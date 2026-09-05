@@ -920,7 +920,12 @@ if (window.matchMedia) {
     if (record && location.hash !== '#' + slug) history.replaceState(null, '', '#' + slug);
   }
   switches.forEach(b => b.addEventListener('click', () => show(b.dataset.cert, true, b)));
-  window.addEventListener('hashchange', () => show(location.hash.slice(1), false));
+  /* Only a hash naming a certificate switches the page. A footnote jump sets
+     the hash too (#fn-3, #fnref-3), and it leaves the selection alone. */
+  window.addEventListener('hashchange', () => {
+    const slug = location.hash.slice(1);
+    if (slugs.includes(slug)) show(slug, false);
+  });
   show(location.hash.slice(1), false);
 })();
 </script>

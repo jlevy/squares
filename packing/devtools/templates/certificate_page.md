@@ -64,12 +64,12 @@ figure lets you select the tighter precision so you can compare the results.)
   </div>
   <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
   <figcaption class="kpress-figcaption"><strong>Figure 2.</strong> Trump’s 1979 packing of eleven unit squares shows
-  <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>.<sup class="kpress-footnote-ref"><a href="#fn-3" id="fnref-3b" data-kpress-footnote-ref="3">3</a></sup></figcaption>
+  <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>.</figcaption>
 </figure>
 
 <figure>
   <div class="fig-head">
-    <span class="caps">Figure 3</span></span>
+    <span class="caps">Figure 3</span>
   </div>
   <div class="line-fig kpress-diagram">
   <svg viewBox="0 0 700 92" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER_DEC}}, the bounds proved here up to {{HEADLINE_L_DEC}}, and the best known packing at {{BEST_PACKING_DEC}}">
@@ -318,7 +318,7 @@ $$
           <button class="knet" data-k="3" aria-pressed="true">3</button>
           <button class="knet" data-k="10">10</button>
           <button class="knet" data-k="30">30</button>
-          <button class="knet" data-k="180">180, the real net</button>
+          <button class="knet" data-k="{{N_DIRECTIONS_MAX}}">{{N_DIRECTIONS_MAX}}, the real net</button>
         </div>
       </div>
       <dl class="kv">
@@ -329,18 +329,17 @@ $$
         <dt><span class="tex">B</span> admitted</dt><dd id="s-B-{{SLUG}}"></dd>
         <dt><span class="tex">B(\cos d + \sin d)</span></dt><dd class="hi" id="s-prod-{{SLUG}}"></dd>
       </dl>
-      <p class="hint">Opens at <span class="tex">K = 3</span>, the coarsest net that still reaches
-      <span class="tex">\pi/4</span>, where Condition 4 admits only
+      <p class="hint">Opens at <span class="tex">K = 3</span>, the coarsest net the figure offers, where Condition 4 admits only
       <span class="tex">B \lt 0.8787</span> and the shrink is unmistakable. Drag either square by its
       handle. At
-      <span class="tex">K = 180</span>, the net the proof uses, the two squares are
+      <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, the two squares are
       indistinguishable.</p>
     </div>
   </div>
   <figcaption class="kpress-figcaption"><strong>Figure 6.</strong> The shrink that buys the finite net. The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
   side-<span class="tex">B</span> square at the nearest net angle. The proof only ever asks about the orange one.
-  <strong>The last quantity must stay below 1.</strong> At <span class="tex">K = 180</span> it is
-  <span class="tex">\approx 0.999996</span>.</figcaption>
+  <strong>The last quantity must stay below 1.</strong> At <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, its
+  largest value, at the widest half-gap, is <span class="tex">{{SHRINK_PEAK_TEX}}</span>.</figcaption>
 </figure>
 
 <!--END:FIGURE-->
@@ -349,14 +348,16 @@ $$
 
 ## Why the Net Has {{N_DIRECTIONS}} Directions
 
-To price a coarser net, hold the {{N_ATOMS}} atoms fixed, coarsen the net, set $B$ to
+To price a coarser net, hold a certificate’s atoms fixed, coarsen the net, set $B$ to
 the largest value Condition 4 admits, and decide Condition 5 again.
-Halving the net shrinks $B$ by
-{{HALVING_B_DROP}} and costs {{HALVING_MASS_DROP}} of the least covered mass.
+Figure 7 does this for each certificate, and its caption says what halving the net costs.
+
+<!--BEGIN:FIGURE-->
 
 <figure>
   <div class="fig-head">
     <span class="caps">Figure 7</span><span class="tag">Condition 4 → Condition 5</span>
+    {{CERT_TOGGLE}}
   </div>
   <div class="chart kpress-diagram">
     <svg viewBox="0 0 700 250" role="img" aria-label="{{COARSEN_ALT}}">
@@ -383,9 +384,12 @@ Halving the net shrinks $B$ by
       </text>
     </svg>
   </div>
-  <figcaption class="kpress-figcaption"><strong>Figure 7.</strong> Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. This shows these atoms are tight against their own net, not that no coarser net could be made
-  to work. It measures the slope of the trade.</figcaption>
+  <figcaption class="kpress-figcaption"><strong>Figure 7.</strong> Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. Halving the net shrinks
+  <span class="tex">B</span> by {{HALVING_B_DROP}} and costs {{HALVING_MASS_DROP}} of the least covered mass. This shows these atoms are tight
+  against their own net, not that no coarser net could be made to work. It measures the slope of the trade.</figcaption>
 </figure>
+
+<!--END:FIGURE-->
 
 <!--END:COARSENING-->
 

@@ -8,13 +8,16 @@ coarsens the net, gives `B` the largest value Condition 4 then admits, and re-de
 Condition 5. The result is the slope of that trade at one point, not a claim that no
 coarser certificate exists: these atoms were optimized against the full net.
 
-The full-net row is the retained certificate's own value and doubles as the
-measurement's control. Minutes per row at the finer nets, so the result is
-retained as JSON and the page renderer reads it rather than recomputing.
+The full-net row is measured on the certificate's own net and doubles as the
+measurement's control. The result is retained as JSON, one file per certificate
+named for its bound (`net-coarsening-381-100.json`), and the page renderer reads
+that file rather than recomputing it.
 
 Usage, from `packing/`:
 
     uv run --frozen python -m devtools.measure_net_coarsening
+    uv run --frozen python -m devtools.measure_net_coarsening \
+        --certificate cases/n11_fractional_certificate/certificate-19-5.json
 """
 
 from __future__ import annotations
@@ -90,21 +93,47 @@ def measure(certificate_path: Path, nets: tuple[int, ...]) -> list[dict[str, obj
     return rows
 
 
+def output_path(record: dict[str, object]) -> Path:
+    """Where a certificate's measurement is retained: named for its bound, as the
+    page renderer expects (`net-coarsening-381-100.json`)."""
+    side = Fraction(str(record["outer_side"]))
+    return CASE / f"net-coarsening-{side.numerator}-{side.denominator}.json"
+
+
+def repository_relative(path: Path, role: str) -> str:
+    """The path as the record states it; a path outside the repository is refused
+    before any sweep runs, since the record cannot name it."""
+    try:
+        return path.relative_to(REPO).as_posix()
+    except ValueError:
+        raise SystemExit(f"the {role} {path} is not inside the repository") from None
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--certificate", type=Path, default=CASE / "certificate.json")
-    parser.add_argument("--output", type=Path, default=CASE / "net-coarsening.json")
+    parser.add_argument(
+        "--output",
+        type=Path,
+        help="where to write the rows (default: beside the certificate, named for its bound)",
+    )
     parser.add_argument("--nets", type=int, nargs="+", default=list(DEFAULT_NETS))
     args = parser.parse_args(argv)
 
-    rows = measure(args.certificate, tuple(args.nets))
-    payload = {
-        "certificate": str(args.certificate.relative_to(REPO)),
-        "certificate_id": json.loads(args.certificate.read_text(encoding="utf-8"))["id"],
-        "rows": rows,
+    # Paths are resolved and checked first: a relative `--certificate` used to
+    # pass the whole measurement and fail on `relative_to` at the write.
+    certificate = args.certificate.resolve()
+    record = json.loads(certificate.read_text(encoding="utf-8"))
+    output = args.output.resolve() if args.output else output_path(record)
+    payload: dict[str, object] = {
+        "certificate": repository_relative(certificate, "certificate"),
+        "certificate_id": record["id"],
     }
-    args.output.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    print(f"wrote {args.output.relative_to(REPO)}")
+    output_label = repository_relative(output, "output")
+
+    payload["rows"] = measure(certificate, tuple(args.nets))
+    output.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    print(f"wrote {output_label}")
     return 0
 
 

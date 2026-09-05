@@ -41,6 +41,7 @@ from math import isqrt
 from pathlib import Path
 from typing import TypedDict
 
+from devtools.measure_net_coarsening import largest_admissible_side
 from sqpack.fractional.certificate import (
     Certificate,
     closed_form_conditions,
@@ -48,7 +49,7 @@ from sqpack.fractional.certificate import (
     verify,
 )
 from sqpack.fractional.model import Atom
-from sqpack.fractional.sweep import minimum_covered_mass
+from sqpack.fractional.sweep import minimum_covered_mass, weight_scale
 from sqpack.render.style import SQUARE_HUE_PALETTE
 
 PACKING = Path(__file__).resolve().parents[1]
@@ -57,7 +58,6 @@ CASE = PACKING / "cases" / "n11_fractional_certificate"
 TEMPLATES = Path(__file__).with_name("templates")
 TEMPLATE = TEMPLATES / "certificate_page.html"
 MARKDOWN = TEMPLATES / "certificate_page.md"
-COARSENING = CASE / "net-coarsening.json"
 VERIFIER_MINIMAL = CASE / "verify_minimal.py"
 OUTPUT = PACKING / "site" / "index.html"
 
@@ -238,7 +238,14 @@ THIRDPARTY = CASE / "thirdparty" / "README.md"
 
 
 def repo_file(path: Path) -> str:
-    return f"{REPO_URL}/blob/main/{path.relative_to(REPO).as_posix()}"
+    """The file's URL on main; a path outside the repository has no such URL."""
+    try:
+        relative = path.resolve().relative_to(REPO)
+    except ValueError:
+        raise SystemExit(
+            f"{path} is outside the repository and cannot be linked on main"
+        ) from None
+    return f"{REPO_URL}/blob/main/{relative.as_posix()}"
 
 
 # The certificates the page walks through, in tab order. The first is shown by
@@ -560,6 +567,10 @@ class Facts:
     orbits: int
     distinct_weights: int
     weight_scale: int
+    # `D`, the tangent of the net's widest half-gap, and the largest side on the
+    # shrink figure's grid that Condition 4 admits for it: what Figure 6 shows.
+    half_gap: Fraction
+    admitted_side: Fraction
 
 
 def load_certificate(path: Path) -> tuple[Certificate, dict[str, str]]:
@@ -589,8 +600,11 @@ def derive(path: Path, *, full_sweep: bool = False) -> Facts:
     sweep over every direction and minutes at this atom count, and the case
     already owns a replay gate that decides it, so re-deciding it here would buy
     a second copy of one verdict at the price of the build. The upright direction
-    is swept regardless: the page marks its witness, and it bounds the record's
-    declared least covered mass from below. `--verify-condition-5` runs the whole sweep.
+    is swept regardless: the page marks its witness, and the record's declared
+    least covered mass has to be exactly what that sweep finds, since the prose
+    says the least cell lies at direction 0; a certificate whose least cell lies
+    elsewhere is refused rather than described wrongly. `--verify-condition-5`
+    runs the whole sweep and holds it to the same value.
     """
     certificate, record = load_certificate(path)
     refused = [report for report in closed_form_conditions(certificate) if not report.holds]
@@ -598,26 +612,28 @@ def derive(path: Path, *, full_sweep: bool = False) -> Facts:
         raise SystemExit(
             f"{path.name} fails {', '.join(r.name for r in refused)}; refusing to render"
         )
+    upright = certificate.directions[0]
+    least, witness = minimum_covered_mass(
+        certificate.atoms, upright, certificate.outer_side, certificate.square_side
+    )
     if full_sweep:
         verdict = verify(certificate)
         if not verdict.accepted:
             raise SystemExit(
                 f"{path.name} fails {', '.join(verdict.failures)}; refusing to render"
             )
-
-    upright = certificate.directions[0]
-    least, witness = minimum_covered_mass(
-        certificate.atoms, upright, certificate.outer_side, certificate.square_side
-    )
+        if verdict.minimum_cell_mass != least:
+            raise SystemExit(
+                f"{path.name}: the least cell lies at direction {verdict.worst_direction} "
+                f"({verdict.minimum_cell_mass}), not at the upright one the page describes "
+                f"({least})"
+            )
 
     seen: set[frozenset[tuple[Fraction, Fraction]]] = set()
     for atom in certificate.atoms:
         seen.add(frozenset(d4_images(atom.x, atom.y, certificate.outer_side)))
 
-    scale = 1
-    for atom in certificate.atoms:
-        denominator = atom.weight.denominator
-        scale = scale * denominator // _gcd(scale, denominator)
+    scale = weight_scale(certificate.atoms)
     # The prover's readout prints its integer count of 1/scale units as a
     # six-place decimal, and that is exact only because the scale divides a
     # million. A certificate with a finer unit would make `= 1.000060` a
@@ -635,11 +651,12 @@ def derive(path: Path, *, full_sweep: bool = False) -> Facts:
             f"carries {certificate.total_mass}"
         )
     declared_least = Fraction(record["least_cell_mass"])
-    if least < declared_least:
+    if least != declared_least:
         raise SystemExit(
-            f"{path.name} declares least cell mass {declared_least}, but the upright "
-            f"direction alone reaches {least}"
+            f"{path.name} declares least cell mass {declared_least}, and the upright "
+            f"direction's is {least}; the page says the least cell is at direction 0"
         )
+    gap, admitted = largest_admissible_side(certificate.half_tangents)
 
     return Facts(
         identifier=record["id"],
@@ -656,13 +673,9 @@ def derive(path: Path, *, full_sweep: bool = False) -> Facts:
         orbits=len(seen),
         distinct_weights=len({atom.weight for atom in certificate.atoms}),
         weight_scale=scale,
+        half_gap=gap,
+        admitted_side=admitted,
     )
-
-
-def _gcd(a: int, b: int) -> int:
-    while b:
-        a, b = b, a % b
-    return a
 
 
 def frac_tex(value: Fraction) -> str:
@@ -726,20 +739,45 @@ def best_packing_svg() -> str:
     return svg
 
 
+def coarsening_path(facts: Facts) -> Path:
+    """The certificate's retained net-coarsening measurement, named for its bound."""
+    return CASE / f"net-coarsening-{slug(facts)}.json"
+
+
 def coarsening_rows(facts: Facts) -> list[CoarseningRow] | None:
     """The retained net-coarsening measurement for this certificate, or None.
 
-    The measurement costs minutes per net and belongs to one certificate, which
-    the file names, so a certificate that has not been measured yet renders
-    without that figure rather than blocking on it or, worse, borrowing another
-    certificate's numbers.
+    The measurement belongs to one certificate and is retained in a file named
+    for its bound, so a certificate that has not been measured yet renders
+    without that figure rather than blocking on it or borrowing another
+    certificate's numbers. A file that is there is held to the certificate it
+    names: its id, its path, nets in order ending at the certificate's own, and
+    a pass flag that agrees with the mass beside it.
     """
-    if not COARSENING.is_file():
+    path = coarsening_path(facts)
+    if not path.is_file():
         return None
-    payload = json.loads(COARSENING.read_text(encoding="utf-8"))
+    payload = json.loads(path.read_text(encoding="utf-8"))
     if payload.get("certificate_id") != facts.identifier:
-        return None
-    return payload["rows"]
+        raise SystemExit(
+            f"{path.name} measures {payload.get('certificate_id')}, not {facts.identifier}"
+        )
+    source = facts.source.resolve()
+    if source.is_relative_to(REPO) and payload.get("certificate") != (
+        source.relative_to(REPO).as_posix()
+    ):
+        raise SystemExit(f"{path.name} names {payload.get('certificate')} as its certificate")
+    rows: list[CoarseningRow] = payload["rows"]
+    nets = [int(row["K"]) for row in rows]
+    if nets != sorted(nets) or nets[-1] != facts.steps:
+        raise SystemExit(
+            f"{path.name} runs nets {nets}; the page expects them ascending and ending at "
+            f"the certificate's own K = {facts.steps}"
+        )
+    for row in rows:
+        if bool(row["passes"]) != (row_mass(row) >= 1):
+            raise SystemExit(f"{path.name} row K={row['K']} declares passes={row['passes']}")
+    return rows
 
 
 def row_mass(row: CoarseningRow) -> Fraction:
@@ -797,7 +835,7 @@ def coarsening_svg(rows: list[CoarseningRow]) -> tuple[str, str, str]:
 def halving_cost(rows: list[CoarseningRow]) -> tuple[str, str]:
     """What halving the finest net costs, as percentages, from the measurement.
 
-    Stated in the prose beside the figure, so it is derived rather than written:
+    Stated in the figure's caption, so it is derived rather than written:
     the same sentence carried a figure from an earlier certificate for one
     render, and the two nets it compares are exactly the ones the rows hold.
     """
@@ -805,7 +843,10 @@ def halving_cost(rows: list[CoarseningRow]) -> tuple[str, str]:
     finest = max(by_net)
     half = finest // 2
     if half not in by_net:
-        return "", ""
+        raise SystemExit(
+            f"the net-coarsening rows run to K = {finest} with no K = {half} row; the "
+            "caption compares those two and cannot be stated"
+        )
     fine, coarse = by_net[finest], by_net[half]
     b_drop = 1 - Fraction(coarse["B"]) / Fraction(fine["B"])
     mass_drop = 1 - row_mass(coarse) / row_mass(fine)
@@ -832,17 +873,6 @@ LINE_HEIGHT = 92.0
 def line_x(value: float) -> float:
     """Where a bound falls on the axis, in the figure's own pixels."""
     return LINE_X0 + (value - LINE_LOW) / (LINE_HIGH - LINE_LOW) * (LINE_X1 - LINE_X0)
-
-
-def number_line(facts: Facts) -> dict[str, str]:
-    """One certificate's positions on the axis, for a figure inside its article."""
-    bound = float(facts.outer_side)
-    return {
-        "PRIOR_X": f"{line_x(float(PRIOR_LOWER)):.0f}",
-        "BOUND_X": f"{line_x(bound):.0f}",
-        "BEST_X": f"{line_x(float(BEST_PACKING)):.0f}",
-        "BAND_W": f"{line_x(float(BEST_PACKING)) - line_x(bound):.0f}",
-    }
 
 
 def number_line_marks(facts: list[Facts], headline: Facts) -> str:
@@ -898,6 +928,20 @@ def bound_substitutions() -> dict[str, str]:
         "BEST_PACKING_DEC": truncated(BEST_PACKING),
         "BEST_PACKING_TEX": truncated(BEST_PACKING, tex=True),
     }
+
+
+def shrink_peak_tex(facts: Facts) -> str:
+    """The largest value Figure 6's readout reaches on the certificate's own net.
+
+    The readout is `B_K (cos d + sin d)` for the side `B_K` the net admits and a
+    mismatch `d` up to the widest half-gap, whose tangent is `D`; `cos d + sin d`
+    grows with `d` below an eighth turn, so the peak is
+    `B_K (1 + D) / sqrt(1 + D^2)`. Irrational, so it is cut off by an integer
+    square root and marked as cut off.
+    """
+    scaled = facts.admitted_side * (1 + facts.half_gap) * 10**APPROX_PLACES
+    cut = isqrt(int(scaled * scaled / (1 + facts.half_gap**2)))
+    return truncated(Fraction(cut, 10**APPROX_PLACES), tex=True)
 
 
 def slug(facts: Facts) -> str:
@@ -956,7 +1000,6 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "HEADLINE_L_FRAC": f"{headline.outer_side.numerator}/{headline.outer_side.denominator}",
         "HEADLINE_L_DEC": decimal(headline.outer_side),
         "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
-        "DEFAULT_L_DEC": decimal(default.outer_side),
         "DEFAULT_ID": default.identifier,
         "DEFAULT_CERT_URL": repo_file(default.source),
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
@@ -1017,11 +1060,10 @@ def certificate_substitutions(
     n = facts.n
     total = facts.total_mass
     shortfall = n - total
-    # Each of these three is a distance from an irrational, so each is a
+    # Each of these two is a distance from an irrational, so each is a
     # truncation of one and goes out with the ellipsis that says so.
     gap_now = BEST_PACKING - facts.outer_side
     gap_before = BEST_PACKING - PRIOR_LOWER
-    movement = facts.outer_side - PRIOR_LOWER
     margin = facts.least_mass - 1
     rows = coarsening_rows(facts)
     if rows:
@@ -1033,7 +1075,7 @@ def certificate_substitutions(
     else:
         bars = values = labels = alt = ""
         halving_b = halving_mass = ""
-    values_map = {
+    return {
         "SLUG": slug(facts),
         "CERT_TOGGLE": toggle,
         "ATOMS": atom_array(facts),
@@ -1046,11 +1088,10 @@ def certificate_substitutions(
         "LIMIT_NUM": str(facts.angle_limit.numerator),
         "LIMIT_DEN": str(facts.angle_limit.denominator),
         "N_WEIGHTS": str(facts.distinct_weights),
-        "L_TEX": frac_tex(facts.outer_side),
         "L_FRAC": f"{facts.outer_side.numerator}/{facts.outer_side.denominator}",
         "L_DEC": decimal(facts.outer_side),
         "L_JS": repr(float(facts.outer_side)),
-        "B_FRAC": f"{facts.square_side.numerator}/{facts.square_side.denominator}",
+        "SHRINK_PEAK_TEX": shrink_peak_tex(facts),
         "B_JS": repr(float(facts.square_side)),
         "TOTAL_TEX": frac_tex(total),
         "TOTAL_DEC": decimal(total),
@@ -1067,10 +1108,6 @@ def certificate_substitutions(
         # the five the page used to print made it 0.00008.
         "WEIGHT_MIN": decimal_or_rational(min(a.weight for a in facts.atoms)),
         "WEIGHT_MAX": decimal_or_rational(max(a.weight for a in facts.atoms)),
-        "WITNESS_TEX": (
-            f"({facts.witness[0].numerator}/{facts.witness[0].denominator},\\; "
-            f"{facts.witness[1].numerator}/{facts.witness[1].denominator})"
-        ),
         "WITNESS_X_JS": f"{facts.witness[0].numerator}/{facts.witness[0].denominator}",
         "WITNESS_Y_JS": f"{facts.witness[1].numerator}/{facts.witness[1].denominator}",
         **bound_substitutions(),
@@ -1079,14 +1116,11 @@ def certificate_substitutions(
         "BEST_SOURCE": BEST_SOURCE,
         "BEST_URL": BEST_URL,
         "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
-        "CERT_URL": repo_file(facts.source.resolve()),
+        "CERT_URL": repo_file(facts.source),
         "RENDERER_URL": repo_file(Path(__file__).resolve()),
         "VERIFIER_URL": repo_file(VERIFIER),
         "GENERATOR_URL": repo_file(GENERATOR),
         "THIRDPARTY_URL": repo_file(THIRDPARTY),
-        # MOVEMENT is the plain-text form; no figure or sentence reaches for it
-        # today, and a TeX one would have to spell the ellipsis differently.
-        "MOVEMENT": truncated(movement),
         "GAP_NOW": truncated(gap_now, tex=True),
         "GAP_BEFORE": truncated(gap_before, tex=True),
         "HALVING_B_DROP": halving_b,
@@ -1096,8 +1130,6 @@ def certificate_substitutions(
         "COARSEN_VALUES": values,
         "COARSEN_LABELS": labels,
     }
-    values_map.update(number_line(facts))
-    return values_map
 
 
 def fill(block: str, values: dict[str, str], *, where: str) -> str:
@@ -1183,7 +1215,12 @@ def markdown_body(
     source = MARKDOWN.read_text(encoding="utf-8")
     if not claimed:
         source = drop_block(source, "CLAIM")
-    if not headline_values["COARSEN_BARS"]:
+    unmeasured = [v["SLUG"] for v in per_certificate if not v["COARSEN_BARS"]]
+    if unmeasured:
+        # Figure 7 is stamped per certificate and switched with the others, so a
+        # page where one certificate lacks its measurement would show a figure
+        # that vanishes on a switch; the section waits for the measurement.
+        print(f"no net-coarsening measurement for {', '.join(unmeasured)}; dropping Figure 7")
         source = drop_block(source, "COARSENING")
     source = expand(source, "FIGURE", per_certificate, article=True)
     source = fill(
@@ -1266,23 +1303,29 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
 
-    certificates = tuple(args.certificate) if args.certificate else WALKTHROUGH
+    # Paths are resolved here, once: a relative `--certificate` or `--output`
+    # used to render the whole page and then fail on `relative_to`.
+    output = args.output.resolve()
+    label = output.relative_to(REPO).as_posix() if output.is_relative_to(REPO) else str(output)
+    certificates = (
+        tuple(path.resolve() for path in args.certificate) if args.certificate else WALKTHROUGH
+    )
     page = render(certificates, full_sweep=args.verify_condition_5)
     if args.check:
-        if not args.output.is_file():
-            print(f"{args.output.relative_to(REPO)} has not been rendered", file=sys.stderr)
+        if not output.is_file():
+            print(f"{label} has not been rendered", file=sys.stderr)
             return 1
-        if args.output.read_text(encoding="utf-8") != page:
-            print(f"{args.output.relative_to(REPO)} is stale; rerender it", file=sys.stderr)
+        if output.read_text(encoding="utf-8") != page:
+            print(f"{label} is stale; rerender it", file=sys.stderr)
             return 1
-        print(f"{args.output.relative_to(REPO)} is current")
+        print(f"{label} is current")
         return 0
 
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(page, encoding="utf-8")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(page, encoding="utf-8")
     for asset in COMPOSITE_ASSETS:
-        shutil.copyfile(asset, args.output.parent / asset.name)
-    print(f"wrote {args.output.relative_to(REPO)} ({len(page) / 1024:.0f} KB)")
+        shutil.copyfile(asset, output.parent / asset.name)
+    print(f"wrote {label} ({len(page) / 1024:.0f} KB)")
     return 0
 
 
