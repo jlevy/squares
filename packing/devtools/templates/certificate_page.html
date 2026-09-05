@@ -58,7 +58,8 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
 }
 /* A section starts with room above its heading, so it reads as a new step. */
 .section-head { margin-block: calc(var(--kpress-font-size-base) * 2.6) 0.9rem; text-align: center; }
-.cert-page h2 { text-align: center; }
+/* A section starts with room above its heading and a breath below it. */
+.cert-page h2 { margin-block: calc(var(--kpress-font-size-base) * 2.8) 1.3rem; text-align: center; }
 .conditions ol { margin-block: 0.6rem 0.8rem; padding-inline-start: 1.4rem; }
 .conditions li { margin-block: 0.3rem; }
 .intro .section-head { margin-block-start: 0; }
@@ -90,11 +91,10 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
   font-size: var(--kpress-font-size-normal);
   gap: 0.2rem;
   line-height: 1.45;
-  margin-block: 1.1rem 0;
+  margin-block: 2rem 2.2rem;
 }
 .credits strong { font-weight: var(--kpress-font-weight-sans-bold); }
-.credits .caps { margin-block-end: 0.2rem; }
-.cert-page .hero .deck { font-family: var(--kpress-font-prose); font-style: italic; margin-block: 1.1rem 0; }
+.cert-page .hero .deck { font-family: var(--kpress-font-prose); font-style: italic; margin-block: 0; }
 
 /* The certificate switch sits in every figure head; the articles are whole
    documents, so they are hidden outright. */

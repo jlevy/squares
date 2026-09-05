@@ -17,7 +17,6 @@ and END:ARTICLE is stamped once per certificate.
 A New Lower Bound on the Square Packing Problem
 
 <div class="credits">
-  <span class="caps">An automated geometric research exploration</span>
   <span>September 4, 2026</span>
   <span>Tooling and human oversight: <a href="https://x.com/ojoshe"><strong>Joshua Levy</strong></a></span>
   <span>Agents: <strong>Opus 5</strong>, <strong>Fable 5.1</strong>, and <strong>Codex 5.6</strong></span>
