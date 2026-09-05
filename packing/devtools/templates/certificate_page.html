@@ -208,23 +208,15 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
   width: 100%;
 }
 .stage canvas:active { cursor: grabbing; }
-.stage-tip { position: relative; }
-.tip {
-  background: var(--kpress-doc-bg);
-  border: 1px solid var(--kpress-doc-border-hairline);
-  border-radius: var(--kpress-radius-sm);
+/* The atom readout: a fixed panel beside the canvas, in the sans face. */
+.tip-panel {
+  color: var(--kpress-doc-text);
   font-family: var(--kpress-font-sans);
   font-size: var(--kpress-font-size-small);
-  line-height: 1.35;
-  padding: 0.35rem 0.55rem;
-  pointer-events: none;
-  position: absolute;
-  transform: translate(-50%, -125%);
-  white-space: nowrap;
-  z-index: 2;
+  line-height: 1.5;
 }
-.tip .tip-w { color: var(--kpress-doc-muted); display: block; margin-block-start: 0.1rem; }
-.tip .katex { font-size: 1.1em; }
+.tip-panel .tip-w { color: var(--kpress-doc-muted); display: block; margin-block-start: 0.1rem; }
+.tip-panel .katex { font-size: 1.1em; }
 .panel {
   border-inline-start: 1px solid var(--kpress-doc-border);
   display: flex;
@@ -474,16 +466,11 @@ function atomAt(cx, cy) {
 function showAtomTip(i) {
   const [xn, xd, yn, yd, w] = ATOM_Q[i];
   const [wn, wd] = reduce(w, SCALE);
-  /* Anchored to the atom, not the pointer: it appears above the disc and
-     holds still until another atom is hovered. */
-  const box = fc.getBoundingClientRect(), [ax, ay] = ATOMS[i];
-  fieldTip.style.left = `${(FM + ax * FSC) / FS * box.width}px`;
-  fieldTip.style.top = `${(FM + (L - ay) * FSC) / FS * box.height - 10}px`;
   fieldTip.innerHTML = '<span class="tip-xy"></span><span class="tip-w"></span>';
   tex(fieldTip.querySelector('.tip-xy'), `(${fracTex(xn, xd)},\\; ${fracTex(yn, yd)})`);
   tex(fieldTip.querySelector('.tip-w'), `w = ${fracTex(wn, wd)}`);
-  fieldTip.hidden = false;
 }
+const ATOM_PROMPT = 'Hover an atom for its position and weight.';
 
 fc.addEventListener('pointermove', e => {
   const box = fc.getBoundingClientRect();
@@ -492,11 +479,11 @@ fc.addEventListener('pointermove', e => {
   fc.style.cursor = i < 0 ? 'default' : 'crosshair';
   if (i === hovered) return;
   hovered = i; drawField();
-  if (i < 0) fieldTip.hidden = true; else showAtomTip(i);
+  if (i < 0) fieldTip.textContent = ATOM_PROMPT; else showAtomTip(i);
 });
 fc.addEventListener('pointerleave', () => {
   if (hovered !== -1) { hovered = -1; drawField(); }
-  fieldTip.hidden = true;
+  fieldTip.textContent = ATOM_PROMPT;
 });
 
 /* ---------- Figure 4 ---------- */

@@ -188,8 +188,15 @@ reflects onto that arc and covers the same mass.
     <span class="caps">Figure 4</span><span class="tag">Conditions 1 and 2</span>
     {{CERT_TOGGLE}}
   </div>
-  <div class="stage stage-tip"><canvas id="field-{{SLUG}}" width="1040" height="1040"></canvas>
-      <div class="tip" id="field-tip-{{SLUG}}" hidden></div></div>
+  <div class="split">
+    <div class="stage"><canvas id="field-{{SLUG}}" width="1040" height="1040"></canvas></div>
+    <div class="panel">
+      <div class="readout">
+        <span class="caps">Atom</span>
+        <div class="tip-panel" id="field-tip-{{SLUG}}">Hover an atom for its position and weight.</div>
+      </div>
+    </div>
+  </div>
   <div class="mass-line">
     <div>Total mass on the board<span class="v tex">\mu\!\left([0,L]^2\right) = {{TOTAL_PLAIN}} = {{TOTAL_DEC}}</span></div>
     <div>Mass eleven disjoint unit squares would need<span class="v tex">{{N}}</span></div>
