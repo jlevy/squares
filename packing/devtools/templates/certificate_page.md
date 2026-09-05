@@ -133,13 +133,13 @@ Conditions 1 to 4 are exact rational comparisons.
 Condition 5 is one exact sweep per direction.
 Together the five prove $s(n) \ge L$.
 
-::: claim
+<div class="cert-claim">
 
 $$
 s({{N}}) \;\ge\; {{L_TEX}} \;=\; {{L_DEC}}
 $$
 
-:::
+</div>
 
 <div class="frontmatter">
   <span>certificate <code>{{ID}}</code></span>
