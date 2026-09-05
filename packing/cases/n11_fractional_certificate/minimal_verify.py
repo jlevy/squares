@@ -4,8 +4,8 @@
     python3 minimal_verify.py certificate.json
 
 One line per condition, then VERIFIED or REFUSED; the exit status is 0 only after
-VERIFIED. Any CPython 3.8 or later, standard library only, nothing imported from this
-repository, and no float decides anything. ``PROOF-CARD.md``, beside this file, states
+VERIFIED. Any CPython 3.12 or later, standard library only, nothing imported from this
+repository, and no float decides anything. ``t-018-proof-card.md``, beside this file, states
 the theorem with the certificate's own parameters; ``sqpack/fractional/certificate.py``
 proves it and ``sqpack/fractional/sweep.py`` is the same sweep, in the project verifier.
 
@@ -34,20 +34,27 @@ inside the container, not its bounding box -- the box admits placements hanging 
 and would make a sound certificate look refutable. Weights are summed as integers on
 their common denominator, and each direction's minimum is re-derived by a direct sum
 over the atoms at its own witness.
+
+``verify_claim.py``, beside this file, is the unpinned counterpart: it decides any
+certificate of this form, the retained ``19/5`` rung included, reads one out of a
+``t-018-verifiable-claim-*.md`` document as readily as from JSON, and is embedded in
+full in those documents so that each travels as one file. This program speaks only for
+the bytes it pins.
 """
 
+import argparse
 import hashlib
 import json
-import sys
 import time
 from bisect import bisect_left, bisect_right
+from collections.abc import Sequence
 from fractions import Fraction
 from itertools import accumulate
 from math import gcd
 from pathlib import Path
 
 #: The retained certificate's bytes, pinned once -- here, and nowhere else. Every other
-#: statement of this digest (PROOF-CARD.md, the evidence entry) should read it from the
+#: statement of this digest (t-018-proof-card.md, the evidence entry) should read it from the
 #: file, `sha256sum certificate.json`, or quote the SHA-256 line this program prints. A
 #: digest copied by hand is a second thing to keep in step, and it will not be kept.
 PINNED_SHA256 = "b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a"
@@ -71,6 +78,9 @@ def load(path, *, pinned):
     if pinned and digest != PINNED_SHA256:
         refuse(f"SHA-256 {digest} is not the pinned {PINNED_SHA256}")
     record = json.loads(raw)
+    variant = record.get("variant", "unconditional")
+    if variant != "unconditional":
+        refuse(f"variant {variant!r} declared; only unconditional certificates are decided")
     atoms = [tuple(rational(value, "atom") for value in row) for row in record["atoms"]]
     if any(len(atom) != 3 for atom in atoms):
         refuse("every atom must be exactly [x, y, weight]")
@@ -241,15 +251,25 @@ def verify(path, *, pinned=True):
     print(f"VERIFIED  {claim}")
 
 
-def main(argv=None):
-    argv = sys.argv[1:] if argv is None else list(argv)
-    paths = [item for item in argv if item != "--unpinned"]
-    if len(paths) != 1:
-        print("usage: minimal_verify.py CERTIFICATE.json [--unpinned]")
-        return 2
+def main(argv: Sequence[str] | None = None) -> int:
+    """Usage errors go to stderr with status 2; verdicts go to stdout with status 0 or 1."""
+    parser = argparse.ArgumentParser(
+        description=(
+            "Decide the retained s(11) >= 381/100 certificate, exactly, from its own bytes."
+        ),
+        epilog=(
+            "One line per condition, then VERIFIED or REFUSED; the exit status is 0 only "
+            "after VERIFIED and 1 on any refusal."
+        ),
+    )
+    parser.add_argument("certificate", help="the certificate.json to decide")
+    parser.add_argument(
+        "--unpinned", action="store_true", help="decide the bytes without the SHA-256 pin"
+    )
+    arguments = parser.parse_args(argv)
     started = time.time()
     try:
-        verify(paths[0], pinned="--unpinned" not in argv)
+        verify(arguments.certificate, pinned=not arguments.unpinned)
     except (ArithmeticError, KeyError, OSError, TypeError, ValueError) as error:
         print(f"REFUSED  {error}")
         return 1
@@ -259,4 +279,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

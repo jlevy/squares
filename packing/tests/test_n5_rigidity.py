@@ -265,7 +265,8 @@ def test_an_incidence_is_not_a_contact() -> None:
     normals: set[int] = set()
     kept = 0
     for one in between:
-        assert one.host is not None and one.edge is not None
+        assert one.host is not None
+        assert one.edge is not None
         if separating(pose, one.host, one.edge, one.moving):
             kept += 1
             normals.add(pose.normal(one.host, one.edge)[1].sign())

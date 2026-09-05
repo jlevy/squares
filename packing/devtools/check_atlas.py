@@ -30,7 +30,6 @@ answer is small enough to argue with by hand.
 from __future__ import annotations
 
 import random
-import sys
 import tempfile
 from pathlib import Path
 
@@ -210,4 +209,4 @@ def _key_of(basin):
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

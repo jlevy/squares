@@ -343,7 +343,7 @@ def render_markdown(payload: dict[str, Any], expected: dict[str, int]) -> str:
     if disagreements is not None:
         out.append(
             f"- Agenda count disagreements: "
-            f"{disagreements if disagreements else 'none — every agenda figure reproduced'}"
+            f"{disagreements or 'none — every agenda figure reproduced'}"
         )
     out.append("")
     out.append(f"Scope: {determination['scope']}.")

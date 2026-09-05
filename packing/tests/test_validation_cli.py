@@ -379,7 +379,7 @@ def test_full_exhaustive_behavioral_step_selects_only_exhaustive_exact_tests(
     )
 
 
-@pytest.mark.parametrize((("inner_jobs", "expected_workers")), ((1, "1"), (4, "2")))
+@pytest.mark.parametrize((("inner_jobs", "expected_workers")), [(1, "1"), (4, "2")])
 def test_full_negative_controls_respect_the_cap_and_measured_worker_count(
     monkeypatch: pytest.MonkeyPatch,
     inner_jobs: int,
@@ -649,6 +649,28 @@ def test_failure_summary_uses_singular_step_for_one_failure() -> None:
     assert "1 STEP FAILED:" in stdout.getvalue()
 
 
+def test_lint_floor_reaches_the_handwritten_skill_assets(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """The one Python file outside `packing/` is linted, and the list of hand-written
+    skills is the Makefile's rather than a second copy that could drift from it."""
+    directories = validate._handwritten_skill_directories()
+    assert directories
+    assert all(path.is_dir() for path in directories)
+    assert any(path.rglob("*.py") for path in directories)
+    assert all(
+        path.parent == validate.REPOSITORY_ROOT / ".agents" / "skills" for path in directories
+    )
+
+    monkeypatch.setattr(validate, "REPOSITORY_ROOT", tmp_path)
+    (tmp_path / "Makefile").write_text("check: skills-check\n")
+    with pytest.raises(validate.StepFailureError, match="HANDWRITTEN_SKILLS"):
+        validate._handwritten_skill_directories()
+    (tmp_path / "Makefile").write_text("HANDWRITTEN_SKILLS := absent-skill\n")
+    with pytest.raises(validate.StepFailureError, match="absent-skill"):
+        validate._handwritten_skill_directories()
+
+
 def test_multi_command_step_stops_at_first_failure_without_printing_success(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
@@ -809,7 +831,7 @@ def test_only_the_whole_suite_steps_carry_budgets() -> None:
 
 @pytest.mark.parametrize(
     ("summary", "expected_scope", "expected_budget"),
-    (("everything", "whole", validate.FAST_SUITE_BUDGET_SECONDS), ("narrow 7", "subset", None)),
+    [("everything", "whole", validate.FAST_SUITE_BUDGET_SECONDS), ("narrow 7", "subset", None)],
 )
 def test_push_tests_take_the_whole_suite_budget_only_when_the_selector_expands(
     monkeypatch: pytest.MonkeyPatch,

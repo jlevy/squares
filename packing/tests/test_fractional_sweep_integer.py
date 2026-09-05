@@ -135,7 +135,8 @@ def test_the_span_reduction_matches_the_independent_cell_reduction() -> None:
     cells = reduce_to_cells(
         certificate.atoms, direction, certificate.outer_side, certificate.square_side
     )
-    assert cells.u_events == spans.u_events and cells.v_events == spans.v_events
+    assert cells.u_events == spans.u_events
+    assert cells.v_events == spans.v_events
     expanded = [(i, j) for i, j0, j1 in spans.spans for j in range(j0, j1 + 1)]
     assert list(cells.cells) == expanded
     assert all(j0 <= j1 for _, j0, j1 in spans.spans)
@@ -286,15 +287,17 @@ def test_a_single_threaded_process_forks_and_a_threaded_one_without_a_main_runs_
     monkeypatch.setattr(main, "__file__", "<stdin>", raising=False)
     monkeypatch.setattr(certificate_module.threading, "active_count", lambda: 1)
     context = certificate_module._pool_context()
-    assert context is not None and context.get_start_method() == "fork"
+    assert context is not None
+    assert context.get_start_method() == "fork"
     monkeypatch.setattr(certificate_module.threading, "active_count", lambda: 2)
     assert certificate_module._pool_context() is None
     monkeypatch.setattr(main, "__file__", __file__)
     context = certificate_module._pool_context()
-    assert context is not None and context.get_start_method() != "fork"
+    assert context is not None
+    assert context.get_start_method() != "fork"
 
     class RefusePool:
-        def __init__(self, *args: object, **kwargs: object) -> None:
+        def __init__(self, *_args: object, **_kwargs: object) -> None:
             raise AssertionError("a threaded process without an importable main started a pool")
 
     monkeypatch.setattr(main, "__file__", "<stdin>", raising=False)

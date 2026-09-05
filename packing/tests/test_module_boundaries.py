@@ -399,6 +399,15 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
             "test_real_production_weight_perturbation_breaks_cancellation",
             "test_uniform_weight_rescaling_fails_exact_normalization",
         },
+        # The unpinned standard-library verifier, verify_claim.py, all in Fraction
+        # arithmetic: the 19/5 rung on its full 181-direction net (36 s, measured
+        # 2026-09-04) and the ten rows of thirdparty/falsify.py's table, each a full
+        # decision, about six minutes together. The fast tier decides the rung's tight
+        # direction and a two-atom instance of the theorem beside them.
+        "test_verify_claim.py": {
+            "test_the_19_5_rung_is_accepted_on_the_full_net",
+            "test_every_falsification_is_refused_on_the_expected_condition",
+        },
         # Measured 2026-08-30: about three minutes. It re-derives n = 40's whole
         # assessment, whose intersecting-assessor section runs 240 linear programs over
         # 400 rows and re-decides every proposal in the field.

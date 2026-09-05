@@ -28,7 +28,7 @@ def test_a_doctored_direction_is_refused() -> None:
     ]
     minus_w[4] = minus_w[4] + field.rational(1)
     zero = tuple(field.zero for _ in range(tangent_cones.VARIABLE_COUNT))
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="source path is not first-order tight"):
         minus_w_owner4.owner4_record(field, stratum, tuple(minus_w), zero)
 
 

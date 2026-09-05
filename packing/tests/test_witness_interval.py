@@ -176,9 +176,9 @@ def audit_against_implementations_that_share_no_code() -> None:
         report = verify_packing(
             points, side * (1 + 1e-15), sign=float_sign(1e-12), check_shapes=False
         )
-        assert report.valid and report.strict_pairs == 406, (
-            "the independent float verifier rejects a packing this route certifies"
-        )
+        rejected = "the independent float verifier rejects a packing this route certifies"
+        assert report.valid, rejected
+        assert report.strict_pairs == 406, rejected
 
         # 3. The relaxation's cost is structural, not fitted: the bound exceeds the true
         #    side by eps times the largest centre coordinate, which for a square flush

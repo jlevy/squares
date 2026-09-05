@@ -37,8 +37,8 @@ The shortest complete check of that larger value is one directory up rather than
 package: `../minimal_verify.py` decides the retained `381/100` bytes the way `verify.py`
 decides these, from one file that uses Python’s standard library and nothing else, and
 `python3 minimal_verify.py certificate.json` reaches `VERIFIED s(11) >= 381/100` in
-about 47 seconds. `../PROOF-CARD.md` states that claim on one page with the constants it
-turns on.
+about 47 seconds. `../t-018-proof-card.md` states that claim on one page with the
+constants it turns on.
 
 What it displaces: the lower bound `2 + 4/√5 = 3.788854…` stated by Walter Stromquist,
 *Packing 10 or 11 unit squares in a square*, Electronic Journal of Combinatorics 10
@@ -73,8 +73,8 @@ inequality `s(11) > 19/5` also follows (by compactness), but the claim is the we
 | `falsify.py` | Applies the perturbations in the falsification table, checks each against the result it must produce, and prints what the verifier refuses. `--quick` runs the bounded negative-weight control alone. |
 | `check.py` | The whole check in one command. |
 
-One command, with whatever `python3` is on your `PATH` (CPython 3.8 or later, tested
-with 3.10 through 3.14, nothing installed):
+One command, with whatever `python3` is on your `PATH` (CPython 3.12 or later, tested
+with 3.12 through 3.14, nothing installed):
 
 ```shell
 python3 check.py
@@ -84,10 +84,10 @@ It rebuilds the control data and compares it to the shipped file, then runs `ver
 on the certificate and on the control.
 Each run prints every condition with its numbers and ends in `VERIFIED` or `REFUSED`;
 the script exits non-zero on any refusal.
-Expect about half a minute.
-Condition 5 took 22 to 27 s on the certificate and 7 to 8 s on the control with CPython
-3.10 through 3.14 on an idle core, and 39 s and 14 s in the pasted run below, on a
-contended one. The outputs are pasted verbatim below.
+Expect about forty seconds.
+Condition 5 took 28 to 29 s on the certificate and 9 s on the control with CPython 3.12
+through 3.14 on a four-core machine with other work running, and 28.9 s and 8.6 s in the
+pasted run below. The outputs are pasted verbatim below.
 
 ## The Theorem
 
@@ -377,18 +377,24 @@ margin covers nothing, and the verifier scores those placements.
 
 ## Output of the Stranger Run
 
-Run from a copy of this directory outside the repository, with an empty environment
-(`env -i PATH=/usr/bin:/bin bash -c 'time python3 check.py'`, so `python3` is the system
-interpreter and nothing from this project is importable).
+Run with an empty environment and only the interpreter on the path
+(`env -i PATH=<python bin>:/usr/bin:/bin bash -c 'time python3 check.py'`), so nothing
+from this project’s environment is importable; the pasted run’s `python3` is the
+project’s CPython 3.14.7, and the same command under the system 3.12 and 3.13 gave the
+same verdicts and figures within a second of the same time.
 Verbatim:
 
 ```
 $ which python3; python3 --version
-/usr/bin/python3
-Python 3.11.15
+/home/user/squares-lint/packing/.venv/bin/python3
+Python 3.14.7
 $ time python3 check.py
+
+=== rebuild and compare the control data ===
 control data rebuilt from the published constants: identical to control-n17-massaccesi.json
-python 3.11.15
+
+=== decide the claim: s(11) >= 19/5 ===
+python 3.14.7
 certificate C-n011-fractional-19-5
   n = 11, L = 19/5 = 3.800000, B = 9977/10000, net t_k = 207107/500000 * k / 180 for k = 0..180, 425 atoms
   PASS  P1 n >= 1, L > 0, B > 0 | n = 11, L = 19/5, B = 9977/10000
@@ -408,12 +414,14 @@ certificate C-n011-fractional-19-5
     direction 120/180  t = 207107/750000      cells  505529  least weight 50003/50000 = 1.000060  running least 50003/50000
     direction 150/180  t = 207107/600000      cells  501069  least weight 50003/50000 = 1.000060  running least 50003/50000
     direction 180/180  t = 207107/500000      cells  499545  least weight 50003/50000 = 1.000060  running least 50003/50000
-  PASS  Condition 5 every admissible placement covers weight >= 1 | least covered weight 50003/50000 = 1.000060 at direction 0 (t = 0), centre (53/100, 53/100) ~ (0.530000, 0.530000); 90546593 cells over 181 directions in 38.7 s
+  PASS  Condition 5 every admissible placement covers weight >= 1 | least covered weight 50003/50000 = 1.000060 at direction 0 (t = 0), centre (53/100, 53/100) ~ (0.530000, 0.530000); 90546593 cells over 181 directions in 28.9 s
   info  declared total_mass 43391/4000 == recomputed 43391/4000
   info  declared least_cell_mass 50003/50000 == recomputed 50003/50000
   info  all atoms lie in [0, L]^2: yes (not a condition; an outside atom only wastes weight)
 VERIFIED: s(11) >= 19/5 = 3.800000
-python 3.11.15
+
+=== decide Massaccesi's published s(17) >= 4.5058 with the same verifier ===
+python 3.14.7
 certificate control-n17-massaccesi-4.5058
   n = 17, L = 22529/5000 = 4.505800, B = 9973/10000, net t_k = 207107/500000 * k / 180 for k = 0..180, 168 atoms
   PASS  P1 n >= 1, L > 0, B > 0 | n = 17, L = 22529/5000, B = 9973/10000
@@ -433,15 +441,16 @@ certificate control-n17-massaccesi-4.5058
     direction 120/180  t = 207107/750000      cells   91589  least weight 1 = 1.000000  running least 1
     direction 150/180  t = 207107/600000      cells   90869  least weight 1 = 1.000000  running least 1
     direction 180/180  t = 207107/500000      cells   90221  least weight 1 = 1.000000  running least 1
-  PASS  Condition 5 every admissible placement covers weight >= 1 | least covered weight 1 = 1.000000 at direction 0 (t = 0), centre (364907/560000, 364907/560000) ~ (0.651620, 0.651620); 16562293 cells over 181 directions in 13.5 s
+  PASS  Condition 5 every admissible placement covers weight >= 1 | least covered weight 1 = 1.000000 at direction 0 (t = 0), centre (364907/560000, 364907/560000) ~ (0.651620, 0.651620); 16562293 cells over 181 directions in 8.6 s
   info  declared total_mass 203/12 == recomputed 203/12
   info  all atoms lie in [0, L]^2: yes (not a condition; an outside atom only wastes weight)
 VERIFIED: s(17) >= 22529/5000 = 4.505800
+
 check.py: all three steps passed
 
-real	0m52.422s
-user	0m34.333s
-sys	0m1.510s
+real	0m37.699s
+user	0m36.919s
+sys	0m0.769s
 exit status 0
 ```
 

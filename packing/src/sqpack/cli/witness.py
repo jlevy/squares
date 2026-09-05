@@ -6,11 +6,12 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from collections.abc import Sequence
 from pathlib import Path
 
 from strif import atomic_output_file
 
-from sqpack.project import ProjectLayoutError, require_project_root
+from sqpack.project import ProjectLayoutError, add_version_argument, require_project_root
 from sqpack.witness import (
     WitnessError,
     exact_verify,
@@ -28,6 +29,7 @@ def parser() -> argparse.ArgumentParser:
     command = argparse.ArgumentParser(
         description="Inspect, numerically check, formally verify, or promote a Witness/v2 file."
     )
+    add_version_argument(command)
     subcommands = command.add_subparsers(dest="operation", required=True)
 
     inspect = subcommands.add_parser(
@@ -140,7 +142,7 @@ def _run(args: argparse.Namespace) -> int:
     return 0
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
     try:
         return _run(args)

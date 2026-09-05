@@ -22,3 +22,6 @@ packing/.gate-running
 
 # Sub-agent worktrees, created by the harness inside the repo.
 .claude/worktrees/
+
+# Rendered by devtools/render_certificate_page.py and deployed by the pages workflow.
+/packing/site/

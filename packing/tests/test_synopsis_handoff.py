@@ -250,7 +250,8 @@ def test_case_interval_rejects_the_lower_bound_left_at_the_displaced_rung() -> N
     problems = check_case_interval(stale, CASE_FRONT)
 
     assert len(problems) == 1
-    assert "381/100" in problems[0] and "3.81" in problems[0]
+    assert "381/100" in problems[0]
+    assert "3.81" in problems[0]
 
 
 def test_case_interval_rejects_a_gap_computed_from_the_displaced_rung() -> None:

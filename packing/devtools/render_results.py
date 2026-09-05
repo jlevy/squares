@@ -15,7 +15,6 @@ Usage, from `packing/`:
 from __future__ import annotations
 
 import argparse
-import sys
 from pathlib import Path
 
 from strif import atomic_output_file
@@ -106,4 +105,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

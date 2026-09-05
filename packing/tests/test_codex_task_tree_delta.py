@@ -228,7 +228,7 @@ def test_build_delta_rejects_a_nonmonotone_selected_measurement(
     monkeypatch.setattr(
         delta_module,
         "build_rollup",
-        lambda _root, _ids, *, through, retrospective_cutoff: (
+        lambda _root, _ids, *, through, retrospective_cutoff: (  # noqa: ARG005 - the seam's signature
             before if through == START else after
         ),
     )
@@ -261,7 +261,7 @@ def test_retained_delta_validates_against_its_enforced_schema(
     monkeypatch.setattr(
         delta_module,
         "build_rollup",
-        lambda _root, _ids, *, through, retrospective_cutoff: (
+        lambda _root, _ids, *, through, retrospective_cutoff: (  # noqa: ARG005 - the seam's signature
             before if through == START else after
         ),
     )
@@ -297,7 +297,7 @@ def test_cli_writes_one_explicit_pure_yaml_artifact(
     monkeypatch.setattr(
         delta_module,
         "build_rollup",
-        lambda _root, _ids, *, through, retrospective_cutoff: (
+        lambda _root, _ids, *, through, retrospective_cutoff: (  # noqa: ARG005 - the seam's signature
             before if through == START else after
         ),
     )
@@ -356,9 +356,7 @@ def test_build_delta_consumes_the_real_codex_v2_scanner_shape(tmp_path: Path) ->
     task_started = "2026-09-01T12:00:00Z"
     start = "2026-09-01T12:00:05Z"
     end = "2026-09-01T12:00:20Z"
-    epoch_ms = int(
-        datetime.fromisoformat(task_started.replace("Z", "+00:00")).timestamp() * 1000
-    )
+    epoch_ms = int(datetime.fromisoformat(task_started).timestamp() * 1000)
 
     def event(timestamp: str, event_type: str, **payload: object) -> dict[str, object]:
         return {

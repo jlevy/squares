@@ -1,0 +1,51 @@
+{
+  "certificate": "packing/cases/n11_fractional_certificate/certificate-19-5.json",
+  "certificate_id": "C-n011-fractional-19-5",
+  "rows": [
+    {
+      "K": 10,
+      "D": "0.0414214",
+      "B": "0.960226",
+      "least_mass": "0.000000",
+      "least_mass_exact": "0",
+      "passes": false,
+      "seconds": 0.6
+    },
+    {
+      "K": 30,
+      "D": "0.0138071",
+      "B": "0.986381",
+      "least_mass": "0.325600",
+      "least_mass_exact": "407/1250",
+      "passes": false,
+      "seconds": 2.0
+    },
+    {
+      "K": 60,
+      "D": "0.0069036",
+      "B": "0.993144",
+      "least_mass": "0.821130",
+      "least_mass_exact": "82113/100000",
+      "passes": false,
+      "seconds": 4.6
+    },
+    {
+      "K": 90,
+      "D": "0.0046024",
+      "B": "0.995419",
+      "least_mass": "0.907055",
+      "least_mass_exact": "181411/200000",
+      "passes": false,
+      "seconds": 6.4
+    },
+    {
+      "K": 180,
+      "D": "0.0023012",
+      "B": "0.997704",
+      "least_mass": "1.000060",
+      "least_mass_exact": "50003/50000",
+      "passes": true,
+      "seconds": 13.3
+    }
+  ]
+}

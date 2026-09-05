@@ -67,7 +67,7 @@ Results first established here, as far as the recorded source searches show:
   Scored `S5`, the rubric’s anchor for movement on a central open case.
   The shortest complete statement of the proof, with the certificate’s hash and the one
   command that checks it from the standard library alone, is the
-  [proof card](packing/cases/n11_fractional_certificate/PROOF-CARD.md).
+  [proof card](packing/cases/n11_fractional_certificate/t-018-proof-card.md).
   A
   [self-contained package for third-party checking](packing/cases/n11_fractional_certificate/thirdparty/)
   ships with it, so the `19/5` rung can be decided without trusting anything else here.
@@ -562,6 +562,7 @@ review. [`epistemics.md`](epistemics.md) owns whole-result classifications.
 │   ├── defects.yaml        Structured defect log
 │   ├── defects.schema.yaml Defect-log contract
 │   └── frankensim-probe/   Focused experiments against FrankenSim
+├── vendor/kpress/          Vendored kpress submodule: the page's rendering layer
 ├── AGENTS.md               Project instructions for agents
 ├── CLAUDE.md               Bridge to AGENTS.md
 ├── Makefile                Markdown formatting, hooks, and skill mirroring

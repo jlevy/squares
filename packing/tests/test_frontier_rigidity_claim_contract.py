@@ -104,7 +104,8 @@ def test_certificate_and_replay_may_be_delegated_to_the_cited_record() -> None:
         case = load_case(n)
         block = case["rigidity"]
         assert block["assurance"] == "verified"
-        assert not block.get("certificate") and not block.get("replay")
+        assert not block.get("certificate")
+        assert not block.get("replay")
         assert rigidity_errors(case, evidence) == [], f"n={n} should pass by delegation"
 
 

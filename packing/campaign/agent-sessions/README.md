@@ -153,7 +153,7 @@ A portable checkpoint runs the session’s exact focused validation and then, fr
 repository root, uses this sequence:
 
 ```shell
-uvx --from flowmark-rs==0.3.2 flowmark --auto <edited-markdown-files>
+uvx --from flowmark-rs==0.4.0 flowmark --auto <edited-markdown-files>
 uv run --directory packing --frozen --all-extras --group dev \
   packing-validate --only "soft-schema"
 uv run --directory packing --frozen packing-ledger render

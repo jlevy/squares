@@ -88,7 +88,8 @@ def test_the_new_sizes_are_built_here_and_not_merely_asserted() -> None:
         squares, side, _field = build(a, b)
         assert len(squares) == n
         report = verify_packing(squares, side, sign=exact_sign)
-        assert report.valid and report.n == n
+        assert report.valid
+        assert report.n == n
 
 
 def test_the_parameter_sweep_obeys_goebels_condition() -> None:

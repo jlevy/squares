@@ -107,7 +107,7 @@ def test_frozen_labels_form_27_disjoint_half_turn_orbits() -> None:
 
 @pytest.mark.parametrize(
     ("payload", "message"),
-    (
+    [
         ("x = 1.0", "unsupported formula character"),
         ("x = 2s", "trailing formula token"),
         ("x = s^2", "unsupported formula character"),
@@ -121,7 +121,7 @@ def test_frozen_labels_form_27_disjoint_half_turn_orbits() -> None:
         ("s = 1", "builtin cannot be assigned"),
         ("x = 1 / 0", "denominator is zero"),
         ("x = 1 / (s - s)", "denominator is zero"),
-    ),
+    ],
 )
 def test_closed_grammar_refuses_every_unfrozen_surface(payload: str, message: str) -> None:
     with pytest.raises(ContractError, match=message):
@@ -166,7 +166,7 @@ def test_zero_classification_is_bounded_across_repeated_definitions() -> None:
 
 @pytest.mark.parametrize(
     ("content", "message"),
-    (
+    [
         (b"\xff", "valid UTF-8"),
         (_comment("x = 1") + b"\0", "NUL"),
         (b"<!--@n54 x = 1\r-->\n", "carriage return"),
@@ -178,7 +178,7 @@ def test_zero_classification_is_bounded_across_repeated_definitions() -> None:
         (b"x = 1\n", "unmarked transport"),
         (b"<!-- x = 1 -->\n", "unmarked transport"),
         (_comment("x = 1") + b"garbage", "unmarked transport"),
-    ),
+    ],
 )
 def test_transport_refuses_unsafe_or_unconsumed_bytes(content: bytes, message: str) -> None:
     with pytest.raises(ContractError, match=message):
@@ -286,13 +286,13 @@ def test_synthetic_fixture_evaluates_exactly_in_assignment_order() -> None:
 
 @pytest.mark.parametrize(
     ("mutation", "message"),
-    (
+    [
         ("field-name", "field name"),
         ("field-polynomial", "field polynomial"),
         ("basis", "basis coefficients"),
         ("embedding", "positive embedding"),
         ("minimal-polynomial", "minimal polynomials"),
-    ),
+    ],
 )
 def test_field_receipt_semantic_drift_is_refused_before_digest(
     mutation: str, message: str
@@ -536,7 +536,7 @@ def test_n54_result_has_the_exact_frozen_profile_and_mutation_receipts() -> None
 
 @pytest.mark.parametrize(
     "content",
-    (
+    [
         b'{"outer":{"key":1,"key":2}}\n',
         b'{"value":1.5}\n',
         b'{"value":1e2}\n',
@@ -544,7 +544,7 @@ def test_n54_result_has_the_exact_frozen_profile_and_mutation_receipts() -> None
         b'{"value":Infinity}\n',
         b'{"b":1,"a":2}\n',
         b'{"a":1}\n\n',
-    ),
+    ],
 )
 def test_canonical_json_loader_refuses_duplicate_float_and_noncanonical_bytes(
     content: bytes,
@@ -556,7 +556,8 @@ def test_canonical_json_loader_refuses_duplicate_float_and_noncanonical_bytes(
 def test_canonical_json_round_trip_and_float_refusal() -> None:
     content = build_n54_result_bytes(FIXTURE.read_bytes())
 
-    assert content.endswith(b"\n") and not content.endswith(b"\n\n")
+    assert content.endswith(b"\n")
+    assert not content.endswith(b"\n\n")
     assert canonical_json_bytes(load_canonical_json(content)) == content
     with pytest.raises(ContractError, match="floating"):
         canonical_json_bytes({"value": 1.0})

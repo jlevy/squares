@@ -114,10 +114,20 @@ The id in the filename must equal the id in the frontmatter.
 Research documents and reviews keep the repository’s dated form:
 `research-YYYY-MM-DD-topic.md`, `review-YYYY-MM-DD-topic.md`.
 
-**Case-local documents for a registered theoretical result use the lowercase result id
-and a descriptive kebab-case suffix, for example `t-018-proof.md`.** [convention] This
-is a filename convention only: prose and structured records keep the canonical uppercase
-id `T-018`. `README.md` remains the exception for a directory’s orientation page.
+**A case-local document for a registered result is named for the result and for what it
+is: the lowercase result id, then a descriptive kebab-case suffix.** [convention]
+`t-018-proof-card.md` and `t-018-verifiable-claim-19-5.md` each say which result and
+which kind of document; a generic name in capitals such as `VERIFIABLE-CLAIM.md` says
+neither, and the second such file would have to fight the first for it.
+There will be many proofs and claims, and each needs a unique, self-describing name.
+This is a filename convention only: prose and structured records keep the canonical
+uppercase id `T-018`. `README.md` remains the exception for a directory’s orientation
+page. The kinds in use, each generated from the certificate so its figures cannot drift:
+`t-NNN-proof-card.md`, the one-page statement with every constant and the one command
+that checks it; `t-NNN-verifiable-claim-<bound>.md`, the self-contained claim with
+theorem, proof, verifier and certificate, one per retained bound; and
+`t-NNN-proof-visual.svg`, the figure.
+A new result takes the same names with its own id.
 
 Use [`repren`](https://github.com/jlevy/repren) for renames—it moves files and rewrites
 references in one pass, which is what keeps the two in step.
@@ -429,6 +439,9 @@ is decided.
 `pyproject.toml`, `.python-version`, Ruff, BasedPyright, CI, and `uv.lock` express one
 runtime policy. Development commands run through the locked uv environment described in
 [`development.md`](development.md).
+The one deliberate exception is the standalone verifiers under
+`packing/cases/n11_fractional_certificate/`, which a reader runs outside this
+environment: they are standard library only and run on CPython 3.12 or later.
 
 **Code is segregated by maturity and consequence.** [checked] Maintained foundations,
 reusable research components, case-specific evidence, developer tooling, and tests live
@@ -439,6 +452,19 @@ The dependency rules and E0–E3 expectations are defined in
 **Markdown is formatted by flowmark**, automatically on commit.
 [checked: hook] Exclusions are evidence-based, not precautionary, and each one states
 its measured reason in [`.flowmarkignore`](.flowmarkignore).
+
+**Custom formatting in a kpress-rendered document is plain HTML.** [convention] A block
+is a `<div class="…">` with a blank line after the opening tag and before the closing
+one, so the Markdown inside it still renders; an inline run is a `<span class="…">`; a
+figure is `<figure>` with a `<figcaption>`, which kpress decorates itself.
+Class names are kpress’s where it styles the block — `hero`, `subtitle`, `boxed-text`,
+`shaded-text`, `claim`, `summary`, `key-claims`, `centered-headers` — and the document’s
+own only where kpress has none.
+No attribute sugar (`{.class}`, `[text]{.class}`) and no `:::` containers: the div and
+span pass-through is the one kpress guarantees without configuration, it survives its
+sanitized mode, and GitHub renders the same blocks as plain HTML. The explainer template
+([`certificate_page.md`](packing/devtools/templates/certificate_page.md)) is the worked
+example.
 
 **Relative links must resolve.** [checked] The campaign’s checker walks every relative
 Markdown link. This project has needed that twice.

@@ -79,7 +79,8 @@ def certifies_when_there_is_room() -> None:
         # re-parsed decimal: the span is outward-rounded and may exceed the literal.
         span_x, span_y = corner_span(squares)
         limit = mp.mpf(side.b)
-        assert mp.mpf(span_x.b) <= limit and mp.mpf(span_y.b) <= limit
+        assert mp.mpf(span_x.b) <= limit
+        assert mp.mpf(span_y.b) <= limit
 
 
 def exact_contacts_are_undecided_not_certified() -> None:

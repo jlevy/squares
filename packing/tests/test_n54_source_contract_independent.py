@@ -194,7 +194,7 @@ def test_loader_rejects_nested_duplicate_key(prospective_result: Path) -> None:
         load_result(prospective_result)
 
 
-@pytest.mark.parametrize("number", (b"8.0", b"8e0", b"8E+0"))
+@pytest.mark.parametrize("number", [b"8.0", b"8e0", b"8E+0"])
 def test_loader_rejects_float_and_exponent_forms(
     prospective_result: Path, number: bytes
 ) -> None:
@@ -217,7 +217,7 @@ def test_loader_rejects_parse_constant(prospective_result: Path) -> None:
 
 @pytest.mark.parametrize(
     ("mutation", "message"),
-    (
+    [
         ("unknown-top-level", "result field inventory changed"),
         ("schema", "result schema changed"),
         ("fixture-binding", "fixture binding changed"),
@@ -225,7 +225,7 @@ def test_loader_rejects_parse_constant(prospective_result: Path) -> None:
         ("witness-binding", "witness metadata binding changed"),
         ("d4-schema", "D4 receipt changed"),
         ("assignment-schema", "assignment result fields changed"),
-    ),
+    ],
 )
 def test_independent_verifier_rejects_schema_and_binding_mutations(
     prospective_result: Path, mutation: str, message: str
@@ -284,10 +284,10 @@ def test_mutation_receipts_require_boolean_true(prospective_result: Path) -> Non
 
 @pytest.mark.parametrize(
     ("mutation", "replacement"),
-    (
+    [
         ("missing_structural_inventory", "accepted unexpectedly"),
         ("correspondence_swap", "accepted unexpectedly"),
-    ),
+    ],
 )
 def test_independent_verifier_rejects_mutation_receipt_drift(
     prospective_result: Path, mutation: str, replacement: str

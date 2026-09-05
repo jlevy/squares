@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="en" data-kpress-theme="system" data-kpress-resolved-theme="light"
+      data-kpress-palette="neutral" data-kpress-prose-font="serif">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="generator" content="kpress">
+<title>s({{N}}) ≥ {{HEADLINE_L_FRAC}}: A New Lower Bound on the Square Packing Problem</title>
+<meta name="description" content="How a weighted point set and a pigeonhole prove s({{N}}) &gt;= {{HEADLINE_L_FRAC}}.">
+<style>{{KPRESS_CSS}}</style>
+<script>{{THEME_BOOTSTRAP}}</script>
+<style>
+/* ============================================================
+   This page on top of the kpress design system.
+
+   Everything typographic -- the reading measure, the type ramp, headings,
+   lists, code, the color roles and both themes -- comes from the kpress
+   stylesheets above. What follows is only what kpress has no component for:
+   the certificate's figures and the two interactive panels. Every value here
+   is a kpress token, so the figures move with the system rather than beside
+   it.
+   ============================================================ */
+
+/* Links take the page's accent, the teal its tags and switches use, rather
+   than kpress's separate link blue. The token is set on body so both themes
+   inherit it and so the footnote popovers, which kpress appends to body,
+   get it too; hover states and footnote marks follow. */
+body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(--kpress-doc-accent); }
+.cert-page { padding-block-end: calc(var(--kpress-font-size-base) * 6); }
+.cert-page a, .cert-page .kpress-footnote-ref a, .cert-page a.kpress-footnote-backref,
+.cert-page a:hover, .kpress a.kpress-footnote-backref:hover,
+.kpress-tooltip a, .kpress-tooltip a:hover, .kpress-tooltip .kpress-footnote-nav-link { color: var(--kpress-doc-accent); }
+
+/* One transition for every hover and every replaced readout: fast, and the
+   same everywhere. The scripts set `.swap` on a readout whose text they
+   replace, so it fades in rather than flicking. */
+.cert-page a, .cert-page button, .cert-page .verdict, .cert-page .mass-dec,
+.cert-page .kpress-footnote-ref a, .cert-page a.kpress-footnote-backref {
+  transition: color 120ms ease-out, background-color 120ms ease-out, border-color 120ms ease-out;
+}
+@keyframes cert-swap { from { opacity: 0; } to { opacity: 1; } }
+.cert-page .swap { animation: cert-swap 160ms ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .cert-page a, .cert-page button, .cert-page .verdict, .cert-page .mass-dec, .cert-page .swap {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Prose keeps the kpress measure; figures are allowed a wider track. The
+   Markdown body has no column wrappers, so every direct child of the page and
+   of an article takes the measure unless it is a figure. kpress indents a list
+   with a margin, which the measure resets; the indent comes back as padding
+   inside the measured box, so a list's text is narrower by the same amount. */
+.cert-page > :is(ul, ol) { box-sizing: border-box; padding-inline-start: 1.8rem; }
+.cert-page > :not(figure, .cert-figure, .kpress-figure),
+.col {
+  margin-inline: auto;
+  max-width: calc(var(--kpress-measure) + 2 * var(--kpress-column-inset));
+}
+.cert-page figure {
+  margin-inline: auto;
+  margin-block: calc(var(--kpress-font-size-base) * 1.8) 0;
+  max-width: calc(var(--kpress-measure) + 14rem);
+  border: 1px solid var(--kpress-doc-border);
+}
+
+/* A section label, in the kpress caps idiom. */
+.caps {
+  color: var(--kpress-doc-muted);
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-caps-label-size);
+  font-weight: var(--kpress-font-weight-sans-medium);
+  letter-spacing: var(--kpress-caps-spacing);
+  text-transform: var(--kpress-caps-transform);
+}
+/* A section starts with room above its heading, so it reads as a new step. */
+.section-head { margin-block: calc(var(--kpress-font-size-base) * 2.6) 0.9rem; text-align: center; }
+/* A section starts with room above its heading and a breath below it. */
+.cert-page h2 { margin-block: calc(var(--kpress-font-size-base) * 2.8) 1.3rem; text-align: center; }
+.conditions ol { margin-block: 0.6rem 0.8rem; padding-inline-start: 1.4rem; }
+.conditions li { margin-block: 0.3rem; }
+.intro .section-head { margin-block-start: 0; }
+
+.hero { padding-block-start: calc(var(--kpress-font-size-base) * 3); }
+/* The heading is set in caps by kpress; s(n) is notation and keeps its case. */
+.hero h1 .symbol { text-transform: none; }
+/* Under the title: the description in sans caps, a step below the title's
+   size, then the deck in the prose face, italic. */
+.cert-page .hero .subtitle {
+  color: var(--kpress-doc-text);
+  font-family: var(--kpress-font-sans);
+  font-feature-settings: var(--kpress-font-features-sans);
+  font-size: calc(var(--kpress-font-size-base) * 1.3);
+  font-style: normal;
+  font-variant-caps: var(--kpress-caps-variant);
+  font-weight: var(--kpress-font-weight-sans-medium);
+  letter-spacing: var(--kpress-caps-spacing);
+  line-height: 1.2;
+  margin-block: 0.5rem 0;
+  text-transform: var(--kpress-caps-transform);
+}
+/* The hero is centered: title, subtitle and credits; the deck below reads as prose. */
+.cert-page .hero h1, .cert-page .hero .subtitle, .credits { text-align: center; }
+.credits {
+  display: grid;
+  font-family: var(--kpress-font-sans);
+  font-feature-settings: var(--kpress-font-features-sans);
+  font-size: var(--kpress-font-size-normal);
+  gap: 0.2rem;
+  line-height: 1.45;
+  margin-block: 2rem 2.2rem;
+}
+.credits strong { font-weight: var(--kpress-font-weight-sans-bold); }
+.cert-page .hero .deck { font-family: var(--kpress-font-prose); font-style: italic; margin-block: 0; }
+/* The deck is a div so its footnote renders; the paragraph inside keeps its edges. */
+.cert-page .hero .deck > p { margin-block: 0; }
+
+/* The certificate switch sits in every figure head; the articles are whole
+   documents, so they are hidden outright. */
+.cert-toggle { display: inline-flex; gap: 0.3rem; margin-inline-start: auto; }
+.cert-toggle button { white-space: nowrap; }
+.intro { margin-block-start: 1.6rem; }
+/* The atlas rendering is inlined: its ground and strokes take the page's
+   theme, and its own caption is replaced by the figure's. */
+.trump a { display: block; width: min(100%, 24rem); }
+.trump svg { display: block; height: auto; width: 100%; }
+.trump svg rect[fill="#ffffff"] { fill: var(--kpress-doc-bg); }
+.trump svg [stroke="#000000"] { stroke: var(--kpress-doc-text); }
+.trump svg text { display: none; }
+.cert-figure[hidden] { display: none; }
+.colophon {
+  color: var(--kpress-doc-muted);
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-tiny);
+  margin-block: 2.5rem 0;
+  text-align: center;
+}
+
+.line-fig { padding: 1.3rem 1.1rem 0.4rem; }
+/* `.kpress-diagram svg` sets display, height and centring; these figures also
+   need full width and labels allowed outside the viewBox. */
+.line-fig svg, .chart svg { overflow: visible; width: 100%; }
+.line-fig svg text, .chart svg text {
+  fill: var(--kpress-doc-muted);
+  font-family: var(--kpress-font-sans);
+}
+
+/* Figure chrome. */
+.fig-head {
+  align-items: baseline;
+  border-block-end: 1px solid var(--kpress-doc-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.9rem;
+  padding: 0.7rem 1.1rem;
+}
+.fig-title {
+  flex: 1 1 14rem;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-small);
+  font-weight: var(--kpress-font-weight-sans-medium);
+}
+.tag {
+  background: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
+  border-radius: var(--kpress-radius-sm);
+  color: var(--kpress-doc-accent);
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-tiny);
+  font-weight: var(--kpress-font-weight-sans-medium);
+  letter-spacing: var(--kpress-caps-spacing);
+  padding: 0.05rem 0.4rem;
+}
+/* `.kpress-figcaption` carries the voice; a bordered figure needs the rule and
+   the padding, which the component leaves to the container. */
+.cert-page .kpress-figcaption {
+  border-block-start: 1px solid var(--kpress-doc-border);
+  margin-block-start: 0;
+  padding: 0.85rem 1.1rem 1rem;
+}
+.cert-page .kpress-figcaption strong {
+  color: var(--kpress-doc-text);
+  font-weight: var(--kpress-font-weight-sans-medium);
+}
+
+/* The mass budget. */
+.mass-line {
+  color: var(--kpress-doc-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-tiny);
+  gap: 1rem;
+  justify-content: space-between;
+  margin-block-start: 0.6rem;
+  padding: 0 1.1rem 0.9rem;
+}
+.mass-line .v { display: block; margin-block-start: 0.15rem; }
+
+/* The two interactive stages. */
+.split { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(14rem, 1fr); }
+/* Figures sit on the page's own ground, and the canvases take the room the
+   figure track gives them. */
+.stage {
+  align-items: center;
+  background: var(--kpress-doc-bg);
+  display: flex;
+  justify-content: center;
+  padding: 0.6rem;
+}
+.stage canvas {
+  cursor: grab;
+  display: block;
+  height: auto;
+  max-width: 42rem;
+  touch-action: none;
+  width: 100%;
+}
+.stage canvas:active { cursor: grabbing; }
+/* The atom readout: a fixed panel beside the canvas, in the sans face. */
+.tip-panel {
+  color: var(--kpress-doc-text);
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-small);
+  line-height: 1.5;
+}
+.tip-panel .tip-w { color: var(--kpress-doc-muted); display: block; margin-block-start: 0.1rem; }
+.tip-panel .katex { font-size: 1.1em; }
+.panel {
+  border-inline-start: 1px solid var(--kpress-doc-border);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--kpress-font-sans);
+  gap: 1.1rem;
+  padding: 1.1rem;
+}
+@media (max-width: 52rem) {
+  .split { grid-template-columns: 1fr; }
+  .panel { border-block-start: 1px solid var(--kpress-doc-border); border-inline-start: 0; }
+}
+
+.readout { padding: 0.2rem 0 0.7rem; }
+.readout .caps { display: block; margin-block-end: 0.5rem; }
+.mass-val {
+  align-items: center;
+  display: flex;
+  font-size: calc(var(--kpress-font-size-base) * 1.9);
+  line-height: 1.1;
+  min-height: 2.4em;
+}
+.mass-val .katex { font-size: 1em; }
+.mass-row { align-items: baseline; display: flex; flex-wrap: wrap; gap: 0.15rem 0.7rem; }
+.mass-dec {
+  color: var(--kpress-doc-text);
+  font-size: var(--kpress-font-size-large);
+}
+.verdict {
+  border-radius: var(--kpress-radius-sm);
+  display: inline-block;
+  font-size: var(--kpress-font-size-tiny);
+  font-weight: var(--kpress-font-weight-sans-medium);
+  letter-spacing: var(--kpress-caps-spacing);
+  margin-block-start: 0.6rem;
+  padding: 0.1rem 0.4rem;
+  text-transform: var(--kpress-caps-transform);
+}
+.verdict.ok {
+  background: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
+  color: var(--kpress-doc-accent);
+}
+.verdict.no {
+  background: color-mix(in srgb, var(--cert-below) 16%, transparent);
+  color: var(--cert-below);
+}
+.verdict.out { background: var(--kpress-doc-code-bg); color: var(--kpress-doc-muted); }
+
+.ctl { display: flex; flex-direction: column; gap: 0.4rem; }
+.ctl .val {
+  color: var(--kpress-doc-text);
+  font-size: var(--kpress-font-size-tiny);
+  line-height: 1.6;
+}
+.cert-page input[type="range"] { accent-color: var(--kpress-doc-accent); margin: 0; width: 100%; }
+.btns { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.cert-page button {
+  background: var(--kpress-doc-bg);
+  border: 1px solid var(--kpress-doc-border-hairline);
+  border-radius: var(--kpress-radius-sm);
+  color: var(--kpress-doc-text);
+  cursor: pointer;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-tiny);
+  padding: 0.3rem 0.55rem;
+}
+.cert-page button:hover { background: var(--kpress-doc-surface-hover); }
+.cert-page button[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
+  border-color: var(--kpress-doc-accent);
+  color: var(--kpress-doc-accent);
+}
+.hint {
+  color: var(--kpress-doc-muted);
+  font-size: var(--kpress-font-size-tiny);
+  line-height: 1.55;
+  margin: 0;
+}
+.legend {
+  color: var(--kpress-doc-muted);
+  display: flex;
+  flex-direction: column;
+  font-size: var(--kpress-font-size-tiny);
+  gap: 0.3rem;
+}
+.legend span { align-items: center; display: flex; gap: 0.5rem; }
+.legend i { display: block; flex: none; height: 0.7rem; width: 0.9rem; }
+
+.kv {
+  align-items: baseline;
+  display: grid;
+  font-size: var(--kpress-font-size-tiny);
+  gap: 0.3rem 0.9rem;
+  grid-template-columns: auto 1fr;
+}
+.kv dt { color: var(--kpress-doc-muted); }
+.kv dd { margin: 0; text-align: end; }
+.kv dd.hi { color: var(--cert-probe); }
+
+.chart { padding: 1.4rem 1.1rem 0.6rem; }
+
+/* One role kpress has no token for: the square the reader drags, which must
+   read as a separate instrument from the mass it measures. */
+:root {
+  /* kpress derives every size from this one token, so the page reads larger
+     everywhere without any element being restyled. */
+  --kpress-host-font-size-base: 18px;
+  --cert-probe: oklch(55% 0.145 52);
+  --cert-below: {{BELOW_ONE}};
+  --cert-near: {{NEAR_LIMIT}};
+  --cert-probe-wash: color-mix(in srgb, var(--cert-probe) 14%, transparent);
+  --cert-accent-wash: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
+}
+:root:where([data-kpress-resolved-theme="dark"]) { --cert-probe: oklch(76% 0.13 60); }
+
+/* Math is held until KaTeX has typeset it, so no raw TeX flashes. */
+.tex, .tex-d { visibility: hidden; }
+.math-ready .tex, .math-ready .tex-d { visibility: visible; }
+/* Wide equations scroll sideways; the block keeps headroom for fractions, since
+   overflow-x: auto also clips vertically and the display margin is zeroed. */
+.tex-d { margin-block: 1.1rem; overflow-x: auto; overflow-y: hidden; padding-block: 0.45rem; }
+.tex-d .katex-display { margin: 0; }
+.caps .katex, .fig-title .katex, .legend .katex, .hint .katex { text-transform: none; }
+/* kpress sizes math to the face it sits in; the page's own sans contexts take
+   kpress's sans size, and its display blocks its display size. */
+.kv .katex, .mass-line .katex, .legend .katex, .hint .katex, .fig-title .katex,
+.caps .katex, .tip .katex { font-size: var(--kpress-katex-size-sans); }
+.cert-page .tex-d .katex { font-size: var(--kpress-katex-size-display); }
+.caps .katex { letter-spacing: 0; }
+</style>
+</head>
+<body class="kpress-frame" data-kpress-frame>
+<main class="kpress-page-main kpress-viewport" data-kpress-viewport>
+<div class="kpress kpress-doc kpress-prose cert-page">
+{{BODY_HTML}}
+<p class="col colophon">Typeset with <a href="https://github.com/jlevy/kpress"><strong>KPress</strong></a></p>
+</div>
+
+</main>
+<script>{{KATEX_JS}}</script>
+<script>{{KPRESS_CLIENT_JS}}</script>
+<!--BEGIN:SCRIPT-->
+<script>
+(() => {
+/* Certificate {{ID}} */
+{{ATOMS}}
+const SCALE = {{SCALE_JS}}, L = {{L_JS}}, B = {{B_JS}}, HALF = B / 2;
+const LIMIT_N = {{LIMIT_NUM}}, LIMIT_D = {{LIMIT_DEN}}, LIMIT = LIMIT_N / LIMIT_D, STEPS = {{N_DIRECTIONS_MAX}};
+
+const gcd = (a, b) => b ? gcd(b, a % b) : a;
+const reduce = (n, d) => { const g = gcd(n, d) || 1; return [n / g, d / g]; };
+const fracTex = (n, d) => (d === 1 ? String(n) : `${n}/${d}`);
+
+/* Angles are the one thing on this page that cannot be printed exactly. A net
+   angle is 2*arctan of a rational, so its degree measure is irrational, and so
+   is any angle the reader drags to; the digits a readout shows are a rounding
+   of it and say so. Zero is the one angle that prints exactly, which is why
+   the mark is conditional rather than blanket: at k = 0 the readout states the
+   angle as an equality, and means it.
+
+   `nearly` marks a value standing on its own — grouped, so KaTeX sets the sign
+   as an ordinary symbol rather than spacing it as a relation — and `degRel`
+   marks one introduced by a relation, by replacing the relation. */
+const deg = (a, places) => (a * 180 / Math.PI).toFixed(places);
+const nearly = text => `{\\approx}\\,${text}`;
+const degTex = (a, places, exact = a === 0) => (exact ? deg(a, places) : nearly(deg(a, places)));
+const degRel = (a, places, exact = a === 0) => `${exact ? '=' : '\\approx'} ${deg(a, places)}`;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const tex = (el, s, d) => { try { katex.render(s, el, { displayMode: !!d, throwOnError: false }); }
+                            catch (e) { el.textContent = s; } };
+/* A readout that is replaced rather than slid fades in (see `.swap`); one
+   that already shows the text is left alone, so leaving and re-entering a
+   figure does not blink it. */
+const swap = el => { el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); };
+const setText = (el, text) => { if (el.textContent !== text) { el.textContent = text; swap(el); } };
+
+function rot(t) { const d = 1 + t * t; return [(1 - t * t) / d, 2 * t / d]; }
+function netT(k) { return LIMIT * k / STEPS; }
+
+/* The direction the figure is computing at. The slider sets a net direction,
+   exactly, from its half-tangent; the handle sets any angle at all. Everything
+   downstream reads cs and sn only, so a direction off the net costs nothing. */
+let sorted = [], cs = 1, sn = 0, angle = 0, onNet = true;
+function resort() {
+  sorted = ATOMS.map(a => [cs * a[0] + sn * a[1], -sn * a[0] + cs * a[1], a[2]])
+                .sort((p, q) => p[0] - q[0]);
+}
+function setDir(k) { curK = k; onNet = true; [cs, sn] = rot(netT(k)); angle = Math.atan2(sn, cs); resort(); }
+function setAngle(a) {
+  const TAU = 2 * Math.PI;
+  angle = ((a % TAU) + TAU) % TAU; onNet = false; cs = Math.cos(angle); sn = Math.sin(angle); resort();
+}
+function lowerBound(u) { let lo = 0, hi = sorted.length;
+  while (lo < hi) { const m = (lo + hi) >> 1; if (sorted[m][0] < u) lo = m + 1; else hi = m; } return lo; }
+
+function massAt(x, y) {
+  const u = cs * x + sn * y, v = -sn * x + cs * y;
+  let i = lowerBound(u - HALF), tot = 0;
+  for (; i < sorted.length && sorted[i][0] <= u + HALF; i++) {
+    const dv = sorted[i][1] - v;
+    if (dv >= -HALF && dv <= HALF) tot += sorted[i][2];
+  }
+  return tot;
+}
+function inset() { return B * (Math.abs(cs) + Math.abs(sn)) / 2; }
+function admissible(x, y) { const h = inset();
+  return x >= h - 1e-12 && x <= L - h + 1e-12 && y >= h - 1e-12 && y <= L - h + 1e-12; }
+
+/* ---------- Figure 3: the atoms ---------- */
+const fc = document.getElementById('field-{{SLUG}}'), fg = fc.getContext('2d');
+const FS = fc.width, FM = FS * 0.055, FPX = FS - 2 * FM, FSC = FPX / L;
+const MAXW = Math.max(...ATOMS.map(a => a[2]));
+const fieldTip = document.getElementById('field-tip-{{SLUG}}');
+let hovered = -1;
+
+function drawField() {
+  fg.clearRect(0, 0, FS, FS);
+  fg.fillStyle = css('--kpress-doc-bg'); fg.fillRect(0, 0, FS, FS);
+  fg.strokeStyle = css('--kpress-doc-border'); fg.lineWidth = 1; fg.setLineDash([4, 6]);
+  for (let i = 1; i <= 3; i++) { const p = FM + FPX * i / L;
+    fg.beginPath(); fg.moveTo(p, FM); fg.lineTo(p, FM + FPX); fg.moveTo(FM, p); fg.lineTo(FM + FPX, p); fg.stroke(); }
+  fg.setLineDash([]);
+  fg.strokeStyle = css('--kpress-doc-border-hairline'); fg.lineWidth = 2; fg.strokeRect(FM, FM, FPX, FPX);
+  ATOMS.forEach(([x, y, w], i) => {
+    const share = Math.sqrt(w / MAXW);
+    const r = share * FSC * 0.115 + FSC * 0.008;
+    const on = i === hovered;
+    fg.fillStyle = on ? css('--cert-probe') : css('--kpress-doc-accent');
+    fg.globalAlpha = on ? 1 : 0.35 + 0.55 * share;
+    fg.beginPath(); fg.arc(FM + x * FSC, FM + (L - y) * FSC, on ? r + FSC * 0.012 : r, 0, 6.2832); fg.fill();
+  });
+  fg.globalAlpha = 1;
+}
+
+/* The atom under the pointer, or -1. Ties go to the heavier one, since a small
+   atom drawn on top of a large one is the harder of the two to aim at. */
+function atomAt(cx, cy) {
+  let best = -1, bestScore = Infinity;
+  for (let i = 0; i < ATOMS.length; i++) {
+    const [x, y, w] = ATOMS[i];
+    const dx = FM + x * FSC - cx, dy = FM + (L - y) * FSC - cy;
+    const d = Math.hypot(dx, dy);
+    const r = Math.sqrt(w / MAXW) * FSC * 0.115 + FSC * 0.008;
+    const reach = Math.max(r, FSC * 0.035);
+    if (d <= reach && d - r < bestScore) { best = i; bestScore = d - r; }
+  }
+  return best;
+}
+
+function showAtomTip(i) {
+  const [xn, xd, yn, yd, w] = ATOM_Q[i];
+  const [wn, wd] = reduce(w, SCALE);
+  fieldTip.innerHTML = '<span class="tip-xy"></span><span class="tip-w"></span>';
+  tex(fieldTip.querySelector('.tip-xy'), `(${fracTex(xn, xd)},\\; ${fracTex(yn, yd)})`);
+  tex(fieldTip.querySelector('.tip-w'), `w = ${fracTex(wn, wd)}`);
+  swap(fieldTip);
+}
+const ATOM_PROMPT = 'Hover an atom for its position and weight.';
+
+fc.addEventListener('pointermove', e => {
+  const box = fc.getBoundingClientRect();
+  const cx = (e.clientX - box.left) / box.width * FS, cy = (e.clientY - box.top) / box.height * FS;
+  const i = atomAt(cx, cy);
+  fc.style.cursor = i < 0 ? 'default' : 'crosshair';
+  if (i === hovered) return;
+  hovered = i; drawField();
+  if (i < 0) setText(fieldTip, ATOM_PROMPT); else showAtomTip(i);
+});
+fc.addEventListener('pointerleave', () => {
+  if (hovered !== -1) { hovered = -1; drawField(); }
+  setText(fieldTip, ATOM_PROMPT);
+});
+
+/* ---------- Figure 4 ---------- */
+const pv = document.getElementById('prove-{{SLUG}}'), pg = pv.getContext('2d');
+const PS = pv.width, PM = PS * 0.06, PPX = PS - 2 * PM, PSC = PPX / L;
+const RES = 230, TIGHT = {{TIGHT_JS}};
+let probe = [{{WITNESS_X_JS}}, {{WITNESS_Y_JS}}], curK = 0, showHeat = true, heat = null;
+/* Handle geometry in container units, so it scales with the drawing. */
+const HGAP = 0.3, HR = 0.075;
+let mode = 'none', handleShown = false, handleHot = false;
+
+function buildHeat() {
+  const img = pg.createImageData(RES, RES), d = img.data;
+  const parse = v => { const m = document.createElement('canvas').getContext('2d');
+    m.fillStyle = v; m.fillRect(0, 0, 1, 1); return Array.from(m.getImageData(0, 0, 1, 1).data).slice(0, 3); };
+  const cLo = parse(css('--cert-below')), cTight = parse(css('--cert-near')),
+        cA = parse(css('--cert-accent-wash')), cB = parse(css('--kpress-doc-accent')), cOut = parse(css('--kpress-doc-border'));
+  const h = inset();
+  const vals = new Float32Array(RES * RES); let hi = 1;
+  for (let j = 0; j < RES; j++) { const y = L * (RES - 1 - j) / (RES - 1);
+    for (let i = 0; i < RES; i++) { const x = L * i / (RES - 1), m = massAt(x, y) / SCALE;
+      vals[j * RES + i] = m;
+      if (x >= h && x <= L - h && y >= h && y <= L - h && m > hi) hi = m; } }
+  const span = Math.max(hi - TIGHT, 0.25);
+  for (let j = 0; j < RES; j++) { const y = L * (RES - 1 - j) / (RES - 1);
+    for (let i = 0; i < RES; i++) {
+      const x = L * i / (RES - 1), o = 4 * (j * RES + i), m = vals[j * RES + i];
+      let col, a;
+      if (!(x >= h && x <= L - h && y >= h && y <= L - h)) { col = cOut; a = 45; }
+      else if (m < 1) { col = cLo; a = 235; }
+      else if (m < TIGHT) { col = cTight; a = 155; }
+      else { const t = Math.sqrt(Math.min(1, (m - TIGHT) / span));
+             col = [cA[0] + (cB[0] - cA[0]) * t, cA[1] + (cB[1] - cA[1]) * t, cA[2] + (cB[2] - cA[2]) * t];
+             a = 70 + 165 * t; }
+      d[o] = col[0]; d[o + 1] = col[1]; d[o + 2] = col[2]; d[o + 3] = a;
+    } }
+  const off = document.createElement('canvas'); off.width = off.height = RES;
+  off.getContext('2d').putImageData(img, 0, 0);
+  heat = off;
+}
+
+function drawProver() {
+  pg.clearRect(0, 0, PS, PS);
+  pg.fillStyle = css('--kpress-doc-bg'); pg.fillRect(0, 0, PS, PS);
+  const X = x => PM + x * PSC, Y = y => PM + (L - y) * PSC;
+  if (showHeat && heat) pg.drawImage(heat, PM, PM, PPX, PPX);
+  pg.strokeStyle = css('--kpress-doc-border-hairline'); pg.lineWidth = 2; pg.strokeRect(PM, PM, PPX, PPX);
+  const h = inset();
+  pg.strokeStyle = css('--kpress-doc-muted'); pg.lineWidth = 1.5; pg.setLineDash([7, 6]);
+  pg.strokeRect(X(h), Y(L - h), (L - 2 * h) * PSC, (L - 2 * h) * PSC);
+  pg.setLineDash([]);
+  const maxw = Math.max(...ATOMS.map(a => a[2]));
+  const pu = cs * probe[0] + sn * probe[1], pvv = -sn * probe[0] + cs * probe[1];
+  for (const [x, y, w] of ATOMS) {
+    const u = cs * x + sn * y, v = -sn * x + cs * y;
+    const hit = Math.abs(u - pu) <= HALF && Math.abs(v - pvv) <= HALF;
+    pg.fillStyle = hit ? css('--cert-probe') : css('--kpress-doc-accent');
+    pg.globalAlpha = hit ? 1 : 0.42;
+    const r = Math.sqrt(w / maxw) * PSC * 0.1 + PSC * 0.007;
+    pg.beginPath(); pg.arc(X(x), Y(y), r, 0, 6.2832); pg.fill();
+  }
+  pg.globalAlpha = 1;
+  pg.save();
+  pg.translate(X(probe[0]), Y(probe[1])); pg.rotate(-Math.atan2(sn, cs));
+  pg.strokeStyle = css('--kpress-doc-bg'); pg.lineWidth = 7;
+  pg.strokeRect(-HALF * PSC, -HALF * PSC, B * PSC, B * PSC);
+  pg.strokeStyle = css('--cert-probe'); pg.lineWidth = 4;
+  pg.strokeRect(-HALF * PSC, -HALF * PSC, B * PSC, B * PSC);
+  pg.restore();
+
+  if (handleShown) {
+    const [hx, hy] = handlePoint();
+    const ex = probe[0] - sn * HALF, ey = probe[1] + cs * HALF;
+    pg.strokeStyle = css('--cert-probe'); pg.lineWidth = 2.5;
+    pg.beginPath(); pg.moveTo(X(ex), Y(ey)); pg.lineTo(X(hx), Y(hy)); pg.stroke();
+    pg.fillStyle = css('--kpress-doc-bg'); pg.lineWidth = handleHot || mode === 'rotate' ? 4.5 : 2.5;
+    pg.beginPath(); pg.arc(X(hx), Y(hy), HR * PSC, 0, 6.2832); pg.fill(); pg.stroke();
+  }
+}
+
+/* The rotation handle sits off the square's own top edge, so it turns with it. */
+function handlePoint() {
+  return [probe[0] - sn * (HALF + HGAP), probe[1] + cs * (HALF + HGAP)];
+}
+
+/* Any direction reduces onto the net's arc [0, pi/4] by the container's own
+   symmetry, which is the reduction Condition 1 pays for. This names the net
+   direction nearest to that reduced angle; the readout reports it and the
+   slider follows it, while the square itself stays exactly where it was put. */
+function nearestNet(phi) {
+  let a = ((phi % (Math.PI / 2)) + Math.PI / 2) % (Math.PI / 2);
+  if (a > Math.PI / 4) a = Math.PI / 2 - a;
+  let best = 0, bestGap = Infinity;
+  for (let k = 0; k <= STEPS; k++) {
+    const gap = Math.abs(2 * Math.atan(netT(k)) - a);
+    if (gap < bestGap) { bestGap = gap; best = k; }
+  }
+  return best;
+}
+
+function updateReadout() {
+  const m = massAt(probe[0], probe[1]);
+  /* Always over SCALE, never reduced: the denominator is the unit the whole
+     certificate is counted in, and a reduced one would change under the reader
+     as they drag, which is the opposite of what the readout is for. The six
+     places are exact rather than rounded, because SCALE divides a million; the
+     renderer refuses a certificate for which it does not. */
+  tex(document.getElementById('mv-{{SLUG}}'), `\\frac{${m}}{${SCALE}}`);
+  /* The comparison sits on the equality line; the pill speaks only when there
+     is more to say than the comparison. */
+  const covers = m >= SCALE, md = document.getElementById('md-{{SLUG}}');
+  tex(md, `= ${(m / SCALE).toFixed(6)} ${covers ? '\\ge' : '\\lt'} 1`);
+  md.style.color = covers ? css('--kpress-doc-accent') : css('--cert-below');
+  const vd = document.getElementById('vd-{{SLUG}}');
+  let cls = 'verdict out', text = '';
+  if (!admissible(probe[0], probe[1])) text = 'Outside the domain';
+  else if (covers && onNet) text = '';
+  else if (covers) text = 'Off the net';
+  else if (onNet) { cls = 'verdict no'; text = 'Breaks Condition 5'; }
+  else text = 'Off the net: no condition tested';
+  const shown = vd.hidden ? '' : vd.textContent;
+  vd.hidden = !text;
+  if (text && (shown !== text || vd.className !== cls)) { vd.className = cls; vd.textContent = text; swap(vd); }
+}
+function updateK() {
+  const el = document.getElementById('kval-{{SLUG}}');
+  /* The half-tangent t is the exact rational the net is built from; the degree
+     measure beside it is not, so only the second one carries a mark. */
+  if (onNet) {
+    tex(el, `k = ${curK}, \\quad t = ${curK === 0 ? '0' : fracTex(...reduce(LIMIT_N * curK, LIMIT_D * STEPS))},` +
+            `\\quad \\theta ${degRel(2 * Math.atan(netT(curK)), 4)}^{\\circ}`);
+  } else {
+    /* The square at theta is the square at theta mod 90 degrees; past 45 the
+       diagonal reflection carries it to one below 45 at the mirrored center.
+       The congruence is exact between the rounded degrees printed, since they
+       differ by a whole number of right angles; what is approximate is each
+       of them separately, and each says so. */
+    const psi = angle % (Math.PI / 2), mirrored = psi > Math.PI / 4;
+    const k = nearestNet(angle);
+    tex(el, `\\theta ${degRel(angle, 4)}^{\\circ} \\equiv ${degTex(psi, 4)}^{\\circ} \\pmod{90^{\\circ}}` +
+            (mirrored ? `, \\text{ diagonal image } ${degTex(Math.PI / 2 - psi, 4)}^{\\circ}` : '') +
+            `; \\text{ nearest net } k = ${k} \\text{ at } ${degTex(2 * Math.atan(netT(k)), 4)}^{\\circ}`);
+  }
+}
+function refresh(rebuild) {
+  if (onNet) setDir(curK); else setAngle(angle);
+  const h = inset();
+  probe[0] = Math.min(L - h, Math.max(h, probe[0]));
+  probe[1] = Math.min(L - h, Math.max(h, probe[1]));
+  if (rebuild && showHeat) buildHeat();
+  drawProver(); updateReadout(); updateK();
+}
+
+function toWorld(e) {
+  const box = pv.getBoundingClientRect();
+  return [((e.clientX - box.left) / box.width * PS - PM) / PSC,
+          L - ((e.clientY - box.top) / box.height * PS - PM) / PSC];
+}
+function place(x, y) {
+  probe = [Math.min(L, Math.max(0, x)), Math.min(L, Math.max(0, y))];
+  drawProver(); updateReadout();
+}
+function rotateTo(x, y) {
+  setAngle(Math.atan2(-(x - probe[0]), y - probe[1]));
+  curK = nearestNet(angle);
+  document.getElementById('kslider-{{SLUG}}').value = String(curK);
+  drawProver(); updateReadout(); updateK();
+}
+function overHandle(x, y) {
+  const [hx, hy] = handlePoint();
+  return Math.hypot(x - hx, y - hy) <= HR * 1.9;
+}
+
+/* Inside the square a drag holds it where it was grabbed; elsewhere a press
+   puts the center under the pointer. */
+let grabOffset = [0, 0];
+function insideProbe(x, y) {
+  const u = cs * x + sn * y, v = -sn * x + cs * y;
+  const pu = cs * probe[0] + sn * probe[1], pvv = -sn * probe[0] + cs * probe[1];
+  return Math.abs(u - pu) <= HALF && Math.abs(v - pvv) <= HALF;
+}
+pv.addEventListener('pointerdown', e => {
+  const [x, y] = toWorld(e);
+  mode = overHandle(x, y) ? 'rotate' : 'move';
+  grabOffset = mode === 'move' && insideProbe(x, y) ? [probe[0] - x, probe[1] - y] : [0, 0];
+  pv.setPointerCapture(e.pointerId);
+  if (mode === 'move') place(x + grabOffset[0], y + grabOffset[1]); else drawProver();
+});
+pv.addEventListener('pointermove', e => {
+  const [x, y] = toWorld(e);
+  if (mode === 'move') { place(x + grabOffset[0], y + grabOffset[1]); return; }
+  if (mode === 'rotate') { rotateTo(x, y); return; }
+  const hot = overHandle(x, y);
+  if (hot !== handleHot || !handleShown) { handleHot = hot; handleShown = true; drawProver(); }
+  pv.style.cursor = hot || insideProbe(x, y) ? 'grab' : 'crosshair';
+});
+function endDrag() {
+  /* The field is a function of the direction, so a rotation invalidates it. It
+     is rebuilt on release rather than per frame: the rebuild is 53,000 cells. */
+  const wasRotating = mode === 'rotate';
+  mode = 'none';
+  if (wasRotating && showHeat) { buildHeat(); drawProver(); }
+}
+pv.addEventListener('pointerup', endDrag);
+pv.addEventListener('pointercancel', endDrag);
+pv.addEventListener('pointerleave', () => {
+  if (mode !== 'none') return;
+  if (handleShown) { handleShown = false; handleHot = false; drawProver(); }
+});
+
+document.getElementById('kslider-{{SLUG}}').addEventListener('input', e => { setDir(+e.target.value); refresh(true); });
+document.getElementById('btn-tight-{{SLUG}}').addEventListener('click', () => {
+  setDir(0); document.getElementById('kslider-{{SLUG}}').value = 0;
+  probe = [{{WITNESS_X_JS}}, {{WITNESS_Y_JS}}]; refresh(true);
+  setText(document.getElementById('hint-{{SLUG}}'),
+    'The tightest placement in the whole certificate: direction k = 0, covering {{LEAST_TEX_PLAIN}}.');
+});
+document.getElementById('btn-scan-{{SLUG}}').addEventListener('click', () => {
+  const h = inset(); let best = Infinity, bx = 0, by = 0, N = 300;
+  for (let j = 0; j <= N; j++) { const y = h + (L - 2 * h) * j / N;
+    for (let i = 0; i <= N; i++) { const x = h + (L - 2 * h) * i / N;
+      const m = massAt(x, y); if (m < best) { best = m; bx = x; by = y; } } }
+  probe = [bx, by]; drawProver(); updateReadout();
+  /* Exact, like the readout above it: an integer count of 1/SCALE units. */
+  const lowest = (best / SCALE).toFixed(6);
+  setText(document.getElementById('hint-{{SLUG}}'), onNet
+    ? 'Raster scan of direction k = ' + curK + ': lowest sampled mass ' + lowest +
+      '. A raster only samples; the exact sweep decides every cell of the arrangement.'
+    : 'Raster scan at ' + (angle === 0 ? '' : '≈') + deg(angle, 4) + '°, off the net: lowest sampled mass ' + lowest +
+      '. The certificate sweeps no angle off the net; Condition 5 is decided at the {{N_DIRECTIONS}} net directions only.');
+});
+document.getElementById('btn-heat-{{SLUG}}').addEventListener('click', e => {
+  showHeat = !showHeat; e.currentTarget.setAttribute('aria-pressed', String(showHeat));
+  if (showHeat && !heat) buildHeat();
+  drawProver();
+});
+
+/* ---------- Figure 5 ---------- */
+let KNET = 3;
+const sk = document.getElementById('shrink-{{SLUG}}'), skg = sk.getContext('2d');
+const SKS = sk.width, SKC = SKS / 2, SKSIDE = SKS * 0.62, SKGAP = SKS * 0.055;
+const SKHR = SKS * 0.028;
+let phiMode = 'none', phiShown = false, phiHot = false;
+
+const phiInput = () => document.getElementById('phi-{{SLUG}}');
+/* The unit square's angle. The slider covers the net's arc; the handle turns
+   through the whole circle, and the slider then shows the arc angle the
+   container's symmetry reduces the square to. */
+let phiVal = (+phiInput().value / 10) * Math.PI / 180;
+/* The slider moves in tenths of a degree, so an angle it sets is an exact
+   number of degrees and the readout prints it as one; the handle turns to
+   wherever the pointer is, and from then on the degree readouts are marked. */
+let phiExact = true;
+const phiNow = () => phiVal;
+const arcOf = phi => { const psi = phi % (Math.PI / 2); return psi > Math.PI / 4 ? Math.PI / 2 - psi : psi; };
+/* The handle rides the square's own top edge, so it turns with it. */
+function phiHandlePoint(phi) {
+  const r = SKSIDE / 2 + SKGAP;
+  return [SKC - r * Math.sin(phi), SKC - r * Math.cos(phi)];
+}
+function skToCanvas(e) {
+  const box = sk.getBoundingClientRect();
+  return [(e.clientX - box.left) / box.width * SKS, (e.clientY - box.top) / box.height * SKS];
+}
+function overPhiHandle(cx, cy) {
+  const [hx, hy] = phiHandlePoint(phiNow());
+  return Math.hypot(cx - hx, cy - hy) <= SKHR * 2;
+}
+function setPhi(cx, cy) {
+  const TAU = 2 * Math.PI;
+  phiVal = ((Math.atan2(SKC - cx, SKC - cy) % TAU) + TAU) % TAU;
+  phiExact = false;
+  phiInput().value = String(Math.round(arcOf(phiVal) * 180 / Math.PI * 10));
+  shrinkDraw();
+}
+sk.addEventListener('pointerdown', e => {
+  const [cx, cy] = skToCanvas(e);
+  if (!overPhiHandle(cx, cy)) return;
+  phiMode = 'rotate'; sk.setPointerCapture(e.pointerId); setPhi(cx, cy);
+});
+sk.addEventListener('pointermove', e => {
+  const [cx, cy] = skToCanvas(e);
+  if (phiMode === 'rotate') { setPhi(cx, cy); return; }
+  const hot = overPhiHandle(cx, cy);
+  if (hot !== phiHot || !phiShown) { phiHot = hot; phiShown = true; shrinkDraw(); }
+  sk.style.cursor = hot ? 'grab' : 'default';
+});
+sk.addEventListener('pointerup', () => { phiMode = 'none'; });
+sk.addEventListener('pointercancel', () => { phiMode = 'none'; });
+sk.addEventListener('pointerleave', () => {
+  if (phiMode !== 'none') return;
+  if (phiShown) { phiShown = false; phiHot = false; shrinkDraw(); }
+});
+function shrinkDraw() {
+  const c = sk, g = skg, S = SKS;
+  const phi = phiNow(), psi = phi % (Math.PI / 2), mirrored = psi > Math.PI / 4;
+  const arc = arcOf(phi);
+  let bestK = 0, bestD = Infinity;
+  for (let k = 0; k <= KNET; k++) { const th = 2 * Math.atan(LIMIT * k / KNET);
+    if (Math.abs(th - arc) < bestD) { bestD = Math.abs(th - arc); bestK = k; } }
+  const theta = 2 * Math.atan(LIMIT * bestK / KNET), d = Math.abs(theta - arc);
+  /* The net direction drawn inside the square is theta's image under the same
+     symmetry that took phi to the arc, so the two squares stay together. */
+  const thetaDrawn = (phi - psi) + (mirrored ? Math.PI / 2 - theta : theta);
+  let D = 0;
+  for (let k = 0; k < KNET; k++) { const a = LIMIT * k / KNET, b2 = LIMIT * (k + 1) / KNET;
+    D = Math.max(D, (b2 - a) / (1 + a * b2)); }
+  const Bk = Math.floor(1e7 / (1 + D) - 1) / 1e7;
+  const prod = Bk * (Math.cos(d) + Math.sin(d));
+
+  g.clearRect(0, 0, S, S);
+  g.fillStyle = css('--kpress-doc-bg'); g.fillRect(0, 0, S, S);
+  const sc = S * 0.62;
+  g.save(); g.translate(S / 2, S / 2);
+  g.save(); g.rotate(-phi);
+  g.strokeStyle = css('--kpress-doc-border-hairline'); g.lineWidth = 3;
+  g.strokeRect(-sc / 2, -sc / 2, sc, sc);
+  g.restore();
+  g.save(); g.rotate(-thetaDrawn);
+  g.fillStyle = css('--cert-probe-wash'); g.globalAlpha = .8;
+  g.fillRect(-Bk * sc / 2, -Bk * sc / 2, Bk * sc, Bk * sc); g.globalAlpha = 1;
+  g.strokeStyle = css('--cert-probe'); g.lineWidth = 3;
+  g.strokeRect(-Bk * sc / 2, -Bk * sc / 2, Bk * sc, Bk * sc);
+  g.restore(); g.restore();
+
+  if (phiShown) {
+    const [hx, hy] = phiHandlePoint(phi);
+    const ex = SKC - (SKSIDE / 2) * Math.sin(phi), ey = SKC - (SKSIDE / 2) * Math.cos(phi);
+    g.strokeStyle = css('--kpress-doc-border-hairline'); g.lineWidth = 2;
+    g.beginPath(); g.moveTo(ex, ey); g.lineTo(hx, hy); g.stroke();
+    g.fillStyle = css('--kpress-doc-bg'); g.lineWidth = phiHot || phiMode === 'rotate' ? 3.5 : 2;
+    g.beginPath(); g.arc(hx, hy, SKHR, 0, 6.2832); g.fill(); g.stroke();
+  }
+
+  /* What each of these six can and cannot claim: phi is exact while the slider
+     owns it; theta is a net angle, exact only at zero; d is their difference,
+     exact only when both are; D is a rational whose decimal does not
+     terminate; Bk is a whole multiple of 1e-7 by construction, so seven places
+     print it in full; and the product is irrational whatever the other two are. */
+  const thetaExact = theta === 0, dExact = phiExact && thetaExact;
+  tex(document.getElementById('s-phi-{{SLUG}}'),
+      `${degTex(phi, 3, phiExact)}^{\\circ}` +
+      (Math.abs(arc - phi) > 1e-9 ? ` \\equiv ${degTex(arc, 3, phiExact)}^{\\circ}` : ''));
+  tex(document.getElementById('s-theta-{{SLUG}}'), `${degTex(theta, 3, thetaExact)}^{\\circ}`);
+  tex(document.getElementById('s-d-{{SLUG}}'), `${degTex(d, 4, dExact)}^{\\circ}`);
+  tex(document.getElementById('s-D-{{SLUG}}'), nearly(D.toFixed(7)));
+  tex(document.getElementById('s-B-{{SLUG}}'), Bk.toFixed(7));
+  const pe = document.getElementById('s-prod-{{SLUG}}');
+  tex(pe, `\\approx ${prod.toFixed(6)} ${prod < 1 ? '\\lt' : '\\ge'} 1`);
+  pe.style.color = prod < 1 ? '' : css('--kpress-doc-danger');
+}
+document.getElementById('phi-{{SLUG}}').addEventListener('input', e => {
+  phiVal = (+e.target.value / 10) * Math.PI / 180; phiExact = true; shrinkDraw();
+});
+const knets = document.querySelectorAll('.cert-figure[data-cert="{{SLUG}}"] .knet');
+knets.forEach(b => b.addEventListener('click', () => {
+  knets.forEach(o => o.setAttribute('aria-pressed', 'false'));
+  b.setAttribute('aria-pressed', 'true'); KNET = +b.dataset.k; shrinkDraw();
+}));
+
+/* ---------- boot ---------- */
+function boot() { drawField(); refresh(true); shrinkDraw(); }
+boot();
+if (window.matchMedia) {
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  if (mq.addEventListener) mq.addEventListener('change', () => { heat = null; boot(); });
+}
+})();
+</script>
+<!--END:SCRIPT-->
+<script>
+/* ---------- shared: static math, then the certificate picker ---------- */
+(() => {
+  const render = (el, s, d) => { try { katex.render(s, el, { displayMode: !!d, throwOnError: false }); }
+                                 catch (e) { el.textContent = s; } };
+  document.querySelectorAll('.tex').forEach(el => {
+    if (!el.dataset.done && !el.querySelector('.katex')) { el.dataset.done = '1'; render(el, el.textContent, false); }
+  });
+  document.querySelectorAll('.tex-d').forEach(el => {
+    if (!el.dataset.done) { el.dataset.done = '1'; render(el, el.textContent, true); }
+  });
+  /* kpress's math markup: the TeX in .kpress-math-render is typeset in place
+     and the element marked rendered, which is what shows it and hides the
+     MathML that stands in when there is no script. */
+  document.querySelectorAll('.kpress-math').forEach(el => {
+    const box = el.querySelector('.kpress-math-render');
+    if (!box || el.dataset.kpressMathRendered) return;
+    const src = box.textContent.trim().replace(/^\\[(\[]/, '').replace(/\\[)\]]$/, '');
+    render(box, src, el.dataset.kpressMath === 'display');
+    el.dataset.kpressMathRendered = 'true';
+  });
+  document.documentElement.classList.add('math-ready');
+
+  /* Footnote hover previews, kpress's own, bundled into this page. Booted after
+     the static math so the preview clones already carry rendered formulas. */
+  if (window.kpressInitTooltips) window.kpressInitTooltips(document, { only: "footnote" });
+  if (window.kpressInitCodeCopy) window.kpressInitCodeCopy(document);
+
+  /* One copy of each figure per certificate. The switch beside every figure
+     shows one certificate's copies and records it in the hash, so a link can
+     open the page on either; the figure the reader switched from stays where
+     it was on screen. */
+  const switches = [...document.querySelectorAll('.cert-toggle button')];
+  const articles = [...document.querySelectorAll('.cert-figure')];
+  const slugs = [...new Set(articles.map(a => a.dataset.cert))];
+  const scroller = document.querySelector('[data-kpress-viewport]') || document.scrollingElement;
+  const figureKey = el => { const f = el.closest('figure'), c = f && f.querySelector('.caps'); return c ? c.textContent : null; };
+  function show(slug, record, from) {
+    if (!slugs.includes(slug)) slug = slugs[0];
+    const key = from ? figureKey(from) : null, top = from ? from.getBoundingClientRect().top : 0;
+    for (const a of articles) {
+      const on = a.dataset.cert === slug;
+      if (on && a.hidden) { a.hidden = false; a.classList.remove('swap'); void a.offsetWidth; a.classList.add('swap'); }
+      else a.hidden = !on;
+    }
+    for (const b of switches) b.setAttribute('aria-pressed', String(b.dataset.cert === slug));
+    if (key) {
+      const twin = [...document.querySelectorAll('.cert-figure:not([hidden]) figure')].find(f => figureKey(f) === key);
+      const button = twin && twin.querySelector('.cert-toggle button');
+      if (button) scroller.scrollBy(0, button.getBoundingClientRect().top - top);
+    }
+    if (record && location.hash !== '#' + slug) history.replaceState(null, '', '#' + slug);
+  }
+  switches.forEach(b => b.addEventListener('click', () => show(b.dataset.cert, true, b)));
+  /* Only a hash naming a certificate switches the page. A footnote jump sets
+     the hash too (#fn-3, #fnref-3), and it leaves the selection alone. */
+  window.addEventListener('hashchange', () => {
+    const slug = location.hash.slice(1);
+    if (slugs.includes(slug)) show(slug, false);
+  });
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>

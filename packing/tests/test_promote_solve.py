@@ -208,7 +208,8 @@ def a_reducible_relation_is_refused_as_not_minimal() -> None:
         "the square of the published polynomial was reported irreducible, so nothing "
         "here distinguishes a minimal polynomial from a multiple of one"
     )
-    assert result.refusal is not None and "factors over Q" in result.refusal, (
+    assert result.refusal is not None
+    assert "factors over Q" in result.refusal, (
         f"a reducible relation was refused for the wrong reason: {result.refusal}"
     )
 

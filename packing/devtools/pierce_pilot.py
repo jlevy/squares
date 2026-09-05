@@ -28,6 +28,7 @@ from __future__ import annotations
 
 import argparse
 import math
+from collections.abc import Sequence
 from dataclasses import dataclass
 
 import numpy as np
@@ -140,14 +141,14 @@ def report(result: PilotResult) -> None:
     )
 
 
-def main(arguments: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--side", type=float, default=None)
     parser.add_argument("--points", type=int, default=26)
     parser.add_argument("--positions", type=int, default=22)
     parser.add_argument("--angles", type=int, default=6)
     parser.add_argument("--ladder", action="store_true")
-    options = parser.parse_args(arguments)
+    options = parser.parse_args(argv)
     print("UNCERTIFIED PILOT: restricted grids, float LP; not a bound in either direction")
     if options.ladder:
         for side in (3.80, 3.83, 3.86, 3.90):
