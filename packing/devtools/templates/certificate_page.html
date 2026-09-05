@@ -32,6 +32,22 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
 .cert-page a:hover, .kpress a.kpress-footnote-backref:hover,
 .kpress-tooltip a, .kpress-tooltip a:hover, .kpress-tooltip .kpress-footnote-nav-link { color: var(--kpress-doc-accent); }
 
+/* One transition for every hover and every replaced readout: fast, and the
+   same everywhere. The scripts set `.swap` on a readout whose text they
+   replace, so it fades in rather than flicking. */
+.cert-page a, .cert-page button, .cert-page .verdict, .cert-page .mass-dec,
+.cert-page .kpress-footnote-ref a, .cert-page a.kpress-footnote-backref {
+  transition: color 120ms ease-out, background-color 120ms ease-out, border-color 120ms ease-out;
+}
+@keyframes cert-swap { from { opacity: 0; } to { opacity: 1; } }
+.cert-page .swap { animation: cert-swap 160ms ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .cert-page a, .cert-page button, .cert-page .verdict, .cert-page .mass-dec, .cert-page .swap {
+    animation: none;
+    transition: none;
+  }
+}
+
 /* Prose keeps the kpress measure; figures are allowed a wider track. The
    Markdown body has no column wrappers, so every direct child of the page and
    of an article takes the measure unless it is a figure. */
@@ -389,6 +405,11 @@ const degRel = (a, places, exact = a === 0) => `${exact ? '=' : '\\approx'} ${de
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const tex = (el, s, d) => { try { katex.render(s, el, { displayMode: !!d, throwOnError: false }); }
                             catch (e) { el.textContent = s; } };
+/* A readout that is replaced rather than slid fades in (see `.swap`); one
+   that already shows the text is left alone, so leaving and re-entering a
+   figure does not blink it. */
+const swap = el => { el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); };
+const setText = (el, text) => { if (el.textContent !== text) { el.textContent = text; swap(el); } };
 
 function rot(t) { const d = 1 + t * t; return [(1 - t * t) / d, 2 * t / d]; }
 function netT(k) { return LIMIT * k / STEPS; }
@@ -469,6 +490,7 @@ function showAtomTip(i) {
   fieldTip.innerHTML = '<span class="tip-xy"></span><span class="tip-w"></span>';
   tex(fieldTip.querySelector('.tip-xy'), `(${fracTex(xn, xd)},\\; ${fracTex(yn, yd)})`);
   tex(fieldTip.querySelector('.tip-w'), `w = ${fracTex(wn, wd)}`);
+  swap(fieldTip);
 }
 const ATOM_PROMPT = 'Hover an atom for its position and weight.';
 
@@ -479,11 +501,11 @@ fc.addEventListener('pointermove', e => {
   fc.style.cursor = i < 0 ? 'default' : 'crosshair';
   if (i === hovered) return;
   hovered = i; drawField();
-  if (i < 0) fieldTip.textContent = ATOM_PROMPT; else showAtomTip(i);
+  if (i < 0) setText(fieldTip, ATOM_PROMPT); else showAtomTip(i);
 });
 fc.addEventListener('pointerleave', () => {
   if (hovered !== -1) { hovered = -1; drawField(); }
-  fieldTip.textContent = ATOM_PROMPT;
+  setText(fieldTip, ATOM_PROMPT);
 });
 
 /* ---------- Figure 4 ---------- */
@@ -598,12 +620,15 @@ function updateReadout() {
   tex(md, `= ${(m / SCALE).toFixed(6)} ${covers ? '\\ge' : '\\lt'} 1`);
   md.style.color = covers ? css('--kpress-doc-accent') : css('--cert-below');
   const vd = document.getElementById('vd-{{SLUG}}');
-  vd.hidden = false;
-  if (!admissible(probe[0], probe[1])) { vd.className = 'verdict out'; vd.textContent = 'Outside the domain'; }
-  else if (covers && onNet) { vd.hidden = true; }
-  else if (covers) { vd.className = 'verdict out'; vd.textContent = 'Off the net'; }
-  else if (onNet) { vd.className = 'verdict no'; vd.textContent = 'Breaks Condition 5'; }
-  else { vd.className = 'verdict out'; vd.textContent = 'Off the net: no condition tested'; }
+  let cls = 'verdict out', text = '';
+  if (!admissible(probe[0], probe[1])) text = 'Outside the domain';
+  else if (covers && onNet) text = '';
+  else if (covers) text = 'Off the net';
+  else if (onNet) { cls = 'verdict no'; text = 'Breaks Condition 5'; }
+  else text = 'Off the net: no condition tested';
+  const shown = vd.hidden ? '' : vd.textContent;
+  vd.hidden = !text;
+  if (text && (shown !== text || vd.className !== cls)) { vd.className = cls; vd.textContent = text; swap(vd); }
 }
 function updateK() {
   const el = document.getElementById('kval-{{SLUG}}');
@@ -695,8 +720,8 @@ document.getElementById('kslider-{{SLUG}}').addEventListener('input', e => { set
 document.getElementById('btn-tight-{{SLUG}}').addEventListener('click', () => {
   setDir(0); document.getElementById('kslider-{{SLUG}}').value = 0;
   probe = [{{WITNESS_X_JS}}, {{WITNESS_Y_JS}}]; refresh(true);
-  document.getElementById('hint-{{SLUG}}').textContent =
-    'The tightest placement in the whole certificate: direction k = 0, covering {{LEAST_TEX_PLAIN}}.';
+  setText(document.getElementById('hint-{{SLUG}}'),
+    'The tightest placement in the whole certificate: direction k = 0, covering {{LEAST_TEX_PLAIN}}.');
 });
 document.getElementById('btn-scan-{{SLUG}}').addEventListener('click', () => {
   const h = inset(); let best = Infinity, bx = 0, by = 0, N = 300;
@@ -706,11 +731,11 @@ document.getElementById('btn-scan-{{SLUG}}').addEventListener('click', () => {
   probe = [bx, by]; drawProver(); updateReadout();
   /* Exact, like the readout above it: an integer count of 1/SCALE units. */
   const lowest = (best / SCALE).toFixed(6);
-  document.getElementById('hint-{{SLUG}}').textContent = onNet
+  setText(document.getElementById('hint-{{SLUG}}'), onNet
     ? 'Raster scan of direction k = ' + curK + ': lowest sampled mass ' + lowest +
       '. A raster only samples; the exact sweep decides every cell of the arrangement.'
     : 'Raster scan at ' + (angle === 0 ? '' : '≈') + deg(angle, 4) + '°, off the net: lowest sampled mass ' + lowest +
-      '. The certificate sweeps no angle off the net; Condition 5 is decided at the {{N_DIRECTIONS}} net directions only.';
+      '. The certificate sweeps no angle off the net; Condition 5 is decided at the {{N_DIRECTIONS}} net directions only.');
 });
 document.getElementById('btn-heat-{{SLUG}}').addEventListener('click', e => {
   showHeat = !showHeat; e.currentTarget.setAttribute('aria-pressed', String(showHeat));
@@ -891,7 +916,11 @@ if (window.matchMedia) {
   function show(slug, record, from) {
     if (!slugs.includes(slug)) slug = slugs[0];
     const key = from ? figureKey(from) : null, top = from ? from.getBoundingClientRect().top : 0;
-    for (const a of articles) a.hidden = a.dataset.cert !== slug;
+    for (const a of articles) {
+      const on = a.dataset.cert === slug;
+      if (on && a.hidden) { a.hidden = false; a.classList.remove('swap'); void a.offsetWidth; a.classList.add('swap'); }
+      else a.hidden = !on;
+    }
     for (const b of switches) b.setAttribute('aria-pressed', String(b.dataset.cert === slug));
     if (key) {
       const twin = [...document.querySelectorAll('.cert-figure:not([hidden]) figure')].find(f => figureKey(f) === key);

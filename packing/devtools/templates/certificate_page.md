@@ -53,13 +53,10 @@ $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
 ## Packing 11 Squares
 
 $s(11)$ is the smallest case still open.
-Trump’s 1979 packing shows $s(11) \le {{BEST_PACKING_TEX}}$.[^trump] This page proves
-$s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
-
-The proof described here covers a bound of $s({{N}}) \ge {{HEADLINE_L_FRAC}}$. (For
-illustration, some of the figures below show a looser bound
-$s({{N}}) \ge {{DEFAULT_L_FRAC}}$, and a toggle on the figure lets you select the
-tighter precision so you can compare the results.)
+Trump’s 1979 packing shows $s(11) \le {{BEST_PACKING_TEX}}$.[^trump] Here we prove
+$s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$. (For illustration, some of the
+figures below show a looser bound $s({{N}}) \ge {{DEFAULT_L_FRAC}}$, and a toggle on the
+figure lets you select the tighter precision so you can compare the results.)
 
 <figure>
   <div class="fig-head">
@@ -104,14 +101,10 @@ tighter precision so you can compare the results.)
 
 ## The Five Conditions
 
-The proof is a **certificate**: a finite list of weighted points in the container (the
-atoms), a finite list of angles (the net), and a shrink factor below 1. Five conditions
-on it, stated below, are decided in exact arithmetic.
-When all five hold, no packing of eleven unit squares fits in the container.
-
-A certificate for $n$ unit squares in a container of side $L$ is a set of weighted atoms
-in the container, a net of directions $\theta_k = 2\arctan t_k$ for $k = 0, \dots, K$,
-each fixed by its rational half-tangent $t_k$, and a shrink $B \lt 1$, such that:
+The proof is a **certificate**: for $n$ unit squares in a container of side $L$, a
+finite set of weighted points in the container (the atoms), a net of directions
+$\theta_k = 2\arctan t_k$ for $k = 0, \dots, K$, each fixed by its rational half-tangent
+$t_k$, and a shrink $B \lt 1$, such that:
 
 {.conditions}
 ::: boxed-text
@@ -142,9 +135,9 @@ $$
 </div>
 
 <div class="frontmatter">
-  <span>certificate <code>{{ID}}</code></span>
+  <span>certificate <a href="{{CERT_URL}}"><code>{{ID}}</code></a></span>
   <span>{{N_ATOMS}} atoms · {{N_DIRECTIONS}} directions · {{N_ORBITS}} orbits of <span class="tex">\mathbf{D}_4</span></span>
-  <span>all arithmetic exact</span>
+  <span>every figure <a href="{{RENDERER_URL}}">computed</a> from the atoms</span>
 </div>
 
 ## Atoms, Mass, and the Budget
@@ -213,8 +206,7 @@ reflects onto that arc and covers the same mass.
 ## Every Placement Covers Mass at Least One
 
 The first condition on the atoms, that every placement of a unit square covers mass at
-least $1$, has three continuous parameters, two of position and one of angle, so it is
-not yet a finite check.
+least $1$, has three continuous parameters, two of position and one of angle.
 
 The proof makes it finite twice over.
 The angle is snapped to a net of {{N_DIRECTIONS}}
@@ -281,9 +273,6 @@ $$
 <!--END:FIGURE-->
 
 ## From a Continuum of Angles to {{N_DIRECTIONS}}
-
-The angles cannot all be checked, so {{N_DIRECTIONS}} of them are checked, and the gaps
-between them are covered by shrinking the square.
 
 Take a unit square at any angle $\varphi$ and let $\theta$ be the nearest net angle.
 A smaller square of side $B$ at angle $\theta$, with the same center, covers no more
@@ -425,7 +414,7 @@ Take any packing of eleven unit squares in the side-{{L_DEC}} container.
 Each square, whatever its angle, contains a side-$B$ square $Q_i$ with the same center
 at one of the {{N_DIRECTIONS}} net angles. That is Condition 4.
 
-Because Condition 4 is a *strict* inequality, each $Q_i$ sits strictly inside its unit
+Because Condition 4 is a *strict* inequality, each $Q_i$ sits inside its unit
 square’s interior, so the eleven are disjoint and no atom is counted twice.
 Each covers mass at least $1$, which is Condition 5.
 Then
@@ -439,9 +428,8 @@ packing exists, and $s({{N}}) \gt {{L_FRAC}}$.
 
 :::
 
-The strict inequality in Condition 4 is what makes the $Q_i$ disjoint.
-With $\le$, two shrunken squares could share an atom on a common boundary, count it
-twice, and add up to more than the container holds.
+With $\le$ in Condition 4, two shrunken squares could share an atom on a common
+boundary, count it twice, and add up to more than the container holds.
 
 ## Generator and Verifier
 
@@ -469,15 +457,6 @@ A wrong linear program will be rejected by the verifier.
 
 A [self-contained third-party check]({{THIRDPARTY_URL}}), one file on Python’s standard
 library, decides the {{DEFAULT_L_FRAC}} certificate without trusting anything else here.
-
-{.article-footer}
-Certificate [`{{ID}}`]({{CERT_URL}}): {{N_ATOMS}} atoms, side $L = {{L_FRAC}}$, shrink
-$B = {{B_FRAC}}$, a net of {{N_DIRECTIONS}} rational half-tangents reaching
-$\tan(\pi/8)$. Total mass ${{TOTAL_PLAIN}}$. Least covered cell mass
-${{LEAST_TEX_PLAIN}}$ at direction $k=0$, center ${{WITNESS_TEX}}$. Every figure is
-[computed]({{RENDERER_URL}}) from that atom list.
-Prior lower bound $2 + 4/\sqrt{5}$.[^stromquist] Best known packing
-${{BEST_PACKING_TEX}}$.[^trump]
 
 <!--BEGIN:CLAIM-->
 
