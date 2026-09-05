@@ -294,3 +294,7 @@ tests plus one register row still described the corpus as it stood before that.
 The register row is `D-455`, and it is the one that mattered — a `frozen_artifact` path
 naming the moving `certificate.json` pointer, so a superseded rung quoted its own
 successor’s atoms.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

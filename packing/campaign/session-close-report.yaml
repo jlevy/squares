@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 86
+count: 87
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 42
+  sessions_measured: 43
   sessions_unmeasured: 44
   attributed:
     rollups: 115
@@ -1338,6 +1338,20 @@ sessions:
   status: stopped
   primary_bead: think-db1k
   phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/f37f604c-3212-50e9-b7f7-4b00b94bfcc0.yaml
+  turns: 1053
+  tool_calls: 568
+  tool_errors: 22
+  one_off_code: 96
+  wall_hours: 18.35
+  codex_receipts: []
+- id: session-087
+  title: "The agenda 022 continuation and the PR 83 gate"
+  status: in_progress
+  primary_bead: think-wufn
+  phases: 1
   measured: true
   rollups:
   - packing/campaign/resource-usage/f37f604c-3212-50e9-b7f7-4b00b94bfcc0.yaml

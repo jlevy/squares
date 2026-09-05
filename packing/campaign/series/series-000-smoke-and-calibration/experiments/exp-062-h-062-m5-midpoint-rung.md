@@ -211,3 +211,7 @@ so the wall seconds here are inflated against `exp-061`’s and should not be co
 them. LP values are arithmetic and are unaffected; both constructions stopped on a
 crossing rather than a deadline, so contention changed neither outcome.
 Only the cost column is untrustworthy, and only upward.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

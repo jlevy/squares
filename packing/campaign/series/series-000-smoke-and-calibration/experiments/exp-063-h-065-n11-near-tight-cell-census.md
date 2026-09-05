@@ -203,3 +203,7 @@ paths have to agree.
 A third test pins the margin’s meaning into the emitted record: the bookkeeping point
 that `epsilon` is a census margin and not the mass gap `M − n`, which at `381/100` is
 negative, is now a field a later reader cannot invert.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
