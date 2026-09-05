@@ -69,7 +69,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 
 | Result | `n` | [`V`](epistemics.md#verification) | [`C`](epistemics.md#confirmation) | [`S`](epistemics.md#significance-and-novelty) | [Novelty](epistemics.md#significance-and-novelty) | What it establishes |
 | --- | --- | --- | --- | --- | --- | --- |
-| [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C4` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
+| [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 99/25, by a first-party weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from a first-party weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
 | [T-020](packing/frontier/RESULTS.md) | 19, 20, 21 | `V4` | `C4` | `S4` | `apparently-novel` | s(19) >= 24/5, s(20) >= 24/5 and s(21) >= 24/5, from a first-party weighted fractional unavoidable-set certificate at container side 24/5 = 4.80. |
@@ -256,6 +256,7 @@ case or experiment separately.
 | [BC-151 — Independent Review of the 4.5058 Adoption Packet](docs/project/reviews/review-2026-09-03-bc151-4-5058-adoption-independent-review.md) | dated review record | record | retained | — |
 | [BC-154 — independent review of the W9 disposition for D-044 and D-046](docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md) | dated review record | record | retained | — |
 | [BC-158 — factual review of the H-060 / exp-058 records against their sources](docs/project/reviews/review-2026-09-03-bc158-h060-record-factual-review.md) | dated review record | record | retained | — |
+| [Adversarial review of PR 78: the `s(11) ≥ 381/100` claim](docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md) | dated review record | record | retained | — |
 | [Review 2026-09-04 — independent verification of T-017 (s(12) ≥ 77/20)](docs/project/reviews/review-2026-09-04-t017-independent-verification.md) | dated review record | record | retained | — |
 | [Review 2026-09-04 — Hostile Third-Party Check of the s(11) ≥ 19/5 Package (T-018)](docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md) | dated review record | record | retained | — |
 | [Review 2026-09-04 — PR #80, the Stacked Hardening of the s(11) ≥ 381/100 Claim](docs/project/reviews/review-2026-09-04-pr80-stacked-hardening.md) | dated review record | record | retained | — |
@@ -428,9 +429,10 @@ unavoidable-set certificate generator — left a trace in this branch’s histor
 verified-upper-bound promotions and `T-009`’s raise to `C4`) and Lane D (the
 `think-ldq2` W9 handoff) do not appear in it.
 
-Lane A retained four results, all `V4`/`C4`, across seven distinct cases: `T-018` raises
-`s(11) >= 381/100`, the smallest open case moving for the first time located in the
-public record since Stromquist stated `2 + 4/√5` in 2003; `T-017` raises
+Lane A retained four results across seven distinct cases, all `V4` and all `C4` when the
+block closed, `T-018` having since been raised to `C5` by a mapped review artifact:
+`T-018` raises `s(11) >= 381/100`, the smallest open case moving for the first time
+located in the public record since Stromquist stated `2 + 4/√5` in 2003; `T-017` raises
 `s(12) >= 99/25`, the first bound specific to `n = 12` in the retained corpus, climbed
 across eight rungs from
 [H-061](packing/campaign/hypotheses/H-061-n12-first-party-fractional-certificate.md)’s
@@ -3654,11 +3656,13 @@ evening and displaces Nagamochi’s 2005 closed form at the other two — `1 + s
 single-case movement in the register, and twenty and twenty-one had never carried a
 bound of their own at all.
 Between them those two are the only values in print this project has replaced.
-All four stand at V4/C4: each was decided twice from frozen bytes by an exact event-cell
+All four stand at V4: each was decided twice from frozen bytes by an exact event-cell
 sweep and by an interval branch and bound with directed rounding, methods that share no
 modelling assumption and fail differently, agreeing on the least covered mass to the
-digit. None reaches C5, because no one outside the project has reviewed any of them; a
-self-contained third-party package ships at
+digit. Three of them stand at C4, and T-018 at C5 — the rung epistemics.md defines as
+review-ready, a mapped and non-superseded review artifact, which the adversarial review
+of PR 78 supplies. None of the four has been read by anyone outside the project, which
+that rung does not ask for; a self-contained third-party package ships at
 `packing/cases/n11_fractional_certificate/thirdparty/` so that a stranger can decide the
 `19/5` rung without trusting this repository.
 

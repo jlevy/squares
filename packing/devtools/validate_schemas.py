@@ -240,7 +240,19 @@ def defect_checks() -> list[str]:
     root = REPO
     # controls.yaml is a file of deliberate corruptions -- it cites a defect that does
     # not exist precisely to prove the recurrence check fires on one.
-    skip = {"defects.yaml", "defects.md", "controls.yaml"}
+    # The PR 78 adversarial review is an imported record whose D-4xx ids from D-441 on
+    # are PR 80's own defect log, numbered independently of this one and colliding with
+    # it on nine ids. Its addendum says so, and every finding it raises is dispositioned
+    # in review-2026-09-04-pr80-stacked-hardening.md. Resolving those ids here would mean
+    # either renumbering a dated record nobody may edit or pointing them at unrelated
+    # local defects, so the file is exempt rather than rewritten. It is the only import
+    # of a foreign log in the corpus; a second one needs its own reason, not this line.
+    skip = {
+        "defects.yaml",
+        "defects.md",
+        "controls.yaml",
+        "review-2026-09-04-pr78-s11-adversarial.md",
+    }
     for path in sorted(root.rglob("*.yaml")) + sorted(root.rglob("*.md")):
         if path.name in skip or "resources" in path.parts or ".venv" in path.parts:
             continue

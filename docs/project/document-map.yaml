@@ -202,6 +202,10 @@ documents:
     role: review
     authority: record
     lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md
+    role: review
+    authority: record
+    lifecycle: retained
   - path: docs/project/reviews/review-2026-09-04-t017-independent-verification.md
     role: review
     authority: record

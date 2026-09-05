@@ -28,7 +28,11 @@ for the first time, having carried a general formula since 2005.
 `C4` is earned the same way everywhere: each certificate is decided twice from the same
 frozen bytes, by the exact event-cell sweep and by an interval branch and bound with
 directed rounding, and the two agree on the least covered mass to the digit.
-`C5`, a review by someone outside the project, is what none of them has.
+`C5` is review-ready — a mapped, non-superseded review artifact — and `T-018` reached it
+on 2026-09-05, after this block closed, when PR 78’s adversarial review came in as a
+dated record.
+The other three have no review artifact, and none of the four has been read
+by anyone outside the project, which the rung does not require.
 
 ## Two structural facts, both proved rather than guessed
 
@@ -82,7 +86,8 @@ every existing point sits in.
   rejection route is far from closing: exact maximum pointwise depth `1925/1152`,
   capping the feasible total at `1152/175` against the eleven a ceiling needs.
   `T-018`’s `next_rung`.
-- **`C4 → C5`** on any result needs a reviewer outside the project.
+- **`C4 → C5`** on any result needs a mapped, non-superseded review artifact; `T-018`
+  gained one on 2026-09-05 and the other three still have none.
   The third-party package at `packing/cases/n11_fractional_certificate/thirdparty/`
   exists so that one can decide the `19/5` rung without trusting this repository.
 

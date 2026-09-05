@@ -681,7 +681,7 @@ results:
       n_values:
         - 11
     verification: V4
-    confirmation: C4
+    confirmation: C5
     significance:
       score: 5
       rationale: >-
@@ -715,11 +715,15 @@ results:
       - packing/src/sqpack/fractional/colgen.py
     controls:
       - packing/tests/test_fractional_certificate.py
+    review_artifact: docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md
     next_rung: >-
       C4 is reached by the interval-certified decision, which is independent in method
       and, deciding coverage on the doubled net, never invokes the D4 reflection and so
       does not need Condition 1 at all. C5 is review-ready under epistemics.md -- a mapped,
-      non-superseded review artifact -- and none has been written for this result.
+      non-superseded review artifact -- and PR 78's adversarial review, ported here as a
+      dated record on 2026-09-05, is that artifact. It is not an external review, which
+      the rubric does not ask for: an outside mathematical review and an archival release
+      would strengthen the priority record without changing this rung.
       The bound itself: 3.81 converged with margin -- objective 10.8603 against eleven,
       rationalised to 434547/40000 = 10.863675 -- so the next rung is a search question
       rather than a limit of the method. Getting there took two attempts at the same
