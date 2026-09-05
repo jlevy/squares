@@ -468,8 +468,11 @@ agenda:
 
 This agenda is paused, and every cell in it is `blocked` on one thing:
 [agenda-021](agenda-021-three-numbers-and-a-wall.md)’s closeout `BC-203`. Nothing here
-is takeable until that closeout has run, evaluated its three doubling-down rules against
-block one’s measured numbers, and named which two of the three lanes below open.
+is takeable until that closeout has run, evaluated its four doubling-down rules against
+block one’s measured numbers, and named which lanes below open — with two exceptions
+that depend on no rule and that a ten-hour pass enters as soon as `BC-203` is written:
+`BC-206`, the `n = 12` ladder, and `BC-208`, the class theorems, the latter only if
+`BC-198`’s controls passed.
 
 That is not caution for its own sake.
 Two of the three lanes here are expensive, and both would be built on premises block one

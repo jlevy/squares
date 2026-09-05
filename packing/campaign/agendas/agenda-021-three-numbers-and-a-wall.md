@@ -27,12 +27,12 @@ agenda:
     0.015. Nobody has ever measured a covering wall; two site sets stopping at exactly
     eleven at 3.82 is the closest the record comes, and T-018 says plainly that reading
     it as tau* would be reading an artefact.
-    Three lanes run concurrently on three cores. Lane A climbs the m = 5 ladder, reading the n = 21 criterion at every rung and one
-    rung near the ceiling on it first, then builds the class-certificate instrument that
-    X-014's Lemma 3 needs, which is a threshold change and nothing geometric, and closes
-    with a zero-build run of the generator at n = 13 -- the calibration X-015's
-    stepping-stone pricing puts first, because the covering value extrapolated to the
-    ceiling there sits below thirteen. Lane B measures the two n = 11 endgame
+    Three lanes run concurrently on three cores. Lane A opens with a zero-build run of the generator at n = 13 -- the calibration
+    X-015's stepping-stone pricing puts first, because the covering value extrapolated
+    to the ceiling there sits below thirteen and its answer reorders block two -- then
+    climbs the m = 5 ladder, reading the n = 21 criterion at every rung and one rung
+    near the ceiling on it first, then builds the class-certificate instrument that
+    X-014's Lemma 3 needs, which is a threshold change and nothing geometric. Lane B measures the two n = 11 endgame
     numbers -- the isolation radius at Trump's pose, and the covering value from below by
     an exact-depth fractional packing -- and then reads the near-tight census off a mass
     grid the sweep already fills. Lane C is the background: agenda-019's BC-191, taken as
@@ -44,7 +44,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [19, 20, 21]
-    state: ready
+    state: blocked
     priority: 0
     question: >-
       Where does the restricted covering optimum at m = 5 reach twenty, and does it reach
@@ -55,8 +55,8 @@ agenda:
       method's?
     hypotheses: [H-062]
     budget: >-
-      200 elapsed minutes, Fable at maximum thinking, research-loop, on lane core 1.
-      The first rung is not part of the bisection: 997/200 = 4.985, 0.0035 below the
+      200 elapsed minutes, Fable at maximum thinking, research-loop, on lane core 1 after
+      BC-211. The first rung is not part of the bisection: 997/200 = 4.985, 0.0035 below the
       ceiling, read on the n = 21 criterion (mass below twenty-one). X-015's
       stepping-stone pricing extrapolates the covering value at the ceiling to 20.4 to
       20.7 by the same finite differences used below, so the n = 21 wall is expected
@@ -102,7 +102,8 @@ agenda:
       Every rung above that side must land in [19, 21), and a rung the n = 20 reading
       refutes may still be an n = 21 certificate.
     entry: >-
-      T-020 is retained at 24/5 with total 946131/50000; ceiling_side gives 5B = 4.9885
+      BC-211 is terminal so the lane core is free; T-020 is retained at 24/5 with total
+      946131/50000; ceiling_side gives 5B = 4.9885
       for n = 20 and n = 21, the reach table's packing cap coincides with it there
       because the grid packing is axis-parallel and every tilt offset is zero, so one
       number is both structural limits; devtools.decide_certificate is the retention gate
@@ -118,7 +119,7 @@ agenda:
       covering value's or the ceiling's.
     bead: think-g73w
     workflows: [research-loop]
-    depends_on: []
+    depends_on: [BC-211]
     parallel_group: agenda021-lane-a
     program: grid-frontier-exact-values
     next_evidence: >-
@@ -192,7 +193,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [13]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Does the existing generator, run unchanged at n = 13 and side 399/100, converge to a
@@ -200,8 +201,8 @@ agenda:
       reaches within 0.0092 of Bentz's s(13) = 4 and the grid-frontier endgame at m = 4 is
       a single certificate's shrink tax rather than a tree?
     budget: >-
-      70 elapsed minutes, Opus at maximum thinking, research-loop, on lane core 1 after
-      BC-198. Numbered after agendas 021 and 022 were drafted: it was added on the
+      70 elapsed minutes, Opus at maximum thinking, research-loop, on lane core 1, first
+      in the lane. Numbered after agendas 021 and 022 were drafted: it was added on the
       stepping-stone pricing X-015 records, which read Bentz's two proofs in X-014's terms
       and found that the covering value extrapolated to the ceiling 4B = 3.9908 sits near
       12.06 to 12.24 -- an extrapolation from the finite differences over the reported
@@ -224,15 +225,15 @@ agenda:
       2097-atom rung at 99/25 -- in which case the run stops time-limited with its
       checkpoint and BC-203 records the price.
     entry: >-
-      BC-198 is terminal so the lane core is free; T-017's 99/25 rung and its site
-      density are retained as the comparison; the estimate above is written down.
+      Lane core 1 is free at dispatch; T-017's 99/25 rung and its site density are
+      retained as the comparison; the estimate above is written down.
     exit: >-
       A converged restricted optimum at 399/100 with the loop's final least covered mass,
       the cost per round against n = 12's, and either a retained certificate or the
       two-site-set refutation; or a time-limited stop with its checkpoint.
     bead: think-2ib0
     workflows: [research-loop]
-    depends_on: [BC-198]
+    depends_on: []
     parallel_group: agenda021-lane-a
     program: grid-frontier-exact-values
     next_evidence: >-
@@ -516,6 +517,10 @@ agenda:
       site sets, BC-212 stays shut and the conditional route runs as drafted.
       Rules one and two can both fire; rule three overrides the endgame half of rule one;
       rule four reorders Lane A of block two without closing any lead.
+      Once this closeout is written, a ten-hour pass does not stop: it continues into
+      agenda-022's BC-206 and BC-208, the two cells no rule gates (BC-208 needs BC-198's
+      controls passing, which is its own entry condition), and the closeout records
+      that continuation as the selected next entry rather than leaving it implicit.
       Where two rules select the same lead, the closeout records the collision and picks
       by the ranked candidate list rather than by recency.
       One question this closeout owns specifically, as agenda-019's did: whether the
@@ -547,13 +552,14 @@ It becomes active when the operator has chosen it over
 queue, which it does not replace: `BC-191` is Lane C’s own first half and runs inside
 this block, and `BC-190`, `BC-192`, `BC-193`, `BC-194` and `BC-195` stay where they are.
 
-Begin at `BC-197`, `BC-199` and `BC-191` together, on three separate cores.
+Begin at `BC-211`, `BC-199` and `BC-191` together, on three separate cores.
 `BC-211`, the `n = 13` calibration, is numbered after both agendas were drafted and runs
-last on Lane A; it is the cheapest cell in the block and the one whose answer reorders
-block two. They are the only work that starts takeable — `BC-197` and `BC-199` are
-`ready` here, and `BC-191` is `ready` in agenda-019 — and every other cell in this
-agenda depends on at least one of the three.
-`BC-197` and `BC-199` enter under `research-loop`; `BC-191` enters under
+first on Lane A: it is the cheapest cell in the block and the one whose answer reorders
+block two, so that answer is in hand before anything else on the lane is spent.
+They are the only work that starts takeable — `BC-211` and `BC-199` are `ready` here,
+and `BC-191` is `ready` in agenda-019 — and every other cell in this agenda depends on
+at least one of the three.
+`BC-211` and `BC-199` enter under `research-loop`; `BC-191` enters under
 `efficiency-loop`, as it was registered.
 
 **Three programs, and each spans this agenda and the next.** Every research cell here
@@ -668,7 +674,7 @@ The closest the record comes is two site sets stopping at exactly eleven at `3.8
 sites can only lower a restricted optimum, so one site set’s converged value is a
 statement about that site set.
 
-`BC-211` is the stepping stone the block adds late.
+`BC-211` is the stepping stone the block adds late and runs first.
 [X-015](../explorations/X-015-the-map-and-the-three-programs.md) read Bentz’s two proofs
 in X-014’s terms — `s(46) = 7` is one unconditional certificate at the grid side with no
 case split, and `s(13) = 4` is Lemma 1 used integrally, then a six-leaf tree — and
@@ -717,18 +723,29 @@ converged optimum below nineteen contradicts a retained packing.
 | Clock | Lane A (core 1) | Lane B (core 2) | Lane C (core 3) | Coordinator |
 | --- | --- | --- | --- | --- |
 | `00:00–00:10` | — | — | — | wall start, continuity trigger armed, dispatch |
-| `00:10–02:10` | `BC-197` `4.985` rung, then the ladder | `BC-199` radius | `BC-191` (agenda-019) | — |
-| `02:10–03:00` | `BC-197` | `BC-200` bracket | `BC-202` `n = 26` | integration checkpoint at `03:00` |
-| `03:00–04:00` | `BC-197` ends `03:30`; `BC-198` from `03:30` | `BC-200` | `BC-202` | — |
-| `04:00–05:20` | `BC-198` ends `05:20` | `BC-201` census, then slack | `BC-202` ends `05:00`, then slack | — |
-| `05:20–06:30` | `BC-211` `n = 13` | slack | slack | — |
+| `00:10–01:20` | `BC-211` `n = 13` | `BC-199` radius | `BC-191` (agenda-019) | — |
+| `01:20–03:00` | `BC-197` `4.985` rung, then the ladder | `BC-199` ends `02:10`; `BC-200` from `02:10` | `BC-202` `n = 26` from `02:10` | integration checkpoint at `03:00` |
+| `03:00–04:40` | `BC-197` | `BC-200` ends `04:00`; `BC-201` from `04:00` | `BC-202` | — |
+| `04:40–06:30` | `BC-198` | `BC-201` ends `05:00`, then slack | `BC-202` ends `05:00`, then slack | — |
 | `06:30–07:30` | freeze | freeze | freeze | `BC-203` closeout |
 
-Cell budgets sum to the lane: `BC-197` 200, `BC-198` 110 and `BC-211` 70 on Lane A, the
+Cell budgets sum to the lane: `BC-211` 70, `BC-197` 200 and `BC-198` 110 on Lane A, the
 full 380 minutes; `BC-199` 120, `BC-200` 110 and `BC-201` 60 on Lane B; `BC-191`’s
 registered 120 and `BC-202`’s 170 on Lane C. Lanes B and C carry 90 minutes of slack
 each, which is the coordinator’s to reassign at the `03:00` checkpoint and not a cell’s
 to spend.
+
+## The ten-hour pass
+
+A pass that runs this block overnight has about two and a half hours left after `BC-203`
+closes, and it does not wait for an operator to spend them.
+Two cells of [agenda-022](agenda-022-the-conditional-route.md) depend on no
+doubling-down rule: `BC-206`, the `n = 12` ladder toward the ceiling, and `BC-208`, the
+two class theorems, which needs only `BC-198`’s controls passing.
+The pass continues into both as soon as the closeout is written, `BC-206` on the lane
+core `BC-202` released and `BC-208` on `BC-198`’s, and stops on their own kill
+conditions or on the operator.
+Everything else in agenda-022 waits for the rules the closeout evaluated.
 
 **The core budget is part of the plan, not an afterthought.** Agenda 017 ran four lanes
 on four cores at load average `10.6` and everything ran about two and a half times

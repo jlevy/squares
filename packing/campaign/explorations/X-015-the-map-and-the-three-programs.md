@@ -491,11 +491,12 @@ names which leads of block two open.
 **Block one, agenda 021, 450 minutes.** The cheapest measurement in each program, and
 the four numbers X-014’s verdict said nobody had measured.
 
-- *Lane A, grid frontier.* `BC-197`: one rung at `4.985` on the `n = 21` reading, then a
-  pre-registered bisection of `[4.80, 4.9885]` for the `n = 20` wall (`H-062`);
-  `BC-198`: the class-certificate program with its two controls, the nine-point bound
-  and Stromquist’s `{0°, 45°}` class (`H-063`); `BC-211`: the generator unchanged at
-  `n = 13`, side `399/100`.
+- *Lane A, grid frontier.* `BC-211` first: the generator unchanged at `n = 13`, side
+  `399/100`, the cheapest cell and the one whose answer reorders block two; then
+  `BC-197`: one rung at `4.985` on the `n = 21` reading, then a pre-registered bisection
+  of `[4.80, 4.9885]` for the `n = 20` wall (`H-062`); then `BC-198`: the
+  class-certificate program with its two controls, the nine-point bound and Stromquist’s
+  `{0°, 45°}` class (`H-063`).
 - *Lane B, `n = 11`.* `BC-199`: the isolation radius `ρ₀` and the stress constant from
   the 128 branch certificates (`H-022`); `BC-200`: the covering value from below at
   `3.82` and `3.85` by an exact-depth fractional packing (`H-064`); `BC-201`: the
@@ -515,9 +516,11 @@ If the `n = 13` run converges below thirteen, block two builds the `B = 1` route
 Two rules can fire at once; the third overrides the endgame half of the first; the
 fourth reorders a lane without closing any lead.
 
-**Block two, agenda 022, 360 minutes, every cell contingent on `BC-203`.** Lane A is
-either the conditional route — the admissible-domain generalisation in all four
-consumers (`BC-204`) and the `n = 13` calibration on it (`BC-205`) — or, under rule
+**Block two, agenda 022, 360 minutes, every cell contingent on `BC-203`** — except
+`BC-206` and `BC-208`, which depend on no rule and which a ten-hour overnight pass
+enters as soon as block one’s closeout is written.
+Lane A is either the conditional route — the admissible-domain generalisation in all
+four consumers (`BC-204`) and the `n = 13` calibration on it (`BC-205`) — or, under rule
 four, the `B = 1` route over the direction continuum (`BC-212`) with the same
 calibration at side exactly four.
 Lane B is the two class theorems at `n = 11`, Gardner with the class widened to two

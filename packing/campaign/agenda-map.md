@@ -34,7 +34,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-018 | `BC-184` | 2 | efficiency | tool_validation | Can the generic interval certifier be wired end to end and reproduce T-009's n = 29 bound through the generic… | `think-4f4d` |
 | agenda-019 | `BC-190` | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and did so 22.7 times… | `think-jgeg` |
 | agenda-019 | `BC-191` | 0 | efficiency | tool_validation | Row generation is between 79 and 94 per cent of every round, the site grids do not scale with the container,… | `think-ji0r` |
-| agenda-021 | `BC-197` | 0 | correctness | research | Where does the restricted covering optimum at m = 5 reach twenty, and does it reach twenty-one below the… | `think-g73w` |
+| agenda-021 | `BC-211` | 0 | correctness | measurement_validation | Does the existing generator, run unchanged at n = 13 and side 399/100, converge to a restricted covering… | `think-2ib0` |
 | agenda-021 | `BC-199` | 0 | insight | research | What explicit isolation radius and quadratic constant follow from exp-013's 128 branch certificates at… | `think-ljvz` |
 
 ## Blocked, and on what
@@ -75,7 +75,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-019 | `BC-194` | 1 | `BC-190`, `BC-191`, `BC-192` | no | — |
 | agenda-019 | `BC-193` | 2 | `BC-192` | no | — |
 | agenda-019 | `BC-195` | 3 | `BC-190`, `BC-191`, `BC-192`, `BC-193`, `BC-194` | no | — |
-| agenda-021 | `BC-211` | 0 | `BC-198` | no | — |
+| agenda-021 | `BC-197` | 0 | `BC-211` | no | — |
 | agenda-021 | `BC-198` | 1 | `BC-197` | no | — |
 | agenda-021 | `BC-200` | 1 | `BC-199` | no | — |
 | agenda-021 | `BC-202` | 1 | `BC-191` | no | — |
@@ -140,14 +140,14 @@ A program is a line of work that spans agendas; its cells carry one `program` sl
 
 | agenda | id | state | question |
 | --- | --- | --- | --- |
-| agenda-021 | `BC-197` | ready | Where does the restricted covering optimum at m = 5 reach twenty, and does it reach twenty-one… |
 | agenda-022 | `BC-204` | blocked | Can the covering program's admissible centre domain be generalised from the hard-coded rotated… |
 | agenda-022 | `BC-205` | blocked | Does the conditional program close a case the classical method closes by hand -- Bentz's… |
 | agenda-022 | `BC-206` | blocked | How far above 99/25 does the n = 12 ladder climb before its restricted optimum reaches twelve,… |
-| agenda-021 | `BC-211` | blocked | Does the existing generator, run unchanged at n = 13 and side 399/100, converge to a restricted… |
+| agenda-021 | `BC-211` | ready | Does the existing generator, run unchanged at n = 13 and side 399/100, converge to a restricted… |
+| agenda-021 | `BC-197` | blocked | Where does the restricted covering optimum at m = 5 reach twenty, and does it reach twenty-one… |
 | agenda-022 | `BC-212` | blocked | Can a certificate at shrink B = 1 -- closed unit-square covering with open-box counting at an… |
 
-Open frontier: `BC-197`, `BC-204`, `BC-205`, `BC-206`, `BC-211`, `BC-212`.
+Open frontier: `BC-204`, `BC-205`, `BC-206`, `BC-211`, `BC-197`, `BC-212`.
 
 ### `n11-closure`
 
