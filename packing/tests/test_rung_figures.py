@@ -12,12 +12,21 @@ other work is in flight against. The third instance, a third-party package's byt
 claim checked by a printed SHA-256, is a claim about file identity rather than a quoted
 mass, atom count, or margin; this module reads no file hash and has no test claiming
 otherwise, which is the honest account of what it covers.
+
+Below those, under its own banner, is the *cross-record* contract `D-442` asked for: the
+same rung is quoted in `results.yaml`, in `evidence.yaml`, in a case page's front matter,
+in the generated reach table and in an agenda's cost prose, and it must agree in all of
+them. Every figure in that half is recomputed from the artifact at test time -- a contract
+with a rung's figures typed into it is one more record describing that rung, and would go
+stale the same way the records it checks do.
 """
 
 from __future__ import annotations
 
 import copy
 import json
+import re
+from decimal import Decimal, InvalidOperation
 from fractions import Fraction
 from pathlib import Path
 
@@ -35,6 +44,11 @@ from devtools.check_rung_figures import (
     pick_retained,
     resolve_certificates,
     round_to,
+)
+from devtools.check_synopsis import spell
+from devtools.render_certificate_reach import (
+    REPORTED_COVERING_VALUES,
+    reported_covering_values,
 )
 from sqpack.yamlio import safe_load
 
@@ -297,3 +311,282 @@ def test_the_repo_wide_scan_covers_evidence_and_defects_too() -> None:
     the latter), and the mechanical check applies there identically."""
     for path, label in ((EVIDENCE, "evidence.yaml"), (DEFECTS, "defects.yaml")):
         assert fraction_decimal_problems(path.read_text(encoding="utf-8"), label) == []
+
+
+# ---------------------------------------------------------------------------------------
+# The cross-record contract.
+#
+# `D-442`: one rung is quoted in many records -- `results.yaml`, `evidence.yaml`, a case's
+# front matter, the generated reach table, an agenda's cost prose -- and the detector above
+# reads only the first of them. A figure left behind in any of the others is the same
+# defect at a surface nothing recomputes.
+#
+# Every figure below is recomputed here, at test time, from the artifact the record points
+# at. That is not a style preference. A contract written with a rung's figures typed into
+# it is itself a record describing that rung, and the next time the ladder moves it becomes
+# an instance of the defect it was built to catch.
+# ---------------------------------------------------------------------------------------
+
+REPO = RESULTS.parents[2]
+PACKING = RESULTS.parents[1]
+CASES = PACKING / "cases"
+REACH = RESULTS.parent / "CERTIFICATE-REACH.md"
+AGENDA_019 = (
+    PACKING / "campaign/agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md"
+)
+
+#: `spell(7) == "seven"`, inverted, so a count written as a word reads as the number it is.
+#: Borrowed from `check_synopsis` rather than retyped: this repository's prose spells its
+#: counts one way, and a second table of number words is a second thing to keep in step.
+_NUMBER_WORDS = {spell(value).lower(): value for value in range(100)}
+
+
+def _stated_number(text: str) -> Decimal | None:
+    """A count or multiple as prose writes it: `1.8`, `7`, or `seven`."""
+    word = _NUMBER_WORDS.get(text.strip().lower())
+    if word is not None:
+        return Decimal(word)
+    try:
+        return Decimal(text)
+    except InvalidOperation:
+        return None
+
+
+def _places(figure: str) -> int:
+    """How many decimal places a figure was written to, which is how it is compared."""
+    return len(figure.split(".", 1)[1]) if "." in figure else 0
+
+
+def _figures(repo_relative: str) -> CertificateFigures:
+    """One certificate's figures, recomputed from its own atoms, never a stored summary."""
+    figures = load_certificate(REPO / repo_relative)
+    assert figures is not None, f"{repo_relative} does not parse as a weighted certificate"
+    return figures
+
+
+def _evidence(evidence_id: str) -> dict:
+    document = safe_load(EVIDENCE.read_text(encoding="utf-8"))
+    return next(e for e in document["evidence"] if e["id"] == evidence_id)
+
+
+def _evidence_by_id() -> dict[str, dict]:
+    document = safe_load(EVIDENCE.read_text(encoding="utf-8"))
+    return {entry["id"]: entry for entry in document["evidence"]}
+
+
+def _front_matter(path: Path) -> dict:
+    """One case page's `packing` block, from the YAML between its first two `---` lines."""
+    _, frontmatter, _ = path.read_text(encoding="utf-8").split("---", 2)
+    return safe_load(frontmatter)["packing"]
+
+
+def _retained_certificates() -> dict[str, CertificateFigures]:
+    """Every moving top-rung pointer the case packages carry, by repository-relative path."""
+    return {
+        (relative := path.relative_to(REPO).as_posix()): _figures(relative)
+        for path in sorted(CASES.glob("n*_fractional_certificate/certificate.json"))
+    }
+
+
+def _declared_artifacts() -> set[str]:
+    document = safe_load(RESULTS.read_text(encoding="utf-8"))
+    return {
+        artifact
+        for result in document["results"]
+        for artifact in result.get("artifacts", [])
+        if isinstance(artifact, str)
+    }
+
+
+def test_the_reach_tables_reported_values_carry_their_own_artifacts_figures() -> None:
+    """`CERTIFICATE-REACH.md`'s covering-value table, recomputed by a second implementation.
+
+    The renderer already reads each frozen artifact rather than quoting it by hand, and
+    `--check` already refuses a stale file. What this adds is the cross-record half: the
+    same masses and atom counts come out of `check_rung_figures`'s own independent loader,
+    and every artifact the table stands a reported value beside is one that a result in
+    `results.yaml` actually declares.
+    """
+    text = REACH.read_text(encoding="utf-8")
+    declared = _declared_artifacts()
+    rendered = {row["side"]: row for row in reported_covering_values()}
+    assert set(rendered) == {side for side, _, _, _ in REPORTED_COVERING_VALUES}
+
+    with_artifacts = 0
+    for side, reported, artifact, _ in REPORTED_COVERING_VALUES:
+        row = rendered[side]
+        assert f"| {side} | {reported} | {row['evidence']} |" in text
+        if artifact is None:
+            continue
+        with_artifacts += 1
+        repo_relative = f"packing/cases/{artifact}"
+        assert repo_relative in declared, f"{repo_relative} is declared by no result"
+        figures = _figures(repo_relative)
+        assert f"{figures.atom_count:,}-atom" in row["evidence"]
+        assert str(round_to(figures.mass, 6)) in row["evidence"]
+    assert with_artifacts, "premise: some reported value has a frozen artifact beside it"
+
+
+def test_the_reach_table_states_how_many_values_it_lists() -> None:
+    """The count its prose spells is the number of rows it renders."""
+    text = REACH.read_text(encoding="utf-8")
+    rows = [line for line in text.splitlines() if re.match(r"^\| \d+\.\d+ \| ", line)]
+    assert len(rows) == len(REPORTED_COVERING_VALUES)
+    assert re.search(rf"\b{spell(len(rows))} values have been reported\b", text, re.I)
+
+
+def test_every_case_page_binds_the_certificate_its_own_evidence_names() -> None:
+    """A case's front-matter bound is the container side of one of its own certificates.
+
+    `D-442`'s surface, contracted rather than spot-checked. For every case page whose
+    verified lower bound cites an evidence entry carrying a certificate, exactly one of
+    those certificates has that bound as its container side, and that certificate's
+    recomputed mass is strictly below this case's own `n` -- which is what makes it a
+    certificate *about this case* rather than one quoted from a neighbour.
+    """
+    evidence = _evidence_by_id()
+    interval = _evidence("E-fractional-interval-decision")
+    expected = {int(value) for value in interval["scope"]["n_values"]}
+
+    bound: set[int] = set()
+    for path in sorted(RESULTS.parent.glob("n-*.md")):
+        packing = _front_matter(path)
+        lower = packing.get("verified_lower_bound") or {}
+        # Keyed by path: two entries may cite the same file (n = 11's own certificate is
+        # named by both its primary entry and the interval decision), and one file is one
+        # certificate however many records point at it.
+        cited = {
+            figures.path: figures
+            for citation in lower.get("evidence") or []
+            if (declared := (evidence.get(citation) or {}).get("certificate"))
+            and (figures := load_certificate(PACKING / declared)) is not None
+        }
+        if not cited:
+            continue
+        n = int(packing["n"])
+        side = Fraction(str(lower["exact_form"]))
+        matching = [figures for figures in cited.values() if figures.outer_side == side]
+        assert len(matching) == 1, f"n = {n}: {len(matching)} cited certificates at {side}"
+        assert matching[0].mass < n, f"n = {n}: {matching[0].path} does not certify it"
+        bound.add(n)
+
+    # Non-vacuity, itself derived: every case the interval decision declares in its own
+    # scope must be bound this way, so the contract cannot quietly empty out.
+    assert bound == expected
+
+
+def test_t017s_ladder_is_the_ladder_the_case_package_actually_retains() -> None:
+    """The rung count and the enumerated sides come from the case directory, not the prose.
+
+    PR 80 wrote "Eight rungs are retained" into the contract as a literal. Eight is the
+    number of certificate files `cases/n12_fractional_certificate/` holds, and reading it
+    from there is what keeps the contract true after the ninth.
+    """
+    sides = sorted(
+        _figures(path.relative_to(REPO).as_posix()).outer_side
+        for path in CASES.glob("n12_fractional_certificate/certificate*.json")
+    )
+    retained = _figures("packing/cases/n12_fractional_certificate/certificate.json")
+    assert sides[-1] == retained.outer_side, "the retained pointer is the ladder's top rung"
+
+    result = _result("T-017")
+    ladder = re.search(r"the ladder ((?:\d+/\d+, )+\d+/\d+) was climbed", result["next_rung"])
+    assert ladder is not None, "premise: next_rung enumerates the ladder"
+    assert [Fraction(token) for token in ladder.group(1).split(", ")] == sides
+
+    below = re.search(
+        r"(\w+) rungs are retained below it, (\d+/\d+) through (\d+/\d+)", result["claim"]
+    )
+    assert below is not None, "premise: the claim counts the rungs below the retained one"
+    assert _stated_number(below.group(1)) == Decimal(len(sides) - 1)
+    assert Fraction(below.group(2)) == sides[0]
+    assert Fraction(below.group(3)) == sides[-2]
+
+
+def test_t017s_retained_figures_are_the_retained_certificates_own() -> None:
+    """The claim, the artifact list and the primary evidence entry all name one file."""
+    retained = _figures("packing/cases/n12_fractional_certificate/certificate.json")
+    record = json.loads((REPO / retained.path).read_text(encoding="utf-8"))
+
+    result = _result("T-017")
+    assert record["claim"] in result["claim"]
+    resolved, _, _ = resolve_certificates(result)
+    assert resolved is not None
+    assert resolved.path == retained.path
+
+    primary = _evidence("E-n012-fractional-certificate")
+    assert (PACKING / primary["certificate"]).resolve() == (REPO / retained.path).resolve()
+    total = f"{retained.mass.numerator}/{retained.mass.denominator}"
+    assert f"{total} = {round_to(retained.mass, 6)}" in result["next_rung"]
+
+
+def test_t017s_quoted_multiples_are_recomputed_from_the_artifacts_they_compare() -> None:
+    """Two "about N times" claims, each derived from the pair of artifacts it is about.
+
+    PR 80 wrote these as "about 6.9 times tighter" and "about 1.77 times" -- figures that
+    are neither what the record says nor recoverable from what it says. Both are ratios
+    between two retained artifacts, so both are computed here from those artifacts and
+    compared to the prose through `round_to`, at the precision the prose itself wrote.
+    """
+    next_rung = _result("T-017")["next_rung"]
+    retained = _figures("packing/cases/n12_fractional_certificate/certificate.json")
+
+    wider = re.search(
+        r"next tightest,[^.]*?at (\d+)/(\d+),\s*is about ([\w.]+) times wider", next_rung
+    )
+    assert wider is not None, "premise: next_rung compares the retained margin to another"
+    other = _figures(
+        f"packing/cases/n12_fractional_certificate/certificate-{wider[1]}-{wider[2]}.json"
+    )
+    stated = _stated_number(wider.group(3))
+    assert stated is not None, f"unreadable multiple {wider.group(3)!r}"
+    assert round_to(other.margin / retained.margin, _places(str(stated))) == stated
+
+    # The second multiple sizes this rung against another retained certificate by atom
+    # count. Both counts and the multiple between them are recomputed; the sentence's
+    # "next largest" is not, because it ranks the register as it stood when this rung was
+    # retained -- n = 20's 2,260-atom rung has since passed it -- and a superlative about
+    # a past moment is history rather than a figure an artifact can still settle.
+    times = re.search(
+        r"(\d[\d,]*) atoms is ([\d.]+) times [^.]*?the (\d[\d,]*)-atom n = (\d+) rung",
+        next_rung,
+    )
+    assert times is not None, "premise: next_rung sizes this rung against another"
+    assert int(times.group(1).replace(",", "")) == retained.atom_count
+    compared = _figures(
+        f"packing/cases/n{int(times.group(4)):02d}_fractional_certificate/certificate.json"
+    )
+    assert int(times.group(3).replace(",", "")) == compared.atom_count
+    ratio = Fraction(retained.atom_count, compared.atom_count)
+    assert round_to(ratio, _places(times.group(2))) == Decimal(times.group(2))
+
+
+def test_the_independent_verifier_entry_names_the_side_it_does_not_decide() -> None:
+    """A historical entry's disclaimer moves with the pointer it disclaims.
+
+    `E-n012-independent-verifier` decides two historical rungs, and says so by naming the
+    current side it does *not* decide. That side is the retained certificate's, so the
+    sentence goes stale the moment the ladder climbs unless it is read against it.
+    """
+    retained = _figures("packing/cases/n12_fractional_certificate/certificate.json")
+    historical = _evidence("E-n012-independent-verifier")
+    checked = _figures(f"packing/{historical['certificate']}")
+    assert checked.path != retained.path
+    assert checked.outer_side < retained.outer_side
+    disclaimer = f"does not decide the current {retained.outer_side} bytes"
+    assert disclaimer in historical["limitations"]
+
+
+def test_the_agenda_quotes_atom_counts_the_retained_certificates_have() -> None:
+    """Agenda prose is a durable record too, and it costs its plans in atom counts.
+
+    PR 80 pinned one sentence of it as "2097 atoms took 4866 s". The seconds are a wall
+    time from a run whose transcript was never retained, and nothing here can recompute
+    them; the atom count is an artifact's, and every atom count the agenda quotes is
+    checked here against the certificates the register actually holds.
+    """
+    counts = {figures.atom_count for figures in _retained_certificates().values()}
+    text = AGENDA_019.read_text(encoding="utf-8")
+    quoted = {int(match.replace(",", "")) for match in re.findall(r"(\d[\d,]*) atoms\b", text)}
+    assert quoted, "premise: the agenda costs its plans in atom counts"
+    assert quoted <= counts, f"no retained certificate has {sorted(quoted - counts)} atoms"
