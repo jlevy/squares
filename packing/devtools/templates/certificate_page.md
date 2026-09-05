@@ -5,8 +5,8 @@ once by kpress (markdown-it: dollarmath, footnotes, block `{.class}` and span
 stay raw HTML: they carry canvas, SVG, controls and layout Markdown cannot express.
 Math in Markdown text is `$…$` and `$$…$$`; math inside a raw HTML block is not seen by
 Markdown, so there it stays `<span class="tex">…</span>` for the page to typeset itself.
-`{{PLACEHOLDERS}}` are substituted before rendering, and the part between BEGIN:ARTICLE
-and END:ARTICLE is stamped once per certificate.
+`{{PLACEHOLDERS}}` are substituted before rendering. Each FIGURE block is stamped once
+per certificate; the prose is filled once, with the headline certificate's values.
 -->
 
 ::: hero
@@ -26,30 +26,26 @@ A New Lower Bound on the Square Packing Problem
 {.deck}
 Eleven unit squares, free to rotate, do not fit in a square of side {{HEADLINE_L_DEC}}.
 The proof is a weighted point set and a pigeonhole argument.
-It is the first improvement in {{YEARS_SINCE_PRIOR}} years to the bounds on the smallest
-open case.
-The previous bound, {{PRIOR_LOWER_DEC}}, was set by Stromquist in {{PRIOR_YEAR}}.[^stromquist]
+It is the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest open case.
+The previous bound, {{PRIOR_LOWER_DEC}}, was Stromquist's in {{PRIOR_YEAR}}.[^stromquist]
 
 :::
 
 ## The Square Packing Problem
 
 The **square packing problem** asks, for each $n$, for $s(n)$, the side of the smallest
-square that holds $n$ unit squares with disjoint interiors.[^survey] The unit squares
-are free to rotate. The value is known for every $n \le 10$. The last of those,
-$s(10) = 3 + 1/\sqrt{2}$, was settled by Stromquist in {{PRIOR_YEAR}},[^stromquist] and
-$s(11)$ is the smallest case still open.
+square that holds $n$ unit squares with disjoint interiors, the squares free to
+rotate.[^survey] The value is known for every $n \le 10$. Stromquist settled
+$s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}},[^stromquist] and $s(11)$ is the smallest
+case still open.
 
-The best known packing, found by Walter Trump in 1979,[^trump] fits eleven squares in a
-square of side {{BEST_PACKING_DEC}}, so $s(11) \le {{BEST_PACKING_TEX}}$. Whether a
-smaller container works is the open question.
-This page proves that the container cannot be as small as {{DEFAULT_L_DEC}}, and then
-that it cannot be as small as {{HEADLINE_L_DEC}}.
+Trump’s 1979 packing[^trump] shows $s(11) \le {{BEST_PACKING_TEX}}$. This page proves
+$s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
 
-Each bound is proved by a **certificate**: a finite list of weighted points in the
-container (the atoms), a finite list of angles (the net), and a shrink factor below 1.
-Five conditions on the certificate, stated in the box below, are decided by exact
-arithmetic. When all five hold, no packing of eleven unit squares fits in the container.
+The proof is a **certificate**: a finite list of weighted points in the container (the
+atoms), a finite list of angles (the net), and a shrink factor below 1. Five conditions
+on it, stated below, are decided in exact arithmetic.
+When all five hold, no packing of eleven unit squares fits in the container.
 
 The proof described here covers a bound of $s({{N}}) \ge {{HEADLINE_L_FRAC}}$. For
 illustration, some of the figures below show a looser bound
@@ -71,9 +67,8 @@ tighter precision so you can compare the results.
 
 ## Packing 11 Squares
 
-Eleven is the smallest open case.
-The figures here show the best known packing of eleven squares, which fixes the upper
-bound on $s(11)$, and where the upper and lower bounds now stand.
+Figure 2 is the best known packing of eleven squares, which sets the upper bound on
+$s(11)$. Figure 3 shows where the bounds stand.
 
 <figure>
   <div class="fig-head">
@@ -160,10 +155,9 @@ $$
 
 ## Atoms, Mass, and the Budget
 
-Place finitely many points in the container and give each a positive weight.
-Each weighted point is an **atom**. The **mass** $\mu(R)$ of a region is the sum of the
-weights of the atoms inside it.
-Every weight is rational, so every mass is a finite exact sum.
+An **atom** is a point in the container with a positive rational weight.
+The **mass** $\mu(R)$ of a region is the sum of the weights of the atoms in it, a finite
+exact sum.
 
 Suppose eleven unit squares fit in the side-{{L_DEC}} container, and suppose the atoms
 have been chosen so that both of these hold:
@@ -186,14 +180,12 @@ The rest of the proof makes the first one finite to check.
 
 ## The Atom Set
 
-There are {{N_ATOMS}} atoms, in {{N_ORBITS}} orbits of the container’s symmetry group
-$\mathbf{D}_4$, carrying {{N_WEIGHTS}} distinct weights between ${{WEIGHT_MIN}}$ and
-${{WEIGHT_MAX}}$. The group is the eight rotations and reflections that map the
-container onto itself, and an orbit is one atom together with its images under all
-eight. The atom set is a union of orbits, so it is invariant under the group, which is
-Condition 1. That invariance lets the proof check angles only up to $\pi/4$: a square at
-any other angle is reflected onto that arc, and the reflected square covers the same
-mass as the original.
+There are {{N_ATOMS}} atoms in {{N_ORBITS}} orbits of $\mathbf{D}_4$, the eight
+rotations and reflections of the container, with {{N_WEIGHTS}} distinct weights between
+${{WEIGHT_MIN}}$ and ${{WEIGHT_MAX}}$. An orbit is an atom with its images under all
+eight, so the set is invariant under the group: Condition 1. That invariance is what
+lets the proof check angles only up to $\pi/4$, since a square at any other angle
+reflects onto that arc and covers the same mass.
 
 <!--BEGIN:FIGURE-->
 
@@ -220,25 +212,23 @@ mass as the original.
 
 ## Every Placement Covers Mass at Least One
 
-The first of the two conditions on the atoms, that every placement of a unit square
-covers mass at least $1$, is not yet a finite check.
-A placement has three continuous parameters, two of position and one of angle, so the
-placements cannot be enumerated.
+The first condition on the atoms, that every placement of a unit square covers mass at
+least $1$, has three continuous parameters, two of position and one of angle, so it is
+not yet a finite check.
 
-The proof makes them finite twice over.
-The angle is snapped to a net of
-{{N_DIRECTIONS}} rational directions, and the square checked at each net direction is a
-slightly smaller one, of side $B$. The next section shows why that smaller square stands
-in for a unit square at any angle.
-For each direction, the position then collapses to a finite grid of cells, because the
-set of atoms under the square changes only when an atom crosses one of its edges.
-The covered mass is constant on each cell, and each cell is an **event cell**. Condition
-5 is the claim that every event cell, at every net direction, carries mass at least $1$.
+The proof makes it finite twice over.
+The angle is snapped to a net of {{N_DIRECTIONS}}
+rational directions, and the square checked at each is a slightly smaller one, of side
+$B$. The next section shows why it stands in for a unit square at any angle.
+Within a direction, the set of atoms under the square changes only when an atom crosses
+an edge, so the positions collapse to finitely many **event cells**, on each of which
+the covered mass is constant.
+Condition 5 says every event cell, at every net direction, carries mass at least $1$.
 
-Figure 5 evaluates that condition.
-Every weight is a whole multiple of ${{SCALE}}$, so the covered mass is an integer count
-of those units and the readout rounds nothing.
-The least covered mass, over every placement and all {{N_DIRECTIONS}} directions, is
+Figure 5 evaluates it.
+Every weight is a whole multiple of ${{SCALE}}$, so the readout counts units and rounds
+nothing. The least covered mass over every placement and all
+{{N_DIRECTIONS}} directions is
 
 $$
 \mu(Q) \;=\; {{LEAST_TEX}} \;=\; {{LEAST_DEC}},
@@ -296,40 +286,37 @@ $$
 The angles cannot all be checked, so {{N_DIRECTIONS}} of them are checked, and the gaps
 between them are covered by shrinking the square.
 
-Take a unit square at any angle $\varphi$, and let $\theta$ be the nearest net angle.
-Inside the unit square, with the same center, place a smaller square of side $B$ at
-angle $\theta$. If the smaller square fits, it covers no more mass than the unit square
-does. So if every placement of the smaller square at a net angle covers mass at least 1,
-then every placement of a unit square at any angle does too.
-The smaller square fits exactly when
+Take a unit square at any angle $\varphi$ and let $\theta$ be the nearest net angle.
+A smaller square of side $B$ at angle $\theta$, with the same center, covers no more
+mass than the unit square if it fits inside it.
+So if every placement of the smaller square at a net angle covers mass at least 1, every
+unit square at any angle does too.
+It fits exactly when
 
 $$
 B\,(\cos d + \sin d) \;\le\; 1,
 $$
 
-where $d$ is the mismatch between the two angles.
+where $d$ is the angle between the two.
 Since $\cos d + \sin d \le 1 + \tan d$ on $[0,\pi/4)$, it is enough that
 
 $$
 B\,(1 + D) \;\lt\; 1, \qquad D \;=\; \max_k \frac{t_{k+1}-t_k}{1+t_k t_{k+1}} \;=\; \max_k \tan\frac{\theta_{k+1}-\theta_k}{2}.
 $$
 
-That is Condition 4, and it couples the two parameters.
-A coarser net has wider gaps, so the mismatch $d$ can be larger, so $B$ must be smaller,
-so each placement covers less mass, and Condition 5 becomes harder to meet.
+That is Condition 4, and it couples the two parameters: a coarser net widens the gaps,
+forces $B$ smaller, and makes Condition 5 harder to meet.
 
-The net stays rational because each angle is carried as a rational half-tangent,
-$\theta_k = 2\arctan t_k$, so that
+Each angle is carried as a rational half-tangent, $\theta_k = 2\arctan t_k$, so that
 
 $$
 \cos\theta = \frac{1-t^2}{1+t^2}, \qquad \sin\theta = \frac{2t}{1+t^2}
 $$
 
-are exact rationals.
-No angle in the net is a floating-point number.
-The net has to reach $\pi/4$, the far end of the arc onto which Condition 1 reflects
-every angle. That is Condition 3. Since $\tan(\pi/8) = \sqrt{2}-1$ is irrational, even
-that is tested in exact rational form:
+are exact rationals and no angle is a floating-point number.
+The net must reach $\pi/4$, the end of the arc that Condition 1 reflects every angle
+onto. That is Condition 3, and since $\tan(\pi/8) = \sqrt{2}-1$ is irrational it too is
+tested in rational form:
 
 $$
 t_K^{\,2} + 2t_K - 1 \;\ge\; 0 \quad\Longleftrightarrow\quad t_K \;\ge\; \tan\frac{\pi}{8}.
@@ -387,9 +374,8 @@ $$
 
 ## Why the Net Has {{N_DIRECTIONS}} Directions
 
-The cost of a coarser net can be measured.
-Hold the {{N_ATOMS}} atoms fixed, coarsen the net, set $B$ to the largest value
-Condition 4 then admits, and decide Condition 5 again.
+To price a coarser net, hold the {{N_ATOMS}} atoms fixed, coarsen the net, set $B$ to
+the largest value Condition 4 admits, and decide Condition 5 again.
 Halving the net shrinks $B$ by
 {{HALVING_B_DROP}} and costs {{HALVING_MASS_DROP}} of the least covered mass.
 
@@ -457,39 +443,35 @@ packing exists, and $s({{N}}) \gt {{L_FRAC}}$.
 :::
 
 The strict inequality in Condition 4 is what makes the $Q_i$ disjoint.
-With $\le$ in its place, two shrunken squares could share an atom on their common
-boundary. That atom would be counted twice, so the eleven masses could add up to more
-than the container holds, and nothing would force the container’s mass up to ${{N}}$.
+With $\le$, two shrunken squares could share an atom on a common boundary, count it
+twice, and add up to more than the container holds.
 
 ## Generator and Verifier
 
-The atoms are not placed by hand but solved for: the atoms and their weights are a
-rationalized optimum of a covering linear program,
+The atoms are solved for, not placed by hand: they are a rationalized optimum of the
+covering linear program
 
 $$
 \tau^*(L,B) \;=\; \min_{w \,\ge\, 0}\; \sum_a w_a \quad\text{subject to}\quad \sum_{a \in Q} w_a \;\ge\; 1 \;\;\text{ for every placement } Q,
 $$
 
-which has one constraint per placement.
-The placements form a continuum, so the constraints are generated as they are needed
-rather than listed in advance: the same event-cell sweep that decides Condition 5 finds
-a placement whose mass falls short, and that placement becomes a new constraint.
-In the language of linear programming, the sweep is the separation oracle.
+with one constraint per placement.
+Placements form a continuum, so constraints are generated as needed: the event-cell
+sweep that decides Condition 5 finds a placement whose mass falls short, and it becomes
+a new constraint. The sweep is the separation oracle.
 
-A certificate exists exactly when $\tau^* \lt n$. The value $\tau^*$ depends on $L$ and
-$B$ alone and never on $n$, which enters only in that comparison.
-A run whose optimum lands on a round number is therefore a sign of a bug, not a result,
-because the target never enters the program.
+A certificate exists exactly when $\tau^* \lt n$. Since $\tau^*$ depends on $L$ and $B$
+alone, an optimum that lands on a round number is a sign of a bug, not a result: the
+target never enters the program.
 
-The search runs in floating point, which is safe because none of it is part of the
-proof. The [generator]({{GENERATOR_URL}}) writes the certificate to a file, and the
-[verifier]({{VERIFIER_URL}}) decides Conditions 1 through 5 on that file in exact
-rational arithmetic.
+The search runs in floating point.
+None of it is part of the proof: the [generator]({{GENERATOR_URL}}) writes the
+certificate to a file, and the [verifier]({{VERIFIER_URL}}) decides Conditions 1 through
+5 on it in exact rational arithmetic.
 A wrong linear program will be rejected by the verifier.
 
-A [self-contained third-party check]({{THIRDPARTY_URL}}), a single file that uses only
-Python’s standard library, decides the {{DEFAULT_L_FRAC}} certificate without trusting
-anything else in this repository.
+A [self-contained third-party check]({{THIRDPARTY_URL}}), one file on Python’s standard
+library, decides the {{DEFAULT_L_FRAC}} certificate without trusting anything else here.
 
 {.article-footer}
 Certificate [`{{ID}}`]({{CERT_URL}}): {{N_ATOMS}} atoms, side $L = {{L_FRAC}}$, shrink
@@ -504,10 +486,10 @@ ${{BEST_PACKING_TEX}}$.[^trump]
 
 ## Verifiable Claim
 
-The claim, the theorem with its proof, and a verifier written in Python’s standard
-library alone, as one file that can be pasted into any coding agent or checked by hand.
-It is [checked into the repository]({{CLAIM_URL}}) beside the certificates it decides,
-and the copy button takes the whole of it.
+The claim, the theorem with its proof, and a standard-library Python verifier, as one
+file to paste into any coding agent or check by hand.
+It is [in the repository]({{CLAIM_URL}}) beside the certificates it decides.
+The copy button takes all of it.
 
 ```markdown
 {{VERIFIABLE_CLAIM}}
@@ -524,6 +506,5 @@ and the copy button takes the whole of it.
     Electronic Journal of Combinatorics, Dynamic Survey DS7.
 
 [^trump]: Walter Trump’s packing of 1979, as recorded in
-    [Kingbird’s register of squares in squares]({{BEST_URL}}), the source the record
-    cites. The rendering is [the project’s own]({{BEST_RENDER_URL}}), from the retained
-    witness.
+    [Kingbird’s register of squares in squares]({{BEST_URL}}). The
+    [rendering]({{BEST_RENDER_URL}}) is the project’s own.
