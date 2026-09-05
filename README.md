@@ -557,6 +557,7 @@ review. [`epistemics.md`](epistemics.md) owns whole-result classifications.
 │   ├── defects.yaml        Structured defect log
 │   ├── defects.schema.yaml Defect-log contract
 │   └── frankensim-probe/   Focused experiments against FrankenSim
+├── vendor/kpress/          Vendored kpress submodule: the page's rendering layer
 ├── AGENTS.md               Project instructions for agents
 ├── CLAUDE.md               Bridge to AGENTS.md
 ├── Makefile                Markdown formatting, hooks, and skill mirroring
