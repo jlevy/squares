@@ -2,7 +2,7 @@
 
 # Agenda map
 
-210 agenda commitments across 23 agendas, as declared in each agenda's own frontmatter.
+211 agenda commitments across 23 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **10** ready, **5** tentative, **41** blocked, **41** stopped, **113** complete.
+- **11** ready, **5** tentative, **41** blocked, **41** stopped, **113** complete.
 
 - **14 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -35,6 +35,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-019 | `BC-190` | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and did so 22.7 times… | `think-jgeg` |
 | agenda-023 | `BC-214` | 0 | efficiency | tool_validation | Can the pull-request surface be brought under four minutes without deleting a check, by moving the broad… | `think-doar` |
 | agenda-023 | `BC-216` | 0 | process | tool_validation | What check would have caught the 499 s to 1370 s regression in the week it happened, and does it hold when… | `think-gy30` |
+| agenda-023 | `BC-218` | 0 | efficiency | tool_validation | How much of the gate's remaining wall is sequencing rather than work, and what does it cost to run the… | `think-m5ev` |
 
 ## Blocked, and on what
 
@@ -125,7 +126,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-020 | completed |  |  |  |  | 1 | 1 |
 | agenda-021 | completed |  |  |  | 2 | 6 | 8 |
 | agenda-022 | active |  |  | 7 |  | 2 | 9 |
-| agenda-023 | active | 2 |  | 2 |  |  | 4 |
+| agenda-023 | active | 3 |  | 2 |  |  | 5 |
 
 ## By program
 
@@ -139,8 +140,9 @@ A program is a line of work that spans agendas; its cells carry one `program` sl
 | agenda-023 | `BC-215` | blocked | Which expensive gate steps re-run when nothing they depend on has changed, and what does skipping… |
 | agenda-023 | `BC-216` | ready | What check would have caught the 499 s to 1370 s regression in the week it happened, and does it… |
 | agenda-023 | `BC-217` | blocked | Can the records gate certify that the full gate actually ran on the commit a block handed over, so… |
+| agenda-023 | `BC-218` | ready | How much of the gate's remaining wall is sequencing rather than work, and what does it cost to run… |
 
-Open frontier: `BC-214`, `BC-215`, `BC-216`, `BC-217`.
+Open frontier: `BC-214`, `BC-215`, `BC-216`, `BC-217`, `BC-218`.
 
 ### `grid-frontier-exact-values`
 

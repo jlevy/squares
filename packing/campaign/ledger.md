@@ -492,6 +492,7 @@ Status: **active**. A W5 efficiency-loop block entered on the operator's directi
 | BC-215 | tool_validation | 11, 20 | blocked | 1 | think-xejq | Whether the deep tier can run often enough to be a backstop rather than a nightly surprise, which is what decides how much the pull-request surface is allowed to miss. |
 | BC-216 | tool_validation | 11 | ready | 0 | think-gy30 | Whether this campaign can hold a cost target it has written down, which every efficiency block so far has assumed rather than checked. |
 | BC-217 | tool_validation | 11 | blocked | 1 | think-cdf0 | Whether a handover can be trusted without re-running the gate to find out, which is what every reviewer of every block in this campaign has had to take on faith. |
+| BC-218 | tool_validation | 11, 20 | ready | 0 | think-m5ev | Whether the four-minute target is reachable without deferring anything further, which decides whether the coverage policy in OR-13 costs anything at all. |
 
 ## Series
 

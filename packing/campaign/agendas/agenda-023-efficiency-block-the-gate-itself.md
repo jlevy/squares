@@ -213,6 +213,57 @@ agenda:
     next_evidence: >-
       Whether a handover can be trusted without re-running the gate to find out, which is
       what every reviewer of every block in this campaign has had to take on faith.
+  - id: BC-218
+    purpose: tool_validation
+    owner_focus: efficiency
+    instances: [11, 20]
+    state: ready
+    priority: 0
+    question: >-
+      How much of the gate's remaining wall is sequencing rather than work, and what does
+      it cost to run the surfaces as parallel GitHub Actions jobs instead of one runner?
+    budget: >-
+      90 elapsed minutes, efficiency-loop, on the operator's direction: use more
+      parallelism on GitHub Actions wherever it would help.
+      The measured starting point is BC-214's, and it is the reason this cell is worth
+      opening rather than declaring victory at 409 s. That figure is one job on one
+      two-core runner running every step in sequence, and the tier is no longer dominated
+      by a single step now that the slow lane has left it -- so what remains is a set of
+      steps whose costs are comparable and which mostly do not depend on each other. A
+      sequential runner pays their sum; parallel jobs pay their maximum plus the setup
+      each one repeats.
+      Three shapes to price rather than assume, because the trade is real in both
+      directions. Separate jobs each repeat checkout, uv install and `uv sync`, which
+      measured about 12 s together on the two-core runner, so a job worth splitting out
+      has to cost more than that. A matrix over the deep lanes buys the most where the
+      exhaustive tier is, since it is the one surface whose steps are genuinely
+      independent decisions. And within a job, `--jobs` and `--inner-jobs` are already
+      the knobs `packing-validate` exposes; whether a larger runner beats more jobs is a
+      measurement nobody here has taken.
+      What must not change: `packing-required` stays the single required context, since
+      D-380 records what a fan-out of required checks did to this repository once, and
+      every step must still land in exactly one surface with `test_every_step_is_reachable_from_some_tier`
+      still passing.
+      Kill: any split that makes the pull-request surface's *sum* of billed runner
+      minutes more than double, since wall time bought with unbounded cost is not a
+      trade this project has agreed to.
+    entry: >-
+      BC-214 has priced the pull-request surface at 409 s on the two-core runner and the
+      slow lane has left it, so what remains is comparable steps rather than one dominant
+      one.
+    exit: >-
+      A measured comparison of the sequential surface against at least one parallel
+      shape, on CI's own runners and not locally; the billed-minutes cost of each beside
+      its wall; and either a wired split with both numbers recorded or a statement of why
+      the sequencing was not the cost.
+    bead: think-m5ev
+    workflows: [efficiency-loop]
+    depends_on: []
+    parallel_group: agenda023-gate
+    program: gate-cost
+    next_evidence: >-
+      Whether the four-minute target is reachable without deferring anything further,
+      which decides whether the coverage policy in OR-13 costs anything at all.
 ---
 # agenda-023 — Efficiency Block: the Gate Itself
 
