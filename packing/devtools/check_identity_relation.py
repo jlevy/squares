@@ -140,7 +140,7 @@ def _keys(control: Control, field: str) -> int | str:
     return len({sample[field] for sample in control.samples})
 
 
-def relation_side_alone(control: Control) -> int | str:
+def relation_side_alone(_control: Control) -> int | str:
     """Every point of an optimal configuration space has the optimal side, by definition.
 
     So this returns 1 wherever it can answer at all, which is why it passes the `n = 3`

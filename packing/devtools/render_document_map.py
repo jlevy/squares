@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import re
 import sys
+from collections.abc import Sequence
 from pathlib import Path
 
 from strif import atomic_output_file
@@ -111,7 +112,7 @@ def parser() -> argparse.ArgumentParser:
     return command
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     arguments = parser().parse_args(argv)
     current = SYNOPSIS.read_text(encoding="utf-8")
     expected = expected_synopsis(current, load_map())

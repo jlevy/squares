@@ -19,6 +19,7 @@ import argparse
 import pathlib
 import sys
 from collections import Counter
+from collections.abc import Sequence
 
 from strif import atomic_output_file
 
@@ -191,11 +192,11 @@ def render(d: dict) -> str:
     return "\n".join(out)
 
 
-def main(arguments: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     """Check or render the generated defect view."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
-    options = parser.parse_args(arguments)
+    options = parser.parse_args(argv)
     rendered = render(safe_load(SRC.read_text(encoding="utf-8")))
     if options.check:
         current = OUT.read_text(encoding="utf-8") if OUT.exists() else ""
@@ -221,4 +222,4 @@ def main(arguments: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

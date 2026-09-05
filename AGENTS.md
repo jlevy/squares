@@ -62,6 +62,11 @@ make format          # format all Markdown
 make format-check    # report drift without writing
 ```
 
+Ruff and BasedPyright run at zero findings over every tracked Python file, the
+hand-written skill assets at the repository root included; `print` is allowed only in
+the tools (`devtools`, `cases`, `tests`, `benchmarks`, the console scripts), and the two
+standalone verifiers under `packing/cases/n11_fractional_certificate/` run on any
+CPython 3.12 or later by design.
 Python, Rust, and research validation are documented in
 [`development.md`](development.md).
 Run them from `packing/`, which is where the project’s `pyproject.toml` and lockfile

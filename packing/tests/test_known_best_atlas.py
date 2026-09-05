@@ -152,10 +152,9 @@ def test_kingbird_sources_are_metadata_only_derived_facts() -> None:
         )
 
 
+@pytest.mark.usefixtures("isolated_atlas_build_cache")
 def test_known_best_rejects_corrupted_retained_unitsquare_svg(
-    tmp_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
-    isolated_atlas_build_cache: None,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     source = SOURCES / "unitsquare/n068.svg"
     monkeypatch.setattr(known_best_builder, "UNITSQUARE_ROOT", tmp_path)
@@ -210,7 +209,7 @@ def test_kingbird_adapter_uses_first_duplicate_id_in_tree_order() -> None:
 
 
 @pytest.mark.parametrize(
-    "href", ("missing", "#missing", "packing.svg#one", "https://example/one")
+    "href", ["missing", "#missing", "packing.svg#one", "https://example/one"]
 )
 def test_kingbird_adapter_rejects_nonlocal_or_unresolved_use(href: str) -> None:
     svg = (

@@ -33,10 +33,13 @@ def test_retained_control_is_current_and_exactly_replayable() -> None:
     result, report = exact_verify(witness)
     independent = independent_check(OUTPUT)
 
-    assert report.valid and result["verification_passed"]
-    assert result["n"] == 11 and result["pairs_tested"] == 55
+    assert report.valid
+    assert result["verification_passed"]
+    assert result["n"] == 11
+    assert result["pairs_tested"] == 55
     assert independent["verification_passed"]
-    assert independent["n"] == 11 and independent["pairs_tested"] == 55
+    assert independent["n"] == 11
+    assert independent["pairs_tested"] == 55
     assert [square["id"] for square in witness["squares"]] == list(range(1, 12))
 
 

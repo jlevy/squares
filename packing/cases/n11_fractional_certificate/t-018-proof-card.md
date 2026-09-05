@@ -49,8 +49,8 @@ s(11) >= 381/100 = 3.81   eleven unit squares do not fit in a square of side 3.8
 
   bytes          packing/cases/n11_fractional_certificate/certificate.json
                  sha256 b121edbd044b...  (`sha256sum certificate.json` for all 64)
-  check          python3 minimal_verify.py certificate.json   ->  VERIFIED, ~48 s
-                 any CPython 3.8+, standard library only, nothing else installed
+  check          python3 minimal_verify.py certificate.json   ->  VERIFIED, ~1 min
+                 any CPython 3.12+, standard library only, nothing else installed
 ```
 
 The bytes on `main`: [certificate.json](https://github.com/jlevy/squares/blob/main/packing/cases/n11_fractional_certificate/certificate.json).
@@ -65,8 +65,9 @@ python3 minimal_verify.py certificate.json
 It prints the SHA-256 it checked, one `PASS` line per condition with the numbers it
 decided on, and `VERIFIED s(11) >= 381/100`; the exit status is 0 only after that
 line. Any other outcome prints `REFUSED` with its reason and exits 1. Measured
-2026-09-05, single-threaded on a four-core machine: 47.5 s under CPython 3.14 and 47.3 s
-under CPython 3.11 run with an empty environment.
+2026-09-05, single-threaded with an empty environment: 47.5 s under CPython 3.14 on one
+four-core machine, and 67.0 s under CPython 3.14.7 and 64.8 s under CPython 3.12.3 on a
+slower one, where the file's previous bytes took 66.7 s.
 [`minimal_verify.py`](minimal_verify.py) imports nothing from this repository and holds
 the only copy of the digest; `sha256sum certificate.json` is the other way to get it.
 

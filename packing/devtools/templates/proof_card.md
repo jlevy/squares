@@ -47,8 +47,8 @@ s(11) >= {{L_FRAC}} = {{L_DEC}}   eleven unit squares do not fit in a square of 
 
   bytes          {{CERT_PATH}}
                  sha256 {{DIGEST_PREFIX}}...  (`sha256sum {{CERT_NAME}}` for all 64)
-  check          python3 minimal_verify.py {{CERT_NAME}}   ->  VERIFIED, ~48 s
-                 any CPython 3.8+, standard library only, nothing else installed
+  check          python3 minimal_verify.py {{CERT_NAME}}   ->  VERIFIED, ~1 min
+                 any CPython 3.12+, standard library only, nothing else installed
 ```
 
 The bytes on `main`: [{{CERT_NAME}}]({{CERT_URL}}).
@@ -63,8 +63,9 @@ python3 minimal_verify.py {{CERT_NAME}}
 It prints the SHA-256 it checked, one `PASS` line per condition with the numbers it
 decided on, and `VERIFIED s(11) >= {{L_FRAC}}`; the exit status is 0 only after that
 line. Any other outcome prints `REFUSED` with its reason and exits 1. Measured
-2026-09-05, single-threaded on a four-core machine: 47.5 s under CPython 3.14 and 47.3 s
-under CPython 3.11 run with an empty environment.
+2026-09-05, single-threaded with an empty environment: 47.5 s under CPython 3.14 on one
+four-core machine, and 67.0 s under CPython 3.14.7 and 64.8 s under CPython 3.12.3 on a
+slower one, where the file's previous bytes took 66.7 s.
 [`minimal_verify.py`](minimal_verify.py) imports nothing from this repository and holds
 the only copy of the digest; `sha256sum {{CERT_NAME}}` is the other way to get it.
 

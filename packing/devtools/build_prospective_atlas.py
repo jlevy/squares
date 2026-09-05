@@ -10,6 +10,7 @@ import json
 import time
 import urllib.error
 import urllib.request
+from collections.abc import Sequence
 from dataclasses import replace
 from functools import cache
 from pathlib import Path
@@ -418,7 +419,7 @@ def parser() -> argparse.ArgumentParser:
     return command
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
     if args.refresh and not args.fetch:
         raise ValueError("--refresh is valid only with --fetch")

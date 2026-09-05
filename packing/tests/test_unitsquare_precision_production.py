@@ -387,7 +387,7 @@ def test_bounded_response_refuses_oversize_nonbytes_and_second_read() -> None:
     class NonBytes:
         closed = False
 
-        def read(self, size: int | None = -1) -> object:
+        def read(self, _size: int | None = -1) -> object:
             return "not bytes"
 
         def close(self) -> None:

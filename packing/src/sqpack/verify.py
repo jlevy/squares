@@ -117,7 +117,7 @@ def separated(a: Square, b: Square, sign) -> int | None:
     return best
 
 
-def _buckets(squares: Sequence[Square], sign, cell: float = 2.0) -> dict:
+def _buckets(squares: Sequence[Square], cell: float = 2.0) -> dict:
     """Grid-bucket square centres so pair enumeration is linear in n.
 
     Only used when the scalar type supports float conversion; exact scalars
@@ -132,7 +132,7 @@ def _buckets(squares: Sequence[Square], sign, cell: float = 2.0) -> dict:
     return grid
 
 
-def candidate_pairs(squares: Sequence[Square], sign, *, bucket: bool = False):
+def candidate_pairs(squares: Sequence[Square], *, bucket: bool = False):
     """Yield index pairs that must be tested."""
     n = len(squares)
     if not bucket:
@@ -140,7 +140,7 @@ def candidate_pairs(squares: Sequence[Square], sign, *, bucket: bool = False):
             for j in range(i + 1, n):
                 yield i, j
         return
-    grid = _buckets(squares, sign)
+    grid = _buckets(squares)
     seen = set()
     for (gx, gy), members in grid.items():
         neighbours = []
@@ -206,7 +206,7 @@ def verify_packing(
                 elif s == 0:
                     report.container_contacts += 1
 
-    for i, j in candidate_pairs(squares, sign, bucket=bucket):
+    for i, j in candidate_pairs(squares, bucket=bucket):
         report.pairs_tested += 1
         verdict = separated(squares[i], squares[j], sign)
         if verdict is None:

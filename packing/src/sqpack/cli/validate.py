@@ -36,6 +36,7 @@ from typing import Literal, Never, override
 
 from sqpack.project import (
     ProjectLayoutError,
+    add_version_argument,
     configured_project_root,
     require_project_root,
 )
@@ -486,12 +487,50 @@ def _soundness_perimeter(context: Context) -> str:
     return output
 
 
+_HANDWRITTEN_SKILLS_PATTERN = re.compile(
+    r"^HANDWRITTEN_SKILLS\s*:=\s*(?P<names>.*)$", re.MULTILINE
+)
+
+
+def _handwritten_skill_directories() -> tuple[Path, ...]:
+    """The hand-written skills under `.agents/skills`, read from the Makefile's
+    `HANDWRITTEN_SKILLS` so the lint floor and `make skills-check` share one list.
+
+    Only these are linted. The generated skills beside them are rewritten
+    byte-for-byte by their installers, and ruff formats the Python blocks in Markdown
+    as well as `.py` files, so pointing it at the whole directory would put the gate
+    in conflict with the generators, which is the case `.flowmarkignore` already
+    documents. `.claude/skills` is the mirror `make skills-sync` keeps and is not a
+    second target.
+    """
+    makefile = REPOSITORY_ROOT / "Makefile"
+    match = _HANDWRITTEN_SKILLS_PATTERN.search(makefile.read_text(encoding="utf-8"))
+    if match is None:
+        raise StepFailureError(f"{makefile} does not declare HANDWRITTEN_SKILLS")
+    names = match.group("names").split()
+    if not names:
+        raise StepFailureError(f"{makefile} declares HANDWRITTEN_SKILLS as empty")
+    directories = tuple(REPOSITORY_ROOT / ".agents" / "skills" / name for name in names)
+    missing = [str(path) for path in directories if not path.is_dir()]
+    if missing:
+        raise StepFailureError(f"HANDWRITTEN_SKILLS names missing directories: {missing}")
+    return directories
+
+
 def _lint_floor(context: Context) -> str:
     """Ruff alone, because it is the half that is instant and the half that caught a
     registry bug: the duplicated declared-consumer key behind one of D-369's CI
-    failures was an `F601`. Measured under a second against basedpyright's 36."""
+    failures was an `F601`. Measured under a second against basedpyright's 36.
+
+    The second target is the hand-written skill assets at the repository root, the one
+    place project Python lives outside this directory; basedpyright reaches them
+    through its `include` list instead."""
     ruff = _required_tool(context, "ruff")
-    return _commands(context, ((ruff, "check", "."), (ruff, "format", "--check", ".")))
+    skills = [str(path) for path in _handwritten_skill_directories()]
+    return _commands(
+        context,
+        ((ruff, "check", ".", *skills), (ruff, "format", "--check", ".", *skills)),
+    )
 
 
 def _type_floor(context: Context) -> str:
@@ -2290,7 +2329,7 @@ def _execute_step(step: Step, context: Context) -> StepResult:
             seconds=time.perf_counter() - started,
             reason=str(error),
         )
-    except Exception:
+    except Exception:  # noqa: BLE001 - whatever a step raises is that step's failure, with its traceback
         return StepResult(
             name=step.name,
             status="failed",
@@ -2454,6 +2493,7 @@ def _parser() -> ArgumentParser:
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
+    add_version_argument(parser)
     parser.add_argument(
         "--edit",
         action="store_true",
@@ -2547,11 +2587,11 @@ def _validate_runtime() -> None:
         raise UsageError(f"Python 3.14 is required, running {sys.version.split()[0]}")
 
 
-def main(arguments: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     """Run validation and return a process-compatible status code."""
     parser = _parser()
     try:
-        namespace = parser.parse_args(arguments)
+        namespace = parser.parse_args(argv)
         strict = namespace.strict or _environment_flag("PACKING_VALIDATE_STRICT")
         deep = namespace.deep or _environment_flag("PACKING_VALIDATE_DEEP") or strict
         _validate_invocation(

@@ -90,6 +90,7 @@ import subprocess
 import sys
 import tempfile
 import time
+from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
@@ -98,7 +99,12 @@ from typing import Any
 import yaml
 from strif import atomic_output_file
 
-from sqpack.project import ProjectLayoutError, configured_project_root, require_project_root
+from sqpack.project import (
+    ProjectLayoutError,
+    add_version_argument,
+    configured_project_root,
+    require_project_root,
+)
 from sqpack.verify import corners_from_poses, float_sign, verify_packing
 from sqpack.yamlio import safe_load
 
@@ -2042,11 +2048,12 @@ def write_report(
     print(f"\nreport at {REPORT.relative_to(ROOT)}")
 
 
-def main(arguments: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     """Run one campaign state-machine command."""
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
+    add_version_argument(parser)
     parser.add_argument("step", choices=[
         "status", "preflight", "queue", "claim", "execute", "record", "release", "run",
         "verify-archive",
@@ -2061,7 +2068,7 @@ def main(arguments: list[str] | None = None) -> int:
     parser.add_argument("--operator", default="local-agent")
     parser.add_argument("--session-hours", type=float, default=8.0)
     parser.add_argument("--why", default="no reason given", help="for release")
-    options = parser.parse_args(arguments)
+    options = parser.parse_args(argv)
 
     try:
         # The verifier is the child half of the independent check and works on an
@@ -2091,4 +2098,4 @@ def main(arguments: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

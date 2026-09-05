@@ -63,7 +63,7 @@ def test_partition_refuses_a_missing_face() -> None:
     set_points, vertices, plan = build()
     reduced = dict(plan)
     reduced.pop("t_x2")
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="expected 30 partition faces, got 29"):
         certify(set_points=set_points, vertices=vertices, plan=reduced)
 
 
@@ -96,7 +96,7 @@ def test_replacement_lemma5_bounds_clear_their_thresholds() -> None:
 def test_replacement_refuses_a_missing_cell() -> None:
     set_points, vertices, plan, expected, boundary = build_replacement("r2")
     plan.pop("n0")
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="partition areas do not sum to its boundary"):
         certify(
             set_points=set_points,
             vertices=vertices,

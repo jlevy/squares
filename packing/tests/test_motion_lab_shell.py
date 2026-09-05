@@ -70,4 +70,5 @@ def test_exact_artifact_declares_the_scenario_registry_for_the_shared_shell() ->
     assert 'id="scenario-registry" type="application/json"' in rendered
     assert '"scenario_id": "exact-n5"' in rendered
     assert '"capabilities": [' in rendered
-    assert '"playback"' in rendered and '"scrub"' in rendered
+    assert '"playback"' in rendered
+    assert '"scrub"' in rendered

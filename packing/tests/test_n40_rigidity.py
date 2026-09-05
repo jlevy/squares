@@ -148,7 +148,8 @@ def test_the_contact_model_is_measured_not_assumed() -> None:
     assert len(dropped) == 208
     assert all(one.kind == "pair" for one in dropped), "no wall row is ever dropped"
     for one in dropped:
-        assert one.host is not None and one.edge is not None
+        assert one.host is not None
+        assert one.edge is not None
         assert not separating(pose, one.host, one.edge, one.moving)
 
 
@@ -390,7 +391,8 @@ def test_a_functional_certificate_is_verified_not_proposed() -> None:
     forward = certify_target(pose, rows, target)
     backward = certify_target(pose, rows, [-value for value in target])
 
-    assert forward is not None and backward is not None
+    assert forward is not None
+    assert backward is not None
     assert verify_target_weights(pose, rows, forward, target)
     assert all(weight.sign() >= 0 for weight in forward)
 

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterator
 from dataclasses import replace
 
 import pytest
@@ -14,9 +13,9 @@ from sqpack.research.exact_jets import SecondOrderJet
 
 
 @pytest.fixture(scope="module")
-def scale_control() -> Iterator[tuple[NumberField, tuple[minus_w_scale.ScaleRecord, ...]]]:
+def scale_control() -> tuple[NumberField, tuple[minus_w_scale.ScaleRecord, ...]]:
     field = face.make_field()
-    yield field, minus_w_scale.positive_w_control_records(field)
+    return field, minus_w_scale.positive_w_control_records(field)
 
 
 @pytest.mark.exhaustive_exact
@@ -239,14 +238,14 @@ def test_missing_real_scale_handler_is_rejected_before_evaluation(
 
 @pytest.mark.parametrize(
     "premise_name",
-    (
+    [
         "t_to_zero",
         "t_eventually_positive",
         "delta_little_o_t",
         "abs_delta_over_t_squared_to_positive_infinity",
         "delta_eventually_nonzero",
         "delta_sign_stable",
-    ),
+    ],
 )
 def test_unbounded_remainder_witnesses_require_every_declared_premise(
     premise_name: str,

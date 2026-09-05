@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from collections.abc import Sequence
 from dataclasses import dataclass
 from decimal import Decimal
 from fractions import Fraction
@@ -91,10 +92,10 @@ FOOTER_SIZE = 16
 TITLE_WEIGHT = 750
 LABEL_WEIGHT = 650
 PANEL_STROKE_WIDTH = Decimal("1.5")
-SHAPE_STROKE_WIDTH = Decimal("2")
+SHAPE_STROKE_WIDTH = Decimal(2)
 GUIDE_STROKE_WIDTH = Decimal("1.25")
 ATOM_SITE_RADIUS = Decimal("0.7")
-MAX_ATOM_WEIGHT_RADIUS = Decimal("8")
+MAX_ATOM_WEIGHT_RADIUS = Decimal(8)
 FONT_FAMILY = "ui-sans-serif, system-ui, -apple-system, sans-serif"
 
 _FAMILIES = square_fill_palette(hue_count=20, shades_per_hue=5)
@@ -909,7 +910,7 @@ def parser() -> argparse.ArgumentParser:
     return command
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     arguments = parser().parse_args(argv)
     try:
         if arguments.check:

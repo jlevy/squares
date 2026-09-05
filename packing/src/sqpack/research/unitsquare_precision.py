@@ -12,9 +12,9 @@ import argparse
 import hashlib
 import itertools
 import json
+import logging
 import math
 import re
-import sys
 import xml.etree.ElementTree as ET
 from collections.abc import Callable, Mapping, Sequence
 from contextlib import closing
@@ -837,6 +837,9 @@ def _selftest() -> None:
         raise PrecisionBridgeError("selftest verification failed: " + "; ".join(errors))
 
 
+logger = logging.getLogger(__name__)
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     """Run synthetic readiness checks; target measurement is a separate gated phase."""
     parser = argparse.ArgumentParser(description=__doc__)
@@ -847,14 +850,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         if arguments.selftest:
             _selftest()
-            print("unitsquare precision synthetic controls passed")
+            logger.info("unitsquare precision synthetic controls passed")
             return 0
         prepare_target_run(arguments.record)
     except TargetMeasurementGatedError as error:
-        print(f"unitsquare-precision: {error}", file=sys.stderr)
+        logger.error("unitsquare-precision: %s", error)  # noqa: TRY400 - a refusal, not a traceback
         return 3
     except PrecisionBridgeError as error:
-        print(f"unitsquare-precision: {error}", file=sys.stderr)
+        logger.error("unitsquare-precision: %s", error)  # noqa: TRY400 - a refusal, not a traceback
         return 1
     raise AssertionError("authorized target execution is not exposed by the W7 CLI")
 

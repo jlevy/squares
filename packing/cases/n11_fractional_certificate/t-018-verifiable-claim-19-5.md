@@ -136,7 +136,7 @@ at that direction. Every quantity is rational, so every score is exact.
 ## How to Check It
 
 Save this file as `t-018-verifiable-claim-19-5.md` and the verifier block below as `verify_claim.py`,
-then run the verifier on this file with any CPython 3.10 or later.
+then run the verifier on this file with any CPython 3.12 or later.
 It needs nothing outside the standard library, and it reads the certificate out of the
 fenced `json` block at the end.
 
@@ -177,7 +177,7 @@ The self-contained package under [`thirdparty/`](https://github.com/jlevy/square
 Usage:  python verify_claim.py certificate.json
         python verify_claim.py t-018-verifiable-claim-19-5.md   (embeds the certificate)
 
-Standard library only, CPython 3.10 or later. Every decision is made in
+Standard library only, CPython 3.12 or later. Every decision is made in
 fractions.Fraction. One line is printed per condition, then VERIFIED or REFUSED,
 and the exit status is 0 only when all five conditions hold.
 
@@ -203,16 +203,18 @@ squares are disjoint, so the total weight is at least n, against Condition 2.)
 minimal_verify.py, beside this file, is the other standard-library check: it is
 pinned by SHA-256 to the retained 381/100 certificate, also compares the record's
 declared total and least mass with what it computes, refuses at the first failing
-check instead of reporting all five, and runs on CPython 3.8. This file decides any
+check instead of reporting all five, and shares this file's floor. This file decides any
 certificate of the form above and is the one the claim documents embed.
 """
 
 # ruff: noqa: N803, N806  -- L, B, D, F, U, V, X, Y are the theorem's own symbols.
 
+import argparse
 import json
 import re
 import sys
 from bisect import bisect_left, bisect_right
+from collections.abc import Sequence
 from fractions import Fraction
 from itertools import accumulate, pairwise
 from math import lcm
@@ -404,14 +406,29 @@ def decide(n, L, B, tangents, atoms):
     return 0 if all(verdicts) else 1
 
 
-if __name__ == "__main__":
-    if len(sys.argv[1:]) != 1:
-        sys.exit(__doc__)
+def main(argv: Sequence[str] | None = None) -> int:
+    """Usage errors go to stderr with status 2; verdicts go to stdout with status 0 or 1."""
+    parser = argparse.ArgumentParser(
+        description="Decide a fractional unavoidable-set certificate for s(n) >= L, exactly.",
+        epilog=(
+            "One line per condition, then VERIFIED or REFUSED; the exit status is 0 only "
+            "after VERIFIED and 1 on any refusal."
+        ),
+    )
+    parser.add_argument(
+        "certificate", help="a certificate.json, or a claim document that embeds one"
+    )
+    arguments = parser.parse_args(argv)
     try:
-        certificate = load(sys.argv[1])
+        certificate = load(arguments.certificate)
     except (OSError, KeyError, TypeError, ValueError) as error:
-        sys.exit(f"not a certificate of the expected shape: {error}")
-    sys.exit(decide(*certificate))
+        print(f"REFUSED: not a certificate of the expected shape: {error}")
+        return 1
+    return decide(*certificate)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
 ````
 
 ## The Certificate

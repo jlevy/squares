@@ -54,7 +54,7 @@ def test_exact_rational_grid_sweep() -> None:
 
 @pytest.mark.parametrize(
     ("m", "c"),
-    ((1, Fraction(1)), (2, Fraction(0)), (2, Fraction(-1, 3))),
+    [(1, Fraction(1)), (2, Fraction(0)), (2, Fraction(-1, 3))],
 )
 def test_parameter_domain_mutations_reject(m: int, c: Fraction) -> None:
     with pytest.raises(CountControlError) as caught:

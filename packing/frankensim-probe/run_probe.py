@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import shutil
 import subprocess
+from collections.abc import Sequence
 from pathlib import Path
 
 from strif import atomic_output_file
@@ -28,10 +29,10 @@ def _write_atomic(path: Path, content: str) -> None:
         temporary.write_text(content, encoding="utf-8")
 
 
-def main(arguments: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     """Install, run, and remove the two probe examples."""
     parser = _parser()
-    options = parser.parse_args(arguments)
+    options = parser.parse_args(argv)
     checkout = options.checkout.resolve()
     if not (checkout / "Cargo.toml").is_file():
         parser.error(f"not a FrankenSim checkout: {checkout}")

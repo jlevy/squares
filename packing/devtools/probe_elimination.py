@@ -207,7 +207,7 @@ def msolve_input(
                 )
             terms.append(term_text(monomial, cleared.numerator, names))
         text = "".join(terms)
-        bodies.append(text[1:] if text.startswith("+") else text)
+        bodies.append(text.removeprefix("+"))
 
         # `parse_expr` rather than `sympify`, because the local symbol table is the whole
         # point: re-parsing against fresh symbols would compare a polynomial to a

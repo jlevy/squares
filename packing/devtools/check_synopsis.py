@@ -90,7 +90,7 @@ def slugs(text: str) -> set[str]:
     """GitHub-style heading anchors, plus any explicit `id="..."`."""
     out = {
         re.sub(r"[^a-z0-9\- ]", "", re.sub(r"<[^>]+>", "", h).lower()).strip().replace(" ", "-")
-        for h in re.findall(r"^#{1,6}\s+(.*)$", text, re.M)
+        for h in re.findall(r"^#{1,6}\s+(.*)$", text, re.MULTILINE)
     }
     return out | set(re.findall(r'id="([^"]+)"', text))
 
@@ -125,12 +125,12 @@ def check_rounds(text: str) -> list[str]:
     rollup_match = re.search(
         r"^### Roll-up\s*$\n(?P<body>.*?)(?=^### Cost and provenance\s*$)",
         text,
-        re.M | re.S,
+        re.MULTILINE | re.DOTALL,
     )
     cost_match = re.search(
         r"^### Cost and provenance\s*$\n(?P<body>.*?)(?=^###\s)",
         text,
-        re.M | re.S,
+        re.MULTILINE | re.DOTALL,
     )
     if rollup_match is None:
         return ["SYNOPSIS.md: has no Roll-up section"]
@@ -147,7 +147,9 @@ def check_rounds(text: str) -> list[str]:
             rollup_ids.append(rid)
             shown.setdefault(rid, cells[-1])
     rollup_counts = Counter(rollup_ids)
-    cost_counts = Counter(re.findall(r"^\| (exp-\d{3}) \|", cost_match.group("body"), re.M))
+    cost_counts = Counter(
+        re.findall(r"^\| (exp-\d{3}) \|", cost_match.group("body"), re.MULTILINE)
+    )
 
     for path in sorted(ROOT.glob("campaign/series/*/experiments/exp-*.md")):
         experiment = front(path)["experiment"]
@@ -180,11 +182,13 @@ def check_hypotheses(text: str) -> list[str]:
     ledger = (ROOT / "campaign" / "ledger.md").read_text()
     derived = {
         hid: status.strip()
-        for hid, status in re.findall(r"^\| (H-\d{3}) \| ([^|]+) \|", ledger, re.M)
+        for hid, status in re.findall(r"^\| (H-\d{3}) \| ([^|]+) \|", ledger, re.MULTILINE)
     }
     if not derived:
         return ["campaign/ledger.md: no registry table to check against"]
-    derived_rounds = dict(re.findall(r"^\| (H-\d{3}) \|(?:[^|]*\|){4} (\d+) \|", ledger, re.M))
+    derived_rounds = dict(
+        re.findall(r"^\| (H-\d{3}) \|(?:[^|]*\|){4} (\d+) \|", ledger, re.MULTILINE)
+    )
 
     shown = dict(
         re.findall(
@@ -231,7 +235,7 @@ def check_totals(text: str) -> list[str]:
     """The round count and effort totals match the ledger's generated footer."""
     ledger = (ROOT / "campaign" / "ledger.md").read_text()
     line = re.search(
-        r"^(\d+) rounds, ([\d.]+) agent-minutes, ([\d.]+) wall-minutes\.$", ledger, re.M
+        r"^(\d+) rounds, ([\d.]+) agent-minutes, ([\d.]+) wall-minutes\.$", ledger, re.MULTILINE
     )
     if not line:
         return ["campaign/ledger.md: no effort total to check against"]
@@ -254,10 +258,12 @@ def check_totals(text: str) -> list[str]:
         "twelve",
     ]
     spelled = words[int(rounds)] if int(rounds) < len(words) else rounds
-    if not re.search(rf"\b({rounds}|{spelled})\b rounds", text, re.I):
+    if not re.search(rf"\b({rounds}|{spelled})\b rounds", text, re.IGNORECASE):
         problems.append(f"SYNOPSIS.md: does not say there are {rounds} rounds")
     if not re.search(
-        rf"^### What the {rounds} rounds jointly establish\s*$", text, re.I | re.M
+        rf"^### What the {rounds} rounds jointly establish\s*$",
+        text,
+        re.IGNORECASE | re.MULTILINE,
     ):
         problems.append(
             f"SYNOPSIS.md: synthesis heading does not name the current round count ({rounds})"
@@ -306,7 +312,7 @@ def check_experiment_scope_claims(text: str) -> list[str]:
 
 def check_freshness_label(text: str) -> list[str]:
     """The dateline may state a date, but not duplicate volatile campaign state."""
-    dateline = re.search(r"^\*\*Date:\*\*.*$", text, re.M)
+    dateline = re.search(r"^\*\*Date:\*\*.*$", text, re.MULTILINE)
     if dateline is None:
         return ["SYNOPSIS.md: has no Date dateline"]
     if not re.fullmatch(r"\*\*Date:\*\* \d{4}-\d{2}-\d{2}", dateline.group(0)):
@@ -447,7 +453,7 @@ def select_latest_closeout(paths: Iterable[Path]) -> tuple[Path, dict] | None:
 def check_current_handoff(text: str) -> list[str]:
     """The cold-start path names the latest terminal session and next entry."""
     section = re.search(
-        r"^### Current Handoff\s*$\n(?P<body>.*?)(?=^##\s|\Z)", text, re.M | re.S
+        r"^### Current Handoff\s*$\n(?P<body>.*?)(?=^##\s|\Z)", text, re.MULTILINE | re.DOTALL
     )
     if section is None:
         return ["SYNOPSIS.md: has no Current Handoff section"]
@@ -487,7 +493,7 @@ def check_current_handoff(text: str) -> list[str]:
     selected_markers = re.findall(
         r"^\*\*Selected next entry:\*\* `(?P<bead>think-[a-z0-9]+)`",
         body,
-        re.M,
+        re.MULTILINE,
     )
     if selected_markers != [expected_bead]:
         problems.append(
@@ -530,7 +536,7 @@ def check_current_handoff(text: str) -> list[str]:
     plan_handoff = re.search(
         r"^For the next supervised exact-research goal,.*?(?=^##\s|\Z)",
         plan,
-        re.M | re.S,
+        re.MULTILINE | re.DOTALL,
     )
     if plan_handoff is None:
         problems.append("active launch plan: has no current handoff paragraph")
@@ -596,7 +602,7 @@ def counted(n: int, singular: str, plural: str) -> str:
 
 def check_unprotected_fix_claims(text: str, expected: int) -> list[str]:
     """Require every unprotected-fix claim to state the derived count."""
-    stated = re.findall(r"([\w-]+) fixes left no", text, re.I)
+    stated = re.findall(r"([\w-]+) fixes left no", text, re.IGNORECASE)
     accepted = {str(expected), spell(expected).lower()}
     if stated and all(claim.lower() in accepted for claim in stated):
         return []
@@ -676,7 +682,7 @@ def check_covering_value_reports(text: str) -> list[str]:
     count_pattern = (
         rf"\b(?:{len(sides)}|{re.escape(spell(len(sides)))}) values have been reported\b"
     )
-    if not re.search(count_pattern, text, re.I):
+    if not re.search(count_pattern, text, re.IGNORECASE):
         problems.append(
             f"SYNOPSIS.md: does not state the reported-covering-value count ({len(sides)}) "
             'in the form "<n> values have been reported"'
@@ -715,7 +721,7 @@ def check_covering_value_reports(text: str) -> list[str]:
 
 def fact_row(text: str, label: str) -> str | None:
     """The value cell of the fact-table row named `label`, or `None` if there is none."""
-    match = re.search(rf"^\| {re.escape(label)} \| (.*?) \|", text, re.M)
+    match = re.search(rf"^\| {re.escape(label)} \| (.*?) \|", text, re.MULTILINE)
     return None if match is None else match.group(1)
 
 
@@ -818,7 +824,7 @@ def check_defects(text: str) -> list[str]:
     # and this check still found the 399 in the second and said nothing. That is what
     # happened on 2026-08-30, to a one-line sed; see `D-400`.
     log_pattern = rf"the\s+log\s+contains\s+(?:{total}|{re.escape(spell(total))})\s+defects"
-    if not re.search(log_pattern, text, re.I):
+    if not re.search(log_pattern, text, re.IGNORECASE):
         problems.append(
             f"SYNOPSIS.md: does not state the defect count ({total}) in the form "
             '"The log contains <n> defects"'
@@ -840,7 +846,7 @@ def check_defects(text: str) -> list[str]:
         rf"(?:{len(soundness)}|{re.escape(spell(len(soundness)))})\s+soundness\s+"
         r"defects\s+pointed\s+in\s+the\s+\*flattering\*\s+direction"
     )
-    if not re.search(soundness_pattern, text, re.I):
+    if not re.search(soundness_pattern, text, re.IGNORECASE):
         problems.append(
             "SYNOPSIS.md: soundness-direction aggregate is not "
             f"{flattering} of {len(soundness)}"
@@ -852,7 +858,7 @@ def check_defects(text: str) -> list[str]:
         rf"(?:{caught_by_gate}|{re.escape(spell(caught_by_gate))})\s+defects\s+in\s+"
         rf"(?:{total}|{re.escape(spell(total))})"
     )
-    if not re.search(gate_pattern, text, re.I):
+    if not re.search(gate_pattern, text, re.IGNORECASE):
         problems.append(
             f"SYNOPSIS.md: gate-detector aggregate is not {caught_by_gate} of {total}"
         )
@@ -902,4 +908,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

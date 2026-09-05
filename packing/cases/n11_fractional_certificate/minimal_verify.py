@@ -4,7 +4,7 @@
     python3 minimal_verify.py certificate.json
 
 One line per condition, then VERIFIED or REFUSED; the exit status is 0 only after
-VERIFIED. Any CPython 3.8 or later, standard library only, nothing imported from this
+VERIFIED. Any CPython 3.12 or later, standard library only, nothing imported from this
 repository, and no float decides anything. ``t-018-proof-card.md``, beside this file, states
 the theorem with the certificate's own parameters; ``sqpack/fractional/certificate.py``
 proves it and ``sqpack/fractional/sweep.py`` is the same sweep, in the project verifier.
@@ -42,11 +42,12 @@ full in those documents so that each travels as one file. This program speaks on
 the bytes it pins.
 """
 
+import argparse
 import hashlib
 import json
-import sys
 import time
 from bisect import bisect_left, bisect_right
+from collections.abc import Sequence
 from fractions import Fraction
 from itertools import accumulate
 from math import gcd
@@ -250,15 +251,25 @@ def verify(path, *, pinned=True):
     print(f"VERIFIED  {claim}")
 
 
-def main(argv=None):
-    argv = sys.argv[1:] if argv is None else list(argv)
-    paths = [item for item in argv if item != "--unpinned"]
-    if len(paths) != 1:
-        print("usage: minimal_verify.py CERTIFICATE.json [--unpinned]")
-        return 2
+def main(argv: Sequence[str] | None = None) -> int:
+    """Usage errors go to stderr with status 2; verdicts go to stdout with status 0 or 1."""
+    parser = argparse.ArgumentParser(
+        description=(
+            "Decide the retained s(11) >= 381/100 certificate, exactly, from its own bytes."
+        ),
+        epilog=(
+            "One line per condition, then VERIFIED or REFUSED; the exit status is 0 only "
+            "after VERIFIED and 1 on any refusal."
+        ),
+    )
+    parser.add_argument("certificate", help="the certificate.json to decide")
+    parser.add_argument(
+        "--unpinned", action="store_true", help="decide the bytes without the SHA-256 pin"
+    )
+    arguments = parser.parse_args(argv)
     started = time.time()
     try:
-        verify(paths[0], pinned="--unpinned" not in argv)
+        verify(arguments.certificate, pinned=not arguments.unpinned)
     except (ArithmeticError, KeyError, OSError, TypeError, ValueError) as error:
         print(f"REFUSED  {error}")
         return 1
@@ -268,4 +279,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

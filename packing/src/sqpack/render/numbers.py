@@ -132,7 +132,7 @@ def scalar_from_exact(
     return result
 
 
-def format_svg_number(value: Decimal | ScalarSource | Fraction | int | float) -> str:
+def format_svg_number(value: Decimal | ScalarSource | Fraction | float) -> str:
     if isinstance(value, ScalarSource):
         decimal_value = value.projected
     elif isinstance(value, Fraction):

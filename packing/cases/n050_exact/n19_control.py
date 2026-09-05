@@ -11,6 +11,7 @@ import hashlib
 import json
 import os
 import tempfile
+from collections.abc import Sequence
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -148,7 +149,7 @@ def write_new_receipt(path: Path, receipt: dict[str, Any]) -> None:
         temporary.unlink(missing_ok=True)
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--record", type=Path, required=True)
     arguments = parser.parse_args(argv)

@@ -72,7 +72,7 @@ def test_strengthened_half_constant_does_not_prove_lemma_5() -> None:
 
 @pytest.mark.parametrize(
     ("angle_upper", "constant"),
-    ((Fraction(0), Fraction(49, 100)), (Fraction(1, 8), Fraction(0))),
+    [(Fraction(0), Fraction(49, 100)), (Fraction(1, 8), Fraction(0))],
 )
 def test_nonpositive_domain_mutations_reject(angle_upper: Fraction, constant: Fraction) -> None:
     with pytest.raises(InequalityControlError) as caught:
@@ -91,12 +91,12 @@ def test_zero_endpoint_inclusion_rejects_strict_claims() -> None:
 
 @pytest.mark.parametrize(
     ("angle_upper", "constant"),
-    (
+    [
         (0.125, Fraction(49, 100)),
         (float("nan"), Fraction(49, 100)),
         (Fraction(1, 8), 0.49),
         (True, Fraction(49, 100)),
-    ),
+    ],
 )
 def test_inexact_and_boolean_inputs_reject(angle_upper: object, constant: object) -> None:
     with pytest.raises(InequalityControlError) as caught:

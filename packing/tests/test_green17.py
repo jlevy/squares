@@ -56,7 +56,7 @@ def test_certificate_refuses_a_displaced_point() -> None:
     displaced = (Rat.of(Fraction(3)), Rat.of(Fraction(9, 10)))
     tampered_points["p0_2"] = displaced
     tampered_vertices["p0_2"] = displaced
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="outs do not match the rectangle's inner corners"):
         certify(
             set_points=tampered_points,
             vertices=tampered_vertices,

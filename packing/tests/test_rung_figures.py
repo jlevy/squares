@@ -607,7 +607,7 @@ def test_the_reach_table_states_how_many_values_it_lists() -> None:
         rf"\b(?:{len(rows)}|{spell(len(rows))}) restricted optima\s+have been reported at "
         rf"(?:{len(sides)}|{spell(len(sides))}) sides\b",
         text,
-        re.I,
+        re.IGNORECASE,
     )
 
 

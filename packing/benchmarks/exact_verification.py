@@ -60,7 +60,8 @@ def bench_float() -> None:
         t0 = time.time()
         r_bkt = verify_packing(squares, side, sign=sign, check_shapes=False, bucket=True)
         t_bkt = time.time() - t0
-        assert r_all.valid and r_bkt.valid
+        assert r_all.valid
+        assert r_bkt.valid
         print(
             f"   {n:>5}   {r_all.pairs_tested:>10}  {t_all * 1e3:>8.1f} ms"
             f"      {r_bkt.pairs_tested:>10}  {t_bkt * 1e3:>8.1f} ms"

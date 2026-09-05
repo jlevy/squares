@@ -62,7 +62,7 @@ def test_manifest_covers_six_paths_and_three_obstruction_views(
     ]
 
 
-@pytest.mark.parametrize("class_name,sigma", release.SIGNS)
+@pytest.mark.parametrize(("class_name", "sigma"), release.SIGNS)
 @pytest.mark.parametrize("stratum", release.STRATA)
 def test_release_projection_reproduces_exact_case_functions(
     manifest: dict[str, object], class_name: str, sigma: int, stratum: str
@@ -169,9 +169,12 @@ process.stdout.write(JSON.stringify(result));
             assert all(base_contacts in value for value in descriptions)
         else:
             assert all("certified path" in value for value in descriptions)
-            assert pair_14 in descriptions[0] and pair_03 not in descriptions[0]
-            assert pair_14 not in descriptions[1] and pair_03 not in descriptions[1]
-            assert pair_03 in descriptions[2] and pair_14 not in descriptions[2]
+            assert pair_14 in descriptions[0]
+            assert pair_03 not in descriptions[0]
+            assert pair_14 not in descriptions[1]
+            assert pair_03 not in descriptions[1]
+            assert pair_03 in descriptions[2]
+            assert pair_14 not in descriptions[2]
 
         if not obstruction:
             upper = cast(dict[str, object], parameter["upper"])
@@ -238,14 +241,16 @@ def test_rendered_lab_is_deterministic_retained_and_offline(
     assert "Content-Security-Policy" in first
     assert "connect-src 'none'" in first
     assert "prefers-reduced-motion: reduce" in first
-    assert "Play" in first and "Restart" in first
+    assert "Play" in first
+    assert "Restart" in first
     assert "aria-pressed" not in first
     assert 'aria-valuetext="0% of interval; u = 0.0000000"' in first
     assert 'role="group" aria-labelledby="overlays-label"' in first
     assert "fetch(" not in first
     assert "eval(" not in first
     assert "innerHTML" not in first
-    assert "http://" not in first and "https://" not in first
+    assert "http://" not in first
+    assert "https://" not in first
     assert not re.search(r"\son[a-z]+\s*=", first, flags=re.IGNORECASE)
 
 

@@ -338,7 +338,8 @@ def test_a_pinned_interval_is_read_as_a_lower_and_an_upper_bound(tmp_path: Path)
     # the stale body away, exactly as it did in the record.
     assert len(findings) == 1
     assert findings[0].check == "bound-figure"
-    assert "0.077084" in findings[0].detail and "0.067084" in findings[0].detail
+    assert "0.077084" in findings[0].detail
+    assert "0.067084" in findings[0].detail
 
     two_decimals = make_case(
         tmp_path,
@@ -396,7 +397,8 @@ def test_a_verified_bound_named_in_words_is_held_to_the_field(tmp_path: Path) ->
     findings = check_case_file(stale)
     assert len(findings) == 1
     assert findings[0].check == "verified-bound-sentence"
-    assert "3.85" in findings[0].detail and "3.96" in findings[0].detail
+    assert "3.85" in findings[0].detail
+    assert "3.96" in findings[0].detail
 
     current = make_case(
         tmp_path,
@@ -582,7 +584,8 @@ def test_fix_rewrites_nearest_decimals_without_strengthening_bounds(tmp_path: Pa
     assert "s(20) \u2264 4.88561809" in text
     assert "best proved lower bound is `4.605551`" in text
     # Only the digits moved: the sentence around them is untouched.
-    assert "The best known packing gives" in text and "and the best proved" in text
+    assert "The best known packing gives" in text
+    assert "and the best proved" in text
 
     # A figure that is neither field's nearest rendering is a stale rung, not a rounding
     # decision, and --fix leaves it for a person to answer.

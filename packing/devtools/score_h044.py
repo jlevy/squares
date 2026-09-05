@@ -29,6 +29,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
@@ -176,12 +177,12 @@ def score() -> dict[str, Any]:
     }
 
 
-def main(arguments: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--record", type=Path, help="write the scored record here")
     group.add_argument("--check", type=Path, help="recompute and compare to this record")
-    options = parser.parse_args(arguments)
+    options = parser.parse_args(argv)
     scored = score()
     if options.record is not None:
         options.record.parent.mkdir(parents=True, exist_ok=True)

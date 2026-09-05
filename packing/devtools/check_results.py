@@ -17,7 +17,6 @@ Usage, from `packing/`:
 from __future__ import annotations
 
 import re
-import sys
 from collections.abc import Iterable
 from pathlib import Path, PurePosixPath
 
@@ -294,4 +293,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

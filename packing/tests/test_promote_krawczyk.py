@@ -157,7 +157,8 @@ def univariate_against_an_independent_isolator() -> None:
             PoseBox.around(("x",), (SQRT2,), "1e-20"),
             digits=40,
         )
-        assert result.exists and result.unique, result.summary()
+        assert result.exists, result.summary()
+        assert result.unique, result.summary()
         assert result.operator == "krawczyk"
 
         low, high = mp.mpf(result.box.lo[0]), mp.mpf(result.box.hi[0])
@@ -167,10 +168,12 @@ def univariate_against_an_independent_isolator() -> None:
         field.refine_to(45)
         field_low, field_high = field.root_bounds()
         as_float = lambda q: mp.mpf(q.numerator) / mp.mpf(q.denominator)  # noqa: E731
-        assert low <= as_float(field_low) and as_float(field_high) <= high, (
+        not_enclosing = (
             "the exact isolating interval is not inside the certified box, so the two "
             "implementations are not enclosing the same root"
         )
+        assert low <= as_float(field_low), not_enclosing
+        assert as_float(field_high) <= high, not_enclosing
     finally:
         mp.mp.dps = previous
 
@@ -190,9 +193,9 @@ def two_dimensional_known_answer() -> None:
             PoseBox.around(("x", "y"), (centre, centre), "1e-15"),
             digits=30,
         )
-        assert result.exists and result.unique, (
-            f"a verdict proved during iteration was not reported: {result.summary()}"
-        )
+        unreported = f"a verdict proved during iteration was not reported: {result.summary()}"
+        assert result.exists, unreported
+        assert result.unique, unreported
         for low, high in zip(result.box.lo, result.box.hi, strict=True):
             assert mp.mpf(low) <= 1 / mp.sqrt(2) <= mp.mpf(high)
     finally:

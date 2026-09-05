@@ -283,6 +283,11 @@ A per-file exception must name the narrow reason beside the configuration; never
 a maintained module from a rule family for convenience.
 Use modern Python 3.14 syntax, absolute imports, `Path`, precise public-boundary types,
 and exception chaining.
+The enabled rule families include the pytest-style, unused-argument, blind-except,
+commented-out-code, refurb, f-string and complexity-ratchet families, each argued for
+beside its entry in `pyproject.toml`; printing is waived only where the tools live, so a
+library module reports through `logging`. The one Python outside `packing/` is the
+hand-written skill assets under `.agents/skills`, which the same two floors reach.
 Comments explain non-obvious intent, invariants, units, evidence limits, and rejected
 alternatives—not a line-by-line translation of the code.
 

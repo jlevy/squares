@@ -28,6 +28,7 @@ import argparse
 import pathlib
 import re
 import sys
+from collections.abc import Sequence
 
 PACKING = pathlib.Path(__file__).resolve().parent.parent
 REPO = PACKING.parent
@@ -41,8 +42,8 @@ END = "<!-- END OPERATING RULES SUMMARY -->"
 # Both patterns treat the separator as optional and the depth as a range, so an editorial
 # pass over either file cannot break the parse. A delimiter that is also a display choice
 # is a delimiter that will eventually move.
-HEADING = re.compile(r"^#{2,3} (OR-\d+):?\s+(.+?)\s*$", re.M)
-BULLET = re.compile(r"^- \*\*(OR-\d+):?\*\*:?\s+(.+?)(?=\n- |\n*\Z)", re.M | re.S)
+HEADING = re.compile(r"^#{2,3} (OR-\d+):?\s+(.+?)\s*$", re.MULTILINE)
+BULLET = re.compile(r"^- \*\*(OR-\d+):?\*\*:?\s+(.+?)(?=\n- |\n*\Z)", re.MULTILINE | re.DOTALL)
 
 
 def _statement(text: str) -> str:
@@ -98,7 +99,7 @@ def apply(*, check: bool) -> int:
     return 0
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--check", action="store_true", help="report drift without writing AGENTS.md"
@@ -112,4 +113,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())
