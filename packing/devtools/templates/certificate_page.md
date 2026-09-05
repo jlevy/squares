@@ -42,11 +42,6 @@ case still open.
 Trump’s 1979 packing[^trump] shows $s(11) \le {{BEST_PACKING_TEX}}$. This page proves
 $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
 
-The proof is a **certificate**: a finite list of weighted points in the container (the
-atoms), a finite list of angles (the net), and a shrink factor below 1. Five conditions
-on it, stated below, are decided in exact arithmetic.
-When all five hold, no packing of eleven unit squares fits in the container.
-
 The proof described here covers a bound of $s({{N}}) \ge {{HEADLINE_L_FRAC}}$. For
 illustration, some of the figures below show a looser bound
 $s({{N}}) \ge {{DEFAULT_L_FRAC}}$, and a toggle on the figure lets you select the
@@ -115,12 +110,17 @@ $s(11)$. Figure 3 shows where the bounds stand.
 
 ## The Five Conditions
 
-{.conditions}
-::: boxed-text
+The proof is a **certificate**: a finite list of weighted points in the container (the
+atoms), a finite list of angles (the net), and a shrink factor below 1. Five conditions
+on it, stated below, are decided in exact arithmetic.
+When all five hold, no packing of eleven unit squares fits in the container.
 
 A certificate for $n$ unit squares in a container of side $L$ is a set of weighted atoms
 in the container, a net of directions $\theta_k = 2\arctan t_k$ for $k = 0, \dots, K$,
 each fixed by its rational half-tangent $t_k$, and a shrink $B \lt 1$, such that:
+
+{.conditions}
+::: boxed-text
 
 - **Condition 1.** The atom set is invariant under the container’s symmetry group
   $\mathbf{D}_4$.
@@ -133,11 +133,11 @@ each fixed by its rational half-tangent $t_k$, and a shrink $B \lt 1$, such that
 - **Condition 5.** At every net direction, every placement of a square of side $B$ inside
   the container covers mass at least $1$.
 
+:::
+
 Conditions 1 to 4 are exact rational comparisons.
 Condition 5 is one exact sweep per direction.
 Together the five prove $s(n) \ge L$.
-
-:::
 
 ::: claim
 
