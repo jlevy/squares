@@ -35,12 +35,22 @@ an empty diff here means *nothing changed* and every step is repeated work. That
 case the daily schedule produces whenever `main` does not move for a day, and it is the
 largest single source of repetition in the window this was written against.
 
+Three questions are answered, and they are not the same question. `touches` reachability
+is the one the cell asked for. The daily schedule's unmoved-tree runs fall out of it.
+The third, `merge_identity`, was not asked for and turned out to be the largest of the
+three: it counts the pushes to `main` whose git *tree id* -- an exact content address,
+not a pattern -- equals that of the pull-request head merged, which means the
+pull-request surface has already run against exactly those bytes.
+
 What the module does **not** do is decide whether a repeated step is safe to skip.
 `touches` is a conservative *selection* map, tuned so that being too wide costs time and
 being too narrow costs a verdict; reading it backwards as a *skip* map inverts which
 direction is safe. The attribution summary (`--attribution`) exists to make that risk
 visible: it counts how many tracked files reach the escape hatch, which is the only
-protection a mis-declared pattern has.
+protection a mis-declared pattern has. And tree identity, exact as it is, addresses only
+the tree: a step that also reads the clock, the git graph, the bead worktree or the
+network is not a function of what the hash covers, and this module does not classify
+which steps those are.
 
 Usage, from `packing/`:
 
