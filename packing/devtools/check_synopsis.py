@@ -11,7 +11,7 @@ It cannot be generated: most of it is judgement, and the judgement is the point.
 So it is *reconciled* instead, the way `campaign/ideas.md` is -- the numbers and
 statuses it asserts must match the artifacts, and every artifact must appear.
 
-Twelve checks:
+Thirteen checks:
 
   1. every round's verdict in the roll-up matches its artifact
   2. every hypothesis's status and round count match the ledger's derived values
@@ -25,6 +25,7 @@ Twelve checks:
  10. the readiness dashboard remains attached to its canonical status owners
  11. living reproducibility instructions do not name removed command paths
  12. the cold-start handoff agrees with the latest terminal session and its next entry
+ 13. the reported covering values it names match `CERTIFICATE-REACH.md`'s own table
 
 Check 8 closes a real gap: `packing-ledger check` walks links under `campaign/`
 only, so the root document's forty-odd references were unchecked.
@@ -38,8 +39,15 @@ import re
 import sys
 from collections import Counter
 from collections.abc import Iterable
+from decimal import Decimal
 from pathlib import Path
 
+from devtools.check_rung_figures import round_to
+from devtools.render_certificate_reach import (
+    CASES,
+    REPORTED_COVERING_VALUES,
+    load_certificate,
+)
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -591,6 +599,105 @@ def check_unprotected_fix_claims(text: str, expected: int) -> list[str]:
     ]
 
 
+#: "at side `4.68`" / "at sides `3.82`, `3.95` and `4.80`" -- the shape the synopsis uses
+#: to attach a covering-value report to the side it was reported at. Backticked decimals
+#: only, which is what keeps this off the other "at side" phrases in the document: the
+#: exact ones are written as fractions or surds (`19/5`, `1 + 5√2/4`) and the unbackticked
+#: ones are not quotations of a reported value at all.
+_AT_SIDES = re.compile(r"\bat sides?\s+((?:`\d+\.\d+`(?:,\s+|\s+and\s+)?)+)")
+
+#: "`11.9706` at `3.95`" and its neighbours; a backticked decimal inside an `_AT_SIDES`
+#: run.
+_QUOTED_DECIMAL = re.compile(r"`(\d+\.\d+)`")
+
+
+def reported_covering_sides() -> tuple[list[str], list[str]]:
+    """Every side `CERTIFICATE-REACH.md` reports a covering value at, and the recomputable ones.
+
+    "Recomputable" is derived, not listed: a row is recomputable here when the value it
+    reports *is* its frozen artifact's own feasible mass, to the places the report writes.
+    Exactly one row is, today, and calling that one a measured optimum is the error this
+    check exists to refuse -- a feasible mass is an upper bound on the covering value at
+    that side, and the search's objective is a different number the record cannot replay.
+    """
+    sides = [side for side, _, _, _ in REPORTED_COVERING_VALUES]
+    recomputable = []
+    for side, reported, artifact, _ in REPORTED_COVERING_VALUES:
+        if artifact is None:
+            continue
+        _, mass = load_certificate(CASES / artifact)
+        digits = len(reported.split(".", 1)[1]) if "." in reported else 0
+        if round_to(mass, digits) == Decimal(reported):
+            recomputable.append(side)
+    return sides, recomputable
+
+
+def check_covering_value_reports(text: str) -> list[str]:
+    """The synopsis's account of the reported covering values matches the generated table.
+
+    The synopsis said "only four restricted optima have ever been measured" and named
+    four, while `CERTIFICATE-REACH.md` listed seven reports -- and called them reports,
+    because no covering-search run log or solver checkpoint was retained for any of them.
+    Three sides were simply missing from the sentence, and the four that were there were
+    described as measurements this repository holds. Two claims, both reconcilable against
+    the renderer, so both are:
+
+    1. the count, stated in the anchored form the table itself uses, and
+    2. every side the synopsis attaches a covering value to is one the table lists, with
+       some sentence naming all of them.
+
+    A third, conditional: where the synopsis claims a value is recomputable here, the
+    sides it names must be the ones that are. It is conditional rather than required
+    because the honest statement of "one of seven" is a judgement the document is free to
+    make in its own words; what it is not free to do is name the wrong side.
+
+    Under-matching a rewording is the safe failure here, as it is in `check_case_prose`: a
+    covering value written in some shape `_AT_SIDES` does not recognise goes unchecked,
+    where a looser pattern would start reporting the document's other uses of "at side".
+    """
+    sides, recomputable = reported_covering_sides()
+    problems = []
+
+    count_pattern = (
+        rf"\b(?:{len(sides)}|{re.escape(spell(len(sides)))}) values have been reported\b"
+    )
+    if not re.search(count_pattern, text, re.I):
+        problems.append(
+            f"SYNOPSIS.md: does not state the reported-covering-value count ({len(sides)}) "
+            'in the form "<n> values have been reported"'
+        )
+
+    named = [set(_QUOTED_DECIMAL.findall(run.group(1))) for run in _AT_SIDES.finditer(text)]
+    for quoted in named:
+        stray = sorted(quoted - set(sides))
+        if stray:
+            problems.append(
+                f"SYNOPSIS.md: names covering-value side(s) {', '.join(stray)}, which "
+                "CERTIFICATE-REACH.md does not report a value at"
+            )
+    if not any(quoted == set(sides) for quoted in named):
+        problems.append(
+            f"SYNOPSIS.md: no sentence names all {len(sides)} reported covering-value "
+            f"sides ({', '.join(sides)})"
+        )
+
+    for sentence in re.split(r"(?<=[a-z0-9)`])\.\s+(?=[A-Z])", text):
+        if "recomputable" not in sentence:
+            continue
+        claimed = {
+            side
+            for run in _AT_SIDES.finditer(sentence)
+            for side in _QUOTED_DECIMAL.findall(run.group(1))
+        }
+        if claimed and claimed != set(recomputable):
+            problems.append(
+                f"SYNOPSIS.md: claims a covering value is recomputable at "
+                f"{', '.join(sorted(claimed))}; the table's recomputable side(s) are "
+                f"{', '.join(recomputable)}"
+            )
+    return problems
+
+
 def check_defects(text: str) -> list[str]:
     """The defect count and per-class counts match the dataset."""
     data = safe_load((ROOT / "defects.yaml").read_text())
@@ -675,6 +782,7 @@ def main() -> int:
         + check_readiness_dashboard(text)
         + check_migrated_commands(text)
         + check_current_handoff(text)
+        + check_covering_value_reports(text)
         + check_defects(text)
     )
     if problems:

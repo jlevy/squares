@@ -449,7 +449,9 @@ Two searches stopped on cost rather than an answer, not as negatives: `n = 18` a
 `4.68` (three site sets converged to exactly `18.000000` without separating a genuine
 covering-value plateau from a degenerate vertex) and `n = 11` at side `3.82` (the
 rejection route’s exact maximum depth caps the feasible total well short of the eleven a
-ceiling needs). Full detail is in
+ceiling needs). Both are reported covering values in
+[`CERTIFICATE-REACH.md`](packing/frontier/CERTIFICATE-REACH.md) with nothing frozen
+beside them. Full detail is in
 [the block-close handoff](docs/project/handoff-2026-09-04-block-close.md).
 
 The same evening, entered directly on the operator’s own direction rather than drawn
@@ -3713,9 +3715,15 @@ packing runs near half a unit — eleven cases above `+0.49`, headed by `n = 51`
 `+0.5364`, then `68`, `84`, `39`, `86`, `66`, `38`, `83`, `37`, `53` and `26`. Two
 cautions travel with that ranking.
 The prize is what the *ceiling* allows; the real limit is the covering value at that
-side, and only four restricted optima have ever been measured — `11.0000` at `3.82`,
-`11.9706` at `3.95`, `11.9936` at `3.96`, `16.9628` at `4.58`. They fit a quadratic, and
-a fitted curve is not a measurement.
+side. Seven values have been reported for the restricted program, at sides `3.82`,
+`3.95`, `3.96`, `4.58`, `4.59`, `4.68` and `4.80` — reports, not measurements this
+repository can reproduce, since no covering-search run log or solver checkpoint was
+retained for any of the seven.
+Exactly one is recomputable from a tracked artifact, at side `3.95`, and what it
+recomputes is the frozen certificate’s own feasible mass — an upper bound on the
+covering value there, not the optimum a search reported.
+Seven heterogeneous reports across a side band `0.98` wide fit a curve, and a fitted
+curve is not a measurement.
 And the cost of a run grows with the container: the site set, the row set and the exact
 sweep all scale with `L²` or worse, so a case at `n = 51` is not an `n = 12` run with a
 different constant.
