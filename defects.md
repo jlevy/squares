@@ -2,7 +2,7 @@
 
 # Defect log
 
-459 defects recorded across the packing toolchain.
+461 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
 | `review` | 275 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
-| `inspection` | 54 | reading the code or the design with intent |
+| `inspection` | 56 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 67 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 67 of 459, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 67 of 461, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 67 of 459, and none of
 | quench | 23 |
 | verifier | 9 |
 | record | 143 |
-| tooling | 164 |
+| tooling | 166 |
 | docs | 109 |
 
 ## By kind
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 67 of 459, and none of
 | --- | ---: |
 | soundness | 94 |
 | validity | 117 |
-| bookkeeping | 173 |
+| bookkeeping | 175 |
 | robustness | 58 |
 | performance | 17 |
 
@@ -694,6 +694,8 @@ This is the actionable list.
 | [D-457](packing/devtools/build_known_best_atlas.py) | 2026-09-05 | tooling | bookkeeping |  | `inspection` | low | fixed | The atlas drew one line weight for cairosvg and another for a browser |
 | [D-458](packing/tests/test_explainer.py) | 2026-09-05 | tooling | bookkeeping |  | `inspection` | low | fixed | The Pages filter named the composite PNG and PDF but not the SVG the figure shows |
 | [D-459](packing/devtools/repo_scope.py) | 2026-09-05 | tooling | bookkeeping |  | `inspection` | low | fixed | A plain git clone fails the documentation check |
+| [D-460](packing/devtools/templates/explainer-shell.html) | 2026-09-05 | tooling | bookkeeping |  | `inspection` | low | fixed | Three canvases took every touch, so the page could not be scrolled past them |
+| [D-461](packing/devtools/templates/explainer-shell.html) | 2026-09-05 | tooling | bookkeeping |  | `inspection` | low | fixed | Every link on the page failed contrast in dark mode |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -64,6 +64,22 @@ body {
   --kpress-doc-link: var(--kpress-doc-accent);
   --color-primary-light: var(--kpress-doc-accent);
 }
+/* kpress declares `--kpress-doc-accent` once, for both themes, and gives
+   `--kpress-doc-link` a value per theme. Aliasing the link to the accent above
+   therefore took the light teal into dark mode as well, where it measured 3.37:1 on
+   the page ground against the 4.5:1 AA needs -- every link on the page, plus the
+   footnote references and the pressed chooser label at 2.99:1 and 3.07:1 on their
+   tinted grounds. The accent is what carries the alias, so the accent is what gains a
+   dark value: the same hue and chroma lifted to the lightness kpress's own dark link
+   uses, which brings everything that reads the accent up together rather than fixing
+   links and leaving the borders and the range control behind. Scoped exactly as kpress
+   scopes its own dark tokens, on the resolver's output attribute, so an explicit
+   choice and the system default both land here. */
+:root:where([data-kpress-resolved-theme="dark"]),
+:where([data-kpress-resolved-theme="dark"]) :is(.kpress, .kpress-page-main, .kpress-tooltip),
+:is(.kpress, .kpress-page-main, .kpress-tooltip)[data-kpress-resolved-theme="dark"] {
+  --kpress-doc-accent: oklch(76.68% 0.0861 186.4);
+}
 .cert-page { padding-block-end: calc(var(--kpress-font-size-base) * 6); }
 .cert-page a, .cert-page .kpress-footnote-ref a, .cert-page a.kpress-footnote-backref,
 .cert-page a:hover, .kpress a.kpress-footnote-backref:hover,
@@ -228,7 +244,11 @@ body {
 
 /* The certificate switch sits at the foot of every figure it changes; the articles
    are whole documents, so they are hidden outright. */
-.cert-toggle { display: inline-flex; gap: 0.3rem; }
+/* Wrapping, because the two buttons are 148px and 176px and the page's scroller
+   clips rather than scrolls: at 320px they spilled about five pixels off each edge and
+   the labels were cut. They fit on one line from 360px up, which is where wrapping
+   costs nothing. */
+.cert-toggle { display: inline-flex; flex-wrap: wrap; gap: 0.3rem; justify-content: center; }
 .cert-toggle button { white-space: nowrap; }
 .intro { margin-block-start: 1.6rem; }
 /* The atlas rendering is inlined: its ground and strokes take the page's
@@ -319,15 +339,25 @@ body {
   justify-content: center;
   padding: 0.6rem;
 }
+/* A canvas is 40% of a phone's viewport height and there are three of them, so what
+   it does with a touch decides whether the page can be read on a phone at all. The
+   blanket `touch-action: none` here took every gesture: a 250px upward swipe starting
+   on a canvas scrolled the page 0px, against 338px for the same swipe two centimetres
+   to the left, leaving 26px of gutter either side as the only way past three dead
+   zones. Only two of the three canvases drag at all -- `prove` and `shrink` capture
+   the pointer -- and neither needs the vertical axis, so `pan-y` gives the page its
+   scroll back and keeps the drag. The atom field, which only taps, restricts nothing. */
 .stage canvas {
-  cursor: grab;
   display: block;
   height: auto;
   max-width: 42rem;
-  touch-action: none;
   width: 100%;
 }
-.stage canvas:active { cursor: grabbing; }
+.stage canvas.draggable {
+  cursor: grab;
+  touch-action: pan-y;
+}
+.stage canvas.draggable:active { cursor: grabbing; }
 /* The atom readout: a fixed panel beside the canvas, in the sans face. */
 .tip-panel {
   color: var(--kpress-doc-text);

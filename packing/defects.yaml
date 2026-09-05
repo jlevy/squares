@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 459
+count: 461
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14884,3 +14884,74 @@ defects:
   status: fixed
   recorded_in: packing/devtools/repo_scope.py
   bead: think-5e7k
+- id: D-460
+  title: Three canvases took every touch, so the page could not be scrolled past them
+  date: '2026-09-05'
+  layer: tooling
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    since the figures were built; invisible on every desktop, because a mouse wheel and
+    a trackpad scroll the page whatever `touch-action` says.
+  severity: low
+  what: >-
+    `.stage canvas` carried a blanket `touch-action: none`. Measured on a 390x844
+    viewport: a 250px upward swipe starting on a canvas scrolled the page 0px, against
+    338px for the same swipe in the 26px gutter beside it and 343px on prose. Each
+    canvas is 339x339 CSS px, 40% of the viewport height, and the article has three of
+    them. Only two of the three drag at all -- `prove` and `shrink` capture the pointer;
+    the atom field only taps -- and neither drag uses the vertical axis.
+  consequence: >-
+    A reader arriving from a shared link on a phone, which is the traffic this page was
+    written for, meets three dead zones covering 40% of the screen each and can only get
+    past them through 26 pixels of gutter on either side. The page is not broken and
+    nothing it says is wrong; it simply does not scroll where a reader's thumb lands.
+  fix: >-
+    Fixed on 2026-09-05. The blanket rule is gone: the atom field restricts nothing, and
+    the two draggable canvases take `touch-action: pan-y`, which returns the vertical
+    axis to the page and keeps the drag. Re-measured after the change: the same swipe
+    scrolls 352px on the field, 246px on the prover and 345px on the shrink.
+  regression: >-
+    None added. Holding this would need a touch-capable browser in the suite, which the
+    gate does not have; the property is stated where the rule is, with the measurement
+    that decided it.
+  status: fixed
+  recorded_in: packing/devtools/templates/explainer-shell.html
+- id: D-461
+  title: Every link on the page failed contrast in dark mode
+  date: '2026-09-05'
+  layer: tooling
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    since the accent was aliased onto the link token; light mode passes at 5.47:1, so
+    the failure only ever appeared under one of the two themes.
+  severity: low
+  what: >-
+    The page sets `--kpress-doc-link: var(--kpress-doc-accent)` so links carry the
+    page's teal. kpress declares `--kpress-doc-link` per theme but declares
+    `--kpress-doc-accent` exactly once, for both, so the alias took the light teal into
+    dark as well. Measured against the dark grounds: body links, the credits, the
+    footnote links and a figure readout at 3.37:1; footnote references, backrefs and
+    inline code at 2.99:1; the pressed chooser label at 3.07:1. WCAG AA asks 4.5:1 and
+    none of these is large text.
+  consequence: >-
+    Every link on a long document is below the readability floor for the half of readers
+    whose phone is in dark mode. Nothing is unreadable outright, and the failure is
+    exactly invisible to anyone testing in light mode.
+  fix: >-
+    Fixed on 2026-09-05 by giving `--kpress-doc-accent` a dark value -- the same hue and
+    chroma at the lightness kpress's own dark link uses -- scoped on the resolver's
+    output attribute the way kpress scopes its own dark tokens. The accent is what
+    carries the alias, so fixing the accent lifts the borders, the pressed state and the
+    range control with the links rather than leaving them behind. Confirmed from
+    rendered pixels rather than computed styles, because `color-mix()` is not parseable
+    by a canvas and a script that reads it through one silently measures the previous
+    fill: links 3.37 to 8.09:1, the pressed chooser 3.07 to 7.41:1, and light mode
+    unchanged at 4.61:1 for the same button.
+  regression: >-
+    None added. A contrast assertion needs a browser to resolve `oklch()` and
+    `color-mix()`, which the gate does not have, and a hand-computed ratio in a test
+    would pin the arithmetic rather than what is drawn.
+  status: fixed
+  recorded_in: packing/devtools/templates/explainer-shell.html

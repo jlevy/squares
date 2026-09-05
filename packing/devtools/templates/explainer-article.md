@@ -246,7 +246,7 @@ $$
 
 <figure data-figure="5">
   <div class="split">
-    <div class="stage"><canvas id="prove-{{SLUG}}" width="1000" height="1000"></canvas></div>
+    <div class="stage"><canvas class="draggable" id="prove-{{SLUG}}" width="1000" height="1000"></canvas></div>
     <div class="panel">
       <div class="readout">
         <span class="caps">Mass covered</span>
@@ -325,7 +325,7 @@ $$
 
 <figure data-figure="6">
   <div class="split">
-    <div class="stage"><canvas id="shrink-{{SLUG}}" width="800" height="800"></canvas></div>
+    <div class="stage"><canvas class="draggable" id="shrink-{{SLUG}}" width="800" height="800"></canvas></div>
     <div class="panel">
       <div class="ctl">
         <span class="caps">Unit square’s angle <span class="tex">\varphi</span></span>
