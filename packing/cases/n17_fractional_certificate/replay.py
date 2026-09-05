@@ -28,10 +28,7 @@ SECOND_RUNG_PATH = Path(__file__).with_name("certificate-229-50.json")
 FIRST_RUNG_PATH = Path(__file__).with_name("certificate-451-100.json")
 
 
-def load(path: Path = CERTIFICATE_PATH) -> Certificate:
-    """Rebuild the retained certificate exactly as it was accepted."""
-
-    record = json.loads(path.read_text())
+def _from_record(record: dict) -> Certificate:
     limit = Fraction(record["angle_limit"])
     steps = int(record["direction_steps"])
     return Certificate(
@@ -47,8 +44,22 @@ def load(path: Path = CERTIFICATE_PATH) -> Certificate:
     )
 
 
+def snapshot(path: Path = CERTIFICATE_PATH) -> tuple[Certificate, dict[str, str], bytes]:
+    """Parse one byte snapshot into the certificate and its declarations."""
+
+    data = path.read_bytes()
+    record = json.loads(data)
+    declarations = {key: str(record[key]) for key in ("claim", "total_mass", "least_cell_mass")}
+    return _from_record(record), declarations, data
+
+
+def load(path: Path = CERTIFICATE_PATH) -> Certificate:
+    """Rebuild the retained certificate exactly as it was accepted."""
+
+    return snapshot(path)[0]
+
+
 def declared(path: Path = CERTIFICATE_PATH) -> dict[str, str]:
     """What the record claims, for a replay to compare against."""
 
-    record = json.loads(path.read_text())
-    return {key: str(record[key]) for key in ("claim", "total_mass", "least_cell_mass")}
+    return snapshot(path)[1]

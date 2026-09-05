@@ -202,6 +202,8 @@ the method-distinct interval branch and bound in
 [`sqpack.fractional`](packing/src/sqpack/fractional/certificate.py) each decide from the
 certificate’s frozen bytes, agreeing on `4001/4000` to the digit.
 
+![The T-018 certificate’s 1,121 weighted atoms with one exact Condition 5 witness, beside the shrink-and-snap containment step.](packing/cases/n11_fractional_certificate/t-018-proof-visual.svg)
+
 ## 2. The Configuration Space
 
 A **configuration** places every square and fixes the container.

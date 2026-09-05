@@ -114,6 +114,11 @@ The id in the filename must equal the id in the frontmatter.
 Research documents and reviews keep the repository’s dated form:
 `research-YYYY-MM-DD-topic.md`, `review-YYYY-MM-DD-topic.md`.
 
+**Case-local documents for a registered theoretical result use the lowercase result id
+and a descriptive kebab-case suffix, for example `t-018-proof.md`.** [convention] This
+is a filename convention only: prose and structured records keep the canonical uppercase
+id `T-018`. `README.md` remains the exception for a directory’s orientation page.
+
 Use [`repren`](https://github.com/jlevy/repren) for renames—it moves files and rewrites
 references in one pass, which is what keeps the two in step.
 
@@ -274,6 +279,15 @@ The ladder vocabulary (`V0`–`V5`, `C0`–`C5`, significance, novelty as applie
 results) is defined there and only there, and the results register at
 `packing/frontier/results.yaml` is where a whole result’s rungs are declared and
 re-derived on every validation run.
+
+**Reserve `C0`–`C5` for confirmation levels.** [convention] Numbered hypotheses or
+checks inside a proof are written as **Condition 1**, **Condition 2**, and so on, never
+with abbreviated letter-C labels.
+This keeps local proof notation from colliding with the repository’s result-level
+confirmation ladder.
+Verbatim source archives and literal third-party machine identifiers may reproduce
+external letter-C notation; they are preserved evidence or syntax, not repository
+terminology.
 
 **Budgets are in pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`. [convention]
 Machine-independent, and comparable across proposers whose move semantics differ.
