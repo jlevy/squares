@@ -341,9 +341,12 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, take **the fresh n = 17 continuation under
-`think-5j8d`**, but only after PR #75’s current head is hosted-green.
-The continuation starts from the terminal evidence retained by
+For the next supervised exact-research goal, take **`BC-191` of Agenda 019 under
+`think-ji0r`**: the `efficiency-loop` measurement of row generation’s cost against the
+container side, now that Agenda 020 has taken the retention gate off the critical path
+(session-085). The fresh `n = 17` continuation this paragraph used to name was
+discharged by Agenda 016’s closeout as the marker of where that chain stopped, and is
+not the next entry. The continuation starts from the terminal evidence retained by
 [session 078](../../../../packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md),
 the coordinator of the completed
 [agenda-015](../../../../packing/campaign/agendas/agenda-015-ten-hour-earned-routes-and-guard-repairs.md).

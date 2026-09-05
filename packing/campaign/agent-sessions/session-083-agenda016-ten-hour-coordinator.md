@@ -472,55 +472,59 @@ whether or not the research lanes have finished.
 
 ## Declared Deviations
 
-Three deviations are declared at the wall start rather than discovered at closeout. The
-count is three, not two: an earlier revision of this section listed only the first two
-while phase 1's outcome already said the frozen packet carried three, and the third --
-the preflight overlap, recorded from the beginning in phase 2's `switch_reason` -- was
-simply missing from the list. Reconciled at closeout in favour of the larger count.
+Three deviations are declared at the wall start rather than discovered at closeout.
+The count is three, not two: an earlier revision of this section listed only the first
+two while phase 1’s outcome already said the frozen packet carried three, and the third
+-- the preflight overlap, recorded from the beginning in phase 2’s `switch_reason` --
+was simply missing from the list.
+Reconciled at closeout in favour of the larger count.
 
-**Operator-authorized entry-condition waiver.** BC-147's entry condition requires PR 76
-merged and hosted-green, with its planning bead closed and no longer blocking. The
-operator directed the launch before merge. The planning bead correctly remains in
-progress, so the live queue and the agenda entry condition disagree for the duration of
-this session. Nothing else in the contract is relaxed, and the closeout reports this as a
-waiver rather than a satisfied gate.
+**Operator-authorized entry-condition waiver.** BC-147’s entry condition requires PR 76
+merged and hosted-green, with its planning bead closed and no longer blocking.
+The operator directed the launch before merge.
+The planning bead correctly remains in progress, so the live queue and the agenda entry
+condition disagree for the duration of this session.
+Nothing else in the contract is relaxed, and the closeout reports this as a waiver
+rather than a satisfied gate.
 
 **The `tbd` CLI is unavailable in this environment.** It is absent from `PATH`, from the
-Python and npm registries, and from a direct Git install. Bead state remains readable and
-writable as ULID-addressed records on the `tbd-sync` branch, but short display ids are
-derived by the CLI and cannot be resolved locally. Live bead reconciliation is therefore
-read-only during the run, and this is recorded as a bounded technical failure against the
-BC-147 and BC-155 obligations that assume the CLI.
+Python and npm registries, and from a direct Git install.
+Bead state remains readable and writable as ULID-addressed records on the `tbd-sync`
+branch, but short display ids are derived by the CLI and cannot be resolved locally.
+Live bead reconciliation is therefore read-only during the run, and this is recorded as
+a bounded technical failure against the BC-147 and BC-155 obligations that assume the
+CLI.
 
-**Preflight verification and lane dispatch overlap.** BC-147's exit was not met when
+**Preflight verification and lane dispatch overlap.** BC-147’s exit was not met when
 phase 2 opened. The lanes were dispatched at 06:51Z on read-only and design-first
 contracts so the ten-hour wall would not be spent idle while the independent exp-056
 frozen-binding readmission finished, and no lane was permitted to freeze a canonical
-result until the launch packet was admitted. The overlap was deliberate and its
-constraint held, but it is a departure from the sequential preflight the agenda
-specifies, so it is declared here rather than left in a phase field.
+result until the launch packet was admitted.
+The overlap was deliberate and its constraint held, but it is a departure from the
+sequential preflight the agenda specifies, so it is declared here rather than left in a
+phase field.
 
 ## Interruptions
 
-**An API rate limit at about 10:45Z terminated six in-flight agents.** The session hit an
-infrastructure rate limit that ended six subagents mid-task and did not clear until
+**An API rate limit at about 10:45Z terminated six in-flight agents.** The session hit
+an infrastructure rate limit that ended six subagents mid-task and did not clear until
 11:40Z. The cost is visible in the commit record as the largest inter-commit gap of the
 run, 77 minutes between 10:29Z and 11:46Z. What it took: the first dispatch of the T-014
-registration audit,
-which left only regenerated comparison outputs and no verdict (redispatched in the
-closeout window and completed at 14:24Z -- see
+registration audit, which left only regenerated comparison outputs and no verdict
+(redispatched in the closeout window and completed at 14:24Z -- see
 [the installed report](../../../docs/project/reviews/review-2026-09-03-bc153-t014-registration-audit.md));
-and the closeout documentation and de-slop pass, which finished partially. This is
-recorded as an interruption rather than a deviation because nothing about the contract
-was relaxed to accommodate it -- the work was lost, not waived.
+and the closeout documentation and de-slop pass, which finished partially.
+This is recorded as an interruption rather than a deviation because nothing about the
+contract was relaxed to accommodate it -- the work was lost, not waived.
 
 ## Toolchain Repair
 
-The checkout carried no virtual environment, and the installed `uv` could not resolve the
-pinned CPython 3.14.7. The session installed `uv` 0.12.9, then CPython 3.14.7 and the
-frozen environment, before any lane ran a command. The repository's own documentation
-guard also rejected an operational scratch file placed in the repository root; it was
-moved out of the tree rather than mapped, and the records tier then passed.
+The checkout carried no virtual environment, and the installed `uv` could not resolve
+the pinned CPython 3.14.7. The session installed `uv` 0.12.9, then CPython 3.14.7 and
+the frozen environment, before any lane ran a command.
+The repository’s own documentation guard also rejected an operational scratch file
+placed in the repository root; it was moved out of the tree rather than mapped, and the
+records tier then passed.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

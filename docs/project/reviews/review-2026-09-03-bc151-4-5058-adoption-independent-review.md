@@ -2,19 +2,22 @@
 
 ## Provenance and installation
 
-This document is the independent review deliverable of BC-151, which replayed the source, re-proved the eleven lemmas, checked the certificate against a fifth from-scratch implementation, and applied the frozen frontier patch on an exact pass, written on 2026-09-03 in the agenda-016 ten-hour
-run. Its author wrote only to `scratchpad/bc151/` -- a container-local directory
-outside the repository, which does not survive the session -- and modified no
-repository file beyond the frontier patch its own verdict authorised. It is installed
-here so that the evidence the records cite outlives that directory.
+This document is the independent review deliverable of BC-151, which replayed the
+source, re-proved the eleven lemmas, checked the certificate against a fifth
+from-scratch implementation, and applied the frozen frontier patch on an exact pass,
+written on 2026-09-03 in the agenda-016 ten-hour run.
+Its author wrote only to `scratchpad/bc151/` -- a container-local directory outside the
+repository, which does not survive the session -- and modified no repository file beyond
+the frontier patch its own verdict authorised.
+It is installed here so that the evidence the records cite outlives that directory.
 
 The source was `373` lines with SHA-256
-`5b54c1f7440af4981591a86c371c1afa9f1a61aa857c0a70d1a63bd39b3500ca`, and that hash names the
-scratchpad source rather than this file. The installation added this preface; it
-altered no classification, verdict, finding, number, citation, recommendation or claim
-boundary, and none may be altered here. References of the form `scratchpad/...` in the
-body below are the author's own record of what was read and where it was written at the
-time, and are left as written.
+`5b54c1f7440af4981591a86c371c1afa9f1a61aa857c0a70d1a63bd39b3500ca`, and that hash names
+the scratchpad source rather than this file.
+The installation added this preface; it altered no classification, verdict, finding,
+number, citation, recommendation or claim boundary, and none may be altered here.
+References of the form `scratchpad/...` in the body below are the author’s own record of
+what was read and where it was written at the time, and are left as written.
 
 * * *
 

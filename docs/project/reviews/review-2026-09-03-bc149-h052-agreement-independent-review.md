@@ -2,19 +2,20 @@
 
 ## Provenance and installation
 
-This document is the review deliverable of BC-149, the independent review of the H-052 complete agreement (exp-059), written on 2026-09-03 in the
-agenda-016 ten-hour run. Its author wrote only to `scratchpad/bc149/`
--- a container-local directory outside the repository, which does not survive the
-session -- and modified no repository file. It is installed here so that the evidence the
-records cite outlives that directory.
+This document is the review deliverable of BC-149, the independent review of the H-052
+complete agreement (exp-059), written on 2026-09-03 in the agenda-016 ten-hour run.
+Its author wrote only to `scratchpad/bc149/` -- a container-local directory outside the
+repository, which does not survive the session -- and modified no repository file.
+It is installed here so that the evidence the records cite outlives that directory.
 
 The source was `316` lines with SHA-256
-`dc1548ff7227171c1770cfaacc88e8420ffb6944827d7b1c1991a2fc5d702d78`, and that hash names the scratchpad
-source rather than this file. The installation added this preface, and reformatted the body to
-house Markdown conventions; it altered no classification, verdict, finding, number,
-citation, recommendation or claim boundary, and none may be altered here. References of
-the form `scratchpad/...` in the body below are the reviewer's own record of what was
-read and where it was written at review time, and are left as written.
+`dc1548ff7227171c1770cfaacc88e8420ffb6944827d7b1c1991a2fc5d702d78`, and that hash names
+the scratchpad source rather than this file.
+The installation added this preface, and reformatted the body to house Markdown
+conventions; it altered no classification, verdict, finding, number, citation,
+recommendation or claim boundary, and none may be altered here.
+References of the form `scratchpad/...` in the body below are the reviewer’s own record
+of what was read and where it was written at review time, and are left as written.
 
 * * *
 

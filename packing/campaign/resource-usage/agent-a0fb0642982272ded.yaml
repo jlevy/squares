@@ -1,0 +1,653 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: a0fb0642982272ded.output
+    sha256: 26c96d1ec8ead9bddd11ea9bbf8c413662968003583f1148e306ea1c98e942ee
+    bytes: 1420285
+    records: 716
+    session_id: 21ae3bfc-58a6-55fc-90e3-6e29d229a7f1
+    harness_versions:
+    - 2.1.260
+  span:
+    started_at: '2026-09-04T07:08:09.348Z'
+    ended_at: '2026-09-04T12:38:00.228Z'
+    wall_seconds: 19790.88
+  turns:
+    assistant: 238
+    sidechain: 238
+    by_model:
+      claude-fable-5-1: 237
+      <synthetic>: 1
+    by_thinking_level:
+      max: 237
+      None: 1
+    by_model_and_thinking_level:
+      claude-fable-5-1 @ max: 237
+      <synthetic> @ None: 1
+    by_branch:
+      claude/agenda-017-plan-and-run: 238
+    latency:
+      count: 238
+      total_seconds: 2262.792
+      median_seconds: 3.189
+      max_seconds: 204.551
+  tokens:
+    cache_creation_input_tokens: 18863060
+    cache_read_input_tokens: 41312375
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 18863060
+    input_tokens: 5064
+    output_tokens: 86554
+    thinking_tokens: 45224
+  tokens_by_thinking_level:
+    None:
+      cache_creation_input_tokens: 0
+      cache_read_input_tokens: 0
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 0
+      input_tokens: 0
+      output_tokens: 0
+    max:
+      cache_creation_input_tokens: 18863060
+      cache_read_input_tokens: 41312375
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 18863060
+      input_tokens: 5064
+      output_tokens: 86554
+      thinking_tokens: 45224
+  tool_calls:
+    total: 148
+    total_seconds: 17585.467
+    share_of_wall: 0.8886
+    errors: 6
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 20
+      total_seconds: 151.002
+      median_seconds: 1.682
+      max_seconds: 117.355
+    by_tool:
+      Bash:
+        count: 113
+        total_seconds: 17549.911
+        median_seconds: 2.475
+        max_seconds: 600.247
+      Monitor:
+        count: 25
+        total_seconds: 29.769
+        median_seconds: 0.097
+        max_seconds: 14.687
+      TaskStop:
+        count: 8
+        total_seconds: 5.767
+        median_seconds: 0.03
+        max_seconds: 2.841
+      ToolSearch:
+        count: 2
+        total_seconds: 0.02
+        median_seconds: 0.01
+        max_seconds: 0.013
+    by_command:
+      pgrep:
+        count: 17
+        total_seconds: 6360.389
+        median_seconds: 442.003
+        max_seconds: 600.247
+      grep:
+        count: 3
+        total_seconds: 603.423
+        median_seconds: 10.141
+        max_seconds: 592.05
+      pgrep && pricing && pricing && added:
+        count: 1
+        total_seconds: 592.722
+        median_seconds: 592.722
+        max_seconds: 592.722
+      pgrep && round:
+        count: 1
+        total_seconds: 592.538
+        median_seconds: 592.538
+        max_seconds: 592.538
+      pgrep && finish && RELOADED:
+        count: 1
+        total_seconds: 592.388
+        median_seconds: 592.388
+        max_seconds: 592.388
+      pgrep && pricing:
+        count: 1
+        total_seconds: 592.198
+        median_seconds: 592.198
+        max_seconds: 592.198
+      pgrep && row:
+        count: 1
+        total_seconds: 591.718
+        median_seconds: 591.718
+        max_seconds: 591.718
+      pgrep && REFUSED && ACCEPTED:
+        count: 1
+        total_seconds: 591.647
+        median_seconds: 591.647
+        max_seconds: 591.647
+      pgrep && round && round:
+        count: 1
+        total_seconds: 591.553
+        median_seconds: 591.553
+        max_seconds: 591.553
+      bwoder8hj.output:
+        count: 1
+        total_seconds: 591.261
+        median_seconds: 591.261
+        max_seconds: 591.261
+      bshl1e1s9.output && pricing && added):
+        count: 1
+        total_seconds: 591.028
+        median_seconds: 591.028
+        max_seconds: 591.028
+      bnupqtm0p.output:
+        count: 1
+        total_seconds: 590.815
+        median_seconds: 590.815
+        max_seconds: 590.815
+      bth198fnt.output:
+        count: 1
+        total_seconds: 590.65
+        median_seconds: 590.65
+        max_seconds: 590.65
+      bpb4qxn3u.output:
+        count: 1
+        total_seconds: 590.562
+        median_seconds: 590.562
+        max_seconds: 590.562
+      bblym3x55.output:
+        count: 1
+        total_seconds: 590.437
+        median_seconds: 590.437
+        max_seconds: 590.437
+      bg71zl0mq.output:
+        count: 1
+        total_seconds: 590.43
+        median_seconds: 590.43
+        max_seconds: 590.43
+      btc31a19l.output && pricing && added):
+        count: 1
+        total_seconds: 590.36
+        median_seconds: 590.36
+        max_seconds: 590.36
+      bbdx1fh23.output:
+        count: 1
+        total_seconds: 590.195
+        median_seconds: 590.195
+        max_seconds: 590.195
+      pgrep && parallel && REFUSED && ACCEPTED:
+        count: 1
+        total_seconds: 527.014
+        median_seconds: 527.014
+        max_seconds: 527.014
+      bjzbuet9w.output:
+        count: 1
+        total_seconds: 200.176
+        median_seconds: 200.176
+        max_seconds: 200.176
+      ? cg4.Lf && sizes && print(frows {m} cols {n}, && h.setOptionValue(output_flag, && h.setOptionValue(threads,
+        && h.setOptionValue(run_crossover, && h.setOptionValue(presolve, && lp.num_col_ &&
+        lp.num_row_ && lp.col_lower_ && lp.col_upper_ && lp.row_upper_ && lp.a_matrix_.index_
+        && lp.a_matrix_.value_ && h && h && h.run() && info && Ab && h.addRows(300, && h.run()
+        && lptime.py
+      : count: 1
+        total_seconds: 117.355
+        median_seconds: 117.355
+        max_seconds: 117.355
+      pgrep && kill && kill && ps && pgrep:
+        count: 1
+        total_seconds: 103.842
+        median_seconds: 103.842
+        max_seconds: 103.842
+      ls && cg5.py:
+        count: 1
+        total_seconds: 21.416
+        median_seconds: 21.416
+        max_seconds: 21.416
+      b2fdzfu1x.output:
+        count: 1
+        total_seconds: 20.232
+        median_seconds: 20.232
+        max_seconds: 20.232
+      seed.py && cg5.py:
+        count: 1
+        total_seconds: 16.504
+        median_seconds: 16.504
+        max_seconds: 16.504
+      pricing && added && dropped) && row && initial && finish && Traceback && Error && stopped && converged:
+        count: 1
+        total_seconds: 14.687
+        median_seconds: 14.687
+        max_seconds: 14.687
+      cg5.py && pgrep:
+        count: 3
+        total_seconds: 13.219
+        median_seconds: 4.575
+        max_seconds: 4.756
+      nohup python3 verify_frozen.py:
+        count: 1
+        total_seconds: 9.315
+        median_seconds: 9.315
+        max_seconds: 9.315
+      kill && pgrep:
+        count: 4
+        total_seconds: 8.837
+        median_seconds: 2.449
+        max_seconds: 2.52
+      pgrep && verify_frozen.py && pgrep:
+        count: 1
+        total_seconds: 6.092
+        median_seconds: 6.092
+        max_seconds: 6.092
+      initial && finish && RELOADED && CERTIFIED && DONE && Traceback && Error && stopped && converged && history:
+        count: 8
+        total_seconds: 5.823
+        median_seconds: 0.112
+        max_seconds: 2.406
+      kill && kill && finish381.py && ps:
+        count: 1
+        total_seconds: 4.405
+        median_seconds: 4.405
+        max_seconds: 4.405
+      ps && uptime:
+        count: 2
+        total_seconds: 3.71
+        median_seconds: 1.855
+        max_seconds: 1.896
+      cg4.py && pgrep:
+        count: 1
+        total_seconds: 3.544
+        median_seconds: 3.544
+        max_seconds: 3.544
+      cg3.py && cg4.py && pgrep:
+        count: 1
+        total_seconds: 3.535
+        median_seconds: 3.535
+        max_seconds: 3.535
+      finish2.py && pgrep && ps:
+        count: 1
+        total_seconds: 3.494
+        median_seconds: 3.494
+        max_seconds: 3.494
+      pgrep && cg3.py && cg4.py && pgrep:
+        count: 1
+        total_seconds: 3.449
+        median_seconds: 3.449
+        max_seconds: 3.449
+      ? pricing && added && dropped) && initial && net && finish && RELOADED && CERTIFIED
+        && DONE && Traceback && Error && stopped && converged && history
+      : count: 1
+        total_seconds: 2.706
+        median_seconds: 2.706
+        max_seconds: 2.706
+      kill && ps && pricing && added && dropped):
+        count: 1
+        total_seconds: 2.685
+        median_seconds: 2.685
+        max_seconds: 2.685
+      50 cg5-191_50.pkl && kill && pgrep:
+        count: 1
+        total_seconds: 2.634
+        median_seconds: 2.634
+        max_seconds: 2.634
+    by_command_family:
+      other:
+        count: 107
+        total_seconds: 16932.362
+        median_seconds: 2.516
+        max_seconds: 600.247
+      inspection:
+        count: 24
+        total_seconds: 634.56
+        median_seconds: 0.093
+        max_seconds: 592.05
+      toolchain:
+        count: 3
+        total_seconds: 5.686
+        median_seconds: 1.606
+        max_seconds: 2.602
+      filesystem:
+        count: 3
+        total_seconds: 5.264
+        median_seconds: 1.681
+        max_seconds: 1.915
+      vcs:
+        count: 1
+        total_seconds: 1.808
+        median_seconds: 1.808
+        max_seconds: 1.808
+    invoked:
+      tail: 88
+      cut: 82
+      sleep: 56
+      pgrep: 53
+      cat: 51
+      cd: 48
+      echo: 47
+      grep: 41
+      head: 28
+      Traceback: 25
+      Error: 25
+      date: 24
+      CERTIFIED: 22
+      finish: 21
+      stopped: 20
+      converged: 20
+      RELOADED: 19
+      DONE: 18
+      history: 18
+      pricing: 16
+      kill: 15
+      initial: 14
+      ls: 12
+      wc: 12
+      added: 11
+      ps: 10
+      dropped): 9
+      sed: 8
+      uptime: 7
+      weights,: 7
+      objective: 6
+      row: 6
+      lp.num_row_: 5
+      lp.col_upper_: 5
+      lp.row_upper_: 5
+      lp.a_matrix_.index_: 5
+      lp.a_matrix_.value_: 5
+      sizes: 5
+      T: 5
+      outer: 5
+      nohup python3 cg4.py: 5
+      nohup python3 cg5.py: 5
+      REFUSED: 5
+      ACCEPTED: 5
+      h.setOptionValue(output_flag,: 4
+      h.run(): 4
+      B: 4
+      model.add_rows(block): 4
+      python3: 4
+      dirs,: 4
+      parallel: 4
+      free: 3
+      y: 3
+      K: 3
+      HALF_TANGENTS: 3
+      DIRECTIONS: 3
+      SIN: 3
+      lp.col_lower_: 3
+      self.n: 3
+      side: 3
+      least: 3
+      v: 3
+      report: 3
+      nohup python3 cg3.py: 3
+      fresh: 3
+      net: 3
+      round: 3
+      model: 3
+      rationalised: 3
+      reloaded: 3
+      verify: 3
+      nohup python3 verify_frozen.py: 3
+      added): 3
+      git log: 2
+      awk: 2
+      Lf: 2
+      k: 2
+      h.setOptionValue(threads,: 2
+      h.setOptionValue(run_crossover,: 2
+      lp.num_col_: 2
+      limit: 2
+      ckpt: 2
+      seen: 2
+      sys.path.insert(0,highspy_site): 2
+      del: 2
+      pkill: 2
+      src: 2
+      tr: 2
+      h: 2
+      atoms: 2
+      C1: 2
+      ? "\n        fC2"
+      : 2
+      direction: 2
+      '5': 2
+      '10': 2
+      '15': 2
+      '20': 2
+      '25': 2
+      '30):': 2
+      nproc: 1
+      git status: 1
+      mkdir: 1
+      (timeout: 1
+      which: 1
+      uv: 1
+      (uv: 1
+      primal: 1
+      ? "\n          ftight"
+      : 1
+      comps: 1
+      comp: 1
+      comp.append(q): 1
+      y0-y1: 1
+      '{seed}]': 1
+      dual: 1
+      overlap: 1
+      y0-yp: 1
+      nohup python3 diag381.py: 1
+      rm: 1
+      print(numpy,: 1
+      h.passModel(lp): 1
+      h.setOptionValue(solver,ipm): 1
+      h.setOptionValue(run_crossover,off): 1
+      '>1.01:': 1
+      nohup python3 packlp.py: 1
+      self.directions.append(direction): 1
+      self.centres.append((float(centre[0]),: 1
+      member: 1
+      centres: 1
+      m,: 1
+      h.setOptionValue(ipm_optimality_tolerance,: 1
+      pend_d: 1
+      pend_c: 1
+      pend_d.append(index): 1
+      pend_c.append((cu,: 1
+      rep_c: 1
+      'rep_d:': 1
+      new_c: 1
+      new_c.append(c): 1
+      'log(converged: no candidate above depth 1)': 1
+      new_orbits: 1
+      new_orbits.append(orb): 1
+      rebuilt: 1
+      saved: 1
+      failed: 1
+      cents2: 1
+      clamped: 1
+      c,: 1
+      yc: 1
+      highspy_site): 1
+      highspy.kHighsInf): 1
+      print(pass,: 1
+      cg4.py: 1
+      cp: 1
+      (np.arange(len(sites.orbits)): 1
+      (age: 1
+      drop: 1
+      ~far: 1
+      weights: 1
+      born: 1
+      wc,: 1
+      tc: 1
+      cg5.py).read()): 1
+      bwoder8hj.output: 1
+      bth198fnt.output: 1
+      cg4.Lf: 1
+      print(frows {m} cols {n},: 1
+      h.setOptionValue(presolve,: 1
+      info: 1
+      Ab: 1
+      h.addRows(300,: 1
+      timeout python3 lptime.py: 1
+      per-row-round: 1
+      import: 1
+      print(clearSolver: 1
+      s,d,c: 1
+      bbdx1fh23.output: 1
+      N: 1
+      workers: 1
+      record: 1
+      C0: 1
+      results: 1
+      ast.parse(open(finish381.py).read()): 1
+      nohup python3 finish381.py: 1
+      'log(floaded weights {wpath}: objective {objective:.9f})': 1
+      loaded: 1
+      support: 1
+      ast.parse(open(finish2.py).read()): 1
+      nohup python3 finish2.py: 1
+      final: 1
+      Killed: 1
+      bjzbuet9w.output: 1
+      sha256sum: 1
+      index,: 1
+      rec: 1
+      gap: 1
+      t1: 1
+      verify(): 1
+      FAIL: 1
+      bshl1e1s9.output: 1
+      bblym3x55.output: 1
+      bnupqtm0p.output: 1
+      '100': 1
+      b2fdzfu1x.output: 1
+      50 cg5-191_50.pkl: 1
+      'total_mass, rec[total_mass], ': 1
+      'atoms, len(rec[atoms]), ': 1
+      bpb4qxn3u.output: 1
+      btc31a19l.output: 1
+      ckpt,: 1
+      added.append(orb): 1
+      python3 seed.py: 1
+      bg71zl0mq.output: 1
+    invoked_families:
+      other: 719
+      inspection: 252
+      shell: 176
+      toolchain: 5
+      vcs: 3
+      filesystem: 3
+    by_shell_shape:
+      compound:
+        count: 87
+        total_seconds: 17395.995
+        median_seconds: 3.888
+        max_seconds: 600.247
+      python_heredoc:
+        count: 16
+        total_seconds: 144.393
+        median_seconds: 1.707
+        max_seconds: 117.355
+      pipeline:
+        count: 25
+        total_seconds: 29.769
+        median_seconds: 0.097
+        max_seconds: 14.687
+      python_inline:
+        count: 4
+        total_seconds: 6.609
+        median_seconds: 1.628
+        max_seconds: 1.808
+      heredoc:
+        count: 3
+        total_seconds: 2.763
+        median_seconds: 0.087
+        max_seconds: 2.613
+      simple:
+        count: 3
+        total_seconds: 0.151
+        median_seconds: 0.049
+        max_seconds: 0.055
+    by_thinking_level:
+      max:
+        count: 148
+        total_seconds: 17585.467
+        median_seconds: 1.811
+        max_seconds: 600.247
+    shell_traits:
+      pipes: 114
+      redirects_output: 58
+      substitutes: 9
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'

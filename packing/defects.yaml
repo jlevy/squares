@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 429
+count: 449
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -12646,7 +12646,7 @@ defects:
     the breach, from before this branch's base until the same day it was recorded; the
     copied build caches, for as long as the portable fallback has bulk-copied the tree
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
     Recorded as "the snapshot cap refuses all 155 negative controls, and build caches are
     what breach it", against a live measurement of 67,823,986 bytes and a 64 MiB cap. Both
@@ -12727,6 +12727,20 @@ defects:
     reproduced as an actual red gate rather than as a projection. Two of the three failed
     steps in that run -- `negative controls` and `fast behavioral tests` -- are this one
     assertion, counted twice; the suite's other 1,606 tests passed.
+
+    Hosted CI is red on it too, as of 2026-09-04, so the "clone with no caches" the
+    paragraph above credits no longer exists on a runner either. The pull-request surface
+    at `dd458471` (PR #78, a planning branch that adds 145,323 tracked bytes under
+    `packing/`) failed exactly this assertion at 67,173,741 bytes, 64,877 over the cap; the
+    tracked, pruned-target and root-document terms at that revision sum to 57,057,956, so
+    the remaining 10.1 MB is the bytecode pytest had written under `tests/`, `devtools/`
+    and `src/` by the time the assertion ran at 53% of the suite. `main` at `9d5eae0f`,
+    the merge of PR #77, fails the same `fast behavioral tests` step in its post-merge run
+    while its previous merge at `bc6d4a87` passed, which dates the hosted red to the
+    record growth between them. Every pull request against `main` is red on this
+    assertion until the caches leave the count, which makes direction (1) below the
+    repair that turns the hosted gate green, not only the used local checkout, and it is
+    scheduled as BC-168 in Agenda 017.
   fix: >-
     Applied at `a478744a`, and deliberately narrow. Four file names joined `PRUNE` --
     exp-059's result and checkpoint, plus the exp-052 and exp-056 checkpoints, which
@@ -12738,7 +12752,27 @@ defects:
     file rather than by directory is not durable and was not meant to be, which makes the
     structural options below more urgent rather than less.
 
-    Three directions remain, and the fourth has been withdrawn. (1) Exclude the build
+    APPLIED 2026-09-04, as direction (1), and the entry is discharged. Before:
+    69,569,514 bytes against the 67,108,864 cap, 2,460,650 over, of which 11,994,514
+    (17.2 per cent) was build cache -- `__pycache__` 11,660,736, `.pytest_cache` 176,516,
+    `.ruff_cache` 157,262 -- in the same six locations this entry names. After: 57,626,070
+    bytes, 9,482,794 of headroom. The count is now byte-identical across deleting every
+    cache and a fresh pytest-and-ruff run that wrote 130,487 bytes, so the drift this entry
+    was retitled around is gone and the measurement is a property of the commit.
+    Two things the prescription below got wrong, neither fatal. It is incomplete rather
+    than mistaken: excluding caches from `_clone_into` alone still leaves nested ones in a
+    worker, because everything that routine does not descend into crosses in a single
+    `cp -R`, which has no exclude option -- so `clone_tree` needs a sweep afterwards. It
+    also omits `ROOT_DOCUMENTS`, whose rglob can reach a cache, since `.agents` carries a
+    Python file. And its safety argument was weaker than the truth: it reasoned that no
+    control names a `.pyc`, when in fact `run_one` sets a fresh `PYTHONPYCACHEPREFIX` per
+    command, so Python resolves bytecode in a mirror tree and cannot read the co-located
+    `__pycache__` at all. The copied caches were provably dead weight, verified by
+    importing a same-size mutated module past a stale `.pyc`.
+    The suite is unaffected: 155 negative controls fire as expected, exit 0, and
+    `check_control_anchors` reports 155 of 155.
+
+    The other three directions are recorded as they stood. (1) Exclude the build
     caches from the counted surface and from `_clone_into`. Still the smallest change,
     still 11.8 MB of pure detritus, and it is the only one of these that makes the
     measurement a property of the commit instead of the checkout. (2) Content-address the
@@ -12777,7 +12811,13 @@ defects:
     was not excluded, its status would have been `missing`, which is a violation, and this
     checker would have been red in every worker -- the `D-427` shape one file over.
   regression: >-
-    none for either surviving half, and one correction to what this entry first said. The
+    `tests/test_negative_controls.py::test_build_caches_leave_the_counted_surface_and_the_worker_trees`
+    plants 1,000,003 bytes in each of four caches -- the three names plus one four levels
+    deep -- alongside one non-cache probe file, then asserts the counted total moved by
+    exactly the probe, so an over-broad exclusion that counts nothing fails the test too,
+    and that no cache directory survives anywhere in a cloned worker while the probe does.
+    Each of the four exclusion sites was ablated separately and each ablation fails it.
+    The older note, kept because it is what this entry was for: The
     cap does have a check: `tests/test_negative_controls.py::test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots`
     asserts `snapshot_source_bytes() < SNAPSHOT_MAX_BYTES`, and the step that runs it is
     `fast=True`, so a fresh checkout at `ceff4400`, where the surface was 78,841,684, fails
@@ -12786,7 +12826,7 @@ defects:
     two runs on one commit agree, and nothing says that the headroom is now smaller than the
     last artifact that consumed it.
   recurrence_of: D-371
-  bead: think-c46d
+  bead: think-ahyr
   recorded_in: packing/devtools/run_negative_controls.py
 - id: D-423
   title: The cover certificate's Lemma 4 boundary is non-strict in two sources and strict in a third, unrecorded
@@ -13209,7 +13249,7 @@ defects:
     That is the shape worth pricing before anything is built.
   regression: none
   recurrence_of: D-413
-  bead: think-xdly
+  bead: think-g4qi
   recorded_in: packing/devtools/run_negative_controls.py
 - id: D-428
   title: The n = 17 successor validator never ties the rebuilt chain spine to the carried boundary
@@ -13279,7 +13319,7 @@ defects:
     binding rather than a spine that disagrees with the boundary. No guard alters a carried
     summary row and rebuilds the chain around it, which is the mutation that passes. The
     repair above should land with exactly that mutation as its test.
-  bead: think-5j8d
+  bead: think-g4qi
   recorded_in: packing/cases/n17_weighted_certificate_successor/run.py
 - id: D-429
   title: The generated-view comparison folds an ellipsis but not the space the formatter puts before it
@@ -13330,5 +13370,976 @@ defects:
     the document, and asserts `--check` still reports the block current. Written against
     the formatter rather than against a hard-coded ` …`, so a future flowmark that stops
     inserting the space does not leave a test asserting the old behaviour.
-  bead: think-c46d
+  bead: think-ahyr
   recorded_in: packing/devtools/render_research_tables.py
+- id: D-430
+  title: The frontier prose kept saying sixty-three open cases rest on Nagamochi after the adoption made it sixty
+  date: '2026-09-04'
+  layer: docs
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    one day: from the 4.5058 adoption at 6734476d on 2026-09-03, which moved n = 17, 18
+    and 19 off the closed form, until the Agenda 017 planning survey counted the cases
+  severity: low
+  status: fixed
+  what: >-
+    `packing/frontier/README.md` said that sixty-three of the sixty-five open cases carry
+    Nagamochi's general closed form as their best proved lower bound and that exactly two
+    are bespoke, and sixty-seven generated case bodies repeated "63 of the 65 open cases".
+    The case records say sixty: the green17 certificate took n = 17 and n = 18 on
+    2026-08-31 and the adopted Massaccesi certificate took n = 19 on 2026-09-03, and
+    `validate.py`'s corpus-count step was updated to 60 with the adoption while the prose
+    that quotes the number was not. The README's own heading says its counts are computed
+    from the artifacts, and this one was typed. A dated review note on
+    `E-nagamochi-lower` still says eighty-eight of the hundred, which was true when it was
+    written and is left as the dated record it is; the checker's docstring carries the
+    current eighty-five and the history.
+  consequence: >-
+    A reader of the front door of the frontier folder was told the adoption had not
+    happened. No verified bound was wrong; the sentence describing which theorem carries
+    them was, in the direction of understating what the repository had established.
+  fix: >-
+    The README states sixty and names the five bespoke cases; the sixty-seven case bodies
+    say sixty; and `devtools.check_nagamochi_bounds` now reads both prose shapes and
+    refuses any figure that disagrees with the count over the case records, so the next
+    adoption that moves a case off the closed form fails the gate until the prose moves
+    with it.
+  regression: >-
+    `check_nagamochi_bounds.prose_counts` compares the README sentence and every case
+    body's "N of the M open cases" against the corpus, run inside the checker's gate step;
+    `tests/test_nagamochi_bounds.py` plants a README with the stale figure and asserts the
+    refusal names it.
+  bead: think-tkwj
+  recorded_in: packing/devtools/check_nagamochi_bounds.py
+- id: D-431
+  title: T-009's significance rationale compares its interval certificate against a different packing
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    since 2026-08-29, when the n = 29 interval certificate was registered with its
+    comparative rationale, until the Agenda 017 planning survey re-ran the rational
+    promotion on the Kingbird witness
+  severity: medium
+  status: outstanding
+  what: >-
+    The limitations of `E-n029-interval-certified-upper` in `packing/frontier/evidence.yaml`
+    say the Krawczyk certificate is "tighter than E-n029-schadt-rational-upper by 5.2337e-5,
+    which is the price each arithmetic regime charges for a certificate rather than a
+    difference in the packing: robust rational promotion had to relax by 5.2e-5 to reach
+    rational coordinates, this route by 5.4e-20", and T-009's significance rationale
+    repeats the comparison. The two certificates are on different packings: the Schadt
+    entry certifies Schadt's n = 29 packing at side 5.933885799813..., whose own
+    limitations record a relaxation of about 4.93e-31 over its source decimal, while the
+    interval certificate is on Kingbird's packing at 5.933833462676.... The 5.2337e-5 is
+    the gap between two packings, not the price of an arithmetic regime. Re-running the
+    shipped robust-rational promotion on the Kingbird witness (`packing-witness promote
+    --strategy robust-rational --max-side-increase 1e-6`) during planning produced an exact
+    rational certificate at side 5.933833462676929189689460616..., which is about 5.43e-20
+    below the interval certificate's 5.93383346267692918974379895098 -- the rational
+    route on the same packing is the tighter of the two, the opposite of what the
+    rationale says.
+  consequence: >-
+    T-009's claim and its V4 rung stand: the interval certificate is a valid bound on
+    s(29). What is wrong is the stated reason it is significant, and a reader comparing
+    the two routes from the record would conclude the interval regime pays 5.4e-20 where
+    rational promotion pays 5.2e-5, when on this packing both pay under 1e-19 and the
+    rational one pays less. The same finding reaches T-009's declared next rung: the
+    rational certificate is repository-origin exact-algebraic evidence by a different
+    method, so registering it raises T-009 to C4 by the register's own definition.
+  fix: >-
+    Register the Kingbird rational certificate as its own evidence entry, rewrite the
+    interval entry's limitations and T-009's rationale to compare the two routes on the
+    same packing with both relaxations stated, and raise T-009 to C4 through the results
+    checker rather than by hand. Deferred to BC-165 of Agenda 017, which records the
+    same command's certificates at ten further sizes and owns the evidence family they
+    join.
+  regression: >-
+    A results-checker rule that a `next_rung` or significance rationale naming a second
+    evidence entry as a comparator must cite an entry whose witness is the same packing
+    (same source witness id), so a cross-packing comparison is refused at registration.
+  bead: think-stb5
+  recorded_in: packing/frontier/evidence.yaml
+- id: D-432
+  title: The push tier keeps the 900-second cap when its selector picks the whole suite
+  date: '2026-09-04'
+  layer: tooling
+  class: robustness
+  detected_by: gate
+  latent_for: >-
+    since BC-086 made `--push` select reachable tests, with the whole-suite fallback
+    inheriting the shared subprocess cap; it first fired on 2026-09-04 when a change set
+    touching the pull-request template made the selector choose everything
+  severity: medium
+  status: outstanding
+  what: >-
+    `packing-validate --push` runs `devtools.reachable_tests --run --since origin/main`,
+    which selects the tests a change can reach and falls back to the whole
+    non-exhaustive suite when a file that configures the suite changed. The fallback
+    ran under the step's default 900-second subprocess cap and was killed at 84% with
+    the summary "command timed out after 900 seconds"; the full suite measured 1,210 s
+    green on 2026-09-03 and the two full-suite steps of the complete gate were given
+    1,800-second budgets that day, while this step kept the shared default. On the
+    Agenda 017 planning branch the change set included `.github/PULL_REQUEST_TEMPLATE.md`,
+    which the selector reports as "configures the suite", so the tier could not finish
+    on two consecutive runs of about 917 s each, and the one failing test it did reach
+    could not be named from its own output.
+  consequence: >-
+    The pre-push floor is unusable as a floor for exactly the change sets that most
+    need it -- anything touching a suite-configuring file -- and a coordinator who
+    reads "1 STEP FAILED" learns neither which test failed nor whether the suite would
+    have passed. On this branch the one failure that did surface before the kill was
+    D-422's snapshot-cap assertion, which is red on any used checkout and green on a
+    fresh clone; the tier gave no way to tell that from a regression.
+  fix: >-
+    Give the reachable-tests step the same 1,800-second budget the full-suite steps
+    carry when its selector reports everything, or make the whole-suite fallback run
+    the fast behavioral step's own configuration; and print the failing test ids in
+    the step's summary regardless of how the run ended, so a killed run still names
+    what it saw. Owned by Agenda 018's gate-speed block, which measures the suite first.
+  regression: >-
+    A test that drives `reachable_tests --run` with a selector reporting everything and
+    asserts the step's budget is the full-suite budget and that a failing test id
+    appears in the summary when the run is interrupted.
+  bead: think-jzqi
+  recorded_in: packing/devtools/reachable_tests.py
+- id: D-433
+  title: The certificate rationaliser floored its weights while its docstring said it rounded up
+  date: '2026-09-04'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: >-
+    since sqpack.fractional.generate was written on 2026-09-04, about four hours; found
+    the same day by the strategy review reading the function against its docstring
+  severity: medium
+  status: fixed
+  what: >-
+    `rationalise` in `packing/src/sqpack/fractional/generate.py` computed each atom's
+    integer weight as `-((-raw * scale).__ceil__())`, which is `floor(raw * scale)`, three
+    lines under a docstring that says "round up to a multiple of 1/scale" and explains
+    that rounding up "is what keeps the coverage rows valid after rationalisation". The
+    `max(units, 1)` guard beneath it masked the error on small weights, which is how it
+    survived the n = 12 certifications at 19/5 and 77/20: those happened to land on
+    weights the floor did not move.
+  consequence: >-
+    No retained result is wrong. The exact verifier decided every accepted certificate
+    and is unaffected; the bug could only weaken a candidate, never strengthen one. What
+    it did was refuse certificates the program had found. The n = 12 candidate at side
+    39/10 converged at 11.921565 with 0.078 of margin, rationalised to 20591/1728 =
+    11.916088 -- below the linear program's own optimum, which is the signature -- and
+    was refused at least cell mass 3395/3456 = 0.98235, the whole deficit being
+    round-down loss. The n = 17, 18 and 20 searches launched with the flawed step were
+    stopped and relaunched after the fix rather than read as negatives.
+  fix: >-
+    `units = math.ceil(raw * scale)`, with the comment stating why floor is exactly
+    wrong here: every coverage row the solver leaves tight sits at exactly 1. Committed
+    with the strategy review's finding the same hour. A first attempt at the same fix,
+    made from the n = 12 run's own refusal at scale 576 earlier in the day, printed its
+    success and never reached the committed file; the review found the line unchanged.
+  regression: >-
+    `tests/test_fractional_certificate.py::test_rationalise_rounds_weights_up_never_down`
+    feeds three weights the floor gets wrong (5.3, 0.5 and 1000.001 units) and asserts
+    each lands on the next multiple above.
+  bead: think-yw5g
+  recorded_in: packing/src/sqpack/fractional/generate.py
+- id: D-434
+  title: The covering LP's separation oracle sees fewer placements than the verifier decides
+  date: '2026-09-04'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: inspection
+  latent_for: >-
+    since sqpack.fractional.generate was written on 2026-09-04, about five hours; found
+    twice in one hour, independently, by a measurement here and by the column-generation
+    lane's own test
+  severity: high
+  what: >-
+    `generate._worst_cells` and `colgen.placement_cells` score an event cell when the
+    cell's centre, rotated back, lies in the admissible centre domain. `sweep.reduce_to_cells`,
+    which `certificate.verify` uses to decide Condition 5, scores every cell whose v-range meets the
+    domain's v-extent within the u-slab. The second set strictly contains the first.
+    Measured on the retained 113-atom certificate at L = 77/20: identical at directions 0
+    and 1, and 432, 452 and 456 extra cells at directions 45, 90 and 180 -- 1.1 to 1.2 per
+    cent. The column-generation lane found the same thing from the other side, on a small
+    instance at L = 11/5 where the oracle reports 2.125 and the sweep 2.
+  consequence: >-
+    The linear program converges with every placement it can see at mass 1 and is then
+    refused by Condition 5 on a placement it was never shown. Both n = 12 pushes to side 39/10 died
+    this way with margin in hand: 11.921565 refused at least cell mass 3395/3456, and
+    11.869187 refused at 3083/3125 after column generation. The direction matters and is
+    the reason this is filed conservative rather than flattering: the oracle never invents
+    a violation, so every row it does emit is sound and every certificate the exact verifier
+    accepted stands, `T-017` included. What the gap costs is candidates, not correctness --
+    the search optimises against a weaker constraint set than the verifier enforces.
+  fix: >-
+    Fixed on 2026-09-04, in the oracle, after the prior question this entry raised was
+    settled the other way: the verifier is right. `sweep.reduce_to_cells` scores exactly
+    the event cells whose open interior meets the closed centre domain, which is what Condition 5
+    must quantify over -- coverage by closed squares is upper semicontinuous, so the open
+    and closed domains share an infimum and that infimum is attained on an open cell
+    meeting the domain, and the per-slab v-extent is exact by convexity. Checked in exact
+    arithmetic on the retained 113-atom certificate: the sweep's cell set equals the
+    "open cell meets the domain" set, decided independently by polygon clipping and
+    positive area, at directions 0, 1, 45, 90 and 180. `sweep.py` and `certificate.py`
+    were not touched.
+    What changed is `generate.py`'s oracle: a float mirror of the reduction that decides
+    reachability from the domain's edge lines per slab and, crucially, emits each row at a
+    point inside cell-intersect-domain rather than at a cell centre that can lie outside
+    the container. That last detail is why an earlier "meets the domain" attempt reported
+    13.5 and 15.4 on a configuration whose accepted certificate carries 11.9375.
+    The decisive check: on the reproduced old-oracle candidate the old oracle reports
+    1.000025 and sees no violation, while the new one reports 0.945515 at direction 67 --
+    the sweep's own exact value.
+  regression: >-
+    `tests/test_fractional_generate.py` asserts on three configurations, all including
+    diagonal directions, that the oracle's minimum equals the sweep's and that its cell
+    set contains the sweep's, and that generated rows land inside the domain. The refused
+    candidate the bug produced is retained as a must-refuse fixture.
+  status: fixed
+  bead: think-yw5g
+  recorded_in: packing/src/sqpack/fractional/generate.py
+- id: D-435
+  title: An enclosing interval run accepted a certificate whose least mass it had pinned below one
+  date: '2026-09-04'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: inspection
+  latent_for: >-
+    since sqpack.fractional.interval was written on 2026-09-04, about three hours; found
+    by reading the acceptance path before registering the verifier as C4 evidence, not by
+    any test
+  severity: high
+  what: >-
+    `interval.verify_by_intervals` decided Condition 5 from the branch-and-bound status alone:
+    `holds` when every direction came back `certified`. But `certified` means only that
+    the search resolved every box against the threshold it was run with, and the two
+    modes run different thresholds. Without `enclose` the threshold is mass 1, so
+    `certified` does mean Condition 5. With `enclose` the threshold is the best point value seen
+    so far, which the search keeps lowering, so `certified` means the minimum was pinned
+    exactly and says nothing about whether the pinned value reaches 1.
+  consequence: >-
+    An enclosing run over the retained n = 12 atoms with one atom lightened by 1/10000
+    returned `accepted` with a width-zero enclosure at 99993/100000 -- the true minimum,
+    correctly measured, and below 1. The measurement was never wrong; the verdict drawn
+    from it was. No retained claim rested on this: every full-net test also asserts the
+    enclosure value, and all three are at or above 1 (50003/50000 at n = 11, 100003/100000
+    at n = 12, exactly 1 for the Massaccesi control), while the sub-net acceptance tests
+    run the mass-1 threshold. The exact verifier is untouched and decides every retained
+    certificate independently. But the gap was in the property whose name is the whole
+    contract, and a future certificate checked only by an enclosing run would have been
+    accepted on a false verdict.
+  fix: >-
+    Fixed on 2026-09-04. `verify_by_intervals` now requires, on top of every direction
+    certifying, that each direction's certified lower bound reach mass 1, and reports
+    `fails` rather than `holds` when a pinned minimum falls short -- an exactly enclosed
+    minimum below 1 is a refutation, not an open question. The comparison is `>=` on the
+    integer mass scale, so the Massaccesi control at exactly 1 still passes, which is the
+    boundary the fix had to preserve.
+  regression: >-
+    `tests/test_fractional_interval.py::test_an_enclosed_run_refuses_a_minimum_it_pinned_below_one`
+    runs the lightened certificate under `enclose` and asserts the direction still comes
+    back `certified`, the enclosure is still the true 99993/100000, and the verdict
+    refuses on Condition 5 -- so it pins the distinction rather than the outcome. The lightened
+    fixture both refusal tests share is now one helper.
+  status: fixed
+  recorded_in: packing/src/sqpack/fractional/interval.py
+- id: D-436
+  title: The third-party package misnamed its own control and refused malformed files by traceback
+  date: '2026-09-04'
+  layer: verifier
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    since the package shipped in c68c1616 on 2026-09-04, about two hours; found by an
+    adversarial review commissioned to read it as a hostile third party would
+  severity: medium
+  what: >-
+    Three statements the package made about itself were wrong. Its README twice called
+    the enlarged-container falsification row "the control" -- once when explaining why
+    the printed cell count is worth reading, once in the objections section -- but the
+    control is Massaccesi's published n = 17 certificate, whose least covered weight is
+    exactly 1. The row that demonstrates cells beyond the atoms' reach are scored is the
+    side-4 falsification, whose least weight is 0. A reader taking "control" in the
+    README's own defined sense would look for a 0 in the control's output and not find
+    one. Second, the README promised a labelled refusal for any file not of the expected
+    form, but a float where an exact rational was required, a zero direction_steps, or an
+    atom row with fewer than three entries raised ValueError, ZeroDivisionError or
+    IndexError instead. Third, "nothing short-circuits" was true of Condition 1 to Condition 5 but not of
+    the preconditions, which return before them.
+  consequence: >-
+    None of it can change a verdict, and the review that found them says so: exit status
+    was already 1 on every malformed file, so no false acceptance was possible, and
+    check.py still reported the step as failed. What it costs is the thing the package
+    exists for. The package's whole claim is that a stranger can decide s(11) >= 19/5
+    without trusting this project, and a stranger who reads a promise about behaviour and
+    then sees a traceback has been given a reason to doubt the parts they cannot check as
+    easily. A misnamed control is worse still, because the control is the one artifact
+    that tests the verifier rather than the certificate.
+  fix: >-
+    Fixed on 2026-09-04, in the package rather than in the prose alone. Both README
+    sentences now name the falsification row and say what the control actually is. The
+    verifier validates the atom shape and the wholeness of n and direction_steps where
+    the file is read, and its entry point catches the parse and shape errors and prints
+    "REFUSED: not a certificate of the expected shape" with the offending value; a file
+    that cannot be opened at all reports a usage error and exits 2, because that is not a
+    refusal. The short-circuit sentence now distinguishes the conditions from the
+    preconditions. Four cosmetic findings in the same review were left as they are and are
+    recorded in it: a claim string that must be in lowest terms, a zero-weight asymmetric
+    atom refused by Condition 1, a degenerate direction that raises where it would be vacuous, and
+    disagreeing timing prose, which was aligned.
+  regression: >-
+    The four malformed files the review named -- a decimal outer_side, direction_steps
+    zero, a two-entry atom row, and n = 11.9 -- each return exit 1 with a labelled REFUSED
+    naming the field, and a missing file returns exit 2. Re-run as a stranger would, from
+    a copy outside the checkout under `env -i`, the package still verifies: the
+    certificate at 50003/50000 over 90,546,593 cells and the control at exactly 1 over
+    16,562,293, both VERIFIED, check.py exit 0.
+  status: fixed
+  recorded_in: docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md
+- id: D-437
+  title: A strong-duality test asserted float equality and failed on half of CI runs
+  date: '2026-09-04'
+  layer: tooling
+  class: robustness
+  detected_by: gate
+  latent_for: >-
+    since tests/test_fractional_generate.py was written on 2026-09-04, about eight hours,
+    of which roughly a third of the block was spent chasing it
+  severity: high
+  what: >-
+    `test_the_dual_of_a_converged_solve_matches_its_objective` asserted strong duality as
+    an exact float comparison, `float(solution.duals.sum()) == np.float64(solution.objective)`.
+    Strong duality is exact over the rationals, but both sides are float sums the LP solver
+    accumulates in an order it chooses, and the two orders need not agree to the last bit.
+    CI failed it at 4.000000000000001 against 4.0 -- one ulp.
+  consequence: >-
+    It passed locally every time and failed on roughly half of CI runs: red at 4482cf7a,
+    green at 31775018, red again at 2cd9d7ef on a commit that changed one README. The
+    alternation was misread as a real failure that some intervening change had fixed,
+    which is worse than a test that fails every time, because it invites a causal story
+    about the commits either side of it.
+    The cost was not the defect but the search. It sat behind the 1800 s timeout (D-438's
+    subject) until the fast tier was trimmed, and after that it was in every failing log
+    -- as `command exited 1`, the assertion text, and a `FAILED tests/...` line -- about
+    640 lines from the end of a 748-line file. Four log fetches read the tail and stopped
+    short of it. Two causes were proposed from reasoning instead and both were wrong, and
+    a third, that packing-validate hides pytest output, was wrong too and had to be
+    retracted from the pull request body. `_run` appends a failed subprocess's output to
+    its failure detail; the record was complete throughout.
+  fix: >-
+    Fixed on 2026-09-04. The comparison is now scale-relative, `abs(dual_total - objective)
+    <= 1e-9 * max(1, abs(objective))`, with the failure message printing both values and
+    the gap. A duality gap that meant anything would be many orders of magnitude larger
+    than that tolerance, so the test gives up nothing and stops depending on which order
+    HiGHS happened to sum in.
+  regression: >-
+    The test passes in 0.51 s and the whole of tests/test_fractional_generate.py in 72 s.
+    The tolerance is relative to the objective's scale, so it holds at the larger
+    objectives the n = 12 and n = 17 ladders reach rather than only at the value 4 this
+    fixture produces.
+  status: fixed
+  recorded_in: packing/tests/test_fractional_generate.py
+- id: D-438
+  title: The fast test tier outgrew its budget as the certificates grew, and hid a failure
+  date: '2026-09-04'
+  layer: tooling
+  class: performance
+  detected_by: gate
+  latent_for: >-
+    accumulated across the block as the ladders were climbed; first fatal once the
+    certificates passed roughly 600 atoms
+  severity: high
+  what: >-
+    `packing-validate`'s `fast behavioral tests` step consumed its entire 1800 s cap:
+    1801.01 s against a 1801.84 s total, while every other step in the tier ran in under
+    40 s. The cost scales with the atom count, and the certificates grew by an order of
+    magnitude during the block -- Massaccesi's 168-atom fixture decides in about 25 s,
+    which is why full 181-direction decisions looked affordable when these tests were
+    written, but the retained n = 12 certificate reached 681 atoms and n = 11's
+    calibration rung 373, both still deciding on the full net in the fast tier. Measured
+    against the n = 17 pair at 708 atoms, which takes about thirteen minutes, those two
+    alone accounted for most of the budget; four full doubled-net interval runs at 361
+    directions each finished it off.
+  consequence: >-
+    Two costs, and the second was the larger. CI was red, and the timeout truncated pytest
+    before it printed a summary, so the genuine test failure underneath it (D-437) had no
+    name for hours. Every run either timed out without naming a test or was cancelled by a
+    push. Fixing the budget did not fix CI; it made CI able to say what was wrong, which
+    is a different thing and was reported as such.
+  fix: >-
+    Fixed on 2026-09-04 in 4482cf7a. Nine full-net decisions moved behind the
+    `exhaustive_exact` marker -- five exact sweeps and four interval doubled-net runs --
+    each declared in the registry with what it costs. Nothing is lost: every one keeps a
+    fast counterpart in the same file that pins what its record claims, or decides it on a
+    coarse net. The tier went 1801 s to 1101 s to 948 s.
+    One of those fast counterparts was wrong on the first attempt and the way it was wrong
+    is worth keeping: deciding the calibration rung on a coarse net by slicing the
+    half-tangents asserted the whole verdict, which fails, because a net that coarse fails
+    Condition 4 by construction -- D grows with the gap and B(1 + D) then exceeds 1. The rung test
+    beside it had solved this already by asserting Condition 5's value rather than the verdict.
+    Coverage is the claim a coarse decision can carry; containment is not.
+  regression: >-
+    The fractional tier runs 85 tests in 176 s with 9 deselected, and the whole
+    non-exhaustive suite 1699 tests in 831 s locally. The marker registry test pins every
+    marked node by name, so a future slow decision cannot join the fast tier silently.
+  status: fixed
+  recorded_in: packing/tests/test_module_boundaries.py
+- id: D-439
+  title: Three records described the top rung, and the top rung moved out from under them
+  date: '2026-09-04'
+  layer: docs
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    from c68c1616, when the package shipped against a top rung of 19/5, until the ladder
+    advanced to 381/100 later the same day -- about six hours, spanning one adversarial
+    review that read the file line by line and did not catch it
+  severity: medium
+  what: >-
+    Three statements in durable records described "the top rung" and were left behind
+    when the ladder advanced past them. All three were true when written and none was
+    edited; what changed was the thing they pointed at.
+    First, the third-party package's file table described its own `certificate.json` as
+    "byte-identical to `../certificate.json`" and printed the SHA-256 to let a reader
+    check it. `../certificate.json` is the case's top rung by construction -- retention
+    replaces it each time the ladder advances -- so when n = 11 moved from 19/5 to
+    381/100 the sibling became a different file with a different hash, and the package's
+    own copy stayed where it was.
+    Second, T-019's significance rationale gave the movement past Massaccesi as 0.0042.
+    That is 451/100 - 22529/5000, the first rung's movement; the retained value is
+    229/50 and the movement is 0.0742, as the claim body two fields above it correctly
+    says. The record contradicted itself across two fields.
+    Third, T-019's next_rung described the headroom below seventeen using 451/100's
+    figures -- "the certificate's total is 16.5936, leaving 0.406" -- as though they were
+    the retained certificate's. The retained total is 3393147/200000 = 16.965735 and the
+    margin is 0.034265, an order of magnitude smaller, so the field understated by ten
+    times how tight the case had become. That passage also inferred a rate of ascent
+    ("about 0.075 per 0.01 of side") from two points on different site sets, which the
+    ladder does not support: margin is not monotone in the side, and n = 12 moves the
+    other way over its top two rungs, 0.007175 at 197/50 then 0.029410 at 79/20.
+  consequence: >-
+    Records only; no bound, certificate or verdict is affected, and the package itself
+    was never at risk, since `check.py`, `verify.py` and `falsify.py` read nothing
+    outside their own directory and a stranger running it got the right answer
+    throughout. The costs are of two kinds.
+    The package broke the one claim in the file a sceptical reader tests first, in a
+    document whose entire purpose is to be checkable without trusting this project.
+    `sha256sum` on the two files disagrees in the first byte, so a reader who ran the
+    check the file invites would have found the package contradicting itself with no way
+    to tell a stale pointer from a swapped certificate.
+    The two T-019 fields are worse in a quieter way. Nothing about them looks wrong: both
+    are exact figures about real artifacts, they simply describe a rung that is no longer
+    the top one. The next_rung error in particular would have steered the next session
+    away from n = 17 -- 0.406 of headroom invites another rung, 0.034 says the case is
+    nearly spent -- and the invented rate of ascent would have made the misreading look
+    quantitative.
+  fix: >-
+    Fixed on 2026-09-04. The package table now names `../certificate-19-5.json`, the
+    immutable rung file, which is what the hash was always of, and says in the same cell
+    that `../certificate.json` is the moving top-rung pointer and now carries 381/100.
+    T-019's rationale now reads 0.0742, and its next_rung is rewritten around the
+    retained certificate's own total and margin, both recomputed from the artifact rather
+    than carried over; the unsupported rate is gone, replaced by the non-monotonicity the
+    two ladders actually show.
+    The general rule the miss teaches: a durable record points at a name whose meaning is
+    fixed and quotes figures it re-derives from that name, never at or from whatever
+    currently sits at the frontier. Retention ladders here supply both kinds --
+    `certificate-19-5.json` never changes, `certificate.json` changes on every rung -- so
+    prose that cites a hash or a mass must cite the first kind.
+    The detector this argued for was then built, the same day, and is
+    `devtools.check_rung_figures` in the records tier. It recomputes each result's
+    certificates from their own atoms -- side, atom count, total mass and margin, all
+    exact, never the file's stored summary -- and checks the result's prose against that.
+    Two classes: every `a/b = d.ddd` anywhere in results.yaml, evidence.yaml and
+    defects.yaml must be arithmetically true, and a quoted total, margin or atom count
+    is compared only where a rung reference anchors it to one of that result's own
+    artifacts, so a figure cited for contrast is left alone rather than guessed at. It
+    refuses the reconstructed 0.0042 and the 451/100 total and margin, and it found
+    nothing else in the tree.
+  regression: >-
+    tests/test_rung_figures.py, fourteen nodes, including both reconstructed T-019
+    figures and a false positive the first draft produced -- T-017's claim states its
+    single rung twice for two purposes, which a naive "two fractions means a movement
+    claim" gate misreads, so the gate requires the two to be distinct.
+    One part stays uncovered and is not claimed: the package's byte-identity error is
+    about a file hash rather than a quoted figure, and the checker reads no hashes.
+    The class is worth the check because it is invisible at review. The adversarial
+    review that read the package line by line
+    (docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md) ran twenty-one
+    attacks and missed its instance, because at the time the sentence was true; the
+    error appears later, without an edit, which is why it wants a check that re-derives
+    rather than a reviewer who re-reads.
+  status: fixed
+  recorded_in: packing/frontier/results.yaml
+- id: D-440
+  title: A confirmation rung rested on a decision no control ever made
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    from the moment T-019 was raised to C4 on 2026-09-04 until the same day, a few hours,
+    and found only because an unrelated claim in SYNOPSIS.md was being checked against
+    its evidence rather than taken on the record's word
+  severity: medium
+  what: >-
+    T-019 stands at C4, and C4 requires two evidence entries with different method
+    values. Its second is E-fractional-interval-decision, whose scope lists n = 17, 18
+    and 19. But the entry's own results list decided no first-party n = 17 certificate:
+    it named n = 11 at 19/5, n = 12 at 197/50 and 393/100, and Massaccesi's published
+    n = 17 certificate, which is the control that tests the verifier and not this
+    project's bound. The replay command the entry names,
+    `pytest tests/test_fractional_interval.py`, matched that -- the only n = 17 nodes in
+    the file decided Massaccesi's control on the sub-net and on the full doubled net.
+    Nothing decided the retained 229/50 certificate by the interval route, and nothing
+    would have noticed if the claim had been false.
+  consequence: >-
+    None to the bound, as it happens. Running the decision settles it: the retained
+    n = 17 certificate is accepted on all 361 doubled-net directions in 2,653,407 boxes
+    with none stalled, and its enclosure of the least covered mass has width zero at
+    12501/12500, exactly the least_cell_mass the certificate declares. So the C4 rung was
+    earned; it simply was not checked.
+    The cost is what an unchecked rung is worth. A confirmation level is a claim about
+    evidence, and the whole point of recording it is that a reader need not re-derive it.
+    Two other results were pinned by exhaustive nodes and this one was not, so the
+    difference was invisible from the register: three results at C4, two of them guarded.
+  fix: >-
+    Fixed on 2026-09-04.
+    `test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net` decides the
+    retained certificate on every direction and asserts the enclosure against the
+    least_cell_mass its own record declares, matching the shape of the n = 11 and n = 12
+    nodes beside it; it is registered in the exhaustive_exact marker registry, which now
+    pins ten nodes. E-fractional-interval-decision's results list is rewritten around the
+    three retained top rungs rather than the lower ones it had been left describing --
+    n = 17 at 229/50 in 2,653,407 boxes, n = 12 at 79/20 in 2,666,151, n = 11 at 381/100
+    in 1,570,831 -- with the earlier rungs and the control kept below them. Wall times are
+    dropped from the entry: box counts are deterministic and comparable, and every one of
+    these runs shared a contended machine.
+  regression: >-
+    The marker registry test pins the new node by name, so it cannot leave the exhaustive
+    tier silently. What has no check is the general shape: an evidence entry whose scope
+    claims an n its replay never decides. The narrower rule that would have caught this
+    one -- every n in an evidence entry's scope should be decided by something the entry's
+    own replay runs -- is worth building and is not built.
+  status: fixed
+  recorded_in: packing/tests/test_fractional_interval.py
+- id: D-441
+  title: The generator decided its candidate before writing it, so a kill lost the candidate
+  date: '2026-09-04'
+  layer: tooling
+  class: robustness
+  detected_by: inspection
+  latent_for: >-
+    from the first generator run on 2026-09-04 through every rung this block climbed;
+    noticed only when a candidate appeared whose exact decision would take about two
+    hours and the question "what happens if I stop this" had an answer nobody wanted
+  severity: medium
+  what: >-
+    The column-generation drivers rationalised their solution, ran the exact event-cell
+    sweep on the in-memory object, and wrote the JSON only inside `if v.accepted`. So the
+    bytes existed only after the most expensive step in the pipeline had already passed.
+    Two consequences follow from that ordering and neither is about correctness.
+    A run killed inside the sweep loses the candidate outright -- the site set survives in
+    the checkpoint, but recovering the atoms means re-solving the linear program, twenty
+    minutes or more, to arrive at weights the process had already computed.
+    And the cheap route cannot run first. The interval decision settles a certificate in
+    tens of seconds where the exact sweep takes minutes to hours, and it is enough to
+    reject; but it needs a file, and there was no file until the slow route had finished.
+    The ordering also contradicted the project's own retention rule, which says to freeze
+    the bytes and decide those, never the object in memory -- the rule that exists because
+    a generator once rewrote its output between verification and retention, turning 1032
+    atoms into 1121 under a path someone was about to read.
+  consequence: >-
+    No retained bound is affected: every certificate in the record was decided from frozen
+    bytes by the reload step that followed, and the reload is what the record cites.
+    The cost is in what cannot be done while a sweep runs, and it has not yet been paid in
+    lost work. An earlier revision of this entry said it had: about forty minutes after
+    the entry was written the session's container restarted, the harness reported every
+    background task stopped, and this was recorded as having taken two candidates with it
+    -- n = 12 at 99/25, 2097 atoms, and n = 17 at 459/100, 1184 atoms. That was wrong and
+    is corrected here. What the restart stopped were the harness's own watchers; the four
+    solver processes were never children of the session and kept running throughout, and
+    `ps` showed all four still accumulating processor time. Four duplicate lanes were
+    launched against the survivors before that was checked, and were stopped.
+    The exposure the entry describes is real and unchanged: nothing is written until the
+    sweep has already passed, so a process that does die inside it loses its candidate,
+    and the cheap interval route cannot pre-screen a file that does not exist. What is not
+    yet demonstrated is a loss, and the entry should not have claimed one.
+  fix: >-
+    Fixed on 2026-09-04 in the parametrised driver. The candidate is written the moment it
+    is rationalised, before any decision, and the exact sweep then runs on the reloaded
+    file rather than on the object; `least_cell_mass` is added to the record afterwards,
+    when there is a verdict to record. The run prints the frozen path and points at
+    `devtools.decide_certificate`, which is the gate the file then has to pass.
+    Freezing first is not a weaker check. The reload was already there and already decided
+    the bytes; what changed is that the bytes now exist whether or not the decision
+    finishes.
+    The two drivers that were briefly reported as having lost candidates carried the old
+    ordering because they predate the parametrised one and were not touched by the first
+    fix; neither in fact lost anything. They are superseded rather
+    than patched: recovery from a checkpoint now goes through the rescale driver, which
+    freezes each candidate to its own path before deciding it and hands the file to
+    `devtools.decide_certificate`. A driver that cannot produce a file for that tool is a
+    driver that should not be run.
+  regression: >-
+    None automated -- this is a driver in the session scratchpad, not repository code, and
+    the repository's own retention path is devtools.decide_certificate, which takes a path
+    and cannot be handed an in-memory object at all. That tool is the durable form of the
+    rule; the driver now hands it a file.
+  status: fixed
+  recorded_in: packing/devtools/decide_certificate.py
+- id: D-442
+  title: A case body kept quoting a bound its own front matter had already moved past
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    six hours at n = 17, n = 18 and n = 19, from the T-019 retention on 2026-09-04 until
+    the T-020 retention the same evening went to update the same files; and, in the
+    second instance below, from the T-019 retention until the same read
+  severity: medium
+  what: >-
+    A frontier case file is two records in one document: YAML front matter, which is
+    machine-checked, and hand-written Markdown prose below it, which is not. Retaining a
+    result updates `verified_lower_bound` in the front matter of every case it moves. It
+    does not update the prose, and nothing checked that the two agree.
+    So after T-019 moved n = 17, n = 18 and n = 19 to 459/100, all three bodies still
+    opened by telling the reader the verified lower bound was 22529/5000 = 4.5058, with
+    n = 18's and n = 19's still explaining that the bound is inherited by monotonicity
+    from a certificate they no longer depend on. The front matter said one thing and the
+    sentence a human reads first said another.
+    Two further instances of the same class were found in the same read, in places the
+    existing detector does not look. `T-019`'s own `next_rung` described "this
+    certificate's 16.965735" -- the mass of the 229/50 rung, quoted as the retained
+    459/100 rung's, whose mass is 423327/25000 = 16.933080. `check_rung_figures` covers
+    exactly this and missed it, because it recognises a total written as "the total is
+    X" and not one written as a possessive. And `test_the_n17_certificate_does_not_reach_
+    n20` had a docstring naming 459/100 over an assertion testing 229/50; both integer
+    comparisons are true, so no test failed when the rung moved underneath it.
+    A fourth instance was found by the detector itself, on its first run over the live
+    corpus, in a case nobody in this session had touched: n-029's opening paragraph
+    reported the verified upper bound as 5.93388579981302587863645209, the ceiling that
+    case held before T-009 replaced it with 5.93383346267692918974379895098 -- a value
+    the very next section of the same document states correctly. The paragraph also
+    explained a discrepancy that no longer exists, the two bounds now differing by
+    9.18974379895098E-15 rather than by the fifth decimal.
+  consequence: >-
+    No bound is wrong and no verdict changes. Every affected statement was true when it
+    was written and each named a real, correctly computed figure; what drifted is which
+    object the figure describes. The cost is to a reader, and it is not small: the case
+    body is the document a person opens to learn what is known about a size, and for six
+    hours it under-reported three cases by 0.0842 and attributed them to the wrong
+    certificate.
+    This is `D-439` recurring, six hours after `D-439` was recorded and its detector
+    built. That is the finding worth keeping. The detector answered the surface the defect
+    was found on -- the results register -- and the same failure simply moved to the two
+    surfaces beside it, the case bodies and the tests. A durable record has more than one
+    place to describe a rung, and each one needs its own check or it will be the next one
+    to go stale.
+  fix: >-
+    Fixed on 2026-09-04. The six affected case bodies (n = 17 through n = 21, and
+    n = 29) are rewritten against their own front matter, with the displaced bounds kept
+    as history and marked as displaced rather than deleted. T-019's possessive figure is corrected to
+    the retained certificate's own mass, and the n = 17 test's assertion is brought onto
+    the rung its docstring names.
+    The durable part is `devtools/check_case_prose.py`, which reads every case file's
+    front matter and its prose and refuses any quoted bound on that file's own n that
+    disagrees with the record, allowing a weaker figure only where the sentence marks it
+    as history.
+  regression: packing/tests/test_case_prose.py
+  status: fixed
+  recorded_in: packing/devtools/check_case_prose.py
+- id: D-443
+  title: A generated document counted stop reasons its own sources do not record
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    about an hour, from the commit that generated the section to the sub-agent report
+    that checked it against the record
+  severity: low
+  what: >-
+    frontier/CERTIFICATE-REACH.md's new attainment section hedges its own extrapolation,
+    and one of the hedges was itself unchecked. It said two of the three runs behind the
+    ratio were halted on projected cost and only one ran its covering search to a
+    converged optimum. The record says otherwise, and says it plainly in the three
+    results' own next_rung fields: T-018's n = 11 run "ran the loop to convergence --
+    three row rounds, 25318 rows, final oracle least mass exactly 1"; T-020's n = 19 run
+    was "halted at round 9 ... because four more rounds would have cost about 3.75 h";
+    and T-019's n = 17 build has no stop reason recorded at all -- the stop its next_rung
+    narrates belongs to an adjacent probe at n = 18, at a different side, on a different
+    site set.
+    So the count was wrong in both halves: one converged rather than one being the
+    exception, and one was halted on cost rather than two.
+  consequence: >-
+    Nothing downstream depends on it. The ratio, the mean, the predicted column and the
+    ranking are all derived arithmetic and are unaffected; what was wrong is a sentence
+    about provenance, in the paragraph whose whole job is to stop a reader trusting the
+    ratio too far. That is the part worth recording. A hedge that misstates its own
+    evidence is worse than no hedge, because it reads as though the limitation has been
+    measured.
+    The origin is the more useful half. The figure was not read off the record; it was
+    supplied to a sub-agent in a task brief by the coordinator, from memory, and written
+    faithfully. That is rule seven of the method document -- read the evidence, not a
+    reconstruction of it -- broken in the same session that recorded two other instances
+    of the same class as D-439 and D-442. It was caught by a second sub-agent that had
+    been told to verify every number in its own brief against the repository before
+    writing it, which is the only reason it did not stand.
+  fix: >-
+    Fixed on 2026-09-04 in devtools/render_certificate_reach.py, which owns the prose.
+    The section now names each of the three runs and what actually stopped it, including
+    that one of them has no recorded stop reason and that the stop narrated nearby
+    belongs to a different side.
+  regression: >-
+    None automated. The claim is about which sentence in a result's next_rung describes
+    which run, and no checker resolves that -- check_rung_figures recomputes quoted
+    quantities from artifacts and check_case_prose compares a case body against its own
+    front matter, but neither reads a narrative back to the run it narrates. The durable
+    control is procedural and is already in force: a sub-agent brief must require every
+    figure in it to be re-derived from the repository before use, which is what caught
+    this one.
+  status: fixed
+  recorded_in: packing/devtools/render_certificate_reach.py
+- id: D-444
+  title: Three tests pinned the Nagamochi count, and the poisoned control went blind a second time
+  date: '2026-09-04'
+  layer: verifier
+  class: bookkeeping
+  detected_by: gate
+  latent_for: >-
+    from the T-020 retention at about 20:35 UTC until the pre-push tier reached the test
+    file at about 21:55; two pushes went out in between, on the strength of the records
+    tier and a pre-push tier that timed out before it got there
+  severity: medium
+  what: >-
+    tests/test_nagamochi_bounds.py held three expectations as literals about the record
+    rather than as relations read from it. test_it_covers_the_cases_it_claims_to asserted
+    that exactly 85 cases cite E-nagamochi-lower; test_a_stale_readme_count_is_refused
+    asserted the checker would answer a stale README with "60 of 65"; and
+    test_a_wrong_value_is_refused poisoned n = 20's verified lower bound with "4.8" to
+    prove the checker bites. T-020 moved n = 19, 20 and 21 off the closed form the same
+    evening, so the count became 83 and 58, and the first two literals were simply
+    stale.
+    The third is the finding. Its own comment records that its original target, n = 19,
+    stopped reaching the checker when T-016 took that case over on 2026-09-03, so the
+    control "passed without biting" and the target was moved to n = 20. On 2026-09-04
+    T-020 gave n = 20 a real verified lower bound of exactly 24/5 = 4.8 with evidence
+    that no longer names the theorem. The poison became the truth, the poisoned case
+    stopped reaching the checker, and the control went blind again by exactly the
+    mechanism its comment describes -- this time it failed only because a second
+    assertion, main() == 1, had nothing left to bite on.
+  consequence: >-
+    No bound and no record was wrong. The checker itself (devtools.check_nagamochi_bounds)
+    read the corpus correctly throughout and passed in the records tier. What was wrong
+    was the test of the checker, and for one push cycle the register carried a test that
+    could not tell a biting control from a blind one.
+    The process cost is the part to keep. The records tier does not run pytest, and the
+    pre-push tier's whole-suite step timed out at 900 s on this box and 1800 s on the CI
+    runner before reaching this file -- so two commits were pushed with a red test that
+    only the full suite reveals, past a gate that exists because that has happened twice
+    before today. That the suite was too slow to reach its own failures is D-369's
+    mechanism; the same evening's integer sweep (agenda-020) is what brings the suite back
+    under the timeout, and this is the first defect the restored gate caught.
+  fix: >-
+    Fixed on 2026-09-04. None of the three tests pins a number now. The coverage test
+    reads the retained certificate packages, computes each one's reach from its side and
+    mass (least_size_certified upward, wherever Theorem 2's value is below the side), and
+    asserts that no reached case still cites the theorem and that every citing case
+    carries the theorem's own value. The stale-README test derives the corpus figure the
+    way the checker does. The poisoned control chooses its target from the record -- the
+    largest citing case with at least 0.3 of room under its reported upper bound -- and
+    poisons by 0.2 above the recorded value, so it can neither be taken over by a result
+    nor fall inside the checker's last-place tolerance.
+  regression: packing/tests/test_nagamochi_bounds.py
+  status: fixed
+  recorded_in: packing/tests/test_nagamochi_bounds.py
+- id: D-445
+  title: The n = 11 case body stayed on the 19/5 rung under front matter that said 381/100
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    from the 381/100 retention at about 12:00 UTC until the records lane of the PR 80
+    review read the body against its front matter at about 23:30 -- across the same
+    evening in which D-442 recorded and fixed the identical class for n = 17 through 21
+    and built a detector for it
+  severity: medium
+  what: >-
+    packing/frontier/n-011.md's body opened by pinning s(11) to [3.8, 3.877084] with a gap
+    of 0.077084, described the certificate as 425 atoms of total mass 43391/4000 at side
+    19/5, and gave the movement as +0.011146 -- every one of them the 19/5 rung's figure --
+    while the front matter above it carried 381/100. This is D-442 again, on the one case
+    the project exists for, and it survived D-442's own fix because that fix rewrote the
+    five bodies the T-019 and T-020 retentions had moved and did not re-read the sixth.
+    It also survived D-442's detector. check_case_prose matches a quoted bound in the
+    shape s(n) >= figure or s(n) <= figure; this body wrote "pinned to `[3.8, 3.877084]`",
+    an interval, and named the atom count and mass as bare figures with no anchor the
+    detector recognises.
+  consequence: >-
+    No bound is wrong: the front matter, the register and the certificate agree at
+    381/100. A reader opening the case file for the smallest open case -- the file the
+    README sends them to first -- was told the bound was 3.8 for about eleven hours after
+    it was 3.81, and told the wrong movement, atom count and mass with it. The finding is
+    the detector's: a check that recognises one prose shape catches one prose shape.
+  fix: >-
+    Fixed on 2026-09-04. The body is rewritten against its front matter -- 381/100,
+    1121 atoms, 434547/40000, least 4001/4000, movement +0.021146, the two rungs below
+    and the 3.82 wall -- and check_case_prose now reads the "pinned to [a, b]" interval
+    form as a lower and an upper bound on the file's own n, so the shape this body used is
+    checked like the others. The sentence is also cross-checked here rather than trusted:
+    the figures are the retained certificate's own.
+  regression: packing/tests/test_case_prose.py
+  status: fixed
+  recorded_in: packing/devtools/check_case_prose.py
+- id: D-446
+  title: Three records said C5 needs a reviewer outside the project; the rubric says review-ready
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    from the T-017 registration on 2026-09-04 until the PR 80 review promoted T-018 to C5
+    on the strength of its own review artifact and the parent's records were read against
+    epistemics.md to see whether that was allowed
+  severity: low
+  what: >-
+    epistemics.md defines C5 as review-ready: a C3 or C4 result plus an existing
+    review_artifact mapped as a non-superseded review. It says nothing about who wrote the
+    review, and external review is not a confirmation rung at all -- novelty's
+    confirmed-novel is the label that needs priority confirmed outside the repository.
+    T-017's, T-019's and T-020's next_rung fields, and the pull request's own text, said
+    instead that C5 "needs a review artifact by someone outside the project". That is a
+    stricter rung than the rubric defines, stated as though it were the rubric.
+  consequence: >-
+    Nothing was scored wrongly, because no fractional result had a review artifact to
+    score. The misstatement mattered the moment one did: PR 80's promotion of T-018 to C5
+    is legitimate under the rubric, and a reader holding the parent's sentence would have
+    read it as illegitimate. A record that states its own rubric has to state it exactly.
+  fix: >-
+    Fixed on 2026-09-04. The three next_rung sentences now say what C5 is -- review-ready,
+    a mapped, non-superseded review artifact, none yet written for the result -- and the
+    pull request says the same.
+  regression: >-
+    None automated; the rubric's own checker derives rungs from the evidence and does not
+    read prose about rungs. The review of PR 80 records the correction.
+  status: fixed
+  recorded_in: packing/frontier/results.yaml
+- id: D-447
+  title: The certificate ceiling was written up as a method-wide impossibility
+  date: '2026-09-04'
+  layer: record
+  class: soundness
+  direction: conservative
+  detected_by: review
+  latent_for: >-
+    from the ceiling's registration on 2026-09-04 until PR 80's review (its F14) read the
+    lemma against the sentences drawn from it the same evening
+  severity: low
+  what: >-
+    The lemma is right: no certificate for n exists at a side above ceil(sqrt(n)) * B, so
+    every single certificate on a finite net sits strictly below the grid value. The
+    sentences drawn from it in certificate.py's docstring, results.yaml (T-017),
+    SYNOPSIS.md and README.md went further -- "no certificate of this shape will ever
+    settle n = 12, however fine the net or the site set", "the method can approach the
+    grid value and never reach it". That is too strong. A proved family of valid
+    certificates with sides tending to 4 would establish s(12) >= 4 by a limit argument
+    without any member reaching 4. The ceiling rules out one finite certificate at the
+    grid bound; whether a family exists is a question about the covering value, which
+    the ceiling says nothing about.
+  consequence: >-
+    A false claim about the method, in the conservative direction: it understated what
+    the method could in principle do, and would have steered a later block away from a
+    route the mathematics leaves open. No bound depends on it.
+  fix: >-
+    Fixed on 2026-09-04 in all four places: the ceiling rules out a single certificate
+    at the grid value, and a limiting family is stated as not excluded and as a question
+    about the covering value. The reach table's foreclosure column, which reads the same
+    lemma, describes single certificates and is unchanged.
+  regression: >-
+    None automated; the claim is prose about a lemma. The lemma itself is tested in
+    test_fractional_certificate.py.
+  status: fixed
+  recorded_in: packing/src/sqpack/fractional/certificate.py
+- id: D-448
+  title: Two comparison factors in T-017's prose were wrong by four times
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    from the 99/25 retention on 2026-09-04 until PR 80's review (its F33) recomputed them
+    the same evening
+  severity: low
+  what: >-
+    T-017's next_rung said the 99/25 rung's margin of 0.001040 was "the tightest margin
+    of any rung in the record by a factor of twenty-eight". Twenty-eight is the ratio
+    against the 79/20 rung's 0.029410; the previous tightest is the 197/50 rung's
+    0.007175, a factor of 6.9. Two sentences later it said 2097 atoms "is three times any
+    other retained certificate"; the next largest is n = 17's 1184, a factor of 1.77.
+    Both are ratios of figures the rung-figure detector recomputes individually; it does
+    not recompute ratios between them.
+  consequence: >-
+    Two overstated comparisons in a paragraph whose purpose is to say how much room is
+    left, and a reader would have taken the rung for tighter and the certificate for
+    larger than they are. Nothing else depends on either.
+  fix: >-
+    Fixed on 2026-09-04: "about seven times tighter than the 197/50 rung's 0.007175" and
+    "1.8 times the next largest retained certificate, the 1184-atom n = 17 rung".
+  regression: >-
+    None automated. A ratio of two recomputed figures is the next shape for
+    check_rung_figures to learn, and D-439's list of shapes it does not read grows by
+    one.
+  status: fixed
+  recorded_in: packing/frontier/results.yaml
+- id: D-449
+  title: The exact sweep's reported witness centre lies outside the admissible domain on most directions
+  date: '2026-09-04'
+  layer: verifier
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: >-
+    since the sweep's first commit on 2026-09-04; found by PR 80's review (its F11) as a
+    possibility and measured on this branch's head by the code lane of the review of that
+    review: 158 of 181 directions at n = 11 and 159 of 181 at n = 17
+  severity: low
+  what: >-
+    minimum_covered_mass reports, beside the least covered mass, a witness centre for it:
+    the midpoint of the event cell that attains the minimum. The reachable cells are the
+    event cells that meet the admissible centre domain, and most of them meet it only in
+    part, so the midpoint of the cell is usually outside the domain -- a point at which no
+    B-square is admissible at all. The value is right: the mass is constant on the cell
+    and the cell does meet the domain. The point reported as attaining it is not a point
+    where anything attains it.
+  consequence: >-
+    No verdict and no bound is affected; the least covered mass, which is what
+    Condition 5 decides on and what every record quotes, is computed over the right
+    cells. What is wrong is a diagnostic that presents itself as a witness: a reader who
+    took the printed centre and placed a B-square there would find the placement
+    inadmissible. Two independent instruments -- the exact sweep and the interval branch
+    and bound -- agree on the value to the digit, and neither has ever been asked to
+    agree on the witness.
+  fix: >-
+    Outstanding; bead think-xyt1 under the port epic think-pev1. PR 80's _cell_witness
+    picks a point strictly inside the cell's intersection with the domain; ported onto
+    this branch it must go into a helper both the integer and the Fraction routes call
+    (the stack's 28990b00 head merged onto this branch left the fix in the Fraction
+    reference path only, failing the value-and-witness equality test on five of six
+    directions; its 04127189 head applies the helper on both routes and is the code
+    to port), and it must
+    be exhausted on all 181 directions of all four retained certificates on the integer
+    route, because the strict-inside check is a new hard-error path.
+  regression: >-
+    None yet; the port adds a test that every reported witness is admissible, on every
+    direction of every retained certificate.
+  status: outstanding
+  recorded_in: packing/src/sqpack/fractional/sweep.py
+  bead: think-xyt1

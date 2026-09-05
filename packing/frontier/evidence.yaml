@@ -1158,3 +1158,381 @@ evidence:
       end to end, replayable per direction with --calibrate ORDINAL. Same method
       family as E-n017-massaccesi-source-replay, so together they support C3, not C4.
     source_reviewed: '2026-09-03'
+  - id: E-n012-fractional-certificate
+    claim: lower-bound
+    scope:
+      n_values:
+        - 12
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained literature archive under packing/resources/ and the frontier
+        source register, reviewed for n = 12 lower bounds on 2026-08-24 and again
+        when this entry was written. The archive holds Stromquist 2003, Bentz 2010,
+        Nagamochi 2005, Friedman's record tables and the Burns--Massaccesi n = 17
+        note. It does not hold a systematic sweep of recent arXiv preprints, which
+        is the known hole and the place a refutation would come from.
+      searched: >-
+        The corpus was searched for any lower bound specific to n = 12 rather than
+        inherited from n = 11 by monotonicity. The frontier case body records the
+        result of that search in its own words: "Nothing specific to n = 12 has
+        ever been proved." No source in the corpus states a bound above
+        2 + 4/sqrt(5) = 3.788854 for this case.
+      novel_object: >-
+        The certificate and the bound it carries, not the method. The weighted
+        fractional unavoidable-set technique is Burns's, with Massaccesi's
+        parameters; what is new here is a first-party certificate instance at
+        n = 12 and side 19/5, and the generator that produced it. Anyone holding
+        Burns's note could have run this search.
+    certificate: cases/n12_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras python -m cases.n12_fractional_certificate
+    replay_status: passed
+    limitations: >-
+      Decides five conditions in exact rational arithmetic over the retained
+      681-atom certificate: the atom multiset is closed under the container's D4
+      group (checked, not inferred from the orbit construction that built it), the
+      total mass is 479713/40000 and so strictly below 12, the 181-direction net reaches
+      pi/4, the containment B(1 + D) < 1 holds at B = 9973/10000, and every
+      reachable event cell at every net direction carries mass at least 1, with the
+      least 100003/100000. The bound proved is the container side itself, 197/50, and not
+      L/B; the shrunken square lies inside a unit square in the same container and
+      absorbs the net's angular gap rather than rescaling anything.
+      Independence is partial. The generator that proposed the weights (a float
+      covering LP by row generation) and the verifier that accepted them (exact
+      Fractions over a polygon-clipped centre domain) are separate implementations
+      with separate arithmetic, and a brute-force membership scan over 48,400
+      placements per direction agrees with the sweep at seven sampled directions.
+      But both live in sqpack.fractional and share the projection convention and
+      the coverage predicate, so their agreement cannot detect an error there. No
+      second party has checked this certificate; that review is outstanding and is
+      why this entry is scored no higher than it is.
+      The same instrument reached 19/5 first, with 68 atoms and mass 58/5; that
+      certificate is retained beside this one and replayed by the same command. At
+      side 39/10 the covering program lands on exactly 12 over the settings tried,
+      so 77/20 is where this setting family stops, not where the method does.
+      The instrument reproduces Massaccesi's published n = 17 optimum exactly
+      (16.916667 = 203/12, found from zero weights without being given the target)
+      and refuses the falsifying control: at n = 12 and side 401/100, where twelve
+      unit squares demonstrably fit, the same pipeline converges to exactly 16 on
+      all four settings tried and certifies nothing.
+    source_reviewed: '2026-09-04'
+  - id: E-n012-independent-verifier
+    claim: lower-bound
+    scope:
+      n_values:
+        - 12
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The same corpus as E-n012-fractional-certificate, searched the same day; this
+        entry confirms that entry's object and adds no claim of its own.
+      searched: The corpus search is E-n012-fractional-certificate's, not repeated here.
+      novel_object: >-
+        Nothing new in this entry -- it is a second, independent decision of the
+        certificate the first entry registers.
+    source_key: "[T-017]"
+    certificate: cases/n12_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras python cases/n12_fractional_certificate/independent_verify.py cases/n12_fractional_certificate/certificate.json
+    replay_status: passed
+    limitations: >-
+      A second exact decision of the same five conditions by a verifier written
+      from the theorem statement alone, by a reviewer who was given the two
+      certificate files and denied the project's implementation. It shares no code
+      with sqpack.fractional: it works in an integer-scaled rotated frame, enumerates
+      every piece of the edge arrangement (open intervals and the breakpoints
+      themselves) in both axes, sums masses directly over atoms with no prefix
+      sums or difference array, and decides the admissible-centre set by exact
+      polygon clipping, reporting a lower and an upper bound on the continuum
+      minimum that coincide at every one of the 181 directions for both
+      certificates. Least covered mass exactly 1 at direction 0 for each; Condition 1 to Condition 4
+      agree with E-n012-fractional-certificate to the digit. Break tests refuse a
+      weight lowered by 1/10000, a dropped atom and a shifted atom, each by the
+      condition that ought to catch it. Run unchanged on Massaccesi's published n = 17
+      certificate, rebuilt from the primary source's data, it returns the published
+      bound with total exactly 203/12 and least covered mass exactly 1 over all 181
+      directions in 30 s -- the control that shows the verifier is right, as distinct
+      from agreeing with the certificate. Same method family (exact-algebraic) as the
+      first entry, so together they support C3 and not C4, which by the rung
+      definition needs a different method value; the reviewer's proof check is
+      retained in docs/project/reviews/ and is the review artifact C5 asks for,
+      pending the operator's reading of it.
+    source_reviewed: '2026-09-04'
+  - id: E-n011-fractional-certificate
+    claim: lower-bound
+    scope:
+      n_values:
+        - 11
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained literature archive under packing/resources/ and the frontier source
+        register, which for n = 11 hold Stromquist 2003 (Theorem 2 and the Figure 14
+        cover this project refuted as D-152), the exp-017 repaired certificate, Trump's
+        1979 packing, Nagamochi 2005 and Friedman's record tables.
+      searched: >-
+        Searched for any lower bound on s(11) above 2 + 4/sqrt(5) = 3.788854. The corpus
+        holds none: that value has been the best since 2003 and the case body describes
+        the interval [3.788854, 3.877084] as the problem the project exists for. The
+        known hole is the same one E-n012-fractional-certificate names -- no systematic
+        sweep of recent preprints.
+      novel_object: >-
+        The certificate and the bound. The method is Burns's with Massaccesi's
+        parameters and the generator is this project's; what is new is an instance at
+        n = 11 and side 381/100, which is the first movement of this case's lower bound
+        since 2003.
+    certificate: cases/n11_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras python -m cases.n11_fractional_certificate
+    replay_status: passed
+    limitations: >-
+      Decides five conditions in exact rational arithmetic over 1121 atoms on a
+      D4-symmetric site set: the atom multiset is closed under the container's D4 group,
+      the total mass is 434547/40000 = 10.863675 and so strictly below 11, the
+      181-direction net reaches pi/4, containment B(1 + D) < 1 holds at B = 9977/10000,
+      and every reachable event cell at every net direction carries mass at least 1, the
+      least being 4001/4000. The bound proved is the container side itself, 381/100, and
+      the shrunken square rescales nothing.
+      The certificate was found by column generation over D4 orbits after the separation
+      oracle was corrected to score the same cells the verifier decides (D-434); before
+      that correction the same search stalled above 11. It was re-decided from its file
+      on disk rather than in memory: the coordinator froze the generator's output to an
+      immutable path and decided those bytes, which matters here because the generator
+      overwrote the same filename with a different certificate between the two attempts
+      at this side. The interval verifier accepted the frozen bytes over all 361
+      directions of the doubled net in 1,570,831 boxes with none stalled, returning a
+      width-zero enclosure at 4001/4000 -- the same value the exact sweep reports.
+      A calibration rung is retained beside it at side 189/50 = 3.78, below Stromquist's
+      bound, where the certificate proves nothing new. That run was made first and on
+      purpose: it is the diagnostic the project registered in advance to test the
+      approach honestly, and it is evidence that the instrument returns sane values below
+      the frontier as well as above it.
+      This entry is the exact-algebraic decision; C4 rests on
+      E-fractional-interval-decision, which decides the same bytes by a different method.
+      A self-contained third-party package ships beside the certificates at
+      cases/n11_fractional_certificate/thirdparty/: the theorem written out for a reader
+      with no context, a certificate as plain data, and a single-file verifier that
+      imports nothing outside the Python standard library and nothing from this
+      repository. It carries the 19/5 rung rather than the top one, so a stranger
+      running it decides s(11) >= 19/5 -- still a movement past Stromquist, and still
+      the claim it was built to make checkable, but one rung below what this entry now
+      certifies. Run as a stranger would -- copied outside the checkout, under
+      `env -i`, on the system interpreter -- it decides all five conditions and reports
+      the least covered weight of that rung, 50003/50000, over 90,546,593 cells and 181
+      directions in about 34 s; the same verifier, unchanged, returns Massaccesi's
+      published 22529/5000 from his own constants, which is the control that tests the
+      verifier rather than the certificate. Ten perturbations are refused and tabulated
+      with the condition each breaks. The package is a third exact-rational
+      implementation of the same reduction, so it does not move the confirmation rung;
+      what it buys is that the claim can be checked without trusting this project.
+      It was then read as a hostile third party would read it, and the review is retained
+      at docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md. That review
+      re-derived the theorem from the shipped words alone -- including the step this
+      branch had to correct once, that the bound is the container side and not L/B -- ran
+      twenty-one attacks of its own, and found nothing that threatens the result. Three
+      packaging defects it did find are fixed (D-436). It is not an external review and
+      does not reach C5: the reviewer is an agent of this project working from the
+      package rather than from the implementation.
+    source_reviewed: '2026-09-04'
+  - id: E-n017-fractional-certificate
+    claim: lower-bound
+    scope:
+      n_values:
+        - 17
+        - 18
+        - 19
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained literature archive under packing/resources/ and the frontier source
+        register, which for n = 17 hold Burns's fractional unavoidable-set note (4.4811),
+        Massaccesi's 2026 certificate (4.5058, adopted here as T-015 and carried to
+        n = 18 and n = 19 as T-016), Nagamochi 2005 and Friedman's record tables.
+      searched: >-
+        Searched for any lower bound on s(17) above 22529/5000 = 4.5058. The corpus holds
+        none: that value is the strongest in the register and is itself only months old.
+        The known hole is the one every entry in this family names -- no systematic sweep
+        of recent preprints, and Massaccesi's note is not peer-reviewed.
+      novel_object: >-
+        The certificate and the side. The method is Burns's and the parametrisation is
+        Massaccesi's own; what is new is a denser certificate at a larger side than his,
+        found by this project's generator once its separation oracle was corrected.
+    certificate: cases/n17_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras python -m cases.n17_fractional_certificate
+    replay_status: passed
+    limitations: >-
+      Decides five conditions in exact rational arithmetic over 1184 atoms on a
+      D4-symmetric site set: the atom multiset is closed under the container's D4 group,
+      the total mass is 423327/25000 = 16.933080 and so strictly below 17, the
+      181-direction net reaches pi/4, containment B(1 + D) < 1 holds at B = 9977/10000,
+      and every reachable event cell at every net direction carries mass at least 1, the
+      least being 200009/200000. The bound proved is the container side itself, 459/100.
+      It displaces a published value rather than an inherited or closed-form one, so it
+      was decided from its bytes by two verifiers that fail differently: the exact
+      event-cell sweep, which accepted in 1473 s at 200009/200000, and the interval
+      branch and bound, which certified all 361 doubled-net directions in 3,683,951
+      boxes with none stalled and enclosed the same value with width zero. Both ran
+      through devtools.decide_certificate, which reads the file back and refuses unless
+      the two agree on the value and not merely on the verdict.
+      Two rungs are retained below it. 229/50 carries the same pair of decisions.
+      451/100 carries a third -- the evaluator written independently from the theorem
+      statement with the implementation withheld, which took 2709 s summing masses
+      directly over 181 directions and returned 200017/200000 exactly, and which
+      reproduces Massaccesi's own published 22529/5000 from his constants as its
+      control.
+      Scope note: n = 18 and n = 19 are carried by monotonicity, since a packing of
+      n >= 17 unit squares contains a packing of 17. Both previously held 4.5058
+      inherited the same way from T-015, so the same single certificate moves all three.
+      It does not reach n = 20, whose 1 + sqrt(13) = 4.6055 from Nagamochi's closed form
+      is larger.
+      This entry is the exact-algebraic decision; C4 rests on
+      E-fractional-interval-decision, which decides the same bytes by a different
+      method.
+    source_reviewed: '2026-09-04'
+  - id: E-n020-fractional-certificate
+    claim: lower-bound
+    scope:
+      n_values:
+        - 19
+        - 20
+        - 21
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained literature archive under packing/resources/ and the frontier source
+        register, which for n = 19, 20 and 21 hold Nagamochi's 2005 closed form, Bentz's
+        2016 proof at n = 22, Friedman's record tables, and this project's own T-019 at
+        459/100. No source in the corpus states a bound specific to any of these three
+        sizes: each has held a general formula since 2005.
+      searched: >-
+        Searched for any lower bound on s(19), s(20) or s(21) above the closed form
+        min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). The corpus holds none at
+        any of the three. The known hole is the one every entry in this family names --
+        no systematic sweep of recent preprints.
+      novel_object: >-
+        The certificate and the side. The method is Burns's and the parametrisation is
+        Massaccesi's; what is new is a certificate at a side no published bound reaches
+        at any of these three sizes, found by this project's generator.
+    certificate: cases/n20_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras python -m cases.n20_fractional_certificate
+    replay_status: passed
+    limitations: >-
+      Decides five conditions in exact rational arithmetic over 2260 atoms on a
+      D4-symmetric site set: the atom multiset is closed under the container's D4 group,
+      the total mass is 946131/50000 = 18.922620, the 181-direction net reaches pi/4,
+      containment B(1 + D) < 1 holds at B = 9977/10000, and every reachable event cell at
+      every net direction carries mass at least 1, the least being 50007/50000. The bound
+      proved is the container side itself, 24/5.
+      Three sizes, and none of them by monotonicity. Only Condition 2 mentions n among the five
+      conditions, so this atom set certifies its side for every integer strictly above its
+      own mass, which is 19 and upward. The register already holds 5 from n = 22 on, so
+      the certificate is true there and weaker; where it moves the register is n = 19,
+      n = 20 and n = 21.
+      It was decided from its bytes by two verifiers that fail differently. The exact
+      event-cell sweep accepted in 5378 s at 50007/50000; the interval branch and bound
+      certified all 361 doubled-net directions in 5,638,343 boxes with none stalled and
+      enclosed the same value with width zero, in 173 s. The exact decision was made by
+      the generator's own rescale driver, which freezes a candidate to its path and then
+      re-reads it, so both routes decided the same bytes on disk rather than an object in
+      memory; the interval decision was made twice, once through
+      devtools.decide_certificate on the frozen file and once through the install guard on
+      the installed one.
+      One rung, no ladder: the side was reached in a single resumed column-generation run
+      rather than climbed, so there is no weaker retained certificate at this size to
+      compare against.
+    source_reviewed: '2026-09-04'
+  - id: E-fractional-interval-decision
+    claim: lower-bound
+    scope:
+      n_values:
+        - 11
+        - 12
+        - 17
+        - 18
+        - 19
+        - 20
+        - 21
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    novelty: previously-published
+    source_key: "[Burns n17]"
+    certificate: cases/n11_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras --group dev pytest tests/test_fractional_interval.py
+    replay_status: passed
+    limitations: >-
+      A second decision of the same certificates by interval arithmetic with directed
+      rounding, existing so that the two decisions can fail differently. Every operation
+      steps one ulp outward after a correctly rounded double operation, with no interval
+      library; rationals enter at one boundary where exact comparison happens, and atom
+      masses are exact integers on the certificate's own weight scale, so the sums round
+      nothing.
+      It is independent in method, not merely in code. Condition 5 is decided by branch and bound
+      over boxes of centres -- for a box, an atom counts only if its coverage rectangle
+      contains the whole box, which is a lower bound by construction and is tested
+      against the inner enclosure of that rectangle so an unresolved atom is dropped
+      rather than assumed. There is no event grid, no difference array and no polygon
+      clipping, so it shares no modelling assumption with the exact route.
+      It also rests on fewer hypotheses. Condition 5 is decided on the doubled net -- theta_k and
+      pi/2 - theta_k, 361 directions -- so the D4 reflection argument is never invoked
+      and Condition 1 is not needed at all, which matters because interval arithmetic cannot
+      establish the equality Condition 1 asserts.
+      Results, 361 of 361 directions certified in every case and none stalled. The four
+      retained top rungs, decided from their frozen bytes: n = 20 at 24/5, 2260 atoms,
+      5,638,343 boxes; n = 17 at 459/100, 1184 atoms,
+      3,683,951 boxes; n = 12 at 99/25, 2097 atoms, 4,448,751 boxes; n = 11 at 381/100,
+      1121 atoms, 1,570,831 boxes. Lower rungs and the control: n = 17 at 229/50 in
+      2,653,407 boxes, n = 11 at 19/5 in
+      1,195,755 boxes, n = 12 at 197/50 in 1,846,439 and at 393/100 in 1,486,159, and
+      Massaccesi's published n = 17 certificate -- the control that tests the verifier
+      rather than the certificate -- in 966,903 boxes, returning 22529/5000. Box counts
+      are deterministic and are the figure to compare; the wall times are not quoted
+      because every one of these runs shared a contended machine.
+      In minimisation mode every enclosure of the least covered mass has width zero and
+      equals the exact verifier's value to the digit: 4001/4000 at n = 11's top rung,
+      12501/12500 at n = 12's, 200009/200000 at n = 17's and 50007/50000 at n = 20's, each matching the
+      least_cell_mass its own certificate declares, and 12501/12500 at the 229/50 rung,
+      50003/50000 and 100003/100000 at the earlier n = 11 and n = 12 rungs. Refusals: the n = 12 atoms in a
+      side-4 container are refuted at direction 0 after 407 boxes, and an atom lowered by
+      1/10000 after 127.
+      What it does not add: no new bound, and no protection against a wrong theorem
+      statement, which both routes share. Its own failure mode is exhibited rather than
+      claimed -- a leave-edge exactly on another's enter-edge stalls at the 1e-12 floor
+      and is reported undecided, never accepted, demonstrated on a tiled grid where 2,868
+      boxes stall and perturbing the seams by 1/100 certifies in 1,351. An exact census
+      confirms no such seam occurs in any retained certificate.
+      Its acceptance path was audited before this entry was written, and one gap was
+      found and closed: enclosing runs settled boxes against the best point value rather
+      than against mass 1, so they pinned the minimum exactly and then read `certified`
+      as though it answered Condition 5. The lightened-atom fixture was accepted that way at a
+      correctly measured 99993/100000 (D-435). The figures above were measured before the
+      fix and none of them moves: it changes only the verdict drawn when a pinned minimum
+      falls short of 1, and every enclosure here is at or above 1. The verdict now
+      requires the certified lower bound to reach mass 1 in both modes, and the retained
+      certificates are re-decided under it by the replay this entry names.
+    source_reviewed: '2026-09-04'

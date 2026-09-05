@@ -110,3 +110,8 @@ packing/frontier/RESULTS.md
 # frontmatter and drift-checked in `packing-validate --records`. Same case as
 # ledger.md and defects.md: two owners for one file means the check never passes.
 packing/campaign/agenda-map.md
+
+# CERTIFICATE-REACH.md is generated from the frontier case files and the certificate
+# module's own ceiling by devtools.render_certificate_reach, drift-checked in
+# `packing-validate --records`. Same case as RESULTS.md: two owners for one file.
+packing/frontier/CERTIFICATE-REACH.md

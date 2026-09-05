@@ -1,8 +1,21 @@
 # Square Packing
 
-This repository combines an offline square-packing literature archive, a per-case
-frontier for `n ≤ 100`, exact and numerical verification tools, search code, and a
-replayable experiment record.
+Three things here, and each is a reason to look:
+
+- **New results.** The lower bound on `s(11)`, the smallest open case, has moved for the
+  first time since Stromquist set it in 2003 — and with it the first bounds ever proved
+  specifically for twelve, twenty and twenty-one squares, and values from `n = 17`
+  through `n = 21` that displace what was in print.
+  [Details below](#new-results).
+- **A survey of the whole problem in one place.** Every case `n = 1…100`, the primary
+  literature retained and transcribed, and the bound a source *reports* kept apart from
+  the bound this repository has *verified* — the most comprehensive single-source
+  treatment of square packing we are aware of.
+  [Details below](#survey).
+- **An automated research workflow underneath all of it.** The results and the survey
+  are produced and checked by AI agents running a recorded process — hypotheses
+  registered before measurement, every claim graded, every defect logged.
+  [Details below](#autonomous-research-process).
 
 [![One hundred known-best square packings arranged from n equals one through one hundred.](packing/atlas/known-best/known-best-1-100.png)](packing/atlas/known-best/known-best-1-100.svg)
 
@@ -12,34 +25,12 @@ Select the image for the zoomable SVG or use the
 [print-ready PDF](packing/atlas/known-best/known-best-1-100.pdf).*
 
 `s(n)` is the side of the smallest square that holds `n` non-overlapping unit squares.
-The problem is elementary to state and open even at small `n`: for `n = 11`, the best
-known packing dates from 1979 and remains about `0.088` above the best proved lower
-bound.
+The problem is elementary to state and remains open even at small `n`.
 
-[Survey](#survey) · [New Results](#new-results) · [What Is Here](#what-is-here) ·
+[New Results](#new-results) · [Survey](#survey) · [What Is Here](#what-is-here) ·
 [Getting Started](#getting-started) · [Reports](#reports) ·
 [Autonomous Research Process](#autonomous-research-process) ·
 [Conventions](#conventions) · [Layout](#layout)
-
-## Survey
-
-The survey records the best known packing and best proved lower bound for every
-`n ≤ 100`, with provenance and separate reported and formally verified lanes.
-Its source is one schema-validated case file under
-[`packing/frontier/`](packing/frontier/README.md); the generated
-[status table](packing/frontier/STATUS.md) is the reader view, and the atlas above
-renders every retained known-best packing.
-
-The [literature archive](packing/resources/README.md) retains each primary source, a
-cleaned Markdown transcription, and the unedited extraction used to check it.
-The generated [evidence inventory](packing/frontier/INVENTORY.md) shows what each
-recorded claim rests on, who performed the work, and how far it has been checked.
-
-The survey audits rather than merely transcribes.
-For example, the earliest published proof of `s(7) = 3` carries four recorded defects in
-its printed route, so the case’s proved status rests on independent later proofs.
-The [`n = 7` case](packing/frontier/n-007.md) states that disposition and links the
-relevant source audit.
 
 ## New Results
 
@@ -52,18 +43,87 @@ The gate checks the structural support for both classifications.
 `apparently-novel` means a recorded source search did not find the named contribution;
 it is not a claim of priority.
 
-Results first established here, as far as the recorded source searches show, include:
+Each result also carries **S**, a significance score from `1` to `5` against the same
+file’s rubric. The two groups below are split on it rather than on taste: `S4` is its
+anchor for a reusable technique, bound family or resolved disputed value, and `S5` for
+movement on a central open case.
+
+Results first established here, as far as the recorded source searches show:
+
+### Notable results (`S4`–`S5`)
+
+- **[T-018](packing/frontier/RESULTS.md): `s(11) ≥ 381/100`, the first movement of the
+  smallest open case since 2003 (`S5`).** [`s(11)`](packing/frontier/n-011.md) is the
+  case this project exists for, and its lower bound had been Stromquist’s
+  `2 + 4/√5 = 3.788854` since he stated it.
+  A first-party
+  [weighted fractional unavoidable-set certificate](packing/cases/n11_fractional_certificate/)
+  — 1121 weighted atoms, total mass `434547/40000`, every placement of a shrunken square
+  covering mass at least `1` — proves that eleven unit squares do not fit in a container
+  of side `3.81`. The interval narrows from `0.088230` to `0.067084`; the gap is not
+  closed. Two rungs are retained below it: `19/5`, the value that first passed
+  Stromquist, and `189/50`, the calibration rung below him that was run first on purpose
+  and proves nothing new.
+  Scored `S5`, the rubric’s anchor for movement on a central open case.
+  A
+  [self-contained third-party package](packing/cases/n11_fractional_certificate/thirdparty/)
+  ships with it, so the `19/5` rung can be decided without trusting anything else here.
+- **T-019: `s(17), s(18), s(19) ≥ 459/100`, displacing the published value (`S4`).** The
+  adopted bound for [these](packing/frontier/n-017.md) three cases was Massaccesi’s
+  `4.5058`, taken from a source rather than proved here.
+  The same generator returns `4.59` — 1184 atoms, total mass `423327/25000 = 16.9331`
+  against `n = 17`, least covered mass `200009/200000` — so the repository now carries a
+  first-party certificate `0.0842` above the number it had adopted, with the `229/50`
+  and `451/100` rungs it climbed through retained below.
+  One certificate covers all three sizes without a monotonicity step: only `Condition 2`
+  mentions `n`, so an atom set certifies its side for every integer above its own mass.
+  `T-020` has since carried `n = 19` past it; `n = 17` and `n = 18` are this result’s
+  alone, being too small for the heavier atom set that moved the other three.
+- **T-020: `s(19), s(20), s(21) ≥ 24/5`, displacing a closed form that stood for twenty
+  years (`S4`).** Twenty and twenty-one squares had never had a bound of their own: both
+  carried Nagamochi’s 2005 general formula, `1 + √13 = 4.6055…` and `1 + √14 = 4.7416…`,
+  and nothing else. A [certificate at `4.80`](packing/cases/n20_fractional_certificate/)
+  — 2260 atoms, total mass `946131/50000`, least covered mass `50007/50000` — moves
+  [`n = 20`](packing/frontier/n-020.md) by `0.194449`, `n = 21` by `0.058343`, and
+  `n = 19` by `0.21`, the largest single-case movement in the register.
+  The three sizes again come out of `Condition 2` alone.
+  Above them the method has `0.1885` of room at `n = 20` and `n = 21` before
+  [its own ceiling](packing/frontier/CERTIFICATE-REACH.md), and `0.0856` at `n = 19`
+  before it would contradict the best known packing.
+- **T-017: `s(12) ≥ 99/25`, from nothing case-specific at all (`S4`).**
+  [`n = 12`](packing/frontier/n-012.md) had only the `n = 11` bound inherited by
+  monotonicity; the frontier record said in as many words that nothing specific to
+  `n = 12` had ever been proved.
+  An eight-rung ladder — `19/5`, `77/20`, `97/25`, `39/10`, `393/100`, `197/50`,
+  `79/20`, `99/25` — is retained, all from one generator that applies at every `n`,
+  which is why this is scored `S4` as a bound family rather than a case result.
+  At `99/25 = 3.96` it also separates the cases: `s(12) > s(11)`, since Trump’s 1979
+  packing puts `s(11) ≤ 3.877084`. That did not follow from anything on record before.
+  The case is now `0.04` from its conjectured optimum of `4`, and no single certificate
+  of this shape can close it: none for twelve squares can exist above `3.990816`, which
+  is proved here and is below the conjectured value.
+  A family of certificates approaching `4` is not ruled out; whether one exists is a
+  question about the covering value.
+- **T-010: `s(11) ≥ 2 + 4/√5`, repaired (`S4`).** The printed 2003 Figure 14
+  unavoidability claim has a strict counterexample, so the literature’s standing `s(11)`
+  bound rested on a broken step — the
+  [case report](docs/project/research/research-2026-08-22-packing-11-unit-squares.md)
+  walks through what survived it.
+  A preregistered, source-distinct replacement point set restores the full lower-bound
+  argument and certifies exactly.
+  `T-018` has since passed the repaired value, but the repair is what made it a value
+  worth passing.
+
+### Further results (`S2`–`S3`)
+
+Sound and checked, and smaller in reach: a single case, a refinement of one catalogue
+annotation, or an erratum.
 
 - **T-001 / T-002: `s(17) ≥ 4.426213` and `s(18) ≥ 4.426213`.** A sixteen-point
   unavoidable set is certified by exact rational cover verification and an independent
   interval branch-and-bound over the full pose space.
-  Both are superseded as the verified lower bound by the source-backed
-  `s(17), s(18), s(19) ≥ 4.5058` adopted on 2026-09-03, which is externally proposed
-  rather than first established here.
-- **T-010: `s(11) ≥ 2 + 4/√5`, repaired.** The printed 2003 Figure 14 unavoidability
-  claim has a strict counterexample.
-  A preregistered, source-distinct replacement point set restores the full lower-bound
-  argument and certifies exactly.
+  Both are superseded as the verified lower bound — first by the source-backed `4.5058`
+  adopted on 2026-09-03, and now by `T-019`, which proves more than either.
 - **T-009: `s(29) ≤ 5.93383346267692918974379895098`.** A Krawczyk interval certificate
   encloses a unique exact solution around a rational witness.
 - **T-012 / T-013: exact rigidity determinations.** The retained `n = 5` optimum is not
@@ -84,10 +144,12 @@ Results first established here, as far as the recorded source searches show, inc
   in print. An exact escape certificate refutes the printed point, and the corrected
   reading certifies exactly against the journal page image.
 
-Machine audits of published work include:
+### Machine audits of published work
 
-- **T-004 / T-008:** Bentz 2010, Theorem 8, including both halves of `s(46) = 7`. The
-  theorem is the source’s; the exact machine audit is the contribution here.
+The theorem is the source’s in each of these; the exact machine check is what this
+repository adds.
+
+- **T-004 / T-008:** Bentz 2010, Theorem 8, including both halves of `s(46) = 7`.
 - **T-011:** exact verification of Trump’s 1979 `n = 11` record witness over its
   degree-eight field, including the zero-gap contacts that finite precision cannot
   certify.
@@ -96,6 +158,26 @@ The complete statements, scopes, evidence, limitations, classifications, and nex
 actions live in the register.
 Results that still rest on a source read rather than a machine check are labeled there
 accordingly.
+
+## Survey
+
+The survey records the best known packing and best proved lower bound for every
+`n ≤ 100`, with provenance and separate reported and formally verified lanes.
+Its source is one schema-validated case file under
+[`packing/frontier/`](packing/frontier/README.md); the generated
+[status table](packing/frontier/STATUS.md) is the reader view, and the atlas above
+renders every retained known-best packing.
+
+The [literature archive](packing/resources/README.md) retains each primary source, a
+cleaned Markdown transcription, and the unedited extraction used to check it.
+The generated [evidence inventory](packing/frontier/INVENTORY.md) shows what each
+recorded claim rests on, who performed the work, and how far it has been checked.
+
+The survey audits rather than merely transcribes.
+For example, the earliest published proof of `s(7) = 3` carries four recorded defects in
+its printed route, so the case’s proved status rests on independent later proofs.
+The [`n = 7` case](packing/frontier/n-007.md) states that disposition and links the
+relevant source audit.
 
 ## What Is Here
 

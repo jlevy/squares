@@ -2,30 +2,34 @@
 
 ## Provenance and installation
 
-This document is the review deliverable of BC-154, the independent review of the W9 disposition for D-044 and D-046, written on 2026-09-03 in the
-agenda-016 ten-hour run. Its author wrote only to `scratchpad/bc154-review/`
--- a container-local directory outside the repository, which does not survive the
-session -- and modified no repository file. It is installed here so that the evidence the
-records cite outlives that directory.
+This document is the review deliverable of BC-154, the independent review of the W9
+disposition for D-044 and D-046, written on 2026-09-03 in the agenda-016 ten-hour run.
+Its author wrote only to `scratchpad/bc154-review/` -- a container-local directory
+outside the repository, which does not survive the session -- and modified no repository
+file.
+It is installed here so that the evidence the records cite outlives that directory.
 
 The source was `1299` lines with SHA-256
-`513e6431e09a189f23de2dc141875f54ca64249c24b887aabe84ddf5a343f542`, and that hash names the scratchpad
-source rather than this file. The installation added this preface and the closing guidelines footer, and reformatted the body to
-house Markdown conventions; it altered no classification, verdict, finding, number,
-citation, recommendation or claim boundary, and none may be altered here. References of
-the form `scratchpad/...` in the body below are the reviewer's own record of what was
-read and where it was written at review time, and are left as written.
+`513e6431e09a189f23de2dc141875f54ca64249c24b887aabe84ddf5a343f542`, and that hash names
+the scratchpad source rather than this file.
+The installation added this preface and the closing guidelines footer, and reformatted
+the body to house Markdown conventions; it altered no classification, verdict, finding,
+number, citation, recommendation or claim boundary, and none may be altered here.
+References of the form `scratchpad/...` in the body below are the reviewer’s own record
+of what was read and where it was written at review time, and are left as written.
 
 **One premise in the body went stale after the review was written, and the body is still
 left as written.** In three places the reviewer records that `sqsearch` is not built in
 this environment. That was true for the whole of the review, which began at 08:46Z on
 2026-09-03 and took its measurements after the quiet lease released at 09:36Z. A release
 binary appeared at `packing/sqsearch/target/release/sqsearch` at 10:30Z the same day --
-ELF x86-64, 617,520 bytes, untracked under that package's own `.gitignore` -- and nothing
-has been executed against it. The conclusion the reviewer draws from the premise is
-unaffected and rests on its own evidence: no live round ran, nothing was recorded through
-the unattended runner, and the end-to-end coverage uses a fixture engine. Recorded here, in the
-installation preface, because the review's findings may not be altered.
+ELF x86-64, 617,520 bytes, untracked under that package’s own `.gitignore` -- and
+nothing has been executed against it.
+The conclusion the reviewer draws from the premise is unaffected and rests on its own
+evidence: no live round ran, nothing was recorded through the unattended runner, and the
+end-to-end coverage uses a fixture engine.
+Recorded here, in the installation preface, because the review’s findings may not be
+altered.
 
 * * *
 
@@ -530,7 +534,7 @@ repaired:**
   See section 8: the source review reads the timebox as per-cell, the runbook reads it
   as per-round, and the repair implemented a third thing.
 - **“The report can omit runnable-but-unrun work and does not implement the promised
-  'what moved / what died' distinction.”** Half done.
+  ‘what moved / what died’ distinction.”** Half done.
   `safe_release` and the report’s Health section now distinguish what died and in which
   state, which is the substantive half.
   But a hypothesis that was *runnable and simply not reached* — the session budget ran
