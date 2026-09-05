@@ -3,12 +3,16 @@ type: is
 id: is-01m1qn0wdqj2yhdpp6ybtcrmjb
 title: "W7 pipeline block: research structures the record did not track"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-05T02:05:38.102Z
-updated_at: 2026-09-05T02:05:38.102Z
+updated_at: 2026-09-05T02:43:12.218Z
+closed_at: 2026-09-05T02:43:12.218Z
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 Audit of eight untracked structures (covering-values register, produced_by on results, proposal registration, program on agenda cells, cost join, packing-side reach cap, certificate variant refusal, bead-vs-agenda staleness report) and the implementation of those with a named consumer, on 2026-09-05.
