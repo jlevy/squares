@@ -12,7 +12,8 @@ wrong direction. Two methods that could only fail in the same way are what the
 ``C4`` confirmation rung exists to rule out.
 
 What is decided. With ``n``, container side ``L``, shrink ``B``, a rational
-half-tangent net ``0 = t_0 < ... < t_K < 1`` and rational-weight atoms:
+half-tangent net ``0 = t_0 < ... < t_K < 1`` and nonnegative rational-weight
+atoms:
 
 ``Condition 2``  total atom mass is strictly below ``n``;
 ``Condition 3``  the net reaches pi/4, i.e. ``t_K^2 + 2 t_K - 1 >= 0``;
@@ -40,10 +41,15 @@ For a box of centres ``X``, the covered mass at *every* ``p`` in ``X`` is at
 least ``sum(w_i : R_i contains X)``, because a region containing the whole box
 contains each of its points. Each ``R_i`` is known only as an enclosure, so the
 test is made against the *inner* box ``[hi(u_i - B/2), lo(u_i + B/2)] x ...``
-that surely lies inside ``R_i``; a region failing that test simply does not
-count, which can only lower the bound. Masses are exact integers on a common
-scale, so the sum itself rounds nothing. The bound is therefore below the true
-covered mass at every centre of the box, with no assumption on the box's size.
+that surely lies inside ``R_i``. Because every weight is nonnegative, omitting a
+region that fails that test can only lower the bound. Masses are exact
+nonnegative integers on a common scale, so the sum itself rounds nothing. The
+bound is therefore below the true covered mass at every centre of the box, with
+no assumption on the box's size.
+
+The upper bound used for refutation has the same dependency: the regions whose
+outer boxes contain ``p`` are a superset of the regions that truly contain it,
+and summing a superset is an upper bound only for nonnegative weights.
 
 Why the domain is handled soundly. The admissible centres are ``[h, L - h]^2``
 in container coordinates, ``h = B (c + s) / 2``, which is a rotated square in
@@ -90,6 +96,15 @@ Ints = NDArray[np.int64]
 
 Status = Literal["holds", "fails", "undecided"]
 
+
+class IntervalInputError(ValueError):
+    """The certificate lies outside what this verifier can enclose in finite floats.
+
+    A refusal, never a verdict: the input is outside the safe domain of the arithmetic,
+    so nothing about the theorem has been decided either way.
+    """
+
+
 # Boxes narrower than this in both axes are not split further. Region edges are
 # enclosed to a few ulps of their magnitude (about 1e-15 here); a box thinner than
 # the fuzz cannot be told apart from the edge it straddles, so splitting it would
@@ -101,6 +116,32 @@ RESOLUTION_FLOOR = 1e-12
 # operation per batch. The size trades Python overhead against memory: each
 # batch holds a boxes-by-atoms boolean mask.
 BATCH = 4096
+
+# Every NumPy mass operation is an int64 sum over a subset of the atom masses. Holding
+# the exact Python-integer total below this keeps each such sum inside int64 with room
+# to spare; the check runs before any array exists, so a scale or a total that would
+# wrap is refused rather than wrapped. The same discipline the exact sweep applies at
+# 2^60 (PR 78's adversarial review, F7).
+INT64_MASS_LIMIT = 2**62
+
+# A leave-edge of one region lying exactly on the enter-edge of another is a seam no
+# outward-rounded enclosure can close, and without a cap the search bisects it down
+# to RESOLUTION_FLOOR along its whole length -- work growing as the reciprocal of the
+# floor (PR 78's adversarial review measured 4,631 boxes at 1e-2, 274,303 at 1e-4 and
+# 33.6 million at 1e-6 on a tiled grid). A direction that reaches this many boxes is
+# abandoned as `undecided` with lower bound zero, which nonnegative weights make sound
+# for every box left unresolved -- a refusal, never an acceptance -- unless a sampled
+# admissible point has already refuted Condition 5. The value is sixteen times the
+# largest per-direction count a retained certificate has needed (31,103, at the n = 17
+# top rung, measured by the review's code lane on 2026-09-04); the full-net decisions
+# of every retained certificate assert that no direction exhausts it.
+BOX_BUDGET = 500_000
+
+# Each search batch materialises a boxes-by-atoms boolean mask: BATCH rows by one
+# column per atom. The largest retained certificate has 2,260 atoms, a 9 MiB mask per
+# batch; this cap keeps one mask under 16 MiB and refuses an input-driven allocation
+# in the hundreds of megabytes before it happens.
+MAX_INTERVAL_ATOMS = 4096
 
 
 # ---------------------------------------------------------------------------
@@ -121,34 +162,58 @@ def _up(values: Floats) -> Floats:
     return np.nextafter(values, np.inf)
 
 
+def _require_finite(*values: Floats) -> None:
+    """Refuse an enclosure that left the finite floats: infinity encloses nothing."""
+    if not all(np.isfinite(value).all() for value in values):
+        raise IntervalInputError(
+            "interval operation cannot be enclosed by finite float arithmetic"
+        )
+
+
 def _add(alo: Floats, ahi: Floats, blo: Floats, bhi: Floats) -> tuple[Floats, Floats]:
-    return _down(alo + blo), _up(ahi + bhi)
+    with np.errstate(over="ignore", invalid="ignore"):
+        low, high = _down(alo + blo), _up(ahi + bhi)
+    _require_finite(low, high)
+    return low, high
 
 
 def _sub(alo: Floats, ahi: Floats, blo: Floats, bhi: Floats) -> tuple[Floats, Floats]:
-    return _down(alo - bhi), _up(ahi - blo)
+    with np.errstate(over="ignore", invalid="ignore"):
+        low, high = _down(alo - bhi), _up(ahi - blo)
+    _require_finite(low, high)
+    return low, high
 
 
 def _mul(alo: Floats, ahi: Floats, blo: Floats, bhi: Floats) -> tuple[Floats, Floats]:
     """Sign-agnostic: the extreme products among the four corner pairs."""
-    products = (alo * blo, alo * bhi, ahi * blo, ahi * bhi)
-    low = np.minimum(np.minimum(products[0], products[1]), np.minimum(products[2], products[3]))
-    high = np.maximum(
-        np.maximum(products[0], products[1]), np.maximum(products[2], products[3])
-    )
-    return _down(low), _up(high)
+    with np.errstate(over="ignore", invalid="ignore"):
+        products = (alo * blo, alo * bhi, ahi * blo, ahi * bhi)
+        _require_finite(*products)
+        low = np.minimum(
+            np.minimum(products[0], products[1]), np.minimum(products[2], products[3])
+        )
+        high = np.maximum(
+            np.maximum(products[0], products[1]), np.maximum(products[2], products[3])
+        )
+        low, high = _down(low), _up(high)
+    _require_finite(low, high)
+    return low, high
 
 
 def _div(alo: Floats, ahi: Floats, blo: Floats, bhi: Floats) -> tuple[Floats, Floats]:
     """Division by an interval that is strictly positive; the caller guarantees it."""
-    quotients = (alo / blo, alo / bhi, ahi / blo, ahi / bhi)
-    low = np.minimum(
-        np.minimum(quotients[0], quotients[1]), np.minimum(quotients[2], quotients[3])
-    )
-    high = np.maximum(
-        np.maximum(quotients[0], quotients[1]), np.maximum(quotients[2], quotients[3])
-    )
-    return _down(low), _up(high)
+    with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+        quotients = (alo / blo, alo / bhi, ahi / blo, ahi / bhi)
+        _require_finite(*quotients)
+        low = np.minimum(
+            np.minimum(quotients[0], quotients[1]), np.minimum(quotients[2], quotients[3])
+        )
+        high = np.maximum(
+            np.maximum(quotients[0], quotients[1]), np.maximum(quotients[2], quotients[3])
+        )
+        low, high = _down(low), _up(high)
+    _require_finite(low, high)
+    return low, high
 
 
 @dataclass(frozen=True, slots=True)
@@ -159,7 +224,11 @@ class Interval:
     hi: float
 
     def __post_init__(self) -> None:
-        if not (math.isfinite(self.lo) and math.isfinite(self.hi)) or self.lo > self.hi:
+        if not (math.isfinite(self.lo) and math.isfinite(self.hi)):
+            raise IntervalInputError(
+                "certificate arithmetic cannot be enclosed by finite floats"
+            )
+        if self.lo > self.hi:
             raise ValueError(f"not an interval: [{self.lo}, {self.hi}]")
 
     @classmethod
@@ -172,7 +241,12 @@ class Interval:
         rationals and has to be enclosed before interval arithmetic can start.
         """
         exact = Fraction(value)
-        nearest = float(exact)
+        try:
+            nearest = float(exact)
+        except OverflowError:
+            raise IntervalInputError(
+                "exact certificate input is outside the finite float range"
+            ) from None
         if Fraction(nearest) == exact:
             return cls(nearest, nearest)
         if Fraction(nearest) < exact:
@@ -228,13 +302,13 @@ class Rotation:
 
     def __post_init__(self) -> None:
         if self.cosine.lo <= 0 or self.sine.lo < 0:
-            raise ValueError(f"direction {self.label} is outside the first quadrant")
+            raise IntervalInputError(f"direction {self.label} is outside the first quadrant")
 
 
 def rotation_from_half_tangent(label: str, tangent: Fraction) -> Rotation:
     """``theta = 2 arctan t``: cos = (1 - t^2) / (1 + t^2), sin = 2t / (1 + t^2)."""
     if tangent < 0 or tangent >= 1:
-        raise ValueError(f"half-tangent {tangent} is outside [0, 1)")
+        raise IntervalInputError(f"half-tangent {tangent} is outside [0, 1)")
     t = Interval.of(tangent)
     square = t * t
     denominator = ONE + square
@@ -280,6 +354,7 @@ class DirectionOutcome:
     witness: tuple[float, float] | None
     boxes: int
     stalled: int
+    budget_exhausted: bool = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -292,14 +367,15 @@ class AtomData:
     yhi: Floats
     mass: Ints
     scale: int
+    total: int
 
     @classmethod
     def of(cls, certificate: Certificate) -> AtomData:
-        scale = 1
-        for atom in certificate.atoms:
-            scale = math.lcm(scale, atom.weight.denominator)
-        if certificate.n * scale >= 2**62:
-            raise ValueError("the weight scale is too large for exact integer masses")
+        if len(certificate.atoms) > MAX_INTERVAL_ATOMS:
+            raise IntervalInputError(
+                f"the interval verifier supports at most {MAX_INTERVAL_ATOMS} atoms"
+            )
+        scale, scaled_mass, total = scaled_atom_masses(certificate)
         xs = [Interval.of(atom.x) for atom in certificate.atoms]
         ys = [Interval.of(atom.y) for atom in certificate.atoms]
         return cls(
@@ -307,15 +383,35 @@ class AtomData:
             xhi=np.array([x.hi for x in xs]),
             ylo=np.array([y.lo for y in ys]),
             yhi=np.array([y.hi for y in ys]),
-            mass=np.array(
-                [int(atom.weight * scale) for atom in certificate.atoms], dtype=np.int64
-            ),
+            mass=np.array(scaled_mass, dtype=np.int64),
             scale=scale,
+            total=total,
         )
 
-    @property
-    def total(self) -> int:
-        return int(self.mass.sum())
+
+def scaled_atom_masses(certificate: Certificate) -> tuple[int, list[int], int]:
+    """The common scale, every mass on it, and their total -- all exact Python integers.
+
+    The total is summed here and not by NumPy, because an ``int64`` sum of masses that
+    individually fit can still wrap, and a wrapped total would pass ``Condition 2``
+    for the wrong reason. Anything at or above ``INT64_MASS_LIMIT`` is refused before an
+    array is built; the scale is checked as it grows so that a pathological set of
+    denominators cannot cost the product before the refusal.
+    """
+    scale = 1
+    for atom in certificate.atoms:
+        scale = math.lcm(scale, atom.weight.denominator)
+        if certificate.n * scale >= INT64_MASS_LIMIT:
+            raise IntervalInputError("the weight scale is too large for exact integer masses")
+    scaled_mass = [int(atom.weight * scale) for atom in certificate.atoms]
+    if any(mass < 0 for mass in scaled_mass):
+        raise IntervalInputError("the interval verifier requires nonnegative atom weights")
+    total = sum(scaled_mass)
+    if total >= INT64_MASS_LIMIT:
+        raise IntervalInputError(
+            "the total scaled atom mass is too large for safe int64 arithmetic"
+        )
+    return scale, scaled_mass, total
 
 
 class DirectionSearch:
@@ -352,11 +448,12 @@ class DirectionSearch:
         v_high = _add(vlo, vhi, *half.arrays())
         self.inner = (u_low[1], u_high[0], v_low[1], v_high[0])
         self.outer = (u_low[0], u_high[1], v_low[0], v_high[1])
+        _require_finite(*self.inner, *self.outer)
         # The domain [h, L - h]^2 in container coordinates.
         self.margin = square_side * (rotation.cosine + rotation.sine) / TWO
         self.far = outer_side - self.margin
         if self.far.lo <= self.margin.hi:
-            raise ValueError("the square does not fit the container at this direction")
+            raise IntervalInputError("the square does not fit the container at this direction")
         h, far = self.margin, self.far
         # Its bounding box in the rotated frame: with both rotation components
         # non-negative, u is extreme at the near and far corners and v at the
@@ -366,6 +463,7 @@ class DirectionSearch:
         v_min = rotation.cosine * h - rotation.sine * far
         v_max = rotation.cosine * far - rotation.sine * h
         self.initial = np.array([[u_min.lo, u_max.hi, v_min.lo, v_max.hi]])
+        _require_finite(self.initial)
 
     def tighten(self, boxes: Floats) -> Floats:
         """Enclose the bounding box of each box's intersection with the domain.
@@ -489,6 +587,7 @@ class DirectionSearch:
                 pending.append(batch[BATCH:])
                 batch = batch[:BATCH]
             tight = self.tighten(batch)
+            _require_finite(tight)
             tight = tight[(tight[:, 0] <= tight[:, 1]) & (tight[:, 2] <= tight[:, 3])]
             boxes += len(tight)
             if not len(tight):
@@ -515,7 +614,28 @@ class DirectionSearch:
             if settled.any():
                 least = int(low[settled].min())
                 lower = least if lower is None else min(lower, least)
-            children, stuck = self._split(tight[~settled])
+            unresolved = tight[~settled]
+            if boxes >= BOX_BUDGET and (len(unresolved) or pending):
+                # Abandon the direction rather than tile a seam to the floor. Zero is
+                # a sound lower bound for every unresolved box because no weight is
+                # negative; a sampled point below the threshold has refuted already.
+                exhausted: Literal["refuted", "undecided"] = (
+                    "refuted" if upper is not None and upper < self.scale else "undecided"
+                )
+                abandoned = sum(
+                    1 for value in stuck_bounds if threshold is None or value < threshold
+                )
+                return DirectionOutcome(
+                    self.label,
+                    exhausted,
+                    0,
+                    upper,
+                    witness,
+                    boxes,
+                    abandoned,
+                    budget_exhausted=True,
+                )
+            children, stuck = self._split(unresolved)
             if len(stuck):
                 stuck_bounds.extend(int(value) for value in self.lower_bound(stuck))
             if len(children):
@@ -630,7 +750,9 @@ def searches(certificate: Certificate, atoms: AtomData) -> Iterator[DirectionSea
     outer = Interval.of(certificate.outer_side)
     square = Interval.of(certificate.square_side)
     for rotation in doubled_net(certificate.half_tangents):
-        yield DirectionSearch(atoms, rotation, outer, square)
+        with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+            search = DirectionSearch(atoms, rotation, outer, square)
+        yield search
 
 
 def verify_by_intervals(
@@ -645,7 +767,7 @@ def verify_by_intervals(
     sub-net decides a weaker statement and is for controls, not for claims).
     """
     if any(t >= 1 for t in certificate.half_tangents):
-        raise ValueError(
+        raise IntervalInputError(
             "half-tangents must stay below 1 so the net stays inside a quarter turn"
         )
     atoms = AtomData.of(certificate)
@@ -658,7 +780,9 @@ def verify_by_intervals(
     for search in searches(certificate, atoms):
         if directions is not None and search.label not in directions:
             continue
-        outcomes.append(search.search(prune_at=None if enclose else atoms.scale))
+        with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+            outcome = search.search(prune_at=None if enclose else atoms.scale)
+        outcomes.append(outcome)
         if outcomes[-1].status == "refuted":
             break
     statuses = {o.status for o in outcomes}
@@ -689,7 +813,8 @@ def verify_by_intervals(
     )
     detail = (
         f"{len(outcomes)} directions, {sum(o.boxes for o in outcomes)} boxes, "
-        f"{sum(o.stalled for o in outcomes)} stalled"
+        f"{sum(o.stalled for o in outcomes)} stalled, "
+        f"{sum(o.budget_exhausted for o in outcomes)} budget-exhausted"
     )
     if worst is not None and worst.upper is not None:
         detail += f"; least point mass {Fraction(worst.upper, atoms.scale)} at {worst.label}"

@@ -1,0 +1,101 @@
+# Proof Card: s(11) ≥ 381/100
+
+**Eleven unit squares, free to rotate, do not fit in a square of side 3.81.** Write
+`s(n)` for the side of the smallest square holding `n` unit squares with pairwise
+disjoint interiors; then `s(11) ≥ 381/100 = 3.81`.
+
+## The argument
+
+The certificate is 1121 nonnegative weighted points in the container `[0, 381/100]²`,
+invariant under its eight symmetries and carrying total weight
+`434547/40000 = 10.863675`, which is below 11. It fixes a shrunken side `B = 9977/10000`
+and a net of 181 directions, at half-angle tangents `t_k = (207107/500000)·k/180` for
+`k = 0..180`; the net reaches π/4 and its largest half-gap tangent is
+`D = 207107/90000000`, so `B(1 + D) = 899996306539/900000000000 ≈ 0.999995896154 < 1`
+and every unit square, at any angle, contains a closed `B`-square at one of the net
+angles — angles past π/4 fold back onto the net by the symmetry the atoms carry.
+Every closed `B`-square at a net angle that lies inside the container covers weight at
+least `4001/4000 = 1.00025`, checked exactly over all 567131843 event cells its centre
+can reach, at all 181 directions.
+Eleven unit squares with disjoint interiors would therefore contain eleven pairwise
+disjoint such `B`-squares, carrying at least 11 between them.
+The atoms carry `10.863675`, so no such packing exists, and `s(11) ≥ 381/100`.
+
+## The card
+
+```text
+s(11) >= 381/100 = 3.81   eleven unit squares do not fit in a square of side 3.81
+
+  atoms          1121 nonnegative weighted points in [0, 381/100]^2, D4-invariant
+  total weight   434547/40000 = 10.863675   (< 11: Condition 2)
+  container side L = 381/100 = 3.81
+  shrink         B = 9977/10000 = 0.9977
+  net            181 directions, half-angle tangents t_k = (207107/500000) k / 180,
+                 k = 0..180; reaches pi/4, as t_K^2 + 2 t_K - 1 = 309449/250000000000
+                 >= 0 (Condition 3)
+  half-gap       D = 207107/90000000 ~ 0.0023011889, the largest of the net
+  containment    B(1 + D) = 899996306539/900000000000 ~ 0.999995896154 < 1
+                 (Condition 4: a unit square at ANY angle holds a B-square at a net
+                 angle; Condition 1, the D4 symmetry, folds angles past pi/4 back)
+  least cover    4001/4000 = 1.00025 >= 1, the least weight any B-square at a net
+                 angle inside the container covers, over 567131843 reachable event
+                 cells at 181 directions -- exact, not sampled (Condition 5)
+
+  so             11 disjoint unit squares would hold 11 disjoint B-squares of weight
+                 >= 1 each, i.e. weight >= 11, and the atoms carry only 10.863675.
+
+  bytes          packing/cases/n11_fractional_certificate/certificate.json
+                 sha256 b121edbd044b...  (`sha256sum certificate.json` for all 64)
+  check          python3 minimal_verify.py certificate.json   ->  VERIFIED, ~48 s
+                 any CPython 3.8+, standard library only, nothing else installed
+```
+
+The bytes on `main`:
+[certificate.json](https://github.com/jlevy/squares/blob/main/packing/cases/n11_fractional_certificate/certificate.json).
+The same claim in 279 characters, wrapped here and one line in fact:
+
+```text
+s(11) >= 3.81: eleven unit squares do not fit in a 3.81 square. Cert: 1121 weighted
+points, total 434547/40000 < 11; every 0.9977-square at one of 181 net angles inside
+covers >= 4001/4000. github.com/jlevy/squares, certificate.json sha256 b121edbd044b,
+python3 minimal_verify.py
+```
+
+## Verify it in one command
+
+```bash
+cd packing/cases/n11_fractional_certificate
+python3 minimal_verify.py certificate.json
+```
+
+It prints the SHA-256 it checked, one `PASS` line per condition with the numbers it
+decided on, and `VERIFIED s(11) >= 381/100`; the exit status is 0 only after that line.
+Any other outcome prints `REFUSED` with its reason and exits 1. Measured 2026-09-05,
+single-threaded on a four-core machine: 47.5 s under CPython 3.14 and 47.3 s under
+CPython 3.11 run with an empty environment.
+[`minimal_verify.py`](minimal_verify.py) imports nothing from this repository and holds
+the only copy of the digest; `sha256sum certificate.json` is the other way to get it.
+
+## What this establishes, and what it does not
+
+- **It proves the bound from those bytes.** The theorem is stated and proved in
+  [`certificate.py`](../../src/sqpack/fractional/certificate.py); the verifier decides
+  its five conditions on this file, in exact rational arithmetic, with no tolerance and
+  no sampled angle anywhere.
+- **The record, not this card, carries the result’s standing.**
+  [`results.yaml`](../../frontier/results.yaml) holds `T-018` at confirmation rung `C5`,
+  which `epistemics.md` defines as review-ready — a mapped, non-superseded review
+  artifact, here the adversarial review of PR 78 — and its novelty as
+  `apparently-novel`, a statement about what a search of the literature found, not a
+  claim of priority.
+- **It says nothing about an upper bound.** The case stays open: eleven unit squares do
+  pack into some larger square, and nothing here bears on how much larger.
+- **What a reader is still trusting**: that the theorem is right, that this verifier
+  implements it, and that CPython’s integers and `fractions` are.
+  Reading `minimal_verify.py` against the theorem is the check that closes the first
+  two; [`thirdparty/README.md`](thirdparty/README.md) writes the theorem out with its
+  proof for the rung below.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

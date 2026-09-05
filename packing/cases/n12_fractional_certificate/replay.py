@@ -1,12 +1,14 @@
-"""Load the retained n = 12 certificates and hand them to the exact verifier.
+"""Load any retained n = 12 certificate and hand it to the exact verifier.
 
-Two certificates are retained. `certificate.json` carries the bound the case
-holds, s(12) >= 77/20; `certificate-19-5.json` is the first rung the same
-instrument reached, kept because it is a smaller object (68 atoms against 113)
-and the one the discovery commit cites. The JSON carries exact rationals as
-strings, so a replay reconstructs the same object the generator proposed.
-Nothing here decides anything: the verdict comes from
-`sqpack.fractional.certificate.verify`, and this module only feeds it.
+Eight rungs are retained. `certificate.json` carries the bound the case holds,
+s(12) >= 99/25, on 2097 atoms of total mass 149987/12500;
+`certificate-79-20.json` is the rung immediately below it; and
+`certificate-19-5.json` is the first rung the same instrument reached, kept
+because it is a far smaller object (68 atoms against 2097) and the one the
+discovery commit cites. The JSON carries exact rationals as strings, so a replay
+reconstructs the same object the generator proposed. Nothing here decides
+anything: the verdict comes from `sqpack.fractional.certificate.verify`, and
+this module only feeds it.
 """
 
 from __future__ import annotations
@@ -23,10 +25,7 @@ PREVIOUS_RUNG_PATH = Path(__file__).with_name("certificate-79-20.json")
 FIRST_RUNG_PATH = Path(__file__).with_name("certificate-19-5.json")
 
 
-def load(path: Path = CERTIFICATE_PATH) -> Certificate:
-    """Rebuild the retained certificate exactly as it was accepted."""
-
-    record = json.loads(path.read_text())
+def _from_record(record: dict) -> Certificate:
     limit = Fraction(record["angle_limit"])
     steps = int(record["direction_steps"])
     return Certificate(
@@ -42,8 +41,22 @@ def load(path: Path = CERTIFICATE_PATH) -> Certificate:
     )
 
 
+def snapshot(path: Path = CERTIFICATE_PATH) -> tuple[Certificate, dict[str, str], bytes]:
+    """Parse one byte snapshot into the certificate and its declarations."""
+
+    data = path.read_bytes()
+    record = json.loads(data)
+    declarations = {key: str(record[key]) for key in ("claim", "total_mass", "least_cell_mass")}
+    return _from_record(record), declarations, data
+
+
+def load(path: Path = CERTIFICATE_PATH) -> Certificate:
+    """Rebuild the retained certificate exactly as it was accepted."""
+
+    return snapshot(path)[0]
+
+
 def declared(path: Path = CERTIFICATE_PATH) -> dict[str, str]:
     """What the record claims, for a replay to compare against."""
 
-    record = json.loads(path.read_text())
-    return {key: str(record[key]) for key in ("claim", "total_mass", "least_cell_mass")}
+    return snapshot(path)[1]

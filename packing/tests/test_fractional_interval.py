@@ -13,6 +13,7 @@ and confirms it is reported as undecided rather than accepted.
 from __future__ import annotations
 
 import random
+import warnings
 from fractions import Fraction
 
 import numpy as np
@@ -26,11 +27,15 @@ from cases.n17_fractional_certificate.replay import declared as declared_n17
 from cases.n17_fractional_certificate.replay import load as load_n17
 from cases.n20_fractional_certificate.replay import declared as declared_n20
 from cases.n20_fractional_certificate.replay import load as load_n20
+from sqpack.fractional import interval as interval_module
 from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.interval import (
+    BATCH,
+    MAX_INTERVAL_ATOMS,
     AtomData,
     DirectionSearch,
     Interval,
+    IntervalInputError,
     doubled_net,
     rotation_from_half_tangent,
     searches,
@@ -285,6 +290,7 @@ def test_the_393_100_certificate_is_accepted_on_the_full_doubled_net() -> None:
     certificate = load_n12(RETAINED_393_100)
     verdict = verify_by_intervals(certificate, enclose=True)
     assert verdict.accepted, verdict.failures
+    assert not any(o.budget_exhausted for o in verdict.directions)
     assert len(verdict.directions) == 361
     assert sum(outcome.stalled for outcome in verdict.directions) == 0
     assert verdict.enclosure == (Fraction(100003, 100000), Fraction(100003, 100000))
@@ -298,6 +304,7 @@ def test_the_live_n12_certificate_is_accepted_on_the_full_doubled_net() -> None:
     record = declared_n12()
     verdict = verify_by_intervals(certificate, enclose=True)
     assert verdict.accepted, verdict.failures
+    assert not any(o.budget_exhausted for o in verdict.directions)
     assert len(verdict.directions) == 361
     assert sum(outcome.stalled for outcome in verdict.directions) == 0
     assert record["claim"] == f"s(12) >= {certificate.bounded_side}"
@@ -312,6 +319,7 @@ def test_the_retained_n11_certificate_is_accepted_on_the_full_doubled_net() -> N
     certificate = load_n11()
     verdict = verify_by_intervals(certificate, enclose=True)
     assert verdict.accepted, verdict.failures
+    assert not any(o.budget_exhausted for o in verdict.directions)
     assert len(verdict.directions) == 361
     assert sum(outcome.stalled for outcome in verdict.directions) == 0
     assert verdict.enclosure == (Fraction(4001, 4000), Fraction(4001, 4000))
@@ -329,6 +337,7 @@ def test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net() -> N
     certificate = load_n17()
     verdict = verify_by_intervals(certificate, enclose=True)
     assert verdict.accepted, verdict.failures
+    assert not any(o.budget_exhausted for o in verdict.directions)
     assert len(verdict.directions) == 361
     assert sum(outcome.stalled for outcome in verdict.directions) == 0
     enclosure = verdict.enclosure
@@ -351,6 +360,7 @@ def test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net() -> N
     certificate = load_n20()
     verdict = verify_by_intervals(certificate, enclose=True)
     assert verdict.accepted, verdict.failures
+    assert not any(o.budget_exhausted for o in verdict.directions)
     assert len(verdict.directions) == 361
     assert sum(outcome.stalled for outcome in verdict.directions) == 0
     enclosure = verdict.enclosure
@@ -386,6 +396,7 @@ def test_massaccesi_n17_reproduces_the_published_bound_on_the_sub_net() -> None:
 def test_massaccesi_n17_reproduces_the_published_bound_on_the_full_doubled_net() -> None:
     verdict = verify_by_intervals(retained_certificate(), enclose=True)
     assert verdict.accepted, verdict.failures
+    assert not any(o.budget_exhausted for o in verdict.directions)
     assert len(verdict.directions) == 361
     assert verdict.enclosure == (Fraction(1), Fraction(1))
 
@@ -426,6 +437,119 @@ def test_the_enclosure_contains_the_exact_minimum_direction_by_direction() -> No
 
 
 # --- refusals -------------------------------------------------------------------
+
+
+def test_a_scaled_mass_total_that_would_wrap_int64_is_refused_before_numpy_sees_it() -> None:
+    """F7 of PR 78's adversarial review: the total was an ``int64`` sum of the masses.
+
+    Two masses of ``2^62`` fit ``int64`` on their own and their sum does not; summed by
+    NumPy the total wrapped negative and would have passed ``Condition 2`` for the wrong
+    reason. The total is now summed in Python integers and refused at ``2^62``, before
+    any array exists, which is the discipline the exact sweep applies at ``2^60``.
+    """
+    certificate = Certificate(
+        n=1,
+        outer_side=Fraction(11, 10),
+        square_side=Fraction(3, 5),
+        atoms=(
+            Atom("centre", Fraction(11, 20), Fraction(11, 20), Fraction(1)),
+            Atom("near", Fraction(0), Fraction(0), Fraction(2**62)),
+            Atom("far", Fraction(11, 10), Fraction(11, 10), Fraction(2**62)),
+        ),
+        half_tangents=(Fraction(0), Fraction(1, 2)),
+    )
+    assert certificate.total_mass == 2**63 + 1
+
+    with pytest.raises(IntervalInputError, match="total scaled atom mass"):
+        AtomData.of(certificate)
+    with pytest.raises(IntervalInputError, match="total scaled atom mass"):
+        verify_by_intervals(certificate, directions=("0",))
+
+
+def test_arithmetic_that_leaves_the_finite_floats_is_a_typed_refusal_not_a_warning() -> None:
+    """F29: a container side near the float ceiling used to raise NumPy overflow warnings
+    and carry infinities into the search. Infinity encloses nothing, so the run is
+    refused, typed, and quiet -- a refusal is not a verdict.
+    """
+    outer = 10**308
+    certificate = Certificate(
+        n=(2 * outer) ** 2,
+        outer_side=Fraction(outer),
+        square_side=Fraction(1, 2),
+        atoms=(),
+        half_tangents=(Fraction(0), Fraction(207107, 500000)),
+    )
+
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        with pytest.raises(IntervalInputError, match="finite float"):
+            verify_by_intervals(certificate, enclose=True, directions=("1",))
+    assert not caught
+
+
+def test_an_exact_seam_exhausts_the_box_budget_and_is_never_accepted(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Regions of side 1/2 on a grid of spacing 1/2 tile the upright domain.
+
+    Every point is covered by mass exactly 1, but each region's leave-edge is another's
+    enter-edge to the digit, and no enclosure can close that seam: without a cap the
+    search bisects it to the resolution floor along its whole length (F10 of PR 78's
+    adversarial review). The direction must exhaust its work budget and say so, with a
+    lower bound of zero and no acceptance. The budget is lowered here so the control
+    runs in a second; the production value is held by the full-net decisions, which
+    assert no direction exhausts it.
+    """
+    budget = 20_000
+    monkeypatch.setattr(interval_module, "BOX_BUDGET", budget)
+    verdict = verify_by_intervals(_grid_certificate(Fraction(1, 2)), directions=("0",))
+    assert not verdict.accepted
+    outcome = verdict.directions[0]
+    assert outcome.status == "undecided"
+    assert outcome.budget_exhausted
+    assert budget <= outcome.boxes <= budget + BATCH
+    assert outcome.lower == 0
+    assert outcome.upper == 1
+    assert "1 budget-exhausted" in verdict.conditions[-1].detail
+
+
+def test_a_restricted_direction_can_still_refute_condition_5() -> None:
+    verdict = verify_by_intervals(_grid_certificate(Fraction(1, 10)), directions=("0",))
+    assert verdict.failures == (CONDITION5,)
+    assert verdict.directions[0].status == "refuted"
+
+
+def test_enclosure_mode_refutes_an_exact_minimum_below_one() -> None:
+    """Enclosure mode pins the least mass and then asks whether it reaches one (D-435).
+
+    Regions of side 1/10 leave uncovered centres, so the enclosed minimum is exactly
+    zero; the direction resolves every box against that minimum and the verdict
+    refuses on the value, which is where the D-435 fix put the question.
+    """
+    verdict = verify_by_intervals(_grid_certificate(Fraction(1, 10)), enclose=True)
+    assert not verdict.accepted
+    assert verdict.failures == (CONDITION5,)
+    assert verdict.enclosure == (Fraction(0), Fraction(0))
+    assert all(o.lower == 0 for o in verdict.directions)
+
+
+def test_more_atoms_than_the_mask_cap_are_refused_before_any_allocation() -> None:
+    certificate = load_n11()
+    copies = MAX_INTERVAL_ATOMS // len(certificate.atoms) + 1
+    oversized = Certificate(
+        n=certificate.n,
+        outer_side=certificate.outer_side,
+        square_side=certificate.square_side,
+        atoms=tuple(
+            Atom(f"{atom.label}:{copy}", atom.x, atom.y, atom.weight / copies)
+            for copy in range(copies)
+            for atom in certificate.atoms
+        ),
+        half_tangents=certificate.half_tangents,
+    )
+    assert len(oversized.atoms) > MAX_INTERVAL_ATOMS
+    with pytest.raises(IntervalInputError, match="supports at most"):
+        AtomData.of(oversized)
 
 
 def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> None:
@@ -665,6 +789,7 @@ def test_perturbing_the_coincidence_away_lets_the_same_search_certify() -> None:
     outcome = verdict.directions[0]
     assert outcome.status == "certified"
     assert outcome.stalled == 0
+    assert not outcome.budget_exhausted
     # One direction certified is the control's answer; the verdict stays
     # undecided, since a sample decides nothing about the other 360 directions.
     assert not verdict.accepted

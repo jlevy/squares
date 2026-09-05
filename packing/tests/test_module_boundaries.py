@@ -316,6 +316,12 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
         # 1800 s budget. Re-pricing them into the fast tier is BC-195's call, with
         # the measurement now in hand. Every one has a fast counterpart in the same
         # file that pins what its record claims, or decides it on a coarse net.
+        # The witness walk: all 181 directions of all four retained certificates on the
+        # integer route, serially, checking the reported centre is admissible (D-449).
+        # 282 s on four cores on 2026-09-05, with the push tier running beside it.
+        "test_fractional_sweep_integer.py": {
+            "test_every_reported_witness_is_admissible_on_every_retained_certificate",
+        },
         "test_fractional_certificate.py": {
             "test_the_full_retained_certificate_is_accepted",
             "test_the_retained_n12_certificate_is_accepted",
@@ -338,8 +344,34 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
         # The retention gate's own positive control: both routes on a retained rung,
         # which is the exact sweep's cost plus the interval route's. Its refusals run
         # in the fast tier beside it, since a refusal is decided before either sweep.
+        # The quick-mode control runs the real interval route on the 19/5 rung: 10.6 s on
+        # four cores on 2026-09-05, measured when PR 80's gate tests were ported and it
+        # was the one unmarked test that cost the fast tier anything. Its stubbed twin
+        # holds the same contract in the fast tier.
         "test_decide_certificate.py": {
             "test_a_retained_rung_passes_both_routes_and_they_agree",
+            "test_quick_mode_says_it_cannot_retain",
+        },
+        # The standalone third-party package deciding its own shipped 19/5 certificate
+        # through its own verifier: 425 atoms, 181 directions and 90,546,593 cells in one
+        # pure-Python process, with no numpy, no parallelism and two direct-summation
+        # audits per direction, because the package's whole point is that it imports
+        # nothing. Measured 2026-09-05 at 22.7 s on an idle four-core box, CPython 3.14.
+        # Everything else in that file -- the loader refusals, the two degenerate
+        # domains, the declaration mismatch and the bounded negative control -- runs in
+        # the fast tier beside it in 0.3 s.
+        "test_n11_thirdparty_verify.py": {
+            "test_the_package_decides_its_own_shipped_certificate",
+        },
+        # The standalone verifier's own full decision of the retained n = 11 bytes,
+        # run as a subprocess. Measured 2026-09-05 at 49.4 s for the node, 47.5 s of it
+        # the verifier itself: 181 directions over 567,131,843 reachable cells, in
+        # pure-Fraction and integer arithmetic with no numpy and no parallelism to
+        # reach for. That is the price of a decision that imports nothing from this
+        # repository. Its refusals run in the fast tier beside it, since a refusal is
+        # decided before the sweep.
+        "test_minimal_verify.py": {
+            "test_the_retained_bytes_are_verified_on_the_full_net",
         },
         "test_exact_jets.py": {
             "test_n5_wall_and_contact_gradients_match_authoritative_source_rows",

@@ -83,6 +83,17 @@ DECLARED_CONSUMERS = {
     "packing/devtools/check_golden_basins.py": (
         "reads the ceiling as an upper limit on a basin side"
     ),
+    "packing/devtools/check_synopsis.py": (
+        "reads the n = 11 case's ceiling from its front matter only to hold the synopsis's "
+        "fact table to it: the table's upper row must be the record's own digits and the gap "
+        "row their difference (D-452). It takes the field to mean exactly what the front "
+        "matter means and asserts nothing about s(n)"
+    ),
+    "packing/tests/test_synopsis_handoff.py": (
+        "names the field in a fixture standing in for the n = 11 front matter, so that the "
+        "fact-table check can be driven on doctored tables; it asserts nothing about the "
+        "bound's value"
+    ),
     "packing/devtools/check_case_prose.py": (
         "reads the field as the ceiling the case's own front matter declares, only to "
         "hold that case's prose to it: a body that quotes an upper bound must quote the "

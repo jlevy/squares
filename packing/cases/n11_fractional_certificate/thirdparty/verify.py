@@ -51,6 +51,15 @@ from operator import add
 RATIONAL = re.compile(r"^-?[0-9]+(/[1-9][0-9]*)?$")
 
 
+class CertificateFormatError(ValueError):
+    """The JSON cannot be interpreted as an exact certificate record.
+
+    One type for every way a file can fail to be a certificate at all, so the
+    command line can promise a labelled refusal instead of a traceback without
+    catching exception types it never meant to catch.
+    """
+
+
 # ---------------------------------------------------------------------------
 # Loading. The JSON carries exact rationals as strings ("p/q" or "p"); the
 # regex refuses anything else, so a decimal or a float cannot slip in and be
@@ -59,49 +68,123 @@ RATIONAL = re.compile(r"^-?[0-9]+(/[1-9][0-9]*)?$")
 
 
 def rational(text):
-    if not isinstance(text, str) or not RATIONAL.match(text):
+    # fullmatch, not match: `$` also matches just before a trailing newline,
+    # so `match` would accept "1/2\n" and Fraction would then read it happily.
+    if not isinstance(text, str) or not RATIONAL.fullmatch(text):
         raise ValueError("not an exact rational string: %r" % (text,))
     return Fraction(text)
 
 
-def whole(value, field):
+def object_without_duplicate_keys(pairs):
+    """Build a JSON object while refusing duplicate member names.
+
+    JSON permits a repeated key and Python's decoder keeps the last one, so a
+    file could carry two values for `n` and be read as whichever was written
+    second. A checker must not have a hidden second answer.
+    """
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise CertificateFormatError("duplicate JSON object key %r" % key)
+        result[key] = value
+    return result
+
+
+def reject_inexact_json_number(text):
+    """Refuse JSON decimals and non-finite constants before they become floats."""
+    raise CertificateFormatError("inexact JSON number %r; use an exact rational string" % text)
+
+
+def required(record, key):
+    if key not in record:
+        raise CertificateFormatError("missing required field %r" % key)
+    return record[key]
+
+
+def exact_integer(record, key):
     """`int()` truncates, and a truncated n or K would decide a different theorem.
 
-    A file saying `"n": 11.9` must be refused, not quietly read as eleven.
+    A file saying `"n": 11.9` must be refused, not quietly read as eleven, and
+    bool is a subclass of int, so `isinstance(value, int)` is deliberately not
+    the test used here: `true` is not a direction count.
     """
-    number = rational(value) if isinstance(value, str) else value
-    if number != int(number):
-        raise ValueError("%s must be a whole number, got %r" % (field, value))
-    return int(number)
+    value = required(record, key)
+    if type(value) is not int:
+        raise CertificateFormatError("field %r must be a JSON integer, got %r" % (key, value))
+    return value
 
 
-def atom_of(atom, index):
-    """An atom is exactly three exact rationals: x, y and weight.
-
-    Checked here rather than where it is unpacked, so a short row is refused by
-    name instead of raising from inside a condition.
-    """
-    if not isinstance(atom, (list, tuple)) or len(atom) != 3:
-        raise ValueError("atom %d must be three rationals, got %r" % (index, atom))
-    return tuple(rational(value) for value in atom)
+def exact_rational(record, key):
+    value = required(record, key)
+    try:
+        return rational(value)
+    except ValueError as error:
+        raise CertificateFormatError("field %r: %s" % (key, error)) from None
 
 
 def load(path):
-    with open(path) as handle:
-        record = json.load(handle)
-    steps = whole(record["direction_steps"], "direction_steps")
+    try:
+        with open(path, encoding="utf-8") as handle:
+            record = json.load(
+                handle,
+                object_pairs_hook=object_without_duplicate_keys,
+                parse_float=reject_inexact_json_number,
+                parse_constant=reject_inexact_json_number,
+            )
+    except CertificateFormatError:
+        raise
+    except (UnicodeError, ValueError, RecursionError) as error:
+        raise CertificateFormatError(str(error)) from None
+    if not isinstance(record, dict):
+        raise CertificateFormatError("top-level JSON value must be an object")
+
+    n = exact_integer(record, "n")
+    steps = exact_integer(record, "direction_steps")
     if steps < 1:
-        raise ValueError("direction_steps must be at least 1, got %r" % (steps,))
-    limit = rational(record["angle_limit"])
+        raise CertificateFormatError("field 'direction_steps' must be at least 1")
+    limit = exact_rational(record, "angle_limit")
+
+    atoms_record = required(record, "atoms")
+    if not isinstance(atoms_record, list):
+        raise CertificateFormatError("field 'atoms' must be a JSON array")
+    atoms = []
+    for index, atom in enumerate(atoms_record):
+        # The row's shape is settled before any atom[j] access, so a short row
+        # is refused by name here rather than escaping as an IndexError from
+        # inside a condition.
+        if not isinstance(atom, list) or len(atom) != 3:
+            raise CertificateFormatError("atoms[%d] must be a three-element JSON array" % index)
+        parsed = []
+        for position, value in enumerate(atom):
+            try:
+                parsed.append(rational(value))
+            except ValueError as error:
+                raise CertificateFormatError("atoms[%d][%d]: %s"
+                                            % (index, position, error)) from None
+        atoms.append(tuple(parsed))
+
+    # The bookkeeping fields are optional, but a file that declares one must
+    # write it in the exact form everything else is written in; `decide`
+    # recomputes it and refuses a disagreement.
+    for key in ("total_mass", "least_cell_mass"):
+        if key in record:
+            try:
+                rational(record[key])
+            except ValueError as error:
+                raise CertificateFormatError("field %r: %s" % (key, error)) from None
+    for key in ("id", "claim"):
+        if key in record and not isinstance(record[key], str):
+            raise CertificateFormatError("field %r must be a string" % key)
+
     return {
-        "id": str(record.get("id", "?")),
-        "n": whole(record["n"], "n"),
-        "L": rational(record["outer_side"]),
-        "B": rational(record["square_side"]),
+        "id": record.get("id", "?"),
+        "n": n,
+        "L": exact_rational(record, "outer_side"),
+        "B": exact_rational(record, "square_side"),
         # The net is fixed by two numbers, T and K: t_k = T k / K. That is
         # Massaccesi's parametrisation, and it keeps every direction rational.
         "tangents": [limit * k / steps for k in range(steps + 1)],
-        "atoms": [atom_of(atom, index) for index, atom in enumerate(record["atoms"])],
+        "atoms": atoms,
         "declared": record,
     }
 
@@ -121,10 +204,14 @@ def preconditions(cert):
     # The counting step of the proof needs every atom to contribute at most
     # its own weight to at most one square; a negative weight would let a
     # square gain mass by covering less.
-    negative = [atom for atom in atoms if atom[2] < 0]
+    # `load` refuses a malformed row, but `decide` is also called on objects
+    # built in code, so P2 must not index a row whose shape it has not checked.
+    triples = all(isinstance(atom, (list, tuple)) and len(atom) == 3 for atom in atoms)
+    negative = [atom for atom in atoms if atom[2] < 0] if triples else []
     checks.append(("P2 every weight is non-negative",
-                   "%d atoms, %d negative" % (len(atoms), len(negative)),
-                   not negative and len(atoms) > 0))
+                   "%d atoms, %d negative%s"
+                   % (len(atoms), len(negative), "" if triples else " (malformed rows)"),
+                   triples and not negative and len(atoms) > 0))
     # The net must start at angle 0 and increase, so that every orientation
     # in [0, pi/4] lies between two adjacent net angles (with Condition 3 closing the
     # top). Each atom triple must have exactly three entries.
@@ -134,7 +221,7 @@ def preconditions(cert):
                    tangents[0] == 0 and increasing and len(tangents) >= 2))
     checks.append(("P4 every atom is an (x, y, weight) triple",
                    "%d atoms" % len(atoms),
-                   all(len(atom) == 3 for atom in atoms)))
+                   triples))
     # The file's own statement of what it proves must be the theorem's
     # conclusion for its n and L, so a reader cannot be misled by the label.
     expected = "s(%d) >= %s" % (n, L)
@@ -323,9 +410,44 @@ def least_covered_weight(cert, c, s, integer_weights, scale, audit=0, rng=None):
     The witness is a point of the container at which a B-square at this
     direction fits and covers exactly the minimum; its weight is recomputed
     by direct summation before it is returned.
+
+    If no B-square at this direction fits inside the container, there is
+    nothing to minimise over: the minimum and the witness are both None and
+    the caller reports Condition 5 vacuously satisfied here. See the note on
+    the empty case below for why that is sound rather than convenient.
     """
     L, B, atoms = cert["L"], cert["B"], cert["atoms"]
     half = B / 2
+
+    # The feasible centres in original coordinates are [h, L-h]^2, where 2h is
+    # the width of the B-square's bounding box at this direction. The open-cell
+    # argument below assumes that set has an interior, so its two degenerate
+    # shapes are settled first.
+    #
+    # 2h > L: the set is empty and Condition 5 here quantifies over nothing, so
+    # it holds vacuously. That is an acceptance, and it is worth saying why it
+    # is sound and not merely convenient. Condition 5 is a hypothesis of the
+    # theorem, and the theorem's proof only ever applies it to a B-square that
+    # it has already placed strictly inside a unit square inside the container;
+    # if no B-square at this direction fits in the container at all, then no
+    # unit square containing one fits either, and the proof never reaches this
+    # direction. Vacuous truth of the hypothesis is therefore the honest
+    # reading, and the resulting bound is still proved. The cost of saying so
+    # is real all the same: this checker's value is that it refuses what it
+    # cannot handle, and a direction it accepts on vacuity is a direction where
+    # it decided nothing. `condition_5` counts those and says how many, and a
+    # certificate whose every direction is vacuous is reported as such rather
+    # than as a decision.
+    #
+    # 2h == L: exactly one admissible centre. Closed-square containment must be
+    # evaluated at that point directly, because the open-cell argument has no
+    # open cell to reason about.
+    h = B * (abs(c) + abs(s)) / 2
+    if 2 * h > L:
+        return None, None, 0
+    if 2 * h == L:
+        centre = (L / 2, L / 2)
+        return covered_weight_at(cert, c, s, *centre), centre, 1
 
     us = [c * x + s * y for x, y, _ in atoms]
     vs = [-s * x + c * y for x, y, _ in atoms]
@@ -354,11 +476,8 @@ def least_covered_weight(cert, c, s, integer_weights, scale, audit=0, rng=None):
     for i in range(1, rows):
         grid[i] = list(map(add, grid[i - 1], grid[i]))
 
-    # The admissible centres, as a polygon in (U, V) coordinates.
-    h = B * (abs(c) + abs(s)) / 2
-    if 2 * h >= L:
-        raise ValueError("no B-square at this direction fits inside the container "
-                         "with room to spare; this verifier does not handle that case")
+    # The admissible centres, as a polygon in (U, V) coordinates. Both
+    # degenerate shapes were returned above, so this polygon has an interior.
     corners = [(h, h), (L - h, h), (L - h, L - h), (h, L - h)]
     F = [(c * x + s * y, -s * x + c * y) for x, y in corners]
     u_min, u_max = min(u for u, _ in F), max(u for u, _ in F)
@@ -421,22 +540,39 @@ def condition_5(cert, audit=0, verbose=False, log=print):
         scale = scale * w.denominator // gcd(scale, w.denominator)
     integer_weights = [int(w * scale) for w in weights]
     rng = random.Random(0)
-    worst, total_cells, started = None, 0, time.time()
+    worst, total_cells, vacuous, started = None, 0, 0, time.time()
     K = len(cert["tangents"]) - 1
     for k, t in enumerate(cert["tangents"]):
         c, s = direction(t)
         minimum, centre, cells = least_covered_weight(cert, c, s, integer_weights, scale, audit, rng)
         total_cells += cells
+        if minimum is None:
+            # No B-square fits here, so there is nothing to minimise over.
+            vacuous += 1
+            if verbose or k % 30 == 0 or k == K:
+                log("    direction %3d/%d  t = %-18s no admissible placement;"
+                    " nothing decided  running least %s"
+                    % (k, K, t, "-" if worst is None else worst[0]))
+            continue
         if worst is None or minimum < worst[0]:
             worst = (minimum, k, t, centre)
         if verbose or k % 30 == 0 or k == K:
             log("    direction %3d/%d  t = %-18s cells %7d  least weight %s = %.6f  running least %s"
                 % (k, K, t, cells, minimum, float(minimum), worst[0]))
+    if worst is None:
+        # Every direction was vacuous. The condition holds, and the honest
+        # report is that nothing was decided rather than that something passed.
+        detail = ("no admissible placement at any of %d directions, so the condition is"
+                  " vacuous and nothing was decided; %.1f s"
+                  % (K + 1, time.time() - started))
+        return ("Condition 5 every admissible placement covers weight >= 1", detail, True), None
     minimum, k, t, (X, Y) = worst
     detail = ("least covered weight %s = %.6f at direction %d (t = %s), centre (%s, %s) ~ (%.6f, %.6f); "
               "%d cells over %d directions in %.1f s"
               % (minimum, float(minimum), k, t, X, Y, float(X), float(Y),
                  total_cells, K + 1, time.time() - started))
+    if vacuous:
+        detail += "; %d of those directions admitted no placement and decided nothing" % vacuous
     return ("Condition 5 every admissible placement covers weight >= 1", detail, minimum >= 1), worst
 
 
@@ -485,22 +621,37 @@ def decide(cert, audit=0, verbose=False, log=print):
     log("  Condition 5: sweeping every net direction")
     (name, detail, holds), worst = condition_5(cert, audit, verbose, log)
     record(name, detail, holds)
-    minimum, k, t, (X, Y) = worst
-    results["minimum"] = minimum
-    results["witness"] = (k, t, X, Y)
-    # The record's own bookkeeping, compared but not decisive: the theorem
-    # does not care what the file says its numbers are.
+    if worst is None:
+        minimum = None
+        results["minimum"] = None
+        results["witness"] = None
+    else:
+        minimum, k, t, (X, Y) = worst
+        results["minimum"] = minimum
+        results["witness"] = (k, t, X, Y)
+    # The theorem does not use the record's own bookkeeping, but an artifact
+    # that declares a value has to agree with its replay: a file whose stated
+    # least covered mass is not the one recomputed here is wrong about itself,
+    # whatever the conditions say. These failures are kept in their own list so
+    # that the mathematical verdict and the record-integrity verdict stay
+    # legible, and both are counted before anything is accepted.
+    declaration_failures = []
     total = sum((w for _, _, w in cert["atoms"]), Fraction(0))
     for key, value in (("total_mass", total), ("least_cell_mass", minimum)):
         if key in declared:
-            agrees = rational(declared[key]) == value
+            if value is None:
+                agrees, replay = False, "nothing (no direction admitted a placement)"
+            else:
+                agrees, replay = rational(declared[key]) == value, str(value)
             log("  %s  declared %s %s %s recomputed %s"
-                % ("info" if agrees else "NOTE", key, declared[key],
-                   "==" if agrees else "!=", value))
+                % ("info" if agrees else "FAIL", key, declared[key],
+                   "==" if agrees else "!=", replay))
+            if not agrees:
+                declaration_failures.append("declared %s disagrees with the replay" % key)
     inside = all(0 <= x <= cert["L"] and 0 <= y <= cert["L"] for x, y, _ in cert["atoms"])
     log("  info  all atoms lie in [0, L]^2: %s (not a condition; an outside atom only wastes weight)"
         % ("yes" if inside else "no"))
-    failures = [name for name, holds in verdicts if not holds]
+    failures = [name for name, holds in verdicts if not holds] + declaration_failures
     if failures:
         log("REFUSED: %s" % ", ".join(failures))
         return False, results
@@ -517,7 +668,17 @@ def main(argv):
     while rest:
         flag = rest.pop(0)
         if flag == "--audit":
-            audit = int(rest.pop(0))
+            if not rest:
+                print("--audit requires a non-negative integer")
+                return 2
+            try:
+                audit = int(rest.pop(0))
+            except ValueError:
+                print("--audit requires a non-negative integer")
+                return 2
+            if audit < 0:
+                print("--audit requires a non-negative integer")
+                return 2
         elif flag == "--verbose":
             verbose = True
         else:
@@ -530,12 +691,12 @@ def main(argv):
         # Not a refusal: the file was never read. Usage status, not verdict status.
         print("could not open %s: %s" % (argv[1], error))
         return 2
-    except (ValueError, TypeError, KeyError, IndexError, ArithmeticError) as error:
-        # A malformed rational, a zero `direction_steps` and a short atom row all
-        # arrive here. This file promises a labelled refusal for any form other than
-        # the one the theorem assumes, and a traceback is not one.
-        print("REFUSED: not a certificate of the expected shape: %s: %s"
-              % (type(error).__name__, error))
+    except CertificateFormatError as error:
+        # A malformed rational, a zero `direction_steps`, a duplicate key and a
+        # short atom row all arrive here, and all as one type. This file promises
+        # a labelled refusal for any form other than the one the theorem assumes,
+        # and a traceback is not one.
+        print("REFUSED: not a certificate of the expected shape: %s" % error)
         return 1
     accepted, _ = decide(cert, audit=audit, verbose=verbose)
     return 0 if accepted else 1

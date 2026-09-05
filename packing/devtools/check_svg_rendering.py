@@ -675,8 +675,11 @@ def run_animation_controls() -> dict[str, bool]:
 
 def _rendered_fixtures() -> dict[str, str]:
     from devtools.render_packing_gallery import render_gallery
+    from devtools.render_t018_proof_visual import ARTIFACT, render_visual
 
-    return render_gallery()
+    rendered = render_gallery()
+    rendered[ARTIFACT.name] = render_visual()
+    return rendered
 
 
 def run_determinism_matrix() -> dict[str, bool]:
@@ -727,6 +730,7 @@ def run_gallery_controls() -> dict[str, bool]:
     from devtools.map_prospective_sources import COVERAGE_OUTPUT
     from devtools.packing_render_adapters import frame_from_kingbird29
     from devtools.render_packing_gallery import build_gallery_manifest
+    from devtools.render_t018_proof_visual import ARTIFACT as T018_PROOF_VISUAL
     from sqpack.render import RenderSpec
     from sqpack.render.color import assign_square_colors
 
@@ -800,6 +804,7 @@ def run_gallery_controls() -> dict[str, bool]:
     document_svg_artifacts = gallery_artifacts | {
         SUMMARY_SVG.resolve(),
         COVERAGE_OUTPUT.resolve(),
+        T018_PROOF_VISUAL.resolve(),
     }
     comparison_artifact = by_id["n10-source-return-comparison"]["artifact"]
     comparison_embeds = {
@@ -902,12 +907,16 @@ def main() -> int:
         controls |= run_gallery_controls()
         if args.update:
             from devtools.render_packing_gallery import write_gallery
+            from devtools.render_t018_proof_visual import write_artifact
 
             write_gallery()
+            write_artifact()
         elif args.check:
             from devtools.render_packing_gallery import check_gallery
+            from devtools.render_t018_proof_visual import check_artifact
 
             check_gallery()
+            check_artifact()
     failed = [name for name, passed in controls.items() if not passed]
     if failed:
         raise ValueError(f"SVG rendering controls failed: {failed}")

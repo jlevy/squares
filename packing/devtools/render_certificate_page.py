@@ -43,7 +43,7 @@ from typing import TypedDict
 
 from sqpack.fractional.certificate import (
     Certificate,
-    conditions_without_sweep,
+    closed_form_conditions,
     d4_images,
     verify,
 )
@@ -593,7 +593,7 @@ def derive(path: Path, *, full_sweep: bool = False) -> Facts:
     declared least covered mass from below. `--verify-condition-5` runs the whole sweep.
     """
     certificate, record = load_certificate(path)
-    refused = [report for report in conditions_without_sweep(certificate) if not report.holds]
+    refused = [report for report in closed_form_conditions(certificate) if not report.holds]
     if refused:
         raise SystemExit(
             f"{path.name} fails {', '.join(r.name for r in refused)}; refusing to render"

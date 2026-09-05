@@ -288,7 +288,45 @@ def test_a_union_of_grids_is_closed_under_d4_and_holds_both_grids() -> None:
 
 
 def test_generate_adaptive_produces_a_certificate_the_exact_verifier_accepts() -> None:
-    """End to end on a bound nobody doubts: s(5) >= 11/5, well under 2.7071."""
+    """End to end on a bound nobody doubts: s(5) >= 11/5, well under 2.7071.
+
+    ``decide=True`` is asked for explicitly: the default no longer decides (below).
+    """
+    certificate, log = colgen.generate_adaptive(
+        5,
+        Fraction(11, 5),
+        Fraction(24, 25),
+        grid_counts=(9,),
+        inset=Fraction(1, 2),
+        angle_limit=Fraction(207107, 500000),
+        direction_steps=12,
+        scale=2000,
+        column_rounds=2,
+        rows_per_direction=2,
+        decide=True,
+    )
+    assert certificate is not None, log.stopped
+    assert log.ceiling is not None
+    assert log.accepted, log.failures
+    verdict = verify(certificate)
+    assert verdict.accepted, verdict.failures
+    assert certificate.total_mass < 5
+
+
+def test_generate_adaptive_returns_before_deciding_so_the_candidate_can_be_frozen(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The default is freeze-then-decide: the generator hands back bytes-to-be, undecided.
+
+    D-441 lost a candidate to a kill between its in-memory decision and its write; the
+    retention boundary is ``devtools.decide_certificate`` on frozen bytes, by both
+    routes, so the default must not decide anything a caller could mistake for that.
+    """
+
+    def unexpected_in_memory_decision(_certificate: object) -> None:
+        raise AssertionError("the default decided a candidate before its bytes were frozen")
+
+    monkeypatch.setattr(colgen, "verify", unexpected_in_memory_decision)
     certificate, log = colgen.generate_adaptive(
         5,
         Fraction(11, 5),
@@ -302,10 +340,8 @@ def test_generate_adaptive_produces_a_certificate_the_exact_verifier_accepts() -
         rows_per_direction=2,
     )
     assert certificate is not None, log.stopped
-    assert log.ceiling is not None
-    verdict = verify(certificate)
-    assert verdict.accepted, verdict.failures
-    assert certificate.total_mass < 5
+    assert log.accepted is False
+    assert log.least_cell_mass is None
 
 
 def _centred(
