@@ -13,6 +13,7 @@ and confirms it is reported as undecided rather than accepted.
 from __future__ import annotations
 
 import random
+import warnings
 from fractions import Fraction
 
 import numpy as np
@@ -31,6 +32,7 @@ from sqpack.fractional.interval import (
     AtomData,
     DirectionSearch,
     Interval,
+    IntervalInputError,
     doubled_net,
     rotation_from_half_tangent,
     searches,
@@ -426,6 +428,54 @@ def test_the_enclosure_contains_the_exact_minimum_direction_by_direction() -> No
 
 
 # --- refusals -------------------------------------------------------------------
+
+
+def test_a_scaled_mass_total_that_would_wrap_int64_is_refused_before_numpy_sees_it() -> None:
+    """F7 of PR 78's adversarial review: the total was an ``int64`` sum of the masses.
+
+    Two masses of ``2^62`` fit ``int64`` on their own and their sum does not; summed by
+    NumPy the total wrapped negative and would have passed ``Condition 2`` for the wrong
+    reason. The total is now summed in Python integers and refused at ``2^62``, before
+    any array exists, which is the discipline the exact sweep applies at ``2^60``.
+    """
+    certificate = Certificate(
+        n=1,
+        outer_side=Fraction(11, 10),
+        square_side=Fraction(3, 5),
+        atoms=(
+            Atom("centre", Fraction(11, 20), Fraction(11, 20), Fraction(1)),
+            Atom("near", Fraction(0), Fraction(0), Fraction(2**62)),
+            Atom("far", Fraction(11, 10), Fraction(11, 10), Fraction(2**62)),
+        ),
+        half_tangents=(Fraction(0), Fraction(1, 2)),
+    )
+    assert certificate.total_mass == 2**63 + 1
+
+    with pytest.raises(IntervalInputError, match="total scaled atom mass"):
+        AtomData.of(certificate)
+    with pytest.raises(IntervalInputError, match="total scaled atom mass"):
+        verify_by_intervals(certificate, directions=("0",))
+
+
+def test_arithmetic_that_leaves_the_finite_floats_is_a_typed_refusal_not_a_warning() -> None:
+    """F29: a container side near the float ceiling used to raise NumPy overflow warnings
+    and carry infinities into the search. Infinity encloses nothing, so the run is
+    refused, typed, and quiet -- a refusal is not a verdict.
+    """
+    outer = 10**308
+    certificate = Certificate(
+        n=(2 * outer) ** 2,
+        outer_side=Fraction(outer),
+        square_side=Fraction(1, 2),
+        atoms=(),
+        half_tangents=(Fraction(0), Fraction(207107, 500000)),
+    )
+
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        with pytest.raises(IntervalInputError, match="finite float"):
+            verify_by_intervals(certificate, enclose=True, directions=("1",))
+    assert not caught
 
 
 def test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover() -> None:

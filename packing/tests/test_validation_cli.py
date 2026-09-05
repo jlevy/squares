@@ -771,7 +771,7 @@ def test_a_step_that_exceeds_its_own_budget_still_fails(
     assert "timed out after 0.2 seconds" in summary.results[0].reason
 
 
-def test_the_only_budgeted_step_is_the_one_d366_names() -> None:
+def test_only_the_whole_suite_steps_carry_budgets() -> None:
     """A budget is an exception, so the set of them is worth watching.
 
     If a second step acquires one, that is a signal the shared cap is wrong rather than
@@ -785,9 +785,14 @@ def test_the_only_budgeted_step_is_the_one_d366_names() -> None:
     enough for these two would stop being a guard for them at all -- which is the trade
     `budget_seconds` exists to refuse, and it does not get better for being made twice.
 
-    What would change this reading is a third step, or either of these two shrinking
-    back under the cap. A third would mean the cap is wrong rather than that two suites
-    are heavy, and it should raise the cap instead of extending this set.
+    The exhaustive exact tier became the third on 2026-09-05, and it is the same class:
+    a whole suite, of complete finite certificate decisions, that measured 892 s on CI's
+    runner against the 900 s cap it had been inheriting -- eight seconds from failing on
+    every merge to main. A fourth budgeted step would mean the cap is wrong rather than
+    that another suite is heavy, and should raise the cap instead of extending this set.
+    The step `--push` builds outside this tuple is not a fourth: when its selector
+    expands to the whole suite it is the fast behavioural suite under another entry point
+    and takes that step's own budget (D-432), which the next test holds.
 
     Recorded honestly: this second budget was added by the coordinator during an
     unattended run and has not been independently reviewed.
@@ -795,7 +800,49 @@ def test_the_only_budgeted_step_is_the_one_d366_names() -> None:
     budgeted = {
         step.name: step.budget_seconds for step in validate.STEPS if step.budget_seconds
     }
-    assert budgeted == {"negative controls": 1800, "fast behavioral tests": 1800}
+    assert budgeted == {
+        "negative controls": 1800,
+        "fast behavioral tests": 1800,
+        "exhaustive exact behavioral tests": 1800,
+    }
+
+
+@pytest.mark.parametrize(
+    ("summary", "expected_scope", "expected_budget"),
+    (("everything", "whole", validate.FAST_SUITE_BUDGET_SECONDS), ("narrow 7", "subset", None)),
+)
+def test_push_tests_take_the_whole_suite_budget_only_when_the_selector_expands(
+    monkeypatch: pytest.MonkeyPatch,
+    summary: str,
+    expected_scope: str,
+    expected_budget: float | None,
+) -> None:
+    """The entry point must not decide the suite's ceiling; the suite does.
+
+    D-432: a change set touching a suite-configuring file made `--push` select the whole
+    suite, and the step it built lost the budget `fast behavioral tests` declares for
+    that same suite, so the run died at the shared 900-second cap without naming the
+    failing test it had reached. The budget is one constant both steps read. A selected
+    subset stays on the shared cap, which is the guard against a hung test.
+    """
+
+    def probe(*args: object, **kwargs: object) -> subprocess.CompletedProcess[str]:
+        del args, kwargs
+        return subprocess.CompletedProcess(
+            args=("reachable-tests",), returncode=0, stdout=f"{summary}\n", stderr=""
+        )
+
+    monkeypatch.setattr(validate.subprocess, "run", probe)
+    step = validate._push_test_step("origin/main")
+
+    assert step.broad is (expected_scope == "whole")
+    assert step.budget_seconds == expected_budget
+    assert (
+        validate.STEPS[
+            [s.name for s in validate.STEPS].index("fast behavioral tests")
+        ].budget_seconds
+        == validate.FAST_SUITE_BUDGET_SECONDS
+    )
 
 
 def test_the_edit_tier_cannot_under_run() -> None:

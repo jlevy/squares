@@ -13473,7 +13473,7 @@ defects:
     inheriting the shared subprocess cap; it first fired on 2026-09-04 when a change set
     touching the pull-request template made the selector choose everything
   severity: medium
-  status: outstanding
+  status: fixed
   what: >-
     `packing-validate --push` runs `devtools.reachable_tests --run --since origin/main`,
     which selects the tests a change can reach and falls back to the whole
@@ -13494,15 +13494,26 @@ defects:
     D-422's snapshot-cap assertion, which is red on any used checkout and green on a
     fresh clone; the tier gave no way to tell that from a regression.
   fix: >-
-    Give the reachable-tests step the same 1,800-second budget the full-suite steps
-    carry when its selector reports everything, or make the whole-suite fallback run
-    the fast behavioral step's own configuration; and print the failing test ids in
-    the step's summary regardless of how the run ended, so a killed run still names
-    what it saw. Owned by Agenda 018's gate-speed block, which measures the suite first.
+    Fixed on the port branch, 2026-09-05: the step `--push` builds carries
+    FAST_SUITE_BUDGET_SECONDS -- 1,800 s, the budget `fast behavioral tests` declares,
+    now one constant both steps read -- when its selector reports everything, and keeps
+    the shared 900 s cap for a true subset. The prescription's second half, naming the
+    failing test from a killed run, is not implemented and is not needed for this
+    failure: with the budget in place the whole-suite fallback finishes. Re-measured on
+    the merged tree with the integer sweep in place (d8733ad0): 1,034 s on
+    four cores at 1,781 passing tests, 996 s on CI's two-core runner, against
+    the 1,210 s of 2026-09-03 and an 1,800 s budget. The exhaustive tier, measured
+    beside it, ran in 930 s locally and 892 s on CI's runner -- eight seconds under the
+    900 s cap it had been inheriting -- so it now carries a budget of its own, 1,800 s,
+    twice the measurement. Ported from PR 80's F13 with its 2,700 s and 21,600 s
+    dropped: the first rested on a 1,791 s measurement of the Fraction sweep the same
+    day and sits above the 1,800 s CI allows the job; the second on a 4,866 s exact
+    decision the integer sweep made a 30 s one.
   regression: >-
-    A test that drives `reachable_tests --run` with a selector reporting everything and
-    asserts the step's budget is the full-suite budget and that a failing test id
-    appears in the summary when the run is interrupted.
+    test_push_tests_take_the_whole_suite_budget_only_when_the_selector_expands, which
+    builds the push step against a selector reporting everything and against one
+    reporting a subset, and asserts the whole-suite budget on the first, the shared cap
+    on the second, and that the budget is the constant `fast behavioral tests` reads.
   bead: think-jzqi
   recorded_in: packing/devtools/reachable_tests.py
 - id: D-433
@@ -14328,18 +14339,21 @@ defects:
     and bound -- agree on the value to the digit, and neither has ever been asked to
     agree on the witness.
   fix: >-
-    Outstanding; bead think-xyt1 under the port epic think-pev1. PR 80's _cell_witness
-    picks a point strictly inside the cell's intersection with the domain; ported onto
-    this branch it must go into a helper both the integer and the Fraction routes call
-    (the stack's 28990b00 head merged onto this branch left the fix in the Fraction
-    reference path only, failing the value-and-witness equality test on five of six
-    directions; its 04127189 head applies the helper on both routes and is the code
-    to port), and it must
-    be exhausted on all 181 directions of all four retained certificates on the integer
-    route, because the strict-inside check is a new hard-error path.
+    Fixed on the port branch, 2026-09-05, from PR 80's head 04127189, which had already
+    applied its helper on both routes: _cell_witness returns the vertex average of the
+    event cell's intersection with the admissible domain and checks it strictly inside
+    the open cell, and both minimum_covered_mass_integer and
+    minimum_covered_mass_fraction call it. With it, reduce_to_cells is re-implemented
+    independently of reduce_to_spans, so the reference no longer shares the optimised
+    route's geometry, and the integer entry point checks nonnegativity, integrality
+    and the int64 limit itself rather than trusting its caller.
   regression: >-
-    None yet; the port adds a test that every reported witness is admissible, on every
-    direction of every retained certificate.
-  status: outstanding
+    test_every_reported_witness_is_an_admissible_centre_on_the_373_atom_rung (every
+    third direction of the first rung, fast tier) and
+    test_every_reported_witness_is_admissible_on_every_retained_certificate (all 181
+    directions of all four retained certificates on the integer route, exhaustive
+    tier): each maps the reported witness back to container coordinates and asks
+    whether a B-square centred there fits, exactly.
+  status: fixed
   recorded_in: packing/src/sqpack/fractional/sweep.py
   bead: think-xyt1
