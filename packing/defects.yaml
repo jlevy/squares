@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 453
+count: 454
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14567,3 +14567,68 @@ defects:
   regression: packing/tests/test_case_prose.py
   status: fixed
   recorded_in: packing/devtools/check_case_prose.py
+- id: D-454
+  title: Four durable records described a rung, a ladder and a count that had already moved
+  date: '2026-09-05'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    the ladder length and the runway figure since the n = 12 ladder reached 99/25 on
+    2026-09-04; the superseded-by rungs since T-019 climbed past 451/100 the same day;
+    the Nagamochi count since 2026-08-31, drifting further at each of the four
+    retentions after it. Found by the residual audit of PR 80's findings, and by nothing
+    automated -- every figure named a real object and every arithmetic was exact.
+  severity: medium
+  what: >-
+    Four statements in the register described the state of a ladder from before it moved.
+    T-017's significance rationale called its ladder a seven-rung ladder and listed seven
+    sides, when eight certificates are retained and the same result's own artifact list
+    carries all eight; the same field put the gap to the conjectured 4 at 0.07, the
+    figure for the 393/100 rung three below the retained one, where 4 - 99/25 is 0.04.
+    T-017's next_rung measured the room under the method's ceiling at 79/20 rather than
+    at the retained 99/25 -- and 0.0408 is exactly right for 79/20, which is why nothing
+    objected.
+    T-015 and T-016 both recorded being superseded by T-019 "which certifies 451/100";
+    451/100 is a real certificate of T-019's and one it had already climbed past, its
+    retained rung being 459/100.
+    And the Nagamochi corpus count was carried in four places with four values:
+    check_nagamochi_bounds' docstring said 85, results.yaml said 86, evidence.yaml said
+    88, and the checker itself printed 83. Two different quantities had been collapsed
+    into one number -- 95 case records cite E-nagamochi-lower, and it supplies the
+    operative verified lower bound in 83 of them.
+  consequence: >-
+    No bound is wrong and no verdict changes; this is D-442's class, one layer further
+    out. Each figure was exact for the object it named, and what drifted is which object
+    that is. The cost falls on a reader deciding where to spend: the runway sentence
+    overstates the room left under the ceiling by a third, the ladder length understates
+    what the generator has retained, the superseded-by pointer sends a reader to a
+    certificate two rungs below the one that displaced them, and the Nagamochi count
+    made the register's most load-bearing external citation look either more or less
+    load-bearing than it is depending on which file was read.
+    The frontier README's own gap table had gone stale in the same way: it ranked n = 11
+    at 0.0882 against Stromquist's displaced bound, and did not carry n = 12, which
+    T-017 had made the narrowest open gap in the corpus at 0.0400.
+  fix: >-
+    Fixed on 2026-09-05. T-017's rationale states the eight-rung ladder and the 0.04 gap;
+    its next_rung measures 0.0308 of runway from the retained 99/25 to 4B = 3.9908, the
+    limit that binds, with 4/(1 + D) = 3.990816 above it and the grid packing's 4 above
+    both. T-015's and T-016's superseded-by sentences name 459/100. The Nagamochi prose
+    in the checker, results.yaml and evidence.yaml now separates the 95 citations from
+    the 83 operative bounds and says which is which. The frontier README's table is
+    recomputed from every open case's front matter and now leads with n = 12.
+  regression: >-
+    packing/tests/test_rung_figures.py and packing/tests/test_nagamochi_bounds.py.
+    check_rung_figures learned three shapes it could not read: a stated ladder length,
+    counted against the certificate artifacts the result declares; a runway figure, which
+    is refused when it names a rung the ladder has climbed past and otherwise recomputed
+    as ceil(sqrt(n)) * B - L from the certificate's own bytes; and a superseded-by
+    sentence, whose rung must be the live certificate.json side of the result it names --
+    a comparison only the other result's artifacts can settle, which is why no
+    single-result check could have caught it. check_nagamochi_bounds derives both corpus
+    counts from the case records and refuses prose in its own docstring, results.yaml or
+    evidence.yaml that disagrees with either, as it already did for the README's open-case
+    count.
+  recurrence_of: D-442
+  status: fixed
+  recorded_in: packing/frontier/results.yaml

@@ -87,10 +87,10 @@ evidence:
       date: '2026-08-30'
       reviewed_by: repository
       note: >-
-        Read here because the inventory's own arithmetic named it: this record carries the
-        verified lower bound for 88 of the hundred cases and the next most-cited carries
-        two, so it was simultaneously the most load-bearing external argument in the
-        register and the only one nobody had opened. The argument closes. Theorem 1 is the
+        Read here because the inventory's own arithmetic named it: at the review date
+        this record carried the verified lower bound for 88 of the hundred cases and the
+        next most-cited carried two, so it was simultaneously the most load-bearing
+        external argument in the register and the only one nobody had opened. The argument closes. Theorem 1 is the
         substantive part -- an upper bound on how many unit squares fit strictly inside an
         a-by-b rectangle, proved by an explicit unavoidable set whose capacity is computed
         rather than asserted, with Lemmas 2 through 7 proved in the paper and only an
@@ -113,9 +113,12 @@ evidence:
         lambda = 1 to estimate the minimum". That last is geometrically evident and is the
         only place the argument leans on something unargued. This promotes nothing: the
         method stays `published-proof`, and `proof-assistant-checked` is a different thing.
-        Separately `devtools/check_nagamochi_bounds.py` re-derives all 88 recorded values
-        from Theorem 2 in the gate, so a transcription slip is caught even though the proof
-        behind them is not machine-checked.
+        Separately `devtools/check_nagamochi_bounds.py` re-derives the 83 operative
+        verified-field values from Theorem 2 in the gate, so a transcription slip in a
+        current bound is caught even though the proof behind them is not machine-checked.
+        95 of the hundred case records cite this record and it supplies the operative
+        verified lower bound in 83 of them; the other 12 citations are historical or
+        reported context, and a citation count is not a count of current bounds.
     limitations: External published proof; its arithmetic is not independently replayed here.
     source_reviewed: '2026-08-24'
 

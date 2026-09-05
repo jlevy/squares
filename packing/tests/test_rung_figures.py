@@ -13,6 +13,10 @@ claim checked by a printed SHA-256, is a claim about file identity rather than a
 mass, atom count, or margin; this module reads no file hash and has no test claiming
 otherwise, which is the honest account of what it covers.
 
+`D-442` is the same failure one layer out: a ladder length, a runway figure, and a
+superseded-by pointer, each describing a rung the ladder had climbed past, none of them
+arithmetically wrong. Those reconstructions perturb `T-017` and `T-015` the same way.
+
 Below those, under its own banner, is the *cross-record* contract `D-442` asked for: the
 same rung is quoted in `results.yaml`, in `evidence.yaml`, in a case page's front matter,
 in the generated reach table and in an agenda's cost prose, and it must agree in all of
@@ -45,6 +49,7 @@ from devtools.check_rung_figures import (
     pick_retained,
     resolve_certificates,
     round_to,
+    superseded_rung_problems,
 )
 from devtools.check_synopsis import spell
 from devtools.render_certificate_reach import (
@@ -184,10 +189,11 @@ def test_resolves_an_explicitly_named_secondary_rung() -> None:
 def test_repeating_the_same_rung_twice_does_not_trip_the_movement_gate() -> None:
     """The movement gate requires two *distinct* fraction-equals-decimal figures.
 
-    `T-017`'s own claim restates its one rung (`79/20 = 3.95`) twice, once for its own
-    container side and once compared against a published packing -- the same value, not
-    a displaced prior one -- and must not be read as a movement claim just because a
-    `movement is` phrase sits elsewhere in the same result.
+    A claim that restates one rung twice -- once for its own container side, once
+    compared against a published packing -- names the same value, not a displaced prior
+    one, and must not be read as a movement claim just because a `movement is` phrase
+    sits elsewhere in the same result. The fake below is written out rather than lifted
+    from a live result, whose claim is rewritten every time the ladder moves (`D-444`).
     """
     fake = {
         "id": "T-000",
@@ -217,6 +223,106 @@ def test_movement_check_accepts_either_subtraction_order() -> None:
     assert movement_problems(reversed_order) == []
 
 
+def test_catches_d442_a_ladder_that_grew_an_eighth_rung() -> None:
+    """`D-442` at `T-017`: the rationale still called the ladder seven rungs and listed
+    seven sides after the generator retained an eighth, `99/25`, which the same result's
+    own artifact list already carried. The count comes from that list, never the prose."""
+    corrupted = copy.deepcopy(_result("T-017"))
+    corrupted["significance"]["rationale"] = corrupted["significance"]["rationale"].replace(
+        "eight-rung ladder", "seven-rung ladder"
+    )
+
+    problems, _ = check_result(corrupted)
+    assert len(problems) == 1
+    assert "T-017 [significance.rationale]" in problems[0]
+    assert "prose says 7 rungs in the ladder" in problems[0]
+    assert "so it is 8" in problems[0]
+
+
+def test_a_count_of_rungs_below_the_top_one_is_read_as_one_less() -> None:
+    """The register writes the same fact in two shapes, and the ladder is the top rung
+    plus everything under it: `T-017` retains eight and says seven are below."""
+    corrupted = copy.deepcopy(_result("T-017"))
+    corrupted["claim"] = "Eight rungs are retained below it."
+
+    problems, _ = check_result(corrupted)
+    assert len(problems) == 1
+    assert "prose says 8 rungs below the retained one" in problems[0]
+    assert "so it is 7" in problems[0]
+
+
+def test_catches_d442_runway_measured_at_a_rung_the_ladder_climbed_past() -> None:
+    """The figure that made this invisible: `0.0408` is exactly right for `79/20`, so
+    nothing arithmetic objects. Runway is a claim about the top rung, and that is what
+    the check holds."""
+    corrupted = copy.deepcopy(_result("T-017"))
+    corrupted["next_rung"] = "So the retained 79/20 has 0.0408 of runway left."
+
+    problems, _ = check_result(corrupted)
+    assert len(problems) == 1
+    assert "prose measures runway at 79/20" in problems[0]
+    assert "certificate-79-20.json" in problems[0]
+    assert "the retained rung 99/25" in problems[0]
+
+
+def test_runway_is_recomputed_from_the_certificates_own_ceiling() -> None:
+    """`ceil(sqrt(n)) * B - L` from the retained certificate's own bytes: at `n = 12`
+    the ceiling is `4B = 3.9908` and the retained `99/25` leaves `0.0308` under it."""
+    corrupted = copy.deepcopy(_result("T-017"))
+    corrupted["next_rung"] = "So the retained 99/25 has 0.0408 of runway left."
+
+    problems, _ = check_result(corrupted)
+    assert len(problems) == 1
+    assert "prose says 0.0408 of runway" in problems[0]
+    assert "leaves 0.0308 below ceil(sqrt(12)) * B" in problems[0]
+
+
+def test_an_unqualified_runway_phrase_reads_the_retained_rung() -> None:
+    """`T-019` writes one runway figure with no side at all, which means the retained
+    rung -- the same default the margin patterns already use."""
+    corrupted = copy.deepcopy(_result("T-019"))
+    corrupted["next_rung"] = "For n = 17 the runway is 0.3000 to the ceiling."
+
+    problems, _ = check_result(corrupted)
+    assert len(problems) == 1
+    assert "leaves 0.3985 below ceil(sqrt(17)) * B" in problems[0]
+
+
+def test_catches_d442_a_superseded_by_naming_a_climbed_past_rung() -> None:
+    """`D-442`'s cross-record shape: `T-015` and `T-016` both said `T-019` "certifies
+    451/100", a real certificate of `T-019`'s and one it had already climbed past. No
+    figure is wrong; only the other result's artifacts can settle which rung is meant."""
+    corrupted = copy.deepcopy(_result("T-015"))
+    corrupted["next_rung"] = corrupted["next_rung"].replace(
+        "certifies 459/100", "certifies 451/100"
+    )
+
+    problems = superseded_rung_problems([corrupted, _result("T-019")])
+    assert len(problems) == 1
+    assert "says T-019 certifies 451/100" in problems[0]
+    assert "certificate-451-100.json" in problems[0]
+    assert "T-019's retained rung is 459/100" in problems[0]
+
+
+def test_a_superseded_by_sentence_leaves_foreign_fractions_alone() -> None:
+    """`22529/5000` is the displaced published value, not one of `T-019`'s rungs, and a
+    check that guessed at it would cry wolf on every cross-reference."""
+    probe = copy.deepcopy(_result("T-015"))
+    probe["next_rung"] = "Superseded by T-019, which displaces 22529/5000 and 203/12."
+
+    assert superseded_rung_problems([probe, _result("T-019")]) == []
+
+
+def test_a_superseding_result_outside_the_register_is_refused() -> None:
+    """A pointer to a result that does not exist is a broken record either way."""
+    probe = copy.deepcopy(_result("T-015"))
+    probe["next_rung"] = "Superseded as the verified lower bound by T-999."
+
+    problems = superseded_rung_problems([probe])
+    assert len(problems) == 1
+    assert "names T-999 as superseding it" in problems[0]
+
+
 def test_certificate_figures_are_recomputed_from_atoms_not_trusted_from_the_file() -> None:
     """The file's own stored `total_mass` is cross-checked, never substituted for the
     atom sum -- the whole point of a checker that re-derives from the rawest ground
@@ -225,6 +331,7 @@ def test_certificate_figures_are_recomputed_from_atoms_not_trusted_from_the_file
         path="synthetic",
         n=5,
         outer_side=Fraction(7, 2),
+        square_side=Fraction(9977, 10000),
         atom_count=2,
         mass=Fraction(3, 2),
         stored_mass=Fraction(999, 100),
@@ -264,6 +371,7 @@ def test_retained_is_the_file_literally_named_certificate_json() -> None:
         path="cases/x/certificate-1-2.json",
         n=3,
         outer_side=Fraction(1, 2),
+        square_side=Fraction(9977, 10000),
         atom_count=1,
         mass=Fraction(1, 2),
         stored_mass=None,
@@ -272,6 +380,7 @@ def test_retained_is_the_file_literally_named_certificate_json() -> None:
         path="cases/x/certificate.json",
         n=3,
         outer_side=Fraction(7, 2),
+        square_side=Fraction(9977, 10000),
         atom_count=1,
         mass=Fraction(3, 2),
         stored_mass=None,
