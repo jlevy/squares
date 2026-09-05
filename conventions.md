@@ -116,13 +116,18 @@ Research documents and reviews keep the repository’s dated form:
 
 **A case-local document for a registered result is named for the result and for what it
 is: the lowercase result id, then a descriptive kebab-case suffix.** [convention]
-`t-018-proof.md` and `t-018-verifiable-claim-19-5.md` each say which result and which
-kind of document; a generic name in capitals such as `VERIFIABLE-CLAIM.md` says neither,
-and the second such file would have to fight the first for it.
+`t-018-proof-card.md` and `t-018-verifiable-claim-19-5.md` each say which result and
+which kind of document; a generic name in capitals such as `VERIFIABLE-CLAIM.md` says
+neither, and the second such file would have to fight the first for it.
 There will be many proofs and claims, and each needs a unique, self-describing name.
 This is a filename convention only: prose and structured records keep the canonical
 uppercase id `T-018`. `README.md` remains the exception for a directory’s orientation
-page.
+page. The kinds in use, each generated from the certificate so its figures cannot drift:
+`t-NNN-proof-card.md`, the one-page statement with every constant and the one command
+that checks it; `t-NNN-verifiable-claim-<bound>.md`, the self-contained claim with
+theorem, proof, verifier and certificate, one per retained bound; and
+`t-NNN-proof-visual.svg`, the figure.
+A new result takes the same names with its own id.
 
 Use [`repren`](https://github.com/jlevy/repren) for renames—it moves files and rewrites
 references in one pass, which is what keeps the two in step.

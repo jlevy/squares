@@ -78,6 +78,11 @@ jobs:
       - name: Render the page from the retained certificate
         run: uv run --frozen --group dev python -m devtools.render_certificate_page
 
+      # The page is not checked in, so this is where a render that did not reproduce
+      # itself byte for byte would show: a second render has to match the first.
+      - name: Check the render is deterministic
+        run: uv run --frozen --group dev python -m devtools.render_certificate_page --check
+
       - name: Check the page is one self-contained file
         run: |
           test -s site/index.html
