@@ -22,7 +22,7 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 <div class="hero">
 
-# <span class="symbol">s({{N}}) ≥ {{HEADLINE_L_FRAC}}</span>
+# <span class="symbol">s({{N}}) <span class="rel">≥</span> {{HEADLINE_L_FRAC}}</span>
 
 <p class="subtitle">A New Lower Bound on the Square Packing Problem</p>
 
@@ -249,7 +249,7 @@ $$
           <div class="mass-val" id="mv-{{SLUG}}"></div>
           <div class="mass-dec" id="md-{{SLUG}}"></div>
         </div>
-        <span class="verdict ok" id="vd-{{SLUG}}">Covers ≥ 1</span>
+        <span class="verdict ok" id="vd-{{SLUG}}">Covers <span class="rel">≥</span> 1</span>
       </div>
       <div class="ctl">
         <span class="caps">Direction <span class="tex">k</span> of the {{N_DIRECTIONS}}-point net</span>
@@ -400,7 +400,7 @@ costs.
     </svg>
   </div>
   <div class="fig-choose">{{CERT_TOGGLE}}</div>
-  <figcaption><strong>Figure 7. Condition 4 → Condition 5.</strong> Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. Halving the net shrinks
+  <figcaption><strong>Figure 7. Condition 4 <span class="rel">→</span> Condition 5.</strong> Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. Halving the net shrinks
   <span class="tex">B</span> by {{HALVING_B_DROP}} and costs {{HALVING_MASS_DROP}} of the least covered mass. This shows these atoms are tight
   against their own net, not that no coarser net could be made to work. It measures the slope of the trade.</figcaption>
 </figure>

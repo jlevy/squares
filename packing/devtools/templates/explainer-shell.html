@@ -98,6 +98,28 @@ body {
 .hero { padding-block-start: calc(var(--kpress-font-size-base) * 3); }
 /* The heading is set in caps by kpress; s(n) is notation and keeps its case. */
 .hero h1 .symbol { text-transform: none; }
+/* Mathematical relations set in a sans line.
+
+   Source Sans 3 carries no U+2265, so the browser resolves the one character to
+   whatever other family in the stack has it. That would pass unnoticed if it landed
+   on a regular weight, but the hero is set at 550 and CSS weight matching searches
+   upward from anything above 500: the fallback family offers 400 and 700, and answers
+   with Bold. One bold character in a semibold line -- measured 18% heavier in stroke
+   and up to twice the ink of the digits beside it, drawn from DejaVu Sans Bold in the
+   printed file while every other glyph on the line came from Source Sans 3.
+
+   Naming the weight is the whole fix. The family stays inherited: the fallback's
+   sans relation is drawn like the digits around it -- flat terminals, the same
+   geometry -- and at 400 its stroke sits close to the semibold it stands in.
+   Routing the character through the page's own KaTeX_Main instead was tried and
+   rejected on the rendering: a Computer Modern relation is a hairline beside
+   Source Sans, lighter against its neighbours than the bold was heavy, and asking
+   for KaTeX_Main at the inherited 550 only reproduces the defect one family along,
+   since KaTeX_Main ships Regular and Bold and the same upward search applies.
+
+   Every site this class marks -- the hero, the two verdict badges, the two figure
+   captions -- is set at 550, so one rule serves them all. */
+.rel { font-weight: 400; }
 /* Under the title: the description in sans caps, a step below the title's
    size, then the deck in the prose face, italic. */
 .cert-page .hero .subtitle {
@@ -459,14 +481,56 @@ body {
      to its source rather than to nothing. */
   .tex, .tex-d { visibility: visible; }
 
+  /* Unrounded advances. This is what made the serif text look loose and, worse,
+     uneven. Chromium's default `text-rendering: auto` rounds every glyph advance
+     to a whole CSS pixel at layout time and then writes that rounded position
+     into the PDF: measured here, 98.44% of the 11,177 glyph moves in the printed
+     file sat on integers. At the print size the rounding is not small. PT Serif
+     at 11pt is 14.6667px, where the word space gains 12.3% and `i` and `l` gain
+     13.3% while the comma and the full stop lose about 10% -- a spread of 1.395px,
+     or 9.5% of an em, between adjacent gaps. The true metrics are identical to the
+     screen's; a sweep across 9pt to 14pt puts 11pt at the worst of the range.
+     `geometricPrecision` is the only value that turns linear metrics on, it
+     inherits, so one declaration covers prose, captions, tables, code and KaTeX,
+     and being print-only it leaves the screen's hinted rendering alone. */
+  .kpress { text-rendering: geometricPrecision; }
+
+  /* kpress borrows Georgia's quotes into the PT Serif stack through a `LocalPunct`
+     @font-face whose `src` is `local("Georgia")`. On a machine without Georgia the
+     face simply fails and nothing changes; on the Mac and Windows machines most
+     readers print from it loads, and every apostrophe and quotation mark in the
+     prose then comes from a different face at different metrics. Print should not
+     depend on which fonts the reader happens to own. */
+  .kpress { --kpress-host-font-prose: "PT Serif", Georgia, "Times New Roman", serif; }
+
   /* Ragged right. kpress justifies printed prose and asks for automatic
      hyphenation to keep the lines even, but hyphenation needs dictionaries the
      printing engine may not carry: headless Chromium has none, so `hyphens: auto`
-     is inert there and justification has nothing to stretch but the word spaces,
-     which is what made the serif text look loose. This page also prints its link
-     targets inline, and a long unbreakable URL in a justified line opens rivers.
-     Even word spacing is worth more here than a straight right edge. */
-  .kpress p, .kpress li, .kpress blockquote, .kpress dd { text-align: left; }
+     is inert there and justification has nothing to stretch but the word spaces.
+     Even word spacing is worth more here than a straight right edge.
+
+     `!important` and the wider selector are deliberate. kpress's rule and this one
+     have the same specificity, so this one wins on nothing but the order the two
+     stylesheets are inlined in; a kpress release that adds `!important` or narrows
+     its selector to `.kpress-prose p` would silently restore justification. The
+     extra elements are not justified by kpress today and cost nothing to name. */
+  .kpress p, .kpress li, .kpress blockquote, .kpress dd, .kpress dt,
+  .kpress figcaption, .kpress td, .kpress th, .kpress caption {
+    text-align: left !important;
+  }
+
+  /* kpress breaks words anywhere inside an ordered list so a long token cannot
+     overflow. With no hyphen to mark the break it reads as a typo. `overflow-wrap`
+     stays, so a URL too long for the measure still wraps -- at a boundary. */
+  .kpress ol > li > * { word-break: normal; }
+
+  /* Margins. The page rule takes `--kpress-print-page-margin` from kpress, which
+     sets it to 0.7in, and nothing else stacks on top: kpress's own print stylesheet
+     zeroes the page and document gutters, and neither width cap binds at this size.
+     0.55in is as far as this can usefully go -- below about 0.56in on Letter the
+     708px paragraph cap starts to bind while the figures keep widening, and text
+     and figures visibly stop agreeing on where the column is. */
+  :root { --kpress-print-page-margin: 0.55in; }
 }
 
 </style>
