@@ -27,6 +27,12 @@ from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.model import Atom
 
 CERTIFICATE_PATH = Path(__file__).with_name("certificate.json")
+#: The rung that was the top until 2026-09-05, and the only one of the three whose
+#: mass reaches below nineteen. It is what keeps n = 19 at 24/5 now that the pointer
+#: above has moved to a heavier set, so it is named rather than globbed for.
+RUNG_24_5_PATH = Path(__file__).with_name("certificate-24-5.json")
+#: The lower rung the same ladder froze at 193/40, retained as the ladder's evidence.
+RUNG_193_40_PATH = Path(__file__).with_name("certificate-193-40.json")
 
 
 def _from_record(record: dict) -> Certificate:

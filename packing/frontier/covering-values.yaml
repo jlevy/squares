@@ -402,7 +402,7 @@ values:
       Halted at round 9 on projected cost: four more rounds would have cost about
       3.75 h to buy margin nothing needed. The side above it was never attempted.
     least_covered_mass: null
-    frozen_artifact: packing/cases/n20_fractional_certificate/certificate.json
+    frozen_artifact: packing/cases/n20_fractional_certificate/certificate-24-5.json
     recorded_in:
       - packing/frontier/results.yaml
       - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
@@ -410,4 +410,6 @@ values:
       A single resumed column-generation run; the record names no site set and retains
       no site or row count. The reported objective has no raw run, and it is not the
       artifact's mass, 946131/50000 = 18.922620, which certifies n = 19 upward and is
-      why the reach table keys this package to n = 19.
+      what keeps n = 19 standing at 24/5 after T-021 raised n = 20 and n = 21 to 97/20.
+      The artifact named here is the immutable 24/5 rung, not the package's moving
+      certificate.json pointer, which now holds the heavier 97/20 rung.

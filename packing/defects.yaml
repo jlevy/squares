@@ -14632,3 +14632,62 @@ defects:
   recurrence_of: D-442
   status: fixed
   recorded_in: packing/frontier/results.yaml
+- id: D-455
+  title: A frozen-artifact path named a moving pointer, so a superseded rung quoted its successor's mass
+  date: '2026-09-05'
+  layer: record
+  class: bookkeeping
+  detected_by: gate
+  latent_for: >-
+    from the moment T-021's 97/20 rung was promoted on 2026-09-05 until the fast tier ran
+    on the same branch a few hours later -- long enough to render one internally
+    contradictory document and to reach CI, not long enough to reach main.
+  severity: medium
+  what: >-
+    The covering-value register's row for n = 20 at 24/5 named its frozen artifact as
+    packing/cases/n20_fractional_certificate/certificate.json. That path is the moving
+    top-rung pointer by this project's own naming convention, not an immutable rung, so
+    when T-021 promoted the 97/20 certificate into it the 24/5 row silently began
+    pointing at a different set of atoms. CERTIFICATE-REACH.md, which recomputes each
+    row's mass from the artifact the row names, then rendered the 4.80 row as a
+    1,680-atom certificate of mass 19.848723 in the same cell whose own note said the
+    artifact's mass was 946131/50000 = 18.922620.
+    Three more statements went stale in the same promotion without being wrong about any
+    object: the renderer's prose hardcoded "three points" and named n = 11, n = 17 and
+    n = 19 as the packing-limited rows, when the n = 20 package's move from n = 19 to
+    n = 20 had turned that into two points and put the ceiling in the binding position;
+    retained_certificates' docstring worked its keying example from the mass the pointer
+    used to hold; and six tests across two files pinned the pointer's old side, mass,
+    atom count and least size certified.
+  consequence: >-
+    No bound is wrong, no certificate is unsound and no verdict changes: every artifact
+    named exists and every mass quoted is the true mass of the file quoted. What breaks
+    is the join between a row and its evidence. A reader auditing the 24/5 rung -- the
+    one that still carries n = 19 -- would have been handed the atoms of the rung that
+    displaced it, and the reach table's regularity section would have kept advertising a
+    three-point band that the corpus no longer contains. It is D-443's neighbour: a
+    figure that stays exact while the object under it moves.
+  fix: >-
+    Fixed on 2026-09-05. The 24/5 row names certificate-24-5.json, the immutable rung,
+    and its note says which of the two it means and why n = 19 stays at 24/5. The n = 20
+    package names its historical rungs as module constants (RUNG_24_5_PATH,
+    RUNG_193_40_PATH), as the n = 11 package already did, so a test can say which rung it
+    is about. render_certificate_reach derives the count word, the case list, the band
+    width and the per-run stop reasons from the corpus instead of writing them down, and
+    STOP_REASONS is keyed by case so a row that leaves the packing-limited set drops its
+    sentence rather than stranding it.
+  regression: >-
+    packing/tests/test_certificate_reach.py and packing/tests/test_fractional_certificate.py.
+    test_every_frozen_artifact_in_the_register_recomputes_its_mass is what caught this: it
+    compares each frozen artifact's own outer_side against the side of the row that names
+    it, which is the one comparison a moving pointer cannot survive. It already existed
+    and it worked. What did not work was the row beside it,
+    test_reported_rows_quote_the_mass_their_own_artifact_recomputes, which checked two
+    hand-listed sides against two hand-listed paths and so restated the bug rather than
+    catching it; it now walks every register row and checks each against the artifact
+    that row names. The three n = 20 tests are rewritten to say which rung they are about
+    and to check the 24/5 rung beside the top one, and the band test reads its case set
+    from the corpus rather than pinning it.
+  recurrence_of: D-443
+  status: fixed
+  recorded_in: packing/frontier/covering-values.yaml

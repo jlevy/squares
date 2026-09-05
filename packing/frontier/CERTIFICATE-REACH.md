@@ -50,7 +50,7 @@ at all:
 | 20 | 4.85 | certificate-seeded | 19.848723 | yes | The row loop converged -- every placement covers mass one -- on the grids unioned with the 24/5 certificate's 2260 atoms scaled by 97/96, after the 600-second run at the same site set had been time-limited at 19.844457 and a 2400-second rerun carried it to convergence in 1616.5 s. | frozen 1,680-atom certificate, feasible mass 19.848723. BC-197 of agenda 021 (exp-061). Rationalised at scale 4,000,000 to 19848723/1000000 over 1680 atoms and retained as T-021's certificate, which the gate accepted on both routes at 200001/200000. |
 | 20 | 4.825 | grid | 19.862092 | yes | The row loop converged at LP round 54 -- every placement covers mass one, least covered mass 1.000000 -- with the optimum reached at round 41 and rounds 41 to 54 clearing the last violations; 949.4 s of round time, 1008.6 s wall. | frozen 1,076-atom certificate, feasible mass 19.862242. BC-197 of agenda 021 (exp-061). Rationalised to 9931121/500000 over 1076 atoms (rounding loss 1.5e-4) and retained as the lower rung beside T-021's; the gate accepted it on both routes at 1000003/1000000. |
 | 20 | 4.875 | grid | 20.016349 | no | Stopped by the ladder on the crossing at LP round 12, least covered mass 0.863635 with placements still violated. | nothing frozen here. BC-197 of agenda 021 (exp-061). The seeded construction walled here too, so this is the bracket's upper end: the m = 5 covering wall lies in [97/20, 39/8]. |
-| 20 | 4.80 | unrecorded | 18.916941 | no | Halted at round 9 on projected cost: four more rounds would have cost about 3.75 h to buy margin nothing needed. The side above it was never attempted. | frozen 1,680-atom certificate, feasible mass 19.848723. A single resumed column-generation run; the record names no site set and retains no site or row count. The reported objective has no raw run, and it is not the artifact's mass, 946131/50000 = 18.922620, which certifies n = 19 upward and is why the reach table keys this package to n = 19. |
+| 20 | 4.80 | unrecorded | 18.916941 | no | Halted at round 9 on projected cost: four more rounds would have cost about 3.75 h to buy margin nothing needed. The side above it was never attempted. | frozen 2,260-atom certificate, feasible mass 18.922620. A single resumed column-generation run; the record names no site set and retains no site or row count. The reported objective has no raw run, and it is not the artifact's mass, 946131/50000 = 18.922620, which certifies n = 19 upward and is what keeps n = 19 standing at 24/5 after T-021 raised n = 20 and n = 21 to 97/20. The artifact named here is the immutable 24/5 rung, not the package's moving certificate.json pointer, which now holds the heavier 97/20 rung. |
 
 No covering-search run log or solver checkpoint was retained for any of them, so
 not one of the reported values can be recomputed here. What a frozen certificate
@@ -161,27 +161,27 @@ the other one was never in reach.
 | 17 | n17_fractional_certificate | 4.5900 | 4.6755 | 4.9885 | packing | 0.98171 |
 | 20 | n20_fractional_certificate | 4.8500 | 5.0000 | 4.9885 | ceiling | 0.97223 |
 
-## What three points would predict, if the ratio held
+## What two points would predict, if the ratio held
 
-**This is an extrapolation from three points, not a measurement.** The three
-packing-limited rows above -- n = 11, n = 17, n = 19 -- land inside a band
-0.001 wide, and their mean is the `ratio` this section's numbers all come
-from: `0.98220`. That the three numbers are exact rationals decided by
-an exact verifier does not make their mean a rate. No rung in this register
+**This is an extrapolation from two points, not a measurement.** The two
+packing-limited rows above -- n = 11, n = 17 -- land inside a band
+0.00099 wide, and their mean is the `ratio` this section's numbers all
+come from: `0.98220`. That the two numbers are exact rationals decided
+by an exact verifier does not make their mean a rate. No rung in this register
 has ever been claimed from a fitted curve, and this one is not the exception:
 it is offered here as a place to look, not as a result.
 
 The ratio is also not purely about how good a covering value the method can
 reach -- it is an observation about where searches were stopped as much as
-about where they could go. The three runs behind it stopped for three
-different reasons, and only one of them is a statement about the method.
-n = 11 ran its covering search to a converged optimum. n = 19 was halted at
-round 9 on projected cost, four rounds short of where it would have stopped
-on its own. n = 17 has no stop reason recorded for its own build at all --
-the stop narrated in its `next_rung` belongs to an adjacent probe at
-n = 18, not to the certificate this row measures. A ratio built from three
-runs, one of which is known to have gone as far as it could, is not a rate
-to spend a rung's confidence on (`D-443`).
+about where they could go. The two runs behind it did not stop for the
+same reason, and not every reason is a statement about the method.
+n = 11 ran its covering search to a converged optimum. n = 17 has no
+stop reason recorded for its own build at all -- the stop narrated in
+its `next_rung` belongs to an adjacent probe at n = 18, not to the
+certificate this row measures.
+A ratio built from two runs, at least one of which is not known to have
+gone as far as it could, is not a rate to spend a rung's confidence on
+(`D-443`).
 
 `predicted` below is `min(ratio * best_packing, limit)` and `predicted
 gain` is `predicted - lower`, clamped at zero. Read them as where to look
