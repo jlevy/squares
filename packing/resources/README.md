@@ -27,7 +27,7 @@ Cleanup was done by language models, so the raw extraction is the fallback whene
 formula in a `.md` looks suspicious.
 
 **Transcription status, stated exactly.** The archive’s discipline is original + cleaned
-`.md` + faithful `.raw.md`, and thirteen entries currently fall short of it in ways
+`.md` + faithful `.raw.md`, and nineteen entries currently fall short of it in ways
 worth naming rather than hiding:
 
 - `gensane-ryckelynck-2005-improved-dense-packings`,
@@ -37,10 +37,15 @@ worth naming rather than hiding:
   `alpert-bauer-kahle-macpherson-spendlove-2023-hard-squares-configuration-spaces`,
   `alvarado-garduno-gonzalez-2025-square-section-braid-groups`,
   `el-moumni-1999-optimal-packings-unit-squares`, and
-  `trump-2023-packing-11-unit-squares` are **raw-only**: PDF and faithful extraction, no
-  cleaned transcription yet.
-  All eight were read directly from the PDF, and the claims resting on them were checked
-  there.
+  `trump-2023-packing-11-unit-squares`, plus `bal-2026-64-rectangle-wegner-lp-gaps`,
+  `dewar-2024-contacts-oriented-squares`,
+  `connelly-whiteley-1996-second-order-rigidity`,
+  `donev-torquato-stillinger-connelly-2004-jamming-lp`,
+  `donev-connelly-stillinger-torquato-2007-underconstrained-jammed-packings`, and
+  `connelly-packings-of-circles-and-spheres-lecture-notes` are **raw-only**: PDF and
+  faithful extraction, no cleaned transcription yet.
+  All fourteen were read directly from the PDF, and the claims resting on them were
+  checked there.
 - `gobel-1979-geometrical-packing-and-covering-problems` is **PDF-only**: the source is
   retained, but neither a cleaned transcription nor a faithful extraction has been
   produced. Claims resting on it must be checked against the page images.
@@ -159,6 +164,22 @@ Citation keys match those used in the research document.
 | **[Roth–Vaughan 1978]** | Inefficiency in Packing Squares with Unit Squares | K. F. Roth, R. C. Vaughan | 1978 | JCTA 24, 170–186 | `roth-vaughan-1978-inefficiency-packing-squares` |
 | **[El Moumni 1999]** | Optimal Packings of Unit Squares in a Square | S. El Moumni | 1999 | Studia Sci. Math. Hungar. 35, 281–290 | `el-moumni-1999-optimal-packings-unit-squares` |
 | **[Trump 2023]** | Packing of 11 unit squares in a square with minimum size | W. Trump | 2023 | Author preprint | `trump-2023-packing-11-unit-squares` |
+| **[Bal 2026]** | A 64-Rectangle Counterexample to Wegner’s Conjecture and LP Gaps up to 5/2 | A. K. Bal | 2026 | arXiv:2607.11318v2 | `bal-2026-64-rectangle-wegner-lp-gaps` |
+| **[Dewar 2024]** | How many contacts can exist between oriented squares of various sizes? | S. Dewar | 2024 | Discrete Math. 347(4), 113879; arXiv:2210.10422v2 | `dewar-2024-contacts-oriented-squares` |
+
+## Rigidity and verification method sources
+
+These papers and notes support the local-rigidity and certified-search program.
+They are method analogues, not direct theorems about the global optimum for eleven
+congruent squares. In particular, smooth-particle or tensegrity results require their
+hypotheses to be matched to the square pose chart and its nonsmooth feature changes.
+
+| Key | Title | Authors | Year | Venue | File stem |
+| --- | --- | --- | --- | --- | --- |
+| **[Connelly–Whiteley 1996]** | Second-Order Rigidity and Prestress Stability for Tensegrity Frameworks | R. Connelly, W. Whiteley | 1996 | SIAM J. Discrete Math. 9(3), 453–491 | `connelly-whiteley-1996-second-order-rigidity` |
+| **[Donev et al. 2004]** | A Linear Programming Algorithm to Test for Jamming in Hard-Sphere Packings | A. Donev, S. Torquato, F. H. Stillinger, R. Connelly | 2004 | J. Comput. Phys. 197, 139–166 | `donev-torquato-stillinger-connelly-2004-jamming-lp` |
+| **[Donev et al. 2007]** | Underconstrained Jammed Packings of Nonspherical Hard Particles: Ellipses and Ellipsoids | A. Donev, R. Connelly, F. H. Stillinger, S. Torquato | 2007 | Phys. Rev. E 75, 051304 | `donev-connelly-stillinger-torquato-2007-underconstrained-jammed-packings` |
+| **[Connelly notes]** | Packings of Circles and Spheres, Lectures III and IV | R. Connelly | undated | Institut Henri Poincaré lecture slides | `connelly-packings-of-circles-and-spheres-lecture-notes` |
 
 ## Web sources
 
@@ -168,9 +189,14 @@ Citation keys match those used in the research document.
 | **[Friedman DS7 html]** | 2009 HTML edition of the DS7 survey | combinatorics.org | `friedman-ds7-survey-2009-html` |
 | **[Kingbird]** | Squares-in-Squares catalogue: exact minimal polynomials, rigidity flags | kingbird.myphotos.cc | `kingbird-squares-in-squares` |
 | **[Kingbird-compared]** | Supersession history: which record fell to which method, when | kingbird.myphotos.cc | `kingbird-squares-in-squares-compared` |
+| **[Kingbird-rigid]** | Author-maintained rigid-packing classification | kingbird.myphotos.cc | `kingbird-squares-in-squares-rigid` |
+| **[Kingbird analytic minimization]** | Author notes on stationary equations for underdetermined packing systems | kingbird.myphotos.cc | `kingbird-squares-in-squares-analytic-minimization` |
 | **[Kingbird run statistics]** | First-party simulated-annealing basin frequencies and setup-specific search costs for `n = 51, 55` | kingbird.myphotos.cc | `kingbird-run-statistics-2026/` |
 | **[UnitSquare 2026]** | Results Release 1: six reported construction-only improvements and its public structured record | hmbelvedere.com | `unitsquare-release1-2026/` |
-| **[Burns–Massaccesi n17]** | Proposed exact-rational lower-bound certificates at 4.4811 and 4.5058, plus a distinct near-record topology | sam-burns.com; gus-massa.blogspot.com | `n17-lower-bounds-2026/` |
+| **[Burns–Massaccesi n17]** | Exact-rational weighted lower-bound sources at 4.4811 and 4.5058, their public verifiers, and a distinct near-record topology; retained as method provenance and controls after later project bounds | sam-burns.com; gus-massa.blogspot.com | `n17-lower-bounds-2026/` |
+| **[Brandwijk n17 capsule]** | Exact 16-point certificate capsule for `s(17) > 89/20`, offline checker, metadata, local audit, and later supersession context | zenodo.org | `literature-refresh-2026-09-05/` |
+| **[De Winter 2026]** | Mutable author report of proposed construction improvements at `n = 68, 126, 206`; coordinates unavailable and values unreplayed | researchgate.net | `de-winter-improved-packings-2026/` |
+| **[Literature refresh 2026-09-05]** | Frozen arXiv, Crossref, OpenAlex, and Zenodo receipts; additions, currentness checks, and nearby-problem exclusions | primary sources and scholarly indexes | `literature-refresh-2026-09-05/` |
 | **[`s(11)` lower-bound audit 2026]** | Exact-value, reciprocal, catalogue, citation-chain, and method-lineage search supporting the scoped novelty claim for `381/100` | primary papers; author pages; scholarly indexes; public catalogues | `s11-lower-bound-literature-audit-2026/` |
 | **[Finite-case literature audit 2026]** | Repeatable queries and bounded negative result for recent papers on the prioritized cases | arxiv.org; combinatorics.org; author pages | `finite-case-literature-audit-2026/` |
 | **[`n = 54` source/formula audit 2026]** | Revision-keyed genealogy, live-SVG formula receipt, quartic-field replay, and typed pose-correspondence gap | combinatorics.org; kingbird.myphotos.cc | `n54-source-formula-audit-2026/` |

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Squares in Squares: Rigid packings</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/copy-tex.min.js" integrity="sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            renderMathInElement(document.body, {
+                // customized options
+                // • auto-render specific keys, e.g.:
+                delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '\\[', right: '\\]', display: true}
+                ],
+                macros: {
+                    "\\Nn": "{#1\\small{\\ldots}}",
+                },
+                // • rendering keys, e.g.:
+                throwOnError : false
+            });
+            for (const toggle of document.getElementsByClassName('toggle')) {
+                toggle.addEventListener('click', toggleEquation);
+                toggle.addEventListener('dblclick', function(event) {
+                    event.preventDefault();
+                    toggleEquation();
+                });
+            }
+        });
+        function toggleEquation() {
+            const frame1 = this.getElementsByClassName('frame1')[0];
+            const frames = this.getElementsByClassName('frames');
+
+            let j = -1;
+            for (let i=0; i<frames.length; i++) {
+                if (frames[i].classList.contains('toggled')) {
+                    j = i; break;
+                }
+            }
+            if (j < 0) {
+                frame1   .classList.toggle('toggled');
+                frames[0].classList.toggle('toggled');
+            } else {
+                frames[j].classList.toggle('toggled');
+                if (j+1 == frames.length) {
+                    frame1.classList.toggle('toggled');
+                } else {
+                    frames[j+1].classList.toggle('toggled');
+                }
+            }
+        }
+
+        // SVG Edit Mode Toggle
+        let openSVGsInEditMode = false;
+        function toggleSVGEditMode() {
+            openSVGsInEditMode = !openSVGsInEditMode;
+            const button = document.getElementById('svgEditToggle');
+            if (button) {
+                button.textContent = openSVGsInEditMode ? 'SVG Edit Mode: ON' : 'SVG Edit Mode: OFF';
+                button.classList.toggle('active', openSVGsInEditMode);
+            }
+        }
+        // Intercept clicks on SVG links
+        document.addEventListener('click', function(e) {
+            if (!openSVGsInEditMode) return;
+            // Find if we clicked on a link or inside one
+            let target = e.target.closest('a');
+            if (!target) return;
+            const href = target.getAttribute('href');
+            if (!href) return;
+            // Check if it's an SVG file
+            if (href.toLowerCase().endsWith('.svg')) {
+                e.preventDefault();
+                // Add #edit hash if not already present
+                const url = href.includes('#') ? href : href + '#edit';
+                window.open(url, target.getAttribute('target') || '_self');
+            }
+        });
+    </script>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<style>
+body {
+    font-family: serif;
+}
+embed {
+    pointer-events: none;
+}
+.svg-table {
+    table-layout: auto;
+    width: max-content;
+    overflow-x: auto;
+    border-spacing: 1.333em 0;
+}
+.svg-box {
+    height: 9.6667em;
+}
+.box {
+    width: 19.333em;
+}
+.desc {
+    align: center;
+    vertical-align: top;
+    padding-top: 0.333em;
+}
+.katex {
+    font-size: 1em;
+}
+.toggle {
+    cursor: pointer;
+}
+.frame1         {display: inline;}
+.frame1.toggled {display: none;  }
+.frames         {display: none;  }
+.frames.toggled {display: inline;}
+#svgEditToggle {
+  font-size: medium;
+}
+</style>
+
+<center><font size="+4">Squares in Squares</font><font size="+3"><br>Rigid packings<br></font>
+<font size="+1">SVG, high-precision, and categorized list by <a href="https://github.com/Davidebyzero" style="text-decoration:none">David Ellsworth</a><br>
+based on <a href="https://web.archive.org/web/20230530194618/https://erich-friedman.github.io/packing/squinsqu/" style="text-decoration:none">original</a> compiled by <a href="https://erich-friedman.github.io/" style="text-decoration:none">Erich Friedman</a></font>
+</center><p>
+
+<font size="+1">This is a list of rigid packings. Most are the best known, but in cases where they are inoptimal, they are shown alongside the best known.
+For the main list, see <a href="squares_in_squares.html">Squares in Squares</a> or <a href="squares_in_squares__triangular_table.html">Squares in Squares: Triangular Table View</a>.</p><p>
+
+A packing is rigid when it cannot be continuously transformed into any other valid packing without changing the size of its enclosing square.</p><p>
+
+Where the word "alternative" is used, this designates an alternative packing, which is enclosed within the same-sized bounding square as another packing, but cannot be reached by continuously translating and/or rotating the squares in that packing.
+When the packing can be reached by such continuous transformations, the word "rearrangement" is used.</p><p>
+
+For more information on each packing, view its SVG's source code. In browsers that don't provide an easy way to do this, you can prepend the URL with "<code>view-source:</code>" (without the quotes).</p><p>
+
+The property of rigidity is rare among nontrivial best known packings. Even the known recurring patterns only extend finitely before becoming inoptimal.</p><p></p>
+
+Zoom:
+<button onclick="zoom_0_25()" ><font size="+0">0.25×</font></button>&thinsp;
+<button onclick="zoom_0_333()"><font size="+0">1/3× </font></button>&thinsp;
+<button onclick="zoom_0_5()"  ><font size="+0">0.5× </font></button>&thinsp;
+<button onclick="zoom_0_667()"><font size="+0">2/3× </font></button>&thinsp;
+<button onclick="zoom_0_75()" ><font size="+0">3/4× </font></button>&thinsp;
+<button onclick="zoomReset()" ><font size="+0">1×   </font></button>&thinsp;
+<button onclick="zoom_1_5()"  ><font size="+0">1.5× </font></button>&thinsp;
+<button onclick="zoom_2()"    ><font size="+0">2×   </font></button></font>
+&emsp;
+<button id="svgEditToggle" onclick="toggleSVGEditMode()">SVG Edit Mode: OFF</button>
+<p></p><hr><p></p>
+
+<script>
+    let currentZoom = 1;
+
+    function zoom(x) {
+        zoomee  = document.querySelector('.container');
+        wrapper = document.querySelector('.wrapper');
+        zoomee .style.transformOrigin = 'top left';
+        zoomee .style.transform = x==1 ? '' : 'scale(' + x + ')';
+        wrapper.style.height    = x==1 ? '' : (zoomee.offsetHeight * x) + 'px';
+    }
+    function zoom_0_25 () {zoom(1/4)}
+    function zoom_0_333() {zoom(1/3)}
+    function zoom_0_5  () {zoom(1/2)}
+    function zoom_0_667() {zoom(2/3)}
+    function zoom_0_75 () {zoom(3/4)}
+    function zoomReset () {zoom(1  )}
+    function zoom_1_5  () {zoom(3/2)}
+    function zoom_2    () {zoom(2  )}
+</script>
+
+<div class="wrapper">
+<div class="container">
+
+<p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">5.<br><a href="square-5.svg"><div class="svg-box"><embed src="square-5.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s =  2 + { 1\over 2}\sqrt 2 = \Nn{2.70710678118654}$<br>Proved optimal by Frits Göbel<br>in early 1979.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">11.<br><a href="square-11.svg"><div class="svg-box"><embed src="square-11.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1"><span class="toggle">
+    <span class="frame1">$s = {}^{8}🔒 = \Nn{3.87708359002281}$</span>
+    <span class="frames">$s^8 - 20s^7 + 178s^6 - 842s^5 + 1923s^4 - 496s^3 - 6754s^2 + 12420s -6865 = 0$</span>
+</span><br>Found by Walter Trump<br>in 1979.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">18.<br><a href="square-18_r1r.svg"><div class="svg-box"><embed src="square-18_r1r.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-18.svg"><div class="svg-box"><embed src="square-18.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 2          + 2         \sqrt 2 = \Nn{4.82842712474619}$<br>Side length found by Frits Göbel <br>in early 1979.<br>Not optimal overall.<br>Rigid alternative found by David Ellsworth in December 2024.
+</font></td><td></td><td class="desc"><font size="+1">$s = {7\over 2} + {1\over 2}\sqrt 7 = \Nn{4.82287565553229}$<br>Found by Pertti Hämäläinen<br>in 1980.<br>Beats the rigid $s(18)$, but is not rigid.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">28.<br><a href="square-28_r1b.svg"><div class="svg-box"><embed src="square-28_r1b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-28.svg"><div class="svg-box"><embed src="square-28.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 3 + 2 \sqrt 2 = \Nn{5.82842712474619}$<br>Side length found by Frits Göbel <br>in early 1979.<br><a href="squares_in_squares__Göbel_squares.html">Explore group</a><br>Semi-rigid alternative with minimal rotated squares found by David Ellsworth in June 2023.<br>The four squares at the middle of each edge of the enclosing square, and the six squares surrounding the center, can all slide together as a carousel-like group.
+</font></td><td></td><td class="desc"><font size="+1"><span class="toggle">
+    <span class="frame1">$s = {}^{6}🔒 = \Nn{5.82444461667405}$</span>
+    <span class="frames">$s^6-24s^5+212s^4-812s^3+1025s^2+882s-1615=0$</span>
+</span><br>Found by David Ellsworth<br>in December 2025, using his modified version of Thomas Schadt's simulated annealing program, starting from randomness.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">40.<br><a href="square-40.svg"><div class="svg-box"><embed src="square-40.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 4 + 2 \sqrt 2 = \Nn{6.82842712474619}$<br>Found by Frits Göbel<br>in early 1979.<br><a href="squares_in_squares__Göbel_squares.html">Explore group</a>
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">50.<br><a href="square-50_r0r.svg"><div class="svg-box"><embed src="square-50_r0r.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-50.svg"><div class="svg-box"><embed src="square-50.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = {11\over 2}\sqrt 2 = \Nn{7.77817459305202}$<br>Found by David Ellsworth<br>in December 2024.<br>Not optimal overall.
+</font></td><td></td><td class="desc"><font size="+1">$s =  7 + {4\over 7}    = \Nn{7.57142857142857}$
+    <br>Found by Thomas Schadt in December 2025, using a simulated annealing program he wrote, starting from randomness. <font size="-1">Optimized by David Ellsworth.
+    <br>This is the third record-setting packing found with a rational side length, thanks to the Pythagorean triple $\{3, 4, 5\}$ determining its tilt angle. It is the first record-setting packing to use the same Pythagorean triple as the $s(104)$ found by David Ellsworth in December 2024 (the first competitively-intended packing found with a rational side length, though not record-setting).
+    <br>It's the second record-setting packing found that is doubly semi-primitive, i.e. has only non-rotated squares on its leftmost and rightmost sides, but has rotated square(s) poking into its top and bottom sides.
+    <br>It's the first to have both of these properties.</font>
+    <br>Beats the rigid $s(50)$, but is not rigid.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">52.<br><a href="square-52b.svg"><div class="svg-box"><embed src="square-52b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 7 + {1\over 2}\sqrt 2 = \Nn{7.70710678118654}$<br>Side length found by Frits Göbel<br>in early 1979.<br>Rigid alternative with minimal rotated squares found by David W. Cantrell<br>in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<!--
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">102.<br><a href="square-102_r0r.svg"><div class="svg-box"><embed src="square-102_r0r.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+     <td class="box"><font size="+3"><br><a href="square-102_r1.svg"><div class="svg-box"><embed src="square-102_r1.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-102.svg"><div class="svg-box"><embed src="square-102.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s =  5          +  4        \sqrt 2 = \Nn{10.65685424949238}$<br>Found by David Ellsworth in December 2024.<br>Based on the $s(148)$ that continues a pattern found by Frits Göbel in early 1979.<br>Not optimal overall.
+</font></td><td></td><td class="desc"><font size="+1">$s = {17\over 2} + {3\over 2}\sqrt 2 = \Nn{10.62132034355964}$<br>Found by Károly Hajba in September 2024.<br>Extends the $s(37)$ found by Evert Stenlund in early 1980.<br>Beats the rigid $s(102)$, but is not rigid.
+</font></td><td></td><td class="desc"><font size="+1"><span class="toggle">
+    <span class="frame1">$s = {}^{8}🔒 = \Nn{10.61138823373863}$</span>
+    <span class="frames">$24s^4-(1400+352\sqrt{2})s^3+(27061+10102\sqrt{2})s^2-(218629+97462\sqrt{2})s+641430+317240\sqrt{2}=0$</span>
+    <span class="frames">$576s^8-67200s^7+3011120s^6-72041376s^5+1033920257s^4-9243724322s^3+50697397293s^2-156795019420s+210150009700=0$</span>
+</span><br>Improved by David W. Cantrell in November 2024 and David Ellsworth in November and December 2024, adapting and extending the $s(37)$ improvement found by David W. Cantrell in September 2002.<br>Beats the rigid $s(102)$, but is not rigid.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+-->
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">149.<br><a href="square-149b.svg"><div class="svg-box"><embed src="square-149b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 12 + {1\over 2}\sqrt 2 = \Nn{12.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.<br>Rigid alternative with minimal rotated squares found by David Ellsworth in November 2024, based on the $s(52)$ found by David W. Cantrell in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">200.<br><a href="square-200_r0r.svg"><div class="svg-box"><embed src="square-200_r0r.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-200.svg"><div class="svg-box"><embed src="square-200.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = {21\over 2}\sqrt 2 = \Nn{14.84924240491749}$<br>Found by David Ellsworth<br>in December 2024.<br>Not optimal overall.
+</font></td><td></td><td class="desc"><font size="+1">$s =  9     + 4 \sqrt 2 = \Nn{14.65685424949238}$<br>Adds two "L"s to the $s(148)$ that continues a pattern found by Frits Göbel in early 1979.<br>Beats the rigid $s(200)$, but is not rigid.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">203.<br><a href="square-203_r0b.svg"><div class="svg-box"><embed src="square-203_r0b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-203a.svg"><div class="svg-box"><embed src="square-203a.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 12 +  2         \sqrt 2 = \Nn{14.82842712474619}$<br>Combines two copies of the rigid $s(18)$ and one of the semi-rigid $s(28)$ found by David Ellsworth in December 2024 and June 2023, respectively.<br>Not optimal overall.
+</font></td><td></td><td class="desc"><font size="+1">$s =  7 + {11\over 2}\sqrt 2 = \Nn{14.77817459305202}$<br>Found by David Ellsworth<br>in December 2024.<br>Based on the $s(233)$ that continues a pattern found by Frits Göbel in early 1979.<br>Beats the rigid $s(203)$, but is not rigid.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">233.<br><a href="square-233_r0b.svg"><div class="svg-box"><embed src="square-233_r0b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-233.svg"><div class="svg-box"><embed src="square-233.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 13 +  2         \sqrt 2 = \Nn{15.82842712474619}$<br>Combines two copies of the rigid $s(18)$ found by David Ellsworth in December 2024 and one of the $s(40)$ found by Frits Göbel in early 1979.<br>Not optimal overall.
+</font></td><td></td><td class="desc"><font size="+1">$s =  8 + {11\over 2}\sqrt 2 = \Nn{15.77817459305202}$<br>Continues a pattern found by<br>Frits Göbel in early 1979.<br><a href="squares_in_squares__Göbel_squares.html">Explore group</a><br>Beats the rigid $s(233)$, but is not rigid.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">265.<br><a href="square-265_r0b.svg"><div class="svg-box"><embed src="square-265_r0b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-265.svg"><div class="svg-box"><embed src="square-265.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 14 +  2         \sqrt 2 = \Nn{16.82842712474619}$<br>Combines three copies of the semi-rigid $s(28)$ found by David Ellsworth in June 2023.<br>Not optimal overall.
+</font></td><td></td><td class="desc"><font size="+1">$s =  9 + {11\over 2}\sqrt 2 = \Nn{16.77817459305202}$<br>Continues a pattern found by<br>Frits Göbel in early 1979.<br><a href="squares_in_squares__Göbel_squares.html">Explore group</a><br>Beats the rigid $s(265)$, but is not rigid.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">296.<br><a href="square-296b.svg"><div class="svg-box"><embed src="square-296b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 17 + {1\over 2}\sqrt 2 = \Nn{17.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.<br>Rigid alternative with minimal rotated squares based on the $s(52)$ found by David W. Cantrell in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">299.<br><a href="square-299_r0b.svg"><div class="svg-box"><embed src="square-299_r0b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td><td>
+</td><td class="box"><font size="+3"><br><a href="square-299.svg"><div class="svg-box"><embed src="square-299.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 15 +           2        \sqrt 2 = \Nn{17.82842712474619}$<br>Combines two copies of the semi-rigid $s(28)$ found by David Ellsworth in June 2023 with one of the $s(40)$ found by Frits Göbel in early 1979.<br>Not optimal overall.
+</font></td><td></td><td class="desc"><font size="+1">$s = {33\over 2} + {1\over 2}\sqrt 7 = \Nn{17.82287565553229}$<br>Extends the $s(86)$ found by<br>Erich Friedman in 1997.<br>Beats the rigid $s(299)$, but is not rigid.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">335.<br><a href="square-335.svg"><div class="svg-box"><embed src="square-335.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 16 +           2        \sqrt 2 = \Nn{18.82842712474619}$<br>Combines the semi-rigid $s(28)$ found by<br>David Ellsworth in June 2023 with<br>two copies of the $s(40)$ found by<br>Frits Göbel in early 1979.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">373.<br><a href="square-373.svg"><div class="svg-box"><embed src="square-373.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 17 + 2 \sqrt 2 = \Nn{19.82842712474619}$<br>Combines three copies of the $s(40)$ found by Frits Göbel in early 1979.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">493.<br><a href="square-493b.svg"><div class="svg-box"><embed src="square-493b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 22 + {1\over 2}\sqrt 2 = \Nn{22.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.<br>Rigid alternative with minimal rotated squares based on the $s(52)$ found by David W. Cantrell in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">740.<br><a href="square-740b.svg"><div class="svg-box"><embed src="square-740b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 27 + {1\over 2}\sqrt 2 = \Nn{27.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.<br>Rigid alternative with minimal rotated squares based on the $s(52)$ found by David W. Cantrell in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1037.<br><a href="square-1037b.svg"><div class="svg-box"><embed src="square-1037b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 32 + {1\over 2}\sqrt 2 = \Nn{32.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.<br>Rigid alternative with minimal rotated squares based on the $s(52)$ found by David W. Cantrell in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1044.<br><a href="square-1044.svg"><div class="svg-box"><embed src="square-1044.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 30 + 2 \sqrt 2 = \Nn{32.82842712474619}$<br>Combines five copies of the $s(40)$ found by Frits Göbel in early 1979.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1384.<br><a href="square-1384b.svg"><div class="svg-box"><embed src="square-1384b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 37 + {1\over 2}\sqrt 2 = \Nn{37.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.<br>Rigid alternative with minimal rotated squares based on the $s(52)$ found by David W. Cantrell in 2005.
+</font></td></tr></tbody></table></font></p><p></p><hr><p><font size="+1">
+
+<table class="svg-table" cellspacing="0" border="0"><tbody><tr align="center">
+     <td class="box"><font size="+3">1781.<br><a href="square-1781b.svg"><div class="svg-box"><embed src="square-1781b.svg" align="absmiddle" type="image/svg+xml"/></div></a>
+</font></td></tr><tr align="center">
+                     <td class="desc"><font size="+1">$s = 42 + {1\over 2}\sqrt 2 = \Nn{42.70710678118654}$<br>Extends the $s(52)$ found by<br>Frits Göbel in early 1979.<br>Rigid alternative with minimal rotated squares based on the $s(52)$ found by David W. Cantrell in 2005.
+</font></td></tr></tbody></table></font></p>
+
+</div>
+</div>
+
+<p></p><hr><p><font size="+1">
+
+<font size="+1">
+For more details, see Erich Friedman's paper on the subject:
+<a href="https://erich-friedman.github.io/papers/squares/squares.html">Packing Unit Squares in Squares: A Survey and New Results</a> (or <a href="squares.html">David Ellsworth's edit</a>).</font></font></p><p><font size="+1"><font size="+1">
+
+
+</font></font></p></body></html>
