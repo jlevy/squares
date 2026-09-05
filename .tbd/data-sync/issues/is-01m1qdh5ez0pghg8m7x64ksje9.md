@@ -5,14 +5,14 @@ title: "Certificate page: every decimal says whether it is exact; rationals wher
 kind: bug
 status: closed
 priority: 2
-version: 2
+version: 3
 labels:
   - explainer
   - pr-79
 dependencies: []
-parent_id: is-01m1q0p63s2evef5mhkyn16e41
+parent_id: is-01m1pnpwvpjydts81pffmp1nt7
 created_at: 2026-09-04T23:54:43.038Z
-updated_at: 2026-09-05T00:26:32.930Z
+updated_at: 2026-09-05T00:41:31.867Z
 closed_at: 2026-09-05T00:26:32.929Z
 close_reason: Commit 6b639c00, verified on the rendered page.
 resolution: null

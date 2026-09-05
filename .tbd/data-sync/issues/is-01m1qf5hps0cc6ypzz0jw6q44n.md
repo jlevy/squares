@@ -5,14 +5,14 @@ title: "Certificate page: footnote popovers stay put on the page, not on the vie
 kind: bug
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - explainer
   - pr-79
   - kpress
 dependencies: []
-parent_id: is-01m1q0p63s2evef5mhkyn16e41
+parent_id: is-01m1pnpwvpjydts81pffmp1nt7
 created_at: 2026-09-05T00:23:19.512Z
-updated_at: 2026-09-05T00:23:19.512Z
+updated_at: 2026-09-05T00:41:56.881Z
 ---
 Review feedback on PR #79: kpress positions a footnote popover in viewport coordinates, appended to body, so it holds a screen position while the page scrolls under it. It should sit at a fixed place on the page beside its reference. Fixed in kpress on the vendored branch; the page picks it up through the render-time bundle.

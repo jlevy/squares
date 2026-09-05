@@ -5,13 +5,13 @@ title: "Certificate page: Condition N in bold only where the conditions are defi
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels:
   - explainer
   - pr-79
 dependencies: []
-parent_id: is-01m1q0p63s2evef5mhkyn16e41
+parent_id: is-01m1pnpwvpjydts81pffmp1nt7
 created_at: 2026-09-05T00:26:28.968Z
-updated_at: 2026-09-05T00:26:28.968Z
+updated_at: 2026-09-05T00:41:57.603Z
 ---
 Review feedback on PR #79: the bold on every mention of a condition goes; the boxed list defining the five is the one place they are set in bold.
