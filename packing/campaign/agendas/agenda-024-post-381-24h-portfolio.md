@@ -272,16 +272,17 @@ locally.
 ## Coordinator entry point
 
 PR #83 is terminal and merged as `663ca37eb622508d9df00c594b8ef11d2c256f55`. The
-portfolio branch is `codex/next-research-strategy`, carried by PR #89 against `main`;
-its merge base with the frozen `origin/main` is the same commit.
-Only the coordinator fetches or reconciles upstream state.
+portfolio branch is `codex/next-research-strategy`, carried by PR #89 against `main`; it
+includes the later PR #88 merge at `3f8e104372c0c523f53855e769d86fd88ecbf22d` through
+reconciliation merge `6a4b329edcced9155d11921eb5c0df8093c26318`. Only the coordinator
+fetches or reconciles upstream state.
 Managers begin from the committed packet and do not need network access.
 
 Run these read-only checks from the repository root immediately before dispatch:
 
 ```sh
 git status --short --branch
-git merge-base --is-ancestor 663ca37eb622508d9df00c594b8ef11d2c256f55 HEAD
+git merge-base --is-ancestor 3f8e104372c0c523f53855e769d86fd88ecbf22d HEAD
 tbd show think-9pzv think-c678 think-gmdy think-jbat \
   think-4ln1 think-9xxh think-do04 think-u7i4 --max-lines 40
 ```
@@ -472,12 +473,56 @@ A sibling-head change does not rewrite a historical launch snapshot.
 The coordinator logs its old and new heads, checks namespace and named-input overlap,
 and either records a no-invalidation disposition or appends a superseding manifest.
 
-The first post-freeze sibling check found one noninvalidating change:
+The post-freeze checks found only noninvalidating changes:
 
 | Observed | Ref movement | Changed paths | Disposition |
 | --- | --- | --- | --- |
 | 2026-09-05 after BC-219 | PR #87: `26709263f740f3d9aece654e0272dae3c168d18d` to `3c6c5e7fc0c1662a57a1a3d06246a3a5e0730b89` | `development.md`, `packing/devtools/gate-budgets.yaml`, `packing/tests/test_module_boundaries.py` | No agenda, BC, H, exp, exploration, manager-output, or named-input collision. Preserve the frozen BC-219 row; apply the new validation-budget behavior only after PR #87 reaches `main`. |
 | 2026-09-05 launch-spike close | PR #87: `3c6c5e7fc0c1662a57a1a3d06246a3a5e0730b89` to `b9d357db7a0f46ff8e0cd5bcfcb157686003b8a2` | `packing/src/sqpack/cli/validate.py`, `packing/tests/test_validation_cli.py` | No namespace, manager-output, research-input, or scientific-verdict collision. The change sizes the quick test lane to available CPUs; keep this branch’s measured push receipt and adopt the runner behavior only when PR #87 reaches `main`. |
+| 2026-09-05 after first green PR #89 run | PR #87: `b9d357db7a0f46ff8e0cd5bcfcb157686003b8a2` to `5ab10a1ab67255d229af1614170a33dc32e19ce8` | `development.md`, `packing/devtools/gate-budgets.yaml` | No namespace, manager-output, research-input, or scientific-verdict collision. This records the stable quick-lane timing and does not alter a manager command or launch criterion. |
+| 2026-09-05 after first green PR #89 run | `origin/main`: `663ca37eb622508d9df00c594b8ef11d2c256f55` to `3f8e104372c0c523f53855e769d86fd88ecbf22d` through merged PR #88 | 37 paths in the manifest below | No agenda, BC, H, exp, reserved result, frozen research input, or scientific-verdict collision. The delta changes repository validation, build, explainer, known-best rendering, accounting, and general documentation surfaces. Merged as `6a4b329e`, aligned the clean kpress gitlink, and preserved the scientific spike receipts. The new-base push tier passed 42 of 61 steps with 595 reachable tests passed and 3 deselected in 186.31 seconds. |
+
+The exact PR #88 changed-path manifest is:
+
+```text
+M	.github/workflows/packing-validation.yml
+M	.github/workflows/pages.yml
+M	README.md
+M	SYNOPSIS.md
+M	conventions.md
+M	defects.md
+M	development.md
+M	docs/project/document-map.yaml
+M	packing/atlas/known-best/composite-figure.json
+A	packing/atlas/known-best/known-best-1-100-card.png
+M	packing/atlas/known-best/known-best-1-100.pdf
+M	packing/atlas/known-best/known-best-1-100.png
+M	packing/atlas/known-best/known-best-1-100.svg
+M	packing/atlas/known-best/known-best-1-100@2x.png
+M	packing/atlas/known-best/known-best-atlas.schema.yaml
+M	packing/atlas/known-best/manifest.json
+A	packing/campaign/resource-usage/11222fc8-7b65-5cb8-8e3b-982ecf899ca8.yaml
+M	packing/campaign/session-close-report.yaml
+M	packing/defects.yaml
+M	packing/devtools/build_known_best_atlas.py
+M	packing/devtools/check_documentation.py
+M	packing/devtools/check_svg_rendering.py
+M	packing/devtools/render_explainer.py
+A	packing/devtools/repo_scope.py
+M	packing/devtools/run_negative_controls.py
+M	packing/devtools/templates/explainer-article.md
+M	packing/devtools/templates/explainer-shell.html
+M	packing/pyproject.toml
+M	packing/src/sqpack/cli/validate.py
+M	packing/tests/test_check_svg_rendering.py
+M	packing/tests/test_explainer.py
+M	packing/tests/test_known_best_atlas.py
+M	packing/tests/test_module_boundaries.py
+A	packing/tests/test_repo_scope.py
+M	packing/tests/test_validation_cli.py
+M	packing/uv.lock
+M	vendor/kpress
+```
 
 ## BC-219 launch snapshot
 
