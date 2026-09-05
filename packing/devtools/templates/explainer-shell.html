@@ -108,21 +108,23 @@ body {
    and up to twice the ink of the digits beside it, drawn from DejaVu Sans Bold in the
    printed file while every other glyph on the line came from Source Sans 3.
 
-   The relation is drawn from KaTeX_Main, which is already inlined in this page and
-   has the glyph. That is the point: leaving the family inherited works, and matches
-   the digits' geometry more closely, but hands the character to whatever sans the
-   reader's machine happens to supply, so the title is set differently on different
-   machines. This page is self-contained by design -- nothing is fetched at view time
-   -- and the same principle applies to a glyph resolved at read time. It also makes
-   the relation the same one KaTeX sets in the prose.
+   Naming the weight is the whole fix, and the family stays inherited. Three
+   treatments were rendered and compared: the sans fallback at 400, the same relation
+   drawn from the page's own KaTeX_Main, and the whole line set as mathematics. The
+   sans one wins on the only thing that shows at this size -- it is drawn like the
+   digits beside it, flat terminals and the same geometry, and at 400 its stroke sits
+   close to the semibold it stands in, where a Computer Modern relation is a hairline
+   against Source Sans and reads as light as the bold read heavy.
 
-   Naming the weight is not decoration. KaTeX_Main ships Regular and Bold, so at the
-   inherited 550 the same upward search that produced the original defect would pick
-   KaTeX_Main-Bold and reproduce it one family along.
+   The cost is stated rather than hidden: this is the one glyph on the page the
+   reader's own machine supplies, so it is drawn in whichever sans that machine has.
+   The weight is fixed everywhere, which is what the defect was about.
 
    Every site this class marks -- the hero, the two verdict badges, the two figure
-   captions -- is set at 550, so one rule serves them all. */
-.rel { font-family: KaTeX_Main, serif; font-weight: 400; }
+   captions -- is set at 550, so one rule serves them all. Naming the weight also
+   guards the KaTeX route if it is ever taken: KaTeX_Main ships Regular and Bold, and
+   at the inherited 550 the same upward search would pick the Bold. */
+.rel { font-weight: 400; }
 /* Under the title: the description in sans caps, a step below the title's
    size, then the deck in the prose face, italic. */
 .cert-page .hero .subtitle {
