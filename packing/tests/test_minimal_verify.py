@@ -27,6 +27,7 @@ from pathlib import Path
 import pytest
 
 from devtools.check_rung_figures import decimal_matches
+from devtools.render_verifiable_claim import REACHABLE_CELLS as RECORDED_CELLS
 from sqpack.yamlio import safe_load
 
 PACKING = Path(__file__).resolve().parents[1]
@@ -36,10 +37,10 @@ CERTIFICATE = CASE / "certificate.json"
 CARD = CASE / "t-018-proof-card.md"
 RESULTS = PACKING / "frontier" / "results.yaml"
 
-#: The verifier's own count of the cells it scores across the net. The exhaustive node
-#: below re-derives it on every run and the card quotes it; this constant is what holds
-#: those two together. Nothing else in the repository states it.
-REACHABLE_CELLS = 567_131_843
+#: The verifier's own count of the cells it scores across the net. The renderer holds the
+#: one typed copy, with its provenance, and prints it on the card; the exhaustive node
+#: below re-derives it on every run. Importing it is what holds the three together.
+REACHABLE_CELLS = RECORDED_CELLS["381-100"]
 
 
 def run(*arguments: str | Path) -> subprocess.CompletedProcess[str]:
@@ -213,5 +214,7 @@ def test_the_proof_card_reports_the_standing_the_register_holds() -> None:
     )
     text = CARD.read_text(encoding="utf-8")
 
-    assert f"confirmation rung `{entry['confirmation']}`" in text
+    # The card is generated from a template the formatter wraps, so the rung may sit on
+    # the line after the words that introduce it.
+    assert re.search(rf"confirmation rung\s+`{re.escape(str(entry['confirmation']))}`", text)
     assert f"`{entry['novelty']}`" in text

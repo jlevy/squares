@@ -233,11 +233,12 @@ documents:
   - path: packing/cases/n11_fractional_certificate/t-018-proof.md
     role: component-guide
     authority: record
-    lifecycle: retained
+    lifecycle: superseded
+    superseded_by: packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md
   - path: packing/cases/n11_fractional_certificate/t-018-proof-card.md
-    role: component-guide
-    authority: record
-    lifecycle: retained
+    role: generated-view
+    authority: generated
+    lifecycle: generated
   - path: packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md
     role: generated-view
     authority: generated

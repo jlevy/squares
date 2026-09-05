@@ -109,6 +109,28 @@ unit square. Second, Condition 5 quantifies over every $B$-square inside $[0, L]
 net angle, a superset of the squares the proof meets.
 A stronger hypothesis can only make the theorem harder to apply, never unsound.
 
+## Why the Sweep Is Exact
+
+Condition 5 quantifies over a continuum of centers, and the verifier decides it by a
+finite enumeration. At the net direction with half-tangent $t_k$, put
+$c_k = (1 - t_k^2)/(1 + t_k^2)$ and $s_k = 2 t_k/(1 + t_k^2)$, so that
+$c_k^2 + s_k^2 = 1$ exactly, and $h_k = (B/2)(|c_k| + |s_k|)$. The closed $B$-square at
+that direction with center $(X, Y)$ lies inside $[0, L]^2$ exactly when
+$h_k \le X, Y \le L - h_k$, and it contains the atom at $(x_i, y_i)$ exactly when
+$|c_k (x_i - X) + s_k (y_i - Y)| \le B/2$ and
+$|-s_k (x_i - X) + c_k (y_i - Y)| \le B/2$. In the rotated coordinates
+$U = c_k X + s_k Y$ and $V = -s_k X + c_k Y$, each atom therefore contributes its weight
+on one closed axis-parallel rectangle of centers, and the edges of these rectangles,
+with the four lines bounding the admissible centers, cut the plane into finitely many
+open cells. The covered mass is constant on each open cell.
+On a cell’s boundary it can only be larger, because the rectangles are closed and the
+weights are nonnegative.
+And every admissible center lies in the closure of some open cell that meets the
+admissible square, since that square has interior and finitely many lines cannot cover
+an open set. So the least mass over all admissible centers is the least over the open
+cells that meet the admissible square, and scoring each of them once decides Condition 5
+at that direction. Every quantity is rational, so every score is exact.
+
 ## How to Check It
 
 Save this file as `{{FILE_NAME}}` and the verifier block below as `{{VERIFIER_NAME}}`,
@@ -126,15 +148,16 @@ It prints one line per condition, then a verdict.
 For this certificate the verdict is `VERIFIED: s(11) >= {{L_FRAC}}`, with Condition 5
 reporting the least covered mass ${{LEAST_FRAC}}$ at direction $0$ and center
 ${{WITNESS_CENTER}}$ over the {{N_DIRECTIONS}} directions.
-It takes {{RUNTIME}} in pure Python.
-The verifier decides Condition 5 by enumerating, for each net direction, the finitely
-many cells of center positions on which the set of atoms under the square is constant,
-and checking the mass on every reachable cell, so the sweep is exact rather than
-sampled.
+It takes {{RUNTIME}} in pure Python, most of it on the finite sweep of Condition 5 that
+“Why the Sweep Is Exact” describes.
 
 The exit status is 0 only when all five conditions hold.
 Perturb the certificate, by lightening one atom, dropping an orbit member, or shortening
 the net, and the verifier refuses it, naming the condition that fails.
+
+## How This Repository Decided It
+
+{{DECIDED_HERE}}
 
 ## The Verifier
 
