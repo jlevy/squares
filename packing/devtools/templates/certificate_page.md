@@ -1,0 +1,523 @@
+<!--
+Contract for this file. Prose, headings, lists, math and footnotes are Markdown, rendered
+once by kpress (markdown-it: dollarmath, footnotes, block `{.class}` and span
+`[text]{.class}` attrs, `::: name` containers). Figures, the credits and the frontmatter
+stay raw HTML: they carry canvas, SVG, controls and layout Markdown cannot express.
+Math in Markdown text is `$…$` and `$$…$$`; math inside a raw HTML block is not seen by
+Markdown, so there it stays `<span class="tex">…</span>` for the page to typeset itself.
+`{{PLACEHOLDERS}}` are substituted before rendering, and the part between BEGIN:ARTICLE
+and END:ARTICLE is stamped once per certificate.
+-->
+
+::: hero
+
+# [s({{N}}) ≥ {{HEADLINE_L_FRAC}}]{.symbol}
+
+{.subtitle}
+A New Lower Bound on the Square Packing Problem
+
+<div class="credits">
+  <span class="caps">An automated geometric research exploration</span>
+  <span>September 4, 2026</span>
+  <span>Tooling and human oversight: <a href="https://x.com/ojoshe"><strong>Joshua Levy</strong></a></span>
+  <span>Agents: <strong>Opus 5</strong>, <strong>Fable 5.1</strong>, and <strong>Codex 5.6</strong></span>
+  <span>Open source at <a href="https://github.com/jlevy/squares"><strong>github.com/jlevy/squares</strong></a></span>
+</div>
+
+{.deck}
+Eleven unit squares, free to rotate, do not fit in a square of side {{HEADLINE_L_DEC}}.
+The proof is a weighted point set and a pigeonhole argument.
+It is the first improvement in {{YEARS_SINCE_PRIOR}} years to the bounds on the smallest
+open case.
+The previous bound, {{PRIOR_LOWER_DEC}}, was set by Stromquist in {{PRIOR_YEAR}}.[^stromquist]
+
+:::
+
+## The Square Packing Problem
+
+The square packing problem[^survey] asks, for each $n$, for $s(n)$, the side of the
+smallest square that holds $n$ unit squares with disjoint interiors.
+The unit squares are free to rotate.
+The value is known for every $n \le 10$. The last of those, $s(10) = 3 + 1/\sqrt{2}$,
+was settled by Stromquist in {{PRIOR_YEAR}},[^stromquist] and $s(11)$ is the smallest
+case still open.
+
+The best known packing, found by Walter Trump in 1979,[^trump] fits eleven squares in a
+square of side {{BEST_PACKING_DEC}}, so $s(11) \le {{BEST_PACKING_TEX}}$. Whether a
+smaller container works is the open question.
+This page proves that the container cannot be as small as {{DEFAULT_L_DEC}}, and then
+that it cannot be as small as {{HEADLINE_L_DEC}}.
+
+Each bound is proved by a **certificate**: a finite list of weighted points in the
+container (the atoms), a finite list of angles (the net), and a shrink factor below 1.
+Five conditions on the certificate, stated in the box below, are decided by exact
+arithmetic. When all five hold, no packing of eleven unit squares fits in the container.
+
+The proof described here covers a bound of $s({{N}}) \ge {{HEADLINE_L_FRAC}}$. For
+illustration, some of the figures below show a looser bound
+$s({{N}}) \ge {{DEFAULT_L_FRAC}}$, and a toggle on the figure lets you select the
+tighter precision so you can compare the results.
+
+<figure>
+  <div class="fig-head">
+    <span class="caps">Figure 1</span>
+    <span class="fig-title">The best known packings of 1 through 100 squares</span>
+  </div>
+  <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.png" alt="The best known packings of one through one hundred unit squares, in a ten-by-ten grid" width="2400" height="2676"></a></div>
+  <figcaption class="kpress-figcaption">The best known packings of 1 through 100 unit squares, from the project’s atlas: each cell
+  is the tightest arrangement on record for that <span class="tex">n</span>, drawn from the retained witness. The full
+  results, with every witness and its provenance, are in
+  <a href="https://github.com/jlevy/squares/blob/main/packing/atlas/known-best/">the GitHub repository</a>, and the
+  composite is <a href="known-best-1-100.pdf">available as a PDF</a>.</figcaption>
+</figure>
+
+## Packing 11 Squares
+
+Eleven is the smallest open case.
+The figures here show the best known packing of eleven squares, which fixes the upper
+bound on $s(11)$, and where the upper and lower bounds now stand.
+
+<figure>
+  <div class="fig-head">
+    <span class="caps">Figure 2</span>
+    <span class="fig-title">The best known packing of 11 squares</span>
+  </div>
+  <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
+  <figcaption class="kpress-figcaption">Trump’s 1979 packing of eleven unit squares in side {{BEST_PACKING_DEC}}, the best known,<sup class="kpress-footnote-ref"><a href="#fn-3" id="fnref-3b" data-kpress-footnote-ref="3">3</a></sup>
+  so <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>. The project’s own rendering, from the retained witness.</figcaption>
+</figure>
+
+## The Five Conditions
+
+{.conditions}
+::: boxed-text
+
+A certificate for $n$ unit squares in a container of side $L$ is a set of weighted atoms
+in the container, a net of directions $\theta_k = 2\arctan t_k$ for $k = 0, \dots, K$,
+each fixed by its rational half-tangent $t_k$, and a shrink $B \lt 1$, such that:
+
+- **Condition 1.** The atom set is invariant under the container’s symmetry group
+  $\mathbf{D}_4$.
+- **Condition 2.** The total mass of the atoms, the sum of all their weights, is strictly
+  below $n$.
+- **Condition 3.** The net reaches $\pi/4$: its last half-tangent is at least
+  $\tan(\pi/8)$.
+- **Condition 4.** $B(1 + D) \lt 1$, where $D$ is the largest of the net’s half-gap
+  tangents, each the tangent of half the angle between two consecutive net directions.
+- **Condition 5.** At every net direction, every placement of a square of side $B$ inside
+  the container covers mass at least $1$.
+
+Conditions 1 to 4 are exact rational comparisons.
+Condition 5 is one exact sweep per direction.
+Together the five prove $s(n) \ge L$.
+
+:::
+
+<!--BEGIN:ARTICLE-->
+
+::: claim
+
+$$
+s({{N}}) \;\ge\; {{L_TEX}} \;=\; {{L_DEC}}
+$$
+
+:::
+
+<div class="frontmatter">
+  <span>certificate <code>{{ID}}</code></span>
+  <span>{{N_ATOMS}} atoms · {{N_DIRECTIONS}} directions · {{N_ORBITS}} orbits of <span class="tex">\mathbf{D}_4</span></span>
+  <span>all arithmetic exact</span>
+</div>
+
+<figure>
+  <div class="fig-head">
+    <span class="caps">Figure 3</span>
+    <span class="fig-title">Bounds on <span class="tex">s({{N}})</span></span>
+    {{CERT_TOGGLE}}
+  </div>
+  <div class="line-fig kpress-diagram">
+  <svg viewBox="0 0 700 92" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER_DEC}}, the new bound {{L_DEC}}, and the best known packing at {{BEST_PACKING_DEC}}">
+    <rect x="{{BOUND_X}}" y="45" width="{{BAND_W}}" height="13" fill="var(--cert-accent-wash)"/>
+    <line x1="20" y1="51.5" x2="680" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1"/>
+    <g stroke="var(--kpress-doc-muted)" stroke-width="1">
+      <line x1="20" y1="47" x2="20" y2="56"/><line x1="460" y1="47" x2="460" y2="56"/>
+      <line x1="680" y1="47" x2="680" y2="56"/>
+    </g>
+    <g font-size="10" fill="var(--kpress-doc-muted)" text-anchor="middle">
+      <text x="20" y="72">3.75</text><text x="460" y="72">3.85</text><text x="680" y="72">3.90</text>
+    </g>
+    <line x1="{{PRIOR_X}}" y1="30" x2="{{PRIOR_X}}" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
+    <circle cx="{{PRIOR_X}}" cy="51.5" r="3.2" fill="var(--kpress-doc-muted)"/>
+    <g text-anchor="middle">
+      <text x="{{PRIOR_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{PRIOR_LOWER_DEC}}</text>
+      <text x="{{PRIOR_X}}" y="12" font-size="9.5" fill="var(--kpress-doc-muted)">{{PRIOR_SOURCE}}</text>
+      <text x="{{BEST_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{BEST_PACKING_DEC}}</text>
+      <text x="{{BEST_X}}" y="12" font-size="9.5" fill="var(--kpress-doc-muted)">{{BEST_SOURCE}}</text>
+    </g>
+    <line x1="{{BEST_X}}" y1="30" x2="{{BEST_X}}" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
+    <circle cx="{{BEST_X}}" cy="51.5" r="3.2" fill="var(--kpress-doc-muted)"/>
+    <line x1="{{BOUND_X}}" y1="51.5" x2="{{BOUND_X}}" y2="84" stroke="var(--cert-probe)" stroke-width="2"/>
+    <circle cx="{{BOUND_X}}" cy="51.5" r="4.4" fill="var(--cert-probe)"/>
+    <text x="{{BOUND_X}}" y="88" dx="11" font-size="11"
+      font-weight="550" fill="var(--cert-probe)">{{L_FRAC}} = {{L_DEC}}, proved below</text>
+  </svg>
+  </div>
+  <figcaption class="kpress-figcaption">The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. It is
+  <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span>.</figcaption>
+</figure>
+
+## Atoms, Mass, and the Budget
+
+Place finitely many points in the container and give each a positive weight.
+Each weighted point is an **atom**. The **mass** $\mu(R)$ of a region is the sum of the
+weights of the atoms inside it.
+Every weight is rational, so every mass is a finite exact sum.
+
+Suppose eleven unit squares fit in the side-{{L_DEC}} container, and suppose the atoms
+have been chosen so that both of these hold:
+
+- Every unit square that can be placed in the container covers mass at least $1$.
+- The total mass of all {{N_ATOMS}} atoms is below ${{N}}$.
+
+The second is a single sum:
+
+$$
+\sum_a w_a \;=\; {{TOTAL_TEX}} \;=\; {{TOTAL_DEC}} \;\lt\; {{N}}
+$$
+
+The eleven squares are disjoint, so no atom is counted twice, and together they cover
+mass at least ${{N}}$. The container holds only ${{TOTAL_DEC}}$. So eleven unit squares
+do not fit.
+
+Both conditions are properties of the atoms, not of any packing.
+The rest of the proof makes the first one finite to check.
+
+## The Atom Set
+
+There are {{N_ATOMS}} atoms, in {{N_ORBITS}} orbits of the container’s symmetry group
+$\mathbf{D}_4$, carrying {{N_WEIGHTS}} distinct weights between ${{WEIGHT_MIN}}$ and
+${{WEIGHT_MAX}}$. The group is the eight rotations and reflections that map the
+container onto itself, and an orbit is one atom together with its images under all
+eight. The atom set is a union of orbits, so it is invariant under the group, which is
+Condition 1. That invariance lets the proof check angles only up to $\pi/4$: a square at
+any other angle is reflected onto that arc, and the reflected square covers the same
+mass as the original.
+
+<figure>
+  <div class="fig-head">
+    <span class="caps">Figure 4</span>
+    <span class="fig-title">The Atoms</span><span class="tag">Conditions 1 and 2</span>
+    {{CERT_TOGGLE}}
+  </div>
+  <div class="stage stage-tip"><canvas id="field-{{SLUG}}" width="1040" height="1040"></canvas>
+      <div class="tip" id="field-tip-{{SLUG}}" hidden></div></div>
+  <div class="mass-line">
+    <div>Total mass on the board<span class="v tex">\mu\!\left([0,L]^2\right) = {{TOTAL_PLAIN}} = {{TOTAL_DEC}}</span></div>
+    <div>Mass eleven disjoint unit squares would need<span class="v tex">{{N}}</span></div>
+    <div>Shortfall<span class="v tex">{{SHORTFALL}}</span></div>
+  </div>
+  <figcaption class="kpress-figcaption">Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
+  corners, where a square has least room to move, and thins in the middle. The sites and weights are the optimum
+  of a covering linear program, rationalized. The board holds less mass than eleven disjoint unit squares would
+  need. Condition 2 is that comparison.</figcaption>
+</figure>
+
+## Every Placement Covers Mass at Least One
+
+The first of the two conditions on the atoms, that every placement of a unit square
+covers mass at least $1$, is not yet a finite check.
+A placement has three continuous parameters, two of position and one of angle, so the
+placements cannot be enumerated.
+
+The proof makes them finite twice over.
+The angle is snapped to a net of
+{{N_DIRECTIONS}} rational directions, and the square checked at each net direction is a
+slightly smaller one, of side $B$. The next section shows why that smaller square stands
+in for a unit square at any angle.
+For each direction, the position then collapses to a finite grid of cells, because the
+set of atoms under the square changes only when an atom crosses one of its edges.
+The covered mass is constant on each cell, and each cell is an **event cell**. Condition
+5 is the claim that every event cell, at every net direction, carries mass at least $1$.
+
+Figure 5 evaluates that condition.
+Every weight is a whole multiple of ${{SCALE}}$, so the covered mass is an integer count
+of those units and the readout rounds nothing.
+The least covered mass, over every placement and all {{N_DIRECTIONS}} directions, is
+
+$$
+\mu(Q) \;=\; {{LEAST_TEX}} \;=\; {{LEAST_DEC}},
+$$
+
+{{LEAST_MARGIN}} parts in {{SCALE_JS}} above the threshold.
+
+<figure>
+  <div class="fig-head">
+    <span class="caps">Figure 5</span>
+    <span class="fig-title">The prover: drag the square, watch the mass</span><span class="tag">Condition 5</span>
+    {{CERT_TOGGLE}}
+  </div>
+  <div class="split">
+    <div class="stage"><canvas id="prove-{{SLUG}}" width="1000" height="1000"></canvas></div>
+    <div class="panel">
+      <div class="readout">
+        <span class="caps">Mass covered</span>
+        <div class="mass-row">
+          <div class="mass-val" id="mv-{{SLUG}}"></div>
+          <div class="mass-dec" id="md-{{SLUG}}"></div>
+        </div>
+        <span class="verdict ok" id="vd-{{SLUG}}">Covers ≥ 1</span>
+      </div>
+      <div class="ctl">
+        <span class="caps">Direction <span class="tex">k</span> of the {{N_DIRECTIONS}}-point net</span>
+        <input type="range" id="kslider-{{SLUG}}" min="0" max="{{N_DIRECTIONS_MAX}}" value="0" step="1" aria-label="Net direction index">
+        <div class="val" id="kval-{{SLUG}}"></div>
+      </div>
+      <div class="btns">
+        <button id="btn-tight-{{SLUG}}">Tightest placement</button>
+        <button id="btn-scan-{{SLUG}}">Scan this direction</button>
+        <button id="btn-heat-{{SLUG}}" aria-pressed="true">Field</button>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--cert-near)"></i>within 12% of the limit</span>
+        <span><i style="background:var(--kpress-doc-accent)"></i>comfortably above</span>
+        <span><i style="background:var(--cert-below)"></i>below 1, which never occurs at a net direction</span>
+      </div>
+      <p class="hint" id="hint-{{SLUG}}">The shaded background is the covered mass at every center position, recomputed
+      for the direction you choose. The dashed outline is where the square’s center is allowed to be. Outside
+      it the square hangs out of the container, and the proof makes no claim.</p>
+    </div>
+  </div>
+  <figcaption class="kpress-figcaption">Inside the dashed domain the field never drops below 1, at any of the {{N_DIRECTIONS}}
+  directions. Outside it the mass falls away at once, which is why the atoms crowd the boundary.</figcaption>
+</figure>
+
+## From a Continuum of Angles to {{N_DIRECTIONS}}
+
+The angles cannot all be checked, so {{N_DIRECTIONS}} of them are checked, and the gaps
+between them are covered by shrinking the square.
+
+Take a unit square at any angle $\varphi$, and let $\theta$ be the nearest net angle.
+Inside the unit square, with the same center, place a smaller square of side $B$ at
+angle $\theta$. If the smaller square fits, it covers no more mass than the unit square
+does. So if every placement of the smaller square at a net angle covers mass at least 1,
+then every placement of a unit square at any angle does too.
+The smaller square fits exactly when
+
+$$
+B\,(\cos d + \sin d) \;\le\; 1,
+$$
+
+where $d$ is the mismatch between the two angles.
+Since $\cos d + \sin d \le 1 + \tan d$ on $[0,\pi/4)$, it is enough that
+
+$$
+B\,(1 + D) \;\lt\; 1, \qquad D \;=\; \max_k \frac{t_{k+1}-t_k}{1+t_k t_{k+1}} \;=\; \max_k \tan\frac{\theta_{k+1}-\theta_k}{2}.
+$$
+
+That is Condition 4, and it couples the two parameters.
+A coarser net has wider gaps, so the mismatch $d$ can be larger, so $B$ must be smaller,
+so each placement covers less mass, and Condition 5 becomes harder to meet.
+
+The net stays rational because each angle is carried as a rational half-tangent,
+$\theta_k = 2\arctan t_k$, so that
+
+$$
+\cos\theta = \frac{1-t^2}{1+t^2}, \qquad \sin\theta = \frac{2t}{1+t^2}
+$$
+
+are exact rationals.
+No angle in the net is a floating-point number.
+The net has to reach $\pi/4$, the far end of the arc onto which Condition 1 reflects
+every angle. That is Condition 3. Since $\tan(\pi/8) = \sqrt{2}-1$ is irrational, even
+that is tested in exact rational form:
+
+$$
+t_K^{\,2} + 2t_K - 1 \;\ge\; 0 \quad\Longleftrightarrow\quad t_K \;\ge\; \tan\frac{\pi}{8}.
+$$
+
+<figure>
+  <div class="fig-head">
+    <span class="caps">Figure 6</span>
+    <span class="fig-title">The shrink that buys the finite net</span><span class="tag">Condition 4</span>
+    {{CERT_TOGGLE}}
+  </div>
+  <div class="split">
+    <div class="stage"><canvas id="shrink-{{SLUG}}" width="800" height="800"></canvas></div>
+    <div class="panel">
+      <div class="ctl">
+        <span class="caps">Unit square’s angle <span class="tex">\varphi</span></span>
+        <input type="range" id="phi-{{SLUG}}" min="0" max="450" value="196" step="1" aria-label="Unit square angle">
+      </div>
+      <div class="ctl">
+        <span class="caps">Net size <span class="tex">K</span></span>
+        <div class="btns">
+          <button class="knet" data-k="3" aria-pressed="true">3</button>
+          <button class="knet" data-k="10">10</button>
+          <button class="knet" data-k="30">30</button>
+          <button class="knet" data-k="180">180, the real net</button>
+        </div>
+      </div>
+      <dl class="kv">
+        <dt><span class="tex">\varphi</span></dt><dd id="s-phi-{{SLUG}}"></dd>
+        <dt>nearest <span class="tex">\theta</span></dt><dd id="s-theta-{{SLUG}}"></dd>
+        <dt>mismatch <span class="tex">d</span></dt><dd id="s-d-{{SLUG}}"></dd>
+        <dt>largest <span class="tex">D</span></dt><dd id="s-D-{{SLUG}}"></dd>
+        <dt><span class="tex">B</span> admitted</dt><dd id="s-B-{{SLUG}}"></dd>
+        <dt><span class="tex">B(\cos d + \sin d)</span></dt><dd class="hi" id="s-prod-{{SLUG}}"></dd>
+      </dl>
+      <p class="hint">Opens at <span class="tex">K = 3</span>, the coarsest net that still reaches
+      <span class="tex">\pi/4</span>, where Condition 4 admits only
+      <span class="tex">B \lt 0.8787</span> and the shrink is unmistakable. Drag either square by its
+      handle. At
+      <span class="tex">K = 180</span>, the net the proof uses, the two squares are
+      indistinguishable.</p>
+    </div>
+  </div>
+  <figcaption class="kpress-figcaption">The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
+  side-<span class="tex">B</span> square at the nearest net angle. The proof only ever asks about the orange one.
+  <strong>The last quantity must stay below 1.</strong> At <span class="tex">K = 180</span> it is
+  <span class="tex">\approx 0.999996</span>.</figcaption>
+</figure>
+
+<!--BEGIN:COARSENING-->
+
+## Why the Net Has {{N_DIRECTIONS}} Directions
+
+The cost of a coarser net can be measured.
+Hold the {{N_ATOMS}} atoms fixed, coarsen the net, set $B$ to the largest value
+Condition 4 then admits, and decide Condition 5 again.
+Halving the net shrinks $B$ by
+{{HALVING_B_DROP}} and costs {{HALVING_MASS_DROP}} of the least covered mass.
+
+<figure>
+  <div class="fig-head">
+    <span class="caps">Figure 7</span>
+    <span class="fig-title">Least covered mass, as the net is coarsened</span><span class="tag">Condition 4 → Condition 5</span>
+    {{CERT_TOGGLE}}
+  </div>
+  <div class="chart kpress-diagram">
+    <svg viewBox="0 0 700 250" role="img" aria-label="{{COARSEN_ALT}}">
+      <g font-size="10" fill="var(--kpress-doc-muted)">
+        <line x1="76" y1="30" x2="76" y2="190" stroke="var(--kpress-doc-muted)"/>
+        <line x1="76" y1="190" x2="664" y2="190" stroke="var(--kpress-doc-muted)"/>
+        <line x1="76" y1="30" x2="664" y2="30" stroke="var(--cert-probe)" stroke-dasharray="4 4" opacity=".8"/>
+        <text x="68" y="34" text-anchor="end">1.0</text>
+        <text x="68" y="114" text-anchor="end">0.5</text>
+        <text x="68" y="194" text-anchor="end">0</text>
+        <text x="84" y="24" fill="var(--cert-probe)">Condition 5 threshold</text>
+      </g>
+      <g>
+        {{COARSEN_BARS}}
+      </g>
+      <g font-size="10.5" fill="var(--kpress-doc-text)" text-anchor="middle">
+        {{COARSEN_VALUES}}
+      </g>
+      <g font-size="10.5" fill="var(--kpress-doc-muted)" text-anchor="middle">
+        {{COARSEN_LABELS}}
+      </g>
+      <text x="76" y="246" font-size="10" fill="var(--kpress-doc-muted)">
+        Only the last bar clears the threshold. Measured on the retained atoms, optimized against the full net.
+      </text>
+    </svg>
+  </div>
+  <figcaption class="kpress-figcaption">This shows these atoms are tight against their own net, not that no coarser net could be made
+  to work. It measures the slope of the trade.</figcaption>
+</figure>
+
+<!--END:COARSENING-->
+
+## The Contradiction
+
+::: boxed-text
+
+Take any packing of eleven unit squares in the side-{{L_DEC}} container.
+Each square, whatever its angle, contains a side-$B$ square $Q_i$ with the same center
+at one of the {{N_DIRECTIONS}} net angles. That is Condition 4.
+
+Because Condition 4 is a *strict* inequality, each $Q_i$ sits strictly inside its unit
+square’s interior, so the eleven are disjoint and no atom is counted twice.
+Each covers mass at least $1$, which is Condition 5.
+Then
+
+$$
+{{N}} \;\le\; \sum_{i=1}^{{{N}}} \mu(Q_i) \;\le\; \mu\!\left([0,L]^2\right) \;=\; {{TOTAL_TEX}} \;=\; {{TOTAL_DEC}} \;\lt\; {{N}},
+$$
+
+where the last step is Condition 2. The two ends contradict each other, so no such
+packing exists, and $s({{N}}) \gt {{L_FRAC}}$.
+
+:::
+
+The strict inequality in Condition 4 is what makes the $Q_i$ disjoint.
+With $\le$ in its place, two shrunken squares could share an atom on their common
+boundary. That atom would be counted twice, so the eleven masses could add up to more
+than the container holds, and nothing would force the container’s mass up to ${{N}}$.
+
+## Generator and Verifier
+
+The atoms are not placed by hand but solved for: the atoms and their weights are a
+rationalized optimum of a covering linear program,
+
+$$
+\tau^*(L,B) \;=\; \min_{w \,\ge\, 0}\; \sum_a w_a \quad\text{subject to}\quad \sum_{a \in Q} w_a \;\ge\; 1 \;\;\text{ for every placement } Q,
+$$
+
+which has one constraint per placement.
+The placements form a continuum, so the constraints are generated as they are needed
+rather than listed in advance: the same event-cell sweep that decides Condition 5 finds
+a placement whose mass falls short, and that placement becomes a new constraint.
+In the language of linear programming, the sweep is the separation oracle.
+
+A certificate exists exactly when $\tau^* \lt n$. The value $\tau^*$ depends on $L$ and
+$B$ alone and never on $n$, which enters only in that comparison.
+A run whose optimum lands on a round number is therefore a sign of a bug, not a result,
+because the target never enters the program.
+
+The search runs in floating point, which is safe because none of it is part of the
+proof. The [generator]({{GENERATOR_URL}}) writes the certificate to a file, and the
+[verifier]({{VERIFIER_URL}}) decides Conditions 1 through 5 on that file in exact
+rational arithmetic.
+A wrong linear program will be rejected by the verifier.
+
+A [self-contained third-party check]({{THIRDPARTY_URL}}), a single file that uses only
+Python’s standard library, decides the {{DEFAULT_L_FRAC}} certificate without trusting
+anything else in this repository.
+
+{.article-footer}
+Certificate [`{{ID}}`]({{CERT_URL}}): {{N_ATOMS}} atoms, side $L = {{L_FRAC}}$, shrink
+$B = {{B_FRAC}}$, a net of {{N_DIRECTIONS}} rational half-tangents reaching
+$\tan(\pi/8)$. Total mass ${{TOTAL_PLAIN}}$. Least covered cell mass
+${{LEAST_TEX_PLAIN}}$ at direction $k=0$, center ${{WITNESS_TEX}}$. Every figure is
+[computed]({{RENDERER_URL}}) from that atom list.
+Prior lower bound $2 + 4/\sqrt{5}$.[^stromquist] Best known packing
+${{BEST_PACKING_TEX}}$.[^trump]
+
+<!--END:ARTICLE-->
+
+<!--BEGIN:CLAIM-->
+
+## Verifiable Claim
+
+The claim, the theorem with its proof, and a verifier written in Python’s standard
+library alone, as one file that can be pasted into any coding agent or checked by hand.
+It is [checked into the repository]({{CLAIM_URL}}) beside the certificates it decides,
+and the copy button takes the whole of it.
+
+```markdown
+{{VERIFIABLE_CLAIM}}
+```
+
+<!--END:CLAIM-->
+
+[^stromquist]: Walter Stromquist,
+    [Packing 10 or 11 unit squares in a square]({{PRIOR_URL}}), Electronic Journal of
+    Combinatorics 10 (2003), R8.
+
+[^survey]: Erich Friedman,
+    [Packing unit squares in squares: a survey and new results]({{PROBLEM_URL}}),
+    Electronic Journal of Combinatorics, Dynamic Survey DS7.
+
+[^trump]: Walter Trump’s packing of 1979, as recorded in
+    [Kingbird’s register of squares in squares]({{BEST_URL}}), the source the record
+    cites. The rendering is [the project’s own]({{BEST_RENDER_URL}}), from the retained
+    witness.

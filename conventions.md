@@ -114,6 +114,13 @@ The id in the filename must equal the id in the frontmatter.
 Research documents and reviews keep the repository’s dated form:
 `research-YYYY-MM-DD-topic.md`, `review-YYYY-MM-DD-topic.md`.
 
+**A standalone proof, verifiable claim, or similar document is named for the result it
+belongs to and for what it is.** [convention] `t-018-verifiable-claim.md` says which
+result and which kind of document; a generic name in capitals such as
+`VERIFIABLE-CLAIM.md` says neither, and the second such file would have to fight the
+first for it. There will be many proofs and claims, and each needs a unique,
+self-describing name.
+
 Use [`repren`](https://github.com/jlevy/repren) for renames—it moves files and rewrites
 references in one pass, which is what keeps the two in step.
 

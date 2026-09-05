@@ -6,9 +6,18 @@ between them, and every quantity each article states is read or derived from
 its certificate file, so the page cannot drift from the bounds it explains.
 When a rung moves, rerunning this is the whole update: no number is typed twice.
 
+The prose is Markdown, in `templates/certificate_page.md`, and kpress renders it:
+headings, lists, math and footnotes are the system's to emit, so the page cannot
+hand-roll a footnote or a heading level that the design system would set
+differently. The HTML template beside it is only the shell — head, the body
+wrapper, and the scripts — and the figures are raw HTML blocks inside the
+Markdown, because a canvas, an SVG and a control panel are not things Markdown
+expresses. `{{PLACEHOLDERS}}` are substituted before the Markdown is parsed,
+which is what keeps a link destination a link destination.
+
 The page is one self-contained file. Typography follows the kpress design
 system, and the kpress distribution also supplies the reading faces, KaTeX and
-the footnote hover previews, all inlined. Nothing is fetched at view time, which
+the client behaviors, all inlined. Nothing is fetched at view time, which
 is what lets the same artifact serve from GitHub Pages, from a file:// URL, and
 from an artifact host with a strict content-security policy.
 
@@ -24,6 +33,7 @@ import argparse
 import base64
 import json
 import re
+import shutil
 import sys
 from dataclasses import dataclass
 from fractions import Fraction
@@ -44,8 +54,11 @@ from sqpack.render.style import SQUARE_HUE_PALETTE
 PACKING = Path(__file__).resolve().parents[1]
 REPO = PACKING.parent
 CASE = PACKING / "cases" / "n11_fractional_certificate"
-TEMPLATE = Path(__file__).with_name("templates") / "certificate_page.html"
+TEMPLATES = Path(__file__).with_name("templates")
+TEMPLATE = TEMPLATES / "certificate_page.html"
+MARKDOWN = TEMPLATES / "certificate_page.md"
 COARSENING = CASE / "net-coarsening.json"
+CLAIM = CASE / "t-018-verifiable-claim.md"
 OUTPUT = PACKING / "site" / "index.html"
 
 # Four colors have to stay apart in the prover: the mass comfortably above the
@@ -214,6 +227,11 @@ BEST_URL = "https://kingbird.myphotos.cc/packing/squares_in_squares.html"
 PRIOR_URL = "https://www.combinatorics.org/ojs/index.php/eljc/article/view/v10i1r8"
 REPO_URL = "https://github.com/jlevy/squares"
 BEST_RENDERING = PACKING / "atlas" / "known-best" / "rendering" / "n-011.svg"
+# The atlas composite of every known-best packing, shown as Figure 1 and served
+# beside the page rather than inlined: the PNG is the image, the PDF the link.
+COMPOSITE_ASSETS = tuple(
+    PACKING / "atlas" / "known-best" / f"known-best-1-100.{ext}" for ext in ("png", "pdf")
+)
 VERIFIER = PACKING / "src" / "sqpack" / "fractional" / "certificate.py"
 GENERATOR = PACKING / "src" / "sqpack" / "fractional" / "generate.py"
 THIRDPARTY = CASE / "thirdparty" / "README.md"
@@ -309,15 +327,23 @@ def theme_bootstrap(static: Path) -> str:
     return (static / "js" / "theme-bootstrap.js").read_text(encoding="utf-8")
 
 
-# kpress's hover previews live in four ES modules, listed here in dependency
-# order: each may import only from the ones before it. The page cannot load
-# them as modules — an inline `<script type="module">` would fetch
+# The two kpress behaviors this page borrows — hover previews for footnotes and
+# the copy button on a code block — live in six ES modules, listed here in
+# dependency order: each may import only from the ones before it. The page
+# cannot load them as modules — an inline `<script type="module">` would fetch
 # `./viewport.js` and its siblings at view time, which is the one thing this
 # page refuses — so they are flattened into a single classic script sharing one
 # function scope. The flattening is checked rather than assumed: every rule
 # below fails the render, so a kpress upgrade that reshapes these modules
 # breaks the build instead of quietly shipping previews that never appear.
-TOOLTIP_MODULES = ("viewport.js", "overlay.js", "runtime.js", "tooltips.js")
+KPRESS_MODULES = (
+    "icons.js",
+    "viewport.js",
+    "overlay.js",
+    "runtime.js",
+    "tooltips.js",
+    "code-copy.js",
+)
 
 # The only two module forms the flattener can rewrite: a named import from a
 # sibling in that list, and an `export` prefixed to a declaration. Everything
@@ -353,37 +379,45 @@ _MODULE_ONLY = (
     ),
 )
 
-# The two names the epilogue below reaches for, and the module each is kpress's
-# public API from. Checked against what that module exports rather than against
-# what it happens to declare: an upstream that stops exporting one of these is
-# retiring it, whatever the flattened scope would still resolve.
-TOOLTIP_API = {"runtime.js": "behaviors", "tooltips.js": "initKpressTooltips"}
+# The three names the epilogue below reaches for, and the module each is
+# kpress's public API from. Checked against what that module exports rather than
+# against what it happens to declare: an upstream that stops exporting one of
+# these is retiring it, whatever the flattened scope would still resolve.
+KPRESS_API = {
+    "runtime.js": "behaviors",
+    "tooltips.js": "initKpressTooltips",
+    "code-copy.js": "initKpressCodeCopy",
+}
 
 # What the flattened script hands the page, and why it hands over only half of
 # what kpress registers. Overriding a behavior with a no-op bind is kpress's own
 # seam (`behaviors.override`), and running it here — at script evaluation, before
 # the runtime's ready pass — is what keeps the built-in link previews from ever
 # binding.
-TOOLTIP_EPILOGUE = """
+KPRESS_EPILOGUE = """
 /* This page wants footnote previews and nothing else. kpress's tooltips module
    registers two behaviors at import — hover previews for internal links, and
    footnote previews — and the runtime binds both once the document is ready,
    which here would hang a preview reading "1" off every footnote's back-arrow.
    The link behavior is overridden with a no-op bind before that pass runs; the
-   footnote one is left alone, and the page boots it explicitly as well. */
+   footnote one is left alone, and the page boots it explicitly as well. The
+   copy button is kpress's own too: its behavior binds itself at the runtime's
+   ready pass, and the boot below runs it earlier so the control is there before
+   the reader can reach the block. */
 behaviors.override("tooltip", () => undefined);
 window.kpressInitTooltips = initKpressTooltips;
+window.kpressInitCodeCopy = initKpressCodeCopy;
 """
 
 
-def kpress_tooltips_js(static: Path) -> str:
-    """kpress's tooltip modules as one classic script, exposing the footnote boot.
+def kpress_client_js(static: Path) -> str:
+    """kpress's client modules as one classic script, exposing the two boots.
 
-    Concatenates `TOOLTIP_MODULES` in order into one IIFE, dropping the imports
+    Concatenates `KPRESS_MODULES` in order into one IIFE, dropping the imports
     (every name they bind is already in scope by the time it is used) and the
     `export` keyword. Refuses to produce a bundle it cannot vouch for: an import
     or export form it does not rewrite, an imported name the source module no
-    longer exports, a module-only construct, a `TOOLTIP_API` name that is gone,
+    longer exports, a module-only construct, a `KPRESS_API` name that is gone,
     or two modules declaring the same top-level name — which sharing one scope
     would silently resolve to whichever came last.
     """
@@ -391,10 +425,10 @@ def kpress_tooltips_js(static: Path) -> str:
     declared: dict[str, str] = {}
     parts: list[str] = []
 
-    for name in TOOLTIP_MODULES:
+    for name in KPRESS_MODULES:
         path = static / "js" / name
         if not path.is_file():
-            raise SystemExit(f"kpress has no js/{name}; the tooltip modules have moved")
+            raise SystemExit(f"kpress has no js/{name}; the client modules have moved")
         source = path.read_text(encoding="utf-8")
 
         names: set[str] = set()
@@ -450,18 +484,33 @@ def kpress_tooltips_js(static: Path) -> str:
                 )
         parts.append(f"/* kpress: js/{name} */\n{body.strip()}\n")
 
-    for module, wanted in TOOLTIP_API.items():
+    for module, wanted in KPRESS_API.items():
         if wanted not in exported.get(module, frozenset()):
             raise SystemExit(
-                f"js/{module} no longer exports `{wanted}`; footnote previews cannot boot"
+                f"js/{module} no longer exports `{wanted}`; the page cannot boot it"
             )
 
-    modules = ", ".join(f"js/{name}" for name in TOOLTIP_MODULES)
-    bundle = f"/* kpress footnote previews, flattened from {modules} */\n(() => {{\n"
-    bundle += '"use strict";\n' + "\n".join(parts) + TOOLTIP_EPILOGUE + "})();\n"
+    modules = ", ".join(f"js/{name}" for name in KPRESS_MODULES)
+    bundle = f"/* kpress client behaviors, flattened from {modules} */\n(() => {{\n"
+    bundle += '"use strict";\n' + "\n".join(parts) + KPRESS_EPILOGUE + "})();\n"
     if re.search(r"</script", bundle, re.IGNORECASE):
-        raise SystemExit("a kpress tooltip module carries `</script`; it cannot be inlined")
+        raise SystemExit("a kpress client module carries `</script`; it cannot be inlined")
     return bundle
+
+
+def icon_sprite(static: Path) -> str:
+    """kpress's icon sprite, which its chrome references by fragment.
+
+    The copy button's glyph is a `<use href="#kpress-icon-copy">`, so the sprite
+    has to be in the document for the control to have a face at all; kpress's own
+    renderer inlines it once per document and this does the same. It is hidden,
+    costs 5 KB, and referencing a fragment rather than a file is what keeps the
+    button drawn under a strict content-security policy.
+    """
+    sprite = (static / "icons" / "icons.svg").read_text(encoding="utf-8")
+    if "kpress-icon-copy" not in sprite:
+        raise SystemExit("kpress's icon sprite has no copy glyph; the button would be blank")
+    return sprite
 
 
 def katex_css(static: Path) -> str:
@@ -667,6 +716,13 @@ def best_packing_svg() -> str:
     svg, count = re.subn(r'width="\d+" height="\d+" viewBox="[^"]*"', box, svg, count=1)
     if count != 1:
         raise SystemExit(f"{BEST_RENDERING.name} root has no width/height/viewBox to replace")
+    # The figure that carries this is a raw HTML block in the Markdown, and a
+    # Markdown HTML block ends at the first blank line: one inside the drawing
+    # would hand the rest of the file to the paragraph parser.
+    if any(not line.strip() for line in svg.splitlines()):
+        raise SystemExit(
+            f"{BEST_RENDERING.name} has a blank line; it would end the figure's HTML block"
+        )
     return svg
 
 
@@ -759,21 +815,73 @@ def halving_cost(rows: list[CoarseningRow]) -> tuple[str, str]:
     return nearly(f"{float(b_drop) * 100:.2f}%"), nearly(f"{float(mass_drop) * 100:.0f}%")
 
 
-def number_line(facts: Facts) -> dict[str, str]:
-    """Positions on the 3.75-3.90 axis the header draws.
+# The bounds figure's axis, in the pixels of its own 700-wide viewBox. These are
+# pixels, not quantities: a rounded coordinate is a rounded coordinate and not a
+# rounded bound.
+LINE_LOW, LINE_HIGH, LINE_X0, LINE_X1 = 3.75, 3.90, 20.0, 680.0
+# The axis sits at y = 51.5; a certificate's mark hangs below it, one row per
+# certificate, the headline bound deepest so no label crosses the mark under it.
+LINE_AXIS_Y = 51.5
+LINE_FIRST_ROW = 62.0
+LINE_ROW = 22.0
+# The viewBox height the figure declares. A certificate count that would not fit
+# under the axis fails the render rather than drawing off the bottom of the box.
+LINE_HEIGHT = 92.0
 
-    These are pixels, not quantities: the axis is 660 of them wide, so a
-    rounded coordinate is a rounded coordinate and not a rounded bound.
-    """
-    low, high, x0, x1 = 3.75, 3.90, 20.0, 680.0
-    place = lambda v: x0 + (v - low) / (high - low) * (x1 - x0)  # noqa: E731
+
+def line_x(value: float) -> float:
+    """Where a bound falls on the axis, in the figure's own pixels."""
+    return LINE_X0 + (value - LINE_LOW) / (LINE_HIGH - LINE_LOW) * (LINE_X1 - LINE_X0)
+
+
+def number_line(facts: Facts) -> dict[str, str]:
+    """One certificate's positions on the axis, for a figure inside its article."""
     bound = float(facts.outer_side)
     return {
-        "PRIOR_X": f"{place(float(PRIOR_LOWER)):.0f}",
-        "BOUND_X": f"{place(bound):.0f}",
-        "BEST_X": f"{place(float(BEST_PACKING)):.0f}",
-        "BAND_W": f"{place(float(BEST_PACKING)) - place(bound):.0f}",
+        "PRIOR_X": f"{line_x(float(PRIOR_LOWER)):.0f}",
+        "BOUND_X": f"{line_x(bound):.0f}",
+        "BEST_X": f"{line_x(float(BEST_PACKING)):.0f}",
+        "BAND_W": f"{line_x(float(BEST_PACKING)) - line_x(bound):.0f}",
     }
+
+
+def number_line_marks(facts: list[Facts], headline: Facts) -> str:
+    """Every certificate's mark on the shared axis: a tick, a dot and a label.
+
+    The figure states all of the bounds at once, so the marks are generated here
+    the way the coarsening bars are, rather than written once and stamped per
+    certificate. Rows go by bound, smallest first and the headline last and
+    deepest: a label runs to the right of its own mark, so the mark below it is
+    always the further one along the axis and the two cannot collide.
+    """
+    ordered = sorted(facts, key=lambda f: f.outer_side)
+    if ordered[-1] is not headline:
+        raise SystemExit("the headline bound is not the largest; the marks would stack wrong")
+    depth = LINE_FIRST_ROW + LINE_ROW * (len(ordered) - 1)
+    if depth + 4 > LINE_HEIGHT:
+        raise SystemExit(
+            f"{len(ordered)} certificates need {depth + 4:.0f} pixels of axis and the "
+            f"figure's viewBox is {LINE_HEIGHT:.0f} tall; raise it in the Markdown"
+        )
+    marks = []
+    for index, f in enumerate(ordered):
+        x = line_x(float(f.outer_side))
+        y = LINE_FIRST_ROW + LINE_ROW * index
+        lead = f is headline
+        colour = "var(--cert-probe)" if lead else "var(--kpress-doc-muted)"
+        emphasis = ' font-weight="550"' if lead else ""
+        label = f"{f.outer_side.numerator}/{f.outer_side.denominator} = {decimal(f.outer_side)}"
+        if lead:
+            label += ", proved below"
+        marks.append(
+            f'<line x1="{x:.0f}" y1="{LINE_AXIS_Y}" x2="{x:.0f}" y2="{y:.0f}" '
+            f'stroke="{colour}" stroke-width="{2 if lead else 1.25}"/>'
+            f'<circle cx="{x:.0f}" cy="{LINE_AXIS_Y}" r="{4.4 if lead else 3.2}" '
+            f'fill="{colour}"/>'
+            f'<text x="{x:.0f}" y="{y + 4:.0f}" dx="11" font-size="11"{emphasis} '
+            f'fill="{colour}">{label}</text>'
+        )
+    return "\n    ".join(marks)
 
 
 def bound_substitutions() -> dict[str, str]:
@@ -797,13 +905,41 @@ def slug(facts: Facts) -> str:
     return f"{facts.outer_side.numerator}-{facts.outer_side.denominator}"
 
 
-def shared_substitutions(static: Path, headline: Facts, default: Facts) -> dict[str, str]:
-    """Values for the page shell: the assets, the headline bound and the deck line."""
+# A fenced code block ends at the first line whose backtick run is as long as
+# the fence that opened it, and the claim is shown inside one. A run at the head
+# of a line is rewritten to the tilde fence, which CommonMark reads as the same
+# construct, so the block a reader copies is still the document the file holds
+# and no fence length in the Markdown can be the wrong one.
+_LEADING_FENCE = re.compile(r"^( {0,3})(`{3,})", re.MULTILINE)
+
+
+def verifiable_claim() -> str | None:
+    """The standalone verifiable claim, as the body of a fenced code block.
+
+    None where the file has not been written yet: the page drops that section
+    and says so, rather than failing a render over a document that is still
+    being drafted next door.
+    """
+    if not CLAIM.is_file():
+        print(f"{CLAIM.relative_to(REPO)} is not written yet; the page drops its section")
+        return None
+    text, rewritten = _LEADING_FENCE.subn(
+        lambda m: m.group(1) + "~" * len(m.group(2)), CLAIM.read_text(encoding="utf-8")
+    )
+    if rewritten:
+        print(f"{CLAIM.name}: {rewritten} backtick fences shown as tildes, to nest in one")
+    return text.strip("\n")
+
+
+def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) -> dict[str, str]:
+    """Values the whole page states: the headline bound, the deck, the shared axis.
+
+    The axis positions are here rather than in `certificate_substitutions`
+    because the bounds figure states every certificate at once and stands outside
+    the stamped article; the band it shades runs from the headline bound to the
+    best packing known, which is what remains unknown after all of them.
+    """
     return {
-        "KPRESS_CSS": kpress_css(static) + katex_css(static),
-        "THEME_BOOTSTRAP": theme_bootstrap(static),
-        "KATEX_JS": (static / "katex" / "katex.min.js").read_text(encoding="utf-8"),
-        "KPRESS_TOOLTIPS_JS": kpress_tooltips_js(static),
         "BELOW_ONE": BELOW_ONE,
         "NEAR_LIMIT": NEAR_LIMIT,
         "N": str(headline.n),
@@ -818,8 +954,31 @@ def shared_substitutions(static: Path, headline: Facts, default: Facts) -> dict[
         "PRIOR_URL": PRIOR_URL,
         "PROBLEM_URL": PROBLEM_URL,
         "BEST_URL": BEST_URL,
+        "BEST_SOURCE": BEST_SOURCE,
         "BEST_RENDER_URL": repo_file(BEST_RENDERING),
+        "CLAIM_URL": repo_file(CLAIM),
         "TRUMP_SVG": best_packing_svg(),
+        "NUMBER_LINE_MARKS": number_line_marks(facts, headline),
+        "PRIOR_X": f"{line_x(float(PRIOR_LOWER)):.0f}",
+        "BEST_X": f"{line_x(float(BEST_PACKING)):.0f}",
+        "BAND_X": f"{line_x(float(headline.outer_side)):.0f}",
+        "BAND_W": f"{line_x(float(BEST_PACKING)) - line_x(float(headline.outer_side)):.0f}",
+    }
+
+
+def shell_substitutions(static: Path, shared: dict[str, str], body: str) -> dict[str, str]:
+    """Values for the page shell: the inlined assets and the rendered body.
+
+    `BODY_HTML` goes in last, after every other value: it is already substituted
+    through, and a later key must not reach inside it.
+    """
+    return {
+        "KPRESS_CSS": kpress_css(static) + katex_css(static),
+        "THEME_BOOTSTRAP": theme_bootstrap(static),
+        "KATEX_JS": (static / "katex" / "katex.min.js").read_text(encoding="utf-8"),
+        "KPRESS_CLIENT_JS": kpress_client_js(static),
+        **shared,
+        "BODY_HTML": body,
     }
 
 
@@ -940,26 +1099,89 @@ def fill(block: str, values: dict[str, str], *, where: str) -> str:
     return block
 
 
-def expand(template: str, name: str, per_certificate: list[dict[str, str]]) -> str:
+def drop_block(text: str, name: str) -> str:
+    """Remove a marked block and its markers, wherever it stands; a no-op if absent."""
+    return re.sub(rf"<!--BEGIN:{name}-->.*?<!--END:{name}-->", "", text, flags=re.DOTALL)
+
+
+def wrap_article(body: str, cert: str) -> str:
+    """One certificate's article, as a raw HTML block the Markdown parser keeps whole.
+
+    The blank line on each side of the two wrapper tags is load-bearing: a
+    Markdown HTML block runs to the next blank line, so an `<article>` pressed
+    against the first paragraph would swallow it into the raw block and leave its
+    Markdown unrendered.
+    """
+    return (
+        f'\n<article class="cert-article" id="cert-{cert}" data-cert="{cert}" hidden>\n\n'
+        f"{body.strip()}\n\n</article>\n\n"
+    )
+
+
+def expand(
+    source: str, name: str, per_certificate: list[dict[str, str]], *, article: bool
+) -> str:
     """Repeat a marked block once per certificate, in order, filled for each.
 
-    The article and its script are each one block in the template,
-    written once with `{{SLUG}}` in every id, and this stamps them out.
+    The article and its script are each one block, written once with `{{SLUG}}`
+    in every id, and this stamps them out: the article into the Markdown source,
+    the script into the shell. A certificate with no matching net-coarsening
+    measurement loses that figure rather than borrowing another's numbers.
     """
     pattern = re.compile(rf"<!--BEGIN:{name}-->(.*?)<!--END:{name}-->", re.DOTALL)
-    match = pattern.search(template)
+    match = pattern.search(source)
     if match is None:
-        raise SystemExit(f"template has no {name} block")
+        raise SystemExit(f"there is no {name} block to stamp")
     block = match.group(1)
     copies = []
     for values in per_certificate:
-        copy = block
-        if name == "ARTICLE" and not values["COARSEN_BARS"]:
-            copy = re.sub(
-                r"<!--BEGIN:COARSENING-->.*?<!--END:COARSENING-->", "", copy, flags=re.DOTALL
-            )
-        copies.append(fill(copy, values, where=f"{name} {values['SLUG']}"))
-    return template[: match.start()] + "".join(copies) + template[match.end() :]
+        copy = block if values["COARSEN_BARS"] else drop_block(block, "COARSENING")
+        copy = fill(copy, values, where=f"{name} {values['SLUG']}")
+        copies.append(wrap_article(copy, values["SLUG"]) if article else copy)
+    return source[: match.start()] + "".join(copies) + source[match.end() :]
+
+
+# Comments in the Markdown source — the contract note at its head, the block
+# markers this file reads, any working annotation — belong to the source and not
+# to the reader, so none of them reach the page.
+_HTML_COMMENT = re.compile(r"<!--.*?-->", re.DOTALL)
+
+
+def markdown_body(
+    per_certificate: list[dict[str, str]], shared: dict[str, str], *, claimed: bool
+) -> str:
+    """The page body: the Markdown source assembled, then rendered once by kpress.
+
+    Order matters twice. The articles are stamped before anything is
+    substituted, so each copy is filled with its own certificate's values and the
+    shared pass then reaches the prose outside them. And every placeholder is
+    substituted before the Markdown is parsed, because markdown-it
+    percent-encodes a link destination: `[computed]({{RENDERER_URL}})` parsed
+    first would leave `href="%7B%7B..."` behind.
+    """
+    source = MARKDOWN.read_text(encoding="utf-8")
+    if not claimed:
+        source = drop_block(source, "CLAIM")
+    source = expand(source, "ARTICLE", per_certificate, article=True)
+    source = fill(_HTML_COMMENT.sub("", source), shared, where=MARKDOWN.name)
+    left = {m.group(1) for m in re.finditer(r"\{\{([A-Z_]+)\}\}", source)}
+    if left:
+        raise SystemExit(f"{MARKDOWN.name}: a substituted value carried {sorted(left)} into it")
+
+    from kpress.format.markdown import parse_markdown  # noqa: PLC0415
+
+    document = parse_markdown(
+        source,
+        title=f"s({shared['N']}) >= {shared['HEADLINE_L_FRAC']}",
+        trust_mode="trusted",
+        math="auto",
+    )
+    refused = [d for d in document.diagnostics if d.severity == "error"]
+    for diagnostic in document.diagnostics:
+        print(f"{MARKDOWN.name}: {diagnostic.severity}: {diagnostic.message}", file=sys.stderr)
+    if refused:
+        raise SystemExit(f"{MARKDOWN.name} did not render cleanly; refusing to write the page")
+    return document.html
 
 
 def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> str:
@@ -978,10 +1200,19 @@ def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> 
         for f in facts
     ]
 
-    page = TEMPLATE.read_text(encoding="utf-8")
-    for name in ("ARTICLE", "SCRIPT"):
-        page = expand(page, name, per_certificate)
-    return fill(page, shared_substitutions(kpress_static(), headline, facts[0]), where="page")
+    shared = shared_substitutions(facts, headline, facts[0])
+    claim = verifiable_claim()
+    if claim is not None:
+        shared["VERIFIABLE_CLAIM"] = claim
+    static = kpress_static()
+    prose = markdown_body(per_certificate, shared, claimed=claim is not None)
+    # The sprite leads the body the way kpress's own renderer places it: the copy
+    # button on a code block draws its glyph from a fragment of it.
+    body = f"{icon_sprite(static)}\n{prose}"
+    shell = expand(
+        TEMPLATE.read_text(encoding="utf-8"), "SCRIPT", per_certificate, article=False
+    )
+    return fill(shell, shell_substitutions(static, shared, body), where=TEMPLATE.name)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -1021,6 +1252,8 @@ def main(argv: list[str] | None = None) -> int:
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(page, encoding="utf-8")
+    for asset in COMPOSITE_ASSETS:
+        shutil.copyfile(asset, args.output.parent / asset.name)
     print(f"wrote {args.output.relative_to(REPO)} ({len(page) / 1024:.0f} KB)")
     return 0
 

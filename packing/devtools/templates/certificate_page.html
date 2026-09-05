@@ -32,7 +32,11 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
 .cert-page a:hover, .kpress a.kpress-footnote-backref:hover,
 .kpress-tooltip a, .kpress-tooltip a:hover, .kpress-tooltip .kpress-footnote-nav-link { color: var(--kpress-doc-accent); }
 
-/* Prose keeps the kpress measure; figures are allowed a wider track. */
+/* Prose keeps the kpress measure; figures are allowed a wider track. The
+   Markdown body has no column wrappers, so every direct child of the page and
+   of an article takes the measure unless it is a figure. */
+.cert-page > :not(figure, .cert-article, .kpress-figure),
+.cert-article > :not(figure, .kpress-figure),
 .col {
   margin-inline: auto;
   max-width: calc(var(--kpress-measure) + 2 * var(--kpress-column-inset));
@@ -111,6 +115,7 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
   font-family: var(--kpress-font-sans);
   font-size: var(--kpress-font-size-tiny);
   margin-block: 2.5rem 0;
+  text-align: center;
 }
 .cert-claim { margin-block-start: 0.2rem; }
 .claim { margin-block: 1.5rem 1.3rem; }
@@ -355,419 +360,13 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
 <body class="kpress-frame" data-kpress-frame>
 <main class="kpress-page-main kpress-viewport" data-kpress-viewport>
 <div class="kpress kpress-doc cert-page">
-
-<header class="hero sans-text col kpress-prose">
-  <h1><span class="symbol">s({{N}}) ≥ {{HEADLINE_L_FRAC}}</span></h1>
-  <p class="subtitle">A New Lower Bound on the Square Packing Problem</p>
-  <div class="credits">
-    <span class="caps">An automated geometric research exploration</span>
-    <span>September 4, 2026</span>
-    <span>Tooling and human oversight: <a href="https://x.com/ojoshe"><strong>Joshua Levy</strong></a></span>
-    <span>Agents: <strong>Claude Opus 5, Fable 5.1 and Codex 5.6</strong></span>
-    <span>Open source at <a href="https://github.com/jlevy/squares"><strong>github.com/jlevy/squares</strong></a></span>
-  </div>
-  <p class="deck">Eleven unit squares, free to rotate, do not fit in a square of side {{HEADLINE_L_DEC}}.
-  The proof is a weighted point set and a pigeonhole. It is the first movement of the smallest open case in
-  {{YEARS_SINCE_PRIOR}} years. The previous bound, {{PRIOR_LOWER_DEC}}, was set by Stromquist in {{PRIOR_YEAR}}.<sup class="kpress-footnote-ref"><a href="#fn-stromquist" id="fnref-1" data-kpress-footnote-ref="stromquist">1</a></sup></p>
-</header>
-
-<section class="col kpress-prose intro">
-  <div class="section-head">
-    <h2>The Square Packing Problem</h2>
-  </div>
-    <p>Packing unit squares in a square<sup class="kpress-footnote-ref"><a href="#fn-survey" id="fnref-2" data-kpress-footnote-ref="survey">2</a></sup> asks, for each <span class="tex">n</span>, for
-    <span class="tex">s(n)</span>: the side of the smallest square that holds <span class="tex">n</span> unit
-    squares with disjoint interiors, the unit squares free to rotate. The value is known for every
-    <span class="tex">n \le 10</span>. The last of those, <span class="tex">s(10) = 3 + 1/\sqrt{2}</span>, was
-    settled by Stromquist in {{PRIOR_YEAR}},<sup class="kpress-footnote-ref"><a href="#fn-stromquist" id="fnref-1b" data-kpress-footnote-ref="stromquist">1</a></sup> and <span class="tex">s(11)</span> is the
-    smallest case still open.</p>
-    <p>The best known packing, found by Walter Trump in 1979,<sup class="kpress-footnote-ref"><a href="#fn-trump" id="fnref-3" data-kpress-footnote-ref="trump">3</a></sup> fits eleven squares in side
-    {{BEST_PACKING_DEC}}, so <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>. Whether a smaller container works
-    is the open question. This page shows it cannot be as small as {{DEFAULT_L_DEC}}, and then not as small as
-    {{HEADLINE_L_DEC}}.</p>
-    <p>Each of those is proved by a <strong>certificate</strong>: a finite list of weighted points in the container
-    and a finite list of angles, which, once four arithmetic checks and one exact sweep pass, rule out every packing
-    of eleven unit squares in that container. The checks are the five conditions below, and the same five decide
-    both. The {{DEFAULT_L_FRAC}} certificate is shown first: it is smaller, and its numbers are easier to follow. The
-    {{HEADLINE_L_FRAC}} certificate is the bound the title states. The switch beside each figure changes every
-    figure and number on the page to the other.</p>
-    <div class="boxed conditions">
-      <p><strong>The five conditions.</strong> A certificate for <span class="tex">n</span> unit squares in a container of
-      side <span class="tex">L</span> is a set of weighted atoms in the container, a net of directions
-      <span class="tex">\theta_k = 2\arctan t_k</span> for <span class="tex">k = 0, \dots, K</span> with rational
-      <span class="tex">t_k</span>, and a shrink <span class="tex">B \lt 1</span>, such that:</p>
-      <ol>
-        <li><strong>Condition 1.</strong> The atom set is invariant under the container’s symmetry group
-        <span class="tex">\mathbf{D}_4</span>.</li>
-        <li><strong>Condition 2.</strong> The total mass of the atoms is strictly below <span class="tex">n</span>.</li>
-        <li><strong>Condition 3.</strong> The net reaches <span class="tex">\pi/4</span>: its last half-tangent is
-        <span class="tex">\tan(\pi/8)</span>.</li>
-        <li><strong>Condition 4.</strong> <span class="tex">B(1 + D) \lt 1</span>, where <span class="tex">D</span> is the
-        largest half-gap tangent between consecutive net directions.</li>
-        <li><strong>Condition 5.</strong> At every net direction, every placement of the side-<span class="tex">B</span>
-        square inside the container covers mass at least <span class="tex">1</span>.</li>
-      </ol>
-      <p>Conditions 1 to 4 are four exact rational comparisons. Condition 5 is one exact sweep per direction. Together
-      they prove <span class="tex">s(n) \ge L</span>.</p>
-    </div>
-</section>
-
-<figure>
-  <div class="fig-head">
-    <span class="caps">Figure 1</span>
-    <span class="fig-title">The best known packing of 11 squares</span>
-  </div>
-  <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
-  <figcaption class="kpress-figcaption">Trump’s 1979 packing of eleven unit squares in side {{BEST_PACKING_DEC}}, the best known,<sup class="kpress-footnote-ref"><a href="#fn-trump" id="fnref-3b" data-kpress-footnote-ref="trump">3</a></sup>
-  so <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>. The project’s own rendering, from the retained witness.</figcaption>
-</figure>
-
-<!--BEGIN:ARTICLE-->
-<article class="cert-article" id="cert-{{SLUG}}" data-cert="{{SLUG}}" hidden>
-
-<div class="cert-claim sans-text col kpress-prose">
-  <div class="claim tex-d">s({{N}}) \;\ge\; {{L_TEX}} \;=\; {{L_DEC}}</div>
-  <div class="frontmatter">
-    <span>certificate <code>{{ID}}</code></span>
-    <span>{{N_ATOMS}} atoms · {{N_DIRECTIONS}} directions · {{N_ORBITS}} orbits of <span class="tex">\mathbf{D}_4</span></span>
-    <span>all arithmetic exact</span>
-  </div>
+{{BODY_HTML}}
+<p class="col colophon">Typeset with <a href="https://github.com/jlevy/kpress"><strong>KPress</strong></a></p>
 </div>
 
-<figure>
-  <div class="fig-head">
-    <span class="caps">Figure 2</span>
-    <span class="fig-title">Bounds on <span class="tex">s({{N}})</span></span>
-    {{CERT_TOGGLE}}
-  </div>
-  <div class="line-fig kpress-diagram">
-  <svg viewBox="0 0 700 92" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER_DEC}}, the new bound {{L_DEC}}, and the best known packing at {{BEST_PACKING_DEC}}">
-    <rect x="{{BOUND_X}}" y="45" width="{{BAND_W}}" height="13" fill="var(--cert-accent-wash)"/>
-    <line x1="20" y1="51.5" x2="680" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1"/>
-    <g stroke="var(--kpress-doc-muted)" stroke-width="1">
-      <line x1="20" y1="47" x2="20" y2="56"/><line x1="460" y1="47" x2="460" y2="56"/>
-      <line x1="680" y1="47" x2="680" y2="56"/>
-    </g>
-    <g font-size="10" fill="var(--kpress-doc-muted)" text-anchor="middle">
-      <text x="20" y="72">3.75</text><text x="460" y="72">3.85</text><text x="680" y="72">3.90</text>
-    </g>
-    <line x1="{{PRIOR_X}}" y1="30" x2="{{PRIOR_X}}" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
-    <circle cx="{{PRIOR_X}}" cy="51.5" r="3.2" fill="var(--kpress-doc-muted)"/>
-    <g text-anchor="middle">
-      <text x="{{PRIOR_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{PRIOR_LOWER_DEC}}</text>
-      <text x="{{PRIOR_X}}" y="12" font-size="9.5" fill="var(--kpress-doc-muted)">{{PRIOR_SOURCE}}</text>
-      <text x="{{BEST_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{BEST_PACKING_DEC}}</text>
-      <text x="{{BEST_X}}" y="12" font-size="9.5" fill="var(--kpress-doc-muted)">{{BEST_SOURCE}}</text>
-    </g>
-    <line x1="{{BEST_X}}" y1="30" x2="{{BEST_X}}" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
-    <circle cx="{{BEST_X}}" cy="51.5" r="3.2" fill="var(--kpress-doc-muted)"/>
-    <line x1="{{BOUND_X}}" y1="51.5" x2="{{BOUND_X}}" y2="84" stroke="var(--cert-probe)" stroke-width="2"/>
-    <circle cx="{{BOUND_X}}" cy="51.5" r="4.4" fill="var(--cert-probe)"/>
-    <text x="{{BOUND_X}}" y="88" dx="11" font-size="11"
-      font-weight="550" fill="var(--cert-probe)">{{L_FRAC}} = {{L_DEC}}, proved below</text>
-  </svg>
-  </div>
-  <figcaption class="kpress-figcaption">The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. It is
-  <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span>.</figcaption>
-</figure>
-
-<section class="col kpress-prose">
-  <div class="section-head">
-    <h2>Atoms, Mass, and the Budget</h2>
-  </div>
-  <p>Place finitely many points in the container and give each a positive weight. Each weighted point is an
-  <strong>atom</strong>. The <strong>mass</strong> <span class="tex">\mu(R)</span> of a region is the sum of the
-  weights inside it. Every weight is rational, so every mass is a finite exact sum.</p>
-  <p>Suppose eleven unit squares fit in the side-{{L_DEC}} container. Choose atoms so that both of these hold:</p>
-  <ul>
-    <li>Every unit square you could possibly place covers mass at least <span class="tex">1</span>.</li>
-    <li>The total mass of all {{N_ATOMS}} atoms is below <span class="tex">{{N}}</span>.</li>
-  </ul>
-  <div class="tex-d">\sum_a w_a \;=\; {{TOTAL_TEX}} \;=\; {{TOTAL_DEC}} \;\lt\; {{N}}</div>
-  <p>The eleven squares are disjoint, so no atom is counted twice and together they cover at least
-  <span class="tex">{{N}}</span>. The board holds <span class="tex">{{TOTAL_DEC}}</span>. The second condition is a
-  property of the chosen atoms rather than of any packing, so the first must fail: eleven such squares do not exist.</p>
-  <p>The rest of the proof makes the first condition finite to check.</p>
-</section>
-
-<section class="col kpress-prose">
-  <div class="section-head">
-    <h2>The Atom Set</h2>
-  </div>
-  <p>There are {{N_ATOMS}} atoms, in {{N_ORBITS}} orbits of the container’s eightfold symmetry group
-  <span class="tex">\mathbf{D}_4</span>, carrying {{N_WEIGHTS}} distinct weights between
-  <span class="tex">{{WEIGHT_MIN}}</span> and <span class="tex">{{WEIGHT_MAX}}</span>. That symmetry is condition
-  Condition 1. It lets the proof check angles only up to <span class="tex">\pi/4</span> and reflect
-  every other orientation onto that arc.</p>
-</section>
-
-<figure>
-  <div class="fig-head">
-    <span class="caps">Figure 3</span>
-    <span class="fig-title">The Atoms</span><span class="tag">Conditions 1 and 2</span>
-    {{CERT_TOGGLE}}
-  </div>
-  <div class="stage stage-tip"><canvas id="field-{{SLUG}}" width="1040" height="1040"></canvas>
-      <div class="tip" id="field-tip-{{SLUG}}" hidden></div></div>
-  <div class="mass-line">
-    <div>Total mass on the board<span class="v tex">\mu\!\left([0,L]^2\right) = {{TOTAL_PLAIN}} = {{TOTAL_DEC}}</span></div>
-    <div>Mass eleven disjoint unit squares would need<span class="v tex">{{N}}</span></div>
-    <div>Shortfall<span class="v tex">{{SHORTFALL}}</span></div>
-  </div>
-  <figcaption class="kpress-figcaption">Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
-  corners, where a square has least room to move, and thins in the middle. The sites and weights are the optimum
-  of a covering linear program, rationalized. The board holds less mass than eleven disjoint unit squares would
-  need. Condition 2 is that comparison.</figcaption>
-</figure>
-
-<section class="col kpress-prose">
-  <div class="section-head">
-    <h2>Every Placement Covers Mass at Least One</h2>
-  </div>
-  <p>Condition 5 is the claim that every placement covers mass at least
-  <span class="tex">1</span>. A placement has three continuous parameters, two of position and one of angle, so
-  the placements cannot be enumerated.</p>
-  <p>The proof makes them finite twice over: the angle is snapped to a net of
-  {{N_DIRECTIONS}} rational directions, and for each direction the position collapses to a finite grid of cells, because the
-  set of atoms under the square changes only when one crosses an edge.</p>
-  <p>The figure below evaluates that condition. Every weight is a whole multiple of
-  <span class="tex">{{SCALE}}</span>, so the covered mass is an integer count of those units and the readout
-  rounds nothing. The least covered mass, over every placement and all {{N_DIRECTIONS}} directions, is</p>
-  <div class="tex-d">\mu(Q) \;=\; {{LEAST_TEX}} \;=\; {{LEAST_DEC}},</div>
-  <p>{{LEAST_MARGIN}} parts in {{SCALE_JS}} above the threshold.</p>
-</section>
-
-<figure>
-  <div class="fig-head">
-    <span class="caps">Figure 4</span>
-    <span class="fig-title">The prover: drag the square, watch the mass</span><span class="tag">Condition 5</span>
-    {{CERT_TOGGLE}}
-  </div>
-  <div class="split">
-    <div class="stage"><canvas id="prove-{{SLUG}}" width="1000" height="1000"></canvas></div>
-    <div class="panel">
-      <div class="readout">
-        <span class="caps">Mass covered</span>
-        <div class="mass-row">
-          <div class="mass-val" id="mv-{{SLUG}}"></div>
-          <div class="mass-dec" id="md-{{SLUG}}"></div>
-        </div>
-        <span class="verdict ok" id="vd-{{SLUG}}">Covers ≥ 1</span>
-      </div>
-      <div class="ctl">
-        <span class="caps">Direction <span class="tex">k</span> of the {{N_DIRECTIONS}}-point net</span>
-        <input type="range" id="kslider-{{SLUG}}" min="0" max="{{N_DIRECTIONS_MAX}}" value="0" step="1" aria-label="Net direction index">
-        <div class="val" id="kval-{{SLUG}}"></div>
-      </div>
-      <div class="btns">
-        <button id="btn-tight-{{SLUG}}">Tightest placement</button>
-        <button id="btn-scan-{{SLUG}}">Scan this direction</button>
-        <button id="btn-heat-{{SLUG}}" aria-pressed="true">Field</button>
-      </div>
-      <div class="legend">
-        <span><i style="background:var(--cert-near)"></i>within 12% of the limit</span>
-        <span><i style="background:var(--kpress-doc-accent)"></i>comfortably above</span>
-        <span><i style="background:var(--cert-below)"></i>below 1, which never occurs at a net direction</span>
-      </div>
-      <p class="hint" id="hint-{{SLUG}}">The shaded background is the covered mass at every center position, recomputed
-      for the direction you choose. The dashed outline is where the square’s center is allowed to be. Outside
-      it the square hangs out of the container, and the proof makes no claim.</p>
-    </div>
-  </div>
-  <figcaption class="kpress-figcaption">Inside the dashed domain the field never drops below 1, at any of the {{N_DIRECTIONS}}
-  directions. Outside it the mass falls away at once, which is why the atoms crowd the boundary.</figcaption>
-</figure>
-
-<section class="col kpress-prose">
-  <div class="section-head">
-    <h2>From a Continuum of Angles to {{N_DIRECTIONS}}</h2>
-  </div>
-  <p>The angles cannot all be checked, so {{N_DIRECTIONS}} are checked and the gaps are covered by shrinking.</p>
-  <p>Given a unit
-  square at any angle <span class="tex">\varphi</span>, take the nearest net angle <span class="tex">\theta</span> and place a
-  slightly smaller square, side <span class="tex">B</span>, concentric inside it at angle
-  <span class="tex">\theta</span>. If the small square fits, proving the covering property for small squares at
-  net angles proves it for unit squares at every angle. It fits exactly when</p>
-  <div class="tex-d">B\,(\cos d + \sin d) \;\le\; 1,</div>
-  <p>where <span class="tex">d</span> is the angular mismatch. Since
-  <span class="tex">\cos d + \sin d \le 1 + \tan d</span> on <span class="tex">[0,\pi/4)</span>, it is enough
-  that</p>
-  <div class="tex-d">B\,(1 + D) \;\lt\; 1, \qquad D \;=\; \max_k \frac{t_{k+1}-t_k}{1+t_k t_{k+1}} \;=\; \max_k \tan\frac{\theta_{k+1}-\theta_k}{2}.</div>
-  <p>That is Condition 4, and it couples the two parameters: a coarser net gives a larger
-  <span class="tex">d</span>, hence a smaller <span class="tex">B</span>, hence less mass covered, hence a
-  harder Condition 5.</p>
-  <p>The net stays rational because the angles are carried as half-tangents,
-  <span class="tex">\theta_k = 2\arctan t_k</span>, so that</p>
-  <div class="tex-d">\cos\theta = \frac{1-t^2}{1+t^2}, \qquad \sin\theta = \frac{2t}{1+t^2}</div>
-  <p>are exact rationals. No angle in the net is a floating-point number. The net has to reach
-  <span class="tex">\pi/4</span>, and since <span class="tex">\tan(\pi/8) = \sqrt{2}-1</span> is irrational,
-  even that is tested in an exact rational form:</p>
-  <div class="tex-d">t_K^{\,2} + 2t_K - 1 \;\ge\; 0 \quad\Longleftrightarrow\quad t_K \;\ge\; \tan\frac{\pi}{8}.</div>
-</section>
-
-<figure>
-  <div class="fig-head">
-    <span class="caps">Figure 5</span>
-    <span class="fig-title">The shrink that buys the finite net</span><span class="tag">Condition 4</span>
-    {{CERT_TOGGLE}}
-  </div>
-  <div class="split">
-    <div class="stage"><canvas id="shrink-{{SLUG}}" width="800" height="800"></canvas></div>
-    <div class="panel">
-      <div class="ctl">
-        <span class="caps">Unit square’s angle <span class="tex">\varphi</span></span>
-        <input type="range" id="phi-{{SLUG}}" min="0" max="450" value="196" step="1" aria-label="Unit square angle">
-      </div>
-      <div class="ctl">
-        <span class="caps">Net size <span class="tex">K</span></span>
-        <div class="btns">
-          <button class="knet" data-k="3" aria-pressed="true">3</button>
-          <button class="knet" data-k="10">10</button>
-          <button class="knet" data-k="30">30</button>
-          <button class="knet" data-k="180">180, the real net</button>
-        </div>
-      </div>
-      <dl class="kv">
-        <dt><span class="tex">\varphi</span></dt><dd id="s-phi-{{SLUG}}"></dd>
-        <dt>nearest <span class="tex">\theta</span></dt><dd id="s-theta-{{SLUG}}"></dd>
-        <dt>mismatch <span class="tex">d</span></dt><dd id="s-d-{{SLUG}}"></dd>
-        <dt>largest <span class="tex">D</span></dt><dd id="s-D-{{SLUG}}"></dd>
-        <dt><span class="tex">B</span> admitted</dt><dd id="s-B-{{SLUG}}"></dd>
-        <dt><span class="tex">B(\cos d + \sin d)</span></dt><dd class="hi" id="s-prod-{{SLUG}}"></dd>
-      </dl>
-      <p class="hint">Opens at <span class="tex">K = 3</span>, the coarsest net that still reaches
-      <span class="tex">\pi/4</span>, where Condition 4 admits only
-      <span class="tex">B \lt 0.8787</span> and the shrink is unmistakable. Drag either square by its
-      handle. At
-      <span class="tex">K = 180</span>, the net the proof uses, the two squares are
-      indistinguishable.</p>
-    </div>
-  </div>
-  <figcaption class="kpress-figcaption">The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
-  side-<span class="tex">B</span> square at the nearest net angle. The proof only ever asks about the orange one.
-  <strong>The last quantity must stay below 1.</strong> At <span class="tex">K = 180</span> it is
-  <span class="tex">\approx 0.999996</span>.</figcaption>
-</figure>
-
-<!--BEGIN:COARSENING-->
-<section class="col kpress-prose">
-  <div class="section-head">
-    <h2>Why the Net Has {{N_DIRECTIONS}} Directions</h2>
-  </div>
-  <p>The direction count is measurable. Hold the {{N_ATOMS}} atoms fixed, coarsen the net, set
-  <span class="tex">B</span> to the largest value Condition 4 then admits, and re-decide
-  Condition 5. Halving the net shrinks <span class="tex">B</span> by {{HALVING_B_DROP}} and costs
-  {{HALVING_MASS_DROP}} of the least covered mass.</p>
-</section>
-
-<figure>
-  <div class="fig-head">
-    <span class="caps">Figure 6</span>
-    <span class="fig-title">Least covered mass, as the net is coarsened</span><span class="tag">Condition 4 → Condition 5</span>
-    {{CERT_TOGGLE}}
-  </div>
-  <div class="chart kpress-diagram">
-    <svg viewBox="0 0 700 250" role="img" aria-label="{{COARSEN_ALT}}">
-      <g font-size="10" fill="var(--kpress-doc-muted)">
-        <line x1="76" y1="30" x2="76" y2="190" stroke="var(--kpress-doc-muted)"/>
-        <line x1="76" y1="190" x2="664" y2="190" stroke="var(--kpress-doc-muted)"/>
-        <line x1="76" y1="30" x2="664" y2="30" stroke="var(--cert-probe)" stroke-dasharray="4 4" opacity=".8"/>
-        <text x="68" y="34" text-anchor="end">1.0</text>
-        <text x="68" y="114" text-anchor="end">0.5</text>
-        <text x="68" y="194" text-anchor="end">0</text>
-        <text x="84" y="24" fill="var(--cert-probe)">Condition 5 threshold</text>
-      </g>
-      <g>
-        {{COARSEN_BARS}}
-      </g>
-      <g font-size="10.5" fill="var(--kpress-doc-text)" text-anchor="middle">
-        {{COARSEN_VALUES}}
-      </g>
-      <g font-size="10.5" fill="var(--kpress-doc-muted)" text-anchor="middle">
-        {{COARSEN_LABELS}}
-      </g>
-      <text x="76" y="246" font-size="10" fill="var(--kpress-doc-muted)">
-        Only the last bar clears the threshold. Measured on the retained atoms, optimized against the full net.
-      </text>
-    </svg>
-  </div>
-  <figcaption class="kpress-figcaption">This shows these atoms are tight against their own net, not that no coarser net could be made
-  to work. It measures the slope of the trade.</figcaption>
-</figure>
-<!--END:COARSENING-->
-
-<section class="col kpress-prose">
-  <div class="section-head">
-    <h2>The Contradiction</h2>
-  </div>
-  <div class="boxed">
-    <p>Take any packing of eleven unit squares in the side-{{L_DEC}} container. Each square, whatever its angle,
-    contains a side-<span class="tex">B</span> square <span class="tex">Q_i</span> at one of the {{N_DIRECTIONS}} net angles,
-    which is Condition 4.</p>
-    <p>Because Condition 4 is a <em>strict</em> inequality, each
-    <span class="tex">Q_i</span> sits strictly inside its unit square’s interior, so the eleven are disjoint and
-    no atom is counted twice. Each covers mass at least <span class="tex">1</span>, which is
-    Condition 5. Then</p>
-    <div class="tex-d">{{N}} \;\le\; \sum_{i=1}^{{{N}}} \mu(Q_i) \;\le\; \mu\!\left([0,L]^2\right) \;=\; {{TOTAL_TEX}} \;=\; {{TOTAL_DEC}} \;\lt\; {{N}},</div>
-    <p>which is false. There is no such packing, and <span class="tex">s({{N}}) \gt {{L_FRAC}}</span>.</p>
-  </div>
-  <p>The strict inequality in Condition 4 is what makes the <span class="tex">Q_i</span> disjoint. With
-  <span class="tex">\le</span> in its place, two shrunken squares could share a boundary atom, the double
-  counting returns, and the sum never reaches <span class="tex">{{N}}</span>.</p>
-</section>
-
-<section class="col kpress-prose">
-  <div class="section-head">
-    <h2>Generator and Verifier</h2>
-  </div>
-  <p>The atoms are not designed. They are solved for. The atoms and their weights are a rationalized optimum of a covering
-  linear program,</p>
-  <div class="tex-d">\tau^*(L,B) \;=\; \min_{w \,\ge\, 0}\; \sum_a w_a \quad\text{subject to}\quad \sum_{a \in Q} w_a \;\ge\; 1 \;\;\text{ for every placement } Q,</div>
-  <p>which has one constraint per placement, a continuum, so the rows are generated rather than enumerated, with
-  the same event-cell sweep acting as the separation oracle.</p>
-  <p>A certificate exists exactly when
-  <span class="tex">\tau^* \lt n</span>. Note that <span class="tex">\tau^*</span> depends on
-  <span class="tex">L</span> and <span class="tex">B</span> alone and never on
-  <span class="tex">n</span>, which enters only in that comparison. A run converging to a
-  round number is therefore a signature of a bug, not a result.</p>
-  <p>All of that search runs in floating point, because it is a search. None of it is in the proof: the
-  <a href="{{GENERATOR_URL}}">generator</a> emits a file, and the <a href="{{VERIFIER_URL}}">verifier</a> re-decides
-  Conditions 1 through 5 on that file in exact rational arithmetic. A wrong linear program will be rejected by the verifier.</p>
-  <p>A <a href="{{THIRDPARTY_URL}}">self-contained third-party check</a>, one file on the standard library
-  alone, decides the {{DEFAULT_L_FRAC}} certificate without trusting this repository.</p>
-</section>
-
-<footer class="col kpress-prose">
-  Certificate <a href="{{CERT_URL}}"><code>{{ID}}</code></a>: {{N_ATOMS}} atoms, side <span class="tex">L = {{L_FRAC}}</span>, shrink
-  <span class="tex">B = {{B_FRAC}}</span>, a net of {{N_DIRECTIONS}} rational half-tangents reaching
-  <span class="tex">\tan(\pi/8)</span>. Total mass <span class="tex">{{TOTAL_PLAIN}}</span>. Least covered cell mass
-  <span class="tex">{{LEAST_TEX_PLAIN}}</span> at direction <span class="tex">k=0</span>, center
-  <span class="tex">{{WITNESS_TEX}}</span>. Every figure is <a href="{{RENDERER_URL}}">computed</a> from that atom list. Prior lower bound
-  <span class="tex">2 + 4/\sqrt{5}</span>.<sup class="kpress-footnote-ref"><a href="#fn-stromquist" id="fnref-1-{{SLUG}}" data-kpress-footnote-ref="stromquist">1</a></sup> Best known packing
-  <span class="tex">{{BEST_PACKING_TEX}}</span>.<sup class="kpress-footnote-ref"><a href="#fn-trump" id="fnref-3-{{SLUG}}" data-kpress-footnote-ref="trump">3</a></sup>
-</footer>
-
-</article>
-<!--END:ARTICLE-->
-
-<section class="col kpress-prose kpress-footnotes">
-<ol>
-<li id="fn-stromquist" class="kpress-footnote-item">Walter Stromquist, <a href="{{PRIOR_URL}}">Packing 10 or 11 unit squares in a
-square</a>, Electronic Journal of Combinatorics 10 (2003), R8. <a href="#fnref-1" class="kpress-footnote-backref">&nbsp;↑&nbsp;</a></li>
-<li id="fn-survey" class="kpress-footnote-item">Erich Friedman, <a href="{{PROBLEM_URL}}">Packing unit squares in squares: a survey
-and new results</a>, Electronic Journal of Combinatorics, Dynamic Survey DS7. <a href="#fnref-2" class="kpress-footnote-backref">&nbsp;↑&nbsp;</a></li>
-<li id="fn-trump" class="kpress-footnote-item">Walter Trump’s packing of 1979, as recorded in <a href="{{BEST_URL}}">Kingbird’s
-register of squares in squares</a>, the source the record cites. The rendering is <a href="{{BEST_RENDER_URL}}">the project’s
-own</a>, from the retained witness. <a href="#fnref-3" class="kpress-footnote-backref">&nbsp;↑&nbsp;</a></li>
-</ol>
-</section>
-
-<p class="col colophon">Published with <a href="https://github.com/jlevy/kpress">kpress</a>.</p>
-
-</div>
 </main>
 <script>{{KATEX_JS}}</script>
-<script>{{KPRESS_TOOLTIPS_JS}}</script>
+<script>{{KPRESS_CLIENT_JS}}</script>
 <!--BEGIN:SCRIPT-->
 <script>
 (() => {
@@ -1275,11 +874,22 @@ if (window.matchMedia) {
   document.querySelectorAll('.tex-d').forEach(el => {
     if (!el.dataset.done) { el.dataset.done = '1'; render(el, el.textContent, true); }
   });
+  /* kpress's math markup: the TeX in .kpress-math-render is typeset in place
+     and the element marked rendered, which is what shows it and hides the
+     MathML that stands in when there is no script. */
+  document.querySelectorAll('.kpress-math').forEach(el => {
+    const box = el.querySelector('.kpress-math-render');
+    if (!box || el.dataset.kpressMathRendered) return;
+    const src = box.textContent.trim().replace(/^\\[(\[]/, '').replace(/\\[)\]]$/, '');
+    render(box, src, el.dataset.kpressMath === 'display');
+    el.dataset.kpressMathRendered = 'true';
+  });
   document.documentElement.classList.add('math-ready');
 
   /* Footnote hover previews, kpress's own, bundled into this page. Booted after
      the static math so the preview clones already carry rendered formulas. */
   if (window.kpressInitTooltips) window.kpressInitTooltips(document, { only: "footnote" });
+  if (window.kpressInitCodeCopy) window.kpressInitCodeCopy(document);
 
   /* One article per certificate. The switch beside every figure shows one and
      records it in the hash, so a link can open the page on either; the figure
