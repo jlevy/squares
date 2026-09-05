@@ -38,11 +38,14 @@ import math
 import multiprocessing as mp
 import os
 import sys
+import threading
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass, field
 from fractions import Fraction
 from functools import partial
 from itertools import pairwise
+from multiprocessing.context import BaseContext
+from pathlib import Path
 
 from sqpack.fractional.model import (
     Atom,
@@ -324,8 +327,24 @@ def _condition_containment(certificate: Certificate) -> ConditionReport:
     product = certificate.square_side * (1 + gap)
     return ConditionReport(
         "Condition 4 containment B(1 + D) < 1",
-        f"B = {certificate.square_side}, D = {gap}, B(1 + D) = {float(product):.9f}",
+        f"B = {certificate.square_side}, D = {gap}, B(1 + D) = {product}",
         holds=product < 1,
+    )
+
+
+def closed_form_conditions(certificate: Certificate) -> tuple[ConditionReport, ...]:
+    """Conditions 1 to 4, which cost nothing, so a gate can refuse on them before the sweep.
+
+    ``verify`` decides these and then pays for Condition 5 whatever they said, so that a
+    verdict reports every condition; a gate that is about to spend minutes on the sweep
+    has reason to ask these four first.
+    """
+
+    return (
+        _condition_symmetric_atoms(certificate),
+        _condition_mass_below_n(certificate),
+        _condition_arc_reaches_eighth_turn(certificate),
+        _condition_containment(certificate),
     )
 
 
@@ -344,6 +363,62 @@ def sweep_direction_minimum(
 #: process, where a failure's traceback is also the caller's own.
 _PARALLEL_ATOMS = 400
 
+#: Each worker holds one dense int64 event grid, (2N + 2)^2 entries for N atoms, so a
+#: host with many cores could turn one decision into an allocation of gigabytes. The
+#: pool is capped at this many workers and at this many bytes of grids in flight; a
+#: certificate whose single grid exceeds the budget runs one worker rather than
+#: refusing. PR 78's adversarial review, F38.
+_MAX_PARALLEL_WORKERS = 4
+_PARALLEL_GRID_BUDGET_BYTES = 512 * 1024 * 1024
+
+
+def _estimated_grid_bytes(atom_count: int) -> int:
+    """Bytes of one direction's dense grid, at most 2N + 2 events on each axis."""
+    events = 2 * atom_count + 2
+    return events * events * 8
+
+
+def _worker_count(certificate: Certificate, requested: int | None) -> int:
+    """The pool size: the request or the core count, under the worker and grid caps."""
+    available = os.process_cpu_count() or 1
+    desired = available if requested is None else max(1, requested)
+    per_worker = _estimated_grid_bytes(len(certificate.atoms))
+    by_memory = max(1, _PARALLEL_GRID_BUDGET_BYTES // max(1, per_worker))
+    return min(
+        desired, available, len(certificate.directions), _MAX_PARALLEL_WORKERS, by_memory
+    )
+
+
+def _main_is_importable() -> bool:
+    """Whether a forkserver or spawn worker could re-import the caller's ``__main__``."""
+    main = sys.modules.get("__main__")
+    main_file = getattr(main, "__file__", None) if main is not None else None
+    return (
+        isinstance(main_file, str)
+        and not main_file.startswith("<")
+        and Path(main_file).is_file()
+    )
+
+
+def _pool_context() -> BaseContext | None:
+    """The start method for the direction pool, or ``None`` to run in this process.
+
+    Python 3.14 starts workers by forkserver on Linux, which re-imports the caller's
+    ``__main__``; a caller run from stdin or a REPL has none, and the pool dies with a
+    connection reset. Forking inherits the parent and asks nothing of it, but is unsafe
+    once the parent has other threads (Python warns, and a lock held by another thread
+    is held forever in the child). So: fork while the process is single-threaded; the
+    platform default once it is not, provided a worker can import ``__main__``; and no
+    pool at all when neither is safe. Off Linux the platform default stands throughout.
+    """
+    if not sys.platform.startswith("linux"):
+        return mp.get_context()
+    if threading.active_count() == 1:
+        return mp.get_context("fork")
+    if _main_is_importable():
+        return mp.get_context()
+    return None
+
 
 def _direction_minimum(certificate: Certificate, direction: Direction) -> tuple[Fraction, str]:
     return sweep_direction_minimum(certificate, direction)[0], direction.label
@@ -355,27 +430,24 @@ def sweep_all_directions(
     """The least covered mass at every net direction, in net order.
 
     Directions are independent, so they are decided in parallel processes;
-    ``workers`` defaults to the machine's core count, or to this process alone
-    below ``_PARALLEL_ATOMS`` atoms, and ``1`` runs them in this process. An
-    explicit count always gets a pool, so the two schedules can be compared on
-    a certificate small enough to compare them quickly. The result is ordered
-    by direction whichever way it ran, so the reduction that follows -- first
-    direction attaining the minimum wins -- does not depend on the schedule.
+    ``workers`` defaults to the process's available core count, or to this process
+    alone below ``_PARALLEL_ATOMS`` atoms, and ``1`` runs them in this process. Both
+    the default and an explicit count sit under ``_MAX_PARALLEL_WORKERS`` and the
+    grid budget (``_worker_count``), and the pool's start method -- or the decision
+    to run in this process after all -- is ``_pool_context``'s. An explicit count
+    otherwise always gets a pool, so the two schedules can be compared on a
+    certificate small enough to compare them quickly. The result is ordered by
+    direction whichever way it ran, so the reduction that follows -- first direction
+    attaining the minimum wins -- does not depend on the schedule.
     """
 
     directions = certificate.directions
-    count = (os.cpu_count() or 1) if workers is None else max(1, workers)
+    count = _worker_count(certificate, workers)
     small = workers is None and len(certificate.atoms) < _PARALLEL_ATOMS
-    if count == 1 or len(directions) < 2 or small:
+    context = _pool_context() if count > 1 else None
+    if count == 1 or len(directions) < 2 or small or context is None:
         return tuple(_direction_minimum(certificate, d) for d in directions)
-    # Python 3.14 starts workers by forkserver on Linux, which re-imports the
-    # caller's ``__main__``; a caller run from stdin or a REPL has none, and the
-    # pool dies with a connection reset. Forking inherits the parent instead and
-    # asks nothing of it. Elsewhere the platform default stands.
-    context = mp.get_context("fork") if sys.platform.startswith("linux") else None
-    with ProcessPoolExecutor(
-        max_workers=min(count, len(directions)), mp_context=context
-    ) as pool:
+    with ProcessPoolExecutor(max_workers=count, mp_context=context) as pool:
         return tuple(pool.map(partial(_direction_minimum, certificate), directions))
 
 
@@ -385,12 +457,7 @@ def verify(certificate: Certificate, *, workers: int | None = None) -> Verdict:
     Exact, and never short-circuits Condition 2 to Condition 4.
     """
 
-    conditions = [
-        _condition_symmetric_atoms(certificate),
-        _condition_mass_below_n(certificate),
-        _condition_arc_reaches_eighth_turn(certificate),
-        _condition_containment(certificate),
-    ]
+    conditions = list(closed_form_conditions(certificate))
     worst: Fraction | None = None
     worst_label: str | None = None
     for minimum, label in sweep_all_directions(certificate, workers=workers):

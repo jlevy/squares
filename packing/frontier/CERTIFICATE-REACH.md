@@ -10,22 +10,37 @@ case's lower bound, at the 181-direction net every retained certificate uses.
 **`prize` is what the ceiling allows, not what a search will reach.** The real
 limit is the covering value: a certificate exists at side `L` only where the
 least total mass that covers every admissible `B`-square falls below `n`, and
-that value is well below the ceiling wherever the ceiling is loose. Four
-restricted optima have been measured, each an upper bound on the covering value
-at its side:
+that value can bind well below the ceiling. Seven values have been reported for
+the restricted program, at seven sides, each at best an upper bound on the
+unrestricted covering value there. What survives here beside each one is a frozen
+certificate or nothing at all:
 
-| side | restricted optimum | from |
+| side | reported value | evidence retained here |
 | ---: | ---: | --- |
-| 3.82 | 11.0000 | converged, n = 11 |
-| 3.95 | 11.9706 | retained certificate's mass, n = 12 |
-| 3.96 | 11.9936 | converged, n = 12 |
-| 4.58 | 16.9628 | converged, n = 17 |
+| 3.82 | 11.0000 | result narrative only; no raw run, nothing frozen here |
+| 3.95 | 11.9706 | frozen 969-atom certificate, feasible mass 11.970590; the reported value is this mass to four places, not a separate measured optimum |
+| 3.96 | 11.9936 | frozen 2,097-atom certificate, feasible mass 11.998960; the reported objective itself has no raw run |
+| 4.58 | 16.9628 | frozen 1,173-atom certificate, feasible mass 16.965735; the reported objective itself has no raw run |
+| 4.59 | 16.9303 | frozen 1,184-atom certificate, feasible mass 16.933080; the reported objective itself has no raw run |
+| 4.68 | 18.0000 | three site sets reported; no raw run, nothing frozen here |
+| 4.80 | 18.916941 | frozen 2,260-atom certificate, feasible mass 18.922620; the reported objective itself has no raw run |
 
-Those four are the whole of what is known about how the covering value grows.
-They are consistent with a quadratic in the side, which would put the reach well
-below the `packing` rows below — but four points and a fitted curve are not a
-measurement, and no rung has ever been claimed from one. Rank on `prize` to
-choose where to look; measure before believing any of it.
+No covering-search run log or solver checkpoint was retained for any of the
+seven, so not one of the reported values can be recomputed here. What a frozen
+certificate recomputes is its own feasible mass — a total that covers every
+admissible `B`-square at that side, and so an upper bound on the covering value
+there, rather than the objective a search reported. Only the `3.95` row's
+reported value is its artifact's own mass; at `3.96`, `4.58`, `4.59` and `4.80`
+the artifact's mass and the reported objective are different numbers.
+
+The seven are also reports of different kinds rather than one series measured
+the same way. At `3.82` a grid-built site set ran its row loop to convergence; at
+`4.80` the run was halted at round 9 on projected cost; at `4.68` it was stopped
+before it could separate a covering value at eighteen from a site set still short
+of one. Seven heterogeneous reports across a side band 0.98 wide do not support a
+growth trend or a fitted curve, and no rung in this register has ever been
+claimed from one. Rank on `prize` to choose where to look; measure and retain the
+run before believing any extrapolation.
 
 Of 100 registered cases, 33 are foreclosed and 67
 are not. Every foreclosed case sits at the grid bound `ceil(sqrt(n))`, which is
@@ -101,8 +116,8 @@ case is open and its conjectured value is that bound.
 | 78 | 9 | 8.9373 | 9.0000 | 8.9793 | ceiling | +0.0421 |
 | 97 | 10 | 9.9443 | 10.0000 | 9.9770 | ceiling | +0.0328 |
 | 12 | 4 | 3.9600 | 4.0000 | 3.9908 | ceiling | +0.0308 |
-| 5 | 3 | 2.7071 | 2.7071 | 2.9931 | packing | -0.0000 |
-| 10 | 4 | 3.7071 | 3.7071 | 3.9908 | packing | -0.0000 |
+| 5 | 3 | 2.7071 | 2.7071 | 2.9931 | packing | +0.0000 |
+| 10 | 4 | 3.7071 | 3.7071 | 3.9908 | packing | +0.0000 |
 
 ## Measured attainment
 
@@ -206,8 +221,8 @@ reaches, not this extrapolation.
 | 76 | 9 | 8.8102 | 9.0000 | 8.9793 | ceiling | +0.1691 | 8.8406 | +0.0304 |
 | 17 | 5 | 4.5900 | 4.6755 | 4.9885 | packing | +0.0855 | 4.5927 | +0.0027 |
 | 60 | 8 | 7.8557 | 8.0000 | 7.9816 | ceiling | +0.1260 | 7.8583 | +0.0027 |
-| 5 | 3 | 2.7071 | 2.7071 | 2.9931 | packing | -0.0000 | 2.6592 | +0.0000 |
-| 10 | 4 | 3.7071 | 3.7071 | 3.9908 | packing | -0.0000 | 3.6415 | +0.0000 |
+| 5 | 3 | 2.7071 | 2.7071 | 2.9931 | packing | +0.0000 | 2.6592 | +0.0000 |
+| 10 | 4 | 3.7071 | 3.7071 | 3.9908 | packing | +0.0000 | 3.6415 | +0.0000 |
 | 11 | 4 | 3.8100 | 3.8771 | 3.9908 | packing | +0.0671 | 3.8084 | +0.0000 |
 | 12 | 4 | 3.9600 | 4.0000 | 3.9908 | ceiling | +0.0308 | 3.9292 | +0.0000 |
 | 19 | 5 | 4.8000 | 4.8856 | 4.9885 | packing | +0.0856 | 4.7991 | +0.0000 |

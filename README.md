@@ -3,9 +3,9 @@
 Three things here, and each is a reason to look:
 
 - **New results.** The lower bound on `s(11)`, the smallest open case, has moved for the
-  first time since Stromquist set it in 2003 — and with it the first bounds ever proved
-  specifically for twelve, twenty and twenty-one squares, and values from `n = 17`
-  through `n = 21` that displace what was in print.
+  first time in the located public record since Stromquist set it in 2003 — and with it
+  the first located public bounds specifically for twelve, twenty and twenty-one
+  squares, and values from `n = 17` through `n = 21` that displace what was in print.
   [Details below](#new-results).
 - **A survey of the whole problem in one place.** Every case `n = 1…100`, the primary
   literature retained and transcribed, and the bound a source *reports* kept apart from
@@ -52,11 +52,11 @@ Results first established here, as far as the recorded source searches show:
 
 ### Notable results (`S4`–`S5`)
 
-- **[T-018](packing/frontier/RESULTS.md): `s(11) ≥ 381/100`, the first movement of the
-  smallest open case since 2003 (`S5`).** [`s(11)`](packing/frontier/n-011.md) is the
-  case this project exists for, and its lower bound had been Stromquist’s
-  `2 + 4/√5 = 3.788854` since he stated it.
-  A first-party
+- **[T-018](packing/frontier/RESULTS.md): `s(11) ≥ 381/100`, the first located public
+  movement of the smallest open case since 2003 (`S5`).**
+  [`s(11)`](packing/frontier/n-011.md) is the case this project exists for, and the
+  recorded public search found no stronger lower bound after Stromquist published
+  `2 + 4/√5 = 3.788854` in 2003. A first-party
   [weighted fractional unavoidable-set certificate](packing/cases/n11_fractional_certificate/)
   — 1121 weighted atoms, total mass `434547/40000`, every placement of a shrunken square
   covering mass at least `1` — proves that eleven unit squares do not fit in a container
@@ -65,8 +65,11 @@ Results first established here, as far as the recorded source searches show:
   Stromquist, and `189/50`, the calibration rung below him that was run first on purpose
   and proves nothing new.
   Scored `S5`, the rubric’s anchor for movement on a central open case.
+  The shortest complete statement of the proof, with the certificate’s hash and the one
+  command that checks it from the standard library alone, is the
+  [proof card](packing/cases/n11_fractional_certificate/PROOF-CARD.md).
   A
-  [self-contained third-party package](packing/cases/n11_fractional_certificate/thirdparty/)
+  [self-contained package for third-party checking](packing/cases/n11_fractional_certificate/thirdparty/)
   ships with it, so the `19/5` rung can be decided without trusting anything else here.
 - **T-019: `s(17), s(18), s(19) ≥ 459/100`, displacing the published value (`S4`).** The
   adopted bound for [these](packing/frontier/n-017.md) three cases was Massaccesi’s

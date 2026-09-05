@@ -9,25 +9,35 @@ reading of the theorem divided by the shrunken side and would have claimed
 
 from __future__ import annotations
 
+import json
 import runpy
+from collections.abc import Callable
 from fractions import Fraction
 from pathlib import Path
+from types import ModuleType
 
 import numpy as np
 import pytest
 
+import cases.n12_fractional_certificate.__main__ as n12_entrypoint
+import cases.n17_fractional_certificate.__main__ as n17_entrypoint
+import cases.n20_fractional_certificate.__main__ as n20_entrypoint
 from cases.n11_fractional_certificate.replay import FIRST_RUNG_PATH as N11_FIRST_RUNG
 from cases.n11_fractional_certificate.replay import STROMQUIST_RUNG_PATH
 from cases.n11_fractional_certificate.replay import declared as n11_declared
 from cases.n11_fractional_certificate.replay import load as n11_load
+from cases.n12_fractional_certificate.__main__ import replay as replay_n12
 from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH, declared, load
+from cases.n17_fractional_certificate.__main__ import replay as replay_n17
 from cases.n17_fractional_certificate.replay import declared as n17_declared
 from cases.n17_fractional_certificate.replay import load as n17_load
 from cases.n17_weighted_certificate.fixture import load_retained_fixture
+from cases.n20_fractional_certificate.__main__ import replay as replay_n20
 from cases.n20_fractional_certificate.replay import declared as n20_declared
 from cases.n20_fractional_certificate.replay import load as n20_load
 from sqpack.fractional.certificate import (
     Certificate,
+    Verdict,
     ceiling_side,
     ceiling_side_for_net,
     grid_refutation_order,
@@ -94,6 +104,99 @@ def test_mass_reaching_n_is_refused() -> None:
     )
     assert heavy.total_mass == 17
     assert "Condition 2 total mass below n" in verify(heavy).failures
+
+
+def small_replay_control() -> dict[str, object]:
+    """A two-square certificate small enough for the exact verifier to decide instantly.
+
+    One central atom, one net step: the five conditions all hold, so a replay of it
+    reaches the declaration guards instead of stopping at a failed condition.
+    """
+    return {
+        "id": "small-replay-control",
+        "n": 2,
+        "outer_side": "1",
+        "square_side": "3/5",
+        "angle_limit": "1/2",
+        "direction_steps": 1,
+        "symmetry": "D4",
+        "claim": "s(2) >= 1",
+        "total_mass": "1",
+        "least_cell_mass": "1",
+        "atoms": [["1/2", "1/2", "1"]],
+    }
+
+
+DECLARED_VALUE_DRIFT = [
+    ("claim", "s(2) >= 2", "retained claim disagrees"),
+    ("total_mass", "0", "retained total mass disagrees"),
+    ("least_cell_mass", "2", "retained least cell mass disagrees"),
+]
+
+
+@pytest.mark.parametrize(("field", "wrong", "message"), DECLARED_VALUE_DRIFT)
+def test_n12_replay_refuses_declared_value_drift(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    field: str,
+    wrong: str,
+    message: str,
+) -> None:
+    """The moving n = 12 pointer may not verify stale declared figures."""
+    record = small_replay_control()
+    record[field] = wrong
+    path = tmp_path / "certificate.json"
+    path.write_text(json.dumps(record), encoding="utf-8")
+
+    assert replay_n12(path) == 1
+    assert message in capsys.readouterr().out
+
+
+@pytest.mark.parametrize("replay", [replay_n17, replay_n20], ids=["n17", "n20"])
+@pytest.mark.parametrize("mutation", DECLARED_VALUE_DRIFT)
+def test_n17_and_n20_replays_refuse_declared_value_drift(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    replay: Callable[[Path], int],
+    mutation: tuple[str, str, str],
+) -> None:
+    """Every named retained replay binds its reader-visible theorem declarations."""
+    field, wrong, message = mutation
+    record = small_replay_control()
+    record[field] = wrong
+    path = tmp_path / "certificate.json"
+    path.write_text(json.dumps(record), encoding="utf-8")
+
+    assert replay(path) == 1
+    assert message in capsys.readouterr().out
+
+
+@pytest.mark.parametrize(
+    "entrypoint",
+    [n12_entrypoint, n17_entrypoint, n20_entrypoint],
+    ids=["n12", "n17", "n20"],
+)
+def test_the_guarded_replays_refuse_a_file_changed_during_verification(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+    entrypoint: ModuleType,
+) -> None:
+    """A long replay may report only on the same bytes it parsed."""
+    record = small_replay_control()
+    path = tmp_path / "certificate.json"
+    path.write_text(json.dumps(record), encoding="utf-8")
+    real_verify: Callable[[Certificate], Verdict] = entrypoint.verify
+
+    def mutate_path(certificate: Certificate) -> Verdict:
+        verdict = real_verify(certificate)
+        changed = record | {"claim": "s(2) >= 2"}
+        path.write_text(json.dumps(changed), encoding="utf-8")
+        return verdict
+
+    monkeypatch.setattr(entrypoint, "verify", mutate_path)
+    assert entrypoint.replay(path) == 1
+    assert "changed during replay" in capsys.readouterr().out
 
 
 def test_a_net_short_of_an_eighth_turn_is_refused() -> None:

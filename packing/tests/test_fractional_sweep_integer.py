@@ -10,6 +10,11 @@ direction of the 2260-atom n = 20 certificate took 39.35 s by Fraction and
 0.86 s by integer; the whole verify took 5378 s and 38.7 s.
 """
 
+# The scheduling bounds are private by design and cheap only as unit contracts; their
+# public effect is a machine with more cores than this one.
+# ruff: noqa: SLF001
+# pyright: reportPrivateUsage=false
+
 from __future__ import annotations
 
 from fractions import Fraction
@@ -18,11 +23,19 @@ import pytest
 
 from cases.n11_fractional_certificate.replay import FIRST_RUNG_PATH as N11_FIRST_RUNG
 from cases.n11_fractional_certificate.replay import load as n11_load
+from cases.n12_fractional_certificate.replay import load as n12_load
 from cases.n17_fractional_certificate.replay import declared as n17_declared
 from cases.n17_fractional_certificate.replay import load as n17_load
+from cases.n20_fractional_certificate.replay import load as n20_load
+from sqpack.fractional import certificate as certificate_module
 from sqpack.fractional import sweep
-from sqpack.fractional.certificate import Certificate, sweep_all_directions, verify
-from sqpack.fractional.model import Atom
+from sqpack.fractional.certificate import (
+    Certificate,
+    sweep_all_directions,
+    sweep_direction_minimum,
+    verify,
+)
+from sqpack.fractional.model import Atom, Direction
 from sqpack.fractional.sweep import (
     minimum_covered_mass,
     minimum_covered_mass_fraction,
@@ -102,8 +115,14 @@ def test_integer_and_fraction_sweeps_agree_on_a_retained_rung(index: int) -> Non
     assert fast == reference
 
 
-def test_the_span_reduction_is_the_cell_reduction_folded() -> None:
-    """``reduce_to_cells`` is defined as the spans expanded; check it at one direction."""
+def test_the_span_reduction_matches_the_independent_cell_reduction() -> None:
+    """The spans expanded are the cells the reference computes on its own.
+
+    Until 2026-09-05 ``reduce_to_cells`` was defined as the spans expanded, so the two
+    agreed by construction and a wrong span geometry would have been wrong twice.
+    PR 78's adversarial review re-implemented the reference reduction independently;
+    this is now a check between two computations, at one direction.
+    """
 
     certificate = n11_load(N11_FIRST_RUNG)
     direction = certificate.directions[53]
@@ -117,6 +136,78 @@ def test_the_span_reduction_is_the_cell_reduction_folded() -> None:
     expanded = [(i, j) for i, j0, j1 in spans.spans for j in range(j0, j1 + 1)]
     assert list(cells.cells) == expanded
     assert all(j0 <= j1 for _, j0, j1 in spans.spans)
+
+
+def _admissible(
+    certificate: Certificate, direction: Direction, point: tuple[Fraction, Fraction]
+) -> bool:
+    """Whether a rotated-frame centre maps back to a placement inside the container.
+
+    ``centre_domain`` sends the container square ``[h, L - h]^2`` through the rotation
+    ``(x, y) -> (c x + s y, -s x + c y)``; this applies the inverse and asks the same
+    question in container coordinates, exactly.
+    """
+
+    u, v = point
+    cosine, sine = direction.ux, direction.uy
+    x, y = cosine * u - sine * v, sine * u + cosine * v
+    half = certificate.square_side * (cosine + sine) / 2
+    far = certificate.outer_side - half
+    return half <= x <= far and half <= y <= far
+
+
+def test_every_reported_witness_is_an_admissible_centre_on_the_373_atom_rung() -> None:
+    """D-449: the witness used to be the midpoint of the attaining event cell.
+
+    Most reachable cells meet the admissible domain only in part, so on 158 of the 181
+    directions of the n = 11 top rung the midpoint was a point at which no B-square is
+    admissible at all. The value was right; the point was not a witness. The witness is
+    now a point of the cell's intersection with the domain, on both routes, and this
+    holds it there on every third direction of the first rung in the fast tier; the
+    exhaustive walk below takes every direction of every retained certificate.
+    """
+
+    certificate = n11_load(N11_FIRST_RUNG)
+    for direction in certificate.directions[::3]:
+        _, witness = minimum_covered_mass(
+            certificate.atoms, direction, certificate.outer_side, certificate.square_side
+        )
+        assert _admissible(certificate, direction, witness), direction.label
+
+
+@pytest.mark.exhaustive_exact
+def test_every_reported_witness_is_admissible_on_every_retained_certificate() -> None:
+    """The strict-inside witness is a new hard-error path, so it is walked in full.
+
+    All 181 directions of all four retained certificates on the integer route: the
+    reported witness is admissible, and the value is the one the record declares.
+    """
+
+    for load, declared in (
+        (n11_load, Fraction(4001, 4000)),
+        (n12_load, Fraction(12501, 12500)),
+        (n17_load, Fraction(200009, 200000)),
+        (n20_load, Fraction(50007, 50000)),
+    ):
+        certificate = load()
+        least: Fraction | None = None
+        for direction in certificate.directions:
+            value, witness = sweep_direction_minimum(certificate, direction)
+            assert _admissible(certificate, direction, witness), direction.label
+            least = value if least is None else min(least, value)
+        assert least == declared
+
+
+def test_the_public_integer_entry_point_refuses_an_overflowing_scaled_total() -> None:
+    """A direct call cannot bypass the int64 obligation ``minimum_covered_mass`` checks."""
+
+    atoms = (
+        Atom("a", Fraction(1), Fraction(1), Fraction(2**62)),
+        Atom("b", Fraction(1), Fraction(1), Fraction(2**62)),
+    )
+    direction = _small_certificate().directions[0]
+    with pytest.raises(ValueError, match="safe int64 limit"):
+        minimum_covered_mass_integer(atoms, direction, Fraction(3), Fraction(1), 1)
 
 
 def test_a_scale_too_large_for_int64_falls_back_to_fractions(
@@ -143,6 +234,62 @@ def test_a_scale_too_large_for_int64_falls_back_to_fractions(
     monkeypatch.setattr(sweep, "minimum_covered_mass_integer", spy)
     assert minimum_covered_mass(*args) == expected
     assert calls == [], "the integer route ran past its own limit"
+
+
+def test_worker_counts_sit_under_the_core_worker_and_grid_caps(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """F38: a many-core host must not allocate one dense grid per core.
+
+    The pool size is the request or the core count, under the worker cap and under the
+    grid budget; a single grid over the budget runs one worker rather than refusing.
+    """
+
+    certificate = n11_load(N11_FIRST_RUNG)
+    one_grid = certificate_module._estimated_grid_bytes(len(certificate.atoms))
+    monkeypatch.setattr(certificate_module.os, "process_cpu_count", lambda: 64)
+    monkeypatch.setattr(certificate_module, "_MAX_PARALLEL_WORKERS", 8)
+    monkeypatch.setattr(certificate_module, "_PARALLEL_GRID_BUDGET_BYTES", 2 * one_grid)
+    assert certificate_module._worker_count(certificate, None) == 2
+    assert certificate_module._worker_count(certificate, 99) == 2
+    assert certificate_module._worker_count(certificate, 1) == 1
+    monkeypatch.setattr(certificate_module, "_PARALLEL_GRID_BUDGET_BYTES", one_grid - 1)
+    assert certificate_module._worker_count(certificate, 99) == 1
+    monkeypatch.setattr(certificate_module, "_PARALLEL_GRID_BUDGET_BYTES", 8 * one_grid)
+    assert certificate_module._worker_count(certificate, None) == 8
+
+
+def test_a_single_threaded_process_forks_and_a_threaded_one_without_a_main_runs_serially(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The pool's start method follows what is safe, not a fixed choice.
+
+    Fork inherits the parent and asks nothing of ``__main__``, which is what a caller
+    run from stdin needs; it is unsafe once the parent has other threads. Then the
+    platform default stands if a worker can re-import ``__main__``, and otherwise the
+    directions run in this process, which is slower and always correct.
+    """
+
+    monkeypatch.setattr(certificate_module.sys, "platform", "linux")
+    main = certificate_module.sys.modules["__main__"]
+    monkeypatch.setattr(main, "__file__", "<stdin>", raising=False)
+    monkeypatch.setattr(certificate_module.threading, "active_count", lambda: 1)
+    context = certificate_module._pool_context()
+    assert context is not None and context.get_start_method() == "fork"
+    monkeypatch.setattr(certificate_module.threading, "active_count", lambda: 2)
+    assert certificate_module._pool_context() is None
+    monkeypatch.setattr(main, "__file__", __file__)
+    context = certificate_module._pool_context()
+    assert context is not None and context.get_start_method() != "fork"
+
+    class RefusePool:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            raise AssertionError("a threaded process without an importable main started a pool")
+
+    monkeypatch.setattr(main, "__file__", "<stdin>", raising=False)
+    monkeypatch.setattr(certificate_module, "ProcessPoolExecutor", RefusePool)
+    small = _small_certificate()
+    assert sweep_all_directions(small, workers=3) == sweep_all_directions(small, workers=1)
 
 
 def test_the_parallel_direction_loop_matches_the_serial_one() -> None:

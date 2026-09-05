@@ -69,7 +69,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 
 | Result | `n` | [`V`](epistemics.md#verification) | [`C`](epistemics.md#confirmation) | [`S`](epistemics.md#significance-and-novelty) | [Novelty](epistemics.md#significance-and-novelty) | What it establishes |
 | --- | --- | --- | --- | --- | --- | --- |
-| [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C4` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
+| [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 99/25, by a first-party weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from a first-party weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
 | [T-020](packing/frontier/RESULTS.md) | 19, 20, 21 | `V4` | `C4` | `S4` | `apparently-novel` | s(19) >= 24/5, s(20) >= 24/5 and s(21) >= 24/5, from a first-party weighted fractional unavoidable-set certificate at container side 24/5 = 4.80. |
@@ -256,12 +256,15 @@ case or experiment separately.
 | [BC-151 — Independent Review of the 4.5058 Adoption Packet](docs/project/reviews/review-2026-09-03-bc151-4-5058-adoption-independent-review.md) | dated review record | record | retained | — |
 | [BC-154 — independent review of the W9 disposition for D-044 and D-046](docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md) | dated review record | record | retained | — |
 | [BC-158 — factual review of the H-060 / exp-058 records against their sources](docs/project/reviews/review-2026-09-03-bc158-h060-record-factual-review.md) | dated review record | record | retained | — |
+| [Adversarial review of PR 78: the `s(11) ≥ 381/100` claim](docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md) | dated review record | record | retained | — |
 | [Review 2026-09-04 — independent verification of T-017 (s(12) ≥ 77/20)](docs/project/reviews/review-2026-09-04-t017-independent-verification.md) | dated review record | record | retained | — |
 | [Review 2026-09-04 — Hostile Third-Party Check of the s(11) ≥ 19/5 Package (T-018)](docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md) | dated review record | record | retained | — |
 | [Review 2026-09-04 — PR #80, the Stacked Hardening of the s(11) ≥ 381/100 Claim](docs/project/reviews/review-2026-09-04-pr80-stacked-hardening.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
-| [Third-Party Check of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
+| [Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
+| [One-minute proof that `s(11) ≥ 381/100`](packing/cases/n11_fractional_certificate/t-018-proof.md) | component scope and use | record | retained | — |
+| [Proof Card: s(11) ≥ 381/100](packing/cases/n11_fractional_certificate/PROOF-CARD.md) | component scope and use | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
@@ -427,10 +430,12 @@ unavoidable-set certificate generator — left a trace in this branch’s histor
 verified-upper-bound promotions and `T-009`’s raise to `C4`) and Lane D (the
 `think-ldq2` W9 handoff) do not appear in it.
 
-Lane A retained four results, all `V4`/`C4`, across seven distinct cases: `T-018` raises
-`s(11) >= 381/100`, the smallest open case moving for the first time since Stromquist
-stated `2 + 4/√5` in 2003; `T-017` raises `s(12) >= 99/25`, the first bound specific to
-`n = 12` in the retained corpus, climbed across eight rungs from
+Lane A retained four results across seven distinct cases, all `V4` and all `C4` when the
+block closed, `T-018` having since been raised to `C5` by a mapped review artifact:
+`T-018` raises `s(11) >= 381/100`, the smallest open case moving for the first time
+located in the public record since Stromquist stated `2 + 4/√5` in 2003; `T-017` raises
+`s(12) >= 99/25`, the first bound specific to `n = 12` in the retained corpus, climbed
+across eight rungs from
 [H-061](packing/campaign/hypotheses/H-061-n12-first-party-fractional-certificate.md)’s
 fixed `19/5` threshold; `T-019` raises `s(17)`, `s(18) >= 459/100`, displacing
 Massaccesi’s published `22529/5000`; and `T-020` raises `s(19)`, `s(20)`,
@@ -444,7 +449,9 @@ Two searches stopped on cost rather than an answer, not as negatives: `n = 18` a
 `4.68` (three site sets converged to exactly `18.000000` without separating a genuine
 covering-value plateau from a degenerate vertex) and `n = 11` at side `3.82` (the
 rejection route’s exact maximum depth caps the feasible total well short of the eleven a
-ceiling needs). Full detail is in
+ceiling needs). Both are reported covering values in
+[`CERTIFICATE-REACH.md`](packing/frontier/CERTIFICATE-REACH.md) with nothing frozen
+beside them. Full detail is in
 [the block-close handoff](docs/project/handoff-2026-09-04-block-close.md).
 
 The same evening, entered directly on the operator’s own direction rather than drawn
@@ -1608,9 +1615,12 @@ calibration.
 A **control cell** is an instance cell whose answer is known before the run,
 and a breach of one rejects the round regardless of outcome.
 
-> The two senses collide, and both appear in this document.
-> **Write “cell” for the configuration-space object and “instance cell”—never bare
-> “cell”—for a sweep position.** In running prose about a round, prefer naming the `n`.
+> Three senses collide, and all three appear in this document.
+> **Write “cell” for the configuration-space object, “instance cell” for a sweep
+> position, and “event cell” for a region of admissible centres—never bare “cell” for
+> either of the last two.** In running prose about a round, prefer naming the `n`. The
+> three are unrelated objects: one is where the LP is solved, one is what a round is run
+> on, and one is where a certificate’s covered mass is constant.
 
 **Basin (point-basin where the distinction matters).** The preimage of one pose returned
 by a deterministic quench: the set of configurations the refiner carries to that
@@ -1633,6 +1643,25 @@ independently validated connectivity rather than declare the quench map undefine
 mechanisms with closed-form optima.
 The ladder validates *machinery*: no proved case exercises an irrational oblique angle,
 so passing it says nothing about strategy at `n = 11`.
+
+### The weighted-certificate objects
+
+The lower-bound lane has its own vocabulary, and it is narrow in the same way the rest
+of this section is. Each term is defined where the conditions themselves are stated, and
+[`TUTORIAL.md`](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) develops all
+five from first principles.
+
+| Term | Controlled meaning | Where it is defined |
+| --- | --- | --- |
+| **atom** / **weight** | An exact point of a candidate container `[0, L]²`, and the nonnegative rational bookkeeping mass assigned to it. An atom has no area, blocks nothing, and is never a packed square | [`fractional.certificate`](packing/src/sqpack/fractional/certificate.py), [tutorial](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) |
+| **atomic measure** / **mass** | The rule assigning a region the sum of the weights of the atoms lying in it, boundary atoms included; a region’s *mass* is what that rule returns. *Atomic* because all of it sits at finitely many points rather than spread over the container | [tutorial](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) |
+| **direction net** | The finite set of exact square orientations a certificate checks, carried as rational half-angle tangents and reaching `π/4`. The strict shrink condition is what lets a nearby net direction stand in for an unchecked orientation, so the net is not a sample | [`fractional.certificate`](packing/src/sqpack/fractional/certificate.py), [tutorial](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) |
+| **event cell** | One open region of admissible centres, at one net direction, on which the set of atoms a shrunken square covers is constant. A third sense of *cell*, unrelated to the two under [The objects](#the-objects), and never written bare | [`fractional.sweep`](packing/src/sqpack/fractional/sweep.py), [tutorial](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) |
+| **weighted fractional unavoidable-set certificate** | A finite weighted atom set whose total mass is below `n` (`Condition 2`) but whose mass is at least one in every admissible shrunken square (`Condition 5`); with the symmetry, net and shrink conditions it proves `s(n) >= L`. Burns’s and Massaccesi’s object; the instances here are this project’s | [`fractional.certificate`](packing/src/sqpack/fractional/certificate.py), [tutorial](TUTORIAL.md#how-a-weighted-atomic-lower-bound-proof-works) |
+
+`Condition 1` to `Condition 5` name the five conditions a certificate must satisfy and
+are stated in the module above; they are not the confirmation rungs `C0` to `C5`, which
+[`epistemics.md`](epistemics.md) owns.
 
 ### The operations
 
@@ -1836,13 +1865,14 @@ For most `n` the answer is uninteresting: `s(m²) = m` by the grid.
 It becomes interesting just above a perfect square, where the leftovers must be tilted
 in.
 
-At `n = 11` the two ends of the interval have barely moved in a generation:
+At `n = 11` the upper end has not moved since 1979, and the lower end moved on
+2026-09-04 for the first time since 2003:
 
 |  | value | source |
 | --- | --- | --- |
 | Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
-| Best certified lower bound | `2 + 4/√5 = 3.788854382…` | exp-017 exact source-distinct repair; value stated by Stromquist 2003, whose printed proof has gap D-152 |
-| Published gap | `0.088229208023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
+| Best certified lower bound | `381/100 = 3.81` | [T-018](packing/frontier/RESULTS.md), a first-party weighted fractional unavoidable-set certificate, decided twice from its frozen bytes |
+| Bound gap | `0.067083590023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
 
 ![Walter Trump’s exact eleven-square packing.](packing/atlas/rendering/trump11-overview.svg)
 
@@ -1850,12 +1880,14 @@ At `n = 11` the two ends of the interval have barely moved in a generation:
 separated from the independently certified lower bound.
 The segment and dot contact marks are exact, not tolerance-based visual guesses.*
 
+The value `T-018` displaces is Stromquist’s `2 + 4/√5 = 3.788854382…`, and that value
+keeps its own place in the record.
 The current audit found an explicit strict box avoiding all twelve printed Figure 14
 points, so the paper’s unavoidability subclaim is false as printed
 ([D-152](defects.md)). Exp-017 independently certifies the same numerical inequality by
 moving only `G=(.8,1.85)` to the source-distinct `G'=(.79,1.85)` and replaying the
-complete finite cover and capacity argument.
-The repaired coordinate and certificate are results of this repository, not claims
+complete finite cover and capacity argument ([T-010](packing/frontier/RESULTS.md)). The
+repaired coordinate and certificate are results of this repository, not claims
 attributed to Stromquist.
 
 Trump’s packing is six axis-aligned squares plus a block of five tilted at
@@ -3151,24 +3183,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 449 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 454 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 93 | asserted something false about the mathematics |
+| soundness | 94 | asserted something false about the mathematics |
 | validity | 117 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 166 | recorded something its own evidence contradicts |
+| bookkeeping | 170 | recorded something its own evidence contradicts |
 | robustness | 57 | did not finish, or finished only by luck |
 | performance | 16 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Seventy-three of the ninety-three soundness defects pointed in the *flattering*
+**Seventy-four of the ninety-four soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-five defects in 449, and no soundness defect
+**The automated gate has caught sixty-five defects in 454, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3308,10 +3340,11 @@ Nagamochi’s closed form a day after the 4.5058 adoption made it sixty; the REA
 sixty-seven case bodies were corrected, and `check_nagamochi_bounds` refuses any prose
 count that disagrees with the case records — which is why the same sixty-seven bodies
 now read fifty-eight, `T-020` having taken two more cases off the closed form.
-[D-449](defects.md) is open: the exact sweep reports, beside the least covered mass, a
-witness centre at the midpoint of the attaining event cell, and on most directions that
-midpoint lies outside the admissible domain; the value is right, the point is not a
-witness, and the fix is bead `think-xyt1` under the port epic.
+[D-449](defects.md) was the exact sweep reporting, beside the least covered mass, a
+witness centre at the midpoint of the attaining event cell, which on most directions
+lies outside the admissible domain; the value was right and the point was not a witness.
+The witness is now a point of the cell’s intersection with the domain on both routes,
+held there on every direction of every retained certificate.
 [D-431](defects.md) is open: `T-009`’s significance rationale compares its `n = 29`
 interval certificate against a rational certificate on Schadt’s packing rather than
 Kingbird’s, and the shipped rational promotion run on the Kingbird witness lands about
@@ -3321,7 +3354,8 @@ packing, and takes `T-009` to `C4` through the results checker.
 [D-432](defects.md) was found by the same branch’s own pre-push tier: when the change
 set touches a file that configures the suite, the tier falls back to the whole suite
 under a 900-second cap the full-suite steps no longer use, dies at 84%, and names no
-failing test; it is owned by Agenda 018’s gate-speed block.
+failing test; the step now takes the fast suite’s own budget when its selector expands
+to the whole suite, the first commit of the branch that ports PR #80’s findings.
 
 [D-393](defects.md) is the same run being wrong about its own gate.
 `D-381` established `--edit` as the pre-push floor, and that floor does not run tests:
@@ -3632,14 +3666,15 @@ agrees, and new components inheriting the perimeter—that apply to code not yet
 ## Where This Stands
 
 **As of 2026-09-04 the project’s largest live result is the fractional lower-bound lane,
-and it is not the cartography spine.** A weighted fractional unavoidable-set certificate
-— Burns’s and Massaccesi’s theorem, this project’s instances and generator — moved seven
-registered cases in one day.
-`s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first movement of that
-bound since Stromquist stated `2 + 4/sqrt(5)` in 2003 and the only S5 result in the
-register, `n = 11` being the smallest open case.
-`s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound ever proved
-about twelve squares rather than inherited from eleven.
+and it is not the cartography spine.** Its weighted-resource lineage runs through Göbel,
+Kearney–Shiu, Nagamochi and Bentz; the recent pure-atomic rational direction-net
+architecture follows Burns, and the LP instance and parameter line follows Massaccesi.
+This project’s instances and generator moved seven registered cases in one day.
+`s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first public movement of
+that bound located by the recorded search after Stromquist stated `2 + 4/sqrt(5)` in
+2003 and the only S5 result in the register, `n = 11` being the smallest open case.
+`s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound located that
+was proved about twelve squares rather than inherited from eleven.
 `s(17) >= 459/100`, and `n = 18` and `n = 19` at the same side without a monotonicity
 step, is [T-019](packing/frontier/RESULTS.md) and displaces Massaccesi’s published
 `4.5058` by `0.0842`. `s(19)`, `s(20)` and `s(21) >= 24/5` is
@@ -3649,11 +3684,14 @@ evening and displaces Nagamochi’s 2005 closed form at the other two — `1 + s
 single-case movement in the register, and twenty and twenty-one had never carried a
 bound of their own at all.
 Between them those two are the only values in print this project has replaced.
-All four stand at V4/C4: each was decided twice from frozen bytes by an exact event-cell
-sweep and by an interval branch and bound with directed rounding, methods that share no
-modelling assumption and fail differently, agreeing on the least covered mass to the
-digit. None reaches C5, because no one outside the project has reviewed any of them; a
-self-contained third-party package ships at
+All four stand at V4: each was decided twice from frozen bytes by an exact event-cell
+sweep and by an interval branch and bound with directed rounding — two routes that share
+the certificate and the closed-form conditions but decide Condition 5 by different
+methods, which fail differently — agreeing on the least covered mass to the digit.
+Three of them stand at C4, and T-018 at C5 — the rung epistemics.md defines as
+review-ready, a mapped and non-superseded review artifact, which the adversarial review
+of PR 78 supplies. None of the four has been read by anyone outside the project, which
+that rung does not ask for; a self-contained package for third-party checking ships at
 `packing/cases/n11_fractional_certificate/thirdparty/` so that a stranger can decide the
 `19/5` rung without trusting this repository.
 
@@ -3702,9 +3740,15 @@ packing runs near half a unit — eleven cases above `+0.49`, headed by `n = 51`
 `+0.5364`, then `68`, `84`, `39`, `86`, `66`, `38`, `83`, `37`, `53` and `26`. Two
 cautions travel with that ranking.
 The prize is what the *ceiling* allows; the real limit is the covering value at that
-side, and only four restricted optima have ever been measured — `11.0000` at `3.82`,
-`11.9706` at `3.95`, `11.9936` at `3.96`, `16.9628` at `4.58`. They fit a quadratic, and
-a fitted curve is not a measurement.
+side. Seven values have been reported for the restricted program, at sides `3.82`,
+`3.95`, `3.96`, `4.58`, `4.59`, `4.68` and `4.80` — reports, not measurements this
+repository can reproduce, since no covering-search run log or solver checkpoint was
+retained for any of the seven.
+Exactly one is recomputable from a tracked artifact, at side `3.95`, and what it
+recomputes is the frozen certificate’s own feasible mass — an upper bound on the
+covering value there, not the optimum a search reported.
+Seven heterogeneous reports across a side band `0.98` wide fit a curve, and a fitted
+curve is not a measurement.
 And the cost of a run grows with the container: the site set, the row set and the exact
 sweep all scale with `L²` or worse, so a case at `n = 51` is not an `n = 12` run with a
 different constant.

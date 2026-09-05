@@ -11,7 +11,7 @@ It cannot be generated: most of it is judgement, and the judgement is the point.
 So it is *reconciled* instead, the way `campaign/ideas.md` is -- the numbers and
 statuses it asserts must match the artifacts, and every artifact must appear.
 
-Twelve checks:
+Thirteen checks:
 
   1. every round's verdict in the roll-up matches its artifact
   2. every hypothesis's status and round count match the ledger's derived values
@@ -25,6 +25,8 @@ Twelve checks:
  10. the readiness dashboard remains attached to its canonical status owners
  11. living reproducibility instructions do not name removed command paths
  12. the cold-start handoff agrees with the latest terminal session and its next entry
+ 13. the reported covering values it names match `CERTIFICATE-REACH.md`'s own table
+ 14. the `n = 11` fact table's two ends and their gap match the case's own front matter
 
 Check 8 closes a real gap: `packing-ledger check` walks links under `campaign/`
 only, so the root document's forty-odd references were unchecked.
@@ -38,8 +40,15 @@ import re
 import sys
 from collections import Counter
 from collections.abc import Iterable
+from decimal import ROUND_HALF_UP, Decimal, InvalidOperation, localcontext
 from pathlib import Path
 
+from devtools.check_rung_figures import round_to
+from devtools.render_certificate_reach import (
+    CASES,
+    REPORTED_COVERING_VALUES,
+    load_certificate,
+)
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -52,6 +61,18 @@ AGENT_SESSIONS = ROOT / "campaign/agent-sessions"
 AGENDAS = ROOT / "campaign/agendas"
 ACTIVE_PLAN = REPO / "docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md"
 DEFECTS = ROOT / "defects.yaml"
+CASE_INTERVAL_ARTIFACT = ROOT / "frontier" / "n-011.md"
+#: The three rows of the `n = 11` fact table under "The Problem", by their row labels.
+#: `gap` is deliberately the term `conventions.md` fixes: the distance between the best
+#: upper and lower bounds, whoever proved them.
+CASE_INTERVAL_LABELS = {
+    "upper": "Best known packing (upper bound)",
+    "lower": "Best certified lower bound",
+    "gap": "Bound gap",
+}
+#: Wide enough for the degree-8 upper bound's thirty-three digits with headroom, for the
+#: same reason `check_rung_figures` carries one.
+_DECIMAL_PRECISION = 60
 READINESS_BEGIN = "<!-- BEGIN CURRENT-RESEARCH-READINESS -->"
 READINESS_END = "<!-- END CURRENT-RESEARCH-READINESS -->"
 READINESS_SOURCES = (
@@ -591,6 +612,196 @@ def check_unprotected_fix_claims(text: str, expected: int) -> list[str]:
     ]
 
 
+#: "at side `4.68`" / "at sides `3.82`, `3.95` and `4.80`" -- the shape the synopsis uses
+#: to attach a covering-value report to the side it was reported at. Backticked decimals
+#: only, which is what keeps this off the other "at side" phrases in the document: the
+#: exact ones are written as fractions or surds (`19/5`, `1 + 5√2/4`) and the unbackticked
+#: ones are not quotations of a reported value at all.
+_AT_SIDES = re.compile(r"\bat sides?\s+((?:`\d+\.\d+`(?:,\s+|\s+and\s+)?)+)")
+
+#: "`11.9706` at `3.95`" and its neighbours; a backticked decimal inside an `_AT_SIDES`
+#: run.
+_QUOTED_DECIMAL = re.compile(r"`(\d+\.\d+)`")
+
+
+def reported_covering_sides() -> tuple[list[str], list[str]]:
+    """Every side `CERTIFICATE-REACH.md` reports a covering value at, and the recomputable ones.
+
+    "Recomputable" is derived, not listed: a row is recomputable here when the value it
+    reports *is* its frozen artifact's own feasible mass, to the places the report writes.
+    Exactly one row is, today, and calling that one a measured optimum is the error this
+    check exists to refuse -- a feasible mass is an upper bound on the covering value at
+    that side, and the search's objective is a different number the record cannot replay.
+    """
+    sides = [side for side, _, _, _ in REPORTED_COVERING_VALUES]
+    recomputable = []
+    for side, reported, artifact, _ in REPORTED_COVERING_VALUES:
+        if artifact is None:
+            continue
+        _, mass = load_certificate(CASES / artifact)
+        digits = len(reported.split(".", 1)[1]) if "." in reported else 0
+        if round_to(mass, digits) == Decimal(reported):
+            recomputable.append(side)
+    return sides, recomputable
+
+
+def check_covering_value_reports(text: str) -> list[str]:
+    """The synopsis's account of the reported covering values matches the generated table.
+
+    The synopsis said "only four restricted optima have ever been measured" and named
+    four, while `CERTIFICATE-REACH.md` listed seven reports -- and called them reports,
+    because no covering-search run log or solver checkpoint was retained for any of them.
+    Three sides were simply missing from the sentence, and the four that were there were
+    described as measurements this repository holds. Two claims, both reconcilable against
+    the renderer, so both are:
+
+    1. the count, stated in the anchored form the table itself uses, and
+    2. every side the synopsis attaches a covering value to is one the table lists, with
+       some sentence naming all of them.
+
+    A third, conditional: where the synopsis claims a value is recomputable here, the
+    sides it names must be the ones that are. It is conditional rather than required
+    because the honest statement of "one of seven" is a judgement the document is free to
+    make in its own words; what it is not free to do is name the wrong side.
+
+    Under-matching a rewording is the safe failure here, as it is in `check_case_prose`: a
+    covering value written in some shape `_AT_SIDES` does not recognise goes unchecked,
+    where a looser pattern would start reporting the document's other uses of "at side".
+    """
+    sides, recomputable = reported_covering_sides()
+    problems = []
+
+    count_pattern = (
+        rf"\b(?:{len(sides)}|{re.escape(spell(len(sides)))}) values have been reported\b"
+    )
+    if not re.search(count_pattern, text, re.I):
+        problems.append(
+            f"SYNOPSIS.md: does not state the reported-covering-value count ({len(sides)}) "
+            'in the form "<n> values have been reported"'
+        )
+
+    named = [set(_QUOTED_DECIMAL.findall(run.group(1))) for run in _AT_SIDES.finditer(text)]
+    for quoted in named:
+        stray = sorted(quoted - set(sides))
+        if stray:
+            problems.append(
+                f"SYNOPSIS.md: names covering-value side(s) {', '.join(stray)}, which "
+                "CERTIFICATE-REACH.md does not report a value at"
+            )
+    if not any(quoted == set(sides) for quoted in named):
+        problems.append(
+            f"SYNOPSIS.md: no sentence names all {len(sides)} reported covering-value "
+            f"sides ({', '.join(sides)})"
+        )
+
+    for sentence in re.split(r"(?<=[a-z0-9)`])\.\s+(?=[A-Z])", text):
+        if "recomputable" not in sentence:
+            continue
+        claimed = {
+            side
+            for run in _AT_SIDES.finditer(sentence)
+            for side in _QUOTED_DECIMAL.findall(run.group(1))
+        }
+        if claimed and claimed != set(recomputable):
+            problems.append(
+                f"SYNOPSIS.md: claims a covering value is recomputable at "
+                f"{', '.join(sorted(claimed))}; the table's recomputable side(s) are "
+                f"{', '.join(recomputable)}"
+            )
+    return problems
+
+
+def fact_row(text: str, label: str) -> str | None:
+    """The value cell of the fact-table row named `label`, or `None` if there is none."""
+    match = re.search(rf"^\| {re.escape(label)} \| (.*?) \|", text, re.M)
+    return None if match is None else match.group(1)
+
+
+def check_case_interval(
+    text: str,
+    front: dict,
+    labels: dict[str, str] = CASE_INTERVAL_LABELS,
+) -> list[str]:
+    """The fact table's two ends and their gap match the case artifact's front matter.
+
+    `D-450`, which is `D-442` one day later. T-018 moved the verified lower bound of
+    `n = 11` to `381/100`, `frontier/n-011.md`'s front matter moved with it, and the
+    fact table under "The Problem" -- the first table a reader meets in this document --
+    kept the displaced `2 + 4/sqrt(5)` and the gap computed from it. `check_case_prose`
+    holds a case *body* to its own front matter and `check_rung_figures` holds the
+    results register to its certificates; the two reader-facing documents were held to
+    nothing, so the class moved to them.
+
+    Three things are required, and each is the shape of the drift that happened:
+
+    * the upper row's digits are the front matter's own, allowing the trailing ellipsis
+      the row writes but not a different value;
+    * the lower row states both the exact form the record carries and its decimal, so a
+      row cannot go stale in one and stay current in the other;
+    * the gap is the difference of the two, at whatever precision the row is written to.
+
+    Pure in its inputs -- `text` and the already-loaded front matter -- so that the
+    negative control can drive it directly rather than doctoring the repository.
+    """
+
+    found = {key: fact_row(text, label) for key, label in labels.items()}
+    if missing := [labels[key] for key, row in found.items() if row is None]:
+        return [f"SYNOPSIS.md: fact table has no '{label}' row" for label in sorted(missing)]
+
+    rows = {key: row for key, row in found.items() if row is not None}
+    figures = {key: re.findall(r"`([^`]*)`", row) for key, row in rows.items()}
+    if empty := [labels[key] for key, found in figures.items() if not found]:
+        return [f"SYNOPSIS.md: '{label}' row states no figure" for label in sorted(empty)]
+
+    upper = str(front["verified_upper_bound"]["value"])
+    lower = str(front["verified_lower_bound"]["value"])
+    exact = str(front["verified_lower_bound"]["exact_form"])
+
+    problems = []
+    written_upper = figures["upper"][0].rstrip("\u2026. ")
+    if not written_upper or not upper.startswith(written_upper):
+        problems.append(
+            f"SYNOPSIS.md: '{labels['upper']}' states '{figures['upper'][0]}', "
+            f"not the case's verified {upper}"
+        )
+
+    lower_cell = figures["lower"][0]
+    absent = [
+        wanted
+        for wanted in (exact, lower)
+        if not re.search(rf"(?<![\w./]){re.escape(wanted)}(?![\w./])", lower_cell)
+    ]
+    if absent:
+        problems.append(
+            f"SYNOPSIS.md: '{labels['lower']}' states '{lower_cell}', which does not "
+            f"carry the case's verified {' and '.join(absent)}"
+        )
+
+    stated_gap = figures["gap"][0]
+    try:
+        stated = Decimal(stated_gap)
+    except InvalidOperation:
+        stated = Decimal("nan")
+    # A non-integer exponent is what a NaN or an infinity carries -- the cell `Decimal`
+    # refused above, and the "nan" or "Infinity" it would have accepted. No gap is one.
+    exponent = stated.as_tuple().exponent
+    if not isinstance(exponent, int):
+        problems.append(f"SYNOPSIS.md: '{labels['gap']}' states no decimal ({stated_gap})")
+        return problems
+    places = -exponent
+    with localcontext() as context:
+        context.prec = _DECIMAL_PRECISION
+        expected = (Decimal(upper) - Decimal(lower)).quantize(
+            Decimal(1).scaleb(-places), rounding=ROUND_HALF_UP
+        )
+    if stated != expected:
+        problems.append(
+            f"SYNOPSIS.md: '{labels['gap']}' states {stated}, "
+            f"not the {expected} the two rows leave between them"
+        )
+    return problems
+
+
 def check_defects(text: str) -> list[str]:
     """The defect count and per-class counts match the dataset."""
     data = safe_load((ROOT / "defects.yaml").read_text())
@@ -675,7 +886,9 @@ def main() -> int:
         + check_readiness_dashboard(text)
         + check_migrated_commands(text)
         + check_current_handoff(text)
+        + check_covering_value_reports(text)
         + check_defects(text)
+        + check_case_interval(text, front(CASE_INTERVAL_ARTIFACT)["packing"])
     )
     if problems:
         print("SYNOPSIS.md has drifted from the artifacts:", file=sys.stderr)

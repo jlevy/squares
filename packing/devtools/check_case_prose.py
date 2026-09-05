@@ -33,19 +33,44 @@ This is that detector. For every `frontier/n-*.md`, it does three things:
      `reported_upper_bound` is tighter than what this repository has itself verified says
      this, in exactly this form, and it is checked directly against `verified_upper_bound`
      with no fallback: the field is named in the sentence, so there is nothing to guess at).
+   - "`s(11)` is pinned to `[3.81, 3.877084]`, a gap of `0.067084`" -- an interval on this
+     file's own `n`, read as a lower and an upper bound, with the gap checked against their
+     difference (`D-445`, where the interval form let a body stay eleven hours on a rung the
+     front matter had left).
+   - "The verified lower bound is `99/25 = 3.96`" -- the same claim the disclaimer makes,
+     written in words rather than as a backticked field name. Five sibling bodies write this
+     sentence as "The verified lower bound is `s(18) >= 459/100 = 4.59`", which the first
+     shape above already anchors; `n-012`'s named no `n` at all, so nothing anchored it and
+     it sat on the `77/20` rung under front matter that said `99/25` (`D-451`). Like the
+     disclaimer it names the field, so it is checked against that field with no fallback and
+     no historical exemption, and where the prose spells the exact fraction as well, that is
+     checked against `exact_form` -- two rungs a hundredth apart can round alike at the two
+     decimals a body writes.
 
-   A quoted figure must equal the front matter's corresponding bound, rounded
-   (`ROUND_HALF_UP`, exactly as `check_rung_figures` rounds) to the number of decimal places
-   the prose itself wrote -- **or** it must equal the corresponding `reported_*_bound` at
-   that same precision. The second alternative is not a loophole; it is what keeps this
-   check from crying wolf at every open case: "the best known packing gives `s(29) <=
-   5.93383346`" is a citation of the *reported* construction, not of this repository's own
-   verified ceiling, and the two legitimately differ whenever a published packing outruns
-   what has been formally verified here (`n-017`'s own body explains this at length, under
-   "The verified upper bound is a ceiling"). Checking reported figures against
-   `reported_*_bound` is exactly as mechanical, and exactly as load-bearing, as checking
-   verified figures against `verified_*_bound` -- both are the front matter disagreeing with
-   the prose, just via different fields depending on which one the sentence is about.
+   A quoted figure must be the front matter's corresponding bound rendered to the number
+   of decimal places the prose itself wrote, in the direction that leaves the sentence it
+   is written in true -- a lower bound rounded *down* (`ROUND_FLOOR`), an upper bound
+   rounded *up* (`ROUND_CEILING`), a figure the value hits exactly satisfying both -- **or**
+   it must be the corresponding `reported_*_bound` rendered the same way. The second
+   alternative is not a loophole; it is what keeps this check from crying wolf at every open
+   case: "the best known packing gives `s(29) <= 5.93383346`" is a citation of the *reported*
+   construction, not of this repository's own verified ceiling, and the two legitimately
+   differ whenever a published packing outruns what has been formally verified here
+   (`n-017`'s own body explains this at length, under "The verified upper bound is a
+   ceiling"). Checking reported figures against `reported_*_bound` is exactly as mechanical,
+   and exactly as load-bearing, as checking verified figures against `verified_*_bound` --
+   both are the front matter disagreeing with the prose, just via different fields depending
+   on which one the sentence is about.
+
+   The *direction* is the part that is easy to get wrong, and this module had it wrong until
+   2026-09-05: it rounded to nearest, the rule `check_rung_figures` applies to a figure that
+   is only ever a restatement. A bound is not a restatement. `n-028`'s body said "the best
+   proved lower bound is `5.358899`" under a `verified_lower_bound` of `5.35889894354`,
+   and forty-one sibling bodies did the same: 54 figures in 42 files, 38 lower bounds
+   rounded up and 16 upper bounds rounded down, each stating an inequality stronger than
+   anything this repository has proved and passing this checker while doing it -- the
+   flattering direction, in the one class of sentence where the flattering direction is a
+   false theorem and not a rounding preference (`D-453`). `--fix` re-renders them.
 
    A figure that matches neither is not automatically a finding: if it is *strictly weaker*
    than the current `verified_*_bound` (a smaller lower bound, a larger upper bound) and its
@@ -62,9 +87,9 @@ This is that detector. For every `frontier/n-*.md`, it does three things:
    and unrelated to which `n` a figure is about: `189/50 = 3.78` in `n-011`'s body is checked
    the same way regardless of whose bound it is illustrating.
 
-What this does **not** cover: `n-011`'s own "`s(11)` is pinned to `[3.8, 3.877084]`" range
-notation is a fourth shape this module does not recognise, so a stale figure written only
-that way would not be caught -- the corpus does not use it for any other open case, and a
+What this does **not** cover: a bound figure written in some sixth shape none of the above
+recognises. Every shape here was added after a body drifted in it -- the `s(n) >=` form for
+`D-442`, the pinned interval for `D-445`, the named-field sentence for `D-451` -- because a
 check that guesses at an unfamiliar shape risks the same false positive this module works to
 avoid elsewhere. Nor does it check the companion figure in "which is **larger** than the
 best known `X` two fields above it" (the `reported_upper_bound` restated next to the
@@ -75,14 +100,16 @@ checks once.
 
 Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m devtools.check_case_prose
+    uv run --frozen --all-extras --group dev python -m devtools.check_case_prose --fix
 """
 
 from __future__ import annotations
 
+import argparse
 import re
 import sys
 from dataclasses import dataclass
-from decimal import ROUND_HALF_UP, Decimal, localcontext
+from decimal import ROUND_CEILING, ROUND_FLOOR, ROUND_HALF_UP, Decimal, localcontext
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -159,6 +186,18 @@ _VERIFIED_FIELD = re.compile(
     r"`verified_(upper|lower)_bound`\s+for this case is\s+`(-?\d+(?:\.\d+)?)`"
 )
 
+#: "The verified lower bound is `99/25 = 3.96`" -- the same claim written in words rather
+#: than as a backticked field name, and the shape `n-012`'s body opens with. Five sibling
+#: bodies write the sentence as "The verified lower bound is `s(18) >= 459/100 = 4.59`",
+#: which `_BOUND_GE` already anchors on its own `s(n)`; this one names no `n` at all, so
+#: nothing anchored it and the sentence sat on the `77/20` rung under front matter that
+#: said `99/25` (`D-451`). Like `_VERIFIED_FIELD` it names the field, so the figure it
+#: states is the field's, with no reported-bound fallback and no historical exemption --
+#: and when the prose writes the exact fraction too, that is checked against `exact_form`.
+_VERIFIED_BOUND_SENTENCE = re.compile(
+    rf"[Tt]he verified (lower|upper) bound is\s+`?{_FIGURE}`?"
+)
+
 
 def sentence_spans(text: str) -> list[tuple[int, int]]:
     """Every sentence in `text` as a `(start, end)` character span, covering all of `text`."""
@@ -200,6 +239,41 @@ class BoundField:
         with localcontext() as context:
             context.prec = _DECIMAL_PRECISION
             return Decimal(str(self.value)).quantize(quantum, rounding=ROUND_HALF_UP)
+
+    def exact_fraction(self) -> Fraction | None:
+        """This bound's exact value, when `exact_form` is a plain integer or rational."""
+        candidate = self.exact_form.strip() if isinstance(self.exact_form, str) else ""
+        if re.fullmatch(r"-?\d+(?:/\d+)?", candidate):
+            return Fraction(candidate)
+        return None
+
+    def safe_decimal_at(self, digits: int, kind: str) -> Decimal | None:
+        """This bound at `digits` places, rounded the one way that cannot strengthen it.
+
+        `decimal_at` rounds to nearest, which answers "is this the same number, at the
+        precision the prose wrote?". For a bound that is the wrong question: the prose
+        writes an *inequality*, and a lower bound rounded up -- or an upper bound rounded
+        down -- states one the record does not carry. So a lower bound is rendered with
+        `ROUND_FLOOR` and an upper bound with `ROUND_CEILING`. A value the prose can write
+        exactly is unaffected: floor and ceiling both return it.
+
+        The rendering is only ever as safe as the stored `value` when there is no rational
+        `exact_form` to work from -- `value` is itself a rounded decimal, and flooring it
+        at its own last digit can land a unit in that place above the true bound. Every
+        precision this corpus's prose writes is coarser than that, by several digits.
+        """
+        if self.value is None:
+            return None
+        exact = self.exact_fraction()
+        with localcontext() as context:
+            context.prec = _DECIMAL_PRECISION
+            candidate = (
+                Decimal(exact.numerator) / Decimal(exact.denominator)
+                if exact is not None
+                else Decimal(str(self.value))
+            )
+            rounding = ROUND_FLOOR if kind == "lower" else ROUND_CEILING
+            return candidate.quantize(Decimal(1).scaleb(-digits), rounding=rounding)
 
 
 @dataclass(frozen=True, slots=True)
@@ -311,12 +385,58 @@ def verified_field_claims(body: str) -> list[VerifiedFieldClaim]:
     ]
 
 
+@dataclass(frozen=True, slots=True)
+class VerifiedBoundSentence:
+    """ "The verified lower bound is `99/25 = 3.96`" -- the figure, and the exact form."""
+
+    kind: str
+    """"lower" or "upper"."""
+    figure: str
+    exact_form: Fraction | None
+    """The `a/b` the prose wrote before the decimal, when it wrote one."""
+    offset: int
+
+
+def verified_bound_sentences(body: str) -> list[VerifiedBoundSentence]:
+    """Every "The verified <kind> bound is <figure>" sentence, in words rather than keys."""
+    found: list[VerifiedBoundSentence] = []
+    for match in _VERIFIED_BOUND_SENTENCE.finditer(body):
+        numerator, denominator = match.group(2), match.group(3)
+        exact = Fraction(int(numerator), int(denominator)) if numerator else None
+        found.append(
+            VerifiedBoundSentence(match.group(1), match.group(4), exact, match.start(4))
+        )
+    return found
+
+
 def _is_historical_mention(sentence: str) -> bool:
     return _HISTORICAL_MARKER.search(sentence) is not None
 
 
+def _field_matches_claim(field: BoundField, figure: str, kind: str) -> bool:
+    """Whether `figure` renders `field` at its own precision without strengthening it.
+
+    A figure the field's value hits exactly always matches. Otherwise a lower-bound figure
+    must be the value rounded *down* and an upper-bound figure the value rounded *up*: at
+    the precision the prose chose, the digits it wrote have to fall on the side of the
+    value that keeps the inequality true. Nearest-rounding accepts the other side too, and
+    that is what let `n-028` claim a lower bound of `5.358899` over a `5.35889894354`.
+    """
+    rendered = field.safe_decimal_at(_digits_of(figure), kind)
+    return rendered is not None and Decimal(figure) == rendered
+
+
 def _check_gap_claim(claim: BoundClaim, front_matter: CaseFrontMatter) -> str | None:
-    """A quoted gap is the difference of the file's own verified bounds, as written."""
+    """A quoted gap is the difference of the file's own verified bounds, as written.
+
+    The one figure here still rounded to nearest, deliberately. A gap is a width, not an
+    inequality: `0.067084` for a gap of `0.06708433` asserts nothing that can be false,
+    where `s(11) >= 3.877085` for a bound of `3.87708433` does. Its two endpoints are
+    checked as bounds in their own right, each in its own safe direction, so the figure a
+    reader would use to bound the interval is safe whichever way this one rounds. The
+    endpoints are taken six places finer than the gap is written, so the subtraction
+    itself contributes nothing at the precision the answer is quantised to.
+    """
     digits = _digits_of(claim.figure)
     lower = front_matter.verified_lower.decimal_at(digits + 6)
     upper = front_matter.verified_upper.decimal_at(digits + 6)
@@ -343,11 +463,10 @@ def check_bound_claim(claim: BoundClaim, front_matter: CaseFrontMatter) -> str |
     verified = front_matter.verified_lower if lower else front_matter.verified_upper
     reported = front_matter.reported_lower if lower else front_matter.reported_upper
     verified_value = verified.decimal_at(digits)
-    reported_value = reported.decimal_at(digits)
 
-    if verified_value is not None and stated == verified_value:
+    if _field_matches_claim(verified, claim.figure, claim.kind):
         return None
-    if reported_value is not None and stated == reported_value:
+    if _field_matches_claim(reported, claim.figure, claim.kind):
         return None
     if verified_value is not None:
         weaker = stated < verified_value if claim.kind == "lower" else stated > verified_value
@@ -355,13 +474,15 @@ def check_bound_claim(claim: BoundClaim, front_matter: CaseFrontMatter) -> str |
             return None
 
     op = "≥" if claim.kind == "lower" else "≤"
+    verified_safe = verified.safe_decimal_at(digits, claim.kind)
+    reported_safe = reported.safe_decimal_at(digits, claim.kind)
     front = (
-        f"verified_{claim.kind}_bound rounds to {verified_value}"
-        if (verified_value is not None)
+        f"verified_{claim.kind}_bound renders to {verified_safe} at that precision"
+        if verified_safe is not None
         else f"verified_{claim.kind}_bound is unset"
     )
-    if reported_value is not None:
-        front += f" (reported_{claim.kind}_bound rounds to {reported_value})"
+    if reported_safe is not None:
+        front += f" (reported_{claim.kind}_bound renders to {reported_safe})"
     return f"prose says s(n) {op} {claim.figure}, but {front}"
 
 
@@ -373,14 +494,47 @@ def check_verified_field_claim(
     historical exemption: this sentence is never about anything but the present value.
     """
     digits = _digits_of(claim.figure)
-    stated = Decimal(claim.figure)
     verified = (
         front_matter.verified_lower if claim.kind == "lower" else front_matter.verified_upper
     )
-    value = verified.decimal_at(digits)
-    if value is not None and stated == value:
+    if _field_matches_claim(verified, claim.figure, claim.kind):
         return None
-    return f"prose says verified_{claim.kind}_bound is {claim.figure}, but it rounds to {value}"
+    value = verified.safe_decimal_at(digits, claim.kind)
+    return (
+        f"prose says verified_{claim.kind}_bound is {claim.figure}, but it renders to {value}"
+    )
+
+
+def check_verified_bound_sentence(
+    claim: VerifiedBoundSentence, front_matter: CaseFrontMatter
+) -> str | None:
+    """The sentence names the field, so it is held to the field and to nothing else.
+
+    Both halves of what the prose wrote are checked: the decimal at the precision it was
+    written to, and -- when the sentence spells the exact fraction as well -- that
+    fraction against `exact_form`. The second half is what catches two rungs that round
+    alike, which is not hypothetical on a ladder whose steps are hundredths.
+    """
+    verified = (
+        front_matter.verified_lower if claim.kind == "lower" else front_matter.verified_upper
+    )
+    digits = _digits_of(claim.figure)
+    value = verified.decimal_at(digits)
+    if value is None:
+        return f"prose states a verified {claim.kind} bound, but the field is unset"
+    if Decimal(claim.figure) != value:
+        return (
+            f"prose says the verified {claim.kind} bound is {claim.figure}, "
+            f"but verified_{claim.kind}_bound rounds to {value}"
+        )
+    exact = (verified.exact_form or "").strip()
+    rational = claim.exact_form is not None and re.fullmatch(r"-?\d+(?:/\d+)?", exact)
+    if rational and claim.exact_form != Fraction(exact):
+        return (
+            f"prose says the verified {claim.kind} bound is {claim.exact_form}, "
+            f"but exact_form is {exact}"
+        )
+    return None
 
 
 def fraction_arithmetic_problems(body: str) -> list[tuple[int, str]]:
@@ -409,7 +563,8 @@ class Finding:
     path: Path
     line: int
     check: str
-    """"bound-figure", "verified-field", or "fraction-arithmetic"."""
+    """"bound-figure", "verified-field", "verified-bound-sentence", or
+    "fraction-arithmetic"."""
     detail: str
 
     def render(self) -> str:
@@ -441,14 +596,96 @@ def check_case_file(path: Path) -> list[Finding]:
         if problem is not None:
             line = _line_at(body_start_line, body, field_claim.offset)
             findings.append(Finding(path, line, "verified-field", problem))
+    for sentence_claim in verified_bound_sentences(body):
+        problem = check_verified_bound_sentence(sentence_claim, front_matter)
+        if problem is not None:
+            line = _line_at(body_start_line, body, sentence_claim.offset)
+            findings.append(Finding(path, line, "verified-bound-sentence", problem))
     for offset, message in fraction_arithmetic_problems(body):
         line = _line_at(body_start_line, body, offset)
         findings.append(Finding(path, line, "fraction-arithmetic", message))
     return findings
 
 
+def _field_for_rewrite(claim: BoundClaim, front_matter: CaseFrontMatter) -> BoundField | None:
+    """The field a flagged figure is the *nearest* rendering of, if it is either field's.
+
+    That is the whole licence `--fix` has: a figure that is one of these fields rounded to
+    nearest was a rounding decision, and re-rounding it is a rewording of the same claim. A
+    figure that is neither field's nearest rendering is something else -- a stale rung, a
+    transposed digit -- and rewriting it would bury a finding instead of answering it.
+    """
+    if claim.kind == "gap":
+        return None
+    lower = claim.kind == "lower"
+    stated = Decimal(claim.figure)
+    digits = _digits_of(claim.figure)
+    for field in (
+        front_matter.verified_lower if lower else front_matter.verified_upper,
+        front_matter.reported_lower if lower else front_matter.reported_upper,
+    ):
+        if field.decimal_at(digits) == stated:
+            return field
+    return None
+
+
+def rewrite_directionally_safe_figures(path: Path) -> int:
+    """Re-render `path`'s nearest-rounded bound figures in the safe direction, in place.
+
+    Only the digits of a flagged figure move, and only when `_field_for_rewrite` finds the
+    field it was rounded from; the sentence around it, and every figure flagged for any
+    other reason, is left exactly as it was. Returns how many figures were rewritten.
+    """
+    text = path.read_text(encoding="utf-8")
+    front_matter_yaml, body, _body_start_line = split_front_matter(text)
+    prefix = text[: len(text) - len(body)]
+    front_matter = parse_front_matter(safe_load(front_matter_yaml))
+    rewrites: dict[int, tuple[int, str]] = {}
+
+    for claim in bound_claims(body, front_matter.n):
+        if check_bound_claim(claim, front_matter) is None:
+            continue
+        field = _field_for_rewrite(claim, front_matter)
+        if field is None:
+            continue
+        rendered = field.safe_decimal_at(_digits_of(claim.figure), claim.kind)
+        if rendered is not None:
+            rewrites[claim.offset] = (len(claim.figure), format(rendered, "f"))
+
+    for field_claim in verified_field_claims(body):
+        if check_verified_field_claim(field_claim, front_matter) is None:
+            continue
+        digits = _digits_of(field_claim.figure)
+        verified = (
+            front_matter.verified_lower
+            if field_claim.kind == "lower"
+            else front_matter.verified_upper
+        )
+        if verified.decimal_at(digits) != Decimal(field_claim.figure):
+            continue
+        rendered = verified.safe_decimal_at(digits, field_claim.kind)
+        if rendered is not None:
+            rewrites[field_claim.offset] = (len(field_claim.figure), format(rendered, "f"))
+
+    for offset, (length, replacement) in sorted(rewrites.items(), reverse=True):
+        body = body[:offset] + replacement + body[offset + length :]
+    if rewrites:
+        path.write_text(prefix + body, encoding="utf-8")
+    return len(rewrites)
+
+
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--fix",
+        action="store_true",
+        help="re-render nearest-rounded bound figures in the direction that keeps them true",
+    )
+    args = parser.parse_args()
     paths = sorted(FRONTIER.glob("n-*.md"))
+    if args.fix:
+        rewritten = sum(rewrite_directionally_safe_figures(path) for path in paths)
+        print(f"  {rewritten} bound figure(s) re-rendered without strengthening a bound")
     findings: list[Finding] = []
     for path in paths:
         findings.extend(check_case_file(path))
