@@ -5,7 +5,7 @@ title: "Certificate page: the article is written in Markdown and math, formatted
 kind: epic
 status: open
 priority: 1
-version: 12
+version: 13
 labels:
   - explainer
   - pr-79
@@ -24,7 +24,8 @@ child_order_hints:
   - is-01m1qg6n672ctfv617p88ahwsf
   - is-01m1qg6njkp049tx31g4jsg5dw
   - is-01m1qg6ny5eqkwqhx7b50ykv97
+  - is-01m1qgbyc4rznp7phdzepvwqew
 created_at: 2026-09-05T00:13:42.830Z
-updated_at: 2026-09-05T00:41:25.188Z
+updated_at: 2026-09-05T00:44:17.666Z
 ---
 Direction on PR #79. The prose leaves the HTML template for a Markdown source with $…$ math, [^n] footnotes and {{placeholders}} for derived numbers, with the interactive figures as raw HTML blocks; flowmark-rs 0.4.0 formats it (math spans stay whole); the renderer substitutes per certificate and renders through kpress's Markdown renderer, then stitches in the scripts. The HTML template shrinks to a shell (head, styles, scripts).
