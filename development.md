@@ -265,7 +265,7 @@ uv run --frozen --all-extras --group dev packing-validate --budgets
 | `--records` | contributor, before touching a registry | 300 s | 13.6 s, four contended cores, 2026-09-05 |
 | `--edit` | contributor, in the edit loop | 240 s | 59.4 s, four contended cores, 2026-09-05 |
 | `--push` | contributor, before a push | 1800 s | about a minute for a code change; the whole quick lane when the diff reaches everything |
-| `--fast` | CI, on a pull request | 210 s | 140.8 s on CI at `--jobs 3`, 2026-09-05, commit `26709263` — 386 s of step time in 140.8 s of wall |
+| `--fast` | CI, on a pull request | 210 s | 177.0 s on CI at `--jobs 3` with 2 quick-lane workers, 2026-09-05, commit `b9d357db` |
 | (default) | CI, on `main` and on the daily schedule | 3600 s | not clocked end to end on one runner; CI splits it across jobs |
 
 The ceiling column is enforced and the cost column is not: the register is the

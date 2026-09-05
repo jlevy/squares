@@ -105,12 +105,20 @@ tiers:
   # Two changes account for it: the shared atlas builds left the quick lane (306s -> 56s
   # locally), and the surface moved to `--jobs 3`, which took the wall from 170.58s to
   # 140.79s at 2.74x parallel against 1.87x.
-  measured_seconds: 140.79
+  # 177.02s, not the 140.79s that stood here for one commit. That figure came from a
+  # configuration this project no longer runs and could not have kept: the same shape gave
+  # 192.26s on its next run and failed 19 tests against the 5s per-test ceiling, because
+  # the quick lane was asking for one worker per cpu while two other steps ran beside it.
+  # Recording the faster of two readings from an unstable configuration is how a band gets
+  # set to a number the tier cannot hold, so the record is the stable configuration's.
+  measured_seconds: 177.02
   measured_on: '2026-09-05'
   measured_where: >-
-    CI run for commit 26709263, job `validate`, GitHub's Linux runner reporting 4 cpus;
-    the step `Run the required pull-request surface` at `--jobs 3 --inner-jobs 1`,
-    140.79s of wall over 386s of step time.
+    CI run for commit b9d357db, job `validate`, GitHub's Linux runner reporting 4 cpus;
+    the step `Run the required pull-request surface` at `--jobs 3 --inner-jobs 1` with the
+    quick lane sized to `cpus - jobs + 1` = 2 workers. 177.02s of wall, of which
+    `fast behavioral tests` is 177.01s: the lane is the whole wall again, and the other
+    234.9s of work hides underneath it in the two remaining lanes.
   # The reference moves with the invocation it describes. A record taken at `--jobs 3`
   # cannot be compared against a `--jobs 2` reference, and leaving the old one here is how
   # a band stays permanently unenforced: every run reports "not the reference shape" and
