@@ -40,6 +40,7 @@ from __future__ import annotations
 
 import math
 import time
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from fractions import Fraction
 from itertools import combinations
@@ -1072,6 +1073,9 @@ def generate_adaptive(
     settle: float = 0.0,
     log_path: Path | None = None,
     decide: bool = False,
+    seed_points: Iterable[tuple[Fraction, Fraction]] = (),
+    timings: list[RoundTiming] | None = None,
+    deadline: float | None = None,
 ) -> tuple[Certificate | None, AdaptiveLog]:
     """Row- and column-generate; decide the result exactly only when asked.
 
@@ -1089,10 +1093,26 @@ def generate_adaptive(
     by both routes, so that what is retained is what was decided (D-433, D-441). An
     in-memory decision is convenient for a small exploratory call and proves nothing
     about any file; nothing may be retained on its word.
+
+    ``seed_points`` are extra sites -- a retained certificate's atoms carried
+    to this side, say -- unioned with the grids and closed under D4, so a
+    second site-set construction can be run through the same loop. A point
+    outside the container is refused. ``timings`` is handed to every
+    `solve_rows` call, so a caller that wants the per-LP-round split while
+    the run is still going gets it; the list is the only thing it touches.
+    ``deadline`` is a ``time.perf_counter`` value handed to `solve_rows`: past
+    it no row round starts, the loop returns unconverged, and the log carries
+    what was reached -- a wall, never a convergence criterion.
     """
 
     half_tangents = net_half_tangents(angle_limit, direction_steps)
     sites = site_set_from_grids(outer_side, grid_counts, inset)
+    extra = set(seed_points)
+    if extra:
+        for x, y in extra:
+            if not (0 <= x <= outer_side and 0 <= y <= outer_side):
+                raise ValueError(f"seed site ({x}, {y}) lies outside the container")
+        sites = site_set_from_points(outer_side, set(sites.positions()) | extra)
     rows = Rows()
     log = AdaptiveLog()
     handle = log_path.open("a") if log_path is not None else None
@@ -1107,6 +1127,8 @@ def generate_adaptive(
                 rows,
                 max_rounds=max_rounds,
                 rows_per_direction=rows_per_direction,
+                timings=timings,
+                deadline=deadline,
             )
             seconds = time.perf_counter() - started
             note = solution.stopped
