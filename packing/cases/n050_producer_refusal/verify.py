@@ -9,7 +9,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-from collections.abc import Sequence
 from pathlib import Path
 from typing import Any, cast
 
@@ -341,7 +340,7 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(argv: Sequence[str] | None = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     arguments = _parser().parse_args(argv)
     try:
         receipt = verify_result(arguments.result)

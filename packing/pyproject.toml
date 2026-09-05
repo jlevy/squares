@@ -191,6 +191,12 @@ max-complexity = 57
 "devtools/check_svg_rendering.py" = ["PLC0415"]
 # CLI behavior tests exercise small internal orchestration seams without making them APIs.
 "tests/test_validation_cli.py" = ["SLF001"]
+# Content-addressed by the immutable exp-055 result, which pins these files' SHA-256s
+# (see the formatter's exclude list below): a finding here is answered in this file,
+# never by editing theirs. The harness's blind except catches whatever the dynamically
+# loaded frozen producer raises; the test's parametrize tuple is its retained shape.
+"cases/n050_producer_refusal/harness.py" = ["BLE001"]
+"tests/test_n050_producer_refusal_independent.py" = ["PT007"]
 "tests/test_reachable_tests.py" = ["SLF001"]
 
 [tool.ruff.lint.flake8-tidy-imports]

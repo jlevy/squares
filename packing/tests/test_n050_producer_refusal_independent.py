@@ -100,13 +100,13 @@ def test_independent_verifier_is_normal_optimized_equivalent(
 
 @pytest.mark.parametrize(
     "mutation",
-    [
+    (
         "producer-binding",
         "nonzero-stage",
         "review-cleared",
         "missing-overwrite",
         "instrument-binding",
-    ],
+    ),
 )
 def test_independent_verifier_rejects_named_mutations(
     prospective_result: Path,

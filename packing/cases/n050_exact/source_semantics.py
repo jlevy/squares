@@ -10,7 +10,6 @@ import argparse
 import hashlib
 import json
 import re
-from collections.abc import Sequence
 from dataclasses import asdict, dataclass, is_dataclass
 from fractions import Fraction
 from pathlib import Path
@@ -320,7 +319,7 @@ def evaluate_receipt(  # noqa: PLR0911 - the ordered returns are the E1 contract
     return IntakeDecision(accepted=True, reason=None, cells=cells)
 
 
-def main(argv: Sequence[str] | None = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     """Enter the separately bound exp-050 runner through the preregistered module."""
 
     parser = argparse.ArgumentParser(description=__doc__)
