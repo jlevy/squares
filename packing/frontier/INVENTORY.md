@@ -64,7 +64,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-n017-massaccesi-source-replay` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
 | `E-n017-massaccesi-h052-agreement` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n012-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
-| `E-n012-independent-verifier` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n012-independent-verifier` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n011-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n017-fractional-certificate` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n020-fractional-certificate` | 3 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
@@ -93,10 +93,10 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 | `E-n011-repaired-lower` | 11 | A correct proof of a bound stated in 1979 and cited as proved since, whose printed argument does not close | 1 | verified |
 | `E-n011-trump-local-rigidity` | 11 | Local rigidity proved by exhausting all 128 branchwise cones; sources assert rigidity, and zero algebraic freedom does not exclude a branching motion | 1 | verified |
 | `E-n012-fractional-certificate` | 12 | The certificate and the bound it carries, not the method. The weighted fractional unavoidable-set technique is Burns's, with Massaccesi's parameters; what is new here is a first-party certificate instance at n = 12 and side 19/5, and the generator that produced it. Anyone holding Burns's note could have run this search. | 1 | verified |
-| `E-n012-independent-verifier` | 12 | Nothing new in this entry -- it is a second, independent decision of the certificate the first entry registers. | 1 | verified |
 | `E-n029-interval-certified-upper` | 29 | An interval certificate for a square-in-square bound; the packing is Kingbird's | 1 | verified |
 | `E-n040-first-order-flexibility` | 40 | That the tilted block turns at first order and every turn is refused at second; DS7 asserts n = 40 is rigid and this refines rather than contradicts it | 1 | verified |
 | `E-green17-sixteen-point-lower` | 17, 18 | The certified object: sixteen rational points unavoidable in [0, 4426213/1000000]^2, every decision an exact rational sign. The bound's value sits below Green's reported number, so what is new is the verified certificate, not the frontier of reported claims. | 0 | verified |
+| `E-n012-independent-verifier` | 12 | Nothing new in this entry -- it is a second, independent decision of the historical 77/20 rung and its 19/5 calibration certificate. | 0 | verified |
 | `E-n029-schadt-rational-upper` | 29 | A rational certificate for an n = 29 bound; the pose is Schadt's | 0 | verified |
 
 The `n` column is what each covers and `cases` is how many frontier records cite it, which are different numbers: a screen can span eighty sizes and be cited by none, because a screen reports structure rather than settling a bound.

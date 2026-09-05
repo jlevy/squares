@@ -1239,33 +1239,33 @@ evidence:
       searched: The corpus search is E-n012-fractional-certificate's, not repeated here.
       novel_object: >-
         Nothing new in this entry -- it is a second, independent decision of the
-        certificate the first entry registers.
+        historical 77/20 rung and its 19/5 calibration certificate.
     source_key: "[T-017]"
-    certificate: cases/n12_fractional_certificate/certificate.json
-    replay: uv run --frozen --all-extras python cases/n12_fractional_certificate/independent_verify.py cases/n12_fractional_certificate/certificate.json
+    certificate: cases/n12_fractional_certificate/certificate-77-20.json
+    replay: uv run --frozen --all-extras python cases/n12_fractional_certificate/independent_verify.py cases/n12_fractional_certificate/certificate-77-20.json
     replay_status: passed
     limitations: >-
-      A second exact decision of the same five conditions by a verifier written
-      from the theorem statement alone, by a reviewer who was given the two
-      certificate files and denied the project's implementation. It shares no code
-      with sqpack.fractional: it works in an integer-scaled rotated frame, enumerates
-      every piece of the edge arrangement (open intervals and the breakpoints
-      themselves) in both axes, sums masses directly over atoms with no prefix
-      sums or difference array, and decides the admissible-centre set by exact
-      polygon clipping, reporting a lower and an upper bound on the continuum
-      minimum that coincide at every one of the 181 directions for both
-      certificates. Least covered mass exactly 1 at direction 0 for each; Condition 1 to Condition 4
-      agree with E-n012-fractional-certificate to the digit. Break tests refuse a
+      A second exact decision of the same five conditions at the historical 19/5 and
+      77/20 rungs, by a verifier written from the theorem statement alone and a reviewer
+      who was given those two certificate files but denied the project's implementation.
+      It shares no code with sqpack.fractional: it works in an integer-scaled rotated
+      frame, enumerates every piece of the edge arrangement (open intervals and the
+      breakpoints themselves) in both axes, sums masses directly over atoms with no
+      prefix sums or difference array, and decides the admissible-centre set by exact
+      polygon clipping. Its lower and upper bounds on the continuum minimum coincide at
+      every one of the 181 directions for both historical certificates. Least covered
+      mass is exactly 1 at direction 0 for each. Break tests refuse a
       weight lowered by 1/10000, a dropped atom and a shifted atom, each by the
       condition that ought to catch it. Run unchanged on Massaccesi's published n = 17
       certificate, rebuilt from the primary source's data, it returns the published
       bound with total exactly 203/12 and least covered mass exactly 1 over all 181
       directions in 30 s -- the control that shows the verifier is right, as distinct
       from agreeing with the certificate. Same method family (exact-algebraic) as the
-      first entry, so together they support C3 and not C4, which by the rung
-      definition needs a different method value; the reviewer's proof check is
-      retained in docs/project/reviews/ and is the review artifact C5 asks for,
-      pending the operator's reading of it.
+      historical first entry, so together they support C3 at those rungs and not C4,
+      which by definition needs a different method value. This evidence does not decide
+      the current 99/25 bytes and is not cited for that bound; its current
+      method-distinct confirmation is E-fractional-interval-decision. The historical
+      reviewer's proof check remains retained in docs/project/reviews/.
     source_reviewed: '2026-09-04'
   - id: E-n011-fractional-certificate
     claim: lower-bound
@@ -1481,7 +1481,7 @@ evidence:
     relationship_to_generator: independent-implementation
     origin: audited-here
     novelty: previously-published
-    source_key: "[Burns n17]"
+    source_key: '[Burns–Massaccesi n17]'
     certificate: cases/n11_fractional_certificate/certificate.json
     replay: uv run --frozen --all-extras --group dev pytest tests/test_fractional_interval.py
     replay_status: passed

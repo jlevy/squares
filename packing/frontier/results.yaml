@@ -612,7 +612,6 @@ results:
       composition step between the artifact and the claim.
     evidence:
       - E-n012-fractional-certificate
-      - E-n012-independent-verifier
       - E-fractional-interval-decision
     artifacts:
       - packing/cases/n12_fractional_certificate/certificate.json
