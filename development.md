@@ -617,14 +617,18 @@ rule and none of them is about `touches`:
 mean equal bytes for every tracked file, including the code that does the verifying —
 which is strictly stronger than hashing the artifacts a step reads.
 **But it addresses only the tree**, and three steps in this gate answer to something
-else: `campaign record` reads the wall clock and three of its refusals become true with
-time alone (an expired lease, a passed session deadline, a passed delegation deadline),
+else. `campaign record` judges four refusals — an expired lease and a passed session,
+workflow-phase or delegation deadline — against a reference instant, which until `D-463`
+was the wall clock and is now HEAD’s committer date; two runs of one commit therefore
+agree, and two commits carrying the same tree still need not.
 `bead tree` reads the bead store in `.git/tbd/data-sync-worktree`, which is not in any
 tree, and `provenance: recorded commits are reachable` reads the git graph and the clone
 depth — `D-226` is the run where CI discarded the history its own provenance gate
-needed. A rule that skips on tree identity has to keep running those three.
-`tests/test_gate_repetition.py` holds the clock counter-example as an assertion rather
-than a paragraph.
+needed. A rule that skips on tree identity has to keep running those three; what `D-463`
+licenses is narrower and exact, that a scheduled rerun of the *same commit* now agrees
+with the run before it, which is what the unmoved-tree count above is made of.
+`tests/test_gate_repetition.py` holds that agreement as an assertion rather than a
+paragraph.
 
 ### Codex research-loop rollups
 

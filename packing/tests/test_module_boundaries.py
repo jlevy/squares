@@ -231,7 +231,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     assert required_step["if"] == "github.event_name == 'pull_request'"
     assert " ".join(str(required_step["run"]).split()) == (
         "uv run --frozen --all-extras --group dev packing-validate --fast "
-        "--jobs 2 --inner-jobs 1"
+        "--jobs 3 --inner-jobs 1"
     )
     full_step = next(
         _mapping(step)
