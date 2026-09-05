@@ -128,8 +128,10 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives six confirmed hypotheses, six refuted hypotheses,
-two open hypotheses, seven open questions, and thirty-five blocked hypotheses.
+three open hypotheses, seven open questions, and thirty-seven blocked hypotheses.
 No hypothesis waits on review and five are unresolved.
+One, H-061, has no round and reads `result registered`: T-017 and T-018 name it in their
+`produced_by`, and the ledger’s `results` column shows them.
 The set includes one claim whose formal prerequisite is missing, H-044 whose registered
 calibration-only amendment keeps the hypothesis undisposed — its first scored round
 (exp-046) missed the criterion determinately under both denominator readings, the review
@@ -480,6 +482,23 @@ already change the terms of.
 `think-jgeg` (`BC-190`) follows once `BC-191` lands.
 `think-5j8d` remains the marker Agenda 016’s closeout discharged and is not this
 session’s selection.
+
+On 2026-09-05, on the branch of PR #81 after merging PR #82, a W3 report and a W7 block
+followed. [X-015](packing/campaign/explorations/X-015-the-map-and-the-three-programs.md)
+maps every recorded direction of the campaign (114 rows in six programs), joins the
+twenty results to the instruments that produced them, ranks three programs by expected
+significance per agent-hour, prices the grid-frontier stepping stones by reading Bentz’s
+proofs in X-014’s terms, and lays out the next twelve hours as
+[Agenda 021](packing/campaign/agendas/agenda-021-three-numbers-and-a-wall.md) and
+[Agenda 022](packing/campaign/agendas/agenda-022-the-conditional-route.md), both
+`paused` behind this handoff’s selected entry: `BC-191` is Lane C’s own first half in
+Agenda 021, so nothing there displaces it.
+Four hypotheses, `H-062` to `H-065`, are registered for those blocks.
+The W7 block added a covering-values register with a `converged` flag, `produced_by` on
+results, `program` on agenda cells with a “By program” section in the agenda map, the
+packing-side cap in the reach table, a `variant` refusal at the retention gate, and a
+bead-staleness report; the ledger’s dependency check now resolves `depends_on` across
+agendas.
 
 The recommended follow-up beyond `BC-191` is the same retarget the reach table already
 ranks: `BC-192` and `BC-194` at `n = 26`, blocked on `BC-191` pricing what a run at a
@@ -2571,7 +2590,11 @@ round that names the hypothesis, control roles included.
 | [H-058](packing/campaign/hypotheses/H-058-n68-one-parent-production-serialization.md) | unresolved | One fixed UnitSquare n = 68 parent admits a compatible rigid pose through a complete provenance-bound production adapter | 2 | — |
 | [H-059](packing/campaign/hypotheses/H-059-n50-producer-refusal-ordering.md) | confirmed | The frozen n = 50 producer refuses an existing result before every downstream observation and evaluation seam | 1 | — |
 | [H-060](packing/campaign/hypotheses/H-060-n5-local-rigidity.md) | confirmed | Goebel’s exact `n = 5` optimum is locally rigid when the container side is fixed | 1 | 11s wall |
-| [H-061](packing/campaign/hypotheses/H-061-n12-first-party-fractional-certificate.md) | open | A first-party fractional unavoidable-set certificate at side `19/5` proves `s(12) ≥ 3.8`, the first `n = 12`-specific bound; carried well past its own claim to `393/100` ([T-017](packing/frontier/RESULTS.md)) and to `s(11) ≥ 19/5` ([T-018](packing/frontier/RESULTS.md)), with the whole ladder retained and verified, and the round that closes the hypothesis is not yet written | 0 | — |
+| [H-061](packing/campaign/hypotheses/H-061-n12-first-party-fractional-certificate.md) | result registered | A first-party fractional unavoidable-set certificate at side `19/5` proves `s(12) ≥ 3.8`, the first `n = 12`-specific bound; carried well past its own claim to `393/100` ([T-017](packing/frontier/RESULTS.md)) and to `s(11) ≥ 19/5` ([T-018](packing/frontier/RESULTS.md)), with the whole ladder retained and verified, and the round that closes the hypothesis is not yet written | 0 | — |
+| [H-062](packing/campaign/hypotheses/H-062-n20-covering-wall.md) | open | The `m = 5` covering wall — the side at which a converged restricted optimum at `n = 20` first reaches twenty — lies strictly below the ceiling `5B = 4.9885`, and four pre-registered rungs bracket it to within `0.02`; registered for Agenda 021’s `BC-197` | 0 | — |
+| [H-063](packing/campaign/hypotheses/H-063-n11-class-certificate.md) | blocked | A two-cell `{0°, 45°}` class certificate refutes the composition `(11, 0)` at or above Trump’s `3.877084`, and every near-axis class inside `θ₀` closes the compositions with at most one tilted square; blocked on the two-threshold program `BC-198` builds | 0 | — |
+| [H-064](packing/campaign/hypotheses/H-064-n11-fractional-packing-floor.md) | open | An exact-depth fractional packing at `77/20` with total weight at least eleven puts `τ*(3.85)` at or above eleven, so the `n = 11` certificate ladder’s top lies below `3.85`; registered for `BC-200` | 0 | — |
+| [H-065](packing/campaign/hypotheses/H-065-n11-near-tight-cell-census.md) | blocked | The near-tight cells (mass at most `1 + 1/20`) on the retained `381/100` certificate are fewer than one fifth of the reachable cells, so Corollary 1a’s exact cover is a check rather than a search; blocked on the census tool `BC-201` builds | 0 | — |
 
 ### Confirmed
 
@@ -3706,12 +3729,13 @@ runway is `0.0856`.
 **Joining that ceiling against the register says the lane has been looking in the wrong
 place.** [`CERTIFICATE-REACH.md`](packing/frontier/CERTIFICATE-REACH.md) ranks all 100
 cases by the most a certificate could add.
-The two this program has spent itself on are near the bottom: `n = 11` has `+0.0671` to
-Trump’s packing and `n = 17` has `+0.0955`. The largest are all just above a perfect
-square, where the lower bound is Nagamochi’s closed form and the gap to the best known
-packing runs near half a unit — eleven cases above `+0.49`, headed by `n = 51` at
-`+0.5364`, then `68`, `84`, `39`, `86`, `66`, `38`, `83`, `37`, `53` and `26`. Two
-cautions travel with that ranking.
+The two this program has spent itself on are near the bottom: `n = 11` has `+0.0590` to
+its packing-side cap (`+0.0671` to Trump’s packing itself, which the cap says no
+certificate on this net reaches) and `n = 17` has `+0.0810`. The largest are all just
+above a perfect square, where the lower bound is Nagamochi’s closed form and the gap to
+the best known packing runs near half a unit — eleven cases above `+0.49`, headed by
+`n = 51` at `+0.5364`, then `68`, `84`, `39`, `86`, `66`, `38`, `83`, `37`, `53` and
+`26`. Two cautions travel with that ranking.
 The prize is what the *ceiling* allows; the real limit is the covering value at that
 side, and only four restricted optima have ever been measured — `11.0000` at `3.82`,
 `11.9706` at `3.95`, `11.9936` at `3.96`, `16.9628` at `4.58`. They fit a quadratic, and

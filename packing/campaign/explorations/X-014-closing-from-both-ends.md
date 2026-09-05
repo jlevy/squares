@@ -59,7 +59,7 @@ exploration:
   - packing/resources/web/montanher-2018-rigorous-packing-unit-squares-circle.md
   - packing/resources/web/markot-2021-improved-interval-methods-circle-packing.md
   - docs/project/research/research-2026-08-22-packing-11-unit-squares.md
-  proposes: []
+  proposes: [H-062, H-063, H-064, H-065]
 ---
 # X-014 — Closing From Both Ends: What a Narrow Gap Buys at `n = 11`, and What It Cannot
 

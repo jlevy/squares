@@ -55,8 +55,10 @@ agenda:
       loss stays below the gap, and only after its diagnostic; and H-064 for the bound
       family, first the n = 13 probe at 399/100 and at 4, then n = 20 at 19/4. Before
       dispatch, rewrite BC-171, BC-172 and BC-173's hypotheses lists from the H-061
-      placeholder they carry in this planning revision to H-062, H-063 and H-064, so the
-      ledger files each round under the claim it tests; and take X-013's Theorem A
+      placeholder they carry in this planning revision to the three ids registered at
+      that point -- H-062, H-063 and H-064 were the placeholders when this was written,
+      and agenda-021 took those numbers on 2026-09-05, so the packet re-numbers at
+      registration -- so the ledger files each round under the claim it tests; and take X-013's Theorem A
       induction as a fallback-card replay, since nothing else reviews it before BC-175
       consumes it. 18--26 verify the toolchain
       exactly as BC-159 did -- tbd under Node 22, a non-shallow clone, the records
