@@ -1641,6 +1641,25 @@ def _session_rollups(context: Context) -> str:
     return _module(context, "devtools.check_session_rollups")
 
 
+def _session_gate(context: Context) -> str:
+    """A terminal session names the gate run that certified its handover (`OR-13`).
+
+    Sub-second: frontmatter, one regex, and two `git` calls per declaration. Records tier
+    and therefore on every pull request, which is the point -- `OR-13` says every fast
+    check runs in CI, and a rule about the gate that only the gate's slow surface enforces
+    is a rule a branch can be green against for its whole life.
+
+    The commit is the load-bearing half. Forty-seven of the first eighty-six terminal
+    records mention a gate in `checks` and seven name any commit, so what the corpus mostly
+    holds is `full gate: passed` in longer words -- a claim about a tree nobody can now
+    identify. Ancestry is checked against the graph and, where the checkout cannot answer,
+    reported as uncheckable rather than assumed false (`conventions.md` §6).
+    """
+    output = _module(context, "devtools.check_session_gate")
+    _require_text(output, "name a full-gate run on a commit in their history")
+    return output
+
+
 def _gobel_family(context: Context) -> str:
     # About five seconds: the family is twelve pairs and only the four whose side matches a
     # retained best known are built and verified exactly, the largest being n = 89 at 3916
@@ -2404,6 +2423,18 @@ STEPS: tuple[Step, ...] = (
             "packing/campaign/resource-usage/*.yaml",
             "packing/campaign/schemas/agent-session.schema.yaml",
             "packing/campaign/schemas/codex-task-tree-delta.schema.yaml",
+        ),
+    ),
+    Step(
+        "terminal sessions name the gate that certified them",
+        _session_gate,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/check_session_gate.py",
+            "packing/campaign/agent-sessions/*.md",
+            "packing/campaign/schemas/agent-session.schema.yaml",
         ),
     ),
     Step(

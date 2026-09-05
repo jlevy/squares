@@ -1366,3 +1366,30 @@ controls:
   replace: ["dev packing-validate --records\n", "dev packing-validate --recordz\n"]
   run: python3 -m devtools.check_gate_budgets
   expect: "never names `packing-validate --records`"
+
+# --- the gate's own certificate (agenda-023 BC-217) ---
+#
+# `check_session_gate` refuses a terminal session that cannot name the gate run that
+# certified its handover. Two controls, for the two ways that goes wrong.
+#
+# Both are deliberately independent of Git. A control runs inside a source snapshot with
+# no `.git`, so the checker's ancestry clause is *uncheckable* there by construction and
+# an ancestry control could not fire; that half is covered against a real Git graph -- a
+# divergent branch and a real shallow clone -- in `tests/test_session_gate.py`, which is
+# where a three-commit history is cheaper to build than to fake.
+- name: session gate - a verdict named without the commit it ran on
+  file: campaign/agent-sessions/session-086-agenda021-overnight-pass.md
+  replace:
+    - "  checks:\n  - 'pytest tests/test_trump_isolation_radius.py: 6 passed'\n"
+    - "  checks:\n  - 'full gate: passed'\n  - 'pytest tests/test_trump_isolation_radius.py: 6 passed'\n"
+  run: python3 -m devtools.check_session_gate
+  expect: "claims a gate run and does not parse"
+
+# The primary refusal, and the boundary in the same mutation: session-087 is the first
+# session the rule binds, so terminalizing it with no declaration is exactly the state
+# `GATE_DECLARED_FROM` exists to start refusing.
+- name: session gate - a terminal session that names no gate run at all
+  file: campaign/agent-sessions/session-087-agenda022-continuation.md
+  replace: ["\n  status: in_progress\n", "\n  status: completed\n"]
+  run: python3 -m devtools.check_session_gate
+  expect: "terminal session names no full-gate run"
