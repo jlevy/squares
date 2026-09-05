@@ -33,8 +33,8 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 A new lower bound on an open problem, found by an automated research process.
 Eleven unit squares, free to rotate, do not fit in a square of side {{HEADLINE_L_DEC}}:
-the proof is a weighted point set and a pigeonhole argument, and it is the first
-improvement in {{YEARS_SINCE_PRIOR}} years on the smallest open case.
+the proof is a weighted point set and a pigeonhole argument, and it appears to be the
+first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest open case.
 The previous bound, {{PRIOR_LOWER_DEC}}, was Stromquist’s in
 {{PRIOR_YEAR}}.[^stromquist]
 
