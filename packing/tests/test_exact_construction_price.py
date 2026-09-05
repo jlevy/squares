@@ -21,8 +21,6 @@ from __future__ import annotations
 
 import json
 
-import pytest
-
 from devtools.price_exact_construction import (
     RECORD,
     SUBJECTS,
@@ -113,6 +111,5 @@ def test_nothing_here_promotes_anything() -> None:
     assert subject["instances"] == [28, 40]
 
 
-@pytest.mark.slow
 def test_the_record_round_trips() -> None:
     assert RECORD.read_text(encoding="utf-8") == serialized(price())

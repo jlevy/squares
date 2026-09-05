@@ -13,8 +13,6 @@ from __future__ import annotations
 import pathlib
 import textwrap
 
-import pytest
-
 from devtools import check_declared_bounds as declared
 from devtools.check_declared_bounds import BoundEntry, BoundsReport
 
@@ -122,7 +120,6 @@ def _entry(receipt: BoundsReport, key: str) -> BoundEntry:
     return matches[0]
 
 
-@pytest.mark.slow
 def test_n68_depth_bound_is_named_by_its_refusal_test() -> None:
     """Positive control: the real repository's declared bounds are all accounted for."""
     receipt = declared.report(declared.ROOT)

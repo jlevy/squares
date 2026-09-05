@@ -38,7 +38,6 @@ would not.
 from __future__ import annotations
 
 import mpmath as mp
-import pytest
 import sympy as sp
 
 from cases.trump11 import packing as trump11
@@ -328,7 +327,6 @@ def main() -> int:
     return 0
 
 
-@pytest.mark.slow
 def test_promote_solve() -> None:
     assert main() == 0
 

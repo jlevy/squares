@@ -310,7 +310,6 @@ def test_known_best_v1_schema_accepts_a_manifest_without_the_new_composite() -> 
     jsonschema.validate(atlas, schema)
 
 
-@pytest.mark.slow
 def test_known_best_composite_contains_every_case_and_square() -> None:
     outputs, _manifest = known_best_builder.expected_outputs()
     composite_path = ATLAS / "known-best-1-100.svg"

@@ -258,7 +258,6 @@ def test_quartic_arithmetic_reduces_and_inverts_every_tested_nonzero_element() -
         FIELD_ZERO.inverse()
 
 
-@pytest.mark.slow
 def test_audited_receipt_binds_exact_field_builtins_and_digest() -> None:
     binding = bind_field_receipt()
 
@@ -272,7 +271,6 @@ def test_audited_receipt_binds_exact_field_builtins_and_digest() -> None:
     )
 
 
-@pytest.mark.slow
 def test_synthetic_fixture_evaluates_exactly_in_assignment_order() -> None:
     parsed = parse_fixture(FIXTURE.read_bytes())
     evaluated = evaluate_fixture(parsed)
@@ -315,7 +313,6 @@ def test_field_receipt_semantic_drift_is_refused_before_digest(
         bind_field_receipt(receipt)
 
 
-@pytest.mark.slow
 def test_field_receipt_digest_drift_is_refused() -> None:
     receipt = cast(dict[str, Any], copy.deepcopy(derive_receipt()))
     receipt["scope"] = "mutated unprojected scope"
@@ -324,7 +321,6 @@ def test_field_receipt_digest_drift_is_refused() -> None:
         bind_field_receipt(receipt)
 
 
-@pytest.mark.slow
 def test_exact_evaluation_refuses_an_algebraically_zero_denominator() -> None:
     parsed = parse_fixture(
         _comment("zero = Sin[a] - Tan[a] * Cos[a]") + _comment("refused = 1 / zero")
@@ -479,7 +475,6 @@ def test_synthetic_correspondence_refuses_endpoint_and_structural_drift() -> Non
         select_synthetic_correspondence(sources, rows, (*edges, edges[0]))
 
 
-@pytest.mark.slow
 def test_n54_result_has_the_exact_frozen_profile_and_mutation_receipts() -> None:
     fixture_content = FIXTURE.read_bytes()
     result = build_n54_result(fixture_content)
@@ -558,7 +553,6 @@ def test_canonical_json_loader_refuses_duplicate_float_and_noncanonical_bytes(
         load_canonical_json(content)
 
 
-@pytest.mark.slow
 def test_canonical_json_round_trip_and_float_refusal() -> None:
     content = build_n54_result_bytes(FIXTURE.read_bytes())
 
@@ -569,7 +563,6 @@ def test_canonical_json_round_trip_and_float_refusal() -> None:
         canonical_json_bytes({"value": 1.0})
 
 
-@pytest.mark.slow
 def test_author_cli_is_stdout_only_and_identical_under_optimization() -> None:
     expected = build_n54_result_bytes(FIXTURE.read_bytes())
     outputs: list[bytes] = []

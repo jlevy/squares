@@ -192,10 +192,6 @@ max-complexity = 57
 "devtools/check_svg_rendering.py" = ["PLC0415"]
 # CLI behavior tests exercise small internal orchestration seams without making them APIs.
 "tests/test_validation_cli.py" = ["SLF001"]
-# The tier-ceiling tests read the real parser and the real tier mapping deliberately: a
-# reimplementation of either would drift from the CLI they check, which is the failure
-# they exist to prevent.
-"tests/test_gate_budgets.py" = ["SLF001"]
 # Content-addressed by the immutable exp-055 result, which pins these files' SHA-256s
 # (see the formatter's exclude list below): a finding here is answered in this file,
 # never by editing theirs. The harness's blind except catches whatever the dynamically
@@ -283,5 +279,4 @@ python_files = ["test_*.py"]
 addopts = ["--strict-config", "--strict-markers"]
 markers = [
   "exhaustive_exact: expensive exact-algebra tests retained by full and integration validation",
-  "slow: measured above the pull-request surface's per-test ceiling; runs in the deep surface",
 ]

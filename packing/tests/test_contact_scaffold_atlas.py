@@ -25,7 +25,6 @@ from devtools.build_contact_scaffold_atlas import (
 ROOT = Path(__file__).resolve().parent.parent
 
 
-@pytest.mark.slow
 def test_contact_scaffold_atlas_and_house_overview_replay_byte_for_byte() -> None:
     expected, rendering = expected_outputs()
     retained = json.loads(OUTPUT.read_text(encoding="utf-8"))
@@ -79,7 +78,6 @@ def test_contact_scaffold_atlas_and_house_overview_replay_byte_for_byte() -> Non
     assert decoded[-1][0] == "T5-21/0123230121"
 
 
-@pytest.mark.slow
 def test_contact_scaffold_atlas_cross_field_mutations_fail() -> None:
     atlas = expected_outputs()[0]["atlas"]
     mutations = []
@@ -135,7 +133,6 @@ def test_contact_scaffold_atlas_contains_no_geometry_or_hypothesis_channel() -> 
     assert (ROOT / atlas["rendering"]["path"]) == RENDERING
 
 
-@pytest.mark.slow
 def test_contact_scaffold_atlas_supports_direct_stable_identity_lookup() -> None:
     atlas = expected_outputs()[0]["atlas"]
 
@@ -157,7 +154,6 @@ def test_contact_scaffold_atlas_supports_direct_stable_identity_lookup() -> None
             scaffold_by_identity(atlas, invalid)
 
 
-@pytest.mark.slow
 def test_contact_scaffold_show_is_read_only_and_explicitly_abstract(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:

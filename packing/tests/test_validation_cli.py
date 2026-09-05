@@ -47,7 +47,6 @@ def _process_is_running(pid: int) -> bool:
     return result.returncode == 0 and bool(state) and not state.startswith("Z")
 
 
-@pytest.mark.slow
 @pytest.mark.skipif(os.name == "nt", reason="bounded tree mode fails closed on Windows")
 def test_run_timeout_terminates_child_and_reports_captured_output(tmp_path: Path) -> None:
     child_pid_path = tmp_path / "child.pid"
@@ -144,7 +143,6 @@ def test_run_ordinary_action_inherits_context_timeout(
     assert "timed out after 0.05 seconds" in summary.results[0].reason
 
 
-@pytest.mark.slow
 @pytest.mark.skipif(os.name == "nt", reason="bounded tree mode fails closed on Windows")
 def test_run_selected_interrupt_stops_detached_production_process(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -324,7 +322,7 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         del context
         nonlocal observed
         observed = command
-        return "==== slowest durations ====\n(1904 durations < 5.00s hidden.)"
+        return ""
 
     monkeypatch.setattr(validate, "_run", capture)
     context = validate.Context(
@@ -344,152 +342,8 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         "-q",
         "tests",
         "-m",
-        "not exhaustive_exact and not slow",
-        "--durations=0",
-        f"--durations-min={validate.QUICK_TEST_CEILING_SECONDS:g}",
+        "not exhaustive_exact",
     )
-
-
-def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    observed: tuple[str, ...] | None = None
-
-    def capture(context: validate.Context, command: tuple[str, ...], **_kwargs: object) -> str:
-        del context
-        nonlocal observed
-        observed = command
-        return ""
-
-    monkeypatch.setattr(validate, "_run", capture)
-    context = validate.Context(
-        deep=False,
-        strict=False,
-        jobs=1,
-        inner_jobs=1,
-        environment=os.environ.copy(),
-    )
-
-    validate._slow_tests(context)
-
-    assert observed == (
-        sys.executable,
-        "-m",
-        "pytest",
-        "-q",
-        "tests",
-        "-m",
-        "slow and not exhaustive_exact",
-    )
-
-
-def test_an_empty_slow_lane_passes_and_a_real_failure_does_not(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """The lane's membership is decided by a ceiling, so it may legitimately be empty.
-
-    pytest exits 5 when every test is deselected. Failing the deep surface on that would
-    make "keep one slow test around" the cheapest fix, which is a worse gate than the one
-    the failure was meant to protect. Every other non-zero exit still fails.
-    """
-
-    def deselected(*_args: object, **_kwargs: object) -> str:
-        raise validate.StepFailureError("command exited 5: pytest\n2153 deselected in 5.32s")
-
-    def broken(*_args: object, **_kwargs: object) -> str:
-        raise validate.StepFailureError("command exited 1: pytest\n1 failed, 3 passed")
-
-    context = validate.Context(
-        deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
-    )
-
-    monkeypatch.setattr(validate, "_run", deselected)
-    assert "no test is deferred" in validate._slow_tests(context)
-
-    monkeypatch.setattr(validate, "_run", broken)
-    with pytest.raises(validate.StepFailureError):
-        validate._slow_tests(context)
-
-
-def test_the_behavioral_lanes_partition_every_test() -> None:
-    """No test runs in two lanes, and none runs in none.
-
-    This is the property the pull-request/deep split rests on (`BC-214`). The three lanes
-    are pytest marker expressions over two markers, so the whole question is four cases,
-    and each must be claimed exactly once. The expressions themselves are read, not
-    paraphrased: a second copy of the lane definitions written out here could disagree
-    with the ones the gate passes to pytest, and would then agree with itself forever.
-    """
-
-    def claims(expression: str, markers: dict[str, bool]) -> bool:
-        return all(
-            markers[term.removeprefix("not ")] is not term.startswith("not ")
-            for term in expression.split(" and ")
-        )
-
-    lanes = (validate.QUICK_TESTS, validate.SLOW_TESTS, validate.EXHAUSTIVE_TESTS)
-    for exhaustive_exact in (False, True):
-        for slow in (False, True):
-            markers = {"exhaustive_exact": exhaustive_exact, "slow": slow}
-            claimed = [lane for lane in lanes if claims(lane, markers)]
-            assert len(claimed) == 1, f"{markers} is claimed by {claimed}"
-
-
-def test_a_test_over_the_per_test_ceiling_fails_the_pull_request_surface(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """The boundary between the lanes is a rule the gate applies, not a list it trusts.
-
-    A hand-kept list of slow tests rots the way `--fast`'s 499s docstring rotted. This is
-    the negative control for the thing that stops it: a retained test measured at or above
-    the ceiling fails, and the failure names the test rather than the tier.
-    """
-    ceiling = validate.QUICK_TEST_CEILING_SECONDS
-    output = (
-        "============================= slowest durations ==========================\n"
-        f"{ceiling + 7.0:.2f}s call     tests/test_probe.py::test_that_grew\n"
-        f"{ceiling + 1.0:.2f}s setup    tests/test_probe.py::test_with_a_costly_fixture\n"
-        "(1904 durations < 5.00s hidden.  Use -vv to show these durations.)\n"
-        "1904 passed in 61.00s"
-    )
-    monkeypatch.setattr(validate, "_run", lambda *_a, **_k: output)
-    context = validate.Context(
-        deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
-    )
-
-    with pytest.raises(validate.StepFailureError) as failure:
-        validate._fast_tests(context)
-
-    message = str(failure.value)
-    assert "test_that_grew" in message
-    assert "mark it `slow`" in message
-    # Setup, not call: a module-scoped fixture bills its whole cost to whichever test
-    # happens to trigger it first, so marking that test moves the cost instead of
-    # removing it. The ceiling is a claim about a test, not about a fixture.
-    assert "test_with_a_costly_fixture" not in message
-
-
-def test_a_quick_lane_under_the_ceiling_passes_and_still_reads_the_durations() -> None:
-    """The check fails closed: no durations section means the ceiling went unchecked."""
-    header = "============================= slowest durations ====================="
-    assert validate._calls_over_ceiling(f"{header}\n(9 durations < 5.00s hidden.)") == []
-    assert validate._calls_over_ceiling(
-        f"{header}\n99.00s call     tests/test_probe.py::test_slow"
-    ) == [(99.0, "tests/test_probe.py::test_slow")]
-
-
-def test_the_ceiling_check_refuses_output_it_cannot_read(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    monkeypatch.setattr(validate, "_run", lambda *_a, **_k: "1904 passed in 61.00s")
-    context = validate.Context(
-        deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
-    )
-
-    with pytest.raises(validate.StepFailureError) as failure:
-        validate._fast_tests(context)
-
-    assert "went unchecked" in str(failure.value)
 
 
 def test_full_exhaustive_behavioral_step_selects_only_exhaustive_exact_tests(
@@ -959,17 +813,10 @@ def test_only_the_whole_suite_steps_carry_budgets() -> None:
     every merge to main. A fourth budgeted step would mean the cap is wrong rather than
     that another suite is heavy, and should raise the cap instead of extending this set.
     The step `--push` builds outside this tuple is not a fourth: when its selector
-    expands to the whole suite it runs the quick and slow lanes together, so it takes the
-    constant that bounds both (D-432), which the next test holds.
+    expands to the whole suite it is the fast behavioural suite under another entry point
+    and takes that step's own budget (D-432), which the next test holds.
 
-    The set changed size twice on 2026-09-05 and stayed at three. `BC-214` split the
-    behavioural suite by measured cost, and the two halves did not both keep the budget:
-    `slow behavioral tests` inherited it, because it is the half that carries the wall,
-    and `fast behavioral tests` gave it up, because a lane whose slowest test is capped
-    at `QUICK_TEST_CEILING_SECONDS` is no longer a step the shared cap is wrong for. An
-    exception that is no longer needed is not harmless -- it is a guard switched off.
-
-    Recorded honestly: the second budget was added by the coordinator during an
+    Recorded honestly: this second budget was added by the coordinator during an
     unattended run and has not been independently reviewed.
     """
     budgeted = {
@@ -977,7 +824,7 @@ def test_only_the_whole_suite_steps_carry_budgets() -> None:
     }
     assert budgeted == {
         "negative controls": 1800,
-        "slow behavioral tests": 1800,
+        "fast behavioral tests": 1800,
         "exhaustive exact behavioral tests": 1800,
     }
 
@@ -995,16 +842,10 @@ def test_push_tests_take_the_whole_suite_budget_only_when_the_selector_expands(
     """The entry point must not decide the suite's ceiling; the suite does.
 
     D-432: a change set touching a suite-configuring file made `--push` select the whole
-    suite, and the step it built lost the budget declared for that same suite, so the run
-    died at the shared 900-second cap without naming the failing test it had reached. The
-    budget is one constant both steps read. A selected subset stays on the shared cap,
-    which is the guard against a hung test.
-
-    Since `BC-214` the step that reads the same constant is `slow behavioral tests`. The
-    whole-suite fallback runs `-m "not exhaustive_exact"`, which is the quick lane and the
-    slow lane together, and the slow lane is the half that costs the wall -- so the
-    constant that bounds `--push` is the one the slow lane declares, not the quick one's
-    absent budget.
+    suite, and the step it built lost the budget `fast behavioral tests` declares for
+    that same suite, so the run died at the shared 900-second cap without naming the
+    failing test it had reached. The budget is one constant both steps read. A selected
+    subset stays on the shared cap, which is the guard against a hung test.
     """
 
     def probe(*args: object, **kwargs: object) -> subprocess.CompletedProcess[str]:
@@ -1020,7 +861,7 @@ def test_push_tests_take_the_whole_suite_budget_only_when_the_selector_expands(
     assert step.budget_seconds == expected_budget
     assert (
         validate.STEPS[
-            [s.name for s in validate.STEPS].index("slow behavioral tests")
+            [s.name for s in validate.STEPS].index("fast behavioral tests")
         ].budget_seconds
         == validate.FAST_SUITE_BUDGET_SECONDS
     )

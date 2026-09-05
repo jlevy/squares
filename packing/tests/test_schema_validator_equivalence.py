@@ -189,7 +189,6 @@ def test_every_schema_reaches_the_mutation_test() -> None:
     assert covered == declared, f"schemas with no mutation target: {declared - covered}"
 
 
-@pytest.mark.slow
 @pytest.mark.parametrize("path", _mutation_targets(), ids=lambda p: p.name)
 def test_validators_agree_on_mutations(path: pathlib.Path) -> None:
     """Both validators reach the same verdict on documents built to fail.
@@ -210,7 +209,6 @@ def test_validators_agree_on_mutations(path: pathlib.Path) -> None:
         )
 
 
-@pytest.mark.slow
 def test_mutations_actually_break_something() -> None:
     """The mutation generator must produce rejections, or the test above proves nothing.
 
