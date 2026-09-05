@@ -189,19 +189,21 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
 .mass-line .v { display: block; margin-block-start: 0.15rem; }
 
 /* The two interactive stages. */
-.split { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(15rem, 1fr); }
+.split { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(14rem, 1fr); }
+/* Figures sit on the page's own ground, and the canvases take the room the
+   figure track gives them. */
 .stage {
   align-items: center;
-  background: var(--kpress-doc-code-bg);
+  background: var(--kpress-doc-bg);
   display: flex;
   justify-content: center;
-  padding: 1.1rem;
+  padding: 0.6rem;
 }
 .stage canvas {
   cursor: grab;
   display: block;
   height: auto;
-  max-width: 32rem;
+  max-width: 42rem;
   touch-action: none;
   width: 100%;
 }
