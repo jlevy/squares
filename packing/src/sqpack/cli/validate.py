@@ -34,6 +34,7 @@ from pathlib import Path
 from threading import Lock
 from typing import Literal, Never, override
 
+from sqpack import gate_budgets
 from sqpack.project import (
     ProjectLayoutError,
     add_version_argument,
@@ -55,11 +56,63 @@ SUPPORTED_PYTHON = (3, 14)
 BASIN_EVENT_CONTRACT_PREFIX = "packing.squares:BasinEvent/"
 PROCESS_TERMINATION_GRACE_SECONDS = 1.0
 DEFAULT_TIMEOUT_SECONDS = 900.0
+#: The tiers this command can select as a whole, and therefore the tiers that must
+#: carry a declared ceiling in `devtools/gate-budgets.yaml`. `devtools.check_gate_budgets`
+#: compares the two sets in both directions, so a tier added here without a ceiling fails
+#: the records tier rather than silently running uncapped.
+#: The tier-selecting flags, narrowest first: `--records --fast` is the records tier.
+#: `test_every_boolean_flag_is_classified` refuses a new `store_true` flag that appears in
+#: neither this tuple nor its allow-list, so a tier cannot be added without deciding
+#: whether it needs a ceiling.
+TIER_FLAGS = ("push", "records", "edit", "fast")
+TIER_IDS = (*TIER_FLAGS, "full")
 #: The budget of the whole non-exhaustive suite, read by `fast behavioral tests` and by
 #: `--push` when its selector expands to everything (D-432). The two run the same suite
 #: through two entry points, so they carry one number; the argument for the number is
 #: written beside the `fast behavioral tests` step, where the measurements are.
+#:
+#: This is the *per-subprocess* cap, and on its own it is not a cost guard: on 2026-08-30
+#: the tier it caps cost 499s, and by 2026-09-05 it cost 1369.60s, entirely inside this
+#: number. What the tier is allowed to cost is declared in `devtools/gate-budgets.yaml`
+#: and enforced by `sqpack.gate_budgets` against each run's own wall.
 FAST_SUITE_BUDGET_SECONDS = 1800.0
+#: The three behavioural lanes, as pytest marker expressions.
+#:
+#: They partition the suite: whatever markers a test carries, it satisfies exactly one of
+#: the three, so no test can land in two lanes and none can land in none.
+#: `test_the_behavioral_lanes_partition_every_test` checks that rather than trusting it.
+#:
+#: The split is `BC-214`. Before it, one lane ran every non-exhaustive test on every pull
+#: request: 1369.60s on CI's two-core runner on 2026-09-05 (run 33982455466), 96.7 per
+#: cent of the whole pull-request surface. The eight failures that run caught were all
+#: sub-0.15-second tests -- 0.46s of call time between them -- so the wall was not where
+#: the detection was, and deferring the whole lane would have thrown away nearly all of
+#: the value for nearly none of the cost.
+QUICK_TESTS = "not exhaustive_exact and not slow"
+SLOW_TESTS = "slow and not exhaustive_exact"
+EXHAUSTIVE_TESTS = "exhaustive_exact"
+#: The pull-request surface's per-test ceiling, in seconds of pytest `call` time.
+#:
+#: This is the boundary between `QUICK_TESTS` and `SLOW_TESTS`, and it is a rule rather
+#: than a list on purpose: `fast behavioral tests` passes it to pytest as
+#: `--durations-min` and fails when any test it ran reports at or above it, naming the
+#: test. A hand-kept list of slow tests would rot exactly the way the 499s figure in this
+#: module's own docstring rotted -- silently, because nothing read it.
+#:
+#: Two numbers, deliberately, and the gap between them is runner variance. Tests are
+#: *marked* at 2s, which is what keeps the lane inside its budget; the gate *fails* at
+#: this ceiling, which leaves the slowest retained test about a factor of two of headroom
+#: so an ordinarily loaded runner cannot turn a passing test into a red pull request. A
+#: single number would have to be one or the other, and a ceiling that is also the
+#: marking threshold is a ceiling that flaps.
+#:
+#: The `call` phase, not setup or teardown, because a module-scoped fixture bills its
+#: whole cost to whichever test happens to trigger it first: `test_every_control_rejects`
+#: in `test_n5_local_rigidity.py` reports 13.1s of setup that belongs to the `determination`
+#: fixture three other tests in that file also use, and marking that one test would move
+#: the cost rather than remove it. A setup phase over the ceiling means the module moves,
+#: which is a judgement, not an automatic one.
+QUICK_TEST_CEILING_SECONDS = 5.0
 #: The budget of the exhaustive exact tier: every complete finite certificate decision
 #: the fast tier defers. Measured on 2026-09-05 at 39 tests: 892s on CI's two-core
 #: runner (run 33932095609, eight seconds under the 900s cap it had been inheriting) and
@@ -189,10 +242,13 @@ class Step:
     """Excluded from `--edit` because its cost is breadth rather than what it uniquely
     catches.
 
-    Measured on 2026-08-30: `--fast` is 499s and `fast behavioral tests` is 499s of it,
-    so the other seventeen fast steps together cost about 48 seconds. A tier priced at
-    the cost of its widest step is a tier people skip, which is the mechanism `D-369`
-    records -- seven CI failures, every one a record check, none a behavioural test.
+    What each tier costs is recorded in `devtools/gate-budgets.yaml` and read by the
+    gate, not written here. This paragraph used to carry the number -- "measured on
+    2026-08-30, `--fast` is 499s and `fast behavioral tests` is 499s of it" -- and six
+    days later the tier cost 1369.60s with nothing objecting, because a number a machine
+    does not read is a number that drifts. A tier priced at the cost of its widest step
+    is a tier people skip, which is the mechanism `D-369` records -- seven CI failures,
+    every one a record check, none a behavioural test.
 
     **The default is the safe direction on purpose.** A new step is in the edit tier
     unless it says otherwise, so forgetting this flag makes the tier slower rather than
@@ -302,6 +358,10 @@ class RunSummary:
     selected_count: int = 0
     total_count: int = 0
     partial_pattern: list[str] = field(default_factory=list)
+    budget: gate_budgets.Verdict | None = None
+    """What this run's wall says about the tier it ran, or `None` when the register could
+    not be read. Carried on the summary so `--format json` reports the cost verdict to a
+    machine, which is the difference between this and the docstring it replaces."""
 
 
 def _timeout_output(error: subprocess.TimeoutExpired) -> str:
@@ -447,8 +507,28 @@ def _optional_tool(context: Context, name: str) -> str:
     return found
 
 
+_DURATION_LINE = re.compile(
+    r"^(?P<seconds>\d+\.\d+)s\s+(?P<phase>setup|call|teardown)\s+(?P<node>\S+)$"
+)
+#: pytest prints this header whenever `--durations` is given, even when every test is
+#: under the minimum. Requiring it is what makes the ceiling check fail closed: if a
+#: future pytest renders durations differently, the check reports that it could not read
+#: them rather than silently finding no violations forever.
+_DURATION_HEADER = "slowest durations"
+
+
+def _calls_over_ceiling(output: str) -> list[tuple[float, str]]:
+    """Test `call` phases pytest reported at or above the quick lane's ceiling."""
+    over = [
+        (float(match["seconds"]), match["node"])
+        for line in output.splitlines()
+        if (match := _DURATION_LINE.match(line.strip())) and match["phase"] == "call"
+    ]
+    return sorted(over, reverse=True)
+
+
 def _fast_tests(context: Context) -> str:
-    return _run(
+    output = _run(
         context,
         (
             sys.executable,
@@ -457,9 +537,57 @@ def _fast_tests(context: Context) -> str:
             "-q",
             "tests",
             "-m",
-            "not exhaustive_exact",
+            QUICK_TESTS,
+            "--durations=0",
+            f"--durations-min={QUICK_TEST_CEILING_SECONDS:g}",
         ),
     )
+    if _DURATION_HEADER not in output:
+        raise StepFailureError(
+            "pytest printed no durations section, so the pull-request surface's per-test "
+            f"ceiling of {QUICK_TEST_CEILING_SECONDS:g}s went unchecked; "
+            f"expected {_DURATION_HEADER!r} in the output"
+        )
+    over = _calls_over_ceiling(output)
+    if over:
+        rendered = "\n".join(f"    {seconds:7.2f}s  {node}" for seconds, node in over)
+        raise StepFailureError(
+            f"{len(over)} test(s) ran at or above the pull-request surface's "
+            f"{QUICK_TEST_CEILING_SECONDS:g}s per-test ceiling:\n{rendered}\n"
+            "  Make it faster, or mark it `slow` and declare it with its measurement in "
+            "test_the_slow_marker_is_declared_only_by_measured_nodes. The marker moves "
+            "the test to the deep surface; it does not stop it running."
+        )
+    return output
+
+
+#: pytest's exit code for "every test was deselected", which for the slow lane means the
+#: ceiling currently defers nothing rather than that anything is wrong.
+_PYTEST_NOTHING_SELECTED = "command exited 5:"
+
+
+def _slow_tests(context: Context) -> str:
+    try:
+        return _run(
+            context,
+            (
+                sys.executable,
+                "-m",
+                "pytest",
+                "-q",
+                "tests",
+                "-m",
+                SLOW_TESTS,
+            ),
+        )
+    except StepFailureError as error:
+        # An empty lane is a lane with no members, not a broken gate. The membership is
+        # decided by a ceiling, so it can legitimately fall to zero -- and a deep surface
+        # that failed when nothing was slow would teach people to keep a token member in
+        # the lane, which is worse than the failure it was meant to report.
+        if _PYTEST_NOTHING_SELECTED not in str(error):
+            raise
+        return "  no test is deferred by the per-test ceiling; the quick lane runs them all"
 
 
 def _exhaustive_exact_tests(context: Context) -> str:
@@ -472,7 +600,7 @@ def _exhaustive_exact_tests(context: Context) -> str:
             "-q",
             "tests",
             "-m",
-            "exhaustive_exact",
+            EXHAUSTIVE_TESTS,
         ),
     )
 
@@ -1256,6 +1384,17 @@ def _pr_rollup(context: Context) -> str:
     return _module(context, "devtools.render_pr_rollup", "--check")
 
 
+def _gate_budgets(context: Context) -> str:
+    # Sub-second: it reads one register and compares two sets. Records tier because it
+    # checks the declaration rather than the clock -- that every tier this command can
+    # select carries a ceiling, and that no ceiling has drifted more than the declared
+    # headroom above the cost recorded for its tier. The run's own wall is checked
+    # separately, by `gate_budgets.judge`, at the end of every whole-tier run.
+    output = _module(context, "devtools.check_gate_budgets")
+    _require_text(output, "gate budget declaration passed")
+    return output
+
+
 def _control_anchors(context: Context) -> str:
     # Sub-second: it resolves 150 anchors by string containment, running no mutation and no
     # subprocess. Records tier because a control whose anchor has stopped matching is not
@@ -1627,11 +1766,31 @@ STEPS: tuple[Step, ...] = (
     # proposed on a 1791s measurement of the Fraction sweep the same day; that
     # measurement no longer describes the suite, and 2700s sits above the 1800s CI
     # allows the job, so a local run could pass a budget CI cannot honour.
+    # No `budget_seconds`. This step carried an 1800s exception to the shared 900s cap
+    # for as long as it ran every non-exhaustive test; since BC-214 split the slow ones
+    # off it does not need one, and a step that no longer needs an exception should not
+    # keep it -- the shared cap is the guard against one hung test, and this step is now
+    # ordinary enough to live under it. What the lane is allowed to *cost*, as against
+    # how long one hung subprocess may hang, is `devtools/gate-budgets.yaml`.
     Step(
         "fast behavioral tests",
         _fast_tests,
         fast=True,
         broad=True,
+    ),
+    # The half of the behavioural suite that costs the wall. It is the same tests under
+    # the same runner, selected by the `slow` marker instead of against it, and it runs
+    # in the full gate -- so nothing the pull-request surface stopped running stopped
+    # running. `SLOW_TESTS` and `QUICK_TESTS` are complements within the non-exhaustive
+    # suite, which is what makes that claim checkable rather than asserted.
+    # It takes the whole non-exhaustive suite's budget rather than a smaller one argued
+    # from today's membership: the lane is defined by a ceiling, so its membership grows
+    # whenever a test crosses that ceiling, and a budget pinned to today's members would
+    # have to be re-argued every time the rule admits one. Its upper bound is the suite it
+    # is a subset of.
+    Step(
+        "slow behavioral tests",
+        _slow_tests,
         budget_seconds=FAST_SUITE_BUDGET_SECONDS,
     ),
     Step(
@@ -1953,6 +2112,20 @@ STEPS: tuple[Step, ...] = (
         fast=True,
         records=True,
         touches=(*_CORE, "packing/devtools/controls.yaml", "packing/devtools/*.py"),
+    ),
+    Step(
+        "tier ceilings are declared and not slack",
+        _gate_budgets,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/check_gate_budgets.py",
+            "packing/devtools/gate-budgets.yaml",
+            # The step also checks that the guide still names every tier, so editing the
+            # guide has to be able to fail it.
+            "development.md",
+        ),
     ),
     Step(
         "the borrowed lower bounds re-derive",
@@ -2432,10 +2605,91 @@ def _run_selected(
     )
 
 
+def _tier_id(namespace: argparse.Namespace) -> str | None:
+    """Which declared tier this invocation is, or `None` when it is a slice of one.
+
+    A slice has no declared cost, and giving it one would waive the ceiling by accident:
+    `--only "lint floor"` finishing in a second says nothing about whether `--fast` has
+    tripled. `--push` is a tier despite selecting its tests from the diff, because its
+    ceiling is declared for the widest thing that selector can expand to.
+    """
+    if namespace.only or (namespace.since and not namespace.push):
+        return None
+    return next((flag for flag in TIER_FLAGS if getattr(namespace, flag)), "full")
+
+
+def _judge_budget(
+    summary: RunSummary,
+    *,
+    tier_id: str | None,
+    jobs: int,
+    inner_jobs: int,
+    force: bool,
+) -> gate_budgets.Verdict:
+    """Compare this run's own wall against the ceiling declared for its tier."""
+    steps = tuple((result.name, result.seconds) for result in summary.results)
+    try:
+        register = gate_budgets.load()
+    except gate_budgets.BudgetError as error:
+        return gate_budgets.Verdict(
+            tier=tier_id,
+            wall_seconds=summary.wall_seconds,
+            status="unknown",
+            notes=(f"the tier register could not be read: {error}",),
+        )
+    return gate_budgets.judge(
+        register,
+        tier_id,
+        wall_seconds=summary.wall_seconds,
+        steps=steps,
+        jobs=jobs,
+        inner_jobs=inner_jobs,
+        cpus=os.process_cpu_count() or DEFAULT_CPU_COUNT,
+        force=force,
+    )
+
+
+def _render_budgets(register: gate_budgets.Register) -> None:
+    """Print the standing cost of every tier, which is what a W5 block reads first."""
+    policy = register.policy
+    print(f"== declared tier ceilings ({register.path}) ==")
+    print(
+        f"  band: a ceiling within {policy.max_headroom:g}x of the recorded cost; a run "
+        f"over {policy.drift_ratio:g}x of it fails; a run under {policy.stale_ratio:g}x "
+        "of it means the record is stale"
+    )
+    for tier in register.tiers:
+        recorded = (
+            f"{tier.measured_seconds:g}s recorded {tier.measured_on}"
+            if tier.measured_seconds is not None
+            else "never recorded at the reference shape"
+        )
+        print(f"\n  {tier.command}")
+        print(f"    ceiling {tier.ceiling_seconds:g}s, {recorded}")
+        print(f"    reference: {tier.reference.describe()}")
+        if tier.measured_where:
+            print(f"    measured: {tier.measured_where}")
+
+
+def _render_early_exit(namespace: argparse.Namespace, selected: Sequence[Step]) -> int:
+    """`--budgets` and `--list` both answer a question about the gate without running it."""
+    if namespace.budgets:
+        _render_budgets(gate_budgets.load())
+        return 0
+    listing = [{"name": step.name, "tags": step.tags} for step in selected]
+    if namespace.format == "json":
+        print(json.dumps(listing, indent=2))
+    else:
+        for step in selected:
+            print(f"{step.name} [{step.tags}]")
+    return 0
+
+
 def _summary_status(summary: RunSummary, *, strict: bool) -> int:
     failed = any(result.status == "failed" for result in summary.results)
     skipped = any(result.status == "skipped" for result in summary.results)
-    return 1 if failed or (strict and skipped) else 0
+    over_budget = summary.budget is not None and summary.budget.failed
+    return 1 if failed or over_budget or (strict and skipped) else 0
 
 
 def _render_text(summary: RunSummary, *, strict: bool) -> int:
@@ -2458,9 +2712,20 @@ def _render_text(summary: RunSummary, *, strict: bool) -> int:
         print(f"  {result.seconds:7.2f}s  {result.name}")
     print(f"  {summary.wall_seconds:7.2f}s  TOTAL (wall)")
 
+    budget = summary.budget
+    if budget is not None:
+        print("\n== the tier against its ceiling ==")
+        for line in gate_budgets.render(budget):
+            print(line)
+
     failed = [result for result in summary.results if result.status == "failed"]
     skipped = [result for result in summary.results if result.status == "skipped"]
     print()
+    if budget is not None and budget.failed and not failed:
+        print("THE TIER IS OUTSIDE ITS DECLARED COST BAND:")
+        for reason in budget.failures:
+            print(f"  - {reason}")
+        return _summary_status(summary, strict=strict)
     if failed:
         noun = "STEP" if len(failed) == 1 else "STEPS"
         print(f"{len(failed)} {noun} FAILED:")
@@ -2546,6 +2811,19 @@ def _parser() -> ArgumentParser:
     )
     parser.add_argument(
         "--list", action="store_true", help="list check names and tiers, then exit"
+    )
+    parser.add_argument(
+        "--budgets",
+        action="store_true",
+        help="print the declared cost ceiling of every tier, then exit",
+    )
+    parser.add_argument(
+        "--enforce-budget",
+        action="store_true",
+        help=(
+            "fail on the tier's declared cost band even when this machine is not the "
+            "shape the ceiling was measured for (also PACKING_VALIDATE_ENFORCE_BUDGET)"
+        ),
     )
     parser.add_argument(
         "--format",
@@ -2657,14 +2935,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             else:
                 print(f"  {len(selected)} steps reachable from those paths")
             print()
-        if namespace.list:
-            records = [{"name": step.name, "tags": step.tags} for step in selected]
-            if namespace.format == "json":
-                print(json.dumps(records, indent=2))
-            else:
-                for step in selected:
-                    print(f"{step.name} [{step.tags}]")
-            return 0
+        if namespace.budgets or namespace.list:
+            return _render_early_exit(namespace, selected)
         environment = os.environ.copy()
         environment["PACK_JOBS"] = str(inner_jobs)
         context = Context(
@@ -2677,11 +2949,22 @@ def main(argv: Sequence[str] | None = None) -> int:
             timeout_is_explicit=timeout_is_explicit,
         )
         summary = _run_selected(selected, context, namespace.only)
+        summary.budget = _judge_budget(
+            summary,
+            tier_id=_tier_id(namespace),
+            jobs=jobs,
+            inner_jobs=inner_jobs,
+            force=namespace.enforce_budget
+            or _environment_flag("PACKING_VALIDATE_ENFORCE_BUDGET"),
+        )
     except ParserExitError as error:
         if error.message:
             stream = sys.stdout if error.status == 0 else sys.stderr
             print(error.message, end="", file=stream)
         return error.status
+    except gate_budgets.BudgetError as error:
+        print(f"packing-validate: error: {error}", file=sys.stderr)
+        return 2
     except (UsageError, StepFailureError, ProjectLayoutError) as error:
         print(f"packing-validate: error: {error}", file=sys.stderr)
         return 2 if isinstance(error, (UsageError, ProjectLayoutError)) else 1

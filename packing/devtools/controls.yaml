@@ -158,7 +158,7 @@ controls:
 
 - name: synopsis - narrative round aggregate lagging the ledger
   file: ../SYNOPSIS.md
-  replace: ["There are 63 terminal rounds", "There are 45 terminal rounds"]
+  replace: ["There are 64 terminal rounds", "There are 45 terminal rounds"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "terminal-round aggregate is not 59 rounds"
 
@@ -1276,3 +1276,93 @@ controls:
   replace: ["**Selected next entry:** `think-wufn`", "**Selected next entry:** `think-cyko`"]
   run: python3 -m devtools.check_synopsis
   expect: "exactly one canonical Selected next entry marker for think-wufn"
+
+# --- the gate's own declared cost (agenda-023 BC-216) ---
+#
+# The check these fire is the one that was missing when `--fast` went from 499s to
+# 1369.60s in six days inside an 1800s cap. It is static: it reads gate-budgets.yaml and
+# no clock, so it is cheap enough to run in the records tier and cannot be blamed on a
+# busy runner. The dynamic half -- a finished run judged against its tier's band -- is
+# controlled in tests/test_gate_budgets.py, where a fabricated slow step is cheaper than
+# an actually slow one.
+#
+# The first three anchor the `records` tier's measurement block, which is checked in with
+# no recorded cost. Each control writes one in, because a rule about the relationship
+# between a ceiling and a measurement needs a measurement to have something to say.
+- name: gate budgets - a ceiling with more headroom than the policy allows
+  file: devtools/gate-budgets.yaml
+  replace:
+    - |-
+      measured_seconds: null
+        measured_on: null
+        measured_where: null
+        reference: {jobs: 2, inner_jobs: 1, cpus: 2}
+        argument: >-
+          Registries,
+    - |-
+      measured_seconds: 20.0
+        measured_on: '2026-08-30'
+        measured_where: null
+        reference: {jobs: 2, inner_jobs: 1, cpus: 2}
+        argument: >-
+          Registries,
+  run: python3 -m devtools.check_gate_budgets
+  expect: "of headroom where policy.max_headroom allows"
+
+- name: gate budgets - a recorded cost nobody can place in time
+  file: devtools/gate-budgets.yaml
+  replace:
+    - |-
+      measured_seconds: null
+        measured_on: null
+        measured_where: null
+        reference: {jobs: 2, inner_jobs: 1, cpus: 2}
+        argument: >-
+          Registries,
+    - |-
+      measured_seconds: 20.0
+        measured_on: null
+        measured_where: null
+        reference: {jobs: 2, inner_jobs: 1, cpus: 2}
+        argument: >-
+          Registries,
+  run: python3 -m devtools.check_gate_budgets
+  expect: "records a cost without a date"
+
+- name: gate budgets - a ceiling declared below the cost its own tier records
+  file: devtools/gate-budgets.yaml
+  replace:
+    - |-
+      measured_seconds: null
+        measured_on: null
+        measured_where: null
+        reference: {jobs: 2, inner_jobs: 1, cpus: 2}
+        argument: >-
+          Registries,
+    - |-
+      measured_seconds: 3000.0
+        measured_on: '2026-08-30'
+        measured_where: null
+        reference: {jobs: 2, inner_jobs: 1, cpus: 2}
+        argument: >-
+          Registries,
+  run: python3 -m devtools.check_gate_budgets
+  expect: "declared to fail every time it runs"
+
+- name: gate budgets - a selectable tier with no declared ceiling
+  file: devtools/gate-budgets.yaml
+  replace: ["- id: fast\n", "- id: fastest\n"]
+  run: python3 -m devtools.check_gate_budgets
+  expect: "can be selected but declares no ceiling"
+
+- name: gate budgets - a stale floor no honest run could clear
+  file: devtools/gate-budgets.yaml
+  replace: ["  stale_ratio: 0.6", "  stale_ratio: 1.6"]
+  run: python3 -m devtools.check_gate_budgets
+  expect: "fails every honest run"
+
+- name: gate budgets - the guide stops naming a tier it is supposed to describe
+  file: ../development.md
+  replace: ["dev packing-validate --records\n", "dev packing-validate --recordz\n"]
+  run: python3 -m devtools.check_gate_budgets
+  expect: "never names `packing-validate --records`"
