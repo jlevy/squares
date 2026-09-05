@@ -2,7 +2,7 @@
 
 # Agenda map
 
-206 agenda commitments across 22 agendas, as declared in each agenda's own frontmatter.
+233 agenda commitments across 25 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **8** ready, **5** tentative, **39** blocked, **41** stopped, **113** complete.
+- **9** ready, **5** tentative, **65** blocked, **41** stopped, **113** complete.
 
-- **12 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **14 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-238`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -33,6 +33,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-018 | `BC-183` | 2 | insight | research | Can the n = 40 admissible cone be characterised on the disjunctive system, so that Goebel's n = 40 packing's… | `think-3yxk` |
 | agenda-018 | `BC-184` | 2 | efficiency | tool_validation | Can the generic interval certifier be wired end to end and reproduce T-009's n = 29 bound through the generic… | `think-4f4d` |
 | agenda-019 | `BC-190` | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and did so 22.7 times… | `think-jgeg` |
+| agenda-024 | `BC-219` | 0 | process | tool_validation | Are the stack base, source packets, ID ranges, manager write scopes, exact controls, checkpoints, and… | `think-9pzv` |
 
 ## Blocked, and on what
 
@@ -79,6 +80,32 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-022 | `BC-207` | 2 | `BC-203`, `BC-208` | no | BC-208's class cuts, and a wall at n = 11 for the cover to sit at. BC-200 found no wall: the cutting-plane loop stalled… |
 | agenda-022 | `BC-209` | 2 | `BC-203`, `BC-206` | yes | BC-206, and a priced target. BC-202's run at 138/25 reached 26.464317 on its site set without converging its column… |
 | agenda-022 | `BC-210` | 3 | `BC-203`, `BC-204`, `BC-205`, `BC-206`, `BC-207`, `BC-208`, `BC-209`, `BC-212` | no | — |
+| agenda-024 | `BC-220` | 0 | `BC-230`, `BC-232`, `BC-233`, `BC-240`, `BC-242`, `BC-245` | no | — |
+| agenda-024 | `BC-221` | 0 | `BC-220` | no | — |
+| agenda-024 | `BC-222` | 0 | `BC-221` | no | — |
+| agenda-024 | `BC-223` | 0 | `BC-222` | no | — |
+| agenda-024 | `BC-224` | 0 | `BC-223` | no | — |
+| agenda-024 | `BC-225` | 0 | `BC-224`, `BC-239`, `BC-249` | no | — |
+| agenda-025 | `BC-230` | 0 | `BC-219` | no | — |
+| agenda-025 | `BC-231` | 0 | `BC-230` | no | — |
+| agenda-025 | `BC-232` | 0 | `BC-219` | no | — |
+| agenda-025 | `BC-234` | 0 | `BC-231` | no | — |
+| agenda-025 | `BC-238` | 0 | `BC-219` | no | A frozen candidate from BC-232, BC-234, or BC-236 and a coordinator gate that diverts it to independent exactification. |
+| agenda-025 | `BC-239` | 0 | `BC-224` | no | — |
+| agenda-025 | `BC-233` | 1 | `BC-219` | no | — |
+| agenda-025 | `BC-235` | 1 | `BC-234` | no | — |
+| agenda-025 | `BC-236` | 1 | `BC-235` | no | — |
+| agenda-025 | `BC-237` | 2 | `BC-236` | no | — |
+| agenda-026 | `BC-240` | 0 | `BC-219` | no | — |
+| agenda-026 | `BC-241` | 0 | `BC-240` | no | — |
+| agenda-026 | `BC-242` | 0 | `BC-219` | no | — |
+| agenda-026 | `BC-243` | 0 | `BC-242` | no | — |
+| agenda-026 | `BC-245` | 0 | `BC-219` | no | — |
+| agenda-026 | `BC-246` | 0 | `BC-240`, `BC-245` | no | — |
+| agenda-026 | `BC-249` | 0 | `BC-224` | no | — |
+| agenda-026 | `BC-244` | 1 | `BC-243` | no | — |
+| agenda-026 | `BC-247` | 1 | `BC-245` | no | — |
+| agenda-026 | `BC-248` | 2 | `BC-246`, `BC-247` | no | An exact fractional measure of mass at least eleven for the chosen subproblem, no more than 231,129 of the present… |
 
 ## Discharged elsewhere
 
@@ -121,6 +148,9 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-020 | completed |  |  |  |  | 1 | 1 |
 | agenda-021 | completed |  |  |  | 2 | 6 | 8 |
 | agenda-022 | active |  |  | 7 |  | 2 | 9 |
+| agenda-024 | active | 1 |  | 6 |  |  | 7 |
+| agenda-025 | active |  |  | 10 |  |  | 10 |
+| agenda-026 | active |  |  | 10 |  |  | 10 |
 
 ## By program
 
@@ -140,6 +170,23 @@ A program is a line of work that spans agendas; its cells carry one `program` sl
 
 Open frontier: `BC-204`, `BC-205`, `BC-212`.
 
+### `n11-adaptive-fractional-frontier`
+
+| agenda | id | state | question |
+| --- | --- | --- | --- |
+| agenda-025 | `BC-230` | blocked | What exact containment theorem and certificate contract allow every angle cell to use its own… |
+| agenda-025 | `BC-231` | blocked | Can an exact verifier decide the adaptive-core contract and refuse uncovered angles, unsafe cell… |
+| agenda-025 | `BC-232` | blocked | Can the retained 3.82 primal/dual state be advanced to total covering mass below 11 or exact… |
+| agenda-025 | `BC-233` | blocked | Does an inset-support sweep provide a better seed for n=11 only after its support is released into… |
+| agenda-025 | `BC-234` | blocked | After exact adaptive semantics and controls pass, can they certify 3.8125 and then 3.815 without… |
+| agenda-025 | `BC-235` | blocked | If square cores stall, can each angle cell be assigned a rational inner kernel contained in every… |
+| agenda-025 | `BC-236` | blocked | Can the rational angle-cell kernel be swept and interval-checked exactly with the existing positive… |
+| agenda-025 | `BC-237` | blocked | After the kernel route is disposed, is a piecewise-algebraic segment-measure verifier small and… |
+| agenda-025 | `BC-238` | blocked | Does any fractional candidate from this agenda survive frozen-byte exactification, source-distinct… |
+| agenda-025 | `BC-239` | blocked | Is every fractional cell classified, its checkpoint and cost preserved, and its one earned… |
+
+Open frontier: `BC-230`, `BC-231`, `BC-232`, `BC-233`, `BC-234`, `BC-235`, `BC-236`, `BC-237`, `BC-238`, `BC-239`.
+
 ### `n11-closure`
 
 | agenda | id | state | question |
@@ -152,6 +199,37 @@ Open frontier: `BC-204`, `BC-205`, `BC-212`.
 | agenda-022 | `BC-207` | blocked | At the side block one found the n = 11 wall, does an exact cover of the heavy atoms by eleven… |
 
 Open frontier: `BC-208`, `BC-207`.
+
+### `n11-density-stationarity-trump-capture`
+
+| agenda | id | state | question |
+| --- | --- | --- | --- |
+| agenda-026 | `BC-240` | blocked | Can the existing 128-branch Trump calculation be stated as one quantitative local theorem with… |
+| agenda-026 | `BC-241` | blocked | Does a source-distinct reviewer reproduce every conclusion that the retained Trump records actually… |
+| agenda-026 | `BC-242` | blocked | What is the correct primal and weak-dual formulation for a density over full-size placements,… |
+| agenda-026 | `BC-243` | blocked | Does the smallest exact full-size-density pilot survive weak-dual checks and approach mass eleven… |
+| agenda-026 | `BC-244` | blocked | If the full-size density nearly reaches eleven, can inverse dual design force equality on Trump's… |
+| agenda-026 | `BC-245` | blocked | What finite typed stationary-backbone language is complete for a minimal counterexample, without… |
+| agenda-026 | `BC-246` | blocked | Does the typed language recover Trump's stationary backbone, every retained branch, and its local… |
+| agenda-026 | `BC-247` | blocked | On the complete n=3 and n=4 controls, and the local n=5 Göbel control, is typed backbone generation… |
+| agenda-026 | `BC-248` | blocked | Can a certified fractional core prune the global typed-backbone search to an exact-cover residue… |
+| agenda-026 | `BC-249` | blocked | Is every closure cell classified, its theorem and checkpoint state preserved, and its one earned… |
+
+Open frontier: `BC-240`, `BC-241`, `BC-242`, `BC-243`, `BC-244`, `BC-245`, `BC-246`, `BC-247`, `BC-248`, `BC-249`.
+
+### `n11-post-381-portfolio`
+
+| agenda | id | state | question |
+| --- | --- | --- | --- |
+| agenda-024 | `BC-219` | ready | Are the stack base, source packets, ID ranges, manager write scopes, exact controls, checkpoints,… |
+| agenda-024 | `BC-220` | blocked | At hour four, have both managers produced valid theorem and control packets, and which exact cells… |
+| agenda-024 | `BC-221` | blocked | At hour eight, what do the first exact measurements say about the fastest path to a bound above… |
+| agenda-024 | `BC-222` | blocked | At hour twelve, which program has earned the portfolio pivot, and which routes should be preserved,… |
+| agenda-024 | `BC-223` | blocked | At hour sixteen, has any candidate or theorem packet earned independent exactification, and can the… |
+| agenda-024 | `BC-224` | blocked | At hour twenty, can new instrument work stop and every remaining resource move to exactification,… |
+| agenda-024 | `BC-225` | blocked | At hour twenty-four, is every research cell honestly classified and reprioritized, with the record… |
+
+Open frontier: `BC-219`, `BC-220`, `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 
 ### `reach-table-ladder`
 

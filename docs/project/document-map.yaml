@@ -3,7 +3,7 @@ softschema:
   schema: document-map.schema.yaml
   status: enforced
 
-last_reviewed: '2026-09-03'
+last_reviewed: '2026-09-05'
 scope: >
   Durable Markdown owned by packing. Source-faithful archive content is
   excluded because its role and lifecycle come from resources/README.md rather than
@@ -218,6 +218,11 @@ documents:
     role: review
     authority: record
     lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-05-strategy-gpt-56-pro-gemini-grok.md
+    role: review
+    authority: record
+    lifecycle: superseded
+    superseded_by: packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md
   - path: docs/project/three-lane-research-method.md
     role: component-guide
     authority: record

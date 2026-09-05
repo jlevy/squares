@@ -3,7 +3,9 @@
 **Date:** 2026-09-05\
 **Status:** Preserved outside advice with an internal factual audit; not a result record\
 **Planning bead:** `think-xk9j`\
-**Stack base:** PR #83, head `e032a0f61e93e32b22cdaedcbc75eb11bd64ae81`
+**Review installation base:** PR #83, then-head
+`e032a0f61e93e32b22cdaedcbc75eb11bd64ae81`; the strategy branch tracks the current PR
+head at its launch gate
 
 ## Provenance and trust boundary
 

@@ -482,6 +482,54 @@ Status: **active**. Block two, and every cell in it is contingent. Agenda-021 me
 | BC-209 | research | 11, 26, 38, 39, 51 | blocked | 2 | think-4in0 | Whether the reach table is a work queue or only a ranking, which is the question X-013 raised and deliberately declined to answer. |
 | BC-210 | tool_validation | 11, 12, 13, 21, 26 | blocked | 3 | think-u066 | Whether the endgame at n = 11 is a research programme or a closed door, which is the question X-014 raised and which two blocks of measurement would finally have priced. |
 
+### [agenda-024](agendas/agenda-024-post-381-24h-portfolio.md) — Post-3.81 24-Hour Portfolio Control
+
+Status: **active**. Coordinate two disjoint research agendas for the next 24 hours without allowing parallel work to split the proof record. Agenda-025 owns the exact fractional frontier and agenda-026 owns density, typed stationarity, and Trump capture. This agenda owns the frozen base and source packets, shared namespaces and records, six four-hour integration gates, all routing decisions, and W10 closeout. The research horizon is a replanning checkpoint rather than a stop condition. PR 87 owns agenda-023 and BC-214 through BC-218; this portfolio starts at BC-219 and quarantines H-066 through H-069 and exp-065 through exp-069 until that sibling is terminal.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-219 | tool_validation | 11 | ready | 0 | think-9pzv | One immutable launch contract that prevents parallel agents from changing the theorem, criteria, source corpus, or shared record underneath one another. |
+| BC-220 | measurement_validation | 11 | blocked | 0 | think-u7i4 | Whether adaptive cores, the resumed bracket, local radius packaging, and the full-size weak-dual pilot are sound enough to receive more compute. |
+| BC-221 | measurement_validation | 11 | blocked | 0 | think-gt06 | A comparable exact-yield-per-hour reading across the adaptive, bracket, radius, and density routes. |
+| BC-222 | research | 11 | blocked | 0 | think-gxcm | Whether the direct-bound route, equality-density route, or local-to-global route now has the strongest verifier-backed expected gain. |
+| BC-223 | measurement_validation | 11 | blocked | 0 | think-dlj8 | A frozen candidate that survives independent exact decision, or a precise reason no branch has earned final-block exactification. |
+| BC-224 | tool_validation | 11 | blocked | 0 | think-wo94 | Review-ready evidence rather than another partially built research surface. |
+| BC-225 | measurement_validation | 11 | blocked | 0 | think-3ilu | The durable result of the 24-hour portfolio and the single highest-value continuation after all costs and negative results are known. |
+
+### [agenda-025](agendas/agenda-025-adaptive-fractional-frontier.md) — Adaptive Fractional Frontier Above 3.81
+
+Status: **active**. Give one managing agent a disjoint, exact program for the likeliest direct improvement to s(11) >= 3.81. Formalize direction-dependent witness sides B_k and their verifier, resume the retained 3.82 primal/dual state, and test Massaccesi's inset margin only as a seed before unrestricted column generation. A verified rung earns immediate exactification; a stalled adaptive core routes to a rational angle-cell kernel; segment measures remain tentative until that route is disposed and a verifier is priced. This manager owns BC-230 through BC-239, H-070 through H-079, and exp-070 through exp-089, but not shared campaign or frontier state.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-230 | research | 11 | blocked | 0 | think-c678 | Whether direction-dependent cores are a sound strengthening of the exact object, rather than a generator heuristic that the verifier cannot decide. |
+| BC-231 | tool_validation | 11, 12, 17 | blocked | 0 | think-7mk4 | A trustworthy decision boundary on which an adaptive 3.8125 run may rely. |
+| BC-232 | research | 11 | blocked | 0 | think-gmdy | Which side of eleven the current one-body formulation reaches at 3.82, or a measured reason to stop spending on this checkpoint. |
+| BC-233 | research | 11, 17 | blocked | 1 | think-jbat | Whether Massaccesi's margin is a useful proposal distribution for this instance, not whether inset supports contain the unrestricted optimum. |
+| BC-234 | research | 11 | blocked | 0 | think-1sv0 | A directly publishable rung or a quantitative verdict on adaptive witness cores. |
+| BC-235 | research | 11 | blocked | 1 | think-ay89 | Whether a strictly richer one-body witness can be represented by a small exact verifier. |
+| BC-236 | tool_validation | 11, 12 | blocked | 1 | think-yaf9 | Whether the kernel language is a certifiable instrument rather than a geometric sketch. |
+| BC-237 | research | 11 | blocked | 2 | think-fw95 | A build/no-build decision for the next richer measure language. |
+| BC-238 | measurement_validation | 11 | blocked | 0 | think-hjoe | A result object the central retention gate can judge without trusting its generator. |
+| BC-239 | measurement_validation | 11 | blocked | 0 | think-mss2 | The fractional program's honest yield, cost, negative results, and best continuation. |
+
+### [agenda-026](agendas/agenda-026-density-stationarity-and-trump-capture.md) — Density, Typed Stationarity, and Trump Capture
+
+Status: **active**. Give one managing agent a disjoint closure program that can turn local knowledge at Walter Trump's packing into a global argument. Package the already-computed quantitative neighborhood theorem instead of rerunning it; test whether a full-size density has a sound weak dual with boundary terms and useful equality set; and replace generic contact-graph enumeration with typed stationary backbones that retain feature contacts, owner axes, order data, abnormal Fritz-John cases, ties, zero multipliers, and rattlers. This manager owns BC-240 through BC-249, H-080 through H-089, and exp-090 through exp-109, but not shared campaign or frontier state.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-240 | research | 11 | blocked | 0 | think-4ln1 | A reviewable local endpoint that a later global capture argument can invoke without treating numerical rigidity as global optimality. |
+| BC-241 | measurement_validation | 11 | blocked | 0 | think-woi0 | Whether the local endpoint is ready to serve as the last step of a global proof. |
+| BC-242 | research | 11 | blocked | 0 | think-9xxh | Whether the proposed density route has a valid lower-bound semantics before any numerical value is interpreted. |
+| BC-243 | measurement_validation | 11 | blocked | 0 | think-mt6q | Whether a sharp equality measure is a plausible closure route rather than an appealing but invalid continuum analogy. |
+| BC-244 | research | 11 | blocked | 1 | think-h7kl | A possible one-body proof endpoint, or evidence that global classification must carry the closure burden. |
+| BC-245 | research | 3, 4, 5, 11 | blocked | 0 | think-do04 | A finite proof language strong enough to replace the review's unsupported generic contact-graph atlas. |
+| BC-246 | tool_validation | 11 | blocked | 0 | think-3l93 | Whether the atlas language can join the global tree to the already-verified local neighborhood. |
+| BC-247 | tool_validation | 3, 4, 5 | blocked | 1 | think-qi66 | A measured branch price and omission control for the proposed global classifier. |
+| BC-248 | research | 11 | blocked | 2 | think-901o | Whether certificate-guided enumeration can cover the complement of the Trump neighborhood at a finite, auditable cost. |
+| BC-249 | measurement_validation | 11 | blocked | 0 | think-7dd9 | The closure program's honest theorem gain, measured costs, negative results, and best continuation. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
@@ -686,6 +734,7 @@ Status: **active**. Block two, and every cell in it is contingent. Agenda-021 me
 - X-010 — Two lanes, two ladders — focusing the campaign on first-party theorems
 - X-012 — One chart, four hundred inequalities, and an order-2m contradiction
 - X-015 — The map and the three programs: where significant progress is likeliest next
+- X-016 — After 3.81: two managers, six gates, one proof boundary
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

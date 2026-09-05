@@ -267,6 +267,7 @@ case or experiment separately.
 | [Review 2026-09-04 — independent verification of T-017 (s(12) ≥ 77/20)](docs/project/reviews/review-2026-09-04-t017-independent-verification.md) | dated review record | record | retained | — |
 | [Review 2026-09-04 — Hostile Third-Party Check of the s(11) ≥ 19/5 Package (T-018)](docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md) | dated review record | record | retained | — |
 | [Review 2026-09-04 — PR #80, the Stacked Hardening of the s(11) ≥ 381/100 Claim](docs/project/reviews/review-2026-09-04-pr80-stacked-hardening.md) | dated review record | record | retained | — |
+| [Review: external strategies for pushing the \(s(11)\) lower bound past 3.81](docs/project/reviews/review-2026-09-05-strategy-gpt-56-pro-gemini-grok.md) | dated review record | record | superseded | [X-016 — After 3.81: Two Managers, Six Gates, One Proof Boundary](packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md) |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
 | [Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
