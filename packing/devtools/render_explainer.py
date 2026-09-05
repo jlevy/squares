@@ -257,21 +257,39 @@ BEST_RENDERING = PACKING / "atlas" / "known-best" / "rendering" / "n-011.svg"
 #: The composite travels with the page: the SVG the figure shows, the PDF it links for
 #: print, and the PNG for a reader whose context cannot render the vector.
 COMPOSITE_STEM = PACKING / "atlas" / "known-best" / "known-best-1-100"
-COMPOSITE_ASSETS = tuple(COMPOSITE_STEM.with_suffix(f".{ext}") for ext in ("svg", "png", "pdf"))
-#: The one of the three a link preview shows. No unfurler renders SVG and none follows a
-#: PDF, so the card names the raster, and it names the 1x rather than the committed
-#: `@2x`: 2400x2896 is inside the 4096x4096 ceiling X applies to a card image and
-#: 4800x5792 is outside it on both axes, while every consumer downscales to 600px or
-#: less anyway. The 1x is also already copied beside the page; the 2x is not, and adding
-#: it would put another 1.2 MiB in every deploy for resolution nothing displays.
+COMPOSITE_ASSETS = (
+    *(COMPOSITE_STEM.with_suffix(f".{ext}") for ext in ("svg", "png", "pdf")),
+    COMPOSITE_STEM.with_name(f"{COMPOSITE_STEM.name}-card.png"),
+)
+#: The full-canvas raster, which the published Markdown shows to a reader whose context
+#: cannot render the vector. The 1x rather than the committed `@2x`: every consumer
+#: downscales to 600px or less anyway, and the 2x would put another 1.2 MiB in the
+#: deploy for resolution nothing displays.
 COMPOSITE_PNG = COMPOSITE_STEM.with_suffix(".png")
-#: What Figure 1 and the link preview are both a picture of, written once. The figure
-#: shows the SVG and the card the PNG, but they are the same drawing, so a reader on a
-#: screen reader and a reader seeing an unfurl get the same sentence.
+#: What a link preview shows. No unfurler renders SVG and none follows a PDF, so a card
+#: has to name a raster, and the full canvas is the wrong one: it is portrait, and every
+#: unfurler that crops keeps a landscape band from the middle of a portrait -- the four
+#: rows of the grid that say least about what the picture is, with the title gone. This
+#: is the same drawing cropped to its top by the atlas builder, at 2400x1256, which is
+#: 1.91:1 to the nearest whole pixel. The crop is chosen here rather than inherited from
+#: whatever each platform does, which is the only part of it this repository controls.
+COMPOSITE_CARD = COMPOSITE_STEM.with_name(f"{COMPOSITE_STEM.name}-card.png")
+#: What Figure 1 is a picture of.
 COMPOSITE_ALT = (
     "The best known packings of one through one hundred unit squares, in a ten-by-ten "
     "grid, each labelled with its best known upper bound and, where the value is still "
     "open, the best proved lower bound"
+)
+#: What the card is a picture of, which stopped being the same sentence when the card
+#: became a crop. It shows the title block and the first four rows, so it says the first
+#: forty and not all hundred: an alt text that promises a reader a picture of one hundred
+#: packings and hands them forty is a small lie told to exactly the readers who cannot
+#: check it.
+CARD_ALT = (
+    "The title of the atlas of best known square packings, above the first four rows of "
+    "its ten-by-ten grid: the best known packings of one through forty unit squares, "
+    "each labelled with its best known upper bound and, where the value is still open, "
+    "the best proved lower bound"
 )
 VERIFIER = PACKING / "src" / "sqpack" / "fractional" / "certificate.py"
 GENERATOR = PACKING / "src" / "sqpack" / "fractional" / "generate.py"
@@ -1172,14 +1190,16 @@ def card_substitutions(headline: Facts, headline_frac: str) -> dict[str, str]:
     the page it opens cannot say different things. The bound in the title and in the
     sentence is the headline certificate's own, like every other number on the page.
 
-    The card names the composite because that is the picture of the result: a portrait
-    at 150:181. X and Facebook centre-crop it to their landscape card and show the
-    middle four rows of the grid; Slack, Discord and iMessage scale the whole thing and
-    show all hundred packings with the title on it. Both readings are of the atlas, so
-    the aspect is left alone rather than a landscape variant being derived for the
-    croppers at the cost of the ones that do not crop.
+    The card names the cropped composite rather than the full canvas, and the reason is
+    what the croppers do with a portrait. X and Facebook show a landscape card and take
+    a band from the middle of whatever they are given: from the 150:181 canvas that is
+    four rows out of the middle of the grid, with the title, the date and the repository
+    line all gone -- everything that says what the picture is. The crop the atlas builder
+    writes is the top of the same drawing at 1.91:1, so those platforms crop nothing and
+    the ones that scale instead show the same band whole. What is lost either way is the
+    legend at the foot, which is the part a reader can find on the page.
     """
-    width, height = png_size(COMPOSITE_PNG)
+    width, height = png_size(COMPOSITE_CARD)
     title = f"s({headline.n}) ≥ {headline_frac}: {SUBTITLE}"
     description = (
         f"How a weighted point set and a pigeonhole prove s({headline.n}) ≥ "
@@ -1192,9 +1212,10 @@ def card_substitutions(headline: Facts, headline_frac: str) -> dict[str, str]:
         "PAGE_DESCRIPTION": description,
         "CANONICAL_URL": SITE_URL,
         "SITE_NAME": SITE_NAME,
-        "CARD_IMAGE_URL": site_file(COMPOSITE_PNG),
+        "CARD_IMAGE_URL": site_file(COMPOSITE_CARD),
         "CARD_IMAGE_WIDTH": str(width),
         "CARD_IMAGE_HEIGHT": str(height),
+        "CARD_ALT": CARD_ALT,
         "COMPOSITE_ALT": COMPOSITE_ALT,
     }
 

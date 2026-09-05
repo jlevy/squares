@@ -15,8 +15,11 @@ from pathlib import Path
 import pytest
 
 from devtools.render_explainer import (
+    CARD_ALT,
     CASE,
+    COMPOSITE_ALT,
     COMPOSITE_ASSETS,
+    COMPOSITE_CARD,
     COMPOSITE_PNG,
     MARKDOWN_OUTPUT,
     RENDER_INPUTS,
@@ -227,16 +230,47 @@ def test_the_card_image_is_one_the_render_serves_beside_the_page(page: str) -> N
     """
     tags = card_tags(page)
     served = {asset.name for asset in COMPOSITE_ASSETS}
-    assert tags["og:image"] == SITE_URL + COMPOSITE_PNG.name
+    assert tags["og:image"] == SITE_URL + COMPOSITE_CARD.name
     assert tags["og:image"].rsplit("/", 1)[-1] in served
     assert tags["twitter:image"] == tags["og:image"]
-    width, height = png_size(COMPOSITE_PNG)
+    width, height = png_size(COMPOSITE_CARD)
     assert (tags["og:image:width"], tags["og:image:height"]) == (str(width), str(height))
-    # Portrait, and every consumer either crops it to a band or scales it down whole;
-    # what none of them does is render it at 4800 px, which is why the card names the
-    # 1x export and not the committed `@2x`.
-    assert width < height
     assert max(width, height) <= 4096
+
+
+def test_the_card_image_is_the_landscape_crop_and_not_the_portrait_canvas() -> None:
+    """A portrait card is cropped by the platform, and it crops away the title.
+
+    X and Facebook show a landscape card and take a band from the middle of whatever
+    they are handed, so the full 150:181 canvas arrives as four rows out of the middle
+    of the grid with the title, the date and the repository line gone. The atlas builder
+    writes the top of the same drawing at 1.91:1 instead, which is the ratio those
+    platforms want, so they crop nothing.
+
+    What is pinned is the property rather than the number: landscape, and within a
+    pixel of the ratio the croppers use. A future canvas can change the crop height as
+    long as the card stays a card.
+    """
+    width, height = png_size(COMPOSITE_CARD)
+    assert width > height, "a card cropped by the platform is a card without its title"
+    assert abs(width / height - 1.91) < 0.01, (width, height, width / height)
+    # The crop is of the composite, not a second drawing: same width, less height.
+    full_width, full_height = png_size(COMPOSITE_PNG)
+    assert width == full_width
+    assert height < full_height
+
+
+def test_the_card_alt_describes_the_crop_and_not_the_whole_atlas() -> None:
+    """The alt text is read by the readers least able to check it against the picture.
+
+    Figure 1 shows all hundred packings and the card shows the first forty, so one
+    sentence cannot be true of both. They were the same string until the card became a
+    crop, which is exactly the kind of change that leaves an alt text quietly wrong.
+    """
+    assert CARD_ALT != COMPOSITE_ALT
+    assert "one hundred" in COMPOSITE_ALT
+    assert "one hundred" not in CARD_ALT
+    assert "forty" in CARD_ALT
 
 
 def test_the_card_and_the_page_say_the_same_thing(page: str) -> None:

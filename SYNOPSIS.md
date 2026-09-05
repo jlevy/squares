@@ -2770,8 +2770,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | claimed by a session | 114 | 28,689 | 16,232 | 327 | 2,712 | 151.73 h |
-| claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **124** | **30,149** | **17,110** | **359** | **2,885** | **158.6 h** |
+| claimed by none | 11 | 4,135 | 2,355 | 83 | 459 | 25.86 h |
+| **measured** | **125** | **32,824** | **18,587** | **410** | **3,171** | **177.59 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |

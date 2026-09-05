@@ -6,7 +6,7 @@ name: Certificate page
   # whenever that certificate, the renderer, or the template moves.
   # The list is every input the renderer reads or imports: the case directory
   # (certificates, coarsening rows, claim documents), the templates, the atlas
-  # rendering it inlines as Figure 2, the three composite assets it serves beside
+  # rendering it inlines as Figure 2, the four composite assets it serves beside
   # the page, the figure record and the module it is read through, the frontier
   # register whose length the opening states, the sqpack modules it imports (it
   # asserts two palette colours at import), the vendored kpress, and the locked
@@ -32,6 +32,7 @@ name: Certificate page
       - packing/atlas/known-best/known-best-1-100.svg
       - packing/atlas/known-best/known-best-1-100.png
       - packing/atlas/known-best/known-best-1-100.pdf
+      - packing/atlas/known-best/known-best-1-100-card.png
       - vendor/kpress
       - packing/pyproject.toml
       - packing/uv.lock
@@ -53,6 +54,7 @@ name: Certificate page
       - packing/atlas/known-best/known-best-1-100.svg
       - packing/atlas/known-best/known-best-1-100.png
       - packing/atlas/known-best/known-best-1-100.pdf
+      - packing/atlas/known-best/known-best-1-100-card.png
       - vendor/kpress
       - packing/pyproject.toml
       - packing/uv.lock
