@@ -584,9 +584,13 @@ agenda:
         Stopped by an external blocker with the tool half-built. The lane had read the
         sweep's mass grid and was refactoring it to expose the per-cell masses the census
         counts when the account's rate limit ended every sub-agent of the pass at 09:21
-        UTC; devtools/census_tight_cells.py exists in that state, with no test and no
-        census run, so nothing is retained here and H-065 is untouched. The cell is
-        unchanged and takeable, and the refactor it needs is named in its own text.
+        UTC. The half-built devtools/census_tight_cells.py was then swept into a commit
+        by a broad `git add -A packing/devtools`, which contradicted this outcome and put
+        four errors in the type floor; it was removed on 2026-09-05, so nothing is
+        retained here and H-065 is untouched. The refactor the cell needs did land on its
+        own: sweep.MassGrid and scaled_mass_grid split the integer route's grid out as a
+        value, so the seam a census reads through is in place. The cell is otherwise
+        unchanged and takeable as written.
       evidence:
       - session-086 stop reason and its Lane B delegation
       disposition: fix-and-rerun
