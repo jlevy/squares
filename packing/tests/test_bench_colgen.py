@@ -133,7 +133,14 @@ def test_bench_rounds_splits_a_round_into_separation_and_lp() -> None:
     run = report["row_run"]
     assert isinstance(run, dict)
     assert run["rounds"] >= 1
-    assert run["separation_seconds"] + run["lp_seconds"] <= run["seconds"] + 1e-6
+    # The parts cannot exceed the whole -- but all three figures are rounded to
+    # milliseconds independently by `bench_rounds`, so the *reported* parts can exceed
+    # the *reported* whole by up to three half-millisecond rounding steps: each part can
+    # round up by just under 5e-4 while the total rounds down by just under 5e-4. A 1e-6
+    # tolerance was therefore three orders of magnitude too tight, and it failed on CI at
+    # 0.004 + 0.005 against 0.008 (run 33989527866) -- arithmetic, not a slow runner, and
+    # it only surfaces once the case is fast enough for millisecond quantisation to bite.
+    assert run["separation_seconds"] + run["lp_seconds"] <= run["seconds"] + 1.5e-3
     assert 0.0 <= run["separation_share"] <= 1.0
     assert len(run["timings"]) >= 1
 
