@@ -796,9 +796,10 @@ def _append_lower_bound(card: ET.Element, n: int, *, left: Decimal, baseline: De
     """The certified floor, under the best known side.
 
     A proved case says `s(n) = ...` on the line above and gets nothing here. Where the
-    project proved the floor itself the line is set in the accent, the same colour as
-    the star in the badge row above it, so the mark and the number it marks read as one
-    statement; the legend counts how many there are.
+    project proved the floor itself, the accent falls on the numeral alone, the same
+    colour as the star in the badge row above it: what is new about the case is the
+    bound, not the function it bounds, so the `s(n) >=` that introduces it stays in the
+    caption colour it carries on every other card. The legend counts how many there are.
     """
     entry = _figure_entries()[n]["lower"]
     if not entry["shown"]:
@@ -813,12 +814,15 @@ def _append_lower_bound(card: ET.Element, n: int, *, left: Decimal, baseline: De
             "font-family": SUMMARY_FONT,
             "font-size": SUMMARY_SMALL_SIZE,
             "font-weight": SUMMARY_SMALL_WEIGHT,
-            "fill": (
-                FIRST_PARTY_ACCENT_COLOR if entry["first_proved_here"] else SUMMARY_SMALL_FILL
-            ),
+            "fill": SUMMARY_SMALL_FILL,
         },
     )
-    _append_function_text(lower, entry["display"], SUMMARY_SMALL_SIZE)
+    _append_function_text(
+        lower,
+        entry["display"],
+        SUMMARY_SMALL_SIZE,
+        accent=FIRST_PARTY_ACCENT_COLOR if entry["first_proved_here"] else None,
+    )
 
 
 @cache
@@ -854,16 +858,34 @@ def _case_badges(built: BuiltCase) -> tuple[tuple[str, str, str], ...]:
 SUMMARY_ITALIC_KERN = Decimal("0.055")
 
 
-def _append_function_text(parent: ET.Element, display: str, size: str) -> None:
+def _append_function_text(
+    parent: ET.Element, display: str, size: str, *, accent: str | None = None
+) -> None:
     """Set `s(n) ...`: the function name italic, the rest upright, kerned apart.
 
     Only the function name is italic, as in ordinary mathematical setting: the
     parentheses, the argument, the relation and the numeral stay upright.
+
+    `accent` colours the value alone -- the run after the last space -- and leaves the
+    function, its argument and the relation in the parent's fill.
+
+    The separating space stays in the text, at the end of the run before the value.
+    Carrying it as a `dx` advance instead would draw the same picture and cost the
+    space in everything that reads the text rather than the ink: selection, copy, and
+    a screen reader. Measured on 2026-09-05 in both renderers this figure passes
+    through, cairosvg and Chromium: against the unsplit line, the split places the
+    value at the same x to within a hundredth of a unit and sets the same total width,
+    so neither trims the space at the seam.
     """
     sub(parent, "tspan", {"font-style": "italic"}).text = display[0]
-    sub(
-        parent, "tspan", {"dx": format_svg_number(Decimal(size) * SUMMARY_ITALIC_KERN)}
-    ).text = display[1:]
+    kern = {"dx": format_svg_number(Decimal(size) * SUMMARY_ITALIC_KERN)}
+    rest = display[1:]
+    head, separator, value = rest.rpartition(" ")
+    if accent is None or not separator:
+        sub(parent, "tspan", kern).text = rest
+        return
+    sub(parent, "tspan", kern).text = head + separator
+    sub(parent, "tspan", {"fill": accent}).text = value
 
 
 def _star_center_y(baseline: Decimal, size: str) -> Decimal:

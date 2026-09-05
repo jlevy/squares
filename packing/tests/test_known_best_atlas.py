@@ -24,6 +24,7 @@ from sqpack.known_best import (
 )
 from sqpack.render.color import ANGLE_CLASS_CONTRACT
 from sqpack.render.model import RenderSpec
+from sqpack.render.style import FIRST_PARTY_ACCENT_COLOR
 from sqpack.witness import load_witness
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -453,3 +454,44 @@ def test_a_catalogue_annotation_is_shown_but_never_counted() -> None:
     # n=11 is the case the old rule under-credited: its rigidity is ours, not Kingbird's.
     assert entries[11]["rigidity"]["basis"] == "first-party-argument"
     assert [b["style"] for b in entries[11]["badges"] if b["glyph"] == "R"] == ["solid"]
+
+
+def test_only_the_bound_numeral_carries_the_new_result_accent() -> None:
+    """The star marks the case; the accent marks what is new about it.
+
+    A first-party lower bound is new in the number it reaches, not in the function it
+    bounds, so `s(n) >=` keeps the caption colour every other card sets it in and the
+    numeral alone takes the accent that matches the star in the badge row above. The
+    record decides which cases are starred; this decides how a starred one is set, and
+    reads it off the drawing rather than the record so the two must agree.
+
+    The separating space is asserted too. It is the one part of the line that a split
+    into coloured runs can silently drop, and losing it would leave the drawing right
+    and every reader that takes the text rather than the ink wrong.
+    """
+    outputs, _manifest = known_best_builder.expected_outputs()
+    root = ET.fromstring(outputs[ATLAS / "known-best-1-100.svg"])
+    record = json.loads((ATLAS / "composite-figure.json").read_text(encoding="utf-8"))
+
+    accented: list[str] = []
+    plain: list[str] = []
+    for node in root.findall(".//svg:text[@data-feature='lower-bound']", SVG):
+        assert node.attrib["fill"] == known_best_builder.SUMMARY_SMALL_FILL
+        marked = [
+            span
+            for span in node.findall("svg:tspan", SVG)
+            if span.attrib.get("fill") == FIRST_PARTY_ACCENT_COLOR
+        ]
+        assert len(marked) <= 1
+        line = "".join(node.itertext())
+        assert re.fullmatch(r"s\(\d+\) \u2265 [0-9.]+", line), line
+        if not marked:
+            plain.append(line)
+            continue
+        accented.append(line)
+        value = marked[0].text or ""
+        assert re.fullmatch(r"[0-9.]+", value), value
+        assert line.endswith(" " + value), line
+
+    assert len(accented) == record["figure"]["totals"]["lower_bound_first_proved_here"]
+    assert len(plain) > len(accented)
