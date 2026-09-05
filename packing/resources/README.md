@@ -14,7 +14,7 @@ packing/resources/
 └── web/      Web sources (catalogues, surveys, encyclopedic): original .html + .md
 ```
 
-Every paper is stored three ways:
+The archive’s normal form stores a paper three ways; the documented exceptions follow:
 
 | File | What it is | Use it for |
 | --- | --- | --- |
@@ -27,8 +27,8 @@ Cleanup was done by language models, so the raw extraction is the fallback whene
 formula in a `.md` looks suspicious.
 
 **Transcription status, stated exactly.** The archive’s discipline is original + cleaned
-`.md` + faithful `.raw.md`, and twelve entries currently fall short of it in ways worth
-naming rather than hiding:
+`.md` + faithful `.raw.md`, and thirteen entries currently fall short of it in ways
+worth naming rather than hiding:
 
 - `gensane-ryckelynck-2005-improved-dense-packings`,
   `nagamochi-2005-packing-unit-squares-in-a-rectangle`,
@@ -41,6 +41,9 @@ naming rather than hiding:
   cleaned transcription yet.
   All eight were read directly from the PDF, and the claims resting on them were checked
   there.
+- `gobel-1979-geometrical-packing-and-covering-problems` is **PDF-only**: the source is
+  retained, but neither a cleaned transcription nor a faithful extraction has been
+  produced. Claims resting on it must be checked against the page images.
 - `roth-vaughan-1978-inefficiency-packing-squares` carries a **partial** cleaned
   transcription: abstract, introduction and Theorem, read from the rendered page image
   and reproduced verbatim; Sections 2–7 are not transcribed.
@@ -135,6 +138,7 @@ Citation keys match those used in the research document.
 | **[Stromquist 2003]** | Packing 10 or 11 Unit Squares in a Square | W. Stromquist | 2003 | Electron. J. Combin. 10, #R8 | `stromquist-2003-packing-10-or-11-unit-squares` |
 | **[Friedman DS7]** | Packing Unit Squares in Squares: A Survey and New Results | E. Friedman | 1998– | Electron. J. Combin., Dynamic Survey DS7 | `friedman-ds7-packing-unit-squares-in-squares` |
 | **[Kearney–Shiu 2002]** | Efficient packing of unit squares in a square | M. J. Kearney, P. Shiu | 2002 | Electron. J. Combin. 9, #R14 | `kearney-shiu-2002-efficient-packing-unit-squares` |
+| **[Göbel 1979]** | Geometrical Packing and Covering Problems | F. Göbel | 1979 | *Packing and Covering in Combinatorics*, Math. Centre Tracts 106, 179–199 | `gobel-1979-geometrical-packing-and-covering-problems` |
 | **[Bentz 2010]** | Optimal Packings of 13 and 46 Unit Squares in a Square | W. Bentz | 2010 | Electron. J. Combin. 17, #R126 | `bentz-2010-optimal-packings-13-and-46` |
 | **[Bentz 2016]** | Optimal Packings of 22 and 33 Unit Squares in a Square | W. Bentz | 2016 | arXiv:1606.03746 | `bentz-2016-optimal-packings-22-and-33` |
 | **[Erdős–Graham 1975]** | On packing squares with equal squares | P. Erdős, R. L. Graham | 1975 | JCTA 19, 119–123 (Stanford CS-TR-75-483) | `erdos-graham-1975-on-packing-squares-with-equal-squares` |
@@ -167,6 +171,7 @@ Citation keys match those used in the research document.
 | **[Kingbird run statistics]** | First-party simulated-annealing basin frequencies and setup-specific search costs for `n = 51, 55` | kingbird.myphotos.cc | `kingbird-run-statistics-2026/` |
 | **[UnitSquare 2026]** | Results Release 1: six reported construction-only improvements and its public structured record | hmbelvedere.com | `unitsquare-release1-2026/` |
 | **[Burns–Massaccesi n17]** | Proposed exact-rational lower-bound certificates at 4.4811 and 4.5058, plus a distinct near-record topology | sam-burns.com; gus-massa.blogspot.com | `n17-lower-bounds-2026/` |
+| **[`s(11)` lower-bound audit 2026]** | Exact-value, reciprocal, catalogue, citation-chain, and method-lineage search supporting the scoped novelty claim for `381/100` | primary papers; author pages; scholarly indexes; public catalogues | `s11-lower-bound-literature-audit-2026/` |
 | **[Finite-case literature audit 2026]** | Repeatable queries and bounded negative result for recent papers on the prioritized cases | arxiv.org; combinatorics.org; author pages | `finite-case-literature-audit-2026/` |
 | **[`n = 54` source/formula audit 2026]** | Revision-keyed genealogy, live-SVG formula receipt, quartic-field replay, and typed pose-correspondence gap | combinatorics.org; kingbird.myphotos.cc | `n54-source-formula-audit-2026/` |
 | **[Montanher et al. 2018]** | Rigorous packing of unit squares into a circle (full text via PMC) | pmc.ncbi.nlm.nih.gov | `montanher-2018-rigorous-packing-unit-squares-circle` |

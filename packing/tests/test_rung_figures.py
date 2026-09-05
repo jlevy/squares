@@ -34,6 +34,7 @@ from devtools.check_rung_figures import (
     movement_problems,
     pick_retained,
     resolve_certificates,
+    round_to,
 )
 from sqpack.yamlio import safe_load
 
@@ -100,6 +101,39 @@ def test_catches_d439_second_instance_a_superseded_rungs_total_and_margin() -> N
     assert "16.9331" in joined
     assert "margin 0.406" in joined
     assert "0.067 (exact" in joined  # 0.066920 rounded to the three places "0.406" states
+
+
+def test_catches_a_bare_possessive_mass_after_the_top_rung_moves() -> None:
+    """PR 80's F27: a total mass written possessively was read by none of the patterns.
+
+    `T-019`'s own `next_rung` states the retained certificate's mass as "this
+    certificate's ... reaching 17, 18 and 19 directly" -- no "total", no "is", and so
+    invisible to every keyword the other patterns key on. That is D-439's own shape with
+    the detector built for it looking straight past: put a superseded rung's mass in that
+    slot and the sentence reads as true while describing the wrong file.
+
+    Both figures are recomputed from the artifacts rather than written down, so this test
+    cannot itself become the stale literal it exists to catch.
+    """
+    result = _result("T-019")
+    retained, _, resolved = resolve_certificates(result)
+    assert retained is not None
+    superseded = next(figures for figures in resolved if figures.mass != retained.mass)
+
+    current = f"this certificate's {round_to(retained.mass, 6)} reaching"
+    next_rung = result["next_rung"]
+    assert current in next_rung, "premise: the live next_rung states the retained mass"
+
+    corrupted = copy.deepcopy(result)
+    corrupted["next_rung"] = next_rung.replace(
+        current, f"this certificate's {round_to(superseded.mass, 6)} reaching"
+    )
+
+    problems, _ = check_result(corrupted)
+    assert len(problems) == 1
+    assert "T-019 [next_rung]" in problems[0]
+    assert f"prose says total {round_to(superseded.mass, 6)}" in problems[0]
+    assert f"gives {round_to(retained.mass, 6)}" in problems[0]
 
 
 def test_ignores_a_cross_referenced_rung_that_is_not_this_results_own() -> None:

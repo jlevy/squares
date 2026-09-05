@@ -20,8 +20,9 @@ strategies:
   family: unavoidable_points
   mechanism: Place `n−1` points every unit square must hit; pigeonhole
   status: used
-  note: Yes — the workhorse for nearly every proved case
-  refs: []
+  note: Yes — Göbel 1979 is the integral precursor; the method is the workhorse for nearly every proved case
+  refs:
+  - Göbel 1979
 - id: 3
   name: Nonavoidance lemmas
   family: unavoidable_points
@@ -41,8 +42,9 @@ strategies:
   family: unavoidable_points
   mechanism: Rotate the unavoidable lattice a quarter turn; colour argument
   status: used
-  note: Yes — Kearney–Shiu, for `s(6) = s(7) = 3`
-  refs: []
+  note: Yes — Kearney–Shiu combine two unavoidable lattices in a dual counting argument for `s(6) = s(7) = 3`
+  refs:
+  - Kearney–Shiu 2002
 - id: 6
   name: “Almost unavoidable” sets + forcing
   family: unavoidable_points
@@ -56,14 +58,16 @@ strategies:
   mechanism: Replace a fixed point set by a parametrised family
   status: used
   note: Yes — Bentz 2016, for `s(22)=5`, `s(33)=6`
-  refs: []
+  refs:
+  - Bentz 2016
 - id: 8
   name: Generalised unavoidable points
   family: unavoidable_points
-  mechanism: Nagamochi’s extension of the method
+  mechanism: Assign nonnegative scores to points, segments, and area so every unit square consumes more than one unit
   status: used
-  note: Yes — `s(m²−1) = s(m²−2) = m`
-  refs: []
+  note: Yes — Nagamochi 2005, including `s(m²−1) = s(m²−2) = m`
+  refs:
+  - Nagamochi 2005
 - id: 9
   name: Restricted-orientation analysis
   family: unavoidable_points
@@ -121,12 +125,13 @@ strategies:
   note: No application to `s(n)` was found in the retrieved corpus
   refs: []
 - id: 17
-  name: LP/SDP relaxation with dual certificates
+  name: Global pose-space LP/SDP relaxations with dual certificates
   family: modern_machinery
-  mechanism: Bound via a relaxation’s dual solution
+  mechanism: Bound the full packing-feasibility problem via a relaxation's dual solution
   status: not_applied
-  note: No application to `s(n)` was found in the retrieved corpus
-  refs: []
+  note: No global pose-space application to `s(n)` was found; the fractional hitting LP is strategy 22
+  refs:
+  - Burns–Massaccesi n17
 - id: 18
   name: Machine-checked formal proof
   family: modern_machinery
@@ -165,15 +170,21 @@ strategies:
   mechanism: Relax piercing to an LP; use the dual fractional packing
   status: used
   note: >-
-    Applied in the August 2026 Burns and Massaccesi proposed computer-assisted lower
-    bounds for s(17): rational weighted atoms form a fractional hitting certificate,
-    and Massaccesi uses LP to generate the fixed certificate. The exact source verifier
-    replays, and on 2026-09-03 the repository adopted the 4.5058 proposal at
-    source-backed scope after an independent replay, a lemma audit and two reviews.
-    The record stays externally proposed: one method family carries it, and no
-    method-distinct certificate exists.
+    Integral unavoidable points, Kearney--Shiu's dual counting, Nagamochi's scored
+    point/segment/area resources, and Bentz's resource-starvation framing form the older
+    lineage. Burns's August 2026 n=17 note gives the pure-atomic, exact-rational
+    direction-net architecture; Massaccesi uses LP to generate fixed weights. The
+    repository replays that certificate as T-015, supplies a reusable generator, and
+    retains first-party instances T-017 through T-020 at n = 11, 12, 17--21. Their
+    finite coverage decisions are checked both by exact event-cell sweeps and by a
+    method-distinct interval branch-and-bound. The certificates are new instances of an
+    established fractional-cover principle, not a new principle.
   refs:
   - Burns–Massaccesi n17
+  - Göbel 1979
+  - Kearney–Shiu 2002
+  - Nagamochi 2005
+  - Bentz 2016
 - id: 23
   name: Integrality-gap bounds (Wegner-type)
   family: transversal_and_wider

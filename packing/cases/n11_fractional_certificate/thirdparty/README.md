@@ -1,11 +1,18 @@
-# Third-Party Check of s(11) ≥ 19/5
+# Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5
 
-Everything needed to check, with your own tools and without trusting this repository,
-that eleven unit squares do not fit in a square of side 3.8. The directory is
-self-contained: a certificate as plain data, the theorem it instantiates written out
-with its proof, a single-file verifier that uses only Python’s standard library, a
-control on a published result by other authors, and the perturbations the verifier
-refuses.
+Everything a reader needs to check, with their own tools and without trusting this
+repository, that eleven unit squares do not fit in a square of side 3.8. The directory
+can be copied out of the checkout and run without importing code from the rest of the
+project or installing its dependencies: a certificate as plain data, the theorem it
+instantiates written out with its proof, a single-file verifier that uses only Python’s
+standard library, a control reconstructed from another author’s published result, and
+the perturbations the verifier refuses.
+
+It is not itself a third-party check, and the name says so.
+This project wrote every file here, on the day of the result; a package assembled by the
+party making the claim cannot be the independent check of it.
+What the package supplies is the material such a check needs, so that making it is
+someone else’s to do.
 
 ## The Claim
 
@@ -56,7 +63,7 @@ inequality `s(11) > 19/5` also follows (by compactness), but the claim is the we
 | `verify.py` | The verifier: one file, standard library only, exact rational arithmetic, no imports from this repository. |
 | `control-n17-massaccesi.json` | Gustavo Massaccesi’s published `n = 17` certificate, rebuilt as data in the same schema. |
 | `build_n17_control.py` | Rebuilds the control file from the constants of its published source; `--check` confirms the shipped file matches. |
-| `falsify.py` | Applies the perturbations in the falsification table and prints what the verifier refuses. |
+| `falsify.py` | Applies the perturbations in the falsification table, checks each against the result it must produce, and prints what the verifier refuses. `--quick` runs the bounded negative-weight control alone. |
 | `check.py` | The whole check in one command. |
 
 One command, with whatever `python3` is on your `PATH` (CPython 3.8 or later, tested
@@ -181,6 +188,10 @@ Both are decided exactly; a floating-point check would have no business here.
 **Schema.** A JSON object with the fields below.
 Every rational is a string matching `-?[0-9]+(/[1-9][0-9]*)?`; the verifier refuses any
 other form, so a decimal or a float cannot enter and be rounded.
+It also refuses a duplicate object key, a non-integer or Boolean `n` or
+`direction_steps`, a JSON number where a rational string belongs, a malformed atom row,
+and a missing required field — each by name, before any condition is decided, rather
+than coercing the value or failing partway through the sweep.
 
 | Field | Type | Meaning |
 | --- | --- | --- |
@@ -191,7 +202,7 @@ other form, so a decimal or a float cannot enter and be rounded.
 | `direction_steps` | integer | `K` |
 | `atoms` | array of `[x, y, w]` | rational site coordinates and weight |
 | `claim` | string | must read `s(n) >= L` for the file’s own `n` and `L`; the verifier checks this so the label cannot mislead |
-| `total_mass`, `least_cell_mass` | rational | the record’s own bookkeeping; recomputed and compared, never trusted |
+| `total_mass`, `least_cell_mass` | rational | the record’s own bookkeeping; optional, but recomputed and compared if present, and a disagreement is a refusal |
 | `id`, `symmetry` | string | labels; Condition 1 checks the symmetry regardless of what is declared |
 
 ## The Verifier
@@ -241,6 +252,38 @@ placements, not sampled:
   disagreement aborts the run.
   `--audit N` re-sums `N` further random admissible cells per direction the same way.
 
+Two things the verifier does at the edges of that argument are worth writing down,
+because in both the reader is owed the reason and not just the behaviour.
+
+**A declared number that disagrees with the replay is a refusal, not a note.** The
+theorem does not use `total_mass` or `least_cell_mass`; the conditions are decided from
+the atoms. But a file that states its own least covered weight and states it wrongly is
+wrong about itself, and a checker that prints that as an aside and then says `VERIFIED`
+has certified bytes it disagrees with.
+The recomputed values are compared against the declared ones, a mismatch is counted with
+the failing conditions, and no such file ends in `VERIFIED`.
+
+**A direction where no `B`-square fits is accepted, and accepted on vacuity.** The set
+of admissible centres at a direction is `[h, L − h]²`, where `2h` is the width of the
+`B`-square’s bounding box there.
+Where `2h > L` that set is empty, and Condition 5 quantifies over nothing, so it holds.
+The earlier verifier raised instead, and the change of policy is deliberate: the
+acceptance is sound.
+Condition 5 is a *hypothesis*, and the proof applies it only to a `B`-square it has
+already placed strictly inside a unit square inside the container; if no `B`-square at
+that direction fits in the container, then no unit square containing one fits either,
+and the proof never reaches that direction.
+A stronger hypothesis can only make a theorem harder to apply, and an empty one cannot
+make it unsound. What the change costs is worth stating in the same breath.
+This checker’s value is that it refuses what it cannot handle, and a direction accepted
+on vacuity is a direction where it decided nothing.
+So it says so: the run prints how many directions admitted no placement, and a
+certificate whose every direction is vacuous is reported as having decided nothing
+rather than as having passed.
+Neither shipped artifact has a vacuous direction.
+Where `2h = L` there is exactly one admissible centre; the open-cell argument has no
+open cell to reason about there, so that one closed placement is evaluated directly.
+
 The verifier reports the exact least covered weight, the direction and the centre of a
 square that attains it, and the number of cells decided.
 The count is worth reading: a verifier that quietly decides fewer placements makes every
@@ -275,8 +318,20 @@ overstating a published result; the control is what catches that kind of error.
 
 `falsify.py` perturbs the certificate and runs the full decision on each variant.
 The perturbed atom is chosen from the verifier’s own witness: the first atom covered by
-the least-covered placement, so a change to it must show in Condition 5. Real output of
-`python3 falsify.py` (about four minutes):
+the least-covered placement, so a change to it must show in Condition 5.
+
+Each row is also an assertion.
+Every perturbation carries the result it must produce — the verdict, the five condition
+outcomes and the exact least covered weight — and the script exits non-zero if a run
+disagrees, so the table is checked rather than merely printed.
+Those expected numbers are this file’s and no other’s, which is why `falsify.py`
+declines a path that is not this directory’s `certificate.json` instead of measuring a
+different certificate against them.
+`python3 falsify.py --quick` runs the one mutation whose expectation does not depend on
+which certificate it is applied to — atom 0 given weight `-1` — which the preconditions
+refuse before any Condition 5 sweep, in well under a second.
+
+Real output of `python3 falsify.py` (about four minutes):
 
 ```
 baseline: deciding the unperturbed certificate to locate its tight placement
@@ -296,6 +351,9 @@ perturbed site: atom 0 at (1/2, 29/30), weight 407/25000
 | weights scaled so the total is exactly n | PASS (425 atoms) | FAIL (11) | PASS (309449/250000000000) | PASS (0.999995896) | PASS (1100066/1084775 = 1.014096) | REFUSED |
 | angle limit 41/100, short of tan(pi/8) | PASS (425 atoms) | PASS (43391/4000) | FAIL (-119/10000) | PASS (0.999972539) | FAIL (195849/200000 = 0.979245) | REFUSED |
 | B raised to 1/(1 + D), so B(1 + D) = 1 | PASS (425 atoms) | PASS (43391/4000) | PASS (309449/250000000000) | FAIL (1.000000000) | PASS (50003/50000 = 1.000060) | REFUSED |
+
+The run ends with `falsify.py: every mutation run matched its refusal oracle`, which is
+the line that makes the table above a check and not a report.
 
 Read the rows as demonstrations of the verifier, not of the certificate.
 Every condition is seen refusing something.
@@ -421,11 +479,12 @@ exit status 0
   The repository now also decides Condition 5 by interval arithmetic with directed
   rounding — branch and bound over boxes of centres, where an atom counts for a box only
   if its coverage rectangle contains the whole box, so the count is a lower bound by
-  construction. There is no event grid, no difference array and no polygon clipping, so
-  it shares no modelling assumption with the sweep, and it decides Condition 5 on the
-  doubled net (`θ_k` and `π/2 − θ_k`, 361 directions), which means it never invokes the
-  reflection argument of step 1 and does not need Condition 1 at all.
-  Run on *this file’s bytes* — SHA-256
+  construction. There is no event grid, no difference array and no polygon clipping: the
+  two routes share the certificate and the closed-form conditions, and share no part of
+  how Condition 5 is decided.
+  It decides Condition 5 on the doubled net (`θ_k` and `π/2 − θ_k`, 361 directions),
+  which means it never invokes the reflection argument of step 1 and does not need
+  Condition 1 at all. Run on *this file’s bytes* — SHA-256
   `60ac0c33e2e5a55874a10b0d09c6aaf3f891db921b063cc860114c2d4588c055`, the hash in the
   table above — it certifies all 361 directions in 1,195,755 boxes with none stalled, in
   about ten seconds, and its enclosure of the least covered weight has width zero at

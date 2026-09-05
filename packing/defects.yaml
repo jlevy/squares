@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 449
+count: 450
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14226,18 +14226,25 @@ defects:
     review_artifact mapped as a non-superseded review. It says nothing about who wrote the
     review, and external review is not a confirmation rung at all -- novelty's
     confirmed-novel is the label that needs priority confirmed outside the repository.
-    T-017's, T-019's and T-020's next_rung fields, and the pull request's own text, said
-    instead that C5 "needs a review artifact by someone outside the project". That is a
-    stricter rung than the rubric defines, stated as though it were the rubric.
+    T-017's, T-018's, T-019's and T-020's next_rung fields, and the pull request's own
+    text, said instead that C5 "needs a review artifact by someone outside the project",
+    and SYNOPSIS.md said it of all four results at once -- "None reaches C5, because no
+    one outside the project has reviewed any of them". That is a stricter rung than the
+    rubric defines, stated as though it were the rubric.
   consequence: >-
     Nothing was scored wrongly, because no fractional result had a review artifact to
     score. The misstatement mattered the moment one did: PR 80's promotion of T-018 to C5
     is legitimate under the rubric, and a reader holding the parent's sentence would have
     read it as illegitimate. A record that states its own rubric has to state it exactly.
   fix: >-
-    Fixed on 2026-09-04. The three next_rung sentences now say what C5 is -- review-ready,
-    a mapped, non-superseded review artifact, none yet written for the result -- and the
-    pull request says the same.
+    Fixed in two passes. On 2026-09-04 the T-018, T-019 and T-020 next_rung sentences and
+    the pull request's own text were rewritten to say what C5 is -- review-ready, a
+    mapped, non-superseded review artifact, none yet written for the result.
+    Two more were found on 2026-09-05 while porting PR 80's surface test over the
+    reader-facing documents, and fixed with it: T-017's next_rung, which this entry names
+    but which the first pass left untouched, and a fourth sentence in SYNOPSIS.md that
+    said none of the four results reaches C5 because no one outside the project has
+    reviewed them. Both now state the rubric.
   regression: >-
     None automated; the rubric's own checker derives rungs from the evidence and does not
     read prose about rungs. The review of PR 80 records the correction.
@@ -14357,3 +14364,47 @@ defects:
   status: fixed
   recorded_in: packing/src/sqpack/fractional/sweep.py
   bead: think-xyt1
+- id: D-450
+  title: The introducing commit named the wrong SHA-256 for the retained 381/100 certificate
+  date: '2026-09-05'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    since commit 6fc71ce9 introduced the 381/100 rung on 2026-09-04; found by PR 80's
+    review, which hashed the retained file before trusting the commit narrative, and
+    re-established here by hashing the file and reading the message
+  severity: high
+  what: >-
+    The commit that introduced the retained n = 11 certificate says the exact and
+    interval verifiers read frozen bytes with SHA-256
+    503c7d154d36ae1e16d3002ab3c5b003316fc47c14718cf65b3dbc43af4d7cd6. The
+    cases/n11_fractional_certificate/certificate.json that same commit retained, and that
+    HEAD still carries as the identical blob, hashes to
+    b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a instead. The
+    message's digest appears nowhere in the tree. Neither digest was recorded in the
+    evidence entry, so nothing in the durable record could be reconciled against the
+    message's claim.
+  consequence: >-
+    A commit message is not part of the argument, and the bound rests on decisions of the
+    retained bytes rather than on the message, so no claim about s(11) is weakened. What
+    the mismatch destroys is the provenance link the message was written to supply: the
+    transcript it narrates cannot be tied to a byte sequence, so it cannot establish that
+    what the two verifiers read is what the repository retains. A reader trusting the
+    message would be checking a file that does not exist here.
+  fix: >-
+    Fixed on 2026-09-05: the evidence entry for the certificate now states the SHA-256 of
+    the retained bytes and says the introducing commit's message names a different one,
+    so the record carries the digest that can be reproduced from the artifact and the
+    reader is told not to rely on the message's attestation. The message is left as
+    written; a dated record of the discrepancy is the fix, not a rewritten history.
+  regression: >-
+    None automated. Nothing in the gate reads a commit message, and no checker compares a
+    stated digest with the file it names -- check_rung_figures says so in its own
+    docstring, which is where D-439's third instance was left unread for the same reason.
+    Binding the digest in code is bead think-4iej's, which pins it once in
+    cases/n11_fractional_certificate/minimal_verify.py; until then the check is
+    `sha256sum packing/cases/n11_fractional_certificate/certificate.json` against the
+    evidence entry.
+  status: fixed
+  recorded_in: packing/frontier/evidence.yaml

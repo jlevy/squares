@@ -69,7 +69,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 
 | Result | `n` | [`V`](epistemics.md#verification) | [`C`](epistemics.md#confirmation) | [`S`](epistemics.md#significance-and-novelty) | [Novelty](epistemics.md#significance-and-novelty) | What it establishes |
 | --- | --- | --- | --- | --- | --- | --- |
-| [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C4` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
+| [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 99/25, by a first-party weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from a first-party weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
 | [T-020](packing/frontier/RESULTS.md) | 19, 20, 21 | `V4` | `C4` | `S4` | `apparently-novel` | s(19) >= 24/5, s(20) >= 24/5 and s(21) >= 24/5, from a first-party weighted fractional unavoidable-set certificate at container side 24/5 = 4.80. |
@@ -256,12 +256,15 @@ case or experiment separately.
 | [BC-151 — Independent Review of the 4.5058 Adoption Packet](docs/project/reviews/review-2026-09-03-bc151-4-5058-adoption-independent-review.md) | dated review record | record | retained | — |
 | [BC-154 — independent review of the W9 disposition for D-044 and D-046](docs/project/reviews/review-2026-09-03-bc154-w9-disposition-d044-d046.md) | dated review record | record | retained | — |
 | [BC-158 — factual review of the H-060 / exp-058 records against their sources](docs/project/reviews/review-2026-09-03-bc158-h060-record-factual-review.md) | dated review record | record | retained | — |
+| [Adversarial review of PR 78: the `s(11) ≥ 381/100` claim](docs/project/reviews/review-2026-09-04-pr78-s11-adversarial.md) | dated review record | record | retained | — |
 | [Review 2026-09-04 — independent verification of T-017 (s(12) ≥ 77/20)](docs/project/reviews/review-2026-09-04-t017-independent-verification.md) | dated review record | record | retained | — |
 | [Review 2026-09-04 — Hostile Third-Party Check of the s(11) ≥ 19/5 Package (T-018)](docs/project/reviews/review-2026-09-04-t018-thirdparty-package.md) | dated review record | record | retained | — |
 | [Review 2026-09-04 — PR #80, the Stacked Hardening of the s(11) ≥ 381/100 Claim](docs/project/reviews/review-2026-09-04-pr80-stacked-hardening.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
-| [Third-Party Check of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
+| [Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
+| [One-minute proof that `s(11) ≥ 381/100`](packing/cases/n11_fractional_certificate/t-018-proof.md) | component scope and use | record | retained | — |
+| [Proof Card: s(11) ≥ 381/100](packing/cases/n11_fractional_certificate/PROOF-CARD.md) | component scope and use | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
@@ -427,10 +430,12 @@ unavoidable-set certificate generator — left a trace in this branch’s histor
 verified-upper-bound promotions and `T-009`’s raise to `C4`) and Lane D (the
 `think-ldq2` W9 handoff) do not appear in it.
 
-Lane A retained four results, all `V4`/`C4`, across seven distinct cases: `T-018` raises
-`s(11) >= 381/100`, the smallest open case moving for the first time since Stromquist
-stated `2 + 4/√5` in 2003; `T-017` raises `s(12) >= 99/25`, the first bound specific to
-`n = 12` in the retained corpus, climbed across eight rungs from
+Lane A retained four results across seven distinct cases, all `V4` and all `C4` when the
+block closed, `T-018` having since been raised to `C5` by a mapped review artifact:
+`T-018` raises `s(11) >= 381/100`, the smallest open case moving for the first time
+located in the public record since Stromquist stated `2 + 4/√5` in 2003; `T-017` raises
+`s(12) >= 99/25`, the first bound specific to `n = 12` in the retained corpus, climbed
+across eight rungs from
 [H-061](packing/campaign/hypotheses/H-061-n12-first-party-fractional-certificate.md)’s
 fixed `19/5` threshold; `T-019` raises `s(17)`, `s(18) >= 459/100`, displacing
 Massaccesi’s published `22529/5000`; and `T-020` raises `s(19)`, `s(20)`,
@@ -3151,14 +3156,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 449 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 450 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 93 | asserted something false about the mathematics |
 | validity | 117 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 166 | recorded something its own evidence contradicts |
+| bookkeeping | 167 | recorded something its own evidence contradicts |
 | robustness | 57 | did not finish, or finished only by luck |
 | performance | 16 | worked, but cost far more than it should |
 
@@ -3168,7 +3173,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-five defects in 449, and no soundness defect
+**The automated gate has caught sixty-five defects in 450, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3634,14 +3639,15 @@ agrees, and new components inheriting the perimeter—that apply to code not yet
 ## Where This Stands
 
 **As of 2026-09-04 the project’s largest live result is the fractional lower-bound lane,
-and it is not the cartography spine.** A weighted fractional unavoidable-set certificate
-— Burns’s and Massaccesi’s theorem, this project’s instances and generator — moved seven
-registered cases in one day.
-`s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first movement of that
-bound since Stromquist stated `2 + 4/sqrt(5)` in 2003 and the only S5 result in the
-register, `n = 11` being the smallest open case.
-`s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound ever proved
-about twelve squares rather than inherited from eleven.
+and it is not the cartography spine.** Its weighted-resource lineage runs through Göbel,
+Kearney–Shiu, Nagamochi and Bentz; the recent pure-atomic rational direction-net
+architecture follows Burns, and the LP instance and parameter line follows Massaccesi.
+This project’s instances and generator moved seven registered cases in one day.
+`s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first public movement of
+that bound located by the recorded search after Stromquist stated `2 + 4/sqrt(5)` in
+2003 and the only S5 result in the register, `n = 11` being the smallest open case.
+`s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound located that
+was proved about twelve squares rather than inherited from eleven.
 `s(17) >= 459/100`, and `n = 18` and `n = 19` at the same side without a monotonicity
 step, is [T-019](packing/frontier/RESULTS.md) and displaces Massaccesi’s published
 `4.5058` by `0.0842`. `s(19)`, `s(20)` and `s(21) >= 24/5` is
@@ -3651,11 +3657,14 @@ evening and displaces Nagamochi’s 2005 closed form at the other two — `1 + s
 single-case movement in the register, and twenty and twenty-one had never carried a
 bound of their own at all.
 Between them those two are the only values in print this project has replaced.
-All four stand at V4/C4: each was decided twice from frozen bytes by an exact event-cell
-sweep and by an interval branch and bound with directed rounding, methods that share no
-modelling assumption and fail differently, agreeing on the least covered mass to the
-digit. None reaches C5, because no one outside the project has reviewed any of them; a
-self-contained third-party package ships at
+All four stand at V4: each was decided twice from frozen bytes by an exact event-cell
+sweep and by an interval branch and bound with directed rounding — two routes that share
+the certificate and the closed-form conditions but decide Condition 5 by different
+methods, which fail differently — agreeing on the least covered mass to the digit.
+Three of them stand at C4, and T-018 at C5 — the rung epistemics.md defines as
+review-ready, a mapped and non-superseded review artifact, which the adversarial review
+of PR 78 supplies. None of the four has been read by anyone outside the project, which
+that rung does not ask for; a self-contained package for third-party checking ships at
 `packing/cases/n11_fractional_certificate/thirdparty/` so that a stranger can decide the
 `19/5` rung without trusting this repository.
 

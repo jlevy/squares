@@ -2,7 +2,7 @@
 
 # Defect log
 
-449 defects recorded across the packing toolchain.
+450 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
-| `review` | 271 | a human or agent reading the work against a checklist |
+| `review` | 272 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
 | `inspection` | 50 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 65 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 65 of 449, and none of the 93 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 65 of 450, and none of the 93 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 65 of 449, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 9 |
-| record | 139 |
+| record | 140 |
 | tooling | 159 |
 | docs | 108 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 65 of 449, and none of
 | --- | ---: |
 | soundness | 93 |
 | validity | 117 |
-| bookkeeping | 166 |
+| bookkeeping | 167 |
 | robustness | 57 |
 | performance | 16 |
 
@@ -684,6 +684,7 @@ This is the actionable list.
 | [D-447](packing/src/sqpack/fractional/certificate.py) | 2026-09-04 | record | soundness | conservative | `review` | low | fixed | The certificate ceiling was written up as a method-wide impossibility |
 | [D-448](packing/frontier/results.yaml) | 2026-09-04 | record | bookkeeping |  | `review` | low | fixed | Two comparison factors in T-017's prose were wrong by four times |
 | [D-449](packing/src/sqpack/fractional/sweep.py) | 2026-09-04 | verifier | validity | neutral | `review` | low | fixed | The exact sweep's reported witness centre lies outside the admissible domain on most directions |
+| [D-450](packing/frontier/evidence.yaml) | 2026-09-05 | record | bookkeeping |  | `review` | high | fixed | The introducing commit named the wrong SHA-256 for the retained 381/100 certificate |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
