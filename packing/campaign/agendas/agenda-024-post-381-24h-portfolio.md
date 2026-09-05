@@ -477,6 +477,7 @@ The first post-freeze sibling check found one noninvalidating change:
 | Observed | Ref movement | Changed paths | Disposition |
 | --- | --- | --- | --- |
 | 2026-09-05 after BC-219 | PR #87: `26709263f740f3d9aece654e0272dae3c168d18d` to `3c6c5e7fc0c1662a57a1a3d06246a3a5e0730b89` | `development.md`, `packing/devtools/gate-budgets.yaml`, `packing/tests/test_module_boundaries.py` | No agenda, BC, H, exp, exploration, manager-output, or named-input collision. Preserve the frozen BC-219 row; apply the new validation-budget behavior only after PR #87 reaches `main`. |
+| 2026-09-05 launch-spike close | PR #87: `3c6c5e7fc0c1662a57a1a3d06246a3a5e0730b89` to `b9d357db7a0f46ff8e0cd5bcfcb157686003b8a2` | `packing/src/sqpack/cli/validate.py`, `packing/tests/test_validation_cli.py` | No namespace, manager-output, research-input, or scientific-verdict collision. The change sizes the quick test lane to available CPUs; keep this branch’s measured push receipt and adopt the runner behavior only when PR #87 reaches `main`. |
 
 ## BC-219 launch snapshot
 
