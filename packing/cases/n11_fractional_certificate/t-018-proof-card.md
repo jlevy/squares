@@ -52,14 +52,6 @@ s(11) >= 381/100 = 3.81   eleven unit squares do not fit in a square of side 3.8
 
 The bytes on `main`:
 [certificate.json](https://github.com/jlevy/squares/blob/main/packing/cases/n11_fractional_certificate/certificate.json).
-The same claim in 279 characters, wrapped here and one line in fact:
-
-```text
-s(11) >= 3.81: eleven unit squares do not fit in a 3.81 square. Cert: 1121 weighted
-points, total 434547/40000 < 11; every 0.9977-square at one of 181 net angles inside
-covers >= 4001/4000. github.com/jlevy/squares, certificate.json sha256 b121edbd044b,
-python3 minimal_verify.py
-```
 
 ## Verify it in one command
 
