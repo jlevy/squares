@@ -57,10 +57,10 @@ $s(11)$ is the smallest case still open.
 Trump’s 1979 packing shows $s(11) \le {{BEST_PACKING_TEX}}$.[^trump] This page proves
 $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
 
-The proof described here covers a bound of $s({{N}}) \ge {{HEADLINE_L_FRAC}}$. For
+The proof described here covers a bound of $s({{N}}) \ge {{HEADLINE_L_FRAC}}$. (For
 illustration, some of the figures below show a looser bound
 $s({{N}}) \ge {{DEFAULT_L_FRAC}}$, and a toggle on the figure lets you select the
-tighter precision so you can compare the results.
+tighter precision so you can compare the results.)
 
 <figure>
   <div class="fig-head">
