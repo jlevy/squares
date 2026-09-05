@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 464
+count: 465
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -15088,3 +15088,44 @@ defects:
     would pin the arithmetic rather than what is drawn.
   status: fixed
   recorded_in: packing/devtools/templates/explainer-shell.html
+- id: D-465
+  title: The gate counted its own render output against the mutation-snapshot cap
+  date: '2026-09-05'
+  layer: tooling
+  class: bookkeeping
+  detected_by: gate
+  latent_for: >-
+    since the explainer's renderer first wrote into `packing/site/`; invisible until the
+    tree grew enough for four megabytes to be the difference.
+  severity: low
+  what: >-
+    `snapshot_source_bytes` walks the working tree rather than the git tree, and
+    `packing/site/` was not pruned. That directory is where the explainer's renderer
+    writes the page, the published Markdown and four copies of the composite on every
+    run; it is gitignored, so no clone has ever contained it and no control can name it.
+    On 2026-09-05 the snapshot measured 71,086,910 bytes against the 67,108,864 cap, and
+    `site` alone was 4,377,699 -- more than the whole 3,978,046-byte breach.
+  consequence: >-
+    The push tier failed locally on a tree whose committed content was under the cap, so
+    the failure was a fact about the checkout rather than about the change. It is D-422's
+    shape one directory over: that entry was 12 MB of bytecode the gate wrote into the
+    tree it was measuring, and this is 4 MB of render output written the same way. CI
+    never saw it, because a fresh clone has no `site/` and the validation job does not
+    render the page -- so the gate that a contributor runs and the gate that decides a
+    merge disagreed.
+  fix: >-
+    Fixed on 2026-09-05 by pruning `packing/site/`, with the measurement recorded beside
+    the exclusion. The link-preview card is pruned in the same change on the grounds its
+    three siblings already carry: a generated export of the same drawing, with the same
+    source receipt the same `--check` replays, named by no control. The cap was not
+    raised, which is what the note above `SNAPSHOT_MAX_BYTES` says to consider first --
+    a higher number would have postponed this rather than fixed it.
+  regression: >-
+    `test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots` is the
+    check, and it is the one that caught this. What it cannot hold is the headroom: the
+    snapshot is now 66,490,716 of 67,108,864, 99.1% of the cap, against a comment on
+    that constant saying a guard with 2% headroom fires for the wrong reason. The next
+    committed artifact of any size trips it. Carried as think-t1lk with the five largest
+    counted files measured, rather than answered here by raising the number again.
+  status: fixed
+  recorded_in: packing/devtools/run_negative_controls.py
