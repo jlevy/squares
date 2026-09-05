@@ -34,6 +34,7 @@ from sqpack.fractional.cutting import (
     screened_separation,
     select_site_orbits,
     symmetric_placements,
+    tidy_family,
     warm_start,
 )
 
@@ -207,3 +208,24 @@ def test_screened_separation_certifies_the_same_maximum_as_the_full_scan() -> No
         for point in orbit
     )
     assert found.decided >= len(found.chosen)
+
+
+def test_tidy_family_rounds_weights_down_and_keeps_the_family_feasible() -> None:
+    ugly = Fraction(1, 3)
+    family = CeilingCertificate(
+        2,
+        TWO,
+        Fraction(1),
+        COARSE,
+        (
+            upright(Fraction(1, 2), Fraction(1, 2), ugly, Fraction(1)),
+            upright(Fraction(1), Fraction(1), 1 - ugly, Fraction(1)),
+        ),
+    )
+    tidy = tidy_family(family, 1000)
+    assert [p.weight for p in tidy.placements] == [Fraction(333, 1000), Fraction(666, 1000)]
+    assert tidy.total_weight <= family.total_weight
+    assert family.total_weight - tidy.total_weight <= Fraction(2, 1000)
+    assert maximum_depth(tidy, container_vertices(tidy, arrangement_lines(tidy)))[0] <= 1
+    with pytest.raises(ValueError, match="positive"):
+        tidy_family(family, 0)

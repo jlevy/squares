@@ -33,6 +33,7 @@ and nothing reported here comes from a sampled depth.
 from __future__ import annotations
 
 import json
+import math
 import time
 from dataclasses import dataclass, field
 from fractions import Fraction
@@ -821,6 +822,36 @@ def cutting_plane_loop(
     return log
 
 
+def tidy_family(family: CeilingCertificate, denominator: int = 10**9) -> CeilingCertificate:
+    """The same family with every weight rounded *down* to a multiple of ``1/denominator``.
+
+    Scaling by the reciprocal of an exact maximum depth leaves weights whose
+    denominators are whatever that depth's was, which after a rationalised dual
+    can run to hundreds of digits. Rounding every weight down keeps the family a
+    fractional packing -- depth is monotone in the weights, so a depth at most 1
+    stays at most 1 -- and costs at most one quantum per placement of total.
+    """
+
+    if denominator < 1:
+        raise ValueError("the denominator must be positive")
+    return CeilingCertificate(
+        family.n,
+        family.outer_side,
+        family.square_side,
+        family.half_tangents,
+        tuple(
+            Placement(
+                p.half_tangent,
+                p.centre_x,
+                p.centre_y,
+                Fraction(math.floor(p.weight * denominator), denominator),
+                p.side,
+            )
+            for p in family.placements
+        ),
+    )
+
+
 def family_record(
     family: CeilingCertificate, provenance: dict[str, Any] | None = None
 ) -> dict[str, Any]:
@@ -964,5 +995,6 @@ __all__ = [
     "snap_centre",
     "support_entries",
     "symmetric_placements",
+    "tidy_family",
     "warm_start",
 ]
