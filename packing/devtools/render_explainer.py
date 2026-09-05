@@ -40,7 +40,7 @@ from dataclasses import dataclass
 from fractions import Fraction
 from math import isqrt
 from pathlib import Path
-from typing import TypedDict
+from typing import NamedTuple, TypedDict
 
 from strif import atomic_output_file
 
@@ -1108,7 +1108,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
         "N_RESULTS": str(registered_results()),
         "N_STARRED": str(starred_lower_bounds()),
-        "SOURCE_URL": repo_file(MARKDOWN),
+        "SOURCE_URL": MARKDOWN_OUTPUT.name,
         "REPO_URL": REPO_URL,
         "PUBLISHED": PUBLICATION_DATE,
         "EDITION": PUBLICATION_EDITION,
@@ -1339,22 +1339,161 @@ def kerned_math_spans(source: str) -> str:
     )
 
 
-def markdown_body(
+#: Where the published Markdown is written, beside the page it is the source of.
+MARKDOWN_OUTPUT = PACKING / "site" / "explainer.md"
+
+
+def _balanced(source: str, start: int, tag: str) -> int:
+    """The index just past the `</tag>` that closes the `<tag` opening at `start`."""
+    depth = 0
+    position = start
+    opening = f"<{tag}"
+    closing = f"</{tag}>"
+    while position < len(source):
+        next_open = source.find(opening, position)
+        next_close = source.find(closing, position)
+        if next_close == -1:
+            raise SystemExit(f"{MARKDOWN.name}: an unclosed <{tag}> reached the publisher")
+        if next_open != -1 and next_open < next_close:
+            depth += 1
+            position = next_open + len(opening)
+            continue
+        depth -= 1
+        position = next_close + len(closing)
+        if depth == 0:
+            return position
+    raise SystemExit(f"{MARKDOWN.name}: an unclosed <{tag}> reached the publisher")
+
+
+_TEX_SPAN = re.compile(r'<span class="tex">(.*?)</span>', re.DOTALL)
+_SCREEN_ONLY = re.compile(r'<span class="screen-only">.*?</span>', re.DOTALL)
+_ANCHOR = re.compile(r'<a\s[^>]*?href="([^"]*)"[^>]*>(.*?)</a>', re.DOTALL)
+_IMG = re.compile(r"<img\s[^>]*>")
+_ATTRIBUTE = re.compile(r'(\w[\w-]*)="([^"]*)"')
+_SIMPLE_TAG = re.compile(r"</?(?:strong|b|em|i|code|span|br)\b[^>]*>")
+
+
+def _inline_markdown(fragment: str) -> str:
+    """Inline HTML the article uses inside a caption, written as Markdown instead."""
+    fragment = _SCREEN_ONLY.sub("", fragment)
+    fragment = _TEX_SPAN.sub(lambda m: f"${m.group(1).strip()}$", fragment)
+    fragment = _ANCHOR.sub(
+        lambda m: f"[{_inline_markdown(m.group(2))}]({m.group(1)})", fragment
+    )
+    for opening, closing, mark in (("<strong>", "</strong>", "**"), ("<b>", "</b>", "**")):
+        fragment = fragment.replace(opening, mark).replace(closing, mark)
+    for opening, closing, mark in (("<em>", "</em>", "*"), ("<i>", "</i>", "*")):
+        fragment = fragment.replace(opening, mark).replace(closing, mark)
+    fragment = fragment.replace("<code>", "`").replace("</code>", "`")
+    fragment = _SIMPLE_TAG.sub("", fragment)
+    return re.sub(r"[ \t]*\n[ \t]*", " ", fragment).strip()
+
+
+def _image_markdown(tag: str) -> str:
+    attributes = dict(_ATTRIBUTE.findall(tag))
+    return f"![{attributes.get('alt', '').strip()}]({attributes.get('src', '')})"
+
+
+def published_markdown(source: str, *, default_slug: str) -> str:
+    """The article as a document, for a reader or a model rather than for a browser.
+
+    The page and this file say the same things; they differ in what they can do. A
+    canvas the reader drags, a panel of controls, a chooser between certificates and a
+    drawn diagram are all apparatus, and none of it survives as text. What the figures
+    mean is in their captions, so a figure here is its caption, plus its image where the
+    image is a file rather than markup.
+
+    Two reductions beyond that. The page carries one copy of every figure per retained
+    certificate and switches between them, which as text would read as the same figure
+    stated twice; only the certificate the page opens on is kept. And the chip row is
+    navigation, whose one purpose is to offer this file.
+    """
+    kept = f'<div class="cert-figure" data-cert="{default_slug}"'
+    while (start := source.find('<div class="cert-figure"')) != -1:
+        end = _balanced(source, start, "div")
+        block = source[start:end]
+        if not block.startswith(kept):
+            source = source[:start] + source[end:]
+            continue
+        inner = block[block.index(">") + 1 : -len("</div>")]
+        source = source[:start] + inner + source[end:]
+
+    for opening in ('<div class="doc-links', '<div class="fig-choose"'):
+        while (start := source.find(opening)) != -1:
+            source = source[:start] + source[_balanced(source, start, "div") :]
+
+    out: list[str] = []
+    position = 0
+    while (start := source.find("<figure", position)) != -1:
+        end = _balanced(source, start, "figure")
+        block = source[start:end]
+        out.append(source[position:start])
+        images = [_image_markdown(tag) for tag in _IMG.findall(block)]
+        caption = re.search(r"<figcaption>(.*?)</figcaption>", block, re.DOTALL)
+        parts = [*images]
+        if caption:
+            parts.append(_inline_markdown(caption.group(1)))
+        out.append("\n\n".join(part for part in parts if part))
+        position = end
+    out.append(source[position:])
+    source = "".join(out)
+
+    source = _IMG.sub(lambda m: _image_markdown(m.group(0)), source)
+
+    # The credits are one span per line inside a div. As a list they survive the
+    # formatter, which would otherwise run four separate facts into one paragraph.
+    def _credits(match: re.Match[str]) -> str:
+        items = re.findall(r"<span>(.*?)</span>", match.group(1), re.DOTALL)
+        return "\n".join(f"- {_inline_markdown(item)}" for item in items)
+
+    source = re.sub(r'<div class="credits">(.*?)</div>', _credits, source, flags=re.DOTALL)
+    # Every remaining div is a named block whose name is a style. The content is the
+    # document; the box around it is the page's.
+    source = re.sub(r"</?div\b[^>]*>", "", source)
+    source = re.sub(r"</?p\b[^>]*>", "", source)
+    source = _inline_markdown_document(source)
+    source = re.sub(r"\n{3,}", "\n\n", source).strip() + "\n"
+
+    # Formatted by the same tool that owns every other Markdown file here, so the
+    # published document wraps the way the repository's prose does. It has to run in
+    # process: the Makefile drives the Rust build through `uvx`, and a network fetch
+    # inside the page build would make the deploy depend on an index being reachable.
+    # `flowmark` is the Python build of the same formatter, pinned in the dev group.
+    from flowmark import reformat_text  # noqa: PLC0415
+
+    return reformat_text(source, semantic=True, cleanups=True)
+
+
+def _inline_markdown_document(source: str) -> str:
+    """`_inline_markdown` over a whole document, line structure intact.
+
+    The caption form collapses its input to one line, which is right for a caption and
+    wrong for prose, so the paragraph shape is preserved by running the conversion
+    within each line rather than over the whole string.
+    """
+    return "\n".join(
+        _inline_markdown(line) if line.strip() else "" for line in source.split("\n")
+    )
+
+
+def markdown_source(
     per_certificate: list[dict[str, str]],
     headline_values: dict[str, str],
     shared: dict[str, str],
     *,
     claimed: bool,
 ) -> str:
-    """The page body: the Markdown source assembled, then rendered once by kpress.
+    """The article's Markdown with every value filled in: what the page is made of.
 
-    Order matters twice. The figures are stamped before anything is
-    substituted, so each copy is filled with its own certificate's values, and
-    the pass that follows fills the prose once, with the headline certificate's
-    values and the shared ones. And every placeholder is
-    substituted before the Markdown is parsed, because markdown-it
-    percent-encodes a link destination: `[computed]({{RENDERER_URL}})` parsed
-    first would leave `href="%7B%7B..."` behind.
+    Split out from the render because it is an artifact in its own right, not just an
+    intermediate. The template is not publishable -- it carries `{{PLACEHOLDERS}}`, so
+    it states no bound and names no number -- and this is the same document with the
+    certificate's own values in it.
+
+    The maths is left unkerned here. `kerned_math_spans` inserts `\\mkern1mu` so KaTeX
+    does not set an italic function name against its parenthesis, which is a fact about
+    typesetting and not about the mathematics; a reader, or a model, reading this file
+    should see `s(11)`.
     """
     source = MARKDOWN.read_text(encoding="utf-8")
     if not claimed:
@@ -1370,16 +1509,30 @@ def markdown_body(
     source = fill(
         _HTML_COMMENT.sub("", source), {**headline_values, **shared}, where=MARKDOWN.name
     )
-    source = kerned_math_spans(source)
     left = {m.group(1) for m in re.finditer(r"\{\{([A-Z_]+)\}\}", source)}
     if left:
         raise SystemExit(f"{MARKDOWN.name}: a substituted value carried {sorted(left)} into it")
+    return source
+
+
+def markdown_body(source: str, *, title: str) -> str:
+    """The page body: the Markdown source assembled, then rendered once by kpress.
+
+    Order matters twice. The figures are stamped before anything is
+    substituted, so each copy is filled with its own certificate's values, and
+    the pass that follows fills the prose once, with the headline certificate's
+    values and the shared ones. And every placeholder is
+    substituted before the Markdown is parsed, because markdown-it
+    percent-encodes a link destination: `[computed]({{RENDERER_URL}})` parsed
+    first would leave `href="%7B%7B..."` behind.
+    """
+    source = kerned_math_spans(source)
 
     from kpress.format.markdown import parse_markdown  # noqa: PLC0415
 
     document = parse_markdown(
         source,
-        title=f"s({shared['N']}) >= {shared['HEADLINE_L_FRAC']}",
+        title=title,
         trust_mode="trusted",
         math="auto",
     )
@@ -1391,7 +1544,14 @@ def markdown_body(
     return document.html
 
 
-def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> str:
+class Render(NamedTuple):
+    """What one render produces: the page, and the document it is made of."""
+
+    page: str
+    markdown: str
+
+
+def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> Render:
     """One page for every certificate given, the first shown by default."""
     if not certificate_paths:
         raise SystemExit("no certificate to render")
@@ -1414,7 +1574,8 @@ def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> 
         print("a certificate lacks a claim document or a timing; the page drops that section")
     static = kpress_static()
     headline_values = per_certificate[facts.index(headline)]
-    prose = markdown_body(per_certificate, headline_values, shared, claimed=claimed)
+    source = markdown_source(per_certificate, headline_values, shared, claimed=claimed)
+    prose = markdown_body(source, title=f"s({shared['N']}) >= {shared['HEADLINE_L_FRAC']}")
     # The sprite leads the body the way kpress's own renderer places it: the copy
     # button on a code block draws its glyph from a fragment of it.
     body = f"{icon_sprite(static)}\n{prose}"
@@ -1423,7 +1584,7 @@ def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> 
     )
     page = fill(shell, shell_substitutions(static, shared, body), where=TEMPLATE.name)
     assert_self_contained(page)
-    return page
+    return Render(page=page, markdown=published_markdown(source, default_slug=slug(facts[0])))
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -1456,23 +1617,30 @@ def main(argv: Sequence[str] | None = None) -> int:
     certificates = (
         tuple(path.resolve() for path in args.certificate) if args.certificate else WALKTHROUGH
     )
-    page = render(certificates, full_sweep=args.verify_condition_5)
+    rendered = render(certificates, full_sweep=args.verify_condition_5)
+    document = output.parent / MARKDOWN_OUTPUT.name
+    written = ((output, rendered.page), (document, rendered.markdown))
     if args.check:
-        if not output.is_file():
-            print(f"{label} has not been rendered", file=sys.stderr)
-            return 1
-        if output.read_bytes() != page.encode("utf-8"):
-            print(f"{label} is stale; rerender it", file=sys.stderr)
-            return 1
+        for path, content in written:
+            name = path.relative_to(REPO).as_posix() if path.is_relative_to(REPO) else str(path)
+            if not path.is_file():
+                print(f"{name} has not been rendered", file=sys.stderr)
+                return 1
+            if path.read_bytes() != content.encode("utf-8"):
+                print(f"{name} is stale; rerender it", file=sys.stderr)
+                return 1
         print(f"{label} is current")
         return 0
 
     output.parent.mkdir(parents=True, exist_ok=True)
-    with atomic_output_file(output) as temporary:
-        temporary.write_text(page, encoding="utf-8")
+    for path, content in written:
+        with atomic_output_file(path) as temporary:
+            temporary.write_text(content, encoding="utf-8")
     for asset in COMPOSITE_ASSETS:
         shutil.copyfile(asset, output.parent / asset.name)
-    print(f"wrote {label} ({len(page) / 1024:.0f} KB)")
+    print(f"wrote {label} ({len(rendered.page) / 1024:.0f} KB)")
+    name = document.relative_to(REPO).as_posix()
+    print(f"wrote {name} ({len(rendered.markdown) / 1024:.0f} KB)")
     return 0
 
 

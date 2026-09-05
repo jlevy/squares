@@ -84,9 +84,9 @@ $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
 
 $s(11)$ is the smallest case still open.
 Trump’s 1979 packing shows $s(11) \le {{BEST_PACKING_TEX}}$.[^trump] Here we prove
-$s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$. The project proves two bounds, and
-the figures below open on the looser one, $s({{N}}) \ge {{DEFAULT_L_FRAC}}$, whose
-smaller numbers are easier to follow.
+$s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$. The project proves two bounds.
+(Some of the figures below also show the looser one, $s({{N}}) \ge {{DEFAULT_L_FRAC}}$,
+whose smaller numbers make the illustration simpler.)
 <span class="screen-only">The chooser under each figure switches every figure between
 the two at once.</span>
 

@@ -242,10 +242,16 @@ body {
   letter-spacing: var(--kpress-caps-spacing);
   padding: 0.05rem 0.4rem;
 }
-/* `.kpress-figcaption` carries the voice; a bordered figure needs the rule and
-   the padding, which the component leaves to the container. */
+/* No box around a figure, and no rule under it. kpress draws both, and on a page
+   this dense they add a grid of grey the content did not ask for; the figures are
+   already set apart by their own white space and by the caption's voice.
+
+   The padding stays. It was there to hold the caption off the border, and with the
+   border gone it does the work the border was doing: the caption sits inset from the
+   measure, so a reader can see where the figure ends and the prose resumes. */
+.cert-page .kpress-figure { border: 0; }
 .cert-page .kpress-figcaption {
-  border-block-start: 1px solid var(--kpress-doc-border);
+  border-block-start: 0;
   margin-block-start: 0;
   padding: 0.85rem 1.1rem 1rem;
 }
