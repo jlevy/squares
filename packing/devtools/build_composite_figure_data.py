@@ -19,6 +19,8 @@ import json
 import math
 import sys
 from collections.abc import Sequence
+from decimal import ROUND_DOWN, Decimal
+from functools import cache
 from pathlib import Path
 
 import sympy as sp
@@ -33,6 +35,7 @@ from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
+EVIDENCE = FRONTIER / "evidence.yaml"
 RECORD = ROOT / "atlas/known-best/composite-figure.json"
 GENERATOR = "python -m devtools.build_composite_figure_data"
 CONTRACT = "packing.squares:CompositeFigure/v1"
@@ -73,10 +76,45 @@ def _degree_from_form(exact_form: str) -> tuple[int, str]:
     return int(sp.degree(polynomial)), str(sp.expand(polynomial)) + " = 0"
 
 
+@cache
+def _first_party_lower_bounds() -> frozenset[str]:
+    """Evidence ids for a lower bound this project proved and believes to be new.
+
+    The star is a claim about provenance, so it is read from the evidence register's
+    own typed fields rather than inferred from the numbers: a first-party lower bound
+    whose novelty the register scores as new. Deciding it by comparing our value with
+    someone else's would be D-385's mistake again, reading from arithmetic what the
+    record already states.
+    """
+    register = safe_load(EVIDENCE.read_text(encoding="utf-8"))["evidence"]
+    return frozenset(
+        str(entry["id"])
+        for entry in register
+        if entry.get("claim") == "lower-bound"
+        and entry.get("performed_by") == "repository"
+        and entry.get("novelty") in {"apparently-novel", "confirmed-novel"}
+    )
+
+
 def _side_text(value: str) -> str:
     """Six significant decimals, trailing zeros and point removed."""
     number = sp.Float(value, 20)
     text = f"{float(number):.6f}".rstrip("0").rstrip(".")
+    return text or "0"
+
+
+def _lower_text(value: str) -> str:
+    """Six decimals of a lower bound, cut off rather than rounded.
+
+    A displayed lower bound must stay true as written, and the stored value is a
+    12-digit display literal rounded to nearest, so it sits above the bound it
+    stands for about half the time. Rounding again would print a number the record
+    does not support: `1 + sqrt(17)` is stored as 5.12310562562 and rounds to
+    5.123106, which is larger than the bound. Truncating toward zero cannot.
+    """
+    exact = Decimal(str(sp.Float(value, 30)))
+    number = exact.quantize(Decimal("1.000000"), rounding=ROUND_DOWN)
+    text = format(number, "f").rstrip("0").rstrip(".")
     return text or "0"
 
 
@@ -186,8 +224,22 @@ def _entry(n: int) -> dict:
         )
 
     relation = "equality" if status == "proved" else "upper-bound"
+    verified = packing["verified_lower_bound"]
+    lower_value = str(verified["value"])
     return {
         "n": n,
+        "lower": {
+            "value": lower_value,
+            # A proved case already reads `s(n) = ...`, so a second line would say the
+            # same thing twice. `status` decides it, never a comparison of the two
+            # stored numbers: at n = 5 and n = 10 the lower bound is stored to more
+            # digits than the upper and compares larger.
+            "shown": status != "proved",
+            "display": f"s({n}) \u2265 {_lower_text(lower_value)}",
+            "first_proved_here": bool(set(verified["evidence"]) & _first_party_lower_bounds()),
+            "evidence": sorted(str(item) for item in verified["evidence"]),
+            "provenance": "frontier",
+        },
         "side": {
             "value": value,
             "relation": relation,
@@ -233,6 +285,9 @@ def build_record() -> dict:
                 ),
                 "rigidity_established": sum(
                     1 for e in entries if e["rigidity"]["state"] == "established"
+                ),
+                "lower_bound_first_proved_here": sum(
+                    1 for e in entries if e["lower"]["first_proved_here"]
                 ),
                 # Counted separately rather than folded in, which is the whole of D-385:
                 # a source's word and our own argument are two facts, not one.

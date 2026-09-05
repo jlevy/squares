@@ -38,7 +38,7 @@ properties:
         properties:
           path: {const: atlas/known-best/known-best-1-100.svg}
           width: {const: 2400}
-          height: {const: 2676}
+          height: {const: 2896}
       png_preview:
         type: object
         additionalProperties: false
@@ -47,7 +47,7 @@ properties:
           path: {const: atlas/known-best/known-best-1-100.png}
           derived_from: {const: atlas/known-best/known-best-1-100.svg}
           width: {const: 2400}
-          height: {const: 2676}
+          height: {const: 2896}
   entries:
     type: array
     minItems: 100

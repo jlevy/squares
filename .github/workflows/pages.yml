@@ -13,12 +13,12 @@ name: Certificate page
     branches: [main]
     paths:
       - packing/cases/n11_fractional_certificate/**
-      - packing/devtools/render_certificate_page.py
+      - packing/devtools/render_explainer.py
       - packing/devtools/measure_net_coarsening.py
       - packing/src/sqpack/**
       - packing/atlas/known-best/rendering/n-011.svg
-      - packing/devtools/templates/certificate_page.html
-      - packing/devtools/templates/certificate_page.md
+      - packing/devtools/templates/explainer-shell.html
+      - packing/devtools/templates/explainer-article.md
       - packing/atlas/known-best/known-best-1-100.png
       - packing/atlas/known-best/known-best-1-100.pdf
       - vendor/kpress
@@ -30,12 +30,12 @@ name: Certificate page
   pull_request:
     paths:
       - packing/cases/n11_fractional_certificate/**
-      - packing/devtools/render_certificate_page.py
+      - packing/devtools/render_explainer.py
       - packing/devtools/measure_net_coarsening.py
       - packing/src/sqpack/**
       - packing/atlas/known-best/rendering/n-011.svg
-      - packing/devtools/templates/certificate_page.html
-      - packing/devtools/templates/certificate_page.md
+      - packing/devtools/templates/explainer-shell.html
+      - packing/devtools/templates/explainer-article.md
       - packing/atlas/known-best/known-best-1-100.png
       - packing/atlas/known-best/known-best-1-100.pdf
       - vendor/kpress
@@ -79,7 +79,7 @@ jobs:
       # published with an explanation of a bound it does not carry. Condition 5 is
       # a sweep per direction and the case replay gate owns it.
       - name: Render the page from the retained certificate
-        run: uv run --frozen --group dev python -m devtools.render_certificate_page
+        run: uv run --frozen --group dev python -m devtools.render_explainer
 
       # The page is not checked in, so this is where a render that did not reproduce
       # itself byte for byte would show: a second render has to match the first. The
@@ -88,7 +88,7 @@ jobs:
       # self-containment check is the renderer's, not a grep here.
       - name: Check the render is deterministic and self-contained
         run: |
-          uv run --frozen --group dev python -m devtools.render_certificate_page --check
+          uv run --frozen --group dev python -m devtools.render_explainer --check
           test -s site/index.html
           echo "one file, $(du -h site/index.html | cut -f1)"
 

@@ -22,11 +22,23 @@
    it.
    ============================================================ */
 
-/* Links take the page's accent, the teal its tags and switches use, rather
-   than kpress's separate link blue. The token is set on body so both themes
-   inherit it and so the footnote popovers, which kpress appends to body,
-   get it too; hover states and footnote marks follow. */
-body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(--kpress-doc-accent); }
+/* One accent, everywhere. kpress ships a separate link blue and sets it on
+   `:root`, on `.kpress`, and again per theme and palette on attribute selectors,
+   all of which outrank `body`; the popovers it appends carry `.kpress-tooltip`
+   and their own resolved-theme attribute. Anything reading the token got the
+   blue, which is why a footnote popover drew a blue rule down its edge while
+   the text beside it was teal. Redeclare the token in the same places kpress
+   does, so the page's accent is what every consumer of it resolves. */
+:root,
+.kpress,
+.kpress-page-main,
+.kpress-tooltip,
+:is(.kpress, .kpress-page-main, .kpress-tooltip)[data-kpress-resolved-theme],
+:is(.kpress, .kpress-page-main, .kpress-tooltip)[data-kpress-palette][data-kpress-resolved-theme],
+body {
+  --kpress-doc-link: var(--kpress-doc-accent);
+  --color-primary-light: var(--kpress-doc-accent);
+}
 .cert-page { padding-block-end: calc(var(--kpress-font-size-base) * 6); }
 .cert-page a, .cert-page .kpress-footnote-ref a, .cert-page a.kpress-footnote-backref,
 .cert-page a:hover, .kpress a.kpress-footnote-backref:hover,
@@ -114,12 +126,44 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
 }
 .credits strong { font-weight: var(--kpress-font-weight-sans-bold); }
 .cert-page .hero .deck { font-family: var(--kpress-font-prose); font-style: italic; margin-block: 0; }
+/* Where this page came from and how to take it away, at the top corner and out of
+   the way. Chips rather than prose: they are tools, not part of the argument. */
+.doc-links {
+  display: flex;
+  float: inline-end;
+  gap: 0.4rem;
+  margin-block-start: 0.15rem;
+  margin-inline-start: 1rem;
+}
+.doc-links .chip {
+  align-items: center;
+  border: 1px solid var(--kpress-doc-border);
+  border-radius: var(--kpress-radius-sm);
+  color: var(--kpress-doc-muted);
+  display: inline-flex;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-tiny);
+  font-weight: var(--kpress-font-weight-sans-medium);
+  gap: 0.3rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  padding: 0.32rem 0.5rem;
+  text-decoration: none;
+}
+.doc-links .chip:hover {
+  background: var(--kpress-doc-surface-hover);
+  border-color: var(--kpress-doc-accent);
+  color: var(--kpress-doc-accent);
+}
+.doc-links .chip.icon { padding-inline: 0.42rem; }
+.doc-links .chip svg { display: block; }
+
 /* The deck is a div so its footnote renders; the paragraph inside keeps its edges. */
 .cert-page .hero .deck > p { margin-block: 0; }
 
-/* The certificate switch sits in every figure head; the articles are whole
-   documents, so they are hidden outright. */
-.cert-toggle { display: inline-flex; gap: 0.3rem; margin-inline-start: auto; }
+/* The certificate switch sits at the foot of every figure it changes; the articles
+   are whole documents, so they are hidden outright. */
+.cert-toggle { display: inline-flex; gap: 0.3rem; }
 .cert-toggle button { white-space: nowrap; }
 .intro { margin-block-start: 1.6rem; }
 /* The atlas rendering is inlined: its ground and strokes take the page's
@@ -147,20 +191,15 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
   font-family: var(--kpress-font-sans);
 }
 
-/* Figure chrome. */
-.fig-head {
-  align-items: baseline;
-  border-block-end: 1px solid var(--kpress-doc-border);
+/* Figure chrome. The figure carries no title: the caption names it, and repeating
+   the number above the frame said the same thing twice. What the head did carry that
+   the caption cannot is the certificate chooser, which belongs with the diagram it
+   changes, so it sits at its foot. */
+.fig-choose {
+  border-block-start: 1px solid var(--kpress-doc-border);
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.9rem;
+  justify-content: center;
   padding: 0.7rem 1.1rem;
-}
-.fig-title {
-  flex: 1 1 14rem;
-  font-family: var(--kpress-font-sans);
-  font-size: var(--kpress-font-size-small);
-  font-weight: var(--kpress-font-weight-sans-medium);
 }
 .tag {
   background: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
@@ -356,13 +395,87 @@ body { --kpress-doc-link: var(--kpress-doc-accent); --color-primary-light: var(-
 .caps .katex, .tip .katex { font-size: var(--kpress-katex-size-sans); }
 .cert-page .tex-d .katex { font-size: var(--kpress-katex-size-display); }
 .caps .katex { letter-spacing: 0; }
+/* ============================================================
+   Print. kpress prints a document well: page margins, 11pt type,
+   forced-light tokens, break rules for headings, figures, boxes and
+   display math, hidden buttons and popovers. It cannot know this page
+   carries canvases, control panels and a figure chooser, so what
+   follows is only what kpress does not cover.
+   ============================================================ */
+@media print {
+  /* Without this the whole document prints as ONE page. kpress's page reset
+     holds `html, body { height: 100%; overflow: hidden }` for the scrolling
+     shell and its print stylesheet releases `.kpress-viewport` but not the
+     two elements above it, so the paginator sees a single viewport of
+     content and stops there. Measured before this rule: 1 page, and 92% of
+     the document absent. */
+  html, body { height: auto; overflow: visible; }
+
+  /* Print shows one certificate, always the one the page opens on, so a
+     printed copy does not depend on what the reader last clicked. */
+  .cert-figure[data-cert="{{DEFAULT_SLUG}}"][hidden] { display: block !important; }
+  .cert-figure:not([data-cert="{{DEFAULT_SLUG}}"]) { display: none !important; }
+
+  /* Nothing on paper can be dragged, hovered or chosen. The buttons kpress
+     already hides; these are the rest of the apparatus, including the empty
+     rule the chooser would otherwise leave under every figure. */
+  .panel, .fig-choose, .cert-page input[type="range"], .screen-only { display: none; }
+
+  /* The panel is gone, so the figure body is a single column, and a canvas
+     is capped by height rather than width so a square one fits the page with
+     its caption. Both were taller than a page before. */
+  .split { display: block; }
+  .stage canvas { max-height: 5.4in; width: auto; max-width: 100%; margin-inline: auto; }
+  .cert-page figure img { max-height: 7in; width: auto; max-width: 100%; }
+
+  /* Link targets are deliberately not spelled out after each link: a URL set in
+     the middle of a sentence breaks the line badly and reads worse than the
+     sentence it interrupts. The footnotes carry the sources, and the colophon
+     carries the repository. */
+
+  /* kpress forces its light tokens on `:root` and `.kpress`, which leaves the
+     page's own main element and this page's one extra token on their dark
+     values. A dark-mode reader would otherwise print prose on a dark ground
+     and lose the Figure 7 threshold line entirely. */
+  .kpress-page-main {
+    --kpress-doc-bg: oklch(100% 0 0);
+    --kpress-doc-border: oklch(78.26% 0 0);
+    --kpress-doc-muted: oklch(38.67% 0 0);
+    --kpress-doc-text: oklch(17.76% 0 0);
+    background: oklch(100% 0 0);
+    color: oklch(17.76% 0 0);
+    color-scheme: light;
+  }
+  :root { --cert-probe: oklch(55% 0.145 52); }
+
+  /* Legend chips carry their meaning in colour alone, so they keep it even
+     when the reader prints without background graphics. */
+  .legend i { border: 1px solid currentColor; print-color-adjust: exact; }
+
+  /* The title block is a title page. */
+  .intro { break-before: page; }
+
+  /* Inline math is hidden until KaTeX finishes; on paper it should fall back
+     to its source rather than to nothing. */
+  .tex, .tex-d { visibility: visible; }
+
+  /* Ragged right. kpress justifies printed prose and asks for automatic
+     hyphenation to keep the lines even, but hyphenation needs dictionaries the
+     printing engine may not carry: headless Chromium has none, so `hyphens: auto`
+     is inert there and justification has nothing to stretch but the word spaces,
+     which is what made the serif text look loose. This page also prints its link
+     targets inline, and a long unbreakable URL in a justified line opens rivers.
+     Even word spacing is worth more here than a straight right edge. */
+  .kpress p, .kpress li, .kpress blockquote, .kpress dd { text-align: left; }
+}
+
 </style>
 </head>
 <body class="kpress-frame" data-kpress-frame>
 <main class="kpress-page-main kpress-viewport" data-kpress-viewport>
 <div class="kpress kpress-doc kpress-prose cert-page">
 {{BODY_HTML}}
-<p class="col colophon">Typeset with <a href="https://github.com/jlevy/kpress"><strong>KPress</strong></a></p>
+<p class="col colophon">Formatted and typeset with <a href="https://github.com/jlevy/flowmark"><strong>Flowmark</strong></a> and <a href="https://github.com/jlevy/kpress"><strong>KPress</strong></a></p>
 </div>
 
 </main>
@@ -395,7 +508,12 @@ const nearly = text => `{\\approx}\\,${text}`;
 const degTex = (a, places, exact = a === 0) => (exact ? deg(a, places) : nearly(deg(a, places)));
 const degRel = (a, places, exact = a === 0) => `${exact ? '=' : '\\approx'} ${deg(a, places)}`;
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-const tex = (el, s, d) => { try { katex.render(s, el, { displayMode: !!d, throwOnError: false }); }
+/* A function name set in italic leans into the parenthesis after it, so `s(n)` sets
+   the bracket against the letter's terminal. One mu is the smallest space TeX offers,
+   and the same offset the drawn figures use, so the prose, the captions and the
+   diagrams space it alike. `cos(x)` is untouched: the letter is not on its own. */
+const kern = s => String(s).replace(/(?<![A-Za-z\\])([a-z])\(/g, '$1\\mkern1mu(');
+const tex = (el, s, d) => { try { katex.render(kern(s), el, { displayMode: !!d, throwOnError: false }); }
                             catch (e) { el.textContent = s; } };
 /* A readout that is replaced rather than slid fades in (see `.swap`); one
    that already shows the text is left alone, so leaving and re-entering a
@@ -484,9 +602,13 @@ function showAtomTip(i) {
   tex(fieldTip.querySelector('.tip-w'), `w = ${fracTex(wn, wd)}`);
   swap(fieldTip);
 }
-const ATOM_PROMPT = 'Hover an atom for its position and weight.';
+const ATOM_PROMPT = 'Hover or tap an atom for its position and weight.';
 
-fc.addEventListener('pointermove', e => {
+/* One selection path for every pointer. A mouse selects by moving over an atom; a
+   touch has nothing to hover with, so it selects on the way down and keeps what it
+   picked, because lifting a finger destroys the pointer and fires `pointerleave`
+   at once. Clearing on leave is therefore for the mouse alone. */
+const pickAtom = e => {
   const box = fc.getBoundingClientRect();
   const cx = (e.clientX - box.left) / box.width * FS, cy = (e.clientY - box.top) / box.height * FS;
   const i = atomAt(cx, cy);
@@ -494,8 +616,11 @@ fc.addEventListener('pointermove', e => {
   if (i === hovered) return;
   hovered = i; drawField();
   if (i < 0) setText(fieldTip, ATOM_PROMPT); else showAtomTip(i);
-});
-fc.addEventListener('pointerleave', () => {
+};
+fc.addEventListener('pointermove', pickAtom);
+fc.addEventListener('pointerdown', pickAtom);
+fc.addEventListener('pointerleave', e => {
+  if (e.pointerType && e.pointerType !== 'mouse') return;
   if (hovered !== -1) { hovered = -1; drawField(); }
   setText(fieldTip, ATOM_PROMPT);
 });
@@ -861,17 +986,28 @@ knets.forEach(b => b.addEventListener('click', () => {
 /* ---------- boot ---------- */
 function boot() { drawField(); refresh(true); shrinkDraw(); }
 boot();
+const repaint = () => { heat = null; boot(); };
 if (window.matchMedia) {
   const mq = window.matchMedia('(prefers-color-scheme: dark)');
-  if (mq.addEventListener) mq.addEventListener('change', () => { heat = null; boot(); });
+  if (mq.addEventListener) mq.addEventListener('change', repaint);
+  /* A canvas is a bitmap, so print CSS cannot recolour one: a reader printing in
+     dark mode would get three near-black squares on white paper. Redrawing once
+     print media is active picks up the light tokens kpress forces for print. The
+     media listener covers a headless render, `beforeprint` the print dialog, and
+     `afterprint` puts the screen colours back. */
+  const pm = window.matchMedia('print');
+  if (pm.addEventListener) pm.addEventListener('change', repaint);
 }
+window.addEventListener('beforeprint', repaint);
+window.addEventListener('afterprint', repaint);
 })();
 </script>
 <!--END:SCRIPT-->
 <script>
 /* ---------- shared: static math, then the certificate picker ---------- */
 (() => {
-  const render = (el, s, d) => { try { katex.render(s, el, { displayMode: !!d, throwOnError: false }); }
+  const kern = s => String(s).replace(/(?<![A-Za-z\\])([a-z])\(/g, '$1\\mkern1mu(');
+  const render = (el, s, d) => { try { katex.render(kern(s), el, { displayMode: !!d, throwOnError: false }); }
                                  catch (e) { el.textContent = s; } };
   document.querySelectorAll('.tex').forEach(el => {
     if (!el.dataset.done && !el.querySelector('.katex')) { el.dataset.done = '1'; render(el, el.textContent, false); }
@@ -904,7 +1040,7 @@ if (window.matchMedia) {
   const articles = [...document.querySelectorAll('.cert-figure')];
   const slugs = [...new Set(articles.map(a => a.dataset.cert))];
   const scroller = document.querySelector('[data-kpress-viewport]') || document.scrollingElement;
-  const figureKey = el => { const f = el.closest('figure'), c = f && f.querySelector('.caps'); return c ? c.textContent : null; };
+  const figureKey = el => { const f = el.closest('figure'); return f ? f.dataset.figure || null : null; };
   function show(slug, record, from) {
     if (!slugs.includes(slug)) slug = slugs[0];
     const key = from ? figureKey(from) : null, top = from ? from.getBoundingClientRect().top : 0;
@@ -922,6 +1058,10 @@ if (window.matchMedia) {
     if (record && location.hash !== '#' + slug) history.replaceState(null, '', '#' + slug);
   }
   switches.forEach(b => b.addEventListener('click', () => show(b.dataset.cert, true, b)));
+  /* The PDF chip prints the page. The print stylesheet turns it into a document:
+     one certificate, no controls, link targets spelled out. */
+  const printer = document.querySelector('[data-print="page"]');
+  if (printer) printer.addEventListener('click', e => { e.preventDefault(); window.print(); });
   /* Only a hash naming a certificate switches the page. A footnote jump sets
      the hash too (#fn-3, #fnref-3), and it leaves the selection alone. */
   window.addEventListener('hashchange', () => {

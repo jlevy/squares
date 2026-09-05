@@ -28,7 +28,7 @@ from pathlib import Path
 
 from strif import atomic_output_file
 
-from devtools.render_certificate_page import (
+from devtools.render_explainer import (
     CASE,
     PACKING,
     REPO,

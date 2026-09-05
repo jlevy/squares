@@ -6,7 +6,7 @@ between them, and every quantity each article states is read or derived from
 its certificate file, so the page cannot drift from the bounds it explains.
 When a rung moves, rerunning this is the whole update: no number is typed twice.
 
-The prose is Markdown, in `templates/certificate_page.md`, and kpress renders it:
+The prose is Markdown, in `templates/explainer-article.md`, and kpress renders it:
 headings, lists, math and footnotes are the system's to emit, so the page cannot
 hand-roll a footnote or a heading level that the design system would set
 differently. The HTML template beside it is only the shell — head, the body
@@ -23,8 +23,8 @@ from an artifact host with a strict content-security policy.
 
 Usage, from `packing/`:
 
-    uv run --frozen --all-extras --group dev python -m devtools.render_certificate_page
-    uv run --frozen --all-extras --group dev python -m devtools.render_certificate_page --check
+    uv run --frozen --all-extras --group dev python -m devtools.render_explainer
+    uv run --frozen --all-extras --group dev python -m devtools.render_explainer --check
 """
 
 from __future__ import annotations
@@ -44,6 +44,7 @@ from typing import TypedDict
 
 from strif import atomic_output_file
 
+from devtools.build_composite_figure_data import load_record as load_figure_record
 from devtools.measure_net_coarsening import largest_admissible_side
 from sqpack.fractional.certificate import (
     Certificate,
@@ -53,14 +54,16 @@ from sqpack.fractional.certificate import (
 )
 from sqpack.fractional.model import Atom
 from sqpack.fractional.sweep import minimum_covered_mass, weight_scale
+from sqpack.release import PUBLICATION_DATE, PUBLICATION_REVISION, PUBLICATION_VERSION
 from sqpack.render.style import SQUARE_HUE_PALETTE
+from sqpack.yamlio import safe_load
 
 PACKING = Path(__file__).resolve().parents[1]
 REPO = PACKING.parent
 CASE = PACKING / "cases" / "n11_fractional_certificate"
 TEMPLATES = Path(__file__).with_name("templates")
-TEMPLATE = TEMPLATES / "certificate_page.html"
-MARKDOWN = TEMPLATES / "certificate_page.md"
+TEMPLATE = TEMPLATES / "explainer-shell.html"
+MARKDOWN = TEMPLATES / "explainer-article.md"
 VERIFIER_CLAIM = CASE / "verify_claim.py"
 OUTPUT = PACKING / "site" / "index.html"
 
@@ -236,8 +239,11 @@ REPO_URL = "https://github.com/jlevy/squares"
 BEST_RENDERING = PACKING / "atlas" / "known-best" / "rendering" / "n-011.svg"
 # The atlas composite of every known-best packing, shown as Figure 1 and served
 # beside the page rather than inlined: the PNG is the image, the PDF the link.
+#: The composite travels with the page: the SVG the figure shows, the PDF it links for
+#: print, and the PNG for a reader whose context cannot render the vector.
 COMPOSITE_ASSETS = tuple(
-    PACKING / "atlas" / "known-best" / f"known-best-1-100.{ext}" for ext in ("png", "pdf")
+    PACKING / "atlas" / "known-best" / f"known-best-1-100.{ext}"
+    for ext in ("svg", "png", "pdf")
 )
 VERIFIER = PACKING / "src" / "sqpack" / "fractional" / "certificate.py"
 GENERATOR = PACKING / "src" / "sqpack" / "fractional" / "generate.py"
@@ -921,6 +927,28 @@ def number_line_marks(facts: list[Facts], headline: Facts) -> str:
     return "\n    ".join(marks)
 
 
+def starred_lower_bounds() -> int:
+    """How many atlas cells carry a lower bound this project proved.
+
+    The composite counts them in its own legend from the figure record; the caption
+    beside the image reads the same total, so the two cannot disagree.
+    """
+    return int(load_figure_record()["totals"]["lower_bound_first_proved_here"])
+
+
+def registered_results() -> int:
+    """How many results the frontier register holds, counted rather than typed.
+
+    The opening says this bound is one of several the program has registered; the
+    register is the only place that number lives, so the page reads it there.
+    """
+    register = PACKING / "frontier" / "results.yaml"
+    entries = safe_load(register.read_text(encoding="utf-8"))["results"]
+    if not entries:
+        raise SystemExit(f"{register.name} lists no results; the opening states a count")
+    return len(entries)
+
+
 def bound_substitutions() -> dict[str, str]:
     """The two irrational bounds, in the forms the page is allowed to print them.
 
@@ -1066,8 +1094,17 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "HEADLINE_L_DEC": decimal(headline.outer_side),
         "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
         "DEFAULT_ID": default.identifier,
+        # Print shows one certificate deterministically, and this names which.
+        "DEFAULT_SLUG": slug(default),
         "DEFAULT_CERT_URL": repo_file(default.source),
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
+        "N_RESULTS": str(registered_results()),
+        "N_STARRED": str(starred_lower_bounds()),
+        "SOURCE_URL": repo_file(MARKDOWN),
+        "REPO_URL": REPO_URL,
+        "PUBLISHED": PUBLICATION_DATE,
+        "VERSION": PUBLICATION_VERSION,
+        "REVISION": PUBLICATION_REVISION,
         "PRIOR_YEAR": str(PRIOR_YEAR),
         **bound_substitutions(),
         "PRIOR_SOURCE": PRIOR_SOURCE,
@@ -1267,6 +1304,33 @@ def expand(
 _HTML_COMMENT = re.compile(r"<!--.*?-->", re.DOTALL)
 
 
+#: A function name set in italic leans into the parenthesis that follows it, so `s(n)`
+#: sets the bracket against the letter's terminal. One mu, a thousandth of an em quad,
+#: is the smallest space TeX offers and is what the drawn figures use as an offset.
+#: Applied wherever the page sets mathematics so the spacing is the same in the prose,
+#: the captions and the drawings.
+_FUNCTION_APPLICATION = re.compile(r"(?<![A-Za-z\\])([a-z])\(")
+
+
+def kerned_math(source: str) -> str:
+    """Put a thin space between a one-letter function name and its parenthesis."""
+    return _FUNCTION_APPLICATION.sub(r"\1\\mkern1mu(", source)
+
+
+def kerned_math_spans(source: str) -> str:
+    """Apply that spacing inside every `$...$` span, and nowhere else.
+
+    Markdown prose is full of parentheses that follow a letter; only the maths is
+    typeset, so only the maths is touched.
+    """
+    return re.sub(
+        r"(?<!\\)(\$\$?)(.+?)(?<!\\)\1",
+        lambda m: f"{m.group(1)}{kerned_math(m.group(2))}{m.group(1)}",
+        source,
+        flags=re.DOTALL,
+    )
+
+
 def markdown_body(
     per_certificate: list[dict[str, str]],
     headline_values: dict[str, str],
@@ -1298,6 +1362,7 @@ def markdown_body(
     source = fill(
         _HTML_COMMENT.sub("", source), {**headline_values, **shared}, where=MARKDOWN.name
     )
+    source = kerned_math_spans(source)
     left = {m.group(1) for m in re.finditer(r"\{\{([A-Z_]+)\}\}", source)}
     if left:
         raise SystemExit(f"{MARKDOWN.name}: a substituted value carried {sorted(left)} into it")

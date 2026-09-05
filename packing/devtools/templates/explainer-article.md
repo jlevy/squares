@@ -14,6 +14,12 @@ Markdown, so there it stays `<span class="tex">…</span>` for the page to types
 per certificate; the prose is filled once, with the headline certificate's values.
 -->
 
+<div class="doc-links screen-only">
+  <a class="chip" href="{{SOURCE_URL}}" title="The Markdown this page is rendered from">MD</a>
+  <a class="chip" href="#" data-print="page" title="Print this page, or save it as a PDF">PDF</a>
+  <a class="chip icon" href="{{REPO_URL}}" title="The project on GitHub" aria-label="The project on GitHub"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+</div>
+
 <div class="hero">
 
 # <span class="symbol">s({{N}}) ≥ {{HEADLINE_L_FRAC}}</span>
@@ -21,23 +27,39 @@ per certificate; the prose is filled once, with the headline certificate's value
 <p class="subtitle">A New Lower Bound on the Square Packing Problem</p>
 
 <div class="credits">
-  <span>September 4, 2026</span>
+  <span>{{PUBLISHED}}</span>
   <span>Tooling and human oversight: <a href="https://x.com/ojoshe"><strong>Joshua Levy</strong></a></span>
   <span>Agents: <strong>Opus 5</strong>, <strong>Fable 5.1</strong>, and <strong>Codex 5.6</strong></span>
   <span>Open source at <a href="https://github.com/jlevy/squares"><strong>github.com/jlevy/squares</strong></a></span>
+  <span>{{VERSION}}, revision {{REVISION}}</span>
 </div>
 
-<div class="deck">
+</div>
 
-Eleven unit squares, free to rotate, do not fit in a square of side {{HEADLINE_L_DEC}}.
-The proof is a weighted point set and a pigeonhole argument.
-It is the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest open case.
+## What Is This?
+
+A new lower bound on an open problem, found by an automated research process.
+Eleven unit squares, free to rotate, do not fit in a square of side {{HEADLINE_L_DEC}}:
+the proof is a weighted point set and a pigeonhole argument, and it appears to be the
+first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest open case.
 The previous bound, {{PRIOR_LOWER_DEC}}, was Stromquist’s in
 {{PRIOR_YEAR}}.[^stromquist]
 
-</div>
-
-</div>
+The search, the checking and the record are the program’s own work, under human
+direction rather than human derivation.
+This is one of {{N_RESULTS}} results it has registered over a few days, and it sits
+inside a survey of the whole problem: the atlas of best known packings for every $n$
+from 1 to 100 in Figure 1 came from the same program, which proved {{N_STARRED}} of the
+lower bounds shown there.
+Most of the repository is not the proof but the loop that produced it: a hypothesis
+registry and an experiment ledger, exact verifiers, a retention gate that keeps a
+certificate only when two independent methods agree to the digit, and a validation suite
+that re-derives every number these documents state.
+None of that is particular to square packing.
+It is a reusable framework for iterative research on creative mathematical and technical
+problems. It makes use of [tbd](https://github.com/jlevy/tbd),
+[softschema](https://github.com/jlevy/softschema), and
+[Practical Prose](https://github.com/jlevy/practical-prose).
 
 ## The Square Packing Problem
 
@@ -47,12 +69,11 @@ rotate.[^survey] The value is known for every $n \le 10$. Stromquist settled
 $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
 
 <figure>
-  <div class="fig-head">
-    <span class="caps">Figure 1</span>
-  </div>
-  <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.png" alt="The best known packings of one through one hundred unit squares, in a ten-by-ten grid" width="2400" height="2676"></a></div>
+  <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.svg" alt="The best known packings of one through one hundred unit squares, in a ten-by-ten grid, each labelled with its best known upper bound and, where the value is still open, the best proved lower bound" width="2400" height="2896"></a></div>
   <figcaption><strong>Figure 1.</strong> The best known packings of 1 through 100 unit squares. Each cell is the tightest
-  arrangement on record for that <span class="tex">n</span>. The full
+  arrangement on record for that <span class="tex">n</span>, with the best known upper bound beneath it and, where
+  <span class="tex">s(n)</span> is not yet settled, the best proved lower bound below that. A crimson star marks a lower
+  bound this project proved: {{N_STARRED}} of the hundred, this page's own among them. The full
   results, with every witness and its provenance, are in
   <a href="https://github.com/jlevy/squares/blob/main/packing/atlas/known-best/">the GitHub repository</a>, and the
   composite is <a href="known-best-1-100.pdf">available as a PDF</a>.</figcaption>
@@ -62,23 +83,19 @@ $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
 
 $s(11)$ is the smallest case still open.
 Trump’s 1979 packing shows $s(11) \le {{BEST_PACKING_TEX}}$.[^trump] Here we prove
-$s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$. (For illustration, some of the
-figures below show a looser bound $s({{N}}) \ge {{DEFAULT_L_FRAC}}$, and a toggle on the
-figure lets you select the tighter precision so you can compare the results.)
+$s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$. The project proves two bounds, and
+the figures below open on the looser one, $s({{N}}) \ge {{DEFAULT_L_FRAC}}$, whose
+smaller numbers are easier to follow.
+<span class="screen-only">The chooser under each figure switches every figure between
+the two at once.</span>
 
 <figure>
-  <div class="fig-head">
-    <span class="caps">Figure 2</span>
-  </div>
   <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
   <figcaption><strong>Figure 2.</strong> Trump’s 1979 packing of eleven unit squares shows
   <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>.</figcaption>
 </figure>
 
 <figure>
-  <div class="fig-head">
-    <span class="caps">Figure 3</span>
-  </div>
   <div class="line-fig kpress-diagram">
   <svg viewBox="0 0 700 92" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER_DEC}}, the bounds proved here up to {{HEADLINE_L_DEC}}, and the best known packing at {{BEST_PACKING_DEC}}">
     <rect x="{{BAND_X}}" y="45" width="{{BAND_W}}" height="13" fill="var(--cert-accent-wash)"/>
@@ -171,17 +188,13 @@ reflects onto that arc and covers the same mass.
 
 <!--BEGIN:FIGURE-->
 
-<figure>
-  <div class="fig-head">
-    <span class="caps">Figure 4</span><span class="tag">Conditions 1 and 2</span>
-    {{CERT_TOGGLE}}
-  </div>
+<figure data-figure="4">
   <div class="split">
     <div class="stage"><canvas id="field-{{SLUG}}" width="1040" height="1040"></canvas></div>
     <div class="panel">
       <div class="readout">
         <span class="caps">Atom</span>
-        <div class="tip-panel" id="field-tip-{{SLUG}}">Hover an atom for its position and weight.</div>
+        <div class="tip-panel" id="field-tip-{{SLUG}}">Hover or tap an atom for its position and weight.</div>
       </div>
     </div>
   </div>
@@ -190,7 +203,8 @@ reflects onto that arc and covers the same mass.
     <div>Mass eleven disjoint unit squares would need<span class="v tex">{{N}}</span></div>
     <div>Shortfall<span class="v tex">{{SHORTFALL}}</span></div>
   </div>
-  <figcaption><strong>Figure 4.</strong> The atoms. Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
+  <div class="fig-choose">{{CERT_TOGGLE}}</div>
+  <figcaption><strong>Figure 4. Conditions 1 and 2.</strong> The atoms. Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
   corners, where a square has least room to move, and thins in the middle. The sites and weights are the optimum
   of a covering linear program, rationalized. The board holds less mass than eleven disjoint unit squares would
   need. Condition 2 is that comparison.</figcaption>
@@ -225,11 +239,7 @@ $$
 
 <!--BEGIN:FIGURE-->
 
-<figure>
-  <div class="fig-head">
-    <span class="caps">Figure 5</span><span class="tag">Condition 5</span>
-    {{CERT_TOGGLE}}
-  </div>
+<figure data-figure="5">
   <div class="split">
     <div class="stage"><canvas id="prove-{{SLUG}}" width="1000" height="1000"></canvas></div>
     <div class="panel">
@@ -261,7 +271,8 @@ $$
       it the square hangs out of the container, and the proof makes no claim.</p>
     </div>
   </div>
-  <figcaption><strong>Figure 5.</strong> The prover: drag the square, watch the mass. Inside the dashed domain the field never drops below 1, at any of the {{N_DIRECTIONS}}
+  <div class="fig-choose">{{CERT_TOGGLE}}</div>
+  <figcaption><strong>Figure 5. Condition 5.</strong> The prover<span class="screen-only">: drag the square, watch the mass</span>. Inside the dashed domain the field never drops below 1, at any of the {{N_DIRECTIONS}}
   directions. Outside it the mass falls away at once, which is why the atoms crowd the boundary.</figcaption>
 </figure>
 
@@ -307,11 +318,7 @@ $$
 
 <!--BEGIN:FIGURE-->
 
-<figure>
-  <div class="fig-head">
-    <span class="caps">Figure 6</span><span class="tag">Condition 4</span>
-    {{CERT_TOGGLE}}
-  </div>
+<figure data-figure="6">
   <div class="split">
     <div class="stage"><canvas id="shrink-{{SLUG}}" width="800" height="800"></canvas></div>
     <div class="panel">
@@ -336,14 +343,15 @@ $$
         <dt><span class="tex">B</span> admitted</dt><dd id="s-B-{{SLUG}}"></dd>
         <dt><span class="tex">B(\cos d + \sin d)</span></dt><dd class="hi" id="s-prod-{{SLUG}}"></dd>
       </dl>
-      <p class="hint">Opens at <span class="tex">K = 3</span>, the coarsest net the figure offers, where Condition 4 admits only
+      <p class="hint screen-only">Opens at <span class="tex">K = 3</span>, the coarsest net the figure offers, where Condition 4 admits only
       <span class="tex">B \lt {{K3_LIMIT_TEX}}</span> and the shrink is unmistakable. Drag either square by its
       handle. At
       <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, the two squares are
       indistinguishable.</p>
     </div>
   </div>
-  <figcaption><strong>Figure 6.</strong> The shrink that buys the finite net. The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
+  <div class="fig-choose">{{CERT_TOGGLE}}</div>
+  <figcaption><strong>Figure 6. Condition 4.</strong> The shrink that buys the finite net. The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
   side-<span class="tex">B</span> square at the nearest net angle. The proof only ever asks about the orange one.
   <strong>The last quantity must stay below 1.</strong> At <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, its
   largest value, at the widest half-gap, is <span class="tex">{{SHRINK_PEAK_TEX}}</span> for the side the figure uses, a seven-place
@@ -365,11 +373,7 @@ costs.
 
 <!--BEGIN:FIGURE-->
 
-<figure>
-  <div class="fig-head">
-    <span class="caps">Figure 7</span><span class="tag">Condition 4 → Condition 5</span>
-    {{CERT_TOGGLE}}
-  </div>
+<figure data-figure="7">
   <div class="chart kpress-diagram">
     <svg viewBox="0 0 700 250" role="img" aria-label="{{COARSEN_ALT}}">
       <g font-size="10" fill="var(--kpress-doc-muted)">
@@ -395,7 +399,8 @@ costs.
       </text>
     </svg>
   </div>
-  <figcaption><strong>Figure 7.</strong> Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. Halving the net shrinks
+  <div class="fig-choose">{{CERT_TOGGLE}}</div>
+  <figcaption><strong>Figure 7. Condition 4 → Condition 5.</strong> Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. Halving the net shrinks
   <span class="tex">B</span> by {{HALVING_B_DROP}} and costs {{HALVING_MASS_DROP}} of the least covered mass. This shows these atoms are tight
   against their own net, not that no coarser net could be made to work. It measures the slope of the trade.</figcaption>
 </figure>
@@ -482,3 +487,7 @@ coding agent or check by hand.
 [^trump]: Walter Trump’s packing of 1979, as recorded in
     [Kingbird’s register of squares in squares]({{BEST_URL}}). The
     [rendering]({{BEST_RENDER_URL}}) is the project’s own.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
