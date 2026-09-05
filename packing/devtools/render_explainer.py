@@ -54,7 +54,7 @@ from sqpack.fractional.certificate import (
 )
 from sqpack.fractional.model import Atom
 from sqpack.fractional.sweep import minimum_covered_mass, weight_scale
-from sqpack.release import PUBLICATION_DATE, PUBLICATION_REVISION, PUBLICATION_VERSION
+from sqpack.release import PUBLICATION_DATE, PUBLICATION_EDITION, PUBLICATION_REVISION
 from sqpack.render.style import SQUARE_HUE_PALETTE
 from sqpack.yamlio import safe_load
 
@@ -1111,7 +1111,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "SOURCE_URL": repo_file(MARKDOWN),
         "REPO_URL": REPO_URL,
         "PUBLISHED": PUBLICATION_DATE,
-        "VERSION": PUBLICATION_VERSION,
+        "EDITION": PUBLICATION_EDITION,
         "REVISION": PUBLICATION_REVISION,
         "PRIOR_YEAR": str(PRIOR_YEAR),
         **bound_substitutions(),

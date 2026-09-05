@@ -181,8 +181,12 @@ body {
   background: var(--kpress-doc-surface-hover);
   border-color: var(--kpress-doc-accent);
   color: var(--kpress-doc-accent);
+  /* kpress underlines a link on hover, which is right for a link in a sentence and
+     wrong for a bordered chip: the rule lands inside the box and reads as a defect.
+     The chip already answers the hover with its border, its ground and its colour,
+     all three on the page's shared 120ms transition. */
+  text-decoration: none;
 }
-.doc-links .chip.icon { padding-inline: 0.42rem; }
 .doc-links .chip svg { display: block; }
 
 /* The deck is a div so its footnote renders; the paragraph inside keeps its edges. */
