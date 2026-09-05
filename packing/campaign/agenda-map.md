@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **9** ready, **5** tentative, **39** blocked, **43** stopped, **110** complete.
+- **9** ready, **5** tentative, **39** blocked, **42** stopped, **111** complete.
 
 - **12 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -120,7 +120,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-018 | paused |  | 2 | 14 |  |  | 16 |
 | agenda-019 | paused | 1 |  | 4 |  | 1 | 6 |
 | agenda-020 | completed |  |  |  |  | 1 | 1 |
-| agenda-021 | completed |  |  |  | 4 | 4 | 8 |
+| agenda-021 | completed |  |  |  | 3 | 5 | 8 |
 | agenda-022 | active | 1 |  | 7 |  | 1 | 9 |
 
 ## By program
@@ -148,7 +148,7 @@ Open frontier: `BC-204`, `BC-205`, `BC-206`, `BC-212`.
 | agenda-021 | `BC-198` | stopped | Does the two-threshold form of Condition 5 -- per-direction-class thresholds as LP variables,… |
 | agenda-021 | `BC-199` | complete | What explicit isolation radius and quadratic constant follow from exp-013's 128 branch certificates… |
 | agenda-021 | `BC-200` | complete | Is the covering value at n = 11 already at or above eleven at 3.82 and at 3.85, measured from below… |
-| agenda-021 | `BC-201` | stopped | How large is the near-tight set on the retained 381/100 certificate -- the reachable event cells… |
+| agenda-021 | `BC-201` | complete | How large is the near-tight set on the retained 381/100 certificate -- the reachable event cells… |
 | agenda-022 | `BC-208` | blocked | Does the class-certificate program deliver two statements about n = 11 that stand on their own --… |
 | agenda-022 | `BC-207` | blocked | At the side block one found the n = 11 wall, does an exact cover of the heavy atoms by eleven… |
 

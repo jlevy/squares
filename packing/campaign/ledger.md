@@ -462,7 +462,7 @@ Status: **completed**. X-014 ends with a verdict and a bill. The two mechanisms 
 | BC-211 | measurement_validation | 13 | stopped | 0 | think-2ib0 | Whether the first exact grid value by machine is one certificate away, which BC-203's fourth rule reads directly and which decides whether block two opens the B = 1 route (BC-212) ahead of the conditional route. |
 | BC-199 | research | 11 | complete | 0 | think-ljvz | Whether the local box is reachable by any tree, which BC-203's third doubling-down rule reads directly and which decides whether block two opens a conditional lead against Trump's pose at all. |
 | BC-200 | measurement_validation | 11 | complete | 1 | think-1qjs | The side every block-two n = 11 cell would have to work at, and BC-203's second doubling-down rule reads the 3.85 outcome directly. |
-| BC-201 | tool_validation | 11 | stopped | 2 | think-614o | Whether Corollary 1a's exact-cover step is a check or a search, which BC-207 in block two consumes directly and cannot start without. |
+| BC-201 | tool_validation | 11 | complete | 2 | think-614o | Whether Corollary 1a's exact-cover step is a check or a search, which BC-207 in block two consumes directly and cannot start without. |
 | BC-202 | research | 26 | stopped | 1 | think-r58z | The first covering-value point outside the 3.82-to-4.80 band, which is what X-013's third proposal asks for and what block two's reach-table rungs are priced against. |
 | BC-203 | tool_validation | 11, 20, 21, 26 | complete | 2 | think-jv2d | Which of agenda-022's leads open, which is the whole of what every cell in that agenda is blocked on. |
 
@@ -486,7 +486,7 @@ Status: **active**. Block two, and every cell in it is contingent. Agenda-021 me
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 62 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 63 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -556,7 +556,7 @@ Status: **active**. Block two, and every cell in it is contingent. Agenda-021 me
 | H-062 | confirmed | proof | On the retained 181-direction net at B = 9977/10000, the side at which | container side: 193/40 39/8 97/20 979/200 123/25 247/50 993/200 | 2 | T-021 | 112m agent + 109.8m wall |
 | H-063 | blocked | proof | Two statements, one instrument. First, the class certificate of X-014' | composition n1: 0 1 2 3 4 5 6 7 8 9 10 11 | 0 |  |  |
 | H-064 | abandoned | proof | At container side 77/20 = 3.85, on the retained 181-direction net at B | container side: 191/50 77/20 387/100 | 1 |  | 96m agent + 66.0m wall |
-| H-065 | blocked | proof | On the retained 381/100 certificate at n = 11 -- 1121 atoms, B = 9977/ | census margin epsilon: 0 0.01 0.05 0.1 | 0 |  |  |
+| H-065 | confirmed | proof | On the retained 381/100 certificate at n = 11 -- 1121 atoms, B = 9977/ | census margin epsilon: 0 0.01 0.05 0.1 | 1 |  | 16m agent + 16.1m wall |
 
 ## Needs review — held for a human, not decided
 
@@ -617,7 +617,7 @@ Status: **active**. Block two, and every cell in it is contingent. Agenda-021 me
 | exp-047 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `interval-enclosure`: the numerical prototype's selftest and synthetic controls pass, but a float midpoint fit with fixed tolerance and heuristic radii does not prove a nonempty compatible-pose enclosure or outward- rounded wall and pair signs, and the preregistered command lacks a complete post- authorization runner. No parent retrieval, target parse or target fit ran, so H-053 remains unresolved. |
 | exp-051 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `executable-runner`: the proof, verifier and generic injected-runner controls pass, but the exact preregistered `--record` command exits 2 before target access because no production CLI adapter exists; no scientific H-053 disposition follows. |
 
-### accepted (20)
+### accepted (21)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -641,6 +641,7 @@ Status: **active**. Block two, and every cell in it is contingent. Agenda-021 me
 | exp-058 | series-000 | 5 | Claude (agent), BC-152 n = 5 proof lane of agenda-016, bead think-760r | H-060 | Accepted 2026-09-03 on BC-153's independent review, which returned PASS. The registered criterion is frozen, was not amended for this round or for the review, and was met as written: the chart is CHECKED -- the reviewer replayed the W7 instrument from clean roots under normal and optimized Python and its neighbourhood receipt is this chart's N exactly, 128 strict conditions in the same four roles and counts, with every gradient and restricted second jet matching and all eight controls rejecting -- and the argument is REVIEWED, by a reviewer who authored none of the packet, the instrument, X-012 or this record, who rebuilt every exact quantity from scratch in sympy sharing no code with the author (the 400 margins, the 28 witnesses, the 20 active rows, -t4^2, q = -2, the displayed g-tilde_3, the midpoints, 28 hand-built Farkas certificates plus T-012's 28 stored ones and its self-stress, and Lemma 8 on random arcs), replayed the packet's five scripts to digests equal to this record's, and accepted every logical step from nonisolation to the second-order contradiction. What is accepted is exactly this: for s = 2 + sqrt(2)/2 and Goebel's labeled pose P0 in C = (R^2 x S^1)^5, P0 is an isolated point of Feas(s) (closed unit squares in [0, s]^2, pairwise disjoint interiors); equivalently there is no nonconstant continuous feasible path from P0 and no sequence of distinct feasible poses converging to it; hence Kingbird-rigid at fixed side. Acceptance widens nothing else: no isolation radius, nothing with the side free (which is false, X-007), no global uniqueness, no other n = 5 optimum, no applicability of Connelly-Whiteley as stated, and no method novelty -- the closing principle is classical and the CW96 Theorem 4.3.1 proof shape is not new. The review names six gaps carried from the record plus one new minor one, none of them a condition of the pass; they are listed in the Amendment below and none of them is closed by this acceptance. This round's own account of what it did and did not do is unchanged above: its numbers still came from scratchpad sympy, and what the review adds is the instrument replay and the independent reconstruction that the criterion's two adjectives require |
 | exp-059 | series-000 | 17 | claude-opus-5 | H-052 | All 181 paired direction cells agree exactly, both complete certificate summaries are identical with global minimum 1/1, every instrument guard holds and the decision derives to accepted from the emitted evidence, so the registered criterion is met at its declared scope. BC-149's independent review, 2026-09-03, returned an exact PASS: every reported figure reproduced, the whole admission boundary replayed, the decision was re-derived from the emitted bytes in a separate process, and a third implementation importing nothing from this repository reproduced all 181 rows. needs_review was cleared on that review, which is the transition it authorised and nothing more; the decision, its reason and the claim boundary are unchanged by it. What is established remains implementation agreement over the same event-cell reduction for one fixed certificate -- not proof-method independence, not adoption of 4.5058, and no cross-n claim. The review's three limitations are recorded in the Amendment below and one of them, the validator gap, is filed as D-428. |
 | exp-062 | series-000 | 20 | Claude (agent), Lane A of agenda-022 BC-213, bead think-wufn, session-087 | H-062 | Every clause is met. The bracket is [97/20, 973/200], width 0.015. Its lower end carries T-021, retained on both routes. Its upper end carries a wall on the two independently constructed site sets H-062 declared, and sits 0.1235 below the ceiling, so at m = 5 the covering value binds and the ceiling never does. The hypothesis is accepted on its own threshold, and this is the first covering wall this project has pinned to the width its hypothesis asked for. |
+| exp-063 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-201 re-run, bead think-614o, session-087 | H-065 | The ratio is 23112904/567130649 = 0.040754, a fifth of the threshold and an eighth of the 0.50 kill line, so the hypothesis is accepted on the number it registered. That acceptance and the cell's own reading point in different directions and both are reported: the tight set is a small fraction of the reachable cells, and it is still far too large and far too spread out for the exact cover to be a check. The threshold was calibrated to catch a tight set covering most of the domain, and four per cent is not most; the operative bar for Corollary 1a was a few hundred cells near a few dozen positions, and twenty-three million cells in twenty-two thousand components is not that either. |
 
 ### baseline (11)
 
@@ -673,7 +674,7 @@ Status: **active**. Block two, and every cell in it is contingent. Agenda-021 me
 
 ## Effort
 
-62 rounds, 2111.1 agent-minutes, 1000.8 wall-minutes.
+63 rounds, 2127.1 agent-minutes, 1017.0 wall-minutes.
 
 ## Exploration reports not yet codified
 

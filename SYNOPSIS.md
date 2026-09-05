@@ -128,8 +128,8 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives seven confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and thirty-seven blocked
+The generated ledger currently derives eight confirmed hypotheses, six refuted
+hypotheses, one open hypothesis, seven open questions, and thirty-six blocked
 hypotheses. No hypothesis waits on review and four are unresolved.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
 pinned the `m = 5` covering wall to a bracket of width 0.015 where it had registered
@@ -2592,7 +2592,7 @@ round that names the hypothesis, control roles included.
 | [H-062](packing/campaign/hypotheses/H-062-n20-covering-wall.md) | confirmed | The `m = 5` covering wall — the side at which a converged restricted optimum at `n = 20` first reaches twenty — lies strictly below the ceiling `5B = 4.9885`, and the pre-registered rungs bracket it to within `0.02`; accepted at `[97/20, 973/200]`, width `0.015`, by Agenda 021’s `BC-197` and Agenda 022’s `BC-213` | 2 | 109.8m wall |
 | [H-063](packing/campaign/hypotheses/H-063-n11-class-certificate.md) | blocked | A two-cell `{0°, 45°}` class certificate refutes the composition `(11, 0)` at or above Trump’s `3.877084`, and every near-axis class inside `θ₀` closes the compositions with at most one tilted square; blocked on the two-threshold program `BC-198` builds | 0 | — |
 | [H-064](packing/campaign/hypotheses/H-064-n11-fractional-packing-floor.md) | abandoned | An exact-depth fractional packing at `77/20` with total weight at least eleven puts `τ*(3.85)` at or above eleven, so the `n = 11` certificate ladder’s top lies below `3.85`; registered for `BC-200` | 1 | 66m wall |
-| [H-065](packing/campaign/hypotheses/H-065-n11-near-tight-cell-census.md) | blocked | The near-tight cells (mass at most `1 + 1/20`) on the retained `381/100` certificate are fewer than one fifth of the reachable cells, so Corollary 1a’s exact cover is a check rather than a search; blocked on the census tool `BC-201` builds | 0 | — |
+| [H-065](packing/campaign/hypotheses/H-065-n11-near-tight-cell-census.md) | confirmed | The near-tight cells (mass at most `1 + 1/20`) on the retained `381/100` certificate are fewer than one fifth of the reachable cells — measured at `0.040754` by `BC-201`, a fifth of the registered threshold. The clause the claim attached to that number does not follow: the cover is a search, not a check | 1 | 16.1m wall |
 
 ### Confirmed
 
@@ -2811,9 +2811,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 62 terminal rounds registered in `series-000`.
+There are 63 terminal rounds registered in `series-000`.
 
-They record 2111.1 agent-minutes and 1000.8 wall-minutes.
+They record 2127.1 agent-minutes and 1017.0 wall-minutes.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
 result; exp-057 stopped before target access; exp-058 stopped on the review it was
 waiting for, which arrived and accepted it.
@@ -2911,6 +2911,7 @@ archive beside it.
 | [exp-060](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-060-h-064-n11-fractional-packing-floor.md) | 11 | target | H-064 | cutting-plane loop over exact-depth fractional packings at 191/50, then 77/20 warm-started, the exact vertex check as the separation oracle | nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861 exactly; the row loop converged at 3.82 to 11.055617 on 12,761 sites; no family reached eleven, so the claim stays unresolved and the round is resumable from the retained 3.82 state | abandoned |
 | [exp-061](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-061-h-062-m5-covering-wall.md) | 20 | target | H-062 | pre-registered bisection of [24/5, 9977/2000], two site sets per rung, refutation on a crossing and confirmation only by a converged row loop | certificates at 97/20 (T-021) and 193/40, walls at 39/8, 979/200 and 997/200, so the m = 5 covering wall is bracketed to width 0.025 against the 0.02 registered; the exactly round 25.000000 at 997/200 is explained by the overlap-strip geometry | unresolved |
 | [exp-062](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-062-h-062-m5-midpoint-rung.md) | 20 | target | H-062 | the one remaining pre-registered rung, at the schedule’s own midpoint 973/200, on the same two site-set rules | both constructions wall — the grids at LP round 16 (20.001502, 543 violated) and the certificate-seeded set at round 34 (20.000223, 213 violated) — closing the bracket to [97/20, 973/200], width 0.015, its upper end 0.1235 below the ceiling | accepted |
+| [exp-063](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-063-h-065-n11-near-tight-cell-census.md) | 11 | target | H-065 | census the reachable event cells within four margins of covered mass one, per direction, through the same mass grid the retention decision reads | the epsilon = 1/20 tight set is 0.040754 of 567,130,649 reachable cells, a fifth of the registered 0.20 — and still a search rather than a check: positive area, a bounding box equal to the centre domain’s in all 181 directions, 22,132 extended components | accepted |
 
 ### Cost and provenance
 
@@ -2978,10 +2979,11 @@ archive beside it.
 | exp-060 | Lane B of Agenda 021, BC-200, one core, 07:39Z–09:15Z | 3960 s | 96 m | timebox | `26e8a6e3` |
 | exp-061 | Lane A of Agenda 021, BC-197, one core, 07:53Z–09:21Z | 5000 s | 88 m | guard | `5d07a24a` |
 | exp-062 | Lane A of Agenda 022, BC-213, one core nominally and three lanes actually, 17:00Z–17:26Z | 1590 s | 24 m | criterion | `ca51821f` |
+| exp-063 | Lane B of Agenda 021, BC-201 re-run, one core, 17:36Z–17:52Z | 967 s | 16 m | criterion | `394a0fee` |
 
-### What the 62 rounds jointly establish
+### What the 63 rounds jointly establish
 
-The 62 rounds use 2111.1 agent-minutes and 1000.8 wall-minutes under the campaign’s
+The 63 rounds use 2127.1 agent-minutes and 1017.0 wall-minutes under the campaign’s
 retained effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through

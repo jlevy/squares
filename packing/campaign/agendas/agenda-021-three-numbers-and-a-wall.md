@@ -532,7 +532,7 @@ agenda:
     purpose: tool_validation
     owner_focus: insight
     instances: [11]
-    state: stopped
+    state: complete
     priority: 2
     question: >-
       How large is the near-tight set on the retained 381/100 certificate -- the reachable
@@ -595,6 +595,42 @@ agenda:
       - session-086 stop reason and its Lane B delegation
       disposition: fix-and-rerun
       follow_up: think-614o
+    - scope: >-
+        The same census, re-run in session-087 with the tool and its test built properly.
+      classification: achieved
+      result: >-
+        Delivered in full: devtools/census_tight_cells.py with
+        tests/test_census_tight_cells.py behind it, reading through the MassGrid and
+        scaled_mass_grid seam so the census and the retention decision read the same
+        int64 array, and the per-direction table at all four margins retained as
+        bc-201-n11-tight-cell-census.json.
+        Over 567,130,649 reachable cells in 181 directions, the epsilon = 1/20 tight set
+        is 23,112,904 cells, a summed ratio of 0.040754 -- a fifth of the 0.20 H-065
+        registered and an eighth of its 0.50 kill line, so the hypothesis is accepted.
+        The census reproduces the certificate's own least_cell_mass, 4001/4000, as the
+        minimum in every direction, and epsilon = 0 is empty everywhere, so Condition 5
+        holds with a uniform margin of 1/4000 and epsilon is a band above a floor.
+        The cell's own reading goes the other way and both are recorded. Corollary 1a's
+        exact cover is a search, not a check: the median direction carries 78,016 tight
+        cells against a bar of a few hundred, the set has positive area (7.596 per cent
+        of the centre domain, 19.77 per cent in one direction, still 1.519 per cent at
+        epsilon = 1/100), its bounding box equals the centre domain's own box in all 181
+        directions at every non-empty margin, and its 22,132 components are extended
+        regions of median about 554 cells rather than positions. That is what BC-207
+        consumes and could not start without.
+        The record says plainly what this is not: the census measures the LP solution's
+        near-active set, not the integer optimum, so it is consistent with an integrality
+        gap and is not evidence of one.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-063-h-065-n11-near-tight-cell-census.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-201-n11-tight-cell-census.json
+      disposition: retire-success
+      follow_up: null
+    artifacts:
+    - packing/devtools/census_tight_cells.py
+    - packing/tests/test_census_tight_cells.py
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-063-h-065-n11-near-tight-cell-census.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-201-n11-tight-cell-census.json
     next_evidence: >-
       Whether Corollary 1a's exact-cover step is a check or a search, which BC-207 in
       block two consumes directly and cannot start without.

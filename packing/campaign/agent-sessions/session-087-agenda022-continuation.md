@@ -190,6 +190,64 @@ session:
     - devtools.decide_certificate
     - git commit
     - git push
+  - task: >-
+      Lane B, agenda-021's BC-201 re-run: the census of near-tight event cells on the
+      retained 381/100 certificate at margins 0, 1/100, 1/20 and 1/10, per direction, as
+      a devtool with a test rather than a script -- reading through the MassGrid seam
+      Lane B's first attempt had been building when the rate limit ended it.
+    operator: sub-agent at the thinking level BC-201 declares, one core
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Delivered in full and H-065 accepted. Over 567,130,649 reachable cells in 181
+      directions the epsilon = 1/20 tight set is 23,112,904, a summed ratio of 0.040754
+      against the 0.20 registered. The census reproduces the certificate's declared
+      least_cell_mass, 4001/4000, as the minimum in every direction, and epsilon = 0 is
+      empty everywhere. The cell's own reading goes the other way and both are recorded:
+      Corollary 1a's exact cover is a search, not a check -- positive area, a bounding box
+      equal to the centre domain's in all 181 directions, and 22,132 extended components.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-063-h-065-n11-near-tight-cell-census.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-201-n11-tight-cell-census.json
+    files:
+    - packing/devtools/census_tight_cells.py
+    - packing/tests/test_census_tight_cells.py
+    checks:
+    - 'pytest tests/test_census_tight_cells.py: 8 passed'
+    - 'ruff check, ruff format --check and basedpyright: clean at the lane''s report'
+    uncertainty: >-
+      The census measures the LP solution's near-active set, not the integer optimum, so
+      it is consistent with an integrality gap and is not evidence of one. And epsilon
+      here is a band above a floor rather than a neighbourhood of a gap, because at
+      381/100 the mass gap M - 11 is negative; the same census at a side where the
+      certificate fails would measure a different thing.
+    elapsed_seconds: 967
+    elapsed_quality: platform_measured
+    next_action: >-
+      BC-207 consumes this directly and can now state which of its two branches it is in.
+    phase: 1
+    budget_minutes: 60
+    started_at: '2026-09-05T17:36:00Z'
+    deadline_at: '2026-09-05T18:36:00Z'
+    expected_output: >-
+      One devtool with a test, the per-direction census at the four margins, and the
+      fraction of reachable cells the epsilon = 1/20 set covers summed over 181
+      directions.
+    validation_command: >-
+      uv run --frozen --all-extras --group dev python -m pytest -q tests/test_census_tight_cells.py
+    kill_condition: >-
+      The census cannot be read through the existing sweep seam without a second
+      implementation of the same fill, which would make the two disagree silently.
+    fallback: >-
+      Report the census on the directions that completed and say which did not, rather
+      than extrapolating a per-direction ratio from a subset.
+    write_scope:
+    - packing/devtools/
+    - packing/tests/
+    - packing/campaign/series/series-000-smoke-and-calibration/results/
+    excluded_commands:
+    - git commit
+    - git push
   outputs:
   - packing/frontier/covering-values.yaml
   - packing/devtools/render_certificate_reach.py
