@@ -143,13 +143,20 @@ SUMMARY_STAR_INSET = Decimal(6)
 SUMMARY_STAR_REFERENCE_SIZE = Decimal(14)
 SUMMARY_STAR_TEXT_INSET = Decimal(17)
 SUMMARY_BADGE_SIZE = Decimal(19)
-SUMMARY_EXPLAINER_BASELINE = Decimal(2806)
-SUMMARY_CREDIT_BASELINE = Decimal(2844)
-SUMMARY_STAMP_BASELINE = Decimal(2872)
-SUMMARY_EXPLAINER = (
-    "s(n) is the side of the smallest square holding n unit squares; "
-    "deg is the algebraic degree of that side length"
+SUMMARY_EXPLAINER_BASELINE = Decimal(2804)
+SUMMARY_CREDIT_BASELINE = Decimal(2834)
+SUMMARY_STAMP_BASELINE = Decimal(2864)
+#: The footer gloss, as runs of (text, italic). The variables are set in italic like the
+#: ones on the cards; `deg` is a function name and stays upright.
+SUMMARY_EXPLAINER_RUNS = (
+    ("s", True),
+    ("(", False),
+    ("n", True),
+    (") is the side of the smallest square holding ", False),
+    ("n", True),
+    (" unit squares; deg is the algebraic degree of that side length", False),
 )
+SUMMARY_EXPLAINER = "".join(text for text, _italic in SUMMARY_EXPLAINER_RUNS)
 # Cap height as a fraction of font size, used to sit the badges flush with the
 # top of the card number rather than on its baseline.
 SUMMARY_LABEL_CAP_RATIO = Decimal("0.70")
@@ -241,7 +248,7 @@ def _text_width(text: str, size: str) -> Decimal:
 
 
 SUMMARY_FOOTER_WEIGHT = "700"
-SUMMARY_LEGEND_ROW_PITCH = Decimal(32)
+SUMMARY_LEGEND_ROW_PITCH = Decimal(28)
 # Helvetica offers regular and bold and nothing between, so there is no semibold
 # to ask for: the card labels take bold, the only heavier face available, over a
 # darker grey. The footer block stays regular so the two do not compete.
@@ -755,9 +762,7 @@ def _append_summary_card(root: ET.Element, built: BuiltCase, *, spec: RenderSpec
     )
     # Only the function name is italic, as in ordinary mathematical setting: the
     # parentheses, the argument, the relation and the numeral stay upright.
-    display = _figure_entries()[n]["side"]["display"]
-    sub(bound, "tspan", {"font-style": "italic"}).text = "s"
-    sub(bound, "tspan", {}).text = display[1:]
+    _append_function_text(bound, _figure_entries()[n]["side"]["display"], SUMMARY_SMALL_SIZE)
 
     # The record carries a degree for all 95 known cases, but printing "deg 1"
     # on the 65 integer sides is noise: a whole number is self-evidently
@@ -792,21 +797,12 @@ def _append_lower_bound(card: ET.Element, n: int, *, left: Decimal, baseline: De
     entry = _figure_entries()[n]["lower"]
     if not entry["shown"]:
         return
-    text_x = left
-    if entry["first_proved_here"]:
-        _append_star(
-            card,
-            center_x=left + SUMMARY_STAR_INSET,
-            center_y=_star_center_y(baseline, SUMMARY_SMALL_SIZE),
-            feature="first-proved-here",
-        )
-        text_x = left + SUMMARY_STAR_TEXT_INSET
     lower = sub(
         card,
         "text",
         {
             "data-feature": "lower-bound",
-            "x": format_svg_number(text_x),
+            "x": format_svg_number(left),
             "y": format_svg_number(baseline),
             "font-family": SUMMARY_FONT,
             "font-size": SUMMARY_SMALL_SIZE,
@@ -814,9 +810,7 @@ def _append_lower_bound(card: ET.Element, n: int, *, left: Decimal, baseline: De
             "fill": SUMMARY_SMALL_FILL,
         },
     )
-    display = entry["display"]
-    sub(lower, "tspan", {"font-style": "italic"}).text = "s"
-    sub(lower, "tspan", {}).text = display[1:]
+    _append_function_text(lower, entry["display"], SUMMARY_SMALL_SIZE)
 
 
 @cache
@@ -832,10 +826,36 @@ def _figure_entries() -> dict[int, dict]:
 
 
 def _case_badges(built: BuiltCase) -> tuple[tuple[str, str, str], ...]:
+    """The card's icons, the new-result star first where the case carries one.
+
+    The star reads as one of the badges rather than as punctuation on the bound line,
+    so it sits with them; being first in the row puts it leftmost, since the row is
+    laid out from the right.
+    """
     entry = _figure_entries()[built.frontier.n]
-    return tuple(
-        (badge["glyph"], badge["style"], badge["meaning"]) for badge in entry["badges"]
-    )
+    badges = [(badge["glyph"], badge["style"], badge["meaning"]) for badge in entry["badges"]]
+    if entry["lower"]["first_proved_here"]:
+        badges.insert(0, ("", "star", "lower bound first proved here"))
+    return tuple(badges)
+
+
+#: How far to push the text after an italic `s`, as a fraction of the font size. An
+#: italic letter leans into whatever follows it, and `s(` sets the parenthesis against
+#: the terminal of the s; a thin space is the typesetter's answer, expressed here as an
+#: offset so it does not depend on a font carrying U+2009.
+SUMMARY_ITALIC_KERN = Decimal("0.055")
+
+
+def _append_function_text(parent: ET.Element, display: str, size: str) -> None:
+    """Set `s(n) ...`: the function name italic, the rest upright, kerned apart.
+
+    Only the function name is italic, as in ordinary mathematical setting: the
+    parentheses, the argument, the relation and the numeral stay upright.
+    """
+    sub(parent, "tspan", {"font-style": "italic"}).text = display[0]
+    sub(
+        parent, "tspan", {"dx": format_svg_number(Decimal(size) * SUMMARY_ITALIC_KERN)}
+    ).text = display[1:]
 
 
 def _star_center_y(baseline: Decimal, size: str) -> Decimal:
@@ -1183,20 +1203,42 @@ def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
         },
     ).text = SUMMARY_REPOSITORY
     _append_summary_legend(root, spec=spec)
-    sub(
+    kern_width = Decimal(SUMMARY_FOOTER_SIZE) * SUMMARY_ITALIC_KERN
+    kern = format_svg_number(kern_width)
+    line_width = sum(
+        (_text_width(text, SUMMARY_FOOTER_SIZE) for text, _italic in SUMMARY_EXPLAINER_RUNS),
+        Decimal(0),
+    ) + kern_width * Decimal(
+        sum(
+            1
+            for index, (_text, italic) in enumerate(SUMMARY_EXPLAINER_RUNS)
+            if index and not italic and SUMMARY_EXPLAINER_RUNS[index - 1][1]
+        )
+    )
+    explainer = sub(
         root,
         "text",
         {
             "data-feature": "explainer",
-            "x": str(SUMMARY_WIDTH // 2),
+            # Anchored from the left rather than centred: a centred run made of several
+            # tspans is not laid out as one chunk by every renderer, and the parts stack
+            # on the same centre. Measuring the line and starting it is unambiguous.
+            "x": format_svg_number((Decimal(SUMMARY_WIDTH) - line_width) / 2),
             "y": format_svg_number(SUMMARY_EXPLAINER_BASELINE),
-            "text-anchor": "middle",
             "font-family": SUMMARY_FONT,
             "font-size": SUMMARY_FOOTER_SIZE,
             "font-weight": SUMMARY_SMALL_WEIGHT,
             "fill": SUMMARY_SMALL_FILL,
         },
-    ).text = SUMMARY_EXPLAINER
+    )
+    previous_italic = False
+    for text, italic in SUMMARY_EXPLAINER_RUNS:
+        attributes: dict[str, str] = {"font-style": "italic"} if italic else {}
+        # An upright run following an italic one needs the same thin space the cards use.
+        if previous_italic and not italic:
+            attributes["dx"] = kern
+        sub(explainer, "tspan", attributes).text = text
+        previous_italic = italic
     sub(
         root,
         "text",
