@@ -646,3 +646,51 @@ def test_one_atom_set_certifies_every_size_above_its_mass() -> None:
     for n in (11, 12, 17, 20):
         assert grid_refutation_order(n) ** 2 >= n
         assert least_size_certified(Fraction(grid_refutation_order(n) ** 2)) > n
+
+
+def test_a_signed_weight_is_refused_before_anything_is_decided() -> None:
+    """Nonnegative weights are the theorem's precondition, and a forgery shows why.
+
+    Five atoms in a container of side 11/10 with B = 3/5: +2 at the centre and
+    -1 at each corner. Total mass -2 < 1, every admissible B-square covers the
+    centre and at most one corner, so every placement carries mass at least 1.
+    Every one of the five conditions holds, and the object would "prove"
+    s(1) >= 11/10, which is false: s(1) = 1. The counting step that turns a
+    covering into a bound is monotonicity of the measure, and signed weights
+    break it. PR 78's adversarial review found this (its F1); the fixture is
+    retained so that the verifier can never accept it again.
+    """
+    side = Fraction(11, 10)
+    atoms = (
+        Atom("centre", Fraction(11, 20), Fraction(11, 20), Fraction(2)),
+        Atom("c00", Fraction(0), Fraction(0), Fraction(-1)),
+        Atom("c01", Fraction(0), side, Fraction(-1)),
+        Atom("c10", side, Fraction(0), Fraction(-1)),
+        Atom("c11", side, side, Fraction(-1)),
+    )
+    with pytest.raises(ValueError, match="weight -1 < 0"):
+        Certificate(
+            n=1,
+            outer_side=side,
+            square_side=Fraction(3, 5),
+            atoms=atoms,
+            half_tangents=(Fraction(0), Fraction(1, 2)),
+            symmetry="D4",
+        )
+    # The same atoms with the corners lightened to zero are a legal object and
+    # are refused on the theorem's own terms: the total is 2 >= n = 1.
+    legal = tuple(
+        atom if atom.weight > 0 else Atom(atom.label, atom.x, atom.y, Fraction(0))
+        for atom in atoms
+    )
+    certificate = Certificate(
+        n=1,
+        outer_side=side,
+        square_side=Fraction(3, 5),
+        atoms=legal,
+        half_tangents=(Fraction(0), Fraction(1, 2)),
+        symmetry="D4",
+    )
+    verdict = verify(certificate)
+    assert not verdict.accepted
+    assert any("Condition 2" in failure for failure in verdict.failures)

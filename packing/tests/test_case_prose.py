@@ -312,3 +312,59 @@ def test_check_bound_claim_treats_a_none_reported_bound_as_no_fallback() -> None
     problem = check_bound_claim(claim, front_matter)
     assert problem is not None
     assert "3.9" in problem
+
+
+def test_a_pinned_interval_is_read_as_a_lower_and_an_upper_bound(tmp_path: Path) -> None:
+    """D-445: the n = 11 body wrote "`s(11)` is pinned to `[3.8, 3.877084]`" and stayed on
+    the 19/5 rung for eleven hours under front matter that said 381/100, because no
+    pattern here read an interval. Both endpoints are bounds on the file's own n.
+    """
+    bounds: _Bounds = {
+        "verified_lower_bound": ("3.81", "381/100"),
+        "verified_upper_bound": ("3.87708433", "root of the degree-8 polynomial"),
+        "reported_lower_bound": ("3.788854", None),
+        "reported_upper_bound": ("3.877084", None),
+    }
+    stale = make_case(
+        tmp_path,
+        "n-011-stale.md",
+        11,
+        bounds,
+        "# case\n\n`s(11)` is pinned to `[3.8, 3.877084]`, a gap of `0.077084`.\n",
+    )
+    findings = check_case_file(stale)
+    # 3.8 is 3.81 written to one decimal and passes as such; the gap is what gives
+    # the stale body away, exactly as it did in the record.
+    assert len(findings) == 1
+    assert findings[0].check == "bound-figure"
+    assert "0.077084" in findings[0].detail and "0.067084" in findings[0].detail
+
+    two_decimals = make_case(
+        tmp_path,
+        "n-011-two-decimals.md",
+        11,
+        bounds,
+        "# case\n\n`s(11)` is pinned to `[3.80, 3.877084]`, a gap of `0.067084`.\n",
+    )
+    findings = check_case_file(two_decimals)
+    assert len(findings) == 1
+    assert "3.80" in findings[0].detail
+
+    current = make_case(
+        tmp_path,
+        "n-011-current.md",
+        11,
+        bounds,
+        "# case\n\n`s(11)` is pinned to `[3.81, 3.877084]`, a gap of `0.067084`.\n",
+    )
+    assert check_case_file(current) == []
+
+    # An interval on another case's n is not this file's claim.
+    other = make_case(
+        tmp_path,
+        "n-011-other.md",
+        11,
+        bounds,
+        "# case\n\nBy contrast `s(12)` is pinned to `[3.96, 4]`.\n",
+    )
+    assert check_case_file(other) == []

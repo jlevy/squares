@@ -247,19 +247,36 @@ def test_a_provably_admissible_centre_is_exactly_admissible() -> None:
 # --- acceptance ---------------------------------------------------------------
 
 
-def test_both_n12_certificates_are_accepted_on_the_sub_net() -> None:
+def test_both_n12_certificates_certify_every_direction_of_the_sub_net() -> None:
+    """A sub-net run certifies its directions and decides nothing about the rest.
+
+    Until PR 78's adversarial review (its F6) an all-certified sample came back
+    ``accepted``; a run over one direction of 361 is a control, not a claim, and
+    the verdict says so by staying undecided. The per-direction outcomes are
+    what a control reads.
+    """
     for certificate in (load_n12(RETAINED_393_100), load_n12()):
         verdict = verify_by_intervals(certificate, directions=SUB_NET)
-        assert verdict.accepted, verdict.failures
+        assert not verdict.accepted
         assert len(verdict.directions) == len(SUB_NET)
         assert all(outcome.status == "certified" for outcome in verdict.directions)
         assert sum(outcome.stalled for outcome in verdict.directions) == 0
+        assert verdict.conditions[-1].status == "undecided"
 
 
-def test_the_retained_n11_certificate_is_accepted_on_the_sub_net() -> None:
+def test_the_retained_n11_certificate_certifies_the_sub_net_without_a_verdict() -> None:
     verdict = verify_by_intervals(load_n11(), directions=SUB_NET)
-    assert verdict.accepted, verdict.failures
+    assert not verdict.accepted
+    assert all(outcome.status == "certified" for outcome in verdict.directions)
     assert verdict.total_mass == Fraction(434547, 40000)
+
+
+def test_a_one_direction_sample_cannot_accept_a_certificate() -> None:
+    """The exact shape of the hole: 1 of 361 directions certified, verdict accepted."""
+    verdict = verify_by_intervals(load_n11(), directions=("0",))
+    assert len(verdict.directions) == 1
+    assert verdict.directions[0].status == "certified"
+    assert not verdict.accepted
 
 
 @pytest.mark.exhaustive_exact
@@ -355,7 +372,8 @@ def test_massaccesi_n17_reproduces_the_published_bound_on_the_sub_net() -> None:
     """
     certificate = retained_certificate()
     verdict = verify_by_intervals(certificate, directions=SUB_NET, enclose=True)
-    assert verdict.accepted, verdict.failures
+    assert not verdict.accepted, "a sub-net run is a control, not a verdict"
+    assert all(outcome.status == "certified" for outcome in verdict.directions)
     assert certificate.bounded_side == Fraction(22529, 5000)
     assert float(certificate.bounded_side) == pytest.approx(4.5058)
     assert verdict.total_mass == Fraction(203, 12)
@@ -647,4 +665,7 @@ def test_perturbing_the_coincidence_away_lets_the_same_search_certify() -> None:
     outcome = verdict.directions[0]
     assert outcome.status == "certified"
     assert outcome.stalled == 0
-    assert verdict.failures == ()
+    # One direction certified is the control's answer; the verdict stays
+    # undecided, since a sample decides nothing about the other 360 directions.
+    assert not verdict.accepted
+    assert verdict.conditions[-1].status == "undecided"

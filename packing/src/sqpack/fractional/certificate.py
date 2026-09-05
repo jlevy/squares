@@ -44,7 +44,12 @@ from fractions import Fraction
 from functools import partial
 from itertools import pairwise
 
-from sqpack.fractional.model import Atom, Direction, rotation_from_half_tangent
+from sqpack.fractional.model import (
+    Atom,
+    Direction,
+    require_nonnegative_atom_weights,
+    rotation_from_half_tangent,
+)
 from sqpack.fractional.sweep import minimum_covered_mass
 
 
@@ -99,6 +104,11 @@ class Certificate:
             raise ValueError("half-angle tangents must be strictly increasing")
         if self.half_tangents[0] != 0:
             raise ValueError("the direction net must start at angle zero")
+        # Nonnegative weights are a precondition of the theorem, not one of its
+        # five conditions: Condition 2 bounds the total, and the counting step
+        # that turns the total into a bound on the disjoint inner squares is
+        # monotonicity of the measure, which signed weights break.
+        require_nonnegative_atom_weights(self.atoms)
 
     @property
     def total_mass(self) -> Fraction:
@@ -203,11 +213,12 @@ def ceiling_side(n: int, square_side: Fraction) -> Fraction:
     supremum over the shrinks a net admits.
 
     The consequence worth carrying: ``s(n) <= ceil(sqrt(n))`` holds trivially by
-    grid packing, and this ceiling sits strictly below ``ceil(sqrt(n))``. The
-    method can therefore approach the grid bound but never reach it, and can
-    never close a case whose value *is* the grid bound. ``n = 12`` is exactly
-    such a case: ``s(12) <= 4`` and 4 is the conjectured value, so no certificate
-    of this shape will ever settle it, however fine the net or the site set.
+    grid packing, and every single certificate on a finite net sits strictly
+    below ``ceil(sqrt(n))``. So no one certificate of this shape certifies the
+    grid value; at ``n = 12`` none reaches the conjectured 4. What this lemma
+    does not exclude is a proved family of certificates whose sides tend to the
+    grid value, followed by a limit argument -- whether such a family exists is
+    a question about the covering value, not about this ceiling.
     """
 
     return grid_refutation_order(n) * square_side

@@ -637,8 +637,9 @@ results:
       climbed once the separation oracle was corrected to score the cells the verifier
       decides (D-434), and every rung is retained.
       The retained certificate's total is 149987/12500 = 11.998960, leaving 0.001040
-      below twelve -- the tightest margin of any rung in the record by a factor of
-      twenty-eight, and it survived on the sign of a rounding rather than by design.
+      below twelve -- the tightest margin of any rung in the record, and it survived on
+      the sign of a rounding rather than by design. The next tightest, two rungs below
+      at 197/50, is about seven times wider.
       Rationalisation rounds each orbit up to a multiple of 1/scale, so its cost is at
       most atoms/scale; at 2097 atoms and scale 200,000 it took 0.005314, five times what
       remained. Raising the scale twentyfold would have cost about 0.00027 and would not
@@ -646,8 +647,8 @@ results:
       Margin does not shrink monotonically as the ladder climbs -- the
       197/50 rung two below this one has 0.007175 and 79/20 has 0.029410, so a tight
       rung is evidence about that run and not about how much room is left.
-      This rung also cost the exhaustive tier, when it was retained: 2097 atoms is three
-      times any other retained certificate and the exact sweep is quadratic in the atom
+      This rung also cost the exhaustive tier, when it was retained: 2097 atoms is 1.8 times the next largest
+      retained certificate, the 1184-atom n = 17 rung, and the exact sweep is quadratic in the atom
       count, so deciding it took 4866 s where the interval route took 110 s. The sweep
       was rewritten the same day to decide in integers on the weights' common scale, in
       parallel over directions, and returns the same verdict in well under a minute;
@@ -658,10 +659,15 @@ results:
       carrying mass at least 1 by Condition 5, which forces the total past n and breaks Condition 2.
       Here that ceiling is 4B = 3.9908, and 4/(1 + D) = 3.990816 over every shrink the
       181-direction net admits, so 79/20 has 0.0408 of runway left.
-      The consequence for this case is structural and worth stating plainly: the grid
+      The consequence for this case is structural and worth stating exactly: the grid
       packing gives s(12) <= 4, the ceiling sits strictly below 4, and 4 is the
-      conjectured value -- so no certificate of this shape will ever settle n = 12,
-      however fine the net or the site set. What remains is how close to 4 it can get.
+      conjectured value -- so no single certificate of this shape certifies s(12) >= 4,
+      however fine the net or the site set. What the ceiling does not exclude is a
+      proved family of certificates with sides tending to 4 and a limit argument on top
+      of it; whether such a family exists is a question about the covering value, and
+      an earlier version of this sentence overstated the ceiling into a method-wide
+      impossibility (PR 78's adversarial review, F14). What remains is how close to 4 a
+      certificate can get.
   - id: T-018
     claim: >-
       s(11) >= 381/100, by a first-party weighted fractional unavoidable-set
@@ -709,7 +715,8 @@ results:
     next_rung: >-
       C4 is reached by the interval-certified decision, which is independent in method
       and, deciding coverage on the doubled net, never invokes the D4 reflection and so
-      does not need Condition 1 at all. C5 needs a review artifact by someone outside the project.
+      does not need Condition 1 at all. C5 is review-ready under epistemics.md -- a mapped,
+      non-superseded review artifact -- and none has been written for this result.
       The bound itself: 3.81 converged with margin -- objective 10.8603 against eleven,
       rationalised to 434547/40000 = 10.863675 -- so the next rung is a search question
       rather than a limit of the method. Getting there took two attempts at the same
@@ -813,8 +820,8 @@ results:
       - packing/tests/test_fractional_certificate.py
     next_rung: >-
       C4 is reached by the interval-certified decision, the first here that is not
-      exact-algebraic. C5 needs a review artifact by someone
-      outside the project. The bound itself: the retained certificate's total is
+      exact-algebraic. C5 is review-ready under epistemics.md -- a mapped, non-superseded
+      review artifact -- and none has been written for this result. The bound itself: the retained certificate's total is
       423327/25000 = 16.933080, leaving 0.066920 below seventeen, and that margin is
       what a further rung has to be found inside.
       One figure from the ladder is worth carrying, because it contradicts the obvious
@@ -931,7 +938,8 @@ results:
       C4 is earned by two evidence entries whose method values differ, the exact
       event-cell sweep and the interval branch and bound, both run in this repository.
       Unlike T-017 and T-019 no independent evaluator reviewed the scoring, and there is
-      no external review, so C5 is as far away here as there.
+      no review artifact, so C5 -- review-ready, a mapped review -- is as far away here as
+      there.
     evidence:
       - E-n020-fractional-certificate
       - E-fractional-interval-decision

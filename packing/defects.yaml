@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 444
+count: 449
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14160,3 +14160,186 @@ defects:
   regression: packing/tests/test_nagamochi_bounds.py
   status: fixed
   recorded_in: packing/tests/test_nagamochi_bounds.py
+- id: D-445
+  title: The n = 11 case body stayed on the 19/5 rung under front matter that said 381/100
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    from the 381/100 retention at about 12:00 UTC until the records lane of the PR 80
+    review read the body against its front matter at about 23:30 -- across the same
+    evening in which D-442 recorded and fixed the identical class for n = 17 through 21
+    and built a detector for it
+  severity: medium
+  what: >-
+    packing/frontier/n-011.md's body opened by pinning s(11) to [3.8, 3.877084] with a gap
+    of 0.077084, described the certificate as 425 atoms of total mass 43391/4000 at side
+    19/5, and gave the movement as +0.011146 -- every one of them the 19/5 rung's figure --
+    while the front matter above it carried 381/100. This is D-442 again, on the one case
+    the project exists for, and it survived D-442's own fix because that fix rewrote the
+    five bodies the T-019 and T-020 retentions had moved and did not re-read the sixth.
+    It also survived D-442's detector. check_case_prose matches a quoted bound in the
+    shape s(n) >= figure or s(n) <= figure; this body wrote "pinned to `[3.8, 3.877084]`",
+    an interval, and named the atom count and mass as bare figures with no anchor the
+    detector recognises.
+  consequence: >-
+    No bound is wrong: the front matter, the register and the certificate agree at
+    381/100. A reader opening the case file for the smallest open case -- the file the
+    README sends them to first -- was told the bound was 3.8 for about eleven hours after
+    it was 3.81, and told the wrong movement, atom count and mass with it. The finding is
+    the detector's: a check that recognises one prose shape catches one prose shape.
+  fix: >-
+    Fixed on 2026-09-04. The body is rewritten against its front matter -- 381/100,
+    1121 atoms, 434547/40000, least 4001/4000, movement +0.021146, the two rungs below
+    and the 3.82 wall -- and check_case_prose now reads the "pinned to [a, b]" interval
+    form as a lower and an upper bound on the file's own n, so the shape this body used is
+    checked like the others. The sentence is also cross-checked here rather than trusted:
+    the figures are the retained certificate's own.
+  regression: packing/tests/test_case_prose.py
+  status: fixed
+  recorded_in: packing/devtools/check_case_prose.py
+- id: D-446
+  title: Three records said C5 needs a reviewer outside the project; the rubric says review-ready
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    from the T-017 registration on 2026-09-04 until the PR 80 review promoted T-018 to C5
+    on the strength of its own review artifact and the parent's records were read against
+    epistemics.md to see whether that was allowed
+  severity: low
+  what: >-
+    epistemics.md defines C5 as review-ready: a C3 or C4 result plus an existing
+    review_artifact mapped as a non-superseded review. It says nothing about who wrote the
+    review, and external review is not a confirmation rung at all -- novelty's
+    confirmed-novel is the label that needs priority confirmed outside the repository.
+    T-017's, T-019's and T-020's next_rung fields, and the pull request's own text, said
+    instead that C5 "needs a review artifact by someone outside the project". That is a
+    stricter rung than the rubric defines, stated as though it were the rubric.
+  consequence: >-
+    Nothing was scored wrongly, because no fractional result had a review artifact to
+    score. The misstatement mattered the moment one did: PR 80's promotion of T-018 to C5
+    is legitimate under the rubric, and a reader holding the parent's sentence would have
+    read it as illegitimate. A record that states its own rubric has to state it exactly.
+  fix: >-
+    Fixed on 2026-09-04. The three next_rung sentences now say what C5 is -- review-ready,
+    a mapped, non-superseded review artifact, none yet written for the result -- and the
+    pull request says the same.
+  regression: >-
+    None automated; the rubric's own checker derives rungs from the evidence and does not
+    read prose about rungs. The review of PR 80 records the correction.
+  status: fixed
+  recorded_in: packing/frontier/results.yaml
+- id: D-447
+  title: The certificate ceiling was written up as a method-wide impossibility
+  date: '2026-09-04'
+  layer: record
+  class: soundness
+  direction: conservative
+  detected_by: review
+  latent_for: >-
+    from the ceiling's registration on 2026-09-04 until PR 80's review (its F14) read the
+    lemma against the sentences drawn from it the same evening
+  severity: low
+  what: >-
+    The lemma is right: no certificate for n exists at a side above ceil(sqrt(n)) * B, so
+    every single certificate on a finite net sits strictly below the grid value. The
+    sentences drawn from it in certificate.py's docstring, results.yaml (T-017),
+    SYNOPSIS.md and README.md went further -- "no certificate of this shape will ever
+    settle n = 12, however fine the net or the site set", "the method can approach the
+    grid value and never reach it". That is too strong. A proved family of valid
+    certificates with sides tending to 4 would establish s(12) >= 4 by a limit argument
+    without any member reaching 4. The ceiling rules out one finite certificate at the
+    grid bound; whether a family exists is a question about the covering value, which
+    the ceiling says nothing about.
+  consequence: >-
+    A false claim about the method, in the conservative direction: it understated what
+    the method could in principle do, and would have steered a later block away from a
+    route the mathematics leaves open. No bound depends on it.
+  fix: >-
+    Fixed on 2026-09-04 in all four places: the ceiling rules out a single certificate
+    at the grid value, and a limiting family is stated as not excluded and as a question
+    about the covering value. The reach table's foreclosure column, which reads the same
+    lemma, describes single certificates and is unchanged.
+  regression: >-
+    None automated; the claim is prose about a lemma. The lemma itself is tested in
+    test_fractional_certificate.py.
+  status: fixed
+  recorded_in: packing/src/sqpack/fractional/certificate.py
+- id: D-448
+  title: Two comparison factors in T-017's prose were wrong by four times
+  date: '2026-09-04'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    from the 99/25 retention on 2026-09-04 until PR 80's review (its F33) recomputed them
+    the same evening
+  severity: low
+  what: >-
+    T-017's next_rung said the 99/25 rung's margin of 0.001040 was "the tightest margin
+    of any rung in the record by a factor of twenty-eight". Twenty-eight is the ratio
+    against the 79/20 rung's 0.029410; the previous tightest is the 197/50 rung's
+    0.007175, a factor of 6.9. Two sentences later it said 2097 atoms "is three times any
+    other retained certificate"; the next largest is n = 17's 1184, a factor of 1.77.
+    Both are ratios of figures the rung-figure detector recomputes individually; it does
+    not recompute ratios between them.
+  consequence: >-
+    Two overstated comparisons in a paragraph whose purpose is to say how much room is
+    left, and a reader would have taken the rung for tighter and the certificate for
+    larger than they are. Nothing else depends on either.
+  fix: >-
+    Fixed on 2026-09-04: "about seven times tighter than the 197/50 rung's 0.007175" and
+    "1.8 times the next largest retained certificate, the 1184-atom n = 17 rung".
+  regression: >-
+    None automated. A ratio of two recomputed figures is the next shape for
+    check_rung_figures to learn, and D-439's list of shapes it does not read grows by
+    one.
+  status: fixed
+  recorded_in: packing/frontier/results.yaml
+- id: D-449
+  title: The exact sweep's reported witness centre lies outside the admissible domain on most directions
+  date: '2026-09-04'
+  layer: verifier
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: >-
+    since the sweep's first commit on 2026-09-04; found by PR 80's review (its F11) as a
+    possibility and measured on this branch's head by the code lane of the review of that
+    review: 158 of 181 directions at n = 11 and 159 of 181 at n = 17
+  severity: low
+  what: >-
+    minimum_covered_mass reports, beside the least covered mass, a witness centre for it:
+    the midpoint of the event cell that attains the minimum. The reachable cells are the
+    event cells that meet the admissible centre domain, and most of them meet it only in
+    part, so the midpoint of the cell is usually outside the domain -- a point at which no
+    B-square is admissible at all. The value is right: the mass is constant on the cell
+    and the cell does meet the domain. The point reported as attaining it is not a point
+    where anything attains it.
+  consequence: >-
+    No verdict and no bound is affected; the least covered mass, which is what
+    Condition 5 decides on and what every record quotes, is computed over the right
+    cells. What is wrong is a diagnostic that presents itself as a witness: a reader who
+    took the printed centre and placed a B-square there would find the placement
+    inadmissible. Two independent instruments -- the exact sweep and the interval branch
+    and bound -- agree on the value to the digit, and neither has ever been asked to
+    agree on the witness.
+  fix: >-
+    Outstanding; bead think-xyt1 under the port epic think-pev1. PR 80's _cell_witness
+    picks a point strictly inside the cell's intersection with the domain; ported onto
+    this branch it must go into a helper both the integer and the Fraction routes call
+    (the stack's 28990b00 head merged onto this branch left the fix in the Fraction
+    reference path only, failing the value-and-witness equality test on five of six
+    directions; its 04127189 head applies the helper on both routes and is the code
+    to port), and it must
+    be exhausted on all 181 directions of all four retained certificates on the integer
+    route, because the strict-inside check is a new hard-error path.
+  regression: >-
+    None yet; the port adds a test that every reported witness is admissible, on every
+    direction of every retained certificate.
+  status: outstanding
+  recorded_in: packing/src/sqpack/fractional/sweep.py
+  bead: think-xyt1
