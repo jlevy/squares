@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 454
+count: 455
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14632,3 +14632,54 @@ defects:
   recurrence_of: D-442
   status: fixed
   recorded_in: packing/frontier/results.yaml
+- id: D-455
+  title: The inline-SVG ownership check swept the vendored submodule's own fixtures
+  date: '2026-09-05'
+  layer: tooling
+  class: robustness
+  detected_by: gate
+  latent_for: >-
+    three merges to main -- f060b1d7, 1d541077 and 85d1c976, about nine hours on
+    2026-09-05 -- from the commit that vendored kpress. No pull request could have seen
+    it: the step belongs to the complete integration surface, which the workflow runs
+    only on pushes to main.
+  severity: medium
+  what: >-
+    check_svg_rendering's `all_inline_svg_targets_are_owned_artifacts` control asks a
+    question about this repository's prose -- does every SVG a document embeds resolve to
+    an artifact this repository builds and retains? -- and answered it over a document set
+    that was not this repository's. The sweep walked REPO.rglob("*.md") excluding
+    `resources`, `node_modules` and dot-prefixed directories, a list written when those
+    were the only foreign trees in the checkout. kpress is now vendored as a submodule at
+    vendor/kpress, its own test fixtures embed two SVGs of their own, and the control
+    duly reported that an upstream project's fixture is not one of our artifacts. The
+    exclusion existed already in the formatter's list, where `.flowmarkignore` names
+    `vendor/` and states the reason; the Python sweep had not been given it. The same
+    predicate was written out twice in the file, once per sweep, so there were two places
+    to forget it and no single place that decided.
+  consequence: >-
+    No artifact, bound or document is wrong: the finding was about a file this repository
+    does not own, and every one of our own embeds resolves. What broke is the gate. The
+    complete integration surface failed on every push to main from the vendoring commit
+    onward, so the one tier that runs the record and rendering controls reported nothing
+    usable, and a real failure arriving behind this one would have been read as the same
+    known redness.
+  fix: >-
+    Fixed on 2026-09-05. The exclusion is stated once, as FOREIGN_DIRECTORY_NAMES beside
+    REPO, and both sweeps draw their documents from one `repository_documents()`
+    generator, so they cannot disagree about which documents count -- a target that one
+    sweep calls unowned and the other cannot see is a contradiction, not a finding. The
+    set gains `vendor`, matching `.flowmarkignore` and for the reason it records: the
+    Markdown under a vendored submodule is the upstream project's.
+  regression: >-
+    packing/tests/test_check_svg_rendering.py, in the fast tier where the gate that
+    caught this one runs only on main. Four controls: the sweep reaches README.md and
+    AGENTS.md, so a sweep that excluded everything cannot pass the rest; it does not
+    reach the named vendored document that turned main red, skipped rather than passed
+    when the submodule is absent, because a test that searches for its own subject
+    passes once the subject is gone; no swept document lies under any foreign directory,
+    stated over the whole result so a second vendored tree cannot slip in; and
+    `.flowmarkignore` and FOREIGN_DIRECTORY_NAMES agree about `vendor`, since the two
+    lists are maintained by hand in different languages.
+  status: fixed
+  recorded_in: packing/devtools/check_svg_rendering.py

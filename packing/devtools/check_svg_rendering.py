@@ -9,6 +9,7 @@ import os
 import re
 import subprocess
 import sys
+from collections.abc import Iterator
 from dataclasses import replace
 from decimal import Decimal
 from fractions import Fraction
@@ -18,6 +19,23 @@ ROOT = Path(__file__).resolve().parents[1]
 # The repository root. Document surfaces (TUTORIAL.md, SYNOPSIS.md, README.md) live
 # there; the rendered artifacts they embed live under packing/.
 REPO = ROOT.parent
+#: Directories whose Markdown is not this repository's to police. `resources` is the
+#: literature archive, whose transcriptions are archived source rather than our prose;
+#: `vendor` holds upstream repositories checked out as submodules, the exclusion
+#: `.flowmarkignore` states for the same reason; `node_modules` is installed. A
+#: dot-prefixed directory is tool-owned. Stated here rather than at each sweep: the two
+#: controls below must agree about which documents count, because a target that one
+#: sweep calls unowned and the other cannot see is a contradiction, not a finding.
+FOREIGN_DIRECTORY_NAMES = frozenset({"resources", "vendor", "node_modules"})
+
+
+def repository_documents() -> Iterator[Path]:
+    """Every Markdown document this repository is answerable for."""
+    for document_path in REPO.rglob("*.md"):
+        parts = document_path.relative_to(REPO).parts
+        if FOREIGN_DIRECTORY_NAMES & set(parts) or any(part.startswith(".") for part in parts):
+            continue
+        yield document_path
 
 
 def _rejects(function, *args, **kwargs) -> bool:
@@ -769,14 +787,7 @@ def run_gallery_controls() -> dict[str, bool]:
     }
 
     inline_svg_targets = []
-    for document_path in REPO.rglob("*.md"):
-        document_parts = document_path.relative_to(REPO).parts
-        if (
-            "resources" in document_parts
-            or "node_modules" in document_parts
-            or any(part.startswith(".") for part in document_parts)
-        ):
-            continue
+    for document_path in repository_documents():
         inline_svg_targets.extend(
             (document_path.parent / target).resolve()
             for target in re.findall(
@@ -809,10 +820,8 @@ def run_gallery_controls() -> dict[str, bool]:
     comparison_artifact = by_id["n10-source-return-comparison"]["artifact"]
     comparison_embeds = {
         document_path.relative_to(REPO).as_posix()
-        for document_path in REPO.rglob("*.md")
-        if not {"resources", "node_modules"} & set(document_path.relative_to(REPO).parts)
-        and not any(part.startswith(".") for part in document_path.relative_to(REPO).parts)
-        and embeds(document_path.relative_to(REPO).as_posix(), comparison_artifact)
+        for document_path in repository_documents()
+        if embeds(document_path.relative_to(REPO).as_posix(), comparison_artifact)
     }
     return {
         "gallery_has_five_known_answers": len(examples) == 5,
