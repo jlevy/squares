@@ -363,6 +363,16 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
         "test_n11_thirdparty_verify.py": {
             "test_the_package_decides_its_own_shipped_certificate",
         },
+        # The standalone verifier's own full decision of the retained n = 11 bytes,
+        # run as a subprocess. Measured 2026-09-05 at 49.4 s for the node, 47.5 s of it
+        # the verifier itself: 181 directions over 567,131,843 reachable cells, in
+        # pure-Fraction and integer arithmetic with no numpy and no parallelism to
+        # reach for. That is the price of a decision that imports nothing from this
+        # repository. Its refusals run in the fast tier beside it, since a refusal is
+        # decided before the sweep.
+        "test_minimal_verify.py": {
+            "test_the_retained_bytes_are_verified_on_the_full_net",
+        },
         "test_exact_jets.py": {
             "test_n5_wall_and_contact_gradients_match_authoritative_source_rows",
         },
