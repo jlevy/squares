@@ -26,7 +26,7 @@ properties:
   composite:
     type: object
     additionalProperties: false
-    required: [layout, renderer, square_count, svg, png_preview]
+    required: [layout, renderer, square_count, svg, png_preview, png_high_resolution]
     properties:
       layout: {const: '10 by 10, row-major n=1..100'}
       renderer: {const: sqpack deterministic composite renderer}
@@ -42,12 +42,26 @@ properties:
       png_preview:
         type: object
         additionalProperties: false
-        required: [path, derived_from, width, height]
+        required: [path, derived_from, scale, width, height]
         properties:
           path: {const: atlas/known-best/known-best-1-100.png}
           derived_from: {const: atlas/known-best/known-best-1-100.svg}
+          scale: {const: 1}
           width: {const: 2400}
           height: {const: 2896}
+      png_high_resolution:
+        # The whole-number scale is the load-bearing constant, not the pixel counts:
+        # a fractional scale lands every edge on a fractional pixel boundary and the
+        # antialiasing shades it invents cost more bytes than the extra pixels do.
+        type: object
+        additionalProperties: false
+        required: [path, derived_from, scale, width, height]
+        properties:
+          path: {const: 'atlas/known-best/known-best-1-100@2x.png'}
+          derived_from: {const: atlas/known-best/known-best-1-100.svg}
+          scale: {const: 2}
+          width: {const: 4800}
+          height: {const: 5792}
   entries:
     type: array
     minItems: 100

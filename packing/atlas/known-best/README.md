@@ -12,9 +12,24 @@ rebuild it, where each fact on it comes from, and how to extend it past `n = 100
 
 The composite is a native 10-by-10 SVG, not a screenshot montage.
 Its 5,050 square polygons come from the same normalized witnesses as the individual
-figures under [`rendering/`](rendering/). [`known-best-1-100.png`](known-best-1-100.png)
-is the GitHub-facing raster preview; it carries the SHA-256 of its source SVG so the
-atlas check rejects a stale preview.
+figures under [`rendering/`](rendering/).
+
+The composite ships in four forms, all drawn from that one SVG in one build:
+
+| File | Size | For |
+| --- | --- | --- |
+| [`known-best-1-100.svg`](known-best-1-100.svg) | 2400 × 2896 units | the source; scales to anything |
+| [`known-best-1-100.png`](known-best-1-100.png) | 2400 × 2896 px | the GitHub-facing raster preview |
+| [`known-best-1-100@2x.png`](known-best-1-100@2x.png) | 4800 × 5792 px | attaching, or downscaling for social media |
+| [`known-best-1-100.pdf`](known-best-1-100.pdf) | 25 × 30.17 in | printing; vector, so text stays selectable |
+
+Each export carries the SHA-256 of its source SVG, so `--check` rejects any one of them
+that has fallen behind the drawing.
+The 2x raster is scaled by a whole number rather than to a round pixel width: a
+fractional scale lands every edge on a fractional pixel boundary, and the antialiasing
+shades the rasteriser then invents cost more bytes than the extra pixels do.
+Rendered from this SVG, a 4096-pixel-wide export is 1,440,555 bytes for 20.2 megapixels
+where the 2x export is 1,294,216 for 27.8.
 
 The pipeline has four separate layers:
 

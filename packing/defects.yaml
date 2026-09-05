@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 456
+count: 457
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -14738,3 +14738,47 @@ defects:
   status: fixed
   recorded_in: packing/src/sqpack/cli/validate.py
   bead: think-tr2z
+- id: D-457
+  title: The atlas drew one line weight for cairosvg and another for a browser
+  date: '2026-09-05'
+  layer: tooling
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    since the composite was first drawn; invisible until the explainer embedded it,
+    because every artifact this repository builds from the file is drawn by the one
+    renderer that ignores the attribute.
+  severity: low
+  what: >-
+    Every shape in the composite carried `vector-effect="non-scaling-stroke"`, 5,150 of
+    them. The attribute takes a stroke width out of the drawing's own coordinate system
+    and measures it in the viewport instead, so the line no longer shrinks when the
+    figure does. cairosvg ignores it outright -- measured at scale 1, 2 and 4, the
+    rendered stroke is identical with the attribute and without -- so it never affected
+    the PNG or the PDF. Chromium honours it, and the explainer shows this 2400-unit
+    figure in a column about 620 pixels wide. There the container outline's 1.15 stayed
+    1.15 device pixels instead of scaling down with its cell, printing about 3.8 times
+    heavier relative to the drawing than the same file rendered standalone, while the
+    0.42 of the square outlines stayed sub-pixel and did not. One file, two line
+    weights, decided by which program drew it.
+  consequence: >-
+    Nothing the figure asserts is wrong; every bound, colour and star is the record's.
+    What was wrong is that the figure did not look like itself. In the explainer the
+    hundred container boxes read as heavy rules against hairline interiors, an emphasis
+    the drawing never asked for and that the standalone PDF does not show, so a reader
+    comparing the two saw two different figures.
+  fix: >-
+    Fixed on 2026-09-05 by removing the attribute from the composite's container
+    outlines and square fills, with the measurement recorded beside the widths it
+    decides. The change is provably invisible to everything already committed: the
+    regenerated 1x raster is pixel-identical to its predecessor, and only the source
+    receipt differs.
+  regression: >-
+    None added. The property that matters -- the two renderers agreeing -- is not
+    something a unit test can hold without a browser in the suite, and the existing
+    drift check already refuses a raster that disagrees with its SVG. The same attribute
+    is still emitted by the shared packing renderer and the T-018 visual, where it is
+    equally inert under cairosvg and equally wrong under a browser; removing it there
+    touches every retained case rendering and is carried separately (think-igdg).
+  status: fixed
+  recorded_in: packing/devtools/build_known_best_atlas.py

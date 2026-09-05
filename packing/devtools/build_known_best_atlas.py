@@ -96,6 +96,7 @@ RENDER_ROOT = ATLAS_ROOT / "rendering"
 MANIFEST = ATLAS_ROOT / "manifest.json"
 SUMMARY_SVG = ATLAS_ROOT / "known-best-1-100.svg"
 SUMMARY_PNG = ATLAS_ROOT / "known-best-1-100.png"
+SUMMARY_PNG_2X = ATLAS_ROOT / "known-best-1-100@2x.png"
 GENERATOR = "python -m devtools.build_known_best_atlas"
 USER_AGENT = "thinking-scratchpad-known-best-atlas/1.0"
 
@@ -317,6 +318,50 @@ class BuiltCase:
     witness: dict
     witness_text: str
     rendering_text: str
+
+
+@dataclass(frozen=True)
+class RasterExport:
+    """One PNG export of the composite, at a whole multiple of the drawing's units.
+
+    ``width`` and ``height`` are read from the canvas constants when asked rather
+    than stored, so a resized canvas moves every export with it and cannot leave
+    one behind at the old size.
+    """
+
+    path: Path
+    scale: int
+    role: str
+
+    @property
+    def width(self) -> int:
+        return SUMMARY_WIDTH * self.scale
+
+    @property
+    def height(self) -> int:
+        return SUMMARY_HEIGHT * self.scale
+
+    @property
+    def name(self) -> str:
+        return f"atlas/known-best/{self.path.name}"
+
+
+# Both rasters of the composite, drawn in the same run and from the same SVG as
+# the PDF. The scales are whole numbers on purpose, and the reason is measured
+# rather than aesthetic: a fractional scale puts every edge in the drawing on a
+# fractional pixel boundary, so the rasteriser invents an antialiasing shade for
+# each one and PNG loses the flat runs it compresses. Rendered from this SVG, a
+# 4096-pixel-wide export (a scale of 4096/2400) carries 48,456 distinct colours
+# in 1,440,555 bytes, while the 2x export below carries 32,201 in 1,294,115 --
+# 37% more pixels for 10% fewer bytes. The obvious round number is the more
+# expensive one, so it is not used.
+#
+# 2x rather than 3x because 3x costs 2,150,682 bytes for detail past what the
+# 1x preview already resolves, and this is a binary paid for on every clone.
+SUMMARY_RASTERS = (
+    RasterExport(path=SUMMARY_PNG, scale=1, role="preview"),
+    RasterExport(path=SUMMARY_PNG_2X, scale=2, role="high-resolution export"),
+)
 
 
 def _json_text(value: object) -> str:
@@ -692,9 +737,20 @@ def _append_summary_card(root: ET.Element, built: BuiltCase, *, spec: RenderSpec
             "width": format_svg_number(SUMMARY_PACKING_SIZE),
             "height": format_svg_number(SUMMARY_PACKING_SIZE),
             "fill": PAPER_THEME.background,
+            # Stroke widths here are in user units and scale with the drawing, deliberately.
+            # `vector-effect="non-scaling-stroke"` used to be set on both this outline and the
+            # square fills below, and it was doing nothing useful and one bad thing. cairosvg
+            # ignores the attribute outright -- measured at scale 1, 2 and 4, the rendered
+            # stroke is identical with it and without -- so no PNG or PDF this repository
+            # builds has ever been affected by it. Chromium does honour it, and resolves it
+            # against the size the figure is displayed at rather than the size it was drawn at.
+            # The explainer shows this 2400-unit figure in a column about 620px wide, so the
+            # 1.15 stayed 1.15 device pixels instead of shrinking with everything around it:
+            # the container box printed about 3.8 times heavier, relative to its own cell, than
+            # the same file rendered standalone. One artifact, two line weights, depending on
+            # who drew it.
             "stroke": PAPER_THEME.container,
             "stroke-width": "1.15",
-            "vector-effect": "non-scaling-stroke",
         },
     )
     for square in frame.squares:
@@ -720,7 +776,6 @@ def _append_summary_card(root: ET.Element, built: BuiltCase, *, spec: RenderSpec
                 "stroke": PAPER_THEME.container,
                 "stroke-width": "0.42",
                 "stroke-linejoin": "round",
-                "vector-effect": "non-scaling-stroke",
             },
         )
         if color.angle_class is not None:
@@ -1384,51 +1439,41 @@ def png_summary_receipt(content: bytes) -> tuple[int, int, str | None]:
     return width, height, source_sha256
 
 
-def _png_matches_summary(path: Path, svg_text: str) -> bool:
-    if not path.is_file():
+def _png_matches_summary(export: RasterExport, svg_text: str) -> bool:
+    if not export.path.is_file():
         return False
     try:
-        width, height, source_sha256 = png_summary_receipt(path.read_bytes())
+        width, height, source_sha256 = png_summary_receipt(export.path.read_bytes())
     except UnicodeDecodeError, ValueError:
         return False
     expected_sha256 = hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
     return (width, height, source_sha256) == (
-        SUMMARY_WIDTH,
-        SUMMARY_HEIGHT,
+        export.width,
+        export.height,
         expected_sha256,
     )
 
 
-def _write_png_preview(content: bytes, svg_text: str) -> None:
-    """Stamp the preview with the SVG it came from, check its size, and write it."""
-    stamped = _png_with_summary_source(
-        content, hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
-    )
-    width, height, _source_sha256 = png_summary_receipt(stamped)
-    if (width, height) != (SUMMARY_WIDTH, SUMMARY_HEIGHT):
-        raise ValueError(
-            f"PNG preview dimensions are {width}x{height}; expected "
-            f"{SUMMARY_WIDTH}x{SUMMARY_HEIGHT}"
-        )
-    with atomic_output_file(SUMMARY_PNG, make_parents=True) as temporary:
-        temporary.write_bytes(stamped)
+def _update_png_export(export: RasterExport, svg_text: str) -> None:
+    """Draw one raster from the SVG, with the same rasteriser that draws the PDF.
 
+    ImageMagick used to draw the preview, and its own SVG renderer restarts each
+    `tspan` at its parent's `x`, which set the italic `s` on top of the `(` in every
+    bound line. The SVG and the PDF were always right; only the preview carried it.
+    cairosvg is a declared dependency and already draws the PDF in this same command,
+    so every raster of one drawing now agrees, and no external tool has to be
+    installed.
 
-def _update_png_preview(svg_text: str) -> None:
-    """Draw the preview from the SVG, with the same rasteriser that draws the PDF.
-
-    ImageMagick used to draw this, and its own SVG renderer restarts each `tspan` at
-    its parent's `x`, which set the italic `s` on top of the `(` in every bound line.
-    The SVG and the PDF were always right; only the preview carried it. cairosvg is a
-    declared dependency and already draws the PDF in this same command, so the two
-    rasters of one drawing now agree, and no external tool has to be installed.
+    The size guard is what stops a resized canvas from leaving a stale export behind:
+    the receipt names the canvas, so a raster drawn at another size is refused rather
+    than written.
     """
-    if _png_matches_summary(SUMMARY_PNG, svg_text):
+    if _png_matches_summary(export, svg_text):
         return
     content = cairosvg.svg2png(
         bytestring=svg_text.encode("utf-8"),
-        output_width=SUMMARY_WIDTH,
-        output_height=SUMMARY_HEIGHT,
+        output_width=export.width,
+        output_height=export.height,
         background_color="white",
     )
     if not isinstance(content, bytes):  # pragma: no cover - cairosvg returns bytes here
@@ -1437,13 +1482,41 @@ def _update_png_preview(svg_text: str) -> None:
         content, hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
     )
     width, height, _source_sha256 = png_summary_receipt(stamped)
-    if (width, height) != (SUMMARY_WIDTH, SUMMARY_HEIGHT):
+    if (width, height) != (export.width, export.height):
         raise ValueError(
-            f"PNG preview dimensions are {width}x{height}; expected "
-            f"{SUMMARY_WIDTH}x{SUMMARY_HEIGHT}"
+            f"PNG {export.role} dimensions are {width}x{height}; expected "
+            f"{export.width}x{export.height}"
         )
-    with atomic_output_file(SUMMARY_PNG, make_parents=True) as temporary:
+    with atomic_output_file(export.path, make_parents=True) as temporary:
         temporary.write_bytes(stamped)
+
+
+def _update_png_exports(svg_text: str) -> None:
+    """Redraw every raster of the composite from the SVG this run produced."""
+    for export in SUMMARY_RASTERS:
+        _update_png_export(export, svg_text)
+
+
+def _composite_pdf_problems(svg_text: str) -> list[str]:
+    """Report the PDF export against the SVG this build produced.
+
+    The PDF is written by `render_composite_pdf`, which owns the page geometry and
+    keeps its own `--check`. This reads the receipt that module writes so the atlas
+    check reports the whole family, rather than passing three of four exports and
+    leaving the reader to run a second command to learn about the fourth.
+    """
+    name = f"atlas/known-best/{render_composite_pdf.SUMMARY_PDF.name}"
+    if not render_composite_pdf.SUMMARY_PDF.is_file():
+        return [f"missing {name}"]
+    try:
+        recorded = render_composite_pdf.pdf_receipt(
+            render_composite_pdf.SUMMARY_PDF.read_bytes()
+        )
+    except ValueError:
+        return [f"{name} is not a readable PDF"]
+    if recorded != hashlib.sha256(svg_text.encode("utf-8")).hexdigest():
+        return [f"missing or stale {name} export receipt"]
+    return []
 
 
 @cache
@@ -1576,10 +1649,18 @@ def _expected_outputs() -> tuple[dict[Path, str], dict]:
             },
             "composite": {
                 "layout": "10 by 10, row-major n=1..100",
+                "png_high_resolution": {
+                    "derived_from": "atlas/known-best/known-best-1-100.svg",
+                    "height": SUMMARY_HEIGHT * 2,
+                    "path": "atlas/known-best/known-best-1-100@2x.png",
+                    "scale": 2,
+                    "width": SUMMARY_WIDTH * 2,
+                },
                 "png_preview": {
                     "derived_from": "atlas/known-best/known-best-1-100.svg",
                     "height": SUMMARY_HEIGHT,
                     "path": "atlas/known-best/known-best-1-100.png",
+                    "scale": 1,
                     "width": SUMMARY_WIDTH,
                 },
                 "renderer": "sqpack deterministic composite renderer",
@@ -1610,11 +1691,14 @@ def update() -> None:
             continue
         with atomic_output_file(path) as temporary:
             temporary.write_text(content, encoding="utf-8")
-    _update_png_preview(outputs[SUMMARY_SVG])
+    # The composite ships as one family drawn from one SVG in one run: the vector
+    # itself, both PNG rasters, and the PDF. Splitting the exports across commands
+    # is what would let three of the four be current and the fourth be last week's.
+    _update_png_exports(outputs[SUMMARY_SVG])
     render_composite_pdf.update()
     print(
         "known-best atlas updated: 100 witnesses, 100 house renderings, "
-        "1 composite, 100 frontier links"
+        "1 composite (SVG, 2 PNG rasters, PDF), 100 frontier links"
     )
 
 
@@ -1640,10 +1724,17 @@ def check() -> None:
         )
     if KINGBIRD_RAW_ROOT.exists():
         problems.append("raw Kingbird source directory must not be retained")
-    if not _png_matches_summary(SUMMARY_PNG, outputs[SUMMARY_SVG]):
-        problems.append(
-            "missing or stale atlas/known-best/known-best-1-100.png preview receipt"
-        )
+    # One --check covers the whole composite family, not just the vector: both
+    # rasters and the PDF are exports of this same SVG, and each carries a receipt
+    # naming the SVG it was drawn from. Reading four receipts costs nothing next to
+    # redrawing a 25-by-30-inch page, and a report that lists every stale export at
+    # once beats finding them one command at a time.
+    problems.extend(
+        f"missing or stale {export.name} {export.role} receipt"
+        for export in SUMMARY_RASTERS
+        if not _png_matches_summary(export, outputs[SUMMARY_SVG])
+    )
+    problems.extend(_composite_pdf_problems(outputs[SUMMARY_SVG]))
     entries = manifest["atlas"]["entries"]
     if [entry["n"] for entry in entries] != list(range(1, 101)):
         problems.append("manifest entries are not exactly n=1..100")

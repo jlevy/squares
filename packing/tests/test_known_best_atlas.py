@@ -16,6 +16,7 @@ import pytest
 import yaml
 
 from devtools import build_known_best_atlas as known_best_builder
+from devtools import render_composite_pdf
 from sqpack.known_best import (
     SourceGeometryError,
     catalogue_source_map,
@@ -256,10 +257,18 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
     entries = document["atlas"]["entries"]
     assert document["atlas"]["composite"] == {
         "layout": "10 by 10, row-major n=1..100",
+        "png_high_resolution": {
+            "derived_from": "atlas/known-best/known-best-1-100.svg",
+            "height": 5792,
+            "path": "atlas/known-best/known-best-1-100@2x.png",
+            "scale": 2,
+            "width": 4800,
+        },
         "png_preview": {
             "derived_from": "atlas/known-best/known-best-1-100.svg",
             "height": 2896,
             "path": "atlas/known-best/known-best-1-100.png",
+            "scale": 1,
             "width": 2400,
         },
         "renderer": "sqpack deterministic composite renderer",
@@ -369,15 +378,89 @@ def test_known_best_composite_png_is_derived_from_current_svg() -> None:
     )
 
 
-def test_known_best_composite_png_refuses_a_preview_of_the_wrong_size(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """The receipt names the canvas, so a preview drawn at another size cannot be written.
+def test_known_best_composite_high_resolution_png_is_derived_from_current_svg() -> None:
+    """The 2x export is pinned to the same canvas and the same source as the preview.
 
-    The preview and the PDF are drawn from the same SVG by the same rasteriser, and the
-    only thing standing between a resized canvas and a stale preview is this check.
+    It exists so the atlas can be attached or downscaled without going back to the
+    vector, which means it is the copy most likely to be handed to someone who cannot
+    check it. Pinning the exact pixel count matters as much as pinning the receipt:
+    4800 by 5792 is twice 2400 by 2896, and the whole-number scale is what keeps the
+    file small. A fractional scale puts every edge on a fractional pixel boundary, and
+    the antialiasing shades the rasteriser then invents cost more bytes than the extra
+    pixels do -- a 4096-wide export of this drawing is 11% larger than this one while
+    carrying 27% fewer pixels.
     """
-    monkeypatch.setattr(known_best_builder, "SUMMARY_PNG", tmp_path / "summary.png")
+    outputs, _manifest = known_best_builder.expected_outputs()
+    svg_text = outputs[ATLAS / "known-best-1-100.svg"]
+    png = (ATLAS / "known-best-1-100@2x.png").read_bytes()
+
+    assert known_best_builder.png_summary_receipt(png) == (
+        4800,
+        5792,
+        hashlib.sha256(svg_text.encode("utf-8")).hexdigest(),
+    )
+
+
+def test_known_best_composite_exports_all_carry_one_source_receipt() -> None:
+    """Every export of the composite names the same SVG, so they cannot disagree.
+
+    The vector, both rasters and the PDF are one family drawn in one `--update` run.
+    What makes "the PNG matches the PDF" checkable rather than asserted is that all
+    four receipts are the digest of the same source: two rasterisers of one drawing
+    differ only in how they antialias an edge, whereas two drawings differ in what
+    they show. This is the pin that would fail if an export were refreshed alone.
+    """
+    outputs, _manifest = known_best_builder.expected_outputs()
+    svg_text = outputs[ATLAS / "known-best-1-100.svg"]
+    expected = hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
+
+    receipts = {
+        export.path.name: known_best_builder.png_summary_receipt(export.path.read_bytes())[2]
+        for export in known_best_builder.SUMMARY_RASTERS
+    }
+    receipts["known-best-1-100.pdf"] = render_composite_pdf.pdf_receipt(
+        (ATLAS / "known-best-1-100.pdf").read_bytes()
+    )
+
+    assert set(receipts) == {
+        "known-best-1-100.png",
+        "known-best-1-100@2x.png",
+        "known-best-1-100.pdf",
+    }
+    assert set(receipts.values()) == {expected}
+
+
+def test_known_best_composite_rasters_scale_the_one_canvas_by_whole_numbers() -> None:
+    """Every raster is a whole multiple of the canvas, and the preview is the 1x one.
+
+    The dimensions are derived from `SUMMARY_WIDTH` and `SUMMARY_HEIGHT` rather than
+    stored, so a resized canvas moves every export together. This pins the two facts
+    that derivation relies on: the scales are integers, and no two exports collide on
+    one path.
+    """
+    exports = known_best_builder.SUMMARY_RASTERS
+
+    assert [export.scale for export in exports] == [1, 2]
+    assert len({export.path for export in exports}) == len(exports)
+    for export in exports:
+        assert export.width == known_best_builder.SUMMARY_WIDTH * export.scale
+        assert export.height == known_best_builder.SUMMARY_HEIGHT * export.scale
+
+
+@pytest.mark.parametrize("scale", [1, 2])
+def test_known_best_composite_png_refuses_a_raster_of_the_wrong_size(
+    scale: int, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The receipt names the canvas, so a raster drawn at another size cannot be written.
+
+    The rasters and the PDF are drawn from the same SVG by the same rasteriser, and the
+    only thing standing between a resized canvas and a stale export is this check. It
+    runs for both scales because the guard compares against the export's own size, and
+    a guard that only ever saw the 1x canvas would pass a 2x export that ignored it.
+    """
+    export = known_best_builder.RasterExport(
+        path=tmp_path / f"summary-{scale}x.png", scale=scale, role="preview"
+    )
     monkeypatch.setattr(known_best_builder, "SUMMARY_WIDTH", 64)
     monkeypatch.setattr(known_best_builder, "SUMMARY_HEIGHT", 64)
     wrong_size = cairosvg.svg2png(
@@ -390,7 +473,44 @@ def test_known_best_composite_png_refuses_a_preview_of_the_wrong_size(
     monkeypatch.setattr(known_best_builder.cairosvg, "svg2png", lambda **_kwargs: wrong_size)
 
     with pytest.raises(ValueError, match="PNG preview dimensions are 8x8"):
-        known_best_builder._update_png_preview("<svg/>\n")  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+        known_best_builder._update_png_export(export, "<svg/>\n")  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    assert not export.path.exists()
+
+
+def test_known_best_atlas_check_reports_the_pdf_export_too(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """One `--check` covers the whole composite family, the PDF included.
+
+    `render_composite_pdf` owns the page and keeps its own check, but a reader who
+    runs the atlas check should not be told three of four exports are current and
+    left to discover the fourth by running a second command. The three states that
+    matter are pinned here: absent, present with a receipt naming another SVG, and
+    present with the right one.
+    """
+    svg_text = "<svg/>\n"
+    digest = hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
+    pdf = tmp_path / "known-best-1-100.pdf"
+    monkeypatch.setattr(render_composite_pdf, "SUMMARY_PDF", pdf)
+    problems = known_best_builder._composite_pdf_problems  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+
+    assert problems(svg_text) == ["missing atlas/known-best/known-best-1-100.pdf"]
+
+    pdf.write_bytes(
+        b"%PDF-1.5\n%%EOF\n%" + render_composite_pdf.PDF_SOURCE_KEY + b": " + b"0" * 64 + b"\n"
+    )
+    assert problems(svg_text) == [
+        "missing or stale atlas/known-best/known-best-1-100.pdf export receipt"
+    ]
+
+    pdf.write_bytes(
+        b"%PDF-1.5\n%%EOF\n%"
+        + render_composite_pdf.PDF_SOURCE_KEY
+        + b": "
+        + digest.encode("ascii")
+        + b"\n"
+    )
+    assert problems(svg_text) == []
 
 
 def _figure_entries() -> dict[int, dict]:

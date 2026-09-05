@@ -110,10 +110,12 @@ PRUNE = frozenset(
         # The composite PNG and PDF join them on the same grounds, from the other side of
         # that merge: generated binary exports, each carrying a source receipt that
         # `build_known_best_atlas --check` and `render_composite_pdf --check` replay, and
-        # together 0.8 MB of every private worker's snapshot.
+        # together 0.8 MB of every private worker's snapshot. The 2x raster joins them on
+        # the same grounds and for 1.3 MB more, which is the larger half of the reason.
         ROOT / "atlas/known-best/contact-overlays",
         ROOT / "atlas/known-best/known-best-1-100.pdf",
         ROOT / "atlas/known-best/known-best-1-100.png",
+        ROOT / "atlas/known-best/known-best-1-100@2x.png",
         ROOT / "atlas/known-best/rendering",
         ROOT / "atlas/prospective/rendering",
         # The n=17 weighted-certificate solver state joins them on 2026-09-03, when the
