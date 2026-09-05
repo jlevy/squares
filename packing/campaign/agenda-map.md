@@ -2,7 +2,7 @@
 
 # Agenda map
 
-206 agenda commitments across 22 agendas, as declared in each agenda's own frontmatter.
+209 agenda commitments across 23 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **9** ready, **5** tentative, **39** blocked, **42** stopped, **111** complete.
+- **11** ready, **5** tentative, **40** blocked, **42** stopped, **111** complete.
 
-- **12 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **13 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -34,6 +34,8 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-018 | `BC-184` | 2 | efficiency | tool_validation | Can the generic interval certifier be wired end to end and reproduce T-009's n = 29 bound through the generic… | `think-4f4d` |
 | agenda-019 | `BC-190` | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and did so 22.7 times… | `think-jgeg` |
 | agenda-022 | `BC-206` | 1 | correctness | research | How far above 99/25 does the n = 12 ladder climb before its restricted optimum reaches twelve, given that the… | `think-ndp3` |
+| agenda-023 | `BC-214` | 0 | efficiency | tool_validation | Can the pull-request surface be brought under four minutes without deleting a check, by moving the broad… | `think-doar` |
+| agenda-023 | `BC-216` | 0 | process | tool_validation | What check would have caught the 499 s to 1370 s regression in the week it happened, and does it hold when… | `think-gy30` |
 
 ## Blocked, and on what
 
@@ -80,6 +82,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-022 | `BC-207` | 2 | `BC-203`, `BC-208` | no | BC-208's class cuts, and a wall at n = 11 for the cover to sit at. BC-200 found no wall: the cutting-plane loop stalled… |
 | agenda-022 | `BC-209` | 2 | `BC-203`, `BC-206` | no | BC-206, and a priced target. BC-202's run at 138/25 reached 26.464317 on its site set without converging its column… |
 | agenda-022 | `BC-210` | 3 | `BC-203`, `BC-204`, `BC-205`, `BC-206`, `BC-207`, `BC-208`, `BC-209`, `BC-212` | no | — |
+| agenda-023 | `BC-215` | 1 | `BC-214` | no | BC-214, which decides which surface each step belongs to. Skipping work before the two surfaces exist would be… |
 
 ## Discharged elsewhere
 
@@ -122,10 +125,21 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-020 | completed |  |  |  |  | 1 | 1 |
 | agenda-021 | completed |  |  |  | 3 | 5 | 8 |
 | agenda-022 | active | 1 |  | 7 |  | 1 | 9 |
+| agenda-023 | active | 2 |  | 1 |  |  | 3 |
 
 ## By program
 
 A program is a line of work that spans agendas; its cells carry one `program` slug. Each is listed in dependency order where `depends_on` gives one and by id otherwise, and its open frontier is the cells not yet terminal.
+
+### `gate-cost`
+
+| agenda | id | state | question |
+| --- | --- | --- | --- |
+| agenda-023 | `BC-214` | ready | Can the pull-request surface be brought under four minutes without deleting a check, by moving the… |
+| agenda-023 | `BC-215` | blocked | Which expensive gate steps re-run when nothing they depend on has changed, and what does skipping… |
+| agenda-023 | `BC-216` | ready | What check would have caught the 499 s to 1370 s regression in the week it happened, and does it… |
+
+Open frontier: `BC-214`, `BC-215`, `BC-216`.
 
 ### `grid-frontier-exact-values`
 
