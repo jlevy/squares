@@ -796,8 +796,9 @@ def _append_lower_bound(card: ET.Element, n: int, *, left: Decimal, baseline: De
     """The certified floor, under the best known side.
 
     A proved case says `s(n) = ...` on the line above and gets nothing here. Where the
-    project proved the floor itself, a star in the figure's one accent colour marks it,
-    and the legend counts how many there are.
+    project proved the floor itself the line is set in the accent, the same colour as
+    the star in the badge row above it, so the mark and the number it marks read as one
+    statement; the legend counts how many there are.
     """
     entry = _figure_entries()[n]["lower"]
     if not entry["shown"]:
@@ -812,7 +813,9 @@ def _append_lower_bound(card: ET.Element, n: int, *, left: Decimal, baseline: De
             "font-family": SUMMARY_FONT,
             "font-size": SUMMARY_SMALL_SIZE,
             "font-weight": SUMMARY_SMALL_WEIGHT,
-            "fill": SUMMARY_SMALL_FILL,
+            "fill": (
+                FIRST_PARTY_ACCENT_COLOR if entry["first_proved_here"] else SUMMARY_SMALL_FILL
+            ),
         },
     )
     _append_function_text(lower, entry["display"], SUMMARY_SMALL_SIZE)
