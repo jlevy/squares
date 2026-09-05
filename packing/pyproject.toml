@@ -143,9 +143,7 @@ select = [
     "TRY",   # exception antipatterns
 ]
 ignore = [
-    # This is a scientific codebase and a CLI toolkit: printing IS the interface
-    # for the tools, and magic numbers in geometry are the geometry.
-    "T201",     # print, which is how every tool here reports
+    # This is a scientific codebase: magic numbers in geometry are the geometry.
     "PLR2004",  # magic value comparison: 0.5 is a half-edge, not a magic number
     "PLR0912",  # branch count: the SAT and LP builders are inherently branchy
     "PLR0913",  # argument count: quench takes its knobs explicitly, by design
@@ -168,6 +166,15 @@ ignore = [
 max-complexity = 57
 
 [tool.ruff.lint.per-file-ignores]
+# Printing is the interface of a tool, so T201 is waived where the tools live and
+# nowhere else. A print in `src/sqpack` outside the console scripts is a library
+# talking to a terminal nobody may be watching; the library modules log instead.
+"devtools/*" = ["T201"]
+"cases/*" = ["T201"]
+"tests/*" = ["T201"]
+"benchmarks/*" = ["T201"]
+"frankensim-probe/*" = ["T201"]
+"src/sqpack/cli/*" = ["T201"]
 # `K` is the published symbol in the source these modules transcribe; renaming it to
 # `k` would make the code harder to check against the paper, which is the point.
 "cases/trump11/packing.py" = ["N806"]
@@ -176,9 +183,9 @@ max-complexity = 57
 "benchmarks/exact_verification.py" = ["SLF001"]
 # The ledger and renderers build markdown a line at a time, which reads better than
 # the comprehension PERF401 would prefer.
-"src/sqpack/campaign/ledger.py" = ["PERF401"]
+"src/sqpack/campaign/ledger.py" = ["PERF401", "T201"]
 # The runner's `# Step: name` section headers read as commented-out code to ERA001.
-"src/sqpack/campaign/runner.py" = ["ERA001"]
+"src/sqpack/campaign/runner.py" = ["ERA001", "T201"]
 "devtools/render_defects.py" = ["PERF401"]
 "devtools/render_research_tables.py" = ["PERF401"]
 "devtools/check_svg_rendering.py" = ["PLC0415"]

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# ruff: noqa: T201 - a command-line tool whose report is its output
 """Starter view generator and invariant checker for an experiment-loop campaign.
 
 Copy into the campaign directory and adapt. It is deliberately small (PyYAML and
