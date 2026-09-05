@@ -530,6 +530,50 @@ def test_live_offset_lease_is_compared_as_the_same_utc_instant(
     assert not any("STALE CLAIM" in problem for problem in problems)
 
 
+def test_a_lease_expired_at_the_commit_is_still_a_stale_claim(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """`D-463` moved this refusal's reference instant, so assert it still refuses.
+
+    The case that must not fire had a test above and the case that must fire had none,
+    which is the asymmetry that lets a refusal be retired by accident.
+    """
+    problems = _experiment_problems(
+        monkeypatch,
+        decision="in-progress",
+        results=[],
+        lease={"expires": "2026-08-24T03:00:00+00:00"},
+        commit=dt.datetime(2026, 8, 24, 9, tzinfo=dt.UTC),
+    )
+
+    assert any("STALE CLAIM, lease expired" in problem for problem in problems)
+
+
+def test_a_lease_written_without_an_offset_is_read_as_utc(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Leases are the one clock in the record that may be naive, because
+    `offset_timestamp` already rejects a naive session, phase or delegation deadline.
+    Reading a naive lease as anything but UTC would expire or extend it by an offset."""
+    expired = _experiment_problems(
+        monkeypatch,
+        decision="in-progress",
+        results=[],
+        lease={"expires": "2026-08-24T03:00:00"},
+        commit=dt.datetime(2026, 8, 24, 9, tzinfo=dt.UTC),
+    )
+    live = _experiment_problems(
+        monkeypatch,
+        decision="in-progress",
+        results=[],
+        lease={"expires": "2026-08-24T12:00:00"},
+        commit=dt.datetime(2026, 8, 24, 9, tzinfo=dt.UTC),
+    )
+
+    assert any("STALE CLAIM, lease expired" in problem for problem in expired)
+    assert not any("STALE CLAIM" in problem for problem in live)
+
+
 def test_terminal_round_requires_a_real_result(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
