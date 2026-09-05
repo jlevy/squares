@@ -24,7 +24,6 @@ Generated from [`operating-rules.md`](operating-rules.md), which carries the evi
 for each rule. Edit there, not here.
 
 <!-- BEGIN OPERATING RULES SUMMARY -->
-
 - **OR-1:** Build the tool; never leave a measurement in one-off code.
 - **OR-2:** Run three to five sub-agents, at a thinking level matched to the task.
 - **OR-3:** Never wait on a gate with nothing else in flight.
@@ -39,7 +38,9 @@ for each rule. Edit there, not here.
 - **OR-12:** One block in four to eight is an efficiency block, and the record says
   which.
 - **OR-13:** Every fast check runs in CI; only the unavoidably slow ones leave.
-
+- **OR-14:** A development cycle is never artificially slow.
+- **OR-15:** Outcome over ceremony, and process is revised on a cadence rather than on
+  irritation.
 <!-- END OPERATING RULES SUMMARY -->
 
 ## Build & Test

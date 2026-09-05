@@ -129,11 +129,25 @@ def test_timings_do_not_change_what_solve_rows_decides() -> None:
 
 
 def test_bench_rounds_splits_a_round_into_separation_and_lp() -> None:
+    """The two measured phases are part of the round, so together they cannot exceed it.
+
+    The tolerance is the reporter's rounding, not a fudge factor. `bench_rounds` rounds
+    `seconds`, `separation_seconds` and `lp_seconds` to milliseconds *independently*, so
+    the two parts can each round up by half a millisecond while the whole rounds down by
+    half, and the inequality can be violated by up to 1.5ms by arithmetic alone. At 1e-6
+    this test failed on a clean serial run of the quick lane with
+    `0.003 + 0.005 <= 0.007`, which is that artifact and not a benchmark that spent more
+    time in its phases than in the round containing them.
+
+    2ms rather than 1.5ms leaves the same kind of margin the durations rules leave: it is
+    above the arithmetic and still two orders of magnitude below any real split this
+    would be worth reporting.
+    """
     report = bench_rounds(small_case(), (5, 7), max_rounds=3)
     run = report["row_run"]
     assert isinstance(run, dict)
     assert run["rounds"] >= 1
-    assert run["separation_seconds"] + run["lp_seconds"] <= run["seconds"] + 1e-6
+    assert run["separation_seconds"] + run["lp_seconds"] <= run["seconds"] + 2e-3
     assert 0.0 <= run["separation_share"] <= 1.0
     assert len(run["timings"]) >= 1
 
