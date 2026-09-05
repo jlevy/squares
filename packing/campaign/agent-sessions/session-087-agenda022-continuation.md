@@ -88,20 +88,34 @@ session:
       early, confirmation only by convergence; freeze a converged candidate and stop
       there.
     operator: sub-agent at the thinking level BC-213 declares, one core
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
+    outcome: >-
+      Both constructions wall at 973/200 = 4.865. The uniform grids crossed twenty at LP
+      round 16 with 20.001502 and 543 placements still violated; the grids unioned with
+      T-021's atoms scaled by 973/970 crossed at round 34 with 20.000223 and 213
+      violated. Neither converged, so nothing was frozen and the n = 20 case package is
+      untouched. Bracket left [97/20, 973/200], width 0.015 against the registered 0.02,
+      0.1235 below the ceiling: H-062 accepted. The seeded crossing cleared twenty by
+      2.23e-5, the closest in the register, and the record says so rather than flattening
+      it into "refuted".
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/bc-213-m5-midpoint-register.txt
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-062-h-062-m5-midpoint-rung.md
     files:
     - packing/campaign/series/series-000-smoke-and-calibration/results/
-    checks: null
+    checks:
+    - 'devtools.decide_certificate: not run, nothing was frozen to decide'
+    - 'packing-ledger check: OK, 62 rounds, H-062 confirmed'
     uncertainty: >-
-      Either outcome resolves H-062, so the risk is cost rather than ambiguity: the
-      seeded convergence at 97/20 took 1616.5 s, and a rung that neither converges nor
-      crosses inside the hour leaves the bracket where agenda 021 left it.
-    elapsed_seconds: null
-    elapsed_quality: null
+      Two, both recorded rather than resolved. The wall rests on crossings, not on
+      converged optima: sound, because rows only raise a restricted optimum, but adding
+      sites lowers one, so a denser site set is where doubt about 973/200 would go. And
+      the lane did not have the core its budget assumed -- two other lanes shared the box
+      -- so its wall seconds are inflated against exp-061's and only the cost column is
+      affected.
+    elapsed_seconds: 1590
+    elapsed_quality: platform_measured
     next_action: >-
       Gate a frozen candidate on both routes, or record the crossing that refutes the
       rung, and write exp-062 either way.

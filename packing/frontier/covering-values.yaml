@@ -390,6 +390,58 @@ values:
       BC-197 of agenda 021 (exp-061). The seeded construction walled here too, so this
       is the bracket's upper end: the m = 5 covering wall lies in [97/20, 39/8].
   - n: 20
+    side: '973/200'
+    side_decimal: '4.865'
+    objective: '20.001502'
+    site_set: grid
+    sites: 6216
+    rows: 5519
+    rounds: 16
+    converged: false
+    stop_reason: >-
+      Stopped by the cell on the crossing at LP round 16, least covered mass 0.890041
+      with 543 placements still violated, after 74.0 s of round time.
+    least_covered_mass: '0.890041'
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-062-h-062-m5-midpoint-rung.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-213-m5-midpoint-register.txt
+    notes: >-
+      BC-213 of agenda 022 (exp-062). Grid counts (34, 46, 56), 806 orbits. Rows only
+      raise a restricted optimum, so this site set's converged optimum is at least
+      20.001502; the value was not computed and the criterion does not ask for it. The
+      run continued to round 24 at 20.095294 because a kill on the uv wrapper did not
+      reach its python child, and those rounds are kept rather than trimmed.
+  - n: 20
+    side: '973/200'
+    side_decimal: '4.865'
+    objective: '20.000223'
+    site_set: certificate-seeded
+    sites: 6216
+    rows: 10767
+    rounds: 34
+    converged: false
+    stop_reason: >-
+      Stopped by the cell on the crossing at LP round 34 with 213 placements still
+      violated, after 1072.6 s of round time.
+    least_covered_mass: null
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-062-h-062-m5-midpoint-rung.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-213-m5-midpoint-register.txt
+    notes: >-
+      BC-213 of agenda 022 (exp-062). The grids above unioned with T-021's 1680 atoms
+      scaled by 973/970. Both constructions walling here closes H-062's bracket to
+      [97/20, 973/200], width 0.015 against the registered 0.02, and 0.1235 below the
+      ceiling 9977/2000 -- so at m = 5 the covering value binds and the ceiling never
+      does. This is the closest crossing in the register: it cleared twenty by 2.23
+      parts in a hundred thousand, against four parts in ten thousand for the grid at
+      97/20, on a walk of 19.996458, 19.997545, 19.998396, 19.999167, 19.999837,
+      20.000223 with the violated count collapsing at 480, 363, 381, 279, 213. The
+      pre-registered rule does not read margins and was applied as written; a denser
+      site set is where any doubt about this rung would go, since adding sites lowers a
+      restricted optimum.
+  - n: 20
     side: '24/5'
     side_decimal: '4.80'
     objective: '18.916941'

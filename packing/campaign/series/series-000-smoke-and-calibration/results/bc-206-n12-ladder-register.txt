@@ -23,8 +23,8 @@
 #             cases/n12_fractional_certificate/certificate.json --seed-map scale
 #             --deadline-seconds <D>
 # Every flag existed as written. Deadlines were cut from the cell's 1200/1800 to
-# fit four sides in 120 minutes; no run reached its deadline, so none of the
-# stops below is a deadline stop.
+# fit four sides in 120 minutes. None of the eight pre-registered runs reached
+# its deadline, so none of their stops is a deadline stop.
 #
 # Certification clause: total mass strictly below twelve with the row loop
 #   converged (violated == 0), then devtools.decide_certificate, which is the
@@ -419,6 +419,117 @@
     cc-397-100, which reruns it with --columns-per-round 96.
   seconds: 150 wall to the kill, 26 rounds of column 0 plus the pricing step
 
+- run: cc-397-100  [NOT pre-registered: the grid driver with a wide column step]
+  side: 397/100 = 3.97
+  construction: grid, BC-191 auto density, --column-rounds 12
+    --columns-per-round 96 (the pre-registered command pins these at 1 and 1)
+  grids: (26, 35, 43); orbits 511; sites 3737 at column 0
+  scale: 4000000
+  seed: none
+  rationale: c-397-100 showed the column step working but one orbit wide, which
+    cannot close 0.364 in any budget. This widens it to the point where the site
+    set can grow by hundreds of orbits inside the cell's clock, which is the only
+    way the generator that built the 3.96 rung gets a fair hearing at 3.97.
+  note: the round lines below are the whole run's LP rounds in order, across all
+    columns; the column boundaries and what each column step bought are in the
+    column table in the verdict.
+  # round  rows  added  violated  restricted-optimum  rationalisation-loss  cumulative LP seconds
+    round=1   rows=503    added=503  violated=543  optimum=9.476636 loss=n/a elapsed_s=18.0
+    round=2   rows=925    added=422  violated=543  optimum=10.600000 loss=n/a elapsed_s=18.3
+    round=3   rows=1284   added=359  violated=543  optimum=10.902330 loss=n/a elapsed_s=18.6
+    round=4   rows=1688   added=404  violated=543  optimum=11.547170 loss=n/a elapsed_s=19.5
+    round=5   rows=2064   added=376  violated=543  optimum=11.800000 loss=n/a elapsed_s=20.1
+    round=6   rows=2371   added=307  violated=543  optimum=11.942376 loss=n/a elapsed_s=20.8
+    round=7   rows=2683   added=312  violated=543  optimum=12.040000 loss=n/a elapsed_s=22.0
+    round=8   rows=2942   added=259  violated=543  optimum=12.131002 loss=n/a elapsed_s=23.3
+    round=9   rows=3282   added=340  violated=543  optimum=12.167983 loss=n/a elapsed_s=24.7
+    round=10  rows=3558   added=276  violated=543  optimum=12.258344 loss=n/a elapsed_s=26.8
+    round=11  rows=3851   added=293  violated=543  optimum=12.277497 loss=n/a elapsed_s=28.7
+    round=12  rows=4139   added=288  violated=510  optimum=12.305179 loss=n/a elapsed_s=30.9
+    round=13  rows=4394   added=255  violated=516  optimum=12.323862 loss=n/a elapsed_s=33.3
+    round=14  rows=4672   added=278  violated=477  optimum=12.333240 loss=n/a elapsed_s=36.5
+    round=15  rows=4935   added=263  violated=471  optimum=12.352930 loss=n/a elapsed_s=39.9
+    round=16  rows=5137   added=202  violated=432  optimum=12.354993 loss=n/a elapsed_s=44.5
+    round=17  rows=5305   added=168  violated=363  optimum=12.360122 loss=n/a elapsed_s=50.3
+    round=18  rows=5428   added=123  violated=315  optimum=12.362321 loss=n/a elapsed_s=55.6
+    round=19  rows=5504   added=76   violated=177  optimum=12.363594 loss=n/a elapsed_s=61.9
+    round=20  rows=5530   added=26   violated=75   optimum=12.363865 loss=n/a elapsed_s=68.5
+    round=21  rows=5576   added=46   violated=90   optimum=12.364016 loss=n/a elapsed_s=76.0
+    round=22  rows=5600   added=24   violated=39   optimum=12.364035 loss=n/a elapsed_s=82.2
+    round=23  rows=5613   added=13   violated=39   optimum=12.364036 loss=n/a elapsed_s=88.1
+    round=24  rows=5614   added=1    violated=3    optimum=12.364038 loss=n/a elapsed_s=94.4
+    round=25  rows=5615   added=1    violated=3    optimum=12.364038 loss=n/a elapsed_s=101.6
+    round=26  rows=5615   added=0    violated=0    optimum=12.364038 loss=n/a elapsed_s=106.8
+    round=27  rows=5815   added=200  violated=393  optimum=12.364038 loss=n/a elapsed_s=114.5
+    round=28  rows=5818   added=3    violated=9    optimum=12.364038 loss=n/a elapsed_s=122.0
+    round=29  rows=5818   added=0    violated=0    optimum=12.364038 loss=n/a elapsed_s=127.1
+    round=30  rows=5993   added=175  violated=381  optimum=12.322401 loss=n/a elapsed_s=133.1
+    round=31  rows=6081   added=88   violated=195  optimum=12.328844 loss=n/a elapsed_s=139.7
+    round=32  rows=6146   added=65   violated=159  optimum=12.329860 loss=n/a elapsed_s=145.7
+    round=33  rows=6163   added=17   violated=30   optimum=12.329950 loss=n/a elapsed_s=151.5
+    round=34  rows=6187   added=24   violated=78   optimum=12.329958 loss=n/a elapsed_s=157.8
+    round=35  rows=6205   added=18   violated=33   optimum=12.329958 loss=n/a elapsed_s=163.7
+    round=36  rows=6210   added=5    violated=9    optimum=12.329958 loss=n/a elapsed_s=170.0
+    round=37  rows=6210   added=0    violated=0    optimum=12.329958 loss=n/a elapsed_s=173.7
+    round=38  rows=6245   added=35   violated=81   optimum=12.329403 loss=n/a elapsed_s=180.8
+    round=39  rows=6258   added=13   violated=33   optimum=12.329421 loss=n/a elapsed_s=187.9
+    round=40  rows=6260   added=2    violated=6    optimum=12.329421 loss=n/a elapsed_s=194.9
+    round=41  rows=6261   added=1    violated=3    optimum=12.329421 loss=n/a elapsed_s=201.5
+    round=42  rows=6261   added=0    violated=0    optimum=12.329421 loss=n/a elapsed_s=205.6
+    round=43  rows=6437   added=176  violated=387  optimum=12.313700 loss=n/a elapsed_s=213.8
+    round=44  rows=6450   added=13   violated=48   optimum=12.314540 loss=n/a elapsed_s=222.2
+    round=45  rows=6520   added=70   violated=126  optimum=12.314951 loss=n/a elapsed_s=229.5
+    round=46  rows=6526   added=6    violated=12   optimum=12.314951 loss=n/a elapsed_s=236.5
+    round=47  rows=6527   added=1    violated=3    optimum=12.314951 loss=n/a elapsed_s=242.7
+    round=48  rows=6528   added=1    violated=3    optimum=12.314951 loss=n/a elapsed_s=248.8
+    round=49  rows=6528   added=0    violated=0    optimum=12.314951 loss=n/a elapsed_s=252.3
+    round=50  rows=6528   added=0    violated=0    optimum=12.314951 loss=n/a elapsed_s=255.6
+    round=51  rows=6804   added=276  violated=405  optimum=12.313726 loss=n/a elapsed_s=265.6
+    round=52  rows=6832   added=28   violated=57   optimum=12.314507 loss=n/a elapsed_s=274.4
+    round=53  rows=6845   added=13   violated=27   optimum=12.314708 loss=n/a elapsed_s=283.3
+    round=54  rows=6847   added=2    violated=6    optimum=12.314708 loss=n/a elapsed_s=291.2
+    round=55  rows=6852   added=5    violated=12   optimum=12.314708 loss=n/a elapsed_s=298.9
+    round=56  rows=6852   added=0    violated=0    optimum=12.314708 loss=n/a elapsed_s=304.4
+    round=57  rows=6871   added=19   violated=36   optimum=12.314701 loss=n/a elapsed_s=314.6
+    round=58  rows=6873   added=2    violated=6    optimum=12.314708 loss=n/a elapsed_s=323.9
+    round=59  rows=6874   added=1    violated=3    optimum=12.314708 loss=n/a elapsed_s=334.1
+    round=60  rows=6874   added=0    violated=0    optimum=12.314708 loss=n/a elapsed_s=338.5
+    # last optimum 12.314708, margin below twelve -0.314708, crossing at round 7, 60 rounds, 338.5 s in the LP loop
+  converged: True, and converged twice over -- the row loop for want of a
+    violated placement, and the COLUMN loop for want of a site worth adding.
+    The run stopped on the generator's own rule, "no candidate orbit has averaged
+    depth above 1", at column 7, not on the clock and not on the round cap.
+  objective: 12.314707522 over 830 orbits and 6153 sites, 60 LP rounds
+  atoms: 593
+  total_mass: 24629591/2000000 = 12.314796
+  rationalisation_loss: 0.000088 (bound atoms/scale = 593/4000000 = 0.000148)
+  column table -- what each column step bought:
+  column 0: orbits=511 sites=3737 lp_rounds=26 objective=12.364038206 depth=1.756219582 seconds=113.7 pricing=0.8
+  column 1: orbits=577 sites=4233 lp_rounds=3 objective=12.364038206 depth=1.401458386 seconds=22.3 pricing=0.9
+  column 2: orbits=625 sites=4617 lp_rounds=8 objective=12.329957631 depth=1.230254925 seconds=51.4 pricing=1.0
+  column 3: orbits=676 sites=4997 lp_rounds=5 objective=12.329420911 depth=1.151512995 seconds=37.4 pricing=0.8
+  column 4: orbits=732 sites=5369 lp_rounds=7 objective=12.314950933 depth=1.032860469 seconds=52.3 pricing=0.9
+  column 5: orbits=780 sites=5753 lp_rounds=1 objective=12.314950933 depth=1.014401596 seconds=6.7 pricing=1.1
+  column 6: orbits=798 sites=5897 lp_rounds=6 objective=12.314707522 depth=1.041334614 seconds=55.8 pricing=1.0
+  column 7: orbits=830 sites=6153 lp_rounds=4 objective=12.314707522 depth=nan seconds=37.7 pricing=1.2
+    (depth is the pricing scan's deepest orbit-averaged depth; nan at column 7
+     means the scan found no point above 1, which is the stopping rule firing)
+  verdict: REFUTED, and this is the one refutation on the ladder that is about
+    the SIDE rather than about a site set. The site set was not fixed: the
+    generator grew it from 511 orbits to 830 and stopped because its own pricing
+    could not find another site worth adding. The optimum moved 12.364038 ->
+    12.314708 over seven column steps and 319 orbits, a total of 0.049330, and
+    then stopped 0.314708 above twelve. Twelve is not 0.05 away at 3.97; it is
+    0.31 away, and the generator that climbed the ladder to 3.96 says so on its
+    own terms.
+    The dual behind that number has orbit-averaged depth at most 1 everywhere
+    the pricing scan looked, which is the feasibility the covering bound needs,
+    so the number is a candidate lower bound on nu*(3.97) and not only an upper
+    bound on what this site set can do. The pricing scan screens in floats,
+    though, so making it a bound rather than a reading takes the exact
+    check_ceiling decision -- that is run k-397-100.
+  seconds: 395.3 wall, 8 column rounds, 60 LP rounds
+
 # ---------------------------------------------------------------------------
 # The pre-registered ladder at a glance. Every entry is a restricted optimum.
 # Rows only raise one, so a value at or above twelve refutes the site set that
@@ -514,21 +625,36 @@
 # 0.000091 is far below any margin on the ladder.
 #
 # What this measures about the ceiling, which is the point of the cell. The
-# covering construction is retained at 99/25 = 3.96 and, on every site set this
-# block could afford at 397/100 = 3.97 -- the auto grid to row convergence, the
-# grid unioned with the retained certificate's 2097 atoms carried by scale, and
-# both of those unioned with the ceiling-window lattice at 16 sites per window --
-# its restricted optimum reaches twelve. So the top of the ladder is bracketed:
+# covering construction is retained at 99/25 = 3.96 with total 11.998960. At
+# 397/100 = 3.97 the same generator, given a column step wide enough to matter,
+# runs its site set from 511 orbits to 830 and then stops on its own rule --
+# no candidate orbit has averaged depth above 1 -- at 12.314707522.
 #
-#   at least 3.96, and below 3.97 on every construction tried here,
-#   which puts the gap to the ceiling 4B = 3.9908 in (0.0208, 0.0308].
+# So the two comparable constructions give 11.998960 at 3.96 and 12.314708 at
+# 3.97: the covering construction's value rises 0.315748 across that 0.01, a
+# slope of 31.57 per unit side. The retained rung has 0.001040 of margin. At
+# that slope the margin is spent 0.0000329 of side above 3.96 --
 #
-# That is a bracket on the construction, not on the covering value. None of the
-# runs above bounds nu*(L) from below: a site set only raises the optimum, so a
-# restricted optimum at or above twelve says the site set failed and says nothing
-# about whether some other measure at that side has mass below twelve. The one
-# thing measured from the other side is weak and worth stating anyway: the
-# converged grid run gives nu*(3.97) <= 12.364038.
+#   the n = 12 ladder climbs about 3.3e-05 above 99/25, to roughly 3.960033,
+#   and the first pre-registered side above it, 3.97, is already 0.31 past the
+#   end rather than marginally past it.
+#
+# That is the cell's question answered, and the answer reverses the expectation
+# it was set with. The 0.0308 of runway between the retained rung and the
+# ceiling 4B = 3.9908 is not runway. The covering value closes it at 3.96003,
+# 0.0308 below where the ceiling would have. At n = 12, m = 4, the covering
+# value binds and the ceiling never gets the chance -- the same shape BC-197
+# found at m = 5, where the wall bracket [97/20, 39/8] sits far below that
+# method's ceiling of 4.9885. The ceiling still forecloses the conjectured 4 for
+# any single certificate of this shape, as T-017 records; what this block adds
+# is that the search stops far earlier and for a different reason, so the gap to
+# the ceiling was never the binding quantity at this n.
+#
+# The eight pre-registered runs are consistent with that and add nothing to it:
+# each refutes its own site set, and a site set only raises the optimum above
+# the unrestricted covering value, so on their own they say nothing about the
+# side. What decides the side is cc-397-100's column-loop convergence, and its
+# dual's exact status is k-397-100's business.
 #
 # The best value seen below twelve above the retained rung is 11.989070, at 3.97
 # on the window construction at row 9 of an unconverged loop. It is a climbing

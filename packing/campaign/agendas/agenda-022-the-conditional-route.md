@@ -50,7 +50,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [20, 21]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Does the remaining rung of the m = 5 bisection, 973/200 = 4.865, certify or wall --
@@ -87,8 +87,45 @@ agenda:
     bead: think-wufn
     workflows: [research-loop]
     depends_on: []
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-062-h-062-m5-midpoint-rung.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-213-m5-midpoint-register.txt
     parallel_group: agenda022-lane-a
     program: grid-frontier-exact-values
+
+    outcomes:
+    - scope: >-
+        The remaining pre-registered rung of H-062's m = 5 bisection, at 973/200 = 4.865,
+        decided on both declared constructions.
+      classification: achieved
+      result: >-
+        Both constructions wall. The uniform grids at BC-191's density rule -- counts
+        (34, 46, 56), 806 orbits, 6216 sites -- crossed twenty at LP round 16 with
+        20.001502 and 543 placements still violated, least covered mass 0.890041. Those
+        grids unioned with T-021's 1680 atoms scaled by 973/970 crossed at LP round 34
+        with 20.000223 and 213 violated. Each fell to the pre-registered
+        early-refutation clause; neither converged, so nothing was frozen and
+        cases/n20_fractional_certificate/ is untouched.
+        The bracket left is [97/20, 973/200], width 0.015 against the 0.02 H-062
+        registered, its lower end T-021's retained certificate and its upper end this
+        wall, 0.1235 below the ceiling 9977/2000. H-062 is accepted on its own
+        threshold -- the first covering wall this project has pinned to the width its
+        hypothesis asked for, and a direct statement that at m = 5 the covering value
+        binds and the ceiling never does.
+        Two things the record carries rather than smooths over. The seeded crossing
+        cleared twenty by 2.23 parts in a hundred thousand, eighteen times tighter than
+        the grid's crossing at the rung below, on a loop whose violated count was
+        collapsing into it; the rule does not read margins and was applied as written,
+        but that rung is where a denser site set would be worth spending. And the
+        acceptance clause asks for a converged optimum at or above twenty, which neither
+        run produced: the clause is met because rows only raise a restricted optimum, so
+        each site set's converged optimum is bounded below by the crossing, and the
+        criterion asks for the bound and not the value.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-062-h-062-m5-midpoint-rung.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-213-m5-midpoint-register.txt
+      disposition: retire-success
+      follow_up: null
     next_evidence: >-
       Whether the first covering wall this project has bracketed can be pinned to the
       width its hypothesis asked for, which is what tells the reach table's ranking how

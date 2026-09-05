@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **10** ready, **5** tentative, **39** blocked, **43** stopped, **109** complete.
+- **9** ready, **5** tentative, **39** blocked, **43** stopped, **110** complete.
 
 - **12 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -33,7 +33,6 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-018 | `BC-183` | 2 | insight | research | Can the n = 40 admissible cone be characterised on the disjunctive system, so that Goebel's n = 40 packing's… | `think-3yxk` |
 | agenda-018 | `BC-184` | 2 | efficiency | tool_validation | Can the generic interval certifier be wired end to end and reproduce T-009's n = 29 bound through the generic… | `think-4f4d` |
 | agenda-019 | `BC-190` | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and did so 22.7 times… | `think-jgeg` |
-| agenda-022 | `BC-213` | 0 | correctness | research | Does the remaining rung of the m = 5 bisection, 973/200 = 4.865, certify or wall -- and so bring the… | `think-wufn` |
 | agenda-022 | `BC-206` | 1 | correctness | research | How far above 99/25 does the n = 12 ladder climb before its restricted optimum reaches twelve, given that the… | `think-ndp3` |
 
 ## Blocked, and on what
@@ -122,7 +121,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-019 | paused | 1 |  | 4 |  | 1 | 6 |
 | agenda-020 | completed |  |  |  |  | 1 | 1 |
 | agenda-021 | completed |  |  |  | 4 | 4 | 8 |
-| agenda-022 | active | 2 |  | 7 |  |  | 9 |
+| agenda-022 | active | 1 |  | 7 |  | 1 | 9 |
 
 ## By program
 
@@ -138,9 +137,9 @@ A program is a line of work that spans agendas; its cells carry one `program` sl
 | agenda-022 | `BC-206` | ready | How far above 99/25 does the n = 12 ladder climb before its restricted optimum reaches twelve,… |
 | agenda-021 | `BC-211` | stopped | Does the existing generator, run unchanged at n = 13 and side 399/100, converge to a restricted… |
 | agenda-022 | `BC-212` | blocked | Can a certificate at shrink B = 1 -- closed unit-square covering with open-box counting at an… |
-| agenda-022 | `BC-213` | ready | Does the remaining rung of the m = 5 bisection, 973/200 = 4.865, certify or wall -- and so bring… |
+| agenda-022 | `BC-213` | complete | Does the remaining rung of the m = 5 bisection, 973/200 = 4.865, certify or wall -- and so bring… |
 
-Open frontier: `BC-204`, `BC-205`, `BC-206`, `BC-212`, `BC-213`.
+Open frontier: `BC-204`, `BC-205`, `BC-206`, `BC-212`.
 
 ### `n11-closure`
 

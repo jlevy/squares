@@ -24,8 +24,8 @@ known packing, otherwise whichever of the two the limit is.
 **`prize` is what the limit allows, not what a search will reach.** The real
 limit is the covering value: a certificate exists at side `L` only where the
 least total mass that covers every admissible `B`-square falls below `n`, and
-that value can bind well below either cap. 18 restricted optima
-have been reported at 13 sides, one per site set, and
+that value can bind well below either cap. 20 restricted optima
+have been reported at 14 sides, one per site set, and
 `frontier/covering-values.yaml` registers each with whether its row loop
 converged; every one is at best an upper bound on the unrestricted covering
 value there. What survives here beside each is a frozen certificate or nothing
@@ -50,6 +50,8 @@ at all:
 | 20 | 4.85 | certificate-seeded | 19.848723 | yes | The row loop converged -- every placement covers mass one -- on the grids unioned with the 24/5 certificate's 2260 atoms scaled by 97/96, after the 600-second run at the same site set had been time-limited at 19.844457 and a 2400-second rerun carried it to convergence in 1616.5 s. | frozen 1,680-atom certificate, feasible mass 19.848723. BC-197 of agenda 021 (exp-061). Rationalised at scale 4,000,000 to 19848723/1000000 over 1680 atoms and retained as T-021's certificate, which the gate accepted on both routes at 200001/200000. |
 | 20 | 4.825 | grid | 19.862092 | yes | The row loop converged at LP round 54 -- every placement covers mass one, least covered mass 1.000000 -- with the optimum reached at round 41 and rounds 41 to 54 clearing the last violations; 949.4 s of round time, 1008.6 s wall. | frozen 1,076-atom certificate, feasible mass 19.862242. BC-197 of agenda 021 (exp-061). Rationalised to 9931121/500000 over 1076 atoms (rounding loss 1.5e-4) and retained as the lower rung beside T-021's; the gate accepted it on both routes at 1000003/1000000. |
 | 20 | 4.875 | grid | 20.016349 | no | Stopped by the ladder on the crossing at LP round 12, least covered mass 0.863635 with placements still violated. | nothing frozen here. BC-197 of agenda 021 (exp-061). The seeded construction walled here too, so this is the bracket's upper end: the m = 5 covering wall lies in [97/20, 39/8]. |
+| 20 | 4.865 | grid | 20.001502 | no | Stopped by the cell on the crossing at LP round 16, least covered mass 0.890041 with 543 placements still violated, after 74.0 s of round time. | nothing frozen here. BC-213 of agenda 022 (exp-062). Grid counts (34, 46, 56), 806 orbits. Rows only raise a restricted optimum, so this site set's converged optimum is at least 20.001502; the value was not computed and the criterion does not ask for it. The run continued to round 24 at 20.095294 because a kill on the uv wrapper did not reach its python child, and those rounds are kept rather than trimmed. |
+| 20 | 4.865 | certificate-seeded | 20.000223 | no | Stopped by the cell on the crossing at LP round 34 with 213 placements still violated, after 1072.6 s of round time. | nothing frozen here. BC-213 of agenda 022 (exp-062). The grids above unioned with T-021's 1680 atoms scaled by 973/970. Both constructions walling here closes H-062's bracket to [97/20, 973/200], width 0.015 against the registered 0.02, and 0.1235 below the ceiling 9977/2000 -- so at m = 5 the covering value binds and the ceiling never does. This is the closest crossing in the register: it cleared twenty by 2.23 parts in a hundred thousand, against four parts in ten thousand for the grid at 97/20, on a walk of 19.996458, 19.997545, 19.998396, 19.999167, 19.999837, 20.000223 with the violated count collapsing at 480, 363, 381, 279, 213. The pre-registered rule does not read margins and was applied as written; a denser site set is where any doubt about this rung would go, since adding sites lowers a restricted optimum. |
 | 20 | 4.80 | unrecorded | 18.916941 | no | Halted at round 9 on projected cost: four more rounds would have cost about 3.75 h to buy margin nothing needed. The side above it was never attempted. | frozen 2,260-atom certificate, feasible mass 18.922620. A single resumed column-generation run; the record names no site set and retains no site or row count. The reported objective has no raw run, and it is not the artifact's mass, 946131/50000 = 18.922620, which certifies n = 19 upward and is what keeps n = 19 standing at 24/5 after T-021 raised n = 20 and n = 21 to 97/20. The artifact named here is the immutable 24/5 rung, not the package's moving certificate.json pointer, which now holds the heavier 97/20 rung. |
 
 No covering-search run log or solver checkpoint was retained for any of them, so
@@ -62,9 +64,9 @@ artifact's mass and the reported objective are different numbers.
 
 They are also reports of different kinds rather than one series measured the same
 way, and the `converged` column is where the difference lives: 7 of
-the 18 ran their row loop to convergence, and the rest stopped for the
+the 20 ran their row loop to convergence, and the rest stopped for the
 reason beside each — or for none the record kept — and stand as upper bounds on
-their own site sets only. 18 heterogeneous reports across a side band
+their own site sets only. 20 heterogeneous reports across a side band
 1.17 wide do not support a growth trend or a fitted curve, and no rung in
 this register has ever been claimed from one. Rank on `prize` to choose where to
 look; measure and retain the run before believing any extrapolation.
