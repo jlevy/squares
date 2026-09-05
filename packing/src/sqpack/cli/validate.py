@@ -638,7 +638,7 @@ def _render_durations(entries: list[tuple[float, str]]) -> str:
     return "\n".join(f"    {seconds:7.2f}s  {node}" for seconds, node in entries)
 
 
-def _pytest_workers() -> int:
+def _pytest_workers(jobs: int) -> int:
     """How many pytest processes the quick behavioural lane asks for.
 
     Deliberately not `--inner-jobs`. That knob is the worker cap *exported to* every step,
@@ -673,15 +673,39 @@ def _pytest_workers() -> int:
     the slow lane the same two tests measure 0.01s and 0.00s. With those 121s gone the
     lane measured 56.61s at `-n 4`, which is what this step is worth once they are.
 
-    The count is the machine's, not the tier's, because this step is the one thing nothing
-    else is waiting behind. `-n 1` is not asked for: a single xdist worker is a subprocess
-    and a protocol for no concurrency at all, which is slower than not asking.
+    The count is what the box has left, not what it has. This lane used to ask for one
+    worker per cpu on the grounds that nothing else was waiting behind it, which was true
+    while `--jobs 2` hid every other step underneath it. It stopped being true at
+    `--jobs 3`: two other steps now run beside this one, so a request for every cpu
+    oversubscribes the runner, and the cost lands in a place the tier cannot absorb.
+
+    The measurement that forced this, on GitHub's four-cpu runner. At `--jobs 3` with one
+    worker per cpu the tier ran 140.79s once and 192.26s the next time on the same
+    configuration -- 37 per cent apart, which is not a tier anyone can set a band around.
+    Worse, the second run failed with **19 tests at or above the 5s per-test ceiling**,
+    between 5.4s and 8.3s, and not one of them was a shared build or an intrinsically slow
+    test: they were ordinary tests inflated by contention. That is the ceiling catching the
+    wrong thing. It exists to find a test that is expensive, and under oversubscription it
+    finds tests that are merely *contended*, which makes it noise rather than a signal.
+
+    So the lane sizes itself to what is free: `cpus - jobs + 1`, this step being one of the
+    `jobs`. At four cpus that is two workers under `--jobs 3` and three under `--jobs 2`,
+    and in both cases total concurrency lands at about the cpu count instead of half again
+    over it. `-n 1` is not asked for: a single xdist worker is a subprocess and a protocol
+    for no concurrency at all, which is slower than not asking, so one worker means running
+    in-process.
+
+    This trades a little of the lane's own speed for a per-test measurement that means
+    something. That is the right trade while the ceiling is the mechanism `OR-13` leans on
+    to decide what may leave the pull-request surface: a ceiling measured under contention
+    would send tests to the deep surface for the sin of having noisy neighbours.
     """
-    return max(1, os.process_cpu_count() or DEFAULT_CPU_COUNT)
+    cpus = max(1, os.process_cpu_count() or DEFAULT_CPU_COUNT)
+    return max(1, cpus - jobs + 1)
 
 
-def _quick_lane_command() -> tuple[str, ...]:
-    workers = _pytest_workers()
+def _quick_lane_command(jobs: int) -> tuple[str, ...]:
+    workers = _pytest_workers(jobs)
     distribution = () if workers == 1 else ("-n", str(workers))
     return (
         sys.executable,
@@ -698,7 +722,7 @@ def _quick_lane_command() -> tuple[str, ...]:
 
 
 def _fast_tests(context: Context) -> str:
-    output = _run(context, _quick_lane_command())
+    output = _run(context, _quick_lane_command(context.jobs))
     _require_durations(output, "quick", f"the {QUICK_TEST_CEILING_SECONDS:g}s per-test ceiling")
     over = [
         entry for entry in _call_durations(output) if entry[0] >= QUICK_TEST_CEILING_SECONDS

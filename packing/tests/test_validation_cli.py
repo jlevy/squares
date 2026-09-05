@@ -335,7 +335,7 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         environment=os.environ.copy(),
     )
 
-    monkeypatch.setattr(validate, "_pytest_workers", lambda: 4)
+    monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 4)
 
     validate._fast_tests(context)
 
@@ -359,14 +359,14 @@ def test_the_quick_lane_asks_for_no_xdist_worker_on_a_single_core_machine(
 ) -> None:
     """`-n 1` is a subprocess and a protocol for no concurrency, so it is worse than none.
 
-    The lane is the pull-request surface's whole wall (`BC-218`), which is why it gets the
-    machine's cores rather than `--inner-jobs`. On a machine with one core there is
-    nothing to divide, and asking xdist for a single worker would pay the fork and the
-    marshalling for it anyway.
+    The lane sizes itself to what the box has left rather than to what it has, so one
+    worker is reached whenever the other steps have claimed everything -- and on a machine
+    with one core there is nothing to divide anyway. Either way, asking xdist for a single
+    worker would pay the fork and the marshalling for no concurrency.
     """
-    monkeypatch.setattr(validate, "_pytest_workers", lambda: 1)
+    monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 1)
 
-    command = validate._quick_lane_command()
+    command = validate._quick_lane_command(1)
 
     assert "-n" not in command
     assert command[-2:] == (
@@ -378,12 +378,23 @@ def test_the_quick_lane_asks_for_no_xdist_worker_on_a_single_core_machine(
 def test_the_quick_lane_worker_count_follows_the_machine_and_is_never_zero(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """It is the machine's count and not the tier's: nothing waits behind this step."""
+    """It is what the box has left -- `cpus - jobs + 1`, this step being one of the jobs.
+
+    Asking for every cpu was right while `--jobs 2` hid every other step under this one.
+    At `--jobs 3` it oversubscribes, and the cost lands on the per-test ceiling: the run
+    that forced this change reported 19 tests between 5.4s and 8.3s against a 5s ceiling,
+    none of them slow tests, all of them merely contended. A ceiling measured under
+    oversubscription sends tests to the deep surface for having noisy neighbours.
+    """
     monkeypatch.setattr(os, "process_cpu_count", lambda: 8)
-    assert validate._pytest_workers() == 8
+    assert validate._pytest_workers(1) == 8
+    assert validate._pytest_workers(3) == 6
+    assert validate._pytest_workers(8) == 1
+    # More jobs than cpus is still one worker, never zero and never negative.
+    assert validate._pytest_workers(99) == 1
 
     monkeypatch.setattr(os, "process_cpu_count", lambda: None)
-    assert validate._pytest_workers() == validate.DEFAULT_CPU_COUNT
+    assert validate._pytest_workers(1) == validate.DEFAULT_CPU_COUNT
 
 
 def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
