@@ -102,10 +102,16 @@ The shortest complete check of the bytes this note is about is
 import from this repository and no dependency to install.
 `python3 minimal_verify.py certificate.json` prints the SHA-256 it read, one `PASS` line
 per condition with the numbers it decided on, and `VERIFIED s(11) >= 381/100`, in about
-47 seconds.
-[`PROOF-CARD.md`](PROOF-CARD.md) is the same claim on one page — the argument
-in a paragraph, every constant above in a block a reader can copy, and that command as
-the check.
+47 seconds. [`t-018-proof-card.md`](t-018-proof-card.md) is the same claim on one page —
+the argument in a paragraph, every constant above in a block a reader can copy, and that
+command as the check.
+
+The two verifiable-claim documents,
+[`t-018-verifiable-claim-381-100.md`](t-018-verifiable-claim-381-100.md) for these bytes
+and [`t-018-verifiable-claim-19-5.md`](t-018-verifiable-claim-19-5.md) for the rung
+below, each carry [`verify_claim.py`](verify_claim.py), an unpinned standard-library
+verifier that decides any certificate of this form, together with the certificate it
+decides, so one file is the whole claim.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

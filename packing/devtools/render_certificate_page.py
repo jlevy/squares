@@ -58,7 +58,7 @@ CASE = PACKING / "cases" / "n11_fractional_certificate"
 TEMPLATES = Path(__file__).with_name("templates")
 TEMPLATE = TEMPLATES / "certificate_page.html"
 MARKDOWN = TEMPLATES / "certificate_page.md"
-VERIFIER_MINIMAL = CASE / "verify_minimal.py"
+VERIFIER_CLAIM = CASE / "verify_claim.py"
 OUTPUT = PACKING / "site" / "index.html"
 
 # Four colors have to stay apart in the prover: the mass comfortably above the
@@ -954,7 +954,7 @@ def claim_path(facts: Facts) -> Path:
     return CASE / f"t-018-verifiable-claim-{slug(facts)}.md"
 
 
-# The minimal verifier's whole decision, `python verify_minimal.py <certificate>`,
+# The claim verifier's whole decision, `python verify_claim.py <certificate>`,
 # timed on 2026-09-04 on an Apple Silicon laptop under CPython 3.14: what the claim
 # documents and the page promise a reader. A certificate not measured here gets no
 # promise, and the page drops its list of claims rather than guess one.

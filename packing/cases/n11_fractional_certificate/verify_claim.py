@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Decide a fractional unavoidable-set certificate for s(n) >= L, exactly.
 
-Usage:  python verify_minimal.py certificate.json
-        python verify_minimal.py t-018-verifiable-claim-19-5.md   (embeds the certificate)
+Usage:  python verify_claim.py certificate.json
+        python verify_claim.py t-018-verifiable-claim-19-5.md   (embeds the certificate)
 
 Standard library only, CPython 3.10 or later. Every decision is made in
 fractions.Fraction. One line is printed per condition, then VERIFIED or REFUSED,
@@ -26,6 +26,12 @@ then n unit squares with disjoint interiors do not fit in [0, L]^2, so s(n) >= L
 (Each unit square, reflected in the diagonal if its angle exceeds pi/4, contains
 strictly inside it a B-square at the nearest net angle, of mass >= 1; the n such
 squares are disjoint, so the total weight is at least n, against Condition 2.)
+
+minimal_verify.py, beside this file, is the other standard-library check: it is
+pinned by SHA-256 to the retained 381/100 certificate, also compares the record's
+declared total and least mass with what it computes, refuses at the first failing
+check instead of reporting all five, and runs on CPython 3.8. This file decides any
+certificate of the form above and is the one the claim documents embed.
 """
 
 # ruff: noqa: N803, N806  -- L, B, D, F, U, V, X, Y are the theorem's own symbols.

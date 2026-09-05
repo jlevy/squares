@@ -33,7 +33,7 @@ PACKING = Path(__file__).resolve().parents[1]
 CASE = PACKING / "cases" / "n11_fractional_certificate"
 VERIFIER = CASE / "minimal_verify.py"
 CERTIFICATE = CASE / "certificate.json"
-CARD = CASE / "PROOF-CARD.md"
+CARD = CASE / "t-018-proof-card.md"
 RESULTS = PACKING / "frontier" / "results.yaml"
 
 #: The verifier's own count of the cells it scores across the net. The exhaustive node

@@ -5,7 +5,7 @@
 
 One line per condition, then VERIFIED or REFUSED; the exit status is 0 only after
 VERIFIED. Any CPython 3.8 or later, standard library only, nothing imported from this
-repository, and no float decides anything. ``PROOF-CARD.md``, beside this file, states
+repository, and no float decides anything. ``t-018-proof-card.md``, beside this file, states
 the theorem with the certificate's own parameters; ``sqpack/fractional/certificate.py``
 proves it and ``sqpack/fractional/sweep.py`` is the same sweep, in the project verifier.
 
@@ -34,6 +34,12 @@ inside the container, not its bounding box -- the box admits placements hanging 
 and would make a sound certificate look refutable. Weights are summed as integers on
 their common denominator, and each direction's minimum is re-derived by a direct sum
 over the atoms at its own witness.
+
+``verify_claim.py``, beside this file, is the unpinned counterpart: it decides any
+certificate of this form, the retained ``19/5`` rung included, reads one out of a
+``t-018-verifiable-claim-*.md`` document as readily as from JSON, and is embedded in
+full in those documents so that each travels as one file. This program speaks only for
+the bytes it pins.
 """
 
 import hashlib
@@ -47,7 +53,7 @@ from math import gcd
 from pathlib import Path
 
 #: The retained certificate's bytes, pinned once -- here, and nowhere else. Every other
-#: statement of this digest (PROOF-CARD.md, the evidence entry) should read it from the
+#: statement of this digest (t-018-proof-card.md, the evidence entry) should read it from the
 #: file, `sha256sum certificate.json`, or quote the SHA-256 line this program prints. A
 #: digest copied by hand is a second thing to keep in step, and it will not be kept.
 PINNED_SHA256 = "b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a"

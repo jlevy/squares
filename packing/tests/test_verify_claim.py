@@ -1,6 +1,6 @@
-"""The minimal standard-library verifier: accepted on the 19/5 rung, refused on the rest.
+"""The unpinned standard-library verifier: accepted on the 19/5 rung, refused on the rest.
 
-`cases/n11_fractional_certificate/verify_minimal.py` is the verifier that
+`cases/n11_fractional_certificate/verify_claim.py` is the verifier that
 the `t-018-verifiable-claim-*.md` documents carry in full, each with its certificate, for a
 reader outside the project. It imports
 nothing from this project, so it is loaded from its path rather than imported, and it
@@ -27,7 +27,7 @@ import pytest
 from devtools.render_verifiable_claim import main as render_claims
 
 CASE = Path(__file__).parents[1] / "cases/n11_fractional_certificate"
-VERIFIER = CASE / "verify_minimal.py"
+VERIFIER = CASE / "verify_claim.py"
 RUNG_19_5 = CASE / "certificate-19-5.json"
 RUNG_381_100 = CASE / "certificate.json"
 #: The verifiable-claim documents, each carrying the verifier and its own certificate.
@@ -75,7 +75,7 @@ FALSIFICATIONS = [
 @pytest.fixture(scope="module")
 def minimal() -> dict[str, Any]:
     """The verifier's namespace, run from its path so nothing is imported from it."""
-    return runpy.run_path(str(VERIFIER), run_name="verify_minimal")
+    return runpy.run_path(str(VERIFIER), run_name="verify_claim")
 
 
 def decide(

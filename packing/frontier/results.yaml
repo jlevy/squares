@@ -718,8 +718,11 @@ results:
       - packing/cases/n11_fractional_certificate/certificate-189-50.json
       - packing/cases/n11_fractional_certificate/t-018-proof.md
       - packing/cases/n11_fractional_certificate/t-018-proof-visual.svg
-      - packing/cases/n11_fractional_certificate/PROOF-CARD.md
+      - packing/cases/n11_fractional_certificate/t-018-proof-card.md
       - packing/cases/n11_fractional_certificate/minimal_verify.py
+      - packing/cases/n11_fractional_certificate/verify_claim.py
+      - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md
+      - packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md
       - packing/src/sqpack/fractional/colgen.py
     controls:
       - packing/tests/test_fractional_certificate.py
