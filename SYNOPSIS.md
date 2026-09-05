@@ -262,7 +262,7 @@ case or experiment separately.
 | [Review 2026-09-04 — PR #80, the Stacked Hardening of the s(11) ≥ 381/100 Claim](docs/project/reviews/review-2026-09-04-pr80-stacked-hardening.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
-| [Third-Party Check of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
+| [Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
 | [One-minute proof that `s(11) ≥ 381/100`](packing/cases/n11_fractional_certificate/t-018-proof.md) | component scope and use | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -3657,12 +3657,13 @@ single-case movement in the register, and twenty and twenty-one had never carrie
 bound of their own at all.
 Between them those two are the only values in print this project has replaced.
 All four stand at V4: each was decided twice from frozen bytes by an exact event-cell
-sweep and by an interval branch and bound with directed rounding, methods that share no
-modelling assumption and fail differently, agreeing on the least covered mass to the
-digit. Three of them stand at C4, and T-018 at C5 — the rung epistemics.md defines as
+sweep and by an interval branch and bound with directed rounding — two routes that share
+the certificate and the closed-form conditions but decide Condition 5 by different
+methods, which fail differently — agreeing on the least covered mass to the digit.
+Three of them stand at C4, and T-018 at C5 — the rung epistemics.md defines as
 review-ready, a mapped and non-superseded review artifact, which the adversarial review
 of PR 78 supplies. None of the four has been read by anyone outside the project, which
-that rung does not ask for; a self-contained third-party package ships at
+that rung does not ask for; a self-contained package for third-party checking ships at
 `packing/cases/n11_fractional_certificate/thirdparty/` so that a stranger can decide the
 `19/5` rung without trusting this repository.
 

@@ -25,6 +25,30 @@ from devtools.decide_certificate import decide, load
 
 CASES = Path(__file__).resolve().parent.parent / "cases"
 RUNG = CASES / "n11_fractional_certificate" / "certificate-19-5.json"
+REPO = CASES.parent.parent
+# The reader-facing surfaces that describe what the two routes share. A claim of
+# method independence is a claim about the record, so it is checked where a reader
+# meets it and not only where the gate states it.
+INDEPENDENCE_SURFACES = (
+    REPO / "README.md",
+    REPO / "SYNOPSIS.md",
+    REPO / "packing/frontier/results.yaml",
+    REPO / "packing/frontier/evidence.yaml",
+    REPO / "packing/frontier/RESULTS.md",
+    REPO / "packing/cases/n11_fractional_certificate/thirdparty/README.md",
+)
+OVERSTATEMENTS = (
+    "share no modelling assumption",
+    "share no modeling assumption",
+    "shares no modelling assumption",
+    "shares no modeling assumption",
+)
+
+
+def collapsed(text: str) -> str:
+    """One line, single-spaced, so a claim split over a line break is still found."""
+
+    return " ".join(text.split())
 
 
 @dataclass(frozen=True)
@@ -78,19 +102,23 @@ def test_the_gate_reads_the_bytes_and_recomputes_rather_than_trusting_the_summar
 
 
 def test_the_gate_describes_its_independence_boundary() -> None:
-    """The two routes share the ``Certificate`` and Conditions 1--4; only Condition 5 differs.
+    """The two routes share the ``Certificate`` and Conditions 2--4; only Condition 5 differs.
 
     "Share no modelling assumption" overstated it (PR 78's adversarial review, F3): the
     routes read one object and decide the closed-form conditions by the same formulas.
     What they do not share is the Condition 5 method, which is where a modelling error
-    would live. The gate's own docstring says exactly that; the record surfaces that
-    still carry the older sentence are the F3 bead's to bring into line.
+    would live. The gate's own docstring says that, and so must every record surface a
+    reader meets the claim on -- a claim about the record is not kept true by a docstring.
     """
     assert retention.__doc__ is not None
     words = " ".join(retention.__doc__.split())
     assert "Certificate" in words
     assert "Conditions 2--4" in words
     assert "share no modelling assumption" not in words
+    for path in INDEPENDENCE_SURFACES:
+        surface = collapsed(path.read_text(encoding="utf-8"))
+        for phrase in OVERSTATEMENTS:
+            assert phrase not in surface, f"{path.name} overstates the independence"
 
 
 def test_a_declared_mass_that_disagrees_with_the_atoms_is_refused(

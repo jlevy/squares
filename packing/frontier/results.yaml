@@ -631,8 +631,10 @@ results:
       C4 is reached. The independent re-derivation agrees but is
       exact-algebraic like the first; what moved the rung is the interval-certified
       decision, which bounds coverage by branch and bound over boxes of centres with
-      directed rounding and shares no modelling assumption with the sweep. C5
-      needs a review artifact by someone outside the project. The bound
+      directed rounding: the two routes share the certificate and the closed-form
+      conditions, and share no part of how Condition 5 is decided. C5 is review-ready
+      under epistemics.md -- a mapped, non-superseded review artifact -- and none has
+      been written for this result. The bound
       itself: the ladder 19/5, 77/20, 97/25, 39/10, 393/100, 197/50, 79/20, 99/25 was
       climbed once the separation oracle was corrected to score the cells the verifier
       decides (D-434), and every rung is retained.

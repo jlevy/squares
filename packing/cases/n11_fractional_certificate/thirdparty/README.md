@@ -1,11 +1,18 @@
-# Third-Party Check of s(11) ≥ 19/5
+# Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5
 
-Everything needed to check, with your own tools and without trusting this repository,
-that eleven unit squares do not fit in a square of side 3.8. The directory is
-self-contained: a certificate as plain data, the theorem it instantiates written out
-with its proof, a single-file verifier that uses only Python’s standard library, a
-control on a published result by other authors, and the perturbations the verifier
-refuses.
+Everything a reader needs to check, with their own tools and without trusting this
+repository, that eleven unit squares do not fit in a square of side 3.8. The directory
+can be copied out of the checkout and run without importing code from the rest of the
+project or installing its dependencies: a certificate as plain data, the theorem it
+instantiates written out with its proof, a single-file verifier that uses only Python’s
+standard library, a control reconstructed from another author’s published result, and
+the perturbations the verifier refuses.
+
+It is not itself a third-party check, and the name says so.
+This project wrote every file here, on the day of the result; a package assembled by the
+party making the claim cannot be the independent check of it.
+What the package supplies is the material such a check needs, so that making it is
+someone else’s to do.
 
 ## The Claim
 
@@ -421,11 +428,12 @@ exit status 0
   The repository now also decides Condition 5 by interval arithmetic with directed
   rounding — branch and bound over boxes of centres, where an atom counts for a box only
   if its coverage rectangle contains the whole box, so the count is a lower bound by
-  construction. There is no event grid, no difference array and no polygon clipping, so
-  it shares no modelling assumption with the sweep, and it decides Condition 5 on the
-  doubled net (`θ_k` and `π/2 − θ_k`, 361 directions), which means it never invokes the
-  reflection argument of step 1 and does not need Condition 1 at all.
-  Run on *this file’s bytes* — SHA-256
+  construction. There is no event grid, no difference array and no polygon clipping: the
+  two routes share the certificate and the closed-form conditions, and share no part of
+  how Condition 5 is decided.
+  It decides Condition 5 on the doubled net (`θ_k` and `π/2 − θ_k`, 361 directions),
+  which means it never invokes the reflection argument of step 1 and does not need
+  Condition 1 at all. Run on *this file’s bytes* — SHA-256
   `60ac0c33e2e5a55874a10b0d09c6aaf3f891db921b063cc860114c2d4588c055`, the hash in the
   table above — it certifies all 361 directions in 1,195,755 boxes with none stalled, in
   about ten seconds, and its enclosure of the least covered weight has width zero at

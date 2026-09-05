@@ -1513,7 +1513,8 @@ evidence:
       contains the whole box, which is a lower bound by construction and is tested
       against the inner enclosure of that rectangle so an unresolved atom is dropped
       rather than assumed. There is no event grid, no difference array and no polygon
-      clipping, so it shares no modelling assumption with the exact route.
+      clipping: the two routes share the certificate object and the closed-form
+      conditions, and share no part of how Condition 5 is decided.
       It also rests on fewer hypotheses. Condition 5 is decided on the doubled net -- theta_k and
       pi/2 - theta_k, 361 directions -- so the D4 reflection argument is never invoked
       and Condition 1 is not needed at all, which matters because interval arithmetic cannot

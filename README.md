@@ -66,7 +66,7 @@ Results first established here, as far as the recorded source searches show:
   and proves nothing new.
   Scored `S5`, the rubric’s anchor for movement on a central open case.
   A
-  [self-contained third-party package](packing/cases/n11_fractional_certificate/thirdparty/)
+  [self-contained package for third-party checking](packing/cases/n11_fractional_certificate/thirdparty/)
   ships with it, so the `19/5` rung can be decided without trusting anything else here.
 - **T-019: `s(17), s(18), s(19) ≥ 459/100`, displacing the published value (`S4`).** The
   adopted bound for [these](packing/frontier/n-017.md) three cases was Massaccesi’s

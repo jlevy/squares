@@ -14226,18 +14226,25 @@ defects:
     review_artifact mapped as a non-superseded review. It says nothing about who wrote the
     review, and external review is not a confirmation rung at all -- novelty's
     confirmed-novel is the label that needs priority confirmed outside the repository.
-    T-017's, T-019's and T-020's next_rung fields, and the pull request's own text, said
-    instead that C5 "needs a review artifact by someone outside the project". That is a
-    stricter rung than the rubric defines, stated as though it were the rubric.
+    T-017's, T-018's, T-019's and T-020's next_rung fields, and the pull request's own
+    text, said instead that C5 "needs a review artifact by someone outside the project",
+    and SYNOPSIS.md said it of all four results at once -- "None reaches C5, because no
+    one outside the project has reviewed any of them". That is a stricter rung than the
+    rubric defines, stated as though it were the rubric.
   consequence: >-
     Nothing was scored wrongly, because no fractional result had a review artifact to
     score. The misstatement mattered the moment one did: PR 80's promotion of T-018 to C5
     is legitimate under the rubric, and a reader holding the parent's sentence would have
     read it as illegitimate. A record that states its own rubric has to state it exactly.
   fix: >-
-    Fixed on 2026-09-04. The three next_rung sentences now say what C5 is -- review-ready,
-    a mapped, non-superseded review artifact, none yet written for the result -- and the
-    pull request says the same.
+    Fixed in two passes. On 2026-09-04 the T-018, T-019 and T-020 next_rung sentences and
+    the pull request's own text were rewritten to say what C5 is -- review-ready, a
+    mapped, non-superseded review artifact, none yet written for the result.
+    Two more were found on 2026-09-05 while porting PR 80's surface test over the
+    reader-facing documents, and fixed with it: T-017's next_rung, which this entry names
+    but which the first pass left untouched, and a fourth sentence in SYNOPSIS.md that
+    said none of the four results reaches C5 because no one outside the project has
+    reviewed them. Both now state the rubric.
   regression: >-
     None automated; the rubric's own checker derives rungs from the evidence and does not
     read prose about rungs. The review of PR 80 records the correction.
