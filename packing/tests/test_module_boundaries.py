@@ -316,6 +316,12 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
         # 1800 s budget. Re-pricing them into the fast tier is BC-195's call, with
         # the measurement now in hand. Every one has a fast counterpart in the same
         # file that pins what its record claims, or decides it on a coarse net.
+        # The witness walk: all 181 directions of all four retained certificates on the
+        # integer route, serially, checking the reported centre is admissible (D-449).
+        # 282 s on four cores on 2026-09-05, with the push tier running beside it.
+        "test_fractional_sweep_integer.py": {
+            "test_every_reported_witness_is_admissible_on_every_retained_certificate",
+        },
         "test_fractional_certificate.py": {
             "test_the_full_retained_certificate_is_accepted",
             "test_the_retained_n12_certificate_is_accepted",

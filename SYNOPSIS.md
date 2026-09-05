@@ -3308,10 +3308,11 @@ Nagamochi’s closed form a day after the 4.5058 adoption made it sixty; the REA
 sixty-seven case bodies were corrected, and `check_nagamochi_bounds` refuses any prose
 count that disagrees with the case records — which is why the same sixty-seven bodies
 now read fifty-eight, `T-020` having taken two more cases off the closed form.
-[D-449](defects.md) is open: the exact sweep reports, beside the least covered mass, a
-witness centre at the midpoint of the attaining event cell, and on most directions that
-midpoint lies outside the admissible domain; the value is right, the point is not a
-witness, and the fix is bead `think-xyt1` under the port epic.
+[D-449](defects.md) was the exact sweep reporting, beside the least covered mass, a
+witness centre at the midpoint of the attaining event cell, which on most directions
+lies outside the admissible domain; the value was right and the point was not a witness.
+The witness is now a point of the cell’s intersection with the domain on both routes,
+held there on every direction of every retained certificate.
 [D-431](defects.md) is open: `T-009`’s significance rationale compares its `n = 29`
 interval certificate against a rational certificate on Schadt’s packing rather than
 Kingbird’s, and the shipped rational promotion run on the Kingbird witness lands about

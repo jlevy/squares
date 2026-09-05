@@ -14339,18 +14339,21 @@ defects:
     and bound -- agree on the value to the digit, and neither has ever been asked to
     agree on the witness.
   fix: >-
-    Outstanding; bead think-xyt1 under the port epic think-pev1. PR 80's _cell_witness
-    picks a point strictly inside the cell's intersection with the domain; ported onto
-    this branch it must go into a helper both the integer and the Fraction routes call
-    (the stack's 28990b00 head merged onto this branch left the fix in the Fraction
-    reference path only, failing the value-and-witness equality test on five of six
-    directions; its 04127189 head applies the helper on both routes and is the code
-    to port), and it must
-    be exhausted on all 181 directions of all four retained certificates on the integer
-    route, because the strict-inside check is a new hard-error path.
+    Fixed on the port branch, 2026-09-05, from PR 80's head 04127189, which had already
+    applied its helper on both routes: _cell_witness returns the vertex average of the
+    event cell's intersection with the admissible domain and checks it strictly inside
+    the open cell, and both minimum_covered_mass_integer and
+    minimum_covered_mass_fraction call it. With it, reduce_to_cells is re-implemented
+    independently of reduce_to_spans, so the reference no longer shares the optimised
+    route's geometry, and the integer entry point checks nonnegativity, integrality
+    and the int64 limit itself rather than trusting its caller.
   regression: >-
-    None yet; the port adds a test that every reported witness is admissible, on every
-    direction of every retained certificate.
-  status: outstanding
+    test_every_reported_witness_is_an_admissible_centre_on_the_373_atom_rung (every
+    third direction of the first rung, fast tier) and
+    test_every_reported_witness_is_admissible_on_every_retained_certificate (all 181
+    directions of all four retained certificates on the integer route, exhaustive
+    tier): each maps the reported witness back to container coordinates and asks
+    whether a B-square centred there fits, exactly.
+  status: fixed
   recorded_in: packing/src/sqpack/fractional/sweep.py
   bead: think-xyt1
