@@ -1068,12 +1068,20 @@ def runtime_phrase(facts: Facts) -> str:
 
 
 def claim_substitutions(headline: Facts, default: Facts) -> dict[str, str]:
-    """The page's list of claim documents: one line per certificate, in both roles."""
+    """What each certificate is, named by the role it plays rather than by its bound.
+
+    The page states the size of a certificate in two places that are not inside its own
+    article -- the opening summary, which describes the headline proof before either
+    article begins, and the list of claim documents, which states both at once. Neither
+    can use the per-certificate values, so both read these; the counts are the same
+    quantities `certificate_substitutions` derives, taken from the same facts.
+    """
     values = {}
     for role, f in (("DEFAULT", default), ("HEADLINE", headline)):
         values[f"{role}_CLAIM_NAME"] = claim_path(f).name
         values[f"{role}_CLAIM_URL"] = repo_file(claim_path(f))
         values[f"{role}_N_ATOMS"] = f"{len(f.atoms):,}"
+        values[f"{role}_N_DIRECTIONS"] = str(f.steps + 1)
         values[f"{role}_RUNTIME"] = runtime_phrase(f)
     return values
 

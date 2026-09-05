@@ -519,6 +519,14 @@ body {
     text-align: left !important;
   }
 
+  /* The rule above is written with `!important` to survive a kpress bump, and that
+     makes it beat the title block's own centring, which is set on plain selectors.
+     The subtitle, the credits and the colophon are centred by design and are restated
+     here rather than carved out of the selector above, so the intent stays legible. */
+  .cert-page .hero h1, .cert-page .hero .subtitle, .credits, .credits p, .colophon {
+    text-align: center !important;
+  }
+
   /* kpress breaks words anywhere inside an ordered list so a long token cannot
      overflow. With no hyphen to mark the break it reads as a typo. `overflow-wrap`
      stays, so a URL too long for the measure still wraps -- at a boundary. */
@@ -527,10 +535,13 @@ body {
   /* Margins. The page rule takes `--kpress-print-page-margin` from kpress, which
      sets it to 0.7in, and nothing else stacks on top: kpress's own print stylesheet
      zeroes the page and document gutters, and neither width cap binds at this size.
-     0.55in is as far as this can usefully go -- below about 0.56in on Letter the
-     708px paragraph cap starts to bind while the figures keep widening, and text
-     and figures visibly stop agreeing on where the column is. */
-  :root { --kpress-print-page-margin: 0.55in; }
+     Set to 1in, the ordinary margin for a printed document of this kind. kpress's
+     0.7in default was measured as the only contribution -- its own print stylesheet
+     zeroes the page and document gutters, and neither width cap binds -- so this token
+     is the whole knob. Widening it also shortens the line, which this page needs more
+     than it needs the space: at 0.7in the measure ran to about 92 characters and at
+     0.55in longer still, well past the 45 to 75 that reads comfortably. */
+  :root { --kpress-print-page-margin: 1in; }
 }
 
 </style>
