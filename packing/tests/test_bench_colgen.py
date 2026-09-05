@@ -142,6 +142,10 @@ def test_bench_rounds_splits_a_round_into_separation_and_lp() -> None:
     2ms rather than 1.5ms leaves the same kind of margin the durations rules leave: it is
     above the arithmetic and still two orders of magnitude below any real split this
     would be worth reporting.
+
+    It was hit twice independently on the same day, which is what says it is arithmetic
+    and not a loaded runner: `0.003 + 0.005 <= 0.007` on a clean serial quick lane here,
+    and `0.004 + 0.005 <= 0.008` on CI (run 33989527866). Both are the bound exactly.
     """
     report = bench_rounds(small_case(), (5, 7), max_rounds=3)
     run = report["row_run"]

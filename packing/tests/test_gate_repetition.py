@@ -30,6 +30,7 @@ from devtools.measure_gate_repetition import (
     schedule_triggers,
 )
 from sqpack.campaign import ledger
+from sqpack.campaign.commit_clock import commit_clock
 from sqpack.cli.validate import STEPS
 
 TRIGGER = Trigger(kind="push", when=datetime(2026, 9, 5, tzinfo=UTC), commit="beef")
@@ -264,20 +265,24 @@ def test_merge_tree_identity_agrees_with_the_diff() -> None:
         assert row.identical == (changed_between(row.head, row.merge) == ())
 
 
-def test_the_campaign_record_verdict_is_not_a_function_of_the_tree_alone() -> None:
-    """The counter-example that bounds every unmoved-tree skip rule, checked rather than
-    asserted.
+def test_the_campaign_record_verdict_does_not_move_with_the_wall_clock() -> None:
+    """The counter-example that used to bound every unmoved-tree skip rule, now closed.
 
     `BC-215` measured that 13 of 70 deep runs in thirty days ran against a tree that had
-    not moved, and the obvious rule is to skip them. This is why the rule cannot be
-    "skip the run": the `campaign record` step reads the wall clock, and three of its
-    refusals are *anti*-monotone in it -- an expired lease, a passed session deadline
-    and a passed delegation deadline all become true with time alone. So a tree that
-    was green yesterday can be red today with no byte changed, and the scheduled run is
-    the only thing that would say so.
+    not moved, and the obvious rule is to skip them. This test was originally the reason
+    that rule could not be written: the `campaign record` step read the wall clock, and
+    four of its refusals are *anti-monotone* in it -- an expired lease, a passed session
+    deadline, a passed workflow-phase deadline and a passed delegation deadline all
+    become true with time alone -- so a tree that was green in the morning was red in the
+    evening with no byte changed. It cost PR 83 two CI cycles in one evening and is
+    `D-463`.
 
-    Same input, two clocks, two verdicts. The session here is synthetic so the assertion
-    does not depend on which real session happens to be open on the day.
+    It now asserts the opposite, which is the property that made the defect a defect: one
+    fixed tree, two wall clocks straddling the record's own deadline, one verdict. The
+    anchor is the commit's, so the wall no longer reaches the comparison at all.
+
+    The session is synthetic so the assertion does not depend on which real session
+    happens to be open on the day.
     """
     session = {
         "_path": Path("session-999-synthetic.md"),
@@ -294,14 +299,54 @@ def test_the_campaign_record_verdict_is_not_a_function_of_the_tree_alone() -> No
             }
         ],
     }
+    # Committed an hour before the deadline it declares, so the record was honest when
+    # it was written and stays honest however long the commit waits to be merged.
+    commit = datetime(2026, 9, 5, 3, tzinfo=UTC)
 
-    def verdict(now: datetime) -> list[str]:
-        return ledger.check([], [], [], [], [session], agendas=[], now=now, logbook_entries=[])
+    def verdict(wall: datetime) -> list[str]:
+        clock = commit_clock(commit=commit, wall=wall, reason="the fixed tree's HEAD")
+        return ledger.check(
+            [], [], [], [], [session], agendas=[], clock=clock, logbook_entries=[]
+        ).problems
 
     passed = "session-999-synthetic.md: in-progress session deadline_at has passed"
-    # Naive UTC, because that is what `ledger.main` passes and the comparison it
-    # reaches is written against it.
-    before = datetime(2026, 9, 5, 1, tzinfo=UTC).replace(tzinfo=None)
-    after = datetime(2026, 9, 6, 1, tzinfo=UTC).replace(tzinfo=None)
-    assert passed not in verdict(before)
-    assert passed in verdict(after)
+    before = datetime(2026, 9, 5, 3, 30, tzinfo=UTC)
+    after = datetime(2026, 9, 6, 1, tzinfo=UTC)
+    assert verdict(before) == verdict(after)
+    assert passed not in verdict(after)
+
+
+def test_a_record_already_overrun_when_it_was_committed_is_still_refused() -> None:
+    """The other half of `D-463`: the anchor moved, the refusal did not go away.
+
+    A gate made reproducible by dropping what it catches is not a fix, so the same
+    synthetic session is committed an hour *after* its own deadline -- it claimed to be
+    live past its own clock at the moment someone committed it -- and is refused a minute
+    later and four days later alike.
+    """
+    session = {
+        "_path": Path("session-999-synthetic.md"),
+        "id": "session-999",
+        "status": "in_progress",
+        "started_at": "2026-09-05T00:00:00Z",
+        "deadline_at": "2026-09-05T04:00:00Z",
+        "budget": {"wall_minutes": 240},
+        "workflow_phases": [
+            {
+                "workflow": "efficiency-loop",
+                "entered_by": "session_start",
+                "status": "in_progress",
+            }
+        ],
+    }
+    commit = datetime(2026, 9, 5, 5, tzinfo=UTC)
+
+    def verdict(wall: datetime) -> list[str]:
+        clock = commit_clock(commit=commit, wall=wall, reason="the fixed tree's HEAD")
+        return ledger.check(
+            [], [], [], [], [session], agendas=[], clock=clock, logbook_entries=[]
+        ).problems
+
+    passed = "session-999-synthetic.md: in-progress session deadline_at has passed"
+    assert passed in verdict(datetime(2026, 9, 5, 5, 1, tzinfo=UTC))
+    assert passed in verdict(datetime(2026, 9, 9, tzinfo=UTC))

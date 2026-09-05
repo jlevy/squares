@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import subprocess
 from copy import deepcopy
 from pathlib import Path
 from typing import cast
@@ -13,6 +14,17 @@ from jsonschema import Draft202012Validator
 
 from cases.campaign_smoke import baseline_sweep
 from sqpack.campaign import ledger, runner
+from sqpack.campaign.commit_clock import Clock, commit_clock, project_clock
+
+
+def _clock(instant: dt.datetime) -> Clock:
+    """A certified anchor for a fixture, standing in for HEAD's committer date.
+
+    `ledger.check` judges its time-based refusals against the commit rather than the
+    wall clock (`D-463`), so a fixture supplies the instant the same way a checkout
+    does.
+    """
+    return Clock(instant.astimezone(dt.UTC), f"fixture commit {instant:%Y-%m-%dT%H:%M:%SZ}")
 
 
 def test_review_pending_round_does_not_disposition_hypothesis() -> None:
@@ -123,7 +135,7 @@ def _session_problems(
     monkeypatch: pytest.MonkeyPatch,
     session: dict[str, object],
     *,
-    now: dt.datetime | None = None,
+    commit: dt.datetime | None = None,
 ) -> list[str]:
     """Run only whole-session invariants, isolated from repository link state."""
     monkeypatch.setattr(ledger, "dead_links", list)
@@ -135,8 +147,8 @@ def _session_problems(
         [],
         [session],
         agendas=[],
-        now=now or dt.datetime(2026, 8, 24, tzinfo=dt.UTC),
-    )
+        clock=_clock(commit or dt.datetime(2026, 8, 24, tzinfo=dt.UTC)),
+    ).problems
 
 
 def _terminal_agenda() -> dict[str, object]:
@@ -199,8 +211,8 @@ def _agenda_problems(monkeypatch: pytest.MonkeyPatch, agenda: dict[str, object])
         [],
         [],
         agendas=[agenda],
-        now=dt.datetime(2026, 9, 2, tzinfo=dt.UTC),
-    )
+        clock=_clock(dt.datetime(2026, 9, 2, tzinfo=dt.UTC)),
+    ).problems
 
 
 def test_terminal_agenda_rejects_classification_disposition_mismatch(
@@ -254,7 +266,7 @@ def _experiment_problems(
     decision: str,
     results: list[dict[str, object]],
     lease: dict[str, str] | None,
-    now: dt.datetime,
+    commit: dt.datetime,
 ) -> list[str]:
     """Run experiment cross-field invariants without repository link state."""
     monkeypatch.setattr(ledger, "dead_links", list)
@@ -280,8 +292,8 @@ def _experiment_problems(
         [experiment],
         [],
         agendas=[],
-        now=now,
-    )
+        clock=_clock(commit),
+    ).problems
 
 
 def _logbook_entry(path: Path) -> dict[str, object]:
@@ -341,9 +353,9 @@ def _logbook_problems(
         [],
         [_bounded_session(max_cycles=2)],
         agendas=[],
-        now=dt.datetime(2026, 8, 24, tzinfo=dt.UTC),
+        clock=_clock(dt.datetime(2026, 8, 24, tzinfo=dt.UTC)),
         logbook_entries=[entry],
-    )
+    ).problems
 
 
 def test_gate_refusal_has_a_specific_type_and_recovery_message(tmp_path: Path) -> None:
@@ -496,7 +508,7 @@ def test_active_agent_session_rejects_an_expired_absolute_deadline(
     problems = _session_problems(
         monkeypatch,
         _bounded_session(max_cycles=2, active=True),
-        now=dt.datetime(2026, 8, 24, 2, tzinfo=dt.UTC),
+        commit=dt.datetime(2026, 8, 24, 2, tzinfo=dt.UTC),
     )
 
     assert (
@@ -512,7 +524,7 @@ def test_live_offset_lease_is_compared_as_the_same_utc_instant(
         decision="in-progress",
         results=[],
         lease={"expires": "2026-08-24T03:00:00-07:00"},
-        now=dt.datetime(2026, 8, 24, 9, tzinfo=dt.UTC).replace(tzinfo=None),
+        commit=dt.datetime(2026, 8, 24, 9, tzinfo=dt.UTC),
     )
 
     assert not any("STALE CLAIM" in problem for problem in problems)
@@ -526,7 +538,7 @@ def test_terminal_round_requires_a_real_result(
         decision="blocked",
         results=[],
         lease=None,
-        now=dt.datetime(2026, 8, 24, tzinfo=dt.UTC).replace(tzinfo=None),
+        commit=dt.datetime(2026, 8, 24, tzinfo=dt.UTC),
     )
 
     assert "exp-999-contract-test.md: terminal round without results" in problems
@@ -558,7 +570,7 @@ def test_active_phase_and_delegation_reject_expired_slice_deadlines(
     problems = _session_problems(
         monkeypatch,
         session,
-        now=dt.datetime(2026, 8, 24, 0, 21, tzinfo=dt.UTC),
+        commit=dt.datetime(2026, 8, 24, 0, 21, tzinfo=dt.UTC),
     )
 
     assert (
@@ -771,11 +783,114 @@ def test_depends_on_resolves_across_agendas_like_discharged_by(
         ],
     }
     problems = ledger.check(
-        [], [], [], [], [], agendas=[earlier, later], now=dt.datetime(2026, 9, 5, tzinfo=dt.UTC)
-    )
+        [],
+        [],
+        [],
+        [],
+        [],
+        agendas=[earlier, later],
+        clock=_clock(dt.datetime(2026, 9, 5, tzinfo=dt.UTC)),
+    ).problems
     assert not any("BC-903" in problem or "BC-904" in problem for problem in problems)
     assert any("BC-905 depends on unknown items ['BC-999']" in problem for problem in problems)
     assert any(
         "BC-906 is ready with incomplete dependencies ['BC-902']" in problem
         for problem in problems
     )
+
+
+# `D-463`. The commit anchor the record gate judges its time-based refusals against, and
+# what it does where a tree cannot supply one.
+
+
+def _git(root: Path, *arguments: str) -> str:
+    completed = subprocess.run(
+        ("git", "-C", str(root), *arguments), capture_output=True, text=True, check=False
+    )
+    assert completed.returncode == 0, completed.stderr
+    return completed.stdout.strip()
+
+
+def test_the_gate_anchors_on_this_checkouts_head_and_not_on_the_wall_clock() -> None:
+    """`ledger.main`'s own composition, which no synthetic fixture can pin down.
+
+    The determinism test in `test_gate_repetition` proves the policy is constant in the
+    wall clock; it cannot prove that the command asks the policy rather than the clock.
+    This one does, by reading the same value out of Git.
+    """
+    root = ledger.PROJECT_ROOT
+    clock = project_clock(root)
+
+    assert clock.certified
+    assert clock.instant == dt.datetime.fromisoformat(_git(root, "log", "-1", "--format=%cI"))
+    assert "HEAD committed" in clock.source
+
+
+def test_a_source_snapshot_with_no_checkout_reports_the_refusals_it_cannot_judge(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """The negative-control sandbox and a source tarball: no `.git`, so no anchor.
+
+    `conventions.md` §6 is followed rather than a second convention invented: the
+    refusals that need an instant are named and counted, nothing fails on them, and the
+    invariants that read only the tree are unaffected.
+    """
+    monkeypatch.setattr(ledger, "dead_links", list)
+    monkeypatch.setattr(ledger, "board_ids", _empty_board_ids)
+    clock = project_clock(tmp_path)
+    session = _bounded_session(max_cycles=2, active=True)
+
+    findings = ledger.check(
+        [], [], [], [], [session], agendas=[], clock=clock, logbook_entries=[]
+    )
+
+    assert not clock.certified
+    assert findings.judged == 0
+    assert findings.uncheckable == [
+        "session-999-contract-test.md: session deadline_at",
+        "session-999-contract-test.md: workflow phase 2 deadline_at",
+    ]
+    assert not any("deadline_at has passed" in problem for problem in findings.problems)
+    # The tree-only invariants still run, so "uncheckable" is bounded to the clock.
+    assert "session-999-contract-test.md: session has no workflow phase history" not in (
+        findings.problems
+    )
+    session["workflow_phases"] = []
+    assert "session-999-contract-test.md: session has no workflow phase history" in (
+        ledger.check(
+            [], [], [], [], [session], agendas=[], clock=clock, logbook_entries=[]
+        ).problems
+    )
+
+
+def test_a_checkout_below_an_unrelated_repository_is_not_an_anchor(tmp_path: Path) -> None:
+    """Git searches upwards, so a snapshot unpacked inside some other repository would
+    otherwise answer with that repository's HEAD -- a wrong anchor, which is worse than
+    none."""
+    outer = tmp_path / "unrelated"
+    (outer / "packing").mkdir(parents=True)
+    _git(tmp_path, "init", str(outer))
+    _git(outer, "config", "user.email", "test@example.invalid")
+    _git(outer, "config", "user.name", "Test")
+    (outer / "README.md").write_text("not this project\n", encoding="utf-8")
+    _git(outer, "add", "README.md")
+    _git(outer, "commit", "-m", "unrelated")
+
+    clock = project_clock(outer / "packing")
+
+    assert not clock.certified
+    assert "does not track this project" in clock.source
+
+
+def test_a_commit_dated_in_the_future_is_reported_rather_than_trusted() -> None:
+    """The committer date is whatever the committing environment said it was, so an
+    anchor ahead of this host's clock is not one. Uncheckable rather than refused, and
+    the comparison runs the monotone way: a tree checkable today stays checkable."""
+    wall = dt.datetime(2026, 9, 5, 12, tzinfo=dt.UTC)
+
+    skewed = commit_clock(commit=wall + dt.timedelta(minutes=4), wall=wall, reason="HEAD")
+    forged = commit_clock(commit=wall.replace(year=2099), wall=wall, reason="HEAD")
+
+    assert skewed.certified, "ordinary host skew must not cost coverage"
+    assert not forged.certified
+    assert "dated ahead of this host's clock" in forged.source

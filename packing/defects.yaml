@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 462
+count: 463
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -15048,3 +15048,68 @@ defects:
   bead: think-8bcl
   status: outstanding
   recorded_in: conventions.md
+- id: D-463
+  title: The record gate judged four refusals against the wall clock, so a green commit did not stay green
+  date: '2026-09-05'
+  layer: tooling
+  class: validity
+  direction: neutral
+  detected_by: anomaly
+  latent_for: >-
+    Thirteen days. The lease refusal landed on 2026-08-23 and the three deadline refusals
+    on 2026-08-25, and nothing could see the problem until a branch happened to hold an
+    open phase whose deadline fell between two CI runs.
+  severity: high
+  what: >-
+    `sqpack.campaign.ledger check` runs in the records tier, which runs on every pull
+    request, and four of its refusals were computed against `datetime.now`: an expired
+    experiment lease, a passed session `deadline_at`, a passed workflow-phase
+    `deadline_at`, and a passed delegation `deadline_at`. All four are anti-monotone in
+    their reference instant -- each becomes true with time alone and none of them ever
+    becomes false again -- so the gate's verdict was not a function of the commit. The
+    same tree passed or failed depending on when CI happened to run.
+    BC-215 demonstrated it by clock injection over one fixed tree: green at 20:30Z, red at
+    20:44Z, byte-identical.
+  consequence: >-
+    PR 83 paid two full CI cycles in one evening for it. The branch was green at 20:36Z on
+    e032a0f6 and red at 21:23Z on a tree whose only difference was a float tolerance in one
+    test, because session-087's phase deadline of 20:43Z passed in between.
+    No bound, result or record is wrong; what was lost is the property CI depends on, that
+    re-running a check cannot change its answer, which is what makes a green commit
+    mergeable. It also bounded a real saving: the unmoved-tree skip rule BC-215 was
+    measuring could not be written while a step's verdict moved on its own.
+  fix: >-
+    `sqpack/campaign/commit_clock.py` resolves one anchor and `ledger.check` takes it in
+    place of `now`: HEAD's committer date inside a checkout, and nothing outside one.
+    Under that anchor each refusal keeps its force and gains a meaning that is a property
+    of the commit, namely that at the moment someone committed this, the record claimed to
+    be live past its own deadline. A session that genuinely overran as of its own commit is
+    still refused, and its author sees it locally before pushing instead of in CI.
+    Where the tree cannot date HEAD the clock-dependent refusals are uncheckable, reported
+    by name and failing nothing. That is the line conventions.md section 6 already draws
+    for engine-commit provenance and devtools/check_session_gate.py for gate declarations,
+    and the negative-control sandbox needs it: it is a source snapshot with no `.git`, and
+    so is a tarball. `check` returns the judged and uncheckable counts separately and the
+    command prints them that way, because adding them together is how uncheckable becomes
+    checked.
+    A committer date is whatever the committing environment said it was, so an anchor more
+    than five minutes ahead of the host's wall clock is uncheckable as well. That one
+    comparison runs the monotone way, so it can never turn a green tree red.
+  regression: >-
+    packing/tests/test_gate_repetition.py, where the counter-example that used to assert
+    this defect now asserts its absence: one fixed tree, two wall clocks straddling the
+    record's own deadline, one verdict. Its neighbour asserts the other half, that a record
+    already overrun when it was committed is still refused. Four more in
+    packing/tests/test_campaign_tools.py cover the anchor itself, that the command reads
+    HEAD's committer date rather than a clock, that a tree with no checkout reports what it
+    cannot judge, that a snapshot below an unrelated repository is not an anchor, and that
+    a future-dated commit is reported rather than trusted. The three tests there that
+    exercise the four refusals pass unchanged.
+    Two residues are stated rather than papered over. A pre-commit run anchors on the
+    previous commit, so a deadline falling between the local check and the commit still
+    flips a verdict, over a window of seconds rather than an open-ended one. And on a
+    pull_request event GitHub checks out a synthesized merge commit whose committer date it
+    sets itself, so an advance of the base branch moves the anchor, together with the tree
+    it also moves.
+  status: fixed
+  recorded_in: packing/src/sqpack/campaign/commit_clock.py

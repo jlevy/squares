@@ -286,7 +286,32 @@ def test_show_reads_a_checkpoint_without_running_anything(tmp_path) -> None:
     start = next(i for i, line in enumerate(body) if line.split()[:2] == ["col", "lp"])
     stop = next(i for i, line in enumerate(body) if line.startswith("chunking overhead:"))
     assert stop - start - 1 == result["lp_rounds"]
-    assert "no candidate orbit has averaged depth above 1" in text
+
+    # The note column is checked for presence, not for which of its two outcomes
+    # occurred. Pricing reads `solution.duals`, and at this LP the dual is degenerate:
+    # the objective (4.000000) and the least covered mass (1.000000) are identical on
+    # every platform, but the dual vector that certifies them is not unique, and
+    # `rank_candidates` reads it. This run finds no candidate here and reports a `nan`
+    # depth; CI's two-core runner found one at averaged depth 2.0 on the same commit
+    # (run 33988186764). A gap that size is a different vertex of the dual polytope, not
+    # arithmetic noise, so pinning either outcome pins a solver's choice among equally
+    # optimal answers.
+    #
+    # Nothing sound rests on that choice. The duals steer *which* columns generation
+    # tries next, so they change how fast a certificate is found and not whether a found
+    # one holds: retention runs `devtools.decide_certificate`, which re-derives every
+    # condition from the atoms themselves by exact event-cell sweep and interval
+    # branch-and-bound, and never consults a dual.
+    # The note lives in the per-column summary, which is a second table below the
+    # per-round one `start`/`stop` bracket, so it is located by its own header.
+    head = next(i for i, line in enumerate(body) if line.split()[-1:] == ["note"])
+    rows = [line for line in body[head + 1 :] if line.strip() and not line.startswith("-")]
+    assert rows, "the reader dropped the per-column summary"
+    for line in rows:
+        note = line.split(None, 9)[9]
+        assert note == "no candidate orbit has averaged depth above 1" or note.startswith(
+            "adding "
+        ), f"unrecognised pricing note: {note!r}"
 
 
 def test_cost_windows_split_the_loop_rather_than_averaging_it() -> None:

@@ -2,7 +2,7 @@
 
 # Defect log
 
-462 defects recorded across the packing toolchain.
+463 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -19,13 +19,13 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
 | `review` | 275 | a human or agent reading the work against a checklist |
-| `anomaly` | 14 | a result that made no sense, chased down |
+| `anomaly` | 15 | a result that made no sense, chased down |
 | `inspection` | 55 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 69 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 69 of 462, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 69 of 463, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 69 of 462, and none of
 | quench | 23 |
 | verifier | 9 |
 | record | 146 |
-| tooling | 164 |
+| tooling | 165 |
 | docs | 109 |
 
 ## By kind
@@ -43,7 +43,7 @@ The line worth reading twice: **the automated gate caught 69 of 462, and none of
 | Class | Count |
 | --- | ---: |
 | soundness | 94 |
-| validity | 117 |
+| validity | 118 |
 | bookkeeping | 174 |
 | robustness | 59 |
 | performance | 18 |
@@ -699,6 +699,7 @@ This is the actionable list.
 | [D-460](packing/campaign/agendas/agenda-022-the-conditional-route.md) | 2026-09-05 | record | bookkeeping |  | `gate` | low | contained | A research cell with no hypothesis cannot produce a round, and BC-206 was written that way |
 | [D-461](packing/devtools/gate-budgets.yaml) | 2026-09-05 | tooling | performance |  | `inspection` | medium | fixed | The pull-request tier tripled inside a cap with 3.61x of headroom, and no check could have objected |
 | [D-462](conventions.md) | 2026-09-05 | record | bookkeeping |  | `inspection` | medium | outstanding | Two branches allocated the same three defect ids to different defects, and nothing local can see it |
+| [D-463](packing/src/sqpack/campaign/commit_clock.py) | 2026-09-05 | tooling | validity | neutral | `anomaly` | high | fixed | The record gate judged four refusals against the wall clock, so a green commit did not stay green |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
