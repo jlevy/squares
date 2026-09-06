@@ -135,6 +135,7 @@ def test_flexibility_is_not_promoted_to_not_rigid() -> None:
     assert "t^2" in built["witness"]["second_order_behaviour"]
 
 
+@pytest.mark.slow
 def test_the_contact_model_is_measured_not_assumed() -> None:
     """`D-390` and `D-391` in numbers, taken from the pose."""
     pose = load_pose()
