@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **4** in_progress, **14** ready, **9** tentative, **56** blocked, **41** stopped, **122** complete.
+- **3** in_progress, **14** ready, **9** tentative, **56** blocked, **41** stopped, **123** complete.
 
 - **18 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-243`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -42,7 +42,6 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-025 | `BC-252` | tentative | 1 | insight | research | Which weight or support change addresses the retained limiting witnesses? | `think-361m` |
 | agenda-025 | `BC-253` | tentative | 2 | insight | research | Can an existential witness menu cover a limiting closed pose box? | `think-mw02` |
 | agenda-026 | `BC-246` | ready | 0 | correctness | tool_validation | Does the typed language recover Trump's stationary backbone, every retained branch, and its local theorem… | `think-3l93` |
-| agenda-026 | `BC-254` | in_progress | 0 | insight | research | Does the exact D4 Trump support admit a full-size dual value above eleven? | `think-01q4` |
 | agenda-026 | `BC-247` | ready | 1 | efficiency | tool_validation | On the complete n=3 and n=4 controls, and the local n=5 Göbel control, is typed backbone generation faithful… | `think-qi66` |
 | agenda-026 | `BC-255` | in_progress | 1 | insight | research | What is the first complete proof obligation for a useful restricted structural theorem? | `think-dene` |
 | agenda-026 | `BC-256` | tentative | 2 | correctness | research | Does a verified packing refute the selected restricted structural claim? | `think-pjk7` |
@@ -106,7 +105,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-025 | `BC-235` | 1 | `BC-234` | no | — |
 | agenda-025 | `BC-236` | 1 | `BC-235` | no | — |
 | agenda-025 | `BC-237` | 2 | `BC-236` | no | — |
-| agenda-026 | `BC-243` | 0 | `BC-242`, `BC-220` | yes | A selected noncontrol placement candidate and a separately priced complete a.e.-depth verifier. BC-254 may settle the… |
+| agenda-026 | `BC-243` | 0 | `BC-242`, `BC-220` | yes | Complete a.e.-depth producer and source-distinct reader readiness. BC254 has selected exp113's unchanged candidate;… |
 | agenda-026 | `BC-249` | 0 | `BC-224` | no | — |
 | agenda-026 | `BC-244` | 1 | `BC-243` | no | — |
 | agenda-026 | `BC-248` | 2 | `BC-246`, `BC-247` | no | An exact fractional measure of mass at least eleven for the chosen subproblem, no more than 2,311,290 of the present… |
@@ -155,7 +154,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-023 | active |  | 3 |  | 2 |  |  | 5 |
 | agenda-024 | active |  |  |  | 5 |  | 3 | 8 |
 | agenda-025 | active | 2 | 1 | 2 | 6 |  | 2 | 13 |
-| agenda-026 | active | 2 | 2 | 2 | 4 |  | 4 | 14 |
+| agenda-026 | active | 1 | 2 | 2 | 4 |  | 5 | 14 |
 
 ## By program
 
@@ -234,12 +233,12 @@ Open frontier: `BC-208`, `BC-207`.
 | agenda-026 | `BC-247` | ready | On the complete n=3 and n=4 controls, and the local n=5 Göbel control, is typed backbone generation… |
 | agenda-026 | `BC-248` | blocked | Can a certified fractional core prune the global typed-backbone search to an exact-cover residue… |
 | agenda-026 | `BC-249` | blocked | Is every closure cell classified, its theorem and checkpoint state preserved, and its one earned… |
-| agenda-026 | `BC-254` | in_progress | Does the exact D4 Trump support admit a full-size dual value above eleven? |
+| agenda-026 | `BC-254` | complete | Does the exact D4 Trump support admit a full-size dual value above eleven? |
 | agenda-026 | `BC-255` | in_progress | What is the first complete proof obligation for a useful restricted structural theorem? |
 | agenda-026 | `BC-256` | tentative | Does a verified packing refute the selected restricted structural claim? |
 | agenda-026 | `BC-257` | tentative | Which below-Trump density target and family justify a continuum proof attempt? |
 
-Open frontier: `BC-243`, `BC-244`, `BC-246`, `BC-247`, `BC-248`, `BC-249`, `BC-254`, `BC-255`, `BC-256`, `BC-257`.
+Open frontier: `BC-243`, `BC-244`, `BC-246`, `BC-247`, `BC-248`, `BC-249`, `BC-255`, `BC-256`, `BC-257`.
 
 ### `n11-post-381-portfolio`
 

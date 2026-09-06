@@ -284,6 +284,135 @@ Otherwise they duplicate work that the exact event boundary instrument still has
 No global eleven-square atlas, density instrument, new registry claim, or certificate
 manifest is needed for this first decision.
 
+## 2026-09-06: Next Allocation After H-104
+
+This source-only update is `think-p0nx`, commissioned at 22:09:48 UTC and handed back
+under the shortened 22:19:32 deadline.
+The preceding assessment remains historical.
+[Exp-114](../../experiments/exp-114-h-104-fixed-side-auxiliaries.md) now accepts H-104:
+the seven fixed-formula clauses hold at exactly 0° and 45°, through the reviewed
+exhaustive producer and independent input/receipt checks.
+It supplies no nearby-angle result, positive margin, or H-036 decision.
+The frozen side 3.878 and both closed ±0.25° neighborhoods remain unchanged.
+
+### First complete obligation
+
+Keep the first continuous discriminator as **every contained near-axis closed unit
+square hits the frozen ten-set**. Its domain includes every center and both signs of the
+angle perturbation, including zero and the angle endpoints.
+Proving it would complete one auxiliary clause; it would not settle localization, the
+three separate A-point implications, either twelve-cover clause, or H-036. The earlier
+nine-point argument already excludes the compositions with at most one near-45° square.
+This ten-set check supports the particular conditional-cover proof, not a new claim to
+that composition exclusion.
+
+### Try a fixed tiling before a general event-root engine
+
+A cheaper sufficient certificate may avoid moving event arrangements altogether.
+Keep the actual angle-dependent containment domain by mapping a fixed unit square of
+parameters $z=(z_1,z_2)$ to the center:
+
+$$
+F_t(z)=\bigl(h(t)+(q-2h(t))z_1,\ h(t)+(q-2h(t))z_2\bigr).
+$$
+
+The width must be proved positive throughout each chart.
+Cover $[0,1]^2$ by a finite closed rational triangulation, and assign one frozen ten-set
+point to each triangle on each one-sided angle chart.
+For every triangle vertex $z$, assigned point $p$, and
+$a(t)\in\{u(t),-u(t),v(t),-v(t)\}$, certify
+
+$$
+d(t)^2\bigl(1/2-a(t)\mathbin{\cdot}(p-F_t(z))\bigr)\geq0
+\quad\hbox{throughout the chart},\qquad d(t)=1+t^2>0.
+$$
+
+Membership is affine in $z$, so vertex inequalities cover the whole closed triangle.
+A checked triangulation covers every center, including seams and vertices.
+After splitting the absolute-value signs in $h$, these are polynomials of degree at most
+four over $\mathbb Q(\sqrt2)$; the near-axis rational target uses rational coefficients.
+No moving vertex or algebraic parameter root is required by a successful certificate of
+this form.
+
+One small sign checker can map an angle slab to $w\in[0,1]$ and verify nonnegative
+Bernstein coefficients by exact arithmetic.
+That condition proves nonnegativity on the entire closed slab, including boundary zeros.
+Exact factoring at rational endpoints and bounded rational subdivision may help, but a
+mixed-sign coefficient list is inconclusive, not a negative value of the polynomial.
+In particular, $(w-1/2)^2$ is nonnegative despite its negative middle degree-two
+Bernstein coefficient.
+An unresolved leaf must remain in the output.
+This limitation can persist under subdivision: a nonzero polynomial with an interior
+zero cannot have all nonnegative Bernstein coefficients there, because every Bernstein
+basis function is positive in the interval’s interior.
+An irrational tangency cannot become an endpoint of a finite rational subdivision.
+Such a case needs another exact sign argument or the separately priced root-boundary
+oracle; the proposed cheap checker is not a complete sign-decision procedure.
+
+This is a sufficient, potentially stronger certificate shape: one assigned point must
+work over a whole triangle and angle slab, although the true cover may switch points
+inside it. No tiling, coefficient inventory, or target feasibility has been computed
+here. H-104’s true Boolean verdict does not supply this certificate.
+Unlike the unsuccessful uniform-core transfer above, this construction retains the
+moving wall constraints; it does not shrink every square by one worst-angle factor.
+Uniform shrinking, or a center shift without a complete containment-and-membership
+argument, is not an alternative proof.
+
+Endpoint samples and a denser angle grid are insufficient.
+A fixed-axis core cover remains a useful sufficient test for an individual clause only
+if its complete domain transfer is proved; the known loss rules it out as the sole route
+to H-036. A hand-derived monotonicity argument or an exact uniform LP dual could replace
+the Bernstein check where available, but neither may omit zero-slack faces or an
+unproved coefficient sign.
+If fixed tiles cannot close the obligation, retain the obstruction to that certificate
+shape and reconsider the earlier event/feasibility-root design; do not automatically
+build both instruments.
+
+### Controls, independent review, and disposition
+
+Before target access, controls must establish:
+
+- A constant-angle accepted source control retains its complete result; the moving
+  center map preserves wall contacts and both orientation signs.
+- Closed tile seams and corners survive; an omitted triangle or boundary is refused.
+  A positive-area picture alone does not establish a closed cover.
+- The nonnegative polynomial $w(1-w)$ keeps both zero endpoints, while $w^2-w+3/16$
+  cannot pass from its positive endpoint values: its midpoint is negative.
+  Mixed Bernstein signs, a dropped sign chart, a narrowed angle range, and a changed
+  point label cannot produce acceptance.
+- A source-distinct reviewer reconstructs the center map and four membership
+  inequalities from the original coordinates, checks the tile union, and verifies the
+  polynomial identities and sign certificates.
+  The existing H-104 receipt reader does not establish continuous coverage.
+
+The rational outer angle bound above remains safe for a positive result.
+An escape in its added sliver is not a counterexample in the declared neighborhood.
+A negative witness needs independent corner containment, strict point avoidance, and
+certified membership in the actual angle interval.
+One such witness rejects this continuous auxiliary clause even if other leaves remain
+unchecked; it does not undo H-104 or refute H-036. Only an independently verified
+eleven-square packing with $L<q$ and all eleven angles in the actual allowed family
+refutes H-036. BC-256’s proof/falsifier counterpart therefore remains a separate bounded
+allocation; failure to find a packing supplies no positive proof evidence.
+
+### Conditional price and stop
+
+Prefer a proposed **20–30 active-minute source/toy implementation slice** for the
+fixed-domain tile and polynomial-sign checker, followed by **10–20 independent review
+minutes**, before authorizing the earlier 60–120-minute general event build.
+These are unmeasured effort estimates, not commissions or target-runtime estimates.
+The exact partition machinery already used by the
+[repaired source cover](../../../../../cases/stromquist/repaired_cover.py) is a reuse
+candidate; its contract must be checked for the new tile format.
+
+At that boundary, require either a reviewed complete certificate interface with working
+controls, or a named missing boundary/identity check and revised price.
+Only then should the coordinator freeze a bounded target attempt and its independent
+replay. Actual target runtime and the number of necessary tiles or angle slabs remain
+unknown. No new target limit is adopted here.
+Refusal by the cheaper certificate shape is not a mathematical negative, and does not
+fund an automatic retry, changed points, smaller angle radius, or full event-root build.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

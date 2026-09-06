@@ -1383,9 +1383,9 @@ sessions:
     snapshot_incomplete: true
 - id: session-089
   title: "The next post-3.81 research phases"
-  status: in_progress
+  status: stopped
   primary_bead: think-jgnv
-  phases: 13
+  phases: 14
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-089.yaml
@@ -1396,8 +1396,8 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-089.yaml
-    model_responses: 797
-    agent_hours: 6.93
-    active_union_hours: 2.0
-    wall_hours: 2.0
+    model_responses: 1185
+    agent_hours: 10.21
+    active_union_hours: 3.13
+    wall_hours: 3.13
     snapshot_incomplete: true

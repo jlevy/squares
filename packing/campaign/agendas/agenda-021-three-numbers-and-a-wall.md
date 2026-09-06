@@ -1043,21 +1043,23 @@ agenda:
           from trees that did not move, and the `touches` sets account for 1.6 per cent,
           so the tree id is the lever and this is the one thing left between the
           pull-request wall and the operator's target.
-      selected:
-        bead: think-xejq
-        workflow: efficiency-loop
+      - bead: think-0za3
+        workflow: research-loop
+        priority: 0
         rationale: >-
-          Reselected at session-087's close, which is what this field is for: it is
-          cross-checked against the latest terminal session's next action rather than
-          frozen at the closeout. This agenda's own selection, think-wufn / BC-213, was
-          taken by session-087 and completed -- both constructions wall at 973/200 and
-          H-062 is accepted at bracket width 0.015 -- so the reason it was chosen is
-          discharged rather than still standing.
-          What replaces it is not a research cell. The block that followed spent itself
-          on the gate's own cost and got the pull-request surface from 1369.60 s to about
-          221.70 s; BC-215 is the one lever it priced and did not pull, and the cells
-          behind it here (BC-204, BC-207, BC-208) are still blocked on questions this
-          block did not open.
+          Added at Session089's handoff, not backdated to this agenda's own W10.
+          BC-251 is ready but unopened. Reserve its unchanged 150-minute scalar
+          invocation and separate verification in a fresh allocation. Full99a3
+          validation passed; Agenda024 also prices independent density and angle work.
+      selected:
+        bead: think-0za3
+        workflow: research-loop
+        rationale: >-
+          This live handoff follows terminal Session089. Its bounded research and
+          method assessments are retained and full validation passed. Preserve
+          BC215 as an uncompleted efficiency candidate, and use
+          Agenda024 Current Allocation for future research rather than restarting
+          a completed test or creating a separate supporting-fix PR.
       operator_input:
         status: unavailable
         note: >-

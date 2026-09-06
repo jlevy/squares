@@ -309,7 +309,7 @@ session:
     clock_role: work
     objective: Compare complete density-depth and continuous-angle next obligations while publishing the finished targets.
     bead: think-jgnv
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Both selected targets have independent scoped dispositions; larger instruments require explicit repricing.
     budget_minutes: 15
@@ -319,12 +319,32 @@ session:
     validation_command: Source-only completeness and cost review; fresh integrated validation proceeds independently.
     kill_condition: The bounded assessments complete or their lease ends; no unregistered target or automatically funded build.
     fallback: Retain the exact missing cost or completeness obligation in the existing agenda.
-    outcome: null
+    outcome: Complete facet/slab density verification and a sufficient closed-tile angle certificate are specified and priced for control-only first slices.
     evidence: [packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md]
-    stop_reason: null
+    stop_reason: Both authors returned by 22:18:47; the independent tile-method check preserved the unresolved interior-zero limitation.
     next_action: Select the next complete end-to-end allocation and publish the handoff within the inherited allowance.
+  - workflow: factual-review
+    focus: correctness
+    recording: contemporaneous
+    clock_role: finalization
+    objective: Reconcile scoped results, next allocations, costs and validation on the single integrated PR101.
+    bead: think-647n
+    status: stopped
+    entered_by: planned_checkpoint
+    switch_reason: The original twenty-minute finalization reserve follows the completed bounded research and method assessments.
+    budget_minutes: 20
+    started_at: '2026-09-06T22:19:32Z'
+    deadline_at: '2026-09-06T22:39:32Z'
+    expected_output: A current reviewable PR and complete next-agent handoff, with any still-running full validation explicitly delegated.
+    validation_command: Record and push tiers, actual hosted CI summaries, privacy-reduced cost receipt and documentation pass.
+    kill_condition: Publication and handoff are complete or the inherited session allowance ends; no new research target.
+    fallback: Preserve the exact running validation reference and continue its existing follow-up without resetting research allocation.
+    outcome: Research and source-only assessments are retained; all workers released; next allocations and actual costs are documented, with final publication and full-gate follow-up tracked separately.
+    evidence: [packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md, packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md]
+    stop_reason: The research handoff is ready; do not hold it open for long-running validation or start unfunded target work.
+    next_action: Follow full validation to its actual terminal summary; require a fresh allocation before new research execution.
   primary_bead: think-jgnv
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 208.1
     checkpoint_minutes: 30
@@ -340,7 +360,13 @@ session:
     before: >-
       PR97 is merged and BC250 is complete. No successor experiment has run.
       BC231, BC254 and BC255 are selected assessments; BC251 needs fresh readiness.
-    after: null
+    after: >-
+      Two adaptive control slices complete; exp113 retains [11,56/5] with H099
+      unresolved; exp114 accepts only H104's exact-angle auxiliaries; exp115 rejects
+      only H105's pair obstruction. BC254 hands the candidate to BC243. Scalar is
+      ready but unopened. Complete facet controls and sufficient angle-tile controls
+      are next-allocation recommendations, with independent review and no automatic
+      target funding. PR101 is the single integration line.
   delegations:
   - task: BC231 / H095 adaptive controls; think-7mk4
     operator: Codex bound_lane_strategy, max reasoning for mathematical judgment
@@ -1046,12 +1072,12 @@ session:
     excluded_commands: [repository edits, generated cost edits, numerical invention, target access, git mutations, tbd mutations]
   - task: Price complete density-depth verification after pair exhaustion; think-pg9k
     operator: Codex gpt6_coverage_audit, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: Complete facet producer and source-distinct slab reader specified; first proposal is 30 author plus 15 review minutes; writer stopped at 22:18:47.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-post-screen-next-discriminator.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-post-screen-next-discriminator.md]
+    checks: [Source-only completeness and complexity audit; no target geometry or tests; Flowmark passed.]
     uncertainty: Complete face-verifier implementation and actual target cost remain unmeasured.
     elapsed_seconds: null
     elapsed_quality: unavailable
@@ -1068,12 +1094,12 @@ session:
     excluded_commands: [target geometry, new rows, LP, higher-order screen, source edits, git mutations, tbd mutations, registries]
   - task: Price the first complete continuous-angle obligation after H104; think-p0nx
     operator: Codex bound_lane_strategy, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: Proposed 20–30 author plus 10–20 review minutes for a sufficient closed-tile certificate; writer stopped at 22:18:30.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md]
+    checks: [Source-only method review; no nearby-angle geometry or tests; independent review confirmed sufficiency and Bernstein interior-zero limitation.]
     uncertainty: H036 remains unresolved and the perturbed-angle target has not run.
     elapsed_seconds: null
     elapsed_quality: unavailable
@@ -1088,6 +1114,28 @@ session:
     fallback: Retain the first missing proof obligation and do not fund an automatic full build.
     write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md]
     excluded_commands: [changed thresholds, nearby-angle evaluation, source edits, new claim or experiment, git mutations, tbd mutations, registries]
+  - task: Independent closed-tile sufficiency check; think-p0nx
+    operator: Codex structural_lane_strategy, max reasoning for mathematical judgment
+    status: completed
+    recording: contemporaneous
+    outcome: Sufficient method is sound; common point labels and full closed coverage required, while interior tangencies can remain unresolved.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md]
+    files: [none; read-only algebra and caveats supplied to the author and coordinator]
+    checks: [Affine tile-vertex reduction, degree-four half-angle forms, both sign charts and Bernstein interior zeros checked symbolically.]
+    uncertainty: No target tiling, polynomial inventory or instrument readiness has been established.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Retain these soundness conditions in the source-only first slice and its independent review.
+    phase: 13
+    budget_minutes: 2.35
+    started_at: '2026-09-06T22:17:11Z'
+    deadline_at: '2026-09-06T22:19:32Z'
+    expected_output: A concise mathematical soundness argument or counterexample caveat.
+    validation_command: Read-only algebraic proof review; no source or target execution.
+    kill_condition: The bounded check completes or the finalization reserve begins.
+    fallback: Leave the method's unverified premise explicit rather than accepting readiness.
+    write_scope: [none; read-only messages to the author and coordinator]
+    excluded_commands: [files, source edits, target geometry, tests, git mutations, tbd mutations, registries]
   outputs:
   - packing/campaign/agent-sessions/session-089-agenda024-next-phases.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md
@@ -1113,8 +1161,14 @@ session:
   - The replay's sole failure was its own misplaced log in the checkout root; moving it out restored the README check without a source change.
   - Initial hosted CI passed geometry, suite, sweeps and macOS; stale live clocks and an upstream bead hierarchy blocked its validation job.
   - Commit 0e6d6aac passed 657 reachable tests with 3 deselected in 44.89 seconds; its sole push-tier failure was prose appended to a declared command, corrected at the next checkpoint.
-  stop_reason: null
-  next_action: Review source instruments, integrate landed corrections and commission only ready, priced target work.
+  - 'full gate: fast at 99a3ad42: passed (62 selected steps in 203.07 seconds)'
+  - 'full gate: full at 99a3ad42: passed (all checks in 1487.51 seconds; final summary observed during publication follow-up)'
+  stop_reason: Selected research and next-method assessments are complete; full validation passed during publication follow-up, with final handoff publication tracked separately.
+  next_action: >-
+    Select BC-251, think-0za3, for the next fresh allocation with its unchanged
+    150-minute process cap and separate verification. Agenda024 Current Allocation
+    owns the parallel density and angle packages. Keep the integrated PR101 line
+    while open; do not repeat exp113, exp114 or exp115.
 ---
 # Session 089 — The Next Post-3.81 Phases
 
@@ -1222,10 +1276,8 @@ All 31 record steps and 45 push steps passed on `2153cb02` in 21.03 and 108.99 s
 The full gate on `a105f729` completed in 1447.15 seconds with one failed step: 67 of 163
 negative controls failed because isolated worker environments lacked dependencies.
 All other steps passed.
-Focused controls pass with the existing environment explicitly bound; the complete
-failed-step replay is running.
-The corrected failed-step replay then exited zero with all 163 negative controls firing;
-its aggregate process cost was not measured.
+The corrected failed-step replay exited zero with all 163 negative controls firing, with
+the existing environment explicitly bound; its aggregate process cost was not measured.
 The original full invocation remains a one-step failure, now discharged by that separate
 replay. The reference-only workflow snapshot correction passed 16 tests and is retained
 at `a40b40d3`. Required hosted CI passed on the published `cf299e6c` checkpoint.
@@ -1233,17 +1285,25 @@ Its two sandbox-blocked process-cleanup tests also passed separately with permis
 inspect processes. These statements do not assign a CI or full-gate pass to later
 unpublished changes.
 
+On the complete research checkpoint `99a3ad42`, all 45 push-tier steps passed in 135.55
+seconds, all 62 fast-tier steps in 203.07 seconds, and the full exhaustive gate passed
+all checks in 1487.51 seconds.
+The last result was observed during the already-commissioned publication follow-up after
+the research window closed.
+These are process wall times, not agent attention, and no measured ceiling changed.
+The final handoff edits receive their own record, regression and hosted checks.
+
 BC251’s 150-minute scalar invocation has not started.
-PR100’s corrections are merged, and the corrected paths passed46 focused tests plus the
-real1121-atom seed-map control.
+PR100’s corrections are merged, and the corrected paths passed 46 focused tests plus the
+real 1121-atom seed-map control.
 BC251 is ready but remains unopened: its unchanged 150-minute invocation plus
 verification no longer fits the inherited outer allowance.
 It needs a sufficient fresh allocation, not a shortened or reset experimental budget.
 No timeout, unavailable input or failed guard earns an unchanged retry.
-The three independent assessment lanes continue while this is resolved.
+All assessment workers have returned; the proposed next allocation is in Agenda024.
 
-The prior full-gate follow-up remains `think-exlq`. PR103’s supporting corrections are
-integrated here and that PR is closed.
+The prior full-gate follow-up `think-exlq` is discharged by the complete passing run.
+PR103’s supporting corrections are integrated here and that PR is closed.
 PR98’s landed efficiency work includes the evolving operating-rule control, so PR102 was
 closed as superseded.
 No threshold was relaxed.

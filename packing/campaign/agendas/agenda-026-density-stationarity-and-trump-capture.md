@@ -207,10 +207,11 @@ agenda:
     workflows: [research-loop, factual-review]
     depends_on: [BC-242, BC-220]
     blocked_on: >-
-      A selected noncontrol placement candidate and a separately priced complete
-      a.e.-depth verifier. BC-254 may settle the declared support by an exact LP upper
-      certificate without building that verifier. A uniform D=11 control is not the
-      selection condition.
+      Complete a.e.-depth producer and source-distinct reader readiness. BC254 has
+      selected exp113's unchanged candidate; exp115 rules out all overweight-pair
+      obstructions but not higher-order depth. The first proposed control-only
+      facet slice is 30 author minutes plus 15 review minutes; full reader and
+      target costs remain unpriced. A uniform D=11 control is not the target.
     parallel_group: agenda026-density
     program: n11-density-stationarity-trump-capture
     next_evidence: >-
@@ -438,7 +439,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 0
     question: Does the exact D4 Trump support admit a full-size dual value above eleven?
     hypotheses: [H-099, H-105]
@@ -461,8 +462,9 @@ agenda:
       source/toy controls and independent review under think-4ej5 and think-0u56.
       H105/exp115 independently exhausted all 134 eligible pairs without an overlap
       witness, rejecting only the pair-obstruction claim. H099 and full a.e. depth
-      remain unresolved. Think-pg9k prices complete positive-area-face verification;
-      no complete arrangement build or repeated incomplete screen is funded.
+      remain unresolved. This cell exits by handing the candidate to BC243 with
+      think-pg9k's complete-method assessment; its bounded support screen is complete.
+      No complete arrangement build or repeated incomplete screen is funded.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-screen-spec.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md

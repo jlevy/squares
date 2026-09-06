@@ -578,16 +578,21 @@ density, typed stationarity, and Trump capture in
 Research and tooling have separate continuation work.
 [Session 087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md)
 completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0.015`.
-Session 088 carries its tooling follow-up forward:
+Session 089 retains the finite-row density candidate, its complete pair exclusion, the
+exact-angle auxiliary result, and the next complete-method assessments.
 
-**Selected next entry:** `think-xejq`, `BC-215` in
-[Agenda 023](packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md),
-for the explained exhaustive-family planner in
-[W5 Phase 3](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md).
-Start in reporting mode with complete input and node attribution; validate the complete
-fresh-plus-reused coverage union before omitting expensive work.
-This terminal-session marker selects tooling work; Agenda 024 continues to own the
-active research allocation.
+**Selected next entry:** `think-0za3`, BC-251’s ready but unopened scalar investigation.
+Reserve its full unchanged 150-minute process cap and separate verification in a fresh
+allocation before launch.
+Full validation of research checkpoint `99a3ad42` passed;
+[Session 089](packing/campaign/agent-sessions/session-089-agenda024-next-phases.md)
+retains that verdict and the completed experiments, which must not be repeated.
+[Agenda 024’s Current Allocation](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
+owns the next fresh scalar, complete-density and continuous-angle packages, including
+independent-review assignments.
+Keep these on integrated PR 101 while it remains open.
+The earlier BC-215 efficiency work remains available in Agenda 023; this handoff does
+not mark it complete or erase its evidence.
 `BC-219` was the preflight for Agenda 024’s original launch inputs.
 Its completion does not replace the continuation addendum’s current gate contract.
 
@@ -3018,7 +3023,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-075.yaml` | session-072, session-075 | 212 | 1.41 h | 1.41 h | 1.75 h | no |
 | `codex-task-tree-session-078.yaml` | session-078, session-082 | 2,401 | 13.41 h | 9.45 h | 10.0 h | yes |
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
-| `codex-task-tree-session-089.yaml` | session-089 | 797 | 6.93 h | 2.0 h | 2.0 h | yes |
+| `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

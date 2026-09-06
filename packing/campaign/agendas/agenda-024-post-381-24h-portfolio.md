@@ -351,6 +351,47 @@ contexts, claims the six cells, and freezes the first-block experiment identitie
 
 ## Current Allocation
 
+Session 089 has completed the selected control slices and three bounded experiments on
+the integrated [PR 101](https://github.com/jlevy/squares/pull/101). BC-250’s publication
+gate and the prerequisite merge of PR 97 are satisfied.
+Do not restart the historical first row below or repeat any completed producer/replay.
+The
+[session record](../agent-sessions/session-089-agenda024-next-phases.md#readiness-and-follow-up)
+owns the actual clocks, dispositions and validation follow-up.
+
+For the next fresh active-time allocation, keep three separable commitments:
+
+- **BC-251 / H-093:** the ready but unopened 150-minute scalar invocation, with
+  verification time reserved.
+  It can run on one CPU while the coordinator manages the other workers; do not shorten
+  or reset its frozen cap.
+- **BC-243 / H-099:** complete a.e.-depth verification of exp113’s unchanged candidate.
+  BC-254 has handed off the finite-row bracket and exp115’s complete pair exclusion.
+  Start with the
+  [complete facet kernel’s 30-minute control slice and separate 15-minute review](../series/series-000-smoke-and-calibration/results/agenda-026/bc-254-post-screen-next-discriminator.md#next-step-complete-face-verification-2026-09-06).
+  The next source/control package is `think-ejwh`, under BC-243’s `think-mt6q`. Price
+  the independent complete slab reader afterward; no target acceptance before both
+  routes and their soundness controls are ready.
+- **BC-255 / H-036 and H-102:** first build the
+  [sufficient closed-tile angle certificate](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md#2026-09-06-next-allocation-after-h-104)
+  in a 20–30-minute source/toy slice, with 10–20 minutes of independent review.
+  The next source/control package is `think-vttn`, under BC-255’s `think-dene`. It must
+  cover the entire near-axis auxiliary domain if successful; a failed Bernstein
+  certificate is unresolved, not a geometric counterexample.
+
+These are next-allocation recommendations, not new commissions inside Session 089’s
+finalization reserve.
+Keep BC-231’s remaining 180–320 active-worker-minute estimate and unpriced retained
+replays conditional; its two selected slices are complete.
+Use two authors and rotate the third worker into independent review, with the
+coordinator owning shared records and the scalar process.
+Reuse PR 101 while it remains the integration line; do not create separate PRs for these
+supporting slices.
+Use `max` for mathematical judgment and `high` or `xhigh` for suitable
+mechanical work.
+
+### Retained Portfolio Commitments
+
 BC-250’s assessment is distilled into the following commitments.
 H-093 through H-103 are prospective registrations; completed commissioning work is their
 antecedent, not a retroactive experiment.
@@ -358,11 +399,10 @@ H-036 is reused at its original restricted-angle scope.
 H-066–069 and H-071–089 remain reserved; H-092 belongs to its existing pending
 transport. Only the coordinator allocates further IDs.
 
-Do not dispatch the selected lanes until BC-250 closes and its checkpoint has been
-reviewed, validated, and published.
-A ready BC is not authorization to bypass that gate.
-For this handoff, the operator also requires PR 97 to land before execution starts on a
-new branch and PR. Do not launch the selected experiments on the planning branch.
+The original launch required BC-250 to close and publish, then PR 97 to land before
+execution on the successor research branch.
+Those gates are complete; they are retained here as provenance, not a current upstream
+blocker.
 
 | Assignment | Questions | Next commitments and owner | Reconsideration condition |
 | --- | --- | --- | --- |
@@ -394,7 +434,8 @@ Each assignment names its BC, H when applicable, bead, input/output paths, actua
 remaining allocation, and stop rule.
 Authors do not accept their own consequential results.
 
-Only the first row is selected.
+Only the first row below was selected for the completed launch allocation.
+Use the current checkpoint above for its continuation; later rows remain conditional.
 Offsets start at the next actual restart, not at a reset of the portfolio’s recorded
 `124:14`. Sessions record actual starts, interruptions, and consumed effort.
 Credit outages do not consume active time; coordination and integration costs remain
