@@ -5,7 +5,7 @@ title: "W5 efficiency block: fast feedback and justified validation checkpoints"
 kind: epic
 status: in_progress
 priority: 1
-version: 22
+version: 23
 spec_path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 labels: []
 dependencies: []
@@ -23,7 +23,7 @@ child_order_hints:
   - is-01m1w3p6hhmhnjqakekbqwa82f
   - is-01m1w1x2hxn7was5jgcheqeyh9
 created_at: 2026-09-06T16:27:59.178Z
-updated_at: 2026-09-06T20:01:23.969Z
+updated_at: 2026-09-06T20:04:13.326Z
 ---
 User-directed W5 efficiency block: audit end-to-end CI and long checkpoints, preserve independent coverage while reducing feedback latency, retain detailed timing evidence, align project documentation and naming, and prepare reusable upstream tbd guidance. The plan is docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md. The first implementation slice is PR98; explained family selection and safe reuse follow under think-xejq.
 
@@ -42,3 +42,5 @@ Historical checkpoints retain their actual source: bc65e779/edccf294 passed ordi
 After the final current-head full checkpoint passes and artifacts are audited, close completed first-slice beads think-9zr2, think-bd9v, think-z4jz, think-h2jx, think-4ah8 and think-a04i, and disposition the bounded profiling/allocation work in think-i2gk. Keep epic think-rwte and Phase 3 think-xejq open. Other open follow-ups are T-022 fast-path work think-efke, snapshot dependency/retention think-rx6p, incremental phases think-uhxt, and the parallel review's think-xs1p. Do not close the parallel agent's parent think-r9br blindly.
 
 The 16-file upstream tbd patch is prepared and checked (97 focused tests, build, CLI discovery, type/lint/format and pristine application). Filing think-jogv awaits the owner's confirmation required by the contribution shortcut. PR93 was already reviewed, fixed, merged and validated. PR98 has no authorization for automatic merge. The task heartbeat verify-pr-98-validation-checkpoint continues CI monitoring and final records. Retain the temporary control worktree and integration stash; automatic approval review rejected their potentially destructive cleanup.
+
+Final ordinary artifact audit: /tmp/pr98-combined-fast-artifact-audit.json verifies clean tested merge 3663706fdd25bc1ee379167599b6e1eb0dafdeaf and parents c14451f5/b3b7275f, 62 Linux fast steps plus four macOS steps, 145 complete command pairs, and 2,354 unique quick JUnit cases with no failures/errors/skips. Pytest took 108.33s; the slowest fast step took 109.14385s. All emitted quick phases match JUnit identities; subthreshold phases are not claimed as recorded. All five artifacts are present. The 2m56s workflow is still above the 2–2.5 minute target.
