@@ -3,10 +3,11 @@ type: is
 id: is-01m1tw2qp3b1jfkg91rzaej2r8
 title: Manage the next structural and high-upside research blocks
 kind: task
-status: open
+status: in_progress
 priority: 0
-version: 4
+version: 5
 spec_path: packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md
+delegate: codex
 labels:
   - closure
   - research-slice
@@ -14,8 +15,11 @@ dependencies:
   - type: blocks
     target: is-01m1tw2r3pbmsbn97r68gdbjgq
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
+hold: null
+hold_until: null
 created_at: 2026-09-06T08:06:42.114Z
-updated_at: 2026-09-06T17:56:43.396Z
+updated_at: 2026-09-06T19:12:02.145Z
+started_at: 2026-09-06T19:12:02.145Z
 ---
 Follow the current two-lane sequence. Start think-01q4 finite-support density discriminator before full BC-243 verifier investment. Uniform D4 D11 is control-only; exact support ceiling closes only that support; candidate D>11 needs full a.e. verification. If it earns no build, select one complete restricted composition or support-signature theorem under think-dene with an LP/Farkas or interval obligation and a known-feasible control. Use think-pjk7 to falsify the selected conjecture. No automatic BC244 or global atlas; preserve all branch completeness obligations.
 
