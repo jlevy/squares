@@ -5,15 +5,17 @@ title: Quantify a strict improvement past T-022 by shrinking the certified core
 kind: feature
 status: in_progress
 priority: 1
-version: 4
+version: 5
 labels:
   - mathematics
   - fractional
   - follow-up
 dependencies: []
 parent_id: is-01m1sn5t0dm6rjj200pw5p1b7a
+child_order_hints:
+  - is-01m1v75q8q7vgpswqag5fy7s8x
 created_at: 2026-09-06T10:59:45.109Z
-updated_at: 2026-09-06T11:05:21.444Z
+updated_at: 2026-09-06T11:20:34.326Z
 ---
 Nonblocking explicit-epsilon route from the frozen T-018 atomic measure. For fixed atoms and weights of total M=434547/40000, search rational B'<9977/10000 and exactly replay the minimum net-core mass m(B'). Rescaling weights by 1/m(B') remains a contradiction whenever m(B')>M/11=434547/440000, so the old 1 threshold is unnecessarily strong. Acceptance: preregister a bounded rational shrink sweep or exact critical-event enumeration; implement the reusable finite arrangement check rather than a one-off calculation; retain exact event formulas, monotonicity and mutation controls; either certify one rational B' and an explicit algebraic or rational lower bound strictly above T-022, with source-distinct review, or retain a falsifying obstruction and price the next route. Keep it outside T-022 and the current release gate until independently reviewed.
 
