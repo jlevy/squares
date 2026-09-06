@@ -1,7 +1,8 @@
 """Falsify both standalone sweeps with a separate exact geometry and mass oracle.
 
 These tests run in the ordinary quick lane. Larger seeded campaigns belong to
-``python -m devtools.check_fractional_sweep --cases 20000 --seed 89213``.
+``uv run --frozen --all-extras --group dev python -m devtools.check_fractional_sweep
+--cases 20000 --seed 89213``, run from ``packing/``.
 Agreement on a finite corpus is a regression check, not a proof of either verifier.
 """
 
@@ -106,3 +107,78 @@ def test_a_wrong_cell_count_is_detected_even_when_the_minimum_agrees(
     monkeypatch.setattr(oracle.minimal_verify, "sweep", lambda *_args: (0, 99))
     with pytest.raises(AssertionError, match="minimal_verify: expected"):
         oracle.compare_case(case)
+
+
+FOUR_CORNERS = oracle.SweepCase(
+    Fraction(2),
+    Fraction(1),
+    Fraction(0),
+    (
+        (Fraction(1, 2), Fraction(1, 2), Fraction(2, 7)),
+        (Fraction(1, 2), Fraction(3, 2), Fraction(3, 11)),
+        (Fraction(3, 2), Fraction(1, 2), Fraction(5, 13)),
+        (Fraction(3, 2), Fraction(3, 2), Fraction(7, 17)),
+    ),
+)
+
+
+def test_the_direct_mass_at_a_center_uses_the_closed_rotated_square() -> None:
+    """At (1, 1) the closed unit square touches all four atoms; at a corner, one."""
+    everything = Fraction(2, 7) + Fraction(3, 11) + Fraction(5, 13) + Fraction(7, 17)
+    assert oracle.covered_mass(FOUR_CORNERS, (Fraction(1), Fraction(1))) == everything
+    assert oracle.covered_mass(FOUR_CORNERS, (Fraction(1, 2), Fraction(1, 2))) == Fraction(2, 7)
+    # A quarter turn (half-tangent 1) maps the square onto itself, so nothing changes.
+    turned = oracle.SweepCase(Fraction(2), Fraction(1), Fraction(1), FOUR_CORNERS.atoms)
+    assert oracle.covered_mass(turned, (Fraction(1), Fraction(1))) == everything
+
+
+def test_a_witness_that_does_not_attain_the_reported_minimum_is_detected(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The verifier's own witness cross-check is not trusted; the oracle decides it."""
+    genuine = oracle.verify_claim.least_mass
+
+    def displaced(*args: object) -> tuple[object, tuple[Fraction, Fraction], object]:
+        minimum, _, cells = genuine(*args)
+        return minimum, (Fraction(1), Fraction(1)), cells
+
+    monkeypatch.setattr(oracle.verify_claim, "least_mass", displaced)
+    with pytest.raises(AssertionError, match=r"covers .* not the reported"):
+        oracle.compare_case(FOUR_CORNERS)
+
+    def escaped(*args: object) -> tuple[object, tuple[Fraction, Fraction], object]:
+        minimum, _, cells = genuine(*args)
+        return minimum, (Fraction(-1), Fraction(-1)), cells
+
+    monkeypatch.setattr(oracle.verify_claim, "least_mass", escaped)
+    with pytest.raises(AssertionError, match="admits no square"):
+        oracle.compare_case(FOUR_CORNERS)
+
+
+def test_a_verifier_refusal_is_reported_with_its_reproduction(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """A verifier that raises instead of answering must not lose the seed and index."""
+
+    def refuse(*_args: object) -> tuple[int, int]:
+        raise ValueError("refused")
+
+    monkeypatch.setattr(oracle.minimal_verify, "sweep", refuse)
+    assert oracle.main(["--cases", "200", "--seed", "89213"]) == 1
+    report = json.loads(capsys.readouterr().out)
+    assert report["result"] == "disagreement"
+    assert report["detail"].startswith("seed=89213, case=")
+    assert "ValueError: refused" in report["detail"]
+
+
+def test_an_oracle_invariant_failure_is_not_reported_as_a_disagreement(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    def broken(_case: oracle.SweepCase) -> oracle.OracleResult:
+        raise oracle.OracleInvariantError("no reachable cell")
+
+    monkeypatch.setattr(oracle, "least_mass", broken)
+    assert oracle.main(["--cases", "1", "--seed", "89213"]) == 2
+    report = json.loads(capsys.readouterr().out)
+    assert report["result"] == "oracle invariant failure"
+    assert "seed=89213, case=0" in report["detail"]

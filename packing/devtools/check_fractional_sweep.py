@@ -1,15 +1,23 @@
 """Falsify the standalone fractional sweeps with independent exact geometry.
 
-Run from ``packing/`` with ``python -m devtools.check_fractional_sweep --cases 20000
---seed 89213``. The bounded seeded corpus includes rational weights, coincident
-events, empty supports, axes and rotations beyond the retained net's first octant.
+Run from ``packing/`` with ``uv run --frozen --all-extras --group dev python -m
+devtools.check_fractional_sweep --cases 20000 --seed 89213``. The bounded seeded
+corpus includes rational weights, coincident events, empty supports, axes and
+rotations beyond the retained net's first octant.
 
 The oracle constructs its own coverage events, uses strict separating-axis overlap
 to decide which open cells meet the admissible center domain, and sums each cell's
 atoms directly. It imports neither production clipping nor strip selection nor
-mass-prefix helpers. The two standalone verifiers are called only for comparison.
-This finite falsification campaign does not verify a retained certificate or prove
-that either implementation is correct on every input.
+mass-prefix helpers. It does share the reduction both verifiers rest on: the event
+lines are every atom's coverage edges plus the center domain's extremes, and the
+minimum over the closed domain is taken over the open cells that meet it. A flaw in
+that reduction would be invisible to all three programs. Comparing reachable-cell
+counts as well as minima is what gives the corpus its power, since most seeded
+minima are zero while the cell set moves under almost any reachability error. The
+witness center each ``verify_claim`` sweep returns is also checked: it must admit a
+square and cover exactly the reported minimum. The two standalone verifiers are
+called only for comparison. This finite falsification campaign does not verify a
+retained certificate or prove that either implementation is correct on every input.
 """
 
 from __future__ import annotations
@@ -46,6 +54,36 @@ class OracleResult:
 
     minimum: Fraction | None
     cells: int
+
+
+class OracleInvariantError(RuntimeError):
+    """The oracle's own reduction failed; this is not a disagreement with a verifier."""
+
+
+def frame(case: SweepCase) -> tuple[Fraction, Fraction, Fraction, Fraction]:
+    """The exact cosine, sine, half-side and axis-aligned reach of one case."""
+    side, shrink, tangent = case.outer_side, case.square_side, case.tangent
+    if side <= 0 or shrink <= 0 or any(weight < 0 for _, _, weight in case.atoms):
+        raise ValueError("positive sides and nonnegative atom weights are required")
+    cosine = (1 - tangent * tangent) / (1 + tangent * tangent)
+    sine = 2 * tangent / (1 + tangent * tangent)
+    half = shrink / 2
+    return cosine, sine, half, half * (abs(cosine) + abs(sine))
+
+
+def covered_mass(case: SweepCase, centre: Point) -> Fraction:
+    """The mass of the closed square at a center in the original frame, summed directly."""
+    cosine, sine, half, _ = frame(case)
+    x, y = centre
+    return sum(
+        (
+            weight
+            for atom_x, atom_y, weight in case.atoms
+            if abs(cosine * (atom_x - x) + sine * (atom_y - y)) <= half
+            and abs(cosine * (atom_y - y) - sine * (atom_x - x)) <= half
+        ),
+        Fraction(0),
+    )
 
 
 def open_cell_meets_domain(cell: Cell, rotation: Point, low: Fraction, high: Fraction) -> bool:
@@ -90,13 +128,8 @@ def least_mass(case: SweepCase) -> OracleResult:
     Nonnegative weights and closed squares make event boundaries no lighter than
     adjacent cells. A singleton domain has no such cells and is scored directly.
     """
-    side, shrink, tangent = case.outer_side, case.square_side, case.tangent
-    if side <= 0 or shrink <= 0 or any(weight < 0 for _, _, weight in case.atoms):
-        raise ValueError("positive sides and nonnegative atom weights are required")
-    cosine = (1 - tangent * tangent) / (1 + tangent * tangent)
-    sine = 2 * tangent / (1 + tangent * tangent)
-    half = shrink / 2
-    reach = half * (abs(cosine) + abs(sine))
+    side = case.outer_side
+    cosine, sine, half, reach = frame(case)
     if 2 * reach > side:
         return OracleResult(None, 0)
     rotated = [
@@ -139,15 +172,15 @@ def least_mass(case: SweepCase) -> OracleResult:
             minimum = mass if minimum is None else min(minimum, mass)
             cells += 1
     if minimum is None:
-        raise AssertionError(f"positive-area domain reached no cell: {case!r}")
+        raise OracleInvariantError(f"positive-area domain reached no cell: {case!r}")
     return OracleResult(minimum, cells)
 
 
 def compare_case(case: SweepCase) -> tuple[OracleResult, bool]:
-    """Compare both minimum and cell count; skip the pinned sweep's unsupported domains."""
+    """Compare minimum, cell count and witness; skip the pinned sweep's unsupported domains."""
     expected = least_mass(case)
     scale = lcm(*(weight.denominator for _, _, weight in case.atoms))
-    minimum, _, cells = verify_claim.least_mass(
+    minimum, centre, cells = verify_claim.least_mass(
         case.outer_side, case.square_side, case.tangent, case.atoms, scale
     )
     minimum = None if minimum is None else Fraction(minimum)
@@ -155,6 +188,23 @@ def compare_case(case: SweepCase) -> tuple[OracleResult, bool]:
         raise AssertionError(
             f"verify_claim: expected {expected}, got {(minimum, cells)}; {case!r}"
         )
+    if minimum is not None:
+        # The verifier's witness is the one claim its own cross-check also guards;
+        # deciding it here keeps the oracle independent of that self-check.
+        if centre is None:
+            raise AssertionError(f"verify_claim: no witness for {minimum}; {case!r}")
+        witness: Point = (Fraction(centre[0]), Fraction(centre[1]))
+        reach = frame(case)[3]
+        if not all(reach <= coordinate <= case.outer_side - reach for coordinate in witness):
+            raise AssertionError(
+                f"verify_claim: witness {witness} admits no square in the container; {case!r}"
+            )
+        direct = covered_mass(case, witness)
+        if direct != minimum:
+            raise AssertionError(
+                f"verify_claim: witness {witness} covers {direct}, not the reported "
+                f"{minimum}; {case!r}"
+            )
     # minimal_verify refuses nonpositive cosines and empty/singleton center domains.
     tangent = case.tangent
     extent = case.square_side * (1 - tangent * tangent + 2 * tangent) / (1 + tangent * tangent)
@@ -201,7 +251,8 @@ def random_case(generator: random.Random) -> SweepCase:
 
 
 def check_cases(*, cases: int, seed: int) -> dict[str, int]:
-    """Run a finite campaign; a disagreement identifies the seed, index and full case."""
+    """Run a finite campaign; a disagreement or a verifier refusal names the seed, index
+    and full case, and the oracle's own invariant failures are kept apart from both."""
     if cases < 1:
         raise ValueError("cases must be positive")
     generator = random.Random(seed)
@@ -217,8 +268,13 @@ def check_cases(*, cases: int, seed: int) -> dict[str, int]:
         case = random_case(generator)
         try:
             expected, minimal_checked = compare_case(case)
-        except AssertionError as error:
-            raise AssertionError(f"seed={seed}, case={index}: {error}") from error
+        except OracleInvariantError as error:
+            raise OracleInvariantError(f"seed={seed}, case={index}: {error}") from error
+        except (AssertionError, ArithmeticError, LookupError, TypeError, ValueError) as error:
+            # A verifier that refuses rather than answers is still a discrepancy, and
+            # the reproduction must survive it instead of dying in a traceback.
+            label = "" if isinstance(error, AssertionError) else f"{type(error).__name__}: "
+            raise AssertionError(f"seed={seed}, case={index}: {label}{error}") from error
         report["verify_claim"] += 1
         report["minimal_verify"] += minimal_checked
         report["vacuous"] += expected.minimum is None
@@ -241,6 +297,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.error("cases must be positive")
     try:
         report = check_cases(cases=arguments.cases, seed=arguments.seed)
+    except OracleInvariantError as error:
+        print(json.dumps({"result": "oracle invariant failure", "detail": str(error)}))
+        return 2
     except AssertionError as error:
         print(json.dumps({"result": "disagreement", "detail": str(error)}))
         return 1

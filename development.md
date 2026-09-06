@@ -440,7 +440,8 @@ implementations.
 The fractional certificate sweeps have a separate geometric oracle in
 [`devtools.check_fractional_sweep`](packing/devtools/check_fractional_sweep.py).
 It constructs event cells independently, decides their intersection with the admissible
-center domain by separating axes, and sums atom weights directly.
+center domain by separating axes, sums atom weights directly, and checks that the
+witness center each sweep returns admits a square and covers the reported minimum.
 It shares no clipping, strip-range, or prefix-sum implementation with the two standalone
 verifiers it checks.
 Small deterministic controls and a seeded corpus run in the ordinary pytest lane, so
