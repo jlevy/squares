@@ -80,7 +80,10 @@ body {
 :is(.kpress, .kpress-page-main, .kpress-tooltip)[data-kpress-resolved-theme="dark"] {
   --kpress-doc-accent: oklch(76.68% 0.0861 186.4);
 }
-.cert-page { padding-block-end: calc(var(--kpress-font-size-base) * 6); }
+.cert-page {
+  --kpress-font-size-h2: calc(var(--kpress-font-size-base) * 1.3);
+  padding-block-end: calc(var(--kpress-font-size-base) * 6);
+}
 .cert-page a, .cert-page .kpress-footnote-ref a, .cert-page a.kpress-footnote-backref,
 .cert-page a:hover, .kpress a.kpress-footnote-backref:hover,
 .kpress-tooltip a, .kpress-tooltip a:hover, .kpress-tooltip .kpress-footnote-nav-link { color: var(--kpress-doc-accent); }
