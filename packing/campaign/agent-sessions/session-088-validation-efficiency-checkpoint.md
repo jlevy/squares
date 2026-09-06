@@ -150,6 +150,8 @@ The integrated fast checkpoint passed all 62 selected steps in 232.89 seconds, i
 [summary log](../../benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.log)
 and
 [raw timing archive](../../benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.tar.gz)
+and its
+[SHA-256 manifest](../../benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.manifest.json)
 retain the exact command and dirty source identity.
 Delegate dispositions describe bounded handoffs; the parent task and full hosted
 checkpoint are still in progress.

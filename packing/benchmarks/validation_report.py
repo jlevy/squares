@@ -11,6 +11,7 @@ from typing import Any
 from xml.etree import ElementTree as ET
 
 from jsonschema import validate
+from strif import atomic_write_text
 
 from sqpack.yamlio import load_yaml
 
@@ -202,7 +203,11 @@ def render(root: Path) -> str:
     schema = load_yaml((root / "experiment.schema.yaml").read_text())
     experiments = []
     for path in sorted((root / "experiments").glob("*.md")):
-        frontmatter = load_yaml(path.read_text().split("---", 2)[1])
+        text = path.read_text()
+        parts = text.split("---", 2)
+        if not text.startswith("---") or len(parts) < 3:
+            raise ValueError(f"experiment record lacks YAML frontmatter: {path}")
+        frontmatter = load_yaml(parts[1])
         experiment = frontmatter["experiment"]
         validate(experiment, schema)
         experiments.append((path, experiment))
@@ -290,7 +295,7 @@ def main() -> int:
     destination = args.root / "report.md"
     if args.check:
         return 0 if destination.exists() and destination.read_text() == text else 1
-    destination.write_text(text)
+    atomic_write_text(destination, text)
     return 0
 
 

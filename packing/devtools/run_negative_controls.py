@@ -748,7 +748,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     if timings:
         # Exclusive creation preserves prior evidence. Each subsequent event is flushed
         # independently, so completed controls remain visible after an interrupted run.
-        timings.touch(exist_ok=False)
+        try:
+            timings.touch(exist_ok=False)
+        except FileExistsError:
+            print(
+                f"journal already exists (--timings refuses to overwrite): {timings}",
+                file=sys.stderr,
+            )
+            return 1
 
     def record(event: str, **fields: object) -> None:
         if timings:

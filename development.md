@@ -809,9 +809,14 @@ tracks instruments that still need this detail.
 
 CI retains a `validation-timings-<job>-<attempt>` artifact for each gate job for 30
 days. It contains checkout provenance, subprocess start/end receipts and streamed logs,
-completed step results, pytest JUnit and setup/call/teardown durations, and incremental
-mutation control timings.
-Upload runs after success or failure.
+completed step results, pytest JUnit, and incremental mutation-control timings.
+JUnit records every selected case with its aggregate duration and outcome.
+Slow and exhaustive logs also retain every setup, call, and teardown duration.
+The quick lane preserves its 12-second console filter, so subthreshold phases are not
+individually retained there.
+Complete incremental per-phase records, including phases completed before termination,
+remain a follow-up under `think-uhxt`; aggregate JUnit timing is not full phase
+attribution. Upload runs after success or failure.
 Pytest writes JUnit at exit, so a hard kill can leave only partial logs and an unmatched
 start; loss of the runner can also prevent upload.
 Neither case is a completed timing observation.
@@ -821,6 +826,23 @@ For a local checkpoint, select a fresh output directory outside the source tree:
 ```bash
 PACKING_VALIDATION_ARTIFACT_DIR="$(mktemp -d /tmp/packing-validation.XXXXXX)" \
   uv run --frozen --all-extras --group dev packing-validate
+```
+
+Use `python -m devtools.checkpoint_manifest pack DIRECTORY ARCHIVE` to retain a flat
+checkpoint directory as a deterministic tar.gz without macOS metadata (`._*`,
+`.DS_Store`). The archive keeps the original receipt bytes; Git revision and path
+identify repository-owned evidence under
+[OR-16](operating-rules.md#or-16-use-git-for-repository-integrity-reserve-checksums-for-real-trust-boundaries).
+New packs do not create checksum sidecars.
+The `check` command remains available for the already retained legacy manifests; it
+compares archive bytes with those records and does not certify the checkpoint’s outcome
+or the truth of its provenance fields.
+
+From `packing/`, check those retained manifests with:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.checkpoint_manifest \
+  check benchmarks/validation-efficiency/checkpoints/*.manifest.json
 ```
 
 The [engineering campaign](packing/benchmarks/validation-efficiency/README.md) records
@@ -873,7 +895,7 @@ rule and none of them is about `touches`:
   them. Every one of those repeated the whole gate.
 - **53 of 55 merges to `main` carried a tree byte-identical to the pull-request head**
   merged, so the pull-request surface had already run against exactly those bytes.
-- **8 of the 64 steps declare no `touches` at all**, deliberately, and they are the
+- **8 of the 66 steps declare no `touches` at all**, deliberately, and they are the
   expensive ones — so `touches` cannot prune the deep surface by cost.
   The escape hatch that protects a mis-declared pattern is reachable by 17 of 1,933
   tracked files, 0.9 per cent, which is far less protection than its own docstring

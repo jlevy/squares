@@ -98,6 +98,53 @@ def test_artifacts_give_pytest_unique_junit_and_all_phase_timings(tmp_path: Path
     assert end["status"] == "passed"
 
 
+def test_artifacts_keep_a_steps_own_durations_filter(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The quick lane's `--durations-min` is its ceiling; capture must not override it."""
+    artifacts = tmp_path / "artifacts"
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={**os.environ, "PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts)},
+    )
+    commands: list[list[str]] = []
+
+    def record(_context: validate.Context, command: list[str], **_options: object) -> str:
+        commands.append(list(command))
+        return ""
+
+    monkeypatch.setattr(validate, "_run_command", record)
+    validate._run(context, validate._quick_lane_command(1))
+    validate._run(context, [sys.executable, "-m", "pytest", "-q", "tests"])
+    quick, bare = commands
+    assert [argument for argument in quick if argument.startswith("--durations-min")] == [
+        f"--durations-min={validate.QUICK_TEST_WALL_BACKSTOP_SECONDS:g}"
+    ]
+    assert quick.count("--durations=0") == 1
+    assert bare[-3:-1] == ["--durations=0", "--durations-min=0"]
+    assert all(command[-1].startswith("--junitxml=") for command in commands)
+
+
+def test_artifact_provenance_reports_a_git_failure_as_a_step_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    artifacts = tmp_path / "artifacts"
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={**os.environ, "PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts)},
+    )
+    monkeypatch.setattr(validate, "REPOSITORY_ROOT", tmp_path / "not-a-repository")
+    with pytest.raises(validate.StepFailureError, match="artifact provenance: git ls-files"):
+        validate._begin_artifacts(context, [])
+    assert not list(artifacts.glob("run-*.json"))
+
+
 def test_artifact_provenance_includes_untracked_source(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -396,7 +443,7 @@ def test_process_registry_rejects_registration_after_stop(
     registry = validate._ProcessRegistry()
     registry.stop()
 
-    with pytest.raises(validate.StepFailureError, match="rejected new subprocess"):
+    with pytest.raises(validate.StepCancelledError, match="rejected new subprocess"):
         registry.register(12345)
     assert signals == [(12345, signal.SIGKILL)]
 
@@ -426,6 +473,10 @@ def test_run_drains_rejected_process_output(monkeypatch: pytest.MonkeyPatch) -> 
             return "", None
 
     process = RejectedProcess()
+    signals: list[tuple[int, int]] = []
+    monkeypatch.setattr(
+        validate.os, "killpg", lambda pid, signum: signals.append((pid, signum))
+    )
     monkeypatch.setattr(validate.subprocess, "Popen", lambda *_args, **_kwargs: process)
     context = validate.Context(
         deep=False,
@@ -440,6 +491,7 @@ def test_run_drains_rejected_process_output(monkeypatch: pytest.MonkeyPatch) -> 
         validate._run(context, (sys.executable, "-c", "pass"))
 
     assert process.communicated
+    assert signals == [(process.pid, signal.SIGKILL)]
 
 
 @pytest.mark.skipif(os.name == "nt", reason="bounded tree mode fails closed on Windows")

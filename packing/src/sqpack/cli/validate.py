@@ -655,12 +655,22 @@ def _begin_artifacts(context: Context, selected: Sequence[Step]) -> None:
     }
 
     def git(*arguments: str) -> bytes:
-        completed = subprocess.run(
-            ["git", "-C", str(REPOSITORY_ROOT), *arguments],
-            env=environment,
-            capture_output=True,
-            check=True,
-        )
+        try:
+            completed = subprocess.run(
+                ["git", "-C", str(REPOSITORY_ROOT), *arguments],
+                env=environment,
+                capture_output=True,
+                check=True,
+            )
+        except (OSError, subprocess.CalledProcessError) as error:
+            detail = (
+                error.stderr.decode(errors="replace").strip()
+                if isinstance(error, subprocess.CalledProcessError)
+                else str(error)
+            )
+            raise StepFailureError(
+                f"artifact provenance: git {' '.join(arguments)} failed: {detail}"
+            ) from error
         return completed.stdout
 
     untracked: dict[str, str] = {}
@@ -723,7 +733,11 @@ def _run(
     log_path = stem.with_suffix(".log")
     arguments = list(command)
     if len(arguments) >= 3 and arguments[1:3] == ["-m", "pytest"]:
-        arguments.extend(("--durations=0", "--durations-min=0", f"--junitxml={stem}.junit.xml"))
+        # A step that chose its own durations filter keeps it: the quick lane's
+        # `--durations-min` is its ceiling, and pytest would take the last value given.
+        if not any(argument.startswith("--durations") for argument in arguments):
+            arguments.extend(("--durations=0", "--durations-min=0"))
+        arguments.append(f"--junitxml={stem}.junit.xml")
     environment = dict(context.environment)
     # Nested test subprocesses must not reuse this gate's artifact configuration.
     if arguments[1:3] != ["-m", "devtools.run_negative_controls"]:

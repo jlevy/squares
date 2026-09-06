@@ -78,8 +78,8 @@ def test_control_timing_records_preserve_failed_detection_and_refuse_overwrite(
     assert records[0]["selected_controls"] == ["detects mutation", "misses mutation"]
     assert records[-1]["status"] == "failed"
     original = timings.read_bytes()
-    with pytest.raises(FileExistsError):
-        controls.main([str(spec), "-j", "1", "--timings", str(timings)])
+    assert controls.main([str(spec), "-j", "1", "--timings", str(timings)]) == 1
+    assert "refuses to overwrite" in capsys.readouterr().err
     assert timings.read_bytes() == original
 
 
