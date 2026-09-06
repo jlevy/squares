@@ -246,6 +246,26 @@ def test_a_certificate_above_the_ceiling_is_refused_before_any_condition(
     )
 
 
+def test_a_duplicate_json_key_is_refused_before_any_condition(
+    minimal: dict[str, Any], tmp_path: Path
+) -> None:
+    path = tmp_path / "duplicate.json"
+    path.write_text(json.dumps(TINY).replace('"n": 2', '"n": 2, "n": 3', 1), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="duplicate JSON object key 'n'"):
+        minimal["load"](str(path))
+
+
+@pytest.mark.parametrize("limit", ["0", "1", "3/2"])
+def test_the_general_checker_refuses_a_net_outside_zero_to_one(
+    minimal: dict[str, Any], tmp_path: Path, limit: str
+) -> None:
+    record = {**TINY, "angle_limit": limit}
+
+    with pytest.raises(ValueError, match=r"supported range 0 < T < 1"):
+        minimal["load"](str(write(record, tmp_path / "bad-angle-limit.json")))
+
+
 @pytest.mark.parametrize(
     "damage",
     [

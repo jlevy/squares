@@ -28,7 +28,7 @@ strict test is sufficient, not necessary.) So the ``n`` shrunken squares are
 pairwise disjoint as closed sets and no atom is counted twice. Each covers mass at least
 1 by ``Condition 5``, for a total of at least ``n``, which ``Condition 2``
 forbids. So ``n`` unit squares do not fit in a container of side ``L``, and
-``s(n) > L``. The bound is
+``s(n) >= L``. The bound is
 ``L`` itself; ``B`` rescales nothing (see ``Certificate.bounded_side``).
 
 The arithmetic is exact throughout. Every quantity is a ``Fraction``; nothing
@@ -129,8 +129,7 @@ class Certificate:
         sits *inside* a unit square that is itself inside the side-``L``
         container, and it exists only so that ``Condition 4`` can absorb the net's
         angular gap. So the contradiction is about ``n`` unit squares in side
-        ``L``, and what the certificate proves is ``s(n) > L``. Reported as
-        ``>= L``, which is what a bound register carries.
+        ``L``, and what the certificate proves is ``s(n) >= L``.
 
         Checked against the retained n = 17 certificate: ``L = 22529/5000`` is
         exactly Massaccesi's published 4.5058, while ``L / B`` would claim
