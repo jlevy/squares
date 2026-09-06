@@ -17,7 +17,7 @@ per certificate; the prose is filled once, with the headline certificate's value
 <div class="doc-links screen-only">
   <a class="chip" href="{{SOURCE_URL}}" title="The Markdown this page is rendered from">MD</a>
   <a class="chip" href="t-018-explainer.pdf" title="The typeset PDF of this page">PDF</a>
-  <a class="chip" href="{{REPO_URL}}" title="The project on GitHub"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>PROJECT</a>
+  <a class="chip" href="{{REPO_URL}}" title="The project on GitHub"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>GITHUB</a>
 </div>
 
 <div class="hero">
@@ -27,65 +27,61 @@ per certificate; the prose is filled once, with the headline certificate's value
 <p class="subtitle centred">{{SUBTITLE}}</p>
 
 <div class="credits centred">
-  <span>{{PUBLISHED}} ({{EDITION}})</span>
-  <span>Tooling and human oversight: <a href="https://x.com/ojoshe"><strong>Joshua Levy</strong></a></span>
+  <span>Human oversight: <a href="https://x.com/ojoshe"><strong>Joshua Levy</strong></a></span>
   <span>Agents: <strong>Opus 5</strong>, <strong>Fable 5.1</strong>, and <strong>Codex 5.6</strong></span>
-  <span>Open source at <a href="https://github.com/jlevy/squares"><strong>github.com/jlevy/squares</strong></a></span>
+  <span><a href="https://github.com/jlevy/squares"><strong>github.com/jlevy/squares</strong></a></span>
+  <span class="publication-date">{{PUBLISHED}} ({{EDITION}})</span>
 </div>
 
 </div>
 
-## What Is This?
+## New Result
 
-This paper presents a new lower bound on a long-standing open geometry problem: eleven
+This work presents a new lower bound on a long-standing open geometry problem: eleven
 unit squares with disjoint interiors, free to rotate, cannot fit in a
 ${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.
 
 The computer-assisted proof was found via an automated research framework.
-This is one of {{N_RESULTS}} results the framework has registered so far, {{N_NOVEL}} of
-them apparently new.
 The certificate used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted points
 in the container and selects a net of {{HEADLINE_N_DIRECTIONS}} rationally parameterized
-directions. Five exact conditions and a pigeonhole-style argument then imply the claim.
-
-<!--BEGIN:CLAIM-->
-
-Verification is exact rational arithmetic: the one-file checker,
+directions. Five exact conditions and a pigeonhole-style argument then imply the
+claim.<!--BEGIN:CLAIM--> [Verification](#verifiable-claim) is exact rational arithmetic:
+the one-file checker,
 {{PINNED_VERIFIER_LINES}}
 of standard-library Python and short enough to read in one sitting, decides the
-certificate file of {{HEADLINE_N_ATOMS}} weighted points in {{HEADLINE_PINNED_RUNTIME}}.
-
-<!--END:CLAIM-->
+certificate file of {{HEADLINE_N_ATOMS}} weighted points in
+{{HEADLINE_PINNED_RUNTIME}}.<!--END:CLAIM-->
 
 This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
 open case of the square packing problem.[^novelty] The previous bound,
 {{PRIOR_LOWER_DEC}}, was Stromquist’s in
 {{PRIOR_YEAR}}.[^stromquist][^repair]
 
-The search, the checking, and the record are the work of agents following a flexible but
-defined research framework, available in
-[the GitHub repository](https://github.com/jlevy/squares).
-The atlas of best known packings for every $n$ from 1 to 100 in Figure 1 came from the
+## The Agentic Research Framework
+
+The results here are from a flexible but defined
+**[agentic research framework](https://github.com/jlevy/squares)** that is likely to be
+useful for creative mathematical or technical problems of other sorts.
+
+This lower bound is one of {{N_RESULTS}} results the framework has registered so far,
+{{N_NOVEL}} of them apparently new.
+The atlas of best known packings for every $n$ from 1 to 100 in Figure 1 comes from the
 same research agenda and currently includes {{N_STARRED}} new lower bounds.
 
-The repository holds much more than this proof: it includes a comprehensive survey of
-previous research, the atlas of packings, a hypothesis registry, an experiment ledger,
-exact verifiers, and a retention gate that labels results according to epistemic status
-(levels of verification, confirmation, and significance).
+The repository includes a comprehensive survey of previous research, the atlas of
+packings, a hypothesis registry, an experiment ledger, exact verifiers, and a retention
+gate that labels results according to epistemic status (levels of verification,
+confirmation, and significance).
 Work is planned on a regular cadence (such as 8 to 12 hours) and broken into several
 defined workflows (research survey, correctness verification, research loop,
 optimization loop, and a few others).
 
-The research framework itself is not specific to square packing.
-It uses a few tools to streamline the process, notably
-[tbd](https://github.com/jlevy/tbd) for task tracking,
-[Softschema](https://github.com/jlevy/softschema) for structuring results, and
-[Practical Prose](https://github.com/jlevy/practical-prose) to improve writing quality.
-
 Every file in the repository (including this paper) is agent written.
 The research framework’s structure had high-level human direction.
-Similarly structured research frameworks are likely useful for creative mathematical or
-technical problems of other sorts.
+It relies on a few other agent tools, notably [tbd](https://github.com/jlevy/tbd) for
+task tracking, [Softschema](https://github.com/jlevy/softschema) for structuring
+results, and [Practical Prose](https://github.com/jlevy/practical-prose) to improve
+writing quality.
 
 ## The Square Packing Problem
 
@@ -120,11 +116,9 @@ This exposition uses the simpler 3.81 certificate bound.
 
 <!--BEGIN:COMPARISON-->
 
-A second certificate, for the looser bound $s({{N}}) \ge {{DEFAULT_L_FRAC}}$, is kept
-beside it: its smaller numbers make the figures legible, and it is the one the project’s
-adversarial review of the checking package read line by line.
-The {{HEADLINE_L_FRAC}} certificate supersedes it, and some of the figures below show
-both.
+(Some figures also show the simpler certificate for the weaker bound
+$s({{N}}) \ge {{DEFAULT_L_FRAC}}$, whose smaller numbers make the argument easier to
+illustrate.)
 
 <!--END:COMPARISON-->
 
@@ -142,26 +136,26 @@ The figures below illustrate this certificate.
 
 <figure>
   <div class="line-fig kpress-diagram">
-  <svg viewBox="0 0 700 92" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER_DEC}}, the bounds proved here up to {{HEADLINE_L_DEC}}, and the best known packing at {{BEST_PACKING_DEC}}">
-    <rect x="{{BAND_X}}" y="45" width="{{BAND_W}}" height="13" fill="var(--cert-accent-wash)"/>
-    <line x1="20" y1="51.5" x2="680" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1"/>
+  <svg viewBox="0 0 700 180" role="img" aria-label="Number line from 3.75 to 3.90 showing the previous lower bound {{PRIOR_LOWER_DEC}}, the bounds proved here up to {{HEADLINE_L_DEC}}, and the best known packing at {{BEST_PACKING_DEC}}">
+    <rect x="{{BAND_X}}" y="69.5" width="{{BAND_W}}" height="13" fill="var(--cert-accent-wash)"/>
+    <line x1="20" y1="76" x2="680" y2="76" stroke="var(--kpress-doc-muted)" stroke-width="1"/>
     <g stroke="var(--kpress-doc-muted)" stroke-width="1">
-      <line x1="20" y1="47" x2="20" y2="56"/><line x1="460" y1="47" x2="460" y2="56"/>
-      <line x1="680" y1="47" x2="680" y2="56"/>
+      <line x1="20" y1="71.5" x2="20" y2="80.5"/><line x1="460" y1="71.5" x2="460" y2="80.5"/>
+      <line x1="680" y1="71.5" x2="680" y2="80.5"/>
     </g>
-    <g font-size="10" fill="var(--kpress-doc-muted)" text-anchor="middle">
-      <text x="20" y="72">3.75</text><text x="460" y="72">3.85</text><text x="680" y="72">3.90</text>
+    <g fill="var(--kpress-doc-muted)" text-anchor="middle">
+      <text x="20" y="100" text-anchor="start">3.75</text><text x="460" y="100">3.85</text><text x="680" y="100" text-anchor="end">3.90</text>
     </g>
-    <line x1="{{PRIOR_X}}" y1="30" x2="{{PRIOR_X}}" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
-    <circle cx="{{PRIOR_X}}" cy="51.5" r="3.2" fill="var(--kpress-doc-muted)"/>
+    <line x1="{{PRIOR_X}}" y1="56" x2="{{PRIOR_X}}" y2="76" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
+    <circle cx="{{PRIOR_X}}" cy="76" r="3.2" fill="var(--kpress-doc-muted)"/>
     <g text-anchor="middle">
-      <text x="{{PRIOR_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{PRIOR_LOWER_DEC}}</text>
-      <text x="{{PRIOR_X}}" y="12" font-size="9.5" fill="var(--kpress-doc-muted)">{{PRIOR_SOURCE}}</text>
-      <text x="{{BEST_X}}" y="24" font-size="10.5" fill="var(--kpress-doc-text)">{{BEST_PACKING_DEC}}</text>
-      <text x="{{BEST_X}}" y="12" font-size="9.5" fill="var(--kpress-doc-muted)">{{BEST_SOURCE}}</text>
+      <text x="{{PRIOR_X}}" y="52" fill="var(--kpress-doc-text)">{{PRIOR_LOWER_DEC}}</text>
+      <text x="{{PRIOR_X}}" y="20" fill="var(--kpress-doc-muted)">{{PRIOR_SOURCE}}</text>
+      <text x="{{BEST_X}}" y="52" fill="var(--kpress-doc-text)">{{BEST_PACKING_DEC}}</text>
+      <text x="{{BEST_X}}" y="20" fill="var(--kpress-doc-muted)">{{BEST_SOURCE}}</text>
     </g>
-    <line x1="{{BEST_X}}" y1="30" x2="{{BEST_X}}" y2="51.5" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
-    <circle cx="{{BEST_X}}" cy="51.5" r="3.2" fill="var(--kpress-doc-muted)"/>
+    <line x1="{{BEST_X}}" y1="56" x2="{{BEST_X}}" y2="76" stroke="var(--kpress-doc-muted)" stroke-width="1.25"/>
+    <circle cx="{{BEST_X}}" cy="76" r="3.2" fill="var(--kpress-doc-muted)"/>
     {{NUMBER_LINE_MARKS}}
   </svg>
   </div>
@@ -205,9 +199,9 @@ the container covers mass at least $1$.
 
 Conditions 1 to 4 are exact rational comparisons.
 Condition 5 is one exact sweep per direction.
-Together the five prove $s(n) \ge L$. The two certificates are
-[`{{DEFAULT_ID}}`]({{DEFAULT_CERT_URL}}) and [`{{ID}}`]({{CERT_URL}}), and every figure
-below is [computed]({{RENDERER_URL}}) from the one it shows.
+Together the five prove $s(n) \ge L$. The certificate is [`{{ID}}`]({{CERT_URL}}) (a
+weaker but simpler one is at [`{{DEFAULT_ID}}`]({{DEFAULT_CERT_URL}})). Every figure
+below is [computed]({{RENDERER_URL}}) from the certificate it shows.
 
 ## Atoms, Mass, and the Budget
 
@@ -353,6 +347,7 @@ angle $\theta$, with the same center, covers no more mass than the unit square i
 fits inside it, because the weights are nonnegative.
 So if every placement of the smaller square at a net angle covers mass at least 1, every
 unit square at any angle does too.
+
 It fits exactly when
 
 $$
@@ -458,29 +453,27 @@ costs.
 
 <figure data-figure="7">
   <div class="chart kpress-diagram">
-    <svg viewBox="0 0 700 250" role="img" aria-label="{{COARSEN_ALT}}">
-      <g font-size="10" fill="var(--kpress-doc-muted)">
-        <line x1="76" y1="30" x2="76" y2="190" stroke="var(--kpress-doc-muted)"/>
-        <line x1="76" y1="190" x2="664" y2="190" stroke="var(--kpress-doc-muted)"/>
-        <line x1="76" y1="30" x2="664" y2="30" stroke="var(--cert-probe)" stroke-dasharray="4 4" opacity=".8"/>
-        <text x="68" y="34" text-anchor="end">1.0</text>
-        <text x="68" y="114" text-anchor="end">0.5</text>
-        <text x="68" y="194" text-anchor="end">0</text>
-        <text x="84" y="24" fill="var(--cert-probe)">Condition 5 threshold</text>
+    <svg viewBox="0 0 700 238" role="img" aria-label="{{COARSEN_ALT}}">
+      <g fill="var(--kpress-doc-muted)">
+        <line x1="76" y1="56" x2="76" y2="160" stroke="var(--kpress-doc-muted)"/>
+        <line x1="76" y1="160" x2="664" y2="160" stroke="var(--kpress-doc-muted)"/>
+        <line x1="76" y1="56" x2="664" y2="56" stroke="var(--cert-probe)" stroke-dasharray="4 4" opacity=".8"/>
+        <text x="68" y="60" text-anchor="end">1.0</text>
+        <text x="68" y="112" text-anchor="end">0.5</text>
+        <text x="68" y="164" text-anchor="end">0</text>
+        <text x="84" y="20" fill="var(--cert-probe)">Condition 5 threshold</text>
       </g>
       <g>
         {{COARSEN_BARS}}
       </g>
-      <g font-size="10.5" fill="var(--kpress-doc-text)" text-anchor="middle">
+      <g fill="var(--kpress-doc-text)" text-anchor="middle">
         {{COARSEN_VALUES}}
       </g>
-      <g font-size="10.5" fill="var(--kpress-doc-muted)" text-anchor="middle">
+      <g fill="var(--kpress-doc-muted)" text-anchor="middle">
         {{COARSEN_LABELS}}
       </g>
-      <text x="76" y="246" font-size="10" fill="var(--kpress-doc-muted)">
-        {{COARSEN_VERDICT}} Measured on the retained atoms, optimized against the full net.
-      </text>
     </svg>
+    <p class="figure-note">{{COARSEN_VERDICT}} Measured on the retained atoms, optimized against the full net.</p>
   </div>
   <div class="fig-choose">{{CERT_TOGGLE}}</div>
   <figcaption><strong>Figure 7. Condition 4 <span class="rel">→</span> Condition 5.</strong> Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. Halving the net shrinks
@@ -492,22 +485,26 @@ costs.
 
 <!--END:COARSENING-->
 
-## The Contradiction
+## The Contradiction Argument
 
 <div class="boxed-text">
 
 Take any packing of eleven unit squares in the side-{{L_DEC}} container.
 Reflect across the container’s diagonal each square whose angle lies past $\pi/4$, so
-that every angle is on the arc from $0$ to $\pi/4$ the net covers (Condition 3). Each
-square then contains a side-$B$ square $Q_i$, centered at the same point and oriented at
-the nearest net angle, inside the unit square’s interior: the mismatch $d$ of the two
-angles has $\tan d \le D$, and Condition 4 makes $B(\cos d + \sin d) \lt 1$ for every
-such $d$. Each $Q_i$ covers mass at least $1$, which is Condition 5. Now reflect back
-each square that was reflected, and $Q_i$ with it.
+that every angle is on the arc from $0$ to $\pi/4$ the net covers (Condition 3).
+
+Each square then contains a side-$B$ square $Q_i$, centered at the same point and
+oriented at the nearest net angle, inside the unit square’s interior: the mismatch $d$
+of the two angles has $\tan d \le D$, and Condition 4 makes $B(\cos d + \sin d) \lt 1$
+for every such $d$. Each $Q_i$ covers mass at least $1$, which is Condition 5.
+
+Now reflect back each square that was reflected, and $Q_i$ with it.
 $Q_i$ still lies in its own unit square’s interior, and by Condition 1 it still covers
-mass at least $1$. The unit squares have disjoint interiors, so the eleven $Q_i$ are
-disjoint. Because the weights are nonnegative and no atom is counted twice, the eleven
-together cover at most the container’s total mass.
+mass at least $1$.
+
+The unit squares have disjoint interiors, so the eleven $Q_i$ are disjoint.
+Because the weights are nonnegative and no atom is counted twice, the eleven together
+cover at most the container’s total mass.
 Then
 
 $$
@@ -566,7 +563,7 @@ importing anything else from the repository.
 
 <!--BEGIN:COMPARISON-->
 
-It decides the looser of the two bounds, not the headline one.
+(It decides the looser of the two bounds, not the headline one.)
 
 <!--END:COMPARISON-->
 
@@ -580,16 +577,70 @@ Each bound has one self-contained file: the claim, the theorem with its proof, a
 verifier in Python’s standard library, and the certificate it decides, to paste into any
 coding agent or check by hand.
 
-- $s(11) \ge {{DEFAULT_L_FRAC}}$: [`{{DEFAULT_CLAIM_NAME}}`]({{DEFAULT_CLAIM_URL}}),
-  {{DEFAULT_N_ATOMS}} atoms, verified in {{DEFAULT_RUNTIME}}.
-- $s(11) \ge {{HEADLINE_L_FRAC}}$: [`{{HEADLINE_CLAIM_NAME}}`]({{HEADLINE_CLAIM_URL}}),
-  {{HEADLINE_N_ATOMS}} atoms, verified in {{HEADLINE_RUNTIME}}.
+For $s(11) \ge {{HEADLINE_L_FRAC}}$:
+[`{{HEADLINE_CLAIM_NAME}}`]({{HEADLINE_CLAIM_URL}}),
+{{HEADLINE_N_ATOMS}} atoms, verified in {{HEADLINE_RUNTIME}}. (For the weaker bound
+$s(11) \ge {{DEFAULT_L_FRAC}}$: [`{{DEFAULT_CLAIM_NAME}}`]({{DEFAULT_CLAIM_URL}}),
+{{DEFAULT_N_ATOMS}} atoms, verified in
+{{DEFAULT_RUNTIME}}.)
 
 The times are the embedded verifier’s, on a laptop.
 The one-file checker beside it that pins the certificate’s digest, `minimal_verify.py`,
 decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
 
 <!--END:CLAIM-->
+
+## Further Reading
+
+- **Papers and sources**
+  - Erich Friedman,
+    [Packing unit squares in squares: a survey and new results]({{PROBLEM_URL}}): an
+    introduction to the problem and its literature
+  - Walter Stromquist, [Packing 10 or 11 unit squares in a square]({{PRIOR_URL}})
+    (2003): the preceding lower bound for eleven squares
+  - Hiroshi Nagamochi, [Packing unit squares in a rectangle]({{NAGAMOCHI_URL}}) (2005):
+    lower bounds from restrictions on packing squares into rectangles
+  - Sam Burns,
+    [Proposing a Better Lower Bound for n=17 Square Packing](https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/)
+    (2026): the weighted-point certificate method with a rational direction net and
+    exact coverage checks that this proof follows
+  - Gustavo Massaccesi,
+    [Another Better Lower Bound for n=17 Square Packing](https://gus-massa.blogspot.com/2026/08/another-better-lower-bound-for-n17.html)
+    and
+    [Linear Programing for Square Packing](https://gus-massa.blogspot.com/2026/08/linear-programing-for-square-packing.html)
+    (2026): an improved certificate using Burns’s method and a linear program to find
+    its weights, the immediate precedents for this project’s generator and $n=11$
+    certificates
+  - [Full paper and source archive]({{ARCHIVE_URL}}): original papers, searchable
+    transcriptions, and captured web sources
+- **Elements of the project**
+  - **[Project overview](https://github.com/jlevy/squares):** results, repository
+    structure, and the research process
+  - **[Problem tutorial]({{TUTORIAL_URL}}):** written as part of this project, a
+    first-principles introduction to square packing, bounds, search, and proof
+    obligations
+  - **[Atlas of packings]({{ATLAS_URL}}):** created as part of this project, a
+    collection of the best known packings for $n=1$ through $100$, with figures,
+    geometry records, and provenance
+- **Agentic research framework**
+  - **[Workflows]({{WORKFLOWS_URL}})** define entry conditions and expected outputs for
+    each kind of research work.
+  - **[Operating principles]({{PRINCIPLES_URL}})** cover correctness, process, insight,
+    and efficiency.
+  - **[Epistemics]({{EPISTEMICS_URL}})** classifies results by verification,
+    confirmation, significance, and novelty.
+- **Agentic tooling**
+  - **[tbd](https://github.com/jlevy/tbd):** tasks, dependencies, and handoffs tracked
+    in Git, plus engineering best practices and guidelines for agents
+  - **[Softschema](https://github.com/jlevy/softschema):** research records in YAML and
+    Markdown, with validation rules that can become stricter as the work matures
+- **Document tooling**
+  - **[Practical Prose](https://github.com/jlevy/practical-prose):** writing guidelines,
+    editing workflows, and document evaluation
+  - **[Flowmark](https://github.com/jlevy/flowmark):** automated Markdown management and
+    consistent formatting
+  - **[KPress](https://github.com/jlevy/kpress):** web and print formatting from
+    Markdown
 
 [^stromquist]: Walter Stromquist,
     [Packing 10 or 11 unit squares in a square]({{PRIOR_URL}}), Electronic Journal of
@@ -600,8 +651,7 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
     literature archive and source register, then arXiv, Crossref, OpenAlex and Semantic
     Scholar, author pages and the public packing catalogues, through September 4, 2026.
     It did not exhaust subscription-only indexes, theses and proceedings, or unindexed
-    sources. The claim is apparent novelty within the searched public record, not
-    priority.
+    sources.
 
 [^repair]: The bound is correct, but the project found that Stromquist’s printed
     argument does not close at his Figure 14 and repaired it with a source-distinct
