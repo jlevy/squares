@@ -553,7 +553,7 @@ decide Condition 5 by distinct methods, both accept it and report the same least
 mass.
 
 A [first-party package for third-party checking]({{THIRDPARTY_URL}}) gathers what an
-outside check needs: the theorem written out, the {{DEFAULT_L_FRAC}} certificate as
+outside check needs: the theorem written out, the {{THIRDPARTY_L_FRAC}} certificate as
 plain data, and a one-file verifier on Python’s standard library that decides it without
 importing anything else from the repository.
 

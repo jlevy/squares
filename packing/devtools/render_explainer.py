@@ -310,6 +310,7 @@ CARD_ALT = (
 VERIFIER = PACKING / "src" / "sqpack" / "fractional" / "certificate.py"
 GENERATOR = PACKING / "src" / "sqpack" / "fractional" / "generate.py"
 THIRDPARTY = CASE / "thirdparty" / "README.md"
+THIRDPARTY_CERTIFICATE = THIRDPARTY.with_name("certificate.json")
 
 
 @cache
@@ -1358,6 +1359,9 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
     best packing known, which is what remains unknown after all of them.
     """
     headline_frac = f"{headline.outer_side.numerator}/{headline.outer_side.denominator}"
+    package_side = Fraction(
+        json.loads(THIRDPARTY_CERTIFICATE.read_text(encoding="utf-8"))["outer_side"]
+    )
     return {
         "BELOW_ONE": BELOW_ONE,
         "NEAR_LIMIT": NEAR_LIMIT,
@@ -1366,6 +1370,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "HEADLINE_L_DEC": decimal(headline.outer_side),
         "HEADLINE_N_ATOMS": f"{len(headline.atoms):,}",
         "HEADLINE_N_DIRECTIONS": str(headline.steps + 1),
+        "THIRDPARTY_L_FRAC": f"{package_side.numerator}/{package_side.denominator}",
         "SUBTITLE": SUBTITLE,
         **card_substitutions(headline, headline_frac),
         "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
