@@ -106,6 +106,34 @@ def test_a_declared_variant_is_refused_before_any_condition(
     assert "Condition" not in result.stdout
 
 
+def test_a_duplicate_json_key_is_refused_before_any_condition(tmp_path: Path) -> None:
+    raw = CERTIFICATE.read_text(encoding="utf-8")
+    duplicate = tmp_path / "duplicate.json"
+    duplicate.write_text(raw.replace('"n": 11', '"n": 11, "n": 12', 1), encoding="utf-8")
+
+    result = run(duplicate, "--unpinned")
+
+    assert result.returncode == 1
+    assert "REFUSED  duplicate JSON object key 'n'" in result.stdout
+    assert "Condition" not in result.stdout
+
+
+@pytest.mark.parametrize("limit", ["0", "1", "3/2"])
+def test_the_pinned_checker_refuses_a_net_outside_zero_to_one(
+    tmp_path: Path, limit: str
+) -> None:
+    record = json.loads(CERTIFICATE.read_text(encoding="utf-8"))
+    record["angle_limit"] = limit
+    changed = tmp_path / "angle-limit.json"
+    changed.write_text(json.dumps(record), encoding="utf-8")
+
+    result = run(changed, "--unpinned")
+
+    assert result.returncode == 1
+    assert f"angle_limit T = {limit} is outside the supported range 0 < T < 1" in result.stdout
+    assert "Condition 3" not in result.stdout
+
+
 def test_one_changed_byte_is_refused_by_the_pin(tmp_path: Path) -> None:
     """The digest is checked before the JSON is parsed, so nothing else is reached."""
 

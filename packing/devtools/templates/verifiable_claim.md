@@ -179,6 +179,7 @@ one site. The theorem would tolerate the last two, an outside atom only adding t
 total and a repeated site being one site of the summed weight, but a well-formed
 certificate has neither, and the pinned checker `minimal_verify.py`, beside this file in
 the repository, refuses them too.
+A duplicate JSON key or a net parameter outside $0 < T < 1$ is also refused.
 
 The exit status is 0 only when all five conditions hold and the three declarations
 match, and 1 on any refusal.
@@ -219,7 +220,7 @@ The condition lines are what to read.
 
 ## The Verifier
 
-`{{VERIFIER_NAME}}`, byte for byte as kept in the repository at
+`{{VERIFIER_NAME}}`, byte for byte as kept beside this document at
 [`{{VERIFIER_NAME}}`]({{VERIFIER_URL}}).
 
 ````python

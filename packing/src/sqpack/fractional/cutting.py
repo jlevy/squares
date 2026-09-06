@@ -690,6 +690,7 @@ def cutting_plane_loop(
     weight_denominator: int = 10**9,
     select_above: Fraction = Fraction(1000001, 1000000),
     exact_scan: bool = False,
+    stop_on_covering_below_n: bool = False,
     log_sinks: Sequence[TextIO] = (),
     state_path: Path | None = None,
 ) -> CuttingLog:
@@ -705,7 +706,11 @@ def cutting_plane_loop(
 
     Per-iteration progress goes to every handle in ``log_sinks`` and nowhere
     else; the default is silence, and a caller wanting a terminal transcript
-    passes ``sys.stdout`` among them.
+    passes ``sys.stdout`` among them. ``stop_on_covering_below_n`` stops after
+    recording exact separation when a completed row solve has a finite
+    covering objective below ``n``, and refuses a non-finite converged
+    objective before publishing an iteration or checkpoint; it does not
+    change the default loop.
     """
 
     if n < 1:
@@ -731,6 +736,17 @@ def cutting_plane_loop(
             rows_per_direction=rows_per_direction,
             deadline=deadline,
         )
+        if (
+            stop_on_covering_below_n
+            and solution.converged
+            and not math.isfinite(solution.objective)
+        ):
+            reason = (
+                "technical refusal: non-finite row-converged covering objective "
+                f"at iteration {index}"
+            )
+            _write(log_sinks, "  failed: " + reason)
+            raise RuntimeError(reason)
         for held in range(len(exact_rows), len(rows)):
             direction = rows.directions[held]
             x, y = snap_centre(
@@ -844,22 +860,33 @@ def cutting_plane_loop(
                 log=log,
             )
 
-        if worst <= 1:
-            if raw_total >= n:
-                log.verdict = verify_ceiling(family)
-                record.note = (
-                    f"verify_ceiling: proved={log.verdict.proved} {log.verdict.failures}"
-                )
-                _write(log_sinks, "  " + record.note)
-                if log.verdict.proved:
-                    log.stopped = f"ceiling proved at iteration {index}"
-                    break
-            if solution.converged:
-                log.stopped = (
-                    f"feasible family below n with converged rows at iteration {index}: "
-                    "the discretised program is at its optimum on this site set"
-                )
+        if worst <= 1 and raw_total >= n:
+            log.verdict = verify_ceiling(family)
+            record.note = f"verify_ceiling: proved={log.verdict.proved} {log.verdict.failures}"
+            _write(log_sinks, "  " + record.note)
+            if log.verdict.proved:
+                log.stopped = f"ceiling proved at iteration {index}"
                 break
+        if stop_on_covering_below_n and solution.converged and solution.objective < n:
+            log.stopped = f"row-converged covering objective below n at iteration {index}"
+            record.note = log.stopped
+            _write(log_sinks, "  stopped: " + log.stopped)
+            if state_path is not None:
+                save_state(
+                    state_path,
+                    outer_side=outer_side,
+                    square_side=square_side,
+                    sites=sites,
+                    exact_rows=exact_rows,
+                    log=log,
+                )
+            break
+        if worst <= 1 and solution.converged:
+            log.stopped = (
+                f"feasible family below n with converged rows at iteration {index}: "
+                "the discretised program is at its optimum on this site set"
+            )
+            break
         selected = separation.chosen
         if not selected and worst <= select_above:
             log.stopped = f"no vertex exceeds {float(select_above):.7f} at iteration {index}"

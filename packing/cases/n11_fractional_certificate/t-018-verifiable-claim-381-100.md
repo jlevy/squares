@@ -7,7 +7,7 @@ that eleven unit squares do not fit in a square of side $381/100 = 3.81$: the
 claim, the theorem it instantiates, its proof, a verifier in Python’s standard library
 alone, and the certificate the verifier decides.
 Paste this one file into any coding agent, or read it yourself.
-It is the tighter of the two bounds the project proves.
+It is the tighter of the two certificate rungs packaged here.
 
 ## The Claim
 
@@ -181,6 +181,7 @@ one site. The theorem would tolerate the last two, an outside atom only adding t
 total and a repeated site being one site of the summed weight, but a well-formed
 certificate has neither, and the pinned checker `minimal_verify.py`, beside this file in
 the repository, refuses them too.
+A duplicate JSON key or a net parameter outside $0 < T < 1$ is also refused.
 
 The exit status is 0 only when all five conditions hold and the three declarations
 match, and 1 on any refusal.
@@ -225,8 +226,8 @@ The certificate embedded below is the file `certificate.json`, whose SHA-256 is 
 
 ## The Verifier
 
-`verify_claim.py`, byte for byte as kept in the repository at
-[`verify_claim.py`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/verify_claim.py).
+`verify_claim.py`, byte for byte as kept beside this document at
+[`verify_claim.py`](verify_claim.py).
 
 ````python
 #!/usr/bin/env python3
@@ -249,9 +250,9 @@ is for a usage error.
 THE THEOREM. Let s(n) be the least side of a square containing n unit squares
 with pairwise disjoint interiors, rotation allowed. A certificate names an
 integer n >= 1, rationals L > 0 (container side) and B > 0 (shrunken side), a
-net of rationals 0 = t_0 < ... < t_K standing for the angles 2 arctan(t_k), and
-atoms (x_i, y_i, w_i) with rational coordinates and weights w_i >= 0; the mass
-of a set is the total weight of the atoms in it. If
+net parameter 0 < T < 1 and rationals t_k = T k / K standing for the angles
+2 arctan(t_k), and atoms (x_i, y_i, w_i) with rational coordinates and weights
+w_i >= 0; the mass of a set is the total weight of the atoms in it. If
   Condition 1  the weighted atoms are invariant under the eight symmetries of
                the container [0, L]^2;
   Condition 2  the total weight is strictly less than n;
@@ -296,6 +297,16 @@ MAX_ATOMS = 2000
 MAX_DIRECTIONS = 1000
 
 
+def object_without_duplicate_keys(pairs):
+    """Build one JSON object, refusing a name whose second value would hide its first."""
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON object key {key!r}")
+        result[key] = value
+    return result
+
+
 def load(path):
     """The certificate as (n, L, B, tangents, atoms, declared), where declared holds the
     file's own claim, total_mass and least_cell_mass for comparison with what is
@@ -316,7 +327,7 @@ def load(path):
             message = "neither a JSON object nor a Markdown document with a fenced json block"
             raise ValueError(message)
         text = fence.group(1)
-    record = json.loads(text)
+    record = json.loads(text, object_pairs_hook=object_without_duplicate_keys)
 
     def rational(value):
         if not isinstance(value, str):  # a JSON float would be rounded: refuse it
@@ -333,8 +344,11 @@ def load(path):
         message = "n and direction_steps must be integers, n >= 1 and direction_steps >= 1"
         raise ValueError(message)
     L, B, T = (rational(record[key]) for key in ("outer_side", "square_side", "angle_limit"))
-    if not (L > 0 and B > 0 and T > 0):
-        message = "outer_side, square_side and angle_limit must be positive"
+    if not (L > 0 and B > 0):
+        message = "outer_side and square_side must be positive"
+        raise ValueError(message)
+    if not 0 < T < 1:
+        message = f"angle_limit T = {T} is outside the supported range 0 < T < 1"
         raise ValueError(message)
     if len(record["atoms"]) > MAX_ATOMS or K + 1 > MAX_DIRECTIONS:
         message = (
