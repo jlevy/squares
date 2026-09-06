@@ -51,7 +51,7 @@ _DATES = re.compile(rb"/(CreationDate|ModDate) \(D:[^)]{0,32}\)")
 
 #: What the page tells us it is ready. `math-ready` is set by the page's own script once
 #: KaTeX has typeset; `document.fonts.ready` settles when the inlined faces are applied.
-_READY = "html.math-ready"
+READY = "html.math-ready"
 
 #: A browser the environment supplies, for hosts that have one and cannot run
 #: `playwright install` -- a sandbox with a preloaded cache, a distribution package, a CI
@@ -62,7 +62,7 @@ _READY = "html.math-ready"
 #: exact bytes: a different build writes a different file, and the difference is not
 #: small. `--check` is unaffected either way, because it compares two renders from
 #: whichever browser it just used rather than against a recorded digest.
-_BROWSER_OVERRIDE = "SQPACK_CHROMIUM"
+BROWSER_OVERRIDE = "SQPACK_CHROMIUM"
 
 #: Where the page lives, so a link in the PDF points there rather than at whoever built
 #: it. Kept in step with `render_explainer.SITE_URL` by the test beside this module.
@@ -114,12 +114,12 @@ def render_pdf_bytes() -> bytes:
         # The default launch is the headless shell, and it stays the default on purpose:
         # `channel="chromium"` runs full Chrome in new-headless mode and rewrites about
         # 99% of the bytes for the same page and the same options.
-        browser = driver.chromium.launch(executable_path=os.environ.get(_BROWSER_OVERRIDE))
+        browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
         try:
             page = browser.new_page()
             page.emulate_media(media="print", reduced_motion="reduce")
             page.goto(PAGE.as_uri(), wait_until="load")
-            page.wait_for_selector(_READY, timeout=60_000)
+            page.wait_for_selector(READY, timeout=60_000)
             page.evaluate("document.fonts.ready")
             page.evaluate(_ABSOLUTE_LINKS, SITE_URL)
             return page.pdf(

@@ -29,8 +29,68 @@ import json
 import sys
 from collections.abc import Sequence
 from pathlib import Path
+from typing import TypedDict
 
-from devtools.render_explainer_pdf import PAGE, _BROWSER_OVERRIDE, _READY
+from playwright.sync_api import ViewportSize
+
+from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY
+
+
+class Centred(TypedDict):
+    """One element's alignment, in one medium. `index` and `parent` line the two up."""
+
+    index: int
+    parent: int
+    path: str
+    align: str
+    declared: bool
+    shown: bool
+
+
+class Marker(TypedDict):
+    """A list marker's box against the line box it belongs to."""
+
+    path: str
+    markerCentre: float
+    lineCentre: float
+    fontSize: float
+    lineHeight: float
+
+
+class Footnote(TypedDict):
+    """How much of a footnote reference's own line lies in front of it."""
+
+    path: str
+    text: str
+    leadIn: float
+    fontSize: float
+
+
+class Overflow(TypedDict):
+    """A block reaching past the measure, where the paper will clip rather than wrap."""
+
+    path: str
+    over: float
+    text: str
+
+
+class Probe(TypedDict):
+    """Everything one pass measures, plus the column it measured at."""
+
+    centred: list[Centred]
+    markers: list[Marker]
+    footnotes: list[Footnote]
+    overflow: list[Overflow]
+    measure: float
+    viewport: float
+
+
+class Measured(TypedDict):
+    """The two passes, taken from one browser and one load of the page."""
+
+    screen: Probe
+    print: Probe
+
 
 #: One CSS pixel, which at the print body size is six percent of an em: well under what
 #: reads as misaligned, well over the rounding in a font's own metrics. The bullet defect
@@ -45,7 +105,7 @@ TOLERANCE_PX = 1.0
 #: 720px here -- and every horizontal question is asked of a page 25% wider than the one
 #: that gets printed. Letter is 816 x 1056px at 96dpi; the stylesheet's margin is 1.25in,
 #: so the column is 816 - 2 * 120.
-PRINT_VIEWPORT = {"width": 816 - 2 * 120, "height": 1056 - 2 * 120}
+PRINT_VIEWPORT: ViewportSize = {"width": 816 - 2 * 120, "height": 1056 - 2 * 120}
 
 #: What each media's probe returns. Written as one script so the two passes cannot drift
 #: apart: the whole point is comparing like with like across `emulateMedia`.
@@ -161,7 +221,9 @@ _PROBE = r"""() => {
       const box = el.getBoundingClientRect();
       if (!box.width) continue;
       const over = round(Math.max(room.left - box.left, box.right - room.right));
-      if (over > 1) out.overflow.push({path: sig(el), over, text: el.textContent.trim().slice(0, 60)});
+      if (over > 1) {
+        out.overflow.push({path: sig(el), over, text: el.textContent.trim().slice(0, 60)});
+      }
     }
   }
 
@@ -196,7 +258,10 @@ _PROBE = r"""() => {
     if (!rects.length) return null;
     const first = Math.min(...rects.map((r) => r.top));
     const band = rects.filter((r) => Math.abs(r.top - first) < 1);
-    return {top: Math.min(...band.map((r) => r.top)), bottom: Math.max(...band.map((r) => r.bottom))};
+    return {
+      top: Math.min(...band.map((r) => r.top)),
+      bottom: Math.max(...band.map((r) => r.bottom)),
+    };
   }
 }"""
 
@@ -204,35 +269,37 @@ _PROBE = r"""() => {
 #: Two frames, so the media switch and the viewport change have both been laid out
 #: before anything is measured. `evaluate` alone does not guarantee a flush after
 #: `emulate_media`, and a rect read from the previous layout is the classic flake here.
-_SETTLED = """() => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done)))"""
+_SETTLED = """() => new Promise(
+  (done) => requestAnimationFrame(() => requestAnimationFrame(done)),
+)"""
 
 
-def measure(page_url: str) -> dict[str, object]:
+def measure(page_url: str) -> Measured:
     """The probe's answer under each medium, from one browser and one load."""
     import os  # noqa: PLC0415
 
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
     with sync_playwright() as driver:
-        browser = driver.chromium.launch(executable_path=os.environ.get(_BROWSER_OVERRIDE))
+        browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
         try:
             page = browser.new_page()
             page.emulate_media(media="screen", reduced_motion="reduce")
             page.goto(page_url, wait_until="load")
-            page.wait_for_selector(_READY, timeout=60_000)
+            page.wait_for_selector(READY, timeout=60_000)
             page.evaluate("document.fonts.ready")
-            screen = page.evaluate(_PROBE)
+            screen: Probe = page.evaluate(_PROBE)
             page.emulate_media(media="print", reduced_motion="reduce")
             page.set_viewport_size(PRINT_VIEWPORT)
             page.evaluate("document.fonts.ready")
             page.evaluate(_SETTLED)
-            printed = page.evaluate(_PROBE)
+            printed: Probe = page.evaluate(_PROBE)
             return {"screen": screen, "print": printed}
         finally:
             browser.close()
 
 
-def findings(measured: dict[str, object], *, every: bool = False) -> list[str]:
+def findings(measured: Measured, *, every: bool = False) -> list[str]:
     """Everything the two passes say is wrong, as lines a reader can act on."""
     screen = measured["screen"]
     printed = measured["print"]
@@ -243,12 +310,11 @@ def findings(measured: dict[str, object], *, every: bool = False) -> list[str]:
     # cascade it was written to win, every time. No list of intents to maintain.
     # The declaration, held to in both media. This is the check that fails a build.
     for medium, probe in (("screen", screen), ("print", printed)):
-        for row in probe["centred"]:
-            if row["declared"] and row["shown"] and row["align"] != "center":
-                found.append(
-                    f"{medium}: `.centred` block is `{row['align']}`, not centred "
-                    f"({row['path']})"
-                )
+        found.extend(
+            f"{medium}: `.centred` block is `{row['align']}`, not centred ({row['path']})"
+            for row in probe["centred"]
+            if row["declared"] and row["shown"] and row["align"] != "center"
+        )
 
     if not every:
         return found
@@ -261,36 +327,36 @@ def findings(measured: dict[str, object], *, every: bool = False) -> list[str]:
         for row in printed["centred"]
         if row["shown"] and was.get(row["index"]) == "center" and row["align"] != "center"
     }
-    for row in printed["centred"]:
-        # Only where the change starts. An element under one that also lost centring
-        # inherited the loss and is a symptom of the same rule, not a second finding.
-        if row["index"] in lost and row["parent"] not in lost:
-            found.append(
-                f"centring lost in print: {row['path']} is `center` on screen "
-                f"and `{row['align']}` in print"
-            )
+    # Only where the change starts. An element under one that also lost centring
+    # inherited the loss and is a symptom of the same rule, not a second finding.
+    found.extend(
+        f"centring lost in print: {row['path']} is `center` on screen "
+        f"and `{row['align']}` in print"
+        for row in printed["centred"]
+        if row["index"] in lost and row["parent"] not in lost
+    )
 
     for medium, probe in (("screen", screen), ("print", printed)):
-        for row in probe["markers"]:
-            off = row["markerCentre"] - row["lineCentre"]
-            if abs(off) > TOLERANCE_PX:
-                found.append(
-                    f"{medium}: list marker off the line's centre by {off:+.2f}px "
-                    f"({row['path']}, {row['fontSize']}px on a {row['lineHeight']}px line)"
-                )
-        for row in probe["footnotes"]:
-            # Under one em there is no word in front of it, only stray punctuation that
-            # wrapped down with it, and the reference reads as opening the line.
-            if row["leadIn"] < row["fontSize"]:
-                found.append(
-                    f"{medium}: footnote reference opens its line, with only "
-                    f"{row['leadIn']:.2f}px in front of it ({row['path']}: {row['text']!r})"
-                )
-        for row in probe["overflow"]:
-            found.append(
-                f"{medium}: {row['path']} runs {row['over']:.2f}px past the measure "
-                f"({row['text']!r})"
-            )
+        found.extend(
+            f"{medium}: list marker off the line's centre by "
+            f"{row['markerCentre'] - row['lineCentre']:+.2f}px "
+            f"({row['path']}, {row['fontSize']}px on a {row['lineHeight']}px line)"
+            for row in probe["markers"]
+            if abs(row["markerCentre"] - row["lineCentre"]) > TOLERANCE_PX
+        )
+        # Under one em there is no word in front of the reference, only stray punctuation
+        # that wrapped down with it, and it reads as opening the line.
+        found.extend(
+            f"{medium}: footnote reference opens its line, with only "
+            f"{row['leadIn']:.2f}px in front of it ({row['path']}: {row['text']!r})"
+            for row in probe["footnotes"]
+            if row["leadIn"] < row["fontSize"]
+        )
+        found.extend(
+            f"{medium}: {row['path']} runs {row['over']:.2f}px past the measure "
+            f"({row['text']!r})"
+            for row in probe["overflow"]
+        )
 
     return found
 

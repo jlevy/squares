@@ -1814,7 +1814,9 @@ _STACKED_MATH = re.compile(r"\\(?:d|t)?frac|\\binom|\\over\b|\\atop\b|\\substack
 # The article's two inline runs. `$$` is display and is deliberately excluded: the
 # alternation takes the doubled form first so a display block cannot be read as two
 # inline ones.
-_INLINE_MATH = re.compile(r'<span class="tex">(.*?)</span>|\$\$.*?\$\$|\$([^$\n]+)\$', re.DOTALL)
+_INLINE_MATH = re.compile(
+    r'<span class="tex">(.*?)</span>|\$\$.*?\$\$|\$([^$\n]+)\$', re.DOTALL
+)
 
 
 def _refuse_stacked_inline_math(source: str) -> None:
