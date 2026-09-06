@@ -22,6 +22,7 @@ from devtools.render_explainer import (
     COMPOSITE_CARD,
     COMPOSITE_PNG,
     MARKDOWN_OUTPUT,
+    OUTPUT,
     RENDER_INPUTS,
     REPO,
     RESULT_ID,
@@ -32,6 +33,7 @@ from devtools.render_explainer import (
     render,
 )
 from devtools.render_explainer import load_certificate as load
+from devtools.render_explainer_pdf import OUTPUT as PDF_OUTPUT
 from sqpack.yamlio import safe_load
 
 
@@ -386,3 +388,119 @@ def test_every_declared_render_input_exists() -> None:
     """
     for declared in RENDER_INPUTS:
         assert declared.exists(), declared.relative_to(REPO).as_posix()
+
+
+def test_no_screen_only_prose_survives_into_the_published_document(document: str) -> None:
+    """A multi-line `screen-only` span used to leak, and reads as ordinary prose when it does.
+
+    `_SCREEN_ONLY` is compiled `re.DOTALL` so it can span lines, but it was applied one
+    line at a time, so a span opening on one line and closing on the next matched
+    nothing; `_SIMPLE_TAG` then stripped the bare tags and the sentence shipped. "The
+    chooser under each figure switches every figure between the two at once" reached a
+    published edition that has no chooser in it, and nothing objected, because the leak
+    is well-formed Markdown in a well-formed document.
+
+    Checked on the words rather than on the markup, for the same reason the publisher's
+    own guard is: an edition that tells its reader to hover or tap is wrong however it
+    got that way, and the markup is exactly what is missing by the time it is wrong.
+    """
+    for word in ("chooser", "hover", "tap", "drag", "click", "slider"):
+        assert word not in document.lower(), f"{word!r} addresses a reader who has the page"
+
+
+def test_the_published_document_says_what_it_is_and_where_the_figures_are(
+    document: str,
+) -> None:
+    """Six of the seven figures are captions here, and a reader cannot tell that alone.
+
+    Figure 1 carries its image; the rest are drawn by the page, so they arrive as
+    captions with nothing above them -- readable, and describing something the reader
+    cannot see. Without a word of explanation that reads as images that failed to load,
+    and the chip row that would have pointed at the real page is one of the things this
+    edition drops.
+    """
+    assert "Markdown edition" in document
+    assert SITE_URL in document
+
+
+def _style_blocks(page: str) -> list[str]:
+    return re.findall(r"<style>(.*?)</style>", page, re.DOTALL)
+
+
+def test_the_page_stylesheet_has_no_orphaned_comment_delimiter(page: str) -> None:
+    """A comment that ends early turns the prose after it into CSS, silently.
+
+    This shipped. A block comment was extended with a second paragraph, but the original
+    `*/` was left in place above it, so eleven lines of English became two invalid
+    qualified rules -- and the second one's prelude ran on until it swallowed the `{
+    text-align: left !important; }` underneath, which is a real rule the printed document
+    depends on. CSS error recovery is silent by specification: the browser dropped both,
+    printed prose reverted to the vendor's justification, and every render, every
+    reproducibility check and every screenshot still passed.
+
+    Checked on the delimiters rather than by parsing, so it needs no CSS parser: strip
+    the balanced comments and nothing that opens or closes one may remain.
+    """
+    for index, css in enumerate(_style_blocks(page)):
+        stripped = re.sub(r"/\*.*?\*/", "", css, flags=re.DOTALL)
+        for orphan in ("*/", "/*"):
+            assert orphan not in stripped, (
+                f"style block {index}: an unbalanced {orphan} leaves prose outside a comment"
+            )
+
+
+def test_no_rule_in_the_page_stylesheet_has_prose_for_a_selector(page: str) -> None:
+    """The other half of the same failure: a selector that is really a sentence.
+
+    An unbalanced comment is one way to get there and a stray `}` is another. A selector
+    cannot contain a semicolon or the word `important`, and a real one here is never
+    hundreds of characters long, so a prelude with any of those is prose that the parser
+    is about to discard along with the rule it was standing in front of.
+    """
+    for index, css in enumerate(_style_blocks(page)):
+        stripped = re.sub(r"/\*.*?\*/", "", css, flags=re.DOTALL)
+        # Preludes only: what stands between the end of one rule and the `{` of the next.
+        for prelude in re.findall(r"(?:^|[}])([^{}]*)\{", stripped):
+            text = prelude.strip()
+            assert ";" not in text, f"style block {index}: selector holds a `;`: {text[:80]!r}"
+            assert "important" not in text, (
+                f"style block {index}: selector holds `important`: {text[:80]!r}"
+            )
+            assert len(text) < 400, f"style block {index}: selector is prose: {text[:80]!r}"
+
+
+def test_every_relative_link_in_the_page_names_a_file_the_deploy_serves(page: str) -> None:
+    """A chip that 404s on the deployed site is invisible to every other check here.
+
+    The page is served from a directory, so each relative `href` and `src` resolves
+    against whatever the Pages artifact happens to contain. The MD chip is checked above
+    against the constant the writer uses; this asks the same question of all of them at
+    once, which is what the PDF chip needed -- its file is written by a different module
+    from the one that writes the page, so nothing else relates the two.
+
+    Two links already shipped as `file:///home/.../known-best-1-100.pdf`, absolute paths
+    to the machine that built them, and the atlas figure was one of them.
+    """
+    served = {
+        OUTPUT.name,
+        MARKDOWN_OUTPUT.name,
+        PDF_OUTPUT.name,
+        *(asset.name for asset in COMPOSITE_ASSETS),
+    }
+    # Markup only. The page inlines KaTeX and kpress's client, and a minified
+    # `'+a(this.src)+'` in one of them reads as an attribute to a regex that does not
+    # know where the script ends.
+    markup = re.sub(r"<(script|style)\b.*?</\1>", "", page, flags=re.DOTALL | re.IGNORECASE)
+    links = {
+        match.group(2)
+        for match in re.finditer(r'\b(href|src)="([^"]+)"', markup)
+        if not re.match(r"[a-z][a-z0-9+.-]*:|#|//", match.group(2), re.IGNORECASE)
+    }
+    missing = sorted(link for link in links if link.split("#")[0].split("?")[0] not in served)
+    assert not missing, f"relative links to files the deploy does not serve: {missing}"
+
+
+def test_the_pdf_chip_offers_the_pdf_the_exporter_writes(page: str) -> None:
+    """Named against the exporter's own constant, so a rename moves both ends at once."""
+    assert f'href="{PDF_OUTPUT.name}"' in page
+    assert PDF_OUTPUT.parent == OUTPUT.parent, "the PDF must land beside the page it links from"

@@ -16,7 +16,8 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 <div class="doc-links screen-only">
   <a class="chip" href="{{SOURCE_URL}}" title="The Markdown this page is rendered from">MD</a>
-  <a class="chip" href="#" data-print="page" title="Print this page, or save it as a PDF">PDF</a>
+  <a class="chip" href="t-018-explainer.pdf" title="The typeset PDF of this page">PDF</a>
+  <button class="chip" type="button" data-print="page" title="Print this page">Print</button>
   <a class="chip" href="{{REPO_URL}}" title="The project on GitHub"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>PROJECT</a>
 </div>
 
@@ -24,10 +25,10 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 # <span class="symbol">s({{N}}) <span class="rel">≥</span> {{HEADLINE_L_FRAC}}</span>
 
-<p class="subtitle">{{SUBTITLE}}</p>
+<p class="subtitle centred">{{SUBTITLE}}</p>
 
-<div class="credits">
-  <span>{{PUBLISHED}} ({{EDITION}}, revision {{REVISION}})</span>
+<div class="credits centred">
+  <span>{{PUBLISHED}} ({{EDITION}})</span>
   <span>Tooling and human oversight: <a href="https://x.com/ojoshe"><strong>Joshua Levy</strong></a></span>
   <span>Agents: <strong>Opus 5</strong>, <strong>Fable 5.1</strong>, and <strong>Codex 5.6</strong></span>
   <span>Open source at <a href="https://github.com/jlevy/squares"><strong>github.com/jlevy/squares</strong></a></span>
@@ -37,28 +38,38 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 ## What Is This?
 
-A new lower bound on an open problem, found by an automated research process.
-The witness used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted points in
-the container and takes a net of {{HEADLINE_N_DIRECTIONS}} rationally parameterized
-directions; five exact conditions on them imply that eleven disjoint unit squares, free
-to rotate, cannot fit in a ${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.
-It appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
-open case; the previous bound, {{PRIOR_LOWER_DEC}}, was Stromquist’s in
-{{PRIOR_YEAR}}.[^stromquist]
+This paper presents a new lower bound on a long-standing open geometry problem: eleven
+disjoint unit squares, free to rotate, cannot fit in a
+${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.
 
-The search, the checking and the record are the program’s own work, under human
-direction rather than human derivation.
-This is one of {{N_RESULTS}} results it has registered over a few days, and it sits
-inside a survey of the whole problem: the atlas of best known packings for every $n$
-from 1 to 100 in Figure 1 came from the same program, which proved {{N_STARRED}} of the
-lower bounds shown there.
-Most of the repository is not the proof but the loop that produced it: a hypothesis
-registry and an experiment ledger, exact verifiers, a retention gate that keeps a
-certificate only when two independent methods agree to the digit, and a validation suite
-that re-derives every number these documents state.
-None of that is particular to square packing.
-It is a reusable framework for iterative research on creative mathematical and technical
-problems. It makes use of [tbd](https://github.com/jlevy/tbd),
+The computer-assisted proof was found via an automated research framework run over a few
+days. The witness used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted
+points in the container and selects a net of {{HEADLINE_N_DIRECTIONS}} rationally
+parameterized directions. Five exact conditions and a pigeonhole-style argument then
+imply the claim.
+
+This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
+open case of the square packing problem. The previous bound, {{PRIOR_LOWER_DEC}}, was
+Stromquist’s in {{PRIOR_YEAR}}.[^stromquist]
+
+The search, the checking, and the record are the work of agents under human direction
+rather than human derivation.
+
+This is one of {{N_RESULTS}} results registered over a few days, all within the same
+automated research framework. The work sits inside a broader survey of the research
+frontier of this problem. The atlas of best known packings for every $n$ from 1 to 100
+in Figure 1 came from the same program, which proved {{N_STARRED}} of the lower bounds
+shown there.
+
+Most of the research work is not the proof but the process and artifacts that produced
+it. The repository includes a comprehensive survey of the research frontier, a
+hypothesis registry, an experiment ledger, exact verifiers, a research loop, an
+optimization loop for efficiency, and a retention gate that keeps results only when
+independent validation methods agree.
+
+None of this is particular to square packing. It is a reusable framework for iterative
+research on creative mathematical and technical problems. The framework uses a few tools
+to streamline the process, notably [tbd](https://github.com/jlevy/tbd),
 [softschema](https://github.com/jlevy/softschema), and
 [Practical Prose](https://github.com/jlevy/practical-prose).
 
@@ -74,7 +85,7 @@ $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
   <figcaption><strong>Figure 1.</strong> The best known packings of 1 through 100 unit squares. Each cell is the tightest
   arrangement on record for that <span class="tex">n</span>, with the best known upper bound beneath it and, where
   <span class="tex">s(n)</span> is not yet settled, the best proved lower bound below that. A crimson star marks a lower
-  bound this project proved: {{N_STARRED}} of the hundred, this page's own among them. The full
+  bound this project proved: {{N_STARRED}} of the hundred, this page’s own among them. The full
   results, with every witness and its provenance, are in
   <a href="https://github.com/jlevy/squares/blob/main/packing/atlas/known-best/">the GitHub repository</a>, and the
   composite is <a href="known-best-1-100.pdf">available as a PDF</a>.</figcaption>
@@ -87,8 +98,6 @@ Trump’s 1979 packing shows $s(11) \le {{BEST_PACKING_TEX}}$.[^trump] Here we p
 $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$. The project proves two bounds.
 (Some of the figures below also show the looser one, $s({{N}}) \ge {{DEFAULT_L_FRAC}}$,
 whose smaller numbers make the illustration simpler.)
-<span class="screen-only">The chooser under each figure switches every figure between
-the two at once.</span>
 
 <figure>
   <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
@@ -121,7 +130,7 @@ the two at once.</span>
     {{NUMBER_LINE_MARKS}}
   </svg>
   </div>
-  <figcaption><strong>Figure 3.</strong> Bounds on <span class="tex">s(11)</span>. The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. Below {{HEADLINE_L_FRAC}} it is
+  <figcaption><strong>Figure 3.</strong> Bounds on <span class="tex">s(11)</span>. The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. Below <span class="tex">{{HEADLINE_L_FRAC}}</span> it is
   <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span>.</figcaption>
 </figure>
 
@@ -358,9 +367,9 @@ $$
   <div class="fig-choose">{{CERT_TOGGLE}}</div>
   <figcaption><strong>Figure 6. Condition 4.</strong> The shrink that buys the finite net. The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
   side-<span class="tex">B</span> square at the nearest net angle. The proof only ever asks about the orange one.
-  <strong>The last quantity must stay below 1.</strong> At <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, its
-  largest value, at the widest half-gap, is <span class="tex">{{SHRINK_PEAK_TEX}}</span> for the side the figure uses, a seven-place
-  value one step below the largest Condition 4 admits, and <span class="tex">{{SHRINK_PEAK_CERT_TEX}}</span> for the certificate’s own
+  The product <span class="tex">B(\cos d + \sin d)</span> must stay below 1. At <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, that
+  product’s largest value, at the widest half-gap, is <span class="tex">{{SHRINK_PEAK_TEX}}</span> at <span class="tex">B = {{SHRINK_SIDE_TEX}}</span>, a seven-place
+  value one step below the largest Condition 4 admits, and <span class="tex">{{SHRINK_PEAK_CERT_TEX}}</span> at the certificate’s own
   side.</figcaption>
 </figure>
 

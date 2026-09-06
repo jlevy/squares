@@ -55,7 +55,7 @@ from sqpack.fractional.certificate import (
 )
 from sqpack.fractional.model import Atom
 from sqpack.fractional.sweep import minimum_covered_mass, weight_scale
-from sqpack.release import PUBLICATION_DATE, PUBLICATION_EDITION, PUBLICATION_REVISION
+from sqpack.release import PUBLICATION_DATE, PUBLICATION_EDITION
 from sqpack.render.style import SQUARE_HUE_PALETTE
 from sqpack.yamlio import safe_load
 
@@ -766,9 +766,24 @@ def derive(path: Path, *, full_sweep: bool = False) -> Facts:
 
 
 def frac_tex(value: Fraction) -> str:
+    """`value` as a stacked fraction, for display math; prose wants `frac_inline_tex`."""
     if value.denominator == 1:
         return str(value.numerator)
     return f"\\frac{{{value.numerator}}}{{{value.denominator}}}"
+
+
+def frac_inline_tex(value: Fraction) -> str:
+    """`value` as a slashed fraction, for a fraction set in a line of prose.
+
+    `frac_tex` builds it in two storeys, which is right in a display block and
+    wrong inline: a stacked fraction is taller than the line it sits in, so it
+    sets its own leading and the numerator and denominator end up on either side
+    of the words around them. The figure readouts already spell an inline
+    fraction with a slash; this is the same spelling, for the prose.
+    """
+    if value.denominator == 1:
+        return str(value.numerator)
+    return f"{value.numerator}/{value.denominator}"
 
 
 def atom_array(facts: Facts) -> str:
@@ -1249,7 +1264,6 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "REPO_URL": REPO_URL,
         "PUBLISHED": PUBLICATION_DATE,
         "EDITION": PUBLICATION_EDITION,
-        "REVISION": PUBLICATION_REVISION,
         "PRIOR_YEAR": str(PRIOR_YEAR),
         **bound_substitutions(),
         "PRIOR_SOURCE": PRIOR_SOURCE,
@@ -1338,6 +1352,9 @@ def certificate_substitutions(facts: Facts, *, default: Facts, toggle: str) -> d
         "L_DEC": decimal(facts.outer_side),
         "L_JS": repr(float(facts.outer_side)),
         "SHRINK_PEAK_TEX": shrink_peak_tex(facts, facts.admitted_side),
+        # The side the peak above is quoted at. Named in the caption rather than left as
+        # "the side the figure uses", which resolves only for a reader who has the figure.
+        "SHRINK_SIDE_TEX": frac_inline_tex(facts.admitted_side),
         "SHRINK_PEAK_CERT_TEX": shrink_peak_tex(facts, facts.square_side),
         "K3_LIMIT_TEX": k3_limit_tex(facts),
         "TIGHT_PERCENT": str((TIGHT - 1) * 100),
@@ -1495,6 +1512,8 @@ RENDER_INPUTS = (
     Path(__file__),
     PACKING / "devtools" / "measure_net_coarsening.py",
     PACKING / "devtools" / "build_composite_figure_data.py",
+    PACKING / "devtools" / "render_explainer_pdf.py",
+    PACKING / "devtools" / "check_print_layout.py",
     PACKING / "src" / "sqpack",
     PACKING / "frontier" / "results.yaml",
     PACKING / "atlas" / "known-best" / "composite-figure.json",
@@ -1559,6 +1578,68 @@ def _image_markdown(tag: str) -> str:
     return f"![{attributes.get('alt', '').strip()}]({attributes.get('src', '')})"
 
 
+#: Sentences that only make sense with the page in front of the reader, named by the
+#: words they would leak. The class is stripped upstream; this is what notices when it
+#: is not, because the failure it guards against is silent by construction -- a leaked
+#: span reads as ordinary prose and nothing about the output looks wrong.
+_ONLY_ON_SCREEN = re.compile(
+    r"\b(?:chooser|hover|tap|drag|click|button|slider|toggle)\b", re.IGNORECASE
+)
+
+
+#: What a reader holding this file alone cannot otherwise work out. Figure 1 carries its
+#: image; Figures 2 through 7 are drawn by the page, so here they are captions with
+#: nothing above them -- readable, and describing something the reader cannot see. A
+#: reader who does not know that is left assuming an image failed to load, and a reader
+#: who wants the drawings has no idea where they are, because the chip row that would
+#: have said so is one of the things this edition drops.
+_EDITION_NOTE = f"""
+
+> This is the Markdown edition, written by the same render that writes the page. The
+> argument is complete here, and every figure's caption states what its figure shows.
+> Only Figure 1 carries its image; the rest are drawn by [the page
+> itself]({SITE_URL})."""
+
+
+def _with_edition_note(document: str) -> str:
+    """Put the note between the credits and the first section.
+
+    Anchored on the first heading rather than on the last credit line: the credits are
+    a list whose items carry links, and inserting after any one of them by text lands
+    inside it and cuts the item in half.
+    """
+    heading = document.find("\n## ")
+    if heading == -1:
+        raise SystemExit(f"{MARKDOWN_OUTPUT.name}: no section to put the edition note above")
+    return document[:heading] + "\n" + _EDITION_NOTE.strip() + "\n" + document[heading:]
+
+
+def _refuse_screen_only_prose(document: str) -> None:
+    """Refuse to publish prose that addresses a reader who has the page in front of them.
+
+    `screen-only` marks the sentences the interactive page needs and this edition must
+    not carry. One leaked once and shipped: `_SCREEN_ONLY` is `re.DOTALL` but was being
+    applied per line, so a span opening on one line and closing on the next matched
+    nothing and came through as prose. Nothing caught it, because a leaked sentence is
+    well-formed Markdown in a well-formed document.
+
+    So the check is on the words rather than on the markup: a published edition that
+    tells its reader to hover, tap or use a chooser is wrong however it got that way.
+    Refused rather than stripped, because the fix belongs in the template or the
+    publisher and a silent repair would hide which.
+    """
+    leaked = [
+        line
+        for line in document.split("\n")
+        if _ONLY_ON_SCREEN.search(line) and "screen-only" not in line
+    ]
+    if leaked:
+        joined = "\n  ".join(leaked[:5])
+        raise SystemExit(
+            f"{MARKDOWN_OUTPUT.name}: prose addresses a reader who has the page:\n  {joined}"
+        )
+
+
 def published_markdown(source: str, *, default_slug: str) -> str:
     """The article as a document, for a reader or a model rather than for a browser.
 
@@ -1612,12 +1693,14 @@ def published_markdown(source: str, *, default_slug: str) -> str:
         return "\n".join(f"- {_inline_markdown(item)}" for item in items)
 
     source = re.sub(r'<div class="credits">(.*?)</div>', _credits, source, flags=re.DOTALL)
+    source = _with_edition_note(source)
     # Every remaining div is a named block whose name is a style. The content is the
     # document; the box around it is the page's.
     source = re.sub(r"</?div\b[^>]*>", "", source)
     source = re.sub(r"</?p\b[^>]*>", "", source)
     source = _inline_markdown_document(source)
     source = re.sub(r"\n{3,}", "\n\n", source).strip() + "\n"
+    _refuse_screen_only_prose(source)
 
     # Formatted by the same tool that owns every other Markdown file here, so the
     # published document wraps the way the repository's prose does. It has to run in
@@ -1635,9 +1718,19 @@ def _inline_markdown_document(source: str) -> str:
     The caption form collapses its input to one line, which is right for a caption and
     wrong for prose, so the paragraph shape is preserved by running the conversion
     within each line rather than over the whole string.
+
+    Screen-only spans are dropped first, over the whole document, and that ordering is
+    the point rather than a detail. `_SCREEN_ONLY` is compiled `re.DOTALL` so it can
+    span lines, but a per-line pass can never hand it both halves of one: the opening
+    line matches nothing, `_SIMPLE_TAG` then strips the bare `<span>` and `</span>` as
+    ordinary inline tags, and the sentence survives into a document that has no screen
+    to speak of. That is how "The chooser under each figure switches every figure
+    between the two at once" reached a published edition with no chooser in it -- a
+    silent failure that repeats for every multi-line screen-only span written after it.
     """
     return "\n".join(
-        _inline_markdown(line) if line.strip() else "" for line in source.split("\n")
+        _inline_markdown(line) if line.strip() else ""
+        for line in _SCREEN_ONLY.sub("", source).split("\n")
     )
 
 
@@ -1716,6 +1809,42 @@ class Render(NamedTuple):
     markdown: str
 
 
+# Math that stacks: two storeys or more, so the box is taller than the line box.
+_STACKED_MATH = re.compile(r"\\(?:d|t)?frac|\\binom|\\over\b|\\atop\b|\\substack")
+# The article's two inline runs. `$$` is display and is deliberately excluded: the
+# alternation takes the doubled form first so a display block cannot be read as two
+# inline ones.
+_INLINE_MATH = re.compile(
+    r'<span class="tex">(.*?)</span>|\$\$.*?\$\$|\$([^$\n]+)\$', re.DOTALL
+)
+
+
+def _refuse_stacked_inline_math(source: str) -> None:
+    """Refuse a two-storey fraction set in a line of prose.
+
+    A stacked fraction is taller than the line box it sits in. Inline, it pushes the
+    line open and lands its numerator and denominator above and below the words on
+    either side, which is how `B = \\frac{9977039}{10000000}` read in Figure 6's
+    caption. Display math is where a fraction gets to be two storeys; `frac_inline_tex`
+    is the spelling for everything else, and the figure readouts already use it.
+
+    Refused rather than rewritten, because the choice belongs at the value's own call
+    site: which of the two forms a number wants is a fact about where it is printed.
+    """
+    stacked = [
+        run
+        for match in _INLINE_MATH.finditer(source)
+        for run in (match.group(1) or match.group(2) or "",)
+        if _STACKED_MATH.search(run)
+    ]
+    if stacked:
+        joined = "\n  ".join(stacked[:5])
+        raise SystemExit(
+            f"{MARKDOWN.name}: stacked math in a line of prose; use `frac_inline_tex`:\n"
+            f"  {joined}"
+        )
+
+
 def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> Render:
     """One page for every certificate given, the first shown by default."""
     if not certificate_paths:
@@ -1740,6 +1869,7 @@ def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> 
     static = kpress_static()
     headline_values = per_certificate[facts.index(headline)]
     source = markdown_source(per_certificate, headline_values, shared, claimed=claimed)
+    _refuse_stacked_inline_math(source)
     prose = markdown_body(source, title=f"s({shared['N']}) >= {shared['HEADLINE_L_FRAC']}")
     # The sprite leads the body the way kpress's own renderer places it: the copy
     # button on a code block draws its glyph from a fragment of it.
