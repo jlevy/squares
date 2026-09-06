@@ -50,8 +50,7 @@ directions. Five exact conditions and a pigeonhole-style argument then imply the
 
 <!--BEGIN:CLAIM-->
 
-[Verification]({{HEADLINE_CLAIM_URL}}) is exact rational arithmetic: the one-file
-checker,
+[Verification](#verifiable-claim) is exact rational arithmetic: the one-file checker,
 {{PINNED_VERIFIER_LINES}}
 of standard-library Python and short enough to read in one sitting, decides the
 certificate file of {{HEADLINE_N_ATOMS}} weighted points in {{HEADLINE_PINNED_RUNTIME}}.
