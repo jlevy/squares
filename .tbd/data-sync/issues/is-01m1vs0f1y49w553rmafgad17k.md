@@ -5,13 +5,13 @@ title: "W5: align validation names, checkpoint policy, and documentation links"
 kind: task
 status: closed
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 labels: []
 dependencies: []
 parent_id: is-01m1vrrktbrd2scnaqfe40eby4
 created_at: 2026-09-06T16:32:16.440Z
-updated_at: 2026-09-06T20:42:42.827Z
+updated_at: 2026-09-06T21:15:43.880Z
 closed_at: 2026-09-06T20:41:54.251Z
 close_reason: First-slice implementation landed in PR98. Ordinary run 34056428243 and full checkpoint 34056585319 passed on b3b7275f/c14451f5 with all seven timing artifacts audited. Separate post-merge validation of 8743cb0d plus PR100 continues under think-rwte; Phase 3 and documented timing/performance follow-ups remain open.
 resolution: null
@@ -24,6 +24,8 @@ First-slice implementation is complete in PR98. Ordinary CI 34056428243 and full
 
 The implementation preserves independent mathematical coverage, repairs repository-relative and limit-tool selection, records timings and failure evidence, reconciles project documentation, and fixes the historical-checkout prerequisite and evolving-rule mutation. Focused checks and the real repaired control passed before hosted CI. Detailed results and source-bound historical observations are in https://github.com/jlevy/squares/pull/98 and the linked W5 plan/report.
 
-jlevy merged PR98 at 20:23:10 UTC as 8743cb0dce21314625f9a75f9934a600f21e6de9. That merge also includes PR100 via parent 6a064e3b, so its tree differs from the PR-tested source. Main run 34057826143 remains in progress; its result is tracked under think-rwte and the task heartbeat. Main deployment passed and the live-site check verified all 20 checks in 11.74s against the landed commit.
+jlevy merged PR98 at 20:23:10 UTC as 8743cb0dce21314625f9a75f9934a600f21e6de9. That merge also includes PR100 via parent 6a064e3b, so its tree differs from the PR-tested source. Main run 34057826143 also passed on the actual combined source, and all three main artifacts were audited: all 66 default checkpoint steps, 2,379 quick cases, 96 slow cases, 55 exhaustive cases, 163 controls and four macOS checks passed. Main deployment passed and the live-site check verified all 20 checks in 11.74s against the landed commit.
 
 Closing these implementation items does not close W5. Explained family selection/reuse remains think-xejq, the T-022 fast-path investigation think-efke, complete incremental phase timing think-uhxt, snapshot retention think-rx6p, and upstream filing think-jogv pending owner approval. No statistical whole-CI speedup is claimed.
+
+Final main timings: 20m23s validate, 22m48s exhaustive, 1m47s macOS, plus 12m57s before the first jobs; 35m46s from workflow creation to completion. Complete slow/exhaustive phase evidence and receipt joins are verified; quick aggregate timings and the documented phase filter remain explicit. Deep golden regeneration and strict mode remain separate. PR98 contains final source-specific artifact links and the measured queue/scheduling follow-up.
