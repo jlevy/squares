@@ -1,6 +1,11 @@
 # Adversarial Senior Review of the Agenda 024 Portfolio
 
-Status: **conditional go after the landing defects in Findings 1–3 are repaired.**
+Status: **historical pre-reconciliation review.
+Its operational recommendations were reconciled by the
+[T+2 coordinator landing decision](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/checkpoint-hour-02-decision.md)
+and superseded for continuation by the
+[T+2 commissioning handoff](../handoff-2026-09-06-post-381-t2-commissioning.md).
+Its mathematical determinations remain evidence only at the boundaries stated below.**
 
 This review covers the frozen T+0 through T+2 research block and the strategy for the
 remaining 22 active portfolio hours.

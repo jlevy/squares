@@ -1356,7 +1356,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
     The axis positions are here rather than in `certificate_substitutions`
     because the bounds figure states every certificate at once and stands outside
     the stamped article; the band it shades runs from the headline bound to the
-    best packing known, which is what remains unknown after all of them.
+    best packing known. It describes the certificates shown, not later refinements.
     """
     headline_frac = f"{headline.outer_side.numerator}/{headline.outer_side.denominator}"
     package_side = Fraction(
@@ -1370,6 +1370,11 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "HEADLINE_L_DEC": decimal(headline.outer_side),
         "HEADLINE_N_ATOMS": f"{len(headline.atoms):,}",
         "HEADLINE_N_DIRECTIONS": str(headline.steps + 1),
+        "REFINEMENT_URL": (
+            repo_file(CASE / "t-022-dilation-limit-proof.md")
+            if headline.n == 11 and headline.outer_side == Fraction(381, 100)
+            else ""
+        ),
         "THIRDPARTY_L_FRAC": f"{package_side.numerator}/{package_side.denominator}",
         "SUBTITLE": SUBTITLE,
         **card_substitutions(headline, headline_frac),
@@ -1893,6 +1898,8 @@ def markdown_source(
     source = MARKDOWN.read_text(encoding="utf-8")
     if not claimed:
         source = drop_block(source, "CLAIM")
+    if not shared["REFINEMENT_URL"]:
+        source = drop_block(source, "REFINEMENT")
     comparison = shared["HEADLINE_L_FRAC"] != shared["DEFAULT_L_FRAC"]
     source = drop_block(source, "NO_COMPARISON" if comparison else "COMPARISON")
     unmeasured = [v["SLUG"] for v in per_certificate if not v["COARSEN_BARS"]]

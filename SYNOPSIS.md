@@ -60,6 +60,14 @@ Read it before citing any capability here.
 
 ### Results and their significance
 
+The core exposition uses T-018’s simple `s(11) >= 3.81` bound.
+The technical register below retains T-022’s small exact refinement; its algebraic
+endpoint need not complicate the introduction.
+Future research follows the
+[payoff policy](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md#research-payoff-and-exposition):
+prioritize substantial bound improvements and methods or theorems that make them
+possible.
+
 Every result this project has registered, in the reading order its significance scores
 set. The full claims, the rationale behind each score, and the next evidence-improving
 action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the `V`,
@@ -70,6 +78,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | Result | `n` | [`V`](epistemics.md#verification) | [`C`](epistemics.md#confirmation) | [`S`](epistemics.md#significance-and-novelty) | [Novelty](epistemics.md#significance-and-novelty) | What it establishes |
 | --- | --- | --- | --- | --- | --- | --- |
 | [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
+| [T-022](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703, as a weak limit corollary of T-018’s retained certificate. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 99/25, by a first-party weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from a first-party weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
 | [T-020](packing/frontier/RESULTS.md) | 19, 20, 21 | `V4` | `C4` | `S4` | `apparently-novel` | s(19) >= 24/5, s(20) >= 24/5 and s(21) >= 24/5, from a first-party weighted fractional unavoidable-set certificate at container side 24/5 = 4.80. |
@@ -128,8 +137,8 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives eight confirmed hypotheses, eight refuted
-hypotheses, one open hypothesis, seven open questions, and thirty-five blocked
+The generated ledger currently derives eight confirmed hypotheses, ten refuted
+hypotheses, two open hypotheses, fifteen open questions, and thirty-seven blocked
 hypotheses. No hypothesis waits on review and five are unresolved.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
 pinned the `m = 5` covering wall to a bracket of width 0.015 where it had registered
@@ -226,11 +235,15 @@ case or experiment separately.
 | [BC-230 Source-Distinct Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-source-distinct-review.md) | dated review record | record | retained | — |
 | [BC-230 Post-Freeze Control Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-postfreeze-control-review.md) | dated review record | record | retained | — |
 | [BC-232 Retained-State Fractional-Cutting Disposition](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-disposition.md) | research synthesis | record | retained | — |
+| [BC-232 Leg-02 Microreceipt 001](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-leg-02-microreceipt-001.md) | research synthesis | record | retained | — |
+| [Agenda 025 T+2-to-T+4 Fractional Manager Gate](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/gate-hour-04.md) | research synthesis | record | retained | — |
+| [Agenda 024 BC-220 Integration Decision](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/gate-hour-04-decision.md) | research synthesis | record | retained | — |
 | [BC-233 Inset-Seed Screen and Released-Support Disposition](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-233-disposition.md) | research synthesis | record | retained | — |
 | [Agenda 025 T+2 Commissioning Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/checkpoint-hour-02.md) | research synthesis | record | retained | — |
 | [BC-242 Full-Size Density Proof Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-242-full-size-density-proof-contract.md) | research synthesis | record | retained | — |
 | [BC-245 Typed Stationary-Backbone Theorem Packet](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-245-typed-backbone-theorem-packet.md) | research synthesis | record | retained | — |
 | [Agenda 026 T+0 to T+2 Commissioning Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/checkpoint-hour-02.md) | research synthesis | record | retained | — |
+| [Agenda 026 T+2 to T+4 Closure Gate](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/gate-hour-04.md) | research synthesis | record | retained | — |
 | [A Quantitative Local Theorem at Trump’s 11-Square Packing](packing/cases/trump11/isolation-theorem.md) | research synthesis | record | retained | — |
 | [Frontier: What Is Known About `s(n)`, Case by Case](packing/frontier/README.md) | frontier semantics and contribution path | definitive | maintained | — |
 | [Current Square-Packing Frontier](packing/frontier/STATUS.md) | generated status view | generated | generated | — |
@@ -289,13 +302,18 @@ case or experiment separately.
 | [Review 2026-09-04 — PR #80, the Stacked Hardening of the s(11) ≥ 381/100 Claim](docs/project/reviews/review-2026-09-04-pr80-stacked-hardening.md) | dated review record | record | retained | — |
 | [Adversarial review of the \(s(11)\ge 3.81\) claim](docs/project/reviews/review-2026-09-05-gpt6-pro-adversarial-review.md) | dated review record | record | retained | — |
 | [Review: external strategies for pushing the \(s(11)\) lower bound past 3.81](docs/project/reviews/review-2026-09-05-strategy-gpt-56-pro-gemini-grok.md) | dated review record | record | superseded | [X-016 — After 3.81: Two Managers, Six Gates, One Proof Boundary](packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md) |
-| [Adversarial Senior Review of the Agenda 024 Portfolio](docs/project/reviews/review-2026-09-06-agenda024-adversarial-senior-strategy.md) | dated review record | record | retained | — |
+| [Adversarial Senior Review of the Agenda 024 Portfolio](docs/project/reviews/review-2026-09-06-agenda024-adversarial-senior-strategy.md) | dated review record | record | superseded | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) |
+| [Independent Review of the T-022 Exact-Containment Limit](docs/project/reviews/review-2026-09-06-t022-dilation-limit.md) | dated review record | record | retained | — |
+| [Independent Review of the Fixed-Weight Core-Shrink Obstruction](docs/project/reviews/review-2026-09-06-core-shrink-obstruction.md) | dated review record | record | retained | — |
 | [Research: Adversarial Review of the s(11) ≥ 381/100 Explainer](docs/project/reviews/review-2026-09-06-claude-code-adversarial-review.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
-| [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | current | maintained | — |
+| [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |
+| [Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md) | dated handoff record | current | maintained | — |
 | [Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
+| [Lean Feasibility Spike for the `s(11) ≥ 381/100` Certificate](packing/cases/n11_fractional_certificate/lean-spike/README.md) | component scope and use | supporting | maintained | — |
 | [Proof Card: s(11) ≥ 381/100](packing/cases/n11_fractional_certificate/t-018-proof-card.md) | generated status view | generated | generated | — |
+| [T-022 Dilation-Limit Corollary, Derived from T-018](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) | research synthesis | record | retained | — |
 | [Verifiable Claim: $s(11) \ge 19/5$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md) | generated status view | generated | generated | — |
 | [Verifiable Claim: $s(11) \ge 381/100$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md) | generated status view | generated | generated | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -311,6 +329,7 @@ case or experiment separately.
 | [Feature: Promotion Pipeline Implementation](docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md) | implementation plan | current | transient | — |
 | [Feature: The Interval Certification Bridge](docs/project/specs/active/plan-2026-08-28-interval-certification.md) | implementation plan | current | transient | — |
 | [Feature: Gate Validation Speed](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md) | implementation plan | current | transient | — |
+| [Plan: Research Lanes Beyond 3.81](docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md) | implementation plan | supporting | transient | — |
 | [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](packing/atlas/README.md) |
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
 | [Spike: Interactive `n = 5` Motion Lab](docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md) | implementation plan | record | retained | — |
@@ -372,7 +391,7 @@ routine task.
 | W7 | `pipeline-improvement` | Named packing-research consumers, the smallest reusable capability or cleanup they need, controls or an independent oracle, a budget, and expected comparability impact | Add, strengthen, simplify, or repair only the bounded packing pipeline surface; do not collect a target verdict while it is mutable, optimize an unchanged implementation without a W5 baseline, or generalize beyond named consumers | Code, entry point or refactor; replayable positive and negative controls; exact validation command; cost and complexity receipt; evidence limits; and a readiness or retained-blocker decision | W2 before a new or materially changed trust boundary reaches W6; W5 if measured throughput remains the blocker; otherwise W6 |
 | W8 | `documentation-pass` | A period of research that closed several commitments, the artifacts it left, and the reader-facing documents that have not caught up | Reconcile the root tier — README, tutorial, synopsis, and the conventions they cite — against the artifacts and against each other; correct, cut, reorder and clarify, but never introduce a claim the record does not already carry, and never soften a claim boundary to make a document read better | A checklist run over each root document, every drift either fixed or filed as a defect, generated views regenerated, and an explicit statement of what was checked and what was left | W2 for any claim the pass could not verify against an artifact; otherwise the next owning workflow |
 | W9 | `remediation` | A confirmed defect or issue inventory, risk ordering, owning beads, and a bounded repair wave | Triage and repair defects systematically without changing scientific criteria or hiding unresolved evidence; group only compatible work and preserve each item’s independent disposition | Fixed items with regressions, contained items with evidence, rerouted evidence work, explicit blockers, regenerated defect views, and validation receipts | W10 reviews the wave and selects what follows |
-| W10 | `review-planning-oversight` | A terminal agenda or session, its artifacts and receipts, live tbd state, and the documents it may have changed | Classify every attempted block, reconcile results and files, review document impact, reprioritize candidates, and select one next entry; do not execute that successor inside the closeout | Per-block outcomes and stop reasons, actionable dispositions, documentation decisions, grouped changes, validation, ranked candidates, operator status, and one selected next entry | The selected owning workflow, often W9 for backlog repair or W8 for substantive documentation drift |
+| W10 | `review-planning-oversight` | A launch or checkpoint scope, source ideas and H-items, stable evidence, agenda and beads; all writers terminal for full closeout | Assess mathematical directions, codify questions, and select bounded parallel work; at terminal closeout also reconcile every outcome and document impact. Do not execute the selected successors here. | H-linked agenda commitments, priorities, prerequisites, owners and one coordinating next entry; a linked tbd plan may retain rationale. Terminal work additionally records outcomes, dispositions and documentation decisions. | The selected coordinating entry dispatches the owning workflows, including independent BCs in parallel |
 
 Implementation is an action inside the workflow that owns its promised result, not an
 undefined handoff: W1 and W2 can make bounded research corrections, W3 can implement a
@@ -398,11 +417,14 @@ W9 owns bounded repair waves over confirmed defects and issues.
 It does not turn a large backlog into one undifferentiated implementation phase: risk is
 ordered first, compatible defects are batched only when they share a trust surface, and
 every selected item exits fixed, contained, rerouted, blocked, or obsolete.
-W10 owns the closeout after an agenda or remediation wave.
-Its documentation review is a mandatory impact check over the root documents; W8 is the
-separate substantive reconciliation workflow when that check finds real drift.
-W10 completes the mechanical reconciliation and records one selected successor, but it
-does not start that successor.
+W10 owns mathematical portfolio planning at launch and checkpoints, and full closeout
+after an agenda or remediation wave.
+Its [planning process](packing/campaign/review-planning-oversight.md#one-planning-block)
+distills source assessments into H-items, agenda commitments, and beads.
+At terminal closeout, the documentation review is a mandatory impact check over the root
+documents; W8 owns substantive reconciliation when that check finds real drift.
+W10 selects one coordinating entry, which can dispatch independent commitments in
+parallel after the planning block closes.
 
 `general-improvement` remains only for repository maintenance outside the packing
 pipeline whose output fits none of W1–W10. It must not hide core work or a session
@@ -439,7 +461,8 @@ W4 process-review ──> W7 pipeline-improvement ──> W2 ──> W6 research
         └─ accepted repair ──┘        W5 efficiency-loop ──┘
                          promoted/high-risk result ──> W2 ──> W3
 
-W1–W9 terminal work ──> W10 review/planning/oversight ──> one selected workflow
+launch/checkpoint ────> W10 review/planning/oversight ──> coordinated parallel work
+W1–W9 terminal work ──> W10 terminal closeout ──────────> selected coordinator
 confirmed defect wave ──> W9 remediation ────────────────┘
 ```
 
@@ -449,90 +472,59 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-**What the last block cost, and what that bought.** The pull-request surface went from
-`1369.60 s` to about `221.70 s` of CI wall, a factor of 6.2, with no check deleted and
-none made optional. Six measured changes did it: the marker split that moved the slow
-behavioural tail off the pull request (`BC-214`); xdist inside the quick lane rather
-than a second GitHub job (`BC-218`, which priced a second job at zero wall and three
-extra billed minutes); three outer jobs; worker sizing at `cpus - jobs + 1`, so a lane
-does not oversubscribe the box its two neighbours are on; the memoized-frontier atlas
-build; and the split of the surface into two concurrent jobs.
-[session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md)
-holds the block’s record and names the gate that certified it — run `34010683180` on
-`main` at `c743d7bb`, with `validate`, `exhaustive` and `macos-portability` all green,
-the first green exhaustive tier since that tier went red.
-
-**The result the block landed.** `T-021`: `s(20) >= 97/20` and `s(21) >= 97/20`, from a
-first-party weighted fractional unavoidable-set certificate retained through the gate on
-both routes, `+0.05` at each of the two sizes.
-It merged as `663ca37e` in PR 83. `T-020`’s `24/5` rung is retained beside it and still
-carries `n = 19`, which the new certificate’s mass is too heavy to reach.
-`H-062` is accepted with it: `BC-213` walled the last pre-registered rung at `973/200`
-on both constructions, leaving the `m = 5` covering wall bracketed to
-`[97/20, 973/200]`, width `0.015` against the `0.02` the hypothesis registered.
-
-**What is still open, with its price.**
-
-- The pull-request wall is about four minutes against a two-to-two-and-a-half-minute
-  target.
-- `BC-215`’s R1 tree-id cache is measured and priced and not wired: 20.2 per cent of
-  deep-run work is repeated, 92 per cent of that repetition is trees that did not move,
-  and the `touches` sets account for 1.6 per cent.
-  The tree id is the lever; `touches` is not.
-- Per-test CPU observations remain diagnostic: an earlier fixture’s child work can be
-  charged to the call that reaps it, and forkserver descendants can be omitted entirely.
-  The gate cannot use these counters to accept or reject an individual test on CPU cost.
-  It retains the `12 s` call-wall ceiling against a `2 s` marking threshold.
-  Reliable attribution across phases and descendant processes remains open.
-
-**What the block cost the trunk.** [D-470](defects.md): a test pinned to the moving
-`certificate.json` pointer still asserted the rung `T-021` displaced, and `main` sat red
-for six hours and seventeen minutes across three merges, because the exhaustive tier
-does not run on a pull request.
-The workflow already concedes the class in writing — a pull request can be green while a
-deferred test is broken — and what bounds it is `deep-gate.yml`, which runs the four
-deferrals against a pull request rather than after it, on a label rather than on every
-pull request. [D-471](defects.md): `D-459`’s conflicted-branch CI blackout fired three
-more times in the same day, and until this branch nothing but a person detected it;
-`branch-mergeability.yml` asks `git merge-tree` on every push, off the branch tip rather
-than off a merge ref that by definition cannot be built.
-Both entries stay open because neither workflow has reached `main`. [D-472](defects.md)
-is the block’s own reasoning failure rather than the trunk’s: a twenty per cent
-difference between two hosted runs was attributed to pool contention and written into a
-commit message as established, and the next run refuted it — with the pools serial, on
-the same code path as the 81.18s reading, the step returned 108.91s. Run-to-run spread
-on these runners is about thirty-four per cent, so one sample per configuration cannot
-resolve the effect being claimed.
-It is recorded because of where it happened: three commits earlier the same block
-measured exactly this for per-test timing and recommended a cpu-time ceiling, and the
-finding was then not carried up a level, from a test to a job, within the hour.
-
-**Selected next entry:** `think-xejq`, `BC-215` in
-[Agenda 023](packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md):
-the R1 tree-id cache, which the efficiency block measured and priced but did not wire.
-
-[Agenda 024](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md) is the
-operator-selected continuation after that rung.
-It coordinates two disjoint programs: the exact fractional frontier in
+The
+[T+2-to-T+10 continuation addendum](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
+is the cold-review entry point for the partially completed post-T+2 continuation.
+The
+[Agenda 024 allocation](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
+owns prospective priorities.
+Its planning block BC-250 links the
+[tbd assessment](docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md)
+of both prior reviews, and distills their directions into H-093–103 and the existing
+agendas. Coordinator `think-jgnv` next dispatches scalar BC-251, adaptive controls
+BC-231, density support BC-254, and restricted assessment BC-255 as capacity and their
+readiness conditions permit.
+The addendum owns command custody and recovery; no successor experiment started during
+the planning block. The user’s credit-interruption amendment excludes unavailable time
+from the wall allowance.
+The addendum records the accounting boundaries, revised deadlines, and conservative
+active-minute position `124:14`, currently held for recovery integration.
+BC-232’s completed recovery produced no row-converged covering; BC-241’s independent
+local-scope review was published in `ad600896`. H-092’s fixed-weight refined-core
+negative passed independent review and awaits integration under `think-xsma`. The
+eventual handoff records the active minute actually reached.
+The addendum preserves the first block’s frozen packets and binds the active-time, role,
+safety, BC-241, BC-232, BC-243, and gate contracts.
+[Agenda 024](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md) remains its
+control plane. It coordinates two disjoint programs: the exact fractional frontier in
 [agenda 025](packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md) and
 density, typed stationarity, and Trump capture in
 [agenda 026](packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md).
-`BC-219` completed against the current branch inputs, but any landing that changes a
-named input returns it to preflight before another manager starts.
 
-The first execution slice consumes the first two active portfolio hours of the same
-roughly 24-active-hour agenda.
-It exercises the coordinator, both managers, one floating worker, retained-state resume
+Two older selections remain only as provenance.
+[Session 087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md)
+completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0.015`; its
+selected entry is retained in the machine-checked marker below:
+
+**Selected next entry:** `think-xejq`, `BC-215` in
+[Agenda 023](packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md) is
+historical provenance, not the live research authority.
+Likewise, `BC-219` was the preflight for Agenda 024’s original launch inputs.
+Its completion does not replace the continuation addendum’s current gate contract.
+
+The completed commissioning slice consumed the first two active portfolio hours of the
+same roughly 24-active-hour agenda.
+It exercised the coordinator, both managers, one floating worker, retained-state resume
 and checkpoint seams, the local Trump theorem packet, central integration, and
 interruption recovery.
-Success means the planned evidence and handoff packets exist and validate; it does not
-require a new lower bound or a global rigidity claim.
-After the `T+2` integration checkpoint lands, 22 active portfolio hours remain and the
-same cells resume without resetting their clocks or budgets.
+The T+2 integration checkpoint left 22 active portfolio hours; the continuation resumes
+those cells without resetting their clocks or budgets.
 
-At `T+0`, the only takeable research cells are `BC-230`, `BC-232`, `BC-233`, `BC-240`,
-`BC-242`, and `BC-245`. The coordinator alone allocates experiment IDs, edits shared or
-generated records, integrates manager packets, and moves a gate.
+At the historical `T+0` launch, the only takeable research cells were `BC-230`,
+`BC-232`, `BC-233`, `BC-240`, `BC-242`, and `BC-245`. Agenda 024’s current allocation
+now governs which cells may run.
+The coordinator alone allocates experiment IDs, edits shared or generated records,
+integrates manager packets, and moves a gate.
 Codex uses `max` reasoning for theorem scope, proof boundaries, mathematical
 disposition, and strategic routing; bounded implementation and independent reviews use
 `xhigh`, while replay, manifest, formatting, and value checks may use `high` when they
@@ -554,6 +546,18 @@ The push-triggered
 branch that cannot be merge-built even when GitHub cannot create its pull-request merge
 ref. Its remaining blind spot is an idle branch after `main` moves and before the next
 push. Session 087 retains the full-gate evidence from run `34010683180` at `c743d7bb`.
+
+The later upstream efficiency corrections preserve that historical accounting.
+Session 087 reduced the then-required CI surface from `1369.60 s` to about `221.70 s`
+without removing checks.
+The R1 tree-id cache remains a separate efficiency task: 20.2 percent of measured
+deep-run work repeated, and 92 percent of that repetition came from unchanged trees.
+Per-test CPU readings are diagnostic because child costs cannot yet be attributed
+reliably; the `12 s` call-wall backstop remains enforced.
+[D-472](defects.md) records why one hosted timing sample cannot establish a speedup.
+[Development’s validation tiers](development.md#validation-tiers) own the current
+configuration and measurements; none of these historical selections supersedes Agenda
+024’s allocation.
 
 ### Handoff Record
 
@@ -1910,6 +1914,25 @@ applied to several claims.
 dependency and readiness, rendered into the ledger.
 It is a coordination artifact, not a second hypothesis registry and not a scheduler.
 
+**Block commitment (`BC`).** One bounded question or deliverable in an agenda, with
+entry and exit conditions, an effort estimate, dependencies, and an accountable bead.
+Its `hypotheses` field links the scientific questions it serves.
+A planning or tool commitment can produce no experiment; a research commitment may
+produce several, each with its own registered claim.
+Completing a BC settles its declared scope, not the whole H-item or agenda.
+
+**Program and parallel group.** Labels on BC items.
+A program groups a continuing research direction; a parallel group identifies work that
+can have a separate owner.
+A strategic lane is such an assignment, not a new record type.
+Actual capacity, dependencies, and shared writes determine which groups run together.
+
+**Planning block.** A W10 commitment that assesses the current questions and selects
+future work.
+A linked tbd plan retains rationale and alternatives; the H-items and agenda
+receive its operational decisions before it closes.
+Sessions then record how that work actually ran.
+
 **Defect.** One record in [`defects.yaml`](packing/defects.yaml)—what went wrong, what
 caught it, and what now stops it recurring—rendered to [`defects.md`](defects.md).
 
@@ -1939,8 +1962,8 @@ At `n = 11` the upper end has not moved since 1979, and the lower end moved on
 |  | value | source |
 | --- | --- | --- |
 | Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
-| Best certified lower bound | `381/100 = 3.81` | [T-018](packing/frontier/RESULTS.md), a first-party weighted fractional unavoidable-set certificate, decided twice from its frozen bytes |
-| Bound gap | `0.067083590023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
+| Best certified lower bound | `38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703…` | [T-022](packing/frontier/RESULTS.md), a weak limit corollary of T-018’s first-party certificate and a sharpened containment lemma |
+| Bound gap | `0.067057866408` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
 
 ![Walter Trump’s exact eleven-square packing.](packing/atlas/rendering/trump11-overview.svg)
 
@@ -2679,6 +2702,19 @@ round that names the hypothesis, control roles included.
 | [H-064](packing/campaign/hypotheses/H-064-n11-fractional-packing-floor.md) | abandoned | An exact-depth fractional packing at `77/20` with total weight at least eleven puts `τ*(3.85)` at or above eleven, so the `n = 11` certificate ladder’s top lies below `3.85`; registered for `BC-200` | 2 | 96m agent, 175.3m wall |
 | [H-065](packing/campaign/hypotheses/H-065-n11-near-tight-cell-census.md) | confirmed | The near-tight cells (mass at most `1 + 1/20`) on the retained `381/100` certificate are fewer than one fifth of the reachable cells — measured at `0.040754` by `BC-201`, a fifth of the registered threshold. The clause the claim attached to that number does not follow: the cover is a search, not a check | 1 | 16.1m wall |
 | [H-070](packing/campaign/hypotheses/H-070-n11-inset-seed-release.md) | **refuted** | At side `191/50`, the best eligible inset-screen seed improves exact rational mass after unrestricted release versus an equal-stop unseeded control | 1 | 8.2m wall |
+| [H-090](packing/campaign/hypotheses/H-090-n11-fixed-atom-core-shrink.md) | refuted | The fixed T-018 atoms retain enough covered mass after shrinking the core to `99769/100000` to certify side `3.8100381`; an exact corner witness rejects this side and every core side below `1849127/1853400`, leaving a narrower shrink interval open | 1 | 30s wall |
+| [H-091](packing/campaign/hypotheses/H-091-n11-narrow-core-shrink.md) | refuted | Core side `997696/1000000` retains minimum mass above `M/11`; its measured minimum `96377/100000` instead supplies an interior witness excluding every fixed-weight core shrink that could beat T-022 using ordinary containment | 1 | 31s wall |
+| [H-093](packing/campaign/hypotheses/H-093-n11-scalar-61-16-certificate.md) | open | The retained scalar core and net admit an exact mass-below-eleven certificate at side `61/16` | 0 | — |
+| [H-094](packing/campaign/hypotheses/H-094-n11-weight-and-site-redesign.md) | open question | Which relative weights and site changes improve the fractional certificate beyond the fixed-weight shrink obstruction? | 0 | — |
+| [H-095](packing/campaign/hypotheses/H-095-n11-adaptive-core-certificate.md) | blocked | Nonconstant direction-specific cores admit an exact mass-below-eleven certificate at side `61/16` | 0 | — |
+| [H-096](packing/campaign/hypotheses/H-096-n11-angle-cell-kernels.md) | open question | Can whole-angle-cell kernels cover more useful positive mass with a tractable exact verifier? | 0 | — |
+| [H-097](packing/campaign/hypotheses/H-097-n11-existential-witness-menus.md) | open question | Can pose-dependent witness choice beat a universal witness while retaining complete pose-box coverage? | 0 | — |
+| [H-098](packing/campaign/hypotheses/H-098-n11-segment-measures.md) | open question | Can segment-supported measures improve the bound with exact intersection-length coverage? | 0 | — |
+| [H-099](packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md) | blocked | The exact deduplicated D4 closure of Trump’s eleven squares admits dual mass above eleven at a.e. depth at most one | 0 | — |
+| [H-100](packing/campaign/hypotheses/H-100-below-trump-area-density.md) | open question | Can a full-size area density give mass below eleven at a side between the retained bound and Trump? | 0 | — |
+| [H-101](packing/campaign/hypotheses/H-101-trump-equality-density.md) | open question | Can mass-eleven density at Trump’s side and a complete equality analysis establish uniqueness? | 0 | — |
+| [H-102](packing/campaign/hypotheses/H-102-complete-restricted-angle-support-families.md) | open question | Which complete restricted angle or wall-support family yields a useful theorem, starting with H-036? | 0 | — |
+| [H-103](packing/campaign/hypotheses/H-103-complete-typed-global-capture.md) | open question | Can a complete typed cover exclude every minimizing branch or place its entire surviving box inside the accepted local Trump neighborhood? | 0 | — |
 
 ### Confirmed
 
@@ -2920,9 +2956,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 66 terminal rounds registered in `series-000`.
+There are 68 terminal rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1162.2 wall-minutes.
+They record 2152.1 agent-minutes and 1163.2 wall-minutes.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
 result; exp-057 stopped before target access; exp-058 stopped on the review it was
 waiting for, which arrived and accepted it.
@@ -3024,6 +3060,8 @@ archive beside it.
 | [exp-064](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-064-h-063-two-threshold-class-program.md) | 11 | target | H-063 | build X-014’s Lemma 3 as per-direction-class thresholds and run its two pre-registered controls | the nine-point bound is exactly nine, but the two-end-cell class cannot refute (11, 0) at Trump’s side and provably never could: `B(2 + (4/3)√2) = 3.876681` sits `0.000403` below the side the control was asked to reach | rejected |
 | [exp-070](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-070-h-064-n11-fractional-resume.md) | 11 | target | H-064 | one retained-state, exact-depth fractional cutting leg at side `191/50` | raised the verified exact lower endpoint to `21342289572/2055263195 ≈ 10.384212408377215`; the only row-converged computational upper endpoint remains `11.055616942909783`, and the four-CPU-hour routing gate remains open | abandoned |
 | [exp-071](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-071-h-070-n11-inset-seed-release.md) | 11 | target | H-070 | three inset screens followed, when eligible, by matched released-seed and unseeded arms | released and unseeded arms converged after eight rounds to byte-identical candidates of exact mass `11142893/1000000`, missing the strict-improvement criterion | rejected |
+| [exp-110](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-110-h-090-core-shrink.md) | 11 | target | H-090 | exact source and smaller-core sweeps on frozen T-018 atoms, with normalization accepted above `M/11` | minimum `85353/100000` at an axis-aligned corner cell falls below `434547/440000`; a direct atom sum excludes all core sides below `1849127/1853400` | rejected |
+| [exp-111](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-111-h-091-core-shrink.md) | 11 | target | H-091 | exact fixed-atom replay above exp-110’s corner event, followed by direct witness-event inspection | minimum `96377/100000` at net direction 97; the witness’s first usable event exceeds the entire ordinary-containment improvement window, closing that fixed-weight route | rejected |
 
 ### Cost and provenance
 
@@ -3095,10 +3133,12 @@ archive beside it.
 | exp-064 | Lane A of Agenda 021, BC-198, one core shared with two lanes, 18:07Z–18:35Z | 1,665 s | 25 m | criterion | `07155377` |
 | exp-070 | one 105-minute retained-state leg; no leg 2 before T+2 | 6560.3 s | — | timebox | `04e6a2ce` |
 | exp-071 | three 540-second screens plus, if eligible, two matched 2,520-second arms | 491.5 s | — | criterion | `04e6a2ce` |
+| exp-110 | one frozen core side, source replay and candidate replay | 29.86 s | — | criterion | `48a161ba` |
+| exp-111 | one frozen core side above the lost corner event, source replay and candidate replay | 30.58 s | — | criterion | `aeb683d5` |
 
-### What the 66 rounds jointly establish
+### What the 68 rounds jointly establish
 
-The 66 rounds use 2152.1 agent-minutes and 1162.2 wall-minutes under the campaign’s
+The 68 rounds use 2152.1 agent-minutes and 1163.2 wall-minutes under the campaign’s
 retained effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
@@ -3794,14 +3834,16 @@ agrees, and new components inheriting the perimeter—that apply to code not yet
 
 ## Where This Stands
 
-**As of 2026-09-04 the project’s largest live result is the fractional lower-bound lane,
+**As of 2026-09-06 the project’s largest live result is the fractional lower-bound lane,
 and it is not the cartography spine.** Its weighted-resource lineage runs through Göbel,
 Kearney–Shiu, Nagamochi and Bentz; the recent pure-atomic rational direction-net
 architecture follows Burns, and the LP instance and parameter line follows Massaccesi.
 This project’s instances and generator moved seven registered cases in one day.
 `s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first public movement of
 that bound located by the recorded search after Stromquist stated `2 + 4/sqrt(5)` in
-2003 and the only S5 result in the register, `n = 11` being the smallest open case.
+2003\. [T-022](packing/frontier/RESULTS.md) retains a small exact refinement to
+`3.810025723614703…`; its proof and endpoint limitations remain in the technical record.
+The shared S5 rubric category does not make these contributions comparable in size.
 `s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound located that
 was proved about twelve squares rather than inherited from eleven.
 `s(17) >= 459/100`, and `n = 18` and `n = 19` at the same side without a monotonicity

@@ -192,13 +192,15 @@ even when the answer is negative or invalid.
 7. **Commit and re-screen.** Regenerate owned views, run the narrowest sufficient gate,
    commit and push the checkpoint, then choose again from the now-current queue.
 
-An agenda boundary adds W10 after the last research slice.
-W10 classifies every block, assigns a terminal disposition and follow-up bead where
-needed, reviews the reader-facing documents, reconciles live tbd, and reprioritizes the
-candidate set before one successor may start.
+Use [W10 planning](review-planning-oversight.md#one-planning-block) at launch and when a
+checkpoint needs mathematical reassessment or a changed allocation.
+Distill its assessment into H-items, agenda commitments, and beads before dispatching
+the next parallel work.
+At a terminal agenda boundary, W10 also classifies every block, assigns dispositions and
+follow-up beads, and reviews the reader-facing documents.
 The operator may confirm or revise that ranking; when no operator is available, the
 recorded fallback keeps an autonomous mandate moving without inventing a new criterion.
-The [W10 runbook](review-planning-oversight.md) owns the exact closeout.
+The W10 runbook owns both the planning process and the additional terminal closeout.
 
 New tangents do not disappear and do not hijack the clock.
 Record one as a bead, defect, exploration report, hypothesis, or open question according
@@ -225,9 +227,8 @@ budget, and instrument are ready and frozen.
 A missing cross-round capability or a material change to a shared trust boundary stops
 W6 and hands off to W7, then W2 when independent review is required.
 Systematic repair of a confirmed defect backlog enters [W9](remediation-pass.md).
-Terminal reconciliation, documentation impact review, reprioritization, and successor
-selection enter [W10](review-planning-oversight.md); W10 does not execute the successor
-it selects.
+Mathematical portfolio assessment, reprioritization, and terminal reconciliation enter
+[W10](review-planning-oversight.md); W10 does not execute the successors it selects.
 
 A user request may cause the same transition immediately, but it does not erase the
 phase already performed.
@@ -258,8 +259,7 @@ A campaign agenda is the small coordination layer between them: an ordered set o
 bounded commitments that can be reprioritized at a checkpoint or divided among agents
 without changing a scientific claim.
 
-The active [basin-map confidence ladder](agendas/agenda-001-basin-confidence-ladder.md)
-separates three purposes:
+Agenda items distinguish three purposes:
 
 - `tool_validation` tests whether this repository emits, retains, replays, and checks
   the evidence it says it does;
@@ -274,6 +274,20 @@ evidence; the body carries the rationale.
 Hypotheses still own criteria, experiment artifacts still own measurements, `tbd` still
 owns work dependencies, and the active session still owns the clock.
 `packing-campaign` does not consume an agenda.
+
+Each research commitment links its actual H-items.
+An instrument, review, or planning commitment may name its consumers’ H-items, but needs
+no artificial hypothesis of its own.
+Use `program` to group related work and `parallel_group` to identify separable
+assignments; these are views over commitments, not additional work hierarchies.
+One BC may span sessions and several experiments, but each experiment still tests one
+registered claim. A bead owns the work and its delegates; it does not own the verdict.
+
+A [planning block](review-planning-oversight.md#one-planning-block) may link a tbd plan
+for the mathematical assessment and alternatives.
+Its exit is the updated queue here, not an instruction to maintain another schedule in
+the plan. Use the existing fields; add a schema field only when a named consumer needs
+it.
 
 Update an agenda only at a checkpoint.
 A completed item means its bounded question has a retained answer, not that a basin map
@@ -334,7 +348,7 @@ methods.
 | `outcome` | outcome | `determination`, assurance, claim boundary, and links to the evidence that supports it |
 | guards and mutations | guard | every required control, including failures and refusals rather than only passing receipts |
 | effort | cost | terminal experiment: `timebox`, `wall_seconds`, `agent_minutes`, `pair_tests`, and `stopped_by` as applicable; gate packet: `active_portfolio_minutes`, aggregate `agent_minutes`, and actual command wall and CPU time |
-| artifacts and continuation | handoff | exact paths and hashes, open obligations, and `resume_from` or `reopen_when` when work remains |
+| artifacts and continuation | handoff | Git revision and repository-relative paths, open obligations, and `resume_from` or `reopen_when` when work remains; checksums only at a named trust boundary under OR-16 |
 
 The following search-proposer vector applies only to numerical pose-search rounds.
 Fractional, theorem, exact-certificate, and review rounds use their own registered

@@ -89,16 +89,20 @@ its search strategy.
 |  | value | status |
 | --- | --- | --- |
 | best-known packing (upper bound) | `3.87708359002281417730789706010096…` | Trump 1979, a construction |
-| best lower bound | `381/100 = 3.81` | [T-018](packing/frontier/RESULTS.md), a verified certificate; see [below](#how-a-weighted-atomic-lower-bound-proof-works) |
-| bound gap | `0.067083590023` | still open |
+| proved lower bound explained here | `381/100 = 3.81` | [T-018](packing/frontier/RESULTS.md), an exact weighted atomic certificate; see [below](#how-a-weighted-atomic-lower-bound-proof-works) |
+| gap between these bounds | about `0.067084` | still open |
+
+The technical record retains the small refinement `s(11) ≥ 3.810025723614703…` in the
+[T-022 proof packet](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md).
+It is a weak limit bound and does not decide fit at that endpoint; the table uses the
+simpler certificate bound proved below.
 
 Two different quantities get called a gap in this subject, and this document keeps them
-apart. The **bound gap** above is the distance between the best upper and lower bounds,
-which is what remains unknown about `s(11)`. A **search gap** is
-`best_side − standing best`, the signed distance from one packing this project found to
-the best one anybody has published, and it is what [§3](#3-cells-basins-and-two-traps)
-onward measures. The first is a property of the problem; the second is a property of a
-run.
+apart. The **bound gap** is the distance between the best upper and lower bounds, which
+is what remains unknown about `s(11)`. A **search gap** is `best_side − standing best`,
+the signed distance from one packing this project found to the best one anybody has
+published, and it is what [§3](#3-cells-basins-and-two-traps) onward measures.
+The first is a property of the problem; the second is a property of a run.
 
 **The previous lower bound also led to a proof repair.** Stromquist’s 2003 Theorem 2 was
 the published source for `2 + 4/√5 = 3.788854382…`, and this repository found that its
@@ -126,9 +130,8 @@ at [§2](#2-the-configuration-space) and return here later.
 Every upper bound in this subject is a construction, and a construction can be handed
 over and checked. A lower bound has to exclude every packing at once, and this is the
 only place in this document where one is proved rather than quoted.
-The lower bound the record now carries for `n = 11`,
-[T-018](packing/frontier/RESULTS.md), is a finite exact certificate, and it is short
-enough to follow from first principles.
+The proof of `s(11) ≥ 3.81`, [T-018](packing/frontier/RESULTS.md), uses a finite exact
+certificate and is short enough to follow from first principles.
 
 Fix a candidate container `K = [0, L]²`—here `L = 381/100`. An **atom** is an exact
 point `z` in `K` together with a nonnegative rational **weight** `w(z)`. An atom has no
@@ -1076,9 +1079,10 @@ throughput.
 `4.6755`. What is unknown is whether the named alternatives, none of which is built,
 would do better.
 
-**4. What `s(11)` actually is.** The interval is `[3.81, 3.877084]`, and neither end is
-known to be tight. The upper end is a construction nobody has beaten since 1979; the
-lower end moved on 2026-09-04, is certified here, and is not claimed to be sharp.
+**4. What `s(11)` actually is.** The bounds above leave a gap of about `0.067`, and
+neither end is known to be tight.
+The upper end is a construction nobody has beaten since 1979; the lower bound excludes
+smaller containers without establishing the optimum.
 
 **5. What a floating LP result means below `1e-11`.** The floor comes from HiGHS’s own
 feasibility tolerance—pinned at `1e-10`, the strictest value it accepts—under which

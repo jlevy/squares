@@ -53,6 +53,8 @@ SHRINK = Fraction(9977, 10000)
 
 
 def main(argv: list[str] | None = None) -> int:
+    driver_wall_started = time.perf_counter()
+    driver_cpu_started = time.process_time()
     parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0])
     parser.add_argument("--n", type=int, required=True)
     parser.add_argument("--side", type=Fraction, required=True, help="container side L")
@@ -68,6 +70,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--support-cap", type=int, default=96)
     parser.add_argument("--rows-rounds", type=int, default=8)
     parser.add_argument("--rows-per-direction", type=int, default=3)
+    parser.add_argument(
+        "--stop-on-covering-below-n",
+        action="store_true",
+        help="stop after exact separation when a row-converged covering objective is below n",
+    )
     parser.add_argument("--warm", type=Path, default=None, help="state file to warm-start from")
     parser.add_argument(
         "--seed-certificate",
@@ -135,6 +142,7 @@ def main(argv: list[str] | None = None) -> int:
         "support_cap": args.support_cap,
         "rows_rounds": args.rows_rounds,
         "rows_per_direction": args.rows_per_direction,
+        "stop_on_covering_below_n": args.stop_on_covering_below_n,
         "origin": origin,
         "seed_certificate": None
         if args.seed_certificate is None
@@ -152,7 +160,8 @@ def main(argv: list[str] | None = None) -> int:
     # while it happens -- and `--log` adds the file alongside it.
     handle = args.log.open("a") if args.log is not None else None
     sinks: tuple[TextIO, ...] = (sys.stdout,) if handle is None else (sys.stdout, handle)
-    started = time.perf_counter()
+    loop_wall_started = time.perf_counter()
+    loop_cpu_started = time.process_time()
     try:
         log = cutting_plane_loop(
             args.n,
@@ -165,16 +174,18 @@ def main(argv: list[str] | None = None) -> int:
             support_cap=args.support_cap,
             cap=args.cap,
             max_iterations=args.iterations,
-            deadline=started + 60.0 * args.minutes,
+            deadline=loop_wall_started + 60.0 * args.minutes,
             rows_max_rounds=args.rows_rounds,
             rows_per_direction=args.rows_per_direction,
+            stop_on_covering_below_n=args.stop_on_covering_below_n,
             log_sinks=sinks,
             state_path=args.state,
         )
     finally:
         if handle is not None:
             handle.close()
-    seconds = time.perf_counter() - started
+    loop_wall_seconds = time.perf_counter() - loop_wall_started
+    loop_cpu_seconds = time.process_time() - loop_cpu_started
 
     frozen = None
     verdict = log.verdict
@@ -202,9 +213,21 @@ def main(argv: list[str] | None = None) -> int:
             json.dumps(family_record(log.best_family, provenance), indent=1) + "\n"
         )
         frozen = str(args.freeze)
+    driver_wall_seconds = time.perf_counter() - driver_wall_started
+    driver_cpu_seconds = time.process_time() - driver_cpu_started
     summary = {
         "settings": settings,
-        "seconds": seconds,
+        "seconds": loop_wall_seconds,
+        "timing": {
+            "scope": (
+                "main entry through measurement immediately before summary serialization; "
+                "excludes import/interpreter/uv startup, final summary write, and teardown"
+            ),
+            "loop_wall_seconds": loop_wall_seconds,
+            "loop_cpu_seconds": loop_cpu_seconds,
+            "driver_wall_seconds_before_summary": driver_wall_seconds,
+            "driver_cpu_seconds_before_summary": driver_cpu_seconds,
+        },
         "stopped": log.stopped,
         "best_scaled_total": str(log.best_scaled_total),
         "best_scaled_total_float": float(log.best_scaled_total),
@@ -225,7 +248,8 @@ def main(argv: list[str] | None = None) -> int:
     print(f"stopped: {log.stopped}")
     print(
         f"best scaled total {log.best_scaled_total} = {float(log.best_scaled_total):.6f} "
-        f"at iteration {log.best_iteration}; {seconds:.0f} s"
+        f"at iteration {log.best_iteration}; {loop_wall_seconds:.0f} s wall, "
+        f"{loop_cpu_seconds:.0f} s CPU"
     )
     if verdict is not None:
         print(f"verify_ceiling: proved={verdict.proved} failures={verdict.failures}")

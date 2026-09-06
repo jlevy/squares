@@ -95,10 +95,10 @@ def relative_link(target: Path, document: Path) -> str:
 
 
 def standing(facts: Facts, headline: Facts) -> str:
-    """Where this bound stands among the project's, for a reader who has only this file."""
+    """Compare the two packaged certificate rungs, not the full result register."""
     if facts is headline:
-        return "It is the tighter of the two bounds the project proves."
-    return "It is the looser of the two bounds the project proves, with the simpler numbers."
+        return "It is the tighter of the two certificate rungs packaged here."
+    return "It is the looser of the two certificate rungs packaged here, with simpler numbers."
 
 
 def point(x: Fraction, y: Fraction) -> str:
@@ -231,7 +231,7 @@ def render_claim(facts: Facts, sibling: Facts, headline: Facts) -> str:
         "OTHER_CLAIM_URL": edition_file(claim_path(sibling)),
         "OTHER_L_FRAC": frac(sibling.outer_side),
         "VERIFIER_NAME": VERIFIER_CLAIM.name,
-        "VERIFIER_URL": edition_file(VERIFIER_CLAIM),
+        "VERIFIER_URL": relative_link(VERIFIER_CLAIM, claim_path(facts)),
         "VERIFIER_SOURCE": VERIFIER_CLAIM.read_text(encoding="utf-8").rstrip("\n"),
         "CERTIFICATE_JSON": facts.source.read_text(encoding="utf-8").rstrip("\n"),
         "BEST_PACKING_TEX": bound_substitutions()["BEST_PACKING_TEX"],

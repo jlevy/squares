@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-09-03'
+last_reviewed: '2026-09-06'
 results:
   - id: T-001
     claim: >-
@@ -1107,3 +1107,58 @@ results:
       exactly 25.000000 whatever the covering value is. No uniform inset-1/2 grid at any
       count the lane could afford puts a site in every strip. The exactly round value
       this register has learned to distrust has, at m = 5, a mechanism.
+
+  - id: T-022
+    claim: >-
+      s(11) >= 38100*sqrt(8100042893309449)/899996306539 =
+      3.810025723614703, as a weak limit corollary of T-018's retained certificate. For
+      every positive rational q with q^2 below
+      810004289330944900000000/809993351783841654158521, common scaling preserves the
+      source hypotheses other than containment, and the exact sharpened containment
+      lemma rules out a packing at side qL. Rational density and upward embedding
+      exclude every real side below the supremum. This is not a certificate or a no-fit
+      decision at the endpoint, and it does not prove a strict inequality there.
+    scope:
+      n_values:
+        - 11
+    verification: V4
+    confirmation: C5
+    significance:
+      score: 5
+      rationale: >-
+        The rubric's S5 anchor is movement on a central open case, and this raises the
+        exact lower endpoint of the smallest open case by about 0.0000257236147034
+        beyond T-018. The movement derives from an exact support identity and unused
+        strictness margin in an existing certificate; it is not a new certificate
+        architecture and leaves a gap of about 0.0670578664 to Trump's packing.
+      scored: '2026-09-06'
+      by: independent max-level proof review and repository replay
+    novelty: apparently-novel
+    composition: >-
+      Derived from a full replay of T-018's accepted five-condition source, scaling
+      equivariance for Condition 1, invariance of Conditions 2 and 3, inverse-dilation
+      preservation of Condition 5, and a separate sharpened containment lemma proved by
+      an exact rational-square comparison. Rational density and upward embedding then
+      supply the limit step. The mapped, non-superseded source-distinct review
+      independently re-derived the theorem and attacked the endpoint, frozen-Condition-4,
+      compactness, scale, and byte-trust boundaries, so the result reaches C5. It does
+      not reach C4 because the review is not a method-distinct second derivation.
+    evidence:
+      - E-n011-fractional-certificate
+      - E-fractional-interval-decision
+      - E-n011-fractional-dilation-limit
+    artifacts:
+      - packing/cases/n11_fractional_certificate/certificate.json
+      - packing/cases/n11_fractional_certificate/t-022-dilation-limit-corollary.json
+      - packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md
+      - packing/devtools/dilation_corollary.py
+    controls:
+      - packing/tests/test_dilation_corollary.py
+    review_artifact: docs/project/reviews/review-2026-09-06-t022-dilation-limit.md
+    next_rung: >-
+      C5 was reached by the mapped 2026-09-06 source-distinct review. A second,
+      method-distinct derivation could separately earn C4 but would not improve the
+      bound. This endpoint is only the uniform fixed-B, single-core strict-containment
+      supremum. Direction-specific cores, two-core endpoint averaging, or exact
+      fixed-atom core shrinkage might extract more from the same data; the present
+      argument cannot prove a strict bound at its own endpoint.

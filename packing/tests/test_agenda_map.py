@@ -142,8 +142,30 @@ def test_the_rendered_map_names_every_live_commitment() -> None:
     rows = load()
     text = render(rows)
     for c in rows:
-        if c.state in ("ready", "tentative"):
+        if c.state in ("in_progress", "ready", "tentative"):
             assert f"`{c.id}`" in text, f"{c.id} is takeable but missing from the map"
+
+
+def test_an_in_progress_commitment_is_labelled_resumable_in_the_live_queue() -> None:
+    """A replacement session must resume a live cell instead of taking it as fresh work."""
+    live = Commitment(
+        agenda="agenda-001",
+        agenda_status="active",
+        doc="agenda-001-x.md",
+        id="BC-001",
+        state="in_progress",
+        priority=0,
+        purpose="research",
+        owner_focus="efficiency",
+        question="Resume the retained checkpoint.",
+        bead="think-aaaa",
+        depends_on=(),
+        blocked_on="",
+        discharged_by="",
+    )
+    text = render([live])
+    assert "| agenda-001 | `BC-001` | in_progress |" in text
+    assert "`in_progress` — underway and resumable from its recorded checkpoint" in text
 
 
 def test_no_commitment_is_offered_as_takeable_after_another_discharged_it() -> None:
@@ -152,7 +174,11 @@ def test_no_commitment_is_offered_as_takeable_after_another_discharged_it() -> N
     Four agenda-005 commitments read `ready` after agenda-006 finished them, and OR-4
     sends a session to exactly that queue. Nothing but this stops it recurring.
     """
-    assert [c.id for c in load() if c.discharged_by and c.state in ("ready", "tentative")] == []
+    assert [
+        c.id
+        for c in load()
+        if c.discharged_by and c.state in ("in_progress", "ready", "tentative")
+    ] == []
 
 
 def test_every_blocked_commitment_names_something_that_can_clear() -> None:

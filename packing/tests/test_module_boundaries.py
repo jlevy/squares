@@ -588,7 +588,7 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
     Four limits of the rule, recorded rather than smoothed over:
 
     * A marker is per function, so a parametrized test moves with all of its cases even
-      when only one case was over. The 64 functions are 94 collected tests.
+      when only one case was over. The 66 functions are 96 collected tests.
     * `call` time only. A module-scoped fixture bills its whole cost to whichever test
       triggers it first -- `test_every_control_rejects` reports 13.1s of setup that
       belongs to `determination`, which three other tests in that file also use -- so
@@ -792,6 +792,12 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         # 7s of call time across 1.
         "test_render_colors.py": {
             "test_right_angles_and_diagonals_are_pinned_across_the_atlas",  # 6.5s
+        },
+        # 35.73s of call time on 2026-09-06 (`BC-241`), in the focused review file.
+        # Rebuilds all 128 exact stress branches and four selected faces; the fast
+        # tests retain the arithmetic and falsification checks on a single branch.
+        "test_review_trump_local_theorem.py": {
+            "test_full_retained_review_and_three_falsifying_controls",
         },
         # 18s of call time across 2.
         "test_schema_validator_equivalence.py": {

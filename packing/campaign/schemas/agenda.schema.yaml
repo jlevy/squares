@@ -56,7 +56,7 @@ properties:
           minItems: 1
           uniqueItems: true
           items: {type: integer, minimum: 1}
-        state: {enum: [complete, ready, blocked, tentative, stopped]}
+        state: {enum: [complete, in_progress, ready, blocked, tentative, stopped]}
         priority: {type: integer, minimum: 0, maximum: 4}
         question: {type: string, minLength: 1}
         hypotheses:

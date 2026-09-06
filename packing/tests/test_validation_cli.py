@@ -576,7 +576,7 @@ def test_the_marker_floor_is_measured_per_function_and_not_per_parametrization(
 
     The marker is a decorator on a `def`. A parametrized function therefore leaves the
     pull-request surface whole, which is why the registry in
-    `test_the_slow_marker_is_declared_only_by_measured_nodes` counts 64 functions and 94
+    `test_the_slow_marker_is_declared_only_by_measured_nodes` counts 66 functions and 96
     collected tests. A floor applied per node asks a question the marker cannot answer:
     it reports the cheap case of an expensive function as a marker to delete, and
     deleting it would drag the expensive case back onto the pull-request surface.

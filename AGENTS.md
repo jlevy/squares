@@ -41,6 +41,8 @@ for each rule. Edit there, not here.
 - **OR-14:** A development cycle is never artificially slow.
 - **OR-15:** Outcome over ceremony, and process is revised on a cadence rather than on
   irritation.
+- **OR-16:** Use Git for repository integrity; reserve checksums for real trust
+  boundaries.
 <!-- END OPERATING RULES SUMMARY -->
 
 ## Build & Test
