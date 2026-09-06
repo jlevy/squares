@@ -240,10 +240,8 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     # * `--jobs 1` in the `suite` job is what hands the behavioural lane four xdist
     #   workers instead of two -- `_pytest_workers` sizes itself to `cpus - jobs + 1`, so
     #   a larger number there is a quieter, slower job;
-    # * `--inner-jobs 2` in the `sweeps` job is what wakes three process pools, all of
-    #   which read `PACK_JOBS`: the escape screen, the chunk census and the prospective
-    #   atlas. At 1 all three run serially. Three inner workers was measured and refused
-    #   -- 2.6s of a 73s job for twelve possible processes on four cpus.
+    # * `--inner-jobs 2` sets the escape screen's PACK_JOBS cap. The chunk census and
+    #   prospective atlas remain serial unless explicitly given their own --jobs.
     required_step = next(
         _mapping(step)
         for step in validate_steps
@@ -568,7 +566,7 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
 def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
     """Which tests the pull-request surface defers, and what each one measured.
 
-    The boundary is a ceiling the gate applies (`QUICK_TEST_CEILING_SECONDS`, enforced by
+    The boundary is a ceiling the gate applies (`QUICK_TEST_WALL_BACKSTOP_SECONDS`, enforced by
     `fast behavioral tests` in **cpu seconds**, through the section
     `devtools/cpu_durations.py` prints rather than pytest's wall `--durations`), and this
     registry is the record of who is currently over it. The two are not the same thing and

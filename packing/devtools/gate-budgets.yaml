@@ -120,7 +120,7 @@ tiers:
   ceiling_seconds: 700.0
   # Cleared twice for the same reason, and the reason is a good one both times: the figure
   # measured a tier that no longer exists. BC-214 cleared 1369.60s (CI run 33982455466)
-  # when it moved every test at or above QUICK_TEST_CEILING_SECONDS out of the quick lane.
+  # when it moved every test at or above QUICK_TEST_WALL_BACKSTOP_SECONDS out of the quick lane.
   # BC-218 cleared 409.0s (CI run 33985984585, job 101359470209, commit 88f7e5f8) because
   # `fast behavioral tests` no longer runs in one process: it asks pytest for one worker
   # per core, and the tier's wall stopped being that step's wall as a result.
@@ -223,10 +223,7 @@ tiers:
   # passing quietly. The old 300s no longer had that last property once nine steps left
   # the tier, which is why it moved down rather than staying put.
   ceiling_seconds: 195.0
-  # Deliberately unmeasured rather than filled in from a local run. This box reports the
-  # same four cpus CI does, so a local figure would match the reference shape and arm the
-  # drift and stale rules against a machine that is not the one the band is for. The first
-  # CI run at the reference shape prints the line to paste.
+  # Hosted samples at the reference shape establish the baseline below.
   measured_seconds: 99.39
   measured_on: '2026-09-06'
   measured_where: >-

@@ -359,26 +359,9 @@ jobs:
     # outer slots already fill four cpus, so a step fanning out to four inner workers is
     # the oversubscription that cost `checks` thirty to eighty per cent per step.
     #
-    # Three was measured and refused, which is a better argument than the one that stood
-    # here before. Four cpus, `--jobs 4`: 72.84s and 73.36s of wall at `--inner-jobs 2`
-    # against 70.19s at 3. A third inner worker buys 2.6s of a 73s job, all of it in the
-    # escape screen and none in the census, which got slower -- twelve possible processes
-    # on four cpus for four per cent of a job that is fifty seconds off the critical path.
-    # `--jobs 3 --inner-jobs 2` was tried too: every step gets faster on the reduced
-    # contention and the wall gets *worse*, 79.45s, because three outer slots leave the
-    # fourth step queueing.
-    #
-    # Measured whole at this shape, 2026-09-06, four cpus: 73.1s of wall, from 79.52s --
-    # the screen 72.84s, the census 60.54s, the known-best atlas 52.34s, the prospective
-    # seed 24.61s. The gains do not land whole: the census costs 60s here against the 41s
-    # it costs alone at two workers, and the screen *rose* from 65.27s, because three
-    # pool-backed steps asking for two workers each is not the machine any of them had to
-    # itself.
-    #
-    # The blast radius is three steps now, checked per process rather than by eye:
-    # `screen_translation_escape`, `census_known_best_chunks` and `build_prospective_atlas`
-    # each size a pool from `PACK_JOBS`. Only the eight subcommands of
-    # `known-best n=1..100 atlas` never read it, directly or transitively.
+    # The screen reads PACK_JOBS. The census and prospective seed default to serial
+    # unless explicitly passed --jobs; these gate invocations do not pass it. Historical
+    # pool experiments did not isolate their effect on tier wall time (D-472).
     #
     # Shallow checkout: the step that needs full history is `provenance`, and it is in the
     # `validate` job's part. `needs_engine` is false for all four, so no cargo build here.

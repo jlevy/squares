@@ -411,8 +411,7 @@ def test_a_pool_worker_censuses_at_the_same_precision_as_this_process() -> None:
     The comparison then requires a real two-process run to reproduce the single-process
     result exactly, through `census_records` itself rather than around it, so what is
     checked is the path the tool takes. Two workers rather than four: two is what the
-    `sweeps` job exports as `--inner-jobs`, and a test that only proved the four-worker
-    path would not cover what CI runs.
+    explicit worker option enables. The gate currently uses the serial default.
     """
     selected = tuple(entry for entry in census.atlas_entries() if entry["n"] in {11, 26})
     assert [entry["n"] for entry in selected] == [11, 26]
@@ -442,3 +441,26 @@ def test_a_pool_worker_censuses_at_the_same_precision_as_this_process() -> None:
     assert serial[0] != serial[1]
     assert serial[0] == at_default_precision[0]
     assert pooled == serial
+
+
+def test_census_defaults_to_serial_even_with_a_gate_worker_cap(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The CLI's omitted --jobs keeps two real witnesses in this process."""
+    entries = tuple(entry for entry in census.atlas_entries() if entry["n"] in {1, 2})
+    assert len(entries) == 2
+    monkeypatch.setattr(census, "atlas_entries", lambda: entries)
+    census.census_records.cache_clear()
+    try:
+        expected = census.census_records(1)
+        monkeypatch.setenv("PACK_JOBS", "2")
+        monkeypatch.setattr(
+            census,
+            "ProcessPoolExecutor",
+            lambda **_kwargs: pytest.fail("default spawned a pool"),
+        )
+        args = census.parser().parse_args(["--check"])
+        assert census.census_records(args.jobs) == expected
+        assert census.parser().parse_args(["--check", "--jobs", "2"]).jobs == 2
+    finally:
+        census.census_records.cache_clear()

@@ -421,12 +421,11 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         # boundary because `sqpack.cli` may not import `devtools`.
         "-p",
         "devtools.cpu_durations",
-        # Two measurements, two thresholds: pytest's own wall section is asked for the
-        # backstop, the plugin's cpu section for the ceiling the gate actually enforces.
+        # Wall time enforces the ceiling; the CPU threshold only filters diagnostics.
         "--durations=0",
         f"--durations-min={validate.QUICK_TEST_WALL_BACKSTOP_SECONDS:g}",
         "--cpu-durations=0",
-        f"--cpu-durations-min={validate.QUICK_TEST_CEILING_SECONDS:g}",
+        f"--cpu-durations-min={validate.QUICK_TEST_CPU_REPORT_SECONDS:g}",
     )
 
 
@@ -449,7 +448,7 @@ def test_the_quick_lane_asks_for_no_xdist_worker_on_a_single_core_machine(
         "--durations=0",
         f"--durations-min={validate.QUICK_TEST_WALL_BACKSTOP_SECONDS:g}",
         "--cpu-durations=0",
-        f"--cpu-durations-min={validate.QUICK_TEST_CEILING_SECONDS:g}",
+        f"--cpu-durations-min={validate.QUICK_TEST_CPU_REPORT_SECONDS:g}",
     )
 
 
@@ -654,20 +653,11 @@ def _cpu_duration_line(seconds: float, phase: str, node: str) -> str:
     return f"{seconds:02.2f}s cpu-lower-bound {phase:<8} {node}"
 
 
-def test_a_test_over_the_per_test_ceiling_fails_the_pull_request_surface(
+def test_cpu_observations_above_the_report_filter_do_not_fail_the_surface(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """The boundary between the lanes is a rule the gate applies, not a list it trusts.
-
-    A hand-kept list of slow tests rots the way `--fast`'s 499s docstring rotted. This is
-    the negative control for the thing that stops it: a retained test measured at or above
-    the ceiling fails, and the failure names the test rather than the tier.
-
-    The measurement is cpu seconds, so the fixture is the plugin's section and not
-    pytest's. The wall section is present and quiet underneath it, which is what makes
-    this a test of the ceiling rather than of the backstop.
-    """
-    ceiling = validate.QUICK_TEST_CEILING_SECONDS
+    """CPU counters include work performed outside the reported test call."""
+    ceiling = validate.QUICK_TEST_CPU_REPORT_SECONDS
     output = (
         "============================= slowest durations ==========================\n"
         f"{ceiling + 1.0:.2f}s call     tests/test_probe.py::test_that_grew\n"
@@ -687,25 +677,15 @@ def test_a_test_over_the_per_test_ceiling_fails_the_pull_request_surface(
         deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
     )
 
-    with pytest.raises(validate.StepFailureError) as failure:
-        validate._fast_tests(context)
-
-    message = str(failure.value)
-    assert "test_that_grew" in message
-    assert "cpu ceiling" in message
-    assert "mark it `slow`" in message
-    # Setup, not call: a module-scoped fixture bills its whole cost to whichever test
-    # happens to trigger it first, so marking that test moves the cost instead of
-    # removing it. The ceiling is a claim about a test, not about a fixture.
-    assert "test_with_a_costly_fixture" not in message
+    assert validate._fast_tests(context) == output
 
 
-def test_the_cpu_ceiling_reads_the_section_the_plugin_really_prints() -> None:
+def test_the_cpu_diagnostics_parser_reads_the_section_the_plugin_really_prints() -> None:
     """The one failure mode of this wiring that fails silently rather than loudly.
 
     pytest pads the phase name to eight columns. A pattern written with a single space
     matches no line at all, so the whole cpu section parses as an empty list -- and an
-    empty list is indistinguishable from a lane where every test was under the ceiling.
+    empty list would conceal observations above the diagnostic display threshold.
     The header check cannot catch it, because the header is still printed. So the parser
     is checked against a line built the way the plugin builds it, with the padding in.
     """
@@ -743,14 +723,7 @@ def test_neither_durations_section_is_read_as_the_other() -> None:
 def test_a_test_expensive_by_waiting_is_caught_by_the_wall_backstop(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """What the cpu ceiling structurally cannot see, and why the wall check stayed.
-
-    A test that blocks charges no cpu, and neither does one whose work happens in a
-    forkserver pool the pytest process never reaps -- `devtools/cpu_durations.py` says so
-    in its own docstring. Both are tests the pull-request surface pays for on the clock
-    and the ceiling would pass, so removing the wall check would have opened a hole
-    exactly where the cpu measurement is blind.
-    """
+    """Long call wall time fails even when observed CPU is negligible."""
     backstop = validate.QUICK_TEST_WALL_BACKSTOP_SECONDS
     output = (
         "============================= slowest durations ==========================\n"
@@ -771,7 +744,7 @@ def test_a_test_expensive_by_waiting_is_caught_by_the_wall_backstop(
 
     message = str(failure.value)
     assert "test_that_waits" in message
-    assert "waiting" in message
+    assert "call wall time" in message
 
 
 def test_a_quick_lane_under_the_ceiling_passes_and_still_reads_the_durations() -> None:
@@ -780,8 +753,8 @@ def test_a_quick_lane_under_the_ceiling_passes_and_still_reads_the_durations() -
     Both lanes fail closed on a missing section, so the empty-but-present case has to be
     distinguishable from it: pytest prints the header and a "hidden" line whenever every
     test is under `--durations-min`, and that is a passing lane rather than a broken one.
-    The cpu section is asked for at the ceiling too, so a healthy lane prints it empty as
-    well and the same distinction has to hold for both.
+    The CPU diagnostic section may also be empty when no observations exceed its
+    display filter; its header must still be present.
     """
     header = "============================= slowest durations ====================="
     assert validate._call_durations(f"{header}\n(9 durations < 12.00s hidden.)") == []
@@ -1329,7 +1302,7 @@ def test_only_the_whole_suite_steps_carry_budgets() -> None:
     behavioural suite by measured cost, and the two halves did not both keep the budget:
     `slow behavioral tests` inherited it, because it is the half that carries the wall,
     and `fast behavioral tests` gave it up, because a lane whose slowest test is capped
-    at `QUICK_TEST_CEILING_SECONDS` is no longer a step the shared cap is wrong for. An
+    at `QUICK_TEST_WALL_BACKSTOP_SECONDS` is no longer a step the shared cap is wrong for. An
     exception that is no longer needed is not harmless -- it is a guard switched off.
 
     Recorded honestly: the second budget was added by the coordinator during an
@@ -1507,9 +1480,9 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
     It is the one deferral whose membership is *enforced* rather than listed, which is
     what makes it safe to have at all. `QUICK_TESTS` and `SLOW_TESTS` are complements, so
     a test cannot fall out of both; `fast behavioral tests` fails when a test it ran
-    reports a `call` phase at or above `QUICK_TEST_CEILING_SECONDS` of *cpu* -- a
-    contention-independent measurement, so the week a test is caught is the week it grew
-    rather than the week the runner was busy -- and `slow behavioral tests` fails when a
+    reports a `call` phase at or above `QUICK_TEST_WALL_BACKSTOP_SECONDS` of wall.
+    CPU observations remain diagnostic because they cannot attribute earlier child work
+    to an isolated call. `slow behavioral tests` fails when a
     deferred test reports below the marker floor, so one that stops being slow has to come
     back. The other three deferrals are a typed list. This one is a rule.
 

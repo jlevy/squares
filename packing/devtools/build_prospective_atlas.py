@@ -344,10 +344,9 @@ def build_cases(entries: Sequence[dict], workers: int | None) -> list[tuple[str,
     geometry and renders only itself -- so this is a map, and it was a serial one. It
     cost 37.03s in the `sweeps` job of run 34018763923.
 
-    `workers` is the pool size. `None` asks `sqpack.workers.worker_count`, which reads
-    the `PACK_JOBS` cap the gate exports to every step, so the count is never taken from
-    the machine behind the gate's back. `1` runs in this process rather than through a
-    pool, because a one-worker pool is a subprocess and a protocol for no concurrency.
+    `workers=None` and `workers=1` run serially in this process, irrespective of
+    `PACK_JOBS`. An explicit larger count enables a pool, capped by the entry count.
+    Serial remains the default while D-472's performance attribution is unresolved.
 
     The retained source paths are resolved here, in the parent, and travel with the
     work. `_source_path` reads the module-level `SOURCE_ROOT`, and a `forkserver` worker
@@ -502,8 +501,8 @@ def parser() -> argparse.ArgumentParser:
         metavar="N",
         default=None,
         help=(
-            "processes to build the seed with; the default follows the PACK_JOBS cap "
-            "the gate exports, and the whole machine when there is no gate"
+            "processes to build the seed with (default: 1, serial; "
+            "explicit --jobs enables a pool independently of PACK_JOBS)"
         ),
     )
     return command

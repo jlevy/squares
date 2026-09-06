@@ -4,8 +4,10 @@
 from __future__ import annotations
 
 import json
+import multiprocessing
 from collections import Counter
 from copy import deepcopy
+from functools import partial
 from pathlib import Path
 
 import mpmath as mp
@@ -174,14 +176,13 @@ def test_a_pool_worker_builds_the_same_bytes_as_this_process() -> None:
     one twice. A second control keeps `==` honest: the two cases must compare unequal,
     so equality here is a measurement rather than a property of the operator.
 
-    Two workers rather than four, because two is what the `sweeps` job exports as
-    `--inner-jobs`, and passing the count explicitly is what makes this cover the pool
-    even when the gate has capped `PACK_JOBS` at one.
+    Two entries and two explicit workers exercise the optional pool. The gate uses
+    the serial default, regardless of its PACK_JOBS cap.
 
     Both cases are generated grids, which is a cost decision and not a coverage one. A
     UnitSquare witness is 2.2s to build, so a pair of builds carrying one would be over
     the pull-request surface's marking threshold for a path the `sweeps` job already
-    runs on every pull request over all 101 cases, byte for byte, at `--inner-jobs 2`.
+    runs serially on every pull request over all 101 cases, byte for byte.
     What that leaves uncovered here is the retained-source path, and the test below
     covers it directly.
     """
@@ -231,16 +232,46 @@ def test_a_pool_worker_reads_the_retained_source_root_this_process_resolved(
     successfully. It is also what makes the test cheap: it fails on the missing file,
     before the 2.2s parse a UnitSquare case would otherwise cost.
     """
+    monkeypatch.setattr(
+        prospective,
+        "ProcessPoolExecutor",
+        partial(
+            prospective.ProcessPoolExecutor, mp_context=multiprocessing.get_context("spawn")
+        ),
+    )
     substitute = prospective.ROOT / "atlas/prospective"
     monkeypatch.setattr(prospective, "SOURCE_ROOT", substitute)
-    entry = next(
+    entries = [
         entry
         for entry in prospective.eligible_entries()
         if entry["source_key"] == "unitsquare-release-1"
-    )
+    ][:2]
+    assert len(entries) == 2
 
     with pytest.raises(ValueError, match="missing retained source") as failure:
-        prospective.build_cases([entry], 2)
+        prospective.build_cases(entries, 2)
 
     assert "atlas/prospective" in str(failure.value)
-    assert f"n={entry['n']}" in str(failure.value)
+    assert f"n={entries[0]['n']}" in str(failure.value)
+
+
+def test_seed_defaults_to_serial_even_with_a_gate_worker_cap(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The CLI's omitted --jobs keeps two real seed cases in this process."""
+    entries = [
+        entry
+        for entry in prospective.eligible_entries()
+        if entry["source_key"] == "catalogue-trivial-grid-rule"
+    ][:2]
+    assert len(entries) == 2
+    expected = prospective.build_cases(entries, 1)
+    monkeypatch.setenv("PACK_JOBS", "2")
+    monkeypatch.setattr(
+        prospective,
+        "ProcessPoolExecutor",
+        lambda **_kwargs: pytest.fail("default spawned a pool"),
+    )
+    args = prospective.parser().parse_args(["--check"])
+    assert prospective.build_cases(entries, args.jobs) == expected
+    assert prospective.parser().parse_args(["--check", "--jobs", "2"]).jobs == 2

@@ -124,27 +124,10 @@ def _census_entry(entry: dict[str, Any]) -> dict[str, Any]:
 def census_records(workers: int | None = None) -> tuple[dict[str, Any], ...]:
     """One `_census_entry` result per atlas entry, in manifest order, built once.
 
-    Every record is independent of every other -- each loads its own witness and reads
-    nothing outside it -- so this is a map, and it was a serial one. It cost 90.38s in
-    the `sweeps` job of run 34018763923, which is a floor under that job's wall: no
-    GitHub job finishes before its own longest step, so no rearrangement of jobs
-    shortens it and the only lever is inside the step.
-
-    `workers` is the pool size, and it defaults to **serial**, which is a measurement
-    rather than timidity. `PACK_JOBS` is a per-step cap but contention is global: the
-    `sweeps` job runs four outer slots on four cpus, so a pool here is workers the
-    machine does not have. Run 34019... measured it -- with this step, the escape screen
-    and the prospective atlas all sizing pools from `--inner-jobs 2`, the tier went
-    81.18s to 98.25s. This step gained 0.5s, the escape screen lost 33s, and
-    `known-best n=1..100 atlas`, which has no pool at all, lost 37s. Exactly one step in
-    this job can afford a pool, and it is the screen, which is the longest.
-
-    So pass `workers` explicitly to use one -- the deep surface at `--jobs 1` can, and
-    the tests do. Sizing from `sqpack.workers.worker_count` is available and correct per
-    step; it is the aggregate that does not fit, and no per-step contract can see that.
-
-    `1` runs in this process rather than through a pool, because a one-worker pool is a
-    subprocess and a protocol for no concurrency at all.
+    Each record loads its own witness. `workers=None` and `workers=1` run serially,
+    irrespective of `PACK_JOBS`; an explicit larger count enables a pool capped by
+    the entry count. Serial remains the default while D-472's performance attribution
+    is unresolved. The available timing samples do not isolate the effect of pooling.
 
     Memoized on the worker count because both documents are reachable from `--update`
     and from `--check`, and the second one must not re-derive the first one's records.
@@ -451,8 +434,8 @@ def parser() -> argparse.ArgumentParser:
         metavar="N",
         default=None,
         help=(
-            "processes to census the corpus with; the default follows the PACK_JOBS cap "
-            "the gate exports, and the whole machine when there is no gate"
+            "processes to census the corpus with (default: 1, serial; "
+            "explicit --jobs enables a pool independently of PACK_JOBS)"
         ),
     )
     return command

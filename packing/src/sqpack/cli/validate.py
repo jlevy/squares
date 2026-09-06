@@ -142,87 +142,11 @@ EXHAUSTIVE_TESTS = "exhaustive_exact"
 #: bounded by the tier's own band in `devtools/gate-budgets.yaml`, which is measured, and
 #: that is the check that actually stops the lane creeping.
 #:
-#: The honest fix is to measure something contention-independent -- cpu time rather than
-#: wall -- so the threshold means the same thing on a quiet box and a loaded runner.
-#: pytest reports wall durations, so that needed a plugin rather than a constant:
-#: `devtools/cpu_durations.py` charges each phase the user and system cpu of the worker
-#: process and of every child it reaps, and prints a section of its own that this gate
-#: reads *beside* pytest's rather than in place of it.
-#:
-#: **So this constant is cpu seconds now, and the multiple is three times the 2s marking
-#: threshold rather than six.** Measured 2026-09-06 on a four-cpu box -- the same cpu count
-#: as the CI runner -- over three runs of this lane at 2,136 tests differing only in what
-#: else was competing for the machine. Per-test ratios are against run A, over the 110
-#: tests with at least 0.30s of both measurements to divide:
-#:
-#:   A  `-n 2`, quiet          lane 127.4s
-#:   B  `-n 2`, four spinners  lane 187.1s  wall median 1.37x p99 2.37x
-#:                                          cpu  median 1.01x p99 1.28x
-#:   C  `-n 4`, four spinners  lane 228.2s  wall median 3.40x p99 7.63x
-#:                                          cpu  median 1.06x p99 1.86x
-#:
-#: Summed over every `call` phase the lane runs, wall went 195.1s to 280.3s to 669.9s
-#: while cpu went 182.2s to 185.6s to 202.3s -- a 3.43x spread against a 1.11x one.
-#:
-#: Run C reproduces the failure that raised the wall constant to 12.0, and then some: 41
-#: tests at or above 5s of wall, six at or above 12s, the worst a 3.01s test reading
-#: 13.69s. The same run measured in cpu has nothing at or above 5s and exactly one test at
-#: or above 4s, at 4.85s, and that one is the lane's genuinely most expensive test rather
-#: than a victim: it reads within a few hundredths of that on a quiet box, which is the
-#: whole claim this constant rests on.
-#:
-#: 6.0 is 1.24x the worst cpu second ever measured here (4.85s, run C) and 1.47x the worst
-#: at the concurrency this gate actually creates (4.08s, run B; `_pytest_workers` sizes the
-#: lane so run C's oversubscription cannot happen).
-#:
-#: Re-measured on 2026-09-06 when this was wired up, over the whole lane at 2,205 tests on
-#: the same four-cpu box: 2,098 `call` phases and 188.8s of cpu against 205.7s of wall. The
-#: test nearest this ceiling is `test_breaking_the_symmetry_of_the_n12_atoms_is_refused` at
-#: 4.51s under `-n 4` and 4.82s run alone -- 75 to 80 per cent of the ceiling, and the same
-#: reading run C recorded as its worst. It costs 1.69s of *wall* alone, so it reads about
-#: three times its own wall time: `sqpack.fractional.certificate` decides its directions in
-#: a process pool, `_cpu_seconds` counts `RUSAGE_CHILDREN`, and a ceiling whose subject is
-#: what the runner pays should charge all four cores rather than one. That is the right
-#: direction, and it is the reason this test rather than a longer one sits closest.
-#:
-#: Lower it to 5.0 -- the 2.5x this constant was first written with -- when that test stops
-#: costing most of five cpu seconds. `test_every_retained_n12_rung_still_verifies`, 3.63s,
-#: is the next one behind it; nothing else on the lane reaches 3.2s.
-#:
-#: **What the section reports is a lower bound, and this check is written to be sound on
-#: exactly that and nothing more.** `devtools/cpu_durations.py` sums `RUSAGE_SELF` and
-#: `RUSAGE_CHILDREN`, which misses a forkserver worker entirely: the persistent server
-#: reaps it, so the pytest process's child counter never receives its usage, and forkserver
-#: is Python 3.14's Linux default. A reading at or above this ceiling therefore *proves*
-#: the test spent that cpu, and may fail it; a reading below it proves nothing, and may not
-#: exempt anything. That asymmetry is the whole licence this gate has to read an incomplete
-#: measurement, and it is why the wall check below was retained rather than replaced.
-QUICK_TEST_CEILING_SECONDS = 6.0
-#: The wall ceiling, unchanged in value and demoted from the guard to the backstop.
-#:
-#: Two kinds of expensive test the cpu ceiling structurally cannot see, and this is what
-#: covers both. A test expensive by *waiting* charges no cpu at all: the
-#: `test_validation_cli.py` tests that block on a subprocess timeout measure about a second
-#: of wall against 0.02s of cpu, and one that waited a minute would still read zero. A test
-#: expensive inside a forkserver process pool reads near zero for the accounting reason
-#: named above, and `sqpack.fractional.certificate` builds a pool whose start method
-#: `_pool_context` chooses at runtime -- fork while the parent is single-threaded, the
-#: platform default (forkserver, on Linux under 3.14) once it is not. Measured on
-#: 2026-09-06 that pool forked, and its cpu was charged: the test that drives it reads
-#: 4.82s of cpu against 1.69s of wall. So the hole is latent here rather than open, which
-#: is a reason to keep the check rather than to drop it -- the branch that opens it is a
-#: thread count, not an edit anyone would notice. Neither case is one a cpu ceiling can
-#: fail, and the pull-request surface pays for both on the clock.
-#:
-#: 12.0 rather than the 20.0 a backstop aimed *only* at waiting could carry. Waiting does
-#: not inflate under contention -- a sleep or a subprocess timeout costs the same wall on a
-#: loaded box as on a quiet one, because nothing it waits for is competing for the cpu --
-#: so a check with only that job could sit above run C's worst reading of 13.69s and lose
-#: nothing it was ever able to catch. It has the forkserver case too, and that case is
-#: work, which does inflate. Raising the number would drop coverage this gate has today for
-#: a class of test the cpu ceiling cannot pick up, and buy back only run C's six contended
-#: tests -- at a concurrency `_pytest_workers` does not create. So it does not move: what
-#: became meaningful here is the cpu ceiling, not this.
+#: CPU observations are diagnostic only: a child started during setup is charged when
+#: a later call reaps it, and background threads share the same process counters.
+#: Six seconds retains the previous report filter without attributing that work to a test.
+QUICK_TEST_CPU_REPORT_SECONDS = 6.0
+#: The enforced per-call wall ceiling remains unchanged.
 QUICK_TEST_WALL_BACKSTOP_SECONDS = 12.0
 #: The other direction, and it exists because `OR-13` is a floor on coverage rather than a
 #: budget on time: a test leaves the pull-request surface by its own measured cost and
@@ -237,16 +161,8 @@ QUICK_TEST_WALL_BACKSTOP_SECONDS = 12.0
 #: The ceiling above is compared per node, because there the question is the opposite one
 #: -- what the pull-request surface actually pays for a single test it ran.
 #:
-#: **Wall seconds, deliberately, while the ceiling above is cpu seconds.** The asymmetry
-#: is not an oversight and it is not a migration half-done. A ceiling asks "is this test
-#: expensive?", where a wall reading inflated by a neighbour is a false accusation and cpu
-#: is the honest measurement; a floor asks "is this marker still earned?", where the answer
-#: it produces is an instruction to *delete* a marker and drag the test back onto the
-#: pull-request surface. A test deferred because it blocks for thirty seconds charges about
-#: 0.02s of cpu, so a cpu floor would order its marker deleted and undo the deferral that
-#: `OR-13` bought. Contention only ever inflates wall, so a wall floor errs towards keeping
-#: a marker -- which is the safe direction for this question and the unsafe direction for
-#: the other one. Each measurement is used where being wrong costs least.
+#: The floor also measures wall time, so a test that is slow because it waits does
+#: not lose its marker merely because it consumed little CPU.
 #:
 #: The two numbers leave a band where the gate says nothing in either direction, and the
 #: band is the point. Marking is done at 2s, between them, so a test near the boundary can
@@ -455,35 +371,11 @@ class Step:
     rest of the tier. That 110.66s was also the floor under the whole pull-request
     surface, and the lever on it was that step's own cost rather than another job.
 
-    That lever has since been pulled, which is why this job now runs at `--inner-jobs 2`
-    rather than 1. `screen_translation_escape` screens 98 independent records and was
-    given a process pool on 2026-09-06; the pool reads `PACK_JOBS`, so until the flag
-    moved it ran one worker and the parallelism was dormant. Best of five rounds on a
-    four-cpu box: 103.94s at one worker, 52.11s at two, 35.40s at three, 27.50s at four.
-    Two is what the job asks for, not four -- the outer pool already has four slots on
-    four cpus, and a fifth process is the oversubscription that inflated every step of
-    `checks` at `--jobs 4`. Three of the four steps now reach `sqpack.workers`, so the
-    flag is no longer one step's knob: `screen_translation_escape`,
-    `census_known_best_chunks` and `build_prospective_atlas` each size a pool from
-    `PACK_JOBS`, and only the eight subcommands of `known-best n=1..100 atlas` do not.
-
-    Three rather than two was measured and refused. Four cpus, this box, `--jobs 4`:
-    72.84s and 73.36s of wall at `--inner-jobs 2` against 70.19s at 3, so a third inner
-    worker buys 2.6s of a 73s job -- all of it in the escape screen, none in the census,
-    which got slower. Twelve possible processes on four cpus for four per cent of a job
-    that is fifty seconds off the critical path is the trade the `checks` table already
-    priced at thirty to eighty per cent per step, and this box is quiet where a runner is
-    not. `--jobs 3 --inner-jobs 2` was tried too: every step gets faster on the reduced
-    contention and the wall gets *worse*, 79.45s, because three outer slots make the
-    fourth step queue.
-
-    The floor moved, and it moved less than the isolated readings promised. Measured
-    whole on a four-cpu box the job is 73.1s, from 79.52s: the screen 72.84s, the census
-    60.54s, the known-best atlas 52.34s, the prospective seed 24.61s. The census is 60s
-    rather than the 41s it costs alone at two workers, and the screen rose from 65.27s,
-    because three pool-backed steps asking for two workers each is not the same machine
-    the screen had to itself. `single-square translation escape screen` is now this job's
-    longest unit and the floor under it."""
+    `--inner-jobs 2` sets `PACK_JOBS` for the translation-escape screen. The chunk
+    census and prospective seed expose explicit worker counts but default to serial;
+    the gate does not pass those counts. The known-best atlas also runs serially.
+    Historical pool experiments do not establish the cause of the observed tier
+    timings; D-472 tracks the remaining performance attribution work."""
 
     suite: bool = False
     """This step is the pull request's behavioural lane, and it runs alone on its own
@@ -834,11 +726,8 @@ _DURATION_HEADER = "slowest durations"
 #: property from the plugin's side; `test_neither_durations_section_is_read_as_the_other`
 #: holds it from this one.
 #:
-#: `\s+` rather than a single space, and it is load bearing. pytest pads the phase name to
-#: eight columns, so a one-space pattern matches nothing at all and the entire section
-#: parses as empty -- which retires the ceiling in silence instead of failing it. That is
-#: also why `_require_durations` is asked for this header: a section that vanished has to
-#: look different from a section that listed nothing.
+#: Pytest pads phase names; accept whitespace between fields. The required header
+#: detects a missing diagnostic section independently of whether any entries are shown.
 _CPU_DURATION_LINE = re.compile(
     r"^(?P<seconds>\d+\.\d+)s\s+cpu-lower-bound"
     r"\s+(?P<phase>setup|call|teardown)\s+(?P<node>\S+)$"
@@ -950,7 +839,7 @@ def _pytest_workers(jobs: int) -> int:
     the step.
 
     The lane is the right shape for it: around 2,000 tests, each held under
-    `QUICK_TEST_CEILING_SECONDS` by the ceiling the step itself enforces, none of them
+    `QUICK_TEST_WALL_BACKSTOP_SECONDS` by the wall ceiling the step enforces, none of them
     writing anywhere shared. Measured on a four-core box at `PACK_JOBS=1`: 306.4s in one
     process against 135.04s at `-n 4`, with no failure that appears only under xdist.
 
@@ -1021,43 +910,16 @@ def _quick_lane_command(jobs: int) -> tuple[str, ...]:
         "--durations=0",
         f"--durations-min={QUICK_TEST_WALL_BACKSTOP_SECONDS:g}",
         "--cpu-durations=0",
-        f"--cpu-durations-min={QUICK_TEST_CEILING_SECONDS:g}",
+        f"--cpu-durations-min={QUICK_TEST_CPU_REPORT_SECONDS:g}",
     )
 
 
 def _fast_tests(context: Context) -> str:
-    """The ceiling in cpu seconds, and the wall only for what cpu seconds cannot see.
-
-    Two checks rather than one because they catch different things and neither subsumes
-    the other. A test expensive because it *computes* is caught in cpu seconds, which do
-    not move when a neighbour takes the core away; a test expensive because it *waits*, or
-    because its work happens in a forkserver pool the pytest process never reaps, charges
-    no cpu the plugin can see, and only the wall backstop finds it.
-
-    The cpu check runs first, so the backstop's message -- which claims the test stayed
-    under the cpu ceiling -- is true whenever it is the one that fires.
-    """
+    """Enforce call wall time; retain CPU counters as diagnostics without attribution."""
     output = _run(context, _quick_lane_command(context.jobs))
-    cpu_rule = f"the {QUICK_TEST_CEILING_SECONDS:g}s per-test cpu ceiling"
-    _require_durations(output, "quick", cpu_rule, _CPU_DURATION_HEADER)
-    wall_rule = f"the {QUICK_TEST_WALL_BACKSTOP_SECONDS:g}s wall backstop"
+    _require_durations(output, "quick", "the observed CPU diagnostics", _CPU_DURATION_HEADER)
+    wall_rule = f"the {QUICK_TEST_WALL_BACKSTOP_SECONDS:g}s wall ceiling"
     _require_durations(output, "quick", wall_rule)
-    over = [
-        entry
-        for entry in _call_durations(output, _CPU_DURATION_LINE)
-        if entry[0] >= QUICK_TEST_CEILING_SECONDS
-    ]
-    if over:
-        raise StepFailureError(
-            f"{len(over)} test(s) ran at or above the pull-request surface's "
-            f"{QUICK_TEST_CEILING_SECONDS:g}s per-test cpu ceiling:"
-            f"\n{_render_durations(over)}\n"
-            "  These are cpu seconds, not wall, so a busy runner did not cause this: the "
-            "reading is a lower bound on what the test itself spent. Make it faster, or "
-            "mark it `slow` and declare it with its measurement in "
-            "test_the_slow_marker_is_declared_only_by_measured_nodes. The marker moves "
-            "the test to the deep surface; it does not stop it running."
-        )
     waiting = [
         entry
         for entry in _call_durations(output)
@@ -1066,12 +928,11 @@ def _fast_tests(context: Context) -> str:
     if waiting:
         raise StepFailureError(
             f"{len(waiting)} test(s) held the pull-request surface for "
-            f"{QUICK_TEST_WALL_BACKSTOP_SECONDS:g}s or more of wall while staying under the "
-            f"{QUICK_TEST_CEILING_SECONDS:g}s cpu ceiling, so they are expensive by waiting "
-            f"or by unreaped descendants rather than by work this gate can "
-            f"measure:\n{_render_durations(waiting)}\n"
-            "  The cpu ceiling cannot see either; this backstop is the only check that "
-            "can. Remove the wait, or mark it `slow`."
+            f"{QUICK_TEST_WALL_BACKSTOP_SECONDS:g}s or more of call wall time:"
+            f"\n{_render_durations(waiting)}\n"
+            "  Make the test faster, or mark it `slow` and declare its measurement in "
+            "test_the_slow_marker_is_declared_only_by_measured_nodes. "
+            "Observed CPU counters do not identify the cause of the elapsed time."
         )
     return output
 
@@ -1396,16 +1257,7 @@ def _known_best_atlas(context: Context) -> str:
 
 
 def _known_best_chunk_census(context: Context) -> str:
-    """94.85s of the 133.22s the known-best atlas cost as one step, and about 181s on CI.
-
-    Nothing about the check changed when it was given its own name: it reads the same
-    committed documents and compares the same re-derivation. What changed is that the
-    gate can now schedule it, and that the step table names it -- which is what `OR-14`
-    asks for before anyone tries to make it cheaper. It was the longest single unit in
-    the sweeps job until it was given a process pool on 2026-09-06 and stopped being
-    one: 79.51s to 60.54s inside the job on a four-cpu box, and 80.42s to 41.27s
-    measured alone at the two workers `--inner-jobs` exports.
-    """
+    """Re-derive the committed chunk census using its serial default."""
     output = _module(context, "devtools.census_known_best_chunks", "--check")
     _require_text(
         output,
@@ -1424,25 +1276,7 @@ def _prospective_source_map(context: Context) -> str:
 
 
 def _prospective_atlas(context: Context) -> str:
-    """The single longest unit on the pull-request surface: 213.2s of CI's 1,100s.
-
-    Split from the source map it used to share a step with, and the split buys
-    attribution rather than time -- the map is 0.39s of the 88.76s the pair cost
-    locally. That is the point: `OR-14` says to attribute rather than absorb, and until
-    this step carried one subcommand the tier's largest cost was reported under a name
-    that also covered a sub-second check.
-
-    That sentence has since been paid off twice and the figure above is the older of the
-    two readings: memoizing the frontier took this step to 37.03s, and it is now the
-    smallest of the sweeps rather than the largest. What has not changed is the shape of
-    the argument. The sweeps job has four units and four cpus, so its outer pool is
-    saturated and its wall is its longest unit's wall; the only lever on that unit is the
-    unit's own cost. `build_prospective_atlas` was given the same process pool on
-    2026-09-06: 23.88s to 13.14s at two workers and 7.28s at four, measured alone.
-    Inside the job it is 24.61s against 25.07s, which is not a contradiction -- it is
-    the smallest of the four steps and the job's wall is its longest one, so what its
-    pool buys here is headroom rather than wall.
-    """
+    """Re-derive the prospective seed using its serial default."""
     output = _module(context, "devtools.build_prospective_atlas", "--check")
     _require_text(
         output, "prospective atlas seed check passed: 101 witnesses and 101 house renderings"
