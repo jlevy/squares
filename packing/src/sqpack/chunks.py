@@ -93,17 +93,33 @@ def _clean_residual(value: float) -> float:
 
 
 def _representative_orientation(poses: list[Pose], members: tuple[int, ...]) -> float:
+    """The class angle, memoized on the only thing the mean reads."""
+    return _mean_orientation(tuple(poses[index].angle_degrees for index in members))
+
+
+@cache
+def _mean_orientation(angles: tuple[float, ...]) -> float:
     # Orientations live modulo 90 degrees. Multiplying by four maps them to an ordinary
     # circle, where a circular mean handles the 0/90 seam without a special case. Use
     # mpmath instead of the platform libm because the result enters a retained,
     # byte-stable census.
+    #
+    # Memoized because every caller asks for the same class angle many times over: the
+    # fit residual asks once per member, the component and contact sweeps ask again for
+    # the same class, and the partition search rebuilds the same census a second time.
     with mp.workdps(PORTABLE_TRIG_DIGITS):
-        radians = [
-            mp.mpf(repr(4 * poses[index].angle_degrees)) * mp.pi / 180 for index in members
-        ]
+        radians = [mp.mpf(repr(4 * angle)) * mp.pi / 180 for angle in angles]
         cosine = mp.fsum(mp.cos(angle) for angle in radians)
         sine = mp.fsum(mp.sin(angle) for angle in radians)
         return _orientation(float(mp.degrees(mp.atan2(sine, cosine)) / 4))
+
+
+def _class_fit_residual(poses: list[Pose], members: tuple[int, ...]) -> float:
+    """How far the worst member of one class sits from the class angle."""
+    representative = _representative_orientation(poses, members)
+    return max(
+        _orientation_distance(poses[index].angle_degrees, representative) for index in members
+    )
 
 
 def _poses(witness: dict[str, Any]) -> list[Pose]:
@@ -192,12 +208,31 @@ def _fitted_angle_classes(
     return sorted(fitted, key=lambda members: (min(members), members))
 
 
-def _lattice_delta(left: Pose, right: Pose, angle_degrees: float) -> tuple[float, float]:
+@cache
+def _portable_scalar(value: float) -> Any:
+    """One f64 lifted to the portable working precision, memoized per coordinate.
+
+    The parse is what costs: a pair sweep over one angle class converts the same
+    centers once per pair, and `mp.mpf(str)` rounds against the *context* precision,
+    so the lift has to happen inside the same `workdps` block it always did.
+    """
+    with mp.workdps(PORTABLE_TRIG_DIGITS):
+        return mp.mpf(repr(value))
+
+
+@cache
+def _portable_rotation(angle_degrees: float) -> tuple[Any, Any]:
+    """Cosine and sine of one class angle at the portable working precision."""
     with mp.workdps(PORTABLE_TRIG_DIGITS):
         radians = mp.mpf(repr(angle_degrees)) * mp.pi / 180
-        cosine, sine = mp.cos(radians), mp.sin(radians)
-        delta_x = mp.mpf(repr(right.center_x)) - mp.mpf(repr(left.center_x))
-        delta_y = mp.mpf(repr(right.center_y)) - mp.mpf(repr(left.center_y))
+        return mp.cos(radians), mp.sin(radians)
+
+
+def _lattice_delta(left: Pose, right: Pose, angle_degrees: float) -> tuple[float, float]:
+    cosine, sine = _portable_rotation(angle_degrees)
+    with mp.workdps(PORTABLE_TRIG_DIGITS):
+        delta_x = _portable_scalar(right.center_x) - _portable_scalar(left.center_x)
+        delta_y = _portable_scalar(right.center_y) - _portable_scalar(left.center_y)
         return (
             float(delta_x * cosine + delta_y * sine),
             float(-delta_x * sine + delta_y * cosine),
@@ -311,16 +346,7 @@ def component_census(witness: dict[str, Any], *, tolerance: float) -> dict[str, 
     poses = _poses(witness)
     classes = _angle_classes(poses, angle_tolerance_degrees=ANGLE_TOLERANCE_DEGREES)
     class_fit_residuals = [
-        _clean_residual(
-            max(
-                _orientation_distance(
-                    poses[index].angle_degrees,
-                    _representative_orientation(poses, members),
-                )
-                for index in members
-            )
-        )
-        for members in classes
+        _clean_residual(_class_fit_residual(poses, members)) for members in classes
     ]
     angle_fit_valid = all(
         residual <= ANGLE_TOLERANCE_DEGREES for residual in class_fit_residuals
@@ -535,6 +561,41 @@ def _solve_partition(
     )
     states = 0
 
+    # A candidate is contained in ``remaining`` exactly when it contains no removed
+    # square. Candidate-index bitsets preserve the original ascending traversal while
+    # avoiding a Python scan of every candidate list at every cached state.
+    #
+    # Both the eligible set and the pivot chosen from it are functions of ``remaining``
+    # and of whether the off-frame allowance is spent, so they are memoized on exactly
+    # that pair: ``solve`` reaches one remaining set once per surviving free-square and
+    # off-frame count, and recomputing an unchanged pivot at each of those was the
+    # search's largest single cost.
+    @cache
+    def frontier(remaining: int, *, off_frame_exhausted: bool) -> tuple[int, int]:
+        removed = all_square_bits ^ remaining
+        ineligible_bits = 0
+        while removed:
+            square_bit = removed & -removed
+            ineligible_bits |= by_square_bits[square_bit.bit_length() - 1]
+            removed ^= square_bit
+        eligible_bits = all_candidate_bits & ~ineligible_bits
+        if off_frame_exhausted:
+            eligible_bits &= ~off_frame_bits
+
+        # Minimum remaining values, ties to the lowest square index: the ascending scan
+        # keeps the first minimum, which is what ``min`` over the index key did.
+        pivot = -1
+        fewest = -1
+        bits = remaining
+        while bits:
+            square_bit = bits & -bits
+            index = square_bit.bit_length() - 1
+            bits ^= square_bit
+            degree = (by_square_bits[index] & eligible_bits).bit_count()
+            if pivot < 0 or degree < fewest:
+                pivot, fewest = index, degree
+        return pivot, by_square_bits[pivot] & eligible_bits
+
     @cache
     def solve(
         remaining: int,
@@ -546,35 +607,17 @@ def _solve_partition(
         if states > maximum_states:
             raise _PartitionSearchLimitError
         remaining_count = remaining.bit_count()
-        minimum_chunk_count = math.ceil(
-            max(0, remaining_count - free_remaining) / maximum_candidate_size
-        )
         if free_remaining < 0 or remaining_count < free_remaining:
             return None
         if remaining == 0:
             return _PartitionSolution((), (), 0.0) if free_remaining == 0 else None
 
-        remaining_indices = [index for index in range(square_count) if remaining & (1 << index)]
-
-        # A candidate is contained in ``remaining`` exactly when it contains no removed
-        # square. Candidate-index bitsets preserve the original ascending traversal while
-        # avoiding a Python scan of every candidate list at every cached state.
-        removed = all_square_bits ^ remaining
-        ineligible_bits = 0
-        while removed:
-            square_bit = removed & -removed
-            ineligible_bits |= by_square_bits[square_bit.bit_length() - 1]
-            removed ^= square_bit
-        eligible_bits = all_candidate_bits & ~ineligible_bits
-        if off_frame_remaining <= 0:
-            eligible_bits &= ~off_frame_bits
-
-        pivot = min(
-            remaining_indices,
-            key=lambda index: ((by_square_bits[index] & eligible_bits).bit_count(), index),
+        minimum_chunk_count = math.ceil(
+            max(0, remaining_count - free_remaining) / maximum_candidate_size
         )
-        options = by_square_bits[pivot] & eligible_bits
+        pivot, options = frontier(remaining, off_frame_exhausted=off_frame_remaining <= 0)
         best: _PartitionSolution | None = None
+        best_key: tuple[Any, ...] | None = None
         while options:
             candidate_bit = options & -options
             candidate_index = candidate_bit.bit_length() - 1
@@ -592,10 +635,9 @@ def _solve_partition(
                 child.free_squares,
                 max(candidate.maximum_contact_residual, child.maximum_contact_residual),
             )
-            if best is None or _solution_key(proposal, candidates) < _solution_key(
-                best, candidates
-            ):
-                best = proposal
+            proposal_key = _solution_key(proposal, candidates)
+            if best_key is None or proposal_key < best_key:
+                best, best_key = proposal, proposal_key
                 # Count and nonnegative residual cannot improve past this bound. The
                 # fixed MRV pivot and candidate ordering define the remaining tie,
                 # avoiding an exponential all-ties traversal on dense grids.
@@ -612,10 +654,9 @@ def _solve_partition(
                     tuple(sorted((pivot, *child.free_squares))),
                     child.maximum_contact_residual,
                 )
-                if best is None or _solution_key(proposal, candidates) < _solution_key(
-                    best, candidates
-                ):
-                    best = proposal
+                proposal_key = _solution_key(proposal, candidates)
+                if best_key is None or proposal_key < best_key:
+                    best, best_key = proposal, proposal_key
                     if (
                         len(proposal.candidates) == minimum_chunk_count
                         and proposal.maximum_contact_residual == 0
@@ -641,6 +682,7 @@ def minimal_lattice_partition(
     maximum_free_squares: int = 2,
     maximum_off_frame_chunks: int = 2,
     maximum_states: int = 250_000,
+    component_document: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Find a deterministic bar/L/rectangle partition in the registered free-square slice.
 
@@ -648,12 +690,25 @@ def minimal_lattice_partition(
     and corner Ls inside the maximal lattice components emitted by ``component_census``.
     They are deliberately not exhaustive over sliding contact assemblies or angle-class
     splits, which remain typed limitations rather than silent refutations.
+
+    ``component_document`` is the census this search would otherwise build for itself. A
+    caller that already publishes that census -- the atlas builder publishes both -- can
+    hand it over rather than pay for it twice, and a document that is not this witness at
+    this tolerance is refused rather than silently searched.
     """
     if tolerance not in {EXACT_ADJACENCY_TOLERANCE, NEAR_ADJACENCY_TOLERANCE}:
         raise ValueError("partition search accepts only the registered exact or near band")
     if maximum_free_squares < 0 or maximum_off_frame_chunks < 0 or maximum_states < 1:
         raise ValueError("partition search limits must be nonnegative and states positive")
-    component_document = component_census(witness, tolerance=tolerance)
+    if component_document is None:
+        component_document = component_census(witness, tolerance=tolerance)
+    elif (
+        component_document.get("witness_id") != witness.get("id")
+        or component_document.get("adjacency_tolerance") != f"{tolerance:.12g}"
+    ):
+        raise ValueError(
+            "the supplied component census is not this witness at this adjacency tolerance"
+        )
     poses = _poses(witness)
     square_positions = {pose.square_id: index for index, pose in enumerate(poses)}
     candidates = [
@@ -910,16 +965,7 @@ def contact_component_census(
     angle_tolerance_degrees = math.degrees(angle_tolerance_radians)
     classes = _fitted_angle_classes(poses, angle_tolerance_degrees=angle_tolerance_degrees)
     class_fit_residuals = [
-        _clean_residual(
-            max(
-                _orientation_distance(
-                    poses[index].angle_degrees,
-                    _representative_orientation(poses, members),
-                )
-                for index in members
-            )
-        )
-        for members in classes
+        _clean_residual(_class_fit_residual(poses, members)) for members in classes
     ]
     components = []
     for class_id, members in enumerate(classes, start=1):

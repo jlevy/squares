@@ -97,11 +97,32 @@ jobs:
       # exactly one lane, and the post-merge jobs are checked disjoint and exhaustive by
       # `test_the_post_merge_jobs_partition_the_gate`. What the split costs is stated
       # rather than hidden: a pull request can be green while a deferred test is broken.
-      - name: Run the required pull-request surface
+      #
+      # **Then the promotion had to be paid for, and this is where.** The merged tier ran
+      # 501.97s at commit `30706bcb`, of which `known-best n=1..100 atlas` was 254.92s and
+      # `prospective n=101..324 source map and safe seed` 213.19s. Reverting the promotion
+      # was refused on coverage grounds, so the cost is bought with a second runner
+      # instead: `--checks` here and `--sweeps` in the `sweeps` job below are complements
+      # within `--fast`, they run concurrently, and a pull request waits for the longer of
+      # the two rather than for their sum. Both are required through `packing-required`.
+      #
+      # Not a subset, and that distinction is the reason these are tier flags rather than
+      # `--skip`. `--skip` narrows a tier while still reporting it, so this job would have
+      # been judged against `--fast`'s recorded 502.3s and failed for finishing early;
+      # `--only` reports no tier at all and would have left both halves of the
+      # pull-request surface with no declared ceiling, which is `D-466` exactly.
+      # `--checks` and `--sweeps` each carry their own entry in `devtools/gate-budgets.yaml`.
+      #
+      # `test_the_pull_request_jobs_partition_the_surface` reads this file, parses these
+      # two commands with the CLI's own parser and resolves them through its own selector,
+      # and requires the two selections to be disjoint and to cover every step outside the
+      # four `test_the_pull_request_surface_defers_only_what_was_measured` pins. A step
+      # added tomorrow lands in one job or the other or fails that test.
+      - name: Run the required pull-request checks
         if: "github.event_name == 'pull_request'"
         run: >-
           uv run --frozen --all-extras --group dev
-          packing-validate --fast --jobs 3 --inner-jobs 1
+          packing-validate --checks --jobs 3 --inner-jobs 1
 
       # Everything except the exhaustive exact tier, which is the `exhaustive` job below.
       # `--skip` is what stops it running here as well: without it the two jobs would both
@@ -119,6 +140,57 @@ jobs:
           uv run --frozen --all-extras --group dev
           packing-validate --skip "exhaustive exact behavioral tests"
           --jobs 2 --inner-jobs 2
+
+  sweeps:
+    # The other half of the pull-request surface, on its own runner and at the same time.
+    #
+    # Four steps, 598.9s of CI step time between them, all of one kind: each re-derives a
+    # retained atlas from the hundred-odd witnesses under it and compares the result byte
+    # for byte. They are the class `D-369` measured -- a registry or generated view going
+    # stale is what actually breaks CI here -- so they belong on every pull request, and
+    # `D-455` is what happened the last time work of this kind ran only after a merge.
+    # What they cannot do is share three workers with the quick behavioural lane: 468.11s
+    # of them beside it put five ordinary tests over the lane's 5s per-test ceiling on
+    # contention alone.
+    #
+    # `--jobs 4 --inner-jobs 1` because this job has four units and four cpus, so outer
+    # parallelism is already saturated and the wall is the longest unit's wall. That unit
+    # is `prospective n=101..324 safe seed` at 213.2s, and it is the reason this job does
+    # not go below about three and a half minutes: a second runner cannot shorten a wall
+    # that is one step, which is the same finding `BC-218` recorded one level up. The
+    # lever from here is that step's own cost, not another job.
+    #
+    # Shallow checkout: the step that needs full history is `provenance`, and it is in the
+    # `validate` job's half. `needs_engine` is false for all four, so no cargo build here.
+    if: "github.event_name == 'pull_request'"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # kpress is vendored at vendor/kpress and installed from that path, so
+          # the environment does not resolve without the submodule checked out.
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Run the required pull-request record sweeps
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --sweeps --jobs 4 --inner-jobs 1
 
   exhaustive:
     # The exhaustive exact tier, on its own runner, reporting its own verdict against its
@@ -182,14 +254,23 @@ jobs:
     # required check pending rather than green -- the safe direction, and the reason the
     # header comment warns against *path* filtering is unaffected, since supersession
     # always starts a replacement run that supplies the check.
+    #
+    # Both halves of the pull-request surface are named here, and this job staying the
+    # single required context is the reason the split is allowed to exist: `BC-218` set
+    # that as the condition for any fan-out, because `D-380` records what a fan-out of
+    # separately required checks did to this repository once. A reviewer still watches one
+    # context; it just has two prerequisites now.
     if: "!cancelled() && github.event_name == 'pull_request'"
-    needs: validate
+    needs: [validate, sweeps]
     runs-on: ubuntu-latest
     steps:
       - name: Require every pull-request prerequisite
         env:
           VALIDATE_RESULT: ${{ needs.validate.result }}
-        run: test "$VALIDATE_RESULT" = "success"
+          SWEEPS_RESULT: ${{ needs.sweeps.result }}
+        run: |
+          test "$VALIDATE_RESULT" = "success"
+          test "$SWEEPS_RESULT" = "success"
 
   macos-portability:
     # A second-architecture smoke check, deliberately minimal.

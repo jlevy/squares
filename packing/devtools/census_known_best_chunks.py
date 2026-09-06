@@ -7,7 +7,9 @@ import argparse
 import json
 from collections import Counter
 from collections.abc import Sequence
+from functools import cache
 from pathlib import Path
+from typing import Any
 
 from strif import atomic_output_file
 
@@ -28,6 +30,30 @@ PARTITION_OUTPUT = ROOT / "atlas/known-best/chunk-partitions.json"
 WITNESS_SCHEMA = ROOT / "witnesses/witness.schema.yaml"
 GENERATOR = "python -m devtools.census_known_best_chunks"
 PARTITION_MAXIMUM_STATES = 10_000
+
+
+@cache
+def _corpus() -> tuple[tuple[dict, ...], tuple[str, ...]]:
+    """The atlas witnesses and their source kinds, read once per process."""
+    atlas = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]
+    witnesses = tuple(
+        load_witness(ROOT / entry["witness"]["path"], fallback_schema=WITNESS_SCHEMA)
+        for entry in atlas["entries"]
+    )
+    return witnesses, tuple(entry["source"]["kind"] for entry in atlas["entries"])
+
+
+@cache
+def _component_entries(tolerance: float) -> tuple[dict[str, Any], ...]:
+    """One maximal-component census per witness, built once and published twice.
+
+    The partition atlas searches inside exactly the census the component atlas prints,
+    and building it a second time was the largest single cost in this step: 200 censuses
+    where 100 exist. Memoized on the band rather than passed around, because both
+    documents are reachable from `--update` and from `--check`.
+    """
+    witnesses, _kinds = _corpus()
+    return tuple(component_census(witness, tolerance=tolerance) for witness in witnesses)
 
 
 def _summary(entries: list[dict]) -> dict:
@@ -109,18 +135,14 @@ def _contact_summary(entries: list[dict], source_kinds: list[str]) -> dict:
 
 
 def expected_document() -> dict:
-    atlas = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]
-    witnesses = [
-        load_witness(ROOT / entry["witness"]["path"], fallback_schema=WITNESS_SCHEMA)
-        for entry in atlas["entries"]
-    ]
-    source_kinds = [entry["source"]["kind"] for entry in atlas["entries"]]
+    witnesses, source_kind_values = _corpus()
+    source_kinds = list(source_kind_values)
     bands = []
     for name, tolerance in (
         ("exact", EXACT_ADJACENCY_TOLERANCE),
         ("near", NEAR_ADJACENCY_TOLERANCE),
     ):
-        entries = [component_census(witness, tolerance=tolerance) for witness in witnesses]
+        entries = list(_component_entries(tolerance))
         bands.append({"name": name, "summary": _summary(entries), "entries": entries})
     contact_sweeps = []
     for name, angle_tolerance, contact_tolerance in (
@@ -236,12 +258,8 @@ def _partition_summary(entries: list[dict], source_kinds: list[str]) -> dict:
 
 
 def expected_partition_document() -> dict:
-    atlas = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]
-    witnesses = [
-        load_witness(ROOT / entry["witness"]["path"], fallback_schema=WITNESS_SCHEMA)
-        for entry in atlas["entries"]
-    ]
-    source_kinds = [entry["source"]["kind"] for entry in atlas["entries"]]
+    witnesses, source_kind_values = _corpus()
+    source_kinds = list(source_kind_values)
     bands = []
     for name, tolerance in (
         ("exact", EXACT_ADJACENCY_TOLERANCE),
@@ -253,10 +271,13 @@ def expected_partition_document() -> dict:
                     witness,
                     tolerance=tolerance,
                     maximum_states=PARTITION_MAXIMUM_STATES,
+                    component_document=component_document,
                 ),
                 "source_kind": source_kind,
             }
-            for witness, source_kind in zip(witnesses, source_kinds, strict=True)
+            for witness, source_kind, component_document in zip(
+                witnesses, source_kinds, _component_entries(tolerance), strict=True
+            )
         ]
         bands.append(
             {

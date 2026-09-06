@@ -57,6 +57,28 @@ from devtools.audit_n54_source_formula import derive_receipt
 FIXTURE = Path("cases/n54_source_contract/synthetic_fixture.n54")
 
 
+@pytest.fixture(scope="module")
+def base_receipt() -> dict[str, Any]:
+    """The unmutated field receipt, derived once for the whole module.
+
+    `derive_receipt()` is a sympy derivation -- eight `simplify` identities and five
+    `minpoly` computations -- and it costs 2.9s per call. Nothing in this module wants a
+    *second* derivation: the mutation tests below want one receipt they can each break in
+    a different place, which is why every call site already deep-copies before touching
+    it. Derived per parametrization it was 16.56s of the quick lane's 149.31s of call
+    time, five re-derivations of a value that is frozen by construction.
+
+    That the derivation itself holds is asserted where it belongs and not here:
+    `test_audit_n54_source_formula.py::test_n54_source_formula_closes_in_one_quartic_field`
+    runs it in the slow lane, its two named negative controls refuse a perturbed input,
+    and the full gate's `n=54 source formula` step runs the tool's own `--check`.
+
+    Module scope rather than session: this is the only module that derives it, and a
+    session fixture would advertise a sharing that does not exist.
+    """
+    return cast(dict[str, Any], derive_receipt())
+
+
 def _comment(payload: str) -> bytes:
     return f"<!--@n54 {payload}-->\n".encode()
 
@@ -297,9 +319,9 @@ def test_synthetic_fixture_evaluates_exactly_in_assignment_order() -> None:
     ],
 )
 def test_field_receipt_semantic_drift_is_refused_before_digest(
-    mutation: str, message: str
+    mutation: str, message: str, base_receipt: dict[str, Any]
 ) -> None:
-    receipt = cast(dict[str, Any], copy.deepcopy(derive_receipt()))
+    receipt = copy.deepcopy(base_receipt)
     if mutation == "field-name":
         receipt["field"]["name"] = "Q(q)"
     elif mutation == "field-polynomial":
@@ -317,6 +339,9 @@ def test_field_receipt_semantic_drift_is_refused_before_digest(
 
 @pytest.mark.slow
 def test_field_receipt_digest_drift_is_refused() -> None:
+    # Deliberately NOT the `base_receipt` fixture. This test is deferred to the deep
+    # surface, where a `call` phase under 1s fails the floor; taking the derivation from
+    # a fixture would move its 2.9s into `setup` and hand the marker straight back.
     receipt = cast(dict[str, Any], copy.deepcopy(derive_receipt()))
     receipt["scope"] = "mutated unprojected scope"
 

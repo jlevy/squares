@@ -65,7 +65,7 @@ DEFAULT_TIMEOUT_SECONDS = 900.0
 #: `test_every_boolean_flag_is_classified` refuses a new `store_true` flag that appears in
 #: neither this tuple nor its allow-list, so a tier cannot be added without deciding
 #: whether it needs a ceiling.
-TIER_FLAGS = ("push", "records", "edit", "fast")
+TIER_FLAGS = ("push", "records", "edit", "checks", "sweeps", "fast")
 TIER_IDS = (*TIER_FLAGS, "full")
 #: The budget of the whole non-exhaustive suite, read by `fast behavioral tests` and by
 #: `--push` when its selector expands to everything (D-432). The two run the same suite
@@ -307,6 +307,33 @@ class Step:
     Being excluded from `--edit` is not being excluded from the gate. Every broad step
     still runs in `--fast` and above, and CI runs the full gate on every push."""
 
+    sweep: bool = False
+    """This step re-derives a retained atlas from its witnesses, and it is expensive
+    enough that the pull request runs it on a second runner rather than beside the rest.
+
+    `fast` says *whether* a pull request runs a step; this says *which of the pull
+    request's two jobs* runs it. Every sweep is also `fast`, the two selections are
+    complements within `--fast`, and
+    `test_the_pull_request_jobs_partition_the_surface` reads the workflow and checks
+    both halves of that against what CI actually invokes -- so a step cannot land in
+    neither job, and no step is paid for twice.
+
+    The boundary is a measurement, not a topic. Four steps carry it, and on CI's
+    four-cpu runner at commit `30706bcb` they cost 598.9s of the tier's 1,100s of step
+    time: the prospective seed at 213.2s, the known-best chunk census at about 181s, the
+    translation-escape screen at 130.8s, and the rest of the known-best atlas at about
+    74s. Nothing else in the tier is above 90s. They are also one kind of work -- each
+    rebuilds the retained atlas from the hundred-odd witnesses and compares it byte for
+    byte -- which is why the split is stable: a step joins this set by being measured
+    into it, and `test_the_pull_request_runs_its_sweeps_on_a_second_runner` is where the
+    number has to be typed.
+
+    Why a second runner rather than a wider one, and this is the whole arithmetic. The
+    tier is about 1,100s of step time on four cpus, so one job cannot go below 275s
+    however it is scheduled, and it does not get there anyway: the sweeps and the quick
+    lane are the four longest steps and they queue behind each other. Two jobs is eight
+    cpus, and the split is where it is because it leaves both halves the same size."""
+
     touches: tuple[str, ...] = ()
     """Repo-relative path globs whose change can affect this step's verdict.
 
@@ -377,6 +404,10 @@ class Step:
     @property
     def tags(self) -> str:
         tags = ["fast" if self.fast else "full"]
+        if self.sweep:
+            tags.append("sweeps")
+        elif self.fast:
+            tags.append("checks")
         if self.fast and not self.broad:
             tags.append("edit")
         if self.records:
@@ -1002,13 +1033,27 @@ def _svg_rendering(context: Context) -> str:
 
 
 def _known_best_atlas(context: Context) -> str:
+    """The known-best atlas without the chunk census, which is its own step.
+
+    `_commands` runs its list in one process after another, so a step is only as
+    schedulable as its longest member and the gate's `--jobs` pool cannot see inside it.
+    Measured one subcommand at a time on a four-cpu box at `PACK_JOBS=1`, this step's
+    nine members were 133.22s, of which `census_known_best_chunks` alone was 94.85s and
+    `build_known_best_atlas` 27.28s; the other seven were 11.09s between them. Against
+    the 254.92s the whole step cost on CI that is about 181s in one member, so a step
+    declared as one unit put a three-minute serial block in the middle of a tier trying
+    to finish in three minutes.
+
+    Splitting at that seam is the only division the measurement supports, and it is
+    two steps rather than nine for the same reason: the other seven are noise, and a
+    step per subcommand would be seven more names in the register for no wall.
+    """
     output = _commands(
         context,
         (
             (sys.executable, "-m", "devtools.build_known_best_atlas", "--check"),
             (sys.executable, "-m", "devtools.build_composite_figure_data", "--check"),
             (sys.executable, "-m", "devtools.render_composite_pdf", "--check"),
-            (sys.executable, "-m", "devtools.census_known_best_chunks", "--check"),
             (
                 sys.executable,
                 "-m",
@@ -1040,8 +1085,6 @@ def _known_best_atlas(context: Context) -> str:
         output,
         "known-best atlas check passed: 100 sources/plans, witnesses, renders, "
         "1 composite, and links",
-        "chunk census check passed: components, contacts, and bounded lattice partitions "
-        "for 100 records",
         "known-best contact overlay check passed: 5 house-rendered calibration strata",
         "known-best chunk evidence profile check passed: 36 non-grid calibration cases",
         "contact enumeration pricing check passed",
@@ -1051,18 +1094,52 @@ def _known_best_atlas(context: Context) -> str:
     return output
 
 
-def _prospective_atlas(context: Context) -> str:
-    output = _commands(
-        context,
-        (
-            (sys.executable, "-m", "devtools.map_prospective_sources", "--check"),
-            (sys.executable, "-m", "devtools.build_prospective_atlas", "--check"),
-        ),
-    )
+def _known_best_chunk_census(context: Context) -> str:
+    """94.85s of the 133.22s the known-best atlas cost as one step, and about 181s on CI.
+
+    Nothing about the check changed when it was given its own name: it reads the same
+    committed documents and compares the same re-derivation. What changed is that the
+    gate can now schedule it, and that the step table names it -- which is what `OR-14`
+    asks for before anyone tries to make it cheaper. It is the longest single unit in
+    the sweeps job, and the second-longest anywhere on the pull-request surface.
+    """
+    output = _module(context, "devtools.census_known_best_chunks", "--check")
     _require_text(
         output,
-        "prospective source map check passed: 224 cases, availability and SVG",
-        "prospective atlas seed check passed: 101 witnesses and 101 house renderings",
+        "chunk census check passed: components, contacts, and bounded lattice partitions "
+        "for 100 records",
+    )
+    return output
+
+
+def _prospective_source_map(context: Context) -> str:
+    output = _module(context, "devtools.map_prospective_sources", "--check")
+    _require_text(
+        output, "prospective source map check passed: 224 cases, availability and SVG"
+    )
+    return output
+
+
+def _prospective_atlas(context: Context) -> str:
+    """The single longest unit on the pull-request surface: 213.2s of CI's 1,100s.
+
+    Split from the source map it used to share a step with, and the split buys
+    attribution rather than time -- the map is 0.39s of the 88.76s the pair cost
+    locally. That is the point: `OR-14` says to attribute rather than absorb, and until
+    this step carried one subcommand the tier's largest cost was reported under a name
+    that also covered a sub-second check.
+
+    It is the reason no arrangement of GitHub jobs takes this surface below about three
+    and a half minutes. The sweeps job has four units and four cpus, so outer
+    parallelism is already saturated and its wall is this step's wall; the only lever
+    left is the step's own cost. `build_prospective_atlas` rebuilds 101 witnesses and
+    101 house renderings in one process, each independent of the others, and
+    `sqpack.workers.worker_count` -- which `check_golden_basins`, `check_regressions`
+    and `check_soundness_perimeter` already use -- is unused here.
+    """
+    output = _module(context, "devtools.build_prospective_atlas", "--check")
+    _require_text(
+        output, "prospective atlas seed check passed: 101 witnesses and 101 house renderings"
     )
     return output
 
@@ -1865,7 +1942,32 @@ _CASES = ("packing/cases/*",)
 _RESULTS = ("packing/campaign/series/*",)
 
 # What `fast` means since 2026-09-05: the tier a pull request runs, and therefore the
-# tier that has to hold everything a merge would otherwise be the first to check.
+# tier that has to hold everything a merge would otherwise be the first to check. Since
+# 2026-09-06 a pull request runs it as two concurrent jobs rather than one -- `--checks`
+# and `--sweeps`, complements within this tier and argued on `Step.sweep` -- so the tier
+# is unchanged and what a pull request waits for is its longer half rather than its sum.
+#
+# The measurement that forced the split, CI run at commit `30706bcb`, `--fast --jobs 3
+# --inner-jobs 1` on a four-cpu runner: 501.97s of wall over about 1,100s of step time.
+# Two steps were 468.11s of it. Three facts follow and all three are arithmetic rather
+# than judgement:
+#
+#   * 1,100s of step time on four cpus cannot finish in under 275s however it is
+#     scheduled, so the two-to-three-minute target is not reachable on one runner. Two
+#     runners is eight cpus and a 137s floor.
+#   * the tier's utilisation was 2.19 of its three workers, so the loss was not only
+#     work but queueing: the four longest steps were 826s between them and had to share.
+#   * a job cannot be shorter than its longest step, which is why the composite steps
+#     were split at their measured seams first. `known-best n=1..100 atlas` was nine
+#     subcommands run one after another and one of them was 71 per cent of it.
+#
+# The contention was the second cost and it was not on the clock. Five ordinary tests
+# reported between 5.47s and 6.72s against the quick lane's 5s per-test ceiling on the
+# merged tier -- not because they had grown but because 468s of atlas rendering was
+# running beside them on the same four cpus. Marking them was tried and is wrong: in the
+# slow lane the same tests fall under the 1s marker floor, which then demands the marker
+# back. They are contended, not slow, and moving the sweeps to their own runner is what
+# removes the contention rather than relabelling it.
 # Twenty-four of the sixty-one steps ran only after merge until this date, and two
 # defects reached main through that gap in one afternoon and sat there red for nine
 # hours -- D-455 caught by `deterministic SVG rendering` and D-456 by the exhaustive
@@ -1992,18 +2094,23 @@ STEPS: tuple[Step, ...] = (
             "*.md",
         ),
     ),
-    # The three record sweeps below are the tier's expensive half -- 170.44s, 122.17s and
-    # 96.50s on CI -- and they are promoted anyway. They are the class D-369 measured:
-    # every CI failure on that branch was a registry, a generated view or a declared
-    # contract going stale, and these three are what re-derives the largest of those from
-    # 100 retained witnesses. A pull request that retains a witness or edits a source map
-    # is exactly the change that breaks them, and until now exactly the change that could
-    # not find out until after the merge.
+    # The record sweeps below are the tier's expensive half -- 598.9s of about 1,100s of
+    # CI step time -- and they are on the pull-request surface anyway. They are the class
+    # D-369 measured: every CI failure on that branch was a registry, a generated view or
+    # a declared contract going stale, and these are what re-derives the largest of those
+    # from 100 retained witnesses. A pull request that retains a witness or edits a source
+    # map is exactly the change that breaks them, and before 2026-09-05 exactly the change
+    # that could not find out until after the merge.
+    #
+    # `sweep=True` is where they run rather than whether: the pull request pays them on a
+    # second runner, concurrently with everything else. What that is worth, and why it is
+    # a second runner and not a wider one, is argued on `Step.sweep`.
     Step(
         "known-best n=1..100 atlas",
         _known_best_atlas,
         fast=True,
         broad=True,
+        sweep=True,
         touches=(
             *_CORE,
             *_CASES,
@@ -2014,11 +2121,47 @@ STEPS: tuple[Step, ...] = (
             "packing/resources/*",
         ),
     ),
+    # Split out of the step above on 2026-09-06, and it keeps that step's attribution
+    # rather than a narrower one of its own. The two halves read overlapping corners of
+    # the same corpus, an over-wide pattern costs a step that need not have run while a
+    # narrow one costs a verdict nobody checked, and only the second is a soundness
+    # failure -- so the conservative move on a split is to give both halves the parent's
+    # set and narrow later with a measurement.
     Step(
-        "prospective n=101..324 source map and safe seed",
+        "known-best chunk census",
+        _known_best_chunk_census,
+        fast=True,
+        broad=True,
+        sweep=True,
+        touches=(
+            *_CORE,
+            *_CASES,
+            "packing/devtools/*",
+            "packing/atlas/*",
+            "packing/witnesses/*",
+            "packing/frontier/*",
+            "packing/resources/*",
+        ),
+    ),
+    # 0.39s locally, against 88.37s for the seed it used to share a step with. It is not
+    # a sweep and does not belong on the second runner: it reads one source map.
+    Step(
+        "prospective n=101..324 source map",
+        _prospective_source_map,
+        fast=True,
+        touches=(
+            *_CORE,
+            "packing/atlas/prospective/*",
+            "packing/resources/web/*",
+            "packing/devtools/map_prospective_sources.py",
+        ),
+    ),
+    Step(
+        "prospective n=101..324 safe seed",
         _prospective_atlas,
         fast=True,
         broad=True,
+        sweep=True,
         touches=(
             *_CORE,
             "packing/atlas/prospective/*",
@@ -2034,6 +2177,7 @@ STEPS: tuple[Step, ...] = (
         _translation_escape_screen,
         fast=True,
         broad=True,
+        sweep=True,
         touches=(
             *_CORE,
             "packing/atlas/known-best/*",
@@ -2845,9 +2989,25 @@ def _select_steps(
     fast: bool,
     records: bool = False,
     edit: bool = False,
+    checks: bool = False,
+    sweeps: bool = False,
     skip: Sequence[str] = (),
 ) -> list[Step]:
     """The steps a tier and its name filters select.
+
+    `--checks` and `--sweeps` are the two halves of `--fast`, and they exist because the
+    pull request runs them as two concurrent GitHub jobs. They are complements by
+    construction here -- one takes the fast steps marked `sweep`, the other the fast
+    steps that are not -- so no step can be in both and none in neither, which is the
+    same property that makes the quick and slow behavioural lanes safe.
+
+    Two jobs could have divided the tier with `--only` and `--skip` instead, and that
+    was rejected on the register rather than on taste. A subset of a tier has no
+    declared cost: `--only` reports no tier at all, and `--skip` reports the tier it
+    narrowed, so a half-tier run would have been judged against the whole tier's
+    recorded 502.3s and failed the stale rule for finishing early. Naming the halves
+    makes each a tier with its own ceiling and its own record, which is what
+    `D-466` says a surface CI runs on every push has to have.
 
     `--skip` is `--only` read the other way round, and it exists so a surface can be run
     as everything-but-one. Two CI jobs cannot divide the gate between them with `--only`
@@ -2868,7 +3028,12 @@ def _select_steps(
     is refused rather than silently ignored, which is the honest answer to a request this
     selector cannot carry out.
     """
-    selected = [step for step in STEPS if not (fast or edit) or step.fast]
+    if sweeps:
+        selected = [step for step in STEPS if step.sweep]
+    elif checks:
+        selected = [step for step in STEPS if step.fast and not step.sweep]
+    else:
+        selected = [step for step in STEPS if not (fast or edit) or step.fast]
     if edit:
         selected = [step for step in selected if not step.broad]
     if records:
@@ -3225,6 +3390,22 @@ def _parser() -> ArgumentParser:
     )
     parser.add_argument("--fast", action="store_true", help="run the fast edit-loop checks")
     parser.add_argument(
+        "--checks",
+        action="store_true",
+        help=(
+            "run the half of --fast that is not a record sweep: the floors, the record "
+            "checks, the quick behavioral lane, and the exact and geometric contracts"
+        ),
+    )
+    parser.add_argument(
+        "--sweeps",
+        action="store_true",
+        help=(
+            "run the half of --fast that re-derives the retained atlases from their "
+            "witnesses; the pull request runs it on a second runner beside --checks"
+        ),
+    )
+    parser.add_argument(
         "--push",
         action="store_true",
         help=(
@@ -3310,18 +3491,31 @@ def _validate_invocation(
     fast: bool,
     records: bool = False,
     edit: bool = False,
+    checks: bool = False,
+    sweeps: bool = False,
     since: str | None = None,
     push: bool = False,
     skip: Sequence[str] = (),
 ) -> None:
-    if strict and (only or skip or fast or records or edit or since or push):
+    narrowed = only or skip or fast or records or edit or checks or sweeps or since or push
+    if strict and narrowed:
         raise UsageError(
-            "--strict cannot be combined with --only, --skip, --fast, --records, "
-            "--edit, --push, or --since"
+            "--strict cannot be combined with --only, --skip, --fast, --checks, "
+            "--sweeps, --records, --edit, --push, or --since"
         )
     if edit and fast:
         raise UsageError(
             "--edit and --fast select different tiers; --fast is the wider of the two"
+        )
+    if checks and sweeps:
+        raise UsageError(
+            "--checks and --sweeps are the two halves of --fast; ask for --fast to run "
+            "both, or for one of them to run that half"
+        )
+    if (checks or sweeps) and (fast or records or edit or push):
+        raise UsageError(
+            "--checks and --sweeps are halves of --fast and are not combined with "
+            "another tier; --fast is both of them"
         )
     if push and (fast or records or edit):
         raise UsageError(
@@ -3348,6 +3542,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             fast=namespace.fast,
             records=namespace.records,
             edit=namespace.edit,
+            checks=namespace.checks,
+            sweeps=namespace.sweeps,
             since=namespace.since,
             push=namespace.push,
             skip=namespace.skip,
@@ -3383,6 +3579,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             fast=namespace.fast,
             records=namespace.records,
             edit=namespace.edit or namespace.push,
+            checks=namespace.checks,
+            sweeps=namespace.sweeps,
             skip=namespace.skip,
         )
         if namespace.push:

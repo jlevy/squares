@@ -140,6 +140,12 @@ tiers:
   # quick lane sizes itself from, not what the tier of machine is nominally sold as.
   reference: {jobs: 3, inner_jobs: 1, cpus: 4}
   argument: >-
+    Since 2026-09-06 no CI job runs this tier whole: a pull request runs `checks` and
+    `sweeps` concurrently and this is their union, so the record below is the last figure
+    CI took of it and the two halves are where the live bands now are. It is still a real
+    tier -- it is what a contributor runs before a block boundary, and it is the thing
+    the two halves have to add up to -- which is why it keeps a ceiling rather than being
+    retired.
     The edit tier plus the behavioural tests under the per-test ceiling: every floor,
     every record check, and the quick lane. What it excludes is a rule rather than a list
     -- `fast behavioral tests` passes the ceiling to pytest as `--durations-min` and fails
@@ -167,6 +173,58 @@ tiers:
     That is a different tier from the one 409s described, in the way that matters here:
     its wall is no longer any single step's wall, so the next number written here should
     be read as a whole-tier figure again and the drift rule will mean what it says.
+
+- id: checks
+  command: packing-validate --checks
+  # Argued from the parts, because this tier has never run: `--fast` measured 501.97s on
+  # CI at commit 30706bcb over about 1,100s of step time, and the four steps `--sweeps`
+  # takes away are 598.9s of that. What is left is about 500s of step time whose longest
+  # member is the quick behavioural lane, so three workers on four cpus should land near
+  # 200s. 400s is twice that: it clears a runner a third slower with room for the
+  # queueing this tier still has, and it is well under the 700s the whole tier is allowed.
+  ceiling_seconds: 400.0
+  # Deliberately unmeasured rather than filled in from a local run. This box reports the
+  # same four cpus CI does, so a local figure would match the reference shape and arm the
+  # drift and stale rules against a machine that is not the one the band is for. The first
+  # CI run at the reference shape prints the line to paste.
+  measured_seconds: null
+  measured_on: null
+  measured_where: null
+  reference: {jobs: 3, inner_jobs: 1, cpus: 4}
+  argument: >-
+    Half of the pull-request surface, and the half a pull request is normally waiting on:
+    every floor, every record check, the quick behavioural lane, and the exact and
+    geometric contracts. Its complement is `sweeps`, the two are complements within
+    `--fast` by construction in `_select_steps`, and
+    `test_the_pull_request_jobs_partition_the_surface` checks that the workflow really
+    invokes both. Splitting the tier into two CI jobs is what bought the wall: 1,100s of
+    step time on one four-cpu runner cannot finish under 275s however it is scheduled,
+    and it was finishing in 502s.
+
+- id: sweeps
+  command: packing-validate --sweeps
+  # Argued from the parts, and from a floor this tier cannot beat. Its four steps cost
+  # 598.9s of CI step time -- the prospective seed 213.2s, the known-best chunk census
+  # about 181s, the translation-escape screen 130.8s, the rest of the known-best atlas
+  # about 74s -- so four workers on four cpus give max(213.2, 149.7) and the wall is the
+  # longest step. About 215s, and 430s is twice it.
+  ceiling_seconds: 430.0
+  measured_seconds: null
+  measured_on: null
+  measured_where: null
+  reference: {jobs: 4, inner_jobs: 1, cpus: 4}
+  argument: >-
+    The pull request's record sweeps, on their own runner: the known-best atlas, its
+    chunk census, the prospective safe seed, and the translation-escape screen. Each
+    re-derives a retained atlas from the witnesses under it and compares it byte for
+    byte, which is both why they are expensive and why they stay on every pull request --
+    a change that retains a witness or edits a source map is exactly what breaks them.
+    Two things about this tier are worth not rediscovering. Its wall is one step's wall:
+    four units on four cpus saturates the outer pool, so `--jobs` is already spent and
+    the only lever left is `prospective n=101..324 safe seed`'s own 213.2s. And it is
+    what removes the contention that failed five ordinary tests against the quick lane's
+    5s per-test ceiling -- those tests were never slow, they were sharing four cpus with
+    468s of atlas rendering.
 
 - id: push
   command: packing-validate --push

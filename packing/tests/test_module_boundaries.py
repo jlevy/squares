@@ -223,15 +223,31 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     validate_steps = _mapping(jobs["validate"])["steps"]
     assert isinstance(validate_steps, list)
+    # The pull-request surface is two concurrent jobs since 2026-09-06, `--checks` here
+    # and `--sweeps` in the `sweeps` job, so a pull request waits for the longer of them
+    # rather than their sum. That they partition `--fast` is proved against the CLI's own
+    # selector by `test_the_pull_request_jobs_partition_the_surface`; what is pinned here
+    # is only that the commands in the file are the ones that test resolves.
     required_step = next(
         _mapping(step)
         for step in validate_steps
-        if _mapping(step).get("name") == "Run the required pull-request surface"
+        if _mapping(step).get("name") == "Run the required pull-request checks"
     )
     assert required_step["if"] == "github.event_name == 'pull_request'"
     assert " ".join(str(required_step["run"]).split()) == (
-        "uv run --frozen --all-extras --group dev packing-validate --fast "
+        "uv run --frozen --all-extras --group dev packing-validate --checks "
         "--jobs 3 --inner-jobs 1"
+    )
+    sweep_steps = _mapping(jobs["sweeps"])["steps"]
+    assert isinstance(sweep_steps, list)
+    sweep_step = next(
+        _mapping(step)
+        for step in sweep_steps
+        if _mapping(step).get("name") == "Run the required pull-request record sweeps"
+    )
+    assert " ".join(str(sweep_step["run"]).split()) == (
+        "uv run --frozen --all-extras --group dev packing-validate --sweeps "
+        "--jobs 4 --inner-jobs 1"
     )
     full_step = next(
         _mapping(step)
@@ -273,7 +289,12 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     ]
 
     required_job = _mapping(jobs["packing-required"])
-    assert required_job["needs"] == "validate"
+    # Both halves of the pull-request surface, and this is the assertion that keeps them
+    # mandatory. Splitting `--fast` across two concurrent jobs buys wall time only if a
+    # pull request still cannot merge without both, so a `needs` naming one of them would
+    # turn the other into an advisory check that nothing blocks on -- the failure mode the
+    # split is otherwise a clean win against.
+    assert required_job["needs"] == ["validate", "sweeps"]
     # `!cancelled()`, not `always()`, and the difference is D-380. With `always()` a run
     # superseded by the next push -- routine, since the workflow sets
     # `cancel-in-progress: true` and OR-3 says to push and keep working -- reached this job
@@ -285,8 +306,19 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     assert "continue-on-error" not in required_job
     required_job_steps = required_job["steps"]
     assert isinstance(required_job_steps, list)
+    # One `test` per prerequisite, and both of them, because `needs` alone does not make a
+    # job's failure fatal here: this job runs under `!cancelled()`, so it is reached even
+    # when a prerequisite failed, and it is the shell that decides. A missing line would
+    # leave that half green whatever it reported.
     required_command = " ".join(str(_mapping(required_job_steps[0])["run"]).split())
-    assert required_command == 'test "$VALIDATE_RESULT" = "success"'
+    assert required_command == (
+        'test "$VALIDATE_RESULT" = "success" test "$SWEEPS_RESULT" = "success"'
+    )
+    required_env = _mapping(_mapping(required_job_steps[0])["env"])
+    assert required_env == {
+        "VALIDATE_RESULT": "${{ needs.validate.result }}",
+        "SWEEPS_RESULT": "${{ needs.sweeps.result }}",
+    }
 
     # The macOS job is a second-architecture smoke check, not a second full gate.
     # It used to run the whole surface, which reached the composite-PDF step, whose

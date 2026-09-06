@@ -52,13 +52,50 @@ def normalise_message(message: str) -> str:
     return message.replace('"', "'")
 
 
-@functools.cache
-def _schema_path_for(path: pathlib.Path) -> pathlib.Path | None:
-    _payload, meta = payload_and_meta(path)
+def _schema_path_from_meta(path: pathlib.Path, meta: dict[str, Any]) -> pathlib.Path | None:
+    """The enforced schema this artifact declares, from frontmatter already in hand."""
     if not meta or meta.get("status") != "enforced":
         return None
     schema_path = (path.parent / meta["schema"]).resolve()
     return schema_path if schema_path.exists() else None
+
+
+@functools.cache
+def _corpus_index() -> dict[pathlib.Path, tuple[pathlib.Path | None, tuple[str, ...] | None]]:
+    """One parse of the corpus: each artifact's enforced schema and top-level key set.
+
+    Both facts come out of the same parse, and everything below that needs either of them
+    without the payload reads them here. It used to be three passes over the corpus and
+    it is now one, which matters because this one runs at *collection*: `_mutation_targets`
+    is evaluated in a `parametrize` decorator, so every xdist worker in every lane paid
+    for it before running a test, including the quick lane, which then deselects the only
+    tests it parametrizes. Measured on this corpus: 3.47s at collection, 1.68s now.
+
+    No payload is retained -- a 5 MB witness is in this corpus -- only the schema path and
+    the sorted key tuple `_mutation_targets` groups on. `None` for the shape marks an
+    artifact whose payload is not an object, which has no mutable surface.
+    """
+    index: dict[pathlib.Path, tuple[pathlib.Path | None, tuple[str, ...] | None]] = {}
+    for path in _corpus():
+        payload, meta = payload_and_meta(path)
+        shape = tuple(sorted(payload)) if isinstance(payload, dict) else None
+        index[path] = (_schema_path_from_meta(path, meta), shape)
+    return index
+
+
+def _schema_path_for(path: pathlib.Path) -> pathlib.Path | None:
+    """The same answer for a caller that has not read the artifact yet.
+
+    A lookup for anything in the corpus, and a parse for anything else -- the index is
+    built once and the corpus is globbed per call, so a path that arrived after the
+    index has to be answered rather than raised at. A caller that is holding the
+    payload's metadata already should use `_schema_path_from_meta`.
+    """
+    entry = _corpus_index().get(path)
+    if entry is not None:
+        return entry[0]
+    _payload, meta = payload_and_meta(path)
+    return _schema_path_from_meta(path, meta)
 
 
 @functools.cache
@@ -133,11 +170,15 @@ def _mutations(payload: Any, schema: dict[str, Any]) -> list[tuple[str, Any]]:
 
 @pytest.mark.parametrize("path", _corpus(), ids=lambda p: p.name)
 def test_validators_agree_on_the_corpus(path: pathlib.Path) -> None:
-    """Both validators reach the same verdict on every enforced artifact."""
-    schema_path = _schema_path_for(path)
+    """Both validators reach the same verdict on every enforced artifact.
+
+    One parse, not two: the schema this artifact declares is in the frontmatter the
+    payload came with, and asking `_schema_path_for` for it re-read the file.
+    """
+    payload, meta = payload_and_meta(path)
+    schema_path = _schema_path_from_meta(path, meta)
     if schema_path is None:
         pytest.skip(f"{path.name} declares no enforced schema")
-    payload, _ = payload_and_meta(path)
     assert _verdict(schema_path, payload) == _verdict_rs(schema_path, payload), (
         f"{path.name}: validators disagree on the artifact as committed"
     )
@@ -163,14 +204,10 @@ def _mutation_targets() -> tuple[pathlib.Path, ...]:
     Cheapest-first makes the representative of each shape the one that costs least.
     """
     by_shape: dict[tuple[pathlib.Path, tuple[str, ...]], pathlib.Path] = {}
-    for path in _corpus():
-        schema_path = _schema_path_for(path)
-        if schema_path is None:
+    for path, (schema_path, keys) in _corpus_index().items():
+        if schema_path is None or keys is None:
             continue
-        payload, _meta = payload_and_meta(path)
-        if not isinstance(payload, dict):
-            continue
-        shape = (schema_path, tuple(sorted(payload)))
+        shape = (schema_path, keys)
         current = by_shape.get(shape)
         if current is None or path.stat().st_size < current.stat().st_size:
             by_shape[shape] = path
