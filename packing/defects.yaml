@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 465
+count: 466
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -15129,3 +15129,41 @@ defects:
     counted files measured, rather than answered here by raising the number again.
   status: fixed
   recorded_in: packing/devtools/run_negative_controls.py
+- id: D-466
+  title: A dependency comment claimed a reproducibility the code it describes denies
+  date: '2026-09-06'
+  layer: tooling
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: >-
+    since the comment was written; nothing reads a comment, so nothing could disagree
+    with it.
+  severity: low
+  what: >-
+    `pyproject.toml` introduced cairosvg with "Emits no timestamps, so the output is
+    byte-reproducible and the staleness check is a byte comparison." Both halves are
+    false, and `render_composite_pdf`'s own docstring says so four lines into the file:
+    "cairo assigns font-subset tags per process, so two runs of the same input agree
+    within one process but not across two", which is why staleness is tracked by a
+    receipt -- the source SVG's sha256 appended after %%EOF -- rather than by comparing
+    bytes. Measured on 2026-09-06: two processes rendering the identical committed SVG
+    both produced 78,519 bytes and the digests differed.
+  consequence: >-
+    No artifact is wrong and no gate was weakened; the code has always done the right
+    thing. What was wrong is what a reader learns from the file where a dependency is
+    justified. The cost showed up when a second PDF was proposed for this repository and
+    the question "can it be byte-compared?" was answered from this comment, which made
+    the existing PDF sound like a precedent for a discipline it does not follow. A
+    comment that overstates a guarantee is worse than none, because it is believed.
+  fix: >-
+    Fixed on 2026-09-06 by saying what the code does: a receipt, not a byte comparison,
+    with the reason and the measurement, and a note that the module's docstring had it
+    right all along. No code or lockfile change -- `uv lock --check` resolves unchanged.
+  regression: >-
+    None automated, and the reason is worth stating: a test that reads a comment would
+    pin prose rather than behaviour. What makes this class findable is that the claim
+    and its refutation were eleven lines apart in two files, and the durable answer is
+    to state a guarantee once, beside the code that provides it, rather than restating
+    it where a dependency is declared.
+  status: fixed
+  recorded_in: packing/pyproject.toml

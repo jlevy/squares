@@ -31,8 +31,14 @@ symbolic = ["sympy>=1.13"]
 [dependency-groups]
 dev = [
     "basedpyright>=1.31",
-    # Vector PDF export of the known-best composite. Emits no timestamps, so the
-    # output is byte-reproducible and the staleness check is a byte comparison.
+    # Vector PDF export of the known-best composite. Its staleness check is a
+    # receipt -- the source SVG's sha256, appended after %%EOF -- and not a byte
+    # comparison, because the output is not byte-reproducible: cairo assigns
+    # font-subset tags per process, so two runs of one input agree within a process
+    # and not across two. Measured 2026-09-06: two processes on the identical SVG
+    # gave 78,519 bytes both times and different digests. This comment used to
+    # claim the opposite of both halves; `render_composite_pdf`'s own docstring had
+    # it right all along.
     "cairosvg>=2.7",
     # Renders the certificate explainer page: kpress supplies the design tokens,
     # the reading faces and the KaTeX distribution, all inlined into one file.

@@ -2,7 +2,7 @@
 
 # Defect log
 
-465 defects recorded across the packing toolchain.
+466 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
 | `review` | 275 | a human or agent reading the work against a checklist |
 | `anomaly` | 14 | a result that made no sense, chased down |
-| `inspection` | 57 | reading the code or the design with intent |
+| `inspection` | 58 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 70 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 70 of 465, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 70 of 466, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 70 of 465, and none of
 | quench | 23 |
 | verifier | 9 |
 | record | 145 |
-| tooling | 168 |
+| tooling | 169 |
 | docs | 109 |
 
 ## By kind
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 70 of 465, and none of
 | --- | ---: |
 | soundness | 94 |
 | validity | 117 |
-| bookkeeping | 178 |
+| bookkeeping | 179 |
 | robustness | 59 |
 | performance | 17 |
 
@@ -701,6 +701,7 @@ This is the actionable list.
 | [D-463](packing/devtools/templates/explainer-shell.html) | 2026-09-05 | tooling | bookkeeping |  | `inspection` | low | fixed | Three canvases took every touch, so the page could not be scrolled past them |
 | [D-464](packing/devtools/templates/explainer-shell.html) | 2026-09-05 | tooling | bookkeeping |  | `inspection` | low | fixed | Every link on the page failed contrast in dark mode |
 | [D-465](packing/devtools/run_negative_controls.py) | 2026-09-05 | tooling | bookkeeping |  | `gate` | low | fixed | The gate counted its own render output against the mutation-snapshot cap |
+| [D-466](packing/pyproject.toml) | 2026-09-06 | tooling | bookkeeping |  | `inspection` | low | fixed | A dependency comment claimed a reproducibility the code it describes denies |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
