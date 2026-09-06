@@ -283,10 +283,15 @@ body {
    beside it: this stylesheet is written in classes against a vendor written in types,
    which loses by default and says nothing when it does. */
 .cert-page .colophon {
+  /* Set off by a rule, because this is now the only place the typesetting is credited:
+     the running foot used to repeat it under every printed page and no longer does, so
+     the note at the end has to read as a closing one rather than as a last paragraph. */
+  border-block-start: 1px solid var(--kpress-doc-border);
   color: var(--kpress-doc-muted);
   font-family: var(--kpress-font-sans);
   font-size: var(--kpress-font-size-tiny);
   margin-block: 2.5rem 0;
+  padding-block-start: 1.1rem;
 }
 
 /* The list bullet, centred on the line it marks rather than offset from a type size.
@@ -766,14 +771,42 @@ body {
     --kpress-print-font-size: 12pt;
   }
 
-  /* No folio on the title page. kpress prints its credit and the page number in the
-     `@page` margin boxes on every page, which is right for a body page and wrong under
-     a title block that already carries the edition and the repository. Chromium 141
-     supports margin boxes and `@page :first` -- verified, not assumed; the advice that
-     Blink ignores them is out of date. */
-  @page :first {
+  /* The running foot carries the folio and nothing else.
+
+     kpress puts its own credit in `@bottom-left` on every page -- `--kpress-print-footer`
+     is the string "Formatted by KPress" -- and the page number in `@bottom-right`. The
+     credit is right for a page kpress publishes and wrong for a paper: it is the same
+     eighteen characters under all thirteen pages, saying at the foot of the argument what
+     the colophon already says once at the end of it. The folio stays, because a paper's
+     pages need numbering.
+
+     Chromium 141 supports margin boxes and `@page :first` -- verified, not assumed; the
+     advice that Blink ignores them is out of date. */
+  @page {
     @bottom-left { content: none; }
+  }
+
+  /* No folio on the title page either: it already carries the edition and the
+     repository, and a page number under a title block reads as a body page. */
+  @page :first {
     @bottom-right { content: none; }
+  }
+
+  /* The footnotes are the paper's sources, not an aside, so they are set in the text
+     colour rather than the muted one kpress gives them. */
+  .cert-page .kpress-footnotes {
+    color: var(--kpress-doc-text);
+  }
+
+  /* Their numbers in the sans the entries are set in. kpress replaces the list marker in
+     print with `content: counter(...)` on `li::before` and sets that in
+     `--kpress-font-prose`, which is right for a numbered list inside serif prose and
+     wrong here: the footnote block is sans throughout, so its own numbers were the one
+     serif thing in it. Scoped to the footnotes for that reason -- an ordered list in the
+     body keeps serif figures, because the text beside them is serif. */
+  .cert-page .kpress-footnotes ol > li::before {
+    font-family: var(--kpress-font-sans);
+    font-feature-settings: var(--kpress-font-features-sans);
   }
 }
 
@@ -1366,10 +1399,6 @@ window.addEventListener('afterprint', repaint);
     if (record && location.hash !== '#' + slug) history.replaceState(null, '', '#' + slug);
   }
   switches.forEach(b => b.addEventListener('click', () => show(b.dataset.cert, true, b)));
-  /* The PDF chip prints the page. The print stylesheet turns it into a document:
-     one certificate, no controls, link targets spelled out. */
-  const printer = document.querySelector('[data-print="page"]');
-  if (printer) printer.addEventListener('click', e => { e.preventDefault(); window.print(); });
   /* Only a hash naming a certificate switches the page. A footnote jump sets
      the hash too (#fn-3, #fnref-3), and it leaves the selection alone. */
   window.addEventListener('hashchange', () => {
