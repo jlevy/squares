@@ -61,8 +61,8 @@ session:
       with mergeable_state clean, and left draft.
     evidence:
     - 'CI run 33977875075, job validate: 3 steps failed on head 6313eee4'
-    - 'CI run 33988186764 on e032a0f6: validate, packing-required, build and
-      macos-portability all success'
+    - 'CI run 33989526527 on e032a0f6: validate, packing-required and
+      macos-portability all success; build passed in run 33989526688'
     - packing/campaign/series/series-000-smoke-and-calibration/results/bc-213-m5-midpoint-register.txt
     - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
     stop_reason: >-
@@ -82,7 +82,7 @@ session:
       priority so it does not depend on one agent remembering it: OR-14 on cycle time
       and OR-15 on outcome over ceremony.
     bead: think-doar
-    status: in_progress
+    status: stopped
     entered_by: user_request
     switch_reason: >-
       Phase 1's objective was met -- the pull request is green and out of draft -- and
@@ -105,16 +105,29 @@ session:
     fallback: >-
       Land the measured improvement that exists, record the remaining levers with their
       prices in agenda-023, and leave the ceiling at the last honest measurement.
-    outcome: null
+    outcome: >-
+      Partial. PR 83 merged at 663ca37e on 2026-09-05T21:49:29Z; the required
+      surface was split into concurrent checks and sweeps, and OR-14 and OR-15
+      are recorded. The 150 s target was not reached: PR 94 run 34018965403
+      measured checks at 264.51 s. BC-215 and BC-217 remain blocked in agenda-023,
+      and the record contains no passing full-tier run for this phase.
     evidence:
     - 'CI run 33988948116 on c1120c44: the tier at 297.87 s of a 550 s ceiling, down
       from 1369.60 s, with five tests over the per-test ceiling'
-    stop_reason: null
+    - 'PR 83 merged at 663ca37eb622508d9df00c594b8ef11d2c256f55'
+    - 'CI run 34018965403 on 3655bfd1: checks took 264.51 s; campaign record failed
+      because this phase still claimed to be in progress after its deadline'
+    - packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md
+    stop_reason: >-
+      Retrospective disposition during PR 94 review on 2026-09-06. The phase's
+      declared interval ended without all expected outputs, and its stale live
+      status blocks subsequent commits. Retain the partial result and the original
+      deadline; the remaining efficiency work requires a new prospective phase.
     next_action: >-
-      Merge PR 83, then merge main into the efficiency branch and finish the
-      shared-build fix that is the last thing holding the tier above target.
+      Reconcile BC-214 under think-doar against the current split and its CI costs,
+      then disposition BC-215 and BC-217 before selecting further efficiency work.
   primary_bead: think-wufn
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 960
     checkpoint_minutes: 60
@@ -132,7 +145,11 @@ session:
       0 of 2 cells terminal; H-062 unresolved with its bracket 0.005 wider than
       registered; the n = 12 ladder unmeasured above 99/25; PR 83 draft with three gate
       steps red on head 6313eee4.
-    after: null
+    after: >-
+      Both original lanes and the two follow-up delegations are terminal. H-062 and
+      H-065 were accepted, H-063 was rejected on its declared condition, and the n = 12
+      ladder retained a bounded negative. PR 83 merged. The efficiency continuation
+      remains partial: checks took 264.51 s on CI against a 150 s objective.
   delegations:
   - task: >-
       Lane A, BC-213: H-062's remaining pre-registered rung at 973/200 for n = 20, on
@@ -382,12 +399,21 @@ session:
   - 'ruff check and ruff format: clean repository-wide'
   - 'basedpyright: 0 errors, 0 warnings, 0 notes'
   - 'pytest tests/test_certificate_reach.py: 20 passed'
+  - 'full gate: fast at e032a0f6: passed (phase 1, CI run 33989526527; not a full-tier run)'
+  - 'PR 94 review at 3655bfd1: packing-ledger check reproduced the stale phase deadline;
+    the subsequent record repair is tracked as think-10hu'
   resource_rollups:
   - packing/campaign/resource-usage/f37f604c-3212-50e9-b7f7-4b00b94bfcc0.yaml
-  stop_reason: null
+  stop_reason: >-
+    Retrospective closeout during PR 94 review on 2026-09-06. Research delegations
+    finished and PR 83 merged, but the efficiency phase did not record completion of
+    its target or all expected outputs. This stopped status preserves those limits
+    rather than claiming the unfinished phase succeeded.
   next_action: >-
-    Land each lane's result through the gate, then take the next ready cell of agenda
-    022 and keep PR 83 green.
+    Continue through agenda-023 BC-214, think-doar: reconcile its retained improvements
+    and remaining costs before opening another efficiency phase. Agenda 022's
+    conditional route remains queued; its two-threshold program is already decided
+    in exp-064.
 ---
 # session-087 — the Agenda 022 Continuation and the PR 83 Gate
 

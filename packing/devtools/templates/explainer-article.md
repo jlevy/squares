@@ -47,10 +47,15 @@ them apparently new.
 The certificate used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted points
 in the container and selects a net of {{HEADLINE_N_DIRECTIONS}} rationally parameterized
 directions. Five exact conditions and a pigeonhole-style argument then imply the claim.
+
+<!--BEGIN:CLAIM-->
+
 Verification is exact rational arithmetic: the one-file checker,
 {{PINNED_VERIFIER_LINES}}
 of standard-library Python and short enough to read in one sitting, decides the
 certificate file of {{HEADLINE_N_ATOMS}} weighted points in {{HEADLINE_PINNED_RUNTIME}}.
+
+<!--END:CLAIM-->
 
 This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
 open case of the square packing problem.[^novelty] The previous bound,

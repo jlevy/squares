@@ -320,11 +320,11 @@ def link_revision() -> str:
     day it is cut and wrong after the next merge that touches a linked file, and every
     merge would then owe the page a republish before its links told the truth. `HEAD`
     of the checkout the deploy renders from is the commit whose files the page
-    describes, so the links name it, in full, as GitHub's own permalinks do. The edition
-    stamp in the credits stays pinned in `sqpack.release`, because the atlas embeds it
-    and is compared byte for byte against a fresh render; it is the edition's label,
-    where this is the build's identity, and the two are allowed to differ. Where git
-    cannot answer (a source tarball) the edition's revision stands in.
+    describes, so the links name it, in full, as GitHub's own permalinks do. The page's
+    credits use this build revision too. The atlas keeps the edition revision pinned
+    in `sqpack.release`, because it is committed and compared byte for byte against a
+    fresh render. Where git cannot answer (a source tarball) the edition's revision
+    stands in.
     """
     found = subprocess.run(
         ("git", "rev-parse", "HEAD"), cwd=REPO, capture_output=True, text=True, check=False
@@ -1364,6 +1364,8 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "N": str(headline.n),
         "HEADLINE_L_FRAC": headline_frac,
         "HEADLINE_L_DEC": decimal(headline.outer_side),
+        "HEADLINE_N_ATOMS": f"{len(headline.atoms):,}",
+        "HEADLINE_N_DIRECTIONS": str(headline.steps + 1),
         "SUBTITLE": SUBTITLE,
         **card_substitutions(headline, headline_frac),
         "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",

@@ -426,10 +426,11 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-[Agenda 022](packing/campaign/agendas/agenda-022-the-conditional-route.md) is running on
-2026-09-05 as the continuation of the overnight pass an account rate limit interrupted,
-recorded contemporaneously as
-[session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md).
+[Session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md)
+continued [agenda 022](packing/campaign/agendas/agenda-022-the-conditional-route.md)
+after an account rate limit interrupted the overnight pass.
+Its research delegations finished and PR 83 merged; its efficiency phase is stopped with
+partial results, dispositioned during the 2026-09-06 PR 94 review.
 Agenda 021 closed first, with `T-021` raising `s(20)` and `s(21)` to `97/20 = 4.85`;
 [session-086](packing/campaign/agent-sessions/session-086-agenda021-overnight-pass.md)
 holds that block’s record.
@@ -467,16 +468,17 @@ derives its count word, case list, band width and per-run stop reasons from the 
 [`conventions.md`](conventions.md) carries the pointer rule where a record author will
 find it.
 
-**Selected next entry:** `think-wufn`, `BC-213` — which
-[session-086](packing/campaign/agent-sessions/session-086-agenda021-overnight-pass.md)
-handed over and this block has taken and completed, as above.
-`BC-206`, the `n = 12` ladder above `99/25`, and `BC-201`, the near-tight-cell census at
-`n = 11`, are in flight as this is written.
+**Selected next entry:** `think-doar`, `BC-214` in
+[agenda 023](packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md):
+reconcile the retained CI split and its remaining costs before opening another
+efficiency phase. PR 94’s checks job took 264.51 s against the phase’s 150 s objective;
+`BC-215` and `BC-217` remain blocked in the agenda and need disposition.
 
-What session-087 will hand over in its place is agenda-021’s `BC-198`, the two-threshold
-form of Condition 5 (`H-063`). It is the only cell left that unblocks anything: `BC-208`
-waits on its class cuts and `BC-207` waits on `BC-208`, so the whole conditional route
-behind them opens or stays shut on that one.
+`BC-213`, `BC-206`, `BC-201`, and `BC-198` are all terminal in session-087’s delegation
+record. The `n = 12` ladder retained a bounded negative; `H-065` was accepted from the
+near-tight-cell census, and `H-063` was rejected by the two-threshold program’s declared
+condition in `exp-064`. The queued conditional route must use those outcomes when
+reassessing `BC-208` and `BC-207`.
 
 ### Handoff Record
 

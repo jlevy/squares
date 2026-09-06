@@ -2,9 +2,13 @@
 
 from __future__ import annotations
 
+import pytest
+
+from devtools import check_published_site
 from devtools.check_published_site import SERVED, pdf_pages, repository_links
 from devtools.render_explainer import COMPOSITE_ASSETS, MARKDOWN_OUTPUT, REPO_URL
 from devtools.render_explainer_pdf import OUTPUT as PDF_OUTPUT
+from sqpack.release import PUBLICATION_STATUS, PUBLICATION_VERSION
 
 
 def test_repository_links_are_read_from_markup_and_markdown_but_not_from_scripts() -> None:
@@ -33,3 +37,33 @@ def test_the_served_files_are_the_markdown_edition_the_pdf_and_the_composite_ass
     assert SERVED[0] == MARKDOWN_OUTPUT.name
     assert SERVED[1] == PDF_OUTPUT.name
     assert set(SERVED[2:]) == {asset.name for asset in COMPOSITE_ASSETS}
+
+
+def test_check_accepts_the_requested_build_and_rejects_a_stale_stamp(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    commit = "0123456789abcdef0123456789abcdef01234567"
+    stamp = " ".join(
+        part for part in (PUBLICATION_STATUS, f"{PUBLICATION_VERSION}-{commit[:8]}") if part
+    )
+    link = f'<a href="{REPO_URL}/blob/{commit}/README.md">Repository</a>'
+    page = f"<p>({stamp})</p>{link}".encode()
+
+    def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
+        assert timeout == 1
+        if url.endswith(".pdf"):
+            return 200, b"%PDF-1.7\n1 0 obj << /Type /Page >> endobj\n%%EOF"
+        return 200, b"" if head else page
+
+    monkeypatch.setattr(check_published_site, "fetch", fetch)
+    results = check_published_site.check("https://example.org", commit, timeout=1)
+    assert all(passed for passed, _ in results), results
+
+    page = f"<p>({stamp.replace(commit[:8], 'deadbeef')})</p>{link}".encode()
+    failures = [
+        line
+        for passed, line in check_published_site.check("https://example.org", commit, timeout=1)
+        if not passed
+    ]
+    assert len(failures) == 1
+    assert "edition stamp" in failures[0]

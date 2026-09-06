@@ -341,13 +341,20 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, take `BC-213` in
-[Agenda 022](../../../../packing/campaign/agendas/agenda-022-the-conditional-route.md),
-bead `think-wufn`: the remaining rung of the `m = 5` bisection at `973/200`, which
-settles `H-062` either way and which
+For the next supervised exact-research goal, first resume `BC-214` in
+[Agenda 023](../../../../packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md),
+bead `think-doar`, through the efficiency loop: reconcile the retained CI split and its
+remaining costs before opening another phase.
+PR 94’s checks job took 264.51 s against the phase’s 150 s objective; `BC-215` and
+`BC-217` still need disposition.
+This is a retrospective handoff correction on 2026-09-06:
+[session-087](../../../../packing/campaign/agent-sessions/session-087-agenda022-continuation.md)
+completed the previously selected `BC-213` rung and confirmed `H-062`, then stopped with
+the efficiency phase incomplete.
+The research results remain in that session and `exp-062`; the current selection agrees
+with
 [Agenda 021](../../../../packing/campaign/agendas/agenda-021-three-numbers-and-a-wall.md)’s
-closeout selected on 2026-09-05 after four rungs bracketed the covering wall to `0.025`
-against the `0.02` that hypothesis registered.
+updated closeout and [SYNOPSIS](../../../../SYNOPSIS.md).
 
 ## The numeric runner launch gate
 

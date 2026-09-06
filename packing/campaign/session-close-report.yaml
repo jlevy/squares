@@ -1349,7 +1349,7 @@ sessions:
   codex_receipts: []
 - id: session-087
   title: "The agenda 022 continuation and the PR 83 gate"
-  status: in_progress
+  status: stopped
   primary_bead: think-wufn
   phases: 2
   measured: true

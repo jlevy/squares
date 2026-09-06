@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-021
   title: "Three Numbers and a Wall — the m = 5 Ladder, the n = 11 Endgame, and a Priced Rung"
-  updated: '2026-09-05'
+  updated: '2026-09-06'
   status: completed
   objective: >-
     X-014 ends with a verdict and a bill. The two mechanisms the owner asked about are
@@ -991,6 +991,15 @@ agenda:
         full gate on the pushed head.
     replanning:
       candidates:
+      - bead: think-doar
+        workflow: efficiency-loop
+        priority: 0
+        rationale: >-
+          Retrospective handoff correction on 2026-09-06 after session-087 stopped.
+          BC-214 in agenda-023 must reconcile the retained CI split and its remaining
+          costs: PR 94's checks job took 264.51 s against the phase's 150 s objective,
+          and BC-215 and BC-217 still need disposition. The candidates below preserve
+          the agenda's original closeout assessment.
       - bead: think-wufn
         workflow: research-loop
         priority: 0
@@ -1025,12 +1034,15 @@ agenda:
           BC-209 inherits BC-202's resumable checkpoint at 138/25 and the cost model
           that now separates a cold column round from a warm one.
       selected:
-        bead: think-wufn
-        workflow: research-loop
+        bead: think-doar
+        workflow: efficiency-loop
         rationale: >-
-          One rung closes a registered hypothesis that four rungs left open by 0.005 of
-          bracket width, at a cost this block measured rather than estimated, and it is
-          the only candidate whose outcome is a verdict rather than an instrument.
+          Retrospective correction on 2026-09-06: session-087 completed BC-213 and
+          confirmed H-062, then stopped with its efficiency phase incomplete. Resume
+          BC-214 in agenda-023 to reconcile that phase's retained work and remaining
+          costs before opening another phase. The 2026-09-05 selection of think-wufn
+          was executed; its measured research outcome remains in session-087 and
+          exp-062.
       operator_input:
         status: unavailable
         note: >-

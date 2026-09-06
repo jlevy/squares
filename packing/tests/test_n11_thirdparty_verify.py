@@ -160,6 +160,54 @@ def test_atom_shape_is_settled_before_any_weight_is_indexed(tmp_path: Path) -> N
     assert checks["P2 every weight is non-negative"] is False
 
 
+@pytest.mark.parametrize("damage", ["duplicate", "outside"])
+def test_site_preconditions_refuse_before_any_condition(tmp_path: Path, damage: str) -> None:
+    """Both mutations preserve the weighted measure inside the container."""
+    record = base_record()
+    record["square_side"] = "3/5"
+    record["atoms"] = [["1/2", "1/2", "1"]]
+    baseline = verify.load(write_record(tmp_path, record))
+    assert verify.decide(baseline, log=lambda *_args: None)[0]
+    if damage == "duplicate":
+        record["atoms"] = [["1/2", "1/2", "1/2"], ["2/4", "2/4", "1/2"]]
+        failed = "P6 every atom has a distinct site"
+    else:
+        record["atoms"] = [
+            ["1/2", "1/2", "1"],
+            ["-1", "-1", "0"],
+            ["-1", "2", "0"],
+            ["2", "-1", "0"],
+            ["2", "2", "0"],
+        ]
+        failed = "P7 every atom lies in [0, L]^2"
+    completed = run_script(VERIFY_PATH, str(write_record(tmp_path, record)))
+    assert completed.returncode == 1
+    assert f"FAIL  {failed}" in completed.stdout
+    assert "REFUSED: the file is not a certificate of the expected shape" in completed.stdout
+    assert "Condition 1" not in completed.stdout
+    assert "Condition 5" not in completed.stdout
+    assert "Traceback" not in completed.stdout + completed.stderr
+
+
+def test_site_preconditions_allow_the_closed_container_boundary(tmp_path: Path) -> None:
+    record = base_record()
+    record["atoms"] = [["0", "0", "1"], ["1", "1", "0"]]
+    cert = verify.load(write_record(tmp_path, record))
+    assert all(holds for _name, _detail, holds in verify.preconditions(cert))
+
+
+def test_the_published_falsifications_still_reach_the_conditions(tmp_path: Path) -> None:
+    """The site checks must not hide any condition in the ten retained refusal rows."""
+    record = json.loads(CERTIFICATE_PATH.read_text())
+    certificate = verify.load(CERTIFICATE_PATH)
+    witness = (0, Fraction(0), Fraction(53, 100), Fraction(53, 100))
+    _site, table = falsify.perturbations(record, certificate, witness)
+    assert len(table) == 10
+    for name, make, _oracle in table:
+        cert = verify.load(write_record(tmp_path, make()))
+        assert all(holds for _key, _detail, holds in verify.preconditions(cert)), name
+
+
 def test_a_declared_bookkeeping_field_must_itself_be_an_exact_rational(tmp_path: Path) -> None:
     record = base_record()
     record["total_mass"] = "1.5"

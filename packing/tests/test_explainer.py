@@ -76,6 +76,18 @@ def test_no_placeholder_survives_substitution(page: str) -> None:
     assert re.findall(r"\{\{[A-Z_]+\}\}", page) == []
 
 
+def test_single_certificate_without_a_pinned_timing_keeps_its_headline_facts() -> None:
+    facts = render_explainer.derive(WALKTHROUGH[0])
+    toggle = render_explainer.certificate_switch([facts], facts)
+    values = render_explainer.certificate_substitutions(facts, default=facts, toggle=toggle)
+    shared = render_explainer.shared_substitutions([facts], facts, facts)
+    source = render_explainer.markdown_source([values], values, shared, claimed=False)
+    assert f"{len(facts.atoms):,} rationally weighted points" in source
+    assert f"{facts.steps + 1} rationally parameterized" in source
+    assert "one-file checker" not in source
+    assert "{{" not in source
+
+
 def test_the_page_is_self_contained(page: str) -> None:
     """The renderer's own check passes on its own output; the workflow relies on this.
 
