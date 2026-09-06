@@ -46,6 +46,7 @@ import re
 import sys
 from collections.abc import Iterator, Sequence
 from dataclasses import dataclass, field
+from itertools import pairwise
 from typing import TypedDict
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -169,7 +170,12 @@ def _literal_parts(node: ast.AST) -> Iterator[str]:
 
 
 def _guard_messages(tree: ast.Module, name: str) -> tuple[str, ...]:
-    """Messages raised by `if` branches whose condition reads the named constant."""
+    """Messages raised by `if` branches whose condition reads the named constant.
+
+    A message assigned immediately before its raise is as explicit as an inline
+    literal. Only that adjacent assignment is resolved, so a same-named variable in
+    another branch cannot supply the message by accident.
+    """
     messages: list[str] = []
     for node in ast.walk(tree):
         if not isinstance(node, ast.If):
@@ -182,6 +188,21 @@ def _guard_messages(tree: ast.Module, name: str) -> tuple[str, ...]:
         for statement in ast.walk(node):
             if isinstance(statement, ast.Raise) and statement.exc is not None:
                 messages.extend(_literal_parts(statement.exc))
+        for assignment, statement in pairwise(node.body):
+            if not (
+                isinstance(assignment, ast.Assign)
+                and len(assignment.targets) == 1
+                and isinstance(assignment.targets[0], ast.Name)
+                and isinstance(statement, ast.Raise)
+                and statement.exc is not None
+            ):
+                continue
+            variable = assignment.targets[0].id
+            if any(
+                isinstance(inner, ast.Name) and inner.id == variable
+                for inner in ast.walk(statement.exc)
+            ):
+                messages.extend(_literal_parts(assignment.value))
     return tuple(dict.fromkeys(message for message in messages if message.strip()))
 
 

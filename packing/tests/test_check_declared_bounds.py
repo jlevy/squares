@@ -137,6 +137,16 @@ def test_n68_depth_bound_is_named_by_its_refusal_test() -> None:
     assert "bounded parser limits" in str(evidence["detail"])
     assert depth["guard_messages"] == ["SVG structure exceeds the bounded parser limits"]
 
+    for name in ("MAX_ATOMS", "MAX_DIRECTIONS"):
+        bound = _entry(receipt, f"cases/n11_fractional_certificate/verify_claim.py::{name}")
+        assert bound["status"] == "named"
+        assert any(
+            reference["function"]
+            == "test_a_certificate_above_the_ceiling_is_refused_before_any_condition"
+            and reference["kind"] == "guard-message"
+            for reference in bound["named_by"]
+        )
+
     assert receipt["violations"] == []
     assert receipt["ok"] is True
     assert declared.main([]) == 0
@@ -156,6 +166,31 @@ def test_unnamed_bound_is_refused(tmp_path: pathlib.Path) -> None:
     assert receipt["ok"] is False
     assert declared.main(["--root", str(tmp_path)]) == 1
     assert declared.main(["--root", str(tmp_path), "--json"]) == 1
+
+
+def test_a_guard_message_assigned_before_the_raise_names_its_bound(
+    tmp_path: pathlib.Path,
+) -> None:
+    """The message may be built locally before it is passed to the exception."""
+    _fixture(tmp_path)
+    parser = tmp_path / "cases/fixture_case/parser.py"
+    parser.write_text(
+        FIXTURE_CASE.replace(
+            'raise ValueError("fixture structure exceeds the synthetic depth bound")',
+            'message = f"fixture structure exceeds the synthetic depth bound: {depth}"\n'
+            "        raise ValueError(message)",
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    receipt = declared.report(tmp_path, allowlist={})
+
+    depth = _entry(receipt, "cases/fixture_case/parser.py::MAX_FIXTURE_DEPTH")
+    assert depth["status"] == "named"
+    assert depth["named_by"][0]["kind"] == "guard-message"
+    assert depth["named_by"][0]["function"] == "test_depth_bound_refuses"
+    assert [entry["name"] for entry in receipt["violations"]] == ["MAX_FIXTURE_WIDTH"]
 
 
 def test_duplicate_bound_name_does_not_cross_module_boundary(
