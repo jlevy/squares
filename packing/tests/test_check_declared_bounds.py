@@ -137,6 +137,18 @@ def test_n68_depth_bound_is_named_by_its_refusal_test() -> None:
     assert "bounded parser limits" in str(evidence["detail"])
     assert depth["guard_messages"] == ["SVG structure exceeds the bounded parser limits"]
 
+    # The standalone verifier is loaded through runpy, so its refusal test names the
+    # declaring paths explicitly instead of presenting a statically resolvable import.
+    for name in ("MAX_ATOMS", "MAX_DIRECTIONS"):
+        bound = _entry(receipt, f"cases/n11_fractional_certificate/verify_claim.py::{name}")
+        assert bound["status"] == "named"
+        assert [(item["path"], item["function"]) for item in bound["named_by"]] == [
+            (
+                "tests/test_verify_claim.py",
+                "test_a_certificate_above_the_ceiling_is_refused_before_any_condition",
+            )
+        ]
+
     assert receipt["violations"] == []
     assert receipt["ok"] is True
     assert declared.main([]) == 0

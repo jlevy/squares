@@ -226,11 +226,18 @@ def test_a_failed_condition_skips_the_sweep(
 def test_a_certificate_above_the_ceiling_is_refused_before_any_condition(
     minimal: dict[str, Any], tmp_path: Path
 ) -> None:
+    """Both standalone parser bounds accept the ceiling and refuse the next value.
+
+    The declared-bound checker cannot resolve the runpy namespace, so name its keys:
+    cases/n11_fractional_certificate/verify_claim.py::MAX_ATOMS
+    cases/n11_fractional_certificate/verify_claim.py::MAX_DIRECTIONS
+    """
     atoms = [["5/8", "5/8", "1"]] * (minimal["MAX_ATOMS"] + 1)
-    with pytest.raises(ValueError, match="at most"):
+    with pytest.raises(ValueError, match="this verifier decides at most"):
         minimal["load"](str(write({**TINY, "atoms": atoms}, tmp_path / "wide.json")))
+    minimal["load"](str(write({**TINY, "atoms": atoms[:-1]}, tmp_path / "at-ceiling.json")))
     steps = {**TINY, "direction_steps": minimal["MAX_DIRECTIONS"]}
-    with pytest.raises(ValueError, match="at most"):
+    with pytest.raises(ValueError, match="this verifier decides at most"):
         minimal["load"](str(write(steps, tmp_path / "long.json")))
     within = {**TINY, "direction_steps": minimal["MAX_DIRECTIONS"] - 1}
     assert (
