@@ -147,11 +147,20 @@ A tier selects steps; a lane divides one step.
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a code change |
 | `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 66 | 700 s | 502.3 s on CI, 2026-09-06, commit `5cad7540`, when CI still ran it whole |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 66 | 240 s | not yet clocked on CI |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 66 | 200 s | not yet clocked on CI; 93.3 s locally at the reference shape |
-| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 66 | 240 s | not yet clocked on CI |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 240 s | not yet clocked on CI |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 66 | 210 s | 106.4 s on CI, the larger of two readings |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 66 | 200 s | 106.1 s on CI, the larger of two readings |
+| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 66 | 240 s | 123.5 s on CI, the larger of two readings |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 215 s | 108.9 s on CI, the larger of two readings |
 | *(no flag)* | **CI, on `main`, on dispatch, and daily**; and what a block ends with | 66 of 66 | 3600 s | split across two jobs; not clocked whole |
+
+**A recorded cost here is the largest reading at the reference shape, not one sample.**
+The spread between hosted runs of identical code is up to 1.39x — `known-best n=1..100
+atlas` read 60.97 s and 84.48 s across two runs on 2026-09-06, on code no commit had
+touched, and every step of the sweeps tier moved about 1.35x with it.
+A drift rule armed on one sample cannot see past that; armed on the worst observed, its
+1.5x means a regression rather than a slow runner.
+[D-472](defects.md) is the entry, and a recorded *band* would beat a recorded maximum —
+that is `think-be1s`, still open.
 
 **The pull-request surface is `--checks`, `--geometry`, `--suite` and `--sweeps`
 together, run as four concurrent CI jobs**, so a pull request waits for the longest of
