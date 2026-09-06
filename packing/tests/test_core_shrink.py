@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from fractions import Fraction
 from pathlib import Path
@@ -10,6 +11,8 @@ import pytest
 
 from devtools.core_shrink import evaluate, publish
 from devtools.decide_certificate import decide, load
+
+PACKING = Path(__file__).resolve().parents[1]
 
 
 def source_bytes() -> bytes:
@@ -87,3 +90,33 @@ def test_invalid_shrink_and_dilation_fail_before_replay() -> None:
         evaluate(source_bytes(), square_side=Fraction(7, 10), factor=Fraction(1), workers=1)
     with pytest.raises(ValueError, match="containment"):
         evaluate(source_bytes(), square_side=Fraction(11, 20), factor=Fraction(2), workers=1)
+
+
+def test_exp110_corner_obstruction_replays_without_the_sweep() -> None:
+    receipt = json.loads(
+        (
+            PACKING / "campaign/series/series-000-smoke-and-calibration/results/"
+            "exp-110-h-090-core-shrink/result.json"
+        ).read_text()
+    )
+    raw = (PACKING / "cases/n11_fractional_certificate/certificate.json").read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == receipt["source_sha256"]
+    atoms = [tuple(map(Fraction, atom)) for atom in json.loads(raw)["atoms"]]
+    edge = Fraction(receipt["witness_admissible_up_to_side"])
+    center = edge / 2
+    below = sum(
+        (weight for x, y, weight in atoms if max(abs(x - center), abs(y - center)) < center),
+        start=Fraction(0),
+    )
+    at = sum(
+        (weight for x, y, weight in atoms if max(abs(x - center), abs(y - center)) <= center),
+        start=Fraction(0),
+    )
+    assert below == Fraction(receipt["minimum_mass"]) == Fraction(85353, 100000)
+    assert below < Fraction(receipt["threshold_mass"])
+    assert at - below == Fraction(917, 6250)
+    assert at == Fraction(receipt["source_minimum_mass"])
+    squared = Fraction(receipt["source_refined_limit_squared"])
+    proposed = Fraction(receipt["proposed_side"])
+    assert proposed - Fraction(1, 100000) > 0
+    assert (proposed - Fraction(1, 100000)) ** 2 > squared

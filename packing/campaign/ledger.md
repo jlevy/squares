@@ -546,7 +546,7 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 66 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 67 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -618,7 +618,7 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 | H-064 | abandoned | proof | At container side 77/20 = 3.85, on the retained 181-direction net at B | container side: 191/50 77/20 387/100 | 2 |  | 96m agent + 175.3m wall |
 | H-065 | confirmed | proof | On the retained 381/100 certificate at n = 11 -- 1121 atoms, B = 9977/ | census margin epsilon: 0 0.01 0.05 0.1 | 1 |  | 16m agent + 16.1m wall |
 | H-070 | refuted | proof | At n = 11, outer side 191/50, and B = 9977/10000, the eligible minimum | one-sided inset: 1/2 2962983/4505800 15513/20000 | 1 |  | 8.2m wall |
-| H-090 | open | proof | With the frozen T-018 atoms, weights, outer side and 181 net direction | core side: 99769/100000 | 0 |  |  |
+| H-090 | refuted | proof | With the frozen T-018 atoms, weights, outer side and 181 net direction | core side: 99769/100000 | 1 |  | 30s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -628,7 +628,7 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 
 ## Rounds
 
-### rejected (12)
+### rejected (13)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -644,6 +644,7 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 | exp-041 | series-000 | 5 | openai-codex | H-023 | The frozen complete-zero-inventory clause is false: one additional owner axis is zero only at the positive endpoint, while independent control review also found mutation-reason and partial-disposition guards that remain unfinished. |
 | exp-064 | series-000 | 11 | Claude (agent), Lane A of agenda-021 BC-198, bead think-m3sx, session-087 | H-063 | The second clause holds exactly and the first cannot, so H-063 falls to its own rejection clause -- X-014's kill condition, that conditioning on direction buys too little. What makes this a strong negative rather than a failed search is that the refusal is proved rather than observed. At Trump's side L/B = 969271/249425 = 3.886021850 exceeds 2 + (4/3)sqrt(2) = 3.885618083, decided against the surd, so eleven pairwise disjoint B-squares of the class fit inside the container and no measure of total mass below eleven can cover them -- whatever site set is used and however long the row loop runs. The control's own ceiling is B(2 + (4/3)sqrt(2)) = 3.876681, which is 0.000403 below the side it was asked to reach: the shrink costs 0.008937 of side and Stromquist's headroom above Trump is only 0.008534. The control was unreachable before the first command ran, and no amount of instrument work would have changed that. Conditioning is not worthless, and the round reports what it does buy rather than only what it does not. On one site set at Trump's side a single threshold gives margin +0.082256 where two thresholds at composition (9, 2) give +0.072368, with the LP separating them once the site set is fine enough. And X-014's own step-1 design point is reachable: composition (11, 0) over the leading nineteen cells at Trump's side and grid 79 gives exact 39123/4096 = 9.551514, margin -5933/4096, every condition holding, refuted. What the program cannot do is reach the side Stromquist's Theorem 3 reaches, because that theorem gets there by a further box step this program does not have. |
 | exp-071 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-233, think-jbat | H-070 | The released seed and matched unseeded control converged after the same eight rounds to byte-identical candidates of exact mass 11142893/1000000, so the seeded arm missed the preregistered strict-improvement criterion. |
+| exp-110 | series-000 | 11 | Codex endpoint_epsilon_spike, max reasoning, coordinator satellite think-zq2u | H-090 | The candidate minimum is below the required threshold by 294969/2200000, so rescaling these weights cannot certify the proposed side 3.8100381. |
 
 ### abandoned (2)
 
@@ -740,7 +741,7 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 
 ## Effort
 
-66 rounds, 2152.1 agent-minutes, 1162.2 wall-minutes.
+67 rounds, 2152.1 agent-minutes, 1162.7 wall-minutes.
 
 ## Exploration reports not yet codified
 

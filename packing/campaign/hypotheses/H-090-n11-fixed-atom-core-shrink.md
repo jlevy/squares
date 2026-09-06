@@ -46,16 +46,15 @@ hypothesis:
 
 Write $M=434547/40000$ for the fixed total mass and $m(b)$ for the least mass of an
 admissible side-$b$ core over the retained net.
-If $m(b)>M/11$, dividing every weight by $m(b)$ gives least covered mass one and
-total mass below eleven.
-This permits a decrease of $5563/440000$ from the source minimum $4001/4000$.
+If $m(b)>M/11$, dividing every weight by $m(b)$ gives least covered mass one and total
+mass below eleven. This permits a decrease of $5563/440000$ from the source minimum
+$4001/4000$.
 
-The first candidate uses $b=99769/100000$ and $q=100001/100000$.
-Its ordinary containment slack is exactly
-$1-qb(1+D)=3714298841717/900000000000000000>0$.
-If coverage passes, the resulting bound $qL=38100381/10000000=3.8100381$ exceeds
-T-022's algebraic endpoint by more than $1/100000$; this comparison is by squares
-of positive exact quantities, not floating-point subtraction.
+The first candidate uses $b=99769/100000$ and $q=100001/100000$. Its ordinary
+containment slack is exactly $1-qb(1+D)=3714298841717/900000000000000000>0$. If coverage
+passes, the resulting bound $qL=38100381/10000000=3.8100381$ exceeds T-022’s algebraic
+endpoint by more than $1/100000$; this comparison is by squares of positive exact
+quantities, not floating-point subtraction.
 
 This hypothesis is frozen before its first measurement.
 The [idea board](../ideas.md) locates it within the strategy portfolio.
