@@ -484,7 +484,7 @@ Status: **active**. Block two, and every cell in it is contingent. Agenda-021 me
 
 ### [agenda-024](agendas/agenda-024-post-381-24h-portfolio.md) — Post-3.81 24-Hour Portfolio Control
 
-Status: **active**. Coordinate two disjoint research agendas for the next 24 hours without allowing parallel work to split the proof record. Agenda-025 owns the exact fractional frontier and agenda-026 owns density, typed stationarity, and Trump capture. This agenda owns the frozen base and source packets, shared namespaces and records, six four-hour integration gates, all routing decisions, and W10 closeout. The research horizon is a replanning checkpoint rather than a stop condition. PR 87 owns agenda-023 and BC-214 through BC-218; this portfolio starts at BC-219 and quarantines H-066 through H-069 and exp-065 through exp-069 until that sibling is terminal.
+Status: **active**. Coordinate two disjoint research agendas for roughly 24 active portfolio hours without allowing parallel work to split the proof record. Agenda-025 owns the exact fractional frontier and agenda-026 owns density, typed stationarity, and Trump capture. This agenda owns the frozen base and source packets, shared namespaces and records, six four-hour integration gates, all routing decisions, and W10 closeout. The research horizon is a replanning checkpoint rather than a stop condition. PR 87 owns agenda-023 and BC-214 through BC-218; this portfolio starts at BC-219 and quarantines H-066 through H-069 and exp-065 through exp-069 until that sibling is terminal.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
@@ -515,7 +515,7 @@ Status: **active**. Give one managing agent a disjoint, exact program for the li
 
 ### [agenda-026](agendas/agenda-026-density-stationarity-and-trump-capture.md) — Density, Typed Stationarity, and Trump Capture
 
-Status: **active**. Give one managing agent a disjoint closure program that can turn local knowledge at Walter Trump's packing into a global argument. Package the already-computed quantitative neighborhood theorem instead of rerunning it; test whether a full-size density has a sound weak dual with boundary terms and useful equality set; and replace generic contact-graph enumeration with typed stationary backbones that retain feature contacts, owner axes, order data, abnormal Fritz-John cases, ties, zero multipliers, and rattlers. This manager owns BC-240 through BC-249, H-080 through H-089, and exp-090 through exp-109, but not shared campaign or frontier state.
+Status: **active**. Give one managing agent a disjoint closure program that can turn local knowledge at Walter Trump's packing into a global argument. Package the already-computed quantitative neighborhood theorem instead of rerunning it; test whether a full-size density has a sound weak dual with boundary terms and useful equality set; and replace generic contact-graph enumeration with typed stationary backbones that retain feature contacts, owner axes, order data, abnormal Fritz–John cases, ties, zero multipliers, and rattlers. This manager owns BC-240 through BC-249, H-080 through H-089, and exp-090 through exp-109, but not shared campaign or frontier state.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
@@ -634,7 +634,7 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes exactly is nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861, with the converged row loop's restricted optimum 11.055617 on 12,761 sites as the certified upper end of the 3.82 bracket. |
+| exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 
 ### unresolved (14)
 

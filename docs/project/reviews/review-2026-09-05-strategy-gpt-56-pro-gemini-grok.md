@@ -33,7 +33,7 @@ are false as written.
 | Topic | Verified project state on 2026-09-05 | Planning consequence |
 | --- | --- | --- |
 | Current bound | The retained exact certificate proves \(s(11)\ge 381/100=3.81\). | Every proposed improvement needs a verifier-backed result strictly above 3.81. |
-| Fractional wall | At \(L=3.82\), retained computations bracket the one-body values by \(9.907906\le\nu_1^*\le\tau_1^*\le11.055617\). At \(L=3.85\), only the lower bound \(\nu_1^*\ge9.049861\) is retained. | Resume the retained \(3.82\) state before launching a broad new sweep. Call this a primal/dual bracket, not a proved continuum duality gap. |
+| Fractional wall | At \(L=3.82\), retained computations bracket the one-body values by \(9.907905\le\nu_1^*\le\tau_1^*\le11.055617\). At \(L=3.85\), only the lower bound \(\nu_1^*\ge9.049860\) is retained. These displayed lower endpoints are truncated, not rounded upward. | Resume the retained \(3.82\) state before launching a broad new sweep. Call this a primal/dual bracket, not a proved continuum duality gap. |
 | Adaptive witness size | A direction-dependent \(B_k\) is a valid strengthening in principle, but no project implementation or exact verifier exists. | This is the highest-priority near-term change to the existing proof language. Every angle cell and the complete \(D_4\) orbit remain proof obligations. |
 | Near-tight pose cells | The existing \(\varepsilon=0.05\) census contains 23,112,904 of 567,130,649 cells in 22,132 components. | The survivor set is still too broad for a naive exact-cover tree. Reclassify only after a near-11 measure is available at 3.82. |
 | Two-threshold angle classes | The tested simple class language reaches 11.606445 on Trump’s witness and has a route ceiling of 3.876681, only 0.000403 below the current verified upper bound. | Do not repeat the same convex two-threshold design. Revisit angle classes only with a materially richer or nonconvex resource language. |
@@ -50,10 +50,12 @@ and the retained experiments linked from those documents.
 ### Margin parameterization
 
 The Massaccesi report is real and narrower than the causal story attached to it.
-At \(L=4.5000\), the published generator swept the doubled margin \(M\) from 0 through
-1.9500 in steps of 0.0500; only \(M=1.5500\) produced total LP weight below 17. The
-final published verifier used \(L=4.5058\) and \(M=1.5513\). The local source and
-verifier are retained in
+Massaccesi reports that, at \(L=4.5000\), a sweep of the doubled margin \(M\) from 0
+through 1.9500 in steps of 0.0500 found total LP weight below 17 only at
+\(M=1.5500\). The published generator retained here fixes \(M=1.5500\); it does not
+contain the sweep wrapper or per-margin output. The final published verifier used
+\(L=4.5058\) and \(M=1.5513\), and that final verifier was replayed locally. The source
+and verifier are retained in
 [`n17-lower-bounds-2026`](../../../packing/resources/web/n17-lower-bounds-2026/README.md).
 
 That observation does not establish that unavoidable atoms inherently cluster away from
@@ -62,6 +64,11 @@ An inset grid is a restricted support family: success certifies a bound, while f
 says nothing about the unrestricted optimum.
 Use a margin sweep to seed atoms, then release the support in unrestricted column
 generation.
+
+One sentence in the preserved contributed body below says the repository lacks an
+explicit Trump-neighborhood radius. That sentence is stale: the table above records
+both the uniform and per-row lower bounds. The trust boundary preserves the contributed
+wording, so this audit note supersedes that assertion without silently rewriting it.
 
 ### Contact graphs and rigidity
 

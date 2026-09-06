@@ -201,7 +201,7 @@ case or experiment separately.
 | [Epistemics](epistemics.md) | whole-result evidence classifications | definitive | maintained | — |
 | [Operating Rules](operating-rules.md) | how a session is conducted | definitive | maintained | — |
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
-| [The `s(n)` Research Campaign — W6 Runbook](packing/campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
+| [The `s(n)` Research Campaign: W6 Runbook](packing/campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
 | [The W8 Documentation Pass — Runbook](packing/campaign/documentation-pass.md) | W8 documentation reconciliation | definitive | maintained | — |
 | [W9 Remediation Pass](packing/campaign/remediation-pass.md) | systematic defect and issue-backlog remediation | definitive | maintained | — |
 | [W10 Review, Planning, and Oversight](packing/campaign/review-planning-oversight.md) | post-agenda disposition, document review, and replanning | definitive | maintained | — |
@@ -227,7 +227,7 @@ case or experiment separately.
 | [Research: Algorithms and Tooling for Square Packing](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) | research synthesis | supporting | maintained | — |
 | [Research: A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | research synthesis | supporting | maintained | — |
 | [Review: Loop Speed, Iteration Cost, and What Actually Gates the Research (PR #17)](docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md) | dated review record | record | superseded | [Packing Development Guide](development.md) |
-| [Review: The Experiment Loop, the Campaign, and the Consolidation (PR #5)](docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md) | dated review record | record | superseded | [The `s(n)` Research Campaign — W6 Runbook](packing/campaign/README.md) |
+| [Review: The Experiment Loop, the Campaign, and the Consolidation (PR #5)](docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md) | dated review record | record | superseded | [The `s(n)` Research Campaign: W6 Runbook](packing/campaign/README.md) |
 | [Review: The Mathematical Frontier, Its Gaps, and How to Search It Fast](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | dated review record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Response to the PR #15 Review: what it got right, one thing it got wrong, and what is missing](docs/project/reviews/review-2026-08-23-response-to-pr15-review.md) | dated review record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Review: PR #14 and the Executable Square-Packing Research Program](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | dated review record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -425,57 +425,46 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-[Agenda 022](packing/campaign/agendas/agenda-022-the-conditional-route.md) is running on
-2026-09-05 as the continuation of the overnight pass an account rate limit interrupted,
-recorded contemporaneously as
-[session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md).
-Agenda 021 closed first, with `T-021` raising `s(20)` and `s(21)` to `97/20 = 4.85`;
-[session-086](packing/campaign/agent-sessions/session-086-agenda021-overnight-pass.md)
-holds that block’s record.
+[Session 086](packing/campaign/agent-sessions/session-086-agenda021-overnight-pass.md)
+still supplies the latest terminal, machine-checked handoff marker.
+Its selected rung was subsequently completed by the continuation work:
 
-**What moved.** `H-062` is accepted.
-`BC-213` decided the one remaining rung of its pre-registered bisection, at
-`973/200 = 4.865`, and both declared constructions walled — the uniform grids at LP
-round 16 with `20.001502` and 543 placements still violated, the grids unioned with
-`T-021`’s atoms at round 34 with `20.000223` and 213 violated
-([exp-062](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-062-h-062-m5-midpoint-rung.md)).
-That pins the `m = 5` covering wall to `[97/20, 973/200]`, width `0.015` against the
-`0.02` the hypothesis registered, its lower end a retained certificate and its upper end
-two independent walls sitting `0.1235` below the ceiling.
-It is the first covering wall this project has measured to the width it asked for, and
-it says directly that at `m = 5` the covering value binds and the ceiling never does.
+**Selected next entry:** `think-wufn`, `BC-213`, recorded as
+[exp-062](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-062-h-062-m5-midpoint-rung.md).
 
-**One clause needed an argument rather than a run.** `H-062` asks its bracket’s upper
-end to carry a *converged* restricted optimum at or above twenty, and neither run
-converged. The clause is met because adding rows can only raise a restricted optimum, so
-each site set’s converged optimum is bounded below by its crossing — the criterion asks
-for the bound, not the value.
-The monotonicity is in rows at a fixed site set; adding *sites* lowers an optimum, and
-no column round completed, so neither set grew.
-`exp-062` states this rather than leaving a reader to reconstruct it, because this
-document’s own limits reading had taken the conservative view of the same clause.
+[Agenda 024](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md) is the
+operator-selected continuation after that rung.
+It coordinates two disjoint programs: the exact fractional frontier in
+[agenda 025](packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md) and
+density, typed stationarity, and Trump capture in
+[agenda 026](packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md).
+`BC-219` completed against the current branch inputs, but any landing that changes a
+named input returns it to preflight before another manager starts.
 
-**What the block also fixed.** `D-458`: the covering-value register’s `24/5` row named
-the moving `certificate.json` pointer instead of the immutable rung, so promoting
-`T-021` into that pointer made a superseded row quote its own successor’s atoms.
-Nothing unsound — every artifact named exists and every mass quoted is that file’s true
-mass — but the join between a row and its evidence was broken, and six tests plus the
-reach renderer’s prose still described the corpus as it stood before `T-021` moved the
-`n = 20` package from certifying `n = 19` to certifying `n = 20`. The renderer now
-derives its count word, case list, band width and per-run stop reasons from the corpus;
-[`conventions.md`](conventions.md) carries the pointer rule where a record author will
-find it.
+The first execution slice consumes the first two active portfolio hours of the same
+roughly 24-active-hour agenda.
+It exercises the coordinator, both managers, one floating worker, retained-state resume
+and checkpoint seams, the local Trump theorem packet, central integration, and
+interruption recovery.
+Success means the planned evidence and handoff packets exist and validate; it does not
+require a new lower bound or a global rigidity claim.
+After the `T+2` integration checkpoint lands, 22 active portfolio hours remain and the
+same cells resume without resetting their clocks or budgets.
 
-**Selected next entry:** `think-wufn`, `BC-213` — which
-[session-086](packing/campaign/agent-sessions/session-086-agenda021-overnight-pass.md)
-handed over and this block has taken and completed, as above.
-`BC-206`, the `n = 12` ladder above `99/25`, and `BC-201`, the near-tight-cell census at
-`n = 11`, are in flight as this is written.
+At `T+0`, the only takeable research cells are `BC-230`, `BC-232`, `BC-233`, `BC-240`,
+`BC-242`, and `BC-245`. The coordinator alone allocates experiment IDs, edits shared or
+generated records, integrates manager packets, and moves a gate.
+Codex uses `max` reasoning for theorem scope, proof boundaries, mathematical
+disposition, and strategic routing; bounded implementation and independent reviews use
+`xhigh`, while replay, manifest, formatting, and value checks may use `high` when they
+require no mathematical choice.
 
-What session-087 will hand over in its place is agenda-021’s `BC-198`, the two-threshold
-form of Condition 5 (`H-063`). It is the only cell left that unblocks anything: `BC-208`
-waits on its class cuts and `BC-207` waits on `BC-208`, so the whole conditional route
-behind them opens or stays shut on that one.
+[Agenda 021](packing/campaign/agendas/agenda-021-three-numbers-and-a-wall.md) supplied
+the retained `T-021` result and the 3.82 fractional state used here.
+Agenda 022’s
+[session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md)
+lifecycle remains owned by the upstream PR #87; this branch consumes its landed record
+through `origin/main` rather than rewriting it.
 
 ### Handoff Record
 
@@ -2317,12 +2306,14 @@ Two implementations, one number.
 ### The mechanism
 
 Where the LP’s optimal basis is locally constant, `φ` is smooth and its derivative is
-read off the active constraints.
-A corner is a **change of optimal basis**: the set of contacts that bind switches as `a`
-crosses `a*`. The switch at the minimum establishes a kink in this one-dimensional
-class-angle objective.
-It does not by itself prove rigidity of the full packing; that requires ruling out every
-other feasible motion, not just motion along this slice.
+read off that basis.
+A corner occurs where the optimal basis switches as `a` crosses `a*`. Because a basis is
+only a subset of the active rows, a basis switch alone does not show that the full
+active-contact set changed.
+The switch at the minimum establishes a kink in this one-dimensional class-angle
+objective.
+It does not by itself prove rigidity of the full packing; that requires ruling
+out every other feasible motion, not just motion along this slice.
 
 ### The prediction, and what it cost to ignore
 
@@ -2490,7 +2481,10 @@ and is the campaign working as designed.
 ### How rounds are run
 
 The full contract is the [runbook](packing/campaign/README.md); the parts that matter
-for reading the results below:
+for reading the results below follow.
+The four-cell and five-seed rules apply only to numerical pose-search proposer
+comparisons. Fractional, theorem, exact-certificate, and review rounds use their own
+preregistered criteria and method-specific controls.
 
 - **Assurance, method, and arithmetic are separate.** A result is `reported`,
   `numerically-checked`, or `verified`; only the last is formal.
@@ -2500,8 +2494,9 @@ for reading the results below:
   margins actually used.
   Basin or terminal-component identity requires its own evidence.
   **`beat_record: true` may only be written for a verified result.**
-- **Four instance cells with different jobs**: `n = 10` positive control, `n = 11`
-  target, `n = 12` open-case calibration, `n = 17` mechanism-matched calibration.
+- **Five standing instance roles**: `n = 10` positive control, `n = 11` target, `n = 12`
+  open-case calibration, `n = 16` proved not-below control, and `n = 17`
+  mechanism-matched calibration.
   A guard breach rejects a round regardless of outcome, because it means the instrument
   is wrong rather than the strategy good.
 - **Five seeds minimum per cell**, median and min–max range both reported.
@@ -2919,7 +2914,7 @@ archive beside it.
 | [exp-057](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-057-h-058-n68-one-parent-localization.md) | 68 | calibration | H-058 | side-semantics binding over the unchanged exp-054 adapter | literal point model retained; six-decimal side provenance absent; no target access | **unresolved** |
 | [exp-058](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-058-h-060-n5-chart-and-proof.md) | 5 | target | H-060 | scratchpad sympy chart-and-proof replay set, read-only; the W7 instrument and the BC-153 reviewer’s from-scratch sympy reconstruction | all 400 elementary inequalities classified exactly and the 16/64 and 4/6 counts confirmed; `w · q_chart = -2√2 < 0`; the frozen criterion met as written on BC-153’s PASS, so the pose is isolated at fixed side | **accepted** |
 | [exp-059](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-059-h-052-n17-fresh-successor-completion.md) | 17 | target | H-052 | fresh successor driver over the frozen exp-056 parent checkpoint and exp-052 chain genesis | all 181 exact direction cells agree; both 181-row manifest summaries byte-identical, every row minimum exactly 1/1, decision derived from the preconditions, mutations and instrument validity | accepted |
-| [exp-060](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-060-h-064-n11-fractional-packing-floor.md) | 11 | target | H-064 | cutting-plane loop over exact-depth fractional packings at 191/50, then 77/20 warm-started, the exact vertex check as the separation oracle | nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861 exactly; the row loop converged at 3.82 to 11.055617 on 12,761 sites; no family reached eleven, so the claim stays unresolved and the round is resumable from the retained 3.82 state | abandoned |
+| [exp-060](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-060-h-064-n11-fractional-packing-floor.md) | 11 | target | H-064 | cutting-plane loop over exact-depth fractional packings at 191/50, then 77/20 warm-started, the exact vertex check as the separation oracle | downward-safe displays nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with exact rationals in the summaries; the row loop converged at 3.82 to 11.055617 on 12,761 sites; no family reached eleven, so the claim stays unresolved and the round is resumable from the retained 3.82 state | abandoned |
 | [exp-061](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-061-h-062-m5-covering-wall.md) | 20 | target | H-062 | pre-registered bisection of [24/5, 9977/2000], two site sets per rung, refutation on a crossing and confirmation only by a converged row loop | certificates at 97/20 (T-021) and 193/40, walls at 39/8, 979/200 and 997/200, so the m = 5 covering wall is bracketed to width 0.025 against the 0.02 registered; the exactly round 25.000000 at 997/200 is explained by the overlap-strip geometry | unresolved |
 | [exp-062](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-062-h-062-m5-midpoint-rung.md) | 20 | target | H-062 | the one remaining pre-registered rung, at the schedule’s own midpoint 973/200, on the same two site-set rules | both constructions wall — the grids at LP round 16 (20.001502, 543 violated) and the certificate-seeded set at round 34 (20.000223, 213 violated) — closing the bracket to [97/20, 973/200], width 0.015, its upper end 0.1235 below the ceiling | accepted |
 | [exp-063](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-063-h-065-n11-near-tight-cell-census.md) | 11 | target | H-065 | census the reachable event cells within four margins of covered mass one, per direction, through the same mass grid the retention decision reads | the epsilon = 1/20 tight set is 0.040754 of 567,130,649 reachable cells, a fifth of the registered 0.20 — and still a search rather than a check: positive area, a bounding box equal to the centre domain’s in all 181 directions, 22,132 extended components | accepted |

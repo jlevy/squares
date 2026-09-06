@@ -144,6 +144,27 @@ Arslanov–Bui 2025 remains paywalled. Crossref fixes its online publication dat
 also remains unretrieved: the tempting institutional PDF is the preceding Bonnot et al.
 article plus an issue contents page, not Plakhta’s paper.
 
+## September Acquisition Manifest
+
+The six additions below are the retained acquisition artifacts. Paths are repository
+relative. Each raw extraction is byte-identical to `pdftotext -layout` on its retained
+PDF; no PDF or raw source was modified while preparing this manifest.
+
+| Source | Local PDF | PDF SHA-256 | Local raw extraction | Raw SHA-256 | Primary acquisition URL | Retrieval timestamp | Extraction method |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Bal 2026 | `packing/resources/papers/bal-2026-64-rectangle-wegner-lp-gaps.pdf` | `4a375f1086fb84536c467966b3ef1de37c85fb3c76618ffc8c4a5543c37c9cf0` | `packing/resources/papers/bal-2026-64-rectangle-wegner-lp-gaps.raw.md` | `d13323a8106bd0116053fd22ed0dbe0b869a3ac661e94df880ba25e189c273cb` | <https://arxiv.org/abs/2607.11318v2> (embedded PDF identifier) | Not recoverable; first retained in commit `5214b57b` on 2026-09-05, which is not an acquisition timestamp | `pdftotext -layout` |
+| Dewar 2024 | `packing/resources/papers/dewar-2024-contacts-oriented-squares.pdf` | `1de373c8e229ce98ab5294953acbc345ed8589b782e6141f6fcb309be9e1059e` | `packing/resources/papers/dewar-2024-contacts-oriented-squares.raw.md` | `3665eac0ba926d080fd03b8e8339fd13a1b4ec4352d5f5b6b726da4f0333941e` | <http://arxiv.org/abs/2210.10422v2> (embedded PDF identifier) | Not recoverable; first retained in commit `5214b57b` on 2026-09-05, which is not an acquisition timestamp | `pdftotext -layout` |
+| Connelly–Whiteley 1996 | `packing/resources/papers/connelly-whiteley-1996-second-order-rigidity.pdf` | `ba6a1ef37a9c423eb19bc5c609f957c9e85d4326d714da377873ad1b3307e8b2` | `packing/resources/papers/connelly-whiteley-1996-second-order-rigidity.raw.md` | `009be244216a1706376f18fb10f92ea4df9be8c14d7a85cd778555f3db254afa` | <https://pi.math.cornell.edu/~connelly/pdf/10.1137_S0895480192229236.pdf> | 2026-09-03 (time not retained) | `pdftotext -layout` |
+| Donev et al. 2004 | `packing/resources/papers/donev-torquato-stillinger-connelly-2004-jamming-lp.pdf` | `bed4073f28564aa7689fa5adaf079362839a32cc9d08c739f2ec5e6788cd08ed` | `packing/resources/papers/donev-torquato-stillinger-connelly-2004-jamming-lp.raw.md` | `31cdaaeb245fc3a1b5ebbc716ab41d108e949a4205d66fcca5f50276d96180fd` | Not recoverable from the retained evidence | Not recoverable; first retained in commit `5214b57b` on 2026-09-05, which is not an acquisition timestamp | `pdftotext -layout` |
+| Donev et al. 2007 | `packing/resources/papers/donev-connelly-stillinger-torquato-2007-underconstrained-jammed-packings.pdf` | `b45a31dc7172fff8bd8075ba36e0efa10e494354f1e2dea6bca330bb0d669d06` | `packing/resources/papers/donev-connelly-stillinger-torquato-2007-underconstrained-jammed-packings.raw.md` | `f97e82e83cc17841b84eee6bdbd8198e12aec3b50e138ac80b4940f02e6c3c52` | <https://pi.math.cornell.edu/~connelly/pdf/10.1103_PhysRevE.75.051304.pdf> | 2026-09-03 (time not retained) | `pdftotext -layout` |
+| Connelly notes | `packing/resources/papers/connelly-packings-of-circles-and-spheres-lecture-notes.pdf` | `5160747aece2fe51ab8a24799d92582382ba63f61ae4a6494e7c7031659b8ca2` | `packing/resources/papers/connelly-packings-of-circles-and-spheres-lecture-notes.raw.md` | `59bdb4dc724a4fd490d239610e29c993b784c147141f9c4fdcd50c6a8d882723` | <https://pi.math.cornell.edu/~connelly/PackingsIII.IV.pdf> | 2026-09-03 (time not retained) | `pdftotext -layout` |
+
+The 2026-09-03 dates come from the prior-art review’s retained acquisition record and
+are dates only. The Bal and Dewar URLs are the versioned arXiv identifiers embedded in
+their PDFs, not an independently retained transfer log. Donev 2004’s paper identity,
+local bytes, and extraction are retained, but its acquisition URL and retrieval time
+cannot be reconstructed from the repository; no publisher URL is inferred here.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

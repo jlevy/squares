@@ -31,7 +31,7 @@ agenda:
       use its own largest safe concentric witness side B_k without leaving an uncovered
       orientation or breaking D4 accounting?
     budget: >-
-      210 elapsed minutes: up to 120 minutes of manager authorship, 75 minutes of
+      210 active minutes: up to 120 minutes of manager authorship, 75 minutes of
       source-distinct review by the floating worker after BC-240 returns it, and 15
       minutes to reconcile the packet. State the closed angle cells, endpoint and seam
       ownership, rational tangent form, strict containment inequality for every member
@@ -63,7 +63,7 @@ agenda:
       Can an exact verifier decide the adaptive-core contract and refuse uncovered
       angles, unsafe cell bounds, missing D4 images, and known-feasible targets?
     budget: >-
-      180 elapsed minutes, manager with one implementation worker,
+      180 active minutes, manager with one implementation worker,
       pipeline-improvement then factual-review. Reuse the existing exact event-cell
       sweep only after BC-230 proves the reduction, extend the interval route, and build
       one standard-library standalone adaptive verifier that does not import sqpack.
@@ -131,8 +131,11 @@ agenda:
       Does an inset-support sweep provide a better seed for n=11 only after its support
       is released into unrestricted column generation?
     budget: >-
-      30 elapsed minutes for the inset screen and at most 90 more for the unrestricted
-      follow-on, manager with one runner, research-loop. Reproduce Massaccesi's n=17
+      30 active portfolio minutes for the inset screen and at most 90 more active
+      portfolio minutes for the unrestricted follow-on, manager with one runner for the
+      screens and up to two single-threaded runners for the matched follow-on,
+      research-loop. Record the manager's attentive work as agent_minutes and each
+      process's actual CPU and command time separately. Reproduce Massaccesi's n=17
       margin semantics first. Sweep the three declared n=11 insets in this runbook at
       identical grid counts and one column round; feed only the best converged seed to
       the unchanged pricing oracle. Split the follow-on equally between that released
@@ -196,7 +199,7 @@ agenda:
       contained in every unit-square orientation in the cell with less lost area than
       its largest concentric square?
     budget: >-
-      150 elapsed minutes, theory and geometry workers, research-loop. Derive the exact
+      150 active minutes, theory and geometry workers, research-loop. Derive the exact
       intersection or a rational inner approximation with a proof of containment and
       quantified area loss. Do not call the intersection polygonal without proof;
       curved or algebraic boundaries require an explicit approximation direction.
@@ -226,7 +229,7 @@ agenda:
       Can the rational angle-cell kernel be swept and interval-checked exactly with the
       existing positive and negative controls and acceptable cost?
     budget: >-
-      180 elapsed minutes, manager plus implementation worker,
+      180 active minutes, manager plus implementation worker,
       pipeline-improvement then factual-review. Build the smallest verifier BC-235's
       representation requires. Accept only exact containment and complete reachable
       center-cell coverage. The n=11 and n=12 retained positives and a known-feasible
@@ -255,7 +258,7 @@ agenda:
       After the kernel route is disposed, is a piecewise-algebraic segment-measure
       verifier small and cheap enough to build in a later block?
     budget: >-
-      90 elapsed minutes, theory-only research-loop. Specify segment-square intersection
+      90 active minutes, theory-only research-loop. Specify segment-square intersection
       regimes, breakpoints, boundary conventions, exact coefficient domain, independent
       controls, and a branch-count estimate. No implementation opens in this agenda.
       Defer unless the complete verifier fits a measured future block and promises a
@@ -320,7 +323,7 @@ agenda:
       Is every fractional cell classified, its checkpoint and cost preserved, and its
       one earned continuation or retirement condition explicit for portfolio closeout?
     budget: >-
-      45 elapsed minutes before BC-225, manager-owned W10 and documentation-pass. Use
+      45 active minutes before BC-225, manager-owned W10 and documentation-pass. Use
       achieved, bounded-negative, time-limited, guard-refused, technical-failure,
       never-opened, or inconclusive; give each continuation a bead and reopen condition;
       validate manager-owned artifacts and submit the terminal packet without editing
@@ -344,6 +347,10 @@ This child agenda is managed independently under the `think-wess` research epic 
 integrated only through [`agenda-024`](agenda-024-post-381-24h-portfolio.md).
 Its first block runs BC-230, BC-232, and BC-233 in parallel after BC-219. BC-231 follows
 the theorem contract; no adaptive rung is claimable before both are complete.
+All minute and hour allocations in this agenda use agenda-024’s active-time accounting
+unless they are explicitly CPU budgets, command time limits, or reported wall/CPU costs.
+An operational interruption pauses this lane’s research allocation and cannot advance it
+through a shared gate.
 
 The workflow entry point is **BC-230 + BC-232 + BC-233 after the coordinator opens
 BC-219**. Work from `packing/` with the project interpreter:
@@ -407,8 +414,9 @@ from `packing/` and therefore omit the leading `packing/`.
   fallback.
 
 The retained 3.82 reading is `9.907905594982566 <= nu* <= tau* <= 11.055616942909815`,
-of width `1.147711347927249`. The continuation earns another four-CPU-hour block only at
-width at most `0.860783510945437`, a 25-percent reduction.
+of width `1.147711347927249`. The continuation earns another four-CPU-hour block only
+when `new_width <= 0.75 * old_width`, equivalently at width at most
+`0.86078351094543675` for this checkpoint.
 An upper endpoint counts only from an iteration whose row loop reports
 `rows_converged: true`; keep its computational status distinct from the exact
 `verify_ceiling` lower endpoint.
@@ -642,13 +650,13 @@ slots. The portfolio’s one floating agent starts on closure BC-240 and moves t
 BC-230 review when that 105-minute theorem packet returns.
 BC-231 does not open before the theorem is reviewed and frozen at the hour-four gate.
 
-| Elapsed | Manager / BC-230 | BC-232 process | BC-233 processes |
+| Active Portfolio Time | Manager / BC-230 | BC-232 process | BC-233 processes |
 | --- | --- | --- | --- |
 | 0--15 min | Verify packet hashes, create the reserved output root, refuse reused stems, and freeze accept rules and worker write scopes. | Load the JSON state, confirm its 181-direction compatibility, and launch leg 1. | Run the n17 source control; record that published `M` is the doubled margin. Confirm the strict-JSON deadline control, while keeping every deadline stop time-limited and ineligible for comparison. |
 | 15--45 min | Draft the lemma, serialized fields, seam rules, scalar specialization, and refusal matrix. | Run leg 1. | Run the three one-round, equal-grid inset screens sequentially; choose only among candidates that were emitted. |
 | 45--87 min | Complete the contract and turn every premise into a BC-231 positive or mutation test. | Run leg 1. | Run the selected released seed and unseeded control concurrently for the same 42-minute deadline. |
 | 87--105 min | Freeze the author draft for review. | Run leg 1. | Compare only equal-status outputs; run quick refusals and reserve a full decision for any mass below 11. |
-| 105--120 min | Hand the frozen draft to the floating reviewer returning from BC-240; supervise the compute lanes. | Finish the 105-minute leg 1, hash its outputs, and launch leg 2 from the fresh state if no stop fired. | Freeze the screen, release, control, cost, and keep-or-retire packet; launch nothing new. |
+| 105--120 min | Hand the frozen draft to the floating reviewer returning from BC-240; supervise the compute lanes. | Finish the 105-minute leg 1, hash its outputs, and prepare the exact leg-2 command. Launch leg 2 only after the T+2 landing. | Freeze the screen, release, control, cost, and keep-or-retire packet; launch nothing new. |
 | 120--195 min | The floating reviewer audits theorem scope, seams, scalar specialization, and controls; the manager answers only concrete blockers. | Run leg 2. | No new run; preserve all outputs. |
 | 195--225 min | Reconcile the review and all three BC dispositions. | Finish the 105-minute leg 2; report endpoints, convergence, width, cost, and the 30 CPU-minutes still owed before the routing test. | Submit the frozen trajectory and disposition. |
 | 225--240 min | Freeze launches and submit `gate-hour-04.md` to the coordinator 15 minutes before the gate. | No new run. | No new run. |
@@ -695,9 +703,9 @@ the current one-body formulation at 3.82. Also stop on a row-converged objective
 11, preserve the state, and run the covering bridge on that state; the float crossing is
 a candidate for that bridge, not a bound.
 Do not apply the width rule at the hour-four gate after only 210 CPU-minutes.
-After the frozen additional 30-minute leg, continue only if the width is at most
-`0.860783510945437`; a larger width retires this checkpoint until its recorded reopen
-condition changes.
+After the frozen additional 30-minute leg, continue only if
+`new_width <= 0.75 * old_width`, which here means width at most `0.86078351094543675`; a
+larger width retires this checkpoint until its recorded reopen condition changes.
 
 ### BC-233 launch
 
@@ -780,7 +788,7 @@ optimum at 3.82 is `11.055617`, `0.056` above it.
 A straight line through those two points crosses eleven near 3.817, so `61/16 = 3.8125`
 and `763/200 = 3.815` are plausibly inside the current instrument’s reach before any
 adaptive core exists, and BC-234 only reaches 61/16 after BC-230 and BC-231, at least
-390 elapsed minutes of theorem and verifier work whose necessity for this rung has not
+390 active minutes of theorem and verifier work whose necessity for this rung has not
 been measured.
 
 The probe is one background single-core process on instruments that already exist: the

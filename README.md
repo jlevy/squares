@@ -1,6 +1,6 @@
 # Square Packing
 
-Three things here:
+This repository contains:
 
 - **[New results](#new-results).** The lower bound on `s(11)` has moved.
   It appears to be the first improvement in 23 years on the smallest open case; the
@@ -19,21 +19,21 @@ The [**explainer page**](https://jlevy.github.io/squares/) is the best introduct
 the proof: the `s(11)` bound and its five conditions in one page, with every figure
 drawn from the certificate it explains.
 
-[![One hundred known-best square packings arranged from n equals one through one hundred, each labelled with its best known upper bound and, where the value is still open, the best proved lower bound.](packing/atlas/known-best/known-best-1-100.png)](https://jlevy.github.io/squares/known-best-1-100.pdf)
+[![One hundred known-best square packings arranged from n equals one through one hundred, each labeled with its best-known upper bound and, where the value is still open, the best proved lower bound.](packing/atlas/known-best/known-best-1-100.png)](https://jlevy.github.io/squares/known-best-1-100.pdf)
 
 *The retained `n = 1…100` atlas, with each packing normalized to its own container and
-labeled by its best known side upper bound and, where `s(n)` is still open, the best
+labeled by its best-known side upper bound and, where `s(n)` is still open, the best
 proved lower bound beneath it.
 A crimson star marks a lower bound proved here.
 The image is available in [**SVG**](packing/atlas/known-best/known-best-1-100.svg),
 [**PDF**](https://jlevy.github.io/squares/known-best-1-100.pdf), and
-[**high-rez PNG**](packing/atlas/known-best/known-best-1-100@2x.png).*
+[**high-resolution PNG**](packing/atlas/known-best/known-best-1-100@2x.png).*
 
 `s(n)` is the side of the smallest square that holds `n` non-overlapping unit squares.
 The problem is elementary to state and remains open even at small `n`.
 
-[New Results](#new-results) · [Survey](#survey) · [What Is Here](#what-is-here) ·
-[Getting Started](#getting-started) · [Reports](#reports) ·
+[New Results](#new-results) · [Survey](#survey) · [Repository Guide](#repository-guide)
+· [Getting Started](#getting-started) · [Reports](#reports) ·
 [Autonomous Research Process](#autonomous-research-process) ·
 [Conventions](#conventions) · [Layout](#layout)
 
@@ -41,7 +41,7 @@ The problem is elementary to state and remains open even at small `n`.
 
 The [results register](packing/frontier/RESULTS.md) collects first-party and
 load-bearing whole results.
-Each result has a `T-NNN` id and the classifications defined in
+Each result has a `T-NNN` ID and the classifications defined in
 [`epistemics.md`](epistemics.md): **V**, the highest verification rung supported by its
 cited evidence, and **C**, what this repository has recorded or performed itself.
 The gate checks the structural support for both classifications.
@@ -55,7 +55,7 @@ movement on a central open case.
 
 Results first established here, as far as the recorded source searches show:
 
-### Notable results (`S4`–`S5`)
+### Notable Results (`S4`–`S5`)
 
 - **[T-018](packing/frontier/RESULTS.md): `s(11) ≥ 381/100`, the first located public
   movement of the smallest open case since 2003 (`S5`).**
@@ -95,9 +95,11 @@ Results first established here, as far as the recorded source searches show:
   [`n = 20`](packing/frontier/n-020.md) by `0.194449`, `n = 21` by `0.058343`, and
   `n = 19` by `0.21`, the largest single-case movement in the register.
   The three sizes again come out of `Condition 2` alone.
-  Above them the method has `0.1885` of room at `n = 20` and `n = 21` before
+  From this `4.80` rung the method had `0.1885` of room at `n = 20` and `n = 21` before
   [its own ceiling](packing/frontier/CERTIFICATE-REACH.md), and `0.0856` at `n = 19`
-  before it would contradict the best known packing.
+  before it would contradict the best-known packing.
+  `T-021` has since raised the `n = 20` and `n = 21` bounds to `97/20`, leaving `0.1385`
+  of room there; this `24/5` rung remains current for `n = 19`.
 - **T-017: `s(12) ≥ 99/25`, from nothing case-specific at all (`S4`).**
   [`n = 12`](packing/frontier/n-012.md) had only the `n = 11` bound inherited by
   monotonicity; the frontier record said in as many words that nothing specific to
@@ -123,23 +125,33 @@ Results first established here, as far as the recorded source searches show:
   `T-018` has since passed the repaired value, but the repair is what made it a value
   worth passing.
 
-### Further results (`S2`–`S3`)
+### Further Results (`S2`–`S3`)
 
-Sound and checked, and smaller in reach: a single case, a refinement of one catalogue
-annotation, or an erratum.
+These checked results have narrower scope: a single case, a catalogue refinement, or an
+erratum.
+
+- **T-021: `s(20), s(21) ≥ 97/20` (`S3`).** A
+  [certificate at `4.85`](packing/cases/n20_fractional_certificate/certificate.json) has
+  total mass `19848723/1000000 = 19.848723`, so the same exact object proves both cases
+  without a monotonicity step.
+  It raises each bound by `0.05` above `T-020`; the heavier atom set does not apply to
+  `n = 19`.
 
 - **T-001 / T-002: `s(17) ≥ 4.426213` and `s(18) ≥ 4.426213`.** A sixteen-point
   unavoidable set is certified by exact rational cover verification and an independent
   interval branch-and-bound over the full pose space.
   Both are superseded as the verified lower bound: first by the source-backed `4.5058`
   adopted on 2026-09-03, and now by `T-019`, which proves more than either.
+
 - **T-009: `s(29) ≤ 5.93383346267692918974379895098`.** A Krawczyk interval certificate
   encloses a unique exact solution around a rational witness.
+
 - **T-012 / T-013: exact rigidity determinations.** The retained `n = 5` optimum is not
   infinitesimally rigid but is second-order rigid.
   The retained `n = 40` packing is infinitesimally flexible, with every recorded
   first-order flex refused at second order.
   Both refine catalogue annotations that say only “Rigid.”
+
 - **T-014: Goebel’s `n = 5` optimum is locally rigid at fixed side.** At the exact side
   `2 + √2/2` the labeled pose is an isolated point of the feasible set: no nonconstant
   continuous feasible path leaves it and no sequence of distinct feasible poses
@@ -149,14 +161,15 @@ annotation, or an erratum.
   The side is fixed throughout; nothing is claimed about an isolation radius, about any
   other `n = 5` optimum, or about global uniqueness, and nothing follows for the side as
   a variable: with the side free the obstruction fails, which X-007 measured.
+
 - **T-005: an erratum in Bentz 2010.** Lemma 10’s middle replacement point is transposed
   in print. An exact escape certificate refutes the printed point, and the corrected
   reading certifies exactly against the journal page image.
 
-### Machine audits of published work
+### Machine Audits of Published Work
 
-The theorem is the source’s in each of these; the exact machine check is what this
-repository adds.
+In each case, the theorem belongs to the source; this repository adds an exact machine
+check.
 
 - **T-004 / T-008:** Bentz 2010, Theorem 8, including both halves of `s(46) = 7`.
 - **T-011:** exact verification of Trump’s 1979 `n = 11` record witness over its
@@ -170,7 +183,7 @@ accordingly.
 
 ## Survey
 
-The survey records the best known packing and best proved lower bound for every
+The survey records the best-known packing and best proved lower bound for every
 `n ≤ 100`, with provenance and separate reported and formally verified lanes.
 Its source is one schema-validated case file under
 [`packing/frontier/`](packing/frontier/README.md); the generated
@@ -188,11 +201,11 @@ its printed route, so the case’s proved status rests on independent later proo
 The [`n = 7` case](packing/frontier/n-007.md) states that disposition and links the
 relevant source audit.
 
-## What Is Here
+## Repository Guide
 
 | Where | What |
 | --- | --- |
-| [**Tutorial**](TUTORIAL.md) | First-principles introduction to the objects, bounds, cells, search, and proof obligations |
+| [**Tutorial**](TUTORIAL.md) | First-principles introduction to the objects, bounds, cells, stationary branches, search, and proof obligations |
 | [**Synopsis**](SYNOPSIS.md) | Current technical state, established results, terminology, experiment roll-up, and handoff |
 | [**Results register**](packing/frontier/RESULTS.md) | Whole-result bounds, audits, structural theorems, and errata graded under [`epistemics.md`](epistemics.md) |
 | [**Frontier**](packing/frontier/STATUS.md) | One record per case for `n = 1…100`, with reported and verified bounds kept separate |
@@ -237,11 +250,11 @@ The [synopsis terminology](SYNOPSIS.md#terminology) gives the full definitions.
 
 ### Essential Conventions
 
-One id names one durable thing, and ids are not reused.
+One ID names one durable thing, and IDs are not reused.
 The prefix identifies the record’s layer; [`conventions.md`](conventions.md#1-identity)
 is the definitive registry.
 
-| Id | Names |
+| ID | Names |
 | --- | --- |
 | `n-NNN` | One frontier case, such as `n-011` |
 | `T-NNN` | One whole result in the results register; the synopsis also has older local `T-N` shorthand |
@@ -254,7 +267,7 @@ is the definitive registry.
 | `session-NNN` | One escalated agent-session record containing ordered workflow phases |
 | `D-NNN` | One defect and its detection, consequence, fix, and regression |
 | `think-xxxx` | One git-native `tbd` bead: durable work and dependency state |
-| `W1`–`W10` | A workflow entry point, not a durable artifact id |
+| `W1`–`W10` | A workflow entry point, not a durable artifact ID |
 
 Other rules needed to read the repository:
 
@@ -267,7 +280,7 @@ Other rules needed to read the repository:
 - Source-faithful archive material is not cleaned up as project prose.
   Reconstructed source text is marked and counted.
 - Corrections preserve the original record and add a dated statement of what remains
-  valid. Ids and scientific outcomes are not silently rewritten.
+  valid. IDs and scientific outcomes are not silently rewritten.
 
 ### Technical Stack
 
@@ -505,10 +518,10 @@ The `tbd` queue owns durable work and dependencies.
 Campaign agendas order bounded commitments; hypothesis and experiment records own
 scientific claims and measurements; commits own code; escalated agent-session records
 own phase and recovery state.
-The key record ids are `X-NNN` for explorations, `H-NNN` for hypotheses, `exp-NNN` for
+The key record IDs are `X-NNN` for explorations, `H-NNN` for hypotheses, `exp-NNN` for
 experiments, `BC-NNN` for bounded commitments, `T-NNN` for registered results, and
 `D-NNN` for defects.
-[`conventions.md`](conventions.md#1-identity) owns the complete id registry.
+[`conventions.md`](conventions.md#1-identity) owns the complete ID registry.
 
 The campaign’s
 [bounded research cycle](packing/campaign/README.md#the-bounded-research-cycle) defines
@@ -522,7 +535,7 @@ Changing agents changes the driver, not the record or the evidence required for 
 | This README | High-level orientation and the relationship among the layers |
 | [`SYNOPSIS.md`](SYNOPSIS.md) | Current technical state, full workflow contracts, work-unit vocabulary, and handoff |
 | [`epistemics.md`](epistemics.md) | Whole-result V/C/S/N classifications and their executable boundary |
-| [`conventions.md`](conventions.md) | Ids, filenames, artifact shape, evidence fields, provenance, and corrections |
+| [`conventions.md`](conventions.md) | IDs, filenames, artifact shape, evidence fields, provenance, and corrections |
 | [`operating-rules.md`](operating-rules.md) | How sessions choose, divide, validate, and hand off work |
 | [Campaign runbook](packing/campaign/README.md) | Hypothesis and experiment mechanics, clocks, budgets, verdicts, and routing |
 | [W9 remediation pass](packing/campaign/remediation-pass.md) | Systematic defect and issue-backlog triage, repair waves, and terminal dispositions |

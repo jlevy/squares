@@ -11,8 +11,8 @@ agenda:
   updated: '2026-09-05'
   status: active
   objective: >-
-    Coordinate two disjoint research agendas for the next 24 hours without allowing
-    parallel work to split the proof record. Agenda-025 owns the exact fractional
+    Coordinate two disjoint research agendas for roughly 24 active portfolio hours
+    without allowing parallel work to split the proof record. Agenda-025 owns the exact fractional
     frontier and agenda-026 owns density, typed stationarity, and Trump capture. This
     agenda owns the frozen base and source packets, shared namespaces and records,
     six four-hour integration gates, all routing decisions, and W10 closeout. The
@@ -32,7 +32,7 @@ agenda:
       controls, checkpoints, and four-hour report contract frozen tightly enough that
       the two managers can work in parallel without shared-state or evidence drift?
     budget: >-
-      45 elapsed minutes, coordinator only, review-planning-oversight. Recheck PR 83,
+      45 active minutes, coordinator only, review-planning-oversight. Recheck PR 83,
       PR 87 and any newly merged operating rules at launch. Freeze the exact base SHA;
       common, fractional and closure resource manifests; BC, H, experiment and
       exploration ranges; manager and worker write exclusions; and the gate packet
@@ -89,7 +89,7 @@ agenda:
       At hour four, have both managers produced valid theorem and control packets, and
       which exact cells are allowed to run in the second block?
     budget: >-
-      30 elapsed minutes at T+4h, coordinator only. Freeze launches 15 minutes before
+      30 active minutes at T+4h, coordinator only. Freeze launches 15 active minutes before
       the gate; inspect both changed-path manifests, exact receipts, refusals, costs,
       checkpoints and proposed hypotheses; validate fractional then closure; integrate
       sequentially; check IDs and references whole-set; regenerate shared views once;
@@ -118,7 +118,7 @@ agenda:
       At hour eight, what do the first exact measurements say about the fastest path to
       a bound above 3.81 and the viability of the two closure endpoints?
     budget: >-
-      30 elapsed minutes at T+8h under the same frozen packet and sequential integration
+      30 active minutes at T+8h under the same frozen packet and sequential integration
       protocol as BC-220. Apply only X-016's predeclared routing rules; do not move an
       accept threshold to rescue a run.
     entry: >-
@@ -145,7 +145,7 @@ agenda:
       At hour twelve, which program has earned the portfolio pivot, and which routes
       should be preserved, demoted, or stopped?
     budget: >-
-      35 elapsed minutes at T+12h. Compare verified improvement, bracket shrinkage,
+      35 active minutes at T+12h. Compare verified improvement, bracket shrinkage,
       theorem closure, exact decision cost, and guard failures. Reallocate within the
       frozen two-program scope; a cross-program route needs an explicit patch request
       and coordinator decision.
@@ -172,7 +172,7 @@ agenda:
       At hour sixteen, has any candidate or theorem packet earned independent
       exactification, and can the other lane continue without touching its proof state?
     budget: >-
-      30 elapsed minutes at T+16h. Freeze candidate bytes before inspecting them; demand
+      30 active minutes at T+16h. Freeze candidate bytes before inspecting them; demand
       a source-distinct decision and falsifying controls for a bound, or an independent
       128-branch replay for the Trump theorem. Reserve roughly 75 percent of the next
       block for a qualifying bound candidate.
@@ -200,7 +200,7 @@ agenda:
       At hour twenty, can new instrument work stop and every remaining resource move to
       exactification, replication, and closeout-quality evidence?
     budget: >-
-      25 elapsed minutes at T+20h. Stop opening new instruments. Preserve any unfinished
+      25 active minutes at T+20h. Stop opening new instruments. Preserve any unfinished
       checkpoint with its reopen condition, assign independent replays and documentation
       review, and freeze the final four hours. No late idea bypasses the earlier controls.
     entry: >-
@@ -226,7 +226,7 @@ agenda:
       At hour twenty-four, is every research cell honestly classified and reprioritized,
       with the record validated and exactly one next entry selected but not executed?
     budget: >-
-      60 elapsed minutes beginning at T+23h. Apply W10 to all three agendas: achieved,
+      60 active minutes beginning at T+23h. Apply W10 to all three agendas: achieved,
       bounded-negative, time-limited, guard-refused, technical-failure, never-opened, or
       inconclusive; record disposition and reopen conditions; run the documentation
       guidelines pass and full validation on the final commit; update the PR's cost and
@@ -260,8 +260,46 @@ BC-219 is a preflight outside the research clock.
 Its completion makes the initial six child cells takeable; it does not start their
 budgets. `T+0` is the later coordinator dispatch record that names all four live agent
 contexts, claims the six cells, and freezes the first-block experiment identities.
-The hour-four gate is four hours after that dispatch, not four hours after the BC-219
-preflight commit.
+
+## Active-Time Accounting
+
+The roughly 24-hour horizon is **active portfolio time**, not wall-clock time and not
+the sum of every parallel worker’s labor.
+`T+4h`, `T+8h`, and the later gate labels are shorthand for the schedule that would
+elapse under continuous agent and host availability.
+The portfolio clock starts at the recorded `T+0` dispatch and advances only while the
+coordinator and every role required by the current block can do their assigned work.
+
+An interrupted agent, unavailable host, usage or quota pause, approval wait, handoff or
+worktree setup, tool outage, and recovery from any of those events pause the affected
+lane and therefore delay its shared gate.
+The lost wall-clock interval consumes neither that lane’s budget nor the 24 active
+hours. An unaffected lane may finish work already authorized for the current block, but
+it may not cross the shared gate, borrow from the next block, or change a criterion
+because another lane is unavailable.
+The gate opens only after its prerequisite packets and planned active allocations are
+complete.
+
+Parallel work does not make the portfolio clock run faster.
+Every packet records three distinct clocks: `active_portfolio_minutes` for progress on
+the synchronized schedule, `agent_minutes` for the sum of attentive human and agent
+labor, and actual command wall and CPU time for processes.
+An unqualified active-minute budget on an agent-owned writing or review cell governs
+attentive work and is reported as `agent_minutes`; schedule tables say active portfolio
+minutes explicitly. A CPU-hour budget or command `--minutes` limit governs an executing
+experiment and remains frozen under its preregistered accept and stop rules; operational
+downtime in which the process does not run is not scientific compute, and a timeout is
+never extended after inspecting a result.
+Mechanical integration and closeout may run past the 24-active-hour research horizon, as
+BC-225 already permits.
+
+At each synchronized gate—`T+4h`, `T+8h`, `T+12h`, `T+16h`, `T+20h`, and `T+24h`—the
+portfolio clock holds at that label while the coordinator performs sequential
+integration, regeneration, validation, commit, and push.
+Those mechanics report their own wall time and `agent_minutes` but do not consume the
+following research block.
+The next block begins from the same gate label only after the landing is durable.
+The T+2 commissioning checkpoint below uses the same convention.
 
 The full rationale, resource packet, ownership matrix, and routing thresholds are in
 [`X-016`](../explorations/X-016-after-381-two-managers-one-proof-boundary.md).
@@ -345,7 +383,7 @@ Each manager submits by gate minus 15 minutes:
 - BC dispositions and checkpoint paths;
 - frozen base SHA, transport identity, and a complete changed-path content manifest;
 - exact checker receipts, invalid runs, and guard refusals;
-- wall and CPU time;
+- `active_portfolio_minutes`, `agent_minutes`, and actual command wall and CPU time;
 - proposed next slices and hypothesis text; and
 - shared-code or cross-program requests.
 
@@ -372,6 +410,17 @@ The coordinator claims tbd cells and creates or allocates hypotheses and experim
 records before dispatch.
 A manager may update a coordinator-created experiment only inside its reserved range and
 may not change its identity or acceptance rule.
+
+For Codex agents, every handoff names a reasoning level.
+Assign `max` to mathematical insight, strategy, theorem or completeness design,
+proof-boundary review, scientific disposition, and consequential integration decisions.
+Assign `xhigh` to bounded implementation, source-distinct review, and editorial work
+that needs substantial but not proof-level judgement.
+Assign `high` to deterministic replay, manifests, value checks, formatting, and other
+tightly specified mechanical work.
+If a mechanical task uncovers a mathematical choice, stop it and redispatch that choice
+at `max`; do not let the original speed-oriented assignment make the decision
+implicitly. Record the level in the `T+0` dispatch and each delegated packet.
 
 The word *owns* refers to scientific work and manager-local output, not ID authority:
 
@@ -416,11 +465,186 @@ regenerates shared views, and makes the portfolio commit.
 The gate packet names the frozen base SHA and either the shared-checkout content
 manifest or the local commit SHA.
 
+## T+0 Through T+2 Commissioning and Landing Gate
+
+This commissioning block is the official first 120 active portfolio minutes of the
+24-hour agenda, not a disposable rehearsal.
+At its landing, 22 active portfolio hours remain.
+It claims the six initial cells, spends and records real BC and compute budgets, and
+leaves a coordinator-integrated checkpoint for replacement agents.
+No clock, BC, hypothesis, experiment, command, or completed output restarts after the
+handoff.
+
+The current dependency boundary is fixed: BC-219 (`think-9pzv`) is closed; BC-230
+(`think-c678`), BC-232 (`think-gmdy`), BC-233 (`think-jbat`), BC-240 (`think-4ln1`),
+BC-242 (`think-9xxh`), and BC-245 (`think-do04`) are the only launch cells; and BC-220
+(`think-u7i4`) remains blocked by exactly those six.
+BC-231 remains behind BC-230, BC-241 behind BC-240, BC-243 behind BC-242, BC-246 behind
+BC-240 and BC-245, and BC-247 behind BC-245. Commissioning creates no BC and consumes no
+unallocated ID.
+
+### T+0 Preflight and Ownership
+
+Run the coordinator entry-point checks and the six-cell `tbd update` already specified
+above. Record `T+0` only after the graph, current base, input hashes, unused output
+stems, allocated records, and all four agent acknowledgements pass.
+Allocate required hypotheses and experiments only from the existing reserved ranges; the
+launch record names the actual IDs chosen after the collision check.
+Do not preassign an ID in this runbook.
+
+| Context | Reasoning and official work | Exclusive writes through T+2 |
+| --- | --- | --- |
+| Coordinator | `max`: launch, proof-boundary decisions, gates, integration, and handoff | Shared H/experiment records, generated views, `results/agenda-024/`, tbd, commit, push |
+| Fractional manager | `max`: BC-230 theorem design; supervision of BC-232 and BC-233 | Existing fractional roots and `results/agenda-025/`; no shared ledger, frontier, schema, or tbd writes |
+| Closure manager | `max`: BC-242 density semantics and BC-245 typed-stationarity completeness design | Existing closure roots and `results/agenda-026/`; no shared ledger, frontier, schema, or tbd writes |
+| Floating worker | `max` for BC-240 theorem packaging, then `xhigh` for the source-distinct BC-230 review | First the closure manager’s assigned BC-240 paths; after a terminal packet and coordinator transfer, only the fractional manager’s assigned review path |
+
+The manager landing paths are
+`packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/checkpoint-hour-02.md`
+and
+`packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/checkpoint-hour-02.md`.
+The coordinator lands
+`packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/checkpoint-hour-02-decision.md`.
+Intermediate coordinator receipts are `commissioning-gate-minute-015.md`,
+`commissioning-gate-minute-030.md`, `commissioning-gate-minute-060.md`, and
+`commissioning-gate-minute-090.md` under the same agenda-024 result root.
+Require every path to be absent before launch; preserve a failed attempt rather than
+overwriting it.
+
+### Thirty-Minute Slices and Microgates
+
+| Active time | Coordinator | Fractional manager | Closure manager | Floating worker |
+| --- | --- | --- | --- | --- |
+| 0–30 | Commit the launch identities and criteria; reject cross-scope writes | Start BC-232 leg 1 with the exact 105-minute command in agenda-025; start BC-233’s declared source control and screens; draft BC-230 | Draft BC-242’s absolutely continuous primal, a.e. dual, boundary convention, and weak-duality obligations | Bind BC-240’s retained packet and draft only the anchored fixed-side local theorem |
+| 30–60 | Audit live PIDs, fresh stems, JSON status, and clock receipts | Continue BC-230; supervise BC-232; complete eligible BC-233 screens and start only the declared equal-budget released/control pair | Continue BC-242, then begin BC-245’s typed-backbone theorem packet | Continue BC-240; run the exact witness and retained tangent replay, never the radius generator |
+| 60–90 | Exercise the interruption contract described below; prevent gate borrowing | Continue the same work; inspect only strict JSON and exact rational fields | Continue BC-245 without implementing an atlas | Resume BC-240 from the minute-60 checkpoint; no work is repeated |
+| 90–120 | At minute 90 forbid any new long command; at minute 105 transfer the terminal floating slot; prepare sequential integration | Finish BC-230’s author checkpoint; let BC-232 leg 1 terminate and hash its fresh outputs; finish or honestly stop BC-233; do not launch BC-232 leg 2 | Freeze BC-242 and BC-245 drafts; review BC-240’s scope and retained-evidence boundary | Return BC-240 by minute 105, then begin the BC-230 source-distinct review at `xhigh`; freeze its partial review at minute 120 |
+
+The minute-15 gate requires four live contexts, recorded reasoning, exact BC ownership,
+fresh output stems, the correct project interpreter, and launched-process identities.
+The minute-30 gate requires the warm state to load, strict-JSON controls to pass, and no
+write outside an assigned scope.
+The minute-60 gate requires each context to write a resume stanza naming completed work,
+open work, hashes, active minutes, and the exact next action.
+After that stanza, deliberately interrupt and resume the floating context on BC-240. The
+shared clock pauses for the lost wall interval; already-authorized processes may finish,
+but no lane crosses the gate or starts a successor.
+The resumed worker must continue from the stanza without repeating a replay or resetting
+BC-240’s budget. The minute-90 gate freezes new launches and hashes every terminal
+numerical output.
+The minute-120 gate stops research, requires no live child process, and
+begins the coordinator-only landing transaction.
+
+### Required Commands and Evidence
+
+BC-232 uses the exact agenda-025 leg-01 command, including `--minutes 105`, the retained
+warm state `bc-200-state-191-50.json`, and fresh `bc-232-leg-01` outputs.
+Its retained input hash must remain
+`8df0b9aa530149b44367842a2e6389949b27189df038d68e9d1afa8fd87df8c6`. Do not start leg 2
+before the T+2 landing.
+Record the maximum exact `best_scaled_total`, the smallest row-converged float
+`rows_objective`, process wall and CPU time, and the fresh state, summary, family, and
+log hashes. The width remains provisional: the 25-percent routing rule does not fire
+until the full declared four-CPU-hour evidence budget has been spent.
+
+BC-233 uses the three exact screen commands and matched 42-minute released/control
+commands in agenda-025 unchanged.
+Each summary must be strict JSON; a deadline stop is time-limited and ineligible for
+comparison. Run the retained scalar exact seams while runner count permits:
+
+```sh
+cd packing
+uv run --frozen --all-extras --group dev pytest -q \
+  tests/test_run_fractional_colgen.py::test_deadline_before_first_round_writes_strict_json \
+  tests/test_run_fractional_colgen.py::test_summary_json_refuses_unexpected_non_finite_values
+uv run --frozen --all-extras --group dev python -m devtools.decide_certificate \
+  cases/n11_fractional_certificate/certificate.json
+.venv/bin/python3 cases/n11_fractional_certificate/minimal_verify.py \
+  --unpinned cases/n11_fractional_certificate/certificate.json
+```
+
+A new mass-below-eleven candidate is frozen and hashed immediately and follows its
+existing exact-decision route; it is never promoted at this checkpoint.
+
+BC-240 runs only the retained exact witness and tangent replay commands from agenda-026.
+The packet must retain the current tangent-record hash
+`60a4b7c48034b37063509a8a641974ed5eae86dccd056e9cbc6cf2fd7f2f0661`, the BC-199 result
+hash `db124b9956d8051682388cbba3b16772e65406a0003debba1c92b915c0c489a8`, and the
+documented semantics-only `tangent_cones.py` drift.
+It must say explicitly that the missing per-face witnesses were not recreated and that
+no global capture theorem was proved.
+
+BC-245’s typed-backbone packet is
+`results/agenda-026/bc-245-typed-backbone-theorem-packet.md`. It records, without
+claiming them proved, the finite-chart obligation; typed square and wall features; owner
+axes, signs, and orders; complete, active, and positive-multiplier row sets; normal/KKT
+and abnormal Fritz–John branches; ties, zero multipliers, and rattlers; the joint
+`D4 x S_n` action; and LP/Farkas, interval, and exact-algebra leaf obligations.
+Its controls label n=3 and n=4 as complete, n=5 as representability-only, and Trump’s
+retained counts as a local endpoint.
+Missing proofs remain marked `open`; no producer, atlas, BC-246, or BC-247 run opens
+here.
+
+At minute 120 the managers run Flowmark on their Markdown and submit complete
+changed-path manifests and SHA-256 hashes.
+The coordinator freezes research, validates fractional before closure, accepts or
+refuses every path, regenerates shared views once, and runs:
+
+```sh
+cd packing
+uv run --frozen --group dev packing-ledger render
+uv run --frozen --all-extras --group dev packing-validate --records
+uv run --frozen --all-extras --group dev packing-validate --edit
+```
+
+The subsequent commit, push, and `tbd sync` are landing mechanics: record their
+`agent_minutes` and wall time, but do not advance the research clock beyond T+120.
+Hosted checks remain asynchronous.
+
+### Stops, Success, and Continuation
+
+Before T+0, abort without starting the clock on a dependency mismatch, unexplained
+frozen-input drift, namespace collision, occupied output stem, missing control, or
+failure to allocate the required records.
+After T+0, never reset: preserve elapsed active time, agent time, process wall and CPU
+cost, logs, and the last valid checkpoint.
+Invalid JSON, disagreement between exact routes, an overwritten path, wrong interpreter,
+or an unexpected shared write stops the affected cell and freezes both managers if it
+crosses the proof boundary.
+A failed scientific accept rule is an honest result, not a commissioning failure.
+Loss of a manager or the floating slot pauses the shared clock; the surviving lanes may
+finish already-authorized work but may not borrow work.
+If the four-context topology cannot be restored, land a `degraded` checkpoint and do not
+call commissioning successful.
+
+Commissioning succeeds when the four roles and floating-slot transfer worked; the
+minute-60 interruption resumed without a reset; BC-232 left a fresh resumable state;
+BC-233 produced strict-JSON or honestly time-limited packets; the retained exact and
+Trump controls agreed; BC-242 and BC-245 preserved their proof boundaries; manager
+manifests were integrated only by the coordinator; validation passed; and the landing
+commit is sufficient for a cold replacement coordinator.
+
+The landing decision records `active_portfolio_minutes: 120`,
+`remaining_active_portfolio_minutes: 1320`, every wall-clock pause, per-role
+`agent_minutes`, per-process wall and CPU time, allocated H/experiment IDs, BC statuses,
+input and output hashes, no-live-process evidence, remaining per-BC budgets, and the
+exact next command and unused stem for each lane.
+The replacement coordinator starts at T+2 from this packet, does not reclaim the six BCs
+or reallocate their records, and continues the same first four-hour block.
+
+Expected work still in progress includes completion and review of BC-230, later BC-232
+legs and its unchanged width test, BC-240 review, and completion of BC-242 and BC-245.
+BC-231, BC-241, BC-243, BC-246, BC-247, adaptive rungs, density optimization, global
+stationary enumeration, exact cover, frontier promotion, and the hour-four BC-220
+decision remain deferred.
+No completion of those cells is implied by a successful commissioning gate.
+
 ## First four-hour dispatch
 
-The coordinator sends three bounded handoffs at `T+0` and keeps the fourth context.
-Each handoff names this agenda, X-016, the manager’s full child agenda, the frozen base,
-the owned paths, the exact BCs, and its gate packet path.
+The T+0-through-T+2 commissioning gate above is the binding first half of this block.
+After its landing, a replacement coordinator resumes at T+2 from the committed budget
+ledger and checkpoints; it does not replay the T+0 rows below.
+The remaining rows describe the scientific objectives through the hour-four BC-220 gate.
 
 | Time | Coordinator | Fractional manager | Closure manager | Floating worker |
 | --- | --- | --- | --- | --- |
@@ -430,7 +654,7 @@ the owned paths, the exact BCs, and its gate packet path.
 | T+135 to T+195 min | Check proposed H/exp text without allocating a new run | Reconcile concrete BC-230 blockers and supervise only the fractional processes | Finish BC-245 and map its solved controls | Complete the BC-230 theorem, seam, specialization, and refusal audit |
 | T+195 to T+225 min | Check manifests, IDs, packet completeness, and exact receipts | Reconcile BC-230, BC-232, and BC-233 dispositions | Specify BC-243 without running it; reconcile BC-240, BC-242, and BC-245 | Return terminal review; start nothing else |
 | T+225 to T+240 min | Freeze launches; accept packets only at the fixed paths | Write `gate-hour-04.md`; no new process | Write `gate-hour-04.md`; no new work | Available only for a coordinator-assigned manifest check |
-| T+240 to T+270 min | Run BC-220: validate fractional, then closure; write the central decision; regenerate shared views once; commit | Await the decision without polling CI | Await the decision without polling CI | Released |
+| Research clock held at T+240; up to 30 wall min of landing mechanics | Run BC-220: validate fractional, then closure; write the central decision; regenerate shared views once; commit | Await the decision without polling CI | Await the decision without polling CI | Released |
 
 The child agendas carry the exact numerical and replay commands.
 Their working-directory declarations are binding: agenda-025 runs its research commands
@@ -486,14 +710,16 @@ The post-freeze checks found only noninvalidating changes:
 | 2026-09-05 launch-spike close | PR #87: `3c6c5e7fc0c1662a57a1a3d06246a3a5e0730b89` to `b9d357db7a0f46ff8e0cd5bcfcb157686003b8a2` | `packing/src/sqpack/cli/validate.py`, `packing/tests/test_validation_cli.py` | No namespace, manager-output, research-input, or scientific-verdict collision. The change sizes the quick test lane to available CPUs; keep this branch’s measured push receipt and adopt the runner behavior only when PR #87 reaches `main`. |
 | 2026-09-05 after first green PR #89 run | PR #87: `b9d357db7a0f46ff8e0cd5bcfcb157686003b8a2` to `5ab10a1ab67255d229af1614170a33dc32e19ce8` | `development.md`, `packing/devtools/gate-budgets.yaml` | No namespace, manager-output, research-input, or scientific-verdict collision. This records the stable quick-lane timing and does not alter a manager command or launch criterion. |
 | 2026-09-05 after first green PR #89 run | `origin/main`: `663ca37eb622508d9df00c594b8ef11d2c256f55` to `3f8e104372c0c523f53855e769d86fd88ecbf22d` through merged PR #88 | 37 paths in the manifest below | No agenda, BC, H, exp, reserved result, frozen research input, or scientific-verdict collision. The delta changes repository validation, build, explainer, known-best rendering, accounting, and general documentation surfaces. Merged as `6a4b329e`, aligned the clean kpress gitlink, and preserved the scientific spike receipts. The new-base push tier passed 42 of 61 steps with 595 reachable tests passed and 3 deselected in 186.31 seconds. |
-| 2026-09-05 review of PR #89 | PR #87: `5ab10a1ab67255d229af1614170a33dc32e19ce8` to `d5bb223576ca5eaa7e40ad505f601cbf98993ae9` | The `origin/main` merge above plus `AGENTS.md`, `README.md`, `development.md`, `operating-rules.md`, `packing/src/sqpack/campaign/commit_clock.py`, `packing/src/sqpack/campaign/ledger.py`, `packing/tests/test_campaign_tools.py`, and `packing/tests/test_gate_repetition.py` | No agenda, BC, H, exp, exploration, manager-output, or scientific-verdict collision. PR #87’s whole delta against `main` does rewrite a frozen named input: it adds `OR-12` through `OR-14` to `operating-rules.md`, regenerates `AGENTS.md` from it, changes the ledger renderer and the agenda map, and tightens the agent-session schema with a session-gate check. That overlap was already present at the BC-219 freeze and was not recorded; the paragraph below carries the disposition. |
+| 2026-09-05 review of PR #89 | PR #87: `5ab10a1ab67255d229af1614170a33dc32e19ce8` to `d5bb223576ca5eaa7e40ad505f601cbf98993ae9` | The `origin/main` merge above plus `AGENTS.md`, `README.md`, `development.md`, `operating-rules.md`, `packing/src/sqpack/campaign/commit_clock.py`, `packing/src/sqpack/campaign/ledger.py`, `packing/tests/test_campaign_tools.py`, and `packing/tests/test_gate_repetition.py` | No agenda, BC, H, exp, exploration, manager-output, or scientific-verdict collision. PR #87’s whole delta against `main` does rewrite a frozen named input: it adds `OR-12` through `OR-15` to `operating-rules.md`, regenerates `AGENTS.md` from it, changes the ledger renderer and the agenda map, and tightens the agent-session schema with a session-gate check. That overlap was already present at the BC-219 freeze and was not recorded; the paragraph below carries the disposition. |
+| 2026-09-05 stabilization audit | PR #87: `d5bb223576ca5eaa7e40ad505f601cbf98993ae9` to `717078ca96823c9c0a631a44fa08a23e9a7bc893` | `development.md`, `packing/campaign/agent-sessions/session-087-agenda022-continuation.md`, `packing/devtools/gate-budgets.yaml`, `packing/tests/test_module_boundaries.py`, and `packing/tests/test_n17_weighted_certificate_successor.py` | No agenda, BC, H, exp, exploration, manager-output, or scientific-verdict collision. The session repair clears PR #89’s current hosted failure, but PR #87 remains red because its new quick-test ceiling still classifies one measured 8.15-second source-copy test as quick. Keep BC-219 at preflight and adopt this delta only after that repair lands through `origin/main`. |
+| 2026-09-05 stabilization repair | PR #87: `717078ca96823c9c0a631a44fa08a23e9a7bc893` to `fd7c9d9417f117f023b1e6e179653d6cf5717f41` | `packing/tests/test_module_boundaries.py` and `packing/tests/test_negative_controls.py` | No research, namespace, manager-output, or named-input collision. The measured 8.15-second source-copy test is now classified as slow and registered in the marker-ownership check. Focused tests passed; hosted `validate`, `macos-portability`, and `packing-required` all pass. PR #87 remains a clean, mergeable draft; adopt the repair only after it reaches `origin/main`. |
 
 **PR #87 and the frozen inputs.** `operating-rules.md` is in the BC-219 manifest and PR
 #87 changes it, so PR #87 reaching `main` is a named-input change under this agenda’s
 own rule: BC-219 returns to preflight before another manager starts.
 The coordinator then re-hashes `operating-rules.md` in a superseding manifest,
 regenerates `ledger.md` and `agenda-map.md` with the merged renderer, reads `OR-12`
-through `OR-14` into the common packet, and applies the merged agent-session schema and
+through `OR-15` into the common packet, and applies the merged agent-session schema and
 session-gate check to the BC-225, BC-239, and BC-249 closeouts.
 Tracked as `think-erkg`.
 

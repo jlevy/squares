@@ -13,7 +13,7 @@ exploration:
   campaign: packing.squares
   brief: >-
     The owner asked for an aggressive strategy to raise the retained lower bound
-    s(11) >= 3.81, a fully refreshed local source archive, and a 24-hour research plan
+    s(11) >= 3.81, a fully refreshed local source archive, and a 24-active-hour research plan
     designed for hierarchical parallel agents. This synthesis audits a three-model
     external review against the retained experiments and primary sources, separates
     valid near-term improvements from attractive but unsound shortcuts, and freezes a
@@ -51,7 +51,7 @@ exploration:
 
 ## Verdict
 
-The next 24 hours should run two research programs in parallel:
+The next 24 active portfolio hours should run two research programs in parallel:
 
 1. push the exact one-body certificate with direction-dependent witness cores while
    closing the retained 3.82 primal/dual bracket; and
@@ -67,6 +67,23 @@ The coordinator, not either manager, owns the proof boundary between them.
 Do not spend this block on a generic contact-graph atlas, a broad `n = 11` exact-cover
 tree, a repeat of the two-threshold angle classes, or another dense sweep from an empty
 state. Each has either failed its present gate or lacks a sound completeness object.
+
+## Time Accounting
+
+The 24-hour horizon estimates active research progress under continuous availability.
+It is not a wall-clock deadline: interrupted tasks, unavailable hosts, usage or quota
+pauses, approval waits, handoff setup, tool outages, and recovery from those events do
+not consume the agenda.
+Agenda-024 owns the precise clock: each shared gate waits for its prerequisite packets
+and planned active allocations, even if calendar time has advanced further.
+
+Parallel managers share this active schedule clock; their labor is also summed
+separately as `agent_minutes`. Actual command wall time and CPU time remain evidence and
+must still be reported.
+Frozen CPU-hour and command timeboxes keep their own preregistered rules, so an
+operational pause is not scientific compute and a result cannot earn a retroactive
+extension. Twenty-four active hours is a replanning point, not a stop condition;
+mechanical validation and closeout may continue afterward.
 
 ## Working definitions
 
@@ -103,8 +120,8 @@ the agendas.
 | **typed contact** | A contact together with the data needed to write its branch equation: corner-edge, edge-edge, or wall feature; owner square and supporting axis; separation order and sign; and any angle-chart or wall identity. Different types on the same abstract edge generally produce different equations. |
 | **active constraint or row** | A branch inequality `g_j(z) >= 0` that holds with equality at the candidate, `g_j(z) = 0`. The complete branch list, its active subset, and the multiplier support below are three different objects. |
 | **Fritz–John stationarity** | A necessary first-order condition for a branch minimum. With side objective `L`, there are nonnegative numbers `alpha` and `lambda_j`, not all zero, such that `alpha grad L - sum_j lambda_j grad g_j = 0` and `lambda_j g_j = 0`. It proposes stationary candidates; it does not prove feasibility, local minimality, rigidity, or global optimality. |
-| **normal, or ordinary, Fritz–John branch** | The case `alpha > 0`. Rescaling makes the objective multiplier one and gives the usual Karush–Kuhn–Tucker equations, so this is also the regular KKT branch. “Ordinary” describes this multiplier state, not a claim that the stationary point is an optimum. |
-| **abnormal Fritz–John branch** | The case `alpha = 0`, where a nontrivial dependence among active constraint gradients satisfies stationarity without using the objective gradient. It can be discarded only after proving a constraint qualification that rules it out on the affected branch. |
+| **normal, or ordinary, Fritz–John branch** | The case `alpha > 0`. Rescaling makes the objective multiplier one and gives a Karush–Kuhn–Tucker multiplier certificate. “Ordinary” describes this multiplier state, not a constraint qualification or a claim that the stationary point is an optimum. |
+| **abnormal Fritz–John branch** | The case `alpha = 0`, where a nontrivial dependence among active constraint gradients satisfies stationarity without using the objective gradient. One geometry may admit both normal and abnormal certificates. Only a proved constraint qualification that rules out the abnormal case on every affected branch permits the enumeration to omit it. |
 | **constraint qualification** | A local regularity hypothesis on the active constraints that makes KKT necessary. Because tied square contacts can violate such hypotheses, this plan retains abnormal branches unless the qualification is proved rather than assumed. |
 | **feature tie** | A geometry at which two or more support descriptions are simultaneously valid, such as a corner-corner touch admitted by several owner-axis choices or a corner meeting two wall strata. It is a branch point in the nonsmooth model, so every applicable typed branch must be retained. |
 | **zero multiplier** | An active constraint whose Fritz–John/KKT coefficient is zero in the selected stationary certificate. The contact is geometrically tight but carries no first-order balance in that certificate; it must not be deleted merely because it is absent from the positive multiplier support. |
@@ -151,10 +168,12 @@ Each successive language needs a new continuum verifier; none is a parameter tog
 
 ### The margin sweep is a generator
 
-Massaccesi’s published generator swept the doubled inset margin at `L = 4.5000`; only
-`M = 1.5500` among the 0.05-spaced trials gave mass below 17, and the final verifier
-used `L = 4.5058`, `M = 1.5513`. That is a useful support prior.
-It does not show that the unrestricted optimum excludes the walls.
+Massaccesi reports sweeping the doubled inset margin at `L = 4.5000`; only `M = 1.5500`
+among the 0.05-spaced trials gave mass below 17. The retained published generator fixes
+that value rather than containing the sweep wrapper.
+The final verifier, which was retained and replayed locally, uses `L = 4.5058`,
+`M = 1.5513`. The reported sweep is therefore a useful heuristic prior, not a reproduced
+search. It does not show that the unrestricted optimum excludes the walls.
 A restricted support succeeds soundly and fails silently.
 
 Agenda-025 therefore gives margin seeding 30 minutes and always follows it with
@@ -194,9 +213,9 @@ The current `epsilon = 0.05` census leaves 23,112,904 of 567,130,649 pose cells 
 22,132 components. That is a diagnostic, not a tractable proof tree.
 Moreover, an `epsilon = M - 11` classifier is meaningful only when the covering measure
 has `M >= 11`. The retained exact 3.82 object is a fractional-packing floor
-`nu* >= 9.907906`; the row-converged `tau* <= 11.055617` objective has no frozen exact
+`nu* >= 9.907905`; the row-converged `tau* <= 11.055617` objective has no frozen exact
 covering measure, so no valid `M >= 11` classifier input exists yet.
-BC-248 remains blocked until a valid near-11 measure leaves at most one percent of the
+BC-248 remains blocked until a valid near-11 measure leaves at most ten percent of the
 present survivors and a complete search is priced below four CPU-hours.
 
 ## Evidence at the handoff
@@ -204,8 +223,8 @@ present survivors and a complete search is priced below four CPU-hours.
 | Evidence | Current reading | Next action |
 | --- | --- | --- |
 | Retained bound | `s(11) >= 381/100` | Any improvement must be an exact certificate at a rational side above 3.81. |
-| 3.82 one-body bracket | `9.907906 <= nu* <= tau* <= 11.055617` | Resume `bc-200-state-191-50.json`; do not restart. |
-| 3.85 floor | `nu* >= 9.049861` | Too loose to route the first block. |
+| 3.82 one-body bracket | `9.907905 <= nu* <= tau* <= 11.055617` | Resume `bc-200-state-191-50.json`; do not restart. |
+| 3.85 floor | `nu* >= 9.049860` | Too loose to route the first block. |
 | Adaptive `B_k` | Valid lemma shape, unimplemented | Formalize certificate semantics and build exact controls first. |
 | Two-threshold classes | 11.606445 on Trump; route ceiling 3.876681 | Retire this class language; a successor must be materially nonconvex or richer. |
 | Trump isolation | All 128 retained branches agree on a positive local radius | Package and review the theorem packet. |
@@ -216,13 +235,23 @@ The interval between 3.81 and the verified construction at approximately 3.87708
 large enough that another decimal rung and an exact-value program are different
 objectives. The portfolio supports both without confusing their evidence.
 
-## The agent hierarchy
+## The Agent Hierarchy
 
 | Role | Agenda and bead | Exclusive work | Must not do |
 | --- | --- | --- | --- |
 | Coordinator | agenda-024; `think-xk9j` | Shared ledgers and maps, hypothesis and experiment creation, `X-017..019`, ID allocation, validation, integration, commits, PR updates, routing, retention, and claim promotion | Run a manager’s experimental loop while also judging it |
 | Fractional manager | agenda-025; `think-wess` | `BC-230..239`, `H-070..079`, `exp-070..089`; fractional code, named drivers, tests, results, and its child agenda | Edit shared campaign/frontier records, change criteria, retain a candidate, or consume closure IDs |
 | Closure manager | agenda-026; `think-j7rm` | `BC-240..249`, `H-080..089`, `exp-090..109`; new density/stationary modules, Trump cases, named drivers, tests, results, and its child agenda | Edit shared campaign/frontier records, change criteria, retain a candidate, or consume fractional IDs |
+
+For Codex delegates, the coordinator sets the reasoning level in each handoff.
+Use `max` for mathematical insight, strategy, theorem design, proof-boundary decisions,
+acceptance or rejection of evidence, and consequential integration judgement.
+Use `xhigh` for source-distinct review, bounded implementation, and editorial work that
+still requires nontrivial judgement; use `high` for deterministic replay, manifest and
+value checks, formatting, and other well-specified mechanical work.
+Speed is not a reason to lower the reasoning level on a mathematical decision.
+The assigned level and task boundary belong in the dispatch and gate packet so a later
+coordinator can audit both.
 
 The manager ranges are disjoint on purpose.
 PR #87 owns agenda-023 and `BC-214..218`. `H-066..069` and `exp-065..069` remain
@@ -255,8 +284,9 @@ Every agent receives common instructions rather than rediscovering them:
   `SYNOPSIS.md`, `packing/frontier/n-011.md`, the current ledger and ideas table;
 - the Python 3.14 rule, validation entry points, ID blocks, write exclusions, checkpoint
   format, four-hour packet format, and central retention boundary; and
-- the local literature refresh packet, including exact query receipts and the explicit
-  limits of every method analogue.
+- the local literature refresh packet, including exact arXiv and OpenAlex query
+  receipts, the retained Crossref response, and the explicit limits of every method
+  analogue.
 
 The fractional packet additionally freezes:
 
@@ -287,7 +317,7 @@ Managers submit a packet 15 minutes before hours 4, 8, 12, 16, 20, and 24 contai
 - each BC’s disposition and exact checkpoint path;
 - the frozen base SHA, transport identity, and a changed-path manifest;
 - exact checker receipts and every invalid or guard-refused run;
-- elapsed wall and CPU cost;
+- `active_portfolio_minutes`, `agent_minutes`, and actual command wall and CPU cost;
 - the proposed next slices and any proposed hypothesis; and
 - shared-code or cross-program requests.
 
@@ -348,9 +378,10 @@ one external blocker stops all lanes.
   a proved constraint qualification is explicit; and the measured branch price fits a
   later budget. Graph-only enumeration, assumed planarity, or center-distance-one
   contacts are guard refusals.
-- Exact cover opens only with a valid measure of mass at least 11, no more than 231,129
-  of the present 23,112,904 survivors, and a priced complete run below four CPU-hours.
-  Its configurations must enforce pairwise-disjoint enclosing unit squares.
+- Exact cover opens only with a valid measure of mass at least 11, no more than
+  2,311,290 of the present 23,112,904 survivors, and a priced complete run below four
+  CPU-hours. Its configurations must enforce closed unit squares whose interiors are
+  pairwise disjoint; boundary touching is allowed.
 
 Three consecutive invalid guard refusals or crashes stop that manager.
 Any duplicate ID, dangling reference, unexpected standing-best change, or shared-record

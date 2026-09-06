@@ -16,7 +16,7 @@ agenda:
     quantitative neighborhood theorem instead of rerunning it; test whether a
     full-size density has a sound weak dual with boundary terms and useful equality
     set; and replace generic contact-graph enumeration with typed stationary backbones
-    that retain feature contacts, owner axes, order data, abnormal Fritz-John cases,
+    that retain feature contacts, owner axes, order data, abnormal Fritz–John cases,
     ties, zero multipliers, and rattlers. This manager owns BC-240 through BC-249,
     H-080 through H-089, and exp-090 through exp-109, but not shared campaign or
     frontier state.
@@ -32,7 +32,7 @@ agenda:
       local theorem with explicit chart, norm, radius, side conclusion, equality case,
       and machine-checkable assumptions?
     budget: >-
-      105 elapsed minutes, one floating theorem worker, research-loop: 15 minutes to
+      105 active minutes, one floating theorem worker, research-loop: 15 minutes to
       read and bind the packet, 60 minutes to draft, and 30 minutes for replay and
       author self-check. Package the retained uniform radius at least 0.0023089, per-row radius
       808514697/200000000000, 128 branch certificates, and C at most 12.873063. Reuse
@@ -65,7 +65,7 @@ agenda:
       Trump records actually support, while detecting source drift and refusing any
       conclusion that would require unretained per-face witnesses?
     budget: >-
-      120 elapsed minutes, independent reviewer, factual-review. Start from the frozen
+      120 active minutes, independent reviewer, factual-review. Start from the frozen
       theorem packet and retained source data. Replay exp-013's exact 128-branch tangent
       endpoint; recompute the aggregate rational minimum, caps, and norm conversions
       from the retained BC-199 record; audit selected branch and face calculations from
@@ -97,7 +97,7 @@ agenda:
       What is the correct primal and weak-dual formulation for a density over full-size
       placements, including boundary nullity or singular mass and the wall KKT terms?
     budget: >-
-      120 elapsed minutes, manager with one analysis worker, research-loop. State the
+      120 active minutes, closure manager, research-loop. State the
       placement space, measure class, normalization, coverage functional, boundary
       convention, compactness or attainment needed, and the weak-duality proof. Begin
       with an absolutely continuous density and an almost-everywhere dual depth, for
@@ -130,7 +130,7 @@ agenda:
       Does the smallest exact full-size-density pilot survive weak-dual checks and
       approach mass eleven closely enough to justify inverse design?
     budget: >-
-      180 elapsed minutes, manager with one exact runner, research-loop then
+      180 active minutes, manager with one exact runner, research-loop then
       factual-review. Use only BC-242's proved discretization. Reproduce a known
       feasible placement as a refusal, check the primal and dual sides independently,
       perturb wall and interior atoms, and report only bounds whose continuum direction
@@ -196,13 +196,13 @@ agenda:
       What finite typed stationary-backbone language is complete for a minimal
       counterexample, without silently excluding nonsmooth or degenerate packings?
     budget: >-
-      150 elapsed minutes, manager with geometry and optimization workers,
-      research-loop. Encode square-square and square-wall point/segment feature types,
+      150 active minutes, closure manager, research-loop. Encode square-square and
+      square-wall point/segment feature types,
       contact owners, supporting axes, cyclic and coordinate orders, active inequality
       sides, angle charts, multipliers, and algebraic coordinates. Treat the container
-      side as a variable and retain its objective row. Prove the alternative that every
-      minimum belongs to a smooth support branch carrying either a regular KKT
-      certificate or an abnormal Fritz-John certificate. Include ties, zero
+      side as a variable and retain its objective row. Prove that every minimum belongs
+      to a smooth support branch carrying a normal/KKT or abnormal Fritz–John
+      multiplier certificate, allowing one geometry to admit both. Include ties, zero
       multipliers, redundant contacts, symmetries, and rattlers. A planar center graph
       or a center-distance equation is not an admissible surrogate.
     entry: >-
@@ -229,7 +229,7 @@ agenda:
       Does the typed language recover Trump's stationary backbone, every retained
       branch, and its local theorem without adding or losing a geometric case?
     budget: >-
-      150 elapsed minutes, manager plus implementation worker, pipeline-improvement
+      150 active minutes, manager plus implementation worker, pipeline-improvement
       then factual-review. Import the exact Trump witness, enumerate its typed
       backbones, solve their LP or Farkas systems, and compare their branch signatures
       to the 128 retained local certificates. Mutate a contact owner, delete a zero
@@ -259,7 +259,7 @@ agenda:
       backbone generation faithful and cheap enough to price an n=11 branch rather
       than merely describe it?
     budget: >-
-      180 elapsed minutes, manager with one runner, pipeline-improvement and
+      180 active minutes, manager with one runner, pipeline-improvement and
       efficiency-loop. Recover the complete exact n=3 quotient interval and n=4 grid
       orbit with the same feature, degeneracy, and symmetry machinery. Use n=5 only as
       a positive representability and local second-order-rigidity control: the
@@ -292,10 +292,11 @@ agenda:
     budget: >-
       At most four CPU-hours and no implementation before both guards pass. Open only
       if the fractional manager supplies a valid exact mass at least eleven for the
-      chosen subproblem and a current near-tight census retains at most 231,129 of the
+      chosen subproblem and a current near-tight census retains at most 2,311,290 of the
       present 23,112,904 survivors. Require an exact-cover formulation whose selected
-      enclosing unit squares are pairwise disjoint; a near-tight placement count alone
-      proves nothing. Preserve every unsearched branch and stop at the budget.
+      closed unit squares have pairwise disjoint interiors, with boundary touching
+      allowed; a near-tight placement count alone proves nothing. Preserve every
+      unsearched branch and stop at the budget.
     entry: >-
       A coordinator gate confirms both numerical guards, BC-246 validates the Trump
       endpoint, and BC-247 prices the chosen branch below the declared budget.
@@ -307,7 +308,7 @@ agenda:
     depends_on: [BC-246, BC-247]
     blocked_on: >-
       An exact fractional measure of mass at least eleven for the chosen subproblem,
-      no more than 231,129 of the present 23,112,904 near-tight survivors, and a
+      no more than 2,311,290 of the present 23,112,904 near-tight survivors, and a
       coordinator-approved branch price below four CPU-hours.
     parallel_group: agenda026-global-capture
     program: n11-density-stationarity-trump-capture
@@ -325,7 +326,7 @@ agenda:
       and its one earned continuation or retirement condition explicit for portfolio
       closeout?
     budget: >-
-      45 elapsed minutes before BC-225, manager-owned W10 and documentation-pass. Use
+      45 active minutes before BC-225, manager-owned W10 and documentation-pass. Use
       achieved, bounded-negative, time-limited, guard-refused, technical-failure,
       never-opened, or inconclusive; give every continuation a bead and reopen
       condition; validate manager-owned artifacts and submit the terminal packet
@@ -351,6 +352,10 @@ integrated only through [`agenda-024`](agenda-024-post-381-24h-portfolio.md).
 Its first block runs BC-240, BC-242, and BC-245 in parallel after BC-219. BC-241 reviews
 the local theorem while BC-243 and the typed-backbone controls wait for their
 mathematical contracts.
+All minute and hour allocations in this agenda use agenda-024’s active-time accounting
+unless they are explicitly CPU budgets, command time limits, or reported wall/CPU costs.
+An operational interruption pauses this lane’s research allocation and cannot advance it
+through a shared gate.
 
 The manager owns closure implementation and named manager artifacts only.
 Shared hypotheses, ledgers, agenda maps, frontier records, schemas, validation
@@ -663,7 +668,7 @@ For inverse design, a Trump placement on the boundary of `P_L` obeys constrained
 stationarity: the derivative of `F_rho` lies in the normal cone generated by active wall
 containment constraints with nonnegative multipliers.
 It need not have zero unconstrained gradient.
-Piecewise densities require feature-cell branches or a stated nonsmooth Fritz-John or
+Piecewise densities require feature-cell branches or a stated nonsmooth Fritz–John or
 Clarke condition, with wall ties retained.
 
 ## Typed-Stationarity Proof Contract
@@ -691,8 +696,10 @@ and `lambda_j`, not all zero, satisfying
 `lambda_j g_j(z) = 0`.
 
 Normalize projectively by `alpha + sum_j lambda_j = 1`. The case `alpha > 0` is the
-regular KKT branch. The case `alpha = 0` is the abnormal Fritz-John branch and may be
-removed only after a constraint qualification is proved for every affected branch.
+normal/KKT multiplier branch.
+The case `alpha = 0` is the abnormal Fritz–John branch.
+A geometry may admit both types; the abnormal case may be omitted only after a
+constraint qualification is proved for every affected branch.
 
 Keep three objects distinct:
 
@@ -717,12 +724,14 @@ At exact fixed angles, centre and side constraints may use
 `packing/src/sqpack/exact_lp.py::fixed_cell_lp` and exact Farkas certificates.
 Interval angle boxes need rigorous coefficient enclosures; a floating realization LP
 cannot be extrapolated into a proof.
-Every closed branch needs one of:
-
-- an exact feasible stationary witness;
-- an exact LP or Farkas infeasibility certificate;
-- a verified interval exclusion; or
-- an exact algebraic or root-isolation certificate.
+Every closed branch needs either a certificate that the whole branch is infeasible or an
+exhaustive isolation or cover of all its stationary components together with a verified
+objective bound on each component.
+An exact feasible stationary witness is a candidate within a branch; it cannot close the
+branch by itself because another root or component, including a rattler family, may
+improve the side. Branch-closing evidence may therefore combine exact LP or Farkas
+infeasibility certificates, verified interval exclusions, and exact algebraic or
+root-isolation certificates, but it must account for the full branch.
 
 A cap or timeout creates an open-branch receipt, never a completeness claim.
 
@@ -845,7 +854,7 @@ The instrument inventory gives three distinct launch states:
 | --- | --- | --- |
 | BC-240 | Exact witness verification, tangent record-and-replay, the retained BC-199 aggregate record, and focused exact tests | Ready for theorem packaging from retained evidence; no generator rerun |
 | BC-242 and BC-243 | `sqpack.fractional.ceiling` verifies pointwise depth for closed squares; `sqpack.exact_lp.fixed_cell_lp` is reusable for fixed-angle cells. The proposed `packing/src/sqpack/full_size_density/`, `packing/cases/n11_full_size_density/`, and focused test roots do not exist, and no code verifies almost-everywhere depth or continuum primal coverage | BC-242 may draft the measure-theoretic contract. BC-243 remains blocked until a new guarded instrument exists |
-| BC-245 through BC-247 | The abstract contact, local-realization, structural full-cell, exact fixed-cell LP, and known-contact checks are live. The proposed `packing/src/sqpack/stationary_backbones/`, `packing/cases/stationary_backbones/`, and focused test roots do not exist. `sqpack.promote.system.close` deflates one known contact system; it does not enumerate typed KKT or abnormal Fritz-John branches | BC-245 may draft the finite-language and completeness lemmas. BC-246 and BC-247 remain blocked until a producer and exact replay guard exist |
+| BC-245 through BC-247 | The abstract contact, local-realization, structural full-cell, exact fixed-cell LP, and known-contact checks are live. The proposed `packing/src/sqpack/stationary_backbones/`, `packing/cases/stationary_backbones/`, and focused test roots do not exist. `sqpack.promote.system.close` deflates one known contact system; it does not enumerate typed KKT or abnormal Fritz–John branches | BC-245 may draft the finite-language and completeness lemmas. BC-246 and BC-247 remain blocked until a producer and exact replay guard exist |
 
 The n=3 and n=4 controls are executable completeness oracles now.
 The n=5 control is executable only as an exact witness and local second-order-rigidity
@@ -868,17 +877,18 @@ oracle. Passing all three does not make an absent typed-backbone producer ready.
    retained evidence; the manager drafts BC-242’s weak-duality theorem and BC-245’s
    typed-branch completeness lemma.
    Do not run the radius generator, a density optimizer, or an atlas in this block.
-5. At 90 elapsed minutes, apply the decision table below and return a gate packet even
-   if every research draft is incomplete.
+5. At 90 active portfolio minutes, apply the decision table below and write the
+   minute-90 resume/checkpoint stanza even if every research draft is incomplete.
    Preserve a bounded negative or missing instrument as the result; do not spend the
    remainder building an unregistered substitute.
+   Return the T+2 manager packet at minute 120.
 
 | Work | Continue condition | Refusal condition |
 | --- | --- | --- |
 | BC-240 theorem packet | The frozen hashes, exact witness, tangent replay, and all focused tests pass; every statement stays in the anchored fixed-side chart | Any unexplained drift, replay mismatch, unresolved branch, skipped test, or claim of global capture or full radius replay |
 | BC-242 proof draft | The placement space, measure class, a.e. boundary convention, weak-duality inequality, wall strata, and finite approximation directions are explicit | Any use of sampled primal coverage as an upper bound, singular mass without its own boundary theorem, or complementary slackness before primal and dual semantics are proved |
 | BC-243 pilot | A new exact a.e.-depth verifier and a continuum primal-coverage guard each have a negative control that is observed to fail, and BC-242 has passed review | The current tree: both instruments are absent, so no numerical pilot may start |
-| BC-245 language draft | The finite chart atlas, feature owners, wall identities, active and positive-support rows, zero multipliers, rattlers, ties, and regular and abnormal FJ cases all appear in the completeness statement | A planar centre graph, one distance equation per contact, an assumed constraint qualification, or deletion of zero-multiplier and rattler variables |
+| BC-245 language draft | The finite chart atlas, feature owners, wall identities, active and positive-support rows, zero multipliers, rattlers, ties, and normal/KKT and abnormal Fritz–John cases all appear in the completeness statement | A planar centre graph, one distance equation per contact, an assumed constraint qualification, or deletion of zero-multiplier and rattler variables |
 | BC-246 and BC-247 execution | A typed producer emits every declared field, an independent replay consumes each field, and BC-245 has passed review; n=3 and n=4 remain completeness controls and n=5 remains a positive local control | The current tree: the producer and replay guard are absent. Existing contact checks cannot be relabelled as stationary-backbone execution |
 
 ## Gate Checklist and Remaining Uncertainty
@@ -899,8 +909,8 @@ following:
 - BC-246 and BC-247: Trump recovery, complete n=3/n=4 recovery, positive n=5 recovery, a
   separate exact synthetic degeneracy fixture, mutation receipts, raw and pruned counts,
   and a priced bounded n=11 slice; and
-- BC-248: both numerical guards, exact pairwise-disjoint cover semantics, a hard compute
-  cap, and explicit open-branch receipts.
+- BC-248: both numerical guards, exact interior-disjoint cover semantics with boundary
+  touching allowed, a hard compute cap, and explicit open-branch receipts.
 
 Four gaps remain. The BC-199 radius generator lacks a retained replay surface and
 complete per-face witnesses.
