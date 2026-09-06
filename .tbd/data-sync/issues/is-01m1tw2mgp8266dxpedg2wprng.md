@@ -3,9 +3,9 @@ type: is
 id: is-01m1tw2mgp8266dxpedg2wprng
 title: Make fractional crossing stop and freeze cooperatively
 kind: task
-status: in_progress
+status: closed
 priority: 0
-version: 4
+version: 6
 labels:
   - fractional
   - safety
@@ -15,10 +15,14 @@ dependencies:
     target: is-01m1tw2n09x1mq8nt6ejn22vrs
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T08:06:38.869Z
-updated_at: 2026-09-06T09:38:36.216Z
+updated_at: 2026-09-06T09:48:20.107Z
+closed_at: 2026-09-06T09:48:20.106Z
+close_reason: The opt-in safe crossing stop is implemented, independently reviewed, hash-bound, twice focused-tested, edit-tier green, and pushed on PR97.
+resolution: null
+duplicate_of: null
 ---
 Implement and test a safe cooperative stop that preserves a row-converged objective below eleven before a later iteration can overwrite it. Record wall time honestly, preserve normal summary and family outputs, and keep existing behavior compatible. This operational fix is outside active research time.
 
 ## Notes
 
-Prepared against the final integrated PR89 tree as detached commit 37ca074d2a9e0027d334be03c982b24ffb6acd4a. Exactly four paths retain SHA256 38648bc4, 6ed0043b, 56bd0f1a, and 25769fab. Focused suite passed 18 and edit tier passed 44/66 in 30.72s. Fresh max adversarial review plus eight focused controls found no P0-P3 launch blocker: trigger is finite/converged/objective<n after exact separation, exact ceiling precedes it, defaults/equality/unconverged cases stay unchanged, state feeds the bridge, and floats remain proposers only. Await post-PR89 cherry-pick, final branch gate, and closure.
+Landed on continuation branch as 228806215149549032522506325bd524a71cbd4d with the four frozen file hashes. Two exact-branch focused runs passed 18 tests in 0.47s and 0.38s; both edit tiers passed 44/66 in 29.31s and 29.57s with Ruff and BasedPyright clean. Max adversarial review found no P0-P3 blocker and corrected only the non-atomic publication wording in the launch doc. PR97 is open and the implementation is fully bound.

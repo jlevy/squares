@@ -5,7 +5,7 @@ title: Execute Agenda 024 from T+2 through T+10
 kind: epic
 status: in_progress
 priority: 0
-version: 16
+version: 17
 labels:
   - research
   - execution
@@ -26,8 +26,9 @@ child_order_hints:
   - is-01m1tw2s5ee6tastdcj6vswefd
   - is-01m1tw2snqarvnh2m1jykw6my1
   - is-01m1tw2ty3xee2t7kerqqxptdr
+  - is-01m1v1w5a9nmhrthcpb0ffpan7
 created_at: 2026-09-06T08:00:40.024Z
-updated_at: 2026-09-06T08:22:46.859Z
+updated_at: 2026-09-06T09:47:58.152Z
 ---
 Coordinate the next eight active portfolio hours after PR #89 lands. Start only from a committed launch-amendment packet on a fresh codex branch; run one fractional manager and one closure manager with a single transferable worker; hold the clock for operational interruptions and T+4/T+8 integration; land a T+10 checkpoint with exact dispositions, upstream reconciliation, validation, and a cold-agent handoff.
 
