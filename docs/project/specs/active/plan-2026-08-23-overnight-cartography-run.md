@@ -341,20 +341,14 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, first resume `BC-214` in
+For the next supervised exact-research goal, take `BC-215` in
 [Agenda 023](../../../../packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md),
-bead `think-doar`, through the efficiency loop: reconcile the retained CI split and its
-remaining costs before opening another phase.
-PR 94’s checks job took 264.51 s against the phase’s 150 s objective; `BC-215` and
-`BC-217` still need disposition.
-This is a retrospective handoff correction on 2026-09-06:
-[session-087](../../../../packing/campaign/agent-sessions/session-087-agenda022-continuation.md)
-completed the previously selected `BC-213` rung and confirmed `H-062`, then stopped with
-the efficiency phase incomplete.
-The research results remain in that session and `exp-062`; the current selection agrees
-with
+bead `think-xejq`: the R1 tree-id cache, which the efficiency block measured and priced
+and did not wire — 20.2 per cent of deep-run work repeated, 92 per cent of it from trees
+that did not move — and which
 [Agenda 021](../../../../packing/campaign/agendas/agenda-021-three-numbers-and-a-wall.md)’s
-updated closeout and [SYNOPSIS](../../../../SYNOPSIS.md).
+closeout reselected at session-087’s close, after that agenda’s own selection, the
+`m = 5` rung at `973/200`, was taken and settled `H-062` at bracket width `0.015`.
 
 ## The numeric runner launch gate
 

@@ -1,0 +1,127 @@
+name: Branch mergeability
+
+# One question, asked on every push to a branch that is not `main`: can GitHub still
+# build this branch's merge ref? When it cannot, no pull-request workflow run is created
+# at all -- and an absent check reads as pending, not as red.
+#
+# **`D-459`, and it fired three times in one day.** Measured on 2026-09-05: five pushes
+# over twenty-five minutes produced no run and no check on PR 83, while every other
+# branch in the repository ran normally throughout, because `main` had moved underneath
+# it and the branch no longer merged. Twice more the same day a push produced zero runs
+# before anyone noticed. Nothing detected any of it; each time it was rediscovered by
+# someone waiting for CI that was never going to start. `development.md` already carries
+# the one-line diagnostic under "A pull request with no checks at all is a mergeability
+# question" -- what it did not have is anything that runs it.
+#
+# **Why this is a `push` workflow and not a `pull_request` one, which is the whole
+# design.** The defect *is* that no pull-request run exists: GitHub resolves
+# `refs/pull/N/merge` before it schedules anything, and when that ref cannot be built
+# there is nothing to schedule. A `pull_request`-triggered check therefore has exactly
+# the same blind spot as the checks it would be reporting on -- it is silent in precisely
+# the case it exists to name. A `push` event has no such dependency: it fires off the
+# branch tip, which always exists, whatever the base is doing. So this runs on the push,
+# and because check runs are keyed to the head commit SHA it still appears on the pull
+# request's checks list, where the missing runs would have been.
+#
+# **What it does not catch, stated rather than hidden.** `main` moving under an idle
+# branch produces no event on that branch, so this workflow is silent until the next push
+# -- which is when `D-459` was actually reproduced, five times over, so the measured
+# incident is covered. The uncovered case is a labelled, approved branch that sits while
+# the base moves. An eligible repository could use a merge queue to test the combined
+# commit, but this personal repository cannot enable one. `development.md` documents
+# that limitation and the workflow changes future queue adoption would require.
+#
+# This adds no required context and cannot sit pending: a push always fires it, and it
+# reports in well under a minute. Its only cost is the checkout below.
+
+"on":
+  push:
+    branches-ignore:
+      # `main` merges into itself, and the queue's own refs are built by GitHub from a
+      # merge that has already succeeded.
+      - main
+      - "gh-readonly-queue/**"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  # Distinct prefix from `packing-validation-...` and `deep-gate-...` on purpose:
+  # concurrency groups are repository-wide strings, and sharing one would let this
+  # thirty-second check cancel a thirty-minute gate run. Superseding is right here --
+  # only the newest tip's mergeability is worth reporting.
+  group: branch-mergeability-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  merges-into-main:
+    # Skipped for a branch deletion, where there is no tip to check out.
+    if: "!github.event.deleted"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # `git merge-tree` needs a merge base, so it needs both histories. This is the
+          # workflow's only real cost and it is the same clone the `validate` job in
+          # `packing-validation.yml` already performs on every pull request.
+          fetch-depth: 0
+          # No submodules: merge-tree reads commits and trees, not the vendored working
+          # copies, and skipping them is most of the difference between this job and a
+          # gate job.
+          submodules: false
+
+      - name: This branch can still be merge-built
+        # `git merge-tree --write-tree` is the whole diagnostic and the reason this check
+        # is cheap enough to run on every push: it merges in memory, writes no working
+        # tree, needs no index, and answers in milliseconds once the objects are local.
+        # Exit 0 is a clean merge, exit 1 is a conflict, anything else is git failing to
+        # answer -- and the third is reported as a failure too, because "the check could
+        # not tell" must not read the same as "the branch is fine".
+        run: |
+          # Fail closed if the fetch or ref resolution fails. Without `-e`, a failed
+          # fetch can fall through to a stale remote-tracking ref and report a clean
+          # merge against the wrong base.
+          set -euo pipefail
+          report="${RUNNER_TEMP:-/tmp}/merge-tree.out"
+          # An explicit refspec rather than `git fetch origin main`: whether a bare
+          # fetch also updates `refs/remotes/origin/main` depends on the refspec
+          # `actions/checkout` happened to configure, and this check must not be the
+          # thing that is sometimes right.
+          git fetch --quiet --no-tags origin +refs/heads/main:refs/remotes/origin/main
+          base="$(git rev-parse origin/main)"
+          git merge-tree --write-tree HEAD origin/main >"$report" 2>&1 && status=0 || status=$?
+          if [ "$status" -eq 0 ]; then
+            echo "Merges cleanly into origin/main ($base); GitHub can build the merge ref."
+            exit 0
+          fi
+          {
+            echo "### This branch cannot be merge-built"
+            echo
+            echo "\`git merge-tree --write-tree HEAD origin/main\` exited $status against"
+            echo "\`origin/main\` at \`$base\`."
+          } >>"$GITHUB_STEP_SUMMARY"
+          if [ "$status" -eq 1 ]; then
+            echo "::error title=Branch conflicts with main::GitHub creates no pull_request run for a conflicted branch, so its checks sit pending rather than red (D-459). Remedy in the job summary."
+            {
+              echo
+              echo "No \`pull_request\` run will be created while this is true, so the pull"
+              echo "request's checks will sit pending rather than turn red. Resolve it:"
+              echo
+              echo '```bash'
+              echo "git fetch origin main && git rebase origin/main   # or: git merge origin/main"
+              echo "git push --force-with-lease"
+              echo '```'
+              echo
+              echo "Conflicting paths, from \`git merge-tree\`:"
+              echo
+              echo '```'
+              cat "$report"
+              echo '```'
+            } >>"$GITHUB_STEP_SUMMARY"
+          else
+            echo "::error title=Mergeability could not be determined::git merge-tree exited $status. Treat this as unknown rather than clean."
+          fi
+          cat "$report"
+          exit 1

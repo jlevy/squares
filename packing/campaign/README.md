@@ -1,12 +1,13 @@
-# The `s(n)` Research Campaign — W6 Runbook
+# The `s(n)` Research Campaign: W6 Runbook
 
-An [experiment loop](../../.agents/skills/experiment-loop/SKILL.md) for the durable
+This runbook defines the
+[experiment loop](../../.agents/skills/experiment-loop/SKILL.md) for the durable
 square-packing research program.
-This file owns W6, `research-loop`: the contract every experiment round runs under—the
+It owns W6, `research-loop`: the contract every experiment round runs under—the
 question, metric vector, accept rule, and budget.
 The [synopsis](../../SYNOPSIS.md#workflow-entry-contracts) owns the ten workflow entry
 points and the distinction among campaign, series, session, experiment, round, and run.
-It is frozen while rounds are running — see
+This runbook is frozen while rounds are running; see
 [what a runner may not do](#what-a-runner-may-not-do).
 
 The [research loop logbook](research-loop-logbook/README.md) gives each bounded
@@ -20,9 +21,9 @@ run; neither category implies the separate novelty assessment owned by
 
 ## The Current Search Objective
 
-**What is the structure of the `s(n)` landscape — how many basins, how rare is the
-record’s, and which proposers reach which — with records as corollaries rather than the
-objective?**
+**What is the structure of the `s(n)` landscape—how many basins exist, how rare is the
+record basin, and which proposers reach which basin—with records as corollaries rather
+than the objective?**
 
 This is the
 [search-philosophy report’s](../../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
@@ -39,13 +40,13 @@ That record has stood for 47 years against purpose-built programs, and a campaig
 only success condition is breaking it would record nothing for weeks.
 The answerable question is about the *methods*: which of them recover a known optimum,
 how much budget that costs, and where they land when they fail.
-That question has never been asked of this problem — the
+The
 [research program](../../docs/project/research/research-2026-08-22-packing-11-unit-squares.md#a-research-program)
-notes that the modern evolutionary-search stack has never been aimed at
-squares-in-squares, and that “success would be informative; failure would be more
-informative”.
+identifies this as an unanswered question: the modern evolutionary-search stack has not
+been aimed at squares-in-squares, and “success would be informative; failure would be
+more informative”.
 
-## Subject, and the instance axis
+## Subject and the Instance Axis
 
 The **subject** records the instrument, assurance, method, actual precision, tolerance,
 and arithmetic regime.
@@ -56,11 +57,11 @@ The **instance axis is `n`**, and the standing cells have different jobs:
 
 | `n` | role | standing best | why this cell |
 | --- | --- | --- | --- |
-| 10 | **positive control** (machinery only) | `3 + 1/√2 = 3.70710678…`, proved | Known answer, and *not* the grid. But its mechanism is a 45° tilt, so passing it proves the machinery and says nothing about finding an oblique record — see the caveat below. |
-| 11 | **target** | `3.87708359002281…`, Trump 1979 | The smallest open case and a degree-8 side construction; exp-013 proves qualitative local isolation, while a radius and global optimality remain open. |
+| 10 | **positive control** (machinery only) | `3 + 1/√2 = 3.70710678…`, proved | Known answer, and *not* the grid. But its mechanism is a 45° tilt, so passing it proves the machinery and says nothing about finding an oblique record—see the caveat below. |
+| 11 | **target** | `3.87708359002281…`, Trump 1979 | The smallest open case and a degree-8 side construction; exp-013 proves qualitative local isolation, and BC-199 supplies a positive radius in the retained fixed-side chart. Global optimality remains open. |
 | 12 | **open-case calibration** | `4`, the trivial grid | The 4×4 grid is the standing best, not a proved optimum. A numerically lower side would be a candidate and must enter formal promotion before it changes the verified frontier. |
-| 16 | **proved not-below control** | `4`, proved | A reported side below `4` is known to be invalid. This is the valid replacement for the old `n=12` guard. |
-| 17 | **mechanism-matched calibration** | `4.67553009360455`, Bidwell 1998, still open | The nearest case whose record uses genuinely *oblique* structure — the primary SVG records `0°`, `+39.80496°`, and `−36.62379°`, so two unequal non-trivial orientations against a grid frame. The only cell here that speaks to record-*finding* rather than machinery. |
+| 16 | **proved not-below control** | `4`, proved | A reported side below `4` is known to be invalid. |
+| 17 | **mechanism-matched calibration** | `4.67553009360455`, Bidwell 1998, still open | The nearest case whose record uses genuinely *oblique* structure—the primary SVG records `0°`, `+39.80496°`, and `−36.62379°`, so two unequal non-trivial orientations against a grid frame. The only cell here that speaks to record-*finding* rather than machinery. |
 
 **The proved ladder cells calibrate machinery, not strategy.** Both proved cases are
 45°-tilt mechanisms, symmetric and reachable by blind search; `n = 11` needs an oblique
@@ -69,17 +70,17 @@ and `n = 10` and remain structurally blind to what the target demands.
 
 That is why `n = 17` joins the standing sweep rather than waiting: it is cheap to carry,
 and rediscovering an oblique record is the only calibration that speaks to
-record-finding. The other two mechanism-matched targets — `n = 11` at inflated `δ`, and
-basin-entry tests — are registered separately.
+record-finding. The other two mechanism-matched targets—`n = 11` at inflated `δ`, and
+basin-entry tests—are registered separately.
 
 Standing bests are read from [`../frontier/`](../frontier/README.md)—`n-010.md`,
 `n-011.md`, `n-012.md`, `n-016.md`, and `n-017.md`—never retyped into a round.
 The frontier artifacts are the campaign’s source of truth for what is already known, and
 a round that moved the frontier would edit one file.
 
-## Who owns a hypothesis
+## Who Owns a Hypothesis
 
-A hypothesis can exist in three forms — prose in the
+A hypothesis can exist in three forms—prose in the
 [standing review’s register](../../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#the-hypothesis-register),
 a codified artifact under `hypotheses/`, and a bead.
 One rule settles which is true:
@@ -91,7 +92,7 @@ So a claim’s criterion, required assurance, kill condition, and status are rea
 artifact and nowhere else; a bead may say “build the instrument for H-002” but never
 “H-002 is confirmed”.
 All fifteen entries from the standing review are now codified.
-Later ids carry campaign-native claims and explicit open questions.
+Later IDs carry campaign-native claims and explicit open questions.
 
 ## The Bounded Research Cycle
 
@@ -306,23 +307,38 @@ small tolerance makes a calculation verified.
 separating-axis assignment, minimizing `s` is a linear program, so the quench can
 produce an endpoint candidate at the floating-point solver’s recorded precision.
 Exact value and terminal-component identity require separate evidence.
-That is what turns “where the annealer stopped” into “which cell this is” — the
-difference between a tolerance-dependent artifact of the cooling schedule and a
-discrete, nameable, exactly-valued object.
+That is what turns “where the annealer stopped” into “which cell this is”—the difference
+between a tolerance-dependent artifact of the cooling schedule and a discrete, nameable,
+exactly-valued object.
 Basin identity, the census, the atlas and every descriptor depend on it, which is why it
 is the registry’s top priority and not yet built.
 
 The assurance boundary is mathematical, not administrative.
-A record packing has pairs touching at *exactly* zero separation — 14 of the 55 pairs in
-Trump’s — and no floating-point check can decide those: a tolerance loose enough to
-accept true contact is loose enough to accept a small overlap.
+A record packing has pairs touching at *exactly* zero separation—14 of the 55 pairs in
+Trump’s—and no floating-point check can decide those: a tolerance loose enough to accept
+true contact is loose enough to accept a small overlap.
 That is the reason `sqpack` exists, and it is why `beat_record: true` requires
 `assurance: verified`.
 
-## The metric vector
+## The Metric Vector
 
-Fixed for the campaign.
-Recorded on every round; the role says what each may conclude.
+Every round records the universal fields below.
+Terminal experiment artifacts use the fields admitted by `Experiment/v2`; portfolio gate
+packets carry the additional portfolio and host accounting needed to coordinate several
+methods.
+
+| Field | Role | Required content |
+| --- | --- | --- |
+| subject and instance | identity | instrument, method, arithmetic or proof regime, precision when applicable, and the scoped `n` or theorem object |
+| preregistered criterion | decision | exact accept and kill rules frozen before measurement or proof work |
+| `outcome` | outcome | `determination`, assurance, claim boundary, and links to the evidence that supports it |
+| guards and mutations | guard | every required control, including failures and refusals rather than only passing receipts |
+| effort | cost | terminal experiment: `timebox`, `wall_seconds`, `agent_minutes`, `pair_tests`, and `stopped_by` as applicable; gate packet: `active_portfolio_minutes`, aggregate `agent_minutes`, and actual command wall and CPU time |
+| artifacts and continuation | handoff | exact paths and hashes, open obligations, and `resume_from` or `reopen_when` when work remains |
+
+The following search-proposer vector applies only to numerical pose-search rounds.
+Fractional, theorem, exact-certificate, and review rounds use their own registered
+criteria and method-specific controls.
 
 | Metric | Role | Source |
 | --- | --- | --- |
@@ -341,14 +357,15 @@ for “found the right combinatorial class”, not a proof of it; confirming the
 a separately scoped structural check or formal certificate.
 Rounds that claim `reached_basin` should say which they mean.
 
-## The accept rule
+## The Search-Proposer Accept Rule
 
-Written before the first measurement, and not changed while rounds are running.
-A candidate strategy is **accepted** when all of:
+This rule applies when a round compares numerical packing proposers.
+It is written before the first measurement and does not change while the round is
+running. A candidate strategy is **accepted** when all of:
 
 1. **Outcome.** Its median `best_side` across ≥5 seeds is below the control’s median,
-   and the two seed ranges do not overlap — or it reaches `reached_basin` on a cell
-   where the control does not.
+   and the two seed ranges do not overlap—or it reaches `reached_basin` on a cell where
+   the control does not.
 2. **Evidence.** Five seeds per cell minimum, median and min–max range both reported.
    Overlapping ranges mean *no detectable effect*, never “a small win”.
 3. **Numerical guard.** Every reported configuration has `overlap == 0` under the
@@ -360,8 +377,8 @@ A candidate strategy is **accepted** when all of:
    same instrument build.
    `n=12` is an open research case, not a negative control: a valid side below `4` would
    require exact promotion, not automatic rejection.
-5. **And the complexity is worth carrying** — a judgment, written as one sentence in
-   `verdict.reason`.
+5. **Carrying cost.** The complexity is worth carrying, with the judgement recorded as
+   one sentence in `verdict.reason`.
 
 Clauses 1–4 are arithmetic.
 Clause 5 is not, and an unattended runner may apply it only in the conservative
@@ -380,18 +397,24 @@ verification work, which are setup and verifier receipts, not proposer budget.
 Budget enforcement, campaign adapters, and cross-proposer comparisons are still
 move-denominated, so no equal-pair-budget comparison is yet admissible.
 
-## Budget and stop conditions
+## Budget and Stop Conditions
+
+The pair-test tiers below govern search-proposer rounds.
+Other round types use the method-specific budget frozen in their registered criterion.
+Their terminal experiment artifacts use the schema-permitted effort fields above, while
+portfolio gate packets record active-portfolio and CPU accounting separately.
 
 | Budget | Value |
 | --- | --- |
-| Per round | tier S = `1e9` pair-tests; tier M = `1e11`; tier L = `1e13` |
+| Search-proposer round | target tier S = `1e9` pair-tests; tier M = `1e11`; tier L = `1e13`. Until pair-test enforcement is implemented, the runner’s move limit is only an invocation cap |
 | Default per session | 8 hours, or 40 rounds |
 | Per hypothesis | 3 rounds, then it must be `abandoned` with `reopen_when` |
 | Per round, wall clock | declare a `timebox` before starting; stopping when it expires is an outcome, not a failure |
 
-Stop, do not adapt, on: budget exhausted; queue empty; three consecutive guard refusals
-or crashes; a control cell breaching; any invariant check failing; or a decision that
-needs a human. Exit non-zero on an abnormal stop.
+Stop without adapting when the budget is exhausted, the queue is empty, three
+consecutive guard refusals or crashes occur, a control cell breaches its bound, an
+invariant check fails, or a decision needs a human.
+Exit nonzero on an abnormal stop.
 
 The per-session value is a default safety bound, not a hard research limit.
 A longer user-level horizon may use multiple source sessions under one mutable agenda,
@@ -400,7 +423,7 @@ Reassess the pipeline, evidence quality, throughput, and remaining portfolio bef
 extending the clock.
 Preserve a protected finalization reserve under either form.
 
-### Effort, and how a round ends
+### Effort and How a Round Ends
 
 Every terminal round carries an `effort` block, and the gate refuses one without it.
 It exists so the record can answer two questions months later that no verdict can: *what
@@ -410,41 +433,40 @@ did this cost*, and *is the question still open?*
 | --- | --- |
 | `timebox` | the give-up bound, declared **before** the round starts |
 | `wall_seconds` | compute time, lifted from the run data |
-| `agent_minutes` | operator time — building, analysing, writing up |
+| `agent_minutes` | operator time—building, analysing, writing up |
 | `pair_tests` | the machine-independent budget currency |
 | `stopped_by` | why the round ended: `criterion`, `timebox`, `saturation`, `guard`, `error`, `dependency` |
 
 `stopped_by` is the field that matters.
 A round that stopped on its `criterion` answered its question, whichever way it fell.
-A round that stopped on its `timebox` did not — the question is still open, the budget
-is already spent, and the round must say in `verdict.resume_from` where a successor
-picks it up.
-The gate enforces exactly that, so a timeboxed round cannot quietly become a
-dead end.
+A round that stopped on its `timebox` did not—the question is still open, the budget is
+already spent, and the round must say in `verdict.resume_from` where a successor picks
+it up. The gate enforces exactly that, so a timeboxed round cannot quietly become a dead
+end.
 
 Three terminal states are distinct on purpose, and the difference is what a future agent
 should do:
 
-- **`rejected`** — the criterion was measured and missed.
+- **`rejected`**—the criterion was measured and missed.
   The claim is refuted *for this cell and regime*; a different regime may still say
   otherwise.
-- **`abandoned`** — the budget ran out with no determination.
+- **`abandoned`**—the budget ran out with no determination.
   Not refuted, out of promise for now: `budget_spent`, `best_reached`, `reopen_when`.
   Resumable, and listed in the ledger’s **Resumable** section.
-- **`exhausted`** — the stronger claim: re-running under this regime would add nothing.
+- **`exhausted`**—the stronger claim: re-running under this regime would add nothing.
   Requires `reopen_when` naming a *change of instrument or regime*, not merely more
   budget. This is how a line of work is closed without pretending it was refuted.
 
 The ledger derives cumulative effort per hypothesis and totals it, so “how much has gone
 into this claim” is a generated number rather than an impression.
 
-## Running one round
+## Running One Round
 
-Two ways, and the difference is who is watching.
+There are two ways; they differ in who watches.
 
-### With the harness — [`packing-campaign`](../src/sqpack/campaign/runner.py)
+### With the Harness: [`packing-campaign`](../src/sqpack/campaign/runner.py)
 
-Each step does one thing, the same way, always.
+Each command has one stable responsibility.
 An agent drives them; nothing here needs a human awake.
 
 **Current launch status: NO-GO for unattended numeric work.** The commands below are the
@@ -518,19 +540,22 @@ Writing new experiment code is expected; writing new harness code per round is t
 error-prone step this removes, because it is code that runs once, at 3am, having never
 been exercised.
 
-#### Before the first night on a new machine
+#### Before the First Night on a New Machine
 
 ```shell
 uv run --frozen packing-campaign preflight
 ```
 
-**The regime is part of the result.** `moves` is the budget unit and the engine is
-deterministic in its seed, so `best_side` reproduces across machines; wall clock does
-not. Measured 2026-08-23: ~40M moves/s on the M1 Pro of the recorded regime, ~14.9M on a
-4-core cloud container at `n = 11` and ~9.9M at `n = 17`. Size a timebox against the
+**For the historical move-denominated recipe above, the regime is part of the result.**
+`--budget-moves` is the engine invocation limit, and the engine is deterministic in its
+seed, so `best_side` reproduces across machines; wall clock does not.
+Measured 2026-08-23: ~40M moves/s on the M1 Pro of the recorded regime, ~14.9M on a
+4-core cloud container at `n = 11`, and ~9.9M at `n = 17`. Size a timebox against the
 machine you are actually on.
+Equal moves support comparisons only within the same proposer and regime; cross-proposer
+comparison requires equal `pair_tests` and is not yet admissible.
 
-### Watched — by hand
+### Watched: By Hand
 
 ```shell
 ./sqsearch/target/release/sqsearch --selftest
@@ -542,7 +567,7 @@ Then write the artifact into `series/<current>/experiments/`, lifting every numb
 the JSONL in `results/` rather than retyping it, and commit artifact, raw runs and
 regenerated views together.
 
-This is still the right path for any round whose analysis is the work — a new refiner, a
+This is still the right path for any round whose analysis is the work—a new refiner, a
 new probe, anything the recipe vocabulary cannot express.
 The first eleven search and quench rounds used this watched path; later corpus and exact
 proof rounds use dedicated deterministic checkers.
@@ -557,7 +582,7 @@ Use `packing-ledger check` for a read-only campaign check and `packing-ledger re
 after a reviewed artifact change.
 Both run in the locked uv environment and share the same invariant implementation.
 
-## What a runner may not do
+## What a Runner May Not Do
 
 The full list is in
 [`unattended.md`](../../.agents/skills/experiment-loop/references/unattended.md).
@@ -569,7 +594,9 @@ The ones specific to this campaign:
 - Do not edit `../frontier/` to match a search result.
   The frontier records the literature; a genuine improvement is a separate, deliberate,
   human-reviewed change.
-- Do not compare strategies at unequal `--budget-moves`.
+- Within one proposer and regime, do not compare runs at unequal `--budget-moves`.
+  Across proposers, equal moves are insufficient; compare only after equal `pair_tests`
+  is enforced.
 - Do not delete a run that came out badly.
   Negative results are the point.
 
@@ -589,12 +616,12 @@ A series is earned by a tooling or regime change that affects comparability, rec
 | `series-003` (S3) | opportunistic `m² − 3` slot | not opened |
 | `series-004` (S4) | proof lane, after PoseBox | not opened |
 | `series-005` (S5) | structured search: angle-class engine | not opened |
-| `series-006` (S6) | landscape cartography — the atlas, the premise, the ladders | not opened |
+| `series-006` (S6) | landscape cartography—the atlas, the premise, the ladders | not opened |
 
 S6 *interleaves* with S1 rather than following it: S1’s basin byproducts are the
 census’s inputs.
 
-## Where this sits
+## Campaign Scope and Related Records
 
 The campaign is the *experiment record*; the toolkit that produces the numbers is
 specified in
@@ -603,7 +630,7 @@ whose Phase 2 (the quench spine) is what makes basins nameable and this record�
 numerical refinement record reproducible.
 The hypothesis registry here is the codified form of the
 [standing review’s register](../../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#the-hypothesis-register);
-`H-001`–`H-015` are its now-codified ids, and this campaign’s own claims start at
+`H-001`–`H-015` are its now-codified IDs, and this campaign’s own claims start at
 `H-016`.
 
 ## Layout
@@ -612,17 +639,23 @@ The hypothesis registry here is the codified form of the
 campaign/
   README.md              this runbook, spans every series
   ideas.md               the idea board: the whole idea space on one page
-  schemas/               scientific contracts plus the small outer agent-session contract
-  agent-sessions/        versioned outer-loop delegation and handoff records
+  agendas/               mutable bounded commitments and integration gates
+  agenda-map.md          generated view over every agenda
+  agent-sessions/        versioned outer-loop delegation and recovery records
+  documentation-pass.md  W8 reader-document reconciliation
+  remediation-pass.md    W9 defect and backlog repair
+  review-planning-oversight.md  W10 closeout and reprioritisation
   explorations/          X-NNN idea reports, free-form
   hypotheses/            H-NNN registry, spans every series
+  research-loop-logbook/ reader-first summaries of bounded research runs
+  resource-usage/        measured compute and agent-effort records
+  schemas/               scientific and session contracts
   series/series-000-smoke-and-calibration/   S0: reproductions and machinery gates
     README.md            the series artifact: goal, instrument, why it exists
     experiments/         exp-NNN, one per round
-    results/             raw JSONL from the engine
+    results/             raw data, checkpoints, and result packets
   ledger.md              generated; never hand-edited
-  session-report.md      generated numeric-runner batch handoff; historical filename,
-                         not a versioned session-NNN agent-session artifact
+  session-close-report.yaml  generated campaign closeout summary
 ```
 
 The implementation lives in `src/sqpack/campaign/`; the durable campaign state stays in

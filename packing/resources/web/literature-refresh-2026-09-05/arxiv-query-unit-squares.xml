@@ -1,0 +1,1099 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/QzUuXBkYWY2+hZJpNQj+08tl47g</id>
+  <title>arXiv Query: search_query=all:"unit squares" AND all:packing&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-09-05T20:47:42Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22unit+squares%22+AND+all:packing&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>52</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2608.13595v2</id>
+    <title>Three Squares in a Rectangle</title>
+    <updated>2026-08-27T06:22:15Z</updated>
+    <link href="https://arxiv.org/abs/2608.13595v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.13595v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>For $x\ge1$, let $G_3(x)$ be the maximum sum of the side lengths of three pairwise interior-disjoint, arbitrarily rotated squares contained in a $1\times x$ rectangle. We determine this function exactly: $G_3(x)=x+\tfrac12$ for $1\le x\le\tfrac32$, $G_3(x)=2$ for $\tfrac32\le x\le2$, $G_3(x)=x$ for $2\le x\le3$, and $G_3(x)=3$ for $x\ge3$. This completes the $n=3$ case of the rectangular square-packing question posed by Richard Stanley in a 2021 MathOverflow comment. The values for $\tfrac32\le x\le3$ follow from a strip theorem stating that three squares in $[0,1]\times[0,H]$, $H\ge2$, have total side length at most $H$. For $x\ge3$, the formula is immediate because each square has side length at most $1$. The range $1\le x\le\tfrac32$ is handled by combining the two-square theorem with an additional semi-perimeter estimate for a triangle whose two nonhorizontal sides have opposite slopes. In particular, the special case $x=2$ answers the question asked in the MathOverflow post. In connection with Erdős problem #106, we also prove that every five-square packing in the unit square with an axis-parallel guillotine cut has total side length at most $2$.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-29T02:47:10Z</published>
+    <arxiv:comment>Revised version. Determines G_3(x) exactly for all x &gt;= 1, completing the n=3 case of the rectangular square-packing question posed by Richard Stanley in a 2021 MathOverflow comment. Adds the range 1 &lt;= x &lt;= 3/2; title and abstract updated</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Haobo Yang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.09406v2</id>
+    <title>Parallel packing a square with isosceles right triangles and equilateral triangles</title>
+    <updated>2026-05-23T04:34:06Z</updated>
+    <link href="https://arxiv.org/abs/2605.09406v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.09406v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Suppose that $I$ is a unit square. Let $T$ (resp. $Δ$) be an isosceles right triangle (resp. an equilateral triangle). We prove that any collection of triangles homothetic to $T$ (resp. $Δ$), whose total area does not exceed $\frac{1}{2}$ (resp. $\frac{\sqrt{3}}{4}$), can be parallel packed into $I$. These upper bounds are tight.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-10T08:09:21Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Chen-Yang Su</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.01484v1</id>
+    <title>Optimally Packing a Large Square by Unit Squares</title>
+    <updated>2026-02-01T23:39:00Z</updated>
+    <link href="https://arxiv.org/abs/2602.01484v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.01484v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show that a large square of sidelength $x$ can be packed by unit squares in a manner so that the wasted space $W(x) = O(x^{3/5})$.</summary>
+    <category term="math.AG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-01T23:39:00Z</published>
+    <arxiv:comment>This work was extracted from the author's 2024 thesis available at https://unbc.arcabc.ca/dissertations-and-theses/15173 . Since then we have become aware of the 2025 paper arXiv:2508.04603 by Bui that shows a similar result by a different method</arxiv:comment>
+    <arxiv:primary_category term="math.AG"/>
+    <author>
+      <name>Rory McClenagan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.22163v1</id>
+    <title>On a square packing conjecture of Erdős</title>
+    <updated>2026-01-10T06:21:21Z</updated>
+    <link href="https://arxiv.org/abs/2601.22163v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.22163v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $f(n)$ be the maximum sum of the sides of non-overlapping squares (or equilateral triangles) packed inside a unit square or (unit equilateral triangle). In this paper, we explore some properties of $f$ and examine how the square and triangle cases are similar. We prove that a conjecture of Erdős, which says that $f(k^2+1) = k$ for all $k$, is equivalent to the convergence of the series $\sum_{k\geqslant 1}(f(k^2+1)-k)$. We also explore the case of parallelograms and discuss how that is similar to the case of unit square and triangle.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-10T06:21:21Z</published>
+    <arxiv:comment>3 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Anshul Raj Singh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.23284v2</id>
+    <title>An Equivalence Between Erdős's Square Packing Conjecture and the Convergence of an Infinite Series</title>
+    <updated>2025-12-20T07:06:57Z</updated>
+    <link href="https://arxiv.org/abs/2506.23284v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.23284v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $f(n)$ denote the maximum sum of the side lengths of $n$ non-overlapping squares packed inside a unit square. We prove that $f(n^2+1) = n$ for all positive integers $n$ if and only if the sum $\sum_{k\geq 1}(f(k^2+1)-k)$ converges. We also show that if $f(k^2+1) = k$, for infinitely many positive integers then $f(k^2+1) = k$ for all positive integers.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-29T15:15:20Z</published>
+    <arxiv:comment>The paper contains a major flaw. In the proof of the second theorem, we make use of an inequality due to Halasz, which is valid only for small values of c, particularly for c less than k. Our proof ignores this restriction on c, which renders the argument flawed</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Anshul Raj Singh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.12022v1</id>
+    <title>Hardness and Approximation Schemes for Discrete Packing and Domination</title>
+    <updated>2025-04-16T12:28:34Z</updated>
+    <link href="https://arxiv.org/abs/2504.12022v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.12022v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present polynomial-time approximation schemes based on local search} technique for both geometric (discrete) independent set (\mdis) and geometric (discrete) dominating set (\mdds) problems, where the objects are arbitrary radii disks and arbitrary side length axis-parallel squares. Further, we show that the \mdds~problem is \apx-hard for various shapes in the plane. Finally, we prove that both \mdis~and \mdds~problems are \np-hard for unit disks intersecting a horizontal line and axis-parallel unit squares intersecting a straight line with slope $-1$.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-16T12:28:34Z</published>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Raghunath Reddy Madireddy</name>
+    </author>
+    <author>
+      <name>Apurva Mudgal</name>
+    </author>
+    <author>
+      <name>Supantha Pandit</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.09489v1</id>
+    <title>Square Packing with Asymptotically Smallest Waste Only Needs Good Squares</title>
+    <updated>2025-04-13T09:08:08Z</updated>
+    <link href="https://arxiv.org/abs/2504.09489v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.09489v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the problem of packing a large square with nonoverlapping unit squares. Let $W(x)$ be the minimum wasted area when a large square of side length $x$ is packed with unit squares. In Roth and Vaughan's paper that proves the lower bound $W(x) \notin o(x^{1/2})$, a good square is defined to be a square with inclination at most $10^{-10}$ with respect to the large square. In this article, we prove that in calculating the asymptotic growth of the wasted space, it suffices to only consider packings with only good squares. This allows the lower bound proof in Roth and Vaughan's paper to be simplified by not having to handle bad squares.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-13T09:08:08Z</published>
+    <arxiv:comment>7 pages, 7 figures, submitted to CCCG 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Hong Duc Bui</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.08863v3</id>
+    <title>Improved Approximation Algorithms for Three-Dimensional Bin Packing</title>
+    <updated>2026-08-22T15:41:11Z</updated>
+    <link href="https://arxiv.org/abs/2503.08863v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.08863v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study two fundamental three-dimensional (3D) geometric packing problems: 3D (Geometric) Bin Packing (3D-BP), and 3D Minimum Volume Bounding Box (3D-MVBB), where given a set of 3D (rectangular) cuboids, the goal is to find an axis-aligned nonoverlapping packing of all cuboids. In 3D-BP, we need to pack the given cuboids into the minimum number of unit cube bins. In 3D-MVBB, the goal is to pack them into a cuboid box of minimum volume.
+  It is NP-hard to even decide whether a set of rectangles can be packed into a unit square bin -- giving an (absolute) approximation hardness of $2$ for 3D-BP. The previous best (absolute) approximation for both the problems follows from a result of Buchwald and Scheithauer (Int.~Trans.~Oper.~Res., 2016), yielding approximation ratios of $11$, and $5+\varepsilon$, respectively, for 3D-BP and 3D-MVBB. We provide improved approximation ratios of $6$, and $3+\varepsilon$, respectively, for the two problems, for any constant $\varepsilon &gt; 0$.
+  For 3D-BP, in the asymptotic regime, Bansal, Correa, Kenyon, and Sviridenko (Math.~Oper.~Res., 2006) showed that there is no asymptotic polynomial-time approximation scheme (APTAS) even when all items have the same height. Caprara (Math.~Oper.~Res., 2008) gave an asymptotic approximation ratio of $T_{\infty}^2 + \varepsilon\approx 2.86$, where $T_{\infty}$ is the well-known Harmonic constant in Bin Packing. We provide an algorithm with an improved asymptotic approximation ratio of $3T_{\infty}/2 +\varepsilon \approx 2.54$. Further, we show that unlike 3D-BP, 3D-MVBB admits an APTAS.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-11T20:07:42Z</published>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Debajyoti Kar</name>
+    </author>
+    <author>
+      <name>Arindam Khan</name>
+    </author>
+    <author>
+      <name>Malin Rau</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.13032v2</id>
+    <title>Efficient UAV Coverage in Large Convex Quadrilateral Areas with Elliptical Footprints</title>
+    <updated>2026-01-26T14:47:12Z</updated>
+    <link href="https://arxiv.org/abs/2502.13032v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.13032v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Unmanned Aerial Vehicles (UAVs) have gained significant attention for improving wireless communication, especially in emergencies or as a complement to existing cellular infrastructure. This letter addresses the problem of efficiently covering a large convex quadrilateral using multiple UAVs, where each UAV generates elliptical coverage footprints based on its altitude and antenna tilt. The challenge is approached using circle-packing techniques within a unit square to arrange UAVs in an optimal configuration. Subsequently, a homography transformation is applied to map the unit square onto the quadrilateral area, ensuring that the UAVs' elliptical footprints cover the entire region. Numerical simulations demonstrate the effectiveness of the proposed method, providing insight into coverage density and optimal altitude configurations for different placement scenarios. The results highlight the scalability and potential for improving UAV-based communication systems, focusing on maximizing coverage efficiency in large areas with irregular shapes.</summary>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-18T16:47:56Z</published>
+    <arxiv:primary_category term="eess.SP"/>
+    <author>
+      <name>Alexander Vavoulas</name>
+    </author>
+    <author>
+      <name>Konstantinos K. Delibasis</name>
+    </author>
+    <author>
+      <name>Harilaos G. Sandalidis</name>
+    </author>
+    <author>
+      <name>George Nousias</name>
+    </author>
+    <author>
+      <name>Nicholas Vaiopoulos</name>
+    </author>
+    <arxiv:doi>10.1109/LWC.2026.3656481</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/LWC.2026.3656481" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.21017v1</id>
+    <title>Reconfiguration of unit squares and disks: PSPACE-hardness in simple settings</title>
+    <updated>2024-12-30T15:34:25Z</updated>
+    <link href="https://arxiv.org/abs/2412.21017v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.21017v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study two well-known reconfiguration problems. Given a start and a target configuration of geometric objects in a polygon, we wonder whether we can move the objects from the start configuration to the target configuration while avoiding collisions between the objects and staying within the polygon. Problems of this type have been considered since the early 80s by roboticists and computational geometers. In this paper, we study some of the simplest possible variants where the objects are unlabeled unit squares or unit disks. In unlabeled reconfiguration, the objects are identical, so that any object is allowed to end at any of the targets positions.
+  We show that it is PSPACE-hard to decide whether there exists a reconfiguration of unit squares even in a simple polygon. Previously, it was only known to be PSPACE-hard in a polygon with holes [Solovey and Halperin, Int. J. Robotics Res. 2016]. Our proof is based on a result of independent interest, namely that reconfiguration between two satisfying assignments of a formula of Monotone-Planar-3SAT is also PSPACE-complete. The reduction from reconfiguration of Monotone-Planar-3SAT to reconfiguration of unit squares extends techniques recently developed to show NP-hardness of packing unit squares in a simple polygon [Abrahamsen and Stade, FOCS 2024]. We also show PSPACE-hardness of reconfiguration of unit disks in a polygon with holes. Previously, it was only known that reconfiguration of disks of two different sizes was PSPACE-hard [Brocken, van der Heijden, Kostitsyna, Lo-Wong and Surtel, FUN 2021].</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-30T15:34:25Z</published>
+    <arxiv:comment>27 pages, 27 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Mikkel Abrahamsen</name>
+    </author>
+    <author>
+      <name>Kevin Buchin</name>
+    </author>
+    <author>
+      <name>Maike Buchin</name>
+    </author>
+    <author>
+      <name>Linda Kleist</name>
+    </author>
+    <author>
+      <name>Maarten Löffler</name>
+    </author>
+    <author>
+      <name>Lena Schlipf</name>
+    </author>
+    <author>
+      <name>André Schulz</name>
+    </author>
+    <author>
+      <name>Jack Stade</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.17151v3</id>
+    <title>Slack-Pack algorithm for Meir-Moser packing problem</title>
+    <updated>2025-07-23T12:44:04Z</updated>
+    <link href="https://arxiv.org/abs/2412.17151v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.17151v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The well-known problem stated by A. Meir and L. Moser consists in tiling the unit square with rectangles (details), whose side lengths equal $1/n\times 1/(n+1)$, where indices~$n$ range from 1 to infinity. Recently, Terence Tao has proved that it is possible to tile with $1/n^t\times 1/(n+1)^t$ rectangles (squares with the side length of $1/n^t$), $1/2&lt;t&lt;1$, the square, whose area equals the sum of areas of these details, provided that only those details, whose indices exceed certain~$n_0$, are taken into consideration. We adduce arguments in favor of the assumption that the result obtained by T. Tao is also valid for $t=1$. We use a new tiling method (the Slack-Pack algorithm), which initially admits gaps between stacks of details. The algorithm uses a pre-fixed parameter $γ$, $\sqrt{3/2}&lt;γ&lt;3/2$, connected with the gap value. The new algorithm allows one to control the ratio of the area of the large rectangular part, which is free of details, to the whole area of the remaining empty space. This ratio (under certain natural assumptions) always exceeds $1-1/γ-δ$, where $δ$ tends to zero as $n_0$ increases.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-22T20:12:12Z</published>
+    <arxiv:comment>24 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>A. D. Kislovskiy</name>
+    </author>
+    <author>
+      <name>E. Yu. Lerner</name>
+    </author>
+    <author>
+      <name>I. A. Senkevich</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.07274v2</id>
+    <title>A note on the Erdős conjecture about square packing</title>
+    <updated>2024-11-18T15:45:54Z</updated>
+    <link href="https://arxiv.org/abs/2411.07274v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.07274v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $f(n)$ denote the maximum total length of the sides of $n$ squares packed inside a unit square. Erdős conjectured that $f(k^2+1)=k$. We show that the conjecture is true if we assume that the sides of the squares are parallel to the sides of the unit square.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-11T12:28:59Z</published>
+    <arxiv:comment>5 pages. Comments welcome!</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Jineon Baek</name>
+    </author>
+    <author>
+      <name>Junnosuke Koizumi</name>
+    </author>
+    <author>
+      <name>Takahiro Ueoro</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.06486v1</id>
+    <title>Coordinated Motion Planning: Multi-Agent Path Finding in a Densely Packed, Bounded Domain</title>
+    <updated>2024-09-10T13:15:32Z</updated>
+    <link href="https://arxiv.org/abs/2409.06486v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.06486v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study Multi-Agent Path Finding for arrangements of labeled agents in the interior of a simply connected domain: Given a unique start and target position for each agent, the goal is to find a sequence of parallel, collision-free agent motions that minimizes the overall time (the makespan) until all agents have reached their respective targets. A natural case is that of a simply connected polygonal domain with axis-parallel boundaries and integer coordinates, i.e., a simple polyomino, which amounts to a simply connected union of lattice unit squares or cells. We focus on the particularly challenging setting of densely packed agents, i.e., one per cell, which strongly restricts the mobility of agents, and requires intricate coordination of motion.
+  We provide a variety of novel results for this problem, including (1) a characterization of polyominoes in which a reconfiguration plan is guaranteed to exist; (2) a characterization of shape parameters that induce worst-case bounds on the makespan; (3) a suite of algorithms to achieve asymptotically worst-case optimal performance with respect to the achievable stretch for cases with severely limited maneuverability. This corresponds to bounding the ratio between obtained makespan and the lower bound provided by the max-min distance between the start and target position of any agent and our shape parameters.
+  Our results extend findings by Demaine et al. (SIAM Journal on Computing, 2019) who investigated the problem for solid rectangular domains, and in the closely related field of Permutation Routing, as presented by Alpert et al. (Computational Geometry, 2022) for convex pieces of grid graphs.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-10T13:15:32Z</published>
+    <arxiv:comment>21 pages, 14 figures, full version of an extended abstract that is to appear in the proceedings of the 35th International Symposium on Algorithms and Computation (ISAAC 2024)</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Sándor P. Fekete</name>
+    </author>
+    <author>
+      <name>Ramin Kosfeld</name>
+    </author>
+    <author>
+      <name>Peter Kramer</name>
+    </author>
+    <author>
+      <name>Jonas Neutzner</name>
+    </author>
+    <author>
+      <name>Christian Rieck</name>
+    </author>
+    <author>
+      <name>Christian Scheffer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.09835v2</id>
+    <title>Hardness of Packing, Covering and Partitioning Simple Polygons with Unit Squares</title>
+    <updated>2024-04-18T08:01:52Z</updated>
+    <link href="https://arxiv.org/abs/2404.09835v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.09835v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show that packing axis-aligned unit squares into a simple polygon $P$ is NP-hard, even when $P$ is an orthogonal and orthogonally convex polygon with half-integer coordinates. It has been known since the early 80s that packing unit squares into a polygon with holes is NP-hard~[Fowler, Paterson, Tanimoto, Inf. Process. Lett., 1981], but the version without holes was conjectured to be polynomial-time solvable more than two decades ago~[Baur and Fekete, Algorithmica, 2001].
+  Our reduction relies on a new way of reducing from \textsc{Planar-3SAT}. Interestingly, our geometric realization of a planar formula is non-planar. Vertices become rows and edges become columns, with crossings being allowed. The planarity ensures that all endpoints of rows and columns are incident to the outer face of the resulting drawing. We can then construct a polygon following the outer face that realizes all the logic of the formula geometrically, without the need of any holes.
+  This new reduction technique proves to be general enough to also show hardness of two natural covering and partitioning problems, even when the input polygon is simple. We say that a polygon $Q$ is \emph{small} if $Q$ is contained in a unit square. We prove that it is NP-hard to find a minimum number of small polygons whose union is $P$ (covering) and to find a minimum number of pairwise interior-disjoint small polygons whose union is $P$ (partitioning), when $P$ is an orthogonal simple polygon with half-integer coordinates. This is the first partitioning problem known to be NP-hard for polygons without holes, with the usual objective of minimizing the number of pieces.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-15T14:40:10Z</published>
+    <arxiv:comment>56 pages, 64 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Mikkel Abrahamsen</name>
+    </author>
+    <author>
+      <name>Jack Stade</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.03091v1</id>
+    <title>The circle packing problem: a theoretical comparison of various convexification techniques</title>
+    <updated>2024-04-03T22:07:30Z</updated>
+    <link href="https://arxiv.org/abs/2404.03091v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.03091v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the problem of packing congruent circles with the maximum radius in a unit square as a mathematical optimization problem. Due to the presence of non-overlapping constraints, this problem is a notoriously difficult nonconvex quadratically constrained optimization problem, which possesses many local optima. We consider several popular convexification techniques, giving rise to linear programming relaxations and semidefinite programming relaxations for the circle packing problem. We compare the strength of these relaxations theoretically, thereby proving the conjectures by Anstreicher (JOGO, 2009). Our results serve as a theoretical justification for the ineffectiveness of existing machinery for convexification of non-overlapping constraints.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-03T22:07:30Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Aida Khajavirad</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2211.10356v1</id>
+    <title>Packing $1.35\cdot 10^{11}$ rectangles into a unit square</title>
+    <updated>2022-11-17T16:59:36Z</updated>
+    <link href="https://arxiv.org/abs/2211.10356v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2211.10356v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It is known that $\sum\limits_{i=1}^{\infty} \frac{1}{i (i+1)} = 1$. In 1968, Meir and Moser asked for finding the smallest $ε$ such that all the rectangles of sizes $1/i \times 1/(i + 1)$ for $i = 1, 2, \ldots$, can be packed into a unit square or a rectangle of area $1 + ε$. In this paper, we show that we can pack the first $1.35\cdot10^{11}$ rectangles into the unit square and give an estimate for $ε$ from this packing.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-11-17T16:59:36Z</published>
+    <arxiv:comment>7 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Mingliang Zhu</name>
+    </author>
+    <author>
+      <name>Antal Joós</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2210.12411v1</id>
+    <title>On a variant of Flory model</title>
+    <updated>2022-10-22T10:28:23Z</updated>
+    <link href="https://arxiv.org/abs/2210.12411v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.12411v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider a one-dimensional variant of a recently introduced settlement planning problem in which houses can be built on finite portions of the rectangular integer lattice subject to certain requirements on the amount of insolation they receive. In our model, each house occupies a unit square on a $1 \times n$ strip, with the restriction that at least one of the neighboring squares must be free. We are interested mostly in situations in which no further building is possible, i.e. in maximal configurations of houses in the strip. We reinterpret the problem as a problem of restricted packing of vertices in a path graph and then apply the transfer matrix method in order to compute the bivariate generating functions for the sequences enumerating all maximal configurations of a given length with respect to the number of houses. This allows us to determine the asymptotic behavior of the enumerating sequences and to compute some interesting statistics. Along the way, we establish close connections between our maximal configurations and several other types of combinatorial objects, including restricted permutations and walks on certain small oriented graphs. In all cases we provide combinatorial proofs. We then generalize our results in several directions by considering multi-story houses, by varying the insolation restrictions, and, finally, by considering strips of width 2 and 3. At the end we comment on several possible directions of future research.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-10-22T10:28:23Z</published>
+    <arxiv:comment>37 pages, 10 figures, 4 tables</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Tomislav Došlić</name>
+    </author>
+    <author>
+      <name>Mate Puljiz</name>
+    </author>
+    <author>
+      <name>Stjepan Šebek</name>
+    </author>
+    <author>
+      <name>Josip Žubrinić</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.04660v2</id>
+    <title>Large deviation principle for random permutations</title>
+    <updated>2023-04-03T15:56:45Z</updated>
+    <link href="https://arxiv.org/abs/2206.04660v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.04660v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We derive a large deviation principle for random permutations induced by probability measures of the unit square, called permutons. These permutations are called $μ$-random permutations. We also introduce and study a new general class of models of random permutations, called Gibbs permutation models, which combines and generalizes $μ$-random permutations and the celebrated Mallows model for permutations. Most of our results hold in the general setting of Gibbs permutation models.
+  We apply the tools that we develop to the case of $μ$-random permutations conditioned to have an atypical proportion of patterns. Several results are made more concrete in the specific case of inversions. For instance, we prove the existence of at least one phase transition for a generalized version of the Mallows model where the base measure is non-uniform. This is in contrast with the results of Starr (2009, 2018) on the (standard) Mallows model, where the absence of phase transition, i.e., phase uniqueness, was proven.
+  Our results naturally lead us to investigate a new notion of permutons, called conditionally constant permutons, which generalizes both pattern-avoiding and pattern-packing permutons. We describe some properties of conditionally constant permutons with respect to inversions. The study of conditionally constant permutons for general patterns seems to be a challenging problem.</summary>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-09T17:57:05Z</published>
+    <arxiv:comment>36 pages, 7 figures; to appear in International Mathematics Research Notices</arxiv:comment>
+    <arxiv:primary_category term="math.PR"/>
+    <author>
+      <name>Jacopo Borga</name>
+    </author>
+    <author>
+      <name>Sayan Das</name>
+    </author>
+    <author>
+      <name>Sumit Mukherjee</name>
+    </author>
+    <author>
+      <name>Peter Winkler</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.02185v3</id>
+    <title>Packing, Hitting, and Colouring Squares</title>
+    <updated>2024-06-03T16:16:27Z</updated>
+    <link href="https://arxiv.org/abs/2206.02185v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.02185v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given a finite family of squares in the plane, the packing problem asks for the maximum number $ν$ of pairwise disjoint squares among them, while the hitting problem for the minimum number $τ$ of points hitting all of them. Clearly, $τ\ge ν$. Both problems are known to be NP-hard, even for families of axis-parallel unit squares.
+  The main results of this work provide the first non-trivial bounds for the $τ/ ν$ ratio for not necessarily axis-parallel squares. We establish an upper bound of $6$ for unit squares and $10$ for squares of varying sizes. The worst ratios we can provide with examples are $3$ and $4$, respectively. For comparison, in the axis-parallel case, the supremum of the considered ratio is in the interval $[\frac{3}{2},2]$ for unit squares and $[\frac{3}{2},4]$ for squares of varying sizes. The methods we introduced for the $τ/ν$ ratio can also be used to relate the chromatic number $χ$ and clique number $ω$ of squares by bounding the $χ/ω$ ratio by $6$ for unit squares and $9$ for squares of varying sizes.
+  The $τ/ ν$ and $χ/ω$ ratios have already been bounded before by a constant for "fat" objects, the fattest and simplest of which are disks and squares. However, while disks have received significant attention, specific bounds for squares have remained essentially unexplored. This work intends to fill this gap.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-05T14:12:10Z</published>
+    <arxiv:comment>The structure and several proofs have been improved. The section about rectangles with bounded aspect ratios has been removed. (32 pages, 20 figures)</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Marco Caoduro</name>
+    </author>
+    <author>
+      <name>András Sebő</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2112.03791v2</id>
+    <title>Online Sorting and Translational Packing of Convex Polygons</title>
+    <updated>2024-04-08T13:46:14Z</updated>
+    <link href="https://arxiv.org/abs/2112.03791v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2112.03791v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate several online packing problems in which convex polygons arrive one by one and have to be placed irrevocably into a container, while the aim is to minimize the used space. Among other variants, we consider strip packing and bin packing, where the container is the infinite horizontal strip $[0,\infty)\times [0,1]$ or a collection of $1 \times 1$ bins, respectively.
+  We draw interesting connections to the following online sorting problem OnlineSorting$[γ,n]$: We receive a stream of real numbers $s_1,\ldots,s_n$, $s_i\in[0,1]$, one by one. Each real must be placed in an array $A$ with $γn$ initially empty cells without knowing the subsequent reals. The goal is to minimize the sum of differences of consecutive reals in $A$. The offline optimum is to place the reals in sorted order so the cost is at most $1$. We show that for any $Δ$-competitive online algorithm of OnlineSorting$[γ,n]$, it holds that $γΔ\inΩ(\log n/\log \log n)$.
+  We use this lower bound to prove the non-existence of competitive algorithms for various online translational packing problems of convex polygons, among them strip packing, bin packing and perimeter packing. This also implies that there exists no online algorithm that can pack all streams of pieces of diameter and total area at most $δ$ into the unit square. These results are in contrast to the case when the pieces are restricted to rectangles, for which competitive algorithms are known. Likewise, the offline versions of packing convex polygons have constant factor approximation algorithms.
+  As a complement, we also include algorithms for both online sorting and translation-only online strip packing with non-trivial competitive ratios. Our algorithm for strip packing relies on a new technique for recursively subdividing the strip into parallelograms of varying height, thickness and slope.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-12-07T16:05:37Z</published>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Anders Aamand</name>
+    </author>
+    <author>
+      <name>Mikkel Abrahamsen</name>
+    </author>
+    <author>
+      <name>Lorenzo Beretta</name>
+    </author>
+    <author>
+      <name>Linda Kleist</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2105.02827v1</id>
+    <title>Tight Approximation Algorithms for Geometric Bin Packing with Skewed Items</title>
+    <updated>2021-05-06T17:16:11Z</updated>
+    <link href="https://arxiv.org/abs/2105.02827v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.02827v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the Two-dimensional Bin Packing (2BP) problem, we are given a set of rectangles of height and width at most one and our goal is to find an axis-aligned nonoverlapping packing of these rectangles into the minimum number of unit square bins. The problem admits no APTAS and the current best approximation ratio is $1.406$ by Bansal and Khan [SODA'14]. A well-studied variant of the problem is Guillotine Two-dimensional Bin Packing (G2BP), where all rectangles must be packed in such a way that every rectangle in the packing can be obtained by recursively applying a sequence of end-to-end axis-parallel cuts, also called guillotine cuts. Bansal, Lodi, and Sviridenko [FOCS'05] obtained an APTAS for this problem. Let $λ$ be the smallest constant such that for every set $I$ of items, the number of bins in the optimal solution to G2BP for $I$ is upper bounded by $λ\operatorname{opt}(I) + c$, where $\operatorname{opt}(I)$ is the number of bins in the optimal solution to 2BP for $I$ and $c$ is a constant. It is known that $4/3 \le λ\le 1.692$. Bansal and Khan [SODA'14] conjectured that $λ= 4/3$. The conjecture, if true, will imply a $(4/3+\varepsilon)$-approximation algorithm for 2BP. According to convention, for a given constant $δ&gt;0$, a rectangle is large if both its height and width are at least $δ$, and otherwise it is called skewed. We make progress towards the conjecture by showing $λ= 4/3$ for skewed instance, i.e., when all input rectangles are skewed. Even for this case, the previous best upper bound on $λ$ was roughly 1.692. We also give an APTAS for 2BP for skewed instance, though general 2BP does not admit an APTAS.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-06T17:16:11Z</published>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Arindam Khan</name>
+    </author>
+    <author>
+      <name>Eklavya Sharma</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2102.08181v1</id>
+    <title>On Greedily Packing Anchored Rectangles</title>
+    <updated>2021-02-16T14:30:17Z</updated>
+    <link href="https://arxiv.org/abs/2102.08181v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2102.08181v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Consider a set P of points in the unit square U, one of them being the origin. For each point p in P you may draw a rectangle in U with its lower-left corner in p. What is the maximum area such rectangles can cover without overlapping each other? Freedman [1969] posed this problem in 1969, asking whether one can always cover at least 50% of U. Over 40 years later, Dumitrescu and Tóth [2011] achieved the first constant coverage of 9.1%; since then, no significant progress was made. While 9.1% might seem low, the authors could not find any instance where their algorithm covers less than 50%, nourishing the hope to eventually prove a 50% bound. While we indeed significantly raise the algorithm's coverage to 39%, we extinguish the hope of reaching 50% by giving points for which the coverage is below 43.3%. Our analysis studies the algorithm's average and worst-case density of so-called tiles, which represent the area where a given point can freely choose its maximum-area rectangle. Our approachis comparatively general and may potentially help in analyzing related algorithms.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-02-16T14:30:17Z</published>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Christoph Damerius</name>
+    </author>
+    <author>
+      <name>Dominik Kaaser</name>
+    </author>
+    <author>
+      <name>Peter Kling</name>
+    </author>
+    <author>
+      <name>Florian Schneider</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2102.05747v1</id>
+    <title>A better lower bound for Lower-Left Anchored Rectangle Packing</title>
+    <updated>2021-02-10T21:42:14Z</updated>
+    <link href="https://arxiv.org/abs/2102.05747v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2102.05747v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given any set of points $S$ in the unit square that contains the origin, does a set of axis aligned rectangles, one for each point in $S$, exist, such that each of them has a point in $S$ as its lower-left corner, they are pairwise interior disjoint, and the total area that they cover is at least 1/2? This question is also known as Freedman's conjecture (conjecturing that such a set of rectangles does exist) and has been open since Allen Freedman posed it in 1969. In this paper, we improve the best known lower bound on the total area that can be covered from 0.09121 to 0.1039. Although this step is small, we introduce new insights that push the limits of this analysis.
+  Our lower bound uses a greedy algorithm with a particular order of the points in $S$. Therefore, it also implies that this greedy algorithm achieves an approximation ratio of 0.1039. We complement the result with an upper bound of 3/4 on the approximation ratio for a natural class of greedy algorithms that includes the one that achieves the lower bound.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-02-10T21:42:14Z</published>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Ruben Hoeksma</name>
+    </author>
+    <author>
+      <name>Matthew Maat</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1909.11648v3</id>
+    <title>High-density hard-core model on $\mathbb{Z}^2$ and norm equations in ring $\mathbb{Z} [{\sqrt[6]{-1}}]$</title>
+    <updated>2023-06-22T16:31:04Z</updated>
+    <link href="https://arxiv.org/abs/1909.11648v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1909.11648v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the Gibbs statistics of high-density hard-core configurations on a unit square lattice $\mathbb{Z}^2$, for a general Euclidean exclusion distance $D$. As a by-product, we solve the disk-packing problem on $\mathbb{Z}^2$ for disks of diameter $D$. The key point is an analysis of solutions to norm equations in $\mathbb{Z}[{\sqrt[6]{-1}}]$. We describe the ground states in terms of M-triangles, i.e., non-obtuse $\mathbb{Z}^2$-triangles of a minimal area with the side-lengths $\geq D$.
+  There is a finite class (Class S) formed by values $D^2$ generating sliding, a phenomenon leading to countable families of periodic ground states. We identify all $D^2$ with sliding. Each of the remaining classes is proven to be infinite; they are characterized by uniqueness or non-uniqueness of a minimal triangle for a given $D^2$, up to $\mathbb{Z}^2$-congruencies. For values of $D^2$ with uniqueness (Class A) we describe the periodic ground states as admissible sub-lattices in $\mathbb{Z}^2$ of maximum density. By using the Pirogov-Sinai theory, it allows us to identify the extreme Gibbs measures (pure phases) for large values of fugacity and describe symmetries between them.
+  Next, we analyze the values $D^2$ with non-uniqueness. For some $D^2$ all M-triangles are ${\mathbb{R}}^2$-congruent but not $\mathbb{Z}^2$-congruent (Class B0). For other values of $D^2$ there exist non-${\mathbb{R}}^2$-congruent M-triangles, with different collections of side-lengths (Class B1). Moreover, there are values $D^2$ for which both cases occur (Class B2). The large-fugacity phase diagram for Classes B0, B1, B2 is determined by dominant ground states.
+  Classes A, B0-B2 are described in terms of cosets in $\mathbb{Z}[{\sqrt[6]{-1}}]$ by the group of units.</summary>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-09-25T17:49:54Z</published>
+    <arxiv:comment>Ancillary files</arxiv:comment>
+    <arxiv:primary_category term="math.PR"/>
+    <author>
+      <name>A. Mazel</name>
+    </author>
+    <author>
+      <name>I. Stuhl</name>
+    </author>
+    <author>
+      <name>Y. Suhov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1809.01769v1</id>
+    <title>Special Configurations in Anchored Rectangle Packings</title>
+    <updated>2018-09-06T00:16:20Z</updated>
+    <link href="https://arxiv.org/abs/1809.01769v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1809.01769v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given a finite set S in $[0,1]^2$ including the origin, an anchored rectangle packing is a set of non-overlapping rectangles in the unit square where each rectangle has a point of S as its left-bottom corner and contains no point of S in its interior. Allen Freedman conjectured in the 1960's one can always find an anchored rectangle packing with total area at least $1/2$. We verify the conjecture for point configurations whose relative positions belong to certain classes of permutations.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-09-06T00:16:20Z</published>
+    <arxiv:comment>40 pages, 20 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Vincent Bian</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1807.07626v1</id>
+    <title>Quasi-polynomial time approximation schemes for packing and covering problems in planar graphs</title>
+    <updated>2018-07-19T20:00:44Z</updated>
+    <link href="https://arxiv.org/abs/1807.07626v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1807.07626v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider two optimization problems in planar graphs. In Maximum Weight Independent Set of Objects we are given a graph $G$ and a family $\mathcal{D}$ of objects, each being a connected subgraph of $G$ with a prescribed weight, and the task is to find a maximum-weight subfamily of $\mathcal{D}$ consisting of pairwise disjoint objects. In Minimum Weight Distance Set Cover we are given an edge-weighted graph $G$, two sets $\mathcal{D},\mathcal{C}$ of vertices of $G$, where vertices of $\mathcal{D}$ have prescribed weights, and a nonnegative radius $r$. The task is to find a minimum-weight subset of $\mathcal{D}$ such that every vertex of $\mathcal{C}$ is at distance at most $r$ from some selected vertex. Via simple reductions, these two problems generalize a number of geometric optimization tasks, notably Maximum Weight Independent Set for polygons in the plane and Weighted Geometric Set Cover for unit disks and unit squares. We present quasi-polynomial time approximation schemes (QPTASs) for both of the above problems in planar graphs: given an accuracy parameter $ε&gt;0$ we can compute a solution whose weight is within multiplicative factor of $(1+ε)$ from the optimum in time $2^{\mathrm{poly}(1/ε,\log |\mathcal{D}|)}\cdot n^{\mathcal{O}(1)}$, where $n$ is the number of vertices of the input graph. Our main technical contribution is to transfer the techniques used for recursive approximation schemes for geometric problems due to Adamaszek, Har-Peled, and Wiese to the setting of planar graphs. In particular, this yields a purely combinatorial viewpoint on these methods.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-07-19T20:00:44Z</published>
+    <arxiv:comment>31 pages, 5 figures, accepted at ESA 2018</arxiv:comment>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Michał Pilipczuk</name>
+    </author>
+    <author>
+      <name>Erik Jan van Leeuwen</name>
+    </author>
+    <author>
+      <name>Andreas Wiese</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1806.09562v1</id>
+    <title>Maximum Area Axis-Aligned Square Packings</title>
+    <updated>2018-06-25T16:51:34Z</updated>
+    <link href="https://arxiv.org/abs/1806.09562v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1806.09562v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given a point set $S=\{s_1,\ldots , s_n\}$ in the unit square $U=[0,1]^2$, an anchored square packing is a set of $n$ interior-disjoint empty squares in $U$ such that $s_i$ is a corner of the $i$th square. The reach $R(S)$ of $S$ is the set of points that may be covered by such a packing, that is, the union of all empty squares anchored at points in $S$. It is shown that area$(R(S))\geq \frac12$ for every finite set $S\subset U$, and this bound is the best possible. The region $R(S)$ can be computed in $O(n\log n)$ time. Finally, we prove that finding a maximum area anchored square packing is NP-complete. This is the first hardness proof for a geometric packing problem where the size of geometric objects in the packing is unrestricted.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-06-25T16:51:34Z</published>
+    <arxiv:comment>20 pages, 13 figures. A 15-page extended abstract appears in the Proceedings of the 43rd International Symposium on Mathematical Foundations of Computer Science (Liverpool, UK, 2018)</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Hugo A. Akitaya</name>
+    </author>
+    <author>
+      <name>Matthew D. Jones</name>
+    </author>
+    <author>
+      <name>David Stalfa</name>
+    </author>
+    <author>
+      <name>Csaba D. Tóth</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1803.04041v2</id>
+    <title>High-density hard-core model on triangular and hexagonal lattices</title>
+    <updated>2020-10-21T21:43:42Z</updated>
+    <link href="https://arxiv.org/abs/1803.04041v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1803.04041v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We perform a rigorous study of the Gibbs statistics of high-density hard-core random configurations on a unit triangular lattice $\mathbb{A}_2$ and a unit honeycomb graph $\mathbb{H}_2$, for any value of the (Euclidean) repulsion diameter $D&gt;0$. Only attainable values of $D$ are relevant, for which $D^2=a^2+b^2+ab$, $a, b \in\mathbb{Z}$ (Löschian numbers). Depending on arithmetic properties of $D^2$, we identify, for large fugacities, the pure phases (extreme Gibbs measures) and specify their symmetries. The answers depend on the way(s) an equilateral triangle of side-length $D$ can be inscribed in $\mathbb{A}_2$ or $\mathbb{H}_2$. On $\mathbb{A}_2$, our approach works for all attainable $D^2$; on $\mathbb{H}_2$ we have to exclude $D^2 = 4, 7, 31, 133$, where a sliding phenomenon occurs, similar to that on a unit square lattice $\mathbb{Z}^2$. For all values $D^2$ apart from the excluded ones we prove the existence of a first-order phase transition where the number of co-existing pure phases grows at least as $O(D^2)$.
+  The proof is based on the Pirogov--Sinai theory which requires non-trivial verifications of key assumptions: finiteness of the set of periodic ground states and the Peierls bound. To establish the Peierls bound, we develop a general method based on the concept of a re-distributed area for Delaunay triangles. Some of the presented proofs are computer-assisted.
+  As a by-product of the ground state identification, we solve the disk-packing problem on $\mathbb{A}_2$ and $\mathbb{H}_2$ for any value of the disk diameter $D$.</summary>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-03-11T21:15:55Z</published>
+    <arxiv:comment>Analysis of the model on the hexagonal lattice has been added. Assisting programs are in Ancillary files</arxiv:comment>
+    <arxiv:primary_category term="math.PR"/>
+    <author>
+      <name>A. Mazel</name>
+    </author>
+    <author>
+      <name>I. Stuhl</name>
+    </author>
+    <author>
+      <name>Y. Suhov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1708.08906v1</id>
+    <title>Online Circle and Sphere Packing</title>
+    <updated>2017-08-29T17:48:51Z</updated>
+    <link href="https://arxiv.org/abs/1708.08906v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1708.08906v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we consider the Online Bin Packing Problem in three variants: Circles in Squares, Circles in Isosceles Right Triangles, and Spheres in Cubes. The two first ones receive an online sequence of circles (items) of different radii while the third one receive an online sequence of spheres (items) of different radii, and they want to pack the items into the minimum number of unit squares, isosceles right triangles of leg length one, and unit cubes, respectively. For Online Circle Packing in Squares, we improve the previous best-known competitive ratio for the bounded space version, when at most a constant number of bins can be open at any given time, from 2.439 to 2.3536. For Online Circle Packing in Isosceles Right Triangles and Online Sphere Packing in Cubes we show bounded space algorithms of asymptotic competitive ratios 2.5490 and 3.5316, respectively, as well as lower bounds of 2.1193 and 2.7707 on the competitive ratio of any online bounded space algorithm for these two problems. We also considered the online unbounded space variant of these three problems which admits a small reorganization of the items inside the bin after their packing, and we present algorithms of competitive ratios 2.3105, 2.5094, and 3.5146 for Circles in Squares, Circles in Isosceles Right Triangles, and Spheres in Cubes, respectively.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-08-29T17:48:51Z</published>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Carla Negri Lintzmayer</name>
+    </author>
+    <author>
+      <name>Flávio Keidi Miyazawa</name>
+    </author>
+    <author>
+      <name>Eduardo Candido Xavier</name>
+    </author>
+    <arxiv:doi>10.1016/j.tcs.2019.01.004</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.tcs.2019.01.004" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1707.07882v1</id>
+    <title>Prices of anarchy of selfish 2D bin packing games</title>
+    <updated>2017-07-25T09:42:27Z</updated>
+    <link href="https://arxiv.org/abs/1707.07882v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1707.07882v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider a game-theoretical problem called selfish 2-dimensional bin packing game, a generalization of the 1-dimensional case already treated in the literature. In this game, the items to be packed are rectangles, and the bins are unit squares. The game starts with a set of items arbitrarily packed in bins. The cost of an item is defined as the ratio between its area and the total occupied area of the respective bin. Each item is a selfish player that wants to minimize its cost. A migration of an item to another bin is allowed only when its cost is decreased. We show that this game always converges to a Nash equilibrium (a stable packing where no single item can decrease its cost by migrating to another bin). We show that the pure price of anarchy of this game is unbounded, so we address the particular case where all items are squares. We show that the pure price of anarchy of the selfish square packing game is at least 2.3634 and at most 2.6875. We also present analogous results for the strong Nash equilibrium (a stable packing where no nonempty set of items can simultaneously migrate to another common bin and decrease the cost of each item in the set). We show that the strong price of anarchy when all items are squares is at least 2.0747 and at most 2.3605.</summary>
+    <category term="cs.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-07-25T09:42:27Z</published>
+    <arxiv:primary_category term="cs.GT"/>
+    <author>
+      <name>Cristina G. Fernandes</name>
+    </author>
+    <author>
+      <name>Carlos E. Ferreira</name>
+    </author>
+    <author>
+      <name>Flávio K. Miyazawa</name>
+    </author>
+    <author>
+      <name>Yoshiko Wakabayashi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1606.03746v1</id>
+    <title>Optimal Packings of 22 and 33 Unit Squares in a Square</title>
+    <updated>2016-06-12T18:17:20Z</updated>
+    <link href="https://arxiv.org/abs/1606.03746v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1606.03746v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $s(n)$ be the side length of the smallest square into which $n$ non-overlapping unit squares can be packed. In 2010, the author showed that $s(13)=4$ and $s(46)=7$. Together with the result $s(6)=3$ by Keaney and Shiu, these results strongly suggest that $s(m^2-3)=m$ for $m\ge 3$, in particular for the values $m=5,6$, which correspond to cases that lie in between the previous results.
+  In this article we show that indeed $s(m^2-3)=m$ for $m=5,6$, implying that the most efficient packings of 22 and 33 squares are the trivial ones. To achieve our results, we modify the well-known method of sets of unavoidable points by replacing them with continuously varying families of such sets.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-06-12T18:17:20Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Wolfram Bentz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1603.02368v2</id>
+    <title>A New Result on Packing Unit Squares into a Large Square</title>
+    <updated>2016-04-09T04:11:32Z</updated>
+    <link href="https://arxiv.org/abs/1603.02368v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1603.02368v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In their 2009 note: \emph{Packing equal squares into a large square}, Chung and Graham proved that the uncovered area of a large square of side length $x$ is $O\left(x^{(3+\sqrt{2})/7}\log x\right)$ after maximum number of non-overlapping unit squares are packed into it, which improved the earlier results of Erdős-Graham, Roth-Vaughan, and Karabash-Soifer. Here we further improve the result to $O(x^{5/8})$ that also helps to improve the bound for the dual problem: finding the minimum number of unit squares needed for covering the large square, from $x^2+O\left(x^{(3+\sqrt{2})/7}\log x\right)$ to $x^2+O(x^{5/8})$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-03-08T03:22:59Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Shuang Wang</name>
+    </author>
+    <author>
+      <name>Tian Dong</name>
+    </author>
+    <author>
+      <name>Jiamin Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1603.00060v1</id>
+    <title>Anchored Rectangle and Square Packings</title>
+    <updated>2016-02-29T21:44:01Z</updated>
+    <link href="https://arxiv.org/abs/1603.00060v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1603.00060v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>For points $p_1,\ldots , p_n$ in the unit square $[0,1]^2$, an \emph{anchored rectangle packing} consists of interior-disjoint axis-aligned empty rectangles $r_1,\ldots , r_n\subseteq [0,1]^2$ such that point $p_i$ is a corner of the rectangle $r_i$ (that is, $r_i$ is \emph{anchored} at $p_i$) for $i=1,\ldots, n$. We show that for every set of $n$ points in $[0,1]^2$, there is an anchored rectangle packing of area at least $7/12-O(1/n)$, and for every $n\in \mathbf{N}$, there are point sets for which the area of every anchored rectangle packing is at most $2/3$. The maximum area of an anchored \emph{square} packing is always at least $5/32$ and sometimes at most $7/27$.
+  The above constructive lower bounds immediately yield constant-factor approximations, of $7/12 -\varepsilon$ for rectangles and $5/32$ for squares, for computing anchored packings of maximum area in $O(n\log n)$ time. We prove that a simple greedy strategy achieves a $9/47$-approximation for anchored square packings, and $1/3$ for lower-left anchored square packings. Reductions to maximum weight independent set (MWIS) yield a QPTAS and a PTAS for anchored rectangle and square packings in $n^{O(1/\varepsilon)}$ and $\exp({\rm poly}(\log (n/\varepsilon)))$ time, respectively.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-02-29T21:44:01Z</published>
+    <arxiv:comment>33 pages, 20 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Kevin Balas</name>
+    </author>
+    <author>
+      <name>Adrian Dumitrescu</name>
+    </author>
+    <author>
+      <name>Csaba D. Tóth</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1507.01454v1</id>
+    <title>Principal Component Analysis of Persistent Homology Rank Functions with case studies of Spatial Point Patterns, Sphere Packing and Colloids</title>
+    <updated>2015-07-06T13:41:57Z</updated>
+    <link href="https://arxiv.org/abs/1507.01454v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1507.01454v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Persistent homology, while ostensibly measuring changes in topology, captures multiscale geometrical information. It is a natural tool for the analysis of point patterns. In this paper we explore the statistical power of the (persistent homology) rank functions. For a point pattern $X$ we construct a filtration of spaces by taking the union of balls of radius $a$ centered on points in $X$, $X_a = \cup_{x\in X}B(x,a)$. The rank function $β_k(X):{\{(a,b)\in \mathbb{R}^2: a\leq b\}} \to \mathbb{R}$ is then defined by $β_k(X)(a,b) = rank ( ι_*:H_k(X_a) \to H_k(X_b))$ where $ι_*$ is the induced map on homology from the inclusion map on spaces. We consider the rank functions as lying in a Hilbert space and show that under reasonable conditions the rank functions from multiple simulations or experiments will lie in an affine subspace. This enables us to perform functional principal component analysis which we apply to experimental data from colloids at different effective temperatures and of sphere packings with different volume fractions. We also investigate the potential of rank functions in providing a test of complete spatial randomness of 2D point patterns using the distances to an empirically computed mean rank function of binomial point patterns in the unit square.</summary>
+    <category term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.AT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-07-06T13:41:57Z</published>
+    <arxiv:comment>25 pages, 15 figures</arxiv:comment>
+    <arxiv:primary_category term="math.ST"/>
+    <author>
+      <name>Vanessa Robins</name>
+    </author>
+    <author>
+      <name>Katharine Turner</name>
+    </author>
+    <arxiv:doi>10.1016/j.physd.2016.03.007</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.physd.2016.03.007" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1412.4709v1</id>
+    <title>Polynomial-Time Approximation Schemes for Circle and Other Packing Problems</title>
+    <updated>2014-12-15T18:27:32Z</updated>
+    <link href="https://arxiv.org/abs/1412.4709v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1412.4709v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We give an asymptotic approximation scheme (APTAS) for the problem of packing a set of circles into a minimum number of unit square bins. To obtain rational solutions, we use augmented bins of height $1+γ$, for some arbitrarily small number $γ&gt; 0$. Our algorithm is polynomial on $\log 1/γ$, and thus $γ$ is part of the problem input. For the special case that $γ$ is constant, we give a (one dimensional) resource augmentation scheme, that is, we obtain a packing into bins of unit width and height $1+γ$ using no more than the number of bins in an optimal packing. Additionally, we obtain an APTAS for the circle strip packing problem, whose goal is to pack a set of circles into a strip of unit width and minimum height. These are the first approximation and resource augmentation schemes for these problems.
+  Our algorithm is based on novel ideas of iteratively separating small and large items, and may be extended to a wide range of packing problems that satisfy certain conditions. These extensions comprise problems with different kinds of items, such as regular polygons, or with bins of different shapes, such as circles and spheres. As an example, we obtain APTAS's for the problems of packing d-dimensional spheres into hypercubes under the $L_p$-norm.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-12-15T18:27:32Z</published>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Flávio K. Miyazawa</name>
+    </author>
+    <author>
+      <name>Lehilton L. C. Pedrosa</name>
+    </author>
+    <author>
+      <name>Rafael C. S. Schouery</name>
+    </author>
+    <author>
+      <name>Maxim Sviridenko</name>
+    </author>
+    <author>
+      <name>Yoshiko Wakabayashi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1411.7819v2</id>
+    <title>Uniformity of point samples in metric spaces using gap ratio</title>
+    <updated>2015-12-04T12:33:13Z</updated>
+    <link href="https://arxiv.org/abs/1411.7819v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1411.7819v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Teramoto et al. defined a new measure called the gap ratio that measures the uniformity of a finite point set sampled from $\cal S$, a bounded subset of $\mathbb{R}^2$. We generalize this definition of measure over all metric spaces by appealing to covering and packing radius. The definition of gap ratio needs only a metric unlike discrepancy, a widely used uniformity measure, that depends on the notion of a range space and its volume. We also show some interesting connections of gap ratio to Delaunay triangulation and discrepancy in the Euclidean plane. The major focus of this work is on solving optimization related questions about selecting uniform point samples from metric spaces; the uniformity being measured using gap ratio. We consider discrete spaces like graph and set of points in the Euclidean space and continuous spaces like the unit square and path connected spaces. We deduce lower bounds, prove hardness and approximation hardness results. We show that a general approximation algorithm framework gives different approximation ratios for different metric spaces based on the lower bound we deduce. Apart from the above, we show existence of coresets for sampling uniform points from the Euclidean space -- for both the static and the streaming case. This leads to a $\left( 1+ε\right)$-approximation algorithm for uniform sampling from the Euclidean space.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-11-28T11:23:59Z</published>
+    <arxiv:comment>31 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Arijit Bishnu</name>
+    </author>
+    <author>
+      <name>Sameer Desai</name>
+    </author>
+    <author>
+      <name>Arijit Ghosh</name>
+    </author>
+    <author>
+      <name>Mayank Goswami</name>
+    </author>
+    <author>
+      <name>Subhabrata Paul</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1403.5665v2</id>
+    <title>Online Square-into-Square Packing</title>
+    <updated>2016-12-31T19:38:28Z</updated>
+    <link href="https://arxiv.org/abs/1403.5665v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1403.5665v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In 1967, Moon and Moser proved a tight bound on the critical density of squares in squares: any set of squares with a total area of at most 1/2 can be packed into a unit square, which is tight. The proof requires full knowledge of the set, as the algorithmic solution consists in sorting the objects by decreasing size, and packing them greedily into shelves. Since then, the online version of the problem has remained open; the best upper bound is still 1/2, while the currently best lower bound is 1/3, due to Han et al. (2008). In this paper, we present a new lower bound of 11/32, based on a dynamic shelf allocation scheme, which may be interesting in itself. We also give results for the closely related problem in which the size of the square container is not fixed, but must be dynamically increased in order to ac- commodate online sequences of objects. For this variant, we establish an upper bound of 3/7 for the critical density, and a lower bound of 1/8. When aiming for accommodating an online sequence of squares, this corresponds to a 2.82...- competitive method for minimizing the required container size, and a lower bound of 1.33 . . . for the achievable factor.</summary>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-03-22T14:18:18Z</published>
+    <arxiv:comment>33 pages, 13 figures; full version of a preliminary extended abstract that appeared in APPROX 2013</arxiv:comment>
+    <arxiv:primary_category term="cs.DM"/>
+    <author>
+      <name>Sándor P. Fekete</name>
+    </author>
+    <author>
+      <name>Hella-Franziska Hoffmann</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1401.5583v1</id>
+    <title>Improved Online Square-into-Square Packing</title>
+    <updated>2014-01-22T07:52:52Z</updated>
+    <link href="https://arxiv.org/abs/1401.5583v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1401.5583v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we show an improved bound and new algorithm for the online square-into-square packing problem. This two-dimensional packing problem involves packing an online sequence of squares into a unit square container without any two squares overlapping. The goal is to find the largest area $α$ such that any set of squares with total area $α$ can be packed. We show an algorithm that can pack any set of squares with total area $α\leq 3/8$ into a unit square in an online setting, improving the previous bound of $11/32$.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-01-22T07:52:52Z</published>
+    <arxiv:comment>15 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Brian Brubach</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1401.0108v4</id>
+    <title>On Packing Almost Half of a Square with Anchored Rectangles: A Constructive Approach</title>
+    <updated>2014-04-28T06:43:55Z</updated>
+    <link href="https://arxiv.org/abs/1401.0108v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1401.0108v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we consider the following geometric puzzle whose origin was traced to Allan Freedman \cite{croft91,tutte69} in the 1960s by Dumitrescu and T{ó}th \cite{adriancasaba2011}. The puzzle has been popularized of late by Peter Winkler \cite{Winkler2007}. Let $P_{n}$ be a set of $n$ points, including the origin, in the unit square $U = [0,1]^2$. The problem is to construct $n$ axis-parallel and mutually disjoint rectangles inside $U$ such that the bottom-left corner of each rectangle coincides with a point in $P_{n}$ and the total area covered by the rectangles is maximized. We would term the above rectangles as \emph{anchored rectangles}. The longstanding conjecture has been that at least half of $U$ can be covered when anchored rectangles are properly placed. Dumitrescu and T{ó}th \cite{Dumitrescu2012} have shown a construction method that can cover at least $0.09121$, i.e., roughly $9\%$ of the area.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-12-31T07:54:16Z</published>
+    <arxiv:comment>This paper has been withdrawn as a bug has been discovered in the proof of claim 5 of the paper entitled "An Existential Proof of the Conjecture on Packing Anchored Rectangles" and this result has been used here also</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Sandip Banerjee</name>
+    </author>
+    <author>
+      <name>Aritra Banik</name>
+    </author>
+    <author>
+      <name>Bhargab B. Bhattacharya</name>
+    </author>
+    <author>
+      <name>Arijit Bishnu</name>
+    </author>
+    <author>
+      <name>Soumyottam Chatterjee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1310.8403v3</id>
+    <title>An Existential Proof of the Conjecture on Packing Anchored Rectangles</title>
+    <updated>2014-04-28T06:35:43Z</updated>
+    <link href="https://arxiv.org/abs/1310.8403v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1310.8403v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $P_{n}$ be a set of $n$ points, including the origin, in the unit square $U = [0,1]^2$. We consider the problem of constructing $n$ axis-parallel and mutually disjoint rectangles inside $U$ such that the bottom-left corner of each rectangle coincides with a point in $P_{n}$ and the total area covered by the rectangles is maximized \cite{ibmpuzzle}, \cite{Winkler2007}, \cite{Winkler2010a}, \cite{Winkler2010b}. The longstanding conjecture has been that at least half of $U$ can be covered when such rectangles are properly placed. In this paper, we give an existential proof of the conjecture.</summary>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-10-31T06:55:05Z</published>
+    <arxiv:comment>This paper has been withdrawn as a bug has been discovered in the proof of Claim 5</arxiv:comment>
+    <arxiv:primary_category term="cs.DM"/>
+    <author>
+      <name>Sandip Banerjee</name>
+    </author>
+    <author>
+      <name>Aritra Banik</name>
+    </author>
+    <author>
+      <name>Bhargab B. Bhattacharya</name>
+    </author>
+    <author>
+      <name>Arijit Bishnu</name>
+    </author>
+    <author>
+      <name>Soumyottam Chatterjee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1310.1789v2</id>
+    <title>On the $L^q$-spectrum of planar self-affine measures</title>
+    <updated>2013-10-15T17:01:44Z</updated>
+    <link href="https://arxiv.org/abs/1310.1789v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1310.1789v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the dimension theory of a class of planar self-affine multifractal measures. These measures are the Bernoulli measures supported on box-like self-affine sets, introduced by the author, which are the attractors of iterated function systems consisting of contracting affine maps which take the unit square to rectangles with sides parallel to the axes. This class contains the self-affine measures recently considered by Feng and Wang as well as many other measures. In particular, we allow the defining maps to have non-trivial rotational and reflectional components. Assuming the rectangular open set condition, we compute the $L^q$-spectrum by means of a $q$-modified singular value function.
+  A key application of our results is a \emph{closed form expression} for the $L^q$-spectrum in the case where there are no mappings that switch the coordinate axes. This is useful for computational purposes and also allows us to prove differentiability of the $L^q$-spectrum at $q=1$ in the more difficult `non-multiplicative' situation. This has applications concerning the Hausdorff, packing and entropy dimension of the measure as well as the Hausdorff and packing dimension of the support. Due to the possible inclusion of axis reversing maps, we are led to extend some results of Peres and Solomyak on the existence of $L^q$-spectrum of self-similar measures to the graph-directed case.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-10-07T14:08:57Z</published>
+    <arxiv:comment>34 pages, 6 figures. Some errors in V1 were corrected and some proofs clarified</arxiv:comment>
+    <arxiv:primary_category term="math.DS"/>
+    <arxiv:journal_ref>Transactions of the American Mathematical Society, 368, (2016), 5579-5620</arxiv:journal_ref>
+    <author>
+      <name>Jonathan M. Fraser</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1209.4053v1</id>
+    <title>A nonsmooth program for jamming hard spheres</title>
+    <updated>2012-09-18T18:49:08Z</updated>
+    <link href="https://arxiv.org/abs/1209.4053v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1209.4053v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study packings of $n$ hard spheres of equal radius in the $d$-dimensional unit cube. We present a nonsmooth function whose local extrema are the radii of jammed packings (where no subset of spheres can be moved keeping all others fixed) and show that for a fixed number of spheres there are only finitely many radii of such jammed configurations. We propose an algorithm for the maximization of this maximal radius function and present examples for 5 - 8 disks in the unit square and 4 - 6 spheres in the unit cube. The method allows straightforward generalization to packings of spheres in other compact containers.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-09-18T18:49:08Z</published>
+    <arxiv:comment>23 pages, 12 figures</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <arxiv:journal_ref>Optimization Letters 8:13-33 (2014)</arxiv:journal_ref>
+    <author>
+      <name>Peter Hinow</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1110.5348v2</id>
+    <title>Packing Squares in a Torus</title>
+    <updated>2012-03-19T17:55:32Z</updated>
+    <link href="https://arxiv.org/abs/1110.5348v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1110.5348v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The densest packings of N unit squares in a torus are studied using analytical methods as well as simulated annealing. A rich array of dense packing solutions are found: density-one packings when N is the sum of two square integers; a family of "gapped bricklayer" Bravais lattice solutions with density N/(N+1); and some surprising non-Bravais lattice configurations, including lattices of holes as well as a configuration for N=23 in which not all squares share the same orientation. The entropy of some of these configurations and the frequency and orientation of density-one solutions as N goes to infinity are discussed.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-10-24T20:33:35Z</published>
+    <arxiv:comment>14 pages, 9 figures; v2 reflects minor changes in published version</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>JSTAT, P01018 (2012)</arxiv:journal_ref>
+    <author>
+      <name>Don Blair</name>
+    </author>
+    <author>
+      <name>Christian D. Santangelo</name>
+    </author>
+    <author>
+      <name>Jon Machta</name>
+    </author>
+    <arxiv:doi>10.1088/1742-5468/2012/01/P01018</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1742-5468/2012/01/P01018" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1108.2639v1</id>
+    <title>On the packing dimension of box-like self-affine sets in the plane</title>
+    <updated>2011-08-12T15:18:27Z</updated>
+    <link href="https://arxiv.org/abs/1108.2639v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1108.2639v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider a class of planar self-affine sets which we call "box-like". A box-like self-affine set is the attractor of an iterated function system (IFS) of affine maps where the image of the unit square, [0,1]^2, under arbitrary compositions of the maps is a rectangle with sides parallel to the axes. This class contains the Bedford-McMullen carpets and the generalisations thereof considered by Lalley-Gatzouras, Barański and Feng-Wang as well as many other sets. In particular, we allow the mappings in the IFS to have non-trivial rotational and reflectional components. Assuming a rectangular open set condition, we compute the packing and box-counting dimensions by means of a pressure type formula based on the singular values of the maps.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-08-12T15:18:27Z</published>
+    <arxiv:comment>15 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Nonlinearity, 25, (2012), 2075-2092</arxiv:journal_ref>
+    <author>
+      <name>Jonathan M. Fraser</name>
+    </author>
+    <arxiv:doi>10.1088/0951-7715/25/7/2075</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/0951-7715/25/7/2075" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1107.5102v2</id>
+    <title>Packing anchored rectangles</title>
+    <updated>2012-07-30T18:21:38Z</updated>
+    <link href="https://arxiv.org/abs/1107.5102v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1107.5102v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $S$ be a set of $n$ points in the unit square $[0,1]^2$, one of which is the origin. We construct $n$ pairwise interior-disjoint axis-aligned empty rectangles such that the lower left corner of each rectangle is a point in $S$, and the rectangles jointly cover at least a positive constant area (about 0.09). This is a first step towards the solution of a longstanding conjecture that the rectangles in such a packing can jointly cover an area of at least 1/2.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-07-26T02:16:11Z</published>
+    <arxiv:comment>17 pages, 7 figures; updated references</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Adrian Dumitrescu</name>
+    </author>
+    <author>
+      <name>Csaba D. Tóth</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1101.2934v2</id>
+    <title>Tiling a unit square with 8 squares</title>
+    <updated>2011-08-04T23:58:25Z</updated>
+    <link href="https://arxiv.org/abs/1101.2934v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1101.2934v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Put n nonoverlapping squares inside the unit square. Let f(n) and g(n) denote the maximum values of the sum of the edge lengths of the n small squares, where in the case of f(n) the maximum is taken over all arbitrary packings of the unit square, and in the case of g(n) it is taken over all tilings of the unit square (i.e., the total area of the n small squares is 1). Benton and Tyler asked for which values of n we have f(n)=g(n). We show that f(8)&gt;g(8). More precisely, we show that g(8)=13/5; it is known that f(8) is at least 8/3.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-01-15T00:54:04Z</published>
+    <arxiv:comment>8 pages; revised (shorter) proof</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Iwan Praton</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1008.1224v2</id>
+    <title>Circle Packing for Origami Design Is Hard</title>
+    <updated>2010-09-20T10:58:47Z</updated>
+    <link href="https://arxiv.org/abs/1008.1224v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1008.1224v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show that deciding whether a given set of circles can be packed into a rectangle, an equilateral triangle, or a unit square are NP-hard problems, settling the complexity of these natural packing problems. On the positive side, we show that any set of circles of total area 1 can be packed into a square of size 4/\sqrt{pi}=2.2567... These results are motivated by problems arising in the context of origami design.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-08-06T16:05:28Z</published>
+    <arxiv:comment>17 pages, 13 figures. An abstract was presented at the 5th International Conference on Origami in Science, Mathematics and Education (5OSME). Updated to fix a numerical typo related to Figure 13, and a new result</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Erik D. Demaine</name>
+    </author>
+    <author>
+      <name>Sandor P. Fekete</name>
+    </author>
+    <author>
+      <name>Robert J. Lang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0903.2265v1</id>
+    <title>An Absolute 2-Approximation Algorithm for Two-Dimensional Bin Packing</title>
+    <updated>2009-03-13T11:39:14Z</updated>
+    <link href="https://arxiv.org/abs/0903.2265v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0903.2265v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We consider the problem of packing rectangles into bins that are unit squares, where the goal is to minimize the number of bins used. All rectangles have to be packed non-overlapping and orthogonal, i.e., axis-parallel. We present an algorithm for this problem with an absolute worst-case ratio of 2, which is optimal provided P != NP.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-03-13T11:39:14Z</published>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Rolf Harren</name>
+    </author>
+    <author>
+      <name>Rob van Stee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0809.2477v4</id>
+    <title>Two new Probability inequalities and Concentration Results</title>
+    <updated>2010-05-21T04:14:04Z</updated>
+    <link href="https://arxiv.org/abs/0809.2477v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0809.2477v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Concentration results and probabilistic analysis for combinatorial problems like the TSP, MWST, graph coloring have received much attention, but generally, for i.i.d. samples (i.i.d. points in the unit square for the TSP, for example). Here, we prove two probability inequalities which generalize and strengthen Martingale inequalities. The inequalities provide the tools to deal with more general heavy-tailed and inhomogeneous distributions for combinatorial problems. We prove a wide range of applications - in addition to the TSP, MWST, graph coloring, we also prove more general results than known previously for concentration in bin-packing, sub-graph counts, Johnson-Lindenstrauss random projection theorem. It is hoped that the strength of the inequalities will serve many more purposes.</summary>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-09-15T10:17:38Z</published>
+    <arxiv:comment>30</arxiv:comment>
+    <arxiv:primary_category term="math.PR"/>
+    <author>
+      <name>Ravindran Kannan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0803.4260v1</id>
+    <title>On Two Dimensional Orthogonal Knapsack Problem</title>
+    <updated>2008-03-29T11:15:11Z</updated>
+    <link href="https://arxiv.org/abs/0803.4260v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0803.4260v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In this paper, we study the following knapsack problem: Given a list of squares with profits, we are requested to pack a sublist of them into a rectangular bin (not a unit square bin) to make profits in the bin as large as possible. We first observe there is a Polynomial Time Approximation Scheme (PTAS) for the problem of packing weighted squares into rectangular bins with large resources, then apply the PTAS to the problem of packing squares with profits into a rectangular bin and get a $\frac65+ε$ approximation algorithm.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-03-29T11:15:11Z</published>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Xin Han</name>
+    </author>
+    <author>
+      <name>Kazuo Iwama</name>
+    </author>
+    <author>
+      <name>Guochuan Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0504341v1</id>
+    <title>The Erdos and Campbell-Staton conjectures about square packing</title>
+    <updated>2005-04-16T23:25:52Z</updated>
+    <link href="https://arxiv.org/abs/math/0504341v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0504341v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Put n open non-overlapping squares inside a unit square, and let f(n) denote the maximum possible value of the sum of the side lengths of the n squares. Campbell and Staton, building on a question of Erdos, conjectured that f(k^2+2c+1)=k+c/k, where c is any integer and k\geq |c|. We show that if this conjecture is true for one value of c, then it is true for all values of c.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-04-16T23:25:52Z</published>
+    <arxiv:comment>2 pages</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Iwan Praton</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0005054v1</id>
+    <title>Compactness Theorems for Geometric Packings</title>
+    <updated>2000-05-05T19:09:09Z</updated>
+    <link href="https://arxiv.org/abs/math/0005054v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0005054v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Moser asked whether the collection of rectangles of dimensions 1 x 1/2, 1/2 x 1/3, 1/3 x 1/4, ..., whose total area equals 1, can be packed into the unit square without overlap, and whether the collection of squares of side lengths 1/2, 1/3, 1/4, ... can be packed without overlap into a rectangle of area pi^2/6-1. Computational investigations have been made into packing these collections into squares of side length 1+epsilon and rectangles of area pi^2/6-1+epsilon, respectively, and one can consider the apparently weaker question whether such packings are possible for every positive number epsilon. In this paper we establish a general theorem on sequences of geometrical packings that implies in particular that the ``for every epsilon'' versions of these two problems are actually equivalent to the original tiling problems.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2000-05-05T19:09:09Z</published>
+    <arxiv:comment>10 pages</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>J. Combin. Theory Ser. A 97 (2002), 225-238.</arxiv:journal_ref>
+    <author>
+      <name>Greg Martin</name>
+    </author>
+  </entry>
+</feed>

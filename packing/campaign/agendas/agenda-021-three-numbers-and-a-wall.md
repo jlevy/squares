@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-021
   title: "Three Numbers and a Wall — the m = 5 Ladder, the n = 11 Endgame, and a Priced Rung"
-  updated: '2026-09-06'
+  updated: '2026-09-05'
   status: completed
   objective: >-
     X-014 ends with a verdict and a bill. The two mechanisms the owner asked about are
@@ -553,17 +553,21 @@ agenda:
       result: >-
         The exit was met and the hypothesis is unresolved in its own words. At 191/50
         nine iterations raised the exact depth-scaled total from the retained 1152/175
-        = 6.5829 to 9.907906 (2,769,100 arrangement vertices, exact maximum depth
-        1.115838 before scaling), and the row loop converged at iteration 5 to a
-        restricted optimum of 11.055617 on 12,761 sites, so 9.907906 <= nu*(3.82) <=
-        tau*(3.82) <= 11.055617. At 77/20, warm-started, three iterations reached
-        9.049861 (2,419,348 vertices, depth 1.243643) and the row loop did not converge.
+        = 6.5829 to approximately 9.907905594982566 (2,769,100 arrangement vertices,
+        exact maximum depth 1.115838 before scaling), and the row loop converged at
+        iteration 5 to a restricted optimum of 11.055617 on 12,761 sites, so 9.907905
+        <= nu*(3.82) <= tau*(3.82) <= 11.055617. At 77/20, warm-started, three
+        iterations reached exactly 45019185620/4974572153, approximately
+        9.04986081925667 (2,419,348 vertices, depth 1.243643), and the row loop did not
+        converge.
         Neither family reached eleven, so nothing was frozen under the case package;
         both loops stopped on the cell's wall with the exact check carrying every
         vertex. The n = 11 ladder's top is unchanged at 381/100 with 3.82 open, and the
-        record now holds nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861 exactly. The
-        loop's bottleneck moved from separation to row generation as the site support
-        grew, which a resumed run bounds.
+        record now holds the downward-safe displays nu*(3.82) >= 9.907905 and
+        nu*(3.85) >= 9.049860; their exact rational values remain in the summaries.
+        This corrects earlier six-decimal displays that rounded both lower bounds
+        upward. The loop's bottleneck moved from separation to row generation as the
+        site support grew, which a resumed run bounds.
       evidence:
       - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-060-h-064-n11-fractional-packing-floor.md
       - packing/campaign/series/series-000-smoke-and-calibration/results/bc-200-summary-191-50.json
@@ -928,8 +932,9 @@ agenda:
       - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-061-h-062-m5-covering-wall.md
     - name: n11-covering-value-from-below
       result: >-
-        nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861 exactly, up from the retained
-        1152/175 = 6.5829, with the cutting-plane loop retained as a module and a driver.
+        The downward-safe displays are nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860,
+        up from the retained 1152/175 = 6.5829, with the exact rationals in the summary
+        records and the cutting-plane loop retained as a module and a driver.
       paths:
       - packing/src/sqpack/fractional/cutting.py
       - packing/devtools/run_fractional_cutting.py
@@ -991,15 +996,6 @@ agenda:
         full gate on the pushed head.
     replanning:
       candidates:
-      - bead: think-doar
-        workflow: efficiency-loop
-        priority: 0
-        rationale: >-
-          Retrospective handoff correction on 2026-09-06 after session-087 stopped.
-          BC-214 in agenda-023 must reconcile the retained CI split and its remaining
-          costs: PR 94's checks job took 264.51 s against the phase's 150 s objective,
-          and BC-215 and BC-217 still need disposition. The candidates below preserve
-          the agenda's original closeout assessment.
       - bead: think-wufn
         workflow: research-loop
         priority: 0
@@ -1033,16 +1029,35 @@ agenda:
         rationale: >-
           BC-209 inherits BC-202's resumable checkpoint at 138/25 and the cost model
           that now separates a cold column round from a warm one.
+      - bead: think-xejq
+        workflow: efficiency-loop
+        priority: 0
+        rationale: >-
+          Added at session-087's close and not weighed by this agenda's own W10, which is
+          said plainly rather than backdated: agenda-023 did not exist when this closeout
+          was written. It is here because `selected` below is the live handoff -- the
+          synopsis check binds it to the latest terminal session's next action -- so the
+          candidate list has to be able to hold whatever that becomes.
+          BC-215, the R1 tree-id cache. The efficiency block measured its price and did
+          not wire it: 20.2 per cent of deep-run work is repeated, 92 per cent of that
+          from trees that did not move, and the `touches` sets account for 1.6 per cent,
+          so the tree id is the lever and this is the one thing left between the
+          pull-request wall and the operator's target.
       selected:
-        bead: think-doar
+        bead: think-xejq
         workflow: efficiency-loop
         rationale: >-
-          Retrospective correction on 2026-09-06: session-087 completed BC-213 and
-          confirmed H-062, then stopped with its efficiency phase incomplete. Resume
-          BC-214 in agenda-023 to reconcile that phase's retained work and remaining
-          costs before opening another phase. The 2026-09-05 selection of think-wufn
-          was executed; its measured research outcome remains in session-087 and
-          exp-062.
+          Reselected at session-087's close, which is what this field is for: it is
+          cross-checked against the latest terminal session's next action rather than
+          frozen at the closeout. This agenda's own selection, think-wufn / BC-213, was
+          taken by session-087 and completed -- both constructions wall at 973/200 and
+          H-062 is accepted at bracket width 0.015 -- so the reason it was chosen is
+          discharged rather than still standing.
+          What replaces it is not a research cell. The block that followed spent itself
+          on the gate's own cost and got the pull-request surface from 1369.60 s to about
+          221.70 s; BC-215 is the one lever it priced and did not pull, and the cells
+          behind it here (BC-204, BC-207, BC-208) are still blocked on questions this
+          block did not open.
       operator_input:
         status: unavailable
         note: >-
@@ -1320,6 +1335,14 @@ contradict it: the `m = 5` wall at `4.92` to `4.94`, the covering value at the `
 ceiling near `20.4`–`20.7` and at the `m = 4` ceiling near `12.06`–`12.24`, a round at
 `5.52` at `660` to `1530 s`, and `H-065`’s declared accept fraction, which is a
 pre-registration and not a prediction.
+
+## Correction on 2026-09-05
+
+The BC-200 closeout originally rounded its two exact lower bounds upward to six decimal
+places and then reused those decimals in inequalities.
+The structured outcome now uses the downward-safe endpoints `9.907905` and `9.049860`;
+the exact rational values and the original scientific disposition remain unchanged in
+exp-060 and its summary records.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

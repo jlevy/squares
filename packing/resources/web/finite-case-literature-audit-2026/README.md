@@ -43,7 +43,7 @@ and the 2021 Electronic Journal of Combinatorics construction paper.
 | Source | Date | Scope | Effect on the prioritized finite cases |
 | --- | --- | --- | --- |
 | [Sam Burns, proposed `n = 17` lower bound](https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/) | 2026-08-06 | proposed fixed weighted certificate at `4.4811` | Relevant proposal, but explicitly not independently implemented or peer reviewed; retained in the adjacent `n17-lower-bounds-2026` archive |
-| [Gustavo Massaccesi, proposed `n = 17` lower bound](https://gus-massa.blogspot.com/2026/08/another-better-lower-bound-for-n17.html) | 2026-08 | proposed fixed weighted certificate at `4.5058` | Relevant proposal and verifier; not a paper or adopted bound; retained and replayed locally |
+| [Gustavo Massaccesi, proposed `n = 17` lower bound](https://gus-massa.blogspot.com/2026/08/another-better-lower-bound-for-n17.html) | 2026-08 | proposed fixed weighted certificate at `4.5058` | Relevant source and verifier; not peer reviewed or the current frontier, but retained, replayed, and later used as a project control |
 | [Arslanov, Mustafin, and Shangitbayev, *Improved Packings of n(n-1) Unit Squares in a Square*](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v28i4p22) | 2021-11-05 | constructive family for `n^2-n` when the parameter is at least 12, plus three larger exceptions | Already represented in the project; it does not change any prioritized finite case below 100 |
 | [Hong Duc Bui, *Square Packing with Asymptotically Smallest Waste Only Needs Good Squares*](https://arxiv.org/abs/2504.09489) | 2025-04-13 | asymptotic structural reduction | No finite-case record or exact value |
 | [Hong Duc Bui, *Square packing with O(x^0.6) wasted area*](https://arxiv.org/abs/2508.04603) | 2025-08-06; revised 2026-03-15 | asymptotic construction | No finite-case record or exact value for the prioritized list |
@@ -59,9 +59,11 @@ No additional 2020--2026 paper in this retrieved corpus establishes a finite-cas
 record, exact value, or target-specific bound for the prioritized cases.
 The Arslanov family begins above this below-100 list, while the Bui and McClenagan
 results are asymptotic rather than target-specific.
-The recent finite-case changes remain first-party web evidence: catalogue entries and
-SVGs, UnitSquare’s release, run-statistics artifacts, and the two proposed `n = 17`
-weighted certificates.
+Within that 2026-08-31 corpus, the recent finite-case changes were first-party web
+evidence: catalogue entries and SVGs, UnitSquare’s release, run-statistics artifacts,
+and the two proposed `n = 17` weighted certificates. The 2026-09-05 correction below
+records later-discovered sources that make this paragraph unsuitable as a current
+archive-wide conclusion.
 
 This conclusion is deliberately narrower than “the literature is complete.”
 Search index coverage, unpublished correspondence, and uncited papers remain possible
@@ -151,6 +153,34 @@ expressions, and a generative half-turn layout. This narrows the absence above: 
 still no paper or 54-row labeled pose derivation, but the current construction is not
 available only as unexplained decimals. The remaining gap is an exact source parser,
 labeled correspondence, and independent geometry replay.
+
+## Correction and refresh — 2026-09-05
+
+A broader arXiv, Crossref, OpenAlex, Zenodo, and author-record pass found two relevant
+sources that the August 31 search missed:
+
+- Kim Brandwijk’s Zenodo capsule `10.5281/zenodo.21422426` certifies
+  `s(17) > 89/20`. It is historically important and supplies a self-contained exact
+  interval-replay architecture, although Burns, Massaccesi, and later project
+  certificates numerically supersede it.
+- Joost de Winter’s mutable August 2026 author upload reports proposed construction
+  improvements for `n = 68, 126, 206`. The fresh index and direct page exposed different
+  revisions, and the PDF and coordinates were unavailable. The values remain
+  source-asserted and unreplayed. Its `n = 68` comparison also overlooks UnitSquare
+  Release 1’s smaller retained parent.
+
+Bal’s `arXiv:2607.11318v2` is a new rectangle packing/piercing and LP-gap source, but it
+does not establish a finite congruent-unit-square bound. Yang `2608.13595v2`, Singh
+`2601.22163`, the withdrawn `2506.23284`, and Baek et al. `2411.07274` concern the sum
+of side lengths of variable-size squares; Dósa–Lángi–Tuza `2601.16535v3` concerns
+covering. Their titles are close enough to cause repeated false positives, so the
+screening decisions are retained rather than silently discarded.
+
+The complete query responses, Brandwijk capsule and audit, Yang screening copy, and de
+Winter source-availability record are under
+[`literature-refresh-2026-09-05`](../literature-refresh-2026-09-05/README.md). That packet
+supersedes this page for currentness; this page still records the exact scope and result
+of the August 31 search.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

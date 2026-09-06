@@ -172,7 +172,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     assert PYTHON_VERSION.read_text(encoding="utf-8").strip() == "3.14.7"
 
-    for job_name in ("validate", "exhaustive", "macos-portability"):
+    for job_name in ("validate", "suite", "exhaustive", "macos-portability"):
         raw_steps = _mapping(jobs[job_name])["steps"]
         assert isinstance(raw_steps, list)
         steps = [_mapping(step) for step in raw_steps]
@@ -223,11 +223,25 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     validate_steps = _mapping(jobs["validate"])["steps"]
     assert isinstance(validate_steps, list)
-    # The pull-request surface is two concurrent jobs since 2026-09-06, `--checks` here
-    # and `--sweeps` in the `sweeps` job, so a pull request waits for the longer of them
+    # The pull-request surface is four concurrent jobs since 2026-09-06: `--checks`
+    # here, `--geometry` in the `geometry` job, `--suite` in the `suite` job and
+    # `--sweeps` in the `sweeps` job, so a pull request waits for the longest of them
     # rather than their sum. That they partition `--fast` is proved against the CLI's own
     # selector by `test_the_pull_request_jobs_partition_the_surface`; what is pinned here
     # is only that the commands in the file are the ones that test resolves.
+    #
+    # The `--jobs` and `--inner-jobs` figures are part of the pin because they are not
+    # decoration, and every one of them is a measurement someone took:
+    #
+    # * `--jobs 3` here and in `geometry` is three units on four cpus and one cpu of
+    #   headroom. `--jobs 4` was tried on run 34016999060 and refused -- saturating the
+    #   runner inflated every step by thirty to eighty per cent, so four workers over 790
+    #   worker-seconds finished no sooner than three over 470;
+    # * `--jobs 1` in the `suite` job is what hands the behavioural lane four xdist
+    #   workers instead of two -- `_pytest_workers` sizes itself to `cpus - jobs + 1`, so
+    #   a larger number there is a quieter, slower job;
+    # * `--inner-jobs 2` in the `sweeps` job is what wakes the escape screen's process
+    #   pool, which reads `PACK_JOBS`; at 1 it ran serially and was the surface's floor.
     required_step = next(
         _mapping(step)
         for step in validate_steps
@@ -238,6 +252,49 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         "uv run --frozen --all-extras --group dev packing-validate --checks "
         "--jobs 3 --inner-jobs 1"
     )
+    geometry_job = _mapping(jobs["geometry"])
+    assert geometry_job["if"] == "github.event_name == 'pull_request'"
+    geometry_steps = geometry_job["steps"]
+    assert isinstance(geometry_steps, list)
+    geometry_step = next(
+        _mapping(step)
+        for step in geometry_steps
+        if _mapping(step).get("name") == "Run the required pull-request geometry checks"
+    )
+    assert " ".join(str(geometry_step["run"]).split()) == (
+        "uv run --frozen --all-extras --group dev packing-validate --geometry "
+        "--jobs 3 --inner-jobs 1"
+    )
+    # Shallow, like `sweeps` and unlike `validate` and `suite`. The step that needs full
+    # history is `provenance`, and it is in the `validate` half; a job that cloned deep
+    # for no reason would pay for it on every pull request.
+    geometry_checkout = next(
+        _mapping(step)
+        for step in geometry_steps
+        if str(_mapping(step).get("uses", "")).startswith("actions/checkout@")
+    )
+    assert "fetch-depth" not in _mapping(geometry_checkout["with"])
+    suite_job = _mapping(jobs["suite"])
+    assert suite_job["if"] == "github.event_name == 'pull_request'"
+    suite_steps = suite_job["steps"]
+    assert isinstance(suite_steps, list)
+    suite_step = next(
+        _mapping(step)
+        for step in suite_steps
+        if _mapping(step).get("name") == "Run the required pull-request behavioral lane"
+    )
+    assert " ".join(str(suite_step["run"]).split()) == (
+        "uv run --frozen --all-extras --group dev packing-validate --suite "
+        "--jobs 1 --inner-jobs 1"
+    )
+    # Full history, like `validate` and unlike `sweeps`: the behavioural lane includes
+    # tests that shell out to git, and they read whatever the checkout gave them.
+    suite_checkout = next(
+        _mapping(step)
+        for step in suite_steps
+        if str(_mapping(step).get("uses", "")).startswith("actions/checkout@")
+    )
+    assert _mapping(suite_checkout["with"])["fetch-depth"] == 0
     sweep_steps = _mapping(jobs["sweeps"])["steps"]
     assert isinstance(sweep_steps, list)
     sweep_step = next(
@@ -247,7 +304,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     )
     assert " ".join(str(sweep_step["run"]).split()) == (
         "uv run --frozen --all-extras --group dev packing-validate --sweeps "
-        "--jobs 4 --inner-jobs 1"
+        "--jobs 4 --inner-jobs 2"
     )
     full_step = next(
         _mapping(step)
@@ -289,12 +346,12 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     ]
 
     required_job = _mapping(jobs["packing-required"])
-    # Both halves of the pull-request surface, and this is the assertion that keeps them
-    # mandatory. Splitting `--fast` across two concurrent jobs buys wall time only if a
-    # pull request still cannot merge without both, so a `needs` naming one of them would
-    # turn the other into an advisory check that nothing blocks on -- the failure mode the
-    # split is otherwise a clean win against.
-    assert required_job["needs"] == ["validate", "sweeps"]
+    # Every part of the pull-request surface, and this is the assertion that keeps them
+    # mandatory. Splitting `--fast` across concurrent jobs buys wall time only if a pull
+    # request still cannot merge without all of them, so a `needs` naming three of the
+    # four would turn the fourth into an advisory check that nothing blocks on -- the
+    # failure mode the split is otherwise a clean win against.
+    assert required_job["needs"] == ["validate", "geometry", "suite", "sweeps"]
     # `!cancelled()`, not `always()`, and the difference is D-380. With `always()` a run
     # superseded by the next push -- routine, since the workflow sets
     # `cancel-in-progress: true` and OR-3 says to push and keep working -- reached this job
@@ -306,17 +363,20 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     assert "continue-on-error" not in required_job
     required_job_steps = required_job["steps"]
     assert isinstance(required_job_steps, list)
-    # One `test` per prerequisite, and both of them, because `needs` alone does not make a
-    # job's failure fatal here: this job runs under `!cancelled()`, so it is reached even
-    # when a prerequisite failed, and it is the shell that decides. A missing line would
-    # leave that half green whatever it reported.
+    # One `test` per prerequisite, and all four of them, because `needs` alone does not
+    # make a job's failure fatal here: this job runs under `!cancelled()`, so it is reached
+    # even when a prerequisite failed, and it is the shell that decides. A missing line
+    # would leave that part of the surface green whatever it reported.
     required_command = " ".join(str(_mapping(required_job_steps[0])["run"]).split())
     assert required_command == (
-        'test "$VALIDATE_RESULT" = "success" test "$SWEEPS_RESULT" = "success"'
+        'test "$VALIDATE_RESULT" = "success" test "$GEOMETRY_RESULT" = "success" '
+        'test "$SUITE_RESULT" = "success" test "$SWEEPS_RESULT" = "success"'
     )
     required_env = _mapping(_mapping(required_job_steps[0])["env"])
     assert required_env == {
         "VALIDATE_RESULT": "${{ needs.validate.result }}",
+        "GEOMETRY_RESULT": "${{ needs.geometry.result }}",
+        "SUITE_RESULT": "${{ needs.suite.result }}",
         "SWEEPS_RESULT": "${{ needs.sweeps.result }}",
     }
 
@@ -527,7 +587,7 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
     Four limits of the rule, recorded rather than smoothed over:
 
     * A marker is per function, so a parametrized test moves with all of its cases even
-      when only one case was over. The 62 functions are 92 collected tests.
+      when only one case was over. The 64 functions are 94 collected tests.
     * `call` time only. A module-scoped fixture bills its whole cost to whichever test
       triggers it first -- `test_every_control_rejects` reports 13.1s of setup that
       belongs to `determination`, which three other tests in that file also use -- so
@@ -596,11 +656,10 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_exact_construction_price.py": {
             "test_the_record_round_trips",  # 21.8s
         },
-        # 9s of call time across 3.
+        # 7s of call time across 2.
         "test_fractional_certificate.py": {
             "test_containment_at_exactly_one_is_refused",  # 4.4s
             "test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover",  # 2.5s
-            "test_breaking_the_symmetry_of_the_n12_atoms_is_refused",  # 2.0s
         },
         # 264s of call time across 1.
         "test_fractional_generate.py": {
@@ -658,8 +717,14 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_motion_lab_is_environment_independent",  # 3.3s
             "test_rendered_lab_is_deterministic_retained_and_offline",  # 3.0s
         },
-        # 16s of call time across 5.
+        # 6.10s on CI's three-worker pull-request surface, measured 2026-09-06.
+        "test_motion_lab_interactive.py": {
+            "test_service_serves_live_and_exact_profiles_with_scenario_refresh",
+        },
+        # 22s of call time across 6. The contact-model test measured 5.82s on CI's
+        # three-worker pull-request surface on 2026-09-06.
         "test_n40_rigidity.py": {
+            "test_the_contact_model_is_measured_not_assumed",
             "test_the_witness_is_a_motion_checked_from_the_pose",  # 4.2s
             "test_only_tight_rows_enter_the_obstruction",  # 3.8s
             "test_the_witness_turns_every_block_square_at_the_same_rate",  # 3.5s

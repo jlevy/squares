@@ -67,6 +67,7 @@ think-ecqk.
 Usage:
     uv run --frozen python -m devtools.screen_translation_escape --update
     uv run --frozen python -m devtools.screen_translation_escape --check
+    uv run --frozen python -m devtools.screen_translation_escape --check --jobs 4
 """
 
 from __future__ import annotations
@@ -74,6 +75,7 @@ from __future__ import annotations
 import argparse
 import json
 from collections.abc import Sequence
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 from typing import Any
 
@@ -83,6 +85,7 @@ from strif import atomic_output_file
 
 from sqpack.verify import Square, edge_axes, float_sign, project, verify_packing
 from sqpack.witness import load_witness, materialize_witness
+from sqpack.workers import worker_count
 from sqpack.yamlio import load_yaml
 
 type Scalar = Any
@@ -613,33 +616,115 @@ def load_record(n: int) -> tuple[Sequence[Square], Scalar, list[int]]:
     return materialize_record(entry)
 
 
-def screen_corpus() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Screen the whole known-best corpus; returns (cases, exclusions)."""
+def _exclusion(entry: dict[str, Any], residual: Scalar) -> dict[str, Any]:
+    """Why one record is screened out rather than reported on."""
+    return {
+        "bead": EXCLUSION_BEAD,
+        "n": entry["n"],
+        "note": (
+            "The witness pieces are not unit squares to a residual far "
+            "larger than any contact tolerance screened here, so contacts "
+            "stop registering and nearly every square reports movable. "
+            "That is a witness-fidelity artifact, not a finding about the "
+            "packing."
+        ),
+        "reason": "witness-shape-residual-above-limit",
+        "shape_residual": _decimal(residual),
+        "source_kind": entry["source"]["kind"],
+    }
+
+
+def _configure_worker() -> None:
+    """Set the working precision in a pool worker, before it touches any arithmetic.
+
+    `mp.mp.dps` is per-process global state, and a `forkserver` or `spawn` child inherits
+    none of it: it starts at mpmath's default of 15 digits.  That is the worst failure
+    this file could have, because it is silent.  Measured: the same materialized geometry
+    screened at 15 digits does not raise, it publishes different decimals -- `n=10`'s
+    `min_pair_separation` reads `0.0` instead of `-6.85757712109491657265e-30` -- so the
+    output would look like a result rather than like a bug.
+
+    Belt and braces, deliberately.  `materialize_record` sets the precision and so does
+    `_screen_entry`; this covers the worker before it reaches either, and keeps the
+    guarantee where the process boundary is rather than three calls inside it.
+    """
     mp.mp.dps = DIGITS
-    cases: list[dict[str, Any]] = []
-    excluded: list[dict[str, Any]] = []
-    for entry in manifest_entries():
+
+
+def _screen_entry(entry: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
+    """Screen one manifest entry: `(True, case)`, or `(False, exclusion)`.
+
+    The whole unit of parallel work, and the process boundary is drawn here rather than
+    around `screen_record` on purpose.  What crosses it in either direction is JSON: a
+    manifest entry going out, and a case or an exclusion coming back, whose every scalar
+    `_decimal` has already rendered to a string.  No mpmath object is ever pickled, so no
+    digit can be lost to a round trip -- the record is materialized in the process that
+    screens it, at the precision that process set.
+    """
+    mp.mp.dps = DIGITS
+    try:
         squares, side, square_ids = materialize_record(entry)
         residual = shape_residual(squares)
         if residual > SHAPE_RESIDUAL_LIMIT:
-            excluded.append(
-                {
-                    "bead": EXCLUSION_BEAD,
-                    "n": entry["n"],
-                    "note": (
-                        "The witness pieces are not unit squares to a residual far "
-                        "larger than any contact tolerance screened here, so contacts "
-                        "stop registering and nearly every square reports movable. "
-                        "That is a witness-fidelity artifact, not a finding about the "
-                        "packing."
-                    ),
-                    "reason": "witness-shape-residual-above-limit",
-                    "shape_residual": _decimal(residual),
-                    "source_kind": entry["source"]["kind"],
-                }
-            )
-            continue
-        cases.append(screen_record(entry["n"], squares, side, square_ids))
+            return False, _exclusion(entry, residual)
+        return True, screen_record(entry["n"], squares, side, square_ids)
+    except Exception as error:
+        # A pool reports the failure without saying which unit raised it, and several of
+        # the messages this can surface name only a square index.  Naming the record here
+        # keeps a failure attributable whichever way the corpus was screened.
+        message = str(error)
+        prefix = f"n={entry['n']}"
+        blamed = message if message.startswith(prefix) else f"{prefix}: {message}"
+        raise ValueError(blamed) from error
+
+
+def screen_corpus(
+    workers: int | None = None,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Screen the whole known-best corpus; returns (cases, exclusions).
+
+    Every record is independent of every other -- each loads its own witness and reads
+    contacts only within itself -- so this is a map, and it was a serial one.  It cost
+    110.66s in the `sweeps` job of run 34010683180, which is a floor under that job's
+    wall: no GitHub job finishes before its own longest step, so no rearrangement of jobs
+    shortens this and the only lever is inside the step.  That is `BC-218`'s finding one
+    level down.
+
+    The corpus divides well, which is not automatic.  Measured serially on a four-core
+    box: 104.45s over 100 records, the dearest of them 3.41s at `n=66` and the ten
+    dearest a quarter of the total.  The largest indivisible unit is an eighth of a
+    four-worker ideal, so no single record can hold the wall up -- and it does not.
+    `--check` on that box, best of five interleaved runs each: 103.94s in one process,
+    52.11s at two workers, 35.40s at three, 27.50s at four.  That is 3.78x on four cores,
+    against a 4x ceiling that also has to pay one interpreter start and one pool.
+
+    `workers` is the pool size.  `None` asks `sqpack.workers.worker_count`, which reads
+    the `PACK_JOBS` cap the gate exports to every step -- the same contract
+    `check_golden_basins`, `check_regressions` and `check_soundness_perimeter` use, and
+    the one `_prospective_atlas` in `validate.py` names as the lever it is missing.  The
+    pull-request tiers set that cap to 1, so under them this stays exactly as serial as
+    it was until a tier says otherwise: the count is never taken from the machine behind
+    the gate's back, which is the mistake that put nineteen ordinary tests over the quick
+    lane's per-test ceiling on contention alone.  `1` runs in this process rather than
+    through a pool, because a one-worker pool is a subprocess and a protocol for no
+    concurrency at all.
+
+    Order is the manifest's, whichever way it ran.  `pool.map` yields by submission index
+    rather than by completion, so `cases` and `excluded` are built in the same order the
+    serial loop built them in -- which `screen_errors` re-checks by requiring ascending
+    `n`, and which is what lets `check` compare the regenerated document byte for byte.
+    """
+    mp.mp.dps = DIGITS
+    entries = manifest_entries()
+    requested = worker_count(len(entries)) if workers is None else workers
+    count = max(1, min(requested, len(entries)))
+    if count == 1:
+        screened = [_screen_entry(entry) for entry in entries]
+    else:
+        with ProcessPoolExecutor(max_workers=count, initializer=_configure_worker) as pool:
+            screened = list(pool.map(_screen_entry, entries))
+    cases = [record for is_case, record in screened if is_case]
+    excluded = [record for is_case, record in screened if not is_case]
     return cases, excluded
 
 
@@ -682,8 +767,8 @@ def screen_errors(screen: dict[str, Any]) -> list[str]:
     return errors
 
 
-def expected_document() -> dict[str, Any]:
-    cases, excluded = screen_corpus()
+def expected_document(workers: int | None = None) -> dict[str, Any]:
+    cases, excluded = screen_corpus(workers)
     aggregate = {
         "movable_squares": sum(case["movable_square_count"] for case in cases),
         "records_excluded": len(excluded),
@@ -762,15 +847,15 @@ def _summary(document: dict[str, Any]) -> str:
     )
 
 
-def update() -> None:
-    document = expected_document()
+def update(workers: int | None = None) -> None:
+    document = expected_document(workers)
     with atomic_output_file(OUTPUT) as temporary:
         temporary.write_text(_json_text(document), encoding="utf-8")
     print(f"translation escape screen updated: {_summary(document)}")
 
 
-def check() -> None:
-    document = expected_document()
+def check(workers: int | None = None) -> None:
+    document = expected_document(workers)
     if not OUTPUT.is_file() or OUTPUT.read_text(encoding="utf-8") != _json_text(document):
         raise ValueError("translation escape screen is missing or stale")
     print(f"translation escape screen check passed: {_summary(document)}")
@@ -781,8 +866,19 @@ def main() -> int:
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--update", action="store_true")
     mode.add_argument("--check", action="store_true")
+    parser.add_argument(
+        "--jobs",
+        type=int,
+        metavar="N",
+        default=None,
+        help=(
+            "processes to screen the corpus with; the default follows the PACK_JOBS cap "
+            "the gate exports, and the whole machine when there is no gate"
+        ),
+    )
     args = parser.parse_args()
-    update() if args.update else check()
+    workers: int | None = args.jobs
+    update(workers) if args.update else check(workers)
     return 0
 
 

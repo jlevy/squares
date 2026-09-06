@@ -1,0 +1,496 @@
+{
+  "schema": "packing.squares:bc-240-trump-local-theorem/v1",
+  "schema_version": 1,
+  "cell": "BC-240",
+  "bead": "think-4ln1",
+  "status": "author_terminal_packet_awaiting_source_distinct_review",
+  "official_t0": "2026-09-06T03:31:00Z",
+  "launch_revision": "c55726e1e885227f63110131c0a914665175ff89",
+  "post_launch_shared_head_observation": {
+    "current_head": "c44562409e7b48578df99fcae9e1cf61856158bc",
+    "history": [
+      {
+        "head": "15514b502e68f3a2f1a4dfea6f2e80795664bdcf",
+        "disposition": "unrelated CI-only snapshot-pruning fix"
+      },
+      {
+        "head": "a70e002e690725ce4c576caf8c057bee25ff3479",
+        "disposition": "upstream reconciliation merge"
+      },
+      {
+        "head": "8cc0af436b0249db8cc8f44e2a6659a573aeda08",
+        "disposition": "CI-only measured-slow-node classification after reconciliation"
+      },
+      {
+        "head": "c44562409e7b48578df99fcae9e1cf61856158bc",
+        "disposition": "later shared-checkout merge of the 8cc0af43 line with c743d7bb; present before the 2026-09-06T04:38:15Z terminal declaration"
+      }
+    ],
+    "coordinator_disposition": "all transitions are outside BC-240; the packet remains bound to the launch revision",
+    "frozen_input_diff_from_launch": false,
+    "agenda_026_diff_from_launch": false,
+    "replay_repeated_after_head_change": false
+  },
+  "commissioning_contract": {
+    "packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md": "011b9e11f393a67bc09b9a37e598252bef8acc6cb2274815ec6d7d2ca2431160",
+    "packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md": "096470755cb056d6dcd9d103d4233819d03f8bff9035e1027d213ca51ab4cb49",
+    "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/launch-t-plus-00.md": "e0a8a7ed4e2d838796c2ae9f68f9c8b9a91bc412052e270bd9cbf190df8683cd"
+  },
+  "theorem_document": "packing/cases/trump11/isolation-theorem.md",
+  "write_scope": [
+    "packing/cases/trump11/isolation-theorem.md",
+    "packing/campaign/series/series-000-smoke-and-calibration/results/bc-240-trump-local-theorem.json"
+  ],
+  "chart": {
+    "anchoring": "container lower-left corner fixed at the origin",
+    "container": "[0,U]^2",
+    "labels_fixed": true,
+    "side_fixed": true,
+    "side": "U",
+    "variables": 33,
+    "coordinates": "(x_i,y_i,theta_i) for i=0,...,10",
+    "corner_model": "c_i + R(theta_i) q_m for q_m in {(+-1/2,+-1/2)}",
+    "packing_semantics": "closed unit squares contained in the closed container with pairwise disjoint interiors; boundary touching allowed",
+    "angle_units": "radians",
+    "angle_scope": "local representatives at the exact witness; no quarter-turn chart crossing",
+    "norm": "sup norm over the 33 pose coordinates",
+    "declared_box_sup_radius": "1/64",
+    "varying_side_convention": "U+sigma is separate from the 33 pose coordinates and is not included in the norm"
+  },
+  "exact_witness": {
+    "n": 11,
+    "field": "Q(u)",
+    "u_minimal_polynomial_high_degree_first": [
+      5,
+      -10,
+      -2,
+      14,
+      12,
+      -6,
+      2,
+      2,
+      -1
+    ],
+    "u_isolating_interval": [
+      "36/100",
+      "37/100"
+    ],
+    "side_expression": "(6u+4)/(1+2u-u^2)",
+    "side_minimal_polynomial_high_degree_first": [
+      1,
+      -20,
+      178,
+      -842,
+      1923,
+      -496,
+      -6754,
+      12420,
+      -6865
+    ],
+    "side_decimal": "3.87708359002281417730789706010096270637645566846",
+    "verified_square_count": 11,
+    "verified_pair_count": 55,
+    "boundary_corner_coordinate_count": 20,
+    "zero_gap_pair_count": 14,
+    "strict_pair_count": 41
+  },
+  "branch_packet": {
+    "pose_variables": 33,
+    "raw_active_feature_count": 24,
+    "linearized_local_option_count": 22,
+    "wall_incidence_count": 11,
+    "wall_tangent_row_count": 20,
+    "pair_contact_count": 14,
+    "wall_incidences": [
+      {"square": 0, "wall": "left", "support_corners": [0, 3], "tangent_rows": 2},
+      {"square": 0, "wall": "bottom", "support_corners": [0, 1], "tangent_rows": 2},
+      {"square": 1, "wall": "right", "support_corners": [1, 2], "tangent_rows": 2},
+      {"square": 1, "wall": "bottom", "support_corners": [0, 1], "tangent_rows": 2},
+      {"square": 2, "wall": "top", "support_corners": [2, 3], "tangent_rows": 2},
+      {"square": 3, "wall": "left", "support_corners": [0, 3], "tangent_rows": 2},
+      {"square": 3, "wall": "top", "support_corners": [2, 3], "tangent_rows": 2},
+      {"square": 4, "wall": "top", "support_corners": [2, 3], "tangent_rows": 2},
+      {"square": 5, "wall": "left", "support_corners": [0, 3], "tangent_rows": 2},
+      {"square": 7, "wall": "bottom", "support_corners": [0], "tangent_rows": 1},
+      {"square": 10, "wall": "right", "support_corners": [1], "tangent_rows": 1}
+    ],
+    "pair_contacts": [
+      {"pair": [0, 6], "raw_options": 1, "derivative_options": 1, "selected_tangent_rows": 1},
+      {"pair": [1, 9], "raw_options": 1, "derivative_options": 1, "selected_tangent_rows": 1},
+      {"pair": [2, 8], "raw_options": 1, "derivative_options": 1, "selected_tangent_rows": 1},
+      {"pair": [2, 10], "raw_options": 1, "derivative_options": 1, "selected_tangent_rows": 1},
+      {"pair": [3, 4], "raw_options": 2, "derivative_options": 1, "selected_tangent_rows": 2},
+      {"pair": [3, 5], "raw_options": 2, "derivative_options": 1, "selected_tangent_rows": 2},
+      {"pair": [4, 5], "raw_options": 4, "derivative_options": 4, "selected_tangent_rows": 2},
+      {"pair": [4, 8], "raw_options": 1, "derivative_options": 1, "selected_tangent_rows": 1},
+      {"pair": [5, 6], "raw_options": 1, "derivative_options": 1, "selected_tangent_rows": 1},
+      {"pair": [6, 7], "raw_options": 2, "derivative_options": 2, "selected_tangent_rows": 2},
+      {"pair": [6, 8], "raw_options": 2, "derivative_options": 2, "selected_tangent_rows": 2},
+      {"pair": [7, 9], "raw_options": 2, "derivative_options": 2, "selected_tangent_rows": 2},
+      {"pair": [8, 9], "raw_options": 2, "derivative_options": 2, "selected_tangent_rows": 2},
+      {"pair": [9, 10], "raw_options": 2, "derivative_options": 2, "selected_tangent_rows": 2}
+    ],
+    "selected_pair_tangent_rows_per_branch": 22,
+    "incidental_zero_projection_noncontacts": [
+      [
+        0,
+        4
+      ],
+      [
+        2,
+        5
+      ]
+    ],
+    "incidental_noncontact_disposition": "each pair also has a strictly separating feature, is locally interior, and contributes no active row",
+    "raw_selection_count": 512,
+    "derivative_distinct_branch_count": 128,
+    "rows_per_branch": 42,
+    "rank_per_branch": 33,
+    "exact_zero_certificates": 128,
+    "exact_nonzero_directions": 0,
+    "unresolved_cones": 0,
+    "determination": "all branchwise fixed-side linearized cones are zero",
+    "determination_scope": "the linearized cones overapproximate the true Bouligand tangent; zero on every complete local branch forces a zero true tangent"
+  },
+  "normalization_and_symmetry": {
+    "direction_normalization": "a hypothetical nonzero displacement is divided by its original 33-coordinate sup norm",
+    "unit_sphere_decomposition": "66 faces, one for each choice of a coordinate and sign +/-1",
+    "stress_normalization": "arbitrary positive scale; only exact positivity, A_b^T lambda_b=0, positive far-wall stress, and scale-invariant ratios are used",
+    "local_quotient": "none; square labels and local angle representatives remain fixed",
+    "distinct_d4_or_relabelling_threshold": "1/8",
+    "symmetry_half_distance_cap": "1/16",
+    "per_row_norm_conversion": "multiplying row j by 2/K_j makes the weighted branch modulus a lower bound in the original 33-coordinate sup norm"
+  },
+  "constants": {
+    "uniform": {
+      "radius_rational_lower_bound": "288616983/125000000000",
+      "radius_decimal_lower_bound": "0.002308935864",
+      "quadratic_constant_rational_upper_bound": "2808470331/125000000",
+      "quadratic_constant_decimal_upper_bound": "22.467762648",
+      "curvature_rational_upper_bound": "4972105219/500000000",
+      "curvature_decimal_upper_bound": "9.944210438",
+      "binding_radius_cap": "modulus_2kappa_over_K"
+    },
+    "per_row_preferred": {
+      "radius_rational_lower_bound": "808514697/200000000000",
+      "radius_decimal_lower_bound": "0.004042573485",
+      "quadratic_constant_rational_upper_bound": "2574612531/200000000",
+      "quadratic_constant_decimal_upper_bound": "12.873062655",
+      "binding_radius_cap": "modulus_per_row_K"
+    },
+    "uniform_other_caps": {
+      "declared_box": "1/64",
+      "gap_to_lipschitz_rational_lower_bound_short": "5875508797/1000000000000",
+      "gap_to_lipschitz_decimal_lower_bound": "0.005875508797",
+      "symmetry_half_distance": "1/16"
+    },
+    "modulus": {
+      "completed_branches": 128,
+      "minimum_lower_decimal": "0.0114802720615064442376926526944",
+      "other_class_lower_decimal": "0.01642384489781872674754032859526",
+      "face_linear_programs_per_branch_per_pass": 66,
+      "uniform_face_linear_programs": 8448,
+      "per_row_weighted_face_linear_programs": 8448,
+      "total_face_linear_programs_across_two_passes": 16896,
+      "per_row_scaling": "row j is scaled by 2/K_j, so its weighted modulus is directly a radius lower bound"
+    }
+  },
+  "theorem": {
+    "quantifier": "for either retained (radius,quadratic constant) pair, with the per-row pair preferred",
+    "fixed_side_local_isolation": "If a labelled pose z packs the 11 closed unit squares in [0,U]^2 and ||z-z_*||_infinity is strictly below the paired radius, then z=z_*.",
+    "side_stability": "If the same labelled pose fits in [0,s']^2 with s'<=U, uses the same origin, and lies strictly inside the paired pose ball, then z=z_* and s'=U.",
+    "equality_case": "Within the stated local side comparison, equality occurs only at the retained labelled Trump pose at side U.",
+    "quadratic_side_bound": "For v=z-z_*, a feasible pose at side U+sigma in the same ball satisfies sigma >= -C ||v||_infinity^2 for the paired C.",
+    "branch_selection": "The retained inactive-gap and branch-completeness guards place every feasible pose in the ball on one of the 512 raw selections represented by the 128 derivative-distinct branches."
+  },
+  "proof_dependencies": [
+    "exact witness containment, separation, and field checks",
+    "complete retained 512-to-128 local support-branch map",
+    "exact rank-33 and positive-stress zero-cone certificate for every 42-by-33 branch matrix",
+    "retained exact lower bounds for every branch modulus",
+    "retained uniform and per-row second-order remainder bounds",
+    "retained inactive-gap, declared-box, and symmetry caps",
+    "positive far-wall stress and the retained exact stress-ratio identity"
+  ],
+  "retained_record_guards": {
+    "bc199_identification": {
+      "distinct_branch_rows": 56,
+      "distinct_tied_gradients": 119,
+      "tied_functions_on_walls_and_contacts": 78,
+      "every_branch_row_is_a_tied_elementary_gradient": true
+    },
+    "bc199_selftests": {
+      "inverse_sqrt2_upper_bound": true,
+      "pi_bounds_ordered": true,
+      "sqrt2_upper_bound": true
+    },
+    "bc199_symmetry": {
+      "certified_distance_at_least_threshold": true,
+      "threshold": "1/8",
+      "half_distance_radius": "1/16"
+    }
+  },
+  "inputs": {
+    "packing/campaign/series/series-000-smoke-and-calibration/results/exp-013-h-026-trump-tangent.json": "60a4b7c48034b37063509a8a641974ed5eae86dccd056e9cbc6cf2fd7f2f0661",
+    "packing/campaign/series/series-000-smoke-and-calibration/results/bc-199-trump-isolation-radius.json": "db124b9956d8051682388cbba3b16772e65406a0003debba1c92b915c0c489a8",
+    "packing/cases/trump11/packing.py": "3b4eae938c37c13af6252ac5d83fa99aa95f6b1627b99920c5df8be94c56bea9",
+    "packing/cases/trump11/tangent_cones.py": "17302de574d9f7bc377cbc1dc4c537dc60976d6a1e4e63432adb5fa184058765",
+    "packing/cases/trump11/isolation_radius.py": "3b4f754b8a77c0a6edb12a8f669e705594817992f9983956d308aa7b343031b4",
+    "packing/cases/trump11/verify_exact.py": "29156a613a23fa8a9e915500d71841938bb714b9b7669c23dbcb973463071c52"
+  },
+  "frozen_source_binding": {
+    "tangent_cones_record_producing_sha256": "31f1c09ff296fdb99a8f6e1f26803350c043796029c40c43b33c1d5637e8dc86",
+    "tangent_cones_launch_sha256": "17302de574d9f7bc377cbc1dc4c537dc60976d6a1e4e63432adb5fa184058765",
+    "drift_disposition": "documented semantics-only removal of the unused exact_pivot_rows field argument and adjustment of callers; current exact replay passed",
+    "radius_generator_frozen_by_bc199": false,
+    "radius_generator_record_producing_sha256": "56a2c6f474f1e236eb33d2dbdd799c7a88310de57ab4f7998d98755cc8065bc4",
+    "radius_generator_launch_drift": "two exact_pivot_rows call sites adjusted for the removed unused argument and one Archimedes-bound provenance comment expanded",
+    "radius_generator_launch_sha256_recorded_without_promotion": "3b4f754b8a77c0a6edb12a8f669e705594817992f9983956d308aa7b343031b4"
+  },
+  "execution_environment": {
+    "project_python_version_file": "packing/.python-version",
+    "project_python_version": "3.14.7",
+    "interpreter_identity_command": "packing/.venv/bin/python3 --version",
+    "interpreter_identity_exit_code": 0,
+    "interpreter_identity_output": "Python 3.14.7",
+    "uv_python_symlink": "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "scientific_commands_cwd": "packing",
+    "scientific_commands_used_login_shell": false
+  },
+  "author_checks": [
+    {
+      "cwd": "packing",
+      "command": "uv run --frozen python -m cases.trump11.verify_exact",
+      "exit_code": 0,
+      "program_reported_wall_seconds": 0.139,
+      "output": {
+        "outcome": "VALID",
+        "squares": 11,
+        "pairs_tested": 55,
+        "boundary_corner_coordinates": 20,
+        "zero_gap_pairs": 14,
+        "strict_pairs": 41,
+        "field": "Q(u), degree 8, u=tan(a/2)",
+        "interval_refinements_needed": 0,
+        "published_side_polynomial_zero": true,
+        "side": "3.87708359002281417730789706010096270637645566846"
+      }
+    },
+    {
+      "cwd": "packing",
+      "command": "uv run --frozen python -m cases.trump11.tangent_cones --replay campaign/series/series-000-smoke-and-calibration/results/exp-013-h-026-trump-tangent.json",
+      "exit_code": 0,
+      "program_reported_elapsed_seconds": 11.023023,
+      "output": {
+        "schema_version": 1,
+        "record_replayed": true,
+        "raw_branch_count": 512,
+        "branch_count": 128,
+        "exact_zero_certificates": 128,
+        "exact_nonzero_directions": 0,
+        "unresolved_cones": 0,
+        "determination_outcome": "criterion_met",
+        "selftests": {
+          "duplicate_branch_records_are_rejected": true,
+          "flexible_cone_has_no_positive_stress": true,
+          "rigid_cone_has_positive_stress": true,
+          "trump_wall_omission_has_exact_nonzero_direction": true,
+          "u_interval_contains_exactly_one_root": true,
+          "u_polynomial_irreducible_over_Q": true,
+          "u_polynomial_squarefree": true
+        }
+      }
+    }
+  ],
+  "operational_attempts": [
+    {
+      "command": "uv run --frozen python -m cases.trump11.verify_exact",
+      "exit_code": 2,
+      "scientific_program_started": false,
+      "disposition": "login-shell initialization and default uv-cache access were denied by the managed environment; reran the exact command unchanged in a non-login approved environment"
+    }
+  ],
+  "not_run": {
+    "radius_generator": "cases.trump11.isolation_radius",
+    "reason": "the generator has --record but no --replay and BC-199 does not retain every per-face primal and dual witness",
+    "missing_per_face_witnesses_recreated": false,
+    "full_radius_replay_claimed": false,
+    "focused_tests_run_by_bc240_author": false
+  },
+  "claim_boundary": {
+    "retained_bc199_text": "Lower bound on the chart-distance radius, in the anchored centre-angle chart at fixed side U = Trump's exact side: no chart point within rho_0 of the labelled pose in the sup norm is a packing in [0, U]^2 other than the pose itself. Side-stability clause: a packing of side s' <= U embedded in [0, U]^2 is a feasible pose at side U, so any such packing within rho_0 of the pose is the pose, which touches all four walls, hence s' = U; on the same ball a packing at side U + sigma satisfies sigma >= -C ||v||^2 for every branch stress. No optimality, no uniqueness beyond the ball, no global statement, and nothing about a different geometrical arrangement of the unit squares.",
+    "established": [
+      "local fixed-side isolation in the labelled anchored 33-variable sup-norm chart",
+      "local side stability for s'<=U with equality only at the retained pose",
+      "local quadratic lower bound on side displacement in the same certified ball"
+    ],
+    "refused": [
+      "a full pose-side chart theorem",
+      "a theorem for a different labeling or contact type outside the certified ball",
+      "global optimality of Trump's side",
+      "global uniqueness",
+      "global capture",
+      "an independent replay of all radius face linear programs",
+      "recreation of missing per-face primal or dual witnesses",
+      "any frontier or standing-best change"
+    ]
+  },
+  "bc241_unexecuted_controls": {
+    "positive_checks": [
+      "verify frozen hashes and classify source drift",
+      "replay the exact exp-013 tangent endpoint from a source-distinct context",
+      "recompute the aggregate rational minimum, caps, and norm conversions from the retained BC-199 record",
+      "audit selected branch and face calculations against the archived generator source"
+    ],
+    "falsifying_mutations": [
+      {
+        "control": "active_row_identity",
+        "mutation": "change one coefficient in a retained active row before elementary-function matching",
+        "required_refusal": "exact row identification no longer matches the tied elementary gradient"
+      },
+      {
+        "control": "branch_sign",
+        "mutation": "multiply one selected separating-axis row by -1 while retaining its recorded stress",
+        "required_refusal": "the exact stress residual or retained branch signature no longer verifies"
+      },
+      {
+        "control": "norm_conversion",
+        "mutation": "replace one per-row factor 2/K_j by 1/K_j",
+        "required_refusal": "the weighted modulus no longer reproduces the retained preferred radius and the norm-conversion comparison rejects it"
+      }
+    ]
+  },
+  "review": {
+    "required": true,
+    "author_may_self_certify_bc241": false,
+    "reject_on": [
+      "constant mismatch against retained BC-199 bytes",
+      "chart or norm drift",
+      "unresolved tangent branch",
+      "source drift not shown to be semantics-neutral",
+      "claim inflation beyond the local fixed-side boundary"
+    ]
+  },
+  "time_accounting": {
+    "budget_active_minutes": 105,
+    "resume_checkpoint_required_at_active_minute": 60,
+    "resume_must_not_repeat_completed_replay": true,
+    "terminal_packet_due_by_active_minute": 105
+  },
+  "minute_60_resume_checkpoint": {
+    "wall_timestamp": "2026-09-06T04:33:15Z",
+    "active_portfolio_minutes": 60,
+    "role_assigned_minutes": 60,
+    "role_assigned_minutes_basis": "the BC-240 floating lane remained assigned for all 60 active commissioning minutes; the coordinator's 2 minute 15 second shared-clock pause is excluded, and no child agent or background scientific process was used",
+    "attentive_agent_minutes": null,
+    "attentive_minutes_basis": "unavailable because model-attention telemetry was not recorded; role assignment is not used as a proxy",
+    "completed": [
+      "bound the packet to launch revision c55726e1e885227f63110131c0a914665175ff89 and the frozen exp-013/BC-199/witness hashes",
+      "ran the exact witness command successfully once under Python 3.14.7 after one recorded pre-program login-shell failure",
+      "ran the retained exp-013 tangent replay successfully once: 512 raw selections, 128 exact zero certificates, zero nonzero directions, and zero unresolved cones",
+      "drafted the anchored fixed-side local theorem and machine-readable companion only at the two reserved paths",
+      "audited constants, active sets, 33-coordinate sup-norm conversions, source drift, local-only scope, JSON syntax, Markdown format, and common-doc footer",
+      "recorded that the radius generator, missing per-face witness recreation, focused tests, extra replay, global claim, and successor work were not run"
+    ],
+    "open": [
+      "complete the deliberate minute-60 interruption and resume without repeating either scientific command",
+      "perform the final static scope, syntax, formatting, hash, and zero-live-process audit",
+      "incorporate any closure-manager review correction only within the two reserved paths",
+      "return the terminal manifest and review note to the closure manager and coordinator by active minute 105"
+    ],
+    "frozen_hashes": {
+      "launch_revision": "c55726e1e885227f63110131c0a914665175ff89",
+      "exp_013_tangent_record_sha256": "60a4b7c48034b37063509a8a641974ed5eae86dccd056e9cbc6cf2fd7f2f0661",
+      "bc_199_radius_record_sha256": "db124b9956d8051682388cbba3b16772e65406a0003debba1c92b915c0c489a8"
+    },
+    "pre_stanza_output_hashes": {
+      "packing/cases/trump11/isolation-theorem.md": "8f7a775b7a10bb53e45462b749c58754427f517d3ccc5c36e7cccf51ee1514c4",
+      "packing/campaign/series/series-000-smoke-and-calibration/results/bc-240-trump-local-theorem.json": "dba8f16230c50aa2acb1b947af626ea5a27b6c987026245c24a3c54b079b0c99"
+    },
+    "hash_scope_note": "the JSON digest above is the pre-stanza byte hash because a file cannot contain its own final digest; the post-stanza digest is reported out of band to the coordinator and closure manager",
+    "exact_next_action": "after the coordinator resumes this context, read this stanza and verify the two current output hashes, then continue with the final static manifest review; do not rerun the completed witness or tangent replay and do not reset the 105-minute BC-240 budget"
+  },
+  "terminal_author_manifest": {
+    "declared_at": "2026-09-06T04:38:15Z",
+    "active_portfolio_minutes_completed": 64,
+    "active_portfolio_elapsed": "64:47",
+    "role_assigned_minutes_completed": 64,
+    "role_assigned_minutes_basis": "floor of commissioning active time through declaration; the 2 minute 15 second initial shared pause and 13 second interruption pause are excluded",
+    "attentive_agent_minutes_completed": null,
+    "attentive_minutes_basis": "unavailable because model-attention telemetry was not recorded; role assignment is not used as a proxy",
+    "status": "terminal author packet awaiting closure-manager inspection and source-distinct BC-241 review",
+    "changed_paths": [
+      "packing/cases/trump11/isolation-theorem.md",
+      "packing/campaign/series/series-000-smoke-and-calibration/results/bc-240-trump-local-theorem.json"
+    ],
+    "pre_manifest_output_hashes": {
+      "packing/cases/trump11/isolation-theorem.md": "8f7a775b7a10bb53e45462b749c58754427f517d3ccc5c36e7cccf51ee1514c4",
+      "packing/campaign/series/series-000-smoke-and-calibration/results/bc-240-trump-local-theorem.json": "89e54f79cb4f71814973dd169f32bf7d3e3289b1b48275688c3e49c2a3d7e37e"
+    },
+    "static_checks": [
+      {
+        "command": "shasum -a 256 <six BC-240 hash-bound input paths>",
+        "exit_code": 0,
+        "output": "all six digests matched the values recorded in inputs"
+      },
+      {
+        "command": "git diff --exit-code c55726e1e885227f63110131c0a914665175ff89 HEAD -- <six BC-240 hash-bound input paths> packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md",
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "command": "jq empty packing/campaign/series/series-000-smoke-and-calibration/results/bc-240-trump-local-theorem.json",
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "command": "flowmark --auto --check packing/cases/trump11/isolation-theorem.md",
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "command": "git diff --check -- packing/cases/trump11/isolation-theorem.md packing/campaign/series/series-000-smoke-and-calibration/results/bc-240-trump-local-theorem.json",
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "command": "jq -en --slurpfile out <BC-240 JSON> --slurpfile rad <BC-199 JSON> --slurpfile tan <exp-013 JSON> <constant, branch, active-set, and norm consistency predicate>",
+        "exit_code": 0,
+        "output": "true"
+      },
+      {
+        "command": "rg --files packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026 | rg 'bc-240|trump-local-theorem'",
+        "exit_code": 1,
+        "output": "",
+        "disposition": "expected: no wrong-scope BC-240 output stem exists"
+      }
+    ],
+    "process_accounting": {
+      "author_started_background_processes": false,
+      "unified_exec_session_ids_opened": 0,
+      "all_author_commands_have_terminal_results": true,
+      "author_owned_live_scientific_processes_by_session_accounting": 0,
+      "host_wide_enumeration_available": false,
+      "host_wide_scan_attempts": [
+        {
+          "command": "pgrep -fl 'cases[.]trump11[.](verify_exact|tangent_cones|isolation_radius)'",
+          "exit_code": 3,
+          "output": "sysmon request failed with error: sysmond service not found; pgrep: Cannot get process list"
+        },
+        {
+          "command": "ps -Ao pid=,ppid=,stat=,command=",
+          "exit_code": 126,
+          "output": "/bin/bash: /bin/ps: Operation not permitted"
+        }
+      ],
+      "review_boundary": "session accounting establishes no author-owned live process; the coordinator must supply any required host-wide confirmation"
+    },
+    "scientific_command_count": 2,
+    "scientific_commands_repeated_after_resume": false,
+    "radius_generator_run": false,
+    "missing_per_face_witnesses_recreated": false,
+    "local_only_claim_boundary_reconfirmed": true,
+    "global_capture_claimed": false,
+    "review_note": "BC-241 remains source-distinct and must run the positive checks and falsifying mutations recorded above; this author packet neither certifies those controls nor promotes the retained aggregate to a full radius replay"
+  }
+}

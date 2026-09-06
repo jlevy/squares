@@ -1,17 +1,16 @@
 # Research Resources: Square Packing
 
-A local, greppable archive of the primary literature behind
+This directory is a local, greppable archive of the primary literature behind
 [research-2026-08-22-packing-11-unit-squares.md](../../docs/project/research/research-2026-08-22-packing-11-unit-squares.md).
-
-The point of this directory is that **the literature can be searched locally**, without
-re-fetching, re-extracting, or fighting paywalls and bot-blocks.
+It keeps the literature searchable without refetching, re-extracting, or fighting
+paywalls and bot blocks.
 
 ## Layout
 
 ```
 packing/resources/
-├── papers/   Academic papers: original .pdf + cleaned .md + faithful .raw.md
-└── web/      Web sources (catalogues, surveys, encyclopedic): original .html + .md
+├── papers/   Academic papers: original .pdf, cleaned .md, and faithful .raw.md
+└── web/      Web sources: original .html and maintained .md capture
 ```
 
 The archive’s normal form stores a paper three ways; the documented exceptions follow:
@@ -26,9 +25,9 @@ The `.raw.md` files are deliberately retained.
 Cleanup was done by language models, so the raw extraction is the fallback whenever a
 formula in a `.md` looks suspicious.
 
-**Transcription status, stated exactly.** The archive’s discipline is original + cleaned
-`.md` + faithful `.raw.md`, and thirteen entries currently fall short of it in ways
-worth naming rather than hiding:
+**Transcription status, stated exactly.** The archive normally stores an original
+source, a cleaned `.md` transcription, and a faithful `.raw.md` extraction.
+Nineteen entries currently fall short in ways worth naming rather than hiding:
 
 - `gensane-ryckelynck-2005-improved-dense-packings`,
   `nagamochi-2005-packing-unit-squares-in-a-rectangle`,
@@ -37,10 +36,15 @@ worth naming rather than hiding:
   `alpert-bauer-kahle-macpherson-spendlove-2023-hard-squares-configuration-spaces`,
   `alvarado-garduno-gonzalez-2025-square-section-braid-groups`,
   `el-moumni-1999-optimal-packings-unit-squares`, and
-  `trump-2023-packing-11-unit-squares` are **raw-only**: PDF and faithful extraction, no
-  cleaned transcription yet.
-  All eight were read directly from the PDF, and the claims resting on them were checked
-  there.
+  `trump-2023-packing-11-unit-squares`, plus `bal-2026-64-rectangle-wegner-lp-gaps`,
+  `dewar-2024-contacts-oriented-squares`,
+  `connelly-whiteley-1996-second-order-rigidity`,
+  `donev-torquato-stillinger-connelly-2004-jamming-lp`,
+  `donev-connelly-stillinger-torquato-2007-underconstrained-jammed-packings`, and
+  `connelly-packings-of-circles-and-spheres-lecture-notes` are **raw-only**: PDF and
+  faithful extraction, no cleaned transcription yet.
+  All fourteen were read directly from the PDF, and the claims resting on them were
+  checked there.
 - `gobel-1979-geometrical-packing-and-covering-problems` is **PDF-only**: the source is
   retained, but neither a cleaned transcription nor a faithful extraction has been
   produced. Claims resting on it must be checked against the page images.
@@ -55,12 +59,12 @@ worth naming rather than hiding:
   Their `.raw.md` files are unedited page-ordered Tesseract OCR for search, not source
   ground truth; formulas and figures must be checked against the PDFs.
 
-Writing the missing transcriptions is deferred deliberately rather than done hastily —
+Writing the missing transcriptions is deferred deliberately rather than done hastily—
 model-assisted cleanup is exactly what produced the reconstruction hazards tabulated in
 the next section, and Roth–Vaughan is the argument for that caution: two independent
 secondary sources reported a constant the paper does not contain.
 
-## Reconstructed passages — read this before quoting a formula
+## Reconstructed Passages: Read This Before Quoting a Formula
 
 Cleanup was model-assisted, and on badly-extracted PDFs the models sometimes
 **reconstructed** damaged mathematics rather than only reformatting it.
@@ -70,37 +74,37 @@ them opens with a ⚠️ banner giving the count.
 | File stem | Annotated | Notes |
 | --- | --- | --- |
 | `stromquist-2003-packing-10-or-11-unit-squares` | 3 | Figure 13’s four defining coordinates were interleaved by the raw multi-column extraction and then reconstructed incorrectly. The lists are now read directly from rendered PDF page 9. A second annotation preserves but corrects the paper’s own extraneous-root error in the middle Lemma 4 table. A third gives an explicit box escaping the printed Figure 14 set and distinguishes that proof gap from the separately proposed one-coordinate repair. |
-| `erdos-graham-1975-on-packing-squares-with-equal-squares` | 17 | **Heavily damaged** 1975 typescript scan. The central theorem was *not extracted at all* — raw shows only `Theorem.` then `(1)` — and the transcription supplies the known `w(α) = Θ(α^{7/11})` as a flagged reconstruction. A reading aid, not a source. |
+| `erdos-graham-1975-on-packing-squares-with-equal-squares` | 17 | **Heavily damaged** 1975 typescript scan. The central theorem was *not extracted at all*—raw shows only `Theorem.` then `(1)`—and the transcription supplies the known `w(α) = Θ(α^{7/11})` as a flagged reconstruction. A reading aid, not a source. |
 | `compound-perfect-squared-squares-1303.0599` | 10 | Ten passages, nearly all **tables and matrices** scrambled by multi-column extraction. Do not cite its tables. |
 | `bentz-2016-optimal-packings-22-and-33` | 3 | Probable “Stromberg” → “Stromquist” correction and a reconstructed distance bound in Lemma 7. |
-| `friedman-ds7-packing-unit-squares-in-squares` | 3 | **The “Optimal?” column of Table 1 was INFERRED, not read** — the column exists in the original but its per-row values were lost, and the transcriber deduced them from the survey’s own theorems. Both appendix tables (53 and 29 rows) were likewise reassembled from interleaved extractions. The survey predates later results, so a blank means “not proved as of that revision”. **The research doc’s proof-status claims do not rest on this file** — they use Kingbird’s explicit “Proved by” attributions and the individual papers. |
+| `friedman-ds7-packing-unit-squares-in-squares` | 3 | **The “Optimal?” column of Table 1 was INFERRED, not read**—the column exists in the original but its per-row values were lost, and the transcriber deduced them from the survey’s own theorems. Both appendix tables (53 and 29 rows) were likewise reassembled from interleaved extractions. The survey predates later results, so a blank means “not proved as of that revision”. **The research doc’s proof-status claims do not rest on this file**—they use Kingbird’s explicit “Proved by” attributions and the individual papers. |
 | `square-packing-x06-wasted-area-2508.04603` | 6 | Three cells of the Section 5 comparison table; two Section 5 repairs (the omitted $\nu$ condition in Proposition 7 and the lost division bar in the reduction waste term); and the omitted upper bound on Section 3.1’s replacement index. Do not cite that table. |
 | `arslanov-improved-packings-n-n-1` | 1 | One orientation-constraint formula unrecoverable; its numeric value is preserved. |
-| `bentz-2010-optimal-packings-13-and-46` | 1 | Corollary 7: segments reconstructed **and an inequality direction changed** (`2√2−2 > b` in raw vs `b > 2√2−2` here). Direction UNVERIFIED. The leading claim — intersection length ≥ `2√2−2 ≈ 0.828` — is unambiguous in the raw and unaffected. |
+| `bentz-2010-optimal-packings-13-and-46` | 1 | Corollary 7: segments reconstructed **and an inequality direction changed** (`2√2−2 > b` in raw vs `b > 2√2−2` here). Direction UNVERIFIED. The leading claim—intersection length ≥ `2√2−2 ≈ 0.828`—is unambiguous in the raw and unaffected. |
 | `kearney-shiu-2002-efficient-packing-unit-squares` | 1 | One chain of inequalities in Theorem 2’s proof not reconstructed; the conclusion is stated. |
 | `mcclenagan-2026-optimally-packing-large-square` | 2 | One exponent `(3−√3)/2` reconstructed from fragments, flagged as possibly wrong; plus a source-level contradictory chain in Section 3. H-037 gives an independent local repair of the chain; it does not certify the full theorem. |
 
 Files not listed carry no annotations.
-Note that resolving `(cid:NN)` ligature artifacts, running headers and page numbers is
-ordinary cleanup, not reconstruction, and is not flagged.
+Resolving `(cid:NN)` ligature artifacts, running headers, and page numbers is ordinary
+cleanup, not reconstruction, and is not flagged.
 
 **The rule:** if a formula sits near an annotation, check it against the `.raw.md`
 before relying on it.
-That is what the raw files are for.
 The research document cites only claims that are unambiguous in the raw extractions.
 
-## Why this archive is not auto-formatted
+## Why This Archive Is Not Auto-Formatted
 
-The repository auto-formats all Markdown with flowmark on commit.
-This directory is excluded, deliberately and for a measured reason.
+The repository auto-formats maintained Markdown with Flowmark on commit.
+The paper and web archives are excluded for two independent reasons.
+First, `.raw.md` files are byte-level ground truth, so reflowing them would void the
+comparison with the model-assisted transcriptions.
+Second, the cleaned `.md` files are archival transcriptions: formatting would retype
+source characters such as straight quotes and ellipses merely to make them look tidy.
 
-The `.raw.md` files must stay byte-exact to serve as ground truth.
-But the cleaned `.md` transcriptions are excluded too, because flowmark inserts line
-breaks **inside** `$...$` math spans when it rewraps.
-Measured 2026-08-22: 31 of 339 spans broken in the Stromquist transcription, 101 of 1236
-in Caoduro–Sebő, 5 of 433 in the Kingbird capture.
-A newline in the middle of a formula defeats `grep`, which is what this archive exists
-for.
+Inline mathematics is no longer the reason for the exclusion.
+The pinned `flowmark-rs==0.4.0` keeps every `$...$` span whole, and
+`devtools.check_math_spans` remeasures that property on copies.
+The archive remains excluded because source and transcription fidelity still require it.
 
 The same byte-level rule applies to whitespace.
 Some faithful `pdfminer` output contains spaces on blank lines, so the root
@@ -108,8 +112,7 @@ Some faithful `pdfminer` output contains spaces on blank lines, so the root
 Hand-written Markdown keeps the normal check; raw extraction bytes are never normalized
 to satisfy a presentation rule.
 
-`packing/resources/README.md` — this file — is *not* excluded, and is formatted
-normally.
+`packing/resources/README.md` is formatted normally.
 
 ## Searching
 
@@ -159,8 +162,24 @@ Citation keys match those used in the research document.
 | **[Roth–Vaughan 1978]** | Inefficiency in Packing Squares with Unit Squares | K. F. Roth, R. C. Vaughan | 1978 | JCTA 24, 170–186 | `roth-vaughan-1978-inefficiency-packing-squares` |
 | **[El Moumni 1999]** | Optimal Packings of Unit Squares in a Square | S. El Moumni | 1999 | Studia Sci. Math. Hungar. 35, 281–290 | `el-moumni-1999-optimal-packings-unit-squares` |
 | **[Trump 2023]** | Packing of 11 unit squares in a square with minimum size | W. Trump | 2023 | Author preprint | `trump-2023-packing-11-unit-squares` |
+| **[Bal 2026]** | A 64-Rectangle Counterexample to Wegner’s Conjecture and LP Gaps up to 5/2 | A. K. Bal | 2026 | arXiv:2607.11318v2 | `bal-2026-64-rectangle-wegner-lp-gaps` |
+| **[Dewar 2024]** | How many contacts can exist between oriented squares of various sizes? | S. Dewar | 2024 | Discrete Math. 347(4), 113879; arXiv:2210.10422v2 | `dewar-2024-contacts-oriented-squares` |
 
-## Web sources
+## Rigidity and Verification Method Sources
+
+These papers and notes support the local-rigidity and certified-search program.
+They are method analogues, not direct theorems about the global optimum for eleven
+congruent squares. In particular, smooth-particle or tensegrity results require their
+hypotheses to be matched to the square pose chart and its nonsmooth feature changes.
+
+| Key | Title | Authors | Year | Venue | File stem |
+| --- | --- | --- | --- | --- | --- |
+| **[Connelly–Whiteley 1996]** | Second-Order Rigidity and Prestress Stability for Tensegrity Frameworks | R. Connelly, W. Whiteley | 1996 | SIAM J. Discrete Math. 9(3), 453–491 | `connelly-whiteley-1996-second-order-rigidity` |
+| **[Donev et al. 2004]** | A Linear Programming Algorithm to Test for Jamming in Hard-Sphere Packings | A. Donev, S. Torquato, F. H. Stillinger, R. Connelly | 2004 | J. Comput. Phys. 197, 139–166 | `donev-torquato-stillinger-connelly-2004-jamming-lp` |
+| **[Donev et al. 2007]** | Underconstrained Jammed Packings of Nonspherical Hard Particles: Ellipses and Ellipsoids | A. Donev, R. Connelly, F. H. Stillinger, S. Torquato | 2007 | Phys. Rev. E 75, 051304 | `donev-connelly-stillinger-torquato-2007-underconstrained-jammed-packings` |
+| **[Connelly notes]** | Packings of Circles and Spheres, Lectures III and IV | R. Connelly | undated | Institut Henri Poincaré lecture slides | `connelly-packings-of-circles-and-spheres-lecture-notes` |
+
+## Web Sources
 
 | Key | What | Source | File stem (in `web/`) |
 | --- | --- | --- | --- |
@@ -168,9 +187,14 @@ Citation keys match those used in the research document.
 | **[Friedman DS7 html]** | 2009 HTML edition of the DS7 survey | combinatorics.org | `friedman-ds7-survey-2009-html` |
 | **[Kingbird]** | Squares-in-Squares catalogue: exact minimal polynomials, rigidity flags | kingbird.myphotos.cc | `kingbird-squares-in-squares` |
 | **[Kingbird-compared]** | Supersession history: which record fell to which method, when | kingbird.myphotos.cc | `kingbird-squares-in-squares-compared` |
+| **[Kingbird-rigid]** | Author-maintained rigid-packing classification | kingbird.myphotos.cc | `kingbird-squares-in-squares-rigid` |
+| **[Kingbird analytic minimization]** | Author notes on stationary equations for underdetermined packing systems | kingbird.myphotos.cc | `kingbird-squares-in-squares-analytic-minimization` |
 | **[Kingbird run statistics]** | First-party simulated-annealing basin frequencies and setup-specific search costs for `n = 51, 55` | kingbird.myphotos.cc | `kingbird-run-statistics-2026/` |
 | **[UnitSquare 2026]** | Results Release 1: six reported construction-only improvements and its public structured record | hmbelvedere.com | `unitsquare-release1-2026/` |
-| **[Burns–Massaccesi n17]** | Proposed exact-rational lower-bound certificates at 4.4811 and 4.5058, plus a distinct near-record topology | sam-burns.com; gus-massa.blogspot.com | `n17-lower-bounds-2026/` |
+| **[Burns–Massaccesi n17]** | Exact-rational weighted lower-bound sources at 4.4811 and 4.5058, their public verifiers, and a distinct near-record topology; retained as method provenance and controls after later project bounds | sam-burns.com; gus-massa.blogspot.com | `n17-lower-bounds-2026/` |
+| **[Brandwijk n17 capsule]** | Exact 16-point certificate capsule for `s(17) > 89/20`, offline checker, metadata, local audit, and later supersession context | zenodo.org | `literature-refresh-2026-09-05/` |
+| **[De Winter 2026]** | Mutable author report of proposed construction improvements at `n = 68, 126, 206`; coordinates unavailable and values unreplayed | researchgate.net | `de-winter-improved-packings-2026/` |
+| **[Literature refresh 2026-09-05]** | Frozen arXiv, Crossref, OpenAlex, and Zenodo receipts; additions, currentness checks, and nearby-problem exclusions | primary sources and scholarly indexes | `literature-refresh-2026-09-05/` |
 | **[`s(11)` lower-bound audit 2026]** | Exact-value, reciprocal, catalogue, citation-chain, and method-lineage search supporting the scoped novelty claim for `381/100` | primary papers; author pages; scholarly indexes; public catalogues | `s11-lower-bound-literature-audit-2026/` |
 | **[Finite-case literature audit 2026]** | Repeatable queries and bounded negative result for recent papers on the prioritized cases | arxiv.org; combinatorics.org; author pages | `finite-case-literature-audit-2026/` |
 | **[`n = 54` source/formula audit 2026]** | Revision-keyed genealogy, live-SVG formula receipt, quartic-field replay, and typed pose-correspondence gap | combinatorics.org; kingbird.myphotos.cc | `n54-source-formula-audit-2026/` |
@@ -181,7 +205,7 @@ Citation keys match those used in the research document.
 | **[Wikipedia]** | Square packing overview | en.wikipedia.org | `wikipedia-square-packing` |
 | **[`n = 19–21` lower-bound audit 2026]** | Versioned DS7 history, evidential status, and bounded priority check for the `24/5` certificate | combinatorics.org; retained papers and web captures | `n19-n21-lower-bound-literature-audit-2026/` |
 
-## Special Kingbird SVG witnesses
+## Special Kingbird SVG Witnesses
 
 These are not papers, but they carry the source geometry rather than a rendered picture.
 
@@ -198,12 +222,12 @@ These are not papers, but they carry the source geometry rather than a rendered 
   The H-024 experiment records the URL, retrieval date, normalization, and retained
   path; Git retains the source bytes.
 
-## Not retrievable
+## Not Retrievable
 
-Recorded so nobody re-hunts them.
+The archive records these sources to avoid duplicate searches.
 **Re-test this list rather than inheriting it.** On 2026-08-22 three entries were
 removed because they turned out to be freely available: Gensane–Ryckelynck (Springer
-serves the PDF openly at its `/content/pdf/` URL — the earlier attempt had fetched the
+serves the PDF openly at its `/content/pdf/` URL—the earlier attempt had fetched the
 article landing page), Nagamochi (open access in the *Electronic Journal of
 Combinatorics*, and cited by its exact title in the archived DS7 reference list all
 along), and Wang–Dong–Li (arXiv).
@@ -215,10 +239,9 @@ Earlier corrections include Markót 2021 at PMC, Roth & Vaughan (1978) supplied 
 request, and Stromquist’s three memoranda on the author’s publication page.
 Reading Roth–Vaughan produced two corrections to the published secondary literature.
 
-**The canonical list now lives in
-[`../frontier/source-availability.yaml`](../frontier/source-availability.yaml)**, with
-the obstacle, what depends on each source, and a route to obtaining it; the research
-document renders it as a table.
+[`../frontier/source-availability.yaml`](../frontier/source-availability.yaml) records
+the maintained list, each obstacle, its dependants, and a route to obtaining the source;
+the research document renders it as a table.
 The short version below is kept for readers of this archive.
 
 | Source | Obstacle |
@@ -227,7 +250,7 @@ The short version below is kept for readers of this archive.
 | Brooks, Smith, Stone & Tutte, *The dissection of rectangles into squares*, Duke Math. J. 7 (1940) | Project Euclid; not open access |
 | Gustafsson & Thulin (1980), *Ronden* | Swedish company periodical; Ellsworth notes he has not read it directly either |
 
-## Provenance and licence
+## Provenance and Licence
 
 The original archive was retrieved on **2026-08-22** from the URLs recorded in each
 file’s metadata header.

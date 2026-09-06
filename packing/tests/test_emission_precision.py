@@ -14,6 +14,8 @@ Both halves are checked here, because either one alone restores the drift.
 from __future__ import annotations
 
 import decimal
+import subprocess
+import sys
 from pathlib import Path
 
 from devtools.build_known_best_atlas import frame_from_witness
@@ -37,6 +39,25 @@ def _rendering() -> str:
     return render_packing_svg(
         frame_from_witness(load_witness(WITNESS)), spec=RenderSpec(overlays=frozenset())
     )
+
+
+def test_svg_precision_checks_do_not_load_the_native_rasterizer() -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            (
+                "import runpy, sys; sys.modules['cairosvg'] = None; "
+                "print(runpy.run_path(sys.argv[1])['_rendering']())"
+            ),
+            str(Path(__file__).resolve()),
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert "<svg" in completed.stdout
 
 
 def test_number_field_decimal_leaves_the_global_precision_alone() -> None:

@@ -9,19 +9,33 @@ way it is, and what the research has and has not established.
 Every result, status, count and verdict lives in [`SYNOPSIS.md`](SYNOPSIS.md), which is
 authoritative wherever the two appear to differ.
 
-**Assumes:** no background in the problem.
-Four outside ideas do real work here—linear programming in
-[§2](#2-the-configuration-space), algebraic number fields in
-[§5](#5-algebra-versus-numerics), and certified numerics and symbolic elimination in the
-same section.
-Each is introduced where it is first needed, and [§11](#11-further-reading)
-says where to learn it properly.
+Several outside ideas do real work here—linear programming in
+[§2](#2-the-configuration-space), then algebraic number fields, constrained optimality,
+rigidity, certified numerics, and symbolic elimination in
+[§5](#5-algebra-versus-numerics).
+Each is introduced where it is first needed, and [§11](#11-further-reading) says where
+to learn it properly.
 [§10](#10-a-notation-card) collects every symbol on one page.
+
+## Contents
+
+1. [The Problem](#1-the-problem)
+2. [The Configuration Space](#2-the-configuration-space)
+3. [Cells, Basins, and Two Traps](#3-cells-basins-and-two-traps)
+4. [The Corner](#4-the-corner)
+5. [Algebra Versus Numerics](#5-algebra-versus-numerics)
+6. [What Is Built, and What Is Not](#6-what-is-built-and-what-is-not)
+7. [How the Search Is Approached, and Why](#7-how-the-search-is-approached-and-why)
+8. [What Is Known, and What Is Not](#8-what-is-known-and-what-is-not)
+9. [A Vocabulary Card](#9-a-vocabulary-card)
+10. [A Notation Card](#10-a-notation-card)
+11. [Further Reading](#11-further-reading)
+12. [Where to Go Next](#12-where-to-go-next)
 
 ## 1. The Problem
 
 `s(n)` is the side of the smallest square that contains `n` non-overlapping unit
-squares, each free to translate **and rotate**. Smallest is exact rather than
+squares, each free to translate **and rotate**. Here, “smallest” is exact rather than
 approximate: the set of achievable sides is closed, so the infimum is attained and a
 best packing exists ([Martin 2000](#11-further-reading)).
 
@@ -44,14 +58,18 @@ Segments mark shared edge intervals and dots mark point contacts, all computed i
 construction’s exact number field and clipped to their participating squares.
 The picture certifies a construction, not its global optimality.*
 
-Three features make this different from most optimization problems.
+Three features make this different from most optimisation problems.
 
 **Touching is legal, and good packings touch constantly.** Disjointness is required of
 *interiors* only.
-In the best known `n = 11` packing, 14 of the 55 pairs are separated by
+In the best-known `n = 11` packing, 14 of the 55 pairs are separated by
 exactly zero and 20 corner coordinates lie exactly on the container boundary.
-Optima are jammed configurations, not interior critical points, which is why exactness
-here is representational rather than numerical ([§5](#5-algebra-versus-numerics)).
+Optimal packings are boundary-constrained.
+Some have a **jammed backbone**, a contact-constrained subset that cannot move
+collectively, while others contain **rattlers**, squares that can move without changing
+the container side, or continuous optimal families.
+This is why exactness here is representational rather than numerical
+([§5](#5-algebra-versus-numerics)).
 
 **Every upper bound in the history of the subject is a construction.** No
 non-constructive upper bound has ever been obtained.
@@ -60,16 +78,17 @@ upper bound—it is the only one anybody has.
 
 **`n = 11` is the first case where genuinely oblique tilt is proved to improve on the
 `0°`/`45°` class.** Stromquist proved that packings restricted to those two orientation
-classes cannot beat `2 + (4/3)√2 ≈ 3.885618`, which is *worse* than the best known
-packing at `≈ 3.877084`. This is the sharpest available statement of why `n = 11` is
-structurally unlike the small proved tilted cases at `n = 5` and `n = 10`. Everything in
-[§7](#7-how-the-search-is-approached-and-why) follows from that sentence.
+classes cannot beat `2 + (4/3)√2 ≈ 3.885618`, which is *worse* than the best-known
+packing at `≈ 3.877084`. Stromquist’s result gives a concrete reason that `n = 11`
+differs from the proved tilted cases at `n = 5` and `n = 10`.
+[Section 7](#7-how-the-search-is-approached-and-why) uses that distinction to motivate
+its search strategy.
 
 ### The state of `n = 11`, in one table
 
 |  | value | status |
 | --- | --- | --- |
-| best known packing (upper bound) | `3.87708359002281417730789706010096…` | Trump 1979, a construction |
+| best-known packing (upper bound) | `3.87708359002281417730789706010096…` | Trump 1979, a construction |
 | best lower bound | `381/100 = 3.81` | [T-018](packing/frontier/RESULTS.md), a verified certificate; see [below](#how-a-weighted-atomic-lower-bound-proof-works) |
 | bound gap | `0.067083590023` | still open |
 
@@ -81,13 +100,12 @@ the best one anybody has published, and it is what [§3](#3-cells-basins-and-two
 onward measures. The first is a property of the problem; the second is a property of a
 run.
 
-**The value that stood before it carries a story this project produced.** Stromquist’s
-2003 Theorem 2 was the published source for `2 + 4/√5 = 3.788854382…`, and this
-repository found that its printed proof is **false as printed**: an exact open box of
-side `10001/10000` fits the claimed container and strictly avoids all twelve printed
-Figure 14 points. A separately preregistered, source-distinct repair—moving one point
-from `(.8, 1.85)` to `(.79, 1.85)`—restores the whole argument and certifies the same
-inequality exactly
+**The previous lower bound also led to a proof repair.** Stromquist’s 2003 Theorem 2 was
+the published source for `2 + 4/√5 = 3.788854382…`, and this repository found that its
+printed proof is **false as printed**: an exact open box of side `10001/10000` fits the
+claimed container and strictly avoids all twelve printed Figure 14 points.
+A separately preregistered, source-distinct repair—moving one point from `(.8, 1.85)` to
+`(.79, 1.85)`—restores the whole argument and certifies the same inequality exactly
 ([exp-016](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md),
 [exp-017](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md)).
 The inequality stands; the printed derivation of it does not.
@@ -96,11 +114,14 @@ terminally refuted the hypothesis it was registered against.
 That value is no longer the best lower bound for `n = 11`; displacing it was the point
 of the certificate below.
 
-Two lessons in that episode generalize: **a published proof is a source, not an
-oracle**, and **the cheapest way to learn something is to try to break a thing you
-believe.**
+The episode is why this repository treats published proofs as source claims and tests
+them with exact counterexample searches.
 
 ### How a weighted atomic lower-bound proof works
+
+This subsection is an optional proof deep dive.
+Readers who want the configuration and linear-programming foundations first can continue
+at [§2](#2-the-configuration-space) and return here later.
 
 Every upper bound in this subject is a construction, and a construction can be handed
 over and checked. A lower bound has to exclude every packing at once, and this is the
@@ -133,7 +154,7 @@ atoms, the nonnegativity premise, and five exact conditions.
 
 | Condition | Exact fact in the `n = 11` certificate | Its job in the proof |
 | --- | --- | --- |
-| **Condition 1** | The weighted atoms are invariant under the container’s `D₄` symmetries | Reflect an orientation onto the net’s arc without changing any covered mass |
+| **Condition 1** | The weighted atoms are invariant under the container’s `D₄` symmetries (the four rotations and four reflections of a square) | Reflect an orientation onto the net’s arc without changing any covered mass |
 | **Condition 2** | `μ(K) = 434547/40000 = 10.863675`, which is below 11 | Supply less total mass than eleven packed squares would have to consume |
 | **Condition 3** | A net of 181 exact directions reaches `π/4` | Put every reduced square orientation between two checked directions |
 | **Condition 4** | `B(1 + D) < 1`, for `B = 9977/10000` and `D = 207107/90000000` | Fit a closed side-`B` square at a nearby net direction strictly inside any unit square |
@@ -218,7 +239,7 @@ So “fix the angles” always means fix all `n` of them.
 Counting scalars, a configuration is `3n + 1` real numbers—**34 at `n = 11`**.
 [§10](#10-a-notation-card) collects every symbol used in this document.
 
-Read naively this is a 34-dimensional nonconvex problem with `C(11,2) = 55` disjunctive
+Read naively, this is a 34-dimensional nonconvex problem with `C(11,2) = 55` disjunctive
 constraints, and it is not obvious where to push.
 The central structural insight of this project is that the naive reading is the wrong
 decomposition.
@@ -273,9 +294,13 @@ with every `oᵢₖ` and every axis `ν_ij` a constant, determined by `θ` and t
 That is the result the synopsis calls **T-2**.
 
 **Why that is good news.** A **linear program** minimises a linear objective over linear
-inequalities. Its feasible region is a polyhedron, an optimum is always attained at a
-vertex, and the whole class is solvable in polynomial time and very fast in practice—the
-solves here take about `1.28 ms`. Two further properties matter later.
+inequalities. Its feasible region is a polyhedron.
+For the feasible packing LP above, whose finite optimum is attained and whose feasible
+region has vertices, one can choose an optimum at a vertex.
+The class is solvable in polynomial time and is fast in practice; representative project
+solves took about `1.28 ms` in the
+[recorded infrastructure benchmark](docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md).
+Two further properties matter later.
 The set of constraints holding with equality at the optimum is its **active set**, and
 the corresponding **optimal basis** is the subset of them the solver uses to pin the
 vertex down; [§4](#4-the-corner) turns entirely on what happens when that basis changes.
@@ -298,11 +323,10 @@ dependence of the offsets and axes on the angles, and the *discrete* choice of c
 That factorisation—a small continuous part times a large combinatorial part—is the
 premise underneath almost everything else here.
 
-Writing the program down is a modelling choice, not a canonical object.
-The same feasible set is expressed with one separation row per pair in
-`sqpack.research.quench` and with sixteen—one per ordered corner pair—in
-`cases.trump11.independent_lp_cell`, which is `1,056 = 16 × (11 + 55)` rows at `n = 11`.
-Both are correct, and they share no constraint-assembly code, which is the point.
+The two independent formulations use different constraint assemblies but describe the
+same feasible set. `sqpack.research.quench` uses one separation row per pair;
+`cases.trump11.independent_lp_cell` uses sixteen, one per ordered corner pair, for
+`1,056 = 16 × (11 + 55)` rows at `n = 11`. They share no constraint-assembly code.
 
 The check that makes it concrete: read the cell off the exact certificate for the best
 known `n = 11` packing (eleven angles and fifty-five axis choices, and nothing else),
@@ -330,8 +354,9 @@ Write `a*` for the angle that minimises it.
 A `*` marks a distinguished value of a symbol rather than one fixed relation: `a*` is a
 minimiser, and `s*` in [§7](#7-how-the-search-is-approached-and-why) is the standing
 best for an `n`, which is not known to be a minimum in the open cases.
-A 2,001-point scan of `[38°, 42°]` puts the minimum one grid step from `a* ≈ 40.18°`,
-Trump’s published tilt.
+A 2,001-point scan of `[38°, 42°]` independently puts the lowest grid sample within one
+step of Trump’s published tilt and locates the neighbourhood of the minimiser
+`a* ≈ 40.18°`.
 
 Trump’s angle is not an input to that computation.
 It is **the argument that minimises a one-dimensional function anyone can plot.** In
@@ -352,8 +377,7 @@ certificate or an optimality proof.*
 
 ## 3. Cells, Basins, and Two Traps
 
-The project is most careful here, because both traps were walked into and both cost real
-work.
+Both traps below arose in retained experiments and changed the project’s definitions.
 
 ### The quench map
 
@@ -420,12 +444,11 @@ A configuration can therefore sit at exactly its fixed-angle cell optimum and st
 far from its quench endpoint, with all the remaining gap in the angles and none in the
 centres.
 
-The dangerous consequence is a reading that feels safe and is backwards: **a fixed-angle
-solve that stops improving has not converged to a local optimum of the problem—it has
-run out of things it is allowed to move.** Watching it flatten and concluding “wrong
-basin” is exactly what the *right* basin looks like when the residual is angular.
+**A fixed-angle solve that stops improving has exhausted only the variables it may move;
+it has not converged to a local optimum of the full problem.** Watching it flatten and
+concluding “wrong basin” is exactly what the *right* basin looks like when the residual
+is angular.
 
-That is not hypothetical.
 An agent built a fixed-angle probe, called it “the quench”, and **retracted a correct
 finding** when it stalled ([D-029](defects.md)). On one `n = 10` start: the annealer
 output and the fixed-angle solve agree to every digit at `+5.6440e-04`, and the full
@@ -481,16 +504,13 @@ refused. Passing that gate is what admitted the bounded `n = 5` connectivity wor
 and this map is the only exact ground truth behind open question 1 in
 [§8](#8-what-is-known-and-what-is-not).
 
-`n = 3` is small enough to look like a curiosity, so it is worth knowing the same
-phenomenon has been pinned down at a size that is not obviously degenerate.
-At `n = 5`, two retained poses with different coordinate keys turn out—after one
-symmetry action and relabelling—to share a single exact optimal face of one fixed-angle
-cell, and that face sits inside an exact two-parameter sheet of optima at a container
-side above `s(5)`. The first-order analysis there admits one direction leaving the
-sheet, and a second-order argument then excludes that direction from the true tangent
-cone. The remaining directions are unclassified, so this is not a connectivity proof; it
-is the strongest exact statement the project has about how sampled endpoints at one open
-size actually relate.
+The same phenomenon appears at `n = 5`. After one symmetry action and relabelling, two
+retained poses with different coordinate keys lie on one exact continuous family in a
+fixed-angle cell.
+An apparent escape direction is ruled out, but the remaining directions
+and global connectivity are still open.
+The constrained-optimality language needed for the sharper statement is introduced in
+[§5](#contact-graphs-stationary-branches-and-rattlers).
 
 The project’s term for this is a **terminal family**, and its definition is deliberately
 strict: local dimension is the nullity of the appropriate independent active-constraint
@@ -509,23 +529,25 @@ logged defect for having done it.
 - **Second version.** It must also be independent of the *representation’s* knobs, and
   must not presume a structure—discreteness—that the mathematics does not supply.
 
-Both are the same shape as Trap 1: **an object that fixes more than the mathematics
-does, mistaken for the mathematics.** The first was written down; the second was
-available from the same argument and was not, and that is why it cost more.
+Both have the same cause as Trap 1: the representation fixes more than the mathematics
+does. The first lesson was documented; the same argument implied the second, but it was
+not documented.
 
 ## 4. The Corner
 
 `φ(a)` is not smooth at its minimum.
-Measuring one-sided slopes and refining the step, both sides converge—to **different**
-values near `0.1747` and `0.384` per radian, stable over five decades.
-Two independent LP formulations agree: `0.1747`/`0.3839` at a ratio of `2.1973`, and
+Refined finite differences give one-sided rise rates of about `0.1747` to the left and
+`0.384` to the right per radian, stable over five decades.
+In the conventional signed derivative, these are about `−0.1747` and `+0.384`. Two
+independent LP formulations agree: `0.1747`/`0.3839` at a ratio of `2.1973`, and
 `0.1747`/`0.3841` at a ratio of `2.198`. **The derivative does not vanish at the
 optimum; it jumps.**
 
 **Why.** Where the LP’s optimal *basis* is locally constant, `φ` is smooth and its
-derivative reads off the active constraints.
-A corner is a **change of optimal basis**—the set of contacts that bind switches as the
-angle crosses `a*`.
+derivative reads off that basis.
+A corner occurs where the optimal basis switches as the angle crosses `a*`. Because a
+basis is only a subset of the active rows, a basis switch alone does not show that the
+full active-contact set changed.
 
 **What it bought.** Replacing smooth descent with a **bracketing search over merged
 angle classes**—a method that tolerates non-smoothness—and changing nothing else took
@@ -542,9 +564,7 @@ in this implementation, which is method-selection evidence and not an impossibil
 result. The kink also lives on a one-dimensional slice, so it is **not** by itself a
 rigidity proof for the full packing.
 
-This chain—a measurement, a mechanism, a prediction, and a method built on the
-prediction that works—is the campaign operating as designed, and it is the single best
-worked example to read in full in the synopsis.
+The synopsis presents this measurement-to-method chain as a full worked example.
 
 ## 5. Algebra Versus Numerics
 
@@ -588,7 +608,8 @@ The verifier here is written once and instantiated at each, which is why “work
 is a choice about where to spend time rather than a second codebase.
 
 **What it costs, and therefore where to spend it.** Exactness is not uniformly
-expensive, and knowing the shape of the cost is what lets you decide:
+expensive. The representative measurements below come from the
+[infrastructure benchmark](docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md):
 
 | Operation | Cost |
 | --- | --- |
@@ -599,12 +620,12 @@ expensive, and knowing the shape of the cost is what lets you decide:
 | One `ℚ(α)` multiplication at degree 62 | 13 ms |
 | Complete exact verification of Trump’s packing, all 55 pairs | 0.35 s |
 
-Two readings. **Exactness is free where it is used**: a whole exact verification costs
-less than a second, against seconds for a single agent turn, so optimising it is
-optimising noise. **And the cost is not flat**: one exact multiplication climbs from
-`215.5 µs` at degree 8 to `13 ms` at degree 62 in pure Python, and even the compiled
-backend’s advantage over pure Python grows with degree—`177×` at 8, `578×` at 62—so
-exact arithmetic is most expensive exactly where the problem is hardest.
+At current sizes, complete exact verification costs less than a second, so it is not the
+present bottleneck.
+The cost is not flat: one exact multiplication climbs from `215.5 µs`
+at degree 8 to `13 ms` at degree 62 in pure Python, and even the compiled backend’s
+advantage over pure Python grows with degree—`177×` at 8, `578×` at 62—so exact
+arithmetic is most expensive exactly where the problem is hardest.
 That is the standing reason it stays out of the search loop.
 
 The useful frame is three budgets rather than one.
@@ -700,18 +721,94 @@ Witness and machine-check evidence uses four tokens:
 | `interval-certified` | Rigorous interval arithmetic, which can certify a strict inequality |
 | `exact-algebraic` | Exact replay in the packing’s own number field, where equality is decidable |
 
-The first two are numerical and the last two are formal, and no amount of the first buys
-the second: **a numerical result remains numerical at tolerance `1e-100`.** Actual
-precision, rounding, and tolerance are recorded alongside the method rather than implied
-by it. Frontier proof evidence uses three further tokens—`published-proof`,
-`proof-audited`, and `proof-assistant-checked`—for claims whose warrant is an argument
-rather than a computation.
+The first two methods are tolerance-based.
+`interval-certified` uses rigorous numerical enclosures; `exact-algebraic` uses exact
+arithmetic. Either supports `verified` only when the scoped certificate and its
+preconditions are checked.
+No amount of ordinary finite-precision checking buys that status: **a numerical result
+remains numerical at tolerance `1e-100`.** Actual precision, rounding, and tolerance are
+recorded alongside the method rather than implied by it.
+Frontier proof evidence uses three further tokens—`published-proof`, `proof-audited`,
+and `proof-assistant-checked`—for claims whose warrant is an argument rather than a
+computation.
 
 `beat_record: true` requires `assurance: verified`. A negative numerical gap is a
 candidate or solver error, never a formal discovery—a rule that caught a critical defect
 when a loose LP tolerance returned a packing violating its own separation constraint.
 Even a verified feasible witness establishes only an upper bound; optimality needs a
 matching verified lower bound.
+
+### Contact graphs, stationary branches, and rattlers
+
+An exact reconstruction needs more information than a contact graph.
+A **contact graph** has one vertex per square and an edge for each touching pair, with
+optional wall vertices for boundary contacts.
+It says who touches whom, but not which equation makes them touch.
+For rotated squares, that equation also depends on whether the features are corner-edge,
+edge-edge, or wall contacts; which square owns the supporting axis; the separation order
+and sign; and the angle and wall chart.
+A **typed contact** retains those choices.
+
+Fixing one consistent set of types gives a smooth **support branch** of the otherwise
+disjunctive feasible set.
+A complete branch contains one typed constraint for every square pair and wall,
+including inequalities that are not tight.
+Write the configuration vector as
+
+```text
+q = (s, x_1, y_1, theta_1, ..., x_n, y_n, theta_n)
+```
+
+and its clearance inequalities as `g_j(q) >= 0`. Row `j` is **active** when
+`g_j(q) = 0`. A **feature tie** occurs when several support descriptions apply at the
+same geometry, as at a corner-corner touch admitted by more than one owner-axis choice.
+The model must keep every applicable branch at a tie rather than choose whichever type a
+floating-point residual happens to prefer.
+
+Fritz–John stationarity supplies the first-order equation on one branch.
+At a branch minimum there are nonnegative multipliers `η` for the side objective and
+`κ_j` for the constraints, not all zero, such that
+
+```text
+η ∇_q s - sum_j κ_j ∇_q g_j = 0,    κ_j g_j(q) = 0.
+```
+
+Here `∇_q` means the gradient with respect to the side, centres, and angles collected in
+`q`. When `η > 0`, rescaling it to one gives the **normal**, or ordinary, Fritz–John
+branch and a **Karush–Kuhn–Tucker (KKT)** multiplier certificate.
+When `η = 0`, the objective drops out and a nontrivial dependence among active
+constraint gradients gives an **abnormal Fritz–John branch**. A proved **constraint
+qualification**—a suitable local regularity condition on those gradients—can rule
+abnormal branches out.
+Without one, omitting them makes an enumeration incomplete.
+Redundant or tied active rows can let one geometry admit both normal and abnormal
+certificates, so the two cases classify multiplier certificates rather than disjoint
+sets of geometries.
+
+Activity and multiplier support are different.
+An active row may have `κ_j = 0`: this is a **zero multiplier**, a tight contact that
+carries no first-order balance in that particular certificate.
+The rows with positive multipliers form the **positive multiplier support**. The contact
+graph induced by those rows may be smaller than the active contact graph and need not be
+connected.
+
+A **rattler** is a square, or a cluster of squares, that can move locally within a cage
+while the remainder stays jammed.
+The jamming literature calls that rigid or force-carrying remainder the **backbone**.
+This project’s proposed **typed stationary backbone** is a broader proof record.
+It retains all configuration variables and every typed pair and wall constraint, then
+records the active subset, positive and zero multiplier states, support orders, angle
+charts, symmetry labels, and rattler attachments together with the continuous equations
+they index. Rattlers and inactive noncontact inequalities remain in the global
+feasibility problem even when they do not appear in the positive multiplier support.
+
+These notions answer different questions.
+**Stationarity** is a necessary first-order condition for a branch minimum; **rigidity**
+means there is no nontrivial feasible local motion after declared symmetries are
+removed; and **local isolation at fixed side** says a proved fixed-side neighbourhood
+contains no other feasible pose.
+Passing any of them does not exclude a better packing elsewhere, so none by itself
+proves global optimality.
 
 ### From a numeric solution to an exact one
 
@@ -738,13 +835,14 @@ algebra can solve and the complete packing can be independently rechecked.
    touches which wall, which squares share an angle class.
    Everything downstream rests on this guess.
 3. **Write and reduce the contact equations.** The unreduced system still contains the
-   centres. In several published rigid constructions, the chosen contact graph lets one
-   eliminate those centres and leave only `s` and the distinct non-axis-aligned angles—
-   two unknowns at `n = 11`, three at `n = 17`. That reduction must be derived from the
-   particular graph; angle-class count alone does not perform it.
+   centres. In several published rigid constructions, the chosen typed contact
+   structure—often reported informally as a contact graph—lets one eliminate those
+   centres and leave only `s` and the distinct non-axis-aligned angles: two unknowns at
+   `n = 11`, three at `n = 17`. That reduction must be derived from the particular
+   contact equations; angle-class count alone does not perform it.
 4. **Close an underdetermined system analytically.** A local extremum of `s` on the
    constraint manifold forces a rank drop, so the missing equations are
-   Jacobian-determinant conditions—Lagrange/Fritz-John in determinant form.
+   Jacobian-determinant conditions—Lagrange/Fritz–John in determinant form.
    The condition is necessary rather than sufficient; roots that are not extrema are
    culled when the reconstruction is verified.
    The practical point is not elegance: it keeps the problem **root-finding**, which
@@ -774,80 +872,34 @@ A complete promotion still needs those discrete and algebraic claims bound to th
 certified root.
 
 There is also a robust route that does not identify the source pose exactly: replace
-decimal centers and rotations by exact rational data, add an explicit side relaxation,
+decimal centres and rotations by exact rational data, add an explicit side relaxation,
 and verify the resulting construction.
 This can prove a slightly weaker upper bound when the numerical pose has enough
 geometric slack. It does not certify the original decimal coordinates or preserve the
 reported value.
 
-How much of that pipeline exists here decides what the word “exact” can mean in this
-directory, and the answer is in [§6](#6-what-is-built-and-what-is-not).
-
 ## 6. What Is Built, and What Is Not
 
-The synopsis owns the authoritative status; this is its shape.
-A documented method here is not necessarily an available one, and the difference decides
-what any result can claim.
+The capability boundary is stable even as individual tools change:
 
-**The verification and experimental stack is built.** Exact `ℚ(α)` arithmetic with
-irreducibility and unique-root checks, rational and algebraic separating-axis
-verification, negative controls, the independently rebuilt LP, the numerical
-class-bracketing quench, the Rust screening annealer, and the registered repository gate
-all exist. `packing-validate --list` is the authoritative inventory.
-Formal results built on the proof instruments include the lower-bound falsification and
-repair, the optimal configuration spaces at `n = 3` and `n = 4`, and the local-isolation
-theorem for Trump’s pose—this project’s results rather than published theorems, with
-[§8](#8-what-is-known-and-what-is-not) marking which claims confirm the literature and
-which are new here. The quench and annealer remain numerical instruments; listing them
-here does not promote their outputs to verified.
+- numerical search and refinement propose candidate configurations;
+- exact arithmetic or rigorous intervals can verify a scoped witness, certificate, or
+  local statement once all of its preconditions are explicit;
+- a fixed-angle LP settles only its declared cell and angles; and
+- stationarity, rigidity, and fixed-side local isolation do not prove global optimality.
 
-**The generic witness boundary and robust rational promotion are built.** One
-`Witness/v2` file can be inspected, numerically checked, or exactly verified without
-case-specific geometry code.
-The retained Schadt `n = 29` decimal pose is numerically checked at 300 digits and
-tolerance `1e-100`; a separate robustification produces a slightly larger rational
-packing that two exact implementations verify.
+No listed capability proves that Trump’s construction is the global `n = 11` optimum.
+A complete typed-stationary enumeration would additionally need every support branch,
+including ties, abnormal Fritz–John cases, zero multipliers, inactive inequalities, and
+rattlers, followed by a global completeness argument.
+Describing that proof object does not establish it.
 
-```shell
-uv run --frozen packing-witness inspect witnesses/schadt-n029-2025-decimal.yaml
-uv run --frozen packing-witness check witnesses/schadt-n029-2025-decimal.yaml \
-  --method numerical-multiprecision --precision 300 --tolerance 1e-100
-uv run --frozen packing-witness verify witnesses/schadt-n029-2025-rational.yaml
-```
-
-**Reported-value recovery has its parts built, and no generic path through them.** Read
-those as two claims, because the distance between them is where this lane actually is.
-
-The parts exist and are library code rather than one-off scripts: contact inference that
-refuses an incidence it cannot decide, assembly of those contacts into equations,
-minimal-polynomial recovery under a margin rule, and a Krawczyk operator that decides
-existence and uniqueness over a box with directed rounding.
-They have certified a real case — `n = 29`, at a declared relaxation — through a
-case-specific driver written for that packing.
-
-What does not exist is the generic route from an arbitrary `Witness/v2` to a
-certificate. `packing-witness promote --strategy interval-existence` returns the typed
-`checker-not-built` gap today rather than pretending every decimal pose is promotable,
-and that refusal is still the honest answer.
-Singular, ambiguous, or ill-conditioned contact systems may defeat the approach even
-once it is wired, so this remains mathematically contingent and not merely unfinished.
-
-A certificate is also not a promotion.
-The `n = 29` result is retained `unresolved` pending human review and moves no bound;
-see [§8](#8-what-is-known-and-what-is-not) for which claims this project’s own work has
-and has not established.
-
-**Three instruments run, but only their narrow event claims are admissible.** The
-endpoint store, canonical identity keys, and census all execute.
-Current `BasinEvent/v3` receipts can certify a producer-contract outcome and an
-independently valid terminal pose on the proved `n = 3, 4` controls.
-They cannot certify that two endpoints belong to different connected terminal
-components, so counting rows in the store is still not counting basins.
-The synopsis names the identity and census blockers.
-
-The synopsis’s
-[verification capability ladder](SYNOPSIS.md#verification-capability-ladder) separates
-built and sound paths, buildable engineering, and mathematically contingent steps.
+The [synopsis capability ladder](SYNOPSIS.md#verification-capability-ladder) owns the
+current implementation status and separates built paths, ordinary engineering, and
+mathematically contingent steps.
+`packing-validate --list`, run from `packing/`, is the live command inventory.
+[Section 8](#8-what-is-known-and-what-is-not) records the claims actually established,
+with their assurance and scope.
 
 ## 7. How the Search Is Approached, and Why
 
@@ -866,8 +918,8 @@ so the ledger can report which whole families remain untried:
 - **Stochastic search:** simulated annealing (the current workhorse), billiard and
   inflation, basin hopping, nonlinear programming, SAT/CP, branch and bound over contact
   classes, evolutionary methods.
-- **Exact refinement:** fixing the contact graph and solving the polynomial system,
-  rigidity-guided enumeration, interval-verified local optima.
+- **Exact refinement:** fixing a typed contact structure and solving the polynomial
+  system, rigidity-guided enumeration, interval-verified local optima.
 - **Workflow:** the human-computer loop against a public record table, which is how the
   tables actually advance.
 
@@ -902,12 +954,11 @@ down and the campaign reverts to throughput.
 The obvious response to “the objective does not reward what we want found” is to reshape
 the objective. Two things are wrong with it.
 
-**Auxiliary losses are hackable, and this problem hacks them immediately.** The most
-contact-rich arrangements are grid-like, so a naive contact reward steers search *into*
-the wide grid funnel—the exact opposite of the intent.
-Note the shape of the trap, because it recurs: the grid is high-contact *and common*;
-the record is high-contact *and rare*. **Any single scalar they share cannot separate
-them.**
+Reshaping the objective creates two problems.
+First, a naive contact reward favours grid-like arrangements, the opposite of the
+intended direction. Note the shape of the trap, because it recurs: the grid is
+high-contact *and common*; the record is high-contact *and rare*. **Any single scalar
+they share cannot separate them.**
 
 **A reshaped loss can change the minimizers** unless equivalence is proved.
 Lexicographic tie-breaking, potential shaping, or an auxiliary term that vanishes on
@@ -932,7 +983,7 @@ solutions along the parameter instead of searching for them cold.
 | Ladder | Parameter | Easy end | What to watch |
 | --- | --- | --- | --- |
 | container inflation | slack `δ` in side `s* + δ` | large `δ`: hypothesized broader accessibility | basin splits and merges; the first observed or certified `δ` at which a named target is reachable |
-| superdisk | exponent `p` | `p = 1`: circles, orientation-free | where orientation symmetry breaks |
+| superdisk | exponent `p` in `|x|^(2p) + |y|^(2p) <= 1` | `p = 1`: circles, orientation-free; `p -> infinity`: the square limit | where orientation symmetry breaks |
 | boundary layer | frozen grid bulk | the pure grid | whether a sheared band re-synchronizes |
 
 Container inflation is the primary one, and it can pay three ways from one computation:
@@ -995,18 +1046,19 @@ definition and the one-place list of apparently novel results.
 | Fixing the angles and every pair’s separating axis makes minimising `s` a linear program | proved | Nothing about *which* cell is best; that choice is the combinatorial hard part |
 | Trump’s 1979 packing is valid, over `ℚ(u)` of degree 8, with 14 pairs at exactly zero separation | verified (`exact-algebraic`); a published construction, confirmed here | Nothing about optimality; it is an upper bound |
 | [`s(11) ≥ 2 + 4/√5`](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | verified (`exact-algebraic`) | Not attributed to Stromquist, not externally peer-reviewed, and it does not close the gap to Trump |
-| [Stromquist’s *printed* 2003 argument fails](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md): an exact **open** box of side `10001/10000` fits the claimed container and avoids all twelve printed Figure 14 points | verified (`exact-algebraic`) | It refutes the printed derivation, not the inequality, which the repaired cover independently certifies. This project’s finding, like the repair beside it |
-| [Trump’s pose is locally isolated](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | verified (`exact-algebraic`) | Not global optimality, and not an explicit isolation radius. It holds in the anchored pose-side chart, modulo finite symmetries. Apparently novel here, not externally peer-reviewed |
-| The one-dimensional class-angle optimum is a corner, with one-sided slopes of `0.1747` and `0.384` per radian | numerically checked (`numerical-f64`) | It is one slice. It is not a rigidity proof, and not a theorem that every derivative-free method fails. This project’s measurement |
+| [Stromquist’s *printed* 2003 argument fails](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md): an exact **open** box of side `10001/10000` fits the claimed container and avoids all twelve printed Figure 14 points | verified (`exact-algebraic`) | It refutes the printed derivation, not the inequality, which the repaired cover independently certifies. Both this falsification and the adjacent repair are this project’s findings |
+| [Trump’s pose is locally isolated at fixed side](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | verified (`exact-algebraic`) | Consequently, it is a strict local minimum of side in the anchored pose–side chart, modulo finite symmetries. This is not global optimality or an explicit isolation radius. Apparently novel here, not externally peer-reviewed |
+| The one-dimensional class-angle optimum is a corner, with signed one-sided derivatives of about `−0.1747` and `+0.384` per radian | numerically checked (`numerical-f64`) | It is one slice. It is not a rigidity proof, and not a theorem that every derivative-free method fails. This project’s measurement |
 | The exact optimal configuration spaces at [`n = 3`](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) and [`n = 4`](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | verified (`exact-algebraic`) | Only those two moduli spaces are classified here; the optimal side values at `n = 5` and `n = 6` are proved, but their optimal configuration spaces are not classified here. The labelled and unlabelled `n = 3` pieces agree with published computations; the rotation exclusion and full quotients are established here, with no novelty claim |
 | Refinement is not the current bottleneck: the same floating-point LP refiner takes the tested proved-control starts to the analytic optima (residuals `≈1e-15`) and leaves the tested `n = 11` starts `6e-02` short | numerically checked (`numerical-f64`) | The solver floor is about `1e-11` in the side, so read smaller residuals as “at the floor”; and it does not establish *why* the `n = 11` starts are far away |
 
 ### Open
 
-**1. What a basin is.** The definition presumes each terminal set is a point, and at
-`n = 3` an exact connected sliding family shows it need not be.
-So the store counts endpoint keys, which may split one component into several rows, and
-the denominator of “rare” is not yet a number.
+**1. How to identify terminal components.** Point-basins are well-defined, but at
+`n = 3` an exact connected sliding family shows that they can split one connected
+terminal component into infinitely many endpoint keys.
+The store therefore counts endpoint keys, which may split one component into several
+rows, and the denominator of “rare” is not yet a number.
 This makes the rarity premise **untestable rather than merely untested**, which is a
 stronger objection than doubting it.
 Settling it takes Jacobian nullity, feasible tangent directions, and certified
@@ -1056,7 +1108,10 @@ Symbols are in [§10](#10-a-notation-card), and [`SYNOPSIS.md`](SYNOPSIS.md#term
 is the authority for everything it defines.
 Two rows below are local to this document: **terminal set**, which the synopsis uses
 without defining, and **feasibility tolerance**, which belongs to the solver rather than
-to the project. The order is by dependency, so it reads top to bottom.
+to the project.
+The stationary-backbone terms are shared with the current exploration and
+agenda, but they describe a proposed completeness object rather than a built global
+enumerator. The order is by dependency, so it reads top to bottom.
 
 Three words carry controlled multiple senses—**cell**, **quench** and
 **exploration**—and the rule for each is given with it.
@@ -1079,11 +1134,22 @@ Three words carry controlled multiple senses—**cell**, **quench** and
 | **terminal set** | The configurations a quench can return: the local optima of the problem |
 | **terminal component** | A connected component of the terminal set, the intended atlas object; current endpoint keys do not certify it |
 | **terminal family** | A terminal component that is not an isolated point |
+| **contact graph** | One vertex per square and one edge per touching pair, optionally with wall vertices. It records incidence, not the feature or branch equation that realizes the contact |
+| **typed contact** | A contact plus its corner, edge, or wall features; owner square and axis; separation order and sign; and chart data—the information needed to write one branch equation |
+| **support branch** | One smooth piece of the disjunctive feasible set obtained by fixing a consistent typed separation for every square pair and a typed description for each wall row |
+| **active constraint** / **active set** | A branch inequality that is tight, and the set of all such rows. The active set can be larger than the positive multiplier support |
+| **feature tie** | A geometry where several support descriptions are simultaneously valid. Every applicable typed branch must be retained |
+| **Fritz–John stationarity** | The first-order multiplier condition necessary at a constrained branch minimum. Satisfying it produces a stationary candidate, not a proof of minimality |
+| **normal (ordinary) Fritz–John branch** / **abnormal Fritz–John branch** | The cases where the objective multiplier is respectively positive or zero. The normal case gives a KKT multiplier certificate. One geometry may admit both certificate types; only a proved constraint qualification lets an enumeration omit every abnormal branch |
+| **zero multiplier** / **positive multiplier support** | A tight row with zero coefficient in one stationary certificate, and the smaller set of rows whose coefficients are positive. Neither is the complete contact set |
+| **rattler** | A square or cluster with feasible local motion inside a cage while the remainder stays jammed. Its variables and inequalities remain part of global feasibility |
+| **typed stationary backbone** | The proposed branch record containing all configuration variables and every typed pair and wall constraint, followed by its active subset, multiplier states and support, charts, symmetries, rattler attachments, and the continuous stationary equations they index |
+| **stationarity** | Satisfaction of a necessary first-order condition on a declared branch. It does not by itself imply rigidity, local minimality, or global optimality |
 | **rigidity** | No non-trivial feasible local motion, under a declared quotient. Contact counts are evidence for it, never a proof of it |
 | **corner** / **kink** | A point where one-sided derivatives differ, so the derivative fails to exist rather than becoming large |
 | **angle class** | A set of squares constrained to share one angle |
 | **descriptor** | A structural coordinate of a packing—contacts, angle classes, symmetry—used to steer search toward diversity rather than toward loss |
-| **bound gap** | The distance between the best known upper and lower bounds for an `n`; a property of the problem |
+| **bound gap** | The distance between the best-known upper and lower bounds for an `n`; a property of the problem |
 | **search gap** | `best_side − standing best`, signed; a property of one run |
 | **standing best** | The best side ever published for that `n`—an upper bound, not known to be optimal in the open cases |
 | **feasibility tolerance** | The margin by which HiGHS may let a returned solution violate its own constraints. Pinned at the strictest value it accepts, and the origin of the `1e-11` floor—a property of the solver, not of the hardware |
@@ -1093,7 +1159,7 @@ Three words carry controlled multiple senses—**cell**, **quench** and
 
 ## 10. A Notation Card
 
-Symbols, in the order the document introduces them.
+Symbols are grouped by topic.
 A subscript `i` always picks out one square; a bare letter is the whole `n`-vector.
 `i` and `j` index squares and `r` indexes net directions; none of the three has a row
 below. `k` and `l`, which index the four corners of one square, get one because they
@@ -1136,20 +1202,18 @@ appear inside `oᵢₖ`.
 | `f` | polynomial | The minimal polynomial of `α`; `deg f` is the field’s degree |
 | `β` | element of `ℚ(α)` | An arbitrary field element, represented by a polynomial in `α` of degree `< deg f` |
 | `u` | algebraic | The primitive element for Trump’s packing, `u = tan(a/2)`, of degree 8 |
+| `q` | `ℝ^(3n+1)` | The support-branch configuration vector collecting `s` and every square’s centre and angle |
+| `g_j` | real-valued function | Clearance in support-branch row `j`; feasibility is `g_j(q) >= 0` and the row is active when `g_j(q) = 0` |
+| `η` | nonnegative real | The objective multiplier in the tutorial’s Fritz–John equation |
+| `κ_j` | nonnegative real | The multiplier on branch constraint `g_j` in that equation |
 | `δ` | real | Slack in a container-inflation ladder |
-| `p` | real | The exponent of a superdisk relaxation |
+| `p` | real | The exponent in the superdisk family `|x|^(2p) + |y|^(2p) <= 1`; `p = 1` is a circle and `p -> infinity` approaches a square |
 
 Two collisions are worth naming because they come from outside this document.
 Smale’s **α-theory**, in [§5](#5-algebra-versus-numerics), has nothing to do with the
 primitive element `α`. And the neighbouring research reports use `θ` for what this
 document calls `a`, and `u_i` for a per-square half-angle parameter rather than a single
 primitive element.
-
-One symbol was moved to avoid a third.
-`μ` is the atomic measure throughout
-[§1](#how-a-weighted-atomic-lower-bound-proof-works), which is the standard notation for
-it, so the minimal polynomial of `α` is written `f` here rather than the `μ` this
-document used before.
 
 ## 11. Further Reading
 
@@ -1188,9 +1252,20 @@ and specifically what they do and do not prove: they find a relation, which is e
 and never a proof that the relation is exact.
 
 **Optimality conditions** ([§5](#5-algebra-versus-numerics)). Lagrange multipliers in
-the classical case, Fritz-John and KKT for inequalities.
-The relevant fact is that a local extremum on a constraint manifold forces a rank drop,
-which is what supplies the missing equations in determinant form.
+the classical case, Fritz–John and KKT for inequalities.
+Fritz–John retains an objective multiplier and remains necessary without the regularity
+assumptions KKT needs; a constraint qualification is what permits the abnormal
+zero-objective-multiplier branch to be discarded.
+The rank condition supplies the missing equations in determinant form, but it is only a
+necessary condition.
+
+**Rigidity and jamming** ([§5](#contact-graphs-stationary-branches-and-rattlers)).
+Connelly–Whiteley on second-order rigidity and Donev et al.
+on jamming, stresses, and rattlers provide the method language collected in the
+archive’s
+[rigidity sources](packing/resources/README.md#rigidity-and-verification-method-sources).
+They are analogues whose hypotheses must be re-established for rotating squares and
+their nonsmooth feature ties, not imported theorems about `s(11)`.
 
 **Energy landscapes** ([§7](#7-how-the-search-is-approached-and-why)). Stillinger and
 Weber’s inherent-structure decomposition, which the quench map is borrowed from; and
@@ -1217,18 +1292,21 @@ likewise has no retained first-party document:
 - Montanher et al. (2018), the only rigorous computer-assisted optimality proof for
   rotatable unit squares in any container—three squares in a circle
 - Martin (2000), the compactness results behind “the infimum is attained”
+- Dewar (2024), direction-typed contact graphs for homothetic oriented squares—useful
+  combinatorial method evidence, not a completeness theorem for the global `n = 11`
+  search
 
 ### What does the arithmetic here
 
-Worth knowing, since a project doing exact algebra might be assumed to depend on a
-computer algebra system, and this one does not.
+The exact algebra does not require a computer algebra system.
+An optional system is used only to rederive one constant.
 
 - **Exact `ℚ(α)` arithmetic is hand-rolled and standard library only.** Elements are
   polynomials with exact rational coefficients reduced modulo the minimal polynomial;
   equality is a zero-representative test and sign is rational-interval bisection.
   No floating point appears in either decision.
-- **A computer algebra system is optional and marginal**, used in one place to re-derive
-  a constant the verifier already carries.
+- **A computer algebra system is optional**, used in one place to rederive a constant
+  the verifier already carries.
 - **The linear programs go through HiGHS**, called from SciPy, whose feasibility
   tolerance is the origin of the floor discussed in
   [§8](#8-what-is-known-and-what-is-not).
@@ -1251,11 +1329,6 @@ computer algebra system, and this one does not.
 | how packings are found, refined and verified | [Algorithms and Tooling](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) |
 | why pointing should beat scaling | [A Search Philosophy](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) |
 | what is known for every `n ≤ 100` | [`frontier/`](packing/frontier/README.md) |
-
-The documents here are unusually willing to say what they have *not* established.
-That is deliberate: most of the soundness failures logged here pointed in the
-**flattering** direction, where the error looks like success.
-A hedge in this directory is usually carrying weight.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

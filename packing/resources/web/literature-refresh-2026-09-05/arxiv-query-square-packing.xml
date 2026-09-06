@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/mmR67JomS0OtM8u64El7A2GmtqM</id>
+  <title>arXiv Query: search_query=ti:"square packing"&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-09-05T20:47:45Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=ti:%22square+packing%22&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>14</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2601.22163v1</id>
+    <title>On a square packing conjecture of Erdős</title>
+    <updated>2026-01-10T06:21:21Z</updated>
+    <link href="https://arxiv.org/abs/2601.22163v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.22163v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $f(n)$ be the maximum sum of the sides of non-overlapping squares (or equilateral triangles) packed inside a unit square or (unit equilateral triangle). In this paper, we explore some properties of $f$ and examine how the square and triangle cases are similar. We prove that a conjecture of Erdős, which says that $f(k^2+1) = k$ for all $k$, is equivalent to the convergence of the series $\sum_{k\geqslant 1}(f(k^2+1)-k)$. We also explore the case of parallelograms and discuss how that is similar to the case of unit square and triangle.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-10T06:21:21Z</published>
+    <arxiv:comment>3 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Anshul Raj Singh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.04603v2</id>
+    <title>Square packing with $O(x^{0.6})$ wasted area</title>
+    <updated>2026-03-15T23:15:05Z</updated>
+    <link href="https://arxiv.org/abs/2508.04603v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.04603v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show a new construction for square packing, and prove that it is more efficient than previous results.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-06T16:23:52Z</published>
+    <arxiv:comment>24 pages, 20 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Hong Duc Bui</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.23284v2</id>
+    <title>An Equivalence Between Erdős's Square Packing Conjecture and the Convergence of an Infinite Series</title>
+    <updated>2025-12-20T07:06:57Z</updated>
+    <link href="https://arxiv.org/abs/2506.23284v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.23284v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $f(n)$ denote the maximum sum of the side lengths of $n$ non-overlapping squares packed inside a unit square. We prove that $f(n^2+1) = n$ for all positive integers $n$ if and only if the sum $\sum_{k\geq 1}(f(k^2+1)-k)$ converges. We also show that if $f(k^2+1) = k$, for infinitely many positive integers then $f(k^2+1) = k$ for all positive integers.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-29T15:15:20Z</published>
+    <arxiv:comment>The paper contains a major flaw. In the proof of the second theorem, we make use of an inequality due to Halasz, which is valid only for small values of c, particularly for c less than k. Our proof ignores this restriction on c, which renders the argument flawed</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Anshul Raj Singh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.09489v1</id>
+    <title>Square Packing with Asymptotically Smallest Waste Only Needs Good Squares</title>
+    <updated>2025-04-13T09:08:08Z</updated>
+    <link href="https://arxiv.org/abs/2504.09489v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.09489v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the problem of packing a large square with nonoverlapping unit squares. Let $W(x)$ be the minimum wasted area when a large square of side length $x$ is packed with unit squares. In Roth and Vaughan's paper that proves the lower bound $W(x) \notin o(x^{1/2})$, a good square is defined to be a square with inclination at most $10^{-10}$ with respect to the large square. In this article, we prove that in calculating the asymptotic growth of the wasted space, it suffices to only consider packings with only good squares. This allows the lower bound proof in Roth and Vaughan's paper to be simplified by not having to handle bad squares.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-13T09:08:08Z</published>
+    <arxiv:comment>7 pages, 7 figures, submitted to CCCG 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Hong Duc Bui</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.07274v2</id>
+    <title>A note on the Erdős conjecture about square packing</title>
+    <updated>2024-11-18T15:45:54Z</updated>
+    <link href="https://arxiv.org/abs/2411.07274v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.07274v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $f(n)$ denote the maximum total length of the sides of $n$ squares packed inside a unit square. Erdős conjectured that $f(k^2+1)=k$. We show that the conjecture is true if we assume that the sides of the squares are parallel to the sides of the unit square.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-11T12:28:59Z</published>
+    <arxiv:comment>5 pages. Comments welcome!</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Jineon Baek</name>
+    </author>
+    <author>
+      <name>Junnosuke Koizumi</name>
+    </author>
+    <author>
+      <name>Takahiro Ueoro</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.01283v2</id>
+    <title>Square packings and rectifiable doubling measures</title>
+    <updated>2025-05-07T22:56:29Z</updated>
+    <link href="https://arxiv.org/abs/2309.01283v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.01283v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that for all integers $2\leq m\leq d-1$, there exists doubling measures on $\mathbb{R}^d$ with full support that are $m$-rectifiable and purely $(m-1)$-unrectifiable in the sense of Federer (i.e. without assuming $μ\ll\mathcal{H}^m$). The corresponding result for 1-rectifiable measures is originally due to Garnett, Killip, and Schul (2010). Our construction of higher-dimensional Lipschitz images is informed by a simple observation about square packing in the plane: $N$ axis-parallel squares of side length $s$ pack inside of a square of side length $\lceil N^{1/2}\rceil s$. The approach is robust and when combined with standard metric geometry techniques allows for constructions in complete Ahlfors regular metric spaces. One consequence of the main theorem is that for each $m\in\{2,3,4\}$ and $s&lt;m$, there exist doubling measures $μ$ on the Heisenberg group $\mathbb{H}^1$ and Lipschitz maps $f:E\subset\mathbb{R}^m\rightarrow\mathbb{H}^1$ such that $μ\ll\mathcal{H}^{s-ε}$ for all $ε&gt;0$, $f(E)$ has Hausdorff dimension $s$, and $μ(f(E))&gt;0$. This is striking, because $\mathcal{H}^m(f(E))=0$ for every Lipschitz map $f:E\subset\mathbb{R}^m\rightarrow\mathbb{H}^1$ by a theorem of Ambrosio and Kirchheim (2000). Another application of the square packing construction is that every compact metric space $\mathbb{X}$ of Assouad dimension strictly less than $m$ is a Lipschitz image of a compact set $E\subset[0,1]^m$. Of independent interest, we record the existence of doubling measures on complete Ahlfors regular metric spaces with prescribed lower and upper Hausdorff and packing dimensions.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-03T22:43:14Z</published>
+    <arxiv:comment>40 pages, 5 figures: this is the final version in Discrete Analysis Journal</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Discrete Analysis, 2025:3, 40 pp</arxiv:journal_ref>
+    <author>
+      <name>Matthew Badger</name>
+    </author>
+    <author>
+      <name>Raanan Schul</name>
+    </author>
+    <arxiv:doi>10.19086/da.137798</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.19086/da.137798" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.06597v1</id>
+    <title>Reducing Moser's Square Packing Problem to a Bounded Number of Squares</title>
+    <updated>2021-03-11T10:52:22Z</updated>
+    <link href="https://arxiv.org/abs/2103.06597v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.06597v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The problem widely known as Moser's Square Packing Problem asks for the smallest area $A$ such that for any set $S$ of squares of total area $1$, there exists a rectangle $R$ of area $A$ into which the squares in $S$ permit an internally-disjoint, axis-parallel packing. It was formulated by Moser in 1966 and remains unsolved so far. The best known lower bound of $\frac{2+\sqrt{3}}{3}\leq A$ is due to Novotný and has been shown to be sufficient for up to $11$ squares by Platz, while Hougardy and Ilhan have established that $A &lt; 1.37$. In this paper, we reduce Moser's Square Packing Problem to a problem on a finite set of squares in the following sense: We show how to compute a natural number $N$ such that it is enough to determine the value of $A$ for sets containing at most $N$ squares with total area $1$.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-11T10:52:22Z</published>
+    <arxiv:comment>15 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Meike Neuwohner</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2011.06889v1</id>
+    <title>Gaps in the spectrum of two-dimensional square packing of stiff disks</title>
+    <updated>2020-11-13T13:02:30Z</updated>
+    <link href="https://arxiv.org/abs/2011.06889v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2011.06889v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we investigate via an asymptotic method the opening of gaps in the spectrum of a stiff problem for the Laplace operator $-Δ$ in $\mathbb{R}^2$ perforated by contiguous circular holes. The density and the stiffness constants are of order $\varepsilon^{-2m}$ and $\varepsilon^{-1}$ in the holes with $m\in (0,1/2)$. We provide an explicit expression of the leading terms of the eigenvalues and the corresponding eigenfunctions which are related to the Bessel functions of the first kind.</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-11-13T13:02:30Z</published>
+    <arxiv:primary_category term="math.AP"/>
+    <author>
+      <name>L. D'Elia</name>
+    </author>
+    <author>
+      <name>S. A. Nazarov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1806.09562v1</id>
+    <title>Maximum Area Axis-Aligned Square Packings</title>
+    <updated>2018-06-25T16:51:34Z</updated>
+    <link href="https://arxiv.org/abs/1806.09562v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1806.09562v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given a point set $S=\{s_1,\ldots , s_n\}$ in the unit square $U=[0,1]^2$, an anchored square packing is a set of $n$ interior-disjoint empty squares in $U$ such that $s_i$ is a corner of the $i$th square. The reach $R(S)$ of $S$ is the set of points that may be covered by such a packing, that is, the union of all empty squares anchored at points in $S$. It is shown that area$(R(S))\geq \frac12$ for every finite set $S\subset U$, and this bound is the best possible. The region $R(S)$ can be computed in $O(n\log n)$ time. Finally, we prove that finding a maximum area anchored square packing is NP-complete. This is the first hardness proof for a geometric packing problem where the size of geometric objects in the packing is unrestricted.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-06-25T16:51:34Z</published>
+    <arxiv:comment>20 pages, 13 figures. A 15-page extended abstract appears in the Proceedings of the 43rd International Symposium on Mathematical Foundations of Computer Science (Liverpool, UK, 2018)</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Hugo A. Akitaya</name>
+    </author>
+    <author>
+      <name>Matthew D. Jones</name>
+    </author>
+    <author>
+      <name>David Stalfa</name>
+    </author>
+    <author>
+      <name>Csaba D. Tóth</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1603.00060v1</id>
+    <title>Anchored Rectangle and Square Packings</title>
+    <updated>2016-02-29T21:44:01Z</updated>
+    <link href="https://arxiv.org/abs/1603.00060v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1603.00060v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>For points $p_1,\ldots , p_n$ in the unit square $[0,1]^2$, an \emph{anchored rectangle packing} consists of interior-disjoint axis-aligned empty rectangles $r_1,\ldots , r_n\subseteq [0,1]^2$ such that point $p_i$ is a corner of the rectangle $r_i$ (that is, $r_i$ is \emph{anchored} at $p_i$) for $i=1,\ldots, n$. We show that for every set of $n$ points in $[0,1]^2$, there is an anchored rectangle packing of area at least $7/12-O(1/n)$, and for every $n\in \mathbf{N}$, there are point sets for which the area of every anchored rectangle packing is at most $2/3$. The maximum area of an anchored \emph{square} packing is always at least $5/32$ and sometimes at most $7/27$.
+  The above constructive lower bounds immediately yield constant-factor approximations, of $7/12 -\varepsilon$ for rectangles and $5/32$ for squares, for computing anchored packings of maximum area in $O(n\log n)$ time. We prove that a simple greedy strategy achieves a $9/47$-approximation for anchored square packings, and $1/3$ for lower-left anchored square packings. Reductions to maximum weight independent set (MWIS) yield a QPTAS and a PTAS for anchored rectangle and square packings in $n^{O(1/\varepsilon)}$ and $\exp({\rm poly}(\log (n/\varepsilon)))$ time, respectively.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-02-29T21:44:01Z</published>
+    <arxiv:comment>33 pages, 20 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Kevin Balas</name>
+    </author>
+    <author>
+      <name>Adrian Dumitrescu</name>
+    </author>
+    <author>
+      <name>Csaba D. Tóth</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1403.5665v2</id>
+    <title>Online Square-into-Square Packing</title>
+    <updated>2016-12-31T19:38:28Z</updated>
+    <link href="https://arxiv.org/abs/1403.5665v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1403.5665v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In 1967, Moon and Moser proved a tight bound on the critical density of squares in squares: any set of squares with a total area of at most 1/2 can be packed into a unit square, which is tight. The proof requires full knowledge of the set, as the algorithmic solution consists in sorting the objects by decreasing size, and packing them greedily into shelves. Since then, the online version of the problem has remained open; the best upper bound is still 1/2, while the currently best lower bound is 1/3, due to Han et al. (2008). In this paper, we present a new lower bound of 11/32, based on a dynamic shelf allocation scheme, which may be interesting in itself. We also give results for the closely related problem in which the size of the square container is not fixed, but must be dynamically increased in order to ac- commodate online sequences of objects. For this variant, we establish an upper bound of 3/7 for the critical density, and a lower bound of 1/8. When aiming for accommodating an online sequence of squares, this corresponds to a 2.82...- competitive method for minimizing the required container size, and a lower bound of 1.33 . . . for the achievable factor.</summary>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-03-22T14:18:18Z</published>
+    <arxiv:comment>33 pages, 13 figures; full version of a preliminary extended abstract that appeared in APPROX 2013</arxiv:comment>
+    <arxiv:primary_category term="cs.DM"/>
+    <author>
+      <name>Sándor P. Fekete</name>
+    </author>
+    <author>
+      <name>Hella-Franziska Hoffmann</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1401.5583v1</id>
+    <title>Improved Online Square-into-Square Packing</title>
+    <updated>2014-01-22T07:52:52Z</updated>
+    <link href="https://arxiv.org/abs/1401.5583v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1401.5583v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we show an improved bound and new algorithm for the online square-into-square packing problem. This two-dimensional packing problem involves packing an online sequence of squares into a unit square container without any two squares overlapping. The goal is to find the largest area $α$ such that any set of squares with total area $α$ can be packed. We show an algorithm that can pack any set of squares with total area $α\leq 3/8$ into a unit square in an online setting, improving the previous bound of $11/32$.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-01-22T07:52:52Z</published>
+    <arxiv:comment>15 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Brian Brubach</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1010.4502v1</id>
+    <title>Online Square Packing</title>
+    <updated>2010-10-21T15:40:13Z</updated>
+    <link href="https://arxiv.org/abs/1010.4502v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1010.4502v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We analyze the problem of packing squares in an online fashion: Given a semi-infinite strip of width 1 and an unknown sequence of squares of side length in [0,1] that arrive from above, one at a time. The objective is to pack these items as they arrive, minimizing the resulting height. Just like in the classical game of Tetris, each square must be moved along a collision-free path to its final destination. In addition, we account for gravity in both motion (squares must never move up) and position (any final destination must be supported from below). A similar problem has been considered before; the best previous result is by Azar and Epstein, who gave a 4-competitive algorithm in a setting without gravity (i.e., with the possibility of letting squares "hang in the air") based on ideas of shelf-packing: Squares are assigned to different horizontal levels, allowing an analysis that is reminiscent of some bin-packing arguments. We apply a geometric analysis to establish a competitive factor of 3.5 for the bottom-left heuristic and present a 34/13=2.615...-competitive algorithm.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-10-21T15:40:13Z</published>
+    <arxiv:comment>24 pages, 10 figures; full version of extended abstract that appeared in WADS 2009</arxiv:comment>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Sandor P. Fekete</name>
+    </author>
+    <author>
+      <name>Tom Kamphans</name>
+    </author>
+    <author>
+      <name>Nils Schweer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0504341v1</id>
+    <title>The Erdos and Campbell-Staton conjectures about square packing</title>
+    <updated>2005-04-16T23:25:52Z</updated>
+    <link href="https://arxiv.org/abs/math/0504341v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0504341v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Put n open non-overlapping squares inside a unit square, and let f(n) denote the maximum possible value of the sum of the side lengths of the n squares. Campbell and Staton, building on a question of Erdos, conjectured that f(k^2+2c+1)=k+c/k, where c is any integer and k\geq |c|. We show that if this conjecture is true for one value of c, then it is true for all values of c.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-04-16T23:25:52Z</published>
+    <arxiv:comment>2 pages</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Iwan Praton</name>
+    </author>
+  </entry>
+</feed>
