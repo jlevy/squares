@@ -57,21 +57,15 @@ Results first established here, as far as the recorded source searches show:
 
 ### Notable Results (`S4`–`S5`)
 
-- **[T-022](packing/frontier/RESULTS.md):
-  `s(11) ≥ 38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703…`, the current
-  lower endpoint for the smallest open case (`S5`).**
-  [`s(11)`](packing/frontier/n-011.md) is the case this project exists for, and the
-  recorded public search found no stronger lower bound after Stromquist published
-  `2 + 4/√5 = 3.788854` in 2003. A first-party
+- **[T-018](packing/frontier/RESULTS.md): `s(11) ≥ 381/100 = 3.81`, improving the lower
+  bound for the smallest open case (`S5`).** [`s(11)`](packing/frontier/n-011.md) is the
+  case this project exists for, and the recorded public search found no stronger lower
+  bound after Stromquist published `2 + 4/√5 = 3.788854` in 2003. A first-party
   [weighted fractional unavoidable-set certificate](packing/cases/n11_fractional_certificate/)
   —1121 weighted atoms, total mass `434547/40000`, every placement of a shrunken square
   covering mass at least `1`—proves that eleven unit squares do not fit in a container
-  of side `381/100 = 3.81` ([T-018](packing/frontier/RESULTS.md)). An exact refinement
-  of the angular support calculation validates a strict family of rational dilations;
-  rational density and upward embedding promote its supremum to the displayed weak
-  bound. There is no certificate or no-fit decision at the endpoint, and no strict
-  inequality is claimed.
-  The interval narrows from `0.088230` to about `0.067058`; the gap is not closed.
+  of side `381/100 = 3.81`. This narrows the interval from `0.088230` to about
+  `0.067084`; the gap is not closed.
   Two certificate rungs are retained below `381/100`: `19/5`, the value that first
   passed Stromquist, and `189/50`, the calibration rung below him that was run first on
   purpose and proves nothing new.
@@ -82,10 +76,10 @@ Results first established here, as far as the recorded source searches show:
   A
   [self-contained package for third-party checking](packing/cases/n11_fractional_certificate/thirdparty/)
   ships with it, so the `19/5` rung can be decided without trusting anything else here.
-  The separate
-  [T-022 proof packet](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md)
-  binds the exact source hash, full five-condition replay, sharpened containment lemma,
-  density argument, and endpoint limitation.
+  A small refinement, recorded in the
+  [T-022 proof packet](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md),
+  gives `s(11) ≥ 3.810025723614703…` as a weak limit bound; it does not decide fit at
+  that endpoint. The certificate at `3.81` supplies the proof explained here.
 - **T-019: `s(17), s(18), s(19) ≥ 459/100`, displacing the published value (`S4`).** The
   adopted bound for [these](packing/frontier/n-017.md) three cases was Massaccesi’s
   `4.5058`, taken from a source rather than proved here.

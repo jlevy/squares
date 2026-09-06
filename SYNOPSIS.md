@@ -60,6 +60,14 @@ Read it before citing any capability here.
 
 ### Results and their significance
 
+The core exposition uses T-018’s simple `s(11) >= 3.81` bound.
+The technical register below retains T-022’s small exact refinement; its algebraic
+endpoint need not complicate the introduction.
+Future research follows the
+[payoff policy](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md#research-payoff-and-exposition):
+prioritize substantial bound improvements and methods or theorems that make them
+possible.
+
 Every result this project has registered, in the reading order its significance scores
 set. The full claims, the rationale behind each score, and the next evidence-improving
 action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the `V`,
@@ -228,6 +236,8 @@ case or experiment separately.
 | [BC-230 Post-Freeze Control Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-postfreeze-control-review.md) | dated review record | record | retained | — |
 | [BC-232 Retained-State Fractional-Cutting Disposition](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-disposition.md) | research synthesis | record | retained | — |
 | [BC-232 Leg-02 Microreceipt 001](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-leg-02-microreceipt-001.md) | research synthesis | record | retained | — |
+| [Agenda 025 T+2-to-T+4 Fractional Manager Gate](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/gate-hour-04.md) | research synthesis | record | retained | — |
+| [Agenda 024 BC-220 Integration Decision](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/gate-hour-04-decision.md) | research synthesis | record | retained | — |
 | [BC-233 Inset-Seed Screen and Released-Support Disposition](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-233-disposition.md) | research synthesis | record | retained | — |
 | [Agenda 025 T+2 Commissioning Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/checkpoint-hour-02.md) | research synthesis | record | retained | — |
 | [BC-242 Full-Size Density Proof Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-242-full-size-density-proof-contract.md) | research synthesis | record | retained | — |
@@ -294,6 +304,7 @@ case or experiment separately.
 | [Review: external strategies for pushing the \(s(11)\) lower bound past 3.81](docs/project/reviews/review-2026-09-05-strategy-gpt-56-pro-gemini-grok.md) | dated review record | record | superseded | [X-016 — After 3.81: Two Managers, Six Gates, One Proof Boundary](packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md) |
 | [Adversarial Senior Review of the Agenda 024 Portfolio](docs/project/reviews/review-2026-09-06-agenda024-adversarial-senior-strategy.md) | dated review record | record | superseded | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) |
 | [Independent Review of the T-022 Exact-Containment Limit](docs/project/reviews/review-2026-09-06-t022-dilation-limit.md) | dated review record | record | retained | — |
+| [Independent Review of the Fixed-Weight Core-Shrink Obstruction](docs/project/reviews/review-2026-09-06-core-shrink-obstruction.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
 | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |
@@ -459,11 +470,14 @@ The
 [T+2-to-T+10 continuation addendum](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
 is the single current cold-review entry point and execution authority for the partially
 completed post-T+2 continuation.
-After the `2026-09-06T10:22:36Z` cutoff, the fixed `2026-09-06T18:22:36Z` outer deadline
-permits only a truthful partial continuation: the eventual handoff records the active
-minute actually reached rather than promising T+10 or minute 600. It preserves the first
-block’s frozen packets and binds the active-time, role, safety, BC-241, BC-232, BC-243,
-and gate contracts for the next 480 active portfolio minutes.
+The user’s credit-interruption amendment excludes unavailable time from the wall
+allowance. The addendum records the accounting boundaries, revised deadlines, and
+conservative active-minute position `124:14`, currently held for recovery integration.
+BC-232’s completed recovery produced no row-converged covering; BC-241’s independent
+local-scope review is complete and awaiting checkpoint publication.
+The eventual handoff records the active minute actually reached.
+The addendum preserves the first block’s frozen packets and binds the active-time, role,
+safety, BC-241, BC-232, BC-243, and gate contracts.
 [Agenda 024](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md) remains its
 control plane. It coordinates two disjoint programs: the exact fractional frontier in
 [agenda 025](packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md) and
@@ -3768,11 +3782,9 @@ architecture follows Burns, and the LP instance and parameter line follows Massa
 This project’s instances and generator moved seven registered cases in one day.
 `s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first public movement of
 that bound located by the recorded search after Stromquist stated `2 + 4/sqrt(5)` in
-2003\. [T-022](packing/frontier/RESULTS.md) combines that source with an exact
-containment refinement and promotes the resulting strict rational-dilation family’s
-supremum, `38100*sqrt(8100042893309449)/899996306539`, to a weak bound; neither an
-endpoint certificate nor a strict inequality is claimed.
-Both carry S5 because `n = 11` is the smallest open case.
+2003\. [T-022](packing/frontier/RESULTS.md) retains a small exact refinement to
+`3.810025723614703…`; its proof and endpoint limitations remain in the technical record.
+The shared S5 rubric category does not make these contributions comparable in size.
 `s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound located that
 was proved about twelve squares rather than inherited from eleven.
 `s(17) >= 459/100`, and `n = 18` and `n = 19` at the same side without a monotonicity

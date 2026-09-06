@@ -257,8 +257,8 @@ This equivalence does not make host-sensitive measurements portable.
 Timing, floating-point last bits, nondeterministic search trajectories, or any method
 whose criterion names the machine or operator still needs the preregistered regime or a
 fresh prospective one.
-Exact-algebraic work with a verified hash chain and identical controls may resume across
-the bridge; a result whose meaning depends on the bridge may not.
+Exact-algebraic work with the same committed inputs and identical controls may resume
+across the bridge; a result whose meaning depends on the bridge may not.
 
 The cost was paid in
 [session-078](packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md):
@@ -389,7 +389,7 @@ rotted; the split has to be something the gate computes and can refuse.
 ## General principles
 
 `OR-1` through `OR-13` say how a particular thing is done here.
-The two below are different in kind: they are the standing principles those procedures
+The three below are different in kind: they are the standing principles those procedures
 answer to, and when a procedure and a principle disagree it is the procedure that is
 wrong. They are stated separately so that a future agent inheriting a rule it finds
 pointless has somewhere to check what the rule was for.
@@ -472,6 +472,29 @@ Between those blocks, follow the process where it is inconvenient and record the
 friction with evidence, rather than routing around it in the moment.
 Friction noticed during a research slice is an input to the next efficiency block, not a
 licence to change the rules mid-slice.
+
+### OR-16: Use Git for repository integrity; reserve checksums for real trust boundaries
+
+Identify committed source, results, and review packets by Git revision and
+repository-relative path.
+Do not add SHA-256 manifests beside those files or hash both sides of a trusted
+save-and-read round trip.
+Compare complete content or regenerated semantic results when a check needs to detect
+drift.
+
+A checksum must name the boundary it crosses, its independently supplied expected value,
+and the failure it detects.
+A downloaded artifact or a proof certificate distributed for independent checking can
+justify one; a local handoff alone does not.
+Keep existing frozen evidence intact, but do not repeat its digests in each new plan or
+review. The detailed policy is in
+[development.md](development.md#hashes-and-repository-owned-artifacts) and
+`tbd guidelines general-coding-rules`.
+
+The owner requested this rule on 2026-09-06 after the PR #97 continuation added
+duplicate packet hashes and a checker-side manifest for files already tracked together
+in Git. `think-jyf4` tracks their removal.
+Include this rule when briefing subagents that create artifacts or validation checks.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -1,7 +1,8 @@
 # Agenda 026 T+2 to T+4 Closure Gate
 
-Status: **in progress from active minute 120; the closure-manager restart receipt is
-recorded, and the separately released BC-241 source-distinct review is running.**
+Status: **BC-241 accepted by the closure manager at retained-record-dependent local
+scope and awaiting coordinator integration; the shared clock remains held at active
+minute 124:14, and the joint T+4 gate is not crossed.**
 
 ## First Closure-Manager Microreceipt
 
@@ -112,17 +113,93 @@ and `factor_j * K_j = 2` for every audited row, and run the three frozen mutatio
 active-row coefficient change, a selected-axis row reversal with the retained stress,
 and a `2/K_j` to `1/K_j` change that changes the exact product from two to one.
 
-## Pending BC-241 Evidence and Max Disposition
+## First-Receipt Pending State
 
-The manager is waiting for the reviewer’s first receipt, single replay outcome, checker
-and focused-test results, retained-arithmetic audit, three mutation results, and final
-JSON packet. The manager will inspect those bytes and make the final `max` disposition
-without editing the reviewer-owned paths.
+At the first-receipt boundary, the manager was waiting for the reviewer’s first receipt,
+single replay outcome, checker and focused-test results, retained-arithmetic audit,
+three mutation results, and final JSON packet.
+The manager did not edit the reviewer-owned paths.
 
-The next unchanged action is to preserve the frozen inputs and local-only boundary while
-waiting for the reviewer.
-No BC-240 rerun, radius-generator run, BC-243 work, shared generated-record edit, push,
-merge, or claim promotion is authorized in this lane.
+That receipt remains frozen in commit `9a93b2ea0b34701304e311aa080ddd31d3c70e88`. No
+BC-240 rerun, radius-generator run, BC-243 work, shared generated-record edit, push,
+merge, or claim promotion occurred in this lane.
+
+## Terminal BC-241 Microreceipt
+
+The reviewer returned its terminal packet at `2026-09-06T16:11:20Z`. The closure manager
+inspected the packet, checker, tests, exact witnesses retained in the packet, and
+changed-path scope at shared head `0b6ca57627887863a29ad54f2fbbebb8e4690800`.
+
+### Clock and Wall Accounting
+
+| Interval or control | Disposition |
+| --- | --- |
+| Active segment 1 | `2026-09-06T11:38:05Z` through `2026-09-06T11:39:49Z`, 1 minute 44 seconds; active minute 120 through 121:44 |
+| BC-232 recovery hold | `2026-09-06T11:39:49Z` through `2026-09-06T11:47:39Z`; excluded from active time |
+| Active segment 2 | `2026-09-06T11:47:39Z` through the conservative cutoff `2026-09-06T11:50:09Z`, 2 minutes 30 seconds; active minute 121:44 through 124:14 |
+| Credit-outage exclusion | `2026-09-06T11:50:09Z` through `2026-09-06T16:07:05Z`, exactly 15,416 seconds or 4 hours 16 minutes 56 seconds; excluded by the user |
+| Recovery work | Reviewer resumed at `2026-09-06T16:07:29Z` and became terminal at `2026-09-06T16:11:20Z`; the coordinator kept the shared clock held, and no labor is backdated |
+| Current active position | Minute `124:14`, held for recovery and coordinator integration |
+| Amended eight-hour target | `2026-09-06T20:39:32Z` |
+| Amended outer deadline | `2026-09-06T22:39:32Z` |
+
+The first receipt preserves the original target and deadline as the controls then in
+force. The amended times add only the user-excluded 15,416-second outage.
+They do not change the active-time semantics, credit work during a hold, or promise
+active minute 600.
+
+### Terminal Artifacts
+
+The checkpoint containing this packet identifies these three repository-owned files:
+
+- `packing/devtools/review_trump_local_theorem.py`
+- `packing/tests/test_review_trump_local_theorem.py`
+- `packing/campaign/series/series-000-smoke-and-calibration/results/bc-241-trump-local-theorem-review.json`
+
+Git supplies their integrity boundary.
+The first receipt above preserves the historical hash audit; it does not require a new
+checksum manifest for these local outputs.
+
+The reviewer was `/root/bc241_transferable_reviewer`; the BC-240 author was
+`/root/bc240_floating_author`. The result is source-distinct by role and context.
+The reviewer wrote only the three reserved paths above and recorded no shared-state edit
+or claim promotion.
+
+### Review Evidence
+
+| Control | Observed result |
+| --- | --- |
+| Frozen inputs and source drift | The first receipt retains the original hash audit. The revised checker compares complete input content with Git revision `f9ba790a` and reads historical sources at `01ca830a`; no duplicate SHA-256 manifest is required. The declared drift remains the reviewed unused-argument removal, its caller changes, and the radius-source provenance-comment expansion. |
+| Single tangent replay | Exactly one invocation began at `2026-09-06T11:39:48Z` and exited zero: 128 of 128 exact zero certificates, no unresolved cone, no exact nonzero direction, and all seven replay self-tests true. Reported process time was 11.73 seconds wall and 11.56 seconds CPU. The timing environment emitted an unrelated Java-runtime warning before the valid replay JSON; it did not change the exit status or structured result. |
+| Aggregate arithmetic | Exact retained candidates, binding minima, shared caps, and outward rounding reproduce uniform radius `288616983/125000000000`, preferred weighted radius `808514697/200000000000`, uniform quadratic constant `2808470331/125000000`, and preferred per-row constant `2574612531/200000000`. |
+| Rows and norm conversion | The checker independently reconstructed 56 distinct tied elementary gradients. Every audited row uses `factor_j = 2/K_j` and satisfies `factor_j * K_j = 2` exactly. |
+| Branch constants | All 128 retained stresses are strictly positive with exact zero residual; near- and far-wall stress sums agree; both uniform and per-row quadratic constants reproduce their published outward bounds. |
+| Required mutations | Changing an active-row coefficient fails exact gradient identity; reversing a selected separating-axis row while retaining its stress fails the exact stress residual; changing `2/K_j` to `1/K_j` changes the product from two to one and is rejected before weighted-radius use. |
+| Selected faces | Uniform and weighted faces for branches 0 and 4 each have an exact feasible primal, exact nonnegative simplex dual, and exact zero primal-dual gap. Floating output proposes a basis only; no tolerance decides acceptance. |
+| Focused validation | Five tests passed in 34.24 seconds; Ruff reported no findings; BasedPyright reported zero errors, warnings, or notes; the standalone checker exited zero in 31.67 seconds wall and 31.15 seconds CPU; `git diff --check` passed. The closure manager inspected these retained validation receipts and did not repeat the scientific review. |
+| Forbidden work | The BC-241 reviewer and closure manager did not rerun `cases.trump11.verify_exact`; the root-run edit gate’s global regression is outside this lane. They did not run `cases.trump11.isolation_radius` or its full generator, and the checker does not invoke the tangent replay. A terminal host query at `2026-09-06T16:13:54Z` found no matching verifier, tangent, radius, checker, or BC-241 review process. |
+
+### Max Disposition
+
+**ACCEPTED: `accept_retained_record_dependent_local_scope`.**
+
+The packet independently supports BC-240’s labelled, anchored, fixed-side local
+isolation and side-stability theorem in the 33-coordinate sup norm.
+It does not support global capture, global uniqueness, global optimality, another
+contact type, or an independent replay of all radius faces.
+Complete 128-by-66 uniform and weighted face witnesses remain absent; the retained
+weighted aggregate rational is not independently recovered from every weighted face; the
+inactive-gap and symmetry producers remain retained exact premises rather than rerun
+outputs.
+Those limits are packaging obligations, not failures of the accepted local-scope
+review.
+
+No mathematical blocker remains for BC-241 at that scope.
+The closure manager makes no tbd change and does not cross the joint T+4 gate.
+BC-243 remains closed; its dual-only release requires BC-220 and the exact
+full-dimensional a.e.-depth controls, while BC-244’s continuum-primal controls are
+separate. The coordinator retains ownership of integration, shared records, bead state,
+commits, pushes, and any later claim promotion.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
