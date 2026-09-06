@@ -196,6 +196,25 @@ def test_large_coordinate_separation_preserves_the_exact_intermediate_depth() ->
     assert separated.chosen[0][0] == n
 
 
+def test_a_vertex_barely_above_the_selection_floor_still_becomes_a_site() -> None:
+    """Two unit squares overlap with depth exactly 2; a floor one attoparticle
+    below it must not lose the overlap to float rounding of the comparison."""
+    side = Fraction(4)
+    family = (
+        upright(Fraction(3, 2), Fraction(3, 2), Fraction(1), Fraction(1)),
+        upright(Fraction(2), Fraction(2), Fraction(1), Fraction(1)),
+    )
+    certificate = CeilingCertificate(2, side, Fraction(1), COARSE, family)
+    lines = arrangement_lines(certificate)
+    held = site_set_from_points(side, {(Fraction(0), Fraction(0))})
+    floor = Fraction(2) - Fraction(1, 10**18)
+    separated = screened_separation(certificate, lines, held, cap=4, select_above=floor)
+    assert separated.max_depth == 2
+    assert separated.chosen
+    assert all(depth == 2 for depth, _ in separated.chosen)
+    assert separated.violating >= len(separated.chosen)
+
+
 def test_float_identical_vertices_cannot_erase_a_thin_overlap() -> None:
     """The zero-weight square contributes an earlier edge rounded onto the overlap.
 

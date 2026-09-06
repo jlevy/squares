@@ -248,11 +248,11 @@ def depths_above(
     and how many vertices were decided exactly.
 
     The screen is `ceiling.maximum_depth`'s, with its checked bounds and an
-    exact fallback outside them. It retains the maximum even below threshold. On the
-    vertices that survive, a placement that contains the point with the margin
-    to spare is a member and one that misses it by the margin is not, so only
-    the placements whose edge passes within the margin of the vertex -- the two
-    that made it, typically -- are decided by exact arithmetic.
+    exact fallback outside them. It retains the maximum even below threshold.
+    On the vertices that survive, a placement that contains the point with the
+    margin to spare is a member and one that misses it by the margin is not,
+    so only the placements whose edge passes within the margin of the vertex
+    -- the two that made it, typically -- are decided by exact arithmetic.
     """
 
     if not vertices:
@@ -350,12 +350,13 @@ def float_vertices(
     """Every pairwise intersection inside the container, in floats, with its two
     lines; nearly parallel pairs are decided exactly and their exact point kept.
 
-    The coefficient envelope is checked before conversion. The float points
-    have error below INTERSECTION_MARGIN and only screen. A vertex that matters
-    is rebuilt exactly from the two lines that made it, which is how
+    The coefficient envelope is checked before conversion. Inside it each float
+    coordinate is within 1e-7 of the exact one, well inside the
+    INTERSECTION_MARGIN padding, and the points only screen. A vertex that
+    matters is rebuilt exactly from the two lines that made it, which is how
     `colgen.rank_candidates` reads the same arrangement. Float-identical points
-    are retained: different rational
-    vertices can round to the same point and have different exact depths.
+    are retained: different rational vertices can round to the same point and
+    have different exact depths.
     """
 
     side = certificate.outer_side
@@ -411,7 +412,13 @@ def float_vertices(
 
 @dataclass(slots=True)
 class Separation:
-    """What one exact separation found: the maximum, its cost, and the new sites."""
+    """What one exact separation found: the maximum, its cost, and the new sites.
+
+    ``violating`` is a count for the log: on the exact path it is the number of
+    vertices whose exact depth exceeds the selection threshold, and on the
+    screened path it is the number the float screen could not rule out, an
+    upper bound on that. Nothing decides on it.
+    """
 
     max_depth: Fraction
     decided: int
@@ -487,7 +494,9 @@ def screened_separation(
         )
     order = np.argsort(-depth, kind="stable")
     floor = float(max(Fraction(0), min(select_above, certificate.total_weight)))
-    violating = int(np.count_nonzero(depth > floor))
+    # The same loosened comparison the site walk uses below, so the logged count
+    # never says nothing violated on an iteration that went on to add cuts.
+    violating = int(np.count_nonzero(depth >= floor - SCREEN_MARGIN))
     held = {point for orbit in sites.orbits for point in orbit}
     best = Fraction(0)
     decided = 0
@@ -804,6 +813,17 @@ def cutting_plane_loop(
                 ),
             )
         else:
+            if not depth_screening_is_safe(family) or not intersection_screening_is_safe(
+                family, lines
+            ):
+                # The exact path is orders of magnitude slower than the screen,
+                # and a run that crosses the envelope should say so in its log
+                # rather than appear to hang.
+                _write(
+                    log_sinks,
+                    "  separation: the family is outside the floating envelope, "
+                    "deciding every vertex exactly",
+                )
             separation = screened_separation(
                 family, lines, sites, cap=cap, select_above=select_above
             )
