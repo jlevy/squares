@@ -129,7 +129,7 @@ controls:
   replace:
     - "<!-- This document follows common-doc-guidelines.md."
     - |-
-      ## OR-16: Never push to a branch other than the designated one
+      ## OR-17: Never push to a branch other than the designated one
 
       <!-- This document follows common-doc-guidelines.md.
   run: python3 -m devtools.render_operating_rules --check

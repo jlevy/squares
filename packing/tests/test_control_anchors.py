@@ -9,6 +9,7 @@ anchored source the formatter had since wrapped.
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 import pytest
@@ -73,3 +74,36 @@ def test_an_anchor_matching_twice_is_refused(
     monkeypatch.setattr(anchors, "CONTROLS", spec)
     monkeypatch.setattr(anchors, "ROOT", tmp_path)
     assert anchors.main() == 1
+
+
+def test_the_injected_operating_rule_is_the_next_free_id() -> None:
+    """A control that injects a *new* rule must inject one that does not exist yet.
+
+    This broke twice on 2026-09-06 and cost `main` a red gate the second time. The
+    control named below appends a rule to `operating-rules.md` and expects the renderer
+    to report that `AGENTS.md`'s summary has drifted, which is only what happens when the
+    injected rule is a legitimate next one. Inject an id that already exists and the
+    renderer reports a duplicate instead; inject one past the end and it reports a gap.
+    Either way the control fires with the wrong message and the suite calls it a failure
+    -- correctly, but the message names contiguity rather than the stale literal, so the
+    reader is sent to the wrong file.
+
+    The anchor is fine in both cases, which is why `test_every_anchor_resolves` does not
+    catch it: what goes stale is the *payload*, not the thing it attaches to. This runs in
+    the quick lane so a rule added in a pull request fails there rather than after a merge,
+    which is how the second occurrence reached `main`.
+    """
+    rules = (anchors.ROOT.parent / "operating-rules.md").read_text(encoding="utf-8")
+    highest = max(int(m) for m in re.findall(r"^### OR-(\d+)", rules, re.M))
+    control = next(
+        item
+        for item in controls()
+        if item["name"] == "operating rules - a new rule never reaches the summary"
+    )
+    injected = re.search(r"## OR-(\d+):", "\n".join(control["replace"]))
+    assert injected is not None, "the control no longer injects a rule heading"
+    assert int(injected[1]) == highest + 1, (
+        f"the control injects OR-{injected[1]} while operating-rules.md ends at "
+        f"OR-{highest}; it must inject OR-{highest + 1} to be a new rule rather than a "
+        "duplicate or a gap"
+    )
