@@ -102,6 +102,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-085](agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md) | completed | contemporaneous | `process-review` (process) | `documentation-pass` (process) | 4 | think-uqgp | Select BC-191 (`think-ji0r`), Agenda 019's efficiency-loop measurement of row generation's cost against the container side -- row generation is 79-94% of every round, site density has never been set as a function of side, and an untuned grid cost 8.8x at n = 20's own side -- now that the retention gate is off the critical path. `think-jgeg`, the sibling question of whether the generator's own accept-or-reject decision belongs on the interval route, follows once BC-191 lands, re-based on the integer sweep rather than the Fraction sweep; the retarget candidates wait on both. `think-5j8d` is the marker Agenda 016's closeout discharged and is not this session's selection. |
 | [session-086](agent-sessions/session-086-agenda021-overnight-pass.md) | stopped | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 2 | think-db1k | BC-213, the remaining m = 5 rung at 973/200 (think-wufn), as agenda-021's closeout selects it. |
 | [session-087](agent-sessions/session-087-agenda022-continuation.md) | completed | contemporaneous | `research-loop` (correctness) | `efficiency-loop` (efficiency) | 2 | think-wufn | Take BC-215 (think-xejq), the one lever the efficiency block measured and did not wire: 20.2 per cent of deep-run work is repeated and 92 per cent of that is trees that did not move, so the tree-id cache is what takes the pull-request wall from about 221.70 s to the operator's two to two and a half minutes. |
+| [session-088](agent-sessions/session-088-agenda024-next-phases.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `pipeline-improvement` (correctness) | 2 | think-jgnv | Publish the launch PR, review first-slice packets, and commission ready work. |
 
 ### Workflow summary
 
@@ -111,11 +112,11 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 1 | 0 | 12 | 0 |
 | `factual-review` | 3 | 0 | 40 | 2 |
-| `insight-iteration` | 17 | 1 | 56 | 2 |
+| `insight-iteration` | 18 | 1 | 57 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 0 | 29 | 0 |
 | `research-loop` | 9 | 4 | 48 | 7 |
-| `pipeline-improvement` | 21 | 0 | 102 | 0 |
+| `pipeline-improvement` | 21 | 0 | 103 | 0 |
 | `documentation-pass` | 1 | 0 | 4 | 0 |
 | `review-planning-oversight` | 0 | 0 | 1 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
@@ -516,7 +517,7 @@ Status: **active**. Pursue stronger n=11 certificates through the scalar languag
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-230 | research | 11 | complete | 0 | think-c678 | After BC-220, BC-231 must implement all three exact decision routes and execute every reviewed positive and negative control. No adaptive certificate exists yet. |
-| BC-231 | tool_validation | 11, 12, 17 | ready | 0 | think-7mk4 | A trustworthy decision boundary on which an adaptive 3.8125 run may rely. |
+| BC-231 | tool_validation | 11, 12, 17 | in_progress | 0 | think-7mk4 | A trustworthy decision boundary on which an adaptive 3.8125 run may rely. |
 | BC-232 | research | 11 | in_progress | 0 | think-gmdy | Which side of eleven the current one-body formulation reaches at 3.82, or a measured reason to stop spending on this checkpoint. |
 | BC-233 | research | 11, 17 | complete | 1 | think-jbat | This seed rule is retired. Reopen margin-biased seeding only under a new preregistered mechanism that can explain why unrestricted trajectories should diverge from the byte-identical control. |
 | BC-234 | research | 11 | blocked | 0 | think-1sv0 | A directly publishable rung or a quantitative verdict on adaptive witness cores. |
@@ -525,7 +526,7 @@ Status: **active**. Pursue stronger n=11 certificates through the scalar languag
 | BC-237 | research | 11 | blocked | 2 | think-fw95 | A build/no-build decision for the next richer measure language. |
 | BC-238 | measurement_validation | 11 | blocked | 0 | think-hjoe | A result object the central retention gate can judge without trusting its generator. |
 | BC-239 | measurement_validation | 11 | blocked | 0 | think-mss2 | The fractional program's honest yield, cost, negative results, and best continuation. |
-| BC-251 | research | 11 | ready | 0 | think-0za3 | A candidate for BC-238 or a specific restriction for BC-252. |
+| BC-251 | research | 11 | blocked | 0 | think-0za3 | Restore readiness after the depth corrections reported in PR100 land and pass the retained seed/bridge controls (think-zuq5), then freeze the one target invocation. No target has run in Session088. |
 | BC-252 | research | 11 | tentative | 1 | think-361m | A finite-model test whose exact outcome would change the allocation. |
 | BC-253 | research | 11 | tentative | 2 | think-mw02 | A complete local forall-pose/exists-witness argument, not a sampled menu. |
 
@@ -545,8 +546,8 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | BC-247 | tool_validation | 3, 4, 5 | ready | 1 | think-qi66 | A measured branch price and omission control for the proposed global classifier. |
 | BC-248 | research | 11 | blocked | 2 | think-901o | Whether certificate-guided enumeration can cover the complement of the Trump neighborhood at a finite, auditable cost. |
 | BC-249 | measurement_validation | 11 | blocked | 0 | think-7dd9 | The closure program's honest theorem gain, measured costs, negative results, and best continuation. |
-| BC-254 | research | 11 | ready | 0 | think-01q4 | An exact upper certificate can retire this support; only verified D>11 can obstruct equality density. A floating LP objective decides neither. |
-| BC-255 | research | 11 | ready | 1 | think-dene | Whether one complete restricted theorem is tractable. Only mass-derived near-tight forcing needs a valid covering measure; geometric conflicts, interval no-goods and restricted wall/angle arguments do not inherently need it. |
+| BC-254 | research | 11 | in_progress | 0 | think-01q4 | An exact upper certificate can retire this support; only verified D>11 can obstruct equality density. A floating LP objective decides neither. |
+| BC-255 | research | 11 | in_progress | 1 | think-dene | Whether one complete restricted theorem is tractable. Only mass-derived near-tight forcing needs a valid covering measure; geometric conflicts, interval no-goods and restricted wall/angle arguments do not inherently need it. |
 | BC-256 | research | 11 | tentative | 2 | think-pjk7 | For H-036, verify every angle restriction and side strictly below 3.878; a counterexample need not improve Trump's record. A different target needs its own H. |
 | BC-257 | research | 11 | tentative | 2 | think-k9zi | A direct mass-below-eleven route at a declared lower side, separately scoped from H-101's equality classification at Trump. |
 
@@ -628,7 +629,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | H-070 | refuted | proof | At n = 11, outer side 191/50, and B = 9977/10000, the eligible minimum | one-sided inset: 1/2 2962983/4505800 15513/20000 | 1 |  | 8.2m wall |
 | H-090 | refuted | proof | With the frozen T-018 atoms, weights, outer side and 181 net direction | core side: 99769/100000 | 1 |  | 30s wall |
 | H-091 | refuted | proof | With the frozen T-018 atoms, weights, outer side and 181 net direction | core side: 997696/1000000 | 1 |  | 31s wall |
-| H-093 | open | proof | At container side 61/16, the retained 181-direction net and scalar cor |  | 0 |  |  |
+| H-093 | blocked | proof | At container side 61/16, the retained 181-direction net and scalar cor |  | 0 |  |  |
 | H-094 | open question | proof | Which changes to relative atom weights and D4 site orbits overcome the |  | 0 |  |  |
 | H-095 | blocked | proof | At container side 61/16, the BC-230 adaptive-core language admits a fi |  | 0 |  |  |
 | H-096 | open question | proof | Can finite rational inner kernels, contained throughout their assigned |  | 0 |  |  |

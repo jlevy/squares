@@ -74,7 +74,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 12, 17]
-    state: ready
+    state: in_progress
     priority: 0
     question: >-
       Can an exact verifier decide the adaptive-core contract and refuse uncovered
@@ -107,7 +107,10 @@ agenda:
     note: >-
       BC-250 selects only two initial slices of at most 30 minutes, then a price of
       remaining work. The full retained control matrix and acceptance conditions
-      remain unchanged; 180 minutes is not an automatic allocation.
+      remain unchanged; 180 minutes is not an automatic allocation. Session088's
+      first control-only implementation has two project routes, not triad acceptance.
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md
   - id: BC-232
     purpose: research
     owner_focus: efficiency
@@ -391,7 +394,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: blocked
     priority: 0
     question: Can the retained scalar certificate language certify side 61/16?
     hypotheses: [H-093]
@@ -408,7 +411,10 @@ agenda:
     bead: think-0za3
     workflows: [research-loop]
     depends_on: [BC-250]
-    next_evidence: A candidate for BC-238 or a specific restriction for BC-252.
+    next_evidence: >-
+      Restore readiness after the depth corrections reported in PR100 land and
+      pass the retained seed/bridge controls (think-zuq5), then freeze the one
+      target invocation. No target has run in Session088.
     parallel_group: agenda025-scalar
     program: n11-adaptive-fractional-frontier
   - id: BC-252

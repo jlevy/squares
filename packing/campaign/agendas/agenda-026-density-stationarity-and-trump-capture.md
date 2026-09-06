@@ -438,7 +438,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: in_progress
     priority: 0
     question: Does the exact D4 Trump support admit a full-size dual value above eleven?
     hypotheses: [H-099]
@@ -454,6 +454,8 @@ agenda:
       A priced admissible test, then an exact support ceiling at most eleven, a
       candidate requiring full a.e.-depth verification, or a scoped unresolved result.
     bead: think-01q4
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-screen-spec.md
     workflows: [insight-iteration, pipeline-improvement, research-loop]
     depends_on: [BC-242, BC-250]
     next_evidence: >-
@@ -465,7 +467,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: in_progress
     priority: 1
     question: What is the first complete proof obligation for a useful restricted structural theorem?
     hypotheses: [H-036, H-102]
@@ -479,6 +481,8 @@ agenda:
       A bounded proof/falsification pair with exact domain and independent check, or
       a named obstacle and a justified alternative under H-102.
     bead: think-dene
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md
     workflows: [insight-iteration]
     depends_on: [BC-250]
     next_evidence: >-
