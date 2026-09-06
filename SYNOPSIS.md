@@ -129,8 +129,8 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives eight confirmed hypotheses, nine refuted
-hypotheses, two open hypotheses, seven open questions, and thirty-five blocked
+The generated ledger currently derives eight confirmed hypotheses, ten refuted
+hypotheses, one open hypothesis, seven open questions, and thirty-five blocked
 hypotheses. No hypothesis waits on review and five are unresolved.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
 pinned the `m = 5` covering wall to a bracket of width 0.015 where it had registered
@@ -2639,7 +2639,7 @@ round that names the hypothesis, control roles included.
 | [H-065](packing/campaign/hypotheses/H-065-n11-near-tight-cell-census.md) | confirmed | The near-tight cells (mass at most `1 + 1/20`) on the retained `381/100` certificate are fewer than one fifth of the reachable cells — measured at `0.040754` by `BC-201`, a fifth of the registered threshold. The clause the claim attached to that number does not follow: the cover is a search, not a check | 1 | 16.1m wall |
 | [H-070](packing/campaign/hypotheses/H-070-n11-inset-seed-release.md) | **refuted** | At side `191/50`, the best eligible inset-screen seed improves exact rational mass after unrestricted release versus an equal-stop unseeded control | 1 | 8.2m wall |
 | [H-090](packing/campaign/hypotheses/H-090-n11-fixed-atom-core-shrink.md) | refuted | The fixed T-018 atoms retain enough covered mass after shrinking the core to `99769/100000` to certify side `3.8100381`; an exact corner witness rejects this side and every core side below `1849127/1853400`, leaving a narrower shrink interval open | 1 | 30s wall |
-| [H-091](packing/campaign/hypotheses/H-091-n11-narrow-core-shrink.md) | open | Core side `997696/1000000`, above H-090's lost corner event, retains minimum mass above `M/11` and would yield lower endpoint `3.81002667` after normalization and dilation | 0 | — |
+| [H-091](packing/campaign/hypotheses/H-091-n11-narrow-core-shrink.md) | refuted | Core side `997696/1000000` retains minimum mass above `M/11`; its measured minimum `96377/100000` instead supplies an interior witness excluding every fixed-weight core shrink that could beat T-022 using ordinary containment | 1 | 31s wall |
 
 ### Confirmed
 
@@ -2881,9 +2881,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 67 terminal rounds registered in `series-000`.
+There are 68 terminal rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1162.7 wall-minutes.
+They record 2152.1 agent-minutes and 1163.2 wall-minutes.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
 result; exp-057 stopped before target access; exp-058 stopped on the review it was
 waiting for, which arrived and accepted it.
@@ -2986,6 +2986,7 @@ archive beside it.
 | [exp-070](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-070-h-064-n11-fractional-resume.md) | 11 | target | H-064 | one retained-state, exact-depth fractional cutting leg at side `191/50` | raised the verified exact lower endpoint to `21342289572/2055263195 ≈ 10.384212408377215`; the only row-converged computational upper endpoint remains `11.055616942909783`, and the four-CPU-hour routing gate remains open | abandoned |
 | [exp-071](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-071-h-070-n11-inset-seed-release.md) | 11 | target | H-070 | three inset screens followed, when eligible, by matched released-seed and unseeded arms | released and unseeded arms converged after eight rounds to byte-identical candidates of exact mass `11142893/1000000`, missing the strict-improvement criterion | rejected |
 | [exp-110](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-110-h-090-core-shrink.md) | 11 | target | H-090 | exact source and smaller-core sweeps on frozen T-018 atoms, with normalization accepted above `M/11` | minimum `85353/100000` at an axis-aligned corner cell falls below `434547/440000`; a direct atom sum excludes all core sides below `1849127/1853400` | rejected |
+| [exp-111](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-111-h-091-core-shrink.md) | 11 | target | H-091 | exact fixed-atom replay above exp-110’s corner event, followed by direct witness-event inspection | minimum `96377/100000` at net direction 97; the witness’s first usable event exceeds the entire ordinary-containment improvement window, closing that fixed-weight route | rejected |
 
 ### Cost and provenance
 
@@ -3058,10 +3059,11 @@ archive beside it.
 | exp-070 | one 105-minute retained-state leg; no leg 2 before T+2 | 6560.3 s | — | timebox | `04e6a2ce` |
 | exp-071 | three 540-second screens plus, if eligible, two matched 2,520-second arms | 491.5 s | — | criterion | `04e6a2ce` |
 | exp-110 | one frozen core side, source replay and candidate replay | 29.86 s | — | criterion | `48a161ba` |
+| exp-111 | one frozen core side above the lost corner event, source replay and candidate replay | 30.58 s | — | criterion | `aeb683d5` |
 
-### What the 67 rounds jointly establish
+### What the 68 rounds jointly establish
 
-The 67 rounds use 2152.1 agent-minutes and 1162.7 wall-minutes under the campaign’s
+The 68 rounds use 2152.1 agent-minutes and 1163.2 wall-minutes under the campaign’s
 retained effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through

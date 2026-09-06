@@ -18,6 +18,7 @@ from dataclasses import replace
 from datetime import UTC, datetime
 from fractions import Fraction
 from pathlib import Path
+from typing import cast
 
 from strif import atomic_output_file
 
@@ -61,6 +62,58 @@ def _witness_details(
             {"side": str(side), "added_mass": str(weight)}
             for side, weight in sorted(events.items())
         ],
+    }
+
+
+def inspect_witness(source: bytes, receipt: dict[str, object]) -> dict[str, object]:
+    """Recompute a retained witness and find its first mass-recovering event.
+
+    This proves an upper bound from one placement, not the global minimum. The
+    source digest and the complete recomputed event spectrum must agree with the
+    receipt before its obstruction is used to bound any unmeasured core side.
+    """
+    if hashlib.sha256(source).hexdigest() != receipt["source_sha256"]:
+        raise ValueError("the witness receipt names different source bytes")
+    certificate, _ = load_frozen_bytes(source)
+    raw_center = receipt["witness_center_uv"]
+    if not isinstance(raw_center, list):
+        raise TypeError("the witness center must be a coordinate list")
+    center = tuple(Fraction(str(value)) for value in raw_center)
+    if len(center) != 2:
+        raise ValueError("the witness center must have two coordinates")
+    smaller = replace(certificate, square_side=Fraction(str(receipt["core_side"])))
+    details = _witness_details(smaller, int(str(receipt["worst_direction"])), center)
+    if any(details[key] != receipt[key] for key in details):
+        raise ValueError("the retained witness differs from its exact atom replay")
+    threshold = certificate.total_mass / certificate.n
+    mass = Fraction(0)
+    previous = Fraction(0)
+    critical = None
+    for event in cast(list[dict[str, str]], details["witness_inclusion_events"]):
+        previous = mass
+        mass += Fraction(event["added_mass"])
+        if mass > threshold:
+            critical = Fraction(event["side"])
+            break
+    if critical is None:
+        raise ValueError("the complete event spectrum never exceeds the usable mass")
+    admissible = Fraction(str(details["witness_admissible_up_to_side"]))
+    core_ceiling_squared = certificate.square_side**2
+    core_ceiling_squared /= 1 + certificate.largest_half_gap_tangent**2
+    return {
+        "source_sha256": receipt["source_sha256"],
+        "worst_direction": receipt["worst_direction"],
+        "first_usable_side": str(critical),
+        "mass_immediately_below": str(previous),
+        "mass_at_event": str(mass),
+        "event_added_mass": str(mass - previous),
+        "witness_admissible_up_to_side": str(admissible),
+        "first_usable_side_is_admissible": critical <= admissible,
+        "ordinary_gain_core_squared_ceiling": str(core_ceiling_squared),
+        "event_squared_minus_ordinary_ceiling": str(critical**2 - core_ceiling_squared),
+        "rejects_every_ordinary_gain_core": (
+            critical <= admissible and critical**2 >= core_ceiling_squared
+        ),
     }
 
 
@@ -186,11 +239,20 @@ def publish(
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path)
-    parser.add_argument("--square-side", type=Fraction, required=True)
-    parser.add_argument("--factor", type=Fraction, required=True)
-    parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--square-side", type=Fraction)
+    parser.add_argument("--factor", type=Fraction)
+    parser.add_argument("--output-dir", type=Path)
     parser.add_argument("--workers", type=int, default=1)
+    parser.add_argument("--inspect-witness", type=Path, help="replay a retained witness only")
     args = parser.parse_args(argv)
+    if args.inspect_witness is not None:
+        if any(value is not None for value in (args.square_side, args.factor, args.output_dir)):
+            parser.error("witness inspection cannot be combined with a new experiment")
+        receipt = json.loads(read_bounded(args.inspect_witness))
+        print(json.dumps(inspect_witness(read_bounded(args.source), receipt), indent=2))
+        return 0
+    if any(value is None for value in (args.square_side, args.factor, args.output_dir)):
+        parser.error("an experiment requires --square-side, --factor and --output-dir")
     if args.output_dir.exists():
         parser.error("the output directory must be fresh")
     source = read_bounded(args.source)

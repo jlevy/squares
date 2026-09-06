@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from devtools.core_shrink import evaluate, publish
+from devtools.core_shrink import evaluate, inspect_witness, publish
 from devtools.decide_certificate import decide, load
 
 PACKING = Path(__file__).resolve().parents[1]
@@ -120,3 +120,39 @@ def test_exp110_corner_obstruction_replays_without_the_sweep() -> None:
     proposed = Fraction(receipt["proposed_side"])
     assert proposed - Fraction(1, 100000) > 0
     assert (proposed - Fraction(1, 100000)) ** 2 > squared
+
+
+@pytest.mark.parametrize(
+    ("experiment", "event", "before", "at", "excludes_ordinary"),
+    [
+        ("exp-110-h-090", "1849127/1853400", "85353/100000", "4001/4000", False),
+        (
+            "exp-111-h-091",
+            "1696802860582378979/1700716629721128200",
+            "96377/100000",
+            "218011/200000",
+            True,
+        ),
+    ],
+)
+def test_retained_witness_recovery_events(
+    experiment: str, event: str, before: str, at: str, *, excludes_ordinary: bool
+) -> None:
+    receipt = json.loads(
+        (
+            PACKING
+            / "campaign/series/series-000-smoke-and-calibration/results"
+            / f"{experiment}-core-shrink/result.json"
+        ).read_text()
+    )
+    source = (PACKING / "cases/n11_fractional_certificate/certificate.json").read_bytes()
+    result = inspect_witness(source, receipt)
+    assert result["first_usable_side"] == event
+    assert result["mass_immediately_below"] == before
+    assert result["mass_at_event"] == at
+    assert result["first_usable_side_is_admissible"]
+    assert result["rejects_every_ordinary_gain_core"] is excludes_ordinary
+    with pytest.raises(ValueError, match="different source bytes"):
+        inspect_witness(source + b" ", receipt)
+    with pytest.raises(ValueError, match="differs from its exact atom replay"):
+        inspect_witness(source, {**receipt, "witness_closed_mass": "1"})
