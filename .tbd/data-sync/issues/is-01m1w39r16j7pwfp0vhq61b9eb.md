@@ -5,7 +5,7 @@ title: Publish and validate the integrated Session089 research PR
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 assignee: codex
 delegate: codex
@@ -17,11 +17,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-06T19:32:06.310Z
-updated_at: 2026-09-06T23:08:42.057Z
+updated_at: 2026-09-06T23:18:57.032Z
 started_at: 2026-09-06T19:32:29.195Z
 ---
 Publish codex/post-381-next-phases from merged PR97. Checklist: verify auth and existing PR; review completed launch/control artifacts; register reports and render checked shared views; commit explicit finished paths only; validate a stable snapshot with edit/push tiers; push and create a cost-first draft PR; observe required CI asynchronously to its final summary; publish first-slice and two-active-hour checkpoints with actual costs, limitations, dispositions and selected next work. No target acceptance or agenda reset. Continuing work stays in BC231/BC254/BC255 beads and scalar readiness think-zuq5.
 
 ## Notes
 
-Final handoff fef2306f22f3facab975fa9745089f9931240b76 was committed and pushed to PR101; the description is current. Worktree is clean. Complete research checkpoint 99a3ad42 passed push (135.55s), fast (203.07s) and full (1487.51s). Final handoff records passed all 31 steps in 16.12s; selected-entry mutation fired in 1.353s and the clean-snapshot test passed in 5.52s. The first immediate gh checks watch returned no checks reported before the new workflows registered, not a test failure or pass. Observe current fef2306f hosted checks, update the description with their actual verdict, mark the same PR ready and close this bead only after those steps. Existing heartbeat has exact source, logs, next allocations and no-new-research boundary. Only PR99 and PR101 remain open; upstream main last fetched at 8743cb0d.
+Final research handoff fef2306f passed required hosted CI to its actual final summary. PR99 then landed as main62f53438 and merged without conflicts as52a30b46. Publication note is c89fb186; all44 edit-tier steps passed64.90s and all43 explainer tests passed1.98s. SamePR101 is being refreshed. Broad affected push remains active under childthink-umuf, exec67935 and /private/tmp/squares-pr101-pr99-integrated-push.log. Do not repeat it or call it passed. Observe fresh c89fb186 hosted CI, mark PR ready once required checks pass, and retain the child until the actual long-suite verdict. Three bounded read-only reviews completed with no blocker; all workers stopped. Research allocation remains closed.

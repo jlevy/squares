@@ -5,19 +5,21 @@ title: Preview explainer typography, PDF layout, and reading guide
 kind: task
 status: in_progress
 priority: 2
-version: 14
+version: 15
 labels: []
 dependencies: []
 created_at: 2026-09-06T18:23:36.838Z
-updated_at: 2026-09-06T22:37:24.389Z
+updated_at: 2026-09-06T23:18:09.739Z
 ---
 
 ## Notes
 
-The user approved the final preview and explicitly requested merge and deployment end to end, including checking all links. Changes are committed and pushed through 184f15475cb243fe2853efd5d28d1d1ca38d0f9d on codex/explainer-editorial-fixes, with origin/main 8743cb0dce21314625f9a75f9934a600f21e6de9 integrated. PR #99 has its final title/description. Standard PR validation (run 34064274054) and Pages build (34064274043) passed; complete checkpoint 34064334605 is running before merge. No deployment yet.
+User approved merge and deployment end to end, with every link current.
 
-Latest local preview changes raise the sans base to 19px (19/18 of prose), with shared figure text, captions, and footnotes at 18.05px on the web, regular 410, medium 550, and bold 680. Main title and subtitle scales are 1.5 and 1.25 (28.5px and 23.75px web), centralized beside the sans settings. The opening heading is New Result. The typography table in packing/devtools/templates/paper-design.md is updated. Print source-note spacing is compacted to avoid stranding the colophon. Shared gray web/black print colors and no persistent underlining remain. Generated HTML/PDF are in packing/site.
+PR #99 merged at 62f53438565f75c420eabd096a26014bc1fc3339 after standard PR validation 34064274054 and full deferred checkpoint 34064334605 passed on head 184f15475cb243fe2853efd5d28d1d1ca38d0f9d, base 8743cb0dce21314625f9a75f9934a600f21e6de9. The merge tree is identical to the checked head. Pages deployment 34065708315 passed. Live publication checker passed 26/26 checks against 62f53438, and the full link audit passed all 32 external URLs, 18 internal anchors, 2 repository fragments, and assets. All 17 repository permalinks name the deployed commit. Current content records 22 results, 15 apparently new, and 7 atlas lower bounds, with an accurate T-022 refinement note.
 
-The 19px light desktop and dark 390px typography audits pass in screen and print with no size/color/overlap/underline findings. Print layout audit passes. CSS/document arithmetic reviewed; PDF pages 1 through 14 visually reviewed. The atlas intentionally occupies its own page, with existing spare space on page 2. Existing oversized LP equation still triggers global print scaling; tracked separately as think-215l and documented as a limit on absolute PDF font sizes.
+The actual deployed 14-page PDF was reviewed page by page. It exposed one Linux-only line wrap on page 4: the period and footnote after Trump’s upper bound began the next line. Follow-up PR #104 at 0ab655e5bf5304baaaff6ad642671b2621a9f3fa keeps the formula, punctuation, and source reference together with a nowrap span. No research content changed. All 43 explainer tests and all 45 selected push-tier steps passed, and the local regenerated PDF remains 14 pages. Independent review confirmed Markdown output remains unchanged after Flowmark. Hosted Pages build 34066362183 passed; required PR validation 34066362179 is running.
 
-Pre-push validation on the committed integrated tree passed 2474 behavioral tests, skipped 1, and deselected 55. Its only failed steps could not find ruff/basedpyright on PATH. Re-running the lint and type floors with the existing development environment on PATH passed Ruff, BasedPyright (0 errors/warnings), Clippy, and rustfmt. Final changes passed packing-validate --push --since c8f68b82: 45 selected steps and 512 reachable tests. All 32 HTTPS targets returned 200; 18 internal anchors, 2 repository heading fragments, 4 local linked assets and the social-preview PNG resolve. All 17 repository permalinks name current head184f1547. No unresolved placeholders or stale repository pins. Retained content is current: 22 results, 15 apparently new, 7 atlas lower bounds, accurate T-022 refinement note. Hosted PDF is14pages with successful reproducibility, typography, and layout checks. Complete checkpoint remains before merge; then use devtools.check_published_site with the exact merged SHA to verify live HTML/Markdown/PDF/assets and repository links.
+Remaining: merge #104 when required checks pass, verify its deployed revision and actual page 4 PDF, watch post-merge CI, then close and sync this task. The unchanged scientific surface retains the full checkpoint evidence above; affected rendering checks are rerun on the follow-up. The existing oversized display-math print scaling limitation remains in think-215l.
+
+Accepted design: sans base 19px, shared figure/caption/footnote text 18.05px on web, weights 410/550/680, main title/subtitle scales 1.5/1.25, H2 1.2. Gray supporting text on web and black in print, no persistent underline. Opening section New Result. Colocated paper-design.md documents the settings and upstream candidates. Generated outputs are under packing/site; production is https://jlevy.github.io/squares/.
