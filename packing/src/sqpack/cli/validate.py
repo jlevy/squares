@@ -374,17 +374,28 @@ class Step:
     four-cpu box: 103.94s at one worker, 52.11s at two, 35.40s at three, 27.50s at four.
     Two is what the job asks for, not four -- the outer pool already has four slots on
     four cpus, and a fifth process is the oversubscription that inflated every step of
-    `checks` at `--jobs 4`. The blast radius is exactly this step: of the eleven modules
-    this tier runs, only `screen_translation_escape` reaches `sqpack.workers`, checked per
-    process rather than by eye, so `PACK_JOBS` reaches nothing else here.
+    `checks` at `--jobs 4`. Three of the four steps now reach `sqpack.workers`, so the
+    flag is no longer one step's knob: `screen_translation_escape`,
+    `census_known_best_chunks` and `build_prospective_atlas` each size a pool from
+    `PACK_JOBS`, and only the eight subcommands of `known-best n=1..100 atlas` do not.
 
-    The floor moves with it. Measured whole at the new shape on a four-cpu box the job is
-    79.52s: the census 79.51s, the screen 65.27s, the known-best atlas 50.52s, the
-    prospective seed 25.07s. The screen costs more than its isolated 52.11s because two
-    inner workers beside three other outer steps is not two workers alone, and it is under
-    the census either way -- which is the only thing the flag had to achieve.
-    `known-best chunk census` at 90.38s on CI is now this job's longest unit and the floor
-    under the whole pull-request surface."""
+    Three rather than two was measured and refused. Four cpus, this box, `--jobs 4`:
+    72.84s and 73.36s of wall at `--inner-jobs 2` against 70.19s at 3, so a third inner
+    worker buys 2.6s of a 73s job -- all of it in the escape screen, none in the census,
+    which got slower. Twelve possible processes on four cpus for four per cent of a job
+    that is fifty seconds off the critical path is the trade the `checks` table already
+    priced at thirty to eighty per cent per step, and this box is quiet where a runner is
+    not. `--jobs 3 --inner-jobs 2` was tried too: every step gets faster on the reduced
+    contention and the wall gets *worse*, 79.45s, because three outer slots make the
+    fourth step queue.
+
+    The floor moved, and it moved less than the isolated readings promised. Measured
+    whole on a four-cpu box the job is 73.1s, from 79.52s: the screen 72.84s, the census
+    60.54s, the known-best atlas 52.34s, the prospective seed 24.61s. The census is 60s
+    rather than the 41s it costs alone at two workers, and the screen rose from 65.27s,
+    because three pool-backed steps asking for two workers each is not the same machine
+    the screen had to itself. `single-square translation escape screen` is now this job's
+    longest unit and the floor under it."""
 
     suite: bool = False
     """This step is the pull request's behavioural lane, and it runs alone on its own
@@ -1230,8 +1241,10 @@ def _known_best_chunk_census(context: Context) -> str:
     Nothing about the check changed when it was given its own name: it reads the same
     committed documents and compares the same re-derivation. What changed is that the
     gate can now schedule it, and that the step table names it -- which is what `OR-14`
-    asks for before anyone tries to make it cheaper. It is the longest single unit in
-    the sweeps job, and the second-longest anywhere on the pull-request surface.
+    asks for before anyone tries to make it cheaper. It was the longest single unit in
+    the sweeps job until it was given a process pool on 2026-09-06 and stopped being
+    one: 79.51s to 60.54s inside the job on a four-cpu box, and 80.42s to 41.27s
+    measured alone at the two workers `--inner-jobs` exports.
     """
     output = _module(context, "devtools.census_known_best_chunks", "--check")
     _require_text(
@@ -1264,11 +1277,11 @@ def _prospective_atlas(context: Context) -> str:
     smallest of the sweeps rather than the largest. What has not changed is the shape of
     the argument. The sweeps job has four units and four cpus, so its outer pool is
     saturated and its wall is its longest unit's wall; the only lever on that unit is the
-    unit's own cost. `build_prospective_atlas` still rebuilds 101 witnesses and 101 house
-    renderings in one process, each independent of the others, with
-    `sqpack.workers.worker_count` unused -- which is what `screen_translation_escape` did
-    until it was given a pool and this job was given `--inner-jobs 2`, and it is where
-    the next reduction in this job's wall comes from.
+    unit's own cost. `build_prospective_atlas` was given the same process pool on
+    2026-09-06: 23.88s to 13.14s at two workers and 7.28s at four, measured alone.
+    Inside the job it is 24.61s against 25.07s, which is not a contradiction -- it is
+    the smallest of the four steps and the job's wall is its longest one, so what its
+    pool buys here is headroom rather than wall.
     """
     output = _module(context, "devtools.build_prospective_atlas", "--check")
     _require_text(

@@ -240,8 +240,10 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     # * `--jobs 1` in the `suite` job is what hands the behavioural lane four xdist
     #   workers instead of two -- `_pytest_workers` sizes itself to `cpus - jobs + 1`, so
     #   a larger number there is a quieter, slower job;
-    # * `--inner-jobs 2` in the `sweeps` job is what wakes the escape screen's process
-    #   pool, which reads `PACK_JOBS`; at 1 it ran serially and was the surface's floor.
+    # * `--inner-jobs 2` in the `sweeps` job is what wakes three process pools, all of
+    #   which read `PACK_JOBS`: the escape screen, the chunk census and the prospective
+    #   atlas. At 1 all three run serially. Three inner workers was measured and refused
+    #   -- 2.6s of a 73s job for twelve possible processes on four cpus.
     required_step = next(
         _mapping(step)
         for step in validate_steps
