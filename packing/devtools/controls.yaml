@@ -171,7 +171,7 @@ controls:
 # the one that announces itself.
 - name: synopsis - narrative round aggregate lagging the ledger
   file: ../SYNOPSIS.md
-  replace: ["There are 69 rounds", "There are 45 rounds"]
+  replace: ["There are 70 rounds", "There are 45 rounds"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "registered-round aggregate is not"
 

@@ -455,11 +455,13 @@ agenda:
       candidate requiring full a.e.-depth verification, or a scoped unresolved result.
     bead: think-01q4
     note: >-
-      Session089's design and toy controls passed independent review. Its next
-      bounded readiness commission is think-0qcu, through 20:19:58 UTC on 2026-09-06;
-      the uniform mass-eleven source/input control is allowed, not a target LP.
+      Session089's source and instrument reviews passed. Exp113 independently
+      replayed a necessary-row ceiling of56/5, leaving H099 unresolved and its
+      full fixed-support supremum in[11,56/5]. Think-eilk prices the next changed
+      discriminator; no further target or complete arrangement build is yet funded.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-screen-spec.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md
     workflows: [insight-iteration, pipeline-improvement, research-loop]
     depends_on: [BC-242, BC-250]
     next_evidence: >-
@@ -474,7 +476,7 @@ agenda:
     state: in_progress
     priority: 1
     question: What is the first complete proof obligation for a useful restricted structural theorem?
-    hypotheses: [H-036, H-102]
+    hypotheses: [H-036, H-102, H-104]
     budget: >-
       One assessment slice of at most 30 minutes, beginning with H-036's unchanged
       0.25-degree restricted-angle claim. State complete cases, a feasible control,
@@ -486,12 +488,14 @@ agenda:
       a named obstacle and a justified alternative under H-102.
     bead: think-dene
     note: >-
-      The first assessment is retained. Session089 then selects think-2kld, a
-      separate at-most-30-minute replay of the original exact-angle Theorem3
-      source control, before any H036 interval-target instrument is funded.
+      Original Theorem3 source controls and the fixed-side adapter passed
+      independent review. Session089 prepares H104/exp114 under think-d2d1 and
+      think-jhs4: one ten-second exact-angle point-formula screen after prospective
+      freeze. H036's full angle-neighborhood claim and missing instrument are unchanged.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md
-    workflows: [insight-iteration]
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md
+    workflows: [insight-iteration, pipeline-improvement, research-loop]
     depends_on: [BC-250]
     next_evidence: >-
       Whether one complete restricted theorem is tractable. Only mass-derived

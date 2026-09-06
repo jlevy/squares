@@ -46,16 +46,50 @@ experiment:
       Startup, teardown and review costs are recorded separately. No unchanged retry
       on timeout, pivot refusal, malformed output or missing source premise.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-113-h-099-trump-support-screen/packet.json
-  lease:
-    expires: '2026-09-06T21:12:35Z'
-    host: local coordinator
-  results: []
+  effort:
+    timebox: One60-second producer and one separate60-second file replay
+    wall_seconds: 28.79
+    stopped_by: criterion
+  results:
+  - shape: determination
+    role: outcome
+    question: Does the exact independently replayed finite-row ceiling reach eleven?
+    outcome: criterion_missed
+    checked_by: >-
+      One separate file replay verifies20necessary rows, nonnegative rational
+      multipliers, and matching primal and upper witnesses of56/5. Finite-row
+      feasibility is not complete a.e.-depth feasibility; H099 remains unresolved.
   verdict:
-    decision: in-progress
+    decision: unresolved
     primary_criterion: Exact independently replayed finite-row upper certificate at most eleven.
-    reason: Prospective protocol frozen before any target rows or optimized weights were evaluated.
+    reason: >-
+      The verified ceiling56/5 exceeds11. It bounds the fixed-support problem but
+      neither refutes H099 nor supplies the missing complete a.e.-depth proof.
+    commit: e70458a9c40cfab46d2f2233b0dfbb47501a4de8
+    reopen_when: A newly priced and prospectively frozen separator or complete arrangement instrument.
 ---
 # exp-113 — A Fixed-Support Ceiling Screen
+
+The screen returned an exact finite-row optimum of $56/5=11.2$, independently replayed
+once. H-099 remains unresolved. The known feasible mass-eleven average and this necessary
+upper certificate place the fixed-support supremum in $[11,56/5]$; they do not exhibit
+an a.e.-feasible weighting of mass $56/5$.
+
+The prospective protocol was committed as `b3046532`, with record-view corrections at
+`cc18f64c`; all31 record checks passed before target access. The producer ran once from
+clean `e70458a9`, returned exit0, and used two solves with6and8pivots. Twenty distinct
+necessary rows survived the fixed sequence. The separate checker also returned exit0.
+The [independent review](../results/exp-113-h-099-trump-support-screen/independent-review.md)
+records its scope and shared foundations.
+
+Producer process cost was19.69seconds wall and17.36seconds CPU; the worker reported
+19.561851seconds wall and17.245133seconds CPU. Separate replay cost was9.10seconds wall
+and9.06seconds CPU. Their summed process wall is28.79seconds and CPU26.42seconds;
+operator attention and review prose time are not measured or included in those totals.
+The output replay finished within its lease; final review formatting ended at21:01:02,
+twelve seconds after the review deadline. No target or replay allowance was extended.
+
+## Retained Prospective Protocol
 
 This prospective record selects one invocation of the independently reviewed
 [BC254 instrument](../results/agenda-026/bc-254-target-readiness-independent-review.md).
@@ -98,7 +132,7 @@ A failed producer may leave empty stdout; that is not a certificate and must not
 to mathematical acceptance.
 No new checksum manifest is needed for these same-tree artifacts.
 
-The independent review and coordinator disposition follow in the same PR101. Nothing
+The independent review and coordinator disposition are retained in the same PR101. Nothing
 here changes the global unit-square packing bound or the source certificate.
 
 <!-- This document follows common-doc-guidelines.md.

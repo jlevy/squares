@@ -186,7 +186,7 @@ session:
     clock_role: work
     objective: Execute the frozen H099 support screen and independently decide its scoped output.
     bead: think-2rxf
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: Reviewed exact instruments and one bounded target protocol are available.
     budget_minutes: 30
@@ -196,11 +196,31 @@ session:
     validation_command: Frozen producer once, then the independent bounded file checker once on valid output.
     kill_condition: The frozen target/replay cap or criterion is reached; no unchanged retry.
     fallback: Preserve a refusal or incomplete result as unresolved and continue independent adapter work.
-    outcome: null
+    outcome: Exact finite-row ceiling56/5 independently replayed; H099 remains unresolved.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md
-    stop_reason: null
+    stop_reason: The frozen target and separate replay completed; no unchanged retry or full-depth claim.
     next_action: Review scope and cost before accepting a fixed-support conclusion or funding a larger instrument.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Test the bounded fixed-side auxiliaries and price the next density discriminator.
+    bead: think-d2d1
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Exp113 is independently settled and the fixed-side source adapter passed review.
+    budget_minutes: 30
+    started_at: '2026-09-06T21:01:13Z'
+    deadline_at: '2026-09-06T21:31:13Z'
+    expected_output: One scoped H104 target decision, priced density next step and integrated PR checkpoint.
+    validation_command: Frozen ten-second target, independent bounded output review, records and pre-push tier.
+    kill_condition: The individual frozen cap or reviewer deadline is reached; no unchanged target retry.
+    fallback: Preserve any missing review or unchecked clause and price only a changed next slice.
+    outcome: null
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md]
+    stop_reason: null
+    next_action: Use the actual formula outcome and density design to select the next funded direction.
   primary_bead: think-jgnv
   status: in_progress
   budget:
@@ -600,13 +620,13 @@ session:
     excluded_commands: [git mutations, tbd mutations, target geometry evaluation, registry allocation]
   - task: H099 prospective protocol and independent target replay; think-ez3v
     operator: Codex gpt6_coverage_audit, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: The target has not run and the independent replay allocation is unspent.
+    outcome: Exact56/5 finite-row optimum verified once; H099 remains unresolved.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/exp-113-h-099-trump-support-screen/independent-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/exp-113-h-099-trump-support-screen/replay.json]
+    checks: [One separate file replay passed in9.10seconds wall and9.06seconds CPU.]
+    uncertainty: Complete a.e.-depth remains unchecked; final prose ended12seconds after the review deadline.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Review the prospective protocol, then own its one separate replay after producer success.
@@ -620,7 +640,78 @@ session:
     fallback: Retain unresolved output without another producer or invalid-packet replay.
     write_scope:
     - packing/campaign/series/series-000-smoke-and-calibration/results/exp-113-h-099-trump-support-screen/independent-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-113-h-099-trump-support-screen/replay.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-113-h-099-trump-support-screen/replay.log
     excluded_commands: [git mutations, tbd mutations, target optimization, registry allocation]
+  - task: H104 independent protocol, retained checker and output review; think-jhs4
+    operator: Codex bound_lane_strategy, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: The separate input/witness replay is not yet implemented; no target access before freeze.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Complete source/toy controls, then review the single target output after dispatch.
+    phase: 8
+    budget_minutes: 14.32
+    started_at: '2026-09-06T20:59:41Z'
+    deadline_at: '2026-09-06T21:14:00Z'
+    expected_output: Retained bounded receipt checker and explicit H104-only assurance decision.
+    validation_command: Source/toy controls only before freeze; one ten-second independent output replay after dispatch.
+    kill_condition: A soundness premise fails or the original review lease ends.
+    fallback: Retain an incomplete instrument or unresolved output without target retry.
+    write_scope:
+    - packing/devtools/check_restricted_orientation_discriminator.py
+    - packing/tests/test_restricted_orientation_packet_review.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-114-h-104-fixed-side-auxiliaries/independent-review.md
+    excluded_commands: [git mutations, tbd mutations, target geometry before dispatch, registry allocation]
+  - task: H099 post-screen discriminator pricing; think-eilk
+    operator: Codex gpt6_coverage_audit, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: The least expensive complete-depth or exact-separation route is not yet priced.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Compare changed discriminators without any new target computation.
+    phase: 8
+    budget_minutes: 20
+    started_at: '2026-09-06T21:01:13Z'
+    deadline_at: '2026-09-06T21:21:13Z'
+    expected_output: One implementable next discriminator with controls, costs and stop conditions.
+    validation_command: Read-only mathematical and code assessment; no target calculations.
+    kill_condition: A priced recommendation is retained or the bounded design lease ends.
+    fallback: State the missing completeness premise or unpriced cost explicitly.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-post-screen-next-discriminator.md]
+    excluded_commands: [git mutations, tbd mutations, target geometry, target optimization, registry allocation]
+  - task: Integrated publication consistency audit; think-647n
+    operator: Codex structural_lane_strategy, existing worker settings
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: Current handoff prose may lag the integrated branch and target dispositions.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Send only concrete current-state corrections to the coordinator.
+    phase: 8
+    budget_minutes: 10
+    started_at: '2026-09-06T21:04:00Z'
+    deadline_at: '2026-09-06T21:14:00Z'
+    expected_output: Read-only report of stale current statements and scope errors.
+    validation_command: Inspect operating rules, session, agenda and PR body; no tests or target runs.
+    kill_condition: The current-state audit is complete or its deadline is reached.
+    fallback: Retain remaining drift locations for the coordinator.
+    write_scope: [none; read-only messages to the coordinator]
+    excluded_commands: [file writes, git mutations, tbd mutations, target evaluation]
   outputs:
   - packing/campaign/agent-sessions/session-089-agenda024-next-phases.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md
@@ -735,20 +826,20 @@ Later rows remain conditional, and each experimental budget stays frozen.
 ## Readiness and Follow-Up
 
 BC251’s 150-minute scalar invocation has not started.
-PR100 reports false depth decisions in `fractional.ceiling` and `fractional.cutting`,
-which the scalar recipe uses.
-Its proposed correction is not on this checkout.
-Check the corrected decision path and retained seed/bridge controls before freezing and
-launching the experiment.
+PR100's corrections are merged, and the corrected paths passed46 focused tests plus
+the real1121-atom seed-map control. BC251 is ready but remains unopened: its unchanged
+150-minute invocation plus verification no longer fits the inherited outer allowance.
+It needs a sufficient fresh allocation, not a shortened or reset experimental budget.
 No timeout, unavailable input or failed guard earns an unchanged retry.
 The three independent assessment lanes continue while this is resolved.
 
-The prior full-gate follow-up remains `think-exlq`: a negative-control fixture injects
-the now-existing OR16, and a consumer-contract test exceeded the 12-second wall ceiling
-at 12.33 seconds. Corrections belong on a separate maintenance PR; no threshold is
-relaxed to clear research work.
-PR98’s efficiency work, PR99’s editorial work and PR100’s adversarial corrections are
-monitored, but only landed `origin/main` is integrated.
+The prior full-gate follow-up remains `think-exlq`. PR103's supporting corrections are
+integrated here and that PR is closed. PR98's landed efficiency work includes the
+evolving operating-rule control, so PR102 was closed as superseded. No threshold was
+relaxed. PR99 remains monitored; only newly landed `origin/main` is integrated.
+The mainline cycle stays on PR101, with source controls, bounded targets, independent
+review and scoped dispositions integrated together. OR6/OR9 codify the ordinary
+2–12-hour review cadence and reserve stacks for a concrete reason.
 No certificate, weak-bound statement or frozen research criterion changes in this launch
 checkpoint.
 

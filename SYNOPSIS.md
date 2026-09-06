@@ -139,8 +139,8 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 
 The generated ledger currently derives eight confirmed hypotheses, ten refuted
 hypotheses, two open hypotheses, fifteen open questions, and thirty-six blocked
-hypotheses. H-099 is running.
-No hypothesis waits on review and five are unresolved.
+hypotheses. H-104 is running.
+No hypothesis waits on review and six are unresolved.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
 pinned the `m = 5` covering wall to a bracket of width 0.015 where it had registered
 0.02. One, H-064, is abandoned in the ledger’s word — its latest round expired resumable
@@ -551,7 +551,8 @@ The addendum owns command custody and recovery; no successor experiment started 
 the planning block. The user’s credit-interruption amendment excludes unavailable time
 from the wall allowance.
 The addendum records the accounting boundaries, revised deadlines, and conservative
-active-minute position `124:14`, currently held for recovery integration.
+active-minute position `124:14`, the inherited reference position for this continuation.
+Session089 is executing; no current active-time total is inferred from elapsed wall time.
 BC-232’s completed recovery produced no row-converged covering; BC-241’s independent
 local-scope review was published in `ad600896`. H-092’s fixed-weight refined-core
 negative passed independent review and awaits integration under `think-xsma`. The
@@ -2778,11 +2779,12 @@ round that names the hypothesis, control roles included.
 | [H-096](packing/campaign/hypotheses/H-096-n11-angle-cell-kernels.md) | open question | Can whole-angle-cell kernels cover more useful positive mass with a tractable exact verifier? | 0 | — |
 | [H-097](packing/campaign/hypotheses/H-097-n11-existential-witness-menus.md) | open question | Can pose-dependent witness choice beat a universal witness while retaining complete pose-box coverage? | 0 | — |
 | [H-098](packing/campaign/hypotheses/H-098-n11-segment-measures.md) | open question | Can segment-supported measures improve the bound with exact intersection-length coverage? | 0 | — |
-| [H-099](packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md) | running | The exact deduplicated D4 closure of Trump’s eleven squares admits dual mass above eleven at a.e. depth at most one | 1 | — |
+| [H-099](packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md) | unresolved | The exact deduplicated D4 closure of Trump’s eleven squares admits dual mass above eleven at a.e. depth at most one | 1 | 29s wall |
 | [H-100](packing/campaign/hypotheses/H-100-below-trump-area-density.md) | open question | Can a full-size area density give mass below eleven at a side between the retained bound and Trump? | 0 | — |
 | [H-101](packing/campaign/hypotheses/H-101-trump-equality-density.md) | open question | Can mass-eleven density at Trump’s side and a complete equality analysis establish uniqueness? | 0 | — |
 | [H-102](packing/campaign/hypotheses/H-102-complete-restricted-angle-support-families.md) | open question | Which complete restricted angle or wall-support family yields a useful theorem, starting with H-036? | 0 | — |
 | [H-103](packing/campaign/hypotheses/H-103-complete-typed-global-capture.md) | open question | Can a complete typed cover exclude every minimizing branch or place its entire surviving box inside the accepted local Trump neighborhood? | 0 | — |
+| [H-104](packing/campaign/hypotheses/H-104-fixed-side-point-cover-auxiliaries.md) | running | The fixed point formulas at side1939/500 satisfy all seven exact0/45-degree auxiliary clauses | 1 | — |
 
 ### Confirmed
 
@@ -3026,10 +3028,10 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 69 rounds registered in `series-000`.
+There are 70 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1163.2 wall-minutes.
-Of these, 68 are terminal; the prospective exp-113 screen has not accessed its target
+They record 2152.1 agent-minutes and 1163.7 wall-minutes.
+Of these, 69 are terminal; the prospective exp-114 screen has not accessed its target
 and contributes no measured effort yet.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
 result; exp-057 stopped before target access; exp-058 stopped on the review it was
@@ -3134,7 +3136,8 @@ archive beside it.
 | [exp-071](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-071-h-070-n11-inset-seed-release.md) | 11 | target | H-070 | three inset screens followed, when eligible, by matched released-seed and unseeded arms | released and unseeded arms converged after eight rounds to byte-identical candidates of exact mass `11142893/1000000`, missing the strict-improvement criterion | rejected |
 | [exp-110](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-110-h-090-core-shrink.md) | 11 | target | H-090 | exact source and smaller-core sweeps on frozen T-018 atoms, with normalization accepted above `M/11` | minimum `85353/100000` at an axis-aligned corner cell falls below `434547/440000`; a direct atom sum excludes all core sides below `1849127/1853400` | rejected |
 | [exp-111](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-111-h-091-core-shrink.md) | 11 | target | H-091 | exact fixed-atom replay above exp-110’s corner event, followed by direct witness-event inspection | minimum `96377/100000` at net direction 97; the witness’s first usable event exceeds the entire ordinary-containment improvement window, closing that fixed-weight route | rejected |
-| [exp-113](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md) | 11 | target | H-099 | exact necessary-row ceiling on the frozen Trump D4 support | prospective protocol; no target result yet | in-progress |
+| [exp-113](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md) | 11 | target | H-099 | exact necessary-row ceiling on the frozen Trump D4 support | independently replayed ceiling56/5; complete a.e.-depth still unverified | unresolved |
+| [exp-114](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md) | 11 | target | H-104 | seven fixed-formula exact-angle auxiliary clauses at1939/500 | prospective protocol; no target result yet | in-progress |
 
 ### Cost and provenance
 
@@ -3208,13 +3211,14 @@ archive beside it.
 | exp-071 | three 540-second screens plus, if eligible, two matched 2,520-second arms | 491.5 s | — | criterion | `04e6a2ce` |
 | exp-110 | one frozen core side, source replay and candidate replay | 29.86 s | — | criterion | `48a161ba` |
 | exp-111 | one frozen core side above the lost corner event, source replay and candidate replay | 30.58 s | — | criterion | `aeb683d5` |
-| exp-113 | one 60-second producer and one separate 60-second replay | — | — | — | `e70458a9` |
+| exp-113 | one 60-second producer and one separate 60-second replay | 28.79 s | — | criterion | `e70458a9` |
+| exp-114 | one 10-second producer and one separate 10-second receipt/witness replay | — | — | — | `e45c8a63` |
 
-### What the 69 rounds jointly establish
+### What the 70 rounds jointly establish
 
-The 69 rounds use 2152.1 agent-minutes and 1163.2 wall-minutes under the campaign’s
+The 70 rounds use 2152.1 agent-minutes and 1163.7 wall-minutes under the campaign’s
 retained effort accounting.
-The prospective exp-113 contributes no measured effort yet.
+The prospective exp-114 contributes no measured effort yet.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; exact component controls pass only

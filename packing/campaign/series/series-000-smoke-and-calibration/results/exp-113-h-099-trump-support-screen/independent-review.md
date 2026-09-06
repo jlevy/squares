@@ -1,9 +1,9 @@
 # exp-113: Independent Protocol and Output Review
 
-Protocol disposition: **GO.** Output review is pending the coordinator’s single frozen
-producer invocation.
-No target optimization, target row generation, or separate packet replay has been run by
-this reviewer.
+Review disposition: **GO for the checked finite-row result.** The one independent file
+replay passed with exact optimum $56/5$. This exceeds eleven, so H-099 remains
+unresolved. The retained primal weights are not certified almost-everywhere feasible.
+This reviewer ran no optimizer or separate target-generation command.
 
 This review is tracked by `think-ez3v` under target commission `think-2rxf`, with a
 commissioned window of `2026-09-06T20:45:50Z`–`2026-09-06T21:00:50Z`. The coordinator
@@ -19,8 +19,11 @@ the limits established in the
 The selected source is `trump11-v1`, and the engine revision is
 `e70458a9c40cfab46d2f2233b0dfbb47501a4de8`. A read-only Git comparison found no
 difference between that revision and the seven reviewed density implementation/test
-files. The coordinator must commit the prospective protocol before the first target rows
-or optimized weights and run the target from the frozen source checkout.
+files. The coordinator committed the prospective protocol at `b3046532` before target
+execution. Before replay, the reviewer checked that the isolated checkout
+`/private/tmp/squares-launch-check.Y1eqVE` had the frozen HEAD and a clean Git status.
+The coordinator reported that the pre-execution record gate passed all 31 selected
+checks at `cc18f64c`; this reviewer did not rerun that shared gate.
 
 The protocol fixes the exact Trump D4 support, center-first sequence and conditional
 dyadic extension, exact arithmetic, zero start with the negative identity active basis,
@@ -73,14 +76,60 @@ assuming strong duality or attainment for the continuum problem.
 
 ## Output Review
 
-Pending. The reviewer owns the one prospective separate file-checker invocation and will
-run it only after the coordinator reports successful producer completion and dispatches
-the packet and frozen checkout path.
-If the producer fails or leaves no valid packet, the reviewer will inspect and retain
-the refusal without spending the replay allowance or rerunning the producer.
+The coordinator dispatched the completed [packet](packet.json) after producer exit zero.
+The reviewer invoked the frozen file checker exactly once, starting at the observed
+clock `2026-09-06T20:58:01Z`, from the isolated checkout’s `packing/` directory.
+The command used the existing Python 3.14 interpreter, with no UV synchronization or
+dependency change:
 
-No Blocker, High, Medium, or Low finding was identified in the prospective protocol.
-This statement does not accept a target output that has not been independently checked.
+```shell
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 PYTHONPATH=src /usr/bin/time -p /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.check_full_size_density_support_ceiling /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-113-h-099-trump-support-screen/packet.json --timeout-seconds 60
+```
+
+Standard output was retained in [replay.json](replay.json), and standard error and
+`time` output in [replay.log](replay.log).
+The checker exited zero, reporting:
+
+```json
+{"finite_row_optimum": "56/5", "scope": "specified finite support only; no almost-everywhere depth claim"}
+```
+
+The packet contains 20 admitted rows and pivot receipts `[6, 8]`, within the frozen
+limits. Its orbit primal is $(1,0,2/5,1/10,0,1/10,3/10,0)$. The nonzero upper
+multipliers, at zero-based row indices $(0,3,7,10,18,19)$, are
+$(4/5,16/5,16/5,8/5,4/5,8/5)$. Substitution into the retained rows gives
+$A^Ty=(4,8,8,8,8,8,8,8)=m$ and $\mathbf1^Ty=(4+16+16+8+4+8)/5=56/5$. The primal
+objective is $4+8(2/5+1/10+1/10+3/10)=56/5$.
+
+The checker verified every row’s source binding, determinant incidence, positive
+neighborhood, rational upper inequality, matching primal objective, and the mass-eleven
+source control. It regenerated the fixed sequence within that authorized replay; the
+reviewer ran no separate row-generation command.
+Pivot counts remain execution receipts, not independently attested solver history.
+
+| Process | Exit | Wall seconds | CPU seconds |
+| --- | ---: | ---: | ---: |
+| Coordinator producer, from retained [run.log](run.log) | 0 | 19.69 | 17.36 |
+| Reviewer’s one file replay | 0 | 9.10 | 9.06 |
+
+CPU is retained user plus system time.
+The producer log separately reports worker wall time `19.561851291917264` seconds and
+CPU `17.245133` seconds, excluding outer startup and teardown.
+The reviewer observed replay completion by `20:58:31 UTC`. Neither process hit its cap,
+and neither was retried.
+These are single-run costs, not statistical performance comparisons.
+Peak memory was not measured.
+
+The maximum almost-everywhere feasible mass on this fixed support therefore lies between
+$11$ and $56/5$. The upper endpoint is attained for the finite-row relaxation, not yet
+for the complete depth constraints.
+The experiment neither rejects nor confirms H-099. Complete depth verification remains a
+scientific dependency; this result authorizes no extra grid or support extension inside
+exp-113.
+
+No Blocker, High, Medium, or Low finding was identified in the protocol or dispatched
+output. Coordinator disposition, shared validation and publication remain separate from
+this independent evidence check.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

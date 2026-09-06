@@ -103,7 +103,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-086](agent-sessions/session-086-agenda021-overnight-pass.md) | stopped | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 2 | think-db1k | BC-213, the remaining m = 5 rung at 973/200 (think-wufn), as agenda-021's closeout selects it. |
 | [session-087](agent-sessions/session-087-agenda022-continuation.md) | completed | contemporaneous | `research-loop` (correctness) | `efficiency-loop` (efficiency) | 2 | think-wufn | Take BC-215 (think-xejq), the one lever the efficiency block measured and did not wire: 20.2 per cent of deep-run work is repeated and 92 per cent of that is trees that did not move, so the tree-id cache is what takes the pull-request wall from about 221.70 s to the operator's two to two and a half minutes. |
 | [session-088](agent-sessions/session-088-validation-efficiency-checkpoint.md) | completed | retrospective | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 1 | think-rwte | Continue think-xejq with explained exhaustive-family planning under W5 Phase 3 after publishing this implementation and verifying its full hosted checkpoint. Preserve complete coverage until the selection and reuse contracts pass their invalidation fixtures. |
-| [session-089](agent-sessions/session-089-agenda024-next-phases.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 7 | think-jgnv | Review source instruments, integrate landed corrections and commission only ready, priced target work. |
+| [session-089](agent-sessions/session-089-agenda024-next-phases.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 8 | think-jgnv | Review source instruments, integrate landed corrections and commission only ready, priced target work. |
 
 ### Workflow summary
 
@@ -116,7 +116,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 18 | 1 | 57 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 9 | 4 | 49 | 7 |
+| `research-loop` | 9 | 4 | 50 | 7 |
 | `pipeline-improvement` | 21 | 0 | 107 | 0 |
 | `documentation-pass` | 1 | 0 | 4 | 0 |
 | `review-planning-oversight` | 0 | 0 | 1 | 0 |
@@ -556,7 +556,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 69 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 70 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -636,11 +636,12 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | H-096 | open question | proof | Can finite rational inner kernels, contained throughout their assigned |  | 0 |  |  |
 | H-097 | open question | proof | Can a finite witness menu certify that every admissible unit-square po |  | 0 |  |  |
 | H-098 | open question | proof | Can nonnegative segment-supported measures give stronger or cheaper n  |  | 0 |  |  |
-| H-099 | running | proof | At the exact Trump side U, the deduplicated D4 images of the eleven ex |  | 1 |  |  |
+| H-099 | unresolved | proof | At the exact Trump side U, the deduplicated D4 images of the eleven ex |  | 1 |  | 29s wall |
 | H-100 | open question | proof | Is there a side L strictly between the retained verified lower bound a |  | 0 |  |  |
 | H-101 | open question | proof | Does the exact Trump-side container admit a nonnegative integrable are |  | 0 |  |  |
 | H-102 | open question | proof | Which explicitly delimited n = 11 angle-composition or wall-support fa |  | 0 |  |  |
 | H-103 | open question | proof | Can a complete typed finite cover of every n = 11 side-minimizing conf |  | 0 |  |  |
+| H-104 | running | proof | At q = 1939/500, the frozen P10, P12 and A-triple point formulas satis |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -676,7 +677,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 
-### unresolved (14)
+### unresolved (15)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -694,6 +695,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-056 | series-000 | 17 | claude-opus-5 then openai-codex-max-equivalent coordinator | H-052 | The fixed 11:23Z timebox ended before all 181 paired rows completed. The retained 170-row prefix is valid process evidence, every completed pair agrees exactly and the interrupted ordinal was not appended, but a prefix does not satisfy H-052's all-direction criterion. No canonical result exists, so H-052 remains neither accepted nor rejected and the terminal decision stays review-pending for BC-145. |
 | exp-057 | series-000 | 68 | claude-opus-5 | H-058 | The release supports the literal printed-rational point model but supplies no provenance for applying either six-decimal coordinate rule to its fourteen-digit side token, so the conjunctive binding stops before BC-139 and H-058 remains unmeasured. |
 | exp-061 | series-000 | 20 | Claude (agent), Lane A of agenda-021 BC-197, bead think-g73w, session-086 | H-062 | The four decided rungs bracket the wall to [97/20, 39/8], width 0.025 against the registered 0.02, so the hypothesis is neither accepted on its own threshold nor rejected by either of its two rejection clauses -- no certificate was retained at 4.98 or above, and optima above twenty were found well below the ceiling. |
+| exp-113 | series-000 | 11 | Codex coordinator, max reasoning, think-2rxf in Session089 | H-099 | The verified ceiling56/5 exceeds11. It bounds the fixed-support problem but neither refutes H099 nor supplies the missing complete a.e.-depth proof. |
 
 ### blocked (6)
 
@@ -752,7 +754,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-113 | series-000 | 11 | Codex coordinator, max reasoning, think-2rxf in Session089 | H-099 | Prospective protocol frozen before any target rows or optimized weights were evaluated. |
+| exp-114 | series-000 | 11 | Codex coordinator, max reasoning, think-d2d1 in Session089 | H-104 | Prospective record before any q-target geometry; independent protocol review precedes execution. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -770,7 +772,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 
 ## Effort
 
-69 rounds, 2152.1 agent-minutes, 1163.2 wall-minutes.
+70 rounds, 2152.1 agent-minutes, 1163.7 wall-minutes.
 
 ## Exploration reports not yet codified
 

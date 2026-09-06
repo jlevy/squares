@@ -55,6 +55,12 @@ and its parser correction.
 A target still requires prospective freeze and separate exact replay.
 Complete almost-everywhere depth verification is not implemented here.
 
+[Exp-113](../series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md)
+subsequently returned a separately replayed finite-row ceiling of $56/5$ on this support.
+Together with the feasible mass-eleven average, it gives the bracket $[11,56/5]$ for
+the full fixed-support supremum. H-099 remains unresolved: the matching finite-row
+primal weights have not passed complete almost-everywhere depth verification.
+
 Let F be the distinct geometric squares in all eight container symmetries of the
 [exact Trump witness](../../cases/trump11/packing.py), identifying local quarter-turn
 reparameterizations and duplicate placements.
