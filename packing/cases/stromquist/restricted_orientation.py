@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from collections.abc import Iterator, Sequence
+from collections.abc import Callable, Iterator, Sequence
 from dataclasses import dataclass
 from fractions import Fraction
 from itertools import pairwise
@@ -20,6 +20,19 @@ type Polygon = tuple[Point, ...]
 type Plane = tuple[FieldElement, FieldElement, FieldElement]
 
 HALF = Fraction(1, 2)
+OBLIGATIONS = (
+    "axis_ten_cover",
+    "localization",
+    "forced_A1",
+    "forced_A2",
+    "forced_A3",
+    "twelve_cover_0",
+    "twelve_cover_45",
+)
+ANGLE_OBLIGATIONS = {
+    0: ("axis_ten_cover", "twelve_cover_0"),
+    45: ("localization", "forced_A1", "forced_A2", "forced_A3", "twelve_cover_45"),
+}
 
 
 @dataclass(frozen=True)
@@ -234,6 +247,13 @@ def source_points(
 ) -> tuple[FieldElement, tuple[Point, ...], tuple[Point, ...]]:
     """Original Theorem 3 coordinates, paper pages 10-11; no Theorem 2 repair."""
     side = 2 + Fraction(4, 3) * field.alpha
+    ten, twelve = point_sets(side)
+    return side, ten, twelve
+
+
+def point_sets(side: FieldElement) -> tuple[tuple[Point, ...], tuple[Point, ...]]:
+    """The unchanged coordinate formulas; another side is a separate auxiliary claim."""
+    field = side.field
     one = field.one
     seeds = (
         (one, one),
@@ -267,7 +287,7 @@ def source_points(
     )
     if len(ten) != 10 or len(set(twelve)) != 12:
         raise ValueError("source point inventory is not ten and twelve distinct points")
-    return side, ten, twelve
+    return ten, twelve
 
 
 def region_witness(cell: Cell, constraints: Sequence[tuple[Plane, bool]]) -> Point | None:
@@ -322,9 +342,16 @@ def _checked_obstruction(
     }
 
 
-def source_replay() -> dict[str, object]:
-    """Check the complete two-angle source control, retaining first obstructions."""
-    side, ten, twelve = source_points(source_field())
+def replay_point_sets(
+    side: FieldElement,
+    ten: tuple[Point, ...],
+    twelve: tuple[Point, ...],
+    *,
+    on_angle_complete: Callable[[dict[str, object]], None] | None = None,
+) -> dict[str, object]:
+    """Check all seven exact-angle auxiliary clauses; report only completed angles."""
+    if len(ten) != 10 or len(twelve) != 12 or len(set(ten)) != 10 or len(set(twelve)) != 12:
+        raise ValueError("point inventory must be ten and twelve distinct points")
     points = ten + twelve
     ten_mask = (1 << len(ten)) - 1
     twelve_mask = ((1 << len(twelve)) - 1) << len(ten)
@@ -395,36 +422,43 @@ def source_replay() -> dict[str, object]:
                     )
         if not sum(counts):
             raise ValueError("source replay reached no center stratum")
-        cases.append(
-            {
-                "angle_degrees": angle,
-                "reachable_event_strata_by_dimension": counts,
-                "ten_avoiding_strata": avoiders,
-                "canonical_ten_avoiding_strata": canonical_avoiders,
-            }
-        )
-    names = (
-        "axis_ten_cover",
-        "localization",
-        "forced_A1",
-        "forced_A2",
-        "forced_A3",
-        "twelve_cover_0",
-        "twelve_cover_45",
-    )
+        case: dict[str, object] = {
+            "angle_degrees": angle,
+            "reachable_event_strata_by_dimension": counts,
+            "ten_avoiding_strata": avoiders,
+            "canonical_ten_avoiding_strata": canonical_avoiders,
+        }
+        cases.append(case)
+        if on_angle_complete is not None:
+            names = ANGLE_OBLIGATIONS[angle]
+            on_angle_complete(
+                {
+                    "angle_degrees": angle,
+                    "case": case,
+                    "obligations": {name: name not in failures for name in names},
+                    "obstructions": [failures[name] for name in names if name in failures],
+                }
+            )
     return {
         "complete": True,
         "status": "obstruction_retained" if failures else "pending_independent_review",
-        "scope": "Theorem 3 source control only; no H-036 target",
+        "scope": "fixed-side exact-angle auxiliary clauses only",
         "field": "Q(sqrt(2)), positive root in (1,2)",
         "container_side_power_basis": side.text(),
         "point_counts": [len(ten), len(twelve)],
         "cases": cases,
-        "obligations": {name: name not in failures for name in names},
+        "obligations": {name: name not in failures for name in OBLIGATIONS},
         "obstructions": list(failures.values()),
         "strict_box_transfer": "a larger open box contains its concentric closed unit square",
         "theorem_acceptance": False,
     }
+
+
+def source_replay() -> dict[str, object]:
+    """Check the complete two-angle source control, retaining first obstructions."""
+    result = replay_point_sets(*source_points(source_field()))
+    result["scope"] = "Theorem 3 source control only; no H-036 target"
+    return result
 
 
 def main() -> None:

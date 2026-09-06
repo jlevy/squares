@@ -266,6 +266,8 @@ case or experiment separately.
 | [BC-255 Theorem 3 Source Control: First Slice](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-slice-01.md) | research synthesis | record | retained | — |
 | [BC-255 Theorem 3 Source-Control Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-independent-review.md) | dated review record | record | retained | — |
 | [BC-255: Restricted-Angle Instrument Design](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md) | research synthesis | record | retained | — |
+| [BC-255: Fixed-Side Discriminator Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md) | research synthesis | record | retained | — |
+| [BC-255: Fixed-Side Discriminator Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-independent-review.md) | dated review record | record | retained | — |
 | [Agenda 026 T+0 to T+2 Commissioning Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/checkpoint-hour-02.md) | research synthesis | record | retained | — |
 | [Agenda 026 T+2 to T+4 Closure Gate](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/gate-hour-04.md) | research synthesis | record | retained | — |
 | [A Quantitative Local Theorem at Trump’s 11-Square Packing](packing/cases/trump11/isolation-theorem.md) | research synthesis | record | retained | — |

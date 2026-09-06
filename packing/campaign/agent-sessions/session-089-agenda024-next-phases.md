@@ -550,13 +550,13 @@ session:
     excluded_commands: [git mutations, tbd mutations, generated AGENTS edits, new frameworks]
   - task: BC255 fixed-side exact-angle auxiliary adapter; think-rpzg
     operator: Codex structural_lane_strategy, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: The distinct target-side adapter and its controls do not yet exist.
+    outcome: Source-preserving adapter complete at20:53:30; original seven clauses unchanged.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md]
+    files: [packing/devtools/run_restricted_orientation_discriminator.py]
+    checks: [39 focused tests passed; lint and types clean; independent retention correction applied.]
+    uncertainty: Fixed-side and perturbed-angle target geometry remain unrun.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Build source/toy controls and a separate bounded target entry; do not evaluate target geometry.
@@ -576,13 +576,13 @@ session:
     excluded_commands: [git mutations, tbd mutations, target geometry evaluation, target measurements, registry allocation]
   - task: BC255 independent fixed-side adapter review; think-w8nx
     operator: Codex bound_lane_strategy, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: Source-preserving refactor and new adapter have not received independent review.
+    outcome: GO at20:57:49 after partial-output regression was repaired and independently replayed.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-independent-review.md]
+    files: [packing/tests/test_restricted_orientation_discriminator_review.py]
+    checks: [35 focused tests passed in9.15seconds; original source CLI and lint/types clean.]
+    uncertainty: No target geometry evaluated; root must freeze and commission the separate target.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Review design now, then replay source and toy controls after stable author handoff.
