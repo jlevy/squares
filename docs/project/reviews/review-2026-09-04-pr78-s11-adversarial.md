@@ -9,6 +9,17 @@
 **Certificate SHA-256:**
 `b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a`
 
+## Correction Added 2026-09-06
+
+Two implementation details in the dated review body are now historical.
+`t-018-proof.md` was retired; the maintained reader paths are the
+[`t-018-proof-card.md`](../../../packing/cases/n11_fractional_certificate/t-018-proof-card.md)
+and the
+[`t-018-verifiable-claim-381-100.md`](../../../packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md).
+The body’s references to a 346-line `minimal_verify.py` describe the reviewed revision;
+after subsequent certificate hardening, the maintained checker is 329 physical lines.
+The dated body remains otherwise unchanged as evidence of what the review assessed.
+
 ## Verdict
 
 **The concrete mathematical claim is accepted: the retained positive-weight certificate

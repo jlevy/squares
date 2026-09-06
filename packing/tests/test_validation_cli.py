@@ -748,7 +748,7 @@ def test_the_marker_floor_is_measured_per_function_and_not_per_parametrization(
 
     The marker is a decorator on a `def`. A parametrized function therefore leaves the
     pull-request surface whole, which is why the registry in
-    `test_the_slow_marker_is_declared_only_by_measured_nodes` counts 64 functions and 94
+    `test_the_slow_marker_is_declared_only_by_measured_nodes` counts 66 functions and 96
     collected tests. A floor applied per node asks a question the marker cannot answer:
     it reports the cheap case of an expensive function as a marker to delete, and
     deleting it would drag the expensive case back onto the pull-request surface.
@@ -1583,6 +1583,20 @@ def test_the_edit_tier_cannot_under_run() -> None:
     assert not any(step.needs_engine for step in validate.STEPS if step.geometry), (
         "an engine step in --geometry would make both halves compile Rust"
     )
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        "packing/devtools/dilation_corollary.py",
+        "packing/devtools/decide_certificate.py",
+    ],
+)
+def test_limit_record_tools_select_the_complete_exact_replay(path: str) -> None:
+    for universe in (validate.STEPS, tuple(step for step in validate.STEPS if step.fast)):
+        selection = validate.select_for_paths([path], universe)
+        assert not selection.unattributed_paths
+        assert "exact verification" in {step.name for step in selection.steps}
 
 
 def test_every_step_is_reachable_from_some_tier() -> None:

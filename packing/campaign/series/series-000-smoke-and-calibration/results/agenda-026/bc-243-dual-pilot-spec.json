@@ -1,0 +1,74 @@
+{
+  "schema": "packing.squares:bc-243-dual-pilot-spec/v1",
+  "cell": "BC-243",
+  "bead": "think-mt6q",
+  "status": "preregistered_interface_not_implemented",
+  "authority": "BC-220 coordinator gate; implementation begins only after gate publication",
+  "theorem": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-242-full-size-density-proof-contract.md",
+  "hypothesis_id": "H-080",
+  "experiment_id": "exp-090",
+  "question": "Can an exact finite dual at Trump's side certify D > 11 and exclude the mass-eleven equality-density route?",
+  "write_roots": [
+    "packing/src/sqpack/full_size_density/",
+    "packing/cases/n11_full_size_density/",
+    "packing/tests/test_full_size_density_*.py"
+  ],
+  "first_family": "Exact D4 orbit of Trump's 11-square packing, at most 88 placements before deduplication",
+  "inputs": {
+    "packing_source": "packing/cases/trump11/packing.py",
+    "packing_source_revision": "f9ba790a2a60b990d20261cc2645595d78740dcc",
+    "geometry": "Existing exact algebraic field at Trump's container side",
+    "weights": "Nonnegative exact rational numbers",
+    "deduplication": "Deterministic exact placement identity with coalesced weights",
+    "containment": "Exact containment of every square in the container",
+    "arrangement": "Complete exact full-dimensional cells with an independently checked completeness receipt"
+  },
+  "semantics": {
+    "depth": "Sum of weights of interiors covering a full-dimensional arrangement cell",
+    "boundary": "Finite edge and vertex union is a Lebesgue-null set; touching is allowed",
+    "D": "Exact sum of all coalesced rational weights",
+    "soundness": "Every atom is contained, every weight is nonnegative, arrangement completeness passes, and maximum full-dimensional depth is at most one",
+    "interval_if_sound": "[D, infinity)",
+    "kill_if_sound": "D > 11",
+    "non_kill": "D <= 11; D=11 does not establish a mass-eleven primal",
+    "forbidden_inference": "No primal upper bound, strong duality, global packing optimum, or continuum coverage claim"
+  },
+  "required_controls": [
+    "Exact unit-weight Trump family has D=11 and depth at most one",
+    "Uniform D4 orbit control with coalesced weights preserves D=11",
+    "Wall-crossing atom is rejected by exact containment",
+    "Unit-weight Trump interior perturbation with exact depth above one is rejected",
+    "Two distinct contained squares of weight1/2 each with positive-area overlap are accepted",
+    "Rational weight mutation producing an overweight full-dimensional cell is rejected",
+    "Negative, malformed and non-exact weights are rejected",
+    "Omitted arrangement cell or incomplete completeness receipt is rejected",
+    "Reordering preserves exact deduplication and D"
+  ],
+  "budget_active_minutes": {
+    "implementation": 120,
+    "source_distinct_controls_and_review": 40,
+    "first_bounded_pilot": 20,
+    "total": 180,
+    "maximum_slice": 30
+  },
+  "ownership": {
+    "implementation": "closure manager, max reasoning for geometry and soundness",
+    "review": "different context, max for mathematical judgment and xhigh for deterministic controls",
+    "shared_records_and_promotion": "coordinator"
+  },
+  "required_output": [
+    "Input Git revisions and repository-relative paths, exact placement count, rational D and containment verdict",
+    "Every full-dimensional arrangement cell, maximum rational depth and explicit null-set boundary",
+    "Independent completeness and mutation dispositions",
+    "Measured wall and CPU costs, with missing measurements labeled unavailable",
+    "One terminal status: sound, unsound or time_limited"
+  ],
+  "output_directory": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-dual-pilot/",
+  "stop_rules": [
+    "Freeze the implementation commit and pass controls before the pilot",
+    "Stop at each declared cap and retain incomplete work as time_limited",
+    "A failed soundness control prevents a sound verdict",
+    "No same-stem rerun, unregistered weight search or BC-244 work",
+    "BC-244's continuum-primal guard is not a prerequisite for this dual-only pilot"
+  ]
+}

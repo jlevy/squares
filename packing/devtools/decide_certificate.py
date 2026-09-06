@@ -237,6 +237,22 @@ def _read_bounded(path: Path) -> bytes:
     return data
 
 
+def load_frozen_bytes(data: bytes) -> tuple[Certificate, dict[str, object]]:
+    """Parse one bounded byte snapshot with the certificate gate's strict decoder."""
+
+    if len(data) > MAX_CERTIFICATE_BYTES:
+        raise CertificateFormatError(
+            f"data exceeds the {MAX_CERTIFICATE_BYTES}-byte certificate limit"
+        )
+    return _load_bytes(data)
+
+
+def read_bounded(path: Path) -> bytes:
+    """Read one candidate with the certificate gate's size bound."""
+
+    return _read_bounded(path)
+
+
 def load(path: Path) -> tuple[Certificate, dict[str, object]]:
     """Rebuild a certificate from a record's own bytes, trusting none of its summary."""
 

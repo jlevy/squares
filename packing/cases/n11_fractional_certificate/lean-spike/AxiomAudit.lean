@@ -1,0 +1,11 @@
+import Kernel
+
+#print axioms FractionalSpike.sum_assignedMass_le_total
+#print axioms FractionalSpike.finite_nonnegative_counting_contradiction
+#print axioms FractionalSpike.finite_nonnegative_mass_bound
+#print axioms FractionalSpike.mass_image_eq_of_permutation
+#print axioms FractionalSpike.ownerOf_eq_some_iff
+#print axioms FractionalSpike.n11_total_mass
+#print axioms FractionalSpike.n11_net_reaches_pi_over_four
+#print axioms FractionalSpike.n11_shrink_margin
+#print axioms FractionalSpike.support_radius_lt_one

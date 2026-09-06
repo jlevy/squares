@@ -28,6 +28,7 @@ stale the same way the records it checks do.
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import re
 from decimal import Decimal, InvalidOperation
@@ -53,6 +54,7 @@ from devtools.check_rung_figures import (
     superseded_rung_problems,
 )
 from devtools.check_synopsis import spell
+from devtools.dilation_corollary import LIMIT_RECORD_SCHEMA, PositiveQuadraticSurd
 from devtools.render_certificate_reach import (
     covering_value_register,
     reported_covering_values,
@@ -664,13 +666,13 @@ def test_the_reach_table_states_how_many_values_it_lists() -> None:
 
 
 def test_every_case_page_binds_the_certificate_its_own_evidence_names() -> None:
-    """A case's front-matter bound is the container side of one of its own certificates.
+    """A case's front-matter bound is bound by its own certificate or limit record.
 
     `D-442`'s surface, contracted rather than spot-checked. For every case page whose
-    verified lower bound cites an evidence entry carrying a certificate, exactly one of
-    those certificates has that bound as its container side, and that certificate's
-    recomputed mass is strictly below this case's own `n` -- which is what makes it a
-    certificate *about this case* rather than one quoted from a neighbour.
+    verified lower bound cites evidence carrying a certificate, exactly one cited object
+    binds that side. Ordinarily it is an endpoint certificate. T-022's typed exception is
+    a weak limit record whose exact source hash, strict-family identity, and source mass
+    are rechecked here; it is deliberately not treated as an endpoint certificate.
     """
     evidence = _evidence_by_id()
     interval = _evidence("E-fractional-interval-decision")
@@ -683,19 +685,58 @@ def test_every_case_page_binds_the_certificate_its_own_evidence_names() -> None:
         # Keyed by path: two entries may cite the same file (n = 11's own certificate is
         # named by both its primary entry and the interval decision), and one file is one
         # certificate however many records point at it.
-        cited = {
-            figures.path: figures
-            for citation in lower.get("evidence") or []
-            if (declared := (evidence.get(citation) or {}).get("certificate"))
-            and (figures := load_certificate(PACKING / declared)) is not None
-        }
+        cited: dict[str, tuple[str, CertificateFigures]] = {}
+        for citation in lower.get("evidence") or []:
+            declared = (evidence.get(citation) or {}).get("certificate")
+            if not isinstance(declared, str):
+                continue
+            target = PACKING / declared
+            if (figures := load_certificate(target)) is not None:
+                cited[figures.path] = (str(figures.outer_side), figures)
+                continue
+            try:
+                record = json.loads(target.read_text(encoding="utf-8"))
+            except OSError, json.JSONDecodeError:
+                continue
+            if record.get("schema") != LIMIT_RECORD_SCHEMA:
+                continue
+            conclusion = record["conclusion"]
+            assert conclusion["relation"] == ">="
+            assert conclusion["endpoint_certificate"] is False
+            source = record["source"]
+            source_path = REPO / source["certificate"]
+            assert hashlib.sha256(source_path.read_bytes()).hexdigest() == source["sha256"]
+            source_figures = load_certificate(source_path)
+            assert source_figures is not None
+            gap = Fraction(source["half_gap_tangent"])
+            shrink = Fraction(source["square_side"])
+            radicand = gap.denominator**2 + gap.numerator**2
+            factor = PositiveQuadraticSurd(
+                Fraction(
+                    shrink.denominator,
+                    shrink.numerator * (gap.denominator + gap.numerator),
+                ),
+                radicand,
+            )
+            limit_side = factor.scaled(source_figures.outer_side)
+            family = record["strict_dilation_family"]
+            assert family["factor_supremum"] == factor.exact
+            assert Fraction(family["factor_supremum_squared"]) == factor.squared
+            assert family["factor_supremum_irrational"] is factor.irrational
+            assert conclusion["bounded_side"] == limit_side.exact
+            assert Fraction(conclusion["bounded_side_squared"]) == limit_side.squared
+            assert conclusion["bounded_side_defining_polynomial"] == (
+                limit_side.defining_polynomial
+            )
+            assert len(source["accepted_conditions"]) == 5
+            cited[target.relative_to(REPO).as_posix()] = (limit_side.exact, source_figures)
         if not cited:
             continue
         n = int(packing["n"])
-        side = Fraction(str(lower["exact_form"]))
-        matching = [figures for figures in cited.values() if figures.outer_side == side]
-        assert len(matching) == 1, f"n = {n}: {len(matching)} cited certificates at {side}"
-        assert matching[0].mass < n, f"n = {n}: {matching[0].path} does not certify it"
+        side = str(lower["exact_form"])
+        matching = [figures for bound_side, figures in cited.values() if bound_side == side]
+        assert len(matching) == 1, f"n = {n}: {len(matching)} cited proof objects at {side}"
+        assert matching[0].mass < n, f"n = {n}: {matching[0].path} has too much mass"
         bound.add(n)
 
     # Non-vacuity, itself derived: every case the interval decision declares in its own

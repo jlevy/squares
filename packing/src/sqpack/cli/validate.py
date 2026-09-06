@@ -1641,6 +1641,21 @@ def _exact_verification(context: Context) -> str:
                 "devtools.generate_known_best_n011_rational_control",
                 "--check",
             ),
+            # T-022 is a limit theorem over the complete strict rational-dilation
+            # family, not an endpoint certificate. Rebuild its proof record only after
+            # replaying Conditions 1--5 from the frozen T-018 bytes. This stays in the
+            # pull-request gate: otherwise a changed certificate could leave the promoted
+            # endpoint looking current until the exhaustive lane happened to run.
+            (
+                sys.executable,
+                "-m",
+                "devtools.dilation_corollary",
+                "cases/n11_fractional_certificate/certificate.json",
+                "--source-name",
+                "packing/cases/n11_fractional_certificate/certificate.json",
+                "--check-limit-record",
+                "cases/n11_fractional_certificate/t-022-dilation-limit-corollary.json",
+            ),
             # The exact rational grid replay. It ran inside `soft-schema validation`
             # until D-370, where it was 3.58s of that step and where nobody would look
             # for exact geometry. Same cases, same predicate, same verdict; only the
@@ -2739,6 +2754,8 @@ STEPS: tuple[Step, ...] = (
             "packing/witnesses/*",
             "packing/frontier/*",
             "packing/devtools/check_basic_bounds.py",
+            "packing/devtools/dilation_corollary.py",
+            "packing/devtools/decide_certificate.py",
             "packing/devtools/generate_known_best_n011_rational_control.py",
             "packing/devtools/check_rational_witness_independent.py",
         ),

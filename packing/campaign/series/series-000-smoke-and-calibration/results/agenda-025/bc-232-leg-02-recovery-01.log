@@ -1,0 +1,10 @@
+iteration 0: sites=27277 orbits=3495 rows=13393 support=96 rows_objective=11.003820 converged=False objective=11.003820 raw_total=10.550690 max_depth=2114368269/2000000000=1.057184 scaled_total=9.979993 vertices=2607444 decided=844 violating=12536 seconds rows=594.3 lp=301.7 sep=9.1
+  added 150 orbits, deepest 1.024981 at (0.997700, 0.997700)
+iteration 1: sites=28477 orbits=3645 rows=13912 support=13 rows_objective=11.000000 converged=False objective=11.000000 raw_total=11.000000 max_depth=4666666667/4000000000=1.166667 scaled_total=9.428571 vertices=35224 decided=119 violating=720 seconds rows=1207.1 lp=138.6 sep=0.1
+  added 84 orbits, deepest 1.166667 at (1.001262, 1.825298)
+iteration 2: sites=29149 orbits=3729 rows=14167 support=11 rows_objective=11.000000 converged=False objective=11.000000 raw_total=11.000000 max_depth=5000000001/4000000000=1.250000 scaled_total=8.800000 vertices=25932 decided=425 violating=1068 seconds rows=1093.9 lp=522.7 sep=0.1
+  added 97 orbits, deepest 1.250000 at (0.973008, 1.754082)
+iteration 3: sites=29917 orbits=3826 rows=14441 support=14 rows_objective=11.000000 converged=False objective=11.000000 raw_total=11.000000 max_depth=4857142857/4000000000=1.214286 scaled_total=9.058824 vertices=46588 decided=119 violating=564 seconds rows=1069.9 lp=620.8 sep=0.2
+  added 63 orbits, deepest 1.214286 at (0.997700, 1.692745)
+iteration 4: sites=30413 orbits=3889 rows=14441 support=13 rows_objective=11.000000 converged=False objective=11.000000 raw_total=11.000000 max_depth=37/32=1.156250 scaled_total=9.513514 vertices=37208 decided=90 violating=528 seconds rows=810.2 lp=800.8 sep=0.1
+  added 62 orbits, deepest 1.156250 at (0.997797, 1.000900)

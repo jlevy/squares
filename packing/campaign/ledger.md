@@ -497,27 +497,28 @@ Status: **active**. A W5 efficiency-loop block entered on the operator's directi
 
 ### [agenda-024](agendas/agenda-024-post-381-24h-portfolio.md) — Post-3.81 24-Hour Portfolio Control
 
-Status: **active**. Coordinate two disjoint research agendas for roughly 24 active portfolio hours without allowing parallel work to split the proof record. Agenda-025 owns the exact fractional frontier and agenda-026 owns density, typed stationarity, and Trump capture. This agenda owns the frozen base and source packets, shared namespaces and records, six four-hour integration gates, all routing decisions, and W10 closeout. The research horizon is a replanning checkpoint rather than a stop condition. PR 87 owns agenda-023 and BC-214 through BC-218; its audited green head is integrated directly here for the gate machinery, while this portfolio starts at BC-219 and quarantines H-066 through H-069 and exp-065 through exp-069 until that sibling is terminal.
+Status: **active**. Coordinate independent mathematical directions for roughly 24 active portfolio hours. Agenda-025 owns scalar and richer-witness certificates; agenda-026 owns full-size densities, structural arguments, and their falsification. This agenda owns shared records, namespace allocation, checkpoint planning, integration, and claim promotion. BC-250 distills the current assessment into the H registry and these agendas. Select the next two-hour block from evidence; later allocations remain conditional. Preserve prior experiment contracts and accounting.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-219 | tool_validation | 11 | complete | 0 | think-9pzv | One immutable launch contract that prevents parallel agents from changing the theorem, criteria, source corpus, or shared record underneath one another. |
-| BC-220 | measurement_validation | 11 | blocked | 0 | think-u7i4 | Whether adaptive cores, the resumed bracket, local radius packaging, and the full-size weak-dual pilot are sound enough to receive more compute. |
+| BC-220 | measurement_validation | 11 | complete | 0 | think-u7i4 | Whether adaptive cores, the resumed bracket, local radius packaging, and the full-size weak-dual pilot are sound enough to receive more compute. |
 | BC-221 | measurement_validation | 11 | blocked | 0 | think-gt06 | A comparable exact-yield-per-hour reading across the adaptive, bracket, radius, and density routes. |
 | BC-222 | research | 11 | blocked | 0 | think-gxcm | Whether the direct-bound route, equality-density route, or local-to-global route now has the strongest verifier-backed expected gain. |
 | BC-223 | measurement_validation | 11 | blocked | 0 | think-dlj8 | A frozen candidate that survives independent exact decision, or a precise reason no branch has earned final-block exactification. |
 | BC-224 | tool_validation | 11 | blocked | 0 | think-wo94 | Review-ready evidence rather than another partially built research surface. |
 | BC-225 | measurement_validation | 11 | blocked | 0 | think-3ilu | The durable result of the 24-hour portfolio and the single highest-value continuation after all costs and negative results are known. |
+| BC-250 | tool_validation | 11 | complete | 0 | think-j1f5 | A next agent can dispatch the selected BC items from these agendas without reconstructing the review conversation or inventing scientific criteria. |
 
 ### [agenda-025](agendas/agenda-025-adaptive-fractional-frontier.md) — Adaptive Fractional Frontier Above 3.81
 
-Status: **active**. Give one managing agent a disjoint, exact program for the likeliest direct improvement to s(11) >= 3.81. Formalize direction-dependent witness sides B_k and their verifier, resume the retained 3.82 primal/dual state, and test Massaccesi's inset margin only as a seed before unrestricted column generation. A verified rung earns immediate exactification; a stalled adaptive core routes to a rational angle-cell kernel; segment measures remain tentative until that route is disposed and a verifier is priced. This manager owns BC-230 through BC-239, H-070 through H-079, and exp-070 through exp-089, but not shared campaign or frontier state.
+Status: **active**. Pursue stronger n=11 certificates through the scalar language, changed weights and sites, and richer witnesses. The current allocation is in agenda-024; H-093 through H-098 own the prospective research questions. Preserve BC-232's unresolved historical criterion and BC-233's seed rejection. This manager owns the cells here, not shared campaign or frontier state; the coordinator allocates experiment IDs.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-230 | research | 11 | complete | 0 | think-c678 | After BC-220, BC-231 must implement all three exact decision routes and execute every reviewed positive and negative control. No adaptive certificate exists yet. |
-| BC-231 | tool_validation | 11, 12, 17 | blocked | 0 | think-7mk4 | A trustworthy decision boundary on which an adaptive 3.8125 run may rely. |
-| BC-232 | research | 11 | ready | 0 | think-gmdy | Which side of eleven the current one-body formulation reaches at 3.82, or a measured reason to stop spending on this checkpoint. |
+| BC-231 | tool_validation | 11, 12, 17 | ready | 0 | think-7mk4 | A trustworthy decision boundary on which an adaptive 3.8125 run may rely. |
+| BC-232 | research | 11 | in_progress | 0 | think-gmdy | Which side of eleven the current one-body formulation reaches at 3.82, or a measured reason to stop spending on this checkpoint. |
 | BC-233 | research | 11, 17 | complete | 1 | think-jbat | This seed rule is retired. Reopen margin-biased seeding only under a new preregistered mechanism that can explain why unrestricted trajectories should diverge from the byte-identical control. |
 | BC-234 | research | 11 | blocked | 0 | think-1sv0 | A directly publishable rung or a quantitative verdict on adaptive witness cores. |
 | BC-235 | research | 11 | blocked | 1 | think-ay89 | Whether a strictly richer one-body witness can be represented by a small exact verifier. |
@@ -525,29 +526,36 @@ Status: **active**. Give one managing agent a disjoint, exact program for the li
 | BC-237 | research | 11 | blocked | 2 | think-fw95 | A build/no-build decision for the next richer measure language. |
 | BC-238 | measurement_validation | 11 | blocked | 0 | think-hjoe | A result object the central retention gate can judge without trusting its generator. |
 | BC-239 | measurement_validation | 11 | blocked | 0 | think-mss2 | The fractional program's honest yield, cost, negative results, and best continuation. |
+| BC-251 | research | 11 | ready | 0 | think-0za3 | A candidate for BC-238 or a specific restriction for BC-252. |
+| BC-252 | research | 11 | tentative | 1 | think-361m | A finite-model test whose exact outcome would change the allocation. |
+| BC-253 | research | 11 | tentative | 2 | think-mw02 | A complete local forall-pose/exists-witness argument, not a sampled menu. |
 
 ### [agenda-026](agendas/agenda-026-density-stationarity-and-trump-capture.md) — Density, Typed Stationarity, and Trump Capture
 
-Status: **active**. Give one managing agent a disjoint closure program that can turn local knowledge at Walter Trump's packing into a global argument. Package the already-computed quantitative neighborhood theorem instead of rerunning it; test whether a full-size density has a sound weak dual with boundary terms and useful equality set; and replace generic contact-graph enumeration with typed stationary backbones that retain feature contacts, owner axes, order data, abnormal Fritz–John cases, ties, zero multipliers, and rattlers. This manager owns BC-240 through BC-249, H-080 through H-089, and exp-090 through exp-109, but not shared campaign or frontier state.
+Status: **active**. Pursue full-size density and structural arguments in parallel, reusing the accepted retained-record-dependent local Trump theorem. H-099 through H-103 and existing H-036 distinguish finite-support duals, below-Trump primal densities, equality at Trump, restricted structural theorems, and complete typed global capture. BC-240 through BC-249 and BC-254 through BC-257 own the bounded work; Agenda 024 selects the allocation. Retain feature contacts, owner axes, order data, abnormal Fritz–John cases, ties, zero multipliers, and rattlers in any claimed complete model. Shared campaign and frontier state remain coordinator-owned; the original H-080 through H-089 and exp-090 through exp-109 reservations remain unchanged.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-240 | research | 11 | complete | 0 | think-4ln1 | BC-241's source-distinct retained-record review must decide whether this local endpoint is safe to invoke; no global capture argument may use it first. |
-| BC-241 | measurement_validation | 11 | ready | 0 | think-woi0 | Whether the local endpoint is ready to serve as the last step of a global proof. |
+| BC-241 | measurement_validation | 11 | complete | 0 | think-woi0 | Whether the local endpoint is ready to serve as the last step of a global proof. |
 | BC-242 | research | 11 | complete | 0 | think-9xxh | BC-243 may build the exact a.e.-depth dual verifier only after BC-220. A sound D>11 kills equality before any continuum primal guard is funded. |
 | BC-243 | measurement_validation | 11 | blocked | 0 | think-mt6q | Whether exact dual depth already rules out a sharp mass-eleven density before the program spends on continuum primal coverage. |
 | BC-244 | research | 11 | blocked | 1 | think-h7kl | A possible one-body proof endpoint, or evidence that global classification must carry the closure burden. |
 | BC-245 | research | 3, 4, 5, 11 | complete | 0 | think-do04 | After BC-220, price a lazy producer and independent replay only on n=3, n=4 and Trump controls. No global n=11 atlas opens without measured pruning and cost. |
-| BC-246 | tool_validation | 11 | blocked | 0 | think-3l93 | Whether the atlas language can join the global tree to the already-verified local neighborhood. |
-| BC-247 | tool_validation | 3, 4, 5 | blocked | 1 | think-qi66 | A measured branch price and omission control for the proposed global classifier. |
+| BC-246 | tool_validation | 11 | ready | 0 | think-3l93 | Whether the atlas language can join the global tree to the already-verified local neighborhood. |
+| BC-247 | tool_validation | 3, 4, 5 | ready | 1 | think-qi66 | A measured branch price and omission control for the proposed global classifier. |
 | BC-248 | research | 11 | blocked | 2 | think-901o | Whether certificate-guided enumeration can cover the complement of the Trump neighborhood at a finite, auditable cost. |
 | BC-249 | measurement_validation | 11 | blocked | 0 | think-7dd9 | The closure program's honest theorem gain, measured costs, negative results, and best continuation. |
+| BC-254 | research | 11 | ready | 0 | think-01q4 | An exact upper certificate can retire this support; only verified D>11 can obstruct equality density. A floating LP objective decides neither. |
+| BC-255 | research | 11 | ready | 1 | think-dene | Whether one complete restricted theorem is tractable. Only mass-derived near-tight forcing needs a valid covering measure; geometric conflicts, interval no-goods and restricted wall/angle arguments do not inherently need it. |
+| BC-256 | research | 11 | tentative | 2 | think-pjk7 | For H-036, verify every angle restriction and side strictly below 3.878; a counterexample need not improve Trump's record. A different target needs its own H. |
+| BC-257 | research | 11 | tentative | 2 | think-k9zi | A direct mass-below-eleven route at a declared lower side, separately scoped from H-101's equality classification at Trump. |
 
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 66 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 68 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -619,6 +627,19 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 | H-064 | abandoned | proof | At container side 77/20 = 3.85, on the retained 181-direction net at B | container side: 191/50 77/20 387/100 | 2 |  | 96m agent + 175.3m wall |
 | H-065 | confirmed | proof | On the retained 381/100 certificate at n = 11 -- 1121 atoms, B = 9977/ | census margin epsilon: 0 0.01 0.05 0.1 | 1 |  | 16m agent + 16.1m wall |
 | H-070 | refuted | proof | At n = 11, outer side 191/50, and B = 9977/10000, the eligible minimum | one-sided inset: 1/2 2962983/4505800 15513/20000 | 1 |  | 8.2m wall |
+| H-090 | refuted | proof | With the frozen T-018 atoms, weights, outer side and 181 net direction | core side: 99769/100000 | 1 |  | 30s wall |
+| H-091 | refuted | proof | With the frozen T-018 atoms, weights, outer side and 181 net direction | core side: 997696/1000000 | 1 |  | 31s wall |
+| H-093 | open | proof | At container side 61/16, the retained 181-direction net and scalar cor |  | 0 |  |  |
+| H-094 | open question | proof | Which changes to relative atom weights and D4 site orbits overcome the |  | 0 |  |  |
+| H-095 | blocked | proof | At container side 61/16, the BC-230 adaptive-core language admits a fi |  | 0 |  |  |
+| H-096 | open question | proof | Can finite rational inner kernels, contained throughout their assigned |  | 0 |  |  |
+| H-097 | open question | proof | Can a finite witness menu certify that every admissible unit-square po |  | 0 |  |  |
+| H-098 | open question | proof | Can nonnegative segment-supported measures give stronger or cheaper n  |  | 0 |  |  |
+| H-099 | blocked | proof | At the exact Trump side U, the deduplicated D4 images of the eleven ex |  | 0 |  |  |
+| H-100 | open question | proof | Is there a side L strictly between the retained verified lower bound a |  | 0 |  |  |
+| H-101 | open question | proof | Does the exact Trump-side container admit a nonnegative integrable are |  | 0 |  |  |
+| H-102 | open question | proof | Which explicitly delimited n = 11 angle-composition or wall-support fa |  | 0 |  |  |
+| H-103 | open question | proof | Can a complete typed finite cover of every n = 11 side-minimizing conf |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -628,7 +649,7 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 
 ## Rounds
 
-### rejected (12)
+### rejected (14)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -644,6 +665,8 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 | exp-041 | series-000 | 5 | openai-codex | H-023 | The frozen complete-zero-inventory clause is false: one additional owner axis is zero only at the positive endpoint, while independent control review also found mutation-reason and partial-disposition guards that remain unfinished. |
 | exp-064 | series-000 | 11 | Claude (agent), Lane A of agenda-021 BC-198, bead think-m3sx, session-087 | H-063 | The second clause holds exactly and the first cannot, so H-063 falls to its own rejection clause -- X-014's kill condition, that conditioning on direction buys too little. What makes this a strong negative rather than a failed search is that the refusal is proved rather than observed. At Trump's side L/B = 969271/249425 = 3.886021850 exceeds 2 + (4/3)sqrt(2) = 3.885618083, decided against the surd, so eleven pairwise disjoint B-squares of the class fit inside the container and no measure of total mass below eleven can cover them -- whatever site set is used and however long the row loop runs. The control's own ceiling is B(2 + (4/3)sqrt(2)) = 3.876681, which is 0.000403 below the side it was asked to reach: the shrink costs 0.008937 of side and Stromquist's headroom above Trump is only 0.008534. The control was unreachable before the first command ran, and no amount of instrument work would have changed that. Conditioning is not worthless, and the round reports what it does buy rather than only what it does not. On one site set at Trump's side a single threshold gives margin +0.082256 where two thresholds at composition (9, 2) give +0.072368, with the LP separating them once the site set is fine enough. And X-014's own step-1 design point is reachable: composition (11, 0) over the leading nineteen cells at Trump's side and grid 79 gives exact 39123/4096 = 9.551514, margin -5933/4096, every condition holding, refuted. What the program cannot do is reach the side Stromquist's Theorem 3 reaches, because that theorem gets there by a further box step this program does not have. |
 | exp-071 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-233, think-jbat | H-070 | The released seed and matched unseeded control converged after the same eight rounds to byte-identical candidates of exact mass 11142893/1000000, so the seeded arm missed the preregistered strict-improvement criterion. |
+| exp-110 | series-000 | 11 | Codex endpoint_epsilon_spike, max reasoning, coordinator satellite think-zq2u | H-090 | The candidate minimum is below the required threshold by 294969/2200000, so rescaling these weights cannot certify the proposed side 3.8100381. |
+| exp-111 | series-000 | 11 | Codex endpoint_epsilon_spike, max reasoning, coordinator satellite think-jthr | H-091 | The candidate minimum is below the threshold by 52441/2200000. Its interior witness also excludes every core side that could beat T-022 through ordinary containment while retaining these sites and relative weights. |
 
 ### abandoned (2)
 
@@ -740,7 +763,7 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 
 ## Effort
 
-66 rounds, 2152.1 agent-minutes, 1162.2 wall-minutes.
+68 rounds, 2152.1 agent-minutes, 1163.2 wall-minutes.
 
 ## Exploration reports not yet codified
 
@@ -751,7 +774,6 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 - X-010 — Two lanes, two ladders — focusing the campaign on first-party theorems
 - X-012 — One chart, four hundred inequalities, and an order-2m contradiction
 - X-015 — The map and the three programs: where significant progress is likeliest next
-- X-016 — After 3.81: two managers, six gates, one proof boundary
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
