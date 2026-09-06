@@ -199,6 +199,13 @@ It also refuses a duplicate object key, a non-integer or Boolean `n` or
 `direction_steps`, a JSON number where a rational string belongs, a malformed atom row,
 and a missing required field — each by name, before any condition is decided, rather
 than coercing the value or failing partway through the sweep.
+Before the conditions run, preconditions P6 and P7 also refuse two atoms at one site and
+any atom outside the closed container `[0, L]²`, including an outside atom of weight
+zero.
+Sites are compared as exact rationals, so `1/2` and `2/4` name the same coordinate.
+These are certificate-format requirements shared with `../verify_claim.py` and
+`../minimal_verify.py`: the theorem permits repeated sites and outside atoms, but the
+three checkers require one atom per site and support inside the container.
 
 | Field | Type | Meaning |
 | --- | --- | --- |
@@ -224,6 +231,11 @@ The preconditions are different — a file that fails one of those is refused th
 the conditions are not reached, because a malformed file has no conditions to decide.
 Every quantity is a `fractions.Fraction`; floats appear only in printed approximations
 beside the exact value.
+
+The package’s `n = 11` certificate, Massaccesi’s `n = 17` control, and all ten
+falsification rows satisfy P6 and P7. The bounded regression tests check those rows’
+preconditions and verify that duplicate and outside sites are refused before any
+condition; `check.py` replays both certificates through all five conditions.
 
 Condition 1 to Condition 4 are closed-form rational tests and can be read off the code
 in a minute. Condition 5 is the substance, and it is decided over the continuum of
@@ -382,7 +394,9 @@ Run with an empty environment and only the interpreter on the path
 from this project’s environment is importable; the pasted run’s `python3` is the
 project’s CPython 3.14.7, and the same command under the system 3.12 and 3.13 gave the
 same verdicts and figures within a second of the same time.
-Verbatim:
+The transcript predates P6 and P7: current runs report those as preconditions and omit
+the informational containment line.
+The recorded run is preserved verbatim:
 
 ```
 $ which python3; python3 --version
@@ -466,8 +480,13 @@ exit status 0
 - **The novelty claim rests on a bounded search.** The project’s record marks the result
   *apparently novel* relative to the corpus it holds: Friedman’s survey, the Kingbird
   catalogue of records, Stromquist 2003, Bentz 2010 and 2016, Nagamochi 2005, and the
-  two 2026 posts. No systematic arXiv or preprint sweep and no MathOverflow search is on
-  record. “First movement since 2003” is a statement about that corpus.
+  two 2026 posts. A
+  [literature audit on 2026-09-04](../../../resources/web/s11-lower-bound-literature-audit-2026/README.md)
+  then searched arXiv, Crossref, OpenAlex and Semantic Scholar, author pages and the
+  public catalogues through that date and found nothing above Stromquist’s value; it did
+  not exhaust subscription-only indexes, theses and proceedings, or unindexed sources.
+  “First movement since 2003” is a statement about that searched record, not a claim of
+  priority.
 - **Who checked it.** The project’s own verifier accepted the certificate; a reviewer
   inside the project wrote a second verifier from the theorem statement with the
   implementation withheld, reproduced the `n = 17` value as a control, and accepted the

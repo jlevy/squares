@@ -57,7 +57,12 @@ from sqpack.fractional.certificate import (
 )
 from sqpack.fractional.model import Atom
 from sqpack.fractional.sweep import minimum_covered_mass, weight_scale
-from sqpack.release import PUBLICATION_DATE, PUBLICATION_EDITION, PUBLICATION_REVISION
+from sqpack.release import (
+    PUBLICATION_DATE,
+    PUBLICATION_REVISION,
+    PUBLICATION_STATUS,
+    PUBLICATION_VERSION,
+)
 from sqpack.render.style import SQUARE_HUE_PALETTE
 from sqpack.yamlio import safe_load
 
@@ -74,6 +79,10 @@ TEMPLATES = Path(__file__).with_name("templates")
 TEMPLATE = TEMPLATES / "explainer-shell.html"
 MARKDOWN = TEMPLATES / "explainer-article.md"
 VERIFIER_CLAIM = CASE / "verify_claim.py"
+#: The one-file checker pinned by digest to the headline certificate; the opening says
+#: how long it is, so a reader knows the whole check is a short read before deciding
+#: whether to make it.
+PINNED_VERIFIER = CASE / "minimal_verify.py"
 OUTPUT = PACKING / "site" / "index.html"
 
 # Four colors have to stay apart in the prover: the mass comfortably above the
@@ -301,6 +310,7 @@ CARD_ALT = (
 VERIFIER = PACKING / "src" / "sqpack" / "fractional" / "certificate.py"
 GENERATOR = PACKING / "src" / "sqpack" / "fractional" / "generate.py"
 THIRDPARTY = CASE / "thirdparty" / "README.md"
+THIRDPARTY_CERTIFICATE = THIRDPARTY.with_name("certificate.json")
 
 
 @cache
@@ -311,11 +321,11 @@ def link_revision() -> str:
     day it is cut and wrong after the next merge that touches a linked file, and every
     merge would then owe the page a republish before its links told the truth. `HEAD`
     of the checkout the deploy renders from is the commit whose files the page
-    describes, so the links name it, in full, as GitHub's own permalinks do. The edition
-    stamp in the credits stays pinned in `sqpack.release`, because the atlas embeds it
-    and is compared byte for byte against a fresh render; it is the edition's label,
-    where this is the build's identity, and the two are allowed to differ. Where git
-    cannot answer (a source tarball) the edition's revision stands in.
+    describes, so the links name it, in full, as GitHub's own permalinks do. The page's
+    credits use this build revision too. The atlas keeps the edition revision pinned
+    in `sqpack.release`, because it is committed and compared byte for byte against a
+    fresh render. Where git cannot answer (a source tarball) the edition's revision
+    stands in.
     """
     found = subprocess.run(
         ("git", "rev-parse", "HEAD"), cwd=REPO, capture_output=True, text=True, check=False
@@ -324,6 +334,20 @@ def link_revision() -> str:
     if found.returncode != 0 or not re.fullmatch(r"[0-9a-f]{40}", revision):
         return PUBLICATION_REVISION
     return revision
+
+
+def page_edition() -> str:
+    """The edition the page stamps: the status and version, then the commit it is built from.
+
+    The version is editorial and pinned in `sqpack.release`; the hash after it is the
+    build's, so it moves on every push, and the credits say exactly which commit the
+    reader is looking at. The atlas footer and the claim documents are committed and
+    compared byte for byte, so they carry `PUBLICATION_EDITION`, whose hash is pinned;
+    the two spellings agree on the status and the version and differ only in which
+    commit they name.
+    """
+    stamp = f"{PUBLICATION_VERSION}-{link_revision()[:8]}"
+    return " ".join(part for part in (PUBLICATION_STATUS, stamp) if part)
 
 
 def repo_file(path: Path, revision: str | None = None) -> str:
@@ -1079,6 +1103,23 @@ def starred_lower_bounds() -> int:
     return int(load_figure_record()["totals"]["lower_bound_first_proved_here"])
 
 
+def novel_results() -> int:
+    """How many registered results the register scores as new, counted rather than typed.
+
+    Seven of the register's entries are audits and replays of published work, scored
+    `previously-published`; the opening's "results" sentence says how many of the count
+    are apparently new, so the reader is not left to assume all of them (review of
+    2026-09-06, C4). The novelty vocabulary is the register's own.
+    """
+    register = PACKING / "frontier" / "results.yaml"
+    entries = safe_load(register.read_text(encoding="utf-8"))["results"]
+    return sum(
+        1
+        for entry in entries
+        if entry.get("novelty") in {"apparently-novel", "confirmed-novel"}
+    )
+
+
 def registered_results() -> int:
     """How many results the frontier register holds, counted rather than typed.
 
@@ -1210,16 +1251,34 @@ def claim_path(facts: Facts) -> Path:
 # promise, and the page drops its list of claims rather than guess one.
 MEASURED_SECONDS = {"19-5": 36, "381-100": 175}
 
+# The pinned one-file checker's whole decision, `python minimal_verify.py
+# certificate.json`, as the proof card records it from 2026-09-05: 47.5 s on one
+# four-core machine and 67.0 s on a slower one. The page speaks from the slower, so
+# that its loose phrase is not the optimistic one (review of 2026-09-06, C6).
+PINNED_SECONDS = {"381-100": 67}
 
-def runtime_phrase(facts: Facts) -> str:
-    """How long the claim verifier takes, said loosely.
+
+def source_lines_phrase(path: Path) -> str:
+    """How long a verifier is, said loosely: its line count to the nearest ten.
+
+    Counted from the file rather than typed, so the sentence that calls the checker a
+    short read stays true as the checker is edited; rounded so that a comment added to
+    it does not change the page.
+    """
+    lines = len(path.read_text(encoding="utf-8").splitlines())
+    return f"about {round(lines, -1):,} lines"
+
+
+def runtime_phrase(facts: Facts, *, pinned: bool = False) -> str:
+    """How long the claim verifier takes, said loosely; `pinned` asks for the checker's.
 
     'about half a minute', 'about 3 minutes': loose on purpose, since the reader's
     machine is not this one.
     """
-    seconds = MEASURED_SECONDS.get(slug(facts))
+    seconds = (PINNED_SECONDS if pinned else MEASURED_SECONDS).get(slug(facts))
     if seconds is None:
-        raise SystemExit(f"{facts.source.name}: the minimal verifier has not been timed on it")
+        program = "minimal_verify.py" if pinned else "the claim verifier"
+        raise SystemExit(f"{facts.source.name}: {program} has not been timed on it")
     if seconds < 45:
         return "about half a minute"
     if seconds < 90:
@@ -1243,6 +1302,8 @@ def claim_substitutions(headline: Facts, default: Facts) -> dict[str, str]:
         values[f"{role}_N_ATOMS"] = f"{len(f.atoms):,}"
         values[f"{role}_N_DIRECTIONS"] = str(f.steps + 1)
         values[f"{role}_RUNTIME"] = runtime_phrase(f)
+    values["HEADLINE_PINNED_RUNTIME"] = runtime_phrase(headline, pinned=True)
+    values["PINNED_VERIFIER_LINES"] = source_lines_phrase(PINNED_VERIFIER)
     return values
 
 
@@ -1298,12 +1359,18 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
     best packing known, which is what remains unknown after all of them.
     """
     headline_frac = f"{headline.outer_side.numerator}/{headline.outer_side.denominator}"
+    package_side = Fraction(
+        json.loads(THIRDPARTY_CERTIFICATE.read_text(encoding="utf-8"))["outer_side"]
+    )
     return {
         "BELOW_ONE": BELOW_ONE,
         "NEAR_LIMIT": NEAR_LIMIT,
         "N": str(headline.n),
         "HEADLINE_L_FRAC": headline_frac,
         "HEADLINE_L_DEC": decimal(headline.outer_side),
+        "HEADLINE_N_ATOMS": f"{len(headline.atoms):,}",
+        "HEADLINE_N_DIRECTIONS": str(headline.steps + 1),
+        "THIRDPARTY_L_FRAC": f"{package_side.numerator}/{package_side.denominator}",
         "SUBTITLE": SUBTITLE,
         **card_substitutions(headline, headline_frac),
         "DEFAULT_L_FRAC": f"{default.outer_side.numerator}/{default.outer_side.denominator}",
@@ -1313,11 +1380,12 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "DEFAULT_CERT_URL": repo_file(default.source),
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
         "N_RESULTS": str(registered_results()),
+        "N_NOVEL": str(novel_results()),
         "N_STARRED": str(starred_lower_bounds()),
         "SOURCE_URL": MARKDOWN_OUTPUT.name,
         "REPO_URL": REPO_URL,
         "PUBLISHED": PUBLICATION_DATE,
-        "EDITION": PUBLICATION_EDITION,
+        "EDITION": page_edition(),
         "PRIOR_YEAR": str(PRIOR_YEAR),
         **bound_substitutions(),
         "PRIOR_SOURCE": PRIOR_SOURCE,
@@ -1733,7 +1801,17 @@ def published_markdown(source: str, *, default_slug: str) -> str:
         caption = re.search(r"<figcaption>(.*?)</figcaption>", block, re.DOTALL)
         parts = [*images]
         if caption:
-            parts.append(_inline_markdown(caption.group(1)))
+            text = _inline_markdown(caption.group(1))
+            if not images:
+                # The caption describes colours and outlines this edition cannot show,
+                # so it says where they are drawn before it describes them (review of
+                # 2026-09-06, D3). The figure number is the caption's own.
+                number = re.match(r"\*\*Figure (\d+)", text)
+                which = f"Figure {number.group(1)}" if number else "This figure"
+                parts.append(
+                    f"*{which} is drawn by [the page]({SITE_URL}); its caption follows.*"
+                )
+            parts.append(text)
         out.append("\n\n".join(part for part in parts if part))
         position = end
     out.append(source[position:])
@@ -1747,7 +1825,11 @@ def published_markdown(source: str, *, default_slug: str) -> str:
         items = re.findall(r"<span>(.*?)</span>", match.group(1), re.DOTALL)
         return "\n".join(f"- {_inline_markdown(item)}" for item in items)
 
-    source = re.sub(r'<div class="credits">(.*?)</div>', _credits, source, flags=re.DOTALL)
+    # The template gives the div a second class for its alignment; the list is keyed on
+    # the first, since the credits fell through to the paragraph flattener as one line
+    # when the pattern asked for the class attribute to be the word alone (review of
+    # 2026-09-06, D3).
+    source = re.sub(r'<div class="credits[^"]*">(.*?)</div>', _credits, source, flags=re.DOTALL)
     source = _with_edition_note(source)
     # Every remaining div is a named block whose name is a style. The content is the
     # document; the box around it is the page's.
@@ -1811,6 +1893,8 @@ def markdown_source(
     source = MARKDOWN.read_text(encoding="utf-8")
     if not claimed:
         source = drop_block(source, "CLAIM")
+    comparison = shared["HEADLINE_L_FRAC"] != shared["DEFAULT_L_FRAC"]
+    source = drop_block(source, "NO_COMPARISON" if comparison else "COMPARISON")
     unmeasured = [v["SLUG"] for v in per_certificate if not v["COARSEN_BARS"]]
     if unmeasured:
         # Figure 7 is stamped per certificate and switched with the others, so a
@@ -1916,7 +2000,10 @@ def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> 
     ]
 
     shared = shared_substitutions(facts, headline, facts[0])
-    claimed = all(claim_path(f).is_file() and slug(f) in MEASURED_SECONDS for f in facts)
+    claimed = (
+        all(claim_path(f).is_file() and slug(f) in MEASURED_SECONDS for f in facts)
+        and slug(headline) in PINNED_SECONDS
+    )
     if claimed:
         shared.update(claim_substitutions(headline, facts[0]))
     else:

@@ -19,10 +19,10 @@ pairwise disjoint interiors, the unit squares free to rotate.
 
 The witness is the certificate `certificate.json`, 1121 weighted points and a net of
 181 rational directions, carried in full at the end of this file and kept
-in the repository as [`certificate.json`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/certificate.json). The verifier below decides five
+in the repository as [`certificate.json`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/certificate.json). The verifier below decides five
 conditions on it in exact rational arithmetic, and the theorem below shows that the five
 conditions imply the claim.
-[`t-018-verifiable-claim-19-5.md`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md) does the same for
+[`t-018-verifiable-claim-19-5.md`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md) does the same for
 $s(11) \ge 19/5$.
 
 ## The Theorem
@@ -123,13 +123,21 @@ $|c_k (x_i - X) + s_k (y_i - Y)| \le B/2$ and
 $|-s_k (x_i - X) + c_k (y_i - Y)| \le B/2$. In the rotated coordinates
 $U = c_k X + s_k Y$ and $V = -s_k X + c_k Y$, each atom therefore contributes its weight
 on one closed axis-parallel rectangle of centers, and the edges of these rectangles,
-with the four lines bounding the admissible centers, cut the plane into finitely many
-open cells. The covered mass is constant on each open cell.
+with the four lines at the extreme $U$- and $V$-coordinates of the admissible square,
+cut the plane into finitely many open cells.
+The admissible square is oblique in these coordinates unless $\theta_k$ is a multiple of
+$\pi/2$, and its own edges are not among the lines: a cell may straddle one of them, and
+the clipping test in `least_mass` decides exactly which cells meet the square, from the
+exact range of $V$ the square occupies over each strip between adjacent $U$-lines.
+The covered mass is constant on each open cell.
 On a cell’s boundary it can only be larger, because the rectangles are closed and the
 weights are nonnegative.
 And every admissible center lies in the closure of some open cell that meets the
-admissible square, since that square has interior when $2 h_k < L$ and finitely many
-lines cannot cover an open set.
+admissible square: that square has interior when $2 h_k < L$, so it has interior points
+within every distance of the center; finitely many lines cannot cover an open set, so
+within every distance of the center some cell meeting the square has a point; and there
+are finitely many cells, so one cell does at every distance, which is to say the center
+lies in its closure.
 So the least mass over all admissible centers is the least over the open cells that meet
 the admissible square, and scoring each of them once decides Condition 5 at that
 direction. Every quantity is rational, so every score is exact.
@@ -162,14 +170,27 @@ It prints one line per condition, then a line comparing the file’s declared `c
 For this certificate the verdict is `VERIFIED: s(11) >= 381/100`, with Condition 5
 reporting the least covered mass $4001/4000$ at direction $0$ and center
 $(27/50, 27/50)$ over the 181 directions.
-It takes about 3 minutes in pure Python, most of it on the finite sweep of Condition 5 that
-“Why the Sweep Is Exact” describes.
+It takes about 3 minutes in pure Python on a laptop, most of it on the finite sweep of
+Condition 5 that “Why the Sweep Is Exact” describes.
 The sweep runs only once Conditions 1 to 4 hold; after a failure among them, the
 Condition 5 line says it was not evaluated.
+Before any condition, a file that is not a certificate of the theorem’s shape is refused
+by name: among the refusals are a rational written as a JSON number, a negative weight,
+a `variant` other than `unconditional`, an atom outside the container, and two atoms at
+one site. The theorem would tolerate the last two, an outside atom only adding to the
+total and a repeated site being one site of the summed weight, but a well-formed
+certificate has neither, and the pinned checker `minimal_verify.py`, beside this file in
+the repository, refuses them too.
 
 The exit status is 0 only when all five conditions hold and the three declarations
-match. Four perturbations show the verifier deciding rather than agreeing, each with its
-magnitude and the line that refuses it.
+match, and 1 on any refusal.
+A third status, 2, means no verdict was reached: a usage error, or the sweep’s own
+cross-check failing.
+At every direction the verifier re-sums the atoms directly at the center it reports and
+compares that with the swept minimum; a disagreement is a bug in the verifier, not in
+the certificate, and it prints one line beginning `INTERNAL ERROR` in place of the
+verdict. Four perturbations show the verifier deciding rather than agreeing, each with
+its magnitude and the line that refuses it.
 Condition 5 holds by the margin $4001/4000 - 1 = 1/4000$, and the
 placement attaining it, centered at $(27/50, 27/50)$, covers the atom at
 $(43/100, 99/100)$, of weight $7/4000$ and one of 8 in its orbit,
@@ -196,16 +217,16 @@ The condition lines are what to read.
 
 ## How This Repository Decided It
 
-Beyond the verifier in this file, the repository decides these bytes twice more, by two routes that share no code with it. With each other they share the `Certificate` representation, the loader that fills it from the file, and Conditions 2 to 4, decided once in closed form; what differs is how each decides Condition 5. The exact event-cell sweep in [`certificate.py`](https://github.com/jlevy/squares/blob/41fb401a/packing/src/sqpack/fractional/certificate.py) does at every net direction what “Why the Sweep Is Exact” describes and reports the least covered mass $4001/4000$ at direction $0$. The interval branch and bound in [`interval.py`](https://github.com/jlevy/squares/blob/41fb401a/packing/src/sqpack/fractional/interval.py) works with directed rounding on the doubled net, the net directions and their reflections across the diagonal, so it never invokes Condition 1 and covers every orientation directly. The retention gate, [`decide_certificate.py`](https://github.com/jlevy/squares/blob/41fb401a/packing/devtools/decide_certificate.py), builds the one `Certificate` both routes read, and accepts it only when both do and the interval route’s enclosure of the least covered mass has width zero and equals the sweep’s value exactly; both accepted this one. Two algorithms over one loaded object are not two independent implementations, nor two independent readings of the file, and the second and third decisions are worth exactly that much. The gate decides only unconditional certificates: a file declaring a `variant` other than `unconditional` is refused before either route runs, as it is by the verifier in this file, and these bytes declare none.
+Beyond the verifier in this file, the repository decides these bytes twice more, by two routes that share no code with it. With each other they share the `Certificate` representation, the loader that fills it from the file, and Conditions 2 to 4, decided once in closed form; what differs is how each decides Condition 5. The exact event-cell sweep in [`certificate.py`](https://github.com/jlevy/squares/blob/9307172a/packing/src/sqpack/fractional/certificate.py) does at every net direction what “Why the Sweep Is Exact” describes and reports the least covered mass $4001/4000$ at direction $0$. The interval branch and bound in [`interval.py`](https://github.com/jlevy/squares/blob/9307172a/packing/src/sqpack/fractional/interval.py) works with directed rounding on the doubled net, the net directions and their reflections across the diagonal, so it never invokes Condition 1 and covers every orientation directly. The retention gate, [`decide_certificate.py`](https://github.com/jlevy/squares/blob/9307172a/packing/devtools/decide_certificate.py), builds the one `Certificate` both routes read, and accepts it only when both do and the interval route’s enclosure of the least covered mass has width zero and equals the sweep’s value exactly; both accepted this one. Two algorithms over one loaded object are not two independent implementations, nor two independent readings of the file, and the second and third decisions are worth exactly that much. The gate decides only unconditional certificates: a file declaring a `variant` other than `unconditional` is refused before either route runs, as it is by the verifier in this file, and these bytes declare none.
 
 The certificate embedded below is the file `certificate.json`, whose SHA-256 is `b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a`.
 
-[`minimal_verify.py`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/minimal_verify.py), beside this file in the repository, is another standard-library check, pinned to exactly these bytes by that digest; [`t-018-proof-card.md`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/t-018-proof-card.md) states the claim on one page, and [`t-018-proof-visual.svg`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/t-018-proof-visual.svg) draws the atoms, the tight Condition 5 witness and the shrink step.
+[`minimal_verify.py`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/minimal_verify.py), beside this file in the repository, is another standard-library check, pinned to exactly these bytes by that digest; [`t-018-proof-card.md`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/t-018-proof-card.md) states the claim on one page, and [`t-018-proof-visual.svg`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/t-018-proof-visual.svg) draws the atoms, the tight Condition 5 witness and the shrink step.
 
 ## The Verifier
 
 `verify_claim.py`, byte for byte as kept in the repository at
-[`verify_claim.py`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/verify_claim.py).
+[`verify_claim.py`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/verify_claim.py).
 
 ````python
 #!/usr/bin/env python3
@@ -218,8 +239,12 @@ Standard library only, CPython 3.12 or later. Every decision is made in
 fractions.Fraction. One line is printed per condition, then one comparing the file's
 declared claim, total_mass and least_cell_mass with what was computed, then VERIFIED
 or REFUSED; the exit status is 0 only when all five conditions hold and the
-declarations match. Condition 5, the sweep, is evaluated only once Conditions 1 to 4
-hold, and its line says so when it was not.
+declarations match, and 1 on any refusal. Condition 5, the sweep, is evaluated only
+once Conditions 1 to 4 hold, and its line says so when it was not. A file that is not
+a certificate of the form below is refused by name before any condition. If the
+sweep's own cross-check fails, the verifier and not the certificate is broken: one
+line beginning INTERNAL ERROR replaces the verdict, and the exit status is 2, as it
+is for a usage error.
 
 THE THEOREM. Let s(n) be the least side of a square containing n unit squares
 with pairwise disjoint interiors, rotation allowed. A certificate names an
@@ -274,7 +299,10 @@ MAX_DIRECTIONS = 1000
 def load(path):
     """The certificate as (n, L, B, tangents, atoms, declared), where declared holds the
     file's own claim, total_mass and least_cell_mass for comparison with what is
-    computed; any other shape is refused.
+    computed; any other shape is refused. So are an atom outside [0, L]^2 and two atoms
+    at one site: the theorem would tolerate both, an outside atom only adding to the
+    total and a repeated site being one site of the summed weight, but neither is a
+    well-formed certificate, and minimal_verify.py refuses them too.
 
     The path is the certificate's JSON file, or a Markdown document carrying it in a
     fenced json block: each verifiable-claim document embeds the certificate it
@@ -314,12 +342,19 @@ def load(path):
             f"at most {MAX_ATOMS} atoms and {MAX_DIRECTIONS} directions"
         )
         raise ValueError(message)
-    atoms = []
+    atoms, sites = [], set()
     for atom in record["atoms"]:
         x, y, w = (rational(value) for value in atom)
         if w < 0:
             message = f"negative weight {w} at ({x}, {y})"
             raise ValueError(message)
+        if not (0 <= x <= L and 0 <= y <= L):
+            message = f"atom ({x}, {y}) lies outside the container [0, {L}]^2"
+            raise ValueError(message)
+        if (x, y) in sites:
+            message = f"two atoms share the site ({x}, {y})"
+            raise ValueError(message)
+        sites.add((x, y))
         atoms.append((x, y, w))
     claim = record["claim"]
     if not isinstance(claim, str):
@@ -336,9 +371,7 @@ def load(path):
 def symmetric(atoms, L):
     """Condition 1. The eight maps form a group, so checking every site of the support
     against every image is the whole of invariance."""
-    weight = {}
-    for x, y, w in atoms:
-        weight[x, y] = weight.get((x, y), 0) + w
+    weight = {(x, y): w for x, y, w in atoms}  # one atom per site: load refused a repeat
     for (x, y), w in weight.items():
         flips = [(p, q) for p in (x, L - x) for q in (y, L - y)]
         for p, q in flips + [(q, p) for p, q in flips]:  # the eight symmetries of [0, L]^2
@@ -347,7 +380,7 @@ def symmetric(atoms, L):
                     f"({x}, {y}) has weight {w} but ({p}, {q}) has {weight.get((p, q), 0)}",
                     False,
                 )
-    return f"{len(atoms)} atoms, {len(weight)} sites, invariant under the 8 symmetries", True
+    return f"{len(atoms)} atoms on distinct sites, invariant under the 8 symmetries", True
 
 
 def extent(polygon, axis, low, high):
@@ -373,15 +406,21 @@ def extent(polygon, axis, low, high):
 # over nothing here and holds vacuously, and the direction is reported as deciding
 # nothing. It is the single point (L/2, L/2) when 2h = L, and that one placement is
 # scored directly. Otherwise F has nonempty interior. The lines u = u_i +- B/2,
-# v = v_i +- B/2 and the four lines bounding F cut the plane into open cells. The mass
-# is constant on a cell (each atom's box has its edges on the lines); a point on a
-# cell's boundary has at least the cell's mass (a closed box meeting the cell contains
-# its closure); and every point of F is in the closure of a cell meeting F (F has
-# interior points arbitrarily near it, and an open set is not covered by finitely many
-# lines). So the least mass over F is the least over the cells meeting F. A cell
-# (a, b) x (a', b') with [a, b] inside F's u-projection meets F iff a' < hi and lo < b',
-# where [lo, hi] is the v-range of F within the closed strip a <= u <= b: the open
-# strip's part of F projects onto an interval between (lo, hi) and [lo, hi].
+# v = v_i +- B/2, with the four lines u = umin, u = umax, v = vmin, v = vmax at F's
+# extreme coordinates (its bounding box: F's own edges are oblique when t > 0, and they
+# are not added), cut the plane into finitely many open cells. The mass is constant on
+# a cell (each atom's box has its edges on the lines); a point on a cell's boundary has
+# at least the cell's mass (a closed box meeting the cell contains its closure); and
+# every point of F is in the closure of a cell meeting F: F has interior points within
+# every distance of it, finitely many lines do not cover an open set, so within every
+# distance of the point some cell meeting F has a point, and since there are finitely
+# many cells one cell does at every distance, which is to say the point is in its
+# closure. So the least mass over F is the least over the cells meeting F. A cell may
+# straddle F's oblique edge, and the clipping test below decides exactly which cells
+# meet F: a cell (a, b) x (a', b') with [a, b] inside F's u-projection meets F iff
+# a' < hi and lo < b', where [lo, hi] is the v-range of F within the closed strip
+# a <= u <= b, since the open strip's part of F projects onto an interval between
+# (lo, hi) and [lo, hi].
 
 
 def mass_at(atoms, c, s, half, center):
@@ -444,9 +483,18 @@ def least_mass(L, B, t, atoms, scale):
     left, right = extent(F, 1, Vc, Vc)
     Uc = (max(U[i], left) + min(U[i + 1], right)) / 2
     X, Y = c * Uc - s * Vc, s * Uc + c * Vc
+    # The sweep's own cross-check: the witness must be admissible, and summing the atoms
+    # at it directly must give the grid's minimum. A failure here is this file's bug, not
+    # the certificate's, and main reports it as one, apart from either verdict.
     direct = mass_at(atoms, c, s, half, (X, Y))
-    if not (h <= X <= L - h and h <= Y <= L - h and direct == Fraction(best, scale)):
-        message = f"center ({X}, {Y}) covers {direct}, the grid says {Fraction(best, scale)}"
+    if not (h <= X <= L - h and h <= Y <= L - h):
+        message = f"at t = {t} the witness center ({X}, {Y}) admits no B-square"
+        raise AssertionError(message)
+    if direct != Fraction(best, scale):
+        message = (
+            f"at t = {t} the center ({X}, {Y}) covers {direct} summed directly, "
+            f"but the grid says {Fraction(best, scale)}"
+        )
         raise AssertionError(message)
     return Fraction(best, scale), (X, Y), cells
 
@@ -543,13 +591,16 @@ def decide(n, L, B, tangents, atoms, declared):  # noqa: PLR0917 -- the certific
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    """Usage errors go to stderr with status 2; verdicts go to stdout with status 0 or 1."""
+    """Verdicts go to stdout with status 0 or 1. Status 2 is no verdict: a usage error,
+    which argparse reports on stderr, or the sweep's own cross-check failing, reported on
+    stdout as one INTERNAL ERROR line in place of the verdict."""
     parser = argparse.ArgumentParser(
         description="Decide a fractional unavoidable-set certificate for s(n) >= L, exactly.",
         epilog=(
             "One line per condition, one comparing the file's declarations with what was "
             "computed, then VERIFIED or REFUSED; the exit status is 0 only after VERIFIED "
-            "and 1 on any refusal."
+            "and 1 on any refusal. Status 2 is no verdict: a usage error, or an INTERNAL "
+            "ERROR line saying the verifier disagreed with itself."
         ),
     )
     parser.add_argument(
@@ -561,7 +612,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     except (OSError, KeyError, TypeError, ValueError) as error:
         print(f"REFUSED: not a certificate of the expected shape: {error}")
         return 1
-    return decide(*certificate)
+    try:
+        return decide(*certificate)
+    except AssertionError as error:  # the sweep's cross-check: this file is what failed
+        print(f"INTERNAL ERROR: no verdict; the verifier disagrees with itself: {error}")
+        return 2
 
 
 if __name__ == "__main__":

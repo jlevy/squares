@@ -259,7 +259,8 @@ def render_card(facts: Facts) -> str:
 
     The cell count and the pinned verifier's timing are the two figures the certificate
     does not carry; the count is recorded above with its provenance, and the timing is
-    stated in the template as the measurement it is.
+    stated in the template as the measurement it is. The claim verifier's time beside it
+    comes from the table the claim document reads, so the card names both programs.
     """
     cells = REACHABLE_CELLS.get(slug(facts))
     if cells is None:
@@ -299,6 +300,7 @@ def render_card(facts: Facts) -> str:
         "CERT_URL": edition_file(facts.source),
         "DIGEST_PREFIX": sha256_of(facts.source)[:DIGEST_PREFIX_CHARS],
         "CLAIM_NAME": claim_path(facts).name,
+        "CLAIM_RUNTIME": runtime_phrase(facts),
         "CONFIRMATION": str(entry["confirmation"]),
         "REVIEW_ARTIFACT": relative_link(review, CARD),
         "NOVELTY": str(entry["novelty"]),

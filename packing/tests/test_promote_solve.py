@@ -277,12 +277,13 @@ def the_reach_is_the_last_degree_clause_3_can_still_judge() -> None:
     assert reach(n11_value(400), "1e-390") == 7
 
 
-def the_probe_sweeps_to_the_reach_rather_than_a_typed_in_ceiling() -> None:
+def test_the_probe_sweeps_to_the_reach_rather_than_a_typed_in_ceiling() -> None:
     """The recorded `n = 29` refusal stopped at twenty because twenty was a default.
 
     A synthetic case stands in for the real one so the contract is checked without
     paying for the sweep: `pi` at 300 digits reaches degree three, and the probe is
-    asked for no ceiling at all.
+    asked for no ceiling at all. Check the degree at the search boundary as well as
+    in the report: a regression to twenty must fail before paying for that sweep.
     """
 
     def not_algebraic(digits: int) -> tuple[str, str, str]:
@@ -294,13 +295,19 @@ def the_probe_sweeps_to_the_reach_rather_than_a_typed_in_ceiling() -> None:
             mp.mp.dps = saved
         return str(value), f"1e-{digits - 10}", "pi, which is not algebraic at all"
 
-    probe_tool.CASES["not-algebraic"] = not_algebraic
-    try:
+    def check_search_ceiling(*args, **kwargs):
+        assert kwargs["max_degree"] == 3, (
+            "the probe stopped short of the degree its digits reach: "
+            f"requested {kwargs['max_degree']} where the digits reach 3"
+        )
+        return minimal_polynomial(*args, **kwargs)
+
+    with pytest.MonkeyPatch.context() as patches:
+        patches.setitem(probe_tool.CASES, "not-algebraic", not_algebraic)
+        patches.setattr(probe_tool, "minimal_polynomial", check_search_ceiling)
         report = probe_tool.probe(
             "not-algebraic", digits=300, max_degree=None, max_coefficient=MAX_COEFFICIENT
         )
-    finally:
-        del probe_tool.CASES["not-algebraic"]
 
     assert report["reach"] == 3, (
         f"290 independent digits reach degree {report['reach']} at |c| < 1e22, not three"
@@ -316,7 +323,7 @@ def the_probe_sweeps_to_the_reach_rather_than_a_typed_in_ceiling() -> None:
 def main() -> int:
     the_digits_a_clause_may_rely_on_are_the_worse_of_two_limits()
     the_reach_is_the_last_degree_clause_3_can_still_judge()
-    the_probe_sweeps_to_the_reach_rather_than_a_typed_in_ceiling()
+    test_the_probe_sweeps_to_the_reach_rather_than_a_typed_in_ceiling()
     the_rule_recovers_a_published_polynomial()
     a_lower_degree_is_preferred_to_a_multiple_of_it()
     the_serialized_digits_are_refused()

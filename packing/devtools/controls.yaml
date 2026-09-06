@@ -1160,9 +1160,8 @@ controls:
 - name: relation reach - the probe sweeps to a typed-in ceiling instead of the digits
   file: devtools/probe_minimal_polynomial.py
   replace: ["        max_degree = max(ceiling, 2)", "        max_degree = 20"]
-  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py -q
+  run: uv run --frozen --group dev python -m pytest tests/test_promote_solve.py::test_the_probe_sweeps_to_the_reach_rather_than_a_typed_in_ceiling -q
   expect: "the probe stopped short of the degree its digits reach"
-  timeout_seconds: 300
 
 # --- the exact grid replay, after it moved out of the schema step (D-370) ---
 # BC-077 moved this replay from `soft-schema validation` into `exact verification`.
