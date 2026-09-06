@@ -103,21 +103,27 @@ observed. Do not infer the PR #89 merge commit from its former open head.
 
 | Binding | Observed value |
 | --- | --- |
-| PR #89 merge commit on `origin/main` | `__PR89_MERGE_COMMIT__` |
-| Final `origin/main` base | `__FINAL_ORIGIN_MAIN_BASE__` |
-| New branch name | `__NEW_BRANCH_NAME__` |
-| New-branch transport head before the binding commit | `__NEW_BRANCH_HEAD__` |
+| PR #89 merge commit on `origin/main` | `6b21d14b64c19003d597ed3c993c051b64336b0c` |
+| Final `origin/main` base | `6b21d14b64c19003d597ed3c993c051b64336b0c` |
+| New branch name | `codex/post-381-t2-t10` |
+| New-branch transport head before the binding commit | `552e0c6969a6aa3a5a2e2a539e826c0bab8c7c83` |
 | Continuation pull-request URL | `__NEW_PR_URL__` |
-| Cooperative-stop implementation commit in this staging stack | `37ca074d2a9e0027d334be03c982b24ffb6acd4a` |
-| Coordinator identity and acknowledgement UTC | `__COORDINATOR_IDENTITY_AND_ACK_UTC__` |
-| Fractional-manager identity and acknowledgement UTC | `__FRACTIONAL_MANAGER_IDENTITY_AND_ACK_UTC__` |
-| Closure-manager identity and acknowledgement UTC | `__CLOSURE_MANAGER_IDENTITY_AND_ACK_UTC__` |
-| Floating-reviewer identity and acknowledgement UTC | `__FLOATING_REVIEWER_IDENTITY_AND_ACK_UTC__` |
+| Cooperative-stop implementation commit on this branch | `228806215149549032522506325bd524a71cbd4d` (transport provenance `37ca074d2a9e0027d334be03c982b24ffb6acd4a`) |
+| Coordinator identity and acknowledgement UTC | `/root`; `2026-09-06T09:43:25Z` |
+| Fractional-manager identity and acknowledgement UTC | `/root/fractional_manager`; `2026-09-06T09:42:33Z` |
+| Closure-manager identity and acknowledgement UTC | `/root/closure_manager`; `2026-09-06T09:42:29Z` |
+| Floating-reviewer identity and acknowledgement UTC | `/root/closure_manager/bc241_source_reviewer`; `2026-09-06T09:42:33Z` |
 | PR #93 | MERGED as `3122c49766e7fc70c8cb299bd8b6b09558447d8a` at `2026-09-06T09:06:10Z` |
-| PR #94 | OPEN at `9c82dc2ac5fecfa94d9388ef61c6b1d4bc21169b` |
-| Continuation release-authorization UTC | `__RELEASE_AUTHORIZATION_UTC__` |
+| PR #94 | OPEN and `DIRTY` at `9c82dc2ac5fecfa94d9388ef61c6b1d4bc21169b` |
+| Continuation release-authorization UTC | `2026-09-06T09:43:25Z` |
 
 <!-- END COORDINATOR BINDING -->
+
+At `2026-09-06T09:43:25Z`, `/root` recorded: “I bind the four roles, frozen inputs,
+clocks, execution graph, and fresh output paths in this addendum.
+I alone will move a shared gate or claim.”
+The three delegated acknowledgements are the verbatim statements in the role table
+below, tied to the identities and UTCs above.
 
 The staged cooperative-stop manifest is:
 
@@ -236,7 +242,7 @@ select substitute work from the repository-wide ready list.
 
 | Order | Bead | Bound work |
 | --- | --- | --- |
-| 1 | `think-5pj8` | Land PR #89 and cut `__NEW_BRANCH_NAME__` without starting the active clock. |
+| 1 | `think-5pj8` | Land PR #89 and cut `codex/post-381-t2-t10` without starting the active clock. |
 | 2 | `think-yjh8` | Complete this launch addendum and role contract. |
 | 3 | `think-qke4` | Implement and verify the opt-in cooperative fractional stop outside active research time. |
 | 4 | `think-6yx2` | Manage the fractional lane from T+2 to T+4. |
