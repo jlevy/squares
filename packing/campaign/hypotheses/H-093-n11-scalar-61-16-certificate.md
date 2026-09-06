@@ -40,6 +40,15 @@ hypothesis:
 ---
 # H-093 — A Scalar Certificate at 61/16
 
+Session 089 restored instrument readiness after integrating PR100’s exact depth fixes
+and PR98’s validation improvements.
+The focused depth, seed, driver and bridge controls and a zero-iteration retained-seed
+control passed in an isolated checkout of `5267bd34`. The
+[readiness audit](../series/series-000-smoke-and-calibration/results/agenda-025/bc-251-readiness-audit.md#landed-code-replay)
+retains the commands and limits.
+No H-093 experiment has started; its prospective freeze, fresh target paths and full
+single-invocation allocation remain separate requirements.
+
 The [scalar probe in Agenda 025](../agendas/agenda-025-adaptive-fractional-frontier.md)
 tests the first selected side between the retained 3.81 certificate and the unfinished
 3.82 bracket. The

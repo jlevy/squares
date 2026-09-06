@@ -142,6 +142,16 @@ def test_round_effort_claims_reject_stale_duplicate() -> None:
     assert check_round_effort_claims(stale_duplicate, "44", "1061", "30.7")
 
 
+def test_round_effort_claims_allow_registered_total_with_a_pending_round() -> None:
+    current = (
+        "There are 45 rounds registered in `series-000`. "
+        "They record 1061 agent-minutes and 30.7 wall-minutes.\n\n"
+        "Of these, 44 are terminal and one remains prospective."
+    )
+    assert check_round_effort_claims(current, "45", "1061", "30.7") == []
+    assert check_round_effort_claims(current, "44", "1061", "30.7")
+
+
 def test_experiment_scope_claims_preserve_h024_prerequisite() -> None:
     current = "Exp-012 leaves H-024 unresolved because its formal prerequisite is unmet."
     promoted = "Exp-012 numerically reconstructs the source and refutes H-024."

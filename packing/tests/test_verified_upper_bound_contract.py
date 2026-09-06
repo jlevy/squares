@@ -22,7 +22,9 @@ places a reader can actually meet the field, and these tests hold all three in p
 from __future__ import annotations
 
 import math
+import os
 import re
+import stat
 from decimal import Decimal, localcontext
 from pathlib import Path
 
@@ -296,27 +298,63 @@ def test_the_schema_states_what_the_field_is_and_is_not() -> None:
     assert "only when status is proved" in exact_form
 
 
+def _consumer_paths(root: Path) -> list[Path]:
+    """Prune excluded trees, then return deterministic, included regular-file paths.
+
+    Directory links are never followed. Included file links retain their lexical
+    consumer names, but must resolve inside the checkout; broken or external links
+    and included traversal/stat errors fail the check rather than hiding a consumer.
+    """
+    resolved_root = root.resolve(strict=True)
+    paths: list[Path] = []
+
+    def raise_walk_error(error: OSError) -> None:
+        raise error
+
+    for directory, subdirectories, filenames in os.walk(
+        root, topdown=True, onerror=raise_walk_error, followlinks=False
+    ):
+        parent = Path(directory)
+        # Dot-directories hold vendored agent skills and tooling state, not our prose.
+        # Mutate this list before os.walk descends: filtering the resulting files is late.
+        subdirectories[:] = [
+            name
+            for name in sorted(subdirectories)
+            if name not in SKIPPED_PARTS
+            and not name.startswith(".")
+            and not stat.S_ISLNK((parent / name).lstat().st_mode)
+        ]
+        for name in sorted(filenames):
+            path = parent / name
+            if (
+                path.suffix not in SEARCHED_SUFFIXES
+                or name in SKIPPED_PARTS
+                or name.startswith(".")
+                or re.fullmatch(r"n-\d{3}\.md", name)
+            ):
+                continue
+            metadata = path.lstat()
+            if stat.S_ISLNK(metadata.st_mode):
+                if not path.resolve(strict=True).is_relative_to(resolved_root):
+                    raise ValueError(
+                        f"included consumer symlink points outside checkout: {path}"
+                    )
+                metadata = path.stat()
+            if not stat.S_ISREG(metadata.st_mode):
+                continue
+            relative = path.relative_to(root).as_posix()
+            # Declared consumers are scanned however large they grow. `packing/defects.yaml`
+            # crossed this generated-blob heuristic in D-392 and silently stopped being read.
+            if metadata.st_size > GENERATED_BYTES and relative not in DECLARED_CONSUMERS:
+                continue
+            paths.append(path)
+    return sorted(paths, key=lambda path: path.relative_to(root).as_posix())
+
+
 def test_no_undeclared_consumer_reads_the_field() -> None:
     found: set[str] = set()
-    for path in sorted(REPO.rglob("*")):
-        if path.is_dir() or path.suffix not in SEARCHED_SUFFIXES:
-            continue
+    for path in _consumer_paths(REPO):
         relative = path.relative_to(REPO)
-        # Dot-directories hold vendored agent skills and tooling state, not our prose.
-        if (
-            SKIPPED_PARTS & set(relative.parts)
-            or any(part.startswith(".") for part in relative.parts)
-            or re.fullmatch(r"n-\d{3}\.md", path.name)
-        ):
-            continue
-        # The size cutoff is a heuristic for generated blobs, and a declared consumer is
-        # not a guess -- so it is scanned however large it has grown. `packing/defects.yaml`
-        # crossed 512 KiB on 2026-08-30 and silently stopped being read, which is `D-392`.
-        if (
-            path.stat().st_size > GENERATED_BYTES
-            and relative.as_posix() not in DECLARED_CONSUMERS
-        ):
-            continue
         body = path.read_text(encoding="utf-8", errors="ignore").replace(OWN_NAME, "")
         if "verified_upper_bound" in body:
             found.add(relative.as_posix())
@@ -331,6 +369,78 @@ def test_no_undeclared_consumer_reads_the_field() -> None:
     )
     stale = sorted(set(DECLARED_CONSUMERS) - found)
     assert stale == [], "declared consumers that no longer read the field"
+
+
+def test_consumer_walk_prunes_before_descent_and_keeps_large_declared_files(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    excluded = [tmp_path / name for name in SKIPPED_PARTS | {".git", ".claude", ".hidden"}]
+    for directory in excluded:
+        directory.mkdir()
+        (directory / "unread.md").write_text("verified_upper_bound", encoding="utf-8")
+    nested = tmp_path / "nested"
+    nested.mkdir()
+    nested_excluded = nested / "node_modules"
+    nested_excluded.mkdir()
+    (nested_excluded / "unread.md").write_text("verified_upper_bound", encoding="utf-8")
+    excluded.append(nested_excluded)
+    (nested / "a.py").write_text("verified_upper_bound", encoding="utf-8")
+    (tmp_path / "z.md").write_text("verified_upper_bound", encoding="utf-8")
+    for name in ("large.md", "generated.md"):
+        (tmp_path / name).write_text("x" * (GENERATED_BYTES + 1), encoding="utf-8")
+    (tmp_path / "n-123.md").write_text("excluded frontier case", encoding="utf-8")
+    (tmp_path / ".hidden.md").write_text("excluded hidden file", encoding="utf-8")
+    monkeypatch.setitem(DECLARED_CONSUMERS, "large.md", "large declared control")
+    original_scandir = os.scandir
+
+    def guarded_scandir(path: str | os.PathLike[str]):
+        assert not any(Path(path).is_relative_to(directory) for directory in excluded)
+        return original_scandir(path)
+
+    monkeypatch.setattr(os, "scandir", guarded_scandir)
+    assert [path.relative_to(tmp_path).as_posix() for path in _consumer_paths(tmp_path)] == [
+        "large.md",
+        "nested/a.py",
+        "z.md",
+    ]
+
+
+def test_consumer_walk_has_explicit_symlink_and_error_boundaries(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root = tmp_path / "repo"
+    root.mkdir()
+    nested = root / "nested"
+    nested.mkdir()
+    source = nested / "source.py"
+    source.write_text("verified_upper_bound", encoding="utf-8")
+    (root / "alias.py").symlink_to(source)
+    (root / "directory-alias").symlink_to(nested, target_is_directory=True)
+    assert [path.relative_to(root).as_posix() for path in _consumer_paths(root)] == [
+        "alias.py",
+        "nested/source.py",
+    ]
+    external = tmp_path / "outside.py"
+    external.write_text("verified_upper_bound", encoding="utf-8")
+    (root / "outside.py").symlink_to(external)
+    with pytest.raises(ValueError, match="outside"):
+        _consumer_paths(root)
+    (root / "outside.py").unlink()
+    broken = root / "broken.py"
+    broken.symlink_to(root / "missing.py")
+    with pytest.raises(FileNotFoundError):
+        _consumer_paths(root)
+    broken.unlink()
+    original_scandir = os.scandir
+
+    def unreadable(path: str | os.PathLike[str]):
+        if Path(path) == nested:
+            raise PermissionError("included directory cannot be read")
+        return original_scandir(path)
+
+    monkeypatch.setattr(os, "scandir", unreadable)
+    with pytest.raises(PermissionError, match="included directory"):
+        _consumer_paths(root)
 
 
 def _body(n: int) -> str:

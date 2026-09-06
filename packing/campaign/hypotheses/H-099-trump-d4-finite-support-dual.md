@@ -27,10 +27,10 @@ hypothesis:
   instrument: >-
     Proposed exact geometric support deduplication, necessary-row LP ceiling certificate,
     and, only for a surviving candidate, BC-243's complete a.e.-depth arrangement
-    verifier with independent replay. Neither route is ready yet. Readiness may be
-    established for the exact ceiling route alone; that does not authorize acceptance
+    verifier with independent replay. The exact ceiling route passed its source and
+    independent readiness controls; this does not authorize acceptance
     of a D > 11 candidate without the complete depth verifier.
-  instrument_ready: false
+  instrument_ready: true
   regime: >-
     n = 11; exact algebraic Trump side; only the geometric D4 closure of the retained
     Trump witness, with no added placements or assumed strong duality
@@ -49,12 +49,27 @@ hypothesis:
 ---
 # H-099 — A Finite-Support Ceiling Before the Arrangement Build
 
-Let F be the distinct geometric squares in all eight container symmetries of the
+Session 089 accepted readiness for the finite-row ceiling route after the
+[independent review](../series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-independent-review.md)
+and its parser correction.
+Complete almost-everywhere depth verification is not implemented here.
+
+[Exp-113](../series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md)
+tested the prospectively frozen support and returned a separately replayed finite-row
+ceiling of $56/5$. Together with the feasible mass-eleven average, it gives the bracket
+$[11,56/5]$ for the full fixed-support supremum.
+H-099 remains unresolved: the matching finite-row primal weights have not passed
+complete almost-everywhere depth verification, so the screen does not certify an
+a.e.-feasible mass-above-eleven weighting.
+
+Let $F$ be the distinct geometric squares in all eight container symmetries of the
 [exact Trump witness](../../cases/trump11/packing.py), identifying local quarter-turn
 reparameterizations and duplicate placements.
-For each D4 orbit O, let a_O be the weight of each distinct member: D = sum |O| a_O.
-Symmetrization preserves full feasibility and D, so orbit weights lose no full-support
-solutions; a test row has coefficient |{S in O : x lies in int S}|, not merely 0 or 1.
+For each D4 orbit $O$, let $a_O$ be the weight of each distinct member, giving
+$D=\sum_O |O|a_O$. Symmetrization preserves full feasibility and $D$, so orbit weights
+lose no full-support solutions.
+A test-row coefficient counts the distinct members of $O$ whose interiors contain the
+test point; it is not merely zero or one.
 
 Every necessary test point must be off all square boundaries, with a certified
 positive-area neighborhood of constant incidence.
@@ -64,8 +79,8 @@ support; a larger optimum still needs every positive-area arrangement face check
 [BC-242](../series/series-000-smoke-and-calibration/results/agenda-026/bc-242-full-size-density-proof-contract.md)
 supplies the weak-duality semantics.
 [Agenda 026](../agendas/agenda-026-density-stationarity-and-trump-capture.md) routes the
-screen through think-01q4 and any justified BC-243 certification through think-mt6q. A
-verified D > 11 rules out mass-eleven area density at U, not below-U density.
+screen through `think-01q4` and any justified BC-243 certification through `think-mt6q`.
+A verified $D>11$ rules out mass-eleven area density at $U$, not below-$U$ density.
 This is the finite discriminator for
 [X-016’s closure route](../explorations/X-016-after-381-two-managers-one-proof-boundary.md#closure-route).
 

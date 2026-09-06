@@ -137,9 +137,10 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives eight confirmed hypotheses, ten refuted
-hypotheses, two open hypotheses, fifteen open questions, and thirty-seven blocked
-hypotheses. No hypothesis waits on review and five are unresolved.
+The generated ledger currently derives nine confirmed hypotheses, ten refuted
+hypotheses, two open hypotheses, fifteen open questions, and thirty-six blocked
+hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
+unresolved. No hypothesis waits on review and six are unresolved.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
 pinned the `m = 5` covering wall to a bracket of width 0.015 where it had registered
 0.02. One, H-064, is abandoned in the ledger’s word — its latest round expired resumable
@@ -243,6 +244,10 @@ case or experiment separately.
 | [BC-230 Adaptive-Core Control Matrix](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-control-matrix.md) | research synthesis | record | retained | — |
 | [BC-230 Source-Distinct Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-source-distinct-review.md) | dated review record | record | retained | — |
 | [BC-230 Post-Freeze Control Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-postfreeze-control-review.md) | dated review record | record | retained | — |
+| [BC-231 First Implementation Slice](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md) | research synthesis | record | retained | — |
+| [BC-231 Slice 01 Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-slice-01-independent-review.md) | dated review record | record | retained | — |
+| [BC-231 Second Implementation Slice](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-02.md) | research synthesis | record | retained | — |
+| [BC-251 Scalar Readiness Audit](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-251-readiness-audit.md) | dated review record | record | retained | — |
 | [BC-232 Retained-State Fractional-Cutting Disposition](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-disposition.md) | research synthesis | record | retained | — |
 | [BC-232 Leg-02 Microreceipt 001](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-leg-02-microreceipt-001.md) | research synthesis | record | retained | — |
 | [Agenda 025 T+2-to-T+4 Fractional Manager Gate](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/gate-hour-04.md) | research synthesis | record | retained | — |
@@ -251,6 +256,25 @@ case or experiment separately.
 | [Agenda 025 T+2 Commissioning Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/checkpoint-hour-02.md) | research synthesis | record | retained | — |
 | [BC-242 Full-Size Density Proof Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-242-full-size-density-proof-contract.md) | research synthesis | record | retained | — |
 | [BC-245 Typed Stationary-Backbone Theorem Packet](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-245-typed-backbone-theorem-packet.md) | research synthesis | record | retained | — |
+| [BC-254: Exact Finite-Support Screen Design](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-screen-spec.md) | research synthesis | record | retained | — |
+| [BC-254 Control Build: First-Slice Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-slice-01.md) | research synthesis | record | retained | — |
+| [BC-254 Support Controls: Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-independent-review.md) | dated review record | record | retained | — |
+| [BC-254: Target-Readiness Build and Source Control](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-slice-02.md) | research synthesis | record | retained | — |
+| [BC-254 Target Instrument: Independent Readiness Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-independent-review.md) | dated review record | record | retained | — |
+| [BC-254: The Next Exact Discriminator After exp-113](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-post-screen-next-discriminator.md) | research synthesis | record | retained | — |
+| [BC-254: Control-Only Pair Separator Build](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-pair-separator-readiness.md) | research synthesis | record | retained | — |
+| [BC-254: Independent Pair-Separator Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-pair-separator-independent-review.md) | dated review record | record | retained | — |
+| [Session 089: Negative-Control Environment Diagnosis](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/session-089-negative-control-environment.md) | research synthesis | record | retained | — |
+| [exp-113: Independent Protocol and Output Review](packing/campaign/series/series-000-smoke-and-calibration/results/exp-113-h-099-trump-support-screen/independent-review.md) | dated review record | record | retained | — |
+| [exp-114: Independent Receipt-Checker Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/exp-114-h-104-fixed-side-auxiliaries/independent-review.md) | dated review record | record | retained | — |
+| [exp-114: Independent Target-Output Review](packing/campaign/series/series-000-smoke-and-calibration/results/exp-114-h-104-fixed-side-auxiliaries/target-output-independent-review.md) | dated review record | record | retained | — |
+| [BC-255 Restricted-Angle Assessment](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md) | research synthesis | record | retained | — |
+| [BC-255 Theorem 3 Source Control: First Slice](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-slice-01.md) | research synthesis | record | retained | — |
+| [BC-255 Theorem 3 Source-Control Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-independent-review.md) | dated review record | record | retained | — |
+| [BC-255: Restricted-Angle Instrument Design](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md) | research synthesis | record | retained | — |
+| [BC-255: Fixed-Side Discriminator Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md) | research synthesis | record | retained | — |
+| [BC-255: Fixed-Side Discriminator Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-independent-review.md) | dated review record | record | retained | — |
+| [BC-255: Independent Reader Cold Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-independent-reader-cold-review.md) | dated review record | record | retained | — |
 | [Agenda 026 T+0 to T+2 Commissioning Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/checkpoint-hour-02.md) | research synthesis | record | retained | — |
 | [Agenda 026 T+2 to T+4 Closure Gate](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/gate-hour-04.md) | research synthesis | record | retained | — |
 | [A Quantitative Local Theorem at Trump’s 11-Square Packing](packing/cases/trump11/isolation-theorem.md) | research synthesis | record | retained | — |
@@ -491,6 +515,18 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
+The next research phases run in [PR101](https://github.com/jlevy/squares/pull/101) on
+`codex/post-381-next-phases`, with the landed PR100 depth fixes and PR98 validation
+improvements integrated.
+[Session 089](packing/campaign/agent-sessions/session-089-agenda024-next-phases.md)
+records live assignments and checkpoints; it was renamed from the branch-local
+session-088 to preserve the separate landed efficiency session below.
+Coordinator `think-jgnv` owns the integrated research line and its first two-hour
+checkpoint.
+Source controls have passed; independent review and bounded end-to-end target
+work remain distinct.
+Supporting fixes stay on this PR.
+
 **Efficiency implementation checkpoint.**
 [Session 088](packing/campaign/agent-sessions/session-088-validation-efficiency-checkpoint.md)
 records the bounded W5 slice: detailed timing artifacts, two independently guarded
@@ -522,11 +558,12 @@ The addendum owns command custody and recovery; no successor experiment started 
 the planning block. The user’s credit-interruption amendment excludes unavailable time
 from the wall allowance.
 The addendum records the accounting boundaries, revised deadlines, and conservative
-active-minute position `124:14`, currently held for recovery integration.
-BC-232’s completed recovery produced no row-converged covering; BC-241’s independent
-local-scope review was published in `ad600896`. H-092’s fixed-weight refined-core
-negative passed independent review and awaits integration under `think-xsma`. The
-eventual handoff records the active minute actually reached.
+active-minute position `124:14`, the inherited reference position for this continuation.
+Session089 is executing; no current active-time total is inferred from elapsed wall
+time. BC-232’s completed recovery produced no row-converged covering; BC-241’s
+independent local-scope review was published in `ad600896`. H-092’s fixed-weight
+refined-core negative passed independent review and awaits integration under
+`think-xsma`. The eventual handoff records the active minute actually reached.
 The addendum preserves the first block’s frozen packets and binds the active-time, role,
 safety, BC-241, BC-232, BC-243, and gate contracts.
 [Agenda 024](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md) remains its
@@ -2749,11 +2786,12 @@ round that names the hypothesis, control roles included.
 | [H-096](packing/campaign/hypotheses/H-096-n11-angle-cell-kernels.md) | open question | Can whole-angle-cell kernels cover more useful positive mass with a tractable exact verifier? | 0 | — |
 | [H-097](packing/campaign/hypotheses/H-097-n11-existential-witness-menus.md) | open question | Can pose-dependent witness choice beat a universal witness while retaining complete pose-box coverage? | 0 | — |
 | [H-098](packing/campaign/hypotheses/H-098-n11-segment-measures.md) | open question | Can segment-supported measures improve the bound with exact intersection-length coverage? | 0 | — |
-| [H-099](packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md) | blocked | The exact deduplicated D4 closure of Trump’s eleven squares admits dual mass above eleven at a.e. depth at most one | 0 | — |
+| [H-099](packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md) | unresolved | The exact deduplicated D4 closure of Trump’s eleven squares admits dual mass above eleven at a.e. depth at most one | 1 | 29s wall |
 | [H-100](packing/campaign/hypotheses/H-100-below-trump-area-density.md) | open question | Can a full-size area density give mass below eleven at a side between the retained bound and Trump? | 0 | — |
 | [H-101](packing/campaign/hypotheses/H-101-trump-equality-density.md) | open question | Can mass-eleven density at Trump’s side and a complete equality analysis establish uniqueness? | 0 | — |
 | [H-102](packing/campaign/hypotheses/H-102-complete-restricted-angle-support-families.md) | open question | Which complete restricted angle or wall-support family yields a useful theorem, starting with H-036? | 0 | — |
 | [H-103](packing/campaign/hypotheses/H-103-complete-typed-global-capture.md) | open question | Can a complete typed cover exclude every minimizing branch or place its entire surviving box inside the accepted local Trump neighborhood? | 0 | — |
+| [H-104](packing/campaign/hypotheses/H-104-fixed-side-point-cover-auxiliaries.md) | confirmed | The fixed point formulas at side1939/500 satisfy all seven exact0/45-degree auxiliary clauses | 1 | 2s wall |
 
 ### Confirmed
 
@@ -2976,17 +3014,19 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-075.yaml` | session-072, session-075 | 212 | 1.41 h | 1.41 h | 1.75 h | no |
 | `codex-task-tree-session-078.yaml` | session-078, session-082 | 2,401 | 13.41 h | 9.45 h | 10.0 h | yes |
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
+| `codex-task-tree-session-089.yaml` | session-089 | 797 | 6.93 h | 2.0 h | 2.0 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 44 |
-| closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **88** |
+| measured | 45 |
+| unmeasured | 44 |
+| **total** | **89** |
 
 <!-- END GENERATED: session-close-report -->
 
-The sessions with no measurement closed before `resource_rollups` existed and their
-harness logs are not retained, so that cost is gone rather than pending.
+Unmeasured sessions include live work awaiting a retained receipt and older closed
+sessions whose harness logs were not retained.
+Missing measurements are not zero cost.
 The Claude rollups no session claims are the delegated half of the same period:
 sub-agent logs that survived while the session records that would have claimed them
 predate the field. Claude backfill needs only a retained log; Codex interval refresh
@@ -2996,9 +3036,11 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 68 terminal rounds registered in `series-000`.
+There are 70 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1163.2 wall-minutes.
+They record 2152.1 agent-minutes and 1163.8 wall-minutes.
+Exp-114 completed its one target and independent replay.
+Reader development costs are recorded separately from those process times.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
 result; exp-057 stopped before target access; exp-058 stopped on the review it was
 waiting for, which arrived and accepted it.
@@ -3102,6 +3144,8 @@ archive beside it.
 | [exp-071](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-071-h-070-n11-inset-seed-release.md) | 11 | target | H-070 | three inset screens followed, when eligible, by matched released-seed and unseeded arms | released and unseeded arms converged after eight rounds to byte-identical candidates of exact mass `11142893/1000000`, missing the strict-improvement criterion | rejected |
 | [exp-110](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-110-h-090-core-shrink.md) | 11 | target | H-090 | exact source and smaller-core sweeps on frozen T-018 atoms, with normalization accepted above `M/11` | minimum `85353/100000` at an axis-aligned corner cell falls below `434547/440000`; a direct atom sum excludes all core sides below `1849127/1853400` | rejected |
 | [exp-111](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-111-h-091-core-shrink.md) | 11 | target | H-091 | exact fixed-atom replay above exp-110’s corner event, followed by direct witness-event inspection | minimum `96377/100000` at net direction 97; the witness’s first usable event exceeds the entire ordinary-containment improvement window, closing that fixed-weight route | rejected |
+| [exp-113](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md) | 11 | target | H-099 | exact necessary-row ceiling on the frozen Trump D4 support | independently replayed ceiling56/5; complete a.e.-depth still unverified | unresolved |
+| [exp-114](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md) | 11 | target | H-104 | seven fixed-formula exact-angle auxiliary clauses at1939/500 | all seven clauses hold in the reviewed exact computation and independent input/receipt replay | accepted |
 
 ### Cost and provenance
 
@@ -3175,11 +3219,15 @@ archive beside it.
 | exp-071 | three 540-second screens plus, if eligible, two matched 2,520-second arms | 491.5 s | — | criterion | `04e6a2ce` |
 | exp-110 | one frozen core side, source replay and candidate replay | 29.86 s | — | criterion | `48a161ba` |
 | exp-111 | one frozen core side above the lost corner event, source replay and candidate replay | 30.58 s | — | criterion | `aeb683d5` |
+| exp-113 | one 60-second producer and one separate 60-second replay | 28.79 s | — | criterion | `e70458a9` |
+| exp-114 | one 10-second producer and one separate 10-second receipt/witness replay | 2.46 s | — | criterion | `e45c8a63` |
 
-### What the 68 rounds jointly establish
+### What the 70 rounds jointly establish
 
-The 68 rounds use 2152.1 agent-minutes and 1163.2 wall-minutes under the campaign’s
+The 70 rounds use 2152.1 agent-minutes and 1163.8 wall-minutes under the campaign’s
 retained effort accounting.
+Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
+separately in Session089.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; exact component controls pass only
