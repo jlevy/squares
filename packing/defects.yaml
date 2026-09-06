@@ -15626,7 +15626,11 @@ defects:
   consequence: >-
     Repairing final ceiling verification alone would still leave intermediate
     purported exact lower bounds vulnerable to the same false-negative screen.
-    No retained small-coordinate result was shown incorrect.
+    Every retained small-coordinate family (BC-200 at 191/50 and 77/20, BC-232 at
+    191/50) was replayed from its bytes through the repaired final verifier with
+    devtools.replay_ceiling_family and reproduced its recorded vertex count and exact
+    maximum depth 1, so no retained result was shown incorrect and none was left
+    unchecked.
   fix: >-
     Reuse the ceiling screening guards and take an exact separation path outside them.
     Allow for approximate intersection error in a separate membership margin, preserve
@@ -15680,7 +15684,8 @@ defects:
   consequence: >-
     The historical number cannot be independently replayed after D-476 and D-477.
     It has not been shown false, but the log cannot support a revalidated exact lower
-    bound or certified bracket.
+    bound or certified bracket. The gap is specific to BC-206: the BC-200 and BC-232
+    families are retained and replay under the repaired verifier.
   fix: >-
     Qualify the maintained record and review as an unreplayed historical report and
     leave side 3.97 undecided. Recovery of the exact witness, or a rerun that retains

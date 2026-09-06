@@ -105,7 +105,16 @@ The cutting screen now shares the arithmetic guards and exact fallback, with a s
 membership margin accounting for approximate intersection error.
 A regression in the [cutting tests](../../../packing/tests/test_fractional_cutting.py)
 checks the reproduced depth.
-No retained small-coordinate cutting result was shown incorrect.
+Every retained small-coordinate cutting family was replayed from its bytes through the
+repaired final verifier with
+[`devtools.replay_ceiling_family`](../../../packing/devtools/replay_ceiling_family.py),
+and each reproduced its recorded vertex count and exact maximum depth 1:
+`bc-200-family-191-50.json` (2,769,100 vertices, total about 9.907906),
+`bc-200-family-77-20.json` (2,419,348 vertices, total `45019185620/4974572153`) and
+`bc-232-leg-01-family.json` (2,677,732 vertices, total `21342289572/2055263195`). The
+floors `ν*(3.82) ≥ 9.907905`, `ν*(3.85) ≥ 9.049860` and `ν*(3.82) ≥ 10.384212` stand; no
+retained small-coordinate cutting result was shown incorrect and none was left
+unchecked.
 
 ### D-477: Floating-point deduplication erased a genuine overlap
 

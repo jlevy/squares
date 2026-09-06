@@ -461,6 +461,13 @@ These comparisons can expose implementation regressions.
 Agreement on a finite corpus does not prove either program correct or replace replaying
 the actual certificate over its complete direction net and center domain.
 
+A retained depth-scaled family, the witness behind a cutting floor, is replayed from its
+bytes with
+[`devtools.replay_ceiling_family`](packing/devtools/replay_ceiling_family.py), which
+re-decides the exact maximum depth with the final verifier and, under `--check`, fails
+unless the record’s own vertex count, depth or scaled total is reproduced.
+The retained n=11 families take several minutes each.
+
 The validation command builds `sqsearch` only when a selected step needs it.
 Checks run concurrently, but their captured output is replayed in declared order.
 `--jobs` controls outer check concurrency; `--inner-jobs` caps each check’s internal
