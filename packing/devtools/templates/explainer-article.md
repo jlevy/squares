@@ -38,28 +38,38 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 ## What Is This?
 
-A new lower bound on an open problem, found by an automated research process.
-The witness used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted points in
-the container and takes a net of {{HEADLINE_N_DIRECTIONS}} rationally parameterized
-directions; five exact conditions on them imply that eleven disjoint unit squares, free
-to rotate, cannot fit in a ${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.
-It appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
-open case; the previous bound, {{PRIOR_LOWER_DEC}}, was Stromquist’s in
-{{PRIOR_YEAR}}.[^stromquist]
+This paper presents a new lower bound on a long-standing open geometry problem: eleven
+disjoint unit squares, free to rotate, cannot fit in a
+${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.
 
-The search, the checking and the record are the program’s own work, under human
-direction rather than human derivation.
-This is one of {{N_RESULTS}} results it has registered over a few days, and it sits
-inside a survey of the whole problem: the atlas of best known packings for every $n$
-from 1 to 100 in Figure 1 came from the same program, which proved {{N_STARRED}} of the
-lower bounds shown there.
-Most of the repository is not the proof but the loop that produced it: a hypothesis
-registry and an experiment ledger, exact verifiers, a retention gate that keeps a
-certificate only when two independent methods agree to the digit, and a validation suite
-that re-derives every number these documents state.
-None of that is particular to square packing.
-It is a reusable framework for iterative research on creative mathematical and technical
-problems. It makes use of [tbd](https://github.com/jlevy/tbd),
+The computer-assisted proof was found via an automated research framework run over a few
+days. The witness used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted
+points in the container and selects a net of {{HEADLINE_N_DIRECTIONS}} rationally
+parameterized directions. Five exact conditions and a pigeonhole-style argument then
+imply the claim.
+
+This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
+open case of the square packing problem. The previous bound, {{PRIOR_LOWER_DEC}}, was
+Stromquist’s in {{PRIOR_YEAR}}.[^stromquist]
+
+The search, the checking, and the record are the work of agents under human direction
+rather than human derivation.
+
+This is one of {{N_RESULTS}} results registered over a few days, all within the same
+automated research framework. The work sits inside a broader survey of the research
+frontier of this problem. The atlas of best known packings for every $n$ from 1 to 100
+in Figure 1 came from the same program, which proved {{N_STARRED}} of the lower bounds
+shown there.
+
+Most of the research work is not the proof but the process and artifacts that produced
+it. The repository includes a comprehensive survey of the research frontier, a
+hypothesis registry, an experiment ledger, exact verifiers, a research loop, an
+optimization loop for efficiency, and a retention gate that keeps results only when
+independent validation methods agree.
+
+None of this is particular to square packing. It is a reusable framework for iterative
+research on creative mathematical and technical problems. The framework uses a few tools
+to streamline the process, notably [tbd](https://github.com/jlevy/tbd),
 [softschema](https://github.com/jlevy/softschema), and
 [Practical Prose](https://github.com/jlevy/practical-prose).
 
