@@ -140,15 +140,17 @@ A tier selects steps; a lane divides one step.
 | `--records` | contributor, before touching a registry; also every pull request | 31 of 64 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a code change |
-| `--fast` | contributor, at a block boundary; the union of the three tiers below | 62 of 66 | 700 s | 502.3 s on CI, 2026-09-06, commit `5cad7540`, when CI still ran it whole |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 57 of 66 | 300 s | not yet clocked on CI |
+| `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 66 | 700 s | 502.3 s on CI, 2026-09-06, commit `5cad7540`, when CI still ran it whole |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 66 | 240 s | not yet clocked on CI |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 66 | 200 s | not yet clocked on CI; 93.3 s locally at the reference shape |
 | `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 66 | 240 s | not yet clocked on CI |
 | `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 240 s | not yet clocked on CI |
 | *(no flag)* | **CI, on `main`, on dispatch, and daily**; and what a block ends with | 66 of 66 | 3600 s | split across two jobs; not clocked whole |
 
-**The pull-request surface is `--checks`, `--suite` and `--sweeps` together, run as
-three concurrent CI jobs**, so a pull request waits for the longest of the three rather
-than for their sum. All three feed the single required `packing-required` context, and
+**The pull-request surface is `--checks`, `--geometry`, `--suite` and `--sweeps`
+together, run as four concurrent CI jobs**, so a pull request waits for the longest of
+the four rather than for their sum.
+All four feed the single required `packing-required` context, and
 `test_the_pull_request_jobs_partition_the_surface` reads the workflow and checks that
 they are pairwise disjoint and that they cover every step of `--fast` — so the split
 cannot lose a check the way a set of independent filters could.
@@ -178,18 +180,66 @@ reporting over the quick lane’s 5 s per-test ceiling because 468 s of atlas re
 was running beside them on the same four cpus, and moving that work to its own runner is
 what removes the contention rather than relabelling the tests as slow.
 
-**What the `sweeps` job is now floored by is one step**, `single-square translation
-escape screen` at 110.66 s — not `prospective n=101..324 safe seed`, which the memoized
-frontier took to 37.03 s. The job has four units and four cpus, so its outer pool is
-already saturated and its wall is that step’s wall; a fourth GitHub job cannot shorten
-it, for the same reason `BC-218` found that a second job could not shorten a tier that
-was one step. That step is also the floor on the *whole* pull-request surface, since no
-job’s wall goes below its own longest step: while it costs 110.66 s, nothing gets the
-surface below about 124 s including setup.
-The lever from here is inside the steps themselves —
-`devtools/screen_translation_escape.py` screens 98 records,
-`devtools/build_prospective_atlas.py` and `devtools/census_known_best_chunks.py` rebuild
-101 and 100 witnesses, each record independent of the others and each rebuilt in a
+`--geometry` is the fourth job, and it is the only one of the four that exists for cpus
+rather than for a kind or a floor.
+What was left in `--checks` once the behavioural lane moved out was 57 steps of pure
+outer-parallel work with no unit large enough to floor the job, so the job was given the
+freed cpu: `--jobs 4`, four units on four cpus.
+CI run 34016999060 priced that and refused it.
+The tier came in at 198.22 s — 23.5 s less than the three-worker job that still had the
+142.43 s behavioural lane inside it — because saturating the runner inflated every step
+by thirty to eighty per cent against the same steps at `--jobs 3` on the run before:
+
+| Step | `--jobs 3` | `--jobs 4` |
+| --- | ---: | ---: |
+| soundness perimeter | 60.62 s | 84.41 s |
+| exact verification | 61.75 s | 79.98 s |
+| type floor (basedpyright) | 40.37 s | 72.31 s |
+| deterministic SVG rendering | 41.30 s | 65.36 s |
+| historical regressions | 36.04 s | 50.00 s |
+| the decimal route | 40.40 s | 49.34 s |
+| D-034’s n=5 identity pair | 34.18 s | 41.85 s |
+
+Four workers over 790 inflated worker-seconds is the same work at a worse price than
+three over 470, which is the lesson `_pytest_workers` already encodes as
+`cpus - jobs + 1`. A queue of that shape is shortened by cpus and by nothing else, so
+the queue was halved and both halves run at `--jobs 3`: eight cpus with a core of
+headroom on each, for work that had four cpus and none.
+The halves are 269.60 s and 275.48 s of a local 545.08 s step-time reading, within two
+per cent of each other, and the boundary is bounded by two rules rather than chosen
+freely — only a `broad` step may cross, so `--edit` stays wholly inside `--checks`, and
+no engine or cargo step may, so only `--checks` pays the serial `cargo build --release`
+that `_build_engine` puts in front of every step.
+Measured locally at the reference shape, `--geometry` is 93.3 s of wall over 243.8 s of
+step time.
+
+**What the `sweeps` job is floored by is one step**, and since 2026-09-06 that step is
+`known-best chunk census` at 90.38 s rather than `single-square translation escape
+screen`. The job has four units and four cpus, so its outer pool is already saturated
+and its wall is its longest unit’s wall; a fifth GitHub job cannot shorten it, for the
+same reason `BC-218` found that a second job could not shorten a tier that was one step.
+The escape screen was that unit at 110.66 s, and the lever on it was never the schedule:
+`devtools/screen_translation_escape.py` screens 98 independent records and was given a
+process pool, but the pool sizes itself from `PACK_JOBS`, which `--inner-jobs` sets, so
+at 1 the parallelism was dormant and the step still ran serially on every pull request.
+Best of five rounds on a four-cpu box: 103.94 s at one worker, 52.11 s at two, 35.40 s
+at three, 27.50 s at four.
+The job now passes `--inner-jobs 2` — two rather than four, because four outer slots
+already fill four cpus and a step fanning out to four inner workers is exactly the
+oversubscription the table above prices.
+Measured whole at that shape on a four-cpu box the job is 79.5 s: the census 79.5 s, the
+screen 65.3 s, the known-best atlas 50.5 s, the prospective seed 25.1 s. The screen
+costs more than its isolated 52.1 s because two inner workers beside three other outer
+steps is not two workers alone, and it is under the census either way, which is the only
+thing the flag had to achieve.
+Of the eleven modules this job runs, only `screen_translation_escape` reaches
+`sqpack.workers` — checked per process, since a transitive import would be invisible to
+a grep of the four entry points — so the blast radius is one step.
+The census’s 90.38 s is now the floor on the *whole* pull-request surface, since no
+job’s wall goes below its own longest step.
+The lever from here is inside the steps that are still serial —
+`devtools/census_known_best_chunks.py` and `devtools/build_prospective_atlas.py` rebuild
+100 and 101 witnesses, each record independent of the others and each rebuilt in a
 single process while `sqpack.workers.worker_count` sits unused.
 
 Four steps are outside the pull-request surface entirely, each deferred on its own
@@ -322,13 +372,14 @@ uv run --frozen --all-extras --group dev packing-validate --edit
 uv run --frozen --all-extras --group dev packing-validate --push
 
 # The pull-request surface: the edit tier plus every behavioral test under the
-# per-test ceiling. CI runs it as the two halves below, one per runner; run it whole
+# per-test ceiling. CI runs it as the four parts below, one per runner; run it whole
 # here, where there is only one machine and nothing to overlap with.
 uv run --frozen --all-extras --group dev packing-validate --fast
 
-# The three parts CI runs concurrently on a pull request. They partition --fast, so
-# running all three is running the surface and running one is running a part of it.
+# The four parts CI runs concurrently on a pull request. They partition --fast, so
+# running all four is running the surface and running one is running a part of it.
 uv run --frozen --all-extras --group dev packing-validate --checks
+uv run --frozen --all-extras --group dev packing-validate --geometry
 uv run --frozen --all-extras --group dev packing-validate --suite
 uv run --frozen --all-extras --group dev packing-validate --sweeps
 
@@ -397,11 +448,12 @@ implemented. These limits are why a subprocess timeout is not, by itself, eviden
 D-239 is resolved.
 
 On pull requests, [`packing-validation.yml`](.github/workflows/packing-validation.yml)
-runs the surface as three concurrent Linux jobs — `packing-validate --checks` in
-`validate`, `packing-validate --suite` in `suite` and `packing-validate --sweeps` in
-`sweeps` — and reports the stable `packing-required` aggregate, which waits on all
-three. One required context, three prerequisites: `BC-218` made that the condition for
-any fan-out, because [D-380](defects.md) records what a fan-out of separately required
+runs the surface as four concurrent Linux jobs — `packing-validate --checks` in
+`validate`, `packing-validate --geometry` in `geometry`, `packing-validate --suite` in
+`suite` and `packing-validate --sweeps` in `sweeps` — and reports the stable
+`packing-required` aggregate, which waits on all four.
+One required context, four prerequisites: `BC-218` made that the condition for any
+fan-out, because [D-380](defects.md) records what a fan-out of separately required
 checks cost this repository once.
 Since 2026-09-05 the surface is sixty-two of the sixty-six steps rather than
 thirty-seven: twenty-one steps that had run only after a merge were promoted into it

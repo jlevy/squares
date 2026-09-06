@@ -176,29 +176,43 @@ tiers:
 
 - id: checks
   command: packing-validate --checks
-  # Re-argued when the behavioural lane left this tier for `suite`, and now argued from a
-  # reading of this tier's own predecessor rather than from `--fast`. On CI (run
-  # 34010470187) `--checks --jobs 3 --inner-jobs 1` was 221.70s over 58 steps, of which
-  # `fast behavioral tests` was 142.43s. Three workers over that wall is 665s of worker
-  # time; take out the lane and the serial `cargo build --release` that every job with an
-  # engine step pays first (about 25s on a cold runner, 18.46s here with a warm registry)
-  # and the other 57 steps are roughly 450s of step time. At `--jobs 4` that is about
-  # 115s, and the longest single step left is `exact verification` at 61.75s, so nothing
-  # in this tier sets its own floor any more.
+  # Re-argued twice on 2026-09-06, and the second time is the one worth reading, because
+  # it is the reading that refused the obvious move.
   #
-  # 300s is a shade over twice the 130-150s that predicts. It clears a runner a third
-  # slower, it is under half the 700s the whole tier is allowed, and it is well below the
-  # 450s this tier would cost if its pool stopped parallelising altogether -- which is
-  # the regression a ceiling on an outer-parallel tier is actually for.
+  # When the behavioural lane left for `suite` this tier was 57 steps of pure
+  # outer-parallel work with nothing large enough to floor it, so it was given the freed
+  # cpu: `--jobs 4` on a four-cpu runner. Run 34016999060 priced that at 198.22s of tier
+  # wall over roughly 790 worker-seconds, against 221.70s for the three-worker job that
+  # still had the 142.43s lane inside it. Removing the largest step on the surface and
+  # adding a worker bought 23.5s, because saturating the runner inflated every step by
+  # thirty to eighty per cent against the same steps at `--jobs 3` on the run before:
+  # the perimeter 60.62s to 84.41s, exact verification 61.75s to 79.98s, the type floor
+  # 40.37s to 72.31s, the SVG renderer 41.30s to 65.36s. So the reference here is back at
+  # `--jobs 3`, with the fourth cpu left for the OS, for the pool-backed steps, and for
+  # `build_n5_identity_pair`, which asks `ProcessPoolExecutor` for the whole machine.
   #
-  # The local reading agrees and is the reason the ceiling is not tighter: 184.91s on
-  # 2026-09-06 at the reference shape on a four-cpu box that two other agent lanes were
-  # using at the same time (load average 6.25 against four cpus). Individual steps came
-  # back inflated by roughly a factor of two against their CI figures -- `type floor`
-  # 96.80s here against 40.37s there -- so that number bounds this tier from above rather
-  # than estimating it, and a ceiling that a contended box clears at 62 per cent is one
-  # an uncontended runner cannot trip by accident.
-  ceiling_seconds: 300.0
+  # What actually shortens a queue that size is cpus, so the queue was halved: `geometry`
+  # below is the other nine steps, on a runner of its own. Local, 2026-09-06, four cpus,
+  # `--checks --jobs 4 --inner-jobs 1` over the undivided 57: 148.49s of wall over
+  # 545.08s of step time, of which the 48 steps left here are 269.60s -- the type floor
+  # 75.42s, the perimeter 73.70s, exact verification 48.52s, and 71.96s in the other 45.
+  #
+  # Measured at the reference shape on the same box: 86.20s of wall over 244.77s of step
+  # time, `--checks --jobs 3 --inner-jobs 1`, 2026-09-06. Step time falls as well as wall
+  # when the fourth worker goes -- 269.60s at `--jobs 4` against 244.77s at 3 -- which is
+  # the same nine per cent the CI table above shows the other way round. On CI add the
+  # serial `cargo build --release` every job with an engine step pays first (about 25s on
+  # a cold runner, 18.46s with a warm registry), so this job should land near 110-120s.
+  # Its longest single step is the perimeter at 68.52s, under that, so nothing in this
+  # tier sets its own floor.
+  #
+  # 240s is a shade over twice that prediction. It clears a runner a third slower, it is
+  # a third of the 700s the whole tier is allowed, and -- the edge that matters for an
+  # outer-parallel tier -- it is below the 244.77s of step time this tier costs if its
+  # pool stops parallelising altogether, so serial degeneration fails here rather than
+  # passing quietly. The old 300s no longer had that last property once nine steps left
+  # the tier, which is why it moved down rather than staying put.
+  ceiling_seconds: 240.0
   # Deliberately unmeasured rather than filled in from a local run. This box reports the
   # same four cpus CI does, so a local figure would match the reference shape and arm the
   # drift and stale rules against a machine that is not the one the band is for. The first
@@ -206,16 +220,68 @@ tiers:
   measured_seconds: null
   measured_on: null
   measured_where: null
-  reference: {jobs: 4, inner_jobs: 1, cpus: 4}
+  reference: {jobs: 3, inner_jobs: 1, cpus: 4}
   argument: >-
-    The part of the pull-request surface that is neither a record sweep nor the
-    behavioural lane: every floor, every record check, and the exact and geometric
-    contracts. It is 57 steps of pure outer-parallel work, which is why it runs at
-    `--jobs 4` -- four units on four cpus -- and why its wall is now step time divided
-    rather than any one step's own cost. `checks`, `suite` and `sweeps` are a partition
-    of `--fast` by construction in `_select_steps`, and
+    The part of the pull-request surface that is none of the other three: every floor,
+    every record check, and everything that needs the Rust engine. That last clause is a
+    rule rather than an accident -- `_build_engine` puts a serial `cargo build --release`
+    in front of every step of any job that selects an engine step, so keeping all three
+    engine steps and the Rust lint floor here is what stops the fourth job paying for a
+    toolchain it never uses. It is 48 steps of pure outer-parallel work at `--jobs 3`,
+    which is three units on four cpus and one cpu of headroom, and its wall is step time
+    divided rather than any one step's own cost. `checks`, `geometry`, `suite` and
+    `sweeps` are a partition of `--fast` by construction in `_select_steps`, and
     `test_the_pull_request_jobs_partition_the_surface` checks that the workflow really
-    invokes all three. What the third job bought is on the `suite` entry below.
+    invokes all four. What the fourth job bought is on the `geometry` entry below.
+
+- id: geometry
+  command: packing-validate --geometry
+  # The other half of the `checks` queue, and the entry that carries the arithmetic for
+  # the split. Local, 2026-09-06, four cpus, `--checks --jobs 4 --inner-jobs 1` over the
+  # undivided 57 steps: 545.08s of step time. These nine are 275.48s of it -- the n=5
+  # identity pair 62.62s, historical regressions 42.35s, the decimal route 39.43s, the
+  # SVG renderer 39.36s, small-n exact models 28.34s, Trump's cones 20.94s, the
+  # independent LP 15.84s, the basin atlas 13.94s, the basin event replay 12.66s -- which
+  # leaves 269.60s in `checks`. Two halves within two per cent of each other.
+  #
+  # Measured at the reference shape on the same box: 93.27s of wall over 243.81s of step
+  # time, `--geometry --jobs 3 --inner-jobs 1`, 2026-09-06 -- against `checks`' 86.20s
+  # over 244.77s, which is what a balanced split is supposed to look like. This job
+  # compiles nothing: none of the nine is `needs_engine` and none runs cargo, so it skips
+  # the serial `cargo build --release` that `checks` pays and its wall is step time
+  # divided from the first second. Its longest single step is historical regressions at
+  # 42.73s, well under the 81s the queue divides to, so this tier does not set its own
+  # floor either.
+  #
+  # 200s is a shade over twice that reading, on the same three edges the entry above
+  # uses: it clears a runner a third slower (124s), it is under the drift rule's reach,
+  # and it is below the 243.81s of step time this tier costs if its pool stops
+  # parallelising -- which is the regression a ceiling on an outer-parallel tier is
+  # actually for.
+  ceiling_seconds: 200.0
+  # Unmeasured for the same reason as `checks` and `suite`: this box reports the same four
+  # cpus CI does, so a local reading would match the reference shape and arm the drift and
+  # stale rules against the wrong machine. The first CI run at the reference shape prints
+  # the line to paste.
+  measured_seconds: null
+  measured_on: null
+  measured_where: null
+  reference: {jobs: 3, inner_jobs: 1, cpus: 4}
+  argument: >-
+    The nine steps that re-derive geometry without the engine: the basin atlas and its
+    event replay, the historical regressions, the small-n exact models, the deterministic
+    SVG renderer, the independently rebuilt fixed-angle LP, Trump's branchwise cones,
+    D-034's n=5 identity pair, and the decimal route's refusal to price an exact pose.
+    It exists for cpus rather than for kind. `checks` was 57 steps of outer-parallel work
+    at `--jobs 4` and 198.22s of wall on CI, and the measurement said that queue is
+    shortened by runners and by nothing else -- a fourth worker on a four-cpu box
+    inflated every step by thirty to eighty per cent and bought 23.5s. Two jobs at
+    `--jobs 3` put eight cpus and two cores of headroom behind work that had four and
+    none. `Step.geometry` carries the two rules that bound which steps may move here --
+    only a `broad` step, so `--edit` stays wholly inside `--checks`; and nothing that
+    needs the engine or runs cargo, so only one of the two jobs compiles Rust -- and
+    `test_the_pull_request_runs_its_sweeps_and_its_suite_apart` is where a tenth name has
+    to be typed next to a number.
 
 - id: suite
   command: packing-validate --suite
@@ -283,16 +349,39 @@ tiers:
   # That is 2.17x of the reading, and it is below the 313.95s this tier costs if the pool
   # stops parallelising -- so serial degeneration fails here instead of passing.
   #
-  # Local, 2026-09-06, at this shape with other agent lanes on the same four cpus:
-  # 141.30s, of which the escape screen was 141.27s. That is the same shape as the CI
-  # reading -- one step is the whole wall -- at a contended box's prices, and it is why
-  # 240s is not tightened further: this tier's wall is one step's wall, so its band has
-  # to hold whatever that step costs on a bad day.
+  # Local, 2026-09-06, at the old `--inner-jobs 1` shape with other agent lanes on the
+  # same four cpus: 141.30s, of which the escape screen was 141.27s -- the same shape as
+  # the CI reading, one step being the whole wall, at a contended box's prices.
+  #
+  # The reference has since moved to `--inner-jobs 2`, and that is a change to this
+  # tier's floor rather than to its schedule. `screen_translation_escape` was given a
+  # process pool on 2026-09-06 but the pool reads `PACK_JOBS`, which this job was setting
+  # to 1, so the parallelism was dormant. Best of five rounds on a four-cpu box: 103.94s
+  # at one worker, 52.11s at two, 35.40s at three, 27.50s at four. Two rather than four,
+  # because the outer pool already has four slots on four cpus and a fifth process is the
+  # oversubscription that cost `checks` thirty to eighty per cent per step at `--jobs 4`.
+  # Of the eleven modules this tier runs, only that one imports `sqpack.workers`, so the
+  # blast radius of the flag is exactly one step -- checked per process rather than by
+  # eye, since a transitive import would be invisible to a grep of the four entry points.
+  #
+  # Measured whole at the new reference shape, 2026-09-06, four cpus: 79.52s of wall over
+  # 220.37s of step time -- the chunk census 79.51s, the escape screen 65.27s, the
+  # known-best atlas 50.52s, the prospective seed 25.07s. 65.27s rather than the 52.11s
+  # of the isolated round, because two inner workers beside three other outer steps is
+  # not two workers alone; that gap is the same contention the `checks` table above
+  # prices, and it is why the flag is 2 and not 4. The screen is no longer this job's
+  # longest unit either way: the census is, and it is now both this job's floor and the
+  # floor under the whole pull-request surface.
+  #
+  # 240s stands through that. It is still below the roughly 258s of step time this tier
+  # costs if the pool stops parallelising, so serial degeneration still fails here, and
+  # it still has to hold whatever the escape screen costs on a bad day -- which is why it
+  # is not tightened to the new prediction.
   ceiling_seconds: 240.0
   measured_seconds: null
   measured_on: null
   measured_where: null
-  reference: {jobs: 4, inner_jobs: 1, cpus: 4}
+  reference: {jobs: 4, inner_jobs: 2, cpus: 4}
   argument: >-
     The pull request's record sweeps, on their own runner: the known-best atlas, its
     chunk census, the prospective safe seed, and the translation-escape screen. Each
@@ -301,11 +390,11 @@ tiers:
     a change that retains a witness or edits a source map is exactly what breaks them.
     Two things about this tier are worth not rediscovering. Its wall is one step's wall:
     four units on four cpus saturates the outer pool, so `--jobs` is already spent and
-    the only lever left is `single-square translation escape screen`'s own 110.66s -- and
-    since that is the largest of the three pull-request jobs' floors, it is the floor
-    under the whole surface. And this tier is what removes the contention that failed
-    five ordinary tests against the quick lane's 5s per-test ceiling -- those tests were
-    never slow, they were sharing four cpus with 468s of atlas rendering.
+    the only lever left is the longest unit's own cost -- which is why `--inner-jobs 2`
+    is set here and nowhere else on the surface, and why the floor it moves is the
+    surface's floor. And this tier is what removes the contention that failed five
+    ordinary tests against the quick lane's 5s per-test ceiling -- those tests were never
+    slow, they were sharing four cpus with 468s of atlas rendering.
 
 - id: push
   command: packing-validate --push

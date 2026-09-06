@@ -774,6 +774,7 @@ def test_invalid_worker_count_and_unmatched_selection_are_actionable() -> None:
         ("--records",),
         ("--edit",),
         ("--checks",),
+        ("--geometry",),
         ("--suite",),
         ("--sweeps",),
         ("--since", "HEAD"),
@@ -1256,21 +1257,32 @@ def test_the_edit_tier_cannot_under_run() -> None:
     checks = names(fast=False, checks=True)
     sweeps = names(fast=False, sweeps=True)
     suite = names(fast=False, suite=True)
+    geometry = names(fast=False, geometry=True)
 
     assert records <= edit <= fast <= everything
     assert fast - edit == {step.name for step in validate.STEPS if step.broad}, (
         "the only steps --fast adds over --edit are the ones marked broad"
     )
-    # The pull request's three jobs are a partition of `--fast` and not three filters,
+    # The pull request's four jobs are a partition of `--fast` and not four filters,
     # which is what makes it safe to run them on separate runners: no step can be in two
-    # and none in none. `--edit` lands wholly inside `--checks` because every sweep and
-    # the behavioural lane are all `broad`, so the edit loop is never waiting on the
-    # runners that carry them.
-    assert checks | suite | sweeps == fast
-    assert not checks & sweeps
-    assert not checks & suite
-    assert not suite & sweeps
+    # and none in none.
+    parts = [checks, geometry, suite, sweeps]
+    assert set().union(*parts) == fast
+    for index, part in enumerate(parts):
+        for other in parts[index + 1 :]:
+            assert not part & other
+    # `--edit` lands wholly inside `--checks`, and since 2026-09-06 that is a rule rather
+    # than an accident. Every sweep and the behavioural lane are `broad`, and
+    # `Step.geometry` may be carried only by a `broad` step for exactly this reason: a
+    # contributor's edit loop never spans two of the pull request's runners, and the one
+    # job it does depend on is the one that already builds the engine.
     assert edit <= checks
+    assert all(step.broad for step in validate.STEPS if step.geometry), (
+        "a non-broad step in --geometry would put part of --edit on a second runner"
+    )
+    assert not any(step.needs_engine for step in validate.STEPS if step.geometry), (
+        "an engine step in --geometry would make both halves compile Rust"
+    )
 
 
 def test_every_step_is_reachable_from_some_tier() -> None:
@@ -1371,11 +1383,11 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
 def test_the_pull_request_runs_its_sweeps_and_its_suite_apart() -> None:
     """Which steps leave the `checks` job for a runner of their own, and why each did.
 
-    `sweep` and `suite` decide which of the pull request's three jobs runs a step, and
-    both default to False, so the failure mode of forgetting one is a slower `checks` job
-    rather than a step nobody runs -- the safe direction, as with `broad` and `touches`.
-    What needs a guard is the other direction: a step moved out to make the `checks` job
-    look fast. Adding a name below means typing a number next to it.
+    `sweep`, `suite` and `geometry` decide which of the pull request's four jobs runs a
+    step, and all three default to False, so the failure mode of forgetting one is a
+    slower `checks` job rather than a step nobody runs -- the safe direction, as with
+    `broad` and `touches`. What needs a guard is the other direction: a step moved out to
+    make the `checks` job look fast. Adding a name below means typing a number next to it.
 
     The measurements are CI's, run 34010470187 on a four-cpu runner: `--checks --jobs 3
     --inner-jobs 1` at 221.70s of wall over 58 steps, and `--sweeps --jobs 4
@@ -1406,7 +1418,40 @@ def test_the_pull_request_runs_its_sweeps_and_its_suite_apart() -> None:
       xdist workers, which was two beside 57 steps at `--jobs 3` and is four at
       `--jobs 1` on a runner of its own.
 
-    What this buys is three numbers instead of one queue, and no coverage change at all:
+    The `geometry` half is the fourth job and its rule is neither kind nor floor but a
+    queue. What was left in `checks` once the lane moved out was 57 steps of pure
+    outer-parallel work with nothing large enough to floor the job, and CI run
+    34016999060 priced the obvious response -- spend the freed cpu at `--jobs 4` -- at
+    198.22s against the 221.70s three-worker job that still had the 142.43s lane inside
+    it. 23.5s, because saturating four cpus inflated every step by thirty to eighty per
+    cent: the perimeter 60.62s to 84.41s, exact verification 61.75s to 79.98s, the type
+    floor 40.37s to 72.31s, the SVG renderer 41.30s to 65.36s. A queue of that shape is
+    shortened by cpus and by nothing else, so the queue was halved and both halves run at
+    `--jobs 3`.
+
+    Two rules bound which steps may cross, and both are asserted in
+    `test_the_edit_tier_cannot_under_run`: only a `broad` step, so `--edit` stays wholly
+    inside `--checks`; and nothing that needs the engine, so only one of the two jobs pays
+    the serial `cargo build --release`. Inside those, the boundary is arithmetic. Local,
+    2026-09-06, four cpus, `--checks --jobs 4 --inner-jobs 1` over the undivided 57 steps
+    at 545.08s of step time, these nine are 275.48s of it:
+
+    - `D-034's n=5 identity pair still reproduces`, 62.62s -- and the step that most wants
+      a runner of its own, because `build_n5_identity_pair` asks `ProcessPoolExecutor` for
+      the whole machine rather than for `PACK_JOBS` workers.
+    - `historical regressions`, 42.35s.
+    - `the decimal route still cannot price an exact pose`, 39.43s.
+    - `deterministic SVG rendering`, 39.36s -- the step `D-455` was caught by.
+    - `small-n exact models and local geometry`, 28.34s.
+    - `Trump exact branchwise linearized cones`, 20.94s.
+    - `fixed-angle cell is an LP, rebuilt independently`, 15.84s.
+    - `basin atlas`, 13.94s.
+    - `basin event record and replay`, 12.66s.
+
+    That leaves 269.60s in `checks`, two halves within two per cent of each other. At the
+    reference shape on the same box the two walls are 93.27s and 86.20s.
+
+    What this buys is four numbers instead of one queue, and no coverage change at all:
     every one of these steps runs on every pull request exactly as it did before, which
     is what `test_the_pull_request_surface_defers_only_what_was_measured` re-checks from
     the workflow rather than from these flags.
@@ -1420,11 +1465,32 @@ def test_the_pull_request_runs_its_sweeps_and_its_suite_apart() -> None:
     assert {step.name for step in validate.STEPS if step.suite} == {
         "fast behavioral tests",
     }
-    # A sweep or a suite step outside `--fast` would be a step the pull request does not
-    # run at all, which is a deferral and belongs in the test above rather than in this
-    # one. Being both would put one step in two jobs, which is a bill paid twice.
-    assert all(step.fast for step in validate.STEPS if step.sweep or step.suite)
-    assert not any(step.sweep and step.suite for step in validate.STEPS)
+    assert {step.name for step in validate.STEPS if step.geometry} == {
+        "D-034's n=5 identity pair still reproduces",
+        "historical regressions",
+        "the decimal route still cannot price an exact pose",
+        "deterministic SVG rendering",
+        "small-n exact models and local geometry",
+        "Trump exact branchwise linearized cones",
+        "fixed-angle cell is an LP, rebuilt independently",
+        "basin atlas",
+        "basin event record and replay",
+    }
+    # A sweep, a suite or a geometry step outside `--fast` would be a step the pull
+    # request does not run at all, which is a deferral and belongs in the test above
+    # rather than in this one. Carrying two of the flags would put one step in two jobs,
+    # which is a bill paid twice.
+    marks = [
+        {step.name for step in validate.STEPS if step.sweep},
+        {step.name for step in validate.STEPS if step.suite},
+        {step.name for step in validate.STEPS if step.geometry},
+    ]
+    assert all(
+        step.fast for step in validate.STEPS if step.sweep or step.suite or step.geometry
+    )
+    for index, marked in enumerate(marks):
+        for other in marks[index + 1 :]:
+            assert not marked & other
 
 
 def _workflow_selections(*, pull_request: bool) -> dict[str, set[str]]:
@@ -1465,6 +1531,7 @@ def _workflow_selections(*, pull_request: bool) -> dict[str, set[str]]:
                     checks=namespace.checks,
                     sweeps=namespace.sweeps,
                     suite=namespace.suite,
+                    geometry=namespace.geometry,
                 )
             }
     return selections
@@ -1478,30 +1545,38 @@ def test_the_pull_request_jobs_partition_the_surface() -> None:
     finishing in 501.97s. It was two jobs for one day, and two could not balance it:
     `checks` 221.70s against `sweeps` 110.66s on run 34010470187, with 142.43s of the
     longer half in a single indivisible step. Three runners is twelve cpus and puts that
-    step on its own. What a split like this risks is the gap `D-455` came through in the
-    other direction -- a step in no selection, run by nobody, reported by nothing -- so
-    the three commands are read from the workflow and checked to be a partition rather
-    than trusted to be.
+    step on its own. Four is the cut after that, and it is the one the arithmetic forced
+    rather than a preference: what was left in `checks` was 790 worker-seconds of pure
+    outer-parallel work against four cpus, `--jobs 4` on run 34016999060 bought 23.5s
+    because it inflated every step by thirty to eighty per cent, and a queue of that
+    shape is shortened by cpus and by nothing else.
 
-    `--checks`, `--suite` and `--sweeps` are a partition in `_select_steps` by
-    construction, so this is really a check on the YAML: that the workflow invokes all
-    three, on a pull request, and narrows none of them with `--only` or `--skip`.
+    What a split like this risks is the gap `D-455` came through in the other direction --
+    a step in no selection, run by nobody, reported by nothing -- so the four commands are
+    read from the workflow and checked to be a partition rather than trusted to be.
+
+    `--checks`, `--geometry`, `--suite` and `--sweeps` are a partition in `_select_steps`
+    by construction, so this is really a check on the YAML: that the workflow invokes all
+    four, on a pull request, and narrows none of them with `--only` or `--skip`.
 
     Pairwise disjointness is asserted rather than inferred from the union. Two jobs make
-    those the same statement; three do not, and the case they differ on -- one step in
-    two jobs and another in none -- is a bill paid twice hiding a check nobody runs.
+    those the same statement; more than two do not, and the case they differ on -- one
+    step in two jobs and another in none -- is a bill paid twice hiding a check nobody
+    runs.
     """
     selections = _workflow_selections(pull_request=True)
 
-    assert set(selections) == {"validate", "suite", "sweeps"}
-    assert not selections["validate"] & selections["sweeps"]
-    assert not selections["validate"] & selections["suite"]
-    assert not selections["suite"] & selections["sweeps"]
-    assert selections["validate"] | selections["suite"] | selections["sweeps"] == {
+    assert set(selections) == {"validate", "geometry", "suite", "sweeps"}
+    names = list(selections)
+    for index, job in enumerate(names):
+        for other in names[index + 1 :]:
+            assert not selections[job] & selections[other], f"{job} and {other} overlap"
+    assert set().union(*selections.values()) == {
         step.name for step in validate.STEPS if step.fast
     }
     assert selections["sweeps"] == {step.name for step in validate.STEPS if step.sweep}
     assert selections["suite"] == {step.name for step in validate.STEPS if step.suite}
+    assert selections["geometry"] == {step.name for step in validate.STEPS if step.geometry}
 
 
 def test_every_tier_band_is_declared_for_the_shape_ci_runs() -> None:
@@ -1549,7 +1624,7 @@ def test_every_tier_band_is_declared_for_the_shape_ci_runs() -> None:
             assert tier.reference.jobs == int(namespace.jobs), tier_id
             assert tier.reference.inner_jobs == int(namespace.inner_jobs), tier_id
             checked.add(tier_id)
-    assert checked == {"checks", "suite", "sweeps"}
+    assert checked == {"checks", "geometry", "suite", "sweeps"}
 
 
 def test_the_post_merge_jobs_partition_the_gate() -> None:
@@ -1563,8 +1638,9 @@ def test_the_post_merge_jobs_partition_the_gate() -> None:
     rename that breaks the split fails here rather than after a merge.
 
     A merge still runs the gate as one job plus the exhaustive tier, not as the pull
-    request's three parts. The `suite` and `sweeps` jobs are pull-request only, and the
-    complete integration surface here already contains every step they would have run.
+    request's four parts. The `geometry`, `suite` and `sweeps` jobs are pull-request only,
+    and the complete integration surface here already contains every step they would have
+    run.
     """
     selections = _workflow_selections(pull_request=False)
 
