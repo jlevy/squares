@@ -3,16 +3,20 @@ type: is
 id: is-01m1wfpb6ekw0asyzwgj1tnk32
 title: Integrate landed explainer changes into PR101 and verify the handoff
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 assignee: codex
 labels: []
 dependencies: []
 parent_id: is-01m1w39r16j7pwfp0vhq61b9eb
 created_at: 2026-09-06T23:08:42.057Z
-updated_at: 2026-09-06T23:25:22.027Z
+updated_at: 2026-09-06T23:45:18.866Z
+closed_at: 2026-09-06T23:45:18.865Z
+close_reason: "PR101 at 8f30be8c contains landed PR99/104 and main ef33d467. All validation and current required CI passed. GitHub REST confirms draft=false: the timed-out ready update did apply. The PR description and handoff are published; no validation remains pending."
+resolution: null
+duplicate_of: null
 ---
 Operational upstream integration after Session089 research ended. Checklist: review incoming explainer/tool/CI changes and semantic overlap; merge landed origin/main only; preserve research evidence and generated cost prefix; run affected push checks; push same PR101; observe final hosted CI and mark ready. Bounded read-only worker reviews cover scientific wording, tool/CI compatibility and PR handoff consistency. No research target or new research allocation.
 
