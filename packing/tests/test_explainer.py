@@ -76,16 +76,38 @@ def test_no_placeholder_survives_substitution(page: str) -> None:
     assert re.findall(r"\{\{[A-Z_]+\}\}", page) == []
 
 
-def test_single_certificate_without_a_pinned_timing_keeps_its_headline_facts() -> None:
-    facts = render_explainer.derive(WALKTHROUGH[0])
-    toggle = render_explainer.certificate_switch([facts], facts)
-    values = render_explainer.certificate_substitutions(facts, default=facts, toggle=toggle)
-    shared = render_explainer.shared_substitutions([facts], facts, facts)
-    source = render_explainer.markdown_source([values], values, shared, claimed=False)
-    assert f"{len(facts.atoms):,} rationally weighted points" in source
-    assert f"{facts.steps + 1} rationally parameterized" in source
-    assert "one-file checker" not in source
-    assert "{{" not in source
+@pytest.mark.parametrize(
+    ("paths", "comparison", "pinned_check"),
+    [
+        (WALKTHROUGH[:1], False, False),
+        (WALKTHROUGH, True, True),
+        (WALKTHROUGH[::-1], False, True),
+        (WALKTHROUGH[1:], False, True),
+    ],
+    ids=["single", "both", "headline-first", "headline-only"],
+)
+def test_certificate_comparisons_match_the_rendered_certificates(
+    paths: tuple[Path, ...], *, comparison: bool, pinned_check: bool
+) -> None:
+    rendered = render(paths)
+    document = " ".join(rendered.markdown.split())
+    assert ("A second certificate" in document) is comparison
+    assert ("certificate supersedes it" in document) is comparison
+    assert ("looser of the two bounds" in document) is comparison
+    assert ("The figures below illustrate this certificate." in document) is not comparison
+    assert "the theorem written out, the 19/5 certificate as plain data" in document
+    assert ("one-file checker" in document) is pinned_check
+    assert "A certificate written by a wrong program" not in document
+    assert (
+        "The verifier rejects a certificate that fails the conditions, "
+        "regardless of how it was generated."
+    ) in document
+    assert "{{" not in rendered.markdown
+    if len(paths) != 1:
+        return
+    facts = render_explainer.derive(paths[0])
+    assert f"{len(facts.atoms):,} rationally weighted points" in document
+    assert f"{facts.steps + 1} rationally parameterized" in document
 
 
 def test_the_page_is_self_contained(page: str) -> None:

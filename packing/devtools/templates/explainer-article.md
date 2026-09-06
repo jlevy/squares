@@ -109,12 +109,23 @@ $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
 
 $s(11)$ is the smallest case still open.
 Trump’s 1979 packing shows $s(11) \le {{BEST_PACKING_TEX}}$.[^trump] Here we prove
-$s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$. A second certificate, for the
-looser bound $s({{N}}) \ge {{DEFAULT_L_FRAC}}$, is kept beside it: its smaller numbers
-make the figures legible, and it is the one the project’s adversarial review of the
-checking package read line by line.
+$s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
+
+<!--BEGIN:COMPARISON-->
+
+A second certificate, for the looser bound $s({{N}}) \ge {{DEFAULT_L_FRAC}}$, is kept
+beside it: its smaller numbers make the figures legible, and it is the one the project’s
+adversarial review of the checking package read line by line.
 The {{HEADLINE_L_FRAC}} certificate supersedes it, and some of the figures below show
 both.
+
+<!--END:COMPARISON-->
+
+<!--BEGIN:NO_COMPARISON-->
+
+The figures below illustrate this certificate.
+
+<!--END:NO_COMPARISON-->
 
 <figure>
   <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
@@ -535,17 +546,24 @@ The search runs in floating point.
 None of it is part of the proof: the [generator]({{GENERATOR_URL}}) writes the
 certificate to a file, and the [verifier]({{VERIFIER_URL}}) decides Conditions 1 through
 5 on it in exact rational arithmetic.
-A certificate written by a wrong program is rejected by the verifier.
-The gate that admits a certificate to the record asks for two verdicts: it accepts one
-only when the exact event-cell sweep and an interval branch-and-bound, which decide
-Condition 5 by distinct methods, both accept it and report the same least covered mass.
+The verifier rejects a certificate that fails the conditions, regardless of how it was
+generated. The gate that admits a certificate to the record asks for two verdicts: it
+accepts one only when the exact event-cell sweep and an interval branch-and-bound, which
+decide Condition 5 by distinct methods, both accept it and report the same least covered
+mass.
 
 A [first-party package for third-party checking]({{THIRDPARTY_URL}}) gathers what an
-outside check needs: the theorem written out, the {{DEFAULT_L_FRAC}} certificate as
+outside check needs: the theorem written out, the {{THIRDPARTY_L_FRAC}} certificate as
 plain data, and a one-file verifier on Python’s standard library that decides it without
 importing anything else from the repository.
-It decides the looser of the two bounds, not the headline one, and since this project
-wrote every file in it, it is not itself a third-party check.
+
+<!--BEGIN:COMPARISON-->
+
+It decides the looser of the two bounds, not the headline one.
+
+<!--END:COMPARISON-->
+
+This project wrote every file in the package, so it is not itself a third-party check.
 
 <!--BEGIN:CLAIM-->
 
