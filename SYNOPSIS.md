@@ -425,57 +425,62 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-[Agenda 022](packing/campaign/agendas/agenda-022-the-conditional-route.md) is running on
-2026-09-05 as the continuation of the overnight pass an account rate limit interrupted,
-recorded contemporaneously as
-[session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md).
-Agenda 021 closed first, with `T-021` raising `s(20)` and `s(21)` to `97/20 = 4.85`;
+**What the last block cost, and what that bought.** The pull-request surface went from
+`1369.60 s` to about `221.70 s` of CI wall, a factor of 6.2, with no check deleted and
+none made optional. Six measured changes did it: the marker split that moved the slow
+behavioural tail off the pull request (`BC-214`); xdist inside the quick lane rather
+than a second GitHub job (`BC-218`, which priced a second job at zero wall and three
+extra billed minutes); three outer jobs; worker sizing at `cpus - jobs + 1`, so a lane
+does not oversubscribe the box its two neighbours are on; the memoized-frontier atlas
+build; and the split of the surface into two concurrent jobs.
+[session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md)
+holds the block’s record and names the gate that certified it — run `34010683180` on
+`main` at `c743d7bb`, with `validate`, `exhaustive` and `macos-portability` all green,
+the first green exhaustive tier since that tier went red.
+
+**The result the block landed.** `T-021`: `s(20) >= 97/20` and `s(21) >= 97/20`, from a
+first-party weighted fractional unavoidable-set certificate retained through the gate on
+both routes, `+0.05` at each of the two sizes.
+It merged as `663ca37e` in PR 83. `T-020`’s `24/5` rung is retained beside it and still
+carries `n = 19`, which the new certificate’s mass is too heavy to reach.
+`H-062` is accepted with it: `BC-213` walled the last pre-registered rung at `973/200`
+on both constructions, leaving the `m = 5` covering wall bracketed to
+`[97/20, 973/200]`, width `0.015` against the `0.02` the hypothesis registered.
+
+**What is still open, with its price.**
+
+- The pull-request wall is about four minutes against a two-to-two-and-a-half-minute
+  target.
+- `BC-215`’s R1 tree-id cache is measured and priced and not wired: 20.2 per cent of
+  deep-run work is repeated, 92 per cent of that repetition is trees that did not move,
+  and the `touches` sets account for 1.6 per cent.
+  The tree id is the lever; `touches` is not.
+- Per-test cost is wall clock rather than CPU time, which is why the per-test ceiling
+  had to be raised to `12 s` against a `2 s` marking threshold — under contention an
+  ordinary test reports as a slow one, and a ceiling measured that way exiles tests for
+  having noisy neighbours.
+
+**What the block cost the trunk.** [D-470](defects.md): a test pinned to the moving
+`certificate.json` pointer still asserted the rung `T-021` displaced, and `main` sat red
+for six hours and seventeen minutes across three merges, because the exhaustive tier
+does not run on a pull request.
+The workflow already concedes the class in writing — a pull request can be green while a
+deferred test is broken — and what bounds it is `deep-gate.yml`, which runs the four
+deferrals against a pull request rather than after it, on a label rather than on every
+pull request. [D-471](defects.md): `D-459`’s conflicted-branch CI blackout fired three
+more times in the same day, and until this branch nothing but a person detected it;
+`branch-mergeability.yml` asks `git merge-tree` on every push, off the branch tip rather
+than off a merge ref that by definition cannot be built.
+Both entries stay open because neither workflow has reached `main`.
+
+**Selected next entry:** `think-xejq`, `BC-215` in
+[agenda-023](packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md) —
+the R1 tree-id cache, the one lever the efficiency block priced and did not pull.
+`think-wufn`, `BC-213`, which
 [session-086](packing/campaign/agent-sessions/session-086-agenda021-overnight-pass.md)
-holds that block’s record.
-
-**What moved.** `H-062` is accepted.
-`BC-213` decided the one remaining rung of its pre-registered bisection, at
-`973/200 = 4.865`, and both declared constructions walled — the uniform grids at LP
-round 16 with `20.001502` and 543 placements still violated, the grids unioned with
-`T-021`’s atoms at round 34 with `20.000223` and 213 violated
-([exp-062](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-062-h-062-m5-midpoint-rung.md)).
-That pins the `m = 5` covering wall to `[97/20, 973/200]`, width `0.015` against the
-`0.02` the hypothesis registered, its lower end a retained certificate and its upper end
-two independent walls sitting `0.1235` below the ceiling.
-It is the first covering wall this project has measured to the width it asked for, and
-it says directly that at `m = 5` the covering value binds and the ceiling never does.
-
-**One clause needed an argument rather than a run.** `H-062` asks its bracket’s upper
-end to carry a *converged* restricted optimum at or above twenty, and neither run
-converged. The clause is met because adding rows can only raise a restricted optimum, so
-each site set’s converged optimum is bounded below by its crossing — the criterion asks
-for the bound, not the value.
-The monotonicity is in rows at a fixed site set; adding *sites* lowers an optimum, and
-no column round completed, so neither set grew.
-`exp-062` states this rather than leaving a reader to reconstruct it, because this
-document’s own limits reading had taken the conservative view of the same clause.
-
-**What the block also fixed.** `D-458`: the covering-value register’s `24/5` row named
-the moving `certificate.json` pointer instead of the immutable rung, so promoting
-`T-021` into that pointer made a superseded row quote its own successor’s atoms.
-Nothing unsound — every artifact named exists and every mass quoted is that file’s true
-mass — but the join between a row and its evidence was broken, and six tests plus the
-reach renderer’s prose still described the corpus as it stood before `T-021` moved the
-`n = 20` package from certifying `n = 19` to certifying `n = 20`. The renderer now
-derives its count word, case list, band width and per-run stop reasons from the corpus;
-[`conventions.md`](conventions.md) carries the pointer rule where a record author will
-find it.
-
-**Selected next entry:** `think-wufn`, `BC-213` — which
-[session-086](packing/campaign/agent-sessions/session-086-agenda021-overnight-pass.md)
-handed over and this block has taken and completed, as above.
-`BC-206`, the `n = 12` ladder above `99/25`, and `BC-201`, the near-tight-cell census at
-`n = 11`, are in flight as this is written.
-
-What session-087 will hand over in its place is agenda-021’s `BC-198`, the two-threshold
-form of Condition 5 (`H-063`). It is the only cell left that unblocks anything: `BC-208`
-waits on its class cuts and `BC-207` waits on `BC-208`, so the whole conditional route
-behind them opens or stays shut on that one.
+handed over, was taken by session-087 and is discharged; the conditional route in
+[agenda-022](packing/campaign/agendas/agenda-022-the-conditional-route.md) sits behind
+`BC-204`, `BC-207` and `BC-208`, which are all still blocked.
 
 ### Handoff Record
 
@@ -3211,15 +3216,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 469 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 471 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 94 | asserted something false about the mathematics |
 | validity | 118 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 180 | recorded something its own evidence contradicts |
-| robustness | 59 | did not finish, or finished only by luck |
+| bookkeeping | 181 | recorded something its own evidence contradicts |
+| robustness | 60 | did not finish, or finished only by luck |
 | performance | 18 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -3228,17 +3233,17 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy defects in 469, and no soundness defect ever.**
-Every soundness failure was found by a control cell whose answer was known in advance, a
-rule written down before the measurement, a generated view contradicting its source, or
-someone reading carefully.
+**The automated gate has caught seventy-one defects in 471, and no soundness defect
+ever.** Every soundness failure was found by a control cell whose answer was known in
+advance, a rule written down before the measurement, a generated view contradicting its
+source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Gate-detected entries here are mechanical process, implementation, or
 test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
 
-The generated log currently has 63 open entries: 40 `outstanding` and 23 `contained`.
+The generated log currently has 66 open entries: 41 `outstanding` and 25 `contained`.
 The W9 candidate `think-cyko` owns their systematic risk ordering and bounded repair
 waves; the synopsis names the cases that matter to current claims rather than pretending
 the examples below are the whole backlog.

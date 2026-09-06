@@ -146,39 +146,107 @@ A tier selects steps; a lane divides one step.
 | `--records` | contributor, before touching a registry; also every pull request | 31 of 64 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a code change |
-| `--fast` | contributor, at a block boundary; the union of the two tiers below | 62 of 66 | 700 s | 502.3 s on CI, 2026-09-06, commit `5cad7540`, when CI still ran it whole |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 58 of 66 | 400 s | not yet clocked on CI |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 430 s | not yet clocked on CI |
+| `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 66 | 700 s | 502.3 s on CI, 2026-09-06, commit `5cad7540`, when CI still ran it whole |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 66 | 240 s | not yet clocked on CI |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 66 | 200 s | not yet clocked on CI; 93.3 s locally at the reference shape |
+| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 66 | 240 s | not yet clocked on CI |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 240 s | not yet clocked on CI |
 | *(no flag)* | **CI, on `main`, on dispatch, and daily**; and what a block ends with | 66 of 66 | 3600 s | split across two jobs; not clocked whole |
 
-**The pull-request surface is `--checks` and `--sweeps` together, run as two concurrent
-CI jobs**, so a pull request waits for the longer of the two rather than for their sum.
-Both feed the single required `packing-required` context, and
+**The pull-request surface is `--checks`, `--geometry`, `--suite` and `--sweeps`
+together, run as four concurrent CI jobs**, so a pull request waits for the longest of
+the four rather than for their sum.
+All four feed the single required `packing-required` context, and
 `test_the_pull_request_jobs_partition_the_surface` reads the workflow and checks that
-they are disjoint and that they cover every step of `--fast` — so the split cannot lose
-a check the way a pair of independent filters could.
+they are pairwise disjoint and that they cover every step of `--fast` — so the split
+cannot lose a check the way a set of independent filters could.
 
 The split is arithmetic, not preference.
 `--fast` was 501.97 s of wall over about 1,100 s of step time at `--jobs 3 --inner-jobs
 1`, and 1,100 s of step time on a four-cpu runner cannot finish under 275 s however it
 is scheduled — so one runner could not reach the two-to-three-minute target and a second
 one had to be bought.
-`--sweeps` takes the four steps that re-derive a retained atlas from its witnesses,
-598.9 s of that step time between them and nothing else in the tier above 90 s; the
-measurement for each is in `test_the_pull_request_runs_its_sweeps_on_a_second_runner`.
+`--sweeps` takes the four steps that re-derive a retained atlas from its witnesses, and
+nothing else in the tier is above 90 s; the measurement for each is in
+`test_the_pull_request_runs_its_sweeps_and_its_suite_apart`.
+
+`--suite` is the third job and it is one step, and the reason it is alone is a floor
+rather than a budget.
+`fast behavioral tests` cost 142.43 s on CI inside the `validate` job, where
+`_pytest_workers` sizes xdist to `cpus - jobs + 1` — two workers beside two other outer
+lanes. No outer parallelism shortens a wall that is one step, which is what `BC-218`
+found one level up, so the only lever on it is the worker count, and the only way to
+raise that without oversubscribing the runner is to stop sharing the job.
+Alone at `--jobs 1` the step has all four cpus to spend on xdist.
+That also retires `BC-218`’s objection to four workers: nineteen ordinary tests went
+over the per-test ceiling on contention when the lane asked for every cpu *beside* other
+work, and a lane that is the only work on its runner cannot create that contention.
 The second cost the split pays off is not on the clock: five ordinary tests were
 reporting over the quick lane’s 5 s per-test ceiling because 468 s of atlas rendering
 was running beside them on the same four cpus, and moving that work to its own runner is
 what removes the contention rather than relabelling the tests as slow.
 
-**What the `sweeps` job is now floored by is one step**, `prospective n=101..324 safe
-seed` at 213.2 s. The job has four units and four cpus, so its outer pool is already
-saturated and its wall is that step’s wall; a third GitHub job cannot shorten it, for
-the same reason `BC-218` found that a second job could not shorten a tier that was one
-step. The lever from here is inside `devtools/build_prospective_atlas.py` and
-`devtools/census_known_best_chunks.py` — 101 witnesses and 100 witnesses respectively,
-each independent of the others, both rebuilt in a single process while
-`sqpack.workers.worker_count` sits unused.
+`--geometry` is the fourth job, and it is the only one of the four that exists for cpus
+rather than for a kind or a floor.
+What was left in `--checks` once the behavioural lane moved out was 57 steps of pure
+outer-parallel work with no unit large enough to floor the job, so the job was given the
+freed cpu: `--jobs 4`, four units on four cpus.
+CI run 34016999060 priced that and refused it.
+The tier came in at 198.22 s — 23.5 s less than the three-worker job that still had the
+142.43 s behavioural lane inside it — because saturating the runner inflated every step
+by thirty to eighty per cent against the same steps at `--jobs 3` on the run before:
+
+| Step | `--jobs 3` | `--jobs 4` |
+| --- | ---: | ---: |
+| soundness perimeter | 60.62 s | 84.41 s |
+| exact verification | 61.75 s | 79.98 s |
+| type floor (basedpyright) | 40.37 s | 72.31 s |
+| deterministic SVG rendering | 41.30 s | 65.36 s |
+| historical regressions | 36.04 s | 50.00 s |
+| the decimal route | 40.40 s | 49.34 s |
+| D-034’s n=5 identity pair | 34.18 s | 41.85 s |
+
+Four workers over 790 inflated worker-seconds is the same work at a worse price than
+three over 470, which is the lesson `_pytest_workers` already encodes as
+`cpus - jobs + 1`. A queue of that shape is shortened by cpus and by nothing else, so
+the queue was halved and both halves run at `--jobs 3`: eight cpus with a core of
+headroom on each, for work that had four cpus and none.
+The halves are 269.60 s and 275.48 s of a local 545.08 s step-time reading, within two
+per cent of each other, and the boundary is bounded by two rules rather than chosen
+freely — only a `broad` step may cross, so `--edit` stays wholly inside `--checks`, and
+no engine or cargo step may, so only `--checks` pays the serial `cargo build --release`
+that `_build_engine` puts in front of every step.
+Measured locally at the reference shape, `--geometry` is 93.3 s of wall over 243.8 s of
+step time.
+
+**What the `sweeps` job is floored by is one step**, and since 2026-09-06 that step is
+`known-best chunk census` at 90.38 s rather than `single-square translation escape
+screen`. The job has four units and four cpus, so its outer pool is already saturated
+and its wall is its longest unit’s wall; a fifth GitHub job cannot shorten it, for the
+same reason `BC-218` found that a second job could not shorten a tier that was one step.
+The escape screen was that unit at 110.66 s, and the lever on it was never the schedule:
+`devtools/screen_translation_escape.py` screens 98 independent records and was given a
+process pool, but the pool sizes itself from `PACK_JOBS`, which `--inner-jobs` sets, so
+at 1 the parallelism was dormant and the step still ran serially on every pull request.
+Best of five rounds on a four-cpu box: 103.94 s at one worker, 52.11 s at two, 35.40 s
+at three, 27.50 s at four.
+The job now passes `--inner-jobs 2` — two rather than four, because four outer slots
+already fill four cpus and a step fanning out to four inner workers is exactly the
+oversubscription the table above prices.
+Measured whole at that shape on a four-cpu box the job is 79.5 s: the census 79.5 s, the
+screen 65.3 s, the known-best atlas 50.5 s, the prospective seed 25.1 s. The screen
+costs more than its isolated 52.1 s because two inner workers beside three other outer
+steps is not two workers alone, and it is under the census either way, which is the only
+thing the flag had to achieve.
+Of the eleven modules this job runs, only `screen_translation_escape` reaches
+`sqpack.workers` — checked per process, since a transitive import would be invisible to
+a grep of the four entry points — so the blast radius is one step.
+The census’s 90.38 s is now the floor on the *whole* pull-request surface, since no
+job’s wall goes below its own longest step.
+The lever from here is inside the steps that are still serial —
+`devtools/census_known_best_chunks.py` and `devtools/build_prospective_atlas.py` rebuild
+100 and 101 witnesses, each record independent of the others and each rebuilt in a
+single process while `sqpack.workers.worker_count` sits unused.
 
 Four steps are outside the pull-request surface entirely, each deferred on its own
 measurement and pinned by `test_the_pull_request_surface_defers_only_what_was_measured`,
@@ -187,6 +255,8 @@ select rather than from a flag: `exhaustive exact behavioral tests` (1943 s, its
 job), `negative controls` (544 s), `n=40 rigidity bracket still reproduces` (221 s), and
 `slow behavioral tests` (the lane below).
 Adding a fifth means arguing it in that test, not editing a list.
+What runs those four *before* a merge rather than after it is
+[the deep gate](#the-deep-gate-the-deferred-surface-before-the-merge).
 
 ### The behavioural lanes
 
@@ -205,6 +275,84 @@ ceiling fails the pull request in the week it grows; a deferred test that drops 
 the floor fails the deep surface until its marker comes off.
 That is what makes the split a rule rather than a hand-maintained list — the failure
 mode `D-466` records.
+
+### The deep gate: the deferred surface, before the merge
+
+The four steps outside the pull-request surface are tabulated under
+[Validation Loops](#validation-tiers); this is about *when* they run.
+Until 2026-09-06 the answer was “after a merge, or on the 08:17 UTC backstop”, and both
+report a break that is already on `main`. Twice on 2026-09-05 that is what happened, and
+one of the two is on the record.
+`test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net` asserted a
+certificate rung a later commit displaced; it is marked `exhaustive_exact`, so no pull
+request ran it and every pull request was green; run 34009814108 failed on the merge
+commit `6bd136b0`, and `main` stayed red across three merges for about five hours.
+
+[`deep-gate.yml`](.github/workflows/deep-gate.yml) runs that surface against a pull
+request instead. Its selection is the **exact complement** of the pull-request surface,
+not a sample of it:
+`test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers` resolves the
+workflow’s own commands through `packing-validate --list` and compares the union against
+every step no pull-request job runs.
+So the pull-request surface and the deep gate together are the whole gate, and a fifth
+deferral argued into `test_the_pull_request_surface_defers_only_what_was_measured` fails
+until it is added here too.
+
+It costs about **32 minutes**, which is why it is not on every build.
+That is `exhaustive-tier`’s measured 1943 s; `deferred-steps` runs beside it and should
+land near the slow lane’s own 890 s, with the negative controls and the n=40 bracket
+finishing underneath that.
+Neither figure has been clocked at this shape yet.
+
+**To run it on a pull request, add the `deep-gate` label.**
+
+- The label starts it, and every subsequent push re-runs it, because a label that
+  attested to an older commit would be the same stale evidence as the daily backstop.
+  **Label last**, when the branch is otherwise ready.
+- Without the label every job skips in seconds, so the workflow adds nothing to an
+  ordinary pull request.
+  It reports one context, `deep-gate-required`, for the reason `packing-required` is one
+  context: `D-380` records what a fan-out of separately required checks cost here.
+- To run it without touching the author’s labels, dispatch **Deep gate** with
+  `pull_request: <number>`; it checks out that pull request’s merge ref.
+
+**When a reviewer should require it.** The three largest deferrals declare no `touches`
+at all, so there is no path rule to lean on and `--since` selects them for every change
+— the judgement is a reviewer’s. Ask for the label when the branch:
+
+- moves a certificate, a retained witness, a rung, or anything under `packing/cases/` —
+  the exhaustive tier is what decides those, and it is what `6bd136b0` broke;
+- edits `devtools/controls.yaml` or a mutation the negative controls declare (`D-403`:
+  stale controls accumulate unseen because they do not run on a pull request);
+- touches `devtools/assess_n40_rigidity.py` or `devtools/assess_n5_rigidity.py`, the
+  n=40 bracket’s declared inputs;
+- adds, removes or could slow a test marked `slow`;
+- or changes mathematics rather than prose, which is the blunt version of all four.
+
+**These runs provide advisory evidence.** A reviewer can request and inspect the deep
+run before merging, but neither the label nor the dispatch enforces a merge
+prerequisite. A dispatch checks out the requested PR’s merge ref; its check run belongs
+to the dispatch ref, so reviewers must inspect that workflow run directly.
+If `main` moves after a successful run, that evidence does not cover the new combined
+tree.
+
+This repository is publicly hosted under a personal account.
+[GitHub merge queues](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue)
+require an organization-owned repository (and an eligible plan for private
+repositories), so queue enforcement is unavailable here.
+The workflow has no `merge_group` trigger.
+
+Future queue adoption would require an eligible repository and a workflow change before
+changing protection settings.
+GitHub shares required status checks between pull requests and merge groups: every
+required context must report on both events.
+In particular, `packing-required` currently runs only on pull requests.
+A future design must run and aggregate the intended fast and deep checks on merge
+groups, while reporting the chosen PR contexts on opening and subsequent updates.
+It must also partition the deep work to avoid running the exhaustive tier in both
+workflows: adding `merge_group` to `packing-validation.yml` alone selects its complete
+post-merge gate, but leaves its PR-only aggregate skipped.
+Verify the complete required-context set on both events before enabling the queue.
 
 ### What it is allowed to cost
 
@@ -234,13 +382,15 @@ uv run --frozen --all-extras --group dev packing-validate --edit
 uv run --frozen --all-extras --group dev packing-validate --push
 
 # The pull-request surface: the edit tier plus every behavioral test under the
-# per-test ceiling. CI runs it as the two halves below, one per runner; run it whole
+# per-test ceiling. CI runs it as the four parts below, one per runner; run it whole
 # here, where there is only one machine and nothing to overlap with.
 uv run --frozen --all-extras --group dev packing-validate --fast
 
-# The two halves CI runs concurrently on a pull request. They are complements within
-# --fast, so running both is running the surface and running one is running half of it.
+# The four parts CI runs concurrently on a pull request. They partition --fast, so
+# running all four is running the surface and running one is running a part of it.
 uv run --frozen --all-extras --group dev packing-validate --checks
+uv run --frozen --all-extras --group dev packing-validate --geometry
+uv run --frozen --all-extras --group dev packing-validate --suite
 uv run --frozen --all-extras --group dev packing-validate --sweeps
 
 # One named component. --only is repeatable and matches displayed step names.
@@ -308,10 +458,11 @@ implemented. These limits are why a subprocess timeout is not, by itself, eviden
 D-239 is resolved.
 
 On pull requests, [`packing-validation.yml`](.github/workflows/packing-validation.yml)
-runs the surface as two concurrent Linux jobs — `packing-validate --checks` in
-`validate` and `packing-validate --sweeps` in `sweeps` — and reports the stable
-`packing-required` aggregate, which now waits on both.
-One required context, two prerequisites: `BC-218` made that the condition for any
+runs the surface as four concurrent Linux jobs — `packing-validate --checks` in
+`validate`, `packing-validate --geometry` in `geometry`, `packing-validate --suite` in
+`suite` and `packing-validate --sweeps` in `sweeps` — and reports the stable
+`packing-required` aggregate, which waits on all four.
+One required context, four prerequisites: `BC-218` made that the condition for any
 fan-out, because [D-380](defects.md) records what a fan-out of separately required
 checks cost this repository once.
 Since 2026-09-05 the surface is sixty-two of the sixty-six steps rather than
@@ -434,6 +585,29 @@ throughout, because `main` had moved under it.
 Resolving the conflict restored CI on the next push.
 The failure mode is quiet in the dangerous direction — an absent check reads as pending
 rather than as red — so the absence is what to investigate, not the wait.
+
+**That command now runs on every push**, in
+[`branch-mergeability.yml`](.github/workflows/branch-mergeability.yml), which is the one
+placement that can fire at all: a `pull_request`-triggered check has the same blind spot
+as the runs it would report on, because the defect *is* that no run is created.
+A `push` event fires off the branch tip, which exists whatever the base is doing, and
+its check run is keyed to the head commit — so it appears on the pull request, where the
+missing runs would have been.
+
+When it fails, it is telling you one thing: **no `pull_request` run will be created for
+this branch until the conflict is resolved**, so the pull request’s checks will sit
+pending rather than turn red.
+The job summary lists the conflicting paths and the two commands that fix it.
+A non-zero exit other than a conflict means git could not answer, and that is reported
+as a failure too, because “the check could not tell” must not read the same as “the
+branch is fine”.
+
+What it does not catch is `main` moving under a branch nobody pushes to, which produces
+no event on that branch.
+In the measured incident the branch was pushed five times inside the window, so the
+incident itself is covered; the residual is a labelled, approved branch left to sit, and
+a future merge queue could close it by building the merge commit itself;
+[queue enforcement is unavailable here](#the-deep-gate-the-deferred-surface-before-the-merge).
 
 ### Every pull request carries what it cost
 

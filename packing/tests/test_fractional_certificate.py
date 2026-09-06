@@ -305,7 +305,6 @@ def test_the_n12_certificate_improves_the_inherited_bound() -> None:
     assert (bound - 2) ** 2 * 5 > 16
 
 
-@pytest.mark.slow
 def test_breaking_the_symmetry_of_the_n12_atoms_is_refused() -> None:
     """Condition 1 is not decoration: drop one orbit member and the reduction is void."""
     certificate = load()

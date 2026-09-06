@@ -27,7 +27,6 @@ import sys
 from collections.abc import Sequence
 from pathlib import Path
 
-import cairosvg
 from strif import atomic_output_file
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -59,6 +58,9 @@ def pdf_receipt(content: bytes) -> str | None:
 
 def render_pdf_bytes() -> bytes:
     """Render the composite SVG to PDF bytes at the artwork's intrinsic size."""
+    # Reading a PDF receipt does not require loading the native renderer.
+    import cairosvg  # noqa: PLC0415
+
     # svg2pdf returns None only when handed a write target, which we never do.
     content = cairosvg.svg2pdf(url=str(SUMMARY_SVG), dpi=CSS_PIXELS_PER_INCH)
     if not isinstance(content, bytes):

@@ -17,6 +17,7 @@ from typing import Any
 import mpmath as mp
 import yaml
 
+from devtools import screen_translation_escape
 from devtools.screen_translation_escape import (
     DIGITS,
     OUTPUT,
@@ -28,7 +29,9 @@ from devtools.screen_translation_escape import (
     ActiveContacts,
     RecordGeometry,
     load_record,
+    manifest_entries,
     schema_errors,
+    screen_corpus,
     screen_errors,
     screen_record,
     shape_residual,
@@ -246,3 +249,42 @@ def test_schema_is_declared_where_the_artifact_says_it_is() -> None:
         yaml.safe_load(declared.read_text(encoding="utf-8"))["$id"]
         == (document["softschema"]["contract"])
     )
+
+
+def test_a_pool_worker_screens_at_the_same_precision_as_this_process() -> None:
+    """The corpus is screened across processes, and the precision is per-process state.
+
+    `mp.mp.dps` is a global that a `forkserver` or `spawn` child does not inherit, and a
+    worker left at mpmath's default of 15 digits does not raise.  It returns a
+    differently rounded case, which is the one failure this screen cannot afford: the
+    output would read as a result rather than as a bug.
+
+    Two derivations, and a control that stops them agreeing vacuously.  The control
+    screens one record's already-materialized geometry at 15 digits and requires the
+    published decimals to move, so the working precision is load bearing here rather
+    than decorative.  The comparison then requires a real two-process run, over a
+    screened case and an excluded record, to reproduce the single-process result exactly
+    -- through `screen_corpus` itself, so what is checked is the path the tool takes.
+    """
+    squares, side, square_ids = load_record(10)
+    mp.mp.dps = DIGITS
+    at_working_precision = screen_record(10, squares, side, square_ids)
+    mp.mp.dps = 15
+    try:
+        lowered = screen_record(10, squares, side, square_ids)
+    finally:
+        mp.mp.dps = DIGITS
+    assert lowered != at_working_precision
+
+    entries = [entry for entry in manifest_entries() if entry["n"] in {10, 68}]
+    original = screen_translation_escape.manifest_entries
+    screen_translation_escape.manifest_entries = lambda: entries
+    try:
+        serial = screen_corpus(1)
+        pooled = screen_corpus(2)
+    finally:
+        screen_translation_escape.manifest_entries = original
+
+    assert [case["n"] for case in serial[0]] == [10]
+    assert [item["n"] for item in serial[1]] == [68]
+    assert pooled == serial
