@@ -3,9 +3,9 @@ type: is
 id: is-01m1tw2ns895rs4qe4xf45m5q1
 title: Manage the closure lane from T+2 to T+4
 kind: task
-status: in_progress
+status: closed
 priority: 0
-version: 7
+version: 8
 spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 delegate: /root/closure_manager
 labels:
@@ -16,7 +16,11 @@ dependencies:
     target: is-01m1tw2pm3r1ppks7e434xxmwn
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T08:06:40.165Z
-updated_at: 2026-09-06T17:57:54.053Z
+updated_at: 2026-09-06T18:18:01.902Z
+closed_at: 2026-09-06T18:18:01.902Z
+close_reason: BC241 review and closure packet were published in ad600896 and accepted at retained-record-dependent local scope:128 branch stresses,56 gradients,three required mutations,four selected faces and one historical tangent replay. No full-radius replay,global capture or optimality is claimed. This closes only the independent review and old closure-manager slice.
+resolution: null
+duplicate_of: null
 ---
 Execute think-woi0 BC-241 through one source-distinct independent tangent replay, exact constants and norm checks, deterministic mutations, max-manager disposition, and a closure gate receipt. Do not repeat BC-240 or open BC-243 early.
 

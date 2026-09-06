@@ -3,9 +3,9 @@ type: is
 id: is-01m1tw2n09x1mq8nt6ejn22vrs
 title: Manage the fractional lane from T+2 to T+4
 kind: task
-status: in_progress
+status: closed
 priority: 0
-version: 8
+version: 9
 spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 delegate: /root/dilation_bound_promotion
 labels:
@@ -16,7 +16,11 @@ dependencies:
     target: is-01m1tw2pm3r1ppks7e434xxmwn
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T08:06:39.364Z
-updated_at: 2026-09-06T17:57:54.053Z
+updated_at: 2026-09-06T18:18:00.981Z
+closed_at: 2026-09-06T18:18:00.980Z
+close_reason: "Recovered BC232 checkpoint was published in ad600896: five unconverged iterations and no row-converged covering candidate. Original stem is terminal, recovery outputs retained; full-budget scientific criterion stays unresolved under think-gmdy and CPU-tail disposition under think-05of. No leg03 is authorized. This closes only the provisional packet and old fractional-manager slice."
+resolution: null
+duplicate_of: null
 ---
 Run the exact unused BC-232 leg 02 for its frozen 105-minute wall budget, supervise in slices no longer than 30 active minutes, preserve the four outputs and cumulative endpoints, and submit think-jeyp at T+4. Do not spend the final 30-minute leg.
 
