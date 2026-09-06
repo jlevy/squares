@@ -24,7 +24,9 @@ from typing import Any
 
 import pytest
 
+from devtools.render_explainer import derive
 from devtools.render_verifiable_claim import main as render_claims
+from devtools.render_verifiable_claim import perturbations
 
 CASE = Path(__file__).parents[1] / "cases/n11_fractional_certificate"
 VERIFIER = CASE / "verify_claim.py"
@@ -48,8 +50,29 @@ TINY = {
     "square_side": "7/10",
     "angle_limit": "207107/500000",
     "direction_steps": 1,
+    "total_mass": "1",
+    "least_cell_mass": "1",
     "symmetry": "D4",
     "atoms": [["5/8", "5/8", "1"]],
+}
+
+#: The adversarial review's degenerate instance (Finding 3): n = 2, L = B = 1/2, net
+#: (0, 1/2), one atom of weight 1 at the center. Upright, the B-square fits with no room
+#: to move, so (1/4, 1/4) is the one admissible center; at t = 1/2 its bounding box is
+#: 7/10 wide and nothing fits, so Condition 5 quantifies over nothing there. Every
+#: hypothesis holds, B(1 + D) = 3/4, and the bound s(2) >= 1/2 follows.
+REVIEWER = {
+    "id": "reviewer-n2",
+    "n": 2,
+    "claim": "s(2) >= 1/2",
+    "outer_side": "1/2",
+    "square_side": "1/2",
+    "angle_limit": "1/2",
+    "direction_steps": 1,
+    "total_mass": "1",
+    "least_cell_mass": "1",
+    "symmetry": "D4",
+    "atoms": [["1/4", "1/4", "1"]],
 }
 
 #: The witness `thirdparty/verify.py` reports for the unperturbed rung, which
@@ -105,7 +128,34 @@ def test_the_smallest_instance_is_accepted(
     assert status == 0
     assert failing == set()
     assert "least covered mass 1 at direction 0 (t = 0), center (5/8, 5/8)" in out
+    assert (
+        "Declarations hold: claim 's(2) >= 5/4', total_mass 1, least_cell_mass 1, as computed"
+    ) in out
     assert out.endswith("VERIFIED: s(2) >= 5/4\n")
+
+
+def test_forged_declarations_are_refused_after_every_condition_holds(
+    minimal: dict[str, Any], tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Finding 4 of the adversarial review: the file's own figures are compared, not carried."""
+    record = {**TINY, "claim": "s(2) >= 100", "total_mass": "-100", "least_cell_mass": "500"}
+    status, failing, out = decide(minimal, write(record, tmp_path / "forged.json"), capsys)
+    assert status == 1
+    assert failing == set()
+    assert (
+        "Declarations fail: claim declared 's(2) >= 100', computed 's(2) >= 5/4'; "
+        "total_mass declared -100, computed 1; least_cell_mass declared 500, computed 1"
+    ) in out
+    assert out.endswith("REFUSED\n")
+
+
+def test_a_certificate_missing_a_declaration_is_refused_before_any_condition(
+    minimal: dict[str, Any], tmp_path: Path
+) -> None:
+    for field in ("claim", "total_mass", "least_cell_mass"):
+        record = {key: value for key, value in TINY.items() if key != field}
+        with pytest.raises(KeyError, match=field):
+            minimal["load"](str(write(record, tmp_path / "bad.json")))
 
 
 def perturbed(name: str) -> dict[str, Any]:
@@ -151,10 +201,50 @@ def test_each_condition_refuses_its_own_perturbation(
     assert out.endswith("REFUSED\n")
 
 
+def test_a_failed_condition_skips_the_sweep(
+    minimal: dict[str, Any], tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Finding 9b: the sweep is the expensive step, and it is not paid for a refused file."""
+    status, failing, out = decide(
+        minimal, write(perturbed("mass reaching n"), tmp_path / "p.json"), capsys
+    )
+    assert status == 1
+    assert failing == {2}
+    assert (
+        "Condition 5 not evaluated: Condition 2 fails, and the sweep runs only when "
+        "Conditions 1 to 4 hold"
+    ) in out
+    assert (
+        "Declarations fail: total_mass declared 1, computed 2; least_cell_mass not compared"
+    ) in out
+    record = {**perturbed("mass reaching n"), "angle_limit": "41/100"}
+    _, failing, out = decide(minimal, write(record, tmp_path / "q.json"), capsys)
+    assert failing == {2, 3}
+    assert "Condition 5 not evaluated: Conditions 2, 3 fail, and the sweep" in out
+
+
+def test_a_certificate_above_the_ceiling_is_refused_before_any_condition(
+    minimal: dict[str, Any], tmp_path: Path
+) -> None:
+    atoms = [["5/8", "5/8", "1"]] * (minimal["MAX_ATOMS"] + 1)
+    with pytest.raises(ValueError, match="at most"):
+        minimal["load"](str(write({**TINY, "atoms": atoms}, tmp_path / "wide.json")))
+    steps = {**TINY, "direction_steps": minimal["MAX_DIRECTIONS"]}
+    with pytest.raises(ValueError, match="at most"):
+        minimal["load"](str(write(steps, tmp_path / "long.json")))
+    within = {**TINY, "direction_steps": minimal["MAX_DIRECTIONS"] - 1}
+    assert (
+        len(minimal["load"](str(write(within, tmp_path / "fine.json")))[3])
+        == (minimal["MAX_DIRECTIONS"])
+    )
+
+
 @pytest.mark.parametrize(
     "damage",
     [
         {"outer_side": 1.25},  # a JSON float is already rounded
+        {"total_mass": 1.0},
+        {"claim": 5},
         {"n": 0},
         {"direction_steps": 0},
         {"atoms": [["5/8", "5/8", "-1"]]},
@@ -171,11 +261,75 @@ def test_a_malformed_file_is_refused_before_any_condition(
         minimal["load"](str(write(record, tmp_path / "bad.json")))
 
 
+def test_a_direction_where_no_square_fits_decides_nothing(minimal: dict[str, Any]) -> None:
+    side = shrunk = Fraction(1, 2)
+    atoms = [(Fraction(1, 4), Fraction(1, 4), Fraction(1))]
+    assert minimal["least_mass"](side, shrunk, Fraction(1, 2), atoms, 1) == (None, None, 0)
+
+
+def test_a_direction_with_one_admissible_center_is_scored_directly(
+    minimal: dict[str, Any],
+) -> None:
+    side, center = Fraction(1, 2), (Fraction(1, 4), Fraction(1, 4))
+    atoms = [(*center, Fraction(1))]
+    # Upright with B = L, the one placement is the container itself.
+    assert minimal["least_mass"](side, side, Fraction(0), atoms, 1) == (1, center, 1)
+    # At t = 1/2 a B-square's bounding box is 7B/5 wide, so B = 5L/7 fits exactly once.
+    rotated = minimal["least_mass"](side, Fraction(5, 14), Fraction(1, 2), atoms, 1)
+    assert rotated == (1, center, 1)
+    light = [(*center, Fraction(1, 2))]
+    half = minimal["least_mass"](side, side, Fraction(0), light, 2)
+    assert half == (Fraction(1, 2), center, 1)
+
+
+def test_the_reviewers_degenerate_instance_is_accepted(
+    minimal: dict[str, Any], tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    status, failing, out = decide(minimal, write(REVIEWER, tmp_path / "r.json"), capsys)
+    assert status == 0
+    assert failing == set()
+    assert (
+        "least covered mass 1 at direction 0 (t = 0), center (1/4, 1/4); 1 cells over "
+        "2 directions, 1 of them admitting no placement"
+    ) in out
+    assert out.endswith("VERIFIED: s(2) >= 1/2\n")
+
+
+def test_a_single_placement_short_of_mass_fails_condition_5(
+    minimal: dict[str, Any], tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    record = {**REVIEWER, "atoms": [["1/4", "1/4", "1/2"]]}
+    record.update(total_mass="1/2", least_cell_mass="1/2")
+    status, failing, out = decide(minimal, write(record, tmp_path / "r.json"), capsys)
+    assert status == 1
+    assert failing == {5}
+    assert "least covered mass 1/2 at direction 0 (t = 0), center (1/4, 1/4)" in out
+
+
+def test_no_placement_at_any_direction_holds_vacuously(
+    minimal: dict[str, Any], tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """B = 3/5 > L: bounding boxes 3/5 and 21/25 wide, and B(1 + D) = 9/10 still."""
+    record = {**REVIEWER, "square_side": "3/5"}
+    status, failing, out = decide(minimal, write(record, tmp_path / "r.json"), capsys)
+    assert status == 0
+    assert failing == set()
+    assert (
+        "Condition 5 holds: no placement at any of the 2 directions, so nothing was decided"
+    ) in out
+    assert out.endswith("VERIFIED: s(2) >= 1/2\n")
+
+
 def test_the_tight_direction_of_the_rung_covers_50003_over_50000(
     minimal: dict[str, Any],
 ) -> None:
     """Direction 0 is where the rung's least covered mass is attained; one direction is fast."""
-    n, side, shrunk, tangents, atoms = minimal["load"](str(RUNG_19_5))
+    n, side, shrunk, tangents, atoms, declared = minimal["load"](str(RUNG_19_5))
+    assert declared == {
+        "claim": "s(11) >= 19/5",
+        "total_mass": Fraction(43391, 4000),
+        "least_cell_mass": Fraction(50003, 50000),
+    }
     detail, holds = minimal["symmetric"](atoms, side)
     assert holds, detail
     assert sum(w for _, _, w in atoms) == Fraction(43391, 4000) < n
@@ -232,6 +386,37 @@ def test_the_claim_documents_are_current() -> None:
     assert render_claims(["--check"]) == 0
 
 
+def test_the_documents_state_these_perturbations() -> None:
+    """The figures “How to Check It” prints, pinned so that a change in how they are chosen
+    is noticed; the exhaustive tier below runs the 19/5 ones through the verifier."""
+    stated = perturbations(derive(RUNG_19_5))
+    assert stated["MARGIN_FRAC"] == "3/50000"
+    assert stated["TIGHT_ATOM"] == "(1/2, 29/30)"
+    assert stated["TIGHT_ORBIT"] == "8"
+    assert stated["LIGHTEN_FRAC"] == "1/10000"
+    assert stated["LIGHTENED_LEAST_FRAC"] == "24999/25000"
+    assert stated["CENTER_ATOM"] == "(19/10, 19/10)"
+    stated = perturbations(derive(RUNG_381_100))
+    assert stated["MARGIN_FRAC"] == "1/4000"
+    assert stated["TIGHT_ATOM"] == "(43/100, 99/100)"
+    assert stated["LIGHTEN_FRAC"] == "1/1000"
+    assert stated["LIGHTENED_LEAST_FRAC"] == "3997/4000"
+    assert stated["CENTER_ATOM"] == "(381/200, 381/200)"
+
+
+def lightened(certificate: Path, sites: str, by: str) -> dict[str, Any]:
+    """The certificate with every atom at one of the sites, as the document lists them,
+    lightened by the stated amount; the declarations are left as they were."""
+    record: dict[str, Any] = json.loads(certificate.read_text())
+    targets = {
+        tuple(Fraction(c) for c in site.split(", ")) for site in sites[1:-1].split("), (")
+    }
+    for atom in record["atoms"]:
+        if (Fraction(atom[0]), Fraction(atom[1])) in targets:
+            atom[2] = str(Fraction(atom[2]) - Fraction(by))
+    return record
+
+
 @pytest.mark.exhaustive_exact
 def test_the_19_5_rung_is_accepted_on_the_full_net(
     minimal: dict[str, Any], capsys: pytest.CaptureFixture[str]
@@ -243,7 +428,42 @@ def test_the_19_5_rung_is_accepted_on_the_full_net(
         "least covered mass 50003/50000 at direction 0 (t = 0), center (53/100, 53/100); "
         "90546593 cells over 181 directions"
     ) in out
+    assert (
+        "Declarations hold: claim 's(11) >= 19/5', total_mass 43391/4000, "
+        "least_cell_mass 50003/50000, as computed"
+    ) in out
     assert out.endswith("VERIFIED: s(11) >= 19/5\n")
+
+
+@pytest.mark.exhaustive_exact
+def test_the_stated_orbit_lightening_fails_condition_5_alone(
+    minimal: dict[str, Any], tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """The document's first perturbation of the 19/5 rung, with the outcome it states."""
+    stated = perturbations(derive(RUNG_19_5))
+    record = lightened(RUNG_19_5, stated["TIGHT_ORBIT_SITES"], stated["LIGHTEN_FRAC"])
+    status, failing, out = decide(minimal, write(record, tmp_path / "orbit.json"), capsys)
+    assert status == 1
+    assert failing == {5}
+    least = Fraction(out.split("least covered mass ")[1].split(" ")[0])
+    assert least <= Fraction(stated["LIGHTENED_LEAST_FRAC"])
+    assert "Declarations fail: total_mass declared 43391/4000" in out
+    assert "least_cell_mass declared 50003/50000" in out
+
+
+@pytest.mark.exhaustive_exact
+def test_the_stated_benign_lightening_keeps_every_condition(
+    minimal: dict[str, Any], tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """The document's benign perturbation of the 19/5 rung: only the declarations refuse."""
+    stated = perturbations(derive(RUNG_19_5))
+    record = lightened(RUNG_19_5, stated["CENTER_ATOM"], stated["MARGIN_FRAC"])
+    status, failing, out = decide(minimal, write(record, tmp_path / "center.json"), capsys)
+    assert status == 1
+    assert failing == set()
+    assert out.count(" holds: ") == 5
+    assert "Declarations fail: total_mass declared 43391/4000, computed 1084769/100000" in out
+    assert out.endswith("REFUSED\n")
 
 
 @pytest.mark.exhaustive_exact
@@ -254,7 +474,13 @@ def test_every_falsification_is_refused_on_the_expected_condition(
     capsys: pytest.CaptureFixture[str],
     case: tuple[int, str, set[int], Fraction],
 ) -> None:
-    """`falsify.py`'s own perturbations, decided by the minimal verifier instead."""
+    """`falsify.py`'s own perturbations, decided by the minimal verifier instead.
+
+    `falsify.py` never short-circuits, so its table records a Condition 5 minimum for
+    every row; this verifier sweeps only once Conditions 1 to 4 hold, so a row failing
+    among them is expected to report Condition 5 as not evaluated, and only a row that
+    fails Condition 5 alone reproduces the recorded least covered mass.
+    """
     row, name, expected, least = case
     falsify = runpy.run_path(str(THIRDPARTY / "falsify.py"), run_name="falsify")
     record = json.loads((THIRDPARTY / "certificate.json").read_text())
@@ -263,6 +489,10 @@ def test_every_falsification_is_refused_on_the_expected_condition(
     perturbation = table[row][1]()
     status, failing, out = decide(minimal, write(perturbation, tmp_path / "p.json"), capsys)
     assert status == 1, name
-    assert failing == expected, name
-    assert f"least covered mass {least} at direction" in out, name
+    before_sweep = expected - {5}
+    assert failing == (before_sweep or expected), name
+    if expected <= {5}:
+        assert f"least covered mass {least} at direction" in out, name
+    else:
+        assert "Condition 5 not evaluated" in out, name
     assert out.endswith("REFUSED\n")

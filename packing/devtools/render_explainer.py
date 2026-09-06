@@ -35,10 +35,12 @@ import json
 import re
 import shutil
 import struct
+import subprocess
 import sys
 from collections.abc import Sequence
 from dataclasses import dataclass
 from fractions import Fraction
+from functools import cache
 from math import isqrt
 from pathlib import Path
 from typing import NamedTuple, TypedDict
@@ -55,7 +57,7 @@ from sqpack.fractional.certificate import (
 )
 from sqpack.fractional.model import Atom
 from sqpack.fractional.sweep import minimum_covered_mass, weight_scale
-from sqpack.release import PUBLICATION_DATE, PUBLICATION_EDITION
+from sqpack.release import PUBLICATION_DATE, PUBLICATION_EDITION, PUBLICATION_REVISION
 from sqpack.render.style import SQUARE_HUE_PALETTE
 from sqpack.yamlio import safe_load
 
@@ -237,8 +239,11 @@ RESULT_YEAR = 2026
 
 # Where the page sends a reader for more: the sources the n = 11 record cites
 # (frontier/n-011.md, keys [Friedman DS7], [Kingbird] and [Stromquist 2003]) and
-# the repository files behind the words, linked on `main`, which is what the
-# page deploys from.
+# the repository files behind the words, linked at the commit the page is built from
+# rather than on `main`, which the page deploys from but which does not stand still.
+# The certificate digests identify the data; the permalinks are what identify the
+# verifier, the generator and the exposition a reported run used (review of
+# 2026-09-05, Finding 8).
 PROBLEM_URL = "https://erich-friedman.github.io/papers/squares/squares.html"
 BEST_URL = "https://kingbird.myphotos.cc/packing/squares_in_squares.html"
 PRIOR_URL = "https://www.combinatorics.org/ojs/index.php/eljc/article/view/v10i1r8"
@@ -251,7 +256,9 @@ REPO_URL = "https://github.com/jlevy/squares"
 # is that one place.
 SITE_URL = "https://jlevy.github.io/squares/"
 SITE_NAME = "Squares"
-BEST_RENDERING = PACKING / "atlas" / "known-best" / "rendering" / "n-011.svg"
+#: The atlas the Figure 1 caption sends a reader to browse, linked as a directory.
+ATLAS = PACKING / "atlas" / "known-best"
+BEST_RENDERING = ATLAS / "rendering" / "n-011.svg"
 # The atlas composite of every known-best packing, shown as Figure 1 and served
 # beside the page rather than inlined: the PNG is the image, the PDF the link.
 #: The composite travels with the page: the SVG the figure shows, the PDF it links for
@@ -296,15 +303,62 @@ GENERATOR = PACKING / "src" / "sqpack" / "fractional" / "generate.py"
 THIRDPARTY = CASE / "thirdparty" / "README.md"
 
 
-def repo_file(path: Path) -> str:
-    """The file's URL on main; a path outside the repository has no such URL."""
+@cache
+def link_revision() -> str:
+    """The commit the page's repository links name: the one the page is built from.
+
+    Read from the checkout at render time, not pinned. A pinned revision is right on the
+    day it is cut and wrong after the next merge that touches a linked file, and every
+    merge would then owe the page a republish before its links told the truth. `HEAD`
+    of the checkout the deploy renders from is the commit whose files the page
+    describes, so the links name it, in full, as GitHub's own permalinks do. The edition
+    stamp in the credits stays pinned in `sqpack.release`, because the atlas embeds it
+    and is compared byte for byte against a fresh render; it is the edition's label,
+    where this is the build's identity, and the two are allowed to differ. Where git
+    cannot answer (a source tarball) the edition's revision stands in.
+    """
+    found = subprocess.run(
+        ("git", "rev-parse", "HEAD"), cwd=REPO, capture_output=True, text=True, check=False
+    )
+    revision = found.stdout.strip()
+    if found.returncode != 0 or not re.fullmatch(r"[0-9a-f]{40}", revision):
+        return PUBLICATION_REVISION
+    return revision
+
+
+def repo_file(path: Path, revision: str | None = None) -> str:
+    """The file's URL at the commit the page is built from; none outside the repository.
+
+    A permalink, not a branch link: `blob/main/` names whatever is on `main` when the
+    reader clicks. A path that does not exist at the linked commit is a link that 404s
+    from the day it is published, so a test checks each linked path against the
+    revision through git; the renderer itself does not, so that a render never depends
+    on more history than the deploy's shallow checkout has.
+
+    `revision` is for the documents that are checked in: a claim document that named
+    the build commit would change with every commit and fail its own drift check
+    forever, so those name the edition's revision instead, through `edition_file`.
+    """
     try:
         relative = path.resolve().relative_to(REPO)
     except ValueError:
-        raise SystemExit(
-            f"{path} is outside the repository and cannot be linked on main"
-        ) from None
-    return f"{REPO_URL}/blob/main/{relative.as_posix()}"
+        raise SystemExit(f"{path} is outside the repository and cannot be linked") from None
+    # GitHub serves a directory under `tree/` and a file under `blob/`, and redirects
+    # the other way round; the canonical one is written so no link is a redirect.
+    kind = "tree" if path.is_dir() else "blob"
+    return f"{REPO_URL}/{kind}/{revision or link_revision()}/{relative.as_posix()}"
+
+
+def edition_file(path: Path) -> str:
+    """The file's URL at the edition's pinned revision, for documents that are checked in.
+
+    The verifiable-claim documents and the proof card are generated, committed, and
+    compared byte for byte with a fresh render, so their links have to be stable between
+    editions; `sqpack.release.PUBLICATION_REVISION` is bumped when an edition is cut
+    and they are regenerated with it. The page itself is not checked in and names the
+    commit it is built from.
+    """
+    return repo_file(path, PUBLICATION_REVISION)
 
 
 def site_file(path: Path) -> str:
@@ -1272,6 +1326,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "BEST_URL": BEST_URL,
         "BEST_SOURCE": BEST_SOURCE,
         "BEST_RENDER_URL": repo_file(BEST_RENDERING),
+        "ATLAS_URL": repo_file(ATLAS),
         "TRUMP_SVG": best_packing_svg(),
         "NUMBER_LINE_MARKS": number_line_marks(facts, headline),
         "PRIOR_X": f"{line_x(float(PRIOR_LOWER)):.0f}",

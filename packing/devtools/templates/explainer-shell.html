@@ -283,10 +283,15 @@ body {
    beside it: this stylesheet is written in classes against a vendor written in types,
    which loses by default and says nothing when it does. */
 .cert-page .colophon {
+  /* Set off by a rule, because this is now the only place the typesetting is credited:
+     the running foot used to repeat it under every printed page and no longer does, so
+     the note at the end has to read as a closing one rather than as a last paragraph. */
+  border-block-start: 1px solid var(--kpress-doc-border);
   color: var(--kpress-doc-muted);
   font-family: var(--kpress-font-sans);
   font-size: var(--kpress-font-size-tiny);
   margin-block: 2.5rem 0;
+  padding-block-start: 1.1rem;
 }
 
 /* The list bullet, centred on the line it marks rather than offset from a type size.
@@ -603,12 +608,27 @@ body {
        canvas 3.6in / img 5.5in   tallest block 6.79in   13 pages
        canvas 3.2in / img 5.0in   tallest block 6.29in   12 pages
 
-     Taking the last: twelve pages, the same as the old 11pt setting, with the 80-column
-     measure bought rather than paid for. The atlas still takes a page of its own, which
-     is right for a hundred-cell reference grid and is what its own standalone PDF is
-     for; what changes is that the other six figures now sit with their text. */
+     Taking the last for the canvases: the other six figures now sit with their text
+     instead of ending a page early.
+
+     The atlas is the exception, and it gets its own cap. It takes a page of its own
+     whatever size it is -- a hundred cells of detail is what the figure is for -- so the
+     only question is how much of that page it uses, and at 5in the answer was 69% of the
+     column: a 398px image in 576px of measure, with 164px of the page left blank under
+     the caption. Measured at the print column, image then whole figure against the 816px
+     the content box holds:
+
+       img 5.0in    image 398x480   figure 652px   80% of the box
+       img 6.0in    image 477x576   figure 748px   92%
+       img 6.5in    image 517x624   figure 796px   98%   <- here
+       img 7.0in    image 557x672   figure 844px   overflows by 28px
+
+     6.5in is the last one that fits. Past it the image stops growing -- 557px is where
+     `max-width` binds -- while the figure keeps overflowing a page it cannot be placed
+     on, because `break-inside: avoid` cannot split it and nothing else can either. The
+     20px of headroom at 6.5in is the margin for a caption that reflows by a line. */
   .stage canvas { max-height: 3.2in; width: auto; max-width: 100%; margin-inline: auto; }
-  .cert-page figure img { max-height: 5in; width: auto; max-width: 100%; }
+  .cert-page figure img { max-height: 6.5in; width: auto; max-width: 100%; }
 
   /* Link targets are deliberately not spelled out after each link: a URL set in
      the middle of a sentence breaks the line badly and reads worse than the
@@ -766,14 +786,42 @@ body {
     --kpress-print-font-size: 12pt;
   }
 
-  /* No folio on the title page. kpress prints its credit and the page number in the
-     `@page` margin boxes on every page, which is right for a body page and wrong under
-     a title block that already carries the edition and the repository. Chromium 141
-     supports margin boxes and `@page :first` -- verified, not assumed; the advice that
-     Blink ignores them is out of date. */
-  @page :first {
+  /* The running foot carries the folio and nothing else.
+
+     kpress puts its own credit in `@bottom-left` on every page -- `--kpress-print-footer`
+     is the string "Formatted by KPress" -- and the page number in `@bottom-right`. The
+     credit is right for a page kpress publishes and wrong for a paper: it is the same
+     eighteen characters under all thirteen pages, saying at the foot of the argument what
+     the colophon already says once at the end of it. The folio stays, because a paper's
+     pages need numbering.
+
+     Chromium 141 supports margin boxes and `@page :first` -- verified, not assumed; the
+     advice that Blink ignores them is out of date. */
+  @page {
     @bottom-left { content: none; }
+  }
+
+  /* No folio on the title page either: it already carries the edition and the
+     repository, and a page number under a title block reads as a body page. */
+  @page :first {
     @bottom-right { content: none; }
+  }
+
+  /* The footnotes are the paper's sources, not an aside, so they are set in the text
+     colour rather than the muted one kpress gives them. */
+  .cert-page .kpress-footnotes {
+    color: var(--kpress-doc-text);
+  }
+
+  /* Their numbers in the sans the entries are set in. kpress replaces the list marker in
+     print with `content: counter(...)` on `li::before` and sets that in
+     `--kpress-font-prose`, which is right for a numbered list inside serif prose and
+     wrong here: the footnote block is sans throughout, so its own numbers were the one
+     serif thing in it. Scoped to the footnotes for that reason -- an ordered list in the
+     body keeps serif figures, because the text beside them is serif. */
+  .cert-page .kpress-footnotes ol > li::before {
+    font-family: var(--kpress-font-sans);
+    font-feature-settings: var(--kpress-font-features-sans);
   }
 }
 
@@ -1366,10 +1414,6 @@ window.addEventListener('afterprint', repaint);
     if (record && location.hash !== '#' + slug) history.replaceState(null, '', '#' + slug);
   }
   switches.forEach(b => b.addEventListener('click', () => show(b.dataset.cert, true, b)));
-  /* The PDF chip prints the page. The print stylesheet turns it into a document:
-     one certificate, no controls, link targets spelled out. */
-  const printer = document.querySelector('[data-print="page"]');
-  if (printer) printer.addEventListener('click', e => { e.preventDefault(); window.print(); });
   /* Only a hash naming a certificate switches the page. A footnote jump sets
      the hash too (#fn-3, #fnref-3), and it leaves the selection alone. */
   window.addEventListener('hashchange', () => {

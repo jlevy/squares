@@ -554,6 +554,14 @@ def least_covered_weight(cert, c, s, integer_weights, scale, *, audit=0, rng=Non
         )
         U = sum(u for u, _ in box) / len(box)
         V = sum(v for _, v in box) / len(box)
+        # Both halves of that claim are checked, not only the second. The cell's
+        # midpoint would not do here: a cell can meet F while its midpoint lies
+        # outside F, and a sum taken there confirms the cell's constant weight
+        # without exhibiting a placement that attains it.
+        assert i == 0 or u_breaks[i - 1] < U
+        assert i == len(u_breaks) or u_breaks[i] > U
+        assert j == 0 or v_breaks[j - 1] < V
+        assert j == len(v_breaks) or v_breaks[j] > V
         X, Y = c * U - s * V, s * U + c * V
         assert h <= X <= L - h
         assert h <= Y <= L - h

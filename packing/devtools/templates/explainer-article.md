@@ -17,7 +17,6 @@ per certificate; the prose is filled once, with the headline certificate's value
 <div class="doc-links screen-only">
   <a class="chip" href="{{SOURCE_URL}}" title="The Markdown this page is rendered from">MD</a>
   <a class="chip" href="t-018-explainer.pdf" title="The typeset PDF of this page">PDF</a>
-  <button class="chip" type="button" data-print="page" title="Print this page">Print</button>
   <a class="chip" href="{{REPO_URL}}" title="The project on GitHub"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>PROJECT</a>
 </div>
 
@@ -42,42 +41,47 @@ This paper presents a new lower bound on a long-standing open geometry problem: 
 disjoint unit squares, free to rotate, cannot fit in a
 ${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.
 
-The computer-assisted proof was found via an automated research framework run over a few
-days. The witness used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted
-points in the container and selects a net of {{HEADLINE_N_DIRECTIONS}} rationally
-parameterized directions. Five exact conditions and a pigeonhole-style argument then
-imply the claim.
+The computer-assisted proof was found via an automated research framework.
+This is one of {{N_RESULTS}} new results of the framework so far.
+The witness used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted points in
+the container and selects a net of {{HEADLINE_N_DIRECTIONS}} rationally parameterized
+directions. Five exact conditions and a pigeonhole-style argument then imply the claim.
 
 This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
-open case of the square packing problem. The previous bound, {{PRIOR_LOWER_DEC}}, was
-Stromquist’s in {{PRIOR_YEAR}}.[^stromquist]
+open case of the square packing problem.
+The previous bound, {{PRIOR_LOWER_DEC}}, was Stromquist’s in
+{{PRIOR_YEAR}}.[^stromquist]
 
-The search, the checking, and the record are the work of agents under human direction
-rather than human derivation.
+The search, the checking, and the record are the work of agents following a flexible but
+defined research framework, available in
+[the GitHub repository](https://github.com/jlevy/squares).
+The atlas of best known packings for every $n$ from 1 to 100 in Figure 1 came from the
+same research agenda and currently includes {{N_STARRED}} new lower bounds.
 
-This is one of {{N_RESULTS}} results registered over a few days, all within the same
-automated research framework. The work sits inside a broader survey of the research
-frontier of this problem. The atlas of best known packings for every $n$ from 1 to 100
-in Figure 1 came from the same program, which proved {{N_STARRED}} of the lower bounds
-shown there.
+The repository is much larger than a single proof: it includes a comprehensive survey of
+previous research, the atlas of packings, a hypothesis registry, an experiment ledger,
+exact verifiers, and a retention gate that labels results according to epistemic status
+(levels of verification, confirmation, and significance).
+Work is planned on a regular cadence (such as 8 to 12 hours) and broken into several
+defined workflows (research survey, correctness verification, research loop,
+optimization loop, and a few others).
 
-Most of the research work is not the proof but the process and artifacts that produced
-it. The repository includes a comprehensive survey of the research frontier, a
-hypothesis registry, an experiment ledger, exact verifiers, a research loop, an
-optimization loop for efficiency, and a retention gate that keeps results only when
-independent validation methods agree.
+The research framework itself is not specific to square packing.
+It uses a few tools to streamline the process, notably
+[tbd](https://github.com/jlevy/tbd) for task tracking,
+[Softschema](https://github.com/jlevy/softschema) for structuring results, and
+[Practical Prose](https://github.com/jlevy/practical-prose) to improve writing quality.
 
-None of this is particular to square packing. It is a reusable framework for iterative
-research on creative mathematical and technical problems. The framework uses a few tools
-to streamline the process, notably [tbd](https://github.com/jlevy/tbd),
-[softschema](https://github.com/jlevy/softschema), and
-[Practical Prose](https://github.com/jlevy/practical-prose).
+Every file in the repository (including this paper) is agent written.
+The research framework’s structure had high-level human direction.
+Similarly structured research frameworks are likely useful for creative mathematical or
+technical problems of other sorts.
 
 ## The Square Packing Problem
 
-The **square packing problem** asks, for each $n$, for $s(n)$, the side of the smallest
-square that holds $n$ unit squares with disjoint interiors, the squares free to
-rotate.[^survey] The value is known for every $n \le 10$. Stromquist settled
+The **square packing problem** asks, for each $n$, for the side $s(n)$ of the smallest
+square that holds $n$ unit squares, which are free to rotate and must have disjoint
+interiors.[^survey] The value of $s(n)$ is known for $n \le 10$. Stromquist settled
 $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
 
 <figure>
@@ -87,7 +91,7 @@ $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
   <span class="tex">s(n)</span> is not yet settled, the best proved lower bound below that. A crimson star marks a lower
   bound this project proved: {{N_STARRED}} of the hundred, this page’s own among them. The full
   results, with every witness and its provenance, are in
-  <a href="https://github.com/jlevy/squares/blob/main/packing/atlas/known-best/">the GitHub repository</a>, and the
+  <a href="{{ATLAS_URL}}">the GitHub repository</a>, and the
   composite is <a href="known-best-1-100.pdf">available as a PDF</a>.</figcaption>
 </figure>
 
@@ -175,7 +179,8 @@ exact sum.
 Suppose eleven unit squares fit in the side-{{L_DEC}} container, and suppose the atoms
 have been chosen so that both of these hold:
 
-- Every unit square that can be placed in the container covers mass at least $1$.
+- Every unit square that can be placed in the container holds mass at least $1$ in its
+  interior.
 - The total mass of all {{N_ATOMS}} atoms is below ${{N}}$.
 
 The second is a single sum:
@@ -184,9 +189,10 @@ $$
 \sum_a w_a \;=\; {{TOTAL_TEX}} \;=\; {{TOTAL_DEC}} \;\lt\; {{N}}
 $$
 
-The eleven squares are disjoint, so no atom is counted twice, and together they cover
-mass at least ${{N}}$. The container holds only ${{TOTAL_DEC}}$. So eleven unit squares
-do not fit.
+Two packed squares may share an edge, and an atom on it lies in both.
+Their interiors are disjoint, so no atom lies in two of them, and together the eleven
+interiors hold mass at least ${{N}}$. The container holds only ${{TOTAL_DEC}}$. So
+eleven unit squares do not fit.
 
 Both conditions are properties of the atoms, not of any packing.
 The rest of the proof makes the first one finite to check.
@@ -219,17 +225,18 @@ reflects onto that arc and covers the same mass.
   </div>
   <div class="fig-choose">{{CERT_TOGGLE}}</div>
   <figcaption><strong>Figure 4. Conditions 1 and 2.</strong> The atoms. Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
-  corners, where a square has least room to move, and thins in the middle. The sites and weights are the optimum
-  of a covering linear program, rationalized. The board holds less mass than eleven disjoint unit squares would
-  need. Condition 2 is that comparison.</figcaption>
+  corners, where a square has least room to move, and thins in the middle. The weights are a rationalized
+  solution of a covering linear program on these sites. The board holds less mass than eleven disjoint unit
+  squares would need. Condition 2 is that comparison.</figcaption>
 </figure>
 
 <!--END:FIGURE-->
 
 ## Every Placement Covers Mass at Least One
 
-The first condition on the atoms, that every placement of a unit square covers mass at
-least $1$, has three continuous parameters, two of position and one of angle.
+The first condition on the atoms, that every placement of a unit square holds mass at
+least $1$ in its interior, has three continuous parameters, two of position and one of
+angle.
 
 The proof makes it finite twice over.
 The angle is snapped to a net of {{N_DIRECTIONS}}
@@ -294,19 +301,24 @@ $$
 
 ## From a Continuum of Angles to {{N_DIRECTIONS}}
 
-Take a unit square at any angle $\varphi$ and let $\theta$ be the nearest net angle.
-A smaller square of side $B$ at angle $\theta$, with the same center, covers no more
-mass than the unit square if it fits inside it.
-So if every placement of the smaller square at a net angle covers mass at least 1, every
-unit square at any angle does too.
+Take a unit square at any angle.
+A quarter turn leaves a square unchanged, so its angle may be taken below $\pi/2$, and
+the net covers only the arc $[0, \pi/4]$. A square whose angle lies past $\pi/4$ is
+therefore first reflected across the container’s diagonal: the image is a unit square in
+the container whose angle $\varphi$ is on the arc, and by Condition 1 it covers the same
+mass. Let $\theta$ be the net angle nearest $\varphi$. A smaller square of side $B$ at
+angle $\theta$, with the same center, covers no more mass than the unit square if it
+fits inside it.
+So if every placement of the smaller square at a net angle covers mass at
+least 1, every unit square at any angle does too.
 It fits exactly when
 
 $$
 B\,(\cos d + \sin d) \;\le\; 1,
 $$
 
-where $d$ is the angle between the two.
-Since $\cos d + \sin d \le 1 + \tan d$ on $[0,\pi/4)$, it is enough that
+where $d$ is the angle between the two, at most half the gap between two consecutive net
+angles. Since $\cos d + \sin d \le 1 + \tan d$ on $[0,\pi/4)$, it is enough that
 
 $$
 B\,(1 + D) \;\lt\; 1, \qquad D \;=\; \max_k \frac{t_{k+1}-t_k}{1+t_k t_{k+1}} \;=\; \max_k \tan\frac{\theta_{k+1}-\theta_k}{2}.
@@ -314,6 +326,17 @@ $$
 
 That is Condition 4, and it couples the two parameters: a coarser net widens the gaps,
 forces $B$ smaller, and makes Condition 5 harder to meet.
+
+The contradiction needs a little more than a fit.
+Two packed squares may share an edge, so the smaller square has to lie in its unit
+square’s *interior*, where no other square reaches.
+It does: its width across the unit square, $B(\cos d + \sin d)$, is $B$ when $d = 0$,
+and $B \lt 1$ because $B(1 + D) \le 1$ with $D \gt 0$; when $d \gt 0$ it is
+$B\cos d\,(1 + \tan d) \lt B(1 + D) \le 1$, since then $\cos d \lt 1$. So the interior
+of every unit square at any angle holds mass at least $1$, as the budget assumed.
+Nothing there needed the inequality in Condition 4 to be strict, so the strict form the
+verifier tests is a sufficient condition rather than a necessary one, and both
+certificates meet it.
 
 Each angle is carried as a rational half-tangent, $\theta_k = 2\arctan t_k$, so that
 
@@ -428,13 +451,17 @@ costs.
 <div class="boxed-text">
 
 Take any packing of eleven unit squares in the side-{{L_DEC}} container.
-Each square, whatever its angle, contains a side-$B$ square $Q_i$ with the same center
-at one of the {{N_DIRECTIONS}} net angles.
-That is Condition 4.
-
-Because Condition 4 is a *strict* inequality, each $Q_i$ sits inside its unit square’s
-interior, so the eleven are disjoint and no atom is counted twice.
-Each covers mass at least $1$, which is Condition 5. Then
+Reflect across the container’s diagonal each square whose angle lies past $\pi/4$, so
+that every angle is on the arc from $0$ to $\pi/4$ the net covers (Condition 3). Each
+square then contains a side-$B$ square $Q_i$ with the same center at the nearest net
+angle, inside the unit square’s interior: the mismatch $d$ of the two angles has
+$\tan d \le D$, and Condition 4 makes $B(\cos d + \sin d) \lt 1$ for every such $d$.
+Each $Q_i$ covers mass at least $1$, which is Condition 5. Now reflect back each square
+that was reflected, and $Q_i$ with it.
+$Q_i$ still lies in its own unit square’s interior, and by Condition 1 it still covers
+mass at least $1$. The unit squares have disjoint interiors, so the eleven $Q_i$ are
+disjoint and no atom is counted twice.
+Then
 
 $$
 {{N}} \;\le\; \sum_{i=1}^{{{N}}} \mu(Q_i) \;\le\; \mu\!\left([0,L]^2\right) \;=\; {{TOTAL_TEX}} \;=\; {{TOTAL_DEC}} \;\lt\; {{N}},
@@ -445,26 +472,30 @@ packing exists, and $s({{N}}) \ge {{L_FRAC}}$.
 
 </div>
 
-With $\le$ in Condition 4, two shrunken squares could share an atom on a common
-boundary, count it twice, and add up to more than the container holds.
-
 ## Generator and Verifier
 
-The atoms are solved for, not placed by hand: they are a rationalized optimum of the
-covering linear program
+The atoms are solved for, not placed by hand.
+The sites $A$ are fixed in advance, in orbits of $\mathbf{D}_4$, and the weights, one
+per orbit, come from the covering linear program
 
 $$
-\tau^*(L,B) \;=\; \min_{w \,\ge\, 0}\; \sum_a w_a \quad\text{subject to}\quad \sum_{a \in Q} w_a \;\ge\; 1 \;\;\text{ for every placement } Q,
+\tau^*(A, \Theta; L, B) \;=\; \min_{w \,\ge\, 0}\; \sum_{a \in A} w_a \quad\text{subject to}\quad \sum_{a \in Q} w_a \;\ge\; 1 \;\;\text{ for every placement } Q,
 $$
 
-with one constraint per placement.
-Placements form a continuum, so constraints are generated as needed: the event-cell
-sweep that decides Condition 5 finds a placement whose mass falls short, and it becomes
-a new constraint. The sweep is the separation oracle.
+with one constraint per placement of a side-$B$ square at a direction of the net
+$\Theta$. Placements form a continuum, so constraints are generated as needed: the
+event-cell sweep that decides Condition 5 finds a placement whose mass falls short, and
+it becomes a new constraint.
+The sweep is the separation oracle.
 
-A certificate exists exactly when $\tau^* \lt n$. Since $\tau^*$ depends on $L$ and $B$
-alone, an optimum that lands on a round number is a sign of a bug, not a result: the
-target never enters the program.
+Condition 1 holds by construction, Condition 5 is feasibility in this program, and
+Condition 2 is a bound on its objective, so on a net and shrink that satisfy Conditions
+3 and 4, a certificate on these sites exists when $\tau^* \lt n$. The target $n$ never
+enters the program; it is compared with the optimum afterwards.
+What the certificate carries is not that optimum but a rational point beside it: the
+solver’s weights, inflated slightly and rounded up to multiples of ${{SCALE}}$ so that
+every constraint holds in exact arithmetic.
+The verifier proves that point feasible, not minimal.
 
 The search runs in floating point.
 None of it is part of the proof: the [generator]({{GENERATOR_URL}}) writes the
@@ -472,8 +503,12 @@ certificate to a file, and the [verifier]({{VERIFIER_URL}}) decides Conditions 1
 5 on it in exact rational arithmetic.
 A wrong linear program will be rejected by the verifier.
 
-A [self-contained third-party check]({{THIRDPARTY_URL}}), one file on Python’s standard
-library, decides the {{DEFAULT_L_FRAC}} certificate without trusting anything else here.
+A [first-party package for third-party checking]({{THIRDPARTY_URL}}) gathers what an
+outside check needs: the theorem written out, the {{DEFAULT_L_FRAC}} certificate as
+plain data, and a one-file verifier on Python’s standard library that decides it without
+importing anything else from the repository.
+It decides the looser of the two bounds, not the headline one, and since this project
+wrote every file in it, it is not itself a third-party check.
 
 <!--BEGIN:CLAIM-->
 

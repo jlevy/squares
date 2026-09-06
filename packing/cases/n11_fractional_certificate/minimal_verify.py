@@ -124,6 +124,16 @@ def clip(polygon, bound, *, above):
     return output
 
 
+def doubled_area(polygon):
+    """Twice the area of a polygon, exactly; zero when it is a point or a segment."""
+    return abs(
+        sum(
+            polygon[k][0] * polygon[k - 1][1] - polygon[k - 1][0] * polygon[k][1]
+            for k in range(len(polygon))
+        )
+    )
+
+
 def sweep(atoms, weights, half, side, tangent):
     """Least mass a reachable placement covers at one net direction, and the cells scored."""
     square = tangent * tangent
@@ -166,7 +176,10 @@ def sweep(atoms, weights, half, side, tangent):
         strip = clip(
             clip(domain, u_events[index], above=True), u_events[index + 1], above=False
         )
-        if len(strip) < 3:
+        # A strip with no area is the domain's boundary seen edge-on, from a column that
+        # lies wholly outside it; the cells it would score contain no placement, and the
+        # vertex count cannot tell, since clipping repeats a vertex that sits on the line.
+        if doubled_area(strip) == 0:
             continue
         floor, roof = min(v for _, v in strip), max(v for _, v in strip)
         first = max(0, bisect_right(v_events, floor) - 1)
@@ -183,8 +196,29 @@ def sweep(atoms, weights, half, side, tangent):
         refuse("the centre domain reached no event cell")
 
     # The prefix sums are the one clever step here; a direct sum at the witness is not.
+    # The witness is a placement, so it has to lie in the centre domain as well as in
+    # the least cell: the cell's midpoint would confirm the cell's constant mass but can
+    # lie outside the domain when the domain's slanted edge cuts the cell. The domain
+    # clipped to the cell's closure is a convex polygon, and the average of its vertices
+    # is strictly inside it -- and so inside the open cell and the domain -- whenever it
+    # has area. A least cell that meets the domain in no area at all touches it along
+    # its boundary only, which the area test above keeps out of the scoring; so every
+    # scored cell, the least one included, has a witness, and its absence is refused.
     i, j = spot
-    centre = ((u_events[i] + u_events[i + 1]) / 2, (v_events[j] + v_events[j + 1]) / 2)
+    piece = clip(clip(domain, u_events[i], above=True), u_events[i + 1], above=False)
+    swapped = [(v, u) for u, v in piece]
+    swapped = clip(clip(swapped, v_events[j], above=True), v_events[j + 1], above=False)
+    piece = [(u, v) for v, u in swapped]
+    if doubled_area(piece) == 0:
+        refuse("the least cell meets the centre domain only on its boundary")
+    centre = (sum(u for u, _ in piece) / len(piece), sum(v for _, v in piece) / len(piece))
+    inside_u = u_events[i] < centre[0] < u_events[i + 1]
+    inside_v = v_events[j] < centre[1] < v_events[j + 1]
+    if not (inside_u and inside_v):
+        refuse("the witness is not strictly inside the least cell")
+    x, y = cosine * centre[0] - sine * centre[1], sine * centre[0] + cosine * centre[1]
+    if not (low <= x <= high and low <= y <= high):
+        refuse("the witness is not a placement inside the container")
     direct = sum(
         weight
         for index, weight in enumerate(weights)
