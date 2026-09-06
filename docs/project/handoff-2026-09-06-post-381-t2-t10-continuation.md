@@ -1,7 +1,8 @@
 # Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10
 
-Status: **bound launch contract; active research remains held until the final local
-gates pass and the coordinator releases the four acknowledged roles.**
+Status: **launch authorization suspended; active research remains held until the
+pre-release umbrella gate is terminal and the coordinator binds a replacement
+authorization to the exact validated, pushed pre-launch head.**
 
 Continue Agenda 024 from active portfolio minute 120 through minute 600 under this
 addendum. It reconciles the two post-T+2 readiness audits and controls execution through
@@ -29,6 +30,15 @@ If these documents conflict about work after T+2, use this order:
 3. Agenda 024, then the applicable manager agenda.
 4. A later coordinator gate packet, but only for work that the preceding gate was
    authorized to choose.
+
+Item 1 protects scientific evidence and claim scope; it does not make an author packet’s
+proposed future scheduling dependencies immutable.
+The frozen BC-242 author packet’s combined BC-243 prerequisite—an exact a.e.-depth
+verifier and a continuum primal-coverage guard—is superseded for post-T+2 scheduling
+only. BC-243 requires the exact a.e.-depth verifier, while BC-244 owns the continuum
+primal-coverage guard.
+The BC-242 weak-duality theorem and every limitation on strong duality, attainment,
+singular primals, numerical endpoints, and primal semantics remain unchanged.
 
 The addendum changes no frozen hash, experimental observation, or proof status.
 New work writes fresh paths.
@@ -114,15 +124,34 @@ observed. Do not infer the PR #89 merge commit from its former open head.
 | Floating-reviewer identity and acknowledgement UTC | `/root/closure_manager/bc241_source_reviewer`; `2026-09-06T09:42:33Z` |
 | PR #93 | MERGED as `3122c49766e7fc70c8cb299bd8b6b09558447d8a` at `2026-09-06T09:06:10Z` |
 | PR #94 | OPEN and `DIRTY` at `9c82dc2ac5fecfa94d9388ef61c6b1d4bc21169b` |
-| Continuation release-authorization UTC | `2026-09-06T09:43:25Z` |
+| Prior continuation release-authorization UTC | `2026-09-06T09:43:25Z`; suspended by `think-r60v` and unusable for restart |
+| Replacement current-head authorization | Pending coordinator binding to the exact validated, pushed pre-launch head after every umbrella dependency is terminal |
+| Actual role restart UTCs | Pending; the first microreceipts record them only after lane release |
 
 <!-- END COORDINATOR BINDING -->
 
-At `2026-09-06T09:43:25Z`, `/root` recorded: “I bind the four roles, frozen inputs,
-clocks, execution graph, and fresh output paths in this addendum.
-I alone will move a shared gate or claim.”
+At `2026-09-06T09:43:25Z`, `/root` recorded the now-historical acknowledgement: “I bind
+the four roles, frozen inputs, clocks, execution graph, and fresh output paths in this
+addendum. I alone will move a shared gate or claim.”
 The three delegated acknowledgements are the verbatim statements in the role table
 below, tied to the identities and UTCs above.
+
+### Authorization Suspension Receipt
+
+This current release receipt suspends and revokes the `2026-09-06T09:43:25Z`
+authorization under `think-r60v`. It authorizes no T+2 command or restart at this or any
+descendant commit. Active portfolio time remains held at minute 120: all recorded wall,
+process, role, agent, and active-clock values remain historical and held, with nothing
+backdated or advanced.
+
+After every pre-release blocker is terminal, the candidate is validated and pushed, and
+the role acknowledgements are current, the coordinator must bind a replacement
+authorization to that exact pre-launch head and close the `think-r60v` umbrella gate.
+Only then may the roles restart.
+Their first microreceipts record the authorized head and actual restart UTCs after those
+restarts occur.
+No prior acknowledgement or authorization UTC can substitute for that new
+binding.
 
 The staged cooperative-stop manifest is:
 
@@ -133,28 +162,35 @@ The staged cooperative-stop manifest is:
 | `packing/tests/test_fractional_cutting.py` | `56bd0f1a4c20e24a5459af87372ac5bd14a50fbdfa704544cfdad47a4ed12c43` |
 | `packing/tests/test_run_fractional_cutting.py` | `25769fabee0aa19642d764d2dd5bf70369000232780bcc2d52eba657d9ff6084` |
 
-The release-authorization UTC is a committed not-before boundary, not the actual T+2
-restart. It authorizes the launch transaction below but does not start the active
-portfolio clock. Actual manager and reviewer restart UTCs belong in their first
-microreceipts, not in this binding block.
+The prior release-authorization UTC remains provenance for the earlier launch
+transaction, not authority for a T+2 restart.
+Actual manager and reviewer restart UTCs belong in their first microreceipts after the
+replacement current-head authorization and lane release, not in this historical binding
+block.
 
 ## Launch Release Sequence
 
 Before active research starts, the coordinator must:
 
-1. Create the new branch from the bound final `origin/main` base.
-   Replace every binding token that is then observable, including the
-   release-authorization UTC, new-branch transport head, and all four role
-   acknowledgements; only the new pull-request URL may remain unfilled.
-2. On the new branch, run the focused cooperative-stop checks recorded by `think-qke4`
-   and the repository’s local edit gate.
-   Both must pass.
-3. Commit and push the staged stack durably, then open the continuation pull request.
-4. Record the observed pull-request URL, rerun the local focused and edit gates, commit
-   the fully bound addendum, and push that exact binding commit to the open pull
-   request.
-5. Confirm the four leg-02 output paths are still absent and no earlier scientific
-   process is live, then release the two managers and floating reviewer.
+1. Integrate and disposition every current pre-release blocker without advancing active
+   time. Add any later blocker to the release umbrella before either T+2 lane can become
+   ready.
+2. Verify in tbd that both T+2 lane beads depend on `think-r60v` and that `think-r60v`
+   depends on every pre-release blocker.
+   Require every umbrella dependency to be terminal and all four role acknowledgements
+   to be current.
+3. On the exact integrated candidate, run the focused cooperative-stop checks recorded
+   by `think-qke4` and the repository’s local edit gate.
+   Both must pass; commit and push the complete release stack durably to the open
+   continuation pull request.
+   Confirm the four leg-02 output paths are still absent and no earlier scientific
+   process is live.
+4. Bind the replacement authorization to that exact pushed pre-launch head, then mark
+   `think-r60v` terminal in the coordinator-owned transaction.
+5. Release the two managers and floating reviewer.
+   The lanes start only now; the first microreceipts record the authorized head and
+   actual role restart UTCs, and the shared active clock starts at the latest
+   required-role restart.
 
 Do not wait for hosted CI to turn green before that first release.
 Hosted checks run concurrently with the research block after the local focused and edit
@@ -189,13 +225,17 @@ The coordinator alone mutates tbd or shared generated records.
 No manager or worker pushes, merges, rebases, changes a budget, or reallocates an ID.
 
 Each manager and the floating reviewer records its actual restart UTC in its first
-microreceipt. The first coordinator receipt records the effective T+2 clock start.
+microreceipt together with the exact authorized pre-launch head.
+The first coordinator receipt records the effective T+2 clock start at the latest
+required-role restart.
 Every first continuation microreceipt also binds the wall authorization
 `2026-09-06T08:22:36Z`, eight-hour target `2026-09-06T16:22:36Z`, and outer deadline
 `2026-09-06T18:22:36Z`. These fixed wall-clock controls neither start nor advance active
-portfolio time. That time is no earlier than the committed release-authorization UTC,
-every required role’s acknowledgement UTC, completion of the local focused and edit
-gates, the durable branch push, and creation of the pull request.
+portfolio time. Each first microreceipt must also bind the replacement authorization UTC
+and its actual role restart UTC; the suspended `2026-09-06T09:43:25Z` authorization does
+not suffice. Active time is no earlier than the replacement authorization UTC, every
+required role’s acknowledgement UTC, completion of the local focused and edit gates, the
+durable branch push, and creation of the pull request.
 If the contexts start at different times, the shared clock starts at the latest
 required-role restart; no receipt backdates it into the launch transaction.
 
@@ -247,8 +287,8 @@ Do not select substitute work from the repository-wide ready list.
 | Child | Boundary | Bound work |
 | --- | --- | --- |
 | `think-5pj8` | Pre-release; terminal | Land PR #89 and cut `codex/post-381-t2-t10` without starting the active clock. |
-| `think-yjh8` | Pre-release | Complete this launch addendum and role contract. |
-| `think-qke4` | Pre-release; terminal | Implement and verify the opt-in cooperative fractional stop outside active research time. |
+| `think-yjh8` | Pre-release blocker | Complete this launch addendum and role contract. |
+| `think-qke4` | Pre-release blocker; terminal | Implement and verify the opt-in cooperative fractional stop outside active research time. |
 | `think-6yx2` | T+2 to T+4 | Manage the fractional lane. |
 | `think-gab1` | T+2 to T+4 | Manage the closure lane. |
 | `think-vniz` | T+4 gate | Hold and decide BC-220. |
@@ -259,27 +299,49 @@ Do not select substitute work from the repository-wide ready list.
 | `think-y1zc` | T+8 to T+10 | Manage the closure lane. |
 | `think-2jzh` | T+10 landing | Land the intermediate checkpoint and cold-agent handoff. |
 | `think-f5t7` | T+2 through T+10 | Monitor PRs #93 and #94 and integrate only commits landed on `origin/main`. |
-| `think-g024` | Pre-release blocker | Reconcile the n=11 Lean formalization spike before continuation release. |
-| `think-ualx` | Pre-release; terminal | Correct the fractional-certificate proof scope and checker trust boundary; integrated at `7e932f1b`. |
+| `think-g024` | Pre-release blocker; terminal | Reconcile the n=11 Lean formalization spike before continuation release. |
+| `think-ualx` | Pre-release blocker; terminal | Correct the fractional-certificate proof scope and checker trust boundary; integrated at `7e932f1b`. |
 | `think-i6q1` | Pre-release blocker | Harden continuation state, ownership, clocks, and review supersession. |
 | `think-a70y` | Longer-term; nonblocking | Design a proof-producing Condition 5 arrangement receipt. |
 | `think-283c` | Pre-release blocker | Reconcile the final integration audit before the T+2 release. |
-| `think-57kj` | Pre-release; pending | Audit and disposition the dilation corollary and possible sharper supremum bound above 3.81. |
+| `think-57kj` | Pre-release blocker; pending | Audit and disposition the dilation corollary and possible sharper supremum bound above 3.81. |
+| `think-r60v` | Pre-release umbrella gate | Suspend the stale authorization and bind both T+2 lanes to one structural release gate. |
+| `think-trn6` | Pre-release blocker | Supersede only BC-242’s obsolete combined BC-243 scheduling dependency. |
+| `think-ntim` | Longer-term; nonblocking | Price the final integration theorem, BC-244 duality obligations, and assurance work. |
 
-Before either lane restarts, `think-yjh8`, `think-g024`, `think-i6q1`, `think-283c`, and
-`think-57kj` must be terminal; `think-qke4` and `think-ualx` are already terminal.
-The two T+2-to-T+4 lane beads require the addendum, and the fractional lane also
-requires the cooperative-stop implementation.
+The current nonterminal blockers observed for the umbrella are `think-yjh8`,
+`think-i6q1`, `think-283c`, `think-57kj`, and `think-trn6`; `think-qke4`, `think-g024`,
+and `think-ualx` are satisfied terminal prerequisites.
+Both T+2-to-T+4 lane beads, `think-6yx2` and `think-gab1`, must depend on `think-r60v`,
+and `think-r60v` must depend on every current pre-release blocker.
+Any blocker added before release must join that umbrella before either lane can become
+ready. The coordinator owns these tbd edges and the terminal disposition.
+The fractional lane also requires the cooperative-stop implementation.
 Both lane beads feed the T+4 gate.
 The T+4 gate bead `think-vniz` also requires the existing `think-jeyp` hashed
 provisional packet. The coordinator must record that edge with
 `tbd dep add think-vniz think-jeyp` before release.
 `think-jeyp` is a prerequisite, not a direct child of this continuation epic.
 The two T+4-to-T+8 lane beads feed the T+8 gate, and the two final lane beads feed the
-T+10 landing. `think-a70y` is explicitly longer-term and cannot block release or consume
-this continuation’s active time.
+T+10 landing. `think-a70y` and `think-ntim` are explicitly longer-term satellites and
+cannot block release or consume this continuation’s active time.
 `think-f5t7` runs as coordinator work across the whole continuation and never imports an
 open pull-request head.
+
+### Future Integration and Assurance Boundary
+
+Before any future exact integration theorem or global optimality claim, every admissible
+non-Trump survivor must be represented, priced, and discharged.
+If BC-244 opens, its packet must explicitly analyze strong duality and primal and dual
+optimizer attainment, or retain each as an unresolved obligation; numerical primal-dual
+agreement cannot replace those proofs.
+
+The terminal `think-g024` Lean spike is a user-requested assurance commitment, not a
+Condition 5 validity prerequisite.
+The `think-a70y` proof-producing Condition 5 receipt remains optional hardening unless a
+later gate promotes it.
+These mathematical scope statements do not undo the operational disposition of either
+bead.
 
 ## Cooperative Fractional Stop
 
@@ -455,7 +517,7 @@ Do not rerun that generator, repeat BC-240, or widen the theorem’s local claim
 
 | Active interval | Fractional lane | Closure lane and floating reviewer |
 | --- | --- | --- |
-| T+2 to T+2:30 | In the first microreceipt, bind the authorization, eight-hour target, outer deadline, and actual restart UTC; launch leg 02 once; bind PID, fresh stems, warm-state hash, and safety flag. | In both first microreceipts, bind the authorization, eight-hour target, outer deadline, and actual restart UTCs; bind reviewer identity, hashes, source drift, and the witness-source hash; launch the one tangent replay. |
+| T+2 to T+2:30 | In the first microreceipt, bind the replacement current-head authorization, eight-hour target, outer deadline, and actual restart UTC; launch leg 02 once; bind PID, fresh stems, warm-state hash, and safety flag. | In both first microreceipts, bind the replacement current-head authorization, eight-hour target, outer deadline, and actual restart UTCs; bind reviewer identity, hashes, source drift, and the witness-source hash; launch the one tangent replay. |
 | T+2:30 to T+3 | Supervise without restart; report completed iterations and properly labelled endpoints. | Complete the tangent replay and independent aggregate/cap arithmetic. |
 | T+3 to T+3:30 | Supervise; if the safe predicate fires, freeze and start only the declared bridge. | Audit selected branch and face calculations and run the three mutations. |
 | T+3:30 to T+4 | Freeze leg-02 outputs or its earlier stop; write `think-jeyp` inside the manager gate packet. | Return the source-distinct packet, make the `max` local-scope disposition, and release the worker. |
