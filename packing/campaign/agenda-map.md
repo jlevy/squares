@@ -2,7 +2,7 @@
 
 # Agenda map
 
-233 agenda commitments across 25 agendas, as declared in each agenda's own frontmatter.
+238 agenda commitments across 26 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **14** ready, **5** tentative, **59** blocked, **41** stopped, **114** complete.
+- **17** ready, **5** tentative, **61** blocked, **41** stopped, **114** complete.
 
-- **14 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-238`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **16 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-238`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -33,6 +33,9 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-018 | `BC-183` | 2 | insight | research | Can the n = 40 admissible cone be characterised on the disjunctive system, so that Goebel's n = 40 packing's… | `think-3yxk` |
 | agenda-018 | `BC-184` | 2 | efficiency | tool_validation | Can the generic interval certifier be wired end to end and reproduce T-009's n = 29 bound through the generic… | `think-4f4d` |
 | agenda-019 | `BC-190` | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and did so 22.7 times… | `think-jgeg` |
+| agenda-023 | `BC-214` | 0 | efficiency | tool_validation | Can the pull-request surface be brought under four minutes without deleting a check, by moving the broad… | `think-doar` |
+| agenda-023 | `BC-216` | 0 | process | tool_validation | What check would have caught the 499 s to 1370 s regression in the week it happened, and does it hold when… | `think-gy30` |
+| agenda-023 | `BC-218` | 0 | efficiency | tool_validation | How much of the gate's remaining wall is sequencing rather than work, and what does it cost to run the… | `think-m5ev` |
 | agenda-025 | `BC-230` | 0 | correctness | research | What exact containment theorem and certificate contract allow every angle cell to use its own largest safe… | `think-c678` |
 | agenda-025 | `BC-232` | 0 | efficiency | research | Can the retained 3.82 primal/dual state be advanced to total covering mass below 11 or exact packing value at… | `think-gmdy` |
 | agenda-025 | `BC-233` | 1 | insight | research | Does an inset-support sweep provide a better seed for n=11 only after its support is released into… | `think-jbat` |
@@ -85,6 +88,8 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-022 | `BC-207` | 2 | `BC-203`, `BC-208` | no | BC-208's class cuts, and a wall at n = 11 for the cover to sit at. BC-200 found no wall: the cutting-plane loop stalled… |
 | agenda-022 | `BC-209` | 2 | `BC-203`, `BC-206` | yes | BC-206, and a priced target. BC-202's run at 138/25 reached 26.464317 on its site set without converging its column… |
 | agenda-022 | `BC-210` | 3 | `BC-203`, `BC-204`, `BC-205`, `BC-206`, `BC-207`, `BC-208`, `BC-209`, `BC-212` | no | — |
+| agenda-023 | `BC-215` | 1 | `BC-214` | no | BC-214, which decides which surface each step belongs to. Skipping work before the two surfaces exist would be… |
+| agenda-023 | `BC-217` | 1 | `BC-214` | no | BC-214, which decides what the full gate is once the surfaces are split. Certifying a tier before its definition… |
 | agenda-024 | `BC-220` | 0 | `BC-230`, `BC-232`, `BC-233`, `BC-240`, `BC-242`, `BC-245` | no | — |
 | agenda-024 | `BC-221` | 0 | `BC-220` | no | — |
 | agenda-024 | `BC-222` | 0 | `BC-221` | no | — |
@@ -147,6 +152,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-020 | completed |  |  |  |  | 1 | 1 |
 | agenda-021 | completed |  |  |  | 2 | 6 | 8 |
 | agenda-022 | active |  |  | 7 |  | 2 | 9 |
+| agenda-023 | active | 3 |  | 2 |  |  | 5 |
 | agenda-024 | active |  |  | 6 |  | 1 | 7 |
 | agenda-025 | active | 3 |  | 7 |  |  | 10 |
 | agenda-026 | active | 3 |  | 7 |  |  | 10 |
@@ -154,6 +160,18 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 ## By program
 
 A program is a line of work that spans agendas; its cells carry one `program` slug. Each is listed in dependency order where `depends_on` gives one and by id otherwise, and its open frontier is the cells not yet terminal.
+
+### `gate-cost`
+
+| agenda | id | state | question |
+| --- | --- | --- | --- |
+| agenda-023 | `BC-214` | ready | Can the pull-request surface be brought under four minutes without deleting a check, by moving the… |
+| agenda-023 | `BC-215` | blocked | Which expensive gate steps re-run when nothing they depend on has changed, and what does skipping… |
+| agenda-023 | `BC-216` | ready | What check would have caught the 499 s to 1370 s regression in the week it happened, and does it… |
+| agenda-023 | `BC-217` | blocked | Can the records gate certify that the full gate actually ran on the commit a block handed over, so… |
+| agenda-023 | `BC-218` | ready | How much of the gate's remaining wall is sequencing rather than work, and what does it cost to run… |
+
+Open frontier: `BC-214`, `BC-215`, `BC-216`, `BC-217`, `BC-218`.
 
 ### `grid-frontier-exact-values`
 

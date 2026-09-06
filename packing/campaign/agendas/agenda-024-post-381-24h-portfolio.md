@@ -17,7 +17,8 @@ agenda:
     agenda owns the frozen base and source packets, shared namespaces and records,
     six four-hour integration gates, all routing decisions, and W10 closeout. The
     research horizon is a replanning checkpoint rather than a stop condition. PR 87
-    owns agenda-023 and BC-214 through BC-218; this portfolio starts at BC-219 and
+    owns agenda-023 and BC-214 through BC-218; its audited green head is integrated
+    directly here for the gate machinery, while this portfolio starts at BC-219 and
     quarantines H-066 through H-069 and exp-065 through exp-069 until that sibling is
     terminal.
   items:
@@ -312,8 +313,11 @@ locally.
 PR #83 is terminal and merged as `663ca37eb622508d9df00c594b8ef11d2c256f55`. The
 portfolio branch is `codex/next-research-strategy`, carried by PR #89 against `main`; it
 includes the later PR #88 merge at `3f8e104372c0c523f53855e769d86fd88ecbf22d` through
-reconciliation merge `6a4b329edcced9155d11921eb5c0df8093c26318`. Only the coordinator
-fetches or reconciles upstream state.
+reconciliation merge `6a4b329edcced9155d11921eb5c0df8093c26318` and directly integrates
+the audited, green PR #87 head `fd7c9d9417f117f023b1e6e179653d6cf5717f41` over planning
+parent `1ed5265ad069b75b1576027e742f59bf8fc603db`. The commit containing this section
+binds the resolved integration.
+Only the coordinator fetches or reconciles upstream state.
 Managers begin from the committed packet and do not need network access.
 
 Run these read-only checks from the repository root immediately before dispatch:
@@ -360,9 +364,9 @@ The launch step itself is tracked as `think-u8vi` under the planning epic; it is
 research cell and belongs to neither manager’s range.
 Write the dispatch record to
 `packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/launch-t-plus-00.md`.
-It carries the current branch HEAD, `origin/main`, current PR #87 head, the six tbd
-claims, allocated H/exp IDs, four agent identities, and the two manager gate paths
-below.
+It carries the current branch HEAD, `origin/main`, the integrated PR #87 source head,
+the six tbd claims, allocated H/exp IDs, four agent identities, and the two manager gate
+paths below.
 
 ## Gate packets and decision paths
 
@@ -694,10 +698,12 @@ accept threshold, independent decision outranks further search.
 
 PR #83 is merged and no longer needs polling.
 During the planning and launch window, the coordinator watches `origin/main`, PR #89,
-and the namespace-owning PR #87. Managers never fetch, merge, rebase, or reinterpret an
-upstream delta. If `origin/main` moves, the coordinator freezes new launches, reconciles
-the portfolio branch, records the old and new base plus the changed paths, and reruns
-the affected preflight checks before another manager starts.
+and the namespace-owning PR #87. PR #87’s exact green head is already integrated, so it
+is not a launch gate; only a later head movement needs a new overlap check.
+Managers never fetch, merge, rebase, or reinterpret an upstream delta.
+If `origin/main` moves, the coordinator freezes new launches, reconciles the portfolio
+branch, records the old and new base plus the changed paths, and reruns the affected
+preflight checks before another manager starts.
 A sibling-head change does not rewrite a historical launch snapshot.
 The coordinator logs its old and new heads, checks namespace and named-input overlap,
 and either records a no-invalidation disposition or appends a superseding manifest.
@@ -712,16 +718,17 @@ The post-freeze checks found only noninvalidating changes:
 | 2026-09-05 after first green PR #89 run | `origin/main`: `663ca37eb622508d9df00c594b8ef11d2c256f55` to `3f8e104372c0c523f53855e769d86fd88ecbf22d` through merged PR #88 | 37 paths in the manifest below | No agenda, BC, H, exp, reserved result, frozen research input, or scientific-verdict collision. The delta changes repository validation, build, explainer, known-best rendering, accounting, and general documentation surfaces. Merged as `6a4b329e`, aligned the clean kpress gitlink, and preserved the scientific spike receipts. The new-base push tier passed 42 of 61 steps with 595 reachable tests passed and 3 deselected in 186.31 seconds. |
 | 2026-09-05 review of PR #89 | PR #87: `5ab10a1ab67255d229af1614170a33dc32e19ce8` to `d5bb223576ca5eaa7e40ad505f601cbf98993ae9` | The `origin/main` merge above plus `AGENTS.md`, `README.md`, `development.md`, `operating-rules.md`, `packing/src/sqpack/campaign/commit_clock.py`, `packing/src/sqpack/campaign/ledger.py`, `packing/tests/test_campaign_tools.py`, and `packing/tests/test_gate_repetition.py` | No agenda, BC, H, exp, exploration, manager-output, or scientific-verdict collision. PR #87’s whole delta against `main` does rewrite a frozen named input: it adds `OR-12` through `OR-15` to `operating-rules.md`, regenerates `AGENTS.md` from it, changes the ledger renderer and the agenda map, and tightens the agent-session schema with a session-gate check. That overlap was already present at the BC-219 freeze and was not recorded; the paragraph below carries the disposition. |
 | 2026-09-05 stabilization audit | PR #87: `d5bb223576ca5eaa7e40ad505f601cbf98993ae9` to `717078ca96823c9c0a631a44fa08a23e9a7bc893` | `development.md`, `packing/campaign/agent-sessions/session-087-agenda022-continuation.md`, `packing/devtools/gate-budgets.yaml`, `packing/tests/test_module_boundaries.py`, and `packing/tests/test_n17_weighted_certificate_successor.py` | No agenda, BC, H, exp, exploration, manager-output, or scientific-verdict collision. The session repair clears PR #89’s current hosted failure, but PR #87 remains red because its new quick-test ceiling still classifies one measured 8.15-second source-copy test as quick. Keep BC-219 at preflight and adopt this delta only after that repair lands through `origin/main`. |
-| 2026-09-05 stabilization repair | PR #87: `717078ca96823c9c0a631a44fa08a23e9a7bc893` to `fd7c9d9417f117f023b1e6e179653d6cf5717f41` | `packing/tests/test_module_boundaries.py` and `packing/tests/test_negative_controls.py` | No research, namespace, manager-output, or named-input collision. The measured 8.15-second source-copy test is now classified as slow and registered in the marker-ownership check. Focused tests passed; hosted `validate`, `macos-portability`, and `packing-required` all pass. PR #87 remains a clean, mergeable draft; adopt the repair only after it reaches `origin/main`. |
+| 2026-09-05 stabilization repair | PR #87: `717078ca96823c9c0a631a44fa08a23e9a7bc893` to `fd7c9d9417f117f023b1e6e179653d6cf5717f41` | `packing/tests/test_module_boundaries.py` and `packing/tests/test_negative_controls.py` | No research, namespace, manager-output, or named-input collision. The measured 8.15-second source-copy test is now classified as slow and registered in the marker-ownership check. Focused tests passed; hosted `validate`, `macos-portability`, and `packing-required` all pass. |
+| 2026-09-05 pre-dispatch integration | PR #87 source head `fd7c9d9417f117f023b1e6e179653d6cf5717f41` integrated over planning parent `1ed5265ad069b75b1576027e742f59bf8fc603db` | Gate-budget and session-gate machinery, operating rules, generated campaign views, validation code and tests; exact hashes below | Integrated directly into PR #89 so upstream timing cannot block commissioning. BC-219 returned to preflight, the named inputs were re-hashed, the generated views were rebuilt, and merged validation must pass before `T+0`. PR #87 retains agenda-023 and its quarantined namespaces; this integration transfers no scientific ownership. |
 
 **PR #87 and the frozen inputs.** `operating-rules.md` is in the BC-219 manifest and PR
-#87 changes it, so PR #87 reaching `main` is a named-input change under this agenda’s
-own rule: BC-219 returns to preflight before another manager starts.
-The coordinator then re-hashes `operating-rules.md` in a superseding manifest,
-regenerates `ledger.md` and `agenda-map.md` with the merged renderer, reads `OR-12`
-through `OR-15` into the common packet, and applies the merged agent-session schema and
-session-gate check to the BC-225, BC-239, and BC-249 closeouts.
-Tracked as `think-erkg`.
+#87 changes it, so direct integration returned BC-219 to preflight under this agenda’s
+own rule. The pre-dispatch manifest below re-hashes `operating-rules.md` and the other
+named inputs, the merged renderer rebuilt `ledger.md` and `agenda-map.md`, and `OR-12`
+through `OR-15` now govern this commissioning block.
+The merged agent-session schema and session-gate check apply to the BC-225, BC-239, and
+BC-249 closeouts. This closes the integration condition tracked as `think-erkg`; passing
+merged validation closes the preflight condition.
 
 The exact PR #88 changed-path manifest is:
 
@@ -863,6 +870,62 @@ Like the spike amendment, this one starts no `T+0`, claims no research cell, and
 allocates no H or exp ID. The scalar 61/16 probe it pre-registers in agenda-025 is an
 option the dispatch record either allocates or declines; either way the record names its
 decision.
+
+### Pre-Dispatch Integration Manifest
+
+The coordinator froze this superseding manifest at `2026-09-06T02:40:31Z` after directly
+integrating PR #87 source head `fd7c9d9417f117f023b1e6e179653d6cf5717f41` over planning
+parent `1ed5265ad069b75b1576027e742f59bf8fc603db`. It supersedes every earlier value for
+a listed path and adds the integrated gate and session surfaces that govern dispatch.
+The commit containing this section binds agenda-024 and the conflict resolutions.
+A later byte change still returns BC-219 to preflight.
+
+```text
+92b615dfbb6de0e4fa9c37ca76270d5f450024a434d8ce42259c1bb44b92d2e0  operating-rules.md
+e8bd93bbd0e95938154f1a32036ed380be2431ef1bccd51d2240a1f79eb054a7  AGENTS.md
+473eef1899dd0fb95fcb54a8d69638fcdc4d98c4c8e0eaa309868707f4bbb02b  development.md
+90fa469aaada59762de1285dc969b51c2c01bb82947aa2c41464aa630c892dc0  docs/project/reviews/review-2026-09-05-strategy-gpt-56-pro-gemini-grok.md
+c6d3b0a9c247ea5fb719ef66c1f0e3b7bd103415a8f8bb0c29d9318f1b6eb72c  packing/resources/README.md
+8d35343f5cfc9147c802166c35aa463c233b6f6721a40363cc248fbf5f690a65  packing/resources/web/literature-refresh-2026-09-05/README.md
+b48c0c31cf62366d44cd12f02cf321dd38b5a23391caec95f04445938e0b3d75  packing/resources/web/n17-lower-bounds-2026/README.md
+78782e710ab3058b12e106721447fa2589e7cf525a9085e7ac7ddaa2b27484bf  packing/campaign/explorations/X-014-closing-from-both-ends.md
+6e49cfd993b51f350249d87d31d3d24984e0e942f7660a2e7fa209a747bbd916  packing/campaign/explorations/X-015-the-map-and-the-three-programs.md
+766f5bc83293e95bb7f99ad4976f1b834eed6fd52d5b1a28bc74a2ac670d0536  packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md
+d016a94131fbde1dc8b5593f102186d365c5caa6f9ab28c774b2717d20db36ad  packing/campaign/agendas/agenda-021-three-numbers-and-a-wall.md
+766240b02a4bb4418c1fc0ede090867fd629849f0918a7c9930fec958cae0e6c  packing/campaign/agendas/agenda-022-the-conditional-route.md
+510d3838a40973ec6535e4c7d99198804b8ed88a9c52126c455c97b182651c0f  packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md
+096470755cb056d6dcd9d103d4233819d03f8bff9035e1027d213ca51ab4cb49  packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md
+67bbe286b3d24b6f2b15effa43be7abc0e1f9d0b7d2e43ad8f6c9dba362e5704  packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-060-h-064-n11-fractional-packing-floor.md
+5042894a870c3d1374ffbb7774eda715c0181150df8b23b422016736b80cc60f  packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-063-h-065-n11-near-tight-cell-census.md
+a0b75ac0ab2a77436d6fe9edae0d526b6fe7d06ab73459b8ee7aa6aea87da0ea  packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-064-h-063-two-threshold-class-program.md
+db124b9956d8051682388cbba3b16772e65406a0003debba1c92b915c0c489a8  packing/campaign/series/series-000-smoke-and-calibration/results/bc-199-trump-isolation-radius.json
+8df0b9aa530149b44367842a2e6389949b27189df038d68e9d1afa8fd87df8c6  packing/campaign/series/series-000-smoke-and-calibration/results/bc-200-state-191-50.json
+84070a20d9954916260f7b2703bdec886523c7eccb912edbc110102731440219  packing/cases/n11_fractional_certificate/t-018-proof-card.md
+3b4f754b8a77c0a6edb12a8f669e705594817992f9983956d308aa7b343031b4  packing/cases/trump11/isolation_radius.py
+bc01c636302f26ce4072ee8886c83463a9648f0e35d918541377cf52559aea2c  packing/frontier/n-011.md
+8c35796d7d7d3b3dbfa8eafd29d63078131ebb9d0b921a71c178ff77530eda01  packing/devtools/run_fractional_colgen.py
+f7f87469d7ee1c3a04679cd9f58bcc032ed79baed927aaf0a7222ec6c7587e43  packing/tests/test_run_fractional_colgen.py
+dcc220357eeb7b5a37e775c00fcf5569608ffa77d6ee4796feff026bb3e46f2c  packing/devtools/run_fractional_cutting.py
+3cf3ac48053a491668541f0c84548cf644640b396642949a059c72e910f89479  packing/devtools/freeze_cutting_primal.py
+8f2c980ca199a256fbb0b8bbded5043d7bff921a250b0753775ce8d8d2225f70  packing/cases/n12_fractional_certificate/replay_independent.py
+25a6827f3d6544fd43f14a4fd1d5274f25732efaa7802c83dca0ec8529def15f  packing/tests/test_freeze_cutting_primal.py
+303190b9b40ad9beb81e979219e4f3a09b9062b13c50cda837d480bd01877fe4  packing/tests/test_run_fractional_cutting.py
+d7f1df062e61b56d37c1c67e0cb63c1b72f9dd6e7eeffde6c00e1c602f22c703  packing/tests/test_n12_replay_independent.py
+31fb57e93207ba5d5bc57ecd2783751ead5848c2f2b4b85d02bf0cfaa0eb86bb  packing/campaign/agent-sessions/session-087-agenda022-continuation.md
+fef9d1a449268e4f38b1b25319c67f02c64bafa4e7cbf00be47523d93f4265d0  packing/campaign/schemas/agent-session.schema.yaml
+4015032995a2c2d63fac29a73379ad0c19b25b067e984306c18827f9c3f1cb1c  packing/devtools/gate-budgets.yaml
+ef9ecd54c003afdae1685590026584def5ce1edd3737297ce32a876a5d91f994  packing/devtools/check_gate_budgets.py
+ba2ebeb9af6fccb47c96c9dae2b01a2cb3c4a8b12cc03c2f8495a7fd469afd99  packing/devtools/check_session_gate.py
+9e8b1f13cda2b63e9f3fdc2efa7c4367564a73c600cb822ab985fa83ea717c8b  packing/src/sqpack/campaign/commit_clock.py
+93468a171c437346e12794b6f995f7f86f849b0d49cef8a156bdd0152db30bb2  packing/src/sqpack/gate_budgets.py
+0bebbea6cc8252933d076d140a7fe2bcacca6ce1f165a0623b88188d40d11d9d  packing/src/sqpack/cli/validate.py
+3ef15867870b51e871942236484b6748cbfe1a5c4726c9257a55b109b202788f  packing/tests/test_session_gate.py
+897c22c3e0a590bd142adfbd2449c65cc1633c55948b84a06109532ba63b6f82  packing/tests/test_gate_budgets.py
+```
+
+This integration starts no `T+0`, claims no research cell, and allocates no H or exp ID.
+It makes the launch self-contained: managers do not wait for PR #87 or `origin/main`,
+and the coordinator records any later upstream movement without erasing this base.
 
 The four-slot launch is coordinator, fractional manager, closure manager, and one
 floating worker. The floating worker authors BC-240, then reviews BC-230; BC-232 and

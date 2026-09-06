@@ -302,6 +302,177 @@ work did not complete, whether each block should continue, and what had been
 reprioritized. Those are not optional questions after the run; W10 makes them the
 closeout product.
 
+## OR-12: One block in four to eight is an efficiency block, and the record says which
+
+The cadence is counted in blocks, not in days.
+A wall-clock schedule fires when nothing has run and stays silent through a burst, and
+this campaign’s activity is bursty by construction — an overnight pass can close six
+cells while a quiet week closes none.
+So the rule is a ratio: **at least one W5 efficiency block in every four to eight blocks
+of any other kind.** Under four is usually too little accumulated change to be worth
+measuring; over eight is where regressions start hiding.
+
+**Nothing schedules this, and nothing can.** There is no cron here, no unattended
+runner, and no session that lives long enough to remember.
+What there is instead is the record: `OR-11`’s closeout publishes the count — blocks
+terminal since the last block whose cells declared `efficiency-loop`, and whether one is
+now due — into the `SYNOPSIS.md` handoff beside the selected next entry.
+**An agent that wakes up reads what has been done and what comes next, because both are
+written down**, and that is the whole mechanism.
+
+The count is derived, not remembered.
+The ledger already records every agenda and the workflows its cells declared, so the
+closeout computes the number rather than recalling it.
+At eight the closeout selects a W5 regardless of what else is ranked; between four and
+eight it may select one and must say why it did not.
+
+Every efficiency block opens by measuring the gate — the one instrument that runs on
+every change whether or not anyone asks for it — against the ceilings its predecessors
+declared, before it takes any queued candidate.
+A tier over its ceiling makes a block due regardless of the count and becomes its first
+cell.
+
+The rule was paid for in a single afternoon.
+`validate.py` recorded its own baseline in a docstring — “Measured on 2026-08-30:
+`--fast` is 499s” — beside an 1800 s cap.
+Six days later the same tier ran 1369.60 s. Nothing objected: the number was inside the
+cap, and 499 was prose.
+Twenty-three minutes of CI on every push, for six days, found by an operator noticing
+that a wait had got long.
+The measurement that would have caught it costs about a minute
+([`agenda-023`](packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md)),
+and the reason it was not taken is that nothing wrote down that it was due.
+
+## OR-13: Every fast check runs in CI; only the unavoidably slow ones leave
+
+The policy is a floor on coverage, not a budget on time.
+**A check goes in the pull-request surface unless it is unavoidably slow.** Speed is
+bought by moving the few checks that are expensive, never by thinning the many that are
+cheap, and a check that leaves the pull-request surface has to earn its exit by its own
+measured cost.
+
+The evidence says this is nearly free, which is why the policy can be this strict.
+Measured on 2026-09-05 over the 2,080 tests of the non-exhaustive suite: one test costs
+268.73 s, the next three cost 94.12 s, 83.30 s and 66.14 s, and about twenty tests carry
+roughly seventy per cent of the tier.
+The remaining two thousand share the rest.
+Deferring twenty tests buys most of the time back; deferring the tier buys the same time
+and throws away everything else with it.
+
+And the cheap checks are where the catching happens.
+All eight failures CI found on the `T-021` branch that day were record-to-artifact
+consistency checks — does a register row match the certificate it names, does the
+synopsis match the ledger, does the reach table match the corpus — and all eight
+together cost 0.46 s. The expensive tests re-derive mathematics already decided and
+frozen. **A check that compares two artifacts is cheap and catches drift; a check that
+re-derives a frozen result is expensive and catches almost nothing between one release
+of the code and the next.** That is the boundary, and it is a property of what a check
+does rather than a list of which tests are slow today.
+
+Three surfaces follow from it.
+**The pull-request surface** is every check that is not unavoidably slow, priced to be
+paid on every push. **The deep surface** carries the ones that are, and runs where it
+does not block a pull request.
+**The full gate** is everything, and it is what a block ends with — the `OR-11`
+closeout, the end of a research block, and before a pull request is marked ready.
+
+A terminal session names its full-gate run in its `checks`: the tier, the commit it ran
+on, and the verdict.
+A session that cannot name one has not finished, whatever its cells say.
+The commit matters as much as the verdict, because a gate run on a tree three commits
+behind the handover certifies nothing about what was handed over.
+
+The boundary is enforced, never curated.
+A hand-maintained list of slow tests rots exactly the way the 499-second docstring
+rotted; the split has to be something the gate computes and can refuse.
+
+## General principles
+
+`OR-1` through `OR-13` say how a particular thing is done here.
+The two below are different in kind: they are the standing principles those procedures
+answer to, and when a procedure and a principle disagree it is the procedure that is
+wrong. They are stated separately so that a future agent inheriting a rule it finds
+pointless has somewhere to check what the rule was for.
+
+### OR-14: A development cycle is never artificially slow
+
+The pull-request surface is paid on every push, by every contributor and every agent,
+and it is the tax on all work in this repository.
+**Its target is two to two and a half minutes; three is the outer edge of acceptable.**
+Above that the slowness is a defect with a number attached, to be measured and
+attributed to a step — not a fact of the world to be absorbed.
+
+Those numbers are a ceiling on the tolerable, not a target to stop at.
+**Cycle time is a floor on iteration rate**: no one can try more than one idea per
+cycle, so a three-minute surface caps the day at twenty attempts per hour of attention
+and a one-minute surface caps it at sixty.
+That is a difference in what work is *possible*, not a difference in comfort, and it is
+why “already inside the band” is not a reason to stop optimising.
+
+The evidence is that slow cycles do not merely cost time, they cost *coverage*, because
+a gate people cannot afford to run is a gate that stops reporting.
+`D-466`: the tier went from 499 s to 1369.60 s and nobody noticed for six days, because
+an 1800 s cap had 3.61× of slack and could not object.
+Worse, the workflow cancels a run when a newer push arrives, so a push cadence faster
+than the tier’s own wall produces **no completed run at all** — three runs on one branch
+were cancelled that way before the pattern was seen.
+On 2026-09-05 a single test fix cost twenty-three minutes to verify, four times over.
+
+What this rule requires in practice:
+
+- **Attribute, do not absorb.** “CI is slow” is not actionable; “`fast behavioral tests`
+  is 408.09 s of a 408.55 s wall” is, and it is what showed that no arrangement of
+  GitHub jobs could help and the parallelism had to go *inside* the step.
+- **Never restart a green pull request’s CI for a change that does not affect that pull
+  request’s own checks.** Carry it on the follow-up branch.
+  This was violated the day the rule was written: a deep-gate-only control fix restarted
+  a twenty-three-minute cycle on an already-green, already-mergeable commit.
+- **Parallelise by default.** Work that can run concurrently should, and the question to
+  ask of a serial gate is why it is serial, not whether the split is worth the trouble.
+  The gains here have been large and repeatable: a marker split took the tier 1369.60 s
+  → 409 s, and one worker per core inside the surviving step took 306.4 s → 135.0 s.
+- **But put the parallelism where the wall is, which requires measuring first.** The
+  same block also priced two fan-outs that buy nothing: a second GitHub job left the
+  wall unchanged at ~425 s and added three billed minutes, because `--jobs 2` had
+  already hidden thirty-seven steps under one 408.09 s step, and a matrix over the deep
+  surface paid N setups to reach a floor one 1765.82 s step already set.
+  **A second job cannot shorten a wall that is one step.** This is not an argument
+  against parallelism; it is the reason to read the step table before choosing a shape.
+- **Buy speed from the expensive few, never from the cheap many** (`OR-13`), and from
+  not re-running work whose inputs have not changed.
+  Never from thinning coverage.
+- **Set the ceiling around what is measured, not around the target.** A ceiling that
+  fails on the day it is written is not measuring drift, it is advertising an
+  aspiration, and a gate that goes red for reasons unrelated to any regression is one
+  people learn to ignore.
+  The target belongs in the agenda; the ceiling belongs around the measurement.
+
+### OR-15: Outcome over ceremony, and process is revised on a cadence rather than on irritation
+
+A process step is justified by what it catches or produces.
+One that catches nothing and produces nothing is ceremony, and ceremony is not free: it
+costs the time it takes and the attention it spends, and it teaches people that the
+process is theatre, which is what makes them skip the parts that matter.
+
+**The rule cuts both ways, and the second direction is the one that gets forgotten.** It
+does not license dropping a check because it is inconvenient.
+The eight failures CI caught on the `T-021` branch were all cheap record-to-artifact
+comparisons costing 0.46 s together, and every one of them would have been lost by a
+change argued as cutting ceremony.
+Cheap and boring is not the same as ceremonial.
+The question is never “is this step tedious” but “what does it catch, and what would
+reach `main` without it”.
+
+**And process that changes constantly cannot earn anything**, because nothing stays
+still long enough to be measured, and an agent cannot learn a process that is different
+each time it wakes. So the revision is scheduled rather than reactive: `OR-12`’s
+efficiency block is where process is re-examined against what it actually earned, and
+that is the place to bring it.
+Between those blocks, follow the process where it is inconvenient and record the
+friction with evidence, rather than routing around it in the moment.
+Friction noticed during a research slice is an input to the next efficiency block, not a
+licence to change the rules mid-slice.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

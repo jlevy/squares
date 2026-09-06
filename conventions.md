@@ -375,6 +375,15 @@ saying so. The reachability gate requires full Git history.
 A shallow checkout that does not contain the recorded commit is uncheckable, not
 evidence that the commit was orphaned.
 
+**A refusal that becomes true with time alone is judged against the commit, never the
+wall clock.** [checked: one tree, two clocks] An expired lease and a passed session,
+phase or delegation deadline are all *anti-monotone* in their reference instant, so a
+wall-clock gate reports when CI ran rather than what the commit says, and a green commit
+does not stay green.
+The instant is HEAD’s committer date; where a tree cannot supply one, those refusals are
+uncheckable and counted apart from the judged ones, exactly as above.
+`D-468`.
+
 **Guards are recomputed, not remembered.** [checked: selftest] The overlap reported for
 a configuration is recomputed from that configuration, never read off an accumulator
 maintained across hundreds of millions of updates.

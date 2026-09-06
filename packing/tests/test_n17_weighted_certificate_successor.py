@@ -309,6 +309,7 @@ def test_production_expectations_are_the_registered_values() -> None:
     assert PRODUCTION_EXPECTATIONS.global_minimum == Fraction(576, 576)
 
 
+@pytest.mark.slow
 def test_real_ancestry_verifies_without_evaluating_a_direction() -> None:
     report = _as_json(ancestry_report())
     assert report["target_directions_evaluated"] == 0
