@@ -292,7 +292,8 @@ case or experiment separately.
 | [Adversarial Senior Review of the Agenda 024 Portfolio](docs/project/reviews/review-2026-09-06-agenda024-adversarial-senior-strategy.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
-| [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | current | maintained | — |
+| [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |
+| [Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md) | dated handoff record | current | maintained | — |
 | [Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
 | [Proof Card: s(11) ≥ 381/100](packing/cases/n11_fractional_certificate/t-018-proof-card.md) | generated status view | generated | generated | — |
 | [Verifiable Claim: $s(11) \ge 19/5$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md) | generated status view | generated | generated | — |
@@ -465,6 +466,12 @@ density, typed stationarity, and Trump capture in
 [agenda 026](packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md).
 `BC-219` completed against the current branch inputs, but any landing that changes a
 named input returns it to preflight before another manager starts.
+
+The
+[T+2-to-T+10 continuation addendum](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
+is the current execution handoff.
+It preserves the first block’s frozen packets and binds the active-time, role, safety,
+BC-241, BC-232, BC-243, and gate contracts for the next 480 active portfolio minutes.
 
 The first execution slice consumes the first two active portfolio hours of the same
 roughly 24-active-hour agenda.

@@ -423,6 +423,13 @@ The Trump radius is an existing local endpoint to package and review.
 The density route must earn weak-dual semantics before numerical optimization, and the
 stationary route must price a complete typed language before an n=11 atlas is launched.
 
+For post-T+2 work through T+10, use the
+[`continuation addendum`](../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md).
+It binds BC-241’s source-distinct controls and narrows BC-243 to an unimplemented,
+dual-only 180-active-minute pilot.
+Continuum primal coverage remains entirely in BC-244. The completed T+0-to-T+2 packets
+stay frozen.
+
 ## Manager Entry Point
 
 The workflow entry point is BC-240, BC-242, and BC-245 after the coordinator opens

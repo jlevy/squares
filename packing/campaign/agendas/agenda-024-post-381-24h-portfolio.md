@@ -263,6 +263,11 @@ It performs no manager experiment.
 Its job is to keep theorem statements, evidence, IDs, shared files, and routing
 decisions single-owned while the two research programs work concurrently.
 
+Post-T+2 execution through T+10 is narrowed by the
+[`T+2-to-T+10 continuation addendum`](../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md).
+That addendum sequences the reviewed continuation; it does not rewrite this agenda’s
+frozen inputs, T+0-to-T+2 packets, budgets, or claim labels.
+
 BC-219 is a preflight outside the research clock.
 Its completion makes the initial six child cells takeable; it does not start their
 budgets. `T+0` is the later coordinator dispatch record that names all four live agent
