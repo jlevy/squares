@@ -5,7 +5,7 @@ title: Make fractional crossing stop and freeze cooperatively
 kind: task
 status: in_progress
 priority: 0
-version: 3
+version: 4
 labels:
   - fractional
   - safety
@@ -15,10 +15,10 @@ dependencies:
     target: is-01m1tw2n09x1mq8nt6ejn22vrs
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T08:06:38.869Z
-updated_at: 2026-09-06T09:05:49.823Z
+updated_at: 2026-09-06T09:38:36.216Z
 ---
 Implement and test a safe cooperative stop that preserves a row-converged objective below eleven before a later iteration can overwrite it. Record wall time honestly, preserve normal summary and family outputs, and keep existing behavior compatible. This operational fix is outside active research time.
 
 ## Notes
 
-Prepared and validated outside the active clock in detached transport commit 3d1496371744bb4e20b5d80d5ffb17b36d7620b8 (parent 601f17f6). Exactly four paths implement opt-in row-converged finite objective below n stopping, pre-publication non-finite refusal, normal terminal artifacts, and scoped timing. Focused suite passed 18 in 0.37s; edit tier passed 44/66 in 28.81s with Ruff and BasedPyright clean. Await cherry-pick onto the post-PR89 branch, exact-head tests, launch binding, and closure.
+Prepared against the final integrated PR89 tree as detached commit 37ca074d2a9e0027d334be03c982b24ffb6acd4a. Exactly four paths retain SHA256 38648bc4, 6ed0043b, 56bd0f1a, and 25769fab. Focused suite passed 18 and edit tier passed 44/66 in 30.72s. Fresh max adversarial review plus eight focused controls found no P0-P3 launch blocker: trigger is finite/converged/objective<n after exact separation, exact ceiling precedes it, defaults/equality/unconverged cases stay unchanged, state feeds the bridge, and floats remain proposers only. Await post-PR89 cherry-pick, final branch gate, and closure.

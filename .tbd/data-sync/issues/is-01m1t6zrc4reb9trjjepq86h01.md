@@ -3,9 +3,9 @@ type: is
 id: is-01m1t6zrc4reb9trjjepq86h01
 title: Publish complete next-agent orchestration handoff
 kind: task
-status: open
+status: closed
 priority: 1
-version: 4
+version: 5
 labels:
   - handoff
   - delegation
@@ -16,6 +16,10 @@ child_order_hints:
   - is-01m1t71csrccnm9j5rxz1adnzw
   - is-01m1t7kfcx94bwqh3p837hteg9
 created_at: 2026-09-06T01:58:04.419Z
-updated_at: 2026-09-06T02:08:50.588Z
+updated_at: 2026-09-06T09:40:20.791Z
+closed_at: 2026-09-06T09:40:20.790Z
+close_reason: The controlling agendas, T+2 handoff, reasoning policy, output ownership, commands, stop rules, validation receipts, and final PR body now support a cold-agent continuation.
+resolution: null
+duplicate_of: null
 ---
 Make PR #89 and its controlling agenda sufficient for a fresh coordinator to resume all parallel work without conversation history: current base and upstream gate, bead and BC entry points, agent topology, write ownership, packet paths, validation commands, stop rules, and explicit Codex reasoning allocation. Use max reasoning for mathematical insight, strategy, proof-boundary, and consequential integration judgment; use high or xhigh for bounded mechanical implementation, deterministic checks, manifests, and editorial work as appropriate.
