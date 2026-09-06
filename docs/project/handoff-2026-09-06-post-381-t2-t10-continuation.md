@@ -1,8 +1,7 @@
 # Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10
 
-Status: **staged prospective launch contract; every delimited binding token below must
-be replaced with observed data in the final binding commit before active research
-starts.**
+Status: **bound launch contract; active research remains held until the final local
+gates pass and the coordinator releases the four acknowledged roles.**
 
 Continue Agenda 024 from active portfolio minute 120 through minute 600 under this
 addendum. It reconciles the two post-T+2 readiness audits and controls execution through
@@ -107,7 +106,7 @@ observed. Do not infer the PR #89 merge commit from its former open head.
 | Final `origin/main` base | `6b21d14b64c19003d597ed3c993c051b64336b0c` |
 | New branch name | `codex/post-381-t2-t10` |
 | New-branch transport head before the binding commit | `552e0c6969a6aa3a5a2e2a539e826c0bab8c7c83` |
-| Continuation pull-request URL | `__NEW_PR_URL__` |
+| Continuation pull-request URL | <https://github.com/jlevy/squares/pull/97> |
 | Cooperative-stop implementation commit on this branch | `228806215149549032522506325bd524a71cbd4d` (transport provenance `37ca074d2a9e0027d334be03c982b24ffb6acd4a`) |
 | Coordinator identity and acknowledgement UTC | `/root`; `2026-09-06T09:43:25Z` |
 | Fractional-manager identity and acknowledgement UTC | `/root/fractional_manager`; `2026-09-06T09:42:33Z` |
