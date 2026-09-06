@@ -105,8 +105,8 @@ session:
       A bounded parser/control report, independent density implementation review,
       and a checked PR checkpoint with remaining work priced. No target authority.
     validation_command: >-
-      packing-validate --records --jobs 3 --inner-jobs 1; then the pre-push tier
-      on an immutable checkout while workers continue.
+      uv run --frozen --all-extras --group dev packing-validate --records --jobs 3
+      --inner-jobs 1
     kill_condition: A required premise or control fails, or the bounded commission ends.
     fallback: Retain the exact refusal or implementation gap and price only a changed next slice.
     outcome: Both toy implementations passed independent review; loader work continues on its original lease.
@@ -121,7 +121,7 @@ session:
     clock_role: work
     objective: Build the density ceiling instrument and replay the restricted source theorem.
     bead: think-jgnv
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: Independent toy reviews passed and the source-control gap is explicit.
     budget_minutes: 30
@@ -131,12 +131,33 @@ session:
     validation_command: Focused Python3.14 tests and records; pre-push tier on a stable checkpoint.
     kill_condition: A required source premise fails or a bounded commission ends.
     fallback: Preserve the exact source obstruction or missing instrument and do not run a target.
-    outcome: null
+    outcome: Preliminary source controls pass; authors finish their existing bounded commissions.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-independent-review.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md
+    stop_reason: The completed scalar audit frees a worker for source-distinct theorem-control review.
+    next_action: Finish the existing author leases while reviewing source completeness independently.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Independently review the source controls and publish the checked readiness checkpoint.
+    bead: think-jgnv
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Preliminary source controls passed and the scalar readiness audit is complete.
+    budget_minutes: 30
+    started_at: '2026-09-06T20:09:14Z'
+    deadline_at: '2026-09-06T20:39:14Z'
+    expected_output: Independent source review, density readiness decision and a current PR checkpoint.
+    validation_command: Focused Python3.14 tests, campaign records and immutable-checkout push checks.
+    kill_condition: A completeness premise fails or the bounded commission ends.
+    fallback: Retain the exact gap and do not convert source controls into a target verdict.
+    outcome: null
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-251-readiness-audit.md
     stop_reason: null
-    next_action: Independently review readiness before registering any optimized target measurement.
+    next_action: Freeze only independently reviewed, priced target work; preserve unopened work explicitly.
   primary_bead: think-jgnv
   status: in_progress
   budget:
@@ -355,16 +376,18 @@ session:
     excluded_commands: [git mutations, tbd mutations, optimized target measurements, registry allocation]
   - task: BC251 / H093 landed-code readiness audit; think-zuq5
     operator: Codex bound_lane_strategy, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: No additional blocking defect found; minimal landed-code and real-seed controls specified.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-251-readiness-audit.md
+    files:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-251-readiness-audit.md
+    checks: [Read-only audit; no test or target command ran; writer stopped at 20:06:09 UTC.]
     uncertainty: Landed fixes and seed/bridge readiness are still required before the scalar invocation.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Specify the smallest exact landed-code control set; no target execution.
+    next_action: Wait for landed corrections, then run the specified controls before restoring readiness.
     phase: 4
     budget_minutes: 15
     started_at: '2026-09-06T19:57:28Z'
@@ -376,6 +399,30 @@ session:
     write_scope:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-251-readiness-audit.md
     excluded_commands: [git mutations, tbd mutations, target measurements, registry allocation]
+  - task: BC255 independent Theorem3 source-control review; think-2f79
+    operator: Codex bound_lane_strategy, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: Source completeness and exact boundary handling have not received independent review.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Read the archived theorem independently and replay after the author's stable handoff.
+    phase: 5
+    budget_minutes: 25
+    started_at: '2026-09-06T20:09:14Z'
+    deadline_at: '2026-09-06T20:34:14Z'
+    expected_output: GO or NO-GO for the original source control, with adversarial tests and precise limits.
+    validation_command: Focused source and independent review tests under Python3.14.
+    kill_condition: A source or completeness premise fails, no useful review remains, or the lease ends.
+    fallback: Preserve the exact obstruction without changing H036 or accepting a new theorem.
+    write_scope:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-independent-review.md
+    - packing/tests/test_stromquist_restricted_orientation_review.py
+    excluded_commands: [git mutations, tbd mutations, target measurements, registry allocation]
   outputs:
   - packing/campaign/agent-sessions/session-088-agenda024-next-phases.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md
@@ -385,6 +432,7 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-02.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-slice-01.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-independent-review.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-251-readiness-audit.md
   checks:
   - PR97 merged as c14451f5 after required hosted checks passed on d29342bb.
   - Prelaunch records tier passed 31 selected steps in 19.16 seconds on c14451f5.
@@ -393,6 +441,7 @@ session:
   - Fixed-commit replay passed 561 reachable tests, with 3 deselected, in 43.54 seconds.
   - The replay's sole failure was its own misplaced log in the checkout root; moving it out restored the README check without a source change.
   - Initial hosted CI passed geometry, suite, sweeps and macOS; stale live clocks and an upstream bead hierarchy blocked its validation job.
+  - Commit 0e6d6aac passed 657 reachable tests with 3 deselected in 44.89 seconds; its sole push-tier failure was prose appended to a declared command, corrected at the next checkpoint.
   stop_reason: null
   next_action: Publish the launch PR, review first-slice packets, and commission ready work.
 ---
