@@ -64,6 +64,32 @@ jobs:
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
 
+      # Only this job builds the engine, and `_build_engine` runs it *before* the
+      # executor rather than inside it, so a cold `cargo build --locked --release` is a
+      # serial prefix on this job's whole wall -- about 25s of it. Nothing else in the
+      # workflow caches cargo, so every run paid that from scratch.
+      #
+      # This does not shorten the surface today: at 112s this job is not the critical
+      # path, `geometry` at 122s is. What it removes is variance. A cold build swings
+      # this job by 25-40s, which is enough to make it the critical path on a bad run,
+      # and a pull-request wall that moves 30 per cent between runs on nothing the author
+      # changed is the thing `OR-14` is actually about.
+      #
+      # Keyed on `Cargo.lock` so a dependency change misses deliberately; the restore
+      # keys let an unrelated lockfile bump start from the previous build rather than
+      # from nothing. `actions/cache` is already pinned at this sha in `pages.yml`, so
+      # this adds no new action to vet.
+      - name: Cache the Rust build for the engine
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            packing/sqsearch/target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('packing/sqsearch/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+
       # `--fast` is the pull-request surface, and two separate pieces of work in one day
       # made it what it is. They pull in opposite directions on purpose.
       #
