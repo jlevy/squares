@@ -437,6 +437,29 @@ drift, provenance, campaign invariants, and mutation controls.
 Pytest is one layer of that gate, not a replacement for proof scripts and independent
 implementations.
 
+The fractional certificate sweeps have a separate geometric oracle in
+[`devtools.check_fractional_sweep`](packing/devtools/check_fractional_sweep.py).
+It constructs event cells independently, decides their intersection with the admissible
+center domain by separating axes, and sums atom weights directly.
+It shares no clipping, strip-range, or prefix-sum implementation with the two standalone
+verifiers it checks.
+Small deterministic controls and a seeded corpus run in the ordinary pytest lane, so
+every pull request exercises them.
+For a larger reproducible falsification pass, run from `packing/`:
+
+```shell
+uv run --frozen --all-extras --group dev python -m devtools.check_fractional_sweep --cases 20000 --seed 89213
+```
+
+The report includes the seed and comparison counts; a discrepancy fails the command and
+identifies its reproducing case.
+The
+[adversarial review](docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md)
+records the original 20,000-case comparison and its scope.
+These comparisons can expose implementation regressions.
+Agreement on a finite corpus does not prove either program correct or replace replaying
+the actual certificate over its complete direction net and center domain.
+
 The validation command builds `sqsearch` only when a selected step needs it.
 Checks run concurrently, but their captured output is replayed in declared order.
 `--jobs` controls outer check concurrency; `--inner-jobs` caps each check’s internal

@@ -109,9 +109,11 @@ Results first established here, as far as the recorded source searches show:
   this is scored `S4` as a bound family rather than a case result.
   At `99/25 = 3.96` it also separates the cases: `s(12) > s(11)`, since Trump’s 1979
   packing puts `s(11) ≤ 3.877084`. That did not follow from anything on record before.
-  The case is now `0.04` from its conjectured optimum of `4`, and no single certificate
-  of this shape can close it: none for twelve squares can exist above `3.990816`, which
-  is proved here and is below the conjectured value.
+  The case is now `0.04` from its conjectured optimum of `4`. On the retained
+  181-direction net, the proved ceiling for twelve squares is approximately `3.990816`;
+  refining the net can raise that ceiling.
+  Every finite net still has a ceiling strictly below `4`, so no single certificate of
+  this shape can close the case.
   A family of certificates approaching `4` is not ruled out; whether one exists is a
   question about the covering value.
 - **T-010: `s(11) ≥ 2 + 4/√5`, repaired (`S4`).** The printed 2003 Figure 14

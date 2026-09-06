@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-022
   title: "The Conditional Route — Boxed Certificates, the n = 13 Calibration, and the Class Theorems"
-  updated: '2026-09-05'
+  updated: '2026-09-06'
   status: active
   objective: >-
     Block two, and every cell in it is contingent. Agenda-021 measures four numbers and
@@ -363,38 +363,36 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
     outcomes:
     - scope: >-
-        The four pre-registered sides of the n = 12 ladder above 99/25, on two
-        constructions each, and how far the ladder reaches below 4B.
+        The eight pre-registered construction runs at four sides of the n = 12
+        ladder above 99/25, and the bounds and site-set refutations they establish.
       classification: achieved
       result: >-
-        The ladder does not climb. All eight pre-registered runs refute and nothing was
+        No higher rung was certified. All eight pre-registered runs refute and nothing was
         frozen as a candidate: at 397/100 the grid converged at round 26 to 12.364038 and
         the seeded set crossed twelve at round 8; at 398/100, 3985/1000 and 399/100 the
         grid locked at exactly 16.000000 from rounds 5, 6 and 7 while the seeded sets
         crossed at rounds 5, 3 and 3. Each refutes a site set rather than a side.
-        The cell's own warning about margin non-monotonicity did not materialise -- the
-        crossings arrive strictly earlier as the side rises, 8, 5, 3, 3 -- so whatever
-        reopens the margin below 99/25 does not operate above it.
+        Across the four tested sides, the seeded constructions crossed twelve at rounds
+        8, 5, 3, 3. These runs do not exclude other constructions above 99/25.
         The 16.000000 is BC-197's 25.000000 one order down and has the same mechanism:
         with delta = 4B - L, a support missing all three windows [L - (4 - k)B, kB]
         admits sixteen dual-feasible unit weights whatever the covering value is, and the
         auto grid places 43 to 44 sites per axis where those windows need 191, 369, 687
         and 4988. The register now carries that artefact signature at two orders, which
         makes it a property of the construction rather than a coincidence at one size.
-        Five unregistered follow-up runs at 397/100 answer the question the cell was for.
+        Five unregistered follow-up runs at 397/100 also measured this side.
         A widened column step converged the column loop at 12.314708 over 830 orbits,
         reproduced from a different start to eleven figures; run_fractional_cutting
-        converged its row LP at 12.248227 and returned an exact floor of 10.845594. So
-        10.845594 <= nu*(3.97) <= 12.248227, and against the retained 11.998960 at 3.96
-        the upper end gives a slope of at least 24.9 per unit side. The retained rung's
-        0.001040 of margin is spent within 0.000042 of side: the ladder ends at about
-        3.96004, and the 0.0308 of runway T-017 recorded under 4B = 3.9908 is not runway.
-        The covering value binds and the ceiling never gets the chance, which is the same
-        shape BC-197 found at m = 5 and the second time this project has measured that
-        difference. Two cases is not a rate and is not offered as one; it is enough to say
-        a runway figure computed from the ceiling is an upper bound on an upper bound.
-        Twelve lies inside the bracket at 3.97, so that side is undecided rather than
-        barred, and every refutation here is of a site set.
+        converged its row LP at 12.248227 and returned an exact floor displayed as
+        approximately 10.845594. Twelve lies inside the reported bracket at 3.97, so
+        that side remains undecided, and every refutation here is of a site set.
+        The retained certificate's mass 11.998960 at 3.96 is another upper bound on
+        the covering value. Subtracting upper bounds at two sides establishes neither
+        a lower slope bound nor the side where the true covering value reaches twelve.
+        Correction, 2026-09-06: the earlier endpoint estimate 3.96004 and the claim that
+        the covering value had exhausted the gap to 4B = 3.9908 are withdrawn. The raw
+        BC-206 log and session-087 preserve that historical inference; the attainable
+        part of the remaining 0.0308 below the fixed-B ceiling is unresolved.
         Rationalisation never fired the kill: three freezes lost 0.000091, 0.000088 and
         0.000083 at scale 4,000,000, about 0.58 of the atoms-over-scale bound each. At
         2097 atoms that scale bounds the loss at 0.000524 against 0.001040 of margin,
