@@ -1,0 +1,60 @@
+{
+  "conclusion": {
+    "bounded_side": "38100*sqrt(8100042893309449)/899996306539",
+    "bounded_side_defining_polynomial": "809993351783841654158521*x^2 - 11758103264356929262890000",
+    "bounded_side_squared": "11758103264356929262890000/809993351783841654158521",
+    "decimal": "3.810025723614703",
+    "endpoint_certificate": false,
+    "relation": ">="
+  },
+  "proof": {
+    "density_step": "for every real x below bounded_side, rational density supplies q with x / outer_side < q < factor_supremum",
+    "embedding_step": "a packing at side x embeds in the larger side q * outer_side, contradicting that strict-subfactor no-fit proof",
+    "endpoint_status": "the sharpened containment inequality is equality at the factor supremum; the weak limit bound does not assert an endpoint certificate, no-fit at the endpoint, or a strict lower bound",
+    "order_step": "equivalently, s(n) is at least every strict rational subbound and therefore at least their real supremum",
+    "requires_compactness": false,
+    "strict_family": "for every rational q > 0 with q^2 below factor_supremum_squared, the sharpened containment theorem and the scaled source data rule out a packing at side q * outer_side"
+  },
+  "schema": "packing.squares:FractionalDilationLimitCorollary/v2",
+  "sharpened_containment": {
+    "gap_domain": "0 <= t <= D = 207107/90000000 < 1",
+    "identity": "cos(d) + sin(d) = (1 + t) / sqrt(1 + t^2), where t = tan(d)",
+    "monotonicity_identity": "(1 + D)^2(1 + t^2) - (1 + t)^2(1 + D^2) = 2(D - t)(1 - Dt) >= 0",
+    "source_gap_below_one": true,
+    "strict_factor_test": "q^2 * 809993351783841654158521/810000000000000000000000 < 8100042893309449/8100000000000000",
+    "strict_factor_test_left_multiplier": "809993351783841654158521/810000000000000000000000",
+    "strict_factor_test_right": "8100042893309449/8100000000000000"
+  },
+  "source": {
+    "accepted_conditions": [
+      "Condition 1 atoms carry the declared symmetry",
+      "Condition 2 total mass below n",
+      "Condition 3 net reaches pi/4",
+      "Condition 4 containment B(1 + D) < 1",
+      "Condition 5 every reachable cell carries mass 1"
+    ],
+    "certificate": "packing/cases/n11_fractional_certificate/certificate.json",
+    "coarse_containment": "899996306539/900000000000",
+    "half_gap_tangent": "207107/90000000",
+    "minimum_cell_mass": "4001/4000",
+    "n": 11,
+    "outer_side": "381/100",
+    "sha256": "b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a",
+    "square_side": "9977/10000",
+    "total_mass": "434547/40000"
+  },
+  "strict_dilation_family": {
+    "factor_domain": "q in Q with q > 0 and q^2 < 810004289330944900000000/809993351783841654158521",
+    "factor_supremum": "10000*sqrt(8100042893309449)/899996306539",
+    "factor_supremum_decimal": "1.000006751604909",
+    "factor_supremum_defining_polynomial": "809993351783841654158521*x^2 - 810004289330944900000000",
+    "factor_supremum_irrational": true,
+    "factor_supremum_squared": "810004289330944900000000/809993351783841654158521",
+    "invariants": [
+      "Condition 1 D4 symmetry is equivariant under common scaling",
+      "Conditions 2 and 3 (total mass and direction net) are unchanged",
+      "Condition 5 covered mass is preserved by inverse dilation of placements"
+    ],
+    "scaled_containment_test": "q^2 B^2 (1 + D)^2 < 1 + D^2; this rational inequality is equivalent to strict geometric containment"
+  }
+}

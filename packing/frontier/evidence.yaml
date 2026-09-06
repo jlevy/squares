@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-08-25'
+last_reviewed: '2026-09-06'
 evidence:
   - id: E-kingbird-upper-register
     claim: upper-bound
@@ -1374,6 +1374,71 @@ evidence:
       does not reach C5: the reviewer is an agent of this project working from the
       package rather than from the implementation.
     source_reviewed: '2026-09-05'
+  - id: E-n011-fractional-dilation-limit
+    claim: lower-bound
+    scope:
+      n_values:
+        - 11
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained square-packing archive and the 2026-09-04 s(11) audit, supplemented
+        by the 2026-09-05 literature refresh and the exact-endpoint query receipt at
+        resources/web/s11-exact-endpoint-literature-audit-2026-09-06/README.md.
+      searched: >-
+        The earlier audit searched the public literature, catalogues, author pages and
+        scholarly indexes for stronger s(11) lower bounds and this certificate method.
+        On 2026-09-06 an independent review additionally searched the refined decimal
+        3.810025723614703, radicand 8100042893309449, radical expression, and the topic
+        query "s(11) 3.810025 square packing" through arXiv, Crossref, OpenAlex, and a
+        general web index. Exact routes returned zero; the inspected leading broad
+        Crossref matches did not state this endpoint.
+      novel_object: >-
+        The exact weak endpoint obtained by combining the retained T-018 source with a
+        sharpened trigonometric containment lemma, every strict rational uniform
+        dilation it admits, and rational density. The source certificate and dilation
+        operation are not new objects; the registered limit corollary is.
+      gaps: >-
+        This bounded search does not exhaust subscription-only indexes, theses,
+        proceedings, non-English or unindexed sources, private correspondence, or
+        unpublished work. Apparent novelty is not a priority claim.
+    certificate: cases/n11_fractional_certificate/t-022-dilation-limit-corollary.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.dilation_corollary cases/n11_fractional_certificate/certificate.json --source-name packing/cases/n11_fractional_certificate/certificate.json --check-limit-record cases/n11_fractional_certificate/t-022-dilation-limit-corollary.json
+    replay_status: passed
+    proof:
+      source: cases/n11_fractional_certificate/t-022-dilation-limit-proof.md
+      theorem: >-
+        The T-018 source and the sharpened containment lemma imply s(11) >=
+        38100*sqrt(8100042893309449)/899996306539.
+      scope: >-
+        Uniform dilation of the retained n = 11 source with fixed relative B, one
+        concentric core per square, and strict support containment.
+      pinpoints: >-
+        Frozen Premise, Sharpened Containment Lemma, The Strict Rational Family, Density
+        and the Infimum, Endpoint and Scope, and Replay.
+      assumptions:
+        - The source certificate passes Conditions 1 through 5 from its frozen bytes.
+        - The exact source half-gap tangent satisfies 0 <= D < 1.
+        - A packing in a smaller square embeds in a larger square.
+        - The rationals are dense in the reals.
+        - s(11) is the infimum of packable container sides.
+    limitations: >-
+      The replay binds the exact source SHA-256
+      b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a and re-decides
+      all five source conditions before deriving a separate exact containment test. For
+      every positive rational q whose square is below
+      810004289330944900000000/809993351783841654158521, the scaled source and
+      sharpened lemma rule out a packing at qL; density and upward embedding then exclude
+      every real side below their supremum. The sharpened containment test is equality
+      at the supremum, so this evidence supplies no endpoint certificate, no endpoint
+      fit decision, and no strict inequality. It uses no compactness or attainment
+      theorem and does not rule out stronger uses of the same atoms or coverage cells.
+    source_reviewed: '2026-09-06'
   - id: E-n017-fractional-certificate
     claim: lower-bound
     scope:

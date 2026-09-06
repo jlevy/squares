@@ -51,6 +51,20 @@ exploration:
 
 ## Verdict
 
+**2026-09-06 endpoint correction.** `T-022` now records
+`s(11) >= 38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703...` as a weak
+limit corollary of the retained `381/100` certificate and a sharpened containment lemma.
+It is not an endpoint certificate and did not change this plan’s `3.82` experimental
+target or its proof boundary.
+
+**Planning status.** The launch assignments, six-gate schedule, and next-entry language
+below are historical design provenance.
+The current authority is the
+[T+2-to-T+10 continuation addendum](../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md),
+the single current cold-review entry point for the partially completed portfolio.
+In particular, the older BC-215 and BC-219 preflight routes are not live scheduling
+authority.
+
 The next 24 active portfolio hours should run two research programs in parallel:
 
 1. push the exact one-body certificate with direction-dependent witness cores while
@@ -222,7 +236,7 @@ present survivors and a complete search is priced below four CPU-hours.
 
 | Evidence | Current reading | Next action |
 | --- | --- | --- |
-| Retained bound | `s(11) >= 381/100` | Any improvement must be an exact certificate at a rational side above 3.81. |
+| Retained bound | `s(11) >= 38100*sqrt(8100042893309449)/899996306539` by T-022’s weak limit corollary | This is only the uniform fixed-B, single-core strict-containment supremum; direction-specific cores and coverage-cell geometry remain open. |
 | 3.82 one-body bracket | `9.907905 <= nu* <= tau* <= 11.055617` | Resume `bc-200-state-191-50.json`; do not restart. |
 | 3.85 floor | `nu* >= 9.049860` | Too loose to route the first block. |
 | Adaptive `B_k` | Valid lemma shape, unimplemented | Formalize certificate semantics and build exact controls first. |

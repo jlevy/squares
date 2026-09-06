@@ -70,6 +70,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | Result | `n` | [`V`](epistemics.md#verification) | [`C`](epistemics.md#confirmation) | [`S`](epistemics.md#significance-and-novelty) | [Novelty](epistemics.md#significance-and-novelty) | What it establishes |
 | --- | --- | --- | --- | --- | --- | --- |
 | [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
+| [T-022](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S5` | `apparently-novel` | s(11) >= 38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703, as a weak limit corollary of T-018’s retained certificate. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 99/25, by a first-party weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from a first-party weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
 | [T-020](packing/frontier/RESULTS.md) | 19, 20, 21 | `V4` | `C4` | `S4` | `apparently-novel` | s(19) >= 24/5, s(20) >= 24/5 and s(21) >= 24/5, from a first-party weighted fractional unavoidable-set certificate at container side 24/5 = 4.80. |
@@ -297,6 +298,7 @@ case or experiment separately.
 | [Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
 | [Lean Feasibility Spike for the `s(11) ≥ 381/100` Certificate](packing/cases/n11_fractional_certificate/lean-spike/README.md) | component scope and use | supporting | maintained | — |
 | [Proof Card: s(11) ≥ 381/100](packing/cases/n11_fractional_certificate/t-018-proof-card.md) | generated status view | generated | generated | — |
+| [T-022 Dilation-Limit Corollary, Derived from T-018](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md) | research synthesis | record | retained | — |
 | [Verifiable Claim: $s(11) \ge 19/5$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md) | generated status view | generated | generated | — |
 | [Verifiable Claim: $s(11) \ge 381/100$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md) | generated status view | generated | generated | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -450,43 +452,45 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-[Session 087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md) is
-the latest terminal, machine-checked handoff.
-It completed Session 086’s selected `BC-213` rung and accepted `H-062` at bracket width
-`0.015`.
-
-**Selected next entry:** `think-xejq`, `BC-215` in
-[Agenda 023](packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md):
-the R1 tree-id cache, which the efficiency block measured and priced but did not wire.
-
-[Agenda 024](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md) is the
-operator-selected continuation after that rung.
-It coordinates two disjoint programs: the exact fractional frontier in
+The
+[T+2-to-T+10 continuation addendum](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
+is the single current cold-review entry point and execution authority for the partially
+completed post-T+2 continuation.
+After the `2026-09-06T10:22:36Z` cutoff, the fixed `2026-09-06T18:22:36Z` outer deadline
+permits only a truthful partial continuation: the eventual handoff records the active
+minute actually reached rather than promising T+10 or minute 600. It preserves the first
+block’s frozen packets and binds the active-time, role, safety, BC-241, BC-232, BC-243,
+and gate contracts for the next 480 active portfolio minutes.
+[Agenda 024](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md) remains its
+control plane. It coordinates two disjoint programs: the exact fractional frontier in
 [agenda 025](packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md) and
 density, typed stationarity, and Trump capture in
 [agenda 026](packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md).
-`BC-219` completed against the current branch inputs, but any landing that changes a
-named input returns it to preflight before another manager starts.
 
-The
-[T+2-to-T+10 continuation addendum](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
-is the current execution handoff.
-It preserves the first block’s frozen packets and binds the active-time, role, safety,
-BC-241, BC-232, BC-243, and gate contracts for the next 480 active portfolio minutes.
+Two older selections remain only as provenance.
+[Session 087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md)
+completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0.015`; its
+selected entry is retained in the machine-checked marker below:
 
-The first execution slice consumes the first two active portfolio hours of the same
-roughly 24-active-hour agenda.
-It exercises the coordinator, both managers, one floating worker, retained-state resume
+**Selected next entry:** `think-xejq`, `BC-215` in
+[Agenda 023](packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md) is
+historical provenance, not the live research authority.
+Likewise, `BC-219` was the preflight for Agenda 024’s original launch inputs.
+Its completion does not replace the continuation addendum’s current gate contract.
+
+The completed commissioning slice consumed the first two active portfolio hours of the
+same roughly 24-active-hour agenda.
+It exercised the coordinator, both managers, one floating worker, retained-state resume
 and checkpoint seams, the local Trump theorem packet, central integration, and
 interruption recovery.
-Success means the planned evidence and handoff packets exist and validate; it does not
-require a new lower bound or a global rigidity claim.
-After the `T+2` integration checkpoint lands, 22 active portfolio hours remain and the
-same cells resume without resetting their clocks or budgets.
+The T+2 integration checkpoint left 22 active portfolio hours; the continuation resumes
+those cells without resetting their clocks or budgets.
 
-At `T+0`, the only takeable research cells are `BC-230`, `BC-232`, `BC-233`, `BC-240`,
-`BC-242`, and `BC-245`. The coordinator alone allocates experiment IDs, edits shared or
-generated records, integrates manager packets, and moves a gate.
+At the historical `T+0` launch, the only takeable research cells were `BC-230`,
+`BC-232`, `BC-233`, `BC-240`, `BC-242`, and `BC-245`. The continuation addendum now
+governs which cells may run.
+The coordinator alone allocates experiment IDs, edits shared or generated records,
+integrates manager packets, and moves a gate.
 Codex uses `max` reasoning for theorem scope, proof boundaries, mathematical
 disposition, and strategic routing; bounded implementation and independent reviews use
 `xhigh`, while replay, manifest, formatting, and value checks may use `high` when they
@@ -1893,8 +1897,8 @@ At `n = 11` the upper end has not moved since 1979, and the lower end moved on
 |  | value | source |
 | --- | --- | --- |
 | Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
-| Best certified lower bound | `381/100 = 3.81` | [T-018](packing/frontier/RESULTS.md), a first-party weighted fractional unavoidable-set certificate, decided twice from its frozen bytes |
-| Bound gap | `0.067083590023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
+| Best certified lower bound | `38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703…` | [T-022](packing/frontier/RESULTS.md), a weak limit corollary of T-018’s first-party certificate and a sharpened containment lemma |
+| Bound gap | `0.067057866408` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
 
 ![Walter Trump’s exact eleven-square packing.](packing/atlas/rendering/trump11-overview.svg)
 
@@ -3748,14 +3752,18 @@ agrees, and new components inheriting the perimeter—that apply to code not yet
 
 ## Where This Stands
 
-**As of 2026-09-04 the project’s largest live result is the fractional lower-bound lane,
+**As of 2026-09-06 the project’s largest live result is the fractional lower-bound lane,
 and it is not the cartography spine.** Its weighted-resource lineage runs through Göbel,
 Kearney–Shiu, Nagamochi and Bentz; the recent pure-atomic rational direction-net
 architecture follows Burns, and the LP instance and parameter line follows Massaccesi.
 This project’s instances and generator moved seven registered cases in one day.
 `s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first public movement of
 that bound located by the recorded search after Stromquist stated `2 + 4/sqrt(5)` in
-2003 and the only S5 result in the register, `n = 11` being the smallest open case.
+2003\. [T-022](packing/frontier/RESULTS.md) combines that source with an exact
+containment refinement and promotes the resulting strict rational-dilation family’s
+supremum, `38100*sqrt(8100042893309449)/899996306539`, to a weak bound; neither an
+endpoint certificate nor a strict inequality is claimed.
+Both carry S5 because `n = 11` is the smallest open case.
 `s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound located that
 was proved about twelve squares rather than inherited from eleven.
 `s(17) >= 459/100`, and `n = 18` and `n = 19` at the same side without a monotonicity

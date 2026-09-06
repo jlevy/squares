@@ -89,8 +89,8 @@ its search strategy.
 |  | value | status |
 | --- | --- | --- |
 | best-known packing (upper bound) | `3.87708359002281417730789706010096…` | Trump 1979, a construction |
-| best lower bound | `381/100 = 3.81` | [T-018](packing/frontier/RESULTS.md), a verified certificate; see [below](#how-a-weighted-atomic-lower-bound-proof-works) |
-| bound gap | `0.067083590023` | still open |
+| best lower bound | `38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703…` | [T-022](packing/frontier/RESULTS.md), a weak limit corollary of the verified T-018 certificate and a sharpened containment lemma; see [below](#how-a-weighted-atomic-lower-bound-proof-works) |
+| bound gap | `0.067057866408` | still open |
 
 Two different quantities get called a gap in this subject, and this document keeps them
 apart. The **bound gap** above is the distance between the best upper and lower bounds,
@@ -174,6 +174,18 @@ yet μ(K) = 434547/40000 = 10.863675.
 
 So eleven unit squares do not fit at side `381/100`. Any packing in a smaller container
 would also fit inside `K`, and therefore `s(11) ≥ 381/100`.
+
+The certificate proof has unused containment margin.
+For `t = tan d <= D < 1`, the exact support factor is `(1 + t)/sqrt(1 + t²)`, whose
+maximum is `(1 + D)/sqrt(1 + D²)`. Therefore every positive rational `q` satisfying
+`q²B²(1 + D)² < 1 + D²` gives the scaled no-fit proof at side `qL`. The supremum of
+those sides is `38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703…`. Every
+smaller real side lies below one of the rationally scaled proof instances, so upward
+embedding excludes it.
+This proves the weak endpoint bound [T-022](packing/frontier/RESULTS.md) without
+compactness or an endpoint certificate.
+At equality the sharpened containment test is no longer strict, so this argument does
+not decide fit at the endpoint and does not prove `s(11)` is strictly larger.
 
 **How 181 directions cover every orientation.** A square is unchanged by a quarter turn,
 and a diagonal reflection reduces its angle into `[0, π/4]` while **Condition 1** leaves
@@ -1076,9 +1088,11 @@ throughput.
 `4.6755`. What is unknown is whether the named alternatives, none of which is built,
 would do better.
 
-**4. What `s(11)` actually is.** The interval is `[3.81, 3.877084]`, and neither end is
-known to be tight. The upper end is a construction nobody has beaten since 1979; the
-lower end moved on 2026-09-04, is certified here, and is not claimed to be sharp.
+**4. What `s(11)` actually is.** The interval is `[3.810025723614703, 3.877084]`, and
+neither end is known to be tight.
+The upper end is a construction nobody has beaten since 1979; the lower end is a weak
+limit corollary of a certificate, and is not claimed to be sharp or itself
+certificate-attained.
 
 **5. What a floating LP result means below `1e-11`.** The floor comes from HiGHS’s own
 feasibility tolerance—pinned at `1e-10`, the strictest value it accepts—under which
