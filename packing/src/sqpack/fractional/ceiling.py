@@ -64,10 +64,11 @@ from sqpack.fractional.model import Direction, rotation_from_half_tangent
 # Screening bounds are checked in exact arithmetic; they select a fast path,
 # not the domain the verifier accepts. For binary64 unit roundoff u = 2^-53:
 #
-# - With |normal| <= 1, |offset| <= 32 and a computed determinant > 1e-3,
-#   determinant error is < 8u and numerator error < 256u. An intersection
-#   coordinate has absolute error < 1e-7, including division and conversion.
-#   The separate 1e-6 intersection padding also covers rounding the wall.
+# - With each normal component at most 1 in magnitude, |offset| <= 32 and a
+#   computed determinant > 1e-3, determinant error is < 8u and numerator
+#   error < 256u. An intersection coordinate has absolute error < 1e-7,
+#   including division and conversion. The separate 1e-6 intersection
+#   padding also covers rounding the wall.
 # - With |point coordinate| <= 16, the two-term projections, offset subtraction
 #   and half-side conversion have combined absolute error < 512u < 1e-12.
 # - For at most 4096 nonnegative weights totaling <= 1024, conversion and any
@@ -213,7 +214,8 @@ class CeilingVerdict:
                 "every closed B-square at a net angle in the container"
             )
         return (
-            f"no {measures} of mass below {self.total_weight} captures mass 1 "
+            f"no {measures} of mass below {self.total_weight} "
+            f"({_decimal_approximation(self.total_weight, 6)}) captures mass 1 "
             f"in {scope}; the fractional method cannot certify this n at this side or "
             "any larger side, and this says nothing about whether n unit squares fit"
         )
@@ -433,8 +435,9 @@ def container_vertices(
     """Every pairwise intersection that lies in the closed container, exactly.
 
     Pairs are screened only within the coefficient bounds justified above.
-    Larger or non-normalized inputs take the exact path; no float conversion
-    is attempted there, even when the rationals exceed binary64's range.
+    Inputs outside those coefficient and coordinate bounds take the exact path;
+    no float conversion is attempted there, even when the rationals exceed
+    binary64's range.
     """
     side = certificate.outer_side
     if not intersection_screening_is_safe(certificate, lines):

@@ -20,6 +20,7 @@ from sqpack.fractional.ceiling import (
     Placement,
     arrangement_lines,
     container_vertices,
+    depth_screening_is_safe,
     maximum_depth,
     scaled_to_unit_depth,
     verify_ceiling,
@@ -99,7 +100,7 @@ def test_coordinates_beyond_float_range_still_receive_an_exact_decision() -> Non
     verdict = verify_ceiling(certificate)
     assert verdict.failures == ("K2 depth at most 1 at every arrangement vertex",)
     assert verdict.max_depth == 2
-    # The public intersection helper must also handle non-normalized line inputs.
+    # The public intersection helper must also handle out-of-range line inputs.
     lines = [(large, Fraction(0), large), (Fraction(0), large, large)]
     assert container_vertices(certificate, lines) == [(Fraction(1), Fraction(1))]
 
@@ -120,12 +121,17 @@ def test_weights_beyond_float_range_are_refused_by_the_exact_depth() -> None:
 
 
 def test_a_large_family_uses_exact_sums_even_at_small_coordinates() -> None:
+    """The family-size limit is the guard's edge: 4096 screens, 4097 goes exact."""
+    vertex = (Fraction(1), Fraction(1))
     square = upright(Fraction(1), Fraction(1), Fraction(1, 4097))
+    bounded = CeilingCertificate(1, TWO, B, NET, (square,) * 4096)
+    assert depth_screening_is_safe(bounded, [vertex])
     certificate = CeilingCertificate(1, TWO, B, NET, (square,) * 4097)
-    worst, decided, where = maximum_depth(certificate, [(Fraction(1), Fraction(1))])
+    assert not depth_screening_is_safe(certificate, [vertex])
+    worst, decided, where = maximum_depth(certificate, [vertex])
     assert worst == 1
     assert decided == 1
-    assert where == (Fraction(1), Fraction(1))
+    assert where == vertex
 
 
 def test_scaling_by_the_maximum_depth_restores_feasibility_and_halves_the_total() -> None:
@@ -253,7 +259,9 @@ def test_the_maximum_depth_is_taken_at_an_arrangement_vertex() -> None:
     worst, decided, where = maximum_depth(certificate, vertices)
     assert worst == 4
     assert where == (Fraction(1), Fraction(1))
-    assert 1 <= decided <= len(vertices)
+    # Vertices arrive in lexicographic order with depths 1, 2, 1, 2, 4, 2, 1, 2, 1;
+    # the screen decides exactly each vertex that could still raise the record.
+    assert decided == 4
 
 
 def test_records_round_trip_exactly() -> None:
