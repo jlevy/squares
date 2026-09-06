@@ -48,16 +48,50 @@ experiment:
       has its own 30-second cap. No unchanged retry, new weights, LP, necessary row,
       higher-order separator or support extension. Record actual process costs.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-115-h-105-fixed-candidate-pair-obstruction/packet.json
-  lease:
-    expires: '2026-09-06T22:17:50Z'
-    host: local coordinator
-  results: []
+  effort:
+    timebox: One 30-second producer and one separately bounded 30-second file replay
+    wall_seconds: 1.8
+    stopped_by: criterion
+  results:
+  - shape: determination
+    role: outcome
+    question: Do these fixed weights have an overweight pair with intersecting interiors?
+    outcome: criterion_missed
+    checked_by: One independent file replay verified all 134 eligible separating axes with no witness or omitted pair.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: A strict positive-area overweight-pair obstruction exists for these fixed weights.
-    reason: Prospective candidate-only record before target construction; reviewed source instrument is committed separately.
+    reason: >-
+      Every eligible pair has an independently checked separating axis. This
+      rejects H105 only; higher-order depth, candidate feasibility and H099 remain
+      unresolved, and the fixed-support bracket stays [11,56/5].
+    commit: cf299e6c7516c2ad41ba05c8e4ac8bb3ca16b5c6
 ---
 # exp-115 — A Pair Test of the Fixed Candidate
+
+H-105 is rejected: all 134 eligible pairs have exact separating axes, and the sole
+independent file replay verified every one.
+There is no pair witness, omitted pair or new LP row.
+H-099 and the candidate’s full almost-everywhere feasibility remain unresolved; the
+$[11,56/5]$ fixed-support supremum bracket is unchanged.
+
+The prospective protocol was committed at `a40b40d3` after all 31 record checks passed
+in 17.05 seconds. The producer then ran once from clean `cf299e6c`, returned exit 0, and
+used 1.05 seconds wall and 1.03 seconds CPU. Its worker reported 0.899715459 seconds
+wall and 0.893114 seconds CPU. The independently dispatched reader ran once from the
+same clean source at 22:08:08–22:08:09 UTC, returned exit 0, and used 0.75 seconds wall
+and 0.73 seconds CPU; its worker reported 0.603746042 seconds wall and 0.600491 seconds
+CPU. Summed process costs are **1.80 seconds wall and 1.76 seconds CPU**, not agent
+attention. Neither invocation was repeated or exceeded its separate cap.
+
+The
+[independent review](../results/exp-115-h-105-fixed-candidate-pair-obstruction/independent-review.md)
+records the complete pair ordering, exact input binding and independent certificate
+reasoning, including its shared arithmetic/source-validation limits.
+The next assessment prices complete positive-area-face verification of these unchanged
+weights. Another incomplete pair-style screen is not a substitute for that obligation.
+
+## Retained Prospective Protocol
 
 This prospectively frozen experiment tests
 [H-105](../../../hypotheses/H-105-exp113-overweight-pair-obstruction.md), not H-099. The

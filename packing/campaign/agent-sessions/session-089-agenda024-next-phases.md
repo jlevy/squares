@@ -289,7 +289,7 @@ session:
     clock_role: work
     objective: Decide the fixed-candidate overweight-pair claim with one producer and one independent replay.
     bead: think-whmn
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: Independent source/toy review accepted the bounded pair instrument at cf299e6c.
     budget_minutes: 20
@@ -299,10 +299,30 @@ session:
     validation_command: One frozen 30-second producer and one separately dispatched 30-second packet replay.
     kill_condition: A declared process cap or the operational lease ends; no unchanged retry.
     fallback: Retain incomplete evidence as unresolved and keep H099 unchanged.
-    outcome: null
+    outcome: All 134 pair separations independently checked; H105 rejected, H099 unresolved; total process wall 1.80 seconds.
     evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-115-h-105-fixed-candidate-pair-obstruction.md]
-    stop_reason: null
+    stop_reason: The declared candidate-only decision is complete; price complete next obligations before more implementation.
     next_action: Price only the next discriminator justified by the independently checked pair outcome.
+  - workflow: insight-iteration
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Compare complete density-depth and continuous-angle next obligations while publishing the finished targets.
+    bead: think-jgnv
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Both selected targets have independent scoped dispositions; larger instruments require explicit repricing.
+    budget_minutes: 15
+    started_at: '2026-09-06T22:09:48Z'
+    deadline_at: '2026-09-06T22:19:32Z'
+    expected_output: Two complete next-method assessments compressed into existing agendas and a current integrated PR.
+    validation_command: Source-only completeness and cost review; fresh integrated validation proceeds independently.
+    kill_condition: The bounded assessments complete or their lease ends; no unregistered target or automatically funded build.
+    fallback: Retain the exact missing cost or completeness obligation in the existing agenda.
+    outcome: null
+    evidence: [packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md]
+    stop_reason: null
+    next_action: Select the next complete end-to-end allocation and publish the handoff within the inherited allowance.
   primary_bead: think-jgnv
   status: in_progress
   budget:
@@ -982,13 +1002,13 @@ session:
     excluded_commands: [dependency changes, expectation weakening, target geometry, git mutations, tbd mutations, shared records]
   - task: Independent fixed-candidate pair packet replay; think-hql2
     operator: Codex structural_lane_strategy, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: Target packet is not yet produced; no candidate access before the committed prospective record.
+    outcome: One replay verified all 134 pair separations and rejected H105 only; writer stopped at 22:09:52.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/exp-115-h-105-fixed-candidate-pair-obstruction/independent-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/exp-115-h-105-fixed-candidate-pair-obstruction/replay.json, packing/campaign/series/series-000-smoke-and-calibration/results/exp-115-h-105-fixed-candidate-pair-obstruction/replay.log]
+    checks: [Replay exited zero at 22:08:08–22:08:09; 0.75 seconds wall and 0.73 CPU.]
+    uncertainty: Higher-order excess depth remains unchecked; this is not a full feasible dual or an H099 decision.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Read the frozen protocol, then replay only the actual producer packet supplied by the coordinator.
@@ -1024,6 +1044,50 @@ session:
     fallback: Report remaining stale statements without inventing measurements or decisions.
     write_scope: [temporary PR body outside its generated cost block]
     excluded_commands: [repository edits, generated cost edits, numerical invention, target access, git mutations, tbd mutations]
+  - task: Price complete density-depth verification after pair exhaustion; think-pg9k
+    operator: Codex gpt6_coverage_audit, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: Complete face-verifier implementation and actual target cost remain unmeasured.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Identify a complete exact argument, independent replay and the smallest useful implementation slice.
+    phase: 13
+    budget_minutes: 15
+    started_at: '2026-09-06T22:09:48Z'
+    deadline_at: '2026-09-06T22:19:32Z'
+    expected_output: Existing density design updated with complete-method scope, controls and honest cost uncertainty.
+    validation_command: Source-only algorithm and proof review; no candidate construction or new geometric test.
+    kill_condition: The bounded assessment completes or its lease ends.
+    fallback: Retain a missing completeness or cost obligation without funding another incomplete screen.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-post-screen-next-discriminator.md]
+    excluded_commands: [target geometry, new rows, LP, higher-order screen, source edits, git mutations, tbd mutations, registries]
+  - task: Price the first complete continuous-angle obligation after H104; think-p0nx
+    operator: Codex bound_lane_strategy, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: H036 remains unresolved and the perturbed-angle target has not run.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Compare the smallest complete angle obligation and any sound cheaper method without changing H036.
+    phase: 13
+    budget_minutes: 15
+    started_at: '2026-09-06T22:09:48Z'
+    deadline_at: '2026-09-06T22:19:32Z'
+    expected_output: Existing angle design updated with complete cases, controls, review and cost uncertainty.
+    validation_command: Source-only mathematical and instrument-design review; no nearby-angle target geometry.
+    kill_condition: The bounded assessment completes or its lease ends.
+    fallback: Retain the first missing proof obligation and do not fund an automatic full build.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md]
+    excluded_commands: [changed thresholds, nearby-angle evaluation, source edits, new claim or experiment, git mutations, tbd mutations, registries]
   outputs:
   - packing/campaign/agent-sessions/session-089-agenda024-next-phases.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md
@@ -1134,6 +1198,10 @@ interruptions. The inherited outer allowance remains 22:39:32 UTC; the session d
 invent a fresh eight-hour wall allowance.
 Only Agenda024’s first allocation is selected.
 Later rows remain conditional, and each experimental budget stays frozen.
+The final source-only method assessments were shortened to finish by 22:19:32 UTC,
+preserving the original twenty-minute finalization reserve.
+Their original fifteen-minute caps were not extended, and no experimental process
+allowance changed.
 
 ## Readiness and Follow-Up
 
@@ -1141,9 +1209,12 @@ Exp114 accepted H104’s seven fixed-formula clauses at exactly zero and 45 degr
 Its sole producer used 2.41 seconds wall and its independent reader 0.05 seconds; the
 combined 2.46 seconds does not measure agent attention.
 H036’s nearby-angle claim remains unresolved, and no packing bound changed.
-The next density instrument passed source/toy controls and independent review.
-The coordinator accepts readiness for one separately frozen pair-obstruction
-discriminator; no pair-separator target has run.
+Exp115 subsequently exhausted all 134 eligible pairs, with every separating axis
+independently checked.
+It rejects H105’s pair-obstruction claim only; H099 and complete almost-everywhere
+feasibility remain unresolved.
+The two processes used 1.80 seconds wall and 1.76 seconds CPU. The next density
+assessment prices complete face coverage, not another incomplete pair-style filter.
 The environment diagnosis began during phase 10 and finished during phase 11; its record
 is attached to that closeout phase without changing its original clock.
 
@@ -1153,7 +1224,14 @@ negative controls failed because isolated worker environments lacked dependencie
 All other steps passed.
 Focused controls pass with the existing environment explicitly bound; the complete
 failed-step replay is running.
-This is not yet an all-green full gate or a CI result for unpublished changes.
+The corrected failed-step replay then exited zero with all 163 negative controls firing;
+its aggregate process cost was not measured.
+The original full invocation remains a one-step failure, now discharged by that separate
+replay. The reference-only workflow snapshot correction passed 16 tests and is retained
+at `a40b40d3`. Required hosted CI passed on the published `cf299e6c` checkpoint.
+Its two sandbox-blocked process-cleanup tests also passed separately with permission to
+inspect processes. These statements do not assign a CI or full-gate pass to later
+unpublished changes.
 
 BC251’s 150-minute scalar invocation has not started.
 PR100’s corrections are merged, and the corrected paths passed46 focused tests plus the

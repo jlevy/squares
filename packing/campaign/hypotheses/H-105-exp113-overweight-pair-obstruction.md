@@ -44,6 +44,11 @@ hypothesis:
 ---
 # H-105 — Does a Pair Already Invalidate the Candidate?
 
+Rejected by
+[exp-115](../series/series-000-smoke-and-calibration/experiments/exp-115-h-105-fixed-candidate-pair-obstruction.md):
+all 134 eligible pairs have independently checked separating axes.
+This leaves the fixed candidate’s higher-order overlap depth and H-099 unresolved.
+
 [Exp-113](../series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md)
 retained an exact finite-row optimum of $56/5$, not a feasible full-size density dual.
 This hypothesis asks whether two squares alone invalidate those fixed weights on a

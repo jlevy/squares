@@ -459,9 +459,10 @@ agenda:
       replayed a necessary-row ceiling of56/5, leaving H099 unresolved and its
       full fixed-support supremum in[11,56/5]. The priced pair separator passed
       source/toy controls and independent review under think-4ej5 and think-0u56.
-      H105/exp115 now freezes one candidate-only pair target and separate replay
-      under think-whmn and think-hql2. A witness invalidates only exp113's fixed
-      weights; no-hit is not a.e. feasibility. No complete arrangement build is funded.
+      H105/exp115 independently exhausted all 134 eligible pairs without an overlap
+      witness, rejecting only the pair-obstruction claim. H099 and full a.e. depth
+      remain unresolved. Think-pg9k prices complete positive-area-face verification;
+      no complete arrangement build or repeated incomplete screen is funded.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-screen-spec.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md

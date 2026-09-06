@@ -137,11 +137,12 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives nine confirmed hypotheses, ten refuted
+The generated ledger currently derives nine confirmed hypotheses, eleven refuted
 hypotheses, two open hypotheses, fifteen open questions, and thirty-six blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. No hypothesis waits on review and six are unresolved.
-H-105 has a prospectively frozen candidate-only pair-obstruction test in progress.
+H-105 is refuted: all 134 eligible candidate pairs are separated, leaving higher-order
+overlap depth and H-099 unresolved.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
 pinned the `m = 5` covering wall to a bracket of width 0.015 where it had registered
 0.02. One, H-064, is abandoned in the ledger’s word — its latest round expired resumable
@@ -269,6 +270,7 @@ case or experiment separately.
 | [exp-113: Independent Protocol and Output Review](packing/campaign/series/series-000-smoke-and-calibration/results/exp-113-h-099-trump-support-screen/independent-review.md) | dated review record | record | retained | — |
 | [exp-114: Independent Receipt-Checker Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/exp-114-h-104-fixed-side-auxiliaries/independent-review.md) | dated review record | record | retained | — |
 | [exp-114: Independent Target-Output Review](packing/campaign/series/series-000-smoke-and-calibration/results/exp-114-h-104-fixed-side-auxiliaries/target-output-independent-review.md) | dated review record | record | retained | — |
+| [exp-115: Independent Pair-Certificate Review](packing/campaign/series/series-000-smoke-and-calibration/results/exp-115-h-105-fixed-candidate-pair-obstruction/independent-review.md) | dated review record | record | retained | — |
 | [BC-255 Restricted-Angle Assessment](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md) | research synthesis | record | retained | — |
 | [BC-255 Theorem 3 Source Control: First Slice](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-slice-01.md) | research synthesis | record | retained | — |
 | [BC-255 Theorem 3 Source-Control Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-independent-review.md) | dated review record | record | retained | — |
@@ -2793,7 +2795,7 @@ round that names the hypothesis, control roles included.
 | [H-102](packing/campaign/hypotheses/H-102-complete-restricted-angle-support-families.md) | open question | Which complete restricted angle or wall-support family yields a useful theorem, starting with H-036? | 0 | — |
 | [H-103](packing/campaign/hypotheses/H-103-complete-typed-global-capture.md) | open question | Can a complete typed cover exclude every minimizing branch or place its entire surviving box inside the accepted local Trump neighborhood? | 0 | — |
 | [H-104](packing/campaign/hypotheses/H-104-fixed-side-point-cover-auxiliaries.md) | confirmed | The fixed point formulas at side1939/500 satisfy all seven exact0/45-degree auxiliary clauses | 1 | 2s wall |
-| [H-105](packing/campaign/hypotheses/H-105-exp113-overweight-pair-obstruction.md) | running | Exp113’s fixed weights have an overweight pair with intersecting interiors | 1 | not yet measured |
+| [H-105](packing/campaign/hypotheses/H-105-exp113-overweight-pair-obstruction.md) | refuted | Exp113’s fixed weights have an overweight pair with intersecting interiors | 1 | 2s wall |
 
 ### Confirmed
 
@@ -3148,7 +3150,7 @@ archive beside it.
 | [exp-111](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-111-h-091-core-shrink.md) | 11 | target | H-091 | exact fixed-atom replay above exp-110’s corner event, followed by direct witness-event inspection | minimum `96377/100000` at net direction 97; the witness’s first usable event exceeds the entire ordinary-containment improvement window, closing that fixed-weight route | rejected |
 | [exp-113](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md) | 11 | target | H-099 | exact necessary-row ceiling on the frozen Trump D4 support | independently replayed ceiling56/5; complete a.e.-depth still unverified | unresolved |
 | [exp-114](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md) | 11 | target | H-104 | seven fixed-formula exact-angle auxiliary clauses at1939/500 | all seven clauses hold in the reviewed exact computation and independent input/receipt replay | accepted |
-| [exp-115](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-115-h-105-fixed-candidate-pair-obstruction.md) | 11 | target | H-105 | exact overweight-pair obstruction for exp113’s unchanged weights | prospectively frozen; no target access yet | in-progress |
+| [exp-115](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-115-h-105-fixed-candidate-pair-obstruction.md) | 11 | target | H-105 | exact overweight-pair obstruction for exp113’s unchanged weights | all 134 eligible pairs have independently checked separating axes | rejected |
 
 ### Cost and provenance
 
@@ -3224,7 +3226,7 @@ archive beside it.
 | exp-111 | one frozen core side above the lost corner event, source replay and candidate replay | 30.58 s | — | criterion | `aeb683d5` |
 | exp-113 | one 60-second producer and one separate 60-second replay | 28.79 s | — | criterion | `e70458a9` |
 | exp-114 | one 10-second producer and one separate 10-second receipt/witness replay | 2.46 s | — | criterion | `e45c8a63` |
-| exp-115 | one 30-second producer and one separate 30-second file replay | not yet measured | — | in-progress | `cf299e6c` |
+| exp-115 | one 30-second producer and one separate 30-second file replay | 1.80 s | — | criterion | `cf299e6c` |
 
 ### What the 71 rounds jointly establish
 

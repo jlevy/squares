@@ -103,7 +103,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-086](agent-sessions/session-086-agenda021-overnight-pass.md) | stopped | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 2 | think-db1k | BC-213, the remaining m = 5 rung at 973/200 (think-wufn), as agenda-021's closeout selects it. |
 | [session-087](agent-sessions/session-087-agenda022-continuation.md) | completed | contemporaneous | `research-loop` (correctness) | `efficiency-loop` (efficiency) | 2 | think-wufn | Take BC-215 (think-xejq), the one lever the efficiency block measured and did not wire: 20.2 per cent of deep-run work is repeated and 92 per cent of that is trees that did not move, so the tree-id cache is what takes the pull-request wall from about 221.70 s to the operator's two to two and a half minutes. |
 | [session-088](agent-sessions/session-088-validation-efficiency-checkpoint.md) | completed | retrospective | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 1 | think-rwte | Continue think-xejq with explained exhaustive-family planning under W5 Phase 3 after publishing this implementation and verifying its full hosted checkpoint. Preserve complete coverage until the selection and reuse contracts pass their invalidation fixtures. |
-| [session-089](agent-sessions/session-089-agenda024-next-phases.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 12 | think-jgnv | Review source instruments, integrate landed corrections and commission only ready, priced target work. |
+| [session-089](agent-sessions/session-089-agenda024-next-phases.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 13 | think-jgnv | Review source instruments, integrate landed corrections and commission only ready, priced target work. |
 
 ### Workflow summary
 
@@ -113,7 +113,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 1 | 0 | 12 | 0 |
 | `factual-review` | 3 | 0 | 40 | 2 |
-| `insight-iteration` | 18 | 1 | 57 | 2 |
+| `insight-iteration` | 18 | 1 | 58 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
 | `research-loop` | 9 | 4 | 52 | 7 |
@@ -642,7 +642,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | H-102 | open question | proof | Which explicitly delimited n = 11 angle-composition or wall-support fa |  | 0 |  |  |
 | H-103 | open question | proof | Can a complete typed finite cover of every n = 11 side-minimizing conf |  | 0 |  |  |
 | H-104 | confirmed | proof | At q = 1939/500, the frozen P10, P12 and A-triple point formulas satis |  | 1 |  | 2s wall |
-| H-105 | running | proof | Among the 60 distinct D4 placements of trump11-v1, with exactly exp-11 |  | 1 |  |  |
+| H-105 | refuted | proof | Among the 60 distinct D4 placements of trump11-v1, with exactly exp-11 |  | 1 |  | 2s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -652,7 +652,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 
 ## Rounds
 
-### rejected (14)
+### rejected (15)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -670,6 +670,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-071 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-233, think-jbat | H-070 | The released seed and matched unseeded control converged after the same eight rounds to byte-identical candidates of exact mass 11142893/1000000, so the seeded arm missed the preregistered strict-improvement criterion. |
 | exp-110 | series-000 | 11 | Codex endpoint_epsilon_spike, max reasoning, coordinator satellite think-zq2u | H-090 | The candidate minimum is below the required threshold by 294969/2200000, so rescaling these weights cannot certify the proposed side 3.8100381. |
 | exp-111 | series-000 | 11 | Codex endpoint_epsilon_spike, max reasoning, coordinator satellite think-jthr | H-091 | The candidate minimum is below the threshold by 52441/2200000. Its interior witness also excludes every core side that could beat T-022 through ordinary containment while retaining these sites and relative weights. |
+| exp-115 | series-000 | 11 | Codex coordinator, max reasoning, think-whmn in Session089 | H-105 | Every eligible pair has an independently checked separating axis. This rejects H105 only; higher-order depth, candidate feasibility and H099 remain unresolved, and the fixed-support bracket stays [11,56/5]. |
 
 ### abandoned (2)
 
@@ -751,12 +752,6 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-030 | series-000 | 9 | openai-codex | H-021 | The complete event path stays below the 30-second profile trigger and retains its nonconverged outcome without censorship. D-126 bars frequency or deterministic-work claims, and no additional n=9 samples are authorized by this performance cell. |
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
-
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-115 | series-000 | 11 | Codex coordinator, max reasoning, think-whmn in Session089 | H-105 | Prospective candidate-only record before target construction; reviewed source instrument is committed separately. |
 
 ## Resumable — stopped on the clock, not on an answer
 
