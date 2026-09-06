@@ -273,6 +273,17 @@ def test_worker_counts_sit_under_the_core_worker_and_grid_caps(
     assert certificate_module._worker_count(certificate, None) == 8
 
 
+@pytest.mark.parametrize("available", [2, 4])
+def test_four_worker_allowance_stays_under_actual_cpus(
+    monkeypatch: pytest.MonkeyPatch, available: int
+) -> None:
+    certificate = n11_load(N11_FIRST_RUNG)
+    monkeypatch.setenv("PACK_JOBS", "4")
+    monkeypatch.setattr(certificate_module.os, "process_cpu_count", lambda: available)
+    assert certificate_module._worker_count(certificate, None) == available
+    assert certificate_module._worker_count(certificate, 99) == available
+
+
 def test_the_gate_budget_caps_default_and_explicit_direction_workers(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

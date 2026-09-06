@@ -170,6 +170,35 @@ def test_ci_keeps_each_gate_jobs_timing_artifacts_even_on_failure() -> None:
             assert upload[0]["with"]["path"] == "${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}"
 
 
+def test_isolated_exhaustive_jobs_use_the_host_without_multiplying_concurrent_pools() -> None:
+    checked: set[tuple[str, str]] = set()
+    for workflow in (WORKFLOW, WORKFLOW.parent / "deep-gate.yml"):
+        document = safe_load(workflow.read_text())
+        for name, job in document["jobs"].items():
+            for step in job.get("steps", []):
+                tokens = shlex.split(str(step.get("run", "")))
+                if "packing-validate" not in tokens:
+                    continue
+                namespace = validate._parser().parse_args(
+                    tokens[tokens.index("packing-validate") + 1 :]
+                )
+                if namespace.only == ["exhaustive exact behavioral tests"]:
+                    assert (namespace.jobs, namespace.inner_jobs) == ("1", "4")
+                elif namespace.skip == ["exhaustive exact behavioral tests"] or (
+                    "negative controls" in namespace.only
+                ):
+                    assert (namespace.jobs, namespace.inner_jobs) == ("2", "2")
+                else:
+                    continue
+                checked.add((workflow.name, name))
+    assert checked == {
+        ("packing-validation.yml", "exhaustive"),
+        ("packing-validation.yml", "validate"),
+        ("deep-gate.yml", "exhaustive-tier"),
+        ("deep-gate.yml", "deferred-steps"),
+    }
+
+
 def _invoke(*arguments: str) -> tuple[int, str, str]:
     stdout = io.StringIO()
     stderr = io.StringIO()

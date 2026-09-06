@@ -429,6 +429,13 @@ Quick tests use xdist workers sized by `cpus - jobs + 1`; `--inner-jobs` control
 internal pools, including the negative-control pool.
 Avoid assuming that either flag alone caps total host concurrency.
 
+The isolated exhaustive jobs use `--jobs 1 --inner-jobs 4`: their recorded hosted
+runners expose four CPUs, and no second outer step competes for that budget.
+The concurrent integration and deferred jobs retain `--jobs 2 --inner-jobs 2`.
+Certificate pools also enforce actual CPU availability, the four-worker maximum, and the
+grid-memory budget. This allocation preserves the parallelism previously available when
+certificate pools ignored `PACK_JOBS`; it is not a measured speedup claim.
+
 CPU observations are diagnostic only.
 Process counters can charge a child’s setup to the call that reaps it and omit
 forkserver descendants; they cannot decide whether an individual test exceeds a CPU

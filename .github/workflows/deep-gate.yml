@@ -186,7 +186,9 @@ jobs:
     # "+3 billed minutes and zero wall" and took it; this one is dearer in minutes and
     # buys a separable verdict, on a workflow requested by label or dispatch.
     #
-    # `--jobs 1 --inner-jobs 2` is the shape the 1943.05s reading was taken under.
+    # Hosted provenance reports four available CPUs. This isolated job gives its
+    # certificate pool up to four workers; actual CPU and grid-memory caps still apply.
+    # This restores its prior allowed parallelism, without claiming a measured speedup.
     if: >-
       github.event_name == 'workflow_dispatch'
       || contains(github.event.pull_request.labels.*.name, 'deep-gate')
@@ -222,7 +224,7 @@ jobs:
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --only "exhaustive exact behavioral tests"
-          --jobs 1 --inner-jobs 2
+          --jobs 1 --inner-jobs 4
 
       - name: Preserve validation timings and partial logs
         if: always()

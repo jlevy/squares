@@ -110,25 +110,34 @@ source-integrity guarantee.
 Allocated worker-seconds remain a scheduling proxy, not measured process-tree CPU. Warm
 caches and lightweight concurrent agent work limit broader timing claims.
 
-The worker-cap correction can increase checkpoint wall time before any pytest-level
-parallel scheduling is adopted.
-The main integration and deep deferred jobs use `--jobs 2 --inner-jobs 2`; both
-exhaustive jobs use `--jobs 1 --inner-jobs 2`. Large default-worker `verify()` calls
-therefore now respect a two-worker cap.
-Previously they could use up to four workers when the host exposed enough CPUs and the
-other caps permitted it.
-On a two-CPU runner, that correction need not reduce their pool size.
-Quick jobs use an inner cap of one, but those settings do not describe the expensive
-full-verification jobs.
-Exposed tests include the full retained certificate, retained n=12, n=11 acceptance and
-calibration, n=17, and n=20 acceptance in `test_fractional_certificate.py`, plus the
-slow n=17 verification test in `test_fractional_sweep_integer.py`. Retain the cap as a
-worker-budget correctness fix, but measure the full checkpoint after these isolated
-trials and evaluate any parallel rollout separately.
-The planned local checkpoint uses two outer jobs and two inner workers to match the main
-integration limits, on a host exposing ten CPUs; it is not a two-CPU host replica.
-The float and bridge comparisons hold the cap constant, so their results cannot
-establish that the whole checkpoint improved.
+The worker-cap correction initially exposed a scheduling mismatch.
+Hosted receipts from
+[PR98’s fast run](https://github.com/jlevy/squares/actions/runs/34050500846) and
+[deferred checkpoint](https://github.com/jlevy/squares/actions/runs/34050662740) report
+four available CPUs.
+The isolated exhaustive jobs had requested one outer job and two inner workers, while
+certificate pools previously ignored the inner cap and could use four.
+Correct enforcement therefore reduced their permitted parallelism on these hosts.
+
+Only the two isolated exhaustive jobs now request `--jobs 1 --inner-jobs 4`. The
+concurrent integration and deferred jobs retain `--jobs 2 --inner-jobs 2`, so two outer
+steps still share the same four-worker allocation.
+Certificate pools separately clamp to actual CPU availability, the four-worker maximum,
+direction count, and the 512 MiB grid budget.
+Focused tests preserve both the four-CPU allowance and two-CPU clamp, and pin the
+isolated/concurrent workflow distinction.
+This restores previously permitted certificate parallelism while enforcing the budget;
+it does not establish a speedup or accelerate serial interval and standalone work.
+
+The first hosted exhaustive run on `fb1a987d` remains the two-inner-worker observation.
+A fresh checkpoint on the allocation-corrected source supplies the final integration
+verdict. Comparing one run of each shape is exploratory, not a controlled percentage
+claim. Further pytest-level scheduling still requires the preregistered equivalence and
+total-work checks in the plan.
+The local profile used two outer and two inner workers on a ten-CPU host; it was not a
+replica of hosted CPU capacity.
+The float and bridge comparisons held those candidates’ worker settings constant, so
+they cannot establish a whole-checkpoint improvement.
 
 Keep n=40 duplicate-replay removal as a separate follow-up.
 Replacing `test_the_record_round_trips` with cheap CLI equality/drift/missing-output

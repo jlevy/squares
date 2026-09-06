@@ -476,13 +476,14 @@ jobs:
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
 
-      # One step, so `--jobs 1`; `--inner-jobs 2` is the setting the 1943s reading was
-      # taken under, and this job now has the whole two-core runner to spend on it.
+      # Hosted provenance reports four available CPUs. This isolated step can use four
+      # certificate workers, still under actual CPU and grid-memory caps. Concurrent
+      # checkpoint steps retain their two-worker allowance. Speedup is not yet measured.
       - name: Run the exhaustive exact tier
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --only "exhaustive exact behavioral tests"
-          --jobs 1 --inner-jobs 2
+          --jobs 1 --inner-jobs 4
 
       - name: Preserve validation timings and partial logs
         if: always()
