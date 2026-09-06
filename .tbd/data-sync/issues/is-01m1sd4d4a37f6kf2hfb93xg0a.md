@@ -5,13 +5,14 @@ title: "BC-215: stop re-running expensive gate work whose inputs have not change
 kind: task
 status: open
 priority: 0
-version: 2
+version: 3
+spec_path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 labels: []
 dependencies: []
 created_at: 2026-09-05T18:26:13.770Z
-updated_at: 2026-09-06T17:06:53.297Z
+updated_at: 2026-09-06T17:45:03.001Z
 ---
 
 ## Notes
 
-W5 validation-efficiency review identified a concrete duplicate: exhaustive test_the_record_round_trips and the named n=40 assessor --check both recompute assess() and compare the full retained dict. Keep both until a follow-up explicitly moves this contract to the named full-gate step, adds cheap CLI equality/drift/missing/read-only checks, and tests aggregate coverage. No cached-result reuse is introduced by the current block. See docs/project/reviews/review-2026-09-06-validation-efficiency-implementation.md and think-i2gk for the exhaustive profile and scheduling follow-up.
+W5 Phase 3 now includes explained exhaustive-family planning before any skip, complete input/node manifests, trusted reusable receipts, end-of-run source checks, and a complete fresh-plus-reused coverage union. See docs/project/reviews/review-2026-09-06-change-scoped-exhaustive-validation.md for PR94/95/96 timing evidence, focused contract obligations, exact files, invalidation fixtures, and project/upstream doc matrix. First slice fixes repository-relative configuration fallback but does not enable family reuse. Also retain the concrete n40 duplicate: exhaustive test_the_record_round_trips and named assessor --check both recompute assess(); preserve both until aggregate coverage and cheap CLI equality/drift/missing/read-only fixtures justify removing one execution.
