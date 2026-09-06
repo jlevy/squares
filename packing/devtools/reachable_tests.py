@@ -25,14 +25,14 @@ inclusion:
   `glob`, `listdir`) or imports dynamically (`importlib`, `__import__`) has the whole
   path space as its input, so it is selected for every change, exactly as unattributed
   steps are.
-- **The whole suite on anything unmapped.** An empty change set, a changed `conftest.py`
-  or packaging file, a Python file outside the mapped roots, or a parse failure selects
-  everything. "Nothing was determined" is not "nothing changed".
+- **Whole-suite fallbacks.** An empty change set, a changed suite configuration file,
+  a Python file outside the mapped roots, or a parse failure selects everything.
+  "Nothing was determined" is not "nothing changed".
 
 The same honesty proviso as `Step.touches` applies and is worth restating: this is a
-static over-approximation, not a proof. CI runs the full gate on every push regardless,
-so the cost of the residual risk is a CI round trip, never a wrong record -- and the
-measured alternative, three times in one day, was running no tests at all.
+static over-approximation, not a proof. Pull-request CI runs the complete fast surface;
+full checkpoints also run deferred checks and exhaustive tests. This selector narrows
+pre-push feedback only and does not establish reusable coverage for omitted tests.
 
 Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m devtools.reachable_tests
@@ -66,7 +66,17 @@ PACKAGE_ROOTS: tuple[tuple[str, Path], ...] = (
 
 #: A changed path equal to or under any of these selects the whole suite: they configure
 #: how every test runs rather than what any one test checks.
-SUITE_WIDE = ("pyproject.toml", "uv.lock", "tests/conftest.py", ".python-version")
+SUITE_WIDE = (
+    "packing/pyproject.toml",
+    "packing/uv.lock",
+    "packing/tests/conftest.py",
+    "packing/.python-version",
+    # Keep root-level configuration conservative if it is added to this checkout.
+    "pyproject.toml",
+    "uv.lock",
+    "tests/conftest.py",
+    ".python-version",
+)
 
 #: Source markers that give a test the repository's whole path space as its input.
 WALKER_MARKERS = ("rglob(", "iterdir(", ".glob(", "listdir(", "importlib", "__import__")

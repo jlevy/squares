@@ -18,8 +18,8 @@ Package metadata, Ruff, and BasedPyright express the broader `3.14`-only compati
 boundary; `uv.lock` pins dependencies, not the interpreter.
 macOS and Linux are supported development hosts.
 Pull requests run the bounded Linux fast surface; integration events run the ordinary
-full gate on both hosts.
-The Rust search engine uses the stable Cargo toolchain.
+full checkpoint on Linux and four focused portability checks on macOS. The Rust search
+engine uses the stable Cargo toolchain.
 
 From this directory:
 
@@ -133,17 +133,33 @@ process execution.
 
 <a id="validation-tiers"></a>
 
-**The canonical reference for what runs where.** Two things are often confused and are
-separate axes. A **tier** is a set of *steps* — which of the gate’s 64 declared steps a
-command runs. A **lane** is a division of the *behavioural suite* — which pytest tests a
-behavioural step runs.
-A tier selects steps; a lane divides one step.
+A **tier** selects validation steps; a **lane** selects tests within a behavioural step.
+The ordinary full checkpoint has 66 steps.
+The
+[validation efficiency plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
+owns the current W5 work on cost, naming, and checkpoint placement.
+
+Use **PR fast surface** for `--fast`, **full checkpoint** for the default command, and
+**deferred checkpoint** for the four steps outside PR fast coverage.
+The advisory `Deferred checkpoint` workflow runs those steps.
+**Golden rebuild** means `--deep`, which also regenerates expensive golden producers;
+**strict checkpoint** means `--strict`, which includes that rebuild and refuses skipped
+checks. The deferred workflow does not pass `--deep`; its filename and label remain
+`deep-gate`.
+
+Run focused/edit checks during ordinary work and the change-reachable push check before
+pushing.
+Obtain a full checkpoint when the PR is ready for final review and repeat checks
+whose evidence later changes invalidate.
+Record the checked source and base, selected steps, and failures or skips.
+Expensive final evidence must not delay every editing cycle, but a green fast surface
+alone is not full pre-merge evidence.
 
 ### The tiers
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 31 of 64 | 300 s | 11.0 s |
+| `--records` | contributor, before touching a registry; also every pull request | 31 of 66 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a code change |
 | `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 66 | 700 s | 502.3 s on CI, 2026-09-06, commit `5cad7540`, when CI still ran it whole |
@@ -151,25 +167,16 @@ A tier selects steps; a lane divides one step.
 | `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 66 | 180 s | 91.6 s on CI, the mean of four readings |
 | `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 66 | 205 s | 102.8 s on CI, the mean of four readings |
 | `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 210 s | 107.1 s on CI, the mean of four readings |
-| *(no flag)* | **CI, on `main`, on dispatch, and daily**; and what a block ends with | 66 of 66 | 3600 s | split across two jobs; not clocked whole |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 66 of 66 | 3600 s | split across two jobs; not clocked whole |
 
-**A recorded cost here is the geometric mean of the readings at the reference shape, not
-one sample and not their maximum.** The spread between hosted runs of identical code is
-up to 1.39x — `known-best n=1..100
-atlas` read 60.97 s and 84.48 s across two runs on 2026-09-06, on code no commit had
-touched, and every step of the sweeps tier moved about 1.35x with it.
-The maximum was tried first, and it is worse in a way worth recording: it puts the
-record at the top of the band, so it starves the *stale* rule by exactly as much as it
-feeds the *drift* rule.
-One fast run then came in at 0.72 of the record and left `--geometry` 1.21x away from
-failing CI for being quick.
-The mean leaves every margin at or above 1.25x at four samples.
-The widest spread is `--suite` at 1.52x, which is one indivisible pytest invocation and
-so has nothing to average over internally.
-**These figures need refreshing as samples accumulate**, because a mean moves when they
-arrive — which is an argument for the band rather than a defect in the numbers.
-[D-472](defects.md) is the entry, and a recorded *band* still beats a recorded point,
-whichever point is chosen — that is `think-be1s`, open.
+The four PR partition costs are geometric means of four readings at the reference shape,
+not maxima. Hosted variation remains material: unchanged atlas code ranged from 60.97 s
+to 84.48 s, and the suite’s spread reached 1.52x. The geometric-mean baselines leave at
+least 1.25x margin to the declared drift and stale limits in those four samples.
+Refresh them as measurements accumulate; a recorded band would represent that variation
+better than a point.
+[D-472](defects.md) retains the calibration history, and `think-be1s` tracks the band
+representation.
 
 **The pull-request surface is `--checks`, `--geometry`, `--suite` and `--sweeps`
 together, run as four concurrent CI jobs**, so a pull request waits for the longest of
@@ -179,102 +186,29 @@ All four feed the single required `packing-required` context, and
 they are pairwise disjoint and that they cover every step of `--fast` — so the split
 cannot lose a check the way a set of independent filters could.
 
-The split is arithmetic, not preference.
-`--fast` was 501.97 s of wall over about 1,100 s of step time at `--jobs 3 --inner-jobs
-1`, and 1,100 s of step time on a four-cpu runner cannot finish under 275 s however it
-is scheduled — so one runner could not reach the two-to-three-minute target and a second
-one had to be bought.
-`--sweeps` takes the four steps that re-derive a retained atlas from its witnesses, and
-nothing else in the tier is above 90 s; the measurement for each is in
-`test_the_pull_request_runs_its_sweeps_and_its_suite_apart`.
+The merged [PR95](https://github.com/jlevy/squares/pull/95) implementation pools the
+known-best census and prospective-atlas rebuilds through the shared worker policy.
+Integration CI also caches the Cargo registry, git cache, and engine target directory;
+Cargo still checks and builds the selected source with its locked dependencies.
+These reduce repeated work without changing the partition or treating a cache hit as
+validation evidence.
 
-`--suite` is the third job and it is one step, and the reason it is alone is a floor
-rather than a budget.
-`fast behavioral tests` cost 142.43 s on CI inside the `validate` job, where
-`_pytest_workers` sizes xdist to `cpus - jobs + 1` — two workers beside two other outer
-lanes. No outer parallelism shortens a wall that is one step, which is what `BC-218`
-found one level up, so the only lever on it is the worker count, and the only way to
-raise that without oversubscribing the runner is to stop sharing the job.
-Alone at `--jobs 1` the step has all four cpus to spend on xdist.
-That also retires `BC-218`’s objection to four workers: nineteen ordinary tests went
-over the per-test ceiling on contention when the lane asked for every cpu *beside* other
-work, and a lane that is the only work on its runner cannot create that contention.
-The second cost the split pays off is not on the clock: five ordinary tests were
-reporting over the quick lane’s 5 s per-test ceiling because 468 s of atlas rendering
-was running beside them on the same four cpus, and moving that work to its own runner is
-what removes the contention rather than relabelling the tests as slow.
+These dated observations include hosted setup and are not controlled speedup
+comparisons:
 
-`--geometry` is the fourth job, and it is the only one of the four that exists for cpus
-rather than for a kind or a floor.
-What was left in `--checks` once the behavioural lane moved out was 57 steps of pure
-outer-parallel work with no unit large enough to floor the job, so the job was given the
-freed cpu: `--jobs 4`, four units on four cpus.
-CI run 34016999060 priced that and refused it.
-The tier came in at 198.22 s — 23.5 s less than the three-worker job that still had the
-142.43 s behavioural lane inside it — because saturating the runner inflated every step
-by thirty to eighty per cent against the same steps at `--jobs 3` on the run before:
+| Surface | Observed wall time | Run |
+| --- | ---: | --- |
+| PR fast surface | 2m22s; four Linux jobs 1m58s–2m15s | [34023121156](https://github.com/jlevy/squares/actions/runs/34023121156) |
+| Full main checkpoint | 27m33s; integration 24m19s and exhaustive 27m28s concurrently | [34025346801](https://github.com/jlevy/squares/actions/runs/34025346801) |
+| Deferred checkpoint | 27m01s; deferred checks 12m32s and exhaustive 26m53s concurrently | [34028227026](https://github.com/jlevy/squares/actions/runs/34028227026) |
 
-| Step | `--jobs 3` | `--jobs 4` |
-| --- | ---: | ---: |
-| soundness perimeter | 60.62 s | 84.41 s |
-| exact verification | 61.75 s | 79.98 s |
-| type floor (basedpyright) | 40.37 s | 72.31 s |
-| deterministic SVG rendering | 41.30 s | 65.36 s |
-| historical regressions | 36.04 s | 50.00 s |
-| the decimal route | 40.40 s | 49.34 s |
-| D-034’s n=5 identity pair | 34.18 s | 41.85 s |
-
-Four workers over 790 inflated worker-seconds is the same work at a worse price than
-three over 470, which is the lesson `_pytest_workers` already encodes as
-`cpus - jobs + 1`. A queue of that shape is shortened by cpus and by nothing else, so
-the queue was halved and both halves run at `--jobs 3`: eight cpus with a core of
-headroom on each, for work that had four cpus and none.
-The halves are 269.60 s and 275.48 s of a local 545.08 s step-time reading, within two
-per cent of each other, and the boundary is bounded by two rules rather than chosen
-freely — only a `broad` step may cross, so `--edit` stays wholly inside `--checks`, and
-no engine or cargo step may, so only `--checks` pays the serial `cargo build --release`
-that `_build_engine` puts in front of every step.
-Measured locally at the reference shape, `--geometry` is 93.3 s of wall over 243.8 s of
-step time.
-
-**What the `sweeps` job is floored by is one step**, and since 2026-09-06 that step is
-`known-best chunk census` at 90.38 s rather than `single-square translation escape
-screen`. The job has four units and four cpus, so its outer pool is already saturated
-and its wall is its longest unit’s wall; a fifth GitHub job cannot shorten it, for the
-same reason `BC-218` found that a second job could not shorten a tier that was one step.
-The escape screen was that unit at 110.66 s, and the lever on it was never the schedule:
-`devtools/screen_translation_escape.py` screens 98 independent records and was given a
-process pool, but the pool sizes itself from `PACK_JOBS`, which `--inner-jobs` sets, so
-at 1 the parallelism was dormant and the step still ran serially on every pull request.
-Best of five rounds on a four-cpu box: 103.94 s at one worker, 52.11 s at two, 35.40 s
-at three, 27.50 s at four.
-The job now passes `--inner-jobs 2` — two rather than four, because four outer slots
-already fill four cpus and a step fanning out to four inner workers is exactly the
-oversubscription the table above prices.
-Measured whole at that shape on a four-cpu box the job is 79.5 s: the census 79.5 s, the
-screen 65.3 s, the known-best atlas 50.5 s, the prospective seed 25.1 s. The screen
-costs more than its isolated 52.1 s because two inner workers beside three other outer
-steps is not two workers alone, and it is under the census either way, which is the only
-thing the flag had to achieve.
-Of the eleven modules this job runs, only `screen_translation_escape` reaches
-`sqpack.workers` — checked per process, since a transitive import would be invisible to
-a grep of the four entry points — so the blast radius is one step.
-The census’s 90.38 s is now the floor on the *whole* pull-request surface, since no
-job’s wall goes below its own longest step.
-The lever from here is inside the steps that are still serial —
-`devtools/census_known_best_chunks.py` and `devtools/build_prospective_atlas.py` rebuild
-100 and 101 witnesses, each record independent of the others and each rebuilt in a
-single process while `sqpack.workers.worker_count` sits unused.
-
-Four steps are outside the pull-request surface entirely, each deferred on its own
-measurement and pinned by `test_the_pull_request_surface_defers_only_what_was_measured`,
-which computes the deferred set from what the workflow’s pull-request jobs actually
-select rather than from a flag: `exhaustive exact behavioral tests` (1943 s, its own CI
-job), `negative controls` (544 s), `n=40 rigidity bracket still reproduces` (221 s), and
-`slow behavioral tests` (the lane below).
-Adding a fifth means arguing it in that test, not editing a list.
-What runs those four *before* a merge rather than after it is
-[the deep gate](#the-deep-gate-the-deferred-surface-before-the-merge).
+All three runs are from 2026-09-06. The durations are observations, not necessary lower
+bounds or enforced tier baselines.
+The four PR partitions now have recorded baselines from four reference-shape readings in
+[gate-budgets.yaml](packing/devtools/gate-budgets.yaml); their drift and stale checks
+are armed. These later calibrated values are distinct from the dated workflow
+observations above. See
+[budget enforcement](#what-each-tier-costs-and-where-its-ceiling-lives).
 
 ### The behavioural lanes
 
@@ -284,9 +218,14 @@ test satisfies exactly one, so no test can be in two lanes and none can be in ze
 
 | Lane | Marker | Tests | Runs in | Bound |
 | --- | --- | ---: | --- | --- |
-| quick | neither | 2,106 | `--fast`, so every pull request | fails a test whose `call` phase reaches 5 s |
-| slow | `slow` | 92 | the full gate | fails a test whose `call` phase is under 1 s |
-| exhaustive | `exhaustive_exact` | 53 | its own CI job | its own 3600 s budget |
+| quick | neither | 2,197 | PR fast surface | fails a test whose `call` phase reaches 12 s |
+| slow | `slow` | 95 | full checkpoint | fails a test whose `call` phase is under 1 s |
+| exhaustive | `exhaustive_exact` | 55 | its own CI job | its own 3600 s budget |
+
+Counts are from
+[main run 34025346801](https://github.com/jlevy/squares/actions/runs/34025346801), not
+fixed test membership.
+The marker expressions determine current membership.
 
 **Both bounds are enforced, in opposite directions.** A quick test that grows past the
 ceiling fails the pull request in the week it grows; a deferred test that drops below
@@ -296,15 +235,11 @@ mode `D-466` records.
 
 ### The deep gate: the deferred surface, before the merge
 
-The four steps outside the pull-request surface are tabulated under
-[Validation Loops](#validation-tiers); this is about *when* they run.
-Until 2026-09-06 the answer was “after a merge, or on the 08:17 UTC backstop”, and both
-report a break that is already on `main`. Twice on 2026-09-05 that is what happened, and
-one of the two is on the record.
-`test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net` asserted a
-certificate rung a later commit displaced; it is marked `exhaustive_exact`, so no pull
-request ran it and every pull request was green; run 34009814108 failed on the merge
-commit `6bd136b0`, and `main` stayed red across three merges for about five hours.
+The deferred checkpoint runs slow behavioural tests, exhaustive exact tests, negative
+controls, and the n=40 rigidity replay.
+These are the four steps outside the [PR fast surface](#validation-tiers).
+[D-470](defects.md) records why checking them only after a merge is insufficient: a
+stale certificate test left main red across three merges despite green PR checks.
 
 [`deep-gate.yml`](.github/workflows/deep-gate.yml) runs that surface against a pull
 request instead. Its selection is the **exact complement** of the pull-request surface,
@@ -316,11 +251,10 @@ So the pull-request surface and the deep gate together are the whole gate, and a
 deferral argued into `test_the_pull_request_surface_defers_only_what_was_measured` fails
 until it is added here too.
 
-It costs about **32 minutes**, which is why it is not on every build.
-That is `exhaustive-tier`’s measured 1943 s; `deferred-steps` runs beside it and should
-land near the slow lane’s own 890 s, with the negative controls and the n=40 bracket
-finishing underneath that.
-Neither figure has been clocked at this shape yet.
+The [dated measurement above](#the-tiers) is about 27 minutes.
+Both jobs need profiling: improving only the exhaustive job can leave the integration
+work on the critical path.
+A duration does not establish that the work is irreducible.
 
 **To run it on a pull request, add the `deep-gate` label.**
 
@@ -331,12 +265,14 @@ Neither figure has been clocked at this shape yet.
   ordinary pull request.
   It reports one context, `deep-gate-required`, for the reason `packing-required` is one
   context: `D-380` records what a fan-out of separately required checks cost here.
-- To run it without touching the author’s labels, dispatch **Deep gate** with
+- To run it without touching the author’s labels, dispatch **Deferred checkpoint** with
   `pull_request: <number>`; it checks out that pull request’s merge ref.
 
-**When a reviewer should require it.** The three largest deferrals declare no `touches`
-at all, so there is no path rule to lean on and `--since` selects them for every change
-— the judgement is a reviewer’s. Ask for the label when the branch:
+**Run the full checkpoint for final review.** A passing PR fast surface and a deferred
+checkpoint together cover the ordinary gate when their source and base identities agree.
+Request the deferred run when the PR is otherwise ready; subsequent invalidating changes
+require fresh evidence.
+Pay particular attention when the branch:
 
 - moves a certificate, a retained witness, a rung, or anything under `packing/cases/` —
   the exhaustive tier is what decides those, and it is what `6bd136b0` broke;
@@ -396,7 +332,7 @@ uv run --frozen --all-extras --group dev packing-validate --records
 uv run --frozen --all-extras --group dev packing-validate --edit
 
 # Pre-push floor: the edit tier plus the behavioral tests reachable from the change
-# (against origin/main, or --since REF). About a minute for a code change; never blind.
+# (against origin/main, or --since REF). Broad changes may select the whole suite.
 uv run --frozen --all-extras --group dev packing-validate --push
 
 # The pull-request surface: the edit tier plus every behavioral test under the
@@ -424,7 +360,7 @@ uv run --frozen --all-extras --group dev packing-validate
 # Rebuild expensive mathematical golden producers while comparing read-only.
 uv run --frozen --all-extras --group dev packing-validate --deep
 
-# Merge or unattended-session handoff: deep checks and no skipped surface.
+# Strict checkpoint: full coverage, golden rebuild, and refusal of skips.
 uv run --frozen --all-extras --group dev packing-validate --strict
 
 # Structured result for agents and automation.
@@ -506,116 +442,61 @@ multiple commands, or detached daemons; Windows process-tree cleanup is not yet
 implemented. These limits are why a subprocess timeout is not, by itself, evidence that
 D-239 is resolved.
 
-On pull requests, [`packing-validation.yml`](.github/workflows/packing-validation.yml)
-runs the surface as four concurrent Linux jobs — `packing-validate --checks` in
-`validate`, `packing-validate --geometry` in `geometry`, `packing-validate --suite` in
-`suite` and `packing-validate --sweeps` in `sweeps` — and reports the stable
-`packing-required` aggregate, which waits on all four.
-One required context, four prerequisites: `BC-218` made that the condition for any
-fan-out, because [D-380](defects.md) records what a fan-out of separately required
-checks cost this repository once.
-Since 2026-09-05 the surface is sixty-two of the sixty-six steps rather than
-thirty-seven: twenty-one steps that had run only after a merge were promoted into it
-([D-455, D-456](defects.md), think-k4fb). Four steps stay out, each on a measurement
-recorded beside `STEPS` in `packing/src/sqpack/cli/validate.py`: the negative controls,
-the `n=40` rigidity bracket, the exhaustive exact tier, and the slow behavioral lane.
+Pushes to `main`, manual dispatches, and the daily schedule run the ordinary full
+checkpoint on Linux in two jobs: `validate` runs everything except exhaustive exact
+tests, and `exhaustive` runs those tests.
+macOS runs four portability checks.
+Neither workflow invocation enables the golden rebuild or strict checkpoint.
+The daily run checks the default branch at 08:17 UTC; unmerged branches need their own
+labelled or dispatched deferred checkpoint.
 
-**The behavioral suite runs in three lanes, and they partition it.** `QUICK_TESTS`,
-`SLOW_TESTS` and `EXHAUSTIVE_TESTS` in `sqpack/cli/validate.py` are marker expressions
-over `slow` and `exhaustive_exact`, and every test satisfies exactly one, so a test
-cannot be in two lanes and cannot be in none.
-`--fast` runs the quick lane; the full gate adds `slow behavioral tests` and
-`exhaustive exact behavioral tests`, so nothing the pull-request surface stops running
-stops running. Measured 2026-09-06: the tree collects 2,251 tests — 53 exhaustive exact,
-92 slow, and 2,106 in the quick lane.
+The behavioural [lane definitions](#the-behavioural-lanes) preserve the partition.
+Quick-test timing uses the `call` phase because shared fixture setup can be charged to
+whichever test starts first.
+Optimize a test that exceeds its ceiling, or retain its measurement when moving it to
+`slow`; remove that marker when its measured cost falls below the floor.
+The marker registry tests enforce both declarations.
+Quick tests use xdist workers sized by `cpus - jobs + 1`; `--inner-jobs` controls other
+internal pools, including the negative-control pool.
+Avoid assuming that either flag alone caps total host concurrency.
 
-**The boundary is a ceiling the gate enforces, not a list it trusts.**
-`fast behavioral tests` passes `QUICK_TEST_WALL_BACKSTOP_SECONDS` (12 seconds) to pytest
-as `--durations-min` and fails, naming the test, when a test it ran reports a `call`
-phase at or above it.
-A test that grows past the ceiling therefore fails the pull-request surface in the week
-it grows; the fix is to make it faster, or to mark it `slow` with its measurement in
-`test_the_slow_marker_is_declared_only_by_measured_nodes`, which moves it to the deep
-surface rather than stopping it running.
-The separately reported CPU observations are diagnostic only.
-Process counters can charge a child’s setup work to the call that reaps it, and omit
+The isolated exhaustive jobs use `--jobs 1 --inner-jobs 4`: their recorded hosted
+runners expose four CPUs, and no second outer step competes for that budget.
+The concurrent integration and deferred jobs retain `--jobs 2 --inner-jobs 2`.
+Certificate pools also enforce actual CPU availability, the four-worker maximum, and the
+grid-memory budget. This allocation preserves the parallelism previously available when
+certificate pools ignored `PACK_JOBS`; it is not a measured speedup claim.
+
+CPU observations are diagnostic only.
+Process counters can charge a child’s setup to the call that reaps it and omit
 forkserver descendants; they cannot decide whether an individual test exceeds a CPU
-ceiling. The `call` phase and not setup, because a module-scoped fixture bills its whole
-cost to whichever test triggers it first, and marking that test would move the cost
-rather than remove it.
-The marker registries are checked the same way for both markers: the declared set is
-pinned by a test, so a marker cannot be added without stating what it measured.
-The quick lane runs under xdist at `cpus - jobs + 1` workers, sized to what the box has
-left rather than to what it has, because asking for every cpu beside the other lanes put
-nineteen ordinary tests over the per-test ceiling on contention alone.
-
-Pushes to `main`, manual dispatches, and the daily schedule run the complete locked
-command on Linux and macOS, split across two jobs since 2026-09-05: `validate` runs
-everything but the exhaustive exact tier (`--skip`), and `exhaustive` runs that tier and
-nothing else (`--only`), so a tier that was 1943s of a 2755s surface carries its own
-budget and its own verdict instead of deciding whether the other sixty steps are
-reported at all (think-tr2z). `--skip TEXT` is `--only` read the other way round,
-repeatable and matching displayed step names the same way; a pattern naming no step is
-refused rather than ignored, since a `--skip` that silently matches nothing runs more
-than it meant to and says nothing.
-The daily cadence is `BC-214`: it is the schedule that catches a deferred test breaking
-on a branch that never reaches `main`, and a weekly one would leave up to seven days
-between the break and the run that names it.
-The macOS integration job also runs the focused deep-golden step directly.
-Negative controls use at most two workers while honoring the `--inner-jobs` cap;
-integration CI opts into two inner workers explicitly.
-D-203’s temporary expected-failure classifier was removed after the repaired producer
-passed on both architectures; the workflow test rejects its return.
-Never accept a rebuilt golden to make the probe green, and do not add a second CI-only
-implementation of either check.
+ceiling or establish complete CPU savings.
 
 ### What each tier costs, and where its ceiling lives
 
-A contributor runs `--edit` in the loop and `--push` before a push.
-CI runs the tier named in
-[`packing-validation.yml`](.github/workflows/packing-validation.yml) on a pull request,
-and the complete locked command on `main`, on dispatch, and on the daily schedule.
+[gate-budgets.yaml](packing/devtools/gate-budgets.yaml) declares each tier’s ceiling,
+reference CPU and worker counts, and optional measured baseline.
+Inspect it through `packing-validate --budgets`. The [tier table](#validation-tiers)
+summarizes the ceilings; those values are not latency targets or GitHub job timeouts.
 
-**What each tier is allowed to cost is data the gate reads, not prose in this file.** It
-is declared in
-[`packing/devtools/gate-budgets.yaml`](packing/devtools/gate-budgets.yaml), one entry
-per tier, and every whole-tier run compares its own wall against it:
+A run at the reference shape, or with `--enforce-budget`, fails above its ceiling.
+With a recorded baseline it also fails above `drift_ratio` or below `stale_ratio`,
+subject to the declared noise floor.
+The records check independently rejects a ceiling above `max_headroom` times the
+baseline. A `null` baseline leaves those ratio checks unarmed; a measurement printed by
+CI does not update the file automatically.
 
-```shell
-uv run --frozen --all-extras --group dev packing-validate --budgets
-```
-
-The tiers and their ceilings are tabulated once, under
-[Validation Loops](#validation-tiers).
-This section is about why the register exists rather than what is in it.
-
-The ceiling column is enforced and the cost column is not: the register is the
-authority, and `packing-validate --budgets` prints it as of now.
-Read that command rather than this table.
-
-**A run outside its tier’s band fails and names the step that spent the time**, because
-“the tier is slow” is not actionable and “`fast behavioral tests` is 1324 s of a 1370 s
-tier” is. The band has more edges than a cap, and they exist because a cap alone did not
-catch the 2026-08-30 to 2026-09-05 drift — 499 s to 1369.60 s, entirely inside an 1800 s
-cap:
-
-- a run over the ceiling fails;
-- a run more than `drift_ratio` above the cost the register records for that tier fails,
-  which is the edge a 2.65× regression crosses long before it reaches a generous cap;
-- a run far enough *below* the recorded cost also fails, printing the figure to write —
-  because a record bounded only from above rots downward, and a stale record makes the
-  first two edges meaningless;
-- and `python -m devtools.check_gate_budgets`, in the records tier, refuses a ceiling
-  more than `max_headroom` above the cost its own tier records, without running anything
-  at all. That is the rule that fires on 1800 s declared beside 499 s.
-
-**Wall time is not comparable across machines, so the ratio rules enforce only on the
-runner the ceiling was measured for.** Each tier declares a reference — CPU count,
-`--jobs` and `--inner-jobs` — and a run whose shape differs is measured, reported, and
-never failed; `--enforce-budget` overrides that for an operator who means it.
-This is a deliberate trade: it makes the check quiet on a developer’s laptop and on a
-contended agent box, and it means a regression is caught by CI rather than before the
-push.
+A different CPU/worker shape reports the budget result without failing, unless
+explicitly enforced.
+Matching CPU counts alone does not establish comparable load or hardware.
+`--only` invocations have no tier ceiling; per-command subprocess timeouts still apply.
+The default subprocess timeout is 900 seconds, increased for steps with declared larger
+budgets, including 1800 seconds for slow tests and negative controls and 3600 seconds
+for exhaustive tests.
+An explicit shorter timeout still wins.
+The full checkpoint’s 3600-second tier declaration is not a universal wall limit on
+split CI jobs. Preserve source, selection, runner, and cache information with timings
+before promoting an observed value into a reference baseline.
 
 ### A pull request with no checks at all is a mergeability question
 
@@ -946,42 +827,83 @@ owns it.
 Gate wall time, solver throughput, pair tests, and time-to-retained-result are useful
 metrics. Line count, abstraction count, and test count are not performance measures.
 
-### The gate’s standing cost, which a W5 block reads rather than re-measures
+For long-running tests and runs, follow
+[OR-14’s timing requirement](operating-rules.md#or-14-a-development-cycle-is-never-artificially-slow):
+retain per-test, per-control, and per-phase measurements with setup/queue/execution
+boundaries where applicable, source and worker configuration, and outcomes including
+failure and cancellation.
+Keep machine-readable records and a readable summary; total wall time alone cannot
+justify an optimization.
+The
+[current plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
+tracks instruments that still need this detail.
 
-A `W5` `efficiency-loop` block on the gate has a baseline before it starts, and the
-baseline is not in anybody’s prose:
+CI retains a `validation-timings-<job>-<attempt>` artifact for each gate job for 30
+days. It contains checkout provenance, subprocess start/end receipts and streamed logs,
+completed step results, pytest JUnit, and incremental mutation-control timings.
+JUnit records every selected case with its aggregate duration and outcome.
+Slow and exhaustive logs also retain every setup, call, and teardown duration.
+The quick lane preserves its 12-second console filter, so subthreshold phases are not
+individually retained there.
+Complete incremental per-phase records, including phases completed before termination,
+remain a follow-up under `think-uhxt`; aggregate JUnit timing is not full phase
+attribution. Upload runs after success or failure.
+Pytest writes JUnit at exit, so a hard kill can leave only partial logs and an unmatched
+start; loss of the runner can also prevent upload.
+Neither case is a completed timing observation.
 
-```shell
-uv run --frozen --all-extras --group dev packing-validate --budgets
+For a local checkpoint, select a fresh output directory outside the source tree:
+
+```bash
+PACKING_VALIDATION_ARTIFACT_DIR="$(mktemp -d /tmp/packing-validation.XXXXXX)" \
+  uv run --frozen --all-extras --group dev packing-validate
 ```
 
-[`packing/devtools/gate-budgets.yaml`](packing/devtools/gate-budgets.yaml) is the
-standing measurement.
-It carries, per tier, the ceiling the gate enforces, the cost last measured at that
-tier’s reference runner, the date and the CI run that measured it, and the argument for
-the number. `W5`’s entry contract asks for a baseline, a profile, a target and a guard;
-this file is where the first two live for the gate, and the gate keeps them current
-itself — a run outside the band fails and prints the figure to write.
+Use `python -m devtools.checkpoint_manifest pack DIRECTORY ARCHIVE` to retain a flat
+checkpoint directory as a deterministic tar.gz without macOS metadata (`._*`,
+`.DS_Store`). The archive keeps the original receipt bytes; Git revision and path
+identify repository-owned evidence under
+[OR-16](operating-rules.md#or-16-use-git-for-repository-integrity-reserve-checksums-for-real-trust-boundaries).
+New packs do not create checksum sidecars.
+The `check` command remains available for the already retained legacy manifests; it
+compares archive bytes with those records and does not certify the checkpoint’s outcome
+or the truth of its provenance fields.
 
-**Do not re-measure the gate by hand and record the result in a comment.** That is the
-failure `agenda-023` `BC-216` was opened to close: `validate.py` recorded `--fast` at
-499 s on 2026-08-30 in a docstring beside an 1800 s cap, the tier reached 1369.60 s six
-days later on CI run `33982455466`, and nothing objected, because 1370 is inside 1800
-and because 499 was prose.
-A number a machine does not read is a number that drifts.
+From `packing/`, check those retained manifests with:
 
-The profile that block worked from, for the next one to start against rather than
-rediscover: the tier was one step — `fast behavioral tests` was 1324 s of the 1369.60 s,
-96.7 per cent of wall, and every other step in the tier together was about 45 s.
-`--edit`, which is every floor and every record check but not the broad suite, was 59.35
-s on a contended four-core box the same day.
-The target was the operator’s own: a pull-request-blocking surface of at most four
-minutes.
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.checkpoint_manifest \
+  check benchmarks/validation-efficiency/checkpoints/*.manifest.json
+```
+
+The [engineering campaign](packing/benchmarks/validation-efficiency/README.md) records
+controlled optimization comparisons separately from checkpoint evidence.
+Its maintained instrument retains raw output and receipts; its generated report
+validates the selected tests, outcomes, and comparison regime before calculating an
+exploratory result.
+
+### The gate’s standing cost, which a W5 block reads rather than re-measures
+
+Start with `packing-validate --budgets` and the [dated hosted runs](#the-tiers).
+The register owns enforceable cost declarations; the run receipts supply observations
+and attribution. Establish a comparable baseline when the reference is unmeasured,
+outdated, or a different execution shape.
+
+The
+[current W5 plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
+requires a baseline, profile, target, and equivalence guard before accepting an
+optimization. Retain raw measurements and generate their report.
+Do not replace those records with a timing comment or treat an incomplete CPU lower
+bound as total test CPU. The prior
+[efficiency infrastructure plan](docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md)
+and
+[gate validation plan](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md)
+retain the earlier experiments and their outcomes.
 
 ### What a deep run repeats, and what that licenses
 
-The deep surface runs on every push to `main`, on the daily schedule and on dispatch,
-and nothing about it is scoped to the change.
+The ordinary full checkpoint runs on every push to `main`, on the daily schedule and on
+dispatch, and nothing about it is scoped to the change.
 How much of it repeats work whose inputs did not move is a measurement, and it has a
 tool rather than an opinion:
 
@@ -1004,7 +926,7 @@ rule and none of them is about `touches`:
   them. Every one of those repeated the whole gate.
 - **53 of 55 merges to `main` carried a tree byte-identical to the pull-request head**
   merged, so the pull-request surface had already run against exactly those bytes.
-- **8 of the 64 steps declare no `touches` at all**, deliberately, and they are the
+- **8 of the 66 steps declare no `touches` at all**, deliberately, and they are the
   expensive ones — so `touches` cannot prune the deep surface by cost.
   The escape hatch that protects a mis-declared pattern is reachable by 17 of 1,933
   tracked files, 0.9 per cent, which is far less protection than its own docstring

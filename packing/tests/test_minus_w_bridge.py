@@ -10,14 +10,30 @@ from __future__ import annotations
 
 import pytest
 
-from cases.n5 import minus_w_owner4, minus_w_scale, tangent_cones, tangent_inventory
+from cases.n5 import (
+    minus_w_owner4,
+    minus_w_row_jets,
+    minus_w_scale,
+    tangent_cones,
+    tangent_inventory,
+)
 from devtools.check_minus_w_bridge import main
 from sqpack.field import NumberField
 
 
 @pytest.mark.slow
-def test_the_bridge_agrees() -> None:
+def test_the_bridge_agrees(monkeypatch: pytest.MonkeyPatch) -> None:
+    original_builder = minus_w_row_jets.active_row_jets
+    built: list[str] = []
+
+    def build_once(field: NumberField, stratum: str):
+        assert stratum not in built, f"source rows for {stratum} were rebuilt"
+        built.append(stratum)
+        return original_builder(field, stratum)
+
+    monkeypatch.setattr(minus_w_row_jets, "active_row_jets", build_once)
     assert main() == 0
+    assert built == list(tangent_cones.STRATA)
 
 
 @pytest.mark.slow

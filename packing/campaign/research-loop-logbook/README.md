@@ -26,6 +26,16 @@ wrong, and cross-reference its `D-NNN` id here.
 Each durable fact has one owner.
 Other records link to that owner instead of copying its mutable state.
 
+For long-lived work, link the detailed timing artifacts and readable summary required by
+[OR-14](../../../operating-rules.md#or-14-a-development-cycle-is-never-artificially-slow)
+through the owning experiment or session.
+Summarize cost and completion status here without copying every timing row.
+Preserve failed, canceled, and partial runs as such; aggregate elapsed time does not
+establish per-test cost or a completed checkpoint.
+The
+[validation efficiency and checkpoints plan](../../../docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
+owns current instrumentation work and its unresolved evidence gaps.
+
 | Question | Owning record | What summaries may repeat |
 | --- | --- | --- |
 | What might be worth trying? | `ideas.md`, `H-NNN`, and launch agendas | The selected question and why it was selected |

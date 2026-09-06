@@ -107,7 +107,7 @@ agenda:
     note: >-
       BC-250 selects only two initial slices of at most 30 minutes, then a price of
       remaining work. The full retained control matrix and acceptance conditions
-      remain unchanged; 180 minutes is not an automatic allocation. Session088's
+      remain unchanged; 180 minutes is not an automatic allocation. Session089's
       two selected slices delivered project routes, a loader and pure cover controls,
       not triad acceptance. The remaining estimate is 180–320 active worker minutes
       plus unpriced full replays; further allocation needs a portfolio decision.
@@ -420,7 +420,7 @@ agenda:
     next_evidence: >-
       Restore readiness after the depth corrections reported in PR100 land and
       pass the retained seed/bridge controls (think-zuq5), then freeze the one
-      target invocation. No target has run in Session088.
+      target invocation. No target has run in Session089.
     parallel_group: agenda025-scalar
     program: n11-adaptive-fractional-frontier
   - id: BC-252

@@ -455,7 +455,7 @@ agenda:
       candidate requiring full a.e.-depth verification, or a scoped unresolved result.
     bead: think-01q4
     note: >-
-      Session088's design and toy controls passed independent review. Its next
+      Session089's design and toy controls passed independent review. Its next
       bounded readiness commission is think-0qcu, through 20:19:58 UTC on 2026-09-06;
       the uniform mass-eleven source/input control is allowed, not a target LP.
     artifacts:
@@ -486,7 +486,7 @@ agenda:
       a named obstacle and a justified alternative under H-102.
     bead: think-dene
     note: >-
-      The first assessment is retained. Session088 then selects think-2kld, a
+      The first assessment is retained. Session089 then selects think-2kld, a
       separate at-most-30-minute replay of the original exact-angle Theorem3
       source control, before any H036 interval-target instrument is funded.
     artifacts:

@@ -9,6 +9,8 @@ change nobody can attribute must select everything.
 
 from __future__ import annotations
 
+import pytest
+
 from devtools.reachable_tests import select_tests
 from sqpack.cli import validate
 
@@ -56,9 +58,19 @@ def test_an_unmapped_python_root_is_still_refused_into_everything() -> None:
     assert select_tests(["packing/scripts/unmapped.py"]).everything
 
 
-def test_suite_configuration_selects_everything() -> None:
-    assert select_tests(["pyproject.toml"]).everything
-    assert select_tests([".github/workflows/packing-validation.yml"]).everything
+@pytest.mark.parametrize(
+    "path",
+    [
+        "packing/pyproject.toml",
+        "packing/uv.lock",
+        "packing/tests/conftest.py",
+        "packing/.python-version",
+        ".github/workflows/packing-validation.yml",
+        "pyproject.toml",
+    ],
+)
+def test_suite_configuration_selects_everything(path: str) -> None:
+    assert select_tests([path]).everything
 
 
 def test_repository_walkers_run_for_any_change() -> None:

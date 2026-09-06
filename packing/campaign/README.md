@@ -209,6 +209,17 @@ or outranks the queue under an explicit re-screen.
 
 ### Workflow Checkpoints
 
+Long-lived tests, controls, and research runs retain detailed timing evidence under
+[OR-14](../../operating-rules.md#or-14-a-development-cycle-is-never-artificially-slow),
+including failed and interrupted work.
+Link the machine-readable receipts and readable summary from the owning experiment or
+session; phase elapsed time alone is insufficient.
+The
+[validation efficiency and checkpoints plan](../../docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
+owns the current W5 validation work.
+Its engineering acceptance criteria do not replace a scientific round’s frozen
+criterion.
+
 At a slice boundary, either renew W6 under a newly stated question or close the phase.
 A renewal closes the old phase and opens another with a changed objective, a new clock,
 and the new evidence that earns another slice; workflow and focus may stay the same.

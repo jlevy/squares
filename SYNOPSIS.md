@@ -200,6 +200,15 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Validation Efficiency Implementation Review](docs/project/reviews/review-2026-09-06-validation-efficiency-implementation.md) | dated review record | record | retained | — |
+| [Validation Efficiency Ideas](packing/benchmarks/validation-efficiency/ideas.md) | implementation plan | supporting | maintained | — |
+| [Reuse Float Midpoint-to-Cell Lookup](packing/benchmarks/validation-efficiency/experiments/VE-001-float-oracle.md) | research synthesis | record | retained | — |
+| [Reuse Bridge Row Inventory](packing/benchmarks/validation-efficiency/experiments/VE-002-bridge.md) | research synthesis | record | retained | — |
+| [Validation Efficiency Campaign](packing/benchmarks/validation-efficiency/README.md) | component scope and use | supporting | maintained | — |
+| [Validation Efficiency Results](packing/benchmarks/validation-efficiency/report.md) | generated status view | generated | generated | — |
+| [Exhaustive Checkpoint Exploration](docs/project/reviews/review-2026-09-06-validation-exhaustive-cost.md) | dated review record | record | retained | — |
+| [Slow-lane and mutation-control inspection](docs/project/reviews/review-2026-09-06-validation-slow-and-controls-cost.md) | dated review record | record | retained | — |
+| [Proposal: Testing and CI Performance Guidance](docs/project/reviews/review-2026-09-06-tbd-testing-and-ci-performance-proposal.md) | dated review record | record | retained | — |
 | [Square Packing](README.md) | reader orientation | definitive | maintained | — |
 | [Synopsis: The `s(n)` Program](SYNOPSIS.md) | current technical state and terminology | definitive | maintained | — |
 | [Tutorial: Square Packing from First Principles](TUTORIAL.md) | first-principles tutorial | supporting | maintained | — |
@@ -340,6 +349,7 @@ case or experiment separately.
 | [Feature: Promotion Pipeline Implementation](docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md) | implementation plan | current | transient | — |
 | [Feature: The Interval Certification Bridge](docs/project/specs/active/plan-2026-08-28-interval-certification.md) | implementation plan | current | transient | — |
 | [Feature: Gate Validation Speed](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md) | implementation plan | current | transient | — |
+| [Feature: Validation Efficiency and Checkpoints](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md) | implementation plan | current | transient | — |
 | [Plan: Research Lanes Beyond 3.81](docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md) | implementation plan | supporting | transient | — |
 | [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](packing/atlas/README.md) |
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
@@ -347,6 +357,7 @@ case or experiment separately.
 | [Feature: Generalized Square-Packing Motion Lab](docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md) | implementation plan | current | transient | — |
 | [create-or-update-pr-simple.md](docs/tbd/shortcuts/create-or-update-pr-simple.md) | component scope and use | definitive | maintained | — |
 | [create-or-update-pr-with-validation-plan.md](docs/tbd/shortcuts/create-or-update-pr-with-validation-plan.md) | component scope and use | definitive | maintained | — |
+| [Change-Scoped Exhaustive Validation](docs/project/reviews/review-2026-09-06-change-scoped-exhaustive-validation.md) | dated review record | record | retained | — |
 | `packing/frontier/n-*.md` | typed case claim register | definitive | maintained | — |
 | `packing/campaign/hypotheses/H-*.md` | typed hypothesis record | definitive | maintained | — |
 | `packing/campaign/series/*/experiments/exp-*.md` | typed experiment record | record | retained | — |
@@ -403,6 +414,13 @@ routine task.
 | W8 | `documentation-pass` | A period of research that closed several commitments, the artifacts it left, and the reader-facing documents that have not caught up | Reconcile the root tier — README, tutorial, synopsis, and the conventions they cite — against the artifacts and against each other; correct, cut, reorder and clarify, but never introduce a claim the record does not already carry, and never soften a claim boundary to make a document read better | A checklist run over each root document, every drift either fixed or filed as a defect, generated views regenerated, and an explicit statement of what was checked and what was left | W2 for any claim the pass could not verify against an artifact; otherwise the next owning workflow |
 | W9 | `remediation` | A confirmed defect or issue inventory, risk ordering, owning beads, and a bounded repair wave | Triage and repair defects systematically without changing scientific criteria or hiding unresolved evidence; group only compatible work and preserve each item’s independent disposition | Fixed items with regressions, contained items with evidence, rerouted evidence work, explicit blockers, regenerated defect views, and validation receipts | W10 reviews the wave and selects what follows |
 | W10 | `review-planning-oversight` | A launch or checkpoint scope, source ideas and H-items, stable evidence, agenda and beads; all writers terminal for full closeout | Assess mathematical directions, codify questions, and select bounded parallel work; at terminal closeout also reconcile every outcome and document impact. Do not execute the selected successors here. | H-linked agenda commitments, priorities, prerequisites, owners and one coordinating next entry; a linked tbd plan may retain rationale. Terminal work additionally records outcomes, dispositions and documentation decisions. | The selected coordinating entry dispatches the owning workflows, including independent BCs in parallel |
+
+The current W5
+[validation efficiency and checkpoints plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
+reviews ordinary PR feedback, full final checkpoints, detailed timing records, and
+coverage-preserving cost reductions.
+The [development guide](development.md#validation-loops) owns the current commands,
+names, and budget semantics; historical benchmark records remain linked from the plan.
 
 Implementation is an action inside the workflow that owns its promised result, not an
 undefined handoff: W1 and W2 can make bounded research corrections, W3 can implement a
@@ -483,15 +501,32 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-The next research phases are running on `codex/post-381-next-phases` from landed PR 97
-at `c14451f5`.
-[Session 088](packing/campaign/agent-sessions/session-088-agenda024-next-phases.md)
-records live assignments, readiness decisions and 30-minute checkpoints.
-Coordinator `think-jgnv` owns the successor PR and its first two-hour integration
-milestone. BC231, BC254 and BC255 begin with independent assessments; BC251’s scalar
-process waits for corrected depth-checking code and fresh readiness controls.
+The next research phases run in [PR101](https://github.com/jlevy/squares/pull/101) on
+`codex/post-381-next-phases`, with the landed PR100 depth fixes and PR98 validation
+improvements integrated.
+[Session 089](packing/campaign/agent-sessions/session-089-agenda024-next-phases.md)
+records live assignments and checkpoints; it was renamed from the branch-local
+session-088 to preserve the separate landed efficiency session below.
+Coordinator `think-jgnv` owns the integrated research line and its first two-hour
+checkpoint. Source controls have passed; independent review and bounded end-to-end
+target work remain distinct. Supporting fixes stay on this PR.
 
+**Efficiency implementation checkpoint.**
+[Session 088](packing/campaign/agent-sessions/session-088-validation-efficiency-checkpoint.md)
+records the bounded W5 slice: detailed timing artifacts, two independently guarded
+component optimizations, configuration-selection repairs, and integrated fast validation
+on main `edccf294` plus the reviewed changes.
+Its 62 selected steps passed in 232.89 seconds on the recorded ten-CPU local host with
+two outer/two inner workers; this is a dated local measurement.
+[PR98](https://github.com/jlevy/squares/pull/98) retains the later hosted results and
+the checkpoint status as upstream work is integrated.
 The
+[W5 plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
+links the measured results, retained profile, complete project documentation matrix, and
+upstream tbd proposal.
+Automatic exhaustive selection and evidence reuse remain planned.
+
+**Research continuation.** The
 [T+2-to-T+10 continuation addendum](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
 is the cold-review entry point for the partially completed post-T+2 continuation.
 The
@@ -520,15 +555,20 @@ control plane. It coordinates two disjoint programs: the exact fractional fronti
 density, typed stationarity, and Trump capture in
 [agenda 026](packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md).
 
-Two older selections remain only as provenance.
+Research and tooling have separate continuation work.
 [Session 087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md)
-completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0.015`; its
-selected entry is retained in the machine-checked marker below:
+completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0.015`.
+Session 088 carries its tooling follow-up forward:
 
 **Selected next entry:** `think-xejq`, `BC-215` in
-[Agenda 023](packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md) is
-historical provenance, not the live research authority.
-Likewise, `BC-219` was the preflight for Agenda 024’s original launch inputs.
+[Agenda 023](packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md),
+for the explained exhaustive-family planner in
+[W5 Phase 3](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md).
+Start in reporting mode with complete input and node attribution; validate the complete
+fresh-plus-reused coverage union before omitting expensive work.
+This terminal-session marker selects tooling work; Agenda 024 continues to own the
+active research allocation.
+`BC-219` was the preflight for Agenda 024’s original launch inputs.
 Its completion does not replace the continuation addendum’s current gate contract.
 
 The completed commissioning slice consumed the first two active portfolio hours of the
@@ -2955,12 +2995,13 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-074.yaml` | session-072, session-074 | 272 | 1.58 h | 1.58 h | 1.9 h | yes |
 | `codex-task-tree-session-075.yaml` | session-072, session-075 | 212 | 1.41 h | 1.41 h | 1.75 h | no |
 | `codex-task-tree-session-078.yaml` | session-078, session-082 | 2,401 | 13.41 h | 9.45 h | 10.0 h | yes |
+| `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 43 |
+| measured | 44 |
 | unmeasured | 45 |
-| **total** | **88** |
+| **total** | **89** |
 
 <!-- END GENERATED: session-close-report -->
 

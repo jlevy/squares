@@ -1,0 +1,6 @@
+.                                                                        [100%]
+============================== slowest durations ===============================
+16.42s call     tests/test_fractional_generate.py::test_the_float_oracle_scores_every_cell_the_exact_sweep_scores
+0.00s setup    tests/test_fractional_generate.py::test_the_float_oracle_scores_every_cell_the_exact_sweep_scores
+0.00s teardown tests/test_fractional_generate.py::test_the_float_oracle_scores_every_cell_the_exact_sweep_scores
+1 passed in 16.94s

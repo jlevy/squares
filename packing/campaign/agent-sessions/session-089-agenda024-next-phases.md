@@ -1,12 +1,12 @@
 ---
-title: session-088 — the next post-3.81 research phases
+title: session-089 — the next post-3.81 research phases
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
 session:
-  id: session-088
+  id: session-089
   title: The next post-3.81 research phases
   date: '2026-09-06'
   started_at: '2026-09-06T19:11:26Z'
@@ -478,7 +478,7 @@ session:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md
     excluded_commands: [git mutations, tbd mutations, target measurements, target geometry evaluation, implementation, registry allocation]
   outputs:
-  - packing/campaign/agent-sessions/session-088-agenda024-next-phases.md
+  - packing/campaign/agent-sessions/session-089-agenda024-next-phases.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-screen-spec.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md
@@ -501,12 +501,18 @@ session:
   stop_reason: null
   next_action: Review source instruments, integrate landed corrections and commission only ready, priced target work.
 ---
-# Session 088 — The Next Post-3.81 Phases
+# Session 089 — The Next Post-3.81 Phases
 
 The user authorized execution on a new branch after PR 97 landed.
 [Agenda 024](../agendas/agenda-024-post-381-24h-portfolio.md#current-allocation) still
 owns allocation. This session records execution and checkpoints, not a second research
 queue. The initial checkout is `c14451f5`; no open PR head was imported.
+
+This research record initially used session-088 on its unpublished branch.
+PR98 landed a different session-088 for the validation-efficiency work, so upstream
+integration renamed this record to session-089. The start, budgets, phase history and
+worker evidence are unchanged. The incoming session and its cost receipt remain intact;
+their measurements do not become this research session's costs.
 
 ## Monitoring and Checkpoints
 

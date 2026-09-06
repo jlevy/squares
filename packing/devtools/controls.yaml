@@ -115,24 +115,29 @@ controls:
   run: python3 -m devtools.render_operating_rules --check
   expect: "AGENTS.md's summary has drifted"
 
-# The injected id must be EXACTLY one past the highest real rule. Not one behind, which is
-# a duplicate, and not far ahead, which is a gap -- the renderer refuses both on contiguity
-# before it can notice the drift this control is about, and a control that fails for the
-# wrong reason is what `expect` exists to catch.
-#
-# This has now bitten three times: OR-8 added while this injected OR-8, OR-9 the same, and
-# then an attempt to end the recurrence by jumping to OR-900, which failed on 2026-08-31
-# with "rule ids are not contiguous from OR-1: ... OR-9, OR-900". There is no id that
-# survives a new rule, so bump this one and the gap control below whenever a rule is added.
+# Append the next contiguous source rule so the unchanged renderer reaches summary
+# drift, even after real rules are added. A literal id recurs as a duplicate; jumping
+# ahead fails the contiguity guard before the intended summary boundary.
 - name: operating rules - a new rule never reaches the summary
   file: ../operating-rules.md
   replace:
     - "<!-- This document follows common-doc-guidelines.md."
     - |-
-      ## OR-16: Never push to a branch other than the designated one
+      <!-- negative-control: append-next-operating-rule -->
 
       <!-- This document follows common-doc-guidelines.md.
-  run: python3 -m devtools.render_operating_rules --check
+  run: |-
+    set -e
+    python3 - <<'PY'
+    from devtools.render_operating_rules import RULES, source_rules
+    next_id = len(source_rules()) + 1
+    text = RULES.read_text(encoding="utf-8")
+    marker = "<!-- negative-control: append-next-operating-rule -->"
+    assert text.count(marker) == 1
+    heading = f"## OR-{next_id}: Keep this new rule in the agent summary"
+    RULES.write_text(text.replace(marker, heading, 1), encoding="utf-8")
+    PY
+    python3 -m devtools.render_operating_rules --check
   expect: "AGENTS.md's summary has drifted"
 
 - name: operating rules - a gap in the rule numbering is not renumbered silently

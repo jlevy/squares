@@ -77,6 +77,11 @@ packing/resources/web/
 # failed on the first run after the file was formatted.
 packing/campaign/ledger.md
 
+# Generated from validated engineering experiment receipts by validation_report.py.
+# The pinned formatter reflows the report (measured on a copy, 2026-09-06), which
+# would fail the generator's --check without changing any measurement.
+packing/benchmarks/validation-efficiency/report.md
+
 # defects.md is the same case, and was missed when the rule above was written: it is
 # rebuilt by `devtools.render_defects` and drift-checked through `packing-validate`.
 # flowmark reflows it today -- verified on 2026-08-23 against
