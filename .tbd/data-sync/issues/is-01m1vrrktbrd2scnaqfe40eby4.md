@@ -5,7 +5,7 @@ title: "W5 efficiency block: fast feedback and justified validation checkpoints"
 kind: epic
 status: in_progress
 priority: 1
-version: 23
+version: 24
 spec_path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 labels: []
 dependencies: []
@@ -23,7 +23,7 @@ child_order_hints:
   - is-01m1w3p6hhmhnjqakekbqwa82f
   - is-01m1w1x2hxn7was5jgcheqeyh9
 created_at: 2026-09-06T16:27:59.178Z
-updated_at: 2026-09-06T20:04:13.326Z
+updated_at: 2026-09-06T20:20:11.369Z
 ---
 User-directed W5 efficiency block: audit end-to-end CI and long checkpoints, preserve independent coverage while reducing feedback latency, retain detailed timing evidence, align project documentation and naming, and prepare reusable upstream tbd guidance. The plan is docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md. The first implementation slice is PR98; explained family selection and safe reuse follow under think-xejq.
 
@@ -44,3 +44,5 @@ After the final current-head full checkpoint passes and artifacts are audited, c
 The 16-file upstream tbd patch is prepared and checked (97 focused tests, build, CLI discovery, type/lint/format and pristine application). Filing think-jogv awaits the owner's confirmation required by the contribution shortcut. PR93 was already reviewed, fixed, merged and validated. PR98 has no authorization for automatic merge. The task heartbeat verify-pr-98-validation-checkpoint continues CI monitoring and final records. Retain the temporary control worktree and integration stash; automatic approval review rejected their potentially destructive cleanup.
 
 Final ordinary artifact audit: /tmp/pr98-combined-fast-artifact-audit.json verifies clean tested merge 3663706fdd25bc1ee379167599b6e1eb0dafdeaf and parents c14451f5/b3b7275f, 62 Linux fast steps plus four macOS steps, 145 complete command pairs, and 2,354 unique quick JUnit cases with no failures/errors/skips. Pytest took 108.33s; the slowest fast step took 109.14385s. All emitted quick phases match JUnit identities; subthreshold phases are not claimed as recorded. All five artifacts are present. The 2m56s workflow is still above the 2–2.5 minute target.
+
+Deferred job 101549500444 passed in 650s (10m50), 19:59:47–20:10:37 UTC. Artifact 9996303040 and audit /tmp/pr98-final-deferred-artifact-audit.json verify the same clean merge, all three selected steps and command pairs, 96 slow cases with 288 complete phase records, all 163 controls, and n=40 replay. Pytest 628.97s; slow step 630.16874s; control journal 334.80885s and control step 335.75164s; n=40 163.72687s. Historical review passed 31.008s, and the repaired rule control passed 0.36894s. The exhaustive job remains pending; completed first-slice beads remain open until that final coverage is verified.

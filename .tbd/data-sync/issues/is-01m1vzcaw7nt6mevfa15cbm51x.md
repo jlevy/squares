@@ -5,13 +5,13 @@ title: Preview explainer typography, PDF layout, and reading guide
 kind: task
 status: open
 priority: 2
-version: 9
+version: 11
 labels: []
 dependencies: []
 created_at: 2026-09-06T18:23:36.838Z
-updated_at: 2026-09-06T19:50:48.673Z
+updated_at: 2026-09-06T20:14:50.150Z
 ---
 
 ## Notes
 
-Local explainer preview is updated across prose, typography, credits, Further Reading, and print layout. Current scale: measure 40, H2 1.2, sans light/regular 430, medium 550, bold 680, with overrides together in explainer-shell.html. Credits and body both measure 18px screen and 12pt print; the typography diagnostic supports CSS selector filtering. The framework phrase links to the repository; redundant open-source and README sentences were removed. Further Reading groups project elements, framework, agent tools, and document tools with Burns/Massaccesi attribution. Moved the results count before the atlas sentence and clarified This lower bound; joined verification into the proof paragraph. Credits say Human oversight; the weaker-certificate parenthetical explains its value for illustration in one sentence; the final apparent-novelty/priority sentence was removed from the footnote. Updated the comparison test for the revised explanation. Fixed Figure 3: certificate labels now descend from the largest bound, so longer leaders remain left of the labels above them. Reviewed enlarged before/after PDF crops; both labels are clear, and only page 4 differs from the previously reviewed render. HTML and PDF rebuilt; 43 explainer tests and Ruff pass. Earlier BasedPyright and print layout checks passed. PDF remains 14 pages with clean breaks. Also fixed Markdown credit date extraction, revision-pinned document links, and URL-fragment handling. Changes remain uncommitted for user inspection.
+Local preview includes the requested prose, credit, Further Reading, Figure 3 label, typography, and print-layout edits. Current typography: measure 40, H2 scale 1.2, sans base 18.5px against 18px serif prose, regular/light 410, medium 550, bold 680. Sans overrides stay together locally; print preserves the size ratio and uses 1.32 caption/footnote leading. Print now resets normal and muted text roles to solid black across KPress scopes, including theme/palette selectors; page numbers are black too. This covers prose, captions, figure labels, footnotes, and colophon while preserving the screen styling and colored links. HTML and PDF rebuilt. All 43 explainer tests pass; git diff --check passes. The 14-page PDF has identical text and line/page breaks to the previously reviewed version. Visually checked the updated Figure 3/captions and Further Reading/footnotes/colophon. Previous font and print-layout audits passed, as did Ruff and BasedPyright for code changes. The diagnostic supports selector filtering. All changes remain uncommitted for user inspection.
