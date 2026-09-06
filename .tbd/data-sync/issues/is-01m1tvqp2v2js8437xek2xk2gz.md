@@ -5,7 +5,7 @@ title: Execute Agenda 024 from T+2 through T+10
 kind: epic
 status: in_progress
 priority: 0
-version: 35
+version: 40
 labels:
   - research
   - execution
@@ -43,11 +43,15 @@ child_order_hints:
   - is-01m1v5jwt792wc9gs756crstvb
   - is-01m1v737815kxw4n164yct54p9
   - is-01m1v8ab46v0vpr5vyzx4sj6yx
+  - is-01m1vqn6m1f1nkzeka8t0tqh9b
+  - is-01m1vqs5efed48ajdchsjx0npf
+  - is-01m1vrxq9nstxhb12j753nvkpp
+  - is-01m1vsa2mptszc9vtgw4668bgt
 created_at: 2026-09-06T08:00:40.024Z
-updated_at: 2026-09-06T11:48:54.194Z
+updated_at: 2026-09-06T16:37:31.413Z
 ---
 Coordinate the next eight active portfolio hours after PR #89 lands. Start only from a committed launch-amendment packet on a fresh codex branch; run one fractional manager and one closure manager with a single transferable worker; hold the clock for operational interruptions and T+4/T+8 integration; land a T+10 checkpoint with exact dispositions, upstream reconciliation, validation, and a cold-agent handoff.
 
 ## Notes
 
-Replacement authorization 2026-09-06T11:31:09Z was bound to reviewed pushed pre-launch head da00905e and published in ff9cfe30. Required roles restarted by 11:38:05Z; shared active time ran 1m44s, then held at minute 121:44 when the original BC-232 process was found dead. Recovery authorization and frozen gate were pushed at 9a93b2ea. After fractional-manager GO at 11:46:52Z, the one permitted scientific recovery launched at 2026-09-06T11:47:39Z in coordinator session 36339 (uv 72209, Python 72291), so shared active time resumes then from minute 121:44. BC-241 remains released at local-only scope. Fixed outer deadline is 2026-09-06T18:22:36Z; interruptions never count as active time and no active-minute-600 claim is permitted.
+User explicitly excluded the credit interruption from wall allowance. Conservative accounting pause: last coordinator observation 2026-09-06T11:50:09Z through first recovered observation 2026-09-06T16:07:05Z, 4h16m56s; exact failure onset unknown. Credited shared time is minute124:14, held for recovery/integration. Adjusted target20:39:32Z and outer boundary22:39:32Z. BC-232 completed five iterations with no row-converged covering and no cumulative bracket improvement; recorded driver wall7278.912243166007s shows the101m argument is cooperative, not a hard cap. BC-241 and core-shrink independent reviews resumed. think-3ir7 owns recovery; current handoff now distinguishes historical deadlines from user amendment. No repeat of completed scientific evidence or unpriced successor launch.
