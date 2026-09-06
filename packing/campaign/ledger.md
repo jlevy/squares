@@ -546,7 +546,7 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 64 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 66 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -615,8 +615,9 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 | H-061 | result registered | proof | There is a finite measure of rational-weight point atoms in [0, 19/5]^ |  | 0 | T-017, T-018 |  |
 | H-062 | confirmed | proof | On the retained 181-direction net at B = 9977/10000, the side at which | container side: 193/40 39/8 97/20 979/200 123/25 247/50 993/200 | 2 | T-021 | 112m agent + 109.8m wall |
 | H-063 | refuted | proof | Two statements, one instrument. First, the class certificate of X-014' | composition n1: 0 1 2 3 4 5 6 7 8 9 10 11* | 1 |  | 25m agent + 27.8m wall |
-| H-064 | abandoned | proof | At container side 77/20 = 3.85, on the retained 181-direction net at B | container side: 191/50 77/20 387/100 | 1 |  | 96m agent + 66.0m wall |
+| H-064 | abandoned | proof | At container side 77/20 = 3.85, on the retained 181-direction net at B | container side: 191/50 77/20 387/100 | 2 |  | 96m agent + 66.0m wall |
 | H-065 | confirmed | proof | On the retained 381/100 certificate at n = 11 -- 1121 atoms, B = 9977/ | census margin epsilon: 0 0.01 0.05 0.1 | 1 |  | 16m agent + 16.1m wall |
+| H-070 | running | proof | At n = 11, outer side 191/50, and B = 9977/10000, the eligible minimum | one-sided inset: 1/2 2962983/4505800 15513/20000 | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -720,6 +721,13 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (2)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The round is preregistered and claimed; no numerical process starts until the T+0 dispatch commit and explicit coordinator GO. |
+| exp-071 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-233, think-jbat | H-070 | The paired round is preregistered and claimed; its strict-JSON control must pass after the T+0 dispatch commit before the first screen starts. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -735,7 +743,7 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 
 ## Effort
 
-64 rounds, 2152.1 agent-minutes, 1044.7 wall-minutes.
+66 rounds, 2152.1 agent-minutes, 1044.7 wall-minutes.
 
 ## Exploration reports not yet codified
 

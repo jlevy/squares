@@ -33,6 +33,7 @@ documents:
   - {path: packing/campaign/ledger.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/agenda-map.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/README.md, role: series-guide, authority: definitive, lifecycle: maintained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/launch-t-plus-00.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/frontier/README.md, role: frontier-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/frontier/STATUS.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/frontier/INVENTORY.md, role: generated-view, authority: generated, lifecycle: generated}
