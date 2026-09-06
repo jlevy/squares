@@ -5,7 +5,7 @@ title: Execute Agenda 024 from T+2 through T+10
 kind: epic
 status: in_progress
 priority: 0
-version: 34
+version: 35
 labels:
   - research
   - execution
@@ -44,10 +44,10 @@ child_order_hints:
   - is-01m1v737815kxw4n164yct54p9
   - is-01m1v8ab46v0vpr5vyzx4sj6yx
 created_at: 2026-09-06T08:00:40.024Z
-updated_at: 2026-09-06T11:40:34.309Z
+updated_at: 2026-09-06T11:48:54.194Z
 ---
 Coordinate the next eight active portfolio hours after PR #89 lands. Start only from a committed launch-amendment packet on a fresh codex branch; run one fractional manager and one closure manager with a single transferable worker; hold the clock for operational interruptions and T+4/T+8 integration; land a T+10 checkpoint with exact dispositions, upstream reconciliation, validation, and a cold-agent handoff.
 
 ## Notes
 
-Replacement authorization 2026-09-06T11:31:09Z is bound to reviewed pushed pre-launch head da00905e1deb3056cf7ae15b6b1786b81c93059c and published in ff9cfe30. Fractional manager restarted 11:35:26Z, closure manager 11:34:50Z, and floating reviewer 11:38:05Z; the latest restart sets the shared Agenda 024 active clock to resume from minute 120 at 2026-09-06T11:38:05Z. BC-232 leg 02 launched once at 11:36:42Z in session 27576 with cooperative stop. BC-241 is released at local-only scope. Fixed outer deadline remains 2026-09-06T18:22:36Z, so even without holds the partial run can reach only about active minute 524.5; interruptions reduce that value and never count as active time.
+Replacement authorization 2026-09-06T11:31:09Z was bound to reviewed pushed pre-launch head da00905e and published in ff9cfe30. Required roles restarted by 11:38:05Z; shared active time ran 1m44s, then held at minute 121:44 when the original BC-232 process was found dead. Recovery authorization and frozen gate were pushed at 9a93b2ea. After fractional-manager GO at 11:46:52Z, the one permitted scientific recovery launched at 2026-09-06T11:47:39Z in coordinator session 36339 (uv 72209, Python 72291), so shared active time resumes then from minute 121:44. BC-241 remains released at local-only scope. Fixed outer deadline is 2026-09-06T18:22:36Z; interruptions never count as active time and no active-minute-600 claim is permitted.
