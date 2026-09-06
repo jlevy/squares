@@ -277,7 +277,7 @@ Each of these adds weight the result does not need, or adds it in the wrong plac
   The direction is right — it is this branch’s own rule — but a default on a public
   generator function is a behaviour change and one test guards it.
 - **One stale figure the stack introduces.** The Lean research note says “the
-  90.5-million-cell C4 decision remains the expensive layer” and “do not begin by
+  90.5-million-cell coverage decision remains the expensive layer” and “do not begin by
   replaying 90.5 million raw cells” — the `19/5` rung’s cell count — while the same file
   correctly gives the current certificate’s 567,130,649. The class the parent recorded
   four times today, once more.
