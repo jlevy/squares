@@ -79,6 +79,10 @@ TEMPLATES = Path(__file__).with_name("templates")
 TEMPLATE = TEMPLATES / "explainer-shell.html"
 MARKDOWN = TEMPLATES / "explainer-article.md"
 VERIFIER_CLAIM = CASE / "verify_claim.py"
+#: The one-file checker pinned by digest to the headline certificate; the opening says
+#: how long it is, so a reader knows the whole check is a short read before deciding
+#: whether to make it.
+PINNED_VERIFIER = CASE / "minimal_verify.py"
 OUTPUT = PACKING / "site" / "index.html"
 
 # Four colors have to stay apart in the prover: the mass comfortably above the
@@ -1253,6 +1257,17 @@ MEASURED_SECONDS = {"19-5": 36, "381-100": 175}
 PINNED_SECONDS = {"381-100": 67}
 
 
+def source_lines_phrase(path: Path) -> str:
+    """How long a verifier is, said loosely: its line count to the nearest ten.
+
+    Counted from the file rather than typed, so the sentence that calls the checker a
+    short read stays true as the checker is edited; rounded so that a comment added to
+    it does not change the page.
+    """
+    lines = len(path.read_text(encoding="utf-8").splitlines())
+    return f"about {round(lines, -1):,} lines"
+
+
 def runtime_phrase(facts: Facts, *, pinned: bool = False) -> str:
     """How long the claim verifier takes, said loosely; `pinned` asks for the checker's.
 
@@ -1287,6 +1302,7 @@ def claim_substitutions(headline: Facts, default: Facts) -> dict[str, str]:
         values[f"{role}_N_DIRECTIONS"] = str(f.steps + 1)
         values[f"{role}_RUNTIME"] = runtime_phrase(f)
     values["HEADLINE_PINNED_RUNTIME"] = runtime_phrase(headline, pinned=True)
+    values["PINNED_VERIFIER_LINES"] = source_lines_phrase(PINNED_VERIFIER)
     return values
 
 

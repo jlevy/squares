@@ -47,6 +47,10 @@ them apparently new.
 The certificate used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted points
 in the container and selects a net of {{HEADLINE_N_DIRECTIONS}} rationally parameterized
 directions. Five exact conditions and a pigeonhole-style argument then imply the claim.
+Verification is exact rational arithmetic: the one-file checker,
+{{PINNED_VERIFIER_LINES}}
+of standard-library Python and short enough to read in one sitting, decides the
+certificate file of {{HEADLINE_N_ATOMS}} weighted points in {{HEADLINE_PINNED_RUNTIME}}.
 
 This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
 open case of the square packing problem.[^novelty] The previous bound,
@@ -59,7 +63,7 @@ defined research framework, available in
 The atlas of best known packings for every $n$ from 1 to 100 in Figure 1 came from the
 same research agenda and currently includes {{N_STARRED}} new lower bounds.
 
-The repository is much larger than a single proof: it includes a comprehensive survey of
+The repository holds much more than this proof: it includes a comprehensive survey of
 previous research, the atlas of packings, a hypothesis registry, an experiment ledger,
 exact verifiers, and a retention gate that labels results according to epistemic status
 (levels of verification, confirmation, and significance).
