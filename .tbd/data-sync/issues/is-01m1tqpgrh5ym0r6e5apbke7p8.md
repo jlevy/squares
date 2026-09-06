@@ -5,7 +5,7 @@ title: Address the 2026-09-06 Claude Code adversarial review of the explainer
 kind: epic
 status: in_progress
 priority: 1
-version: 29
+version: 30
 labels:
   - review-claude
 dependencies: []
@@ -37,7 +37,8 @@ child_order_hints:
   - is-01m1tqpstgns62r6t1jjvgpsj3
   - is-01m1tqpt68meevswkc48gcz10p
   - is-01m1tqpthqq2bnj053chgqw3hm
+  - is-01m1trx8pzvj8529kjnmtn9rzg
 created_at: 2026-09-06T06:50:07.504Z
-updated_at: 2026-09-06T06:50:18.414Z
+updated_at: 2026-09-06T07:11:17.214Z
 ---
 Source: docs/project/reviews/review-2026-09-06-claude-code-adversarial-review.md, which read the page at c743d7bb, before the 2026-09-05 review's fixes (think-cd62) landed in PR #92. Verdict: the theorem and certificate hold; the page's presentation had gaps. Triage on 2026-09-06 against main at 235bfc50: A1, A2, A4, A6, B1 and C2 are already fixed by round one and are closed here with the bead that did it; C3's phrase is gone from the rewritten opening. The rest are open and implemented on claude/second-adversarial-review as one change with round one; the edition stays at v0.2.0-41fb401a (no second bump). D1 (the opening's structure) is the author's decision and is left open for it.

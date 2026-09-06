@@ -3,9 +3,9 @@ type: is
 id: is-01m1t71c4hyfw28d5nc5m6jv6b
 title: Obtain green hosted checks and sync terminal bead graph
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 4
+version: 5
 labels:
   - hosted-ci
 dependencies:
@@ -16,6 +16,10 @@ child_order_hints:
   - is-01m1tcw4q98vj6rme1bbatbg2a
   - is-01m1tdk0b963qq9aqcpxqdyvmv
 created_at: 2026-09-06T01:58:57.423Z
-updated_at: 2026-09-06T03:53:26.631Z
+updated_at: 2026-09-06T07:15:21.226Z
 ---
 Push the reconciled branch, monitor PR #89 through all required checks, fix any branch-owned failure, update evidence, close terminal stabilization beads, and run tbd sync.
+
+## Notes
+
+Local landing gates are complete, including the recovered full checkpoint and final pre-push 842-test run. Next: sync tbd, commit the T+2 checkpoint, push PR #89, replace its stale body, monitor the new head through required hosted checks, fix any branch-owned failure, then record exact head/run evidence and close.
