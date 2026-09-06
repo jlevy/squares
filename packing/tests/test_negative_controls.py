@@ -28,6 +28,7 @@ from devtools.run_negative_controls import (
     run_control_command,
     snapshot_source_bytes,
 )
+from sqpack.yamlio import safe_load
 
 
 def test_oversized_snapshot_is_refused_before_cloning(
@@ -367,3 +368,49 @@ def test_timeout_reaps_a_child_that_ignores_termination() -> None:
     assert outcome.timed_out is True
     assert outcome.returncode != 0
     assert time.monotonic() - started < 1.0
+
+
+@pytest.mark.parametrize("rule_count", [16, 17, 25])
+def test_new_operating_rule_control_reaches_summary_drift_after_future_rules(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, rule_count: int
+) -> None:
+    spec = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    control = next(
+        item
+        for item in spec["controls"]
+        if item["name"] == "operating rules - a new rule never reaches the summary"
+    )
+    work = tmp_path / HERE
+    tools = work / "devtools"
+    tools.mkdir(parents=True)
+    (tools / "__init__.py").write_text("")
+    shutil.copy2(ROOT / "devtools/render_operating_rules.py", tools)
+    original = (
+        "\n\n".join(f"## OR-{index}: Rule {index}" for index in range(1, rule_count + 1))
+        + "\n\n<!-- This document follows common-doc-guidelines.md.\n-->\n"
+    )
+    source = tmp_path / "operating-rules.md"
+    source.write_text(original)
+    summary = "\n".join(
+        f"- **OR-{index}:** Rule {index}." for index in range(1, rule_count + 1)
+    )
+    (tmp_path / "AGENTS.md").write_text(
+        "<!-- BEGIN OPERATING RULES SUMMARY -->\n"
+        + summary
+        + "\n<!-- END OPERATING RULES SUMMARY -->\n"
+    )
+    monkeypatch.setenv(
+        "PATH", str(Path(sys.executable).parent) + os.pathsep + os.environ["PATH"]
+    )
+    baseline = subprocess.run(
+        [sys.executable, "-m", "devtools.render_operating_rules", "--check"],
+        cwd=work,
+        env={**os.environ, "PYTHONPATH": str(work)},
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert baseline.returncode == 0, baseline.stderr
+    assert f"mirrors all {rule_count} rules" in baseline.stdout
+    assert controls.run_one(control, tmp_path) == (True, "")
+    assert source.read_text() == original

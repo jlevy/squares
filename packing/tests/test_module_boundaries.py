@@ -166,6 +166,22 @@ def test_readme_inventory_ignores_cache_only_legacy_directories(tmp_path: Path) 
     assert meaningful_top_level_entries(repository) == {"README.md", "current"}
 
 
+def test_deferred_slow_review_has_its_required_git_history() -> None:
+    workflow = VALIDATION_WORKFLOW.with_name("deep-gate.yml")
+    jobs = _mapping(_mapping(yaml.safe_load(workflow.read_text()))["jobs"])
+    deferred = _mapping(jobs["deferred-steps"])
+    raw_steps = deferred["steps"]
+    assert isinstance(raw_steps, list)
+    steps = [_mapping(step) for step in raw_steps]
+    assert any('"slow behavioral tests"' in str(step.get("run", "")) for step in steps)
+    checkout = next(
+        step for step in steps if str(step.get("uses", "")).startswith("actions/checkout@")
+    )
+    assert _mapping(checkout.get("with") or {}).get("fetch-depth") == 0, (
+        "the slow retained-theorem review reads exact historical Git objects"
+    )
+
+
 def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -> None:
     document: object = yaml.safe_load(VALIDATION_WORKFLOW.read_text(encoding="utf-8"))
     jobs = _mapping(_mapping(document)["jobs"])
