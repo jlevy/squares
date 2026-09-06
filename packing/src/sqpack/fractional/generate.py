@@ -27,7 +27,7 @@ from fractions import Fraction
 import numpy as np
 from scipy.optimize import linprog
 
-from sqpack.fractional.certificate import Certificate, verify
+from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.model import Atom, Direction, rotation_from_half_tangent
 
 
@@ -497,7 +497,16 @@ def generate(
     scale: int = 576,
     max_rounds: int = 60,
 ) -> tuple[Certificate | None, GenerationLog, float]:
-    """Search for a certificate at one setting, then decide it exactly."""
+    """Search for a certificate at one setting and return the candidate undecided.
+
+    Nothing here verifies. The candidate is the rationalised solver point, built and
+    handed back, because a decision made in memory is not evidence about any file
+    (D-441 lost a candidate to a kill between its in-memory decision and its write):
+    the retention boundary is `devtools.decide_certificate` on the frozen bytes, by
+    both routes. A search loop that wants a verdict before freezing has
+    `colgen.generate_adaptive(decide=True)`; this function has no such option, and
+    its caller decides with `sqpack.fractional.certificate.verify`.
+    """
 
     grid = build_site_grid(outer_side, grid_count, inset)
     half_tangents = net_half_tangents(angle_limit, direction_steps)
@@ -532,5 +541,4 @@ __all__ = [
     "placement_cells",
     "rationalise",
     "solve_covering_lp",
-    "verify",
 ]

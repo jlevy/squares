@@ -9,7 +9,7 @@ reasons.
 from __future__ import annotations
 
 #: The edition the figures and the explainer state. Bump it when they are republished.
-PUBLICATION_VERSION = "v0.1.0"
+PUBLICATION_VERSION = "v0.2.0"
 
 #: Where the edition stands, said ahead of the version. Empty once it is final; the
 #: join below then drops it and the stray space with it, so going final is one edit.
@@ -23,7 +23,7 @@ PUBLICATION_STATUS = "DRAFT"
 #: byte against a fresh render, and a live revision would differ from the committed one
 #: the moment it was committed, failing that gate forever. Bump it with the version when
 #: republishing.
-PUBLICATION_REVISION = "3bd273e6"
+PUBLICATION_REVISION = "41fb401a"
 
 #: The version, written the one way it is ever written: `v0.1.0-3bd273e6`. Semver core,
 #: then the revision, in the shape a build identifier takes everywhere else.

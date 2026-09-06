@@ -235,6 +235,10 @@ documents:
     role: review
     authority: record
     lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-05-gpt6-pro-adversarial-review.md
+    role: review
+    authority: record
+    lifecycle: retained
   - path: docs/project/reviews/review-2026-09-05-strategy-gpt-56-pro-gemini-grok.md
     role: review
     authority: record

@@ -147,7 +147,7 @@ The local landing tree is bound to these revisions:
 | Item | Receipt |
 | --- | --- |
 | Pre-checkpoint branch HEAD | `c44562409e7b48578df99fcae9e1cf61856158bc` |
-| Landed upstream inspected locally | `origin/main` at `c743d7bb218b0cf7fece852eed050298ae80b8ce`, verified as an ancestor of the branch |
+| Landed upstream inspected locally | `origin/main` at `235bfc5011d5bf2a7fab0c7aea154187f4e0fcd1` after PR #92 merged, verified as an ancestor of the integrated branch |
 | Final checkpoint commit | The commit containing this receipt. Its immutable SHA and hosted checks are recorded on [PR #89](https://github.com/jlevy/squares/pull/89) and in `think-ygb4` after push; embedding either here would create a new head and another check run. |
 
 The frozen hashes in the coordinator decision remain the historical T+2 identities.
