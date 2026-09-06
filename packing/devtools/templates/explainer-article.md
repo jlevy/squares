@@ -104,8 +104,9 @@ $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
 ## Packing 11 Squares
 
 $s(11)$ is the smallest case still open.
-Trump’s 1979 packing shows $s(11) \le {{BEST_PACKING_TEX}}$.[^trump] Here we prove
-$s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
+Trump’s 1979 packing shows
+<span class="math-reference">$s(11) \le {{BEST_PACKING_TEX}}$.[^trump]</span> Here we
+prove $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
 
 <!--BEGIN:REFINEMENT-->
 

@@ -645,6 +645,9 @@ body {
 }
 :root:where([data-kpress-resolved-theme="dark"]) { --cert-probe: oklch(76% 0.13 60); }
 
+/* Keep an inline result, its punctuation and its source reference together. */
+.math-reference { white-space: nowrap; }
+
 /* Math is held until KaTeX has typeset it, so no raw TeX flashes. */
 .tex, .tex-d { visibility: hidden; }
 .math-ready .tex, .math-ready .tex-d { visibility: visible; }
