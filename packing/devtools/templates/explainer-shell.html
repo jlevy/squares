@@ -190,8 +190,13 @@ body {
   margin-block: 0.5rem 0;
   text-transform: var(--kpress-caps-transform);
 }
-/* The hero is centered: title, subtitle and credits; the deck below reads as prose. */
-.cert-page .hero h1, .cert-page .hero .subtitle, .credits { text-align: center; }
+/* `.centred` is the page's one word for "this block is centred, in every medium".
+   It exists because the print block left-aligns prose wholesale, and the elements that
+   must escape that need to be nameable in one place: the rule there carves them out by
+   `:not(.centred)` and `check_print_layout` holds them to it. The hero's `h1` is named
+   separately because a Markdown heading carries no class of its own.
+   The hero is centred -- title, subtitle and credits; the deck below reads as prose. */
+.centred, .cert-page .hero h1 { text-align: center; }
 .credits {
   display: grid;
   font-family: var(--kpress-font-sans);
@@ -259,12 +264,46 @@ body {
 .trump svg [stroke="#000000"] { stroke: var(--kpress-doc-text); }
 .trump svg text { display: none; }
 .cert-figure[hidden] { display: none; }
-.colophon {
+/* `.cert-page` and not `.colophon` alone. A class-only selector is (0,1,0) and kpress's
+   paragraph margins are type-qualified -- `.kpress-prose p` on screen, `.kpress p` in
+   print, both (0,1,1) -- so the 2.5rem here lost in both media and the colophon sat
+   0.65rem under the footnotes instead of 2.5rem. The same shape as the centring bug
+   beside it: this stylesheet is written in classes against a vendor written in types,
+   which loses by default and says nothing when it does. */
+.cert-page .colophon {
   color: var(--kpress-doc-muted);
   font-family: var(--kpress-font-sans);
   font-size: var(--kpress-font-size-tiny);
   margin-block: 2.5rem 0;
-  text-align: center;
+}
+
+/* The list bullet, centred on the line it marks rather than offset from a type size.
+
+   kpress draws it as an absolutely positioned `::before` -- `list-style-type: none`,
+   `content: "\25AA\FE0E"` -- and places it with `top: calc(var(--kpress-font-size-base)
+   * 0.1)`. That constant is tuned for one type size, and the print block sets a
+   different one, so in the PDF the bullet sat about 2.2px low, reading as sitting on
+   the baseline instead of on the middle of the line. It was 2.5px low on screen too.
+
+   The fix is to stop expressing the position as a fraction of a font size at all: give
+   the marker a box exactly one line box tall, pin it to the top of the first line, and
+   centre the glyph inside it. Then it is right at any type size and any leading.
+
+   `line-height: 1lh` on the `li` is what makes `1lh` on the marker mean the line the
+   marker belongs to. Without it the marker's own smaller `font-size` rescales the
+   inherited unitless line-height and its box comes out short. On the `line-height`
+   property `lh` resolves against the parent's computed line-height rather than the
+   element's, which is what avoids the circularity; here the two differ by 0.02px.
+
+   Measured, marker centre against the first line box's centre, before and after:
+   screen +0.35px to -0.09px, print -1.88px to -0.01px. `check_print_layout` keeps it
+   there, in both media. */
+.cert-page.kpress-prose ul > li { line-height: 1lh; }
+.cert-page.kpress-prose ul > li::before {
+  align-items: center;
+  display: flex;
+  height: 1lh;
+  top: 0;
 }
 
 .line-fig { padding: 1.3rem 1.1rem 0.4rem; }
@@ -579,6 +618,21 @@ body {
   }
   :root { --cert-probe: oklch(55% 0.145 52); }
 
+  /* The accent, which the block above forgot. The dark rule near the top of this sheet
+     lifts `--kpress-doc-accent` to L=76.68% so links clear 4.5:1 on a dark ground; the
+     print reset puts the ground back to white and left the accent where it was, so a
+     dark-mode reader printed #6ec5bc links on paper at 2.02:1 against the 5.47:1 the
+     light accent gives. Restored to kpress's own light value.
+
+     Declared on the same elements the dark rule names, including the attribute form at
+     (0,2,0). Putting it on `.kpress-page-main` alone would be shadowed by the dark
+     rule's own declaration on `.kpress` -- exactly how the print type size went missing
+     two rules down. */
+  :root, .kpress, .kpress-page-main, .kpress-tooltip,
+  :is(.kpress, .kpress-page-main, .kpress-tooltip)[data-kpress-resolved-theme] {
+    --kpress-doc-accent: oklch(51.09% 0.0861 186.4);
+  }
+
   /* Legend chips carry their meaning in colour alone, so they keep it even
      when the reader prints without background graphics. */
   .legend i { border: 1px solid currentColor; print-color-adjust: exact; }
@@ -622,17 +676,31 @@ body {
      have the same specificity, so this one wins on nothing but the order the two
      stylesheets are inlined in; a kpress release that adds `!important` or narrows
      its selector to `.kpress-prose p` would silently restore justification. The
-     extra elements are not justified by kpress today and cost nothing to name. */
-  .kpress p, .kpress li, .kpress blockquote, .kpress dd, .kpress dt,
-  .kpress figcaption, .kpress td, .kpress th, .kpress caption {
+     extra elements are not justified by kpress today and cost nothing to name.
+
+     What is centred by design carries `.centred` and is carved out of the selector
+     rather than restated after it. Restating it is what shipped the bug: the exemption
+     was `.colophon { text-align: center !important }` at (0,1,0) against this rule's
+     (0,2,0), both `!important` in one stylesheet, so the more specific one won and the
+     colophon printed flush left. An exemption that has to out-shout the rule it exempts
+     is a race the rule can win; an exemption the rule does not match is not a race at
+     all, which is why this one is written with `:not()`. `:is()` takes the specificity
+     of its most specific argument -- all type selectors here -- so the selector is
+     (0,2,1) and the `!important` still stands against a kpress bump.
+
+     `check_print_layout` holds `.centred` to its word in both media. */
+  .kpress :is(p, li, blockquote, dd, dt, figcaption, td, th, caption):not(.centred) {
     text-align: left !important;
   }
 
-  /* The rule above is written with `!important` to survive a kpress bump, and that
-     makes it beat the title block's own centring, which is set on plain selectors.
-     The subtitle, the credits and the colophon are centred by design and are restated
-     here rather than carved out of the selector above, so the intent stays legible. */
-  .cert-page .hero h1, .cert-page .hero .subtitle, .credits, .credits p, .colophon {
+  /* Carving `.centred` out of the rule above is only half of it: kpress justifies
+     printed prose itself, so a block this page excuses from the left-align rule lands
+     on the vendor's `justify` instead of on its own centring, which is (0,1,0) and
+     loses. This is the restatement the rule above refuses to be, and the difference is
+     that it is not exempting anything from a rule beside it -- the two selectors cannot
+     match the same element -- it is beating a stylesheet we do not control, which is
+     what the ragged-right rule above already uses `!important` for. */
+  .kpress .centred {
     text-align: center !important;
   }
 
@@ -643,28 +711,45 @@ body {
 
   /* The measure, which is what "the margins look wrong" turned out to mean.
 
-     Measured across the whole document rather than estimated, median characters per
-     full body line:
+     Measured across the document rather than estimated, median characters per full body
+     line, over the paragraphs that carry no inline math -- a KaTeX span sits at its own
+     top, so counting distinct line tops in a paragraph containing one counts more lines
+     than the paragraph has, and an earlier pass that did not exclude them read 45 where
+     the answer was 64:
 
        0.70in / 11pt   6.94in column   102 chars   11 pages
        1.00in / 11pt   6.30in column    94 chars   12 pages   <- was here
-       1.00in / 12pt   6.28in column    86 chars   13 pages
-       1.25in / 12pt   5.84in column    80 chars   14 pages
-       1.50in / 11pt   5.34in column    80 chars   14 pages
+       1.25in / 11pt   5.84in column    80 chars
+       1.25in / 12pt   5.84in column    64 chars   13 pages   <- is here
 
      The margin alone cannot fix this. Going 0.7in to 1in bought eight characters and
-     cost a page, and 94 is still far outside the 45 to 75 that reads comfortably -- at
-     11pt, 75 characters wants a 5.0in column, which is a 1.75in margin. It is a type
-     size decision wearing a margin's clothes, so both move: 1.25in and 12pt, for an
-     80-character line at two pages' cost. (The previous comment here claimed 0.7in
-     "ran to about 92 characters". That figure described neither setting.)
+     cost a page, and 94 is still far outside the 45 to 75 that reads comfortably. It is
+     a type size decision wearing a margin's clothes, so both move.
+
+     The two rows that matter are the last two, and they are the same margin: the type
+     size is what carries the measure from 80 into the band. That is worth stating
+     plainly because the first version of this change did not deliver it. The margin
+     took effect and the type size did not (see the rule below), so the document shipped
+     at 1.25in and 11pt -- the 80-character row -- while the row underneath it, the one
+     this comment argued for, was labelled 12pt and had never been rendered. The 80
+     figure was real; only its label was wrong.
 
      `size` is declared because the exporter passes `preferCSSPageSize`, which makes
      this rule the one that decides the paper. Declaring `size` WITHOUT that flag is the
      trap: Chromium then centres the CSS page box on the API's paper and leaves dead
      bands around it. The two belong together and are commented at both ends. */
   @page { size: Letter; }
-  :root {
+  /* On `.kpress` as well as `:root`, and that is the whole of why the type size moved.
+     kpress declares both tokens on `:root, .kpress, .kpress-page-main, .kpress-tooltip`
+     and then reads the size back on `.kpress` -- `font-size: var(--kpress-print-font-size)`
+     -- so a declaration only at the root is shadowed by kpress's own on the element that
+     consumes it, and inheritance never gets a turn. The margin escaped this because
+     `@page { margin: var(--kpress-print-page-margin) }` resolves at the root, where
+     nothing shadows it. So the first version of this rule shipped 1.25in margins around
+     11pt type, half of a change whose whole argument was that the two move together, and
+     set the folio -- also resolved at the root -- one step larger than the body it
+     numbers. Measured in the PDF before the fix: body 11.00pt, folio 12pt. */
+  :root, .kpress {
     --kpress-print-page-margin: 1.25in;
     --kpress-print-font-size: 12pt;
   }
@@ -686,7 +771,7 @@ body {
 <main class="kpress-page-main kpress-viewport" data-kpress-viewport>
 <div class="kpress kpress-doc kpress-prose cert-page">
 {{BODY_HTML}}
-<p class="col colophon">Formatted and typeset with <a href="https://github.com/jlevy/flowmark"><strong>Flowmark</strong></a> and <a href="https://github.com/jlevy/kpress"><strong>KPress</strong></a></p>
+<p class="col colophon centred">Formatted and typeset with <a href="https://github.com/jlevy/flowmark"><strong>Flowmark</strong></a> and <a href="https://github.com/jlevy/kpress"><strong>KPress</strong></a></p>
 </div>
 
 </main>

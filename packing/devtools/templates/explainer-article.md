@@ -25,9 +25,9 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 # <span class="symbol">s({{N}}) <span class="rel">≥</span> {{HEADLINE_L_FRAC}}</span>
 
-<p class="subtitle">{{SUBTITLE}}</p>
+<p class="subtitle centred">{{SUBTITLE}}</p>
 
-<div class="credits">
+<div class="credits centred">
   <span>{{PUBLISHED}} ({{EDITION}})</span>
   <span>Tooling and human oversight: <a href="https://x.com/ojoshe"><strong>Joshua Levy</strong></a></span>
   <span>Agents: <strong>Opus 5</strong>, <strong>Fable 5.1</strong>, and <strong>Codex 5.6</strong></span>
@@ -369,7 +369,7 @@ $$
   <div class="fig-choose">{{CERT_TOGGLE}}</div>
   <figcaption><strong>Figure 6. Condition 4.</strong> The shrink that buys the finite net. The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
   side-<span class="tex">B</span> square at the nearest net angle. The proof only ever asks about the orange one.
-  <strong>The product <span class="tex">B(\cos d + \sin d)</span> must stay below 1.</strong> At <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, that
+  The product <span class="tex">B(\cos d + \sin d)</span> must stay below 1. At <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, that
   product’s largest value, at the widest half-gap, is <span class="tex">{{SHRINK_PEAK_TEX}}</span> at <span class="tex">B = {{SHRINK_SIDE_TEX}}</span>, a seven-place
   value one step below the largest Condition 4 admits, and <span class="tex">{{SHRINK_PEAK_CERT_TEX}}</span> at the certificate’s own
   side.</figcaption>

@@ -766,9 +766,24 @@ def derive(path: Path, *, full_sweep: bool = False) -> Facts:
 
 
 def frac_tex(value: Fraction) -> str:
+    """`value` as a stacked fraction, for display math; prose wants `frac_inline_tex`."""
     if value.denominator == 1:
         return str(value.numerator)
     return f"\\frac{{{value.numerator}}}{{{value.denominator}}}"
+
+
+def frac_inline_tex(value: Fraction) -> str:
+    """`value` as a slashed fraction, for a fraction set in a line of prose.
+
+    `frac_tex` builds it in two storeys, which is right in a display block and
+    wrong inline: a stacked fraction is taller than the line it sits in, so it
+    sets its own leading and the numerator and denominator end up on either side
+    of the words around them. The figure readouts already spell an inline
+    fraction with a slash; this is the same spelling, for the prose.
+    """
+    if value.denominator == 1:
+        return str(value.numerator)
+    return f"{value.numerator}/{value.denominator}"
 
 
 def atom_array(facts: Facts) -> str:
@@ -1339,7 +1354,7 @@ def certificate_substitutions(facts: Facts, *, default: Facts, toggle: str) -> d
         "SHRINK_PEAK_TEX": shrink_peak_tex(facts, facts.admitted_side),
         # The side the peak above is quoted at. Named in the caption rather than left as
         # "the side the figure uses", which resolves only for a reader who has the figure.
-        "SHRINK_SIDE_TEX": frac_tex(facts.admitted_side),
+        "SHRINK_SIDE_TEX": frac_inline_tex(facts.admitted_side),
         "SHRINK_PEAK_CERT_TEX": shrink_peak_tex(facts, facts.square_side),
         "K3_LIMIT_TEX": k3_limit_tex(facts),
         "TIGHT_PERCENT": str((TIGHT - 1) * 100),
@@ -1498,6 +1513,7 @@ RENDER_INPUTS = (
     PACKING / "devtools" / "measure_net_coarsening.py",
     PACKING / "devtools" / "build_composite_figure_data.py",
     PACKING / "devtools" / "render_explainer_pdf.py",
+    PACKING / "devtools" / "check_print_layout.py",
     PACKING / "src" / "sqpack",
     PACKING / "frontier" / "results.yaml",
     PACKING / "atlas" / "known-best" / "composite-figure.json",
@@ -1793,6 +1809,40 @@ class Render(NamedTuple):
     markdown: str
 
 
+# Math that stacks: two storeys or more, so the box is taller than the line box.
+_STACKED_MATH = re.compile(r"\\(?:d|t)?frac|\\binom|\\over\b|\\atop\b|\\substack")
+# The article's two inline runs. `$$` is display and is deliberately excluded: the
+# alternation takes the doubled form first so a display block cannot be read as two
+# inline ones.
+_INLINE_MATH = re.compile(r'<span class="tex">(.*?)</span>|\$\$.*?\$\$|\$([^$\n]+)\$', re.DOTALL)
+
+
+def _refuse_stacked_inline_math(source: str) -> None:
+    """Refuse a two-storey fraction set in a line of prose.
+
+    A stacked fraction is taller than the line box it sits in. Inline, it pushes the
+    line open and lands its numerator and denominator above and below the words on
+    either side, which is how `B = \\frac{9977039}{10000000}` read in Figure 6's
+    caption. Display math is where a fraction gets to be two storeys; `frac_inline_tex`
+    is the spelling for everything else, and the figure readouts already use it.
+
+    Refused rather than rewritten, because the choice belongs at the value's own call
+    site: which of the two forms a number wants is a fact about where it is printed.
+    """
+    stacked = [
+        run
+        for match in _INLINE_MATH.finditer(source)
+        for run in (match.group(1) or match.group(2) or "",)
+        if _STACKED_MATH.search(run)
+    ]
+    if stacked:
+        joined = "\n  ".join(stacked[:5])
+        raise SystemExit(
+            f"{MARKDOWN.name}: stacked math in a line of prose; use `frac_inline_tex`:\n"
+            f"  {joined}"
+        )
+
+
 def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> Render:
     """One page for every certificate given, the first shown by default."""
     if not certificate_paths:
@@ -1817,6 +1867,7 @@ def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> 
     static = kpress_static()
     headline_values = per_certificate[facts.index(headline)]
     source = markdown_source(per_certificate, headline_values, shared, claimed=claimed)
+    _refuse_stacked_inline_math(source)
     prose = markdown_body(source, title=f"s({shared['N']}) >= {shared['HEADLINE_L_FRAC']}")
     # The sprite leads the body the way kpress's own renderer places it: the copy
     # button on a code block draws its glyph from a fragment of it.

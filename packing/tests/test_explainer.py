@@ -419,3 +419,49 @@ def test_the_published_document_says_what_it_is_and_where_the_figures_are(
     """
     assert "Markdown edition" in document
     assert SITE_URL in document
+
+
+def _style_blocks(page: str) -> list[str]:
+    return re.findall(r"<style>(.*?)</style>", page, re.DOTALL)
+
+
+def test_the_page_stylesheet_has_no_orphaned_comment_delimiter(page: str) -> None:
+    """A comment that ends early turns the prose after it into CSS, silently.
+
+    This shipped. A block comment was extended with a second paragraph, but the original
+    `*/` was left in place above it, so eleven lines of English became two invalid
+    qualified rules -- and the second one's prelude ran on until it swallowed the `{
+    text-align: left !important; }` underneath, which is a real rule the printed document
+    depends on. CSS error recovery is silent by specification: the browser dropped both,
+    printed prose reverted to the vendor's justification, and every render, every
+    reproducibility check and every screenshot still passed.
+
+    Checked on the delimiters rather than by parsing, so it needs no CSS parser: strip
+    the balanced comments and nothing that opens or closes one may remain.
+    """
+    for index, css in enumerate(_style_blocks(page)):
+        stripped = re.sub(r"/\*.*?\*/", "", css, flags=re.DOTALL)
+        for orphan in ("*/", "/*"):
+            assert orphan not in stripped, (
+                f"style block {index}: an unbalanced {orphan} leaves prose outside a comment"
+            )
+
+
+def test_no_rule_in_the_page_stylesheet_has_prose_for_a_selector(page: str) -> None:
+    """The other half of the same failure: a selector that is really a sentence.
+
+    An unbalanced comment is one way to get there and a stray `}` is another. A selector
+    cannot contain a semicolon or the word `important`, and a real one here is never
+    hundreds of characters long, so a prelude with any of those is prose that the parser
+    is about to discard along with the rule it was standing in front of.
+    """
+    for index, css in enumerate(_style_blocks(page)):
+        stripped = re.sub(r"/\*.*?\*/", "", css, flags=re.DOTALL)
+        # Preludes only: what stands between the end of one rule and the `{` of the next.
+        for prelude in re.findall(r"(?:^|[}])([^{}]*)\{", stripped):
+            text = prelude.strip()
+            assert ";" not in text, f"style block {index}: selector holds a `;`: {text[:80]!r}"
+            assert "important" not in text, (
+                f"style block {index}: selector holds `important`: {text[:80]!r}"
+            )
+            assert len(text) < 400, f"style block {index}: selector is prose: {text[:80]!r}"

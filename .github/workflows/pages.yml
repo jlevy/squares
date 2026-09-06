@@ -24,6 +24,7 @@ name: Certificate page
       - packing/devtools/measure_net_coarsening.py
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
+      - packing/devtools/check_print_layout.py
       - packing/src/sqpack/**
       - packing/frontier/results.yaml
       - packing/atlas/known-best/composite-figure.json
@@ -47,6 +48,7 @@ name: Certificate page
       - packing/devtools/measure_net_coarsening.py
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
+      - packing/devtools/check_print_layout.py
       - packing/src/sqpack/**
       - packing/frontier/results.yaml
       - packing/atlas/known-best/composite-figure.json
@@ -137,6 +139,14 @@ jobs:
       # check-that-can-never-pass this repository has already been bitten by.
       - name: Check the PDF reproduces itself
         run: uv run --frozen --group dev python -m devtools.render_explainer_pdf --check
+
+      # Reproducibility is not correctness: the check above would have passed on all
+      # three print defects a reader found in the finished PDF, because two identical
+      # renders of a wrong page still agree. This one measures the print layout -- the
+      # blocks the page declares centred, where the list markers sit, whether a footnote
+      # reference opens a line -- at the column the PDF actually has.
+      - name: Check the print layout
+        run: uv run --frozen --group dev python -m devtools.check_print_layout
 
       - name: Upload the page artifact
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
