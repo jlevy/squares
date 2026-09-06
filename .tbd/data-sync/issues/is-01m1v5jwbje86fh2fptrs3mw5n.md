@@ -5,7 +5,8 @@ title: Reconcile the cold-handoff prerequisite snapshot and nonblocking endpoint
 kind: bug
 status: closed
 priority: 0
-version: 3
+version: 4
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels:
   - release-blocker
   - handoff
@@ -14,7 +15,7 @@ dependencies:
     target: is-01m1v2yhy02qmka8ez4d2f5bde
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T10:52:48.369Z
-updated_at: 2026-09-06T10:53:13.135Z
+updated_at: 2026-09-06T17:57:54.053Z
 closed_at: 2026-09-06T10:53:13.134Z
 close_reason: The source-distinct cold auditor concurrently created the broader think-yrto bead for the same release-handoff reconciliation. Keep think-yrto as the authoritative blocker; think-66zs contributed the explicit prerequisite-snapshot and endpoint-satellite acceptance details.
 resolution: duplicate

@@ -5,7 +5,8 @@ title: Hold and decide the BC-220 T+4 portfolio gate
 kind: task
 status: open
 priority: 0
-version: 10
+version: 11
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels:
   - orchestration
   - research-gate
@@ -30,6 +31,6 @@ dependencies:
     target: is-01m1vvtwj9tm9fgcx0xsf14345
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T08:06:41.025Z
-updated_at: 2026-09-06T17:21:39.400Z
+updated_at: 2026-09-06T17:57:54.053Z
 ---
 Pause the active clock, integrate both T+4 packets in frozen order, accept or refuse each claim, freeze the literal BC-232 leg 03 and scalar execution identities, preregister the dual-only BC-243 pilot, assign the floating worker, reconcile upstream, validate, commit, and push.

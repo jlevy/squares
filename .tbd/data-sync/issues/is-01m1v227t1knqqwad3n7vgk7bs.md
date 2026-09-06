@@ -5,7 +5,8 @@ title: Correct fractional certificate proof scope and checker trust boundary
 kind: bug
 status: closed
 priority: 0
-version: 4
+version: 5
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 delegate: claude-code@spud10.local
 labels:
   - proof-scope
@@ -17,7 +18,7 @@ parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 hold: null
 hold_until: null
 created_at: 2026-09-06T09:51:17.312Z
-updated_at: 2026-09-06T10:07:27.844Z
+updated_at: 2026-09-06T17:57:54.053Z
 started_at: 2026-09-06T09:52:13.618Z
 closed_at: 2026-09-06T10:00:21.861Z
 close_reason: "Integrated as 7e932f1b. The certificate-local theorem now states s(n) >= L; both standalone verifier paths require 0 < T < 1 and reject duplicate JSON keys; generated claim documents were refreshed. Specialist validation: 75 fast verifier tests, Ruff, BasedPyright, claim render check, and edit gate passed. Coordinator rerun on integrated head: 54 focused tests passed with 14 exhaustive deselected, Ruff clean, claim render current, and diff check clean. Exhaustive exact decisions remain for the checkpoint gate."

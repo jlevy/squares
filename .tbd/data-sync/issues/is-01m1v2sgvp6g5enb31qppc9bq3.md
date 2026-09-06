@@ -5,7 +5,8 @@ title: Audit and disposition the post-3.81 dilation lower-bound corollary
 kind: bug
 status: closed
 priority: 0
-version: 6
+version: 7
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels:
   - mathematics
   - release-blocker
@@ -14,7 +15,7 @@ dependencies:
     target: is-01m1v2yhy02qmka8ez4d2f5bde
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T10:04:00.245Z
-updated_at: 2026-09-06T11:14:24.389Z
+updated_at: 2026-09-06T17:57:54.053Z
 closed_at: 2026-09-06T11:14:24.389Z
 close_reason: T-022 is integrated and independently accepted at C5. Exact weak bound is 38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703407...; proof-record SHA-256 16a52d54b95cbcdf7e97eab3b40b829ca24126141b7914ff224d2794af47d442; endpoint and strictness limits are explicit; focused, record, edit, and fast checks passed.
 resolution: null

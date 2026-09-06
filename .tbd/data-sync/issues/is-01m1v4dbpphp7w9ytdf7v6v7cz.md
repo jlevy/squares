@@ -5,7 +5,8 @@ title: Reconcile duplicate BC-220 and BC-221 gate beads
 kind: bug
 status: closed
 priority: 0
-version: 3
+version: 4
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels:
   - release-blocker
   - orchestration
@@ -14,7 +15,7 @@ dependencies:
     target: is-01m1v2yhy02qmka8ez4d2f5bde
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T10:32:18.901Z
-updated_at: 2026-09-06T10:43:40.245Z
+updated_at: 2026-09-06T17:57:54.053Z
 closed_at: 2026-09-06T10:43:40.244Z
 close_reason: Integrated commit 7e5604cb defines think-vniz + think-u7i4 as one T+4 coordinator transaction and think-u8h0 + think-gt06 as one T+8 transaction, each with one immutable decision packet. Live tbd edges show the scientific gates block their continuation wrappers and all downstream lanes pass through the paired transaction.
 resolution: null

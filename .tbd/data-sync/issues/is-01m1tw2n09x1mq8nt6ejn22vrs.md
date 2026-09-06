@@ -5,7 +5,8 @@ title: Manage the fractional lane from T+2 to T+4
 kind: task
 status: in_progress
 priority: 0
-version: 7
+version: 8
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 delegate: /root/dilation_bound_promotion
 labels:
   - fractional
@@ -15,7 +16,7 @@ dependencies:
     target: is-01m1tw2pm3r1ppks7e434xxmwn
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T08:06:39.364Z
-updated_at: 2026-09-06T11:48:51.402Z
+updated_at: 2026-09-06T17:57:54.053Z
 ---
 Run the exact unused BC-232 leg 02 for its frozen 105-minute wall budget, supervise in slices no longer than 30 active minutes, preserve the four outputs and cumulative endpoints, and submit think-jeyp at T+4. Do not spend the final 30-minute leg.
 

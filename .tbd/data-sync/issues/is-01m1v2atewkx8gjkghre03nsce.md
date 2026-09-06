@@ -5,7 +5,8 @@ title: Reconcile final integration audit before T+2 release
 kind: task
 status: closed
 priority: 1
-version: 4
+version: 5
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels:
   - release-blocker
   - documentation
@@ -14,7 +15,7 @@ dependencies:
     target: is-01m1v2yhy02qmka8ez4d2f5bde
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T09:55:58.555Z
-updated_at: 2026-09-06T11:14:23.545Z
+updated_at: 2026-09-06T17:57:54.053Z
 closed_at: 2026-09-06T11:14:23.544Z
 close_reason: "Final integration audit is resolved on PR #97: source-local condition labels, current n=11 survey/frontier evidence, and retained-reference corrections are integrated; record, documentation, formatting, Ruff, type, focused, and fast validation passed."
 resolution: null

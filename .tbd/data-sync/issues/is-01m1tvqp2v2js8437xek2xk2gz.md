@@ -5,7 +5,8 @@ title: Execute Agenda 024 from T+2 through T+10
 kind: epic
 status: in_progress
 priority: 0
-version: 42
+version: 43
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels:
   - research
   - execution
@@ -49,10 +50,10 @@ child_order_hints:
   - is-01m1vsa2mptszc9vtgw4668bgt
   - is-01m1vv7m9vnn4k7hnbx3sdz3rv
 created_at: 2026-09-06T08:00:40.024Z
-updated_at: 2026-09-06T17:11:08.346Z
+updated_at: 2026-09-06T17:57:53.708Z
 ---
 Coordinate the next eight active portfolio hours after PR #89 lands. Start only from a committed launch-amendment packet on a fresh codex branch; run one fractional manager and one closure manager with a single transferable worker; hold the clock for operational interruptions and T+4/T+8 integration; land a T+10 checkpoint with exact dispositions, upstream reconciliation, validation, and a cold-agent handoff.
 
 ## Notes
 
-Published checkpoint ad600896 on PR 97. The current handoff remains execution authority. Shared clock is 124:14, held for recovery/integration; the user-excluded conservative credit pause is 11:50:09Z–16:07:05Z (4h16m56s), with amended target 20:39:32Z and outer boundary 22:39:32Z. BC-232 recovery is terminal with no new covering; no final 30-minute leg is affordable (think-05of). BC-241 local-scope review and H-090/H-091 obstruction are retained. BC-220's prepared decision now supersedes artificial minute-240 waiting, but final disposition/role restart remain open. User priorities: core exposition stays at 3.81 with a technical T-022 pointer; focus on larger gains or enabling methods. OR-16 is visible in AGENTS: use Git for repository integrity and SHA only across a real named trust boundary. H-092 transport 30c44bb6 is retained in think-xsma pending independent review/integration, with no further fixed-weight target.
+Current entry is BC-250 checkpoint planning under think-j1f5, not a new research execution. After publication, this coordinator dispatches BC-251 scalar (H-093), BC-231 adaptive controls (H-095), BC-254 density support (H-099), and BC-255 restricted assessment (H-036/H-102) as the four-slot allocation allows. Use the coordinator plus three useful workers, not mandatory idle manager slots; independent review can replace the third worker. Agenda 024 owns allocation; the linked tbd plan retains rationale. H-092 transport 30c44bb6 passed independent review and awaits integration under think-xsma, no fourth shrink target. BC-232 remains scientifically unresolved with no leg 03. Portfolio stays at retained 124:14 until actual research restart; interruptions excluded, integration costs visible. PRs 94–96 landed in origin/main edccf294 and are being merged into PR 97.

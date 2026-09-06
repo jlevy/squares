@@ -5,12 +5,12 @@ title: Screen changed weights and sites with exact finite LP certificates
 kind: task
 status: open
 priority: 1
-version: 1
-spec_path: docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
+version: 2
+spec_path: packing/campaign/hypotheses/H-094-n11-weight-and-site-redesign.md
 labels: []
 dependencies: []
 parent_id: is-01m1sp7k7txpwp2y4pbhen30jv
 created_at: 2026-09-06T17:21:39.040Z
-updated_at: 2026-09-06T17:21:39.040Z
+updated_at: 2026-09-06T17:56:38.133Z
 ---
-Prior strategy A4/A5. Define a fixed-target finite-row LP from retained violating witnesses and D4 site orbits. Exact dual floor at least eleven rules out that fixed-site relaxation; mass below eleven only earns global separation. Use exact active-basis recovery when rounding consumes a promising margin, with inactive-row and global checks. If sites must change, compare witness-boundary/intersection proposals with one unrelated seed under matched preregistered work. Do not repeat H070 or fixed-relative-weight core shrinking. Freeze criterion and instrument before measurement.
+BC-252, H-094 open question. One selected assessment slice freezes a narrower fixed-site LP or event-guided support test from retained bad poses. No target measurement before a concrete hypothesis, exact geometry, rows and cost decision. Basis recovery on an actual candidate instead supports that candidate H093/H095 and BC238.

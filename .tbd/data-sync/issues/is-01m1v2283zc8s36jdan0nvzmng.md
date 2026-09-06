@@ -5,7 +5,8 @@ title: Harden continuation state graph, ownership, clocks, and review supersessi
 kind: task
 status: closed
 priority: 0
-version: 4
+version: 5
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 delegate: claude-code@spud10.local
 labels:
   - orchestration
@@ -17,7 +18,7 @@ parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 hold: null
 hold_until: null
 created_at: 2026-09-06T09:51:17.630Z
-updated_at: 2026-09-06T10:23:02.831Z
+updated_at: 2026-09-06T17:57:54.053Z
 started_at: 2026-09-06T09:52:13.626Z
 closed_at: 2026-09-06T10:23:02.830Z
 close_reason: "Integrated both launch-hardening transports through 0660f02b: state graph reconciled, stale authorization suspended, structural umbrella and BC-242/243 precedence made explicit; current combined edit tier passed 44/66 in 28.78s."

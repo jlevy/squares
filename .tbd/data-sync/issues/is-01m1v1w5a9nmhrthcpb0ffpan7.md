@@ -5,7 +5,8 @@ title: Reconcile the n=11 Lean formalization spike before continuation release
 kind: task
 status: closed
 priority: 0
-version: 4
+version: 5
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 delegate: claude-code@spud10.local
 labels:
   - formalization
@@ -17,7 +18,7 @@ parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 hold: null
 hold_until: null
 created_at: 2026-09-06T09:47:58.152Z
-updated_at: 2026-09-06T10:07:27.577Z
+updated_at: 2026-09-06T17:57:54.053Z
 started_at: 2026-09-06T09:52:13.606Z
 closed_at: 2026-09-06T10:05:45.739Z
 close_reason: "Integrated as 5c790cdd after certificate hardening. Ported nine Lean theorem proofs and pinned Lake metadata from reviewed source commit 04127189 without importing the open branch. Corrected scope: finite counting, symmetry, and scalar inequalities only; no certificate-data connection, angle equivalence, Condition 5, oriented-square model, or headline theorem. Current checker count is 329 at 7e932f1b; current Lean elaboration/kernel replay is explicitly unperformed because the pinned toolchain/cache are absent. The specialist records tier passed 31 steps, docs/map/links cover 490 documents, dependency revisions are pinned, static source audit found no sorry/admit/custom axioms/native_decide, and Flowmark/diff checks passed."

@@ -5,14 +5,14 @@ title: Integrate PR97 after the active owner checkpoint
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels: []
 dependencies: []
-parent_id: is-01m1vvztgzpzjdjc0smdjjynw5
+parent_id: null
 hold: blocked
 hold_until: null
 created_at: 2026-09-06T17:27:36.675Z
-updated_at: 2026-09-06T17:45:51.943Z
+updated_at: 2026-09-06T18:02:07.722Z
 ---
 Integrate PR97 after its active owner produces a checkpoint. Do not land the currently reviewed snapshot as the owner's final disposition.
 

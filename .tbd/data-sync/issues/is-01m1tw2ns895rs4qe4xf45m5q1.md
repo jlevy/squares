@@ -5,7 +5,8 @@ title: Manage the closure lane from T+2 to T+4
 kind: task
 status: in_progress
 priority: 0
-version: 6
+version: 7
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 delegate: /root/closure_manager
 labels:
   - closure
@@ -15,7 +16,7 @@ dependencies:
     target: is-01m1tw2pm3r1ppks7e434xxmwn
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T08:06:40.165Z
-updated_at: 2026-09-06T11:48:59.086Z
+updated_at: 2026-09-06T17:57:54.053Z
 ---
 Execute think-woi0 BC-241 through one source-distinct independent tangent replay, exact constants and norm checks, deterministic mutations, max-manager disposition, and a closure gate receipt. Do not repeat BC-240 or open BC-243 early.
 

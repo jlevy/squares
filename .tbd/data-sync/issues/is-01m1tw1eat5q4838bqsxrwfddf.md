@@ -5,7 +5,8 @@ title: Land PR 89 and cut the T+2 to T+10 continuation branch
 kind: task
 status: closed
 priority: 0
-version: 6
+version: 7
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels:
   - orchestration
   - landing
@@ -18,7 +19,7 @@ dependencies:
     target: is-01m1tw2ty3xee2t7kerqqxptdr
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T08:05:59.767Z
-updated_at: 2026-09-06T09:48:19.562Z
+updated_at: 2026-09-06T17:57:54.053Z
 closed_at: 2026-09-06T09:48:19.561Z
 close_reason: PR89 landed, its merge was observed on origin/main, the source task was notified, and PR97 now carries the fresh continuation branch.
 resolution: null

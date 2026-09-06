@@ -5,12 +5,12 @@ title: Design an existential witness test after a universal-witness obstruction
 kind: task
 status: open
 priority: 2
-version: 1
-spec_path: docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
+version: 2
+spec_path: packing/campaign/hypotheses/H-097-n11-existential-witness-menus.md
 labels: []
 dependencies: []
 parent_id: is-01m1sp7k7txpwp2y4pbhen30jv
 created_at: 2026-09-06T17:21:39.764Z
-updated_at: 2026-09-06T17:21:39.764Z
+updated_at: 2026-09-06T17:56:39.858Z
 ---
-Prior strategy B5: for every unit-square pose there exists a strictly interior heavy witness from a finite library. First prove a selection lemma on one whole closed pose box and a refusal control; no global disjunctive verifier until an identified universal-witness obstruction and independently reviewed cover justify it. Offsets/orientations/shapes may vary; nested concentric sizes alone add no expressiveness. Numerical samples do not establish continuum coverage.
+BC-253, H-097 open question. Conditional bounded theory slice on a named single-witness restriction. Prove whole-closed-pose-box forall pose/exists strictly interior heavy witness selection; no sampled-menu conclusion or global verifier before a useful local proof and separate selection.

@@ -5,7 +5,8 @@ title: Correct weighted-overlap controls for BC-243
 kind: bug
 status: closed
 priority: 0
-version: 3
+version: 4
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels:
   - release-blocker
   - mathematics
@@ -14,7 +15,7 @@ dependencies:
     target: is-01m1v2yhy02qmka8ez4d2f5bde
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T10:32:28.741Z
-updated_at: 2026-09-06T10:43:40.509Z
+updated_at: 2026-09-06T17:57:54.053Z
 closed_at: 2026-09-06T10:43:40.508Z
 close_reason: Integrated commit 7e5604cb narrows BC-243's Trump mutation to an exact unit-weight depth-greater-than-one refusal and adds the required positive two-placement weight-1/2 overlap control with summed a.e. depth at most one, consistently in the continuation and Agenda 026.
 resolution: null

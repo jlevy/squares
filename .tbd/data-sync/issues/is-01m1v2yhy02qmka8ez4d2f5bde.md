@@ -5,7 +5,8 @@ title: Suspend stale launch authorization and structurally gate both T+2 lanes
 kind: bug
 status: closed
 priority: 0
-version: 5
+version: 6
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels:
   - orchestration
   - release-blocker
@@ -16,7 +17,7 @@ dependencies:
     target: is-01m1tw2ns895rs4qe4xf45m5q1
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T10:06:45.183Z
-updated_at: 2026-09-06T11:34:03.220Z
+updated_at: 2026-09-06T17:57:54.053Z
 closed_at: 2026-09-06T11:34:03.219Z
 close_reason: Replacement authorization recorded at 2026-09-06T11:31:09Z against exact validated pushed pre-launch head da00905e1deb3056cf7ae15b6b1786b81c93059c and published in binding commit ff9cfe30. All 15 structural prerequisites are terminal; fractional manager, closure manager, and source-distinct floating reviewer issued current exact-head GO acknowledgements; cold mathematical and strategy audits are GO; local edit/focused gates and hosted checks passed. The release is partial from active minute 120 through the fixed 2026-09-06T18:22:36Z outer deadline and cannot promise minute 600.
 resolution: null

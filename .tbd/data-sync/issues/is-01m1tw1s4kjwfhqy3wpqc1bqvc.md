@@ -5,7 +5,8 @@ title: Freeze the continuation launch addendum and role contract
 kind: task
 status: closed
 priority: 0
-version: 7
+version: 8
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels:
   - orchestration
   - launch-contract
@@ -18,7 +19,7 @@ dependencies:
     target: is-01m1v2yhy02qmka8ez4d2f5bde
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T08:06:10.834Z
-updated_at: 2026-09-06T11:14:23.826Z
+updated_at: 2026-09-06T17:57:54.053Z
 closed_at: 2026-09-06T11:14:23.825Z
 close_reason: "Launch addendum and role contract are committed, validated, and pushed on PR #97 at 81946c62; the current handoff binds active-time accounting, ownership, stop rules, gates, exact commands, fresh output paths, and partial-deadline handling."
 resolution: null

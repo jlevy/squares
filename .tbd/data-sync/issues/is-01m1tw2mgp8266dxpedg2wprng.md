@@ -5,7 +5,8 @@ title: Make fractional crossing stop and freeze cooperatively
 kind: task
 status: closed
 priority: 0
-version: 8
+version: 9
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels:
   - fractional
   - safety
@@ -17,7 +18,7 @@ dependencies:
     target: is-01m1v2yhy02qmka8ez4d2f5bde
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T08:06:38.869Z
-updated_at: 2026-09-06T11:27:28.836Z
+updated_at: 2026-09-06T17:57:54.053Z
 closed_at: 2026-09-06T09:48:20.106Z
 close_reason: The opt-in safe crossing stop is implemented, independently reviewed, hash-bound, twice focused-tested, edit-tier green, and pushed on PR97.
 resolution: null

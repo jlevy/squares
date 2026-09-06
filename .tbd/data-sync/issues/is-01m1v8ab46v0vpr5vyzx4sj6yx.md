@@ -5,7 +5,8 @@ title: Recover BC-232 leg 02 after the manager exec session died
 kind: bug
 status: closed
 priority: 0
-version: 4
+version: 5
+spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels:
   - release-blocker
   - fractional
@@ -15,7 +16,7 @@ dependencies:
     target: is-01m1tw2n09x1mq8nt6ejn22vrs
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T11:40:34.309Z
-updated_at: 2026-09-06T11:48:48.618Z
+updated_at: 2026-09-06T17:57:54.053Z
 closed_at: 2026-09-06T11:48:48.617Z
 close_reason: Audited fresh-stem recovery launched once from pushed head 9a93b2ea; operational release blocker resolved.
 resolution: null
