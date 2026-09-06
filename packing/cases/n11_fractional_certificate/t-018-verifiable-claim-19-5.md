@@ -19,10 +19,10 @@ pairwise disjoint interiors, the unit squares free to rotate.
 
 The witness is the certificate `certificate-19-5.json`, 425 weighted points and a net of
 181 rational directions, carried in full at the end of this file and kept
-in the repository as [`certificate-19-5.json`](https://github.com/jlevy/squares/blob/3bd273e6/packing/cases/n11_fractional_certificate/certificate-19-5.json). The verifier below decides five
+in the repository as [`certificate-19-5.json`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/certificate-19-5.json). The verifier below decides five
 conditions on it in exact rational arithmetic, and the theorem below shows that the five
 conditions imply the claim.
-[`t-018-verifiable-claim-381-100.md`](https://github.com/jlevy/squares/blob/3bd273e6/packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md) does the same for
+[`t-018-verifiable-claim-381-100.md`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md) does the same for
 $s(11) \ge 381/100$.
 
 ## The Theorem
@@ -196,16 +196,16 @@ The condition lines are what to read.
 
 ## How This Repository Decided It
 
-Beyond the verifier in this file, the repository decides these bytes twice more, by two routes that share no code with it. With each other they share the `Certificate` representation, the loader that fills it from the file, and Conditions 2 to 4, decided once in closed form; what differs is how each decides Condition 5. The exact event-cell sweep in [`certificate.py`](https://github.com/jlevy/squares/blob/3bd273e6/packing/src/sqpack/fractional/certificate.py) does at every net direction what “Why the Sweep Is Exact” describes and reports the least covered mass $50003/50000$ at direction $0$. The interval branch and bound in [`interval.py`](https://github.com/jlevy/squares/blob/3bd273e6/packing/src/sqpack/fractional/interval.py) works with directed rounding on the doubled net, the net directions and their reflections across the diagonal, so it never invokes Condition 1 and covers every orientation directly. The retention gate, [`decide_certificate.py`](https://github.com/jlevy/squares/blob/3bd273e6/packing/devtools/decide_certificate.py), builds the one `Certificate` both routes read, and accepts it only when both do and the interval route’s enclosure of the least covered mass has width zero and equals the sweep’s value exactly; both accepted this one. Two algorithms over one loaded object are not two independent implementations, nor two independent readings of the file, and the second and third decisions are worth exactly that much. The gate decides only unconditional certificates: a file declaring a `variant` other than `unconditional` is refused before either route runs, as it is by the verifier in this file, and these bytes declare none.
+Beyond the verifier in this file, the repository decides these bytes twice more, by two routes that share no code with it. With each other they share the `Certificate` representation, the loader that fills it from the file, and Conditions 2 to 4, decided once in closed form; what differs is how each decides Condition 5. The exact event-cell sweep in [`certificate.py`](https://github.com/jlevy/squares/blob/41fb401a/packing/src/sqpack/fractional/certificate.py) does at every net direction what “Why the Sweep Is Exact” describes and reports the least covered mass $50003/50000$ at direction $0$. The interval branch and bound in [`interval.py`](https://github.com/jlevy/squares/blob/41fb401a/packing/src/sqpack/fractional/interval.py) works with directed rounding on the doubled net, the net directions and their reflections across the diagonal, so it never invokes Condition 1 and covers every orientation directly. The retention gate, [`decide_certificate.py`](https://github.com/jlevy/squares/blob/41fb401a/packing/devtools/decide_certificate.py), builds the one `Certificate` both routes read, and accepts it only when both do and the interval route’s enclosure of the least covered mass has width zero and equals the sweep’s value exactly; both accepted this one. Two algorithms over one loaded object are not two independent implementations, nor two independent readings of the file, and the second and third decisions are worth exactly that much. The gate decides only unconditional certificates: a file declaring a `variant` other than `unconditional` is refused before either route runs, as it is by the verifier in this file, and these bytes declare none.
 
 The certificate embedded below is the file `certificate-19-5.json`, whose SHA-256 is `60ac0c33e2e5a55874a10b0d09c6aaf3f891db921b063cc860114c2d4588c055`.
 
-The self-contained package under [`thirdparty/`](https://github.com/jlevy/squares/blob/3bd273e6/packing/cases/n11_fractional_certificate/thirdparty/README.md) decides this rung with nothing outside the standard library, and rebuilds Massaccesi’s $n = 17$ certificate as a known-answer control beside it.
+The self-contained package under [`thirdparty/`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/thirdparty/README.md) decides this rung with nothing outside the standard library, and rebuilds Massaccesi’s $n = 17$ certificate as a known-answer control beside it.
 
 ## The Verifier
 
 `verify_claim.py`, byte for byte as kept in the repository at
-[`verify_claim.py`](https://github.com/jlevy/squares/blob/3bd273e6/packing/cases/n11_fractional_certificate/verify_claim.py).
+[`verify_claim.py`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/verify_claim.py).
 
 ````python
 #!/usr/bin/env python3

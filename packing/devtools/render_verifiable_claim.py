@@ -43,8 +43,8 @@ from devtools.render_explainer import (
     decimal,
     derive,
     digits,
+    edition_file,
     fill,
-    repo_file,
     runtime_phrase,
     slug,
 )
@@ -155,7 +155,7 @@ def decided_here(facts: Facts, headline: Facts) -> str:
     the card exist for the headline bound, and the self-contained third-party package for
     the rung below it, so those sentences go with the certificate they are about.
     """
-    sweep, interval, gate = repo_file(VERIFIER), repo_file(INTERVAL), repo_file(GATE)
+    sweep, interval, gate = edition_file(VERIFIER), edition_file(INTERVAL), edition_file(GATE)
     routes = (
         "Beyond the verifier in this file, the repository decides these bytes twice more, by "
         "two routes that share no code with it. With each other they share the "
@@ -184,15 +184,15 @@ def decided_here(facts: Facts, headline: Facts) -> str:
     )
     if facts is headline:
         beside = (
-            f"[`{PINNED_VERIFIER.name}`]({repo_file(PINNED_VERIFIER)}), beside this file in "
+            f"[`{PINNED_VERIFIER.name}`]({edition_file(PINNED_VERIFIER)}), beside this file in "
             "the repository, is another standard-library check, pinned to exactly these bytes "
-            f"by that digest; [`{CARD.name}`]({repo_file(CARD)}) states the claim on one "
-            f"page, and [`{FIGURE.name}`]({repo_file(FIGURE)}) draws the atoms, the tight "
+            f"by that digest; [`{CARD.name}`]({edition_file(CARD)}) states the claim on one "
+            f"page, and [`{FIGURE.name}`]({edition_file(FIGURE)}) draws the atoms, the tight "
             "Condition 5 witness and the shrink step."
         )
     else:
         beside = (
-            f"The self-contained package under [`thirdparty/`]({repo_file(THIRDPARTY)}) "
+            f"The self-contained package under [`thirdparty/`]({edition_file(THIRDPARTY)}) "
             "decides this rung with nothing outside the standard library, and rebuilds "
             "Massaccesi\u2019s $n = 17$ certificate as a known-answer control beside it."
         )
@@ -217,7 +217,7 @@ def render_claim(facts: Facts, sibling: Facts, headline: Facts) -> str:
         **perturbations(facts),
         "FILE_NAME": claim_path(facts).name,
         "CERT_NAME": facts.source.name,
-        "CERT_URL": repo_file(facts.source),
+        "CERT_URL": edition_file(facts.source),
         "L_FRAC": frac(facts.outer_side),
         "L_DEC": decimal(facts.outer_side),
         "N_ATOMS": str(len(facts.atoms)),
@@ -228,10 +228,10 @@ def render_claim(facts: Facts, sibling: Facts, headline: Facts) -> str:
         "STANDING": standing(facts, headline),
         "DECIDED_HERE": decided_here(facts, headline),
         "OTHER_FILE_NAME": claim_path(sibling).name,
-        "OTHER_CLAIM_URL": repo_file(claim_path(sibling)),
+        "OTHER_CLAIM_URL": edition_file(claim_path(sibling)),
         "OTHER_L_FRAC": frac(sibling.outer_side),
         "VERIFIER_NAME": VERIFIER_CLAIM.name,
-        "VERIFIER_URL": repo_file(VERIFIER_CLAIM),
+        "VERIFIER_URL": edition_file(VERIFIER_CLAIM),
         "VERIFIER_SOURCE": VERIFIER_CLAIM.read_text(encoding="utf-8").rstrip("\n"),
         "CERTIFICATE_JSON": facts.source.read_text(encoding="utf-8").rstrip("\n"),
         "BEST_PACKING_TEX": bound_substitutions()["BEST_PACKING_TEX"],
@@ -296,7 +296,7 @@ def render_card(facts: Facts) -> str:
         "CELLS": str(cells),
         "CERT_NAME": facts.source.name,
         "CERT_PATH": facts.source.resolve().relative_to(REPO).as_posix(),
-        "CERT_URL": repo_file(facts.source),
+        "CERT_URL": edition_file(facts.source),
         "DIGEST_PREFIX": sha256_of(facts.source)[:DIGEST_PREFIX_CHARS],
         "CLAIM_NAME": claim_path(facts).name,
         "CONFIRMATION": str(entry["confirmation"]),

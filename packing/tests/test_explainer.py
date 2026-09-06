@@ -37,12 +37,12 @@ from devtools.render_explainer import (
     VERIFIER,
     WALKTHROUGH,
     assert_self_contained,
+    link_revision,
     png_size,
     render,
 )
 from devtools.render_explainer import load_certificate as load
 from devtools.render_explainer_pdf import OUTPUT as PDF_OUTPUT
-from sqpack.release import PUBLICATION_REVISION
 from sqpack.yamlio import safe_load
 
 
@@ -528,23 +528,26 @@ def repository_links(text: str) -> set[tuple[str, str]]:
     return {(ref, path.rstrip("/")) for ref, path in REPOSITORY_LINK.findall(markup)}
 
 
-def test_every_repository_link_is_a_permalink_to_the_publication_revision(
+def test_every_repository_link_is_a_permalink_to_the_commit_the_page_is_built_from(
     page: str, document: str
 ) -> None:
-    """A link on `main` names whatever is there when the reader clicks, not the edition.
+    """A link on `main` names whatever is there when the reader clicks, not this build.
 
-    The page stamps an edition cut from one commit, and the certificate digests it
-    prints identify the data; the links are what identify the verifier, the generator,
-    the third-party check and the exposition a reported run used, and every one of them
-    was built as `blob/main/...` (review of 2026-09-05, Finding 8). So each link into
-    the repository names the publication revision, in the page and in the Markdown
-    edition alike. The set of linked paths is checked with it: a permalink to the wrong
-    file is pinned just as firmly.
+    The certificate digests the page prints identify the data; the links are what
+    identify the verifier, the generator, the checking package and the exposition a
+    reported run used, and every one of them was built as `blob/main/...` (review of
+    2026-09-05, Finding 8). So each link into the repository names the commit the page
+    is rendered from, in full, in the page and in the Markdown edition alike, and that
+    commit is read from the checkout rather than pinned, so that no merge leaves the
+    deployed page linking to files older than the ones it describes. The set of linked
+    paths is checked with it: a permalink to the wrong file is pinned just as firmly.
     """
+    revision = link_revision()
+    assert re.fullmatch(r"[0-9a-f]{40}", revision), revision
     links = repository_links(page) | repository_links(document)
     assert links, "the page links nothing in the repository"
-    unpinned = sorted(f"{ref}/{path}" for ref, path in links if ref != PUBLICATION_REVISION)
-    assert not unpinned, f"repository links not pinned to {PUBLICATION_REVISION}: {unpinned}"
+    unpinned = sorted(f"{ref}/{path}" for ref, path in links if ref != revision)
+    assert not unpinned, f"repository links not pinned to {revision}: {unpinned}"
     linked = {path for _, path in links}
     evidence = (
         VERIFIER,
@@ -560,18 +563,14 @@ def test_every_repository_link_is_a_permalink_to_the_publication_revision(
         assert path.resolve().relative_to(REPO).as_posix() in linked, path.name
 
 
-def test_every_permalinked_path_exists_at_the_publication_revision(
-    page: str, document: str
-) -> None:
+def test_every_permalinked_path_exists_at_the_linked_commit(page: str, document: str) -> None:
     """A permalink to a path the commit does not have is a 404 from the day it is published.
 
-    `PUBLICATION_REVISION` is pinned by hand in `sqpack.release` and the paths are
-    resolved against the working tree, so nothing else relates the two: a file renamed
-    after the edition was cut, or a revision bumped past a rename, links to nothing.
-    Asked of git rather than of the working tree, since the working tree is exactly what
-    a permalink does not point at. A shallow checkout has no history to ask -- the Pages
-    deploy and the macOS job build from one -- so the check skips there and runs where
-    the history is fetched, which the validate job's `fetch-depth: 0` is for.
+    The linked commit is the checkout's `HEAD` and the paths are resolved against the
+    working tree, so what this catches is a linked file that is new and not yet
+    committed, or renamed in the tree but not in the commit. Asked of git rather than of
+    the working tree, since the working tree is exactly what a permalink does not point
+    at. Skipped where git cannot answer for the commit, which a source tarball cannot.
     """
 
     def exists(spec: str) -> bool:
@@ -580,10 +579,11 @@ def test_every_permalinked_path_exists_at_the_publication_revision(
         )
         return result.returncode == 0
 
-    if not exists(f"{PUBLICATION_REVISION}^{{commit}}"):
-        pytest.skip(f"{PUBLICATION_REVISION} is not in this clone; the check needs history")
+    revision = link_revision()
+    if not exists(f"{revision}^{{commit}}"):
+        pytest.skip(f"{revision} is not in this clone; the check needs git")
     links = repository_links(page) | repository_links(document)
-    pinned = sorted(path for ref, path in links if ref == PUBLICATION_REVISION)
-    assert pinned, "nothing is linked at the publication revision"
-    missing = [path for path in pinned if not exists(f"{PUBLICATION_REVISION}:{path}")]
-    assert not missing, f"linked at {PUBLICATION_REVISION} but not in that commit: {missing}"
+    pinned = sorted(path for ref, path in links if ref == revision)
+    assert pinned, "nothing is linked at the build commit"
+    missing = [path for path in pinned if not exists(f"{revision}:{path}")]
+    assert not missing, f"linked at {revision} but not in that commit: {missing}"

@@ -53,7 +53,7 @@ s(11) >= 381/100 = 3.81   eleven unit squares do not fit in a square of side 3.8
                  any CPython 3.12+, standard library only, nothing else installed
 ```
 
-The bytes on `main`: [certificate.json](https://github.com/jlevy/squares/blob/3bd273e6/packing/cases/n11_fractional_certificate/certificate.json).
+The bytes on `main`: [certificate.json](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/certificate.json).
 
 ## Verify It in One Command
 

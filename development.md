@@ -38,6 +38,12 @@ Use `uv sync --frozen --all-extras --group dev` in CI and when reproducing the l
 development environment; the explicit development group prevents an ambient uv
 configuration from omitting the test and quality tools.
 
+The atlas rasters and the composite PDF are drawn by `cairosvg`, which needs the
+system’s `libcairo`. CI installs it; on macOS with Homebrew it is installed but not on
+the loader’s path, so export `DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib` before
+rebuilding the atlas or running the push tier, whose reachable tests otherwise abort at
+collection on the three modules that import it.
+
 ## Code Maturity and Placement
 
 The maturity class says how a module is maintained, not how important its mathematics
@@ -467,6 +473,57 @@ is, and narrowing it needs a branch-aware token count that the harness does not 
 The gate step `the branch cost rollup renders` runs the renderer over every branch in
 the records, including one no rollup mentions, because a division by a turn count fails
 on exactly that edge.
+
+## Publishing the Explainer
+
+The explainer at <https://jlevy.github.io/squares/> is not checked in.
+GitHub Pages builds it from `main` in `.github/workflows/pages.yml`, on every push that
+touches one of the renderer’s declared inputs (`RENDER_INPUTS` in
+`devtools/render_explainer.py`, which a test keeps equal to the workflow’s path filter).
+The build renders the page (`site/index.html`), the Markdown edition
+(`site/t-018-explainer.md`), the PDF (`site/t-018-explainer.pdf`, drawn by Playwright’s
+Chromium) and the composite assets beside them, renders each twice and requires the two
+to agree, checks the print layout, and only then deploys.
+A pull request runs the same build without deploying, so a render that breaks fails
+review rather than the next deploy.
+
+**Merging is the whole publish.** Every repository link on the page is a permalink to
+the commit the page was built from, read from the checkout at render time
+(`link_revision()`), so no merge leaves the deployed page linking to files older than
+the ones it describes, and nothing has to be bumped for the links to be right.
+After a merge, wait for the “Certificate page” workflow on `main` and confirm the deploy
+from the checkout:
+
+```shell
+uv run --frozen --all-extras --group dev python -m devtools.check_published_site --commit <merge commit>
+```
+
+It fetches the live page, the Markdown edition, the PDF and the assets, and checks that
+the edition stamp is the one `sqpack.release` names, that every repository link names
+that commit and resolves on GitHub, and that the PDF is a PDF.
+
+**Cutting an edition** is the one manual step, and it is editorial.
+The stamp in the page’s credits and the atlas footer (`DRAFT v0.2.0-41fb401a`) is
+`sqpack.release`’s, pinned rather than read from git because the atlas embeds it and is
+compared byte for byte against a fresh render.
+The generated claim documents and the proof card are checked in and drift-checked the
+same way, so their links name the edition’s revision (`edition_file()`), not the build
+commit. To cut one:
+
+1. Set `PUBLICATION_VERSION`, `PUBLICATION_REVISION` (the short hash of the commit whose
+   content the edition describes, which is by construction older than the commit that
+   carries the bump) and `PUBLICATION_DATE` in `src/sqpack/release.py`.
+2. Rebuild the atlas family:
+   `uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --update`
+   (see the cairo note under Supported Environment), and regenerate the claim documents:
+   `uv run --frozen --all-extras --group dev python -m devtools.render_verifiable_claim`.
+3. Run `packing-validate --only "known-best"` and
+   `pytest tests/test_explainer.py tests/test_verify_claim.py tests/test_release.py`,
+   and commit the release module, the five atlas files and the three generated documents
+   together.
+
+The stamp is the edition’s label; the links are the build’s identity, and the two are
+allowed to differ.
 
 ## Focused Quality Commands
 
