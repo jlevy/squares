@@ -317,6 +317,10 @@ reconciliation merge `6a4b329edcced9155d11921eb5c0df8093c26318` and directly int
 the audited, green PR #87 head `fd7c9d9417f117f023b1e6e179653d6cf5717f41` over planning
 parent `1ed5265ad069b75b1576027e742f59bf8fc603db`. The commit containing this section
 binds the resolved integration.
+PR #87 subsequently landed on `origin/main` as
+`57135eec465ffd8a143ad8df287c62638d97fa5c`; reconciliation merge
+`b60b2ca813a95fedb48e17f9fefd9e4bf0e31af0` was conflict-free, and the final amendment
+below binds its thirteen effective changed paths.
 Only the coordinator fetches or reconciles upstream state.
 Managers begin from the committed packet and do not need network access.
 
@@ -720,6 +724,7 @@ The post-freeze checks found only noninvalidating changes:
 | 2026-09-05 stabilization audit | PR #87: `d5bb223576ca5eaa7e40ad505f601cbf98993ae9` to `717078ca96823c9c0a631a44fa08a23e9a7bc893` | `development.md`, `packing/campaign/agent-sessions/session-087-agenda022-continuation.md`, `packing/devtools/gate-budgets.yaml`, `packing/tests/test_module_boundaries.py`, and `packing/tests/test_n17_weighted_certificate_successor.py` | No agenda, BC, H, exp, exploration, manager-output, or scientific-verdict collision. The session repair clears PR #89’s current hosted failure, but PR #87 remains red because its new quick-test ceiling still classifies one measured 8.15-second source-copy test as quick. Keep BC-219 at preflight and adopt this delta only after that repair lands through `origin/main`. |
 | 2026-09-05 stabilization repair | PR #87: `717078ca96823c9c0a631a44fa08a23e9a7bc893` to `fd7c9d9417f117f023b1e6e179653d6cf5717f41` | `packing/tests/test_module_boundaries.py` and `packing/tests/test_negative_controls.py` | No research, namespace, manager-output, or named-input collision. The measured 8.15-second source-copy test is now classified as slow and registered in the marker-ownership check. Focused tests passed; hosted `validate`, `macos-portability`, and `packing-required` all pass. |
 | 2026-09-05 pre-dispatch integration | PR #87 source head `fd7c9d9417f117f023b1e6e179653d6cf5717f41` integrated over planning parent `1ed5265ad069b75b1576027e742f59bf8fc603db` | Gate-budget and session-gate machinery, operating rules, generated campaign views, validation code and tests; exact hashes below | Integrated directly into PR #89 so upstream timing cannot block commissioning. BC-219 returned to preflight, the named inputs were re-hashed, the generated views were rebuilt, and merged validation must pass before `T+0`. PR #87 retains agenda-023 and its quarantined namespaces; this integration transfers no scientific ownership. |
+| 2026-09-05 final preflight fetch | `origin/main`: `3f8e104372c0c523f53855e769d86fd88ecbf22d` to PR #87 merge `57135eec465ffd8a143ad8df287c62638d97fa5c` | Thirteen effective paths after the earlier direct integration; exact hashes below | Merged conflict-free as `b60b2ca8`. No agenda, BC, H, experiment, exploration, manager output, theorem input, or scientific verdict changed. `development.md` and validation machinery changed, so BC-219 repeated the affected documentation, record, and validation preflight before dispatch. |
 
 **PR #87 and the frozen inputs.** `operating-rules.md` is in the BC-219 manifest and PR
 #87 changes it, so direct integration returned BC-219 to preflight under this agenda’s
@@ -926,6 +931,37 @@ ba2ebeb9af6fccb47c96c9dae2b01a2cb3c4a8b12cc03c2f8495a7fd469afd99  packing/devtoo
 This integration starts no `T+0`, claims no research cell, and allocates no H or exp ID.
 It makes the launch self-contained: managers do not wait for PR #87 or `origin/main`,
 and the coordinator records any later upstream movement without erasing this base.
+
+### Final `origin/main` Landing Amendment
+
+The coordinator froze this amendment at `2026-09-06T03:18:00Z` after the final preflight
+fetch observed PR #87 on `origin/main` at `57135eec465ffd8a143ad8df287c62638d97fa5c`.
+The conflict-free reconciliation merge `b60b2ca813a95fedb48e17f9fefd9e4bf0e31af0`
+changed thirteen effective paths relative to the already integrated source head.
+The values below supersede earlier hashes for `development.md`,
+`packing/devtools/gate-budgets.yaml`, and `packing/src/sqpack/cli/validate.py`; the
+remaining paths are added as the complete effective delta.
+No frozen scientific input changed.
+
+```text
+e0fb50b7956141fa2ffddcf70cf2726d70f78c628ef1823503cfb8f4c903eac8  .github/workflows/packing-validation.yml
+5de1f4ab27338ec00148e3568ab70a4ae8cad7b3f637bd9570da5d62d11839a8  development.md
+f4870278a3fb430eb16b7ef653a82aae93793018d3e67b2b02590f8c9b18e1c6  packing/devtools/census_known_best_chunks.py
+ff72dba9bd94f42342ae41b488b77889ee92aed39186aee14b9048f33f3ea82c  packing/devtools/gate-budgets.yaml
+33b64c52ae794b1ed89c2500585ff013c884d641a65f90623f093bd5bbab33af  packing/devtools/reachable_tests.py
+f1a42d3ffc84a8c79f54caaba24ce963da041dea4d48b20d78fa4e5ada574ed8  packing/src/sqpack/chunks.py
+1f7282b2dceb6e9959fb44dc522a7b1b07f4cc6b68c618ebb82bad19d2bb543f  packing/src/sqpack/cli/validate.py
+aa4ec0783c4b36064c2eccf343fa860eb91881465d88bd243ac44932f31e00ea  packing/src/sqpack/render/color.py
+1e1aa0efa747cd85398298057816ce23b862742b4f7d1b0c659b0ead85850881  packing/tests/test_module_boundaries.py
+ae690f3c1717a445745e226f2aa5157a704b34108e0f0b8d3f207b7ac4cc2cfa  packing/tests/test_n050_producer_refusal_independent.py
+9e11a2be3e1e8f5c3b3b643a2e37b4fd94c1f32d191e7ba3d652bafd5f093f29  packing/tests/test_n54_source_contract.py
+1bbe88b70f56427eca06e4238e672323ee8184341ed233c5e971d8195cef2491  packing/tests/test_schema_validator_equivalence.py
+cafd827c15ca1dca11e9538affb6e9f86ad332daa64acab8f381be39d720b876  packing/tests/test_validation_cli.py
+```
+
+This amendment also starts no `T+0` and allocates no research identity.
+A later upstream movement follows the same append-only rule; it does not rewrite this
+observation.
 
 The four-slot launch is coordinator, fractional manager, closure manager, and one
 floating worker. The floating worker authors BC-240, then reviews BC-230; BC-232 and

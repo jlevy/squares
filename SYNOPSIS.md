@@ -465,7 +465,8 @@ Agenda 022’s
 [session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md)
 lifecycle remains owned by PR #87. This branch directly integrates that PR’s audited,
 green head `fd7c9d94` so its gate and session rules are available for commissioning; the
-still-running session keeps its own deadline and is not an external launch blocker.
+work then landed on `origin/main` as `57135eec` and was reconciled here as `b60b2ca8`.
+The still-running session keeps its own deadline and is not an external launch blocker.
 
 ### Handoff Record
 
