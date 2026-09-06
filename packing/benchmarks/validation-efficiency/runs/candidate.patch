@@ -1,0 +1,1177 @@
+diff --git a/SYNOPSIS.md b/SYNOPSIS.md
+index 8b1adce3..82c09054 100644
+--- a/SYNOPSIS.md
++++ b/SYNOPSIS.md
+@@ -310,6 +310,7 @@ case or experiment separately.
+ | [Feature: Promotion Pipeline Implementation](docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md) | implementation plan | current | transient | — |
+ | [Feature: The Interval Certification Bridge](docs/project/specs/active/plan-2026-08-28-interval-certification.md) | implementation plan | current | transient | — |
+ | [Feature: Gate Validation Speed](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md) | implementation plan | current | transient | — |
++| [Feature: Validation Efficiency and Checkpoints](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md) | implementation plan | current | transient | — |
+ | [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](packing/atlas/README.md) |
+ | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
+ | [Spike: Interactive `n = 5` Motion Lab](docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md) | implementation plan | record | retained | — |
+@@ -373,6 +374,12 @@ routine task.
+ | W9 | `remediation` | A confirmed defect or issue inventory, risk ordering, owning beads, and a bounded repair wave | Triage and repair defects systematically without changing scientific criteria or hiding unresolved evidence; group only compatible work and preserve each item’s independent disposition | Fixed items with regressions, contained items with evidence, rerouted evidence work, explicit blockers, regenerated defect views, and validation receipts | W10 reviews the wave and selects what follows |
+ | W10 | `review-planning-oversight` | A terminal agenda or session, its artifacts and receipts, live tbd state, and the documents it may have changed | Classify every attempted block, reconcile results and files, review document impact, reprioritize candidates, and select one next entry; do not execute that successor inside the closeout | Per-block outcomes and stop reasons, actionable dispositions, documentation decisions, grouped changes, validation, ranked candidates, operator status, and one selected next entry | The selected owning workflow, often W9 for backlog repair or W8 for substantive documentation drift |
+ 
++The current W5 [validation efficiency and checkpoints plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
++reviews ordinary PR feedback, full final checkpoints, detailed timing records, and
++coverage-preserving cost reductions. The [development guide](development.md#validation-loops)
++owns the current commands, names, and budget semantics; historical benchmark records
++remain linked from the plan.
++
+ Implementation is an action inside the workflow that owns its promised result, not an
+ undefined handoff: W1 and W2 can make bounded research corrections, W3 can implement a
+ bounded exploratory derivation or visualization without spending an undeclared
+diff --git a/development.md b/development.md
+index 2b30723f..0c86002c 100644
+--- a/development.md
++++ b/development.md
+@@ -17,8 +17,8 @@ interpreter to **3.14.7** through `.python-version` and the workflow.
+ Package metadata, Ruff, and BasedPyright express the broader `3.14`-only compatibility
+ boundary; `uv.lock` pins dependencies, not the interpreter.
+ macOS and Linux are supported development hosts.
+-Pull requests run the bounded Linux fast surface; integration events run the ordinary
+-full gate on both hosts.
++Pull requests run the bounded Linux fast surface; integration events run the ordinary full checkpoint on Linux and four focused
++portability checks on macOS.
+ The Rust search engine uses the stable Cargo toolchain.
+ 
+ From this directory:
+@@ -133,130 +133,59 @@ process execution.
+ 
+ <a id="validation-tiers"></a>
+ 
+-**The canonical reference for what runs where.** Two things are often confused and are
+-separate axes. A **tier** is a set of *steps* — which of the gate’s 64 declared steps a
+-command runs. A **lane** is a division of the *behavioural suite* — which pytest tests a
+-behavioural step runs.
+-A tier selects steps; a lane divides one step.
++A **tier** selects validation steps; a **lane** selects tests within a behavioural
++step. The ordinary full checkpoint has 66 steps. The
++[validation efficiency plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
++owns the current W5 work on cost, naming, and checkpoint placement.
++
++Use **PR fast surface** for `--fast`, **full checkpoint** for the default command,
++and **deferred checkpoint** for the four steps outside PR fast coverage. The advisory
++`Deep gate` workflow runs the deferred checkpoint. **Golden rebuild** means `--deep`,
++which also regenerates expensive golden producers; **strict checkpoint** means
++`--strict`, which includes that rebuild and refuses skipped checks.
++The workflow named `Deep gate` does not pass `--deep`.
++
++Run focused/edit checks during ordinary work and the change-reachable push check before
++pushing. Obtain a full checkpoint when the PR is ready for final review and repeat
++checks whose evidence later changes invalidate. Record the checked source and base,
++selected steps, and failures or skips. Expensive final evidence must not delay every
++editing cycle, but a green fast surface alone is not full pre-merge evidence.
+ 
+ ### The tiers
+ 
+-| Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
+-| --- | --- | ---: | ---: | --- |
+-| `--records` | contributor, before touching a registry; also every pull request | 31 of 64 | 300 s | 11.0 s |
+-| `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
+-| `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a code change |
+-| `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 66 | 700 s | 502.3 s on CI, 2026-09-06, commit `5cad7540`, when CI still ran it whole |
+-| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 66 | 240 s | not yet clocked on CI |
+-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 66 | 200 s | not yet clocked on CI; 93.3 s locally at the reference shape |
+-| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 66 | 240 s | not yet clocked on CI |
+-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 240 s | not yet clocked on CI |
+-| *(no flag)* | **CI, on `main`, on dispatch, and daily**; and what a block ends with | 66 of 66 | 3600 s | split across two jobs; not clocked whole |
+-
+-**The pull-request surface is `--checks`, `--geometry`, `--suite` and `--sweeps`
+-together, run as four concurrent CI jobs**, so a pull request waits for the longest of
+-the four rather than for their sum.
+-All four feed the single required `packing-required` context, and
+-`test_the_pull_request_jobs_partition_the_surface` reads the workflow and checks that
+-they are pairwise disjoint and that they cover every step of `--fast` — so the split
+-cannot lose a check the way a set of independent filters could.
+-
+-The split is arithmetic, not preference.
+-`--fast` was 501.97 s of wall over about 1,100 s of step time at `--jobs 3 --inner-jobs
+-1`, and 1,100 s of step time on a four-cpu runner cannot finish under 275 s however it
+-is scheduled — so one runner could not reach the two-to-three-minute target and a second
+-one had to be bought.
+-`--sweeps` takes the four steps that re-derive a retained atlas from its witnesses, and
+-nothing else in the tier is above 90 s; the measurement for each is in
+-`test_the_pull_request_runs_its_sweeps_and_its_suite_apart`.
+-
+-`--suite` is the third job and it is one step, and the reason it is alone is a floor
+-rather than a budget.
+-`fast behavioral tests` cost 142.43 s on CI inside the `validate` job, where
+-`_pytest_workers` sizes xdist to `cpus - jobs + 1` — two workers beside two other outer
+-lanes. No outer parallelism shortens a wall that is one step, which is what `BC-218`
+-found one level up, so the only lever on it is the worker count, and the only way to
+-raise that without oversubscribing the runner is to stop sharing the job.
+-Alone at `--jobs 1` the step has all four cpus to spend on xdist.
+-That also retires `BC-218`’s objection to four workers: nineteen ordinary tests went
+-over the per-test ceiling on contention when the lane asked for every cpu *beside* other
+-work, and a lane that is the only work on its runner cannot create that contention.
+-The second cost the split pays off is not on the clock: five ordinary tests were
+-reporting over the quick lane’s 5 s per-test ceiling because 468 s of atlas rendering
+-was running beside them on the same four cpus, and moving that work to its own runner is
+-what removes the contention rather than relabelling the tests as slow.
+-
+-`--geometry` is the fourth job, and it is the only one of the four that exists for cpus
+-rather than for a kind or a floor.
+-What was left in `--checks` once the behavioural lane moved out was 57 steps of pure
+-outer-parallel work with no unit large enough to floor the job, so the job was given the
+-freed cpu: `--jobs 4`, four units on four cpus.
+-CI run 34016999060 priced that and refused it.
+-The tier came in at 198.22 s — 23.5 s less than the three-worker job that still had the
+-142.43 s behavioural lane inside it — because saturating the runner inflated every step
+-by thirty to eighty per cent against the same steps at `--jobs 3` on the run before:
+-
+-| Step | `--jobs 3` | `--jobs 4` |
+-| --- | ---: | ---: |
+-| soundness perimeter | 60.62 s | 84.41 s |
+-| exact verification | 61.75 s | 79.98 s |
+-| type floor (basedpyright) | 40.37 s | 72.31 s |
+-| deterministic SVG rendering | 41.30 s | 65.36 s |
+-| historical regressions | 36.04 s | 50.00 s |
+-| the decimal route | 40.40 s | 49.34 s |
+-| D-034’s n=5 identity pair | 34.18 s | 41.85 s |
+-
+-Four workers over 790 inflated worker-seconds is the same work at a worse price than
+-three over 470, which is the lesson `_pytest_workers` already encodes as
+-`cpus - jobs + 1`. A queue of that shape is shortened by cpus and by nothing else, so
+-the queue was halved and both halves run at `--jobs 3`: eight cpus with a core of
+-headroom on each, for work that had four cpus and none.
+-The halves are 269.60 s and 275.48 s of a local 545.08 s step-time reading, within two
+-per cent of each other, and the boundary is bounded by two rules rather than chosen
+-freely — only a `broad` step may cross, so `--edit` stays wholly inside `--checks`, and
+-no engine or cargo step may, so only `--checks` pays the serial `cargo build --release`
+-that `_build_engine` puts in front of every step.
+-Measured locally at the reference shape, `--geometry` is 93.3 s of wall over 243.8 s of
+-step time.
+-
+-**What the `sweeps` job is floored by is one step**, and since 2026-09-06 that step is
+-`known-best chunk census` at 90.38 s rather than `single-square translation escape
+-screen`. The job has four units and four cpus, so its outer pool is already saturated
+-and its wall is its longest unit’s wall; a fifth GitHub job cannot shorten it, for the
+-same reason `BC-218` found that a second job could not shorten a tier that was one step.
+-The escape screen was that unit at 110.66 s, and the lever on it was never the schedule:
+-`devtools/screen_translation_escape.py` screens 98 independent records and was given a
+-process pool, but the pool sizes itself from `PACK_JOBS`, which `--inner-jobs` sets, so
+-at 1 the parallelism was dormant and the step still ran serially on every pull request.
+-Best of five rounds on a four-cpu box: 103.94 s at one worker, 52.11 s at two, 35.40 s
+-at three, 27.50 s at four.
+-The job now passes `--inner-jobs 2` — two rather than four, because four outer slots
+-already fill four cpus and a step fanning out to four inner workers is exactly the
+-oversubscription the table above prices.
+-Measured whole at that shape on a four-cpu box the job is 79.5 s: the census 79.5 s, the
+-screen 65.3 s, the known-best atlas 50.5 s, the prospective seed 25.1 s. The screen
+-costs more than its isolated 52.1 s because two inner workers beside three other outer
+-steps is not two workers alone, and it is under the census either way, which is the only
+-thing the flag had to achieve.
+-Of the eleven modules this job runs, only `screen_translation_escape` reaches
+-`sqpack.workers` — checked per process, since a transitive import would be invisible to
+-a grep of the four entry points — so the blast radius is one step.
+-The census’s 90.38 s is now the floor on the *whole* pull-request surface, since no
+-job’s wall goes below its own longest step.
+-The lever from here is inside the steps that are still serial —
+-`devtools/census_known_best_chunks.py` and `devtools/build_prospective_atlas.py` rebuild
+-100 and 101 witnesses, each record independent of the others and each rebuilt in a
+-single process while `sqpack.workers.worker_count` sits unused.
+-
+-Four steps are outside the pull-request surface entirely, each deferred on its own
+-measurement and pinned by `test_the_pull_request_surface_defers_only_what_was_measured`,
+-which computes the deferred set from what the workflow’s pull-request jobs actually
+-select rather than from a flag: `exhaustive exact behavioral tests` (1943 s, its own CI
+-job), `negative controls` (544 s), `n=40 rigidity bracket still reproduces` (221 s), and
+-`slow behavioral tests` (the lane below).
+-Adding a fifth means arguing it in that test, not editing a list.
+-What runs those four *before* a merge rather than after it is
+-[the deep gate](#the-deep-gate-the-deferred-surface-before-the-merge).
++| Tier | Who runs it, and when | Steps | Declared ceiling |
++| --- | --- | ---: | ---: |
++| `--records` | Before registry changes; included in every PR | 31 of 66 | 300 s |
++| `--edit` | During editing: floors and record checks | Use `--edit --list` | 240 s |
++| `--push` | Before a push: edit tier and tests reachable from `--since` | Varies with diff | 1800 s |
++| `--fast` | PR fast surface, or local coverage check | 62 of 66 | 700 s |
++| `--checks` | PR `validate` job | 48 of 66 | 240 s |
++| `--geometry` | PR `geometry` job | 9 of 66 | 200 s |
++| `--suite` | PR `suite` job | 1 of 66 | 240 s |
++| `--sweeps` | PR `sweeps` job | 4 of 66 | 240 s |
++| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 66 of 66 | 3600 s |
++
++CI runs the four PR partitions concurrently. All four feed the stable
++`packing-required` context. `test_the_pull_request_jobs_partition_the_surface` checks
++that the selections are pairwise disjoint and cover `--fast`.
++The geometry partition excludes engine and cargo work; the quick suite gets its own
++runner; sweeps re-derive the retained atlases and translation screen.
++The measured reasons for these partitions are retained in
++[gate-budgets.yaml](packing/devtools/gate-budgets.yaml) and
++[session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md).
++
++These dated observations include hosted setup and are not controlled speedup comparisons:
++
++| Surface | Observed wall time | Run |
++| --- | ---: | --- |
++| PR fast surface | 2m22s; four Linux jobs 1m58s–2m15s | [34023121156](https://github.com/jlevy/squares/actions/runs/34023121156) |
++| Full main checkpoint | 27m33s; integration 24m19s and exhaustive 27m28s concurrently | [34025346801](https://github.com/jlevy/squares/actions/runs/34025346801) |
++| Deferred checkpoint | 27m01s; deferred checks 12m32s and exhaustive 26m53s concurrently | [34028227026](https://github.com/jlevy/squares/actions/runs/34028227026) |
++
++All three runs are from 2026-09-06. The durations are observations, not necessary lower
++bounds or enforced tier baselines. The four PR tier entries still have no recorded
++`measured_seconds`; their ceilings are declared, but their drift calibration is not yet
++armed. See [budget enforcement](#what-each-tier-costs-and-where-its-ceiling-lives).
+ 
+ ### The behavioural lanes
+ 
+@@ -266,9 +195,12 @@ test satisfies exactly one, so no test can be in two lanes and none can be in ze
+ 
+ | Lane | Marker | Tests | Runs in | Bound |
+ | --- | --- | ---: | --- | --- |
+-| quick | neither | 2,106 | `--fast`, so every pull request | fails a test whose `call` phase reaches 5 s |
+-| slow | `slow` | 92 | the full gate | fails a test whose `call` phase is under 1 s |
+-| exhaustive | `exhaustive_exact` | 53 | its own CI job | its own 3600 s budget |
++| quick | neither | 2,197 | PR fast surface | fails a test whose `call` phase reaches 12 s |
++| slow | `slow` | 95 | full checkpoint | fails a test whose `call` phase is under 1 s |
++| exhaustive | `exhaustive_exact` | 55 | its own CI job | its own 3600 s budget |
++
++Counts are from [main run 34025346801](https://github.com/jlevy/squares/actions/runs/34025346801),
++not fixed test membership. The marker expressions determine current membership.
+ 
+ **Both bounds are enforced, in opposite directions.** A quick test that grows past the
+ ceiling fails the pull request in the week it grows; a deferred test that drops below
+@@ -278,15 +210,11 @@ mode `D-466` records.
+ 
+ ### The deep gate: the deferred surface, before the merge
+ 
+-The four steps outside the pull-request surface are tabulated under
+-[Validation Loops](#validation-tiers); this is about *when* they run.
+-Until 2026-09-06 the answer was “after a merge, or on the 08:17 UTC backstop”, and both
+-report a break that is already on `main`. Twice on 2026-09-05 that is what happened, and
+-one of the two is on the record.
+-`test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net` asserted a
+-certificate rung a later commit displaced; it is marked `exhaustive_exact`, so no pull
+-request ran it and every pull request was green; run 34009814108 failed on the merge
+-commit `6bd136b0`, and `main` stayed red across three merges for about five hours.
++The deferred checkpoint runs slow behavioural tests, exhaustive exact tests, negative
++controls, and the n=40 rigidity replay. These are the four steps outside the
++[PR fast surface](#validation-tiers). [D-470](defects.md) records why checking them only
++after a merge is insufficient: a stale certificate test left main red across three
++merges despite green PR checks.
+ 
+ [`deep-gate.yml`](.github/workflows/deep-gate.yml) runs that surface against a pull
+ request instead. Its selection is the **exact complement** of the pull-request surface,
+@@ -298,11 +226,9 @@ So the pull-request surface and the deep gate together are the whole gate, and a
+ deferral argued into `test_the_pull_request_surface_defers_only_what_was_measured` fails
+ until it is added here too.
+ 
+-It costs about **32 minutes**, which is why it is not on every build.
+-That is `exhaustive-tier`’s measured 1943 s; `deferred-steps` runs beside it and should
+-land near the slow lane’s own 890 s, with the negative controls and the n=40 bracket
+-finishing underneath that.
+-Neither figure has been clocked at this shape yet.
++The [dated measurement above](#the-tiers) is about 27 minutes. Both jobs need
++profiling: improving only the exhaustive job can leave the integration work on the
++critical path. A duration does not establish that the work is irreducible.
+ 
+ **To run it on a pull request, add the `deep-gate` label.**
+ 
+@@ -316,9 +242,10 @@ Neither figure has been clocked at this shape yet.
+ - To run it without touching the author’s labels, dispatch **Deep gate** with
+   `pull_request: <number>`; it checks out that pull request’s merge ref.
+ 
+-**When a reviewer should require it.** The three largest deferrals declare no `touches`
+-at all, so there is no path rule to lean on and `--since` selects them for every change
+-— the judgement is a reviewer’s. Ask for the label when the branch:
++**Run the full checkpoint for final review.** A passing PR fast surface and a deferred
++checkpoint together cover the ordinary gate when their source and base identities agree.
++Request the deferred run when the PR is otherwise ready; subsequent invalidating changes
++require fresh evidence. Pay particular attention when the branch:
+ 
+ - moves a certificate, a retained witness, a rung, or anything under `packing/cases/` —
+   the exhaustive tier is what decides those, and it is what `6bd136b0` broke;
+@@ -378,7 +305,7 @@ uv run --frozen --all-extras --group dev packing-validate --records
+ uv run --frozen --all-extras --group dev packing-validate --edit
+ 
+ # Pre-push floor: the edit tier plus the behavioral tests reachable from the change
+-# (against origin/main, or --since REF). About a minute for a code change; never blind.
++# (against origin/main, or --since REF). Broad changes may select the whole suite.
+ uv run --frozen --all-extras --group dev packing-validate --push
+ 
+ # The pull-request surface: the edit tier plus every behavioral test under the
+@@ -406,7 +333,7 @@ uv run --frozen --all-extras --group dev packing-validate
+ # Rebuild expensive mathematical golden producers while comparing read-only.
+ uv run --frozen --all-extras --group dev packing-validate --deep
+ 
+-# Merge or unattended-session handoff: deep checks and no skipped surface.
++# Strict checkpoint: full coverage, golden rebuild, and refusal of skips.
+ uv run --frozen --all-extras --group dev packing-validate --strict
+ 
+ # Structured result for agents and automation.
+@@ -457,111 +384,44 @@ multiple commands, or detached daemons; Windows process-tree cleanup is not yet
+ implemented. These limits are why a subprocess timeout is not, by itself, evidence that
+ D-239 is resolved.
+ 
+-On pull requests, [`packing-validation.yml`](.github/workflows/packing-validation.yml)
+-runs the surface as four concurrent Linux jobs — `packing-validate --checks` in
+-`validate`, `packing-validate --geometry` in `geometry`, `packing-validate --suite` in
+-`suite` and `packing-validate --sweeps` in `sweeps` — and reports the stable
+-`packing-required` aggregate, which waits on all four.
+-One required context, four prerequisites: `BC-218` made that the condition for any
+-fan-out, because [D-380](defects.md) records what a fan-out of separately required
+-checks cost this repository once.
+-Since 2026-09-05 the surface is sixty-two of the sixty-six steps rather than
+-thirty-seven: twenty-one steps that had run only after a merge were promoted into it
+-([D-455, D-456](defects.md), think-k4fb). Four steps stay out, each on a measurement
+-recorded beside `STEPS` in `packing/src/sqpack/cli/validate.py`: the negative controls,
+-the `n=40` rigidity bracket, the exhaustive exact tier, and the slow behavioral lane.
+-
+-**The behavioral suite runs in three lanes, and they partition it.** `QUICK_TESTS`,
+-`SLOW_TESTS` and `EXHAUSTIVE_TESTS` in `sqpack/cli/validate.py` are marker expressions
+-over `slow` and `exhaustive_exact`, and every test satisfies exactly one, so a test
+-cannot be in two lanes and cannot be in none.
+-`--fast` runs the quick lane; the full gate adds `slow behavioral tests` and
+-`exhaustive exact behavioral tests`, so nothing the pull-request surface stops running
+-stops running. Measured 2026-09-06: the tree collects 2,251 tests — 53 exhaustive exact,
+-92 slow, and 2,106 in the quick lane.
+-
+-**The boundary is a ceiling the gate enforces, not a list it trusts.**
+-`fast behavioral tests` passes `QUICK_TEST_CEILING_SECONDS` to pytest as
+-`--durations-min` and fails, naming the test, when a test it ran reports a `call` phase
+-at or above it. A test that grows past the ceiling therefore fails the pull-request
+-surface in the week it grows; the fix is to make it faster, or to mark it `slow` with
+-its measurement in `test_the_slow_marker_is_declared_only_by_measured_nodes`, which
+-moves it to the deep surface rather than stopping it running.
+-The `call` phase and not setup, because a module-scoped fixture bills its whole cost to
+-whichever test triggers it first, and marking that test would move the cost rather than
+-remove it. The marker registries are checked the same way for both markers: the declared
+-set is pinned by a test, so a marker cannot be added without stating what it measured.
+-The quick lane runs under xdist at `cpus - jobs + 1` workers, sized to what the box has
+-left rather than to what it has, because asking for every cpu beside the other lanes put
+-nineteen ordinary tests over the per-test ceiling on contention alone.
+-
+-Pushes to `main`, manual dispatches, and the daily schedule run the complete locked
+-command on Linux and macOS, split across two jobs since 2026-09-05: `validate` runs
+-everything but the exhaustive exact tier (`--skip`), and `exhaustive` runs that tier and
+-nothing else (`--only`), so a tier that was 1943s of a 2755s surface carries its own
+-budget and its own verdict instead of deciding whether the other sixty steps are
+-reported at all (think-tr2z). `--skip TEXT` is `--only` read the other way round,
+-repeatable and matching displayed step names the same way; a pattern naming no step is
+-refused rather than ignored, since a `--skip` that silently matches nothing runs more
+-than it meant to and says nothing.
+-The daily cadence is `BC-214`: it is the schedule that catches a deferred test breaking
+-on a branch that never reaches `main`, and a weekly one would leave up to seven days
+-between the break and the run that names it.
+-The macOS integration job also runs the focused deep-golden step directly.
+-Negative controls use at most two workers while honoring the `--inner-jobs` cap;
+-integration CI opts into two inner workers explicitly.
+-D-203’s temporary expected-failure classifier was removed after the repaired producer
+-passed on both architectures; the workflow test rejects its return.
+-Never accept a rebuilt golden to make the probe green, and do not add a second CI-only
+-implementation of either check.
++Pushes to `main`, manual dispatches, and the daily schedule run the ordinary full
++checkpoint on Linux in two jobs: `validate` runs everything except exhaustive exact
++tests, and `exhaustive` runs those tests. macOS runs four portability checks. Neither
++workflow invocation enables the golden rebuild or strict checkpoint.
++The daily run checks the default branch at 08:17 UTC; unmerged branches need their own
++labelled or dispatched deferred checkpoint.
++
++The behavioural [lane definitions](#the-behavioural-lanes) preserve the partition.
++Quick-test timing uses the `call` phase because shared fixture setup can be charged to
++whichever test starts first. Optimize a test that exceeds its ceiling, or retain its
++measurement when moving it to `slow`; remove that marker when its measured cost falls
++below the floor. The marker registry tests enforce both declarations.
++Quick tests use xdist workers sized by `cpus - jobs + 1`; `--inner-jobs` controls other
++internal pools, including the negative-control pool. Avoid assuming that either flag
++alone caps total host concurrency.
+ 
+ ### What each tier costs, and where its ceiling lives
+ 
+-A contributor runs `--edit` in the loop and `--push` before a push.
+-CI runs the tier named in
+-[`packing-validation.yml`](.github/workflows/packing-validation.yml) on a pull request,
+-and the complete locked command on `main`, on dispatch, and on the daily schedule.
+-
+-**What each tier is allowed to cost is data the gate reads, not prose in this file.** It
+-is declared in
+-[`packing/devtools/gate-budgets.yaml`](packing/devtools/gate-budgets.yaml), one entry
+-per tier, and every whole-tier run compares its own wall against it:
+-
+-```shell
+-uv run --frozen --all-extras --group dev packing-validate --budgets
+-```
+-
+-The tiers and their ceilings are tabulated once, under
+-[Validation Loops](#validation-tiers).
+-This section is about why the register exists rather than what is in it.
+-
+-The ceiling column is enforced and the cost column is not: the register is the
+-authority, and `packing-validate --budgets` prints it as of now.
+-Read that command rather than this table.
+-
+-**A run outside its tier’s band fails and names the step that spent the time**, because
+-“the tier is slow” is not actionable and “`fast behavioral tests` is 1324 s of a 1370 s
+-tier” is. The band has more edges than a cap, and they exist because a cap alone did not
+-catch the 2026-08-30 to 2026-09-05 drift — 499 s to 1369.60 s, entirely inside an 1800 s
+-cap:
+-
+-- a run over the ceiling fails;
+-- a run more than `drift_ratio` above the cost the register records for that tier fails,
+-  which is the edge a 2.65× regression crosses long before it reaches a generous cap;
+-- a run far enough *below* the recorded cost also fails, printing the figure to write —
+-  because a record bounded only from above rots downward, and a stale record makes the
+-  first two edges meaningless;
+-- and `python -m devtools.check_gate_budgets`, in the records tier, refuses a ceiling
+-  more than `max_headroom` above the cost its own tier records, without running anything
+-  at all. That is the rule that fires on 1800 s declared beside 499 s.
+-
+-**Wall time is not comparable across machines, so the ratio rules enforce only on the
+-runner the ceiling was measured for.** Each tier declares a reference — CPU count,
+-`--jobs` and `--inner-jobs` — and a run whose shape differs is measured, reported, and
+-never failed; `--enforce-budget` overrides that for an operator who means it.
+-This is a deliberate trade: it makes the check quiet on a developer’s laptop and on a
+-contended agent box, and it means a regression is caught by CI rather than before the
+-push.
++[gate-budgets.yaml](packing/devtools/gate-budgets.yaml) declares each tier’s ceiling,
++reference CPU and worker counts, and optional measured baseline. Inspect it through
++`packing-validate --budgets`. The [tier table](#validation-tiers) summarizes the ceilings;
++those values are not latency targets or GitHub job timeouts.
++
++A run at the reference shape, or with `--enforce-budget`, fails above its ceiling.
++With a recorded baseline it also fails above `drift_ratio` or below `stale_ratio`,
++subject to the declared noise floor. The records check independently rejects a ceiling
++above `max_headroom` times the baseline. A `null` baseline leaves those ratio checks
++unarmed; a measurement printed by CI does not update the file automatically.
++
++A different CPU/worker shape reports the budget result without failing, unless explicitly
++enforced. Matching CPU counts alone does not establish comparable load or hardware.
++`--only` invocations have no tier ceiling; per-command subprocess timeouts still apply.
++The default subprocess timeout is 900 seconds, increased for steps with declared larger
++budgets, including 1800 seconds for slow tests and negative controls and 3600 seconds
++for exhaustive tests. An explicit shorter timeout still wins.
++The full checkpoint’s 3600-second tier declaration is not a universal wall limit on
++split CI jobs. Preserve source, selection, runner, and cache information with timings
++before promoting an observed value into a reference baseline.
+ 
+ ### A pull request with no checks at all is a mergeability question
+ 
+@@ -890,41 +750,33 @@ owns it.
+ Gate wall time, solver throughput, pair tests, and time-to-retained-result are useful
+ metrics. Line count, abstraction count, and test count are not performance measures.
+ 
+-### The gate’s standing cost, which a W5 block reads rather than re-measures
++For long-running tests and runs, follow
++[OR-14’s timing requirement](operating-rules.md#or-14-a-development-cycle-is-never-artificially-slow):
++retain per-test, per-control, and per-phase measurements with setup/queue/execution
++boundaries where applicable, source and worker configuration, and outcomes including
++failure and cancellation. Keep machine-readable records and a readable summary; total
++wall time alone cannot justify an optimization. The
++[current plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
++tracks instruments that still need this detail.
+ 
+-A `W5` `efficiency-loop` block on the gate has a baseline before it starts, and the
+-baseline is not in anybody’s prose:
++### The gate’s standing cost, which a W5 block reads rather than re-measures
+ 
+-```shell
+-uv run --frozen --all-extras --group dev packing-validate --budgets
+-```
++Start with `packing-validate --budgets` and the
++[dated hosted runs](#the-tiers). The register owns enforceable cost declarations; the
++run receipts supply observations and attribution. Establish a comparable baseline when
++the reference is unmeasured, outdated, or a different execution shape.
+ 
+-[`packing/devtools/gate-budgets.yaml`](packing/devtools/gate-budgets.yaml) is the
+-standing measurement.
+-It carries, per tier, the ceiling the gate enforces, the cost last measured at that
+-tier’s reference runner, the date and the CI run that measured it, and the argument for
+-the number. `W5`’s entry contract asks for a baseline, a profile, a target and a guard;
+-this file is where the first two live for the gate, and the gate keeps them current
+-itself — a run outside the band fails and prints the figure to write.
+-
+-**Do not re-measure the gate by hand and record the result in a comment.** That is the
+-failure `agenda-023` `BC-216` was opened to close: `validate.py` recorded `--fast` at
+-499 s on 2026-08-30 in a docstring beside an 1800 s cap, the tier reached 1369.60 s six
+-days later on CI run `33982455466`, and nothing objected, because 1370 is inside 1800
+-and because 499 was prose.
+-A number a machine does not read is a number that drifts.
+-
+-The profile that block worked from, for the next one to start against rather than
+-rediscover: the tier was one step — `fast behavioral tests` was 1324 s of the 1369.60 s,
+-96.7 per cent of wall, and every other step in the tier together was about 45 s.
+-`--edit`, which is every floor and every record check but not the broad suite, was 59.35
+-s on a contended four-core box the same day.
+-The target was the operator’s own: a pull-request-blocking surface of at most four
+-minutes.
++The [current W5 plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
++requires a baseline, profile, target, and equivalence guard before accepting an
++optimization. Retain raw measurements and generate their report. Do not replace those
++records with a timing comment or treat an incomplete CPU lower bound as total test CPU.
++The prior [efficiency infrastructure plan](docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md)
++and [gate validation plan](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md)
++retain the earlier experiments and their outcomes.
+ 
+ ### What a deep run repeats, and what that licenses
+ 
+-The deep surface runs on every push to `main`, on the daily schedule and on dispatch,
++The ordinary full checkpoint runs on every push to `main`, on the daily schedule and on dispatch,
+ and nothing about it is scoped to the change.
+ How much of it repeats work whose inputs did not move is a measurement, and it has a
+ tool rather than an opinion:
+diff --git a/docs/project/document-map.yaml b/docs/project/document-map.yaml
+index 3ec15515..b17aa664 100644
+--- a/docs/project/document-map.yaml
++++ b/docs/project/document-map.yaml
+@@ -297,6 +297,7 @@ documents:
+   - {path: docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md, role: plan, authority: current, lifecycle: transient}
+   - {path: docs/project/specs/active/plan-2026-08-28-interval-certification.md, role: plan, authority: current, lifecycle: transient}
+   - {path: docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md, role: plan, authority: current, lifecycle: transient}
++  - {path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md, role: plan, authority: current, lifecycle: transient}
+   - path: docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+     role: plan
+     authority: record
+diff --git a/docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md b/docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
+index 188d03a6..aea39608 100644
+--- a/docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
++++ b/docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
+@@ -17,6 +17,14 @@ status: active
+ 
+ **Primary focus:** Efficiency
+ 
++**Current follow-up:** [Validation Efficiency and Checkpoints](plan-2026-09-06-validation-efficiency-and-checkpoints.md)
++owns the 2026-09-06 implementation block. Its checkpoint placement and acceptance
++criteria supersede this plan’s original operational targets where they differ.
++The measurements, proposals, and unresolved items below remain dated evidence;
++[development.md](../../../../development.md#validation-loops) owns current commands and
++coverage. In particular, the one-minute target and full-macOS/deep-golden scheduling
++below must not be read as the current CI configuration.
++
+ ## Decision
+ 
+ The required pull-request signal will be a stable `packing-required` check whose work
+diff --git a/docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md b/docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md
+index 26508fd8..e2384569 100644
+--- a/docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md
++++ b/docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md
+@@ -6,6 +6,11 @@
+ 
+ **Status:** Both phases landed 2026-08-30, under `BC-077` and `BC-079` in agenda-007
+ 
++**Current follow-up:** [Validation Efficiency and Checkpoints](plan-2026-09-06-validation-efficiency-and-checkpoints.md)
++owns the 2026-09-06 W5 work on current feedback, final checkpoints, naming, and timing
++records. This completed plan retains the dated measurements and decisions below;
++[development.md](../../../../development.md#validation-loops) owns current usage.
++
+ ## Overview
+ 
+ Make the validation surface fast enough that the checks which actually catch defects get
+diff --git a/operating-rules.md b/operating-rules.md
+index 7b9236d9..9506cb0d 100644
+--- a/operating-rules.md
++++ b/operating-rules.md
+@@ -363,18 +363,24 @@ And the cheap checks are where the catching happens.
+ All eight failures CI found on the `T-021` branch that day were record-to-artifact
+ consistency checks — does a register row match the certificate it names, does the
+ synopsis match the ledger, does the reach table match the corpus — and all eight
+-together cost 0.46 s. The expensive tests re-derive mathematics already decided and
+-frozen. **A check that compares two artifacts is cheap and catches drift; a check that
+-re-derives a frozen result is expensive and catches almost nothing between one release
+-of the code and the next.** That is the boundary, and it is a property of what a check
+-does rather than a list of which tests are slow today.
+-
+-Three surfaces follow from it.
+-**The pull-request surface** is every check that is not unavoidably slow, priced to be
+-paid on every push. **The deep surface** carries the ones that are, and runs where it
+-does not block a pull request.
+-**The full gate** is everything, and it is what a block ends with — the `OR-11`
+-closeout, the end of a research block, and before a pull request is marked ready.
++together cost 0.46 s. In that sample, cheap comparisons caught the observed drift.
++Expensive re-derivation may still supply independent evidence that no comparison can
++replace. Decide placement from each check’s contract and measured cost; a history with
++few failures does not show that its evidence is redundant.
++
++Use the **PR fast surface** for feedback on ordinary commits. The **deferred
++checkpoint** carries the expensive checks; combined with the fast surface on matching
++source and base, it provides the **full checkpoint**. Obtain that full evidence before
++final pre-merge review and at a research block’s close. Recheck any part invalidated by
++later source, dependency, configuration, or base changes. Daily and post-merge checks
++remain backstops, and do not substitute for the final pre-merge checkpoint.
++
++Expense must be justified by independent evidence and by the implementation’s cost.
++Preserve distinct correctness contracts and failure localization while reducing shared
++setup, duplicate computation, and avoidable serial work. A check is not dispensable
++merely because it has caught no recent failure. The
++[validation efficiency plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
++owns the current review of this placement and cost.
+ 
+ A terminal session names its full-gate run in its `checks`: the tier, the commit it ran
+ on, and the verdict.
+@@ -418,15 +424,32 @@ than the tier’s own wall produces **no completed run at all** — three runs o
+ were cancelled that way before the pattern was seen.
+ On 2026-09-05 a single test fix cost twenty-three minutes to verify, four times over.
+ 
++The target applies to ordinary PR feedback. A full final checkpoint may take longer,
++but its measured duration is still open to improvement. Twenty-seven minutes observed
++on one checkpoint is not a necessary minimum. Plan the expensive checks for final
++review, retain the source and base they checked, and refresh invalidated evidence rather
++than paying that cost on every editing cycle.
++
++**Record detailed timings for long-running work.** Every long-lived run or test must
++leave durable, machine-readable timing records and a readable summary. Attribute time
++to individual tests, mutation controls, and phases; separate queue, setup, and execution
++where those stages exist. Record source identity, configuration, worker counts, and
++outcome, including failures and cancellations. Aggregate elapsed time alone is
++insufficient. If the instrument cannot report this detail, add it before accepting a
++performance claim; a cancelled run must retain its partial evidence.
++The [validation efficiency plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
++tracks implementation and acceptance of this requirement; the rule does not assert
++that every existing runner already complies.
++
+ What this rule requires in practice:
+ 
+ - **Attribute, do not absorb.** “CI is slow” is not actionable; “`fast behavioral tests`
+   is 408.09 s of a 408.55 s wall” is, and it is what showed that no arrangement of
+   GitHub jobs could help and the parallelism had to go *inside* the step.
+-- **Never restart a green pull request’s CI for a change that does not affect that pull
+-  request’s own checks.** Carry it on the follow-up branch.
+-  This was violated the day the rule was written: a deep-gate-only control fix restarted
+-  a twenty-three-minute cycle on an already-green, already-mergeable commit.
++- **Keep unrelated changes off a ready pull request.** Use a follow-up branch for work
++  that does not affect its contract. A fix needed to pass its full final checkpoint
++  belongs before the merge, even if the fast surface is already green. Record which
++  earlier evidence it invalidates and rerun those checks.
+ - **Parallelise by default.** Work that can run concurrently should, and the question to
+   ask of a serial gate is why it is serial, not whether the split is worth the trouble.
+   The gains here have been large and repeatable: a marker split took the tier 1369.60 s
+@@ -449,8 +472,12 @@ What this rule requires in practice:
+ 
+ ### OR-15: Outcome over ceremony, and process is revised on a cadence rather than on irritation
+ 
+-A process step is justified by what it catches or produces.
+-One that catches nothing and produces nothing is ceremony, and ceremony is not free: it
++A process step is justified by what it catches or produces. Review its independent
++contract, repeated work, implementation cost, and cheaper equivalent evidence before
++changing its placement. Keep immediate feedback useful on ordinary commits and obtain
++full evidence at the final pre-merge checkpoint, as defined in
++[the validation guide](development.md#validation-loops).
++A step that catches nothing and produces nothing is ceremony, and ceremony is not free: it
+ costs the time it takes and the attention it spends, and it teaches people that the
+ process is theatre, which is what makes them skip the parts that matter.
+ 
+diff --git a/packing/devtools/check_minus_w_bridge.py b/packing/devtools/check_minus_w_bridge.py
+index b4c7ba95..33afc6fc 100644
+--- a/packing/devtools/check_minus_w_bridge.py
++++ b/packing/devtools/check_minus_w_bridge.py
+@@ -41,7 +41,13 @@ import json
+ from fractions import Fraction
+ from pathlib import Path
+ 
+-from cases.n5 import minus_w_owner4, minus_w_scale, tangent_cones, tangent_inventory
++from cases.n5 import (
++    minus_w_owner4,
++    minus_w_row_jets,
++    minus_w_scale,
++    tangent_cones,
++    tangent_inventory,
++)
+ from sqpack.field import NumberField
+ 
+ ROOT = Path(__file__).resolve().parent.parent
+@@ -65,6 +71,9 @@ def main() -> int:
+ 
+     zero = tuple(field.zero for _ in range(tangent_cones.VARIABLE_COUNT))
+     probe = tuple(field.rational(index - 7) for index in range(tangent_cones.VARIABLE_COUNT))
++    # Source geometry is shared by the velocity and correction probes. Keep its rows
++    # local to this invocation so each probe still evaluates its own exact stress.
++    row_inventory = minus_w_row_jets.RowJetInventory.build(field)
+ 
+     problems: list[str] = []
+     scale_total = 0
+@@ -79,9 +88,19 @@ def main() -> int:
+             problems.append(f"{stratum}: -W disagrees with the retained canonical_minus_W")
+             continue
+ 
+-        owner4_zero = minus_w_owner4.owner4_record(field, stratum, minus_w, zero)
+-        owner4_probe = minus_w_owner4.owner4_record(field, stratum, minus_w, probe)
+-        owner4_plus = minus_w_owner4.owner4_record(field, stratum, plus_w, zero)
++        owner4_zero = minus_w_owner4.owner4_record(
++            field, stratum, minus_w, zero, active_rows=row_inventory.active_rows(field, stratum)
++        )
++        owner4_probe = minus_w_owner4.owner4_record(
++            field,
++            stratum,
++            minus_w,
++            probe,
++            active_rows=row_inventory.active_rows(field, stratum),
++        )
++        owner4_plus = minus_w_owner4.owner4_record(
++            field, stratum, plus_w, zero, active_rows=row_inventory.active_rows(field, stratum)
++        )
+         if owner4_zero.constant != owner4_probe.constant:
+             problems.append(f"{stratum}: owner-4 constant depends on the correction")
+         if owner4_zero.constant.sign() >= 0:
+@@ -98,8 +117,12 @@ def main() -> int:
+                 "obstruction_coefficient"
+             )
+ 
+-        minus_records = minus_w_scale.scale_records(field, stratum, minus_w, zero)
+-        plus_records = minus_w_scale.scale_records(field, stratum, plus_w, zero)
++        minus_records = minus_w_scale.scale_records(
++            field, stratum, minus_w, zero, row_inventory=row_inventory
++        )
++        plus_records = minus_w_scale.scale_records(
++            field, stratum, plus_w, zero, row_inventory=row_inventory
++        )
+         for minus_record, plus_record in zip(minus_records, plus_records, strict=True):
+             scale_total += 1
+             key = f"{stratum}/{minus_record.key}"
+diff --git a/packing/devtools/run_negative_controls.py b/packing/devtools/run_negative_controls.py
+index 0a6d91be..7dd2a50e 100644
+--- a/packing/devtools/run_negative_controls.py
++++ b/packing/devtools/run_negative_controls.py
+@@ -56,6 +56,8 @@ Usage:
+ from __future__ import annotations
+ 
+ import argparse
++import hashlib
++import json
+ import math
+ import os
+ import queue
+@@ -65,11 +67,13 @@ import signal
+ import subprocess
+ import sys
+ import tempfile
++import time
+ from collections.abc import Sequence
+ from concurrent.futures import ThreadPoolExecutor
+ from contextlib import suppress
+ from dataclasses import dataclass
+ from pathlib import Path
++from threading import Lock
+ 
+ from sqpack.workers import worker_count
+ from sqpack.yamlio import safe_load
+@@ -623,6 +627,11 @@ def _parser() -> argparse.ArgumentParser:
+     )
+     parser.add_argument("-k", "--match", help="run controls whose names contain TEXT")
+     parser.add_argument("-j", "--jobs", type=int, default=0, help="worker count (0 = auto)")
++    parser.add_argument(
++        "--timings",
++        type=Path,
++        help="create a JSONL timing journal; refuses to overwrite existing evidence",
++    )
+     return parser
+ 
+ 
+@@ -656,10 +665,32 @@ def main(argv: Sequence[str] | None = None) -> int:
+     )
+ 
+     failures: list[tuple[str, str]] = []
++    durations: list[tuple[float, str]] = []
++    started = time.perf_counter()
++    journal_lock = Lock()
++    if options.timings:
++        # Exclusive creation preserves prior evidence. Each subsequent event is flushed
++        # independently, so completed controls remain visible after an interrupted run.
++        options.timings.touch(exist_ok=False)
++
++    def record(event: str, **fields: object) -> None:
++        if options.timings:
++            with journal_lock, options.timings.open("a", encoding="utf-8") as journal:
++                journal.write(json.dumps({"event": event, **fields}) + "\n")
++
++    record(
++        "run_started",
++        selected_controls=[c["name"] for c in controls],
++        workers=workers,
++        spec_sha256=hashlib.sha256(spec_path.read_bytes()).hexdigest(),
++        python=sys.version,
++        source_bytes=source_bytes,
++    )
+     with tempfile.TemporaryDirectory(prefix="negctl-") as tmp:
+         trees = [Path(tmp) / f"w{i}" for i in range(workers)]
+         with ThreadPoolExecutor(max_workers=workers) as pool:
+             list(pool.map(clone_tree, trees))
++            record("snapshots_ready", wall_seconds=time.perf_counter() - started)
+ 
+             # A tree is CHECKED OUT for the duration of one control and returned
+             # afterwards, so no two running controls can ever share one.
+@@ -677,20 +708,51 @@ def main(argv: Sequence[str] | None = None) -> int:
+             for t in trees:
+                 available.put(t)
+ 
+-            def work(c: dict) -> tuple[dict, bool, str]:
++            def work(c: dict) -> tuple[dict, bool, str, float]:
+                 tree = available.get()
++                control_started = time.perf_counter()
++                record("control_started", name=c["name"])
+                 try:
+                     passed, detail = run_one(c, tree)
++                except BaseException as error:
++                    record(
++                        "control_finished",
++                        name=c["name"],
++                        status="interrupted"
++                        if isinstance(error, KeyboardInterrupt)
++                        else "error",
++                        detail=str(error),
++                        wall_seconds=time.perf_counter() - control_started,
++                    )
++                    raise
+                 finally:
+                     available.put(tree)
+-                return c, passed, detail
++                seconds = time.perf_counter() - control_started
++                record(
++                    "control_finished",
++                    name=c["name"],
++                    status="passed" if passed else "failed",
++                    detail=detail,
++                    wall_seconds=seconds,
++                )
++                return c, passed, detail, seconds
+ 
+             # `pool.map` preserves order, so the report reads the same however the
+             # work happened to be split across trees.
+-            for c, passed, detail in pool.map(work, controls):
++            for c, passed, detail, seconds in pool.map(work, controls):
++                durations.append((seconds, c["name"]))
+                 if not passed:
+                     failures.append((c["name"], detail))
+ 
++    record(
++        "run_finished",
++        status="failed" if failures else "passed",
++        wall_seconds=time.perf_counter() - started,
++        completed=len(durations),
++    )
++    print("  slowest negative controls (wall seconds):")
++    for seconds, name in sorted(durations, reverse=True)[:10]:
++        print(f"    {seconds:8.3f}s  {name}")
+     for name, detail in failures:
+         print(f"  CONTROL FAILED  {name}: {detail}", file=sys.stderr)
+     if failures:
+diff --git a/packing/src/sqpack/cli/validate.py b/packing/src/sqpack/cli/validate.py
+index 51ddaae5..717de9e7 100644
+--- a/packing/src/sqpack/cli/validate.py
++++ b/packing/src/sqpack/cli/validate.py
+@@ -966,6 +966,8 @@ def _exhaustive_exact_tests(context: Context) -> str:
+             "tests",
+             "-m",
+             EXHAUSTIVE_TESTS,
++            "--durations=0",
++            "--durations-min=0",
+         ),
+     )
+ 
+diff --git a/packing/src/sqpack/fractional/certificate.py b/packing/src/sqpack/fractional/certificate.py
+index 4dd33454..9e000e60 100644
+--- a/packing/src/sqpack/fractional/certificate.py
++++ b/packing/src/sqpack/fractional/certificate.py
+@@ -57,6 +57,7 @@ from sqpack.fractional.model import (
+     rotation_from_half_tangent,
+ )
+ from sqpack.fractional.sweep import minimum_covered_mass
++from sqpack.workers import worker_count
+ 
+ 
+ @dataclass(frozen=True, slots=True)
+@@ -382,13 +383,17 @@ def _estimated_grid_bytes(atom_count: int) -> int:
+ 
+ 
+ def _worker_count(certificate: Certificate, requested: int | None) -> int:
+-    """The pool size: the request or the core count, under the worker and grid caps."""
++    """The pool size under the gate, core, worker, and grid caps."""
+     available = os.process_cpu_count() or 1
+     desired = available if requested is None else max(1, requested)
+     per_worker = _estimated_grid_bytes(len(certificate.atoms))
+     by_memory = max(1, _PARALLEL_GRID_BUDGET_BYTES // max(1, per_worker))
+     return min(
+-        desired, available, len(certificate.directions), _MAX_PARALLEL_WORKERS, by_memory
++        desired,
++        worker_count(available),
++        len(certificate.directions),
++        _MAX_PARALLEL_WORKERS,
++        by_memory,
+     )
+ 
+ 
+@@ -435,7 +440,8 @@ def sweep_all_directions(
+     Directions are independent, so they are decided in parallel processes;
+     ``workers`` defaults to the process's available core count, or to this process
+     alone below ``_PARALLEL_ATOMS`` atoms, and ``1`` runs them in this process. Both
+-    the default and an explicit count sit under ``_MAX_PARALLEL_WORKERS`` and the
++    the default and an explicit count sit under the gate's ``PACK_JOBS`` cap,
++    ``_MAX_PARALLEL_WORKERS`` and the
+     grid budget (``_worker_count``), and the pool's start method -- or the decision
+     to run in this process after all -- is ``_pool_context``'s. An explicit count
+     otherwise always gets a pool, so the two schedules can be compared on a
+diff --git a/packing/tests/test_fractional_generate.py b/packing/tests/test_fractional_generate.py
+index bc966930..5a27ab48 100644
+--- a/packing/tests/test_fractional_generate.py
++++ b/packing/tests/test_fractional_generate.py
+@@ -12,6 +12,7 @@ that by-product could ever claim more than weak duality allows.
+ from __future__ import annotations
+ 
+ from fractions import Fraction
++from itertools import pairwise
+ 
+ import numpy as np
+ import pytest
+@@ -120,6 +121,14 @@ def test_adding_a_site_orbit_never_raises_the_optimum_on_the_rows_held() -> None
+     assert solved[2] <= solution.objective + 1e-9
+ 
+ 
++def _midpoint_cell_indices(
++    events: tuple[Fraction, ...], float_events: np.ndarray
++) -> np.ndarray:
++    """Map each exact interval once, preserving midpoint rounding and left-search ties."""
++    midpoints = np.array([float((left + right) / 2) for left, right in pairwise(events)])
++    return np.searchsorted(float_events, midpoints, side="left") - 1
++
++
+ def _oracle_against_sweep(
+     atoms: tuple[Atom, ...],
+     direction: Direction,
+@@ -139,18 +148,36 @@ def _oracle_against_sweep(
+     weights = np.array([float(atom.weight) for atom in atoms])
+     grid = event_grid(points, weights, direction, float(outer), float(side))
+     found = placement_cells(points, weights, direction, float(outer), float(side), keep=3)
+-    lacking = 0
+-    for i, j in reduction.cells:
+-        u_mid = float((reduction.u_events[i] + reduction.u_events[i + 1]) / 2)
+-        v_mid = float((reduction.v_events[j] + reduction.v_events[j + 1]) / 2)
+-        cell = (
+-            int(np.searchsorted(grid.u_events, u_mid)) - 1,
+-            int(np.searchsorted(grid.v_events, v_mid)) - 1,
+-        )
+-        lacking += not grid.reachable[cell]
++    # A midpoint depends only on its axis interval, not the other coordinate. Keep the
++    # independently enumerated reference cells, but avoid repeating exact arithmetic
++    # and scalar searches for every Cartesian pair in that same set.
++    u_cells = _midpoint_cell_indices(reduction.u_events, grid.u_events)
++    v_cells = _midpoint_cell_indices(reduction.v_events, grid.v_events)
++    cells = np.asarray(reduction.cells, dtype=np.intp)
++    lacking = int(np.count_nonzero(~grid.reachable[u_cells[cells[:, 0]], v_cells[cells[:, 1]]]))
+     return min(mass for mass, _, _, _ in found), float(exact), lacking
+ 
+ 
++def test_midpoint_mapping_preserves_cells_when_exact_events_round_together() -> None:
++    """The optimized mapping must keep the scalar reference's left-search convention."""
++    events = (
++        Fraction(0),
++        Fraction(1),
++        Fraction(1) + Fraction(1, 2**55),
++        Fraction(1) + Fraction(1, 2**54),
++        Fraction(2),
++    )
++    float_events = np.array([float(event) for event in events])
++    reference = np.array(
++        [
++            int(np.searchsorted(float_events, float((left + right) / 2))) - 1
++            for left, right in pairwise(events)
++        ]
++    )
++    assert reference.tolist() == [0, 0, 0, 3]
++    assert np.array_equal(_midpoint_cell_indices(events, float_events), reference)
++
++
+ def _patterned_atoms(outer: Fraction, counts: tuple[int, ...]) -> tuple[Atom, ...]:
+     positions = colgen.site_set_from_grids(outer, counts, Fraction(1, 2)).positions()
+     pattern = [Fraction((index * 5) % 4, 8) for index in range(len(positions))]
+@@ -161,6 +188,25 @@ def _patterned_atoms(outer: Fraction, counts: tuple[int, ...]) -> tuple[Atom, ..
+     )
+ 
+ 
++def test_oracle_comparison_counts_every_missing_reference_cell(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    """An empty float reachability map must expose every independently derived cell."""
++    outer, side = Fraction(11, 5), Fraction(24, 25)
++    atoms = _patterned_atoms(outer, (3,))
++    reference = reduce_to_cells(atoms, UPRIGHT, outer, side)
++    original_grid = event_grid
++
++    def emptied_grid(*args, **kwargs):
++        grid = original_grid(*args, **kwargs)
++        grid.reachable[:] = False
++        return grid
++
++    monkeypatch.setitem(globals(), "event_grid", emptied_grid)
++    _oracle, _exact, lacking = _oracle_against_sweep(atoms, UPRIGHT, outer, side)
++    assert lacking == len(reference.cells) > 0
++
++
+ @pytest.mark.slow
+ def test_the_float_oracle_scores_every_cell_the_exact_sweep_scores() -> None:
+     """D-434's regression: the oracle and the verifier must decide one cell set.
+diff --git a/packing/tests/test_fractional_sweep_integer.py b/packing/tests/test_fractional_sweep_integer.py
+index 5881c6a8..9dc60974 100644
+--- a/packing/tests/test_fractional_sweep_integer.py
++++ b/packing/tests/test_fractional_sweep_integer.py
+@@ -259,6 +259,7 @@ def test_worker_counts_sit_under_the_core_worker_and_grid_caps(
+     """
+ 
+     certificate = n11_load(N11_FIRST_RUNG)
++    monkeypatch.delenv("PACK_JOBS", raising=False)
+     one_grid = certificate_module._estimated_grid_bytes(len(certificate.atoms))
+     monkeypatch.setattr(certificate_module.os, "process_cpu_count", lambda: 64)
+     monkeypatch.setattr(certificate_module, "_MAX_PARALLEL_WORKERS", 8)
+@@ -272,6 +273,26 @@ def test_worker_counts_sit_under_the_core_worker_and_grid_caps(
+     assert certificate_module._worker_count(certificate, None) == 8
+ 
+ 
++def test_the_gate_budget_caps_default_and_explicit_direction_workers(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    """A pytest worker cannot multiply the gate's per-step process allowance."""
++    certificate = _small_certificate()
++    monkeypatch.setattr(certificate_module.os, "process_cpu_count", lambda: 8)
++    monkeypatch.setenv("PACK_JOBS", "1")
++    assert certificate_module._worker_count(certificate, None) == 1
++    assert certificate_module._worker_count(certificate, 8) == 1
++
++    class RefusePool:
++        def __init__(self, *_args: object, **_kwargs: object) -> None:
++            raise AssertionError("a one-worker budget started a direction pool")
++
++    monkeypatch.setattr(certificate_module, "ProcessPoolExecutor", RefusePool)
++    assert sweep_all_directions(certificate, workers=8) == sweep_all_directions(
++        certificate, workers=1
++    )
++
++
+ def test_a_single_threaded_process_forks_and_a_threaded_one_without_a_main_runs_serially(
+     monkeypatch: pytest.MonkeyPatch,
+ ) -> None:
+@@ -308,12 +329,16 @@ def test_a_single_threaded_process_forks_and_a_threaded_one_without_a_main_runs_
+ 
+ 
+ @pytest.mark.slow
+-def test_the_parallel_direction_loop_matches_the_serial_one() -> None:
++def test_the_parallel_direction_loop_matches_the_serial_one(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
+     """Same minima, same order, same first-attaining label, whatever the schedule."""
+-
++    # This isolated correctness probe owns two workers even inside a serial benchmark.
++    # The separate one-worker-cap test proves ordinary calls cannot escape their budget.
++    monkeypatch.setenv("PACK_JOBS", "2")
+     certificate = n11_load(N11_FIRST_RUNG)
+     serial = sweep_all_directions(certificate, workers=1)
+-    parallel = sweep_all_directions(certificate, workers=3)
++    parallel = sweep_all_directions(certificate, workers=2)
+     assert parallel == serial
+     assert [label for _, label in serial] == [d.label for d in certificate.directions]
+ 
+diff --git a/packing/tests/test_minus_w_bridge.py b/packing/tests/test_minus_w_bridge.py
+index 3bfa9190..f87248aa 100644
+--- a/packing/tests/test_minus_w_bridge.py
++++ b/packing/tests/test_minus_w_bridge.py
+@@ -10,14 +10,30 @@ from __future__ import annotations
+ 
+ import pytest
+ 
+-from cases.n5 import minus_w_owner4, minus_w_scale, tangent_cones, tangent_inventory
++from cases.n5 import (
++    minus_w_owner4,
++    minus_w_row_jets,
++    minus_w_scale,
++    tangent_cones,
++    tangent_inventory,
++)
+ from devtools.check_minus_w_bridge import main
+ from sqpack.field import NumberField
+ 
+ 
+ @pytest.mark.slow
+-def test_the_bridge_agrees() -> None:
++def test_the_bridge_agrees(monkeypatch: pytest.MonkeyPatch) -> None:
++    original_builder = minus_w_row_jets.active_row_jets
++    built: list[str] = []
++
++    def build_once(field: NumberField, stratum: str):
++        assert stratum not in built, f"source rows for {stratum} were rebuilt"
++        built.append(stratum)
++        return original_builder(field, stratum)
++
++    monkeypatch.setattr(minus_w_row_jets, "active_row_jets", build_once)
+     assert main() == 0
++    assert built == list(tangent_cones.STRATA)
+ 
+ 
+ @pytest.mark.slow
+diff --git a/packing/tests/test_negative_controls.py b/packing/tests/test_negative_controls.py
+index d8e6b537..48c6d45f 100644
+--- a/packing/tests/test_negative_controls.py
++++ b/packing/tests/test_negative_controls.py
+@@ -2,6 +2,7 @@
+ 
+ from __future__ import annotations
+ 
++import json
+ import os
+ import shlex
+ import shutil
+@@ -12,6 +13,7 @@ from pathlib import Path
+ 
+ import pytest
+ 
++from devtools import run_negative_controls as controls
+ from devtools.run_negative_controls import (
+     BUILD_CACHES,
+     HERE,
+@@ -25,6 +27,44 @@ from devtools.run_negative_controls import (
+     snapshot_source_bytes,
+ )
+ 
++
++def test_control_timing_records_preserve_failed_detection_and_refuse_overwrite(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
++) -> None:
++    spec = tmp_path / "controls.yaml"
++    spec.write_text("controls:\n- name: detects mutation\n- name: misses mutation\n")
++    timings = tmp_path / "timings.jsonl"
++    monkeypatch.setattr(controls, "snapshot_source_bytes", lambda: 0)
++    monkeypatch.setattr(controls, "clone_tree", lambda tree: tree.mkdir(parents=True))
++    monkeypatch.setattr(
++        controls,
++        "run_one",
++        lambda control, _tree: (
++            control["name"] == "detects mutation",
++            ""
++            if control["name"] == "detects mutation"
++            else "command SUCCEEDED; the check did not fire",
++        ),
++    )
++    assert controls.main([str(spec), "-j", "1", "--timings", str(timings)]) == 1
++    captured = capsys.readouterr()
++    assert "CONTROL FAILED  misses mutation" in captured.err
++    assert "slowest negative controls" in captured.out
++    records = [json.loads(line) for line in timings.read_text().splitlines()]
++    results = [record for record in records if record["event"] == "control_finished"]
++    assert {record["name"]: record["status"] for record in results} == {
++        "detects mutation": "passed",
++        "misses mutation": "failed",
++    }
++    assert all(record["wall_seconds"] >= 0 for record in results)
++    assert records[0]["selected_controls"] == ["detects mutation", "misses mutation"]
++    assert records[-1]["status"] == "failed"
++    original = timings.read_bytes()
++    with pytest.raises(FileExistsError):
++        controls.main([str(spec), "-j", "1", "--timings", str(timings)])
++    assert timings.read_bytes() == original
++
++
+ # A size no accident produces, so a byte that moves the count can be attributed.
+ CACHE_PROBE_BYTES = b"n" * 1_000_003
+ # One temporary directory under `packing/`, where the walk counts it, holding a file
+diff --git a/packing/tests/test_validation_cli.py b/packing/tests/test_validation_cli.py
+index e9c0b917..9ac02a6a 100644
+--- a/packing/tests/test_validation_cli.py
++++ b/packing/tests/test_validation_cli.py
+@@ -720,6 +720,8 @@ def test_full_exhaustive_behavioral_step_selects_only_exhaustive_exact_tests(
+         "tests",
+         "-m",
+         "exhaustive_exact",
++        "--durations=0",
++        "--durations-min=0",
+     )
+ 
+ 

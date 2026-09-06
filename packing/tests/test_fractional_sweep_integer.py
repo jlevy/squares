@@ -259,6 +259,7 @@ def test_worker_counts_sit_under_the_core_worker_and_grid_caps(
     """
 
     certificate = n11_load(N11_FIRST_RUNG)
+    monkeypatch.delenv("PACK_JOBS", raising=False)
     one_grid = certificate_module._estimated_grid_bytes(len(certificate.atoms))
     monkeypatch.setattr(certificate_module.os, "process_cpu_count", lambda: 64)
     monkeypatch.setattr(certificate_module, "_MAX_PARALLEL_WORKERS", 8)
@@ -270,6 +271,26 @@ def test_worker_counts_sit_under_the_core_worker_and_grid_caps(
     assert certificate_module._worker_count(certificate, 99) == 1
     monkeypatch.setattr(certificate_module, "_PARALLEL_GRID_BUDGET_BYTES", 8 * one_grid)
     assert certificate_module._worker_count(certificate, None) == 8
+
+
+def test_the_gate_budget_caps_default_and_explicit_direction_workers(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A pytest worker cannot multiply the gate's per-step process allowance."""
+    certificate = _small_certificate()
+    monkeypatch.setattr(certificate_module.os, "process_cpu_count", lambda: 8)
+    monkeypatch.setenv("PACK_JOBS", "1")
+    assert certificate_module._worker_count(certificate, None) == 1
+    assert certificate_module._worker_count(certificate, 8) == 1
+
+    class RefusePool:
+        def __init__(self, *_args: object, **_kwargs: object) -> None:
+            raise AssertionError("a one-worker budget started a direction pool")
+
+    monkeypatch.setattr(certificate_module, "ProcessPoolExecutor", RefusePool)
+    assert sweep_all_directions(certificate, workers=8) == sweep_all_directions(
+        certificate, workers=1
+    )
 
 
 def test_a_single_threaded_process_forks_and_a_threaded_one_without_a_main_runs_serially(
@@ -308,12 +329,16 @@ def test_a_single_threaded_process_forks_and_a_threaded_one_without_a_main_runs_
 
 
 @pytest.mark.slow
-def test_the_parallel_direction_loop_matches_the_serial_one() -> None:
+def test_the_parallel_direction_loop_matches_the_serial_one(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     """Same minima, same order, same first-attaining label, whatever the schedule."""
-
+    # This isolated correctness probe owns two workers even inside a serial benchmark.
+    # The separate one-worker-cap test proves ordinary calls cannot escape their budget.
+    monkeypatch.setenv("PACK_JOBS", "2")
     certificate = n11_load(N11_FIRST_RUNG)
     serial = sweep_all_directions(certificate, workers=1)
-    parallel = sweep_all_directions(certificate, workers=3)
+    parallel = sweep_all_directions(certificate, workers=2)
     assert parallel == serial
     assert [label for _, label in serial] == [d.label for d in certificate.directions]
 

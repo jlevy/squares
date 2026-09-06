@@ -5,7 +5,9 @@
 
 from __future__ import annotations
 
+import hashlib
 import io
+import json
 import os
 import shlex
 import signal
@@ -25,6 +27,139 @@ from sqpack.yamlio import safe_load
 WORKFLOW = Path(__file__).resolve().parents[2] / ".github/workflows/packing-validation.yml"
 """The gate's own workflow, read by the test that keeps its two post-merge jobs a
 partition of `STEPS`. Repository-relative from `packing/tests/`, so two levels up."""
+
+
+def test_artifacts_keep_partial_subprocess_output_after_timeout(tmp_path: Path) -> None:
+    artifacts = tmp_path / "artifacts"
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={**os.environ, "PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts)},
+        timeout_seconds=0.2,
+    )
+    with pytest.raises(validate.StepFailureError, match="timed out"):
+        validate._run(
+            context,
+            [sys.executable, "-c", "import time; print('partial', flush=True); time.sleep(60)"],
+        )
+    assert "partial" in next(artifacts.glob("*.log")).read_text()
+    end = json.loads(next(artifacts.glob("*.end.json")).read_text())
+    assert end["status"] == "timed_out"
+    assert end["run_id"] == context.artifact_run_id
+    assert end["wall_seconds"] > 0
+    assert next(artifacts.glob("*.start.json")).is_file()
+
+
+@pytest.mark.parametrize("error_type", [KeyboardInterrupt, validate.StepCancelledError])
+def test_artifacts_distinguish_cancelled_commands(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    error_type: type[BaseException],
+) -> None:
+    artifacts = tmp_path / "artifacts"
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={**os.environ, "PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts)},
+    )
+
+    def cancelled(*_args: object, **_kwargs: object) -> str:
+        raise error_type("operator cancelled")
+
+    monkeypatch.setattr(validate, "_run_command", cancelled)
+    with pytest.raises(error_type):
+        validate._run(context, [sys.executable, "-c", "pass"])
+    end = json.loads(next(artifacts.glob("*.end.json")).read_text())
+    assert end["status"] == "cancelled"
+    assert end["reason"] == "operator cancelled"
+
+
+def test_artifacts_give_pytest_unique_junit_and_all_phase_timings(tmp_path: Path) -> None:
+    source = tmp_path / "test_probe.py"
+    source.write_text("def test_probe():\n    assert True\n")
+    artifacts = tmp_path / "artifacts"
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={**os.environ, "PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts)},
+    )
+    output = validate._run(
+        context, [sys.executable, "-m", "pytest", "-q", str(source)], cwd=tmp_path
+    )
+    assert "slowest durations" in output
+    assert next(artifacts.glob("*.junit.xml")).is_file()
+    end = json.loads(next(artifacts.glob("*.end.json")).read_text())
+    assert end["status"] == "passed"
+
+
+def test_artifact_provenance_includes_untracked_source(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    subprocess.run(["git", "init", "-q", str(repo)], check=True)
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repo),
+            "-c",
+            "user.name=Test",
+            "-c",
+            "user.email=test@example.com",
+            "commit",
+            "-q",
+            "--allow-empty",
+            "-m",
+            "baseline",
+        ],
+        check=True,
+    )
+    source = repo / "untracked.py"
+    source.write_text("VALUE = 3\n")
+    artifacts = tmp_path / "artifacts"
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={**os.environ, "PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts)},
+    )
+    monkeypatch.setattr(validate, "REPOSITORY_ROOT", repo)
+    validate._begin_artifacts(context, [])
+    receipt = json.loads(next(artifacts.glob("run-*.json")).read_text())
+    assert receipt["commit"]
+    assert receipt["run_id"] == context.artifact_run_id
+    assert receipt["untracked_hashes"] == {
+        "untracked.py": hashlib.sha256(source.read_bytes()).hexdigest(),
+    }
+    assert "untracked.py" in receipt["git_status"]
+
+
+def test_ci_keeps_each_gate_jobs_timing_artifacts_even_on_failure() -> None:
+    for workflow in (WORKFLOW, WORKFLOW.parent / "deep-gate.yml"):
+        document = safe_load(workflow.read_text())
+        assert isinstance(document, dict)
+        assert "PACKING_VALIDATION_ARTIFACT_DIR" in document["env"]
+        for name, job in document["jobs"].items():
+            steps = job.get("steps", [])
+            if not any("packing-validate" in str(step.get("run", "")) for step in steps):
+                continue
+            upload = [
+                step
+                for step in steps
+                if str(step.get("uses", "")).startswith("actions/upload-artifact@")
+            ]
+            assert len(upload) == 1, name
+            assert upload[0]["if"] == "always()", name
+            assert upload[0]["with"]["path"] == "${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}"
 
 
 def _invoke(*arguments: str) -> tuple[int, str, str]:
@@ -846,6 +981,8 @@ def test_full_exhaustive_behavioral_step_selects_only_exhaustive_exact_tests(
         "tests",
         "-m",
         "exhaustive_exact",
+        "--durations=0",
+        "--durations-min=0",
     )
 
 

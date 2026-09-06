@@ -17,6 +17,16 @@ status: active
 
 **Primary focus:** Efficiency
 
+**Current follow-up:**
+[Validation Efficiency and Checkpoints](plan-2026-09-06-validation-efficiency-and-checkpoints.md)
+owns the 2026-09-06 implementation block.
+Its checkpoint placement and acceptance criteria supersede this plan’s original
+operational targets where they differ.
+The measurements, proposals, and unresolved items below remain dated evidence;
+[development.md](../../../../development.md#validation-loops) owns current commands and
+coverage. In particular, the one-minute target and full-macOS/deep-golden scheduling
+below must not be read as the current CI configuration.
+
 ## Decision
 
 The required pull-request signal will be a stable `packing-required` check whose work

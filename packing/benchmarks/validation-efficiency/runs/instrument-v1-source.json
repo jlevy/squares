@@ -1,0 +1,10 @@
+{
+  "instrument_source": "packing/benchmarks/validation-efficiency/runs/instrument-v1.py.txt",
+  "sha256": "bba17dbcfee0089c62a07f33eea86ee1d5be0c887091f5443c90df4f59c73cd3",
+  "purpose": "Exact instrument source used by the completed 12-sample campaign before the provenance fix.",
+  "dirty_diff_hash_kind": "UTF-8 replacement decoded Git diff with leading/trailing whitespace stripped, then UTF-8 encoded",
+  "limitations": [
+    "Untracked files outside the selected test targets were not content-hashed.",
+    "Source provenance was captured at invocation start, not rechecked at each sample end."
+  ]
+}

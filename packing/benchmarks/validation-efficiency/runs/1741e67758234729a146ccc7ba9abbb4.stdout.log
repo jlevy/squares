@@ -1,0 +1,12 @@
+...                                                                      [100%]
+============================== slowest durations ===============================
+68.23s call     tests/test_minus_w_bridge.py::test_the_bridge_agrees
+13.38s call     tests/test_minus_w_bridge.py::test_the_scale_constant_actually_measures_the_direction
+4.29s call     tests/test_minus_w_bridge.py::test_a_doctored_direction_is_refused
+0.00s setup    tests/test_minus_w_bridge.py::test_the_scale_constant_actually_measures_the_direction
+0.00s setup    tests/test_minus_w_bridge.py::test_the_bridge_agrees
+0.00s teardown tests/test_minus_w_bridge.py::test_the_bridge_agrees
+0.00s setup    tests/test_minus_w_bridge.py::test_a_doctored_direction_is_refused
+0.00s teardown tests/test_minus_w_bridge.py::test_a_doctored_direction_is_refused
+0.00s teardown tests/test_minus_w_bridge.py::test_the_scale_constant_actually_measures_the_direction
+3 passed in 85.96s (0:01:25)

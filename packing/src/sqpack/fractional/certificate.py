@@ -60,6 +60,7 @@ from sqpack.fractional.model import (
     rotation_from_half_tangent,
 )
 from sqpack.fractional.sweep import minimum_covered_mass
+from sqpack.workers import worker_count
 
 
 @dataclass(frozen=True, slots=True)
@@ -386,13 +387,17 @@ def _estimated_grid_bytes(atom_count: int) -> int:
 
 
 def _worker_count(certificate: Certificate, requested: int | None) -> int:
-    """The pool size: the request or the core count, under the worker and grid caps."""
+    """The pool size under the gate, core, worker, and grid caps."""
     available = os.process_cpu_count() or 1
     desired = available if requested is None else max(1, requested)
     per_worker = _estimated_grid_bytes(len(certificate.atoms))
     by_memory = max(1, _PARALLEL_GRID_BUDGET_BYTES // max(1, per_worker))
     return min(
-        desired, available, len(certificate.directions), _MAX_PARALLEL_WORKERS, by_memory
+        desired,
+        worker_count(available),
+        len(certificate.directions),
+        _MAX_PARALLEL_WORKERS,
+        by_memory,
     )
 
 
@@ -439,7 +444,8 @@ def sweep_all_directions(
     Directions are independent, so they are decided in parallel processes;
     ``workers`` defaults to the process's available core count, or to this process
     alone below ``_PARALLEL_ATOMS`` atoms, and ``1`` runs them in this process. Both
-    the default and an explicit count sit under ``_MAX_PARALLEL_WORKERS`` and the
+    the default and an explicit count sit under the gate's ``PACK_JOBS`` cap,
+    ``_MAX_PARALLEL_WORKERS`` and the
     grid budget (``_worker_count``), and the pool's start method -- or the decision
     to run in this process after all -- is ``_pool_context``'s. An explicit count
     otherwise always gets a pool, so the two schedules can be compared on a

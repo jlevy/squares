@@ -1,4 +1,4 @@
-name: Deep gate
+name: Deferred checkpoint
 
 # The four steps the pull-request surface defers, run against a pull request *before* it
 # merges rather than after it. Not on every build, and that is the point: the selection
@@ -65,6 +65,10 @@ name: Deep gate
 
 permissions:
   contents: read
+
+env:
+  # Outside the checkout: receipts must not enter source scans or mutation snapshots.
+  PACKING_VALIDATION_ARTIFACT_DIR: ${{ github.workspace }}/../validation-artifacts
 
 concurrency:
   # Deliberately *not* `packing-validation-...`. Concurrency groups are repository-wide
@@ -159,6 +163,15 @@ jobs:
           --only "n=40 rigidity bracket still reproduces"
           --jobs 2 --inner-jobs 2
 
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
   exhaustive-tier:
     # The exhaustive exact tier alone, on its own runner, for the reason think-tr2z split
     # it out of the post-merge gate: at 1943.05s it is the one step that decides whether
@@ -210,6 +223,15 @@ jobs:
           uv run --frozen --all-extras --group dev
           packing-validate --only "exhaustive exact behavioral tests"
           --jobs 1 --inner-jobs 2
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
 
   deep-gate-required:
     # One context for the whole deep surface, exactly as `packing-required` is one
