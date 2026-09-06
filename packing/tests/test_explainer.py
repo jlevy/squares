@@ -10,23 +10,31 @@ substitution, and nothing in the page is a reference outside it.
 from __future__ import annotations
 
 import re
+import subprocess
 from pathlib import Path
 
 import pytest
 
+from devtools import render_explainer
 from devtools.render_explainer import (
+    ATLAS,
+    BEST_RENDERING,
     CARD_ALT,
     CASE,
     COMPOSITE_ALT,
     COMPOSITE_ASSETS,
     COMPOSITE_CARD,
     COMPOSITE_PNG,
+    GENERATOR,
     MARKDOWN_OUTPUT,
     OUTPUT,
     RENDER_INPUTS,
     REPO,
+    REPO_URL,
     RESULT_ID,
     SITE_URL,
+    THIRDPARTY,
+    VERIFIER,
     WALKTHROUGH,
     assert_self_contained,
     png_size,
@@ -34,6 +42,7 @@ from devtools.render_explainer import (
 )
 from devtools.render_explainer import load_certificate as load
 from devtools.render_explainer_pdf import OUTPUT as PDF_OUTPUT
+from sqpack.release import PUBLICATION_REVISION
 from sqpack.yamlio import safe_load
 
 
@@ -504,3 +513,77 @@ def test_the_pdf_chip_offers_the_pdf_the_exporter_writes(page: str) -> None:
     """Named against the exporter's own constant, so a rename moves both ends at once."""
     assert f'href="{PDF_OUTPUT.name}"' in page
     assert PDF_OUTPUT.parent == OUTPUT.parent, "the PDF must land beside the page it links from"
+
+
+#: A link into this repository as GitHub spells one: the ref, then the path, under
+#: `blob/` for a file and `tree/` for a directory.
+REPOSITORY_LINK = re.compile(
+    re.escape(REPO_URL) + r"/(?:blob|tree)/([^/\s\"<>)]+)/([^\s\"<>)]*)"
+)
+
+
+def repository_links(text: str) -> set[tuple[str, str]]:
+    """Every (ref, path) the text links into the repository, scripts and styles aside."""
+    markup = re.sub(r"<(script|style)\b.*?</\1>", "", text, flags=re.DOTALL | re.IGNORECASE)
+    return {(ref, path.rstrip("/")) for ref, path in REPOSITORY_LINK.findall(markup)}
+
+
+def test_every_repository_link_is_a_permalink_to_the_publication_revision(
+    page: str, document: str
+) -> None:
+    """A link on `main` names whatever is there when the reader clicks, not the edition.
+
+    The page stamps an edition cut from one commit, and the certificate digests it
+    prints identify the data; the links are what identify the verifier, the generator,
+    the third-party check and the exposition a reported run used, and every one of them
+    was built as `blob/main/...` (review of 2026-09-05, Finding 8). So each link into
+    the repository names the publication revision, in the page and in the Markdown
+    edition alike. The set of linked paths is checked with it: a permalink to the wrong
+    file is pinned just as firmly.
+    """
+    links = repository_links(page) | repository_links(document)
+    assert links, "the page links nothing in the repository"
+    unpinned = sorted(f"{ref}/{path}" for ref, path in links if ref != PUBLICATION_REVISION)
+    assert not unpinned, f"repository links not pinned to {PUBLICATION_REVISION}: {unpinned}"
+    linked = {path for _, path in links}
+    evidence = (
+        VERIFIER,
+        GENERATOR,
+        THIRDPARTY,
+        BEST_RENDERING,
+        ATLAS,
+        Path(render_explainer.__file__),
+        *WALKTHROUGH,
+        *sorted(CASE.glob("*-verifiable-claim-*.md")),
+    )
+    for path in evidence:
+        assert path.resolve().relative_to(REPO).as_posix() in linked, path.name
+
+
+def test_every_permalinked_path_exists_at_the_publication_revision(
+    page: str, document: str
+) -> None:
+    """A permalink to a path the commit does not have is a 404 from the day it is published.
+
+    `PUBLICATION_REVISION` is pinned by hand in `sqpack.release` and the paths are
+    resolved against the working tree, so nothing else relates the two: a file renamed
+    after the edition was cut, or a revision bumped past a rename, links to nothing.
+    Asked of git rather than of the working tree, since the working tree is exactly what
+    a permalink does not point at. A shallow checkout has no history to ask -- the Pages
+    deploy and the macOS job build from one -- so the check skips there and runs where
+    the history is fetched, which the validate job's `fetch-depth: 0` is for.
+    """
+
+    def exists(spec: str) -> bool:
+        result = subprocess.run(
+            ["git", "cat-file", "-e", spec], cwd=REPO, capture_output=True, check=False
+        )
+        return result.returncode == 0
+
+    if not exists(f"{PUBLICATION_REVISION}^{{commit}}"):
+        pytest.skip(f"{PUBLICATION_REVISION} is not in this clone; the check needs history")
+    links = repository_links(page) | repository_links(document)
+    pinned = sorted(path for ref, path in links if ref == PUBLICATION_REVISION)
+    assert pinned, "nothing is linked at the publication revision"
+    missing = [path for path in pinned if not exists(f"{PUBLICATION_REVISION}:{path}")]
+    assert not missing, f"linked at {PUBLICATION_REVISION} but not in that commit: {missing}"

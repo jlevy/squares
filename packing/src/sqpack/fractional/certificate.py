@@ -20,9 +20,12 @@ hold together, so the conditions are named here rather than left to a caller:
 
 Given all five: each of ``n`` interior-disjoint unit squares contains, about
 its own centre, a closed ``B``-square at some net angle. That ``B``-square lies
-*strictly* inside the unit square's interior because ``Condition 4`` is strict --
-``B (1 + D) < 1`` leaves room -- so the ``n`` shrunken squares are pairwise
-disjoint as closed sets and no atom is counted twice. Each covers mass at least
+*strictly* inside the unit square's interior: with ``d`` the angle between the
+two, ``tan d <= D``, so its width across the unit square,
+``B (cos d + sin d) <= B (1 + D)``, is below 1 by ``Condition 4``. (It would be
+even with ``<=`` there, since ``D > 0`` and ``cos d < 1`` for ``d > 0``; the
+strict test is sufficient, not necessary.) So the ``n`` shrunken squares are
+pairwise disjoint as closed sets and no atom is counted twice. Each covers mass at least
 1 by ``Condition 5``, for a total of at least ``n``, which ``Condition 2``
 forbids. So ``n`` unit squares do not fit in a container of side ``L``, and
 ``s(n) > L``. The bound is

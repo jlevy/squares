@@ -55,7 +55,7 @@ from sqpack.fractional.certificate import (
 )
 from sqpack.fractional.model import Atom
 from sqpack.fractional.sweep import minimum_covered_mass, weight_scale
-from sqpack.release import PUBLICATION_DATE, PUBLICATION_EDITION
+from sqpack.release import PUBLICATION_DATE, PUBLICATION_EDITION, PUBLICATION_REVISION
 from sqpack.render.style import SQUARE_HUE_PALETTE
 from sqpack.yamlio import safe_load
 
@@ -237,8 +237,11 @@ RESULT_YEAR = 2026
 
 # Where the page sends a reader for more: the sources the n = 11 record cites
 # (frontier/n-011.md, keys [Friedman DS7], [Kingbird] and [Stromquist 2003]) and
-# the repository files behind the words, linked on `main`, which is what the
-# page deploys from.
+# the repository files behind the words, linked at the revision the edition was cut
+# from rather than on `main`, which the page deploys from but which does not stand
+# still. The certificate digests identify the data; the pinned links are what
+# identify the verifier, the generator and the exposition a reported run used
+# (review of 2026-09-05, Finding 8).
 PROBLEM_URL = "https://erich-friedman.github.io/papers/squares/squares.html"
 BEST_URL = "https://kingbird.myphotos.cc/packing/squares_in_squares.html"
 PRIOR_URL = "https://www.combinatorics.org/ojs/index.php/eljc/article/view/v10i1r8"
@@ -251,7 +254,9 @@ REPO_URL = "https://github.com/jlevy/squares"
 # is that one place.
 SITE_URL = "https://jlevy.github.io/squares/"
 SITE_NAME = "Squares"
-BEST_RENDERING = PACKING / "atlas" / "known-best" / "rendering" / "n-011.svg"
+#: The atlas the Figure 1 caption sends a reader to browse, linked as a directory.
+ATLAS = PACKING / "atlas" / "known-best"
+BEST_RENDERING = ATLAS / "rendering" / "n-011.svg"
 # The atlas composite of every known-best packing, shown as Figure 1 and served
 # beside the page rather than inlined: the PNG is the image, the PDF the link.
 #: The composite travels with the page: the SVG the figure shows, the PDF it links for
@@ -297,14 +302,22 @@ THIRDPARTY = CASE / "thirdparty" / "README.md"
 
 
 def repo_file(path: Path) -> str:
-    """The file's URL on main; a path outside the repository has no such URL."""
+    """The file's URL at the publication revision; a path outside the repository has none.
+
+    A permalink, not a branch link: `blob/main/` names whatever is on `main` when the
+    reader clicks, and the edition the page stamps was cut from one commit. A path that
+    did not exist at that commit is a link that 404s from the day it is published, so a
+    test checks each linked path against the revision; the renderer itself cannot, since
+    the deploy builds from a shallow checkout that has no history to ask.
+    """
     try:
         relative = path.resolve().relative_to(REPO)
     except ValueError:
-        raise SystemExit(
-            f"{path} is outside the repository and cannot be linked on main"
-        ) from None
-    return f"{REPO_URL}/blob/main/{relative.as_posix()}"
+        raise SystemExit(f"{path} is outside the repository and cannot be linked") from None
+    # GitHub serves a directory under `tree/` and a file under `blob/`, and redirects
+    # the other way round; the canonical one is written so no link is a redirect.
+    kind = "tree" if path.is_dir() else "blob"
+    return f"{REPO_URL}/{kind}/{PUBLICATION_REVISION}/{relative.as_posix()}"
 
 
 def site_file(path: Path) -> str:
@@ -1272,6 +1285,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "BEST_URL": BEST_URL,
         "BEST_SOURCE": BEST_SOURCE,
         "BEST_RENDER_URL": repo_file(BEST_RENDERING),
+        "ATLAS_URL": repo_file(ATLAS),
         "TRUMP_SVG": best_packing_svg(),
         "NUMBER_LINE_MARKS": number_line_marks(facts, headline),
         "PRIOR_X": f"{line_x(float(PRIOR_LOWER)):.0f}",
