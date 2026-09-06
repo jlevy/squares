@@ -249,7 +249,7 @@ session:
     clock_role: work
     objective: Execute H104 once and independently decide its exact-angle scope.
     bead: think-d2d1
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: Reader cold review discharged the two remaining source-only readiness gates.
     budget_minutes: 20.22
@@ -259,10 +259,30 @@ session:
     validation_command: Frozen ten-second producer once, then independent ten-second reader once.
     kill_condition: The frozen process or review cap is reached; no unchanged retry.
     fallback: Preserve incomplete or refused evidence and leave the affected mathematical claim unresolved.
+    outcome: All seven clauses passed; one independent replay accepted H104 only, with H036 unresolved.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md]
+    stop_reason: The target and independent review finished; switch to publication and source-only separator review.
+    next_action: Publish the result on PR101 and price any continuous-angle extension separately.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Publish H104 and independently review the next density instrument while repairing validation invocation.
+    bead: think-647n
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: H104 has a scoped decision and the pair author has handed off stable source and controls.
+    budget_minutes: 25
+    started_at: '2026-09-06T21:47:00Z'
+    deadline_at: '2026-09-06T22:12:00Z'
+    expected_output: Updated integrated PR101, pair readiness decision and actual failed-step replay verdict.
+    validation_command: Source/toy independent review, record and push tiers, and the isolated negative-control step.
+    kill_condition: A correctness premise fails or the separate bounded commission ends; no unregistered target.
+    fallback: Retain the exact missing gate and select no target without a new prospective record.
     outcome: null
     evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md]
     stop_reason: null
-    next_action: Publish the result on PR101 and price any continuous-angle extension separately.
+    next_action: Accept only reviewed readiness; freeze a separate candidate-only discriminator before target access.
   primary_bead: think-jgnv
   status: in_progress
   budget:
@@ -780,13 +800,13 @@ session:
     excluded_commands: [checker edits without root coordination, target geometry, git mutations, tbd mutations, registry allocation]
   - task: H099 overweight-pair separator source/toy build; think-4ej5
     operator: Codex gpt6_coverage_audit, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: Pair-search and strict positive-area witness commands are not yet implemented or reviewed.
+    outcome: Source/toy implementation complete; writer stopped at 21:43:14 before its deadline.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-pair-separator-readiness.md]
+    files: [packing/src/sqpack/full_size_density/pair_separator.py, packing/devtools/run_full_size_density_pair_separator.py, packing/devtools/check_full_size_density_pair_separator.py, packing/tests/test_full_size_density_pair_separator.py]
+    checks: [54 tests passed; pytest 7.74 seconds, process 8.03 wall and 7.58 CPU; Ruff and types clean.]
+    uncertainty: Independent readiness remains required; target geometry and target binding roundtrip were not invoked.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Build declared controls only; retain a priced readiness checkpoint before target access.
@@ -807,16 +827,16 @@ session:
     excluded_commands: [target geometry, target optimization, new necessary rows, git mutations, tbd mutations, registry allocation]
   - task: H104 independent target receipt and witness replay; think-jhs4
     operator: Codex structural_lane_strategy, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: The target and its single output replay remain unrun.
+    outcome: Accept H104 only; the sole replay exited zero at 21:35:35, and the writer stopped at 21:37:06.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/exp-114-h-104-fixed-side-auxiliaries/target-output-independent-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/exp-114-h-104-fixed-side-auxiliaries/replay.json, packing/campaign/series/series-000-smoke-and-calibration/results/exp-114-h-104-fixed-side-auxiliaries/replay.log]
+    checks: [Single reader 0.05 seconds wall and 0.05 CPU; all seven exact-angle clauses complete and true.]
+    uncertainty: Positive coverage relies on the reviewed exhaustive producer, not receipt counts; H036 remains unresolved.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Read the prospective protocol and await the coordinator's actual producer packet and exit code.
+    next_action: Retain the narrow outcome and separately price continuous-angle work.
     phase: 10
     budget_minutes: 10.2
     started_at: '2026-09-06T21:29:48Z'
@@ -852,6 +872,94 @@ session:
     fallback: Report remaining body drift; do not change mathematical meaning to resolve wording.
     write_scope: [H099 and H104 bodies, exp113 body, temporary PR body outside the generated cost block]
     excluded_commands: [YAML edits, numerical or criterion changes, source edits, Git mutations, tbd mutations]
+  - task: Diagnose the isolated full-gate negative-control environment; think-h264
+    operator: Codex bound_lane_strategy, existing worker settings
+    status: completed
+    recording: contemporaneous
+    outcome: Missing yaml and pytest traced to empty worker environments; explicit existing-venv binding passes focused controls.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/session-089-negative-control-environment.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/session-089-negative-control-environment.md]
+    checks: [Native focused interval mutation fired; process 5.05 seconds wall and 4.73 CPU.]
+    uncertainty: The corrected replay of all 163 controls is running; no full-gate pass is yet claimed.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Retain diagnosis and actual replay evidence without changing mathematical expectations.
+    phase: 11
+    budget_minutes: 15
+    started_at: '2026-09-06T21:38:35Z'
+    deadline_at: '2026-09-06T21:53:35Z'
+    expected_output: Minimal cause, focused reproduction and safe failed-step replay command.
+    validation_command: Isolated import/control diagnosis under Python3.14 with UV_NO_SYNC=1.
+    kill_condition: Cause and replay are known or the diagnosis lease ends; no full-suite retry.
+    fallback: Retain unresolved validation separately from mathematical outcomes.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/session-089-negative-control-environment.md]
+    excluded_commands: [source edits, dependency changes, shared venv repointing, target geometry, git mutations, tbd mutations]
+  - task: Independent pair-separator correctness review; think-0u56
+    operator: Codex structural_lane_strategy, max reasoning for mathematical judgment
+    status: completed
+    recording: contemporaneous
+    outcome: GO for one bounded producer and separate replay after a new freeze; writer stopped at 21:54:32.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-pair-separator-independent-review.md]
+    files: [packing/tests/test_full_size_density_pair_separator_review.py]
+    checks: [42 source/toy tests passed; 4.65 seconds wall and 4.56 CPU; Ruff, types and formatting clean.]
+    uncertainty: Target construction and geometry remain uninvoked; no pair result or a.e. feasibility claim follows from readiness.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Review strict-area witnesses, separated-prefix completeness, binding and independence limits.
+    phase: 11
+    budget_minutes: 10
+    started_at: '2026-09-06T21:47:00Z'
+    deadline_at: '2026-09-06T21:57:00Z'
+    expected_output: A measured source/toy review with GO or a precise blocker.
+    validation_command: Independent source/toy regressions only, using projectPython3.14.
+    kill_condition: A soundness blocker is found or the review lease ends.
+    fallback: Preserve the missing readiness guard and do not run the candidate.
+    write_scope: [packing/tests/test_full_size_density_pair_separator_review.py, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-pair-separator-independent-review.md]
+    excluded_commands: [target construction or geometry, target binding roundtrip, LP, new rows, source edits, git mutations, tbd mutations]
+  - task: Candidate-only prospective protocol assessment; think-01q4
+    operator: Codex gpt6_coverage_audit, max reasoning for mathematical judgment
+    status: completed
+    recording: contemporaneous
+    outcome: Recommend a separate exact pair-obstruction claim; candidate refutation does not resolve H099.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-post-screen-next-discriminator.md]
+    files: [none; read-only advice retained in this session, with root owning any later experiment]
+    checks: [Read-only criterion and schema audit; no file writes, tests or target geometry.]
+    uncertainty: Root must allocate any new hypothesis and experiment after accepting instrument readiness.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Propose minimal scoped accept, reject and unresolved semantics without target access.
+    phase: 11
+    budget_minutes: 10
+    started_at: '2026-09-06T21:47:00Z'
+    deadline_at: '2026-09-06T21:57:00Z'
+    expected_output: Read-only protocol advice and a next discriminator for either possible outcome.
+    validation_command: Read retained candidate metadata, instrument design and experiment schemas; no calculation.
+    kill_condition: The advice is complete or the bounded review lease ends.
+    fallback: Leave target work unopened without a reviewed prospective record.
+    write_scope: [none; read-only messages to the coordinator]
+    excluded_commands: [file writes, tests, target construction or geometry, git mutations, tbd mutations, registry allocation]
+  - task: Preserve referenced workflow evidence in control snapshots; think-lpoq
+    operator: Codex bound_lane_strategy, existing worker settings
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: This is separate from the environment-only failed-step replay on immutable a105f729.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Add a narrow snapshot regression and retain referenced workflow evidence without weakening mutation expectations.
+    phase: 11
+    budget_minutes: 15
+    started_at: '2026-09-06T21:51:00Z'
+    deadline_at: '2026-09-06T22:06:00Z'
+    expected_output: Reproduced clean-snapshot omission, scoped fix and measured fast regression.
+    validation_command: Focused negative-control snapshot tests under projectPython3.14.
+    kill_condition: The repair is validated or the bounded lease ends; no full-suite rerun.
+    fallback: Retain the omission as a separate uncompleted supporting fix.
+    write_scope: [packing/devtools/run_negative_controls.py, packing/tests/test_negative_controls.py, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/session-089-negative-control-environment.md]
+    excluded_commands: [dependency changes, expectation weakening, target geometry, git mutations, tbd mutations, shared records]
   outputs:
   - packing/campaign/agent-sessions/session-089-agenda024-next-phases.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md
@@ -965,23 +1073,45 @@ Later rows remain conditional, and each experimental budget stays frozen.
 
 ## Readiness and Follow-Up
 
+Exp114 accepted H104’s seven fixed-formula clauses at exactly zero and 45 degrees.
+Its sole producer used 2.41 seconds wall and its independent reader 0.05 seconds; the
+combined 2.46 seconds does not measure agent attention.
+H036’s nearby-angle claim remains unresolved, and no packing bound changed.
+The next density instrument passed source/toy controls and independent review.
+The coordinator accepts readiness for one separately frozen pair-obstruction
+discriminator; no pair-separator target has run.
+The environment diagnosis began during phase 10 and finished during phase 11; its record
+is attached to that closeout phase without changing its original clock.
+
+All 31 record steps and 45 push steps passed on `2153cb02` in 21.03 and 108.99 seconds.
+The full gate on `a105f729` completed in 1447.15 seconds with one failed step: 67 of 163
+negative controls failed because isolated worker environments lacked dependencies.
+All other steps passed.
+Focused controls pass with the existing environment explicitly bound; the complete
+failed-step replay is running.
+This is not yet an all-green full gate or a CI result for unpublished changes.
+
 BC251’s 150-minute scalar invocation has not started.
-PR100's corrections are merged, and the corrected paths passed46 focused tests plus
-the real1121-atom seed-map control. BC251 is ready but remains unopened: its unchanged
-150-minute invocation plus verification no longer fits the inherited outer allowance.
+PR100’s corrections are merged, and the corrected paths passed46 focused tests plus the
+real1121-atom seed-map control.
+BC251 is ready but remains unopened: its unchanged 150-minute invocation plus
+verification no longer fits the inherited outer allowance.
 It needs a sufficient fresh allocation, not a shortened or reset experimental budget.
 No timeout, unavailable input or failed guard earns an unchanged retry.
 The three independent assessment lanes continue while this is resolved.
 
-The prior full-gate follow-up remains `think-exlq`. PR103's supporting corrections are
-integrated here and that PR is closed. PR98's landed efficiency work includes the
-evolving operating-rule control, so PR102 was closed as superseded. No threshold was
-relaxed. PR99 remains monitored; only newly landed `origin/main` is integrated.
+The prior full-gate follow-up remains `think-exlq`. PR103’s supporting corrections are
+integrated here and that PR is closed.
+PR98’s landed efficiency work includes the evolving operating-rule control, so PR102 was
+closed as superseded.
+No threshold was relaxed.
+PR99 remains monitored; only newly landed `origin/main` is integrated.
 The mainline cycle stays on PR101, with source controls, bounded targets, independent
-review and scoped dispositions integrated together. OR6/OR9 codify the ordinary
-2–12-hour review cadence and reserve stacks for a concrete reason.
-No certificate, weak-bound statement or frozen research criterion changes in this launch
-checkpoint.
+review and scoped dispositions integrated together.
+OR6/OR9 codify the ordinary 2–12-hour review cadence and reserve stacks for a concrete
+reason.
+No certificate, weak-bound statement or frozen research criterion changes in this
+launch checkpoint.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

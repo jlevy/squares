@@ -44,10 +44,10 @@ hypothesis:
 ---
 # H-104 — Test the Fixed Point-Cover Mechanism First
 
-H-104 remains unresolved.
-The independent receipt reader has passed cold review.
-The prospectively registered exp-114 remains unopened; its first target dispatch and
-separately bounded replay are next.
+Accepted by
+[exp-114](../series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md):
+all seven clauses passed the reviewed exact computation and an independent input/receipt
+check. This is only the fixed-formula exact-angle precursor; H-036 remains unresolved.
 
 This claim tests the smallest concrete precursor to
 [H-036](H-036-robust-restricted-orientation.md), under the
@@ -83,8 +83,8 @@ One valid falsifier rejects the conjunction even if the remaining clauses are un
 The
 [adapter review](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-independent-review.md)
 explains the exhaustive source algorithm and its independence limits.
-An all-true result would be computationally verified for these exact angles, not a
-standalone certificate of H-036 or of a continuous-angle theorem.
+The all-true result is computationally verified for these exact angles, not a standalone
+certificate of H-036 or of a continuous-angle theorem.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

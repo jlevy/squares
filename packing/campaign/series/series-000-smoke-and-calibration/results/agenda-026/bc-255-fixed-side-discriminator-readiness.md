@@ -55,10 +55,11 @@ The source geometry loops, clipping, membership masks, canonical region, and str
 localization-complement regions are unchanged.
 A new guard refuses inventories other than ten and twelve distinct points.
 
-All arithmetic is in $\mathbb Q(\sqrt2)$ with the positive root in $(1,2)$. At each of the
-two fixed orientations, the core retains singleton events, intervening open intervals,
-and every reachable product stratum, including closed containment contacts, segments,
-and points. It checks the seven clauses separately:
+All arithmetic is in $\mathbb Q(\sqrt2)$ with the positive root in $(1,2)$. At each of
+the two fixed orientations, the core retains singleton events, intervening open
+intervals, and every reachable product stratum, including closed containment contacts,
+segments, and points.
+It checks the seven clauses separately:
 
 - Axis ten-set coverage and axis twelve-set coverage.
 - 45° ten-set-avoider localization to the four $K_4$ images of $R=[1,q/2]\times[0,1]$.
@@ -135,11 +136,11 @@ They never construct its field element, point sets, event cells, or target geome
 
 The source CLI returned source side `poly[2,4/3]`, ten and twelve points, no escapes,
 and all seven obligations true.
-Its reachable event-product stratum counts by source dimension are `[280, 526, 247]` at 0° and
-`[406, 841, 444]` at 45°, matching the
+Its reachable event-product stratum counts by source dimension are `[280, 526, 247]` at
+0° and `[406, 841, 444]` at 45°, matching the
 [retained source control](bc-255-theorem3-source-control-slice-01.md#execution-record).
 The six 45° avoiding strata and one canonical avoiding stratum are unchanged.
-Clipping can lower a stratum's dimension, so these are not counts of the final clipped
+Clipping can lower a stratum’s dimension, so these are not counts of the final clipped
 vertices, segments and rectangles.
 
 Commands ran under frozen Python 3.14 with existing dependencies and cache.

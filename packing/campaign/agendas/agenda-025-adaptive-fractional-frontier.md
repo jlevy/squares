@@ -469,8 +469,9 @@ agenda:
 The [current allocation](agenda-024-post-381-24h-portfolio.md#current-allocation) owns
 prospective allocations for L1 (current certificates) and L2 (richer witnesses).
 The scalar probe runs independently of adaptive-verifier implementation.
-Scientific criteria below remain applicable. The
-[continuation addendum's scalar command](../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md#scalar-6116-launch)
+Scientific criteria below remain applicable.
+The
+[continuation addendum’s scalar command](../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md#scalar-6116-launch)
 supersedes the historical scalar invocation below; historical schedules do not authorize
 an additional BC-232 final leg.
 
@@ -931,9 +932,10 @@ whether to allocate it (`think-8rqf`), gives it a hypothesis and an experiment r
 the reserved ranges, and starts it only once BC-233’s screen has released a core, so the
 first-block process count never exceeds three.
 
-The following command is historical. Use the continuation addendum's linked scalar
-command, which adds `--stop-on-covering-below-n` while preserving the frozen150-minute
-budget and other parameters.
+The following command is historical.
+Use the continuation addendum’s linked scalar command, which adds
+`--stop-on-covering-below-n` while preserving the frozen150-minute budget and other
+parameters.
 
 ```bash
 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 \

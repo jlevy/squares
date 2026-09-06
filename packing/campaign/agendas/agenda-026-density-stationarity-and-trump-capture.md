@@ -457,8 +457,10 @@ agenda:
     note: >-
       Session089's source and instrument reviews passed. Exp113 independently
       replayed a necessary-row ceiling of56/5, leaving H099 unresolved and its
-      full fixed-support supremum in[11,56/5]. Think-eilk prices the next changed
-      discriminator; no further target or complete arrangement build is yet funded.
+      full fixed-support supremum in[11,56/5]. The priced pair separator passed
+      source/toy controls and independent review under think-4ej5 and think-0u56.
+      A candidate-only target needs its own prospective claim and protocol;
+      no further target or complete arrangement build has run.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-screen-spec.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md
@@ -489,9 +491,11 @@ agenda:
     bead: think-dene
     note: >-
       Original Theorem3 source controls and the fixed-side adapter passed
-      independent review. Session089 prepares H104/exp114 under think-d2d1 and
-      think-jhs4: one ten-second exact-angle point-formula screen after prospective
-      freeze. H036's full angle-neighborhood claim and missing instrument are unchanged.
+      independent review. Session089 completed H104/exp114 under think-d2d1 and
+      think-jhs4: all seven fixed-formula exact-angle auxiliaries passed the reviewed
+      exhaustive computation and separate input/receipt check. H104 is accepted only
+      at that narrow scope; H036's full angle-neighborhood claim remains unresolved.
+      The continuous-angle instrument is separately priced and not automatically funded.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md
