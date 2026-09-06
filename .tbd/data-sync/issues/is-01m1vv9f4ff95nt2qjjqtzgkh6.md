@@ -3,18 +3,22 @@ type: is
 id: is-01m1vv9f4ff95nt2qjjqtzgkh6
 title: Reconcile live beads and publish the revised strategic sequence
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 10
 spec_path: docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
 labels: []
 dependencies: []
 parent_id: is-01m1vv7m9vnn4k7hnbx3sdz3rv
 created_at: 2026-09-06T17:12:08.590Z
-updated_at: 2026-09-06T18:25:38.272Z
+updated_at: 2026-09-06T18:56:47.917Z
+closed_at: 2026-09-06T18:56:47.916Z
+close_reason: BC250 planning is distilled into H093–103 and reused H036, Agenda024 allocations, child agendas/BC items, beads, and W10. Independent source, math, and framework reviews are complete. Planning and integration are published in PR97, merged as c14451f5 after required hosted checks passed. The operator deferred long tooling; two late local infrastructure-check failures are recorded and owned separately by think-exlq under continuation epic think-jgnv. No full-gate pass or new research execution is claimed. Next actual research starts on a new branch/PR using the committed Current Allocation.
+resolution: null
+duplicate_of: null
 ---
 Update stale BC220 and manager descriptions, preserve terminal scientific criteria and BC232 unresolved CPU tails, record H092 independent review with integration still explicit, connect research direction tasks to governing handoff, validate changed documentation and required checks, commit/push PR97 and sync beads. No new research execution within this W10 planning phase.
 
 ## Notes
 
-Full gate custody: committed tree d29342bb; execution session 76502; uv PID 67153 and validator PID 67168. From packing/: DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib PYTHONUNBUFFERED=1 uv run --frozen --all-extras --group dev packing-validate --jobs 3 --inner-jobs 1. At 18:23 UTC, exhaustive pytest 67262, slow pytest 67263, and negative controls 67270 were active. Do not edit source or start research during the gate. Planning cb211305 passed 45 pre-push steps and 593 tests in 90.91 seconds. The merged pre-push run was interrupted without a verdict to avoid duplicating the slow suite. Focused integration passed 127 tests in 17.07 seconds, plus 74 verifier and six rendering tests. Remaining sequence: full result; push; update PR97 and wait for required CI; merge with head-match and preserve experiment ancestry (no squash). Actual research starts on a new branch/PR after PR97 lands. Publication remains open; no target experiment started.
+PR97 merged at 2026-09-06T18:54:15Z as c14451f5378e55dd072327d6d8f55dc957fbc5c3, preserving reviewed head d29342bb and planning cb211305. Required hosted CI was green. The operator explicitly deferred long local validation rather than holding landing. The full gate subsequently completed in 2015.94 seconds wall with two failed steps: negative controls and fast behavioral tests. No full-gate pass is claimed; think-exlq owns exact failure triage and a separate correction PR as needed, outside the completed planning epic. No successor experiment started. Next research uses a new branch/PR from landed main and Agenda024 Current Allocation; frozen BC232 criterion and unknown tails remain open.
