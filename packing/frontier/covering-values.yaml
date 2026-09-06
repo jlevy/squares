@@ -64,7 +64,8 @@ values:
       The row loop converged at cutting-plane iteration 5 (11.055617 on 12,761 sites
       after the arrangement vertices of the dual family were added as site orbits) and
       held that value through iteration 8; the cutting-plane loop itself stopped on its
-      36-minute wall with the exact depth-scaled total at 9.907906.
+      36-minute wall with the exact depth-scaled total approximately
+      9.907905594982566.
     least_covered_mass: '1'
     frozen_artifact: null
     recorded_in:
@@ -75,7 +76,9 @@ values:
       violating arrangement vertices the cutting-plane loop added, which is why this
       site set's optimum sits above the two earlier site sets' exactly eleven: the
       quantity is a restricted optimum on that set, an upper bound on the covering
-      value. The run log and the resumable state are retained beside the summary.
+      value. The run log and the resumable state are retained beside the summary. The
+      prior six-decimal display 9.907906 rounded the exact lower bound upward; this
+      record now preserves its approximate status.
   - n: 11
     side: '77/20'
     side_decimal: '3.85'
@@ -89,7 +92,7 @@ values:
       The row loop had not converged at any of the three cutting-plane iterations (the
       objective descended 11.429225, 11.254796, 11.227631 with placements still
       violated) when the 30-minute wall stopped the loop; the exact depth-scaled total
-      stood at 9.049861.
+      stood at 45019185620/4974572153, approximately 9.04986081925667.
     least_covered_mass: null
     frozen_artifact: null
     recorded_in:
@@ -98,7 +101,9 @@ values:
     notes: >-
       BC-200 of agenda 021 (exp-060), warm-started from the 191/50 state. An
       unconverged row loop's value is an upper bound on nothing in particular: rows
-      only raise it. Retained as a measurement of where the loop stood.
+      only raise it. Retained as a measurement of where the loop stood. The prior
+      six-decimal display 9.049861 rounded the exact lower bound upward; this record now
+      preserves the exact rational and its approximate decimal.
   - n: 12
     side: '79/20'
     side_decimal: '3.95'

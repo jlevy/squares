@@ -161,12 +161,12 @@ controls:
 # stale `replace` fails loudly, because its search string no longer matches and the
 # mutation cannot be applied, while a stale `expect` degrades quietly into "failed, but
 # not with the expected message", which reads as a broken control rather than a moved
-# corpus. That is what happened: the count went 59 -> 64, `replace` was updated and
-# `expect` was not. One place tracking the corpus is enough, and it should be the one
-# that announces itself.
+# corpus. That is what happened when the count went 59 -> 64; the same anchor now moves
+# with the registered corpus. One place tracking the corpus is enough, and it should be
+# the one that announces itself.
 - name: synopsis - narrative round aggregate lagging the ledger
   file: ../SYNOPSIS.md
-  replace: ["There are 64 terminal rounds", "There are 45 terminal rounds"]
+  replace: ["There are 66 terminal rounds", "There are 45 terminal rounds"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "terminal-round aggregate is not"
 

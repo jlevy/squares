@@ -829,10 +829,10 @@ D-488 records the detector regression.
 ### F42: Medium terminology defect, fixed here: proof conditions reused the confirmation ladder
 
 The fractional-certificate proof, portable checkers, Lean report, and several historical
-records called their five local hypotheses C₀ through C₄. Elsewhere the repository uses
-`C0` through `C5` exclusively for epistemic confirmation levels, so a sentence such as
-“the interval route decides C₄” was genuinely ambiguous: it could mean the fifth proof
-condition or distinct-method confirmation.
+records called their five local hypotheses by letter-C labels with numerical subscripts.
+Elsewhere the repository uses `C0` through `C5` exclusively for epistemic confirmation
+levels, so a sentence such as “the interval route decides the fifth local condition” was
+genuinely ambiguous with distinct-method confirmation.
 
 **Resolution:** the proof contract and every maintained output now say **Condition 1**
 through **Condition 5**. Adversarial tests use **Control 1**, **Control 2**, and so on;

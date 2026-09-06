@@ -125,6 +125,33 @@ def summary(
     }
 
 
+def _finite_json_number(value: object) -> object:
+    if isinstance(value, float) and not math.isfinite(value):
+        return None
+    return value
+
+
+def run_summary_json(result: dict[str, object]) -> str:
+    """Encode strict JSON, using null for unavailable solver values."""
+
+    record = dict(result)
+    record["objective"] = _finite_json_number(record["objective"])
+    record["least_covered"] = _finite_json_number(record["least_covered"])
+    rounds = record["rounds"]
+    assert isinstance(rounds, list)
+    record["rounds"] = [
+        {
+            **entry,
+            "objective": _finite_json_number(entry["objective"]),
+            "least_covered": _finite_json_number(entry["least_covered"]),
+            "averaged_depth": _finite_json_number(entry["averaged_depth"]),
+            "reduced_cost": _finite_json_number(entry["reduced_cost"]),
+        }
+        for entry in rounds
+    ]
+    return json.dumps(record, indent=1, allow_nan=False) + "\n"
+
+
 SEED_MAPS = ("scale", "centre")
 
 
@@ -433,7 +460,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     if args.json is not None:
         args.json.parent.mkdir(parents=True, exist_ok=True)
-        args.json.write_text(json.dumps(result, indent=1) + "\n")
+        args.json.write_text(run_summary_json(result))
     return 0
 
 

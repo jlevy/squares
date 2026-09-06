@@ -99,7 +99,8 @@ session:
       bounds moved and one instrument line was priced: T-021 raises s(20) and s(21) to
       97/20 from a certificate the gate retained on both routes, the m = 5 covering wall
       is bracketed to [97/20, 39/8], the exact floor under the n = 11 covering value rose
-      from 6.5829 to 9.907906, Trump's isolation radius and stress constant came out as
+      from 6.5829 to approximately 9.907905594982566, Trump's isolation radius and stress
+      constant came out as
       exact rationals with four corrections to the sketch that proposed them, and
       BC-191's three baselines are measured with a site-density rule and a raised default
       scale to show for it. Three cells stopped: BC-211 time-limited on its own
@@ -139,8 +140,9 @@ session:
     after: >-
       Six of eight cells terminal with outcomes and two stopped by an external blocker;
       T-021 registered at 97/20 for n = 20 and n = 21; the m = 5 covering wall bracketed
-      to [97/20, 39/8]; nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861 exactly; rho_0
-      >= 0.0023089 and C <= 22.467763 at Trump's pose; BC-191's three baselines measured.
+      to [97/20, 39/8]; the downward-safe displays are nu*(3.82) >= 9.907905 and
+      nu*(3.85) >= 9.049860, with exact rationals in the exp-060 summaries; rho_0 >=
+      0.0023089 and C <= 22.467763 at Trump's pose; BC-191's three baselines measured.
   delegations:
   - task: >-
       Lane A, BC-211: the generator unchanged at n = 13, side 399/100, to convergence;
@@ -295,8 +297,9 @@ session:
     status: completed
     recording: contemporaneous
     outcome: >-
-      Complete at 96 of 110 minutes. nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861
-      exactly; the row loop's converged restricted optimum at 3.82 is 11.055617 on
+      Complete at 96 of 110 minutes. The downward-safe displays are nu*(3.82) >=
+      9.907905 and nu*(3.85) >= 9.049860, with exact rationals in the summaries; the row
+      loop's converged restricted optimum at 3.82 is 11.055617 on
       12,761 sites; no family reached eleven; H-064 unresolved (exp-060, abandoned,
       resumable from the retained 3.82 state).
     evidence:
@@ -517,6 +520,12 @@ its artifact before it enters a record.
 
 The wall accounting, the four doubling-down rules and the ten-hour continuation are the
 agenda’s own and are not restated here.
+
+The BC-200 values in the structured closeout were corrected on 2026-09-05. Earlier
+versions rounded both exact lower bounds upward to six decimal places and then used the
+rounded values in inequalities.
+The record now uses downward-safe endpoints; exp-060 and its summaries retain the exact
+rationals, and the scientific disposition is unchanged.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -6,6 +6,10 @@ its parameters on the line and a per-iteration table on stdout, so that a
 depth-scaled total in the record can be reproduced from a command rather than
 from a script that was not kept. It writes a state file every iteration, which
 a later run at the same or a larger side warm-starts from with ``--warm``.
+A fresh side below every retained state -- warm starts only move upward --
+can instead take a retained certificate's atoms as extra sites with
+``--seed-certificate``, carried to the side by the same two maps the
+column-generation driver offers.
 
 Nothing here decides a bound. A family whose exact depth is at most 1 is
 scaled and verified in memory by ``verify_ceiling``; ``--freeze`` writes the
@@ -29,8 +33,9 @@ from fractions import Fraction
 from pathlib import Path
 from typing import TextIO
 
+from devtools.run_fractional_colgen import SEED_MAPS, seed_points_from
 from sqpack.fractional.ceiling import verify_ceiling
-from sqpack.fractional.colgen import Rows
+from sqpack.fractional.colgen import Rows, site_set_from_points
 from sqpack.fractional.cutting import (
     cutting_plane_loop,
     family_record,
@@ -64,6 +69,18 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--rows-rounds", type=int, default=8)
     parser.add_argument("--rows-per-direction", type=int, default=3)
     parser.add_argument("--warm", type=Path, default=None, help="state file to warm-start from")
+    parser.add_argument(
+        "--seed-certificate",
+        type=Path,
+        default=None,
+        help="a retained certificate whose atom sites join the grid seed (not with --warm)",
+    )
+    parser.add_argument(
+        "--seed-map",
+        choices=SEED_MAPS,
+        default="scale",
+        help="how the seed atoms are carried: scale the coordinates, or centre them",
+    )
     parser.add_argument("--log", type=Path, default=None)
     parser.add_argument("--state", type=Path, default=None)
     parser.add_argument("--freeze", type=Path, default=None, help="write the best family here")
@@ -72,6 +89,10 @@ def main(argv: list[str] | None = None) -> int:
 
     half_tangents = net_half_tangents(args.angle_limit, args.steps)
     grids = tuple(int(c) for c in args.grids.split(",")) if args.grids else None
+    if args.warm is not None and args.seed_certificate is not None:
+        # A state already carries the sites it earned; a seed belongs to a fresh start.
+        parser.error("--seed-certificate cannot be combined with --warm")
+    seed_sites = 0
     if args.warm is not None:
         old_side, points, carried = load_state(args.warm)
         sites, exact_rows = warm_start(
@@ -93,6 +114,14 @@ def main(argv: list[str] | None = None) -> int:
         rows = Rows()
         exact_rows = []
         origin = "grid seed"
+        if args.seed_certificate is not None:
+            seed = seed_points_from(args.seed_certificate, args.side, args.seed_map)
+            seed_sites = len(seed)
+            sites = site_set_from_points(args.side, set(sites.positions()) | seed)
+            origin = (
+                f"grid seed plus {seed_sites} {args.seed_map}-mapped atom sites "
+                f"from {args.seed_certificate}"
+            )
     settings = {
         "n": args.n,
         "outer_side": str(args.side),
@@ -107,6 +136,11 @@ def main(argv: list[str] | None = None) -> int:
         "rows_rounds": args.rows_rounds,
         "rows_per_direction": args.rows_per_direction,
         "origin": origin,
+        "seed_certificate": None
+        if args.seed_certificate is None
+        else str(args.seed_certificate),
+        "seed_map": args.seed_map,
+        "seed_sites": seed_sites,
         "initial_sites": sites.size,
         "initial_orbits": len(sites.orbits),
         "initial_rows": len(rows),

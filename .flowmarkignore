@@ -137,6 +137,11 @@ packing/cases/n11_fractional_certificate/t-018-proof-card.md
 docs/project/reviews/review-2026-09-03-bc152-h060-prior-art-survey.md
 docs/project/reviews/review-2026-09-03-bc158-h060-record-factual-review.md
 
+# This review embeds a contributed third-party strategy body whose pre-installation
+# digest is part of its provenance record. The local audit is maintained prose, but the
+# source body is intentionally preserved rather than retyped by the formatter.
+docs/project/reviews/review-2026-09-05-strategy-gpt-56-pro-gemini-grok.md
+
 # Vendored upstream repositories, checked out as submodules; their Markdown is the
 # upstream project's. flowmark skips a directory named `vendor` by default, but a
 # `--exclude` flag replaces that default list, so the exclusion is stated here too.

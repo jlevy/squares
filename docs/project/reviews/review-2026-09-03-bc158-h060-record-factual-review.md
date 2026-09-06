@@ -48,11 +48,10 @@ F10 is X-007. F11–F12 are the checks that pass.
 
 ## F1 — MATERIAL MISSTATEMENT: “the instrument does not exist” was false when written
 
-**The records say:**
+**The records say (with local control labels expanded):**
 
-> exp-058 `verdict.reason`: “the W7 tool, its neighbourhood receipt and the eight
-> rejecting controls C1-C8 **do not exist**, which is why H-060 keeps instrument_ready
-> false”
+> exp-058 `verdict.reason`: “the W7 tool, its neighbourhood receipt and Controls 1–8
+> **do not exist**, which is why H-060 keeps instrument_ready false”
 
 > exp-058 results JSON, `disposition.note`: “the W7 repository instrument, its receipt
 > and the eight rejecting controls **do not exist**”
@@ -61,8 +60,7 @@ F10 is X-007. F11–F12 are the checks that pass.
 > repository instrument, **because the instrument does not exist**.”
 
 > exp-058 body, *What This Round Does Not Establish*: “The `W7` executable instrument,
-> its exact neighbourhood receipt, and the eight rejecting controls `C1`–`C8`. Only `C8`
-> was pre-run here”
+> its exact neighbourhood receipt, and Controls 1–8. Only Control 8 was pre-run here”
 
 > X-012 preface, **Owns:** “the `W7` executable instrument, its receipt and the eight
 > rejecting controls of §6 belong to a separate lane and **do not exist yet**.”
@@ -88,7 +86,7 @@ exp-058 and X-012 — already contains `__init__.py`, `binding.py`, `chart.py`,
 `git show 2f112f4c:packing/src/sqpack/local_rigidity/controls.py` defines, by name:
 `changed_feature`, `zero_margin`, `omitted_constraint`, `invented_contact`,
 `side_release`, `wrong_chart`, `certificate_drift`, `exp034_angle_and_slide` — a
-one-to-one match, in order, with X-012 §6’s table of `C1`–`C8`. The same commit’s
+one-to-one match, in order, with X-012 §6’s table of Controls 1–8. The same commit’s
 `instrument.py` carries `isolation_decided: bool = False` and an `instrument_ready`
 property.
 
@@ -118,8 +116,8 @@ The narrow defence available is that the agenda’s `W7` asks to *extend*
 — a deviation the review records independently (§8 item 9: “The instrument is a new
 package (`sqpack.local_rigidity`) binding to `devtools.assess_n5_rigidity`, not an
 extension of it as the hypothesis’s instrument text says”). That defence covers the
-words “the W7 extension”; it does not cover “its exact neighbourhood receipt, and the
-eight rejecting controls `C1`–`C8` do not exist”, which existed and ran.
+words “the W7 extension”; it does not cover “its exact neighbourhood receipt, and
+Controls 1–8 do not exist”, which existed and ran.
 
 Note also that the agenda assigns `W7` to `BC-152` itself, not to another lane —
 agenda-016, BC-152 budget: “45--105 W7 extend the existing rigidity tool with a locally

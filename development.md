@@ -329,26 +329,30 @@ at all, so there is no path rule to lean on and `--since` selects them for every
 - adds, removes or could slow a test marked `slow`;
 - or changes mathematics rather than prose, which is the blunt version of all four.
 
-**The mandatory form of this is the merge queue**, and it is wired and dormant.
-Branch protection cannot make a check mandatory without making it universal: a required
-context that does not run on some pull request sits pending on it forever, which is the
-same trap the workflow header refuses a path filter for.
-A merge-queue run happens once per merge *attempt*, on the commit that is about to
-become `main`, so `deep-gate-required` can be required there without being required on
-every pull request — and the queue re-tests against the updated base, which is the one
-hole a pre-merge deep run cannot close on its own.
-Turning it on is two repository settings and no file change: enable the merge queue for
-`main`, and add `deep-gate-required` to the queue’s required checks.
-`deep-gate.yml` already carries the `merge_group` trigger, so nothing else has to move.
+**These runs provide advisory evidence.** A reviewer can request and inspect the deep
+run before merging, but neither the label nor the dispatch enforces a merge
+prerequisite. A dispatch checks out the requested PR’s merge ref; its check run belongs
+to the dispatch ref, so reviewers must inspect that workflow run directly.
+If `main` moves after a successful run, that evidence does not cover the new combined
+tree.
 
-There is a second arrangement, and the two must not both be taken.
-`packing-validation.yml` selects its post-merge jobs by `github.event_name !=
-'pull_request'`, so adding `merge_group` *there* would run the complete gate on every
-merge attempt — the exhaustive tier included, which is the deep gate’s larger half.
-Requiring `packing-required` on the queue and dropping the deep gate’s `merge_group`
-trigger is the same guarantee by the other route; doing both pays 1943 s twice for one
-commit. It would also need `packing-required`’s own condition widened, since it is
-`pull_request`-only today and the `sweeps` job it waits on does not run post-merge.
+This repository is publicly hosted under a personal account.
+[GitHub merge queues](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue)
+require an organization-owned repository (and an eligible plan for private
+repositories), so queue enforcement is unavailable here.
+The workflow has no `merge_group` trigger.
+
+Future queue adoption would require an eligible repository and a workflow change before
+changing protection settings.
+GitHub shares required status checks between pull requests and merge groups: every
+required context must report on both events.
+In particular, `packing-required` currently runs only on pull requests.
+A future design must run and aggregate the intended fast and deep checks on merge
+groups, while reporting the chosen PR contexts on opening and subsequent updates.
+It must also partition the deep work to avoid running the exhaustive tier in both
+workflows: adding `merge_group` to `packing-validation.yml` alone selects its complete
+post-merge gate, but leaves its PR-only aggregate skipped.
+Verify the complete required-context set on both events before enabling the queue.
 
 ### What it is allowed to cost
 
@@ -602,7 +606,8 @@ What it does not catch is `main` moving under a branch nobody pushes to, which p
 no event on that branch.
 In the measured incident the branch was pushed five times inside the window, so the
 incident itself is covered; the residual is a labelled, approved branch left to sit, and
-the merge queue closes it by building the merge commit itself.
+a future merge queue could close it by building the merge commit itself;
+[queue enforcement is unavailable here](#the-deep-gate-the-deferred-surface-before-the-merge).
 
 ### Every pull request carries what it cost
 

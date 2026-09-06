@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Squares in Squares: Analytic Minimization of Underdetermined Nonlinear Systems</title>
+    <link rel="icon" href="favicon_Göbel_square.png" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon_Göbel_square.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/copy-tex.min.js" integrity="sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            renderMathInElement(document.body, {
+                // customized options
+                // • auto-render specific keys, e.g.:
+                delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '\\[', right: '\\]', display: true}
+                ],
+                macros: {
+                    "\\Nn": "{#1\\small{\\ldots}}",
+                },
+                // • rendering keys, e.g.:
+                throwOnError : false
+            });
+            for (const toggle of document.getElementsByClassName('toggle')) {
+                toggle.addEventListener('click', toggleEquation);
+            }
+        });
+        function toggleEquation() {
+            const frame1 = this.getElementsByClassName('frame1')[0];
+            const frames = this.getElementsByClassName('frames');
+
+            let j = -1;
+            for (let i=0; i<frames.length; i++) {
+                if (frames[i].classList.contains('toggled')) {
+                    j = i; break;
+                }
+            }
+            if (j < 0) {
+                frame1   .classList.toggle('toggled');
+                frames[0].classList.toggle('toggled');
+            } else {
+                frames[j].classList.toggle('toggled');
+                if (j+1 == frames.length) {
+                    frame1.classList.toggle('toggled');
+                } else {
+                    frames[j+1].classList.toggle('toggled');
+                }
+            }
+        }
+    </script>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<style>
+body {
+    font-family: serif;
+}
+embed {
+    pointer-events: none;
+}
+.svg-table {
+    table-layout: auto;
+    width: max-content;
+    overflow-x: auto;
+    border-spacing: 1.333em 0;
+}
+.svg-box {
+    height: 9.6667em;
+}
+.box {
+    width: 19.333em;
+}
+.desc {
+    align: center;
+    vertical-align: top;
+    padding-top: 0.333em;
+}
+.katex {
+    font-size: 1em;
+}
+.toggle {
+    cursor: pointer;
+}
+.frame1         {display: inline;}
+.frame1.toggled {display: none;  }
+.frames         {display: none;  }
+.frames.toggled {display: inline;}
+</style>
+
+<center><font size="+4">Squares in Squares</font><font size="+3"><br>Analytic Minimization of Underdetermined Nonlinear Systems<br></font>
+<font size="+1">by <a href="https://github.com/Davidebyzero" style="text-decoration:none">David Ellsworth</a></font>
+</center>
+
+<font size="+1">
+<p>To optimize a packing with true exactitude, an analytic (or symbolic/algebraic) solution is necessary. This is where the number of
+independent variables is matched by the number of constraints, enabling the multivariate Newton-Raphson method to be used
+(which in Mathematica is done with <code>FindRoot[]</code>), or in the case of packings below a certain level of complexity,
+a symbolic/algebraic solution (<code>Solve[]</code>).</p>
+
+<p>The side lenth of the enclosing square, $s$, is the first independent variable – the one that we want to minimize. The others are in most cases
+the distinct non-orthogonal angles (or slopes) of the squares in the packing, which in my notation are $a$, $b$, $c$, etc.
+For example in <a href="square-17.svg">$s(17)$</a> there are two angles, for a total of three independent variables $\{s, a, b\}$.</p>
+
+<p>The constraints are equations, which declare certain squares to be touching certain other squares (corner to edge or corner to corner)
+or the corner of a square to be touching an edge of the enclosing square. In my notation they are <code>f1</code>, <code>f2</code>, <code>f3</code>, etc.,
+which are functions of subsets of the independent variables, each to be set equal to zero, e.g. <code>f1==0</code>.</p>
+
+<p>A problem arises when there are fewer constraints than independent variables, making the system of equations underdetermined.
+What we'd like to do is make it a square system of equations (same number of constraints as variables) by using the minimization of $s$ as a constraint.
+In the two-variable case $\{s, a\}$ with only one constraint equation <code>f1==0</code>, it's easy to create the extra constraint equation:</p>
+
+<pre>
+    D[f1,a] == 0
+</pre>
+
+<p>But it's not obvious why that works – it's not as simple and direct as just setting the derivative of $s$ (with respect to some other variable) equal to zero.
+So instead, when solving <a href="square-39_r3.svg">$s(39)$</a>, <a href="square-87_r2.svg">$s(87)$</a>, and <a href="square-41_r2.svg">$s(41)$</a> back in June 2023,
+I came up with a method using a using a <a href="https://en.wikipedia.org/wiki/Discriminant">discriminant</a> that, in hindsight,
+was actually a more complicated roundabout way of doing the same thing as above.</p>
+
+<p>When there were three or more variables, I did not know any general way to get a solution other than to use <code>FindMinimum[]</code> or similar. That resulted
+in a solution that's not only slower, but much worse or even incapable of computing to very high precision (thousands of digits). Getting a closed-form or polynomial root solution
+requires either using <code>Solve[]</code> (solving symbolically) which has the same requirements as an analytic solution, or calculating the variables to high enough precision that
+<code>RootApproximant[]</code> can be used to find the exact polynomial root solution, which <code>FindMinimum[]</code> fails to do on complicated packings.</p>
+
+<p>I did find that in the case of <a href="square-29_r3.svg">the <i>s</i>(29) found by Thierry Gensane and Philippe Ryckelynck</a>, which has six variables and five natural constraints,
+there is a certain derivative that just so happens to work as sixth constraint when set equal to zero. But there's no apparent reason why it should work with this particular derivative,
+and there was no such derivative for other packings, even similar ones such as <a href="square-55.svg">$s(55)$</a> with its eight variables and seven natural constraints.</p>
+
+<h2>Three variables and two constraints</h2>
+
+<p>On December 2, 2024 I stumbled upon a way to handle the case of three variables and two constraint functions.
+Let the variables be $\{s, a, b\}$ and the first two constraint functions be <code>f1</code> and <code>f2</code>.
+(The variables $\{a,b\}$ can be either angles or slopes; it works either way).</p>
+
+<p>At first I was using <code>s1</code> and <code>s2</code>, which are two functions of <code>a</code> and <code>b</code> that are the result of <code>Solve[]</code>ing <code>f1==0</code> and <code>f2==0</code> for <code>s</code>,
+respectively. Wherever <code>s1 == s2</code>, there is a valid solution (trio of variables <code>a</code>, <code>b</code>, and <code>s = s1 = s2</code> that meets the constraints).</p>
+
+<p>I had my third constraint as:</p>
+
+<pre>
+    D[s1,a] / D[s1,b] == D[s2,a] / D[s2,b]
+</pre>
+
+<p>which successfully found me the minimum. I did not at first understand why it worked.</p>
+
+<p>I was kind of stuck on the ratios being equal; it didn't make sense to me that this would signal a minimum/maximum. Then I realized that the
+ratios are an incomplete representation – they're just slopes. To complete the representation we can make each a vector, with direction and magnitude (or slope and signed magnitude).
+And at a local minimum (or maximum) <code>s</code>, these two vectors
+<i>point in exactly opposite directions</i>. The magnitudes don't have to be equal, just the vectors' slopes, i.e. our two ratios of derivatives.
+(Right now the signed magnitudes are kind of hidden and we only have the slopes, but the sign of <code>D[s1,a]</code> will be opposite that of <code>D[s2,a]</code> and the
+sign of <code>D[s1,b]</code> will be opposite that of <code>D[s2,b]</code>. Those opposite signs cancel out in the ratios, making the ratios equal even in sign.)</p>
+
+<p>These two gradient vectors indicate the two directions of movement within the $(a,b)$ plane of greatest increase in $s$, according to the two different
+constraint functions. (One can visualize up/down as the $s$ axis, perpendicular to the $(a,b)$ plane.) The two constraint functions each form
+a curved 2D surface in 3D, the two of which intersect along a 1D curve, along which are the only valid solutions to the constraints. On any point along this curve other
+than the endpoint, the two vectors of greatest $s$ increase are not exactly opposite each other, so some motion sideways to the vectors can still
+decrease $s$ while remaining on the 1D curve of validity. But once the two vectors point in exactly opposite directions, the only directions of
+movement that don't increase $s$ are perpendicular to the two vectors, and that just leaves $s$ constant (not to mention also departing from the
+curve of validity). So that is a local minimum (or maximum) for $s$, and an endpoint of the 1D curve.</p>
+
+<p>Let's switch to the better formulation now (in which we can get magnitude if we want – not that we need it yet). We don't need <code>s1</code> and <code>s2</code>;
+we don't need to <code>Solve[]</code> anything. Instead, we can take the ratios of other partial derivatives to get the partial derivatives we need:</p>
+
+<p>Instead of <code>D[s1,a]</code>, we use <code>D[f1,a] / D[f1,s]</code>. If you express this mathematically as (∂f1/∂a) / (∂f1/∂s), the two <code>∂f1</code> cancel out leaving <code>∂s/∂a</code>.
+(There's no mention of <code>f1</code> anymore in that, but it's still representing "<code>f1</code>'s version of the situation".) We do the same for <code>b</code>, getting <code>D[f1,b] / D[f1,s]</code>.</p>
+
+<p>Then to get the equivalent of <code>D[s1,a] / D[s1,b]</code>, we take:</p>
+
+<pre>
+    (D[f1,a] / D[f1,s]) / (D[f1,b] / D[f1,s])
+</pre>
+
+<p>Note that we get another cancellation, of <code>D[f1,s]</code>, leaving us with <code>D[f1,a] / D[f1,b]</code>. Which is equivalent to our original <code>D[s1,a] / D[s1,b]</code>. So then our third constraint will be:</p>
+
+<pre>
+    D[f1,a] / D[f1,b] == D[f2,a] / D[f2,b]
+</pre>
+
+<p>To get full vectors with magnitude and direction, we could take <code>{D[f1,a] / D[f1,s], D[f1,b] / D[f1,s]}</code>, or put more simply,
+<code>{D[f1,a], D[f1,b]} / D[f1,s]</code>, and do the same for <code>f2</code> to get the other vector. Printing them in <code>ToPolarCoordinates[]</code> form would then show,
+that at the point of minimum <code>s</code>, the two vectors point in exactly opposite directions, i.e. angles differing by exactly Pi=180° (but with magnitudes
+that are probably different). But this only has illustrative purpose at this point, and is extraneous from the actual <code>FindRoot[]</code>.</p>
+
+<h2>A generalization</h2>
+
+<p>So then I was puzzling out how this might be extended to more variables, and played around with matrices for a while before figuring it out.</p>
+
+<p>When you construct a Jacobian square matrix of the gradients, it contains the partial derivative, with respect to each variable, of <code>s</code> and each
+constraint function; the columns are your variables, and the rows are your constraints, except with the first row being <code>s</code>. Since <code>s</code> is both the
+first row and the first column, this signals that it's what we want to minimize (or maximize). The first row of the matrix will be <code>{1, 0, 0,..., 0}</code>,
+since the derivative of <code>s</code> with respect to all of the other independent variables is zero. It's just a simple derivative, not the extrapolated effect
+of the FindRoot's search, so <code>D[s,a]</code> for example is just going to be 0.</p>
+
+<p>So, say we have four variables <code>s</code>, <code>a</code>, <code>b</code>, <code>c</code> and three constraint functions <code>f1</code>, <code>f2</code>, <code>f3</code>.
+In Mathematica taking the Jacobian gradient matrix is as simple as just:</p>
+
+<pre>
+    grad = Grad[{s, f1, f2, f3}, {s, a, b, c}]
+</pre>
+
+<p>which, expanded out, would be:</p>
+
+<pre>
+    {Grad[s , {s, a, b, c}],
+     Grad[f1, {s, a, b, c}],
+     Grad[f2, {s, a, b, c}],
+     Grad[f3, {s, a, b, c}]}
+</pre>
+
+<p>or expanded even further:</p>
+
+<pre>
+    {{D[s ,s], D[s ,a], D[s ,b], D[s ,c]},
+     {D[f1,s], D[f1,a], D[f1,b], D[f1,c]},
+     {D[f2,s], D[f2,a], D[f2,b], D[f2,c]},
+     {D[f3,s], D[f3,a], D[f3,b], D[f3,c]}}
+</pre>
+
+<p>And the first row is going to be {1, 0, 0, 0}, since none of those are functions; they're just variables, that, at this snapshot, can be considered constant.</p>
+
+<p>Taken as a whole, the matrix indicates an instantaneous (tangent) linear approximation of what effect adding 1 to any variable will have on <code>s</code>
+and the constraint functions. If you multiply this matrix (with dot product) by a one-column matrix of deltas for your variables:</p>
+
+<pre>
+    grad . {{∆s}, {∆a}, {∆b}, {∆c}}
+</pre>
+
+<p>you get a one-column matrix indicating the linear approximation of what the resulting deltas will be for <code>s</code> and each of your constraint functions:</p>
+
+<pre>
+    {{∆s*D[s ,s] + ∆a*D[s ,a] + ∆b*D[s ,b] + ∆c*D[s ,c]},
+     {∆s*D[f1,s] + ∆a*D[f1,a] + ∆b*D[f1,b] + ∆c*D[f1,c]},
+     {∆s*D[f2,s] + ∆a*D[f2,a] + ∆b*D[f2,b] + ∆c*D[f2,c]},
+     {∆s*D[f3,s] + ∆a*D[f3,a] + ∆b*D[f3,b] + ∆c*D[f3,c]}}
+</pre>
+
+<p>But what we want is to go in the opposite direction. We want to know what set of deltas for the variables will result in changing <code>s</code> while keeping
+the constraint functions' values constant (at zero). We want whatever value for "deltas" for which</p>
+
+<pre>
+    grad . deltas
+</pre>
+
+<p>would give us this one-column matrix:</p>
+
+<pre>
+    {{1},
+     {0},
+     {0},
+     {0}}
+</pre>
+
+<p>To do that we invert the matrix, and multiply this by whatever amount we want to change <code>s</code> by. Multiplying our variables by that matrix will then
+modify <code>s</code> by the amount we want while keeping the constraint functions constant (to a linear approximation, at least).</p>
+
+<p>Except that's not really what we want to do. We just want to know if inverting the matrix is possible. If it's not possible to invert the matrix,
+that means not all changes in <code>s</code> (while keeping the constraints at zero) are attainable. And that's exactly what we want; we want it to be impossible
+to decrease <code>s</code>. We want the matrix to go down by at least one rank, so that its span no longer covers the entire space.</p>
+
+<p>When a matrix isn't invertible, it's a singular matrix. This is the case if and only if the determinant of the matrix is zero. So, as our last
+constraint function, we set that determinant equal to zero:</p>
+
+<pre>
+    Det[grad] == 0
+</pre>
+
+<p>And voila! We have a constraint that takes us to a local minimum (or maximum) of <code>s</code>.</p>
+
+<p>And funnily enough, a Jacobian gradient matrix is precisly how Newton's method is implemented in the multi-variable case, and how <code>FindRoot[]</code> works.
+In that case, it actually does invert the matrix and multiply by it and subtract that, which if the functions were linear, would take it directly to
+"all constraints equal zero" in one step.</p>
+
+<p>So this "<code>FindRoot</code> breakthrough" actually results in "nesting" a Jacobian determinant inside a Jacobian, if you take into account how <code>FindRoot</code> works internally.</p>
+
+<p>And before this, I didn't even know what a Jacobian was. Sometimes <code>FindRoot[]</code> would complain about a Singular Jacobian. Now I know what that means;
+it means it's reached a point where it can't invert the matrix anymore, so it doesn't know where to go next.</p>
+
+<p>(I had worked with matrix inversion practically, though, in a couple of projects: 1) the project where I reverse-engineered the ECC error correction codes
+of a couple of hard drives – though that's on Galois fields rather than real numbers; 2) playing with using Fourier transform + matrix inversion for
+deconvolution of bitmap images – needed high precision 16-bit per RGB channel, otherwise it added lots of noise.)</p>
+
+<h2>Two variables and one constraint</h2>
+
+This case collapses into the a derivative, explaining why that method works for e.g. the old <a href="square-39_r3.svg">$s(39)$</a>, <a href="square-87_r2.svg">$s(87)$</a>, and <a href="square-41_r2.svg">$s(41)$</a>:
+
+<pre>
+    Det[Grad[{s,f1}, {s,a}]] == Det[{D[s,s], D[s,a]}, {D[f1,s], D[f1,a]}]
+                             == Det[{  1   ,   0   }, {D[f1,s], D[f1,a]}]
+                             == 0*D[f1,s] + 1*D[f1,a]
+                             == D[f1,a]
+</pre>
+
+<h2>The full generalization</h2>
+
+<p>I had wondered, back in December 2024, what to do if the number of independent variables minus the number of constraints was greater than one.
+The answer I settled on was to conjecture that "nesting" additional Jacobians could result in a solution for such a case, but I had no packings to test it on.</p>
+
+<p>Optimizing Thomas Schadt's improvement of $s(39)$ <a href="square-39_r5.svg">provided such a testing ground</a>, in which there are three variables and only one constraint.
+It turns out that solving this really is as simple as I thought:</p>
+
+<pre>
+    f2 = Det[Grad[{s,f1   }, {s,a  }]];
+    f3 = Det[Grad[{s,f1,f2}, {s,a,b}]];
+</pre>
+
+<p>This provides the needed extra two constraint functions.</p>
+
+<h2>Packings that use this technique</h2>
+
+Three or more variables with two less constraints:
+<ul style="margin-top: 0.2em;">
+<li><a href="square-39_r5.svg">$s(39)_\text{r5}$</a> and <a href="square-126.svg">$s(126)$</a></li>
+</ul>
+
+Three or more variables with one less constraint:
+<ul style="margin-top: 0.2em;">
+<li><a href="square-29_r3.svg">$s(29)_\text{r3}$</a>, <a href="square-55_r4.svg">$s(55)_\text{r4}$</a>, <a href="square-55_r5.svg">$s(55)_\text{r5}$</a>, and <a href="square-55_r7.svg">$s(55)_\text{r7}$</a></li>
+<li><a href="square-55.svg">$s(55)$</a></li>
+<li><a href="square-39.svg">$s(39)$</a></li>
+<li><a href="square-71_r8.svg">$s(71)_\text{r8}$</a></li>
+<li><a href="square-108.svg">$s(108)$</a></li>
+<li><a href="square-51.svg">$s(51)$</a></li>
+<li><a href="square-53_r3.svg">$s(53)_\text{r3}$</a> and others like it: <a href="square-177.svg">$s(177)$</a>, <a href="square-266.svg">$s(266)$</a>, <a href="square-106.svg">$s(106)$</a></li>
+<li><a href="square-87.svg">$s(87)$</a></li>
+<li><a href="square-37_r2.svg">$s(37)_\text{r2}$</a></li>
+<li><a href="square-37_r3.svg">$s(37)_\text{r3}$</a> (non-record-setting)</li>
+<li><a href="square-1453.svg">$s(1453)$</a>, and others like it but non-record-setting:
+<a href="square-260_r1.svg">$s(260)_\text{r1}$</a>,
+<a href="square-446_r1.svg">$s(446)_\text{r1}$</a>,
+<a href="square-791_r1.svg">$s(791)_\text{r1}$</a>, and
+<a href="square-1097_r1.svg">$s(1097)_\text{r1}$</a>
+<!--
+<a href="square-2512_r1.svg">$s(2512)$</a>
+-->
+</li>
+</ul>
+
+Trivial cases with two variables and one constraint:
+<ul style="margin-top: 0.2em;">
+<li><a href="square-39_r3.svg">$s(39)_\text{r3}$</a>, <a href="square-87_r2.svg">$s(87)_\text{r2}$</a>, <a href="square-41_r2.svg">$s(41)_\text{r2}$</a>,
+    <a href="square-175_r2.svg">$s(175)_\text{r2}$</a> and <a href="square-175_r3.svg">$s(175)_\text{r3}$</a></li>
+<li><a href="square-126_r2.svg">$s(126)_\text{r2}$</a>, <a href="square-126_r3.svg">$s(126)_\text{r3}$</a></li>
+<li><a href="square-69.svg">$s(69)$</a>, <a href="square-205.svg">$s(205)$</a>, <a href="square-234.svg">$s(234)$</a>, <a href="square-128.svg">$s(128)$</a>,
+    <a href="square-152.svg">$s(152)$</a>, <a href="square-235.svg">$s(235)$</a>, <a href="square-300.svg">$s(300)$</a></li>
+<li><a href="square-147_r2.svg">$s(147)_\text{r2}$</a> and <a href="square-264_r2.svg">$s(264)_\text{r2}$</a> (non-record-setting)</li>
+<li><a href="square-53.svg">$s(53)$</a> to minimize an angle (for non-essential aesthetic purposes)</li>
+</ul>
+
+</font></p></body></html>

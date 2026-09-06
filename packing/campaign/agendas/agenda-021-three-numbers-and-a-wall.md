@@ -553,17 +553,21 @@ agenda:
       result: >-
         The exit was met and the hypothesis is unresolved in its own words. At 191/50
         nine iterations raised the exact depth-scaled total from the retained 1152/175
-        = 6.5829 to 9.907906 (2,769,100 arrangement vertices, exact maximum depth
-        1.115838 before scaling), and the row loop converged at iteration 5 to a
-        restricted optimum of 11.055617 on 12,761 sites, so 9.907906 <= nu*(3.82) <=
-        tau*(3.82) <= 11.055617. At 77/20, warm-started, three iterations reached
-        9.049861 (2,419,348 vertices, depth 1.243643) and the row loop did not converge.
+        = 6.5829 to approximately 9.907905594982566 (2,769,100 arrangement vertices,
+        exact maximum depth 1.115838 before scaling), and the row loop converged at
+        iteration 5 to a restricted optimum of 11.055617 on 12,761 sites, so 9.907905
+        <= nu*(3.82) <= tau*(3.82) <= 11.055617. At 77/20, warm-started, three
+        iterations reached exactly 45019185620/4974572153, approximately
+        9.04986081925667 (2,419,348 vertices, depth 1.243643), and the row loop did not
+        converge.
         Neither family reached eleven, so nothing was frozen under the case package;
         both loops stopped on the cell's wall with the exact check carrying every
         vertex. The n = 11 ladder's top is unchanged at 381/100 with 3.82 open, and the
-        record now holds nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861 exactly. The
-        loop's bottleneck moved from separation to row generation as the site support
-        grew, which a resumed run bounds.
+        record now holds the downward-safe displays nu*(3.82) >= 9.907905 and
+        nu*(3.85) >= 9.049860; their exact rational values remain in the summaries.
+        This corrects earlier six-decimal displays that rounded both lower bounds
+        upward. The loop's bottleneck moved from separation to row generation as the
+        site support grew, which a resumed run bounds.
       evidence:
       - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-060-h-064-n11-fractional-packing-floor.md
       - packing/campaign/series/series-000-smoke-and-calibration/results/bc-200-summary-191-50.json
@@ -928,8 +932,9 @@ agenda:
       - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-061-h-062-m5-covering-wall.md
     - name: n11-covering-value-from-below
       result: >-
-        nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861 exactly, up from the retained
-        1152/175 = 6.5829, with the cutting-plane loop retained as a module and a driver.
+        The downward-safe displays are nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860,
+        up from the retained 1152/175 = 6.5829, with the exact rationals in the summary
+        records and the cutting-plane loop retained as a module and a driver.
       paths:
       - packing/src/sqpack/fractional/cutting.py
       - packing/devtools/run_fractional_cutting.py
@@ -1330,6 +1335,14 @@ contradict it: the `m = 5` wall at `4.92` to `4.94`, the covering value at the `
 ceiling near `20.4`–`20.7` and at the `m = 4` ceiling near `12.06`–`12.24`, a round at
 `5.52` at `660` to `1530 s`, and `H-065`’s declared accept fraction, which is a
 pre-registration and not a prediction.
+
+## Correction on 2026-09-05
+
+The BC-200 closeout originally rounded its two exact lower bounds upward to six decimal
+places and then reused those decimals in inequalities.
+The structured outcome now uses the downward-safe endpoints `9.907905` and `9.049860`;
+the exact rational values and the original scientific disposition remain unchanged in
+exp-060 and its summary records.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

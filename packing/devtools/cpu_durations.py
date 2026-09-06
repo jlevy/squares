@@ -1,49 +1,28 @@
-"""Per-test CPU-time measurement, as a pytest plugin.
+"""Observed CPU lower bounds for pytest phases, for diagnosis only.
 
-The two-sided per-test discipline in `sqpack.cli.validate` -- a ceiling that pushes an
-expensive test off the pull-request surface and a floor that pulls a cheap one back onto
-it -- reads pytest's own `--durations` section, which is wall clock.
-Wall clock on a shared runner measures the runner as much as the test.
-The evidence is in the docstring on `QUICK_TEST_CEILING_SECONDS`: four consecutive runs
-of one surface at one commit reported 19, then 5, then 1, then 3 tests over the ceiling,
-a different cast each time and every one of them 1.5s to 3s on a quiet box.
-The constant absorbed that by rising to 12.0, six times the 2s threshold it is supposed
-to enforce, which is a guard that no longer guards.
+Each setup, call and teardown phase records the increase in `resource.getrusage` for
+this process and its reaped children. This separates CPU work from waiting for directly
+observed work, but does not measure complete descendant CPU. It must not replace the
+wall-clock thresholds in `sqpack.cli.validate`; gate wiring needs complete accounting
+first.
 
-CPU time is the contention-independent measurement that fixes the threshold rather than
-the constant.
-A test's wall time grows when a neighbour takes the core away from it; the cpu-seconds it
-charges for its own work do not move, because the scheduler is dividing the same work
-into the same instructions either way.
+A waited-for `subprocess.run` child contributes its CPU. A multiprocessing forkserver
+worker does not: the persistent server reaps that worker, so the pytest process's
+`RUSAGE_CHILDREN` never receives its usage during the phase. Forkserver is Python 3.14's
+Linux default. A CPU-heavy process-pool test can therefore report almost zero here even
+when the test waits for every result. The plugin leaves process start methods unchanged.
 
-This plugin measures each `setup`, `call` and `teardown` phase with `resource.getrusage`,
-attaches the result to the phase's report as a user property, and prints a
-`slowest cpu durations` section shaped like pytest's own so the gate can parse it the same
-way. The section is deliberately *not* byte-compatible with pytest's: the `cpu` token
-after the seconds keeps `sqpack.cli.validate._DURATION_LINE` from reading both sections as
-one list when both are printed.
+These observations omit descendant work and do not provide complete attribution to
+individual tests. A child started by an earlier phase can be charged when a later phase
+reaps it, and background threads contribute to process CPU. The lower-bound label
+describes incomplete process-tree accounting, not a bound on an isolated test's cost.
+Under xdist each worker observes its own process counters; phase report user properties
+carry those observations to the controller.
 
-Two design decisions are load bearing.
-
-**Children are counted.** `_cpu_seconds` sums `RUSAGE_SELF` and `RUSAGE_CHILDREN`, so a
-test whose work happens in a subprocess is charged for it.
-Excluding children would be the more literal reading of "this test's cpu time" and it
-would put a hole in the middle of the guard: this suite shells out to cargo, to
-standalone verifiers and to `sqpack` console scripts, and every one of those tests would
-measure near zero cpu and pass a ceiling it should fail.
-`RUSAGE_CHILDREN` accrues only on reaping, which `subprocess.run` and friends do before
-returning, so the cost lands inside the phase that paid it.
-Two consequences are worth stating rather than discovering: a child that a phase spawns
-and does not wait for is billed to whichever later phase reaps it, exactly as its wall
-time is today; and a child that is itself parallel -- `cargo build -j 4` -- charges the
-cpu of all its cores, so it can read *above* its own wall time.
-That is the right direction for a ceiling whose subject is what the runner pays.
-
-**Measurement is per process, which is what makes xdist tractable.** Each xdist worker is
-its own process, so `RUSAGE_SELF` there is that worker's tests and nobody else's, and the
-neighbouring workers -- the contention this exists to reject -- are invisible to it by
-construction. The controller aggregates through `user_properties`, which pytest already
-serialises across the worker boundary.
+The report property, section heading and per-line token all name the lower-bound
+contract. The section always explains the missing descendant accounting, including
+when all entries are hidden. Its format is distinct from pytest's wall durations so the
+existing gate cannot mistake these incomplete observations for its current measurement.
 """
 
 from __future__ import annotations
@@ -60,12 +39,12 @@ if TYPE_CHECKING:
 
 #: The user-property name each phase's cpu measurement travels under, from the worker
 #: that ran the test to the controller that prints the section.
-CPU_PROPERTY: Final = "cpu_seconds"
+CPU_PROPERTY: Final = "observed_cpu_seconds_lower_bound"
 
 #: The section header, chosen to contain pytest's own "slowest durations" nowhere: the
 #: gate requires that string to prove pytest printed wall durations at all, and a header
 #: that also matched would let a run with no wall section look like one that had it.
-CPU_DURATIONS_HEADER: Final = "slowest cpu durations"
+CPU_DURATIONS_HEADER: Final = "slowest observed cpu durations (lower bounds)"
 
 #: Phase measurements for one item, keyed by phase name. Lives on the item rather than in
 #: a module global so nothing has to be cleaned up between tests.
@@ -79,9 +58,8 @@ _DEFAULT_MIN_SECONDS: Final = 0.005
 def _cpu_seconds() -> float:
     """User plus system cpu charged to this process and to every child it has reaped.
 
-    Both halves are needed. `RUSAGE_SELF` alone misses the subprocess work that several
-    of this suite's most expensive tests consist entirely of; `RUSAGE_CHILDREN` alone
-    misses everything that runs in-process, which is most of it.
+    This excludes unreaped descendants and forkserver workers: their CPU belongs to
+    the persistent server's child counter. It is not total CPU spent by a test.
     Both counters are monotone within a process, so a difference of two readings is never
     negative and never has to be clamped.
     """
@@ -117,7 +95,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         type=int,
         default=0,
         metavar="N",
-        help="show the N slowest test phases by cpu time (0 for all)",
+        help="show N largest observed CPU lower bounds (0 for all); not total test CPU",
     )
     _ = group.addoption(
         "--cpu-durations-min",
@@ -125,7 +103,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         type=float,
         default=_DEFAULT_MIN_SECONDS,
         metavar="N",
-        help="minimum cpu seconds for a phase to be listed by --cpu-durations",
+        help="minimum observed CPU lower bound for a phase to be listed",
     )
 
 
@@ -176,9 +154,8 @@ class CpuDurations:
     ) -> None:
         """Always print the header, even with nothing to list.
 
-        The gate's `_require_durations` fails closed on a missing header: a run whose
-        section vanished has to look different from a run whose section was empty, or a
-        renamed section would silently retire the ceiling.
+        The accounting limitation must remain visible even when the display threshold
+        hides every entry. These observations cannot establish a test's total CPU cost.
         """
         # `getoption` is typed `Any`, and returns `None` for an option some other
         # invocation of this plugin did not register; the defaults are restated rather
@@ -192,13 +169,16 @@ class CpuDurations:
         if limit > 0:
             shown = shown[:limit]
         terminalreporter.write_sep("=", CPU_DURATIONS_HEADER)
+        terminalreporter.write_line(
+            "Incomplete descendant accounting; do not use for total CPU thresholds."
+        )
         hidden = len(listed) - len(shown)
         if hidden > 0:
             terminalreporter.write_line(
-                f"({hidden} cpu durations < {minimum:g}s or beyond --cpu-durations hidden.)"
+                f"({hidden} CPU lower bounds < {minimum:g}s or beyond --cpu-durations hidden.)"
             )
         for seconds, when, nodeid in shown:
-            terminalreporter.write_line(f"{seconds:02.2f}s cpu {when:<8} {nodeid}")
+            terminalreporter.write_line(f"{seconds:02.2f}s cpu-lower-bound {when:<8} {nodeid}")
 
 
 def pytest_configure(config: pytest.Config) -> None:

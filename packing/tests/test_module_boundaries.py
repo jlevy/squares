@@ -589,7 +589,7 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
     Four limits of the rule, recorded rather than smoothed over:
 
     * A marker is per function, so a parametrized test moves with all of its cases even
-      when only one case was over. The 62 functions are 92 collected tests.
+      when only one case was over. The 64 functions are 94 collected tests.
     * `call` time only. A module-scoped fixture bills its whole cost to whichever test
       triggers it first -- `test_every_control_rejects` reports 13.1s of setup that
       belongs to `determination`, which three other tests in that file also use -- so
@@ -658,11 +658,10 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_exact_construction_price.py": {
             "test_the_record_round_trips",  # 21.8s
         },
-        # 9s of call time across 3.
+        # 7s of call time across 2.
         "test_fractional_certificate.py": {
             "test_containment_at_exactly_one_is_refused",  # 4.4s
             "test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover",  # 2.5s
-            "test_breaking_the_symmetry_of_the_n12_atoms_is_refused",  # 2.0s
         },
         # 264s of call time across 1.
         "test_fractional_generate.py": {
@@ -720,8 +719,14 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_motion_lab_is_environment_independent",  # 3.3s
             "test_rendered_lab_is_deterministic_retained_and_offline",  # 3.0s
         },
-        # 16s of call time across 5.
+        # 6.10s on CI's three-worker pull-request surface, measured 2026-09-06.
+        "test_motion_lab_interactive.py": {
+            "test_service_serves_live_and_exact_profiles_with_scenario_refresh",
+        },
+        # 22s of call time across 6. The contact-model test measured 5.82s on CI's
+        # three-worker pull-request surface on 2026-09-06.
         "test_n40_rigidity.py": {
+            "test_the_contact_model_is_measured_not_assumed",
             "test_the_witness_is_a_motion_checked_from_the_pose",  # 4.2s
             "test_only_tight_rows_enter_the_obstruction",  # 3.8s
             "test_the_witness_turns_every_block_square_at_the_same_rate",  # 3.5s

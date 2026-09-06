@@ -494,11 +494,59 @@ Status: **active**. A W5 efficiency-loop block entered on the operator's directi
 | BC-217 | tool_validation | 11 | blocked | 1 | think-cdf0 | Whether a handover can be trusted without re-running the gate to find out, which is what every reviewer of every block in this campaign has had to take on faith. |
 | BC-218 | tool_validation | 11, 20 | ready | 0 | think-m5ev | Whether the four-minute target is reachable without deferring anything further, which decides whether the coverage policy in OR-13 costs anything at all. |
 
+### [agenda-024](agendas/agenda-024-post-381-24h-portfolio.md) — Post-3.81 24-Hour Portfolio Control
+
+Status: **active**. Coordinate two disjoint research agendas for roughly 24 active portfolio hours without allowing parallel work to split the proof record. Agenda-025 owns the exact fractional frontier and agenda-026 owns density, typed stationarity, and Trump capture. This agenda owns the frozen base and source packets, shared namespaces and records, six four-hour integration gates, all routing decisions, and W10 closeout. The research horizon is a replanning checkpoint rather than a stop condition. PR 87 owns agenda-023 and BC-214 through BC-218; its audited green head is integrated directly here for the gate machinery, while this portfolio starts at BC-219 and quarantines H-066 through H-069 and exp-065 through exp-069 until that sibling is terminal.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-219 | tool_validation | 11 | complete | 0 | think-9pzv | One immutable launch contract that prevents parallel agents from changing the theorem, criteria, source corpus, or shared record underneath one another. |
+| BC-220 | measurement_validation | 11 | blocked | 0 | think-u7i4 | Whether adaptive cores, the resumed bracket, local radius packaging, and the full-size weak-dual pilot are sound enough to receive more compute. |
+| BC-221 | measurement_validation | 11 | blocked | 0 | think-gt06 | A comparable exact-yield-per-hour reading across the adaptive, bracket, radius, and density routes. |
+| BC-222 | research | 11 | blocked | 0 | think-gxcm | Whether the direct-bound route, equality-density route, or local-to-global route now has the strongest verifier-backed expected gain. |
+| BC-223 | measurement_validation | 11 | blocked | 0 | think-dlj8 | A frozen candidate that survives independent exact decision, or a precise reason no branch has earned final-block exactification. |
+| BC-224 | tool_validation | 11 | blocked | 0 | think-wo94 | Review-ready evidence rather than another partially built research surface. |
+| BC-225 | measurement_validation | 11 | blocked | 0 | think-3ilu | The durable result of the 24-hour portfolio and the single highest-value continuation after all costs and negative results are known. |
+
+### [agenda-025](agendas/agenda-025-adaptive-fractional-frontier.md) — Adaptive Fractional Frontier Above 3.81
+
+Status: **active**. Give one managing agent a disjoint, exact program for the likeliest direct improvement to s(11) >= 3.81. Formalize direction-dependent witness sides B_k and their verifier, resume the retained 3.82 primal/dual state, and test Massaccesi's inset margin only as a seed before unrestricted column generation. A verified rung earns immediate exactification; a stalled adaptive core routes to a rational angle-cell kernel; segment measures remain tentative until that route is disposed and a verifier is priced. This manager owns BC-230 through BC-239, H-070 through H-079, and exp-070 through exp-089, but not shared campaign or frontier state.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-230 | research | 11 | complete | 0 | think-c678 | After BC-220, BC-231 must implement all three exact decision routes and execute every reviewed positive and negative control. No adaptive certificate exists yet. |
+| BC-231 | tool_validation | 11, 12, 17 | blocked | 0 | think-7mk4 | A trustworthy decision boundary on which an adaptive 3.8125 run may rely. |
+| BC-232 | research | 11 | ready | 0 | think-gmdy | Which side of eleven the current one-body formulation reaches at 3.82, or a measured reason to stop spending on this checkpoint. |
+| BC-233 | research | 11, 17 | complete | 1 | think-jbat | This seed rule is retired. Reopen margin-biased seeding only under a new preregistered mechanism that can explain why unrestricted trajectories should diverge from the byte-identical control. |
+| BC-234 | research | 11 | blocked | 0 | think-1sv0 | A directly publishable rung or a quantitative verdict on adaptive witness cores. |
+| BC-235 | research | 11 | blocked | 1 | think-ay89 | Whether a strictly richer one-body witness can be represented by a small exact verifier. |
+| BC-236 | tool_validation | 11, 12 | blocked | 1 | think-yaf9 | Whether the kernel language is a certifiable instrument rather than a geometric sketch. |
+| BC-237 | research | 11 | blocked | 2 | think-fw95 | A build/no-build decision for the next richer measure language. |
+| BC-238 | measurement_validation | 11 | blocked | 0 | think-hjoe | A result object the central retention gate can judge without trusting its generator. |
+| BC-239 | measurement_validation | 11 | blocked | 0 | think-mss2 | The fractional program's honest yield, cost, negative results, and best continuation. |
+
+### [agenda-026](agendas/agenda-026-density-stationarity-and-trump-capture.md) — Density, Typed Stationarity, and Trump Capture
+
+Status: **active**. Give one managing agent a disjoint closure program that can turn local knowledge at Walter Trump's packing into a global argument. Package the already-computed quantitative neighborhood theorem instead of rerunning it; test whether a full-size density has a sound weak dual with boundary terms and useful equality set; and replace generic contact-graph enumeration with typed stationary backbones that retain feature contacts, owner axes, order data, abnormal Fritz–John cases, ties, zero multipliers, and rattlers. This manager owns BC-240 through BC-249, H-080 through H-089, and exp-090 through exp-109, but not shared campaign or frontier state.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-240 | research | 11 | complete | 0 | think-4ln1 | BC-241's source-distinct retained-record review must decide whether this local endpoint is safe to invoke; no global capture argument may use it first. |
+| BC-241 | measurement_validation | 11 | ready | 0 | think-woi0 | Whether the local endpoint is ready to serve as the last step of a global proof. |
+| BC-242 | research | 11 | complete | 0 | think-9xxh | BC-243 may build the exact a.e.-depth dual verifier only after BC-220. A sound D>11 kills equality before any continuum primal guard is funded. |
+| BC-243 | measurement_validation | 11 | blocked | 0 | think-mt6q | Whether exact dual depth already rules out a sharp mass-eleven density before the program spends on continuum primal coverage. |
+| BC-244 | research | 11 | blocked | 1 | think-h7kl | A possible one-body proof endpoint, or evidence that global classification must carry the closure burden. |
+| BC-245 | research | 3, 4, 5, 11 | complete | 0 | think-do04 | After BC-220, price a lazy producer and independent replay only on n=3, n=4 and Trump controls. No global n=11 atlas opens without measured pruning and cost. |
+| BC-246 | tool_validation | 11 | blocked | 0 | think-3l93 | Whether the atlas language can join the global tree to the already-verified local neighborhood. |
+| BC-247 | tool_validation | 3, 4, 5 | blocked | 1 | think-qi66 | A measured branch price and omission control for the proposed global classifier. |
+| BC-248 | research | 11 | blocked | 2 | think-901o | Whether certificate-guided enumeration can cover the complement of the Trump neighborhood at a finite, auditable cost. |
+| BC-249 | measurement_validation | 11 | blocked | 0 | think-7dd9 | The closure program's honest theorem gain, measured costs, negative results, and best continuation. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 64 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 66 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -567,8 +615,9 @@ Status: **active**. A W5 efficiency-loop block entered on the operator's directi
 | H-061 | result registered | proof | There is a finite measure of rational-weight point atoms in [0, 19/5]^ |  | 0 | T-017, T-018 |  |
 | H-062 | confirmed | proof | On the retained 181-direction net at B = 9977/10000, the side at which | container side: 193/40 39/8 97/20 979/200 123/25 247/50 993/200 | 2 | T-021 | 112m agent + 109.8m wall |
 | H-063 | refuted | proof | Two statements, one instrument. First, the class certificate of X-014' | composition n1: 0 1 2 3 4 5 6 7 8 9 10 11* | 1 |  | 25m agent + 27.8m wall |
-| H-064 | abandoned | proof | At container side 77/20 = 3.85, on the retained 181-direction net at B | container side: 191/50 77/20 387/100 | 1 |  | 96m agent + 66.0m wall |
+| H-064 | abandoned | proof | At container side 77/20 = 3.85, on the retained 181-direction net at B | container side: 191/50 77/20 387/100 | 2 |  | 96m agent + 175.3m wall |
 | H-065 | confirmed | proof | On the retained 381/100 certificate at n = 11 -- 1121 atoms, B = 9977/ | census margin epsilon: 0 0.01 0.05 0.1 | 1 |  | 16m agent + 16.1m wall |
+| H-070 | refuted | proof | At n = 11, outer side 191/50, and B = 9977/10000, the eligible minimum | one-sided inset: 1/2 2962983/4505800 15513/20000 | 1 |  | 8.2m wall |
 
 ## Needs review — held for a human, not decided
 
@@ -578,7 +627,7 @@ Status: **active**. A W5 efficiency-loop block entered on the operator's directi
 
 ## Rounds
 
-### rejected (11)
+### rejected (12)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -593,12 +642,14 @@ Status: **active**. A W5 efficiency-loop block entered on the operator's directi
 | exp-037 | series-000 | 29 | openai-codex | H-042 | The retained serialization has six numerical orientation classes, with minimum class gap 0.296067 degrees against a 1e-90 degree interval radius. |
 | exp-041 | series-000 | 5 | openai-codex | H-023 | The frozen complete-zero-inventory clause is false: one additional owner axis is zero only at the positive endpoint, while independent control review also found mutation-reason and partial-disposition guards that remain unfinished. |
 | exp-064 | series-000 | 11 | Claude (agent), Lane A of agenda-021 BC-198, bead think-m3sx, session-087 | H-063 | The second clause holds exactly and the first cannot, so H-063 falls to its own rejection clause -- X-014's kill condition, that conditioning on direction buys too little. What makes this a strong negative rather than a failed search is that the refusal is proved rather than observed. At Trump's side L/B = 969271/249425 = 3.886021850 exceeds 2 + (4/3)sqrt(2) = 3.885618083, decided against the surd, so eleven pairwise disjoint B-squares of the class fit inside the container and no measure of total mass below eleven can cover them -- whatever site set is used and however long the row loop runs. The control's own ceiling is B(2 + (4/3)sqrt(2)) = 3.876681, which is 0.000403 below the side it was asked to reach: the shrink costs 0.008937 of side and Stromquist's headroom above Trump is only 0.008534. The control was unreachable before the first command ran, and no amount of instrument work would have changed that. Conditioning is not worthless, and the round reports what it does buy rather than only what it does not. On one site set at Trump's side a single threshold gives margin +0.082256 where two thresholds at composition (9, 2) give +0.072368, with the LP separating them once the site set is fine enough. And X-014's own step-1 design point is reachable: composition (11, 0) over the leading nineteen cells at Trump's side and grid 79 gives exact 39123/4096 = 9.551514, margin -5933/4096, every condition holding, refuted. What the program cannot do is reach the side Stromquist's Theorem 3 reaches, because that theorem gets there by a further box step this program does not have. |
+| exp-071 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-233, think-jbat | H-070 | The released seed and matched unseeded control converged after the same eight rounds to byte-identical candidates of exact mass 11142893/1000000, so the seeded arm missed the preregistered strict-improvement criterion. |
 
-### abandoned (1)
+### abandoned (2)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes exactly is nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861, with the converged row loop's restricted optimum 11.055617 on 12,761 sites as the certified upper end of the 3.82 bracket. |
+| exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
+| exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 
 ### unresolved (14)
 
@@ -684,10 +735,11 @@ Status: **active**. A W5 efficiency-loop block entered on the operator's directi
 | exp-052 | H-052 | 74.2667m agent + 74.3m wall | timebox | Canonical checkpoint SHA-256 db5c156959b6de4e6f2c9be283454d0 |  |
 | exp-056 | H-052 | 356.0m wall | timebox | Canonical child checkpoint SHA-256 0d39a7e734e8afc62fda914fd |  |
 | exp-060 | H-064 | 96m agent + 66.0m wall | timebox | packing/campaign/series/series-000-smoke-and-calibration/res | a resumed loop from the retained 191/50 state with row gener |
+| exp-070 | H-064 | 109.3m wall | timebox | packing/campaign/series/series-000-smoke-and-calibration/res | After the T+2 landing, spend the remaining 135 one-core proc |
 
 ## Effort
 
-64 rounds, 2152.1 agent-minutes, 1044.7 wall-minutes.
+66 rounds, 2152.1 agent-minutes, 1162.2 wall-minutes.
 
 ## Exploration reports not yet codified
 
@@ -698,6 +750,7 @@ Status: **active**. A W5 efficiency-loop block entered on the operator's directi
 - X-010 — Two lanes, two ladders — focusing the campaign on first-party theorems
 - X-012 — One chart, four hundred inequalities, and an order-2m contradiction
 - X-015 — The map and the three programs: where significant progress is likeliest next
+- X-016 — After 3.81: two managers, six gates, one proof boundary
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

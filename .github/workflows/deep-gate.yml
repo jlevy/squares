@@ -30,36 +30,12 @@ name: Deep gate
 # the unstated assumption that a deferred step only has to be reported eventually. It has
 # to be reported before the merge. It does not have to be reported on every push.
 #
-# **So this workflow separates "mandatory" from "every build", which branch protection
-# alone cannot do.** A required context that does not run on some pull request sits
-# pending on it forever -- the same trap the `packing-validation.yml` header warns about
-# for path filters -- and a context that runs on every pull request is the 32 minutes
-# this file exists to avoid. The mechanism that separates them is the merge queue, and
-# the three triggers below are that answer plus the two ways to reach it by hand today.
+# Reviewers request this advisory evidence by label or dispatch. It does not enforce a
+# merge prerequisite. This personal repository cannot enable GitHub's organization-only
+# merge queue; future queue adoption also requires workflow changes because GitHub shares
+# required checks between pull requests and merge groups. See `development.md`.
 
 "on":
-  # **The mandatory path, and the one this design is actually for.** A merge-queue run
-  # happens once per merge *attempt*, on the exact commit that is about to become `main`,
-  # rather than once per push -- so `deep-gate-required` can be a required check for the
-  # queue without being a required check on every pull request. That is the whole of
-  # "mandatory, but not on every CI build", and it also closes the residual this file
-  # cannot close on its own: a deep run on a pull request proves the branch as it stood,
-  # and `main` can move underneath it before the merge button is pressed. The queue
-  # re-tests against the updated base by construction.
-  #
-  # It is wired now and dormant until someone turns the queue on, because that is a
-  # repository setting and not a file. Nothing here fires until then; see
-  # `development.md` for the two settings and the required-context name to enter.
-  #
-  # **One thing not to do twice**, because the overlap is not obvious from either file.
-  # `packing-validation.yml` selects by `github.event_name != 'pull_request'`, so adding
-  # `merge_group` there would run the *complete* gate on every merge attempt -- the
-  # exhaustive tier included, which is this workflow's larger half. That is a coherent
-  # arrangement and it is the other one: require `packing-required` on the queue and drop
-  # this trigger. What is not coherent is both, which pays 1943s twice for the same
-  # commit. Pick one when the queue is switched on; until then neither fires.
-  merge_group: {}
-
   # **The on-demand path, which is what exists today.** `deep-gate` on the pull request
   # runs this; no label runs nothing. `labeled` starts it, and `synchronize` is what
   # keeps it honest -- without it the label would attest to a commit that is no longer
@@ -67,11 +43,12 @@ name: Deep gate
   # last, when the branch is otherwise ready: every push after the label costs another
   # deep run.
   #
-  # On a pull request with no label every job below is skipped in seconds. A skipped job
+  # `opened` creates a run even before the first push or label change. On a pull
+  # request with no label every job below is skipped in seconds. A skipped job
   # reports a conclusion; it does not sit pending. That distinction is the whole of the
   # `D-380` argument at the bottom of this file.
   pull_request:
-    types: [labeled, synchronize, reopened, ready_for_review]
+    types: [opened, labeled, synchronize, reopened, ready_for_review]
 
   # **The escape hatch.** `pull_request: <number>` checks out that pull request's merge
   # ref and runs the deep surface against it without touching labels -- useful for
@@ -95,9 +72,8 @@ concurrency:
   # would let an ordinary push cancel a 32-minute deep run and leave the label attesting
   # to a run that never finished. Different prefix, no interaction in either direction.
   #
-  # Keyed by event as well as ref for the reason the other file gives: `github.ref` on a
-  # merge-queue run is `refs/heads/gh-readonly-queue/...` and already unique per attempt,
-  # while on a pull request it is `refs/pull/N/merge` and shared across re-labels.
+  # Keyed by event as well as ref: a pull-request run uses `refs/pull/N/merge`,
+  # while a dispatch can target the same ref independently.
   # The dispatch input joins the key so two dispatches aimed at different pull
   # requests do not queue behind one another on `refs/heads/main`.
   group: deep-gate-${{ github.event_name }}-${{ github.event.inputs.pull_request || github.ref }}
@@ -106,8 +82,7 @@ concurrency:
   # gives for making it. There, a cancelled deep run is "the only deep coverage that tree
   # was going to get", because the tree is already merged. Here it is not: a superseded
   # commit is one nobody will merge, the replacement run gets its own deep coverage, and
-  # `synchronize` guarantees there is a replacement. A merge-queue run is never
-  # cancelled, because the commit it is testing is the one about to land.
+  # `synchronize` guarantees there is a replacement.
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
@@ -139,8 +114,7 @@ jobs:
     # then 221.36s) finish underneath it on the second slot. A third slot buys nothing
     # and costs contention, which is `BC-218`'s finding one level down.
     if: >-
-      github.event_name == 'merge_group'
-      || github.event_name == 'workflow_dispatch'
+      github.event_name == 'workflow_dispatch'
       || contains(github.event.pull_request.labels.*.name, 'deep-gate')
     runs-on: ubuntu-latest
     defaults:
@@ -155,7 +129,7 @@ jobs:
           # than a branch tip.
           # `github.event.inputs` rather than the `inputs` context: the latter is
           # documented as available only to a dispatched or reusable workflow, and
-          # this step also runs on `pull_request` and `merge_group`, where the event
+          # this step also runs on `pull_request`, where the event
           # payload simply carries no inputs and this renders empty.
           ref: ${{ github.event.inputs.pull_request && format('refs/pull/{0}/merge', github.event.inputs.pull_request) || '' }}
           # Shallow is enough: the only step that needs full history is `provenance`, and
@@ -197,13 +171,11 @@ jobs:
     # It costs a second runner and no wall: 1943.05s here against about 890s there, so
     # the gate finishes when this job does either way. `BC-218` priced a second job at
     # "+3 billed minutes and zero wall" and took it; this one is dearer in minutes and
-    # buys a separable verdict, on a workflow that runs once per merge rather than once
-    # per push.
+    # buys a separable verdict, on a workflow requested by label or dispatch.
     #
     # `--jobs 1 --inner-jobs 2` is the shape the 1943.05s reading was taken under.
     if: >-
-      github.event_name == 'merge_group'
-      || github.event_name == 'workflow_dispatch'
+      github.event_name == 'workflow_dispatch'
       || contains(github.event.pull_request.labels.*.name, 'deep-gate')
     runs-on: ubuntu-latest
     defaults:
@@ -215,7 +187,7 @@ jobs:
         with:
           # `github.event.inputs` rather than the `inputs` context: the latter is
           # documented as available only to a dispatched or reusable workflow, and
-          # this step also runs on `pull_request` and `merge_group`, where the event
+          # this step also runs on `pull_request`, where the event
           # payload simply carries no inputs and this renders empty.
           ref: ${{ github.event.inputs.pull_request && format('refs/pull/{0}/merge', github.event.inputs.pull_request) || '' }}
           # Shallow, and submodules for the same two reasons as above.
@@ -268,8 +240,7 @@ jobs:
     # leave this unreported rather than report a hard failure. A genuine failure in
     # either job is not `cancelled()`, so it still fails here.
     if: >-
-      !cancelled() && (github.event_name == 'merge_group'
-      || github.event_name == 'workflow_dispatch'
+      !cancelled() && (github.event_name == 'workflow_dispatch'
       || contains(github.event.pull_request.labels.*.name, 'deep-gate'))
     needs: [deferred-steps, exhaustive-tier]
     runs-on: ubuntu-latest

@@ -1,0 +1,52 @@
+{
+  "checked_at": "2026-09-05T21:01:12Z",
+  "source_url": "https://www.researchgate.net/publication/411979559_An_improved_packing_of_206_unit_squares_in_a_square",
+  "source_kind": "mutable_author_upload",
+  "retrieval": {
+    "stable_pdf_retained": false,
+    "coordinates_retained": false,
+    "direct_http": "403",
+    "advertised_pdf": "404",
+    "browser": "captcha_not_bypassed"
+  },
+  "observed_revisions": [
+    {
+      "surface": "fresh_search_index_rendering",
+      "title": "Improved packings of 68, 126 and 206 unit squares in a square",
+      "document_date": "2026-08-14",
+      "precision_claim": "50-digit verification of displayed 15-decimal coordinates"
+    },
+    {
+      "surface": "direct_page_rendering",
+      "title": "An improved packing of 206 unit squares in a square",
+      "document_date": "2026-08-08",
+      "precision_claim": "40-digit verification of displayed 15-decimal coordinates"
+    }
+  ],
+  "reported_packings": [
+    {
+      "n": 68,
+      "side": "8.802212238746405",
+      "reported_on": "2026-08-12",
+      "status": "source_asserted_unreplayed"
+    },
+    {
+      "n": 68,
+      "side": "8.802187556882656",
+      "reported_on": "2026-08-14",
+      "status": "source_asserted_unreplayed"
+    },
+    {
+      "n": 126,
+      "side": "11.774735132406546",
+      "reported_on": "2026-08-14",
+      "status": "source_asserted_unreplayed"
+    },
+    {
+      "n": 206,
+      "side": "14.872219025630592",
+      "reported_on": "2026-08-07",
+      "status": "source_asserted_unreplayed"
+    }
+  ]
+}

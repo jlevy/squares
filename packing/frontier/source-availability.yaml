@@ -18,7 +18,7 @@ softschema:
   schema: source-availability.schema.yaml
   status: enforced
 
-last_checked: '2026-08-27'
+last_checked: '2026-09-05'
 archive: packing/resources/
 
 # Cleared since the first pass. Kept so the correction is visible, and as
@@ -94,11 +94,12 @@ unretrieved:
     url: https://doi.org/10.2140/agt.2021.21.1445
     blocker: bot_blocked
     detail: >
-      The official MSP article page and PDF route were re-tested 2026-08-24. The PDF
+      The official MSP article page and PDF route were re-tested 2026-09-05. The PDF
       route returned the publisher's "PDF Access Denied" HTML response, not a PDF.
-      The proposed idUS institutional-repository mirror was also checked: its byte
-      stream is instead the 23-page Bonnot–de Carvalho–González-Meneses–Hall article
-      (AGT 21, 1351-1370), not the Plakhta article or the complete issue.
+      The proposed idUS institutional-repository mirror was also rechecked: its issue
+      contents page names Plakhta, but the payload is the 23-page Bonnot–de
+      Carvalho–González-Meneses–Hall article (AGT 21, 1351-1370), not the Plakhta
+      article or the complete issue.
     depends_on_it: >
       H-032's literature routing for affine Morse-Bott analysis of square configuration
       spaces in a rectangle; it is context and method, not a classification of the
@@ -115,7 +116,9 @@ unretrieved:
     blocker: paywall
     detail: >
       Springer. The /content/pdf/ URL returns HTTP 200 but serves a paywall
-      landing page, not the PDF -- re-tested 2026-08-22.
+      landing page, not the PDF -- re-tested 2026-09-05. Crossref records online
+      publication on 2025-08-03; the ResearchGate record was found, but no lawful
+      public full-text PDF was verified.
     depends_on_it: Current continuation of the Kearney-Shiu delta_n / n_r line.
     priority: 2
     route: institutional subscription

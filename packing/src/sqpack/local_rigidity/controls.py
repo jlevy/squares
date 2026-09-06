@@ -125,7 +125,7 @@ def _guard_refuses(system: ConstraintSystem) -> tuple[bool, str]:
     return False, ""
 
 
-# -- C1 changed feature ------------------------------------------------------
+# -- Control 1: changed feature ----------------------------------------------
 
 
 def changed_feature(chart: Chart, system: ConstraintSystem, t012: T012System) -> ControlOutcome:
@@ -268,7 +268,7 @@ def changed_feature(chart: Chart, system: ConstraintSystem, t012: T012System) ->
     )
 
 
-# -- C2 zero margin ----------------------------------------------------------
+# -- Control 2: zero margin --------------------------------------------------
 
 
 def zero_margin(system: ConstraintSystem) -> ControlOutcome:
@@ -305,7 +305,7 @@ def zero_margin(system: ConstraintSystem) -> ControlOutcome:
     )
 
 
-# -- C3 omitted constraint ---------------------------------------------------
+# -- Control 3: omitted constraint -------------------------------------------
 
 
 def omitted_constraint(chart: Chart) -> ControlOutcome:
@@ -351,7 +351,7 @@ def omitted_constraint(chart: Chart) -> ControlOutcome:
     )
 
 
-# -- C4 invented contact -----------------------------------------------------
+# -- Control 4: invented contact ---------------------------------------------
 
 
 def invented_contact(
@@ -402,7 +402,7 @@ def invented_contact(
     )
 
 
-# -- C5 side release ---------------------------------------------------------
+# -- Control 5: side release -------------------------------------------------
 
 
 def released_side_pose(pose: BasePose, growth: FieldElement) -> BasePose:

@@ -134,6 +134,16 @@ PRUNE = frozenset(
         # have hidden that rather than fixed it, which is what the note above this
         # constant says to check for before raising it a second time.
         ROOT / "site",
+        # Agenda 024's commissioning outputs and its two manager roots are retained
+        # research evidence, not mutation-control inputs. Long numerical logs and warm
+        # states can grow while the gate is running; copying them into every private
+        # worker both wastes the fixed snapshot budget and makes that budget depend on
+        # unrelated research progress. Markdown linked from checked documents is copied
+        # back by `linked_pruned_targets`, and registered frontier evidence is copied by
+        # `result_pruned_targets`, so the checkers keep every dependency they declare.
+        ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-024",
+        ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-025",
+        ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-026",
         # The n=17 weighted-certificate solver state joins them on 2026-09-03, when the
         # H-052 lane committed exp-059's completion record and its checkpoint and pushed
         # the snapshot to 90,031,065 bytes against the 67,108,864 cap. Counted over the
@@ -187,6 +197,15 @@ PRUNE = frozenset(
         "/exp-059-h-052-n17-fresh-successor-completion.checkpoint.json",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results"
         "/exp-059-h-052-n17-fresh-successor-completion.json",
+        # BC-200's 2.5 MB resumable state and 0.3 MB frozen family are the n=11
+        # counterpart of the n=17 solver evidence above. PR #89's first hosted run
+        # measured 67,129,316 bytes, 20,452 above the 64 MiB cap. Neither path is a
+        # control target or opened by a registered control; pruning both restores
+        # bounded headroom without raising the cap or dropping a checked dependency.
+        ROOT / "campaign/series/series-000-smoke-and-calibration/results"
+        "/bc-200-state-191-50.json",
+        ROOT / "campaign/series/series-000-smoke-and-calibration/results"
+        "/bc-200-family-191-50.json",
         ROOT / "resources",
         ROOT / "sqsearch/target",
         ROOT / "witnesses/prospective",

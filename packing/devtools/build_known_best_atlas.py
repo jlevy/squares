@@ -21,7 +21,6 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from xml.etree import ElementTree as ET
 
-import cairosvg
 import mpmath as mp
 from strif import atomic_output_file
 
@@ -1511,6 +1510,9 @@ def _update_png_export(export: RasterExport, svg_text: str) -> None:
     """
     if _png_matches_summary(export, svg_text):
         return
+    # SVG construction and receipt checks do not need the native Cairo library.
+    import cairosvg  # noqa: PLC0415
+
     content = cairosvg.svg2png(
         bytestring=_cropped_svg(svg_text, export).encode("utf-8"),
         output_width=export.width,
