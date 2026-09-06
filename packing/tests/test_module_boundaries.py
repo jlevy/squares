@@ -486,7 +486,7 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
         },
         # The standalone verifier's own full decision of the retained n = 11 bytes,
         # run as a subprocess. Measured 2026-09-05 at 49.4 s for the node, 47.5 s of it
-        # the verifier itself: 181 directions over 567,131,843 reachable cells, in
+        # the verifier itself: 181 directions over 567,130,649 reachable cells, in
         # pure-Fraction and integer arithmetic with no numpy and no parallelism to
         # reach for. That is the price of a decision that imports nothing from this
         # repository. Its refusals run in the fast tier beside it, since a refusal is
@@ -525,9 +525,16 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
         # 2026-09-04) and the ten rows of thirdparty/falsify.py's table, each a full
         # decision, about six minutes together. The fast tier decides the rung's tight
         # direction and a two-atom instance of the theorem beside them.
+        # The two perturbations the claim document states for the 19/5 rung, replayed on
+        # the full net through the embedded verifier: the orbit lightening that fails
+        # Condition 5 alone and the central-atom lightening that only the declarations
+        # line refuses. Measured 2026-09-05 at 37.2 s and 38.7 s on the same box, each a
+        # full 181-direction sweep like the acceptance test above them.
         "test_verify_claim.py": {
             "test_the_19_5_rung_is_accepted_on_the_full_net",
             "test_every_falsification_is_refused_on_the_expected_condition",
+            "test_the_stated_orbit_lightening_fails_condition_5_alone",
+            "test_the_stated_benign_lightening_keeps_every_condition",
         },
         # Measured 2026-08-30: about three minutes. It re-derives n = 40's whole
         # assessment, whose intersecting-assessor section runs 240 linear programs over

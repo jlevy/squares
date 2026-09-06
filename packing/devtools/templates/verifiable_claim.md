@@ -126,10 +126,21 @@ open cells. The covered mass is constant on each open cell.
 On a cell’s boundary it can only be larger, because the rectangles are closed and the
 weights are nonnegative.
 And every admissible center lies in the closure of some open cell that meets the
-admissible square, since that square has interior and finitely many lines cannot cover
-an open set. So the least mass over all admissible centers is the least over the open
-cells that meet the admissible square, and scoring each of them once decides Condition 5
-at that direction. Every quantity is rational, so every score is exact.
+admissible square, since that square has interior when $2 h_k < L$ and finitely many
+lines cannot cover an open set.
+So the least mass over all admissible centers is the least over the open cells that meet
+the admissible square, and scoring each of them once decides Condition 5 at that
+direction. Every quantity is rational, so every score is exact.
+
+Two shapes of the admissible square need no cells.
+When $2 h_k > L$, no $B$-square at that direction fits inside the container, so
+Condition 5 quantifies over nothing there and holds vacuously; the verifier counts such
+a direction as admitting no placement rather than as decided, and a certificate whose
+every direction admits none is reported as having decided nothing.
+When $2 h_k = L$, the one admissible center is $(L/2, L/2)$, and the verifier scores
+that single closed square directly.
+Neither arises here: $B < 1$ and $L > 2$, so $2 h_k \le B \sqrt{2} < L$ at every
+direction.
 
 ## How to Check It
 
@@ -144,16 +155,42 @@ python {{VERIFIER_NAME}} {{FILE_NAME}}
 
 It also accepts the certificate on its own, saved from that block as `{{CERT_NAME}}`.
 
-It prints one line per condition, then a verdict.
+It prints one line per condition, then a line comparing the file’s declared `claim`,
+`total_mass` and `least_cell_mass` with what it computed, then a verdict.
 For this certificate the verdict is `VERIFIED: s(11) >= {{L_FRAC}}`, with Condition 5
 reporting the least covered mass ${{LEAST_FRAC}}$ at direction $0$ and center
 ${{WITNESS_CENTER}}$ over the {{N_DIRECTIONS}} directions.
 It takes {{RUNTIME}} in pure Python, most of it on the finite sweep of Condition 5 that
 “Why the Sweep Is Exact” describes.
+The sweep runs only once Conditions 1 to 4 hold; after a failure among them, the
+Condition 5 line says it was not evaluated.
 
-The exit status is 0 only when all five conditions hold.
-Perturb the certificate, by lightening one atom, dropping an orbit member, or shortening
-the net, and the verifier refuses it, naming the condition that fails.
+The exit status is 0 only when all five conditions hold and the three declarations
+match. Four perturbations show the verifier deciding rather than agreeing, each with its
+magnitude and the line that refuses it.
+Condition 5 holds by the margin ${{LEAST_FRAC}} - 1 = {{MARGIN_FRAC}}$, and the
+placement attaining it, centered at ${{WITNESS_CENTER}}$, covers the atom at
+${{TIGHT_ATOM}}$, of weight ${{TIGHT_WEIGHT}}$ and one of {{TIGHT_ORBIT}} in its orbit,
+the atoms at ${{TIGHT_ORBIT_SITES}}$.
+
+- Lighten all {{TIGHT_ORBIT}} atoms of that orbit by ${{LIGHTEN_FRAC}}$, more than the
+  margin. Conditions 1 to 4 still hold, and Condition 5 fails: that placement now covers
+  at most ${{LIGHTENED_LEAST_FRAC}}$, and the least covered mass reported is no more
+  than that.
+- Lighten one of them alone by the same amount, or drop it.
+  Condition 1 fails, and Condition 5 is not evaluated.
+- Set `angle_limit` to $41/100$, short of $\tan(\pi/8) = 0.4142\ldots$. Condition 3
+  fails, and Condition 5 is not evaluated.
+- Lighten the central atom at ${{CENTER_ATOM}}$, a one-point orbit of weight
+  ${{CENTER_WEIGHT}}$, by the margin ${{MARGIN_FRAC}}$ or by less.
+  All five conditions still hold: Condition 1 is untouched, Condition 2 improves, and
+  every placement loses at most the margin.
+  What refuses the file is the declarations line, since its `total_mass` is now stale;
+  write the values that line computed into the file, and the verdict is `VERIFIED`.
+
+The first two also leave the file’s `total_mass` stale, and the first its
+`least_cell_mass`; the declarations line, after the conditions, says so.
+The condition lines are what to read.
 
 ## How This Repository Decided It
 

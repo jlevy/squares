@@ -18,7 +18,7 @@ net reaches π/4 and its largest half-gap tangent is `D = 207107/90000000`, so
 any angle, contains a closed `B`-square at one of the net angles — angles past π/4 fold
 back onto the net by the symmetry the atoms carry.
 Every closed `B`-square at a net angle that lies inside the container covers weight at
-least `4001/4000 = 1.00025`, checked exactly over all 567131843 event cells
+least `4001/4000 = 1.00025`, checked exactly over all 567130649 event cells
 its centre can reach, at all 181 directions.
 Eleven unit squares with disjoint interiors would therefore contain eleven pairwise
 disjoint such `B`-squares, carrying at least 11 between them.
@@ -41,7 +41,7 @@ s(11) >= 381/100 = 3.81   eleven unit squares do not fit in a square of side 3.8
                  (Condition 4: a unit square at ANY angle holds a B-square at a net
                  angle; Condition 1, the D4 symmetry, folds angles past pi/4 back)
   least cover    4001/4000 = 1.00025 >= 1, the least weight any B-square at a net
-                 angle inside the container covers, over 567131843 reachable event
+                 angle inside the container covers, over 567130649 reachable event
                  cells at 181 directions -- exact, not sampled (Condition 5)
 
   so             11 disjoint unit squares would hold 11 disjoint B-squares of weight
@@ -53,7 +53,7 @@ s(11) >= 381/100 = 3.81   eleven unit squares do not fit in a square of side 3.8
                  any CPython 3.12+, standard library only, nothing else installed
 ```
 
-The bytes on `main`: [certificate.json](https://github.com/jlevy/squares/blob/main/packing/cases/n11_fractional_certificate/certificate.json).
+The bytes on `main`: [certificate.json](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/certificate.json).
 
 ## Verify It in One Command
 

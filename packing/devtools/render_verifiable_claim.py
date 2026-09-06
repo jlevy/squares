@@ -43,11 +43,12 @@ from devtools.render_explainer import (
     decimal,
     derive,
     digits,
+    edition_file,
     fill,
-    repo_file,
     runtime_phrase,
     slug,
 )
+from sqpack.fractional.certificate import d4_images
 from sqpack.yamlio import safe_load
 
 TEMPLATE = TEMPLATES / "verifiable_claim.md"
@@ -71,7 +72,7 @@ DIGEST_PREFIX_CHARS = 12
 #: (`minimal_verify.py certificate.json`, 2026-09-05); a certificate without a recorded
 #: count has no card. This is the one typed copy: `test_minimal_verify.py` imports it, and
 #: its exhaustive node re-derives it from the verifier's own report.
-REACHABLE_CELLS = {"381-100": 567_131_843}
+REACHABLE_CELLS = {"381-100": 567_130_649}
 
 #: How many decimal places the card carries for the two irrational-looking quantities it
 #: cannot print exactly: the largest half-gap tangent and the containment product. Both
@@ -100,6 +101,53 @@ def standing(facts: Facts, headline: Facts) -> str:
     return "It is the looser of the two bounds the project proves, with the simpler numbers."
 
 
+def point(x: Fraction, y: Fraction) -> str:
+    return f"({frac(x)}, {frac(y)})"
+
+
+def perturbations(facts: Facts) -> dict[str, str]:
+    """The perturbations “How to Check It” states, each computed from the certificate.
+
+    The margin over Condition 5 is the least covered mass less 1, and the atom named is
+    the first in the file that the witness placement covers. Lightening its whole orbit
+    by more than the margin keeps Condition 1 and takes that placement below 1, so
+    Condition 5 fails and the least the verifier reports is at most the old least less
+    the lightening. Lightening the central atom, the one-point orbit, by the margin or
+    less costs every placement at most the margin, so all five conditions still hold. The
+    lightening is the coarsest power of ten above the margin, so that it reads as a
+    number a reader would type.
+    """
+    side, half = facts.outer_side, facts.square_side / 2
+    witness_x, witness_y = facts.witness
+    margin = facts.least_mass - 1
+    tight = next(
+        a for a in facts.atoms if abs(a.x - witness_x) <= half and abs(a.y - witness_y) <= half
+    )
+    orbit = sorted(set(d4_images(tight.x, tight.y, side)))
+    central = next((a for a in facts.atoms if (a.x, a.y) == (side / 2, side / 2)), None)
+    places = 1
+    while Fraction(1, 10 ** (places + 1)) > margin:
+        places += 1
+    lightening = Fraction(1, 10**places)
+    if central is None or len(orbit) == 1 or tight.weight <= lightening:
+        raise SystemExit(
+            f"{facts.source.name}: the perturbations the claim document states need a "
+            "central atom, a tight atom with an orbit of more than one site, and that "
+            f"atom heavier than the lightening {lightening}"
+        )
+    return {
+        "MARGIN_FRAC": frac(margin),
+        "TIGHT_ATOM": point(tight.x, tight.y),
+        "TIGHT_WEIGHT": frac(tight.weight),
+        "TIGHT_ORBIT": str(len(orbit)),
+        "TIGHT_ORBIT_SITES": ", ".join(point(x, y) for x, y in orbit),
+        "LIGHTEN_FRAC": frac(lightening),
+        "LIGHTENED_LEAST_FRAC": frac(facts.least_mass - lightening),
+        "CENTER_ATOM": point(side / 2, side / 2),
+        "CENTER_WEIGHT": frac(central.weight),
+    }
+
+
 def decided_here(facts: Facts, headline: Facts) -> str:
     """How the repository decided this certificate, beyond the verifier in the file.
 
@@ -107,19 +155,25 @@ def decided_here(facts: Facts, headline: Facts) -> str:
     the card exist for the headline bound, and the self-contained third-party package for
     the rung below it, so those sentences go with the certificate they are about.
     """
-    sweep, interval, gate = repo_file(VERIFIER), repo_file(INTERVAL), repo_file(GATE)
+    sweep, interval, gate = edition_file(VERIFIER), edition_file(INTERVAL), edition_file(GATE)
     routes = (
         "Beyond the verifier in this file, the repository decides these bytes twice more, by "
-        "two methods that share no code with it or with each other. The exact event-cell "
-        f"sweep in [`certificate.py`]({sweep}) does at every net direction what “Why the "
-        "Sweep Is Exact” describes and reports the least covered mass "
-        f"${frac(facts.least_mass)}$ at direction $0$. The interval branch and bound in "
+        "two routes that share no code with it. With each other they share the "
+        "`Certificate` representation, the loader that fills it from the file, and "
+        "Conditions 2 to 4, decided once in closed form; what differs is how each decides "
+        f"Condition 5. The exact event-cell sweep in [`certificate.py`]({sweep}) does at "
+        "every net direction what “Why the Sweep Is Exact” describes and reports the least "
+        f"covered mass ${frac(facts.least_mass)}$ at direction $0$. The interval branch and "
+        "bound in "
         f"[`interval.py`]({interval}) works with directed rounding on the doubled net, the "
         "net directions and their reflections across the diagonal, so it never invokes "
         "Condition 1 and covers every orientation directly. The retention gate, "
-        f"[`decide_certificate.py`]({gate}), accepts a certificate only when both routes "
-        "accept it and the interval route\u2019s enclosure of the least covered mass has "
-        "width zero and equals the sweep\u2019s value exactly, and both accepted this one. "
+        f"[`decide_certificate.py`]({gate}), builds the one `Certificate` both routes read, "
+        "and accepts it only when both do and the interval route\u2019s enclosure of the "
+        "least covered mass has width zero and equals the sweep\u2019s value exactly; both "
+        "accepted this one. Two algorithms over one loaded object "
+        "are not two independent implementations, nor two independent readings of the "
+        "file, and the second and third decisions are worth exactly that much. "
         "The gate decides only unconditional certificates: a file declaring a `variant` "
         "other than `unconditional` is refused before either route runs, as it is by the "
         "verifier in this file, and these bytes declare none."
@@ -130,15 +184,15 @@ def decided_here(facts: Facts, headline: Facts) -> str:
     )
     if facts is headline:
         beside = (
-            f"[`{PINNED_VERIFIER.name}`]({repo_file(PINNED_VERIFIER)}), beside this file in "
+            f"[`{PINNED_VERIFIER.name}`]({edition_file(PINNED_VERIFIER)}), beside this file in "
             "the repository, is another standard-library check, pinned to exactly these bytes "
-            f"by that digest; [`{CARD.name}`]({repo_file(CARD)}) states the claim on one "
-            f"page, and [`{FIGURE.name}`]({repo_file(FIGURE)}) draws the atoms, the tight "
+            f"by that digest; [`{CARD.name}`]({edition_file(CARD)}) states the claim on one "
+            f"page, and [`{FIGURE.name}`]({edition_file(FIGURE)}) draws the atoms, the tight "
             "Condition 5 witness and the shrink step."
         )
     else:
         beside = (
-            f"The self-contained package under [`thirdparty/`]({repo_file(THIRDPARTY)}) "
+            f"The self-contained package under [`thirdparty/`]({edition_file(THIRDPARTY)}) "
             "decides this rung with nothing outside the standard library, and rebuilds "
             "Massaccesi\u2019s $n = 17$ certificate as a known-answer control beside it."
         )
@@ -150,12 +204,20 @@ def render_claim(facts: Facts, sibling: Facts, headline: Facts) -> str:
 
     The template names the least covered mass at direction 0; `derive` has already
     refused a certificate whose declared least is not the upright direction's, so what
-    arrives here is described rightly.
+    arrives here is described rightly. It also says that no direction's admissible
+    centers degenerate to a point or to nothing, which holds because B < 1 (Condition 4,
+    re-decided by `derive`) and L > 2, the one bound checked here.
     """
+    if facts.outer_side <= 2:
+        raise SystemExit(
+            f"{facts.source.name}: L = {facts.outer_side} is not above 2, and the template "
+            "says every direction admits a square of centers with interior"
+        )
     values = {
+        **perturbations(facts),
         "FILE_NAME": claim_path(facts).name,
         "CERT_NAME": facts.source.name,
-        "CERT_URL": repo_file(facts.source),
+        "CERT_URL": edition_file(facts.source),
         "L_FRAC": frac(facts.outer_side),
         "L_DEC": decimal(facts.outer_side),
         "N_ATOMS": str(len(facts.atoms)),
@@ -166,10 +228,10 @@ def render_claim(facts: Facts, sibling: Facts, headline: Facts) -> str:
         "STANDING": standing(facts, headline),
         "DECIDED_HERE": decided_here(facts, headline),
         "OTHER_FILE_NAME": claim_path(sibling).name,
-        "OTHER_CLAIM_URL": repo_file(claim_path(sibling)),
+        "OTHER_CLAIM_URL": edition_file(claim_path(sibling)),
         "OTHER_L_FRAC": frac(sibling.outer_side),
         "VERIFIER_NAME": VERIFIER_CLAIM.name,
-        "VERIFIER_URL": repo_file(VERIFIER_CLAIM),
+        "VERIFIER_URL": edition_file(VERIFIER_CLAIM),
         "VERIFIER_SOURCE": VERIFIER_CLAIM.read_text(encoding="utf-8").rstrip("\n"),
         "CERTIFICATE_JSON": facts.source.read_text(encoding="utf-8").rstrip("\n"),
         "BEST_PACKING_TEX": bound_substitutions()["BEST_PACKING_TEX"],
@@ -234,7 +296,7 @@ def render_card(facts: Facts) -> str:
         "CELLS": str(cells),
         "CERT_NAME": facts.source.name,
         "CERT_PATH": facts.source.resolve().relative_to(REPO).as_posix(),
-        "CERT_URL": repo_file(facts.source),
+        "CERT_URL": edition_file(facts.source),
         "DIGEST_PREFIX": sha256_of(facts.source)[:DIGEST_PREFIX_CHARS],
         "CLAIM_NAME": claim_path(facts).name,
         "CONFIRMATION": str(entry["confirmation"]),
