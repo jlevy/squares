@@ -22,21 +22,26 @@ work after T+2. The [`T+2 handoff`](handoff-2026-09-06-post-381-t2-commissioning
 its linked manager and coordinator packets remain the evidence boundary for the
 completed commissioning block.
 
-If these documents conflict about work after T+2, use this order:
+If these documents conflict about work after T+2, apply this precedence:
 
-1. Frozen input bytes, preregistrations, result packets, and their original claim
-   labels.
-2. This continuation addendum for T+2 through T+10 execution.
-3. Agenda 024, then the applicable manager agenda.
-4. A later coordinator gate packet, but only for work that the preceding gate was
-   authorized to choose.
+1. This continuation addendum controls execution, roles, allocations, gate sequence, and
+   the fixed wall deadline.
+2. Agenda 024 and an authorized coordinator gate packet control portfolio decisions.
+3. Frozen input bytes, preregistrations, and result packets control the evidence they
+   record, but not later scheduling once this addendum has superseded it.
+4. Each claim’s recorded epistemic classification caps what a later packet may assert.
 
-Item 1 protects scientific evidence and claim scope; it does not make an author packet’s
-proposed future scheduling dependencies immutable.
+The applicable manager agenda supplies the cell contract where it is consistent with
+items 1 and 2. Neither execution authority nor a portfolio decision may rewrite item 3
+or promote a claim beyond item 4. Historical reviews establish provenance for the
+decisions that used them; they are not current execution or scientific authority.
 The frozen BC-242 author packet’s combined BC-243 prerequisite—an exact a.e.-depth
 verifier and a continuum primal-coverage guard—is superseded for post-T+2 scheduling
 only. BC-243 requires the exact a.e.-depth verifier, while BC-244 owns the continuum
 primal-coverage guard.
+For BC-243 controls, the packet’s generic interior-overlap rejection is narrowed by the
+exact unit-weight and weighted-depth controls below; geometric overlap by itself is not
+a weighted-dual failure.
 The BC-242 weak-duality theorem and every limitation on strong duality, attainment,
 singular primals, numerical endpoints, and primal semantics remain unchanged.
 
@@ -99,6 +104,56 @@ Preserve these claim labels:
   `n = 11` atlas.
 - BC-243 may report only an exact dual lower value and the one-sided interval
   `[D, infinity)`. Continuum primal coverage belongs entirely to BC-244.
+
+## Cold Senior Review Protocol
+
+This protocol governs the pre-release review and later cold reviews at the T+4 and T+8
+boundaries.
+
+| Audit field | Bound value |
+| --- | --- |
+| Audited input head | `ca188bd2afe317fa0fb5eb71f7986b8d4a2ef62e` |
+| Review observation UTC | `2026-09-06T10:35:23Z` |
+| Active minute | 120, held |
+| Wall authority | The wall authorization remains `2026-09-06T08:22:36Z`, with target `2026-09-06T16:22:36Z` and fixed outer deadline `2026-09-06T18:22:36Z`. The `2026-09-06T09:43:25Z` restart authorization is revoked; its replacement is pending and may authorize only a truthful partial continuation. |
+| tbd scope | Read live dependencies and terminal states at release. The coordinator alone changes edges or states; this review binds structure, not a cached status snapshot. |
+
+A cold senior review returns `GO` only when the exact reviewed candidate is integrated,
+validated, and pushed without unexplained source drift; live tbd shows every applicable
+structural prerequisite terminal; current role acknowledgements are present; the
+coordinator’s replacement authorization binds the exact pushed pre-launch head and
+partial wall envelope; and the packet preserves every claim label and epistemic ceiling.
+A later gate also requires its two manager packets and the single joint disposition
+below. Any unmet condition is `NO-GO` with a named owner and blocking finding.
+
+Each wrapper and scientific gate pair is one coordinator-owned transaction:
+
+| Boundary | Joint transaction | Immutable disposition packet |
+| --- | --- | --- |
+| T+4 | `think-vniz` and BC-220 `think-u7i4` | `packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/gate-hour-04-decision.md` |
+| T+8 | `think-u8h0` and BC-221 `think-gt06` | `packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/gate-hour-08-decision.md` |
+
+The packet names and disposes both beads with one decision.
+The coordinator commits the packet before changing either tbd state or edge; a split,
+missing, or contradictory disposition is `NO-GO`.
+
+Completing an allocated slice does not improve a candidate’s evidentiary status or earn
+`GO`. Apply the preregistered acceptance rule to the candidate actually returned.
+At a cap or the outer deadline, freeze a promising but unaccepted candidate under its
+exact current label and hand it off at the actual active minute.
+
+No new work opens until its gate packet records the input evidence and hashes, one
+owner, exclusive write scope, exact claim, acceptance and refusal rules, structural
+blocking classification and dependencies, and active-minute allocation.
+Unowned, unpriced, or unscoped work remains closed.
+
+| Boundary | Cold-review rule |
+| --- | --- |
+| Claims | Record the exact epistemic classification; schedule pressure and reviewer approval cannot promote it. |
+| Gates | One immutable decision packet jointly disposes each wrapper and scientific gate pair. |
+| Clocks | Wall, active, process, role, and agent time remain separate. Operational holds consume no active time; after `2026-09-06T10:22:36Z`, only a partial continuation through the fixed outer deadline is wall-feasible. |
+| Global closure | Every admissible non-Trump survivor must be represented, priced, and discharged before any exact integration theorem or global-optimality claim. |
+| New work | Bind evidence, owner, paths, scope, acceptance and refusal rules, blocking classification, dependencies, and active allocation before launch. |
 
 ## Coordinator Binding Required Before Launch
 
@@ -654,7 +709,11 @@ This control does not kill equality.
 Independent controls must also:
 
 - reject a wall-crossing atom by exact containment;
-- reject an interior perturbation that creates positive-area overlap;
+- in the unit-weight Trump control, reject an interior perturbation whose exact
+  full-dimensional a.e. depth exceeds one;
+- accept an exact fixture with two distinct, contained, positive-area-overlapping
+  placements of weight `1/2` each and no other atoms; its summed depth is one on the
+  overlap and `1/2` elsewhere on full-dimensional cells;
 - reject a rational weight mutation that makes one full-dimensional arrangement cell
   overweight;
 - reject a negative weight and any malformed or non-exact weight;

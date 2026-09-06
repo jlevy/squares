@@ -168,12 +168,15 @@ agenda:
     budget: >-
       180 active minutes, manager with one exact runner, research-loop then
       factual-review. Build only BC-242's exact a.e.-depth arrangement verifier in this
-      cell. Recover the eleven-atom Trump control at D=11; perturb wall and interior
-      atoms; reject overweight full-dimensional arrangement cells; and verify exact
-      containment. A finite placement family with certified almost-everywhere depth
-      gives the one-sided lower bound [D,infinity). Any sound D>11 kills the
-      mass-eleven equality route. A sampled primal has no upper-bound semantics and a
-      continuum primal-coverage guard is deliberately deferred to BC-244.
+      cell. Recover the eleven-atom, unit-weight Trump control at D=11. Reject its
+      interior perturbation only when exact full-dimensional a.e. depth exceeds one;
+      accept two distinct, contained, positive-area-overlapping placements of weight
+      1/2 each and no other atoms, whose summed full-dimensional depth is at most one;
+      reject overweight cells; and verify exact containment. A finite placement family
+      with certified almost-everywhere depth gives the one-sided lower bound
+      [D,infinity). Any sound D>11 kills the mass-eleven equality route. A sampled
+      primal has no upper-bound semantics and a continuum primal-coverage guard is
+      deliberately deferred to BC-244.
     entry: >-
       BC-242's theorem and finite object are committed and a coordinator gate approves
       its exact controls.
@@ -436,8 +439,13 @@ scheduling statement.
 For post-T+2 scheduling, this reviewed agenda and the continuation addendum supersede
 only that combined dependency: BC-243 requires the exact a.e.-depth verifier, while
 BC-244 owns the continuum primal-coverage guard.
+The continuation contract also narrows the author packet’s generic interior-overlap
+control. BC-243 rejects the perturbed unit-weight Trump fixture only when its exact
+full-dimensional a.e. depth exceeds one; geometric overlap alone is not a rejection
+condition for a weighted dual.
 The frozen weak-duality proof and every limitation on strong duality, attainment,
-singular primals, numerical endpoints, and primal semantics remain authoritative.
+singular primals, numerical endpoints, and primal semantics remain unchanged as frozen
+evidence.
 
 ## Manager Entry Point
 
@@ -713,6 +721,15 @@ It is therefore the wrong verifier for this dual and must not be weakened or rel
 A new a.e.-depth verifier must inspect full-dimensional cells of the exact boundary
 arrangement and ignore only a proved measure-zero union of boundaries.
 
+BC-243 must run two distinct overlap controls.
+The unit-weight Trump mutation perturbs one interior atom so that exact full-dimensional
+a.e. depth exceeds one and must be rejected.
+A weighted-overlap fixture whose overlapping placements carry positive rational weights
+must be accepted when its summed exact depth is at most one on every full-dimensional
+cell. Use two distinct, contained, positive-area-overlapping placements of weight `1/2`
+each and no other atoms: their depth is one on the overlap and `1/2` elsewhere.
+This distinction tests weighted depth rather than geometric intersection.
+
 The following directions are mandatory:
 
 - A finite exact placement family with a certified a.e. depth bound is dual-feasible and
@@ -969,7 +986,7 @@ oracle. Passing all three does not make an absent typed-backbone producer ready.
 | --- | --- | --- |
 | BC-240 theorem packet | The frozen hashes, exact witness, tangent replay, and all focused tests pass; every statement stays in the anchored fixed-side chart | Any unexplained drift, replay mismatch, unresolved branch, skipped test, or claim of global capture or full radius replay |
 | BC-242 proof draft | The placement space, measure class, a.e. boundary convention, weak-duality inequality, wall strata, and finite approximation directions are explicit | Any use of sampled primal coverage as an upper bound, singular mass without its own boundary theorem, or complementary slackness before primal and dual semantics are proved |
-| BC-243 dual-only pilot | A new exact a.e.-depth verifier has the Trump D=11 control and every declared mutation, and BC-242 has passed review | The current tree has no a.e.-depth verifier, so no numerical dual pilot may start; absence of the BC-244 continuum primal guard is not a blocker |
+| BC-243 dual-only pilot | A new exact a.e.-depth verifier has the unit-weight Trump D=11 control, rejects its exact depth-greater-than-one interior mutation, accepts the feasible positive weighted-overlap control, passes every other declared mutation, and BC-242 has passed review | The current tree has no a.e.-depth verifier, so no numerical dual pilot may start; absence of the BC-244 continuum primal guard is not a blocker |
 | BC-245 language draft | The finite chart atlas, feature owners, wall identities, active and positive-support rows, zero multipliers, rattlers, ties, and normal/KKT and abnormal Fritz–John cases all appear in the completeness statement | A planar centre graph, one distance equation per contact, an assumed constraint qualification, or deletion of zero-multiplier and rattler variables |
 | BC-246 and BC-247 execution | A typed producer emits every declared field, an independent replay consumes each field, and BC-245 has passed review; n=3 and n=4 remain completeness controls and n=5 remains a positive local control | The current tree: the producer and replay guard are absent. Existing contact checks cannot be relabelled as stationary-backbone execution |
 
@@ -984,9 +1001,10 @@ following:
   mutations, and a list of unreviewed generator obligations;
 - BC-242: weak-duality proof, a.e. boundary convention, singular-mass refusal or
   theorem, finite approximation directions, and wall stationarity;
-- BC-243: exact lower-bound depth, the Trump D=11 control, containment and arrangement
-  mutations, and a one-sided interval; BC-244 separately owns continuum certification
-  for every claimed upper bound;
+- BC-243: exact lower-bound depth, the unit-weight Trump D=11 control, rejection of its
+  depth-greater-than-one mutation, acceptance of the feasible positive weighted-overlap
+  control, containment and arrangement mutations, and a one-sided interval; BC-244
+  separately owns continuum certification for every claimed upper bound;
 - BC-245: finite branch-language lemma, FJ normalization, abnormal cases, ties, zero
   multipliers, rattlers, charts, symmetry action, and certificate types;
 - BC-246 and BC-247: Trump recovery, complete n=3/n=4 recovery, positive n=5 recovery, a
