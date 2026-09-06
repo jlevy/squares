@@ -177,6 +177,90 @@ def test_depths_above_finds_exactly_the_overlap_vertices_at_depth_two() -> None:
     assert all(depth == 2 for depth, _, _ in deep)
 
 
+def test_large_coordinate_separation_preserves_the_exact_intermediate_depth() -> None:
+    side, n = Fraction(10000000010), 2 * 10**21
+    square = Placement(
+        Fraction(1, 5), Fraction(10**10), Fraction(70000000004, 7), Fraction(n, 2), Fraction(1)
+    )
+    net = tuple(LIMIT * k / 180 for k in range(181))
+    certificate = CeilingCertificate(n, side, B, net, (square, square))
+    lines = arrangement_lines(certificate)
+    vertices = container_vertices(certificate, lines)
+    deep, worst, _ = depths_above(certificate, vertices)
+    assert worst == n
+    assert deep
+    assert all(value == n for value, _, _ in deep)
+    held = site_set_from_points(side, {(Fraction(0), Fraction(0))})
+    separated = screened_separation(certificate, lines, held, cap=1, select_above=Fraction(1))
+    assert separated.max_depth == n
+    assert separated.chosen[0][0] == n
+
+
+def test_a_vertex_barely_above_the_selection_floor_still_becomes_a_site() -> None:
+    """Two unit squares overlap with depth exactly 2; a floor one attoparticle
+    below it must not lose the overlap to float rounding of the comparison."""
+    side = Fraction(4)
+    family = (
+        upright(Fraction(3, 2), Fraction(3, 2), Fraction(1), Fraction(1)),
+        upright(Fraction(2), Fraction(2), Fraction(1), Fraction(1)),
+    )
+    certificate = CeilingCertificate(2, side, Fraction(1), COARSE, family)
+    lines = arrangement_lines(certificate)
+    held = site_set_from_points(side, {(Fraction(0), Fraction(0))})
+    floor = Fraction(2) - Fraction(1, 10**18)
+    separated = screened_separation(certificate, lines, held, cap=4, select_above=floor)
+    assert separated.max_depth == 2
+    assert separated.chosen
+    assert all(depth == 2 for depth, _ in separated.chosen)
+    assert separated.violating >= len(separated.chosen)
+
+
+def test_float_identical_vertices_cannot_erase_a_thin_overlap() -> None:
+    """The zero-weight square contributes an earlier edge rounded onto the overlap.
+
+    Its right edge lies strictly left of the overlap. Merging float-identical
+    intersections retained only that edge and lost both actual overlap edges.
+    """
+    epsilon = Fraction(1, 10**20)
+    family = (
+        upright(Fraction(3, 2) - 2 * epsilon, Fraction(3, 2), Fraction(0), Fraction(1)),
+        upright(Fraction(5, 2) - epsilon, Fraction(3, 2), Fraction(1), Fraction(1)),
+        upright(Fraction(3, 2) + epsilon, Fraction(3, 2), Fraction(1), Fraction(1)),
+    )
+    side = Fraction(4)
+    certificate = CeilingCertificate(2, side, Fraction(1), COARSE, family)
+    lines = arrangement_lines(certificate)
+    held = site_set_from_points(side, {(Fraction(0), Fraction(0))})
+    separated = screened_separation(certificate, lines, held, cap=0, select_above=Fraction(1))
+    assert (
+        separated.max_depth
+        == maximum_depth(certificate, container_vertices(certificate, lines))[0]
+    )
+    assert separated.max_depth == 2
+
+
+def test_exact_fallback_and_thresholds_do_not_require_binary64_coordinates() -> None:
+    for coordinate in (Fraction(1), Fraction(10**400)):
+        side = coordinate + 1
+        square = upright(coordinate, coordinate, Fraction(1, 4))
+        certificate = CeilingCertificate(1, side, B, COARSE, (square,))
+        lines = arrangement_lines(certificate)
+        vertices = container_vertices(certificate, lines)
+        deep, worst, _ = depths_above(certificate, vertices, Fraction(10**400))
+        assert deep == []
+        assert worst == Fraction(1, 4)
+        separated = screened_separation(
+            certificate, lines, SiteSet(side, ()), cap=1, select_above=Fraction(1, 8)
+        )
+        assert separated.max_depth == Fraction(1, 4)
+        assert separated.chosen[0][0] == Fraction(1, 4)
+        above = screened_separation(
+            certificate, lines, SiteSet(side, ()), cap=1, select_above=Fraction(10**400)
+        )
+        assert above.max_depth == Fraction(1, 4)
+        assert above.chosen == []
+
+
 def test_select_site_orbits_groups_vertices_into_new_d4_orbits() -> None:
     deep = [
         (Fraction(2), Fraction(1, 2), Fraction(1, 2)),

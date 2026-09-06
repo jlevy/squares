@@ -306,6 +306,7 @@ case or experiment separately.
 | [Independent Review of the T-022 Exact-Containment Limit](docs/project/reviews/review-2026-09-06-t022-dilation-limit.md) | dated review record | record | retained | — |
 | [Independent Review of the Fixed-Weight Core-Shrink Obstruction](docs/project/reviews/review-2026-09-06-core-shrink-obstruction.md) | dated review record | record | retained | — |
 | [Research: Adversarial Review of the s(11) ≥ 381/100 Explainer](docs/project/reviews/review-2026-09-06-claude-code-adversarial-review.md) | dated review record | record | retained | — |
+| [Published Core Claims: Adversarial Review and Corrections](docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
 | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |
@@ -3341,24 +3342,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 472 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 478 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 94 | asserted something false about the mathematics |
-| validity | 118 | was correct, but the measurement did not bear on the question |
+| soundness | 97 | asserted something false about the mathematics |
+| validity | 121 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 182 | recorded something its own evidence contradicts |
 | robustness | 60 | did not finish, or finished only by luck |
 | performance | 18 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Seventy-four of the ninety-four soundness defects pointed in the *flattering*
+**Seventy-seven of the ninety-seven soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy-two defects in 472, and no soundness defect
+**The automated gate has caught seventy-two defects in 478, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3379,7 +3380,13 @@ whose merge ref GitHub cannot synthesize receives no pull-request workflow run.
 The push-triggered `git merge-tree` guard now detects that state after every branch
 push; an idle branch can still become conflicted when `main` moves underneath it.
 
-The generated log currently has 66 open entries: 40 `outstanding` and 26 `contained`.
+**[D-478](defects.md) records a missing witness for BC-206’s reported cutting floor.**
+The value near `10.845594` at side `3.97` survives only in a text log.
+Its generating family is unavailable for replay after the cutting-screen repairs, so it
+is qualified as an unreplayed historical report.
+`think-aenh` owns recovery or recomputation with a retained exact witness.
+
+The generated log currently has 68 open entries: 41 `outstanding` and 27 `contained`.
 The W9 candidate `think-cyko` owns their systematic risk ordering and bounded repair
 waves; the synopsis names the cases that matter to current claims rather than pretending
 the examples below are the whole backlog.
@@ -3663,7 +3670,7 @@ It is contained rather than fixed — such delegations are recorded on completio
 `read_only` flag is better than permitting an empty list that would be ambiguous between
 “writes nothing” and “nobody filled this in”.
 
-108 fixes left no regression check behind.
+111 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
 and exit survived, but invalid `gdate` precision left the start and end fields empty, so
 [D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.
@@ -3917,13 +3924,15 @@ side. 18 values have been reported for the restricted program, at sides `3.82`, 
 `4.825`, `4.85`, `4.865`, `4.875`, `4.895` and `4.985` — the first eight reports, not
 measurements this repository can reproduce, since no covering-search run log or solver
 checkpoint was retained for any of them; the ten added on 2026-09-05 by Agenda 021’s
-`BC-200` and `BC-197` and Agenda 022’s `BC-213` and `BC-206` carry their logs, their
-resumable state and, where one exists, the frozen certificate the value belongs to.
+`BC-200` and `BC-197` and Agenda 022’s `BC-213` and `BC-206` carry run logs; retained
+checkpoint and frozen-certificate availability differs by row.
 Several sides are reported more than once from site sets built differently, which is the
 point of reporting them that way: at `4.85` the difference is between a wall and the
 certificate `T-021` rests on, at `4.865` it is two independent walls, and at `3.97` it
 is a converged grid optimum of `12.364038` above a cutting-plane row LP of `12.248227`
-with an exact floor of `10.845594` beneath it.
+with a historical reported floor of `10.845594`. That floor cannot currently be replayed
+because its generating family and state are missing; [D-478](defects.md) records the
+evidence gap.
 
 The middle tier is built and works within the explicit boundaries above.
 Two instruments now agree on the cell decomposition to `4.4e-16` and on the corner’s
