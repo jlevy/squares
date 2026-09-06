@@ -231,6 +231,12 @@ X-013’s and X-014’s did not).
 | 81 | Run the existing generator at `n = 13`, side `399/100`, as a zero-build calibration of the grid-frontier program against a case Bentz closed by hand | shaped |  | [X-015](explorations/X-015-the-map-and-the-three-programs.md) | The extrapolated covering value at the ceiling is about `12.06`–`12.24 < 13`, so one unconditional certificate may reach within `0.0092` of `s(13) = 4`; a converged optimum at or above `13` says the endgame at `m = 4` is a tree |
 | 82 | The `B = 1` route: closed-square covering with open-box counting at an integer side, certified over the direction continuum by angle-interval branch and bound, first at `n = 13` (side `4`) and then `n = 21` (side `5`) | shaped |  | [X-015](explorations/X-015-the-map-and-the-three-programs.md); X-014 §"`n = 12` Is a Different Proof"; BC-193 | The only route past the ceiling `⌈√n⌉/(1 + D)`: a quarter-turn net alone buys nothing at `B = 1`, so the instrument needs Condition 5 at every angle; Bentz’s `s(46) = 7` is one such certificate at side exactly `7`, already audited here |
 
+## Registered by X-016 and Agenda 025, 2026-09-05
+
+| # | Idea | Status | H | From | Why it might work, or not |
+| --- | --- | --- | --- | --- | --- |
+| 83 | Use Massaccesi-style inset margins only to propose an `n = 11` fractional seed, then release the support and compare it with an equal-budget unrestricted control | registered | [H-070](hypotheses/H-070-n11-inset-seed-release.md) | [X-016](explorations/X-016-after-381-two-managers-one-proof-boundary.md) and agenda-025 BC-233 | A seed clustered away from walls may reach a better column set sooner, but the claim fails on equal or larger exact mass and remains unresolved on unmatched stopping states; it proves neither that walls are irrelevant nor that the inset grid is unavoidable |
+
 ## Open questions
 
 Not claims, so they cannot be hypotheses.

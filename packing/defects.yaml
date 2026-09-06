@@ -15396,10 +15396,11 @@ defects:
     `.github/workflows/deep-gate.yml` runs the four deferrals -- the exhaustive tier, the
     negative controls, the n = 40 bracket and the slow behavioural lane -- against a pull
     request rather than after it, in two jobs so that D-456's timeout cannot swallow the
-    other three verdicts. It is on this branch and not on main as this is written, and it
-    is asked for by a label rather than run on every pull request, so a branch that does
-    not ask still merges on the same evidence this one did. Until it is required, the
-    guard is the post-merge exhaustive job, which does catch this class -- six hours late.
+    other three verdicts. PR 93 landed it on main as 3122c497. It is requested by a
+    label rather than run on every pull request, so a branch that does not ask still
+    merges on the same evidence this one did. Until it is required, the guard is the
+    post-merge exhaustive job, which does catch this class -- six hours late in this
+    instance.
   regression: >-
     The exhaustive exact tier itself, which is what caught this one and will catch the
     next one at the same distance. No check added here fires earlier, and the two that
@@ -15449,10 +15450,9 @@ defects:
     control that fails when the day gets busy, and the day it is most needed -- several
     branches, a moving main -- is exactly the busy one.
   fix: >-
-    Not on main as this is written, which is why the status is outstanding. Each of the
-    three occurrences was ended the way D-459's was, by merging the base into the branch,
-    and CI created a run on the next push every time.
-    The durable half now exists on this branch as
+    Each of the three occurrences was ended the way D-459's was, by merging the base
+    into the branch, and CI created a run on the next push every time. The durable repair
+    landed on main in PR 93 as 3122c497:
     `.github/workflows/branch-mergeability.yml`, and its shape is the whole design: it
     triggers on `push` rather than on `pull_request`, because the defect *is* that no
     pull-request run exists, so a pull-request-triggered check would be silent in exactly
@@ -15463,13 +15463,12 @@ defects:
     view of a pull request -- because `git merge-tree` is local and answers the same
     question with no external service in the dependency graph.
   regression: >-
-    The workflow above, which is the first thing that detects this class at all; what
-    keeps this entry open is that it has not reached main. One residue is worth stating
-    rather than discovering: it answers about the base the runner fetched, so a base that
-    advances after the check still produces the blackout. That narrows the window from
-    open-ended to one fetch, which is the same residue the commit-clock anchor carries in
-    D-468, and it is a fact to read the check with rather than a reason not to have it.
+    The workflow above, which is the first automated check that detects this class.
+    One residue is worth stating rather than discovering: it answers about the base the
+    runner fetched, so a base that advances after the check still produces the blackout
+    until the branch's next push. That narrows the window from open-ended to one push,
+    and it is why the defect is contained rather than fixed.
   recurrence_of: D-459
-  status: outstanding
+  status: contained
   bead: think-706h
   recorded_in: .github/workflows/branch-mergeability.yml

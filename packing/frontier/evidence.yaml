@@ -1250,7 +1250,7 @@ evidence:
         historical 77/20 rung and its 19/5 calibration certificate.
     source_key: "[T-017]"
     certificate: cases/n12_fractional_certificate/certificate-77-20.json
-    replay: uv run --frozen --all-extras python cases/n12_fractional_certificate/independent_verify.py cases/n12_fractional_certificate/certificate-77-20.json
+    replay: uv run --frozen --all-extras python cases/n12_fractional_certificate/replay_independent.py cases/n12_fractional_certificate/certificate-77-20.json
     replay_status: passed
     limitations: >-
       A second exact decision of the same five conditions at the historical 19/5 and

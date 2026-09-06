@@ -80,7 +80,10 @@ jobs:
         # answer -- and the third is reported as a failure too, because "the check could
         # not tell" must not read the same as "the branch is fine".
         run: |
-          set -uo pipefail
+          # Fail closed if the fetch or ref resolution fails. Without `-e`, a failed
+          # fetch can fall through to a stale remote-tracking ref and report a clean
+          # merge against the wrong base.
+          set -euo pipefail
           report="${RUNNER_TEMP:-/tmp}/merge-tree.out"
           # An explicit refspec rather than `git fetch origin main`: whether a bare
           # fetch also updates `refs/remotes/origin/main` depends on the refspec

@@ -268,6 +268,10 @@ def test_the_conflict_check_runs_on_an_event_that_fires_for_an_unmergeable_branc
 
     steps = [step for job in document["jobs"].values() for step in job["steps"]]
     commands = "\n".join(str(step.get("run", "")) for step in steps)
+    # A missing `-e` lets a failed fetch fall through to a stale origin/main and can
+    # turn an unknown answer into a false green. The workflow must fail closed before
+    # asking merge-tree anything.
+    assert "set -euo pipefail" in commands
     assert "git merge-tree --write-tree HEAD origin/main" in commands
     assert "exit 1" in commands
 

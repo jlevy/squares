@@ -286,17 +286,17 @@ these that merge settled and which stand.
 | **agenda-019 cost figures corrected** (a third paired point; contention noted; 13,000 s figure retracted) | F33’s complaint about the two-point exponents is partly addressed; what remains is the two comparison factors above. |
 | **The reach table gained the attainment ratio and a predicted-gain ranking** | F26’s evidence-status column has to be re-applied on the new renderer. |
 | **Agenda-017 closed (W10), agenda-020, session-085, the cold-start handoff** now select `BC-191`/`think-ji0r` | The stack’s agenda-019 edits (+65/−48) predate the handoff section and the BC-190 re-basing. |
-| **The certificate conditions are being renamed** on both branches from `C0`–`C4` to Condition 1–Condition 5 | Aligned at `04127189`: the stack’s `results.yaml` spells the obligations Condition 1–5 and keeps `C0`–`C5` for the rungs, as in the table below. |
+| **The certificate conditions are being renamed** on both branches from the former letter-C condition labels to Condition 1–Condition 5 | Aligned at `04127189`: the stack’s `results.yaml` spells the obligations Condition 1–5 and keeps `C0`–`C5` for the confirmation rungs, as in the table below. |
 
 The condition rename, so that the two branches align:
 
-| Old certificate condition | New name | Meaning |
+| Former certificate condition | New name | Meaning |
 | --- | --- | --- |
-| `C0` | Condition 1 | the atom multiset is closed under the container’s D4 symmetry |
-| `C1` | Condition 2 | total mass strictly below n |
-| `C2` | Condition 3 | the direction net reaches π/4 |
-| `C3` | Condition 4 | containment, `B(1 + D) < 1` |
-| `C4` | Condition 5 | every closed B-square at every net direction covers mass ≥ 1 |
+| symmetry condition | Condition 1 | the atom multiset is closed under the container’s D4 symmetry |
+| mass condition | Condition 2 | total mass strictly below n |
+| direction-net condition | Condition 3 | the direction net reaches π/4 |
+| containment condition | Condition 4 | containment, `B(1 + D) < 1` |
+| coverage condition | Condition 5 | every closed B-square at every net direction covers mass ≥ 1 |
 
 `C0`–`C5` then mean only the confirmation rungs of `epistemics.md`. F1’s new
 nonnegativity requirement is best written as part of Condition 2’s statement (the
