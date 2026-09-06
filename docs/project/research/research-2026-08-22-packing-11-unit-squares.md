@@ -1,11 +1,11 @@
 # Research: Packing 11 Unit Squares in a Square
 
-**Date:** 2026-08-22 (last updated 2026-08-25)
+**Date:** 2026-08-22 (last updated 2026-09-05)
 
 **Author:** Claude (agent), for mailto:samanthadrakova@gmail.com
 
-**Status:** Complete as of 2026-08-25, with a dated addendum below for what this project
-established afterwards
+**Status:** The literature report is preserved as of 2026-08-25; the dated project
+summary and addenda record results through the 2026-09-05 refresh
 
 ## How to read the citations
 
@@ -28,10 +28,49 @@ Where a claim rests on a source that could **not** be retrieved, it is marked
 **[secondary]** and the obstacle is recorded in the resources README. Those claims are
 the weakest in this document and are flagged again in [Open Questions](#open-questions).
 
-## Overview
+## Current Summary at the 2026-09-05 Refresh
 
-This document records everything that could be established about the problem of packing
-11 unit squares into the smallest possible enclosing square.
+At the 2026-09-05 refresh captured here, the T-018 certificate baseline gives the
+certified interval `[3.81,3.877084]`, of width `0.067084`. The lower endpoint is the
+project’s verified `s(11) >= 381/100` result
+([T-018](../../../packing/frontier/RESULTS.md)); the upper endpoint remains Trump’s 1979
+packing.
+
+The lower-bound improvement remains `apparently-novel` in the repository’s scoped sense.
+The
+[frozen 2026-09-05 literature refresh](../../../packing/resources/web/literature-refresh-2026-09-05/README.md)
+and the
+[case-specific search receipt](../../../packing/resources/web/s11-lower-bound-literature-audit-2026/README.md)
+located no earlier public lower bound above Stromquist’s `2 + 4/sqrt(5)`. This is a
+statement about the searched public record, not a claim of absolute priority; the
+receipt lists the unsearched and inaccessible sources.
+
+## Literature Refresh Addendum (2026-09-05)
+
+The bounded
+[frozen refresh](../../../packing/resources/web/literature-refresh-2026-09-05/README.md)
+found no earlier public `n = 11` lower bound above Stromquist’s value.
+It also added two sources that do not change the project’s lower-bound frontier:
+
+- Brandwijk’s externally published exact capsule states `s(17) > 89/20 = 4.45`, below
+  T-019’s `459/100 = 4.59`, so it does not move `n = 17` through `19`. The refresh
+  matched the retained hashes, built the vendored checker, ran its 55 tests, and ran the
+  fast checksum check.
+  It did not complete the 60,393,653-node replay locally; the full-replay result remains
+  source-reported.
+- De Winter’s mutable report proposes upper-bound constructions for `n = 68`, `126`, and
+  `206`. The coordinates were unavailable and the geometry was not replayed.
+  Those proposed constructions are irrelevant to lower-bound novelty at `n = 17` through
+  `21`.
+
+These findings do not change T-018 or T-019’s `apparently-novel` status.
+That label describes the bounded public search and its retained receipts, not absolute
+priority.
+
+## Historical Overview (2026-08-25)
+
+The original report recorded what could be established by 2026-08-25 about packing 11
+unit squares into the smallest possible enclosing square.
 It is written to support *full technical understanding* of the problem and its
 literature, not to introduce the topic pedagogically.
 Claims are separated by assurance: reported, numerically checked, or formally verified.
@@ -42,7 +81,7 @@ easily-stated geometry problem that remains **unsolved** after nearly fifty year
 The best known packing dates from 1979 and has never been improved; the lower-bound
 value was published in 2003. This audit found a gap in its printed proof, preregistered
 a one-coordinate repair, and then certified that repair exactly in exp-017. A gap of
-roughly 0.088 in the side length separates them.
+roughly 0.088 in the side length separated them at that date.
 Understanding precisely *where* that gap comes from — and why the available proof
 technique cannot close it — is the substance of this document.
 
@@ -61,13 +100,13 @@ research, state that Stromquist’s 2003 paper *proved* Walter Trump’s 11-squa
 optimal. That is false, and the error is consequential enough to be worth stating
 precisely. See [Corrections to Common Summaries](#corrections-to-common-summaries).
 
-## What This Project Established at `n = 11` After This Report
+## Historical Addendum: Project Results as of 2026-08-30
 
-**Added 2026-08-30.** Everything above this section states what was known on 2026-08-25
-and is left as written.
-The results below postdate it and are the project’s own; they do not alter the
-literature findings above, and none of them moves `s(11)`, which remains open with the
-same gap.
+**Added 2026-08-30.** This section preserves the project state on that date.
+The results below postdated the original report and were the project’s own; at that date
+none moved `s(11)`, which remained open with the original report’s gap.
+The [current summary](#current-summary-at-the-2026-09-05-refresh) records the later
+lower-bound improvement.
 
 **The exact route now closes end to end, and the difference is exactly zero.**
 `discharge` stops at the side, which is a claim about a *number*. The round trip carries
@@ -98,12 +137,20 @@ This matters at `n = 29`, where no float solver produces a feasible vertex to be
 from; `n = 11` is the case where the answer is known and the method could therefore be
 checked.
 
-**What has not changed.** `s(11)` is unsolved.
-The upper bound is still Trump’s 1979 packing, the lower bound still `2 + 4/√5`, and
-roughly `0.088` still separates them.
+**What had not changed by 2026-08-30.** `s(11)` was still unsolved.
+The upper bound was Trump’s 1979 packing, the lower bound was still `2 + 4/√5`, and
+roughly `0.088` still separated them.
 The [synopsis](../../../SYNOPSIS.md#what-is-built) carries the current state of every
 capability named here; this section records only which of this report’s open items the
 project has since answered for itself.
+
+## Historical Report Body (2026-08-25)
+
+The report body below preserves the literature and project state audited on 2026-08-25.
+In particular, its `[3.788854, 3.877084]` intervals and `0.088230` gaps are historical,
+not the current project frontier.
+See the [current summary](#current-summary-at-the-2026-09-05-refresh) for the
+post-report interval.
 
 ## Questions to Answer
 
@@ -159,7 +206,7 @@ interiors. Two elementary bounds hold for all `n`:
 For `n = 11` these give `3.31662… ≤ s(11) ≤ 4`. Both are far from tight.
 The entire difficulty of the problem lies between them.
 
-### The state of knowledge for n = 11
+### The State of Knowledge for n = 11 on 2026-08-25
 
 | Quantity | Value | Status | Source |
 | --- | --- | --- | --- |
@@ -608,7 +655,7 @@ fraction). They give `4 ≤ n₂ ≤ 43`, and by the same ideas `n₃ ≤ 239`, 
 `n_r ≪ r^{11/4}`. They also show `δ₈ < 0.536`, `δ₄₂ < 0.507` and `δ₄₃ < 1/2`, and remark
 that improving either bound “represents an interesting challenge”.
 
-### The landscape of solved cases
+### The Landscape of Solved Cases in the Historical Report
 
 Exact values of `s(n)` known as of this research:
 
@@ -773,6 +820,9 @@ sources, plus Nagamochi’s family stated in general form, is the safe reading; 
 enumeration rather than a mathematical subtlety.
 
 ### The open frontier: what is actually unknown
+
+This section preserves the 2026-08-25 frontier snapshot; the generated table below is
+historical rather than a current inventory.
 
 The solved cases above are the exceptions.
 This table is the complement — **every open `n ≤ 100`** — and it is the spine of any
@@ -1659,14 +1709,14 @@ These are frequently conflated with the present problem in casual sources:
 - **Packing unit squares in a circle, triangle, or rectangle** — related technique
   (unavoidable points), different constants.
 
-## Key Insights
+## Historical Key Insights
 
-1. **The problem is open, and the gap is structural, not incidental.** The current
-   certified interval is `[3.788854, 3.877084]`. D-152 leaves the published lower-bound
-   proof false as printed; exp-017 independently certifies the lower value with H-041’s
-   source-distinct repair.
-   The numerical endpoints themselves have stood unimproved for over two decades (lower)
-   and nearly five (upper).
+1. **The problem was open, and the gap was structural, not incidental.** As of
+   2026-08-25, the certified interval was `[3.788854, 3.877084]`. D-152 left the
+   published lower-bound proof false as printed; exp-017 independently certified the
+   lower value with H-041’s source-distinct repair.
+   At that date, the numerical endpoints had stood unimproved for over two decades
+   (lower) and nearly five (upper).
 
 2. **Gardner’s conjecture was settled without solving the problem.** Stromquist proved
    the *necessity* of oblique tilts by bounding the 0°/45° class from below at
@@ -2049,8 +2099,9 @@ impossible constants.
   `P(3.87708359002281) ≈ −6.4 × 10⁻¹³`, consistent to available precision.
 - Factored the polynomial symbolically (SymPy): **irreducible over ℚ**, with exactly two
   real roots, the positive one being `3.877083590022814`.
-- Computed the open interval width: `0.088229208022982…` (re-derived at 50-digit
-  precision; an earlier draft quoted a float64 value correct only to ~12 digits).
+- Computed the 2026-08-25 open interval width: `0.088229208022982…` (re-derived at
+  50-digit precision; an earlier draft quoted a float64 value correct only to ~12
+  digits).
 
 **Sources that could not be retrieved.** Several primaries remain unavailable through
 the routes checked, including the Chung–Graham papers, Arslanov–Bui (2025), the BSST

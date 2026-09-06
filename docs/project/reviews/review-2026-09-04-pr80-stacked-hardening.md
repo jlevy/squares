@@ -17,6 +17,19 @@ tests, one over the records and prose — and their findings are folded in below
 attribution. Every figure here was read from the diff or the artifact, not from PR #80’s
 description.
 
+## Correction Added 2026-09-06
+
+Two implementation details in the dated review body are now historical.
+`t-018-proof.md` was retired; the maintained reader paths are the
+[`t-018-proof-card.md`](../../../packing/cases/n11_fractional_certificate/t-018-proof-card.md)
+and the
+[`t-018-verifiable-claim-381-100.md`](../../../packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md).
+The body’s 346-line count for `minimal_verify.py` describes the reviewed revision; after
+subsequent certificate hardening, the maintained checker is 329 physical lines.
+The body’s later shorthand references to “the proof note” likewise mean the retired
+`t-018-proof.md`, not either maintained reader document.
+The dated body remains otherwise unchanged as evidence of what the review assessed.
+
 ## Verdict
 
 **Merge the substance, not the stack.** PR #80 finds one real gap in the parent’s
