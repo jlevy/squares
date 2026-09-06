@@ -1,8 +1,54 @@
 # Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10
 
-Status: **launch authorization suspended; active research remains held until the
-pre-release umbrella gate is terminal and the coordinator binds a replacement
-authorization to the exact validated, pushed pre-launch head.**
+Status: **recovering the credit interruption; completed computations and interrupted
+reviews are being checkpointed before the next research slice.**
+
+## Current Recovery Boundary
+
+The user explicitly directed that the credit interruption not count against the wall
+allowance. This instruction supersedes the fixed wall deadlines below for current
+execution; their timestamps remain historical receipts.
+The last observed coordinator check before the interruption was `2026-09-06T11:50:09Z`,
+and the first recovered observation was `2026-09-06T16:07:05Z`. The exact credit-failure
+onset was not retained, so these observations define a conservative accounting pause of
+4 hours 16 minutes 56 seconds.
+They do not establish the exact outage duration.
+
+The credited shared clock stands at active minute **124:14**: the first continuation
+segment contributed 1 minute 44 seconds, and the recovered process launch at `11:47:39Z`
+through the last observation at `11:50:09Z` contributed 2 minutes 30 seconds.
+Recovery and integration currently hold that clock.
+Parallel computation during the interruption has its own measured process cost and does
+not establish agent attention or advance the shared agenda clock.
+
+Adding the excluded interval to the historical wall boundaries moves the eight-hour
+target to `2026-09-06T20:39:32Z` and the ten-hour outer boundary to
+`2026-09-06T22:39:32Z`. A further credit interruption must receive its own explicit
+accounting entry. Neither boundary promises completion at active minute 600.
+
+`think-3ir7` owns the recovery transaction from pushed commit
+`9a93b2ea0b34701304e311aa080ddd31d3c70e88`:
+
+- BC-232 produced all four files on the `bc-232-leg-02-recovery-01` stem.
+  Its five iterations produced no row-converged covering, and no exactification is
+  released. The recorded driver wall is 7,278.912243166007 seconds before summary
+  serialization. Thus `--minutes 101` was a cooperative deadline, not the hard cap
+  claimed in the historical recovery receipt.
+  The new fractional gate packet must report the overrun and price any remaining process
+  allocation before another launch.
+- BC-241 retains its successful single tangent replay.
+  The interrupted reviewer may finish its checker, controls, and review packet; the
+  closure manager then supplies the mathematical disposition at the existing local
+  scope.
+- H-090 and H-091 remain in the isolated transport ending at `96ff4751` until their
+  independent review and integration finish.
+  A further refined-containment test requires its own prospective registration.
+
+The T+4 gate has not been reached.
+Successor searches and the BC-243 pilot remain subject to the coordinator gate below.
+Existing release prerequisites stay closed; the credit outage does not require repeating
+scientific evidence or the entire launch audit.
+Resume from the accepted packets after checking the affected changes.
 
 Continue Agenda 024 from active portfolio minute 120 through minute 600 under this
 addendum. It reconciles the two post-T+2 readiness audits and controls execution through
