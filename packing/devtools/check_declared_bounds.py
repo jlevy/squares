@@ -169,12 +169,22 @@ def _literal_parts(node: ast.AST) -> Iterator[str]:
             yield child.value
 
 
+def _message_parts(node: ast.AST) -> Iterator[str]:
+    """Rendered literal text, excluding expressions inside f-string fields."""
+    if isinstance(node, ast.Constant) and isinstance(node.value, str):
+        yield node.value
+    elif isinstance(node, ast.JoinedStr):
+        for part in node.values:
+            if isinstance(part, ast.Constant) and isinstance(part.value, str):
+                yield part.value
+
+
 def _guard_messages(tree: ast.Module, name: str) -> tuple[str, ...]:
     """Messages raised by `if` branches whose condition reads the named constant.
 
     A message assigned immediately before its raise is as explicit as an inline
-    literal. Only that adjacent assignment is resolved, so a same-named variable in
-    another branch cannot supply the message by accident.
+    literal. Only that adjacent assignment passed directly to the exception is resolved,
+    so another branch or a string used as a lookup key cannot supply the message.
     """
     messages: list[str] = []
     for node in ast.walk(tree):
@@ -186,23 +196,24 @@ def _guard_messages(tree: ast.Module, name: str) -> tuple[str, ...]:
         if not reads:
             continue
         for statement in ast.walk(node):
-            if isinstance(statement, ast.Raise) and statement.exc is not None:
-                messages.extend(_literal_parts(statement.exc))
+            if isinstance(statement, ast.Raise) and isinstance(statement.exc, ast.Call):
+                for argument in statement.exc.args:
+                    messages.extend(_message_parts(argument))
         for assignment, statement in pairwise(node.body):
             if not (
                 isinstance(assignment, ast.Assign)
                 and len(assignment.targets) == 1
                 and isinstance(assignment.targets[0], ast.Name)
                 and isinstance(statement, ast.Raise)
-                and statement.exc is not None
+                and isinstance(statement.exc, ast.Call)
             ):
                 continue
             variable = assignment.targets[0].id
             if any(
-                isinstance(inner, ast.Name) and inner.id == variable
-                for inner in ast.walk(statement.exc)
+                isinstance(argument, ast.Name) and argument.id == variable
+                for argument in statement.exc.args
             ):
-                messages.extend(_literal_parts(assignment.value))
+                messages.extend(_message_parts(assignment.value))
     return tuple(dict.fromkeys(message for message in messages if message.strip()))
 
 
@@ -341,8 +352,10 @@ def _names(bound: Bound, reference: Reference) -> NameEvidence | None:
             detail=bound.key,
         )
     for message in bound.guard_messages:
+        if len(message.strip()) < MIN_MESSAGE_MATCH:
+            continue
         for literal in reference.literals:
-            if len(literal) < MIN_MESSAGE_MATCH:
+            if len(literal.strip()) < MIN_MESSAGE_MATCH:
                 continue
             if literal in message or message in literal:
                 return NameEvidence(
