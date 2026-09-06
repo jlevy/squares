@@ -569,11 +569,18 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
     """Which tests the pull-request surface defers, and what each one measured.
 
     The boundary is a ceiling the gate applies (`QUICK_TEST_CEILING_SECONDS`, enforced by
-    `fast behavioral tests` through pytest's `--durations-min`), and this registry is the
-    record of who is currently over it. The two are not the same thing and both are
-    needed: the ceiling is what stops the lane rotting, and the registry is what stops a
-    marker being added quietly to make a red test go away, because adding one edits this
-    file and has to state a number.
+    `fast behavioral tests` in **cpu seconds**, through the section
+    `devtools/cpu_durations.py` prints rather than pytest's wall `--durations`), and this
+    registry is the record of who is currently over it. The two are not the same thing and
+    both are needed: the ceiling is what stops the lane rotting, and the registry is what
+    stops a marker being added quietly to make a red test go away, because adding one edits
+    this file and has to state a number.
+
+    The measurements recorded below are wall seconds, because that is what was measured
+    when each was written and a wall reading is an upper bound on the cpu one for anything
+    that is not parallel. They are evidence for the marker, not the gate's own reading;
+    what the gate compares is cpu, and a wall figure here that is far above its cpu cost is
+    a test whose marker deserves re-checking rather than a disagreement between them.
 
     Measured on 2026-09-05 (`BC-214`), one contended local box, `pytest --durations=0`
     over the whole non-exhaustive suite: 2,080 tests and 1,038s of recorded phase time,
