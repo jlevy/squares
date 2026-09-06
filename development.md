@@ -147,11 +147,29 @@ A tier selects steps; a lane divides one step.
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a code change |
 | `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 66 | 700 s | 502.3 s on CI, 2026-09-06, commit `5cad7540`, when CI still ran it whole |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 66 | 240 s | not yet clocked on CI |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 66 | 200 s | not yet clocked on CI; 93.3 s locally at the reference shape |
-| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 66 | 240 s | not yet clocked on CI |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 240 s | not yet clocked on CI |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 66 | 195 s | 99.4 s on CI, the mean of four readings |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 66 | 180 s | 91.6 s on CI, the mean of four readings |
+| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 66 | 205 s | 102.8 s on CI, the mean of four readings |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 210 s | 107.1 s on CI, the mean of four readings |
 | *(no flag)* | **CI, on `main`, on dispatch, and daily**; and what a block ends with | 66 of 66 | 3600 s | split across two jobs; not clocked whole |
+
+**A recorded cost here is the geometric mean of the readings at the reference shape, not
+one sample and not their maximum.** The spread between hosted runs of identical code is
+up to 1.39x — `known-best n=1..100
+atlas` read 60.97 s and 84.48 s across two runs on 2026-09-06, on code no commit had
+touched, and every step of the sweeps tier moved about 1.35x with it.
+The maximum was tried first, and it is worse in a way worth recording: it puts the
+record at the top of the band, so it starves the *stale* rule by exactly as much as it
+feeds the *drift* rule.
+One fast run then came in at 0.72 of the record and left `--geometry` 1.21x away from
+failing CI for being quick.
+The mean leaves every margin at or above 1.25x at four samples.
+The widest spread is `--suite` at 1.52x, which is one indivisible pytest invocation and
+so has nothing to average over internally.
+**These figures need refreshing as samples accumulate**, because a mean moves when they
+arrive — which is an argument for the band rather than a defect in the numbers.
+[D-472](defects.md) is the entry, and a recorded *band* still beats a recorded point,
+whichever point is chosen — that is `think-be1s`, open.
 
 **The pull-request surface is `--checks`, `--geometry`, `--suite` and `--sweeps`
 together, run as four concurrent CI jobs**, so a pull request waits for the longest of
@@ -481,16 +499,21 @@ stops running. Measured 2026-09-06: the tree collects 2,251 tests — 53 exhaust
 92 slow, and 2,106 in the quick lane.
 
 **The boundary is a ceiling the gate enforces, not a list it trusts.**
-`fast behavioral tests` passes `QUICK_TEST_CEILING_SECONDS` to pytest as
-`--durations-min` and fails, naming the test, when a test it ran reports a `call` phase
-at or above it. A test that grows past the ceiling therefore fails the pull-request
-surface in the week it grows; the fix is to make it faster, or to mark it `slow` with
-its measurement in `test_the_slow_marker_is_declared_only_by_measured_nodes`, which
-moves it to the deep surface rather than stopping it running.
-The `call` phase and not setup, because a module-scoped fixture bills its whole cost to
-whichever test triggers it first, and marking that test would move the cost rather than
-remove it. The marker registries are checked the same way for both markers: the declared
-set is pinned by a test, so a marker cannot be added without stating what it measured.
+`fast behavioral tests` passes `QUICK_TEST_WALL_BACKSTOP_SECONDS` (12 seconds) to pytest
+as `--durations-min` and fails, naming the test, when a test it ran reports a `call`
+phase at or above it.
+A test that grows past the ceiling therefore fails the pull-request surface in the week
+it grows; the fix is to make it faster, or to mark it `slow` with its measurement in
+`test_the_slow_marker_is_declared_only_by_measured_nodes`, which moves it to the deep
+surface rather than stopping it running.
+The separately reported CPU observations are diagnostic only.
+Process counters can charge a child’s setup work to the call that reaps it, and omit
+forkserver descendants; they cannot decide whether an individual test exceeds a CPU
+ceiling. The `call` phase and not setup, because a module-scoped fixture bills its whole
+cost to whichever test triggers it first, and marking that test would move the cost
+rather than remove it.
+The marker registries are checked the same way for both markers: the declared set is
+pinned by a test, so a marker cannot be added without stating what it measured.
 The quick lane runs under xdist at `cpus - jobs + 1` workers, sized to what the box has
 left rather than to what it has, because asking for every cpu beside the other lanes put
 nineteen ordinary tests over the per-test ceiling on contention alone.

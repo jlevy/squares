@@ -449,10 +449,63 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-[Session 087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md) is
-the latest terminal, machine-checked handoff.
-It completed Session 086’s selected `BC-213` rung and accepted `H-062` at bracket width
-`0.015`.
+**What the last block cost, and what that bought.** The pull-request surface went from
+`1369.60 s` to about `221.70 s` of CI wall, a factor of 6.2, with no check deleted and
+none made optional. Six measured changes did it: the marker split that moved the slow
+behavioural tail off the pull request (`BC-214`); xdist inside the quick lane rather
+than a second GitHub job (`BC-218`, which priced a second job at zero wall and three
+extra billed minutes); three outer jobs; worker sizing at `cpus - jobs + 1`, so a lane
+does not oversubscribe the box its two neighbours are on; the memoized-frontier atlas
+build; and the split of the surface into two concurrent jobs.
+[session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md)
+holds the block’s record and names the gate that certified it — run `34010683180` on
+`main` at `c743d7bb`, with `validate`, `exhaustive` and `macos-portability` all green,
+the first green exhaustive tier since that tier went red.
+
+**The result the block landed.** `T-021`: `s(20) >= 97/20` and `s(21) >= 97/20`, from a
+first-party weighted fractional unavoidable-set certificate retained through the gate on
+both routes, `+0.05` at each of the two sizes.
+It merged as `663ca37e` in PR 83. `T-020`’s `24/5` rung is retained beside it and still
+carries `n = 19`, which the new certificate’s mass is too heavy to reach.
+`H-062` is accepted with it: `BC-213` walled the last pre-registered rung at `973/200`
+on both constructions, leaving the `m = 5` covering wall bracketed to
+`[97/20, 973/200]`, width `0.015` against the `0.02` the hypothesis registered.
+
+**What is still open, with its price.**
+
+- The pull-request wall is about four minutes against a two-to-two-and-a-half-minute
+  target.
+- `BC-215`’s R1 tree-id cache is measured and priced and not wired: 20.2 per cent of
+  deep-run work is repeated, 92 per cent of that repetition is trees that did not move,
+  and the `touches` sets account for 1.6 per cent.
+  The tree id is the lever; `touches` is not.
+- Per-test CPU observations remain diagnostic: an earlier fixture’s child work can be
+  charged to the call that reaps it, and forkserver descendants can be omitted entirely.
+  The gate cannot use these counters to accept or reject an individual test on CPU cost.
+  It retains the `12 s` call-wall ceiling against a `2 s` marking threshold.
+  Reliable attribution across phases and descendant processes remains open.
+
+**What the block cost the trunk.** [D-470](defects.md): a test pinned to the moving
+`certificate.json` pointer still asserted the rung `T-021` displaced, and `main` sat red
+for six hours and seventeen minutes across three merges, because the exhaustive tier
+does not run on a pull request.
+The workflow already concedes the class in writing — a pull request can be green while a
+deferred test is broken — and what bounds it is `deep-gate.yml`, which runs the four
+deferrals against a pull request rather than after it, on a label rather than on every
+pull request. [D-471](defects.md): `D-459`’s conflicted-branch CI blackout fired three
+more times in the same day, and until this branch nothing but a person detected it;
+`branch-mergeability.yml` asks `git merge-tree` on every push, off the branch tip rather
+than off a merge ref that by definition cannot be built.
+Both entries stay open because neither workflow has reached `main`. [D-472](defects.md)
+is the block’s own reasoning failure rather than the trunk’s: a twenty per cent
+difference between two hosted runs was attributed to pool contention and written into a
+commit message as established, and the next run refuted it — with the pools serial, on
+the same code path as the 81.18s reading, the step returned 108.91s. Run-to-run spread
+on these runners is about thirty-four per cent, so one sample per configuration cannot
+resolve the effect being claimed.
+It is recorded because of where it happened: three commits earlier the same block
+measured exactly this for per-test timing and recommended a cpu-time ceiling, and the
+finding was then not carried up a level, from a test to a job, within the hour.
 
 **Selected next entry:** `think-xejq`, `BC-215` in
 [Agenda 023](packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md):
@@ -3248,14 +3301,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 471 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 472 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 94 | asserted something false about the mathematics |
 | validity | 118 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 181 | recorded something its own evidence contradicts |
+| bookkeeping | 182 | recorded something its own evidence contradicts |
 | robustness | 60 | did not finish, or finished only by luck |
 | performance | 18 | worked, but cost far more than it should |
 
@@ -3265,7 +3318,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy-one defects in 471, and no soundness defect
+**The automated gate has caught seventy-two defects in 472, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Build or check the descriptive chunk-component census over the known-best atlas."""
+"""Build or check the descriptive chunk-component census over the known-best atlas.
+
+Usage:
+    uv run --frozen python -m devtools.census_known_best_chunks --update
+    uv run --frozen python -m devtools.census_known_best_chunks --check
+    uv run --frozen python -m devtools.census_known_best_chunks --check --jobs 4
+"""
 
 from __future__ import annotations
 
@@ -7,6 +13,7 @@ import argparse
 import json
 from collections import Counter
 from collections.abc import Sequence
+from concurrent.futures import ProcessPoolExecutor
 from functools import cache
 from pathlib import Path
 from typing import Any
@@ -31,29 +38,114 @@ WITNESS_SCHEMA = ROOT / "witnesses/witness.schema.yaml"
 GENERATOR = "python -m devtools.census_known_best_chunks"
 PARTITION_MAXIMUM_STATES = 10_000
 
+BANDS: tuple[tuple[str, float], ...] = (
+    ("exact", EXACT_ADJACENCY_TOLERANCE),
+    ("near", NEAR_ADJACENCY_TOLERANCE),
+)
+"""The two registered adjacency bands, in the order both documents publish them."""
+
+CONTACT_SWEEPS: tuple[tuple[str, float, float], ...] = (
+    ("registered-angle-contact", 1e-6, 1e-3),
+    ("regularized-angle-contact", 1e-3, 1e-2),
+)
+"""The two contact sweeps, as `(name, angle tolerance radians, contact tolerance)`."""
+
 
 @cache
-def _corpus() -> tuple[tuple[dict, ...], tuple[str, ...]]:
-    """The atlas witnesses and their source kinds, read once per process."""
-    atlas = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]
-    witnesses = tuple(
-        load_witness(ROOT / entry["witness"]["path"], fallback_schema=WITNESS_SCHEMA)
-        for entry in atlas["entries"]
-    )
-    return witnesses, tuple(entry["source"]["kind"] for entry in atlas["entries"])
+def atlas_entries() -> tuple[dict[str, Any], ...]:
+    """The atlas manifest entries, read once per process.
 
-
-@cache
-def _component_entries(tolerance: float) -> tuple[dict[str, Any], ...]:
-    """One maximal-component census per witness, built once and published twice.
-
-    The partition atlas searches inside exactly the census the component atlas prints,
-    and building it a second time was the largest single cost in this step: 200 censuses
-    where 100 exist. Memoized on the band rather than passed around, because both
-    documents are reachable from `--update` and from `--check`.
+    Only the entries, no longer the witnesses they name. Each witness is now loaded by
+    whichever process censuses it, which is both what keeps mpmath objects out of the
+    pool protocol and what parallelizes the schema-validated load along with the work.
     """
-    witnesses, _kinds = _corpus()
-    return tuple(component_census(witness, tolerance=tolerance) for witness in witnesses)
+    atlas = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]
+    return tuple(atlas["entries"])
+
+
+def _census_entry(entry: dict[str, Any]) -> dict[str, Any]:
+    """Every derived census for one witness: the whole unit of parallel work.
+
+    Six documents per witness -- a maximal-component census and a bounded partition
+    search in each of the two bands, and a contact census in each of the two sweeps.
+    They are grouped rather than mapped separately because the partition search reads
+    exactly the census the component atlas publishes, and handing it over is what the
+    per-band memo this replaced was for: 200 censuses where 100 exist. Keeping the pair
+    inside one unit keeps that saving without a memo that would have to be shared across
+    processes to survive.
+
+    The process boundary is drawn here on purpose. What crosses it is JSON in both
+    directions: a manifest entry going out, and plain dicts of strings, numbers and
+    lists coming back, every one of them already destined for `json.dumps`. No mpmath
+    object is ever pickled, so no digit can be lost to a round trip -- the witness is
+    materialized in the process that censuses it.
+    """
+    try:
+        witness = load_witness(ROOT / entry["witness"]["path"], fallback_schema=WITNESS_SCHEMA)
+        components = {
+            name: component_census(witness, tolerance=tolerance) for name, tolerance in BANDS
+        }
+        source_kind = entry["source"]["kind"]
+        return {
+            "components": components,
+            "contacts": {
+                name: contact_component_census(
+                    witness,
+                    angle_tolerance_radians=angle_tolerance,
+                    contact_tolerance=contact_tolerance,
+                )
+                for name, angle_tolerance, contact_tolerance in CONTACT_SWEEPS
+            },
+            "partitions": {
+                name: {
+                    **minimal_lattice_partition(
+                        witness,
+                        tolerance=tolerance,
+                        maximum_states=PARTITION_MAXIMUM_STATES,
+                        component_document=components[name],
+                    ),
+                    "source_kind": source_kind,
+                }
+                for name, tolerance in BANDS
+            },
+            "source_kind": source_kind,
+        }
+    except Exception as error:
+        # A pool reports which call raised without saying which unit it was, and the
+        # messages this can surface name a square id or a component, never the record.
+        # Naming it here keeps a failure attributable whichever way the corpus ran.
+        message = str(error)
+        prefix = f"n={entry['n']}"
+        blamed = message if message.startswith(prefix) else f"{prefix}: {message}"
+        raise ValueError(blamed) from error
+
+
+@cache
+def census_records(workers: int | None = None) -> tuple[dict[str, Any], ...]:
+    """One `_census_entry` result per atlas entry, in manifest order, built once.
+
+    Each record loads its own witness. `workers=None` and `workers=1` run serially,
+    irrespective of `PACK_JOBS`; an explicit larger count enables a pool capped by
+    the entry count. Serial remains the default while D-472's performance attribution
+    is unresolved. The available timing samples do not isolate the effect of pooling.
+
+    Memoized on the worker count because both documents are reachable from `--update`
+    and from `--check`, and the second one must not re-derive the first one's records.
+
+    Order is the manifest's, whichever way it ran. `pool.map` yields by submission index
+    rather than by completion, so both documents are built in the order the serial loop
+    built them in, which is what lets `check` compare them byte for byte.
+
+    No pool `initializer`, and that is a measured decision rather than an omission --
+    see `test_a_pool_worker_censuses_at_the_same_precision_as_this_process`.
+    """
+    entries = atlas_entries()
+    requested = 1 if workers is None else workers
+    count = max(1, min(requested, len(entries)))
+    if count == 1:
+        return tuple(_census_entry(entry) for entry in entries)
+    with ProcessPoolExecutor(max_workers=count) as pool:
+        return tuple(pool.map(_census_entry, entries))
 
 
 def _summary(entries: list[dict]) -> dict:
@@ -134,29 +226,16 @@ def _contact_summary(entries: list[dict], source_kinds: list[str]) -> dict:
     return summary
 
 
-def expected_document() -> dict:
-    witnesses, source_kind_values = _corpus()
-    source_kinds = list(source_kind_values)
+def expected_document(workers: int | None = None) -> dict:
+    records = census_records(workers)
+    source_kinds = [record["source_kind"] for record in records]
     bands = []
-    for name, tolerance in (
-        ("exact", EXACT_ADJACENCY_TOLERANCE),
-        ("near", NEAR_ADJACENCY_TOLERANCE),
-    ):
-        entries = list(_component_entries(tolerance))
+    for name, _tolerance in BANDS:
+        entries = [record["components"][name] for record in records]
         bands.append({"name": name, "summary": _summary(entries), "entries": entries})
     contact_sweeps = []
-    for name, angle_tolerance, contact_tolerance in (
-        ("registered-angle-contact", 1e-6, 1e-3),
-        ("regularized-angle-contact", 1e-3, 1e-2),
-    ):
-        entries = [
-            contact_component_census(
-                witness,
-                angle_tolerance_radians=angle_tolerance,
-                contact_tolerance=contact_tolerance,
-            )
-            for witness in witnesses
-        ]
+    for name, _angle_tolerance, _contact_tolerance in CONTACT_SWEEPS:
+        entries = [record["contacts"][name] for record in records]
         contact_sweeps.append(
             {
                 "name": name,
@@ -257,28 +336,12 @@ def _partition_summary(entries: list[dict], source_kinds: list[str]) -> dict:
     return result
 
 
-def expected_partition_document() -> dict:
-    witnesses, source_kind_values = _corpus()
-    source_kinds = list(source_kind_values)
+def expected_partition_document(workers: int | None = None) -> dict:
+    records = census_records(workers)
+    source_kinds = [record["source_kind"] for record in records]
     bands = []
-    for name, tolerance in (
-        ("exact", EXACT_ADJACENCY_TOLERANCE),
-        ("near", NEAR_ADJACENCY_TOLERANCE),
-    ):
-        entries = [
-            {
-                **minimal_lattice_partition(
-                    witness,
-                    tolerance=tolerance,
-                    maximum_states=PARTITION_MAXIMUM_STATES,
-                    component_document=component_document,
-                ),
-                "source_kind": source_kind,
-            }
-            for witness, source_kind, component_document in zip(
-                witnesses, source_kinds, _component_entries(tolerance), strict=True
-            )
-        ]
+    for name, _tolerance in BANDS:
+        entries = [record["partitions"][name] for record in records]
         bands.append(
             {
                 "name": name,
@@ -330,9 +393,9 @@ def _text(document: dict) -> str:
     return json.dumps(document, indent=2, sort_keys=True) + "\n"
 
 
-def update() -> None:
-    component_text = _text(expected_document())
-    partition_text = _text(expected_partition_document())
+def update(workers: int | None = None) -> None:
+    component_text = _text(expected_document(workers))
+    partition_text = _text(expected_partition_document(workers))
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     with atomic_output_file(OUTPUT) as temporary:
         temporary.write_text(component_text, encoding="utf-8")
@@ -344,11 +407,11 @@ def update() -> None:
     )
 
 
-def check() -> None:
-    expected = _text(expected_document())
+def check(workers: int | None = None) -> None:
+    expected = _text(expected_document(workers))
     if not OUTPUT.is_file() or OUTPUT.read_text(encoding="utf-8") != expected:
         raise ValueError("atlas/known-best/chunk-components.json is missing or stale")
-    expected_partitions = _text(expected_partition_document())
+    expected_partitions = _text(expected_partition_document(workers))
     if (
         not PARTITION_OUTPUT.is_file()
         or PARTITION_OUTPUT.read_text(encoding="utf-8") != expected_partitions
@@ -365,12 +428,23 @@ def parser() -> argparse.ArgumentParser:
     mode = command.add_mutually_exclusive_group(required=True)
     mode.add_argument("--update", action="store_true")
     mode.add_argument("--check", action="store_true")
+    command.add_argument(
+        "--jobs",
+        type=int,
+        metavar="N",
+        default=None,
+        help=(
+            "processes to census the corpus with (default: 1, serial; "
+            "explicit --jobs enables a pool independently of PACK_JOBS)"
+        ),
+    )
     return command
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
-    update() if args.update else check()
+    workers: int | None = args.jobs
+    update(workers) if args.update else check(workers)
     return 0
 
 

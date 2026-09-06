@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Acquire and build the annotation-free 101-case prospective atlas seed."""
+"""Acquire and build the annotation-free 101-case prospective atlas seed.
+
+Usage:
+    uv run --frozen python -m devtools.build_prospective_atlas --update
+    uv run --frozen python -m devtools.build_prospective_atlas --check
+    uv run --frozen python -m devtools.build_prospective_atlas --check --jobs 4
+"""
 
 from __future__ import annotations
 
@@ -11,6 +17,7 @@ import time
 import urllib.error
 import urllib.request
 from collections.abc import Sequence
+from concurrent.futures import ProcessPoolExecutor
 from dataclasses import replace
 from functools import cache
 from pathlib import Path
@@ -186,7 +193,17 @@ def fetch(*, refresh: bool) -> None:
     )
 
 
-def _witness(entry: dict) -> dict:
+def _witness(entry: dict, source_path: str | None = None) -> dict:
+    """The Witness/v2 document for one case, from an already-resolved source path.
+
+    `source_path` is where the retained UnitSquare SVG for this case lives, or `None`
+    for a generated grid, which has no retained source at all. It is passed in rather
+    than read from `SOURCE_ROOT` because this runs in a pool worker, and a `forkserver`
+    child re-imports this module instead of inheriting it: a caller that repointed that
+    root would have the parent reading one directory and the workers reading another,
+    with nothing raising. Resolving in the parent puts the answer in the unit's payload,
+    where it travels with the work.
+    """
     n = entry["n"]
     witness_id = f"W-prospective-source-n{n:03d}"
     witness_path = f"witnesses/prospective/n-{n:03d}.yaml"
@@ -205,16 +222,16 @@ def _witness(entry: dict) -> dict:
             ),
         )
     else:
-        source_path = _source_path(entry)
-        if not source_path.is_file():
-            raise FileNotFoundError(f"missing retained source: {_relative(source_path)}")
-        content = source_path.read_bytes()
+        retained = Path(source_path) if source_path else _source_path(entry)
+        if not retained.is_file():
+            raise FileNotFoundError(f"missing retained source: {_relative(retained)}")
+        content = retained.read_bytes()
         _check_unitsquare_acquisition(entry, content)
         geometry = parse_unitsquare_svg(content.decode("utf-8"), expected_n=n)
         witness = unitsquare_witness(
             n,
             geometry,
-            source_path=_relative(source_path),
+            source_path=_relative(retained),
             source_url=entry["source_url"],
             witness_id=witness_id,
             witness_path=witness_path,
@@ -251,7 +268,7 @@ def _render(witness: dict) -> str:
     )
 
 
-def _manifest_entry(entry: dict, witness: dict) -> dict:
+def _manifest_entry(entry: dict, witness: dict, source_path: str | None = None) -> dict:
     n = entry["n"]
     source_kind = (
         "exact-generated-grid"
@@ -270,7 +287,7 @@ def _manifest_entry(entry: dict, witness: dict) -> dict:
     if source_kind == "unitsquare-rendering":
         source.update(
             {
-                "path": _relative(_source_path(entry)),
+                "path": _relative(Path(source_path) if source_path else _source_path(entry)),
                 "url": entry["source_url"],
             }
         )
@@ -293,6 +310,69 @@ def _manifest_entry(entry: dict, witness: dict) -> dict:
     }
 
 
+def _build_one(entry: dict, source_path: str | None) -> tuple[str, str, dict]:
+    """Witness text, house rendering and manifest entry for one case.
+
+    The whole unit of parallel work, and the process boundary is drawn here rather than
+    around `_witness` on purpose. What crosses it is text in both directions: a
+    source-map entry and an already-resolved retained-source path going out, and a YAML
+    document, an SVG and a plain manifest dict coming back. Nothing carrying a scalar
+    kind is ever pickled, so the witness is built and rendered in the same process, and
+    no digit can be lost to a round trip.
+    """
+    try:
+        witness = _witness(entry, source_path)
+        return (
+            witness_document(witness, schema="../witness.schema.yaml"),
+            _render(witness),
+            _manifest_entry(entry, witness, source_path),
+        )
+    except Exception as error:
+        # A pool reports which call raised without saying which unit raised it, and the
+        # messages here name a witness id or a path rather than the case. Naming it
+        # keeps a failure attributable whichever way the seed was built.
+        message = str(error)
+        prefix = f"n={entry['n']}"
+        blamed = message if message.startswith(prefix) else f"{prefix}: {message}"
+        raise ValueError(blamed) from error
+
+
+def build_cases(entries: Sequence[dict], workers: int | None) -> list[tuple[str, str, dict]]:
+    """Build every case, in source-map order, across `workers` processes.
+
+    Every case is independent of every other -- each parses or generates its own
+    geometry and renders only itself -- so this is a map, and it was a serial one. It
+    cost 37.03s in the `sweeps` job of run 34018763923.
+
+    `workers=None` and `workers=1` run serially in this process, irrespective of
+    `PACK_JOBS`. An explicit larger count enables a pool, capped by the entry count.
+    Serial remains the default while D-472's performance attribution is unresolved.
+
+    The retained source paths are resolved here, in the parent, and travel with the
+    work. `_source_path` reads the module-level `SOURCE_ROOT`, and a `forkserver` worker
+    re-imports this module rather than inheriting it, so a caller that repointed that
+    root -- `clear_build_caches` exists for one -- would otherwise have the parent
+    reading a temporary directory and the workers reading the real one, silently.
+
+    Order is the source map's, whichever way it ran: `pool.map` yields by submission
+    index rather than by completion, so `seed_errors` still sees the frozen selection in
+    the frozen order and `check` can compare the manifest byte for byte.
+    """
+    source_paths = [
+        str(_source_path(entry)) if entry["source_key"] == "unitsquare-release-1" else None
+        for entry in entries
+    ]
+    requested = 1 if workers is None else workers
+    count = max(1, min(requested, len(entries)))
+    if count == 1:
+        return [
+            _build_one(entry, source_path)
+            for entry, source_path in zip(entries, source_paths, strict=True)
+        ]
+    with ProcessPoolExecutor(max_workers=count) as pool:
+        return list(pool.map(_build_one, entries, source_paths))
+
+
 def clear_build_caches() -> None:
     """Drop the memoized seed build.
 
@@ -303,25 +383,24 @@ def clear_build_caches() -> None:
     _expected_outputs.cache_clear()
 
 
-def expected_outputs() -> tuple[dict[Path, str], dict]:
+def expected_outputs(workers: int | None = None) -> tuple[dict[Path, str], dict]:
     """Derived seed artifacts and manifest; callers get copies of the memo."""
-    outputs, manifest = _expected_outputs()
+    outputs, manifest = _expected_outputs(workers)
     return dict(outputs), copy.deepcopy(manifest)
 
 
 @cache
-def _expected_outputs() -> tuple[dict[Path, str], dict]:
+def _expected_outputs(workers: int | None = None) -> tuple[dict[Path, str], dict]:
     entries = eligible_entries()
     outputs: dict[Path, str] = {}
     manifest_entries = []
-    for entry in entries:
+    for entry, (witness_text, rendering, manifest_entry) in zip(
+        entries, build_cases(entries, workers), strict=True
+    ):
         n = entry["n"]
-        witness = _witness(entry)
-        witness_text = witness_document(witness, schema="../witness.schema.yaml")
-        rendering = _render(witness)
         outputs[WITNESS_ROOT / f"n-{n:03d}.yaml"] = witness_text
         outputs[RENDER_ROOT / f"n-{n:03d}.svg"] = rendering
-        manifest_entries.append(_manifest_entry(entry, witness))
+        manifest_entries.append(manifest_entry)
 
     retained_sources = []
     for entry in entries:
@@ -376,8 +455,8 @@ def _expected_outputs() -> tuple[dict[Path, str], dict]:
     return outputs, manifest
 
 
-def update() -> None:
-    outputs, _manifest = expected_outputs()
+def update(workers: int | None = None) -> None:
+    outputs, _manifest = expected_outputs(workers)
     for path, content in sorted(outputs.items(), key=lambda item: item[0].as_posix()):
         path.parent.mkdir(parents=True, exist_ok=True)
         if path.is_file() and path.read_text(encoding="utf-8") == content:
@@ -387,8 +466,8 @@ def update() -> None:
     print("prospective atlas seed updated: 101 witnesses and 101 house renderings")
 
 
-def check() -> None:
-    outputs, manifest = expected_outputs()
+def check(workers: int | None = None) -> None:
+    outputs, manifest = expected_outputs(workers)
     problems = []
     for path, expected in sorted(outputs.items(), key=lambda item: item[0].as_posix()):
         if not path.is_file():
@@ -416,6 +495,16 @@ def parser() -> argparse.ArgumentParser:
     mode.add_argument("--update", action="store_true")
     mode.add_argument("--check", action="store_true")
     command.add_argument("--refresh", action="store_true")
+    command.add_argument(
+        "--jobs",
+        type=int,
+        metavar="N",
+        default=None,
+        help=(
+            "processes to build the seed with (default: 1, serial; "
+            "explicit --jobs enables a pool independently of PACK_JOBS)"
+        ),
+    )
     return command
 
 
@@ -423,12 +512,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
     if args.refresh and not args.fetch:
         raise ValueError("--refresh is valid only with --fetch")
+    workers: int | None = args.jobs
     if args.fetch:
         fetch(refresh=args.refresh)
     elif args.update:
-        update()
+        update(workers)
     else:
-        check()
+        check(workers)
     return 0
 
 
