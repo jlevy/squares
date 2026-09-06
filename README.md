@@ -222,6 +222,13 @@ relevant source audit.
 | [**Campaign record**](packing/campaign/README.md) | Hypotheses, preregistered experiments, session records, agendas, and generated ledger |
 | [**Defect log**](defects.md) | Generated record of defects, detection methods, fixes, and regressions |
 
+Long-lived tests and runs retain detailed timing evidence under
+[OR-14](operating-rules.md#or-14-a-development-cycle-is-never-artificially-slow).
+The
+[validation efficiency and checkpoints plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
+tracks improvements to everyday feedback and full final checkpoints, with measurements
+and preserved coverage required before accepting a speedup.
+
 [`SYNOPSIS.md`](SYNOPSIS.md) is the technical root and current-state document.
 The generated day-to-day views are the frontier
 [status table](packing/frontier/STATUS.md),

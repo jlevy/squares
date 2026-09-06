@@ -12,6 +12,7 @@ that by-product could ever claim more than weak duality allows.
 from __future__ import annotations
 
 from fractions import Fraction
+from itertools import pairwise
 
 import numpy as np
 import pytest
@@ -120,6 +121,14 @@ def test_adding_a_site_orbit_never_raises_the_optimum_on_the_rows_held() -> None
     assert solved[2] <= solution.objective + 1e-9
 
 
+def _midpoint_cell_indices(
+    events: tuple[Fraction, ...], float_events: np.ndarray
+) -> np.ndarray:
+    """Map each exact interval once, preserving midpoint rounding and left-search ties."""
+    midpoints = np.array([float((left + right) / 2) for left, right in pairwise(events)])
+    return np.searchsorted(float_events, midpoints, side="left") - 1
+
+
 def _oracle_against_sweep(
     atoms: tuple[Atom, ...],
     direction: Direction,
@@ -139,16 +148,34 @@ def _oracle_against_sweep(
     weights = np.array([float(atom.weight) for atom in atoms])
     grid = event_grid(points, weights, direction, float(outer), float(side))
     found = placement_cells(points, weights, direction, float(outer), float(side), keep=3)
-    lacking = 0
-    for i, j in reduction.cells:
-        u_mid = float((reduction.u_events[i] + reduction.u_events[i + 1]) / 2)
-        v_mid = float((reduction.v_events[j] + reduction.v_events[j + 1]) / 2)
-        cell = (
-            int(np.searchsorted(grid.u_events, u_mid)) - 1,
-            int(np.searchsorted(grid.v_events, v_mid)) - 1,
-        )
-        lacking += not grid.reachable[cell]
+    # A midpoint depends only on its axis interval, not the other coordinate. Keep the
+    # independently enumerated reference cells, but avoid repeating exact arithmetic
+    # and scalar searches for every Cartesian pair in that same set.
+    u_cells = _midpoint_cell_indices(reduction.u_events, grid.u_events)
+    v_cells = _midpoint_cell_indices(reduction.v_events, grid.v_events)
+    cells = np.asarray(reduction.cells, dtype=np.intp).reshape(-1, 2)
+    lacking = int(np.count_nonzero(~grid.reachable[u_cells[cells[:, 0]], v_cells[cells[:, 1]]]))
     return min(mass for mass, _, _, _ in found), float(exact), lacking
+
+
+def test_midpoint_mapping_preserves_cells_when_exact_events_round_together() -> None:
+    """The optimized mapping must keep the scalar reference's left-search convention."""
+    events = (
+        Fraction(0),
+        Fraction(1),
+        Fraction(1) + Fraction(1, 2**55),
+        Fraction(1) + Fraction(1, 2**54),
+        Fraction(2),
+    )
+    float_events = np.array([float(event) for event in events])
+    reference = np.array(
+        [
+            int(np.searchsorted(float_events, float((left + right) / 2))) - 1
+            for left, right in pairwise(events)
+        ]
+    )
+    assert reference.tolist() == [0, 0, 0, 3]
+    assert np.array_equal(_midpoint_cell_indices(events, float_events), reference)
 
 
 def _patterned_atoms(outer: Fraction, counts: tuple[int, ...]) -> tuple[Atom, ...]:
@@ -159,6 +186,25 @@ def _patterned_atoms(outer: Fraction, counts: tuple[int, ...]) -> tuple[Atom, ..
         for index, (x, y) in enumerate(positions)
         if pattern[index] > 0
     )
+
+
+def test_oracle_comparison_counts_every_missing_reference_cell(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """An empty float reachability map must expose every independently derived cell."""
+    outer, side = Fraction(11, 5), Fraction(24, 25)
+    atoms = _patterned_atoms(outer, (3,))
+    reference = reduce_to_cells(atoms, UPRIGHT, outer, side)
+    original_grid = event_grid
+
+    def emptied_grid(*args, **kwargs):
+        grid = original_grid(*args, **kwargs)
+        grid.reachable[:] = False
+        return grid
+
+    monkeypatch.setitem(globals(), "event_grid", emptied_grid)
+    _oracle, _exact, lacking = _oracle_against_sweep(atoms, UPRIGHT, outer, side)
+    assert lacking == len(reference.cells) > 0
 
 
 @pytest.mark.slow

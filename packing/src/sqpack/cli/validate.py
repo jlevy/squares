@@ -17,9 +17,11 @@ from __future__ import annotations
 
 import argparse
 import fnmatch
+import hashlib
 import json
 import math
 import os
+import platform
 import re
 import shutil
 import signal
@@ -27,13 +29,15 @@ import subprocess
 import sys
 import time
 import traceback
+import uuid
 from collections.abc import Callable, Iterator, Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from contextlib import contextmanager, nullcontext, suppress
 from dataclasses import asdict, dataclass, field, replace
+from datetime import UTC, datetime
 from pathlib import Path
 from threading import Lock
-from typing import Literal, Never, override
+from typing import Literal, Never, TextIO, override
 
 from sqpack import gate_budgets
 from sqpack.project import (
@@ -222,12 +226,17 @@ class _ProcessRegistry:
             if self._stopping:
                 with suppress(ProcessLookupError):
                     os.killpg(pid, signal.SIGKILL)
-                raise StepFailureError("validation is stopping; rejected new subprocess")
+                raise StepCancelledError("validation is stopping; rejected new subprocess")
             self._pids.add(pid)
 
     def discard(self, pid: int) -> None:
         with self._lock:
             self._pids.discard(pid)
+
+    @property
+    def stopping(self) -> bool:
+        with self._lock:
+            return self._stopping
 
     def stop(self) -> None:
         with self._lock:
@@ -253,6 +262,14 @@ class UsageError(ValueError):
 
 class StepFailureError(RuntimeError):
     """A check ran and did not establish its contract."""
+
+
+class StepTimeoutError(StepFailureError):
+    """A validation subprocess exceeded its assigned timeout."""
+
+
+class StepCancelledError(StepFailureError):
+    """The owning validation run stopped this subprocess."""
 
 
 class StepSkippedError(RuntimeError):
@@ -303,6 +320,8 @@ class Context:
     raise a number a person typed: someone tightening the cap is deliberately bounding
     this run, and a step quietly opting out of that is the bug, not the feature."""
 
+    step_name: str = ""
+    artifact_run_id: str = field(default_factory=lambda: uuid.uuid4().hex)
     processes: _ProcessRegistry = field(
         default_factory=_ProcessRegistry, compare=False, repr=False
     )
@@ -341,8 +360,8 @@ class Step:
     blinder. Marking a step `broad` is the change that needs an argument, and
     `test_the_edit_tier_cannot_under_run` is where it has to be made.
 
-    Being excluded from `--edit` is not being excluded from the gate. Every broad step
-    still runs in `--fast` and above, and CI runs the full gate on every push."""
+    Broad steps remain in their declared fast or full tier when excluded from `--edit`.
+    Pull-request CI runs the fast surface; full checkpoints also run deferred checks."""
 
     sweep: bool = False
     """This step re-derives a retained atlas from its witnesses, and it is expensive
@@ -609,12 +628,181 @@ def _stop_process_group(process: subprocess.Popen[str]) -> str:
         return stdout or output
 
 
+def _artifact_directory(context: Context) -> Path | None:
+    target = context.environment.get("PACKING_VALIDATION_ARTIFACT_DIR")
+    if not target:
+        return None
+    directory = Path(target).resolve()
+    directory.mkdir(parents=True, exist_ok=True)
+    return directory
+
+
+def _write_artifact(path: Path, document: object) -> None:
+    # Each UUID path is written once, so concurrent steps never overwrite receipts.
+    with path.open("x", encoding="utf-8") as stream:
+        json.dump(document, stream, sort_keys=True, indent=2)
+        stream.write("\n")
+        stream.flush()
+        os.fsync(stream.fileno())
+
+
+def _begin_artifacts(context: Context, selected: Sequence[Step]) -> None:
+    directory = _artifact_directory(context)
+    if directory is None:
+        return
+    environment = {
+        key: value for key, value in context.environment.items() if not key.startswith("GIT_")
+    }
+
+    def git(*arguments: str) -> bytes:
+        try:
+            completed = subprocess.run(
+                ["git", "-C", str(REPOSITORY_ROOT), *arguments],
+                env=environment,
+                capture_output=True,
+                check=True,
+            )
+        except (OSError, subprocess.CalledProcessError) as error:
+            detail = (
+                error.stderr.decode(errors="replace").strip()
+                if isinstance(error, subprocess.CalledProcessError)
+                else str(error)
+            )
+            raise StepFailureError(
+                f"artifact provenance: git {' '.join(arguments)} failed: {detail}"
+            ) from error
+        return completed.stdout
+
+    untracked: dict[str, str] = {}
+    for encoded in git("ls-files", "--others", "--exclude-standard", "-z").split(b"\0"):
+        if not encoded:
+            continue
+        name = os.fsdecode(encoded)
+        path = REPOSITORY_ROOT / name
+        if path.is_file() and not path.is_relative_to(directory):
+            untracked[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+    _write_artifact(
+        directory / f"run-{uuid.uuid4().hex}.json",
+        {
+            "run_id": context.artifact_run_id,
+            "started_at": datetime.now(UTC).isoformat(),
+            "commit": git("rev-parse", "HEAD").decode().strip(),
+            "git_status": git("status", "--porcelain").decode(errors="replace"),
+            "dirty_diff_sha256": hashlib.sha256(git("diff", "HEAD", "--binary")).hexdigest(),
+            "untracked_hashes": untracked,
+            "python": sys.version,
+            "interpreter": sys.executable,
+            "platform": platform.platform(),
+            "available_cpus": os.process_cpu_count(),
+            "jobs": context.jobs,
+            "inner_jobs": context.inner_jobs,
+            "selected_steps": [step.name for step in selected],
+            "environment": {
+                key: value
+                for key, value in environment.items()
+                if key
+                in {
+                    "PACK_JOBS",
+                    "OMP_NUM_THREADS",
+                    "OPENBLAS_NUM_THREADS",
+                    "MKL_NUM_THREADS",
+                    "VECLIB_MAXIMUM_THREADS",
+                    "NUMEXPR_NUM_THREADS",
+                    "BLIS_NUM_THREADS",
+                    "GITHUB_SHA",
+                    "GITHUB_RUN_ID",
+                    "GITHUB_RUN_ATTEMPT",
+                    "GITHUB_JOB",
+                }
+            },
+        },
+    )
+
+
 def _run(
     context: Context,
     command: Sequence[str],
     *,
     cwd: Path = PROJECT_ROOT,
     timeout_seconds: float | None = None,
+) -> str:
+    directory = _artifact_directory(context)
+    if directory is None:
+        return _run_command(context, command, cwd=cwd, timeout_seconds=timeout_seconds)
+    stem = directory / f"command-{uuid.uuid4().hex}"
+    log_path = stem.with_suffix(".log")
+    arguments = list(command)
+    if len(arguments) >= 3 and arguments[1:3] == ["-m", "pytest"]:
+        # A step that chose its own durations filter keeps it: the quick lane's
+        # `--durations-min` is its ceiling, and pytest would take the last value given.
+        if not any(argument.startswith("--durations") for argument in arguments):
+            arguments.extend(("--durations=0", "--durations-min=0"))
+        arguments.append(f"--junitxml={stem}.junit.xml")
+    environment = dict(context.environment)
+    # Nested test subprocesses must not reuse this gate's artifact configuration.
+    if arguments[1:3] != ["-m", "devtools.run_negative_controls"]:
+        environment.pop("PACKING_VALIDATION_ARTIFACT_DIR", None)
+    environment["PYTHONUNBUFFERED"] = "1"
+    metadata = {
+        "run_id": context.artifact_run_id,
+        "command": arguments,
+        "step_name": context.step_name,
+        "cwd": str(cwd),
+        "log_path": str(log_path),
+        "started_at": datetime.now(UTC).isoformat(),
+        "jobs": context.jobs,
+        "inner_jobs": context.inner_jobs,
+        "timeout_seconds": min(timeout_seconds, context.timeout_seconds)
+        if timeout_seconds is not None
+        else context.timeout_seconds,
+    }
+    _write_artifact(stem.with_suffix(".start.json"), metadata)
+    started = time.perf_counter()
+    status = "failed"
+    reason = ""
+    try:
+        with log_path.open("w", encoding="utf-8") as stream:
+            output = _run_command(
+                replace(context, environment=environment),
+                arguments,
+                cwd=cwd,
+                timeout_seconds=timeout_seconds,
+                output_stream=stream,
+                output_path=log_path,
+            )
+    except BaseException as error:
+        if isinstance(error, StepTimeoutError):
+            status = "timed_out"
+        elif isinstance(error, (KeyboardInterrupt, StepCancelledError)):
+            status = "cancelled"
+        elif isinstance(error, StepSkippedError):
+            status = "skipped"
+        reason = str(error) or type(error).__name__
+        raise
+    else:
+        status = "passed"
+        return output
+    finally:
+        _write_artifact(
+            stem.with_suffix(".end.json"),
+            {
+                **metadata,
+                "finished_at": datetime.now(UTC).isoformat(),
+                "wall_seconds": time.perf_counter() - started,
+                "status": status,
+                "reason": reason,
+            },
+        )
+
+
+def _run_command(
+    context: Context,
+    command: Sequence[str],
+    *,
+    cwd: Path = PROJECT_ROOT,
+    timeout_seconds: float | None = None,
+    output_stream: TextIO | None = None,
+    output_path: Path | None = None,
 ) -> str:
     effective_timeout = (
         context.timeout_seconds
@@ -632,7 +820,7 @@ def _run(
         list(command),
         cwd=cwd,
         env=context.environment,
-        stdout=subprocess.PIPE,
+        stdout=output_stream if output_stream is not None else subprocess.PIPE,
         stderr=subprocess.STDOUT,
         text=True,
         start_new_session=True,
@@ -653,22 +841,28 @@ def _run(
         stdout, _ = process.communicate(timeout=effective_timeout)
     except subprocess.TimeoutExpired:
         output = _stop_process_group(process).rstrip()
+        if output_path is not None:
+            output = output_path.read_text(encoding="utf-8", errors="replace").rstrip()
         rendered = " ".join(command)
         detail = f"command timed out after {effective_timeout:g} seconds: {rendered}"
         if output:
             detail += f"\n{output}"
-        raise StepFailureError(detail) from None
+        raise StepTimeoutError(detail) from None
     except BaseException:
         _stop_process_group(process)
         raise
     finally:
         context.processes.discard(process.pid)
     output = (stdout or "").rstrip()
+    if output_path is not None:
+        output = output_path.read_text(encoding="utf-8", errors="replace").rstrip()
     if process.returncode:
         rendered = " ".join(command)
         detail = f"command exited {process.returncode}: {rendered}"
         if output:
             detail += f"\n{output}"
+        if context.processes.stopping:
+            raise StepCancelledError(detail)
         raise StepFailureError(detail)
     return output
 
@@ -998,6 +1192,8 @@ def _exhaustive_exact_tests(context: Context) -> str:
             "tests",
             "-m",
             EXHAUSTIVE_TESTS,
+            "--durations=0",
+            "--durations-min=0",
         ),
     )
 
@@ -2572,6 +2768,8 @@ STEPS: tuple[Step, ...] = (
             "packing/witnesses/*",
             "packing/frontier/*",
             "packing/devtools/check_basic_bounds.py",
+            "packing/devtools/dilation_corollary.py",
+            "packing/devtools/decide_certificate.py",
             "packing/devtools/generate_known_best_n011_rational_control.py",
             "packing/devtools/check_rational_witness_independent.py",
         ),
@@ -3278,6 +3476,20 @@ def _select_steps(
 
 
 def _execute_step(step: Step, context: Context) -> StepResult:
+    result = _execute_step_result(step, replace(context, step_name=step.name))
+    directory = _artifact_directory(context)
+    if directory is not None:
+        _write_artifact(
+            directory / f"step-{uuid.uuid4().hex}.json",
+            {
+                "run_id": context.artifact_run_id,
+                **asdict(result),
+            },
+        )
+    return result
+
+
+def _execute_step_result(step: Step, context: Context) -> StepResult:
     started = time.perf_counter()
     if (
         step.budget_seconds is not None
@@ -3850,6 +4062,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             timeout_seconds=timeout_seconds,
             timeout_is_explicit=timeout_is_explicit,
         )
+        _begin_artifacts(context, selected)
         summary = _run_selected(selected, context, namespace.only, namespace.skip)
         summary.budget = _judge_budget(
             summary,

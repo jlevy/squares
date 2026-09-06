@@ -41,7 +41,13 @@ import json
 from fractions import Fraction
 from pathlib import Path
 
-from cases.n5 import minus_w_owner4, minus_w_scale, tangent_cones, tangent_inventory
+from cases.n5 import (
+    minus_w_owner4,
+    minus_w_row_jets,
+    minus_w_scale,
+    tangent_cones,
+    tangent_inventory,
+)
 from sqpack.field import NumberField
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -65,6 +71,9 @@ def main() -> int:
 
     zero = tuple(field.zero for _ in range(tangent_cones.VARIABLE_COUNT))
     probe = tuple(field.rational(index - 7) for index in range(tangent_cones.VARIABLE_COUNT))
+    # Source geometry is shared by the velocity and correction probes. Keep its rows
+    # local to this invocation so each probe still evaluates its own exact stress.
+    row_inventory = minus_w_row_jets.RowJetInventory.build(field)
 
     problems: list[str] = []
     scale_total = 0
@@ -79,9 +88,19 @@ def main() -> int:
             problems.append(f"{stratum}: -W disagrees with the retained canonical_minus_W")
             continue
 
-        owner4_zero = minus_w_owner4.owner4_record(field, stratum, minus_w, zero)
-        owner4_probe = minus_w_owner4.owner4_record(field, stratum, minus_w, probe)
-        owner4_plus = minus_w_owner4.owner4_record(field, stratum, plus_w, zero)
+        owner4_zero = minus_w_owner4.owner4_record(
+            field, stratum, minus_w, zero, active_rows=row_inventory.active_rows(field, stratum)
+        )
+        owner4_probe = minus_w_owner4.owner4_record(
+            field,
+            stratum,
+            minus_w,
+            probe,
+            active_rows=row_inventory.active_rows(field, stratum),
+        )
+        owner4_plus = minus_w_owner4.owner4_record(
+            field, stratum, plus_w, zero, active_rows=row_inventory.active_rows(field, stratum)
+        )
         if owner4_zero.constant != owner4_probe.constant:
             problems.append(f"{stratum}: owner-4 constant depends on the correction")
         if owner4_zero.constant.sign() >= 0:
@@ -98,8 +117,12 @@ def main() -> int:
                 "obstruction_coefficient"
             )
 
-        minus_records = minus_w_scale.scale_records(field, stratum, minus_w, zero)
-        plus_records = minus_w_scale.scale_records(field, stratum, plus_w, zero)
+        minus_records = minus_w_scale.scale_records(
+            field, stratum, minus_w, zero, row_inventory=row_inventory
+        )
+        plus_records = minus_w_scale.scale_records(
+            field, stratum, plus_w, zero, row_inventory=row_inventory
+        )
         for minus_record, plus_record in zip(minus_records, plus_records, strict=True):
             scale_total += 1
             key = f"{stratum}/{minus_record.key}"

@@ -33,6 +33,19 @@ and focused check in the place already tracking the work.
 Read [`operating-rules.md`](../../../operating-rules.md) first: OR-4 decides what the
 session picks up, OR-5 what workflow it declares.
 
+For long-lived work, plan the detailed timing receipts required by
+[OR-14](../../../operating-rules.md#or-14-a-development-cycle-is-never-artificially-slow)
+before launching it.
+Retain per-test, control, and phase timings with source revision, configuration,
+workers, and terminal status, including failure or interruption.
+Distinguish queue, setup, and execution where applicable.
+Link the machine-readable artifacts and readable summary from session evidence; session
+clocks do not replace them.
+The
+[validation efficiency and checkpoints plan](../../../docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
+tracks remaining instrument coverage and acceptance, so an absent receipt must remain an
+explicit evidence gap.
+
 Open a versioned session when at least one of these conditions holds:
 
 - the work will cross multiple workflow or material-focus phases;

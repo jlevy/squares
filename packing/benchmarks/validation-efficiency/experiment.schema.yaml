@@ -1,0 +1,14 @@
+type: object
+additionalProperties: false
+required: [id, title, registered, tier, control_label, candidate_label, minimum_samples, minimum_improvement, maximum_allocation_ratio, target]
+properties:
+  id: {type: string, pattern: '^VE-[0-9]{3}$'}
+  title: {type: string, minLength: 1}
+  registered: {type: string}
+  tier: {type: string, enum: [exploratory]}
+  control_label: {type: string, minLength: 1}
+  candidate_label: {type: string, minLength: 1}
+  minimum_samples: {type: integer, minimum: 3}
+  minimum_improvement: {type: number, exclusiveMinimum: 0, exclusiveMaximum: 1}
+  maximum_allocation_ratio: {type: number, minimum: 1}
+  target: {type: string, minLength: 1}

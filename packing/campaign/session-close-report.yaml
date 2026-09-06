@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 87
+count: 88
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 43
+  sessions_measured: 44
   sessions_unmeasured: 44
   attributed:
     rollups: 115
@@ -35,9 +35,9 @@ totals:
     one_off_code: 3267
     wall_hours: 195.94
 codex_receipts:
-  attributed: 16
+  attributed: 17
   unattributed: 0
-  measured: 16
+  measured: 17
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1361,3 +1361,23 @@ sessions:
   one_off_code: 96
   wall_hours: 18.35
   codex_receipts: []
+- id: session-088
+  title: "Validation efficiency implementation and integrated fast checkpoint"
+  status: completed
+  primary_bead: think-rwte
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-088.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-088.yaml
+    model_responses: 661
+    agent_hours: 3.21
+    active_union_hours: 1.43
+    wall_hours: 1.43
+    snapshot_incomplete: true

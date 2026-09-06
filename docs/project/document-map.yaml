@@ -9,6 +9,15 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-09-06-validation-efficiency-implementation.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/benchmarks/validation-efficiency/ideas.md, role: plan, authority: supporting, lifecycle: maintained}
+  - {path: packing/benchmarks/validation-efficiency/experiments/VE-001-float-oracle.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/benchmarks/validation-efficiency/experiments/VE-002-bridge.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/benchmarks/validation-efficiency/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/benchmarks/validation-efficiency/report.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: docs/project/reviews/review-2026-09-06-validation-exhaustive-cost.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-09-06-validation-slow-and-controls-cost.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-09-06-tbd-testing-and-ci-performance-proposal.md, role: review, authority: record, lifecycle: retained}
   - {path: README.md, role: orientation, authority: definitive, lifecycle: maintained}
   - {path: SYNOPSIS.md, role: technical-synthesis, authority: definitive, lifecycle: maintained}
   - {path: TUTORIAL.md, role: tutorial, authority: supporting, lifecycle: maintained}
@@ -330,6 +339,7 @@ documents:
   - {path: docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-28-interval-certification.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md, role: plan, authority: supporting, lifecycle: transient}
   - path: docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
     role: plan
@@ -357,6 +367,10 @@ documents:
     role: component-guide
     authority: definitive
     lifecycle: maintained
+  - path: docs/project/reviews/review-2026-09-06-change-scoped-exhaustive-validation.md
+    role: review
+    authority: record
+    lifecycle: retained
 collections:
   - pattern: packing/frontier/n-*.md
     role: frontier-case
