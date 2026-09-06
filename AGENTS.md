@@ -72,11 +72,27 @@ the tools (`devtools`, `cases`, `tests`, `benchmarks`, the console scripts), and
 standalone verifiers under `packing/cases/n11_fractional_certificate/` run on any
 CPython 3.12 or later by design.
 Python, Rust, and research validation are documented in
-[`development.md`](development.md).
+[`development.md`](development.md); **the five validation tiers and the three behavioral
+lanes are tabulated in
+[development.md → Validation Loops](development.md#validation-tiers)**, which is the one
+place they are written down.
+Read it before changing what runs where.
+
 Run them from `packing/`, which is where the project’s `pyproject.toml` and lockfile
-live: `uv run --frozen --all-extras --group dev packing-validate --edit` while editing,
-`packing-validate --push` before any push (the edit tier plus the tests reachable from
-the change), and the full `packing-validate` at a research or merge checkpoint.
+live:
+
+| When | Command |
+| --- | --- |
+| while editing | `uv run --frozen --all-extras --group dev packing-validate --edit` |
+| before any push | `packing-validate --push` — the edit tier plus the tests reachable from the change |
+| before touching a registry | `packing-validate --records` |
+| what every pull request runs | `packing-validate --fast` |
+| at a research or merge checkpoint, and to close a session | the full `packing-validate` |
+
+`OR-13` is the policy behind that split: every fast check runs on the pull-request
+surface, and only the unavoidably slow ones leave it, each on its own measurement.
+`OR-14` is why the surface is kept quick — a development cycle is never artificially
+slow, and its target is two to two and a half minutes.
 
 ### Markdown formatting
 

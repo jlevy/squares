@@ -125,6 +125,58 @@ process execution.
 
 ## Validation Loops
 
+<a id="validation-tiers"></a>
+
+**The canonical reference for what runs where.** Two things are often confused and are
+separate axes. A **tier** is a set of *steps* — which of the gate’s 64 declared steps a
+command runs. A **lane** is a division of the *behavioural suite* — which pytest tests a
+behavioural step runs.
+A tier selects steps; a lane divides one step.
+
+### The tiers
+
+| Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
+| --- | --- | ---: | ---: | --- |
+| `--records` | contributor, before touching a registry; also every pull request | 31 of 64 | 300 s | 11.0 s |
+| `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
+| `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a code change |
+| `--fast` | **CI, on every pull request** | 60 of 64 | 210 s | 177.0 s on CI |
+| *(no flag)* | **CI, on `main`, on dispatch, and daily**; and what a block ends with | 64 of 64 | 3600 s | split across two jobs; not clocked whole |
+
+Four steps are outside `--fast`, each deferred on its own measurement and pinned by
+`test_the_pull_request_surface_defers_only_what_was_measured`: `exhaustive exact
+behavioral tests` (1943 s, its own CI job), `negative controls` (544 s), `n=40 rigidity
+bracket still reproduces` (221 s), and `slow behavioral tests` (the lane below).
+Adding a fifth means arguing it in that test, not editing a list.
+
+### The behavioural lanes
+
+`QUICK_TESTS`, `SLOW_TESTS` and `EXHAUSTIVE_TESTS` in `sqpack/cli/validate.py` are
+marker expressions over `slow` and `exhaustive_exact`. They are **complements**: every
+test satisfies exactly one, so no test can be in two lanes and none can be in zero.
+
+| Lane | Marker | Tests | Runs in | Bound |
+| --- | --- | ---: | --- | --- |
+| quick | neither | 2,106 | `--fast`, so every pull request | fails a test whose `call` phase reaches 5 s |
+| slow | `slow` | 92 | the full gate | fails a test whose `call` phase is under 1 s |
+| exhaustive | `exhaustive_exact` | 53 | its own CI job | its own 3600 s budget |
+
+**Both bounds are enforced, in opposite directions.** A quick test that grows past the
+ceiling fails the pull request in the week it grows; a deferred test that drops below
+the floor fails the deep surface until its marker comes off.
+That is what makes the split a rule rather than a hand-maintained list — the failure
+mode `D-466` records.
+
+### What it is allowed to cost
+
+Ceilings are **data the gate reads, not prose in this file**: one entry per tier in
+[`packing/devtools/gate-budgets.yaml`](packing/devtools/gate-budgets.yaml), compared
+against every whole-tier run’s own wall.
+
+```shell
+uv run --frozen --all-extras --group dev packing-validate --budgets
+```
+
 Choose the smallest loop that protects the change:
 
 ```shell
@@ -279,13 +331,9 @@ per tier, and every whole-tier run compares its own wall against it:
 uv run --frozen --all-extras --group dev packing-validate --budgets
 ```
 
-| Tier | Who runs it | Ceiling | Cost when last measured |
-| --- | --- | --- | --- |
-| `--records` | contributor, before touching a registry | 300 s | 13.6 s, four contended cores, 2026-09-05 |
-| `--edit` | contributor, in the edit loop | 240 s | 59.4 s, four contended cores, 2026-09-05 |
-| `--push` | contributor, before a push | 1800 s | about a minute for a code change; the whole quick lane when the diff reaches everything |
-| `--fast` | CI, on a pull request | 210 s | 177.0 s on CI at `--jobs 3` with 2 quick-lane workers, 2026-09-05, commit `b9d357db` |
-| (default) | CI, on `main` and on the daily schedule | 3600 s | not clocked end to end on one runner; CI splits it across jobs |
+The tiers and their ceilings are tabulated once, under
+[Validation Loops](#validation-tiers).
+This section is about why the register exists rather than what is in it.
 
 The ceiling column is enforced and the cost column is not: the register is the
 authority, and `packing-validate --budgets` prints it as of now.
