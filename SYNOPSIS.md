@@ -2959,13 +2959,13 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 43 |
-| closed before `resource_rollups` existed, logs not retained | 45 |
+| unmeasured | 45 |
 | **total** | **88** |
 
 <!-- END GENERATED: session-close-report -->
 
-The sessions with no measurement closed before `resource_rollups` existed and their
-harness logs are not retained, so that cost is gone rather than pending.
+Unmeasured sessions include live work awaiting a retained receipt and older closed
+sessions whose harness logs were not retained. Missing measurements are not zero cost.
 The Claude rollups no session claims are the delegated half of the same period:
 sub-agent logs that survived while the session records that would have claimed them
 predate the field. Claude backfill needs only a retained log; Codex interval refresh

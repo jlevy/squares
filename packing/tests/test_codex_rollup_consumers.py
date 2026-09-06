@@ -337,6 +337,20 @@ def test_close_report_defensively_deduplicates_one_sessions_declarations(
     assert report.count("model_responses: 7") == 1
 
 
+def test_live_session_without_a_rollup_is_not_labeled_as_historically_closed(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    sessions = {"session-088": {"status": "in_progress", "resource_rollups": []}}
+    monkeypatch.setattr(closer, "load_sessions", lambda: sessions)
+    monkeypatch.setattr(closer, "USAGE", tmp_path)
+    rendered = closer.render_synopsis_block()
+    assert "| measured | 0 |" in rendered
+    assert "| unmeasured | 1 |" in rendered
+    assert "| **total** | **1** |" in rendered
+    assert "closed before" not in rendered
+    assert sessions["session-088"]["status"] == "in_progress"
+
+
 def test_close_render_uses_cumulative_branch_cost_even_with_session_detail(
     monkeypatch, tmp_path: Path
 ) -> None:
