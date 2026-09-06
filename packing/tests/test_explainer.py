@@ -91,8 +91,7 @@ def test_certificate_comparisons_match_the_rendered_certificates(
 ) -> None:
     rendered = render(paths)
     document = " ".join(rendered.markdown.split())
-    assert ("A second certificate" in document) is comparison
-    assert ("certificate supersedes it" in document) is comparison
+    assert ("simpler certificate for the weaker bound" in document) is comparison
     assert ("looser of the two bounds" in document) is comparison
     assert ("The figures below illustrate this certificate." in document) is not comparison
     assert "the theorem written out, the 19/5 certificate as plain data" in document
@@ -554,12 +553,12 @@ def test_the_pdf_chip_offers_the_pdf_the_exporter_writes(page: str) -> None:
 #: A link into this repository as GitHub spells one: the ref, then the path, under
 #: `blob/` for a file and `tree/` for a directory.
 REPOSITORY_LINK = re.compile(
-    re.escape(REPO_URL) + r"/(?:blob|tree)/([^/\s\"<>)]+)/([^\s\"<>)]*)"
+    re.escape(REPO_URL) + r"/(?:blob|tree)/([^/\s\"<>)]+)/([^\s\"<>?#)]*)"
 )
 
 
 def repository_links(text: str) -> set[tuple[str, str]]:
-    """Every (ref, path) the text links into the repository, scripts and styles aside."""
+    """Repository (ref, path) pairs, excluding fragments, queries, scripts and styles."""
     markup = re.sub(r"<(script|style)\b.*?</\1>", "", text, flags=re.DOTALL | re.IGNORECASE)
     return {(ref, path.rstrip("/")) for ref, path in REPOSITORY_LINK.findall(markup)}
 

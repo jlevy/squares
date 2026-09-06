@@ -81,12 +81,117 @@ body {
   --kpress-doc-accent: oklch(76.68% 0.0861 186.4);
 }
 .cert-page {
-  --kpress-font-size-h2: calc(var(--kpress-font-size-base) * 1.3);
+  --kpress-measure: calc(var(--kpress-font-size-base) * 40);
+  --kpress-font-size-h2: calc(var(--kpress-font-size-base) * 1.2);
   padding-block-end: calc(var(--kpress-font-size-base) * 6);
+}
+/* Paper typography profile; see paper-design.md beside this template.
+   Keep the values and their scope together for review upstream to KPress:
+   an 18.5px sans base against 18px prose, regular 410, medium 550, bold 680.
+   Figure text, captions and footnotes share one supporting-text role.
+   Print keeps the same size ratio.
+   Scope the bold token to sans components because KPress also uses it for serif
+   emphasis. Diagram labels with explicit SVG weights join the same scale. */
+:root {
+  --cert-font-scale-sans: calc(18.5 / 18);
+  --cert-font-weight-sans-light: 410;
+  --cert-font-weight-sans-bold: 680;
+  --paper-support-scale: 0.95;
+  --paper-support-leading: 1.4;
+}
+/* Resolve the sans base in the prose scope so nested sans components all use
+   the same size instead of multiplying the scale at each level. */
+:root, .cert-page {
+  --cert-font-size-sans-base: calc(var(--kpress-font-size-base) * var(--cert-font-scale-sans));
+  --paper-font-size-support: calc(var(--cert-font-size-sans-base) * var(--paper-support-scale));
+  --paper-support-color: var(--kpress-doc-muted);
+}
+.cert-page :is(.credits, .kpress-figcaption, .kpress-footnotes, .colophon,
+  .mass-line, .panel, .tip-panel, .caps, .tag, button, .doc-links .chip,
+  .hero h1, .hero .subtitle),
+.kpress-tooltip {
+  --kpress-font-size-base: var(--cert-font-size-sans-base);
+  --kpress-font-size-normal: var(--kpress-font-size-base);
+  --kpress-font-size-large: calc(var(--kpress-font-size-base) * 1.2);
+  --kpress-font-size-small: calc(var(--kpress-font-size-base) * 0.95);
+  --kpress-font-size-smaller: calc(var(--kpress-font-size-base) * 0.9);
+  --kpress-font-size-tiny: calc(var(--kpress-font-size-base) * 0.85);
+  --kpress-caps-label-size: calc(var(--kpress-font-size-smaller) * var(--kpress-caps-heading-size-multiplier));
+}
+.cert-page .panel { font-size: var(--kpress-font-size-normal); }
+.cert-page, .kpress-tooltip {
+  --kpress-font-weight-sans-light: var(--cert-font-weight-sans-light);
+}
+.cert-page :is(.credits, .kpress-figcaption, .kpress-footnotes, .colophon,
+  .mass-line, .panel, .tip-panel, .line-fig, .chart, button),
+.kpress-tooltip {
+  --kpress-font-weight-sans-bold: var(--cert-font-weight-sans-bold);
+  font-weight: var(--cert-font-weight-sans-light);
+}
+.cert-page :is(.line-fig, .chart) [font-weight="650"] {
+  font-weight: var(--cert-font-weight-sans-bold);
+}
+@media print {
+  /* Keep small sans text compact as its letter size increases. */
+  :root { --paper-support-leading: 1.32; }
 }
 .cert-page a, .cert-page .kpress-footnote-ref a, .cert-page a.kpress-footnote-backref,
 .cert-page a:hover, .kpress a.kpress-footnote-backref:hover,
 .kpress-tooltip a, .kpress-tooltip a:hover, .kpress-tooltip .kpress-footnote-nav-link { color: var(--kpress-doc-accent); }
+.cert-page a, .kpress-tooltip a { text-decoration: none; }
+
+/* Supporting text uses one size, family, weight and color in both media.
+   KPress's print text-role reset below turns the inherited gray into black. */
+.cert-page :is(.kpress-figcaption, .kpress-footnotes, .mass-line, .line-fig,
+  .chart, .panel, .tip-panel),
+.cert-page figure :is(.caps, .hint, .legend, .kv, .val, .mass-val, .mass-dec,
+  .verdict, .tag, button) {
+  font-family: var(--kpress-font-sans);
+  font-size: var(--paper-font-size-support);
+  font-weight: var(--cert-font-weight-sans-light);
+  line-height: var(--paper-support-leading);
+  color: var(--paper-support-color);
+}
+.cert-page :is(.kpress-figcaption, .kpress-footnotes) strong { color: inherit; }
+.cert-page :is(figure, .kpress-footnotes) a,
+.cert-page :is(figure, .kpress-footnotes) a:hover {
+  color: var(--paper-support-color);
+  text-decoration: none;
+}
+.cert-page :is(.kpress-figcaption, .kpress-footnotes, .mass-line, .panel) .katex {
+  font-size: var(--kpress-katex-size-sans);
+  color: inherit;
+}
+.cert-page .kpress-footnotes code { color: inherit; }
+.cert-page :is(.line-fig, .chart) svg text {
+  font-family: var(--kpress-font-sans);
+  font-size: var(--paper-diagram-font-size, var(--paper-font-size-support));
+  fill: var(--paper-support-color);
+}
+.cert-page figure .figure-note {
+  font: inherit;
+  color: inherit;
+  margin-block: 0.25rem 0;
+}
+.cert-page figure .verdict.ok { color: var(--kpress-doc-accent); }
+.cert-page figure .verdict.no { color: var(--cert-below); }
+/* Diagram geometry scales with its viewport; the shared script compensates
+   label sizes. Narrow screens scroll the diagram instead of shrinking its text. */
+.cert-page :is(.line-fig, .chart) {
+  overflow-x: auto;
+  margin-block-end: 0;
+}
+.cert-page :is(.line-fig, .chart) svg { min-width: calc(var(--paper-font-size-support) * 34); }
+@media print {
+  .cert-page a, .cert-page a:hover { text-decoration: none; }
+  .cert-page :is(.line-fig, .chart) { overflow: visible; }
+  /* Fix the drawing width before pagination so label compensation sees the
+     same viewport as the PDF: Letter text column minus figure side padding. */
+  .cert-page :is(.line-fig, .chart) svg {
+    min-width: 0;
+    width: calc(8.5in - 2 * var(--kpress-print-page-margin) - 2.2rem);
+  }
+}
 
 /* One transition for every hover and every replaced readout: fast, and the
    same everywhere. The scripts set `.swap` on a readout whose text they
@@ -211,6 +316,7 @@ body {
   margin-block: 2rem 2.2rem;
 }
 .credits strong { font-weight: var(--kpress-font-weight-sans-bold); }
+.credits .publication-date { margin-block-start: 1lh; }
 .cert-page .hero .deck { font-family: var(--kpress-font-prose); font-style: italic; margin-block: 0; }
 /* Where this page came from and how to take it away, at the top corner and out of
    the way. Chips rather than prose: they are tools, not part of the argument. */
@@ -280,22 +386,15 @@ body {
 .trump svg [stroke="#000000"] { stroke: var(--kpress-doc-text); }
 .trump svg text { display: none; }
 .cert-figure[hidden] { display: none; }
-/* `.cert-page` and not `.colophon` alone. A class-only selector is (0,1,0) and kpress's
-   paragraph margins are type-qualified -- `.kpress-prose p` on screen, `.kpress p` in
-   print, both (0,1,1) -- so the 2.5rem here lost in both media and the colophon sat
-   0.65rem under the footnotes instead of 2.5rem. The same shape as the centring bug
-   beside it: this stylesheet is written in classes against a vendor written in types,
-   which loses by default and says nothing when it does. */
+/* Separate the closing credit with whitespace. Qualify the selector so its
+   margins take precedence over kpress's paragraph rules in both media. */
 .cert-page .colophon {
-  /* Set off by a rule, because this is now the only place the typesetting is credited:
-     the running foot used to repeat it under every printed page and no longer does, so
-     the note at the end has to read as a closing one rather than as a last paragraph. */
-  border-block-start: 1px solid var(--kpress-doc-border);
+  border-block-start: 0;
   color: var(--kpress-doc-muted);
   font-family: var(--kpress-font-sans);
   font-size: var(--kpress-font-size-tiny);
-  margin-block: 2.5rem 0;
-  padding-block-start: 1.1rem;
+  margin-block: 4rem 0;
+  padding-block-start: 0;
 }
 
 /* The list bullet, centred on the line it marks rather than offset from a type size.
@@ -370,7 +469,6 @@ body {
   padding: 0.85rem 1.1rem 1rem;
 }
 .cert-page .kpress-figcaption strong {
-  color: var(--kpress-doc-text);
   font-weight: var(--kpress-font-weight-sans-medium);
 }
 
@@ -526,7 +624,7 @@ body {
 .kv dd { margin: 0; text-align: end; }
 .kv dd.hi { color: var(--cert-probe); }
 
-.chart { padding: 1.4rem 1.1rem 0.6rem; }
+.chart { padding: 0.5rem 1.1rem 0.4rem; }
 
 /* One role kpress has no token for: the square the reader drags, which must
    read as a separate instrument from the mass it measures. */
@@ -582,57 +680,17 @@ body {
      rule the chooser would otherwise leave under every figure. */
   .panel, .fig-choose, .cert-page input[type="range"], .screen-only { display: none; }
 
-  /* The panel is gone, so the figure body is a single column, and a canvas
-     is capped by height rather than width so a square one fits the page with
-     its caption. Both were taller than a page before.
-
-     The canvas cap is 4.5in rather than 5.4in to buy back printed pages. A figure
-     is `break-inside: avoid`, so one too tall for the space left is pushed whole to
-     the next page and the current page ends early: measured, this document left
-     32.94in of premature whitespace across four pages, which reads as a break
-     arriving just after a heading even though a paragraph intervenes. It is not
-     that: no heading in the document is stranded, kpress's `break-after: avoid`
-     matches every one of them and was confirmed load-bearing by removing it. The
-     figures were simply too tall. 4.5in and 4.6in measure the same and 4.4in is
-     worse, because pagination is discrete.
-
-     The image cap stays at 7in deliberately. Taking it to 6in would close the
-     largest gap and save two more pages, but the image it caps is the hundred-cell
-     atlas, whose per-cell labels already set at about 2.4pt; the whitespace is the
-     cheaper thing to keep. */
+  /* Stack the printable figure body and cap canvases so their captions fit. */
   .split { display: block; }
-  /* Figure caps, set against the content box rather than by eye. At 1.25in margins a
-     Letter page holds 8.5in of content, and a figure is `break-inside: avoid`, so one
-     taller than the space left is pushed whole and ends the page early. At the previous
-     caps the tallest figure block measured 8.29in -- 97.5% of the box, which is to say
-     it could never share a page with anything, and the text that preceded it was
-     stranded three lines into an otherwise empty page.
-
-       canvas 4.5in / img 7.0in   tallest block 8.29in   14 pages
-       canvas 3.6in / img 5.5in   tallest block 6.79in   13 pages
-       canvas 3.2in / img 5.0in   tallest block 6.29in   12 pages
-
-     Taking the last for the canvases: the other six figures now sit with their text
-     instead of ending a page early.
-
-     The atlas is the exception, and it gets its own cap. It takes a page of its own
-     whatever size it is -- a hundred cells of detail is what the figure is for -- so the
-     only question is how much of that page it uses, and at 5in the answer was 69% of the
-     column: a 398px image in 576px of measure, with 164px of the page left blank under
-     the caption. Measured at the print column, image then whole figure against the 816px
-     the content box holds:
-
-       img 5.0in    image 398x480   figure 652px   80% of the box
-       img 6.0in    image 477x576   figure 748px   92%
-       img 6.5in    image 517x624   figure 796px   98%   <- here
-       img 7.0in    image 557x672   figure 844px   overflows by 28px
-
-     6.5in is the last one that fits. Past it the image stops growing -- 557px is where
-     `max-width` binds -- while the figure keeps overflowing a page it cannot be placed
-     on, because `break-inside: avoid` cannot split it and nothing else can either. The
-     20px of headroom at 6.5in is the margin for a caption that reflows by a line. */
   .stage canvas { max-height: 3.2in; width: auto; max-width: 100%; margin-inline: auto; }
   .cert-page figure img { max-height: 6.5in; width: auto; max-width: 100%; }
+
+  /* The hundred-packing atlas gets a page of its own. With 0.75in vertical
+     margins, its full six-inch width leaves room for the caption. Remove the
+     stage's side padding and the old height cap that narrowed the graphic. */
+  .cert-page .stage:has(img[src="known-best-1-100.svg"]) { padding-inline: 0; }
+  .cert-page .stage > a:has(img[src="known-best-1-100.svg"]) { width: 100%; }
+  .cert-page figure img[src="known-best-1-100.svg"] { max-height: none; width: 100%; }
 
   /* Link targets are deliberately not spelled out after each link: a URL set in
      the middle of a sentence breaks the line badly and reads worse than the
@@ -646,11 +704,17 @@ body {
   .kpress-page-main {
     --kpress-doc-bg: oklch(100% 0 0);
     --kpress-doc-border: oklch(78.26% 0 0);
-    --kpress-doc-muted: oklch(38.67% 0 0);
-    --kpress-doc-text: oklch(17.76% 0 0);
     background: oklch(100% 0 0);
-    color: oklch(17.76% 0 0);
     color-scheme: light;
+  }
+  /* Print prose, captions, labels and the colophon in solid black. Reset both
+     text roles at every KPress scope so screen theme tokens cannot shadow them. */
+  :root, .kpress, .kpress-page-main, .kpress-tooltip,
+  :is(.kpress, .kpress-page-main, .kpress-tooltip)[data-kpress-resolved-theme],
+  :is(.kpress, .kpress-page-main, .kpress-tooltip)[data-kpress-palette][data-kpress-resolved-theme] {
+    --kpress-doc-muted: #000;
+    --kpress-doc-text: #000;
+    color: var(--kpress-doc-text);
   }
   :root { --cert-probe: oklch(55% 0.145 52); }
 
@@ -774,7 +838,21 @@ body {
      this rule the one that decides the paper. Declaring `size` WITHOUT that flag is the
      trap: Chromium then centres the CSS page box on the API's paper and leaves dead
      bands around it. The two belong together and are commented at both ends. */
-  @page { size: Letter; }
+  @page { size: Letter; margin-top: 0.75in; margin-bottom: 0.75in; }
+  .cert-page { padding-block-end: 0; }
+  .cert-page .hero { padding-block-start: 0.25in; }
+  .cert-page h2 { margin-block: calc(var(--kpress-font-size-base) * 1.5) 0.75rem; }
+  .cert-page .colophon { margin-block-start: 2rem; }
+  /* Keep reading-guide groups together and set their short entries compactly. */
+  #further-reading + ul { font-size: var(--kpress-font-size-small); }
+  #further-reading + ul > li { break-inside: avoid; }
+  #further-reading + ul ul { margin-block-end: 0; }
+  #further-reading + ul ul > li { margin-block-start: 0.3rem; }
+  /* Keep an equation with the prose introducing it, and short lists intact. */
+  .cert-page p { break-inside: avoid; }
+  .cert-page p:has(+ .kpress-math-display, + ul) { break-after: avoid; }
+  .cert-page p + .kpress-math-display { break-before: avoid; }
+  .cert-page > ul:not(:has(ul)) { break-inside: avoid; }
   /* On `.kpress` as well as `:root`, and that is the whole of why the type size moved.
      kpress declares both tokens on `:root, .kpress, .kpress-page-main, .kpress-tooltip`
      and then reads the size back on `.kpress` -- `font-size: var(--kpress-print-font-size)`
@@ -803,6 +881,8 @@ body {
      advice that Blink ignores them is out of date. */
   @page {
     @bottom-left { content: none; }
+    @bottom-left { color: #000; }
+    @bottom-right { color: #000; vertical-align: top; padding-top: 0.15in; }
   }
 
   /* No folio on the title page either: it already carries the edition and the
@@ -815,7 +895,10 @@ body {
      colour rather than the muted one kpress gives them. */
   .cert-page .kpress-footnotes {
     color: var(--kpress-doc-text);
+    margin-block-start: 1.5rem;
+    padding-block-start: 0.75rem;
   }
+  .cert-page .kpress-footnotes ol > li { margin-block-start: 0.4rem; }
 
   /* Their numbers in the sans the entries are set in. kpress replaces the list marker in
      print with `content: counter(...)` on `li::before` and sets that in
@@ -1366,6 +1449,26 @@ window.addEventListener('afterprint', repaint);
 <script>
 /* ---------- shared: static math, then the certificate picker ---------- */
 (() => {
+  /* SVG font sizes use viewBox units. Compensate for the drawing scale so
+     labels have the same on-page size as captions, including during print. */
+  const diagrams = [...document.querySelectorAll('.line-fig svg, .chart svg')];
+  function sizeDiagramLabels() {
+    for (const svg of diagrams) {
+      if (!svg.getBoundingClientRect().width) continue;
+      const matrix = svg.getScreenCTM();
+      const scale = matrix && Math.hypot(matrix.c, matrix.d);
+      if (!scale) continue;
+      const size = parseFloat(getComputedStyle(svg.parentElement).fontSize) / scale;
+      svg.style.setProperty('--paper-diagram-font-size', `${size}px`);
+    }
+  }
+  const diagramObserver = new ResizeObserver(sizeDiagramLabels);
+  diagrams.forEach(svg => diagramObserver.observe(svg));
+  window.addEventListener('beforeprint', sizeDiagramLabels);
+  window.addEventListener('afterprint', sizeDiagramLabels);
+  window.matchMedia('print').addEventListener('change', sizeDiagramLabels);
+  document.fonts.ready.then(sizeDiagramLabels);
+  sizeDiagramLabels();
   const kern = s => String(s).replace(/(?<![A-Za-z\\])([a-z])\(/g, '$1\\mkern1mu(');
   const render = (el, s, d) => { try { katex.render(kern(s), el, { displayMode: !!d, throwOnError: false }); }
                                  catch (e) { el.textContent = s; } };

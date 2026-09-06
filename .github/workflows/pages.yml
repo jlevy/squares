@@ -25,6 +25,7 @@ name: Certificate page
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
       - packing/devtools/check_print_layout.py
+      - packing/devtools/inspect_explainer_typography.py
       - packing/src/sqpack/**
       - packing/frontier/results.yaml
       - packing/atlas/known-best/composite-figure.json
@@ -49,6 +50,7 @@ name: Certificate page
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
       - packing/devtools/check_print_layout.py
+      - packing/devtools/inspect_explainer_typography.py
       - packing/src/sqpack/**
       - packing/frontier/results.yaml
       - packing/atlas/known-best/composite-figure.json
@@ -147,6 +149,12 @@ jobs:
       # reference opens a line -- at the column the PDF actually has.
       - name: Check the print layout
         run: uv run --frozen --group dev python -m devtools.check_print_layout
+
+      - name: Check paper typography on screen and in print
+        run: |
+          uv run --frozen --group dev python -m devtools.inspect_explainer_typography --self-test
+          uv run --frozen --group dev python -m devtools.inspect_explainer_typography --check-supporting --theme light
+          uv run --frozen --group dev python -m devtools.inspect_explainer_typography --check-supporting --theme dark --width 390
 
       - name: Upload the page artifact
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'

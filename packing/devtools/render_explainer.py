@@ -979,7 +979,7 @@ def row_mass(row: CoarseningRow) -> Fraction:
 def coarsening_svg(rows: list[CoarseningRow]) -> tuple[str, str, str]:
     """Bars, value labels and axis labels for the net-coarsening figure."""
     left, width, gap = 100.0, 66.0, 50.0
-    top, base = 30.0, 190.0
+    top, base = 56.0, 160.0
     bars, values, labels = [], [], []
     for index, row in enumerate(rows):
         x = left + index * (width + gap)
@@ -1005,8 +1005,8 @@ def coarsening_svg(rows: list[CoarseningRow]) -> tuple[str, str, str]:
         # measurement records it rounded to six places rather than exactly, so
         # the label says as much. The mass above the bar is the exact one.
         labels.append(
-            f'<text x="{x + width / 2:.0f}" y="210"{tone}>K = {row["K"]}</text>'
-            f'<text x="{x + width / 2:.0f}" y="226" font-size="9.5">'
+            f'<text x="{x + width / 2:.0f}" y="188"{tone}>K = {row["K"]}</text>'
+            f'<text x="{x + width / 2:.0f}" y="220">'
             f"B {nearly(row['B'])}</text>"
         )
     return "\n        ".join(bars), "\n        ".join(values), "\n        ".join(labels)
@@ -1040,14 +1040,14 @@ def halving_cost(rows: list[CoarseningRow]) -> tuple[str, str]:
 # pixels, not quantities: a rounded coordinate is a rounded coordinate and not a
 # rounded bound.
 LINE_LOW, LINE_HIGH, LINE_X0, LINE_X1 = 3.75, 3.90, 20.0, 680.0
-# The axis sits at y = 51.5; a certificate's mark hangs below it, one row per
-# certificate, the headline bound deepest so no label crosses the mark under it.
-LINE_AXIS_Y = 51.5
-LINE_FIRST_ROW = 62.0
-LINE_ROW = 22.0
+# The axis sits at y = 76; a certificate's mark hangs below it, one row per
+# certificate, the largest bound first so deeper leaders stay left of earlier labels.
+LINE_AXIS_Y = 76.0
+LINE_FIRST_ROW = 128.0
+LINE_ROW = 32.0
 # The viewBox height the figure declares. A certificate count that would not fit
 # under the axis fails the render rather than drawing off the bottom of the box.
-LINE_HEIGHT = 92.0
+LINE_HEIGHT = 180.0
 
 
 def line_x(value: float) -> float:
@@ -1060,17 +1060,16 @@ def number_line_marks(facts: list[Facts], headline: Facts) -> str:
 
     The figure states all of the bounds at once, so the marks are generated here
     the way the coarsening bars are, rather than written once and stamped per
-    certificate. Rows go by bound, smallest first and the headline last and
-    deepest: a label runs to the right of its own mark, so the mark below it is
-    always the further one along the axis and the two cannot collide.
+    certificate. Rows go by bound, largest first: labels run to the right of
+    their marks, so deeper leaders stay to the left of the labels above them.
     """
-    ordered = sorted(facts, key=lambda f: f.outer_side)
-    if ordered[-1] is not headline:
+    ordered = sorted(facts, key=lambda f: f.outer_side, reverse=True)
+    if ordered[0] is not headline:
         raise SystemExit("the headline bound is not the largest; the marks would stack wrong")
     depth = LINE_FIRST_ROW + LINE_ROW * (len(ordered) - 1)
-    if depth + 4 > LINE_HEIGHT:
+    if depth + 10 > LINE_HEIGHT:
         raise SystemExit(
-            f"{len(ordered)} certificates need {depth + 4:.0f} pixels of axis and the "
+            f"{len(ordered)} certificates need {depth + 10:.0f} pixels of axis and the "
             f"figure's viewBox is {LINE_HEIGHT:.0f} tall; raise it in the Markdown"
         )
     marks = []
@@ -1088,7 +1087,7 @@ def number_line_marks(facts: list[Facts], headline: Facts) -> str:
             f'stroke="{colour}" stroke-width="{2 if lead else 1.25}"/>'
             f'<circle cx="{x:.0f}" cy="{LINE_AXIS_Y}" r="{4.4 if lead else 3.2}" '
             f'fill="{colour}"/>'
-            f'<text x="{x:.0f}" y="{y + 4:.0f}" dx="11" font-size="11"{emphasis} '
+            f'<text x="{x:.0f}" y="{y + 4:.0f}" dx="11"{emphasis} '
             f'fill="{colour}">{label}</text>'
         )
     return "\n    ".join(marks)
@@ -1395,6 +1394,16 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "BEST_SOURCE": BEST_SOURCE,
         "BEST_RENDER_URL": repo_file(BEST_RENDERING),
         "ATLAS_URL": repo_file(ATLAS),
+        "ARCHIVE_URL": repo_file(REPO / "packing/resources"),
+        "NAGAMOCHI_URL": repo_file(
+            REPO
+            / "packing/resources/papers"
+            / "nagamochi-2005-packing-unit-squares-in-a-rectangle.pdf"
+        ),
+        "TUTORIAL_URL": repo_file(REPO / "TUTORIAL.md"),
+        "WORKFLOWS_URL": repo_file(REPO / "SYNOPSIS.md") + "#workflow-entry-contracts",
+        "PRINCIPLES_URL": repo_file(REPO / "README.md") + "#operating-principles",
+        "EPISTEMICS_URL": repo_file(REPO / "epistemics.md"),
         "TRUMP_SVG": best_packing_svg(),
         "NUMBER_LINE_MARKS": number_line_marks(facts, headline),
         "PRIOR_X": f"{line_x(float(PRIOR_LOWER)):.0f}",
@@ -1822,7 +1831,7 @@ def published_markdown(source: str, *, default_slug: str) -> str:
     # The credits are one span per line inside a div. As a list they survive the
     # formatter, which would otherwise run four separate facts into one paragraph.
     def _credits(match: re.Match[str]) -> str:
-        items = re.findall(r"<span>(.*?)</span>", match.group(1), re.DOTALL)
+        items = re.findall(r"<span\b[^>]*>(.*?)</span>", match.group(1), re.DOTALL)
         return "\n".join(f"- {_inline_markdown(item)}" for item in items)
 
     # The template gives the div a second class for its alignment; the list is keyed on
