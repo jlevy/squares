@@ -35,7 +35,7 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 </div>
 
-## What Is This?
+## New Result
 
 This work presents a new lower bound on a long-standing open geometry problem: eleven
 unit squares with disjoint interiors, free to rotate, cannot fit in a
