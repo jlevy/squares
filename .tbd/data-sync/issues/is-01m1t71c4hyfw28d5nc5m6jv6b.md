@@ -5,12 +5,14 @@ title: Obtain green hosted checks and sync terminal bead graph
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 labels:
   - hosted-ci
 dependencies:
   - type: blocks
     target: is-01m1t71csrccnm9j5rxz1adnzw
+  - type: blocks
+    target: is-01m1tw1eat5q4838bqsxrwfddf
 parent_id: is-01m1t5yjssbd51cnnw2zwkqah6
 child_order_hints:
   - is-01m1tcw4q98vj6rme1bbatbg2a
@@ -18,7 +20,7 @@ child_order_hints:
   - is-01m1ts774dawfnc2rfb65gzadb
   - is-01m1tspngpszdxr6qgwfgxphbw
 created_at: 2026-09-06T01:58:57.423Z
-updated_at: 2026-09-06T07:52:25.685Z
+updated_at: 2026-09-06T08:05:59.767Z
 ---
 Push the reconciled branch, monitor PR #89 through all required checks, fix any branch-owned failure, update evidence, close terminal stabilization beads, and run tbd sync.
 

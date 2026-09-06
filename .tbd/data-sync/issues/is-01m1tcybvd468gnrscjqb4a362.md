@@ -5,12 +5,12 @@ title: The pull-request surface's 5s per-test ceiling is not stable at its own c
 kind: bug
 status: open
 priority: 1
-version: 1
+version: 2
 labels:
   - tooling
 dependencies: []
 created_at: 2026-09-06T03:42:10.284Z
-updated_at: 2026-09-06T03:42:10.284Z
+updated_at: 2026-09-06T08:07:42.669Z
 ---
 `fast behavioral tests` fails on a different, essentially arbitrary set of tests each run,
 so the `checks` surface has never been green and cannot be made green by marking.
@@ -62,3 +62,7 @@ gap was sized for.
    constant. Correct and the most work.
 
 `BC-218` is the cell that owns this tier's calibration.
+
+## Notes
+
+PR #93 review R2 (https://github.com/jlevy/squares/pull/93#issuecomment-5557862664) reproduced missing forkserver worker CPU: >=0.5 process CPU seconds in worker reported as 0.01 by parent plugin. Review remediation keeps the plugin diagnostic-only and labels terminal and serialized observations as incomplete lower bounds. Before using CPU thresholds, implement and test complete descendant accounting (including forkserver, direct children, xdist, and cross-phase reaping) without altering workload process semantics. Existing wall-clock threshold remains active; complete CPU accounting is follow-up here.
