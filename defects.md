@@ -233,7 +233,7 @@ This is the actionable list.
 | D-460 | contained | low | A research cell with no hypothesis cannot produce a round, and BC-206 was written that way | `think-c0qm` |
 | D-467 | outstanding | medium | Two branches allocated the same three defect ids to different defects, and nothing local can see it | `think-8bcl` |
 | D-470 | contained | medium | A test pinned to the moving certificate pointer went stale, and no pull request could have caught it | `think-doar` |
-| D-471 | outstanding | medium | The conflicted-branch CI blackout fired three more times in one day, and nothing but a person detects it | `think-706h` |
+| D-471 | contained | medium | The conflicted-branch CI blackout fired three more times in one day, and nothing but a person detects it | `think-706h` |
 
 ## Every defect
 
@@ -709,7 +709,7 @@ This is the actionable list.
 | [D-468](packing/src/sqpack/campaign/commit_clock.py) | 2026-09-05 | tooling | validity | neutral | `anomaly` | high | fixed | The record gate judged four refusals against the wall clock, so a green commit did not stay green |
 | [D-469](packing/pyproject.toml) | 2026-09-06 | tooling | bookkeeping |  | `inspection` | low | fixed | A dependency comment claimed a reproducibility the code it describes denies |
 | [D-470](packing/tests/test_fractional_interval.py) | 2026-09-06 | tooling | bookkeeping |  | `gate` | medium | contained | A test pinned to the moving certificate pointer went stale, and no pull request could have caught it |
-| [D-471](packing/campaign/agent-sessions/session-087-agenda022-continuation.md) | 2026-09-06 | tooling | robustness |  | `inspection` | medium | outstanding | The conflicted-branch CI blackout fired three more times in one day, and nothing but a person detects it |
+| [D-471](.github/workflows/branch-mergeability.yml) | 2026-09-06 | tooling | robustness |  | `inspection` | medium | contained | The conflicted-branch CI blackout fired three more times in one day, and nothing but a person detects it |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

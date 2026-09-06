@@ -490,6 +490,17 @@ Agenda 022’s Session 087 closed after PR 83 merged and the full gate passed on
 Agenda 024 is a separate portfolio; its active-hour clocks and T+2 disposition do not
 resume the completed efficiency block.
 
+PR 93 subsequently landed two operational guards on `main` without changing this
+research entry point.
+The on-demand [`deep-gate.yml`](.github/workflows/deep-gate.yml) runs the four deferred
+checks against a pull request before merge; because it is advisory, the post-merge full
+gate remains the backstop for a pull request that does not request it.
+The push-triggered
+[`branch-mergeability.yml`](.github/workflows/branch-mergeability.yml) now reports a
+branch that cannot be merge-built even when GitHub cannot create its pull-request merge
+ref. Its remaining blind spot is an idle branch after `main` moves and before the next
+push. Session 087 retains the full-gate evidence from run `34010683180` at `c743d7bb`.
+
 ### Handoff Record
 
 [Open the house rendering of the retained 100-square witness.](packing/atlas/known-best/rendering/n-100.svg)
@@ -3266,14 +3277,15 @@ The supported distinction is that the gate has never caught the mathematics bein
 **[D-470](defects.md) records a deferred exhaustive test that still asserted the rung
 `T-021` displaced.** The full gate caught the stale transcription after the PR 83 merge;
 the test now re-derives its values from the moving certificate pointer.
-The post-merge exhaustive tier remains the guard for this deferred class.
+The optional pre-merge deep gate now exercises the deferred surface; the post-merge
+exhaustive tier remains the backstop when that gate is not requested.
 
 **[D-471](defects.md) records three further conflicted-branch CI blackouts.** A branch
 whose merge ref GitHub cannot synthesize receives no pull-request workflow run.
-The proposed local `git merge-tree` guard is not on this tree, so the defect remains
-outstanding rather than being described as contained.
+The push-triggered `git merge-tree` guard now detects that state after every branch
+push; an idle branch can still become conflicted when `main` moves underneath it.
 
-The generated log currently has 66 open entries: 41 `outstanding` and 25 `contained`.
+The generated log currently has 66 open entries: 40 `outstanding` and 26 `contained`.
 The W9 candidate `think-cyko` owns their systematic risk ordering and bounded repair
 waves; the synopsis names the cases that matter to current claims rather than pretending
 the examples below are the whole backlog.

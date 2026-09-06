@@ -15393,16 +15393,22 @@ defects:
     *declares*, so a verifier that drifted from the artifact fails even if both literals
     were updated together.
     The structural half is bounded rather than closed, which is why this is contained.
-    The post-merge exhaustive job remains the guard for deferred tests; it caught this
-    instance six hours late. A later efficiency-branch proposal to run the deferrals
-    before merge is not part of this closure and is not represented as a present guard.
+    `.github/workflows/deep-gate.yml` runs the four deferrals -- the exhaustive tier, the
+    negative controls, the n = 40 bracket and the slow behavioural lane -- against a pull
+    request rather than after it, in two jobs so that D-456's timeout cannot swallow the
+    other three verdicts. PR 93 landed it on main as 3122c497. It is requested by a
+    label rather than run on every pull request, so a branch that does not ask still
+    merges on the same evidence this one did. Until it is required, the guard is the
+    post-merge exhaustive job, which does catch this class -- six hours late in this
+    instance.
   regression: >-
     The exhaustive exact tier itself, which is what caught this one and will catch the
     next one at the same distance. No check added here fires earlier, and the two that
     could are named rather than left implicit: a rule refusing a retained test literal
     derived from the moving pointer unless the test says which rung it means, which is
-    the file-level form of D-458's fix. A pre-merge deep gate would generalise beyond
-    this pointer, but that proposed workflow is not present on this tree.
+    the file-level form of D-458's fix, and the pre-merge deep gate above, which is the
+    surface-level one. The first is cheap and narrow, the second is the one that
+    generalises past this pointer.
   recurrence_of: D-458
   status: contained
   bead: think-doar
@@ -15444,20 +15450,25 @@ defects:
     control that fails when the day gets busy, and the day it is most needed -- several
     branches, a moving main -- is exactly the busy one.
   fix: >-
-    The three instances were ended the way D-459's was, by merging the base into the
-    branch, and CI created a run on the next push every time. That fixes each instance,
-    not the class, so the status remains outstanding.
-    An unmerged efficiency-branch proposal used a push-triggered local
-    `git merge-tree` check: it would run from the branch tip even when GitHub cannot
-    synthesize the pull-request merge ref. This planning closure does not import that
-    workflow, so it is retained as a prospective repair rather than a present control.
+    Each of the three occurrences was ended the way D-459's was, by merging the base
+    into the branch, and CI created a run on the next push every time. The durable repair
+    landed on main in PR 93 as 3122c497:
+    `.github/workflows/branch-mergeability.yml`, and its shape is the whole design: it
+    triggers on `push` rather than on `pull_request`, because the defect *is* that no
+    pull-request run exists, so a pull-request-triggered check would be silent in exactly
+    the case it is meant to name. A push fires off the branch tip, which always exists,
+    and its check run is keyed to the head commit, so it appears on the pull request's
+    checks list where the missing runs would have been. D-459's objection stands and is
+    respected rather than overruled -- the gate validates this repository, not GitHub's
+    view of a pull request -- because `git merge-tree` is local and answers the same
+    question with no external service in the dependency graph.
   regression: >-
-    No current automated regression detects this class. A push-triggered local
-    `git merge-tree` check is the proposed regression: it can test the same mergeability
-    condition without depending on GitHub's synthesized merge ref. It would still answer
-    about the base the runner fetched, so a later base advance leaves a one-fetch window,
-    the same residue the commit-clock anchor carries in D-468.
+    The workflow above, which is the first automated check that detects this class.
+    One residue is worth stating rather than discovering: it answers about the base the
+    runner fetched, so a base that advances after the check still produces the blackout
+    until the branch's next push. That narrows the window from open-ended to one push,
+    and it is why the defect is contained rather than fixed.
   recurrence_of: D-459
-  status: outstanding
+  status: contained
   bead: think-706h
-  recorded_in: packing/campaign/agent-sessions/session-087-agenda022-continuation.md
+  recorded_in: .github/workflows/branch-mergeability.yml

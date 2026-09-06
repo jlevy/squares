@@ -512,7 +512,7 @@ def test_known_best_composite_png_refuses_a_raster_of_the_wrong_size(
         background_color="white",
     )
     assert isinstance(wrong_size, bytes)
-    monkeypatch.setattr(known_best_builder.cairosvg, "svg2png", lambda **_kwargs: wrong_size)
+    monkeypatch.setattr(cairosvg, "svg2png", lambda **_kwargs: wrong_size)
 
     with pytest.raises(ValueError, match="PNG preview dimensions are 8x8"):
         known_best_builder._update_png_export(export, "<svg/>\n")  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001

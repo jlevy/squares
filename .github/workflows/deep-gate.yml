@@ -1,0 +1,254 @@
+name: Deep gate
+
+# The four steps the pull-request surface defers, run against a pull request *before* it
+# merges rather than after it. Not on every build, and that is the point: the selection
+# here is 1943.05s in one step.
+#
+# **The hole this closes, and it is measured rather than feared.** The header of
+# `packing-validation.yml` already concedes it in one sentence -- "a pull request can be
+# green while a deferred test is broken" -- and on 2026-09-05 that sentence came true.
+# `test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net` in
+# `packing/tests/test_fractional_interval.py` asserted a certificate rung that a later
+# commit displaced. It is marked `exhaustive_exact`, so no pull request ran it; every
+# pull request was green. Run 34009814108, on the merge commit `6bd136b0` (PR #90),
+# failed on `assert enclosure == (Fraction(50007, 50000), ...)` against the moved value,
+# and `main` stayed red across `6bd136b0` -> `da06ac25` until `c743d7bb` merged the fix:
+# about five hours and three merges. Twice in one day, through the same gap.
+#
+# The daily `cron: "17 8 * * *"` in `packing-validation.yml` is the only other thing that
+# runs this surface, and its own comment is honest about what it is -- a backstop that
+# reports a break "up to 24 hours late", by which time the break is on `main` and two
+# more merges are sitting on top of it. A backstop is not a gate.
+#
+# **Why the steps are not simply promoted into `--fast` instead.** Because the
+# measurements say no, and they are re-argued every time somebody asks:
+# `test_the_pull_request_surface_defers_only_what_was_measured` prices the exhaustive
+# tier at 1943.05s, the negative controls at 543.67s and the n=40 bracket at 221.36s
+# against a `--fast` band of 700s in `devtools/gate-budgets.yaml`. Twenty-one steps were
+# promoted on 2026-09-05 on exactly that arithmetic and these four were refused on it.
+# What did not survive contact with `6bd136b0` is the *other* half of that decision --
+# the unstated assumption that a deferred step only has to be reported eventually. It has
+# to be reported before the merge. It does not have to be reported on every push.
+#
+# Reviewers request this advisory evidence by label or dispatch. It does not enforce a
+# merge prerequisite. This personal repository cannot enable GitHub's organization-only
+# merge queue; future queue adoption also requires workflow changes because GitHub shares
+# required checks between pull requests and merge groups. See `development.md`.
+
+"on":
+  # **The on-demand path, which is what exists today.** `deep-gate` on the pull request
+  # runs this; no label runs nothing. `labeled` starts it, and `synchronize` is what
+  # keeps it honest -- without it the label would attest to a commit that is no longer
+  # the head, which is the same class of stale evidence as the daily backstop. Label
+  # last, when the branch is otherwise ready: every push after the label costs another
+  # deep run.
+  #
+  # `opened` creates a run even before the first push or label change. On a pull
+  # request with no label every job below is skipped in seconds. A skipped job
+  # reports a conclusion; it does not sit pending. That distinction is the whole of the
+  # `D-380` argument at the bottom of this file.
+  pull_request:
+    types: [opened, labeled, synchronize, reopened, ready_for_review]
+
+  # **The escape hatch.** `pull_request: <number>` checks out that pull request's merge
+  # ref and runs the deep surface against it without touching labels -- useful for
+  # re-running one after an infrastructure failure, and useful to a reviewer who wants
+  # the evidence without changing the author's pull request. Blank runs against whatever
+  # ref the dispatch was aimed at. GitHub only offers a `workflow_dispatch` that exists
+  # on the default branch, so this input is inert until this file is on `main`.
+  workflow_dispatch:
+    inputs:
+      pull_request:
+        description: "Pull request number to run against (blank: this ref)"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  # Deliberately *not* `packing-validation-...`. Concurrency groups are repository-wide
+  # strings, and that group carries `cancel-in-progress` on pull requests: sharing it
+  # would let an ordinary push cancel a 32-minute deep run and leave the label attesting
+  # to a run that never finished. Different prefix, no interaction in either direction.
+  #
+  # Keyed by event as well as ref: a pull-request run uses `refs/pull/N/merge`,
+  # while a dispatch can target the same ref independently.
+  # The dispatch input joins the key so two dispatches aimed at different pull
+  # requests do not queue behind one another on `refs/heads/main`.
+  group: deep-gate-${{ github.event_name }}-${{ github.event.inputs.pull_request || github.ref }}
+  # Supersede pull-request runs only, which is the opposite of the call
+  # `packing-validation.yml` makes for its deep jobs -- and for the reason that file
+  # gives for making it. There, a cancelled deep run is "the only deep coverage that tree
+  # was going to get", because the tree is already merged. Here it is not: a superseded
+  # commit is one nobody will merge, the replacement run gets its own deep coverage, and
+  # `synchronize` guarantees there is a replacement.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  deferred-steps:
+    # Three of the four deferrals: `negative controls` (543.67s), `slow behavioral tests`
+    # (890s of a 1,038s suite, in 92 of 2,251 tests) and `n=40 rigidity bracket still
+    # reproduces` (221.36s). The fourth is `exhaustive-tier` below.
+    #
+    # `--only` rather than a tier flag, and unlike in `packing-validation.yml` that is
+    # the correct instrument here. There, `--only` on a pull-request job would have left
+    # part of the surface with no declared ceiling, which is `D-466`. Here the selection is
+    # by construction not a tier: it is the *complement* of one, it has no entry in
+    # `devtools/gate-budgets.yaml`, and `_tier_id` returns `None` for an `--only` run so
+    # nothing is judged against a ceiling it does not have. What bounds these steps is
+    # their own `budget_seconds`, which `_execute_step` raises the subprocess timeout to
+    # -- 1800s for the negative controls and for the slow lane. That is the same
+    # arrangement the `exhaustive` job in `packing-validation.yml` already runs under.
+    #
+    # The names are typed here and cannot drift silently:
+    # `test_the_deep_gate_runs_exactly_what_the_pull_request_defers` parses these commands
+    # with the CLI's own parser, resolves them through its own selector, and requires the
+    # union to equal the set no pull-request job runs. A fifth deferral added tomorrow
+    # fails that test until it is added here, which is the property the daily backstop
+    # never had.
+    #
+    # `--jobs 2 --inner-jobs 2`: this job's wall is one step's wall. `slow behavioral
+    # tests` runs pytest in a single process -- the xdist lane is the quick one -- so it
+    # is 890s that no amount of outer parallelism shortens, and the other two (543.67s
+    # then 221.36s) finish underneath it on the second slot. A third slot buys nothing
+    # and costs contention, which is `BC-218`'s finding one level down.
+    if: >-
+      github.event_name == 'workflow_dispatch'
+      || contains(github.event.pull_request.labels.*.name, 'deep-gate')
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Blank on every event but `workflow_dispatch`, where it names the pull
+          # request's merge ref so a dispatch tests what a merge would produce rather
+          # than a branch tip.
+          # `github.event.inputs` rather than the `inputs` context: the latter is
+          # documented as available only to a dispatched or reusable workflow, and
+          # this step also runs on `pull_request`, where the event
+          # payload simply carries no inputs and this renders empty.
+          ref: ${{ github.event.inputs.pull_request && format('refs/pull/{0}/merge', github.event.inputs.pull_request) || '' }}
+          # Shallow is enough: the only step that needs full history is `provenance`, and
+          # this selection is `--only`, so it is not in it. kpress is vendored at
+          # vendor/kpress and installed from that path, so the environment does not
+          # resolve without the submodule checked out.
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Run the deferred steps that are not the exhaustive tier
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate
+          --only "negative controls"
+          --only "slow behavioral tests"
+          --only "n=40 rigidity bracket still reproduces"
+          --jobs 2 --inner-jobs 2
+
+  exhaustive-tier:
+    # The exhaustive exact tier alone, on its own runner, for the reason think-tr2z split
+    # it out of the post-merge gate: at 1943.05s it is the one step that decides whether
+    # the *other* steps get reported at all. `D-456` is what that looked like -- the tier
+    # outgrew its budget, the gate killed it with its output in an unflushed pipe, and
+    # three consecutive merges went red saying nothing about the sixty other steps. Run
+    # beside `deferred-steps` in one job it would do that here too, and the deep gate's
+    # whole value is naming *which* deferral broke before the merge rather than after it.
+    #
+    # It costs a second runner and no wall: 1943.05s here against about 890s there, so
+    # the gate finishes when this job does either way. `BC-218` priced a second job at
+    # "+3 billed minutes and zero wall" and took it; this one is dearer in minutes and
+    # buys a separable verdict, on a workflow requested by label or dispatch.
+    #
+    # `--jobs 1 --inner-jobs 2` is the shape the 1943.05s reading was taken under.
+    if: >-
+      github.event_name == 'workflow_dispatch'
+      || contains(github.event.pull_request.labels.*.name, 'deep-gate')
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # `github.event.inputs` rather than the `inputs` context: the latter is
+          # documented as available only to a dispatched or reusable workflow, and
+          # this step also runs on `pull_request`, where the event
+          # payload simply carries no inputs and this renders empty.
+          ref: ${{ github.event.inputs.pull_request && format('refs/pull/{0}/merge', github.event.inputs.pull_request) || '' }}
+          # Shallow, and submodules for the same two reasons as above.
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Run the exhaustive exact tier
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --only "exhaustive exact behavioral tests"
+          --jobs 1 --inner-jobs 2
+
+  deep-gate-required:
+    # One context for the whole deep surface, exactly as `packing-required` is one
+    # context for the whole pull-request surface -- and for the same recorded reason.
+    # `D-380` is what a fan-out of separately required checks did here once: superseded
+    # runs reporting hard failures, waking a session twice in ten minutes to diagnose a
+    # run that had already been replaced. `BC-218` set "the aggregate stays the single
+    # required context" as the condition for allowing any job split at all, and this
+    # workflow is a job split, so it inherits the condition. A reviewer watches
+    # `packing-required` and, when the deep surface is in play, `deep-gate-required`.
+    # Never four contexts.
+    #
+    # **This adds no always-pending context to an ordinary pull request**, which is the
+    # other half of the `D-380` failure mode and the one a new workflow is most likely to
+    # reintroduce. Two properties give that:
+    #
+    #   1. On a pull request with no `deep-gate` label, the `if` below is false and this
+    #      job is *skipped*. A skipped job reports a conclusion; a check that never runs
+    #      is what sits pending forever, and that is why the label is tested in the job
+    #      condition rather than in the `pull_request` trigger's filters.
+    #   2. This workflow does not become a prerequisite of `packing-required`, and
+    #      `packing-validation.yml` is untouched. If it did, every pull request would
+    #      wait 32 minutes for the surface this file exists to keep off every pull
+    #      request.
+    #
+    # `!cancelled()` rather than `always()`, again for `D-380`: `cancel-in-progress` is
+    # on for pull requests above, so supersession is routine, and a superseded run must
+    # leave this unreported rather than report a hard failure. A genuine failure in
+    # either job is not `cancelled()`, so it still fails here.
+    if: >-
+      !cancelled() && (github.event_name == 'workflow_dispatch'
+      || contains(github.event.pull_request.labels.*.name, 'deep-gate'))
+    needs: [deferred-steps, exhaustive-tier]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every deep-gate prerequisite
+        env:
+          DEFERRED_RESULT: ${{ needs.deferred-steps.result }}
+          EXHAUSTIVE_RESULT: ${{ needs.exhaustive-tier.result }}
+        run: |
+          test "$DEFERRED_RESULT" = "success"
+          test "$EXHAUSTIVE_RESULT" = "success"

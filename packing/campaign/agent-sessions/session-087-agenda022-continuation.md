@@ -470,7 +470,7 @@ The register row is `D-458`, and it is the one that mattered — a `frozen_artif
 naming the moving `certificate.json` pointer, so a superseded rung quoted its own
 successor’s atoms.
 
-## How It Closed
+## How it closed
 
 **What the block cost, first.** The pull-request surface went from `1369.60 s` to about
 `221.70 s` of CI wall, a factor of 6.2, with nothing deleted and nothing made optional:
