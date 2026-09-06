@@ -3,13 +3,17 @@ type: is
 id: is-01m1tzfd14a4f13r75eff7nj8q
 title: Merge PR 93 and verify main CI and publication end to end
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 labels: []
 dependencies: []
 created_at: 2026-09-06T09:06:02.915Z
-updated_at: 2026-09-06T09:08:45.026Z
+updated_at: 2026-09-06T09:38:30.679Z
+closed_at: 2026-09-06T09:38:30.678Z
+close_reason: "PR93 merged3122c49766e7fc70c8cb299bd8b6b09558447d8a. Exact-SHA post-merge Packing validation run34023692785 completed SUCCESS: validate, exhaustive, macos-portability all success. Certificate page run34023692789 build/deploy success; live-site19/19 checks passed against mergeSHA including14-page PDF, all atlas assets and source permalinks. Translation98record CLI and CPU xdist5test smokes pass. End-to-end verification complete."
+resolution: null
+duplicate_of: null
 ---
 User authorized merge of reviewed PR93 at89ee68c8. Verify merge readiness, merge exact reviewed head, monitor all workflows at resulting main merge SHA through completion, verify public certificate page/artifacts and changed CLI smoke; fix attributable failures as needed and sync tracking.
 

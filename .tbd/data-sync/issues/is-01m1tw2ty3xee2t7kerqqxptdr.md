@@ -3,19 +3,19 @@ type: is
 id: is-01m1tw2ty3xee2t7kerqqxptdr
 title: Monitor and integrate landed PRs 93 and 94 through T+10
 kind: task
-status: open
+status: in_progress
 priority: 0
-version: 4
+version: 5
 labels:
   - orchestration
   - upstream
 dependencies: []
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 created_at: 2026-09-06T08:06:45.437Z
-updated_at: 2026-09-06T08:31:40.489Z
+updated_at: 2026-09-06T09:14:41.566Z
 ---
 Monitor PRs 93 and 94 and origin/main. Import only landed main commits, pause active research time for each integration, reconcile shared generated records conservatively, validate proportionately, and record exact merge commits in the handoff.
 
 ## Notes
 
-Current watch: origin/main remains 235bfc50. PR 93 remains OPEN/CLEAN at c610d308 with known fetch-fail-closed and stale live-timing defects plus skipped advisory deep gate. PR 94 remains OPEN/CLEAN at 9c82dc2 and its standard hosted checks are green; max read-only audit found no mathematical blocker and no change to the T+2 to T+10 scientific launch. If PR94 lands, preserve PR89 live Agenda 024 authority, union the three review registrations, retain the genuine c743d7bb full-gate receipt, reconcile Session 087 as stopped with BC-214 next, regenerate ledger and session-close records, and rerun record/edit plus hosted checks. Never import either open head. Heartbeat checks every ten minutes.
+At 2026-09-06T09:06:10Z PR 93 landed as merge commit 3122c49766e7fc70c8cb299bd8b6b09558447d8a; origin/main was fetched and the landed commit is now a required integration input. A source-distinct xhigh merge worker is preparing the merge from PR89 head 957e5abe in a detached worktree, preserving the live Agenda024/T+2 state while repairing the known fail-open fetch and stale timing defects. PR94 remains OPEN at 9c82dc2ac5fecfa94d9388ef61c6b1d4bc21169b and is not imported. The old-head full run was intentionally stopped after PR93 landed; a canonical full gate will run only on the integrated head. Active research time remains paused.

@@ -5,7 +5,7 @@ title: Obtain green hosted checks and sync terminal bead graph
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 labels:
   - hosted-ci
 dependencies:
@@ -20,10 +20,10 @@ child_order_hints:
   - is-01m1ts774dawfnc2rfb65gzadb
   - is-01m1tspngpszdxr6qgwfgxphbw
 created_at: 2026-09-06T01:58:57.423Z
-updated_at: 2026-09-06T09:03:53.111Z
+updated_at: 2026-09-06T09:20:33.713Z
 ---
 Push the reconciled branch, monitor PR #89 through all required checks, fix any branch-owned failure, update evidence, close terminal stabilization beads, and run tbd sync.
 
 ## Notes
 
-Current exact head 957e5abe independently repairs the two PR92 standalone-verifier bound declarations without importing open PR93. Focused bound controls passed 2 in 3.36s. The fix is pushed and hosted checks are running in parallel with the final canonical full gate. A detached future-branch safe-stop patch separately passed 18 focused tests and all 44 edit-tier steps; it is not part of PR89.
+PR89 integrated landed PR93 through merge commit 00e774de8c3cbb6695402615992d92ab1b4f4c93 (parents 957e5abe and origin/main 3122c497) and pushed it. The merge preserved Agenda024/T+2 live authority, corrected the stale Session087 note to completed/BC214 completed/BC215 next, and added a tested set -euo pipefail guard so the new branch-mergeability fetch fails closed. Hosted integrated-head build, validate, geometry, and mergeability have passed; suite, sweeps, and macOS remain in flight. A canonical integrated-head full gate is running. PR94 remains open and excluded.
