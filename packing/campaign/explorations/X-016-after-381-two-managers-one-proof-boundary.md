@@ -32,6 +32,8 @@ exploration:
   - packing/campaign/explorations/X-015-the-map-and-the-three-programs.md
   - packing/campaign/agendas/agenda-021-three-numbers-and-a-wall.md
   - packing/campaign/agendas/agenda-022-the-conditional-route.md
+  - packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md
+  - packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-060-h-064-n11-fractional-packing-floor.md
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-063-h-065-n11-near-tight-cell-census.md
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-064-h-063-two-threshold-class-program.md
@@ -40,6 +42,8 @@ exploration:
   - packing/cases/n11_fractional_certificate/t-018-proof-card.md
   - packing/cases/trump11/isolation_radius.py
   - packing/frontier/n-011.md
+  - packing/resources/papers/dewar-2024-contacts-oriented-squares.raw.md
+  - packing/resources/papers/donev-connelly-stillinger-torquato-2007-underconstrained-jammed-packings.raw.md
   - operating-rules.md
   proposes: []
 ---
@@ -63,6 +67,60 @@ The coordinator, not either manager, owns the proof boundary between them.
 Do not spend this block on a generic contact-graph atlas, a broad `n = 11` exact-cover
 tree, a repeat of the two-threshold angle classes, or another dense sweep from an empty
 state. Each has either failed its present gate or lacks a sound completeness object.
+
+## Working definitions
+
+This plan joins proof ideas that operate on different mathematical objects.
+The definitions below are part of the contract: a later agent should be able to tell
+what a proposed calculation would establish without reconstructing the terminology from
+the agendas.
+
+### Proof layers and fractional objects
+
+| Term | Meaning in this exploration |
+| --- | --- |
+| **one-body measure** | A nonnegative measure on the container tested against one admissible witness square at a time. If every witness has mass at least one and the container has total mass below eleven, eleven disjoint witnesses cannot exist. |
+| **unconditional one-body measure** | One measure whose lower-mass condition holds for every admissible centre and orientation. It can enter the counting proof without first classifying a packing. |
+| **conditional one-body measure** | A measure whose lower-mass condition holds only on a stated pose or composition class. It becomes a proof component only after a complete case split assigns every possible packing to a covered class. |
+| **integral configuration argument** | An argument whose variables describe a whole eleven-square placement, so it may use compatibility among different squares. It is not a stronger row in the one-body LP; it is a different proof object. |
+| **compatibility constraint** | A condition involving several placement choices. Clique rows exclude mutually conflicting selections, odd-cycle rows strengthen pairwise conflict constraints around an odd cycle, Hall rows detect too few compatible regions for the required assignments, and cell-hyperedge rows encode a forbidden combination spanning several pose cells. Their soundness depends on the integral configuration model that gives those selections meaning. |
+| **direction net and angle cell** | The direction net is the finite set of orientations checked by a certificate. Adjacent net directions bound a closed angle interval, or angle cell, whose every orientation must be handled by a proved containment rule. Sampling representatives is not enough. |
+| **witness core and `B_k`** | A witness core is the smaller region placed strictly inside each packed unit square before mass is counted. In the current certificate it is one concentric square of side `B`; an adaptive certificate gives angle cell `k` its own largest proved-safe side `B_k`. |
+| **angle-cell kernel** | A rationally described inner region contained in every unit square whose orientation lies in one angle cell. It may retain more useful area than any common concentric square, but it needs a new exact containment and centre-sweep proof. |
+| **segment measure** | A nonnegative measure supported on finitely many line segments. The mass captured by a moving square changes continuously and piecewise algebraically, so neither the atomic event sweep nor an area-density verifier decides it without new boundary rules. |
+| **full-size absolutely continuous density** | A nonnegative integrable function spread over area in the container, tested by integrating over the full unit square rather than a shrunken core. A total mass below eleven with coverage at least one for every pose would prove a lower bound because shared square boundaries have area measure zero; sampled coverage is only a candidate. |
+| **continuum verifier** | A proof procedure that decides a universal claim over every admissible centre, orientation, and wall stratum. A grid or finite pose sample is a proposer unless a containment, interval, or finite-cell theorem closes the gaps between samples. |
+| **support prior and restricted support** | A support prior biases a generator toward promising atom locations, such as an inset grid. A certificate found on that restricted set is sound once verified; failure there says nothing about measures using excluded locations. |
+| **unrestricted column generation** | An LP loop that alternates solving on the current finite rows and columns with pricing searches for a violated pose row or an improving atom column anywhere in the allowed container. Releasing an inset seed means the pricing oracle may add wall-near support again. |
+| **`nu*` / `tau*` bracket** | `nu*` is the fractional-packing optimum and `tau*` the fractional-covering optimum for the declared one-body formulation, with `nu* <= tau*`. A verified packing family supplies a lower endpoint and a row-converged covering solution an upper endpoint. `tau* < 11` can yield the desired measure; `nu* >= 11` rules out that formulation at the tested side. Intermediate values are optimization evidence, not a new bound on `s(11)`. |
+
+### Typed stationarity and local closure
+
+| Term | Meaning in this exploration |
+| --- | --- |
+| **support branch** | One smooth piece of the disjunctive nonoverlap and containment system. For each square pair it fixes the owner square, one local supporting axis, and the separation order; for a wall it fixes the responsible corner and wall. Angle charts are part of the branch. |
+| **contact graph** | The graph with a vertex for each square and an edge when two squares touch; boundary contacts may be represented by extra wall vertices. It records incidence but not the geometric equation that realizes a touch. |
+| **typed contact** | A contact together with the data needed to write its branch equation: corner-edge, edge-edge, or wall feature; owner square and supporting axis; separation order and sign; and any angle-chart or wall identity. Different types on the same abstract edge generally produce different equations. |
+| **active constraint or row** | A branch inequality `g_j(z) >= 0` that holds with equality at the candidate, `g_j(z) = 0`. The complete branch list, its active subset, and the multiplier support below are three different objects. |
+| **Fritz–John stationarity** | A necessary first-order condition for a branch minimum. With side objective `L`, there are nonnegative numbers `alpha` and `lambda_j`, not all zero, such that `alpha grad L - sum_j lambda_j grad g_j = 0` and `lambda_j g_j = 0`. It proposes stationary candidates; it does not prove feasibility, local minimality, rigidity, or global optimality. |
+| **normal, or ordinary, Fritz–John branch** | The case `alpha > 0`. Rescaling makes the objective multiplier one and gives the usual Karush–Kuhn–Tucker equations, so this is also the regular KKT branch. “Ordinary” describes this multiplier state, not a claim that the stationary point is an optimum. |
+| **abnormal Fritz–John branch** | The case `alpha = 0`, where a nontrivial dependence among active constraint gradients satisfies stationarity without using the objective gradient. It can be discarded only after proving a constraint qualification that rules it out on the affected branch. |
+| **constraint qualification** | A local regularity hypothesis on the active constraints that makes KKT necessary. Because tied square contacts can violate such hypotheses, this plan retains abnormal branches unless the qualification is proved rather than assumed. |
+| **feature tie** | A geometry at which two or more support descriptions are simultaneously valid, such as a corner-corner touch admitted by several owner-axis choices or a corner meeting two wall strata. It is a branch point in the nonsmooth model, so every applicable typed branch must be retained. |
+| **zero multiplier** | An active constraint whose Fritz–John/KKT coefficient is zero in the selected stationary certificate. The contact is geometrically tight but carries no first-order balance in that certificate; it must not be deleted merely because it is absent from the positive multiplier support. |
+| **positive multiplier support** | The active rows with `lambda_j > 0`. This is the force- or stress-carrying part of one multiplier certificate, not the whole contact set and not necessarily a connected graph. |
+| **rattler** | A square, or a cluster of squares, that can move locally inside a cage while a remainder stays jammed. It may be absent from positive multiplier support, but its variables and every nonoverlap and wall inequality remain part of the global feasibility problem. |
+| **typed stationary backbone** | This project’s proposed finite record for one stationary branch: the typed contacts and walls, support orders, angle charts, active and inactive rows, positive and zero multiplier states, symmetry labels, and rattler attachments, together with the continuous equations they index. It is broader than the jamming literature’s “backbone,” which usually means the rigid or force-carrying remainder after rattlers are removed. |
+| **anchored chart and local isolation** | The retained anchored chart fixes the container as `[0,L]^2` with one corner at the origin and represents each labelled square by its centre and angle; finite `D4` and relabelling copies are handled separately. Local isolation means that a proved neighborhood in that declared chart contains no other feasible configuration at the tested side. It is a local statement and does not exclude a better packing elsewhere. |
+| **LP/Farkas, interval, and exact-algebra leaves** | Once angles and branch choices are exact, the centre-and-side problem is linear: an exact LP can realize it, while a Farkas certificate proves infeasibility by an exact nonnegative combination of rows. Interval exclusion proves that a whole angle box has no solution. Exact algebra or root isolation is reserved for the stationary leaves those cheaper decisions cannot close. |
+
+### Exact-cover language
+
+| Term | Meaning in this exploration |
+| --- | --- |
+| **event cell** | A region of witness centres on which an atomic measure covers the same set of atoms and therefore has constant mass. This is not a configuration-space support branch. |
+| **near-tight classifier** | A rule, derived from a valid covering measure of total mass `M >= 11`, that keeps only event cells whose covered mass is close enough to one to occur in an eleven-square equality or near-equality case. Without the measure and its proved threshold, “near-tight” is only a heuristic label. |
+| **exact-cover tree** | A complete discrete search over compatible event-cell choices for all eleven squares, including pairwise nonoverlap of the corresponding enclosing unit squares. A **survivor** is an unresolved node or component after sound pruning, not evidence that a packing exists. |
 
 ## What the outside review got right
 
@@ -111,8 +169,8 @@ equations; generic contact is not a center distance of one.
 An abstract graph still has a continuous semialgebraic embedding problem, and neither
 planarity nor the proposed degree bounds has been proved.
 
-The credible object is a typed stationary backbone, including ordinary and abnormal
-Fritz–John branches, feature ties, zero multipliers, and rattlers.
+The credible object is a typed stationary backbone, including normal (ordinary) and
+abnormal Fritz–John branches, feature ties, zero multipliers, and rattlers.
 Centres can then be eliminated by LP/Farkas certificates, with interval checks and exact
 algebra reserved for surviving leaves.
 Agenda-026 writes and prices that object against Trump, the globally classified

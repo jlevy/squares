@@ -10,12 +10,12 @@ Every result, status, count and verdict lives in [`SYNOPSIS.md`](SYNOPSIS.md), w
 authoritative wherever the two appear to differ.
 
 **Assumes:** no background in the problem.
-Four outside ideas do real work here—linear programming in
-[§2](#2-the-configuration-space), algebraic number fields in
-[§5](#5-algebra-versus-numerics), and certified numerics and symbolic elimination in the
-same section.
-Each is introduced where it is first needed, and [§11](#11-further-reading)
-says where to learn it properly.
+Several outside ideas do real work here—linear programming in
+[§2](#2-the-configuration-space), then algebraic number fields, constrained optimality,
+rigidity, certified numerics, and symbolic elimination in
+[§5](#5-algebra-versus-numerics).
+Each is introduced where it is first needed, and [§11](#11-further-reading) says where
+to learn it properly.
 [§10](#10-a-notation-card) collects every symbol on one page.
 
 ## 1. The Problem
@@ -738,10 +738,11 @@ algebra can solve and the complete packing can be independently rechecked.
    touches which wall, which squares share an angle class.
    Everything downstream rests on this guess.
 3. **Write and reduce the contact equations.** The unreduced system still contains the
-   centres. In several published rigid constructions, the chosen contact graph lets one
-   eliminate those centres and leave only `s` and the distinct non-axis-aligned angles—
-   two unknowns at `n = 11`, three at `n = 17`. That reduction must be derived from the
-   particular graph; angle-class count alone does not perform it.
+   centres. In several published rigid constructions, the chosen typed contact
+   structure—often reported informally as a contact graph—lets one eliminate those
+   centres and leave only `s` and the distinct non-axis-aligned angles: two unknowns at
+   `n = 11`, three at `n = 17`. That reduction must be derived from the particular
+   contact equations; angle-class count alone does not perform it.
 4. **Close an underdetermined system analytically.** A local extremum of `s` on the
    constraint manifold forces a rank drop, so the missing equations are
    Jacobian-determinant conditions—Lagrange/Fritz-John in determinant form.
@@ -780,6 +781,64 @@ This can prove a slightly weaker upper bound when the numerical pose has enough
 geometric slack. It does not certify the original decimal coordinates or preserve the
 reported value.
 
+### Contact graphs, stationary branches, and rattlers
+
+The contact structure in step 2 contains more information than a graph.
+A **contact graph** has one vertex per square and an edge for each touching pair, with
+optional wall vertices for boundary contacts.
+It says who touches whom, but not which equation makes them touch.
+For rotated squares, that equation also depends on whether the features are corner-edge,
+edge-edge, or wall contacts; which square owns the supporting axis; the separation order
+and sign; and the angle and wall chart.
+A **typed contact** retains those choices.
+
+Fixing one consistent set of types gives a smooth **support branch** of the otherwise
+disjunctive feasible set.
+Write its clearance inequalities as `g_j >= 0`; row `j` is **active** when `g_j = 0`. A
+**feature tie** occurs when several support descriptions apply at the same geometry, as
+at a corner-corner touch admitted by more than one owner-axis choice.
+The model must keep every applicable branch at a tie rather than choose whichever type a
+floating-point residual happens to prefer.
+
+Fritz–John stationarity supplies the first-order equation on one branch.
+At a branch minimum there are nonnegative multipliers `η` for the side objective and
+`κ_j` for the constraints, not all zero, such that
+
+```text
+η grad s - sum_j κ_j grad g_j = 0,    κ_j g_j = 0.
+```
+
+When `η > 0`, rescaling it to one gives the **normal**, or ordinary, Fritz–John branch
+and the regular KKT equations.
+When `η = 0`, the objective drops out and a nontrivial dependence among active
+constraint gradients gives an **abnormal Fritz–John branch**. A proved **constraint
+qualification**—a suitable local regularity condition on those gradients—can rule
+abnormal branches out.
+Without one, omitting them makes an enumeration incomplete.
+
+Activity and multiplier support are different.
+An active row may have `κ_j = 0`: this is a **zero multiplier**, a tight contact that
+carries no first-order balance in that particular certificate.
+The rows with positive multipliers form the **positive multiplier support**, which may
+be smaller than the active contact set and need not be connected.
+
+A **rattler** is a square, or a cluster of squares, that can move locally within a cage
+while the remainder stays jammed.
+The jamming literature calls that rigid or force-carrying remainder the **backbone**.
+This project’s proposed **typed stationary backbone** is a broader proof record: it
+stores the typed contacts and walls, branch orders and angle charts, active rows,
+positive and zero multiplier states, symmetry labels, and rattler attachments, together
+with the continuous equations they index.
+Rattlers remain in the feasibility problem even if they do not appear in the positive
+multiplier support.
+
+These notions answer different questions.
+**Stationarity** is a necessary first-order condition for a branch minimum; **rigidity**
+means there is no nontrivial feasible local motion after declared symmetries are
+removed; and **local isolation** says a proved neighborhood contains no other feasible
+pose. Passing any of them does not exclude a better packing in another part of
+configuration space, so none by itself proves global optimality.
+
 How much of that pipeline exists here decides what the word “exact” can mean in this
 directory, and the answer is in [§6](#6-what-is-built-and-what-is-not).
 
@@ -800,6 +859,15 @@ theorem for Trump’s pose—this project’s results rather than published theo
 [§8](#8-what-is-known-and-what-is-not) marking which claims confirm the literature and
 which are new here. The quench and annealer remain numerical instruments; listing them
 here does not promote their outputs to verified.
+
+**A complete typed-stationary enumerator is not built.** The repository can infer and
+assemble contacts for named witnesses, solve the retained exact fixed-angle control
+cells, and replay the exact tangent and local-isolation calculations for Trump’s pose.
+It does not yet generate every support branch, retain all regular and abnormal
+multiplier states through ties and rattlers, or close a global `n = 11` enumeration.
+[Agenda 026](packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md)
+specifies the completeness object and its small known-answer controls; describing that
+object here does not assert that those gates have passed.
 
 **The generic witness boundary and robust rational promotion are built.** One
 `Witness/v2` file can be inspected, numerically checked, or exactly verified without
@@ -866,8 +934,8 @@ so the ledger can report which whole families remain untried:
 - **Stochastic search:** simulated annealing (the current workhorse), billiard and
   inflation, basin hopping, nonlinear programming, SAT/CP, branch and bound over contact
   classes, evolutionary methods.
-- **Exact refinement:** fixing the contact graph and solving the polynomial system,
-  rigidity-guided enumeration, interval-verified local optima.
+- **Exact refinement:** fixing a typed contact structure and solving the polynomial
+  system, rigidity-guided enumeration, interval-verified local optima.
 - **Workflow:** the human-computer loop against a public record table, which is how the
   tables actually advance.
 
@@ -1056,7 +1124,10 @@ Symbols are in [§10](#10-a-notation-card), and [`SYNOPSIS.md`](SYNOPSIS.md#term
 is the authority for everything it defines.
 Two rows below are local to this document: **terminal set**, which the synopsis uses
 without defining, and **feasibility tolerance**, which belongs to the solver rather than
-to the project. The order is by dependency, so it reads top to bottom.
+to the project.
+The stationary-backbone terms are shared with the current exploration and
+agenda, but they describe a proposed completeness object rather than a built global
+enumerator. The order is by dependency, so it reads top to bottom.
 
 Three words carry controlled multiple senses—**cell**, **quench** and
 **exploration**—and the rule for each is given with it.
@@ -1079,6 +1150,17 @@ Three words carry controlled multiple senses—**cell**, **quench** and
 | **terminal set** | The configurations a quench can return: the local optima of the problem |
 | **terminal component** | A connected component of the terminal set, the intended atlas object; current endpoint keys do not certify it |
 | **terminal family** | A terminal component that is not an isolated point |
+| **contact graph** | One vertex per square and one edge per touching pair, optionally with wall vertices. It records incidence, not the feature or branch equation that realizes the contact |
+| **typed contact** | A contact plus its corner, edge, or wall features; owner square and axis; separation order and sign; and chart data—the information needed to write one branch equation |
+| **support branch** | One smooth piece of the disjunctive feasible set obtained by fixing a consistent typed separation for every square pair and a typed description for each wall row |
+| **active constraint** / **active set** | A branch inequality that is tight, and the set of all such rows. The active set can be larger than the positive multiplier support |
+| **feature tie** | A geometry where several support descriptions are simultaneously valid. Every applicable typed branch must be retained |
+| **Fritz–John stationarity** | The first-order multiplier condition necessary at a constrained branch minimum. Satisfying it produces a stationary candidate, not a proof of minimality |
+| **normal (ordinary) Fritz–John branch** / **abnormal Fritz–John branch** | The cases where the objective multiplier is respectively positive or zero. The normal case gives the regular KKT equations; a constraint qualification can exclude the abnormal case, but without a proof of one both remain |
+| **zero multiplier** / **positive multiplier support** | A tight row with zero coefficient in one stationary certificate, and the smaller set of rows whose coefficients are positive. Neither is the complete contact set |
+| **rattler** | A square or cluster with feasible local motion inside a cage while the remainder stays jammed. Its variables and inequalities remain part of global feasibility |
+| **typed stationary backbone** | The proposed branch record joining typed contacts, charts, activity and multiplier states, symmetries, rattler attachments, and the continuous stationary equations they index |
+| **stationarity** | Satisfaction of a necessary first-order condition on a declared branch. It does not by itself imply rigidity, local minimality, or global optimality |
 | **rigidity** | No non-trivial feasible local motion, under a declared quotient. Contact counts are evidence for it, never a proof of it |
 | **corner** / **kink** | A point where one-sided derivatives differ, so the derivative fails to exist rather than becoming large |
 | **angle class** | A set of squares constrained to share one angle |
@@ -1116,6 +1198,9 @@ appear inside `oᵢₖ`.
 | `D` | nonnegative rational | The largest tangent of a half-gap between adjacent net directions |
 | `k`, `l` | integer | Corner indices, `1…4`, as in `oᵢₖ` and `oⱼₗ` |
 | `s` | real, variable | The container side being minimised. Distinct from `s(n)`, which is the answer; `s` is what the program solves for |
+| `g_j` | real-valued function | Clearance in support-branch row `j`; feasibility is `g_j >= 0` and the row is active when `g_j = 0` |
+| `η` | nonnegative real | The objective multiplier in the tutorial’s Fritz–John equation |
+| `κ_j` | nonnegative real | The multiplier on branch constraint `g_j` in that equation |
 | `(xᵢ, yᵢ)` | `ℝ²` per square | The centre of square `i` |
 | `x`, `y` | `ℝⁿ` each | All `n` centre coordinates |
 | `θᵢ` | `[0, π/2)` | The angle of square `i` |
@@ -1189,8 +1274,19 @@ and never a proof that the relation is exact.
 
 **Optimality conditions** ([§5](#5-algebra-versus-numerics)). Lagrange multipliers in
 the classical case, Fritz-John and KKT for inequalities.
-The relevant fact is that a local extremum on a constraint manifold forces a rank drop,
-which is what supplies the missing equations in determinant form.
+Fritz–John retains an objective multiplier and remains necessary without the regularity
+assumptions KKT needs; a constraint qualification is what permits the abnormal
+zero-objective-multiplier branch to be discarded.
+The rank condition supplies the missing equations in determinant form, but it is only a
+necessary condition.
+
+**Rigidity and jamming** ([§5](#contact-graphs-stationary-branches-and-rattlers)).
+Connelly–Whiteley on second-order rigidity and Donev et al.
+on jamming, stresses, and rattlers provide the method language collected in the
+archive’s
+[rigidity sources](packing/resources/README.md#rigidity-and-verification-method-sources).
+They are analogues whose hypotheses must be re-established for rotating squares and
+their nonsmooth feature ties, not imported theorems about `s(11)`.
 
 **Energy landscapes** ([§7](#7-how-the-search-is-approached-and-why)). Stillinger and
 Weber’s inherent-structure decomposition, which the quench map is borrowed from; and
@@ -1217,6 +1313,9 @@ likewise has no retained first-party document:
 - Montanher et al. (2018), the only rigorous computer-assisted optimality proof for
   rotatable unit squares in any container—three squares in a circle
 - Martin (2000), the compactness results behind “the infimum is attained”
+- Dewar (2024), direction-typed contact graphs for homothetic oriented squares—useful
+  combinatorial method evidence, not a completeness theorem for the global `n = 11`
+  search
 
 ### What does the arithmetic here
 
