@@ -116,11 +116,11 @@ $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
 
 <!--BEGIN:COMPARISON-->
 
-A second certificate, for the looser bound $s({{N}}) \ge {{DEFAULT_L_FRAC}}$, is kept
+(A second certificate, for the looser bound $s({{N}}) \ge {{DEFAULT_L_FRAC}}$, is kept
 beside it: its smaller numbers make the figures legible, and it is the one the project’s
 adversarial review of the checking package read line by line.
 The {{HEADLINE_L_FRAC}} certificate supersedes it, and some of the figures below show
-both.
+both.)
 
 <!--END:COMPARISON-->
 
@@ -201,9 +201,9 @@ the container covers mass at least $1$.
 
 Conditions 1 to 4 are exact rational comparisons.
 Condition 5 is one exact sweep per direction.
-Together the five prove $s(n) \ge L$. The two certificates are
-[`{{DEFAULT_ID}}`]({{DEFAULT_CERT_URL}}) and [`{{ID}}`]({{CERT_URL}}), and every figure
-below is [computed]({{RENDERER_URL}}) from the one it shows.
+Together the five prove $s(n) \ge L$. The certificate is [`{{ID}}`]({{CERT_URL}}) (a
+weaker but simpler one is at [`{{DEFAULT_ID}}`]({{DEFAULT_CERT_URL}})). Every figure
+below is [computed]({{RENDERER_URL}}) from the certificate it shows.
 
 ## Atoms, Mass, and the Budget
 
@@ -562,7 +562,7 @@ importing anything else from the repository.
 
 <!--BEGIN:COMPARISON-->
 
-It decides the looser of the two bounds, not the headline one.
+(It decides the looser of the two bounds, not the headline one.)
 
 <!--END:COMPARISON-->
 
@@ -576,10 +576,12 @@ Each bound has one self-contained file: the claim, the theorem with its proof, a
 verifier in Python’s standard library, and the certificate it decides, to paste into any
 coding agent or check by hand.
 
-- $s(11) \ge {{DEFAULT_L_FRAC}}$: [`{{DEFAULT_CLAIM_NAME}}`]({{DEFAULT_CLAIM_URL}}),
-  {{DEFAULT_N_ATOMS}} atoms, verified in {{DEFAULT_RUNTIME}}.
-- $s(11) \ge {{HEADLINE_L_FRAC}}$: [`{{HEADLINE_CLAIM_NAME}}`]({{HEADLINE_CLAIM_URL}}),
-  {{HEADLINE_N_ATOMS}} atoms, verified in {{HEADLINE_RUNTIME}}.
+For $s(11) \ge {{HEADLINE_L_FRAC}}$:
+[`{{HEADLINE_CLAIM_NAME}}`]({{HEADLINE_CLAIM_URL}}),
+{{HEADLINE_N_ATOMS}} atoms, verified in {{HEADLINE_RUNTIME}}. (For the weaker bound
+$s(11) \ge {{DEFAULT_L_FRAC}}$: [`{{DEFAULT_CLAIM_NAME}}`]({{DEFAULT_CLAIM_URL}}),
+{{DEFAULT_N_ATOMS}} atoms, verified in
+{{DEFAULT_RUNTIME}}.)
 
 The times are the embedded verifier’s, on a laptop.
 The one-file checker beside it that pins the certificate’s digest, `minimal_verify.py`,
