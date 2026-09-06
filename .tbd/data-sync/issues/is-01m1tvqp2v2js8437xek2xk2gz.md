@@ -5,7 +5,7 @@ title: Execute Agenda 024 from T+2 through T+10
 kind: epic
 status: in_progress
 priority: 0
-version: 44
+version: 47
 spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels:
   - research
@@ -49,11 +49,13 @@ child_order_hints:
   - is-01m1vrxq9nstxhb12j753nvkpp
   - is-01m1vsa2mptszc9vtgw4668bgt
   - is-01m1vv7m9vnn4k7hnbx3sdz3rv
+  - is-01m1w140k75zvvqpvj55e8k9my
+  - is-01m1w39r16j7pwfp0vhq61b9eb
 created_at: 2026-09-06T08:00:40.024Z
-updated_at: 2026-09-06T18:12:52.499Z
+updated_at: 2026-09-06T19:32:06.310Z
 ---
 Coordinate the next eight active portfolio hours after PR #89 lands. Start only from a committed launch-amendment packet on a fresh codex branch; run one fractional manager and one closure manager with a single transferable worker; hold the clock for operational interruptions and T+4/T+8 integration; land a T+10 checkpoint with exact dispositions, upstream reconciliation, validation, and a cold-agent handoff.
 
 ## Notes
 
-BC250 planning is codified in cb211305. After PR97 is validated and lands, execute the selected work only on a NEW branch and PR, per latest operator direction. Agenda024 owns allocation: BC251/H093 scalar, BC231/H095 adaptive controls, BC254/H099 density support, BC255/H036+H102 restricted assessment, with root plus three useful workers and reviewer replacement. H092 review is GO, existing transport30c44bb6 integration remains think-xsma; no fourth shrink target. BC232 no leg03, frozen criterion unresolved. Portfolio held124:14; no new eight-hour clock yet. PR94–96 origin/main edccf294 is being integrated. PR98 efficiency and PR99 explainer remain open; integrate only when landed.
+User authorized new research phases on a fresh branch after PR97 landed. Live branch codex/post-381-next-phases starts at c14451f5; session088 records the selected first two-hour allocation and first observed coordination boundary2026-09-06T19:11:26Z. Three workers: bound_lane_strategy BC231/H095/think-7mk4; structural_lane_strategy BC254/H099/think-01q4; gpt6_coverage_audit BC255/H036+H102/think-dene. Root combines manager responsibilities, owns BC251 scalar readiness/one process, shared records, PR and upstream. First worker slice ends19:41:26Z; coherent PR checkpoint every30-minute slice, two-hour integration nominal21:11:26Z adjusted for actual outages. Prior portfolio124:14 is not reset; inherited outer allowance22:39:32Z remains. BC251 has not started because PR100 reports unsound ceiling/cutting depth decisions; only corrected landed code plus readiness controls can launch its unchanged150-minute invocation. Other selected lanes continue independently. PR98/99/100 remain open; import only landed main. think-exlq owns prior full-gate fixture/timing corrections separately. H092 transport integration and BC232 unresolved criterion/tails remain unchanged. Live agenda allocations govern over older two-lane descriptions. Mathematical judgments max; mechanical work high/xhigh; independent review before acceptance.
