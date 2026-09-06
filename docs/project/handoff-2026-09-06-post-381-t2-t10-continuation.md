@@ -119,8 +119,10 @@ boundaries.
 
 | Audit field | Bound value |
 | --- | --- |
-| Cold review’s integrated input head | `0660f02bc41f49d90e6cc763afb9fe926c2858c6` |
-| Protocol reconciliation UTC | `2026-09-06T10:35:23Z` |
+| Historical cold review’s integrated input head | `0660f02bc41f49d90e6cc763afb9fe926c2858c6` |
+| Historical protocol reconciliation UTC | `2026-09-06T10:35:23Z` |
+| Latest source-distinct cold audit | `/root/cold_strategy_release_audit` audited `81946c62d6db20c080be3b9a4371585558da2683`; receipt observed `2026-09-06T11:23:51Z` |
+| Latest cold-audit disposition | Mathematical soundness `GO`; strategic reconstructability `GO`; release `NO-GO` until `think-vnlw`, current role acknowledgements, and the replacement authorization transaction are complete. |
 | Isolated transport lineage | `ca188bd2afe317fa0fb5eb71f7986b8d4a2ef62e` was the fourth transport’s parent and prior transport head, not an audited shared head. |
 | Active minute | 120, held |
 | Wall authority | The wall authorization remains `2026-09-06T08:22:36Z`, with target `2026-09-06T16:22:36Z` and fixed outer deadline `2026-09-06T18:22:36Z`. The `2026-09-06T09:43:25Z` restart authorization is revoked; its replacement is pending and may authorize only a truthful partial continuation. |
@@ -224,7 +226,7 @@ observed. Do not infer the PR #89 merge commit from its former open head.
 | New branch name | `codex/post-381-t2-t10` |
 | New-branch transport head before the binding commit | `552e0c6969a6aa3a5a2e2a539e826c0bab8c7c83` |
 | Continuation pull-request URL | <https://github.com/jlevy/squares/pull/97> |
-| Cooperative-stop implementation commit on this branch | `228806215149549032522506325bd524a71cbd4d` (transport provenance `37ca074d2a9e0027d334be03c982b24ffb6acd4a`) |
+| Cooperative-stop implementation commit on this branch | `22880621708b15054b4c7a7876eff0b0cc270764` (transport provenance `37ca074d2a9e0027d334be03c982b24ffb6acd4a`) |
 | Coordinator identity and acknowledgement UTC | `/root`; `2026-09-06T09:43:25Z` |
 | Fractional-manager identity and acknowledgement UTC | `/root/fractional_manager`; `2026-09-06T09:42:33Z` |
 | Closure-manager identity and acknowledgement UTC | `/root/closure_manager`; `2026-09-06T09:42:29Z` |
