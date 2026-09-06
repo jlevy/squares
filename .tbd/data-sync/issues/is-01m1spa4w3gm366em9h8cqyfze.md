@@ -3,9 +3,10 @@ type: is
 id: is-01m1spa4w3gm366em9h8cqyfze
 title: Specify complete typed stationary backbones
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 4
+version: 5
+delegate: claude-code@spud10.local
 labels:
   - research
 dependencies:
@@ -16,7 +17,10 @@ dependencies:
   - type: blocks
     target: is-01m1sp9x74c7706vvea0w6ga08
 parent_id: is-01m1sp7knp5r8860yf00zhyexx
+hold: null
+hold_until: null
 created_at: 2026-09-05T21:06:39.106Z
-updated_at: 2026-09-05T21:07:03.685Z
+updated_at: 2026-09-06T03:21:56.583Z
+started_at: 2026-09-06T03:21:56.583Z
 ---
 BC-245: define feature types, owner axes and order, stationarity, abnormal Fritz-John branches, feature ties, zero multipliers, rattlers, and exact leaf obligations.
