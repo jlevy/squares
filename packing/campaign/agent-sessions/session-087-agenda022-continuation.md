@@ -10,7 +10,7 @@ session:
   title: The agenda 022 continuation and the PR 83 gate
   date: '2026-09-05'
   started_at: '2026-09-05T16:43:00Z'
-  deadline_at: '2026-09-06T02:43:00Z'
+  deadline_at: '2026-09-06T08:43:00Z'
   branch: claude/agenda-021-overnight-pass
   goal: >-
     Continue the overnight pass on the branch session-086 closed. Two things run at
@@ -88,9 +88,9 @@ session:
       Phase 1's objective was met -- the pull request is green and out of draft -- and
       the operator directed the block to the gate's own cost, which is a different
       objective rather than a continuation of the first.
-    budget_minutes: 240
+    budget_minutes: 600
     started_at: '2026-09-05T20:43:00Z'
-    deadline_at: '2026-09-06T00:43:00Z'
+    deadline_at: '2026-09-06T06:43:00Z'
     expected_output: >-
       PR 83 merged to main; the pull-request tier measured on CI at or under 150 s with
       its ceiling set around the measurement rather than the target; BC-215 and BC-217
@@ -116,7 +116,7 @@ session:
   primary_bead: think-wufn
   status: in_progress
   budget:
-    wall_minutes: 600
+    wall_minutes: 960
     checkpoint_minutes: 60
     slice_minutes: 30
     finalization_minutes: 60
