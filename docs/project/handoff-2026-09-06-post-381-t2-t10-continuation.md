@@ -112,8 +112,9 @@ boundaries.
 
 | Audit field | Bound value |
 | --- | --- |
-| Audited input head | `ca188bd2afe317fa0fb5eb71f7986b8d4a2ef62e` |
-| Review observation UTC | `2026-09-06T10:35:23Z` |
+| Cold review’s integrated input head | `0660f02bc41f49d90e6cc763afb9fe926c2858c6` |
+| Protocol reconciliation UTC | `2026-09-06T10:35:23Z` |
+| Isolated transport lineage | `ca188bd2afe317fa0fb5eb71f7986b8d4a2ef62e` was the fourth transport’s parent and prior transport head, not an audited shared head. |
 | Active minute | 120, held |
 | Wall authority | The wall authorization remains `2026-09-06T08:22:36Z`, with target `2026-09-06T16:22:36Z` and fixed outer deadline `2026-09-06T18:22:36Z`. The `2026-09-06T09:43:25Z` restart authorization is revoked; its replacement is pending and may authorize only a truthful partial continuation. |
 | tbd scope | Read live dependencies and terminal states at release. The coordinator alone changes edges or states; this review binds structure, not a cached status snapshot. |
@@ -373,14 +374,15 @@ Do not select substitute work from the repository-wide ready list.
 | `think-a70y` | Longer-term; nonblocking | Design a proof-producing Condition 5 arrangement receipt. |
 | `think-283c` | Pre-release blocker | Reconcile the final integration audit before the T+2 release. |
 | `think-57kj` | Pre-release blocker | Audit and disposition the dilation corollary and possible sharper supremum bound above 3.81. |
+| `think-hvze` | Pre-release blocker | Correct the cold-review provenance by distinguishing its integrated input from isolated transport lineage. |
 | `think-r60v` | Pre-release umbrella gate | Suspend the stale authorization and bind both T+2 lanes to one structural release gate. |
 | `think-trn6` | Pre-release blocker | Supersede only BC-242’s obsolete combined BC-243 scheduling dependency. |
 | `think-ntim` | Longer-term; nonblocking | Price the final integration theorem, BC-244 duality obligations, and assurance work. |
 
 The authoritative `think-r60v` prerequisite set is `think-yjh8`, `think-qke4`,
-`think-g024`, `think-ualx`, `think-i6q1`, `think-283c`, `think-57kj`, and `think-trn6`.
-These identities define structure, not a status snapshot; live tbd status at the release
-transaction controls, and every prerequisite must then be terminal.
+`think-g024`, `think-ualx`, `think-i6q1`, `think-283c`, `think-57kj`, `think-trn6`, and
+`think-hvze`. These identities define structure, not a status snapshot; live tbd status
+at the release transaction controls, and every prerequisite must then be terminal.
 Both T+2-to-T+4 lane beads, `think-6yx2` and `think-gab1`, must depend on `think-r60v`,
 and `think-r60v` must depend on the complete prerequisite set.
 Any blocker added before release must join that umbrella before either lane can become
