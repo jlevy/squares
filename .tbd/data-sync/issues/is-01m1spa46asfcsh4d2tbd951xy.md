@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m1spa46asfcsh4d2tbd951xy
-title: Run the full-size weak-dual kill pilot
+title: Run the exact full-size a.e.-depth dual kill pilot
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 labels:
   - research
 dependencies:
@@ -13,6 +13,6 @@ dependencies:
     target: is-01m1spa4h4x0mdyfza324b3zsa
 parent_id: is-01m1sp7knp5r8860yf00zhyexx
 created_at: 2026-09-05T21:06:38.409Z
-updated_at: 2026-09-05T21:07:02.780Z
+updated_at: 2026-09-06T05:57:42.861Z
 ---
-BC-243: seek a rigorously feasible fractional packing above 11 at Trump's side; success kills the equality-density route and failure proves nothing.
+BC-243: after BC-242 passes review and BC-220 opens the block, build the exact almost-everywhere depth arrangement verifier, recover the Trump D=11 control, run containment/overlap/overweight mutations, and report only the one-sided bound [D,infinity). Any sound D>11 kills the mass-eleven equality-density route. This cell does not wait for or build a continuum primal guard.
