@@ -268,6 +268,10 @@ documents:
     role: component-guide
     authority: record
     lifecycle: retained
+  - path: packing/cases/n11_fractional_certificate/lean-spike/README.md
+    role: component-guide
+    authority: supporting
+    lifecycle: maintained
   - path: packing/cases/n11_fractional_certificate/t-018-proof-card.md
     role: generated-view
     authority: generated
