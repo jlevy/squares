@@ -5,7 +5,7 @@ title: Deepen the exact fractional frontier above 3.81
 kind: epic
 status: open
 priority: 1
-version: 13
+version: 16
 labels:
   - research
   - fractional
@@ -24,7 +24,10 @@ child_order_hints:
   - is-01m1spa2vv81h0k95xtfdnp95r
   - is-01m1sx0q5s610zc3b6r61azdx0
   - is-01m1tmkneaynvbx9ee3wz5c7mf
+  - is-01m1vvtvrvn3h40brmksg8jvyh
+  - is-01m1vvtw71vymhb8d6hqz66f9a
+  - is-01m1vvtwxnf6kejcx3q4yxgwav
 created_at: 2026-09-05T21:05:15.504Z
-updated_at: 2026-09-06T05:56:08.264Z
+updated_at: 2026-09-06T17:21:39.764Z
 ---
 Execute agenda-025 under a dedicated manager using BC-230..239, H-070..079, and exp-070..089: formalize and verify adaptive direction-dependent witness cores, resume the retained 3.82 primal/dual state, use margin sweeps only as seeds for unrestricted column generation, and route to rational angle-cell kernels only under predeclared gates. The manager receives a frozen local resource packet and cannot write shared campaign/frontier state or promote claims.

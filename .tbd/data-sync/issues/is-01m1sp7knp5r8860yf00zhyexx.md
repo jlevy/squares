@@ -5,7 +5,7 @@ title: Develop global closure and Trump capture
 kind: epic
 status: open
 priority: 1
-version: 11
+version: 14
 labels:
   - research
   - rigidity
@@ -22,7 +22,10 @@ child_order_hints:
   - is-01m1spa5jfw0zq77kxzehqdze8
   - is-01m1spa5xp8zv49c7xq51j5x90
   - is-01m1spa6970mzbpt7v207jsgz5
+  - is-01m1vvtwj9tm9fgcx0xsf14345
+  - is-01m1vvtx8n6tryrc848wzq2pbc
+  - is-01m1vvtxkhyh0rv2ya533jkwvz
 created_at: 2026-09-05T21:05:15.957Z
-updated_at: 2026-09-05T21:06:40.550Z
+updated_at: 2026-09-06T17:21:40.464Z
 ---
 Execute agenda-026 under a dedicated manager using BC-240..249, H-080..089, and exp-090..109: package and independently review the existing Trump isolation-radius theorem, test the full-size density route by an exact weak-dual kill, specify typed stationary backbones including abnormal Fritz-John branches, and price solved controls before any global enumeration. The manager receives a frozen local resource packet and cannot write shared campaign/frontier state or promote claims.

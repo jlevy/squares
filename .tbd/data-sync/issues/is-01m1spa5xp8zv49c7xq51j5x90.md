@@ -5,12 +5,12 @@ title: Open exact cover only on a sparse valid survivor set
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 labels:
   - research
 dependencies: []
 parent_id: is-01m1sp7knp5r8860yf00zhyexx
 created_at: 2026-09-05T21:06:40.181Z
-updated_at: 2026-09-05T21:48:57.891Z
+updated_at: 2026-09-06T17:26:06.608Z
 ---
-BC-248: open no exact-cover residue until a certified fractional measure has mass at least 11, at most 231129 of the current 23112904 near-tight survivors remain, BC-246 recovers the Trump endpoint, and BC-247 prices the chosen typed branch below four CPU-hours. Enforce pairwise-disjoint enclosing unit squares and preserve every open branch.
+BC-248: no exact-cover residue until a valid exact covering measure has M>=11, at most 2,311,290 of the reference 23,112,904 near-tight survivors remain, BC-246 validates the Trump endpoint, and BC-247 prices a complete branch run below four CPU-hours. Selected closed unit squares must have pairwise disjoint interiors; preserve every unresolved branch. This corrects the bead transcription 231129 to the unchanged agenda guard 2311290; it does not revise the scientific threshold.
