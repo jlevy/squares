@@ -305,38 +305,15 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
     printed = measured["print"]
     found: list[str] = []
 
-    # Centring that does not survive. The one invariant that needs both media: an
-    # element the page centres on screen and left-aligns in print is a rule that lost a
-    # cascade it was written to win, every time. No list of intents to maintain.
-    # The declaration, held to in both media. This is the check that fails a build.
+    # `.centred` is the page's declaration that a block is centred in every medium, so
+    # it is the thing to hold it to. Everything here runs in both media: a defect that is
+    # wrong on screen too is still a defect, and two of these were.
     for medium, probe in (("screen", screen), ("print", printed)):
         found.extend(
             f"{medium}: `.centred` block is `{row['align']}`, not centred ({row['path']})"
             for row in probe["centred"]
             if row["declared"] and row["shown"] and row["align"] != "center"
         )
-
-    if not every:
-        return found
-
-    # The sweep, for exploring. Not a failure: the print block left-aligns figure
-    # captions on purpose, and every caption in the document is a true positive here.
-    was = {row["index"]: row["align"] for row in screen["centred"]}
-    lost = {
-        row["index"]
-        for row in printed["centred"]
-        if row["shown"] and was.get(row["index"]) == "center" and row["align"] != "center"
-    }
-    # Only where the change starts. An element under one that also lost centring
-    # inherited the loss and is a symptom of the same rule, not a second finding.
-    found.extend(
-        f"centring lost in print: {row['path']} is `center` on screen "
-        f"and `{row['align']}` in print"
-        for row in printed["centred"]
-        if row["index"] in lost and row["parent"] not in lost
-    )
-
-    for medium, probe in (("screen", screen), ("print", printed)):
         found.extend(
             f"{medium}: list marker off the line's centre by "
             f"{row['markerCentre'] - row['lineCentre']:+.2f}px "
@@ -357,6 +334,27 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
             f"({row['text']!r})"
             for row in probe["overflow"]
         )
+
+    if not every:
+        return found
+
+    # The sweep, for exploring, and not a failure: the print block left-aligns figure
+    # captions on purpose, so every caption in the document answers to it. This is how
+    # the colophon was found, before there was a class to check.
+    was = {row["index"]: row["align"] for row in screen["centred"]}
+    lost = {
+        row["index"]
+        for row in printed["centred"]
+        if row["shown"] and was.get(row["index"]) == "center" and row["align"] != "center"
+    }
+    # Only where the change starts. An element under one that also lost centring
+    # inherited the loss and is a symptom of the same rule, not a second finding.
+    found.extend(
+        f"centring lost in print: {row['path']} is `center` on screen "
+        f"and `{row['align']}` in print"
+        for row in printed["centred"]
+        if row["index"] in lost and row["parent"] not in lost
+    )
 
     return found
 
