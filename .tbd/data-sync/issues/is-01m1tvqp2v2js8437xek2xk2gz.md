@@ -5,7 +5,7 @@ title: Execute Agenda 024 from T+2 through T+10
 kind: epic
 status: in_progress
 priority: 0
-version: 32
+version: 34
 labels:
   - research
   - execution
@@ -42,11 +42,12 @@ child_order_hints:
   - is-01m1v5jwbje86fh2fptrs3mw5n
   - is-01m1v5jwt792wc9gs756crstvb
   - is-01m1v737815kxw4n164yct54p9
+  - is-01m1v8ab46v0vpr5vyzx4sj6yx
 created_at: 2026-09-06T08:00:40.024Z
-updated_at: 2026-09-06T11:19:12.384Z
+updated_at: 2026-09-06T11:40:34.309Z
 ---
 Coordinate the next eight active portfolio hours after PR #89 lands. Start only from a committed launch-amendment packet on a fresh codex branch; run one fractional manager and one closure manager with a single transferable worker; hold the clock for operational interruptions and T+4/T+8 integration; land a T+10 checkpoint with exact dispositions, upstream reconciliation, validation, and a cold-agent handoff.
 
 ## Notes
 
-Unattended run authorized at 2026-09-06T08:22:36Z. Use the next eight wall-clock hours for maximum progress, with a ten-hour outer handoff window. The scientific portfolio remains at active minute 120 until PR 89 lands and the continuation launch addendum plus safe fractional stop are committed. Operational validation, upstream integration, CI, tool recovery, and handoff do not consume active portfolio minutes. Existing heartbeat now resumes the full agenda and monitors PRs 93 and 94 every ten minutes.
+Replacement authorization 2026-09-06T11:31:09Z is bound to reviewed pushed pre-launch head da00905e1deb3056cf7ae15b6b1786b81c93059c and published in ff9cfe30. Fractional manager restarted 11:35:26Z, closure manager 11:34:50Z, and floating reviewer 11:38:05Z; the latest restart sets the shared Agenda 024 active clock to resume from minute 120 at 2026-09-06T11:38:05Z. BC-232 leg 02 launched once at 11:36:42Z in session 27576 with cooperative stop. BC-241 is released at local-only scope. Fixed outer deadline remains 2026-09-06T18:22:36Z, so even without holds the partial run can reach only about active minute 524.5; interruptions reduce that value and never count as active time.
