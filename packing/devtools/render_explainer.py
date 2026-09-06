@@ -1888,6 +1888,8 @@ def markdown_source(
     source = MARKDOWN.read_text(encoding="utf-8")
     if not claimed:
         source = drop_block(source, "CLAIM")
+    comparison = shared["HEADLINE_L_FRAC"] != shared["DEFAULT_L_FRAC"]
+    source = drop_block(source, "NO_COMPARISON" if comparison else "COMPARISON")
     unmeasured = [v["SLUG"] for v in per_certificate if not v["COARSEN_BARS"]]
     if unmeasured:
         # Figure 7 is stamped per certificate and switched with the others, so a
