@@ -227,11 +227,13 @@ case or experiment separately.
 | [BC-230 Source-Distinct Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-source-distinct-review.md) | dated review record | record | retained | — |
 | [BC-230 Post-Freeze Control Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-postfreeze-control-review.md) | dated review record | record | retained | — |
 | [BC-232 Retained-State Fractional-Cutting Disposition](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-disposition.md) | research synthesis | record | retained | — |
+| [BC-232 Leg-02 Microreceipt 001](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-leg-02-microreceipt-001.md) | research synthesis | record | retained | — |
 | [BC-233 Inset-Seed Screen and Released-Support Disposition](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-233-disposition.md) | research synthesis | record | retained | — |
 | [Agenda 025 T+2 Commissioning Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/checkpoint-hour-02.md) | research synthesis | record | retained | — |
 | [BC-242 Full-Size Density Proof Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-242-full-size-density-proof-contract.md) | research synthesis | record | retained | — |
 | [BC-245 Typed Stationary-Backbone Theorem Packet](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-245-typed-backbone-theorem-packet.md) | research synthesis | record | retained | — |
 | [Agenda 026 T+0 to T+2 Commissioning Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/checkpoint-hour-02.md) | research synthesis | record | retained | — |
+| [Agenda 026 T+2 to T+4 Closure Gate](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/gate-hour-04.md) | research synthesis | record | retained | — |
 | [A Quantitative Local Theorem at Trump’s 11-Square Packing](packing/cases/trump11/isolation-theorem.md) | research synthesis | record | retained | — |
 | [Frontier: What Is Known About `s(n)`, Case by Case](packing/frontier/README.md) | frontier semantics and contribution path | definitive | maintained | — |
 | [Current Square-Packing Frontier](packing/frontier/STATUS.md) | generated status view | generated | generated | — |
