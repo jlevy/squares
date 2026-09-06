@@ -1307,7 +1307,11 @@ PR103’s supporting corrections are integrated here and that PR is closed.
 PR98’s landed efficiency work includes the evolving operating-rule control, so PR102 was
 closed as superseded.
 No threshold was relaxed.
-PR99 remains monitored; only newly landed `origin/main` is integrated.
+During publication follow-up, required hosted CI passed on `fef2306f`. PR99 then landed
+at `62f53438` and was merged without conflicts as `52a30b46`. The explainer changes
+receive affected checks and a fresh hosted run; they do not alter this session’s
+research results or reopen its allocation.
+Only newly landed `origin/main` is integrated.
 The mainline cycle stays on PR101, with source controls, bounded targets, independent
 review and scoped dispositions integrated together.
 OR6/OR9 codify the ordinary 2–12-hour review cadence and reserve stacks for a concrete
