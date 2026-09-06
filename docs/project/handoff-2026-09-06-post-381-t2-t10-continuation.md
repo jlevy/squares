@@ -122,10 +122,11 @@ boundaries.
 | Historical cold review’s integrated input head | `0660f02bc41f49d90e6cc763afb9fe926c2858c6` |
 | Historical protocol reconciliation UTC | `2026-09-06T10:35:23Z` |
 | Latest source-distinct cold audit | `/root/cold_strategy_release_audit` audited `81946c62d6db20c080be3b9a4371585558da2683`; receipt observed `2026-09-06T11:23:51Z` |
-| Latest cold-audit disposition | Mathematical soundness `GO`; strategic reconstructability `GO`; release `NO-GO` until `think-vnlw`, current role acknowledgements, and the replacement authorization transaction are complete. |
+| Exact-head release-delta audit | `/root/cold_strategy_release_audit` audited `da00905e1deb3056cf7ae15b6b1786b81c93059c`; receipt bound `2026-09-06T11:31:09Z` |
+| Latest cold-audit disposition | Mathematical soundness `GO`; strategic reconstructability `GO`; no document defect remains. Release becomes effective only after this binding commit is pushed and `think-r60v` is closed. |
 | Isolated transport lineage | `ca188bd2afe317fa0fb5eb71f7986b8d4a2ef62e` was the fourth transport’s parent and prior transport head, not an audited shared head. |
 | Active minute | 120, held |
-| Wall authority | The wall authorization remains `2026-09-06T08:22:36Z`, with target `2026-09-06T16:22:36Z` and fixed outer deadline `2026-09-06T18:22:36Z`. The `2026-09-06T09:43:25Z` restart authorization is revoked; its replacement is pending and may authorize only a truthful partial continuation. |
+| Wall authority | The wall authorization remains `2026-09-06T08:22:36Z`, with target `2026-09-06T16:22:36Z` and fixed outer deadline `2026-09-06T18:22:36Z`. The `2026-09-06T09:43:25Z` restart authorization is revoked. Its `2026-09-06T11:31:09Z` replacement binds the exact pushed pre-launch head and authorizes only a truthful partial continuation after the binding transaction completes. |
 | tbd scope | Read live dependencies and terminal states at release. The coordinator alone changes edges or states; this review binds structure, not a cached status snapshot. |
 
 A cold senior review returns `GO` only when the exact reviewed candidate is integrated,
@@ -209,13 +210,12 @@ Unowned, unpriced, or unscoped work remains closed.
 | Global closure | Every admissible non-Trump survivor must be represented, priced, and discharged before any exact integration theorem or global-optimality claim. |
 | New work | Bind evidence, owner, paths, scope, acceptance and refusal rules, blocking classification, dependencies, and active allocation before launch. |
 
-## Coordinator Binding Required Before Launch
+## Coordinator Binding
 
-This transport draft may be committed with the delimited tokens below.
-The coordinator must replace every token with observed data in a later binding commit
-and push that commit before releasing active research.
-Opening the continuation pull request may precede the binding commit so its URL can be
-observed. Do not infer the PR #89 merge commit from its former open head.
+The initial transport was committed before its pull-request URL and final release data
+could be observed. This binding records those observations and the replacement
+authorization. It must be pushed and `think-r60v` must be closed before active research
+resumes. Do not infer a merge commit from a former open head.
 
 <!-- BEGIN COORDINATOR BINDING: REQUIRED BEFORE ACTIVE RESEARCH -->
 
@@ -227,14 +227,16 @@ observed. Do not infer the PR #89 merge commit from its former open head.
 | New-branch transport head before the binding commit | `552e0c6969a6aa3a5a2e2a539e826c0bab8c7c83` |
 | Continuation pull-request URL | <https://github.com/jlevy/squares/pull/97> |
 | Cooperative-stop implementation commit on this branch | `22880621708b15054b4c7a7876eff0b0cc270764` (transport provenance `37ca074d2a9e0027d334be03c982b24ffb6acd4a`) |
-| Coordinator identity and acknowledgement UTC | `/root`; `2026-09-06T09:43:25Z` |
-| Fractional-manager identity and acknowledgement UTC | `/root/fractional_manager`; `2026-09-06T09:42:33Z` |
-| Closure-manager identity and acknowledgement UTC | `/root/closure_manager`; `2026-09-06T09:42:29Z` |
-| Floating-reviewer identity and acknowledgement UTC | `/root/closure_manager/bc241_source_reviewer`; `2026-09-06T09:42:33Z` |
+| Exact pushed pre-launch head | `da00905e1deb3056cf7ae15b6b1786b81c93059c` |
+| Historical coordinator identity and acknowledgement UTC | `/root`; `2026-09-06T09:43:25Z` |
+| Current coordinator identity and acknowledgement UTC | `/root`; `2026-09-06T11:31:09Z` |
+| Current fractional-manager identity and acknowledgement UTC | `/root/dilation_bound_promotion`; `2026-09-06T11:27:28Z` |
+| Current closure-manager identity and acknowledgement UTC | `/root/closure_manager`; `2026-09-06T11:30:36Z` |
+| Current floating-reviewer identity and acknowledgement UTC | `/root/bc241_transferable_reviewer`; `2026-09-06T11:29:14Z` |
 | PR #93 | MERGED as `3122c49766e7fc70c8cb299bd8b6b09558447d8a` at `2026-09-06T09:06:10Z` |
 | PR #94 | OPEN and `DIRTY` at `9c82dc2ac5fecfa94d9388ef61c6b1d4bc21169b` |
 | Prior continuation release-authorization UTC | `2026-09-06T09:43:25Z`; suspended by `think-r60v` and unusable for restart |
-| Replacement current-head authorization | Pending coordinator binding to the exact validated, pushed pre-launch head after every umbrella dependency is terminal |
+| Replacement current-head authorization | `/root` authorized a partial continuation at `2026-09-06T11:31:09Z`, bound to `da00905e1deb3056cf7ae15b6b1786b81c93059c`; it becomes effective only after this binding commit is pushed and `think-r60v` is closed. |
 | Actual role restart UTCs | Pending; the first microreceipts record them only after lane release |
 
 <!-- END COORDINATOR BINDING -->
@@ -242,25 +244,28 @@ observed. Do not infer the PR #89 merge commit from its former open head.
 At `2026-09-06T09:43:25Z`, `/root` recorded the now-historical acknowledgement: “I bind
 the four roles, frozen inputs, clocks, execution graph, and fresh output paths in this
 addendum. I alone will move a shared gate or claim.”
-The three delegated acknowledgements are the verbatim statements in the role table
-below, tied to the identities and UTCs above.
+At `2026-09-06T11:31:09Z`, `/root` renewed that acknowledgement against the exact pushed
+pre-launch head: “I bind the four roles, frozen inputs, clocks, execution graph, and
+fresh output paths in this addendum.
+I alone will move a shared gate or claim.”
+The three current delegated acknowledgements are the verbatim statements in the role
+table below, tied to the current identities and UTCs above.
 
-### Authorization Suspension Receipt
+### Authorization Replacement Receipt
 
-This current release receipt suspends and revokes the `2026-09-06T09:43:25Z`
-authorization under `think-r60v`. It authorizes no T+2 command or restart at this or any
-descendant commit. Active portfolio time remains held at minute 120: all recorded wall,
-process, role, agent, and active-clock values remain historical and held, with nothing
-backdated or advanced.
+The `2026-09-06T09:43:25Z` authorization remains revoked.
+All `think-r60v` prerequisites were terminal, the local edit and focused gates passed,
+hosted checks were green, and all current role acknowledgements were present when
+`/root` recorded the replacement at `2026-09-06T11:31:09Z`. It binds exact pushed
+pre-launch head `da00905e1deb3056cf7ae15b6b1786b81c93059c`. This binding commit changes
+only the release receipt and becomes effective after it is pushed and `think-r60v` is
+closed.
 
-After every pre-release blocker is terminal, the candidate is validated and pushed, and
-the role acknowledgements are current, the coordinator must bind a replacement
-authorization to that exact pre-launch head and close the `think-r60v` umbrella gate.
-Only then may the roles restart.
-Their first microreceipts record the authorized head and actual restart UTCs after those
-restarts occur.
-No prior acknowledgement or authorization UTC can substitute for that new
-binding.
+The replacement authorizes a partial continuation from active minute 120 only through
+the fixed `2026-09-06T18:22:36Z` outer deadline.
+It neither backdates active time nor promises active minute 600. The first microreceipts
+record the authorized head, this replacement authorization UTC, and actual role restart
+UTCs after the roles restart.
 
 The staged cooperative-stop manifest is:
 
