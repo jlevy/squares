@@ -1,7 +1,7 @@
 # Agenda 024 T+0 Dispatch Record
 
-Status: **armed; official T+0 awaits the commit containing the final timestamp and the
-coordinator’s explicit GO.**
+Status: **launched at 2026-09-06T03:31:00Z; the coordinator’s explicit GO follows the
+commit containing this timestamp.**
 
 ## Frozen identities
 
@@ -10,8 +10,13 @@ coordinator’s explicit GO.**
 - Integrated PR #87 source: `fd7c9d9417f117f023b1e6e179653d6cf5717f41`.
 - PR #89: `codex/next-research-strategy`; hosted checks are asynchronous.
 - Open PR #90 was red on `validate` at preflight and is not a launch dependency.
-- Official clock: pending.
-  The commit that replaces this field binds the dispatch bytes.
+- Official T+0: `2026-09-06T03:31:00Z`.
+- Frozen preregistration commit: `f1b6c641e8d3a2fea39cf5aa5292cb8fc1221772`.
+- The commit containing this field binds the dispatch timestamp; the first receipt
+  records its SHA-256 identity.
+- The T+2 gate is 120 accumulated active portfolio minutes, not a wall-clock deadline.
+  Operational interruptions are recorded and pause that shared clock without extending
+  any process’s own frozen timebox.
 
 ## Claims and allocation
 
