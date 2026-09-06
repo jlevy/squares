@@ -63,7 +63,7 @@
   </g>
   <text data-feature="explainer" x="709.572" y="2804" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="1.045">(</tspan><tspan font-style="italic">n</tspan><tspan dx="1.045">) is the side of the smallest square holding </tspan><tspan font-style="italic">n</tspan><tspan dx="1.045"> unit squares; deg is the algebraic degree of that side length</tspan></text>
   <text data-feature="credit" x="1200" y="2834" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">Diagram by Joshua Levy with assistance from Claude and Codex</text>
-  <text data-feature="release-stamp" x="1200" y="2864" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">DRAFT v0.1.0, revision 3bd273e6</text>
+  <text data-feature="release-stamp" x="1200" y="2864" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">DRAFT v0.1.0-3bd273e6</text>
   <g data-feature="packing-card" data-n="1" data-row="0" data-column="0" data-source-id="W-known-best-n001">
     <rect data-feature="container-outline" x="84" y="186" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" />
     <polygon data-feature="square-fill" data-square="n-001-square-001" data-hue-index="0" data-shade-index="0" data-contact-sides="4" data-orientation-radians="0.0" points="84,344 242,344 242,186 84,186" fill="#257260" stroke="#000000" stroke-width="0.42" stroke-linejoin="round" data-angle-class="0" />

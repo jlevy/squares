@@ -41,7 +41,7 @@ from sqpack.known_best import (
     rational_integer,
     unitsquare_witness,
 )
-from sqpack.release import PUBLICATION_DATE, PUBLICATION_EDITION, PUBLICATION_REVISION
+from sqpack.release import PUBLICATION_DATE, PUBLICATION_EDITION
 from sqpack.render import render_packing_svg
 from sqpack.render.color import (
     ANGLE_CLASS_CONTRACT,
@@ -268,7 +268,10 @@ SUMMARY_MATH_GLYPH_BASELINE = Decimal(14)
 SUMMARY_BADGE_STAR_SPAN = Decimal("0.92")
 SUMMARY_CREDIT = "Diagram by Joshua Levy with assistance from Claude and Codex"
 #: The edition stamp, last of the footer lines and in the same voice as the rest of it.
-SUMMARY_RELEASE_STAMP = f"{PUBLICATION_EDITION}, revision {PUBLICATION_REVISION}"
+#: Taken whole from `sqpack.release` rather than assembled here: this line and the
+#: explainer's credits are the two places an edition is stamped, and they used to build
+#: the same string from the same parts in two files.
+SUMMARY_RELEASE_STAMP = PUBLICATION_EDITION
 SUMMARY_REPOSITORY = "github.com/jlevy/squares"
 # Set a step above the other small labels so the URL reads as part of the
 # heading block rather than as another footnote.

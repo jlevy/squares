@@ -27,7 +27,7 @@ per certificate; the prose is filled once, with the headline certificate's value
 <p class="subtitle">{{SUBTITLE}}</p>
 
 <div class="credits">
-  <span>{{PUBLISHED}} ({{EDITION}}, revision {{REVISION}})</span>
+  <span>{{PUBLISHED}} ({{EDITION}})</span>
   <span>Tooling and human oversight: <a href="https://x.com/ojoshe"><strong>Joshua Levy</strong></a></span>
   <span>Agents: <strong>Opus 5</strong>, <strong>Fable 5.1</strong>, and <strong>Codex 5.6</strong></span>
   <span>Open source at <a href="https://github.com/jlevy/squares"><strong>github.com/jlevy/squares</strong></a></span>
