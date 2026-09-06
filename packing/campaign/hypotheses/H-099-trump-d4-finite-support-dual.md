@@ -49,24 +49,27 @@ hypothesis:
 ---
 # H-099 — A Finite-Support Ceiling Before the Arrangement Build
 
-Session 089 accepts readiness for the finite-row ceiling route only, after the
+Session 089 accepted readiness for the finite-row ceiling route after the
 [independent review](../series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-independent-review.md)
 and its parser correction.
-A target still requires prospective freeze and separate exact replay.
 Complete almost-everywhere depth verification is not implemented here.
 
 [Exp-113](../series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md)
-subsequently returned a separately replayed finite-row ceiling of $56/5$ on this support.
-Together with the feasible mass-eleven average, it gives the bracket $[11,56/5]$ for
-the full fixed-support supremum. H-099 remains unresolved: the matching finite-row
-primal weights have not passed complete almost-everywhere depth verification.
+tested the prospectively frozen support and returned a separately replayed finite-row
+ceiling of $56/5$. Together with the feasible mass-eleven average, it gives the bracket
+$[11,56/5]$ for the full fixed-support supremum.
+H-099 remains unresolved: the matching finite-row primal weights have not passed
+complete almost-everywhere depth verification, so the screen does not certify an
+a.e.-feasible mass-above-eleven weighting.
 
-Let F be the distinct geometric squares in all eight container symmetries of the
+Let $F$ be the distinct geometric squares in all eight container symmetries of the
 [exact Trump witness](../../cases/trump11/packing.py), identifying local quarter-turn
 reparameterizations and duplicate placements.
-For each D4 orbit O, let a_O be the weight of each distinct member: D = sum |O| a_O.
-Symmetrization preserves full feasibility and D, so orbit weights lose no full-support
-solutions; a test row has coefficient |{S in O : x lies in int S}|, not merely 0 or 1.
+For each D4 orbit $O$, let $a_O$ be the weight of each distinct member, giving
+$D=\sum_O |O|a_O$. Symmetrization preserves full feasibility and $D$, so orbit weights
+lose no full-support solutions.
+A test-row coefficient counts the distinct members of $O$ whose interiors contain the
+test point; it is not merely zero or one.
 
 Every necessary test point must be off all square boundaries, with a certified
 positive-area neighborhood of constant incidence.
@@ -76,8 +79,8 @@ support; a larger optimum still needs every positive-area arrangement face check
 [BC-242](../series/series-000-smoke-and-calibration/results/agenda-026/bc-242-full-size-density-proof-contract.md)
 supplies the weak-duality semantics.
 [Agenda 026](../agendas/agenda-026-density-stationarity-and-trump-capture.md) routes the
-screen through think-01q4 and any justified BC-243 certification through think-mt6q. A
-verified D > 11 rules out mass-eleven area density at U, not below-U density.
+screen through `think-01q4` and any justified BC-243 certification through `think-mt6q`.
+A verified $D>11$ rules out mass-eleven area density at $U$, not below-$U$ density.
 This is the finite discriminator for
 [X-016’s closure route](../explorations/X-016-after-381-two-managers-one-proof-boundary.md#closure-route).
 

@@ -11,8 +11,8 @@ count: 89
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 44
-  sessions_unmeasured: 45
+  sessions_measured: 45
+  sessions_unmeasured: 44
   attributed:
     rollups: 115
     turns: 29742
@@ -35,9 +35,9 @@ totals:
     one_off_code: 3267
     wall_hours: 195.94
 codex_receipts:
-  attributed: 17
+  attributed: 18
   unattributed: 0
-  measured: 17
+  measured: 18
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1385,9 +1385,19 @@ sessions:
   title: "The next post-3.81 research phases"
   status: in_progress
   primary_bead: think-jgnv
-  phases: 8
-  measured: false
-  unmeasured_reason: >-
-    declares no rollups
-  rollups: []
-  codex_receipts: []
+  phases: 10
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-089.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-089.yaml
+    model_responses: 797
+    agent_hours: 6.93
+    active_union_hours: 2.0
+    wall_hours: 2.0
+    snapshot_incomplete: true

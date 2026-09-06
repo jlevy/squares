@@ -139,7 +139,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 
 The generated ledger currently derives eight confirmed hypotheses, ten refuted
 hypotheses, two open hypotheses, fifteen open questions, and thirty-six blocked
-hypotheses. H-104 is running.
+hypotheses. H-104 is running after its independent-reader readiness review passed.
 No hypothesis waits on review and six are unresolved.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
 pinned the `m = 5` covering wall to a bracket of width 0.015 where it had registered
@@ -261,13 +261,16 @@ case or experiment separately.
 | [BC-254 Support Controls: Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-independent-review.md) | dated review record | record | retained | — |
 | [BC-254: Target-Readiness Build and Source Control](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-slice-02.md) | research synthesis | record | retained | — |
 | [BC-254 Target Instrument: Independent Readiness Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-independent-review.md) | dated review record | record | retained | — |
+| [BC-254: The Next Exact Discriminator After exp-113](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-post-screen-next-discriminator.md) | research synthesis | record | retained | — |
 | [exp-113: Independent Protocol and Output Review](packing/campaign/series/series-000-smoke-and-calibration/results/exp-113-h-099-trump-support-screen/independent-review.md) | dated review record | record | retained | — |
+| [exp-114: Independent Receipt-Checker Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/exp-114-h-104-fixed-side-auxiliaries/independent-review.md) | dated review record | record | retained | — |
 | [BC-255 Restricted-Angle Assessment](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md) | research synthesis | record | retained | — |
 | [BC-255 Theorem 3 Source Control: First Slice](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-slice-01.md) | research synthesis | record | retained | — |
 | [BC-255 Theorem 3 Source-Control Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-independent-review.md) | dated review record | record | retained | — |
 | [BC-255: Restricted-Angle Instrument Design](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md) | research synthesis | record | retained | — |
 | [BC-255: Fixed-Side Discriminator Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md) | research synthesis | record | retained | — |
 | [BC-255: Fixed-Side Discriminator Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-independent-review.md) | dated review record | record | retained | — |
+| [BC-255: Independent Reader Cold Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-independent-reader-cold-review.md) | dated review record | record | retained | — |
 | [Agenda 026 T+0 to T+2 Commissioning Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/checkpoint-hour-02.md) | research synthesis | record | retained | — |
 | [Agenda 026 T+2 to T+4 Closure Gate](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/gate-hour-04.md) | research synthesis | record | retained | — |
 | [A Quantitative Local Theorem at Trump’s 11-Square Packing](packing/cases/trump11/isolation-theorem.md) | research synthesis | record | retained | — |
@@ -3007,11 +3010,12 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-075.yaml` | session-072, session-075 | 212 | 1.41 h | 1.41 h | 1.75 h | no |
 | `codex-task-tree-session-078.yaml` | session-078, session-082 | 2,401 | 13.41 h | 9.45 h | 10.0 h | yes |
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
+| `codex-task-tree-session-089.yaml` | session-089 | 797 | 6.93 h | 2.0 h | 2.0 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 44 |
-| unmeasured | 45 |
+| measured | 45 |
+| unmeasured | 44 |
 | **total** | **89** |
 
 <!-- END GENERATED: session-close-report -->
@@ -3031,8 +3035,8 @@ The relevant generator writes the receipt, and the entry fills in on the next
 There are 70 rounds registered in `series-000`.
 
 They record 2152.1 agent-minutes and 1163.7 wall-minutes.
-Of these, 69 are terminal; the prospective exp-114 screen has not accessed its target
-and contributes no measured effort yet.
+Of these, 69 are terminal; exp-114's unused target allowance is prospectively open after
+its reader review passed. Reader development costs are recorded separately.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
 result; exp-057 stopped before target access; exp-058 stopped on the review it was
 waiting for, which arrived and accepted it.
@@ -3137,7 +3141,7 @@ archive beside it.
 | [exp-110](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-110-h-090-core-shrink.md) | 11 | target | H-090 | exact source and smaller-core sweeps on frozen T-018 atoms, with normalization accepted above `M/11` | minimum `85353/100000` at an axis-aligned corner cell falls below `434547/440000`; a direct atom sum excludes all core sides below `1849127/1853400` | rejected |
 | [exp-111](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-111-h-091-core-shrink.md) | 11 | target | H-091 | exact fixed-atom replay above exp-110’s corner event, followed by direct witness-event inspection | minimum `96377/100000` at net direction 97; the witness’s first usable event exceeds the entire ordinary-containment improvement window, closing that fixed-weight route | rejected |
 | [exp-113](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md) | 11 | target | H-099 | exact necessary-row ceiling on the frozen Trump D4 support | independently replayed ceiling56/5; complete a.e.-depth still unverified | unresolved |
-| [exp-114](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md) | 11 | target | H-104 | seven fixed-formula exact-angle auxiliary clauses at1939/500 | prospective protocol; no target result yet | in-progress |
+| [exp-114](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md) | 11 | target | H-104 | seven fixed-formula exact-angle auxiliary clauses at1939/500 | prospective target after independent-reader readiness passed | in-progress |
 
 ### Cost and provenance
 
@@ -3212,13 +3216,13 @@ archive beside it.
 | exp-110 | one frozen core side, source replay and candidate replay | 29.86 s | — | criterion | `48a161ba` |
 | exp-111 | one frozen core side above the lost corner event, source replay and candidate replay | 30.58 s | — | criterion | `aeb683d5` |
 | exp-113 | one 60-second producer and one separate 60-second replay | 28.79 s | — | criterion | `e70458a9` |
-| exp-114 | one 10-second producer and one separate 10-second receipt/witness replay | — | — | — | `e45c8a63` |
+| exp-114 | one 10-second producer and one separate 10-second receipt/witness replay, both unspent | — | — | — | `e45c8a63` |
 
 ### What the 70 rounds jointly establish
 
 The 70 rounds use 2152.1 agent-minutes and 1163.7 wall-minutes under the campaign’s
 retained effort accounting.
-The prospective exp-114 contributes no measured effort yet.
+Exp-114 contributes no target effort; its readiness work is recorded in Session089.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; exact component controls pass only

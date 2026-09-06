@@ -12,6 +12,8 @@ session:
   started_at: '2026-09-06T19:11:26Z'
   deadline_at: '2026-09-06T22:39:32Z'
   branch: codex/post-381-next-phases
+  resource_rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-089.yaml
   goal: >-
     Execute Agenda024's selected first two-hour allocation, produce independent
     mathematical or instrument-readiness evidence in the fractional, density and
@@ -207,7 +209,7 @@ session:
     clock_role: work
     objective: Test the bounded fixed-side auxiliaries and price the next density discriminator.
     bead: think-d2d1
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: Exp113 is independently settled and the fixed-side source adapter passed review.
     budget_minutes: 30
@@ -217,10 +219,50 @@ session:
     validation_command: Frozen ten-second target, independent bounded output review, records and pre-push tier.
     kill_condition: The individual frozen cap or reviewer deadline is reached; no unchanged target retry.
     fallback: Preserve any missing review or unchecked clause and price only a changed next slice.
+    outcome: The density separator is priced; H104 remains unopened while its new reader receives cold review.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md]
+    stop_reason: Fund the priced source-only separator build while the structural cold review keeps its original deadline.
+    next_action: Use the actual formula outcome and density design to select the next funded direction.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Build the priced pair separator while finishing reader review and integrated publication.
+    bead: think-4ej5
+    status: stopped
+    entered_by: evidence_checkpoint
+    switch_reason: The density design identifies a small changed discriminator with explicit controls and cost.
+    budget_minutes: 30
+    started_at: '2026-09-06T21:20:01Z'
+    deadline_at: '2026-09-06T21:50:01Z'
+    expected_output: Source/toy pair-separator checkpoint, structural readiness or target outcome, and current PR101.
+    validation_command: Source/toy controls and independent review; records and immutable-checkout validation.
+    kill_condition: A source premise fails or the bounded author lease ends; no unregistered candidate access.
+    fallback: Retain missing instrument or review gates without assigning a mathematical negative.
+    outcome: Independent-reader cold review passed; the pair-separator author continues on its original lease.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-post-screen-next-discriminator.md]
+    stop_reason: Ready to execute the unchanged, previously unopened H104 target with independent output review.
+    next_action: Review the separator before any new density target and preserve H104's unchanged criterion.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Execute H104 once and independently decide its exact-angle scope.
+    bead: think-d2d1
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Reader cold review discharged the two remaining source-only readiness gates.
+    budget_minutes: 20.22
+    started_at: '2026-09-06T21:29:48Z'
+    deadline_at: '2026-09-06T21:50:01Z'
+    expected_output: One fixed-side receipt, independent decision and scoped disposition; pair build continues independently.
+    validation_command: Frozen ten-second producer once, then independent ten-second reader once.
+    kill_condition: The frozen process or review cap is reached; no unchanged retry.
+    fallback: Preserve incomplete or refused evidence and leave the affected mathematical claim unresolved.
     outcome: null
     evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md]
     stop_reason: null
-    next_action: Use the actual formula outcome and density design to select the next funded direction.
+    next_action: Publish the result on PR101 and price any continuous-angle extension separately.
   primary_bead: think-jgnv
   status: in_progress
   budget:
@@ -645,13 +687,13 @@ session:
     excluded_commands: [git mutations, tbd mutations, target optimization, registry allocation]
   - task: H104 independent protocol, retained checker and output review; think-jhs4
     operator: Codex bound_lane_strategy, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: The separate input/witness replay is not yet implemented; no target access before freeze.
+    outcome: Source/toy reader checkpoint completed at21:13:28; target never opened.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/exp-114-h-104-fixed-side-auxiliaries/independent-review.md]
+    files: [packing/devtools/check_restricted_orientation_discriminator.py]
+    checks: [Nine source/toy tests pass; Ruff and BasedPyright clean.]
+    uncertainty: Cold review and CLI-alarm/partial-negative regressions remain; no target replay occurred.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Complete source/toy controls, then review the single target output after dispatch.
@@ -670,13 +712,13 @@ session:
     excluded_commands: [git mutations, tbd mutations, target geometry before dispatch, registry allocation]
   - task: H099 post-screen discriminator pricing; think-eilk
     operator: Codex gpt6_coverage_audit, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: The least expensive complete-depth or exact-separation route is not yet priced.
+    outcome: A134-pair exact separator is priced before any complete arrangement build; stopped21:17:25.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-post-screen-next-discriminator.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-post-screen-next-discriminator.md]
+    checks: [Design-only source and code assessment; no target computation.]
+    uncertainty: The proposed30-minute build and10-minute review are estimates, not measured costs.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Compare changed discriminators without any new target computation.
@@ -692,13 +734,13 @@ session:
     excluded_commands: [git mutations, tbd mutations, target geometry, target optimization, registry allocation]
   - task: Integrated publication consistency audit; think-647n
     operator: Codex structural_lane_strategy, existing worker settings
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: Current handoff prose may lag the integrated branch and target dispositions.
+    outcome: Two stale command/accounting pointers identified and corrected by the coordinator.
+    evidence: [packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md, SYNOPSIS.md]
+    files: [packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md, SYNOPSIS.md]
+    checks: [Read-only audit; no tests or target runs.]
+    uncertainty: New mathematical results still require the ordinary publication pass.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Send only concrete current-state corrections to the coordinator.
@@ -712,6 +754,104 @@ session:
     fallback: Retain remaining drift locations for the coordinator.
     write_scope: [none; read-only messages to the coordinator]
     excluded_commands: [file writes, git mutations, tbd mutations, target evaluation]
+  - task: H104 independent-reader cold review and boundary controls; think-slox
+    operator: Codex structural_lane_strategy, max reasoning for mathematical judgment
+    status: completed
+    recording: contemporaneous
+    outcome: GO; twelve source/toy tests pass with no checker edits, writer stopped21:26:39.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-independent-reader-cold-review.md]
+    files: [packing/tests/test_restricted_orientation_packet_boundary_review.py]
+    checks: [Twelve tests passed in2.25seconds; process2.48wall/2.35CPU; Ruff and types clean.]
+    uncertainty: Positive coverage still relies on the reviewed exhaustive producer; no target has run.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Review exact arithmetic, formula/witness binding and positive-assurance limits without target access.
+    phase: 8
+    budget_minutes: 14.59
+    started_at: '2026-09-06T21:15:25Z'
+    deadline_at: '2026-09-06T21:30:00Z'
+    expected_output: Reader readiness GO or a concrete blocker, with measured source/toy tests.
+    validation_command: Source/toy CLI alarm and partial-negative regressions under projectPython3.14.
+    kill_condition: A blocking soundness error is found or the bounded review lease ends.
+    fallback: Leave exp114 unopened, retaining the exact missing gate.
+    write_scope:
+    - packing/tests/test_restricted_orientation_packet_boundary_review.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-independent-reader-cold-review.md
+    excluded_commands: [checker edits without root coordination, target geometry, git mutations, tbd mutations, registry allocation]
+  - task: H099 overweight-pair separator source/toy build; think-4ej5
+    operator: Codex gpt6_coverage_audit, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: Pair-search and strict positive-area witness commands are not yet implemented or reviewed.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Build declared controls only; retain a priced readiness checkpoint before target access.
+    phase: 9
+    budget_minutes: 30
+    started_at: '2026-09-06T21:20:01Z'
+    deadline_at: '2026-09-06T21:50:01Z'
+    expected_output: Reusable pair separator and separate witness checker, source/toy evidence and actual costs.
+    validation_command: Exact contact/overlap, weight threshold, triple limitation and non-target algebraic controls.
+    kill_condition: A source/control premise fails or the bounded build lease ends.
+    fallback: Retain the missing guard; no target calculation, extra solve or support extension.
+    write_scope:
+    - packing/src/sqpack/full_size_density/pair_separator.py
+    - packing/devtools/run_full_size_density_pair_separator.py
+    - packing/devtools/check_full_size_density_pair_separator.py
+    - packing/tests/test_full_size_density_pair_separator.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-pair-separator-readiness.md
+    excluded_commands: [target geometry, target optimization, new necessary rows, git mutations, tbd mutations, registry allocation]
+  - task: H104 independent target receipt and witness replay; think-jhs4
+    operator: Codex structural_lane_strategy, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: The target and its single output replay remain unrun.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Read the prospective protocol and await the coordinator's actual producer packet and exit code.
+    phase: 10
+    budget_minutes: 10.2
+    started_at: '2026-09-06T21:29:48Z'
+    deadline_at: '2026-09-06T21:40:00Z'
+    expected_output: Exact H104-only output decision, costs and independence limitations.
+    validation_command: One committed-reader file replay with its fixed ten-second alarm and actual producer exit status.
+    kill_condition: A decision/refusal is retained or the review lease ends; no producer run or repeated replay.
+    fallback: Leave missing or incomplete output unresolved without another target attempt.
+    write_scope:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-114-h-104-fixed-side-auxiliaries/replay.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-114-h-104-fixed-side-auxiliaries/replay.log
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-114-h-104-fixed-side-auxiliaries/target-output-independent-review.md
+    excluded_commands: [target producer, source edits, git mutations, tbd mutations, registry allocation]
+  - task: Checkpoint body editing and scope consistency; think-647n
+    operator: Codex bound_lane_strategy, existing worker settings
+    status: completed
+    recording: contemporaneous
+    outcome: Four bodies copy-edited; writer stopped21:31:33 with protected metadata and costs unchanged.
+    evidence: [packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md, packing/campaign/hypotheses/H-104-fixed-side-point-cover-auxiliaries.md]
+    files: [packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md, packing/campaign/hypotheses/H-104-fixed-side-point-cover-auxiliaries.md, packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md]
+    checks: [Frontmatter and generated PR cost block preserved; Practical Prose and Flowmark passes.]
+    uncertainty: Root must update the next actual target outcome after this stable handoff.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Publish the integrated checkpoint with exact source/replay scope and current costs.
+    phase: 9
+    budget_minutes: 10
+    started_at: '2026-09-06T21:23:02Z'
+    deadline_at: '2026-09-06T21:33:02Z'
+    expected_output: Clear body prose without changed numerical values, criteria or source records.
+    validation_command: Protected-frontmatter comparison, common-edit, de-slop and Flowmark.
+    kill_condition: The bounded edit is complete or its deadline arrives.
+    fallback: Report remaining body drift; do not change mathematical meaning to resolve wording.
+    write_scope: [H099 and H104 bodies, exp113 body, temporary PR body outside the generated cost block]
+    excluded_commands: [YAML edits, numerical or criterion changes, source edits, Git mutations, tbd mutations]
   outputs:
   - packing/campaign/agent-sessions/session-089-agenda024-next-phases.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md

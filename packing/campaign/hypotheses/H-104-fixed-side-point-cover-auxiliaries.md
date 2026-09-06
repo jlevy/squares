@@ -44,38 +44,47 @@ hypothesis:
 ---
 # H-104 — Test the Fixed Point-Cover Mechanism First
 
+H-104 remains unresolved.
+The independent receipt reader has passed cold review.
+The prospectively registered exp-114 remains unopened; its first target dispatch and
+separately bounded replay are next.
+
 This claim tests the smallest concrete precursor to
 [H-036](H-036-robust-restricted-orientation.md), under the
 [H-102](H-102-complete-restricted-angle-support-families.md) restricted-family agenda.
-It does not change H-036's side threshold or quarter-degree neighborhoods.
+It does not change H-036’s side threshold or quarter-degree neighborhoods.
 
 Set $q=1939/500$. The frozen `point_sets(q)` formulas in
 [the source module](../../cases/stromquist/restricted_orientation.py), committed at
-`e45c8a63`, define the ten-point set $P_{10}$, twelve-point set $P_{12}$, and distinguished
-points $A_1,A_2,A_3$ in their original order (the first three entries of $P_{12}$).
-Substitute $q$ into the formulas; do not homothetically scale the source point sets.
-The canonical region is $R=[1,q/2]\times[0,1]$; $K_4$ consists of
-the identity and reflections in the container's horizontal and vertical midlines.
+`e45c8a63`, define the ten-point set $P_{10}$, twelve-point set $P_{12}$, and
+distinguished points $A_1,A_2,A_3$ in their original order (the first three entries of
+$P_{12}$). Substitute $q$ into the formulas; do not homothetically scale the source
+point sets. The canonical region is $R=[1,q/2]\times[0,1]$; $K_4$ consists of the
+identity and reflections in the container’s horizontal and vertical midlines.
 The seven clauses are:
 
 - Every contained axis-aligned closed unit square hits $P_{10}$.
 - Every such axis-aligned square hits $P_{12}$.
-- Every contained 45-degree square avoiding $P_{10}$ has its center in a $K_4$ image of $R$.
+- Every contained 45-degree closed unit square avoiding $P_{10}$ has its center in a
+  $K_4$ image of $R$.
 - Every such avoider with center in $R$ contains $A_1$.
 - Every such avoider with center in $R$ contains $A_2$.
 - Every such avoider with center in $R$ contains $A_3$.
 - Every contained 45-degree closed unit square hits $P_{12}$.
 
-Containment and point hits include the boundary. Source-control avoider counts are not
-requirements on this target; a universally quantified clause can hold vacuously.
-Incomplete receipts are not positive results. Any retained negative witness must be independently checked
-against its exact square corners, point membership and relevant region.
+Containment and point hits include the boundary.
+Source-control avoider counts are not requirements on this target; a universally
+quantified clause can hold vacuously.
+Incomplete receipts are not positive results.
+Any retained negative witness must be independently checked against its exact square
+corners, point membership, and relevant region.
 One valid falsifier rejects the conjunction even if the remaining clauses are unchecked.
 
-The [adapter review](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-independent-review.md)
-explains the exhaustive source algorithm and its independence limits. An all-true result
-would be computationally verified for these exact angles, not a standalone certificate
-of H-036 or of a continuous-angle theorem.
+The
+[adapter review](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-independent-review.md)
+explains the exhaustive source algorithm and its independence limits.
+An all-true result would be computationally verified for these exact angles, not a
+standalone certificate of H-036 or of a continuous-angle theorem.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

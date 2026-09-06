@@ -42,15 +42,37 @@ experiment:
       sampled angle or longer run. Record startup and review costs separately.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-114-h-104-fixed-side-auxiliaries/packet.json
   lease:
-    expires: '2026-09-06T21:14:00Z'
+    expires: '2026-09-06T21:40:00Z'
     host: local coordinator
   results: []
   verdict:
     decision: in-progress
     primary_criterion: All seven fixed-formula exact-angle auxiliary clauses hold.
-    reason: Prospective record before any q-target geometry; independent protocol review precedes execution.
+    reason: >-
+      Independent reader cold review is GO with twelve source/toy controls passing.
+      This prospective operational lease opens the still-unused single producer and
+      replay allowances; target side, formulas, criterion and process caps are unchanged.
 ---
 # exp-114 — A Ten-Second Point-Cover Discriminator
+
+The target remained unopened during reader development. The independent reader's author stopped at 21:13:28 UTC
+with nine passing source/toy tests, but explicitly withheld reader readiness pending
+cold review and two targeted regressions. The original 21:14 operational lease expired
+without a target invocation. `think-slox` then returned cold-review GO, with twelve
+source/toy tests passing and writer stop at 21:26:39 UTC. Root accepts reader readiness
+and prospectively opens the unused target/replay allowances through 21:40 UTC.
+No process budget has been consumed, shortened or reset.
+
+The independent command, run from the committed reader checkout, is:
+
+```bash
+PYTHONPATH=src /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.check_restricted_orientation_discriminator PACKET --target-fixed-side --producer-exit-code STATUS
+```
+
+`PACKET` is the absolute retained producer path and `STATUS` its actual exit code.
+The reader installs its own fixed ten-second alarm. Retain its stdout as `replay.json`,
+stderr and process costs as `replay.log`, and the independent scope review beside them.
+There is no second producer or source-distinct exhaustive positive certificate.
 
 This one run tests [H-104](../../../hypotheses/H-104-fixed-side-point-cover-auxiliaries.md),
 not the full H-036 packing statement. The root commits this protocol before accessing
