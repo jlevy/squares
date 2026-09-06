@@ -5,7 +5,7 @@ title: Execute Agenda 024 from T+2 through T+10
 kind: epic
 status: in_progress
 priority: 0
-version: 40
+version: 41
 labels:
   - research
   - execution
@@ -48,10 +48,10 @@ child_order_hints:
   - is-01m1vrxq9nstxhb12j753nvkpp
   - is-01m1vsa2mptszc9vtgw4668bgt
 created_at: 2026-09-06T08:00:40.024Z
-updated_at: 2026-09-06T16:37:31.413Z
+updated_at: 2026-09-06T16:52:18.599Z
 ---
 Coordinate the next eight active portfolio hours after PR #89 lands. Start only from a committed launch-amendment packet on a fresh codex branch; run one fractional manager and one closure manager with a single transferable worker; hold the clock for operational interruptions and T+4/T+8 integration; land a T+10 checkpoint with exact dispositions, upstream reconciliation, validation, and a cold-agent handoff.
 
 ## Notes
 
-User explicitly excluded the credit interruption from wall allowance. Conservative accounting pause: last coordinator observation 2026-09-06T11:50:09Z through first recovered observation 2026-09-06T16:07:05Z, 4h16m56s; exact failure onset unknown. Credited shared time is minute124:14, held for recovery/integration. Adjusted target20:39:32Z and outer boundary22:39:32Z. BC-232 completed five iterations with no row-converged covering and no cumulative bracket improvement; recorded driver wall7278.912243166007s shows the101m argument is cooperative, not a hard cap. BC-241 and core-shrink independent reviews resumed. think-3ir7 owns recovery; current handoff now distinguishes historical deadlines from user amendment. No repeat of completed scientific evidence or unpriced successor launch.
+Published checkpoint ad600896 on PR 97. The current handoff remains execution authority. Shared clock is 124:14, held for recovery/integration; the user-excluded conservative credit pause is 11:50:09Z–16:07:05Z (4h16m56s), with amended target 20:39:32Z and outer boundary 22:39:32Z. BC-232 recovery is terminal with no new covering; no final 30-minute leg is affordable (think-05of). BC-241 local-scope review and H-090/H-091 obstruction are retained. BC-220's prepared decision now supersedes artificial minute-240 waiting, but final disposition/role restart remain open. User priorities: core exposition stays at 3.81 with a technical T-022 pointer; focus on larger gains or enabling methods. OR-16 is visible in AGENTS: use Git for repository integrity and SHA only across a real named trust boundary. H-092 transport 30c44bb6 is retained in think-xsma pending independent review/integration, with no further fixed-weight target.
