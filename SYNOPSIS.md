@@ -261,6 +261,7 @@ case or experiment separately.
 | [BC-254 Support Controls: Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-independent-review.md) | dated review record | record | retained | — |
 | [BC-254: Target-Readiness Build and Source Control](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-slice-02.md) | research synthesis | record | retained | — |
 | [BC-254 Target Instrument: Independent Readiness Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-independent-review.md) | dated review record | record | retained | — |
+| [exp-113: Independent Protocol and Output Review](packing/campaign/series/series-000-smoke-and-calibration/results/exp-113-h-099-trump-support-screen/independent-review.md) | dated review record | record | retained | — |
 | [BC-255 Restricted-Angle Assessment](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md) | research synthesis | record | retained | — |
 | [BC-255 Theorem 3 Source Control: First Slice](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-slice-01.md) | research synthesis | record | retained | — |
 | [BC-255 Theorem 3 Source-Control Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-independent-review.md) | dated review record | record | retained | — |
