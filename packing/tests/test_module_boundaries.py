@@ -656,11 +656,10 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_exact_construction_price.py": {
             "test_the_record_round_trips",  # 21.8s
         },
-        # 9s of call time across 3.
+        # 7s of call time across 2.
         "test_fractional_certificate.py": {
             "test_containment_at_exactly_one_is_refused",  # 4.4s
             "test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover",  # 2.5s
-            "test_breaking_the_symmetry_of_the_n12_atoms_is_refused",  # 2.0s
         },
         # 264s of call time across 1.
         "test_fractional_generate.py": {
