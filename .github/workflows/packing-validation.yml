@@ -24,7 +24,7 @@ permissions:
 
 env:
   # Outside the checkout: receipts must not enter source scans or mutation snapshots.
-  PACKING_VALIDATION_ARTIFACT_DIR: ${{ github.workspace }}/../validation-artifacts
+  PACKING_VALIDATION_ARTIFACT_DIR: ${{ github.workspace }}-validation-artifacts
 
 concurrency:
   # Keyed by event as well as ref, so a scheduled deep run and a push-to-main deep run --

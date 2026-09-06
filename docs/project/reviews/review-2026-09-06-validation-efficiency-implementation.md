@@ -138,6 +138,28 @@ That policy change needs its own disposition and a guard proving the full gate s
 invokes the complete assessor.
 The expensive test and named step remain in this block.
 
+## Hosted Artifact Boundary
+
+The first PR98 run on `a49a9db8` passed its behavioral and macOS checks but failed
+artifact upload: the pinned uploader rejects `..` path segments, including within an
+absolute path. The original workflow path used a parent segment to stay outside the
+checkout. Both workflows now use the normalized sibling path
+`${{ github.workspace }}-validation-artifacts`. The existing workflow contract test
+expands a representative workspace and rejects relative segments, relative paths, and
+paths inside the checkout.
+It failed against the original YAML; all nine focused workflow/artifact checks passed
+after the repair. The
+[failed hosted job](https://github.com/jlevy/squares/actions/runs/34050209769/job/101532343566)
+retains the actual service refusal.
+A successful hosted upload is the final integration evidence; local path checks alone do
+not establish it.
+
+The validation job also caught an independently changed live bead tree: an open,
+explicitly deferred PR97 follow-up remained under its completed parent.
+Making that follow-up standalone preserved its blocked status and repaired the
+structural check. This illustrates why live bead state is an input to the records lane
+and cannot be reused on a Git tree match alone.
+
 ## Validation
 
 Focused candidate checks passed: four bridge/midpoint checks and two

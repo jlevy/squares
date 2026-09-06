@@ -68,7 +68,7 @@ permissions:
 
 env:
   # Outside the checkout: receipts must not enter source scans or mutation snapshots.
-  PACKING_VALIDATION_ARTIFACT_DIR: ${{ github.workspace }}/../validation-artifacts
+  PACKING_VALIDATION_ARTIFACT_DIR: ${{ github.workspace }}-validation-artifacts
 
 concurrency:
   # Deliberately *not* `packing-validation-...`. Concurrency groups are repository-wide

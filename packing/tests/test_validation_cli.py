@@ -148,6 +148,14 @@ def test_ci_keeps_each_gate_jobs_timing_artifacts_even_on_failure() -> None:
         document = safe_load(workflow.read_text())
         assert isinstance(document, dict)
         assert "PACKING_VALIDATION_ARTIFACT_DIR" in document["env"]
+        workspace = "/home/runner/work/squares/squares"
+        artifact_pattern = document["env"]["PACKING_VALIDATION_ARTIFACT_DIR"].replace(
+            "${{ github.workspace }}", workspace
+        )
+        # upload-artifact rejects these segments even in an absolute path.
+        assert not {".", ".."}.intersection(artifact_pattern.split("/")), workflow
+        assert Path(artifact_pattern).is_absolute(), workflow
+        assert not Path(artifact_pattern).is_relative_to(workspace), workflow
         for name, job in document["jobs"].items():
             steps = job.get("steps", [])
             if not any("packing-validate" in str(step.get("run", "")) for step in steps):
