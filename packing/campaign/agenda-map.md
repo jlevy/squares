@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **1** in_progress, **17** ready, **9** tentative, **56** blocked, **41** stopped, **122** complete.
+- **4** in_progress, **13** ready, **9** tentative, **57** blocked, **41** stopped, **122** complete.
 
-- **18 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-243`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **19 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-251`, `BC-243`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -36,15 +36,14 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-023 | `BC-214` | ready | 0 | efficiency | tool_validation | Can the pull-request surface be brought under four minutes without deleting a check, by moving the broad… | `think-doar` |
 | agenda-023 | `BC-216` | ready | 0 | process | tool_validation | What check would have caught the 499 s to 1370 s regression in the week it happened, and does it hold when… | `think-gy30` |
 | agenda-023 | `BC-218` | ready | 0 | efficiency | tool_validation | How much of the gate's remaining wall is sequencing rather than work, and what does it cost to run the… | `think-m5ev` |
-| agenda-025 | `BC-231` | ready | 0 | correctness | tool_validation | Can an exact verifier decide the adaptive-core contract and refuse uncovered angles, unsafe cell bounds,… | `think-7mk4` |
+| agenda-025 | `BC-231` | in_progress | 0 | correctness | tool_validation | Can an exact verifier decide the adaptive-core contract and refuse uncovered angles, unsafe cell bounds,… | `think-7mk4` |
 | agenda-025 | `BC-232` | in_progress | 0 | efficiency | research | Can the retained 3.82 primal/dual state be advanced to total covering mass below 11 or exact packing value at… | `think-gmdy` |
-| agenda-025 | `BC-251` | ready | 0 | insight | research | Can the retained scalar certificate language certify side 61/16? | `think-0za3` |
 | agenda-025 | `BC-252` | tentative | 1 | insight | research | Which weight or support change addresses the retained limiting witnesses? | `think-361m` |
 | agenda-025 | `BC-253` | tentative | 2 | insight | research | Can an existential witness menu cover a limiting closed pose box? | `think-mw02` |
 | agenda-026 | `BC-246` | ready | 0 | correctness | tool_validation | Does the typed language recover Trump's stationary backbone, every retained branch, and its local theorem… | `think-3l93` |
-| agenda-026 | `BC-254` | ready | 0 | insight | research | Does the exact D4 Trump support admit a full-size dual value above eleven? | `think-01q4` |
+| agenda-026 | `BC-254` | in_progress | 0 | insight | research | Does the exact D4 Trump support admit a full-size dual value above eleven? | `think-01q4` |
 | agenda-026 | `BC-247` | ready | 1 | efficiency | tool_validation | On the complete n=3 and n=4 controls, and the local n=5 Göbel control, is typed backbone generation faithful… | `think-qi66` |
-| agenda-026 | `BC-255` | ready | 1 | insight | research | What is the first complete proof obligation for a useful restricted structural theorem? | `think-dene` |
+| agenda-026 | `BC-255` | in_progress | 1 | insight | research | What is the first complete proof obligation for a useful restricted structural theorem? | `think-dene` |
 | agenda-026 | `BC-256` | tentative | 2 | correctness | research | Does a verified packing refute the selected restricted structural claim? | `think-pjk7` |
 | agenda-026 | `BC-257` | tentative | 2 | insight | research | Which below-Trump density target and family justify a continuum proof attempt? | `think-k9zi` |
 
@@ -103,6 +102,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-025 | `BC-234` | 0 | `BC-231` | no | — |
 | agenda-025 | `BC-238` | 0 | `BC-219` | yes | A frozen lower-bound candidate from BC-232, BC-233, BC-234, BC-236, or BC-251, its object-specific project and… |
 | agenda-025 | `BC-239` | 0 | `BC-224` | no | — |
+| agenda-025 | `BC-251` | 0 | `BC-250` | yes | The exact depth corrections reported in PR100 and a successful retained seed/bridge replay on landed code; think-zuq5… |
 | agenda-025 | `BC-235` | 1 | `BC-234` | no | — |
 | agenda-025 | `BC-236` | 1 | `BC-235` | no | — |
 | agenda-025 | `BC-237` | 2 | `BC-236` | no | — |
@@ -154,8 +154,8 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-022 | active |  |  |  | 7 |  | 2 | 9 |
 | agenda-023 | active |  | 3 |  | 2 |  |  | 5 |
 | agenda-024 | active |  |  |  | 5 |  | 3 | 8 |
-| agenda-025 | active | 1 | 2 | 2 | 6 |  | 2 | 13 |
-| agenda-026 | active |  | 4 | 2 | 4 |  | 4 | 14 |
+| agenda-025 | active | 2 |  | 2 | 7 |  | 2 | 13 |
+| agenda-026 | active | 2 | 2 | 2 | 4 |  | 4 | 14 |
 
 ## By program
 
@@ -192,7 +192,7 @@ Open frontier: `BC-204`, `BC-205`, `BC-212`.
 | agenda | id | state | question |
 | --- | --- | --- | --- |
 | agenda-025 | `BC-230` | complete | What exact containment theorem and certificate contract allow every angle cell to use its own… |
-| agenda-025 | `BC-231` | ready | Can an exact verifier decide the adaptive-core contract and refuse uncovered angles, unsafe cell… |
+| agenda-025 | `BC-231` | in_progress | Can an exact verifier decide the adaptive-core contract and refuse uncovered angles, unsafe cell… |
 | agenda-025 | `BC-232` | in_progress | Can the retained 3.82 primal/dual state be advanced to total covering mass below 11 or exact… |
 | agenda-025 | `BC-233` | complete | Does an inset-support sweep provide a better seed for n=11 only after its support is released into… |
 | agenda-025 | `BC-234` | blocked | After exact adaptive semantics and controls pass, can they certify 3.8125 and then 3.815 without… |
@@ -201,7 +201,7 @@ Open frontier: `BC-204`, `BC-205`, `BC-212`.
 | agenda-025 | `BC-237` | blocked | After the kernel route is disposed, is a piecewise-algebraic segment-measure verifier small and… |
 | agenda-025 | `BC-238` | blocked | Does any fractional candidate from this agenda survive frozen-byte exactification, source-distinct… |
 | agenda-025 | `BC-239` | blocked | Is every fractional cell classified, its checkpoint and cost preserved, and its one earned… |
-| agenda-025 | `BC-251` | ready | Can the retained scalar certificate language certify side 61/16? |
+| agenda-025 | `BC-251` | blocked | Can the retained scalar certificate language certify side 61/16? |
 | agenda-025 | `BC-252` | tentative | Which weight or support change addresses the retained limiting witnesses? |
 | agenda-025 | `BC-253` | tentative | Can an existential witness menu cover a limiting closed pose box? |
 
@@ -234,8 +234,8 @@ Open frontier: `BC-208`, `BC-207`.
 | agenda-026 | `BC-247` | ready | On the complete n=3 and n=4 controls, and the local n=5 Göbel control, is typed backbone generation… |
 | agenda-026 | `BC-248` | blocked | Can a certified fractional core prune the global typed-backbone search to an exact-cover residue… |
 | agenda-026 | `BC-249` | blocked | Is every closure cell classified, its theorem and checkpoint state preserved, and its one earned… |
-| agenda-026 | `BC-254` | ready | Does the exact D4 Trump support admit a full-size dual value above eleven? |
-| agenda-026 | `BC-255` | ready | What is the first complete proof obligation for a useful restricted structural theorem? |
+| agenda-026 | `BC-254` | in_progress | Does the exact D4 Trump support admit a full-size dual value above eleven? |
+| agenda-026 | `BC-255` | in_progress | What is the first complete proof obligation for a useful restricted structural theorem? |
 | agenda-026 | `BC-256` | tentative | Does a verified packing refute the selected restricted structural claim? |
 | agenda-026 | `BC-257` | tentative | Which below-Trump density target and family justify a continuum proof attempt? |
 

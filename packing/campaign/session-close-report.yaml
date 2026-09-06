@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 87
+count: 88
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 43
-  sessions_unmeasured: 44
+  sessions_unmeasured: 45
   attributed:
     rollups: 115
     turns: 29742
@@ -1360,4 +1360,14 @@ sessions:
   tool_errors: 22
   one_off_code: 96
   wall_hours: 18.35
+  codex_receipts: []
+- id: session-088
+  title: "The next post-3.81 research phases"
+  status: in_progress
+  primary_bead: think-jgnv
+  phases: 2
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
   codex_receipts: []

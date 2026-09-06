@@ -411,6 +411,9 @@ agenda:
     bead: think-0za3
     workflows: [research-loop]
     depends_on: [BC-250]
+    blocked_on: >-
+      The exact depth corrections reported in PR100 and a successful retained
+      seed/bridge replay on landed code; think-zuq5 owns this readiness boundary.
     next_evidence: >-
       Restore readiness after the depth corrections reported in PR100 land and
       pass the retained seed/bridge controls (think-zuq5), then freeze the one

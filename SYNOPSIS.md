@@ -2951,8 +2951,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 43 |
-| closed before `resource_rollups` existed, logs not retained | 44 |
-| **total** | **87** |
+| closed before `resource_rollups` existed, logs not retained | 45 |
+| **total** | **88** |
 
 <!-- END GENERATED: session-close-report -->
 
