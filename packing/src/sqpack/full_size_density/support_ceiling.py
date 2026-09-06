@@ -1,4 +1,4 @@
-"""Exact BC-254 toy instruments. Target support construction is not commissioned."""
+"""Exact finite-support geometry and LP adapters; no execution at import time."""
 
 from __future__ import annotations
 
@@ -21,6 +21,10 @@ QUARTER_TURNS = 4
 
 class SupportError(ValueError):
     """An exact support, row, or certificate precondition was not established."""
+
+
+class BoundaryPointError(SupportError):
+    """An exact supporting-line equality disqualifies this necessary row."""
 
 
 @dataclass(frozen=True)
@@ -102,14 +106,21 @@ def build_control_support(seeds: Sequence[Square], side: FieldElement) -> Suppor
     """Deduplicate D4 toy supports; the side guard disables the Trump target."""
     if side != CONTROL_SIDE:
         raise SupportError("target-disabled: only side-two controls are commissioned")
-    if not seeds:
-        raise SupportError("support is empty")
+    return build_support(seeds, side)
+
+
+def build_support(seeds: Sequence[Square], side: FieldElement) -> Support:
+    """Construct exactly the D4 closure of at most eleven declared unit squares."""
+    if not seeds or len(seeds) > 11 or side.sign() <= 0:
+        raise SupportError("support requires one to eleven seeds and a positive side")
     placements: dict[SquareKey, Square] = {}
     for seed in seeds:
         _edges(seed, side)
         for square in _images(seed, side):
             placements.setdefault(square_key(square), square)
     remaining = set(placements)
+    for square in placements.values():
+        _edges(square, side)
     orbits: list[tuple[Square, ...]] = []
     while remaining:
         representative = placements[min(remaining)]
@@ -122,7 +133,9 @@ def build_control_support(seeds: Sequence[Square], side: FieldElement) -> Suppor
 def necessary_row(support: Support, point: Point) -> NecessaryRow:
     """Certify a positive-area constant-incidence neighborhood using projections."""
     side = support.side
-    if any(value.field is not side.field for value in point):
+    if len(point) != 2 or any(
+        not isinstance(value, FieldElement) or value.field is not side.field for value in point
+    ):
         raise SupportError("row point uses another field")
     forms = [point[0], side - point[0], point[1], side - point[1]]
     if any(value.sign() <= 0 for value in forms):
@@ -137,7 +150,7 @@ def necessary_row(support: Support, point: Point) -> NecessaryRow:
             values = (u, 1 - u, v, 1 - v)
             signs = tuple(value.sign() for value in values)
             if 0 in signs:
-                raise SupportError("row point lies on a supporting boundary line")
+                raise BoundaryPointError("row point lies on a supporting boundary line")
             count += int(all(sign > 0 for sign in signs))
             forms.extend(values)
         coefficients.append(count)
@@ -208,7 +221,7 @@ def solve_control_lp(
         raise SupportError("invalid incidence coefficient")
     if any(not any(row[column] > 0 for row in matrix) for column in range(len(sizes))):
         raise SupportError("uncovered column has no finite-bound guard")
-    if not 0 <= pivot_budget <= PIVOT_CAP:
+    if type(pivot_budget) is not int or not 0 <= pivot_budget <= PIVOT_CAP:
         raise SupportError("pivot cap exceeds the control commission")
     rows = [
         LinearRow(f"point:{index}", tuple(map(Fraction, row)))

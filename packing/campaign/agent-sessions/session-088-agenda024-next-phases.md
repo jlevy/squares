@@ -322,16 +322,19 @@ session:
     excluded_commands: [git mutations, tbd mutations, target measurements, registry allocation]
   - task: BC255 / H036 and H102 exact-angle source replay; think-2kld
     operator: Codex gpt6_coverage_audit, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: Closed point-cover and conditional-source obligations have not been replayed.
+    outcome: All seven exact-angle source obligations pass; writer stopped at 20:11:40 UTC.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-slice-01.md
+    files:
+    - packing/cases/stromquist/restricted_orientation.py
+    - packing/tests/test_stromquist_restricted_orientation.py
+    checks: [Seven tests passed with no skips; final source replay took 1.70 seconds wall and 1.65 CPU; scoped lint and type checks clean.]
+    uncertainty: Independent review and the perturbed-angle instrument remain open; no target ran.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Retain the complete original Theorem3 control or the first exact obstruction.
+    next_action: Receive source-distinct review before accepting instrument readiness.
     phase: 4
     budget_minutes: 30
     started_at: '2026-09-06T19:49:58Z'
@@ -347,16 +350,20 @@ session:
     excluded_commands: [git mutations, tbd mutations, target measurements, registry allocation]
   - task: BC254 / H099 target-instrument readiness; think-0qcu
     operator: Codex structural_lane_strategy, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: Source binding, target row order, serialized replay and cost are not ready.
+    outcome: Source binding and controls pass; no target rows or LP ran; writer stopped at 20:12:57 UTC.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-slice-02.md
+    files:
+    - packing/src/sqpack/full_size_density/support_screen.py
+    - packing/devtools/run_full_size_density_support_screen.py
+    - packing/devtools/check_full_size_density_support_ceiling.py
+    checks: [26 focused and module-boundary tests passed with no skips; source control took 0.573108 seconds wall and 0.566956 CPU; scoped lint and type checks clean.]
+    uncertainty: Independent target readiness and the optimized target row/LP/replay cost remain open.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Return a checked ceiling instrument and price its first frozen invocation.
+    next_action: Independent review must distinguish shared sequence generation from source-distinct geometry.
     phase: 4
     budget_minutes: 27.77
     started_at: '2026-09-06T19:52:12Z'
@@ -423,6 +430,53 @@ session:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-independent-review.md
     - packing/tests/test_stromquist_restricted_orientation_review.py
     excluded_commands: [git mutations, tbd mutations, target measurements, registry allocation]
+  - task: BC254 independent target-instrument readiness review; think-bv9t
+    operator: Codex gpt6_coverage_audit, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: Independent review has not accepted the source, row or serialized upper-bound contract.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Review the stable author packet and replay source/control mode only.
+    phase: 5
+    budget_minutes: 25
+    started_at: '2026-09-06T20:13:11Z'
+    deadline_at: '2026-09-06T20:38:11Z'
+    expected_output: GO or NO-GO for the support-ceiling instrument, with exact independence limits.
+    validation_command: Focused author and independent review controls under Python3.14.
+    kill_condition: A soundness premise fails or the review lease ends.
+    fallback: Retain the counterexample or missing premise; do not invoke an optimized target.
+    write_scope:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-independent-review.md
+    - packing/tests/test_full_size_density_support_screen_review.py
+    excluded_commands: [git mutations, tbd mutations, target measurements, target row generation, registry allocation]
+  - task: BC255 restricted-angle instrument design and pricing; think-6s8x
+    operator: Codex structural_lane_strategy, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: Complete perturbed-angle proof machinery and its cost remain unpriced.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Specify the smallest complete instrument conditionally on independent source review.
+    phase: 5
+    budget_minutes: 20
+    started_at: '2026-09-06T20:15:48Z'
+    deadline_at: '2026-09-06T20:35:48Z'
+    expected_output: Complete-case design, controls, cost range and a precisely bounded next discriminator.
+    validation_command: Analytical design against unchanged H036 and retained source obligations only.
+    kill_condition: No useful design work remains or the lease ends.
+    fallback: Retain the missing proof premise without target geometry evaluation or implementation.
+    write_scope:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md
+    excluded_commands: [git mutations, tbd mutations, target measurements, target geometry evaluation, implementation, registry allocation]
   outputs:
   - packing/campaign/agent-sessions/session-088-agenda024-next-phases.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md
@@ -433,6 +487,8 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-slice-01.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-independent-review.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-251-readiness-audit.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-slice-02.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-slice-01.md
   checks:
   - PR97 merged as c14451f5 after required hosted checks passed on d29342bb.
   - Prelaunch records tier passed 31 selected steps in 19.16 seconds on c14451f5.
@@ -443,7 +499,7 @@ session:
   - Initial hosted CI passed geometry, suite, sweeps and macOS; stale live clocks and an upstream bead hierarchy blocked its validation job.
   - Commit 0e6d6aac passed 657 reachable tests with 3 deselected in 44.89 seconds; its sole push-tier failure was prose appended to a declared command, corrected at the next checkpoint.
   stop_reason: null
-  next_action: Publish the launch PR, review first-slice packets, and commission ready work.
+  next_action: Review source instruments, integrate landed corrections and commission only ready, priced target work.
 ---
 # Session 088 — The Next Post-3.81 Phases
 
