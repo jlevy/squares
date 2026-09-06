@@ -13,9 +13,12 @@ from __future__ import annotations
 
 import json
 from fractions import Fraction
+from types import SimpleNamespace
 
 import numpy as np
+import pytest
 
+from devtools import colgen_checkpoint
 from devtools.colgen_checkpoint import (
     Progress,
     Settings,
@@ -350,71 +353,59 @@ def test_cost_windows_split_the_loop_rather_than_averaging_it() -> None:
     assert cost_lines(Progress()) == ["cost: no row-generation round has finished"]
 
 
-def test_a_clock_stop_between_column_rounds_keeps_the_converged_optimum(tmp_path) -> None:
-    """A converged column round survives a deadline that lands after it.
+@pytest.mark.parametrize("after_convergence", [False, True], ids=["before-first", "between"])
+def test_a_clock_stop_between_column_rounds_keeps_the_converged_optimum(
+    tmp_path, monkeypatch, *, after_convergence: bool
+) -> None:
+    """A clock stop retains exactly the converged optimum already reached.
 
-    The row loop converging is what makes a restricted optimum the site set's
-    own rather than a point the clock stopped at, and this driver exists so that
-    a budget stop costs a run its next round and not its last answer. So a
-    deadline arriving once some column round has converged must still report
-    ``converged``, still report *that* round's optimum, and still freeze its
-    candidate. The site set here is coarse enough that column generation has
-    real work to do -- eight column rounds, and the optimum moves at the
-    seventh -- so a fractional deadline lands mid-search rather than after it.
+    Advance the driver's clock after a real LP chunk, either the first unfinished
+    chunk or the first converged one. This covers a nonempty log without convergence
+    and a deadline between columns without assuming anything about runner speed.
+    The solver has no deadline of its own: the driver's next chunk boundary observes
+    the controlled clock. All LP, pricing, checkpoint and freezing work stays real.
     """
 
-    settings = small_settings(
-        max_rounds=40, chunk_rounds=40, column_rounds=12, grid_counts=(5,)
-    )
-    whole = run(
-        settings,
+    now = 0.0
+
+    def solve_then_expire(*args, **kwargs):
+        nonlocal now
+        kwargs["deadline"] = None
+        solution = solve_rows(*args, **kwargs)
+        if not after_convergence or solution.converged:
+            now = 2.0
+        return solution
+
+    monkeypatch.setattr(colgen_checkpoint, "time", SimpleNamespace(perf_counter=lambda: now))
+    monkeypatch.setattr(colgen_checkpoint, "solve_rows", solve_then_expire)
+    freeze = tmp_path / "certificate.json"
+    result = run(
+        small_settings(max_rounds=40, chunk_rounds=1, column_rounds=12, grid_counts=(5,)),
         log_path=None,
-        checkpoint=None,
+        checkpoint=tmp_path / "checkpoint.npz",
         resume=None,
-        freeze=None,
-        deadline_seconds=None,
+        freeze=freeze,
+        deadline_seconds=1.0,
         verify_serial=False,
     )
-    full = whole["rounds"]
-    assert isinstance(full, list)
-    assert len(full) > 2
-    elapsed = whole["seconds"]
-    assert isinstance(elapsed, float)
-
-    stopped_early = False
-    for fraction in (0.2, 0.35, 0.5, 0.7):
-        freeze = tmp_path / f"certificate-{fraction}.json"
-        result = run(
-            settings,
-            log_path=None,
-            checkpoint=tmp_path / "checkpoint.npz",
-            resume=None,
-            freeze=freeze,
-            deadline_seconds=elapsed * fraction,
-            verify_serial=False,
-        )
-        rounds = result["rounds"]
-        assert isinstance(rounds, list)
-        if not rounds:
-            # Too little clock for even the first row loop: nothing converged,
-            # and the result has to say so rather than freeze anything.
-            assert result["converged"] is False
-            assert result["frozen"] is None
-            continue
-        at = result["converged_at_column"]
-        assert isinstance(at, int)
+    rounds = result["rounds"]
+    assert isinstance(rounds, list)
+    assert len(rounds) == 1
+    if not after_convergence:
+        assert result["lp_rounds"] == 1
+        assert result["converged_at_column"] is None
+        assert result["converged"] is False
+        assert result["frozen"] is None
+        assert not freeze.exists()
+    else:
+        assert result["converged_at_column"] == 0
         assert result["converged"] is True
-        assert result["objective"] == rounds[at]["objective"]
-        assert result["least_covered"] == rounds[at]["least_covered"]
+        assert result["objective"] == rounds[0]["objective"]
+        assert result["least_covered"] == rounds[0]["least_covered"]
         assert freeze.exists()
-        if len(rounds) < len(full):
-            stopped_early = True
-            # Either the clock ran out inside a row loop or between two of them,
-            # and both leave the converged optimum standing.
-            assert result["stopped"] == "no clock for a single row-generation chunk" or str(
-                rounds[-1]["note"]
-            ).startswith("deadline reached")
-    assert stopped_early, "no deadline in the sweep stopped the search early"
+        # Pricing must offer a second column so the deadline actually stops it.
+        assert rounds[0]["added"] > 0
+        assert result["stopped"] == "no clock for a single row-generation chunk"
 
 
 def test_the_two_convergences_are_reported_apart() -> None:
