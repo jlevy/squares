@@ -93,7 +93,19 @@ tiers:
   # 281s). 210s is 1.49x against the 2.0x allowed. The band is 69s wide on a 141s tier, so
   # it catches a regression of a half -- looser in ratio than the old 550/409 because the
   # tier is now small enough that runner noise is a larger share of it.
-  ceiling_seconds: 210.0
+  # Cleared a third time, and the register is working rather than failing when it does
+  # this: it refuses to compare a wall against a record taken on a different tier. Main
+  # promoted twenty-one steps into `--fast` on 2026-09-05 -- `known-best n=1..100 atlas`
+  # at 133.5s and `prospective n=101..324 source map and safe seed` at 89.9s among them --
+  # so the 177.02s recorded here measured a tier with roughly 360s less work in it. A
+  # local run of the merged tier is 253.61s, which already breaches the 210s band the old
+  # record justified, and that is the band doing its job.
+  #
+  # 600s until CI prints a figure, and it is a hang detector rather than a band: with no
+  # record, rule 2 has nothing to bound it against, which the `edit` entry says too. The
+  # first run at the reference shape prints the line to write here, and the band is then
+  # rebuilt from it rather than from this number.
+  ceiling_seconds: 600.0
   # Cleared twice for the same reason, and the reason is a good one both times: the figure
   # measured a tier that no longer exists. BC-214 cleared 1369.60s (CI run 33982455466)
   # when it moved every test at or above QUICK_TEST_CEILING_SECONDS out of the quick lane.
@@ -111,14 +123,9 @@ tiers:
   # the quick lane was asking for one worker per cpu while two other steps ran beside it.
   # Recording the faster of two readings from an unstable configuration is how a band gets
   # set to a number the tier cannot hold, so the record is the stable configuration's.
-  measured_seconds: 177.02
-  measured_on: '2026-09-05'
-  measured_where: >-
-    CI run for commit b9d357db, job `validate`, GitHub's Linux runner reporting 4 cpus;
-    the step `Run the required pull-request surface` at `--jobs 3 --inner-jobs 1` with the
-    quick lane sized to `cpus - jobs + 1` = 2 workers. 177.02s of wall, of which
-    `fast behavioral tests` is 177.01s: the lane is the whole wall again, and the other
-    234.9s of work hides underneath it in the two remaining lanes.
+  measured_seconds: null
+  measured_on: null
+  measured_where: null
   # The reference moves with the invocation it describes. A record taken at `--jobs 3`
   # cannot be compared against a `--jobs 2` reference, and leaving the old one here is how
   # a band stays permanently unenforced: every run reports "not the reference shape" and

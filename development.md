@@ -140,8 +140,15 @@ A tier selects steps; a lane divides one step.
 | `--records` | contributor, before touching a registry; also every pull request | 31 of 64 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a code change |
-| `--fast` | **CI, on every pull request** | 60 of 64 | 210 s | 177.0 s on CI |
+| `--fast` | **CI, on every pull request** | 60 of 64 | 600 s | unrecorded — 253.6 s locally after main’s promotion; see below |
 | *(no flag)* | **CI, on `main`, on dispatch, and daily**; and what a block ends with | 64 of 64 | 3600 s | split across two jobs; not clocked whole |
+
+`--fast`’s ceiling is a hang detector rather than a band right now, and deliberately so:
+main’s promotion of twenty-one steps changed what the tier *is*, so the 177.0 s recorded
+against the previous shape was cleared rather than adjusted.
+The register refuses to compare a wall against a record from a different tier — that is
+the behaviour, not a gap — and the first CI run at the reference shape prints the figure
+the band is rebuilt from.
 
 Four steps are outside `--fast`, each deferred on its own measurement and pinned by
 `test_the_pull_request_surface_defers_only_what_was_measured`: `exhaustive exact
