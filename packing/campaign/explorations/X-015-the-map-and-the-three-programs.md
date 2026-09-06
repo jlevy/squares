@@ -253,6 +253,17 @@ argument in the literature is Stromquist’s Theorem 3.
 **Where the walls are, and the finding that reorders the block.** The covering value
 `τ*(L)` has been measured at seven sides, all inside `[3.82, 4.80]`, and every measured
 value is an upper bound on it (a restricted optimum on one site set).
+
+> **Correction, 2026-09-06:** The endpoint forecasts and planning conclusions below are
+> historical heuristics.
+> Differences between upper bounds do not establish the growth of the true covering
+> value or where it reaches twelve; neither the forecast near `3.963` here nor the later
+> `3.96004` estimate establishes an endpoint for the `n = 12` ladder.
+> The retained `3.96` certificate also rules out the hypothetical endpoint `3.9` in “If
+> This Argument Is Wrong.”
+> See the
+> [adversarial review](../../../docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md).
+
 Extrapolating linearly from the top measured point, with the local slopes between
 reported values as the spread, gives lower estimates of the side where `τ*` reaches `n`:
 

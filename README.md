@@ -57,18 +57,18 @@ Results first established here, as far as the recorded source searches show:
 
 ### Notable Results (`S4`–`S5`)
 
-- **[T-018](packing/frontier/RESULTS.md): `s(11) ≥ 381/100`, the first located public
-  movement of the smallest open case since 2003 (`S5`).**
-  [`s(11)`](packing/frontier/n-011.md) is the case this project exists for, and the
-  recorded public search found no stronger lower bound after Stromquist published
-  `2 + 4/√5 = 3.788854` in 2003. A first-party
+- **[T-018](packing/frontier/RESULTS.md): `s(11) ≥ 381/100 = 3.81`, improving the lower
+  bound for the smallest open case (`S5`).** [`s(11)`](packing/frontier/n-011.md) is the
+  case this project exists for, and the recorded public search found no stronger lower
+  bound after Stromquist published `2 + 4/√5 = 3.788854` in 2003. A first-party
   [weighted fractional unavoidable-set certificate](packing/cases/n11_fractional_certificate/)
   —1121 weighted atoms, total mass `434547/40000`, every placement of a shrunken square
   covering mass at least `1`—proves that eleven unit squares do not fit in a container
-  of side `3.81`. The interval narrows from `0.088230` to `0.067084`; the gap is not
-  closed. Two rungs are retained below it: `19/5`, the value that first passed
-  Stromquist, and `189/50`, the calibration rung below him that was run first on purpose
-  and proves nothing new.
+  of side `381/100 = 3.81`. This narrows the interval from `0.088230` to about
+  `0.067084`; the gap is not closed.
+  Two certificate rungs are retained below `381/100`: `19/5`, the value that first
+  passed Stromquist, and `189/50`, the calibration rung below him that was run first on
+  purpose and proves nothing new.
   Scored `S5`, the rubric’s anchor for movement on a central open case.
   The shortest complete statement of the proof, with the certificate’s hash and the one
   command that checks it from the standard library alone, is the
@@ -76,6 +76,10 @@ Results first established here, as far as the recorded source searches show:
   A
   [self-contained package for third-party checking](packing/cases/n11_fractional_certificate/thirdparty/)
   ships with it, so the `19/5` rung can be decided without trusting anything else here.
+  A small refinement, recorded in the
+  [T-022 proof packet](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md),
+  gives `s(11) ≥ 3.810025723614703…` as a weak limit bound; it does not decide fit at
+  that endpoint. The certificate at `3.81` supplies the proof explained here.
 - **T-019: `s(17), s(18), s(19) ≥ 459/100`, displacing the published value (`S4`).** The
   adopted bound for [these](packing/frontier/n-017.md) three cases was Massaccesi’s
   `4.5058`, taken from a source rather than proved here.
@@ -109,9 +113,11 @@ Results first established here, as far as the recorded source searches show:
   this is scored `S4` as a bound family rather than a case result.
   At `99/25 = 3.96` it also separates the cases: `s(12) > s(11)`, since Trump’s 1979
   packing puts `s(11) ≤ 3.877084`. That did not follow from anything on record before.
-  The case is now `0.04` from its conjectured optimum of `4`, and no single certificate
-  of this shape can close it: none for twelve squares can exist above `3.990816`, which
-  is proved here and is below the conjectured value.
+  The case is now `0.04` from its conjectured optimum of `4`. On the retained
+  181-direction net, the proved ceiling for twelve squares is approximately `3.990816`;
+  refining the net can raise that ceiling.
+  Every finite net still has a ceiling strictly below `4`, so no single certificate of
+  this shape can close the case.
   A family of certificates approaching `4` is not ruled out; whether one exists is a
   question about the covering value.
 - **T-010: `s(11) ≥ 2 + 4/√5`, repaired (`S4`).** The printed 2003 Figure 14
@@ -215,6 +221,13 @@ relevant source audit.
 | [**Code and development guide**](development.md) | Exact verification, search, promotion, and the [validation tiers and behavioral lanes](development.md#validation-tiers) that gate every change |
 | [**Campaign record**](packing/campaign/README.md) | Hypotheses, preregistered experiments, session records, agendas, and generated ledger |
 | [**Defect log**](defects.md) | Generated record of defects, detection methods, fixes, and regressions |
+
+Long-lived tests and runs retain detailed timing evidence under
+[OR-14](operating-rules.md#or-14-a-development-cycle-is-never-artificially-slow).
+The
+[validation efficiency and checkpoints plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
+tracks improvements to everyday feedback and full final checkpoints, with measurements
+and preserved coverage required before accepting a speedup.
 
 [`SYNOPSIS.md`](SYNOPSIS.md) is the technical root and current-state document.
 The generated day-to-day views are the frontier

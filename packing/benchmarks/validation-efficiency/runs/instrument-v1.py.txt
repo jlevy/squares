@@ -1,0 +1,263 @@
+"""Record repeated pytest runs with raw output, JUnit, and append-only receipts.
+
+Example: python -m benchmarks.validation_timing --root . --label serial
+--output-dir /tmp/validation-samples --repeats 3 tests -m exhaustive_exact
+
+Allocated worker-seconds are wall time times the declared process allocation, not
+measured CPU. Native thread limits and inner workers are recorded separately. Tests
+that explicitly create their own pools can exceed the declared allocation.
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+import platform
+import signal
+import subprocess
+import sys
+import time
+import uuid
+from collections.abc import Sequence
+from contextlib import suppress
+from datetime import UTC, datetime
+from pathlib import Path
+from typing import Any
+
+NATIVE_THREAD_LIMITS = (
+    "OPENBLAS_NUM_THREADS",
+    "OMP_NUM_THREADS",
+    "MKL_NUM_THREADS",
+    "VECLIB_MAXIMUM_THREADS",
+    "NUMEXPR_NUM_THREADS",
+    "BLIS_NUM_THREADS",
+)
+
+
+def _now() -> str:
+    return datetime.now(UTC).isoformat()
+
+
+def _append(output_dir: Path, event: dict[str, Any]) -> None:
+    with (output_dir / "receipts.jsonl").open("a", encoding="utf-8") as stream:
+        stream.write(json.dumps(event, sort_keys=True) + "\n")
+        stream.flush()
+        os.fsync(stream.fileno())
+
+
+def _stop(process: subprocess.Popen[bytes]) -> None:
+    """Reap the process and terminate descendants in its private process group."""
+    with suppress(ProcessLookupError):
+        os.killpg(process.pid, signal.SIGTERM)
+    with suppress(subprocess.TimeoutExpired):
+        process.wait(timeout=1)
+    # A parent can exit while a grandchild ignores SIGTERM and keeps running.
+    with suppress(ProcessLookupError):
+        os.killpg(process.pid, signal.SIGKILL)
+    process.wait()
+
+
+def run_sample(
+    command: Sequence[str],
+    *,
+    root: Path,
+    output_dir: Path,
+    metadata: dict[str, Any],
+    timeout: float | None,
+    environment: dict[str, str] | None = None,
+) -> dict[str, Any]:
+    """Write a start receipt before launch and an end receipt after cleanup.
+
+    Output is streamed directly to files, including before an interrupt or timeout.
+    A hard kill of this recorder leaves the durable start receipt unmatched; consumers
+    must treat that as incomplete. JUnit is best effort because pytest writes it on exit.
+    """
+    output_dir.mkdir(parents=True, exist_ok=True)
+    run_id = uuid.uuid4().hex
+    stdout_path = output_dir / f"{run_id}.stdout.log"
+    stderr_path = output_dir / f"{run_id}.stderr.log"
+    junit_path = output_dir / f"{run_id}.junit.xml"
+    argv = [part.replace("{junit}", str(junit_path)) for part in command]
+    receipt = {
+        **metadata,
+        "run_id": run_id,
+        "command": argv,
+        "root": str(root),
+        "started_at": _now(),
+        "stdout_path": str(stdout_path),
+        "stderr_path": str(stderr_path),
+        "junit_path": str(junit_path),
+        "timeout_seconds": timeout,
+    }
+    _append(output_dir, {**receipt, "event": "start"})
+    started = time.perf_counter()
+    status = "failed"
+    returncode: int | None = None
+    error = ""
+    process: subprocess.Popen[bytes] | None = None
+    try:
+        with stdout_path.open("wb") as stdout, stderr_path.open("wb") as stderr:
+            process = subprocess.Popen(
+                argv,
+                cwd=root,
+                env=environment,
+                stdout=stdout,
+                stderr=stderr,
+                start_new_session=True,
+            )
+            try:
+                returncode = process.wait(timeout=timeout)
+                status = "passed" if returncode == 0 else "failed"
+            except subprocess.TimeoutExpired:
+                status = "timeout"
+            except KeyboardInterrupt:
+                status = "interrupted"
+            finally:
+                _stop(process)
+                returncode = process.returncode
+    except OSError as exc:
+        error = str(exc)
+    elapsed = time.perf_counter() - started
+    result = {
+        **receipt,
+        "event": "end",
+        "finished_at": _now(),
+        "status": status,
+        "returncode": returncode,
+        "wall_seconds": elapsed,
+        "allocated_worker_seconds": elapsed * int(metadata["allocated_workers"]),
+        "error": error,
+    }
+    _append(output_dir, result)
+    return result
+
+
+def _git(root: Path, *arguments: str) -> str:
+    environment = {
+        key: value for key, value in os.environ.items() if not key.startswith("GIT_")
+    }
+    result = subprocess.run(
+        ["git", "-C", str(root), *arguments],
+        capture_output=True,
+        check=False,
+        env=environment,
+    )
+    return (
+        result.stdout.decode("utf-8", errors="replace").strip()
+        if result.returncode == 0
+        else ""
+    )
+
+
+def _sources(root: Path, targets: Sequence[str]) -> dict[str, str]:
+    hashes: dict[str, str] = {}
+    for target in targets:
+        path = (root / target.split("::", 1)[0]).resolve()
+        paths = sorted(path.rglob("*.py")) if path.is_dir() else [path]
+        for source in paths:
+            if source.is_file():
+                hashes[str(source)] = hashlib.sha256(source.read_bytes()).hexdigest()
+    return hashes
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--root", type=Path, required=True, help="packing root or repository root"
+    )
+    parser.add_argument("--label", required=True)
+    parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--repeats", type=int, default=3)
+    parser.add_argument("--timeout", type=float)
+    parser.add_argument("--workers", type=int, default=0, help="xdist workers; 0 is in-process")
+    parser.add_argument(
+        "--inner-workers", type=int, default=1, help="PACK_JOBS cap per pytest worker"
+    )
+    parser.add_argument("--native-threads", type=int, default=1)
+    parser.add_argument("-m", "--marker")
+    parser.add_argument("-k", "--match")
+    parser.add_argument("targets", nargs="+")
+    args = parser.parse_args(argv)
+    if (
+        args.repeats < 1
+        or args.workers < 0
+        or args.inner_workers < 1
+        or args.native_threads < 1
+    ):
+        parser.error("repeats and worker limits must be positive (xdist workers may be zero)")
+    if args.timeout is not None and not (0 < args.timeout < float("inf")):
+        parser.error("timeout must be finite and positive")
+    root = args.root.resolve()
+    if (root / "packing/pyproject.toml").is_file():
+        root /= "packing"
+    output_dir = args.output_dir.resolve()
+    environment = os.environ.copy()
+    environment.update({name: str(args.native_threads) for name in NATIVE_THREAD_LIMITS})
+    environment.update(
+        {
+            "PACK_JOBS": str(args.inner_workers),
+            "UV_NO_SYNC": "1",
+            "PYTHONPATH": os.pathsep.join((str(root / "src"), str(root))),
+            "PYTHONUNBUFFERED": "1",
+        }
+    )
+    # Ambient pytest switches could select different tests or overwrite our JUnit path.
+    environment.pop("PYTEST_ADDOPTS", None)
+    command = [
+        sys.executable,
+        "-m",
+        "pytest",
+        "-q",
+        *args.targets,
+        "--durations=0",
+        "--durations-min=0",
+        "--junitxml={junit}",
+    ]
+    if args.workers:
+        command.extend(("-n", str(args.workers)))
+    if args.marker:
+        command.extend(("-m", args.marker))
+    if args.match:
+        command.extend(("-k", args.match))
+    dirty_diff = _git(root, "diff", "HEAD", "--binary")
+    metadata = {
+        "label": args.label,
+        "commit": _git(root, "rev-parse", "HEAD"),
+        "git_status": _git(root, "status", "--porcelain"),
+        "dirty_diff_sha256": hashlib.sha256(dirty_diff.encode()).hexdigest(),
+        "source_hashes": _sources(root, args.targets),
+        "platform": platform.platform(),
+        "python": sys.version,
+        "interpreter": sys.executable,
+        "available_cpus": os.process_cpu_count(),
+        "pytest_workers": args.workers,
+        "inner_workers": args.inner_workers,
+        "native_threads": args.native_threads,
+        "allocated_workers": max(1, args.workers) * args.inner_workers,
+        "allocation_note": "wall times declared workers; not CPU or enforced process count",
+        "environment": {
+            name: environment[name]
+            for name in (*NATIVE_THREAD_LIMITS, "PACK_JOBS", "PYTHONPATH", "UV_NO_SYNC")
+        },
+    }
+    passed = True
+    for repeat in range(1, args.repeats + 1):
+        result = run_sample(
+            command,
+            root=root,
+            output_dir=output_dir,
+            metadata={**metadata, "repeat": repeat},
+            timeout=args.timeout,
+            environment=environment,
+        )
+        print(json.dumps(result, sort_keys=True), flush=True)
+        passed = passed and result["status"] == "passed"
+        if result["status"] == "interrupted":
+            return 130
+    return 0 if passed else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

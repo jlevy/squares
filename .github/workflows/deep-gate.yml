@@ -1,4 +1,4 @@
-name: Deep gate
+name: Deferred checkpoint
 
 # The four steps the pull-request surface defers, run against a pull request *before* it
 # merges rather than after it. Not on every build, and that is the point: the selection
@@ -66,6 +66,10 @@ name: Deep gate
 permissions:
   contents: read
 
+env:
+  # Outside the checkout: receipts must not enter source scans or mutation snapshots.
+  PACKING_VALIDATION_ARTIFACT_DIR: ${{ github.workspace }}-validation-artifacts
+
 concurrency:
   # Deliberately *not* `packing-validation-...`. Concurrency groups are repository-wide
   # strings, and that group carries `cancel-in-progress` on pull requests: sharing it
@@ -132,10 +136,10 @@ jobs:
           # this step also runs on `pull_request`, where the event
           # payload simply carries no inputs and this renders empty.
           ref: ${{ github.event.inputs.pull_request && format('refs/pull/{0}/merge', github.event.inputs.pull_request) || '' }}
-          # Shallow is enough: the only step that needs full history is `provenance`, and
-          # this selection is `--only`, so it is not in it. kpress is vendored at
-          # vendor/kpress and installed from that path, so the environment does not
-          # resolve without the submodule checked out.
+          # The slow retained-theorem review compares exact historical Git contents;
+          # those objects must exist even though this selection omits provenance.
+          fetch-depth: 0
+          # kpress is installed from the vendored submodule.
           submodules: true
 
       - name: Install uv and Python 3.14
@@ -159,6 +163,15 @@ jobs:
           --only "n=40 rigidity bracket still reproduces"
           --jobs 2 --inner-jobs 2
 
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
   exhaustive-tier:
     # The exhaustive exact tier alone, on its own runner, for the reason think-tr2z split
     # it out of the post-merge gate: at 1943.05s it is the one step that decides whether
@@ -173,7 +186,9 @@ jobs:
     # "+3 billed minutes and zero wall" and took it; this one is dearer in minutes and
     # buys a separable verdict, on a workflow requested by label or dispatch.
     #
-    # `--jobs 1 --inner-jobs 2` is the shape the 1943.05s reading was taken under.
+    # Hosted provenance reports four available CPUs. This isolated job gives its
+    # certificate pool up to four workers; actual CPU and grid-memory caps still apply.
+    # This restores its prior allowed parallelism, without claiming a measured speedup.
     if: >-
       github.event_name == 'workflow_dispatch'
       || contains(github.event.pull_request.labels.*.name, 'deep-gate')
@@ -190,7 +205,8 @@ jobs:
           # this step also runs on `pull_request`, where the event
           # payload simply carries no inputs and this renders empty.
           ref: ${{ github.event.inputs.pull_request && format('refs/pull/{0}/merge', github.event.inputs.pull_request) || '' }}
-          # Shallow, and submodules for the same two reasons as above.
+          # This selection has no historical-content review. Keep its shallow checkout;
+          # the vendored submodule is still required to resolve the environment.
           submodules: true
 
       - name: Install uv and Python 3.14
@@ -209,7 +225,16 @@ jobs:
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --only "exhaustive exact behavioral tests"
-          --jobs 1 --inner-jobs 2
+          --jobs 1 --inner-jobs 4
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
 
   deep-gate-required:
     # One context for the whole deep surface, exactly as `packing-required` is one

@@ -27,7 +27,7 @@ import pytest
 
 from devtools.render_explainer import derive
 from devtools.render_verifiable_claim import main as render_claims
-from devtools.render_verifiable_claim import perturbations
+from devtools.render_verifiable_claim import perturbations, render_claim
 
 CASE = Path(__file__).parents[1] / "cases/n11_fractional_certificate"
 VERIFIER = CASE / "verify_claim.py"
@@ -248,6 +248,26 @@ def test_a_certificate_above_the_ceiling_is_refused_before_any_condition(
     )
 
 
+def test_a_duplicate_json_key_is_refused_before_any_condition(
+    minimal: dict[str, Any], tmp_path: Path
+) -> None:
+    path = tmp_path / "duplicate.json"
+    path.write_text(json.dumps(TINY).replace('"n": 2', '"n": 2, "n": 3', 1), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="duplicate JSON object key 'n'"):
+        minimal["load"](str(path))
+
+
+@pytest.mark.parametrize("limit", ["0", "1", "3/2"])
+def test_the_general_checker_refuses_a_net_outside_zero_to_one(
+    minimal: dict[str, Any], tmp_path: Path, limit: str
+) -> None:
+    record = {**TINY, "angle_limit": limit}
+
+    with pytest.raises(ValueError, match=r"supported range 0 < T < 1"):
+        minimal["load"](str(write(record, tmp_path / "bad-angle-limit.json")))
+
+
 @pytest.mark.parametrize(
     "damage",
     [
@@ -457,6 +477,19 @@ def test_a_failed_cross_check_is_an_internal_error_with_status_2(
     with pytest.raises(SystemExit) as usage:  # argparse: the other outcome with status 2
         minimal["main"]([])
     assert usage.value.code == 2
+
+
+@pytest.mark.parametrize("certificate", CLAIMS, ids=lambda p: p.stem)
+def test_rendered_claim_links_to_its_embedded_verifier(certificate: Path) -> None:
+    """The exact-byte link follows the rendered source, not an older edition pin."""
+    facts = derive(certificate)
+    sibling = derive(next(path for path in CLAIMS if path != certificate))
+    headline = max((facts, sibling), key=lambda fact: fact.outer_side)
+    document = render_claim(facts, sibling, headline)
+
+    assert f"[`{VERIFIER.name}`]({VERIFIER.name})" in document
+    assert fenced(document, "python") == VERIFIER.read_text()
+    assert "two certificate rungs packaged here" in document
 
 
 def test_the_claim_documents_are_current() -> None:

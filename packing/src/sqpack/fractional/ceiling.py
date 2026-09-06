@@ -42,13 +42,12 @@ inside the bounded container has a vertex in its closure, and a closed square
 containing a face contains its closure, so the maximum depth over the container
 is attained at a vertex: the intersection of two non-parallel lines. Those are
 finitely many and every one that matters is decided in exact arithmetic. Floats
-only screen: a pair of lines whose float intersection lies outside the container
-by more than a fixed margin, or a vertex whose float depth -- computed with
-every membership test loosened by that margin -- falls short of 1 by more than
-the margin, cannot be a counterexample, because the rounding error of a double
-on these quantities is smaller than the margin by four orders of magnitude.
-Nearly parallel pairs, where a float intersection is unreliable, are never
-screened and always decided exactly.
+only screen within checked bounds on coordinates, line coefficients, weights
+and family size; the error bounds below justify each margin there. All other
+inputs use exact enumeration and summation, before any float conversion.
+Nearly parallel pairs are always decided exactly. Depth screening compares
+against the best exact depth found, so the reported maximum is exact even
+when it is below 1.
 """
 
 from __future__ import annotations
@@ -62,15 +61,39 @@ import numpy as np
 
 from sqpack.fractional.model import Direction, rotation_from_half_tangent
 
-# Floats screen, and this margin is what makes the screen safe. Coordinates
-# here are below 10, direction cosines below 1, and a double carries 53 bits,
-# so the rounding error of any projection or intersection with a determinant
-# above ``NEAR_PARALLEL`` is below 1e-12. The margin exceeds that by four
-# orders of magnitude and the exact decision is made on anything inside it.
+# Screening bounds are checked in exact arithmetic; they select a fast path,
+# not the domain the verifier accepts. For binary64 unit roundoff u = 2^-53:
+#
+# - With each normal component at most 1 in magnitude, |offset| <= 32 and a
+#   computed determinant > 1e-3, determinant error is < 8u and numerator
+#   error < 256u. An intersection coordinate has absolute error < 1e-7,
+#   including division and conversion. The separate 1e-6 intersection
+#   padding also covers rounding the wall.
+# - With |point coordinate| <= 16, the two-term projections, offset subtraction
+#   and half-side conversion have combined absolute error < 512u < 1e-12.
+# - For at most 4096 nonnegative weights totaling <= 1024, conversion and any
+#   order of binary additions introduce error < 2 * 4096 * u * 1024 < 1e-9.
+#   Underflow contributes < 4096 * 2^-1074, also covered by these bounds.
+#
+# Thus 1e-8 covers both loosened membership and comparison to an exact depth
+# converted to a float. Outside any bound we do not use that screen.
 SCREEN_MARGIN = 1e-8
 NEAR_PARALLEL = 1e-3
+INTERSECTION_MARGIN = 1e-6
+_SCREEN_COORDINATE_LIMIT = 16
+_SCREEN_OFFSET_LIMIT = 32
+_SCREEN_PLACEMENT_LIMIT = 4096
+_SCREEN_TOTAL_WEIGHT_LIMIT = 1024
 
 Line = tuple[Fraction, Fraction, Fraction]
+
+
+def _decimal_approximation(value: Fraction, places: int) -> str:
+    """An optional display must not prevent an exact decision on a large rational."""
+    try:
+        return f"{float(value):.{places}f}"
+    except OverflowError:
+        return "outside binary64 range"
 
 
 @dataclass(frozen=True, slots=True)
@@ -191,7 +214,8 @@ class CeilingVerdict:
                 "every closed B-square at a net angle in the container"
             )
         return (
-            f"no {measures} of mass below {float(self.total_weight):.6f} captures mass 1 "
+            f"no {measures} of mass below {self.total_weight} "
+            f"({_decimal_approximation(self.total_weight, 6)}) captures mass 1 "
             f"in {scope}; the fractional method cannot certify this n at this side or "
             "any larger side, and this says nothing about whether n unit squares fit"
         )
@@ -368,19 +392,65 @@ def exact_intersection(first: Line, second: Line) -> tuple[Fraction, Fraction] |
     return x, y
 
 
+def intersection_screening_is_safe(certificate: CeilingCertificate, lines: list[Line]) -> bool:
+    """Whether the coefficient bounds proved above justify floating intersections."""
+    return certificate.outer_side <= _SCREEN_COORDINATE_LIMIT and all(
+        abs(a) <= 1 and abs(b) <= 1 and abs(c) <= _SCREEN_OFFSET_LIMIT for a, b, c in lines
+    )
+
+
+def depth_screening_is_safe(
+    certificate: CeilingCertificate,
+    vertices: list[tuple[Fraction, Fraction]] | None = None,
+) -> bool:
+    """Whether the proved projection and sum bounds apply to rounded exact points.
+
+    Without supplied points, all points in the container must meet the bound.
+    Approximate intersections need an additional membership margin for their
+    coordinate error; this guard alone does not supply it.
+    """
+    return (
+        len(certificate.placements) <= _SCREEN_PLACEMENT_LIMIT
+        and certificate.total_weight <= _SCREEN_TOTAL_WEIGHT_LIMIT
+        and all(
+            abs(p.centre_x) <= _SCREEN_COORDINATE_LIMIT
+            and abs(p.centre_y) <= _SCREEN_COORDINATE_LIMIT
+            and p.side <= 2 * _SCREEN_COORDINATE_LIMIT
+            for p in certificate.placements
+        )
+        and (
+            certificate.outer_side <= _SCREEN_COORDINATE_LIMIT
+            if vertices is None
+            else all(
+                abs(x) <= _SCREEN_COORDINATE_LIMIT and abs(y) <= _SCREEN_COORDINATE_LIMIT
+                for x, y in vertices
+            )
+        )
+    )
+
+
 def container_vertices(
     certificate: CeilingCertificate, lines: list[Line]
 ) -> list[tuple[Fraction, Fraction]]:
     """Every pairwise intersection that lies in the closed container, exactly.
 
-    Pairs are screened in floats and decided exactly: a pair is skipped only
-    when its float intersection misses the container by more than the margin
-    *and* the pair is far from parallel, so the float point is trustworthy.
+    Pairs are screened only within the coefficient bounds justified above.
+    Inputs outside those coefficient and coordinate bounds take the exact path;
+    no float conversion is attempted there, even when the rationals exceed
+    binary64's range.
     """
     side = certificate.outer_side
+    if not intersection_screening_is_safe(certificate, lines):
+        exact_points: set[tuple[Fraction, Fraction]] = set()
+        for index, first in enumerate(lines):
+            for second in lines[index + 1 :]:
+                point = exact_intersection(first, second)
+                if point is not None and 0 <= point[0] <= side and 0 <= point[1] <= side:
+                    exact_points.add(point)
+        return sorted(exact_points)
     data = np.array([[float(a), float(b), float(c)] for a, b, c in lines])
     count = len(lines)
-    high = float(side) + SCREEN_MARGIN
+    high = float(side) + INTERSECTION_MARGIN
     found: set[tuple[Fraction, Fraction]] = set()
     for i in range(count - 1):
         a, b, e = data[i]
@@ -389,7 +459,12 @@ def container_vertices(
         safe = np.where(np.abs(determinant) > NEAR_PARALLEL, determinant, 1.0)
         x = (e * d - f * b) / safe
         y = (a * f - c * e) / safe
-        inside = (x >= -SCREEN_MARGIN) & (x <= high) & (y >= -SCREEN_MARGIN) & (y <= high)
+        inside = (
+            (x >= -INTERSECTION_MARGIN)
+            & (x <= high)
+            & (y >= -INTERSECTION_MARGIN)
+            & (y <= high)
+        )
         decide = (np.abs(determinant) <= NEAR_PARALLEL) | inside
         for offset in np.flatnonzero(decide):
             exact = exact_intersection(lines[i], lines[i + 1 + int(offset)])
@@ -403,7 +478,11 @@ def container_vertices(
 def float_family(
     certificate: CeilingCertificate,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    """Slab normals, offsets, half-sides and weights of the family, as floats."""
+    """Numerical slab data; callers must justify any screening done with it.
+
+    This conversion alone supplies no rounding enclosure. `maximum_depth`
+    checks its screening envelope before calling it.
+    """
     normals = []
     offsets = []
     halves = []
@@ -422,13 +501,16 @@ def loose_membership(
     normals: np.ndarray,
     offsets: np.ndarray,
     halves: np.ndarray,
+    *,
+    margin: float = SCREEN_MARGIN,
 ) -> np.ndarray:
     """Which placements contain which points, every test loosened by the margin.
 
-    Loosening makes the result a superset of the exact membership at the exact
-    point, which is the direction the screen needs.
+    This is a superset of exact membership only within the coordinate and
+    coefficient bounds above, with points obtained by rounding exact points.
+    `maximum_depth` checks those bounds before using this numerical helper.
     """
-    slack = halves[None, :] + SCREEN_MARGIN
+    slack = halves[None, :] + margin
     first = np.abs(points @ normals[:, 0, :].T - offsets[None, :, 0]) <= slack
     second = np.abs(points @ normals[:, 1, :].T - offsets[None, :, 1]) <= slack
     return first & second
@@ -440,13 +522,23 @@ def maximum_depth(
 ) -> tuple[Fraction, int, tuple[Fraction, Fraction] | None]:
     """The exact maximum depth over the vertices, and how many were decided exactly.
 
-    A vertex whose loosened float depth is below ``1 - SCREEN_MARGIN`` has exact
-    depth below 1 and is not decided; every other vertex is, and the exact
-    depth is summed only over the placements the loosened test admits, which
-    is a superset of the exact members.
+    The screen needs bounds on points, projections, family size and total
+    weight. Outside that envelope every membership and sum is exact. Within
+    it, a vertex is skipped only if its loosened float depth is below the
+    best exact depth by more than the margin, so subunit maxima are retained.
     """
     if not vertices:
         return Fraction(0), 0, None
+    if not depth_screening_is_safe(certificate, vertices):
+        worst, where = Fraction(0), None
+        for x, y in vertices:
+            exact = sum(
+                (p.weight for p in certificate.placements if p.contains(x, y)),
+                start=Fraction(0),
+            )
+            if exact > worst:
+                worst, where = exact, (x, y)
+        return worst, len(vertices), where
     normals, offsets, halves, weights = float_family(certificate)
     points = np.array([[float(x), float(y)] for x, y in vertices])
     worst = Fraction(0)
@@ -457,7 +549,9 @@ def maximum_depth(
         block = points[start : start + chunk]
         loose = loose_membership(block, normals, offsets, halves)
         depth = loose.astype(float) @ weights
-        for local in np.flatnonzero(depth >= 1 - SCREEN_MARGIN):
+        for local in np.flatnonzero(depth >= float(worst) - SCREEN_MARGIN):
+            if depth[local] < float(worst) - SCREEN_MARGIN:
+                continue
             x, y = vertices[start + local]
             exact = Fraction(0)
             for member in np.flatnonzero(loose[local]):
@@ -481,7 +575,7 @@ def verify_ceiling(certificate: CeilingCertificate) -> CeilingVerdict:
     conditions.append(
         ConditionReport(
             "K2 depth at most 1 at every arrangement vertex",
-            f"maximum depth {worst} = {float(worst):.9f}"
+            f"maximum depth {worst} ({_decimal_approximation(worst, 9)})"
             + (f" at {where}" if where is not None else "")
             + f" over {len(vertices)} vertices, {decided} decided exactly",
             holds=worst <= 1,
@@ -491,7 +585,7 @@ def verify_ceiling(certificate: CeilingCertificate) -> CeilingVerdict:
     conditions.append(
         ConditionReport(
             "K3 total weight at least n",
-            f"total {total} = {float(total):.9f} against n = {certificate.n}",
+            f"total {total} ({_decimal_approximation(total, 9)}) against n = {certificate.n}",
             holds=total >= certificate.n,
         )
     )
@@ -530,8 +624,10 @@ __all__ = [
     "Placement",
     "arrangement_lines",
     "container_vertices",
+    "depth_screening_is_safe",
     "exact_intersection",
     "float_family",
+    "intersection_screening_is_safe",
     "loose_membership",
     "maximum_depth",
     "scaled_to_unit_depth",

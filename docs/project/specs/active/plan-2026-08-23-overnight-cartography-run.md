@@ -343,12 +343,15 @@ of it.
 
 For the next supervised exact-research goal, take `BC-215` in
 [Agenda 023](../../../../packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md),
-bead `think-xejq`: the R1 tree-id cache, which the efficiency block measured and priced
-and did not wire — 20.2 per cent of deep-run work repeated, 92 per cent of it from trees
-that did not move — and which
-[Agenda 021](../../../../packing/campaign/agendas/agenda-021-three-numbers-and-a-wall.md)’s
-closeout reselected at session-087’s close, after that agenda’s own selection, the
-`m = 5` rung at `973/200`, was taken and settled `H-062` at bracket width `0.015`.
+bead `think-xejq`. Session 088 continues that selection through
+[W5 Phase 3](plan-2026-09-06-validation-efficiency-and-checkpoints.md): an explained
+exhaustive-family planner, initially in reporting mode, followed by validated evidence
+reuse and complete coverage accounting.
+The earlier R1 tree-id measurements motivate reducing repeated work; a tree-id cache
+alone does not establish all family inputs.
+The current implementation’s full hosted checkpoint must pass before final readiness.
+See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the integrated
+record.
 
 ## The numeric runner launch gate
 

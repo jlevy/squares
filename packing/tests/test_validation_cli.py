@@ -5,7 +5,9 @@
 
 from __future__ import annotations
 
+import hashlib
 import io
+import json
 import os
 import shlex
 import signal
@@ -25,6 +27,223 @@ from sqpack.yamlio import safe_load
 WORKFLOW = Path(__file__).resolve().parents[2] / ".github/workflows/packing-validation.yml"
 """The gate's own workflow, read by the test that keeps its two post-merge jobs a
 partition of `STEPS`. Repository-relative from `packing/tests/`, so two levels up."""
+
+
+def test_artifacts_keep_partial_subprocess_output_after_timeout(tmp_path: Path) -> None:
+    artifacts = tmp_path / "artifacts"
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={**os.environ, "PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts)},
+        timeout_seconds=0.2,
+    )
+    with pytest.raises(validate.StepFailureError, match="timed out"):
+        validate._run(
+            context,
+            [sys.executable, "-c", "import time; print('partial', flush=True); time.sleep(60)"],
+        )
+    assert "partial" in next(artifacts.glob("*.log")).read_text()
+    end = json.loads(next(artifacts.glob("*.end.json")).read_text())
+    assert end["status"] == "timed_out"
+    assert end["run_id"] == context.artifact_run_id
+    assert end["wall_seconds"] > 0
+    assert next(artifacts.glob("*.start.json")).is_file()
+
+
+@pytest.mark.parametrize("error_type", [KeyboardInterrupt, validate.StepCancelledError])
+def test_artifacts_distinguish_cancelled_commands(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    error_type: type[BaseException],
+) -> None:
+    artifacts = tmp_path / "artifacts"
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={**os.environ, "PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts)},
+    )
+
+    def cancelled(*_args: object, **_kwargs: object) -> str:
+        raise error_type("operator cancelled")
+
+    monkeypatch.setattr(validate, "_run_command", cancelled)
+    with pytest.raises(error_type):
+        validate._run(context, [sys.executable, "-c", "pass"])
+    end = json.loads(next(artifacts.glob("*.end.json")).read_text())
+    assert end["status"] == "cancelled"
+    assert end["reason"] == "operator cancelled"
+
+
+def test_artifacts_give_pytest_unique_junit_and_all_phase_timings(tmp_path: Path) -> None:
+    source = tmp_path / "test_probe.py"
+    source.write_text("def test_probe():\n    assert True\n")
+    artifacts = tmp_path / "artifacts"
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={**os.environ, "PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts)},
+    )
+    output = validate._run(
+        context, [sys.executable, "-m", "pytest", "-q", str(source)], cwd=tmp_path
+    )
+    assert "slowest durations" in output
+    assert next(artifacts.glob("*.junit.xml")).is_file()
+    end = json.loads(next(artifacts.glob("*.end.json")).read_text())
+    assert end["status"] == "passed"
+
+
+def test_artifacts_keep_a_steps_own_durations_filter(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The quick lane's `--durations-min` is its ceiling; capture must not override it."""
+    artifacts = tmp_path / "artifacts"
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={**os.environ, "PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts)},
+    )
+    commands: list[list[str]] = []
+
+    def record(_context: validate.Context, command: list[str], **_options: object) -> str:
+        commands.append(list(command))
+        return ""
+
+    monkeypatch.setattr(validate, "_run_command", record)
+    validate._run(context, validate._quick_lane_command(1))
+    validate._run(context, [sys.executable, "-m", "pytest", "-q", "tests"])
+    quick, bare = commands
+    assert [argument for argument in quick if argument.startswith("--durations-min")] == [
+        f"--durations-min={validate.QUICK_TEST_WALL_BACKSTOP_SECONDS:g}"
+    ]
+    assert quick.count("--durations=0") == 1
+    assert bare[-3:-1] == ["--durations=0", "--durations-min=0"]
+    assert all(command[-1].startswith("--junitxml=") for command in commands)
+
+
+def test_artifact_provenance_reports_a_git_failure_as_a_step_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    artifacts = tmp_path / "artifacts"
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={**os.environ, "PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts)},
+    )
+    monkeypatch.setattr(validate, "REPOSITORY_ROOT", tmp_path / "not-a-repository")
+    with pytest.raises(validate.StepFailureError, match="artifact provenance: git ls-files"):
+        validate._begin_artifacts(context, [])
+    assert not list(artifacts.glob("run-*.json"))
+
+
+def test_artifact_provenance_includes_untracked_source(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    subprocess.run(["git", "init", "-q", str(repo)], check=True)
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repo),
+            "-c",
+            "user.name=Test",
+            "-c",
+            "user.email=test@example.com",
+            "commit",
+            "-q",
+            "--allow-empty",
+            "-m",
+            "baseline",
+        ],
+        check=True,
+    )
+    source = repo / "untracked.py"
+    source.write_text("VALUE = 3\n")
+    artifacts = tmp_path / "artifacts"
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={**os.environ, "PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts)},
+    )
+    monkeypatch.setattr(validate, "REPOSITORY_ROOT", repo)
+    validate._begin_artifacts(context, [])
+    receipt = json.loads(next(artifacts.glob("run-*.json")).read_text())
+    assert receipt["commit"]
+    assert receipt["run_id"] == context.artifact_run_id
+    assert receipt["untracked_hashes"] == {
+        "untracked.py": hashlib.sha256(source.read_bytes()).hexdigest(),
+    }
+    assert "untracked.py" in receipt["git_status"]
+
+
+def test_ci_keeps_each_gate_jobs_timing_artifacts_even_on_failure() -> None:
+    for workflow in (WORKFLOW, WORKFLOW.parent / "deep-gate.yml"):
+        document = safe_load(workflow.read_text())
+        assert isinstance(document, dict)
+        assert "PACKING_VALIDATION_ARTIFACT_DIR" in document["env"]
+        workspace = "/home/runner/work/squares/squares"
+        artifact_pattern = document["env"]["PACKING_VALIDATION_ARTIFACT_DIR"].replace(
+            "${{ github.workspace }}", workspace
+        )
+        # upload-artifact rejects these segments even in an absolute path.
+        assert not {".", ".."}.intersection(artifact_pattern.split("/")), workflow
+        assert Path(artifact_pattern).is_absolute(), workflow
+        assert not Path(artifact_pattern).is_relative_to(workspace), workflow
+        for name, job in document["jobs"].items():
+            steps = job.get("steps", [])
+            if not any("packing-validate" in str(step.get("run", "")) for step in steps):
+                continue
+            upload = [
+                step
+                for step in steps
+                if str(step.get("uses", "")).startswith("actions/upload-artifact@")
+            ]
+            assert len(upload) == 1, name
+            assert upload[0]["if"] == "always()", name
+            assert upload[0]["with"]["path"] == "${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}"
+
+
+def test_isolated_exhaustive_jobs_use_the_host_without_multiplying_concurrent_pools() -> None:
+    checked: set[tuple[str, str]] = set()
+    for workflow in (WORKFLOW, WORKFLOW.parent / "deep-gate.yml"):
+        document = safe_load(workflow.read_text())
+        for name, job in document["jobs"].items():
+            for step in job.get("steps", []):
+                tokens = shlex.split(str(step.get("run", "")))
+                if "packing-validate" not in tokens:
+                    continue
+                namespace = validate._parser().parse_args(
+                    tokens[tokens.index("packing-validate") + 1 :]
+                )
+                if namespace.only == ["exhaustive exact behavioral tests"]:
+                    assert (namespace.jobs, namespace.inner_jobs) == ("1", "4")
+                elif namespace.skip == ["exhaustive exact behavioral tests"] or (
+                    "negative controls" in namespace.only
+                ):
+                    assert (namespace.jobs, namespace.inner_jobs) == ("2", "2")
+                else:
+                    continue
+                checked.add((workflow.name, name))
+    assert checked == {
+        ("packing-validation.yml", "exhaustive"),
+        ("packing-validation.yml", "validate"),
+        ("deep-gate.yml", "exhaustive-tier"),
+        ("deep-gate.yml", "deferred-steps"),
+    }
 
 
 def _invoke(*arguments: str) -> tuple[int, str, str]:
@@ -224,7 +443,7 @@ def test_process_registry_rejects_registration_after_stop(
     registry = validate._ProcessRegistry()
     registry.stop()
 
-    with pytest.raises(validate.StepFailureError, match="rejected new subprocess"):
+    with pytest.raises(validate.StepCancelledError, match="rejected new subprocess"):
         registry.register(12345)
     assert signals == [(12345, signal.SIGKILL)]
 
@@ -254,6 +473,10 @@ def test_run_drains_rejected_process_output(monkeypatch: pytest.MonkeyPatch) -> 
             return "", None
 
     process = RejectedProcess()
+    signals: list[tuple[int, int]] = []
+    monkeypatch.setattr(
+        validate.os, "killpg", lambda pid, signum: signals.append((pid, signum))
+    )
     monkeypatch.setattr(validate.subprocess, "Popen", lambda *_args, **_kwargs: process)
     context = validate.Context(
         deep=False,
@@ -268,6 +491,7 @@ def test_run_drains_rejected_process_output(monkeypatch: pytest.MonkeyPatch) -> 
         validate._run(context, (sys.executable, "-c", "pass"))
 
     assert process.communicated
+    assert signals == [(process.pid, signal.SIGKILL)]
 
 
 @pytest.mark.skipif(os.name == "nt", reason="bounded tree mode fails closed on Windows")
@@ -576,7 +800,7 @@ def test_the_marker_floor_is_measured_per_function_and_not_per_parametrization(
 
     The marker is a decorator on a `def`. A parametrized function therefore leaves the
     pull-request surface whole, which is why the registry in
-    `test_the_slow_marker_is_declared_only_by_measured_nodes` counts 64 functions and 94
+    `test_the_slow_marker_is_declared_only_by_measured_nodes` counts 66 functions and 96
     collected tests. A floor applied per node asks a question the marker cannot answer:
     it reports the cheap case of an expensive function as a marker to delete, and
     deleting it would drag the expensive case back onto the pull-request surface.
@@ -846,6 +1070,8 @@ def test_full_exhaustive_behavioral_step_selects_only_exhaustive_exact_tests(
         "tests",
         "-m",
         "exhaustive_exact",
+        "--durations=0",
+        "--durations-min=0",
     )
 
 
@@ -1409,6 +1635,20 @@ def test_the_edit_tier_cannot_under_run() -> None:
     assert not any(step.needs_engine for step in validate.STEPS if step.geometry), (
         "an engine step in --geometry would make both halves compile Rust"
     )
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        "packing/devtools/dilation_corollary.py",
+        "packing/devtools/decide_certificate.py",
+    ],
+)
+def test_limit_record_tools_select_the_complete_exact_replay(path: str) -> None:
+    for universe in (validate.STEPS, tuple(step for step in validate.STEPS if step.fast)):
+        selection = validate.select_for_paths([path], universe)
+        assert not selection.unattributed_paths
+        assert "exact verification" in {step.name for step in selection.steps}
 
 
 def test_every_step_is_reachable_from_some_tier() -> None:

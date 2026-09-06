@@ -107,6 +107,13 @@ $s(11)$ is the smallest case still open.
 Trump’s 1979 packing shows $s(11) \le {{BEST_PACKING_TEX}}$.[^trump] Here we prove
 $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
 
+<!--BEGIN:REFINEMENT-->
+
+The technical record retains a small exact refinement in [T-022]({{REFINEMENT_URL}}).
+This exposition uses the simpler 3.81 certificate bound.
+
+<!--END:REFINEMENT-->
+
 <!--BEGIN:COMPARISON-->
 
 (Some figures also show the simpler certificate for the weaker bound
@@ -152,7 +159,7 @@ The figures below illustrate this certificate.
     {{NUMBER_LINE_MARKS}}
   </svg>
   </div>
-  <figcaption><strong>Figure 3.</strong> Bounds on <span class="tex">s(11)</span>. The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. With the lower bound at <span class="tex">{{HEADLINE_L_FRAC}}</span> the gap is
+  <figcaption><strong>Figure 3.</strong> Bounds on <span class="tex">s(11)</span>. The shaded band is the gap left by the certificates explained here. With their lower bound at <span class="tex">{{HEADLINE_L_FRAC}}</span> the gap is
   <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span> at Stromquist’s bound.</figcaption>
 </figure>
 

@@ -11,14 +11,11 @@ agenda:
   updated: '2026-09-06'
   status: active
   objective: >-
-    Give one managing agent a disjoint, exact program for the likeliest direct
-    improvement to s(11) >= 3.81. Formalize direction-dependent witness sides B_k and
-    their verifier, resume the retained 3.82 primal/dual state, and test Massaccesi's
-    inset margin only as a seed before unrestricted column generation. A verified rung
-    earns immediate exactification; a stalled adaptive core routes to a rational
-    angle-cell kernel; segment measures remain tentative until that route is disposed
-    and a verifier is priced. This manager owns BC-230 through BC-239, H-070 through
-    H-079, and exp-070 through exp-089, but not shared campaign or frontier state.
+    Pursue stronger n=11 certificates through the scalar language, changed weights
+    and sites, and richer witnesses. The current allocation is in agenda-024; H-093
+    through H-098 own the prospective research questions. Preserve BC-232's unresolved
+    historical criterion and BC-233's seed rejection. This manager owns the cells here,
+    not shared campaign or frontier state; the coordinator allocates experiment IDs.
   items:
   - id: BC-230
     purpose: research
@@ -77,7 +74,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 12, 17]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Can an exact verifier decide the adaptive-core contract and refuse uncovered
@@ -100,17 +97,22 @@ agenda:
       single-B specialization; every mutation is refused for the named reason; decision
       cost is measured.
     bead: think-7mk4
+    hypotheses: [H-095]
     workflows: [pipeline-improvement, factual-review]
     depends_on: [BC-230, BC-220]
     parallel_group: agenda025-theorem
     program: n11-adaptive-fractional-frontier
     next_evidence: >-
       A trustworthy decision boundary on which an adaptive 3.8125 run may rely.
+    note: >-
+      BC-250 selects only two initial slices of at most 30 minutes, then a price of
+      remaining work. The full retained control matrix and acceptance conditions
+      remain unchanged; 180 minutes is not an automatic allocation.
   - id: BC-232
     purpose: research
     owner_focus: efficiency
     instances: [11]
-    state: ready
+    state: in_progress
     priority: 0
     question: >-
       Can the retained 3.82 primal/dual state be advanced to total covering mass below
@@ -210,10 +212,8 @@ agenda:
       3.815 only if the first certifies or removes at least 25 percent of the
       same-support excess over 11. Freeze any mass-below-11 bytes immediately and send
       them to the coordinator. Do not spend the cell proliferating net or margin
-      variants after a candidate exists. A scalar attempt at 61/16 with the existing
-      single-B instruments may run in block one as a background process without
-      waiting for BC-230 and BC-231, under the pre-registered probe in this agenda's
-      launch section; its wall or its rung prices the adaptive route before it opens.
+      variants after a candidate exists. The independent scalar attempt is BC-251;
+      it does not wait for the adaptive instruments.
     entry: >-
       BC-231 passes, BC-220 or a later coordinator gate creates the allocated
       hypothesis, and the target and scale are frozen.
@@ -221,6 +221,7 @@ agenda:
       An exact candidate above 3.81, or exact before/after excess and cost deciding
       whether BC-235 opens.
     bead: think-1sv0
+    hypotheses: [H-095]
     workflows: [research-loop]
     depends_on: [BC-231]
     parallel_group: agenda025-adaptive-run
@@ -238,7 +239,9 @@ agenda:
       contained in every unit-square orientation in the cell with less lost area than
       its largest concentric square?
     budget: >-
-      150 active minutes, theory and geometry workers, research-loop. Derive the exact
+      150 active minutes as the original planning ceiling, theory and geometry
+      workers, insight-iteration. A selected narrower hypothesis precedes a measured
+      comparison. Derive the exact
       intersection or a rational inner approximation with a proof of containment and
       quantified area loss. Do not call the intersection polygonal without proof;
       curved or algebraic boundaries require an explicit approximation direction.
@@ -251,7 +254,8 @@ agenda:
       A finite rational kernel representation with an exact containment proof and
       enough predicted gain to justify BC-236, or a bounded negative with the obstruction.
     bead: think-ay89
-    workflows: [research-loop]
+    hypotheses: [H-096]
+    workflows: [insight-iteration]
     depends_on: [BC-234]
     parallel_group: agenda025-kernel
     program: n11-adaptive-fractional-frontier
@@ -280,6 +284,7 @@ agenda:
       Exact positive and negative receipts, a measured cost ratio, and a keep-or-retire
       decision under the four-times rule.
     bead: think-yaf9
+    hypotheses: [H-096]
     workflows: [pipeline-improvement, factual-review]
     depends_on: [BC-235]
     parallel_group: agenda025-kernel
@@ -297,7 +302,8 @@ agenda:
       After the kernel route is disposed, is a piecewise-algebraic segment-measure
       verifier small and cheap enough to build in a later block?
     budget: >-
-      90 active minutes, theory-only research-loop. Specify segment-square intersection
+      90 active minutes as the original planning ceiling, theory-only insight-iteration.
+      Specify segment-square intersection
       regimes, breakpoints, boundary conventions, exact coefficient domain, independent
       controls, and a branch-count estimate. No implementation opens in this agenda.
       Defer unless the complete verifier fits a measured future block and promises a
@@ -308,7 +314,8 @@ agenda:
       A costed, falsifiable verifier design and reopen condition, or a recorded reason
       segments add complexity without enough expressive gain.
     bead: think-fw95
-    workflows: [research-loop, efficiency-loop]
+    hypotheses: [H-098]
+    workflows: [insight-iteration]
     depends_on: [BC-236]
     parallel_group: agenda025-kernel
     program: n11-adaptive-fractional-frontier
@@ -325,8 +332,8 @@ agenda:
       source-distinct replay, and falsifying mutations?
     budget: >-
       Up to 75 percent of the block following any candidate, manager plus independent
-      reviewer, factual-review. Freeze bytes and SHA-256 before review. Select the
-      decision routes by object: a scalar certificate from BC-232 or BC-233 uses
+      reviewer, factual-review. Commit candidate bytes before review. Select the
+      decision routes by object: a scalar certificate from BC-232, BC-233 or BC-251 uses
       `decide_certificate` and `minimal_verify.py --unpinned`; an adaptive certificate
       from BC-234 uses the extended project sweep, interval route, and BC-231's
       standalone verifier; and a kernel candidate from BC-236 cannot enter until
@@ -336,16 +343,17 @@ agenda:
       lower-bound candidate for these routes. The coordinator alone may retain or
       promote a result.
     entry: >-
-      BC-232, BC-233, BC-234, or BC-236 emits a frozen lower-bound candidate with all
+      BC-232, BC-233, BC-234, BC-236, or BC-251 emits a frozen lower-bound candidate with all
       routes required by its object type, and a coordinator gate diverts it here.
     exit: >-
       A complete candidate packet accepted by all three decision routes, or the smallest
       failing premise and a refusal with no frontier change.
     bead: think-hjoe
+    hypotheses: [H-093, H-095]
     workflows: [factual-review]
     depends_on: [BC-219]
     blocked_on: >-
-      A frozen lower-bound candidate from BC-232, BC-233, BC-234, or BC-236, its
+      A frozen lower-bound candidate from BC-232, BC-233, BC-234, BC-236, or BC-251, its
       object-specific project and source-distinct routes, and a coordinator gate that
       diverts it to independent exactification.
     parallel_group: agenda025-exactification
@@ -379,8 +387,79 @@ agenda:
     program: n11-adaptive-fractional-frontier
     next_evidence: >-
       The fractional program's honest yield, cost, negative results, and best continuation.
+  - id: BC-251
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: ready
+    priority: 0
+    question: Can the retained scalar certificate language certify side 61/16?
+    hypotheses: [H-093]
+    budget: >-
+      One invocation of the existing 150-minute cooperative-deadline probe below,
+      with one CPU and retained checkpoints. No retry or budget reset. Independent
+      verification and integration are separately allocated.
+    entry: >-
+      BC-250 is published; H-093 and the prospective experiment are frozen; the scalar
+      input, bridge and decision routes pass readiness in an isolated checkout.
+    exit: >-
+      A retained scalar candidate, exact fixed-language obstruction, or unresolved
+      run with its actual stop and continuation evidence under H-093.
+    bead: think-0za3
+    workflows: [research-loop]
+    depends_on: [BC-250]
+    next_evidence: A candidate for BC-238 or a specific restriction for BC-252.
+    parallel_group: agenda025-scalar
+    program: n11-adaptive-fractional-frontier
+  - id: BC-252
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: tentative
+    priority: 1
+    question: Which weight or support change addresses the retained limiting witnesses?
+    hypotheses: [H-094]
+    budget: >-
+      One assessment slice of at most 30 minutes. Freeze a narrower hypothesis,
+      target, witness geometry and row-generation rule before any LP comparison.
+      Candidate-triggered exact basis recovery instead stays under its candidate's H.
+    entry: Retained bad poses identify a restriction that changing weights or sites could remove.
+    exit: >-
+      One priced, registered fixed-site LP or event-guided support discriminator,
+      or a reason no proposed change earns measurement.
+    bead: think-361m
+    workflows: [insight-iteration]
+    depends_on: [BC-250]
+    next_evidence: A finite-model test whose exact outcome would change the allocation.
+    parallel_group: agenda025-support
+    program: n11-adaptive-fractional-frontier
+  - id: BC-253
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: tentative
+    priority: 2
+    question: Can an existential witness menu cover a limiting closed pose box?
+    hypotheses: [H-097]
+    budget: >-
+      One theory slice of at most 30 minutes after a named single-witness restriction.
+      No global disjunctive verifier or unregistered target measurement.
+    entry: A retained pose family exposes a restriction that a finite witness menu could remove.
+    exit: A precise selection/containment obligation and useful local discriminator, or a parked question.
+    bead: think-mw02
+    workflows: [insight-iteration]
+    depends_on: [BC-250]
+    next_evidence: A complete local forall-pose/exists-witness argument, not a sampled menu.
+    parallel_group: agenda025-witness-theory
+    program: n11-adaptive-fractional-frontier
 ---
 # Agenda 025 — Adaptive Fractional Frontier Above 3.81
+
+The [current allocation](agenda-024-post-381-24h-portfolio.md#current-allocation) owns
+prospective allocations for L1 (current certificates) and L2 (richer witnesses).
+The scalar probe runs independently of adaptive-verifier implementation.
+Current commands and scientific criteria below remain applicable; historical schedules
+do not authorize an additional BC-232 final leg.
 
 This child agenda is managed independently under the `think-wess` research epic and
 integrated only through [`agenda-024`](agenda-024-post-381-24h-portfolio.md).

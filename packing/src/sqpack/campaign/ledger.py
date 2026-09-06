@@ -565,7 +565,7 @@ def check(  # noqa: C901 - a flat list of record invariants, each a few lines; s
                 )
             if item_id in dependencies:
                 problems.append(f"{name}: {item_id} depends on itself")
-            if item["state"] == "ready":
+            if item["state"] in {"in_progress", "ready"}:
                 incomplete = sorted(
                     dependency
                     for dependency in dependencies
@@ -573,7 +573,8 @@ def check(  # noqa: C901 - a flat list of record invariants, each a few lines; s
                 )
                 if incomplete:
                     problems.append(
-                        f"{name}: {item_id} is ready with incomplete dependencies {incomplete}"
+                        f"{name}: {item_id} is {item['state']} with incomplete "
+                        f"dependencies {incomplete}"
                     )
             # A commitment discharged by another one retains nothing of its own: the
             # artifacts sit on the commitment that did the work, and copying the list

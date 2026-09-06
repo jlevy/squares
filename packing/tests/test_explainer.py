@@ -96,6 +96,9 @@ def test_certificate_comparisons_match_the_rendered_certificates(
     assert ("The figures below illustrate this certificate." in document) is not comparison
     assert "the theorem written out, the 19/5 certificate as plain data" in document
     assert ("one-file checker" in document) is pinned_check
+    assert ("T-022" in document) is pinned_check
+    assert "gap left by the certificates explained here" in document
+    assert "what remains unknown about" not in document
     assert "A certificate written by a wrong program" not in document
     assert (
         "The verifier rejects a certificate that fails the conditions, "

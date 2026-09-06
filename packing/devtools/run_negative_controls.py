@@ -56,8 +56,11 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
 import math
 import os
+import platform
 import queue
 import re
 import shutil
@@ -65,11 +68,15 @@ import signal
 import subprocess
 import sys
 import tempfile
+import time
 from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import suppress
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from pathlib import Path
+from threading import Lock
+from uuid import uuid4
 
 from sqpack.workers import worker_count
 from sqpack.yamlio import safe_load
@@ -284,7 +291,13 @@ ROOT_DOCUMENTS = (
 # 2026-09-04, 12 MB of the breach was bytecode the gate had itself written into the tree
 # it was measuring, so the cap was reporting a fact about the checkout; a higher number
 # would have postponed that rather than fixed it (D-422).
-SNAPSHOT_MAX_BYTES = 64 * 1024 * 1024
+# The combined PR97/98 source measured 67,801,700 bytes (64.66 MiB) on 2026-09-06,
+# after excluding caches and generator outputs. No safe additional prune was found:
+# linked evidence must remain present so controls reach their intended refusal.
+# Compressing the retained summary to xz would leave only about 40 KiB of headroom.
+# Allow 80 MiB as measured storage headroom, not a speed target. Raising this guard
+# does not increase the bytes actually copied; dependency-policy work is separate.
+SNAPSHOT_MAX_BYTES = 80 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something
@@ -570,6 +583,9 @@ def run_one(c: dict, tree: Path) -> tuple[bool, str]:
         # check=False deliberately: a non-zero exit is the EXPECTED outcome here, and
         # inspecting it is this function's whole job.
         env = os.environ.copy()
+        # The parent owns the control journal. Mutation snapshots have no Git
+        # metadata, and nested gates must not start a second artifact capture there.
+        env.pop("PACKING_VALIDATION_ARTIFACT_DIR", None)
         # Every worker links the already-synced environment to avoid reinstalling the
         # scientific stack. Letting `uv run` sync that shared environment installs the
         # editable project from a temporary snapshot, which disappears after this run
@@ -623,7 +639,70 @@ def _parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("-k", "--match", help="run controls whose names contain TEXT")
     parser.add_argument("-j", "--jobs", type=int, default=0, help="worker count (0 = auto)")
+    parser.add_argument(
+        "--timings",
+        type=Path,
+        help="create a JSONL timing journal; refuses to overwrite existing evidence",
+    )
     return parser
+
+
+def timing_provenance() -> dict[str, object]:
+    """Identify the observed source and runtime without recording unrelated environment."""
+
+    def git_bytes(*args: str) -> bytes | None:
+        try:
+            result = subprocess.run(
+                ["git", *args], cwd=REPO, capture_output=True, check=False, timeout=10
+            )
+        except OSError, subprocess.TimeoutExpired:
+            return None
+        return result.stdout if result.returncode == 0 else None
+
+    revision = git_bytes("rev-parse", "HEAD")
+    diff = git_bytes("diff", "--binary", "HEAD", "--")
+    untracked = git_bytes("ls-files", "--others", "--exclude-standard", "-z")
+    untracked_hashes: dict[str, str | None] = {}
+    if untracked is not None:
+        for raw_path in sorted(filter(None, untracked.split(b"\0"))):
+            relative = os.fsdecode(raw_path)
+            try:
+                untracked_hashes[relative] = hashlib.sha256(
+                    (REPO / relative).read_bytes()
+                ).hexdigest()
+            except OSError:
+                untracked_hashes[relative] = None
+    lock = ROOT / "uv.lock"
+    return {
+        "source_revision": None if revision is None else revision.decode().strip(),
+        "dirty_diff_sha256": None if diff is None else hashlib.sha256(diff).hexdigest(),
+        "tracked_dirty": None if diff is None else bool(diff),
+        "untracked_sha256": None if untracked is None else untracked_hashes,
+        "host": platform.node(),
+        "platform": platform.platform(),
+        "machine": platform.machine(),
+        "cpu_count": os.process_cpu_count(),
+        "python": sys.version,
+        "python_executable": sys.executable,
+        "python_implementation": sys.implementation.name,
+        "uv_lock_sha256": hashlib.sha256(lock.read_bytes()).hexdigest()
+        if lock.exists()
+        else None,
+        "worker_environment": {
+            name: os.environ.get(name)
+            for name in (
+                "PACK_JOBS",
+                "OMP_NUM_THREADS",
+                "OPENBLAS_NUM_THREADS",
+                "MKL_NUM_THREADS",
+                "VECLIB_MAXIMUM_THREADS",
+                "NUMEXPR_NUM_THREADS",
+                "PYTHONHASHSEED",
+                "PYTHON_GIL",
+                "PYTHONPATH",
+            )
+        },
+    }
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -656,10 +735,55 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
 
     failures: list[tuple[str, str]] = []
+    durations: list[tuple[float, str]] = []
+    started = time.perf_counter()
+    journal_lock = Lock()
+    timings = options.timings
+    artifact_directory = os.environ.get("PACKING_VALIDATION_ARTIFACT_DIR")
+    if timings is None and artifact_directory:
+        directory = Path(artifact_directory)
+        directory.mkdir(parents=True, exist_ok=True)
+        timings = directory / f"negative-controls-{uuid4().hex}.jsonl"
+    provenance = timing_provenance() if timings else {}
+    if timings:
+        # Exclusive creation preserves prior evidence. Each subsequent event is flushed
+        # independently, so completed controls remain visible after an interrupted run.
+        try:
+            timings.touch(exist_ok=False)
+        except FileExistsError:
+            print(
+                f"journal already exists (--timings refuses to overwrite): {timings}",
+                file=sys.stderr,
+            )
+            return 1
+
+    def record(event: str, **fields: object) -> None:
+        if timings:
+            with journal_lock, timings.open("a", encoding="utf-8") as journal:
+                journal.write(
+                    json.dumps({"event": event, "at": datetime.now(UTC).isoformat(), **fields})
+                    + "\n"
+                )
+
+    record(
+        "run_started",
+        selected_controls=[c["name"] for c in controls],
+        argv=list(sys.argv[1:] if argv is None else argv),
+        selected_commands=[{"name": c["name"], "run": c.get("run")} for c in controls],
+        workers=workers,
+        requested_workers=requested,
+        match=only,
+        artifact_directory=artifact_directory,
+        journal=str(timings) if timings else None,
+        spec_sha256=hashlib.sha256(spec_path.read_bytes()).hexdigest(),
+        source_bytes=source_bytes,
+        **provenance,
+    )
     with tempfile.TemporaryDirectory(prefix="negctl-") as tmp:
         trees = [Path(tmp) / f"w{i}" for i in range(workers)]
         with ThreadPoolExecutor(max_workers=workers) as pool:
             list(pool.map(clone_tree, trees))
+            record("snapshots_ready", wall_seconds=time.perf_counter() - started)
 
             # A tree is CHECKED OUT for the duration of one control and returned
             # afterwards, so no two running controls can ever share one.
@@ -677,20 +801,51 @@ def main(argv: Sequence[str] | None = None) -> int:
             for t in trees:
                 available.put(t)
 
-            def work(c: dict) -> tuple[dict, bool, str]:
+            def work(c: dict) -> tuple[dict, bool, str, float]:
                 tree = available.get()
+                control_started = time.perf_counter()
                 try:
+                    record("control_started", name=c["name"], command=c.get("run"))
                     passed, detail = run_one(c, tree)
+                except BaseException as error:
+                    record(
+                        "control_finished",
+                        name=c["name"],
+                        status="interrupted"
+                        if isinstance(error, KeyboardInterrupt)
+                        else "error",
+                        detail=str(error),
+                        wall_seconds=time.perf_counter() - control_started,
+                    )
+                    raise
                 finally:
                     available.put(tree)
-                return c, passed, detail
+                seconds = time.perf_counter() - control_started
+                record(
+                    "control_finished",
+                    name=c["name"],
+                    status="passed" if passed else "failed",
+                    detail=detail,
+                    wall_seconds=seconds,
+                )
+                return c, passed, detail, seconds
 
             # `pool.map` preserves order, so the report reads the same however the
             # work happened to be split across trees.
-            for c, passed, detail in pool.map(work, controls):
+            for c, passed, detail, seconds in pool.map(work, controls):
+                durations.append((seconds, c["name"]))
                 if not passed:
                     failures.append((c["name"], detail))
 
+    record(
+        "run_finished",
+        status="failed" if failures else "passed",
+        wall_seconds=time.perf_counter() - started,
+        completed=len(durations),
+    )
+    print("  slowest negative controls (wall seconds):")
+    for seconds, name in sorted(durations, reverse=True)[:10]:
+        print(f"    {seconds:8.3f}s  {name}")
     for name, detail in failures:
         print(f"  CONTROL FAILED  {name}: {detail}", file=sys.stderr)
     if failures:

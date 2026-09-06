@@ -12,20 +12,26 @@ from __future__ import annotations
 
 import json
 from fractions import Fraction
+from io import StringIO
 from pathlib import Path
 
+import numpy as np
 import pytest
 
+from sqpack.fractional import cutting as cutting_module
 from sqpack.fractional.ceiling import (
     CeilingCertificate,
+    CeilingVerdict,
+    ConditionReport,
     Placement,
     arrangement_lines,
     container_vertices,
     maximum_depth,
 )
 from sqpack.fractional.certificate import d4_images
-from sqpack.fractional.colgen import Rows, SiteSet, site_set_from_points
+from sqpack.fractional.colgen import LpSolution, Rows, SiteSet, site_set_from_points
 from sqpack.fractional.cutting import (
+    Separation,
     SupportEntry,
     cutting_plane_loop,
     depths_above,
@@ -42,6 +48,82 @@ B = Fraction(9977, 10000)
 LIMIT = Fraction(207107, 500000)
 COARSE = (Fraction(0), LIMIT)
 TWO = Fraction(2)
+
+
+def stubbed_cutting_run(
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    rows_objective: float,
+    stop_on_covering_below_n: bool,
+    rows_converged: bool = True,
+    max_depth: Fraction = Fraction(2),
+    family_total: Fraction = Fraction(1),
+    state_path: Path | None = None,
+    log_sinks: tuple[StringIO, ...] = (),
+    verify_verdict: CeilingVerdict | None = None,
+) -> tuple[cutting_module.CuttingLog, SiteSet, list[CeilingCertificate]]:
+    """Run one deterministic loop iteration at the stop/site-addition boundary."""
+
+    sites = site_set_from_points(TWO, {(Fraction(1), Fraction(1))})
+    matrix = np.ones((1, 1))
+    rows = Rows(
+        directions=[0],
+        centres=[(1.0, 1.0)],
+        matrix=matrix,
+        keys={matrix[0].tobytes()},
+    )
+    exact_rows = [(0, Fraction(1), Fraction(1))]
+    solution = LpSolution(
+        np.ones(1),
+        np.ones(1),
+        objective=rows_objective,
+        stopped=(
+            "converged: every placement covers mass 1"
+            if rows_converged
+            else "round cap reached"
+        ),
+    )
+    new_orbit = site_set_from_points(TWO, {(Fraction(1, 2), Fraction(1, 2))}).orbits[0]
+    separation = Separation(max_depth, 1, 1, 1, [(Fraction(2), new_orbit)])
+    monkeypatch.setattr(cutting_module, "solve_rows", lambda *_args, **_kwargs: solution)
+    monkeypatch.setattr(
+        cutting_module,
+        "solve_lp",
+        lambda *_args, **_kwargs: (np.ones(1), np.ones(1), 10.5),
+    )
+    monkeypatch.setattr(
+        cutting_module,
+        "support_entries",
+        lambda *_args, **_kwargs: (
+            SupportEntry(0, Fraction(0), Fraction(1), Fraction(1), family_total),
+        ),
+    )
+    monkeypatch.setattr(cutting_module, "arrangement_lines", lambda _family: [])
+    monkeypatch.setattr(
+        cutting_module, "screened_separation", lambda *_args, **_kwargs: separation
+    )
+    verified: list[CeilingCertificate] = []
+    if verify_verdict is not None:
+
+        def fake_verify(family: CeilingCertificate) -> CeilingVerdict:
+            verified.append(family)
+            return verify_verdict
+
+        monkeypatch.setattr(cutting_module, "verify_ceiling", fake_verify)
+    log = cutting_plane_loop(
+        11,
+        TWO,
+        B,
+        COARSE,
+        sites=sites,
+        rows=rows,
+        exact_rows=exact_rows,
+        max_iterations=1,
+        stop_on_covering_below_n=stop_on_covering_below_n,
+        log_sinks=log_sinks,
+        state_path=state_path,
+    )
+    return log, sites, verified
 
 
 def upright(x: Fraction, y: Fraction, weight: Fraction, side: Fraction = B) -> Placement:
@@ -95,6 +177,90 @@ def test_depths_above_finds_exactly_the_overlap_vertices_at_depth_two() -> None:
     assert all(depth == 2 for depth, _, _ in deep)
 
 
+def test_large_coordinate_separation_preserves_the_exact_intermediate_depth() -> None:
+    side, n = Fraction(10000000010), 2 * 10**21
+    square = Placement(
+        Fraction(1, 5), Fraction(10**10), Fraction(70000000004, 7), Fraction(n, 2), Fraction(1)
+    )
+    net = tuple(LIMIT * k / 180 for k in range(181))
+    certificate = CeilingCertificate(n, side, B, net, (square, square))
+    lines = arrangement_lines(certificate)
+    vertices = container_vertices(certificate, lines)
+    deep, worst, _ = depths_above(certificate, vertices)
+    assert worst == n
+    assert deep
+    assert all(value == n for value, _, _ in deep)
+    held = site_set_from_points(side, {(Fraction(0), Fraction(0))})
+    separated = screened_separation(certificate, lines, held, cap=1, select_above=Fraction(1))
+    assert separated.max_depth == n
+    assert separated.chosen[0][0] == n
+
+
+def test_a_vertex_barely_above_the_selection_floor_still_becomes_a_site() -> None:
+    """Two unit squares overlap with depth exactly 2; a floor one attoparticle
+    below it must not lose the overlap to float rounding of the comparison."""
+    side = Fraction(4)
+    family = (
+        upright(Fraction(3, 2), Fraction(3, 2), Fraction(1), Fraction(1)),
+        upright(Fraction(2), Fraction(2), Fraction(1), Fraction(1)),
+    )
+    certificate = CeilingCertificate(2, side, Fraction(1), COARSE, family)
+    lines = arrangement_lines(certificate)
+    held = site_set_from_points(side, {(Fraction(0), Fraction(0))})
+    floor = Fraction(2) - Fraction(1, 10**18)
+    separated = screened_separation(certificate, lines, held, cap=4, select_above=floor)
+    assert separated.max_depth == 2
+    assert separated.chosen
+    assert all(depth == 2 for depth, _ in separated.chosen)
+    assert separated.violating >= len(separated.chosen)
+
+
+def test_float_identical_vertices_cannot_erase_a_thin_overlap() -> None:
+    """The zero-weight square contributes an earlier edge rounded onto the overlap.
+
+    Its right edge lies strictly left of the overlap. Merging float-identical
+    intersections retained only that edge and lost both actual overlap edges.
+    """
+    epsilon = Fraction(1, 10**20)
+    family = (
+        upright(Fraction(3, 2) - 2 * epsilon, Fraction(3, 2), Fraction(0), Fraction(1)),
+        upright(Fraction(5, 2) - epsilon, Fraction(3, 2), Fraction(1), Fraction(1)),
+        upright(Fraction(3, 2) + epsilon, Fraction(3, 2), Fraction(1), Fraction(1)),
+    )
+    side = Fraction(4)
+    certificate = CeilingCertificate(2, side, Fraction(1), COARSE, family)
+    lines = arrangement_lines(certificate)
+    held = site_set_from_points(side, {(Fraction(0), Fraction(0))})
+    separated = screened_separation(certificate, lines, held, cap=0, select_above=Fraction(1))
+    assert (
+        separated.max_depth
+        == maximum_depth(certificate, container_vertices(certificate, lines))[0]
+    )
+    assert separated.max_depth == 2
+
+
+def test_exact_fallback_and_thresholds_do_not_require_binary64_coordinates() -> None:
+    for coordinate in (Fraction(1), Fraction(10**400)):
+        side = coordinate + 1
+        square = upright(coordinate, coordinate, Fraction(1, 4))
+        certificate = CeilingCertificate(1, side, B, COARSE, (square,))
+        lines = arrangement_lines(certificate)
+        vertices = container_vertices(certificate, lines)
+        deep, worst, _ = depths_above(certificate, vertices, Fraction(10**400))
+        assert deep == []
+        assert worst == Fraction(1, 4)
+        separated = screened_separation(
+            certificate, lines, SiteSet(side, ()), cap=1, select_above=Fraction(1, 8)
+        )
+        assert separated.max_depth == Fraction(1, 4)
+        assert separated.chosen[0][0] == Fraction(1, 4)
+        above = screened_separation(
+            certificate, lines, SiteSet(side, ()), cap=1, select_above=Fraction(10**400)
+        )
+        assert above.max_depth == Fraction(1, 4)
+        assert above.chosen == []
+
+
 def test_select_site_orbits_groups_vertices_into_new_d4_orbits() -> None:
     deep = [
         (Fraction(2), Fraction(1, 2), Fraction(1, 2)),
@@ -109,6 +275,144 @@ def test_select_site_orbits_groups_vertices_into_new_d4_orbits() -> None:
     assert select_site_orbits(deep, held, TWO, cap=1)[0][1] == chosen[0][1]
     assert select_site_orbits(deep, SiteSet(TWO, ()), TWO, cap=10)[1:]
     assert len(select_site_orbits(deep, SiteSet(TWO, ()), TWO, cap=10)) == 3
+
+
+def test_opt_in_covering_stop_records_the_exact_iteration_before_site_addition(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    state = tmp_path / "state.json"
+    transcript = StringIO()
+    log, sites, _ = stubbed_cutting_run(
+        monkeypatch,
+        rows_objective=10.75,
+        stop_on_covering_below_n=True,
+        state_path=state,
+        log_sinks=(transcript,),
+    )
+    reason = "row-converged covering objective below n at iteration 0"
+    assert log.stopped == reason
+    assert len(log.iterations) == 1
+    assert log.iterations[0].rows_converged
+    assert log.iterations[0].rows_objective == 10.75
+    assert log.iterations[0].max_depth == 2
+    assert log.iterations[0].added == 0
+    assert log.best_iteration == 0
+    assert log.best_family is not None
+    assert log.sites == sites
+    saved = json.loads(state.read_text())
+    assert saved["stopped"] == reason
+    assert saved["iterations"][0]["note"] == reason
+    assert len(saved["sites"]) == sites.size
+    assert f"stopped: {reason}" in transcript.getvalue()
+
+
+def test_covering_stop_is_opt_in_and_requires_a_converged_row_solve(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    default, _, _ = stubbed_cutting_run(
+        monkeypatch,
+        rows_objective=10.75,
+        stop_on_covering_below_n=False,
+    )
+    assert default.stopped == "iteration cap 1 reached"
+    assert default.iterations[0].added == 1
+
+    default_non_finite, _, _ = stubbed_cutting_run(
+        monkeypatch,
+        rows_objective=float("inf"),
+        stop_on_covering_below_n=False,
+    )
+    assert default_non_finite.stopped == "iteration cap 1 reached"
+    assert default_non_finite.iterations[0].added == 1
+
+    unfinished, _, _ = stubbed_cutting_run(
+        monkeypatch,
+        rows_objective=10.75,
+        stop_on_covering_below_n=True,
+        rows_converged=False,
+    )
+    assert unfinished.stopped == "iteration cap 1 reached"
+    assert unfinished.iterations[0].added == 1
+
+
+def test_opt_in_covering_stop_refuses_a_non_finite_converged_objective(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    transcript = StringIO()
+    reason = "technical refusal: non-finite row-converged covering objective at iteration 0"
+    new_state = tmp_path / "new-state.json"
+    with pytest.raises(RuntimeError, match=reason):
+        stubbed_cutting_run(
+            monkeypatch,
+            rows_objective=float("inf"),
+            stop_on_covering_below_n=True,
+            state_path=new_state,
+            log_sinks=(transcript,),
+        )
+    assert not new_state.exists()
+    assert "rows_objective=" not in transcript.getvalue()
+    assert f"failed: {reason}" in transcript.getvalue()
+
+    old_state = tmp_path / "old-state.json"
+    checkpoint = b'{"stopped":"prior checkpoint"}\n'
+    old_state.write_bytes(checkpoint)
+    with pytest.raises(RuntimeError, match=reason):
+        stubbed_cutting_run(
+            monkeypatch,
+            rows_objective=float("nan"),
+            stop_on_covering_below_n=True,
+            state_path=old_state,
+        )
+    assert old_state.read_bytes() == checkpoint
+
+
+def test_opt_in_covering_stop_is_strict_at_equality(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    log, _, _ = stubbed_cutting_run(
+        monkeypatch,
+        rows_objective=11.0,
+        stop_on_covering_below_n=True,
+    )
+    assert log.stopped == "iteration cap 1 reached"
+    assert log.iterations[0].added == 1
+
+
+def test_opt_in_covering_stop_continues_above_n(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    log, _, _ = stubbed_cutting_run(
+        monkeypatch,
+        rows_objective=11.25,
+        stop_on_covering_below_n=True,
+    )
+    assert log.stopped == "iteration cap 1 reached"
+    assert log.iterations[0].added == 1
+
+
+def test_exact_ceiling_verification_precedes_the_opt_in_covering_stop(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    verdict = CeilingVerdict(
+        (ConditionReport("exact ceiling", "synthetic precedence control", holds=True),),
+        total_weight=Fraction(11),
+        max_depth=Fraction(1),
+        vertices=1,
+        decided_exactly=1,
+        regime="fixed-B",
+        symmetric_only=False,
+    )
+    log, _, verified = stubbed_cutting_run(
+        monkeypatch,
+        rows_objective=10.75,
+        stop_on_covering_below_n=True,
+        max_depth=Fraction(1),
+        family_total=Fraction(11),
+        verify_verdict=verdict,
+    )
+    assert len(verified) == 1
+    assert log.verdict is verdict
+    assert log.stopped == "ceiling proved at iteration 0"
 
 
 def test_the_loop_reaches_the_corner_ceiling_at_side_two(tmp_path: Path) -> None:

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 472
+count: 478
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -15530,3 +15530,166 @@ defects:
   status: outstanding
   bead: think-be1s
   recorded_in: packing/devtools/gate-budgets.yaml
+- id: D-473
+  title: Ceiling verification trusted a floating screen outside its justified numerical range
+  date: '2026-09-06'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: until the published-claims adversarial review on 2026-09-06
+  severity: high
+  status: fixed
+  what: >-
+    The ceiling verifier used a fixed floating-point margin before exact checks,
+    justified in a comment for coordinates below ten, without bounding its accepted
+    inputs. Two coincident unit squares near coordinates 10^10 were accepted with
+    reported maximum depth zero. Scaling their weights to 10^21 each produced a false
+    no-certificate conclusion contradicted by an explicit finite half-integer grid.
+  consequence: >-
+    A claimed exact impossibility verifier accepted a false theorem. The reproduced
+    input is outside the retained small-container cases; the headline s(11) lower-bound
+    verifier is separate and does not use this screen.
+  fix: >-
+    Check exact coordinate, coefficient, family-size and total-weight bounds before
+    any floating screen. Use separately justified intersection and membership margins
+    within those bounds and exact enumeration and summation otherwise. Compare against
+    the best exact depth so subunit maxima and scaling factors are also correct.
+  regression: packing/tests/test_fractional_ceiling.py
+  bead: think-lsg0
+  recorded_in: docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md
+- id: D-474
+  title: Feasible covering masses were subtracted to infer a lower slope and a stopping side
+  date: '2026-09-06'
+  layer: record
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: from the BC-206 research conclusion to the published-claims review
+  severity: medium
+  status: fixed
+  what: >-
+    The n=12 follow-up subtracted upper bounds on the covering optimum at 3.96 and
+    3.97, called the resulting secant a lower slope, and inferred an endpoint near
+    3.96004. Neither that inequality nor the extrapolation follows from the quoted
+    evidence; even two exact endpoints would need further assumptions about variation
+    between them.
+  consequence: >-
+    An unsupported impossibility inference could terminate or deprioritize viable
+    search. No retained packing lower bound depends on the inferred endpoint.
+  fix: >-
+    Withdraw the slope and endpoint from maintained records, state that the bounds at
+    3.97 straddle twelve, and explicitly correct the historical inference without
+    rewriting the retained raw run or session record.
+  regression: none
+  bead: think-cmi9
+  recorded_in: docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md
+- id: D-475
+  title: The README presented a fixed-net numerical ceiling without its net restriction
+  date: '2026-09-06'
+  layer: docs
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: until the published-claims adversarial review on 2026-09-06
+  severity: medium
+  status: fixed
+  what: >-
+    The README said no twelve-square certificate of this form exists above 3.990816,
+    although the theorem establishes 4/(1+D) for a fixed direction net. Refining the
+    retained 181-direction net decreases D and raises that numerical ceiling.
+  consequence: >-
+    The summary asserted a stronger numerical impossibility than its cited proof.
+    No certificate above that side was constructed during the review, so the finding
+    is an unsupported scope expansion rather than a countercertificate.
+  fix: >-
+    Qualify 3.990816 by the retained direction net and distinguish it from the
+    obstruction to reaching four with a single finite net.
+  regression: none
+  bead: think-hekn
+  recorded_in: docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md
+- id: D-476
+  title: Cutting separation could retain an invalid scaled bound before final verification
+  date: '2026-09-06'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: until tracing the D-473 screen through its search consumers
+  severity: high
+  status: fixed
+  what: >-
+    Cutting separation reused the unbounded floating membership screen. The D-473
+    large-coordinate family has exact depth 2e21 but depths_above reported zero and
+    no violated constraints. The runner used that result to retain best_scaled_total
+    before invoking the separate final ceiling verifier.
+  consequence: >-
+    Repairing final ceiling verification alone would still leave intermediate
+    purported exact lower bounds vulnerable to the same false-negative screen.
+    Every retained small-coordinate family (BC-200 at 191/50 and 77/20, BC-232 at
+    191/50) was replayed from its bytes through the repaired final verifier with
+    devtools.replay_ceiling_family and reproduced its recorded vertex count and exact
+    maximum depth 1, so no retained result was shown incorrect and none was left
+    unchecked.
+  fix: >-
+    Reuse the ceiling screening guards and take an exact separation path outside them.
+    Allow for approximate intersection error in a separate membership margin, preserve
+    maxima below the selection threshold, and avoid float conversion in exact fallback
+    clustering and for unbounded thresholds.
+  regression: packing/tests/test_fractional_cutting.py
+  bead: think-ozdb
+  recorded_in: docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md
+- id: D-477
+  title: Cutting separation merged distinct exact vertices with identical float coordinates
+  date: '2026-09-06'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: until challenging the cutting screen with nearby rational boundaries
+  severity: high
+  status: fixed
+  what: >-
+    float_vertices deduplicated candidates by their floating-point coordinates.
+    Distinct exact vertices of small unit squares separated by 1e-20 can round to
+    the same point. A zero-weight square's boundary displaced the vertices witnessing
+    two positive-weight squares' narrow overlap, so screened_separation returned a
+    maximum of one when the exact maximum was two.
+  consequence: >-
+    Even small-coordinate search inputs could receive an invalid scaled lower bound.
+    A numerical-range guard cannot fix the loss of distinct vertices; the final
+    ceiling verifier enumerates its vertices independently.
+  fix: >-
+    Retain candidates with identical float coordinates and reconstruct their exact
+    points independently before deciding depth. Approximate equality never removes
+    an exact arrangement vertex.
+  regression: packing/tests/test_fractional_cutting.py
+  bead: think-hrko
+  recorded_in: docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md
+- id: D-478
+  title: The BC-206 cutting floor has no retained family for independent replay
+  date: '2026-09-06'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: until seeking replay evidence after the cutting-screen repairs
+  severity: medium
+  status: contained
+  what: >-
+    The BC-206 n=12 run log reports a depth-scaled floor near 10.845594 at side
+    397/100, but its generating exact family or state is not retained. The log names
+    f-397-100.state.json as a warm start without retaining it. Rounded maxima in the
+    text cannot reconstruct a witness for the repaired verifier.
+  consequence: >-
+    The historical number cannot be independently replayed after D-476 and D-477.
+    It has not been shown false, but the log cannot support a revalidated exact lower
+    bound or certified bracket. The gap is specific to BC-206: the BC-200 and BC-232
+    families are retained and replay under the repaired verifier.
+  fix: >-
+    Qualify the maintained record and review as an unreplayed historical report and
+    leave side 3.97 undecided. Recovery of the exact witness, or a rerun that retains
+    one, remains a separate follow-up under think-aenh.
+  regression: none
+  bead: think-aenh
+  recorded_in: docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md

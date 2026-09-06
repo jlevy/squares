@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-08-25'
+last_reviewed: '2026-09-06'
 evidence:
   - id: E-kingbird-upper-register
     claim: upper-bound
@@ -1290,9 +1290,11 @@ evidence:
       corpus: >-
         The retained literature archive under packing/resources/, the frontier source
         register, current public record catalogues, and online scholarly indexes searched
-        through 2026-09-04, with the durable query and source receipt at
-        resources/web/s11-lower-bound-literature-audit-2026/README.md. The local corpus
-        includes Stromquist 2003 (Theorem 2 and the
+        through 2026-09-05. The case-specific receipt is
+        resources/web/s11-lower-bound-literature-audit-2026/README.md; the frozen
+        arXiv, Crossref, OpenAlex, and Zenodo refresh is
+        resources/web/literature-refresh-2026-09-05/README.md. The local corpus includes
+        Stromquist 2003 (Theorem 2 and the
         Figure 14 cover this project refuted as D-152), the exp-017 repaired certificate,
         Trump's 1979 packing, Nagamochi 2005 and Friedman's record tables.
       searched: >-
@@ -1300,8 +1302,9 @@ evidence:
         citation chains, author pages and public packing catalogues for unrestricted
         packing of eleven unit, equal or congruent squares; s(11) and s_11; lower bounds;
         weighted, fractional, resource and unavoidable-set methods; and the exact values
-        381/100, 100/381, 110000/145161, 19/5, 5/19 and 275/361. No public lower bound above Stromquist's
-        2 + 4/sqrt(5) = 3.788854 was located.
+        381/100, 100/381, 110000/145161, 19/5, 5/19 and 275/361. The 2026-09-05
+        refresh did not locate an earlier external lower bound above Stromquist's
+        2 + 4/sqrt(5) = 3.788854.
       novel_object: >-
         The certificate and the bound. The resource lineage runs through Göbel's
         integral unavoidable points, Kearney and Shiu's dual lattices, Nagamochi's
@@ -1370,7 +1373,72 @@ evidence:
       packaging defects it did find are fixed (D-436). It is not an external review and
       does not reach C5: the reviewer is an agent of this project working from the
       package rather than from the implementation.
-    source_reviewed: '2026-09-04'
+    source_reviewed: '2026-09-05'
+  - id: E-n011-fractional-dilation-limit
+    claim: lower-bound
+    scope:
+      n_values:
+        - 11
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained square-packing archive and the 2026-09-04 s(11) audit, supplemented
+        by the 2026-09-05 literature refresh and the exact-endpoint query receipt at
+        resources/web/s11-exact-endpoint-literature-audit-2026-09-06/README.md.
+      searched: >-
+        The earlier audit searched the public literature, catalogues, author pages and
+        scholarly indexes for stronger s(11) lower bounds and this certificate method.
+        On 2026-09-06 an independent review additionally searched the refined decimal
+        3.810025723614703, radicand 8100042893309449, radical expression, and the topic
+        query "s(11) 3.810025 square packing" through arXiv, Crossref, OpenAlex, and a
+        general web index. Exact routes returned zero; the inspected leading broad
+        Crossref matches did not state this endpoint.
+      novel_object: >-
+        The exact weak endpoint obtained by combining the retained T-018 source with a
+        sharpened trigonometric containment lemma, every strict rational uniform
+        dilation it admits, and rational density. The source certificate and dilation
+        operation are not new objects; the registered limit corollary is.
+      gaps: >-
+        This bounded search does not exhaust subscription-only indexes, theses,
+        proceedings, non-English or unindexed sources, private correspondence, or
+        unpublished work. Apparent novelty is not a priority claim.
+    certificate: cases/n11_fractional_certificate/t-022-dilation-limit-corollary.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.dilation_corollary cases/n11_fractional_certificate/certificate.json --source-name packing/cases/n11_fractional_certificate/certificate.json --check-limit-record cases/n11_fractional_certificate/t-022-dilation-limit-corollary.json
+    replay_status: passed
+    proof:
+      source: cases/n11_fractional_certificate/t-022-dilation-limit-proof.md
+      theorem: >-
+        The T-018 source and the sharpened containment lemma imply s(11) >=
+        38100*sqrt(8100042893309449)/899996306539.
+      scope: >-
+        Uniform dilation of the retained n = 11 source with fixed relative B, one
+        concentric core per square, and strict support containment.
+      pinpoints: >-
+        Frozen Premise, Sharpened Containment Lemma, The Strict Rational Family, Density
+        and the Infimum, Endpoint and Scope, and Replay.
+      assumptions:
+        - The source certificate passes Conditions 1 through 5 from its frozen bytes.
+        - The exact source half-gap tangent satisfies 0 <= D < 1.
+        - A packing in a smaller square embeds in a larger square.
+        - The rationals are dense in the reals.
+        - s(11) is the infimum of packable container sides.
+    limitations: >-
+      The replay binds the exact source SHA-256
+      b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a and re-decides
+      all five source conditions before deriving a separate exact containment test. For
+      every positive rational q whose square is below
+      810004289330944900000000/809993351783841654158521, the scaled source and
+      sharpened lemma rule out a packing at qL; density and upward embedding then exclude
+      every real side below their supremum. The sharpened containment test is equality
+      at the supremum, so this evidence supplies no endpoint certificate, no endpoint
+      fit decision, and no strict inequality. It uses no compactness or attainment
+      theorem and does not rule out stronger uses of the same atoms or coverage cells.
+    source_reviewed: '2026-09-06'
   - id: E-n017-fractional-certificate
     claim: lower-bound
     scope:
@@ -1389,16 +1457,26 @@ evidence:
         The retained literature archive under packing/resources/ and the frontier source
         register, which for n = 17 hold Burns's fractional unavoidable-set note (4.4811),
         Massaccesi's 2026 certificate (4.5058, adopted here as T-015 and carried to
-        n = 18 and n = 19 as T-016), Nagamochi 2005 and Friedman's record tables.
+        n = 18 and n = 19 as T-016), Nagamochi 2005 and Friedman's record tables. The
+        frozen arXiv, Crossref, OpenAlex, and Zenodo search receipts are retained at
+        resources/web/literature-refresh-2026-09-05/README.md.
       searched: >-
-        Searched for any lower bound on s(17) above 22529/5000 = 4.5058. The corpus holds
-        none: that value is the strongest in the register and is itself only months old.
-        The known hole is the one every entry in this family names -- no systematic sweep
-        of recent preprints, and Massaccesi's note is not peer-reviewed.
+        Searched for any lower bound on s(17) above 22529/5000 = 4.5058. The refresh
+        located Brandwijk's externally published s(17) > 89/20 = 4.45 capsule, which is
+        below T-019's 459/100 = 4.59 and does not displace it. It located no earlier
+        external public bound above 4.5058. De Winter's mutable report concerns proposed
+        upper-bound constructions at n = 68, 126 and 206; its coordinates were
+        unavailable and its values were not replayed, so it has no bearing on lower
+        bounds at n = 17 through 21.
       novel_object: >-
         The certificate and the side. The method is Burns's and the parametrisation is
         Massaccesi's own; what is new is a denser certificate at a larger side than his,
         found by this project's generator once its separation oracle was corrected.
+      gaps: >-
+        The frozen refresh is a bounded public-record search, not an exhaustive review of
+        subscription-only indexes, theses, proceedings, non-English or unindexed sources,
+        private correspondence, or unpublished work. The label records apparent novelty
+        within that search, not absolute priority.
     certificate: cases/n17_fractional_certificate/certificate.json
     replay: uv run --frozen --all-extras python -m cases.n17_fractional_certificate
     replay_status: passed
@@ -1430,7 +1508,7 @@ evidence:
       This entry is the exact-algebraic decision; C4 rests on
       E-fractional-interval-decision, which decides the same bytes by a different
       method.
-    source_reviewed: '2026-09-04'
+    source_reviewed: '2026-09-05'
   - id: E-n020-fractional-certificate-97-20
     claim: lower-bound
     source_reviewed: '2026-09-05'
@@ -1449,18 +1527,27 @@ evidence:
         The retained literature archive under packing/resources/ and the frontier source
         register, which for n = 20 and n = 21 hold Nagamochi's 2005 closed form, Bentz's
         2016 proof at n = 22, Friedman's record tables, and this project's own T-020 at
-        24/5. No source in the corpus states a bound specific to either size above that.
+        24/5. The frozen arXiv, Crossref, OpenAlex, and Zenodo search receipts are
+        retained at resources/web/literature-refresh-2026-09-05/README.md. No external
+        source in that corpus states a bound specific to either size above T-020.
       searched: >-
-        The corpus search is E-n020-fractional-certificate's, unchanged: no lower bound
-        on s(20) or s(21) above the closed form appears in it, and this rung raises this
-        project's own value rather than a published one. The known hole is the same --
-        no systematic sweep of recent preprints.
+        The corpus search is E-n020-fractional-certificate's, extended by the frozen
+        2026-09-05 refresh: no external lower bound on s(20) or s(21) above T-020 appears
+        in it, and this rung raises this project's own value rather than a published one.
+        De Winter's mutable report concerns proposed upper-bound constructions at n = 68,
+        126 and 206; its coordinates were unavailable and its values were not replayed,
+        so it is irrelevant to lower bounds at n = 17 through 21.
       novel_object: >-
         The certificate and the side. The method is Burns's, the parametrisation
         Massaccesi's, and the previous rung this project's own; what is new is a
         certificate at 97/20, found by seeding the generator's site set with the 24/5
         certificate's own atoms scaled to the new side after the uniform grid walled
         there.
+      gaps: >-
+        The refresh is a bounded public-record search, not an exhaustive review of
+        subscription-only indexes, theses, proceedings, non-English or unindexed sources,
+        private correspondence, or unpublished work. The label records apparent novelty
+        within that search, not absolute priority.
     certificate: cases/n20_fractional_certificate/certificate.json
     replay: uv run --frozen --all-extras python -m cases.n20_fractional_certificate
     replay_status: passed
@@ -1500,17 +1587,26 @@ evidence:
         The retained literature archive under packing/resources/ and the frontier source
         register, which for n = 19, 20 and 21 hold Nagamochi's 2005 closed form, Bentz's
         2016 proof at n = 22, Friedman's record tables, and this project's own T-019 at
-        459/100. No source in the corpus states a bound specific to any of these three
-        sizes: each has held a general formula since 2005.
+        459/100. The frozen arXiv, Crossref, OpenAlex, and Zenodo search receipts are
+        retained at resources/web/literature-refresh-2026-09-05/README.md. No external
+        source in that corpus states a bound specific to any of these three sizes above
+        the register's prior value.
       searched: >-
         Searched for any lower bound on s(19), s(20) or s(21) above the closed form
-        min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). The corpus holds none at
-        any of the three. The known hole is the one every entry in this family names --
-        no systematic sweep of recent preprints.
+        min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1), including the frozen
+        2026-09-05 refresh. The corpus holds none at any of the three. De Winter's mutable
+        report concerns proposed upper-bound constructions at n = 68, 126 and 206; its
+        coordinates were unavailable and its values were not replayed, so it is
+        irrelevant to lower bounds at n = 17 through 21.
       novel_object: >-
         The certificate and the side. The method is Burns's and the parametrisation is
         Massaccesi's; what is new is a certificate at a side no published bound reaches
         at any of these three sizes, found by this project's generator.
+      gaps: >-
+        The refresh is a bounded public-record search, not an exhaustive review of
+        subscription-only indexes, theses, proceedings, non-English or unindexed sources,
+        private correspondence, or unpublished work. The label records apparent novelty
+        within that search, not absolute priority.
     certificate: cases/n20_fractional_certificate/certificate-24-5.json
     replay: uv run --frozen --all-extras python -m cases.n20_fractional_certificate cases/n20_fractional_certificate/certificate-24-5.json
     replay_status: passed
@@ -1538,7 +1634,7 @@ evidence:
       One rung, no ladder: the side was reached in a single resumed column-generation run
       rather than climbed, so there is no weaker retained certificate at this size to
       compare against.
-    source_reviewed: '2026-09-04'
+    source_reviewed: '2026-09-05'
   - id: E-fractional-interval-decision
     claim: lower-bound
     scope:

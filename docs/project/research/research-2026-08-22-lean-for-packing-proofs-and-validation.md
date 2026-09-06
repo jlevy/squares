@@ -1,46 +1,44 @@
 # Research: Lean for Square-Packing Proofs and Validation
 
-**Date:** 2026-08-22 (last updated 2026-08-22)
+**Date:** 2026-08-22 (local proof status reconciled 2026-09-06)
 
 **Author:** Claude (agent), for samanthadrakova@gmail.com
 
-**Status:** Complete
+**Status:** Survey complete; partial Lean source retained, current Lean replay pending
 
 ## Overview
 
-This document asks whether the Lean theorem prover belongs in this project, and if so
-where.
+Lean can reduce the code a third party must trust when checking a packing result.
+The immediate target is now the computer-assisted lower bound `s(11) ≥ 381/100 = 3.81`:
+the [proof card](../../../packing/cases/n11_fractional_certificate/t-018-proof-card.md)
+states the argument, and the 329-line
+[minimal verifier](../../../packing/cases/n11_fractional_certificate/minimal_verify.py)
+decides its five certificate conditions with exact arithmetic.
+A complete Lean formalization would check both the geometric implication and the
+certificate computation against stated axioms and the kernel.
 
-The motivating requirement is specific: we want a **concise, thorough, foolproof way to
-express a solution — an example or a proof — and to have its validation checked by a
-third party who does not trust our code.** Today the repository’s exact verifier answers
-“is this packing valid?”
-correctly, in 0.35 s, with no floating point in the decision path.
-But its answer is only as good as the reader’s willingness to trust roughly 500 lines of
-our Python (and, per the
-[infrastructure plan](research-2026-08-22-infrastructure-for-packing-exploration.md), a
-future few thousand lines of our Rust).
-A Lean proof replaces that trust with a machine check against a small kernel that other
-people have independently reimplemented.
-
-The conclusion, stated up front so the rest can justify it:
-
-- **The upper bound is formalizable today and nobody has done it.** `s(11) ≤ 3.877084…`
+- **The upper bound has a finite algebraic formalization target.** `s(11) ≤ 3.877084…`
   is a single explicit witness plus 55 pairwise disjointness facts plus containment —
   finitely many polynomial inequalities over one number field.
-  That is squarely inside what Lean does well, and it would be, as far as this research
-  found, the **first formal theorem about `s(n)` for any non-trivial `n`**.
-- **The lower bound for an open case is not formalizable, for the same reason it is not
-  provable**: there is no informal proof to formalize.
-  This is a property of the mathematics, not of Lean.
-- **The lemma layer of the *solved* cases is formalizable now**, and is the natural
-  first target — Flyspeck’s pattern exactly.
-- **Lean belongs in the agent tier and never in the search loop.** Formal verification
-  of nonlinear inequalities ran about **3,000× slower** than the equivalent C++ in
-  Flyspeck. Mapped onto this project’s measured budgets, that is fine for checking a
-  result and catastrophic for generating one.
-- **Its highest-value role is as a second, independent checker over our own verifier** —
-  the pattern this repository has already found most convincing once.
+  The original survey located no formal theorem about `s(n)` for non-trivial `n`; that
+  dated search does not establish that none exists.
+- **The lower bound has mathematics to formalize.** The retained
+  [Lean spike](../../../packing/cases/n11_fractional_certificate/lean-spike/README.md)
+  has nine theorem proofs for counting, atomic-mass symmetry, and scalar inequalities
+  used in Conditions 2–4. Its source reports a historical Lean 4.32.1/Mathlib 4.32.1
+  build and axiom audit.
+  This continuation port has source checks only: the pinned Lean toolchain and cache are
+  absent on the host, so neither compilation nor a kernel check was replayed.
+  The spike does not formalize the geometry, replay Condition 5’s **567,130,649 cells**,
+  or prove the full `s(11)` theorem.
+- **The lemma layer of the solved cases supplies smaller formalization targets.** A
+  formal proof can expose a missing hypothesis in a human argument even before a whole
+  optimality theorem is formalized.
+- **Use Lean to check retained results before considering it in the search loop.**
+  Formal verification of nonlinear inequalities ran about **3,000× slower** than the
+  equivalent C++ in the cited Flyspeck experiment.
+  That historical measurement motivates separating search from proof replay; it is not a
+  benchmark of the current Lean toolchain or this certificate.
 
 ## Questions to Answer
 
@@ -56,14 +54,16 @@ The conclusion, stated up front so the rest can justify it:
 
 ## Scope
 
-**Included:** Lean 4 and Mathlib as they stand in August 2026; the recent formalization
+**Included:** the August 2026 survey of Lean 4 and Mathlib; the recent formalization
 record where it bears on computational or newly-discovered mathematics; the specific fit
 to upper bounds, lower bounds, the nonavoidance lemma layer, and unavoidable-set
 decisions; certificate design; and cost.
+The 2026-09-06 reconciliation checks local proof status and certificate values; it does
+not repeat the survey’s external literature search.
 
 **Excluded:** a tutorial on dependent type theory; comparison of Lean against Coq/Rocq,
 Isabelle or HOL Light on general merits (they appear only where a precedent used them);
-and any claim that formalization would help *find* a packing proof that does not exist.
+and a new search for a packing proof within this formalization reconciliation.
 
 ## Findings
 
@@ -77,8 +77,10 @@ and number theory.
 For this project, one architectural property carries almost all the value: **the trusted
 computing base is a small kernel.** A Lean proof is a term; checking it means
 type-checking that term against a kernel of a few thousand lines.
-Everything else — tactics, automation, elaboration, the entire library, and any AI that
-produced the proof — is *untrusted*, because whatever it emits is checked.
+Tactics, automation, elaboration, and any AI that produces the proof emit terms that the
+kernel checks. The theorem statement and its axiom dependencies also need review: a
+kernel check does not establish an unproved assumption or show that the statement
+describes the intended geometry.
 Independent third-party kernel implementations exist and can re-check the same proof
 term.
 
@@ -97,8 +99,9 @@ The third row is not hypothetical here: the
 already ran an unrelated Rust interval implementation against our exact verifier and got
 the same partition of the 55 pairs into 41 strictly separated and 14 touching, and
 called that agreement “the strongest evidence in either research document.”
-A Lean proof is the same move one level further, and it is the level at which the
-evidence stops depending on us at all.
+A Lean proof can remove dependence on the project’s verifier implementation.
+It still requires checking the formal statement and its assumptions against the intended
+packing problem.
 
 ### Performance characteristics: where Lean is fine, and where it is hopeless
 
@@ -110,16 +113,15 @@ Lean’s cost profile is unusual and needs stating precisely, because the naive 
 | Mechanism | How it works | Speed | Trust |
 | --- | --- | --- | --- |
 | `decide` | The kernel reduces the decision procedure directly | Slowest; can time out or fail to reduce at all on structures the kernel’s evaluator handles poorly | **Kernel only** — the strongest guarantee |
-| `native_decide` | Compiles the decision procedure to native code and trusts the result | Orders of magnitude faster | **Trusts the compiler**, not the kernel — the proof term is not independently checked |
+| `native_decide` | Compiles the decision procedure and admits its result through a compiler-trusting axiom | Faster for many large checks | The kernel accepts a proof term that depends on the additional axiom; it does not independently evaluate the compiled computation |
 | Certificate + reflection | An external tool searches; Lean *checks* a certificate with a verified checker | Fast search, kernel-checked result | **Kernel only** |
 
-The middle row deserves a warning in this project’s own vocabulary: **`native_decide` is
-a claim-integrity hazard.** It produces a theorem that looks kernel-checked and is not;
-a bug in Lean’s code generator affecting rational arithmetic would silently invalidate
-every proof relying on it.
-For a result whose entire purpose is to be trustworthy without trusting us, reaching for
-`native_decide` gives away most of what we came for.
-The third row is the right pattern and is discussed below.
+For independent checking of the certificate computation, the third row is the target.
+An axiom audit distinguishes it from a proof that trusts a compiled decision procedure.
+The retained spike uses no `native_decide`, custom axiom, or placeholder proof;
+[its README](../../../packing/cases/n11_fractional_certificate/lean-spike/README.md#verification-status)
+separates source inspection, historical reported builds, current replay, and the
+remaining formal theorem.
 
 **The concrete slowdown figure.** Flyspeck — the formal proof of the Kepler conjecture,
 and the closest existing analogue to a formal packing-optimality proof — verified about
@@ -135,14 +137,12 @@ Map that onto this project’s
 | One separating-axis pair test | 57 ns | ~170 µs | Fine in isolation |
 | One full `n = 11` verification (55 pairs) | ~3 µs of predicate work | ~10 ms | **Entirely fine** |
 | One annealing basin (`s(51)`, published) | ~23.6 s | ~20 hours | **Hopeless** |
-| A 3,004-basin campaign | ~4.9 GPU-hours | ~1,700 GPU-years | **Absurd** |
+| A 3,004-basin campaign | ~4.9 GPU-hours | ~14,700 device-hours, or 1.68 device-years | Arithmetic illustration only; GPU throughput and formal proof replay are different workloads |
 
-The answer to “where and when” falls straight out of that table.
-**Lean belongs in the agent tier, applied to results, and must never appear in the
-search loop.** A 3,000× penalty on a 10 ms check is invisible; on a campaign it is a
-civilisation-scale mistake.
-This is the same tiering that put SymPy at the agent tier and Rust in the inner loop,
-applied to a third tool.
+These multiplications illustrate why a small retained check is a better first target
+than instrumenting a search loop with proof replay.
+They do not predict Lean performance: the factor comes from a different formal system,
+machine, and workload.
 
 ### Deep dive: what Lean has actually been used for recently
 
@@ -180,9 +180,10 @@ Its shape is the one a square-packing optimality proof would take:
 Every one of those three moves has a direct counterpart here.
 Unavoidable-point arguments *are* nonlinear inequalities over `(x, y, θ)`. The
 [`n = 11` report’s](research-2026-08-22-packing-11-unit-squares.md) observation that the
-whole lower-bound literature is “resource starvation” — and that its natural un-taken
-next step is an explicitly **fractional LP certificate** — is Flyspeck’s second move
-waiting to be made. And enumerating contact classes is the tame-graph archive problem.
+lower-bound methods can be interpreted as resource constraints led to the **fractional
+certificate** now retained for `s(11) ≥ 381/100`. Enumerating contact classes raises a
+separate completeness obligation analogous to the tame-graph archive problem; a list of
+contact graphs alone is not a proof that every packing has been represented.
 
 *The caution:* a decade, and the 3,000× figure comes from this project.
 
@@ -254,9 +255,9 @@ Every part of that is finite and algebraic:
 Mathlib has what this needs: polynomial rings, algebraic elements, and `IsAdjoinRoot`
 for working in `ℚ[X]/(m)`. The work is stating the geometry cleanly and discharging a
 few hundred polynomial sign conditions.
-That is a real project — plausibly weeks, not days — but it is *ordinary* formalization
-with no research risk, and the result would be the first formal theorem about `s(n)` for
-non-trivial `n`.
+The geometry and sign arguments still require proof development.
+The original estimate was weeks rather than days, but no complete upper-bound
+formalization has been timed here.
 
 **Why start here even though it proves nothing new:** it delivers the requirement.
 A Lean file plus its kernel check is a third-party-verifiable certificate that a
@@ -272,8 +273,8 @@ by a referee with a pencil.
 Lemma 2 is representative and small: *any box whose centre lies in the interior of a
 triangle with all sides at most 1 must contain one of its vertices.*
 
-These are genuinely formalizable now, and doing so is **diagnostic**: this layer is what
-every proved value of `s(n)` stands on, and no one has ever machine-checked it.
+Formalizing these lemmas would test assumptions used in several nontrivial solved cases.
+The original survey located no machine-checked version of those particular arguments.
 The [`n = 11` report’s](research-2026-08-22-packing-11-unit-squares.md) own correction
 history is the argument for bothering — the structure of Stromquist’s Theorem 2 was
 misread in this repository until the archived paper was read line by line, and the error
@@ -281,8 +282,7 @@ was in exactly this layer.
 
 Then `s(10)` (Stromquist’s Theorem 1): ten points, each region covered by one of Lemmas
 1, 2 or 4, then a named-box case analysis.
-That is a complete, published, human-scale optimality proof for a non-trivial `n`, and
-it would be the first formalized.
+That is a complete, published optimality proof for a nontrivial `n`.
 
 #### 3. Unavoidable-set verification — the interesting middle
 
@@ -301,15 +301,34 @@ would let existing lower-bound proofs be machine-checked, and — more interesti
 [`n = 11` report](research-2026-08-22-packing-11-unit-squares.md) identifies as the
 plausible route to a new bound.
 
-#### 4. A lower bound for an open case — blocked, and not by Lean
+#### 4. A lower bound for an open case — a partial formalization
 
-There is no informal computer-assisted proof of `s(11)`, `s(12)`, or any open case to
-formalize. Lean cannot supply one.
-The nearest reachable target is the family the frontier corpus surfaced:
-`n = 97, 78, 61` are `10² − 3`, `9² − 3`, `8² − 3`, the next unproved members of a
-family proved for `m = 3…7`, with **integer** conjectured optima and the narrowest gaps
-in the table. If a computer-assisted proof of one of those were produced by any means,
-the `K₈(4,2) = 23` pattern says how to make it checkable.
+The retained fractional unavoidable-set certificate establishes `s(11) ≥ 381/100`. Its
+human implication is short: eleven disjoint inner squares, each covering at least unit
+atom mass, would require total mass at least eleven; the certificate carries only
+`434547/40000 = 10.863675`. The exact Python checker decides the five hypotheses needed
+to apply that argument.
+The [result record](../../../packing/frontier/results.yaml) carries T-018’s evidence and
+confirmation status, including its method-distinct interval confirmation.
+
+The retained
+[`lean-spike`](../../../packing/cases/n11_fractional_certificate/lean-spike/README.md)
+contains counting and symmetry lemmas, scalar inequalities with the certificate’s
+numbers, and the final algebraic inequality in the support-radius step.
+These are partial formalization source, with a historical build reported but no current
+Lean replay on this host.
+They do not check the atom data or prove that the net and geometry imply coverage at
+every orientation.
+
+Condition 5 says every contained side-`9977/10000` square at each of 181 rational
+directions covers mass at least one; the retained minimum is `4001/4000`. The Python
+verifier reduces the continuum of centers to **567,130,649 reachable event cells**. The
+separate interval verifier confirms the same certificate on a doubled net of 361
+directions, without needing the diagonal-reflection reduction.
+Formalizing the continuum reduction and checking a compact partition or range-minimum
+receipt remain proposed work.
+The 329-line Python checker already decides the retained certificate; neither its
+runtime nor a source-only Lean audit constitutes a Lean proof of the packing theorem.
 
 ### What a third-party-verifiable certificate would look like
 
@@ -349,23 +368,21 @@ The
 
 ## Key Insights
 
-1. **The upper bound is formalizable today, and doing it would be a first.** No formal
-   theorem about `s(n)` exists for any non-trivial `n`, and `s(11) ≤ 3.877084…` needs
+1. **The upper bound reduces to a finite algebraic witness.** The original survey
+   located no formal theorem about `s(n)` for non-trivial `n`; `s(11) ≤ 3.877084…` needs
    only finitely many polynomial sign conditions over one degree-8 number field.
-   The absence is an opportunity, not evidence of difficulty.
-2. **Lean’s tier is the same tier SymPy’s is.** A 3,000× formal-verification penalty is
-   invisible on a 10 ms result check and fatal in a 4.9-GPU-hour campaign.
-   The rule is uniform across this project’s tooling: heavy machinery on results, native
-   code in loops.
+2. **Measure formal replay on a retained result first.** The historical Flyspeck
+   slowdown suggests that a small result check is a more useful first experiment than an
+   entire campaign; it does not establish this project’s eventual slowdown.
 3. **The exact-zero contacts are what make this a formalization problem rather than a
    numerical one — and they are also what makes it tractable.** Fourteen of the 55 pairs
    touch with exactly zero gap, which no floating-point or interval method can certify;
    but in `ℚ(u)` exact zero is a *syntactic* test, which is precisely the kind of thing
    a kernel checks well.
-4. **`native_decide` would undermine the entire point.** It is orders of magnitude
-   faster and trusts the compiler rather than the kernel.
-   Using it for a result whose purpose is third-party verifiability trades away the
-   guarantee to save time we do not need to save.
+4. **Audit axioms as well as build success.** A theorem can build with a placeholder or
+   custom axiom; `native_decide` adds trust in compiled computation.
+   Independent certificate verification requires an explicit account of those
+   dependencies.
 5. **The certificate pattern decouples search speed from trust completely.**
    `K₈(4,2) = 23` ran a SAT solver and shipped LRAT refutations checked inside Lean with
    no solver at replay.
@@ -375,17 +392,17 @@ The
 6. **Formalization has stopped being only transcription, and our other documents needed
    updating.** AlphaProof Nexus resolved 9 open Erdős problems and 44 OEIS conjectures
    autonomously at a few hundred dollars each.
-   This does not put `s(11)` in reach, but it retires the blanket claim that
-   formalization never discovers anything.
-7. **The lemma layer is the highest-value small target, because it is load-bearing and
-   unchecked.** Every proved value of `s(n)` rests on nonavoidance lemmas verified only
-   by human referees, and this repository has already found one misreading in that
-   layer.
+   That work did not produce this project’s later `s(11)` certificate, but it is
+   evidence against the blanket claim that formalization never participates in
+   discovery.
+7. **The nonavoidance lemmas are small diagnostic targets.** They support several solved
+   cases, and this repository has already found one misreading in that layer.
 8. **Flyspeck’s three moves map one-to-one onto this problem.** Nonlinear inequalities
    by interval arithmetic; relaxation to an infeasible LP; a pre-classified
    combinatorial archive imported rather than re-derived.
-   The [`n = 11` report’s](research-2026-08-22-packing-11-unit-squares.md) untaken
-   “fractional LP certificate” is Flyspeck’s second move, waiting.
+   The [`n = 11` report’s](research-2026-08-22-packing-11-unit-squares.md) proposed
+   fractional route now has the retained `381/100` certificate.
+   A compact, formally checked coverage receipt is a further assurance target.
 
 ## Comparison Matrix
 
@@ -397,42 +414,47 @@ Where each layer of assurance stands, for a claim of the form “this packing is
 | Interval arithmetic | No (proves `>`, never `=`) | No | Low | Milliseconds | Implemented in the FrankenSim probe |
 | Exact arithmetic in `ℚ(α)` | Yes | Only if you read our code | Low | 0.35 s (Python) | **Implemented and passing** |
 | Two independent exact implementations | Yes | Partly — a shared bug is unlikely | Medium | Seconds | **Achieved once**, Rust vs Python |
-| Lean proof, `native_decide` | Yes | Weakly — trusts the compiler | Medium | Fast | Not attempted |
-| **Lean proof, kernel-checked** | **Yes** | **Yes** | Weeks, once | Minutes | **Not attempted — the gap** |
+| Lean proof, `native_decide` | Possible | Adds compiler trust | Depends on the formalization | Workload-dependent | Not used in the retained spike |
+| Lean proof without a computation-trusting axiom | Possible | Kernel and declared axioms, with statement review | Unmeasured for the full packing theorem | Unmeasured here | Nine partial lower-bound theorem proofs retained as source; historical build reported, current replay pending; no full packing theorem |
 
 ## Recommendations
 
 Ordered by value per unit of effort, and deliberately small at the start.
 
-1. **Make the verifier emit a certificate rather than a boolean.** Free, immediate, and
-   a prerequisite for everything below: record the separating axis and its sign for each
-   of the strictly separated pairs, and the exact-zero witness for each contact.
-   This is a change to `Certified`’s payload in the infrastructure plan, not a new
-   project.
-2. **Formalize the nonavoidance lemma layer** — Friedman’s Lemmas 1–3, Stromquist’s 1–6.
-   Small, self-contained, single-variable, and load-bearing for every proved value of
-   `s(n)`. Treat it as diagnostic: the interesting outcome is a gap, not a green check.
-3. **Formalize `s(11) ≤ 3.877084…` from the exact witness.** The first formal theorem
-   about `s(n)`, and the artifact that satisfies the third-party-verifiability
-   requirement. Scope it as one packing first; if it works, the record corpus becomes a
-   theorem per analytically-optimized entry.
-4. **Then `s(10) = 3 + ½√2`**, Stromquist’s Theorem 1 — a complete published optimality
-   proof at human scale, and the first formalized.
+1. **Replay the retained Lean spike before relying on its formal status.** Use the
+   committed toolchain and manifest, retain build output, and inspect the nine-theorem
+   axiom audit. No mathematical research is needed for this operational prerequisite.
+2. **Design a compact proof-producing Condition 5 receipt.** The `381/100` result has a
+   short human implication and complete exact Python replay.
+   A partition or range-minimum receipt, with a proof of its coverage, could reduce the
+   cost of independent formal checking.
+   The spike README gives the proposed event-strip decomposition and its missing
+   obligations; no receipt checker has been implemented.
+3. **Make packing verifiers emit certificates suitable for independent checking.** For
+   upper bounds, record the separating axis and its sign for each strictly separated
+   pair and the exact-zero witness for each contact.
+4. **Formalize the nonavoidance lemma layer** — Friedman’s Lemmas 1–3, Stromquist’s 1–6.
+   These small calculus arguments support several solved cases.
+   Check their hypotheses against the published statements before formalizing them.
+5. **Formalize `s(11) ≤ 3.877084…` from the exact witness.** Scope it as one packing
+   first; if it works, the record corpus becomes a theorem per analytically-optimized
+   entry.
+6. **Then `s(10) = 3 + ½√2`**, Stromquist’s Theorem 1, a complete published optimality
+   proof at human scale.
    This is where the lemma layer pays off.
-5. **Evaluate `LeanCert` and `ComputableReal` on one nonavoidance lemma** before
+7. **Evaluate `LeanCert` and `ComputableReal` on one nonavoidance lemma** before
    committing to the unavoidable-set decision procedure.
    Both are young; a single lemma is a cheap probe of whether the interval-arithmetic
    layer is ready.
-6. **Keep an LLM-plus-Lean loop in view for the lemma layer, not for the open cases.**
-   The AlphaProof Nexus result suggests this is now the cheapest way to formalize many
-   small, independently-stated lemmas — which is exactly the shape of item 2.
+8. **Evaluate an LLM-plus-Lean loop on small, independently stated lemmas.** The
+   survey’s formal-proof-search examples motivate an experiment; they do not price this
+   project’s geometry or receipt checker.
 
-**What not to do.** Do not put Lean anywhere near the search loop.
-Do not reach for `native_decide` on a result meant to be third-party verifiable.
-Do not start with a lower bound for an open case — the obstacle is mathematical and Lean
-does not move it. And do not treat formalization as a substitute for the exact verifier:
-the verifier is what makes a search’s output a measurement, at a speed Lean will never
-match.
+Keep formalization separate from the active numerical search until measurements justify
+integration. Start with a compact receipt design before attempting kernel evaluation of
+hundreds of millions of rational cells.
+The Python verifier remains the decision procedure for the retained lower bound while
+those formal proof layers are unfinished.
 
 ## Open Questions
 
@@ -451,6 +473,8 @@ match.
   object?
 - [ ] Could the Gauss-style autoformalization agents that finished dimension 8 be
   pointed at the lemma layer, and at what cost?
+- [ ] What partition or range-minimum receipt lets Lean check the full `n = 11`
+  Condition 5 coverage fact without replaying the search or trusting compiled execution?
 - [ ] Does the 3,000× Flyspeck figure still hold in Lean 4 with modern interval tooling,
   or has it improved? It is a 2013-era measurement on HOL Light.
 
@@ -458,6 +482,18 @@ match.
 
 Conducted 2026-08-22 by web research plus analysis against this repository’s existing
 documents and code.
+
+The 2026-09-06 reconciliation reviewed the seven-file spike and proposed note update
+from commit `04127189a7f08cab35b3c3b6e098d7cc9a729ee0` as untrusted source material.
+The six Lean/build files were retained after source inspection; their README was
+corrected against the current certificate, proof card, and result record.
+The checker at integration commit `7e932f1b` has 329 physical lines, and the current top
+rung has 567,130,649 reachable event cells.
+The source branch reported Lean 4.32.1/Mathlib 4.32.1 builds and an axiom audit using
+standard axioms only.
+This host lacks that pinned toolchain and cache, so the port did not replay syntax,
+elaboration, or kernel checking and does not treat the historical report as a current
+verification receipt.
 
 **Sources consulted directly.** The sphere-packing formalization project pages and
 arXiv:2604.23468; the Flyspeck literature, principally the Taylor-interval verification
@@ -474,9 +510,10 @@ The 57 ns and 23.6 s figures used in the slowdown table are from the
 [infrastructure study’s](research-2026-08-22-infrastructure-for-packing-exploration.md)
 measurements and the record page respectively.
 
-**Not established.** No Lean code was written or run in this session, so every estimate
-of formalization effort is a judgement, not a measurement — the “weeks, not days” figure
-for the `s(11)` upper bound especially.
+**Not established.** Neither Condition 5 nor the full `s(11)` theorem has a retained
+Lean formalization. The nine-theorem spike is source-reviewed here but awaits current
+Lean replay. Every estimate of the remaining formalization effort is a judgement, not a
+measurement, including the “weeks, not days” estimate for the `s(11)` upper bound.
 The claim that no formal theorem about `s(n)` exists for non-trivial `n` is a negative
 result from search and is weak in the usual way: nothing was found, which is not the
 same as nothing existing.

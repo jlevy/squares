@@ -22,6 +22,10 @@ name: Packing validation
 permissions:
   contents: read
 
+env:
+  # Outside the checkout: receipts must not enter source scans or mutation snapshots.
+  PACKING_VALIDATION_ARTIFACT_DIR: ${{ github.workspace }}-validation-artifacts
+
 concurrency:
   # Keyed by event as well as ref, so a scheduled deep run and a push-to-main deep run --
   # both on `refs/heads/main` -- stop cancelling each other.
@@ -225,6 +229,15 @@ jobs:
           packing-validate --skip "exhaustive exact behavioral tests"
           --jobs 2 --inner-jobs 2
 
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
   suite:
     # The pull request's behavioural lane, alone on a runner, and the arithmetic for that
     # is one sentence: a job cannot be shorter than its longest step, and this step was
@@ -276,6 +289,15 @@ jobs:
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --suite --jobs 1 --inner-jobs 1
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
 
   geometry:
     # The second half of the `checks` queue, and the only one of the four pull-request
@@ -329,6 +351,15 @@ jobs:
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --geometry --jobs 3 --inner-jobs 1
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
 
   sweeps:
     # One of the four parts of the pull-request surface, on its own runner and at the
@@ -395,6 +426,15 @@ jobs:
           uv run --frozen --all-extras --group dev
           packing-validate --sweeps --jobs 4 --inner-jobs 2
 
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
   exhaustive:
     # The exhaustive exact tier, on its own runner, reporting its own verdict against its
     # own budget (think-tr2z).
@@ -436,13 +476,23 @@ jobs:
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
 
-      # One step, so `--jobs 1`; `--inner-jobs 2` is the setting the 1943s reading was
-      # taken under, and this job now has the whole two-core runner to spend on it.
+      # Hosted provenance reports four available CPUs. This isolated step can use four
+      # certificate workers, still under actual CPU and grid-memory caps. Concurrent
+      # checkpoint steps retain their two-worker allowance. Speedup is not yet measured.
       - name: Run the exhaustive exact tier
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --only "exhaustive exact behavioral tests"
-          --jobs 1 --inner-jobs 2
+          --jobs 1 --inner-jobs 4
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
 
   packing-required:
     # `!cancelled()` rather than `always()`. With `always()`, a run superseded by the next
@@ -549,3 +599,12 @@ jobs:
           --only "small-n exact models"
           --only "golden basin maps"
           --jobs 4 --inner-jobs 1
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30

@@ -9,9 +9,10 @@ repository, and no float decides anything. ``t-018-proof-card.md``, beside this 
 the theorem with the certificate's own parameters; ``sqpack/fractional/certificate.py``
 proves it and ``sqpack/fractional/sweep.py`` is the same sweep, in the project verifier.
 
-For ``n``, a container side ``L``, a shrunken side ``B``, net half-angle tangents
-``t_k = T k / K`` (net angle ``2 arctan t_k``), atoms ``(x, y, w)`` with ``w >= 0``, and
-``D = max_k (t_k+1 - t_k) / (1 + t_k t_k+1)``, the largest tangent of HALF a net gap:
+For ``n``, a container side ``L``, a shrunken side ``B``, a net parameter ``0 < T < 1``
+and half-angle tangents ``t_k = T k / K`` (net angle ``2 arctan t_k``), atoms
+``(x, y, w)`` with ``w >= 0``, and ``D = max_k (t_k+1 - t_k) / (1 + t_k t_k+1)``,
+the largest tangent of HALF a net gap:
 
   Condition 1  the atoms are invariant under the eight symmetries of ``[0, L]^2``;
   Condition 2  the total weight is strictly below ``n``;
@@ -65,6 +66,16 @@ def refuse(message):
     raise ValueError(message)
 
 
+def object_without_duplicate_keys(pairs):
+    """Build one JSON object, refusing a name whose second value would hide its first."""
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            refuse(f"duplicate JSON object key {key!r}")
+        result[key] = value
+    return result
+
+
 def rational(value, field):
     """Exact rationals arrive as strings; a JSON number would be a float, and is refused."""
     if not isinstance(value, str):
@@ -77,7 +88,7 @@ def load(path, *, pinned):
     digest = hashlib.sha256(raw).hexdigest()
     if pinned and digest != PINNED_SHA256:
         refuse(f"SHA-256 {digest} is not the pinned {PINNED_SHA256}")
-    record = json.loads(raw)
+    record = json.loads(raw, object_pairs_hook=object_without_duplicate_keys)
     variant = record.get("variant", "unconditional")
     if variant != "unconditional":
         refuse(f"variant {variant!r} declared; only unconditional certificates are decided")
@@ -247,8 +258,10 @@ def verify(path, *, pinned=True):
     print(f"Condition 2  PASS  total mass {total} = {float(total):.6f} < {n}")
 
     limit, steps = rational(record["angle_limit"], "angle_limit"), record["direction_steps"]
-    if not isinstance(steps, int) or steps < 1 or limit <= 0:
-        refuse(f"a net of {steps} steps up to {limit} is not a net")
+    if not isinstance(steps, int) or steps < 1:
+        refuse(f"a net of {steps} steps is not a net")
+    if not 0 < limit < 1:
+        refuse(f"angle_limit T = {limit} is outside the supported range 0 < T < 1")
     tangents = [limit * step / steps for step in range(steps + 1)]
     slack = limit * limit + 2 * limit - 1
     if slack < 0:

@@ -45,6 +45,7 @@ import numpy as np
 from scipy import sparse
 
 from sqpack.fractional.ceiling import (
+    INTERSECTION_MARGIN,
     NEAR_PARALLEL,
     SCREEN_MARGIN,
     CeilingCertificate,
@@ -53,8 +54,10 @@ from sqpack.fractional.ceiling import (
     Placement,
     arrangement_lines,
     container_vertices,
+    depth_screening_is_safe,
     exact_intersection,
     float_family,
+    intersection_screening_is_safe,
     loose_membership,
     verify_ceiling,
 )
@@ -244,30 +247,45 @@ def depths_above(
     """Every vertex whose exact depth exceeds ``threshold``, the exact maximum,
     and how many vertices were decided exactly.
 
-    The screen is `ceiling.maximum_depth`'s: a vertex whose loosened float depth
-    is below ``threshold - SCREEN_MARGIN`` cannot exceed the threshold. On the
-    vertices that survive, a placement that contains the point with the margin
-    to spare is a member and one that misses it by the margin is not, so only
-    the placements whose edge passes within the margin of the vertex -- the two
-    that made it, typically -- are decided by exact arithmetic.
+    The screen is `ceiling.maximum_depth`'s, with its checked bounds and an
+    exact fallback outside them. It retains the maximum even below threshold.
+    On the vertices that survive, a placement that contains the point with the
+    margin to spare is a member and one that misses it by the margin is not,
+    so only the placements whose edge passes within the margin of the vertex
+    -- the two that made it, typically -- are decided by exact arithmetic.
     """
 
     if not vertices:
         return [], Fraction(0), 0
+    if not depth_screening_is_safe(certificate, vertices):
+        found = []
+        worst = Fraction(0)
+        for x, y in vertices:
+            value = sum(
+                (p.weight for p in certificate.placements if p.contains(x, y)),
+                start=Fraction(0),
+            )
+            worst = max(worst, value)
+            if value > threshold:
+                found.append((value, x, y))
+        found.sort(key=lambda entry: (-entry[0], entry[1], entry[2]))
+        return found, worst, len(vertices)
     normals, offsets, halves, weights = float_family(certificate)
     points = np.array([[float(x), float(y)] for x, y in vertices])
     placements = certificate.placements
     found: list[tuple[Fraction, Fraction, Fraction]] = []
     worst = Fraction(0)
     decided = 0
-    limit = float(threshold) - SCREEN_MARGIN
+    # Clamping changes no candidate decision: depths are nonnegative and at
+    # most the total weight, while arbitrary thresholds need not fit binary64.
+    threshold_float = float(max(Fraction(0), min(threshold, certificate.total_weight)))
     chunk = max(1, 2_000_000 // max(1, len(placements)))
     tight = halves[None, :] - SCREEN_MARGIN
     for start in range(0, points.shape[0], chunk):
         block = points[start : start + chunk]
         loose = loose_membership(block, normals, offsets, halves)
         depth = loose.astype(float) @ weights
-        candidates = np.flatnonzero(depth >= limit)
+        candidates = np.flatnonzero(depth >= min(threshold_float, float(worst)) - SCREEN_MARGIN)
         if candidates.size == 0:
             continue
         sub = block[candidates]
@@ -275,6 +293,8 @@ def depths_above(
         second = np.abs(sub @ normals[:, 1, :].T - offsets[None, :, 1]) <= tight
         strict = first & second
         for local, index in enumerate(candidates):
+            if depth[index] < min(threshold_float, float(worst)) - SCREEN_MARGIN:
+                continue
             x, y = vertices[start + int(index)]
             exact = Fraction(0)
             for member in np.flatnonzero(strict[local]):
@@ -308,20 +328,17 @@ def select_site_orbits(
 
     held = {point for orbit in sites.orbits for point in orbit}
     chosen: list[tuple[Fraction, tuple[tuple[Fraction, Fraction], ...]]] = []
-    chosen_points: list[tuple[float, float]] = []
+    chosen_points: list[tuple[Fraction, Fraction]] = []
+    radius = Fraction(cluster_radius)
     for depth, x, y in deep:
         orbit = d4_orbit(x, y, outer_side)
         if any(point in held for point in orbit):
             continue
-        fx, fy = float(x), float(y)
-        if any(
-            abs(fx - px) <= cluster_radius and abs(fy - py) <= cluster_radius
-            for px, py in chosen_points
-        ):
+        if any(abs(x - px) <= radius and abs(y - py) <= radius for px, py in chosen_points):
             continue
         held.update(orbit)
         chosen.append((depth, orbit))
-        chosen_points.extend((float(px), float(py)) for px, py in orbit)
+        chosen_points.extend(orbit)
         if len(chosen) >= cap:
             break
     return chosen
@@ -333,16 +350,21 @@ def float_vertices(
     """Every pairwise intersection inside the container, in floats, with its two
     lines; nearly parallel pairs are decided exactly and their exact point kept.
 
-    The float points only screen. A vertex that matters is rebuilt exactly from
-    the two lines that made it, which is how `colgen.rank_candidates` reads the
-    same arrangement. Float-identical duplicates are dropped; exact duplicates
-    that differ in the last float digit survive and cost one extra decision.
+    The coefficient envelope is checked before conversion. Inside it each float
+    coordinate is within 1e-7 of the exact one, well inside the
+    INTERSECTION_MARGIN padding, and the points only screen. A vertex that
+    matters is rebuilt exactly from the two lines that made it, which is how
+    `colgen.rank_candidates` reads the same arrangement. Float-identical points
+    are retained: different rational vertices can round to the same point and
+    have different exact depths.
     """
 
     side = certificate.outer_side
+    if not intersection_screening_is_safe(certificate, lines):
+        raise ValueError("floating vertices require the checked coefficient envelope")
     data = np.array([[float(a), float(b), float(c)] for a, b, c in lines])
     count = len(lines)
-    high = float(side) + SCREEN_MARGIN
+    high = float(side) + INTERSECTION_MARGIN
     xs: list[np.ndarray] = []
     ys: list[np.ndarray] = []
     firsts: list[np.ndarray] = []
@@ -356,7 +378,13 @@ def float_vertices(
         safe = np.where(far, determinant, 1.0)
         x = (e * d - f * b) / safe
         y = (a * f - c * e) / safe
-        inside = far & (x >= -SCREEN_MARGIN) & (x <= high) & (y >= -SCREEN_MARGIN) & (y <= high)
+        inside = (
+            far
+            & (x >= -INTERSECTION_MARGIN)
+            & (x <= high)
+            & (y >= -INTERSECTION_MARGIN)
+            & (y <= high)
+        )
         index = np.flatnonzero(inside)
         xs.append(x[index])
         ys.append(y[index])
@@ -374,10 +402,6 @@ def float_vertices(
     else:
         points = np.zeros((0, 2))
         pairs = np.zeros((0, 2), dtype=np.int64)
-    if points.shape[0]:
-        _, keep = np.unique(points, axis=0, return_index=True)
-        keep.sort()
-        points, pairs = points[keep], pairs[keep]
     cache: dict[int, tuple[Fraction, Fraction]] = {}
     for i, j, exact in exact_points:
         cache[points.shape[0]] = exact
@@ -388,7 +412,13 @@ def float_vertices(
 
 @dataclass(slots=True)
 class Separation:
-    """What one exact separation found: the maximum, its cost, and the new sites."""
+    """What one exact separation found: the maximum, its cost, and the new sites.
+
+    ``violating`` is a count for the log: on the exact path it is the number of
+    vertices whose exact depth exceeds the selection threshold, and on the
+    screened path it is the number the float screen could not rule out, an
+    upper bound on that. Nothing decides on it.
+    """
 
     max_depth: Fraction
     decided: int
@@ -419,6 +449,27 @@ def screened_separation(
     tightens as the walk proceeds. Sites are chosen from the same walk.
     """
 
+    if not depth_screening_is_safe(certificate) or not intersection_screening_is_safe(
+        certificate, lines
+    ):
+        vertices = container_vertices(certificate, lines)
+        deep, worst, decided = depths_above(certificate, vertices, select_above)
+        return Separation(
+            worst,
+            decided,
+            len(vertices),
+            len(deep),
+            select_site_orbits(
+                deep,
+                sites,
+                certificate.outer_side,
+                cap=cap,
+                cluster_radius=cluster_radius,
+            )
+            if cap > 0
+            else [],
+        )
+
     side = certificate.outer_side
     points, pairs, cache = float_vertices(certificate, lines)
     total = int(points.shape[0])
@@ -426,35 +477,45 @@ def screened_separation(
         return Separation(Fraction(0), 0, 0, 0, [])
     normals, offsets, halves, weights = float_family(certificate)
     placements = certificate.placements
+    # Each approximate intersection coordinate has error < 1e-7. A unit
+    # normal projects both errors with total < 2e-7, so this 2e-6 margin
+    # covers them plus the rounded-point projection error. The 1e-8 depth
+    # sum margin alone would not justify these membership tests.
+    membership_margin = 2 * INTERSECTION_MARGIN
     depth = np.zeros(total)
     chunk = max(1, 2_000_000 // max(1, len(placements)))
     for start in range(0, total, chunk):
         block = points[start : start + chunk]
         depth[start : start + chunk] = (
-            loose_membership(block, normals, offsets, halves).astype(float) @ weights
+            loose_membership(block, normals, offsets, halves, margin=membership_margin).astype(
+                float
+            )
+            @ weights
         )
     order = np.argsort(-depth, kind="stable")
-    floor = float(select_above)
-    violating = int(np.count_nonzero(depth > floor))
+    floor = float(max(Fraction(0), min(select_above, certificate.total_weight)))
+    # The same loosened comparison the site walk uses below, so the logged count
+    # never says nothing violated on an iteration that went on to add cuts.
+    violating = int(np.count_nonzero(depth >= floor - SCREEN_MARGIN))
     held = {point for orbit in sites.orbits for point in orbit}
     best = Fraction(0)
     decided = 0
     chosen: list[tuple[Fraction, tuple[tuple[Fraction, Fraction], ...]]] = []
     cluster = np.zeros((8 * max(cap, 1), 2))
     filled = 0
-    tight = halves[None, :] - SCREEN_MARGIN
+    tight = halves[None, :] - membership_margin
     finished = False
     for start in range(0, total, 256):
         block_index = order[start : start + 256]
         sub = points[block_index]
-        loose = loose_membership(sub, normals, offsets, halves)
+        loose = loose_membership(sub, normals, offsets, halves, margin=membership_margin)
         first = np.abs(sub @ normals[:, 0, :].T - offsets[None, :, 0]) <= tight
         second = np.abs(sub @ normals[:, 1, :].T - offsets[None, :, 1]) <= tight
         strict = first & second
         for local, index in enumerate(block_index):
             float_depth = float(depth[index])
             wants_max = float_depth >= float(best) - SCREEN_MARGIN
-            wants_site = len(chosen) < cap and float_depth > floor
+            wants_site = len(chosen) < cap and float_depth >= floor - SCREEN_MARGIN
             if not wants_max and not wants_site:
                 finished = True
                 break
@@ -638,6 +699,7 @@ def cutting_plane_loop(
     weight_denominator: int = 10**9,
     select_above: Fraction = Fraction(1000001, 1000000),
     exact_scan: bool = False,
+    stop_on_covering_below_n: bool = False,
     log_sinks: Sequence[TextIO] = (),
     state_path: Path | None = None,
 ) -> CuttingLog:
@@ -653,7 +715,11 @@ def cutting_plane_loop(
 
     Per-iteration progress goes to every handle in ``log_sinks`` and nowhere
     else; the default is silence, and a caller wanting a terminal transcript
-    passes ``sys.stdout`` among them.
+    passes ``sys.stdout`` among them. ``stop_on_covering_below_n`` stops after
+    recording exact separation when a completed row solve has a finite
+    covering objective below ``n``, and refuses a non-finite converged
+    objective before publishing an iteration or checkpoint; it does not
+    change the default loop.
     """
 
     if n < 1:
@@ -679,6 +745,17 @@ def cutting_plane_loop(
             rows_per_direction=rows_per_direction,
             deadline=deadline,
         )
+        if (
+            stop_on_covering_below_n
+            and solution.converged
+            and not math.isfinite(solution.objective)
+        ):
+            reason = (
+                "technical refusal: non-finite row-converged covering objective "
+                f"at iteration {index}"
+            )
+            _write(log_sinks, "  failed: " + reason)
+            raise RuntimeError(reason)
         for held in range(len(exact_rows), len(rows)):
             direction = rows.directions[held]
             x, y = snap_centre(
@@ -736,6 +813,17 @@ def cutting_plane_loop(
                 ),
             )
         else:
+            if not depth_screening_is_safe(family) or not intersection_screening_is_safe(
+                family, lines
+            ):
+                # The exact path is orders of magnitude slower than the screen,
+                # and a run that crosses the envelope should say so in its log
+                # rather than appear to hang.
+                _write(
+                    log_sinks,
+                    "  separation: the family is outside the floating envelope, "
+                    "deciding every vertex exactly",
+                )
             separation = screened_separation(
                 family, lines, sites, cap=cap, select_above=select_above
             )
@@ -792,22 +880,33 @@ def cutting_plane_loop(
                 log=log,
             )
 
-        if worst <= 1:
-            if raw_total >= n:
-                log.verdict = verify_ceiling(family)
-                record.note = (
-                    f"verify_ceiling: proved={log.verdict.proved} {log.verdict.failures}"
-                )
-                _write(log_sinks, "  " + record.note)
-                if log.verdict.proved:
-                    log.stopped = f"ceiling proved at iteration {index}"
-                    break
-            if solution.converged:
-                log.stopped = (
-                    f"feasible family below n with converged rows at iteration {index}: "
-                    "the discretised program is at its optimum on this site set"
-                )
+        if worst <= 1 and raw_total >= n:
+            log.verdict = verify_ceiling(family)
+            record.note = f"verify_ceiling: proved={log.verdict.proved} {log.verdict.failures}"
+            _write(log_sinks, "  " + record.note)
+            if log.verdict.proved:
+                log.stopped = f"ceiling proved at iteration {index}"
                 break
+        if stop_on_covering_below_n and solution.converged and solution.objective < n:
+            log.stopped = f"row-converged covering objective below n at iteration {index}"
+            record.note = log.stopped
+            _write(log_sinks, "  stopped: " + log.stopped)
+            if state_path is not None:
+                save_state(
+                    state_path,
+                    outer_side=outer_side,
+                    square_side=square_side,
+                    sites=sites,
+                    exact_rows=exact_rows,
+                    log=log,
+                )
+            break
+        if worst <= 1 and solution.converged:
+            log.stopped = (
+                f"feasible family below n with converged rows at iteration {index}: "
+                "the discretised program is at its optimum on this site set"
+            )
+            break
         selected = separation.chosen
         if not selected and worst <= select_above:
             log.stopped = f"no vertex exceeds {float(select_above):.7f} at iteration {index}"

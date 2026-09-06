@@ -6,6 +6,12 @@
 
 **Status:** Both phases landed 2026-08-30, under `BC-077` and `BC-079` in agenda-007
 
+**Current follow-up:**
+[Validation Efficiency and Checkpoints](plan-2026-09-06-validation-efficiency-and-checkpoints.md)
+owns the 2026-09-06 W5 work on current feedback, final checkpoints, naming, and timing
+records. This completed plan retains the dated measurements and decisions below;
+[development.md](../../../../development.md#validation-loops) owns current usage.
+
 ## Overview
 
 Make the validation surface fast enough that the checks which actually catch defects get

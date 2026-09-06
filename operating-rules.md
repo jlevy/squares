@@ -257,8 +257,8 @@ This equivalence does not make host-sensitive measurements portable.
 Timing, floating-point last bits, nondeterministic search trajectories, or any method
 whose criterion names the machine or operator still needs the preregistered regime or a
 fresh prospective one.
-Exact-algebraic work with a verified hash chain and identical controls may resume across
-the bridge; a result whose meaning depends on the bridge may not.
+Exact-algebraic work with the same committed inputs and identical controls may resume
+across the bridge; a result whose meaning depends on the bridge may not.
 
 The cost was paid in
 [session-078](packing/campaign/agent-sessions/session-078-agenda015-ten-hour-coordinator.md):
@@ -363,18 +363,26 @@ And the cheap checks are where the catching happens.
 All eight failures CI found on the `T-021` branch that day were record-to-artifact
 consistency checks — does a register row match the certificate it names, does the
 synopsis match the ledger, does the reach table match the corpus — and all eight
-together cost 0.46 s. The expensive tests re-derive mathematics already decided and
-frozen. **A check that compares two artifacts is cheap and catches drift; a check that
-re-derives a frozen result is expensive and catches almost nothing between one release
-of the code and the next.** That is the boundary, and it is a property of what a check
-does rather than a list of which tests are slow today.
+together cost 0.46 s. In that sample, cheap comparisons caught the observed drift.
+Expensive re-derivation may still supply independent evidence that no comparison can
+replace. Decide placement from each check’s contract and measured cost; a history with
+few failures does not show that its evidence is redundant.
 
-Three surfaces follow from it.
-**The pull-request surface** is every check that is not unavoidably slow, priced to be
-paid on every push. **The deep surface** carries the ones that are, and runs where it
-does not block a pull request.
-**The full gate** is everything, and it is what a block ends with — the `OR-11`
-closeout, the end of a research block, and before a pull request is marked ready.
+Use the **PR fast surface** for feedback on ordinary commits.
+The **deferred checkpoint** carries the expensive checks; combined with the fast surface
+on matching source and base, it provides the **full checkpoint**. Obtain that full
+evidence before final pre-merge review and at a research block’s close.
+Recheck any part invalidated by later source, dependency, configuration, or base
+changes. Daily and post-merge checks remain backstops, and do not substitute for the
+final pre-merge checkpoint.
+
+Expense must be justified by independent evidence and by the implementation’s cost.
+Preserve distinct correctness contracts and failure localization while reducing shared
+setup, duplicate computation, and avoidable serial work.
+A check is not dispensable merely because it has caught no recent failure.
+The
+[validation efficiency plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
+owns the current review of this placement and cost.
 
 A terminal session names its full-gate run in its `checks`: the tier, the commit it ran
 on, and the verdict.
@@ -389,7 +397,7 @@ rotted; the split has to be something the gate computes and can refuse.
 ## General principles
 
 `OR-1` through `OR-13` say how a particular thing is done here.
-The two below are different in kind: they are the standing principles those procedures
+The three below are different in kind: they are the standing principles those procedures
 answer to, and when a procedure and a principle disagree it is the procedure that is
 wrong. They are stated separately so that a future agent inheriting a rule it finds
 pointless has somewhere to check what the rule was for.
@@ -418,15 +426,35 @@ than the tier’s own wall produces **no completed run at all** — three runs o
 were cancelled that way before the pattern was seen.
 On 2026-09-05 a single test fix cost twenty-three minutes to verify, four times over.
 
+The target applies to ordinary PR feedback.
+A full final checkpoint may take longer, but its measured duration is still open to
+improvement. Twenty-seven minutes observed on one checkpoint is not a necessary minimum.
+Plan the expensive checks for final review, retain the source and base they checked, and
+refresh invalidated evidence rather than paying that cost on every editing cycle.
+
+**Record detailed timings for long-running work.** Every long-lived run or test must
+leave durable, machine-readable timing records and a readable summary.
+Attribute time to individual tests, mutation controls, and phases; separate queue,
+setup, and execution where those stages exist.
+Record source identity, configuration, worker counts, and outcome, including failures
+and cancellations. Aggregate elapsed time alone is insufficient.
+If the instrument cannot report this detail, add it before accepting a performance
+claim; a cancelled run must retain its partial evidence.
+The
+[validation efficiency plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
+tracks implementation and acceptance of this requirement; the rule does not assert that
+every existing runner already complies.
+
 What this rule requires in practice:
 
 - **Attribute, do not absorb.** “CI is slow” is not actionable; “`fast behavioral tests`
   is 408.09 s of a 408.55 s wall” is, and it is what showed that no arrangement of
   GitHub jobs could help and the parallelism had to go *inside* the step.
-- **Never restart a green pull request’s CI for a change that does not affect that pull
-  request’s own checks.** Carry it on the follow-up branch.
-  This was violated the day the rule was written: a deep-gate-only control fix restarted
-  a twenty-three-minute cycle on an already-green, already-mergeable commit.
+- **Keep unrelated changes off a ready pull request.** Use a follow-up branch for work
+  that does not affect its contract.
+  A fix needed to pass its full final checkpoint belongs before the merge, even if the
+  fast surface is already green.
+  Record which earlier evidence it invalidates and rerun those checks.
 - **Parallelise by default.** Work that can run concurrently should, and the question to
   ask of a serial gate is why it is serial, not whether the split is worth the trouble.
   The gains here have been large and repeatable: a marker split took the tier 1369.60 s
@@ -450,8 +478,13 @@ What this rule requires in practice:
 ### OR-15: Outcome over ceremony, and process is revised on a cadence rather than on irritation
 
 A process step is justified by what it catches or produces.
-One that catches nothing and produces nothing is ceremony, and ceremony is not free: it
-costs the time it takes and the attention it spends, and it teaches people that the
+Review its independent contract, repeated work, implementation cost, and cheaper
+equivalent evidence before changing its placement.
+Keep immediate feedback useful on ordinary commits and obtain full evidence at the final
+pre-merge checkpoint, as defined in
+[the validation guide](development.md#validation-loops).
+A step that catches nothing and produces nothing is ceremony, and ceremony is not free:
+it costs the time it takes and the attention it spends, and it teaches people that the
 process is theatre, which is what makes them skip the parts that matter.
 
 **The rule cuts both ways, and the second direction is the one that gets forgotten.** It
@@ -472,6 +505,29 @@ Between those blocks, follow the process where it is inconvenient and record the
 friction with evidence, rather than routing around it in the moment.
 Friction noticed during a research slice is an input to the next efficiency block, not a
 licence to change the rules mid-slice.
+
+### OR-16: Use Git for repository integrity; reserve checksums for real trust boundaries
+
+Identify committed source, results, and review packets by Git revision and
+repository-relative path.
+Do not add SHA-256 manifests beside those files or hash both sides of a trusted
+save-and-read round trip.
+Compare complete content or regenerated semantic results when a check needs to detect
+drift.
+
+A checksum must name the boundary it crosses, its independently supplied expected value,
+and the failure it detects.
+A downloaded artifact or a proof certificate distributed for independent checking can
+justify one; a local handoff alone does not.
+Keep existing frozen evidence intact, but do not repeat its digests in each new plan or
+review. The detailed policy is in
+[development.md](development.md#hashes-and-repository-owned-artifacts) and
+`tbd guidelines general-coding-rules`.
+
+The owner requested this rule on 2026-09-06 after the PR #97 continuation added
+duplicate packet hashes and a checker-side manifest for files already tracked together
+in Git. `think-jyf4` tracks their removal.
+Include this rule when briefing subagents that create artifacts or validation checks.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
