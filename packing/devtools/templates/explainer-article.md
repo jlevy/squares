@@ -45,33 +45,35 @@ ${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.
 The computer-assisted proof was found via an automated research framework run over a few
 days. The witness used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted
 points in the container and selects a net of {{HEADLINE_N_DIRECTIONS}} rationally
-parameterized directions. Five exact conditions and a pigeonhole-style argument then
-imply the claim.
+parameterized directions.
+Five exact conditions and a pigeonhole-style argument then imply the claim.
 
 This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
-open case of the square packing problem. The previous bound, {{PRIOR_LOWER_DEC}}, was
-Stromquist’s in {{PRIOR_YEAR}}.[^stromquist]
+open case of the square packing problem.
+The previous bound, {{PRIOR_LOWER_DEC}}, was Stromquist’s in
+{{PRIOR_YEAR}}.[^stromquist]
 
 The search, the checking, and the record are the work of agents under human direction
 rather than human derivation.
 
 This is one of {{N_RESULTS}} results registered over a few days, all within the same
-automated research framework. The work sits inside a broader survey of the research
-frontier of this problem. The atlas of best known packings for every $n$ from 1 to 100
-in Figure 1 came from the same program, which proved {{N_STARRED}} of the lower bounds
-shown there.
+automated research framework.
+The work sits inside a broader survey of the research frontier of this problem.
+The atlas of best known packings for every $n$ from 1 to 100 in Figure 1 came from the
+same program, which proved {{N_STARRED}} of the lower bounds shown there.
 
 Most of the research work is not the proof but the process and artifacts that produced
-it. The repository includes a comprehensive survey of the research frontier, a
-hypothesis registry, an experiment ledger, exact verifiers, a research loop, an
-optimization loop for efficiency, and a retention gate that keeps results only when
-independent validation methods agree.
+it.
+The repository includes a comprehensive survey of the research frontier, a hypothesis
+registry, an experiment ledger, exact verifiers, a research loop, an optimization loop
+for efficiency, and a retention gate that keeps results only when independent validation
+methods agree.
 
-None of this is particular to square packing. It is a reusable framework for iterative
-research on creative mathematical and technical problems. The framework uses a few tools
-to streamline the process, notably [tbd](https://github.com/jlevy/tbd),
-[softschema](https://github.com/jlevy/softschema), and
-[Practical Prose](https://github.com/jlevy/practical-prose).
+None of this is particular to square packing.
+It is a reusable framework for iterative research on creative mathematical and technical
+problems. The framework uses a few tools to streamline the process, notably
+[tbd](https://github.com/jlevy/tbd), [softschema](https://github.com/jlevy/softschema),
+and [Practical Prose](https://github.com/jlevy/practical-prose).
 
 ## The Square Packing Problem
 
