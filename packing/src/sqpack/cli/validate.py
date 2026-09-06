@@ -35,6 +35,7 @@ from pathlib import Path
 from threading import Lock
 from typing import Literal, Never, override
 
+from sqpack import gate_budgets
 from sqpack.project import (
     ProjectLayoutError,
     add_version_argument,
@@ -56,11 +57,89 @@ SUPPORTED_PYTHON = (3, 14)
 BASIN_EVENT_CONTRACT_PREFIX = "packing.squares:BasinEvent/"
 PROCESS_TERMINATION_GRACE_SECONDS = 1.0
 DEFAULT_TIMEOUT_SECONDS = 900.0
+#: The tiers this command can select as a whole, and therefore the tiers that must
+#: carry a declared ceiling in `devtools/gate-budgets.yaml`. `devtools.check_gate_budgets`
+#: compares the two sets in both directions, so a tier added here without a ceiling fails
+#: the records tier rather than silently running uncapped.
+#: The tier-selecting flags, narrowest first: `--records --fast` is the records tier.
+#: `test_every_boolean_flag_is_classified` refuses a new `store_true` flag that appears in
+#: neither this tuple nor its allow-list, so a tier cannot be added without deciding
+#: whether it needs a ceiling.
+TIER_FLAGS = ("push", "records", "edit", "checks", "sweeps", "fast")
+TIER_IDS = (*TIER_FLAGS, "full")
 #: The budget of the whole non-exhaustive suite, read by `fast behavioral tests` and by
 #: `--push` when its selector expands to everything (D-432). The two run the same suite
 #: through two entry points, so they carry one number; the argument for the number is
 #: written beside the `fast behavioral tests` step, where the measurements are.
+#:
+#: This is the *per-subprocess* cap, and on its own it is not a cost guard: on 2026-08-30
+#: the tier it caps cost 499s, and by 2026-09-05 it cost 1369.60s, entirely inside this
+#: number. What the tier is allowed to cost is declared in `devtools/gate-budgets.yaml`
+#: and enforced by `sqpack.gate_budgets` against each run's own wall.
 FAST_SUITE_BUDGET_SECONDS = 1800.0
+#: The three behavioural lanes, as pytest marker expressions.
+#:
+#: They partition the suite: whatever markers a test carries, it satisfies exactly one of
+#: the three, so no test can land in two lanes and none can land in none.
+#: `test_the_behavioral_lanes_partition_every_test` checks that rather than trusting it.
+#:
+#: The split is `BC-214`. Before it, one lane ran every non-exhaustive test on every pull
+#: request: 1369.60s on CI's two-core runner on 2026-09-05 (run 33982455466), 96.7 per
+#: cent of the whole pull-request surface. The eight failures that run caught were all
+#: sub-0.15-second tests -- 0.46s of call time between them -- so the wall was not where
+#: the detection was, and deferring the whole lane would have thrown away nearly all of
+#: the value for nearly none of the cost.
+QUICK_TESTS = "not exhaustive_exact and not slow"
+SLOW_TESTS = "slow and not exhaustive_exact"
+EXHAUSTIVE_TESTS = "exhaustive_exact"
+#: The pull-request surface's per-test ceiling, in seconds of pytest `call` time.
+#:
+#: This is the boundary between `QUICK_TESTS` and `SLOW_TESTS`, and it is a rule rather
+#: than a list on purpose: `fast behavioral tests` passes it to pytest as
+#: `--durations-min` and fails when any test it ran reports at or above it, naming the
+#: test. A hand-kept list of slow tests would rot exactly the way the 499s figure in this
+#: module's own docstring rotted -- silently, because nothing read it.
+#:
+#: Two numbers, deliberately, and the gap between them is runner variance. Tests are
+#: *marked* at 2s, which is what keeps the lane inside its budget; the gate *fails* at
+#: this ceiling, which leaves the slowest retained test about a factor of two of headroom
+#: so an ordinarily loaded runner cannot turn a passing test into a red pull request. A
+#: single number would have to be one or the other, and a ceiling that is also the
+#: marking threshold is a ceiling that flaps.
+#:
+#: The `call` phase, not setup or teardown, because a module-scoped fixture bills its
+#: whole cost to whichever test happens to trigger it first: `test_every_control_rejects`
+#: in `test_n5_local_rigidity.py` reports 13.1s of setup that belongs to the `determination`
+#: fixture three other tests in that file also use, and marking that one test would move
+#: the cost rather than remove it. A setup phase over the ceiling means the module moves,
+#: which is a judgement, not an automatic one.
+QUICK_TEST_CEILING_SECONDS = 5.0
+#: The other direction, and it exists because `OR-13` is a floor on coverage rather than a
+#: budget on time: a test leaves the pull-request surface by its own measured cost and
+#: nothing else, so a `slow` marker on a test that is no longer slow is coverage the
+#: pull-request surface has lost for no reason anybody measured. `slow behavioral tests`
+#: fails when a test it ran reports a `call` phase below this, naming it, and the fix is to
+#: delete the marker.
+#:
+#: Compared per test *function*, taking its slowest parametrization, because that is the
+#: granularity a marker has: a decorator on a `def` defers every case of a parametrized
+#: test at once, so one cheap case says nothing about whether the marker is still earned.
+#: The ceiling above is compared per node, because there the question is the opposite one
+#: -- what the pull-request surface actually pays for a single test it ran.
+#:
+#: The two numbers leave a band -- 1s to 5s -- where the gate says nothing in either
+#: direction, and the band is the point. Marking is done at 2s, in the middle of it, so a
+#: test near the boundary can move either way under ordinary runner variance without
+#: turning a passing suite red. A single number would make every borderline test a coin
+#: toss on every run; the measured distribution has 46 tests between 1s and 2s, which is
+#: exactly the population a tight cutoff would flap on.
+#:
+#: What stops the quick lane creeping upward *in aggregate*, since a test at 4s passes the
+#: ceiling, is not this pair but `devtools/gate-budgets.yaml`: the `fast` tier declares a
+#: ceiling there that the gate reads and enforces against its own wall. One test getting
+#: big is caught here; the tier getting big is caught there; neither is prose. The figure
+#: is deliberately not repeated here -- a second copy is the thing that rots.
+SLOW_TEST_FLOOR_SECONDS = 1.0
 #: The budget of the exhaustive exact tier: every complete finite certificate decision
 #: the fast tier defers. Measured on 2026-09-05 at 39 tests: 892s on CI's two-core
 #: runner (run 33932095609, eight seconds under the 900s cap it had been inheriting) and
@@ -212,10 +291,13 @@ class Step:
     """Excluded from `--edit` because its cost is breadth rather than what it uniquely
     catches.
 
-    Measured on 2026-08-30: `--fast` is 499s and `fast behavioral tests` is 499s of it,
-    so the other seventeen fast steps together cost about 48 seconds. A tier priced at
-    the cost of its widest step is a tier people skip, which is the mechanism `D-369`
-    records -- seven CI failures, every one a record check, none a behavioural test.
+    What each tier costs is recorded in `devtools/gate-budgets.yaml` and read by the
+    gate, not written here. This paragraph used to carry the number -- "measured on
+    2026-08-30, `--fast` is 499s and `fast behavioral tests` is 499s of it" -- and six
+    days later the tier cost 1369.60s with nothing objecting, because a number a machine
+    does not read is a number that drifts. A tier priced at the cost of its widest step
+    is a tier people skip, which is the mechanism `D-369` records -- seven CI failures,
+    every one a record check, none a behavioural test.
 
     **The default is the safe direction on purpose.** A new step is in the edit tier
     unless it says otherwise, so forgetting this flag makes the tier slower rather than
@@ -224,6 +306,33 @@ class Step:
 
     Being excluded from `--edit` is not being excluded from the gate. Every broad step
     still runs in `--fast` and above, and CI runs the full gate on every push."""
+
+    sweep: bool = False
+    """This step re-derives a retained atlas from its witnesses, and it is expensive
+    enough that the pull request runs it on a second runner rather than beside the rest.
+
+    `fast` says *whether* a pull request runs a step; this says *which of the pull
+    request's two jobs* runs it. Every sweep is also `fast`, the two selections are
+    complements within `--fast`, and
+    `test_the_pull_request_jobs_partition_the_surface` reads the workflow and checks
+    both halves of that against what CI actually invokes -- so a step cannot land in
+    neither job, and no step is paid for twice.
+
+    The boundary is a measurement, not a topic. Four steps carry it, and on CI's
+    four-cpu runner at commit `30706bcb` they cost 598.9s of the tier's 1,100s of step
+    time: the prospective seed at 213.2s, the known-best chunk census at about 181s, the
+    translation-escape screen at 130.8s, and the rest of the known-best atlas at about
+    74s. Nothing else in the tier is above 90s. They are also one kind of work -- each
+    rebuilds the retained atlas from the hundred-odd witnesses and compares it byte for
+    byte -- which is why the split is stable: a step joins this set by being measured
+    into it, and `test_the_pull_request_runs_its_sweeps_on_a_second_runner` is where the
+    number has to be typed.
+
+    Why a second runner rather than a wider one, and this is the whole arithmetic. The
+    tier is about 1,100s of step time on four cpus, so one job cannot go below 275s
+    however it is scheduled, and it does not get there anyway: the sweeps and the quick
+    lane are the four longest steps and they queue behind each other. Two jobs is eight
+    cpus, and the split is where it is because it leaves both halves the same size."""
 
     touches: tuple[str, ...] = ()
     """Repo-relative path globs whose change can affect this step's verdict.
@@ -295,6 +404,10 @@ class Step:
     @property
     def tags(self) -> str:
         tags = ["fast" if self.fast else "full"]
+        if self.sweep:
+            tags.append("sweeps")
+        elif self.fast:
+            tags.append("checks")
         if self.fast and not self.broad:
             tags.append("edit")
         if self.records:
@@ -330,6 +443,10 @@ class RunSummary:
     narrowing produced a partial surface. A run that skipped one named step is not the
     same thing as a tier, and reporting it as one is how a job that quietly stopped
     running something looks exactly like a job that was never meant to."""
+    budget: gate_budgets.Verdict | None = None
+    """What this run's wall says about the tier it ran, or `None` when the register could
+    not be read. Carried on the summary so `--format json` reports the cost verdict to a
+    machine, which is the difference between this and the docstring it replaces."""
 
 
 def _timeout_output(error: subprocess.TimeoutExpired) -> str:
@@ -475,19 +592,237 @@ def _optional_tool(context: Context, name: str) -> str:
     return found
 
 
-def _fast_tests(context: Context) -> str:
-    return _run(
-        context,
-        (
-            sys.executable,
-            "-m",
-            "pytest",
-            "-q",
-            "tests",
-            "-m",
-            "not exhaustive_exact",
-        ),
+_DURATION_LINE = re.compile(
+    r"^(?P<seconds>\d+\.\d+)s\s+(?P<phase>setup|call|teardown)\s+(?P<node>\S+)$"
+)
+#: pytest prints this header whenever `--durations` is given, even when every test is
+#: under the minimum. Requiring it is what makes the ceiling check fail closed: if a
+#: future pytest renders durations differently, the check reports that it could not read
+#: them rather than silently finding no violations forever.
+_DURATION_HEADER = "slowest durations"
+
+
+def _call_durations(output: str) -> list[tuple[float, str]]:
+    """Every test `call` phase pytest's durations section reported, slowest first."""
+    calls = [
+        (float(match["seconds"]), match["node"])
+        for line in output.splitlines()
+        if (match := _DURATION_LINE.match(line.strip())) and match["phase"] == "call"
+    ]
+    return sorted(calls, reverse=True)
+
+
+#: A node id split into the test function and the parametrization pytest appended to it.
+#:
+#: The shape is `path::[Class::]function[params]`, and the awkward part is `params`, which
+#: pytest writes with `ascii_escaped` and therefore does not escape brackets or colons:
+#: `test_param[with[brackets]]`, `TestClass::test_method[z[1]]` and `test_param[x::y]` are
+#: all real ids this project's own pytest emits, checked rather than assumed. So neither
+#: "cut at the first `[`" nor "split on the last `::`" is safe.
+#:
+#: What is safe is that a function name is a Python identifier and the parametrization is
+#: the whole of the tail. The lazy `.*?::` walks `::`-separated segments from the left and
+#: the greedy `\[.*\]$` swallows the tail whole, so the match lands on the last segment
+#: that is an identifier followed by either nothing or a bracketed suffix reaching the end
+#: of the line -- which is the function, whatever the parameters contain.
+_TEST_NODE = re.compile(r"^(?P<function>.*?::[A-Za-z_]\w*)(?:\[.*\])?$")
+
+
+def _test_function(node: str) -> str:
+    """The node id with its parametrization removed, or the node id if it has none.
+
+    An id this cannot parse is returned whole rather than dropped or raised on. That
+    degrades to one group per node, which is the behaviour this function replaced, so an
+    unfamiliar id makes the floor check stricter than intended rather than blind.
+    """
+    match = _TEST_NODE.match(node)
+    return node if match is None else match["function"]
+
+
+def _slowest_call_per_function(entries: list[tuple[float, str]]) -> list[tuple[float, str]]:
+    """One entry per test function, carrying its slowest parametrization.
+
+    The `slow` marker is per function -- a decorator on a `def`, so a parametrized test
+    moves to the deep surface with all of its cases, which is why the registry in
+    `test_the_slow_marker_is_declared_only_by_measured_nodes` counts 62 functions and 92
+    collected tests. A floor applied per *node* therefore asks a question the marker
+    cannot answer: it reports the cheap case of an expensive function as a marker to
+    delete, and deleting it would drag the expensive case back onto the pull-request
+    surface. The cost of a marker is the cost of its slowest case, so that is what the
+    floor compares.
+
+    Ordering is not assumed: the maximum is taken explicitly rather than relying on the
+    caller having sorted, and the result is sorted slowest first for rendering.
+    """
+    slowest: dict[str, tuple[float, str]] = {}
+    for seconds, node in entries:
+        function = _test_function(node)
+        current = slowest.get(function)
+        if current is None or seconds > current[0]:
+            slowest[function] = (seconds, node)
+    return sorted(slowest.values(), reverse=True)
+
+
+def _require_durations(output: str, lane: str, rule: str) -> None:
+    if _DURATION_HEADER not in output:
+        raise StepFailureError(
+            f"pytest printed no durations section for the {lane} lane, so {rule} went "
+            f"unchecked; expected {_DURATION_HEADER!r} in the output"
+        )
+
+
+def _render_durations(entries: list[tuple[float, str]]) -> str:
+    return "\n".join(f"    {seconds:7.2f}s  {node}" for seconds, node in entries)
+
+
+def _pytest_workers(jobs: int) -> int:
+    """How many pytest processes the quick behavioural lane asks for.
+
+    Deliberately not `--inner-jobs`. That knob is the worker cap *exported to* every step,
+    and the tiers set it to 1 for a good reason: most steps are a single process, the gate
+    runs `--jobs` of them at once, and a cap that made each one greedy would just make
+    them fight. This lane is the exception, and `BC-218` measured why.
+
+    On CI's own runner (run 33985984585, job 101359470209, commit 88f7e5f8) the `--fast`
+    tier's wall was 408.55s and `fast behavioral tests` was 408.09s of it -- 99.9 per
+    cent. That is not a tier whose steps are queued behind each other: `--jobs 2` had
+    already absorbed the other 37 steps into the second lane, where their whole visible
+    cost was 135.17s, and they finished with the wall to spare. So the sequencing was
+    never the cost, and no arrangement of GitHub jobs can shorten a wall that is one step
+    -- a second job would repeat 11s of checkout, uv install and `uv sync` to run work
+    that already costs nothing on the clock. The only parallelism left to buy is inside
+    the step.
+
+    The lane is the right shape for it: around 2,000 tests, each held under
+    `QUICK_TEST_CEILING_SECONDS` by the ceiling the step itself enforces, none of them
+    writing anywhere shared. Measured on a four-core box at `PACK_JOBS=1`: 306.4s in one
+    process against 135.04s at `-n 4`, with no failure that appears only under xdist.
+
+    135s is not 306/4, and the gap is where the rest of this lane's cost now is. Two tests
+    carry 121s of the serial lane between them -- 93.86s and 26.83s -- so nearly a
+    quarter of the work sits in units too big to divide, and at `-n 4` the larger of them
+    is 70 per cent of the wall on its own. Neither has grown. Both call a module-level
+    cached builder that a test BC-214 deferred used to trigger first, so both are being
+    billed for a build rather than for themselves, and this step's own ceiling is failing
+    on them today. That is named where the rule lives, in
+    `test_the_slow_marker_is_declared_only_by_measured_nodes`, and it is not fixed here:
+    marking them moves the failure to the deep surface rather than removing it, because in
+    the slow lane the same two tests measure 0.01s and 0.00s. With those 121s gone the
+    lane measured 56.61s at `-n 4`, which is what this step is worth once they are.
+
+    The count is what the box has left, not what it has. This lane used to ask for one
+    worker per cpu on the grounds that nothing else was waiting behind it, which was true
+    while `--jobs 2` hid every other step underneath it. It stopped being true at
+    `--jobs 3`: two other steps now run beside this one, so a request for every cpu
+    oversubscribes the runner, and the cost lands in a place the tier cannot absorb.
+
+    The measurement that forced this, on GitHub's four-cpu runner. At `--jobs 3` with one
+    worker per cpu the tier ran 140.79s once and 192.26s the next time on the same
+    configuration -- 37 per cent apart, which is not a tier anyone can set a band around.
+    Worse, the second run failed with **19 tests at or above the 5s per-test ceiling**,
+    between 5.4s and 8.3s, and not one of them was a shared build or an intrinsically slow
+    test: they were ordinary tests inflated by contention. That is the ceiling catching the
+    wrong thing. It exists to find a test that is expensive, and under oversubscription it
+    finds tests that are merely *contended*, which makes it noise rather than a signal.
+
+    So the lane sizes itself to what is free: `cpus - jobs + 1`, this step being one of the
+    `jobs`. At four cpus that is two workers under `--jobs 3` and three under `--jobs 2`,
+    and in both cases total concurrency lands at about the cpu count instead of half again
+    over it. `-n 1` is not asked for: a single xdist worker is a subprocess and a protocol
+    for no concurrency at all, which is slower than not asking, so one worker means running
+    in-process.
+
+    This trades a little of the lane's own speed for a per-test measurement that means
+    something. That is the right trade while the ceiling is the mechanism `OR-13` leans on
+    to decide what may leave the pull-request surface: a ceiling measured under contention
+    would send tests to the deep surface for the sin of having noisy neighbours.
+    """
+    cpus = max(1, os.process_cpu_count() or DEFAULT_CPU_COUNT)
+    return max(1, cpus - jobs + 1)
+
+
+def _quick_lane_command(jobs: int) -> tuple[str, ...]:
+    workers = _pytest_workers(jobs)
+    distribution = () if workers == 1 else ("-n", str(workers))
+    return (
+        sys.executable,
+        "-m",
+        "pytest",
+        "-q",
+        "tests",
+        "-m",
+        QUICK_TESTS,
+        *distribution,
+        "--durations=0",
+        f"--durations-min={QUICK_TEST_CEILING_SECONDS:g}",
     )
+
+
+def _fast_tests(context: Context) -> str:
+    output = _run(context, _quick_lane_command(context.jobs))
+    _require_durations(output, "quick", f"the {QUICK_TEST_CEILING_SECONDS:g}s per-test ceiling")
+    over = [
+        entry for entry in _call_durations(output) if entry[0] >= QUICK_TEST_CEILING_SECONDS
+    ]
+    if over:
+        raise StepFailureError(
+            f"{len(over)} test(s) ran at or above the pull-request surface's "
+            f"{QUICK_TEST_CEILING_SECONDS:g}s per-test ceiling:\n{_render_durations(over)}\n"
+            "  Make it faster, or mark it `slow` and declare it with its measurement in "
+            "test_the_slow_marker_is_declared_only_by_measured_nodes. The marker moves "
+            "the test to the deep surface; it does not stop it running."
+        )
+    return output
+
+
+#: pytest's exit code for "every test was deselected", which for the slow lane means the
+#: ceiling currently defers nothing rather than that anything is wrong.
+_PYTEST_NOTHING_SELECTED = "command exited 5:"
+
+
+def _slow_tests(context: Context) -> str:
+    try:
+        output = _run(
+            context,
+            (
+                sys.executable,
+                "-m",
+                "pytest",
+                "-q",
+                "tests",
+                "-m",
+                SLOW_TESTS,
+                "--durations=0",
+                "--durations-min=0",
+            ),
+        )
+    except StepFailureError as error:
+        # An empty lane is a lane with no members, not a broken gate. The membership is
+        # decided by a ceiling, so it can legitimately fall to zero -- and a deep surface
+        # that failed when nothing was slow would teach people to keep a token member in
+        # the lane, which is worse than the failure it was meant to report.
+        if _PYTEST_NOTHING_SELECTED not in str(error):
+            raise
+        return "  no test is deferred by the per-test ceiling; the quick lane runs them all"
+    _require_durations(output, "slow", f"the {SLOW_TEST_FLOOR_SECONDS:g}s marker floor")
+    # Per function, not per node, because the marker is per function. `_fast_tests` keeps
+    # the opposite rule for the opposite reason: one node at or above the ceiling is one
+    # node the pull-request surface actually pays for, whatever its siblings cost.
+    under = [
+        entry
+        for entry in _slowest_call_per_function(_call_durations(output))
+        if entry[0] < SLOW_TEST_FLOOR_SECONDS
+    ]
+    if under:
+        raise StepFailureError(
+            f"{len(under)} deferred test(s) ran below the {SLOW_TEST_FLOOR_SECONDS:g}s floor "
+            f"a `slow` marker has to earn, each shown at its slowest parametrization:\n"
+            f"{_render_durations(under)}\n"
+            "  Delete the marker and its registry entry. OR-13 is a floor on coverage: a "
+            "test leaves the pull-request surface by its own measured cost, and one that "
+            "no longer costs that has to come back."
+        )
+    return output
 
 
 def _exhaustive_exact_tests(context: Context) -> str:
@@ -500,7 +835,7 @@ def _exhaustive_exact_tests(context: Context) -> str:
             "-q",
             "tests",
             "-m",
-            "exhaustive_exact",
+            EXHAUSTIVE_TESTS,
         ),
     )
 
@@ -698,13 +1033,27 @@ def _svg_rendering(context: Context) -> str:
 
 
 def _known_best_atlas(context: Context) -> str:
+    """The known-best atlas without the chunk census, which is its own step.
+
+    `_commands` runs its list in one process after another, so a step is only as
+    schedulable as its longest member and the gate's `--jobs` pool cannot see inside it.
+    Measured one subcommand at a time on a four-cpu box at `PACK_JOBS=1`, this step's
+    nine members were 133.22s, of which `census_known_best_chunks` alone was 94.85s and
+    `build_known_best_atlas` 27.28s; the other seven were 11.09s between them. Against
+    the 254.92s the whole step cost on CI that is about 181s in one member, so a step
+    declared as one unit put a three-minute serial block in the middle of a tier trying
+    to finish in three minutes.
+
+    Splitting at that seam is the only division the measurement supports, and it is
+    two steps rather than nine for the same reason: the other seven are noise, and a
+    step per subcommand would be seven more names in the register for no wall.
+    """
     output = _commands(
         context,
         (
             (sys.executable, "-m", "devtools.build_known_best_atlas", "--check"),
             (sys.executable, "-m", "devtools.build_composite_figure_data", "--check"),
             (sys.executable, "-m", "devtools.render_composite_pdf", "--check"),
-            (sys.executable, "-m", "devtools.census_known_best_chunks", "--check"),
             (
                 sys.executable,
                 "-m",
@@ -736,8 +1085,6 @@ def _known_best_atlas(context: Context) -> str:
         output,
         "known-best atlas check passed: 100 sources/plans, witnesses, renders, "
         "1 composite, and links",
-        "chunk census check passed: components, contacts, and bounded lattice partitions "
-        "for 100 records",
         "known-best contact overlay check passed: 5 house-rendered calibration strata",
         "known-best chunk evidence profile check passed: 36 non-grid calibration cases",
         "contact enumeration pricing check passed",
@@ -747,18 +1094,52 @@ def _known_best_atlas(context: Context) -> str:
     return output
 
 
-def _prospective_atlas(context: Context) -> str:
-    output = _commands(
-        context,
-        (
-            (sys.executable, "-m", "devtools.map_prospective_sources", "--check"),
-            (sys.executable, "-m", "devtools.build_prospective_atlas", "--check"),
-        ),
-    )
+def _known_best_chunk_census(context: Context) -> str:
+    """94.85s of the 133.22s the known-best atlas cost as one step, and about 181s on CI.
+
+    Nothing about the check changed when it was given its own name: it reads the same
+    committed documents and compares the same re-derivation. What changed is that the
+    gate can now schedule it, and that the step table names it -- which is what `OR-14`
+    asks for before anyone tries to make it cheaper. It is the longest single unit in
+    the sweeps job, and the second-longest anywhere on the pull-request surface.
+    """
+    output = _module(context, "devtools.census_known_best_chunks", "--check")
     _require_text(
         output,
-        "prospective source map check passed: 224 cases, availability and SVG",
-        "prospective atlas seed check passed: 101 witnesses and 101 house renderings",
+        "chunk census check passed: components, contacts, and bounded lattice partitions "
+        "for 100 records",
+    )
+    return output
+
+
+def _prospective_source_map(context: Context) -> str:
+    output = _module(context, "devtools.map_prospective_sources", "--check")
+    _require_text(
+        output, "prospective source map check passed: 224 cases, availability and SVG"
+    )
+    return output
+
+
+def _prospective_atlas(context: Context) -> str:
+    """The single longest unit on the pull-request surface: 213.2s of CI's 1,100s.
+
+    Split from the source map it used to share a step with, and the split buys
+    attribution rather than time -- the map is 0.39s of the 88.76s the pair cost
+    locally. That is the point: `OR-14` says to attribute rather than absorb, and until
+    this step carried one subcommand the tier's largest cost was reported under a name
+    that also covered a sub-second check.
+
+    It is the reason no arrangement of GitHub jobs takes this surface below about three
+    and a half minutes. The sweeps job has four units and four cpus, so outer
+    parallelism is already saturated and its wall is this step's wall; the only lever
+    left is the step's own cost. `build_prospective_atlas` rebuilds 101 witnesses and
+    101 house renderings in one process, each independent of the others, and
+    `sqpack.workers.worker_count` -- which `check_golden_basins`, `check_regressions`
+    and `check_soundness_perimeter` already use -- is unused here.
+    """
+    output = _module(context, "devtools.build_prospective_atlas", "--check")
+    _require_text(
+        output, "prospective atlas seed check passed: 101 witnesses and 101 house renderings"
     )
     return output
 
@@ -1284,6 +1665,17 @@ def _pr_rollup(context: Context) -> str:
     return _module(context, "devtools.render_pr_rollup", "--check")
 
 
+def _gate_budgets(context: Context) -> str:
+    # Sub-second: it reads one register and compares two sets. Records tier because it
+    # checks the declaration rather than the clock -- that every tier this command can
+    # select carries a ceiling, and that no ceiling has drifted more than the declared
+    # headroom above the cost recorded for its tier. The run's own wall is checked
+    # separately, by `gate_budgets.judge`, at the end of every whole-tier run.
+    output = _module(context, "devtools.check_gate_budgets")
+    _require_text(output, "gate budget declaration passed")
+    return output
+
+
 def _control_anchors(context: Context) -> str:
     # Sub-second: it resolves 150 anchors by string containment, running no mutation and no
     # subprocess. Records tier because a control whose anchor has stopped matching is not
@@ -1354,6 +1746,25 @@ def _session_rollups(context: Context) -> str:
     # Sub-second: it reads frontmatter and stats files. Records-tier because that is exactly
     # what it checks -- that a terminal session names what it cost and the record is there.
     return _module(context, "devtools.check_session_rollups")
+
+
+def _session_gate(context: Context) -> str:
+    """A terminal session names the gate run that certified its handover (`OR-13`).
+
+    Sub-second: frontmatter, one regex, and two `git` calls per declaration. Records tier
+    and therefore on every pull request, which is the point -- `OR-13` says every fast
+    check runs in CI, and a rule about the gate that only the gate's slow surface enforces
+    is a rule a branch can be green against for its whole life.
+
+    The commit is the load-bearing half. Forty-seven of the first eighty-six terminal
+    records mention a gate in `checks` and seven name any commit, so what the corpus mostly
+    holds is `full gate: passed` in longer words -- a claim about a tree nobody can now
+    identify. Ancestry is checked against the graph and, where the checkout cannot answer,
+    reported as uncheckable rather than assumed false (`conventions.md` §6).
+    """
+    output = _module(context, "devtools.check_session_gate")
+    _require_text(output, "name a full-gate run on a commit in their history")
+    return output
 
 
 def _gobel_family(context: Context) -> str:
@@ -1531,7 +1942,32 @@ _CASES = ("packing/cases/*",)
 _RESULTS = ("packing/campaign/series/*",)
 
 # What `fast` means since 2026-09-05: the tier a pull request runs, and therefore the
-# tier that has to hold everything a merge would otherwise be the first to check.
+# tier that has to hold everything a merge would otherwise be the first to check. Since
+# 2026-09-06 a pull request runs it as two concurrent jobs rather than one -- `--checks`
+# and `--sweeps`, complements within this tier and argued on `Step.sweep` -- so the tier
+# is unchanged and what a pull request waits for is its longer half rather than its sum.
+#
+# The measurement that forced the split, CI run at commit `30706bcb`, `--fast --jobs 3
+# --inner-jobs 1` on a four-cpu runner: 501.97s of wall over about 1,100s of step time.
+# Two steps were 468.11s of it. Three facts follow and all three are arithmetic rather
+# than judgement:
+#
+#   * 1,100s of step time on four cpus cannot finish in under 275s however it is
+#     scheduled, so the two-to-three-minute target is not reachable on one runner. Two
+#     runners is eight cpus and a 137s floor.
+#   * the tier's utilisation was 2.19 of its three workers, so the loss was not only
+#     work but queueing: the four longest steps were 826s between them and had to share.
+#   * a job cannot be shorter than its longest step, which is why the composite steps
+#     were split at their measured seams first. `known-best n=1..100 atlas` was nine
+#     subcommands run one after another and one of them was 71 per cent of it.
+#
+# The contention was the second cost and it was not on the clock. Five ordinary tests
+# reported between 5.47s and 6.72s against the quick lane's 5s per-test ceiling on the
+# merged tier -- not because they had grown but because 468s of atlas rendering was
+# running beside them on the same four cpus. Marking them was tried and is wrong: in the
+# slow lane the same tests fall under the 1s marker floor, which then demands the marker
+# back. They are contended, not slow, and moving the sweeps to their own runner is what
+# removes the contention rather than relabelling it.
 # Twenty-four of the sixty-one steps ran only after merge until this date, and two
 # defects reached main through that gap in one afternoon and sat there red for nine
 # hours -- D-455 caught by `deterministic SVG rendering` and D-456 by the exhaustive
@@ -1658,18 +2094,23 @@ STEPS: tuple[Step, ...] = (
             "*.md",
         ),
     ),
-    # The three record sweeps below are the tier's expensive half -- 170.44s, 122.17s and
-    # 96.50s on CI -- and they are promoted anyway. They are the class D-369 measured:
-    # every CI failure on that branch was a registry, a generated view or a declared
-    # contract going stale, and these three are what re-derives the largest of those from
-    # 100 retained witnesses. A pull request that retains a witness or edits a source map
-    # is exactly the change that breaks them, and until now exactly the change that could
-    # not find out until after the merge.
+    # The record sweeps below are the tier's expensive half -- 598.9s of about 1,100s of
+    # CI step time -- and they are on the pull-request surface anyway. They are the class
+    # D-369 measured: every CI failure on that branch was a registry, a generated view or
+    # a declared contract going stale, and these are what re-derives the largest of those
+    # from 100 retained witnesses. A pull request that retains a witness or edits a source
+    # map is exactly the change that breaks them, and before 2026-09-05 exactly the change
+    # that could not find out until after the merge.
+    #
+    # `sweep=True` is where they run rather than whether: the pull request pays them on a
+    # second runner, concurrently with everything else. What that is worth, and why it is
+    # a second runner and not a wider one, is argued on `Step.sweep`.
     Step(
         "known-best n=1..100 atlas",
         _known_best_atlas,
         fast=True,
         broad=True,
+        sweep=True,
         touches=(
             *_CORE,
             *_CASES,
@@ -1680,11 +2121,47 @@ STEPS: tuple[Step, ...] = (
             "packing/resources/*",
         ),
     ),
+    # Split out of the step above on 2026-09-06, and it keeps that step's attribution
+    # rather than a narrower one of its own. The two halves read overlapping corners of
+    # the same corpus, an over-wide pattern costs a step that need not have run while a
+    # narrow one costs a verdict nobody checked, and only the second is a soundness
+    # failure -- so the conservative move on a split is to give both halves the parent's
+    # set and narrow later with a measurement.
     Step(
-        "prospective n=101..324 source map and safe seed",
+        "known-best chunk census",
+        _known_best_chunk_census,
+        fast=True,
+        broad=True,
+        sweep=True,
+        touches=(
+            *_CORE,
+            *_CASES,
+            "packing/devtools/*",
+            "packing/atlas/*",
+            "packing/witnesses/*",
+            "packing/frontier/*",
+            "packing/resources/*",
+        ),
+    ),
+    # 0.39s locally, against 88.37s for the seed it used to share a step with. It is not
+    # a sweep and does not belong on the second runner: it reads one source map.
+    Step(
+        "prospective n=101..324 source map",
+        _prospective_source_map,
+        fast=True,
+        touches=(
+            *_CORE,
+            "packing/atlas/prospective/*",
+            "packing/resources/web/*",
+            "packing/devtools/map_prospective_sources.py",
+        ),
+    ),
+    Step(
+        "prospective n=101..324 safe seed",
         _prospective_atlas,
         fast=True,
         broad=True,
+        sweep=True,
         touches=(
             *_CORE,
             "packing/atlas/prospective/*",
@@ -1700,6 +2177,7 @@ STEPS: tuple[Step, ...] = (
         _translation_escape_screen,
         fast=True,
         broad=True,
+        sweep=True,
         touches=(
             *_CORE,
             "packing/atlas/known-best/*",
@@ -1764,13 +2242,33 @@ STEPS: tuple[Step, ...] = (
     # measurement no longer describes the suite. The second half of that argument --
     # that 2700s "sits above the 1800s CI allows the job" -- was wrong and is struck:
     # the `validate` job declares no `timeout-minutes` and never has, so it inherits
-    # GitHub's 360-minute default and there is no such ceiling (D-456). The budget above
-    # stands on its measurement alone.
+    # GitHub's 360-minute default and there is no such ceiling (D-456).
+    # No `budget_seconds` here either, and for a separate reason. This step carried an
+    # 1800s exception to the shared 900s cap for as long as it ran every non-exhaustive
+    # test; since BC-214 split the slow ones off it does not need one, and a step that no
+    # longer needs an exception should not keep it -- the shared cap is the guard against
+    # one hung test, and this step is now ordinary enough to live under it. What the lane
+    # is allowed to *cost*, as against how long one hung subprocess may hang, is
+    # `devtools/gate-budgets.yaml`.
     Step(
         "fast behavioral tests",
         _fast_tests,
         fast=True,
         broad=True,
+    ),
+    # The half of the behavioural suite that costs the wall. It is the same tests under
+    # the same runner, selected by the `slow` marker instead of against it, and it runs
+    # in the full gate -- so nothing the pull-request surface stopped running stopped
+    # running. `SLOW_TESTS` and `QUICK_TESTS` are complements within the non-exhaustive
+    # suite, which is what makes that claim checkable rather than asserted.
+    # It takes the whole non-exhaustive suite's budget rather than a smaller one argued
+    # from today's membership: the lane is defined by a ceiling, so its membership grows
+    # whenever a test crosses that ceiling, and a budget pinned to today's members would
+    # have to be re-argued every time the rule admits one. Its upper bound is the suite it
+    # is a subset of.
+    Step(
+        "slow behavioral tests",
+        _slow_tests,
         budget_seconds=FAST_SUITE_BUDGET_SECONDS,
     ),
     # 1943.05s on CI, and since 2026-09-05 the only step its workflow job runs: the
@@ -2127,6 +2625,20 @@ STEPS: tuple[Step, ...] = (
         touches=(*_CORE, "packing/devtools/controls.yaml", "packing/devtools/*.py"),
     ),
     Step(
+        "tier ceilings are declared and not slack",
+        _gate_budgets,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/check_gate_budgets.py",
+            "packing/devtools/gate-budgets.yaml",
+            # The step also checks that the guide still names every tier, so editing the
+            # guide has to be able to fail it.
+            "development.md",
+        ),
+    ),
+    Step(
         "the borrowed lower bounds re-derive",
         _nagamochi_bounds,
         fast=True,
@@ -2226,6 +2738,18 @@ STEPS: tuple[Step, ...] = (
             "packing/campaign/resource-usage/*.yaml",
             "packing/campaign/schemas/agent-session.schema.yaml",
             "packing/campaign/schemas/codex-task-tree-delta.schema.yaml",
+        ),
+    ),
+    Step(
+        "terminal sessions name the gate that certified them",
+        _session_gate,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/check_session_gate.py",
+            "packing/campaign/agent-sessions/*.md",
+            "packing/campaign/schemas/agent-session.schema.yaml",
         ),
     ),
     Step(
@@ -2465,9 +2989,25 @@ def _select_steps(
     fast: bool,
     records: bool = False,
     edit: bool = False,
+    checks: bool = False,
+    sweeps: bool = False,
     skip: Sequence[str] = (),
 ) -> list[Step]:
     """The steps a tier and its name filters select.
+
+    `--checks` and `--sweeps` are the two halves of `--fast`, and they exist because the
+    pull request runs them as two concurrent GitHub jobs. They are complements by
+    construction here -- one takes the fast steps marked `sweep`, the other the fast
+    steps that are not -- so no step can be in both and none in neither, which is the
+    same property that makes the quick and slow behavioural lanes safe.
+
+    Two jobs could have divided the tier with `--only` and `--skip` instead, and that
+    was rejected on the register rather than on taste. A subset of a tier has no
+    declared cost: `--only` reports no tier at all, and `--skip` reports the tier it
+    narrowed, so a half-tier run would have been judged against the whole tier's
+    recorded 502.3s and failed the stale rule for finishing early. Naming the halves
+    makes each a tier with its own ceiling and its own record, which is what
+    `D-466` says a surface CI runs on every push has to have.
 
     `--skip` is `--only` read the other way round, and it exists so a surface can be run
     as everything-but-one. Two CI jobs cannot divide the gate between them with `--only`
@@ -2488,7 +3028,12 @@ def _select_steps(
     is refused rather than silently ignored, which is the honest answer to a request this
     selector cannot carry out.
     """
-    selected = [step for step in STEPS if not (fast or edit) or step.fast]
+    if sweeps:
+        selected = [step for step in STEPS if step.sweep]
+    elif checks:
+        selected = [step for step in STEPS if step.fast and not step.sweep]
+    else:
+        selected = [step for step in STEPS if not (fast or edit) or step.fast]
     if edit:
         selected = [step for step in selected if not step.broad]
     if records:
@@ -2678,10 +3223,91 @@ def _run_selected(
     )
 
 
+def _tier_id(namespace: argparse.Namespace) -> str | None:
+    """Which declared tier this invocation is, or `None` when it is a slice of one.
+
+    A slice has no declared cost, and giving it one would waive the ceiling by accident:
+    `--only "lint floor"` finishing in a second says nothing about whether `--fast` has
+    tripled. `--push` is a tier despite selecting its tests from the diff, because its
+    ceiling is declared for the widest thing that selector can expand to.
+    """
+    if namespace.only or (namespace.since and not namespace.push):
+        return None
+    return next((flag for flag in TIER_FLAGS if getattr(namespace, flag)), "full")
+
+
+def _judge_budget(
+    summary: RunSummary,
+    *,
+    tier_id: str | None,
+    jobs: int,
+    inner_jobs: int,
+    force: bool,
+) -> gate_budgets.Verdict:
+    """Compare this run's own wall against the ceiling declared for its tier."""
+    steps = tuple((result.name, result.seconds) for result in summary.results)
+    try:
+        register = gate_budgets.load()
+    except gate_budgets.BudgetError as error:
+        return gate_budgets.Verdict(
+            tier=tier_id,
+            wall_seconds=summary.wall_seconds,
+            status="unknown",
+            notes=(f"the tier register could not be read: {error}",),
+        )
+    return gate_budgets.judge(
+        register,
+        tier_id,
+        wall_seconds=summary.wall_seconds,
+        steps=steps,
+        jobs=jobs,
+        inner_jobs=inner_jobs,
+        cpus=os.process_cpu_count() or DEFAULT_CPU_COUNT,
+        force=force,
+    )
+
+
+def _render_budgets(register: gate_budgets.Register) -> None:
+    """Print the standing cost of every tier, which is what a W5 block reads first."""
+    policy = register.policy
+    print(f"== declared tier ceilings ({register.path}) ==")
+    print(
+        f"  band: a ceiling within {policy.max_headroom:g}x of the recorded cost; a run "
+        f"over {policy.drift_ratio:g}x of it fails; a run under {policy.stale_ratio:g}x "
+        "of it means the record is stale"
+    )
+    for tier in register.tiers:
+        recorded = (
+            f"{tier.measured_seconds:g}s recorded {tier.measured_on}"
+            if tier.measured_seconds is not None
+            else "never recorded at the reference shape"
+        )
+        print(f"\n  {tier.command}")
+        print(f"    ceiling {tier.ceiling_seconds:g}s, {recorded}")
+        print(f"    reference: {tier.reference.describe()}")
+        if tier.measured_where:
+            print(f"    measured: {tier.measured_where}")
+
+
+def _render_early_exit(namespace: argparse.Namespace, selected: Sequence[Step]) -> int:
+    """`--budgets` and `--list` both answer a question about the gate without running it."""
+    if namespace.budgets:
+        _render_budgets(gate_budgets.load())
+        return 0
+    listing = [{"name": step.name, "tags": step.tags} for step in selected]
+    if namespace.format == "json":
+        print(json.dumps(listing, indent=2))
+    else:
+        for step in selected:
+            print(f"{step.name} [{step.tags}]")
+    return 0
+
+
 def _summary_status(summary: RunSummary, *, strict: bool) -> int:
     failed = any(result.status == "failed" for result in summary.results)
     skipped = any(result.status == "skipped" for result in summary.results)
-    return 1 if failed or (strict and skipped) else 0
+    over_budget = summary.budget is not None and summary.budget.failed
+    return 1 if failed or over_budget or (strict and skipped) else 0
 
 
 def _render_text(summary: RunSummary, *, strict: bool) -> int:
@@ -2704,9 +3330,20 @@ def _render_text(summary: RunSummary, *, strict: bool) -> int:
         print(f"  {result.seconds:7.2f}s  {result.name}")
     print(f"  {summary.wall_seconds:7.2f}s  TOTAL (wall)")
 
+    budget = summary.budget
+    if budget is not None:
+        print("\n== the tier against its ceiling ==")
+        for line in gate_budgets.render(budget):
+            print(line)
+
     failed = [result for result in summary.results if result.status == "failed"]
     skipped = [result for result in summary.results if result.status == "skipped"]
     print()
+    if budget is not None and budget.failed and not failed:
+        print("THE TIER IS OUTSIDE ITS DECLARED COST BAND:")
+        for reason in budget.failures:
+            print(f"  - {reason}")
+        return _summary_status(summary, strict=strict)
     if failed:
         noun = "STEP" if len(failed) == 1 else "STEPS"
         print(f"{len(failed)} {noun} FAILED:")
@@ -2752,6 +3389,22 @@ def _parser() -> ArgumentParser:
         help="run the edit-loop checks: everything in --fast except the broad test suite",
     )
     parser.add_argument("--fast", action="store_true", help="run the fast edit-loop checks")
+    parser.add_argument(
+        "--checks",
+        action="store_true",
+        help=(
+            "run the half of --fast that is not a record sweep: the floors, the record "
+            "checks, the quick behavioral lane, and the exact and geometric contracts"
+        ),
+    )
+    parser.add_argument(
+        "--sweeps",
+        action="store_true",
+        help=(
+            "run the half of --fast that re-derives the retained atlases from their "
+            "witnesses; the pull request runs it on a second runner beside --checks"
+        ),
+    )
     parser.add_argument(
         "--push",
         action="store_true",
@@ -2810,6 +3463,19 @@ def _parser() -> ArgumentParser:
         "--list", action="store_true", help="list check names and tiers, then exit"
     )
     parser.add_argument(
+        "--budgets",
+        action="store_true",
+        help="print the declared cost ceiling of every tier, then exit",
+    )
+    parser.add_argument(
+        "--enforce-budget",
+        action="store_true",
+        help=(
+            "fail on the tier's declared cost band even when this machine is not the "
+            "shape the ceiling was measured for (also PACKING_VALIDATE_ENFORCE_BUDGET)"
+        ),
+    )
+    parser.add_argument(
         "--format",
         choices=("text", "json"),
         default="text",
@@ -2825,18 +3491,31 @@ def _validate_invocation(
     fast: bool,
     records: bool = False,
     edit: bool = False,
+    checks: bool = False,
+    sweeps: bool = False,
     since: str | None = None,
     push: bool = False,
     skip: Sequence[str] = (),
 ) -> None:
-    if strict and (only or skip or fast or records or edit or since or push):
+    narrowed = only or skip or fast or records or edit or checks or sweeps or since or push
+    if strict and narrowed:
         raise UsageError(
-            "--strict cannot be combined with --only, --skip, --fast, --records, "
-            "--edit, --push, or --since"
+            "--strict cannot be combined with --only, --skip, --fast, --checks, "
+            "--sweeps, --records, --edit, --push, or --since"
         )
     if edit and fast:
         raise UsageError(
             "--edit and --fast select different tiers; --fast is the wider of the two"
+        )
+    if checks and sweeps:
+        raise UsageError(
+            "--checks and --sweeps are the two halves of --fast; ask for --fast to run "
+            "both, or for one of them to run that half"
+        )
+    if (checks or sweeps) and (fast or records or edit or push):
+        raise UsageError(
+            "--checks and --sweeps are halves of --fast and are not combined with "
+            "another tier; --fast is both of them"
         )
     if push and (fast or records or edit):
         raise UsageError(
@@ -2863,6 +3542,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             fast=namespace.fast,
             records=namespace.records,
             edit=namespace.edit,
+            checks=namespace.checks,
+            sweeps=namespace.sweeps,
             since=namespace.since,
             push=namespace.push,
             skip=namespace.skip,
@@ -2898,6 +3579,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             fast=namespace.fast,
             records=namespace.records,
             edit=namespace.edit or namespace.push,
+            checks=namespace.checks,
+            sweeps=namespace.sweeps,
             skip=namespace.skip,
         )
         if namespace.push:
@@ -2922,14 +3605,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             else:
                 print(f"  {len(selected)} steps reachable from those paths")
             print()
-        if namespace.list:
-            records = [{"name": step.name, "tags": step.tags} for step in selected]
-            if namespace.format == "json":
-                print(json.dumps(records, indent=2))
-            else:
-                for step in selected:
-                    print(f"{step.name} [{step.tags}]")
-            return 0
+        if namespace.budgets or namespace.list:
+            return _render_early_exit(namespace, selected)
         environment = os.environ.copy()
         environment["PACK_JOBS"] = str(inner_jobs)
         context = Context(
@@ -2942,11 +3619,22 @@ def main(argv: Sequence[str] | None = None) -> int:
             timeout_is_explicit=timeout_is_explicit,
         )
         summary = _run_selected(selected, context, namespace.only, namespace.skip)
+        summary.budget = _judge_budget(
+            summary,
+            tier_id=_tier_id(namespace),
+            jobs=jobs,
+            inner_jobs=inner_jobs,
+            force=namespace.enforce_budget
+            or _environment_flag("PACKING_VALIDATE_ENFORCE_BUDGET"),
+        )
     except ParserExitError as error:
         if error.message:
             stream = sys.stdout if error.status == 0 else sys.stderr
             print(error.message, end="", file=stream)
         return error.status
+    except gate_budgets.BudgetError as error:
+        print(f"packing-validate: error: {error}", file=sys.stderr)
+        return 2
     except (UsageError, StepFailureError, ProjectLayoutError) as error:
         print(f"packing-validate: error: {error}", file=sys.stderr)
         return 2 if isinstance(error, (UsageError, ProjectLayoutError)) else 1

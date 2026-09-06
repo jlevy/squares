@@ -21,8 +21,23 @@ from cases.n050_producer_refusal.verify import (
 PACKING = Path(__file__).resolve().parents[1]
 
 
-@pytest.fixture
-def prospective_result(tmp_path: Path) -> Path:
+@pytest.fixture(scope="session")
+def producer_stdout() -> bytes:
+    """The producer's self-test receipt, produced once for the whole session.
+
+    Seven tests below want *a* prospective receipt to verify or to break, and the
+    producer costs 0.55s of subprocess for each one it is asked for. Nothing here asserts
+    that two runs agree, so seven runs were seven copies of one artifact: 3.85s of the
+    quick lane spent re-earning bytes the first run already had.
+
+    Same shape as `test_n54_source_contract_independent.py`, which pays its author run
+    once at session scope and hands every test its own copy of the file. That the
+    producer emits the same bytes twice is pinned where it is actually asserted rather
+    than assumed here:
+    `test_n050_producer_refusal.py::test_full_controller_is_normal_optimized_equivalent`
+    runs it under normal and optimized Python and compares stdout, in this same lane. So
+    the runs removed here were repetition, not a second opinion.
+    """
     completed = subprocess.run(
         [sys.executable, "-m", "cases.n050_producer_refusal.run", "--selftest"],
         cwd=PACKING,
@@ -30,8 +45,14 @@ def prospective_result(tmp_path: Path) -> Path:
         check=False,
     )
     assert completed.returncode == 0, completed.stderr.decode()
+    return completed.stdout
+
+
+@pytest.fixture
+def prospective_result(tmp_path: Path, producer_stdout: bytes) -> Path:
+    """A private copy of the receipt, so a test that mutates it cannot reach another."""
     path = tmp_path / "result.json"
-    path.write_bytes(completed.stdout)
+    path.write_bytes(producer_stdout)
     return path
 
 
