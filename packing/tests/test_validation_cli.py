@@ -300,9 +300,9 @@ def test_list_is_read_only_and_exposes_fast_and_full_check_groups() -> None:
 
     assert status == 0
     assert stderr == ""
-    assert "fast behavioral tests [fast]" in stdout
+    assert "fast behavioral tests [fast, checks]" in stdout
     assert "exhaustive exact behavioral tests [full]" in stdout
-    assert "soundness perimeter [fast, engine]" in stdout
+    assert "soundness perimeter [fast, checks, engine]" in stdout
 
 
 def test_list_applies_the_same_fast_and_name_filters_as_execution() -> None:
@@ -310,7 +310,7 @@ def test_list_applies_the_same_fast_and_name_filters_as_execution() -> None:
 
     assert status == 0
     assert stderr == ""
-    assert "fast behavioral tests [fast]" in stdout
+    assert "fast behavioral tests [fast, checks]" in stdout
     assert "exhaustive exact behavioral tests" not in stdout
     assert "negative controls" not in stdout
 
@@ -335,7 +335,7 @@ def test_skip_is_only_read_the_other_way_round() -> None:
     listed = stdout.splitlines()
     assert len(listed) == len(validate.STEPS) - 1
     assert not any("exhaustive exact" in line for line in listed)
-    assert "fast behavioral tests [fast]" in stdout
+    assert "fast behavioral tests [fast, checks]" in stdout
 
 
 def test_a_skip_naming_no_step_is_refused_rather_than_ignored() -> None:
@@ -1249,11 +1249,20 @@ def test_the_edit_tier_cannot_under_run() -> None:
     fast = names(fast=True)
     edit = names(fast=False, edit=True)
     records = names(fast=True, records=True)
+    checks = names(fast=False, checks=True)
+    sweeps = names(fast=False, sweeps=True)
 
     assert records <= edit <= fast <= everything
     assert fast - edit == {step.name for step in validate.STEPS if step.broad}, (
         "the only steps --fast adds over --edit are the ones marked broad"
     )
+    # The pull request's two jobs are a partition of `--fast` and not a pair of filters,
+    # which is what makes it safe to run them on separate runners: no step can be in both
+    # and none in neither. `--edit` lands wholly inside `--checks` because every sweep is
+    # `broad`, so the edit loop is never waiting on the runner that carries the sweeps.
+    assert checks | sweeps == fast
+    assert not checks & sweeps
+    assert edit <= checks
 
 
 def test_every_step_is_reachable_from_some_tier() -> None:
@@ -1267,7 +1276,8 @@ def test_every_step_is_reachable_from_some_tier() -> None:
 
 
 def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
-    """A step outside `--fast` is a step no pull request runs, so the set is pinned.
+    """A step no pull-request job selects is a step no pull request runs, so the set is
+    pinned -- and read from the workflow rather than from a flag.
 
     This is the guard think-k4fb asked for, and it exists because `fast` defaults to
     False. Twenty-four of sixty-one steps had accumulated outside the tier, nobody had
@@ -1275,6 +1285,15 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
     gap and stayed red for nine hours (D-455, D-456). Twenty-one were promoted; a
     twenty-fifth step added tomorrow would rebuild the gap silently unless adding it to
     this set is a thing someone has to type.
+
+    It reads the workflow because since 2026-09-06 the surface is two jobs, and a flag
+    can no longer answer the question on its own. `Step.fast` says a step is meant to run
+    on a pull request; only the workflow says one does. The old assertion would have gone
+    on passing if a job stopped being invoked, if `--only` narrowed one of them, or if a
+    new step landed in a `sweep` set no job selected -- three ways to lose a check that
+    all look identical from inside `STEPS`. So the deferred set is now computed as
+    everything the pull-request jobs do not select, and the flag is checked against it
+    afterwards rather than trusted as the answer.
 
     Each remaining name is deferred on a measurement, and the measurements are on CI's
     two-core runner in the complete surface of run 33987628341:
@@ -1289,9 +1308,20 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
       mathematics rather than checking a record, no pull request changes its answer
       without editing the assessor, and `--since` selects it for exactly those changes.
 
-    Deferring a fourth means arguing here that the tier's wall time -- `max(the
-    behavioural suite, everything else over the remaining workers)` -- has moved. There is
-    a fourth, and this is that argument.
+    Deferring a fourth means arguing here that the tier's wall time -- now `max(the
+    checks job, the sweeps job)` rather than one job's queue -- has moved. There is a
+    fourth, and this is that argument.
+
+    Nothing was deferred on 2026-09-06, and that is the point of recording it here. The
+    tier had reached 501.97s and the obvious 468.11s of it to drop were the two atlas
+    sweeps main had just promoted; the measurement refused that too. Those two are the
+    class `D-369` counted -- a registry or generated view going stale is what actually
+    fails CI here -- and a change that retains a witness or edits a source map is exactly
+    what breaks them, so deferring them would have re-opened the gap `D-455` came through
+    with the cheapest half of the evidence. The cost was bought from concurrency instead:
+    a second runner, argued in
+    `test_the_pull_request_runs_its_sweeps_on_a_second_runner`, which changes when a
+    check runs but not whether. This set has held at four across that change.
 
     `slow behavioral tests` is `BC-214`. It is not a step that was never decided: it is
     the half of the behavioural suite that carries the wall, split out by measurement
@@ -1313,33 +1343,88 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
     comparisons, 0.46s of call time between them. The wall was never where the catching
     was.
     """
-    assert {step.name for step in validate.STEPS if not step.fast} == {
+    deferred = {step.name for step in validate.STEPS} - set().union(
+        *_workflow_selections(pull_request=True).values()
+    )
+
+    assert deferred == {
         "exhaustive exact behavioral tests",
         "negative controls",
         "n=40 rigidity bracket still reproduces",
         "slow behavioral tests",
     }
+    # And the same four are what `--fast` leaves out, so the flag and the workflow cannot
+    # drift apart: a step marked `fast` that no pull-request job invokes is deferred in
+    # fact and promoted on paper, which is the state think-k4fb found and this pins shut.
+    assert deferred == {step.name for step in validate.STEPS if not step.fast}
 
 
-def test_the_post_merge_jobs_partition_the_gate() -> None:
-    """The two jobs a merge runs must together select every step, and none twice.
+def test_the_pull_request_runs_its_sweeps_on_a_second_runner() -> None:
+    """Which steps the second pull-request job takes, and the measurement for each.
 
-    think-tr2z split the exhaustive tier onto its own runner so that it reports its own
-    verdict against its own budget; `--skip` on the other job is what stops it being paid
-    for twice. Both halves of that are a name typed into a YAML file, so this reads the
-    workflow, parses each command with the CLI's own parser, and resolves it through the
-    CLI's own selector: a step added to `STEPS` lands in one job or the other, and a
-    rename that breaks the split fails here rather than after a merge.
+    `sweep` decides which of the pull request's two jobs runs a step, and it defaults to
+    False, so the failure mode of forgetting it is a slower `checks` job rather than a
+    step nobody runs -- the safe direction, as with `broad` and `touches`. What needs a
+    guard is the other direction: a step moved here to make the `checks` job look fast.
+    Adding a name below means typing a number next to it.
+
+    The measurements are CI's, run at commit `30706bcb`, `--fast --jobs 3 --inner-jobs 1`
+    on a four-cpu runner, 501.97s of wall over about 1,100s of step time:
+
+    - `prospective n=101..324 safe seed`, 213.2s. The longest single unit anywhere on the
+      pull-request surface, and this job's wall.
+    - `known-best chunk census`, about 181s. Measured as 94.85s of the 133.22s the
+      undivided known-best step cost locally, against 254.92s for that step on CI.
+    - `single-square translation escape screen`, 130.8s.
+    - `known-best n=1..100 atlas`, about 74s -- the eight subcommands left after the
+      census was split out of it.
+
+    598.9s between them, and nothing else in the tier is above 90s, so the boundary is
+    not a close call today. They are also one kind of work: each re-derives a retained
+    atlas from the hundred-odd witnesses under it and compares it byte for byte. That
+    matters more than the ranking, because a rule keyed on kind survives a step getting
+    faster, and a rule keyed on today's top four does not.
+
+    What this buys is two numbers, not one. A pull request now waits for the longer of
+    two concurrent jobs instead of the sum of a queue, and the five ordinary tests that
+    were failing the quick lane's 5s per-test ceiling stop sharing four cpus with 468s of
+    atlas rendering. Neither of those is a coverage change: every one of these steps runs
+    on every pull request, exactly as it did the day before.
     """
+    assert {step.name for step in validate.STEPS if step.sweep} == {
+        "prospective n=101..324 safe seed",
+        "known-best chunk census",
+        "single-square translation escape screen",
+        "known-best n=1..100 atlas",
+    }
+    # A sweep outside `--fast` would be a step the pull request does not run at all, which
+    # is a deferral and belongs in the test above rather than in this one.
+    assert all(step.fast for step in validate.STEPS if step.sweep)
+
+
+def _workflow_selections(*, pull_request: bool) -> dict[str, set[str]]:
+    """What each Linux gate job actually selects on this event, by job name.
+
+    Read from the workflow, parsed with the CLI's own parser and resolved through its own
+    selector, because every part of the split is a string typed into a YAML file and a
+    guard that reimplemented the selector would drift from the thing it guards.
+
+    `macos-portability` is excluded by name rather than by rule. It runs four steps a
+    second architecture could disagree about, deliberately duplicating work the Linux
+    jobs also do, so it is not part of either partition -- and the tests that call this
+    assert which jobs exist, so a new one cannot join either surface unnoticed.
+    """
+    condition = "github.event_name == 'pull_request'"
+    negation = "github.event_name != 'pull_request'"
+    excluded = negation if pull_request else condition
     document = safe_load(WORKFLOW.read_text(encoding="utf-8"))
-    jobs = document["jobs"]
     selections: dict[str, set[str]] = {}
-    for job_name in ("validate", "exhaustive"):
-        for step in jobs[job_name]["steps"]:
+    for job_name, job in document["jobs"].items():
+        if job_name == "macos-portability" or excluded in str(job.get("if", "")):
+            continue
+        for step in job.get("steps", []):
             command = str(step.get("run", ""))
-            if "packing-validate" not in command:
-                continue
-            if step.get("if") == "github.event_name == 'pull_request'":
+            if "packing-validate" not in command or excluded in str(step.get("if", "")):
                 continue
             tokens = shlex.split(command)
             arguments = tokens[tokens.index("packing-validate") + 1 :]
@@ -1352,8 +1437,52 @@ def test_the_post_merge_jobs_partition_the_gate() -> None:
                     fast=namespace.fast,
                     records=namespace.records,
                     edit=namespace.edit,
+                    checks=namespace.checks,
+                    sweeps=namespace.sweeps,
                 )
             }
+    return selections
+
+
+def test_the_pull_request_jobs_partition_the_surface() -> None:
+    """The two jobs a pull request runs must divide `--fast`, and pay for nothing twice.
+
+    The surface was one job until 2026-09-06 and one job could not hold it: 1,100s of
+    step time on a four-cpu runner has a 275s floor however it is scheduled, and it was
+    finishing in 501.97s. Two runners is eight cpus. What a split like that risks is the
+    gap `D-455` came through in the other direction -- a step in neither selection, run
+    by nobody, reported by nothing -- so the two commands are read from the workflow and
+    checked to be complements rather than trusted to be.
+
+    `--checks` and `--sweeps` are complements in `_select_steps` by construction, so this
+    is really a check on the YAML: that the workflow invokes both, on a pull request, and
+    narrows neither with `--only` or `--skip`.
+    """
+    selections = _workflow_selections(pull_request=True)
+
+    assert set(selections) == {"validate", "sweeps"}
+    assert not selections["validate"] & selections["sweeps"]
+    assert selections["validate"] | selections["sweeps"] == {
+        step.name for step in validate.STEPS if step.fast
+    }
+    assert selections["sweeps"] == {step.name for step in validate.STEPS if step.sweep}
+
+
+def test_the_post_merge_jobs_partition_the_gate() -> None:
+    """The two jobs a merge runs must together select every step, and none twice.
+
+    think-tr2z split the exhaustive tier onto its own runner so that it reports its own
+    verdict against its own budget; `--skip` on the other job is what stops it being paid
+    for twice. Both halves of that are a name typed into a YAML file, so this reads the
+    workflow, parses each command with the CLI's own parser, and resolves it through the
+    CLI's own selector: a step added to `STEPS` lands in one job or the other, and a
+    rename that breaks the split fails here rather than after a merge.
+
+    A merge still runs the gate as one job plus the exhaustive tier, not as the pull
+    request's two halves. The `sweeps` job is pull-request only, and the complete
+    integration surface here already contains every step it would have run.
+    """
+    selections = _workflow_selections(pull_request=False)
 
     assert set(selections) == {"validate", "exhaustive"}
     assert selections["exhaustive"] == {"exhaustive exact behavioral tests"}
@@ -1436,8 +1565,15 @@ def test_broad_is_opt_out_so_a_new_step_joins_the_edit_tier() -> None:
         "search engine (sqsearch)",  # 2.19s, but needs that same build
         "differential: search energy vs validity oracle",  # 0.34s, likewise
         "lint floor (rust)",  # 14.94s of cargo clippy and rustfmt
-        "known-best n=1..100 atlas",  # 148.50s
-        "prospective n=101..324 source map and safe seed",  # 102.56s
+        # The four record sweeps, split at their measured seams on 2026-09-06 so the pull
+        # request's second runner can schedule them. The figures beside them are the
+        # 148.50s and 102.56s above, divided by the same measurement that split them:
+        # locally, at `PACK_JOBS=1` and one subcommand at a time, the census was 94.85s of
+        # the undivided known-best step's 133.22s and the seed 88.37s of the prospective
+        # step's 88.76s.
+        "known-best n=1..100 atlas",  # 148.50s undivided, about 43s without the census
+        "known-best chunk census",  # about 106s of that 148.50s
+        "prospective n=101..324 safe seed",  # 102.10s of the 102.56s
         "single-square translation escape screen",  # 73.07s
         "historical regressions",  # 29.35s
         "deterministic SVG rendering",  # 26.39s

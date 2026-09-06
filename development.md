@@ -140,22 +140,46 @@ A tier selects steps; a lane divides one step.
 | `--records` | contributor, before touching a registry; also every pull request | 31 of 64 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a code change |
-| `--fast` | **CI, on every pull request** | 60 of 64 | 700 s | **502.3 s on CI**, 2026-09-06, commit `5cad7540` |
-| *(no flag)* | **CI, on `main`, on dispatch, and daily**; and what a block ends with | 64 of 64 | 3600 s | split across two jobs; not clocked whole |
+| `--fast` | contributor, at a block boundary; the union of the two tiers below | 62 of 66 | 700 s | 502.3 s on CI, 2026-09-06, commit `5cad7540`, when CI still ran it whole |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 58 of 66 | 400 s | not yet clocked on CI |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 430 s | not yet clocked on CI |
+| *(no flag)* | **CI, on `main`, on dispatch, and daily**; and what a block ends with | 66 of 66 | 3600 s | split across two jobs; not clocked whole |
 
-**`--fast` costs 502.3 s, and two steps are 468.1 s of it**: `known-best n=1..100 atlas`
-at 254.9 s and `prospective n=101..324 source map and safe seed` at 213.2 s. Both were
-promoted onto the pull-request surface on 2026-09-05 after `D-455` escaped through the
-gap where they had been running only post-merge, and together they now cost more than
-the entire tier did before they arrived (177.0 s). That is the coverage-against-cost
-trade `OR-13` and `OR-14` are both about, made deliberately and stated here rather than
-discovered later. Whether they belong on every pull request or behind change scoping is
-the open question `agenda-023` carries next; it is a measurement, not an opinion.
+**The pull-request surface is `--checks` and `--sweeps` together, run as two concurrent
+CI jobs**, so a pull request waits for the longer of the two rather than for their sum.
+Both feed the single required `packing-required` context, and
+`test_the_pull_request_jobs_partition_the_surface` reads the workflow and checks that
+they are disjoint and that they cover every step of `--fast` — so the split cannot lose
+a check the way a pair of independent filters could.
 
-Four steps are outside `--fast`, each deferred on its own measurement and pinned by
-`test_the_pull_request_surface_defers_only_what_was_measured`: `exhaustive exact
-behavioral tests` (1943 s, its own CI job), `negative controls` (544 s), `n=40 rigidity
-bracket still reproduces` (221 s), and `slow behavioral tests` (the lane below).
+The split is arithmetic, not preference.
+`--fast` was 501.97 s of wall over about 1,100 s of step time at `--jobs 3 --inner-jobs
+1`, and 1,100 s of step time on a four-cpu runner cannot finish under 275 s however it
+is scheduled — so one runner could not reach the two-to-three-minute target and a second
+one had to be bought.
+`--sweeps` takes the four steps that re-derive a retained atlas from its witnesses,
+598.9 s of that step time between them and nothing else in the tier above 90 s; the
+measurement for each is in `test_the_pull_request_runs_its_sweeps_on_a_second_runner`.
+The second cost the split pays off is not on the clock: five ordinary tests were
+reporting over the quick lane’s 5 s per-test ceiling because 468 s of atlas rendering
+was running beside them on the same four cpus, and moving that work to its own runner is
+what removes the contention rather than relabelling the tests as slow.
+
+**What the `sweeps` job is now floored by is one step**, `prospective n=101..324 safe
+seed` at 213.2 s. The job has four units and four cpus, so its outer pool is already
+saturated and its wall is that step’s wall; a third GitHub job cannot shorten it, for
+the same reason `BC-218` found that a second job could not shorten a tier that was one
+step. The lever from here is inside `devtools/build_prospective_atlas.py` and
+`devtools/census_known_best_chunks.py` — 101 witnesses and 100 witnesses respectively,
+each independent of the others, both rebuilt in a single process while
+`sqpack.workers.worker_count` sits unused.
+
+Four steps are outside the pull-request surface entirely, each deferred on its own
+measurement and pinned by `test_the_pull_request_surface_defers_only_what_was_measured`,
+which computes the deferred set from what the workflow’s pull-request jobs actually
+select rather than from a flag: `exhaustive exact behavioral tests` (1943 s, its own CI
+job), `negative controls` (544 s), `n=40 rigidity bracket still reproduces` (221 s), and
+`slow behavioral tests` (the lane below).
 Adding a fifth means arguing it in that test, not editing a list.
 
 ### The behavioural lanes
@@ -204,8 +228,14 @@ uv run --frozen --all-extras --group dev packing-validate --edit
 uv run --frozen --all-extras --group dev packing-validate --push
 
 # The pull-request surface: the edit tier plus every behavioral test under the
-# per-test ceiling. This is what CI runs on a pull request.
+# per-test ceiling. CI runs it as the two halves below, one per runner; run it whole
+# here, where there is only one machine and nothing to overlap with.
 uv run --frozen --all-extras --group dev packing-validate --fast
+
+# The two halves CI runs concurrently on a pull request. They are complements within
+# --fast, so running both is running the surface and running one is running half of it.
+uv run --frozen --all-extras --group dev packing-validate --checks
+uv run --frozen --all-extras --group dev packing-validate --sweeps
 
 # One named component. --only is repeatable and matches displayed step names.
 uv run --frozen --all-extras --group dev packing-validate --only "basin identity"
@@ -272,13 +302,17 @@ implemented. These limits are why a subprocess timeout is not, by itself, eviden
 D-239 is resolved.
 
 On pull requests, [`packing-validation.yml`](.github/workflows/packing-validation.yml)
-runs `packing-validate --fast` on Linux and reports the stable `packing-required`
-aggregate. Since 2026-09-05 that tier is fifty-eight of the sixty-one steps rather than
-thirty-seven: twenty-one steps that had run only after a merge were promoted into it,
-because a tier costs the longer of its behavioral suite and everything else, not the sum
-([D-455, D-456](defects.md), think-k4fb). Three steps stay out, each on a measurement
+runs the surface as two concurrent Linux jobs — `packing-validate --checks` in
+`validate` and `packing-validate --sweeps` in `sweeps` — and reports the stable
+`packing-required` aggregate, which now waits on both.
+One required context, two prerequisites: `BC-218` made that the condition for any
+fan-out, because [D-380](defects.md) records what a fan-out of separately required
+checks cost this repository once.
+Since 2026-09-05 the surface is sixty-two of the sixty-six steps rather than
+thirty-seven: twenty-one steps that had run only after a merge were promoted into it
+([D-455, D-456](defects.md), think-k4fb). Four steps stay out, each on a measurement
 recorded beside `STEPS` in `packing/src/sqpack/cli/validate.py`: the negative controls,
-the `n=40` rigidity bracket, and the exhaustive exact tier.
+the `n=40` rigidity bracket, the exhaustive exact tier, and the slow behavioral lane.
 
 **The behavioral suite runs in three lanes, and they partition it.** `QUICK_TESTS`,
 `SLOW_TESTS` and `EXHAUSTIVE_TESTS` in `sqpack/cli/validate.py` are marker expressions
