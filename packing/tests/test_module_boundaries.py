@@ -678,6 +678,12 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_every_control_rejects",  # 8.0s
             "test_a_declared_count_disagreement_blocks_readiness",  # 2.6s
         },
+        # 8s of call time across 1; 8.15s on the hosted PR runner. This directly copies
+        # the source tree into a worker and has no shared builder whose cost can move to
+        # a neighbouring test, so the slow marker is the measured classification.
+        "test_negative_controls.py": {
+            "test_build_caches_leave_the_counted_surface_and_the_worker_trees",  # 8.15s on CI
+        },
         # 16s of call time across 1.
         "test_promote_elimination.py": {
             "test_promote_elimination",  # 15.7s

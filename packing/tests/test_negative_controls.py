@@ -53,6 +53,7 @@ def test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots() ->
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
+@pytest.mark.slow
 def test_build_caches_leave_the_counted_surface_and_the_worker_trees(
     tmp_path: Path,
 ) -> None:
