@@ -17,7 +17,9 @@ from __future__ import annotations
 import pytest
 
 from devtools.check_print_layout import (
+    BOXED_TOLERANCE_PX,
     TOLERANCE_PX,
+    Boxed,
     Centred,
     Footnote,
     Marker,
@@ -66,6 +68,7 @@ def probe(**over: object) -> Probe:
         "centred": [],
         "markers": [],
         "footnotes": [],
+        "boxed": [],
         "overflow": [],
         "measure": 576.0,
         "viewport": 576.0,
@@ -155,3 +158,22 @@ def test_the_sweep_is_reported_only_when_asked_and_only_where_a_loss_starts() ->
     assert swept == [
         "centring lost in print: figcaption[1] is `center` on screen and `left` in print"
     ]
+
+
+def boxed(**over: object) -> Boxed:
+    row: Boxed = {"path": "a.chip[1]", "text": "PDF", "offset": 0.0}
+    return {**row, **over}  # pyright: ignore[reportReturnType]
+
+
+@pytest.mark.parametrize("off", [-0.65, 0.65, -2.0])
+def test_a_label_off_the_centre_of_its_own_box_is_a_finding(off: float) -> None:
+    """-0.65 is what the chips shipped at, and is the reason this tolerance is not 1px."""
+    assert abs(off) > BOXED_TOLERANCE_PX
+    found = findings(both(boxed=[boxed(offset=off)]))
+    assert len(found) == 2
+    assert f"{off:+.2f}px off the centre of its own box" in found[0]
+
+
+@pytest.mark.parametrize("off", [0.0, 0.02, -0.5])
+def test_a_label_within_tolerance_is_not(off: float) -> None:
+    assert not findings(both(boxed=[boxed(offset=off)]))

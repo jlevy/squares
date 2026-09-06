@@ -98,8 +98,6 @@ Trump’s 1979 packing shows $s(11) \le {{BEST_PACKING_TEX}}$.[^trump] Here we p
 $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$. The project proves two bounds.
 (Some of the figures below also show the looser one, $s({{N}}) \ge {{DEFAULT_L_FRAC}}$,
 whose smaller numbers make the illustration simpler.)
-<span class="screen-only">The chooser under each figure switches every figure between
-the two at once.</span>
 
 <figure>
   <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>

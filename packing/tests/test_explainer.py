@@ -22,6 +22,7 @@ from devtools.render_explainer import (
     COMPOSITE_CARD,
     COMPOSITE_PNG,
     MARKDOWN_OUTPUT,
+    OUTPUT,
     RENDER_INPUTS,
     REPO,
     RESULT_ID,
@@ -32,6 +33,7 @@ from devtools.render_explainer import (
     render,
 )
 from devtools.render_explainer import load_certificate as load
+from devtools.render_explainer_pdf import OUTPUT as PDF_OUTPUT
 from sqpack.yamlio import safe_load
 
 
@@ -465,3 +467,40 @@ def test_no_rule_in_the_page_stylesheet_has_prose_for_a_selector(page: str) -> N
                 f"style block {index}: selector holds `important`: {text[:80]!r}"
             )
             assert len(text) < 400, f"style block {index}: selector is prose: {text[:80]!r}"
+
+
+def test_every_relative_link_in_the_page_names_a_file_the_deploy_serves(page: str) -> None:
+    """A chip that 404s on the deployed site is invisible to every other check here.
+
+    The page is served from a directory, so each relative `href` and `src` resolves
+    against whatever the Pages artifact happens to contain. The MD chip is checked above
+    against the constant the writer uses; this asks the same question of all of them at
+    once, which is what the PDF chip needed -- its file is written by a different module
+    from the one that writes the page, so nothing else relates the two.
+
+    Two links already shipped as `file:///home/.../known-best-1-100.pdf`, absolute paths
+    to the machine that built them, and the atlas figure was one of them.
+    """
+    served = {
+        OUTPUT.name,
+        MARKDOWN_OUTPUT.name,
+        PDF_OUTPUT.name,
+        *(asset.name for asset in COMPOSITE_ASSETS),
+    }
+    # Markup only. The page inlines KaTeX and kpress's client, and a minified
+    # `'+a(this.src)+'` in one of them reads as an attribute to a regex that does not
+    # know where the script ends.
+    markup = re.sub(r"<(script|style)\b.*?</\1>", "", page, flags=re.DOTALL | re.IGNORECASE)
+    links = {
+        match.group(2)
+        for match in re.finditer(r'\b(href|src)="([^"]+)"', markup)
+        if not re.match(r"[a-z][a-z0-9+.-]*:|#|//", match.group(2), re.IGNORECASE)
+    }
+    missing = sorted(link for link in links if link.split("#")[0].split("?")[0] not in served)
+    assert not missing, f"relative links to files the deploy does not serve: {missing}"
+
+
+def test_the_pdf_chip_offers_the_pdf_the_exporter_writes(page: str) -> None:
+    """Named against the exporter's own constant, so a rename moves both ends at once."""
+    assert f'href="{PDF_OUTPUT.name}"' in page
+    assert PDF_OUTPUT.parent == OUTPUT.parent, "the PDF must land beside the page it links from"

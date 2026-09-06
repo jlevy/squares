@@ -228,8 +228,20 @@ body {
   font-weight: var(--kpress-font-weight-sans-medium);
   gap: 0.3rem;
   letter-spacing: 0.02em;
-  line-height: 1;
-  padding: 0.32rem 0.5rem;
+  /* `normal`, not `1`, and the padding is what it is because of that.
+
+     `line-height: 1` makes the line box 15.3px while the sans content area at that size
+     is 17.28px. The half-leading is then negative, and negative leading is not shared
+     evenly the way positive leading is -- ascent and descent are not symmetric about the
+     em box -- so the text sat 0.65px above the chip's centre: 2.11px of space over it and
+     3.41px under. Small, and a reader saw it.
+
+     A line box at least as tall as the content area centres exactly, so the height comes
+     back from the padding instead: `normal` gives a 23.98px content area, and 0.11rem
+     either side puts the chip at 27.50px against the 27.52px it had. Measured after:
+     2.75px above, 2.75px below, offset 0. `check_print_layout` holds it there. */
+  line-height: normal;
+  padding: 0.11rem 0.5rem;
   text-decoration: none;
 }
 .doc-links .chip:hover {

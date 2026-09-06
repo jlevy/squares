@@ -66,6 +66,14 @@ class Footnote(TypedDict):
     fontSize: float
 
 
+class Boxed(TypedDict):
+    """Text against the box drawn around it, for a control that is a box and a label."""
+
+    path: str
+    text: str
+    offset: float
+
+
 class Overflow(TypedDict):
     """A block reaching past the measure, where the paper will clip rather than wrap."""
 
@@ -80,6 +88,7 @@ class Probe(TypedDict):
     centred: list[Centred]
     markers: list[Marker]
     footnotes: list[Footnote]
+    boxed: list[Boxed]
     overflow: list[Overflow]
     measure: float
     viewport: float
@@ -99,6 +108,13 @@ class Measured(TypedDict):
 #: pixel is finer than that construction is self-consistent to.
 TOLERANCE_PX = 1.0
 
+#: Half of that, for a label against the box drawn around it. Tighter because the
+#: measurement is tighter: both sides are rects from one layout, with none of the
+#: marker check's mismatch between a marker box and a line box. It has to be tighter to
+#: be worth having -- the chips shipped 0.65px off and a reader saw it, which a
+#: one-pixel tolerance would have called clean.
+BOXED_TOLERANCE_PX = 0.5
+
 #: The measure the PDF actually has, in CSS pixels. `emulate_media` switches which media
 #: queries match; it does not paginate and it does not apply the `@page` box. So the
 #: default 1280px viewport leaves the column at whatever `--kpress-measure` caps it to --
@@ -111,7 +127,7 @@ PRINT_VIEWPORT: ViewportSize = {"width": 816 - 2 * 120, "height": 1056 - 2 * 120
 #: apart: the whole point is comparing like with like across `emulateMedia`.
 _PROBE = r"""() => {
   const out = {
-    centred: [], markers: [], footnotes: [], overflow: [],
+    centred: [], markers: [], footnotes: [], boxed: [], overflow: [],
     /* Named so a viewport that did not take is visible in the output rather than
        silently making every horizontal answer wrong. */
     measure: document.querySelector('.kpress')?.getBoundingClientRect().width ?? 0,
@@ -207,6 +223,31 @@ _PROBE = r"""() => {
       /* The width of its own line that precedes it. Near zero and it opens the line. */
       leadIn: round(ahead),
       fontSize: round(parseFloat(getComputedStyle(block).fontSize)),
+    });
+  }
+
+  /* Boxed labels: a control whose whole design is a word inside a border, where the
+     word being off the border's centre is the defect. Measured against the box rather
+     than against a line, because there is only one line and the box is what a reader
+     sees it against.
+
+     The chips shipped 0.65px high, from `line-height: 1` on a font whose content area is
+     taller than one em: the half-leading goes negative and negative leading is not shared
+     the way positive leading is. Nothing here computes a marker or a line, so none of the
+     checks above could have seen it. */
+  for (const chip of document.querySelectorAll('.doc-links .chip')) {
+    const box = chip.getBoundingClientRect();
+    const text = [...chip.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
+    if (!text || !box.height) continue;
+    const range = document.createRange();
+    range.selectNodeContents(text);
+    const ink = range.getBoundingClientRect();
+    if (!ink.height) continue;
+    out.boxed.push({
+      path: sig(chip),
+      text: text.textContent.trim().slice(0, 20),
+      /* Positive when the label sits below the centre of the box drawn around it. */
+      offset: round((ink.top + ink.bottom) / 2 - (box.top + box.bottom) / 2),
     });
   }
 
@@ -330,6 +371,12 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
             if row["leadIn"] < row["fontSize"]
         )
         found.extend(
+            f"{medium}: label sits {row['offset']:+.2f}px off the centre of its own box "
+            f"({row['path']}: {row['text']!r})"
+            for row in probe["boxed"]
+            if abs(row["offset"]) > BOXED_TOLERANCE_PX
+        )
+        found.extend(
             f"{medium}: {row['path']} runs {row['over']:.2f}px past the measure "
             f"({row['text']!r})"
             for row in probe["overflow"]
@@ -385,9 +432,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     declared = sum(1 for row in counts["centred"] if row["declared"])
     print(
         f"measured {len(counts['centred'])} blocks ({declared} declared `.centred`), "
-        f"{len(counts['markers'])} list markers and {len(counts['footnotes'])} footnote "
-        f"references in each medium; print column "
-        f"{counts['measure']:.0f}px in a {counts['viewport']:.0f}px page"
+        f"{len(counts['markers'])} list markers, {len(counts['footnotes'])} footnote "
+        f"references and {len(measured['screen']['boxed'])} boxed labels in each medium; "
+        f"print column {counts['measure']:.0f}px in a {counts['viewport']:.0f}px page"
     )
     if found:
         print(f"{len(found)} print-layout findings")
