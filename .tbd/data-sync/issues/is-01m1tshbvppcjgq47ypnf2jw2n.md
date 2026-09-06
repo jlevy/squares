@@ -3,13 +3,13 @@ type: is
 id: is-01m1tshbvppcjgq47ypnf2jw2n
 title: "campaign record: session-087's in-progress workflow deadline has passed, failing the full gate on main"
 kind: bug
-status: open
+status: in_progress
 priority: 2
-version: 2
+version: 3
 labels: []
 dependencies: []
 created_at: 2026-09-06T07:22:15.797Z
-updated_at: 2026-09-06T07:46:58.513Z
+updated_at: 2026-09-06T07:49:10.395Z
 ---
 packing-validate's 'campaign record' step fails on main at 235bfc50 (run 34017401849, the complete integration surface) and locally on 2026-09-06 with: FAIL session-087-agenda022-continuation.md: in-progress workflow phase 2 deadline_at has passed. The check is time-based: an in-progress session record with a declared phase deadline goes red once the clock passes it, whichever branch is checked out. Close or extend session-087's phase 2 in its record, or give the check a grace rule for records whose session is still open. Not a change of any pull request; the PR surface (--checks) does not run this step.
 
