@@ -70,7 +70,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | Result | `n` | [`V`](epistemics.md#verification) | [`C`](epistemics.md#confirmation) | [`S`](epistemics.md#significance-and-novelty) | [Novelty](epistemics.md#significance-and-novelty) | What it establishes |
 | --- | --- | --- | --- | --- | --- | --- |
 | [T-018](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 381/100, by a first-party weighted fractional unavoidable-set certificate at container side 381/100 = 3.81. |
-| [T-022](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S5` | `apparently-novel` | s(11) >= 38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703, as a weak limit corollary of T-018’s retained certificate. |
+| [T-022](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S5` | `apparently-novel` | s(11) >= 38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703, as a weak limit corollary of T-018’s retained certificate. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V4` | `C4` | `S4` | `apparently-novel` | s(12) >= 99/25, by a first-party weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V4` | `C4` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from a first-party weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
 | [T-020](packing/frontier/RESULTS.md) | 19, 20, 21 | `V4` | `C4` | `S4` | `apparently-novel` | s(19) >= 24/5, s(20) >= 24/5 and s(21) >= 24/5, from a first-party weighted fractional unavoidable-set certificate at container side 24/5 = 4.80. |
@@ -291,6 +291,7 @@ case or experiment separately.
 | [Adversarial review of the \(s(11)\ge 3.81\) claim](docs/project/reviews/review-2026-09-05-gpt6-pro-adversarial-review.md) | dated review record | record | retained | — |
 | [Review: external strategies for pushing the \(s(11)\) lower bound past 3.81](docs/project/reviews/review-2026-09-05-strategy-gpt-56-pro-gemini-grok.md) | dated review record | record | superseded | [X-016 — After 3.81: Two Managers, Six Gates, One Proof Boundary](packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md) |
 | [Adversarial Senior Review of the Agenda 024 Portfolio](docs/project/reviews/review-2026-09-06-agenda024-adversarial-senior-strategy.md) | dated review record | record | superseded | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) |
+| [Independent Review of the T-022 Exact-Containment Limit](docs/project/reviews/review-2026-09-06-t022-dilation-limit.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
 | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |
