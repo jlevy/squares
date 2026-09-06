@@ -27,9 +27,9 @@ name: Branch mergeability
 # branch produces no event on that branch, so this workflow is silent until the next push
 # -- which is when `D-459` was actually reproduced, five times over, so the measured
 # incident is covered. The uncovered case is a labelled, approved branch that sits while
-# the base moves; a merge queue closes it by construction, because the queue builds the
-# merge commit itself and its failure is a dequeue rather than a red `main`. That is the
-# same setting `deep-gate.yml` is waiting on, and `development.md` records both.
+# the base moves. An eligible repository could use a merge queue to test the combined
+# commit, but this personal repository cannot enable one. `development.md` documents
+# that limitation and the workflow changes future queue adoption would require.
 #
 # This adds no required context and cannot sit pending: a push always fires it, and it
 # reports in well under a minute. Its only cost is the checkout below.

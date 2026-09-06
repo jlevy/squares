@@ -153,7 +153,7 @@ def test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers() -> No
 
 
 def test_the_deep_gate_does_not_run_on_every_build() -> None:
-    """Mandatory is not the same as unconditional, and the cost is why.
+    """The advisory deep run starts only when a reviewer requests it.
 
     The selection above is 1943.05s in one step against a `--fast` band of 700s, so a
     deep gate on every push is the tax `test_the_pull_request_surface_defers_only_what_
@@ -167,7 +167,7 @@ def test_the_deep_gate_does_not_run_on_every_build() -> None:
     """
     triggers = _workflow(DEEP_GATE)["on"]
 
-    assert set(triggers) == {"merge_group", "pull_request", "workflow_dispatch"}
+    assert set(triggers) == {"pull_request", "workflow_dispatch"}
     assert set(triggers["pull_request"]) == {"types"}
     # `synchronize` is not decoration. Without it the label attests to a commit that is
     # no longer the head, which is the same stale evidence the daily backstop provides.
@@ -176,6 +176,22 @@ def test_the_deep_gate_does_not_run_on_every_build() -> None:
 
     for job_name, job in _workflow(DEEP_GATE)["jobs"].items():
         assert LABEL_TEST in str(job.get("if", "")), f"{job_name} runs without the label"
+
+
+def test_an_unlabelled_opened_pull_request_reports_skipped_deep_jobs() -> None:
+    """Opening a PR must create a run, but must not start expensive deep work.
+
+    GitHub cannot report skipped jobs if the event never creates a workflow run.
+    Pin both the opening event and the complete conditions: an accidental unconditional
+    opening-event clause would preserve the trigger while starting the deep suite.
+    """
+    document = _workflow(DEEP_GATE)
+    assert "opened" in document["on"]["pull_request"]["types"]
+    requested = f"github.event_name == 'workflow_dispatch' || {LABEL_TEST}"
+    for job_name, job in document["jobs"].items():
+        condition = " ".join(str(job["if"]).split())
+        expected = f"!cancelled() && ({requested})" if job_name == AGGREGATE_JOB else requested
+        assert condition == expected, job_name
 
 
 def test_the_deep_gate_reports_one_context_and_never_leaves_it_pending() -> None:
