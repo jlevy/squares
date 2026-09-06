@@ -21,8 +21,10 @@ from devtools.run_fractional_colgen import (
     RunSettings,
     certificate_json,
     counts_for,
+    main,
     round_table_from,
     run,
+    run_summary_json,
     seed_points_from,
     window_lattice,
 )
@@ -96,6 +98,10 @@ def test_the_run_reports_a_row_per_round_and_freezes_what_it_found(tmp_path: Pat
     result = run(settings, log_path=tmp_path / "run.log", freeze=freeze, verify_serial=False)
 
     assert result["settings"] == settings.as_dict()
+    serialized = json.loads(run_summary_json(result))
+    for key in ("objective", "least_covered"):
+        assert isinstance(result[key], float)
+        assert serialized[key] == result[key]
     rounds = result["rounds"]
     assert isinstance(rounds, list)
     assert rounds
@@ -248,3 +254,70 @@ def test_a_deadline_stop_leaves_the_table_and_no_candidate(tmp_path: Path) -> No
     assert result["frozen"] is None
     assert str(result["stopped"]).startswith("deadline reached")
     assert not (tmp_path / "never.json").exists()
+
+
+def test_deadline_before_first_round_writes_strict_json(tmp_path: Path) -> None:
+    """Unavailable solver values serialize as null, not nonstandard tokens."""
+
+    output = tmp_path / "summary.json"
+    exit_code = main(
+        [
+            "--n",
+            "1",
+            "--side",
+            "2",
+            "--shrink",
+            "1",
+            "--grid-counts",
+            "3",
+            "--inset",
+            "1/2",
+            "--angle-limit",
+            "1/10",
+            "--direction-steps",
+            "1",
+            "--scale",
+            "1000",
+            "--column-rounds",
+            "1",
+            "--max-rounds",
+            "4",
+            "--rows-per-direction",
+            "2",
+            "--deadline-seconds",
+            "-1",
+            "--json",
+            str(output),
+        ]
+    )
+
+    text = output.read_text()
+    assert exit_code == 0
+    assert "Infinity" not in text
+    assert "NaN" not in text
+    record = json.loads(text)
+    assert str(record["stopped"]).startswith("deadline reached")
+    assert record["objective"] is None
+    assert record["least_covered"] is None
+    rounds = record["rounds"]
+    assert isinstance(rounds, list)
+    assert len(rounds) == 1
+    for key in ("objective", "least_covered", "averaged_depth", "reduced_cost"):
+        assert rounds[0][key] is None
+
+
+def test_summary_json_refuses_unexpected_non_finite_values() -> None:
+    """The strict encoder catches a non-finite value outside known sentinels."""
+
+    result: dict[str, object] = {
+        "objective": 1.0,
+        "least_covered": 1.0,
+        "rounds": [],
+        "seconds": float("nan"),
+    }
+    try:
+        run_summary_json(result)
+    except ValueError as error:
+        assert "Out of range float values" in str(error)
+    else:
+        raise AssertionError("the summary encoder accepted an unexpected NaN")

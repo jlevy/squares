@@ -144,6 +144,7 @@ def test_general_browser_javascript_parses_as_shipped() -> None:
     assert completed.returncode == 0, completed.stderr
 
 
+@pytest.mark.slow
 def test_service_serves_live_and_exact_profiles_with_scenario_refresh() -> None:
     server = create_server(port=0)
     thread = threading.Thread(target=server.serve_forever, daemon=True)

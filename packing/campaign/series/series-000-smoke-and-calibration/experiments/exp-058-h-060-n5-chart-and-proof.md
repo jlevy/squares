@@ -34,9 +34,9 @@ experiment:
     control: >-
       T-012's retained certificate record bc-049-n5-rigidity-certificates.json and X-007,
       both held fixed and neither edited; the pose read corner-for-corner out of
-      cases/gobel5; the C8 exp-034 specificity control, pre-run here through the T-012
-      machinery and then decided exactly on container side; and the seven remaining
-      declared controls C1-C7, which are specified in the proof artifact and belong to the
+      cases/gobel5; the exp-034 specificity check, Control 8, pre-run here through the
+      T-012 machinery and then decided exactly on container side; and the remaining
+      Controls 1–7, which are specified in the proof artifact and belong to the
       W7 instrument phase rather than to this round. That instrument was built after this
       packet was frozen and exercises all eight there; its readiness review has now
       passed, at final payload digest 743fd18a, which makes the instrument usable and
@@ -178,7 +178,8 @@ experiment:
       and invalid at Goebel's side for every sampled u, its square 1 overshooting the wall
       by exactly 3 sqrt(2)/4 - 1 > 0, so the two feasible sets are disjoint and the family
       is at positive distance from the pose. control_exp034.py separately shows the cone is
-      open there, which is what the unbuilt instrument's C8 refusal will have to reproduce
+      open there, which is what the unbuilt instrument's Control 8 refusal will have to
+      reproduce
   verdict:
     decision: accepted
     needs_review: false
@@ -296,8 +297,8 @@ reaching the printed page, which is gap 1 of the Amendment:
 1. **Discharged.** A `W7` instrument whose readiness review passes — it passed on the
    third round, at final payload digest `743fd18a`; the history, the reviewer’s one
    residual recommendation and what the lane changed after the pass are below.
-   That does not make *this* round’s chart checked: only `C8` was pre-run here, and only
-   to confirm that `exp-034` is not a refutation — not to exercise an instrument
+   That does not make *this* round’s chart checked: only Control 8 was pre-run here, and
+   only to confirm that `exp-034` is not a refutation — not to exercise an instrument
    refusal, and every number in this record still comes from scratchpad sympy.
 2. **Open.** Primary-text confirmation of the curve-selection statement, `BCR`
    Proposition 8.1.13 — or Milnor 1968 Lemma 3.1 *together with* the finite-union
@@ -334,8 +335,7 @@ Built at `6580a9fd`, sixteen minutes before this record was registered, as the p
 [`devtools/assess_n5_rigidity.py`](../../../../devtools/assess_n5_rigidity.py) rather
 than extending it, which is a deviation from `W7`’s registered instrument text.
 It self-reports `instrument_ready` with `isolation_decided` false — it does not decide
-isolation — and it exercises all eight controls `C1`–`C8`, matching the artifact’s table
-one for one.
+isolation — and it exercises Controls 1–8, matching the artifact’s table one for one.
 
 Its readiness review has now **passed**, on the third round, which is what moved `H-060`
 to `instrument_ready: true`:
@@ -344,10 +344,10 @@ to `instrument_ready: true`:
   `1ab2708623cf4dd077a0f125ba81cf3777088ea8e4d750a56d1dc3f55f807978` at commit
   `2f112f4c`. Classification **BOUNDED-CAVEAT**, not a pass.
   Every mathematical and computational claim reproduced, but two of the eight registered
-  controls — `C1` `changed_feature` and `C4` `invented_contact` — were structurally
-  incapable of failing and never reached the binding’s refusal path, so “all eight
-  controls reject” overstated the evidence for the one refusal the instrument exists to
-  make.
+  controls — Control 1 `changed_feature` and Control 4 `invented_contact` — were
+  structurally incapable of failing and never reached the binding’s refusal path, so
+  “all eight controls reject” overstated the evidence for the one refusal the instrument
+  exists to make.
 - Repaired at `609e7392`; digest
   `ba99ccccd7303f260f48c62a10fb9b6dc43ca3e8ff804646ef5de89a48967971`. The re-review
   verified the repair by removal — neutering the guard or the binding makes both
@@ -365,8 +365,8 @@ to `instrument_ready: true`:
   The leaf diff against the author’s final certificate shows exactly one differing leaf,
   `/claim_boundary/provenance/pinned_commit`, with `tree_matches: True` and
   `paths_differing: []` — which is precisely the provenance item the second round left
-  open, now closed. The `C1`/`C4` repair was re-verified by removal: replace the guard
-  with a no-op and both controls stop rejecting.
+  open, now closed. The repair to Controls 1 and 4 was re-verified by removal: replace
+  the guard with a no-op and both controls stop rejecting.
   The corrected constant is confirmed on all sixteen support features,
   `G''(e_u4) = -2(m+1)` exactly; the reviewer’s earlier `-(m + 1/2)` was the geometric
   gap’s second derivative rather than the cleared chart polynomial’s. The structural

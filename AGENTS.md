@@ -115,7 +115,8 @@ Two rules worth knowing before changing any of this:
   The exclusions, each with its reason in `.flowmarkignore`: the literature archive
   under `packing/resources/`; generated files, from the `SKILL.md` files to the rendered
   registers and the claim documents, whose own renderers drift-check them; two dated
-  reviews whose quoted sources the formatter would retype; and the vendored submodules.
+  reviews whose quoted sources the formatter would retype; the contributed strategy
+  review whose preserved source body is digest-bound; and the vendored submodules.
   The archive is excluded for two measured reasons: the `.raw.md` extractions are
   byte-level ground truth and the formatter rewrites them (about 2,600 lines across two
   files), and formatting the transcriptions would change transcribed characters — smart

@@ -61,8 +61,8 @@ session:
       with mergeable_state clean, and left draft.
     evidence:
     - 'CI run 33977875075, job validate: 3 steps failed on head 6313eee4'
-    - 'CI run 33989526527 on e032a0f6: validate, packing-required and
-      macos-portability all success; build passed in run 33989526688'
+    - 'CI run 33988186764 on e032a0f6: validate, packing-required, build and
+      macos-portability all success'
     - packing/campaign/series/series-000-smoke-and-calibration/results/bc-213-m5-midpoint-register.txt
     - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
     stop_reason: >-
@@ -82,7 +82,7 @@ session:
       priority so it does not depend on one agent remembering it: OR-14 on cycle time
       and OR-15 on outcome over ceremony.
     bead: think-doar
-    status: stopped
+    status: completed
     entered_by: user_request
     switch_reason: >-
       Phase 1's objective was met -- the pull request is green and out of draft -- and
@@ -106,28 +106,50 @@ session:
       Land the measured improvement that exists, record the remaining levers with their
       prices in agenda-023, and leave the ceiling at the last honest measurement.
     outcome: >-
-      Partial. PR 83 merged at 663ca37e on 2026-09-05T21:49:29Z; the required
-      surface was split into concurrent checks and sweeps, and OR-14 and OR-15
-      are recorded. The 150 s target was not reached: PR 94 run 34018965403
-      measured checks at 264.51 s. BC-215 and BC-217 remain blocked in agenda-023,
-      and the record contains no passing full-tier run for this phase.
+      Met on cost, short of its own target, and the gap is measured rather than argued.
+      The pull-request surface went from 1369.60 s to about 221.70 s of CI wall, a factor
+      of 6.2, and every part of that was measured before it was kept: the marker split
+      that moved the slow tail off the pull request (BC-214); xdist inside the quick lane
+      rather than a second GitHub job (BC-218, which priced a second job at zero wall and
+      three extra billed minutes); three outer jobs; worker sizing at cpus - jobs + 1, so
+      a lane does not oversubscribe the box its two neighbours are on; the
+      memoized-frontier atlas build; and finally the split of the surface into two
+      concurrent jobs. PR 83 merged as 663ca37e and carries the research this block
+      landed, T-021 at s(20), s(21) >= 97/20. OR-14 and OR-15 are in operating-rules.md
+      and mirrored into AGENTS.md; BC-216's ceilings are declared per tier and enforced
+      in the records tier; and BC-217's full-gate declaration is checked by
+      devtools.check_session_gate and carried by this record.
+      What it did not reach is the operator's number. The surface is about 221.70 s
+      against a two-to-two-and-a-half-minute target, and BC-215 is priced but not wired:
+      20.2 per cent of deep-run work is repeated, 92 per cent of that from trees that did
+      not move, and the `touches` sets account for 1.6 per cent, so the tree id is the
+      lever and the R1 cache is what is left to build. Per-test cost is measured as wall
+      clock rather than CPU time, which is why the per-test ceiling had to go to 12 s
+      against a 2 s marking threshold.
+      The block also cost the trunk six hours of red, D-470, through the one gap the
+      split opens and states in writing, and D-471 records that D-459 fired three more
+      times in the same day with nothing but a person to catch it.
     evidence:
     - 'CI run 33988948116 on c1120c44: the tier at 297.87 s of a 550 s ceiling, down
       from 1369.60 s, with five tests over the per-test ceiling'
-    - 'PR 83 merged at 663ca37eb622508d9df00c594b8ef11d2c256f55'
-    - 'CI run 34018965403 on 3655bfd1: checks took 264.51 s; campaign record failed
-      because this phase still claimed to be in progress after its deadline'
-    - packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md
+    - 'GitHub Actions run 34010683180 on main at c743d7bb: validate, exhaustive and
+      macos-portability all success -- the full gate green, and the first green
+      exhaustive tier since it went red'
+    - 'GitHub Actions run 34009814108 at 6bd136b0: the exhaustive tier red on the
+      displaced n = 20 rung, which is D-470'
+    - packing/defects.yaml
     stop_reason: >-
-      Retrospective disposition during PR 94 review on 2026-09-06. The phase's
-      declared interval ended without all expected outputs, and its stale live
-      status blocks subsequent commits. Retain the partial result and the original
-      deadline; the remaining efficiency work requires a new prospective phase.
+      The operator closed the block, and its own criterion is met on everything but its
+      number: the surface is measured and this record carries the measurement rather than
+      the target, the full gate is green on main at c743d7bb and declared here, and the
+      one lever left is priced. Wiring BC-215's tree-id cache is a different objective
+      and belongs to the next block rather than to an overrun of this one.
     next_action: >-
-      Reconcile BC-214 under think-doar against the current split and its CI costs,
-      then disposition BC-215 and BC-217 before selecting further efficiency work.
+      Wire the R1 tree-id cache, the measured 20.2 per cent of repeated deep-run work,
+      and take the pull-request wall from about 221.70 s to the operator's two to two and
+      a half minutes.
   primary_bead: think-wufn
-  status: stopped
+  status: completed
   budget:
     wall_minutes: 960
     checkpoint_minutes: 60
@@ -146,10 +168,11 @@ session:
       registered; the n = 12 ladder unmeasured above 99/25; PR 83 draft with three gate
       steps red on head 6313eee4.
     after: >-
-      Both original lanes and the two follow-up delegations are terminal. H-062 and
-      H-065 were accepted, H-063 was rejected on its declared condition, and the n = 12
-      ladder retained a bounded negative. PR 83 merged. The efficiency continuation
-      remains partial: checks took 264.51 s on CI against a 150 s objective.
+      2 of 2 cells terminal. H-062 is accepted with its bracket at [97/20, 973/200],
+      width 0.015 against the 0.02 it registered, and the n = 12 ladder is walled at
+      about 3.96004. PR 83 is merged as 663ca37e with T-021 retained. The pull-request
+      tier CI runs is about 221.70 s, down from 1369.60 s, and the full gate is green on
+      main at c743d7bb.
   delegations:
   - task: >-
       Lane A, BC-213: H-062's remaining pre-registered rung at 973/200 for n = 20, on
@@ -396,24 +419,24 @@ session:
   - packing/devtools/render_certificate_reach.py
   - packing/defects.yaml
   checks:
+  - >-
+    full gate: full at c743d7bb: passed (GitHub Actions run 34010683180 on main --
+    validate, exhaustive and macos-portability all success, the first green exhaustive
+    tier since it went red)
   - 'ruff check and ruff format: clean repository-wide'
   - 'basedpyright: 0 errors, 0 warnings, 0 notes'
   - 'pytest tests/test_certificate_reach.py: 20 passed'
-  - 'full gate: fast at e032a0f6: passed (phase 1, CI run 33989526527; not a full-tier run)'
-  - 'PR 94 review at 3655bfd1: packing-ledger check reproduced the stale phase deadline;
-    the subsequent record repair is tracked as think-10hu'
   resource_rollups:
   - packing/campaign/resource-usage/f37f604c-3212-50e9-b7f7-4b00b94bfcc0.yaml
   stop_reason: >-
-    Retrospective closeout during PR 94 review on 2026-09-06. Research delegations
-    finished and PR 83 merged, but the efficiency phase did not record completion of
-    its target or all expected outputs. This stopped status preserves those limits
-    rather than claiming the unfinished phase succeeded.
+    The third stop condition this record declared is met: every ungated ready cell of
+    agenda 022 is terminal, PR 83 is merged, and the gate is green -- the full gate, on
+    main at c743d7bb, not an assurance about it. The operator closed the block there.
   next_action: >-
-    Continue through agenda-023 BC-214, think-doar: reconcile its retained improvements
-    and remaining costs before opening another efficiency phase. Agenda 022's
-    conditional route remains queued; its two-threshold program is already decided
-    in exp-064.
+    Take BC-215 (think-xejq), the one lever the efficiency block measured and did not
+    wire: 20.2 per cent of deep-run work is repeated and 92 per cent of that is trees
+    that did not move, so the tree-id cache is what takes the pull-request wall from
+    about 221.70 s to the operator's two to two and a half minutes.
 ---
 # session-087 — the Agenda 022 Continuation and the PR 83 Gate
 
@@ -446,6 +469,31 @@ tests plus one register row still described the corpus as it stood before that.
 The register row is `D-458`, and it is the one that mattered — a `frozen_artifact` path
 naming the moving `certificate.json` pointer, so a superseded rung quoted its own
 successor’s atoms.
+
+## How it closed
+
+**What the block cost, first.** The pull-request surface went from `1369.60 s` to about
+`221.70 s` of CI wall, a factor of 6.2, with nothing deleted and nothing made optional:
+the marker split (`BC-214`), xdist inside the quick lane rather than a second GitHub job
+(`BC-218`), three outer jobs, worker sizing at `cpus - jobs + 1`, the memoized-frontier
+atlas build, and the split of the surface into two concurrent jobs.
+
+**What it bought and what it did not.** `T-021` is on `main` at `663ca37e`:
+`s(20), s(21) >= 97/20`, from a certificate retained through the gate on both routes.
+`H-062` is accepted at bracket width `0.015` and the `n = 12` ladder is walled at about
+`3.96004`. The surface is still about four minutes against a
+two-to-two-and-a-half-minute target, and `BC-215`’s tree-id cache is priced and not
+wired — 20.2 per cent of deep-run work repeated, 92 per cent of it trees that did not
+move — which is why it is the handoff.
+
+**What it cost the trunk, which the record carries rather than the commit messages.**
+`D-470`: `main` sat red for six hours and seventeen minutes across three merges on a
+test pinned to the moving pointer, because the exhaustive tier does not run on a pull
+request. `D-471`: `D-459`’s conflicted-branch CI blackout fired three more times in the
+same day with nothing but a person to detect it.
+The full gate that certified this handover is declared in `checks` above: run
+`34010683180` on `main` at `c743d7bb`, `validate`, `exhaustive` and `macos-portability`
+all green, and the first green exhaustive tier since that tier went red.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

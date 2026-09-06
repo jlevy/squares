@@ -50,6 +50,13 @@ def test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots() ->
     assert ROOT / "witnesses/prospective" in PRUNE
     assert ROOT / "atlas/known-best/rendering" in PRUNE
     assert ROOT / "atlas/known-best/contact-overlays" in PRUNE
+    assert (
+        ROOT
+        / "campaign/series/series-000-smoke-and-calibration/results"
+        / "bc-200-state-191-50.json"
+        in PRUNE
+    )
+    assert ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-025" in PRUNE
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 

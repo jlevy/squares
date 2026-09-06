@@ -72,7 +72,8 @@ experiment:
     checked_by: >-
       sqpack.fractional.ceiling.verify_ceiling on the scaled 728-placement family:
       depth at most one at every arrangement vertex holds (24 vertices decided exactly);
-      the total-weight condition fails at 45019185620/4974572153 = 9.049861
+      the total-weight condition fails at 45019185620/4974572153 ≈
+      9.04986081925667
   - shape: determination
     role: mechanism
     question: >-
@@ -82,7 +83,8 @@ experiment:
     checked_by: >-
       verify_ceiling on the scaled 760-placement family at 191/50: depth at most one at
       all 2,769,100 arrangement vertices (437,480 decided exactly, the rest screened in
-      floats below the exact maximum 1.115838 before scaling); total 9.907906
+      floats below the exact maximum 1.115838 before scaling); exact retained total
+      approximately 9.907905594982566, hence strictly above 9.907905
   verdict:
     decision: abandoned
     primary_criterion: >-
@@ -92,13 +94,14 @@ experiment:
     reason: >-
       Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop
       stalled below eleven at both sides and decides nothing about the covering value;
-      what it establishes exactly is nu*(3.82) >= 9.907906 and nu*(3.85) >= 9.049861,
-      with the converged row loop's restricted optimum 11.055617 on 12,761 sites as the
-      certified upper end of the 3.82 bracket.
+      what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with
+      downward-safe displayed endpoints whose exact rational values are retained in the
+      two summary records. The converged row loop's restricted optimum 11.055617 on
+      12,761 sites supplies the upper end of the 3.82 bracket.
     budget_spent: 110 minutes of the cell's 110, of which 66 minutes of wall on the two runs
     best_reached: >-
-      nu*(3.82) >= 9.907906 (2,769,100 vertices, exact maximum depth 1.115838 before
-      scaling); nu*(3.85) >= 9.049861 (2,419,348 vertices, 1.243643); tau*(3.82) <=
+      nu*(3.82) >= 9.907905 (2,769,100 vertices, exact maximum depth 1.115838 before
+      scaling); nu*(3.85) >= 9.049860 (2,419,348 vertices, 1.243643); tau*(3.82) <=
       11.055617 on the 12,761-site set
     reopen_when: >-
       a resumed loop from the retained 191/50 state with row generation bounded to one
@@ -117,15 +120,25 @@ lower bound on the fractional packing value `ν*(L)` and hence on the covering v
 `τ*(L)`.
 
 At `191/50 = 3.82`, nine iterations of the cutting-plane loop raised the exact
-depth-scaled total from the retained `1152/175 = 6.5829` to `9.907906`, with the row
-loop converging at iteration 5 to a restricted optimum of `11.055617` on 12,761 sites,
-so the bracket is `9.907906 ≤ ν*(3.82) ≤ τ*(3.82) ≤ 11.055617`. At `77/20 = 3.85`, three
-iterations warm-started from the `3.82` state reached `9.049861`; the row loop never
-converged there, so no upper end is certified.
+depth-scaled total from the retained `1152/175 = 6.5829` to an exact retained rational
+approximately equal to `9.907905594982566`. Thus the safely displayed bracket is
+`9.907905 ≤ ν*(3.82) ≤ τ*(3.82) ≤ 11.055617`; the row loop converged at iteration 5 to a
+restricted optimum of `11.055617` on 12,761 sites.
+At `77/20 = 3.85`, three iterations warm-started from the `3.82` state reached the exact
+rational `45019185620/4974572153 ≈ 9.04986081925667`, hence `ν*(3.85) ≥ 9.049860`. The
+row loop never converged there, so no upper end is certified.
 Neither family reached eleven, so nothing was frozen under the case package and the
 claim stays unresolved in the hypothesis’s own words; the families, their
 `verify_ceiling` verdicts, the summaries, the logs and the resumable `3.82` state are
 retained beside this record.
+
+## Correction on 2026-09-05
+
+Earlier versions displayed the two exact lower bounds as `9.907906` and `9.049861` and
+then used those upward-rounded decimals in inequalities.
+The exact rational results and the round’s scientific disposition are unchanged.
+The frontmatter and body now use the downward-safe endpoints `9.907905` and `9.049860`,
+while the summary records retain the exact rationals.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

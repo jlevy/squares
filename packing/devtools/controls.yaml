@@ -161,12 +161,12 @@ controls:
 # stale `replace` fails loudly, because its search string no longer matches and the
 # mutation cannot be applied, while a stale `expect` degrades quietly into "failed, but
 # not with the expected message", which reads as a broken control rather than a moved
-# corpus. That is what happened: the count went 59 -> 64, `replace` was updated and
-# `expect` was not. One place tracking the corpus is enough, and it should be the one
-# that announces itself.
+# corpus. That is what happened when the count went 59 -> 64; the same anchor now moves
+# with the registered corpus. One place tracking the corpus is enough, and it should be
+# the one that announces itself.
 - name: synopsis - narrative round aggregate lagging the ledger
   file: ../SYNOPSIS.md
-  replace: ["There are 64 terminal rounds", "There are 45 terminal rounds"]
+  replace: ["There are 66 terminal rounds", "There are 45 terminal rounds"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "terminal-round aggregate is not"
 
@@ -1280,9 +1280,9 @@ controls:
 
 - name: synopsis handoff - W10 selected entry is replaced by a deferred candidate
   file: ../SYNOPSIS.md
-  replace: ["**Selected next entry:** `think-doar`", "**Selected next entry:** `think-cyko`"]
+  replace: ["**Selected next entry:** `think-xejq`", "**Selected next entry:** `think-cyko`"]
   run: python3 -m devtools.check_synopsis
-  expect: "exactly one canonical Selected next entry marker for think-doar"
+  expect: "exactly one canonical Selected next entry marker for think-xejq"
 
 # --- the gate's own declared cost (agenda-023 BC-216) ---
 #
@@ -1392,13 +1392,14 @@ controls:
   run: python3 -m devtools.check_session_gate
   expect: "claims a gate run and does not parse"
 
-# The primary refusal, and the boundary in the same mutation: session-087 is the first
-# session the rule binds. Removing its declaration must leave its stopped state
-# uncertified, rather than quietly exempting the first record governed by the rule.
+# The primary refusal, on the first session the rule binds. session-087 closed with its
+# declaration in place, so the mutation is no longer terminalizing it -- it breaks the
+# declaration's prefix, which leaves a terminal session whose `checks` claim no gate at
+# all. The mutated item is still there and still readable, which is the point: prose
+# about a gate is not a declaration, and this is the state `GATE_DECLARED_FROM` exists
+# to start refusing.
 - name: session gate - a terminal session that names no gate run at all
   file: campaign/agent-sessions/session-087-agenda022-continuation.md
-  replace:
-    - "  - 'full gate: fast at e032a0f6: passed (phase 1, CI run 33989526527; not a full-tier run)'\n"
-    - ""
+  replace: ["full gate: full at ", "full gate ran at "]
   run: python3 -m devtools.check_session_gate
   expect: "terminal session names no full-gate run"
