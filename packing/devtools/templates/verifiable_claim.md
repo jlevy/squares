@@ -121,13 +121,21 @@ $|c_k (x_i - X) + s_k (y_i - Y)| \le B/2$ and
 $|-s_k (x_i - X) + c_k (y_i - Y)| \le B/2$. In the rotated coordinates
 $U = c_k X + s_k Y$ and $V = -s_k X + c_k Y$, each atom therefore contributes its weight
 on one closed axis-parallel rectangle of centers, and the edges of these rectangles,
-with the four lines bounding the admissible centers, cut the plane into finitely many
-open cells. The covered mass is constant on each open cell.
+with the four lines at the extreme $U$- and $V$-coordinates of the admissible square,
+cut the plane into finitely many open cells.
+The admissible square is oblique in these coordinates unless $\theta_k$ is a multiple of
+$\pi/2$, and its own edges are not among the lines: a cell may straddle one of them, and
+the clipping test in `least_mass` decides exactly which cells meet the square, from the
+exact range of $V$ the square occupies over each strip between adjacent $U$-lines.
+The covered mass is constant on each open cell.
 On a cell’s boundary it can only be larger, because the rectangles are closed and the
 weights are nonnegative.
 And every admissible center lies in the closure of some open cell that meets the
-admissible square, since that square has interior when $2 h_k < L$ and finitely many
-lines cannot cover an open set.
+admissible square: that square has interior when $2 h_k < L$, so it has interior points
+within every distance of the center; finitely many lines cannot cover an open set, so
+within every distance of the center some cell meeting the square has a point; and there
+are finitely many cells, so one cell does at every distance, which is to say the center
+lies in its closure.
 So the least mass over all admissible centers is the least over the open cells that meet
 the admissible square, and scoring each of them once decides Condition 5 at that
 direction. Every quantity is rational, so every score is exact.
@@ -160,14 +168,28 @@ It prints one line per condition, then a line comparing the file’s declared `c
 For this certificate the verdict is `VERIFIED: s(11) >= {{L_FRAC}}`, with Condition 5
 reporting the least covered mass ${{LEAST_FRAC}}$ at direction $0$ and center
 ${{WITNESS_CENTER}}$ over the {{N_DIRECTIONS}} directions.
-It takes {{RUNTIME}} in pure Python, most of it on the finite sweep of Condition 5 that
-“Why the Sweep Is Exact” describes.
+It takes {{RUNTIME}} in pure Python on a laptop, most of it on the finite sweep of
+Condition 5 that “Why the Sweep Is Exact” describes.
 The sweep runs only once Conditions 1 to 4 hold; after a failure among them, the
 Condition 5 line says it was not evaluated.
+Before any condition, a file that is not a certificate of the theorem’s shape is refused
+by name: among the refusals are a rational written as a JSON number, a negative weight,
+a `variant` other than `unconditional`, an atom outside the container, and two atoms at
+one site. The theorem would tolerate the last two, an outside atom only adding to the
+total and a repeated site being one site of the summed weight, but a well-formed
+certificate has neither, and the pinned checker `minimal_verify.py`, beside this file in
+the repository, refuses them too.
+A duplicate JSON key or a net parameter outside $0 < T < 1$ is also refused.
 
 The exit status is 0 only when all five conditions hold and the three declarations
-match. Four perturbations show the verifier deciding rather than agreeing, each with its
-magnitude and the line that refuses it.
+match, and 1 on any refusal.
+A third status, 2, means no verdict was reached: a usage error, or the sweep’s own
+cross-check failing.
+At every direction the verifier re-sums the atoms directly at the center it reports and
+compares that with the swept minimum; a disagreement is a bug in the verifier, not in
+the certificate, and it prints one line beginning `INTERNAL ERROR` in place of the
+verdict. Four perturbations show the verifier deciding rather than agreeing, each with
+its magnitude and the line that refuses it.
 Condition 5 holds by the margin ${{LEAST_FRAC}} - 1 = {{MARGIN_FRAC}}$, and the
 placement attaining it, centered at ${{WITNESS_CENTER}}$, covers the atom at
 ${{TIGHT_ATOM}}$, of weight ${{TIGHT_WEIGHT}}$ and one of {{TIGHT_ORBIT}} in its orbit,
@@ -198,7 +220,7 @@ The condition lines are what to read.
 
 ## The Verifier
 
-`{{VERIFIER_NAME}}`, byte for byte as kept in the repository at
+`{{VERIFIER_NAME}}`, byte for byte as kept beside this document at
 [`{{VERIFIER_NAME}}`]({{VERIFIER_URL}}).
 
 ````python

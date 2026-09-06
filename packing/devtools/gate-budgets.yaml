@@ -34,9 +34,19 @@ policy:
   # 2.0 is chosen against the incident: it catches a 2.65x regression with margin, and it
   # tolerates a runner a third slower than the one that set the record.
   max_headroom: 2.0
-  # A run this multiple of the recorded cost has regressed. 1.5 sits above the runner
-  # noise this project has measured (a contended box moves a tier by a quarter) and well
-  # below the 2.65x that went unnoticed.
+  # A run this multiple of the recorded cost has regressed. The figure this comment used
+  # to cite -- a contended box moving a tier by a quarter -- was measured on a development
+  # box and is not what the hosted runners do. Two runs of identical code on 2026-09-06
+  # put every step of the sweeps tier up about 1.35x, `known-best n=1..100 atlas` worst at
+  # 1.39x on code no commit had touched. Against that, 1.5 has eight per cent of margin.
+  # What buys the margin back is the baseline rather than the ratio: `measured_seconds` is
+  # the geometric mean of the readings seen at the reference shape, not one sample and not
+  # their maximum. The maximum was tried first and is worse in a way worth recording: it
+  # puts the record at the top of the band, so it starves the stale rule by exactly as much
+  # as it feeds the drift rule, and run 34037168378 -- a fast runner at 0.72 of the record
+  # -- left `geometry` 1.21x from failing CI for being quick. The mean leaves both rules
+  # about 1.35x. `D-472` is the entry, `think-be1s` the remaining work: a recorded band
+  # beats a recorded point, whichever point is chosen.
   drift_ratio: 1.5
   # A run this far *below* the recorded cost means the record is stale in the flattering
   # direction. The run fails and prints the number to write, so nobody has to remember to.
@@ -110,7 +120,7 @@ tiers:
   ceiling_seconds: 700.0
   # Cleared twice for the same reason, and the reason is a good one both times: the figure
   # measured a tier that no longer exists. BC-214 cleared 1369.60s (CI run 33982455466)
-  # when it moved every test at or above QUICK_TEST_CEILING_SECONDS out of the quick lane.
+  # when it moved every test at or above QUICK_TEST_WALL_BACKSTOP_SECONDS out of the quick lane.
   # BC-218 cleared 409.0s (CI run 33985984585, job 101359470209, commit 88f7e5f8) because
   # `fast behavioral tests` no longer runs in one process: it asks pytest for one worker
   # per core, and the tier's wall stopped being that step's wall as a result.
@@ -212,14 +222,19 @@ tiers:
   # pool stops parallelising altogether, so serial degeneration fails here rather than
   # passing quietly. The old 300s no longer had that last property once nine steps left
   # the tier, which is why it moved down rather than staying put.
-  ceiling_seconds: 240.0
-  # Deliberately unmeasured rather than filled in from a local run. This box reports the
-  # same four cpus CI does, so a local figure would match the reference shape and arm the
-  # drift and stale rules against a machine that is not the one the band is for. The first
-  # CI run at the reference shape prints the line to paste.
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
+  ceiling_seconds: 195.0
+  # Hosted samples at the reference shape establish the baseline below.
+  measured_seconds: 99.39
+  measured_on: '2026-09-06'
+  measured_where: >-
+    The geometric mean of four readings at the reference shape -- 106.35, 106.02, 80.62 and 107.33 --
+    across runs 34023002068, 34032566385, 34037168378 and 34040196689.
+    Observed spread 1.33x. The centre of the band, not an edge: recording the
+    maximum was tried first and left `geometry` 1.21x from failing the stale rule on a
+    fast runner, because a record at the top of the band starves that rule by as much
+    as it feeds the drift rule. At four samples every margin is at least 1.25x.
+    **Refresh this when samples accumulate** -- a mean moves as they arrive, which is
+    the argument for `think-be1s` rather than a property of these numbers.
   reference: {jobs: 3, inner_jobs: 1, cpus: 4}
   argument: >-
     The part of the pull-request surface that is none of the other three: every floor,
@@ -258,14 +273,19 @@ tiers:
   # and it is below the 243.81s of step time this tier costs if its pool stops
   # parallelising -- which is the regression a ceiling on an outer-parallel tier is
   # actually for.
-  ceiling_seconds: 200.0
-  # Unmeasured for the same reason as `checks` and `suite`: this box reports the same four
-  # cpus CI does, so a local reading would match the reference shape and arm the drift and
-  # stale rules against the wrong machine. The first CI run at the reference shape prints
-  # the line to paste.
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
+  ceiling_seconds: 180.0
+  # Hosted samples at the reference shape establish the baseline below.
+  measured_seconds: 91.55
+  measured_on: '2026-09-06'
+  measured_where: >-
+    The geometric mean of four readings at the reference shape -- 104.12, 106.07, 76.76 and 82.86 --
+    across runs 34023002068, 34032566385, 34037168378 and 34040196689.
+    Observed spread 1.38x. The centre of the band, not an edge: recording the
+    maximum was tried first and left `geometry` 1.21x from failing the stale rule on a
+    fast runner, because a record at the top of the band starves that rule by as much
+    as it feeds the drift rule. At four samples every margin is at least 1.25x.
+    **Refresh this when samples accumulate** -- a mean moves as they arrive, which is
+    the argument for `think-be1s` rather than a property of these numbers.
   reference: {jobs: 3, inner_jobs: 1, cpus: 4}
   argument: >-
     The nine steps that re-derive geometry without the engine: the basin atlas and its
@@ -311,14 +331,19 @@ tiers:
   # four are worth about 2.6x against one here. The two readings 30 per cent apart are
   # why 240s is not tightened to the faster of them: that is what a shared box does to a
   # wall, and a band set to a good day fails on an ordinary one.
-  ceiling_seconds: 240.0
-  # Unmeasured for the same reason as `checks`: this box reports the same four cpus CI
-  # does, so a local reading would match the reference shape and arm the drift and stale
-  # rules against the wrong machine. The first CI run at the reference shape prints the
-  # line to paste.
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
+  ceiling_seconds: 205.0
+  # Hosted samples at the reference shape establish the baseline below.
+  measured_seconds: 102.83
+  measured_on: '2026-09-06'
+  measured_where: >-
+    The geometric mean of four readings at the reference shape -- 102.50, 123.53, 108.44 and 81.43 --
+    across runs 34023002068, 34032566385, 34037168378 and 34040196689.
+    Observed spread 1.52x. The centre of the band, not an edge: recording the
+    maximum was tried first and left `geometry` 1.21x from failing the stale rule on a
+    fast runner, because a record at the top of the band starves that rule by as much
+    as it feeds the drift rule. At four samples every margin is at least 1.25x.
+    **Refresh this when samples accumulate** -- a mean moves as they arrive, which is
+    the argument for `think-be1s` rather than a property of these numbers.
   # `inner_jobs: 1`, not 4, because that is what the workflow passes. The xdist worker
   # count comes from `--jobs` through `_pytest_workers`, not from `--inner-jobs`, and a
   # reference that named the worker count instead of the invocation would match no run
@@ -377,10 +402,18 @@ tiers:
   # costs if the pool stops parallelising, so serial degeneration still fails here, and
   # it still has to hold whatever the escape screen costs on a bad day -- which is why it
   # is not tightened to the new prediction.
-  ceiling_seconds: 240.0
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
+  ceiling_seconds: 210.0
+  measured_seconds: 107.05
+  measured_on: '2026-09-06'
+  measured_where: >-
+    The geometric mean of four readings at the reference shape -- 108.91, 108.62, 106.15 and 104.57 --
+    across runs 34023002068, 34032566385, 34037168378 and 34040196689.
+    Observed spread 1.04x. The centre of the band, not an edge: recording the
+    maximum was tried first and left `geometry` 1.21x from failing the stale rule on a
+    fast runner, because a record at the top of the band starves that rule by as much
+    as it feeds the drift rule. At four samples every margin is at least 1.25x.
+    **Refresh this when samples accumulate** -- a mean moves as they arrive, which is
+    the argument for `think-be1s` rather than a property of these numbers.
   reference: {jobs: 4, inner_jobs: 2, cpus: 4}
   argument: >-
     The pull request's record sweeps, on their own runner: the known-best atlas, its

@@ -4,10 +4,13 @@
 from __future__ import annotations
 
 import json
+import multiprocessing
 from collections import Counter
 from copy import deepcopy
+from functools import partial
 from pathlib import Path
 
+import mpmath as mp
 import pytest
 
 from devtools import build_prospective_atlas as prospective
@@ -152,3 +155,123 @@ def test_fetch_rejects_corrupted_retained_source_before_use(
 
     with pytest.raises(ValueError, match="hash mismatch against upstream declaration"):
         prospective.fetch(refresh=False)
+
+
+def test_a_pool_worker_builds_the_same_bytes_as_this_process() -> None:
+    """The seed is built across processes, and mpmath precision is per-process state.
+
+    `mp.mp.dps` is a global a `forkserver` child does not inherit: a worker starts at
+    mpmath's default of 15 digits whatever the parent set. Where that matters it is
+    silent -- arithmetic at the wrong precision does not raise, it publishes different
+    decimals into a retained witness, and a wrong decimal there reads as a coordinate
+    rather than as a bug. It does not matter here, and measuring that rather than
+    assuming it is why `build_cases` takes no pool `initializer`: the generated grid is
+    exact rational arithmetic, `unitsquare_witness` sets its own working precision, and
+    the renderer brackets what it needs.
+
+    The control is that the precision gap is real and load bearing in the comparison.
+    The same two cases are built at mpmath's default and at 300 digits, twenty times the
+    precision, and the bytes have to match; the ambient value is checked between them,
+    so the two builds demonstrably ran at different precision rather than at the same
+    one twice. A second control keeps `==` honest: the two cases must compare unequal,
+    so equality here is a measurement rather than a property of the operator.
+
+    Two entries and two explicit workers exercise the optional pool. The gate uses
+    the serial default, regardless of its PACK_JOBS cap.
+
+    Both cases are generated grids, which is a cost decision and not a coverage one. A
+    UnitSquare witness is 2.2s to build, so a pair of builds carrying one would be over
+    the pull-request surface's marking threshold for a path the `sweeps` job already
+    runs serially on every pull request over all 101 cases, byte for byte.
+    What that leaves uncovered here is the retained-source path, and the test below
+    covers it directly.
+    """
+    entries = prospective.eligible_entries()
+    selected = [
+        entry for entry in entries if entry["source_key"] == "catalogue-trivial-grid-rule"
+    ][:2]
+    assert len(selected) == 2
+
+    ambient = mp.mp.dps
+    try:
+        mp.mp.dps = 15
+        at_default_precision = prospective.build_cases(selected, 1)
+        mp.mp.dps = 300
+        serial = prospective.build_cases(selected, 1)
+        assert mp.mp.dps == 300
+        pooled = prospective.build_cases(selected, 2)
+    finally:
+        mp.mp.dps = ambient
+
+    assert [entry["n"] for _witness, _rendering, entry in serial] == [
+        selected[0]["n"],
+        selected[1]["n"],
+    ]
+    assert serial[0] != serial[1]
+    assert serial == at_default_precision
+    assert pooled == serial
+
+
+def test_a_pool_worker_reads_the_retained_source_root_this_process_resolved(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The retained source path is resolved here and travels with the unit, not read there.
+
+    `_source_path` reads the module-level `SOURCE_ROOT`, and a `forkserver` worker
+    re-imports this module rather than inheriting it, so module state a caller repointed
+    does not cross the boundary with the work -- `clear_build_caches` exists for exactly
+    such a caller. Left to resolve the root itself, a worker would read the real
+    directory while this process read the substituted one and build four UnitSquare
+    cases from bytes nobody asked for, without anything raising. `build_cases` resolves
+    the path in this process instead and sends it in the payload.
+
+    Failing rather than succeeding is what makes this a test and not a demonstration.
+    The root is repointed at a directory holding no SVG at all, so a worker that used the
+    payload cannot find the source and says so, naming the substituted directory; a
+    worker that resolved `SOURCE_ROOT` for itself would find the real file and build
+    successfully. It is also what makes the test cheap: it fails on the missing file,
+    before the 2.2s parse a UnitSquare case would otherwise cost.
+    """
+    monkeypatch.setattr(
+        prospective,
+        "ProcessPoolExecutor",
+        partial(
+            prospective.ProcessPoolExecutor, mp_context=multiprocessing.get_context("spawn")
+        ),
+    )
+    substitute = prospective.ROOT / "atlas/prospective"
+    monkeypatch.setattr(prospective, "SOURCE_ROOT", substitute)
+    entries = [
+        entry
+        for entry in prospective.eligible_entries()
+        if entry["source_key"] == "unitsquare-release-1"
+    ][:2]
+    assert len(entries) == 2
+
+    with pytest.raises(ValueError, match="missing retained source") as failure:
+        prospective.build_cases(entries, 2)
+
+    assert "atlas/prospective" in str(failure.value)
+    assert f"n={entries[0]['n']}" in str(failure.value)
+
+
+def test_seed_defaults_to_serial_even_with_a_gate_worker_cap(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The CLI's omitted --jobs keeps two real seed cases in this process."""
+    entries = [
+        entry
+        for entry in prospective.eligible_entries()
+        if entry["source_key"] == "catalogue-trivial-grid-rule"
+    ][:2]
+    assert len(entries) == 2
+    expected = prospective.build_cases(entries, 1)
+    monkeypatch.setenv("PACK_JOBS", "2")
+    monkeypatch.setattr(
+        prospective,
+        "ProcessPoolExecutor",
+        lambda **_kwargs: pytest.fail("default spawned a pool"),
+    )
+    args = prospective.parser().parse_args(["--check"])
+    assert prospective.build_cases(entries, args.jobs) == expected
+    assert prospective.parser().parse_args(["--check", "--jobs", "2"]).jobs == 2

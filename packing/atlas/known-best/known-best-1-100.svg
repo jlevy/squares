@@ -24,7 +24,7 @@
   <rect width="2400" height="2896" fill="#ffffff" />
   <text x="1200" y="76" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="48" font-weight="700" letter-spacing="1.5" fill="#17202a">100 BEST KNOWN SQUARE PACKINGS</text>
   <polygon data-feature="release-star" points="935.1370000000000000000000001,93.75714285714285714285714286 937.7574285714285714285714287,101.2934285714285714285714286 945.7338571428571428571428572,101.4568571428571428571428571 939.3768571428571428571428572,106.278 941.687142857142857142857143,113.9145714285714285714285714 935.1370000000000000000000001,109.3571428571428571428571429 928.5868571428571428571428572,113.9145714285714285714285714 930.897142857142857142857143,106.278 924.540142857142857142857143,101.4568571428571428571428571 932.5165714285714285714285715,101.2934285714285714285714286" fill="#a3123f" />
-  <text data-feature="release" x="957.2798571428571428571428573" y="114" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700" fill="#17202a">Including new results (September 5, 2026)</text>
+  <text data-feature="release" x="957.2798571428571428571428573" y="114" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700" fill="#17202a">Including new results (September 6, 2026)</text>
   <text data-feature="repository" x="1200" y="148" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700" fill="#17202a">github.com/jlevy/squares</text>
   <g data-feature="evidence-legend">
     <rect data-feature="evidence-badge" data-evidence="proved optimal" x="288.0695" y="2717" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />
@@ -63,7 +63,7 @@
   </g>
   <text data-feature="explainer" x="709.572" y="2804" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="1.045">(</tspan><tspan font-style="italic">n</tspan><tspan dx="1.045">) is the side of the smallest square holding </tspan><tspan font-style="italic">n</tspan><tspan dx="1.045"> unit squares; deg is the algebraic degree of that side length</tspan></text>
   <text data-feature="credit" x="1200" y="2834" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">Diagram by Joshua Levy with assistance from Claude and Codex</text>
-  <text data-feature="release-stamp" x="1200" y="2864" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">DRAFT v0.2.0-41fb401a</text>
+  <text data-feature="release-stamp" x="1200" y="2864" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">DRAFT v0.2.1-9307172a</text>
   <g data-feature="packing-card" data-n="1" data-row="0" data-column="0" data-source-id="W-known-best-n001">
     <rect data-feature="container-outline" x="84" y="186" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" />
     <polygon data-feature="square-fill" data-square="n-001-square-001" data-hue-index="0" data-shade-index="0" data-contact-sides="4" data-orientation-radians="0.0" points="84,344 242,344 242,186 84,186" fill="#257260" stroke="#000000" stroke-width="0.42" stroke-linejoin="round" data-angle-class="0" />

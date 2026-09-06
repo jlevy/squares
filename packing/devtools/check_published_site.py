@@ -40,7 +40,7 @@ from devtools.render_explainer import (
     SITE_URL,
 )
 from devtools.render_explainer_pdf import OUTPUT as PDF_OUTPUT
-from sqpack.release import PUBLICATION_EDITION
+from sqpack.release import PUBLICATION_STATUS, PUBLICATION_VERSION
 
 #: A link into this repository as GitHub spells one: the ref, then the path, under
 #: `blob/` for a file and `tree/` for a directory.
@@ -111,11 +111,14 @@ def check(site: str, commit: str, *, timeout: float) -> list[tuple[bool, str]]:
     results.append(
         (status == 200, f"page {site}{OUTPUT.name}: HTTP {status}, {len(page)} bytes")
     )
-    stamped = PUBLICATION_EDITION in text
+    edition = " ".join(
+        part for part in (PUBLICATION_STATUS, f"{PUBLICATION_VERSION}-{commit[:8]}") if part
+    )
+    stamped = edition in text
     results.append(
         (
             stamped,
-            f"edition stamp {PUBLICATION_EDITION!r} is {'' if stamped else 'not '}on the page",
+            f"edition stamp {edition!r} is {'' if stamped else 'not '}on the page",
         )
     )
 

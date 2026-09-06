@@ -8,8 +8,12 @@ Standard library only, CPython 3.12 or later. Every decision is made in
 fractions.Fraction. One line is printed per condition, then one comparing the file's
 declared claim, total_mass and least_cell_mass with what was computed, then VERIFIED
 or REFUSED; the exit status is 0 only when all five conditions hold and the
-declarations match. Condition 5, the sweep, is evaluated only once Conditions 1 to 4
-hold, and its line says so when it was not.
+declarations match, and 1 on any refusal. Condition 5, the sweep, is evaluated only
+once Conditions 1 to 4 hold, and its line says so when it was not. A file that is not
+a certificate of the form below is refused by name before any condition. If the
+sweep's own cross-check fails, the verifier and not the certificate is broken: one
+line beginning INTERNAL ERROR replaces the verdict, and the exit status is 2, as it
+is for a usage error.
 
 THE THEOREM. Let s(n) be the least side of a square containing n unit squares
 with pairwise disjoint interiors, rotation allowed. A certificate names an
@@ -74,7 +78,10 @@ def object_without_duplicate_keys(pairs):
 def load(path):
     """The certificate as (n, L, B, tangents, atoms, declared), where declared holds the
     file's own claim, total_mass and least_cell_mass for comparison with what is
-    computed; any other shape is refused.
+    computed; any other shape is refused. So are an atom outside [0, L]^2 and two atoms
+    at one site: the theorem would tolerate both, an outside atom only adding to the
+    total and a repeated site being one site of the summed weight, but neither is a
+    well-formed certificate, and minimal_verify.py refuses them too.
 
     The path is the certificate's JSON file, or a Markdown document carrying it in a
     fenced json block: each verifiable-claim document embeds the certificate it
@@ -117,12 +124,19 @@ def load(path):
             f"at most {MAX_ATOMS} atoms and {MAX_DIRECTIONS} directions"
         )
         raise ValueError(message)
-    atoms = []
+    atoms, sites = [], set()
     for atom in record["atoms"]:
         x, y, w = (rational(value) for value in atom)
         if w < 0:
             message = f"negative weight {w} at ({x}, {y})"
             raise ValueError(message)
+        if not (0 <= x <= L and 0 <= y <= L):
+            message = f"atom ({x}, {y}) lies outside the container [0, {L}]^2"
+            raise ValueError(message)
+        if (x, y) in sites:
+            message = f"two atoms share the site ({x}, {y})"
+            raise ValueError(message)
+        sites.add((x, y))
         atoms.append((x, y, w))
     claim = record["claim"]
     if not isinstance(claim, str):
@@ -139,9 +153,7 @@ def load(path):
 def symmetric(atoms, L):
     """Condition 1. The eight maps form a group, so checking every site of the support
     against every image is the whole of invariance."""
-    weight = {}
-    for x, y, w in atoms:
-        weight[x, y] = weight.get((x, y), 0) + w
+    weight = {(x, y): w for x, y, w in atoms}  # one atom per site: load refused a repeat
     for (x, y), w in weight.items():
         flips = [(p, q) for p in (x, L - x) for q in (y, L - y)]
         for p, q in flips + [(q, p) for p, q in flips]:  # the eight symmetries of [0, L]^2
@@ -150,7 +162,7 @@ def symmetric(atoms, L):
                     f"({x}, {y}) has weight {w} but ({p}, {q}) has {weight.get((p, q), 0)}",
                     False,
                 )
-    return f"{len(atoms)} atoms, {len(weight)} sites, invariant under the 8 symmetries", True
+    return f"{len(atoms)} atoms on distinct sites, invariant under the 8 symmetries", True
 
 
 def extent(polygon, axis, low, high):
@@ -176,15 +188,21 @@ def extent(polygon, axis, low, high):
 # over nothing here and holds vacuously, and the direction is reported as deciding
 # nothing. It is the single point (L/2, L/2) when 2h = L, and that one placement is
 # scored directly. Otherwise F has nonempty interior. The lines u = u_i +- B/2,
-# v = v_i +- B/2 and the four lines bounding F cut the plane into open cells. The mass
-# is constant on a cell (each atom's box has its edges on the lines); a point on a
-# cell's boundary has at least the cell's mass (a closed box meeting the cell contains
-# its closure); and every point of F is in the closure of a cell meeting F (F has
-# interior points arbitrarily near it, and an open set is not covered by finitely many
-# lines). So the least mass over F is the least over the cells meeting F. A cell
-# (a, b) x (a', b') with [a, b] inside F's u-projection meets F iff a' < hi and lo < b',
-# where [lo, hi] is the v-range of F within the closed strip a <= u <= b: the open
-# strip's part of F projects onto an interval between (lo, hi) and [lo, hi].
+# v = v_i +- B/2, with the four lines u = umin, u = umax, v = vmin, v = vmax at F's
+# extreme coordinates (its bounding box: F's own edges are oblique when t > 0, and they
+# are not added), cut the plane into finitely many open cells. The mass is constant on
+# a cell (each atom's box has its edges on the lines); a point on a cell's boundary has
+# at least the cell's mass (a closed box meeting the cell contains its closure); and
+# every point of F is in the closure of a cell meeting F: F has interior points within
+# every distance of it, finitely many lines do not cover an open set, so within every
+# distance of the point some cell meeting F has a point, and since there are finitely
+# many cells one cell does at every distance, which is to say the point is in its
+# closure. So the least mass over F is the least over the cells meeting F. A cell may
+# straddle F's oblique edge, and the clipping test below decides exactly which cells
+# meet F: a cell (a, b) x (a', b') with [a, b] inside F's u-projection meets F iff
+# a' < hi and lo < b', where [lo, hi] is the v-range of F within the closed strip
+# a <= u <= b, since the open strip's part of F projects onto an interval between
+# (lo, hi) and [lo, hi].
 
 
 def mass_at(atoms, c, s, half, center):
@@ -247,9 +265,18 @@ def least_mass(L, B, t, atoms, scale):
     left, right = extent(F, 1, Vc, Vc)
     Uc = (max(U[i], left) + min(U[i + 1], right)) / 2
     X, Y = c * Uc - s * Vc, s * Uc + c * Vc
+    # The sweep's own cross-check: the witness must be admissible, and summing the atoms
+    # at it directly must give the grid's minimum. A failure here is this file's bug, not
+    # the certificate's, and main reports it as one, apart from either verdict.
     direct = mass_at(atoms, c, s, half, (X, Y))
-    if not (h <= X <= L - h and h <= Y <= L - h and direct == Fraction(best, scale)):
-        message = f"center ({X}, {Y}) covers {direct}, the grid says {Fraction(best, scale)}"
+    if not (h <= X <= L - h and h <= Y <= L - h):
+        message = f"at t = {t} the witness center ({X}, {Y}) admits no B-square"
+        raise AssertionError(message)
+    if direct != Fraction(best, scale):
+        message = (
+            f"at t = {t} the center ({X}, {Y}) covers {direct} summed directly, "
+            f"but the grid says {Fraction(best, scale)}"
+        )
         raise AssertionError(message)
     return Fraction(best, scale), (X, Y), cells
 
@@ -346,13 +373,16 @@ def decide(n, L, B, tangents, atoms, declared):  # noqa: PLR0917 -- the certific
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    """Usage errors go to stderr with status 2; verdicts go to stdout with status 0 or 1."""
+    """Verdicts go to stdout with status 0 or 1. Status 2 is no verdict: a usage error,
+    which argparse reports on stderr, or the sweep's own cross-check failing, reported on
+    stdout as one INTERNAL ERROR line in place of the verdict."""
     parser = argparse.ArgumentParser(
         description="Decide a fractional unavoidable-set certificate for s(n) >= L, exactly.",
         epilog=(
             "One line per condition, one comparing the file's declarations with what was "
             "computed, then VERIFIED or REFUSED; the exit status is 0 only after VERIFIED "
-            "and 1 on any refusal."
+            "and 1 on any refusal. Status 2 is no verdict: a usage error, or an INTERNAL "
+            "ERROR line saying the verifier disagreed with itself."
         ),
     )
     parser.add_argument(
@@ -364,7 +394,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     except (OSError, KeyError, TypeError, ValueError) as error:
         print(f"REFUSED: not a certificate of the expected shape: {error}")
         return 1
-    return decide(*certificate)
+    try:
+        return decide(*certificate)
+    except AssertionError as error:  # the sweep's cross-check: this file is what failed
+        print(f"INTERNAL ERROR: no verdict; the verifier disagrees with itself: {error}")
+        return 2
 
 
 if __name__ == "__main__":

@@ -261,6 +261,10 @@ documents:
     role: review
     authority: record
     lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-06-claude-code-adversarial-review.md
+    role: review
+    authority: record
+    lifecycle: retained
   - path: docs/project/three-lane-research-method.md
     role: component-guide
     authority: record

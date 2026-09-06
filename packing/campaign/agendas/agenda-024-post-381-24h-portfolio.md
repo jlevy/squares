@@ -361,6 +361,8 @@ transport. Only the coordinator allocates further IDs.
 Do not dispatch the selected lanes until BC-250 closes and its checkpoint has been
 reviewed, validated, and published.
 A ready BC is not authorization to bypass that gate.
+For this handoff, the operator also requires PR 97 to land before execution starts on a
+new branch and PR. Do not launch the selected experiments on the planning branch.
 
 | Assignment | Questions | Next commitments and owner | Reconsideration condition |
 | --- | --- | --- | --- |

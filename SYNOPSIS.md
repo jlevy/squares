@@ -305,6 +305,7 @@ case or experiment separately.
 | [Adversarial Senior Review of the Agenda 024 Portfolio](docs/project/reviews/review-2026-09-06-agenda024-adversarial-senior-strategy.md) | dated review record | record | superseded | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) |
 | [Independent Review of the T-022 Exact-Containment Limit](docs/project/reviews/review-2026-09-06-t022-dilation-limit.md) | dated review record | record | retained | — |
 | [Independent Review of the Fixed-Weight Core-Shrink Obstruction](docs/project/reviews/review-2026-09-06-core-shrink-obstruction.md) | dated review record | record | retained | — |
+| [Research: Adversarial Review of the s(11) ≥ 381/100 Explainer](docs/project/reviews/review-2026-09-06-claude-code-adversarial-review.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
 | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |
@@ -545,6 +546,18 @@ The push-triggered
 branch that cannot be merge-built even when GitHub cannot create its pull-request merge
 ref. Its remaining blind spot is an idle branch after `main` moves and before the next
 push. Session 087 retains the full-gate evidence from run `34010683180` at `c743d7bb`.
+
+The later upstream efficiency corrections preserve that historical accounting.
+Session 087 reduced the then-required CI surface from `1369.60 s` to about `221.70 s`
+without removing checks.
+The R1 tree-id cache remains a separate efficiency task: 20.2 percent of measured
+deep-run work repeated, and 92 percent of that repetition came from unchanged trees.
+Per-test CPU readings are diagnostic because child costs cannot yet be attributed
+reliably; the `12 s` call-wall backstop remains enforced.
+[D-472](defects.md) records why one hosted timing sample cannot establish a speedup.
+[Development’s validation tiers](development.md#validation-tiers) own the current
+configuration and measurements; none of these historical selections supersedes Agenda
+024’s allocation.
 
 ### Handoff Record
 
@@ -3328,14 +3341,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 471 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 472 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 94 | asserted something false about the mathematics |
 | validity | 118 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 181 | recorded something its own evidence contradicts |
+| bookkeeping | 182 | recorded something its own evidence contradicts |
 | robustness | 60 | did not finish, or finished only by luck |
 | performance | 18 | worked, but cost far more than it should |
 
@@ -3345,7 +3358,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy-one defects in 471, and no soundness defect
+**The automated gate has caught seventy-two defects in 472, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

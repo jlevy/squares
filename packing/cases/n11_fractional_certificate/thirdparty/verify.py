@@ -246,6 +246,25 @@ def preconditions(cert):
             claimed == expected,
         )
     )
+    # These are certificate-format requirements shared with the other standalone
+    # verifiers. The theorem would allow repeated sites and outside atoms, but a
+    # well-formed record lists each site once and keeps its support in the container.
+    sites = {(x, y) for x, y, _w in atoms} if triples else set()
+    checks.append(
+        (
+            "P6 every atom has a distinct site",
+            f"{len(atoms)} atoms on {len(sites)} distinct sites",
+            triples and len(sites) == len(atoms),
+        )
+    )
+    outside = [site for site in sites if not (0 <= site[0] <= L and 0 <= site[1] <= L)]
+    checks.append(
+        (
+            "P7 every atom lies in [0, L]^2",
+            f"{len(outside)} sites outside the container",
+            triples and not outside,
+        )
+    )
     return checks
 
 
@@ -262,9 +281,7 @@ def symmetry_images(x, y, L):
 
 def condition_1(cert):
     L = cert["L"]
-    weight = {}
-    for x, y, w in cert["atoms"]:
-        weight[(x, y)] = weight.get((x, y), Fraction(0)) + w
+    weight = {(x, y): w for x, y, w in cert["atoms"]}  # P6 refuses repeated sites
     # Each map is a bijection of the plane whose inverse is also in the
     # group, so "every site's image carries the site's weight" is the whole
     # of invariance: the support maps onto itself with weights preserved.
@@ -719,11 +736,6 @@ def decide(cert, *, audit=0, verbose=False, log=print):
             )
             if not agrees:
                 declaration_failures.append(f"declared {key} disagrees with the replay")
-    inside = all(0 <= x <= cert["L"] and 0 <= y <= cert["L"] for x, y, _ in cert["atoms"])
-    log(
-        f"  info  all atoms lie in [0, L]^2: {'yes' if inside else 'no'} "
-        "(not a condition; an outside atom only wastes weight)"
-    )
     failures = [name for name, holds in verdicts if not holds] + declaration_failures
     if failures:
         log("REFUSED: {}".format(", ".join(failures)))

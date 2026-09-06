@@ -95,10 +95,10 @@ def relative_link(target: Path, document: Path) -> str:
 
 
 def standing(facts: Facts, headline: Facts) -> str:
-    """Where this bound stands among the project's, for a reader who has only this file."""
+    """Compare the two packaged certificate rungs, not the full result register."""
     if facts is headline:
-        return "It is the tighter of the two bounds the project proves."
-    return "It is the looser of the two bounds the project proves, with the simpler numbers."
+        return "It is the tighter of the two certificate rungs packaged here."
+    return "It is the looser of the two certificate rungs packaged here, with simpler numbers."
 
 
 def point(x: Fraction, y: Fraction) -> str:
@@ -231,7 +231,7 @@ def render_claim(facts: Facts, sibling: Facts, headline: Facts) -> str:
         "OTHER_CLAIM_URL": edition_file(claim_path(sibling)),
         "OTHER_L_FRAC": frac(sibling.outer_side),
         "VERIFIER_NAME": VERIFIER_CLAIM.name,
-        "VERIFIER_URL": edition_file(VERIFIER_CLAIM),
+        "VERIFIER_URL": relative_link(VERIFIER_CLAIM, claim_path(facts)),
         "VERIFIER_SOURCE": VERIFIER_CLAIM.read_text(encoding="utf-8").rstrip("\n"),
         "CERTIFICATE_JSON": facts.source.read_text(encoding="utf-8").rstrip("\n"),
         "BEST_PACKING_TEX": bound_substitutions()["BEST_PACKING_TEX"],
@@ -259,7 +259,8 @@ def render_card(facts: Facts) -> str:
 
     The cell count and the pinned verifier's timing are the two figures the certificate
     does not carry; the count is recorded above with its provenance, and the timing is
-    stated in the template as the measurement it is.
+    stated in the template as the measurement it is. The claim verifier's time beside it
+    comes from the table the claim document reads, so the card names both programs.
     """
     cells = REACHABLE_CELLS.get(slug(facts))
     if cells is None:
@@ -299,6 +300,7 @@ def render_card(facts: Facts) -> str:
         "CERT_URL": edition_file(facts.source),
         "DIGEST_PREFIX": sha256_of(facts.source)[:DIGEST_PREFIX_CHARS],
         "CLAIM_NAME": claim_path(facts).name,
+        "CLAIM_RUNTIME": runtime_phrase(facts),
         "CONFIRMATION": str(entry["confirmation"]),
         "REVIEW_ARTIFACT": relative_link(review, CARD),
         "NOVELTY": str(entry["novelty"]),

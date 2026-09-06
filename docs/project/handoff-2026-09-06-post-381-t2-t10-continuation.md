@@ -1,5 +1,8 @@
 # Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10
 
+The current operator handoff requires PR 97 to land before the selected research starts
+on a new branch and PR. This planning branch runs no successor experiment.
+
 Status: **recovery checkpoint published in PR 97; the next research sequence is being
 selected from the completed evidence.**
 

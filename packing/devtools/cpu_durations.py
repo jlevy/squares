@@ -3,8 +3,9 @@
 Each setup, call and teardown phase records the increase in `resource.getrusage` for
 this process and its reaped children. This separates CPU work from waiting for directly
 observed work, but does not measure complete descendant CPU. It must not replace the
-wall-clock thresholds in `sqpack.cli.validate`; gate wiring needs complete accounting
-first.
+wall-clock thresholds in `sqpack.cli.validate`. That module requires the diagnostic
+section to be present, but CPU readings never decide whether a test passes or fails:
+reaping earlier work can charge an otherwise cheap call.
 
 A waited-for `subprocess.run` child contributes its CPU. A multiprocessing forkserver
 worker does not: the persistent server reaps that worker, so the pytest process's
@@ -156,6 +157,11 @@ class CpuDurations:
 
         The accounting limitation must remain visible even when the display threshold
         hides every entry. These observations cannot establish a test's total CPU cost.
+
+        Printing unconditionally is also what lets `sqpack.cli.validate._require_durations`
+        fail closed on this section: a run whose section vanished has to look different
+        from a run whose section listed nothing, or a rename here would silently retire
+        the ceiling that reads it.
         """
         # `getoption` is typed `Any`, and returns `None` for an option some other
         # invocation of this plugin did not register; the defaults are restated rather

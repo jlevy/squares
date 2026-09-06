@@ -7,6 +7,9 @@ both their display and serialized report property as lower bounds. These diagnos
 are not wired into the validation gate's total-cost thresholds.
 """
 
+# Exercise the CLI gate using real diagnostic output.
+# pyright: reportPrivateUsage=false
+
 from __future__ import annotations
 
 import os
@@ -19,6 +22,7 @@ from pathlib import Path
 import pytest
 
 from devtools.cpu_durations import CPU_DURATIONS_HEADER
+from sqpack.cli import validate
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
@@ -115,6 +119,7 @@ def _run_under_the_plugin(directory: Path, suite: str, *extra: str) -> str:
             "--durations-min=0",
             *extra,
         ],
+        timeout=30,
         capture_output=True,
         text=True,
         check=False,
@@ -208,3 +213,51 @@ def test_forkserver_measurements_are_explicit_lower_bounds(tmp_path: Path) -> No
     names = {element.attrib["name"] for element in ET.parse(report).iter("property")}
     assert "observed_cpu_seconds_lower_bound" in names
     assert "cpu_seconds" not in names
+
+
+_SETUP_CHILD_SUITE = r"""
+import subprocess
+import sys
+
+import pytest
+
+
+@pytest.fixture(scope="module")
+def completed_setup_child():
+    child = subprocess.Popen(
+        [sys.executable, "-c",
+         "import os, time\n"
+         "budget = float(os.environ['CPU_DURATIONS_PROBE_BUDGET'])\n"
+         "start = time.process_time()\n"
+         "while time.process_time() - start < budget: pass\n"
+         "print('ready', flush=True)"],
+        stdout=subprocess.PIPE,
+        text=True,
+    )
+    assert child.stdout.readline() == "ready\n"
+    yield child
+    child.wait(timeout=10)
+
+
+def test_only_reaps_setup_work(completed_setup_child):
+    assert completed_setup_child.wait(timeout=10) == 0
+"""
+
+
+def test_reaping_setup_cpu_does_not_fail_a_cheap_call(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Synchronize on finished setup work before reaping it in a real test call.
+
+    RUSAGE_CHILDREN increases in call even though the work preceded it. Lower only the
+    diagnostic display threshold to keep the regression short; retain the real wall gate.
+    """
+    output = _run_under_the_plugin(tmp_path, _SETUP_CHILD_SUITE, "--cpu-durations-min=0")
+    cpu = _call_phases(_CPU_LINE, output)
+    assert cpu["test_only_reaps_setup_work"] >= 0.8 * _BUDGET_SECONDS
+    monkeypatch.setattr(validate, "QUICK_TEST_CPU_REPORT_SECONDS", 0.1)
+    monkeypatch.setattr(validate, "_run", lambda *_args, **_kwargs: output)
+    context = validate.Context(
+        deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
+    )
+    assert validate._fast_tests(context) == output  # noqa: SLF001 - exercise the real gate

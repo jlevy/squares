@@ -240,8 +240,8 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     # * `--jobs 1` in the `suite` job is what hands the behavioural lane four xdist
     #   workers instead of two -- `_pytest_workers` sizes itself to `cpus - jobs + 1`, so
     #   a larger number there is a quieter, slower job;
-    # * `--inner-jobs 2` in the `sweeps` job is what wakes the escape screen's process
-    #   pool, which reads `PACK_JOBS`; at 1 it ran serially and was the surface's floor.
+    # * `--inner-jobs 2` sets the escape screen's PACK_JOBS cap. The chunk census and
+    #   prospective atlas remain serial unless explicitly given their own --jobs.
     required_step = next(
         _mapping(step)
         for step in validate_steps
@@ -566,12 +566,13 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
 def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
     """Which tests the pull-request surface defers, and what each one measured.
 
-    The boundary is a ceiling the gate applies (`QUICK_TEST_CEILING_SECONDS`, enforced by
-    `fast behavioral tests` through pytest's `--durations-min`), and this registry is the
-    record of who is currently over it. The two are not the same thing and both are
-    needed: the ceiling is what stops the lane rotting, and the registry is what stops a
-    marker being added quietly to make a red test go away, because adding one edits this
-    file and has to state a number.
+    The gate enforces `QUICK_TEST_WALL_BACKSTOP_SECONDS` using pytest's call-wall
+    durations. This registry records the measurements supporting current slow markers;
+    adding a marker must state its measured cost here. The slow lane separately checks
+    its wall-time floor, so a marker that is no longer earned is reconsidered.
+
+    CPU counters are diagnostic only: they can include earlier setup work and omit
+    descendant CPU. They cannot establish an individual test's CPU cost.
 
     Measured on 2026-09-05 (`BC-214`), one contended local box, `pytest --durations=0`
     over the whole non-exhaustive suite: 2,080 tests and 1,038s of recorded phase time,

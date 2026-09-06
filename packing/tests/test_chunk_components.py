@@ -8,9 +8,11 @@ import math
 from pathlib import Path
 from typing import Any
 
+import mpmath as mp
 import pytest
 
 import sqpack.chunks as chunks_module
+from devtools import census_known_best_chunks as census
 from sqpack.chunks import (
     NEAR_ADJACENCY_TOLERANCE,
     component_census,
@@ -378,3 +380,87 @@ def test_partition_ties_follow_the_declared_deterministic_traversal() -> None:
         "a01:bar:1,4",
     ]
     assert [chunk["id"] for chunk in replay["options"][0]["chunks"]] == selected
+
+
+def test_a_pool_worker_censuses_at_the_same_precision_as_this_process() -> None:
+    """The corpus is censused across processes, and mpmath precision is per-process state.
+
+    `mp.mp.dps` is a global that a `forkserver` child does not inherit: a worker starts
+    at mpmath's default of 15 digits whatever the parent set. Where that matters it is
+    silent -- arithmetic at the wrong precision does not raise, it publishes different
+    decimals, and a retained census is exactly the document where a wrong number reads
+    as a result rather than as a bug.
+
+    It does not matter here, and measuring that rather than assuming it is the whole
+    point of this test, because it is why `census_records` needs no pool `initializer`.
+    Every mpmath entry point under `component_census`, `contact_component_census` and
+    `minimal_lattice_partition` sets its own working precision instead of reading the
+    ambient one: poses are materialized at 80 digits, and every trigonometric call is
+    bracketed by `mp.workdps(PORTABLE_TRIG_DIGITS)`. Measured over n=5, 11, 17, 40 and
+    97 entered at 15, 80 and 300 ambient digits, the six documents per witness are
+    byte-identical.
+
+    Two controls, so neither half passes vacuously. The first is the precision gap
+    itself: one witness is censused twice, once from mpmath's default and once from
+    whatever the first run left behind, and the assertion between them requires those to
+    differ -- so the two runs demonstrably started from the different ambient states a
+    pool creates, rather than from the same state twice. The second is that the two
+    records in the pooled run compare unequal, so `==` over these documents is sharp
+    enough to see a difference when there is one.
+
+    The comparison then requires a real two-process run to reproduce the single-process
+    result exactly, through `census_records` itself rather than around it, so what is
+    checked is the path the tool takes. Two workers rather than four: two is what the
+    explicit worker option enables. The gate currently uses the serial default.
+    """
+    selected = tuple(entry for entry in census.atlas_entries() if entry["n"] in {11, 26})
+    assert [entry["n"] for entry in selected] == [11, 26]
+
+    ambient = mp.mp.dps
+    original = census.atlas_entries
+    try:
+        census.atlas_entries = lambda: selected[:1]
+        census.census_records.cache_clear()
+        mp.mp.dps = 15
+        at_default_precision = census.census_records(1)
+        assert mp.mp.dps != 15
+        census.census_records.cache_clear()
+        assert census.census_records(1) == at_default_precision
+
+        census.atlas_entries = lambda: selected
+        census.census_records.cache_clear()
+        serial = census.census_records(1)
+        census.census_records.cache_clear()
+        pooled = census.census_records(2)
+    finally:
+        census.atlas_entries = original
+        census.census_records.cache_clear()
+        mp.mp.dps = ambient
+
+    assert [record["components"]["exact"]["n"] for record in serial] == [11, 26]
+    assert serial[0] != serial[1]
+    assert serial[0] == at_default_precision[0]
+    assert pooled == serial
+
+
+def test_census_defaults_to_serial_even_with_a_gate_worker_cap(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The CLI's omitted --jobs keeps two real witnesses in this process."""
+    entries = tuple(entry for entry in census.atlas_entries() if entry["n"] in {1, 2})
+    assert len(entries) == 2
+    monkeypatch.setattr(census, "atlas_entries", lambda: entries)
+    census.census_records.cache_clear()
+    try:
+        expected = census.census_records(1)
+        monkeypatch.setenv("PACK_JOBS", "2")
+        monkeypatch.setattr(
+            census,
+            "ProcessPoolExecutor",
+            lambda **_kwargs: pytest.fail("default spawned a pool"),
+        )
+        args = census.parser().parse_args(["--check"])
+        assert census.census_records(args.jobs) == expected
+        assert census.parser().parse_args(["--check", "--jobs", "2"]).jobs == 2
+    finally:
+        census.census_records.cache_clear()

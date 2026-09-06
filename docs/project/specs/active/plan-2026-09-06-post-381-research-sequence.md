@@ -183,6 +183,13 @@ The separate two-core endpoint theorem `think-ixsm` remains paused: it could est
 strictness without an explicit epsilon, but is not selected ahead of these larger-gain
 directions.
 
+The subsequent
+[explainer review](../../reviews/review-2026-09-06-claude-code-adversarial-review.md)
+adds assurance and exposition corrections without changing this allocation.
+Its B1 caveat matters during candidate review: the minimal standalone verifier may
+include out-of-domain cells and conservatively refuse a valid candidate.
+A refusal or disagreement is not an exact obstruction to the mathematical hypothesis.
+
 ## Lean and Shared Assurance
 
 The
@@ -229,17 +236,18 @@ close the partially executed Agenda 024.
 | Reusable assessment process | W10’s planning-block runbook |
 
 The next coordinating entry is `think-jgnv`, which dispatches the selected agenda
-commitments after this block is published.
-Each target test still needs its prospective experiment and ready instrument; an open
-question does not authorize measurement.
+commitments after this block is published and PR 97 lands, on a new branch and PR as the
+operator requested. Each target test still needs its prospective experiment and ready
+instrument; an open question does not authorize measurement.
 The hypothesis files, idea board, source backlinks, agenda fields, and live beads must
 agree before the planning block closes.
 
 BC-232’s unfinished scientific criterion stays open.
 H-092’s reviewed transport remains pending integration; do not repeat its measurement
 for another receipt.
-PRs 94–96 have landed upstream and must be reconciled before this checkpoint is
-published.
+PRs 94–96 are incorporated from `origin/main` at `edccf294` in this checkpoint.
+The merge preserves both sets of verifier guards, T-022’s weak endpoint statement, and
+the new agenda’s priority over historical handoff text.
 
 README and TUTORIAL need no new mathematical exposition for this planning revision.
 SYNOPSIS defines the work entities and points to the agenda.
