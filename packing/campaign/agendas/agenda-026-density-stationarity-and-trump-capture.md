@@ -441,7 +441,7 @@ agenda:
     state: in_progress
     priority: 0
     question: Does the exact D4 Trump support admit a full-size dual value above eleven?
-    hypotheses: [H-099]
+    hypotheses: [H-099, H-105]
     budget: >-
       First freeze the deduplicated support, exact arithmetic, initial off-boundary
       rows and deterministic row-generation rule in one slice of at most 30 minutes.
@@ -459,11 +459,13 @@ agenda:
       replayed a necessary-row ceiling of56/5, leaving H099 unresolved and its
       full fixed-support supremum in[11,56/5]. The priced pair separator passed
       source/toy controls and independent review under think-4ej5 and think-0u56.
-      A candidate-only target needs its own prospective claim and protocol;
-      no further target or complete arrangement build has run.
+      H105/exp115 now freezes one candidate-only pair target and separate replay
+      under think-whmn and think-hql2. A witness invalidates only exp113's fixed
+      weights; no-hit is not a.e. feasibility. No complete arrangement build is funded.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-screen-spec.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-115-h-105-fixed-candidate-pair-obstruction.md
     workflows: [insight-iteration, pipeline-improvement, research-loop]
     depends_on: [BC-242, BC-250]
     next_evidence: >-

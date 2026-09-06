@@ -269,7 +269,7 @@ session:
     clock_role: work
     objective: Publish H104 and independently review the next density instrument while repairing validation invocation.
     bead: think-647n
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: H104 has a scoped decision and the pair author has handed off stable source and controls.
     budget_minutes: 25
@@ -279,10 +279,30 @@ session:
     validation_command: Source/toy independent review, record and push tiers, and the isolated negative-control step.
     kill_condition: A correctness premise fails or the separate bounded commission ends; no unregistered target.
     fallback: Retain the exact missing gate and select no target without a new prospective record.
-    outcome: null
+    outcome: Pair readiness accepted and H104 retained at cf299e6c; corrected a105 failed-step replay passed all 163 controls.
     evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md]
-    stop_reason: null
+    stop_reason: The next candidate-only target can now be frozen; publication and supporting fixes continue independently.
     next_action: Accept only reviewed readiness; freeze a separate candidate-only discriminator before target access.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Decide the fixed-candidate overweight-pair claim with one producer and one independent replay.
+    bead: think-whmn
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Independent source/toy review accepted the bounded pair instrument at cf299e6c.
+    budget_minutes: 20
+    started_at: '2026-09-06T21:57:50Z'
+    deadline_at: '2026-09-06T22:17:50Z'
+    expected_output: A scoped H105 decision or refusal, actual process costs and integrated PR101 checkpoint.
+    validation_command: One frozen 30-second producer and one separately dispatched 30-second packet replay.
+    kill_condition: A declared process cap or the operational lease ends; no unchanged retry.
+    fallback: Retain incomplete evidence as unresolved and keep H099 unchanged.
+    outcome: null
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-115-h-105-fixed-candidate-pair-obstruction.md]
+    stop_reason: null
+    next_action: Price only the next discriminator justified by the independently checked pair outcome.
   primary_bead: think-jgnv
   status: in_progress
   budget:
@@ -940,12 +960,12 @@ session:
     excluded_commands: [file writes, tests, target construction or geometry, git mutations, tbd mutations, registry allocation]
   - task: Preserve referenced workflow evidence in control snapshots; think-lpoq
     operator: Codex bound_lane_strategy, existing worker settings
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
+    outcome: Reference-only workflow copying and clean-before-mutation regression pass; writer stopped at 21:59:36.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/session-089-negative-control-environment.md]
+    files: [packing/devtools/run_negative_controls.py, packing/tests/test_negative_controls.py]
+    checks: [16 tests passed, one slow test deselected; 8.32 seconds wall and 7.65 CPU; Ruff and types clean.]
     uncertainty: This is separate from the environment-only failed-step replay on immutable a105f729.
     elapsed_seconds: null
     elapsed_quality: unavailable
@@ -960,6 +980,50 @@ session:
     fallback: Retain the omission as a separate uncompleted supporting fix.
     write_scope: [packing/devtools/run_negative_controls.py, packing/tests/test_negative_controls.py, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/session-089-negative-control-environment.md]
     excluded_commands: [dependency changes, expectation weakening, target geometry, git mutations, tbd mutations, shared records]
+  - task: Independent fixed-candidate pair packet replay; think-hql2
+    operator: Codex structural_lane_strategy, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: Target packet is not yet produced; no candidate access before the committed prospective record.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Read the frozen protocol, then replay only the actual producer packet supplied by the coordinator.
+    phase: 12
+    budget_minutes: 13.67
+    started_at: '2026-09-06T22:02:20Z'
+    deadline_at: '2026-09-06T22:16:00Z'
+    expected_output: H105-only decision, retained replay, measured process costs and independence limits.
+    validation_command: One cf299e6c file checker with its own 30-second cap, or refusal review if no valid producer packet exists.
+    kill_condition: The single replay cap or review lease ends; no producer or repeated replay.
+    fallback: Retain failed or incomplete output as unresolved without changing H099.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/exp-115-h-105-fixed-candidate-pair-obstruction/replay.json, packing/campaign/series/series-000-smoke-and-calibration/results/exp-115-h-105-fixed-candidate-pair-obstruction/replay.log, packing/campaign/series/series-000-smoke-and-calibration/results/exp-115-h-105-fixed-candidate-pair-obstruction/independent-review.md]
+    excluded_commands: [producer invocation, source edits, new rows, LP, support changes, git mutations, tbd mutations, registry allocation]
+  - task: Update the integrated PR body through pair readiness; think-647n
+    operator: Codex gpt6_coverage_audit, existing worker settings
+    status: completed
+    recording: contemporaneous
+    outcome: PR body current through cf299e6c with generated cost prefix unchanged; writer stopped at 22:02:46.
+    evidence: [packing/campaign/agent-sessions/session-089-agenda024-next-phases.md]
+    files: [temporary PR body outside its generated cost block]
+    checks: [Practical Prose and Flowmark pass; entire generated opening prefix preserved.]
+    uncertainty: Root must append the actual target and latest validation outcomes after this handoff.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Keep the generated cost block unchanged and distinguish narrow mathematical results from readiness.
+    phase: 11
+    budget_minutes: 10
+    started_at: '2026-09-06T21:59:00Z'
+    deadline_at: '2026-09-06T22:09:00Z'
+    expected_output: Current PR body with exact scoped outcomes and integrated-cycle policy.
+    validation_command: Practical Prose common-edit and de-slop; compare values to retained evidence.
+    kill_condition: The bounded body edit completes or its lease ends.
+    fallback: Report remaining stale statements without inventing measurements or decisions.
+    write_scope: [temporary PR body outside its generated cost block]
+    excluded_commands: [repository edits, generated cost edits, numerical invention, target access, git mutations, tbd mutations]
   outputs:
   - packing/campaign/agent-sessions/session-089-agenda024-next-phases.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md

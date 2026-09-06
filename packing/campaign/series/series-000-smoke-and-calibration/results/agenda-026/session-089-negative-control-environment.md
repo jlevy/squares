@@ -113,6 +113,80 @@ A separately prioritized follow-up can add the referenced workflow evidence in
 `packing/tests/test_negative_controls.py`. This diagnosis makes no claim that an
 unmutated worker passes every document check.
 
+## Repair Addendum: Referenced Workflow Evidence
+
+The preceding sections retain the environment diagnosis at its 21:49 handoff.
+This addendum records `think-lpoq`, the separately authorized W7 repair on integration
+line 101, commissioned for 21:51:00–22:06:00 UTC on 2026-09-06. The Git base at this
+repair handoff is `cf299e6c`; the changes are limited to
+`packing/devtools/run_negative_controls.py`, `packing/tests/test_negative_controls.py`,
+and this addendum.
+
+### Corrected replay of the original failed step
+
+The coordinator’s environment-corrected replay on the unchanged `a105f729` snapshot
+completed with exit 0 and `163 negative controls fire as expected`. Its log is
+`/private/tmp/squares-pr101-a105-negative-controls-replay.log`. The slowest individual
+control took 23.304 seconds; total process wall time and CPU were not measured and
+remain unavailable.
+
+That replay, combined with the other passing steps in the original 1447.15-second
+invocation, discharges the old failed-step obligation.
+The original invocation still failed one step.
+The replay did not include the new workflow-copying fix below and is not evidence for
+that fix.
+
+### Snapshot repair and controls
+
+The new regression first ran the complete synopsis checker in an unmutated private
+snapshot. It failed with exactly two diagnostics: missing `deep-gate.yml` and
+`branch-mergeability.yml` links.
+This isolated the evidence omission from the earlier dependency failure and from any
+intentional mutation.
+
+The repair extends the existing referenced-file scan to `.github/workflows` and copies
+selected files relative to the repository root.
+It does not copy the whole workflow directory.
+The existing size calculation counts every selected file against the unchanged snapshot
+cap.
+
+Two fast regressions in
+[test_negative_controls.py](../../../../../tests/test_negative_controls.py) cover the
+repair:
+
+- A private selection fixture keeps an existing referenced workflow once, omits an
+  unreferenced workflow and a nonexistent link, and refuses to follow a workflow symlink
+  outside the selected root.
+- The real snapshot passes the complete unmutated synopsis checker, preserves both
+  workflow files byte for byte, and copies exactly the selected workflow evidence.
+  The unchanged registered dateline mutation then fires on its expected assertion,
+  without a dead-link diagnostic, and the synopsis bytes are restored.
+
+Measured invocations used project Python 3.14 through frozen uv from `packing/`:
+
+| Check | Result | Pytest time | Process wall | User CPU | System CPU |
+| --- | --- | ---: | ---: | ---: | ---: |
+| New clean-snapshot regression before the fix | 1 expected failure | 2.22 s | 2.46 s | 1.59 s | 0.70 s |
+| Both new controls after the fix | 2 passed | 3.37 s | 3.61 s | 2.61 s | 0.89 s |
+| Final focused file, quick lane | 16 passed; 1 slow test deselected | 8.07 s | 8.32 s | 5.72 s | 1.93 s |
+
+The final test command was:
+
+```bash
+/usr/bin/time -p env UV_CACHE_DIR=/private/tmp/squares-uv-cache \
+  uv run --frozen --no-sync --all-extras --group dev python -m pytest \
+  tests/test_negative_controls.py -q -m 'not slow and not exhaustive_exact' \
+  --durations=5
+```
+
+The new real-snapshot test’s final call time was 4.23 seconds.
+Ruff check and BasedPyright report zero findings on both changed Python files, and Ruff
+format reports both files formatted.
+The initial Ruff `RUF005` finding was corrected before these final checks.
+Flowmark’s automatic-format check passes on this report.
+No full suite, research target, dependency synchronization, shared-environment change,
+or repeat of the coordinator’s 163-control replay ran for this repair.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

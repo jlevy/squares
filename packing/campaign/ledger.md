@@ -103,7 +103,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-086](agent-sessions/session-086-agenda021-overnight-pass.md) | stopped | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 2 | think-db1k | BC-213, the remaining m = 5 rung at 973/200 (think-wufn), as agenda-021's closeout selects it. |
 | [session-087](agent-sessions/session-087-agenda022-continuation.md) | completed | contemporaneous | `research-loop` (correctness) | `efficiency-loop` (efficiency) | 2 | think-wufn | Take BC-215 (think-xejq), the one lever the efficiency block measured and did not wire: 20.2 per cent of deep-run work is repeated and 92 per cent of that is trees that did not move, so the tree-id cache is what takes the pull-request wall from about 221.70 s to the operator's two to two and a half minutes. |
 | [session-088](agent-sessions/session-088-validation-efficiency-checkpoint.md) | completed | retrospective | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 1 | think-rwte | Continue think-xejq with explained exhaustive-family planning under W5 Phase 3 after publishing this implementation and verifying its full hosted checkpoint. Preserve complete coverage until the selection and reuse contracts pass their invalidation fixtures. |
-| [session-089](agent-sessions/session-089-agenda024-next-phases.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `pipeline-improvement` (correctness) | 11 | think-jgnv | Review source instruments, integrate landed corrections and commission only ready, priced target work. |
+| [session-089](agent-sessions/session-089-agenda024-next-phases.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 12 | think-jgnv | Review source instruments, integrate landed corrections and commission only ready, priced target work. |
 
 ### Workflow summary
 
@@ -116,7 +116,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 18 | 1 | 57 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 9 | 4 | 51 | 7 |
+| `research-loop` | 9 | 4 | 52 | 7 |
 | `pipeline-improvement` | 21 | 0 | 109 | 0 |
 | `documentation-pass` | 1 | 0 | 4 | 0 |
 | `review-planning-oversight` | 0 | 0 | 1 | 0 |
@@ -556,7 +556,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 70 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 71 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -642,6 +642,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | H-102 | open question | proof | Which explicitly delimited n = 11 angle-composition or wall-support fa |  | 0 |  |  |
 | H-103 | open question | proof | Can a complete typed finite cover of every n = 11 side-minimizing conf |  | 0 |  |  |
 | H-104 | confirmed | proof | At q = 1939/500, the frozen P10, P12 and A-triple point formulas satis |  | 1 |  | 2s wall |
+| H-105 | running | proof | Among the 60 distinct D4 placements of trump11-v1, with exactly exp-11 |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -751,6 +752,12 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-115 | series-000 | 11 | Codex coordinator, max reasoning, think-whmn in Session089 | H-105 | Prospective candidate-only record before target construction; reviewed source instrument is committed separately. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -767,7 +774,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 
 ## Effort
 
-70 rounds, 2152.1 agent-minutes, 1163.8 wall-minutes.
+71 rounds, 2152.1 agent-minutes, 1163.8 wall-minutes.
 
 ## Exploration reports not yet codified
 

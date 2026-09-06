@@ -310,6 +310,30 @@ def test_results_register_dependencies_survive_snapshot_pruning() -> None:
     assert "resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.pdf" in retained
 
 
+def test_workflow_evidence_selection_keeps_only_existing_referenced_files(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    workflows = tmp_path / ".github/workflows"
+    workflows.mkdir(parents=True)
+    needed = workflows / "needed.yml"
+    needed.write_text("name: evidence\n")
+    (workflows / "unused.yml").write_text("name: unreferenced\n")
+    outside = tmp_path / "outside.yml"
+    outside.write_text("name: outside the workflow root\n")
+    (workflows / "escape.yml").symlink_to(outside)
+    document = tmp_path / "SYNOPSIS.md"
+    document.write_text(
+        "[needed](.github/workflows/needed.yml)\n"
+        "[again](.github/workflows/needed.yml)\n"
+        "[absent](.github/workflows/absent.yml)\n"
+        "[escape](.github/workflows/escape.yml)\n"
+    )
+    monkeypatch.setattr(controls, "ROOT", tmp_path / "packing")
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (workflows,))
+    assert controls.linked_pruned_targets() == [needed]
+
+
 def test_unmutated_results_checker_is_green_inside_a_worker(tmp_path: Path) -> None:
     tree = tmp_path / "snapshot"
     clone_tree(tree)
@@ -321,6 +345,70 @@ def test_unmutated_results_checker_is_green_inside_a_worker(tmp_path: Path) -> N
         check=False,
     )
     assert completed.returncode == 0, completed.stdout + completed.stderr
+
+
+def test_synopsis_snapshot_is_clean_before_its_registered_mutation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    tree = tmp_path / "snapshot"
+    clone_tree(tree)
+    work = tree / HERE
+    synopsis = tree / "SYNOPSIS.md"
+    original = synopsis.read_bytes()
+    environment = {
+        **os.environ,
+        "PYTHONPATH": os.pathsep.join((str(work / "src"), str(work))),
+    }
+    baseline = subprocess.run(
+        [sys.executable, "-m", "devtools.check_synopsis"],
+        cwd=work,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert baseline.returncode == 0, baseline.stdout + baseline.stderr
+
+    for name in ("deep-gate.yml", "branch-mergeability.yml"):
+        relative = Path(".github/workflows") / name
+        assert (tree / relative).read_bytes() == (controls.REPO / relative).read_bytes()
+    selected_workflows = {
+        path.relative_to(controls.REPO)
+        for path in controls.snapshot_pruned_targets()
+        if path.is_relative_to(controls.REPO / ".github/workflows")
+    }
+    copied_workflows = {
+        path.relative_to(tree)
+        for path in (tree / ".github/workflows").rglob("*")
+        if path.is_file()
+    }
+    assert copied_workflows == selected_workflows
+
+    spec = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    control = next(
+        item
+        for item in spec["controls"]
+        if item["name"] == "synopsis - dateline duplicates volatile campaign progress"
+    )
+    outcomes: list[controls.CommandOutcome] = []
+
+    def capture(
+        command: str, *, cwd: Path, environment: dict[str, str], timeout_seconds: float
+    ) -> controls.CommandOutcome:
+        outcome = run_control_command(
+            command,
+            cwd=cwd,
+            environment=environment,
+            timeout_seconds=timeout_seconds,
+        )
+        outcomes.append(outcome)
+        return outcome
+
+    monkeypatch.setattr(controls, "run_control_command", capture)
+    assert controls.run_one(control, tree) == (True, "")
+    assert len(outcomes) == 1
+    assert "dead link" not in outcomes[0].stdout + outcomes[0].stderr
+    assert synopsis.read_bytes() == original
 
 
 def test_control_targets_cannot_escape_the_private_snapshot(tmp_path: Path) -> None:

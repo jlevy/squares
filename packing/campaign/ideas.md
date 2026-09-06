@@ -263,6 +263,7 @@ Row 86 belongs to the pending refined-core transport.
 | 96 | Complete restricted angle or wall-support theorems | registered | [H-102](hypotheses/H-102-complete-restricted-angle-support-families.md) | Start from H-036; proof and falsifier test the same claim independently. |
 | 97 | Typed global capture with conditional/configuration cuts | registered | [H-103](hypotheses/H-103-complete-typed-global-capture.md) | Complete coverage, sound cuts, and exact local capture are separate obligations. |
 | 98 | Fixed-side point-cover auxiliaries before an angle-neighborhood proof | registered | [H-104](hypotheses/H-104-fixed-side-point-cover-auxiliaries.md) | Seven exact-angle formula clauses; a counterexample rejects only this mechanism, not H-036. |
+| 99 | An overweight pair invalidates exp113’s fixed candidate | registered | [H-105](hypotheses/H-105-exp113-overweight-pair-obstruction.md) | A strict positive-area pair witness retires these weights only; complete pair exhaustion is not a.e. feasibility. |
 
 Exact basis recovery and Lean replay support the relevant candidate or assurance bead;
 they are not additional mathematical hypotheses without a specific method comparison.

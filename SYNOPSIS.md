@@ -141,6 +141,7 @@ The generated ledger currently derives nine confirmed hypotheses, ten refuted
 hypotheses, two open hypotheses, fifteen open questions, and thirty-six blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. No hypothesis waits on review and six are unresolved.
+H-105 has a prospectively frozen candidate-only pair-obstruction test in progress.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
 pinned the `m = 5` covering wall to a bracket of width 0.015 where it had registered
 0.02. One, H-064, is abandoned in the ledger’s word — its latest round expired resumable
@@ -2792,6 +2793,7 @@ round that names the hypothesis, control roles included.
 | [H-102](packing/campaign/hypotheses/H-102-complete-restricted-angle-support-families.md) | open question | Which complete restricted angle or wall-support family yields a useful theorem, starting with H-036? | 0 | — |
 | [H-103](packing/campaign/hypotheses/H-103-complete-typed-global-capture.md) | open question | Can a complete typed cover exclude every minimizing branch or place its entire surviving box inside the accepted local Trump neighborhood? | 0 | — |
 | [H-104](packing/campaign/hypotheses/H-104-fixed-side-point-cover-auxiliaries.md) | confirmed | The fixed point formulas at side1939/500 satisfy all seven exact0/45-degree auxiliary clauses | 1 | 2s wall |
+| [H-105](packing/campaign/hypotheses/H-105-exp113-overweight-pair-obstruction.md) | running | Exp113’s fixed weights have an overweight pair with intersecting interiors | 1 | not yet measured |
 
 ### Confirmed
 
@@ -3036,7 +3038,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 70 rounds registered in `series-000`.
+There are 71 rounds registered in `series-000`.
 
 They record 2152.1 agent-minutes and 1163.8 wall-minutes.
 Exp-114 completed its one target and independent replay.
@@ -3146,6 +3148,7 @@ archive beside it.
 | [exp-111](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-111-h-091-core-shrink.md) | 11 | target | H-091 | exact fixed-atom replay above exp-110’s corner event, followed by direct witness-event inspection | minimum `96377/100000` at net direction 97; the witness’s first usable event exceeds the entire ordinary-containment improvement window, closing that fixed-weight route | rejected |
 | [exp-113](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md) | 11 | target | H-099 | exact necessary-row ceiling on the frozen Trump D4 support | independently replayed ceiling56/5; complete a.e.-depth still unverified | unresolved |
 | [exp-114](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md) | 11 | target | H-104 | seven fixed-formula exact-angle auxiliary clauses at1939/500 | all seven clauses hold in the reviewed exact computation and independent input/receipt replay | accepted |
+| [exp-115](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-115-h-105-fixed-candidate-pair-obstruction.md) | 11 | target | H-105 | exact overweight-pair obstruction for exp113’s unchanged weights | prospectively frozen; no target access yet | in-progress |
 
 ### Cost and provenance
 
@@ -3221,10 +3224,11 @@ archive beside it.
 | exp-111 | one frozen core side above the lost corner event, source replay and candidate replay | 30.58 s | — | criterion | `aeb683d5` |
 | exp-113 | one 60-second producer and one separate 60-second replay | 28.79 s | — | criterion | `e70458a9` |
 | exp-114 | one 10-second producer and one separate 10-second receipt/witness replay | 2.46 s | — | criterion | `e45c8a63` |
+| exp-115 | one 30-second producer and one separate 30-second file replay | not yet measured | — | in-progress | `cf299e6c` |
 
-### What the 70 rounds jointly establish
+### What the 71 rounds jointly establish
 
-The 70 rounds use 2152.1 agent-minutes and 1163.8 wall-minutes under the campaign’s
+The 71 rounds use 2152.1 agent-minutes and 1163.8 wall-minutes under the campaign’s
 retained effort accounting.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
 separately in Session089.
