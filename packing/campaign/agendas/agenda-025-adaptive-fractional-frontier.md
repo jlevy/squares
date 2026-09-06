@@ -168,7 +168,10 @@ agenda:
       3.815 only if the first certifies or removes at least 25 percent of the
       same-support excess over 11. Freeze any mass-below-11 bytes immediately and send
       them to the coordinator. Do not spend the cell proliferating net or margin
-      variants after a candidate exists.
+      variants after a candidate exists. A scalar attempt at 61/16 with the existing
+      single-B instruments may run in block one as a background process without
+      waiting for BC-230 and BC-231, under the pre-registered probe in this agenda's
+      launch section; its wall or its rung prices the adaptive route before it opens.
     entry: >-
       BC-231 passes, BC-220 or a later coordinator gate creates the allocated
       hypothesis, and the target and scale are frozen.
@@ -423,6 +426,11 @@ An upper endpoint counts only from an iteration whose row loop reports
 - `packing/src/sqpack/fractional/cutting.py` and
   `packing/devtools/run_fractional_cutting.py` own the 3.82 cutting state and exact
   packing-family floor.
+- `packing/devtools/freeze_cutting_primal.py` is the covering bridge for that state: row
+  generation to convergence on the state’s sites, one covering solve, the column
+  generator’s rationalisation, and a `least_cell_mass`-null candidate in the retained
+  shape. `run_fractional_cutting --seed-certificate` starts a fresh side from the grid
+  plus a retained certificate’s atoms, since a warm start only moves upward.
 - `packing/src/sqpack/fractional/colgen.py` and
   `packing/devtools/run_fractional_colgen.py` own row/column generation and frozen
   covering candidates.
@@ -484,8 +492,10 @@ idle core. The third-party check documents about 30 seconds on an idle core and 
 minute when contended; the archived raw source replay completed in under five seconds.
 The full n=11 falsification table costs about four minutes.
 These are retained measurements, not guarantees for an adaptive object.
-The n12 independent verifier has a historical absolute path in its CLI tail; use the
-module replay above and its imported tests until that separate defect is assigned.
+The n12 independent verifier’s own command-line tail reads a mode name and the
+reviewer’s absolute checkout path, so the evidence register’s replay runs through
+`cases/n12_fractional_certificate/replay_independent.py`, which loads the retained file
+unchanged and takes a certificate path (`think-d7yx`).
 
 ## Launch Audit Receipts and Open Instrument Gate
 
@@ -532,6 +542,15 @@ unexpected-NaN refusal.
 A deadline-stopped BC-233 arm is now safe to preserve and hand off as strict JSON, but
 it is still time-limited and ineligible for comparison or BC-233’s scientific exit.
 Any future summary containing `Infinity` or `NaN` is a technical failure, not a result.
+
+A reviewer’s timing run on 2026-09-05 (`think-kht8`) executed the BC-233 inset-`1/2`
+screen template below unchanged, writing outside the reserved root on a four-core macOS
+host: the row loop converged in 25 LP rounds at objective `78/7 = 11.142857`, the
+restricted optimum exp-060’s iteration 0 reached on this grid, a 196-atom candidate of
+rationalised mass `11142897/1000000` was emitted, and the process took 191.0 s of wall
+including its final `check_ceiling` pass, inside the 540 s deadline.
+That is a timing receipt for one host, not a scientific result: the candidate was
+neither declared, decided, nor retained.
 
 These commands reproduce the bounded receipts without starting a production run:
 
@@ -602,8 +621,13 @@ Two driver boundaries matter:
 1. `run_fractional_cutting --freeze` writes the best exact **packing family**, even when
    its total is below 11. It does not serialize the current primal site weights.
    If a row-converged covering objective falls below 11, stop that lane, preserve the
-   state, and request a tested rationalize/freeze bridge; the float objective is not a
-   bound certificate.
+   state, and run `devtools.freeze_cutting_primal` on it (the command is in the 61/16
+   section below): the bridge regenerates rows to convergence on the state’s sites,
+   re-solves the covering program, rationalises the weights the way the column generator
+   does, and writes a `least_cell_mass`-null candidate for the declaration bridge and
+   the two-route decision.
+   The float objective is not a bound certificate, and neither is the bridge’s total
+   until `decide_certificate` accepts the frozen bytes.
 2. `run_fractional_colgen` has no resume checkpoint.
    `--column-rounds 1` is the fixed grid screen; later rounds add priced site orbits and
    release the support.
@@ -615,7 +639,7 @@ Two driver boundaries matter:
 The manager owns BC-230 and supervises one BC-232 process plus the matched BC-233
 processes, all pinned to one numerical thread; compute processes do not consume agent
 slots. The portfolio’s one floating agent starts on closure BC-240 and moves to the
-BC-230 review when that 90-minute theorem packet returns.
+BC-230 review when that 105-minute theorem packet returns.
 BC-231 does not open before the theorem is reviewed and frozen at the hour-four gate.
 
 | Elapsed | Manager / BC-230 | BC-232 process | BC-233 processes |
@@ -668,7 +692,7 @@ computational upper endpoint.
 Preserve those different evidential labels.
 Stop immediately on a `verify_ceiling` packing family of total at least 11; that closes
 the current one-body formulation at 3.82. Also stop on a row-converged objective below
-11, preserve the state, and request the rationalize/freeze bridge; the float crossing is
+11, preserve the state, and run the covering bridge on that state; the float crossing is
 a candidate for that bridge, not a bound.
 Do not apply the width rule at the hour-four gate after only 210 CPU-minutes.
 After the frozen additional 30-minute leg, continue only if the width is at most
@@ -746,6 +770,65 @@ Equal or larger exact mass retires the seed.
 A lower float LP objective, unequal stopping status, deadline stop, or failed inset
 screen is unresolved and earns no continuation.
 
+### Scalar probe at 61/16: a pre-registered first-block option
+
+Nothing between 3.81 and 3.82 has been attempted with the existing single-`B` theorem.
+The covering-values register holds `n = 11` reports at 3.82 and 3.85 only, and T-018’s
+own ladder went 3.78, 19/5, 381/100, then straight to 3.82. The retained certificate
+carries `434547/40000 = 10.863675`, `0.136` below eleven; the vertex-seeded restricted
+optimum at 3.82 is `11.055617`, `0.056` above it.
+A straight line through those two points crosses eleven near 3.817, so `61/16 = 3.8125`
+and `763/200 = 3.815` are plausibly inside the current instrument’s reach before any
+adaptive core exists, and BC-234 only reaches 61/16 after BC-230 and BC-231, at least
+390 elapsed minutes of theorem and verifier work whose necessity for this rung has not
+been measured.
+
+The probe is one background single-core process on instruments that already exist: the
+cutting driver from the grid plus the 3.81 atoms carried by `--seed-certificate` (a warm
+start cannot move downward), with BC-232’s net, shrink, row budget and thread pins, and
+the covering bridge on its state if a row-converged objective falls below eleven.
+It is not one of the six cells X-016 opens at `T+0`. The coordinator decides at dispatch
+whether to allocate it (`think-8rqf`), gives it a hypothesis and an experiment record in
+the reserved ranges, and starts it only once BC-233’s screen has released a core, so the
+first-block process count never exceeds three.
+
+```bash
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 \
+uv run --frozen --all-extras --group dev python -m devtools.run_fractional_cutting \
+  --n 11 --side 61/16 --shrink 9977/10000 \
+  --angle-limit 207107/500000 --steps 180 \
+  --minutes 150 --iterations 40 --cap 150 --support-cap 96 \
+  --rows-rounds 2 --rows-per-direction 3 \
+  --seed-certificate cases/n11_fractional_certificate/certificate.json --seed-map scale \
+  --log campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-234-scalar-61-16-leg-01.log \
+  --state campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-234-scalar-61-16-leg-01-state.json \
+  --json campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-234-scalar-61-16-leg-01-summary.json \
+  --freeze campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-234-scalar-61-16-leg-01-family.json
+```
+
+Read it exactly as BC-232: the lower endpoint is the exact `best_scaled_total`, the
+computational upper endpoint is the smallest row-converged `rows_objective`. A
+`verify_ceiling` family of total at least eleven closes the scalar formulation at 61/16
+and prices BC-230 precisely, since an adaptive core must then earn more than the whole
+scalar margin at this side.
+A wall reached by the 150-minute clock is time-limited and reopens only at the hour-four
+gate with its state hashed.
+A row-converged objective below eleven runs the bridge on the fresh state:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.freeze_cutting_primal \
+  --n 11 --state STATE.json --angle-limit 207107/500000 --steps 180 \
+  --rows-rounds 2 --rows-per-direction 3 --scale 4000000 \
+  --freeze CANDIDATE.json --json CANDIDATE.receipt.json
+```
+
+The bridge refuses an unconverged row loop, a rejected program, a rationalised total at
+or above eleven, and an existing output path.
+Its candidate then takes the scalar route already declared for BC-232 and BC-233: hash,
+`declare_least_cell_mass`, hash again, `decide_certificate`, and
+`minimal_verify.py --unpinned`. A decided mass below eleven routes to BC-238 and
+outranks everything else in the block.
+
 ## Development and gate validation
 
 BC-231 must leave this source-distinct decision surface for BC-238:
@@ -785,6 +868,8 @@ uv run --frozen --all-extras --group dev python -m pytest -q \
   tests/test_run_fractional_colgen.py::test_summary_json_refuses_unexpected_non_finite_values \
   tests/test_declare_least_cell_mass.py \
   tests/test_decide_certificate.py \
+  tests/test_freeze_cutting_primal.py \
+  tests/test_run_fractional_cutting.py \
   -m 'not exhaustive_exact and not exhaustive_interval'
 ```
 
@@ -792,6 +877,8 @@ The planning spike on 2026-09-05 passed 83 tests with two exhaustive tests desel
 1.45 seconds in pytest and 1.84 seconds wall on this checkout.
 The integrated readiness slice passed 88 tests with two exhaustive tests deselected in
 3.52 seconds of pytest time.
+With the two test files the 2026-09-05 review added, the same slice passed 94 tests with
+two deselected in 4.24 seconds of pytest time on the reviewer’s macOS host.
 This proves only that the existing seams are green; it is the baseline BC-231 must
 preserve.
 

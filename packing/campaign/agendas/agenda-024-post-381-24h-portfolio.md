@@ -318,6 +318,8 @@ neighboring soft-schema artifacts as contracts, then run the whole-set record ch
 before dispatching their commands.
 
 Record `T+0` only after those steps pass.
+The launch step itself is tracked as `think-u8vi` under the planning epic; it is not a
+research cell and belongs to neither manager’s range.
 Write the dispatch record to
 `packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/launch-t-plus-00.md`.
 It carries the current branch HEAD, `origin/main`, current PR #87 head, the six tbd
@@ -406,6 +408,9 @@ In a shared checkout, a manager leaves owned changes uncommitted and submits the
 manifest defined above.
 In an isolated worktree, a manager may make local transport commits containing only
 owned paths, but may not push, merge, rebase, or operate tbd.
+A fresh worktree first runs `git submodule update --init vendor/kpress`: the dev
+dependency group builds the vendored `kpress`, and `uv run --frozen` refuses an empty
+gitlink before any command in this packet can start.
 The coordinator reviews and integrates either form, creates the shared records,
 regenerates shared views, and makes the portfolio commit.
 The gate packet names the frozen base SHA and either the shared-checkout content
@@ -481,6 +486,16 @@ The post-freeze checks found only noninvalidating changes:
 | 2026-09-05 launch-spike close | PR #87: `3c6c5e7fc0c1662a57a1a3d06246a3a5e0730b89` to `b9d357db7a0f46ff8e0cd5bcfcb157686003b8a2` | `packing/src/sqpack/cli/validate.py`, `packing/tests/test_validation_cli.py` | No namespace, manager-output, research-input, or scientific-verdict collision. The change sizes the quick test lane to available CPUs; keep this branch’s measured push receipt and adopt the runner behavior only when PR #87 reaches `main`. |
 | 2026-09-05 after first green PR #89 run | PR #87: `b9d357db7a0f46ff8e0cd5bcfcb157686003b8a2` to `5ab10a1ab67255d229af1614170a33dc32e19ce8` | `development.md`, `packing/devtools/gate-budgets.yaml` | No namespace, manager-output, research-input, or scientific-verdict collision. This records the stable quick-lane timing and does not alter a manager command or launch criterion. |
 | 2026-09-05 after first green PR #89 run | `origin/main`: `663ca37eb622508d9df00c594b8ef11d2c256f55` to `3f8e104372c0c523f53855e769d86fd88ecbf22d` through merged PR #88 | 37 paths in the manifest below | No agenda, BC, H, exp, reserved result, frozen research input, or scientific-verdict collision. The delta changes repository validation, build, explainer, known-best rendering, accounting, and general documentation surfaces. Merged as `6a4b329e`, aligned the clean kpress gitlink, and preserved the scientific spike receipts. The new-base push tier passed 42 of 61 steps with 595 reachable tests passed and 3 deselected in 186.31 seconds. |
+| 2026-09-05 review of PR #89 | PR #87: `5ab10a1ab67255d229af1614170a33dc32e19ce8` to `d5bb223576ca5eaa7e40ad505f601cbf98993ae9` | The `origin/main` merge above plus `AGENTS.md`, `README.md`, `development.md`, `operating-rules.md`, `packing/src/sqpack/campaign/commit_clock.py`, `packing/src/sqpack/campaign/ledger.py`, `packing/tests/test_campaign_tools.py`, and `packing/tests/test_gate_repetition.py` | No agenda, BC, H, exp, exploration, manager-output, or scientific-verdict collision. PR #87’s whole delta against `main` does rewrite a frozen named input: it adds `OR-12` through `OR-14` to `operating-rules.md`, regenerates `AGENTS.md` from it, changes the ledger renderer and the agenda map, and tightens the agent-session schema with a session-gate check. That overlap was already present at the BC-219 freeze and was not recorded; the paragraph below carries the disposition. |
+
+**PR #87 and the frozen inputs.** `operating-rules.md` is in the BC-219 manifest and PR
+#87 changes it, so PR #87 reaching `main` is a named-input change under this agenda’s
+own rule: BC-219 returns to preflight before another manager starts.
+The coordinator then re-hashes `operating-rules.md` in a superseding manifest,
+regenerates `ledger.md` and `agenda-map.md` with the merged renderer, reads `OR-12`
+through `OR-14` into the common packet, and applies the merged agent-session schema and
+session-gate check to the BC-225, BC-239, and BC-249 closeouts.
+Tracked as `think-erkg`.
 
 The exact PR #88 changed-path manifest is:
 
@@ -594,6 +609,34 @@ f7f87469d7ee1c3a04679cd9f58bcc032ed79baed927aaf0a7222ec6c7587e43  packing/tests/
 This amendment does not start `T+0`, claim a research cell, or allocate an H or exp ID.
 The launch record still rechecks these bytes against its commit and names the actual
 operators and experiment identities before either numerical lane starts.
+
+### Post-Review Manifest
+
+The 2026-09-05 review of PR #89 (`think-2vl2`) froze this amendment at
+`2026-09-06T00:57:38Z`. It supersedes the agenda-025 hash in the planning-spike
+manifest, carries agenda-026 unchanged, and adds the only implementation and test files
+the review changed or created: the cutting driver’s `--seed-certificate` flag, the
+covering bridge `devtools.freeze_cutting_primal`, and the n=12 replay wrapper, each with
+its tests. It also rebinds X-016, a BC-219 input whose frozen hash the coordinator’s
+commit `9da7a876` (working definitions added after the freeze) left stale without a
+superseding manifest.
+
+```text
+b5559b35578cfa470008d43959d0a3b7cc2e18afd56ae114fabf373fe730236e  packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md
+9153c33f705de6ad8fac76fee8d31b5176bb9d379270deca2bf35852f8e77f88  packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md
+3e544c5a316d57af21530a5d8269df6a87942d6bdc7537d35d128bbb30cb8b72  packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md
+dcc220357eeb7b5a37e775c00fcf5569608ffa77d6ee4796feff026bb3e46f2c  packing/devtools/run_fractional_cutting.py
+3cf3ac48053a491668541f0c84548cf644640b396642949a059c72e910f89479  packing/devtools/freeze_cutting_primal.py
+8f2c980ca199a256fbb0b8bbded5043d7bff921a250b0753775ce8d8d2225f70  packing/cases/n12_fractional_certificate/replay_independent.py
+25a6827f3d6544fd43f14a4fd1d5274f25732efaa7802c83dca0ec8529def15f  packing/tests/test_freeze_cutting_primal.py
+303190b9b40ad9beb81e979219e4f3a09b9062b13c50cda837d480bd01877fe4  packing/tests/test_run_fractional_cutting.py
+d7f1df062e61b56d37c1c67e0cb63c1b72f9dd6e7eeffde6c00e1c602f22c703  packing/tests/test_n12_replay_independent.py
+```
+
+Like the spike amendment, this one starts no `T+0`, claims no research cell, and
+allocates no H or exp ID. The scalar 61/16 probe it pre-registers in agenda-025 is an
+option the dispatch record either allocates or declines; either way the record names its
+decision.
 
 The four-slot launch is coordinator, fractional manager, closure manager, and one
 floating worker. The floating worker authors BC-240, then reviews BC-230; BC-232 and
