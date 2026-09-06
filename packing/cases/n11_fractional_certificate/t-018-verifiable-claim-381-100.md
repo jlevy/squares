@@ -19,10 +19,10 @@ pairwise disjoint interiors, the unit squares free to rotate.
 
 The witness is the certificate `certificate.json`, 1121 weighted points and a net of
 181 rational directions, carried in full at the end of this file and kept
-in the repository as [`certificate.json`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/certificate.json). The verifier below decides five
+in the repository as [`certificate.json`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/certificate.json). The verifier below decides five
 conditions on it in exact rational arithmetic, and the theorem below shows that the five
 conditions imply the claim.
-[`t-018-verifiable-claim-19-5.md`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md) does the same for
+[`t-018-verifiable-claim-19-5.md`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md) does the same for
 $s(11) \ge 19/5$.
 
 ## The Theorem
@@ -217,16 +217,16 @@ The condition lines are what to read.
 
 ## How This Repository Decided It
 
-Beyond the verifier in this file, the repository decides these bytes twice more, by two routes that share no code with it. With each other they share the `Certificate` representation, the loader that fills it from the file, and Conditions 2 to 4, decided once in closed form; what differs is how each decides Condition 5. The exact event-cell sweep in [`certificate.py`](https://github.com/jlevy/squares/blob/41fb401a/packing/src/sqpack/fractional/certificate.py) does at every net direction what “Why the Sweep Is Exact” describes and reports the least covered mass $4001/4000$ at direction $0$. The interval branch and bound in [`interval.py`](https://github.com/jlevy/squares/blob/41fb401a/packing/src/sqpack/fractional/interval.py) works with directed rounding on the doubled net, the net directions and their reflections across the diagonal, so it never invokes Condition 1 and covers every orientation directly. The retention gate, [`decide_certificate.py`](https://github.com/jlevy/squares/blob/41fb401a/packing/devtools/decide_certificate.py), builds the one `Certificate` both routes read, and accepts it only when both do and the interval route’s enclosure of the least covered mass has width zero and equals the sweep’s value exactly; both accepted this one. Two algorithms over one loaded object are not two independent implementations, nor two independent readings of the file, and the second and third decisions are worth exactly that much. The gate decides only unconditional certificates: a file declaring a `variant` other than `unconditional` is refused before either route runs, as it is by the verifier in this file, and these bytes declare none.
+Beyond the verifier in this file, the repository decides these bytes twice more, by two routes that share no code with it. With each other they share the `Certificate` representation, the loader that fills it from the file, and Conditions 2 to 4, decided once in closed form; what differs is how each decides Condition 5. The exact event-cell sweep in [`certificate.py`](https://github.com/jlevy/squares/blob/9307172a/packing/src/sqpack/fractional/certificate.py) does at every net direction what “Why the Sweep Is Exact” describes and reports the least covered mass $4001/4000$ at direction $0$. The interval branch and bound in [`interval.py`](https://github.com/jlevy/squares/blob/9307172a/packing/src/sqpack/fractional/interval.py) works with directed rounding on the doubled net, the net directions and their reflections across the diagonal, so it never invokes Condition 1 and covers every orientation directly. The retention gate, [`decide_certificate.py`](https://github.com/jlevy/squares/blob/9307172a/packing/devtools/decide_certificate.py), builds the one `Certificate` both routes read, and accepts it only when both do and the interval route’s enclosure of the least covered mass has width zero and equals the sweep’s value exactly; both accepted this one. Two algorithms over one loaded object are not two independent implementations, nor two independent readings of the file, and the second and third decisions are worth exactly that much. The gate decides only unconditional certificates: a file declaring a `variant` other than `unconditional` is refused before either route runs, as it is by the verifier in this file, and these bytes declare none.
 
 The certificate embedded below is the file `certificate.json`, whose SHA-256 is `b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a`.
 
-[`minimal_verify.py`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/minimal_verify.py), beside this file in the repository, is another standard-library check, pinned to exactly these bytes by that digest; [`t-018-proof-card.md`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/t-018-proof-card.md) states the claim on one page, and [`t-018-proof-visual.svg`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/t-018-proof-visual.svg) draws the atoms, the tight Condition 5 witness and the shrink step.
+[`minimal_verify.py`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/minimal_verify.py), beside this file in the repository, is another standard-library check, pinned to exactly these bytes by that digest; [`t-018-proof-card.md`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/t-018-proof-card.md) states the claim on one page, and [`t-018-proof-visual.svg`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/t-018-proof-visual.svg) draws the atoms, the tight Condition 5 witness and the shrink step.
 
 ## The Verifier
 
 `verify_claim.py`, byte for byte as kept in the repository at
-[`verify_claim.py`](https://github.com/jlevy/squares/blob/41fb401a/packing/cases/n11_fractional_certificate/verify_claim.py).
+[`verify_claim.py`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/verify_claim.py).
 
 ````python
 #!/usr/bin/env python3
