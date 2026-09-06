@@ -20,6 +20,7 @@ from sqpack.fractional.ceiling import (
     Placement,
     arrangement_lines,
     container_vertices,
+    depth_screening_is_safe,
     maximum_depth,
     scaled_to_unit_depth,
     verify_ceiling,
@@ -67,6 +68,70 @@ def test_two_overlapping_unit_weight_squares_are_refused() -> None:
     assert verdict.failures == ("K2 depth at most 1 at every arrangement vertex",)
     assert verdict.max_depth == 2
     assert verdict.total_weight == 2
+
+
+def test_large_coordinates_cannot_hide_a_false_ceiling_behind_float_screening() -> None:
+    """The half-integer grid is a covering certificate below this alleged ceiling.
+
+    A B-square contains an axis-aligned square of side at least B/sqrt(2) > 1/2,
+    hence a grid point. The two coincident dual placements have depth n, not zero.
+    """
+    side, shrink, n = Fraction(10000000010), Fraction(9, 10), 2 * 10**21
+    net = tuple(map(Fraction, ("0", "1/10", "1/5", "3/10", "2/5", "21/50")))
+    square = Placement(
+        Fraction(1, 5), Fraction(10**10), Fraction(70000000004, 7), Fraction(n, 2), Fraction(1)
+    )
+    certificate = CeilingCertificate(n, side, shrink, net, (square, square))
+    assert (2 * side + 1) ** 2 < n
+    assert shrink**2 > 2 * Fraction(1, 2) ** 2
+    verdict = verify_ceiling(certificate)
+    assert verdict.failures == ("K2 depth at most 1 at every arrangement vertex",)
+    assert verdict.max_depth == n
+    scaled, factor = scaled_to_unit_depth(certificate)
+    assert factor == n
+    assert scaled.total_weight == 1
+    assert verify_ceiling(scaled).max_depth == 1
+
+
+def test_coordinates_beyond_float_range_still_receive_an_exact_decision() -> None:
+    large = Fraction(10**400)
+    square = upright(large, large, Fraction(1), Fraction(1))
+    certificate = CeilingCertificate(2, large + 1, B, NET, (square, square))
+    verdict = verify_ceiling(certificate)
+    assert verdict.failures == ("K2 depth at most 1 at every arrangement vertex",)
+    assert verdict.max_depth == 2
+    # The public intersection helper must also handle out-of-range line inputs.
+    lines = [(large, Fraction(0), large), (Fraction(0), large, large)]
+    assert container_vertices(certificate, lines) == [(Fraction(1), Fraction(1))]
+
+
+def test_the_reported_maximum_is_exact_even_below_one() -> None:
+    certificate = CeilingCertificate(1, TWO, B, NET, corners(B, Fraction(1, 4)))
+    verdict = verify_ceiling(certificate)
+    assert verdict.proved
+    assert verdict.max_depth == Fraction(1, 4)
+
+
+def test_weights_beyond_float_range_are_refused_by_the_exact_depth() -> None:
+    large = Fraction(10**400)
+    square = upright(Fraction(1), Fraction(1), large, Fraction(1))
+    verdict = verify_ceiling(CeilingCertificate(1, TWO, B, NET, (square,)))
+    assert verdict.failures == ("K2 depth at most 1 at every arrangement vertex",)
+    assert verdict.max_depth == large
+
+
+def test_a_large_family_uses_exact_sums_even_at_small_coordinates() -> None:
+    """The family-size limit is the guard's edge: 4096 screens, 4097 goes exact."""
+    vertex = (Fraction(1), Fraction(1))
+    square = upright(Fraction(1), Fraction(1), Fraction(1, 4097))
+    bounded = CeilingCertificate(1, TWO, B, NET, (square,) * 4096)
+    assert depth_screening_is_safe(bounded, [vertex])
+    certificate = CeilingCertificate(1, TWO, B, NET, (square,) * 4097)
+    assert not depth_screening_is_safe(certificate, [vertex])
+    worst, decided, where = maximum_depth(certificate, [vertex])
+    assert worst == 1
+    assert decided == 1
+    assert where == vertex
 
 
 def test_scaling_by_the_maximum_depth_restores_feasibility_and_halves_the_total() -> None:
@@ -194,7 +259,9 @@ def test_the_maximum_depth_is_taken_at_an_arrangement_vertex() -> None:
     worst, decided, where = maximum_depth(certificate, vertices)
     assert worst == 4
     assert where == (Fraction(1), Fraction(1))
-    assert decided == 9
+    # Vertices arrive in lexicographic order with depths 1, 2, 1, 2, 4, 2, 1, 2, 1;
+    # the screen decides exactly each vertex that could still raise the record.
+    assert decided == 4
 
 
 def test_records_round_trip_exactly() -> None:

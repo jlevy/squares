@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:CoveringValues/v1
   schema: covering-values.schema.yaml
   status: enforced
-last_reviewed: '2026-09-05'
+last_reviewed: '2026-09-06'
 values:
   - n: 11
     side: '191/50'
@@ -591,9 +591,9 @@ values:
     recorded_in:
       - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
     notes: >-
-      BC-206 of agenda 022. Crossings arrive strictly earlier as the side rises -- rounds
-      8, 5, 3, 3 across the four sides -- so the margin non-monotonicity this ladder
-      shows below 99/25 does not reappear above it.
+      BC-206 of agenda 022. Across the four tested sides, the seeded constructions
+      crossed twelve at rounds 8, 5, 3, 3. No higher certified rung was found in
+      these runs; they do not exclude other constructions above 99/25.
   - n: 12
     side: '3985/1000'
     side_decimal: '3.985'
@@ -611,9 +611,9 @@ values:
     recorded_in:
       - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
     notes: >-
-      BC-206 of agenda 022. Crossings arrive strictly earlier as the side rises -- rounds
-      8, 5, 3, 3 across the four sides -- so the margin non-monotonicity this ladder
-      shows below 99/25 does not reappear above it.
+      BC-206 of agenda 022. Across the four tested sides, the seeded constructions
+      crossed twelve at rounds 8, 5, 3, 3. No higher certified rung was found in
+      these runs; they do not exclude other constructions above 99/25.
   - n: 12
     side: '399/100'
     side_decimal: '3.99'
@@ -631,9 +631,9 @@ values:
     recorded_in:
       - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
     notes: >-
-      BC-206 of agenda 022. Crossings arrive strictly earlier as the side rises -- rounds
-      8, 5, 3, 3 across the four sides -- so the margin non-monotonicity this ladder
-      shows below 99/25 does not reappear above it.
+      BC-206 of agenda 022. Across the four tested sides, the seeded constructions
+      crossed twelve at rounds 8, 5, 3, 3. No higher certified rung was found in
+      these runs; they do not exclude other constructions above 99/25.
   - n: 12
     side: '397/100'
     side_decimal: '3.97'
@@ -644,18 +644,24 @@ values:
     rounds: null
     converged: true
     stop_reason: >-
-      The row LP converged at 12.248227 under devtools.run_fractional_cutting, the
-      instrument BC-200 used, with an exact depth-scaled floor beneath it.
+      The row LP reportedly converged at 12.248227 under devtools.run_fractional_cutting,
+      the instrument BC-200 used. The log also reports a depth-scaled floor, but its
+      generating family and state were not retained for replay.
     least_covered_mass: null
     frozen_artifact: null
     recorded_in:
       - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
     notes: >-
-      BC-206 of agenda 022, unregistered follow-up at a pre-registered side. This row is
-      the one that says where the ladder ends: with an exact floor of 10.845594 under a
-      converged 12.248227, the covering value at 3.97 is bracketed rather than guessed,
-      and against the retained 11.998960 at 3.96 the upper end gives a slope of at least
-      24.9 per unit side. The retained rung's 0.001040 of margin is spent within 0.000042
-      of side, so the ladder ends at about 3.96004 and the 0.0308 of runway T-017 recorded
-      under the ceiling 4B = 3.9908 is not runway. Twelve lies inside the bracket, so 3.97
-      is undecided rather than barred.
+      BC-206 of agenda 022, unregistered follow-up at a pre-registered side. The log
+      reports a cutting floor of approximately 10.845594 and a converged row-LP value
+      of 12.248227 at 3.97. The floor has not been replayed after the D-476 and D-477
+      cutting corrections because its generating family and state were not retained.
+      This does not show the historical floor invalid, but the log supplies no
+      revalidated exact bracket. The side remains undecided. The retained certificate
+      at 3.96 gives an upper bound of 11.998960 on its covering value.
+      Subtracting two upper bounds does not bound the increase in the true optima.
+      These data establish neither a lower slope bound nor the side where the covering
+      value reaches twelve. Correction, 2026-09-06: the previous endpoint estimate
+      3.96004 and the claim that the gap to the fixed-B ceiling 4B = 3.9908 was exhausted
+      are withdrawn. The recorded run log preserves that historical inference; the
+      attainable part of the remaining 0.0308 below the ceiling is unresolved.
