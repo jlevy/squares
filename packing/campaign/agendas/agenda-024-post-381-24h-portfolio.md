@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-024
   title: "Post-3.81 24-Hour Portfolio Control"
-  updated: '2026-09-05'
+  updated: '2026-09-06'
   status: active
   objective: >-
     Coordinate two disjoint research agendas for roughly 24 active portfolio hours
@@ -96,14 +96,20 @@ agenda:
       sequentially; check IDs and references whole-set; regenerate shared views once;
       commit the routing decision. Hosted checks remain asynchronous.
     entry: >-
-      The initial six manager cells have submitted packets under BC-219's frozen
-      contract.
+      BC-230, BC-233, BC-240, BC-242 and BC-245 have submitted terminal packets under
+      BC-219's frozen contract, and still-open BC-232 has submitted the required T+4
+      checkpoint artifact under think-jeyp with its remaining budget, live-state
+      receipt and routing status.
     exit: >-
       Every submitted artifact is accepted, refused or returned with one concrete gap;
       the hour-four instrument/control readiness decision and next block are committed.
     bead: think-u7i4
     workflows: [factual-review, review-planning-oversight]
-    depends_on: [BC-230, BC-232, BC-233, BC-240, BC-242, BC-245]
+    depends_on: [BC-230, BC-233, BC-240, BC-242, BC-245]
+    blocked_on: >-
+      The T+4 BC-232 provisional checkpoint artifact does not exist yet. It must hash
+      leg 02, report exact endpoints and cost, retain the final 30 one-core minutes, and
+      be submitted at the active T+4 boundary without closing BC-232.
     parallel_group: agenda024-control
     program: n11-post-381-portfolio
     next_evidence: >-
@@ -282,24 +288,29 @@ The gate opens only after its prerequisite packets and planned active allocation
 complete.
 
 Parallel work does not make the portfolio clock run faster.
-Every packet records three distinct clocks: `active_portfolio_minutes` for progress on
-the synchronized schedule, `agent_minutes` for the sum of attentive human and agent
-labor, and actual command wall and CPU time for processes.
-An unqualified active-minute budget on an agent-owned writing or review cell governs
-attentive work and is reported as `agent_minutes`; schedule tables say active portfolio
-minutes explicitly. A CPU-hour budget or command `--minutes` limit governs an executing
-experiment and remains frozen under its preregistered accept and stop rules; operational
-downtime in which the process does not run is not scientific compute, and a timeout is
-never extended after inspecting a result.
+Every packet records distinct clocks: `active_portfolio_minutes` for progress on the
+synchronized schedule, `agent_minutes` for attentive human and agent labor when that
+labor is directly observed, `role_assigned_minutes` when only assignment is known, and
+actual command wall and CPU time for processes.
+Unknown attention or CPU time stays unknown; assignment or wall time is not a proxy.
+An unqualified active-minute budget on an agent-owned writing or review cell governs the
+planned allocation; it does not prove attention.
+Report attentive `agent_minutes` only from direct observation or an explicitly labelled
+self-report, otherwise report them as unknown and retain role-assigned time separately.
+Schedule tables say active portfolio minutes explicitly.
+A CPU-hour budget or command `--minutes` limit governs an executing experiment and
+remains frozen under its preregistered accept and stop rules; operational downtime in
+which the process does not run is not scientific compute, and a timeout is never
+extended after inspecting a result.
 Mechanical integration and closeout may run past the 24-active-hour research horizon, as
 BC-225 already permits.
 
 At each synchronized gate—`T+4h`, `T+8h`, `T+12h`, `T+16h`, `T+20h`, and `T+24h`—the
 portfolio clock holds at that label while the coordinator performs sequential
 integration, regeneration, validation, commit, and push.
-Those mechanics report their own wall time and `agent_minutes` but do not consume the
-following research block.
-The next block begins from the same gate label only after the landing is durable.
+Those mechanics report their own wall time, role-assigned time, and directly observed or
+self-reported `agent_minutes` where available, but do not consume the following research
+block. The next block begins from the same gate label only after the landing is durable.
 The T+2 commissioning checkpoint below uses the same convention.
 
 The full rationale, resource packet, ownership matrix, and routing thresholds are in
@@ -334,10 +345,11 @@ tbd show think-9pzv think-c678 think-gmdy think-jbat \
 ```
 
 The base check succeeds silently.
-The local bead graph must show BC-219 (`think-9pzv`) closed; the six initial cells open
-and unblocked; and BC-220 (`think-u7i4`) blocked by exactly those six cells.
-Do not select work from the repository-wide `tbd ready` list, which contains unrelated
-agendas.
+At the recorded T+0 launch, the local bead graph had to show BC-219 (`think-9pzv`)
+closed, the six initial cells open and unblocked, and BC-220 (`think-u7i4`) blocked by
+exactly those six cells.
+This check is historical and must not be rerun at T+2. Do not select work from the
+repository-wide `tbd ready` list, which contains unrelated agendas.
 
 The coordinator then performs the only tbd mutation in the launch step.
 `tbd start` claims all seven beads atomically; current tbd deliberately rejects bulk
@@ -392,7 +404,8 @@ Each manager submits by gate minus 15 minutes:
 - BC dispositions and checkpoint paths;
 - frozen base SHA, transport identity, and a complete changed-path content manifest;
 - exact checker receipts, invalid runs, and guard refusals;
-- `active_portfolio_minutes`, `agent_minutes`, and actual command wall and CPU time;
+- `active_portfolio_minutes`, `role_assigned_minutes`, directly observed or
+  self-reported `agent_minutes` where available, and actual command wall and CPU time;
 - proposed next slices and hypothesis text; and
 - shared-code or cross-program requests.
 
@@ -486,8 +499,11 @@ handoff.
 
 The current dependency boundary is fixed: BC-219 (`think-9pzv`) is closed; BC-230
 (`think-c678`), BC-232 (`think-gmdy`), BC-233 (`think-jbat`), BC-240 (`think-4ln1`),
-BC-242 (`think-9xxh`), and BC-245 (`think-do04`) are the only launch cells; and BC-220
-(`think-u7i4`) remains blocked by exactly those six.
+BC-242 (`think-9xxh`), and BC-245 (`think-do04`) are the only launch cells.
+BC-220 (`think-u7i4`) has terminal bead dependencies on BC-230, BC-233, BC-240, BC-242
+and BC-245. BC-232 deliberately remains open through the T+4 gate; its submitted
+checkpoint artifact, remaining budget and routing status are an entry condition rather
+than a terminal dependency.
 BC-231 remains behind BC-230, BC-241 behind BC-240, BC-243 behind BC-242, BC-246 behind
 BC-240 and BC-245, and BC-247 behind BC-245. Commissioning creates no BC and consumes no
 unallocated ID.
@@ -606,17 +622,18 @@ uv run --frozen --all-extras --group dev packing-validate --records
 uv run --frozen --all-extras --group dev packing-validate --edit
 ```
 
-The subsequent commit, push, and `tbd sync` are landing mechanics: record their
-`agent_minutes` and wall time, but do not advance the research clock beyond T+120.
-Hosted checks remain asynchronous.
+The subsequent commit, push, and `tbd sync` are landing mechanics: record wall and
+role-assigned time, plus `agent_minutes` only when observed or explicitly self-reported,
+but do not advance the research clock beyond T+120. Hosted checks remain asynchronous.
 
 ### Stops, Success, and Continuation
 
 Before T+0, abort without starting the clock on a dependency mismatch, unexplained
 frozen-input drift, namespace collision, occupied output stem, missing control, or
 failure to allocate the required records.
-After T+0, never reset: preserve elapsed active time, agent time, process wall and CPU
-cost, logs, and the last valid checkpoint.
+After T+0, never reset: preserve elapsed active time, measured or explicitly
+self-reported agent time, otherwise role-assigned time, process wall and CPU cost, logs,
+and the last valid checkpoint.
 Invalid JSON, disagreement between exact routes, an overwritten path, wrong interpreter,
 or an unexpected shared write stops the affected cell and freezes both managers if it
 crosses the proof boundary.
@@ -634,18 +651,18 @@ manifests were integrated only by the coordinator; validation passed; and the la
 commit is sufficient for a cold replacement coordinator.
 
 The landing decision records `active_portfolio_minutes: 120`,
-`remaining_active_portfolio_minutes: 1320`, every wall-clock pause, per-role
-`agent_minutes`, per-process wall and CPU time, allocated H/experiment IDs, BC statuses,
-input and output hashes, no-live-process evidence, remaining per-BC budgets, and the
-exact next command and unused stem for each lane.
+`remaining_active_portfolio_minutes: 1320`, every wall-clock pause, directly observed
+per-role `agent_minutes` or an explicit unknown, separately labelled
+`role_assigned_minutes`, per-process wall and CPU time, allocated H/experiment IDs, BC
+statuses, input and output hashes, no-live-process evidence, remaining per-BC budgets,
+and the exact next command and unused stem for each lane.
 The replacement coordinator starts at T+2 from this packet, does not reclaim the six BCs
 or reallocate their records, and continues the same first four-hour block.
 
-Expected work still in progress includes completion and review of BC-230, later BC-232
-legs and its unchanged width test, BC-240 review, and completion of BC-242 and BC-245.
-BC-231, BC-241, BC-243, BC-246, BC-247, adaptive rungs, density optimization, global
-stationary enumeration, exact cover, frontier promotion, and the hour-four BC-220
-decision remain deferred.
+Expected work still in progress includes BC-232’s later legs and unchanged width test,
+BC-241 review, and source-distinct review of BC-242 and BC-245. BC-231, BC-241, BC-243,
+BC-246, BC-247, adaptive rungs, density optimization, global stationary enumeration,
+exact cover, frontier promotion, and the hour-four BC-220 decision remain deferred.
 No completion of those cells is implied by a successful commissioning gate.
 
 ## First four-hour dispatch
@@ -661,7 +678,7 @@ The remaining rows describe the scientific objectives through the hour-four BC-2
 | T+15 to T+105 min | Reject unallocated records and cross-scope writes | Draft BC-230 while supervising the exact background processes | Finish BC-242 and begin BC-245 | Finish BC-240, run its allowed tangent replay and aggregate self-check, and return the packet |
 | T+105 to T+135 min | Hold the floating slot transfer until BC-240 paths are final | Freeze BC-230 author draft and continue supervising processes | Review BC-240 and BC-242; return concrete corrections | Move to the source-distinct BC-230 review |
 | T+135 to T+195 min | Check proposed H/exp text without allocating a new run | Reconcile concrete BC-230 blockers and supervise only the fractional processes | Finish BC-245 and map its solved controls | Complete the BC-230 theorem, seam, specialization, and refusal audit |
-| T+195 to T+225 min | Check manifests, IDs, packet completeness, and exact receipts | Reconcile BC-230, BC-232, and BC-233 dispositions | Specify BC-243 without running it; reconcile BC-240, BC-242, and BC-245 | Return terminal review; start nothing else |
+| T+195 to T+225 min | Check manifests, IDs, packet completeness, and exact receipts | Reconcile BC-230 and BC-233; submit BC-232’s required checkpoint without closing it | Specify BC-243’s dual-only pilot without running it; reconcile BC-240, BC-242, and BC-245 | Return terminal review; start nothing else |
 | T+225 to T+240 min | Freeze launches; accept packets only at the fixed paths | Write `gate-hour-04.md`; no new process | Write `gate-hour-04.md`; no new work | Available only for a coordinator-assigned manifest check |
 | Research clock held at T+240; up to 30 wall min of landing mechanics | Run BC-220: validate fractional, then closure; write the central decision; regenerate shared views once; commit | Await the decision without polling CI | Await the decision without polling CI | Released |
 
@@ -688,7 +705,7 @@ It is a default continuation, not permission to keep a route alive after its kil
 | Hours | Fractional program | Closure program | Coordinator |
 | --- | --- | --- | --- |
 | 0–4 | BC-230 theorem contract, BC-232 resumed bracket, BC-233 seed/control | BC-240 theorem packet, BC-242 density semantics, BC-245 typed completeness | freeze launch; reject shared writes; run BC-220 |
-| 4–8 | BC-231 verifier if its theorem passed; otherwise concentrate on BC-232 | BC-241 independent replay; BC-243 pilot only if weak dual is proved; price BC-247 from the BC-245 contract | compare exact yield and cost at BC-221 |
+| 4–8 | Finish BC-232’s final 30 process minutes while preregistering and running the direct scalar 61/16 probe; run BC-231 only after its repaired controls pass | BC-241 source-distinct replay; BC-243 dual-only pilot after BC-242 review; price BC-247 from the BC-245 contract | compare exact yield and cost at BC-221 |
 | 8–12 | BC-234 first adaptive rung if both controls pass; otherwise finish the retained bracket or open BC-235 | finish the density kill and small-case price; BC-246 only after the typed language passes review | make the BC-222 portfolio pivot |
 | 12–16 | leading direct-bound route receives two-thirds of available compute; preserve one falsifier or theorem worker | leading closure route receives two-thirds only if no bound candidate qualifies; otherwise retain one local/global control worker | freeze candidate bytes and run BC-223 |
 | 16–20 | exactify any candidate; otherwise one last predeclared rung or bounded-negative close | independently replay the local theorem or exactify the one closure route that passed its guards | stop new instruments at BC-224 |

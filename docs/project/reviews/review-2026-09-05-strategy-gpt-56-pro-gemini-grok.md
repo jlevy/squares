@@ -714,7 +714,7 @@ placements**.
 
 The feedback’s tight-cell census is exactly the right first diagnostic.
 
-### C1. Near-tight cells and role clusters
+### Program C, Step 1: Near-tight cells and role clusters
 
 For several values of \(\varepsilon\), enumerate exactly the pose cells satisfying
 
@@ -740,7 +740,7 @@ It is something like:
 
 That would convert the fractional certificate into a global capture mechanism.
 
-### C2. Exact-cover and Hall-type forcing
+### Program C, Step 2: Exact-cover and Hall-type forcing
 
 If certain atoms have weight greater than \(\varepsilon\), every such atom must lie in
 one of the eleven selected witnesses, because at most \(\varepsilon\) total mass may
@@ -756,7 +756,7 @@ Use exact-cover, matching, and Hall-type deficiencies to force roles or eliminat
 branches. This is substantially stronger and more structured than enumerating arbitrary
 center tiles.
 
-### C3. Angle-composition certificates
+### Program C, Step 3: Angle-composition certificates
 
 Partition orientations into \(D_4\)-closed bins and solve class-threshold programs for
 each possible composition.
@@ -783,7 +783,7 @@ Useful intermediate theorems include:
 
 These would be real structural results even before the full problem is closed.
 
-### C4. Boundary-support signatures, not just wall-contact counts
+### Program C, Step 4: Boundary-support signatures, not just wall-contact counts
 
 The feedback proposes splitting by how many squares touch each wall.
 That is useful but probably too coarse.
@@ -805,7 +805,7 @@ inequality whose coefficients can be interpreted as a weighted chain of widths.
 These may be the human-readable geometric inequalities hidden inside the numerical
 solver.
 
-### C5. Boxed conditional certificates
+### Program C, Step 5: Boxed conditional certificates
 
 Once a square is known to occupy a pose box \(b\), exploit the region common to every
 square in that box. The other ten squares must avoid that guaranteed occupied region.

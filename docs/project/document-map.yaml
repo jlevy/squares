@@ -3,7 +3,7 @@ softschema:
   schema: document-map.schema.yaml
   status: enforced
 
-last_reviewed: '2026-09-05'
+last_reviewed: '2026-09-06'
 scope: >
   Durable Markdown owned by packing. Source-faithful archive content is
   excluded because its role and lifecycle come from resources/README.md rather than
@@ -34,6 +34,22 @@ documents:
   - {path: packing/campaign/agenda-map.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/README.md, role: series-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/launch-t-plus-00.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/commissioning-gate-minute-015.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/commissioning-gate-minute-030.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/commissioning-gate-minute-060.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/commissioning-gate-minute-090.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/checkpoint-hour-02-decision.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-adaptive-core-contract.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-control-matrix.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-source-distinct-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-postfreeze-control-review.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-disposition.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-233-disposition.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/checkpoint-hour-02.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-242-full-size-density-proof-contract.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-245-typed-backbone-theorem-packet.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/checkpoint-hour-02.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/cases/trump11/isolation-theorem.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/frontier/README.md, role: frontier-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/frontier/STATUS.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/frontier/INVENTORY.md, role: generated-view, authority: generated, lifecycle: generated}
@@ -224,6 +240,10 @@ documents:
     authority: record
     lifecycle: superseded
     superseded_by: packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md
+  - path: docs/project/reviews/review-2026-09-06-agenda024-adversarial-senior-strategy.md
+    role: review
+    authority: record
+    lifecycle: retained
   - path: docs/project/three-lane-research-method.md
     role: component-guide
     authority: record
@@ -232,6 +252,10 @@ documents:
     role: handoff
     authority: record
     lifecycle: retained
+  - path: docs/project/handoff-2026-09-06-post-381-t2-commissioning.md
+    role: handoff
+    authority: current
+    lifecycle: maintained
   - path: packing/cases/n11_fractional_certificate/thirdparty/README.md
     role: component-guide
     authority: record

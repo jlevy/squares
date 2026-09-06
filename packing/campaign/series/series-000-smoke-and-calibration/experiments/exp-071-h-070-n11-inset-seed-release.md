@@ -23,7 +23,7 @@ experiment:
     precision: {binary_bits: 64, rounding: nearest ties-to-even for LP work; rationalisation scale 4000000 for candidate weights}
     tolerance: no float tolerance decides the paired comparison; exact candidate total_mass does
     host_system: macOS arm64, one numerical thread per process, Python 3.14.7
-    selftest_passed: false
+    selftest_passed: true
   instance: {axis: n, point: 11, role: target}
   method:
     control: >-
@@ -46,24 +46,52 @@ experiment:
       30 active portfolio minutes for screens plus at most 42 one-core process minutes
       per matched follow-on arm; minute 90 forbids a new long process
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-233-disposition.md
-  lease:
-    expires: '2026-09-06T07:22:10Z'
-    host: spud10.local
-  results: []
+  effort:
+    timebox: >-
+      30 active portfolio minutes for the three screens plus at most 42 one-core
+      process minutes for each matched arm
+    wall_seconds: 491.483
+    pair_tests: 1
+    stopped_by: criterion
+  results:
+  - shape: paired
+    metric: exact rational total mass after eight unrestricted column rounds
+    role: outcome
+    control_median: 11.142893
+    candidate_median: 11.142893
+    change_pct: 0.0
+    passes_acceptance: false
+    direction: unclear
+    pairs: 1
+  - shape: determination
+    role: outcome
+    question: >-
+      Does the released candidate seeded from the best eligible inset screen finish at
+      strictly smaller exact mass than the matched unseeded control?
+    outcome: criterion_missed
+    checked_by: >-
+      Both strict-JSON summaries exited zero, converged in eight rounds, and emitted
+      byte-identical candidates of exact mass 11142893/1000000; the complete hashes are
+      recorded in results/agenda-025/bc-233-disposition.md.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: >-
       strict exact-mass comparison after equal stopping class and completed-round count,
       with every ineligible, time-limited, and guard-refused run retained
     reason: >-
-      The paired round is preregistered and claimed; its strict-JSON control must pass
-      after the T+0 dispatch commit before the first screen starts.
+      The released seed and matched unseeded control converged after the same eight
+      rounds to byte-identical candidates of exact mass 11142893/1000000, so the seeded
+      arm missed the preregistered strict-improvement criterion.
+    commit: c55726e1e885227f63110131c0a914665175ff89
 ---
 # exp-071 — Margin-Biased Seed With Support Released
 
-The screens choose a proposal; only the matched unrestricted arms test H-070. If the
-statuses cannot be matched by T+2, the honest result is time-limited or unresolved, not
-a rescued comparison.
+The screens chose the inset-`1/2` proposal.
+The matched unrestricted arms then converged after eight rounds to byte-identical
+candidates of exact mass `11142893/1000000`. H-070 is therefore rejected: the seed
+neither helped nor hurt under this test.
+Both candidates remain above eleven, so the round also opened no exact lower-bound
+route.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

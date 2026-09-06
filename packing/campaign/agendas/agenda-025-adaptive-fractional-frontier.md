@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-025
   title: "Adaptive Fractional Frontier Above 3.81"
-  updated: '2026-09-05'
+  updated: '2026-09-06'
   status: active
   objective: >-
     Give one managing agent a disjoint, exact program for the likeliest direct
@@ -24,7 +24,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       What exact containment theorem and certificate contract allow every angle cell to
@@ -48,11 +48,31 @@ agenda:
     bead: think-c678
     workflows: [research-loop]
     depends_on: [BC-219]
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-adaptive-core-contract.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-control-matrix.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-postfreeze-control-review.md
     parallel_group: agenda025-theorem
     program: n11-adaptive-fractional-frontier
     next_evidence: >-
-      Whether direction-dependent cores are a sound strengthening of the exact object,
-      rather than a generator heuristic that the verifier cannot decide.
+      After BC-220, BC-231 must implement all three exact decision routes and execute
+      every reviewed positive and negative control. No adaptive certificate exists yet.
+    outcomes:
+    - scope: >-
+        The exact adaptive-core containment and mass theorem, scalar specialization,
+        serialized field contract, and executable positive and negative control matrix.
+      classification: achieved
+      result: >-
+        The theorem passed source-distinct mathematical review. Four frozen control
+        defects were repaired under a new matrix hash, then passed a fresh xhigh
+        implementation review and max coordinator disposition. No verifier or candidate
+        is implemented by this cell.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-adaptive-core-contract.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-source-distinct-review.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-postfreeze-control-review.md
+      disposition: retire-success
+      follow_up: null
   - id: BC-231
     purpose: tool_validation
     owner_focus: correctness
@@ -81,7 +101,7 @@ agenda:
       cost is measured.
     bead: think-7mk4
     workflows: [pipeline-improvement, factual-review]
-    depends_on: [BC-230]
+    depends_on: [BC-230, BC-220]
     parallel_group: agenda025-theorem
     program: n11-adaptive-fractional-frontier
     next_evidence: >-
@@ -125,7 +145,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11, 17]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Does an inset-support sweep provide a better seed for n=11 only after its support
@@ -134,8 +154,10 @@ agenda:
       30 active portfolio minutes for the inset screen and at most 90 more active
       portfolio minutes for the unrestricted follow-on, manager with one runner for the
       screens and up to two single-threaded runners for the matched follow-on,
-      research-loop. Record the manager's attentive work as agent_minutes and each
-      process's actual CPU and command time separately. Reproduce Massaccesi's n=17
+      research-loop. Record attentive agent_minutes only from direct observation or an
+      explicitly labelled self-report; otherwise record role-assigned minutes and leave
+      attention unknown. Record each process's actual CPU and command time separately.
+      Reproduce Massaccesi's n=17
       margin semantics first. Sweep the three declared n=11 insets in this runbook at
       identical grid counts and one column round; feed only the best converged seed to
       the unchanged pricing oracle. Split the follow-on equally between that released
@@ -151,11 +173,28 @@ agenda:
     bead: think-jbat
     workflows: [research-loop]
     depends_on: [BC-219]
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-233-disposition.md
     parallel_group: agenda025-seeding
     program: n11-adaptive-fractional-frontier
     next_evidence: >-
-      Whether Massaccesi's margin is a useful proposal distribution for this instance,
-      not whether inset supports contain the unrestricted optimum.
+      This seed rule is retired. Reopen margin-biased seeding only under a new
+      preregistered mechanism that can explain why unrestricted trajectories should
+      diverge from the byte-identical control.
+    outcomes:
+    - scope: >-
+        The preregistered three-inset screen followed by the matched unrestricted
+        released-seed and unseeded control at equal stopping class and round count.
+      classification: bounded-negative
+      result: >-
+        All three screens were eligible, but the released and control arms completed
+        eight converged rounds with byte-identical candidates of exact mass
+        11142893/1000000. This seed rule earns no continuation; it does not rule out
+        every inset mechanism.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-233-disposition.md
+      disposition: retire-negative
+      follow_up: null
   - id: BC-234
     purpose: research
     owner_focus: insight

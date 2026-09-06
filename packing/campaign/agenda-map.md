@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **17** ready, **5** tentative, **61** blocked, **41** stopped, **114** complete.
+- **13** ready, **5** tentative, **60** blocked, **41** stopped, **119** complete.
 
-- **16 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-238`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **17 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-220`, `BC-238`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -36,12 +36,8 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-023 | `BC-214` | 0 | efficiency | tool_validation | Can the pull-request surface be brought under four minutes without deleting a check, by moving the broad… | `think-doar` |
 | agenda-023 | `BC-216` | 0 | process | tool_validation | What check would have caught the 499 s to 1370 s regression in the week it happened, and does it hold when… | `think-gy30` |
 | agenda-023 | `BC-218` | 0 | efficiency | tool_validation | How much of the gate's remaining wall is sequencing rather than work, and what does it cost to run the… | `think-m5ev` |
-| agenda-025 | `BC-230` | 0 | correctness | research | What exact containment theorem and certificate contract allow every angle cell to use its own largest safe… | `think-c678` |
 | agenda-025 | `BC-232` | 0 | efficiency | research | Can the retained 3.82 primal/dual state be advanced to total covering mass below 11 or exact packing value at… | `think-gmdy` |
-| agenda-025 | `BC-233` | 1 | insight | research | Does an inset-support sweep provide a better seed for n=11 only after its support is released into… | `think-jbat` |
-| agenda-026 | `BC-240` | 0 | correctness | research | Can the existing 128-branch Trump calculation be stated as one quantitative local theorem with explicit… | `think-4ln1` |
-| agenda-026 | `BC-242` | 0 | correctness | research | What is the correct primal and weak-dual formulation for a density over full-size placements, including… | `think-9xxh` |
-| agenda-026 | `BC-245` | 0 | correctness | research | What finite typed stationary-backbone language is complete for a minimal counterexample, without silently… | `think-do04` |
+| agenda-026 | `BC-241` | 0 | correctness | measurement_validation | Does a source-distinct reviewer reproduce every conclusion that the retained Trump records actually support,… | `think-woi0` |
 
 ## Blocked, and on what
 
@@ -90,25 +86,24 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-022 | `BC-210` | 3 | `BC-203`, `BC-204`, `BC-205`, `BC-206`, `BC-207`, `BC-208`, `BC-209`, `BC-212` | no | — |
 | agenda-023 | `BC-215` | 1 | `BC-214` | no | BC-214, which decides which surface each step belongs to. Skipping work before the two surfaces exist would be… |
 | agenda-023 | `BC-217` | 1 | `BC-214` | no | BC-214, which decides what the full gate is once the surfaces are split. Certifying a tier before its definition… |
-| agenda-024 | `BC-220` | 0 | `BC-230`, `BC-232`, `BC-233`, `BC-240`, `BC-242`, `BC-245` | no | — |
+| agenda-024 | `BC-220` | 0 | `BC-230`, `BC-233`, `BC-240`, `BC-242`, `BC-245` | yes | The T+4 BC-232 provisional checkpoint artifact does not exist yet. It must hash leg 02, report exact endpoints and… |
 | agenda-024 | `BC-221` | 0 | `BC-220` | no | — |
 | agenda-024 | `BC-222` | 0 | `BC-221` | no | — |
 | agenda-024 | `BC-223` | 0 | `BC-222` | no | — |
 | agenda-024 | `BC-224` | 0 | `BC-223` | no | — |
 | agenda-024 | `BC-225` | 0 | `BC-224`, `BC-239`, `BC-249` | no | — |
-| agenda-025 | `BC-231` | 0 | `BC-230` | no | — |
+| agenda-025 | `BC-231` | 0 | `BC-230`, `BC-220` | no | — |
 | agenda-025 | `BC-234` | 0 | `BC-231` | no | — |
 | agenda-025 | `BC-238` | 0 | `BC-219` | yes | A frozen lower-bound candidate from BC-232, BC-233, BC-234, or BC-236, its object-specific project and source-distinct… |
 | agenda-025 | `BC-239` | 0 | `BC-224` | no | — |
 | agenda-025 | `BC-235` | 1 | `BC-234` | no | — |
 | agenda-025 | `BC-236` | 1 | `BC-235` | no | — |
 | agenda-025 | `BC-237` | 2 | `BC-236` | no | — |
-| agenda-026 | `BC-241` | 0 | `BC-240` | no | — |
-| agenda-026 | `BC-243` | 0 | `BC-242` | no | — |
-| agenda-026 | `BC-246` | 0 | `BC-240`, `BC-245` | no | — |
+| agenda-026 | `BC-243` | 0 | `BC-242`, `BC-220` | no | — |
+| agenda-026 | `BC-246` | 0 | `BC-240`, `BC-245`, `BC-220` | no | — |
 | agenda-026 | `BC-249` | 0 | `BC-224` | no | — |
 | agenda-026 | `BC-244` | 1 | `BC-243` | no | — |
-| agenda-026 | `BC-247` | 1 | `BC-245` | no | — |
+| agenda-026 | `BC-247` | 1 | `BC-245`, `BC-220` | no | — |
 | agenda-026 | `BC-248` | 2 | `BC-246`, `BC-247` | no | An exact fractional measure of mass at least eleven for the chosen subproblem, no more than 2,311,290 of the present… |
 
 ## Discharged elsewhere
@@ -154,8 +149,8 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-022 | active |  |  | 7 |  | 2 | 9 |
 | agenda-023 | active | 3 |  | 2 |  |  | 5 |
 | agenda-024 | active |  |  | 6 |  | 1 | 7 |
-| agenda-025 | active | 3 |  | 7 |  |  | 10 |
-| agenda-026 | active | 3 |  | 7 |  |  | 10 |
+| agenda-025 | active | 1 |  | 7 |  | 2 | 10 |
+| agenda-026 | active | 1 |  | 6 |  | 3 | 10 |
 
 ## By program
 
@@ -191,10 +186,10 @@ Open frontier: `BC-204`, `BC-205`, `BC-212`.
 
 | agenda | id | state | question |
 | --- | --- | --- | --- |
-| agenda-025 | `BC-230` | ready | What exact containment theorem and certificate contract allow every angle cell to use its own… |
+| agenda-025 | `BC-230` | complete | What exact containment theorem and certificate contract allow every angle cell to use its own… |
 | agenda-025 | `BC-231` | blocked | Can an exact verifier decide the adaptive-core contract and refuse uncovered angles, unsafe cell… |
 | agenda-025 | `BC-232` | ready | Can the retained 3.82 primal/dual state be advanced to total covering mass below 11 or exact… |
-| agenda-025 | `BC-233` | ready | Does an inset-support sweep provide a better seed for n=11 only after its support is released into… |
+| agenda-025 | `BC-233` | complete | Does an inset-support sweep provide a better seed for n=11 only after its support is released into… |
 | agenda-025 | `BC-234` | blocked | After exact adaptive semantics and controls pass, can they certify 3.8125 and then 3.815 without… |
 | agenda-025 | `BC-235` | blocked | If square cores stall, can each angle cell be assigned a rational inner kernel contained in every… |
 | agenda-025 | `BC-236` | blocked | Can the rational angle-cell kernel be swept and interval-checked exactly with the existing positive… |
@@ -202,7 +197,7 @@ Open frontier: `BC-204`, `BC-205`, `BC-212`.
 | agenda-025 | `BC-238` | blocked | Does any fractional candidate from this agenda survive frozen-byte exactification, source-distinct… |
 | agenda-025 | `BC-239` | blocked | Is every fractional cell classified, its checkpoint and cost preserved, and its one earned… |
 
-Open frontier: `BC-230`, `BC-231`, `BC-232`, `BC-233`, `BC-234`, `BC-235`, `BC-236`, `BC-237`, `BC-238`, `BC-239`.
+Open frontier: `BC-231`, `BC-232`, `BC-234`, `BC-235`, `BC-236`, `BC-237`, `BC-238`, `BC-239`.
 
 ### `n11-closure`
 
@@ -221,18 +216,18 @@ Open frontier: `BC-208`, `BC-207`.
 
 | agenda | id | state | question |
 | --- | --- | --- | --- |
-| agenda-026 | `BC-240` | ready | Can the existing 128-branch Trump calculation be stated as one quantitative local theorem with… |
-| agenda-026 | `BC-241` | blocked | Does a source-distinct reviewer reproduce every conclusion that the retained Trump records actually… |
-| agenda-026 | `BC-242` | ready | What is the correct primal and weak-dual formulation for a density over full-size placements,… |
-| agenda-026 | `BC-243` | blocked | Does the smallest exact full-size-density pilot survive weak-dual checks and approach mass eleven… |
-| agenda-026 | `BC-244` | blocked | If the full-size density nearly reaches eleven, can inverse dual design force equality on Trump's… |
-| agenda-026 | `BC-245` | ready | What finite typed stationary-backbone language is complete for a minimal counterexample, without… |
+| agenda-026 | `BC-240` | complete | Can the existing 128-branch Trump calculation be stated as one quantitative local theorem with… |
+| agenda-026 | `BC-241` | ready | Does a source-distinct reviewer reproduce every conclusion that the retained Trump records actually… |
+| agenda-026 | `BC-242` | complete | What is the correct primal and weak-dual formulation for a density over full-size placements,… |
+| agenda-026 | `BC-243` | blocked | Does the smallest exact a.e.-depth dual pilot certify a value above eleven, which kills the… |
+| agenda-026 | `BC-244` | blocked | If the dual-only pilot leaves equality alive, can a continuum primal guard and inverse dual design… |
+| agenda-026 | `BC-245` | complete | What finite typed stationary-backbone language is complete for a minimal counterexample, without… |
 | agenda-026 | `BC-246` | blocked | Does the typed language recover Trump's stationary backbone, every retained branch, and its local… |
 | agenda-026 | `BC-247` | blocked | On the complete n=3 and n=4 controls, and the local n=5 Göbel control, is typed backbone generation… |
 | agenda-026 | `BC-248` | blocked | Can a certified fractional core prune the global typed-backbone search to an exact-cover residue… |
 | agenda-026 | `BC-249` | blocked | Is every closure cell classified, its theorem and checkpoint state preserved, and its one earned… |
 
-Open frontier: `BC-240`, `BC-241`, `BC-242`, `BC-243`, `BC-244`, `BC-245`, `BC-246`, `BC-247`, `BC-248`, `BC-249`.
+Open frontier: `BC-241`, `BC-243`, `BC-244`, `BC-246`, `BC-247`, `BC-248`, `BC-249`.
 
 ### `n11-post-381-portfolio`
 
