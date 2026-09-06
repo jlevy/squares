@@ -102,7 +102,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-085](agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md) | completed | contemporaneous | `process-review` (process) | `documentation-pass` (process) | 4 | think-uqgp | Select BC-191 (`think-ji0r`), Agenda 019's efficiency-loop measurement of row generation's cost against the container side -- row generation is 79-94% of every round, site density has never been set as a function of side, and an untuned grid cost 8.8x at n = 20's own side -- now that the retention gate is off the critical path. `think-jgeg`, the sibling question of whether the generator's own accept-or-reject decision belongs on the interval route, follows once BC-191 lands, re-based on the integer sweep rather than the Fraction sweep; the retarget candidates wait on both. `think-5j8d` is the marker Agenda 016's closeout discharged and is not this session's selection. |
 | [session-086](agent-sessions/session-086-agenda021-overnight-pass.md) | stopped | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 2 | think-db1k | BC-213, the remaining m = 5 rung at 973/200 (think-wufn), as agenda-021's closeout selects it. |
 | [session-087](agent-sessions/session-087-agenda022-continuation.md) | completed | contemporaneous | `research-loop` (correctness) | `efficiency-loop` (efficiency) | 2 | think-wufn | Take BC-215 (think-xejq), the one lever the efficiency block measured and did not wire: 20.2 per cent of deep-run work is repeated and 92 per cent of that is trees that did not move, so the tree-id cache is what takes the pull-request wall from about 221.70 s to the operator's two to two and a half minutes. |
-| [session-088](agent-sessions/session-088-agenda024-next-phases.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `pipeline-improvement` (correctness) | 3 | think-jgnv | Publish the launch PR, review first-slice packets, and commission ready work. |
+| [session-088](agent-sessions/session-088-agenda024-next-phases.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `pipeline-improvement` (correctness) | 4 | think-jgnv | Publish the launch PR, review first-slice packets, and commission ready work. |
 
 ### Workflow summary
 
@@ -116,7 +116,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 0 | 29 | 0 |
 | `research-loop` | 9 | 4 | 48 | 7 |
-| `pipeline-improvement` | 21 | 0 | 104 | 0 |
+| `pipeline-improvement` | 21 | 0 | 105 | 0 |
 | `documentation-pass` | 1 | 0 | 4 | 0 |
 | `review-planning-oversight` | 0 | 0 | 1 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |

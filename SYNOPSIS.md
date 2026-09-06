@@ -236,6 +236,7 @@ case or experiment separately.
 | [BC-230 Post-Freeze Control Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-230-postfreeze-control-review.md) | dated review record | record | retained | — |
 | [BC-231 First Implementation Slice](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md) | research synthesis | record | retained | — |
 | [BC-231 Slice 01 Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-slice-01-independent-review.md) | dated review record | record | retained | — |
+| [BC-231 Second Implementation Slice](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-02.md) | research synthesis | record | retained | — |
 | [BC-232 Retained-State Fractional-Cutting Disposition](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-disposition.md) | research synthesis | record | retained | — |
 | [BC-232 Leg-02 Microreceipt 001](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-leg-02-microreceipt-001.md) | research synthesis | record | retained | — |
 | [Agenda 025 T+2-to-T+4 Fractional Manager Gate](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/gate-hour-04.md) | research synthesis | record | retained | — |

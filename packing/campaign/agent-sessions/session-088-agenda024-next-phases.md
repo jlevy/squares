@@ -95,7 +95,7 @@ session:
       Implement the BC231 project loader and pure cover validators, independently
       review BC254 toy controls, and reconcile publication and prerequisite tooling.
     bead: think-jgnv
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: First adaptive implementation passed source-distinct control-only review.
     budget_minutes: 30
@@ -109,12 +109,34 @@ session:
       on an immutable checkout while workers continue.
     kill_condition: A required premise or control fails, or the bounded commission ends.
     fallback: Retain the exact refusal or implementation gap and price only a changed next slice.
-    outcome: null
+    outcome: Both toy implementations passed independent review; loader work continues on its original lease.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-slice-01-independent-review.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-slice-01.md
+    stop_reason: Source and target-instrument readiness now have separate bounded commissions.
+    next_action: Complete the existing loader lease while commissioning the two readiness follow-ups.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Build the density ceiling instrument and replay the restricted source theorem.
+    bead: think-jgnv
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Independent toy reviews passed and the source-control gap is explicit.
+    budget_minutes: 30
+    started_at: '2026-09-06T19:49:58Z'
+    deadline_at: '2026-09-06T20:19:58Z'
+    expected_output: Bounded source/readiness controls, independent review needs and measured costs.
+    validation_command: Focused Python3.14 tests and records; pre-push tier on a stable checkpoint.
+    kill_condition: A required source premise fails or a bounded commission ends.
+    fallback: Preserve the exact source obstruction or missing instrument and do not run a target.
+    outcome: null
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-independent-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md
     stop_reason: null
-    next_action: Review the second-slice outputs before further verifier or target work.
+    next_action: Independently review readiness before registering any optimized target measurement.
   primary_bead: think-jgnv
   status: in_progress
   budget:
@@ -226,16 +248,19 @@ session:
     excluded_commands: [git mutations, tbd mutations, target measurements, registry allocation]
   - task: BC231 / H095 second selected slice; think-7mk4
     operator: Codex bound_lane_strategy, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: Serialized refusal coverage and remaining triad work are not yet complete.
+    outcome: Bounded loader and pure F4/F5 validators implemented; coordinator review found no issue.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-02.md
+    files:
+    - packing/src/sqpack/fractional/adaptive_io.py
+    - packing/tests/test_fractional_adaptive_io.py
+    checks: [254 focused tests passed in 17.44 seconds; 22 deliberately deselected; scoped lint and type checks clean.]
+    uncertainty: Remaining estimate is 180–320 active worker minutes plus unpriced full replays.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Submit the parser controls and price all remaining BC231 work.
+    next_action: Stop automatic adaptive allocation; compare the remaining cost at the portfolio checkpoint.
     phase: 3
     budget_minutes: 30
     started_at: '2026-09-06T19:39:02Z'
@@ -274,12 +299,90 @@ session:
     write_scope:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-independent-review.md
     excluded_commands: [git mutations, tbd mutations, target measurements, registry allocation]
+  - task: BC255 / H036 and H102 exact-angle source replay; think-2kld
+    operator: Codex gpt6_coverage_audit, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: Closed point-cover and conditional-source obligations have not been replayed.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Retain the complete original Theorem3 control or the first exact obstruction.
+    phase: 4
+    budget_minutes: 30
+    started_at: '2026-09-06T19:49:58Z'
+    deadline_at: '2026-09-06T20:19:58Z'
+    expected_output: Reusable exact one-square source control at the original side and exact angles.
+    validation_command: Focused source-control tests with exact boundary and feasible examples.
+    kill_condition: Source coordinates or a complete boundary case fail, or the commission ends.
+    fallback: Retain the source obstruction without changing the archive or H036.
+    write_scope:
+    - packing/cases/stromquist/restricted_orientation.py
+    - packing/tests/test_stromquist_restricted_orientation.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-slice-01.md
+    excluded_commands: [git mutations, tbd mutations, target measurements, registry allocation]
+  - task: BC254 / H099 target-instrument readiness; think-0qcu
+    operator: Codex structural_lane_strategy, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: Source binding, target row order, serialized replay and cost are not ready.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Return a checked ceiling instrument and price its first frozen invocation.
+    phase: 4
+    budget_minutes: 27.77
+    started_at: '2026-09-06T19:52:12Z'
+    deadline_at: '2026-09-06T20:19:58Z'
+    expected_output: Exact source control, deterministic rows, strict replay and bounded command.
+    validation_command: Toy controls and the predeclared uniform mass-eleven source control only.
+    kill_condition: Geometry, source multiplicities or the uniform packing control fails.
+    fallback: Retain the guard or implementation gap; do not invoke an optimized target LP.
+    write_scope:
+    - packing/src/sqpack/full_size_density/support_ceiling.py
+    - packing/src/sqpack/full_size_density/support_screen.py
+    - packing/devtools/check_full_size_density_support_ceiling.py
+    - packing/devtools/run_full_size_density_support_screen.py
+    - packing/tests/test_full_size_density_support_ceiling.py
+    - packing/tests/test_full_size_density_support_screen.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-slice-02.md
+    excluded_commands: [git mutations, tbd mutations, optimized target measurements, registry allocation]
+  - task: BC251 / H093 landed-code readiness audit; think-zuq5
+    operator: Codex bound_lane_strategy, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: Landed fixes and seed/bridge readiness are still required before the scalar invocation.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Specify the smallest exact landed-code control set; no target execution.
+    phase: 4
+    budget_minutes: 15
+    started_at: '2026-09-06T19:57:28Z'
+    deadline_at: '2026-09-06T20:12:28Z'
+    expected_output: Thin-overlap regression and retained seed/bridge readiness commands.
+    validation_command: Read frozen scalar recipe and exact test/bridge contracts; no optimization.
+    kill_condition: No further useful audit remains or the bounded lease ends.
+    fallback: Preserve the readiness hold and continue the independent source/density work.
+    write_scope:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-251-readiness-audit.md
+    excluded_commands: [git mutations, tbd mutations, target measurements, registry allocation]
   outputs:
   - packing/campaign/agent-sessions/session-088-agenda024-next-phases.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-screen-spec.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-slice-01-independent-review.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-02.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-slice-01.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-independent-review.md
   checks:
@@ -310,23 +413,38 @@ unresolved questions and selected next work.
 Mathematical results receive an independent review before acceptance.
 Publication and its validation checklist are tracked in `think-647n`.
 
-The launch contains two adaptive project routes with 152 focused tests passing
-(22 slow or exhaustive tests deliberately deselected), a reviewed exact density-screen
-design, and a restricted point-cover assessment.
+The launch contains two adaptive project routes with 152 focused tests passing (22 slow
+or exhaustive tests deliberately deselected), a reviewed exact density-screen design,
+and a restricted point-cover assessment.
 These are control and design results, not a new packing bound.
 The scalar process remains unopened.
 The independent adaptive review and density toy-control build use the remaining first
 slice; their next checkpoint is still 19:41:26 UTC, not a renewed 30-minute allowance.
 
 Both have returned their bounded first-slice outputs.
-The second adaptive slice starts at the observed 19:39:02 UTC coordination boundary
-and ends at 20:09:02 UTC; that is the last of its two initially selected slices.
+The second adaptive slice starts at the observed 19:39:02 UTC coordination boundary and
+ends at 20:09:02 UTC; that is the last of its two initially selected slices.
 The density implementation review has its own observed 19:41:31–19:51:31 interval.
 While those run, the former density author handles a separate maintenance commission
 under `think-exlq` through 19:56 UTC in an isolated checkout, with no writes to research
 files under review. That follow-up also owns `think-6cvj`, an inaccurate generated label
 that calls a live, unmeasured session a historical closed session.
 Neither issue authorizes inventing a resource receipt or changing a test ceiling.
+
+The density review returned GO at 19:47:06 UTC. The next checkpoint therefore selects
+two readiness commissions: `think-0qcu` completes the finite-support instrument, and
+`think-2kld` replays Stromquist’s original exact-angle Theorem 3. Both end at 20:19:58
+UTC; the existing adaptive loader lease still ends at 20:09:02 UTC. The density
+source/input control may reconstruct the retained Trump witness and its uniform averaged
+mass eleven. It may not optimize target weights.
+The restricted control uses the original side and exact angles, not H036’s target.
+These follow-ups were commissioned after the first reviews; no historical or
+experimental budget is extended by the new phase.
+The adaptive author returned both selected slices before their deadlines.
+The remaining 180–320 active-worker-minute estimate, plus unpriced source replays,
+requires a fresh portfolio decision; it is not automatically funded here.
+That worker now audits the scalar readiness controls under `think-zuq5` through
+20:12:28 UTC, without importing an open PR or starting the scalar optimization.
 
 The selected first block has three workers and the coordinator.
 BC231 covers adaptive controls, BC254 a finite-support density discriminator, and BC255

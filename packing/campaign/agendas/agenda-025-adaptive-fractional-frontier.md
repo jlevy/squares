@@ -108,9 +108,12 @@ agenda:
       BC-250 selects only two initial slices of at most 30 minutes, then a price of
       remaining work. The full retained control matrix and acceptance conditions
       remain unchanged; 180 minutes is not an automatic allocation. Session088's
-      first control-only implementation has two project routes, not triad acceptance.
+      two selected slices delivered project routes, a loader and pure cover controls,
+      not triad acceptance. The remaining estimate is 180–320 active worker minutes
+      plus unpriced full replays; further allocation needs a portfolio decision.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-02.md
   - id: BC-232
     purpose: research
     owner_focus: efficiency
