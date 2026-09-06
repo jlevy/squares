@@ -147,10 +147,10 @@ A tier selects steps; a lane divides one step.
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a code change |
 | `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 66 | 700 s | 502.3 s on CI, 2026-09-06, commit `5cad7540`, when CI still ran it whole |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 66 | 190 s | 96.9 s on CI, the mean of three readings |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 66 | 185 s | 94.6 s on CI, the mean of three readings |
-| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 66 | 220 s | 111.2 s on CI, the mean of three readings |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 215 s | 107.9 s on CI, the mean of three readings |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 66 | 195 s | 99.4 s on CI, the mean of four readings |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 66 | 180 s | 91.6 s on CI, the mean of four readings |
+| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 66 | 205 s | 102.8 s on CI, the mean of four readings |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 210 s | 107.1 s on CI, the mean of four readings |
 | *(no flag)* | **CI, on `main`, on dispatch, and daily**; and what a block ends with | 66 of 66 | 3600 s | split across two jobs; not clocked whole |
 
 **A recorded cost here is the geometric mean of the readings at the reference shape, not
@@ -163,9 +163,13 @@ record at the top of the band, so it starves the *stale* rule by exactly as much
 feeds the *drift* rule.
 One fast run then came in at 0.72 of the record and left `--geometry` 1.21x away from
 failing CI for being quick.
-The mean leaves both rules about 1.35x. [D-472](defects.md) is the entry, and a recorded
-*band* still beats a recorded point, whichever point is chosen — that is `think-be1s`,
-open.
+The mean leaves every margin at or above 1.25x at four samples.
+The widest spread is `--suite` at 1.52x, which is one indivisible pytest invocation and
+so has nothing to average over internally.
+**These figures need refreshing as samples accumulate**, because a mean moves when they
+arrive — which is an argument for the band rather than a defect in the numbers.
+[D-472](defects.md) is the entry, and a recorded *band* still beats a recorded point,
+whichever point is chosen — that is `think-be1s`, open.
 
 **The pull-request surface is `--checks`, `--geometry`, `--suite` and `--sweeps`
 together, run as four concurrent CI jobs**, so a pull request waits for the longest of
