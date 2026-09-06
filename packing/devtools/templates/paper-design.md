@@ -20,11 +20,13 @@ physical sizes.
 | Role | Web | Print | Treatment |
 | --- | --- | --- | --- |
 | Prose | 18px | 12pt | Serif, with KPress prose emphasis |
-| Sans base | 18.5px | 12⅓pt | A size ratio of 18.5/18 against prose |
-| Title credits and date | 18.5px | 12⅓pt | Sans base size |
+| Sans base | 19px | 12⅔pt | A size ratio of 19/18 against prose |
+| Main title | 28.5px | 19pt | Sans, 1.5 of the sans base |
+| Subtitle | 23.75px | About 15.8333pt | Sans caps, 1.25 of the sans base |
+| Title credits and date | 19px | 12⅔pt | Sans base size |
 | Section headings | 21.6px | 14.4pt | Serif italic, 1.2 of the prose base |
-| Figure text, captions, and footnotes | 17.575px | About 11.7167pt | Shared sans size: 0.95 of the sans base |
-| Colophon | 15.725px | About 10.4833pt | Sans, 0.85 of the sans base |
+| Figure text, captions, and footnotes | 18.05px | About 12.0333pt | Shared sans size: 0.95 of the sans base |
+| Colophon | 16.15px | About 10.7667pt | Sans, 0.85 of the sans base |
 | Sans weights | 410 regular, 550 medium, 680 bold | Same | Preserve serif weight settings |
 | Supporting text color | KPress gray text role | Solid black | Preserve semantic diagram and status colors |
 
@@ -76,6 +78,8 @@ margins, ragged-right prose, embedded reading fonts, and fractional glyph advanc
 The title has extra top padding; page numbers sit inside the bottom margin and are
 omitted on the first page.
 Supporting text uses 1.4 line-height on the web and 1.32 in print.
+Print source notes use compact list spacing and a 1.5rem gap before the colophon to keep
+the closing credit on the same page.
 Set the print SVG width before pagination so its font measurements match the exported
 page. Interactive controls disappear, the default certificate determines the printed
 figures, and the atlas occupies its own page.
