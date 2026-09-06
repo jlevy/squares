@@ -30,6 +30,21 @@ from devtools.run_negative_controls import (
 )
 
 
+def test_oversized_snapshot_is_refused_before_cloning(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    spec = tmp_path / "controls.yaml"
+    spec.write_text("controls:\n- name: selected\n")
+    monkeypatch.setattr(
+        controls, "snapshot_source_bytes", lambda: controls.SNAPSHOT_MAX_BYTES + 1
+    )
+    monkeypatch.setattr(
+        controls, "clone_tree", lambda _tree: pytest.fail("oversized snapshot was cloned")
+    )
+    assert controls.main([str(spec), "-j", "1"]) == 1
+    assert f"cap is {controls.SNAPSHOT_MAX_BYTES}" in capsys.readouterr().err
+
+
 def test_control_timing_records_preserve_failed_detection_and_refuse_overwrite(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:

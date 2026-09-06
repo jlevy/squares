@@ -291,7 +291,13 @@ ROOT_DOCUMENTS = (
 # 2026-09-04, 12 MB of the breach was bytecode the gate had itself written into the tree
 # it was measuring, so the cap was reporting a fact about the checkout; a higher number
 # would have postponed that rather than fixed it (D-422).
-SNAPSHOT_MAX_BYTES = 64 * 1024 * 1024
+# The combined PR97/98 source measured 67,801,700 bytes (64.66 MiB) on 2026-09-06,
+# after excluding caches and generator outputs. No safe additional prune was found:
+# linked evidence must remain present so controls reach their intended refusal.
+# Compressing the retained summary to xz would leave only about 40 KiB of headroom.
+# Allow 80 MiB as measured storage headroom, not a speed target. Raising this guard
+# does not increase the bytes actually copied; dependency-policy work is separate.
+SNAPSHOT_MAX_BYTES = 80 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something
