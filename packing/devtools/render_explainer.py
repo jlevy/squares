@@ -57,7 +57,12 @@ from sqpack.fractional.certificate import (
 )
 from sqpack.fractional.model import Atom
 from sqpack.fractional.sweep import minimum_covered_mass, weight_scale
-from sqpack.release import PUBLICATION_DATE, PUBLICATION_EDITION, PUBLICATION_REVISION
+from sqpack.release import (
+    PUBLICATION_DATE,
+    PUBLICATION_REVISION,
+    PUBLICATION_STATUS,
+    PUBLICATION_VERSION,
+)
 from sqpack.render.style import SQUARE_HUE_PALETTE
 from sqpack.yamlio import safe_load
 
@@ -324,6 +329,20 @@ def link_revision() -> str:
     if found.returncode != 0 or not re.fullmatch(r"[0-9a-f]{40}", revision):
         return PUBLICATION_REVISION
     return revision
+
+
+def page_edition() -> str:
+    """The edition the page stamps: the status and version, then the commit it is built from.
+
+    The version is editorial and pinned in `sqpack.release`; the hash after it is the
+    build's, so it moves on every push, and the credits say exactly which commit the
+    reader is looking at. The atlas footer and the claim documents are committed and
+    compared byte for byte, so they carry `PUBLICATION_EDITION`, whose hash is pinned;
+    the two spellings agree on the status and the version and differ only in which
+    commit they name.
+    """
+    stamp = f"{PUBLICATION_VERSION}-{link_revision()[:8]}"
+    return " ".join(part for part in (PUBLICATION_STATUS, stamp) if part)
 
 
 def repo_file(path: Path, revision: str | None = None) -> str:
@@ -1079,6 +1098,23 @@ def starred_lower_bounds() -> int:
     return int(load_figure_record()["totals"]["lower_bound_first_proved_here"])
 
 
+def novel_results() -> int:
+    """How many registered results the register scores as new, counted rather than typed.
+
+    Seven of the register's entries are audits and replays of published work, scored
+    `previously-published`; the opening's "results" sentence says how many of the count
+    are apparently new, so the reader is not left to assume all of them (review of
+    2026-09-06, C4). The novelty vocabulary is the register's own.
+    """
+    register = PACKING / "frontier" / "results.yaml"
+    entries = safe_load(register.read_text(encoding="utf-8"))["results"]
+    return sum(
+        1
+        for entry in entries
+        if entry.get("novelty") in {"apparently-novel", "confirmed-novel"}
+    )
+
+
 def registered_results() -> int:
     """How many results the frontier register holds, counted rather than typed.
 
@@ -1313,11 +1349,12 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "DEFAULT_CERT_URL": repo_file(default.source),
         "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
         "N_RESULTS": str(registered_results()),
+        "N_NOVEL": str(novel_results()),
         "N_STARRED": str(starred_lower_bounds()),
         "SOURCE_URL": MARKDOWN_OUTPUT.name,
         "REPO_URL": REPO_URL,
         "PUBLISHED": PUBLICATION_DATE,
-        "EDITION": PUBLICATION_EDITION,
+        "EDITION": page_edition(),
         "PRIOR_YEAR": str(PRIOR_YEAR),
         **bound_substitutions(),
         "PRIOR_SOURCE": PRIOR_SOURCE,
@@ -1733,7 +1770,17 @@ def published_markdown(source: str, *, default_slug: str) -> str:
         caption = re.search(r"<figcaption>(.*?)</figcaption>", block, re.DOTALL)
         parts = [*images]
         if caption:
-            parts.append(_inline_markdown(caption.group(1)))
+            text = _inline_markdown(caption.group(1))
+            if not images:
+                # The caption describes colours and outlines this edition cannot show,
+                # so it says where they are drawn before it describes them (review of
+                # 2026-09-06, D3). The figure number is the caption's own.
+                number = re.match(r"\*\*Figure (\d+)", text)
+                which = f"Figure {number.group(1)}" if number else "This figure"
+                parts.append(
+                    f"*{which} is drawn by [the page]({SITE_URL}); its caption follows.*"
+                )
+            parts.append(text)
         out.append("\n\n".join(part for part in parts if part))
         position = end
     out.append(source[position:])
@@ -1747,7 +1794,11 @@ def published_markdown(source: str, *, default_slug: str) -> str:
         items = re.findall(r"<span>(.*?)</span>", match.group(1), re.DOTALL)
         return "\n".join(f"- {_inline_markdown(item)}" for item in items)
 
-    source = re.sub(r'<div class="credits">(.*?)</div>', _credits, source, flags=re.DOTALL)
+    # The template gives the div a second class for its alignment; the list is keyed on
+    # the first, since the credits fell through to the paragraph flattener as one line
+    # when the pattern asked for the class attribute to be the word alone (review of
+    # 2026-09-06, D3).
+    source = re.sub(r'<div class="credits[^"]*">(.*?)</div>', _credits, source, flags=re.DOTALL)
     source = _with_edition_note(source)
     # Every remaining div is a named block whose name is a style. The content is the
     # document; the box around it is the page's.

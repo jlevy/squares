@@ -502,13 +502,18 @@ It fetches the live page, the Markdown edition, the PDF and the assets, and chec
 the edition stamp is the one `sqpack.release` names, that every repository link names
 that commit and resolves on GitHub, and that the PDF is a PDF.
 
-**Cutting an edition** is the one manual step, and it is editorial.
-The stamp in the page’s credits and the atlas footer (`DRAFT v0.2.0-41fb401a`) is
-`sqpack.release`’s, pinned rather than read from git because the atlas embeds it and is
-compared byte for byte against a fresh render.
-The generated claim documents and the proof card are checked in and drift-checked the
-same way, so their links name the edition’s revision (`edition_file()`), not the build
-commit. To cut one:
+**The stamp in the credits has two parts, and they move on different clocks.** The
+version (`v0.2.0`) is editorial and pinned in `src/sqpack/release.py`; the hash after it
+is the commit the page is built from, read at render time (`page_edition()`), so it
+changes on every push, and a reader of the deployed page sees exactly which commit they
+are looking at. The atlas footer and the generated claim documents are checked in and
+drift-checked byte for byte, so they carry the pinned `PUBLICATION_REVISION` instead
+(`PUBLICATION_EDITION` and `edition_file()`); the two spellings agree on the status and
+the version and differ only in which commit they name.
+
+**Cutting an edition** is the one manual step, and it is editorial: it changes the
+version, and with it the revision the committed artifacts are stamped with.
+To cut one:
 
 1. Set `PUBLICATION_VERSION`, `PUBLICATION_REVISION` (the short hash of the commit whose
    content the edition describes, which is by construction older than the commit that
@@ -521,9 +526,6 @@ commit. To cut one:
    `pytest tests/test_explainer.py tests/test_verify_claim.py tests/test_release.py`,
    and commit the release module, the five atlas files and the three generated documents
    together.
-
-The stamp is the edition’s label; the links are the build’s identity, and the two are
-allowed to differ.
 
 ## Focused Quality Commands
 
