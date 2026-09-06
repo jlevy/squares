@@ -448,12 +448,14 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-[Session 086](packing/campaign/agent-sessions/session-086-agenda021-overnight-pass.md)
-still supplies the latest terminal, machine-checked handoff marker.
-Its selected rung was subsequently completed by the continuation work:
+[Session 087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md) is
+the latest terminal, machine-checked handoff.
+It completed Session 086’s selected `BC-213` rung and accepted `H-062` at bracket width
+`0.015`.
 
-**Selected next entry:** `think-wufn`, `BC-213`, recorded as
-[exp-062](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-062-h-062-m5-midpoint-rung.md).
+**Selected next entry:** `think-xejq`, `BC-215` in
+[Agenda 023](packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md):
+the R1 tree-id cache, which the efficiency block measured and priced but did not wire.
 
 [Agenda 024](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md) is the
 operator-selected continuation after that rung.
@@ -484,12 +486,9 @@ require no mathematical choice.
 
 [Agenda 021](packing/campaign/agendas/agenda-021-three-numbers-and-a-wall.md) supplied
 the retained `T-021` result and the 3.82 fractional state used here.
-Agenda 022’s
-[session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md)
-lifecycle remains owned by PR #87. This branch directly integrates that PR’s audited,
-green head `fd7c9d94` so its gate and session rules are available for commissioning; the
-work then landed on `origin/main` as `57135eec` and was reconciled here as `b60b2ca8`.
-The still-running session keeps its own deadline and is not an external launch blocker.
+Agenda 022’s Session 087 closed after PR 83 merged and the full gate passed on `main`.
+Agenda 024 is a separate portfolio; its active-hour clocks and T+2 disposition do not
+resume the completed efficiency block.
 
 ### Handoff Record
 
@@ -3237,15 +3236,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 469 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 471 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 94 | asserted something false about the mathematics |
 | validity | 118 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 180 | recorded something its own evidence contradicts |
-| robustness | 59 | did not finish, or finished only by luck |
+| bookkeeping | 181 | recorded something its own evidence contradicts |
+| robustness | 60 | did not finish, or finished only by luck |
 | performance | 18 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -3254,17 +3253,27 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy defects in 469, and no soundness defect ever.**
-Every soundness failure was found by a control cell whose answer was known in advance, a
-rule written down before the measurement, a generated view contradicting its source, or
-someone reading carefully.
+**The automated gate has caught seventy-one defects in 471, and no soundness defect
+ever.** Every soundness failure was found by a control cell whose answer was known in
+advance, a rule written down before the measurement, a generated view contradicting its
+source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Gate-detected entries here are mechanical process, implementation, or
 test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
 
-The generated log currently has 63 open entries: 40 `outstanding` and 23 `contained`.
+**[D-470](defects.md) records a deferred exhaustive test that still asserted the rung
+`T-021` displaced.** The full gate caught the stale transcription after the PR 83 merge;
+the test now re-derives its values from the moving certificate pointer.
+The post-merge exhaustive tier remains the guard for this deferred class.
+
+**[D-471](defects.md) records three further conflicted-branch CI blackouts.** A branch
+whose merge ref GitHub cannot synthesize receives no pull-request workflow run.
+The proposed local `git merge-tree` guard is not on this tree, so the defect remains
+outstanding rather than being described as contained.
+
+The generated log currently has 66 open entries: 41 `outstanding` and 25 `contained`.
 The W9 candidate `think-cyko` owns their systematic risk ordering and bounded repair
 waves; the synopsis names the cases that matter to current claims rather than pretending
 the examples below are the whole backlog.

@@ -341,13 +341,14 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, take `BC-213` in
-[Agenda 022](../../../../packing/campaign/agendas/agenda-022-the-conditional-route.md),
-bead `think-wufn`: the remaining rung of the `m = 5` bisection at `973/200`, which
-settles `H-062` either way and which
+For the next supervised exact-research goal, take `BC-215` in
+[Agenda 023](../../../../packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md),
+bead `think-xejq`: the R1 tree-id cache, which the efficiency block measured and priced
+and did not wire — 20.2 per cent of deep-run work repeated, 92 per cent of it from trees
+that did not move — and which
 [Agenda 021](../../../../packing/campaign/agendas/agenda-021-three-numbers-and-a-wall.md)’s
-closeout selected on 2026-09-05 after four rungs bracketed the covering wall to `0.025`
-against the `0.02` that hypothesis registered.
+closeout reselected at session-087’s close, after that agenda’s own selection, the
+`m = 5` rung at `973/200`, was taken and settled `H-062` at bracket width `0.015`.
 
 ## The numeric runner launch gate
 

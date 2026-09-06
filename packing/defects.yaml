@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 469
+count: 471
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -15341,3 +15341,123 @@ defects:
     it where a dependency is declared.
   status: fixed
   recorded_in: packing/pyproject.toml
+- id: D-470
+  title: A test pinned to the moving certificate pointer went stale, and no pull request could have caught it
+  date: '2026-09-06'
+  layer: tooling
+  class: bookkeeping
+  detected_by: gate
+  latent_for: >-
+    Six hours and seventeen minutes on the trunk, and three merges. `main` went red at
+    663ca37e (2026-09-05T21:49Z), the merge that promoted T-021, and was green again at
+    c743d7bb (2026-09-06T04:07Z); 3f8e1043 (#88), 57135eec (#87) and 6bd136b0 (#90)
+    landed into the red. All three were green on their own surface and none of them could
+    have been anything else, which is the half of this entry that outlives it.
+  severity: medium
+  what: >-
+    test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net reads the
+    n = 20 package through load_n20(), which opens
+    cases/n20_fractional_certificate/certificate.json. By this project's naming
+    convention that path is the *moving* top-rung pointer and certificate-A-B.json is the
+    immutable historical rung, so a test whose literals are the pointer's current value
+    goes stale by design the moment a better rung lands. T-021 landed one, and the test
+    still described T-020. Run 34009814108 at 6bd136b0 has it verbatim --
+    `assert enclosure == (Fraction(50007, 50000), Fraction(50007, 50000))` against an
+    actual (Fraction(200001, 200000), ...) -- and the bounded-side assertion beside it,
+    24/5 against the certificate's 97/20, would have failed next.
+    That is D-458's mechanism at a second site: D-458 fixed the register row that named
+    the pointer, and nothing pointed at the test that also did.
+    The class is larger than the instance, and the workflow comment already concedes it
+    in writing -- "a pull request can be green while a deferred test is broken". Three
+    steps stay off the pull-request surface on their measured cost (the exhaustive tier
+    at 1943.05s, the negative controls at 543.67s, the n = 40 bracket at 221.36s), and a
+    test in any of them can break without a pull request objecting. This is the second
+    time in two days that a deferred step is how something reached main; D-455 and D-456
+    were the first, and they are why twenty-one steps were promoted onto the
+    pull-request surface the day before.
+  consequence: >-
+    No bound, certificate or verdict is wrong. The certificate the test loads is sound
+    and T-021's claim is unaffected; what was wrong is a test's transcription of it.
+    What was lost is the trunk. For six hours the one tier that decides complete finite
+    certificates reported a failure that was not about the tree being merged into it, so
+    three authors merged onto a red main and a real failure arriving behind this one
+    would have read as the same known redness -- the same thing D-456 cost nine hours of
+    the day before, through the same gap.
+  fix: >-
+    Fixed on 2026-09-06 in 398f16dd, merged as c743d7bb: the literals are re-derived from
+    the artifact, and the docstring now carries the maintenance rule rather than only the
+    numbers -- the test follows the moving pointer deliberately, so its figures must be
+    re-derived on every promotion. It also states the pairing that makes the literals
+    worth having instead of being a second transcription of the artifact: the final
+    assertion ties the verifier's own computed enclosure to the value the certificate
+    *declares*, so a verifier that drifted from the artifact fails even if both literals
+    were updated together.
+    The structural half is bounded rather than closed, which is why this is contained.
+    The post-merge exhaustive job remains the guard for deferred tests; it caught this
+    instance six hours late. A later efficiency-branch proposal to run the deferrals
+    before merge is not part of this closure and is not represented as a present guard.
+  regression: >-
+    The exhaustive exact tier itself, which is what caught this one and will catch the
+    next one at the same distance. No check added here fires earlier, and the two that
+    could are named rather than left implicit: a rule refusing a retained test literal
+    derived from the moving pointer unless the test says which rung it means, which is
+    the file-level form of D-458's fix. A pre-merge deep gate would generalise beyond
+    this pointer, but that proposed workflow is not present on this tree.
+  recurrence_of: D-458
+  status: contained
+  bead: think-doar
+  recorded_in: packing/tests/test_fractional_interval.py
+- id: D-471
+  title: The conflicted-branch CI blackout fired three more times in one day, and nothing but a person detects it
+  date: '2026-09-06'
+  layer: tooling
+  class: robustness
+  detected_by: inspection
+  latent_for: >-
+    One day and three occurrences, each ended by somebody asking why a branch had no
+    checks. Two pushes landed into the silence before the last of them was noticed. The
+    underlying behaviour has been latent since the pull_request workflow was written; it
+    is only visible on a day with enough parallel branches for main to move under one of
+    them, and 2026-09-05 was that day three times over.
+  severity: medium
+  what: >-
+    When a pull request's branch conflicts with its base, GitHub cannot build
+    refs/pull/N/merge, and a pull_request workflow checks that ref out. So no run is
+    created at all: no check appears, the API reports zero check runs, and the pull
+    request goes silent rather than red.
+    D-459 recorded this on 2026-09-05, fixed the instance by merging main into the branch,
+    and left the durable half as a diagnostic rule in development.md -- zero check runs is
+    a question, not a wait. The rule did not hold: the same failure fired three times the
+    same day across the branches this block was running in parallel, and each time it was
+    found by a person rather than by a check.
+    The diagnostic is one local command and needs no API:
+    `git merge-tree --write-tree HEAD origin/main` fails exactly when the merge ref cannot
+    be built, which is exactly when no run will be created.
+  consequence: >-
+    Nothing false entered the record on any of the three, and the direct cost is wall
+    clock and uninformative pushes. The risk is the direction the failure leans, which
+    D-459 already stated and this entry only prices: an absent check reads as pending
+    rather than as red, so a branch can sit ungated while looking merely slow, and the
+    longer it waits the harder its merge gets.
+    What three occurrences in one day add is the verdict on the containment. A control
+    that exists only as a sentence in a document and a habit of reading carefully is a
+    control that fails when the day gets busy, and the day it is most needed -- several
+    branches, a moving main -- is exactly the busy one.
+  fix: >-
+    The three instances were ended the way D-459's was, by merging the base into the
+    branch, and CI created a run on the next push every time. That fixes each instance,
+    not the class, so the status remains outstanding.
+    An unmerged efficiency-branch proposal used a push-triggered local
+    `git merge-tree` check: it would run from the branch tip even when GitHub cannot
+    synthesize the pull-request merge ref. This planning closure does not import that
+    workflow, so it is retained as a prospective repair rather than a present control.
+  regression: >-
+    No current automated regression detects this class. A push-triggered local
+    `git merge-tree` check is the proposed regression: it can test the same mergeability
+    condition without depending on GitHub's synthesized merge ref. It would still answer
+    about the base the runner fetched, so a later base advance leaves a one-fetch window,
+    the same residue the commit-clock anchor carries in D-468.
+  recurrence_of: D-459
+  status: outstanding
+  bead: think-706h
+  recorded_in: packing/campaign/agent-sessions/session-087-agenda022-continuation.md

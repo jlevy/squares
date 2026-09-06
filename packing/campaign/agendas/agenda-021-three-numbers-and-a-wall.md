@@ -1029,13 +1029,35 @@ agenda:
         rationale: >-
           BC-209 inherits BC-202's resumable checkpoint at 138/25 and the cost model
           that now separates a cold column round from a warm one.
-      selected:
-        bead: think-wufn
-        workflow: research-loop
+      - bead: think-xejq
+        workflow: efficiency-loop
+        priority: 0
         rationale: >-
-          One rung closes a registered hypothesis that four rungs left open by 0.005 of
-          bracket width, at a cost this block measured rather than estimated, and it is
-          the only candidate whose outcome is a verdict rather than an instrument.
+          Added at session-087's close and not weighed by this agenda's own W10, which is
+          said plainly rather than backdated: agenda-023 did not exist when this closeout
+          was written. It is here because `selected` below is the live handoff -- the
+          synopsis check binds it to the latest terminal session's next action -- so the
+          candidate list has to be able to hold whatever that becomes.
+          BC-215, the R1 tree-id cache. The efficiency block measured its price and did
+          not wire it: 20.2 per cent of deep-run work is repeated, 92 per cent of that
+          from trees that did not move, and the `touches` sets account for 1.6 per cent,
+          so the tree id is the lever and this is the one thing left between the
+          pull-request wall and the operator's target.
+      selected:
+        bead: think-xejq
+        workflow: efficiency-loop
+        rationale: >-
+          Reselected at session-087's close, which is what this field is for: it is
+          cross-checked against the latest terminal session's next action rather than
+          frozen at the closeout. This agenda's own selection, think-wufn / BC-213, was
+          taken by session-087 and completed -- both constructions wall at 973/200 and
+          H-062 is accepted at bracket width 0.015 -- so the reason it was chosen is
+          discharged rather than still standing.
+          What replaces it is not a research cell. The block that followed spent itself
+          on the gate's own cost and got the pull-request surface from 1369.60 s to about
+          221.70 s; BC-215 is the one lever it priced and did not pull, and the cells
+          behind it here (BC-204, BC-207, BC-208) are still blocked on questions this
+          block did not open.
       operator_input:
         status: unavailable
         note: >-
