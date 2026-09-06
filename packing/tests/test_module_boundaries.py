@@ -341,7 +341,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     assert exhaustive_commands == [
         (
             'uv run --frozen --all-extras --group dev packing-validate --only "exhaustive '
-            'exact behavioral tests" --jobs 1 --inner-jobs 2'
+            'exact behavioral tests" --jobs 1 --inner-jobs 4'
         )
     ]
 
