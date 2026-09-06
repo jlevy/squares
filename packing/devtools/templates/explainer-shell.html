@@ -541,8 +541,23 @@ body {
      atlas, whose per-cell labels already set at about 2.4pt; the whitespace is the
      cheaper thing to keep. */
   .split { display: block; }
-  .stage canvas { max-height: 4.5in; width: auto; max-width: 100%; margin-inline: auto; }
-  .cert-page figure img { max-height: 7in; width: auto; max-width: 100%; }
+  /* Figure caps, set against the content box rather than by eye. At 1.25in margins a
+     Letter page holds 8.5in of content, and a figure is `break-inside: avoid`, so one
+     taller than the space left is pushed whole and ends the page early. At the previous
+     caps the tallest figure block measured 8.29in -- 97.5% of the box, which is to say
+     it could never share a page with anything, and the text that preceded it was
+     stranded three lines into an otherwise empty page.
+
+       canvas 4.5in / img 7.0in   tallest block 8.29in   14 pages
+       canvas 3.6in / img 5.5in   tallest block 6.79in   13 pages
+       canvas 3.2in / img 5.0in   tallest block 6.29in   12 pages
+
+     Taking the last: twelve pages, the same as the old 11pt setting, with the 80-column
+     measure bought rather than paid for. The atlas still takes a page of its own, which
+     is right for a hundred-cell reference grid and is what its own standalone PDF is
+     for; what changes is that the other six figures now sit with their text. */
+  .stage canvas { max-height: 3.2in; width: auto; max-width: 100%; margin-inline: auto; }
+  .cert-page figure img { max-height: 5in; width: auto; max-width: 100%; }
 
   /* Link targets are deliberately not spelled out after each link: a URL set in
      the middle of a sentence breaks the line badly and reads worse than the
@@ -626,16 +641,43 @@ body {
      stays, so a URL too long for the measure still wraps -- at a boundary. */
   .kpress ol > li > * { word-break: normal; }
 
-  /* Margins. The page rule takes `--kpress-print-page-margin` from kpress, which
-     sets it to 0.7in, and nothing else stacks on top: kpress's own print stylesheet
-     zeroes the page and document gutters, and neither width cap binds at this size.
-     Set to 1in, the ordinary margin for a printed document of this kind. kpress's
-     0.7in default was measured as the only contribution -- its own print stylesheet
-     zeroes the page and document gutters, and neither width cap binds -- so this token
-     is the whole knob. Widening it also shortens the line, which this page needs more
-     than it needs the space: at 0.7in the measure ran to about 92 characters and at
-     0.55in longer still, well past the 45 to 75 that reads comfortably. */
-  :root { --kpress-print-page-margin: 1in; }
+  /* The measure, which is what "the margins look wrong" turned out to mean.
+
+     Measured across the whole document rather than estimated, median characters per
+     full body line:
+
+       0.70in / 11pt   6.94in column   102 chars   11 pages
+       1.00in / 11pt   6.30in column    94 chars   12 pages   <- was here
+       1.00in / 12pt   6.28in column    86 chars   13 pages
+       1.25in / 12pt   5.84in column    80 chars   14 pages
+       1.50in / 11pt   5.34in column    80 chars   14 pages
+
+     The margin alone cannot fix this. Going 0.7in to 1in bought eight characters and
+     cost a page, and 94 is still far outside the 45 to 75 that reads comfortably -- at
+     11pt, 75 characters wants a 5.0in column, which is a 1.75in margin. It is a type
+     size decision wearing a margin's clothes, so both move: 1.25in and 12pt, for an
+     80-character line at two pages' cost. (The previous comment here claimed 0.7in
+     "ran to about 92 characters". That figure described neither setting.)
+
+     `size` is declared because the exporter passes `preferCSSPageSize`, which makes
+     this rule the one that decides the paper. Declaring `size` WITHOUT that flag is the
+     trap: Chromium then centres the CSS page box on the API's paper and leaves dead
+     bands around it. The two belong together and are commented at both ends. */
+  @page { size: Letter; }
+  :root {
+    --kpress-print-page-margin: 1.25in;
+    --kpress-print-font-size: 12pt;
+  }
+
+  /* No folio on the title page. kpress prints its credit and the page number in the
+     `@page` margin boxes on every page, which is right for a body page and wrong under
+     a title block that already carries the edition and the repository. Chromium 141
+     supports margin boxes and `@page :first` -- verified, not assumed; the advice that
+     Blink ignores them is out of date. */
+  @page :first {
+    @bottom-left { content: none; }
+    @bottom-right { content: none; }
+  }
 }
 
 </style>

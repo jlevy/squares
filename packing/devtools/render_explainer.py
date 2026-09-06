@@ -1497,6 +1497,7 @@ RENDER_INPUTS = (
     Path(__file__),
     PACKING / "devtools" / "measure_net_coarsening.py",
     PACKING / "devtools" / "build_composite_figure_data.py",
+    PACKING / "devtools" / "render_explainer_pdf.py",
     PACKING / "src" / "sqpack",
     PACKING / "frontier" / "results.yaml",
     PACKING / "atlas" / "known-best" / "composite-figure.json",

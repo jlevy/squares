@@ -23,6 +23,7 @@ name: Certificate page
       - packing/devtools/render_explainer.py
       - packing/devtools/measure_net_coarsening.py
       - packing/devtools/build_composite_figure_data.py
+      - packing/devtools/render_explainer_pdf.py
       - packing/src/sqpack/**
       - packing/frontier/results.yaml
       - packing/atlas/known-best/composite-figure.json
@@ -45,6 +46,7 @@ name: Certificate page
       - packing/devtools/render_explainer.py
       - packing/devtools/measure_net_coarsening.py
       - packing/devtools/build_composite_figure_data.py
+      - packing/devtools/render_explainer_pdf.py
       - packing/src/sqpack/**
       - packing/frontier/results.yaml
       - packing/atlas/known-best/composite-figure.json
@@ -108,6 +110,33 @@ jobs:
           uv run --frozen --group dev python -m devtools.render_explainer --check
           test -s site/index.html
           echo "one file, $(du -h site/index.html | cut -f1)"
+
+      # Playwright's own Chromium, at the revision its pinned wheel names -- so the
+      # browser moves when someone bumps that pin and not when a runner image rolls.
+      # `--only-shell` is what `chromium.launch()` actually starts: 109 MB against the
+      # 291 MB a full `install chromium` pulls, for a binary the exporter never uses.
+      - name: Cache the Playwright browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install the browser the exporter draws with
+        run: uv run --frozen --group dev python -m playwright install --only-shell chromium
+
+      # After the page, not beside it: the exporter loads `site/index.html` from disk,
+      # and Figure 1 references the composite that the render copies into `site/` on its
+      # way out.
+      - name: Draw the PDF of the page
+        run: uv run --frozen --group dev python -m devtools.render_explainer_pdf --update
+
+      # The same question the render answers above, asked of the PDF: two draws in one
+      # browser have to agree. Not a comparison against a recorded digest -- the bytes
+      # depend on the Chromium build and on the host's fonts, so a recorded digest would
+      # fail on the next pin bump and on every contributor's machine, which is the
+      # check-that-can-never-pass this repository has already been bitten by.
+      - name: Check the PDF reproduces itself
+        run: uv run --frozen --group dev python -m devtools.render_explainer_pdf --check
 
       - name: Upload the page artifact
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'

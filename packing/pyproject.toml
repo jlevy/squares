@@ -40,6 +40,24 @@ dev = [
     # claim the opposite of both halves; `render_composite_pdf`'s own docstring had
     # it right all along.
     "cairosvg>=2.7",
+    # Draws the explainer page as a PDF, in `devtools.render_explainer_pdf`.
+    #
+    # Pinned exactly, and the pin is doing more work than a version pin usually does:
+    # the wheel ships `driver/package/browsers.json`, which names the exact Chromium
+    # revision the driver downloads, so **this pin is the browser pin**. A `>=` here
+    # would float the browser build and with it every byte the exporter writes. 1.62.0
+    # was published 2026-07-31, 36 days before adoption, so it clears the 14-day
+    # cool-off in `tbd guidelines supply-chain-hardening` without an exception.
+    #
+    # In `dev` for the reason kpress is: the type floor covers `devtools`, so a package
+    # a devtool imports has to resolve wherever that floor runs, which is this group.
+    # The cost is honest -- `macos-portability` syncs this group and pulls a 42.5 MB
+    # wheel it never uses.
+    #
+    # What the lockfile does NOT cover: the browser binary itself, which the driver
+    # fetches from Playwright's CDN on `playwright install`. The revision is pinned by
+    # the wheel; the bytes at that URL are not hashed here.
+    "playwright==1.62.0",
     # Renders the certificate explainer page: kpress supplies the design tokens,
     # the reading faces and the KaTeX distribution, all inlined into one file.
     # In `dev` rather than a group of its own because the type floor covers
