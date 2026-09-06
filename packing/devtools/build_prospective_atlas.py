@@ -34,7 +34,6 @@ from sqpack.known_best import (
 from sqpack.render import render_packing_svg
 from sqpack.render.model import RenderSpec
 from sqpack.witness import check_witness_semantics, witness_document
-from sqpack.workers import worker_count
 
 ROOT = Path(__file__).resolve().parent.parent
 REPOSITORY_ROOT = ROOT.parent
@@ -364,7 +363,7 @@ def build_cases(entries: Sequence[dict], workers: int | None) -> list[tuple[str,
         str(_source_path(entry)) if entry["source_key"] == "unitsquare-release-1" else None
         for entry in entries
     ]
-    requested = worker_count(len(entries)) if workers is None else workers
+    requested = 1 if workers is None else workers
     count = max(1, min(requested, len(entries)))
     if count == 1:
         return [

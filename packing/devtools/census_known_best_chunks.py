@@ -29,7 +29,6 @@ from sqpack.chunks import (
     minimal_lattice_partition,
 )
 from sqpack.witness import load_witness
-from sqpack.workers import worker_count
 
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "atlas/known-best/manifest.json"
@@ -131,13 +130,21 @@ def census_records(workers: int | None = None) -> tuple[dict[str, Any], ...]:
     GitHub job finishes before its own longest step, so no rearrangement of jobs
     shortens it and the only lever is inside the step.
 
-    `workers` is the pool size. `None` asks `sqpack.workers.worker_count`, which reads
-    the `PACK_JOBS` cap the gate exports to every step -- the same contract
-    `screen_translation_escape`, `check_golden_basins` and `check_regressions` use. The
-    count is never taken from the machine behind the gate's back, which is the mistake
-    that put nineteen ordinary tests over the quick lane's per-test ceiling on
-    contention alone. `1` runs in this process rather than through a pool, because a
-    one-worker pool is a subprocess and a protocol for no concurrency at all.
+    `workers` is the pool size, and it defaults to **serial**, which is a measurement
+    rather than timidity. `PACK_JOBS` is a per-step cap but contention is global: the
+    `sweeps` job runs four outer slots on four cpus, so a pool here is workers the
+    machine does not have. Run 34019... measured it -- with this step, the escape screen
+    and the prospective atlas all sizing pools from `--inner-jobs 2`, the tier went
+    81.18s to 98.25s. This step gained 0.5s, the escape screen lost 33s, and
+    `known-best n=1..100 atlas`, which has no pool at all, lost 37s. Exactly one step in
+    this job can afford a pool, and it is the screen, which is the longest.
+
+    So pass `workers` explicitly to use one -- the deep surface at `--jobs 1` can, and
+    the tests do. Sizing from `sqpack.workers.worker_count` is available and correct per
+    step; it is the aggregate that does not fit, and no per-step contract can see that.
+
+    `1` runs in this process rather than through a pool, because a one-worker pool is a
+    subprocess and a protocol for no concurrency at all.
 
     Memoized on the worker count because both documents are reachable from `--update`
     and from `--check`, and the second one must not re-derive the first one's records.
@@ -150,7 +157,7 @@ def census_records(workers: int | None = None) -> tuple[dict[str, Any], ...]:
     see `test_a_pool_worker_censuses_at_the_same_precision_as_this_process`.
     """
     entries = atlas_entries()
-    requested = worker_count(len(entries)) if workers is None else workers
+    requested = 1 if workers is None else workers
     count = max(1, min(requested, len(entries)))
     if count == 1:
         return tuple(_census_entry(entry) for entry in entries)
