@@ -3302,13 +3302,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 477 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 478 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 97 | asserted something false about the mathematics |
-| validity | 120 | was correct, but the measurement did not bear on the question |
+| validity | 121 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 182 | recorded something its own evidence contradicts |
 | robustness | 60 | did not finish, or finished only by luck |
 | performance | 18 | worked, but cost far more than it should |
@@ -3319,7 +3319,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy-two defects in 477, and no soundness defect
+**The automated gate has caught seventy-two defects in 478, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3340,7 +3340,13 @@ whose merge ref GitHub cannot synthesize receives no pull-request workflow run.
 The push-triggered `git merge-tree` guard now detects that state after every branch
 push; an idle branch can still become conflicted when `main` moves underneath it.
 
-The generated log currently has 66 open entries: 40 `outstanding` and 26 `contained`.
+**[D-478](defects.md) records a missing witness for BC-206’s reported cutting floor.**
+The value near `10.845594` at side `3.97` survives only in a text log.
+Its generating family is unavailable for replay after the cutting-screen repairs, so it
+is qualified as an unreplayed historical report.
+`think-aenh` owns recovery or recomputation with a retained exact witness.
+
+The generated log currently has 67 open entries: 40 `outstanding` and 27 `contained`.
 The W9 candidate `think-cyko` owns their systematic risk ordering and bounded repair
 waves; the synopsis names the cases that matter to current claims rather than pretending
 the examples below are the whole backlog.
@@ -3624,7 +3630,7 @@ It is contained rather than fixed — such delegations are recorded on completio
 `read_only` flag is better than permitting an empty list that would be ambiguous between
 “writes nothing” and “nobody filled this in”.
 
-110 fixes left no regression check behind.
+111 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
 and exit survived, but invalid `gdate` precision left the start and end fields empty, so
 [D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.

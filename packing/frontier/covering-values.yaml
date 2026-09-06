@@ -644,17 +644,21 @@ values:
     rounds: null
     converged: true
     stop_reason: >-
-      The row LP converged at 12.248227 under devtools.run_fractional_cutting, the
-      instrument BC-200 used, with an exact depth-scaled floor beneath it.
+      The row LP reportedly converged at 12.248227 under devtools.run_fractional_cutting,
+      the instrument BC-200 used. The log also reports a depth-scaled floor, but its
+      generating family and state were not retained for replay.
     least_covered_mass: null
     frozen_artifact: null
     recorded_in:
       - packing/campaign/series/series-000-smoke-and-calibration/results/bc-206-n12-ladder-register.txt
     notes: >-
-      BC-206 of agenda 022, unregistered follow-up at a pre-registered side. The reported
-      bounds on the covering value at 3.97 are approximately 10.845594 and 12.248227;
-      twelve lies inside that interval, so this side remains undecided. The retained
-      certificate at 3.96 gives an upper bound of 11.998960 on its covering value.
+      BC-206 of agenda 022, unregistered follow-up at a pre-registered side. The log
+      reports a cutting floor of approximately 10.845594 and a converged row-LP value
+      of 12.248227 at 3.97. The floor has not been replayed after the D-476 and D-477
+      cutting corrections because its generating family and state were not retained.
+      This does not show the historical floor invalid, but the log supplies no
+      revalidated exact bracket. The side remains undecided. The retained certificate
+      at 3.96 gives an upper bound of 11.998960 on its covering value.
       Subtracting two upper bounds does not bound the increase in the true optima.
       These data establish neither a lower slope bound nor the side where the covering
       value reaches twelve. Correction, 2026-09-06: the previous endpoint estimate

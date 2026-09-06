@@ -383,9 +383,12 @@ agenda:
         Five unregistered follow-up runs at 397/100 also measured this side.
         A widened column step converged the column loop at 12.314708 over 830 orbits,
         reproduced from a different start to eleven figures; run_fractional_cutting
-        converged its row LP at 12.248227 and returned an exact floor displayed as
-        approximately 10.845594. Twelve lies inside the reported bracket at 3.97, so
-        that side remains undecided, and every refutation here is of a site set.
+        reportedly converged its row LP at 12.248227 and reported a cutting floor of
+        approximately 10.845594. The floor has not been replayed after the D-476 and
+        D-477 cutting corrections because its generating family and state were not
+        retained. This does not show the historical floor invalid, but the log supplies
+        no revalidated exact bracket. The side remains undecided, and every refutation
+        here is of a site set.
         The retained certificate's mass 11.998960 at 3.96 is another upper bound on
         the covering value. Subtracting upper bounds at two sides establishes neither
         a lower slope bound nor the side where the true covering value reaches twelve.

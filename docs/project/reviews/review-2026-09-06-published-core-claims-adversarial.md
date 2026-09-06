@@ -9,7 +9,7 @@ version, interval implementation, sources, and proposed findings.
 An additional pass challenged the findings against their surrounding definitions.
 
 No counterexample to the headline bound or omitted family of placements was found.
-The five findings below concern a separate ceiling checker, its search consumer, and
+The six findings below concern a separate ceiling checker, its search consumer, and
 statements about the method’s reach.
 Epic `think-hmtc` tracks their focused remediation and contribution of the independent
 geometric oracle.
@@ -54,11 +54,12 @@ Bead: `think-cmi9`. Severity: medium.
 The [covering-value record](../../../packing/frontier/covering-values.yaml) compared a
 feasible covering mass `11.998960` at side `3.96` with `12.248227` at side `3.97`,
 inferred a slope of at least `24.9`, and placed the ladder’s endpoint near `3.96004`.
-Its available lower bound at `3.97` was only approximately `10.845594`.
+The run reported a lower floor at `3.97` of approximately `10.845594`; D-478 below
+explains why that historical floor cannot currently be independently replayed.
 
-The two feasible masses upper-bound the minimum covering value.
-Subtracting them does not lower-bound its increase: a value of `11.9` at both sides
-satisfies all the quoted numerical bounds and has zero slope.
+Even if both reported feasible masses were validated upper bounds on the minimum
+covering value, subtracting them would not lower-bound its increase: a value of `11.9`
+at both sides satisfies all the quoted numerical bounds and has zero slope.
 That example is a countermodel to the inference, not a claim about the actual optimum.
 Even two exact endpoint optima would not bound the slope immediately after `3.96`
 without further assumptions.
@@ -66,8 +67,9 @@ without further assumptions.
 The slope and endpoint conclusions have been withdrawn from maintained views.
 The source run log and session remain historical evidence with explicit corrections in
 the maintained records.
-The interval at `3.97` straddles twelve, so it does not decide whether the unrestricted
-method can certify that side.
+Even the reported interval at `3.97` straddles twelve.
+With its lower witness unavailable, it cannot be treated as a revalidated bracket; this
+evidence does not decide whether the unrestricted method can certify that side.
 The retained `s(12) ≥ 3.96` certificate remains a separate result.
 
 ### D-475: The numerical ceiling depends on the direction net
@@ -130,6 +132,25 @@ exact point before deciding depth.
 The [cutting regression](../../../packing/tests/test_fractional_cutting.py) retains this
 example. The final ceiling verifier enumerates its vertices independently; this example
 demonstrates an invalid intermediate bound, not an accepted final theorem.
+
+### D-478: A reported cutting floor has no retained replayable witness
+
+Bead: `think-aenh`. Severity: medium.
+Status: contained by qualification; recovery or recomputation remains open.
+
+The retained BC-206 text log reports the `n=12`, `L=3.97` cutting floor `10.845594`. It
+names `f-397-100.state.json` as a warm-start input, but no generating family or state
+for the reported best floor is retained.
+Searches of tracked files, the review and main checkouts, and temporary artifacts did
+not locate it.
+
+The rounded depth and mass printed in the log cannot reconstruct an exact witness.
+Consequently, this number cannot be independently replayed after D-476 and D-477. It has
+not been shown invalid, but it must remain an unreplayed historical report rather than a
+revalidated lower bound or certified bracket.
+The maintained row and agenda now state that limitation.
+Closing this gap requires recovering the exact family or rerunning the experiment while
+retaining its witness.
 
 ## Independent Verification Evidence
 

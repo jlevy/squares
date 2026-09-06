@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 477
+count: 478
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -15661,4 +15661,30 @@ defects:
     an exact arrangement vertex.
   regression: packing/tests/test_fractional_cutting.py
   bead: think-hrko
+  recorded_in: docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md
+- id: D-478
+  title: The BC-206 cutting floor has no retained family for independent replay
+  date: '2026-09-06'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: until seeking replay evidence after the cutting-screen repairs
+  severity: medium
+  status: contained
+  what: >-
+    The BC-206 n=12 run log reports a depth-scaled floor near 10.845594 at side
+    397/100, but its generating exact family or state is not retained. The log names
+    f-397-100.state.json as a warm start without retaining it. Rounded maxima in the
+    text cannot reconstruct a witness for the repaired verifier.
+  consequence: >-
+    The historical number cannot be independently replayed after D-476 and D-477.
+    It has not been shown false, but the log cannot support a revalidated exact lower
+    bound or certified bracket.
+  fix: >-
+    Qualify the maintained record and review as an unreplayed historical report and
+    leave side 3.97 undecided. Recovery of the exact witness, or a rerun that retains
+    one, remains a separate follow-up under think-aenh.
+  regression: none
+  bead: think-aenh
   recorded_in: docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md
