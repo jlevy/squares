@@ -140,15 +140,17 @@ A tier selects steps; a lane divides one step.
 | `--records` | contributor, before touching a registry; also every pull request | 31 of 64 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a code change |
-| `--fast` | **CI, on every pull request** | 60 of 64 | 600 s | unrecorded — 253.6 s locally after main’s promotion; see below |
+| `--fast` | **CI, on every pull request** | 60 of 64 | 700 s | **502.3 s on CI**, 2026-09-06, commit `5cad7540` |
 | *(no flag)* | **CI, on `main`, on dispatch, and daily**; and what a block ends with | 64 of 64 | 3600 s | split across two jobs; not clocked whole |
 
-`--fast`’s ceiling is a hang detector rather than a band right now, and deliberately so:
-main’s promotion of twenty-one steps changed what the tier *is*, so the 177.0 s recorded
-against the previous shape was cleared rather than adjusted.
-The register refuses to compare a wall against a record from a different tier — that is
-the behaviour, not a gap — and the first CI run at the reference shape prints the figure
-the band is rebuilt from.
+**`--fast` costs 502.3 s, and two steps are 468.1 s of it**: `known-best n=1..100 atlas`
+at 254.9 s and `prospective n=101..324 source map and safe seed` at 213.2 s. Both were
+promoted onto the pull-request surface on 2026-09-05 after `D-455` escaped through the
+gap where they had been running only post-merge, and together they now cost more than
+the entire tier did before they arrived (177.0 s). That is the coverage-against-cost
+trade `OR-13` and `OR-14` are both about, made deliberately and stated here rather than
+discovered later. Whether they belong on every pull request or behind change scoping is
+the open question `agenda-023` carries next; it is a measurement, not an opinion.
 
 Four steps are outside `--fast`, each deferred on its own measurement and pinned by
 `test_the_pull_request_surface_defers_only_what_was_measured`: `exhaustive exact

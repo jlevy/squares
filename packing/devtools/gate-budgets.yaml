@@ -93,19 +93,21 @@ tiers:
   # 281s). 210s is 1.49x against the 2.0x allowed. The band is 69s wide on a 141s tier, so
   # it catches a regression of a half -- looser in ratio than the old 550/409 because the
   # tier is now small enough that runner noise is a larger share of it.
-  # Cleared a third time, and the register is working rather than failing when it does
-  # this: it refuses to compare a wall against a record taken on a different tier. Main
-  # promoted twenty-one steps into `--fast` on 2026-09-05 -- `known-best n=1..100 atlas`
-  # at 133.5s and `prospective n=101..324 source map and safe seed` at 89.9s among them --
-  # so the 177.02s recorded here measured a tier with roughly 360s less work in it. A
-  # local run of the merged tier is 253.61s, which already breaches the 210s band the old
-  # record justified, and that is the band doing its job.
+  # 700s, a band around the 502.3s below. The tier is not what it was when it measured
+  # 177.02s: main promoted twenty-one steps into `--fast` on 2026-09-05, and two of them
+  # cost more between them (468.11s) than the entire tier did before they arrived. That
+  # is a deliberate coverage trade -- D-455 escaped through exactly that gap -- and it is
+  # recorded here rather than argued with.
   #
-  # 600s until CI prints a figure, and it is a hang detector rather than a band: with no
-  # record, rule 2 has nothing to bound it against, which the `edit` entry says too. The
-  # first run at the reference shape prints the line to write here, and the band is then
-  # rebuilt from it rather than from this number.
-  ceiling_seconds: 600.0
+  # 1.39x of the record, the same shape of band as before: above the quarter a contended
+  # runner adds (628s), under the drift rule's 1.5x (753s) so the ceiling never speaks
+  # after the record-relative rule, and inside rule 2's slack (1005s).
+  #
+  # Third figure this entry has held and the third re-scoping behind it: 1369.60s,
+  # 409.0s, 177.02s, now 502.3s. The register has been right every time and the tier has
+  # kept moving underneath it, which is what a cost register on a subsystem two sessions
+  # are editing at once actually looks like.
+  ceiling_seconds: 700.0
   # Cleared twice for the same reason, and the reason is a good one both times: the figure
   # measured a tier that no longer exists. BC-214 cleared 1369.60s (CI run 33982455466)
   # when it moved every test at or above QUICK_TEST_CEILING_SECONDS out of the quick lane.
@@ -123,9 +125,14 @@ tiers:
   # the quick lane was asking for one worker per cpu while two other steps ran beside it.
   # Recording the faster of two readings from an unstable configuration is how a band gets
   # set to a number the tier cannot hold, so the record is the stable configuration's.
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
+  measured_seconds: 502.3
+  measured_on: '2026-09-06'
+  measured_where: >-
+    CI run for commit 5cad7540, job `validate`, GitHub's Linux runner reporting 4 cpus,
+    at `--jobs 3 --inner-jobs 1`. 502.30s of wall over roughly 1,100s of step time, of
+    which `known-best n=1..100 atlas` is 254.92s and `prospective n=101..324 source map
+    and safe seed` is 213.19s -- the two steps main promoted on 2026-09-05, and together
+    more than the whole tier cost before they arrived.
   # The reference moves with the invocation it describes. A record taken at `--jobs 3`
   # cannot be compared against a `--jobs 2` reference, and leaving the old one here is how
   # a band stays permanently unenforced: every run reports "not the reference shape" and

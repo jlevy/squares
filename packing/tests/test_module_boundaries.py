@@ -600,6 +600,14 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_known_best_atlas.py": {
             "test_known_best_composite_contains_every_case_and_square",  # 27.3s
         },
+        # 2s of call time across 1, and it is the boundary case the band exists for.
+        # 2.22s locally, 6.43s on CI -- slower cores and two lanes beside it -- so it sat
+        # under the 5s ceiling everywhere it had been run and over it where it counted.
+        # Marking is safe in both directions here: 2.22s clears the 1s floor, so the deep
+        # surface will not hand the marker back the way it did for the shared builds.
+        "test_n17_weighted_certificate_successor.py": {
+            "test_real_ancestry_verifies_without_evaluating_a_direction",  # 6.4s on CI
+        },
         # 101s of call time across 3.
         "test_minus_w_bridge.py": {
             "test_the_bridge_agrees",  # 80.4s
