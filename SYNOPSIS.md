@@ -259,8 +259,11 @@ case or experiment separately.
 | [BC-254 Control Build: First-Slice Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-slice-01.md) | research synthesis | record | retained | — |
 | [BC-254 Support Controls: Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-independent-review.md) | dated review record | record | retained | — |
 | [BC-254: Target-Readiness Build and Source Control](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-slice-02.md) | research synthesis | record | retained | — |
+| [BC-254 Target Instrument: Independent Readiness Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-independent-review.md) | dated review record | record | retained | — |
 | [BC-255 Restricted-Angle Assessment](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md) | research synthesis | record | retained | — |
 | [BC-255 Theorem 3 Source Control: First Slice](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-slice-01.md) | research synthesis | record | retained | — |
+| [BC-255 Theorem 3 Source-Control Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-independent-review.md) | dated review record | record | retained | — |
+| [BC-255: Restricted-Angle Instrument Design](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md) | research synthesis | record | retained | — |
 | [Agenda 026 T+0 to T+2 Commissioning Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/checkpoint-hour-02.md) | research synthesis | record | retained | — |
 | [Agenda 026 T+2 to T+4 Closure Gate](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/gate-hour-04.md) | research synthesis | record | retained | — |
 | [A Quantitative Local Theorem at Trump’s 11-Square Packing](packing/cases/trump11/isolation-theorem.md) | research synthesis | record | retained | — |
@@ -508,8 +511,10 @@ improvements integrated.
 records live assignments and checkpoints; it was renamed from the branch-local
 session-088 to preserve the separate landed efficiency session below.
 Coordinator `think-jgnv` owns the integrated research line and its first two-hour
-checkpoint. Source controls have passed; independent review and bounded end-to-end
-target work remain distinct. Supporting fixes stay on this PR.
+checkpoint.
+Source controls have passed; independent review and bounded end-to-end target
+work remain distinct.
+Supporting fixes stay on this PR.
 
 **Efficiency implementation checkpoint.**
 [Session 088](packing/campaign/agent-sessions/session-088-validation-efficiency-checkpoint.md)
@@ -3006,7 +3011,8 @@ in separate tables: their units differ, and the same work can appear in both.
 <!-- END GENERATED: session-close-report -->
 
 Unmeasured sessions include live work awaiting a retained receipt and older closed
-sessions whose harness logs were not retained. Missing measurements are not zero cost.
+sessions whose harness logs were not retained.
+Missing measurements are not zero cost.
 The Claude rollups no session claims are the delegated half of the same period:
 sub-agent logs that survived while the session records that would have claimed them
 predate the field. Claude backfill needs only a retained log; Codex interval refresh

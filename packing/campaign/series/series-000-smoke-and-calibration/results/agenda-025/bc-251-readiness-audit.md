@@ -105,6 +105,25 @@ They do not start the 150-minute invocation, revive BC-232, change H-093’s cri
 authorize further BC-231 implementation.
 No additional useful read-only audit remains in this selected slice.
 
+## Landed-Code Replay
+
+The coordinator integrated PR100 and PR98, then replayed the declared focused controls
+in an isolated checkout of `5267bd34` under project Python 3.14. All 46 passed.
+The real retained-seed driver control also passed at the original side `381/100`: the
+[retained summary](bc-251-readiness-seed.json) records all 1,121 seed sites, 4,329
+initial sites in 588 orbits, zero initial rows, no iterations and no frozen family.
+The safe-stop flag is true, and the net, side and scale-map checks agree with the frozen
+recipe. The command-level run took 0.311 seconds; the empty loop reports zero rounded
+wall and CPU seconds, not a measurement of target cost.
+
+These checks restore instrument readiness, not authorization to omit the prospective
+experiment or independent candidate verification.
+The single 150-minute target remains unopened.
+Its complete process allowance plus verification no longer fits the inherited remaining
+Session 089 window; preserve the invocation for a suitable next allocation instead of
+silently shortening or resetting it.
+Independent end-to-end density and restricted-geometry work continues on PR101.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

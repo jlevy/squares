@@ -30,7 +30,7 @@ hypothesis:
     The existing frozen scalar 61/16 recipe using packing/devtools/run_fractional_cutting.py,
     its seed certificate, packing/devtools/freeze_cutting_primal.py, and the existing
     declaration, production decision and standalone verification commands.
-  instrument_ready: false
+  instrument_ready: true
   regime: >-
     n = 11; side 61/16; B = 9977/10000; the retained rational 181-direction net;
     exact rational certificate decisions and the unchanged scalar recipe.
@@ -40,10 +40,14 @@ hypothesis:
 ---
 # H-093 — A Scalar Certificate at 61/16
 
-Session 088 holds instrument readiness while PR100’s reported depth-checking defects in
-the scalar cutting path are corrected and replayed.
-No H-093 experiment has started; the criterion and single-invocation budget are
-unchanged.
+Session 089 restored instrument readiness after integrating PR100’s exact depth fixes
+and PR98’s validation improvements.
+The focused depth, seed, driver and bridge controls and a zero-iteration retained-seed
+control passed in an isolated checkout of `5267bd34`. The
+[readiness audit](../series/series-000-smoke-and-calibration/results/agenda-025/bc-251-readiness-audit.md#landed-code-replay)
+retains the commands and limits.
+No H-093 experiment has started; its prospective freeze, fresh target paths and full
+single-invocation allocation remain separate requirements.
 
 The [scalar probe in Agenda 025](../agendas/agenda-025-adaptive-fractional-frontier.md)
 tests the first selected side between the retained 3.81 certificate and the unfinished

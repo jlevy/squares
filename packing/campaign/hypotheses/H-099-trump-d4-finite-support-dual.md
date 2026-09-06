@@ -27,10 +27,10 @@ hypothesis:
   instrument: >-
     Proposed exact geometric support deduplication, necessary-row LP ceiling certificate,
     and, only for a surviving candidate, BC-243's complete a.e.-depth arrangement
-    verifier with independent replay. Neither route is ready yet. Readiness may be
-    established for the exact ceiling route alone; that does not authorize acceptance
+    verifier with independent replay. The exact ceiling route passed its source and
+    independent readiness controls; this does not authorize acceptance
     of a D > 11 candidate without the complete depth verifier.
-  instrument_ready: false
+  instrument_ready: true
   regime: >-
     n = 11; exact algebraic Trump side; only the geometric D4 closure of the retained
     Trump witness, with no added placements or assumed strong duality
@@ -48,6 +48,12 @@ hypothesis:
     reproducing this control is not evidence for D > 11.
 ---
 # H-099 — A Finite-Support Ceiling Before the Arrangement Build
+
+Session 089 accepts readiness for the finite-row ceiling route only, after the
+[independent review](../series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-independent-review.md)
+and its parser correction.
+A target still requires prospective freeze and separate exact replay.
+Complete almost-everywhere depth verification is not implemented here.
 
 Let F be the distinct geometric squares in all eight container symmetries of the
 [exact Trump witness](../../cases/trump11/packing.py), identifying local quarter-turn

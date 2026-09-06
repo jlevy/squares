@@ -143,7 +143,7 @@ session:
     clock_role: work
     objective: Independently review the source controls and publish the checked readiness checkpoint.
     bead: think-jgnv
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: Preliminary source controls passed and the scalar readiness audit is complete.
     budget_minutes: 30
@@ -153,11 +153,33 @@ session:
     validation_command: Focused Python3.14 tests, campaign records and immutable-checkout push checks.
     kill_condition: A completeness premise fails or the bounded commission ends.
     fallback: Retain the exact gap and do not convert source controls into a target verdict.
-    outcome: null
+    outcome: Both source instruments passed independent review; a bounded parser defect was repaired and replayed.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-251-readiness-audit.md
+    stop_reason: Readiness reviews and extension design are complete; selected end-to-end steps are now concrete.
+    next_action: Prepare the density target freeze and build the separate fixed-side auxiliary adapter.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Build the fixed-side auxiliary discriminator and prepare the reviewed density target freeze.
+    bead: think-jgnv
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Source controls and independent reviews passed; the restricted extension has a priced first discriminator.
+    budget_minutes: 30
+    started_at: '2026-09-06T20:33:03Z'
+    deadline_at: '2026-09-06T21:03:03Z'
+    expected_output: A source-controlled exact-angle adapter, integrated validation and a prospectively frozen density screen.
+    validation_command: Focused controls and records, followed by immutable-checkout push validation.
+    kill_condition: A source premise fails or the bounded commission ends.
+    fallback: Preserve the control refusal or missing target instrument without a mathematical negative.
+    outcome: null
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-independent-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md
     stop_reason: null
-    next_action: Freeze only independently reviewed, priced target work; preserve unopened work explicitly.
+    next_action: Execute only frozen targets after readiness; keep all evidence and supporting fixes on PR101.
   primary_bead: think-jgnv
   status: in_progress
   budget:
@@ -408,16 +430,18 @@ session:
     excluded_commands: [git mutations, tbd mutations, target measurements, registry allocation]
   - task: BC255 independent Theorem3 source-control review; think-2f79
     operator: Codex bound_lane_strategy, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: Source completeness and exact boundary handling have not received independent review.
+    outcome: GO for the exact-angle source control; writer stopped at 20:21:17 UTC.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-independent-review.md
+    files:
+    - packing/tests/test_stromquist_restricted_orientation_review.py
+    checks: [16 author and reviewer tests passed; process wall 8.65 seconds and CPU 8.22; scoped lint and type checks clean.]
+    uncertainty: Fixed-angle source control only; no target or continuous-angle result.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Read the archived theorem independently and replay after the author's stable handoff.
+    next_action: Build a separate controlled target-side auxiliary adapter before an experiment freeze.
     phase: 5
     budget_minutes: 25
     started_at: '2026-09-06T20:09:14Z'
@@ -432,16 +456,18 @@ session:
     excluded_commands: [git mutations, tbd mutations, target measurements, registry allocation]
   - task: BC254 independent target-instrument readiness review; think-bv9t
     operator: Codex gpt6_coverage_audit, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: Independent review has not accepted the source, row or serialized upper-bound contract.
+    outcome: Initial parser NO-GO repaired under think-q25u; final GO; writer stopped at 20:32:15 UTC.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-independent-review.md
+    files:
+    - packing/tests/test_full_size_density_support_screen_review.py
+    checks: [45 tests passed in 1.54 seconds wall and 1.49 CPU; scoped lint and type checks clean.]
+    uncertainty: Shared sequence generation is not independent history attestation; target costs remain unmeasured.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Review the stable author packet and replay source/control mode only.
+    next_action: Coordinator freezes one bounded target and separate exact replay before execution.
     phase: 5
     budget_minutes: 25
     started_at: '2026-09-06T20:13:11Z'
@@ -456,16 +482,18 @@ session:
     excluded_commands: [git mutations, tbd mutations, target measurements, target row generation, registry allocation]
   - task: BC255 restricted-angle instrument design and pricing; think-6s8x
     operator: Codex structural_lane_strategy, max reasoning for mathematical judgment
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: Complete perturbed-angle proof machinery and its cost remain unpriced.
+    outcome: Fixed-side exact-angle screen selected before a continuous extension; writer stopped at 20:30:53 UTC.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md
+    files:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md
+    checks: [Analytical design only; no target geometry or code ran.]
+    uncertainty: Adapter estimate is 20–30 author minutes; later angle extension is 60–120 plus separate review, only if justified.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Specify the smallest complete instrument conditionally on independent source review.
+    next_action: Build source and toy controls for the fixed-side adapter; freeze any target separately.
     phase: 5
     budget_minutes: 20
     started_at: '2026-09-06T20:15:48Z'
@@ -477,6 +505,54 @@ session:
     write_scope:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md
     excluded_commands: [git mutations, tbd mutations, target measurements, target geometry evaluation, implementation, registry allocation]
+  - task: Codify end-to-end research and one integrated PR; think-efz1
+    operator: Codex bound_lane_strategy, max reasoning for process judgment
+    status: completed
+    recording: contemporaneous
+    outcome: OR6 and OR9 now codify end-to-end slices and integrated 2–12-hour research PRs.
+    evidence: [operating-rules.md]
+    files: [operating-rules.md]
+    checks: [Flowmark and whitespace checks passed; writer stopped at 20:31:35 UTC.]
+    uncertainty: Generated rule check and integration validation belong to the coordinator.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Keep the research and its supporting fixes on PR101; no small follow-up PRs.
+    phase: 5
+    budget_minutes: 13
+    started_at: '2026-09-06T20:25:38Z'
+    deadline_at: '2026-09-06T20:38:38Z'
+    expected_output: Concise additions to existing rules, without duplicate frameworks or new rule identifiers.
+    validation_command: Practical Prose pass, Flowmark and generated operating-rule check.
+    kill_condition: The requested policy is explicit and consistent, or the lease ends.
+    fallback: Retain the smallest unresolved wording issue without blocking independent mathematics.
+    write_scope: [operating-rules.md]
+    excluded_commands: [git mutations, tbd mutations, generated AGENTS edits, new frameworks]
+  - task: BC255 fixed-side exact-angle auxiliary adapter; think-rpzg
+    operator: Codex structural_lane_strategy, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: The distinct target-side adapter and its controls do not yet exist.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Build source/toy controls and a separate bounded target entry; do not evaluate target geometry.
+    phase: 6
+    budget_minutes: 30
+    started_at: '2026-09-06T20:33:03Z'
+    deadline_at: '2026-09-06T21:03:03Z'
+    expected_output: All-seven-obligation adapter with original source behavior unchanged and a ten-second cap.
+    validation_command: Original source and declared toys only; target dispatch mocked in interface controls.
+    kill_condition: A source/control premise fails or the bounded implementation lease ends.
+    fallback: Preserve the missing instrument without running q=1939/500 or any perturbed angle.
+    write_scope:
+    - packing/devtools/run_restricted_orientation_discriminator.py
+    - packing/tests/test_restricted_orientation_discriminator.py
+    - packing/cases/stromquist/restricted_orientation.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md
+    excluded_commands: [git mutations, tbd mutations, target geometry evaluation, target measurements, registry allocation]
   outputs:
   - packing/campaign/agent-sessions/session-089-agenda024-next-phases.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md
@@ -489,6 +565,10 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-251-readiness-audit.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-slice-02.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-slice-01.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-independent-review.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-independent-review.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md
+  - operating-rules.md
   checks:
   - PR97 merged as c14451f5 after required hosted checks passed on d29342bb.
   - Prelaunch records tier passed 31 selected steps in 19.16 seconds on c14451f5.
@@ -511,8 +591,9 @@ queue. The initial checkout is `c14451f5`; no open PR head was imported.
 This research record initially used session-088 on its unpublished branch.
 PR98 landed a different session-088 for the validation-efficiency work, so upstream
 integration renamed this record to session-089. The start, budgets, phase history and
-worker evidence are unchanged. The incoming session and its cost receipt remain intact;
-their measurements do not become this research session's costs.
+worker evidence are unchanged.
+The incoming session and its cost receipt remain intact; their measurements do not
+become this research session’s costs.
 
 ## Monitoring and Checkpoints
 

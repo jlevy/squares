@@ -397,7 +397,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: blocked
+    state: ready
     priority: 0
     question: Can the retained scalar certificate language certify side 61/16?
     hypotheses: [H-093]
@@ -414,13 +414,12 @@ agenda:
     bead: think-0za3
     workflows: [research-loop]
     depends_on: [BC-250]
-    blocked_on: >-
-      The exact depth corrections reported in PR100 and a successful retained
-      seed/bridge replay on landed code; think-zuq5 owns this readiness boundary.
     next_evidence: >-
-      Restore readiness after the depth corrections reported in PR100 land and
-      pass the retained seed/bridge controls (think-zuq5), then freeze the one
-      target invocation. No target has run in Session089.
+      Landed depth fixes and isolated seed/bridge controls pass at5267bd34;
+      think-zuq5's readiness boundary is discharged. Freeze the one target invocation
+      only with its full150-minute allocation and separately priced verification.
+      No target has run in Session089; do not shorten or reset that invocation to fit
+      the remaining checkpoint window.
     parallel_group: agenda025-scalar
     program: n11-adaptive-fractional-frontier
   - id: BC-252

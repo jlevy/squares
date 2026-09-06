@@ -1385,7 +1385,7 @@ sessions:
   title: "The next post-3.81 research phases"
   status: in_progress
   primary_bead: think-jgnv
-  phases: 5
+  phases: 6
   measured: false
   unmeasured_reason: >-
     declares no rollups

@@ -1,0 +1,39 @@
+{
+ "settings": {
+  "n": 11,
+  "outer_side": "381/100",
+  "square_side": "9977/10000",
+  "angle_limit": "207107/500000",
+  "direction_steps": 180,
+  "grids": null,
+  "minutes": 0.0,
+  "iterations": 0,
+  "cap": 150,
+  "support_cap": 96,
+  "rows_rounds": 2,
+  "rows_per_direction": 3,
+  "stop_on_covering_below_n": true,
+  "origin": "grid seed plus 1121 scale-mapped atom sites from cases/n11_fractional_certificate/certificate.json",
+  "seed_certificate": "cases/n11_fractional_certificate/certificate.json",
+  "seed_map": "scale",
+  "seed_sites": 1121,
+  "initial_sites": 4329,
+  "initial_orbits": 588,
+  "initial_rows": 0
+ },
+ "seconds": 0.001730457996018231,
+ "timing": {
+  "scope": "main entry through measurement immediately before summary serialization; excludes import/interpreter/uv startup, final summary write, and teardown",
+  "loop_wall_seconds": 0.001730457996018231,
+  "loop_cpu_seconds": 0.0017289999999999806,
+  "driver_wall_seconds_before_summary": 0.06682324991561472,
+  "driver_cpu_seconds_before_summary": 0.06605699999999998
+ },
+ "stopped": "iteration cap 0 reached",
+ "best_scaled_total": "0",
+ "best_scaled_total_float": 0.0,
+ "best_iteration": -1,
+ "verdict": null,
+ "iterations": [],
+ "frozen": null
+}

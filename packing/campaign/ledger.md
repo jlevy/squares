@@ -103,7 +103,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-086](agent-sessions/session-086-agenda021-overnight-pass.md) | stopped | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 2 | think-db1k | BC-213, the remaining m = 5 rung at 973/200 (think-wufn), as agenda-021's closeout selects it. |
 | [session-087](agent-sessions/session-087-agenda022-continuation.md) | completed | contemporaneous | `research-loop` (correctness) | `efficiency-loop` (efficiency) | 2 | think-wufn | Take BC-215 (think-xejq), the one lever the efficiency block measured and did not wire: 20.2 per cent of deep-run work is repeated and 92 per cent of that is trees that did not move, so the tree-id cache is what takes the pull-request wall from about 221.70 s to the operator's two to two and a half minutes. |
 | [session-088](agent-sessions/session-088-validation-efficiency-checkpoint.md) | completed | retrospective | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 1 | think-rwte | Continue think-xejq with explained exhaustive-family planning under W5 Phase 3 after publishing this implementation and verifying its full hosted checkpoint. Preserve complete coverage until the selection and reuse contracts pass their invalidation fixtures. |
-| [session-089](agent-sessions/session-089-agenda024-next-phases.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `pipeline-improvement` (correctness) | 5 | think-jgnv | Review source instruments, integrate landed corrections and commission only ready, priced target work. |
+| [session-089](agent-sessions/session-089-agenda024-next-phases.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `pipeline-improvement` (correctness) | 6 | think-jgnv | Review source instruments, integrate landed corrections and commission only ready, priced target work. |
 
 ### Workflow summary
 
@@ -117,7 +117,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
 | `research-loop` | 9 | 4 | 48 | 7 |
-| `pipeline-improvement` | 21 | 0 | 106 | 0 |
+| `pipeline-improvement` | 21 | 0 | 107 | 0 |
 | `documentation-pass` | 1 | 0 | 4 | 0 |
 | `review-planning-oversight` | 0 | 0 | 1 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
@@ -527,7 +527,7 @@ Status: **active**. Pursue stronger n=11 certificates through the scalar languag
 | BC-237 | research | 11 | blocked | 2 | think-fw95 | A build/no-build decision for the next richer measure language. |
 | BC-238 | measurement_validation | 11 | blocked | 0 | think-hjoe | A result object the central retention gate can judge without trusting its generator. |
 | BC-239 | measurement_validation | 11 | blocked | 0 | think-mss2 | The fractional program's honest yield, cost, negative results, and best continuation. |
-| BC-251 | research | 11 | blocked | 0 | think-0za3 | Restore readiness after the depth corrections reported in PR100 land and pass the retained seed/bridge controls (think-zuq5), then freeze the one target invocation. No target has run in Session088. |
+| BC-251 | research | 11 | ready | 0 | think-0za3 | Landed depth fixes and isolated seed/bridge controls pass at5267bd34; think-zuq5's readiness boundary is discharged. Freeze the one target invocation only with its full150-minute allocation and separately priced verification. No target has run in Session089; do not shorten or reset that invocation to fit the remaining checkpoint window. |
 | BC-252 | research | 11 | tentative | 1 | think-361m | A finite-model test whose exact outcome would change the allocation. |
 | BC-253 | research | 11 | tentative | 2 | think-mw02 | A complete local forall-pose/exists-witness argument, not a sampled menu. |
 
@@ -630,13 +630,13 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | H-070 | refuted | proof | At n = 11, outer side 191/50, and B = 9977/10000, the eligible minimum | one-sided inset: 1/2 2962983/4505800 15513/20000 | 1 |  | 8.2m wall |
 | H-090 | refuted | proof | With the frozen T-018 atoms, weights, outer side and 181 net direction | core side: 99769/100000 | 1 |  | 30s wall |
 | H-091 | refuted | proof | With the frozen T-018 atoms, weights, outer side and 181 net direction | core side: 997696/1000000 | 1 |  | 31s wall |
-| H-093 | blocked | proof | At container side 61/16, the retained 181-direction net and scalar cor |  | 0 |  |  |
+| H-093 | open | proof | At container side 61/16, the retained 181-direction net and scalar cor |  | 0 |  |  |
 | H-094 | open question | proof | Which changes to relative atom weights and D4 site orbits overcome the |  | 0 |  |  |
 | H-095 | blocked | proof | At container side 61/16, the BC-230 adaptive-core language admits a fi |  | 0 |  |  |
 | H-096 | open question | proof | Can finite rational inner kernels, contained throughout their assigned |  | 0 |  |  |
 | H-097 | open question | proof | Can a finite witness menu certify that every admissible unit-square po |  | 0 |  |  |
 | H-098 | open question | proof | Can nonnegative segment-supported measures give stronger or cheaper n  |  | 0 |  |  |
-| H-099 | blocked | proof | At the exact Trump side U, the deduplicated D4 images of the eleven ex |  | 0 |  |  |
+| H-099 | open | proof | At the exact Trump side U, the deduplicated D4 images of the eleven ex |  | 0 |  |  |
 | H-100 | open question | proof | Is there a side L strictly between the retained verified lower bound a |  | 0 |  |  |
 | H-101 | open question | proof | Does the exact Trump-side container admit a nonnegative integrable are |  | 0 |  |  |
 | H-102 | open question | proof | Which explicitly delimited n = 11 angle-composition or wall-support fa |  | 0 |  |  |
