@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **4** in_progress, **13** ready, **9** tentative, **57** blocked, **41** stopped, **122** complete.
+- **4** in_progress, **14** ready, **9** tentative, **56** blocked, **41** stopped, **122** complete.
 
-- **19 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-251`, `BC-243`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **18 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-243`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -38,6 +38,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-023 | `BC-218` | ready | 0 | efficiency | tool_validation | How much of the gate's remaining wall is sequencing rather than work, and what does it cost to run the… | `think-m5ev` |
 | agenda-025 | `BC-231` | in_progress | 0 | correctness | tool_validation | Can an exact verifier decide the adaptive-core contract and refuse uncovered angles, unsafe cell bounds,… | `think-7mk4` |
 | agenda-025 | `BC-232` | in_progress | 0 | efficiency | research | Can the retained 3.82 primal/dual state be advanced to total covering mass below 11 or exact packing value at… | `think-gmdy` |
+| agenda-025 | `BC-251` | ready | 0 | insight | research | Can the retained scalar certificate language certify side 61/16? | `think-0za3` |
 | agenda-025 | `BC-252` | tentative | 1 | insight | research | Which weight or support change addresses the retained limiting witnesses? | `think-361m` |
 | agenda-025 | `BC-253` | tentative | 2 | insight | research | Can an existential witness menu cover a limiting closed pose box? | `think-mw02` |
 | agenda-026 | `BC-246` | ready | 0 | correctness | tool_validation | Does the typed language recover Trump's stationary backbone, every retained branch, and its local theorem… | `think-3l93` |
@@ -102,7 +103,6 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-025 | `BC-234` | 0 | `BC-231` | no | — |
 | agenda-025 | `BC-238` | 0 | `BC-219` | yes | A frozen lower-bound candidate from BC-232, BC-233, BC-234, BC-236, or BC-251, its object-specific project and… |
 | agenda-025 | `BC-239` | 0 | `BC-224` | no | — |
-| agenda-025 | `BC-251` | 0 | `BC-250` | yes | The exact depth corrections reported in PR100 and a successful retained seed/bridge replay on landed code; think-zuq5… |
 | agenda-025 | `BC-235` | 1 | `BC-234` | no | — |
 | agenda-025 | `BC-236` | 1 | `BC-235` | no | — |
 | agenda-025 | `BC-237` | 2 | `BC-236` | no | — |
@@ -154,7 +154,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-022 | active |  |  |  | 7 |  | 2 | 9 |
 | agenda-023 | active |  | 3 |  | 2 |  |  | 5 |
 | agenda-024 | active |  |  |  | 5 |  | 3 | 8 |
-| agenda-025 | active | 2 |  | 2 | 7 |  | 2 | 13 |
+| agenda-025 | active | 2 | 1 | 2 | 6 |  | 2 | 13 |
 | agenda-026 | active | 2 | 2 | 2 | 4 |  | 4 | 14 |
 
 ## By program
@@ -201,7 +201,7 @@ Open frontier: `BC-204`, `BC-205`, `BC-212`.
 | agenda-025 | `BC-237` | blocked | After the kernel route is disposed, is a piecewise-algebraic segment-measure verifier small and… |
 | agenda-025 | `BC-238` | blocked | Does any fractional candidate from this agenda survive frozen-byte exactification, source-distinct… |
 | agenda-025 | `BC-239` | blocked | Is every fractional cell classified, its checkpoint and cost preserved, and its one earned… |
-| agenda-025 | `BC-251` | blocked | Can the retained scalar certificate language certify side 61/16? |
+| agenda-025 | `BC-251` | ready | Can the retained scalar certificate language certify side 61/16? |
 | agenda-025 | `BC-252` | tentative | Which weight or support change addresses the retained limiting witnesses? |
 | agenda-025 | `BC-253` | tentative | Can an existential witness menu cover a limiting closed pose box? |
 

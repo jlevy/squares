@@ -164,7 +164,7 @@ session:
     clock_role: work
     objective: Build the fixed-side auxiliary discriminator and prepare the reviewed density target freeze.
     bead: think-jgnv
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: Source controls and independent reviews passed; the restricted extension has a priced first discriminator.
     budget_minutes: 30
@@ -174,12 +174,33 @@ session:
     validation_command: Focused controls and records, followed by immutable-checkout push validation.
     kill_condition: A source premise fails or the bounded commission ends.
     fallback: Preserve the control refusal or missing target instrument without a mathematical negative.
-    outcome: null
+    outcome: The density protocol is prepared; the fixed-side adapter continues on its original bounded lease.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-independent-review.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md
+    stop_reason: The next end-to-end target and independent reviewer are selected.
+    next_action: Commit the prospective density protocol and execute once after the record checks pass.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Execute the frozen H099 support screen and independently decide its scoped output.
+    bead: think-2rxf
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Reviewed exact instruments and one bounded target protocol are available.
+    budget_minutes: 30
+    started_at: '2026-09-06T20:45:50Z'
+    deadline_at: '2026-09-06T21:15:50Z'
+    expected_output: One retained target/refusal, independent packet decision, actual cost and H099 disposition.
+    validation_command: Frozen producer once, then the independent bounded file checker once on valid output.
+    kill_condition: The frozen target/replay cap or criterion is reached; no unchanged retry.
+    fallback: Preserve a refusal or incomplete result as unresolved and continue independent adapter work.
+    outcome: null
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md
     stop_reason: null
-    next_action: Execute only frozen targets after readiness; keep all evidence and supporting fixes on PR101.
+    next_action: Review scope and cost before accepting a fixed-support conclusion or funding a larger instrument.
   primary_bead: think-jgnv
   status: in_progress
   budget:
@@ -553,6 +574,53 @@ session:
     - packing/cases/stromquist/restricted_orientation.py
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md
     excluded_commands: [git mutations, tbd mutations, target geometry evaluation, target measurements, registry allocation]
+  - task: BC255 independent fixed-side adapter review; think-w8nx
+    operator: Codex bound_lane_strategy, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: Source-preserving refactor and new adapter have not received independent review.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Review design now, then replay source and toy controls after stable author handoff.
+    phase: 6
+    budget_minutes: 18.92
+    started_at: '2026-09-06T20:44:08Z'
+    deadline_at: '2026-09-06T21:03:03Z'
+    expected_output: GO or NO-GO for adapter readiness, without evaluating the fixed-side target.
+    validation_command: Source/toy and mocked target-dispatch controls under projectPython3.14.
+    kill_condition: A soundness blocker is found or the bounded review lease ends.
+    fallback: Retain the blocker or incomplete review without target execution.
+    write_scope:
+    - packing/tests/test_restricted_orientation_discriminator_review.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-independent-review.md
+    excluded_commands: [git mutations, tbd mutations, target geometry evaluation, registry allocation]
+  - task: H099 prospective protocol and independent target replay; think-ez3v
+    operator: Codex gpt6_coverage_audit, max reasoning for mathematical judgment
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: The target has not run and the independent replay allocation is unspent.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Review the prospective protocol, then own its one separate replay after producer success.
+    phase: 7
+    budget_minutes: 15
+    started_at: '2026-09-06T20:45:50Z'
+    deadline_at: '2026-09-06T21:00:50Z'
+    expected_output: Independent bounded packet decision or refusal review, scoped to H099 only.
+    validation_command: Exact file checker once with its frozen60-second cap; no optimization.
+    kill_condition: A scoped decision or refusal is established, or the review lease ends.
+    fallback: Retain unresolved output without another producer or invalid-packet replay.
+    write_scope:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-113-h-099-trump-support-screen/independent-review.md
+    excluded_commands: [git mutations, tbd mutations, target optimization, registry allocation]
   outputs:
   - packing/campaign/agent-sessions/session-089-agenda024-next-phases.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md

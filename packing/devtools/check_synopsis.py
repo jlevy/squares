@@ -279,7 +279,7 @@ def check_round_effort_claims(
 ) -> list[str]:
     """Require every narrative campaign-total claim to match the generated footer."""
     claims = re.findall(
-        r"There are (\d+) terminal rounds registered in `series-\d+`\.\s+"
+        r"There are (\d+) (?:terminal )?rounds registered in `series-\d+`\.\s+"
         r"They record ([\d.]+) agent-minutes\s+and ([\d.]+) wall-minutes\.",
         text,
     )
@@ -288,7 +288,7 @@ def check_round_effort_claims(
         return []
     return [
         (
-            "SYNOPSIS.md: terminal-round aggregate is not "
+            "SYNOPSIS.md: registered-round aggregate is not "
             f"{rounds} rounds, {agent_minutes} agent-minutes, and "
             f"{wall_minutes} wall-minutes at every occurrence"
         )
