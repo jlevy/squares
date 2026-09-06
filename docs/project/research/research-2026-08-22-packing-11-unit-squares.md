@@ -1,11 +1,11 @@
 # Research: Packing 11 Unit Squares in a Square
 
-**Date:** 2026-08-22 (last updated 2026-09-05)
+**Date:** 2026-08-22 (last updated 2026-09-06)
 
 **Author:** Claude (agent), for mailto:samanthadrakova@gmail.com
 
 **Status:** The literature report is preserved as of 2026-08-25; the dated project
-summary and addenda record results through the 2026-09-05 refresh
+summary and addenda record results through the 2026-09-06 refresh
 
 ## How to read the citations
 
@@ -28,22 +28,35 @@ Where a claim rests on a source that could **not** be retrieved, it is marked
 **[secondary]** and the obstacle is recorded in the resources README. Those claims are
 the weakest in this document and are flagged again in [Open Questions](#open-questions).
 
-## Current Summary at the 2026-09-05 Refresh
+## Current Summary Through 2026-09-06
 
-At the 2026-09-05 refresh captured here, the T-018 certificate baseline gives the
-certified interval `[3.81,3.877084]`, of width `0.067084`. The lower endpoint is the
-project’s verified `s(11) >= 381/100` result
-([T-018](../../../packing/frontier/RESULTS.md)); the upper endpoint remains Trump’s 1979
-packing.
+T-022 sharpens the project’s weak lower bound to
+
+```text
+s(11) >= 38100*sqrt(8100042893309449)/899996306539
+      = 3.810025723614703407193395411021535...
+```
+
+The resulting certified interval extends to Trump’s verified 1979 construction at
+`3.87708359002281417730789706010096...`; its width is approximately
+`0.06705786640811077`. T-022 is a uniform fixed-core dilation corollary of the frozen
+T-018 certificate. It replays T-018’s five conditions, then proves the sharper
+strict-containment inequality separately.
+The endpoint follows by rational density and upward embedding, so this is a weak `>=`
+statement: it is not an endpoint no-fit certificate and does not prove a strict
+improvement beyond the displayed algebraic number.
+See [T-022](../../../packing/frontier/RESULTS.md) and its exact proof packet.
 
 The lower-bound improvement remains `apparently-novel` in the repository’s scoped sense.
 The
 [frozen 2026-09-05 literature refresh](../../../packing/resources/web/literature-refresh-2026-09-05/README.md)
 and the
 [case-specific search receipt](../../../packing/resources/web/s11-lower-bound-literature-audit-2026/README.md)
-located no earlier public lower bound above Stromquist’s `2 + 4/sqrt(5)`. This is a
-statement about the searched public record, not a claim of absolute priority; the
-receipt lists the unsearched and inaccessible sources.
+located no earlier public lower bound above Stromquist’s `2 + 4/sqrt(5)`. A bounded
+[endpoint-specific audit](../../../packing/resources/web/s11-exact-endpoint-literature-audit-2026-09-06/README.md)
+then found no public occurrence of T-022’s exact endpoint or formula on the searched
+surfaces. These are statements about the searched public record, not claims of absolute
+priority; the receipts list the search boundaries and inaccessible sources.
 
 ## Literature Refresh Addendum (2026-09-05)
 
@@ -105,8 +118,8 @@ precisely. See [Corrections to Common Summaries](#corrections-to-common-summarie
 **Added 2026-08-30.** This section preserves the project state on that date.
 The results below postdated the original report and were the project’s own; at that date
 none moved `s(11)`, which remained open with the original report’s gap.
-The [current summary](#current-summary-at-the-2026-09-05-refresh) records the later
-lower-bound improvement.
+The [current summary](#current-summary-through-2026-09-06) records the later lower-bound
+improvement.
 
 **The exact route now closes end to end, and the difference is exactly zero.**
 `discharge` stops at the side, which is a claim about a *number*. The round trip carries
@@ -149,8 +162,8 @@ project has since answered for itself.
 The report body below preserves the literature and project state audited on 2026-08-25.
 In particular, its `[3.788854, 3.877084]` intervals and `0.088230` gaps are historical,
 not the current project frontier.
-See the [current summary](#current-summary-at-the-2026-09-05-refresh) for the
-post-report interval.
+See the [current summary](#current-summary-through-2026-09-06) for the post-report
+interval.
 
 ## Questions to Answer
 

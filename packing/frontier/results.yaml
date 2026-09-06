@@ -1122,7 +1122,7 @@ results:
       n_values:
         - 11
     verification: V4
-    confirmation: C3
+    confirmation: C5
     significance:
       score: 5
       rationale: >-
@@ -1139,8 +1139,10 @@ results:
       equivariance for Condition 1, invariance of Conditions 2 and 3, inverse-dilation
       preservation of Condition 5, and a separate sharpened containment lemma proved by
       an exact rational-square comparison. Rational density and upward embedding then
-      supply the limit step. The derived claim has one proof-producing exact
-      implementation, so it takes the lower C3 confirmation rung.
+      supply the limit step. The mapped, non-superseded source-distinct review
+      independently re-derived the theorem and attacked the endpoint, frozen-Condition-4,
+      compactness, scale, and byte-trust boundaries, so the result reaches C5. It does
+      not reach C4 because the review is not a method-distinct second derivation.
     evidence:
       - E-n011-fractional-certificate
       - E-fractional-interval-decision
@@ -1152,10 +1154,11 @@ results:
       - packing/devtools/dilation_corollary.py
     controls:
       - packing/tests/test_dilation_corollary.py
+    review_artifact: docs/project/reviews/review-2026-09-06-t022-dilation-limit.md
     next_rung: >-
-      A second, method-distinct derivation could raise confirmation to C4, and a mapped
-      review packet could make it review-ready at C5. Neither would improve the bound.
-      This endpoint is only the uniform fixed-B, single-core strict-containment
-      supremum. Direction-specific cores or use of coverage-cell geometry might extract
-      more from the same data; the present argument cannot prove a strict bound at its
-      own endpoint.
+      C5 was reached by the mapped 2026-09-06 source-distinct review. A second,
+      method-distinct derivation could separately earn C4 but would not improve the
+      bound. This endpoint is only the uniform fixed-B, single-core strict-containment
+      supremum. Direction-specific cores, two-core endpoint averaging, or exact
+      fixed-atom core shrinkage might extract more from the same data; the present
+      argument cannot prove a strict bound at its own endpoint.

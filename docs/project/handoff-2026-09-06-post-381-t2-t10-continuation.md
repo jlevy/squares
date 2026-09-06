@@ -60,6 +60,9 @@ The continuation starts from these fixed facts:
 | T+0 | `2026-09-06T03:31:00Z` |
 | T+2 boundary | `2026-09-06T05:33:28Z` |
 | Portfolio allocation | 120 active minutes consumed; 1,320 remain |
+| T-022 promotion commit | `6b4cde0a` on this branch; independent review is a separate transport |
+| T-022 exact weak bound | `38100*sqrt(8100042893309449)/899996306539 = 3.810025723614703407...` |
+| T-022 proof-record SHA-256 | `16a52d54b95cbcdf7e97eab3b40b829ca24126141b7914ff224d2794af47d442` |
 | BC-232 retained leg-01 state | `f91999b452bf89f49e2d4cda9827efbf57623a4196688b5feba0819bc7e851e2` |
 | BC-232 retained leg-01 summary | `d8c50db8770b12d43baa6d9e2c7384a52a0f250f8cee26b6a036c99b3cb3350e` |
 | BC-232 retained leg-01 family | `4cfbdce5cb659d77d652c011854de74ddcad94c903eff30af07bbcb5d8d9cc3f` |
@@ -91,6 +94,10 @@ rewriting the historical T+2 manifests.
 Preserve these claim labels:
 
 - `T-018` remains the formal first-party claim `s(11) >= 381/100`.
+- `T-022` is the weak bound `s(11) >= 38100*sqrt(8100042893309449)/899996306539`,
+  obtained from every strict rational member of the uniform fixed-`B`, single-core
+  dilation family. It is not a certificate or no-fit decision at the algebraic endpoint
+  and proves no strict inequality there.
 - BC-232 reports an exact packing-family lower endpoint and a separate row-converged
   floating computational upper endpoint.
   Neither label transfers to the other quantity.
@@ -126,6 +133,50 @@ coordinator’s replacement authorization binds the exact pushed pre-launch head
 partial wall envelope; and the packet preserves every claim label and epistemic ceiling.
 A later gate also requires its two manager packets and the single joint disposition
 below. Any unmet condition is `NO-GO` with a named owner and blocking finding.
+
+The cold review may run while execution is held.
+It grants no execution authority and changes no bead, edge, criterion, or claim.
+A reviewer reconstructs the program in this order:
+
+1. This addendum for current execution, clocks, and authority.
+2. [`X-016`](../../packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md)
+   for strategic rationale; its original launch schedule is historical.
+3. Agenda 024 and the two manager agendas for portfolio and cell contracts.
+4. The frontier and generated results for established claims.
+5. Frozen primary packets for evidence.
+6. The epistemics and development documents for assurance and validation semantics.
+
+The reviewer returns three separate judgments: mathematical soundness, strategic
+priority, and release readiness.
+A sound theorem can be low priority, and a strong strategy does not make a release
+ready. The strategic judgment must ask whether a cheaper deduction is available from the
+retained evidence, whether each proposed route has a result that discriminates success
+from failure, and whether a premise, workstream, or relevant counterexample class is
+missing.
+
+Use these four workstreams when assigning or reviewing proposals:
+
+| Workstream | Accountable role | Scope |
+| --- | --- | --- |
+| Direct lower bound | Fractional manager | BC-232, scalar consequences, finite weighted certificates, and exact lower-bound promotion. |
+| Trump local theorem | Closure manager | BC-241 and only the scoped local-isolation and side-stability theorem. |
+| Equality-density program | Closure manager, with the transferable reviewer | BC-243, BC-244, exact a.e.-depth controls, primal coverage, and duality obligations. |
+| Global integration | Coordinator | Cross-lane theorem obligations, survivor coverage, assurance allocation, and `think-ntim`. |
+
+A new proposal enters through the coordinator with all of these fields:
+
+| Field | Required content |
+| --- | --- |
+| Evidence | Frozen input, derivation, source, or reproducible observation that motivates it. |
+| Affected claim | Exact theorem, bound, gate, or assumption it could change. |
+| Consequence | The discriminating result and what success or failure would imply. |
+| Owner | One accountable role and exclusive write scope. |
+| Dependency | Required evidence, gate, and tbd edges. |
+| Blocking class | Release-blocking, gate-blocking, or nonblocking satellite. |
+
+The coordinator records one disposition: `accept`, `reject`, `defer`, or
+`request_evidence`, with a reason.
+An unpriced or undispositioned proposal authorizes no execution.
 
 Each wrapper and scientific gate pair is one coordinator-owned transaction:
 
@@ -375,16 +426,22 @@ Do not select substitute work from the repository-wide ready list.
 | `think-283c` | Pre-release blocker | Reconcile the final integration audit before the T+2 release. |
 | `think-57kj` | Pre-release blocker | Audit and disposition the dilation corollary and possible sharper supremum bound above 3.81. |
 | `think-hvze` | Pre-release blocker | Correct the cold-review provenance by distinguishing its integrated input from isolated transport lineage. |
+| `think-hspy` | Pre-release blocker | Reconcile the duplicate BC-220 and BC-221 gate identities as joint transactions. |
+| `think-v4u3` | Pre-release blocker | Make this continuation the unambiguous current handoff in SYNOPSIS and X-016. |
+| `think-1lc2` | Pre-release blocker | Correct BC-243’s weighted-overlap controls. |
+| `think-yrto` | Pre-release blocker | Make the complete program reconstructable by a source-distinct cold senior. |
+| `think-66zs` | Terminal duplicate | Preserve the prerequisite-snapshot and endpoint-satellite requirements now owned by `think-yrto`. |
 | `think-r60v` | Pre-release umbrella gate | Suspend the stale authorization and bind both T+2 lanes to one structural release gate. |
 | `think-trn6` | Pre-release blocker | Supersede only BC-242’s obsolete combined BC-243 scheduling dependency. |
 | `think-ntim` | Longer-term; nonblocking | Price the final integration theorem, BC-244 duality obligations, and assurance work. |
 
-The authoritative `think-r60v` prerequisite set is `think-yjh8`, `think-qke4`,
-`think-g024`, `think-ualx`, `think-i6q1`, `think-283c`, `think-57kj`, `think-trn6`, and
-`think-hvze`. These identities define structure, not a status snapshot; live tbd status
-at the release transaction controls, and every prerequisite must then be terminal.
-Both T+2-to-T+4 lane beads, `think-6yx2` and `think-gab1`, must depend on `think-r60v`,
-and `think-r60v` must depend on the complete prerequisite set.
+At `2026-09-06T10:53:13Z`, `think-r60v` was blocked by `think-yjh8`, `think-qke4`,
+`think-g024`, `think-ualx`, `think-i6q1`, `think-283c`, `think-57kj`, `think-trn6`,
+`think-hspy`, `think-v4u3`, `think-1lc2`, `think-hvze`, terminal duplicate `think-66zs`,
+and `think-yrto`. This is a dated audit receipt, not an authoritative fixed set.
+The scoped live tbd graph controls at release, and every then-current prerequisite must
+be terminal. Both T+2-to-T+4 lane beads, `think-6yx2` and `think-gab1`, must depend on
+`think-r60v`, and `think-r60v` must depend on every current prerequisite.
 Any blocker added before release must join that umbrella before either lane can become
 ready. The coordinator owns these tbd edges and the terminal disposition.
 The fractional lane also requires the cooperative-stop implementation.
@@ -394,10 +451,21 @@ provisional packet. The coordinator must record that edge with
 `tbd dep add think-vniz think-jeyp` before release.
 `think-jeyp` is a prerequisite, not a direct child of this continuation epic.
 The two T+4-to-T+8 lane beads feed the T+8 gate, and the two final lane beads feed the
-T+10 landing. `think-a70y` and `think-ntim` are explicitly longer-term satellites and
-cannot block release or consume this continuation’s active time.
-`think-f5t7` runs as coordinator work across the whole continuation and never imports an
-open pull-request head.
+T+10 landing. `think-a70y`, `think-ntim`, `think-ixsm`, and `think-zq2u` are explicitly
+longer-term satellites and cannot block release or consume this continuation’s active
+time. `think-f5t7` runs as coordinator work across the whole continuation and never
+imports an open pull-request head.
+
+A cold reviewer can reproduce the release structure without changing state:
+
+```bash
+git rev-parse HEAD
+git merge-base --is-ancestor origin/main HEAD
+tbd dep list think-r60v --json
+tbd dep list think-vniz --json
+tbd dep list think-u8h0 --json
+tbd show think-jgnv --json
+```
 
 ### Future Integration and Assurance Boundary
 
@@ -411,6 +479,14 @@ The terminal `think-g024` Lean spike is a user-requested assurance commitment, n
 Condition 5 validity prerequisite.
 The `think-a70y` proof-producing Condition 5 receipt remains optional hardening unless a
 later gate promotes it.
+The `think-ixsm` two-core endpoint theorem is a nonblocking mathematical follow-up.
+It may establish endpoint no-fit and, with a separate compactness argument, a strict but
+nonquantified improvement; it is not part of T-022 and cannot change this release’s
+claim without its own proof packet and source-distinct review.
+The `think-zq2u` fixed-atom core-shrink route is the quantitative companion: it asks for
+an exact rational shrink with minimum net-core mass above the rescaling threshold
+`434547/440000`, or a retained obstruction.
+It is likewise nonblocking.
 These mathematical scope statements do not undo the operational disposition of either
 bead.
 
