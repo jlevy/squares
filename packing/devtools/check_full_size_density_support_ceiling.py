@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import signal
 import stat
 import sys
@@ -32,6 +33,7 @@ from sqpack.full_size_density.support_screen import extend_rows, initial_rows, p
 from sqpack.verify import exact_sign, verify_packing
 
 PACKET_BYTES = 2 * 1024 * 1024
+RATIONAL_TEXT = re.compile(r"-?(?:0|[1-9][0-9]*)(?:/[1-9][0-9]*)?")
 
 
 def load_source(source: str) -> tuple[tuple[Square, ...], FieldElement]:
@@ -219,6 +221,10 @@ def _keys(value: Any, expected: set[str]) -> dict[str, Any]:
 def _rational(value: Any) -> Fraction:
     if type(value) is not str or len(value) > 4096:
         raise SupportError("packet rational must be a bounded canonical string")
+    # Reject exponent syntax before conversion: a short exponent can allocate an
+    # unbounded integer even when the packet and its string lengths are capped.
+    if RATIONAL_TEXT.fullmatch(value) is None:
+        raise SupportError("packet rational is not canonical")
     result = checked_rational(value)
     if str(result) != value:
         raise SupportError("packet rational is not canonical")

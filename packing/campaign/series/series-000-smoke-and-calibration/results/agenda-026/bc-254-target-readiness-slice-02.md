@@ -4,9 +4,8 @@ Status: implementation and author controls complete; independent review, coordin
 readiness, and experiment freeze remain pending.
 No target LP, target row sequence, or arrangement was evaluated.
 This W7 pipeline-improvement slice (correctness) belongs to BC-254 / H-099 /
-`think-0qcu`, commissioned from
-`2026-09-06T19:52:12Z` through `2026-09-06T20:19:58Z`. The
-[reviewed design](bc-254-support-screen-spec.md) is unchanged.
+`think-0qcu`, commissioned from `2026-09-06T19:52:12Z` through `2026-09-06T20:19:58Z`.
+The [reviewed design](bc-254-support-screen-spec.md) is unchanged.
 The coordinator committed the reviewed toy baseline as `88277d92` before releasing these
 implementation files for this slice.
 

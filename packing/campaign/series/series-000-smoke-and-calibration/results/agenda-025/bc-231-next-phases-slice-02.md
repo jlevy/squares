@@ -82,8 +82,8 @@ The coordinator independently read the loader, its refusal tests and the BC-230
 serialized contract, then replayed the loader and first-slice adaptive tests under
 Python 3.14. No finding was identified in this control-only boundary.
 The review checked canonical rational spelling, noncoercive integer fields, bounded
-reads, declaration order, F4/F5 branch reachability, and the explicit separation
-between loading and a coverage or retention verdict.
+reads, declaration order, F4/F5 branch reachability, and the explicit separation between
+loading and a coverage or retention verdict.
 This does not complete the missing standalone, source-replay, or triad obligations.
 
 ## Remaining Work and Price

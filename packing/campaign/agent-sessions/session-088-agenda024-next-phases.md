@@ -548,8 +548,8 @@ experimental budget is extended by the new phase.
 The adaptive author returned both selected slices before their deadlines.
 The remaining 180–320 active-worker-minute estimate, plus unpriced source replays,
 requires a fresh portfolio decision; it is not automatically funded here.
-That worker now audits the scalar readiness controls under `think-zuq5` through
-20:12:28 UTC, without importing an open PR or starting the scalar optimization.
+That worker now audits the scalar readiness controls under `think-zuq5` through 20:12:28
+UTC, without importing an open PR or starting the scalar optimization.
 
 The selected first block has three workers and the coordinator.
 BC231 covers adaptive controls, BC254 a finite-support density discriminator, and BC255
