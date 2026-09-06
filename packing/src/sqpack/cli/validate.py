@@ -113,7 +113,40 @@ EXHAUSTIVE_TESTS = "exhaustive_exact"
 #: fixture three other tests in that file also use, and marking that one test would move
 #: the cost rather than remove it. A setup phase over the ceiling means the module moves,
 #: which is a judgement, not an automatic one.
-QUICK_TEST_CEILING_SECONDS = 5.0
+#:
+#: **12s, not the 5s this stood at, and the paragraph above is why it had to move.** That
+#: paragraph claims the gap between the 2s marking threshold and the ceiling leaves "about
+#: a factor of two of headroom so an ordinarily loaded runner cannot turn a passing test
+#: into a red pull request". The claim was right in form and wrong in magnitude: a factor
+#: of 2.5 is not enough for this runner.
+#:
+#: What was measured, over four consecutive CI runs of the same surface. The number of
+#: tests reported at or above 5s was 19, then 5, then 1, then 3 -- **a different set each
+#: time**, and every one of them a test measuring 1.5s to 3s locally.
+#: `test_static_fallback_and_epistemic_labels_are_structural` is 1.55s here and reported
+#: 5.68s there, a factor of 3.7, and it is unchanged by its neighbours so it is not a
+#: shared build. The tier's own wall moved 191.81s to 290.00s across those runs with no
+#: change to what it runs, so roughly half the spread is the runner rather than the load
+#: this gate places on it.
+#:
+#: A guard that fires on a different victim every run is noise, and the repair it invites
+#: is worse than the noise: marking whichever test lost, which builds exactly the curated
+#: list of slow tests that `SLOW_TESTS` exists to avoid, and does it with tests that are
+#: not slow. Three of the four runs above would have had a 1.5s test deferred to the deep
+#: surface for having noisy neighbours.
+#:
+#: So the headroom is six times the marking threshold rather than two and a half. A test
+#: genuinely worth deferring does 5s of work and would report near 18s under the inflation
+#: measured here, so it is still caught; a 2s test has to lose the lottery six times over
+#: before it is. What this does *not* weaken is the aggregate: the lane's total cost is
+#: bounded by the tier's own band in `devtools/gate-budgets.yaml`, which is measured, and
+#: that is the check that actually stops the lane creeping.
+#:
+#: The honest fix is to measure something contention-independent -- cpu time rather than
+#: wall -- so the threshold means the same thing on a quiet box and a loaded runner.
+#: pytest reports wall durations, so that needs a plugin rather than a constant, and it is
+#: a cell rather than a number.
+QUICK_TEST_CEILING_SECONDS = 12.0
 #: The other direction, and it exists because `OR-13` is a floor on coverage rather than a
 #: budget on time: a test leaves the pull-request surface by its own measured cost and
 #: nothing else, so a `slow` marker on a test that is no longer slow is coverage the
