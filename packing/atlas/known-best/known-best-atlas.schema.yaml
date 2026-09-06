@@ -26,7 +26,16 @@ properties:
   composite:
     type: object
     additionalProperties: false
-    required: [layout, renderer, square_count, svg, png_preview, png_high_resolution]
+    required:
+      [
+        layout,
+        renderer,
+        square_count,
+        svg,
+        png_preview,
+        png_high_resolution,
+        png_link_preview_card,
+      ]
     properties:
       layout: {const: '10 by 10, row-major n=1..100'}
       renderer: {const: sqpack deterministic composite renderer}
@@ -49,6 +58,23 @@ properties:
           scale: {const: 1}
           width: {const: 2400}
           height: {const: 2896}
+      png_link_preview_card:
+        # The one export that is a crop rather than a scale. Every unfurler shows a
+        # landscape card and centre-crops what it is handed, so a portrait canvas
+        # arrives as a band from the middle of the grid with the title gone. 2400x1256
+        # is 1.91:1 to the nearest whole pixel, which is the ratio those platforms
+        # want, so the crop here is the crop shown. Same width as the canvas, because
+        # it is the top of the same drawing and not a second one.
+        type: object
+        additionalProperties: false
+        required: [path, derived_from, scale, top_crop, width, height]
+        properties:
+          path: {const: atlas/known-best/known-best-1-100-card.png}
+          derived_from: {const: atlas/known-best/known-best-1-100.svg}
+          scale: {const: 1}
+          top_crop: {const: true}
+          width: {const: 2400}
+          height: {const: 1256}
       png_high_resolution:
         # The whole-number scale is the load-bearing constant, not the pixel counts:
         # a fractional scale lands every edge on a fractional pixel boundary and the

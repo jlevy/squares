@@ -64,90 +64,110 @@ jobs:
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
 
-      # Two surfaces, and the reason they are two (BC-214).
+      # `--fast` is the pull-request surface, and two separate pieces of work in one day
+      # made it what it is. They pull in opposite directions on purpose.
       #
-      # The pull-request surface is `--fast`, re-priced rather than replaced. On
-      # 2026-09-05 that tier cost 1369.60s on this runner (run 33982455466) and
-      # `fast behavioral tests` was 1324s -- 96.7 per cent -- of it, so every pull request
-      # paid twenty-two minutes, and a gate that charges that much is a gate people learn
-      # to route around.
+      # **Coverage went up.** Since 2026-09-05 the tier is fifty-eight of sixty-one steps,
+      # against thirty-seven before. Twenty-four steps used to run only after a merge, and
+      # two defects reached main through that gap and sat red for nine hours -- `D-455` in
+      # `deterministic SVG rendering` and `D-456` in the exhaustive tier -- neither of them
+      # something a pull request could have caught. The three still deferred are argued by
+      # their measurements above `STEPS`: the exhaustive tier at 1943.05s, the negative
+      # controls at 543.67s, the n=40 bracket at 221.36s.
       #
-      # The obvious cut was to take the behavioural suite off the pull request entirely.
-      # The measurement refused it: the eight real failures that suite caught on this
-      # branch were all sub-0.15-second tests, 0.46s of call time between them, so the
-      # wall was not where the detection was. Deferring the tier would have thrown away
-      # nearly all of the value for nearly none of the cost. What moves instead is the
-      # tail -- the tests measured at or above `QUICK_TEST_CEILING_SECONDS`, which carry
-      # the wall and, on the evidence of the last month, none of the failures.
+      # **Cost went down**, which is what made that affordable. The tier was 1369.60s on
+      # this runner (run 33982455466), of which `fast behavioral tests` was 96.7 per cent.
+      # Three measured changes took it to 177.02s: the behavioural suite splits by marker
+      # so the slow tail runs on the deep surface (`BC-214`); the quick lane runs under
+      # xdist, because a second GitHub job cannot shorten a wall that is one step
+      # (`BC-218`, which priced a second job at zero wall and +3 billed minutes); and the
+      # surface runs `--jobs 3`.
       #
-      # Nothing becomes optional. `QUICK_TESTS` and `SLOW_TESTS` are complements within
-      # the non-exhaustive suite and `EXHAUSTIVE_TESTS` is the rest, so every test is in
-      # exactly one lane; the step below runs the whole gate, all three lanes and every
-      # other declared step, on each push to `main`, on the daily schedule, and on
-      # `workflow_dispatch`, which can be dispatched against any branch -- so the deep
-      # surface is available on a pull request's own head on request. The two `if`
-      # conditions here are exact complements so that no event reaches neither step.
+      # Two results worth not rediscovering. Cutting the behavioural suite from the pull
+      # request was the obvious move and the measurement refused it: the eight real
+      # failures it caught that day were 0.46s of call time between them, so the wall was
+      # never where the detection was -- which is `OR-13`. And the quick lane sizes itself
+      # to `cpus - jobs + 1` rather than to the machine: asking for every cpu beside two
+      # other lanes put nineteen ordinary tests over the per-test ceiling on contention
+      # alone, and a ceiling measured under oversubscription exiles tests for having noisy
+      # neighbours.
       #
-      # What the split costs is stated rather than hidden: a pull request can now be green
-      # while a deferred test is broken. What is deferred is the slow tail, and the honest
-      # summary of it is that no failure in the last month has come from there.
-      # One job, and BC-218 priced the alternatives rather than assuming this one.
-      #
-      # The tempting read of BC-214's 409s is that it is a queue: a dozen steps of
-      # comparable cost on one runner, waiting for each other, and a fan-out of jobs would
-      # pay their maximum instead of their sum. The step table refuses it. At 88f7e5f8
-      # (run 33985984585, job 101359470209) the tier's wall was 408.55s and `fast
-      # behavioral tests` was 408.09s of it -- 99.9 per cent. `--jobs 2` had already put
-      # every other step in the second lane, where the whole visible cost was 135.17s, and
-      # they finished with the wall to spare. There was no queue. There was one step.
-      #
-      # So the shapes priced out like this, all against a measured 11s of checkout, uv
-      # install and `uv sync` that any new job repeats:
-      #
-      #   * A second job for the record checks: wall unchanged at ~425s, because the
-      #     behavioural step still runs alone for 409s of it, and +3 billed minutes for
-      #     work that was already free. Strictly worse, and rejected on the numbers.
-      #   * A matrix over the deep surface: same argument one level up. That surface's
-      #     wall is 2491.83s (run 33982793449) and `exhaustive exact behavioral tests` is
-      #     1765.82s of it, so a matrix pays N setups to arrive at a floor set by one step.
-      #   * Parallelism inside the step: 306.4s to 135.0s at `-n 4` on a four-core box,
-      #     and 56.6s with two shared cached builds removed from the lane. This is the one
-      #     that moves, and the measured half of it is wired in `_fast_tests`.
-      #
-      # Two things follow, for whoever reads this next. The remaining wall is not sequencing
-      # either: 121s of the 306.4s is two tests being billed for a build they share with a
-      # test BC-214 deferred, they are why this step still fails its own per-test ceiling,
-      # and `test_the_slow_marker_is_declared_only_by_measured_nodes` records why marking
-      # them is not the fix.
-      #
-      # `--jobs 3`, and this is the measured step rather than the predicted one. At
-      # `--jobs 2` on 69e4d545 the tier was 170.58s of wall over 319.81s of work -- 1.87x,
-      # so the pool was already near its limit and the wall was two roughly equal lanes.
-      # Removing the shared builds takes `fast behavioral tests` from 132.04s to about
-      # 74s, which leaves ~262s of work whose largest indivisible piece is the type floor
-      # at 73.69s. A third lane brings the wall toward that floor; a fourth cannot pass it.
-      #
-      # What this trades, stated because it is the thing that could make it worse: the
-      # runner has four cpus, and `fast behavioral tests` already asks pytest for one
-      # worker per cpu, so a third concurrent step oversubscribes. `--inner-jobs 1` still
-      # caps every *other* step at one worker, so the contention is the quick lane against
-      # two single-process steps rather than a free-for-all. It is expected to pay and it
-      # is not assumed to: the next run prints the wall, and if it is not below 170.58s
-      # this goes back to 2 with the number written here.
+      # Nothing became optional. `QUICK_TESTS` and `SLOW_TESTS` are complements within the
+      # non-exhaustive suite and `EXHAUSTIVE_TESTS` is the rest, so every test is in
+      # exactly one lane, and the post-merge jobs are checked disjoint and exhaustive by
+      # `test_the_post_merge_jobs_partition_the_gate`. What the split costs is stated
+      # rather than hidden: a pull request can be green while a deferred test is broken.
       - name: Run the required pull-request surface
         if: "github.event_name == 'pull_request'"
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --fast --jobs 3 --inner-jobs 1
 
-      # The deep surface: no tier flag, so every declared step runs, and everything the
-      # pull-request surface stopped running lands here. Do not narrow this command --
-      # a tier flag here is how a step ends up in neither surface.
+      # Everything except the exhaustive exact tier, which is the `exhaustive` job below.
+      # `--skip` is what stops it running here as well: without it the two jobs would both
+      # pay 1943s for the same step. The two selections partition the gate, and
+      # `test_the_post_merge_jobs_partition_the_gate` is what keeps them a partition when a
+      # step is added.
+      #
+      # `--skip` is the only narrowing allowed here, and only because that test proves it
+      # is still a partition. A *tier* flag on this command would be a different thing and
+      # is not allowed: a tier is a filter nothing checks the complement of, so it is how a
+      # step ends up in neither surface, which is the gap `D-455` and `D-456` came through.
       - name: Run the complete integration surface
         if: "github.event_name != 'pull_request'"
         run: >-
           uv run --frozen --all-extras --group dev
-          packing-validate --jobs 2 --inner-jobs 2
+          packing-validate --skip "exhaustive exact behavioral tests"
+          --jobs 2 --inner-jobs 2
+
+  exhaustive:
+    # The exhaustive exact tier, on its own runner, reporting its own verdict against its
+    # own budget (think-tr2z).
+    #
+    # It was 1943s of the complete surface's 2755s, sharing a two-core runner with the
+    # behavioural suite. When it outgrew its budget on 2026-09-05 the gate killed it with
+    # its output still in an unflushed pipe (D-456), so `validate` went red on three
+    # consecutive merges while saying nothing at all about the sixty other steps, and a
+    # real failure arriving behind it would have looked identical. Split, this job answers
+    # one question -- do the complete finite certificate decisions still pass -- and the
+    # job above answers the rest.
+    #
+    # No `packing-required` dependency: it does not run on pull requests, because at half
+    # an hour it is the one step whose cost rules it out of the pull-request tier. The
+    # workflow-level concurrency group still cancels it with the rest of a superseded run.
+    if: "github.event_name != 'pull_request'"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        # Shallow is enough: the provenance step that needs full history is not in this
+        # selection. kpress is vendored at vendor/kpress and installed from that path, so
+        # the environment does not resolve without the submodule checked out.
+        with:
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      # One step, so `--jobs 1`; `--inner-jobs 2` is the setting the 1943s reading was
+      # taken under, and this job now has the whole two-core runner to spend on it.
+      - name: Run the exhaustive exact tier
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --only "exhaustive exact behavioral tests"
+          --jobs 1 --inner-jobs 2
 
   packing-required:
     # `!cancelled()` rather than `always()`. With `always()`, a run superseded by the next

@@ -448,7 +448,7 @@ class Deadlines:
 
     Every question asked through here is *anti-monotone* in its reference instant: it
     becomes true with time alone. Against the wall clock that makes the gate's verdict
-    a function of when it ran rather than of the commit, which is `D-463`; the instant
+    a function of when it ran rather than of the commit, which is `D-468`; the instant
     therefore comes from HEAD's committer date, and where there is none the question is
     recorded as unanswerable instead of answered. See `sqpack.campaign.commit_clock`.
     """
@@ -1640,7 +1640,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 2
     # HEAD's committer date, not the wall clock: the refusals it decides become true
     # with time alone, so a wall-clock anchor makes this gate's verdict a fact about
-    # when CI ran rather than about the commit (`D-463`).
+    # when CI ran rather than about the commit (`D-468`).
     clock = project_clock(PROJECT_ROOT)
     series = load(ROOT / "series", "series", "*/README.md")
     explorations = load(ROOT / "explorations", "exploration")

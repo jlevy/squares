@@ -2,7 +2,7 @@
 
 # Defect log
 
-463 defects recorded across the packing toolchain.
+468 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
 | `review` | 275 | a human or agent reading the work against a checklist |
 | `anomaly` | 15 | a result that made no sense, chased down |
-| `inspection` | 55 | reading the code or the design with intent |
+| `inspection` | 59 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 69 | the automated test suite |
+| `gate` | 70 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 69 of 463, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 70 of 468, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 69 of 463, and none of
 | quench | 23 |
 | verifier | 9 |
 | record | 146 |
-| tooling | 165 |
+| tooling | 170 |
 | docs | 109 |
 
 ## By kind
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 69 of 463, and none of
 | --- | ---: |
 | soundness | 94 |
 | validity | 118 |
-| bookkeeping | 174 |
+| bookkeeping | 179 |
 | robustness | 59 |
 | performance | 18 |
 
@@ -231,7 +231,7 @@ This is the actionable list.
 | D-429 | outstanding | low | The generated-view comparison folds an ellipsis but not the space the formatter puts before it | `think-ahyr` |
 | D-431 | outstanding | medium | T-009's significance rationale compares its interval certificate against a different packing | `think-stb5` |
 | D-460 | contained | low | A research cell with no hypothesis cannot produce a round, and BC-206 was written that way | `think-c0qm` |
-| D-462 | outstanding | medium | Two branches allocated the same three defect ids to different defects, and nothing local can see it | `think-8bcl` |
+| D-467 | outstanding | medium | Two branches allocated the same three defect ids to different defects, and nothing local can see it | `think-8bcl` |
 
 ## Every defect
 
@@ -697,9 +697,14 @@ This is the actionable list.
 | [D-458](packing/frontier/covering-values.yaml) | 2026-09-05 | record | bookkeeping |  | `gate` | medium | fixed | A frozen-artifact path named a moving pointer, so a superseded rung quoted its successor's mass |
 | [D-459](development.md) | 2026-09-05 | tooling | robustness |  | `inspection` | low | fixed | A conflicted branch produced no CI at all, and no checks reads as pending rather than red |
 | [D-460](packing/campaign/agendas/agenda-022-the-conditional-route.md) | 2026-09-05 | record | bookkeeping |  | `gate` | low | contained | A research cell with no hypothesis cannot produce a round, and BC-206 was written that way |
-| [D-461](packing/devtools/gate-budgets.yaml) | 2026-09-05 | tooling | performance |  | `inspection` | medium | fixed | The pull-request tier tripled inside a cap with 3.61x of headroom, and no check could have objected |
-| [D-462](conventions.md) | 2026-09-05 | record | bookkeeping |  | `inspection` | medium | outstanding | Two branches allocated the same three defect ids to different defects, and nothing local can see it |
-| [D-463](packing/src/sqpack/campaign/commit_clock.py) | 2026-09-05 | tooling | validity | neutral | `anomaly` | high | fixed | The record gate judged four refusals against the wall clock, so a green commit did not stay green |
+| [D-461](packing/tests/test_explainer.py) | 2026-09-05 | tooling | bookkeeping |  | `inspection` | low | fixed | The Pages filter named the composite PNG and PDF but not the SVG the figure shows |
+| [D-462](packing/devtools/repo_scope.py) | 2026-09-05 | tooling | bookkeeping |  | `inspection` | low | fixed | A plain git clone fails the documentation check |
+| [D-463](packing/devtools/templates/explainer-shell.html) | 2026-09-05 | tooling | bookkeeping |  | `inspection` | low | fixed | Three canvases took every touch, so the page could not be scrolled past them |
+| [D-464](packing/devtools/templates/explainer-shell.html) | 2026-09-05 | tooling | bookkeeping |  | `inspection` | low | fixed | Every link on the page failed contrast in dark mode |
+| [D-465](packing/devtools/run_negative_controls.py) | 2026-09-05 | tooling | bookkeeping |  | `gate` | low | fixed | The gate counted its own render output against the mutation-snapshot cap |
+| [D-466](packing/devtools/gate-budgets.yaml) | 2026-09-05 | tooling | performance |  | `inspection` | medium | fixed | The pull-request tier tripled inside a cap with 3.61x of headroom, and no check could have objected |
+| [D-467](conventions.md) | 2026-09-05 | record | bookkeeping |  | `inspection` | medium | outstanding | Two branches allocated the same three defect ids to different defects, and nothing local can see it |
+| [D-468](packing/src/sqpack/campaign/commit_clock.py) | 2026-09-05 | tooling | validity | neutral | `anomaly` | high | fixed | The record gate judged four refusals against the wall clock, so a green commit did not stay green |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

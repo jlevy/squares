@@ -149,6 +149,10 @@ uv run --frozen --all-extras --group dev packing-validate --fast
 # One named component. --only is repeatable and matches displayed step names.
 uv run --frozen --all-extras --group dev packing-validate --only "basin identity"
 
+# Everything but one. --skip takes the same repeatable, substring-matched names, and
+# refuses a pattern that names no step rather than quietly removing nothing.
+uv run --frozen --all-extras --group dev packing-validate --skip "negative controls"
+
 # Full integration checkpoint used locally and in CI.
 uv run --frozen --all-extras --group dev packing-validate
 
@@ -208,15 +212,21 @@ D-239 is resolved.
 
 On pull requests, [`packing-validation.yml`](.github/workflows/packing-validation.yml)
 runs `packing-validate --fast` on Linux and reports the stable `packing-required`
-aggregate.
+aggregate. Since 2026-09-05 that tier is fifty-eight of the sixty-one steps rather than
+thirty-seven: twenty-one steps that had run only after a merge were promoted into it,
+because a tier costs the longer of its behavioral suite and everything else, not the sum
+([D-455, D-456](defects.md), think-k4fb). Three steps stay out, each on a measurement
+recorded beside `STEPS` in `packing/src/sqpack/cli/validate.py`: the negative controls,
+the `n=40` rigidity bracket, and the exhaustive exact tier.
 
-The behavioral suite runs in three lanes, and they partition it: `QUICK_TESTS`,
+**The behavioral suite runs in three lanes, and they partition it.** `QUICK_TESTS`,
 `SLOW_TESTS` and `EXHAUSTIVE_TESTS` in `sqpack/cli/validate.py` are marker expressions
 over `slow` and `exhaustive_exact`, and every test satisfies exactly one, so a test
 cannot be in two lanes and cannot be in none.
 `--fast` runs the quick lane; the full gate adds `slow behavioral tests` and
 `exhaustive exact behavioral tests`, so nothing the pull-request surface stops running
-stops running.
+stops running. Measured 2026-09-06: the tree collects 2,251 tests — 53 exhaustive exact,
+92 slow, and 2,106 in the quick lane.
 
 **The boundary is a ceiling the gate enforces, not a list it trusts.**
 `fast behavioral tests` passes `QUICK_TEST_CEILING_SECONDS` to pytest as
@@ -229,14 +239,23 @@ The `call` phase and not setup, because a module-scoped fixture bills its whole 
 whichever test triggers it first, and marking that test would move the cost rather than
 remove it. The marker registries are checked the same way for both markers: the declared
 set is pinned by a test, so a marker cannot be added without stating what it measured.
+The quick lane runs under xdist at `cpus - jobs + 1` workers, sized to what the box has
+left rather than to what it has, because asking for every cpu beside the other lanes put
+nineteen ordinary tests over the per-test ceiling on contention alone.
 
 Pushes to `main`, manual dispatches, and the daily schedule run the complete locked
-command on Linux and macOS. The daily cadence is `BC-214`: it is the schedule that
-catches a deferred test breaking on a branch that never reaches `main`, and a weekly one
-would leave up to seven days between the break and the run that names it.
+command on Linux and macOS, split across two jobs since 2026-09-05: `validate` runs
+everything but the exhaustive exact tier (`--skip`), and `exhaustive` runs that tier and
+nothing else (`--only`), so a tier that was 1943s of a 2755s surface carries its own
+budget and its own verdict instead of deciding whether the other sixty steps are
+reported at all (think-tr2z). `--skip TEXT` is `--only` read the other way round,
+repeatable and matching displayed step names the same way; a pattern naming no step is
+refused rather than ignored, since a `--skip` that silently matches nothing runs more
+than it meant to and says nothing.
+The daily cadence is `BC-214`: it is the schedule that catches a deferred test breaking
+on a branch that never reaches `main`, and a weekly one would leave up to seven days
+between the break and the run that names it.
 The macOS integration job also runs the focused deep-golden step directly.
-The default validator runs the 118-test core and 21-test exhaustive exact branches as
-separate direct steps.
 Negative controls use at most two workers while honoring the `--inner-jobs` cap;
 integration CI opts into two inner workers explicitly.
 D-203’s temporary expected-failure classifier was removed after the repaired producer
@@ -618,13 +637,13 @@ mean equal bytes for every tracked file, including the code that does the verify
 which is strictly stronger than hashing the artifacts a step reads.
 **But it addresses only the tree**, and three steps in this gate answer to something
 else. `campaign record` judges four refusals — an expired lease and a passed session,
-workflow-phase or delegation deadline — against a reference instant, which until `D-463`
+workflow-phase or delegation deadline — against a reference instant, which until `D-468`
 was the wall clock and is now HEAD’s committer date; two runs of one commit therefore
 agree, and two commits carrying the same tree still need not.
 `bead tree` reads the bead store in `.git/tbd/data-sync-worktree`, which is not in any
 tree, and `provenance: recorded commits are reachable` reads the git graph and the clone
 depth — `D-226` is the run where CI discarded the history its own provenance gate
-needed. A rule that skips on tree identity has to keep running those three; what `D-463`
+needed. A rule that skips on tree identity has to keep running those three; what `D-468`
 licenses is narrower and exact, that a scheduled rerun of the *same commit* now agrees
 with the run before it, which is what the unmoved-tree count above is made of.
 `tests/test_gate_repetition.py` holds that agreement as an assertion rather than a

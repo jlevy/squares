@@ -961,15 +961,15 @@
           "state": "closed-form"
         },
         "lower": {
-          "display": "s(20) ≥ 4.8",
+          "display": "s(20) ≥ 4.85",
           "evidence": [
             "E-fractional-interval-decision",
-            "E-n020-fractional-certificate"
+            "E-n020-fractional-certificate-97-20"
           ],
           "first_proved_here": true,
           "provenance": "frontier",
           "shown": true,
-          "value": "4.8"
+          "value": "4.85"
         },
         "n": 20,
         "optimality": {
@@ -1006,15 +1006,15 @@
           "state": "closed-form"
         },
         "lower": {
-          "display": "s(21) ≥ 4.8",
+          "display": "s(21) ≥ 4.85",
           "evidence": [
             "E-fractional-interval-decision",
-            "E-n020-fractional-certificate"
+            "E-n020-fractional-certificate-97-20"
           ],
           "first_proved_here": true,
           "provenance": "frontier",
           "shown": true,
-          "value": "4.8"
+          "value": "4.85"
         },
         "n": 21,
         "optimality": {

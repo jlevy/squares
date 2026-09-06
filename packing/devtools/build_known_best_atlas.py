@@ -97,6 +97,7 @@ MANIFEST = ATLAS_ROOT / "manifest.json"
 SUMMARY_SVG = ATLAS_ROOT / "known-best-1-100.svg"
 SUMMARY_PNG = ATLAS_ROOT / "known-best-1-100.png"
 SUMMARY_PNG_2X = ATLAS_ROOT / "known-best-1-100@2x.png"
+SUMMARY_PNG_CARD = ATLAS_ROOT / "known-best-1-100-card.png"
 GENERATOR = "python -m devtools.build_known_best_atlas"
 USER_AGENT = "thinking-scratchpad-known-best-atlas/1.0"
 
@@ -332,6 +333,11 @@ class RasterExport:
     path: Path
     scale: int
     role: str
+    #: Drawing units kept from the top, or None for the whole canvas. A cropped
+    #: export is rendered from a copy of the SVG whose viewport is this tall, so the
+    #: rasteriser draws the band directly rather than drawing the canvas and
+    #: discarding most of it, and no image library enters the pipeline.
+    crop_units: int | None = None
 
     @property
     def width(self) -> int:
@@ -339,7 +345,7 @@ class RasterExport:
 
     @property
     def height(self) -> int:
-        return SUMMARY_HEIGHT * self.scale
+        return (self.crop_units or SUMMARY_HEIGHT) * self.scale
 
     @property
     def name(self) -> str:
@@ -358,9 +364,25 @@ class RasterExport:
 #
 # 2x rather than 3x because 3x costs 2,150,682 bytes for detail past what the
 # 1x preview already resolves, and this is a binary paid for on every clone.
+#
+# The card is the third, and it is a crop rather than a scale. Every unfurler shows a
+# landscape card and center-crops what it is given, so the portrait composite loses its
+# title and keeps a band from the middle of the grid -- the part that says least about
+# what the picture is. Cropping it here means the crop is chosen rather than inherited:
+# SUMMARY_CARD_UNITS is the title block plus four whole rows, and the sliver of the
+# fifth that completes the ratio reads as a continuation rather than a cut. 2400x1256 is
+# 1.911:1, which is 1.91:1 to the nearest whole pixel, so a platform expecting that
+# ratio crops nothing at all.
+SUMMARY_CARD_UNITS = 1256
 SUMMARY_RASTERS = (
     RasterExport(path=SUMMARY_PNG, scale=1, role="preview"),
     RasterExport(path=SUMMARY_PNG_2X, scale=2, role="high-resolution export"),
+    RasterExport(
+        path=SUMMARY_PNG_CARD,
+        scale=1,
+        role="link-preview card",
+        crop_units=SUMMARY_CARD_UNITS,
+    ),
 )
 
 
@@ -1454,6 +1476,22 @@ def _png_matches_summary(export: RasterExport, svg_text: str) -> bool:
     )
 
 
+def _cropped_svg(svg_text: str, export: RasterExport) -> str:
+    """The SVG an export is drawn from: the drawing itself, or a shortened viewport.
+
+    An SVG viewport clips, so narrowing `viewBox` and `height` on the root is the whole
+    crop: the rasteriser draws the band and never draws what falls outside it. Only the
+    root is touched, and only for an export that asks, so the receipt stamped into every
+    raster still names the sha256 of the one drawing all three come from.
+    """
+    if export.crop_units is None:
+        return svg_text
+    root = ET.fromstring(svg_text)
+    root.set("height", str(export.crop_units))
+    root.set("viewBox", f"0 0 {SUMMARY_WIDTH} {export.crop_units}")
+    return ET.tostring(root, encoding="unicode")
+
+
 def _update_png_export(export: RasterExport, svg_text: str) -> None:
     """Draw one raster from the SVG, with the same rasteriser that draws the PDF.
 
@@ -1471,7 +1509,7 @@ def _update_png_export(export: RasterExport, svg_text: str) -> None:
     if _png_matches_summary(export, svg_text):
         return
     content = cairosvg.svg2png(
-        bytestring=svg_text.encode("utf-8"),
+        bytestring=_cropped_svg(svg_text, export).encode("utf-8"),
         output_width=export.width,
         output_height=export.height,
         background_color="white",
@@ -1656,6 +1694,14 @@ def _expected_outputs() -> tuple[dict[Path, str], dict]:
                     "scale": 2,
                     "width": SUMMARY_WIDTH * 2,
                 },
+                "png_link_preview_card": {
+                    "derived_from": "atlas/known-best/known-best-1-100.svg",
+                    "height": SUMMARY_CARD_UNITS,
+                    "path": "atlas/known-best/known-best-1-100-card.png",
+                    "scale": 1,
+                    "top_crop": True,
+                    "width": SUMMARY_WIDTH,
+                },
                 "png_preview": {
                     "derived_from": "atlas/known-best/known-best-1-100.svg",
                     "height": SUMMARY_HEIGHT,
@@ -1692,13 +1738,13 @@ def update() -> None:
         with atomic_output_file(path) as temporary:
             temporary.write_text(content, encoding="utf-8")
     # The composite ships as one family drawn from one SVG in one run: the vector
-    # itself, both PNG rasters, and the PDF. Splitting the exports across commands
-    # is what would let three of the four be current and the fourth be last week's.
+    # itself, every PNG raster, and the PDF. Splitting the exports across commands
+    # is what would let four of the five be current and the fifth be last week's.
     _update_png_exports(outputs[SUMMARY_SVG])
     render_composite_pdf.update()
     print(
-        "known-best atlas updated: 100 witnesses, 100 house renderings, "
-        "1 composite (SVG, 2 PNG rasters, PDF), 100 frontier links"
+        f"known-best atlas updated: 100 witnesses, 100 house renderings, 1 composite "
+        f"(SVG, {len(SUMMARY_RASTERS)} PNG rasters, PDF), 100 frontier links"
     )
 
 

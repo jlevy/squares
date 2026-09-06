@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """The instant a record gate judges its time-based refusals against.
 
-`D-463`. Several of `packing-ledger check`'s refusals are *anti-monotone* in their
+`D-468`. Several of `packing-ledger check`'s refusals are *anti-monotone* in their
 reference instant -- an expired lease, a passed session deadline, a passed workflow-phase
 deadline and a passed delegation deadline all become true with time alone. Read against
 the wall clock, that makes the gate's verdict a function of when CI happened to run

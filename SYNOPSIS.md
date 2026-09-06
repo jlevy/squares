@@ -2691,7 +2691,7 @@ nothing was tested — but the ledger’s round count and effort attribution do 
 them. The check that would refuse the shape at draft time, rather than at the experiment
 record, is named in the entry and not built.
 
-`D-462` stands `outstanding`, and it is the one entry here that no check inside this
+`D-467` stands `outstanding`, and it is the one entry here that no check inside this
 repository can close.
 Two branches allocated `D-455`, `D-456` and `D-457` to six different defects while both
 were open, and the collision repeated one level down at `D-458` when the second branch
@@ -2761,8 +2761,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | claimed by a session | 115 | 29,742 | 16,800 | 349 | 2,808 | 170.08 h |
-| claimed by none | 10 | 1,460 | 878 | 32 | 173 | 6.87 h |
-| **measured** | **125** | **31,202** | **17,678** | **381** | **2,981** | **176.95 h** |
+| claimed by none | 11 | 4,135 | 2,355 | 83 | 459 | 25.86 h |
+| **measured** | **126** | **33,877** | **19,155** | **432** | **3,267** | **195.94 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -3210,14 +3210,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 463 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 468 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 94 | asserted something false about the mathematics |
 | validity | 118 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 174 | recorded something its own evidence contradicts |
+| bookkeeping | 179 | recorded something its own evidence contradicts |
 | robustness | 59 | did not finish, or finished only by luck |
 | performance | 18 | worked, but cost far more than it should |
 
@@ -3227,10 +3227,10 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixty-nine defects in 463, and no soundness defect
-ever.** Every soundness failure was found by a control cell whose answer was known in
-advance, a rule written down before the measurement, a generated view contradicting its
-source, or someone reading carefully.
+**The automated gate has caught seventy defects in 468, and no soundness defect ever.**
+Every soundness failure was found by a control cell whose answer was known in advance, a
+rule written down before the measurement, a generated view contradicting its source, or
+someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Gate-detected entries here are mechanical process, implementation, or
 test-validity failures, found by contiguity, integration, mutation-anchor,

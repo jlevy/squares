@@ -21,7 +21,7 @@ def _clock(instant: dt.datetime) -> Clock:
     """A certified anchor for a fixture, standing in for HEAD's committer date.
 
     `ledger.check` judges its time-based refusals against the commit rather than the
-    wall clock (`D-463`), so a fixture supplies the instant the same way a checkout
+    wall clock (`D-468`), so a fixture supplies the instant the same way a checkout
     does.
     """
     return Clock(instant.astimezone(dt.UTC), f"fixture commit {instant:%Y-%m-%dT%H:%M:%SZ}")
@@ -533,7 +533,7 @@ def test_live_offset_lease_is_compared_as_the_same_utc_instant(
 def test_a_lease_expired_at_the_commit_is_still_a_stale_claim(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """`D-463` moved this refusal's reference instant, so assert it still refuses.
+    """`D-468` moved this refusal's reference instant, so assert it still refuses.
 
     The case that must not fire had a test above and the case that must fire had none,
     which is the asymmetry that lets a refusal be retired by accident.
@@ -843,7 +843,7 @@ def test_depends_on_resolves_across_agendas_like_discharged_by(
     )
 
 
-# `D-463`. The commit anchor the record gate judges its time-based refusals against, and
+# `D-468`. The commit anchor the record gate judges its time-based refusals against, and
 # what it does where a tree cannot supply one.
 
 

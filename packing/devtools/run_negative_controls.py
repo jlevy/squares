@@ -112,12 +112,28 @@ PRUNE = frozenset(
         # `build_known_best_atlas --check` and `render_composite_pdf --check` replay, and
         # together 0.8 MB of every private worker's snapshot. The 2x raster joins them on
         # the same grounds and for 1.3 MB more, which is the larger half of the reason.
+        # The link-preview card joins its three siblings on 2026-09-05, on exactly their
+        # grounds: a generated export of the same drawing, carrying the same source
+        # receipt the same `--check` replays, named by no control. 0.2 MB.
         ROOT / "atlas/known-best/contact-overlays",
+        ROOT / "atlas/known-best/known-best-1-100-card.png",
         ROOT / "atlas/known-best/known-best-1-100.pdf",
         ROOT / "atlas/known-best/known-best-1-100.png",
         ROOT / "atlas/known-best/known-best-1-100@2x.png",
         ROOT / "atlas/known-best/rendering",
         ROOT / "atlas/prospective/rendering",
+        # `site` is a stronger case than any of the above and is here for a different
+        # reason: it is not repository content at all. The explainer's renderer writes
+        # the page, the published Markdown and four copies of the composite there on
+        # every run; the directory is gitignored, so no clone has ever contained it and
+        # no control can name it. This walk counts the working tree rather than the git
+        # tree, so it was counting 4,377,699 bytes of the gate's own output back into
+        # the gate's own budget -- which is D-422's shape, one directory over: on
+        # 2026-09-05 the snapshot measured 71,086,910 against the 67,108,864 cap, and
+        # `site` alone is more than the whole 3,978,046-byte breach. A raised cap would
+        # have hidden that rather than fixed it, which is what the note above this
+        # constant says to check for before raising it a second time.
+        ROOT / "site",
         # The n=17 weighted-certificate solver state joins them on 2026-09-03, when the
         # H-052 lane committed exp-059's completion record and its checkpoint and pushed
         # the snapshot to 90,031,065 bytes against the 67,108,864 cap. Counted over the

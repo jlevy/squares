@@ -275,7 +275,7 @@ def test_the_campaign_record_verdict_does_not_move_with_the_wall_clock() -> None
     deadline, a passed workflow-phase deadline and a passed delegation deadline all
     become true with time alone -- so a tree that was green in the morning was red in the
     evening with no byte changed. It cost PR 83 two CI cycles in one evening and is
-    `D-463`.
+    `D-468`.
 
     It now asserts the opposite, which is the property that made the defect a defect: one
     fixed tree, two wall clocks straddling the record's own deadline, one verdict. The
@@ -317,7 +317,7 @@ def test_the_campaign_record_verdict_does_not_move_with_the_wall_clock() -> None
 
 
 def test_a_record_already_overrun_when_it_was_committed_is_still_refused() -> None:
-    """The other half of `D-463`: the anchor moved, the refusal did not go away.
+    """The other half of `D-468`: the anchor moved, the refusal did not go away.
 
     A gate made reproducible by dropping what it catches is not a fix, so the same
     synthetic session is committed an hour *after* its own deadline -- it claimed to be

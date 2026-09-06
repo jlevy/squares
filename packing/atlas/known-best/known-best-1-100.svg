@@ -470,7 +470,7 @@
     <text x="2284.5" y="622.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <polygon data-feature="legend-star" points="2261.5,609.46 2263.555356666666666666666667,615.3711533333333333333333333 2269.81174,615.49934 2264.82557,619.2808466666666666666666667 2266.637663333333333333333333,625.27066 2261.5,621.696 2256.362336666666666666666667,625.27066 2258.17443,619.2808466666666666666666667 2253.18826,615.49934 2259.444643333333333333333333,615.3711533333333333333333333" fill="#a3123f" data-evidence="lower bound first proved here" />
     <text data-feature="side-bound" x="2136" y="646" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="0.77">(20) ≤ 5</tspan></text>
-    <text data-feature="lower-bound" x="2136" y="663" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="0.77">(20) ≥ </tspan><tspan fill="#a3123f">4.8</tspan></text>
+    <text data-feature="lower-bound" x="2136" y="663" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="0.77">(20) ≥ </tspan><tspan fill="#a3123f">4.85</tspan></text>
   </g>
   <g data-feature="packing-card" data-n="21" data-row="2" data-column="0" data-source-id="W-known-best-n021">
     <rect data-feature="container-outline" x="84" y="690" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" />
@@ -500,7 +500,7 @@
     <text x="232.5" y="874.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <polygon data-feature="legend-star" points="209.5,861.46 211.5553566666666666666666667,867.3711533333333333333333333 217.81174,867.49934 212.82557,871.2808466666666666666666667 214.6376633333333333333333333,877.27066 209.5,873.696 204.3623366666666666666666667,877.27066 206.17443,871.2808466666666666666666667 201.18826,867.49934 207.4446433333333333333333333,867.3711533333333333333333333" fill="#a3123f" data-evidence="lower bound first proved here" />
     <text data-feature="side-bound" x="84" y="898" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="0.77">(21) ≤ 5</tspan></text>
-    <text data-feature="lower-bound" x="84" y="915" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="0.77">(21) ≥ </tspan><tspan fill="#a3123f">4.8</tspan></text>
+    <text data-feature="lower-bound" x="84" y="915" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="0.77">(21) ≥ </tspan><tspan fill="#a3123f">4.85</tspan></text>
   </g>
   <g data-feature="packing-card" data-n="22" data-row="2" data-column="1" data-source-id="W-known-best-n022">
     <rect data-feature="container-outline" x="312" y="690" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" />

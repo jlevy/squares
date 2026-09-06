@@ -411,7 +411,7 @@ why “already inside the band” is not a reason to stop optimising.
 
 The evidence is that slow cycles do not merely cost time, they cost *coverage*, because
 a gate people cannot afford to run is a gate that stops reporting.
-`D-461`: the tier went from 499 s to 1369.60 s and nobody noticed for six days, because
+`D-466`: the tier went from 499 s to 1369.60 s and nobody noticed for six days, because
 an 1800 s cap had 3.61× of slack and could not object.
 Worse, the workflow cancels a run when a newer push arrives, so a push cadence faster
 than the tier’s own wall produces **no completed run at all** — three runs on one branch
