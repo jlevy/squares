@@ -116,7 +116,6 @@ def _rich_scaffold() -> ContactScaffold:
     )
 
 
-@pytest.mark.slow
 def test_exhaustive_connected_graph_quotient_through_five_vertices() -> None:
     labeled_counts = []
     topology_counts = []

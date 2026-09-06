@@ -574,14 +574,9 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_check_declared_bounds.py": {
             "test_n68_depth_bound_is_named_by_its_refusal_test",  # 3.4s
         },
-        # 29s of call time across 2.
+        # 24s of call time across 1.
         "test_contact_assembly_labels.py": {
             "test_every_rich_d4_and_relabeling_image_has_one_label",  # 23.6s
-            # 5.2s on CI at the `checks` shape, 2.2s on the box the rest were measured
-            # on. Marked on the CI reading, which is the one the ceiling is applied to:
-            # the pull-request surface runs three gate steps on four cpus since the tier
-            # split, so a test measured alone is not measured where it is judged.
-            "test_exhaustive_connected_graph_quotient_through_five_vertices",  # 5.2s
         },
         # 9s of call time across 4.
         "test_contact_scaffold_atlas.py": {
