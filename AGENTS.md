@@ -24,7 +24,6 @@ Generated from [`operating-rules.md`](operating-rules.md), which carries the evi
 for each rule. Edit there, not here.
 
 <!-- BEGIN OPERATING RULES SUMMARY -->
-
 - **OR-1:** Build the tool; never leave a measurement in one-off code.
 - **OR-2:** Run three to five sub-agents, at a thinking level matched to the task.
 - **OR-3:** Never wait on a gate with nothing else in flight.
@@ -36,7 +35,12 @@ for each rule. Edit there, not here.
 - **OR-9:** A pull request leads with what the branch cost.
 - **OR-10:** Treat matched agent and host handoffs as continuation, not a reset.
 - **OR-11:** Close an agenda through disposition and reprioritization.
-
+- **OR-12:** One block in four to eight is an efficiency block, and the record says
+  which.
+- **OR-13:** Every fast check runs in CI; only the unavoidably slow ones leave.
+- **OR-14:** A development cycle is never artificially slow.
+- **OR-15:** Outcome over ceremony, and process is revised on a cadence rather than on
+  irritation.
 <!-- END OPERATING RULES SUMMARY -->
 
 ## Build & Test
@@ -68,11 +72,27 @@ the tools (`devtools`, `cases`, `tests`, `benchmarks`, the console scripts), and
 standalone verifiers under `packing/cases/n11_fractional_certificate/` run on any
 CPython 3.12 or later by design.
 Python, Rust, and research validation are documented in
-[`development.md`](development.md).
+[`development.md`](development.md); **the five validation tiers and the three behavioral
+lanes are tabulated in
+[development.md → Validation Loops](development.md#validation-tiers)**, which is the one
+place they are written down.
+Read it before changing what runs where.
+
 Run them from `packing/`, which is where the project’s `pyproject.toml` and lockfile
-live: `uv run --frozen --all-extras --group dev packing-validate --edit` while editing,
-`packing-validate --push` before any push (the edit tier plus the tests reachable from
-the change), and the full `packing-validate` at a research or merge checkpoint.
+live:
+
+| When | Command |
+| --- | --- |
+| while editing | `uv run --frozen --all-extras --group dev packing-validate --edit` |
+| before any push | `packing-validate --push` — the edit tier plus the tests reachable from the change |
+| before touching a registry | `packing-validate --records` |
+| what every pull request runs | `packing-validate --fast` |
+| at a research or merge checkpoint, and to close a session | the full `packing-validate` |
+
+`OR-13` is the policy behind that split: every fast check runs on the pull-request
+surface, and only the unavoidably slow ones leave it, each on its own measurement.
+`OR-14` is why the surface is kept quick — a development cycle is never artificially
+slow, and its target is two to two and a half minutes.
 
 ### Markdown formatting
 

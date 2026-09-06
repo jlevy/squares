@@ -46,6 +46,7 @@ import subprocess
 import sys
 from collections.abc import Sequence
 from dataclasses import dataclass
+from functools import cache
 from pathlib import Path
 
 from sqpack.cli.validate import changed_paths
@@ -97,8 +98,21 @@ def _module_name(path: Path) -> str | None:
     return None
 
 
+@cache
 def _imports_of(path: Path) -> set[str] | None:
-    """Top-level dotted names this file imports, or None when it cannot be parsed."""
+    """Top-level dotted names this file imports, or None when it cannot be parsed.
+
+    Memoized on the path for the life of the process, which is exactly one selection in
+    production: `main` calls `select_tests` once, and `packing-validate --push` reaches
+    this module as a subprocess (twice, `--summary` then `--run`, each a fresh process).
+    So no consumer can observe a tree that moved under the memo. The repeat caller is
+    `tests/test_reachable_tests.py`, which puts ten questions to one static tree; the
+    five that get past the everything-shortcuts each re-parsed every mapped file, at
+    1.25s to 1.52s a call and 6.97s of the quick lane between them.
+
+    The returned set is shared between callers now. `select_tests` only reads it; a
+    future caller that wants to mutate one has to copy it first.
+    """
     try:
         tree = ast.parse(path.read_text(encoding="utf-8"))
     except OSError, SyntaxError, UnicodeDecodeError:
@@ -125,8 +139,13 @@ def _imports_of(path: Path) -> set[str] | None:
     return found
 
 
+@cache
 def _mapped_files() -> dict[str, Path]:
-    """Every mapped module name to its file, packages included via __init__."""
+    """Every mapped module name to its file, packages included via __init__.
+
+    Memoized for the same reason and under the same guarantee as `_imports_of`, and read
+    rather than mutated by its one caller.
+    """
     files: dict[str, Path] = {}
     for _package, directory in PACKAGE_ROOTS:
         for path in sorted(directory.rglob("*.py")):
@@ -250,6 +269,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         if selection.everything
         else [str((ROOT.parent / test).relative_to(ROOT)) for test in selection.tests]
     )
+    # `not exhaustive_exact`, which keeps the `slow` lane in. That is deliberate and it
+    # is the difference between this tier and the pull-request surface: `--fast` defers
+    # every test above the per-test ceiling because it pays for them on every pull
+    # request, while `--push` pays only for the tests your own change reaches, and a slow
+    # test your change reaches is exactly the one worth waiting for.
     command = (
         sys.executable,
         "-m",

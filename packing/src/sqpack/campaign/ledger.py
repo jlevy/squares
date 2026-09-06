@@ -31,12 +31,14 @@ import re
 import sys
 from collections import Counter, defaultdict
 from collections.abc import Sequence
+from dataclasses import dataclass
 from pathlib import Path
 
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
 from sqpack.assurance import check_experiment_semantics
+from sqpack.campaign.commit_clock import Clock, project_clock
 from sqpack.project import (
     ProjectLayoutError,
     add_version_argument,
@@ -425,6 +427,54 @@ def dead_links() -> list[str]:
     return problems
 
 
+@dataclass(frozen=True, slots=True)
+class Findings:
+    """What the whole-set pass concluded, split by whether it could conclude at all.
+
+    Two lists rather than one, because they are different claims. A refusal this
+    checkout could not evaluate is a fact about the checkout, never a verdict about the
+    record, so it cannot join `problems`; and it cannot be dropped either, or
+    "uncheckable" quietly becomes "checked" (`conventions.md` §6). `judged` is the
+    other half of that pair: the count of time-based refusals actually decided.
+    """
+
+    problems: list[str]
+    uncheckable: list[str]
+    judged: int
+
+
+class Deadlines:
+    """Has this moment passed, as of one fixed instant, and what could not be asked.
+
+    Every question asked through here is *anti-monotone* in its reference instant: it
+    becomes true with time alone. Against the wall clock that makes the gate's verdict
+    a function of when it ran rather than of the commit, which is `D-468`; the instant
+    therefore comes from HEAD's committer date, and where there is none the question is
+    recorded as unanswerable instead of answered. See `sqpack.campaign.commit_clock`.
+    """
+
+    def __init__(self, clock: Clock) -> None:
+        self.clock = clock
+        self.judged = 0
+        self.uncheckable: list[str] = []
+
+    def passed(self, moment: dt.datetime, *, what: str, inclusive: bool = True) -> bool:
+        """Whether `moment` lies at or before the anchor. Unanswerable reads as `False`.
+
+        Timestamps in the record are written with and without an offset; a naive one
+        means UTC, which is what the campaign schemas require of every clock they
+        accept. Converting rather than dropping the offset matters -- discarding it
+        moves the instant, and would expire a live west-of-UTC lease hours early.
+        """
+        anchor = self.clock.instant
+        if anchor is None:
+            self.uncheckable.append(what)
+            return False
+        self.judged += 1
+        against = moment if moment.tzinfo is not None else moment.replace(tzinfo=dt.UTC)
+        return against <= anchor if inclusive else against < anchor
+
+
 def check(  # noqa: C901 - a flat list of record invariants, each a few lines; see mccabe
     series,
     explorations,
@@ -433,12 +483,13 @@ def check(  # noqa: C901 - a flat list of record invariants, each a few lines; s
     sessions,
     *,
     agendas,
-    now: dt.datetime,
+    clock: Clock,
     logbook_entries=None,
-) -> list[str]:
+) -> Findings:
     """Whole-set invariants. Per-artifact validation cannot see any of these."""
     logbook_entries = logbook_entries or []
     problems = []
+    deadlines = Deadlines(clock)
 
     for label, items in (
         ("series", series),
@@ -839,15 +890,11 @@ def check(  # noqa: C901 - a flat list of record invariants, each a few lines; s
         expires = (experiment.get("lease") or {}).get("expires")
         if not expires:
             problems.append(f"{name}: in-progress without a lease")
-        # Leases may be written with or without a timezone; `now` here is naive UTC.
-        # Interpret a naive lease as UTC and convert an aware lease before dropping its
-        # timezone. Merely removing an offset changes the instant and can expire a live
-        # west-of-UTC lease several hours early.
+        # Leases may be written with or without a timezone; `Deadlines.passed` reads a
+        # naive one as UTC and compares an aware one at its own offset.
         else:
             parsed_expiry = dt.datetime.fromisoformat(expires)
-            if parsed_expiry.tzinfo is not None:
-                parsed_expiry = parsed_expiry.astimezone(dt.UTC).replace(tzinfo=None)
-            if parsed_expiry < now:
+            if deadlines.passed(parsed_expiry, what=f"{name}: lease expiry", inclusive=False):
                 problems.append(f"{name}: STALE CLAIM, lease expired {expires}")
 
     for session in sessions:
@@ -880,12 +927,11 @@ def check(  # noqa: C901 - a flat list of record invariants, each a few lines; s
             ):
                 problems.append(f"{name}: deadline_at exceeds budget.wall_minutes")
         clocked = session_started is not None and session_deadline is not None
-        current = now if now.tzinfo is not None else now.replace(tzinfo=dt.UTC)
         if (
             status == "in_progress"
             and clocked
             and session_deadline is not None
-            and session_deadline <= current
+            and deadlines.passed(session_deadline, what=f"{name}: session deadline_at")
         ):
             problems.append(f"{name}: in-progress session deadline_at has passed")
 
@@ -967,7 +1013,9 @@ def check(  # noqa: C901 - a flat list of record invariants, each a few lines; s
                     if (
                         phase_status == "in_progress"
                         and deadline is not None
-                        and deadline <= current
+                        and deadlines.passed(
+                            deadline, what=f"{name}: workflow phase {number} deadline_at"
+                        )
                     ):
                         problems.append(
                             f"{name}: in-progress workflow phase {number} deadline_at "
@@ -1122,7 +1170,9 @@ def check(  # noqa: C901 - a flat list of record invariants, each a few lines; s
             if (
                 delegation_status == "in_progress"
                 and delegation_deadline is not None
-                and delegation_deadline <= current
+                and deadlines.passed(
+                    delegation_deadline, what=f"{name}: delegation deadline_at"
+                )
             ):
                 problems.append(f"{name}: in-progress delegation deadline_at has passed")
             if delegation.get("started_at") is not None and delegation_started is None:
@@ -1190,7 +1240,11 @@ def check(  # noqa: C901 - a flat list of record invariants, each a few lines; s
     )
     problems += dead_links()
 
-    return problems
+    return Findings(
+        problems=problems,
+        uncheckable=deadlines.uncheckable,
+        judged=deadlines.judged,
+    )
 
 
 def status_of(hypothesis: dict, rounds: list[dict], *, results: Sequence[str] = ()) -> str:
@@ -1549,6 +1603,22 @@ def render(
     return "\n".join(lines) + "\n"
 
 
+def report_clock(findings: Findings, clock: Clock) -> None:
+    """Say how many time-based refusals were decided, and how many could not be.
+
+    Counted apart, and never summed. A checkout with no history answers none of them,
+    and a line reporting only the total would read as coverage this run did not have.
+    """
+    print(
+        f"  time-based refusals: {findings.judged} judged, "
+        f"{len(findings.uncheckable)} uncheckable ({clock.source})"
+    )
+    if findings.uncheckable:
+        print("    a checkout that cannot date HEAD is no evidence against these:")
+        for line in findings.uncheckable:
+            print(f"    UNCHECKABLE {line}")
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     add_version_argument(parser)
@@ -1568,7 +1638,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     except ProjectLayoutError as error:
         print(f"packing-ledger: error: {error}", file=sys.stderr)
         return 2
-    now = dt.datetime.now(dt.UTC).replace(tzinfo=None)
+    # HEAD's committer date, not the wall clock: the refusals it decides become true
+    # with time alone, so a wall-clock anchor makes this gate's verdict a fact about
+    # when CI ran rather than about the commit (`D-468`).
+    clock = project_clock(PROJECT_ROOT)
     series = load(ROOT / "series", "series", "*/README.md")
     explorations = load(ROOT / "explorations", "exploration")
     hypotheses = load(ROOT / "hypotheses", "hypothesis")
@@ -1578,16 +1651,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     logbook_entries = load(ROOT / "research-loop-logbook", "logbook_entry", "run-*.md")
     results = load_results()
 
-    problems = check(
+    findings = check(
         series,
         explorations,
         hypotheses,
         experiments,
         sessions,
         agendas=agendas,
-        now=now,
+        clock=clock,
         logbook_entries=logbook_entries,
     )
+    problems = findings.problems
     for problem in problems:
         print(f"FAIL {problem}", file=sys.stderr)
 
@@ -1620,6 +1694,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         f"{len(sessions)} agent {session_label}, {len(agendas)} agendas, "
         f"{len(logbook_entries)} logbook entries"
     )
+    report_clock(findings, clock)
     return 0
 
 

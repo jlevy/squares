@@ -199,7 +199,7 @@ relevant source audit.
 | [**Atlas**](packing/atlas/README.md) | Known-best and prospective packings, contact-scaffold enumeration, and deterministic renderings |
 | [**Literature**](packing/resources/README.md) | Retained primary sources, cleaned transcriptions, and raw extractions |
 | [**Reports**](#reports) | Six research reports on the mathematics, algorithms, infrastructure, formal proof, and search strategy |
-| [**Code and development guide**](development.md) | Exact verification, search, promotion, testing, and validation commands |
+| [**Code and development guide**](development.md) | Exact verification, search, promotion, and the [validation tiers and behavioral lanes](development.md#validation-tiers) that gate every change |
 | [**Campaign record**](packing/campaign/README.md) | Hypotheses, preregistered experiments, session records, agendas, and generated ledger |
 | [**Defect log**](defects.md) | Generated record of defects, detection methods, fixes, and regressions |
 
@@ -305,6 +305,16 @@ uv run --frozen packing-witness verify witnesses/schadt-n029-2025-rational.yaml
 uv run --frozen python -m cases.trump11.verify_exact
 uv run --frozen --all-extras --group dev packing-validate --edit
 ```
+
+`--edit` is the smallest of five validation tiers.
+Which steps each tier runs, what it costs, and which of the three behavioral lanes a
+test lands in are tabulated in
+[**development.md → Validation Loops**](development.md#validation-tiers); the ceilings
+themselves are data the gate reads, in
+[`packing/devtools/gate-budgets.yaml`](packing/devtools/gate-budgets.yaml).
+In short: a contributor runs `--edit` while editing and `--push` before pushing, every
+pull request runs `--fast`, and the complete gate runs on `main` and at the end of a
+research block.
 
 [`Witness/v2`](packing/witnesses/witness.schema.yaml) is the interchange format for
 supported rational, algebraic, and decimal witnesses.

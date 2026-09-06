@@ -57,6 +57,28 @@ from devtools.audit_n54_source_formula import derive_receipt
 FIXTURE = Path("cases/n54_source_contract/synthetic_fixture.n54")
 
 
+@pytest.fixture(scope="module")
+def base_receipt() -> dict[str, Any]:
+    """The unmutated field receipt, derived once for the whole module.
+
+    `derive_receipt()` is a sympy derivation -- eight `simplify` identities and five
+    `minpoly` computations -- and it costs 2.9s per call. Nothing in this module wants a
+    *second* derivation: the mutation tests below want one receipt they can each break in
+    a different place, which is why every call site already deep-copies before touching
+    it. Derived per parametrization it was 16.56s of the quick lane's 149.31s of call
+    time, five re-derivations of a value that is frozen by construction.
+
+    That the derivation itself holds is asserted where it belongs and not here:
+    `test_audit_n54_source_formula.py::test_n54_source_formula_closes_in_one_quartic_field`
+    runs it in the slow lane, its two named negative controls refuse a perturbed input,
+    and the full gate's `n=54 source formula` step runs the tool's own `--check`.
+
+    Module scope rather than session: this is the only module that derives it, and a
+    session fixture would advertise a sharing that does not exist.
+    """
+    return cast(dict[str, Any], derive_receipt())
+
+
 def _comment(payload: str) -> bytes:
     return f"<!--@n54 {payload}-->\n".encode()
 
@@ -258,6 +280,7 @@ def test_quartic_arithmetic_reduces_and_inverts_every_tested_nonzero_element() -
         FIELD_ZERO.inverse()
 
 
+@pytest.mark.slow
 def test_audited_receipt_binds_exact_field_builtins_and_digest() -> None:
     binding = bind_field_receipt()
 
@@ -271,6 +294,7 @@ def test_audited_receipt_binds_exact_field_builtins_and_digest() -> None:
     )
 
 
+@pytest.mark.slow
 def test_synthetic_fixture_evaluates_exactly_in_assignment_order() -> None:
     parsed = parse_fixture(FIXTURE.read_bytes())
     evaluated = evaluate_fixture(parsed)
@@ -295,9 +319,9 @@ def test_synthetic_fixture_evaluates_exactly_in_assignment_order() -> None:
     ],
 )
 def test_field_receipt_semantic_drift_is_refused_before_digest(
-    mutation: str, message: str
+    mutation: str, message: str, base_receipt: dict[str, Any]
 ) -> None:
-    receipt = cast(dict[str, Any], copy.deepcopy(derive_receipt()))
+    receipt = copy.deepcopy(base_receipt)
     if mutation == "field-name":
         receipt["field"]["name"] = "Q(q)"
     elif mutation == "field-polynomial":
@@ -313,7 +337,11 @@ def test_field_receipt_semantic_drift_is_refused_before_digest(
         bind_field_receipt(receipt)
 
 
+@pytest.mark.slow
 def test_field_receipt_digest_drift_is_refused() -> None:
+    # Deliberately NOT the `base_receipt` fixture. This test is deferred to the deep
+    # surface, where a `call` phase under 1s fails the floor; taking the derivation from
+    # a fixture would move its 2.9s into `setup` and hand the marker straight back.
     receipt = cast(dict[str, Any], copy.deepcopy(derive_receipt()))
     receipt["scope"] = "mutated unprojected scope"
 
@@ -321,6 +349,7 @@ def test_field_receipt_digest_drift_is_refused() -> None:
         bind_field_receipt(receipt)
 
 
+@pytest.mark.slow
 def test_exact_evaluation_refuses_an_algebraically_zero_denominator() -> None:
     parsed = parse_fixture(
         _comment("zero = Sin[a] - Tan[a] * Cos[a]") + _comment("refused = 1 / zero")
@@ -475,6 +504,7 @@ def test_synthetic_correspondence_refuses_endpoint_and_structural_drift() -> Non
         select_synthetic_correspondence(sources, rows, (*edges, edges[0]))
 
 
+@pytest.mark.slow
 def test_n54_result_has_the_exact_frozen_profile_and_mutation_receipts() -> None:
     fixture_content = FIXTURE.read_bytes()
     result = build_n54_result(fixture_content)
@@ -553,6 +583,7 @@ def test_canonical_json_loader_refuses_duplicate_float_and_noncanonical_bytes(
         load_canonical_json(content)
 
 
+@pytest.mark.slow
 def test_canonical_json_round_trip_and_float_refusal() -> None:
     content = build_n54_result_bytes(FIXTURE.read_bytes())
 
@@ -563,6 +594,7 @@ def test_canonical_json_round_trip_and_float_refusal() -> None:
         canonical_json_bytes({"value": 1.0})
 
 
+@pytest.mark.slow
 def test_author_cli_is_stdout_only_and_identical_under_optimization() -> None:
     expected = build_n54_result_bytes(FIXTURE.read_bytes())
     outputs: list[bytes] = []

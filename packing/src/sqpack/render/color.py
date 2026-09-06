@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from dataclasses import dataclass, field
-from decimal import ROUND_HALF_UP, Decimal, localcontext
+from decimal import ROUND_CEILING, ROUND_FLOOR, ROUND_HALF_UP, Decimal, localcontext
 from functools import cache
 from math import atan2, cos, degrees, hypot, radians, sin
 
@@ -543,17 +543,53 @@ def _edge_match_residual(
     left: tuple[tuple[Decimal, Decimal], tuple[Decimal, Decimal]],
     right: tuple[tuple[Decimal, Decimal], tuple[Decimal, Decimal]],
 ) -> Decimal:
+    # Written out rather than looped. This is the innermost comparison of an O(n^2)
+    # edge sweep -- forty million calls over the prospective atlas alone -- and the two
+    # index generators cost more than the eight subtractions they drive. The argument
+    # order is the comprehensions': endpoint major, axis minor, so equal residuals still
+    # resolve to the same Decimal instance and the same emitted text.
+    (left_x0, left_y0), (left_x1, left_y1) = left
+    (right_x0, right_y0), (right_x1, right_y1) = right
     direct = max(
-        abs(left[endpoint][axis] - right[endpoint][axis])
-        for endpoint in range(2)
-        for axis in range(2)
+        abs(left_x0 - right_x0),
+        abs(left_y0 - right_y0),
+        abs(left_x1 - right_x1),
+        abs(left_y1 - right_y1),
     )
     reverse = max(
-        abs(left[endpoint][axis] - right[1 - endpoint][axis])
-        for endpoint in range(2)
-        for axis in range(2)
+        abs(left_x0 - right_x1),
+        abs(left_y0 - right_y1),
+        abs(left_x1 - right_x0),
+        abs(left_y1 - right_y0),
     )
     return min(direct, reverse)
+
+
+def _contact_box(
+    edges: tuple[tuple[tuple[Decimal, Decimal], tuple[Decimal, Decimal]], ...],
+    *,
+    tolerance: Decimal,
+) -> tuple[Decimal, Decimal, Decimal, Decimal]:
+    """One square's corner box, grown by the contact tolerance and never shrunk.
+
+    A residual within tolerance puts every endpoint coordinate of the two edges within
+    tolerance of each other, so two squares whose grown boxes are disjoint on either
+    axis cannot hold a matching edge pair. Screening on that is what keeps the sweep
+    from spending 254s on forty million residuals that a coordinate comparison refuses.
+
+    The rounding modes are the soundness argument: coordinates carry more significant
+    digits than the working precision, so the growth is rounded outward in both
+    directions and the box is never smaller than the exact one.
+    """
+    xs = [point[0] for edge in edges for point in edge]
+    ys = [point[1] for edge in edges for point in edge]
+    with localcontext() as context:
+        context.prec = ANGLE_WORKING_DIGITS
+        context.rounding = ROUND_FLOOR
+        low_x, low_y = min(xs) - tolerance, min(ys) - tolerance
+        context.rounding = ROUND_CEILING
+        high_x, high_y = max(xs) + tolerance, max(ys) + tolerance
+    return low_x, high_x, low_y, high_y
 
 
 def _edge_wall_candidates(
@@ -597,8 +633,18 @@ def _full_side_contacts(
                 )
                 if contact.residual <= contact_tolerance
             )
+    boxes = [_contact_box(edges, tolerance=contact_tolerance) for edges in square_edges]
     for left_index, left_edges in enumerate(square_edges):
+        left_low_x, left_high_x, left_low_y, left_high_y = boxes[left_index]
         for right_index in range(left_index + 1, len(square_edges)):
+            right_low_x, right_high_x, right_low_y, right_high_y = boxes[right_index]
+            if (
+                left_high_x < right_low_x
+                or right_high_x < left_low_x
+                or left_high_y < right_low_y
+                or right_high_y < left_low_y
+            ):
+                continue
             if (
                 _orientation_distance(orientations[left_index], orientations[right_index])
                 > angle_tolerance
