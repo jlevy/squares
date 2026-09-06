@@ -1,5 +1,6 @@
 """Guard the exploratory report against accepting invalid or incomparable evidence."""
 
+import shutil
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
@@ -165,6 +166,17 @@ def test_end_cannot_understate_declared_worker_allocation() -> None:
     }
     with pytest.raises(ValueError, match="contradictory worker allocation"):
         completed_runs([start, end])
+
+
+def test_render_rejects_an_experiment_without_yaml_frontmatter(tmp_path: Path) -> None:
+    shutil.copy(DEFAULT_ROOT / "experiment.schema.yaml", tmp_path / "experiment.schema.yaml")
+    (tmp_path / "experiments").mkdir()
+    (tmp_path / "experiments" / "bad-experiment.md").write_text(
+        "# No Frontmatter\n\nThis file has no YAML frontmatter.\n"
+    )
+    (tmp_path / "runs").mkdir()
+    with pytest.raises(ValueError, match=r"lacks YAML frontmatter.*bad-experiment\.md"):
+        render(tmp_path)
 
 
 def test_retained_report_matches_the_actual_experiment_corpus() -> None:

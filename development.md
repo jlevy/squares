@@ -823,6 +823,17 @@ PACKING_VALIDATION_ARTIFACT_DIR="$(mktemp -d /tmp/packing-validation.XXXXXX)" \
   uv run --frozen --all-extras --group dev packing-validate
 ```
 
+A retained checkpoint archive is packed and verified with
+`python -m devtools.checkpoint_manifest` (`pack` to build a deterministic tar.gz and
+SHA-256 manifest from the output directory, `check` to verify a manifest against its
+archive). The packer excludes macOS metadata (`._*`, `.DS_Store`) and records per-file
+SHA-256 hashes beside the archive:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.checkpoint_manifest \
+  check packing/benchmarks/validation-efficiency/checkpoints/*.manifest.json
+```
+
 The [engineering campaign](packing/benchmarks/validation-efficiency/README.md) records
 controlled optimization comparisons separately from checkpoint evidence.
 Its maintained instrument retains raw output and receipts; its generated report
@@ -873,7 +884,7 @@ rule and none of them is about `touches`:
   them. Every one of those repeated the whole gate.
 - **53 of 55 merges to `main` carried a tree byte-identical to the pull-request head**
   merged, so the pull-request surface had already run against exactly those bytes.
-- **8 of the 64 steps declare no `touches` at all**, deliberately, and they are the
+- **8 of the 66 steps declare no `touches` at all**, deliberately, and they are the
   expensive ones — so `touches` cannot prune the deep surface by cost.
   The escape hatch that protects a mis-declared pattern is reachable by 17 of 1,933
   tracked files, 0.9 per cent, which is far less protection than its own docstring

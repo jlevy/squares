@@ -64,7 +64,7 @@ observations across named runs are context, not a controlled speedup experiment.
 | --- | --- | --- |
 | PR fast surface | 2m22s overall; four Linux jobs 1m58s–2m15s including setup | [PR run](https://github.com/jlevy/squares/actions/runs/34023121156) |
 | Full main checkpoint | 27m33s; integration 24m19s and exhaustive 27m28s concurrently | [Main run](https://github.com/jlevy/squares/actions/runs/34025346801) |
-| Deferred checkpoint | 27m01s; deferred checks 12m32s and exhaustive 26m53s concurrently | [Deep gate run](https://github.com/jlevy/squares/actions/runs/34028227026) |
+| Deferred checkpoint | 27m01s; deferred checks 12m32s and exhaustive 26m53s concurrently | [Deferred checkpoint run](https://github.com/jlevy/squares/actions/runs/34028227026) |
 | Publication | 54s; build 36s and deployment 10s | [Pages run](https://github.com/jlevy/squares/actions/runs/34025346806) |
 
 The complete ordinary gate has 66 steps; 62 run on PRs as 48 checks, nine geometry

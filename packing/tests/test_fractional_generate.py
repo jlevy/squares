@@ -153,7 +153,7 @@ def _oracle_against_sweep(
     # and scalar searches for every Cartesian pair in that same set.
     u_cells = _midpoint_cell_indices(reduction.u_events, grid.u_events)
     v_cells = _midpoint_cell_indices(reduction.v_events, grid.v_events)
-    cells = np.asarray(reduction.cells, dtype=np.intp)
+    cells = np.asarray(reduction.cells, dtype=np.intp).reshape(-1, 2)
     lacking = int(np.count_nonzero(~grid.reachable[u_cells[cells[:, 0]], v_cells[cells[:, 1]]]))
     return min(mass for mass, _, _, _ in found), float(exact), lacking
 
