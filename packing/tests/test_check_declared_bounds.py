@@ -137,15 +137,17 @@ def test_n68_depth_bound_is_named_by_its_refusal_test() -> None:
     assert "bounded parser limits" in str(evidence["detail"])
     assert depth["guard_messages"] == ["SVG structure exceeds the bounded parser limits"]
 
-    # The standalone verifier is loaded through runpy, so its refusal test names the
-    # declaring paths explicitly instead of presenting a statically resolvable import.
     for name in ("MAX_ATOMS", "MAX_DIRECTIONS"):
         bound = _entry(receipt, f"cases/n11_fractional_certificate/verify_claim.py::{name}")
         assert bound["status"] == "named"
-        assert [(item["path"], item["function"]) for item in bound["named_by"]] == [
+        assert [
+            (reference["path"], reference["function"], reference["kind"])
+            for reference in bound["named_by"]
+        ] == [
             (
                 "tests/test_verify_claim.py",
                 "test_a_certificate_above_the_ceiling_is_refused_before_any_condition",
+                "guard-message",
             )
         ]
 
@@ -168,6 +170,100 @@ def test_unnamed_bound_is_refused(tmp_path: pathlib.Path) -> None:
     assert receipt["ok"] is False
     assert declared.main(["--root", str(tmp_path)]) == 1
     assert declared.main(["--root", str(tmp_path), "--json"]) == 1
+
+
+def test_a_guard_message_assigned_before_the_raise_names_its_bound(
+    tmp_path: pathlib.Path,
+) -> None:
+    """The message may be built locally before it is passed to the exception."""
+    _fixture(tmp_path)
+    parser = tmp_path / "cases/fixture_case/parser.py"
+    parser.write_text(
+        FIXTURE_CASE.replace(
+            'raise ValueError("fixture structure exceeds the synthetic depth bound")',
+            'message = f"fixture structure exceeds the synthetic depth bound: {depth}"\n'
+            "        raise ValueError(message)",
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    receipt = declared.report(tmp_path, allowlist={})
+
+    depth = _entry(receipt, "cases/fixture_case/parser.py::MAX_FIXTURE_DEPTH")
+    assert depth["status"] == "named"
+    assert depth["named_by"][0]["kind"] == "guard-message"
+    assert depth["named_by"][0]["function"] == "test_depth_bound_refuses"
+    assert [entry["name"] for entry in receipt["violations"]] == ["MAX_FIXTURE_WIDTH"]
+
+
+@pytest.mark.parametrize("assigned", [False, True], ids=["inline", "assigned"])
+@pytest.mark.parametrize(
+    ("message", "unrelated_literal"),
+    [
+        (
+            "f\"{record['private_mapping_key_for_atoms']} exceeds the declared ceiling\"",
+            "display private_mapping_key_for_atoms in the user interface",
+        ),
+        ('f"atoms {len(record)}"', "unrelated atoms displayed in blue"),
+    ],
+    ids=["formatted-expression-key", "short-rendered-fragment"],
+)
+def test_incidental_message_fragments_do_not_name_an_untested_bound(
+    tmp_path: pathlib.Path, *, assigned: bool, message: str, unrelated_literal: str
+) -> None:
+    """A dictionary key or generic word does not demonstrate a bound's refusal."""
+    _fixture(tmp_path)
+    guard = (
+        f"message = {message}\n        raise ValueError(message)"
+        if assigned
+        else f"raise ValueError({message})"
+    )
+    (tmp_path / "cases/fixture_case/parser.py").write_text(
+        "MAX_ATOMS = 2\n\ndef parse(record):\n"
+        '    if len(record["atoms"]) > MAX_ATOMS:\n'
+        f"        {guard}\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "tests/test_fixture_case.py").write_text(
+        "def test_unrelated_display():\n"
+        f"    assert {unrelated_literal!r}.endswith({unrelated_literal[-4:]!r})\n",
+        encoding="utf-8",
+    )
+
+    receipt = declared.report(tmp_path, allowlist={})
+
+    bound = _entry(receipt, "cases/fixture_case/parser.py::MAX_ATOMS")
+    assert bound["named_by"] == []
+    assert bound["status"] == "unnamed"
+    assert receipt["ok"] is False
+
+
+@pytest.mark.parametrize("argument", ["record[message]", "transform(message)"])
+def test_an_assigned_string_used_inside_an_expression_does_not_name_a_bound(
+    tmp_path: pathlib.Path, argument: str
+) -> None:
+    """A lookup key or transformed input is not the exception's literal message."""
+    _fixture(tmp_path)
+    (tmp_path / "cases/fixture_case/parser.py").write_text(
+        "MAX_ATOMS = 2\n\ndef parse(record):\n"
+        '    if len(record["atoms"]) > MAX_ATOMS:\n'
+        '        message = "private_mapping_key_for_atoms"\n'
+        f"        raise ValueError({argument})\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "tests/test_fixture_case.py").write_text(
+        "def test_unrelated_display():\n"
+        '    assert "display private_mapping_key_for_atoms".startswith("display")\n',
+        encoding="utf-8",
+    )
+
+    receipt = declared.report(tmp_path, allowlist={})
+
+    bound = _entry(receipt, "cases/fixture_case/parser.py::MAX_ATOMS")
+    assert bound["named_by"] == []
+    assert bound["status"] == "unnamed"
+    assert receipt["ok"] is False
 
 
 def test_duplicate_bound_name_does_not_cross_module_boundary(
