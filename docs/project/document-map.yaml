@@ -322,6 +322,7 @@ documents:
   - {path: docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-28-interval-certification.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md, role: plan, authority: supporting, lifecycle: transient}
   - path: docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
     role: plan
     authority: record

@@ -11,16 +11,13 @@ agenda:
   updated: '2026-09-06'
   status: active
   objective: >-
-    Coordinate two disjoint research agendas for roughly 24 active portfolio hours
-    without allowing parallel work to split the proof record. Agenda-025 owns the exact fractional
-    frontier and agenda-026 owns density, typed stationarity, and Trump capture. This
-    agenda owns the frozen base and source packets, shared namespaces and records,
-    six four-hour integration gates, all routing decisions, and W10 closeout. The
-    research horizon is a replanning checkpoint rather than a stop condition. PR 87
-    owns agenda-023 and BC-214 through BC-218; its audited green head is integrated
-    directly here for the gate machinery, while this portfolio starts at BC-219 and
-    quarantines H-066 through H-069 and exp-065 through exp-069 until that sibling is
-    terminal.
+    Coordinate independent mathematical directions for roughly 24 active portfolio
+    hours. Agenda-025 owns scalar and richer-witness certificates; agenda-026 owns
+    full-size densities, structural arguments, and their falsification. This agenda
+    owns shared records, namespace allocation, checkpoint planning, integration, and
+    claim promotion. BC-250 distills the current assessment into the H registry and
+    these agendas. Select the next two-hour block from evidence; later allocations
+    remain conditional. Preserve prior experiment contracts and accounting.
   items:
   - id: BC-219
     purpose: tool_validation
@@ -84,7 +81,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       At hour four, have both managers produced valid theorem and control packets, and
@@ -106,15 +103,32 @@ agenda:
     bead: think-u7i4
     workflows: [factual-review, review-planning-oversight]
     depends_on: [BC-230, BC-233, BC-240, BC-242, BC-245]
-    blocked_on: >-
-      The T+4 BC-232 provisional checkpoint artifact does not exist yet. It must hash
-      leg 02, report exact endpoints and cost, retain the final 30 one-core minutes, and
-      be submitted at the active T+4 boundary without closing BC-232.
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/gate-hour-04-decision.md
+    - docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
     parallel_group: agenda024-control
     program: n11-post-381-portfolio
     next_evidence: >-
       Whether adaptive cores, the resumed bracket, local radius packaging, and the
       full-size weak-dual pilot are sound enough to receive more compute.
+    outcomes:
+    - scope: >-
+        Recovery checkpoint integration and prospective allocation, at actual credited
+        minute 124:14 rather than the nominal hour-four label.
+      classification: achieved
+      result: >-
+        The provisional BC-232 recovery and retained-record-dependent BC-241 review
+        were published in ad600896 with required PR checks passing. BC-232 has no new
+        converged candidate and its full-budget routing criterion remains unresolved.
+        No final 30-minute leg is released. The current strategy selects the scalar
+        probe with independent richer-witness, density, and restricted-structure work;
+        new measured tests still require prospective registration.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/gate-hour-04-decision.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/gate-hour-04.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/gate-hour-04.md
+      disposition: retire-success
+      follow_up: null
   - id: BC-221
     purpose: measurement_validation
     owner_focus: insight
@@ -122,21 +136,25 @@ agenda:
     state: blocked
     priority: 0
     question: >-
-      At hour eight, what do the first exact measurements say about the fastest path to
-      a bound above 3.81 and the viability of the two closure endpoints?
+      After the next selected block, which certificate, density, or structural
+      direction has earned more effort toward a substantial mathematical result?
     budget: >-
-      30 active minutes at T+8h under the same frozen packet and sequential integration
-      protocol as BC-220. Apply only X-016's predeclared routing rules; do not move an
-      accept threshold to rescue a run.
+      Up to 30 active minutes after the next two-hour research block, at its actual
+      credited offset rather than the historical T+8h label. Re-screen prospective
+      work under W10; preserve every frozen scientific threshold and budget.
     entry: >-
-      BC-220 has committed the second block and both managers submit by gate minus 15
-      minutes.
+      BC-250 has selected the block and its workers submit retained evidence before
+      the coordinator's integration reserve. A longer frozen process may submit a
+      checkpoint without being called terminal.
     exit: >-
       Exact measurements and costs are reconciled, any candidate is diverted to
       independent replay, and the third block is frozen.
     bead: think-gt06
     workflows: [factual-review, review-planning-oversight]
     depends_on: [BC-220]
+    blocked_on: >-
+      BC-250's planning decision and the next selected research block's retained
+      packets; the completed recovery checkpoint does not supply those measurements.
     parallel_group: agenda024-control
     program: n11-post-381-portfolio
     next_evidence: >-
@@ -254,8 +272,65 @@ agenda:
     next_evidence: >-
       The durable result of the 24-hour portfolio and the single highest-value
       continuation after all costs and negative results are known.
+  - id: BC-250
+    purpose: tool_validation
+    owner_focus: insight
+    instances: [11]
+    state: complete
+    priority: 0
+    question: >-
+      Which reviewed mathematical directions justify the next parallel work, and are
+      their hypotheses, bounded commitments, owners, and prerequisites recorded in
+      the existing framework?
+    budget: >-
+      Checkpoint planning, not a research experiment. Began under think-j1f5 at
+      2026-09-06T17:11:08Z; the operator then added framework simplification and H-item
+      codification. Three disjoint max-level assessments support one coordinator.
+      Finish with checked registry/agenda links and a publishable decision; no new
+      target measurement or reset of the portfolio clock.
+    entry: >-
+      BC-220's recovery evidence is retained; both the broad contributed strategy and
+      GPT-6 adversarial review are available, with the user's significant-gain priority.
+    exit: >-
+      The linked tbd plan retains source assessment; H-items own research questions;
+      agendas own selected commitments and conditional routing; beads own work. W10
+      documents this repeatable checkpoint process, and existing views validate.
+    bead: think-j1f5
+    workflows: [review-planning-oversight, process-review]
+    depends_on: [BC-220]
+    artifacts:
+    - docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
+    - packing/campaign/review-planning-oversight.md
+    - packing/campaign/ideas.md
+    parallel_group: agenda024-control
+    program: n11-post-381-portfolio
+    next_evidence: >-
+      A next agent can dispatch the selected BC items from these agendas without
+      reconstructing the review conversation or inventing scientific criteria.
+    outcomes:
+    - scope: Checkpoint assessment and codification of the post-3.81 research directions.
+      classification: achieved
+      result: >-
+        Three hypotheses and eight open questions are registered as H-093 through
+        H-103; restricted proof and falsification reuse H-036. Agendas 024 through
+        026 own allocation and bounded commitments, with real owning beads. W10 now
+        covers checkpoint planning using existing fields. Independent reviews accept
+        the mapping; no target measurement or prior scientific verdict changed.
+      evidence:
+      - docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
+      - packing/campaign/ideas.md
+      - packing/campaign/review-planning-oversight.md
+      disposition: retire-success
+      follow_up: null
 ---
 # Agenda 024 — Post-3.81 24-Hour Portfolio Control
+
+BC-250 records the current planning decision.
+Its
+[tbd plan](../../../docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md)
+retains the mathematical assessment and source coverage.
+The current allocation below and the child agendas own execution priorities; H-items own
+scientific claims. Frozen experimental criteria and completed evidence are unchanged.
 
 This is the control plane for [`agenda-025`](agenda-025-adaptive-fractional-frontier.md)
 and [`agenda-026`](agenda-026-density-stationarity-and-trump-capture.md).
@@ -263,15 +338,78 @@ It performs no manager experiment.
 Its job is to keep theorem statements, evidence, IDs, shared files, and routing
 decisions single-owned while the two research programs work concurrently.
 
-Post-T+2 execution through T+10 is narrowed by the
-[`T+2-to-T+10 continuation addendum`](../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md).
-That addendum sequences the reviewed continuation; it does not rewrite this agenda’s
-frozen inputs, T+0-to-T+2 packets, budgets, or claim labels.
+The
+[continuation addendum](../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
+retains command and recovery details.
+The allocation below is the prospective queue; the launch schedules later in this
+document are retained design history.
 
 BC-219 is a preflight outside the research clock.
 Its completion makes the initial six child cells takeable; it does not start their
 budgets. `T+0` is the later coordinator dispatch record that names all four live agent
 contexts, claims the six cells, and freezes the first-block experiment identities.
+
+## Current Allocation
+
+BC-250’s assessment is distilled into the following commitments.
+H-093 through H-103 are prospective registrations; completed commissioning work is their
+antecedent, not a retroactive experiment.
+H-036 is reused at its original restricted-angle scope.
+H-066–069 and H-071–089 remain reserved; H-092 belongs to its existing pending
+transport. Only the coordinator allocates further IDs.
+
+Do not dispatch the selected lanes until BC-250 closes and its checkpoint has been
+reviewed, validated, and published.
+A ready BC is not authorization to bypass that gate.
+
+| Assignment | Questions | Next commitments and owner | Reconsideration condition |
+| --- | --- | --- | --- |
+| Scalar and support improvement | H-093, H-094 | BC-251 scalar, then candidate-triggered BC-238 or BC-252 support diagnosis; fractional manager | An exact candidate earns verification; an inconclusive run earns diagnosis, not an unchanged retry. |
+| Richer witnesses | H-095–098 | BC-231 controls now; BC-234 adaptive test after acceptance; BC-235/236 kernels, BC-253 existential menus, BC-237 segments conditionally | Price BC-231 after two short slices. An area gain without useful covered mass does not fund a kernel build. |
+| Full-size densities | H-099–101 | BC-254 support screen, BC-243 noncontrol certification, BC-257 below-Trump design, BC-244 equality design; closure manager | A support ceiling retires only that support. A Trump-side obstruction does not close the below-Trump primal question. |
+| Restricted and global structure | H-036, H-102, H-103 | BC-255 restricted assessment; BC-246/247 typed controls when selected; BC-248 only under its existing guards | Complete one restricted theorem or expose its first obstruction before broad enumeration. |
+| Independent falsification | The structural claim being tested, initially H-036 | BC-256 with its own proposer and independent feasibility check | A verified counterexample redirects the theorem effort; a failed search proves no exclusion. |
+
+The fractional manager groups the first two assignments; the closure manager groups
+density and structure.
+Group membership imposes no scientific dependency.
+The coordinator assigns the falsifier independently and owns shared records, claims,
+integration, and upstream reconciliation.
+Exact basis recovery serves the candidate’s H-item; cached Lean replay under
+`think-zinm` is optional assurance, not a bound lane.
+
+With four available agent slots, use the coordinator and three workers: BC-231 controls,
+BC-254 support design/screen, and BC-255 restricted assessment.
+The coordinator supervises BC-251’s single-CPU scalar process, which needs no separate
+agent slot. Reassign the third worker to independent review when a consequential packet
+is ready; BC-255 or BC-256 then pauses at a retained boundary.
+With more capacity, the two managers can delegate disjoint workers and share a reviewer.
+Never retain an idle manager when its slot would unblock useful work.
+
+Use `max` for mathematical insight, strategy, proof completeness, and acceptance; `high`
+or `xhigh` for mechanical implementation and editing.
+Each assignment names its BC, H when applicable, bead, input/output paths, actual
+remaining allocation, and stop rule.
+Authors do not accept their own consequential results.
+
+Only the first row is selected.
+Offsets start at the next actual restart, not at a reset of the portfolio’s recorded
+`124:14`. Sessions record actual starts, interruptions, and consumed effort.
+Credit outages do not consume active time; coordination and integration costs remain
+visible separately. The outer wall allowance is unchanged.
+
+| Active offset from restart | Selected or conditional work | Checkpoint |
+| --- | --- | --- |
+| 0–2 hours | BC-251 once; BC-231 scalar specialization and one nonuniform control in two slices of at most 30 minutes; BC-254 finite-support design and readiness; BC-255 restricted assessment concurrently when review does not need its slot | BC-221 reviews actual evidence. The scalar command’s frozen 150-minute cooperative deadline may outlast this checkpoint; retain it, do not restart it. |
+| 2–4 hours | Exactify a candidate; otherwise choose BC-252, a priced BC-231 continuation, or one restricted proof. A noncontrol density candidate earns BC-243. | Integrate within four hours. Controls alone authorize no research ladder. |
+| 4–6 hours | BC-234 only with accepted adaptive routes; otherwise the best supported weight/site or richer-witness discriminator. Continue earned density/structure work; BC-256 can test the same frozen claim independently. | Re-screen payoff, proof gaps, and cost. Do not enlarge a stopped test’s budget. |
+| 6–8 hours | Finish the strongest reviewable outputs, preserve partial work and explicit continuation conditions | Validate and publish a checkpoint; allocate the remaining 24-hour horizon from evidence, not a promised matrix. |
+
+The unopened BC-222–225 milestones retain their identities but their historical clock
+labels are estimates, not dispatch times or experiment budgets.
+Record actual checkpoint offsets as they occur.
+A promising bound receives roughly three quarters of the next available research
+capacity for exactification, while independent theory can continue.
 
 ## Active-Time Accounting
 

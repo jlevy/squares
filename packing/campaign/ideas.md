@@ -239,6 +239,33 @@ X-013’s and X-014’s did not).
 | 84 | Shrink the T-018 core with the atoms fixed, normalize by the exact minimum mass, then dilate to a rational side above T-022 | registered | [H-090](hypotheses/H-090-n11-fixed-atom-core-shrink.md) | [X-016](explorations/X-016-after-381-two-managers-one-proof-boundary.md), coordinator satellite think-zq2u | Coverage may fall below one and still work if it stays above total mass divided by eleven; finite atom events can also cause an immediate discontinuous loss |
 | 85 | Test a smaller core above the exact corner event lost by H-090, with the same mass-normalization rule | registered | [H-091](hypotheses/H-091-n11-narrow-core-shrink.md) | exp-110, coordinator satellite think-jthr | The first negative excludes only sides below `1849127/1853400`; side `997696/1000000` is above that event and leaves enough containment slack to beat T-022 if all remaining cells retain mass above `M/11` |
 
+## Post-3.81 Planning Questions
+
+BC-250 codified these directions from
+[X-016](explorations/X-016-after-381-two-managers-one-proof-boundary.md) and the
+[three-model strategy review](../../docs/project/reviews/review-2026-09-05-strategy-gpt-56-pro-gemini-grok.md).
+The [agenda allocation](agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
+owns scheduling; the registry and generated ledger own claim scope and status.
+Open questions are registered but not runnable experiments.
+Row 86 belongs to the pending refined-core transport.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 87 | Scalar certificate at 61/16 | registered | [H-093](hypotheses/H-093-n11-scalar-61-16-certificate.md) | Use the existing instrument once; a floating objective is not a certificate. |
+| 88 | Change relative weights and event-guided site support | registered | [H-094](hypotheses/H-094-n11-weight-and-site-redesign.md) | Escape the fixed-weight restriction, starting with exact bad-pose rows. |
+| 89 | Adaptive cores and nonuniform angle cells | registered | [H-095](hypotheses/H-095-n11-adaptive-core-certificate.md) | A complete containment/coverage decision must precede synthesis. |
+| 90 | Rational angle-cell kernels | registered | [H-096](hypotheses/H-096-n11-angle-cell-kernels.md) | Extra captured mass matters; extra area alone does not. |
+| 91 | Existential witness menus | registered | [H-097](hypotheses/H-097-n11-existential-witness-menus.md) | Prove the whole-pose-box selection statement before a global verifier. |
+| 92 | Segment-supported measures | registered | [H-098](hypotheses/H-098-n11-segment-measures.md) | Exact intersection mass replaces binary atom incidence. |
+| 93 | Nonuniform weights on the exact D4 Trump support | registered | [H-099](hypotheses/H-099-trump-d4-finite-support-dual.md) | A necessary-row LP can certify a support ceiling; D>11 needs full a.e.-depth verification. |
+| 94 | Full-size area density below Trump | registered | [H-100](hypotheses/H-100-below-trump-area-density.md) | Continuum coverage and mass below eleven at a separately selected side. |
+| 95 | Equality density at Trump | registered | [H-101](hypotheses/H-101-trump-equality-density.md) | Requires both an actual density and complete compatible equality-set classification. |
+| 96 | Complete restricted angle or wall-support theorems | registered | [H-102](hypotheses/H-102-complete-restricted-angle-support-families.md) | Start from H-036; proof and falsifier test the same claim independently. |
+| 97 | Typed global capture with conditional/configuration cuts | registered | [H-103](hypotheses/H-103-complete-typed-global-capture.md) | Complete coverage, sound cuts, and exact local capture are separate obligations. |
+
+Exact basis recovery and Lean replay support the relevant candidate or assurance bead;
+they are not additional mathematical hypotheses without a specific method comparison.
+
 ## Open questions
 
 Not claims, so they cannot be hypotheses.

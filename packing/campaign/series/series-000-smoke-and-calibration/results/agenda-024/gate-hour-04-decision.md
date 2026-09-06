@@ -1,7 +1,7 @@
 # Agenda 024 BC-220 Integration Decision
 
-Status: **decision prepared; source-distinct review, validation, and publication are
-required before the successor lanes start.**
+Status: **recovery evidence reviewed, validated, and published in `ad600896`. Successor
+allocation follows Agenda 024’s current allocation.**
 
 BC-220 and its orchestration bead `think-vniz` share this decision.
 The coordinator brings the nominal T+4 gate forward because both assigned outputs are
@@ -24,7 +24,7 @@ The revised eight-hour target is `2026-09-06T20:39:32Z`; the outer boundary is
 | BC-232 final leg | Defer to `think-05of`; do not launch | Known CPU usage leaves at most `861.998305` seconds of the four-hour allocation; the earlier 30-minute leg is no longer affordable. Missing terminal CPU prevents an exact remaining allocation. No frozen width verdict is issued. |
 | BC-241 | Accept the retained-record-dependent local theorem review | The [closure packet](../agenda-026/gate-hour-04.md) records the independent replay, exact arithmetic, three rejected mutations, and selected faces. It supplies no global capture or optimality conclusion. |
 | H-090 and H-091 | Retire the ordinary-containment fixed-weight improvement route as a bounded negative | The [independent review](../../../../../../docs/project/reviews/review-2026-09-06-core-shrink-obstruction.md) accepts the whole-window witness. Original experiment ancestry is preserved in `f9ba790a`. |
-| H-092/exp-112 | Finish retaining the registered test, then park further fixed-weight probes | `think-xsma` owns the one refined-containment target and its record. No fourth point or sweep is authorized. The user’s payoff policy requires a changed mechanism with credible larger headroom before reopening. |
+| H-092/exp-112 | Integrate the reviewed negative, then park further fixed-weight probes | `think-xsma` owns transport `30c44bb6`, independently reviewed with 14 focused tests. The target fails; residual possible gain for the fixed sites/net/relative weights is below `0.00000125` above T-022. No fourth target. |
 
 The BC-232 provisional checkpoint fulfills `think-jeyp` without closing BC-232 or H-064.
 The missing terminal CPU remains explicit; another process cannot recreate it.
@@ -40,17 +40,16 @@ removing a named obstacle to larger bounds or a closure theorem.
 Instrument completion and small refinements alone do not justify automatic follow-on
 allocations. T-022 stays in the exact record while the core exposition leads with 3.81.
 
-The following allocation is prospective.
-Start after this gate is reviewed, validated, committed, and pushed.
-The coordinator records the latest required-role restart as the next shared-clock origin
-at minute `124:14`; it never restarts at minute 240 by label.
-
-| Owner | Work | Cap and stop rule |
-| --- | --- | --- |
-| Coordinator process session; fractional manager supervises | Scalar `61/16` probe from the unchanged T-018 certificate, using the literal scalar command in the current handoff | One invocation with the configured 150-minute cooperative deadline and at most one CPU thread. Record actual wall and CPU, including any overrun. A row-converged covering below eleven opens only the existing exactification sequence. |
-| Fractional manager | BC-231 adaptive verifier implementation against the reviewed BC-230 theorem and control matrix | At most 180 active minutes, in slices of at most 30. First 120 minutes implement; reserve 40 for a distinct review and 20 for reconciliation. No adaptive candidate search before all three routes and controls agree. |
-| Closure manager | BC-243 dual-only implementation and pilot under the [frozen interface](../agenda-026/bc-243-dual-pilot-spec.json) | At most 120 active minutes implement, 40 distinct review, and 20 first pilot. Register H-080/exp-090 before the pilot and freeze code before measurement. No primal work. |
-| Transferable reviewer | Check H-092’s retained scope without extending its search, then one independent implementation/control review at a time | `max` for mathematical judgment; `xhigh` or `high` for deterministic mechanics. The author cannot accept its own theorem or instrument. |
+The
+[Agenda 024 allocation](../../../../agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
+owns the next parallel block.
+BC-250’s linked tbd assessment is distilled into H-items, BC commitments, and beads
+before publication. This replaces automatic implementation allocations; it does not
+change the retained scientific criteria.
+The coordinator records the actual required-role restart from minute `124:14`, never
+from a nominal minute-240 label.
+BC-251 names the scalar probe; its historical output stem below stays unchanged for
+command compatibility.
 
 The scalar process runs from a clean isolated checkout of the published gate commit,
 using the same repository-relative command and fresh output names.
@@ -96,10 +95,13 @@ Historical evidence retains its original provenance.
 
 The initial recovery edit gate passed all 44 selected steps in 47.45 seconds, including
 Ruff, BasedPyright, and experiment ancestry.
-The manager packets and this decision receive final documentation and contract checks
-before publication.
-The BC-241 five focused tests and the core-shrink seven focused tests
-passed independently; no target sweep is repeated for this integration.
+Publication at `ad600896` passed the 45 selected pre-push steps and 679 reachable tests,
+with three tests deselected; all required hosted PR checks passed.
+The BC-241 six focused tests and the ordinary core-shrink seven focused tests passed
+independently. The prospective sequence receives its own documentation and contract
+checks; no target sweep is repeated for this planning revision.
+Full research-session closeout validation remains distinct from these required PR
+checks.
 
 The latest upstream check found `origin/main` at
 `6b21d14b64c19003d597ed3c993c051b64336b0c`, already an ancestor, with PR 93 integrated

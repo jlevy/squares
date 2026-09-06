@@ -138,7 +138,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives eight confirmed hypotheses, ten refuted
-hypotheses, one open hypothesis, seven open questions, and thirty-five blocked
+hypotheses, two open hypotheses, fifteen open questions, and thirty-seven blocked
 hypotheses. No hypothesis waits on review and five are unresolved.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
 pinned the `m = 5` covering wall to a bracket of width 0.015 where it had registered
@@ -328,6 +328,7 @@ case or experiment separately.
 | [Feature: Promotion Pipeline Implementation](docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md) | implementation plan | current | transient | — |
 | [Feature: The Interval Certification Bridge](docs/project/specs/active/plan-2026-08-28-interval-certification.md) | implementation plan | current | transient | — |
 | [Feature: Gate Validation Speed](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md) | implementation plan | current | transient | — |
+| [Plan: Research Lanes Beyond 3.81](docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md) | implementation plan | supporting | transient | — |
 | [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](packing/atlas/README.md) |
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
 | [Spike: Interactive `n = 5` Motion Lab](docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md) | implementation plan | record | retained | — |
@@ -389,7 +390,7 @@ routine task.
 | W7 | `pipeline-improvement` | Named packing-research consumers, the smallest reusable capability or cleanup they need, controls or an independent oracle, a budget, and expected comparability impact | Add, strengthen, simplify, or repair only the bounded packing pipeline surface; do not collect a target verdict while it is mutable, optimize an unchanged implementation without a W5 baseline, or generalize beyond named consumers | Code, entry point or refactor; replayable positive and negative controls; exact validation command; cost and complexity receipt; evidence limits; and a readiness or retained-blocker decision | W2 before a new or materially changed trust boundary reaches W6; W5 if measured throughput remains the blocker; otherwise W6 |
 | W8 | `documentation-pass` | A period of research that closed several commitments, the artifacts it left, and the reader-facing documents that have not caught up | Reconcile the root tier — README, tutorial, synopsis, and the conventions they cite — against the artifacts and against each other; correct, cut, reorder and clarify, but never introduce a claim the record does not already carry, and never soften a claim boundary to make a document read better | A checklist run over each root document, every drift either fixed or filed as a defect, generated views regenerated, and an explicit statement of what was checked and what was left | W2 for any claim the pass could not verify against an artifact; otherwise the next owning workflow |
 | W9 | `remediation` | A confirmed defect or issue inventory, risk ordering, owning beads, and a bounded repair wave | Triage and repair defects systematically without changing scientific criteria or hiding unresolved evidence; group only compatible work and preserve each item’s independent disposition | Fixed items with regressions, contained items with evidence, rerouted evidence work, explicit blockers, regenerated defect views, and validation receipts | W10 reviews the wave and selects what follows |
-| W10 | `review-planning-oversight` | A terminal agenda or session, its artifacts and receipts, live tbd state, and the documents it may have changed | Classify every attempted block, reconcile results and files, review document impact, reprioritize candidates, and select one next entry; do not execute that successor inside the closeout | Per-block outcomes and stop reasons, actionable dispositions, documentation decisions, grouped changes, validation, ranked candidates, operator status, and one selected next entry | The selected owning workflow, often W9 for backlog repair or W8 for substantive documentation drift |
+| W10 | `review-planning-oversight` | A launch or checkpoint scope, source ideas and H-items, stable evidence, agenda and beads; all writers terminal for full closeout | Assess mathematical directions, codify questions, and select bounded parallel work; at terminal closeout also reconcile every outcome and document impact. Do not execute the selected successors here. | H-linked agenda commitments, priorities, prerequisites, owners and one coordinating next entry; a linked tbd plan may retain rationale. Terminal work additionally records outcomes, dispositions and documentation decisions. | The selected coordinating entry dispatches the owning workflows, including independent BCs in parallel |
 
 Implementation is an action inside the workflow that owns its promised result, not an
 undefined handoff: W1 and W2 can make bounded research corrections, W3 can implement a
@@ -415,11 +416,14 @@ W9 owns bounded repair waves over confirmed defects and issues.
 It does not turn a large backlog into one undifferentiated implementation phase: risk is
 ordered first, compatible defects are batched only when they share a trust surface, and
 every selected item exits fixed, contained, rerouted, blocked, or obsolete.
-W10 owns the closeout after an agenda or remediation wave.
-Its documentation review is a mandatory impact check over the root documents; W8 is the
-separate substantive reconciliation workflow when that check finds real drift.
-W10 completes the mechanical reconciliation and records one selected successor, but it
-does not start that successor.
+W10 owns mathematical portfolio planning at launch and checkpoints, and full closeout
+after an agenda or remediation wave.
+Its [planning process](packing/campaign/review-planning-oversight.md#one-planning-block)
+distills source assessments into H-items, agenda commitments, and beads.
+At terminal closeout, the documentation review is a mandatory impact check over the root
+documents; W8 owns substantive reconciliation when that check finds real drift.
+W10 selects one coordinating entry, which can dispatch independent commitments in
+parallel after the planning block closes.
 
 `general-improvement` remains only for repository maintenance outside the packing
 pipeline whose output fits none of W1–W10. It must not hide core work or a session
@@ -456,7 +460,8 @@ W4 process-review ──> W7 pipeline-improvement ──> W2 ──> W6 research
         └─ accepted repair ──┘        W5 efficiency-loop ──┘
                          promoted/high-risk result ──> W2 ──> W3
 
-W1–W9 terminal work ──> W10 review/planning/oversight ──> one selected workflow
+launch/checkpoint ────> W10 review/planning/oversight ──> coordinated parallel work
+W1–W9 terminal work ──> W10 terminal closeout ──────────> selected coordinator
 confirmed defect wave ──> W9 remediation ────────────────┘
 ```
 
@@ -468,14 +473,25 @@ controller, not permission to blur contracts.
 
 The
 [T+2-to-T+10 continuation addendum](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
-is the single current cold-review entry point and execution authority for the partially
-completed post-T+2 continuation.
-The user’s credit-interruption amendment excludes unavailable time from the wall
-allowance. The addendum records the accounting boundaries, revised deadlines, and
-conservative active-minute position `124:14`, currently held for recovery integration.
+is the cold-review entry point for the partially completed post-T+2 continuation.
+The
+[Agenda 024 allocation](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
+owns prospective priorities.
+Its planning block BC-250 links the
+[tbd assessment](docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md)
+of both prior reviews, and distills their directions into H-093–103 and the existing
+agendas. Coordinator `think-jgnv` next dispatches scalar BC-251, adaptive controls
+BC-231, density support BC-254, and restricted assessment BC-255 as capacity and their
+readiness conditions permit.
+The addendum owns command custody and recovery; no successor experiment started during
+the planning block. The user’s credit-interruption amendment excludes unavailable time
+from the wall allowance.
+The addendum records the accounting boundaries, revised deadlines, and conservative
+active-minute position `124:14`, currently held for recovery integration.
 BC-232’s completed recovery produced no row-converged covering; BC-241’s independent
-local-scope review is complete and awaiting checkpoint publication.
-The eventual handoff records the active minute actually reached.
+local-scope review was published in `ad600896`. H-092’s fixed-weight refined-core
+negative passed independent review and awaits integration under `think-xsma`. The
+eventual handoff records the active minute actually reached.
 The addendum preserves the first block’s frozen packets and binds the active-time, role,
 safety, BC-241, BC-232, BC-243, and gate contracts.
 [Agenda 024](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md) remains its
@@ -504,8 +520,8 @@ The T+2 integration checkpoint left 22 active portfolio hours; the continuation 
 those cells without resetting their clocks or budgets.
 
 At the historical `T+0` launch, the only takeable research cells were `BC-230`,
-`BC-232`, `BC-233`, `BC-240`, `BC-242`, and `BC-245`. The continuation addendum now
-governs which cells may run.
+`BC-232`, `BC-233`, `BC-240`, `BC-242`, and `BC-245`. Agenda 024’s current allocation
+now governs which cells may run.
 The coordinator alone allocates experiment IDs, edits shared or generated records,
 integrates manager packets, and moves a gate.
 Codex uses `max` reasoning for theorem scope, proof boundaries, mathematical
@@ -1885,6 +1901,25 @@ applied to several claims.
 dependency and readiness, rendered into the ledger.
 It is a coordination artifact, not a second hypothesis registry and not a scheduler.
 
+**Block commitment (`BC`).** One bounded question or deliverable in an agenda, with
+entry and exit conditions, an effort estimate, dependencies, and an accountable bead.
+Its `hypotheses` field links the scientific questions it serves.
+A planning or tool commitment can produce no experiment; a research commitment may
+produce several, each with its own registered claim.
+Completing a BC settles its declared scope, not the whole H-item or agenda.
+
+**Program and parallel group.** Labels on BC items.
+A program groups a continuing research direction; a parallel group identifies work that
+can have a separate owner.
+A strategic lane is such an assignment, not a new record type.
+Actual capacity, dependencies, and shared writes determine which groups run together.
+
+**Planning block.** A W10 commitment that assesses the current questions and selects
+future work.
+A linked tbd plan retains rationale and alternatives; the H-items and agenda
+receive its operational decisions before it closes.
+Sessions then record how that work actually ran.
+
 **Defect.** One record in [`defects.yaml`](packing/defects.yaml)—what went wrong, what
 caught it, and what now stops it recurring—rendered to [`defects.md`](defects.md).
 
@@ -2656,6 +2691,17 @@ round that names the hypothesis, control roles included.
 | [H-070](packing/campaign/hypotheses/H-070-n11-inset-seed-release.md) | **refuted** | At side `191/50`, the best eligible inset-screen seed improves exact rational mass after unrestricted release versus an equal-stop unseeded control | 1 | 8.2m wall |
 | [H-090](packing/campaign/hypotheses/H-090-n11-fixed-atom-core-shrink.md) | refuted | The fixed T-018 atoms retain enough covered mass after shrinking the core to `99769/100000` to certify side `3.8100381`; an exact corner witness rejects this side and every core side below `1849127/1853400`, leaving a narrower shrink interval open | 1 | 30s wall |
 | [H-091](packing/campaign/hypotheses/H-091-n11-narrow-core-shrink.md) | refuted | Core side `997696/1000000` retains minimum mass above `M/11`; its measured minimum `96377/100000` instead supplies an interior witness excluding every fixed-weight core shrink that could beat T-022 using ordinary containment | 1 | 31s wall |
+| [H-093](packing/campaign/hypotheses/H-093-n11-scalar-61-16-certificate.md) | open | The retained scalar core and net admit an exact mass-below-eleven certificate at side `61/16` | 0 | — |
+| [H-094](packing/campaign/hypotheses/H-094-n11-weight-and-site-redesign.md) | open question | Which relative weights and site changes improve the fractional certificate beyond the fixed-weight shrink obstruction? | 0 | — |
+| [H-095](packing/campaign/hypotheses/H-095-n11-adaptive-core-certificate.md) | blocked | Nonconstant direction-specific cores admit an exact mass-below-eleven certificate at side `61/16` | 0 | — |
+| [H-096](packing/campaign/hypotheses/H-096-n11-angle-cell-kernels.md) | open question | Can whole-angle-cell kernels cover more useful positive mass with a tractable exact verifier? | 0 | — |
+| [H-097](packing/campaign/hypotheses/H-097-n11-existential-witness-menus.md) | open question | Can pose-dependent witness choice beat a universal witness while retaining complete pose-box coverage? | 0 | — |
+| [H-098](packing/campaign/hypotheses/H-098-n11-segment-measures.md) | open question | Can segment-supported measures improve the bound with exact intersection-length coverage? | 0 | — |
+| [H-099](packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md) | blocked | The exact deduplicated D4 closure of Trump’s eleven squares admits dual mass above eleven at a.e. depth at most one | 0 | — |
+| [H-100](packing/campaign/hypotheses/H-100-below-trump-area-density.md) | open question | Can a full-size area density give mass below eleven at a side between the retained bound and Trump? | 0 | — |
+| [H-101](packing/campaign/hypotheses/H-101-trump-equality-density.md) | open question | Can mass-eleven density at Trump’s side and a complete equality analysis establish uniqueness? | 0 | — |
+| [H-102](packing/campaign/hypotheses/H-102-complete-restricted-angle-support-families.md) | open question | Which complete restricted angle or wall-support family yields a useful theorem, starting with H-036? | 0 | — |
+| [H-103](packing/campaign/hypotheses/H-103-complete-typed-global-capture.md) | open question | Can a complete typed cover exclude every minimizing branch or place its entire surviving box inside the accepted local Trump neighborhood? | 0 | — |
 
 ### Confirmed
 

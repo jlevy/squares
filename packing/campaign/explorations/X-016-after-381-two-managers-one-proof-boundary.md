@@ -45,7 +45,7 @@ exploration:
   - packing/resources/papers/dewar-2024-contacts-oriented-squares.raw.md
   - packing/resources/papers/donev-connelly-stillinger-torquato-2007-underconstrained-jammed-packings.raw.md
   - operating-rules.md
-  proposes: []
+  proposes: [H-070, H-090, H-091, H-093, H-094, H-095, H-096, H-097, H-098, H-099, H-100, H-101, H-102, H-103]
 ---
 # X-016 — After 3.81: Two Managers, Six Gates, One Proof Boundary
 

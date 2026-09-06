@@ -11,15 +11,15 @@ agenda:
   updated: '2026-09-06'
   status: active
   objective: >-
-    Give one managing agent a disjoint closure program that can turn local knowledge at
-    Walter Trump's packing into a global argument. Package the already-computed
-    quantitative neighborhood theorem instead of rerunning it; test whether a
-    full-size density has a sound weak dual with boundary terms and useful equality
-    set; and replace generic contact-graph enumeration with typed stationary backbones
-    that retain feature contacts, owner axes, order data, abnormal Fritz–John cases,
-    ties, zero multipliers, and rattlers. This manager owns BC-240 through BC-249,
-    H-080 through H-089, and exp-090 through exp-109, but not shared campaign or
-    frontier state.
+    Pursue full-size density and structural arguments in parallel, reusing the accepted
+    retained-record-dependent local Trump theorem. H-099 through H-103 and existing
+    H-036 distinguish finite-support duals, below-Trump primal densities, equality at
+    Trump, restricted structural theorems, and complete typed global capture. BC-240
+    through BC-249 and BC-254 through BC-257 own the bounded work; Agenda 024 selects
+    the allocation. Retain feature contacts, owner axes, order data, abnormal
+    Fritz–John cases, ties, zero multipliers, and rattlers in any claimed complete
+    model. Shared campaign and frontier state remain coordinator-owned; the original
+    H-080 through H-089 and exp-090 through exp-109 reservations remain unchanged.
   items:
   - id: BC-240
     purpose: research
@@ -76,7 +76,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Does a source-distinct reviewer reproduce every conclusion that the retained
@@ -101,10 +101,28 @@ agenda:
     bead: think-woi0
     workflows: [factual-review]
     depends_on: [BC-240]
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/bc-241-trump-local-theorem-review.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/gate-hour-04.md
     parallel_group: agenda026-local-theorem
     program: n11-density-stationarity-trump-capture
     next_evidence: >-
       Whether the local endpoint is ready to serve as the last step of a global proof.
+    outcomes:
+    - scope: >-
+        Source-distinct review of the labelled, anchored, fixed-side local theorem,
+        conditional on retained BC-199 data rather than a full radius-generator replay.
+      classification: achieved
+      result: >-
+        One independent tangent replay, exact aggregate and norm arithmetic, 56 gradient
+        checks, three rejected mutations, and four selected face checks accept the
+        retained-record-dependent local endpoint. No global capture, uniqueness, or
+        optimality is established; not every radius face LP was replayed.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-241-trump-local-theorem-review.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/gate-hour-04.md
+      disposition: retire-success
+      follow_up: null
   - id: BC-242
     purpose: research
     owner_focus: correctness
@@ -185,13 +203,23 @@ agenda:
       unsound, equality killed by D>11, or equality not killed at the priced resolution
       and therefore eligible for BC-244.
     bead: think-mt6q
+    hypotheses: [H-099]
     workflows: [research-loop, factual-review]
     depends_on: [BC-242, BC-220]
+    blocked_on: >-
+      A selected noncontrol placement candidate and a separately priced complete
+      a.e.-depth verifier. BC-254 may settle the declared support by an exact LP upper
+      certificate without building that verifier. A uniform D=11 control is not the
+      selection condition.
     parallel_group: agenda026-density
     program: n11-density-stationarity-trump-capture
     next_evidence: >-
       Whether exact dual depth already rules out a sharp mass-eleven density before the
       program spends on continuum primal coverage.
+    note: >-
+      BC-250 narrows prospective allocation: retain all soundness controls, but no
+      automatic 180-minute build or BC-244 launch. Candidate acceptance uses H-099;
+      a sampled objective above eleven does not certify depth.
   - id: BC-244
     purpose: research
     owner_focus: insight
@@ -220,6 +248,7 @@ agenda:
       with its equality-set obligation; otherwise a bounded negative naming the open
       pose box, wall stratum, or constraint that prevents sharpness.
     bead: think-h7kl
+    hypotheses: [H-101]
     workflows: [research-loop]
     depends_on: [BC-243]
     parallel_group: agenda026-density
@@ -281,7 +310,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Does the typed language recover Trump's stationary backbone, every retained
@@ -299,6 +328,7 @@ agenda:
       Exact recovery and mutation receipts establish that the language represents the
       intended n=11 endpoint, or isolate a completeness defect for repair.
     bead: think-3l93
+    hypotheses: [H-103]
     workflows: [pipeline-improvement, factual-review]
     depends_on: [BC-240, BC-245, BC-220]
     parallel_group: agenda026-stationarity
@@ -310,7 +340,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [3, 4, 5]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       On the complete n=3 and n=4 controls, and the local n=5 Göbel control, is typed
@@ -332,6 +362,7 @@ agenda:
       Complete n=3 and n=4 recovery, positive n=5 recovery, mutation controls, measured
       pruning rates, and a priced n=11 slice determine whether an exact branch opens.
     bead: think-qi66
+    hypotheses: [H-103]
     workflows: [pipeline-improvement, efficiency-loop]
     depends_on: [BC-245, BC-220]
     parallel_group: agenda026-stationarity
@@ -362,6 +393,7 @@ agenda:
       An exact closed residue, or a checkpoint reporting covered, open, and refused
       branches with no claim of global completeness.
     bead: think-901o
+    hypotheses: [H-103]
     workflows: [research-loop, efficiency-loop]
     depends_on: [BC-246, BC-247]
     blocked_on: >-
@@ -402,8 +434,116 @@ agenda:
     next_evidence: >-
       The closure program's honest theorem gain, measured costs, negative results, and
       best continuation.
+  - id: BC-254
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: ready
+    priority: 0
+    question: Does the exact D4 Trump support admit a full-size dual value above eleven?
+    hypotheses: [H-099]
+    budget: >-
+      First freeze the deduplicated support, exact arithmetic, initial off-boundary
+      rows and deterministic row-generation rule in one slice of at most 30 minutes.
+      Price and commission the small LP certificate checker before target work.
+      Further slices require that readiness decision; no unpriced arrangement build.
+    entry: >-
+      BC-250 is published and BC-242's weak-dual contract is retained. H-099 is
+      registered; measurement waits for instrument readiness and a frozen experiment.
+    exit: >-
+      A priced admissible test, then an exact support ceiling at most eleven, a
+      candidate requiring full a.e.-depth verification, or a scoped unresolved result.
+    bead: think-01q4
+    workflows: [insight-iteration, pipeline-improvement, research-loop]
+    depends_on: [BC-242, BC-250]
+    next_evidence: >-
+      An exact upper certificate can retire this support; only verified D>11 can
+      obstruct equality density. A floating LP objective decides neither.
+    parallel_group: agenda026-density-support
+    program: n11-density-stationarity-trump-capture
+  - id: BC-255
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: ready
+    priority: 1
+    question: What is the first complete proof obligation for a useful restricted structural theorem?
+    hypotheses: [H-036, H-102]
+    budget: >-
+      One assessment slice of at most 30 minutes, beginning with H-036's unchanged
+      0.25-degree restricted-angle claim. State complete cases, a feasible control,
+      and one LP/Farkas or interval obligation. Register any different family or side
+      before testing it. No global atlas build.
+    entry: BC-250 selects this assessment; H-036 and the local/source controls are available.
+    exit: >-
+      A bounded proof/falsification pair with exact domain and independent check, or
+      a named obstacle and a justified alternative under H-102.
+    bead: think-dene
+    workflows: [insight-iteration]
+    depends_on: [BC-250]
+    next_evidence: >-
+      Whether one complete restricted theorem is tractable. Only mass-derived
+      near-tight forcing needs a valid covering measure; geometric conflicts,
+      interval no-goods and restricted wall/angle arguments do not inherently need it.
+    parallel_group: agenda026-restricted-theory
+    program: n11-density-stationarity-trump-capture
+  - id: BC-256
+    purpose: research
+    owner_focus: correctness
+    instances: [11]
+    state: tentative
+    priority: 2
+    question: Does a verified packing refute the selected restricted structural claim?
+    hypotheses: [H-036]
+    budget: >-
+      One bounded adversarial slice after the target domain, proposer and independent
+      feasibility check are frozen. Register its experiment before search. Do not
+      interpret an unsuccessful heuristic search as a proof of the conjecture.
+    entry: >-
+      H-036's restricted domain and strict counterexample threshold are retained;
+      the coordinator selects a checked proposer and an independent verifier.
+      The author's proof need not be finished.
+    exit: A verified counterexample or a retained bounded search with the claim unresolved.
+    bead: think-pjk7
+    workflows: [research-loop, factual-review]
+    depends_on: [BC-250]
+    next_evidence: >-
+      For H-036, verify every angle restriction and side strictly below 3.878; a
+      counterexample need not improve Trump's record. A different target needs its own H.
+    parallel_group: agenda026-falsification
+    program: n11-density-stationarity-trump-capture
+  - id: BC-257
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: tentative
+    priority: 2
+    question: Which below-Trump density target and family justify a continuum proof attempt?
+    hypotheses: [H-100]
+    budget: >-
+      One theory/design slice if selected. Name the target, nonnegative density class,
+      exact mass calculation and complete pose/wall coverage obligations. No fitting
+      or continuum-verifier build before a narrower hypothesis and cost decision.
+    entry: >-
+      A stated density mechanism offers useful headroom; no prerequisite that the
+      equality route at Trump's side survives BC-243.
+    exit: A priced concrete density hypothesis, or a parked question with its missing premise.
+    bead: think-k9zi
+    workflows: [insight-iteration]
+    depends_on: [BC-250]
+    next_evidence: >-
+      A direct mass-below-eleven route at a declared lower side, separately scoped
+      from H-101's equality classification at Trump.
+    parallel_group: agenda026-primal-design
+    program: n11-density-stationarity-trump-capture
 ---
 # Agenda 026 — Density, Typed Stationarity, and Trump Capture
+
+The [current allocation](agenda-024-post-381-24h-portfolio.md#current-allocation) owns
+prospective allocations for L3 (density), L4 (structural arguments), and L5
+(falsification). Density feasibility and restricted structural theory may proceed in
+parallel; uniform D4 controls alone do not justify a full BC-243 build or BC-244. The
+proof contracts and frozen scientific criteria below remain applicable.
 
 This child agenda is managed independently under the `think-j7rm` research epic and
 integrated only through [`agenda-024`](agenda-024-post-381-24h-portfolio.md).

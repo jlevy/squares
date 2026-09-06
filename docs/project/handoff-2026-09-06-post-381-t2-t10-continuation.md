@@ -1,7 +1,19 @@
 # Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10
 
-Status: **recovering the credit interruption; completed computations and interrupted
-reviews are being checkpointed before the next research slice.**
+Status: **recovery checkpoint published in PR 97; the next research sequence is being
+selected from the completed evidence.**
+
+The
+[Agenda 024 allocation](../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
+owns prospective priorities.
+BC-250 (`think-j1f5`) links the
+[tbd assessment](specs/active/plan-2026-09-06-post-381-research-sequence.md), which
+covers both prior reviews, the core-shrink obstruction, and the retained Lean spike.
+After the planning block closes, coordinator `think-jgnv` dispatches BC-251, BC-231,
+BC-254, and BC-255 under their H-items and readiness conditions.
+Independent review can take the third worker slot.
+That allocation supersedes the historical scheduling tables below; literal commands,
+frozen scientific criteria, and recovery accounting remain applicable.
 
 ## Current Recovery Boundary
 
@@ -40,14 +52,16 @@ accounting entry. Neither boundary promises completion at active minute 600.
   retained-record-dependent local scope.
   Its checker, controls, and
   [closure packet](../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/gate-hour-04.md)
-  are ready for publication; no global capture or optimality conclusion follows.
+  were published in `ad600896`; no global capture or optimality conclusion follows.
 - H-090 and H-091’s transport ending at `96ff4751` passed
   [independent review](reviews/review-2026-09-06-core-shrink-obstruction.md) and was
   merged with its experiment ancestry preserved in `f9ba790a`. The accepted obstruction
   closes the ordinary-containment improvement window for the frozen sites, net, and
   relative weights. `think-xsma` owns the separately authorized H-092/exp-112
   refined-containment test, with registration and instrument controls committed before
-  measurement.
+  measurement. Its transport `30c44bb6` has now passed independent review: the target
+  failed, and the remaining possible fixed-site/net/relative-weight gain is below
+  `0.00000125` above T-022. Integration remains pending; no further target is selected.
 
 The nominal T+4 integration decision is being closed on completed evidence at actual
 active minute **124:14**, under the
@@ -56,8 +70,8 @@ This current-execution amendment supersedes every historical instruction below t
 until minute 240, reserve or launch BC-232’s final 30-minute leg, or restart successors
 at a nominal clock label.
 **Do not launch BC-232 leg 03.** Its remaining compute allocation is unresolved under
-`think-05of`. The decision’s prospective successor allocations replace the historical
-next-block allocations only after review, validation, commit, and push.
+`think-05of`. BC-250’s distilled agenda allocations replace the historical next-block
+allocations only after review, validation, commit, and push.
 Record the actual required-role restart from `124:14`; later gates close on completed
 evidence or their declared cap, without crediting unused time.
 No frozen scientific criterion changes.
