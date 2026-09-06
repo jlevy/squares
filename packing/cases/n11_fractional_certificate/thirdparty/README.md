@@ -466,8 +466,13 @@ exit status 0
 - **The novelty claim rests on a bounded search.** The project’s record marks the result
   *apparently novel* relative to the corpus it holds: Friedman’s survey, the Kingbird
   catalogue of records, Stromquist 2003, Bentz 2010 and 2016, Nagamochi 2005, and the
-  two 2026 posts. No systematic arXiv or preprint sweep and no MathOverflow search is on
-  record. “First movement since 2003” is a statement about that corpus.
+  two 2026 posts. A
+  [literature audit on 2026-09-04](../../../resources/web/s11-lower-bound-literature-audit-2026/README.md)
+  then searched arXiv, Crossref, OpenAlex and Semantic Scholar, author pages and the
+  public catalogues through that date and found nothing above Stromquist’s value; it did
+  not exhaust subscription-only indexes, theses and proceedings, or unindexed sources.
+  “First movement since 2003” is a statement about that searched record, not a claim of
+  priority.
 - **Who checked it.** The project’s own verifier accepted the certificate; a reviewer
   inside the project wrote a second verifier from the theorem statement with the
   implementation withheld, reproduced the `n = 17` value as a control, and accepted the

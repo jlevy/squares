@@ -9,7 +9,8 @@ verdict is read back from the lines it prints.
 
 Two tiers. The fast tier decides a two-atom-sized instance of the theorem (n = 2, one
 atom of weight 1 at the center of a container of side 5/4) and one perturbation per
-condition, in milliseconds, and checks the tight direction of the real 19/5 rung. The
+condition, in milliseconds, the two preconditions and the internal-error status the
+2026-09-06 review asked for, and the tight direction of the real 19/5 rung. The
 `exhaustive_exact` tier runs the full 181-direction decision on the rung (about 36 s in
 pure Python) and every row of `thirdparty/falsify.py`'s table, each a full decision.
 """
@@ -261,6 +262,44 @@ def test_a_malformed_file_is_refused_before_any_condition(
         minimal["load"](str(write(record, tmp_path / "bad.json")))
 
 
+def test_an_atom_outside_the_container_is_refused_before_any_condition(
+    minimal: dict[str, Any], tmp_path: Path
+) -> None:
+    """B3 of the 2026-09-06 review: `minimal_verify.py` refuses an outside atom, and the
+    two verifiers should agree on what a well-formed certificate is. The container is
+    closed, so an atom on its boundary is inside."""
+    outside = {**TINY, "atoms": [["3/2", "3/2", "1"]]}
+    with pytest.raises(ValueError, match=r"\(3/2, 3/2\) lies outside the container"):
+        minimal["load"](str(write(outside, tmp_path / "outside.json")))
+    corner = {**TINY, "atoms": [["5/4", "5/4", "1"]]}
+    assert minimal["load"](str(write(corner, tmp_path / "corner.json")))[4] == [
+        (Fraction(5, 4), Fraction(5, 4), Fraction(1))
+    ]
+
+
+def test_two_atoms_at_one_site_are_refused_rather_than_merged(
+    minimal: dict[str, Any], tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """B3 of the 2026-09-06 review: two halves at the center once merged into the
+    smallest instance and were verified. They are refused by name before any condition,
+    and the command line reports that refusal with status 1."""
+    record = {**TINY, "atoms": [["5/8", "5/8", "1/2"], ["5/8", "5/8", "1/2"]]}
+    path = write(record, tmp_path / "twice.json")
+    with pytest.raises(ValueError, match=r"two atoms share the site \(5/8, 5/8\)"):
+        minimal["load"](str(path))
+    assert minimal["main"]([str(path)]) == 1
+    assert capsys.readouterr().out == (
+        "REFUSED: not a certificate of the expected shape: "
+        "two atoms share the site (5/8, 5/8)\n"
+    )
+
+
+def test_both_retained_certificates_pass_the_preconditions(minimal: dict[str, Any]) -> None:
+    """Distinct sites, all inside the container: `load` would refuse otherwise."""
+    for certificate in CLAIMS:
+        assert len(minimal["load"](str(certificate))[4]) > 0
+
+
 def test_a_direction_where_no_square_fits_decides_nothing(minimal: dict[str, Any]) -> None:
     side = shrunk = Fraction(1, 2)
     atoms = [(Fraction(1, 4), Fraction(1, 4), Fraction(1))]
@@ -379,6 +418,37 @@ def test_a_document_without_a_certificate_is_refused(
     path.write_text("# A claim\n\nNo certificate here.\n")
     with pytest.raises(ValueError, match="fenced json block"):
         minimal["load"](str(path))
+
+
+def test_a_failed_cross_check_is_an_internal_error_with_status_2(
+    minimal: dict[str, Any],
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """B2 of the 2026-09-06 review: at every direction the sweep re-sums the mass at its
+    witness directly, and a disagreement is the verifier's own bug, reported apart from
+    both verdicts with status 2, never as a refusal of the certificate. The direct sum is
+    forced wrong by one in the verifier's own namespace, which its functions share."""
+    path = write(TINY, tmp_path / "tiny.json")
+    assert minimal["main"]([str(path)]) == 0
+    assert capsys.readouterr().out.endswith("VERIFIED: s(2) >= 5/4\n")
+
+    def one_too_many(atoms: Any, c: Any, s: Any, half: Any, center: Any) -> Any:
+        return minimal["mass_at"](atoms, c, s, half, center) + 1
+
+    monkeypatch.setitem(minimal["least_mass"].__globals__, "mass_at", one_too_many)
+    assert minimal["main"]([str(path)]) == 2
+    out = capsys.readouterr().out
+    assert "VERIFIED" not in out
+    assert "REFUSED" not in out
+    assert out.endswith(
+        "INTERNAL ERROR: no verdict; the verifier disagrees with itself: at t = 0 the "
+        "center (5/8, 5/8) covers 2 summed directly, but the grid says 1\n"
+    )
+    with pytest.raises(SystemExit) as usage:  # argparse: the other outcome with status 2
+        minimal["main"]([])
+    assert usage.value.code == 2
 
 
 def test_the_claim_documents_are_current() -> None:

@@ -1246,16 +1246,23 @@ def claim_path(facts: Facts) -> Path:
 # promise, and the page drops its list of claims rather than guess one.
 MEASURED_SECONDS = {"19-5": 36, "381-100": 175}
 
+# The pinned one-file checker's whole decision, `python minimal_verify.py
+# certificate.json`, as the proof card records it from 2026-09-05: 47.5 s on one
+# four-core machine and 67.0 s on a slower one. The page speaks from the slower, so
+# that its loose phrase is not the optimistic one (review of 2026-09-06, C6).
+PINNED_SECONDS = {"381-100": 67}
 
-def runtime_phrase(facts: Facts) -> str:
-    """How long the claim verifier takes, said loosely.
+
+def runtime_phrase(facts: Facts, *, pinned: bool = False) -> str:
+    """How long the claim verifier takes, said loosely; `pinned` asks for the checker's.
 
     'about half a minute', 'about 3 minutes': loose on purpose, since the reader's
     machine is not this one.
     """
-    seconds = MEASURED_SECONDS.get(slug(facts))
+    seconds = (PINNED_SECONDS if pinned else MEASURED_SECONDS).get(slug(facts))
     if seconds is None:
-        raise SystemExit(f"{facts.source.name}: the minimal verifier has not been timed on it")
+        program = "minimal_verify.py" if pinned else "the claim verifier"
+        raise SystemExit(f"{facts.source.name}: {program} has not been timed on it")
     if seconds < 45:
         return "about half a minute"
     if seconds < 90:
@@ -1279,6 +1286,7 @@ def claim_substitutions(headline: Facts, default: Facts) -> dict[str, str]:
         values[f"{role}_N_ATOMS"] = f"{len(f.atoms):,}"
         values[f"{role}_N_DIRECTIONS"] = str(f.steps + 1)
         values[f"{role}_RUNTIME"] = runtime_phrase(f)
+    values["HEADLINE_PINNED_RUNTIME"] = runtime_phrase(headline, pinned=True)
     return values
 
 
@@ -1967,7 +1975,10 @@ def render(certificate_paths: tuple[Path, ...], *, full_sweep: bool = False) -> 
     ]
 
     shared = shared_substitutions(facts, headline, facts[0])
-    claimed = all(claim_path(f).is_file() and slug(f) in MEASURED_SECONDS for f in facts)
+    claimed = (
+        all(claim_path(f).is_file() and slug(f) in MEASURED_SECONDS for f in facts)
+        and slug(headline) in PINNED_SECONDS
+    )
     if claimed:
         shared.update(claim_substitutions(headline, facts[0]))
     else:

@@ -38,19 +38,20 @@ per certificate; the prose is filled once, with the headline certificate's value
 ## What Is This?
 
 This paper presents a new lower bound on a long-standing open geometry problem: eleven
-disjoint unit squares, free to rotate, cannot fit in a
+unit squares with disjoint interiors, free to rotate, cannot fit in a
 ${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.
 
 The computer-assisted proof was found via an automated research framework.
-This is one of {{N_RESULTS}} new results of the framework so far.
-The witness used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted points in
-the container and selects a net of {{HEADLINE_N_DIRECTIONS}} rationally parameterized
+This is one of {{N_RESULTS}} results the framework has registered so far, {{N_NOVEL}} of
+them apparently new.
+The certificate used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted points
+in the container and selects a net of {{HEADLINE_N_DIRECTIONS}} rationally parameterized
 directions. Five exact conditions and a pigeonhole-style argument then imply the claim.
 
 This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
-open case of the square packing problem.
-The previous bound, {{PRIOR_LOWER_DEC}}, was Stromquist’s in
-{{PRIOR_YEAR}}.[^stromquist]
+open case of the square packing problem.[^novelty] The previous bound,
+{{PRIOR_LOWER_DEC}}, was Stromquist’s in
+{{PRIOR_YEAR}}.[^stromquist][^repair]
 
 The search, the checking, and the record are the work of agents following a flexible but
 defined research framework, available in
@@ -99,9 +100,12 @@ $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
 
 $s(11)$ is the smallest case still open.
 Trump’s 1979 packing shows $s(11) \le {{BEST_PACKING_TEX}}$.[^trump] Here we prove
-$s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$. The project proves two bounds.
-(Some of the figures below also show the looser one, $s({{N}}) \ge {{DEFAULT_L_FRAC}}$,
-whose smaller numbers make the illustration simpler.)
+$s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$. A second certificate, for the
+looser bound $s({{N}}) \ge {{DEFAULT_L_FRAC}}$, is kept beside it: its smaller numbers
+make the figures legible, and it is the one the project’s adversarial review of the
+checking package read line by line.
+The {{HEADLINE_L_FRAC}} certificate supersedes it, and some of the figures below show
+both.
 
 <figure>
   <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
@@ -134,21 +138,29 @@ whose smaller numbers make the illustration simpler.)
     {{NUMBER_LINE_MARKS}}
   </svg>
   </div>
-  <figcaption><strong>Figure 3.</strong> Bounds on <span class="tex">s(11)</span>. The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. Below <span class="tex">{{HEADLINE_L_FRAC}}</span> it is
-  <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span>.</figcaption>
+  <figcaption><strong>Figure 3.</strong> Bounds on <span class="tex">s(11)</span>. The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. With the lower bound at <span class="tex">{{HEADLINE_L_FRAC}}</span> the gap is
+  <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span> at Stromquist’s bound.</figcaption>
 </figure>
 
 ## The Five Conditions
 
+The argument is the weighted, fractional form of the classical unavoidable-set argument
+for square packing, in the shape Gustavo Massaccesi used for $n = 17$ in August 2026
+after Sam Burns proposed the weighted form,[^burns][^massaccesi] descended from Göbel’s
+unavoidable points (1979) and Nagamochi’s weighted resources (2005).[^lineage] Neither
+the theorem nor the shape of the certificate is this project’s; what is new here is the
+$n = 11$ instance and the generator that found it.
+
 The proof is a **certificate**: for $n$ unit squares in a container of side $L$, a
-finite set of weighted points in the container (the atoms), a net of directions
-$\theta_k = 2\arctan t_k$ for $k = 0, \dots, K$, each fixed by its rational half-tangent
-$t_k$, and a shrink $B \lt 1$, such that:
+finite set of points in the container, each with a nonnegative rational weight (the
+atoms; every weight in this certificate is positive), a net of directions
+$\theta_k = 2\arctan t_k$ with rational half-tangents
+$0 = t_0 \lt t_1 \lt \cdots \lt t_K$, and a shrink $B$, such that:
 
 <div class="conditions boxed-text">
 
 **Condition 1.** The atom set is invariant under the container’s symmetry group
-$\mathbf{D}_4$.
+$\mathbf{D}_4$, its four rotations and four reflections.
 
 **Condition 2.** The total mass of the atoms, the sum of all their weights, is strictly
 below $n$.
@@ -172,7 +184,8 @@ below is [computed]({{RENDERER_URL}}) from the one it shows.
 
 ## Atoms, Mass, and the Budget
 
-An **atom** is a point in the container with a positive rational weight.
+An **atom** is a point in the container with a nonnegative rational weight, and here
+every weight is positive.
 The **mass** $\mu(R)$ of a region is the sum of the weights of the atoms in it, a finite
 exact sum.
 
@@ -219,24 +232,24 @@ reflects onto that arc and covers the same mass.
     </div>
   </div>
   <div class="mass-line">
-    <div>Total mass on the board<span class="v tex">\mu\!\left([0,L]^2\right) = {{TOTAL_PLAIN}} = {{TOTAL_DEC}}</span></div>
-    <div>Mass eleven disjoint unit squares would need<span class="v tex">{{N}}</span></div>
+    <div>Total mass in the container<span class="v tex">\mu\!\left([0,L]^2\right) = {{TOTAL_PLAIN}} = {{TOTAL_DEC}}</span></div>
+    <div>Mass eleven packed unit squares would need<span class="v tex">{{N}}</span></div>
     <div>Shortfall<span class="v tex">{{SHORTFALL}}</span></div>
   </div>
   <div class="fig-choose">{{CERT_TOGGLE}}</div>
   <figcaption><strong>Figure 4. Conditions 1 and 2.</strong> The atoms. Disc area is proportional to weight. Mass gathers along the edges and in a ring inside the
   corners, where a square has least room to move, and thins in the middle. The weights are a rationalized
-  solution of a covering linear program on these sites. The board holds less mass than eleven disjoint unit
-  squares would need. Condition 2 is that comparison.</figcaption>
+  solution, on these sites, of the linear program described under Generator and Verifier. The container holds less
+  mass than eleven unit squares with disjoint interiors would need. Condition 2 is that comparison.</figcaption>
 </figure>
 
 <!--END:FIGURE-->
 
 ## Every Placement Covers Mass at Least One
 
-The first condition on the atoms, that every placement of a unit square holds mass at
-least $1$ in its interior, has three continuous parameters, two of position and one of
-angle.
+The covering requirement on the atoms, that every placement of a unit square holds mass
+at least $1$ in its interior, has three continuous parameters, two of position and one
+of angle.
 
 The proof makes it finite twice over.
 The angle is snapped to a net of {{N_DIRECTIONS}}
@@ -245,18 +258,20 @@ $B$. The next section shows why it stands in for a unit square at any angle.
 Within a direction, the set of atoms under the square changes only when an atom crosses
 an edge, so the positions collapse to finitely many **event cells**, on each of which
 the covered mass is constant.
-Condition 5 says every event cell, at every net direction, carries mass at least $1$.
+Condition 5 says every event cell the square’s center can reach without leaving the
+container, at every net direction, carries mass at least $1$.
 
 Figure 5 evaluates it.
 Every weight is a whole multiple of ${{SCALE}}$, so the readout counts units and rounds
-nothing. The least covered mass over every placement and all
-{{N_DIRECTIONS}} directions is
+nothing. The least covered mass over every placement and all {{N_DIRECTIONS}}
+directions is attained at direction $0$, by the square $Q$ centered at
+$({{WITNESS_X_JS}}, {{WITNESS_Y_JS}})$:
 
 $$
 \mu(Q) \;=\; {{LEAST_TEX}} \;=\; {{LEAST_DEC}},
 $$
 
-{{LEAST_MARGIN}} parts in {{SCALE_JS}} above the threshold.
+a margin of {{LEAST_MARGIN}} of those units above the threshold.
 
 <!--BEGIN:FIGURE-->
 
@@ -308,9 +323,9 @@ therefore first reflected across the container’s diagonal: the image is a unit
 the container whose angle $\varphi$ is on the arc, and by Condition 1 it covers the same
 mass. Let $\theta$ be the net angle nearest $\varphi$. A smaller square of side $B$ at
 angle $\theta$, with the same center, covers no more mass than the unit square if it
-fits inside it.
-So if every placement of the smaller square at a net angle covers mass at
-least 1, every unit square at any angle does too.
+fits inside it, because the weights are nonnegative.
+So if every placement of the smaller square at a net angle covers mass at least 1, every
+unit square at any angle does too.
 It fits exactly when
 
 $$
@@ -391,17 +406,21 @@ $$
   <figcaption><strong>Figure 6. Condition 4.</strong> The shrink that buys the finite net. The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
   side-<span class="tex">B</span> square at the nearest net angle. The proof only ever asks about the orange one.
   The product <span class="tex">B(\cos d + \sin d)</span> must stay below 1. At <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, that
-  product’s largest value, at the widest half-gap, is <span class="tex">{{SHRINK_PEAK_TEX}}</span> at <span class="tex">B = {{SHRINK_SIDE_TEX}}</span>, a seven-place
-  value one step below the largest Condition 4 admits, and <span class="tex">{{SHRINK_PEAK_CERT_TEX}}</span> at the certificate’s own
-  side.</figcaption>
+  product’s largest value, at the widest half-gap, is <span class="tex">{{SHRINK_PEAK_TEX}}</span> at <span class="tex">B = {{SHRINK_SIDE_TEX}}</span>, the side the figure
+  uses: one seven-decimal step below the largest side Condition 4 admits, a step taken so that the strict inequality holds
+  however the division falls, so the shrink shown is, to within that step, the least the net allows. At the certificate’s own
+  side the product reaches <span class="tex">{{SHRINK_PEAK_CERT_TEX}}</span>.</figcaption>
 </figure>
 
 <!--END:FIGURE-->
 
 <!--BEGIN:COARSENING-->
 
-## Why the Net Has {{N_DIRECTIONS}} Directions
+## What a Coarser Net Costs
 
+The net was not derived here.
+It is the one Massaccesi’s $n = 17$ certificate used, {{N_DIRECTIONS}} half-tangents
+equally spaced from $0$ to ${{LIMIT_NUM}}/{{LIMIT_DEN}}$, carried over unchanged.
 To price a coarser net, hold a certificate’s atoms fixed, coarsen the net, set $B$ to a
 seven-place value one step below the largest Condition 4 admits, and decide Condition 5
 again.
@@ -453,14 +472,15 @@ costs.
 Take any packing of eleven unit squares in the side-{{L_DEC}} container.
 Reflect across the container’s diagonal each square whose angle lies past $\pi/4$, so
 that every angle is on the arc from $0$ to $\pi/4$ the net covers (Condition 3). Each
-square then contains a side-$B$ square $Q_i$ with the same center at the nearest net
-angle, inside the unit square’s interior: the mismatch $d$ of the two angles has
-$\tan d \le D$, and Condition 4 makes $B(\cos d + \sin d) \lt 1$ for every such $d$.
-Each $Q_i$ covers mass at least $1$, which is Condition 5. Now reflect back each square
-that was reflected, and $Q_i$ with it.
+square then contains a side-$B$ square $Q_i$, centered at the same point and oriented at
+the nearest net angle, inside the unit square’s interior: the mismatch $d$ of the two
+angles has $\tan d \le D$, and Condition 4 makes $B(\cos d + \sin d) \lt 1$ for every
+such $d$. Each $Q_i$ covers mass at least $1$, which is Condition 5. Now reflect back
+each square that was reflected, and $Q_i$ with it.
 $Q_i$ still lies in its own unit square’s interior, and by Condition 1 it still covers
 mass at least $1$. The unit squares have disjoint interiors, so the eleven $Q_i$ are
-disjoint and no atom is counted twice.
+disjoint. Because the weights are nonnegative and no atom is counted twice, the eleven
+together cover at most the container’s total mass.
 Then
 
 $$
@@ -471,6 +491,11 @@ where the last step is Condition 2. The two ends contradict each other, so no su
 packing exists, and $s({{N}}) \ge {{L_FRAC}}$.
 
 </div>
+
+The argument shows that a container of side exactly {{L_FRAC}} is too small.
+By compactness a packing exists at the infimum, so in fact $s({{N}}) \gt {{L_FRAC}}$;
+the claim is stated as $\ge$ because that is what the theorem behind the verifier
+proves, with no appeal to compactness.
 
 ## Generator and Verifier
 
@@ -501,7 +526,10 @@ The search runs in floating point.
 None of it is part of the proof: the [generator]({{GENERATOR_URL}}) writes the
 certificate to a file, and the [verifier]({{VERIFIER_URL}}) decides Conditions 1 through
 5 on it in exact rational arithmetic.
-A wrong linear program will be rejected by the verifier.
+A certificate written by a wrong program is rejected by the verifier.
+The gate that admits a certificate to the record asks for two verdicts: it accepts one
+only when the exact event-cell sweep and an interval branch-and-bound, which decide
+Condition 5 by distinct methods, both accept it and report the same least covered mass.
 
 A [first-party package for third-party checking]({{THIRDPARTY_URL}}) gathers what an
 outside check needs: the theorem written out, the {{DEFAULT_L_FRAC}} certificate as
@@ -523,11 +551,28 @@ coding agent or check by hand.
 - $s(11) \ge {{HEADLINE_L_FRAC}}$: [`{{HEADLINE_CLAIM_NAME}}`]({{HEADLINE_CLAIM_URL}}),
   {{HEADLINE_N_ATOMS}} atoms, verified in {{HEADLINE_RUNTIME}}.
 
+The times are the embedded verifier’s, on a laptop.
+The one-file checker beside it that pins the certificate’s digest, `minimal_verify.py`,
+decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
+
 <!--END:CLAIM-->
 
 [^stromquist]: Walter Stromquist,
     [Packing 10 or 11 unit squares in a square]({{PRIOR_URL}}), Electronic Journal of
     Combinatorics 10 (2003), R8.
+
+[^novelty]: No improvement on Stromquist’s {{PRIOR_YEAR}} bound is known to us.
+    The search behind that statement, recorded in the repository, covered the project’s
+    literature archive and source register, then arXiv, Crossref, OpenAlex and Semantic
+    Scholar, author pages and the public packing catalogues, through September 4, 2026.
+    It did not exhaust subscription-only indexes, theses and proceedings, or unindexed
+    sources. The claim is apparent novelty within the searched public record, not
+    priority.
+
+[^repair]: The bound is correct, but the project found that Stromquist’s printed
+    argument does not close at his Figure 14 and repaired it with a source-distinct
+    point set, certified exactly (`T-010` in the project’s result register).
+    The proof here does not depend on it.
 
 [^survey]: Erich Friedman,
     [Packing unit squares in squares: a survey and new results]({{PROBLEM_URL}}),
@@ -536,6 +581,20 @@ coding agent or check by hand.
 [^trump]: Walter Trump’s packing of 1979, as recorded in
     [Kingbird’s register of squares in squares]({{BEST_URL}}). The
     [rendering]({{BEST_RENDER_URL}}) is the project’s own.
+
+[^burns]: Sam Burns,
+    [Proposing a Better Lower Bound for n=17 Square Packing](https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/),
+    August 2026.
+
+[^massaccesi]: Gustavo Massaccesi,
+    [Another Better Lower Bound for n=17 Square Packing](https://gus-massa.blogspot.com/2026/08/another-better-lower-bound-for-n17.html),
+    August 2026, with the linear program that found it described in
+    [a companion post](https://gus-massa.blogspot.com/2026/08/linear-programing-for-square-packing.html).
+
+[^lineage]: F. Göbel, Geometrical packing and covering problems, in *Packing and
+    Covering in Combinatorics*, Mathematical Centre Tracts 106 (1979), 179–199; Hiroshi
+    Nagamochi, Packing unit squares in a rectangle, Electronic Journal of Combinatorics
+    12 (2005), R37.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
