@@ -478,17 +478,11 @@ on both constructions, leaving the `m = 5` covering wall bracketed to
   deep-run work is repeated, 92 per cent of that repetition is trees that did not move,
   and the `touches` sets account for 1.6 per cent.
   The tree id is the lever; `touches` is not.
-- Per-test cost now reads observed CPU lower bounds beside wall, so the ceiling is `6 s`
-  of CPU against a `2 s` marking threshold rather than `12 s` of wall — three times the
-  threshold instead of six.
-  Under contention an ordinary test reports as a slow one on wall, and a ceiling
-  measured that way exiles tests for having noisy neighbours.
-  The wall check stays at `12 s` behind it, because CPU cannot see a test that is
-  expensive by waiting, nor a `multiprocessing` forkserver worker, whose CPU the
-  persistent server reaps before the pytest process can observe it — and forkserver is
-  Python 3.14’s Linux default.
-  What remains open is that the reading is a lower bound: a gate may fail on it, never
-  pass on it.
+- Per-test CPU observations remain diagnostic: an earlier fixture’s child work can be
+  charged to the call that reaps it, and forkserver descendants can be omitted entirely.
+  The gate cannot use these counters to accept or reject an individual test on CPU cost.
+  It retains the `12 s` call-wall ceiling against a `2 s` marking threshold.
+  Reliable attribution across phases and descendant processes remains open.
 
 **What the block cost the trunk.** [D-470](defects.md): a test pinned to the moving
 `certificate.json` pointer still asserted the rung `T-021` displaced, and `main` sat red

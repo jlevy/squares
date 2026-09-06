@@ -274,10 +274,7 @@ tiers:
   # parallelising -- which is the regression a ceiling on an outer-parallel tier is
   # actually for.
   ceiling_seconds: 180.0
-  # Unmeasured for the same reason as `checks` and `suite`: this box reports the same four
-  # cpus CI does, so a local reading would match the reference shape and arm the drift and
-  # stale rules against the wrong machine. The first CI run at the reference shape prints
-  # the line to paste.
+  # Hosted samples at the reference shape establish the baseline below.
   measured_seconds: 91.55
   measured_on: '2026-09-06'
   measured_where: >-
@@ -335,10 +332,7 @@ tiers:
   # why 240s is not tightened to the faster of them: that is what a shared box does to a
   # wall, and a band set to a good day fails on an ordinary one.
   ceiling_seconds: 205.0
-  # Unmeasured for the same reason as `checks`: this box reports the same four cpus CI
-  # does, so a local reading would match the reference shape and arm the drift and stale
-  # rules against the wrong machine. The first CI run at the reference shape prints the
-  # line to paste.
+  # Hosted samples at the reference shape establish the baseline below.
   measured_seconds: 102.83
   measured_on: '2026-09-06'
   measured_where: >-
