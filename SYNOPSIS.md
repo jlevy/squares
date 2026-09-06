@@ -471,7 +471,16 @@ pull request. [D-471](defects.md): `D-459`’s conflicted-branch CI blackout fir
 more times in the same day, and until this branch nothing but a person detected it;
 `branch-mergeability.yml` asks `git merge-tree` on every push, off the branch tip rather
 than off a merge ref that by definition cannot be built.
-Both entries stay open because neither workflow has reached `main`.
+Both entries stay open because neither workflow has reached `main`. [D-472](defects.md)
+is the block’s own reasoning failure rather than the trunk’s: a twenty per cent
+difference between two hosted runs was attributed to pool contention and written into a
+commit message as established, and the next run refuted it — with the pools serial, on
+the same code path as the 81.18s reading, the step returned 108.91s. Run-to-run spread
+on these runners is about thirty-four per cent, so one sample per configuration cannot
+resolve the effect being claimed.
+It is recorded because of where it happened: three commits earlier the same block
+measured exactly this for per-test timing and recommended a cpu-time ceiling, and the
+finding was then not carried up a level, from a test to a job, within the hour.
 
 **Selected next entry:** `think-xejq`, `BC-215` in
 [agenda-023](packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md) —
@@ -3216,14 +3225,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 471 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 472 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 94 | asserted something false about the mathematics |
 | validity | 118 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 181 | recorded something its own evidence contradicts |
+| bookkeeping | 182 | recorded something its own evidence contradicts |
 | robustness | 60 | did not finish, or finished only by luck |
 | performance | 18 | worked, but cost far more than it should |
 
@@ -3233,7 +3242,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy-one defects in 471, and no soundness defect
+**The automated gate has caught seventy-two defects in 472, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

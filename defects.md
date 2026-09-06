@@ -2,7 +2,7 @@
 
 # Defect log
 
-471 defects recorded across the packing toolchain.
+472 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -10,7 +10,7 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 
 - **94 soundness defects** — the system asserting something false about the mathematics. 74 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
 - **108 fixes left no regression check behind.** That list is the best predictor of what comes back; recorded recurrences are D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268, D-279 repeats D-271, D-281 repeats D-267, D-282 repeats D-264, D-312 repeats D-309, D-313 repeats D-259, D-315 repeats D-295, D-318 repeats D-308, D-321 repeats D-317, D-323 repeats D-022, D-324 repeats D-320, D-325 repeats D-319, D-326 repeats D-305, D-327 repeats D-301, D-334 repeats D-028, D-337 repeats D-107, D-339 repeats D-155, D-340 repeats D-163, D-386 repeats D-358, D-395 repeats D-358, D-397 repeats D-358, D-400 repeats D-398, D-422 repeats D-371, D-424 repeats D-144, D-427 repeats D-413, D-451 repeats D-442, D-452 repeats D-442, D-454 repeats D-442, D-458 repeats D-443, D-470 repeats D-458, D-471 repeats D-459.
-- **66 are still open** (outstanding or contained), every one carrying a bead.
+- **67 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -23,9 +23,9 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `inspection` | 61 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 71 | the automated test suite |
+| `gate` | 72 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 71 of 471, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 72 of 472, and none of the 94 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 71 of 471, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 9 |
-| record | 146 |
+| record | 147 |
 | tooling | 173 |
 | docs | 109 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 71 of 471, and none of
 | --- | ---: |
 | soundness | 94 |
 | validity | 118 |
-| bookkeeping | 181 |
+| bookkeeping | 182 |
 | robustness | 60 |
 | performance | 18 |
 
@@ -234,6 +234,7 @@ This is the actionable list.
 | D-467 | outstanding | medium | Two branches allocated the same three defect ids to different defects, and nothing local can see it | `think-8bcl` |
 | D-470 | contained | medium | A test pinned to the moving certificate pointer went stale, and no pull request could have caught it | `think-doar` |
 | D-471 | outstanding | medium | The conflicted-branch CI blackout fired three more times in one day, and nothing but a person detects it | `think-706h` |
+| D-472 | outstanding | medium | A single CI timing was treated as a measurement, and a twenty per cent difference was attributed inside thirty-four per cent of noise | `think-be1s` |
 
 ## Every defect
 
@@ -710,6 +711,7 @@ This is the actionable list.
 | [D-469](packing/pyproject.toml) | 2026-09-06 | tooling | bookkeeping |  | `inspection` | low | fixed | A dependency comment claimed a reproducibility the code it describes denies |
 | [D-470](packing/tests/test_fractional_interval.py) | 2026-09-06 | tooling | bookkeeping |  | `gate` | medium | contained | A test pinned to the moving certificate pointer went stale, and no pull request could have caught it |
 | [D-471](.github/workflows/branch-mergeability.yml) | 2026-09-06 | tooling | robustness |  | `inspection` | medium | outstanding | The conflicted-branch CI blackout fired three more times in one day, and nothing but a person detects it |
+| [D-472](packing/devtools/gate-budgets.yaml) | 2026-09-06 | record | bookkeeping |  | `gate` | medium | outstanding | A single CI timing was treated as a measurement, and a twenty per cent difference was attributed inside thirty-four per cent of noise |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 471
+count: 472
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -15473,3 +15473,61 @@ defects:
   status: outstanding
   bead: think-706h
   recorded_in: .github/workflows/branch-mergeability.yml
+- id: D-472
+  title: A single CI timing was treated as a measurement, and a twenty per cent difference
+    was attributed inside thirty-four per cent of noise
+  date: '2026-09-06'
+  layer: record
+  class: bookkeeping
+  detected_by: gate
+  latent_for: >-
+    About an hour, between the commit that asserted the causal claim and the next CI run
+    that refuted it. The underlying exposure is older: every cost figure this project has
+    quoted from a single hosted run carries it, and the gate-budgets drift rule is armed
+    against exactly such figures.
+  severity: medium
+  what: >-
+    The sweeps tier measured 81.18s on one run and 98.25s on the next, across a change
+    that gave two of its four steps process pools. The regression was attributed to
+    aggregate contention -- three pooled steps asking for two workers each in a job with
+    four outer slots on four cpus -- and the argument cited `known-best n=1..100 atlas`,
+    which has no pool, inflating 60.97s to 98.25s alongside them. That reasoning was
+    written into a commit message as established fact.
+    The next run refuted it. With both new pools defaulted to serial, which is the same
+    code path the 81.18s reading came from, the chunk census returned 108.91s -- worse
+    than either pooled reading. In the same run `validate` moved 112s to 133s and `suite`
+    114s to 125s, on code neither commit touched.
+    So the spread between runs of identical code is about thirty-four per cent, and the
+    effect being attributed was about twenty. One sample per configuration cannot resolve
+    it. The unpooled step inflating was evidence for shared contention and equally
+    evidence for a slow runner, and only the first was weighed.
+  consequence: >-
+    No wrong code shipped and no false claim reached a record that outlives the branch:
+    the commit message was corrected in the same branch, the pull-request body was
+    restated as a range, and the change it argued for is independently justified. The
+    cost is the reasoning, not the artifact.
+    What makes it worth an entry is where it happened. `9bf48256`, three commits earlier,
+    measured this exact effect one level down -- wall time on a shared runner measures the
+    neighbours, three runs of the same suite spreading 3.43x on wall against 1.11x on cpu
+    -- and recommended a cpu-time ceiling because of it. The same author then made the
+    wall-time mistake one level up, on a job instead of a test, within the hour. A finding
+    that is not carried across scales is not yet a finding.
+  fix: >-
+    Quote hosted figures as ranges over repeated samples, and do not attribute a
+    difference smaller than the observed run-to-run spread. The three samples of the
+    four-job surface are 124s, 122s and 137s, so the claim this branch supports is a
+    roughly two-fold improvement against 235-282s, which survives the spread, rather than
+    any particular second inside it.
+    The change the bad reasoning argued for stands on its own ground: the pull-request
+    surface is bounded by `geometry`, `sweeps` is not on the critical path, so pooling
+    there buys no wall either way, and defaulting to serial keeps the shape that is
+    measured-good.
+  regression: >-
+    None yet, and that is the honest status. `gate-budgets.yaml` already carries a drift
+    rule at 1.5x and a stale rule at 0.6x, both of which compare against a single recorded
+    `measured_seconds`; against a thirty-four per cent spread a 1.5x rule is close to the
+    noise floor, so it will fire on quiet regressions and stay silent on real ones. That
+    is the thing to fix next, and it is a register change rather than a document one.
+  status: outstanding
+  bead: think-be1s
+  recorded_in: packing/devtools/gate-budgets.yaml
