@@ -94,7 +94,7 @@ def test_the_injected_operating_rule_is_the_next_free_id() -> None:
     which is how the second occurrence reached `main`.
     """
     rules = (anchors.ROOT.parent / "operating-rules.md").read_text(encoding="utf-8")
-    highest = max(int(m) for m in re.findall(r"^### OR-(\d+)", rules, re.M))
+    highest = max(int(m) for m in re.findall(r"^### OR-(\d+)", rules, re.MULTILINE))
     control = next(
         item
         for item in controls()
