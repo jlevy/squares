@@ -516,7 +516,7 @@ Status: **active**. Give one managing agent a disjoint, exact program for the li
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-230 | research | 11 | complete | 0 | think-c678 | After BC-220, BC-231 must implement all three exact decision routes and execute every reviewed positive and negative control. No adaptive certificate exists yet. |
 | BC-231 | tool_validation | 11, 12, 17 | blocked | 0 | think-7mk4 | A trustworthy decision boundary on which an adaptive 3.8125 run may rely. |
-| BC-232 | research | 11 | ready | 0 | think-gmdy | Which side of eleven the current one-body formulation reaches at 3.82, or a measured reason to stop spending on this checkpoint. |
+| BC-232 | research | 11 | in_progress | 0 | think-gmdy | Which side of eleven the current one-body formulation reaches at 3.82, or a measured reason to stop spending on this checkpoint. |
 | BC-233 | research | 11, 17 | complete | 1 | think-jbat | This seed rule is retired. Reopen margin-biased seeding only under a new preregistered mechanism that can explain why unrestricted trajectories should diverge from the byte-identical control. |
 | BC-234 | research | 11 | blocked | 0 | think-1sv0 | A directly publishable rung or a quantitative verdict on adaptive witness cores. |
 | BC-235 | research | 11 | blocked | 1 | think-ay89 | Whether a strictly richer one-body witness can be represented by a small exact verifier. |

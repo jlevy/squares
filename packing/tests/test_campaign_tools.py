@@ -824,6 +824,7 @@ def test_depends_on_resolves_across_agendas_like_discharged_by(
             _cell("BC-904", "blocked", ["BC-902"]),
             _cell("BC-905", "blocked", ["BC-999"]),
             _cell("BC-906", "ready", ["BC-902"]),
+            _cell("BC-907", "in_progress", ["BC-902"]),
         ],
     }
     problems = ledger.check(
@@ -839,6 +840,10 @@ def test_depends_on_resolves_across_agendas_like_discharged_by(
     assert any("BC-905 depends on unknown items ['BC-999']" in problem for problem in problems)
     assert any(
         "BC-906 is ready with incomplete dependencies ['BC-902']" in problem
+        for problem in problems
+    )
+    assert any(
+        "BC-907 is in_progress with incomplete dependencies ['BC-902']" in problem
         for problem in problems
     )
 

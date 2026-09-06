@@ -53,15 +53,17 @@ FOOTER = (
     "-->"
 )
 
-# Declared-state order, most actionable first. `tentative` is in the schema and has
-# never been used; it is listed so a first use appears in the right place rather than
-# being sorted to the end as an unknown.
-STATE_ORDER = ("ready", "tentative", "blocked", "stopped", "complete")
+# Declared-state order, most actionable first. Work already in progress leads so a
+# replacement session resumes it before taking a fresh ready cell. `tentative` is in the
+# schema and has never been used; it is listed so a first use appears in the right place
+# rather than being sorted to the end as an unknown.
+STATE_ORDER = ("in_progress", "ready", "tentative", "blocked", "stopped", "complete")
 
 # What each state means for a session picking work. The schema names the values; it
 # does not say which of them a coordinator may act on, and that is the whole question
 # this document exists to answer.
 STATE_MEANING = {
+    "in_progress": "underway and resumable from its recorded checkpoint",
     "ready": "may be taken now",
     "tentative": "declared but not yet committed to",
     "blocked": "waiting on a named predecessor",
@@ -160,7 +162,7 @@ def violations(commitments: list[Commitment]) -> list[str]:
                 f"{c.id} is {c.state} inside terminal {c.agenda}; every item in a "
                 "completed or superseded agenda must be complete or stopped"
             )
-        if c.discharged_by and c.state in ("ready", "tentative"):
+        if c.discharged_by and c.state in ("in_progress", "ready", "tentative"):
             out.append(
                 f"{c.id} is {c.state} but names discharged_by: {c.discharged_by}; "
                 "a commitment another one discharges is not takeable"
@@ -235,7 +237,7 @@ def program_order(cells: list[Commitment]) -> list[Commitment]:
 
 def render(commitments: list[Commitment]) -> str:
     done = {c.id for c in commitments if c.state == "complete"}
-    live = [c for c in commitments if c.state in ("ready", "tentative")]
+    live = [c for c in commitments if c.state in ("in_progress", "ready", "tentative")]
     blocked = [c for c in commitments if c.state == "blocked"]
     counts = Counter(c.state for c in commitments)
 
@@ -302,13 +304,13 @@ def render(commitments: list[Commitment]) -> str:
         out += [
             "Commitments a session may take now, in each agenda's declared order.",
             "",
-            "| agenda | id | pri | focus | purpose | question | bead |",
-            "| --- | --- | ---: | --- | --- | --- | --- |",
+            "| agenda | id | state | pri | focus | purpose | question | bead |",
+            "| --- | --- | --- | ---: | --- | --- | --- | --- |",
         ]
         for c in sorted(live, key=lambda c: (c.agenda, c.priority)):
             out.append(
-                f"| {c.agenda} | `{c.id}` | {c.priority} | {c.owner_focus} | {c.purpose} "
-                f"| {truncate(c.question, 110)} | `{c.bead}` |"
+                f"| {c.agenda} | `{c.id}` | {c.state} | {c.priority} | {c.owner_focus} "
+                f"| {c.purpose} | {truncate(c.question, 110)} | `{c.bead}` |"
             )
     else:
         out += ["No commitment is in a takeable state.", ""]
@@ -446,8 +448,8 @@ def main() -> int:
         agendas = len({c.agenda for c in commitments})
         print(
             f"  agenda map matches {len(commitments)} commitments across {agendas} "
-            f"agendas: {counts['ready']} ready, {counts['blocked']} blocked, "
-            f"{counts['complete']} complete"
+            f"agendas: {counts['in_progress']} in progress, {counts['ready']} ready, "
+            f"{counts['blocked']} blocked, {counts['complete']} complete"
         )
         return 0
 

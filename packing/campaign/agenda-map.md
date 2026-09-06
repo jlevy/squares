@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **13** ready, **5** tentative, **60** blocked, **41** stopped, **119** complete.
+- **1** in_progress, **12** ready, **5** tentative, **60** blocked, **41** stopped, **119** complete.
 
 - **17 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-220`, `BC-238`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -18,26 +18,26 @@ order rather than imposing one across them.
 
 Commitments a session may take now, in each agenda's declared order.
 
-| agenda | id | pri | focus | purpose | question | bead |
-| --- | --- | ---: | --- | --- | --- | --- |
-| agenda-001 | `BC-010` | 0 | insight | research | Are the equal-side n=5 candidates connected in the stationary set, and what verified minimax clearance… | `think-iivb` |
-| agenda-002 | `BC-017` | 1 | efficiency | tool_validation | Can a stratum be priced in counted LP solves end to end, so enumeration results are comparable to each other… | `think-u97a` |
-| agenda-005 | `BC-049` | 1 | correctness | research | Are the packings the catalogue annotates "Rigid." actually rigid, on evidence of our own rather than on the… | `think-xdly` |
-| agenda-009 | `BC-089` | 0 | correctness | research | Which of the 13 trailing cases still owned here with a published exact side are materialisations of a… | `think-d0j1` |
-| agenda-009 | `BC-091` | 1 | insight | research | At the 31 open sizes where nobody has beaten the trivial grid, is the grid optimal or merely unbeaten? | `think-7t9u` |
-| agenda-009 | `BC-090` | 2 | insight | research | Can a stricter, better informed search beat a stochastic incumbent at any of the ten sizes whose best known… | `think-xdly` |
-| agenda-010 | `BC-099` | 0 | correctness | research | Does Bentz 2010's m = 4 argument certify mechanically, or where exactly does it escape? | `think-1o1f` |
-| agenda-010 | `BC-104` | 2 | insight | research | Does the stage-1 pipeline -- enumerator, glued rows, class-angle sweep -- reproduce the proved controls… | `think-sfzh` |
-| agenda-010 | `BC-097` | 3 | process | tool_validation | Is the queue readable -- the gap ranking on a durable surface, and the 25 stale in_progress beads reconciled? | `think-6z95` |
-| agenda-010 | `BC-105` | 3 | correctness | research | Can a restricted-class optimality statement at n = 11 -- no packing of at most K chunks with at most two tilt… | `think-dbtx` |
-| agenda-018 | `BC-183` | 2 | insight | research | Can the n = 40 admissible cone be characterised on the disjunctive system, so that Goebel's n = 40 packing's… | `think-3yxk` |
-| agenda-018 | `BC-184` | 2 | efficiency | tool_validation | Can the generic interval certifier be wired end to end and reproduce T-009's n = 29 bound through the generic… | `think-4f4d` |
-| agenda-019 | `BC-190` | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and did so 22.7 times… | `think-jgeg` |
-| agenda-023 | `BC-214` | 0 | efficiency | tool_validation | Can the pull-request surface be brought under four minutes without deleting a check, by moving the broad… | `think-doar` |
-| agenda-023 | `BC-216` | 0 | process | tool_validation | What check would have caught the 499 s to 1370 s regression in the week it happened, and does it hold when… | `think-gy30` |
-| agenda-023 | `BC-218` | 0 | efficiency | tool_validation | How much of the gate's remaining wall is sequencing rather than work, and what does it cost to run the… | `think-m5ev` |
-| agenda-025 | `BC-232` | 0 | efficiency | research | Can the retained 3.82 primal/dual state be advanced to total covering mass below 11 or exact packing value at… | `think-gmdy` |
-| agenda-026 | `BC-241` | 0 | correctness | measurement_validation | Does a source-distinct reviewer reproduce every conclusion that the retained Trump records actually support,… | `think-woi0` |
+| agenda | id | state | pri | focus | purpose | question | bead |
+| --- | --- | --- | ---: | --- | --- | --- | --- |
+| agenda-001 | `BC-010` | ready | 0 | insight | research | Are the equal-side n=5 candidates connected in the stationary set, and what verified minimax clearance… | `think-iivb` |
+| agenda-002 | `BC-017` | ready | 1 | efficiency | tool_validation | Can a stratum be priced in counted LP solves end to end, so enumeration results are comparable to each other… | `think-u97a` |
+| agenda-005 | `BC-049` | ready | 1 | correctness | research | Are the packings the catalogue annotates "Rigid." actually rigid, on evidence of our own rather than on the… | `think-xdly` |
+| agenda-009 | `BC-089` | ready | 0 | correctness | research | Which of the 13 trailing cases still owned here with a published exact side are materialisations of a… | `think-d0j1` |
+| agenda-009 | `BC-091` | ready | 1 | insight | research | At the 31 open sizes where nobody has beaten the trivial grid, is the grid optimal or merely unbeaten? | `think-7t9u` |
+| agenda-009 | `BC-090` | tentative | 2 | insight | research | Can a stricter, better informed search beat a stochastic incumbent at any of the ten sizes whose best known… | `think-xdly` |
+| agenda-010 | `BC-099` | ready | 0 | correctness | research | Does Bentz 2010's m = 4 argument certify mechanically, or where exactly does it escape? | `think-1o1f` |
+| agenda-010 | `BC-104` | tentative | 2 | insight | research | Does the stage-1 pipeline -- enumerator, glued rows, class-angle sweep -- reproduce the proved controls… | `think-sfzh` |
+| agenda-010 | `BC-097` | ready | 3 | process | tool_validation | Is the queue readable -- the gap ranking on a durable surface, and the 25 stale in_progress beads reconciled? | `think-6z95` |
+| agenda-010 | `BC-105` | tentative | 3 | correctness | research | Can a restricted-class optimality statement at n = 11 -- no packing of at most K chunks with at most two tilt… | `think-dbtx` |
+| agenda-018 | `BC-183` | tentative | 2 | insight | research | Can the n = 40 admissible cone be characterised on the disjunctive system, so that Goebel's n = 40 packing's… | `think-3yxk` |
+| agenda-018 | `BC-184` | tentative | 2 | efficiency | tool_validation | Can the generic interval certifier be wired end to end and reproduce T-009's n = 29 bound through the generic… | `think-4f4d` |
+| agenda-019 | `BC-190` | ready | 0 | efficiency | tool_validation | The interval route decides more directions on fewer hypotheses than the exact sweep and did so 22.7 times… | `think-jgeg` |
+| agenda-023 | `BC-214` | ready | 0 | efficiency | tool_validation | Can the pull-request surface be brought under four minutes without deleting a check, by moving the broad… | `think-doar` |
+| agenda-023 | `BC-216` | ready | 0 | process | tool_validation | What check would have caught the 499 s to 1370 s regression in the week it happened, and does it hold when… | `think-gy30` |
+| agenda-023 | `BC-218` | ready | 0 | efficiency | tool_validation | How much of the gate's remaining wall is sequencing rather than work, and what does it cost to run the… | `think-m5ev` |
+| agenda-025 | `BC-232` | in_progress | 0 | efficiency | research | Can the retained 3.82 primal/dual state be advanced to total covering mass below 11 or exact packing value at… | `think-gmdy` |
+| agenda-026 | `BC-241` | ready | 0 | correctness | measurement_validation | Does a source-distinct reviewer reproduce every conclusion that the retained Trump records actually support,… | `think-woi0` |
 
 ## Blocked, and on what
 
@@ -123,34 +123,34 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 
 ## By agenda
 
-| agenda | status | ready | tentative | blocked | stopped | complete | total |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| agenda-001 | active | 1 |  | 4 |  | 10 | 15 |
-| agenda-002 | active | 1 |  | 7 |  | 3 | 11 |
-| agenda-003 | active |  |  | 1 | 1 | 6 | 8 |
-| agenda-004 | active |  |  |  |  | 7 | 7 |
-| agenda-005 | active | 1 |  | 1 | 1 | 7 | 10 |
-| agenda-006 | completed |  |  |  | 2 | 23 | 25 |
-| agenda-007 | completed |  |  |  |  | 4 | 4 |
-| agenda-008 | completed |  |  |  |  | 4 | 4 |
-| agenda-009 | active | 2 | 1 |  | 1 | 4 | 8 |
-| agenda-010 | active | 2 | 2 |  |  | 9 | 13 |
-| agenda-011 | completed |  |  |  |  | 2 | 2 |
-| agenda-012 | active |  |  | 1 | 5 | 2 | 8 |
-| agenda-013 | completed |  |  |  | 1 | 6 | 7 |
-| agenda-014 | completed |  |  |  | 7 | 7 | 14 |
-| agenda-015 | completed |  |  |  | 6 | 4 | 10 |
-| agenda-016 | completed |  |  |  | 8 | 1 | 9 |
-| agenda-017 | completed |  |  |  | 7 | 4 | 11 |
-| agenda-018 | paused |  | 2 | 14 |  |  | 16 |
-| agenda-019 | paused | 1 |  | 4 |  | 1 | 6 |
-| agenda-020 | completed |  |  |  |  | 1 | 1 |
-| agenda-021 | completed |  |  |  | 2 | 6 | 8 |
-| agenda-022 | active |  |  | 7 |  | 2 | 9 |
-| agenda-023 | active | 3 |  | 2 |  |  | 5 |
-| agenda-024 | active |  |  | 6 |  | 1 | 7 |
-| agenda-025 | active | 1 |  | 7 |  | 2 | 10 |
-| agenda-026 | active | 1 |  | 6 |  | 3 | 10 |
+| agenda | status | in_progress | ready | tentative | blocked | stopped | complete | total |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| agenda-001 | active |  | 1 |  | 4 |  | 10 | 15 |
+| agenda-002 | active |  | 1 |  | 7 |  | 3 | 11 |
+| agenda-003 | active |  |  |  | 1 | 1 | 6 | 8 |
+| agenda-004 | active |  |  |  |  |  | 7 | 7 |
+| agenda-005 | active |  | 1 |  | 1 | 1 | 7 | 10 |
+| agenda-006 | completed |  |  |  |  | 2 | 23 | 25 |
+| agenda-007 | completed |  |  |  |  |  | 4 | 4 |
+| agenda-008 | completed |  |  |  |  |  | 4 | 4 |
+| agenda-009 | active |  | 2 | 1 |  | 1 | 4 | 8 |
+| agenda-010 | active |  | 2 | 2 |  |  | 9 | 13 |
+| agenda-011 | completed |  |  |  |  |  | 2 | 2 |
+| agenda-012 | active |  |  |  | 1 | 5 | 2 | 8 |
+| agenda-013 | completed |  |  |  |  | 1 | 6 | 7 |
+| agenda-014 | completed |  |  |  |  | 7 | 7 | 14 |
+| agenda-015 | completed |  |  |  |  | 6 | 4 | 10 |
+| agenda-016 | completed |  |  |  |  | 8 | 1 | 9 |
+| agenda-017 | completed |  |  |  |  | 7 | 4 | 11 |
+| agenda-018 | paused |  |  | 2 | 14 |  |  | 16 |
+| agenda-019 | paused |  | 1 |  | 4 |  | 1 | 6 |
+| agenda-020 | completed |  |  |  |  |  | 1 | 1 |
+| agenda-021 | completed |  |  |  |  | 2 | 6 | 8 |
+| agenda-022 | active |  |  |  | 7 |  | 2 | 9 |
+| agenda-023 | active |  | 3 |  | 2 |  |  | 5 |
+| agenda-024 | active |  |  |  | 6 |  | 1 | 7 |
+| agenda-025 | active | 1 |  |  | 7 |  | 2 | 10 |
+| agenda-026 | active |  | 1 |  | 6 |  | 3 | 10 |
 
 ## By program
 
@@ -188,7 +188,7 @@ Open frontier: `BC-204`, `BC-205`, `BC-212`.
 | --- | --- | --- | --- |
 | agenda-025 | `BC-230` | complete | What exact containment theorem and certificate contract allow every angle cell to use its own… |
 | agenda-025 | `BC-231` | blocked | Can an exact verifier decide the adaptive-core contract and refuse uncovered angles, unsafe cell… |
-| agenda-025 | `BC-232` | ready | Can the retained 3.82 primal/dual state be advanced to total covering mass below 11 or exact… |
+| agenda-025 | `BC-232` | in_progress | Can the retained 3.82 primal/dual state be advanced to total covering mass below 11 or exact… |
 | agenda-025 | `BC-233` | complete | Does an inset-support sweep provide a better seed for n=11 only after its support is released into… |
 | agenda-025 | `BC-234` | blocked | After exact adaptive semantics and controls pass, can they certify 3.8125 and then 3.815 without… |
 | agenda-025 | `BC-235` | blocked | If square cores stall, can each angle cell be assigned a rational inner kernel contained in every… |
@@ -255,6 +255,7 @@ Open frontier: `BC-209`.
 
 ## What the states mean
 
+- `in_progress` — underway and resumable from its recorded checkpoint
 - `ready` — may be taken now
 - `tentative` — declared but not yet committed to
 - `blocked` — waiting on a named predecessor

@@ -650,7 +650,7 @@ They are planned outputs, not proof that the corresponding artifact already exis
 | Work | Reserved output |
 | --- | --- |
 | BC-240 theorem | `packing/cases/trump11/isolation-theorem.md` and `packing/campaign/series/series-000-smoke-and-calibration/results/bc-240-trump-local-theorem.json` |
-| BC-241 review | `packing/campaign/series/series-000-smoke-and-calibration/results/bc-241-trump-local-theorem-review.json` |
+| BC-241 review | `packing/devtools/review_trump_local_theorem.py`, `packing/tests/test_review_trump_local_theorem.py`, and `packing/campaign/series/series-000-smoke-and-calibration/results/bc-241-trump-local-theorem-review.json` |
 | BC-242–BC-244 density | `packing/src/sqpack/full_size_density/`, `packing/cases/n11_full_size_density/`, `packing/tests/test_full_size_density_*.py`, and result files prefixed `bc-242-`, `bc-243-`, or `bc-244-` in the series-000 result directory |
 | BC-245–BC-248 stationarity | `packing/src/sqpack/stationary_backbones/`, `packing/cases/stationary_backbones/`, `packing/tests/test_stationary_backbone_*.py`, and result files prefixed `bc-245-` through `bc-248-` in the series-000 result directory |
 | Coordinator-created research records | exp-090 through exp-109 under `packing/campaign/series/series-000-smoke-and-calibration/experiments/` with matching result prefixes; after allocation, the manager may append commands and outcomes without changing the frozen criteria |

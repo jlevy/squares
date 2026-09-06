@@ -247,7 +247,8 @@ documents:
   - path: docs/project/reviews/review-2026-09-06-agenda024-adversarial-senior-strategy.md
     role: review
     authority: record
-    lifecycle: retained
+    lifecycle: superseded
+    superseded_by: docs/project/handoff-2026-09-06-post-381-t2-commissioning.md
   - path: docs/project/three-lane-research-method.md
     role: component-guide
     authority: record

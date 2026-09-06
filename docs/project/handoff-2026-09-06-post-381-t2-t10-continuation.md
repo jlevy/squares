@@ -175,7 +175,7 @@ reviewer. A background numerical process is not another agent slot.
 | Coordinator | `max` | Shared state, tbd, criteria, gates, upstream integration, claim promotion, commits, pushes, and handoffs | “I bind the four roles, frozen inputs, clocks, execution graph, and fresh output paths in this addendum. I alone will move a shared gate or claim.” |
 | Fractional manager | `max` | Agenda 025 work, BC-232 and scalar process supervision, BC-231 routing, and `results/agenda-025/` packets | “I accept the frozen fractional commands, stop rules, labels, budgets, and output stems. I will not spend leg 03 before BC-220.” |
 | Closure manager | `max` | Agenda 026 work, final BC-241 and BC-243 dispositions, and `results/agenda-026/` packets | “I accept BC-240’s local-only boundary and BC-243’s dual-only boundary. I will not open BC-243 before BC-220 or BC-244 without a later gate.” |
-| Floating reviewer | `xhigh`; `high` only for deterministic mechanics | One bounded source-distinct review or implementation-control assignment at a time | “I accept only the current assigned paths and checklist. I will not change criteria, promote a claim, edit shared state, or retain the slot after my packet is terminal.” |
+| Floating reviewer | `xhigh`; `high` only for deterministic mechanics | One bounded source-distinct review or implementation-control assignment at a time. For BC-241, the only reserved writes are `packing/devtools/review_trump_local_theorem.py`, `packing/tests/test_review_trump_local_theorem.py`, and `packing/campaign/series/series-000-smoke-and-calibration/results/bc-241-trump-local-theorem-review.json`. | “I accept only the current assigned paths and checklist. I will not change criteria, promote a claim, edit shared state, or retain the slot after my packet is terminal.” |
 
 The floating reviewer is one transferable context, not one worker per manager.
 It begins with BC-241. A manager may receive it only after the preceding manager accepts
@@ -190,9 +190,12 @@ No manager or worker pushes, merges, rebases, changes a budget, or reallocates a
 
 Each manager and the floating reviewer records its actual restart UTC in its first
 microreceipt. The first coordinator receipt records the effective T+2 clock start.
-That time is no earlier than the committed release-authorization UTC, every required
-role’s acknowledgement UTC, completion of the local focused and edit gates, the durable
-branch push, and creation of the pull request.
+Every first continuation microreceipt also binds the wall authorization
+`2026-09-06T08:22:36Z`, eight-hour target `2026-09-06T16:22:36Z`, and outer deadline
+`2026-09-06T18:22:36Z`. These fixed wall-clock controls neither start nor advance active
+portfolio time. That time is no earlier than the committed release-authorization UTC,
+every required role’s acknowledgement UTC, completion of the local focused and edit
+gates, the durable branch push, and creation of the pull request.
 If the contexts start at different times, the shared clock starts at the latest
 required-role restart; no receipt backdates it into the launch transaction.
 
@@ -236,31 +239,47 @@ Do not write a T+10 receipt or claim 480 continuation minutes.
 
 ## Bound Execution Graph
 
-The execution epic is `think-jgnv`. Its 13 children are the continuation graph; do not
-select substitute work from the repository-wide ready list.
+The execution epic is `think-jgnv`. Its authoritative direct-child set lives in tbd; the
+set observed by this launch-graph audit is listed below so a later child addition cannot
+hide behind a hard-coded count.
+Do not select substitute work from the repository-wide ready list.
 
-| Order | Bead | Bound work |
+| Child | Boundary | Bound work |
 | --- | --- | --- |
-| 1 | `think-5pj8` | Land PR #89 and cut `codex/post-381-t2-t10` without starting the active clock. |
-| 2 | `think-yjh8` | Complete this launch addendum and role contract. |
-| 3 | `think-qke4` | Implement and verify the opt-in cooperative fractional stop outside active research time. |
-| 4 | `think-6yx2` | Manage the fractional lane from T+2 to T+4. |
-| 5 | `think-gab1` | Manage the closure lane from T+2 to T+4. |
-| 6 | `think-vniz` | Hold and decide BC-220 at T+4. |
-| 7 | `think-0p1m` | Manage the fractional lane from T+4 to T+8. |
-| 8 | `think-v55y` | Manage the closure lane from T+4 to T+8. |
-| 9 | `think-u8h0` | Hold and decide BC-221 at T+8. |
-| 10 | `think-522z` | Manage the fractional lane from T+8 to T+10. |
-| 11 | `think-y1zc` | Manage the closure lane from T+8 to T+10. |
-| 12 | `think-2jzh` | Land the T+10 checkpoint and cold-agent handoff. |
-| 13 | `think-f5t7` | Monitor PRs #93 and #94 and integrate only commits landed on `origin/main`. |
+| `think-5pj8` | Pre-release; terminal | Land PR #89 and cut `codex/post-381-t2-t10` without starting the active clock. |
+| `think-yjh8` | Pre-release | Complete this launch addendum and role contract. |
+| `think-qke4` | Pre-release; terminal | Implement and verify the opt-in cooperative fractional stop outside active research time. |
+| `think-6yx2` | T+2 to T+4 | Manage the fractional lane. |
+| `think-gab1` | T+2 to T+4 | Manage the closure lane. |
+| `think-vniz` | T+4 gate | Hold and decide BC-220. |
+| `think-0p1m` | T+4 to T+8 | Manage the fractional lane. |
+| `think-v55y` | T+4 to T+8 | Manage the closure lane. |
+| `think-u8h0` | T+8 gate | Hold and decide BC-221. |
+| `think-522z` | T+8 to T+10 | Manage the fractional lane. |
+| `think-y1zc` | T+8 to T+10 | Manage the closure lane. |
+| `think-2jzh` | T+10 landing | Land the intermediate checkpoint and cold-agent handoff. |
+| `think-f5t7` | T+2 through T+10 | Monitor PRs #93 and #94 and integrate only commits landed on `origin/main`. |
+| `think-g024` | Pre-release blocker | Reconcile the n=11 Lean formalization spike before continuation release. |
+| `think-ualx` | Pre-release; terminal | Correct the fractional-certificate proof scope and checker trust boundary; integrated at `7e932f1b`. |
+| `think-i6q1` | Pre-release blocker | Harden continuation state, ownership, clocks, and review supersession. |
+| `think-a70y` | Longer-term; nonblocking | Design a proof-producing Condition 5 arrangement receipt. |
+| `think-283c` | Pre-release blocker | Reconcile the final integration audit before the T+2 release. |
+| `think-57kj` | Pre-release; pending | Audit and disposition the dilation corollary and possible sharper supremum bound above 3.81. |
 
-The two T+2-to-T+4 lane beads require the addendum.
-The fractional lane also requires the cooperative-stop implementation.
+Before either lane restarts, `think-yjh8`, `think-g024`, `think-i6q1`, `think-283c`, and
+`think-57kj` must be terminal; `think-qke4` and `think-ualx` are already terminal.
+The two T+2-to-T+4 lane beads require the addendum, and the fractional lane also
+requires the cooperative-stop implementation.
 Both lane beads feed the T+4 gate.
+The T+4 gate bead `think-vniz` also requires the existing `think-jeyp` hashed
+provisional packet. The coordinator must record that edge with
+`tbd dep add think-vniz think-jeyp` before release.
+`think-jeyp` is a prerequisite, not a direct child of this continuation epic.
 The two T+4-to-T+8 lane beads feed the T+8 gate, and the two final lane beads feed the
-T+10 landing. `think-f5t7` runs as coordinator work across the whole continuation and
-never imports an open pull-request head.
+T+10 landing. `think-a70y` is explicitly longer-term and cannot block release or consume
+this continuation’s active time.
+`think-f5t7` runs as coordinator work across the whole continuation and never imports an
+open pull-request head.
 
 ## Cooperative Fractional Stop
 
@@ -436,7 +455,7 @@ Do not rerun that generator, repeat BC-240, or widen the theorem’s local claim
 
 | Active interval | Fractional lane | Closure lane and floating reviewer |
 | --- | --- | --- |
-| T+2 to T+2:30 | Record the manager’s actual restart UTC; launch leg 02 once; bind PID, fresh stems, warm-state hash, and safety flag. | Record both actual restart UTCs; bind reviewer identity, hashes, source drift, and the witness-source hash; launch the one tangent replay. |
+| T+2 to T+2:30 | In the first microreceipt, bind the authorization, eight-hour target, outer deadline, and actual restart UTC; launch leg 02 once; bind PID, fresh stems, warm-state hash, and safety flag. | In both first microreceipts, bind the authorization, eight-hour target, outer deadline, and actual restart UTCs; bind reviewer identity, hashes, source drift, and the witness-source hash; launch the one tangent replay. |
 | T+2:30 to T+3 | Supervise without restart; report completed iterations and properly labelled endpoints. | Complete the tangent replay and independent aggregate/cap arithmetic. |
 | T+3 to T+3:30 | Supervise; if the safe predicate fires, freeze and start only the declared bridge. | Audit selected branch and face calculations and run the three mutations. |
 | T+3:30 to T+4 | Freeze leg-02 outputs or its earlier stop; write `think-jeyp` inside the manager gate packet. | Return the source-distinct packet, make the `max` local-scope disposition, and release the worker. |

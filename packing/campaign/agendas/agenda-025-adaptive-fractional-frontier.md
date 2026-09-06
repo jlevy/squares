@@ -110,7 +110,7 @@ agenda:
     purpose: research
     owner_focus: efficiency
     instances: [11]
-    state: ready
+    state: in_progress
     priority: 0
     question: >-
       Can the retained 3.82 primal/dual state be advanced to total covering mass below

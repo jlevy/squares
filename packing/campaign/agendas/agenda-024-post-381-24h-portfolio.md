@@ -456,6 +456,7 @@ The word *owns* refers to scientific work and manager-local output, not ID autho
 | Coordinator BCs | BC-219 through BC-225 | Coordinator |
 | Fractional BCs | BC-230 through BC-239 | Fractional manager; coordinator alone mutates tbd |
 | Closure BCs | BC-240 through BC-249 | Closure manager; coordinator alone mutates tbd |
+| BC-241 source-distinct review | `packing/devtools/review_trump_local_theorem.py`, `packing/tests/test_review_trump_local_theorem.py`, and `packing/campaign/series/series-000-smoke-and-calibration/results/bc-241-trump-local-theorem-review.json` | Floating reviewer for the bounded checklist; closure manager for the final disposition; coordinator alone integrates |
 | Fractional hypotheses and experiments | H-070 through H-079; exp-070 through exp-089 | Coordinator creates and freezes identity and criterion; manager appends allocated outcomes |
 | Closure hypotheses and experiments | H-080 through H-089; exp-090 through exp-109 | Coordinator creates and freezes identity and criterion; manager appends allocated outcomes |
 | Cross-program explorations | X-017 through X-019 | Coordinator, after a fresh collision check |
