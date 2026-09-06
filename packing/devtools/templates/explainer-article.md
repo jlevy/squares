@@ -41,42 +41,47 @@ This paper presents a new lower bound on a long-standing open geometry problem: 
 disjoint unit squares, free to rotate, cannot fit in a
 ${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.
 
-The computer-assisted proof was found via an automated research framework run over a few
-days. The witness used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted
-points in the container and selects a net of {{HEADLINE_N_DIRECTIONS}} rationally
-parameterized directions. Five exact conditions and a pigeonhole-style argument then
-imply the claim.
+The computer-assisted proof was found via an automated research framework.
+This is one of {{N_RESULTS}} new results of the framework so far.
+The witness used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted points in
+the container and selects a net of {{HEADLINE_N_DIRECTIONS}} rationally parameterized
+directions. Five exact conditions and a pigeonhole-style argument then imply the claim.
 
 This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
-open case of the square packing problem. The previous bound, {{PRIOR_LOWER_DEC}}, was
-Stromquist’s in {{PRIOR_YEAR}}.[^stromquist]
+open case of the square packing problem.
+The previous bound, {{PRIOR_LOWER_DEC}}, was Stromquist’s in
+{{PRIOR_YEAR}}.[^stromquist]
 
-The search, the checking, and the record are the work of agents under human direction
-rather than human derivation.
+The search, the checking, and the record are the work of agents following a flexible but
+defined research framework, available in
+[the GitHub repository](https://github.com/jlevy/squares).
+The atlas of best known packings for every $n$ from 1 to 100 in Figure 1 came from the
+same research agenda and currently includes {{N_STARRED}} new lower bounds.
 
-This is one of {{N_RESULTS}} results registered over a few days, all within the same
-automated research framework. The work sits inside a broader survey of the research
-frontier of this problem. The atlas of best known packings for every $n$ from 1 to 100
-in Figure 1 came from the same program, which proved {{N_STARRED}} of the lower bounds
-shown there.
+The repository is much larger than a single proof: it includes a comprehensive survey of
+previous research, the atlas of packings, a hypothesis registry, an experiment ledger,
+exact verifiers, and a retention gate that labels results according to epistemic status
+(levels of verification, confirmation, and significance).
+Work is planned on a regular cadence (such as 8 to 12 hours) and broken into several
+defined workflows (research survey, correctness verification, research loop,
+optimization loop, and a few others).
 
-Most of the research work is not the proof but the process and artifacts that produced
-it. The repository includes a comprehensive survey of the research frontier, a
-hypothesis registry, an experiment ledger, exact verifiers, a research loop, an
-optimization loop for efficiency, and a retention gate that keeps results only when
-independent validation methods agree.
+The research framework itself is not specific to square packing.
+It uses a few tools to streamline the process, notably
+[tbd](https://github.com/jlevy/tbd) for task tracking,
+[Softschema](https://github.com/jlevy/softschema) for structuring results, and
+[Practical Prose](https://github.com/jlevy/practical-prose) to improve writing quality.
 
-None of this is particular to square packing. It is a reusable framework for iterative
-research on creative mathematical and technical problems. The framework uses a few tools
-to streamline the process, notably [tbd](https://github.com/jlevy/tbd),
-[softschema](https://github.com/jlevy/softschema), and
-[Practical Prose](https://github.com/jlevy/practical-prose).
+Every file in the repository (including this paper) is agent written.
+The research framework’s structure had high-level human direction.
+Similarly structured research frameworks are likely useful for creative mathematical or
+technical problems of other sorts.
 
 ## The Square Packing Problem
 
-The **square packing problem** asks, for each $n$, for $s(n)$, the side of the smallest
-square that holds $n$ unit squares with disjoint interiors, the squares free to
-rotate.[^survey] The value is known for every $n \le 10$. Stromquist settled
+The **square packing problem** asks, for each $n$, for the side $s(n)$ of the smallest
+square that holds $n$ unit squares, which are free to rotate and must have disjoint
+interiors.[^survey] The value of $s(n)$ is known for $n \le 10$. Stromquist settled
 $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
 
 <figure>
