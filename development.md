@@ -181,6 +181,8 @@ select rather than from a flag: `exhaustive exact behavioral tests` (1943 s, its
 job), `negative controls` (544 s), `n=40 rigidity bracket still reproduces` (221 s), and
 `slow behavioral tests` (the lane below).
 Adding a fifth means arguing it in that test, not editing a list.
+What runs those four *before* a merge rather than after it is
+[the deep gate](#the-deep-gate-the-deferred-surface-before-the-merge).
 
 ### The behavioural lanes
 
@@ -199,6 +201,80 @@ ceiling fails the pull request in the week it grows; a deferred test that drops 
 the floor fails the deep surface until its marker comes off.
 That is what makes the split a rule rather than a hand-maintained list — the failure
 mode `D-466` records.
+
+### The deep gate: the deferred surface, before the merge
+
+The four steps outside the pull-request surface are tabulated under
+[Validation Loops](#validation-tiers); this is about *when* they run.
+Until 2026-09-06 the answer was “after a merge, or on the 08:17 UTC backstop”, and both
+report a break that is already on `main`. Twice on 2026-09-05 that is what happened, and
+one of the two is on the record.
+`test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net` asserted a
+certificate rung a later commit displaced; it is marked `exhaustive_exact`, so no pull
+request ran it and every pull request was green; run 34009814108 failed on the merge
+commit `6bd136b0`, and `main` stayed red across three merges for about five hours.
+
+[`deep-gate.yml`](.github/workflows/deep-gate.yml) runs that surface against a pull
+request instead. Its selection is the **exact complement** of the pull-request surface,
+not a sample of it:
+`test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers` resolves the
+workflow’s own commands through `packing-validate --list` and compares the union against
+every step no pull-request job runs.
+So the pull-request surface and the deep gate together are the whole gate, and a fifth
+deferral argued into `test_the_pull_request_surface_defers_only_what_was_measured` fails
+until it is added here too.
+
+It costs about **32 minutes**, which is why it is not on every build.
+That is `exhaustive-tier`’s measured 1943 s; `deferred-steps` runs beside it and should
+land near the slow lane’s own 890 s, with the negative controls and the n=40 bracket
+finishing underneath that.
+Neither figure has been clocked at this shape yet.
+
+**To run it on a pull request, add the `deep-gate` label.**
+
+- The label starts it, and every subsequent push re-runs it, because a label that
+  attested to an older commit would be the same stale evidence as the daily backstop.
+  **Label last**, when the branch is otherwise ready.
+- Without the label every job skips in seconds, so the workflow adds nothing to an
+  ordinary pull request.
+  It reports one context, `deep-gate-required`, for the reason `packing-required` is one
+  context: `D-380` records what a fan-out of separately required checks cost here.
+- To run it without touching the author’s labels, dispatch **Deep gate** with
+  `pull_request: <number>`; it checks out that pull request’s merge ref.
+
+**When a reviewer should require it.** The three largest deferrals declare no `touches`
+at all, so there is no path rule to lean on and `--since` selects them for every change
+— the judgement is a reviewer’s. Ask for the label when the branch:
+
+- moves a certificate, a retained witness, a rung, or anything under `packing/cases/` —
+  the exhaustive tier is what decides those, and it is what `6bd136b0` broke;
+- edits `devtools/controls.yaml` or a mutation the negative controls declare (`D-403`:
+  stale controls accumulate unseen because they do not run on a pull request);
+- touches `devtools/assess_n40_rigidity.py` or `devtools/assess_n5_rigidity.py`, the
+  n=40 bracket’s declared inputs;
+- adds, removes or could slow a test marked `slow`;
+- or changes mathematics rather than prose, which is the blunt version of all four.
+
+**The mandatory form of this is the merge queue**, and it is wired and dormant.
+Branch protection cannot make a check mandatory without making it universal: a required
+context that does not run on some pull request sits pending on it forever, which is the
+same trap the workflow header refuses a path filter for.
+A merge-queue run happens once per merge *attempt*, on the commit that is about to
+become `main`, so `deep-gate-required` can be required there without being required on
+every pull request — and the queue re-tests against the updated base, which is the one
+hole a pre-merge deep run cannot close on its own.
+Turning it on is two repository settings and no file change: enable the merge queue for
+`main`, and add `deep-gate-required` to the queue’s required checks.
+`deep-gate.yml` already carries the `merge_group` trigger, so nothing else has to move.
+
+There is a second arrangement, and the two must not both be taken.
+`packing-validation.yml` selects its post-merge jobs by `github.event_name !=
+'pull_request'`, so adding `merge_group` *there* would run the complete gate on every
+merge attempt — the exhaustive tier included, which is the deep gate’s larger half.
+Requiring `packing-required` on the queue and dropping the deep gate’s `merge_group`
+trigger is the same guarantee by the other route; doing both pays 1943 s twice for one
+commit. It would also need `packing-required`’s own condition widened, since it is
+`pull_request`-only today and the `sweeps` job it waits on does not run post-merge.
 
 ### What it is allowed to cost
 
@@ -428,6 +504,28 @@ throughout, because `main` had moved under it.
 Resolving the conflict restored CI on the next push.
 The failure mode is quiet in the dangerous direction — an absent check reads as pending
 rather than as red — so the absence is what to investigate, not the wait.
+
+**That command now runs on every push**, in
+[`branch-mergeability.yml`](.github/workflows/branch-mergeability.yml), which is the one
+placement that can fire at all: a `pull_request`-triggered check has the same blind spot
+as the runs it would report on, because the defect *is* that no run is created.
+A `push` event fires off the branch tip, which exists whatever the base is doing, and
+its check run is keyed to the head commit — so it appears on the pull request, where the
+missing runs would have been.
+
+When it fails, it is telling you one thing: **no `pull_request` run will be created for
+this branch until the conflict is resolved**, so the pull request’s checks will sit
+pending rather than turn red.
+The job summary lists the conflicting paths and the two commands that fix it.
+A non-zero exit other than a conflict means git could not answer, and that is reported
+as a failure too, because “the check could not tell” must not read the same as “the
+branch is fine”.
+
+What it does not catch is `main` moving under a branch nobody pushes to, which produces
+no event on that branch.
+In the measured incident the branch was pushed five times inside the window, so the
+incident itself is covered; the residual is a labelled, approved branch left to sit, and
+the merge queue closes it by building the merge commit itself.
 
 ### Every pull request carries what it cost
 
