@@ -618,6 +618,7 @@ Status: **active**. Give one managing agent a disjoint closure program that can 
 | H-064 | abandoned | proof | At container side 77/20 = 3.85, on the retained 181-direction net at B | container side: 191/50 77/20 387/100 | 2 |  | 96m agent + 175.3m wall |
 | H-065 | confirmed | proof | On the retained 381/100 certificate at n = 11 -- 1121 atoms, B = 9977/ | census margin epsilon: 0 0.01 0.05 0.1 | 1 |  | 16m agent + 16.1m wall |
 | H-070 | refuted | proof | At n = 11, outer side 191/50, and B = 9977/10000, the eligible minimum | one-sided inset: 1/2 2962983/4505800 15513/20000 | 1 |  | 8.2m wall |
+| H-090 | open | proof | With the frozen T-018 atoms, weights, outer side and 181 net direction | core side: 99769/100000 | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 

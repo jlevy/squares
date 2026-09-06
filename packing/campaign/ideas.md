@@ -236,6 +236,7 @@ X-013’s and X-014’s did not).
 | # | Idea | Status | H | From | Why it might work, or not |
 | --- | --- | --- | --- | --- | --- |
 | 83 | Use Massaccesi-style inset margins only to propose an `n = 11` fractional seed, then release the support and compare it with an equal-budget unrestricted control | registered | [H-070](hypotheses/H-070-n11-inset-seed-release.md) | [X-016](explorations/X-016-after-381-two-managers-one-proof-boundary.md) and agenda-025 BC-233 | A seed clustered away from walls may reach a better column set sooner, but the claim fails on equal or larger exact mass and remains unresolved on unmatched stopping states; it proves neither that walls are irrelevant nor that the inset grid is unavoidable |
+| 84 | Shrink the T-018 core with the atoms fixed, normalize by the exact minimum mass, then dilate to a rational side above T-022 | registered | [H-090](hypotheses/H-090-n11-fixed-atom-core-shrink.md) | [X-016](explorations/X-016-after-381-two-managers-one-proof-boundary.md), coordinator satellite think-zq2u | Coverage may fall below one and still work if it stays above total mass divided by eleven; finite atom events can also cause an immediate discontinuous loss |
 
 ## Open questions
 
