@@ -74,7 +74,7 @@ $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
   <figcaption><strong>Figure 1.</strong> The best known packings of 1 through 100 unit squares. Each cell is the tightest
   arrangement on record for that <span class="tex">n</span>, with the best known upper bound beneath it and, where
   <span class="tex">s(n)</span> is not yet settled, the best proved lower bound below that. A crimson star marks a lower
-  bound this project proved: {{N_STARRED}} of the hundred, this page's own among them. The full
+  bound this project proved: {{N_STARRED}} of the hundred, this page’s own among them. The full
   results, with every witness and its provenance, are in
   <a href="https://github.com/jlevy/squares/blob/main/packing/atlas/known-best/">the GitHub repository</a>, and the
   composite is <a href="known-best-1-100.pdf">available as a PDF</a>.</figcaption>
@@ -121,7 +121,7 @@ the two at once.</span>
     {{NUMBER_LINE_MARKS}}
   </svg>
   </div>
-  <figcaption><strong>Figure 3.</strong> Bounds on <span class="tex">s(11)</span>. The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. Below {{HEADLINE_L_FRAC}} it is
+  <figcaption><strong>Figure 3.</strong> Bounds on <span class="tex">s(11)</span>. The shaded band is the bound gap, what remains unknown about <span class="tex">s(11)</span>. Below <span class="tex">{{HEADLINE_L_FRAC}}</span> it is
   <span class="tex">{{GAP_NOW}}</span> wide, down from <span class="tex">{{GAP_BEFORE}}</span>.</figcaption>
 </figure>
 
@@ -358,9 +358,9 @@ $$
   <div class="fig-choose">{{CERT_TOGGLE}}</div>
   <figcaption><strong>Figure 6. Condition 4.</strong> The shrink that buys the finite net. The dark outline is the unit square at angle <span class="tex">\varphi</span>. Orange is the
   side-<span class="tex">B</span> square at the nearest net angle. The proof only ever asks about the orange one.
-  <strong>The last quantity must stay below 1.</strong> At <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, its
-  largest value, at the widest half-gap, is <span class="tex">{{SHRINK_PEAK_TEX}}</span> for the side the figure uses, a seven-place
-  value one step below the largest Condition 4 admits, and <span class="tex">{{SHRINK_PEAK_CERT_TEX}}</span> for the certificate’s own
+  <strong>The product <span class="tex">B(\cos d + \sin d)</span> must stay below 1.</strong> At <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, that
+  product’s largest value, at the widest half-gap, is <span class="tex">{{SHRINK_PEAK_TEX}}</span> at <span class="tex">B = {{SHRINK_SIDE_TEX}}</span>, a seven-place
+  value one step below the largest Condition 4 admits, and <span class="tex">{{SHRINK_PEAK_CERT_TEX}}</span> at the certificate’s own
   side.</figcaption>
 </figure>
 

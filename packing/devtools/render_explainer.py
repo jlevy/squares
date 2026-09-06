@@ -1337,6 +1337,9 @@ def certificate_substitutions(facts: Facts, *, default: Facts, toggle: str) -> d
         "L_DEC": decimal(facts.outer_side),
         "L_JS": repr(float(facts.outer_side)),
         "SHRINK_PEAK_TEX": shrink_peak_tex(facts, facts.admitted_side),
+        # The side the peak above is quoted at. Named in the caption rather than left as
+        # "the side the figure uses", which resolves only for a reader who has the figure.
+        "SHRINK_SIDE_TEX": frac_tex(facts.admitted_side),
         "SHRINK_PEAK_CERT_TEX": shrink_peak_tex(facts, facts.square_side),
         "K3_LIMIT_TEX": k3_limit_tex(facts),
         "TIGHT_PERCENT": str((TIGHT - 1) * 100),
@@ -1558,6 +1561,68 @@ def _image_markdown(tag: str) -> str:
     return f"![{attributes.get('alt', '').strip()}]({attributes.get('src', '')})"
 
 
+#: Sentences that only make sense with the page in front of the reader, named by the
+#: words they would leak. The class is stripped upstream; this is what notices when it
+#: is not, because the failure it guards against is silent by construction -- a leaked
+#: span reads as ordinary prose and nothing about the output looks wrong.
+_ONLY_ON_SCREEN = re.compile(
+    r"\b(?:chooser|hover|tap|drag|click|button|slider|toggle)\b", re.IGNORECASE
+)
+
+
+#: What a reader holding this file alone cannot otherwise work out. Figure 1 carries its
+#: image; Figures 2 through 7 are drawn by the page, so here they are captions with
+#: nothing above them -- readable, and describing something the reader cannot see. A
+#: reader who does not know that is left assuming an image failed to load, and a reader
+#: who wants the drawings has no idea where they are, because the chip row that would
+#: have said so is one of the things this edition drops.
+_EDITION_NOTE = f"""
+
+> This is the Markdown edition, written by the same render that writes the page. The
+> argument is complete here, and every figure's caption states what its figure shows.
+> Only Figure 1 carries its image; the rest are drawn by [the page
+> itself]({SITE_URL})."""
+
+
+def _with_edition_note(document: str) -> str:
+    """Put the note between the credits and the first section.
+
+    Anchored on the first heading rather than on the last credit line: the credits are
+    a list whose items carry links, and inserting after any one of them by text lands
+    inside it and cuts the item in half.
+    """
+    heading = document.find("\n## ")
+    if heading == -1:
+        raise SystemExit(f"{MARKDOWN_OUTPUT.name}: no section to put the edition note above")
+    return document[:heading] + "\n" + _EDITION_NOTE.strip() + "\n" + document[heading:]
+
+
+def _refuse_screen_only_prose(document: str) -> None:
+    """Refuse to publish prose that addresses a reader who has the page in front of them.
+
+    `screen-only` marks the sentences the interactive page needs and this edition must
+    not carry. One leaked once and shipped: `_SCREEN_ONLY` is `re.DOTALL` but was being
+    applied per line, so a span opening on one line and closing on the next matched
+    nothing and came through as prose. Nothing caught it, because a leaked sentence is
+    well-formed Markdown in a well-formed document.
+
+    So the check is on the words rather than on the markup: a published edition that
+    tells its reader to hover, tap or use a chooser is wrong however it got that way.
+    Refused rather than stripped, because the fix belongs in the template or the
+    publisher and a silent repair would hide which.
+    """
+    leaked = [
+        line
+        for line in document.split("\n")
+        if _ONLY_ON_SCREEN.search(line) and "screen-only" not in line
+    ]
+    if leaked:
+        joined = "\n  ".join(leaked[:5])
+        raise SystemExit(
+            f"{MARKDOWN_OUTPUT.name}: prose addresses a reader who has the page:\n  {joined}"
+        )
+
+
 def published_markdown(source: str, *, default_slug: str) -> str:
     """The article as a document, for a reader or a model rather than for a browser.
 
@@ -1611,12 +1676,14 @@ def published_markdown(source: str, *, default_slug: str) -> str:
         return "\n".join(f"- {_inline_markdown(item)}" for item in items)
 
     source = re.sub(r'<div class="credits">(.*?)</div>', _credits, source, flags=re.DOTALL)
+    source = _with_edition_note(source)
     # Every remaining div is a named block whose name is a style. The content is the
     # document; the box around it is the page's.
     source = re.sub(r"</?div\b[^>]*>", "", source)
     source = re.sub(r"</?p\b[^>]*>", "", source)
     source = _inline_markdown_document(source)
     source = re.sub(r"\n{3,}", "\n\n", source).strip() + "\n"
+    _refuse_screen_only_prose(source)
 
     # Formatted by the same tool that owns every other Markdown file here, so the
     # published document wraps the way the repository's prose does. It has to run in
@@ -1634,9 +1701,19 @@ def _inline_markdown_document(source: str) -> str:
     The caption form collapses its input to one line, which is right for a caption and
     wrong for prose, so the paragraph shape is preserved by running the conversion
     within each line rather than over the whole string.
+
+    Screen-only spans are dropped first, over the whole document, and that ordering is
+    the point rather than a detail. `_SCREEN_ONLY` is compiled `re.DOTALL` so it can
+    span lines, but a per-line pass can never hand it both halves of one: the opening
+    line matches nothing, `_SIMPLE_TAG` then strips the bare `<span>` and `</span>` as
+    ordinary inline tags, and the sentence survives into a document that has no screen
+    to speak of. That is how "The chooser under each figure switches every figure
+    between the two at once" reached a published edition with no chooser in it -- a
+    silent failure that repeats for every multi-line screen-only span written after it.
     """
     return "\n".join(
-        _inline_markdown(line) if line.strip() else "" for line in source.split("\n")
+        _inline_markdown(line) if line.strip() else ""
+        for line in _SCREEN_ONLY.sub("", source).split("\n")
     )
 
 

@@ -386,3 +386,36 @@ def test_every_declared_render_input_exists() -> None:
     """
     for declared in RENDER_INPUTS:
         assert declared.exists(), declared.relative_to(REPO).as_posix()
+
+
+def test_no_screen_only_prose_survives_into_the_published_document(document: str) -> None:
+    """A multi-line `screen-only` span used to leak, and reads as ordinary prose when it does.
+
+    `_SCREEN_ONLY` is compiled `re.DOTALL` so it can span lines, but it was applied one
+    line at a time, so a span opening on one line and closing on the next matched
+    nothing; `_SIMPLE_TAG` then stripped the bare tags and the sentence shipped. "The
+    chooser under each figure switches every figure between the two at once" reached a
+    published edition that has no chooser in it, and nothing objected, because the leak
+    is well-formed Markdown in a well-formed document.
+
+    Checked on the words rather than on the markup, for the same reason the publisher's
+    own guard is: an edition that tells its reader to hover or tap is wrong however it
+    got that way, and the markup is exactly what is missing by the time it is wrong.
+    """
+    for word in ("chooser", "hover", "tap", "drag", "click", "slider"):
+        assert word not in document.lower(), f"{word!r} addresses a reader who has the page"
+
+
+def test_the_published_document_says_what_it_is_and_where_the_figures_are(
+    document: str,
+) -> None:
+    """Six of the seven figures are captions here, and a reader cannot tell that alone.
+
+    Figure 1 carries its image; the rest are drawn by the page, so they arrive as
+    captions with nothing above them -- readable, and describing something the reader
+    cannot see. Without a word of explanation that reads as images that failed to load,
+    and the chip row that would have pointed at the real page is one of the things this
+    edition drops.
+    """
+    assert "Markdown edition" in document
+    assert SITE_URL in document
