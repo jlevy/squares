@@ -65,7 +65,7 @@ DEFAULT_TIMEOUT_SECONDS = 900.0
 #: `test_every_boolean_flag_is_classified` refuses a new `store_true` flag that appears in
 #: neither this tuple nor its allow-list, so a tier cannot be added without deciding
 #: whether it needs a ceiling.
-TIER_FLAGS = ("push", "records", "edit", "checks", "sweeps", "fast")
+TIER_FLAGS = ("push", "records", "edit", "suite", "checks", "sweeps", "fast")
 TIER_IDS = (*TIER_FLAGS, "full")
 #: The budget of the whole non-exhaustive suite, read by `fast behavioral tests` and by
 #: `--push` when its selector expands to everything (D-432). The two run the same suite
@@ -342,30 +342,54 @@ class Step:
 
     sweep: bool = False
     """This step re-derives a retained atlas from its witnesses, and it is expensive
-    enough that the pull request runs it on a second runner rather than beside the rest.
+    enough that the pull request runs it on its own runner rather than beside the rest.
 
-    `fast` says *whether* a pull request runs a step; this says *which of the pull
-    request's two jobs* runs it. Every sweep is also `fast`, the two selections are
-    complements within `--fast`, and
-    `test_the_pull_request_jobs_partition_the_surface` reads the workflow and checks
-    both halves of that against what CI actually invokes -- so a step cannot land in
-    neither job, and no step is paid for twice.
+    `fast` says *whether* a pull request runs a step; this and `suite` say *which of the
+    pull request's three jobs* runs it. Every sweep is also `fast`, the three selections
+    are complements within `--fast`, and
+    `test_the_pull_request_jobs_partition_the_surface` reads the workflow and checks all
+    three against what CI actually invokes -- so a step cannot land in no job, and no
+    step is paid for twice.
 
     The boundary is a measurement, not a topic. Four steps carry it, and on CI's
-    four-cpu runner at commit `30706bcb` they cost 598.9s of the tier's 1,100s of step
-    time: the prospective seed at 213.2s, the known-best chunk census at about 181s, the
-    translation-escape screen at 130.8s, and the rest of the known-best atlas at about
-    74s. Nothing else in the tier is above 90s. They are also one kind of work -- each
-    rebuilds the retained atlas from the hundred-odd witnesses and compares it byte for
-    byte -- which is why the split is stable: a step joins this set by being measured
-    into it, and `test_the_pull_request_runs_its_sweeps_on_a_second_runner` is where the
-    number has to be typed.
+    four-cpu runner (run 34010470187) they cost 313.95s of step time: the
+    translation-escape screen at 110.66s, the known-best chunk census at 90.38s, the
+    known-best atlas at 75.88s, and the prospective seed at 37.03s. They are also one
+    kind of work -- each rebuilds the retained atlas from the hundred-odd witnesses and
+    compares it byte for byte -- which is why the split is stable: a step joins this set
+    by being measured into it, and
+    `test_the_pull_request_runs_its_sweeps_and_its_suite_apart` is where the number has
+    to be typed.
 
-    Why a second runner rather than a wider one, and this is the whole arithmetic. The
-    tier is about 1,100s of step time on four cpus, so one job cannot go below 275s
-    however it is scheduled, and it does not get there anyway: the sweeps and the quick
-    lane are the four longest steps and they queue behind each other. Two jobs is eight
-    cpus, and the split is where it is because it leaves both halves the same size."""
+    Why its own runner rather than a wider one, and this is the whole arithmetic. Four
+    units on four cpus saturates the outer pool, so this job's wall is its longest unit's
+    wall and nothing else: 110.66s, against 313.95s if the four had to queue behind the
+    rest of the tier. That 110.66s is also the floor under the whole pull-request
+    surface, and the lever on it is that step's own cost rather than another job."""
+
+    suite: bool = False
+    """This step is the pull request's behavioural lane, and it runs alone on its own
+    runner so that xdist can have every cpu.
+
+    One step carries it and the reason is arithmetic rather than kind. `_pytest_workers`
+    sizes the lane to `cpus - jobs + 1`, because a lane that asks for every cpu beside
+    two other steps oversubscribes the runner and fails ordinary tests against the
+    per-test ceiling for having noisy neighbours (`BC-218`). Beside 57 other steps at
+    `--jobs 3` that formula gave two workers and the lane cost 142.43s of CI's 221.70s
+    `checks` job (run 34010470187) -- the longest single unit anywhere on the surface,
+    and a wall no outer parallelism can go below. Alone at `--jobs 1` the same formula
+    gives four workers with nothing beside them, which is the one configuration where
+    the lane can have the whole runner and the ceiling still measures tests rather than
+    contention.
+
+    So this flag buys two things at once that the `sweep` split could not: the lane stops
+    setting the `checks` job's wall, and it gets twice the workers while it runs. What it
+    does not buy is coverage -- the step runs on every pull request either way, which is
+    the distinction `test_the_pull_request_surface_defers_only_what_was_measured` keeps.
+
+    Like `sweep` it defaults to False, so forgetting it makes the `checks` job slower
+    rather than leaving a step unrun, and like `sweep` its membership is pinned with a
+    measurement in `test_the_pull_request_runs_its_sweeps_and_its_suite_apart`."""
 
     touches: tuple[str, ...] = ()
     """Repo-relative path globs whose change can affect this step's verdict.
@@ -439,6 +463,8 @@ class Step:
         tags = ["fast" if self.fast else "full"]
         if self.sweep:
             tags.append("sweeps")
+        elif self.suite:
+            tags.append("suite")
         elif self.fast:
             tags.append("checks")
         if self.fast and not self.broad:
@@ -764,6 +790,13 @@ def _pytest_workers(jobs: int) -> int:
     over it. `-n 1` is not asked for: a single xdist worker is a subprocess and a protocol
     for no concurrency at all, which is slower than not asking, so one worker means running
     in-process.
+
+    The pull request now runs this step alone on its own job at `--jobs 1`, and that is
+    the same formula rather than an exception to it: with nothing else in the selection
+    the count is `cpus`, and total concurrency is still about the cpu count. The
+    difference is who else is asking. That is the whole reason `Step.suite` exists --
+    beside 57 other steps the lane could have two workers honestly or four dishonestly,
+    and on its own runner four is what is free.
 
     This trades a little of the lane's own speed for a per-test measurement that means
     something. That is the right trade while the ceiling is the mechanism `OR-13` leans on
@@ -1976,12 +2009,23 @@ _RESULTS = ("packing/campaign/series/*",)
 
 # What `fast` means since 2026-09-05: the tier a pull request runs, and therefore the
 # tier that has to hold everything a merge would otherwise be the first to check. Since
-# 2026-09-06 a pull request runs it as two concurrent jobs rather than one -- `--checks`
-# and `--sweeps`, complements within this tier and argued on `Step.sweep` -- so the tier
-# is unchanged and what a pull request waits for is its longer half rather than its sum.
+# 2026-09-06 a pull request runs it as concurrent jobs rather than one -- `--checks`,
+# `--suite` and `--sweeps`, a partition of this tier argued on `Step.sweep` and
+# `Step.suite` -- so the tier is unchanged and what a pull request waits for is its
+# longest part rather than their sum.
 #
-# The measurement that forced the split, CI run at commit `30706bcb`, `--fast --jobs 3
-# --inner-jobs 1` on a four-cpu runner: 501.97s of wall over about 1,100s of step time.
+# The three-way split is the second cut and it was taken on the two-job surface's own
+# measurement (run 34010470187): `checks` 221.70s against `sweeps` 110.66s, badly
+# unbalanced, and 142.43s of the longer half was one step -- `fast behavioral tests`,
+# which no outer parallelism can divide because a job cannot be shorter than one step.
+# Moving that step to a runner of its own does two things at once, and both are
+# arithmetic: it takes the largest unit out of the `checks` queue, and it takes the lane
+# from two xdist workers (`cpus - jobs + 1` at `--jobs 3`) to four (at `--jobs 1`). The
+# rest of `checks` is then pure outer-parallel work at `--jobs 4`, and the surface's wall
+# is `max` of three jobs whose floor is the 110.66s translation-escape screen.
+#
+# The measurement that forced the first split, CI run at commit `30706bcb`, `--fast
+# --jobs 3 --inner-jobs 1` on a four-cpu runner: 501.97s of wall over 1,100s of step time.
 # Two steps were 468.11s of it. Three facts follow and all three are arithmetic rather
 # than judgement:
 #
@@ -2283,11 +2327,17 @@ STEPS: tuple[Step, ...] = (
     # one hung test, and this step is now ordinary enough to live under it. What the lane
     # is allowed to *cost*, as against how long one hung subprocess may hang, is
     # `devtools/gate-budgets.yaml`.
+    # `suite=True` is where this step runs rather than whether: it is the pull request's
+    # third job, alone, so that `_pytest_workers` hands xdist every cpu instead of the
+    # two it gets beside 57 other steps. 142.43s of the 221.70s `checks` job on CI
+    # (run 34010470187) at two workers, and the longest single unit anywhere on the
+    # surface. The argument for a job rather than a wider `--jobs` is on `Step.suite`.
     Step(
         "fast behavioral tests",
         _fast_tests,
         fast=True,
         broad=True,
+        suite=True,
     ),
     # The half of the behavioural suite that costs the wall. It is the same tests under
     # the same runner, selected by the `slow` marker instead of against it, and it runs
@@ -3024,21 +3074,23 @@ def _select_steps(
     edit: bool = False,
     checks: bool = False,
     sweeps: bool = False,
+    suite: bool = False,
     skip: Sequence[str] = (),
 ) -> list[Step]:
     """The steps a tier and its name filters select.
 
-    `--checks` and `--sweeps` are the two halves of `--fast`, and they exist because the
-    pull request runs them as two concurrent GitHub jobs. They are complements by
-    construction here -- one takes the fast steps marked `sweep`, the other the fast
-    steps that are not -- so no step can be in both and none in neither, which is the
-    same property that makes the quick and slow behavioural lanes safe.
+    `--checks`, `--suite` and `--sweeps` are the three parts of `--fast`, and they exist
+    because the pull request runs them as three concurrent GitHub jobs. They are a
+    partition by construction here -- one takes the fast steps marked `sweep`, one the
+    fast steps marked `suite`, and `--checks` takes the fast steps marked neither -- so
+    no step can be in two and none in none, which is the same property that makes the
+    quick and slow behavioural lanes safe.
 
-    Two jobs could have divided the tier with `--only` and `--skip` instead, and that
+    Three jobs could have divided the tier with `--only` and `--skip` instead, and that
     was rejected on the register rather than on taste. A subset of a tier has no
     declared cost: `--only` reports no tier at all, and `--skip` reports the tier it
-    narrowed, so a half-tier run would have been judged against the whole tier's
-    recorded 502.3s and failed the stale rule for finishing early. Naming the halves
+    narrowed, so a part-tier run would have been judged against the whole tier's
+    recorded 502.3s and failed the stale rule for finishing early. Naming the parts
     makes each a tier with its own ceiling and its own record, which is what
     `D-466` says a surface CI runs on every push has to have.
 
@@ -3063,8 +3115,10 @@ def _select_steps(
     """
     if sweeps:
         selected = [step for step in STEPS if step.sweep]
+    elif suite:
+        selected = [step for step in STEPS if step.suite]
     elif checks:
-        selected = [step for step in STEPS if step.fast and not step.sweep]
+        selected = [step for step in STEPS if step.fast and not (step.sweep or step.suite)]
     else:
         selected = [step for step in STEPS if not (fast or edit) or step.fast]
     if edit:
@@ -3426,16 +3480,24 @@ def _parser() -> ArgumentParser:
         "--checks",
         action="store_true",
         help=(
-            "run the half of --fast that is not a record sweep: the floors, the record "
-            "checks, the quick behavioral lane, and the exact and geometric contracts"
+            "run the part of --fast that is neither a record sweep nor the behavioral "
+            "lane: the floors, the record checks, and the exact and geometric contracts"
+        ),
+    )
+    parser.add_argument(
+        "--suite",
+        action="store_true",
+        help=(
+            "run the part of --fast that is the quick behavioral lane; the pull request "
+            "gives it its own runner so xdist can have every cpu"
         ),
     )
     parser.add_argument(
         "--sweeps",
         action="store_true",
         help=(
-            "run the half of --fast that re-derives the retained atlases from their "
-            "witnesses; the pull request runs it on a second runner beside --checks"
+            "run the part of --fast that re-derives the retained atlases from their "
+            "witnesses; the pull request runs it on a runner of its own"
         ),
     )
     parser.add_argument(
@@ -3526,29 +3588,31 @@ def _validate_invocation(
     edit: bool = False,
     checks: bool = False,
     sweeps: bool = False,
+    suite: bool = False,
     since: str | None = None,
     push: bool = False,
     skip: Sequence[str] = (),
 ) -> None:
-    narrowed = only or skip or fast or records or edit or checks or sweeps or since or push
+    parts = checks or sweeps or suite
+    narrowed = only or skip or fast or records or edit or parts or since or push
     if strict and narrowed:
         raise UsageError(
             "--strict cannot be combined with --only, --skip, --fast, --checks, "
-            "--sweeps, --records, --edit, --push, or --since"
+            "--suite, --sweeps, --records, --edit, --push, or --since"
         )
     if edit and fast:
         raise UsageError(
             "--edit and --fast select different tiers; --fast is the wider of the two"
         )
-    if checks and sweeps:
+    if [checks, sweeps, suite].count(True) > 1:
         raise UsageError(
-            "--checks and --sweeps are the two halves of --fast; ask for --fast to run "
-            "both, or for one of them to run that half"
+            "--checks, --suite and --sweeps are the three parts of --fast; ask for "
+            "--fast to run them all, or for one of them to run that part"
         )
-    if (checks or sweeps) and (fast or records or edit or push):
+    if parts and (fast or records or edit or push):
         raise UsageError(
-            "--checks and --sweeps are halves of --fast and are not combined with "
-            "another tier; --fast is both of them"
+            "--checks, --suite and --sweeps are parts of --fast and are not combined "
+            "with another tier; --fast is all three of them"
         )
     if push and (fast or records or edit):
         raise UsageError(
@@ -3577,6 +3641,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             edit=namespace.edit,
             checks=namespace.checks,
             sweeps=namespace.sweeps,
+            suite=namespace.suite,
             since=namespace.since,
             push=namespace.push,
             skip=namespace.skip,
@@ -3614,6 +3679,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             edit=namespace.edit or namespace.push,
             checks=namespace.checks,
             sweeps=namespace.sweeps,
+            suite=namespace.suite,
             skip=namespace.skip,
         )
         if namespace.push:

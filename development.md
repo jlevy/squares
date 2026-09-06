@@ -140,39 +140,57 @@ A tier selects steps; a lane divides one step.
 | `--records` | contributor, before touching a registry; also every pull request | 31 of 64 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a code change |
-| `--fast` | contributor, at a block boundary; the union of the two tiers below | 62 of 66 | 700 s | 502.3 s on CI, 2026-09-06, commit `5cad7540`, when CI still ran it whole |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 58 of 66 | 400 s | not yet clocked on CI |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 430 s | not yet clocked on CI |
+| `--fast` | contributor, at a block boundary; the union of the three tiers below | 62 of 66 | 700 s | 502.3 s on CI, 2026-09-06, commit `5cad7540`, when CI still ran it whole |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 57 of 66 | 300 s | not yet clocked on CI |
+| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 66 | 240 s | not yet clocked on CI |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 240 s | not yet clocked on CI |
 | *(no flag)* | **CI, on `main`, on dispatch, and daily**; and what a block ends with | 66 of 66 | 3600 s | split across two jobs; not clocked whole |
 
-**The pull-request surface is `--checks` and `--sweeps` together, run as two concurrent
-CI jobs**, so a pull request waits for the longer of the two rather than for their sum.
-Both feed the single required `packing-required` context, and
+**The pull-request surface is `--checks`, `--suite` and `--sweeps` together, run as
+three concurrent CI jobs**, so a pull request waits for the longest of the three rather
+than for their sum. All three feed the single required `packing-required` context, and
 `test_the_pull_request_jobs_partition_the_surface` reads the workflow and checks that
-they are disjoint and that they cover every step of `--fast` — so the split cannot lose
-a check the way a pair of independent filters could.
+they are pairwise disjoint and that they cover every step of `--fast` — so the split
+cannot lose a check the way a set of independent filters could.
 
 The split is arithmetic, not preference.
 `--fast` was 501.97 s of wall over about 1,100 s of step time at `--jobs 3 --inner-jobs
 1`, and 1,100 s of step time on a four-cpu runner cannot finish under 275 s however it
 is scheduled — so one runner could not reach the two-to-three-minute target and a second
 one had to be bought.
-`--sweeps` takes the four steps that re-derive a retained atlas from its witnesses,
-598.9 s of that step time between them and nothing else in the tier above 90 s; the
-measurement for each is in `test_the_pull_request_runs_its_sweeps_on_a_second_runner`.
+`--sweeps` takes the four steps that re-derive a retained atlas from its witnesses, and
+nothing else in the tier is above 90 s; the measurement for each is in
+`test_the_pull_request_runs_its_sweeps_and_its_suite_apart`.
+
+`--suite` is the third job and it is one step, and the reason it is alone is a floor
+rather than a budget.
+`fast behavioral tests` cost 142.43 s on CI inside the `validate` job, where
+`_pytest_workers` sizes xdist to `cpus - jobs + 1` — two workers beside two other outer
+lanes. No outer parallelism shortens a wall that is one step, which is what `BC-218`
+found one level up, so the only lever on it is the worker count, and the only way to
+raise that without oversubscribing the runner is to stop sharing the job.
+Alone at `--jobs 1` the step has all four cpus to spend on xdist.
+That also retires `BC-218`’s objection to four workers: nineteen ordinary tests went
+over the per-test ceiling on contention when the lane asked for every cpu *beside* other
+work, and a lane that is the only work on its runner cannot create that contention.
 The second cost the split pays off is not on the clock: five ordinary tests were
 reporting over the quick lane’s 5 s per-test ceiling because 468 s of atlas rendering
 was running beside them on the same four cpus, and moving that work to its own runner is
 what removes the contention rather than relabelling the tests as slow.
 
-**What the `sweeps` job is now floored by is one step**, `prospective n=101..324 safe
-seed` at 213.2 s. The job has four units and four cpus, so its outer pool is already
-saturated and its wall is that step’s wall; a third GitHub job cannot shorten it, for
-the same reason `BC-218` found that a second job could not shorten a tier that was one
-step. The lever from here is inside `devtools/build_prospective_atlas.py` and
-`devtools/census_known_best_chunks.py` — 101 witnesses and 100 witnesses respectively,
-each independent of the others, both rebuilt in a single process while
-`sqpack.workers.worker_count` sits unused.
+**What the `sweeps` job is now floored by is one step**, `single-square translation
+escape screen` at 110.66 s — not `prospective n=101..324 safe seed`, which the memoized
+frontier took to 37.03 s. The job has four units and four cpus, so its outer pool is
+already saturated and its wall is that step’s wall; a fourth GitHub job cannot shorten
+it, for the same reason `BC-218` found that a second job could not shorten a tier that
+was one step. That step is also the floor on the *whole* pull-request surface, since no
+job’s wall goes below its own longest step: while it costs 110.66 s, nothing gets the
+surface below about 124 s including setup.
+The lever from here is inside the steps themselves —
+`devtools/screen_translation_escape.py` screens 98 records,
+`devtools/build_prospective_atlas.py` and `devtools/census_known_best_chunks.py` rebuild
+101 and 100 witnesses, each record independent of the others and each rebuilt in a
+single process while `sqpack.workers.worker_count` sits unused.
 
 Four steps are outside the pull-request surface entirely, each deferred on its own
 measurement and pinned by `test_the_pull_request_surface_defers_only_what_was_measured`,
@@ -308,9 +326,10 @@ uv run --frozen --all-extras --group dev packing-validate --push
 # here, where there is only one machine and nothing to overlap with.
 uv run --frozen --all-extras --group dev packing-validate --fast
 
-# The two halves CI runs concurrently on a pull request. They are complements within
-# --fast, so running both is running the surface and running one is running half of it.
+# The three parts CI runs concurrently on a pull request. They partition --fast, so
+# running all three is running the surface and running one is running a part of it.
 uv run --frozen --all-extras --group dev packing-validate --checks
+uv run --frozen --all-extras --group dev packing-validate --suite
 uv run --frozen --all-extras --group dev packing-validate --sweeps
 
 # One named component. --only is repeatable and matches displayed step names.
@@ -378,11 +397,11 @@ implemented. These limits are why a subprocess timeout is not, by itself, eviden
 D-239 is resolved.
 
 On pull requests, [`packing-validation.yml`](.github/workflows/packing-validation.yml)
-runs the surface as two concurrent Linux jobs — `packing-validate --checks` in
-`validate` and `packing-validate --sweeps` in `sweeps` — and reports the stable
-`packing-required` aggregate, which now waits on both.
-One required context, two prerequisites: `BC-218` made that the condition for any
-fan-out, because [D-380](defects.md) records what a fan-out of separately required
+runs the surface as three concurrent Linux jobs — `packing-validate --checks` in
+`validate`, `packing-validate --suite` in `suite` and `packing-validate --sweeps` in
+`sweeps` — and reports the stable `packing-required` aggregate, which waits on all
+three. One required context, three prerequisites: `BC-218` made that the condition for
+any fan-out, because [D-380](defects.md) records what a fan-out of separately required
 checks cost this repository once.
 Since 2026-09-05 the surface is sixty-two of the sixty-six steps rather than
 thirty-seven: twenty-one steps that had run only after a merge were promoted into it

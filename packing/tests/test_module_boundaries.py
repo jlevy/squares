@@ -172,7 +172,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     assert PYTHON_VERSION.read_text(encoding="utf-8").strip() == "3.14.7"
 
-    for job_name in ("validate", "exhaustive", "macos-portability"):
+    for job_name in ("validate", "suite", "exhaustive", "macos-portability"):
         raw_steps = _mapping(jobs[job_name])["steps"]
         assert isinstance(raw_steps, list)
         steps = [_mapping(step) for step in raw_steps]
@@ -223,11 +223,18 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     validate_steps = _mapping(jobs["validate"])["steps"]
     assert isinstance(validate_steps, list)
-    # The pull-request surface is two concurrent jobs since 2026-09-06, `--checks` here
-    # and `--sweeps` in the `sweeps` job, so a pull request waits for the longer of them
-    # rather than their sum. That they partition `--fast` is proved against the CLI's own
-    # selector by `test_the_pull_request_jobs_partition_the_surface`; what is pinned here
-    # is only that the commands in the file are the ones that test resolves.
+    # The pull-request surface is three concurrent jobs since 2026-09-06: `--checks`
+    # here, `--suite` in the `suite` job and `--sweeps` in the `sweeps` job, so a pull
+    # request waits for the longest of them rather than their sum. That they partition
+    # `--fast` is proved against the CLI's own selector by
+    # `test_the_pull_request_jobs_partition_the_surface`; what is pinned here is only
+    # that the commands in the file are the ones that test resolves.
+    #
+    # The `--jobs` and `--inner-jobs` figures are part of the pin because they are not
+    # decoration. `--jobs 4` here is four units on four cpus now that the indivisible
+    # behavioural lane has left this job, and `--jobs 1` in the `suite` job is what hands
+    # that lane four xdist workers instead of two -- `_pytest_workers` sizes itself to
+    # `cpus - jobs + 1`, so a larger number there is a quieter, slower job.
     required_step = next(
         _mapping(step)
         for step in validate_steps
@@ -236,8 +243,29 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     assert required_step["if"] == "github.event_name == 'pull_request'"
     assert " ".join(str(required_step["run"]).split()) == (
         "uv run --frozen --all-extras --group dev packing-validate --checks "
-        "--jobs 3 --inner-jobs 1"
+        "--jobs 4 --inner-jobs 1"
     )
+    suite_job = _mapping(jobs["suite"])
+    assert suite_job["if"] == "github.event_name == 'pull_request'"
+    suite_steps = suite_job["steps"]
+    assert isinstance(suite_steps, list)
+    suite_step = next(
+        _mapping(step)
+        for step in suite_steps
+        if _mapping(step).get("name") == "Run the required pull-request behavioral lane"
+    )
+    assert " ".join(str(suite_step["run"]).split()) == (
+        "uv run --frozen --all-extras --group dev packing-validate --suite "
+        "--jobs 1 --inner-jobs 1"
+    )
+    # Full history, like `validate` and unlike `sweeps`: the behavioural lane includes
+    # tests that shell out to git, and they read whatever the checkout gave them.
+    suite_checkout = next(
+        _mapping(step)
+        for step in suite_steps
+        if str(_mapping(step).get("uses", "")).startswith("actions/checkout@")
+    )
+    assert _mapping(suite_checkout["with"])["fetch-depth"] == 0
     sweep_steps = _mapping(jobs["sweeps"])["steps"]
     assert isinstance(sweep_steps, list)
     sweep_step = next(
@@ -289,12 +317,12 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     ]
 
     required_job = _mapping(jobs["packing-required"])
-    # Both halves of the pull-request surface, and this is the assertion that keeps them
-    # mandatory. Splitting `--fast` across two concurrent jobs buys wall time only if a
-    # pull request still cannot merge without both, so a `needs` naming one of them would
-    # turn the other into an advisory check that nothing blocks on -- the failure mode the
-    # split is otherwise a clean win against.
-    assert required_job["needs"] == ["validate", "sweeps"]
+    # Every part of the pull-request surface, and this is the assertion that keeps them
+    # mandatory. Splitting `--fast` across concurrent jobs buys wall time only if a pull
+    # request still cannot merge without all of them, so a `needs` naming two of the three
+    # would turn the third into an advisory check that nothing blocks on -- the failure
+    # mode the split is otherwise a clean win against.
+    assert required_job["needs"] == ["validate", "suite", "sweeps"]
     # `!cancelled()`, not `always()`, and the difference is D-380. With `always()` a run
     # superseded by the next push -- routine, since the workflow sets
     # `cancel-in-progress: true` and OR-3 says to push and keep working -- reached this job
@@ -306,17 +334,19 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     assert "continue-on-error" not in required_job
     required_job_steps = required_job["steps"]
     assert isinstance(required_job_steps, list)
-    # One `test` per prerequisite, and both of them, because `needs` alone does not make a
-    # job's failure fatal here: this job runs under `!cancelled()`, so it is reached even
-    # when a prerequisite failed, and it is the shell that decides. A missing line would
-    # leave that half green whatever it reported.
+    # One `test` per prerequisite, and all three of them, because `needs` alone does not
+    # make a job's failure fatal here: this job runs under `!cancelled()`, so it is reached
+    # even when a prerequisite failed, and it is the shell that decides. A missing line
+    # would leave that part of the surface green whatever it reported.
     required_command = " ".join(str(_mapping(required_job_steps[0])["run"]).split())
     assert required_command == (
-        'test "$VALIDATE_RESULT" = "success" test "$SWEEPS_RESULT" = "success"'
+        'test "$VALIDATE_RESULT" = "success" test "$SUITE_RESULT" = "success" '
+        'test "$SWEEPS_RESULT" = "success"'
     )
     required_env = _mapping(_mapping(required_job_steps[0])["env"])
     assert required_env == {
         "VALIDATE_RESULT": "${{ needs.validate.result }}",
+        "SUITE_RESULT": "${{ needs.suite.result }}",
         "SWEEPS_RESULT": "${{ needs.sweeps.result }}",
     }
 

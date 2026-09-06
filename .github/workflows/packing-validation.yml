@@ -81,7 +81,8 @@ jobs:
       # so the slow tail runs on the deep surface (`BC-214`); the quick lane runs under
       # xdist, because a second GitHub job cannot shorten a wall that is one step
       # (`BC-218`, which priced a second job at zero wall and +3 billed minutes); and the
-      # surface runs `--jobs 3`.
+      # surface moved to `--jobs 3`, which it has since left in both directions -- see the
+      # three-way split below.
       #
       # Two results worth not rediscovering. Cutting the behavioural suite from the pull
       # request was the obvious move and the measurement refused it: the eight real
@@ -101,28 +102,46 @@ jobs:
       # **Then the promotion had to be paid for, and this is where.** The merged tier ran
       # 501.97s at commit `30706bcb`, of which `known-best n=1..100 atlas` was 254.92s and
       # `prospective n=101..324 source map and safe seed` 213.19s. Reverting the promotion
-      # was refused on coverage grounds, so the cost is bought with a second runner
-      # instead: `--checks` here and `--sweeps` in the `sweeps` job below are complements
-      # within `--fast`, they run concurrently, and a pull request waits for the longer of
-      # the two rather than for their sum. Both are required through `packing-required`.
+      # was refused on coverage grounds, so the cost is bought with more runners instead:
+      # `--checks` here, `--suite` and `--sweeps` in the two jobs below. The three are a
+      # partition of `--fast`, they run concurrently, and a pull request waits for the
+      # longest of them rather than for their sum. All three are required through
+      # `packing-required`.
+      #
+      # **Two runners were not enough, and the second cut is measured too.** Run
+      # 34010470187 on the two-job surface: `checks` 221.70s against `sweeps` 110.66s.
+      # Two things were wrong with that. It was unbalanced by a factor of two, and
+      # 142.43s of the longer half was a single step -- `fast behavioral tests` -- so no
+      # `--jobs` setting could divide it, which is the same `BC-218` finding one level
+      # down. Giving that step its own job takes it out of this queue *and* takes it from
+      # two xdist workers to four, because `_pytest_workers` is `cpus - jobs + 1` and
+      # this job was three of the four cpus. What is left here is 57 steps of pure
+      # outer-parallel work, so this job runs `--jobs 4`: four units on four cpus, and
+      # its longest single step is `exact verification` at 61.75s.
+      #
+      # Nothing left the surface to buy that. The three jobs still select every step
+      # `--fast` does, which is what `test_the_pull_request_jobs_partition_the_surface`
+      # checks -- `OR-13`, and the same refusal recorded two paragraphs up.
       #
       # Not a subset, and that distinction is the reason these are tier flags rather than
       # `--skip`. `--skip` narrows a tier while still reporting it, so this job would have
       # been judged against `--fast`'s recorded 502.3s and failed for finishing early;
-      # `--only` reports no tier at all and would have left both halves of the
+      # `--only` reports no tier at all and would have left every part of the
       # pull-request surface with no declared ceiling, which is `D-466` exactly.
-      # `--checks` and `--sweeps` each carry their own entry in `devtools/gate-budgets.yaml`.
+      # `--checks`, `--suite` and `--sweeps` each carry their own entry in
+      # `devtools/gate-budgets.yaml`.
       #
       # `test_the_pull_request_jobs_partition_the_surface` reads this file, parses these
-      # two commands with the CLI's own parser and resolves them through its own selector,
-      # and requires the two selections to be disjoint and to cover every step outside the
-      # four `test_the_pull_request_surface_defers_only_what_was_measured` pins. A step
-      # added tomorrow lands in one job or the other or fails that test.
+      # three commands with the CLI's own parser and resolves them through its own
+      # selector, and requires the three selections to be pairwise disjoint and to cover
+      # every step outside the four
+      # `test_the_pull_request_surface_defers_only_what_was_measured` pins. A step added
+      # tomorrow lands in one of the three jobs or fails that test.
       - name: Run the required pull-request checks
         if: "github.event_name == 'pull_request'"
         run: >-
           uv run --frozen --all-extras --group dev
-          packing-validate --checks --jobs 3 --inner-jobs 1
+          packing-validate --checks --jobs 4 --inner-jobs 1
 
       # Everything except the exhaustive exact tier, which is the `exhaustive` job below.
       # `--skip` is what stops it running here as well: without it the two jobs would both
@@ -141,27 +160,79 @@ jobs:
           packing-validate --skip "exhaustive exact behavioral tests"
           --jobs 2 --inner-jobs 2
 
-  sweeps:
-    # The other half of the pull-request surface, on its own runner and at the same time.
+  suite:
+    # The pull request's behavioural lane, alone on a runner, and the arithmetic for that
+    # is one sentence: a job cannot be shorter than its longest step, and this step was
+    # 142.43s of the 221.70s `checks` job on run 34010470187 -- the longest single unit
+    # anywhere on the surface.
     #
-    # Four steps, 598.9s of CI step time between them, all of one kind: each re-derives a
-    # retained atlas from the hundred-odd witnesses under it and compares the result byte
-    # for byte. They are the class `D-369` measured -- a registry or generated view going
-    # stale is what actually breaks CI here -- so they belong on every pull request, and
-    # `D-455` is what happened the last time work of this kind ran only after a merge.
-    # What they cannot do is share three workers with the quick behavioural lane: 468.11s
-    # of them beside it put five ordinary tests over the lane's 5s per-test ceiling on
-    # contention alone.
+    # `--jobs 1` is not a throttle, it is what buys the workers. `_pytest_workers` sizes
+    # xdist to `cpus - jobs + 1` because a lane that grabs every cpu beside two other
+    # steps fails ordinary tests against its own 5s per-test ceiling on contention alone
+    # (`BC-218`, nineteen of them). Beside 57 steps at `--jobs 3` that formula gave two
+    # workers. Alone at `--jobs 1` it gives four, with nothing else on the runner to
+    # contend with, so the ceiling goes on measuring tests rather than neighbours.
+    # `--inner-jobs 1` for the same reason: `PACK_JOBS` is the per-step process cap, and
+    # a step already running four xdist workers must not have each of them fan out again.
+    #
+    # Full history, unlike the shallow jobs below. This job runs about 2,100 tests and
+    # several of them shell out to git; `--fast` reached them from the `validate` job's
+    # `fetch-depth: 0`, and moving the lane to a shallow runner would change what those
+    # tests see. The clone is a few seconds against a job that is minutes.
+    if: "github.event_name == 'pull_request'"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # The behavioural lane includes tests that read git history rather than only
+          # the worktree, so this job clones the same way `validate` does.
+          fetch-depth: 0
+          # kpress is vendored at vendor/kpress and installed from that path, so
+          # the environment does not resolve without the submodule checked out.
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Run the required pull-request behavioral lane
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --suite --jobs 1 --inner-jobs 1
+
+  sweeps:
+    # The third part of the pull-request surface, on its own runner and at the same time.
+    #
+    # Four steps, 313.95s of CI step time between them (run 34010470187), all of one
+    # kind: each re-derives a retained atlas from the hundred-odd witnesses under it and
+    # compares the result byte for byte. They are the class `D-369` measured -- a registry
+    # or generated view going stale is what actually breaks CI here -- so they belong on
+    # every pull request, and `D-455` is what happened the last time work of this kind ran
+    # only after a merge. What they cannot do is share three workers with the quick
+    # behavioural lane: 468.11s of them beside it put five ordinary tests over the lane's
+    # 5s per-test ceiling on contention alone.
     #
     # `--jobs 4 --inner-jobs 1` because this job has four units and four cpus, so outer
     # parallelism is already saturated and the wall is the longest unit's wall. That unit
-    # is `prospective n=101..324 safe seed` at 213.2s, and it is the reason this job does
-    # not go below about three and a half minutes: a second runner cannot shorten a wall
-    # that is one step, which is the same finding `BC-218` recorded one level up. The
-    # lever from here is that step's own cost, not another job.
+    # is `single-square translation escape screen` at 110.66s, against 78.5s if the four
+    # could be divided evenly -- so this job is the floor under the whole pull-request
+    # surface, and no arrangement of jobs takes the surface below it. The lever from here
+    # is that step's own cost, not another job.
     #
     # Shallow checkout: the step that needs full history is `provenance`, and it is in the
-    # `validate` job's half. `needs_engine` is false for all four, so no cargo build here.
+    # `validate` job's part. `needs_engine` is false for all four, so no cargo build here.
     if: "github.event_name == 'pull_request'"
     runs-on: ubuntu-latest
     defaults:
@@ -255,21 +326,23 @@ jobs:
     # header comment warns against *path* filtering is unaffected, since supersession
     # always starts a replacement run that supplies the check.
     #
-    # Both halves of the pull-request surface are named here, and this job staying the
+    # Every part of the pull-request surface is named here, and this job staying the
     # single required context is the reason the split is allowed to exist: `BC-218` set
     # that as the condition for any fan-out, because `D-380` records what a fan-out of
     # separately required checks did to this repository once. A reviewer still watches one
-    # context; it just has two prerequisites now.
+    # context; it just has three prerequisites now.
     if: "!cancelled() && github.event_name == 'pull_request'"
-    needs: [validate, sweeps]
+    needs: [validate, suite, sweeps]
     runs-on: ubuntu-latest
     steps:
       - name: Require every pull-request prerequisite
         env:
           VALIDATE_RESULT: ${{ needs.validate.result }}
+          SUITE_RESULT: ${{ needs.suite.result }}
           SWEEPS_RESULT: ${{ needs.sweeps.result }}
         run: |
           test "$VALIDATE_RESULT" = "success"
+          test "$SUITE_RESULT" = "success"
           test "$SWEEPS_RESULT" = "success"
 
   macos-portability:
