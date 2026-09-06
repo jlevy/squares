@@ -246,6 +246,19 @@ The active portfolio clock resumes at T+2, active minute 120. It reaches T+4 at 
 minutes and leaves 840 of Agenda 024’s 1,440-minute allocation.
 T+10 is an intermediate handoff, not the T+12 portfolio pivot.
 
+After `2026-09-06T10:22:36Z`, fewer than 480 wall minutes remain before the fixed
+`2026-09-06T18:22:36Z` outer deadline.
+A full T+2-to-T+10 advance is therefore no longer wall-feasible, even if every remaining
+wall minute were active.
+A replacement authorization issued after that cutoff may release only a partial
+continuation through the fixed deadline.
+The partial handoff records the actual active minute reached; the authorization must not
+promise an arrival at active minute 600.
+
+This wall limit changes neither the Agenda 024 objective nor active-time accounting.
+Operational holds still consume no active portfolio minutes, although elapsed wall time
+reduces the active work that can fit before the deadline.
+
 Use the clocks as distinct measurements:
 
 | Measurement | Meaning |
@@ -286,9 +299,9 @@ Do not select substitute work from the repository-wide ready list.
 
 | Child | Boundary | Bound work |
 | --- | --- | --- |
-| `think-5pj8` | Pre-release; terminal | Land PR #89 and cut `codex/post-381-t2-t10` without starting the active clock. |
+| `think-5pj8` | Pre-release prerequisite | Land PR #89 and cut `codex/post-381-t2-t10` without starting the active clock. |
 | `think-yjh8` | Pre-release blocker | Complete this launch addendum and role contract. |
-| `think-qke4` | Pre-release blocker; terminal | Implement and verify the opt-in cooperative fractional stop outside active research time. |
+| `think-qke4` | Pre-release blocker | Implement and verify the opt-in cooperative fractional stop outside active research time. |
 | `think-6yx2` | T+2 to T+4 | Manage the fractional lane. |
 | `think-gab1` | T+2 to T+4 | Manage the closure lane. |
 | `think-vniz` | T+4 gate | Hold and decide BC-220. |
@@ -299,21 +312,22 @@ Do not select substitute work from the repository-wide ready list.
 | `think-y1zc` | T+8 to T+10 | Manage the closure lane. |
 | `think-2jzh` | T+10 landing | Land the intermediate checkpoint and cold-agent handoff. |
 | `think-f5t7` | T+2 through T+10 | Monitor PRs #93 and #94 and integrate only commits landed on `origin/main`. |
-| `think-g024` | Pre-release blocker; terminal | Reconcile the n=11 Lean formalization spike before continuation release. |
-| `think-ualx` | Pre-release blocker; terminal | Correct the fractional-certificate proof scope and checker trust boundary; integrated at `7e932f1b`. |
+| `think-g024` | Pre-release blocker | Reconcile the n=11 Lean formalization spike before continuation release. |
+| `think-ualx` | Pre-release blocker | Correct the fractional-certificate proof scope and checker trust boundary; integrated at `7e932f1b`. |
 | `think-i6q1` | Pre-release blocker | Harden continuation state, ownership, clocks, and review supersession. |
 | `think-a70y` | Longer-term; nonblocking | Design a proof-producing Condition 5 arrangement receipt. |
 | `think-283c` | Pre-release blocker | Reconcile the final integration audit before the T+2 release. |
-| `think-57kj` | Pre-release blocker; pending | Audit and disposition the dilation corollary and possible sharper supremum bound above 3.81. |
+| `think-57kj` | Pre-release blocker | Audit and disposition the dilation corollary and possible sharper supremum bound above 3.81. |
 | `think-r60v` | Pre-release umbrella gate | Suspend the stale authorization and bind both T+2 lanes to one structural release gate. |
 | `think-trn6` | Pre-release blocker | Supersede only BC-242’s obsolete combined BC-243 scheduling dependency. |
 | `think-ntim` | Longer-term; nonblocking | Price the final integration theorem, BC-244 duality obligations, and assurance work. |
 
-The current nonterminal blockers observed for the umbrella are `think-yjh8`,
-`think-i6q1`, `think-283c`, `think-57kj`, and `think-trn6`; `think-qke4`, `think-g024`,
-and `think-ualx` are satisfied terminal prerequisites.
+The authoritative `think-r60v` prerequisite set is `think-yjh8`, `think-qke4`,
+`think-g024`, `think-ualx`, `think-i6q1`, `think-283c`, `think-57kj`, and `think-trn6`.
+These identities define structure, not a status snapshot; live tbd status at the release
+transaction controls, and every prerequisite must then be terminal.
 Both T+2-to-T+4 lane beads, `think-6yx2` and `think-gab1`, must depend on `think-r60v`,
-and `think-r60v` must depend on every current pre-release blocker.
+and `think-r60v` must depend on the complete prerequisite set.
 Any blocker added before release must join that umbrella before either lane can become
 ready. The coordinator owns these tbd edges and the terminal disposition.
 The fractional lane also requires the cooperative-stop implementation.
