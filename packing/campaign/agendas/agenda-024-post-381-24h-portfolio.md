@@ -339,11 +339,12 @@ and unblocked; and BC-220 (`think-u7i4`) blocked by exactly those six cells.
 Do not select work from the repository-wide `tbd ready` list, which contains unrelated
 agendas.
 
-The coordinator then performs the only tbd mutation in the launch step:
+The coordinator then performs the only tbd mutation in the launch step.
+`tbd start` claims all seven beads atomically; current tbd deliberately rejects bulk
+status changes through `tbd update`:
 
 ```sh
-tbd update think-c678 think-gmdy think-jbat think-4ln1 think-9xxh think-do04 \
-  --status in_progress
+tbd start think-u8vi think-c678 think-gmdy think-jbat think-4ln1 think-9xxh think-do04
 ```
 
 Before either numerical process starts, the coordinator creates the required hypothesis
@@ -493,7 +494,7 @@ unallocated ID.
 
 ### T+0 Preflight and Ownership
 
-Run the coordinator entry-point checks and the six-cell `tbd update` already specified
+Run the coordinator entry-point checks and the seven-bead `tbd start` already specified
 above. Record `T+0` only after the graph, current base, input hashes, unused output
 stems, allocated records, and all four agent acknowledgements pass.
 Allocate required hypotheses and experiments only from the existing reserved ranges; the
