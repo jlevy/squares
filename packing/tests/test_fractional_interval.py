@@ -351,13 +351,28 @@ def test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net() -> N
 
 @pytest.mark.exhaustive_exact
 def test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net() -> None:
-    """The interval-certified decision of s(19), s(20), s(21) >= 24/5.
+    """The interval-certified decision of the retained n = 20 rung, every direction.
 
-    T-020 stands at C4 on the strength of this route. It is the cheap half of
-    the pair: the exact event-cell sweep took 5378 s on the same bytes and this
-    took 173 s on a contended machine, 167 s on a quiet one. The ratio is the
-    order of thirty, and the box count -- 5,638,343 here, the largest in the
-    corpus -- is the figure that compares across machines.
+    `T-021` stands on this route: `s(20), s(21) >= 97/20`, retained at a least
+    cell mass of `200001/200000`.
+
+    **This test follows the moving pointer, and that is deliberate — but it is
+    why the figures below have to be re-derived on every promotion.**
+    `load_n20()` reads `cases/n20_fractional_certificate/certificate.json`,
+    which is the *current* rung by convention, not an immutable one
+    (`conventions.md`, and `D-458` is the defect that came from confusing the
+    two). When `T-021` displaced `T-020`, the certificate under that path became
+    a different object with a different claim and a different enclosure, and
+    this test kept asserting `24/5` and `50007/50000` against it. It went red on
+    `main` for five hours because the exhaustive tier does not run on a pull
+    request, so nothing objected until after the merge.
+
+    The pairing that makes the assertions meaningful, rather than a transcription
+    of the artifact into a second place: the last line ties the verifier's own
+    computed enclosure to the value the certificate *declares*, so a verifier
+    that drifted from the artifact fails even if both literals were updated
+    together; the literals then pin that agreed value to a number a human
+    checked.
     """
     certificate = load_n20()
     verdict = verify_by_intervals(certificate, enclose=True)
@@ -366,9 +381,9 @@ def test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net() -> N
     assert len(verdict.directions) == 361
     assert sum(outcome.stalled for outcome in verdict.directions) == 0
     enclosure = verdict.enclosure
-    assert enclosure == (Fraction(50007, 50000), Fraction(50007, 50000))
+    assert enclosure == (Fraction(200001, 200000), Fraction(200001, 200000))
     assert enclosure is not None
-    assert certificate.bounded_side == Fraction(24, 5)
+    assert certificate.bounded_side == Fraction(97, 20)
     assert declared_n20()["least_cell_mass"] == str(enclosure[0])
 
 
