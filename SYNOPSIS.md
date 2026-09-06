@@ -130,7 +130,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives eight confirmed hypotheses, nine refuted
-hypotheses, one open hypothesis, seven open questions, and thirty-five blocked
+hypotheses, two open hypotheses, seven open questions, and thirty-five blocked
 hypotheses. No hypothesis waits on review and five are unresolved.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
 pinned the `m = 5` covering wall to a bracket of width 0.015 where it had registered
@@ -2639,6 +2639,7 @@ round that names the hypothesis, control roles included.
 | [H-065](packing/campaign/hypotheses/H-065-n11-near-tight-cell-census.md) | confirmed | The near-tight cells (mass at most `1 + 1/20`) on the retained `381/100` certificate are fewer than one fifth of the reachable cells — measured at `0.040754` by `BC-201`, a fifth of the registered threshold. The clause the claim attached to that number does not follow: the cover is a search, not a check | 1 | 16.1m wall |
 | [H-070](packing/campaign/hypotheses/H-070-n11-inset-seed-release.md) | **refuted** | At side `191/50`, the best eligible inset-screen seed improves exact rational mass after unrestricted release versus an equal-stop unseeded control | 1 | 8.2m wall |
 | [H-090](packing/campaign/hypotheses/H-090-n11-fixed-atom-core-shrink.md) | refuted | The fixed T-018 atoms retain enough covered mass after shrinking the core to `99769/100000` to certify side `3.8100381`; an exact corner witness rejects this side and every core side below `1849127/1853400`, leaving a narrower shrink interval open | 1 | 30s wall |
+| [H-091](packing/campaign/hypotheses/H-091-n11-narrow-core-shrink.md) | open | Core side `997696/1000000`, above H-090’s lost corner event, retains minimum mass above `M/11` and yields a normalized certificate at side `3.81002667` after dilation | 0 | — |
 
 ### Confirmed
 
