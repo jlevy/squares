@@ -5,7 +5,7 @@ title: Address shortcomings from the published square-packing adversarial review
 kind: epic
 status: in_progress
 priority: 1
-version: 11
+version: 12
 labels: []
 dependencies: []
 child_order_hints:
@@ -17,6 +17,6 @@ child_order_hints:
   - is-01m1vz4dvs8ng1e70vgzv9mfg7
   - is-01m1w02sjh48x0b0d16f1yz9ak
 created_at: 2026-09-06T18:07:58.957Z
-updated_at: 2026-09-06T18:37:24.395Z
+updated_at: 2026-09-06T19:03:08.239Z
 ---
-W9 remediation entry, explicit user request. Group six confirmed shortcomings from the edccf294 adversarial review and repair follow-through: unsafe ceiling-verifier floating screen; unsupported n12 slope/endpoint conclusion; missing fixed-net qualification; unguarded intermediate cutting bounds; distinct exact cutting vertices lost by float deduplication; and a missing witness for the reported BC206 cutting floor. The oracle contribution is a seventh child. Focused branch codex/adversarial-review-fixes applies the five repairs and qualifies the missing-witness floor; think-aenh remains open for recovery or recomputation with retained exact evidence. Headline s11>=3.81 was not refuted; no new packing result is intended.
+W9 remediation entry, explicit user request. Six shortcomings are recorded as D-473 through D-478 in the durable published-core adversarial review. Five are repaired: unsafe ceiling screening, unguarded cutting bounds, float vertex deduplication, the unsupported n12 endpoint, and the missing fixed-net qualification. The independent geometric sweep oracle is contributed and documented. D-478 is contained by qualifying the historical BC206 floor; think-aenh remains open to recover or recompute its missing exact witness. PR https://github.com/jlevy/squares/pull/100 on codex/adversarial-review-fixes contains the completed wave at commit 237d9386. Pre-push checks, final-commit hosted CI, and the full local gate passed; the full gate included 2396 Python tests and finished in 1838.80 seconds on the review host. Six children are closed; only the witness-recovery child remains open. The headline s11>=3.81 was not refuted and no new packing result is claimed.
