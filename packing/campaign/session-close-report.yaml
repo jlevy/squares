@@ -1523,9 +1523,9 @@ sessions:
     snapshot_incomplete: true
 - id: session-096
   title: "Residual ten-square skeleton admission"
-  status: in_progress
+  status: stopped
   primary_bead: think-oli1
-  phases: 3
+  phases: 4
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-096.yaml
@@ -1536,8 +1536,8 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-096.yaml
-    model_responses: 146
-    agent_hours: 1.4
-    active_union_hours: 0.63
-    wall_hours: 0.63
+    model_responses: 196
+    agent_hours: 1.87
+    active_union_hours: 1.07
+    wall_hours: 1.07
     snapshot_incomplete: true

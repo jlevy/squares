@@ -341,20 +341,22 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, select `think-s6e7` under BC-282 in
-[Agenda 028](../../../../packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md).
-Allocate 20 minutes to define the complete residual ten-square skeleton and its
-alternative-obligation table, then 10 minutes for independent admission.
-A specific new geometric implication is required before any later target.
-Session 092’s mathematical checkpoint `7b967d34` passed all 66 full validation steps.
-Its scientific block is closed; PR 110 retains the results and publication recovery.
-The successor design has not run and requires a separate allocation.
-[Agenda 024’s Current Allocation](../../../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
-retains the parallel continuation’s assignments and priorities.
-Its separate next step is BC-264’s 30-minute H-114 feature and kernel-contract pricing;
-that lane remains independently allocated.
-See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the latest session,
-funding conditions and independent-review assignments.
+For the next supervised exact-research goal, select existing `think-mq0d` under BC-264
+in
+[Agenda027](../../../../packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md),
+with its separate owner.
+Allocate at most 30 minutes of source-free feature and kernel-contract pricing.
+First accept BC260’s kernel-specific implications; the direct case/Farkas review did not
+cover them. Fix one feature family, exact PSD criteria and the full diagonal/pair
+verification price before any scientific target.
+Check live ownership before dispatch; no degree escalation or general hierarchy follows
+by default. Session096 completed BC282’s exact open-fiber reduction and independent
+admission, which refused the larger target.
+Its comparisons park local H120/H118 target work and retain their re-entry conditions in
+[X018](../../../../packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md#bc282-checkpoint-and-current-allocation).
+PR110 retains this continuation and the closed session092 investigation.
+See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for current evidence and
+allocation boundaries.
 
 ## The numeric runner launch gate
 

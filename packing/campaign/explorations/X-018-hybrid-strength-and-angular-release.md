@@ -187,7 +187,7 @@ Its H124 collision-augmented exp127 remains unresolved with `no_chain` and no
 independent target reader.
 Neither source task is repeated here.
 
-## Overnight Closing Allocation and Ranked Portfolio
+## Final Allocation and Ranked Portfolio
 
 **The overnight close selected BC282’s residual-skeleton design.** The final W5
 assessment compared three disjoint read-only reviews with the accepted mathematics.

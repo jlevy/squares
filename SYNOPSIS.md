@@ -576,56 +576,50 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-**Active continuation:** [session096](packing/campaign/agent-sessions/session-096-residual-skeleton.md)
-has completed BC282’s exact translation reduction and independent target-readiness
-review. The reduction is accepted; the larger target is not admitted. Its efficiency
-checkpoint parks local H120/H118 target work and preserves existing BC264 kernel pricing
-under its separate owner. Publication and validation are in progress. The completed
-session092 handoff below is retained until this continuation terminalizes.
+**BC282’s exact reduction is accepted; further local target work is parked.**
+[Session096](packing/campaign/agent-sessions/session-096-residual-skeleton.md) continues
+the owner’s request after the closed eight-hour investigation in
+[session092](packing/campaign/agent-sessions/session-092-hybrid-overnight.md).
+[PR110](https://github.com/jlevy/squares/pull/110) retains both checkpoints.
+The new design preserves all 40 containment rows and 45 complete pair clauses through
+ten closed envelope chambers and 24 open collision intervals.
+The independent audit accepts the exact translation/fiber equivalence, including
+degenerate fibers and legal touching.
+It proves neither coverage of a target fiber nor a feasible skeleton.
 
-**Eight-hour investigation closed; BC-282 design selected next.**
-[Session 092](packing/campaign/agent-sessions/session-092-hybrid-overnight.md) was
-allocated from 06:31 to 14:31 UTC on September 7, on `codex/n11-hybrid-overnight` after
-PR 107 landed at `dd36800e`. [PR 110](https://github.com/jlevy/squares/pull/110) retains
-intermediate checkpoints, independently audited proofs, exact model obstructions and
-validation. All scientific audits ended before their original limits.
-Usage interrupted the final documentation reviews and publication; the user asked to
-continue and the coordinator recovered the checkpoint after the original 14:31 deadline.
-No successor was executed during that publication recovery.
+The proposed six-source covering chain remains unproved.
+Uniform templates, bounded endpoint transitions and a priced complete witness
+discriminator are missing, so the conditional 30/25/20-minute target was not admitted.
+Two subsequent comparisons support parking local H120 and H118 target work.
+Paused `think-k54y` retains H120’s exact re-entry conditions; H118 still needs a finite
+rule preserving one angle against walls and all ten actual neighbors, its joint-angle
+control and a full verification price.
 
-[X-018](packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md) and
-[Agenda 028](packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md)
-retain H-118–121 and sequential BC-269–282. The central parent fence and signed release
-exclusions are accepted.
-The BC-281 audit leaves the complete closed half-angle remainder
-$[1/24,1/3]\cup[1/2,23/25]$, with both slide signs and all original conditions.
-The stronger counting inequality also drops the four block contact equations while
-retaining six fixed axis squares and one common angle.
-The global bracket is unchanged.
-Disk and octagon capacity bounds on the boundary family are refuted; maximal wall-core
-and full-square capacity questions remain unresolved.
+**Selected next entry:** `think-mq0d`, existing BC-264 / H-114, under its separate
+owner. Allocate at most 30 minutes of source-free feature and kernel-contract pricing.
+First accept the kernel-specific BC260 implications, which the direct case/Farkas review
+did not cover. Fix one feature family, exact PSD/necessary-constraint acceptance and the
+full diagonal/pair verification price.
+This is preparation; no target, degree escalation or new hierarchy is admitted.
+Check the owner’s live state before any dispatch.
 
-**Selected next entry:** `think-s6e7`, BC-282, design only.
-Allocate 20 minutes for the complete residual ten-square skeleton and
-alternative-obligation table, then 10 minutes for independent admission.
-A specific new geometric implication is required before any later target.
-An exact feasible skeleton would show square 10 must enter the proof; it would not be an
-eleven-square witness.
-Do not restart the frozen BC-281 attempt.
-Phase 20 is the final W5 allocation and validation block, following five completed
-phases since W5 phase 14. Zero research phases follow it.
-Immutable `7b967d34` passed all 66 full checks in 1604.44 seconds; the final
-documentation and status delta has its own push gate.
-The original 480-minute window and scientific caps remain recorded in the stopped
-session.
+The prior signed exclusions retain the complete closed half-angle remainder
+$[1/24,1/3]\cup[1/2,23/25]$, both signs and all original source features.
+The stronger count retains six fixed axis squares and one common angle while dropping
+the four block contact equations.
+The global n11 bracket is unchanged.
+The central parent fence is accepted; the matching coupled-LP strength comparison,
+maximal wall-core capacity and full-square boundary questions remain unresolved.
 
-The parallel task **Squares plan X-016** landed PR 109 on `main` at `07e82d1e`. This
-branch integrates that checkpoint while preserving both lanes’ records.
-Its exp-128 fixes the current Trump D4 support optimum at 11. Its completed BC-265/H-116
-comparison selects future BC-264/H-114 feature and kernel pricing; that work and the
-unresolved H-124 remainder remain separate.
-Source H-122–124, exp-121–128 and sessions 091/093/094/095 are occupied.
-Check live allocations before reserving another ID.
+The parallel task **Squares plan X-016** landed PR109 on main at `07e82d1e`, already
+integrated here.
+Its exp128 fixes the old Trump support optimum at eleven; BC265 selected
+the existing BC264 entry.
+Preserve source H122–124, exp121–128 and sessions091/093–095. This continuation executes
+BC282 in session096 and allocates no BC283, new hypothesis or experiment.
+PR111’s separate session093 naming collision is tracked by `think-rzek`; it does not
+change the landed IDs.
+Refresh live allocations before reserving another ID.
 
 **Independent alternative prepared.**
 [X-017](packing/campaign/explorations/X-017-compatibility-and-complete-case-covers.md)
@@ -3223,7 +3217,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-093.yaml` | session-093 | 673 | 6.07 h | 1.99 h | 1.99 h | yes |
 | `codex-task-tree-session-094.yaml` | session-094 | 562 | 4.53 h | 1.82 h | 1.82 h | yes |
 | `codex-task-tree-session-095.yaml` | session-095 | 476 | 4.08 h | 1.69 h | 1.69 h | yes |
-| `codex-task-tree-session-096.yaml` | session-096 | 146 | 1.4 h | 0.63 h | 0.63 h | yes |
+| `codex-task-tree-session-096.yaml` | session-096 | 196 | 1.87 h | 1.07 h | 1.07 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

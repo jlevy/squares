@@ -67,7 +67,7 @@ session:
     clock_role: work
     objective: Publish the accepted BC282 reduction and select at most one changed next design from its exact readiness gap and the independently owned portfolio.
     bead: think-oli1
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: BC282 is terminal with useful exact mathematics but no admitted full target; spending the reserved target price would be an unchanged unpriced attempt.
     budget_minutes: 20
@@ -77,12 +77,37 @@ session:
     validation_command: Records and immutable full checkpoint validation; read-only comparison of admitted contracts and costs.
     kill_condition: Original18:09 cutoff; no scientific target, implementation, inherited deadline extension or duplicated BC264 ownership.
     fallback: Retain BC282 NO-GO and exact missing premise, with parallel BC264 ownership unchanged.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Publish the accepted checkpoint and choose only a changed, concretely priced successor; finalization remains protected.
+    outcome: Both comparative reviews recommend zero additional local target allocation. Root selects the existing separately owned BC264 pricing entry and pauses H120 re-entry in think-k54y. The accepted mathematical checkpoint127fd112 is committed; its immutable full gate is running. A final scope review found only a corrected cost-label ambiguity.
+    evidence:
+    - packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md
+    stop_reason: All review and allocation work is terminal; no target was admitted. Enter the protected publication and validation reserve.
+    next_action: Finish immutable full validation, terminal records, the final documentation delta, publication and hosted CI.
+  - workflow: documentation-pass
+    focus: correctness
+    recording: contemporaneous
+    clock_role: finalization
+    objective: Publish the independently accepted BC282 reduction and reprioritized handoff with exact cost and completed validation evidence.
+    bead: think-oli1
+    status: stopped
+    entered_by: planned_checkpoint
+    switch_reason: The efficiency checkpoint parks local targets and all delegates are terminal. The enlarged finalization reserve begins after every original work-phase deadline.
+    budget_minutes: 71
+    started_at: '2026-09-07T18:09:00Z'
+    deadline_at: '2026-09-07T19:20:00Z'
+    expected_output: Terminal session and task records, cumulative branch-cost receipt, full-checkpoint and final-delta evidence, updated PR110 and passing hosted CI.
+    validation_command: packing-validate
+    kill_condition: Use the three bounded finalization slots in the body and original19:20 endpoint; no new scientific target, target retry, adapter or external-owner dispatch.
+    fallback: Preserve the accepted result and exact unfinished validation or publication obligation without claiming completion.
+    outcome: At the18:39:20UTC checkpoint, immutable127fd112 has a passing62-step fast gate, all55 exhaustive exact tests and targeted recovery of all six sandbox-blocked tests. The original full invocation remains failed. The accepted reduction, terminal handoff and refreshed cost receipt are ready for a separately checked final documentation commit; push and hosted CI are not yet claimed.
+    evidence:
+    - packing/campaign/agent-sessions/session-096-residual-skeleton.md
+    - packing/campaign/resource-usage/codex-task-tree-session-096.yaml
+    - SYNOPSIS.md
+    stop_reason: Freeze the terminal record for immutable final-delta checks. Scientific allocation and review are complete; final publication receipts are recorded on PR110 after their actual outcomes.
+    next_action: Validate the final documentation commit, publish it on PR110 and verify hosted CI; keep the original19:20 publication endpoint and no additional scientific target.
   primary_bead: think-oli1
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 120
     max_cycles: 4
@@ -98,7 +123,7 @@ session:
   progress:
     metric: Independently admitted complete residual proof obligations and accepted geometric implications
     before: BC281 accepts closed exclusions and necessary cap/core conditions, leaving both signs on [1/24,1/3] union [1/2,23/25]. BC282 is the selected unexecuted design; BC264 is separately owned.
-    after: null
+    after: Independent admission accepts the complete seven-parameter40/45 skeleton, ten closed envelope chambers and exact24-open-interval fiber equivalence with touching and degenerate fibers retained. No particular fiber coverage, feasible skeleton, eleven-square witness or global bound is established. The conditional target is NO-GO, leaving75 worker-minutes unspent. Comparative reviews park local H120/H118 targets and select the existing separately owned kernel pricing entry.
   delegations:
   - task: BC282 Complete residual design with a specific additional geometric implication and finite obligation table
     operator: Codex direct_contracts, inherited max thinking
@@ -262,15 +287,48 @@ session:
     excluded_commands:
     - All file, Git and shared-record mutations
     - Scientific target, numerical solver, new proof or implementation
+  - task: BC282 publication scope review
+    operator: Codex closing_scope_review, inherited max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: "Read-only publication audit found no scientific or ownership overclaim. Corrected the PR cost prose to label session092 separately from session096\u2019s new interval."
+    evidence:
+    - packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md
+    files: []
+    checks:
+    - Compared current handoff, X018, H120, BC282 outcomes and PR draft to the frozen admission; no tests or edits.
+    uncertainty: Immutable127fd112 full-gate outcome remains pending; this review does not certify it.
+    elapsed_seconds: 76
+    elapsed_quality: operator_reported_approximate
+    next_action: Retain the cost correction and wait for actual full and final-delta validation before publication.
+    phase: 3
+    budget_minutes: 5
+    started_at: '2026-09-07T18:05:11Z'
+    deadline_at: '2026-09-07T18:09:00Z'
+    expected_output: Read-only audit of final result scope, disjoint allocations, target NO-GO and cost/validation wording.
+    validation_command: Read the owned integration delta and PR draft against frozen mathematical admission.
+    kill_condition: Original18:09 endpoint; no edits, target work or further mathematical derivation.
+    fallback: Retain exact publication issues for the coordinator without extending the review.
+    excluded_commands:
+    - All file or Git mutations
+    - Scientific target, new proof or code execution
   outputs: *id004
   checks:
   - Baseline013e772a is clean and pushed. Its code parentaeef535f passed all66 full checks in1752.00 seconds; the final documentation delta passed45 push checks in140.20 seconds and hosted CI.
   - Local and source worktree inventories end at session095. The complete paginated PR111 file inventory contains session093-atlas-expansion-to-324, not session096; this branch allocates the next sequential session096. The external093 naming collision with landed source work is separate from this allocation.
   - Baseline aeef535f records tier passed31 of66 steps in37.05 seconds before registry integration; exit0. This is a baseline check, not validation of the new documents.
-  - Cost receipt cutoff17:58UTC is an incomplete lower bound for this new interval; session092 accounting is unchanged. Later validation/publication and pre17:20 orientation are outside this snapshot.
+  - Cost receipt refreshed through18:24UTC preserves the exact17:20 baseline and nondecreasing totals; it remains an incomplete lower bound. Session092 accounting is unchanged. Pre17:20 orientation and post18:24 validation/publication are outside this snapshot.
   - 'Initial working-tree records run failed three steps in34.80 seconds: two repository walkers entered existing attic fixtures, and the declared-command checker parsed prose after the phase1 command. The command is corrected; subsequent validation uses the clean immutable checkout. No scope, formatter exclusions or validation thresholds changed.'
-  stop_reason: null
-  next_action: Complete checkpoint validation and publication, then retain existing BC-264 under think-mq0d as the next portfolio pricing entry with its separate owner. Local H120 target work is parked.
+  - "Publication scope review18:05:11\u201318:06:27 found one minor cost-label ambiguity, corrected in the PR draft. It found no mathematical overclaim, witness conflation or ownership violation; no gate result was inferred."
+  - The full127fd112 invocation retains the ordinary transcript, including step/test durations, but PACKING_VALIDATION_ARTIFACT_DIR was not set, so structured command and JUnit receipts are unavailable for that invocation. This limits performance attribution and supports no optimization claim. The final-delta invocation will enable the existing artifact directory; the full run is not repeated for telemetry alone.
+  - 'full gate: full at 127fd112: failed (64 of66 steps passed in1817.29 seconds; six tests were blocked by sandbox permissions)'
+  - The failed full invocation exited1. Its fast suite had3429 passed, three permission failures and one skipped; its slow suite had95 passed and three permission failures. All55 exhaustive exact tests and the remaining64 steps passed. Each failed test explicitly reports PermissionError for forkserver IPC, localhost binding or process inspection.
+  - On unchanged127fd112, all six failed tests passed with the required local permissions in8.77 seconds; exit0. The original failed transcript and six-test recovery transcript/JUnit are retained in attic/agenda-028-overnight. This is targeted recovery, not a claim that the original full invocation passed.
+  - 'full gate: fast at 127fd112: passed (62 of66 steps in324.34 seconds; 3432 tests passed and one skipped; exit0)'
+  - The fast recovery gate retains structured command, provenance, step and JUnit artifacts through the existing artifact-directory setting. No runtime or test threshold changed. Its passing result and the six-test recovery do not relabel the original full invocation as passed.
+  - Terminal record freeze uses the observed18:39:20UTC checkpoint. The final documentation delta, push and hosted CI are pending at this freeze; their actual commit-bound receipts belong to PR110. The integration bead remains open until publication succeeds.
+  stop_reason: BC282 design and independent admission are complete, with a useful exact reduction and no admitted target. Stop local scientific work on that evidence, not on budget exhaustion. Freeze the terminal record for separately checked publication; PR110 retains the actual final-delta and hosted outcomes without a self-referential claim about an unrun commit.
+  next_action: After final-delta validation and publication, retain existing BC-264 / think-mq0d as the next portfolio pricing entry under its separate owner. Check live ownership and accept its kernel-specific prerequisites before at most30 minutes of feature and full-verification pricing; no automatic target or hierarchy.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-096.yaml
 ---

@@ -1108,15 +1108,16 @@ agenda:
           independently audited partial release exclusions. Allocate 20 minutes
           for the design and 10 for independent admission before any later target.
       selected:
-        bead: think-s6e7
-        workflow: research-loop
+        bead: think-mq0d
+        workflow: insight-iteration
         rationale: >-
-          This live handoff follows terminal Session092 and its passed full
-          7b967d34 checkpoint. BC-282 is an unexecuted design in Agenda028 on
-          PR110; admission requires a specific new geometric implication. The
-          scientific block is closed, and publication recovery does not extend
-          its deadline. Agenda024's separate continuation retains its assignments;
-          the earlier candidates and historical closeout remain unchanged.
+          Updated at session096’s checkpoint, not backdated to this agenda’s W10.
+          BC282’s exact translation/fiber reduction is independently accepted,
+          but its full target is not admitted. Comparative review parks further
+          local H120/H118 targets. The existing BC264 entry remains the next
+          portfolio pricing priority under its separate owner: first accept the
+          kernel-specific contract, fix features and price full pair verification.
+          No new target, ID, degree escalation or automatic dispatch is authorized.
       operator_input:
         status: unavailable
         note: >-
