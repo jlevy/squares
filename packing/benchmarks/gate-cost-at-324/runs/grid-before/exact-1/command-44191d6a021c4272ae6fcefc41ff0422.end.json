@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/Users/levy/wrk/github/squares/.claude/worktrees/pr-89-review-strategy-19e990/packing/.venv/bin/python3",
+    "-m",
+    "cases.gobel40.verify_exact"
+  ],
+  "cwd": "/Users/levy/wrk/github/squares/.claude/worktrees/pr-89-review-strategy-19e990/packing",
+  "finished_at": "2026-09-07T14:32:56.616234+00:00",
+  "inner_jobs": 1,
+  "jobs": 3,
+  "log_path": "/private/tmp/claude-502/-Users-levy-wrk-github-squares--claude-worktrees-pr-89-review-strategy-19e990/b48434ad-6026-497b-a36d-ed85246e6a7e/scratchpad/runs/before-exact-1/command-44191d6a021c4272ae6fcefc41ff0422.log",
+  "reason": "",
+  "run_id": "9b28fc11e6f441ca89197e605da0bedd",
+  "started_at": "2026-09-07T14:32:55.634846+00:00",
+  "status": "passed",
+  "step_name": "exact verification",
+  "timeout_seconds": 900.0,
+  "wall_seconds": 0.9825302500030375
+}

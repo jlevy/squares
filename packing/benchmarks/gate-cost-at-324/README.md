@@ -5,7 +5,7 @@ date: 2026-09-07
 # Gate Cost at the Widened Corpus
 
 What the pull-request surface costs now that the known-best corpus runs to n = 324, and
-what the two steps that stopped fitting were replaced with.
+what the three re-derivations that stopped fitting were replaced with.
 Bead `think-lmlr`, the W5 efficiency slice of the
 [atlas expansion plan](../../../docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md).
 
@@ -13,6 +13,12 @@ The corpus grew from n = 1..100 to n = 1..324 on 2026-09-07 (commits `32b796cc`,
 `6e21c4ca`, `282dee9d`): 324 cases and 52,650 unit squares against 100 and 5,050. Two
 sweeps grew with it and one did not, and the readings below are what decided which of
 them stayed on every pull request.
+
+Then the `checks` job failed the register’s drift rule on the same corpus and the same
+day, from a step nobody had been looking at, and
+[the section on it](#the-checks-job-and-the-grid-replay-inside-it) is the second slice.
+It is written against the first: same box, same instrument, same guard, and a baseline
+that is this branch’s tree rather than the commit the first slice started from.
 
 ## Protocol
 
@@ -25,8 +31,9 @@ here is transcribed by hand except this prose.
 Two kinds were dropped rather than kept: the `command-*.start.json` receipts, whose
 every field the matching `.end.json` repeats, and the per-subprocess receipts of the
 tier runs, where the step record is the number and forty-eight command records per run
-are not. The atlas reading keeps its per-subprocess receipts, because the split between
-its one expensive member and its seven cheap ones is what that reading is for.
+are not. Three readings keep their per-subprocess receipts, because a split inside one
+step is what each of them is for: the atlas step’s one expensive member against its
+seven cheap ones, and `exact verification` at each end of the second slice’s change.
 
 **Every reading waited for an idle host, and the two that did not say so.** The driver
 polls `pgrep -f 'packing-validate|devtools\.|-m pytest'` before each reading and does
@@ -294,7 +301,11 @@ forgotten there.
 | --- | ---: | ---: | --- |
 | `sweeps` | 210 s | 210 s | 107.05 s cleared |
 | `fast` | 700 s | 600 s | 502.30 s cleared |
-| `checks`, `geometry`, `suite` | unchanged | unchanged | unchanged |
+| `checks`, `geometry`, `suite` | unchanged | unchanged | unchanged by this slice |
+
+The `checks` row is what the section below then changed: its ceiling still stands at 195
+s and its 99.39 s record is cleared, on the same rule and for a step this slice never
+touched.
 
 **Two records were cleared and neither was replaced**, which is the register’s own
 precedent rather than a shortcut.
@@ -323,6 +334,194 @@ It is not tightened further for the same reason the `sweeps` one did not move.
 
 `devtools.check_gate_budgets` passes: nine tiers, three with a recorded cost, all
 ceilings within 2× of it, all named in `development.md`.
+
+## The `checks` job, and the grid replay inside it
+
+The sweeps job was not the only one the widening reached, and the second one announced
+itself rather than being found: on 2026-09-07 the `checks` job ran **189.09 s** against
+a recorded 99.39 s -- 1.90x, where the register’s drift rule fails at 1.5x -- and 6 s
+under its 195 s ceiling.
+The gate’s own verdict named the step in the same breath: `exact
+verification` was **133.4 s of it, 70.6 per cent**. That is the first record in this
+register cleared by its own rule firing rather than by a re-scoping somebody noticed.
+
+**The baseline here is not `2841eec9`.** It is this branch’s tree with everything above
+already applied, commit `1f436895` with a clean working tree, which the gate’s own
+`run-*.json` records for every reading.
+Same box, same instrument, same idle guard; readings under
+[`runs/grid-before/`](runs/grid-before/) and [`runs/grid-after/`](runs/grid-after/),
+with the per-subprocess receipts kept for one reading of the step at each end, because
+the split between its one growing member and its sixteen fixed ones is what those two
+readings are for.
+
+### Baseline
+
+| Reading | Shape | Wall (s) |
+| --- | --- | ---: |
+| `exact verification` (whole step) | `--only`, `--jobs 3 --inner-jobs 1` | 84.56, 84.11, 83.95 |
+| … `check_basic_bounds` | (inside that step) | 34.74 |
+| … `dilation_corollary --check-limit-record` | (inside that step) | 26.58 |
+| … the fifteen other subcommands | (inside that step) | 23.23 |
+| `packing-validate --checks` | `--jobs 3 --inner-jobs 1` | 120.03 |
+
+Three readings of the step because it is under five minutes, and they span 0.7 per cent.
+The tier reading is 120.03 s of wall over 219.76 s of step time in 48 steps, every step
+passing.
+
+**One member of that step grows with the corpus and it is the one that grew.**
+`check_basic_bounds` replays the exact rational grid witness of every case whose
+verified upper bound is the grid ceiling -- 305 of the 324 today -- and it was 3.58 s
+when [D-370](../../../defects.md) moved it into this step at n = 1..100. The other
+sixteen subcommands are fixed cases: one rational control, one limit record, ten
+construction replays and four witness checks, none of which can move when the corpus
+widens.
+
+**The ratio this box shows against CI is 1.58, in two places at once.** 189.09 / 120.03
+for the tier and 133.4 / 84.21 for the step.
+That agreement is what makes the local readings below usable for a decision about a
+hosted runner; nothing here is written into the register as a `measured_seconds`.
+
+### The cost curve
+
+`check_basic_bounds` gained `--max-n` to take this, which is the only reason that flag
+exists.
+
+| Replayed | Grid cases | Wall (s) |
+| --- | ---: | ---: |
+| n ≤ 100 | 81 | 2.75 |
+| n ≤ 200 | 181 | 12.65 |
+| n ≤ 324 (all) | 305 | 34.70, 34.94, 34.80 |
+
+**The curve is quadratic in the corpus’s last n, not cubic**, and that is a property of
+the check rather than luck.
+`verify_grid` buckets its pair enumeration -- two unit squares overlap only if their
+centres are within sqrt(2), so a bucket of side 2 and its eight neighbours contain every
+pair that could -- so one case is about linear in its own n and the corpus is the sum of
+them. A widening to n = 400 would put this near 53 s with nothing else changing.
+
+### The speedup, taken before any deferral
+
+`OR-13` puts this first, and here it is worth doing and does not help.
+The replay is a map over independent cases -- `verify_grid` builds its own grid from n
+and reads nothing else -- so `check_basic_bounds` now sizes a `ProcessPoolExecutor` from
+`sqpack.workers.worker_count`, the same contract `screen_translation_escape` and
+`build_known_best_atlas` use.
+
+| Shape | Wall (s) | CPU (s) | Speedup |
+| --- | ---: | ---: | ---: |
+| serial (`--jobs 1`) | 34.81 | 34.81 | 1.00x |
+| `--jobs 2` | 18.58 | 36.64 | 1.87x |
+| `--jobs 4` | 9.97 | 38.49 | 3.49x |
+
+**The equivalence evidence is byte-for-byte, not a matching verdict.** The tool’s whole
+stdout at one worker and at four hashes to `1caa1409…`, and the sampled run’s to
+`6d1e0e63…`, at both counts; `cmp` reports no difference for either pair.
+That is stronger than comparing exit codes, because the failure this could introduce is
+a reordered failure list rather than a wrong one -- `pool.map` yields by submission
+index, and the tool keys its failures by n and prints them in frontier-document order.
+`test_a_pool_worker_replays_the_same_verdicts_as_this_process` holds the property as an
+assertion over sizes chosen to cross a perfect square, its predecessor and its
+successor, where the grid’s own side changes.
+CPU is flat across the three rows, so the pool divides the work rather than adding any.
+
+**And it buys the pull request nothing, which is the point of measuring it.** Every
+pull-request tier passes `--inner-jobs 1`, so `PACK_JOBS` is 1 and a pooled step is the
+serial step there by design -- the same cap that keeps nineteen ordinary tests from
+going over the quick lane’s per-test ceiling on contention alone.
+What the pool decides is where the deferred copy can live: run as `deep-gate.yml`
+invokes it, `--only "exact rational grid replay" --jobs 2 --inner-jobs 2`, the whole
+replay is 18.79 s of wall over 36.65 s of cpu, underneath a slow lane that is 890 s.
+
+### What did not fit, and what replaced it
+
+87.56 s of local `--checks` scaled by 1.575 is about 138 s on the reference runner, and
+120.03 s scaled the same way is the 189.09 s that was actually observed.
+So the local criterion of “under 120 s” is the one number in this decision that would
+have been misread: the tier was already at 120.03 s here on the day it failed the drift
+rule there.
+The deferral is argued on the hosted figure, and the local ones support it by
+their ratio.
+
+`check_basic_bounds` is therefore sampled on the pull-request surface and run whole on
+the deferred one, as `exact rational grid replay`. The stand-in is the complement rather
+than a slice:
+
+- every one of the 324 cases still has its declared grid upper bound, area lower bound
+  and Nagamochi lower bound compared against the closed form its evidence record names
+  -- that half is 0.14 s of the 34.86 s, and it never left;
+- every ninth case that claims a grid witness is still replayed exactly, 34 of 305, from
+  the first, so the sample reaches the 224 cases the widening added;
+- and what waits for the deep gate is the other eight ninths of the per-case geometry.
+
+| Sampled step | Shape | Wall (s) |
+| --- | --- | ---: |
+| `check_basic_bounds --sample` (34 of 305) | `PACK_JOBS=1` | 4.12, 4.19, 4.13 |
+
+### After the change
+
+| Reading | Shape | Wall (s) | Ceiling (s) | Of ceiling |
+| --- | --- | ---: | ---: | ---: |
+| `exact verification` (whole step) | `--only`, `--jobs 3 --inner-jobs 1` | 53.66, 53.57, 53.56 | — | — |
+| `packing-validate --checks` | `--jobs 3 --inner-jobs 1` | 87.83, 87.31, 87.54 | 195 | 45% |
+| `packing-validate --geometry` | `--jobs 3 --inner-jobs 1` | 48.25 | 180 | 27% |
+| `packing-validate --suite` | `--jobs 1 --inner-jobs 1` | 39.00 | 205 | 19% |
+
+The four readings above are of the code change, taken before this document and the
+register entry were written.
+The three pull-request jobs were then run again with those documents in place, since
+`checks` is the tier that reads them, and `--records` with them because a registry
+moved: 27.52 s, 86.57 s, 48.93 s and 38.20 s, every step of all four passing, at 9, 44,
+27 and 19 per cent of their ceilings.
+
+The step is 84.21 s to 53.60 s, the tier 120.03 s to 87.56 s, and every step passes at
+both ends -- the two pre-existing failures the earlier readings carried are gone,
+because the uncommitted session file and the frontier-generator work that caused them
+have landed. `--geometry` and `--suite` are unchanged within noise, which is what a
+change confined to one step of one job should look like.
+
+Inside the tier, over 186.86 s of step time in 48 steps:
+
+| Step | Wall (s) |
+| --- | ---: |
+| `exact verification` | 55.10 |
+| `bead tree` | 31.06 |
+| `soundness perimeter` | 29.04 |
+| `type floor (basedpyright)` | 21.66 |
+| the other 44 | 49.99 |
+
+**This step no longer floors the tier, and that is the number that says the sample is
+dense enough.** Three workers divide 186.86 s of step time into 62.29 s, and the longest
+step is 55.10 s under it, so the wall is now the queue’s rather than any one step’s. A
+denser sample would buy cases the deferred replay already covers and buy them against a
+floor that has moved.
+
+### What the remaining wall is, and what this slice did not do
+
+Two levers are visible in these readings and neither is spent here, so they are recorded
+rather than taken.
+
+**The queue is submitted in declared order, and the longest step is declared 40th of
+48.** Before, the step was 86.71 s and the tier 120.03 s: the step started about 33 s in
+and the tier ended when it did.
+After, the ideal wall is 62.29 s and the observed one 87.56 s, so about 25 s of this job
+is a queue waiting for work it could have started first.
+That is worth about 40 s on the reference runner, it is one scheduling decision rather
+than a coverage trade, and it belongs to whoever owns the gate’s scheduler rather than
+to a slice about one step.
+
+**`dilation_corollary --check-limit-record` is now the step’s largest member at 26.35
+s.** It is a fixed case -- one certificate and one limit record, at n = 11 -- so it did
+not grow and will not, and it is half of what is left.
+Nothing here measured whether it can be made cheaper.
+
+**The per-case predicate was left exactly as it is.** A grid witness’s non-overlap is a
+property of the lattice it is built on, so the bucketed pair sweep inside `verify_grid`
+is in one sense re-proving what the construction already guarantees, and the coordinates
+are integer-valued `Fraction`s where Python `int`s are the same rationals more cheaply.
+Both are real options and both were refused: the replay’s contract is an *independent*
+exact check of a witness, and a check made cheap by assuming the thing it verifies is
+not the same check. `OR-13` asks for the cost to come off the schedule, not off the
+predicate.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

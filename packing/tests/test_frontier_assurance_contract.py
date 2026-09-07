@@ -6,12 +6,17 @@ from __future__ import annotations
 from copy import deepcopy
 from pathlib import Path
 
+import pytest
 import yaml
 from jsonschema import Draft202012Validator
 
 from cases.gobel5.verify_exact import verify as verify_gobel5
 from cases.gobel10.verify_exact import verify as verify_gobel10
-from devtools.check_basic_bounds import check_case_basic_bounds, verify_grid
+from devtools.check_basic_bounds import (
+    check_case_basic_bounds,
+    replay_grid_witnesses,
+    verify_grid,
+)
 from devtools.migrate_frontier_v2 import apply_assurance_audits, migrate_case
 from devtools.render_research_tables import compact_bound, same_bound
 from sqpack.assurance import (
@@ -19,6 +24,7 @@ from sqpack.assurance import (
     check_evidence_semantics,
     check_experiment_semantics,
 )
+from sqpack.known_best import GRID_SAMPLE_STRIDE, sampled_sequence
 
 
 def numerical_evidence() -> dict[str, object]:
@@ -416,3 +422,48 @@ def test_every_external_proof_in_the_register_declares_its_review() -> None:
             "informally-verified",
             "defect-found",
         }, record["id"]
+
+
+def test_a_pool_worker_replays_the_same_verdicts_as_this_process() -> None:
+    """The grid replay's pool divides the work rather than changing it.
+
+    `check_basic_bounds` runs the exact rational replay through a process pool sized by
+    `sqpack.workers.worker_count`, which is what let the whole replay move to the deep
+    gate rather than be thinned there too. A pool is only allowed to be faster: the
+    verdicts, their keys and their order have to be what one process produces, because
+    the tool prints its failures in frontier-document order and a run that reordered them
+    would be a different report of the same facts.
+
+    Measured on 2026-09-07 over the whole corpus at `n=1..324`: 34.81s serial, 18.58s at
+    two workers, 9.97s at four, over 34.8s, 36.6s and 38.5s of cpu -- so the pool divides
+    the work rather than adding any -- and the whole run's stdout was byte-for-byte
+    identical at one worker and at four. This holds the same property as an assertion, on
+    a handful of sizes chosen to cross a perfect square, its predecessor and its
+    successor, where the grid's own side changes.
+    """
+    numbers = [1, 2, 8, 9, 10, 16, 17]
+
+    serial = replay_grid_witnesses(numbers, 1)
+    pooled = replay_grid_witnesses(numbers, 3)
+
+    assert pooled == serial
+    assert list(pooled) == list(serial) == numbers
+    assert all(failures == [] for failures in serial.values())
+
+
+def test_the_sampled_replay_is_a_stride_over_the_grid_cases() -> None:
+    """What the pull request replays, and what it therefore does not.
+
+    The sample is every `GRID_SAMPLE_STRIDE`th case that claims a grid witness, taken
+    from the first, so it is the same set on every run and it reaches the 224 cases the
+    2026-09-07 widening added. A count would not: which cases claim `E-basic-grid-upper`
+    is a frontier fact that falls as constructions are found, and a stride over the
+    corpus range would thin the sample by however many non-grid cases it landed on.
+    """
+    grid = [3, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15]
+
+    assert sampled_sequence(grid, 1) == tuple(grid)
+    assert sampled_sequence(grid, GRID_SAMPLE_STRIDE) == (3, 14)
+    assert sampled_sequence(grid, len(grid) + 1) == (3,)
+    with pytest.raises(ValueError, match="stride must be positive"):
+        sampled_sequence(grid, 0)

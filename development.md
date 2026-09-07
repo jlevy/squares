@@ -134,13 +134,13 @@ process execution.
 <a id="validation-tiers"></a>
 
 A **tier** selects validation steps; a **lane** selects tests within a behavioural step.
-The ordinary full checkpoint has 68 steps.
+The ordinary full checkpoint has 69 steps.
 The
 [validation efficiency plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
 owns the current W5 work on cost, naming, and checkpoint placement.
 
 Use **PR fast surface** for `--fast`, **full checkpoint** for the default command, and
-**deferred checkpoint** for the six steps outside PR fast coverage.
+**deferred checkpoint** for the seven steps outside PR fast coverage.
 The advisory `Deferred checkpoint` workflow runs those steps.
 **Golden rebuild** means `--deep`, which also regenerates expensive golden producers;
 **strict checkpoint** means `--strict`, which includes that rebuild and refuses skipped
@@ -159,27 +159,33 @@ alone is not full pre-merge evidence.
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 31 of 68 | 300 s | 11.0 s |
+| `--records` | contributor, before touching a registry; also every pull request | 31 of 69 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a code change |
-| `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 68 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 68 | 195 s | 99.4 s on CI, the mean of four readings |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 68 | 180 s | 91.6 s on CI, the mean of four readings |
-| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 68 | 205 s | 102.8 s on CI, the mean of four readings |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 68 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 68 of 68 | 3600 s | split across two jobs; not clocked whole |
+| `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 69 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 69 | 195 s | record cleared 2026-09-07 when the grid replay was deferred; 87.6 s locally, only the ceiling applies |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 69 | 180 s | 91.6 s on CI, the mean of four readings |
+| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 69 | 205 s | 102.8 s on CI, the mean of four readings |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 69 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 69 of 69 | 3600 s | split across two jobs; not clocked whole |
 
-Three of the four PR partition costs are geometric means of four readings at the
-reference shape, not maxima.
-Hosted variation remains material: unchanged atlas code ranged from 60.97 s to 84.48 s,
-and the suite’s spread reached 1.52x. The geometric-mean baselines leave at least 1.25x
-margin to the declared drift and stale limits in those four samples.
-Refresh them as measurements accumulate; a recorded band would represent that variation
-better than a point.
-The fourth, `--sweeps`, has no recorded cost: two of its four steps were split on
-2026-09-07 when the corpus widened, so the tier those readings measured no longer exists
-and only its ceiling applies until CI clocks the new one.
-The gate prints the line to write when that happens.
+Two of the four PR partition costs are geometric means of four readings at the reference
+shape, not maxima. Hosted variation remains material: unchanged atlas code ranged from
+60.97 s to 84.48 s, and the suite’s spread reached 1.52x. The geometric-mean baselines
+leave at least 1.25x margin to the declared drift and stale limits in those four
+samples. Refresh them as measurements accumulate; a recorded band would represent that
+variation better than a point.
+The other two, `--sweeps` and `--checks`, have no recorded cost, and the corpus widening
+of 2026-09-07 is why both times.
+Two of the sweeps tier’s four steps were split that day, so the tier those readings
+measured no longer exists.
+The `checks` record was cleared the same day and by its own rule firing rather than by
+hand: at n = 1..324 the tier ran 189.09 s against a recorded 99.39 s — 1.90x, where 1.5x
+fails — and the gate’s verdict named `exact verification` as 133.4 s of it.
+The grid replay inside that step was the corpus-scaling member and is now deferred; the
+[readings are retained](packing/benchmarks/gate-cost-at-324/README.md).
+Only the ceilings apply on both until CI clocks the new tiers, and the gate prints the
+line to write when it does.
 [D-472](defects.md) retains the calibration history, and `think-be1s` tracks the band
 representation.
 
@@ -241,21 +247,25 @@ mode `D-466` records.
 ### The deep gate: the deferred surface, before the merge
 
 The deferred checkpoint runs slow behavioural tests, exhaustive exact tests, negative
-controls, the n=40 rigidity replay, the whole known-best atlas rebuild, and the whole
-single-square translation escape screen.
-These are the six steps outside the [PR fast surface](#validation-tiers).
+controls, the n=40 rigidity replay, the whole known-best atlas rebuild, the whole
+single-square translation escape screen, and the whole exact rational grid replay.
+These are the seven steps outside the [PR fast surface](#validation-tiers).
 [D-470](defects.md) records why checking them only after a merge is insufficient: a
 stale certificate test left main red across three merges despite green PR checks.
 
-The last two joined on 2026-09-07 because the corpus tripled, not because the gate
+The last three joined on 2026-09-07 because the corpus tripled, not because the gate
 changed its mind about them.
 At n = 1..324 the escape screen measured 766.26 s and `build_known_best_atlas --check`
-691.19 s of a 703.28 s step, against a 210 s ceiling on the job that carried both;
-[the readings are retained](packing/benchmarks/gate-cost-at-324/README.md).
-Neither left without a stand-in: `known-best atlas records and sample` and `translation
-escape screen records and sample` run on every pull request, re-derive the whole record
-layer of each artifact, and rebuild a fixed, recorded sample of the cases, so per-case
-geometry is the only evidence that waits for this surface.
+691.19 s of a 703.28 s step, against a 210 s ceiling on the job that carried both.
+`exact rational grid replay` is `devtools.check_basic_bounds` run whole, at 34.81 s
+inside `exact verification` — the one member of that step that grows with the corpus, in
+a `checks` job that had just run 189.09 s against a 195 s ceiling.
+[The readings are retained](packing/benchmarks/gate-cost-at-324/README.md).
+None left without a stand-in: `known-best atlas records and sample`, `translation escape
+screen records and sample`, and the sampled replay inside `exact verification` run on
+every pull request, re-derive the whole record layer of each artifact, and rebuild a
+fixed, recorded sample of the cases, so per-case geometry is the only evidence that
+waits for this surface.
 
 [`deep-gate.yml`](.github/workflows/deep-gate.yml) runs that surface against a pull
 request instead. Its selection is the **exact complement** of the pull-request surface,
@@ -263,7 +273,7 @@ not a sample of it:
 `test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers` resolves the
 workflow’s own commands through `packing-validate --list` and compares the union against
 every step no pull-request job runs.
-So the pull-request surface and the deep gate together are the whole gate, and a seventh
+So the pull-request surface and the deep gate together are the whole gate, and an eighth
 deferral argued into `test_the_pull_request_surface_defers_only_what_was_measured` fails
 until it is added here too.
 

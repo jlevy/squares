@@ -43,6 +43,7 @@ from sqpack import gate_budgets
 from sqpack.known_best import (
     ATLAS_SAMPLE_STRIDE,
     CALIBRATION_CORPUS,
+    GRID_SAMPLE_STRIDE,
     KNOWN_BEST_COMPOSITES,
     KNOWN_BEST_CORPUS,
     SCREEN_SAMPLE_STRIDE,
@@ -1813,6 +1814,24 @@ def _stromquist_rejection(context: Context) -> str:
 
 
 def _exact_verification(context: Context) -> str:
+    """The exact certificates, and a sampled stand-in for the grid replay among them.
+
+    `_commands` runs its list in one process after another, so this step's wall is the
+    sum of fifteen subcommands and the gate's `--jobs` pool cannot see inside it. At
+    `n=1..324` the step was 84.21s on an idle ten-cpu box (three readings, spread 0.7 per
+    cent) and 133.4s on CI, where it was 70.6 per cent of a `checks` job that ran 189.09s
+    against a 195s ceiling. One member grows with the corpus and it is the one that grew:
+    `check_basic_bounds` at 34.81s of the 84.21s, against 3.58s when it arrived here
+    under `D-370`.
+
+    So the replay is sampled here and run whole on the deferred surface, as `exact
+    rational grid replay`. `benchmarks/gate-cost-at-324/` retains the readings and
+    `test_the_pull_request_surface_defers_only_what_was_measured` carries the argument.
+    The other sixteen subcommands are fixed cases -- one rational control, one limit
+    record, ten construction replays and four witness checks -- so none of them moves
+    when the corpus widens. The largest is now `dilation_corollary` at 26.35s, which is
+    where the next second on this step would have to come from.
+    """
     output = _commands(
         context,
         (
@@ -1841,7 +1860,13 @@ def _exact_verification(context: Context) -> str:
             # until D-370, where it was 3.58s of that step and where nobody would look
             # for exact geometry. Same cases, same predicate, same verdict; only the
             # step reporting it changed.
-            (sys.executable, "-m", "devtools.check_basic_bounds"),
+            #
+            # `--sample` since 2026-09-07, and the corpus is why. Every case still has
+            # its declared bound compared against the closed form -- that half is
+            # 0.14s and stays whole -- and every ninth grid case is still replayed
+            # exactly. What waits for the deep gate is the other eight ninths of the
+            # per-case geometry, at 34.81s here and about 55s on CI.
+            (sys.executable, "-m", "devtools.check_basic_bounds", "--sample"),
             (sys.executable, "-m", "cases.trump11.verify_exact"),
             (sys.executable, "-m", "cases.gobel5.verify_exact"),
             (sys.executable, "-m", "cases.gobel10.verify_exact"),
@@ -1908,6 +1933,12 @@ def _exact_verification(context: Context) -> str:
     _require_text(
         output,
         "known-best n=11 rational control check passed",
+        # The sample's shape, from the shared constant rather than typed twice. The
+        # replayed count itself is not asserted: how many cases claim `E-basic-grid-upper`
+        # is a frontier fact that falls as constructions are found, while the 324 is the
+        # corpus fact `frontier corpus` already pins.
+        f"exact rational grid witnesses (every {GRID_SAMPLE_STRIDE}th grid case, from the "
+        f"first) and checked basic bound instantiations for {KNOWN_BEST_CORPUS.count} cases",
         "VALID: 11 squares, 55 pairs tested",
         "14 separated with zero gap, 41 strictly",
         "20 corner coordinates exactly on the boundary",
@@ -1919,6 +1950,30 @@ def _exact_verification(context: Context) -> str:
         "VERIFIED: 11 squares, 55 pairs",
         "VERIFIED\n  id: W-schadt-n029-2025-decimal-rational",
         "VERIFIED: 29 squares, 406 pairs",
+    )
+    return output
+
+
+def _exact_grid_replay(context: Context) -> str:
+    """Every exact rational grid witness in the frontier, replayed in full.
+
+    Deferred rather than dropped, and the measurement is on
+    `test_the_pull_request_surface_defers_only_what_was_measured`: 34.81s at `n=1..324`
+    inside a step that was 70.6 per cent of a `checks` job running 189.09s against a 195s
+    ceiling. What a pull request runs instead is the sampled replay inside `exact
+    verification`, which is the complement of this step and not a rerun of it -- every
+    case's declared bound against its closed form, and every ninth grid case replayed
+    exactly.
+
+    The cost is quadratic in the corpus's last `n`, which is why this one moved and the
+    fourteen fixed cases beside it did not: 2.75s at `n=1..100`, 12.65s at `n=1..200`,
+    34.81s at `n=1..324`, all on the box `benchmarks/gate-cost-at-324/` names.
+    """
+    output = _module(context, "devtools.check_basic_bounds")
+    _require_text(
+        output,
+        f"exact rational grid witnesses and checked basic bound instantiations for "
+        f"{KNOWN_BEST_CORPUS.count} cases",
     )
     return output
 
@@ -2968,6 +3023,27 @@ STEPS: tuple[Step, ...] = (
         "exact verification",
         _exact_verification,
         fast=True,
+        touches=(
+            *_CORE,
+            *_CASES,
+            "packing/witnesses/*",
+            "packing/frontier/*",
+            "packing/devtools/check_basic_bounds.py",
+            "packing/devtools/dilation_corollary.py",
+            "packing/devtools/decide_certificate.py",
+            "packing/devtools/generate_known_best_n011_rational_control.py",
+            "packing/devtools/check_rational_witness_independent.py",
+        ),
+    ),
+    # The whole grid replay, off the pull-request surface since 2026-09-07 and on its own
+    # measurement: 34.81s at `n=1..324` inside a step that was 133.4s of a 189.09s
+    # `checks` job with a 195s ceiling. It keeps the parent step's `touches` for the
+    # reason the atlas rebuild did -- the two halves read the same frontier, and the
+    # conservative move on a split is to give both halves the parent's set and narrow
+    # later with a measurement.
+    Step(
+        "exact rational grid replay",
+        _exact_grid_replay,
         touches=(
             *_CORE,
             *_CASES,

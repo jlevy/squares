@@ -1,6 +1,6 @@
 name: Deferred checkpoint
 
-# The four steps the pull-request surface defers, run against a pull request *before* it
+# The seven steps the pull-request surface defers, run against a pull request *before* it
 # merges rather than after it. Not on every build, and that is the point: the selection
 # here is 1943.05s in one step.
 #
@@ -91,19 +91,28 @@ concurrency:
 
 jobs:
   deferred-steps:
-    # Five of the six deferrals: `negative controls` (543.67s), `slow behavioral tests`
+    # Six of the seven deferrals: `negative controls` (543.67s), `slow behavioral tests`
     # (890s of a 1,038s suite, in 92 of 2,251 tests), `n=40 rigidity bracket still
-    # reproduces` (221.36s), and the two the widened known-best corpus put here on
-    # 2026-09-07 -- `known-best n=1..324 atlas rebuild` and `single-square translation
-    # escape screen`. The sixth is `exhaustive-tier` below.
+    # reproduces` (221.36s), and the three the widened known-best corpus put here on
+    # 2026-09-07 -- `known-best n=1..324 atlas rebuild`, `single-square translation
+    # escape screen` and `exact rational grid replay`. The seventh is `exhaustive-tier`
+    # below.
     #
-    # The two new ones are here on their own measurements, taken at n=1..324 on an idle
+    # The three new ones are here on their own measurements, taken at n=1..324 on an idle
     # ten-cpu box and retained in `packing/benchmarks/gate-cost-at-324/`: 691.19s for the
     # rebuild and 766.26s for the screen, against the 210s ceiling on the pull-request
-    # job that used to carry both. Neither is deferred without a stand-in -- `known-best
-    # atlas records and sample` and `translation escape screen records and sample` run on
-    # every pull request -- and the pair here is the exact complement of those, not a
+    # job that used to carry both; and 34.81s for the grid replay, inside a step that was
+    # 133.4s of a `checks` job running 189.09s against a 195s ceiling. None is deferred
+    # without a stand-in -- `known-best atlas records and sample`, `translation escape
+    # screen records and sample` and the sampled replay inside `exact verification` run
+    # on every pull request -- and this selection is the exact complement of those, not a
     # rerun of them.
+    #
+    # The grid replay costs this job nothing on the clock. It is 34.81s serial beside a
+    # 890s slow lane, and its own pool takes it to 18.79s -- measured here, at this job's
+    # own `--jobs 2 --inner-jobs 2`, replaying all 305 witnesses over 36.65s of cpu. A
+    # step that finishes inside the wall a longer step already sets is free in the sense
+    # that decides where work goes.
     #
     # `--only` rather than a tier flag, and unlike in `packing-validation.yml` that is
     # the correct instrument here. There, `--only` on a pull-request job would have left
@@ -177,6 +186,7 @@ jobs:
           --only "n=40 rigidity bracket still reproduces"
           --only "known-best n=1..324 atlas rebuild"
           --only "single-square translation escape screen"
+          --only "exact rational grid replay"
           --jobs 2 --inner-jobs 2
 
       - name: Preserve validation timings and partial logs

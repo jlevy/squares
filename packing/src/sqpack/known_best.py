@@ -5,7 +5,7 @@ from __future__ import annotations
 import html
 import json
 import re
-from collections.abc import Iterable, Mapping
+from collections.abc import Iterable, Mapping, Sequence
 from copy import deepcopy
 from dataclasses import dataclass
 from fractions import Fraction
@@ -259,6 +259,32 @@ deferred surface.
 """
 
 
+GRID_SAMPLE_STRIDE = 9
+"""The same idea again, for the exact rational grid replay in `check_basic_bounds`.
+
+Nine, like the atlas and unlike the screen, and it is set against the `checks` job rather
+than the sweeps one. `verify_grid` buckets its pair enumeration, so one case is about
+linear in its own `n` and the corpus total is quadratic in the last one: 2.75s at
+`n<=100`, 12.65s at `n<=200`, 34.81s at all 305, measured with the tool's own `--max-n`
+on 2026-09-07. Every ninth grid case is 4.15s of that, which took `exact verification`
+from 84.21s to 53.60s and the whole `checks` tier from 120.03s to 87.56s on the box
+`benchmarks/gate-cost-at-324/` names -- about 138s of the CI job that had just run
+189.09s against a 195s ceiling.
+
+A denser sample buys cases the deferred `exact rational grid replay` already covers, and
+it buys them on a tier this step no longer floors: at every ninth case `exact
+verification` is 55.1s against 62.3s of divided step time, so the queue sets the wall now
+and the next second saved here is not a second off the job. A sparser one would stop
+reaching the range's far end often enough to be a tripwire.
+
+The stride is over the grid cases themselves rather than over `KNOWN_BEST_CORPUS`,
+because which cases claim `E-basic-grid-upper` is a frontier fact that falls as
+constructions are found: 305 of 324 today, and a case that stops claiming it stops being
+this check's business. Striding the corpus range would thin the sample by however many
+non-grid cases it happened to land on.
+"""
+
+
 def sampled_numbers(
     cases: CorpusRange = KNOWN_BEST_CORPUS, stride: int = ATLAS_SAMPLE_STRIDE
 ) -> tuple[int, ...]:
@@ -270,9 +296,19 @@ def sampled_numbers(
     in a tool would have had to be re-typed in the gate -- which is the shape of drift
     this module already exists to prevent for `CorpusRange`.
     """
+    return sampled_sequence(cases.numbers, stride)
+
+
+def sampled_sequence(numbers: Sequence[int], stride: int) -> tuple[int, ...]:
+    """Every `stride`th of an explicit list of cases, from its first.
+
+    The same rule as `sampled_numbers` for a set the corpus does not name. The grid replay
+    samples the cases that claim a grid witness, which is a frontier fact rather than a
+    range, so the sequence is passed in and only the rule is shared.
+    """
     if stride < 1:
         raise ValueError("a sample stride must be positive")
-    return tuple(cases.numbers[::stride])
+    return tuple(numbers[::stride])
 
 
 CALIBRATION_CORPUS = CorpusRange(first_n=1, last_n=100)

@@ -1,0 +1,8 @@
+{
+  "name": "Trump exact branchwise linearized cones",
+  "output": "{\n  \"branch_count\": 128,\n  \"determination_outcome\": \"criterion_met\",\n  \"elapsed_seconds\": 10.743435,\n  \"exact_nonzero_directions\": 0,\n  \"exact_zero_certificates\": 128,\n  \"raw_branch_count\": 512,\n  \"record_replayed\": true,\n  \"schema_version\": 1,\n  \"selftests\": {\n    \"duplicate_branch_records_are_rejected\": true,\n    \"flexible_cone_has_no_positive_stress\": true,\n    \"rigid_cone_has_positive_stress\": true,\n    \"trump_wall_omission_has_exact_nonzero_direction\": true,\n    \"u_interval_contains_exactly_one_root\": true,\n    \"u_polynomial_irreducible_over_Q\": true,\n    \"u_polynomial_squarefree\": true\n  },\n  \"unresolved_cones\": 0\n}",
+  "reason": "",
+  "run_id": "492344ab5b1a40bd90fc12284596a6ad",
+  "seconds": 11.309883834001084,
+  "status": "passed"
+}

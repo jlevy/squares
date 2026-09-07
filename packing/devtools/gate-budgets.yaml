@@ -128,6 +128,14 @@ tiers:
   # unknown speed, and it is still under the step time this tier costs serially. It is
   # not tightened further because no reading at the reference shape exists to tighten it
   # against -- that is a measurement to take, not a number to guess, which is `OR-14`.
+  #
+  # A third step left the same day and this ceiling did not move for it either. `exact
+  # verification` now runs the grid replay sampled and `exact rational grid replay` runs
+  # it whole on the deferred surface, which takes 30.61s of local step time out of this
+  # tier -- the `checks` entry below carries the readings. The tier was not re-clocked
+  # whole for it: a 229.05s reading that a step-time subtraction predicts at about 198s
+  # is not a reading, and the number that matters here is still the missing one at the
+  # reference shape.
   ceiling_seconds: 600.0
   # Cleared twice for the same reason, and the reason is a good one both times: the figure
   # measured a tier that no longer exists. BC-214 cleared 1369.60s (CI run 33982455466)
@@ -235,19 +243,64 @@ tiers:
   # pool stops parallelising altogether, so serial degeneration fails here rather than
   # passing quietly. The old 300s no longer had that last property once nine steps left
   # the tier, which is why it moved down rather than staying put.
+  #
+  # --- 2026-09-07: the corpus tripled and the drift rule said so ---------------------
+  #
+  # This is the first entry in the register whose record was cleared by its own rule
+  # firing rather than by a re-scoping noticed by hand. `KNOWN_BEST_CORPUS` widened from
+  # n=1..100 to n=1..324, and on commit `2841eec9` this job ran 189.09s against the
+  # 99.39s below -- 1.90x, where 1.5x fails -- and 6s under a 195s ceiling. The gate's
+  # own verdict named the step: `exact verification` was 133.4s of it, 70.6 per cent.
+  #
+  # Measured on an idle ten-cpu box, three readings apiece, everything retained under
+  # `benchmarks/gate-cost-at-324/runs/`:
+  #
+  #   `--checks --jobs 3 --inner-jobs 1`   120.03s wall over 219.76s of step time
+  #     `exact verification`                86.71s of it (84.21s run alone)
+  #       `check_basic_bounds`              34.81s -- the only member that grew
+  #       the sixteen other subcommands     49.40s -- fixed cases, corpus-independent
+  #
+  # The CI ratio this box shows is 1.58 in both places at once, which is what makes it
+  # usable: 189.09/120.03 for the tier and 133.4/84.21 for the step.
+  #
+  # `check_basic_bounds` was pooled before it was thinned, as `OR-13` asks. It now sizes
+  # a `ProcessPoolExecutor` from `sqpack.workers.worker_count`: 34.81s serial, 18.58s at
+  # two workers, 9.97s at four, over 34.8s, 36.6s and 38.5s of cpu, and the whole run's
+  # stdout is byte-for-byte identical at one worker and at four. That bought this job
+  # nothing and was still worth doing -- every pull-request tier passes `--inner-jobs 1`,
+  # so `PACK_JOBS` is 1 here by design, and what the pool decides is that the deferred
+  # copy costs the deep gate 18.79s at its `--jobs 2 --inner-jobs 2` rather than 34.81s,
+  # measured there.
+  #
+  # So the replay is sampled here and whole on the deferred surface, as `exact rational
+  # grid replay`. Every case's declared bounds are still compared against their closed
+  # forms -- 0.14s, never left -- and every ninth grid case is still replayed exactly, at
+  # 4.15s in place of 34.81s. Measured whole afterwards on the same box, three readings:
+  #
+  #   `--checks --jobs 3 --inner-jobs 1`    87.56s wall over 186.86s of step time
+  #     `exact verification`                55.10s, and no longer this tier's floor
+  #
+  # 195s stands, and it is a decision rather than an oversight. Scaled by that same 1.58
+  # the prediction for the reference runner is about 138s, so the ceiling is a 1.41x band
+  # around it: it clears a runner a third slower (184s), and it is far below the roughly
+  # 295s of step time this tier costs on that runner if its pool stops parallelising, so
+  # serial degeneration fails here rather than passing quietly. Tightening it against a
+  # prediction rather than a reading is what `OR-14` calls advertising an aspiration --
+  # and the first run at the reference shape prints the line to write, at which point
+  # rule 2 re-argues this number against a real one.
   ceiling_seconds: 195.0
-  # Hosted samples at the reference shape establish the baseline below.
-  measured_seconds: 99.39
-  measured_on: '2026-09-06'
-  measured_where: >-
-    The geometric mean of four readings at the reference shape -- 106.35, 106.02, 80.62 and 107.33 --
-    across runs 34023002068, 34032566385, 34037168378 and 34040196689.
-    Observed spread 1.33x. The centre of the band, not an edge: recording the
-    maximum was tried first and left `geometry` 1.21x from failing the stale rule on a
-    fast runner, because a record at the top of the band starves that rule by as much
-    as it feeds the drift rule. At four samples every margin is at least 1.25x.
-    **Refresh this when samples accumulate** -- a mean moves as they arrive, which is
-    the argument for `think-be1s` rather than a property of these numbers.
+  # Cleared, on the same rule that cleared 1369.60s and 409.0s from the `fast` entry and
+  # 107.05s from `sweeps`: the figure measures a tier that no longer exists. It measured
+  # this one twice over -- the four readings predate the corpus widening, and the widened
+  # tier then lost 34.81s of local step time to the deferred surface -- so keeping it
+  # would fail the drift rule on the tier as it was and the stale rule on the tier as it
+  # is. The 189.09s CI reading is not written here either, and deliberately: it is a
+  # reading at the reference shape of the tier this change replaced, so recording it
+  # would arm the stale rule against every honest run of the new one. The gate prints the
+  # line to paste the first time a run at the reference shape measures the new tier.
+  measured_seconds: null
+  measured_on: null
+  measured_where: null
   reference: {jobs: 3, inner_jobs: 1, cpus: 4}
   argument: >-
     The part of the pull-request surface that is none of the other three: every floor,
@@ -344,17 +397,25 @@ tiers:
   # four are worth about 2.6x against one here. The two readings 30 per cent apart are
   # why 240s is not tightened to the faster of them: that is what a shared box does to a
   # wall, and a band set to a good day fails on an ordinary one.
-  ceiling_seconds: 205.0
+  #
+  # 2026-09-07: the corpus tripled (n = 1..324) and the lane's tests that iterate it grew
+  # with it. The first hosted reading at the reference shape, run 34133437296, was
+  # 162.62s, all tests passing, which failed the drift rule against the 102.83s record
+  # (1.58x) rather than the ceiling. The record below is that reading; the ceiling moves
+  # to 260s, 1.6x the reading and under the 2x headroom rule, because the same lane has
+  # shown a 1.52x hosted spread and a band set to one reading fails on an ordinary day.
+  ceiling_seconds: 260.0
   # Hosted samples at the reference shape establish the baseline below.
-  measured_seconds: 102.83
-  measured_on: '2026-09-06'
+  measured_seconds: 162.62
+  measured_on: '2026-09-07'
   measured_where: >-
-    The geometric mean of four readings at the reference shape -- 102.50, 123.53, 108.44 and 81.43 --
-    across runs 34023002068, 34032566385, 34037168378 and 34040196689.
-    Observed spread 1.52x. The centre of the band, not an edge: recording the
-    maximum was tried first and left `geometry` 1.21x from failing the stale rule on a
-    fast runner, because a record at the top of the band starves that rule by as much
-    as it feeds the drift rule. At four samples every margin is at least 1.25x.
+    One reading at the reference shape, 162.62s in run 34133437296, the first hosted run
+    of the lane over the 324-case corpus; the earlier four-sample mean of 102.83s
+    (102.50, 123.53, 108.44 and 81.43 across runs 34023002068, 34032566385, 34037168378
+    and 34040196689, spread 1.52x) described the hundred-case corpus. The centre of the
+    band, not an edge: recording the maximum was tried first and left `geometry` 1.21x
+    from failing the stale rule on a fast runner, because a record at the top of the band
+    starves that rule by as much as it feeds the drift rule.
     **Refresh this when samples accumulate** -- a mean moves as they arrive, which is
     the argument for `think-be1s` rather than a property of these numbers.
   # `inner_jobs: 1`, not 4, because that is what the workflow passes. The xdist worker

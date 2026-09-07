@@ -1752,6 +1752,43 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
     a pull request in the minute it is introduced, and only per-case geometry waits for
     the deep gate.
 
+    **A seventh arrived the same day, from the same corpus and on a different job.**
+    `exact rational grid replay` is `devtools.check_basic_bounds` run whole, and it was
+    the corpus-scaling member of `exact verification` on the `checks` job. What that job
+    did on CI at commit `2841eec9` is the whole argument: 189.09s against a 195s ceiling
+    and a recorded 99.39s, with the gate's own verdict naming `exact verification` as
+    133.4s of it -- 70.6 per cent. Measured on an idle ten-cpu box, three readings
+    apiece, with everything retained under `benchmarks/gate-cost-at-324/runs/`:
+
+    - the step, 84.56s, 84.11s and 83.95s, spread 0.7 per cent;
+    - `check_basic_bounds` inside it, 34.70s, 34.94s and 34.80s -- 41 per cent of the
+      step, against 3.58s when `D-370` moved it here at `n=1..100`;
+    - the sixteen other subcommands, 49.4s between them, every one a fixed case that
+      cannot grow with the corpus.
+
+    The cost is quadratic in the corpus's last `n` -- `verify_grid` buckets its pair
+    enumeration, so a case is linear in its own `n` and the corpus is the sum -- which
+    the tool's own `--max-n` measures: 2.75s at `n=1..100`, 12.65s at `n=1..200`, 34.81s
+    at `n=1..324`. A widening to 400 would put it near 53s without anything else
+    changing.
+
+    It was made faster before it was deferred, and the speedup is why the deep gate can
+    afford it. The replay is a map over independent cases, so it now asks
+    `sqpack.workers.worker_count` for its pool exactly as `screen_translation_escape` and
+    `build_known_best_atlas` do: 34.81s serial, 18.58s at two workers, 9.97s at four,
+    over 34.8s, 36.6s and 38.5s of cpu, and the whole run's stdout is byte-for-byte
+    identical at one worker and at four. What that does not do is help the job it was on:
+    every pull-request tier passes `--inner-jobs 1`, so `PACK_JOBS` is 1 and the pooled
+    step is the serial step there by design. The pool decides where the deferred copy can
+    live, not whether the deferral is needed.
+
+    The stand-in is the complement rather than a sample of the step. Every one of the 324
+    cases still has its declared upper, area and Nagamochi bounds compared against their
+    closed forms -- that half is 0.14s and never left -- and every ninth grid case is
+    still replayed exactly, at 4.15s in place of 34.81s. What waits for the deep gate is
+    the other eight ninths of the per-case geometry, on witnesses whose non-overlap is a
+    property of the lattice they are built on.
+
     Nothing was deferred on 2026-09-06, and that is the point of recording it here. The
     tier had reached 501.97s and the obvious 468.11s of it to drop were the two atlas
     sweeps main had just promoted; the measurement refused that too. Those two are the
@@ -1762,9 +1799,9 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
     a second runner, and then a third for the behavioural lane, both argued in
     `test_the_pull_request_runs_its_sweeps_and_its_suite_apart`, which changes when a
     check runs but not whether. This set held at four across both changes, and what took
-    it to six a day later was not a decision to carry less but a corpus that tripled: the
-    same refusal applies to the record layer of both, which is why the record layer stayed
-    and only the per-case re-derivation left.
+    it to seven a day later was not a decision to carry less but a corpus that tripled:
+    the same refusal applies to the record layer of all three, which is why the record
+    layer stayed and only the per-case re-derivation left.
 
     `slow behavioral tests` is `BC-214`. It is not a step that was never decided: it is
     the half of the behavioural suite that carries the wall, split out by measurement
@@ -1798,8 +1835,9 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
         "slow behavioral tests",
         "known-best n=1..324 atlas rebuild",
         "single-square translation escape screen",
+        "exact rational grid replay",
     }
-    # And the same four are what `--fast` leaves out, so the flag and the workflow cannot
+    # And the same set is what `--fast` leaves out, so the flag and the workflow cannot
     # drift apart: a step marked `fast` that no pull-request job invokes is deferred in
     # fact and promoted on paper, which is the state think-k4fb found and this pins shut.
     assert deferred == {step.name for step in validate.STEPS if not step.fast}
