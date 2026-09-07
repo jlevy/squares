@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 479
+count: 480
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -15724,3 +15724,32 @@ defects:
   regression: none
   bead: think-7u4s
   recorded_in: docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md
+- id: D-480
+  title: Raised footnote ink shifted the list-marker alignment measurement
+  date: '2026-09-07'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: inspection
+  latent_for: until the explainer attribution pass added footnotes to short list items
+  severity: low
+  status: fixed
+  what: >-
+    The print-layout probe included raised footnote ink when reconstructing the first
+    line of a list item. Those references have zero line height and do not enlarge
+    the line box. Centered bullets were reported as displaced by up to 2.44 pixels
+    on screen and 4.89 pixels in print.
+  consequence: >-
+    Adding ordinary source footnotes made a correctly aligned reading list fail the
+    layout gate. PDF inspection distinguished the false positives from a separate
+    real orphan-footnote wrap, which was fixed in the paper.
+  fix: >-
+    Subtract the rectangle occurrences owned by zero-line-height footnote references
+    before grouping the first line. Preserve other inline and math rectangles,
+    nonzero-line-height references, the grouping threshold, and the orphan check.
+  regression: >-
+    packing/tests/test_check_print_layout.py::test_zero_line_height_footnote_ink_does_not_move_the_marker_line
+    replays Chrome geometry, retains contributing references, and rejects a displaced
+    marker. The existing mixed-math and next-line control remains active.
+  bead: think-vzld
+  recorded_in: packing/devtools/check_print_layout.py

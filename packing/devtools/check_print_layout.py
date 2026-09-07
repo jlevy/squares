@@ -295,11 +295,35 @@ _PROBE = r"""() => {
 
      The mass-condition bullets have inline tops at -1, 0, 2 and 3px. A one-pixel band
      kept only the highest math run and falsely reported a 2.2px marker offset. Group
-     runs starting in the topmost rect's upper half; the next line starts below it. */
+     runs starting in the topmost rect's upper half; the next line starts below it.
+
+     A zero-line-height footnote is raised without enlarging that line, but its ink
+     still appears in Range rects. Remove its owned rectangles before grouping, not
+     other inline boxes that really can enlarge the line. Count duplicate rectangles
+     so an unrelated box with the same geometry is not removed along with the ref. */
   function firstLineBox(el) {
     const range = document.createRange();
     range.selectNodeContents(el);
-    const rects = [...range.getClientRects()].filter((r) => r.width && r.height);
+    const excluded = new Map();
+    const key = (r) => [r.top, r.right, r.bottom, r.left].join(',');
+    for (const ref of el.querySelectorAll('sup.kpress-footnote-ref')) {
+      if (parseFloat(getComputedStyle(ref).lineHeight) !== 0) continue;
+      const reference = document.createRange();
+      reference.selectNode(ref);
+      for (const rect of reference.getClientRects()) {
+        if (!rect.width || !rect.height) continue;
+        const id = key(rect);
+        excluded.set(id, (excluded.get(id) || 0) + 1);
+      }
+    }
+    const rects = [...range.getClientRects()].filter((r) => {
+      if (!r.width || !r.height) return false;
+      const id = key(r);
+      const count = excluded.get(id) || 0;
+      if (!count) return true;
+      excluded.set(id, count - 1);
+      return false;
+    });
     if (!rects.length) return null;
     const topmost = rects.reduce((a, r) => (r.top < a.top ? r : a));
     const band = rects.filter((r) => r.top < topmost.top + topmost.height / 2);
