@@ -110,7 +110,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-094](agent-sessions/session-094-complete-cover-and-density-controls.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 8 | think-63oj | Post-checkpoint amendment after Session095's accepted exp128 and independent BC265 design selects BC-264 under think-mq0d for the existing 30-minute H114 feature and kernel-contract pricing slice. No target or new block is activated. BC259 and the fixed collision-cover allocation are terminal; neither receives an unchanged retry. |
 | [session-095](agent-sessions/session-095-collision-cover-and-support-ceiling.md) | completed | contemporaneous | `research-loop` (insight) | `documentation-pass` (correctness) | 5 | think-ro0s | After final record-delta validation and publication, hand off future BC264/think-mq0d's existing30-minute H114 feature and kernel-contract pricing slice. Retain the conditional H101 Omega-avoiding fallback; no new block, target or unchanged retry is activated here. |
 | [session-096](agent-sessions/session-096-stromquist-memos-and-helpers.md) | completed | retrospective | `research-survey` (correctness) | `documentation-pass` (correctness) | 4 | think-7u4s | After the final pre-push check and review publication, preserve BC-264 under think-mq0d as the existing H114 feature and kernel-contract pricing entry. The source brief separately retains the geometric replay dependency; this review activates no new target or unchanged retry. |
-| [session-097](agent-sessions/session-097-kernel-contract-and-feature-pricing.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 5 | think-c53m | Complete exp129's explicit remaining launch guards and publication on PR116; then run its once-only finite H125 test only before the fixed cutoff, preserving any failure or non-invocation. |
+| [session-097](agent-sessions/session-097-kernel-contract-and-feature-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 6 | think-c53m | Complete the separately tracked operational validation/publication of this frozen checkpoint on PR116, retaining actual failures or pending results. Only a new explicit allocation after the guards pass may admit the unspent first scientific invocation. |
 
 ### Workflow summary
 
@@ -119,7 +119,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 1 | 1 | 12 | 1 |
-| `factual-review` | 3 | 0 | 43 | 2 |
+| `factual-review` | 3 | 0 | 44 | 2 |
 | `insight-iteration` | 19 | 1 | 60 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
@@ -701,7 +701,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | H-122 | refuted | proof | At q=1939/500, every contained closed unit square whose orientation mo |  | 1 |  | 0s wall |
 | H-123 | confirmed | proof | At q=1939/500, every contained closed unit square with orientation wit |  | 1 |  | 0s wall |
 | H-124 | unresolved | proof | At q=1939/500, every contained closed unit square Q in the actual near |  | 3 |  | 3s wall |
-| H-125 | running | proof | At side L=96/25, the fixed eleven-feature joint-D4 family in BC264's S |  | 1 |  |  |
+| H-125 | blocked | proof | At side L=96/25, the fixed eleven-feature joint-D4 family in BC264's S |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -765,7 +765,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-126 | series-000 | 11 | Session094 coordinator, BC243; max mathematical judgment | H-099 | The conservative graph contains a reported overweight clique, so this sufficient depth certificate failed. No common geometric interior was certified and no independent target reader ran. H099 and its fixed-support bracket remain unresolved and unchanged. |
 | exp-127 | series-000 | 11 | Session095 coordinator, BC255; max mathematical judgment | H-124 | The augmented sufficient cover returned no_chain. H124 and restricted H036 remain unresolved, with exp125's diagonal lemma retained. This ends the fixed representation's allocation without a retry, parameter sweep or diagonal rerun. |
 
-### blocked (7)
+### blocked (8)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -776,6 +776,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-047 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `interval-enclosure`: the numerical prototype's selftest and synthetic controls pass, but a float midpoint fit with fixed tolerance and heuristic radii does not prove a nonempty compatible-pose enclosure or outward- rounded wall and pair signs, and the preregistered command lacks a complete post- authorization runner. No parent retrieval, target parse or target fit ran, so H-053 remains unresolved. |
 | exp-051 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `executable-runner`: the proof, verifier and generic injected-runner controls pass, but the exact preregistered `--record` command exits 2 before target access because no production CLI adapter exists; no scientific H-053 disposition follows. |
 | exp-118 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-252 | H-107 | The prospective record gate was not complete by the 03:16 UTC launch cutoff; no target or verification process ran and both allowances remain unspent. |
+| exp-129 | series-000 | 11 | Session097 coordinator under BC264 and think-rzdb; independent max mathematical admission | H-125 | Required protocol checks and publication did not complete before the immutable22:20 launch cutoff. No scientific process ran; H125 remains untested and both child allowances are unspent. |
 
 ### accepted (27)
 
@@ -825,12 +826,6 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-129 | series-000 | 11 | Session097 coordinator under BC264 and think-rzdb; independent max mathematical admission | H-125 | Prospective once-only protocol registered before either scientific source is constructed; actual passing engine/protocol checks, final protocol review and publication are still required. |
-
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -845,6 +840,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-060 | H-064 | 96m agent + 66.0m wall | timebox | packing/campaign/series/series-000-smoke-and-calibration/res | a resumed loop from the retained 191/50 state with row gener |
 | exp-070 | H-064 | 109.3m wall | timebox | packing/campaign/series/series-000-smoke-and-calibration/res | After the T+2 landing, spend the remaining 135 one-core proc |
 | exp-118 | H-107 |  | dependency |  |  |
+| exp-129 | H-125 |  | dependency |  |  |
 
 ## Effort
 

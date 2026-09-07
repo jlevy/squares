@@ -395,6 +395,40 @@ and `new_packing_bound=false`. Any other result remains unresolved.
 No retry or target-informed repair follows.
 The KILL grace means this is not a strict sixty-second total-runtime promise.
 
+## Conditional Scope of an Axis-Only Obstruction
+
+A source-free review on September7,22:28:34–22:33:23 UTC (289 seconds) establishes
+the following conditional extension, checked by the coordinator. Exp129 never ran;
+there is no biquadratic obstruction to promote yet.
+
+Let $\mathcal B=\operatorname{span}\{u^iv^j:0\le i,j\le2\}$. Suppose an enriched
+kernel has $K-1=\psi(P)^TQ\psi(Q)$, with $Q\succeq0$, and every axis restriction
+$\psi_j(u,v,0)$ lies in $\mathcal B$. Writing those restrictions as $F\eta$ gives
+the PSD axis coefficient matrix $F^TQF$ in the basis
+$\eta=(1,r,p,d,w,V_0,V_1)$ defined above. Jointly average this axis kernel over
+container $D_4$. PSD, the same diagonal bound and all compatible-pair inequalities
+survive, including touching. The enriched family need not itself be closed under
+symmetry, and no independent folding is allowed.
+
+This representation has three trivial copies, two distinct scalar characters and
+two standard-vector copies. Its invariant PSD cone is exactly $A_3\succeq0$,
+$B_2\succeq0$, $a_d,a_w\ge0$, with vector block $B_2\otimes I_2$: eleven
+coefficient parameters in a nine-dimensional feature span. H125 realizes every
+such axis kernel by choosing $A_4=\operatorname{diag}(A_3,0)$ and $a_s=0$;
+on axes its four invariant features are $(1,r,p,1)$.
+
+Consequently, a sound **axis-only objective certificate** for H125 proving
+$b\ge1+\sum\beta\ge11$ would also exclude $b<11$ in every enriched kernel just
+described. Exact rational certificate data bound real PSD coefficients, not merely
+rational ones. Angular features vanishing on axes or restricting into this particular
+span cannot evade that certificate. Axis features outside the span are not covered.
+
+The qualification is essential: arbitrary full-angle nonexistence within H125 would
+not transfer. The matrix realizing the averaged axis kernel need not satisfy its
+full-angle constraints. This conditional statement neither supplies the missing
+objective certificate nor decides H125; the unconditional cubic obstruction remains
+a separate result. No feature expansion or additional allocation follows from it.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

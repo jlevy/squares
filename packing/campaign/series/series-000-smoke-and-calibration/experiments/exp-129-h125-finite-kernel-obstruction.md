@@ -63,13 +63,20 @@ experiment:
       refusal/non-invocation. No retry, changed feature/source, extra LP,
       target-informed repair or continuum build.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-129-h125-finite-kernel-obstruction
-  lease:
-    expires: '2026-09-07T22:27:00Z'
-  results: []
+  effort:
+    timebox: One producer and one conditional reader, each with a 60-second TERM limit and two-second KILL grace; both scientific allowances unspent
+    wall_seconds: 0
+    stopped_by: dependency
+  results:
+  - shape: determination
+    role: guard
+    question: Did all launch prerequisites pass before the 22:20 UTC cutoff?
+    outcome: criterion_missed
+    checked_by: Protocol424adf85 failed its records and push gates on the stale synopsis round-count control anchor. The cutoff passed with no scientific source, target, packet, output directory or reader invocation.
   verdict:
-    decision: in-progress
+    decision: blocked
     primary_criterion: An independently reconstructed exact projected-PSD objective certificate proves b>=11 for exactly H125's fixed family.
-    reason: Prospective once-only protocol registered before either scientific source is constructed; actual passing engine/protocol checks, final protocol review and publication are still required.
+    reason: Required protocol checks and publication did not complete before the immutable22:20 launch cutoff. No scientific process ran; H125 remains untested and both child allowances are unspent.
 ---
 # exp129 — One Finite Kernel-Family Obstruction Test
 
@@ -80,6 +87,29 @@ The [feature design and reader review](../results/agenda-027/bc-264-kernel-featu
 and [kernel contract and producer review](../results/agenda-027/bc-264-kernel-acceptance-review.md)
 accept only this fixed finite refutational route.
 The source-free build's75 controls do not measure H125.
+
+## Disposition: No Scientific Invocation
+
+The launch guard failed. Engine `d6f0c403` passed its immutable push gate in
+261.31 seconds and was published on PR116. The independent code and protocol reviews
+were GO. Prospective protocol `424adf85`, however, failed its records gate in
+170.62 seconds and its push gate in 396.61 seconds (403.25 external wall).
+Both failed only the control anchor that still expected “There are 84 rounds” after
+the synopsis correctly counted85. The push's645 reachable tests passed; three were
+deselected. Neither a passing subset nor a later correction satisfies the original
+22:20 UTC launch cutoff.
+
+No scientific source, solver target, output directory, packet or reader was invoked.
+Scientific wall time is zero; validation and coordination cost belongs to Session097.
+The full engine checkpoint was still pending when this disposition was recorded.
+This is an operational block, not a numerical failure or a refutation of H125.
+
+The original protocol below is retained unchanged as planning history. Its clock and
+lease are expired. A future first invocation requires a new explicit sufficient
+allocation, passing record checks, a renewed operational lease and publication of
+the new admission before launch. It must preserve the unspent fixed source and
+once-only acceptance contract unless a separately justified claim is registered.
+Do not silently restart this expired allocation or borrow finalization time.
 
 ## Admission Before Invocation
 

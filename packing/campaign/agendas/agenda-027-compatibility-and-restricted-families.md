@@ -308,12 +308,19 @@ agenda:
       The first slice's original cap was21:27 UTC on September7; no target was admitted.
       Pricing finished at21:23:55 with a proved cubic center-feature obstruction
       and one eleven-feature16-parameter D4 family. The finite LP and independent
-      exact reader now have separate source-free build caps ending before22:00;
-      no scientific invocation, degree escalation or continuum build is admitted.
+      exact reader completed separate source-free builds before22:00;
+      all75 controls and independent max code/protocol reviews passed.
+      Engine d6f0c403 passed its immutable push gate. Exp129 did not launch:
+      protocol424adf85 failed its records/push gates on a stale synopsis control,
+      so the22:20 launch cutoff passed with zero scientific time. H125 is untested;
+      the unspent first invocation requires a fresh explicit allocation and passing
+      published admission, not a restart under the expired clock. No degree
+      escalation or continuum build is admitted.
       The accepted kernel-specific artifact now supplies the entry contract, so
       the coarse dependency on all of BC260 is removed for this cell only.
       Other BC260 implications retain their own review status. H125 records the
-      concrete family prospectively; its instrument is not ready yet.
+      concrete family prospectively; its source-free instrument is ready but the
+      operational launch guard is blocked. Keep this cell open at that precise scope.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md
@@ -464,9 +471,12 @@ agenda:
 **Selected work has executed; the rest requires its own allocation.** Session095
 completed BC259’s independent support-ceiling adoption and BC265’s comparative design.
 Session097 completed BC264's pricing: a cubic-feature obstruction is proved and a
-fixed eleven-feature family has an admitted finite refutational test design.
-Separate max-thinking agents now implement the proposer and independent exact reader.
-No target has been admitted; a feasible LP would remain inconclusive.
+fixed eleven-feature family has independently reviewed finite instruments with75
+source-free controls. Exp129 did not launch because its protocol checks had not
+passed by the launch cutoff; both ultimately failed a stale documentation-control
+anchor. H125 remains untested and both scientific allowances are unspent. A feasible LP would remain
+inconclusive. The next admission must use a fresh allocation after the checkpoint
+checks pass, preserving the original non-invocation rather than extending its clock.
 [X-017](../explorations/X-017-compatibility-and-complete-case-covers.md) owns the
 critical assessment, mathematical distinctions, and complete source-to-record map.
 This agenda owns the prospective actions.

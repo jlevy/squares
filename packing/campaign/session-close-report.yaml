@@ -1523,9 +1523,9 @@ sessions:
     snapshot_incomplete: true
 - id: session-097
   title: "Kernel contract and feature pricing"
-  status: in_progress
+  status: stopped
   primary_bead: think-c53m
-  phases: 5
+  phases: 6
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-097.yaml
@@ -1536,8 +1536,8 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-097.yaml
-    model_responses: 175
-    agent_hours: 1.66
-    active_union_hours: 0.64
-    wall_hours: 0.64
+    model_responses: 474
+    agent_hours: 4.01
+    active_union_hours: 1.6
+    wall_hours: 1.6
     snapshot_incomplete: true

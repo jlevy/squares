@@ -402,18 +402,22 @@ tiers:
   # costs if the pool stops parallelising, so serial degeneration still fails here, and
   # it still has to hold whatever the escape screen costs on a bad day -- which is why it
   # is not tightened to the new prediction.
-  ceiling_seconds: 210.0
-  measured_seconds: 107.05
-  measured_on: '2026-09-06'
+  ceiling_seconds: 194.0
+  measured_seconds: 97.07
+  measured_on: '2026-09-07'
   measured_where: >-
-    The geometric mean of four readings at the reference shape -- 108.91, 108.62, 106.15 and 104.57 --
-    across runs 34023002068, 34032566385, 34037168378 and 34040196689.
-    Observed spread 1.04x. The centre of the band, not an edge: recording the
-    maximum was tried first and left `geometry` 1.21x from failing the stale rule on a
-    fast runner, because a record at the top of the band starves that rule by as much
-    as it feeds the drift rule. At four samples every margin is at least 1.25x.
-    **Refresh this when samples accumulate** -- a mean moves as they arrive, which is
-    the argument for `think-be1s` rather than a property of these numbers.
+    The geometric mean of six reference-shape readings is 97.07455 seconds, recorded
+    as 97.07. Retained samples 108.91, 108.62, 106.15 and 104.57 are from runs
+    34023002068, 34032566385, 34037168378 and 34040196689. Added samples are 109.16
+    at c3a4e8ec in run 34164869950 and 58.38 at d6f0c403 in run 34166034785.
+    The two added runs used the same four full sweep steps, jobs 4, inner_jobs 2,
+    ubuntu-24.04 image 20260831.293.1, runner 2.337.0, Python 3.14.7 and the same
+    successful uv cache key. Their source delta changed no sweep implementation,
+    workflow or dependency inputs. Hardware and load equivalence remain unknown;
+    this refresh is not an optimization claim. Observed spread is 1.87x, and the
+    fastest sample is only just above the unchanged 0.6 stale floor. The 194-second
+    ceiling remains below twice the rounded mean. Preserve all samples as the mean
+    evolves; the historical `think-be1s` reference concerns a richer band model.
   reference: {jobs: 4, inner_jobs: 2, cpus: 4}
   argument: >-
     The pull request's record sweeps, on their own runner: the known-best atlas, its

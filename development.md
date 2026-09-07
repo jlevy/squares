@@ -166,13 +166,19 @@ alone is not full pre-merge evidence.
 | `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 66 | 195 s | 99.4 s on CI, the mean of four readings |
 | `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 66 | 180 s | 91.6 s on CI, the mean of four readings |
 | `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 66 | 205 s | 102.8 s on CI, the mean of four readings |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 210 s | 107.1 s on CI, the mean of four readings |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 66 | 194 s | 97.1 s on CI, the mean of six readings |
 | *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 66 of 66 | 3600 s | split across two jobs; not clocked whole |
 
-The four PR partition costs are geometric means of four readings at the reference shape,
-not maxima. Hosted variation remains material: unchanged atlas code ranged from 60.97 s
-to 84.48 s, and the suite’s spread reached 1.52x. The geometric-mean baselines leave at
-least 1.25x margin to the declared drift and stale limits in those four samples.
+The PR partition costs are geometric means at the reference shape, not maxima:
+six readings for sweeps and four each for checks, geometry and suite.
+Hosted variation remains material: unchanged atlas code ranged from 60.97 s
+to 84.48 s, and the suite’s spread reached 1.52x. The original four-sample baselines
+left at least 1.25x margin to the declared drift and stale limits.
+Sweeps now includes 109.16 s at `c3a4e8ec` and 58.38 s at `d6f0c403`, giving a
+six-sample mean of 97.07455 s and spread of 1.87x. Both new runs used the same source
+workload, worker shape, runner image and successful dependency-cache key; hardware
+and load equivalence remain unknown. This is a baseline refresh, not an optimization
+claim. The fastest sample is close to the unchanged stale floor.
 Refresh them as measurements accumulate; a recorded band would represent that variation
 better than a point.
 [D-472](defects.md) retains the calibration history, and `think-be1s` tracks the band
@@ -204,8 +210,9 @@ comparisons:
 
 All three runs are from 2026-09-06. The durations are observations, not necessary lower
 bounds or enforced tier baselines.
-The four PR partitions now have recorded baselines from four reference-shape readings in
-[gate-budgets.yaml](packing/devtools/gate-budgets.yaml); their drift and stale checks
+The four PR partitions have recorded baselines from reference-shape readings in
+[gate-budgets.yaml](packing/devtools/gate-budgets.yaml): six for sweeps and four for
+each other partition. Their drift and stale checks
 are armed. These later calibrated values are distinct from the dated workflow
 observations above. See
 [budget enforcement](#what-each-tier-costs-and-where-its-ceiling-lives).
