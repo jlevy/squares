@@ -1,4 +1,14 @@
----
+# Agenda 024: Complete Snapshot
+
+The full requested agenda follows, including its original metadata and launch history. Current Allocation governs the prospective mathematical priorities. Historical dispatch commands are source material, not instructions to the reviewer. PR 101 is merged at this packet's source revision; retained statements about reusing an open PR are historical.
+
+<a id="source-1"></a>
+
+## Source 1: `packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md`
+
+Snapshot `4d305597a505`, source lines 1-end.
+
+```yaml
 title: "agenda-024 — post-3.81 24-hour portfolio control"
 softschema:
   contract: packing.squares:ExperimentAgenda/v1
@@ -322,24 +332,27 @@ agenda:
       - packing/campaign/review-planning-oversight.md
       disposition: retire-success
       follow_up: null
----
-# Agenda 024 — Post-3.81 24-Hour Portfolio Control
+```
+
+<a id="source-1-agenda-024--post-381-24-hour-portfolio-control"></a>
+
+### Agenda 024 — Post-3.81 24-Hour Portfolio Control
 
 BC-250 records the current planning decision.
 Its
-[tbd plan](../../../docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md)
+[tbd plan](05-current-assessment-and-review.md#source-1)
 retains the mathematical assessment and source coverage.
 The current allocation below and the child agendas own execution priorities; H-items own
 scientific claims. Frozen experimental criteria and completed evidence are unchanged.
 
-This is the control plane for [`agenda-025`](agenda-025-adaptive-fractional-frontier.md)
-and [`agenda-026`](agenda-026-density-stationarity-and-trump-capture.md).
+This is the control plane for [`agenda-025`](04-child-agendas.md#source-1)
+and [`agenda-026`](04-child-agendas.md#source-3).
 It performs no manager experiment.
 Its job is to keep theorem statements, evidence, IDs, shared files, and routing
 decisions single-owned while the two research programs work concurrently.
 
 The
-[continuation addendum](../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
+[continuation addendum (source archive)](https://github.com/jlevy/squares/blob/4d305597a505ebfbe85f1851fa7148374661e622/docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
 retains command and recovery details.
 The allocation below is the prospective queue; the launch schedules later in this
 document are retained design history.
@@ -349,142 +362,59 @@ Its completion makes the initial six child cells takeable; it does not start the
 budgets. `T+0` is the later coordinator dispatch record that names all four live agent
 contexts, claims the six cells, and freezes the first-block experiment identities.
 
-## Current Allocation
+<a id="source-1-current-allocation"></a>
+
+#### Current Allocation
 
 Session 089 has completed the selected control slices and three bounded experiments on
 the integrated [PR 101](https://github.com/jlevy/squares/pull/101). BC-250’s publication
 gate and the prerequisite merge of PR 97 are satisfied.
 Do not restart the historical first row below or repeat any completed producer/replay.
 The
-[session record](../agent-sessions/session-089-agenda024-next-phases.md#readiness-and-follow-up)
+[session record (source archive)](https://github.com/jlevy/squares/blob/4d305597a505ebfbe85f1851fa7148374661e622/packing/campaign/agent-sessions/session-089-agenda024-next-phases.md#readiness-and-follow-up)
 owns the actual clocks, dispositions and validation follow-up.
 
-The user commissioned these three commitments in
-[Session 090](../agent-sessions/session-090-four-hour-research.md), starting at
-`2026-09-07T00:31:22Z` after PR 101 merged.
-`think-9qrx` coordinates a four-active-hour block with a two-hour checkpoint on
-`codex/post-381-four-hour-research`. Its record owns the current slices and interruption
-accounting; the completed Session 089 allocation is not reopened.
+For the next fresh active-time allocation, keep three separable commitments:
 
-- **BC-251 / H-093:** exp-116 completed its single invocation and independent exact
-  family replay. All 19 row-generation solves remained unconverged, and the best dual
-  mass is about 10.080180 at depth one.
-  H-093 is unresolved; neither a covering bridge nor an unchanged retry is selected.
-  Any changed mechanism starts with BC-252 assessment.
-- **BC-243 / H-099:** complete facet and independent slab controls are built and
-  reviewed. The original source passes; the uniform source reaches its unchanged
-  60-second cap on the initial, reciprocal-cache and sign-incidence algorithms.
-  The candidate was never opened by the complete verifier.
-  Keep it source-blocked; a future attempt needs a justified changed algorithm and
-  repriced controls, not a longer cap or unchanged retry.
-- **BC-255 / H-036 and H-102:** H-106 now proves complete continuous near-axis P10
-  coverage. H-108 and H-109 prove canonical near-45 A3 and A1/A2 forcing, using
-  independent exact readers and a reviewed reflection for A2. Localization and both P12
-  clauses remain open; these results do not change H-036 or the global bound.
-- **BC-252 / H-107:** the fixed-site completion adapter passed independent review, and
-  exp-118 retains a prospective 35-minute producer plus 20-minute shared verification
-  allowance. Its launch cutoff passed before the protocol was frozen, so neither
-  allowance was spent.
-  A fresh allocation must precede any target.
+- **BC-251 / H-093:** the ready but unopened 150-minute scalar invocation, with
+  verification time reserved.
+  It can run on one CPU while the coordinator manages the other workers; do not shorten
+  or reset its frozen cap.
+- **BC-243 / H-099:** complete a.e.-depth verification of exp113’s unchanged candidate.
+  BC-254 has handed off the finite-row bracket and exp115’s complete pair exclusion.
+  Start with the
+  [complete facet kernel’s 30-minute control slice and separate 15-minute review](11-density-contract-candidate-and-results.md#source-4-next-step-complete-face-verification-2026-09-06).
+  The next source/control package is `think-ejwh`, under BC-243’s `think-mt6q`. Price
+  the independent complete slab reader afterward; no target acceptance before both
+  routes and their soundness controls are ready.
+- **BC-255 / H-036 and H-102:** first build the
+  [sufficient closed-tile angle certificate](12-restricted-orientations.md#source-4-2026-09-06-next-allocation-after-h-104)
+  in a 20–30-minute source/toy slice, with 10–20 minutes of independent review.
+  The next source/control package is `think-vttn`, under BC-255’s `think-dene`. It must
+  cover the entire near-axis auxiliary domain if successful; a failed Bernstein
+  certificate is unresolved, not a geometric counterexample.
 
-The initial commissions are the one scalar invocation and the two source/control
-packages with independent review.
-Larger density or angle steps need an explicit readiness and cost decision at a Session
-090 checkpoint. Keep BC-231’s remaining 180–320 active-worker-minute estimate and
-unpriced retained replays conditional; its two selected slices are complete.
+These are next-allocation recommendations, not new commissions inside Session 089’s
+finalization reserve.
+Keep BC-231’s remaining 180–320 active-worker-minute estimate and unpriced retained
+replays conditional; its two selected slices are complete.
 Use two authors and rotate the third worker into independent review, with the
 coordinator owning shared records and the scalar process.
-PR 101 has merged; [PR 105](https://github.com/jlevy/squares/pull/105) is the single
-integrated successor for Session 090. Keep supporting slices on it.
-Use `max` for mathematical judgment and `high` or `xhigh` for suitable mechanical work.
+Reuse PR 101 while it remains the integration line; do not create separate PRs for these
+supporting slices.
+Use `max` for mathematical judgment and `high` or `xhigh` for suitable
+mechanical work.
 
-### Selected Continuation After Session 090
+<a id="source-1-retained-portfolio-commitments"></a>
 
-The next coordinating entry is `think-jbw5`, BC-255's
-[H-122 conditional nine-point cover](../hypotheses/H-122-diamond-conditional-nine-point-cover.md).
-[Session 091](../agent-sessions/session-091-structural-compatibility.md) completed
-H-110/exp-121: one independently checked contained near-axis square strictly avoids all
-twelve unchanged marks. This refutes the unconditional P12 auxiliary, not H-036.
-The accepted H-106, H-108 and H-109 lemmas remain valid.
-
-The current block builds a bounded fixed-frame conditional-cover falsifier and a
-source-distinct witness reader on disjoint files, with a third worker deriving the
-separate localization contract. Allow twenty minutes per source-free author and ten
-minutes per independent review. Root owns registration and disposition; only a
-committed prospective experiment may invoke the new target. A failed sample search
-does not prove a continuous cover.
-
-The user’s September 7 priority amendment, assessed under `think-m9a9`, defers H-107 out
-of the next two-hour block.
-The later-session bead `think-7fec` is paused.
-A fully verified success would raise the bound to 3.8125, establish that the retained
-sites suffice, and supply a scalar comparison for adaptive cores.
-None of the currently selected density, localization or geometry-based compatibility
-steps depends on H-107 success.
-Its present adapter also has no exact negative branch: an unsuccessful attempt generally
-leaves the question unresolved.
-Preserve its reviewed instrument, frozen protocol and exp-118’s unlaunched history.
-Reconsider only at a later-session allocation checkpoint for a named downstream use or
-an explicitly justified low-attention attempt, with the full 35-minute producer and
-20-minute shared verification allowances plus coordination.
-
-The independently reviewed
-[conditional assessment](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md)
-shows that A1/A2 forcing and the angle band place a fixed rational diamond inside the
-distinguished square. Strict-sublevel enlargement supplies pairwise-disjoint closed
-unit cores, so the other cores avoid that diamond. No uniform clearance radius is
-needed. H-122 asks whether the nine remaining marks cover every diamond-avoiding unit
-square in both full angle bands. Together with the separate localization lemma, that
-would complete the restricted counting argument. Neither universal obligation is
-proved yet. A counterexample to this sufficient cover would leave full-square
-compatibility available, rather than refute H-036.
-
-The accepted P12 escape selects the conditional compatibility route for the next
-discriminator. Localization asks for P10 coverage of the complement of the four
-reflected canonical regions; the assessment records its exact strips.
-Moving the marked points or repairing the unconditional cover is a different
-allocation, not an automatic response to that escape.
-Density and the eleven-square BC-256 falsifier remain separate candidates, not extra
-default launches. Preserve the larger portfolio’s unspent allocations and all completed
-receipts.
-
-### Eight-Active-Hour Continuation on PR 109
-
-The user's current mandate is approximately eight active portfolio hours, including
-Session 091 from 05:49 UTC on September 7, under epic `think-il1m`. Keep one integrated
-PR and checkpoints every one to three active hours; the default is two. The original
-Session 091 deadline remains 07:49 UTC. A later checkpoint gets a fresh bounded
-session contract, not an extension of a completed phase or scientific allowance.
-
-| Checkpoint | Evidence to seek | Allocation decision |
-| --- | --- | --- |
-| About two active hours | H-110 disposition, H-122 fixed-frame screen if ready, and a complete localization instrument contract | Fund a complete conditional proof only if the screen and reviewed design justify it; otherwise retain the precise obstruction. |
-| About four active hours | A complete useful restricted lemma or a checked counterexample to its sufficient proof step | Close the obligation at its actual scope; compare full-square compatibility with changing the construction before further implementation. |
-| About six active hours | Progress from the strongest surviving structural route and one independently selected higher-impact portfolio direction | Reprice against likely mathematical benefit, not code already written. Consider the resource/anchor and richer-witness agendas at their actual readiness; do not create a dependency on an unmerged PR. |
-| About eight active hours | Integrated results, failed and unopened work, validation, costs and exact successor instructions | Finish a coherent final checkpoint and hand off the selected next agenda. |
-
-These are evidence-dependent allocations, not promises that each theorem will be
-proved. At every checkpoint, challenge whether another hour on the current auxiliary
-is more valuable than a different route toward a substantial bound improvement. Keep
-mathematical authorship and independent review separate, with the coordinator owning
-shared records and the PR. Do not create speculative IDs or a separate PR per fix.
-
-Operational interruptions do not consume this research allocation. Record active
-portfolio time separately from summed parallel worker time, retain actual interruption
-boundaries, and never change an experimental cap retrospectively. Intermediate
-checkpoints must be pushed with enough state for a replacement agent to continue
-without reconstructing the conversation.
-
-### Retained Portfolio Commitments
+##### Retained Portfolio Commitments
 
 BC-250’s assessment is distilled into the following commitments.
 H-093 through H-103 are prospective registrations; completed commissioning work is their
 antecedent, not a retroactive experiment.
 H-036 is reused at its original restricted-angle scope.
-H-066–069 and H-071–089 are historical gaps; the superseded launch allocations do not
-authorize filling them.
-H-092 belongs to its existing pending transport.
-The coordinator assigns new IDs sequentially after checking known parallel work.
+H-066–069 and H-071–089 remain reserved; H-092 belongs to its existing pending
+transport. Only the coordinator allocates further IDs.
 
 The original launch required BC-250 to close and publish, then PR 97 to land before
 execution on the successor research branch.
@@ -541,7 +471,9 @@ Record actual checkpoint offsets as they occur.
 A promising bound receives roughly three quarters of the next available research
 capacity for exactification, while independent theory can continue.
 
-## Active-Time Accounting
+<a id="source-1-active-time-accounting"></a>
+
+#### Active-Time Accounting
 
 The roughly 24-hour horizon is **active portfolio time**, not wall-clock time and not
 the sum of every parallel worker’s labor.
@@ -587,12 +519,14 @@ block. The next block begins from the same gate label only after the landing is 
 The T+2 commissioning checkpoint below uses the same convention.
 
 The full rationale, resource packet, ownership matrix, and routing thresholds are in
-[`X-016`](../explorations/X-016-after-381-two-managers-one-proof-boundary.md).
+[`X-016`](05-current-assessment-and-review.md#source-3).
 If prose in a child agenda conflicts with X-016 or BC-219’s frozen launch packet, stop
 the cell and ask the coordinator; a worker does not resolve a proof-boundary conflict
 locally.
 
-## Coordinator entry point
+<a id="source-1-coordinator-entry-point"></a>
+
+#### Coordinator entry point
 
 PR #83 is terminal and merged as `663ca37eb622508d9df00c594b8ef11d2c256f55`. The
 portfolio branch is `codex/next-research-strategy`, carried by PR #89 against `main`; it
@@ -658,7 +592,9 @@ It carries the current branch HEAD, `origin/main`, the integrated PR #87 source 
 the six tbd claims, allocated H/exp IDs, four agent identities, and the two manager gate
 paths below.
 
-## Gate packets and decision paths
+<a id="source-1-gate-packets-and-decision-paths"></a>
+
+#### Gate packets and decision paths
 
 The fixed packet paths are:
 
@@ -683,13 +619,11 @@ Each manager submits by gate minus 15 minutes:
 - shared-code or cross-program requests.
 
 In a shared checkout, the content manifest lists every modified and untracked owned path
-from `git status --short --untracked-files=all -- <owned-paths>`; deleted paths are
-marked `DELETED`. Include untracked result artifacts in the review and commit.
-Git provides repository integrity; do not add a per-file checksum inventory for a
-same-repository handoff.
-Use a checksum only at a real trust boundary, such as verifying an externally downloaded
-proof certificate. In an isolated worktree, the packet gives the local transport commit
-and its complete name-status list.
+from `git status --short --untracked-files=all -- <owned-paths>` and gives the SHA-256
+of every listed regular file; deleted paths are marked `DELETED`. A `git diff` hash
+alone is insufficient because it omits untracked result artifacts.
+In an isolated worktree, the packet gives the local transport commit and its complete
+name-status list.
 
 The coordinator integrates fractional before closure, regenerates shared views once, and
 records every accepted and refused path in the coordinator decision packet before
@@ -697,7 +631,9 @@ committing the gate.
 CI is not a reason for either manager to poll; disjoint theory or review work remains
 available while hosted checks run.
 
-## Delegation topology
+<a id="source-1-delegation-topology"></a>
+
+#### Delegation topology
 
 The two managers own agendas, not just individual commands.
 Each manager reads its whole packet, assigns bounded cells to workers, checks their
@@ -719,10 +655,7 @@ If a mechanical task uncovers a mathematical choice, stop it and redispatch that
 at `max`; do not let the original speed-oriented assignment make the decision
 implicitly. Record the level in the `T+0` dispatch and each delegated packet.
 
-The word *owns* refers to scientific work and manager-local output, not ID authority.
-The following table records the original launch allocation.
-Consult [Parallel ID Allocation](#parallel-id-allocation) for current ownership and
-pending work before using an uncreated ID.
+The word *owns* refers to scientific work and manager-local output, not ID authority:
 
 | Surface | Reserved range | Writer or allocator |
 | --- | --- | --- |
@@ -734,63 +667,6 @@ pending work before using an uncreated ID.
 | Closure hypotheses and experiments | H-080 through H-089; exp-090 through exp-109 | Coordinator creates and freezes identity and criterion; manager appends allocated outcomes |
 | Cross-program explorations | X-017 through X-019 | Coordinator, after a fresh collision check |
 | Ledgers, maps, frontier, schemas, PR, and retention | Shared; no manager range | Coordinator |
-
-### Parallel ID Allocation
-
-The PR 105 coordinator maintains this assignment map under `think-4cdg`; its PR
-description mirrors the table so downstream agents can work around this branch.
-The user’s latest 2026-09-07 instruction selects sequential assignment for this line of
-work. No speculative range is reserved.
-A next-ID pointer changes when an agent publishes or explicitly assigns a record;
-recheck parallel work before using it.
-
-The current collision check includes `origin/main` at `dd36800e` after PRs 105–108
-landed and this continuation on PR 109. PR 107 added a further Agenda 028 and
-H-118–H-121 after the previous inventory. The unrun local diamond claim was renamed
-H-122 before its instrument commit; H-123 now owns localization. PR 106's n=17 work
-adds no native IDs.
-IDs quoted inside imported source packets are not native allocations.
-
-| Namespace | Integrated research line: PRs 105 and 109 | PR 107 additions already published | Next sequential ID after the checked records |
-| --- | --- | --- | --- |
-| Explorations | None new | X-017–X-018 | X-019 |
-| Agendas | None new; this branch uses Agenda 024–026 | agenda-027–agenda-028 | agenda-029 |
-| Bounded commitments | Existing BC-251–BC-255 carry this block’s work; BC-256–BC-257 are also occupied | BC-258–BC-275 | BC-276 |
-| Hypotheses | H-106–H-110 and H-122–H-123 | H-111–H-121 | H-124 |
-| Experiments | exp-116–exp-121 | None | exp-122 |
-| Agent sessions | session-090–session-091 | None | session-092 |
-| Series | Existing series-000; no new series | None | series-001 if a new series is justified; none is assigned |
-
-The user will arrange downstream agents around this sequential line.
-The coordinator publishes actual assignments before dispatch and refreshes the PR at
-each checkpoint. Workers receive their precise IDs and write scopes in their existing
-bead handoffs; they do not independently take the same next number.
-Root retains acceptance and integration authority for work commissioned through PR 105.
-
-Historical gaps are preserved: H-066–H-069 and H-071–H-089 have no native records here;
-the quarantined PR 87 allocation also holds exp-065–exp-069. H-070 and exp-070–exp-071
-have been consumed. The unused exp-072–exp-109 launch ranges are not silently recycled.
-H-092 and exp-112 belong to pending transport `30c44bb6`. The original speculative
-X-017–X-019 reservation is superseded: PR 107 has published X-017–X-018; X-019 is the next
-sequential pointer, not a reserved block.
-No uncreated ranges from the earlier draft of this update were dispatched.
-
-The native record inventory at this checkpoint is X-001–X-018, agenda-001–agenda-028,
-BC-001–BC-155 / BC-159–BC-185 / BC-190–BC-225 / BC-230–BC-275, H-001–H-065 / H-070 /
-H-090–H-091 / H-093–H-123, and exp-001–exp-064 / exp-070–exp-071 / exp-110–exp-111 /
-exp-113–exp-121. Sessions occupy session-001–session-091. Other native sequences are
-run-001–run-002, D-001–D-478, T-001–T-022, CG-001–CG-012 and VE-001–VE-002; this branch
-introduces none of those IDs.
-PR 107's definitions are included in this combined record.
-BC IDs span agendas; experiment IDs span series.
-
-Assign each new artifact to its actual question: a BC can reuse an existing H-item, and
-multiple experiments can test that H-item.
-Do not allocate a new hypothesis or agenda merely to consume the next number.
-`think-*` bead IDs are generated by tbd and need no numeric reservation.
-Frontier claims, defects, generated ledgers, agenda maps, schemas and the PR remain
-coordinator-written surfaces with their existing review rules; ID assignment does not
-grant concurrent write access to them.
 
 | Manager | First worker wave | Later worker wave |
 | --- | --- | --- |
@@ -823,7 +699,9 @@ regenerates shared views, and makes the portfolio commit.
 The gate packet names the frozen base SHA and either the shared-checkout content
 manifest or the local commit SHA.
 
-## T+0 Through T+2 Commissioning and Landing Gate
+<a id="source-1-t0-through-t2-commissioning-and-landing-gate"></a>
+
+#### T+0 Through T+2 Commissioning and Landing Gate
 
 This commissioning block is the official first 120 active portfolio minutes of the
 24-hour agenda, not a disposable rehearsal.
@@ -844,7 +722,9 @@ BC-231 remains behind BC-230, BC-241 behind BC-240, BC-243 behind BC-242, BC-246
 BC-240 and BC-245, and BC-247 behind BC-245. Commissioning creates no BC and consumes no
 unallocated ID.
 
-### T+0 Preflight and Ownership
+<a id="source-1-t0-preflight-and-ownership"></a>
+
+##### T+0 Preflight and Ownership
 
 Run the coordinator entry-point checks and the seven-bead `tbd start` already specified
 above. Record `T+0` only after the graph, current base, input hashes, unused output
@@ -872,7 +752,9 @@ Intermediate coordinator receipts are `commissioning-gate-minute-015.md`,
 Require every path to be absent before launch; preserve a failed attempt rather than
 overwriting it.
 
-### Thirty-Minute Slices and Microgates
+<a id="source-1-thirty-minute-slices-and-microgates"></a>
+
+##### Thirty-Minute Slices and Microgates
 
 | Active time | Coordinator | Fractional manager | Closure manager | Floating worker |
 | --- | --- | --- | --- | --- |
@@ -896,7 +778,9 @@ numerical output.
 The minute-120 gate stops research, requires no live child process, and
 begins the coordinator-only landing transaction.
 
-### Required Commands and Evidence
+<a id="source-1-required-commands-and-evidence"></a>
+
+##### Required Commands and Evidence
 
 BC-232 uses the exact agenda-025 leg-01 command, including `--minutes 105`, the retained
 warm state `bc-200-state-191-50.json`, and fresh `bc-232-leg-01` outputs.
@@ -962,7 +846,9 @@ The subsequent commit, push, and `tbd sync` are landing mechanics: record wall a
 role-assigned time, plus `agent_minutes` only when observed or explicitly self-reported,
 but do not advance the research clock beyond T+120. Hosted checks remain asynchronous.
 
-### Stops, Success, and Continuation
+<a id="source-1-stops-success-and-continuation"></a>
+
+##### Stops, Success, and Continuation
 
 Before T+0, abort without starting the clock on a dependency mismatch, unexplained
 frozen-input drift, namespace collision, occupied output stem, missing control, or
@@ -1001,7 +887,9 @@ BC-246, BC-247, adaptive rungs, density optimization, global stationary enumerat
 exact cover, frontier promotion, and the hour-four BC-220 decision remain deferred.
 No completion of those cells is implied by a successful commissioning gate.
 
-## First four-hour dispatch
+<a id="source-1-first-four-hour-dispatch"></a>
+
+#### First four-hour dispatch
 
 The T+0-through-T+2 commissioning gate above is the binding first half of this block.
 After its landing, a replacement coordinator resumes at T+2 from the committed budget
@@ -1033,7 +921,9 @@ uv run --frozen --all-extras --group dev packing-validate --edit
 This is the local gate for the commit, not permission to skip a candidate’s exact
 decision routes or a manager’s cell-specific controls.
 
-## Default block matrix
+<a id="source-1-default-block-matrix"></a>
+
+#### Default block matrix
 
 The gates may reallocate this schedule, but only from evidence already named in X-016.
 It is a default continuation, not permission to keep a route alive after its kill rule.
@@ -1052,7 +942,9 @@ merely because its endpoint would be important.
 The hour-16 rule does the opposite for a real candidate: once frozen bytes cross an
 accept threshold, independent decision outranks further search.
 
-## Upstream reconciliation
+<a id="source-1-upstream-reconciliation"></a>
+
+#### Upstream reconciliation
 
 PR #83 is merged and no longer needs polling.
 During the planning and launch window, the coordinator watches `origin/main`, PR #89,
@@ -1131,7 +1023,9 @@ M	packing/uv.lock
 M	vendor/kpress
 ```
 
-## BC-219 launch snapshot
+<a id="source-1-bc-219-launch-snapshot"></a>
+
+#### BC-219 launch snapshot
 
 The coordinator froze this snapshot at `2026-09-05T21:54:16Z` and then rebased the
 strategy stack directly onto the merged parent:
@@ -1184,7 +1078,9 @@ db124b9956d8051682388cbba3b16772e65406a0003debba1c92b915c0c489a8  packing/campai
 bc01c636302f26ce4072ee8886c83463a9648f0e35d918541377cf52559aea2c  packing/frontier/n-011.md
 ```
 
-### Post-BC-219 Planning-Spike Manifest
+<a id="source-1-post-bc-219-planning-spike-manifest"></a>
+
+##### Post-BC-219 Planning-Spike Manifest
 
 The coordinator froze this amendment at `2026-09-05T23:12:46Z` after the bounded launch
 audits tracked by `think-e7si` and the strict-JSON repair tracked by `think-quwt`. It
@@ -1202,7 +1098,9 @@ This amendment does not start `T+0`, claim a research cell, or allocate an H or 
 The launch record still rechecks these bytes against its commit and names the actual
 operators and experiment identities before either numerical lane starts.
 
-### Post-Review Manifest
+<a id="source-1-post-review-manifest"></a>
+
+##### Post-Review Manifest
 
 The 2026-09-05 review of PR #89 (`think-2vl2`) froze this amendment at
 `2026-09-06T00:57:38Z`. It supersedes the agenda-025 hash in the planning-spike
@@ -1230,7 +1128,9 @@ allocates no H or exp ID. The scalar 61/16 probe it pre-registers in agenda-025 
 option the dispatch record either allocates or declines; either way the record names its
 decision.
 
-### Pre-Dispatch Integration Manifest
+<a id="source-1-pre-dispatch-integration-manifest"></a>
+
+##### Pre-Dispatch Integration Manifest
 
 The coordinator froze this superseding manifest at `2026-09-06T02:40:31Z` after directly
 integrating PR #87 source head `fd7c9d9417f117f023b1e6e179653d6cf5717f41` over planning
@@ -1286,7 +1186,9 @@ This integration starts no `T+0`, claims no research cell, and allocates no H or
 It makes the launch self-contained: managers do not wait for PR #87 or `origin/main`,
 and the coordinator records any later upstream movement without erasing this base.
 
-### Final `origin/main` Landing Amendment
+<a id="source-1-final-originmain-landing-amendment"></a>
+
+##### Final `origin/main` Landing Amendment
 
 The coordinator froze this amendment at `2026-09-06T03:18:00Z` after the final preflight
 fetch observed PR #87 on `origin/main` at `57135eec465ffd8a143ad8df287c62638d97fa5c`.

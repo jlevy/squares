@@ -491,19 +491,20 @@ states which checks actually ran, and links unfinished obligations and exact res
 commands. Beads are synchronized separately on `tbd-sync`; their IDs and scope are
 mirrored here so a PR reader can recover the plan.
 
-This branch has allocated **Session 091**, **exp-121** and **H-122**, and continues
+This branch has allocated **Session 091**, **exp-121** and **H-122–H-123**, and continues
 **BC-255 / H-102**. H-110 is complete; the next selected bead is `think-jbw5`.
 No new agenda or exploration ID is allocated at this checkpoint.
-The last audited external allocation is PR 107: X-017, Agenda 027, BC-258–268 and
-H-111–117, with no session or experiment IDs. Its current head is `96be087f`;
-PR 108 has merged into that branch and allocated no scientific IDs. Neither has landed
-on main at this check.
+PR 107 landed on main at `dd36800e`, including PR 108 and its follow-up planning:
+X-017–X-018, Agenda 027–028, BC-258–275 and H-111–121, with no session or experiment
+IDs. The temporary local H-118 diamond label was renamed H-122 before its first
+instrument commit or target invocation. The next pointers are H-124, exp-122,
+Session 092, BC-276, Agenda 029 and X-019; none is reserved speculatively.
 Choose each next required ID sequentially after checking current remote claims;
 publish it on this PR rather than reserving speculative ranges.
 
 Merge only landed `origin/main` changes, following the upstream-merge shortcut.
-Unmerged PRs 107 and 108 are coordination context, not prerequisites and not automatic
-merge targets. If interrupted, read this session, its bead `think-fqhr`, the latest PR
+Open PR heads remain coordination context, not prerequisites or automatic merge
+targets. If interrupted, read this session, its bead `think-fqhr`, the latest PR
 checkpoint and the current H-110 record before dispatching anything. Never repeat a
 completed or still-running scientific invocation.
 

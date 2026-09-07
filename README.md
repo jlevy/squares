@@ -622,6 +622,9 @@ review. [`epistemics.md`](epistemics.md) owns whole-result classifications.
 └── package-lock.json       Tooling lockfile
 ```
 
+An optional, Git-ignored `attic/` holds intake and scratch files.
+Sources used by durable research are retained under `packing/resources/`.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

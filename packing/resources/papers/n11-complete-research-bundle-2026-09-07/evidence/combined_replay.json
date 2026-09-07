@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "fixed_support_upper_bound": "11",
+  "ordered_angle_profiles": 1024,
+  "checks": [
+    "fixed-support receipt reproduced",
+    "both mutation suites pass",
+    "normal and optimized Python agree",
+    "new elementary receipt reproduced"
+  ],
+  "scope": "Same-code certificate/control replay; no historical 3.81 replay, full radius replay, or global enumeration",
+  "new_global_bound": null
+}
