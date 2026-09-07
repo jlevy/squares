@@ -16,7 +16,7 @@ from __future__ import annotations
 import argparse
 import json
 from collections.abc import Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from fractions import Fraction
 from itertools import pairwise
 
@@ -50,6 +50,25 @@ class Arrangement:
     lines: tuple[Line, ...]
     facets: tuple[Facet, ...]
     point_contacts: tuple[tuple[int, Point], ...]
+    _clearance_reciprocals: dict[frozenset[Point], FieldElement] = field(
+        default_factory=dict, init=False, compare=False, repr=False
+    )
+
+    def clearance_reciprocal(
+        self, first: Line, second: Line, derivative: FieldElement
+    ) -> FieldElement:
+        """Invert each nonzero unordered canonical-normal pair at most once.
+
+        Offsets and facets do not affect 4*abs(n_first dot n_second). Fill lazily
+        after the gap sign check: eager sign checks could refine the shared root
+        interval earlier and change the rational clearance selected downstream.
+        """
+        key = frozenset(((first.a, first.b), (second.a, second.b)))
+        reciprocal = self._clearance_reciprocals.get(key)
+        if reciprocal is None:
+            reciprocal = (4 * _absolute(derivative)).inverse()
+            self._clearance_reciprocals[key] = reciprocal
+        return reciprocal
 
 
 @dataclass(frozen=True)
@@ -221,7 +240,10 @@ def facet_probes(
             raise SupportError("facet midpoint meets an unsplit crossing or duplicate line")
         derivative = other.a * line.a + other.b * line.b
         if not derivative.is_zero():
-            delta = min(delta, _positive_lower(_absolute(gap) / (4 * _absolute(derivative))))
+            clearance = _absolute(gap) * arrangement.clearance_reciprocal(
+                line, other, derivative
+            )
+            delta = min(delta, _positive_lower(clearance))
     probes: list[tuple[int, Point]] = []
     for direction in (-1, 1):
         point = (center[0] + direction * delta * line.a, center[1] + direction * delta * line.b)

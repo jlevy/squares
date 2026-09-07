@@ -8,10 +8,13 @@ from fractions import Fraction
 
 import pytest
 
-from devtools.check_full_size_density_pair_separator import control_family
+from devtools.check_full_size_density_pair_separator import control_family, family_signature
 from devtools.density_face_verifier import (
     Arrangement,
+    FaceResult,
     Facet,
+    Line,
+    build_arrangement,
     check_excess_box,
     clip_line,
     facet_probes,
@@ -19,9 +22,10 @@ from devtools.density_face_verifier import (
     normalized_line,
     verify_density,
 )
-from sqpack.field import NumberField
+from sqpack.field import FieldElement, NumberField
 from sqpack.full_size_density.support_ceiling import (
     BoundaryPointError,
+    Point,
     Support,
     SupportError,
     axis_square,
@@ -221,3 +225,127 @@ def test_toy_cli_has_no_candidate_dispatch(capsys: pytest.CaptureFixture[str]) -
     with pytest.raises(SystemExit) as failure:
         main(("--target",))
     assert failure.value.code == 2
+
+
+def test_clearance_inverts_each_nonzero_normal_pair_only_once_per_arrangement(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    family = control_family("toy-rotated-algebraic-v1")
+    arrangement = build_arrangement(family)
+    separate_arrangement = build_arrangement(family)
+    normals = {(line.a, line.b) for line in arrangement.lines}
+    pairs = {
+        frozenset(((first.a, first.b), (second.a, second.b)))
+        for first in arrangement.lines
+        for second in arrangement.lines
+        if first is not second and not (first.a * second.a + first.b * second.b).is_zero()
+    }
+    calls = 0
+    original = FieldElement.inverse
+
+    def counted(value: FieldElement) -> FieldElement:
+        nonlocal calls
+        calls += 1
+        return original(value)
+
+    monkeypatch.setattr(FieldElement, "inverse", counted)
+    for facet in arrangement.facets:
+        facet_probes(arrangement, facet, family.side)
+    # Each facet also divides its two midpoint coordinates by two. All other
+    # inversions in this stage must be the distinct nonzero clearance pairs.
+    midpoint_calls = 2 * len(arrangement.facets)
+    assert calls - midpoint_calls == len(pairs)
+    assert len(pairs) <= len(normals) * (len(normals) + 1) // 2
+    first_pass = calls
+    for facet in arrangement.facets:
+        facet_probes(arrangement, facet, family.side)
+    assert calls - first_pass == midpoint_calls
+    previous = calls
+    for facet in separate_arrangement.facets:
+        facet_probes(separate_arrangement, facet, family.side)
+    assert calls - previous == midpoint_calls + len(pairs)
+    assert separate_arrangement == arrangement
+
+
+def _exact_face_payload(result: FaceResult) -> tuple:
+    """Compare fresh fields by coefficients, including every selected rational delta."""
+
+    def coordinates(point: Point) -> tuple[tuple[Fraction, ...], ...]:
+        return tuple(tuple(value.coeffs) for value in point)
+
+    probes = []
+    for probe in result.probes:
+        facet = result.arrangement.facets[probe.facet]
+        line = result.arrangement.lines[facet.line]
+        axis = 1 if line.a.is_zero() else 0
+        midpoint = (facet.start[axis] + facet.end[axis]) / 2
+        normal = (line.a, line.b)[axis]
+        delta = (probe.point[axis] - midpoint) / (probe.direction * normal)
+        probes.append(
+            (
+                probe.facet,
+                probe.direction,
+                coordinates(probe.point),
+                tuple(delta.coeffs),
+                probe.members,
+                probe.depth,
+            )
+        )
+    box = result.witness
+    return (
+        family_signature(result.family),
+        tuple(
+            (coordinates((line.a, line.b)), tuple(line.c.coeffs), line.labels)
+            for line in result.arrangement.lines
+        ),
+        tuple(
+            (facet.line, coordinates(facet.start), coordinates(facet.end))
+            for facet in result.arrangement.facets
+        ),
+        tuple(
+            (index, coordinates(point)) for index, point in result.arrangement.point_contacts
+        ),
+        tuple(probes),
+        result.maximum,
+        None if box is None else (coordinates(box.point), box.radius, box.members, box.excess),
+    )
+
+
+def test_cached_clearances_match_uncached_fresh_field_geometry_exactly(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def uncached(
+        _arrangement: Arrangement, _first: Line, _second: Line, derivative: FieldElement
+    ) -> FieldElement:
+        # The pre-cache denominator and inversion, including its sign check.
+        absolute = derivative if derivative.sign() >= 0 else -derivative
+        return (4 * absolute).inverse()
+
+    def run(name: str, *, reverse: bool, aliases_and_zero: bool) -> FaceResult:
+        family = control_family(name)
+        squares = tuple(
+            tuple(reversed(entry.square)) if reverse else entry.square
+            for entry in family.placements
+        )
+        weights = tuple(entry.weight for entry in family.placements)
+        if aliases_and_zero:
+            q = family.side.field.rational
+            squares += (squares[0][1:] + squares[0][:1], axis_square(q("1/2"), q("1/2")))
+            weights += (weights[0], Fraction())
+        return verify_density(squares, family.side, weights)
+
+    for name, reverse, aliases_and_zero in (
+        ("toy-triple-v1", False, False),
+        ("toy-edge-v1", True, True),
+        ("toy-rotated-algebraic-v1", True, True),
+    ):
+        cached = _exact_face_payload(
+            run(name, reverse=reverse, aliases_and_zero=aliases_and_zero)
+        )
+        # Reconstruct, rather than reusing the first run's refined root interval.
+        with monkeypatch.context() as patch:
+            patch.setattr(Arrangement, "clearance_reciprocal", uncached)
+            reference = _exact_face_payload(
+                run(name, reverse=reverse, aliases_and_zero=aliases_and_zero)
+            )
+        assert cached == reference
