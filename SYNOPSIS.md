@@ -526,6 +526,24 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
+**Atlas expansion to `n = 324`, owner-directed, beside the research line.**
+[The plan](docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md) under
+epic `think-0juv` and
+[session-093](packing/campaign/agent-sessions/session-093-atlas-expansion-to-324.md)
+widened the frontier register and the known-best atlas from `n = 1..100` to `1..324`,
+the end of the catalogue’s audited range, on
+[PR 111](https://github.com/jlevy/squares/pull/111). The unseen-corpus baseline is
+commit `6e21c4ca`; the calibration-only layers stay pinned to the first hundred.
+The `known-best-1-324` poster ships beside the untouched 1-100 figure, the prospective
+seed is retired to a pointer, and the sweeps tier is re-priced from measurement with two
+deferred steps.
+Open for the owner before merge: the derived-facts retention route (`D2`)
+for the 123 catalogue cases, whether to build `325..400` in the caveated form the survey
+allows, and whether the poster needs a 2x raster.
+Next on that line: the checks tier’s exact-verification step, priced in a second slice,
+then the full checkpoint.
+This line does not preempt the research selection below.
+
 **Focused parallel strategy prepared.**
 [X-018](packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md)
 reviews PR108 and ranks the overnight opportunities: direct compatibility and complete

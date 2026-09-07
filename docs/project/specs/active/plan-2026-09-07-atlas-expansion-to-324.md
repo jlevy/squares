@@ -341,27 +341,33 @@ Each phase closes on its own validation and a commit.
 - [x] Exports with receipts; `render_composite_pdf` handles both families.
 - [x] Hue-separation test past 20 classes.
 - [x] Playbook section rewritten from “Extending to 200” to “The two composites”.
-      Shipped 2026-09-07: 4224 by 4912 units, SVG 6,198,351 bytes at 117.7 bytes per
-      square after three measured levers (no per-square data attributes, one shared stroke
-      per card, three-decimal coordinates, each recorded in the drawing's profile), a
-      4224-pixel PNG and a 44 by 51 inch PDF with receipts, no 2x raster (measured at five
-      megabytes for 83 megapixels). The palette measurement found up to 106 angle classes
-      in one frame, so hues wrap rather than widen; the playbook's step 3 was wrong about
-      that and is rewritten.
+  Shipped 2026-09-07: 4224 by 4912 units, SVG 6,198,351 bytes at 117.7 bytes per square
+  after three measured levers (no per-square data attributes, one shared stroke per
+  card, three-decimal coordinates, each recorded in the drawing’s profile), a 4224-pixel
+  PNG and a 44 by 51 inch PDF with receipts, no 2x raster (measured at five megabytes
+  for 83 megapixels). The palette measurement found up to 106 angle classes in one frame,
+  so hues wrap rather than widen; the playbook’s step 3 was wrong about that and is
+  rewritten.
 
 ### Phase 5: Gate, documents, closeout
 
-- [ ] Sweeps-tier ceilings re-argued from the recorded measurements.
+- [x] Sweeps-tier ceilings re-argued from the recorded measurements.
   Inputs measured on 2026-09-07 on the ten-CPU local host, not calibrated: the
   known-best atlas rebuild takes about eleven minutes at 324 against a 210 s sweeps
   ceiling; the escape screen about three minutes wall; the change-reachable test
   selection passed its 900 s step ceiling in the push tier.
   The candidates are a rebuild that reuses unchanged renderings, `--jobs` for the
   per-case work, and a measured deferral of whatever stays unavoidably slow under OR-13.
-- [ ] README, SYNOPSIS, atlas READMEs, `frontier/README.md`, and the site updated; W8
+  Measured 2026-09-07: the atlas check 691 s serial and the escape screen 766 s at 324
+  on the idle ten-CPU host; the atlas builder pooled at 3.75x on four workers; both
+  steps deferred to the deep gate on those measurements with sampled records-and-sample
+  stand-ins on the sweeps job, which now runs in 57 s at the CI shape.
+  The checks tier grew with the corpus too (189 s on CI against a stale 99 s record, the
+  exact verification step at 133 s of it) and is priced in a second slice.
+- [x] README, SYNOPSIS, atlas READMEs, `frontier/README.md`, and the site updated; W8
   pass; document map current.
 - [ ] Handoff entry naming the frozen corpus commit and the selected next entry.
-- [ ] `think-ezcx` re-parented and its note superseded.
+- [x] `think-ezcx` re-parented and its note superseded.
 
 ### Phase 6 (conditional): `325..400`
 
