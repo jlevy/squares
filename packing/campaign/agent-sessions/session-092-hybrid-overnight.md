@@ -381,7 +381,7 @@ session:
     started_at: '2026-09-07T11:12:25Z'
     deadline_at: '2026-09-07T11:37:25Z'
     expected_output: A native complete protocol, independent common-core equality and inclusion proof, exact same-normal predicate/control admission, and an immutable passing-records checkpoint before any target.
-    validation_command: Independent exact generic mathematical and predicate review, then packing-validate --records on the committed protocol.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: Unproved maximal-core identity, changed Gamma0, independent normals inside one pair, missing closed seam, target work before admission, or phase deadline.
     fallback: Retain the precise failed implication and do not invoke this target. Consider the complete release-angle chart under a separate prospective allocation.
     outcome: null
@@ -1298,6 +1298,7 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
   checks:
+  - The first52b1b43e record run failed only because phase15's validation_command included prose after the CLI arguments. It is corrected to the exact runnable invocation. The failed30.45-second receipt is retained; no target starts before its successful committed replay.
   - BC279's native protocol froze11:23:05. Independent predicate/control review completed11:25:47 and mathematical review11:28:01, both within their unchanged caps. Both reconcile the frozen native model and accept it; target work awaits committed protocol and passing records.
   - The accepted-tool receipt through11:18UTC records43664.617 agent-seconds over17208 active elapsed seconds, with26456.617 parallel-overlap seconds. Its prior baseline is unchanged, and the current four live tasks make this an incomplete lower bound.
   - Required hosted CI at0e1961e2 is green without any runtime-band change. Its new full replay started11:16UTC on an immutable attic checkout with two workers and one inner worker. Source session094 full validation is complete; an unrelated checkout uses one CPU for its pre-push work.
