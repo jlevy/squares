@@ -28,7 +28,8 @@ hypothesis:
   instrument: >-
     Source-free-controlled exact event-cell discriminator for one fixed S and
     one Q frame, with an independently implemented corner/SAT witness reader.
-    A complete continuous-angle proof instrument is not yet available.
+    Independently source-bound closed-polygon cover certificates are also available;
+    exp125 certifies the whole diagonal S band, while its axis sufficient cover is unresolved.
   instrument_ready: true
   regime: Fixed q, unchanged P10 and B–J coordinates, canonical Q center and both full closed angle bands; closed tangency counts as intersection.
   instance: {axis: n, point: 11}
@@ -51,6 +52,15 @@ coverage has an independent certificate from that run.
 The producer and independent reader passed 27 source-free controls and independent
 reviews by 08:09:33 UTC, before the prospective protocol and sole scientific invocation.
 No retry or second frame is allocated.
+
+The separately registered complete-cover experiment
+[exp125](../series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md)
+subsequently certified the sufficient cover for every S in the whole near45 band: the
+independent source reader checked13 polygons,12 closed slabs and72 endpoint-pair
+conditions. Its axis-band producer returned `no_chain` and did not authorize a reader.
+Thus the remaining compatibility obligation is the near-axis S band; H124 as a whole and
+restricted H036 are still unresolved.
+This partial lemma does not change the unrestricted packing bound.
 
 Write q=1939/500. The actual angle bands, modulo square quarter turns, are
 [-pi/720,pi/720] and [pi/4-pi/720,pi/4+pi/720]. Both closed unit squares must lie in
@@ -257,7 +267,9 @@ $$
 
 Writing a closed union preserves seams rather than discarding them informally.
 Failure of this sufficient representation would leave H124 unresolved.
-No residual-cover run, automatic retry or continuous arrangement build is allocated.
+Exp125 subsequently tested exactly this sufficient representation, with the scoped
+outcomes recorded above.
+No retry or continuous arrangement build is allocated here.
 
 ### Endpoint-chain Certificates
 
@@ -300,8 +312,10 @@ independent mechanical review under `think-m820`. Independent mathematical sourc
 reviews passed at 10:10:26 and 10:14:46 UTC. The reviewed source has at most 60 polygon
 vertices and at most 2,082 conservative x-events; these are static bounds, not runtime
 measurements or an actual cover.
-Any target invocation also requires a committed prospective protocol.
-No actual residual-cover input has been constructed or evaluated.
+Exp125 supplied the committed prospective protocol and actual source evaluation after
+those readiness checks.
+Only its diagonal cover passed independent source reconstruction; the axis producer
+returned `no_chain` and did not authorize a reader.
 Timeout, omitted evidence or failure to construct a chain is unresolved; even a verified
 gap in this sufficient cover would not refute H124.
 

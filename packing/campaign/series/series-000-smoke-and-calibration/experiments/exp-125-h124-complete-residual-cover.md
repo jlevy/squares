@@ -53,21 +53,60 @@ experiment:
       or independent reader failure stops the entire sequence. No retry or cap
       extension. Begin by10:32 UTC, finish by10:38:06 UTC, or retain non-invocation.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-125-h124-complete-residual-cover
-  lease:
-    expires: '2026-09-07T10:38:06Z'
-    host: Session094 coordinator
-  results: []
+  effort:
+    timebox: One producer per whole band; only the covered diagonal band authorized its independent reader
+    wall_seconds: 1.90
+    stopped_by: criterion
+  results:
+  - shape: determination
+    role: outcome
+    question: Do the fixed complete sufficient covers certify both whole angle bands?
+    outcome: criterion_missed
+    checked_by: Both producers exited zero. Axis returned unresolved/no_chain with no reader; diagonal returned covered/complete and its independent source-bound reader verified13 polygons,12 slabs and72 endpoint-pair checks. Only the diagonal-band sufficient lemma is certified.
   verdict:
-    decision: in-progress
+    decision: unresolved
     primary_criterion: Both complete closed whole-band covers pass independent source reconstruction and endpoint-chain verification, together with the reviewed analytical reduction.
-    reason: Prospectively registered; no scientific source constructor or cover invocation has run. Immutable push evidence, protocol review and committed record checks remain launch prerequisites.
+    reason: The whole diagonal-band sufficient cover passes independent verification, but the axis-band sufficient cover returned no_chain. Both bands are required, so H124 and restricted H036 remain unresolved. No failed-cover counterexample or unrestricted bound is claimed.
+    commit: dde14af1
 ---
 # Complete H124 Residual Cover
 
-This is a new complete sufficient-cover experiment, not a repeat of exp124’s fixed-S
-screen. The exact source and its mathematical reduction are defined in
+The diagonal-band sufficient lemma is independently certified; the axis-band cover and
+H124 remain unresolved.
+This is a complete sufficient-cover experiment, not a repeat of exp124’s fixed-S screen.
+The exact source and its mathematical reduction are defined in
 [H124](../../../hypotheses/H-124-full-distinguished-square-compatibility.md).
-Source construction, actual producer-reader wire agreement and runtime are untested.
+
+## Retained Outcome
+
+Protocol `dde14af1` and its synopsis correction `bc846ff5` were committed before
+invocation.
+The frozen engine `7daa7c55` passed all 45 push-tier steps in 153.55 seconds;
+the committed prospective record passed all 31 record checks in 18.97 seconds.
+Independent protocol review completed at 10:23:18 UTC after the unresolved stop-rule
+clarification. The full engine gate was still running and was not treated as a launch
+prerequisite or claimed pass.
+
+| Process, in order | Actual exit | External wall / user / system | Receipt |
+| --- | --- | --- | --- |
+| Axis producer, launched at the observed 10:30 UTC boundary | 0 | 0.19 / 0.16 / 0.02 seconds | `unresolved`, `no_chain`; no reader |
+| Diagonal producer, launched at the observed 10:30:55 UTC boundary | 0 | 1.48 / 1.44 / 0.02 seconds | `covered`, `complete` |
+| Diagonal independent reader, completed by 10:32 UTC | 0 | 0.23 / 0.19 / 0.02 seconds | `status=verified_source_cover`; nested `status=verified_cover`; both `cover_proved=true` |
+
+The independent diagonal reader reconstructed the scientific source itself and verified
+13 polygons, 12 closed slabs and 72 endpoint-pair checks.
+Together with the reviewed analytical reduction, that establishes compatibility for
+every admissible near45 S, throughout its whole closed angle band.
+It is not a central-angle sample.
+The missing near-axis S obligation prevents acceptance of H124 or restricted H036.
+
+The axis receipt supplies no independently checked gap or disjoint Q/S witness.
+Its `no_chain` result is failure of this sufficient cover procedure, not a
+counterexample. The protocol permitted the separately declared diagonal producer after
+precisely this stop reason.
+No process was repeated, no axis reader was invoked, and all calls finished before the
+original cutoff. Raw stdout and external timing remain under the declared result
+directory. The admission and stop rules below governed this completed sequence.
 
 ## Frozen Admission and Commands
 
@@ -80,8 +119,8 @@ Run the declared producer once for `axis`, then at most once for `diagonal`,
 substituting only the frame argument.
 Each has `--limit 5000 --timeout-seconds 120`. These frame names denote complete
 continuous angle bands, not central-angle samples.
-The static source bound is13 polygons, at most60 vertices and at most2,082 conservative
-x-events.
+The static source bound is 13 polygons, at most 60 vertices and at most 2,082
+conservative x-events.
 
 For a frame, actual exit zero, exact source label `h124:axis` or `h124:diagonal`,
 envelope kind `h124-closed-cover/v1`, and nested `status=covered` with
@@ -120,7 +159,7 @@ Retain partial or empty output on failure, labeled as such.
 A conditional process not invoked gets no invented receipt.
 Remove the lease and record the scoped verdict when this sequence ends.
 
-Fresh upstream/open-PR inspection at10:05 UTC found no exp125 or H125 in PR110 at
+Fresh upstream/open-PR inspection at 10:05 UTC found no exp125 or H125 in PR110 at
 `57b85302`; this record allocates exp125 sequentially.
 It allocates no new hypothesis, agenda, BC or exploration ID. Session094 and this
 experiment remain on integrated PR109.

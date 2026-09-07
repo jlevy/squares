@@ -2884,7 +2884,7 @@ round that names the hypothesis, control roles included.
 | [H-121](packing/campaign/hypotheses/H-121-axis-plus-one-minimizer.md) | blocked | Some global minimizing packing has orientations in the axis-plus-one-angle family | 0 | — |
 | [H-122](packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md) | refuted | One independently checked square avoids all nine marks and the forced diamond; full-square compatibility remains open | 1 | 0.20s wall |
 | [H-123](packing/campaign/hypotheses/H-123-near45-coordinate-localization.md) | confirmed | Complete coordinate localization follows from the reviewed reduction and independent four-guard certificate | 1 | 0.21s wall |
-| [H-124](packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md) | unresolved | The fixed-S screen found no pair; a separate complete two-band cover experiment is registered but not invoked | 2 | 0.84s wall |
+| [H-124](packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md) | unresolved | Whole diagonal S-band cover independently certified; near-axis S remains unresolved | 2 | 2.74s wall |
 
 ### Confirmed
 
@@ -3252,7 +3252,7 @@ archive beside it.
 | [exp-122](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-122-diamond-conditional-cover-screen.md) | 11 | target | H-122 | four fixed-frame diamond-conditioned cover samples | first frame gives an independently verified strict nine-mark and diamond escape; unused frames not run | rejected |
 | [exp-123](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-123-near45-localization.md) | 11 | target | H-123 | four continuous localization polynomial guards | independent exact reader checks all four guards and sixteen coefficients; reviewed reduction supplies complete localization | accepted |
 | [exp-124](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-124-full-square-compatibility-screen.md) | 11 | target | H-124 | fixed exp122 square and exact45 canonical Q | no witness after837 event cells; witness-only reader not invoked | unresolved |
-| [exp-125](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md) | 11 | target | H-124 | Complete residual cover for both whole bands | Prospectively registered; not invoked | in-progress |
+| [exp-125](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md) | 11 | target | H-124 | Complete residual cover for both whole bands | Diagonal independently certified; axis no_chain without reader | unresolved |
 
 ### Cost and provenance
 
@@ -3338,7 +3338,7 @@ archive beside it.
 | exp-122 | one thirty-second producer and conditional ten-second independent reader | 0.20 s | — | criterion | `c4a69e3e` |
 | exp-123 | one fifteen-second producer and conditional ten-second independent reader | 0.21 s | — | criterion | `3ea8e346` |
 | exp-124 | one thirty-second producer; conditional reader not invoked | 0.84 s | — | criterion | `a75d751a` |
-| exp-125 | two ordered120-second producers; each conditional reader60 seconds | — | — | not invoked | `7daa7c55` |
+| exp-125 | one producer per band; only diagonal reader invoked | 1.90 s | — | criterion | `7daa7c55` |
 
 ### What the 81 rounds jointly establish
 

@@ -62,7 +62,7 @@ session:
     objective: Test the complete H124 sufficient cover and, only if independently admitted, the separate density source controls.
     commitment: BC-255
     bead: think-drj8
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Independent mathematical source and H124 protocol reviews passed with explicit complete-process stop rules.
     budget_minutes: 12
@@ -72,10 +72,30 @@ session:
     validation_command: Frozen engine7daa7c55 CLI commands and exact independent acceptance predicates in exp125 and the separately declared graph protocol.
     kill_condition: Launch cutoff10:32 UTC, completion cutoff10:38:06 UTC, or any protocol-specific stop. No retries or cap extension.
     fallback: Retain partial evidence and the exact unresolved premise; do not substitute sampled targets.
+    outcome: Exp125 ran once per band after committed record admission. Axis returned no_chain; diagonal passed independent source-bound verification. H124 remains unresolved with a certified whole-diagonal-band partial lemma. Density remained uninvoked without completed protocol review.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md]
+    stop_reason: Both declared cover conditions are dispositioned and no retries are admitted; the density launch cutoff elapsed without admission.
+    next_action: Reprice the missing near-axis obligation and retain the unused density protocol without changing its cutoff.
+  - workflow: review-planning-oversight
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Reprice the missing near-axis compatibility branch and complete the remaining static density admission obligations.
+    bead: think-63oj
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Exp125 independently certifies the whole diagonal branch but leaves the axis sufficient cover unresolved; the old density allocation was never invoked.
+    budget_minutes: 25
+    started_at: '2026-09-07T10:31:00Z'
+    deadline_at: '2026-09-07T10:56:00Z'
+    expected_output: A source-free mathematical next-obligation assessment, a scoped independent density predicate verdict and recoverable outcome records on PR109.
+    validation_command: Independent mathematical review of retained proofs, exact static status mapping, record checks and existing asynchronous full gate.
+    kill_condition: Original worker caps or any unresolved premise; no target repetition or modification of expired deadlines.
+    fallback: Preserve the certified diagonal lemma and precise missing axis premise; defer any unready future scientific allocation.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Pass committed prospective records, then invoke each admitted lane at most as declared.
+    next_action: Finish the active mathematical assessment and publish retained evidence before selecting a separately scoped next obligation.
   primary_bead: think-63oj
   status: in_progress
   budget:
@@ -293,12 +313,168 @@ session:
     fallback: "Retain the exact missing premise without science or a cap extension."
     write_scope: ["packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md","packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-graph-depth-assessment.md"]
     excluded_commands: ["Scientific source or target evaluation","Registry or Git writes"]
+  - task: "Independent exp125 protocol review (think-y146)"
+    operator: "Codex density_control_recovery, max thinking"
+    status: completed
+    recording: contemporaneous
+    outcome: "GO after stop-rule clarification; actual review 10:19:21–10:23:18 UTC. Only no_chain, event_limit or slab_limit permit the other declared frame; operational failures stop all calls."
+    evidence: ["packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md"]
+    files: []
+    checks: []
+    uncertainty: "No new scientific invocation is authorized by this assignment; runtime and remaining proof obligations are distinct."
+    elapsed_seconds: 237
+    elapsed_quality: operator_reported_approximate
+    next_action: "The reviewed protocol has been executed once and dispositioned; do not repeat it."
+    phase: 2
+    budget_minutes: 5
+    started_at: "2026-09-07T10:19:00Z"
+    deadline_at: "2026-09-07T10:24:00Z"
+    expected_output: "A bounded scoped verdict or identified remaining premise, with actual timing."
+    validation_command: "Static retained-source review only; no scientific construction or target calls."
+    kill_condition: "Original deadline or a decisive soundness gap; no cap extension."
+    fallback: "Retain the completed evidence and exact missing premise without science."
+    write_scope: ["Read-only review"]
+    excluded_commands: ["Scientific source evaluation","Target invocation","Git or registry writes"]
+  - task: "Initial density protocol review (think-ptb9)"
+    operator: "Codex scalar_followup_assessment, max thinking"
+    status: canceled
+    recording: contemporaneous
+    outcome: "No full GO. Actual start10:26:01 was already after the bead's original deadline; stopped on root correction. Root's later dispatch deadline was not adopted. Partial static mappings do not admit science."
+    evidence: ["packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-graph-depth-assessment.md"]
+    files: []
+    checks: []
+    uncertainty: "No new scientific invocation is authorized by this assignment; runtime and remaining proof obligations are distinct."
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: "Retain the entirely uninvoked five-row sequence and its original cutoff; separately assess the remaining static predicates."
+    phase: 2
+    budget_minutes: 5
+    started_at: "2026-09-07T10:21:00Z"
+    deadline_at: "2026-09-07T10:26:00Z"
+    expected_output: "A bounded scoped verdict or identified remaining premise, with actual timing."
+    validation_command: "Static retained-source review only; no scientific construction or target calls."
+    kill_condition: "Original deadline or a decisive soundness gap; no cap extension."
+    fallback: "Retain the completed evidence and exact missing premise without science."
+    write_scope: ["Read-only review"]
+    excluded_commands: ["Scientific source evaluation","Target invocation","Git or registry writes"]
+  - task: "PR and handoff mechanical audit (think-kmne)"
+    operator: "Codex checkpoint_handoff_audit, high thinking"
+    status: completed
+    recording: contemporaneous
+    outcome: "Read-only audit10:29:16–10:30:09 UTC identified stale Session093 recovery and ID pointers, missing new gate scope, density non-admission and compressed prose. Root updated PR109."
+    evidence: ["packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md"]
+    files: []
+    checks: []
+    uncertainty: "No new scientific invocation is authorized by this assignment; runtime and remaining proof obligations are distinct."
+    elapsed_seconds: 53
+    elapsed_quality: operator_reported_approximate
+    next_action: "Preserve current outcome records and refresh active-slice cost at the checkpoint."
+    phase: 3
+    budget_minutes: 12
+    started_at: "2026-09-07T10:29:00Z"
+    deadline_at: "2026-09-07T10:38:06Z"
+    expected_output: "A bounded scoped verdict or identified remaining premise, with actual timing."
+    validation_command: "Static retained-source review only; no scientific construction or target calls."
+    kill_condition: "Original deadline or a decisive soundness gap; no cap extension."
+    fallback: "Retain the completed evidence and exact missing premise without science."
+    write_scope: ["Read-only review"]
+    excluded_commands: ["Scientific source evaluation","Target invocation","Git or registry writes"]
+  - task: "Remaining density admission predicates (think-aukd)"
+    operator: "Codex scalar_followup_assessment, max thinking"
+    status: completed
+    recording: contemporaneous
+    outcome: "Static GO10:32:19–10:34:07 UTC. Exact inner overweight status and stop reason replay as verified_overweight_clique, then source-bound unresolved/false; node exhaustion cannot pass. No runtime source or mass outcome established."
+    evidence: ["packing/devtools/check_weighted_clique_certificate.py","packing/devtools/run_full_size_density_graph.py"]
+    files: []
+    checks: []
+    uncertainty: "No new scientific invocation is authorized by this assignment; runtime and remaining proof obligations are distinct."
+    elapsed_seconds: 108
+    elapsed_quality: operator_reported_approximate
+    next_action: "Any future controls need a new prospective allocation; this does not reopen the expired sequence."
+    phase: 4
+    budget_minutes: 10
+    started_at: "2026-09-07T10:32:00Z"
+    deadline_at: "2026-09-07T10:42:00Z"
+    expected_output: "A bounded scoped verdict or identified remaining premise, with actual timing."
+    validation_command: "Static retained-source review only; no scientific construction or target calls."
+    kill_condition: "Original deadline or a decisive soundness gap; no cap extension."
+    fallback: "Retain the completed evidence and exact missing premise without science."
+    write_scope: ["Read-only review"]
+    excluded_commands: ["Scientific source evaluation","Target invocation","Git or registry writes"]
+  - task: "Outcome documentation edit (think-bzp5)"
+    operator: "Codex checkpoint_handoff_audit, high thinking"
+    status: completed
+    recording: contemporaneous
+    outcome: "Edited assigned Markdown bodies10:36:17–10:37:45 UTC. Fixed spacing, historical protocol labels and exact status/boolean wording against retained JSON; numerical claims, commands and frontmatter preserved."
+    evidence: ["packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md","packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md"]
+    files: []
+    checks: []
+    uncertainty: "No new scientific invocation is authorized by this assignment; runtime and remaining proof obligations are distinct."
+    elapsed_seconds: 88
+    elapsed_quality: operator_reported_approximate
+    next_action: "Root applies whole-repository Flowmark and integrates the terminal experiment record."
+    phase: 4
+    budget_minutes: 10
+    started_at: "2026-09-07T10:35:00Z"
+    deadline_at: "2026-09-07T10:45:00Z"
+    expected_output: "A bounded scoped verdict or identified remaining premise, with actual timing."
+    validation_command: "Static retained-source review only; no scientific construction or target calls."
+    kill_condition: "Original deadline or a decisive soundness gap; no cap extension."
+    fallback: "Retain the completed evidence and exact missing premise without science."
+    write_scope: ["Assigned Markdown bodies only"]
+    excluded_commands: ["Scientific source evaluation","Target invocation","Git or registry writes"]
+  - task: "Next structural obligation assessment (think-byq5)"
+    operator: "Codex density_control_recovery, max thinking"
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: []
+    checks: []
+    uncertainty: "No new scientific invocation is authorized by this assignment; runtime and remaining proof obligations are distinct."
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: "Reprice the remaining near-axis S branch after the certified diagonal lemma; no scientific source evaluation."
+    phase: 4
+    budget_minutes: 15
+    started_at: "2026-09-07T10:31:00Z"
+    deadline_at: "2026-09-07T10:46:00Z"
+    expected_output: "A bounded scoped verdict or identified remaining premise, with actual timing."
+    validation_command: "Static retained-source review only; no scientific construction or target calls."
+    kill_condition: "Original deadline or a decisive soundness gap; no cap extension."
+    fallback: "Retain the completed evidence and exact missing premise without science."
+    write_scope: ["Read-only review"]
+    excluded_commands: ["Scientific source evaluation","Target invocation","Git or registry writes"]
+  - task: "Independent center-correlated reduction review (think-vnua)"
+    operator: "Codex scalar_followup_assessment, max thinking"
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: []
+    checks: []
+    uncertainty: "No new scientific invocation is authorized by this assignment; runtime and remaining proof obligations are distinct."
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: "Audit the vertex-intersection lemma, coordinate frame, outer-domain direction and continuous-angle obligations without source evaluation."
+    phase: 4
+    budget_minutes: 15
+    started_at: "2026-09-07T10:37:49Z"
+    deadline_at: "2026-09-07T10:52:49Z"
+    expected_output: "A bounded scoped verdict or identified remaining premise, with actual timing."
+    validation_command: "Static retained-source review only; no scientific construction or target calls."
+    kill_condition: "Original deadline or a decisive soundness gap; no cap extension."
+    fallback: "Retain the completed evidence and exact missing premise without science."
+    write_scope: ["Read-only review"]
+    excluded_commands: ["Scientific source evaluation","Target invocation","Git or registry writes"]
   outputs:
   - packing/devtools/h124_cover_source.py
   - packing/devtools/check_h124_cover_source.py
   - packing/devtools/run_h124_cover.py
   - packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md
   checks:
+  - Planning began with the10:31 mathematical dispatch while the admitted diagonal replay was completing. The phase start records that earlier actual entry, with the same25-minute allowance giving the stricter10:56 deadline. The PR audit inherited phase3's stricter10:38:06 cap and finished10:30:09; no worker or scientific cutoff is extended.
+  - Fresh10:38 UTC upstream inspection found no landed main commits; origin/main remains dd36800e. PR110 advanced to1b7ed623 and retains its separate lane.
   - H124 protocol review think-y146 passed after the stop-rule clarification, actual10:19:21–10:23:18 UTC (237 seconds), within original10:24 cap; no science or tests ran.
   - Density protocol review think-ptb9 has no full GO. The bead declared5 minutes from10:21, but dispatch occurred10:25:40 and actual review began10:26:01; root corrected its later dispatch deadline to original10:26. Review stopped on that correction; negative graph predicates and prerequisites remain unchecked. No scientific invocation is admitted in this lane.
   - Immutable engine7daa7c55 push passed45/45 in153.55 seconds; external156.67 wall,208.28 user,26.03 system. Full gate remains running. Engine pushed to integrated PR109 before scientific admission.
@@ -315,26 +491,30 @@ session:
   - Fresh09:47 UTC fetch leaves origin/main at dd36800e and external PR110 at4ac71438. Session094, H125 and exp125 are not occupied there; only Session094 is allocated now.
   - Session093 checkpoint23d74f69 and generated map6ff421e5 retain full23498e87 passed1631.92 seconds, delta bfc27c7a push passed130.89 seconds and terminal records passed31/31 in19.84 seconds.
   stop_reason: null
-  next_action: Finish independent source-free readiness and control-contract review before selecting any scientific invocation.
+  next_action: Inspect exp125 retained receipts; reprice the missing near-axis S obligation after the certified diagonal lemma. The density sequence remains uninvoked; no completed producer or reader may be repeated.
 ---
 # Complete Cover and Repaired Density Controls
 
 This is the third two-hour checkpoint slice of the eight-active-hour program that began
-at05:49 UTC, under `think-il1m`. It continues Session093’s selected `think-7e72`
+at 05:49 UTC, under `think-il1m`. It continues Session093’s selected `think-7e72`
 handoff. Interruptions do not consume the allocation; recursive agent time is separate.
 
 ## Slices and Decisions
 
 | Slice | Work | Required decision |
 | --- | --- | --- |
-| First30 minutes | Independent H124 source constructors and a capped caller; graph-control assessment in parallel | Ready for review or a named missing premise |
-| Next30 minutes | Independent reviews, prospective protocol and at most one newly admitted scientific obligation per ready lane | Checked result, unresolved outcome or explicit non-invocation |
-| Next40 minutes | Reprice from evidence and prepare one changed next obligation where justified | Continue a promising route or preserve the negative and stop it |
-| Final20 minutes | Full/delta validation, record and cost reconciliation, editorial pass and PR update | Recoverable third checkpoint and selected final slice |
+| First 30 minutes | Independent H124 source constructors and a capped caller; graph-control assessment in parallel | Ready for review or a named missing premise |
+| Next 30 minutes | Independent reviews, prospective protocol and at most one newly admitted scientific obligation per ready lane | Checked result, unresolved outcome or explicit non-invocation |
+| Next 40 minutes | Reprice from evidence and prepare one changed next obligation where justified | Continue a promising route or preserve the negative and stop it |
+| Final 20 minutes | Full/delta validation, record and cost reconciliation, editorial pass and PR update | Recoverable third checkpoint and selected final slice |
 
-H124 uses the reviewed common obstacle and a complete closed cover of both continuous
-angle bands, not two sampled angles.
-A failed sufficient cover leaves H124 unresolved.
+H124’s sufficient route requires the reviewed common obstacle and complete closed covers
+of both continuous angle bands.
+[Exp125](../series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md)
+independently certified the diagonal-band cover; the axis producer returned `no_chain`
+and had no reader invocation.
+The axis-band obligation remains unresolved, preventing acceptance of H124 or restricted
+H036. The axis result supplies no independently verified gap or counterexample.
 Authors must not execute its scientific source while preparing source-free controls.
 The density lane’s degree-eight repair does not restart the stopped original control
 sequence. BC243’s existing soundness obligations remain binding; any new source attempt

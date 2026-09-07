@@ -107,7 +107,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-090](agent-sessions/session-090-four-hour-research.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 11 | think-9qrx | After Session090 closes, select think-qv73 under BC255 for H110's source-free fixed P12 escape instrument and independent review, then a fresh prospective experiment. The September7 priority amendment holds H107 out of the next block and selects a bounded conditional-compatibility assessment alongside H110. Agenda024 owns this revised allocation and the deferred bead. Density remains source-blocked; no exp116 retry. |
 | [session-091](agent-sessions/session-091-structural-compatibility.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 6 | think-fqhr | Select think-7e72 for a bounded full-P10 distinguished-square compatibility discriminator after fresh ID/ownership checks; no repeated H110/H122/H123 invocation. |
 | [session-093](agent-sessions/session-093-full-square-compatibility.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 9 | think-bmx9 | Select think-7e72 for independently authored H124 residual-cover source binding and a bounded caller, alongside a separately declared degree-eight graph source-control attempt in the density lane. Neither target is yet allocated; preserve the stopped original sequence and check fresh IDs before the next session. |
-| [session-094](agent-sessions/session-094-complete-cover-and-density-controls.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `research-loop` (insight) | 3 | think-63oj | Finish independent source-free readiness and control-contract review before selecting any scientific invocation. |
+| [session-094](agent-sessions/session-094-complete-cover-and-density-controls.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `review-planning-oversight` (insight) | 4 | think-63oj | Inspect exp125 retained receipts; reprice the missing near-axis S obligation after the certified diagonal lemma. The density sequence remains uninvoked; no completed producer or reader may be repeated. |
 
 ### Workflow summary
 
@@ -123,7 +123,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-loop` | 9 | 4 | 61 | 7 |
 | `pipeline-improvement` | 25 | 0 | 126 | 0 |
 | `documentation-pass` | 1 | 0 | 7 | 0 |
-| `review-planning-oversight` | 0 | 0 | 1 | 0 |
+| `review-planning-oversight` | 0 | 0 | 2 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
 ## Experiment agendas
@@ -697,7 +697,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | H-121 | blocked | proof | Some global minimizing packing of eleven unit squares has every actual |  | 0 |  |  |
 | H-122 | refuted | proof | At q=1939/500, every contained closed unit square whose orientation mo |  | 1 |  | 0s wall |
 | H-123 | confirmed | proof | At q=1939/500, every contained closed unit square with orientation wit |  | 1 |  | 0s wall |
-| H-124 | unresolved | proof | At q=1939/500, every contained closed unit square Q in the actual near |  | 2 |  | 1s wall |
+| H-124 | unresolved | proof | At q=1939/500, every contained closed unit square Q in the actual near |  | 2 |  | 3s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -735,7 +735,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 
-### unresolved (17)
+### unresolved (18)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -756,6 +756,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-113 | series-000 | 11 | Codex coordinator, max reasoning, think-2rxf in Session089 | H-099 | The verified ceiling56/5 exceeds11. It bounds the fixed-support problem but neither refutes H099 nor supplies the missing complete a.e.-depth proof. |
 | exp-116 | series-000 | 11 | Codex coordinator, max mathematical reasoning, think-0za3 in Session090 | H-093 | The driver stopped adding sites at iteration18 without row convergence; the replayed dual family has mass about10.08018, so neither acceptance nor rejection criterion holds. |
 | exp-124 | series-000 | 11 | Session093 coordinator, BC255, max mathematical judgment | H-124 | The sole fixed-frame screen found no pair. This does not certify the continuous compatibility claim or the screen's coverage independently, so H124 remains unresolved. |
+| exp-125 | series-000 | 11 | Session094 coordinator, BC255; max mathematical judgment | H-124 | The whole diagonal-band sufficient cover passes independent verification, but the axis-band sufficient cover returned no_chain. Both bands are required, so H124 and restricted H036 remain unresolved. No failed-cover counterexample or unrestricted bound is claimed. |
 
 ### blocked (7)
 
@@ -816,12 +817,6 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-030 | series-000 | 9 | openai-codex | H-021 | The complete event path stays below the 30-second profile trigger and retains its nonconverged outcome without censorship. D-126 bars frequency or deterministic-work claims, and no additional n=9 samples are authorized by this performance cell. |
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
-
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-125 | series-000 | 11 | Session094 coordinator, BC255; max mathematical judgment | H-124 | Prospectively registered; no scientific source constructor or cover invocation has run. Immutable push evidence, protocol review and committed record checks remain launch prerequisites. |
 
 ## Resumable — stopped on the clock, not on an answer
 
