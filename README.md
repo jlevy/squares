@@ -29,6 +29,15 @@ The image is available in [**SVG**](packing/atlas/known-best/known-best-1-100.sv
 [**PDF**](https://jlevy.github.io/squares/known-best-1-100.pdf), and
 [**high-resolution PNG**](packing/atlas/known-best/known-best-1-100@2x.png).*
 
+The register now runs to `n = 324`, the end of the catalogue’s audited range, and a
+second, poster-sized composite draws all of it:
+[**`known-best-1-324`**](packing/atlas/known-best/known-best-1-324.png), an 18-by-18
+grid with the same cards, badges and legend, available as
+[**SVG**](packing/atlas/known-best/known-best-1-324.svg) and
+[**PDF**](packing/atlas/known-best/known-best-1-324.pdf) (44 by 51 inches).
+The first figure is unchanged; the [atlas README](packing/atlas/known-best/README.md)
+describes both.
+
 `s(n)` is the side of the smallest square that holds `n` non-overlapping unit squares.
 The problem is elementary to state and remains open even at small `n`.
 

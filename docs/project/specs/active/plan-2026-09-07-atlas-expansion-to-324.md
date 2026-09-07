@@ -335,12 +335,19 @@ Each phase closes on its own validation and a commit.
 
 ### Phase 4: The poster
 
-- [ ] Composite specification for `1..324`, 18 columns; computed baselines; legend
+- [x] Composite specification for `1..324`, 18 columns; computed baselines; legend
   totals recomputed.
-- [ ] Byte-budget measurement built into the builder’s report; encoding chosen from it.
-- [ ] Exports with receipts; `render_composite_pdf` handles both families.
-- [ ] Hue-separation test past 20 classes.
-- [ ] Playbook section rewritten from “Extending to 200” to “The two composites”.
+- [x] Byte-budget measurement built into the builder’s report; encoding chosen from it.
+- [x] Exports with receipts; `render_composite_pdf` handles both families.
+- [x] Hue-separation test past 20 classes.
+- [x] Playbook section rewritten from “Extending to 200” to “The two composites”.
+      Shipped 2026-09-07: 4224 by 4912 units, SVG 6,198,351 bytes at 117.7 bytes per
+      square after three measured levers (no per-square data attributes, one shared stroke
+      per card, three-decimal coordinates, each recorded in the drawing's profile), a
+      4224-pixel PNG and a 44 by 51 inch PDF with receipts, no 2x raster (measured at five
+      megabytes for 83 megapixels). The palette measurement found up to 106 angle classes
+      in one frame, so hues wrap rather than widen; the playbook's step 3 was wrong about
+      that and is rewritten.
 
 ### Phase 5: Gate, documents, closeout
 
