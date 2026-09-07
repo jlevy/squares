@@ -1,0 +1,17 @@
+{
+  "child_cpu_seconds": 0.103133,
+  "child_exit_code": 0,
+  "child_wall_cap_seconds": 10,
+  "command": [
+    "/Users/levy/wrk/github/squares/packing/.venv/bin/python3",
+    "-m",
+    "devtools.angle_near45_triangle_control",
+    "--target-a3",
+    "--worker"
+  ],
+  "note": "complete worker return",
+  "parent_exit_code": 0,
+  "process_wall_seconds": 0.1802414170006159,
+  "stderr": "",
+  "stdout": "{\"half_angle_slabs\": [[\"-110880/50803079\", \"0\"], [\"0\", \"110880/50803079\"]], \"inequalities_checked\": 24, \"kind\": \"fixed-side-near45-a3-forcing-triangle\", \"point\": [\"3/2\", \"13/10\"], \"side\": \"1939/500\", \"status\": \"proved\", \"unresolved\": [], \"version\": 1, \"vertices\": [\"E\", \"F\", \"G\"]}\n"
+}

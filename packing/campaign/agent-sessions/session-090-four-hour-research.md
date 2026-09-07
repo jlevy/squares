@@ -174,7 +174,7 @@ session:
     clock_role: work
     objective: Complete independent A3 instrument review, prospectively test the canonical near45 implication and publish the next integrated checkpoint.
     bead: think-vttn
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: Both independent near45 implementations have source-free controls; scalar and density are retained at their exact unlaunched or source-blocked boundaries.
     budget_minutes: 30
@@ -184,10 +184,30 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: A review premise fails, either fixed10-second process cap expires, or this selection slice ends.
     fallback: Preserve the actual obligation and unspent allowances; never treat a failed sufficient vertex as a counterexample.
+    outcome: H108 accepted after one exact producer and independent reader. H109 selector adaptations passed separate source-free reviews; the single A1 experiment and analytic A2 transfer are prospectively recorded.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-119-h-108-near45-a3-forcing.md, packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-120-h-109-near45-a1-a2-forcing.md]
+    stop_reason: The A3 disposition and H109 readiness permit the last bounded target and checkpoint integration.
+    next_action: Commit the H109 protocol, pass records, run its sole target and conditional reader, then finalize the selected next discriminator.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Disposition the canonical A1/A2 implication and select the next restricted-angle discriminator while publishing the integrated checkpoint.
+    bead: think-drwv
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Independent selector reviews and the reflection argument passed; the remaining target costs seconds and fits before finalization.
+    budget_minutes: 20
+    started_at: '2026-09-07T03:51:22Z'
+    deadline_at: '2026-09-07T04:11:22Z'
+    expected_output: One complete H109 disposition, independently retained receipts, a prioritized successor and a pushed checkpoint with validation in flight.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: A launch guard fails, either frozen ten-second process cap expires, or the finalization reserve begins.
+    fallback: Preserve the precise unresolved or unlaunched result; no repeated target or automatic next block.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Finish only the already commissioned reviews at their original caps, then require a committed prospective protocol and passing records before the sole target.
+    next_action: Publish the committed prospective checkpoint and run only the single authorized A1 producer and conditional independent reader.
   primary_bead: think-9qrx
   status: in_progress
   budget:
@@ -656,7 +676,7 @@ session:
   - Updated narrative-count negative control fired in 1.568s using a private source snapshot.
   - Root independently reviewed the rational angle kernel and replayed 8 controls; 0.05s pytest, 0.57s process wall, 0.42s CPU.
   stop_reason: null
-  next_action: Continue PR105 with accepted H106, the next restricted-angle clause and fixed-site scalar readiness; density remains source-blocked and exp116 must not be retried unchanged.
+  next_action: Continue PR105 with accepted H106 and H108; review the bounded H109 A1/reflection adaptation before its prospective target. H107 remains unlaunched, density remains source-blocked, and exp116 must not be retried unchanged.
 ---
 # Session 090 — Four-Hour Research Block
 
@@ -860,20 +880,71 @@ For BC-252, `think-au9i` completed the fixed-site receipt adapter in the origina
 02:42:09–02:54:37 author interval.
 The root review found that a failed later LP can leave dual vectors indexed by a shorter
 row prefix; the receipt now names that prefix explicitly and has a regression.
-`think-36uc` owns the separate final review.
-The read-only protocol assessment ran 02:57:26–03:02:58 UTC under `think-u7c9`. Its
-proposed 45-minute target, 15-minute source controls and 20-minute candidate
-verification do not fit before the closing reserve.
-Reuse of already-running, unchanged proof-chain controls and a shorter external target
-cap need an explicit allocation decision; no scalar target is authorized by the adapter
-alone.
+The separate review under `think-36uc` passed all nine controls after adding a
+uniform-net input guard; it completed at 03:13:19 UTC. The read-only protocol assessment
+ran 02:57:26–03:02:58 UTC under `think-u7c9`. Its proposed 45-minute target, 15-minute
+source controls and 20-minute candidate verification do not fit before the closing
+reserve. The reviewed exp-118 protocol subsequently priced a 35-minute producer and a
+shared 20-minute sequential verification allowance, reusing unchanged proof-chain
+controls. Its 03:16 launch cutoff passed before the protocol was frozen.
+No target or verification process ran.
+H-107 is therefore blocked on a fresh allocation, not mathematically rejected.
+The protocol and adapter are retained for the next block.
 
 The published `2707ea39` checkpoint passed every required hosted check at 02:52:03 UTC.
-The full local gate remains active on that immutable snapshot.
+The full local gate completed successfully on that immutable snapshot in 1,496.68
+seconds. All required hosted checks also passed on the newer `1412664f` checkpoint.
 The fresh upstream fetch found no new main commit and no other outstanding PR. PR 105’s
 body now records the terminal scalar outcome, accepted auxiliary lemma, source-control
 limits and current validation scope.
 Core README and TUTORIAL exposition remains unchanged.
+
+## Second Continuous Clause and Final Research Slice
+
+Exp-119 accepted H-108: every contained canonical near-45-degree square avoiding the two
+points L and M contains A3. Avoiding P10 implies this weaker two-point antecedent, so
+the certificate proves a stronger implication than the registered P10 clause.
+It does not supply the missing localization premise or a global packing bound.
+
+The A3 producer author worked 03:10:48–03:21:45 UTC; the independent reader author
+worked 03:11:13–03:23:43 UTC. Separate reviews passed 13 producer and 17 reader controls
+without evaluating the target.
+The reader review ended at 03:27:57 UTC. After prospective commit `97cf8dde` and 31
+passing record checks, one producer and one independent reader ran from clean
+`bdc68784`. Both returned actual exit zero and proved all 24 inequalities over the two
+closed angle signs. Combined process cost was 0.67 seconds wall and 0.32 CPU; the
+independent reader operator worked 03:35:28–03:36:41 UTC. The full receipts are retained
+with exp-119.
+
+The read-only reflection assessment under `think-r6nd` took 03:28:48–03:32:08 UTC.
+Reflection across the canonical region exchanges L/M, A1/A2 and the two angle signs
+while preserving containment.
+Thus one A1 certificate under two-point avoidance would prove both A1 and A2; no second
+target is necessary.
+This argument does not assume that reflection preserves P10.
+
+H-109 registers that implication before evaluation.
+`think-ctwh` and `think-63q5` own parallel, 15-minute producer and independent-reader
+selector adaptations; neither may evaluate scientific geometry.
+Separate review is required before a committed prospective experiment and its sole
+bounded invocation. The A1 reader froze at 03:41:35 UTC after 5 minutes 23 seconds, and
+`think-rsvp` owns its independent review.
+The producer froze at 03:43:41 UTC after 7 minutes 32 seconds.
+Root review passed its 19 source-free controls in 0.35 seconds wall and 0.33 CPU. The
+independent reader review under `think-rsvp` ran 03:43:26–03:47:14 UTC and passed 22
+source-free controls in 0.50 seconds wall and 0.46 CPU. Both unchanged kernels and
+closed selector bindings are frozen at `57ad0dea`; exp-120 records the prospective
+single A1 check and analytic A2 transfer.
+No target has run at this checkpoint.
+
+The 03:47 upstream check found main unchanged and a new, green PR 106 for the n=17
+archive, source control and comprehensive review.
+Its only shared edited document is SYNOPSIS’s generated document-map block; the research
+instruments do not overlap.
+Merge it after it lands and regenerate shared views.
+Do not duplicate its source fetches or certificate replay.
+
+The finalization reserve remains 04:11:22 UTC; no scientific allowance is extended.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

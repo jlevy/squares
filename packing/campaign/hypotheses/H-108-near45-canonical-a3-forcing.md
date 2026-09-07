@@ -31,7 +31,7 @@ hypothesis:
   regime: Unchanged q, P10, A3 and canonical region; no point movement or angle narrowing.
   instance: {axis: n, point: 11}
   priority: 1
-  cost_estimate: Parallel20-minute author slices, independent10-minute review, then separately frozen10-second producer and10-second reader.
+  cost_estimate: Parallel 20-minute author slices, independent 10-minute review, then separately frozen 10-second producer and 10-second reader.
   prereqs: [complete source-free controls and independent mathematical review, committed prospective experiment]
   replication: false
   registered: '2026-09-07'
@@ -47,12 +47,16 @@ premise.
 Localization into the canonical region, A1 and A2 forcing, and both twelve-point
 clauses remain separate.
 
+Here `q=1939/500`, `A3=(3/2,13/10)` and the canonical center region is
+`R=[1,q/2]x[0,1]`. The angle neighborhood is `[pi/4-pi/720,pi/4+pi/720]`, and
+containment means containment in `[0,q]^2`.
+
 The unchanged point set comes from
 [the source-formula implementation](../../cases/stromquist/restricted_orientation.py).
 It contains the horizontal and vertical reflections of the four seeds `(1,1)`,
-`(q/2,1)`, `(3/2-q/4,q/2)`, and `(1/2+q/4,q/2)`. The proposed proof uses only `L=(1,1)`
-and `M=(q/2,1)`, so it tests a stronger sufficient implication: avoiding those two
-points already forces A3 under the other hypotheses.
+`(q/2,1)`, `(3/2-q/4,q/2)`, and `(1/2+q/4,q/2)`. The sufficient implication uses only
+`L=(1,1)` and `M=(q/2,1)`. Avoiding these two points is a weaker antecedent than
+avoiding P10, so proving that it forces A3 establishes a stronger theorem.
 Avoidance of a closed square is strict; a boundary hit is not avoidance.
 
 ## Reduction to Three Moving Vertices
@@ -68,8 +72,8 @@ Avoidance of L reduces to `CX-SY>1/2` or `SX+CY>1/2`. Avoidance of M reduces to
 respectively `CW>1`, `SW>1`, or `CX+S(W-X)-(C+S)Y>1`; each contradicts `W<1` and
 `C,S<1`.
 
-Thus, in square-frame coordinates `U=Cx+Sy`, `V=-Sx+Cy`, every avoider lies in the
-closed enlargement
+Thus, in square-frame coordinates `U=Cx+Sy`, `V=-Sx+Cy`, every square avoiding L and M
+under these hypotheses has its center in the closed enlargement
 
 $$
 K_\theta=\{U\le u_*,\ V\le v_*,\ SU+CV\ge h\},\qquad
@@ -92,9 +96,9 @@ At zero Delta the vertices coincide; at negative Delta the set is empty.
 Checking all three formal vertices even in that last case is a stronger sufficient test,
 not an assertion that those vertices are admissible centers.
 
-Membership of `A=(a,b)` consists of the four affine margins `1/2 +/- (Ca+Sb-U)` and
-`1/2 +/- (-Sa+Cb-V)`. Nonnegativity at all three vertices therefore covers the whole
-closed triangle. No center sampling or omitted boundary is involved.
+Containment of the marked point `A=(a,b)` requires nonnegativity of the four affine
+margins `1/2 +/- (Ca+Sb-U)` and `1/2 +/- (-Sa+Cb-V)`. Nonnegativity at all three
+vertices therefore covers the whole closed triangle, including its boundary.
 
 ## Exact Angle Certificate and Its Limits
 
@@ -114,14 +118,22 @@ A separate reader must reconstruct its own chart, vertex margins, polynomial ari
 and sign test. Shared exact field arithmetic remains an explicit common dependency.
 Source-free controls check identities, denominator signs, the empty/singleton/full
 triangle cases, genuine negative margins and complete packet admission.
-The earlier full-P10 source result is not a known-positive control for the stronger
-two-point antecedent.
+The earlier full-P10 source result is not a known-positive control for this stronger
+implication, whose two-point antecedent is weaker.
 
-No target has run at registration.
+No target had run at registration.
 A failed formal vertex or Bernstein test leaves the claim unresolved; it is not
 necessarily an avoider in the declared geometric domain.
 No subdivision increase, altered point or narrower interval is authorized by failure.
 Even success proves only A3 forcing, not H-036 or a global packing bound.
+
+## Outcome
+
+[Exp-119](../series/series-000-smoke-and-calibration/experiments/exp-119-h-108-near45-a3-forcing.md)
+accepted this clause on 2026-09-07. Both the producer and source-distinct reader proved
+all 24 closed-slab obligations with actual exit zero and no unresolved entries.
+The generic triangle implication supplies complete center coverage.
+Localization, A1/A2 forcing and twelve-point coverage are not inferred from this result.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

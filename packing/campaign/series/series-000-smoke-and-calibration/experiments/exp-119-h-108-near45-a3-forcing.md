@@ -13,7 +13,7 @@ experiment:
   hypotheses: [H-108]
   tier: confirmatory
   subject:
-    label: Fixed q1939/500 and A3 formulas throughout both closed near-45 angle signs
+    label: Fixed q=1939/500 and A3 formulas throughout both closed near-45 angle signs
     engine: Exact formal-vertex producer and independent polarized-Bernstein reader
     engine_commit: bdc687841467599231b59447b38f9037625deb43
     assurance: verified
@@ -52,23 +52,60 @@ experiment:
       independent file replay with a separate ten-second external and internal cap.
       No retries, subdivision, point changes, side changes or angle narrowing.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-119-h-108-near45-a3-forcing/packet.json
-  lease: {expires: '2026-09-07T03:45:00Z', host: Session 090 coordinator}
-  results: []
+  effort:
+    timebox: One ten-second producer and one ten-second independent reader, each invoked once
+    wall_seconds: 0.67
+    stopped_by: criterion
+  results:
+  - shape: determination
+    role: outcome
+    question: Does every declared canonical near-45 P10 avoider contain A3?
+    outcome: criterion_met
+    checked_by: >-
+      Producer completed all 24 formal-vertex inequalities with actual exit zero.
+      The source-distinct reader returned actual exit zero, decision proved,
+      six vertex-slab checks, 24 independent inequalities and no unresolved entries.
+      The generic two-point implication and outward-angle premise were reviewed
+      separately; no localization or global packing conclusion follows.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Complete independently verified A3 forcing in the declared canonical near-45 domain.
-    reason: Prospectively frozen; no target has run.
+    reason: The complete canonical A3 forcing implication passed the independent exact reader on both closed angle signs.
+    commit: 97cf8dde
 ---
 # exp-119 — Near-45 A3 Forcing
+
+H-108 is accepted. The sole producer ran after the observed 03:34:05 UTC preflight and
+before 03:34:32 UTC, returning actual exit zero, all 24 inequalities and no unresolved
+entries. The independent reader ran once at the observed 03:35:51 UTC boundary and
+returned actual exit zero, six vertex-slab checks, all 24 independent inequalities and
+the exact side, point and slab identity.
+Its operator interval was 03:35:28–03:36:41 UTC. Both commands used clean immutable
+`bdc68784`.
+
+The prospective protocol was committed at `97cf8dde`; all 31 record checks passed in
+29.92 seconds before dispatch.
+Producer process cost was 0.57 seconds wall and 0.23 CPU seconds; the independent reader
+used 0.10 seconds wall and 0.09 CPU seconds.
+Total process costs were 0.67 seconds wall and 0.32 CPU seconds, distinct from author,
+review and operator time.
+Neither ten-second allowance was repeated or extended.
+The result directory retains both streams, the packet, worker log and independent
+replay.
+
+This proves only the canonical A3 clause.
+
+## Retained Prospective Protocol
 
 This tests [H-108](../../../hypotheses/H-108-near45-canonical-a3-forcing.md), one
 auxiliary clause of H-036. The hand-derived reduction proves that a canonical contained
 square avoiding just L and M lies in the closed triangle used by the instrument.
-Avoiding P10 implies that stronger antecedent.
+Avoiding P10 implies that weaker two-point antecedent, so the proved implication is
+stronger than the registered P10 claim.
 The reader independently derives its own margins and degree-four polarized Bernstein
 coefficients; it does not trust the producer’s coefficients or counters as a proof.
 
-The producer review under `think-vnwo` accepts the complete triangle argument and its
+The producer review under `think-vnwo` accepted the complete triangle argument and its
 positive denominator clearing.
 Its thirteen controls independently passed in 0.38 seconds wall and 0.32 CPU. The
 separate reader review under `think-1bxf` completed at 03:27:57 UTC: seventeen

@@ -267,6 +267,7 @@ Row 86 belongs to the pending refined-core transport.
 | 100 | Continuous near-axis ten-point coverage | registered | [H-106](hypotheses/H-106-continuous-near-axis-ten-point-cover.md) | Both closed angle signs and every contained center; failed tile labels remain unresolved, not a packing counterexample. |
 | 101 | Complete rows on the retained scalar sites | registered | [H-107](hypotheses/H-107-fixed-site-scalar-completion.md) | Fix the terminal exp116 sites and complete missing rows before adapting support; only exact coverage accepts. |
 | 102 | Force A3 for a canonical near-45 avoider | registered | [H-108](hypotheses/H-108-near45-canonical-a3-forcing.md) | A two-point avoidance implication reduces to three moving vertices and 24 exact quartics; failed sufficient assignments remain unresolved. |
+| 103 | Force A1 and transfer the proof to A2 by local reflection | registered | [H-109](hypotheses/H-109-near45-canonical-a1-a2-forcing.md) | The two-point implication is preserved by canonical reflection; one A1 certificate supplies A2 without another target run. |
 
 Exact basis recovery and Lean replay support the relevant candidate or assurance bead;
 they are not additional mathematical hypotheses without a specific method comparison.
