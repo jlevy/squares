@@ -73,7 +73,7 @@ Native command, step and run receipts are retained for every pair:
 | 2 | [Control 2](../checkpoints/VE-004-control-2.tar.gz) | [Candidate 2](../checkpoints/VE-004-candidate-2.tar.gz) |
 | 3 | [Control 3](../checkpoints/VE-004-control-3.tar.gz) | [Candidate 3](../checkpoints/VE-004-candidate-3.tar.gz) |
 
-## Hosted Failure Evidence
+## Hosted Failure and Recovery
 
 The hosted observations motivated the candidate; they are not a matched performance
 experiment. Their native command, step and run receipts are preserved below. The prior
@@ -92,6 +92,21 @@ running. Other unchanged commands also slowed, including commands that ran durin
 final tail. Runner metadata does not identify a hardware or load cause. Starting the
 verifier earlier addresses the measured queue delay; it does not explain or eliminate
 hosted-runner variation.
+
+The first hosted repair run,
+[34158723317](https://github.com/jlevy/squares/actions/runs/34158723317), passed all
+required checks at branch head `d915dfa9` (tested merge `4b1d71cd`). The checks tier
+passed all 48 steps in 116.92 seconds, within the unchanged runtime band; exact
+verification took 100.07 seconds. Its [native receipts](../checkpoints/VE-004-ci-success.tar.gz)
+remain separate from the local comparison. This is a successful hosted checkpoint,
+not a matched estimate of hosted speedup.
+
+The full checkpoint on measured candidate `ed595fb6` also passed all 66 steps in
+1616.00 seconds. Its [native archive](../checkpoints/VE-004-full-ed595fb6.tar.gz) retains
+3,433 passing fast tests, 98 passing slow tests, all 55 passing exhaustive exact tests
+and the negative controls. One vendored-document exclusion test was skipped because
+the isolated checkout lacks the kpress submodule. This closes the full correctness
+obligation; it does not extend the checks-tier performance result to the full gate.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

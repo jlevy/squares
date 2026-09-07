@@ -3219,7 +3219,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-093.yaml` | session-093 | 673 | 6.07 h | 1.99 h | 1.99 h | yes |
 | `codex-task-tree-session-094.yaml` | session-094 | 562 | 4.53 h | 1.82 h | 1.82 h | yes |
 | `codex-task-tree-session-095.yaml` | session-095 | 476 | 4.08 h | 1.69 h | 1.69 h | yes |
-| `codex-task-tree-session-096.yaml` | session-096 | 196 | 1.87 h | 1.07 h | 1.07 h | yes |
+| `codex-task-tree-session-096.yaml` | session-096 | 590 | 4.33 h | 3.1 h | 3.15 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

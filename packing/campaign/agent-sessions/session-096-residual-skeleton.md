@@ -317,7 +317,7 @@ session:
   - Baseline013e772a is clean and pushed. Its code parentaeef535f passed all66 full checks in1752.00 seconds; the final documentation delta passed45 push checks in140.20 seconds and hosted CI.
   - Local and source worktree inventories end at session095. The complete paginated PR111 file inventory contains session093-atlas-expansion-to-324, not session096; this branch allocates the next sequential session096. The external093 naming collision with landed source work is separate from this allocation.
   - Baseline aeef535f records tier passed31 of66 steps in37.05 seconds before registry integration; exit0. This is a baseline check, not validation of the new documents.
-  - Cost receipt refreshed through18:24UTC preserves the exact17:20 baseline and nondecreasing totals; it remains an incomplete lower bound. Session092 accounting is unchanged. Pre17:20 orientation and post18:24 validation/publication are outside this snapshot.
+  - Publication-recovery cost receipt refreshed through20:28:54UTC preserves the exact17:20 baseline and nondecreasing totals; it remains an incomplete lower bound. Session092 accounting is unchanged. Pre17:20 orientation and post20:28:54 validation/publication are outside this snapshot. The earlier18:24 receipt remains in Git history.
   - 'Initial working-tree records run failed three steps in34.80 seconds: two repository walkers entered existing attic fixtures, and the declared-command checker parsed prose after the phase1 command. The command is corrected; subsequent validation uses the clean immutable checkout. No scope, formatter exclusions or validation thresholds changed.'
   - "Publication scope review18:05:11\u201318:06:27 found one minor cost-label ambiguity, corrected in the PR draft. It found no mathematical overclaim, witness conflation or ownership violation; no gate result was inferred."
   - The full127fd112 invocation retains the ordinary transcript, including step/test durations, but PACKING_VALIDATION_ARTIFACT_DIR was not set, so structured command and JUnit receipts are unavailable for that invocation. This limits performance attribution and supports no optimization claim. The final-delta invocation will enable the existing artifact directory; the full run is not repeated for telemetry alone.
@@ -327,6 +327,7 @@ session:
   - 'full gate: fast at 127fd112: passed (62 of66 steps in324.34 seconds; 3432 tests passed and one skipped; exit0)'
   - The fast recovery gate retains structured command, provenance, step and JUnit artifacts through the existing artifact-directory setting. No runtime or test threshold changed. Its passing result and the six-test recovery do not relabel the original full invocation as passed.
   - Terminal record freeze uses the observed18:39:20UTC checkpoint. The final documentation delta, push and hosted CI are pending at this freeze; their actual commit-bound receipts belong to PR110. The integration bead remains open until publication succeeds.
+  - 'full gate: full at ed595fb6: passed (all66 steps in1616.00 seconds;3433 fast tests passed with one vendored-document exclusion skip,98 slow tests and55 exhaustive exact tests passed; exit0)'
   stop_reason: BC282 design and independent admission are complete, with a useful exact reduction and no admitted target. Stop local scientific work on that evidence, not on budget exhaustion. Freeze the terminal record for separately checked publication; PR110 retains the actual final-delta and hosted outcomes without a self-referential claim about an unrun commit.
   next_action: After final-delta validation and publication, retain existing BC-264 / think-mq0d as the next portfolio pricing entry under its separate owner. Check live ownership and accept its kernel-specific prerequisites before at most30 minutes of feature and full-verification pricing; no automatic target or hierarchy.
   resource_rollups:
@@ -427,6 +428,24 @@ evidence admission support that restricted conclusion. Native receipts, raw outp
 JUnit and the original failed setup are retained in the engineering campaign.
 No mathematical verifier, runtime threshold or worker count changed. Full-checkpoint
 and hosted-CI outcomes remain separate obligations, not inferred speedups.
+
+Hosted run 34158723317 passed all required checks at `d915dfa9`; its checks tier
+completed all 48 steps in 116.92 seconds inside the unchanged band. The retained native
+receipts identify tested merge `4b1d71cd`. This establishes a passing hosted checkpoint,
+not a hosted speedup estimate.
+
+The full checkpoint at `ed595fb6` passed all 66 steps in 1616.00 seconds, with 3,433
+fast tests passed, 98 slow tests passed and all 55 exhaustive exact tests passed. One
+vendored-document exclusion test was skipped because the isolated checkout lacks the
+kpress submodule. All negative controls passed. The
+[native checkpoint](../../benchmarks/validation-efficiency/checkpoints/VE-004-full-ed595fb6.tar.gz)
+retains source, commands, step results and JUnit. This is full correctness evidence,
+not a full-checkpoint performance comparison.
+
+The final publication review at 20:21:56–20:23:07 found no attribution or allocation
+error and required the refreshed cumulative two-session cost table in the PR. These frozen
+receipts support final documentation publication; its own checks are recorded on
+[PR110](https://github.com/jlevy/squares/pull/110).
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
