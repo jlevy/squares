@@ -3,9 +3,9 @@ type: is
 id: is-01m1xt8a0k997fn657rh5qxnbt
 title: Session095 fixed collision cover and independent support-ceiling adoption
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 18
+version: 19
 spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels: []
 dependencies: []
@@ -27,7 +27,11 @@ child_order_hints:
   - is-01m1y0j13gmzjvjxbayz138qgk
   - is-01m1y0s5qp740s06c6snv3v83t
 created_at: 2026-09-07T11:32:30.855Z
-updated_at: 2026-09-07T15:51:03.666Z
+updated_at: 2026-09-07T15:53:35.921Z
+closed_at: 2026-09-07T15:53:35.920Z
+close_reason: "Session095 complete: terminal exp127 axis no_chain; accepted exp128 attained old-support optimum11, H099 refuted only on that support; independent BC265 calibration/strategy reports reconciled. Final083a1ba7 published with passing local push and all required hosted CI, no merge conflicts. Selected future entryBC264/H114 think-mq0d; no new target authorized. Credit interruption excluded from active research time; preserved original scientific caps, partial cost cutoff and unmeasured tail."
+resolution: null
+duplicate_of: null
 ---
 Planned final two-hour slice of the eight-active-hour portfolio,11:49–13:49 UTC absent interruption; reserve13:29–13:49 for checkpoint. Continue primary H124/BC255/think-7e72 with one fixed Cstar axiscover only after immutable readiness and a committed protocol. In parallel adopt BC259/think-nwss seven-row ceiling11 on existing support in30minutes plus atmost30conditionalminutes. Root owns integration/IDs/PR109; max mathematics/high mechanical. No new scientific invocation authorized by this planning bead.
 
