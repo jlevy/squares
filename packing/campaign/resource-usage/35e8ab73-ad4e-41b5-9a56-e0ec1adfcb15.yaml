@@ -1,0 +1,748 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: 35e8ab73-ad4e-41b5-9a56-e0ec1adfcb15.jsonl
+    sha256: f53b10267827337a43176faa96199f429f0a80f1cddbb0d0e05f471032ed0b6f
+    bytes: 21660873
+    records: 1331
+    session_id: 35e8ab73-ad4e-41b5-9a56-e0ec1adfcb15
+    harness_versions:
+    - 2.1.260
+  span:
+    started_at: '2026-09-07T16:22:16.206Z'
+    ended_at: '2026-09-07T19:09:30.005Z'
+    wall_seconds: 10033.799
+  turns:
+    assistant: 364
+    sidechain: 0
+    by_model:
+      claude-fable-5-1: 364
+    by_thinking_level:
+      xhigh: 364
+    by_model_and_thinking_level:
+      claude-fable-5-1 @ xhigh: 364
+    by_branch:
+      claude/kpress-pt-serif-fonts-1ec7e6: 364
+    latency:
+      count: 364
+      total_seconds: 4333.038
+      median_seconds: 4.308
+      max_seconds: 208.763
+  tokens:
+    cache_creation_input_tokens: 2078836
+    cache_read_input_tokens: 143752209
+    ephemeral_1h_input_tokens: 2078836
+    ephemeral_5m_input_tokens: 0
+    input_tokens: 8936
+    output_tokens: 1167564
+    thinking_tokens: 435371
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 2078836
+      cache_read_input_tokens: 143752209
+      ephemeral_1h_input_tokens: 2078836
+      ephemeral_5m_input_tokens: 0
+      input_tokens: 8936
+      output_tokens: 1167564
+      thinking_tokens: 435371
+  tool_calls:
+    total: 213
+    total_seconds: 918.129
+    share_of_wall: 0.0915
+    errors: 6
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 1
+    one_off_code:
+      count: 32
+      total_seconds: 188.639
+      median_seconds: 4.636
+      max_seconds: 26.218
+    by_tool:
+      Bash:
+        count: 136
+        total_seconds: 795.046
+        median_seconds: 3.164
+        max_seconds: 98.785
+      Agent:
+        count: 12
+        total_seconds: 34.236
+        median_seconds: 2.472
+        max_seconds: 7.197
+      mcp__Claude_Browser__browser_batch:
+        count: 4
+        total_seconds: 31.026
+        median_seconds: 5.327
+        max_seconds: 17.439
+      mcp__Claude_Browser__navigate:
+        count: 2
+        total_seconds: 17.766
+        median_seconds: 8.883
+        max_seconds: 14.758
+      SendUserFile:
+        count: 4
+        total_seconds: 17.396
+        median_seconds: 1.968
+        max_seconds: 12.393
+      mcp__Claude_Browser__preview_start:
+        count: 2
+        total_seconds: 9.927
+        median_seconds: 4.964
+        max_seconds: 5.292
+      Write:
+        count: 12
+        total_seconds: 5.089
+        median_seconds: 0.05
+        max_seconds: 4.553
+      Read:
+        count: 29
+        total_seconds: 4.92
+        median_seconds: 0.077
+        max_seconds: 1.764
+      mcp__Claude_Browser__preview_stop:
+        count: 1
+        total_seconds: 2.324
+        median_seconds: 2.324
+        max_seconds: 2.324
+      Edit:
+        count: 9
+        total_seconds: 0.333
+        median_seconds: 0.035
+        max_seconds: 0.061
+      Skill:
+        count: 1
+        total_seconds: 0.039
+        median_seconds: 0.039
+        max_seconds: 0.039
+      ToolSearch:
+        count: 1
+        total_seconds: 0.027
+        median_seconds: 0.027
+        max_seconds: 0.027
+    by_command:
+      packing-validate && ✗ && error && not && packing-validate:
+        count: 1
+        total_seconds: 98.785
+        median_seconds: 98.785
+        max_seconds: 98.785
+      git && packing-validate:
+        count: 1
+        total_seconds: 55.489
+        median_seconds: 55.489
+        max_seconds: 55.489
+      python3:
+        count: 3
+        total_seconds: 32.462
+        median_seconds: 7.861
+        max_seconds: 18.251
+      python3 && rm && python:
+        count: 2
+        total_seconds: 32.431
+        median_seconds: 16.215
+        max_seconds: 20.867
+      ls:
+        count: 7
+        total_seconds: 26.54
+        median_seconds: 2.029
+        max_seconds: 18.491
+      ? 'font-style: && font-weight: && src: && unicode-range: && }} && font-style: && font-weight:
+        && src: && unicode-range: && }} && font-style: && font-weight: && src: && unicode-range:
+        && }} && font-style: && font-weight: && src: && unicode-range: && }} && .kpress &&
+        * && font-style: && * && operator && .kpress && .kpress && font-style: && .kpress
+        && font-weight: && .kpress && font-style: && font-weight: && .kpress && font-style:
+        && font-weight: && src: && size-adjust: && }} && font-style: && }} && top:0 && left:0
+        && z-index:9999 && background:#c00 && color:#fff && 1.6 && python3 && python3 && ls'
+      : count: 1
+        total_seconds: 26.218
+        median_seconds: 26.218
+        max_seconds: 26.218
+      ? devtools.render_explainer && devtools.render_explainer && devtools.check_print_layout
+        && devtools.inspect_explainer_typography && devtools.render_explainer_pdf && ls
+      : count: 1
+        total_seconds: 22.226
+        median_seconds: 22.226
+        max_seconds: 22.226
+      python3 && python:
+        count: 1
+        total_seconds: 17.046
+        median_seconds: 17.046
+        max_seconds: 17.046
+      ? devtools.render_explainer && devtools.check_print_layout && devtools.inspect_explainer_typography
+        && devtools.render_explainer_pdf && devtools.compare_math_fonts
+      : count: 1
+        total_seconds: 16.613
+        median_seconds: 16.613
+        max_seconds: 16.613
+      devtools.check_print_layout && devtools.check_print_layout && devtools.inspect_explainer_typography:
+        count: 1
+        total_seconds: 16.247
+        median_seconds: 16.247
+        max_seconds: 16.247
+      tbd && tbd && tbd:
+        count: 1
+        total_seconds: 15.937
+        median_seconds: 15.937
+        max_seconds: 15.937
+      mkdir && cp && python:
+        count: 1
+        total_seconds: 15.796
+        median_seconds: 15.796
+        max_seconds: 15.796
+      uv.toml && probe && Error && passed && failed && advance && family && numerator:
+        count: 1
+        total_seconds: 13.263
+        median_seconds: 13.263
+        max_seconds: 13.263
+      ls && Georgia && font_metrics.py:
+        count: 1
+        total_seconds: 13.022
+        median_seconds: 13.022
+        max_seconds: 13.022
+      mkdir:
+        count: 1
+        total_seconds: 12.681
+        median_seconds: 12.681
+        max_seconds: 12.681
+      ls && index.html && rm && make:
+        count: 1
+        total_seconds: 11.866
+        median_seconds: 11.866
+        max_seconds: 11.866
+      python && None) && print(typed) && uv.toml && uv.toml && uv.toml:
+        count: 1
+        total_seconds: 11.276
+        median_seconds: 11.276
+        max_seconds: 11.276
+      devtools.render_explainer && ls:
+        count: 2
+        total_seconds: 10.033
+        median_seconds: 5.017
+        max_seconds: 5.232
+      ? 'git && git && font-family:KaTeX_Math && font-style:italic && font-weight:400 && font-family:KaTeX_Main
+        && font-style:normal && font-weight:400 && uppercase && font-style: && font-weight:
+        && src: && unicode-range: && size-adjust: && }} && font-style: && font-weight: &&
+        src: && unicode-range: && size-adjust: && }} && font-style: && }} && skew && end &&
+        python3 && cp && rm && python'
+      : count: 1
+        total_seconds: 9.817
+        median_seconds: 9.817
+        max_seconds: 9.817
+      ruff && ruff && basedpyright:
+        count: 2
+        total_seconds: 9.575
+        median_seconds: 4.788
+        max_seconds: 6.153
+      tbd && tbd:
+        count: 3
+        total_seconds: 9.126
+        median_seconds: 1.017
+        max_seconds: 7.606
+      open:
+        count: 2
+        total_seconds: 9.093
+        median_seconds: 4.547
+        max_seconds: 6.203
+      ? 'python3 && s && print(document-map: added) && tbd && write && freshness && katex,
+        && add && metrics && vitest && Playwright && golden && extend && run && variant &&
+        tbd'
+      : count: 1
+        total_seconds: 9.076
+        median_seconds: 9.076
+        max_seconds: 9.076
+      tbd create:
+        count: 1
+        total_seconds: 9.052
+        median_seconds: 9.052
+        max_seconds: 9.052
+      cp && python3 && cp && rm && python:
+        count: 1
+        total_seconds: 8.973
+        median_seconds: 8.973
+        max_seconds: 8.973
+      sed:
+        count: 7
+        total_seconds: 8.661
+        median_seconds: 0.274
+        max_seconds: 3.461
+      ? 'font-style: && font-weight: && src: && unicode-range: && }} && font-style: && font-weight:
+        && src: && unicode-range: && }} && python3 && rm && python'
+      : count: 1
+        total_seconds: 8.026
+        median_seconds: 8.026
+        max_seconds: 8.026
+      (tmp_path && (tmp_path && uv.toml && uv.toml && uv.toml && uv.toml && failed && assert:
+        count: 1
+        total_seconds: 7.874
+        median_seconds: 7.874
+        max_seconds: 7.874
+      tbd && tbd && tbd && vdk5 && azvf && v83x && 58av && do8b && 0vju && 0kmq:
+        count: 1
+        total_seconds: 7.28
+        median_seconds: 7.28
+        max_seconds: 7.28
+      python && top:0 && left:0 && z-index:9999 && [h-ops], VARIANTS && page.wait_for_timeout(150) && print(wrote,:
+        count: 1
+        total_seconds: 7.13
+        median_seconds: 7.13
+        max_seconds: 7.13
+      git && gh && KaTeX, && `--kpress-katex-size-prose` && reverts && `katex`), && goldens && `python:
+        count: 1
+        total_seconds: 7.062
+        median_seconds: 7.062
+        max_seconds: 7.062
+      uv.toml && uv.toml && ERROR) && passed:
+        count: 1
+        total_seconds: 6.81
+        median_seconds: 6.81
+        max_seconds: 6.81
+      gh pr:
+        count: 2
+        total_seconds: 6.661
+        median_seconds: 3.331
+        max_seconds: 5.801
+      uv python:
+        count: 1
+        total_seconds: 6.379
+        median_seconds: 6.379
+        max_seconds: 6.379
+      ? python3 && H, && `+ && PT && `≥ && J, && inside && the && the && `θ_k`, && two &&
+        a && the && print(route J recorded) && flowmark && codespell@2.4.2 && devtools.render_document_map
+        && devtools.check_documentation && git && git
+      : count: 1
+        total_seconds: 6.216
+        median_seconds: 6.216
+        max_seconds: 6.216
+      flowmark && make:
+        count: 1
+        total_seconds: 5.997
+        median_seconds: 5.997
+        max_seconds: 5.997
+      python3 && print(edits applied:, && devtools.check_documentation && tbd:
+        count: 1
+        total_seconds: 5.982
+        median_seconds: 5.982
+        max_seconds: 5.982
+      uv run python -m devtools.render_pr_rollup:
+        count: 2
+        total_seconds: 5.821
+        median_seconds: 2.91
+        max_seconds: 3.242
+      npx:
+        count: 1
+        total_seconds: 5.803
+        median_seconds: 5.803
+        max_seconds: 5.803
+      python3 && cp && ls:
+        count: 2
+        total_seconds: 5.776
+        median_seconds: 2.888
+        max_seconds: 3.709
+    by_command_family:
+      toolchain:
+        count: 49
+        total_seconds: 271.777
+        median_seconds: 4.485
+        max_seconds: 20.867
+      project:
+        count: 10
+        total_seconds: 176.602
+        median_seconds: 5.017
+        max_seconds: 98.785
+      other:
+        count: 22
+        total_seconds: 114.969
+        median_seconds: 3.704
+        max_seconds: 26.218
+      vcs:
+        count: 16
+        total_seconds: 110.036
+        median_seconds: 3.303
+        max_seconds: 55.489
+      inspection:
+        count: 34
+        total_seconds: 78.805
+        median_seconds: 0.644
+        max_seconds: 18.491
+      filesystem:
+        count: 5
+        total_seconds: 42.857
+        median_seconds: 8.973
+        max_seconds: 15.796
+    invoked:
+      echo: 303
+      head: 149
+      cd: 138
+      grep: 136
+      tail: 99
+      sed: 67
+      ls: 47
+      python3: 26
+      uv uv.toml: 21
+      cat: 20
+      wc: 19
+      the: 15
+      'font-style:': 14
+      'font-weight:': 11
+      '}}': 11
+      git status: 11
+      tbd shortcut: 9
+      git kpress: 9
+      'src:': 9
+      rm: 9
+      'unicode-range:': 8
+      uv run python: 8
+      uv run python -m devtools.check_documentation: 8
+      cp: 6
+      .kpress: 6
+      tbd update: 6
+      awk: 6
+      python: 6
+      git log: 6
+      uv run python -m devtools.render_explainer: 5
+      export: 5
+      git ls-files: 4
+      '*': 4
+      git diff: 4
+      tbd list: 4
+      s: 4
+      uvx flowmark: 4
+      +%s): 4
+      failed: 4
+      npx: 4
+      Slot: 4
+      Reading: 4
+      KaTeX: 4
+      const: 4
+      git show: 3
+      sort: 3
+      'size-adjust:': 3
+      tbd create: 3
+      uv run python -m devtools.render_document_map: 3
+      launch: 3
+      metrics: 3
+      make lint-check: 3
+      make test: 3
+      Error: 3
+      git commit: 3
+      gh pr: 3
+      uv run python -m devtools.render_pr_rollup: 3
+      katex: 2
+      git submodule: 2
+      tbd template: 2
+      git check-ignore: 2
+      top:0: 2
+      left:0: 2
+      z-index:9999: 2
+      '120': 2
+      which: 2
+      mkdir: 2
+      python3 -m devtools.check_print_layout: 2
+      open: 2
+      '`check_print_layout`': 2
+      and: 2
+      Safari: 2
+      print(doc patched): 2
+      write: 2
+      freshness: 2
+      katex,: 2
+      add: 2
+      vitest: 2
+      Playwright: 2
+      golden: 2
+      tbd dep: 2
+      set: 2
+      font-weight:400: 2
+      t: 2
+      skip: 2
+      channel: 2
+      def: 2
+      ruff check: 2
+      ruff format: 2
+      basedpyright: 2
+      uv run python -m devtools.check_print_layout: 2
+      uv run python -m devtools.inspect_explainer_typography: 2
+      uv run python -m devtools.render_explainer_pdf: 2
+      uv run packing-validate: 2
+      ERROR): 2
+      passed: 2
+      ✗: 2
+      error: 2
+      print(parity test narrowed): 2
+      Ranges: 2
+      Test: 2
+      (tmp_path: 2
+      '[0-9]+': 2
+      git add: 2
+      uv run python -m devtools.log_rollup: 2
+      font: 1
+      .css$: 1
+      .scss$: 1
+      '@font-face': 1
+      <link: 1
+      <script: 1
+      .woff: 1
+      unicode-range: 1
+      font-sans: 1
+      font-mono: 1
+      LocalPunct: 1
+      font-size-adjust: 1
+      tr: 1
+      uv sync: 1
+      SITE_URL: 1
+      output: 1
+      write_text: 1
+      stix: 1
+      latin: 1
+      times: 1
+      georgia: 1
+      cambria: 1
+      libertinus: 1
+      termes: 1
+      Georgia: 1
+      uv run python font_metrics.py: 1
+      print(---): 1
+      find: 1
+      sqrt: 1
+      tan: 1
+      cos: 1
+      sin: 1
+      arctan: 1
+      sum: 1
+      mathbf: 1
+      mathrm: 1
+      text: 1
+      operatorname: 1
+      le: 1
+      ge: 1
+      lt: 1
+      gt: 1
+      approx: 1
+      sigma: 1
+      pi: 1
+      dfrac: 1
+      uniq: 1
+      operator: 1
+      background:#c00: 1
+      color:#fff: 1
+      '1.6': 1
+      '"$f":\{[^}]*\}': 1
+      '49': 1
+      '110': 1
+      '72': 1
+      '43': 1
+      '116': 1
+      '107': 1
+      '66': 1
+      xHeight:[[^]]*]: 1
+      sup1:[[^]]*]: 1
+      sub1:[[^]]*]: 1
+      num1:[[^]]*]: 1
+      gs: 1
+      cmap: 1
+      k: 1
+      gs[name].draw(pen): 1
+      adv: 1
+      upper: 1
+      lower: 1
+      jpg: 1
+      svg: 1
+      footer: 1
+      common-doc-guidelines: 1
+      'title:': 1
+      print(edits applied:,: 1
+      tbd close: 1
+      usage: 1
+      argparse: 1
+      SYNOPSIS: 1
+      '[h-ops], VARIANTS': 1
+      page.wait_for_timeout(150): 1
+      print(wrote,: 1
+      python3 -m devtools.inspect_explainer_typography: 1
+      check: 1
+      'print(document-map: added)': 1
+      extend: 1
+      run: 1
+      variant: 1
+      deferred: 1
+      kpress: 1
+      ? "n\n       squares"
+      : 1
+      verification: 1
+      print(spec and brief patched): 1
+      tbd ready: 1
+      vdk5: 1
+      azvf: 1
+      v83x: 1
+      58av: 1
+      do8b: 1
+      0vju: 1
+      0kmq: 1
+      git branch: 1
+      git rev-parse: 1
+      font-family:KaTeX_Math: 1
+      font-style:italic: 1
+      font-family:KaTeX_Main: 1
+      font-style:normal: 1
+      uppercase: 1
+      skew: 1
+      end: 1
+      'print(kpress index: added)': 1
+      'print(document-map: research entry removed)': 1
+      H,: 1
+      '`+': 1
+      PT: 1
+      '`≥': 1
+      J,: 1
+      inside: 1
+      '`θ_k`,': 1
+      two: 1
+      a: 1
+      print(route J recorded): 1
+      uvx codespell@2.4.2: 1
+      tbd show: 1
+      tbd status: 1
+      kpress-design.md: 1
+      see: 1
+      tasks: 1
+      print(tracking lines updated): 1
+      make install: 1
+      fixture: 1
+      chromium: 1
+      BROWSER: 1
+      sync_playwright: 1
+      executable: 1
+      sleep: 1
+      'padding-block-start:': 1
+      print(test updated): 1
+      index.html: 1
+      not: 1
+      uv run packing-validate null: 1
+      uv python: 1
+      slot: 1
+      print(css test updated): 1
+      ', The': 1
+      ', Each': 1
+      declaring: 1
+      A: 1
+      print(docs patched): 1
+      ^s*$: 1
+      (other): 39
+    invoked_families:
+      inspection: 548
+      shell: 451
+      other: 377
+      toolchain: 88
+      vcs: 55
+      project: 34
+      filesystem: 17
+    by_shell_shape:
+      compound:
+        count: 97
+        total_seconds: 598.256
+        median_seconds: 2.909
+        max_seconds: 98.785
+      python_heredoc:
+        count: 27
+        total_seconds: 171.914
+        median_seconds: 5.074
+        max_seconds: 26.218
+      python_inline:
+        count: 5
+        total_seconds: 16.725
+        median_seconds: 2.491
+        max_seconds: 6.81
+      heredoc:
+        count: 4
+        total_seconds: 7.657
+        median_seconds: 1.723
+        max_seconds: 4.081
+      simple:
+        count: 2
+        total_seconds: 0.367
+        median_seconds: 0.183
+        max_seconds: 0.194
+      pipeline:
+        count: 1
+        total_seconds: 0.127
+        median_seconds: 0.127
+        max_seconds: 0.127
+    by_thinking_level:
+      xhigh:
+        count: 213
+        total_seconds: 918.129
+        median_seconds: 2.392
+        max_seconds: 98.785
+    shell_traits:
+      pipes: 121
+      redirects_output: 24
+      substitutes: 5
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 11
+    queue_operations:
+      enqueue: 36
+      dequeue: 19
+      remove: 16
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'
