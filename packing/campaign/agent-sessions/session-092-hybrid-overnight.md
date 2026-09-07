@@ -1799,6 +1799,8 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
   checks:
+  - 'full gate: full at 7b967d34: passed (66 steps in 1604.44 seconds; immutable mathematical checkpoint)'
+  - The final documentation push check at b716e03f failed in 140.22 seconds. The synopsis retained the older selected entry and the stopped session omitted its canonical full-gate declaration; two existing behavioral tests reproduced those record defects. The correction aligns all live handoff pointers with BC-282 and names the actual passed checkpoint without changing any checker or mathematical result.
   - Recovery accounting through15:41:25UTC preserves the exact original baseline and nondecreasing cumulative timings. It records65804.238 agent-seconds over25979.477 active-union seconds within33013 elapsed-envelope seconds, including39824.761 overlap seconds. The original-deadline snapshot separately records65381.081 agent-seconds and25560.729 active-union seconds. One live coordinator makes the latest receipt incomplete; recovery and interruption are not eight hours of uninterrupted mathematical attention.
   - Recovered at15:34:37UTC after the user asked to continue. Immutable7b967d34 passed all66 full checks in1604.44seconds, including2848 fast tests with1 skipped,98 geometry tests and55 sweep tests. Its31 records passed24.07seconds and45 push steps167.65seconds. All actual process exits were zero. The new delta contains records and documentation only and receives its own push floor.
   - The three final documentation delegates returned account usage-limit errors without artifacts. Their original13:46 deadlines remain fixed and their statuses are blocked. The coordinator checks the final native scopes, successor boundaries and reader-document decisions from retained evidence; this is not another independent mathematical audit.
@@ -1853,7 +1855,7 @@ session:
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-092.yaml
   stop_reason: Account usage interrupted final documentation reviews and publication after all scientific audits were complete. The coordinator resumed on the user continuation at15:34:37 only to reconcile, validate and publish existing work; no scientific cap or original session deadline is extended.
-  next_action: After the final record-only push gate and publication, start a separately allocated BC282 design from Agenda028 and think-s6e7. Require the20-minute complete skeleton/alternative table and10-minute independent admission before any later target; no automatic retry or new eight-hour block.
+  next_action: After the final record-only push gate and publication, start a separately allocated BC-282 design from Agenda 028 and think-s6e7. Require the 20-minute complete skeleton/alternative table and 10-minute independent admission before any later target; no automatic retry or new eight-hour block.
 
 ---
 # Eight-Hour Hybrid and Release Investigation
@@ -1975,6 +1977,7 @@ questions. This session’s closure does not close the whole research program.
 | Document | Coordinator decision and reason |
 | --- | --- |
 | `SYNOPSIS.md` | Updated the current handoff, accepted scope, exact remainder, sequential ownership and future design; regenerated the owned views. |
+| Agenda 021’s live replanning selection and the active overnight launch plan | Updated both current handoff pointers to BC-282 after the final push check found their stale selection. The historical candidates and parallel assignments remain recorded. |
 | `README.md` | Checked current. The global lower and upper bounds are unchanged; local family results belong in the linked synopsis and research record. |
 | `TUTORIAL.md` | Checked current. Its explanation and bound table remain valid and explicitly delegate current campaign outcomes to the synopsis. |
 | `conventions.md` | Updated the live-assignment pointer to the generated agenda map while retaining the source allocation and parallel-PR checks; the numbering and evidence rules are unchanged. |

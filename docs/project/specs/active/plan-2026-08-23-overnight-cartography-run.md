@@ -341,19 +341,16 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, select `think-qv73` under BC-255 for
-H-110’s fixed near-axis P12 escape test.
-Allocate source-free controls, independent review and a fresh prospective experiment
-before evaluating the candidate.
-Session 090’s mathematical-code checkpoint `bc5c24b5` passed full validation.
-Keep the continuation on integrated PR 105 while open; do not repeat a completed
-experiment or create another supporting-fix PR.
+For the next supervised exact-research goal, select `think-s6e7` under BC-282 in
+[Agenda 028](../../../../packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md).
+Allocate 20 minutes to define the complete residual ten-square skeleton and its
+alternative-obligation table, then 10 minutes for independent admission.
+A specific new geometric implication is required before any later target.
+Session 092’s mathematical checkpoint `7b967d34` passed all 66 full validation steps.
+Its scientific block is closed; PR 110 retains the results and publication recovery.
+The successor design has not run and requires a separate allocation.
 [Agenda 024’s Current Allocation](../../../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
-supplies the current priorities.
-The September 7 amendment holds H-107 fixed-site scalar completion out of the next
-two-hour block and selects a bounded conditional-compatibility assessment through Agenda
-024\. The complete-density target remains source-blocked.
-The earlier BC-215 efficiency program remains uncompleted, not silently discarded.
+retains the parallel continuation’s assignments and priorities.
 See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the latest session,
 funding conditions and independent-review assignments.
 

@@ -1059,16 +1059,24 @@ agenda:
           H110 tests one fixed near-axis P12 escape before a larger positive proof.
           Source-free controls, independent review and a fresh prospective round
           are required; no target has run.
+      - bead: think-s6e7
+        workflow: research-loop
+        priority: 1
+        rationale: >-
+          Added at Session092's handoff, not backdated to this agenda's own W10.
+          BC-282 designs the complete residual ten-square skeleton after the
+          independently audited partial release exclusions. Allocate 20 minutes
+          for the design and 10 for independent admission before any later target.
       selected:
-        bead: think-qv73
+        bead: think-s6e7
         workflow: research-loop
         rationale: >-
-          This live handoff follows terminal Session090 and its passed full
-          bc5c24b5 checkpoint. H106, H108 and H109 accept continuous auxiliaries;
-          H110 is the next unrun discriminator. The September7 amendment holds
-          H107 out of the next block and selects a bounded conditional-compatibility
-          assessment through Agenda024. Preserve BC215 as an uncompleted
-          efficiency candidate and keep the work on the integrated research PR.
+          This live handoff follows terminal Session092 and its passed full
+          7b967d34 checkpoint. BC-282 is an unexecuted design in Agenda028 on
+          PR110; admission requires a specific new geometric implication. The
+          scientific block is closed, and publication recovery does not extend
+          its deadline. Agenda024's separate continuation retains its assignments;
+          the earlier candidates and historical closeout remain unchanged.
       operator_input:
         status: unavailable
         note: >-

@@ -561,21 +561,21 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-**Eight-hour investigation closed; BC282 design selected next.**
+**Eight-hour investigation closed; BC-282 design selected next.**
 [Session 092](packing/campaign/agent-sessions/session-092-hybrid-overnight.md) was
 allocated from 06:31 to 14:31 UTC on September 7, on `codex/n11-hybrid-overnight` after
-PR107 landed at `dd36800e`. [PR110](https://github.com/jlevy/squares/pull/110) retains
+PR 107 landed at `dd36800e`. [PR 110](https://github.com/jlevy/squares/pull/110) retains
 intermediate checkpoints, independently audited proofs, exact model obstructions and
 validation. All scientific audits ended before their original limits.
 Usage interrupted the final documentation reviews and publication; the user asked to
-continue and the coordinator recovered the checkpoint after the original14:31 deadline.
+continue and the coordinator recovered the checkpoint after the original 14:31 deadline.
 No successor was executed.
 
-[X018](packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md) and
-[Agenda028](packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md)
-retain H118–121 and sequential BC269–282. The central parent fence and signed release
+[X-018](packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md) and
+[Agenda 028](packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md)
+retain H-118–121 and sequential BC-269–282. The central parent fence and signed release
 exclusions are accepted.
-The BC281 audit leaves the complete closed half-angle remainder
+The BC-281 audit leaves the complete closed half-angle remainder
 $[1/24,1/3]\cup[1/2,23/25]$, with both slide signs and all original conditions.
 The stronger counting inequality also drops the four block contact equations while
 retaining six fixed axis squares and one common angle.
@@ -583,25 +583,25 @@ The global bracket is unchanged.
 Disk and octagon capacity bounds on the boundary family are refuted; maximal wall-core
 and full-square capacity questions remain unresolved.
 
-**Selected next entry: BC282 / `think-s6e7`, design only.** Price20 minutes for the
-complete residual ten-square skeleton and alternative-obligation table, then10 minutes
-for independent admission.
+**Selected next entry:** `think-s6e7`, BC-282, design only.
+Allocate 20 minutes for the complete residual ten-square skeleton and
+alternative-obligation table, then 10 minutes for independent admission.
 A specific new geometric implication is required before any later target.
-An exact feasible skeleton would show square10 must enter the proof; it would not be an
+An exact feasible skeleton would show square 10 must enter the proof; it would not be an
 eleven-square witness.
-Do not restart the frozen BC281 attempt.
-Phase20 is the final W5 allocation and validation block, following five completed phases
-since W5 phase14. Zero research phases follow it.
-Immutable7b967d34 passed all66 full checks in1604.44seconds; the final documentation and
-status delta has its own push gate.
-The original480-minute window and scientific caps remain recorded in the stopped
+Do not restart the frozen BC-281 attempt.
+Phase 20 is the final W5 allocation and validation block, following five completed
+phases since W5 phase 14. Zero research phases follow it.
+Immutable `7b967d34` passed all 66 full checks in 1604.44 seconds; the final
+documentation and status delta has its own push gate.
+The original 480-minute window and scientific caps remain recorded in the stopped
 session.
 
-The parallel task **Squares plan X-016** owns its PR109 continuation.
-Its exp128 fixes the current Trump D4 support optimum at11. Its completed BC265/H116
-comparison selects future BC264/H114 feature and kernel pricing; that work and the
-unresolved H124 remainder remain separate.
-Source H122–124, exp121–128 and sessions091/093/094/095 are occupied.
+The parallel task **Squares plan X-016** owns its PR 109 continuation.
+Its exp-128 fixes the current Trump D4 support optimum at 11. Its completed BC-265/H-116
+comparison selects future BC-264/H-114 feature and kernel pricing; that work and the
+unresolved H-124 remainder remain separate.
+Source H-122–124, exp-121–128 and sessions 091/093/094/095 are occupied.
 Check live allocations before reserving another ID.
 
 **Independent alternative prepared.**
@@ -683,8 +683,8 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**Selected next entry:** `think-qv73`, the fixed near-axis P12 escape discriminator,
-registered but unrun.
+**Session 090’s selection:** `think-qv73`, the fixed near-axis P12 escape discriminator,
+was registered but unrun at that handoff.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
 `think-9qrx`, completed the user-approved research block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
