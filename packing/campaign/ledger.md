@@ -553,6 +553,24 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | BC-256 | research | 11 | tentative | 2 | think-pjk7 | For H-036, verify every angle restriction and side strictly below 3.878; a counterexample need not improve Trump's record. A different target needs its own H. |
 | BC-257 | research | 11 | tentative | 2 | think-k9zi | A direct mass-below-eleven route at a declared lower side, separately scoped from H-101's equality classification at Trump. |
 
+### [agenda-027](agendas/agenda-027-compatibility-and-restricted-families.md) — Compatibility and Restricted Families
+
+Status: **paused**. Prepare an independent alternative to the ongoing Agenda024-026 allocation, based on X-017 and the owner's contributed research bundle. Compare a complete resource/anchor exclusion at side 96/25 with a contact-independent six-axis-plus-five shared-angle theorem; retain a small independent pair-kernel discriminator and candidate-led successors. Review contributed evidence at its own scope, build only the interfaces selected pilots need, and expand on closed continuous domains or explicit useful residuals. This prepared agenda launches no experiments. Its commitments, ownership and dependencies are separate from the continuing source run.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-258 | research | 11 | complete | 0 | think-adfk | BC-259, BC-260 and BC-267 are independently takeable reviews when this agenda is selected for execution. None requires the source run to finish. |
+| BC-259 | measurement_validation | 11 | ready | 0 | think-nwss | If accepted, append a separate reviewed determination at the original support scope and propose its disposition to the source coordinator. Do not rewrite exp113/115 or consume the old source target budget. On failure, retain the exact missing binding and continue unrelated pilots. |
+| BC-260 | measurement_validation | 11 | ready | 0 | think-ql1j | BC-261 consumes only the accepted case/Farkas and required resource subset; BC-264 consumes the kernel subset. Physical stationarity is reviewed separately under BC-267 and is not a gate on direct all-feasible exclusions. |
+| BC-261 | tool_validation | 3, 4, 11 | blocked | 0 | think-0w2c | Freeze the instrument and controls for BC-262/263 only after independent acceptance. If the shared abstraction grows before one real leaf closes, cut its scope to that leaf or retain a priced implementation blocker. |
+| BC-262 | research | 11 | blocked | 1 | think-zz3t | Expand only for closed continuous domains or a simpler actionable remainder. If refinement leaves almost all minima zero or the same large residual, reprice a second anchor, a low-order no-good or a stronger representation. No midpoint result, core completion or solver timeout becomes a global verdict. |
+| BC-263 | research | 11 | blocked | 1 | think-gdr6 | Expand if a small reusable certificate family closes meaningful domains. Stop broadening if progress consists of sampled angles, one contact graph, or unrelated microscopic boxes. Keep the full H-112 claim unresolved until all angles and cases are covered; verify any counterexample first. |
+| BC-264 | research | 11 | tentative | 2 | think-mq0d | Continue only if the chosen representation earns useful margin or closes a stated domain. An exact family obstruction redirects features; recurring unpriced pair violations redirect to conditional kernels or reusable cases. |
+| BC-265 | research | 11 | tentative | 3 | think-j8pz | Commission only the selected object's next instrument. Expanded support is H-116, not H-099; equality at U does not imply a below-U transport; arc boundary-nullity does not establish continuum coverage. |
+| BC-266 | research | 11 | tentative | 3 | think-bgsz | A complete restricted theorem can transfer only the neighborhoods its margin supports. Do not normalize one absolute angle by arbitrary rotation or infer unrestricted optimality from two-angle success. |
+| BC-267 | measurement_validation | 3, 4, 11 | ready | 1 | think-zq12 | Only leaves using physical stationarity depend on this acceptance. Existing sign/bin branches keep their old obligations. A feasible high-angle witness can refute an all-feasible restriction, but cannot alone refute existence of a different low-angle minimizing representative. |
+| BC-268 | research | 11 | ready | 1 | think-x61z | Expand the method that closes whole cases or yields an actionable simpler remainder; reprice or stop unproductive representations. Retain every partial, failed or never-opened attempt honestly. Do not close the other coordinator's session or alter its scientific budgets. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
@@ -645,6 +663,13 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | H-104 | confirmed | proof | At q = 1939/500, the frozen P10, P12 and A-triple point formulas satis |  | 1 |  | 2s wall |
 | H-105 | refuted | proof | Among the 60 distinct D4 placements of trump11-v1, with exactly exp-11 |  | 1 |  | 2s wall |
 | H-106 | confirmed | proof | At q=1939/500, every contained closed unit square with angle in [-pi/7 |  | 1 |  | 0s wall |
+| H-111 | open question | proof | At side 96/25, can a complete coarse pose cover, separate certified re |  | 0 |  |  |
+| H-112 | blocked | proof | Every packing of six axis-aligned unit squares and five unit squares s |  | 0 |  |  |
+| H-113 | blocked | proof | Every packing of eleven unit squares with at most two distinct actual  |  | 0 |  |  |
+| H-114 | open question | proof | Can a small explicitly fixed two-pose feature family at side 96/25 yie |  | 0 |  |  |
+| H-115 | open question | proof | Can finite nondegenerate curved arcs carrying nonnegative integrable p |  | 0 |  |  |
+| H-116 | open question | proof | Does a finite full-size placement support extending beyond the sixty T |  | 0 |  |  |
+| H-117 | open question | proof | Can a complete structural argument force at most k < 11 exact orientat |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 

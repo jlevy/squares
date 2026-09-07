@@ -165,6 +165,22 @@ Citation keys match those used in the research document.
 | **[Bal 2026]** | A 64-Rectangle Counterexample to Wegner’s Conjecture and LP Gaps up to 5/2 | A. K. Bal | 2026 | arXiv:2607.11318v2 | `bal-2026-64-rectangle-wegner-lp-gaps` |
 | **[Dewar 2024]** | How many contacts can exist between oriented squares of various sizes? | S. Dewar | 2024 | Discrete Math. 347(4), 113879; arXiv:2210.10422v2 | `dewar-2024-contacts-oriented-squares` |
 
+## Contributed Research Packets
+
+The owner-supplied
+[complete n=11 research bundle](papers/n11-complete-research-bundle-2026-09-07/INTAKE.md)
+was received on 2026-09-07 UTC and first unpacked into the local `attic/`. Its 57
+supplied files are retained unchanged in the archive, including the review, enumeration
+addendum, integrated agenda, source snapshot, checkers and PDFs.
+The intake note records provenance and the scope of the replayed controls.
+This is a contributed analysis packet; its proposals and supplied checks are not
+automatically accepted campaign results.
+
+[X-017](../campaign/explorations/X-017-compatibility-and-complete-case-covers.md) owns
+the critical adaptation and complete source-to-record map.
+[Agenda 027](../campaign/agendas/agenda-027-compatibility-and-restricted-families.md)
+organizes the proposed work as a separate agenda.
+
 ## Rigidity and Verification Method Sources
 
 These papers and notes support the local-rigidity and certified-search program.

@@ -138,7 +138,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives ten confirmed hypotheses, eleven refuted
-hypotheses, one open hypothesis, fifteen open questions, and thirty-six blocked
+hypotheses, one open hypothesis, twenty open questions, and thirty-eight blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. No hypothesis waits on review and six are unresolved.
 H-105 is refuted: all 134 eligible candidate pairs are separated, leaving higher-order
@@ -519,6 +519,18 @@ stop. Long autonomous sessions use the same rule; autonomy changes the duration 
 controller, not permission to blur contracts.
 
 ### Current Handoff
+
+**Independent alternative prepared.**
+[X-017](packing/campaign/explorations/X-017-compatibility-and-complete-case-covers.md)
+reconciles the contributed research packet with PR105’s committed state at `46f38ab4`.
+[Agenda 027](packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md)
+proposes resource-and-anchor and six-plus-five restricted-family pilots, with a separate
+pair-kernel discriminator.
+It is paused, with no target experiments launched.
+Its X-017, H-111–117 and BC-258–268 records and epic `think-sz5t` keep its ownership and
+numbering separate from the continuing agenda below.
+None of its dependencies requires that run to finish; the original handoff remains the
+entry for that run.
 
 The next research phases run in [PR101](https://github.com/jlevy/squares/pull/101) on
 `codex/post-381-next-phases`, with the landed PR100 depth fixes and PR98 validation
@@ -2815,6 +2827,13 @@ round that names the hypothesis, control roles included.
 | [H-104](packing/campaign/hypotheses/H-104-fixed-side-point-cover-auxiliaries.md) | confirmed | The fixed point formulas at side1939/500 satisfy all seven exact0/45-degree auxiliary clauses | 1 | 2s wall |
 | [H-105](packing/campaign/hypotheses/H-105-exp113-overweight-pair-obstruction.md) | refuted | Exp113’s fixed weights have an overweight pair with intersecting interiors | 1 | 2s wall |
 | [H-106](packing/campaign/hypotheses/H-106-continuous-near-axis-ten-point-cover.md) | confirmed | The unchanged ten-point formulas cover every contained square throughout the full near-axis angle neighborhood at1939/500 | 1 | 0.37s wall |
+| [H-111](packing/campaign/hypotheses/H-111-resource-anchor-case-exclusion.md) | open question | Can a complete resource-and-anchor case cover exclude eleven squares at side 96/25? | 0 | — |
+| [H-112](packing/campaign/hypotheses/H-112-six-axis-five-common-angle-optimum.md) | blocked | Every packing of six axis-aligned squares and five sharing a free actual angle has side at least the Trump side | 0 | — |
+| [H-113](packing/campaign/hypotheses/H-113-at-most-two-angle-optimum.md) | blocked | Every packing of eleven squares using at most two actual orientation classes has side at least the Trump side | 0 | — |
+| [H-114](packing/campaign/hypotheses/H-114-two-pose-kernel-exclusion.md) | open question | Can a two-pose positive-semidefinite kernel exclude eleven squares at side 96/25? | 0 | — |
+| [H-115](packing/campaign/hypotheses/H-115-boundary-null-curved-resources.md) | open question | Can boundary-null curved resources give a useful candidate-led improvement? | 0 | — |
+| [H-116](packing/campaign/hypotheses/H-116-expanded-full-size-dual-support.md) | open question | Does support beyond the sixty Trump-D4 placements admit depth-one weight above eleven at the exact Trump side? | 0 | — |
+| [H-117](packing/campaign/hypotheses/H-117-forced-angle-complexity.md) | open question | Can minimizing angle complexity be bounded by a complete structural argument, or both near-cluster and dispersed cases be controlled? | 0 | — |
 
 ### Confirmed
 

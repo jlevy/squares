@@ -1,0 +1,43 @@
+{
+  "status": "PASS: elementary controls only",
+  "ordered_profiles": 1024,
+  "unordered_partitions": 56,
+  "histogram_counts": {
+    "before": 78,
+    "after_elementary_cuts": 65
+  },
+  "twelve_disk_control": {
+    "container_side": "18/5",
+    "minimum_distance_squared": "1",
+    "nearest_adjacent_row_distance_squared": "901/900",
+    "conclusion": "The unrestricted diameter-one disk relaxation fits 11 (indeed 12) disks by side 3.6"
+  },
+  "angular_arithmetic": {
+    "side_upper_q": "38771/10000",
+    "delta_radians": "1/500",
+    "sqrt2_lower": "1414213/1000000",
+    "restricted_bound_rational_lower": "2914213/750000",
+    "rounded_packing_side_upper": "19424271/5000000",
+    "obliquity_margin": "11447/15000000",
+    "near_axis_grid_margin": "575729/5000000",
+    "U_less_than_q_checked_from_root_definition": true,
+    "premises": [
+      "Supplied defining polynomial and intended root for U",
+      "Stromquist exact 0/45-degree lower bound"
+    ],
+    "scope": "Arithmetic supporting deductions in the addendum; not a new s(11) bound"
+  },
+  "angle_controls": {
+    "half_tangent": "1/10",
+    "cos": "99/101",
+    "sin": "20/101",
+    "fixed_side_rotation_violates_wall": true,
+    "independent_reflection_turns_touching_pair_into_strict_overlap": true,
+    "strict_overlap_witness_relative_to_A": [
+      "5049/10100",
+      "51/505"
+    ],
+    "scope": "Exact counterexamples to invalid simplifications, not packing exclusions"
+  },
+  "new_global_square_packing_bound": null
+}

@@ -31,7 +31,7 @@ The prefix says what kind of thing it is.
 | Exploration report | `X-NNN` | campaign | `X-001` |
 | Agent session | `session-NNN` | campaign | `session-001` |
 | Agenda | `agenda-NNN` | campaign | `agenda-001` |
-| Agenda cell | `AA-NNN`, prefix declared per agenda | its agenda | `BC-001` |
+| Agenda cell | `BC-NNN` | campaign; owned by one agenda | `BC-001` |
 | Frontier case | `n-NNN` | `frontier/`, one artifact per `n ≤ 100` | `n-011` |
 | Search/proof strategy | `search:N`, `proof:N` | the frontier catalogues | `search:12` |
 | Defect | `D-NNN` | the directory, logged in `defects.yaml` | `D-014` |
@@ -82,12 +82,35 @@ experiments. Four experiments currently reference `H-016`: one historical three-
 round and its three per-cell replacements.
 A round does not apply its one verdict to several hypotheses.
 
-**Ids are never reused, and never renumbered except on merge collision.**
+**Assign IDs sequentially within each prefix.** [convention] Continue after the largest
+existing ID or current explicit assignment in the integrated record and known parallel
+work. Read the linked parallel PR and its current agenda before assigning numbers; a
+local branch alone may be behind.
+Use the next IDs for the artifacts being written, without jumping to a distant range for
+a branch or agent. Existing historical gaps remain.
+An ID identifies a record, not its priority, execution order, or dependency.
+
+Record the assigned IDs with the artifacts in their owning bead and publish them in the
+draft PR. Those existing records provide coordination; do not add a second allocation
+ledger or reserve speculative future ranges.
+Historical launch drafts do not reserve uncreated records after their allocation has
+been superseded.
+Recheck known parallel changes before integration: sequential allocation
+is a convention, not an atomic allocator.
+
+The shared `BC-` sequence continues across agendas.
+Each cell belongs to one agenda, but its bare ID is used in `depends_on`,
+`discharged_by` and generated views, so restarting at `BC-001` in each agenda would be
+ambiguous.
+
+**Published IDs are never reused, and never renumbered except on merge collision.**
 [checked: whole-set uniqueness] When two branches collide, the newer campaign renumbers
 and the change is recorded as an annotation on the affected artifacts, never as a silent
 edit. Sequential defect IDs are branch-provisional: the later branch takes the next free
 IDs at merge and updates its references in the same change.
-Do not reserve IDs or add a second coordination ledger.
+Do not reserve future defect IDs.
+Correcting the IDs of an unpublished draft does not require renumbering any existing
+record.
 
 **Reserved ids.** [checked] No hypothesis ids are currently reserved.
 A future reservation is declared in a `reserved-ids` comment on the idea board and names

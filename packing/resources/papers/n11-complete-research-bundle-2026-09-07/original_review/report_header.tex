@@ -1,0 +1,40 @@
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{etoolbox}
+\definecolor{NavyBlue}{RGB}{27,55,79}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily ELEVEN SQUARES}
+\fancyhead[R]{\small\sffamily RESEARCH STRATEGY REVIEW}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\emergencystretch}{3em}
+\setlength{\parskip}{0.45em}
+\setlength{\parindent}{0pt}
+\titleformat{\section}{\Large\bfseries\color{NavyBlue}}{\thesection}{0.65em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{0.65em}{}
+\titlespacing*{\section}{0pt}{2.1ex plus 1ex minus .2ex}{1.2ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{1.7ex plus .8ex minus .2ex}{0.7ex plus .2ex}
+\AtBeginEnvironment{longtable}{\small\renewcommand{\arraystretch}{1.16}}
+\renewcommand{\maketitle}{%
+\begin{titlepage}
+\vspace*{0.35in}
+{\sffamily\large\color{NavyBlue} TECHNICAL RESEARCH REPORT\par}
+\vspace{0.22in}
+{\Huge\bfseries Beyond 3.81\par}
+\vspace{0.12in}
+{\LARGE A Research Strategy for Eleven Squares\par}
+\vspace{0.2in}
+{\large New structural deductions, an exact fixed-support certificate,\par and routes toward a global proof\par}
+\vspace{0.34in}
+\begin{center}
+\includegraphics[width=0.64\textwidth]{trump_cover.png}
+\end{center}
+\vfill
+{\small Supplied exact Trump construction. Source: packet file 18.\par}
+\vspace{0.15in}
+{\normalsize Based on the research snapshot of 6 September 2026\par}
+{\small Source revision: \texttt{4d305597a505}\par}
+\end{titlepage}
+}

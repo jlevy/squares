@@ -2,7 +2,7 @@
 
 # Agenda map
 
-246 agenda commitments across 26 agendas, as declared in each agenda's own frontmatter.
+257 agenda commitments across 27 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **4** in_progress, **13** ready, **8** tentative, **56** blocked, **41** stopped, **124** complete.
+- **4** in_progress, **17** ready, **11** tentative, **59** blocked, **41** stopped, **125** complete.
 
 - **18 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-243`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -45,6 +45,13 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-026 | `BC-255` | in_progress | 1 | insight | research | What is the first complete proof obligation for a useful restricted structural theorem? | `think-dene` |
 | agenda-026 | `BC-256` | tentative | 2 | correctness | research | Does a verified packing refute the selected restricted structural claim? | `think-pjk7` |
 | agenda-026 | `BC-257` | tentative | 2 | insight | research | Which below-Trump density target and family justify a continuum proof attempt? | `think-k9zi` |
+| agenda-027 | `BC-259` | ready | 0 | correctness | measurement_validation | Does independent source binding and geometric replay accept the contributed seven-row ceiling of eleven for… | `think-nwss` |
+| agenda-027 | `BC-260` | ready | 0 | correctness | measurement_validation | Which direct resource, anchor, case-composition, angular-transfer, uniform Farkas and pair-kernel… | `think-ql1j` |
+| agenda-027 | `BC-267` | ready | 1 | correctness | measurement_validation | Which physical normal-stationarity and stationary-value deductions survive independent review, and what exact… | `think-zq12` |
+| agenda-027 | `BC-268` | ready | 1 | insight | research | Which next slice earns allocation from the actual Agenda100 review and pilot evidence, whether the source… | `think-x61z` |
+| agenda-027 | `BC-264` | tentative | 2 | insight | research | Does one small fixed feature family for H-114 have an exact obstruction, or a b < 11 candidate with a… | `think-mq0d` |
+| agenda-027 | `BC-265` | tentative | 3 | insight | research | Which single candidate-led resource option deserves the next discriminator: equality-support geometry, curved… | `think-j8pz` |
+| agenda-027 | `BC-266` | tentative | 3 | insight | research | Does the shared certificate interface make a complete two-angle family under H-113 worth attempting, with… | `think-bgsz` |
 
 ## Blocked, and on what
 
@@ -108,6 +115,9 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-026 | `BC-249` | 0 | `BC-224` | no | — |
 | agenda-026 | `BC-244` | 1 | `BC-243` | no | — |
 | agenda-026 | `BC-248` | 2 | `BC-246`, `BC-247` | no | An exact fractional measure of mass at least eleven for the chosen subproblem, no more than 2,311,290 of the present… |
+| agenda-027 | `BC-261` | 0 | `BC-260` | no | — |
+| agenda-027 | `BC-262` | 1 | `BC-261` | no | — |
+| agenda-027 | `BC-263` | 1 | `BC-261` | no | — |
 
 ## Discharged elsewhere
 
@@ -154,6 +164,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-024 | active |  |  |  | 5 |  | 3 | 8 |
 | agenda-025 | active | 3 |  | 1 | 6 |  | 3 | 13 |
 | agenda-026 | active | 1 | 2 | 2 | 4 |  | 5 | 14 |
+| agenda-027 | paused |  | 4 | 3 | 3 |  | 1 | 11 |
 
 ## By program
 
@@ -217,6 +228,24 @@ Open frontier: `BC-231`, `BC-232`, `BC-234`, `BC-235`, `BC-236`, `BC-237`, `BC-2
 | agenda-022 | `BC-207` | blocked | At the side block one found the n = 11 wall, does an exact cover of the heavy atoms by eleven… |
 
 Open frontier: `BC-208`, `BC-207`.
+
+### `n11-compatibility-and-restricted-families`
+
+| agenda | id | state | question |
+| --- | --- | --- | --- |
+| agenda-027 | `BC-258` | complete | How should the supplied research bundle change the set of alternative directions, after orientation… |
+| agenda-027 | `BC-259` | ready | Does independent source binding and geometric replay accept the contributed seven-row ceiling of… |
+| agenda-027 | `BC-260` | ready | Which direct resource, anchor, case-composition, angular-transfer, uniform Farkas and pair-kernel… |
+| agenda-027 | `BC-261` | blocked | Can the existing geometry and fixed-angle LP export one independently checked uniform exclusion… |
+| agenda-027 | `BC-262` | blocked | At 96/25, does a frozen complete anchor domain admit an exact exclusion or useful explicit residual… |
+| agenda-027 | `BC-263` | blocked | Can uniform certificates close a nontrivial complete common-angle interval in H-112 without… |
+| agenda-027 | `BC-264` | tentative | Does one small fixed feature family for H-114 have an exact obstruction, or a b < 11 candidate with… |
+| agenda-027 | `BC-265` | tentative | Which single candidate-led resource option deserves the next discriminator: equality-support… |
+| agenda-027 | `BC-266` | tentative | Does the shared certificate interface make a complete two-angle family under H-113 worth… |
+| agenda-027 | `BC-267` | ready | Which physical normal-stationarity and stationary-value deductions survive independent review, and… |
+| agenda-027 | `BC-268` | ready | Which next slice earns allocation from the actual Agenda100 review and pilot evidence, whether the… |
+
+Open frontier: `BC-259`, `BC-260`, `BC-261`, `BC-262`, `BC-263`, `BC-264`, `BC-265`, `BC-266`, `BC-267`, `BC-268`.
 
 ### `n11-density-stationarity-trump-capture`
 

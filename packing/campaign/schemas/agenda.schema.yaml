@@ -44,7 +44,7 @@ properties:
         id:
           type: string
           pattern: "^BC-[0-9]{3}$"
-          description: Stable cell id within this agenda; never reused.
+          description: Stable cell id across the campaign, owned by one agenda; never reused.
         purpose:
           enum: [tool_validation, measurement_validation, research]
           description: >-

@@ -269,6 +269,27 @@ Row 86 belongs to the pending refined-core transport.
 Exact basis recovery and Lean replay support the relevant candidate or assurance bead;
 they are not additional mathematical hypotheses without a specific method comparison.
 
+## Independent Compatibility and Restricted-Family Proposals
+
+[X-017](explorations/X-017-compatibility-and-complete-case-covers.md) assesses the
+contributed packet against PR105’s committed `46f38ab4` state.
+[Agenda 027](agendas/agenda-027-compatibility-and-restricted-families.md) is prepared
+and paused. These idea numbers and H-111–117 records continue the sequences after the
+parallel source program’s current entries.
+Branch and bead ownership distinguish the programs; the numbers carry no execution order
+or dependency. The source-to-record map in X-017 also routes overlapping proposals to
+existing H-094–103 without duplicating them.
+
+| # | Idea | Status | Record | Crux |
+| --- | --- | --- | --- | --- |
+| 105 | Resources and anchors in a complete case cover | registered | [H-111](hypotheses/H-111-resource-anchor-case-exclusion.md) | Exclude every case at 96/25 with valid mass semantics and a complete anchor cover. |
+| 106 | Six axis-aligned squares plus five at a common free angle | registered | [H-112](hypotheses/H-112-six-axis-five-common-angle-optimum.md) | Cover the continuous family without assuming Trump’s contacts or wall pattern. |
+| 107 | At most two actual orientation classes | registered | [H-113](hypotheses/H-113-at-most-two-angle-optimum.md) | Retain both absolute angles, every multiplicity and all seams. |
+| 108 | A two-pose kernel that excludes eleven | registered | [H-114](hypotheses/H-114-two-pose-kernel-exclusion.md) | Exact positivity, diagonal and compatible-pair bounds must hold over the whole domain, including touching. |
+| 109 | Boundary-null curved resources | registered | [H-115](hypotheses/H-115-boundary-null-curved-resources.md) | Find a concrete useful candidate before building a general verifier. |
+| 110 | Expand full-size dual support beyond Trump’s orbit | registered | [H-116](hypotheses/H-116-expanded-full-size-dual-support.md) | The contributed ceiling concerns the old support only; every extension needs its own exact evidence. |
+| 111 | Force a useful bound on minimizing angle complexity | registered | [H-117](hypotheses/H-117-forced-angle-complexity.md) | A restricted-family success needs a separate argument controlling the unrestricted remainder. |
+
 ## Open questions
 
 Not claims, so they cannot be hypotheses.
