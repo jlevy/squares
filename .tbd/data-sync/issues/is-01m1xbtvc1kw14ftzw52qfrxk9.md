@@ -3,9 +3,9 @@ type: is
 id: is-01m1xbtvc1kw14ftzw52qfrxk9
 title: BC255 full distinguished-square compatibility discriminator
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 15
+version: 16
 spec_path: packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md
 labels: []
 dependencies: []
@@ -22,7 +22,11 @@ child_order_hints:
   - is-01m1xhn8w2y3hvyzhe4409221d
   - is-01m1xt8asffrbenqebvm2z85s7
 created_at: 2026-09-07T07:20:29.824Z
-updated_at: 2026-09-07T11:32:31.660Z
+updated_at: 2026-09-07T12:00:56.991Z
+closed_at: 2026-09-07T12:00:56.989Z
+close_reason: All funded H124discriminators and fixedrepresentations areterminal. Exp124no_witness, exp125diagonalindependentlycertified/axisno_chain, exp127collisionaugmentedaxisno_chain0.25s withnoreader. H124/H036remainunresolved;no radiusrefinement/retry/twoanglesolver funded. Futurechangedpremise needsnewrepricing; selectedremainingSession095workisBC259.
+resolution: null
+duplicate_of: null
 ---
 Selected local follow-up candidate after H123accepted and H122refuted, from think-7bly sourcefreeassessment. Changedclaim: everycanonicalcontainednear45Q avoiding ALLP10 intersects every both-band contained P9-avoiderS. Completeclaim plusH106/H123/closedcores provesH036; oneverifieddisjointpair refutesonlythissufficientroute. Beforeanytarget allocateH124afterfreshclaimscheck, sourcefreeproducer/reader+reviews, prospectiveexp124; freezeexp122S verbatim and oneexact45Qframe, canonicalclipping/strictstrata, all10+9marks and76edgechecks. 25–35min estimatedcriticalpath,50–70worker-minutes; possible30sproducer/10sreader caps notfrozen. No automaticlaunchthisSession091; compareopportunitycostatcheckpoint. CoordinateBC270onlyifowneravailable; appblockedcross-taskmessage soleaveexternalassignmentsuntouched.
 
