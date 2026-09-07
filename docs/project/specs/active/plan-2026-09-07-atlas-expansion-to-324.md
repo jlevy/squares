@@ -323,7 +323,9 @@ Each phase closes on its own validation and a commit.
   assessment reads 18 tilings, 296 not rigid, seven undetermined and three left to a
   stronger argument. The full rebuild takes about eleven minutes and the screen about
   three, which Phase 5 must price.
-- [ ] Freeze: name the commit in the epic as the unseen-corpus baseline.
+- [x] Freeze: name the commit in the epic as the unseen-corpus baseline.
+  Commit `6e21c4ca` on `claude/atlas-expansion-300-400-9f79fc` is the baseline: 324
+  typed records and witnesses, with no calibration instrument run above 100.
 - [x] Retire the prospective seed; keep and re-point the source map.
   The seed manifest is a dated retirement record pointing at the known-best manifest;
   the source map stays as the provenance record.
