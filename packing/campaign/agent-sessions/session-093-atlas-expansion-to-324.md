@@ -10,7 +10,7 @@ session:
   title: Atlas expansion to n = 324 and the poster composite
   date: '2026-09-07'
   started_at: '2026-09-07T07:20:00Z'
-  deadline_at: '2026-09-07T15:20:00Z'
+  deadline_at: '2026-09-08T15:20:00Z'
   branch: claude/atlas-expansion-300-400-9f79fc
   goal: Plan and begin the owner-directed widening of the frontier register and known-best
     atlas from n = 1..100 to n = 1..324, survey public sources beyond n = 100, and prepare the
@@ -117,10 +117,38 @@ session:
       owner's D2 confirmation, the hosted re-run of the re-priced tiers, and the full
       checkpoint before merge.
     next_action: Closeout with the handoff entry naming the frozen corpus commit.
+  - workflow: review-planning-oversight
+    focus: process
+    recording: contemporaneous
+    clock_role: work
+    objective: Hold the record open for the owner's decisions (D2, 325..400, the poster
+      raster), the hosted re-run of the re-priced tiers, the full checkpoint before merge, and
+      the harness rollup that lets this session name what it cost and the gate that certified
+      it. No further autonomous work is planned in this phase.
+    bead: think-0juv
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: The bounded work is complete and committed on PR 111; only records that
+      depend on the owner, CI and the harness remain.
+    budget_minutes: 1340
+    started_at: '2026-09-07T15:40:00Z'
+    deadline_at: '2026-09-08T14:00:00Z'
+    expected_output: A terminal session record with its rollup and certifying gate named, and
+      the epic closed at merge.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: The owner stops the line or reverts D2.
+    fallback: Leave the session open with this phase and the handoff entry as the recovery
+      state.
+    outcome: null
+    evidence: []
+    stop_reason: null
+    next_action: Terminalize the record once the rollup exists and the full checkpoint has run.
   primary_bead: think-0juv
-  status: completed
+  status: in_progress
   budget:
-    wall_minutes: 480
+    # 480 for the work; extended once, at 2026-09-07T15:40Z, to hold the record open for
+    # the finalization phase below, not to continue autonomous work (D-395).
+    wall_minutes: 1920
     checkpoint_minutes: 240
   stop_conditions:
   - Stop a phase when its bounded output is complete and validated; do not start a corpus chunk
@@ -584,13 +612,14 @@ session:
     against hundred-case records, refreshed in 543a1f2f. The full checkpoint is not yet
     obtained.
   resource_rollups: []
-  stop_reason: Bounded output reached at 2026-09-07T15:24:41Z: the plan's Phases 0 through 5 are terminal
-    on PR 111 and the calibration boundary held throughout. Not stopped by a clock; Phase 6
-    stays closed under D1 unless the owner chooses the caveated form.
-  next_action: Owner confirms D2 and the two open questions; the re-priced tiers are read on
-    the next hosted run and the full checkpoint is obtained before merge (label deep-gate
-    last); the epic think-0juv closes at merge with the cost block rendered from the session's
-    rollups.
+  stop_reason: null
+  next_action: The plan's Phases 0 through 5 are terminal on PR 111 and the calibration
+    boundary held throughout; the session stays open, with its clock extended to 2026-09-08,
+    until the owner confirms D2 and the two open questions, the re-priced tiers are read on the
+    next hosted run, the full checkpoint is obtained before merge (label deep-gate last), and
+    the harness has written this session's rollup so the record can name what it cost and the
+    gate that certified it. Phase 6 stays closed under D1 unless the owner chooses the
+    caveated form.
 
 ---
 <!-- This document follows common-doc-guidelines.md.
