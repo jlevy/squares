@@ -76,12 +76,16 @@ Work is planned on a regular cadence (such as 8 to 12 hours) and broken into sev
 defined workflows (research survey, correctness verification, research loop,
 optimization loop, and a few others).
 
+<div class="boxed-text">
+
 The repository’s original prose and code, including this paper, were written by agents
 under human direction.
 The framework relies on a few other agent tools, notably
 [tbd](https://github.com/jlevy/tbd) for task tracking,
 [Softschema](https://github.com/jlevy/softschema) for structuring results, and
 [Practical Prose](https://github.com/jlevy/practical-prose) to improve writing quality.
+
+</div>
 
 ## The Square Packing Problem
 
