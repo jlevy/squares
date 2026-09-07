@@ -74,7 +74,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 12, 17]
-    state: ready
+    state: in_progress
     priority: 0
     question: >-
       Can an exact verifier decide the adaptive-core contract and refuse uncovered
@@ -107,7 +107,13 @@ agenda:
     note: >-
       BC-250 selects only two initial slices of at most 30 minutes, then a price of
       remaining work. The full retained control matrix and acceptance conditions
-      remain unchanged; 180 minutes is not an automatic allocation.
+      remain unchanged; 180 minutes is not an automatic allocation. Session089's
+      two selected slices delivered project routes, a loader and pure cover controls,
+      not triad acceptance. The remaining estimate is 180–320 active worker minutes
+      plus unpriced full replays; further allocation needs a portfolio decision.
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-01.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-231-next-phases-slice-02.md
   - id: BC-232
     purpose: research
     owner_focus: efficiency
@@ -408,7 +414,12 @@ agenda:
     bead: think-0za3
     workflows: [research-loop]
     depends_on: [BC-250]
-    next_evidence: A candidate for BC-238 or a specific restriction for BC-252.
+    next_evidence: >-
+      Landed depth fixes and isolated seed/bridge controls pass at5267bd34;
+      think-zuq5's readiness boundary is discharged. Freeze the one target invocation
+      only with its full150-minute allocation and separately priced verification.
+      No target has run in Session089; do not shorten or reset that invocation to fit
+      the remaining checkpoint window.
     parallel_group: agenda025-scalar
     program: n11-adaptive-fractional-frontier
   - id: BC-252
@@ -458,8 +469,11 @@ agenda:
 The [current allocation](agenda-024-post-381-24h-portfolio.md#current-allocation) owns
 prospective allocations for L1 (current certificates) and L2 (richer witnesses).
 The scalar probe runs independently of adaptive-verifier implementation.
-Current commands and scientific criteria below remain applicable; historical schedules
-do not authorize an additional BC-232 final leg.
+Scientific criteria below remain applicable.
+The
+[continuation addendum’s scalar command](../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md#scalar-6116-launch)
+supersedes the historical scalar invocation below; historical schedules do not authorize
+an additional BC-232 final leg.
 
 This child agenda is managed independently under the `think-wess` research epic and
 integrated only through [`agenda-024`](agenda-024-post-381-24h-portfolio.md).
@@ -917,6 +931,11 @@ It is not one of the six cells X-016 opens at `T+0`. The coordinator decides at 
 whether to allocate it (`think-8rqf`), gives it a hypothesis and an experiment record in
 the reserved ranges, and starts it only once BC-233’s screen has released a core, so the
 first-block process count never exceeds three.
+
+The following command is historical.
+Use the continuation addendum’s linked scalar command, which adds
+`--stop-on-covering-below-n` while preserving the frozen150-minute budget and other
+parameters.
 
 ```bash
 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 \

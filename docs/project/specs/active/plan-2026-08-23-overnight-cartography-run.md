@@ -341,17 +341,16 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, take `BC-215` in
-[Agenda 023](../../../../packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md),
-bead `think-xejq`. Session 088 continues that selection through
-[W5 Phase 3](plan-2026-09-06-validation-efficiency-and-checkpoints.md): an explained
-exhaustive-family planner, initially in reporting mode, followed by validated evidence
-reuse and complete coverage accounting.
-The earlier R1 tree-id measurements motivate reducing repeated work; a tree-id cache
-alone does not establish all family inputs.
-The current implementation’s full hosted checkpoint must pass before final readiness.
-See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the integrated
-record.
+For the next supervised exact-research goal, select BC-251, `think-0za3`, with a fresh
+allocation for its full unchanged 150-minute process cap and separate verification.
+Session 089’s retained research checkpoint `99a3ad42` passed full validation.
+Keep the continuation on integrated PR 101 while open; do not repeat a completed
+experiment or create another supporting-fix PR.
+[Agenda 024’s Current Allocation](../../../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
+then supplies the next fresh scalar, complete-density and continuous-angle packages.
+The earlier BC-215 efficiency program remains uncompleted, not silently discarded.
+See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the latest session,
+funding conditions and independent-review assignments.
 
 ## The numeric runner launch gate
 

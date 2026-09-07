@@ -422,18 +422,22 @@ def _clone_into(src: Path, dst: Path) -> None:
 
 
 INLINE_LINK = re.compile(r"\]\(([^)#\s]+)\)")
-# Pruned directories a checked document may legitimately link into. `.venv` and
+# Omitted sources a checked document may legitimately link into. `.venv` and
 # `sqsearch/target` are symlinked back whole, and `.gate-running` is a marker,
-# so the linked-file copy covers only the content prunes.
-LINKED_PRUNE_ROOTS = tuple(
-    path
-    for path in sorted(PRUNE)
-    if path not in {ROOT / ".gate-running", ROOT / ".venv", ROOT / "sqsearch/target"}
+# so the linked-file copy covers only the content prunes and referenced workflows.
+# Workflow evidence lives outside `packing/`; copying only links keeps it bounded.
+LINKED_PRUNE_ROOTS = (
+    *(
+        path
+        for path in sorted(PRUNE)
+        if path not in {ROOT / ".gate-running", ROOT / ".venv", ROOT / "sqsearch/target"}
+    ),
+    REPO / ".github/workflows",
 )
 
 
 def linked_pruned_targets() -> list[Path]:
-    """Pruned files the checked documents link to inline, resolved and existing.
+    """Omitted files the checked documents link to inline, resolved and existing.
 
     The archive and the generator-owned renderings are pruned from every worker
     (45 MiB against the cap), but the link checker runs inside the worker and
@@ -526,7 +530,7 @@ def clone_tree(dest: Path) -> None:
     resource_readme.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(ROOT / "resources/README.md", resource_readme)
     for target in snapshot_pruned_targets():
-        landing = work / target.relative_to(ROOT)
+        landing = dest / target.relative_to(REPO)
         landing.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(target, landing)
     shutil.copy2(REPO / ".flowmarkignore", dest / ".flowmarkignore")

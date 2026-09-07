@@ -595,10 +595,7 @@ def render_synopsis_block() -> str:
         "| Coverage | sessions |",
         "| --- | ---: |",
         f"| measured | {len(measured_ids)} |",
-        (
-            f"| closed before `resource_rollups` existed, logs not retained "
-            f"| {len(sessions) - len(measured_ids)} |"
-        ),
+        f"| unmeasured | {len(sessions) - len(measured_ids)} |",
         f"| **total** | **{len(sessions)}** |",
         "",
         END,

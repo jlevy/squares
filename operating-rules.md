@@ -135,6 +135,17 @@ hours and cap each slice at 30 minutes, per the
 Thirty minutes is a ceiling, not a quota: close a slice as soon as its bounded output is
 complete. Replan at each boundary from measured time, and only forward.
 
+Plan each selected research direction end to end: known or source controls, a frozen
+bounded target attempt, independent verification, and an evidential disposition that
+selects the next slice.
+Unmet readiness conditions stop or redirect the target; they never justify bypassing
+controls. Instrument readiness is pipeline progress, not a mathematical result.
+Record refusals, obstructions and bounded negatives at their established scope; a failed
+readiness guard or incomplete attempt is not a mathematical negative.
+Incomplete work retains its limitation and next dependency.
+Checkpoints may close before this chain is complete, but the continuation must name the
+next link.
+
 ## OR-7: Run the documentation guidelines pass at block boundaries
 
 A block that produced a new document, a substantial rewrite, or a long block comment
@@ -212,6 +223,15 @@ wearing a measurement’s clothes.
 Codex intervals render in a separate section: their model responses are not Claude
 turns, and adding the two harnesses could count the same work twice.
 A live Codex snapshot is explicitly a lower bound.
+
+Keep one integrated pull request for a coherent mainline research cycle, ordinarily 2–12
+hours. Shorter slices and checkpoints update that PR. Supporting instrumentation, CI
+repairs, and editorial fixes needed for the cycle stay on its integration line, rather
+than creating a succession of tiny PRs and back-merges.
+A stacked PR remains appropriate when a separable review or dependency boundary
+justifies it; state that boundary and the integration plan.
+The cycle length is a planning horizon, not permission to extend a declared clock or a
+requirement to produce a successful mathematical result.
 
 **A multi-block session keeps the pull request current, not just open.** The owner
 reviews as the work lands, so a session that runs more than one block opens the pull
