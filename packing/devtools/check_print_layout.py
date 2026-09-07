@@ -90,6 +90,10 @@ class Probe(TypedDict):
     footnotes: list[Footnote]
     boxed: list[Boxed]
     overflow: list[Overflow]
+    #: How far the document's layout reaches past the page, and the run that reaches
+    #: farthest. Not clipped: Chromium scales the whole document to fit it.
+    pageOverflow: float
+    widest: Overflow | None
     measure: float
     viewport: float
 
@@ -128,6 +132,7 @@ PRINT_VIEWPORT: ViewportSize = {"width": 816 - 2 * 120, "height": 1056 - 2 * 120
 _PROBE = r"""() => {
   const out = {
     centred: [], markers: [], footnotes: [], boxed: [], overflow: [],
+    pageOverflow: 0, widest: null,
     /* Named so a viewport that did not take is visible in the output rather than
        silently making every horizontal answer wrong. */
     measure: document.querySelector('.kpress')?.getBoundingClientRect().width ?? 0,
@@ -251,10 +256,9 @@ _PROBE = r"""() => {
     });
   }
 
-  /* Overflow. The measure is set by the `@page` margin, so anything reaching past the
-     body's content box will be clipped at the paper's edge rather than wrapped. Figures
-     are allowed their own scroll on screen and are excluded by the same class the
-     stylesheet uses to let them. */
+  /* Overflow. The measure is set by the `@page` margin, so a block reaching past the
+     body's content box is wrapped wrongly or cut. Figures are allowed their own scroll
+     on screen and are excluded by the same class the stylesheet uses to let them. */
   const page = document.querySelector('.kpress');
   if (page) {
     const room = page.getBoundingClientRect();
@@ -266,6 +270,28 @@ _PROBE = r"""() => {
         out.overflow.push({path: sig(el), over, text: el.textContent.trim().slice(0, 60)});
       }
     }
+  }
+
+  /* The whole page. An unclipped run past the page box is not cut at the paper's edge:
+     Chromium scales the entire document down until it fits, and every size on every
+     page shrinks with it, silently. One display equation 42px too wide printed a 12pt
+     document at 11.2pt and nothing here saw it, because the blocks above are column
+     boxes and the run that overflowed was inline content inside one. The document's own
+     scroll width is what Chromium fits, so that is what is measured, with the widest
+     unclipped run named so the finding says what to shrink. */
+  const root = document.documentElement;
+  out.pageOverflow = round(root.scrollWidth - root.clientWidth);
+  if (out.pageOverflow > 1) {
+    let widest = null;
+    for (const el of document.querySelectorAll('.kpress *')) {
+      if (el.closest('svg')) continue;
+      const box = el.getBoundingClientRect();
+      const over = box.width ? box.right - root.clientWidth : 0;
+      if (over > 1 && (!widest || over > widest.over)) {
+        widest = {path: sig(el), over: round(over), text: el.textContent.trim().slice(0, 60)};
+      }
+    }
+    out.widest = widest;
   }
 
   return out;
@@ -389,6 +415,18 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
             f"{medium}: {row['path']} runs {row['over']:.2f}px past the measure "
             f"({row['text']!r})"
             for row in probe["overflow"]
+        )
+
+    # The page as a whole, in print only: on screen a wide run scrolls, on paper it
+    # shrinks the document. Reported with the scale Chromium would apply, which is the
+    # number a reader of the PDF would otherwise have to infer from the type size.
+    if printed["pageOverflow"] > TOLERANCE_PX:
+        scale = printed["viewport"] / (printed["viewport"] + printed["pageOverflow"])
+        widest = printed["widest"]
+        where = f"; the widest run is {widest['path']} ({widest['text']!r})" if widest else ""
+        found.append(
+            f"print: the document is {printed['pageOverflow']:.0f}px wider than the page, "
+            f"so Chromium prints every page scaled to {scale:.1%}{where}"
         )
 
     if not every:

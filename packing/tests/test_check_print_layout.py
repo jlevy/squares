@@ -70,6 +70,8 @@ def probe(**over: object) -> Probe:
         "footnotes": [],
         "boxed": [],
         "overflow": [],
+        "pageOverflow": 0,
+        "widest": None,
         "measure": 576.0,
         "viewport": 576.0,
     }
@@ -177,3 +179,27 @@ def test_a_label_off_the_centre_of_its_own_box_is_a_finding(off: float) -> None:
 @pytest.mark.parametrize("off", [0.0, 0.02, -0.5])
 def test_a_label_within_tolerance_is_not(off: float) -> None:
     assert not findings(both(boxed=[boxed(offset=off)]))
+
+
+def test_a_document_wider_than_the_page_is_reported_with_the_scale_chromium_applies() -> None:
+    """An unclipped run past the page box shrinks every page, silently, in the PDF."""
+    measured = both()
+    measured["print"]["pageOverflow"] = 42
+    measured["print"]["viewport"] = 576
+    measured["print"]["widest"] = {
+        "path": "span.base[3]",
+        "over": 42,
+        "text": "1 for every placement Q,",
+    }
+    found = findings(measured)
+    assert len(found) == 1
+    assert "42px wider than the page" in found[0]
+    assert "scaled to 93.2%" in found[0]
+    assert "span.base[3]" in found[0]
+
+
+def test_screen_overflow_alone_is_not_a_page_finding() -> None:
+    """On screen a wide run scrolls; only the print pass decides the paper."""
+    measured = both()
+    measured["screen"]["pageOverflow"] = 200
+    assert findings(measured) == []
