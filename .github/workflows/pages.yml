@@ -153,6 +153,12 @@ jobs:
       - name: Check the print layout
         run: uv run --frozen --group dev python -m devtools.check_print_layout
 
+      - name: Check the print-layout probe still catches a page-width overflow
+        run: uv run --frozen --group dev python -m devtools.check_print_layout --self-check
+
+      - name: Check every comparison variant measures the font it draws
+        run: uv run --frozen --group dev python -m devtools.compare_math_fonts check
+
       - name: Check paper typography on screen and in print
         run: |
           uv run --frozen --group dev python -m devtools.inspect_explainer_typography --self-test

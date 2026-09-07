@@ -38,12 +38,15 @@ metrics installer returns early. With that stamped, `current` is Route A again, 
 variant's CSS lands on upstream's `.katex` rules, and `--metrics-patch` reaches the
 table KaTeX actually lays out from.
 
-What the variants are is `unicode-range` composites, and that is not a stylistic choice.
-KaTeX picks the face by class, and digits, operator names and `\text{}` carry no class
-at all: they are drawn by whatever family the root `.katex` rule names. So "digits from
-PT Serif, operators from KaTeX" cannot be said in class selectors, only in a family that
-answers differently per code point. Every range here is disjoint from its partner, so
-nothing depends on which face wins an overlap.
+What a variant is made of is `unicode-range` faces, and that is not a stylistic choice.
+KaTeX picks the face by class, and digits, operators, operator names and `\text{}` carry
+no class at all: they are drawn by whatever family the root `.katex` rule names. So
+"digits from PT Serif, operators from KaTeX" cannot be said in class selectors, only in
+a family restricted to the code points the route moves. Each is the reading face alone,
+with KaTeX's own face after it in the rule's family list rather than inside it, so a
+range a later family was added to serve is still there to be claimed -- a family covering
+the whole plane shadows what follows it, which is how the scaled Greek capitals came to
+be declared and never drawn.
 
 `--metrics-patch` is the honest version of the same page. KaTeX lays out from a table of
 `[depth, height, italic, skew, width]` baked into `katex.min.js`, so a swapped face is
@@ -53,6 +56,16 @@ numerator clips. The flag rewrites the entries for exactly the code points a var
 swaps, from the PT Serif files' own bounds. Skew is left at KaTeX's value, because it
 places an accent over a glyph rather than describing the glyph, and the scaled Greek is
 the one case where every number moves, since there the glyph itself is scaled.
+
+`check` and `verify` are what keep the two halves of a route in step, because a route is
+described twice -- once to the browser as CSS and once to KaTeX as a metric plan -- and
+four routes were shipped whose descriptions disagreed. `check` reads both descriptions
+and reports the code points where they differ; it needs a rendered page for the faces and
+no browser. `verify` reads the page they produced: it draws representative inputs in each
+variant and compares the advance the browser inked with the width KaTeX summed from its
+own table, which is the check that cannot be satisfied by writing the same mistake twice.
+Neither is a nicety. A route that draws one face and measures another produces no error
+anywhere -- only a montage answering a question nobody asked.
 """
 
 from __future__ import annotations
@@ -351,16 +364,31 @@ def metrics_table(faces: Sequence[FaceMetrics]) -> str:
 
 @dataclass(frozen=True)
 class PageFaces:
-    """The three inlined faces a composite family is assembled from, as `data:` URLs.
+    """The inlined faces a route's families are assembled from, as `data:` URLs.
 
     Taken out of the rendered page rather than out of the font files, so a variant is a
     string operation on one self-contained document: no network, no second render, and
-    the composite is built from the same bytes the page already ships.
+    the route is built from the same bytes the page already ships.
+
+    One reading face per style KaTeX can put a Latin letter in, because a route that
+    moves `\\mathbf` has to move it in bold or draw a weight the metric table is not
+    describing. `file` names which woff2 each URL came from, which is how `reconcile`
+    below joins a CSS rule back to the glyph coverage it actually has.
     """
 
     pt_regular: str
+    pt_italic: str
+    pt_bold: str
     katex_main: str
     katex_math_italic: str
+
+    def file(self, url: str) -> str | None:
+        """The woff2 a `data:` URL was taken from, for the reading faces only."""
+        return {
+            self.pt_regular: _PT_REGULAR_FILE,
+            self.pt_italic: _PT_ITALIC_FILE,
+            self.pt_bold: _PT_BOLD_FILE,
+        }.get(url)
 
 
 def _prose_face(html: str, family: str, style: str, weight: str) -> str:
@@ -389,26 +417,84 @@ def _katex_face(html: str, name: str, style: str, weight: str) -> str:
 
 
 def page_faces(html: str) -> PageFaces:
-    """The faces every composite below is built from."""
+    """The faces every route below is built from."""
     return PageFaces(
         pt_regular=_prose_face(html, "PT Serif", "normal", "400"),
+        pt_italic=_prose_face(html, "PT Serif", "italic", "400"),
+        pt_bold=_prose_face(html, "PT Serif", "normal", "700"),
         katex_main=_katex_face(html, "KaTeX_Main", "normal", "400"),
         katex_math_italic=_katex_face(html, "KaTeX_Math", "italic", "400"),
     )
 
 
-#: The code points a variant can move, as the metric table indexes them.
+#: The code points a route can move, as the metric table indexes them.
 _DIGITS = tuple(range(0x30, 0x3A))
 _LETTERS = tuple(range(0x41, 0x5B)) + tuple(range(0x61, 0x7B))
 _ALPHANUMERIC = _DIGITS + _LETTERS
+
+#: The five characters the one operator-moving route adds, spelled out because they are
+#: the whole of what separates it: `+`, `<`, `=`, `>`, and U+2212, which is the minus
+#: KaTeX sets for `-` in math and not the hyphen a source file would otherwise carry.
+_OPERATORS = (0x2B, 0x3C, 0x3D, 0x3E, 0x2212)
+
 _GREEK = tuple(range(0x370, 0x400))
 _GREEK_CAPITALS = tuple(range(0x391, 0x3AA))
+
+#: Greek plus the two dotless letters KaTeX draws from the same italic math face. The
+#: scaled family claims them, so the scaled metric plan has to reach them too, even
+#: though this page sets no `\imath` and the table has no row for either.
+_GREEK_SCALED = (*_GREEK, 0x1D6A4, 0x1D6A5)
 
 #: Lowercase Greek to PT Serif's x-height, 500/441; capitals, which KaTeX sets upright
 #: from Main-Regular, to its cap height, 700/683. Scaling by the x-height ratio also
 #: thickens the strokes by the same 13%, which is the second half of why it helps.
 GREEK_SCALE = 1.134
 GREEK_CAPITAL_SCALE = 1.025
+
+#: A face or a scale over `WHOLE_FACE` covers every glyph the file has rather than a
+#: named range. That is what a `size-adjust` on a family with no `unicode-range` applies
+#: to, and so what the metric patch has to move: every row of that face's table.
+WHOLE_FACE: tuple[int, ...] | None = None
+
+
+def _ranges(code_points: Iterable[int]) -> str:
+    """A `unicode-range` list covering exactly these code points, runs collapsed.
+
+    Written rather than hand-typed so one tuple is the whole description of a route: the
+    range the browser reads and the entries the metric patch rewrites cannot then say
+    different things, which is the failure this module is most prone to.
+    """
+    ordered = sorted(set(code_points))
+    if not ordered:
+        raise ValueError("a face restricted to no code points would never be reached")
+    runs: list[list[int]] = []
+    for point in ordered:
+        if runs and point == runs[-1][1] + 1:
+            runs[-1][1] = point
+        else:
+            runs.append([point, point])
+    return ", ".join(
+        f"U+{low:04X}" if low == high else f"U+{low:04X}-{high:04X}" for low, high in runs
+    )
+
+
+#: Which of KaTeX's metric tables each CSS rule a route writes is laid out from. This is
+#: the join the whole reconciliation turns on, and the reason a route cannot be read off
+#: its class selectors alone: KaTeX looks a character's box up by *face*, never by class,
+#: so two selectors landing in the same table have to draw from the same font or one of
+#: them is placed from a measurement of the other. `.katex` is the root rule, which draws
+#: everything KaTeX gives no font class at all -- digits, operators, and the letters of
+#: the built-in operator names `\sin`, `\cos`, `\tan` -- and it shares Main-Regular with
+#: `\text` and `\mathrm`, which is why no route can move one of those and not the other.
+SELECTOR_FACES: tuple[tuple[str, str], ...] = (
+    (".katex", "Main-Regular"),
+    (".mainrm", "Main-Regular"),
+    (".textrm", "Main-Regular"),
+    (".mathrm", "Main-Regular"),
+    (".mathnormal", "Math-Italic"),
+    (".mathit", "Main-Italic"),
+    (".mathbf", "Main-Bold"),
+)
 
 
 @dataclass(frozen=True)
@@ -417,7 +503,9 @@ class Variant:
 
     `swaps` and `scales` describe the same change to KaTeX's metric table that the CSS
     describes to the browser, so `--metrics-patch` rewrites exactly the entries whose
-    glyphs the variant actually redirects and no others.
+    glyphs the variant actually redirects and no others. `reconcile` below is what holds
+    the two descriptions to each other; every built-in route is checked by it in the
+    tests, because the two were written by hand once and disagreed four ways.
     """
 
     name: str
@@ -425,61 +513,113 @@ class Variant:
     css: str
     #: `(metric face, PT Serif file, code points)` for glyphs drawn from another file.
     swaps: tuple[tuple[str, str, tuple[int, ...]], ...] = ()
-    #: `(metric face, code points, factor)` for glyphs drawn from the same file, scaled.
-    scales: tuple[tuple[str, tuple[int, ...], float], ...] = ()
+    #: `(metric face, code points or `WHOLE_FACE`, factor)` for glyphs drawn from the
+    #: same file, scaled.
+    scales: tuple[tuple[str, tuple[int, ...] | None, float], ...] = ()
 
 
 _PT_REGULAR_FILE = "pt-serif-latin-400-normal.woff2"
 _PT_ITALIC_FILE = "pt-serif-latin-400-italic.woff2"
 _PT_BOLD_FILE = "pt-serif-latin-700-normal.woff2"
 
-_DIGIT_SWAPS = (("Main-Regular", _PT_REGULAR_FILE, _ALPHANUMERIC),)
-_LETTER_SWAPS = (*_DIGIT_SWAPS, ("Math-Italic", _PT_ITALIC_FILE, _LETTERS))
-_ALL_SWAPS = (
-    *_LETTER_SWAPS,
-    ("Main-Italic", _PT_ITALIC_FILE, _LETTERS),
-    ("Main-Bold", _PT_BOLD_FILE, _ALPHANUMERIC),
-)
+#: The families a route declares, named for what they carry rather than for the KaTeX
+#: face they stand in front of. Each is the reading face alone, restricted to the route's
+#: own code points; the KaTeX face follows it in the rule's family list, which is where
+#: anything outside that range is answered. Two families rather than one composite,
+#: because a composite claiming the whole plane also claims the ranges a later family in
+#: the list was added to serve -- which is exactly how the scaled Greek capitals came to
+#: be shadowed.
+_UPRIGHT_FAMILY = "PT Math Upright"
+_ITALIC_FAMILY = "PT Math Italic"
+_BOLD_FAMILY = "PT Math Bold"
 
-#: Upright text: `\text`, `\textrm` and `\mathrm` all reach the reading face, and the
-#: root composite covers what carries no class at all, digits above everything else.
-_UPRIGHT_CSS = """
-.kpress .katex .mainrm, .kpress .katex .textrm, .kpress .katex .mathrm {
-  font-family: "PT Serif", KaTeX_Main; }
-"""
 
-_ITALIC_CSS = """
-.kpress .katex .mathnormal { font-family: "PT Serif", KaTeX_Math; font-style: italic; }
-"""
+def _face(
+    family: str,
+    src: str,
+    code_points: tuple[int, ...] | None,
+    *,
+    style: str = "normal",
+    weight: str = "400",
+    adjust: float | None = None,
+) -> str:
+    """One `@font-face`, restricted to the code points the route claims to move."""
+    size_adjust = "" if adjust is None else f"\n  size-adjust: {adjust * 100:.1f}%;"
+    restriction = "" if code_points is None else f"\n  unicode-range: {_ranges(code_points)};"
+    return (
+        f'@font-face {{ font-family: "{family}"; font-style: {style}; '
+        f"font-weight: {weight};\n"
+        f'  src: url("{src}") format("woff2");{size_adjust}{restriction} }}\n'
+    )
 
-_ALL_CSS = """
-/* Operator names -- `tan`, `arctan` -- are included by the root rule, since KaTeX
-   gives them no font class of their own. */
-.kpress .katex .mainrm, .kpress .katex .textrm, .kpress .katex .mathrm {
-  font-family: "PT Serif", KaTeX_Main; }
-.kpress .katex .mathnormal, .kpress .katex .mathit {
-  font-family: "PT Serif", KaTeX_Math; font-style: italic; }
-.kpress .katex .mathbf { font-family: "PT Serif", KaTeX_Main; font-weight: 700; }
-.kpress .katex .boldsymbol {
-  font-family: "PT Serif", KaTeX_Math; font-style: italic; font-weight: 700; }
-"""
+
+def _upright_css(faces: PageFaces, code_points: tuple[int, ...], greek: str = "") -> str:
+    r"""Upright glyphs from the reading face, everywhere KaTeX draws them upright.
+
+    Two rules and one family, written together because both are laid out from
+    Main-Regular's rows. The root rule draws every character KaTeX gives no font class:
+    digits, operators, and the letters of `\sin` and `\tan`. The class rule draws `\text`
+    and `\mathrm`. A route that moved one and left the other on KaTeX would be measured
+    from a face it does not draw for whichever half it left behind, and there is no
+    second Main-Regular table to give them different answers.
+    """
+    tail = f'"{_UPRIGHT_FAMILY}", {greek}KaTeX_Main'
+    return (
+        _face(_UPRIGHT_FAMILY, faces.pt_regular, code_points)
+        + f'.kpress .katex {{ font-family: {tail}, "Times New Roman", serif; }}\n'
+        + ".kpress .katex .mainrm, .kpress .katex .textrm, .kpress .katex .mathrm {\n"
+        + f"  font-family: {tail}; }}\n"
+    )
+
+
+def _italic_css(faces: PageFaces, greek: str = "") -> str:
+    """Italic variables from PT Serif Italic; Greek is left to the family after it."""
+    return (
+        _face(_ITALIC_FAMILY, faces.pt_italic, _LETTERS, style="italic")
+        + ".kpress .katex .mathnormal {\n"
+        + f'  font-family: "{_ITALIC_FAMILY}", {greek}KaTeX_Math; font-style: italic; }}\n'
+    )
+
+
+def _every_style_css(faces: PageFaces, greek: str = "") -> str:
+    r"""The italic route plus the other two styles a Latin letter can be set in.
+
+    `\boldsymbol` is deliberately absent. Its face is KaTeX_Math bold italic, which this
+    page does not carry -- the renderer prunes it as unreachable, the same slot the
+    shipped composite drops -- and no route here plans a Math-BoldItalic patch. A rule
+    for it would draw the reading face out of a table nothing had rewritten, which is the
+    one thing every route above is arranged not to do.
+    """
+    return (
+        _italic_css(faces, greek)
+        + ".kpress .katex .mathit {\n"
+        + f'  font-family: "{_ITALIC_FAMILY}", KaTeX_Main; font-style: italic; }}\n'
+        + _face(_BOLD_FAMILY, faces.pt_bold, _ALPHANUMERIC, weight="700")
+        + ".kpress .katex .mathbf {\n"
+        + f'  font-family: "{_BOLD_FAMILY}", KaTeX_Main; font-weight: 700; }}\n'
+    )
+
 
 _ONE_EM_CSS = """
 .kpress { --kpress-katex-size-prose: 1em; }
 """
 
-
-def _composite(family: str, faces: PageFaces, katex_range: str, prose_range: str) -> str:
-    """A family that answers with KaTeX_Main over one range and PT Serif over another."""
-    return (
-        f'@font-face {{ font-family: "{family}"; font-style: normal; font-weight: 400;\n'
-        f'  src: url("{faces.katex_main}") format("woff2");\n'
-        f"  unicode-range: {katex_range}; }}\n"
-        f'@font-face {{ font-family: "{family}"; font-style: normal; font-weight: 400;\n'
-        f'  src: url("{faces.pt_regular}") format("woff2");\n'
-        f"  unicode-range: {prose_range}; }}\n"
-        f'.kpress .katex {{ font-family: "{family}", KaTeX_Main, "Times New Roman", serif; }}\n'
-    )
+#: Upright text and the built-in operator names share Main-Regular, so every route that
+#: moves one moves both, and the plan patches the letters as well as the digits.
+_UPRIGHT_SWAPS = (("Main-Regular", _PT_REGULAR_FILE, _ALPHANUMERIC),)
+_LETTER_SWAPS = (*_UPRIGHT_SWAPS, ("Math-Italic", _PT_ITALIC_FILE, _LETTERS))
+_ALL_SWAPS = (
+    *_LETTER_SWAPS,
+    ("Main-Italic", _PT_ITALIC_FILE, _LETTERS),
+    ("Main-Bold", _PT_BOLD_FILE, _ALPHANUMERIC),
+)
+#: The operator route draws five more characters from the reading face, and they are
+#: Main-Regular's rows too: an unpatched `+` is placed in a box 0.24 em wider than the
+#: glyph that lands in it.
+_OPERATOR_SWAPS = (
+    ("Main-Regular", _PT_REGULAR_FILE, _ALPHANUMERIC + _OPERATORS),
+    *_ALL_SWAPS[1:],
+)
 
 
 def built_in_variants(faces: PageFaces) -> tuple[Variant, ...]:
@@ -487,43 +627,27 @@ def built_in_variants(faces: PageFaces) -> tuple[Variant, ...]:
 
     All eight are relative to stock KaTeX, which is what `stock_katex_baseline` restores
     before any of this CSS is injected: `current` is that baseline with nothing added,
-    and every other route is one family on top of it.
+    and every other route is one or more restricted reading faces on top of it.
     """
-    digits = _composite("KaTeX_MainPT", faces, "U+0000-002F, U+003A-10FFFF", "U+0030-0039")
-    latin = _composite(
-        "KaTeX_MainPTL",
-        faces,
-        "U+0000-002F, U+003A-0040, U+005B-0060, U+007B-10FFFF",
-        "U+0030-0039, U+0041-005A, U+0061-007A",
-    )
-    operators = _composite(
-        "KaTeX_MainPTO",
-        faces,
-        "U+0000-002A, U+002C-002F, U+003A-003B, U+003F-0040, U+005B-0060, "
-        "U+007B-2211, U+2213-10FFFF",
-        "U+002B, U+0030-0039, U+003C-003E, U+0041-005A, U+0061-007A, U+2212",
-    )
-    size_adjusted = (
-        '@font-face { font-family: "KaTeX_MathAdj"; font-style: italic; font-weight: 400;\n'
-        f'  src: url("{faces.katex_math_italic}") format("woff2");\n'
-        f"  size-adjust: {GREEK_SCALE * 100:.1f}%; }}\n"
+    upright = _upright_css(faces, _ALPHANUMERIC)
+    every_style = _every_style_css(faces)
+    size_adjusted = _face(
+        "KaTeX_MathAdj",
+        faces.katex_math_italic,
+        WHOLE_FACE,
+        style="italic",
+        adjust=GREEK_SCALE,
+    ) + (
         ".kpress .katex .mathnormal {\n"
         '  font-family: "KaTeX_MathAdj", KaTeX_Math; font-style: italic; }\n'
     )
-    greek = (
-        '@font-face { font-family: "KaTeX_MathGreek"; font-style: italic; font-weight: 400;\n'
-        f'  src: url("{faces.katex_math_italic}") format("woff2");\n'
-        f"  unicode-range: U+0370-03FF, U+1D6A4-1D6A5; "
-        f"size-adjust: {GREEK_SCALE * 100:.1f}%; }}\n"
-        '@font-face { font-family: "KaTeX_MainGreek"; font-style: normal; font-weight: 400;\n'
-        f'  src: url("{faces.katex_main}") format("woff2");\n'
-        f"  unicode-range: U+0391-03A9; size-adjust: {GREEK_CAPITAL_SCALE * 100:.1f}%; }}\n"
-        ".kpress .katex .mathnormal {\n"
-        '  font-family: "PT Serif", "KaTeX_MathGreek", KaTeX_Math; font-style: italic; }\n'
-        ".kpress .katex {\n"
-        '  font-family: "KaTeX_MainPTL", "KaTeX_MainGreek", KaTeX_Main, '
-        '"Times New Roman", serif; }\n'
-    )
+    greek_faces = _face(
+        "KaTeX_MathGreek",
+        faces.katex_math_italic,
+        _GREEK_SCALED,
+        style="italic",
+        adjust=GREEK_SCALE,
+    ) + _face("KaTeX_MainGreek", faces.katex_main, _GREEK_CAPITALS, adjust=GREEK_CAPITAL_SCALE)
     return (
         Variant(
             "current",
@@ -532,48 +656,56 @@ def built_in_variants(faces: PageFaces) -> tuple[Variant, ...]:
         ),
         Variant(
             "digits",
-            "Route B: digits and upright text from PT Serif; variables stay KaTeX_Math",
-            digits + _UPRIGHT_CSS,
-            swaps=_DIGIT_SWAPS,
+            "Route B: digits and upright text from PT Serif, operator names with them; "
+            "variables stay KaTeX_Math",
+            upright,
+            swaps=_UPRIGHT_SWAPS,
         ),
         Variant(
             "letters",
             "Route C: B plus italic variables from PT Serif Italic",
-            digits + _UPRIGHT_CSS + _ITALIC_CSS,
+            upright + _italic_css(faces),
             swaps=_LETTER_SWAPS,
         ),
         Variant(
             "all",
             "Route D: every Latin letter and digit from PT Serif, in every style",
-            latin + _ALL_CSS,
+            upright + every_style,
             swaps=_ALL_SWAPS,
         ),
         Variant(
             "all-1em",
             "Route E: D with the prose KaTeX size token at 1em instead of 1.05em",
-            latin + _ALL_CSS + _ONE_EM_CSS,
+            upright + every_style + _ONE_EM_CSS,
             swaps=_ALL_SWAPS,
         ),
         Variant(
             "sizeadj",
             "Route F, eliminated: B plus KaTeX_Math size-adjusted to PT Serif's x-height",
-            digits + _UPRIGHT_CSS + size_adjusted,
-            swaps=_DIGIT_SWAPS,
-            scales=(("Math-Italic", _LETTERS, GREEK_SCALE),),
+            upright + size_adjusted,
+            swaps=_UPRIGHT_SWAPS,
+            # The adjusted family carries no `unicode-range`, so it draws every glyph
+            # `.mathnormal` reaches -- Greek as much as Latin -- and the plan scales the
+            # whole table with it. Scaling only the letters left `\alpha` drawn 13.4%
+            # larger than the box KaTeX had placed it in.
+            scales=(("Math-Italic", WHOLE_FACE, GREEK_SCALE),),
         ),
         Variant(
             "ops",
             "Route H, eliminated: D plus + - = < > from PT Serif, as mathastext does",
-            operators + _ALL_CSS,
-            swaps=_ALL_SWAPS,
+            _upright_css(faces, _ALPHANUMERIC + _OPERATORS) + every_style,
+            swaps=_OPERATOR_SWAPS,
         ),
         Variant(
             "greek",
             "Route J: E plus Greek scaled to PT Serif, lowercase 113.4%, capitals 102.5%",
-            latin + _ALL_CSS + _ONE_EM_CSS + greek,
+            _upright_css(faces, _ALPHANUMERIC, greek='"KaTeX_MainGreek", ')
+            + _every_style_css(faces, greek='"KaTeX_MathGreek", ')
+            + _ONE_EM_CSS
+            + greek_faces,
             swaps=_ALL_SWAPS,
             scales=(
-                ("Math-Italic", _GREEK, GREEK_SCALE),
+                ("Math-Italic", _GREEK_SCALED, GREEK_SCALE),
                 ("Main-Regular", _GREEK_CAPITALS, GREEK_CAPITAL_SCALE),
             ),
         ),
@@ -643,6 +775,7 @@ def _rewrite_face_table(
     face: str,
     replacements: dict[int, tuple[float, float, float, float]],
     factors: dict[int, float],
+    whole_face: float | None = None,
 ) -> tuple[str, int]:
     """Rewrite one face's entries in place, returning the page and the count changed."""
     marker = f'"{face}":{{'
@@ -669,8 +802,8 @@ def _rewrite_face_table(
             return (
                 f"{code_point}:[{depth:.5f},{height:.5f},{italic:.5f},{values[3]},{width:.5f}]"
             )
-        if code_point in factors:
-            factor = factors[code_point]
+        factor = factors.get(code_point, whole_face)
+        if factor is not None:
             rewritten += 1
             # Here the glyph itself is scaled by `size-adjust`, so every number moves.
             scaled = ",".join(f"{value * factor:.5f}" for value in values)
@@ -693,12 +826,245 @@ def patch_metrics(html: str, variant: Variant, font_dir: Path) -> tuple[str, int
         factors = {
             code_point: factor
             for scaled, code_points, factor in variant.scales
-            if scaled == face
+            if scaled == face and code_points is not None
             for code_point in code_points
         }
-        html, rewritten = _rewrite_face_table(html, face, replacements, factors)
+        # A `WHOLE_FACE` scale reaches rows this module never enumerates, so it is
+        # applied by the rewrite itself rather than expanded into `factors` here: the
+        # table is the only place the face's own row list exists.
+        whole = next(
+            (
+                factor
+                for scaled, code_points, factor in variant.scales
+                if scaled == face and code_points is None
+            ),
+            None,
+        )
+        html, rewritten = _rewrite_face_table(html, face, replacements, factors, whole)
         total += rewritten
     return html, total
+
+
+# Holding the CSS and the metric plan to each other.
+
+#: The woff2 behind each of KaTeX's metric tables. A table is generated from its face, so
+#: this is also what says whether a table has a row for a code point at all -- which is
+#: what keeps the check below from reporting a disagreement about a row that cannot exist.
+_METRIC_FACE_FILES = {
+    "Main-Regular": "KaTeX_Main-Regular.woff2",
+    "Main-Italic": "KaTeX_Main-Italic.woff2",
+    "Main-Bold": "KaTeX_Main-Bold.woff2",
+    "Math-Italic": "KaTeX_Math-Italic.woff2",
+}
+
+#: Where a route and its plan can disagree at all: the alphanumerics and operators any
+#: route moves, and the Greek one route scales. Nothing outside it is redirected by any
+#: built-in route, and the check is per code point, so a wider set would only be slower.
+_PROBE_POINTS = _ALPHANUMERIC + _OPERATORS + _GREEK
+
+#: A family named in a rule but declared nowhere in the variant's CSS: KaTeX's own, or
+#: the generic tail. It draws the stock face at stock size, which is what a plan that
+#: says nothing about a code point is asserting.
+STOCK = "KaTeX"
+
+
+@dataclass(frozen=True)
+class _Declared:
+    """One `@font-face` a variant's CSS declares, as the browser would match it."""
+
+    family: str
+    style: str
+    weight: str
+    source: str
+    points: frozenset[int] | None
+    adjust: float
+
+
+_FONT_FACE = re.compile(r"@font-face\s*\{([^{}]*)\}")
+_RULE = re.compile(r"([^{}]+)\{([^{}]*)\}")
+_RANGE = re.compile(r"U\+([0-9A-Fa-f]+)(?:-([0-9A-Fa-f]+))?")
+#: Read on its own, because a `data:` URL carries the `;` every other property ends at.
+_SRC = re.compile(r'src:\s*url\("([^"]+)"\)')
+
+
+def _declaration(body: str, name: str, fallback: str = "") -> str:
+    match = re.search(rf"(?:^|;)\s*{name}\s*:\s*([^;]+)", body)
+    return match.group(1).strip() if match else fallback
+
+
+def _declared_faces(css: str) -> list[_Declared]:
+    """Every `@font-face` in a variant's CSS, in declaration order."""
+    declared: list[_Declared] = []
+    for match in _FONT_FACE.finditer(css):
+        body = match.group(1)
+        restriction = _declaration(body, "unicode-range")
+        points = None
+        if restriction:
+            points = frozenset(
+                point
+                for low, high in _RANGE.findall(restriction)
+                for point in range(int(low, 16), int(high or low, 16) + 1)
+            )
+        adjust = _declaration(body, "size-adjust", "100%")
+        source = _SRC.search(body)
+        if source is None:
+            raise SystemExit(f"an @font-face in the variant's CSS declares no url(): {body}")
+        declared.append(
+            _Declared(
+                family=_declaration(body, "font-family").strip("\"'"),
+                style=_declaration(body, "font-style", "normal"),
+                weight=_declaration(body, "font-weight", "400"),
+                source=source.group(1),
+                points=points,
+                adjust=float(adjust.rstrip("%")) / 100,
+            )
+        )
+    return declared
+
+
+def _rules(css: str) -> list[tuple[list[str], str, str, list[str]]]:
+    """Each rule that names a family, as `(selectors, style, weight, family list)`."""
+    found: list[tuple[list[str], str, str, list[str]]] = []
+    for match in _RULE.finditer(_FONT_FACE.sub("", css)):
+        families = _declaration(match.group(2), "font-family")
+        if not families:
+            continue
+        found.append(
+            (
+                [selector.strip() for selector in match.group(1).split(",")],
+                _declaration(match.group(2), "font-style", "normal"),
+                _declaration(match.group(2), "font-weight", "400"),
+                [family.strip().strip("\"'") for family in families.split(",")],
+            )
+        )
+    return found
+
+
+def _drawn_by(
+    families: Sequence[str],
+    style: str,
+    weight: str,
+    code_point: int,
+    *,
+    declared: Sequence[_Declared],
+    coverage: dict[str, frozenset[int]],
+) -> tuple[str, float]:
+    """Which face a rule's family list actually draws a code point from, and at what size.
+
+    The browser's own order: each family in turn, and within a family the declaration
+    whose style and weight match and whose `unicode-range` claims the character. A family
+    that claims the character but whose file has no glyph for it does not answer, which is
+    the difference between a route that moves a glyph and one that only says it does.
+    """
+    names = {face.family for face in declared}
+    for family in families:
+        if family not in names:
+            # KaTeX's own, or the generic tail: whatever it is, it is not this route's.
+            return STOCK, 1.0
+        for face in declared:
+            if face.family != family or face.style != style or face.weight != weight:
+                continue
+            if face.points is not None and code_point not in face.points:
+                continue
+            if code_point not in coverage[face.source]:
+                continue
+            return face.source, face.adjust
+    return STOCK, 1.0
+
+
+def _planned(variant: Variant, face: str, code_point: int) -> tuple[str, float]:
+    """The file and size the plan says that face's row for a code point was rewritten to.
+
+    A swap moves the row to another file at its own size; a scale keeps KaTeX's own file
+    and multiplies every number in the row. A code point in neither is KaTeX's, untouched,
+    which is the same pair as a scale of one over the face's own file -- so both sides of
+    the comparison can be written as one `(file, factor)` and neither needs a third state.
+    """
+    for swapped, filename, points in variant.swaps:
+        if swapped == face and code_point in points:
+            return filename, 1.0
+    for scaled, points, factor in variant.scales:
+        if scaled == face and (points is None or code_point in points):
+            return _METRIC_FACE_FILES[face], factor
+    return _METRIC_FACE_FILES[face], 1.0
+
+
+def reconcile(variant: Variant, faces: PageFaces, font_dir: Path = PROSE_FONTS) -> list[str]:
+    r"""Every disagreement between the glyphs `variant` draws and the boxes it measures.
+
+    Two independent descriptions of one route meet here. The CSS says which file draws a
+    character; `swaps` and `scales` say which file KaTeX was told to lay it out from. They
+    were written side by side once and disagreed four ways -- `\sin` drawn from KaTeX and
+    measured from PT Serif, a whole face scaled in CSS and only its letters in the plan,
+    five operators moved with no entries for them, and scaled Greek capitals shadowed by an
+    earlier family claiming the whole plane. None of the four is an error at any point in
+    the pipeline: each is a page that draws one font and places it from another, which is
+    visible only as a montage answering a question nobody asked.
+
+    Reported per metric face rather than per selector, because the table is per face: two
+    selectors that reach the same table must draw from the same file, and a route that
+    moves `\text` without moving the operator names is not a route the table can express.
+    """
+    declared = _declared_faces(variant.css)
+    sources = {
+        faces.pt_regular: font_dir / _PT_REGULAR_FILE,
+        faces.pt_italic: font_dir / _PT_ITALIC_FILE,
+        faces.pt_bold: font_dir / _PT_BOLD_FILE,
+        faces.katex_main: KATEX_FONTS / "KaTeX_Main-Regular.woff2",
+        faces.katex_math_italic: KATEX_FONTS / "KaTeX_Math-Italic.woff2",
+    }
+    coverage = {
+        url: frozenset(_unicode_cmap(TTFont(path), path)) for url, path in sources.items()
+    }
+    named = {url: path.name for url, path in sources.items()}
+    rules = _rules(variant.css)
+
+    # Gathered before anything is reported, and keyed by what the disagreement is rather
+    # than by where it was found, so that a run of code points saying the same thing is
+    # one line naming a range instead of fifty-two naming a letter each.
+    disagreements: dict[tuple[str, ...], list[int]] = {}
+    for face, filename in _METRIC_FACE_FILES.items():
+        path = KATEX_FONTS / filename
+        rows = frozenset(_unicode_cmap(TTFont(path), path))
+        selectors = [selector for selector, reached in SELECTOR_FACES if reached == face]
+        for code_point in _PROBE_POINTS:
+            if code_point not in rows:
+                continue
+            planned, scale = _planned(variant, face, code_point)
+            for selector in selectors:
+                matching = [
+                    rule for rule in rules if any(one.endswith(selector) for one in rule[0])
+                ]
+                if not matching:
+                    drawn, adjust = STOCK, 1.0
+                else:
+                    _, style, weight, families = matching[-1]
+                    drawn, adjust = _drawn_by(
+                        families,
+                        style,
+                        weight,
+                        code_point,
+                        declared=declared,
+                        coverage=coverage,
+                    )
+                # An undeclared family is KaTeX's own face at its own size, which is the
+                # same pair the plan writes for a row it leaves alone.
+                source = named.get(drawn, filename)
+                if source == planned and abs(adjust - scale) < 1e-9:
+                    continue
+                key = (
+                    face,
+                    selector,
+                    f"{source} at {adjust:.3f}",
+                    f"{planned} at {scale:.3f}",
+                )
+                disagreements.setdefault(key, []).append(code_point)
+
+    return [
+        f"{variant.name}: {face}'s rows for {_ranges(points)} are drawn through "
+        f"`{selector}` from {source}, but the plan measures them from {plan}"
+        for (face, selector, source, plan), points in disagreements.items()
+    ]
 
 
 # Building the pages.
@@ -840,7 +1206,7 @@ _MARK_PARAGRAPH = """({key, start}) => {
 #: `built_in_variants` needs faces only to build CSS; the names and the order it returns
 #: do not depend on them, and stacking the pages is the one caller that wants the names
 #: on their own, from a directory rather than from a page.
-_NAMES_ONLY = PageFaces("", "", "")
+_NAMES_ONLY = PageFaces("", "", "", "", "")
 
 
 def _variant_order(directory: Path, only: Sequence[str]) -> list[Path]:
@@ -979,6 +1345,130 @@ def _montage(out: Path, key: str, rows: Sequence[tuple[str, Path]]) -> Path | No
     return target
 
 
+# Checking the pages in a browser.
+
+#: One input for each way a route can reach a metric table, which is one input for each of
+#: the four defects the reconciliation above was written for: the letters of a built-in
+#: operator name and a digit run reach Main-Regular through the root rule, `\text` reaches
+#: it through a class, an operator reaches it as itself; `\alpha` reaches Math-Italic and
+#: `\Gamma` is the upright capital KaTeX draws from Main-Regular; `x` and `\mathbf{D}` are
+#: the plain variable and the one bold letter this page actually sets.
+#: One character per input wherever an input can be one. KaTeX merges adjacent symbols
+#: that share a class into a single node and concatenates their text without summing
+#: their widths, so a multi-character run's declared width is its first character's. The
+#: probe below refuses such a node rather than comparing against it; `\sin` is exempt
+#: because operator names are built without that merge, which is also why they are the
+#: run this whole finding was reported on.
+VERIFY_INPUTS: tuple[str, ...] = (
+    r"\sin",
+    r"\alpha",
+    "+",
+    r"\Gamma",
+    "4",
+    "x",
+    r"\text{f}",
+    r"\mathbf{D}",
+)
+
+#: How far a drawn advance may sit from the width KaTeX placed it in, in em. Every route
+#: now agrees to within 0.0016 em, which is the browser's own rounding of a subpixel
+#: advance; the four defects this was written for were 0.016, 0.086, 0.100 and 0.245 em
+#: out. The threshold sits an order of magnitude clear of each side of that gap.
+VERIFY_TOLERANCE_EM = 0.01
+
+#: Draw each input into the page and read back both numbers: the advance the browser
+#: actually inked, and the width KaTeX summed from its own table to place it. Both come
+#: from one call, on the page's own KaTeX build, inside the column so that the rules and
+#: the size the page sets are the ones in force -- a measurement taken in a bare document
+#: would compare fonts nobody is looking at.
+_ADVANCES = r"""(inputs) => {
+  const column = document.querySelector('.kpress');
+  const host = document.createElement('span');
+  column.appendChild(host);
+  const measured = [];
+  try {
+    for (const input of inputs) {
+      host.textContent = '';
+      const tree = katex.__renderToDomTree(input, {throwOnError: true, displayMode: false});
+      host.appendChild(tree.toNode());
+      const drawn = host.firstElementChild;
+      const size = parseFloat(getComputedStyle(drawn).fontSize);
+      measured.push({
+        input,
+        /* The sum of the leaves' own boxes: KaTeX's table is per glyph, and what it
+           places is the run, so the run is what compares with the drawn advance. */
+        metric: leaves(tree),
+        drawn: drawn.getBoundingClientRect().width / size,
+      });
+    }
+  } finally {
+    host.remove();
+  }
+  return measured;
+
+  /* A symbol's box is its advance plus its italic correction, because that is what
+     KaTeX draws: `SymbolNode.toNode` puts the correction on the node as a right margin,
+     and an inline margin widens the box the browser reports for the run around it. The
+     two numbers are separate rows in the metric table and the patch rewrites both. */
+  function leaves(node) {
+    if (typeof node.width === 'number' && typeof node.text === 'string') {
+      if ([...node.text].length > 1) {
+        throw new Error(
+          'KaTeX merged ' + JSON.stringify(node.text) + ' into one node, whose declared '
+          + 'width is only its first character: pick a single-character input');
+      }
+      return node.width + (node.italic || 0);
+    }
+    return (node.children || []).reduce((sum, child) => sum + leaves(child), 0);
+  }
+}"""
+
+
+def verify_advances(variants_dir: Path, only: Sequence[str] = ()) -> list[str]:
+    r"""Compare what each variant page draws with what its metric table placed.
+
+    The reconciliation above reads the two descriptions of a route; this reads the page
+    they produced. It is the check that cannot be satisfied by writing the same mistake
+    twice: the advance comes from the browser's own layout of the shipped woff2, and the
+    width comes from the table `--metrics-patch` rewrote, so a route drawing one face and
+    measuring another is a difference between two numbers rather than between two files.
+
+    Run over pages built with `--metrics-patch`; without it every route disagrees by
+    construction, which is the entire point of the flag.
+    """
+    from playwright.sync_api import sync_playwright  # noqa: PLC0415
+
+    pages = _variant_order(variants_dir, only)
+    if not pages:
+        raise SystemExit(f"no variant pages in {variants_dir}; run `variants` first")
+    failures: list[str] = []
+    with sync_playwright() as driver:
+        browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
+        try:
+            page = browser.new_page()
+            for source in pages:
+                page.goto(source.resolve().as_uri(), wait_until="load")
+                page.wait_for_selector(READY, timeout=60_000)
+                page.evaluate("document.fonts.ready")
+                rows: list[dict[str, Any]] = page.evaluate(_ADVANCES, list(VERIFY_INPUTS))
+                for row in rows:
+                    off = abs(float(row["drawn"]) - float(row["metric"]))
+                    mark = " " if off <= VERIFY_TOLERANCE_EM else "*"
+                    print(
+                        f"{mark} {source.stem:9} {row['input']:12} "
+                        f"drawn {row['drawn']:.5f}em  metric {row['metric']:.5f}em  "
+                        f"off {off:.5f}em"
+                    )
+                    if off > VERIFY_TOLERANCE_EM:
+                        failures.append(
+                            f"{source.stem}: {row['input']} is drawn {row['drawn']:.5f}em "
+                            f"wide and placed in {row['metric']:.5f}em"
+                        )
+        finally:
+            browser.close()
+    return failures
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     command = argparse.ArgumentParser(description=__doc__)
     subcommands = command.add_subparsers(dest="command", required=True)
@@ -1011,6 +1501,19 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="extra CSS selectors to stack, beyond the fixed set",
     )
 
+    check = subcommands.add_parser(
+        "check", help="hold every route's CSS to its own metric plan, without a browser"
+    )
+    check.add_argument("--page", type=Path, default=PAGE, help="the rendered explainer")
+
+    verify = subcommands.add_parser(
+        "verify", help="compare drawn advances with KaTeX's widths in a browser"
+    )
+    verify.add_argument(
+        "--variants", type=Path, required=True, help="directory of variant pages"
+    )
+    verify.add_argument("--only", nargs="+", default=(), help="variant names to verify")
+
     arguments = command.parse_args(argv)
     if arguments.command == "metrics":
         faces = [*DEFAULT_FACES, *((path.stem, path) for path in arguments.fonts)]
@@ -1022,9 +1525,32 @@ def main(argv: Sequence[str] | None = None) -> int:
             arguments.spec,
             metrics_patch=arguments.metrics_patch,
         )
+    elif arguments.command == "check":
+        return _report(check_routes(arguments.page), "every route draws what it measures")
+    elif arguments.command == "verify":
+        return _report(
+            verify_advances(arguments.variants, arguments.only),
+            "every drawn advance matches the width it was placed in",
+        )
     else:
         take_shots(arguments.variants, arguments.out, arguments.only, arguments.element)
     return 0
+
+
+def check_routes(page: Path) -> list[str]:
+    """Reconcile every built-in route against its own metric plan, from a rendered page."""
+    if not page.is_file():
+        raise SystemExit(f"no rendered page at {page}; render the explainer first")
+    html = stock_katex_baseline(page.read_text(encoding="utf-8"))
+    faces = page_faces(html)
+    return [line for variant in built_in_variants(faces) for line in reconcile(variant, faces)]
+
+
+def _report(failures: Sequence[str], clean: str) -> int:
+    for failure in failures:
+        print(failure)
+    print(clean if not failures else f"{len(failures)} disagreement(s)")
+    return 1 if failures else 0
 
 
 if __name__ == "__main__":
