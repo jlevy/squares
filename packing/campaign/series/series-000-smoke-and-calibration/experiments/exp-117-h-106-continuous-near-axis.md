@@ -67,6 +67,9 @@ one auxiliary clause for H-036, using the unchanged point formulas and complete 
 neighborhood. No target has run.
 Commit this protocol and pass record checks before dispatch from a clean detached
 `cf0f4d4c` checkout.
+Both commands run from that checkout's `packing/` directory, with `PYTHONPATH=src`
+selecting its isolated source. The existing project interpreter supplies dependencies;
+it does not select the integration checkout's source.
 
 The
 [independent review](../results/agenda-026/bc-255-near-axis-reader-independent-review.md)
