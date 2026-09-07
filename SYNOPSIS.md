@@ -1277,9 +1277,13 @@ stays refused. CG-010 is structurally complete under `BC-030`; BC-016 is blocked
 `think-3yv8` on retained poses, an executable glued row, symbolic tie labels, and a
 receipt checker, while BC-017 under `think-u97a` remains the ready constructive W7 lane.
 
-All `n = 1..100` frontier entries now point to normalized witnesses and deterministic
-house renderings. The source-complete corpus is calibration evidence, not an unseen
-holdout and not a new proof of optimality.
+All `n = 1..324` frontier entries now point to normalized witnesses and deterministic
+house renderings. The first hundred are calibration evidence, not an unseen holdout and
+not a new proof of optimality; `n = 101..324`, promoted on 2026-09-07 under the
+[expansion plan](docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md)
+and frozen at commit `6e21c4ca`, is the unseen corpus a confirmatory run may use once its
+instrument and grammar are frozen, and the calibration-only layers stay pinned to the
+first hundred.
 The atlas source inventory retains attributed Kingbird-derived numerical facts but no
 raw Kingbird SVG because the review located no express redistribution terms; that
 conservative repository policy is not a legal conclusion.
