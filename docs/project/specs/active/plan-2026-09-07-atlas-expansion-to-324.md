@@ -270,15 +270,22 @@ Each phase closes on its own validation and a commit.
 
 ### Phase 1: Gates
 
-- [ ] `think-k5z2`: machine reparse of catalogue exact forms and degrees, run against
+- [x] `think-k5z2`: machine reparse of catalogue exact forms and degrees, run against
       `n = 1..100` first; it must report zero divergences before Phase 2.
-- [ ] Retention record for `101..324`: extend `sources.json` and the prospective map;
-      update the retention README with the dated decision.
-- [ ] Evidence items for the new range.
-- [ ] `generate_frontier_case.py` with a golden test against a regenerated `n ≤ 100`
+      Landed as `sqpack.kingbird_catalogue`; 206 facts checked, zero divergences.
+      The catalogue's `n = 179` entry prints a superseded closed form beside a newer
+      decimal, so a generated record must check every form against its decimal.
+- [x] Retention record for `101..324`: the prospective map and the retention README
+      carry the dated decision; `sources.json` extends when the acquisition pass runs.
+- [x] Evidence items for the new range: three scopes widened to 324 and
+      `E-kingbird-grid-completeness` added.
+- [x] `generate_frontier_case.py` with a golden test against a regenerated `n ≤ 100`
       grid case (the generator must reproduce `n = 100`'s lanes from the same inputs).
-- [ ] Parameterize the builder and the figure-data tool by range and composite list;
+      Every bound lane of `n = 100, 99, 98, 64, 50` reproduces byte for byte.
+- [x] Parameterize the builder and the figure-data tool by range and composite list;
       the `known-best-1-100` family must be byte-identical before and after.
+      `CorpusRange` and `CompositeSpec`; the family, renderings, witnesses and records
+      were byte-identical after a rebuild.
 
 ### Phase 2: Corpus `101..200`
 

@@ -169,6 +169,81 @@ session:
     elapsed_seconds: 587
     elapsed_quality: platform_measured
     next_action: Archive the two Göbel pages under resources/web in a later slice.
+  - task: Machine-reparse catalogue exact forms, degrees and polynomials (think-l0vj)
+    operator: Claude Opus delegate
+    status: completed
+    recording: contemporaneous
+    phase: 2
+    outcome: sqpack.kingbird_catalogue parses all 174 pictured entries and the completeness
+      bound; check_source_coverage reconciles 206 facts for n = 1..100 with zero divergences and
+      refuses ten injected perturbations including the original n = 54 miss; n = 179 found to
+      print a superseded closed form beside a newer decimal.
+    evidence:
+    - packing/src/sqpack/kingbird_catalogue.py
+    - packing/tests/test_kingbird_catalogue.py
+    files:
+    - packing/src/sqpack/kingbird_catalogue.py
+    - packing/devtools/check_source_coverage.py
+    - packing/tests/test_kingbird_catalogue.py
+    checks:
+    - Coordinator re-ran ruff, basedpyright, the 23 tests and check_source_coverage before
+      committing 27982e1c.
+    uncertainty: The credit line is not yet exposed by the parser, so construction methods for
+      catalogue cases cannot be derived until the follow-up lands.
+    elapsed_seconds: 1348
+    elapsed_quality: platform_measured
+    next_action: Expose the credit line for the generator's construction-method mapping.
+  - task: Parameterize the known-best builder by corpus range and composite specification (think-s7bb)
+    operator: Claude Opus delegate
+    status: completed
+    recording: contemporaneous
+    phase: 2
+    outcome: CorpusRange and CompositeSpec replace the hard-coded range, layout, canvas and
+      baselines; the known-best-1-100 family, renderings, witnesses and frontier records were
+      byte-identical after a rebuild; the schema pins the 1-100 canvas through a contains clause.
+    evidence:
+    - packing/src/sqpack/known_best.py
+    - packing/tests/test_known_best_atlas.py
+    files:
+    - packing/devtools/build_known_best_atlas.py
+    - packing/devtools/build_composite_figure_data.py
+    - packing/devtools/render_composite_pdf.py
+    - packing/src/sqpack/known_best.py
+    - packing/atlas/known-best/known-best-atlas.schema.yaml
+    - packing/atlas/known-best/composite-figure.schema.yaml
+    - packing/tests/test_known_best_atlas.py
+    checks:
+    - Coordinator re-ran ruff, basedpyright, 26 tests, the atlas, figure-data and PDF checks and
+      the schema validation, and confirmed an empty git status over the 1-100 family, renderings,
+      witnesses and frontier before committing 14f86a4c.
+    uncertainty: The playbook's canvas-change instructions are now partly stale; the Phase 4
+      playbook rewrite owns that.
+    elapsed_seconds: 1343
+    elapsed_quality: platform_measured
+    next_action: Add the 1..324 composite specification in Phase 4.
+  - task: Frontier case generator for n > 100 with a golden test (think-bqu1)
+    operator: Claude Opus delegate
+    status: completed
+    recording: contemporaneous
+    phase: 2
+    outcome: generate_frontier_case reproduces every bound lane of n = 100, 99, 98, 64 and 50
+      byte for byte; 24 proved cases in 101..324 match the spec; refuses to write below 101 or
+      over an existing record.
+    evidence:
+    - packing/devtools/generate_frontier_case.py
+    - packing/tests/test_generate_frontier_case.py
+    files:
+    - packing/devtools/generate_frontier_case.py
+    - packing/tests/test_generate_frontier_case.py
+    - packing/tests/test_verified_upper_bound_contract.py
+    checks:
+    - Coordinator re-ran ruff, basedpyright and the 35 tests and generated n = 101 into the
+      scratchpad before committing 27ca4833.
+    uncertainty: 127 catalogue cases come out construction_method unknown until the credit line
+      is exposed; UnitSquare override cases and the n = 179 self-contradiction are follow-ups.
+    elapsed_seconds: 1334
+    elapsed_quality: platform_measured
+    next_action: Follow-up delegate for UnitSquare overrides, credit-line methods and n = 179.
   outputs:
   - docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
   checks:
