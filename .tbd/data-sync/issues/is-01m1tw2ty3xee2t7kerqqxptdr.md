@@ -5,7 +5,7 @@ title: Monitor landed upstream changes through the integrated research handoff
 kind: task
 status: in_progress
 priority: 0
-version: 18
+version: 19
 spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels:
   - orchestration
@@ -14,8 +14,9 @@ dependencies: []
 parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 child_order_hints:
   - is-01m1x5jw55j4kx432a2fc2smf0
+  - is-01m1x64qrvdn9wp33nbz525y39
 created_at: 2026-09-06T08:06:45.437Z
-updated_at: 2026-09-07T05:35:05.388Z
+updated_at: 2026-09-07T05:41:02.362Z
 ---
 Monitor PRs 93 and 94 and origin/main. Import only landed main commits, pause active research time for each integration, reconcile shared generated records conservatively, validate proportionately, and record exact merge commits in the handoff.
 
