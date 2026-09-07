@@ -390,6 +390,134 @@ A partial positive sweep, timeout, or disagreement proves neither outcome.
 No reweighting, support extension, new row, LP, or new research allocation is authorized
 by this assessment.
 
+### Source-Bound Adapter Readiness, 2026-09-07
+
+[Session 090](../../../../agent-sessions/session-090-four-hour-research.md) records a
+control-only GO for the [facet kernel](../../../../../devtools/density_face_verifier.py)
+at `ea9d2898` after independent mathematical review.
+Its [ten controls](../../../../../tests/test_density_face_verifier.py) passed in 1.98
+seconds pytest time, 2.23 seconds process wall and 2.16 seconds CPU. This establishes
+neither source-scale readiness nor a candidate result; the independently written slab
+kernel and its review are separate work.
+The following adapter assessment (`think-4tqm`, 00:57:08–01:01:04 UTC) inspected code
+and retained JSON only, without constructing geometry or replaying a source.
+
+Freeze the accepted [exp-113 packet](../exp-113-h-099-trump-support-screen/packet.json),
+retained at `a105f729`, and its
+[experiment scope](../../experiments/exp-113-h-099-trump-support-screen.md).
+The source is `trump11-v1`, with 60 distinct placements, orbit sizes
+`(4, 8, 8, 8, 8, 8, 8, 8)` and per-member weights `(1, 0, 2/5, 1/10, 0, 1/10, 3/10, 0)`,
+giving total mass $56/5$. Keep all placements, including the zero-weight ones, in the
+source identity. In the [source constructor](../../../../../cases/trump11/packing.py),
+`U_MIN_POLY` defines the half-angle parameter $u=\tan(a/2)$, not the container side
+called $U$ in H-099. Use the returned side $(6u+4)/(1+2u-u^2)$ and compare its retained
+coefficient vector; substituting `field.alpha` would change the problem.
+
+Reuse the existing boundaries:
+
+- The producer can use `load_source`, `bind_source` and `support_metadata`, followed by
+  [`make_family`](../../../../../src/sqpack/full_size_density/pair_separator.py) for
+  contained unit geometry, rational weights and geometric deduplication.
+  The reader can use `reconstruct_source` and its explicit direct D4 maps.
+  These routes preserve the source ordering while avoiding a shared arrangement
+  enumeration.
+- [`bind_parent`, `candidate_family` and `family_signature`](../../../../../devtools/check_full_size_density_pair_separator.py)
+  already bind the fixed source, metadata and weights.
+  `bind_parent` does not reverify the parent LP proof or execution history; retain the
+  previously accepted upper certificate as separate evidence.
+  Do not import the pair producer’s 134-pair condition or its 30-second budget into the
+  face adapter.
+- [`load_packet`](../../../../../devtools/check_full_size_density_support_ceiling.py)
+  supplies the regular-file/no-symlink boundary, 2 MiB input cap, and duplicate-key,
+  floating-point and nonfinite-number refusals.
+  Reuse bounded canonical rational parsing and require exact receipt keys and types.
+  A compact receipt needs source/family identity, explicit completion status, rational
+  maximum and any positive-area excess box, not every producer probe.
+  Inconsistent status, malformed witnesses, truncated output and nonzero process exits
+  must not authorize complete feasibility.
+
+A positive receipt requires the reader to regenerate every slab and open band; checking
+supplied probes, counts or the producer’s completion flag is insufficient.
+An independently checked excess box invalidates only these weights.
+Both routes share the exact field kernel, original source and accepted packing
+validator; geometric enumeration is the source-distinct part.
+The original Trump packing and its uniform D4 average remain separately commissioned
+source controls, with expected a.e. depth at most one, not a presumed exact maximum for
+the average.
+
+After slab-control GO, estimate one **20–30-active-minute author slice** for the two
+thin process/receipt adapters and toy refusal controls, then **10–15 minutes of cold
+review**. This is a funding estimate, not an allocation or target deadline.
+Source-scale and target wall/CPU, coefficient growth and peak memory remain unmeasured.
+The candidate has $P=36$ positive placements and at most $M=148$ distinct lines; safe
+combinatorial guards are $M^2$ facets and $2M^2$ probes.
+These are not measured counts or memory bounds: the current facet kernel retains all
+probes.
+Choose tested process and memory limits after source-control costs are known, and
+treat any limit hit as unresolved.
+
+Complete independently checked depth at most one would accept H-099 with mass $56/5$;
+combined with exp-113’s upper certificate, it would determine this support’s optimum.
+It would constrain absolutely continuous covering densities at the exact Trump side, not
+improve a global packing bound or decide below-Trump density methods.
+
+## Source Checkpoint and Selected Arithmetic Change
+
+Session 090 ran each source producer once at `c5f3a97f`, with a 60-second cap per
+process. The original eleven-square packing passed the facet producer and independent
+slab reader with maximum depth one and mass eleven.
+Their outer costs were respectively 20.35 seconds wall / 19.30 CPU and 4.48 seconds wall
+/ 4.44 CPU. The uniform-average producer reached its cap: 60.10 seconds wall / 59.74
+CPU, exit 1, and no stdout packet.
+Its reader was not invoked.
+The empty `bc-243-uniform-face-control.json` is retained stdout, not a valid
+certificate. Memory and agent attention were not measured.
+
+The [original receipt](bc-243-original-face-control.json),
+[independent replay](bc-243-original-face-replay.json), and
+[uniform timeout log](bc-243-uniform-face-control.log) preserve these distinct outcomes.
+The uniform source obligation is unresolved, so the fixed candidate remains unopened.
+
+The next selected slice changes exact arithmetic, not the cap.
+A static review found that each facet recomputes inverses of `4*abs(a_j*a_k+b_j*b_k)`,
+although this value depends only on two canonical line normals.
+A local per-arrangement reciprocal cache reduces those inversions to at most `R*(R+1)/2`
+nonzero normal pairs, where `R` is the number of distinct normals.
+It leaves the exact clearance, probe coordinates, membership tests and strict excess
+witness unchanged. This is an operation-count argument, not a measured source speedup.
+`think-063l` allocates at most 20 author minutes and a separate ten-minute independent
+review before any changed-code source control is commissioned.
+No target, larger cap, or unchanged retry follows automatically.
+
+The cache at `b379bfc6` passed independent review and 35 focused toy/adapter controls in
+7.77 seconds wall / 7.73 CPU. Its degree-eight toy reduces clearance inversions from 588
+to eight; fresh-field comparisons preserve exact deltas, probes, memberships, depths and
+strict witnesses. Session 090 now selects `think-zkj0`: one original and one uniform
+producer on this changed code, each followed by one independent slab replay only if its
+producer returns a complete positive receipt.
+Each process retains the same 60-second cap and source inputs; original depth must equal
+one and uniform depth must be at most one.
+Use fresh `original-cached-face` and `uniform-cached-face` output stems.
+This ten-minute operator slice measures source readiness, not the candidate.
+
+The changed source controls did not discharge readiness.
+The original cached producer and independent reader passed in 54.22 / 7.95 seconds wall
+and 30.93 / 7.84 CPU. The uniform cached producer again hit its unchanged cap: 60.09
+seconds wall and 58.94 CPU, empty stdout, exit 1; its reader was not invoked.
+These shared-host observations do not establish a cache speedup.
+The [new timeout log](bc-243-uniform-cached-face-control.log) retains the one recovered
+invocation, not a retry of the earlier source revision.
+
+The next changed algorithm, `think-8zdl`, uses exact facet-side signs to infer square
+membership. For every oriented square edge, retain the inward sign after canonical line
+normalization; coincident edges can require opposite signs.
+The clearance theorem already preserves all other line signs at both adjacent probes.
+This permits one midpoint sign vector per facet, with the facet’s own sign selected by
+probe direction. All four inward signs must hold for each square.
+Keep exact probe coordinates, complete arrangement construction and independent strict
+witness checks unchanged.
+Twenty author minutes and separate review precede any changed-code source control.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

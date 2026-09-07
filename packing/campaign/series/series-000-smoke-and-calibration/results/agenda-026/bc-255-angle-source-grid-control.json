@@ -1,0 +1,41 @@
+{
+  "angle_slab": [
+    "0",
+    "0"
+  ],
+  "assignments": [
+    [
+      1,
+      1,
+      4,
+      4,
+      7,
+      7
+    ],
+    [
+      0,
+      3,
+      3,
+      6,
+      6,
+      9
+    ],
+    [
+      2,
+      2,
+      5,
+      5,
+      8,
+      8
+    ]
+  ],
+  "grid": [
+    6,
+    3
+  ],
+  "inequalities_checked": 432,
+  "kind": "original-source-axis-ten-cover-grid",
+  "status": "proved",
+  "unresolved": [],
+  "version": 1
+}

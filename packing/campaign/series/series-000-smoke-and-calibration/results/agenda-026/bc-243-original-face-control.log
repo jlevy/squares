@@ -1,0 +1,14 @@
+Source control only; no exp-113 candidate weights.
+Code revision: c5f3a97f
+Working directory: /private/tmp/squares-session090-validation.6CXAil/packing
+Interpreter: project Python 3.14.7; adapter and sqpack imports confirmed inside this checkout.
+Observed dispatch: 2026-09-07 01:36:15 UTC
+Outer command: /usr/bin/time -p env PYTHONPATH=src OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /Users/levy/wrk/github/squares/packing/.venv/bin/python -m devtools.run_full_size_density_faces --control trump-original-control-v1 --timeout-seconds 60 > /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-original-face-control.json 2>> /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-original-face-control.log
+Exact stderr and outer /usr/bin/time -p output follow:
+{"wall_seconds": 20.167775459005497, "cpu_seconds": 19.129824000000003}
+real 20.35
+user 19.15
+sys 0.15
+Observed completed: 2026-09-07 01:36:41 UTC
+Exit status: 0
+The successful producer emitted a complete receipt; independent replay is separately recorded.

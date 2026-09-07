@@ -1051,15 +1051,24 @@ agenda:
           BC-251 is ready but unopened. Reserve its unchanged 150-minute scalar
           invocation and separate verification in a fresh allocation. Full99a3
           validation passed; Agenda024 also prices independent density and angle work.
+      - bead: think-qv73
+        workflow: research-loop
+        priority: 0
+        rationale: >-
+          Added at Session090's handoff, not backdated to this agenda's own W10.
+          H110 tests one fixed near-axis P12 escape before a larger positive proof.
+          Source-free controls, independent review and a fresh prospective round
+          are required; no target has run.
       selected:
-        bead: think-0za3
+        bead: think-qv73
         workflow: research-loop
         rationale: >-
-          This live handoff follows terminal Session089. Its bounded research and
-          method assessments are retained and full validation passed. Preserve
-          BC215 as an uncompleted efficiency candidate, and use
-          Agenda024 Current Allocation for future research rather than restarting
-          a completed test or creating a separate supporting-fix PR.
+          This live handoff follows terminal Session090 and its passed full
+          bc5c24b5 checkpoint. H106, H108 and H109 accept continuous auxiliaries;
+          H110 is the next unrun discriminator. The September7 amendment holds
+          H107 out of the next block and selects a bounded conditional-compatibility
+          assessment through Agenda024. Preserve BC215 as an uncompleted
+          efficiency candidate and keep the work on the integrated research PR.
       operator_input:
         status: unavailable
         note: >-

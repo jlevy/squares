@@ -294,6 +294,15 @@ assignments; these are views over commitments, not additional work hierarchies.
 One BC may span sessions and several experiments, but each experiment still tests one
 registered claim. A bead owns the work and its delegates; it does not own the verdict.
 
+Assign research IDs sequentially, checking the integrated record and known parallel PRs
+first. Publish actual assignments in the owning agenda and integrated PR. The current
+[allocation table](agendas/agenda-024-post-381-24h-portfolio.md#parallel-id-allocation)
+distinguishes published records, pending transports and the next sequential IDs.
+Follow [the ID rules](../../conventions.md#1-identity): preserve historical gaps and
+avoid speculative reservations.
+ID assignment does not grant write access to shared registries or permission to launch
+research.
+
 A [planning block](review-planning-oversight.md#one-planning-block) may link a tbd plan
 for the mathematical assessment and alternatives.
 Its exit is the updated queue here, not an instruction to maintain another schedule in

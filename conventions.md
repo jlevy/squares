@@ -87,13 +87,28 @@ A round does not apply its one verdict to several hypotheses.
 and the change is recorded as an annotation on the affected artifacts, never as a silent
 edit. Sequential defect IDs are branch-provisional: the later branch takes the next free
 IDs at merge and updates its references in the same change.
-Do not reserve IDs or add a second coordination ledger.
+Assign new research IDs sequentially within each prefix, after the largest published ID
+or current explicit assignment in the integrated record and known parallel work.
+Check the other PR’s current agenda and outstanding transports before assigning IDs; a
+local branch alone may be behind.
+Preserve historical gaps.
+Record actual assignments in the owning agenda and bead, and mirror them on the
+integrated PR so downstream agents can work around them.
+A next-ID pointer is not a reservation or permission to launch research: budgets, write
+scopes and experiment acceptance rules still require their usual prospective records.
+Do not reserve speculative blocks or add a second allocation ledger.
+Current research assignments are in
+[Agenda 024](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#parallel-id-allocation).
+Defect IDs remain branch-provisional; do not reserve future defect IDs.
 
-**Reserved ids.** [checked] No hypothesis ids are currently reserved.
-A future reservation is declared in a `reserved-ids` comment on the idea board and names
-a claim that exists upstream but is not yet codified.
-A reserved id may be *named* but not *linked*, and a reservation that has been fulfilled
-is flagged stale.
+**Reserved ids.** The idea board’s machine-checked `reserved-ids` comments name
+particular upstream claims awaiting codification, not a worker’s future namespace.
+No such comments are currently active; Agenda 024 records known pending transports.
+Name an uncreated record without linking to a nonexistent file.
+Publishing a record consumes its ID permanently, even if the research is later retired.
+Superseded launch drafts do not reserve speculative future blocks.
+Missing numbers are not automatically free: preserve pending upstream work and check
+known parallel assignments.
 
 ## 2. Naming
 

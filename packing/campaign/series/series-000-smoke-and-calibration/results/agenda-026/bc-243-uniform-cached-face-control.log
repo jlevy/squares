@@ -1,0 +1,25 @@
+Changed-code uniform source control only.
+Source revision: b379bfc60922124e65263018b1f2e0aa5a705fb0
+Working directory: /private/tmp/squares-session090-recovery.zliTmQ/packing
+Interpreter: /Users/levy/wrk/github/squares/packing/.venv/bin/python3
+Recovery first observed clock: 2026-09-07 02:25:16 UTC
+Recovery operator boundary: 2026-09-07 02:33:16 UTC
+Observed immediately before dispatch: 2026-09-07 02:27:13 UTC
+Setup/preflight since the first observed clock: 117 seconds, including source-checkout recovery coordination. Earlier skill-loading time was not separately clocked.
+The old temporary checkout was absent. The replacement checkout was verified at the same immutable source revision; original producer/replay artifacts were retained and neither command was repeated.
+No matching density-control process was live in the read-only process check at 2026-09-07 02:25:51 UTC. No uniform-cached artifact existed before dispatch.
+The shell enabled noclobber before the following command, preventing output replacement.
+Exact command:
+/usr/bin/time -p env PYTHONPATH=src OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.run_full_size_density_faces --control trump-uniform-control-v1 --timeout-seconds 60 > /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-uniform-cached-face-control.json 2> /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-uniform-cached-face-control.log
+Exact stderr and outer /usr/bin/time -p output follow:
+unresolved: process wall cap expired
+real 60.09
+user 58.66
+sys 0.28
+Observed completion: 2026-09-07 02:28:13 UTC
+Exit status: 1
+Total outer CPU: 58.94 seconds (user plus sys).
+Stdout: 0 bytes; no complete receipt and no measured maximum.
+The immutable source checkout was still clean after completion.
+The independent uniform reader was not invoked because no complete positive packet exists. No target, retry, cap increase, LP, or geometry experiment was run.
+Disposition: source-control readiness remains unresolved at the frozen 60-second process cap. This is a bounded instrument failure, not a mathematical negative and not a measured cache-speedup conclusion.

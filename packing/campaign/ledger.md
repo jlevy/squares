@@ -104,6 +104,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-087](agent-sessions/session-087-agenda022-continuation.md) | completed | contemporaneous | `research-loop` (correctness) | `efficiency-loop` (efficiency) | 2 | think-wufn | Take BC-215 (think-xejq), the one lever the efficiency block measured and did not wire: 20.2 per cent of deep-run work is repeated and 92 per cent of that is trees that did not move, so the tree-id cache is what takes the pull-request wall from about 221.70 s to the operator's two to two and a half minutes. |
 | [session-088](agent-sessions/session-088-validation-efficiency-checkpoint.md) | completed | retrospective | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 1 | think-rwte | Continue think-xejq with explained exhaustive-family planning under W5 Phase 3 after publishing this implementation and verifying its full hosted checkpoint. Preserve complete coverage until the selection and reuse contracts pass their invalidation fixtures. |
 | [session-089](agent-sessions/session-089-agenda024-next-phases.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 14 | think-jgnv | Select BC-251, think-0za3, for the next fresh allocation with its unchanged 150-minute process cap and separate verification. Agenda024 Current Allocation owns the parallel density and angle packages. Keep the integrated PR101 line while open; do not repeat exp113, exp114 or exp115. |
+| [session-090](agent-sessions/session-090-four-hour-research.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 11 | think-9qrx | After Session090 closes, select think-qv73 under BC255 for H110's source-free fixed P12 escape instrument and independent review, then a fresh prospective experiment. The September7 priority amendment holds H107 out of the next block and selects a bounded conditional-compatibility assessment alongside H110. Agenda024 owns this revised allocation and the deferred bead. Density remains source-blocked; no exp116 retry. |
 
 ### Workflow summary
 
@@ -116,9 +117,9 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 18 | 1 | 58 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 9 | 4 | 52 | 7 |
-| `pipeline-improvement` | 21 | 0 | 109 | 0 |
-| `documentation-pass` | 1 | 0 | 4 | 0 |
+| `research-loop` | 9 | 4 | 56 | 7 |
+| `pipeline-improvement` | 22 | 0 | 114 | 0 |
+| `documentation-pass` | 1 | 0 | 6 | 0 |
 | `review-planning-oversight` | 0 | 0 | 1 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
@@ -527,8 +528,8 @@ Status: **active**. Pursue stronger n=11 certificates through the scalar languag
 | BC-237 | research | 11 | blocked | 2 | think-fw95 | A build/no-build decision for the next richer measure language. |
 | BC-238 | measurement_validation | 11 | blocked | 0 | think-hjoe | A result object the central retention gate can judge without trusting its generator. |
 | BC-239 | measurement_validation | 11 | blocked | 0 | think-mss2 | The fractional program's honest yield, cost, negative results, and best continuation. |
-| BC-251 | research | 11 | ready | 0 | think-0za3 | Landed depth fixes and isolated seed/bridge controls pass at5267bd34; think-zuq5's readiness boundary is discharged. Freeze the one target invocation only with its full150-minute allocation and separately priced verification. No target has run in Session089; do not shorten or reset that invocation to fit the remaining checkpoint window. |
-| BC-252 | research | 11 | tentative | 1 | think-361m | A finite-model test whose exact outcome would change the allocation. |
+| BC-251 | research | 11 | complete | 0 | think-0za3 | Exp116 completed once in Session090: all19row solves unconverged, site addition stopped at iteration18, best exact dual mass20843712108/2067791663 and depth1 independently reproduced. H093 remains unresolved; no bridge or unchanged retry. BC252 may assess a changed row-completion or support mechanism. |
+| BC-252 | research | 11 | in_progress | 1 | think-361m | Session090 selected fixed-site row completion before further support adaptation; its adapter is reviewed but no target has launched. The September7 priority amendment holds H107 out of the next two-hour block under paused think-7fec. Reconsider at a later-session checkpoint for a named downstream use or justified low-attention attempt; preserve both frozen scientific caps. |
 | BC-253 | research | 11 | tentative | 2 | think-mw02 | A complete local forall-pose/exists-witness argument, not a sampled menu. |
 
 ### [agenda-026](agendas/agenda-026-density-stationarity-and-trump-capture.md) — Density, Typed Stationarity, and Trump Capture
@@ -548,7 +549,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | BC-248 | research | 11 | blocked | 2 | think-901o | Whether certificate-guided enumeration can cover the complement of the Trump neighborhood at a finite, auditable cost. |
 | BC-249 | measurement_validation | 11 | blocked | 0 | think-7dd9 | The closure program's honest theorem gain, measured costs, negative results, and best continuation. |
 | BC-254 | research | 11 | complete | 0 | think-01q4 | An exact upper certificate can retire this support; only verified D>11 can obstruct equality density. A floating LP objective decides neither. |
-| BC-255 | research | 11 | in_progress | 1 | think-dene | Whether one complete restricted theorem is tractable. Only mass-derived near-tight forcing needs a valid covering measure; geometric conflicts, interval no-goods and restricted wall/angle arguments do not inherently need it. |
+| BC-255 | research | 11 | in_progress | 1 | think-dene | Check the fixed H110 candidate before funding larger localization or P12 certificates; its controls, independent review and target remain unrun. Only mass-derived near-tight forcing needs a valid covering measure; geometric conflicts, interval no-goods and restricted wall/angle arguments do not inherently need it. |
 | BC-256 | research | 11 | tentative | 2 | think-pjk7 | For H-036, verify every angle restriction and side strictly below 3.878; a counterexample need not improve Trump's record. A different target needs its own H. |
 | BC-257 | research | 11 | tentative | 2 | think-k9zi | A direct mass-below-eleven route at a declared lower side, separately scoped from H-101's equality classification at Trump. |
 
@@ -556,7 +557,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 71 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 76 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -630,7 +631,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | H-070 | refuted | proof | At n = 11, outer side 191/50, and B = 9977/10000, the eligible minimum | one-sided inset: 1/2 2962983/4505800 15513/20000 | 1 |  | 8.2m wall |
 | H-090 | refuted | proof | With the frozen T-018 atoms, weights, outer side and 181 net direction | core side: 99769/100000 | 1 |  | 30s wall |
 | H-091 | refuted | proof | With the frozen T-018 atoms, weights, outer side and 181 net direction | core side: 997696/1000000 | 1 |  | 31s wall |
-| H-093 | open | proof | At container side 61/16, the retained 181-direction net and scalar cor |  | 0 |  |  |
+| H-093 | unresolved | proof | At container side 61/16, the retained 181-direction net and scalar cor |  | 1 |  | 59.3m wall |
 | H-094 | open question | proof | Which changes to relative atom weights and D4 site orbits overcome the |  | 0 |  |  |
 | H-095 | blocked | proof | At container side 61/16, the BC-230 adaptive-core language admits a fi |  | 0 |  |  |
 | H-096 | open question | proof | Can finite rational inner kernels, contained throughout their assigned |  | 0 |  |  |
@@ -643,6 +644,11 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | H-103 | open question | proof | Can a complete typed finite cover of every n = 11 side-minimizing conf |  | 0 |  |  |
 | H-104 | confirmed | proof | At q = 1939/500, the frozen P10, P12 and A-triple point formulas satis |  | 1 |  | 2s wall |
 | H-105 | refuted | proof | Among the 60 distinct D4 placements of trump11-v1, with exactly exp-11 |  | 1 |  | 2s wall |
+| H-106 | confirmed | proof | At q=1939/500, every contained closed unit square with angle in [-pi/7 |  | 1 |  | 0s wall |
+| H-107 | blocked | proof | The terminal exp-116 site set supports a D4-invariant nonnegative rati |  | 1 |  |  |
+| H-108 | confirmed | proof | At q=1939/500, every contained closed unit square whose angle lies in  |  | 1 |  | 1s wall |
+| H-109 | confirmed | proof | At q=1939/500, every contained closed unit square with angle in [pi/4- |  | 1 |  | 0s wall |
+| H-110 | blocked | proof | At q=1939/500 and t=1/1000, the closed unit square at angle theta=2 ar |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -679,7 +685,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 
-### unresolved (15)
+### unresolved (16)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -698,8 +704,9 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-057 | series-000 | 68 | claude-opus-5 | H-058 | The release supports the literal printed-rational point model but supplies no provenance for applying either six-decimal coordinate rule to its fourteen-digit side token, so the conjunctive binding stops before BC-139 and H-058 remains unmeasured. |
 | exp-061 | series-000 | 20 | Claude (agent), Lane A of agenda-021 BC-197, bead think-g73w, session-086 | H-062 | The four decided rungs bracket the wall to [97/20, 39/8], width 0.025 against the registered 0.02, so the hypothesis is neither accepted on its own threshold nor rejected by either of its two rejection clauses -- no certificate was retained at 4.98 or above, and optima above twenty were found well below the ceiling. |
 | exp-113 | series-000 | 11 | Codex coordinator, max reasoning, think-2rxf in Session089 | H-099 | The verified ceiling56/5 exceeds11. It bounds the fixed-support problem but neither refutes H099 nor supplies the missing complete a.e.-depth proof. |
+| exp-116 | series-000 | 11 | Codex coordinator, max mathematical reasoning, think-0za3 in Session090 | H-093 | The driver stopped adding sites at iteration18 without row convergence; the replayed dual family has mass about10.08018, so neither acceptance nor rejection criterion holds. |
 
-### blocked (6)
+### blocked (7)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -709,8 +716,9 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-026 | series-000 | 6 | openai-codex | H-021 | Seeds 0 through 2 replay as admissible, but seed 3 crashed at the retention boundary after failing independent validity. D-183 blocks the cell and all larger event slices until a separately preregistered replication retains that stop. |
 | exp-047 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `interval-enclosure`: the numerical prototype's selftest and synthetic controls pass, but a float midpoint fit with fixed tolerance and heuristic radii does not prove a nonempty compatible-pose enclosure or outward- rounded wall and pair signs, and the preregistered command lacks a complete post- authorization runner. No parent retrieval, target parse or target fit ran, so H-053 remains unresolved. |
 | exp-051 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `executable-runner`: the proof, verifier and generic injected-runner controls pass, but the exact preregistered `--record` command exits 2 before target access because no production CLI adapter exists; no scientific H-053 disposition follows. |
+| exp-118 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-252 | H-107 | The prospective record gate was not complete by the 03:16 UTC launch cutoff; no target or verification process ran and both allowances remain unspent. |
 
-### accepted (22)
+### accepted (25)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -736,6 +744,9 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-062 | series-000 | 20 | Claude (agent), Lane A of agenda-022 BC-213, bead think-wufn, session-087 | H-062 | Every clause is met. The bracket is [97/20, 973/200], width 0.015. Its lower end carries T-021, retained on both routes. Its upper end carries a wall on the two independently constructed site sets H-062 declared, and sits 0.1235 below the ceiling, so at m = 5 the covering value binds and the ceiling never does. The hypothesis is accepted on its own threshold, and this is the first covering wall this project has pinned to the width its hypothesis asked for. |
 | exp-063 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-201 re-run, bead think-614o, session-087 | H-065 | The ratio is 23112904/567130649 = 0.040754, a fifth of the threshold and an eighth of the 0.50 kill line, so the hypothesis is accepted on the number it registered. That acceptance and the cell's own reading point in different directions and both are reported: the tight set is a small fraction of the reachable cells, and it is still far too large and far too spread out for the exact cover to be a check. The threshold was calibrated to catch a tight set covering most of the domain, and four per cent is not most; the operative bar for Corollary 1a was a few hundred cells near a few dozen positions, and twenty-three million cells in twenty-two thousand components is not that either. |
 | exp-114 | series-000 | 11 | Codex coordinator, max reasoning, think-d2d1 in Session089 | H-104 | All seven fixed-formula auxiliaries hold at q=1939/500 for exactly zero and45 degrees in the reviewed exact computation. The independent reader verifies inputs and complete receipt scope. No nearby-angle or H036 conclusion follows. |
+| exp-117 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session090 BC255 | H-106 | Complete fixed-side near-axis ten-point coverage passed the source-distinct exact reader within both frozen caps. |
+| exp-119 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-255 | H-108 | The complete canonical A3 forcing implication passed the independent exact reader on both closed angle signs. |
+| exp-120 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-255 | H-109 | Independent exact A1 replay passed on both closed angle signs; the reviewed reflection establishes A2. |
 
 ### baseline (11)
 
@@ -766,10 +777,11 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-056 | H-052 | 356.0m wall | timebox | Canonical child checkpoint SHA-256 0d39a7e734e8afc62fda914fd |  |
 | exp-060 | H-064 | 96m agent + 66.0m wall | timebox | packing/campaign/series/series-000-smoke-and-calibration/res | a resumed loop from the retained 191/50 state with row gener |
 | exp-070 | H-064 | 109.3m wall | timebox | packing/campaign/series/series-000-smoke-and-calibration/res | After the T+2 landing, spend the remaining 135 one-core proc |
+| exp-118 | H-107 |  | dependency |  |  |
 
 ## Effort
 
-71 rounds, 2152.1 agent-minutes, 1163.8 wall-minutes.
+76 rounds, 2152.1 agent-minutes, 1223.1 wall-minutes.
 
 ## Exploration reports not yet codified
 

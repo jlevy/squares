@@ -1,0 +1,17 @@
+{
+  "child_cpu_seconds": 0.19852999999999998,
+  "child_exit_code": 0,
+  "child_wall_cap_seconds": 10,
+  "command": [
+    "/Users/levy/wrk/github/squares/packing/.venv/bin/python3",
+    "-m",
+    "devtools.angle_grid_source_control",
+    "--source-control",
+    "--worker"
+  ],
+  "note": "complete worker return",
+  "parent_exit_code": 0,
+  "process_wall_seconds": 0.20276070898398757,
+  "stderr": "",
+  "stdout": "{\"angle_slab\": [\"0\", \"0\"], \"assignments\": [[1, 1, 4, 4, 7, 7], [0, 3, 3, 6, 6, 9], [2, 2, 5, 5, 8, 8]], \"grid\": [6, 3], \"inequalities_checked\": 432, \"kind\": \"original-source-axis-ten-cover-grid\", \"status\": \"proved\", \"unresolved\": [], \"version\": 1}\n"
+}

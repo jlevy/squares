@@ -1,0 +1,10 @@
+Changed-code source control only, not candidate weights.
+Source revision: b379bfc60922124e65263018b1f2e0aa5a705fb0
+Working directory: /private/tmp/squares-session090-validation.6CXAil/packing
+Commissioned after 2026-09-07T02:06:57Z; precise dispatch time was not separately observed.
+Control: trump-original-control-v1; frozen process wall cap60seconds.
+Exact stderr and outer timer follow:
+{"wall_seconds": 53.876643499941565, "cpu_seconds": 30.628804000000002}
+real 54.22
+user 30.59
+sys 0.34

@@ -397,7 +397,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: complete
     priority: 0
     question: Can the retained scalar certificate language certify side 61/16?
     hypotheses: [H-093]
@@ -415,21 +415,22 @@ agenda:
     workflows: [research-loop]
     depends_on: [BC-250]
     next_evidence: >-
-      Landed depth fixes and isolated seed/bridge controls pass at5267bd34;
-      think-zuq5's readiness boundary is discharged. Freeze the one target invocation
-      only with its full150-minute allocation and separately priced verification.
-      No target has run in Session089; do not shorten or reset that invocation to fit
-      the remaining checkpoint window.
+      Exp116 completed once in Session090: all19row solves unconverged, site addition
+      stopped at iteration18, best exact dual mass20843712108/2067791663 and depth1
+      independently reproduced. H093 remains unresolved; no bridge or unchanged
+      retry. BC252 may assess a changed row-completion or support mechanism.
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-116-h-093-scalar-61-16.md
     parallel_group: agenda025-scalar
     program: n11-adaptive-fractional-frontier
   - id: BC-252
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: tentative
+    state: in_progress
     priority: 1
     question: Which weight or support change addresses the retained limiting witnesses?
-    hypotheses: [H-094]
+    hypotheses: [H-094, H-107]
     budget: >-
       One assessment slice of at most 30 minutes. Freeze a narrower hypothesis,
       target, witness geometry and row-generation rule before any LP comparison.
@@ -441,7 +442,14 @@ agenda:
     bead: think-361m
     workflows: [insight-iteration]
     depends_on: [BC-250]
-    next_evidence: A finite-model test whose exact outcome would change the allocation.
+    next_evidence: >-
+      Session090 selected fixed-site row completion before further support
+      adaptation; its adapter is reviewed but no target has launched. The September7
+      priority amendment holds H107 out of the next two-hour block under paused
+      think-7fec. Reconsider at a later-session checkpoint for a named downstream
+      use or justified low-attention attempt; preserve both frozen scientific caps.
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md
     parallel_group: agenda025-support
     program: n11-adaptive-fractional-frontier
   - id: BC-253

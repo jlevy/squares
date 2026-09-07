@@ -1,0 +1,21 @@
+Changed-algorithm uniform source control only.
+Source revision: 22ef5f6c42a8fbb57bce3823fb800fcdbc92ed93
+Working directory: /private/tmp/squares-session090-recovery.zliTmQ/packing
+Operator first observed clock: 2026-09-07 02:56:55 UTC
+Operator boundary: 2026-09-07 03:04:55 UTC
+Observed immediately before dispatch: 2026-09-07 02:59:39 UTC
+The original producer and its independent replay had exited 0 before this uniform producer was invoked. Noclobber prevented output replacement.
+Exact command:
+/usr/bin/time -p env PYTHONPATH=src OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.run_full_size_density_faces --control trump-uniform-control-v1 --timeout-seconds 60 > /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-uniform-incidence-face-control.json 2> /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-uniform-incidence-face-control.log
+Exact stderr and outer /usr/bin/time -p output follow:
+unresolved: process wall cap expired
+real 60.09
+user 55.71
+sys 0.15
+Completion observed when the process was polled: 2026-09-07 03:00:51 UTC. The process may have exited earlier; its measured outer wall is recorded above.
+Exit status: 1
+Total outer CPU: 55.86 seconds (user plus sys).
+Stdout: 0 bytes; no complete receipt and no measured uniform maximum.
+The immutable source checkout remained clean through completion of all three invoked processes.
+The independent uniform reader was not invoked because no complete positive packet exists. No repeat, candidate, LP, target, or increased cap was run.
+Disposition: uniform source readiness remains unresolved at the frozen 60-second process cap. This is not a mathematical negative or a shared-host speedup conclusion.

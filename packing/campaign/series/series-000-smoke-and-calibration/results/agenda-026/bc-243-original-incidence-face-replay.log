@@ -1,0 +1,17 @@
+Independent complete slab replay of the changed-algorithm original source receipt.
+Source revision: 22ef5f6c42a8fbb57bce3823fb800fcdbc92ed93
+Working directory: /private/tmp/squares-session090-recovery.zliTmQ/packing
+Observed immediately before dispatch: 2026-09-07 02:58:38 UTC
+The original producer exited 0 and supplied a complete positive receipt before this replay was invoked. Noclobber prevented output replacement.
+Exact command:
+/usr/bin/time -p env PYTHONPATH=src OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.check_full_size_density_faces /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-original-incidence-face-control.json --control trump-original-control-v1 --timeout-seconds 60 > /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-original-incidence-face-replay.json 2> /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-original-incidence-face-replay.log
+Exact worker stderr and outer /usr/bin/time -p output follow:
+{"wall_seconds": 3.763689708000129, "cpu_seconds": 3.7579890000000002}
+real 3.90
+user 3.86
+sys 0.03
+Completion observed when the process was polled: 2026-09-07 02:59:04 UTC. The process may have exited earlier; its measured outer wall is recorded above.
+Exit status: 0
+Total outer CPU: 3.89 seconds (user plus sys).
+Independent decision: ae-feasible; mass 11; maximum 1.
+Scope: the fixed weighted original source family at its exact side; no global packing-bound claim. Shared-host timing is not a speedup claim.

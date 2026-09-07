@@ -46,8 +46,13 @@ The focused depth, seed, driver and bridge controls and a zero-iteration retaine
 control passed in an isolated checkout of `5267bd34`. The
 [readiness audit](../series/series-000-smoke-and-calibration/results/agenda-025/bc-251-readiness-audit.md#landed-code-replay)
 retains the commands and limits.
-No H-093 experiment has started; its prospective freeze, fresh target paths and full
-single-invocation allocation remain separate requirements.
+[Exp-116](../series/series-000-smoke-and-calibration/experiments/exp-116-h-093-scalar-61-16.md)
+ran once in Session 090 and leaves this claim unresolved.
+All 19 row solves remained unconverged; the driver stopped adding sites at iteration 18.
+Independent exact replay confirmed the best dual family’s mass `20843712108/2067791663`
+(about 10.080180) and maximum depth one.
+This is below the mass-eleven obstruction threshold, and no covering bridge was
+authorized. No unchanged retry is selected.
 
 The [scalar probe in Agenda 025](../agendas/agenda-025-adaptive-fractional-frontier.md)
 tests the first selected side between the retained 3.81 certificate and the unfinished
