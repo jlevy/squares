@@ -5,7 +5,7 @@ title: Run the scalar 61/16 discriminator independently of adaptive tooling
 kind: task
 status: in_progress
 priority: 0
-version: 5
+version: 6
 spec_path: packing/campaign/hypotheses/H-093-n11-scalar-61-16-certificate.md
 delegate: codex
 labels: []
@@ -16,11 +16,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-06T17:21:38.586Z
-updated_at: 2026-09-07T00:32:41.614Z
+updated_at: 2026-09-07T00:47:21.148Z
 started_at: 2026-09-06T19:12:02.154Z
 ---
 BC-251, H-093. Execute the existing frozen scalar61/16 recipe once after BC-250 publication, instrument readiness and prospective experiment freeze. Existing150-minute cooperative process deadline, one CPU, no adaptive BC231 dependency. Exact candidate acceptance is separate from floating convergence; an exact ceiling can refute only the fixed scalar language. Stop variant work for BC238 review.
 
 ## Notes
 
-User commissioned the next four-active-hour allocation after PR101 merged on 2026-09-07. Session090 starts from main4d305597 on codex/post-381-four-hour-research. Independent launch review underway; target still not run. Preserve full150-minute one-CPU invocation, fresh paths and prospective exp116 before launch.
+exp116 prospectively frozen inf59dd46c, corrected views/anchors through97ba816e; isolated records passed31/66steps20.72s. Single target launched2026-09-07T00:46:18UTC from immutable4d305597 worktree/private/tmp/squares-session090-scalar.rw72vS, execution handle16679. Frozen150-minute cooperative clock nominally reaches03:16:18UTC plus measured tail; no retry. stdout/private/tmp/squares-session090-exp116.stdout.log; stderr/time/private/tmp/squares-session090-exp116.stderr.log. Four durable outputs use retained bc-234-scalar-61-16-leg-01 stem in results/agenda-025. Do not bridge while writer active.
