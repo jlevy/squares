@@ -19,11 +19,13 @@ import yaml
 from devtools import build_known_best_atlas as known_best_builder
 from devtools import render_composite_pdf
 from sqpack.known_best import (
+    ATLAS_SAMPLE_STRIDE,
     CompositeSpec,
     SourceGeometryError,
     catalogue_source_map,
     parse_kingbird_svg,
     parse_unitsquare_svg,
+    sampled_sequence,
 )
 from sqpack.render.color import ANGLE_CLASS_CONTRACT
 from sqpack.render.model import RenderSpec
@@ -367,28 +369,50 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
         == GOLDEN_SOURCE_KINDS[corpus.label]
     )
 
+    # The record-level checks reach every case; the witness files themselves, which are
+    # the expensive part (a schema-validated load of a 30 KB YAML each, 8 s of call time
+    # over 324 on this host and past the quick lane's 12 s ceiling on the hosted
+    # runner), are opened on the atlas sample's own stride here and on every case in
+    # the slow twin below -- the same split the gate makes for the atlas rebuild.
+    sampled = set(sampled_sequence([entry["n"] for entry in entries], ATLAS_SAMPLE_STRIDE))
     for entry in entries:
         n = entry["n"]
-        witness_path = ROOT / entry["witness"]["path"]
-        witness = load_witness(witness_path, fallback_schema=SCHEMA)
-        assert witness["n"] == n
-        assert witness["id"] == entry["witness"]["id"]
-        assert len(witness["squares"]) == n
-        if entry["source"]["kind"] == "kingbird-derived-facts":
-            assert entry["source"]["path"] == ("resources/web/known-best-packings/sources.json")
-            assert witness["source"]["key"] == "Kingbird derived numerical facts"
-            assert witness["source"]["path"] == entry["source"]["path"]
-            assert "not a legal conclusion" in witness["claim"]["limitations"]
-        elif entry["source"]["kind"] == "unitsquare-rendering":
-            assert witness["source"]["revision"] == (
-                f"upstream-declared parent-content SHA-256 {release_by_n[n]['record_sha256']}"
-            )
+        assert (ROOT / entry["witness"]["path"]).is_file()
         assert (ROOT / entry["rendering"]["path"]).is_file()
         frontier = (ROOT / entry["frontier_path"]).read_text(encoding="utf-8")
-        assert f"    - {witness['id']}\n" in frontier
+        assert f"    - {entry['witness']['id']}\n" in frontier
+        if n in sampled:
+            _assert_witness_agrees_with_entry(entry, release_by_n)
 
     n29_frontier = (ROOT / "frontier/n-029.md").read_text(encoding="utf-8")
     assert "    - W-n029-kingbird\n" in n29_frontier
+
+
+def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
+    n = entry["n"]
+    witness = load_witness(ROOT / entry["witness"]["path"], fallback_schema=SCHEMA)
+    assert witness["n"] == n
+    assert witness["id"] == entry["witness"]["id"]
+    assert len(witness["squares"]) == n
+    if entry["source"]["kind"] == "kingbird-derived-facts":
+        assert entry["source"]["path"] == ("resources/web/known-best-packings/sources.json")
+        assert witness["source"]["key"] == "Kingbird derived numerical facts"
+        assert witness["source"]["path"] == entry["source"]["path"]
+        assert "not a legal conclusion" in witness["claim"]["limitations"]
+    elif entry["source"]["kind"] == "unitsquare-rendering":
+        assert witness["source"]["revision"] == (
+            f"upstream-declared parent-content SHA-256 {release_by_n[n]['record_sha256']}"
+        )
+
+
+@pytest.mark.slow
+def test_every_known_best_witness_agrees_with_its_manifest_entry() -> None:
+    """The whole-corpus copy of the sampled check above, on the slow lane."""
+    document = json.loads((ATLAS / "manifest.json").read_text(encoding="utf-8"))
+    release = json.loads(UNITSQUARE_RESULTS.read_text(encoding="utf-8"))
+    release_by_n = {record["n"]: record for record in release["results"]}
+    for entry in document["atlas"]["entries"]:
+        _assert_witness_agrees_with_entry(entry, release_by_n)
 
 
 def test_known_best_v1_schema_accepts_a_manifest_without_the_new_composite() -> None:

@@ -720,6 +720,10 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         # because the build is already paid, and is what lets those four read the file.
         "test_known_best_atlas.py": {
             "test_known_best_composite_contains_every_case_and_square",  # 27.3s
+            # The whole-corpus witness load behind the atlas coverage test: 7.11s of call
+            # locally at n = 1..324, and its parent read 18.00s on the hosted runner (run
+            # 34139067270) before the surface copy was cut to the atlas sample's stride.
+            "test_every_known_best_witness_agrees_with_its_manifest_entry",
         },
         # 2s of call time across 1, and it is the boundary case the band exists for.
         # 2.22s locally, 6.43s on CI -- slower cores and two lanes beside it -- so it sat
