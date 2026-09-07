@@ -97,8 +97,8 @@ upper or lower bounds.
 An **upper bound** is constructive: an arrangement of $n$ unit squares in a square of
 side $L$ shows that $s(n) \le L$. Trump’s packing for $n = 11$ is one example.[^trump]
 Such constructions may be specified with approximate numerical coordinates or derived
-exactly by solving the geometric relationships between touching squares; in either case,
-their fit in the stated container must be verified.
+exactly by solving the geometric relationships between touching squares.
+Approximate coordinates alone do not constitute a formal proof of the upper bound.
 
 A **lower bound** proves that $s(n) \ge L$ by ruling out every arrangement in a
 container of side less than $L$. This requires an argument covering all possible
