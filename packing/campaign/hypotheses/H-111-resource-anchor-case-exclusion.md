@@ -14,7 +14,7 @@ hypothesis:
     a nontrivial continuous anchor domain that the same geometric relaxation without
     resource rows leaves unresolved?
   lane: proof
-  derived_from: [X-020]
+  derived_from: [X-017]
   instrument: >-
     Proposed geometry-bound capacity-one cells, uniform resource minima, exact
     conflicts and residual-ten or residual-nine certificates, composed through a
@@ -38,7 +38,7 @@ hypothesis:
 ---
 # H-111 — Resource and Anchor Exclusions
 
-[X-020](../explorations/X-020-compatibility-and-complete-case-covers.md#a-resources-and-boundary-anchors-the-principal-global-bound-pilot)
+[X-017](../explorations/X-017-compatibility-and-complete-case-covers.md#a-resources-and-boundary-anchors-the-principal-global-bound-pilot)
 gives the mechanism and its relationship to H-103.
 [Agenda 027](../agendas/agenda-027-compatibility-and-restricted-families.md) owns the
 proposed pilot; no experiment is registered or executed by this question.

@@ -13,7 +13,7 @@ hypothesis:
     arbitrary actual orientation modulo pi/2, with all centers and contacts free,
     requires container side at least the exact Trump side U.
   lane: proof
-  derived_from: [X-020]
+  derived_from: [X-017]
   criterion:
     shape: determination
     metric: complete restricted-family lower bound or a verified sub-U packing
@@ -44,7 +44,7 @@ hypothesis:
 ---
 # H-112 — A Contact-Independent Six-Plus-Five Theorem
 
-[X-020](../explorations/X-020-compatibility-and-complete-case-covers.md#b-restricted-families-the-principal-structural-theorem-pilot)
+[X-017](../explorations/X-017-compatibility-and-complete-case-covers.md#b-restricted-families-the-principal-structural-theorem-pilot)
 explains the proposed proof and falsifier.
 [Agenda 027](../agendas/agenda-027-compatibility-and-restricted-families.md) first asks
 for one complete continuous interval, with the unsolved family retained explicitly.

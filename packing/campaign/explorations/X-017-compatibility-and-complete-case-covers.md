@@ -1,12 +1,12 @@
 ---
-title: X-020 — compatibility and complete case covers
+title: X-017 — compatibility and complete case covers
 softschema:
   contract: packing.squares:Exploration/v1
   schema: ../schemas/exploration.schema.yaml
   envelope: exploration
   status: enforced
 exploration:
-  id: X-020
+  id: X-017
   title: Compatibility, Restricted Families, and Complete Case Covers
   date: '2026-09-07'
   author: Codex coordinator, with three independent read-only intake assessments
@@ -38,7 +38,7 @@ exploration:
   - docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
   proposes: [H-111, H-112, H-113, H-114, H-115, H-116, H-117]
 ---
-# X-020 — Compatibility, Restricted Families, and Complete Case Covers
+# X-017 — Compatibility, Restricted Families, and Complete Case Covers
 
 **Recommendation.** Prepare two complementary pilots: a coarse resource-and-anchor
 argument at $L=96/25=3.84$, and a contact-independent theorem for six axis-aligned
@@ -66,26 +66,29 @@ The
 records that boundary and the same-code replay of the supplied controls.
 Later source work is outside that fixed mathematical baseline.
 
-**Parallel ownership.** At the owner’s request, this program uses X-020, Agenda 027,
+**Parallel ownership.** At the owner’s request, this program uses X-017, Agenda 027,
 H-111–117, and BC-258–268, recorded on `think-adfk` and its owning epic `think-sz5t`.
 These continue the existing sequences; branch and bead ownership distinguish the
-parallel program.
-PR105 owns H-110 and BC-257, and its existing plan assigns X-017–019 to
-that coordinator. The owner explicitly locked all of PR105’s ID choices, so those
-exploration IDs remain occupied even while their records are being prepared.
+parallel program. PR105’s final
+[allocation table](../agendas/agenda-024-post-381-24h-portfolio.md#parallel-id-allocation)
+at `54d1ca98` explicitly assigns X-017, Agenda 027, H-111–117 and BC-258–268 to PR107.
+It preserves the source program’s H-106–110, exp-116–120, session-090 and occupied
+commitments through BC-257. This program follows that locked table without changing any
+source-program identity.
+No new experiment or session ID is assigned here.
 [Conventions](../../../conventions.md#1-identity) owns the general rule.
 No new commitment depends on the other coordinator finishing a run.
 
-**Identifier correction.** The first draft of PR107 published this report as X-017. It
-was renamed to X-020, with its references updated together, to preserve PR105’s locked
-X-017–019 allocation.
-No existing source-program ID was changed.
+**Identifier correction.** X-017 is the originally published and final identity.
+The temporary X-020 filename in commit `5e1263ff` was based on the older launch text.
+It was reverted, with all references, after PR105 published its final assignment table
+and explicitly superseded the speculative X-017–019 reservation.
 
 **Later source checkpoint.** This branch subsequently integrated PR105’s committed
-`f5684f51` checkpoint to keep the stacked PR reviewable.
-It brings the independently accepted continuous near-45 A3 and A1/A2 implications under
-H-108/H-109, the reviewed but unlaunched H-107 scalar protocol, and H-110’s fixed
-near-axis twelve-point escape candidate for a fresh allocation.
+`f5684f51` checkpoint and `54d1ca98` allocation/closeout to keep the stacked PR
+reviewable. It brings the independently accepted continuous near-45 A3 and A1/A2
+implications under H-108/H-109, the reviewed but unlaunched H-107 scalar protocol, and
+H-110’s fixed near-axis twelve-point escape candidate for a fresh allocation.
 These are source-program updates, not results of this exploration.
 They sharpen the auxiliary restricted-angle work while leaving H-036 and the global
 bound unresolved. Consume their final reviewed receipts from the source program before

@@ -13,7 +13,7 @@ hypothesis:
     symmetric kernel K with K-1 positive semidefinite, diagonal at most b < 11,
     and nonpositive values on every distinct compatible pair of contained unit squares?
   lane: proof
-  derived_from: [X-020]
+  derived_from: [X-017]
   instrument: >-
     Proposed feature-family SDP proposer, adversarial compatible-pair separator,
     exact PSD evidence and independent continuum diagonal/pair verifier.
@@ -35,7 +35,7 @@ hypothesis:
 ---
 # H-114 — A Small Interaction-Kernel Discriminator
 
-[X-020](../explorations/X-020-compatibility-and-complete-case-covers.md#c-two-pose-kernels-a-separate-bounded-opportunity)
+[X-017](../explorations/X-017-compatibility-and-complete-case-covers.md#c-two-pose-kernels-a-separate-bounded-opportunity)
 states the proof obligations and stop conditions.
 [Agenda 027](../agendas/agenda-027-compatibility-and-restricted-families.md) keeps the
 pilot independent of success on the angle-family theorem.

@@ -341,13 +341,18 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, select BC-251, `think-0za3`, with a fresh
-allocation for its full unchanged 150-minute process cap and separate verification.
-Session 089’s retained research checkpoint `99a3ad42` passed full validation.
-Keep the continuation on integrated PR 101 while open; do not repeat a completed
+For the next supervised exact-research goal, select `think-qv73` under BC-255 for
+H-110’s fixed near-axis P12 escape test.
+Allocate source-free controls, independent review and a fresh prospective experiment
+before evaluating the candidate.
+Session 090’s mathematical-code checkpoint `bc5c24b5` passed full validation.
+Keep the continuation on integrated PR 105 while open; do not repeat a completed
 experiment or create another supporting-fix PR.
 [Agenda 024’s Current Allocation](../../../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
-then supplies the next fresh scalar, complete-density and continuous-angle packages.
+supplies the current priorities.
+H-107 fixed-site scalar completion may run alongside the P12 authors only when the new
+block covers its full producer and verification caps; the complete-density target
+remains source-blocked.
 The earlier BC-215 efficiency program remains uncompleted, not silently discarded.
 See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the latest session,
 funding conditions and independent-review assignments.
