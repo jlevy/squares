@@ -66,7 +66,10 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
-    "packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md": (
+    (
+        "packing/campaign/series/series-000-smoke-and-calibration/experiments/"
+        "exp-126-h099-complete-graph-candidate.md"
+    ): (
         "requires an independent graph-proof status for a conditional depth ceiling, "
         "not the frontier packing-side field or an exact value of s(n)"
     ),
