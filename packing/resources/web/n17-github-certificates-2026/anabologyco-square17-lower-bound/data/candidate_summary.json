@@ -1,0 +1,13 @@
+{
+  "side_fraction": "9141/2000",
+  "side": 4.5705,
+  "grid": 4000,
+  "active_orbits": 71,
+  "expanded_atoms": 560,
+  "weight_denominator": 1000000000000,
+  "safety_factor": "10003/10000",
+  "mass_numerator": 16994734834452,
+  "mass": 16.994734834452,
+  "slack": 0.005265165547999828,
+  "unsafed_mass": 16.989637942801476
+}

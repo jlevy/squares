@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.o
+*.out
+verify_certificate
+generate_certificate
+.DS_Store
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.toc
+paper/main.pdf
+paper/main.out
+*.cert.new
+*.cert
+!*.cert.xz

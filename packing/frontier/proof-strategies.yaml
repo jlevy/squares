@@ -136,9 +136,19 @@ strategies:
   name: Machine-checked formal proof
   family: modern_machinery
   mechanism: Verify a case analysis in Lean/HOL Light/Isabelle
-  status: not_applied
-  note: 'No machine-checked `s(n)` proof was found in the retrieved corpus; adjacent precedents include Flyspeck (2014) and sphere packing in dimension 8 (Feb 2026)'
-  refs: []
+  status: adjacent
+  note: >-
+    No machine-checked `s(n)` theorem is on record. The nearest thing is
+    anabologyco-maker's August 2026 Lean 4 layer over its `s(17) >= 4.5705` weighted
+    certificate: `native_decide` theorems replay the finite checks (certificate
+    arithmetic and D4 symmetry, the two endpoint audits, and all 148,937 orientation
+    cells), so the trust base is the Lean kernel plus its compiler rather than the C++
+    and Python checkers; the event-completeness layer and the measure argument are not
+    formalized, and the bound is source-backed here. Adjacent precedents remain Flyspeck
+    (2014) and sphere packing in dimension 8 (Feb 2026). Not applied to any
+    first-party certificate; T-019's finite checks are the natural first target.
+  refs:
+  - GitHub n17 certificates 2026
 - id: 19
   name: Electrical-network / Kirchhoff methods
   family: dissection_tradition
@@ -161,9 +171,19 @@ strategies:
   note: >-
     Applied explicitly by Bašić–Slivková (2018), who study the piercing number of all
     unit-square poses in a square, connect it to s(n), and derive a specialized n=61
-    lower bound. Classical unavoidable-point proofs are the integral special case.
+    lower bound. Classical unavoidable-point proofs are the integral special case, and
+    the strongest integral instances on record are the August 2026 GitHub certificates
+    for n = 17: sixteen rational points made strictly unavoidable by an exact
+    pose-space subdivision with pure-integer checkers (Mira 4.450837 and 4.468292, Fort
+    4.456575), the last adding a strict triangle-piercing leaf: a unit square whose
+    centre lies strictly inside a triangle with all sides shorter than one contains a
+    vertex in its interior, an orientation-free discharge that the classical triangle
+    lemma of Stromquist's tradition supplies. Brandwijk's 89/20 capsule (July 2026) and
+    this repository's green17 set (4.426213) are the same family.
   refs:
   - Basic-Slivkova 2018
+  - GitHub n17 certificates 2026
+  - Brandwijk n17 capsule
 - id: 22
   name: Fractional transversals and LP duality
   family: transversal_and_wider
@@ -178,9 +198,18 @@ strategies:
     retains first-party instances T-017 through T-020 at n = 11, 12, 17--21. Their
     finite coverage decisions are checked both by exact event-cell sweeps and by a
     method-distinct interval branch-and-bound. The certificates are new instances of an
-    established fractional-cover principle, not a new principle.
+    established fractional-cover principle, not a new principle. anabologyco-maker's
+    August 2026 candidate at `9141/2000 = 4.5705` decides the same kind of measure
+    another way: no shrunken square and no direction net, but an exact partition of the
+    orientation interval by the 1,344,862 event polynomials of the arrangement (an
+    exact Bernstein prefilter, then Sturm chains) into 148,937 open cells, each audited
+    at one exact rational tangent with the true closed unit square, plus the two
+    endpoints. That removes the containment loss and the `5B` ceiling of the shrink
+    reduction, and lets atoms sit exactly one unit from the walls, which this
+    repository's sweep cannot reach; its decisive stages are source-backed here.
   refs:
   - Burns–Massaccesi n17
+  - GitHub n17 certificates 2026
   - Göbel 1979
   - Kearney–Shiu 2002
   - Nagamochi 2005

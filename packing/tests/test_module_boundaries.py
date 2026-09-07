@@ -144,11 +144,15 @@ def test_no_python_implementation_remains_in_ambiguous_legacy_locations() -> Non
 
 
 def test_no_bash_or_shell_entry_points_remain() -> None:
+    # The literature archive retains third-party sources byte for byte, their own
+    # verify scripts included; those are retained bytes, not entry points of this
+    # project, and the project's replays of them are Python.
     scripts = [
         path
         for pattern in ("*.sh", "*.bash")
         for path in PROJECT_ROOT.rglob(pattern)
         if not any(part.startswith(".") for part in path.relative_to(PROJECT_ROOT).parts)
+        and path.relative_to(PROJECT_ROOT).parts[0] != "resources"
     ]
     assert [path.relative_to(PROJECT_ROOT) for path in scripts] == []
 

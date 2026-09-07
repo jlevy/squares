@@ -1,6 +1,6 @@
 ---
 title: Comprehensive Review of the n = 17 Record
-description: A full audit of everything the repository holds about seventeen unit squares in a square, checked against the live sources on 7 September 2026, with the Burns series reconciled, the stale bookkeeping named, and the lanes where the case can still move ranked by what they would cost and prove.
+description: A full audit of everything the repository holds about seventeen unit squares in a square, checked against the live sources on 7 September 2026 and, in a second pass, against three GitHub certificate repositories the first search missed; the repository's own bound stands but its novelty claim did not, with the Burns series reconciled, the stale bookkeeping named, and the lanes where the case can still move ranked by what they would cost and prove.
 author: Claude Code
 ---
 # Research: Comprehensive Review of the n = 17 Record
@@ -25,8 +25,15 @@ The Burns-series reconciliation that prompted the review is applied in the same 
 request and is summarised in its own section below.
 
 **Verdict.** The mathematics on record is current and sound: `s(17) ≥ 459/100 = 4.59`
-(`T-019`, `V4/C4`) stands, no external source has moved past it, and Bidwell’s
-`4.67553009360455` is still the best known packing everywhere it is listed.
+(`T-019`, `V4/C4`) stands as the strongest bound found anywhere, published or not, and
+Bidwell’s `4.67553009360455` is still the best known packing everywhere it is listed.
+The currency check below has a hole, though: its corpus is arXiv, Crossref, OpenAlex,
+Zenodo and the known authors’ sites, and it has never searched GitHub, where three
+certificate repositories had been public since August, one of them past Massaccesi’s
+`4.5058` nineteen days before `T-019` was registered.
+None of the three reaches `4.59`, so the bound is not what needs correcting; `T-019`’s
+novelty claim is, and the correction is applied in this pull request (see “Three GitHub
+certificate repositories” below).
 What is stale is the bookkeeping, and what is missing is on the upper side.
 The case has never had an upper-bound result of its own: its verified ceiling is the
 trivial `5`, `0.3245` above the packing, while the machinery that certified `s(29)`'s
@@ -55,8 +62,18 @@ Checked live on 7 September 2026 against the holdings in
 
 The live check reported the Massaccesi edit as dated 9 September 2026, two days after
 the check itself; it is recorded here as found.
-No numerical claim at `n = 17` has changed anywhere since the 5 September refresh, and
-the repository’s `4.59` remains unpublished outside it.
+
+The live check’s corpus is arXiv, Crossref, OpenAlex, Zenodo and the known authors’
+sites; it has never searched GitHub.
+GitHub held three certificate repositories the check never saw: Mira’s exact
+sixteen-point certificates (github.com/Mira-acc/17squares), Stanislav Fort’s exact
+sixteen-point certificate (github.com/stanislavfort/17squares), and anabologyco-maker’s
+weighted fractional certificate (github.com/anabologyco-maker/square17-lower-bound), all
+public since August 2026. They are addressed below in “Three GitHub certificate
+repositories.”
+
+No numerical claim at `n = 17` has changed at any source the refresh indexes since the 5
+September refresh; GitHub, which the refresh does not index, held values it never saw.
 
 ## The lower-bound lane
 
@@ -171,6 +188,138 @@ The reconciliation is applied alongside this review; the details are in the
   value out of it; whether the lane should mean best-in-print or best-replayed is
   `think-ss2a`’s decision and is not made here.
 
+## Three GitHub certificate repositories
+
+The currency check’s corpus never included GitHub.
+It should have: three certificate repositories for `s(17)` were public there before this
+review was written, and one of them held a public bound above Massaccesi’s for nineteen
+days before `T-019` was registered.
+The user found all three on 7 September 2026; they are cloned under `attic/`, archived
+under
+[`packing/resources/web/n17-github-certificates-2026/`](../../../packing/resources/web/n17-github-certificates-2026/)
+with replay scripts, and carried in `frontier/evidence.yaml` under source key
+`[GitHub n17 certificates 2026]`.
+
+| Date | Author | Value | Type | Status here |
+| --- | --- | --- | --- | --- |
+| 18 Jul 2026 | Brandwijk | `89/20 = 4.45` | Exact, 16 points | Already tracked (Zenodo record `21422426`), unchanged |
+| 6 Aug 2026 | Burns | `4.4811` | Weighted | Replayed and verified (`E-n017-burns-source-replay`) |
+| 10 Aug 2026 | Mira | `4.450837` | Exact, 16 points | Superseded by the same repository’s 11 Aug commit; not independently replayed |
+| 11 Aug 2026 | Fort | `4.456575` | Exact, 16 points | Replayed here, valid (`E-n017-fort-point-certificate-replay`) |
+| 11 Aug 2026 | Mira | `4.468292` | Exact, 16 points | Replayed here, valid (`E-n017-mira-point-certificate-replay`) |
+| 13 Aug 2026 | anabologyco | `4.57` | Weighted, exact-orientation | Superseded by the same repository’s v0.2.0 |
+| 16 Aug 2026 | anabologyco | `9141/2000 = 4.5705` | Weighted, exact-orientation | Source-backed only; not decidable here (`E-n017-anabologyco-weighted-certificate`) |
+| 21 Aug 2026 | Massaccesi | `22529/5000 = 4.5058` | Weighted | Retained (`T-015`, `C3`) |
+| 4 Sep 2026 | This repository | `459/100 = 4.59` | Weighted | Current bound (`T-019`, `V4/C4`) |
+
+The three exact sixteen-point certificates, Mira’s two and Fort’s, are the strongest
+integral (unweighted) bounds on record, above both Brandwijk’s and this repository’s own
+green17 `4.426213`.
+
+**Mira** (`github.com/Mira-acc/17squares`) posted an exact sixteen-point
+strictly-unavoidable-point certificate for `s(17) > 4.450837` on 10 August 2026, then a
+second on 11 August for `s(17) > 4.468292`, adding strict triangle-piercing leaves: a
+strict form of the classical triangle lemma, that a unit square whose centre lies
+strictly inside a triangle with all sides shorter than 1 contains a vertex in its
+interior. The later certificate is a 122,626,747-node exact pose-space subdivision with
+`t = tan(theta)` ranging over `[-1, 1]`, one byte per node, exact integer comparisons,
+three independent checkers (a fast C++ one, a Boost bigint C++ one, and a pure-Python
+integer one), and a LaTeX paper and PDF. Replayed here with the pure-Python checker:
+valid over all 122,626,747 nodes in 3 min 34 s, and both published hashes matched
+(`E-n017-mira-point-certificate-replay`); the two Boost checkers were not run, Boost
+being absent from the container.
+The repository is credited to a language model (GPT-5.6 Pro) working under human
+direction and is not peer reviewed; it cites Friedman, Stromquist, Ellsworth and Fort,
+and not Brandwijk, Burns or Massaccesi.
+The first, 10 August certificate was not extracted from the archive and was not
+independently replayed; it is superseded within the same repository by the second.
+
+**Stanislav Fort** (`github.com/stanislavfort/17squares`) posted `s(17) > 4.456575` on
+11 August 2026 on the same architecture as Mira’s, without the triangle-piercing leaves:
+a 21,696,657-node exact subdivision over the same sixteen points.
+The author’s README states the work was done by a language model (GPT-5.6-Sol) and that
+he cannot vouch for it; a GitHub Action runs the checkers on every push.
+Replayed here with the pure-Python checker: valid in 20 s
+(`E-n017-fort-point-certificate-replay`); the C++ checker, which needs Boost, was not
+run.
+
+**anabologyco-maker** (`github.com/anabologyco-maker/square17-lower-bound`) posted a
+weighted fractional unavoidable-set certificate between 13 and 17 August 2026: 71 D4
+orbits expanded to 560 atoms on the 1/4000 grid, total mass `16.994734834452`, claiming
+`s(17) >= 9141/2000 = 4.5705` (tag v0.2.0, 16 August; v0.1.1 of 13 August claimed
+`4.57`). Its verifier is architecturally unlike this repository’s: no shrunken square
+and no direction net.
+Instead it decides an exact orientation partition: 1,344,862 event polynomials, an exact
+Bernstein prefilter discarding 1,194,331 of them, Sturm chains on the remaining 150,531
+giving 148,937 open orientation cells, one exact rational `t = tan(theta/2)` audited per
+cell, 278,950,150 subthreshold runs all proved outside the feasible region, and endpoint
+audits at `theta = 0` and `theta = pi/4`. A Lean 4 layer carries `native_decide`
+theorems over the finite checks, including all 148,937 cells, in an 8.5-hour build; the
+event-completeness layer and the measure argument are not formalised.
+Its README states the certificate was built with GPT-5.6 Sol Pro and audited and
+formalised by “Claude Fable 5 (Anthropic)”, with peer review pending.
+Replayed here only in part (`E-n017-anabologyco-weighted-certificate`): its `SHA256SUMS`
+verified over all 76 entries, and its certificate-arithmetic and Bernstein-filter Python
+stages both pass; the Sturm, endpoint and coverage stages need `g++` with
+Boost.Multiprecision, absent from the container and not installed at the user’s
+decision, and Lean is absent too.
+This repository’s own verifier cannot decide it either: the 560 atoms re-encoded into
+`sqpack.fractional` at side `9141/2000` with the 181-direction net are refused at least
+cell mass about `0.0245` at direction `0`, because the source places atoms exactly one
+unit from the container walls, which a wall-touching closed unit square captures on its
+boundary and which this repository’s shrunken square cannot reach at all.
+That refusal is an artefact of the reduction, not evidence against the source.
+
+What is new for this record, against what stood before today: the strongest integral
+sixteen-point certificates are now Mira’s and Fort’s, and the strict triangle-piercing
+leaf is a certificate ingredient this repository’s own sixteen-point work does not use.
+anabologyco’s exact-orientation weighted verifier, with no shrink and a Lean 4 layer, is
+a working instance of the proof-assistant-checked (`V5`) direction the record already
+names as a follow-on for `T-015` and `T-019`, reached first by someone else, on a weaker
+bound. `T-019`’s novelty claim and movement figure need the correction recorded as item
+10 in Bookkeeping below.
+And all four 2026 authors found so far, Burns, Mira, Fort and anabologyco, disclose a
+model-generated proof with a human declining to vouch for it, which is exactly the
+situation this repository’s replay-here discipline exists for.
+
+What this repository’s tools can and cannot do with them: the shrink in
+`sqpack.fractional`’s reduction is why its own verifier refuses anabologyco’s
+certificate, an artefact of the reduction rather than a finding against the source, and
+nothing here re-derives the certificate under an unshrunk verifier.
+The two exact sixteen-point certificates, Mira’s and Fort’s, are candidates for a
+genuinely independent decision: this repository’s green17 interval audit takes an
+arbitrary side through its `--side` flag and an arbitrary point set through the `points`
+argument of its audit function, and could re-decide either one as a second
+implementation distinct from all three of Mira’s own checkers; that re-decision was not
+run today.
+
+Worth citing, worth learning from, and where each now lives in this record:
+
+- **Cited.** All three repositories are named on the `n = 17`, `18` and `19` case files
+  and in three evidence entries under the source key `[GitHub n17 certificates 2026]`;
+  the root README’s `T-019` entry now credits every 2026 bound that came close, with its
+  author and date; the proof-strategy catalogue cites them at entries 18
+  (machine-checked proof, now `adjacent` on the strength of anabologyco’s Lean layer),
+  21 (the strict triangle-piercing leaf and the exact pose-space subdivision format) and
+  22 (the exact orientation partition as a second way to decide a weighted measure); and
+  the search-strategy catalogue’s entry 16 records Burns’s learned search and its
+  near-record basin.
+- **Learned.** Four ideas are portable: Mira’s strict triangle-piercing leaf, an
+  orientation-free discharge for integral certificates; the one-byte-per-node exact
+  subdivision certificate with pure-integer checkers, a format small enough to hand to a
+  proof assistant; anabologyco’s exact orientation partition, which needs no shrunken
+  square, so it has no containment loss and no `5B` ceiling and can place atoms on the
+  wall lines; and the operational habits around them, Fort’s checker run on every push
+  by a GitHub Action, Mira’s byte-identical regeneration of the tree from a
+  deterministic generator, and anabologyco’s process-isolated coverage ranges.
+- **Not adopted, and why.** None of the three changes a bound here.
+  What they change is the target list: an unshrunk exact-orientation verifier would be a
+  third decision procedure for the retained certificates and the only route to deciding
+  the `4.5705` atoms here; a Lean layer over `T-019`’s finite checks is now a
+  demonstrated shape rather than a hope; and the two sixteen-point certificates are the
+  natural first inputs to a green17-audit re-decision.
+  Each is a bead, none was run today.
+
 ## Bookkeeping
 
 The tracker is behind the record.
@@ -204,6 +353,10 @@ Inconsistencies found across documents, for the record:
 8. The witness receipt reports a pair gap of `0.0` where the screen reports `-7.4e-34`
    for the same configuration.
 9. The refresh packet’s “Massaccesi’s article body is unchanged” is now stale.
+10. `T-019`’s claim, its significance rationale and its novelty basis quote `4.5058` as
+    the best prior public value and `0.0842` as the movement past it, where `4.5705` and
+    `0.0195` are the facts; corrected in this pull request.
+11. The literature-refresh method’s corpus has no code-hosting sites.
 
 ## Where `n = 17` can still move
 
@@ -232,7 +385,17 @@ artifacts were built first, and the case then paid for itself.
    more than one basin, which is what `H-020`’s calibration lane needs.
 4. **Write `T-019`’s `C5` artifact.** The current bound is the only `S4` result at
    `n = 17` and its review-readiness is the last assurance step it lacks.
-5. **Close the tracker**: the seven finished beads, `BC-115`’s re-scope, and the
+5. **Replay the two strongest external results independently.** anabologyco’s decisive
+   stages (the Sturm partition, the endpoint audits, the coverage audit) need `g++` with
+   Boost, absent from the container and not installed at the user’s decision, and Lean,
+   also absent; replaying them, and re-deciding Mira’s sixteen points with this
+   repository’s own green17 interval audit through its `--side` and `--points`
+   arguments, an implementation distinct from all three of Mira’s own checkers, would
+   put the two strongest external results at `n = 17` on this repository’s own footing
+   rather than the source’s. anabologyco’s exact-orientation approach carries neither
+   this repository’s shrink loss nor its `5B` ceiling, so whichever result moves first,
+   the packing-side cap and not the method ceiling is what binds.
+6. **Close the tracker**: the seven finished beads, `BC-115`’s re-scope, and the
    `think-ss2a` decision, each of which is a disposition rather than work.
 
 What this review does not do: it does not change a bound, it does not reconstruct the

@@ -1218,6 +1218,181 @@ evidence:
       over the same rational net), independent at the implementation level only, so
       together they support C3, not C4. No new first-party mathematics is claimed.
     source_reviewed: '2026-09-07'
+  - id: E-n017-mira-point-certificate-replay
+    claim: lower-bound
+    scope: {n_values: [17, 18, 19]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    novelty: previously-published
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    source_key: '[GitHub n17 certificates 2026]'
+    certificate: resources/web/n17-github-certificates-2026/mira-17squares/certificates/lower_bound_4p468292/square17_lb_4p468292.cert.xz
+    replay: uv run --frozen python resources/web/n17-github-certificates-2026/replay_mira_python.py
+    replay_status: passed
+    external_review:
+      state: not-reviewed
+      date: '2026-09-07'
+      note: >-
+        The proof interface (PROOF.md) and the paper's triangle-piercing lemma were read
+        here on 2026-09-07, but the argument was not worked through. What the replay
+        decides is the finite tree the certificate ships; what makes a strictly pierced
+        triangle a sound leaf, and what turns the finite refutation into the strict
+        inequality, are the source's lemmas and they are transcribed, not audited.
+    limitations: >-
+      Replays the source's own pure-Python integer checker over the retained certificate
+      (github.com/Mira-acc/17squares, commit 0872d3ac9a95bb4f8f628c8ee255d76eb27d6c2f,
+      11 August 2026): 16 rational points of denominator 10^7 and 18 triangles, decided by
+      a 122,626,747-node exact subdivision of the pose space into point, strict
+      triangle-piercing and infeasible leaves, with t = tan(theta) ranging over [-1, 1]
+      and integer comparisons throughout. The 2026-09-07 replay returned
+      PYTHON_INTEGER_CERTIFICATE_VALID_4P468292 over all 122,626,747 nodes in 3 min 34 s,
+      and the retained XZ archive (SHA-256 a349b81e...) and its decompressed certificate
+      (SHA-256 2838f315...) matched the hashes the source publishes. The bound is the
+      strict one the source states, 4468292/1000000 = 4.468292; strictness is a
+      compactness step over the closed pose space, which the replay does not decide and
+      which was not worked through here.
+      What was not replayed: the source ships three checkers and only this one was run,
+      the two C++ checkers needing Boost, which is absent from the session container. No
+      first-party implementation has been pointed at these 16 points.
+      The architecture is not this repository's. It is an integral 16-point unavoidable-set
+      certificate in the family of cases/green17, not a weighted fractional unavoidable set
+      like the retained first-party rungs, so sqpack.fractional neither produces nor
+      decides it. As a bound it was superseded before it was published -- by Burns's
+      44811/10000 of 6 August 2026, then by Massaccesi's 22529/5000 and the first-party
+      459/100 (T-019) -- and it is retained because it is the strongest integral 16-point
+      certificate on record, above Brandwijk's 89/20 capsule and this repository's own
+      4426213/1000000. The same repository's first version (commit 3d5fc2c, 10 August
+      2026) proved 4450837/1000000.
+      Scope note: n = 18 and n = 19 inherit by monotonicity, a packing of n >= 17 unit
+      squares containing a packing of 17; the certificate itself speaks only about 17.
+      The code and exposition are credited to a language model (GPT-5.6 Pro) working under
+      human direction, and the work is not peer reviewed.
+    source_reviewed: '2026-09-07'
+  - id: E-n017-fort-point-certificate-replay
+    claim: lower-bound
+    scope: {n_values: [17, 18, 19]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    novelty: previously-published
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    source_key: '[GitHub n17 certificates 2026]'
+    certificate: resources/web/n17-github-certificates-2026/stanislavfort-17squares/certificates/lower_bound_4p456575/square17_lb_4p456575.cert.xz
+    replay: uv run --frozen python resources/web/n17-github-certificates-2026/replay_fort_python.py
+    replay_status: passed
+    external_review:
+      state: not-reviewed
+      date: '2026-09-07'
+      note: >-
+        The repository's proof interface was read here on 2026-09-07 and the architecture
+        recognised as Mira's without the triangle leaves, but the argument was not worked
+        through: the replay decides the shipped tree, not the lemma that licenses its
+        leaves or the compactness step behind the strict inequality.
+    limitations: >-
+      Replays the source's own pure-Python integer checker over the retained certificate
+      (github.com/stanislavfort/17squares, commit
+      853f7ee61e7d37c8284a3fe130d79831140ad507, 11 August 2026): 16 rational points of
+      denominator 10^6 decided by a 21,696,657-node exact subdivision of the pose space,
+      the same architecture as Mira's with no triangle-piercing leaves. The 2026-09-07
+      replay returned PYTHON_INTEGER_CERTIFICATE_VALID in 20 s; the raw certificate's
+      SHA-256 is 5fbee90dc6fedc1851e4b8b9866f8ffa41c38cb09ebb6a9f748096217f078550 and it
+      is retained here XZ-compressed. The bound is the strict one the source states,
+      4456575/1000000 = 4.456575, whose strictness is a compactness step the replay does
+      not decide.
+      What was not replayed: the C++ checker, which needs Boost and was not built here, so
+      one of the two checkers the source ships has been run. No first-party implementation
+      has been pointed at these 16 points.
+      The architecture is not this repository's: an integral 16-point unavoidable-set
+      certificate in the family of cases/green17, not a weighted fractional unavoidable
+      set, so sqpack.fractional neither produces nor decides it. As a bound it was already
+      weaker when published than Burns's 44811/10000 of 6 August 2026, and was superseded
+      again by Massaccesi's 22529/5000 and by the first-party 459/100 (T-019); it is
+      retained as the second of the two exact 16-point certificates of that week, a hair
+      below Mira's 4468292/1000000 and above Brandwijk's 89/20 and this repository's own
+      4426213/1000000.
+      Scope note: n = 18 and n = 19 inherit by monotonicity, a packing of n >= 17 unit
+      squares containing a packing of 17.
+      The author's README states that the work was done by a language model (GPT-5.6-Sol)
+      and that he cannot vouch for it; it is not peer reviewed.
+    source_reviewed: '2026-09-07'
+  - id: E-n017-anabologyco-weighted-certificate
+    claim: lower-bound
+    scope: {n_values: [17, 18, 19]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    novelty: previously-published
+    relationship_to_generator: not-applicable
+    origin: external
+    source_key: '[GitHub n17 certificates 2026]'
+    certificate: resources/web/n17-github-certificates-2026/anabologyco-square17-lower-bound/data/atoms.csv
+    replay: uv run --frozen python resources/web/n17-github-certificates-2026/replay_anabologyco_python_stages.py
+    replay_status: not-attempted
+    external_review:
+      state: not-reviewed
+      date: '2026-09-07'
+      note: >-
+        PROOF.md was read here on 2026-09-07. The weighted obstruction lemma, with its
+        generic-translation step, and the event-stability claim that lets one exact
+        rational t = tan(theta/2) per open orientation cell stand for the whole cell were
+        noted as the two load-bearing steps, and neither was worked through. Reading is
+        not a check, and this entry claims none.
+    blocker:
+      kind: checker
+      detail: >-
+        The decisive stages cannot run here. The Sturm-chain orientation partition, the
+        endpoint audits at theta = 0 and pi/4, and the coverage audit are C++ and need
+        g++ with Boost.Multiprecision, which is absent from the session container and was
+        not installed; the Lean 4 layer needs Lean 4.33, also absent. This repository's
+        own verifier is not a substitute: re-encoding the 560 atoms into the sqpack
+        fractional schema at side 9141/2000 with the 181-direction net is refused by the
+        exact sweep at B = 9977/10000 and again at B = 9973/10000, least cell mass
+        6119404457/250000000000 (about 0.0245) at direction 0. That refusal is an artefact
+        of this repository's shrink reduction and not evidence against the source: the
+        source places atoms exactly on the lines one unit from the container walls, which
+        a wall-touching closed unit square captures on its boundary and a shrunken
+        B-square cannot reach at all.
+    limitations: >-
+      Reported, not verified here. The source (github.com/anabologyco-maker/square17-lower-bound,
+      commit 396da6f7c112f49b50b5f4563ad2486ef38ac909 of 17 August 2026; tag v0.2.0 of
+      16 August 2026, the tag this entry records; tag v0.1.1 of 13 August 2026 proved
+      4.57) states the non-strict s(17) >= 9141/2000 = 4.5705 from a weighted fractional
+      unavoidable set: 71 D4 orbits expanded to 560 atoms on the 1/4000 grid, weights in
+      units of 10^-12, total mass 16994734834452/10^12 = 16.994734834452 < 17, decided not
+      over a direction net but over an exact orientation partition -- 1,344,862 event
+      polynomials, a Bernstein prefilter, Sturm chains, and 148,937 open orientation cells
+      each audited at one exact rational t = tan(theta/2), with endpoint audits at
+      theta = 0 and theta = pi/4. It uses the TRUE closed unit square, with no shrink and
+      no direction net, which is a different reduction from Burns's and from this
+      repository's. A Lean 4 layer carries native_decide theorems over the finite checks;
+      the event-completeness layer and the measure argument are not formalized.
+      What was replayed here on 2026-09-07 is only the Boost-free part: the source's
+      SHA256SUMS verified over all 76 entries; scripts/check_certificate.py returned EXACT
+      CERTIFICATE ARITHMETIC PASS with mass 4248683708613/250000000000; and
+      scripts/verify_filter.py returned EXACT BERNSTEIN FILTER PASS over 1,344,862 raw
+      polynomials, 1,194,331 discarded and 150,531 kept. Those stages check arithmetic and
+      a filter, not the bound. The stages that decide it -- the Sturm partition, the
+      endpoint audits, the coverage audit and the Lean layer -- were not run, for the
+      reasons in the blocker, so replay_status is not-attempted rather than passed and the
+      assurance stays reported.
+      Position: at 9141/2000 = 4.5705 this is the strongest public value on record below
+      this repository's 459/100, by 39/2000 = 0.0195, and it is above Massaccesi's
+      22529/5000, which the record had treated as the best published value. It was tagged
+      on 16 August 2026, nineteen days before T-019 was registered, and it was outside the
+      record's search corpus at that time because the 2026-09-05 refresh searched arXiv,
+      Crossref, OpenAlex and Zenodo and not GitHub; it was found on 2026-09-07. It is
+      neither peer reviewed nor replayed here, so it displaces nothing, and T-019 is not
+      affected as a theorem -- what changes is what the record may say about movement past
+      the best prior public value.
+      Scope note: n = 18 and n = 19 would inherit by monotonicity, a packing of n >= 17
+      unit squares containing a packing of 17; the scope is recorded for the source's
+      claim, which is reported and not verified here.
+      Provenance per the source's README: built with a language model (GPT 5.6 Sol Pro),
+      audited and formalized by "Claude Fable 5 (Anthropic)"; peer review pending.
+    source_reviewed: '2026-09-07'
   - id: E-n017-massaccesi-h052-agreement
     claim: lower-bound
     scope: {n_values: [17, 18, 19]}
@@ -1549,12 +1724,27 @@ evidence:
         Massaccesi's 2026 certificate (4.5058, adopted here as T-015 and carried to
         n = 18 and n = 19 as T-016), Nagamochi 2005 and Friedman's record tables. The
         frozen arXiv, Crossref, OpenAlex, and Zenodo search receipts are retained at
-        resources/web/literature-refresh-2026-09-05/README.md.
+        resources/web/literature-refresh-2026-09-05/README.md. GitHub-hosted certificate
+        repositories were not part of that corpus until 2026-09-07, when a check of GitHub
+        found three of them for n = 17 and they were archived here under the source key
+        [GitHub n17 certificates 2026], at
+        resources/web/n17-github-certificates-2026/.
       searched: >-
         Searched for any lower bound on s(17) above 22529/5000 = 4.5058. The refresh
         located Brandwijk's externally published s(17) > 89/20 = 4.45 capsule, which is
-        below T-019's 459/100 = 4.59 and does not displace it. It located no earlier
-        external public bound above 4.5058. De Winter's mutable report concerns proposed
+        below T-019's 459/100 = 4.59 and does not displace it. The frozen refresh located
+        no other external public bound above 4.5058, but it searched arXiv, Crossref,
+        OpenAlex and Zenodo and not GitHub, and the 2026-09-07 GitHub check found one
+        there: anabologyco-maker's candidate at container side 9141/2000 = 4.5705 (tag
+        v0.2.0, 16 August 2026, nineteen days before this result was registered), which is
+        not peer reviewed and whose decisive stages were not replayed here
+        (E-n017-anabologyco-weighted-certificate). It lies above 4.5058 and below 459/100,
+        so the movement past the best prior public value is 39/2000 = 0.0195 rather than
+        the 0.0842 past the value this record had adopted. The same check found Mira's and
+        Fort's exact 16-point certificates at 4.468292 and 4.456575, both committed on
+        11 August 2026 (Mira's repository having first proved 4.450837 on 10 August), both
+        replayed here by their own Python checkers and both below 4.5058. Nothing found is
+        above 459/100. De Winter's mutable report concerns proposed
         upper-bound constructions at n = 68, 126 and 206; its coordinates were
         unavailable and its values were not replayed, so it has no bearing on lower
         bounds at n = 17 through 21.
@@ -1565,7 +1755,10 @@ evidence:
       gaps: >-
         The frozen refresh is a bounded public-record search, not an exhaustive review of
         subscription-only indexes, theses, proceedings, non-English or unindexed sources,
-        private correspondence, or unpublished work. The label records apparent novelty
+        private correspondence, or unpublished work. GitHub and similar code-hosting sites
+        were the hole in it, and they were where the three August 2026 certificates for
+        this size sat; the 2026-09-07 check closed that hole for n = 17 only, and no other
+        size has been searched there. The label records apparent novelty
         within that search, not absolute priority.
     certificate: cases/n17_fractional_certificate/certificate.json
     replay: uv run --frozen --all-extras python -m cases.n17_fractional_certificate

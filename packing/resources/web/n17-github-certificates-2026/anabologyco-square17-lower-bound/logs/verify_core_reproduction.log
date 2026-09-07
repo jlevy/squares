@@ -1,0 +1,19 @@
+atoms=560
+exact_mass=4248683708613/250000000000
+mass_decimal=16.994734834452
+slack=1316291387/250000000000
+EXACT CERTIFICATE ARITHMETIC PASS
+raw_polynomials=1344862
+exactly_discarded=1194331
+filtered_polynomials=150531
+EXACT BERNSTEIN FILTER PASS
+polynomials=150531 samples=148937 expected_roots=148936
+located_incidences=149049 seconds=2.92667
+root_gaps=148936 gcd_checks=149049 common=1 seconds=2.43752
+EXACT EVENT PARTITION PASS
+exact_total_mass_numerator=16994734834452
+theta_0_min_open_cell_coverage=1000300000011
+theta_pi_over_4_subthreshold_runs=700
+theta_pi_over_4_min_arrangement_coverage=0
+EXACT ENDPOINT COVERAGE PASS
+Run scripts/run_coverage_ranges.sh for the complete 148,937-cell audit.
