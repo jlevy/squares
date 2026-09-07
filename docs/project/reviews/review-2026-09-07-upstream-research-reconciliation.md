@@ -135,6 +135,13 @@ The atlas PR’s remote session093 and local proposed 097 both collide with sour
 ownership; `think-rzek` retains that separate repair and the need for a fresh
 reservation. Neither collision justifies renumbering landed scientific records.
 
+A concurrent upstream merge reached the same PR110 branch as `7a2145f4` during
+validation. It independently preserved both receipts but selected097 from the remote
+inventory. This integration retains that commit in history and resolves the competing
+rename to098, preserving the earlier live kernel allocation.
+Its additional plan reference is carried forward with098. No code or scientific result
+differs between these two merge resolutions.
+
 Preserve each cost payload byte-for-byte during rekeying, including its original before
 baseline. Historical runtime archives keep their original filenames and source IDs.
 Update current links and regenerate the ledger and cost views from the resolved records.

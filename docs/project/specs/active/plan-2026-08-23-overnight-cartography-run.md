@@ -345,12 +345,15 @@ For the next supervised exact-research goal, select existing `think-mq0d` under 
 in
 [Agenda027](../../../../packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md),
 with its separate owner.
-Allocate at most 30 minutes of source-free feature and kernel-contract pricing.
-First accept BC260’s kernel-specific implications; the direct case/Farkas review did not
-cover them. Fix one feature family, exact PSD criteria and the full diagonal/pair
-verification price before any scientific target.
+The original handoff allocated at most 30 minutes of source-free feature and
+kernel-contract pricing.
+The owner’s live session097 has since completed that pricing and begun source-free
+implementation. Follow its current admission checkpoint before dispatch; do not restart
+the original slice.
+Kernel-specific implications, fixed exact PSD criteria and a complete
+verification price remain prerequisites for scientific target admission.
 Check live ownership before dispatch; no degree escalation or general hierarchy follows
-by default. Session096 completed BC282’s exact open-fiber reduction and independent
+by default. Session098 completed BC282’s exact open-fiber reduction and independent
 admission, which refused the larger target.
 Its comparisons park local H120/H118 target work and retain their re-entry conditions in
 [X018](../../../../packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md#bc282-checkpoint-and-current-allocation).
