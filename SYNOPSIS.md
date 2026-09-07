@@ -141,7 +141,7 @@ The generated ledger currently derives fourteen confirmed hypotheses, twelve ref
 hypotheses, one open hypothesis, twenty-three open questions, and forty blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. No hypothesis is running or waiting on review and seven are unresolved.
-H-124's fixed-square screen found no pair; its witness-only reader was not invoked.
+H-124’s fixed-square screen found no pair; its witness-only reader was not invoked.
 H-105 is refuted: all 134 eligible candidate pairs are separated, leaving higher-order
 overlap depth and H-099 unresolved.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and

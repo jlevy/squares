@@ -107,7 +107,7 @@ session:
     clock_role: work
     objective: Prepare independent geometric graph adapters and review the continuous common-obstacle reduction.
     bead: think-bmx9
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Generic graph reviews passed and the analytical assessment derived a larger full-band common obstacle; neither result authorizes a scientific target.
     budget_minutes: 30
@@ -117,10 +117,30 @@ session:
     validation_command: Focused synthetic controls and independent mathematical review, then the immutable push tier.
     kill_condition: Original twenty-minute adapter caps and ten-minute proof-review cap; missing source binding or failed controls prohibits science.
     fallback: Preserve exact readiness gaps for the next checkpoint without a target launch or cap extension.
+    outcome: Both geometric adapters and their independent reviews passed by09:01:21UTC. The root source-binding command passed fifteen synthetic controls and awaits its independent review. The continuous common obstacle and smaller endpoint-chain cover contract passed mathematical assessment.
+    evidence: [packing/devtools/geometric_graph_certificate.py, packing/devtools/check_geometric_graph_certificate.py, packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md]
+    stop_reason: The changed instruments justify a bounded source-free cover build and a separate source-binding readiness review.
+    next_action: Preserve original caps, prepare the reviewed source-control protocol, and do not infer scientific readiness from generic tests.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Author independent closed-polygon cover instruments and finish density source-binding readiness.
+    bead: think-bmx9
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: The endpoint-chain proof reduces the cover reader to exact endpoint checks; independent geometric graph reviews passed, leaving one separate source-binding review.
+    budget_minutes: 27.27
+    started_at: '2026-09-07T09:02:18Z'
+    deadline_at: '2026-09-07T09:29:34Z'
+    expected_output: Source-free cover producer and independent reader, plus reviewed density source binding; any science needs a separately committed protocol.
+    validation_command: Focused synthetic controls, independent reviews, and immutable push/checkpoint validation.
+    kill_condition: Original twenty-minute cover-author and ten-minute source-binding-review caps remain binding; no work runs past protected finalization.
+    fallback: Retain partial instruments and exact readiness gaps; defer unready science without changing caps.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Review the frozen adapter packages independently and price only a justified next discriminator.
+    next_action: Finish independent source binding, then price prospective source controls; the polygon cover target remains unfunded.
   primary_bead: think-bmx9
   status: in_progress
   budget:
@@ -407,16 +427,16 @@ session:
     excluded_commands: [Scientific source or target evaluation, File or registry writes]
   - task: Source-free geometric graph producer adapter (think-gn8q)
     operator: Codex scalar_followup_assessment, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
-    files: []
-    checks: []
+    outcome: Frozen at08:56:16UTC within the original cap; full roster validation and all positive pairs, conservative unknown edges and graph-proof coupling pass synthetic controls.
+    evidence: [packing/devtools/geometric_graph_certificate.py]
+    files: [packing/devtools/geometric_graph_certificate.py, packing/tests/test_geometric_graph_certificate.py]
+    checks: [37 tests pass in0.24seconds wall and0.23CPU, Ruff and format clean; BasedPyright zero findings]
     uncertainty: Exact geometry, full-source binding and source-free controls are not yet ready.
-    elapsed_seconds: null
-    elapsed_quality: unavailable
-    next_action: Freeze before the original twenty-minute deadline; no scientific execution.
+    elapsed_seconds: 795
+    elapsed_quality: operator_reported_approximate
+    next_action: Independent review think-epl5 passed; await separate source-binding readiness.
     phase: 5
     budget_minutes: 20
     started_at: '2026-09-07T08:43:01Z'
@@ -429,16 +449,16 @@ session:
     excluded_commands: [Scientific source construction or retained-coordinate computation, Target execution, Registry or Git writes, Dependency changes]
   - task: Independent source-free geometric graph reader (think-hhsg)
     operator: Codex angle_reader_recovery, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
-    files: []
-    checks: []
+    outcome: Frozen at08:55:02UTC within the original cap; every original unit square, sixteen cross-projections per nonedge, full graph reconstruction and nested acceptance are independently checked.
+    evidence: [packing/devtools/check_geometric_graph_certificate.py]
+    files: [packing/devtools/check_geometric_graph_certificate.py, packing/tests/test_check_geometric_graph_certificate.py]
+    checks: [67 tests pass in0.28seconds wall and0.27CPU, Ruff and format clean; BasedPyright zero findings]
     uncertainty: Source identity and independent nonedge replay are not yet ready.
-    elapsed_seconds: null
-    elapsed_quality: unavailable
-    next_action: Freeze before the original twenty-minute deadline; no scientific execution.
+    elapsed_seconds: 697
+    elapsed_quality: operator_reported_approximate
+    next_action: Independent review think-kxef passed; await separate source-binding readiness.
     phase: 5
     budget_minutes: 20
     started_at: '2026-09-07T08:43:25Z'
@@ -449,6 +469,138 @@ session:
     fallback: Retain source and exact missing premise without science.
     write_scope: [packing/devtools/check_geometric_graph_certificate.py, packing/tests/test_check_geometric_graph_certificate.py]
     excluded_commands: [New producer inspection, Scientific source or target evaluation, Registry or Git writes, Dependency changes]
+  - task: Independent geometric graph producer review (think-epl5)
+    operator: Codex angle_reader_recovery, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: GO at09:00:50UTC; no findings. Seven unrelated toy JSON roundtrips cover tangency, zero entries, unknown edges, exhaustion and algebraic geometry.
+    evidence: [packing/devtools/geometric_graph_certificate.py]
+    files: []
+    checks: [104 combined tests pass in0.32seconds wall and0.32CPU, Ruff and format clean; BasedPyright zero findings]
+    uncertainty: Source identity, containment and process caps require the separate binding review.
+    elapsed_seconds: 172
+    elapsed_quality: operator_reported_approximate
+    next_action: Review the source-binding command under think-0s6h.
+    phase: 5
+    budget_minutes: 10
+    started_at: '2026-09-07T08:57:58Z'
+    deadline_at: '2026-09-07T09:07:36Z'
+    expected_output: Independent source-free producer readiness verdict.
+    validation_command: Synthetic controls, toy roundtrips and static proof review.
+    kill_condition: Original09:07:36 deadline or a correctness finding.
+    fallback: Retain the gap without scientific invocation.
+    write_scope: [Read-only review]
+    excluded_commands: [Scientific source or target evaluation, File or shared-record writes]
+  - task: Independent geometric graph reader review (think-kxef)
+    operator: Codex scalar_followup_assessment, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: GO at09:01:21UTC; no findings. Complete independent source and graph replay is sound, including quartic toy tangency and zero-weight source tampering refusals.
+    evidence: [packing/devtools/check_geometric_graph_certificate.py]
+    files: []
+    checks: [67 reader tests pass; combined additional toy checks total0.58seconds wall and0.51CPU, Ruff and format clean; BasedPyright zero findings]
+    uncertainty: Scientific source identity and containment are separate obligations.
+    elapsed_seconds: 192
+    elapsed_quality: operator_reported_approximate
+    next_action: Author the independent closed-polygon cover reader under think-qt0k.
+    phase: 5
+    budget_minutes: 10
+    started_at: '2026-09-07T08:58:09Z'
+    deadline_at: '2026-09-07T09:07:36Z'
+    expected_output: Independent source-free geometric reader verdict.
+    validation_command: Synthetic controls, unrelated roundtrips and static proof review.
+    kill_condition: Original09:07:36 deadline or a correctness finding.
+    fallback: Preserve the exact missing premise without scientific invocation.
+    write_scope: [Read-only review]
+    excluded_commands: [Scientific source or target evaluation, File or shared-record writes]
+  - task: Closed residual-cover certificate assessment (think-h93h)
+    operator: Codex density_control_recovery, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: GO at09:00:51UTC for a complete closed-slab endpoint-chain certificate. Convexity proves each slab from one shared chain's two endpoint checks; the independent reader need not reconstruct discovery events.
+    evidence: [packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md]
+    files: []
+    checks: [Read-only mathematical and existing API assessment; no scientific evaluation]
+    uncertainty: Actual residual coverage and runtime remain untested; the representation may fail without refuting H124.
+    elapsed_seconds: 507
+    elapsed_quality: operator_reported_approximate
+    next_action: Author a bounded source-free producer under think-g29r with a separate blind reader.
+    phase: 5
+    budget_minutes: 10
+    started_at: '2026-09-07T08:52:24Z'
+    deadline_at: '2026-09-07T09:02:24Z'
+    expected_output: Complete reusable polygon-cover certificate contract and justified authoring cost.
+    validation_command: Static proof and API comparison only.
+    kill_condition: Ten active minutes or a decisive proof gap.
+    fallback: Retain the gap without target allocation.
+    write_scope: [Read-only assessment]
+    excluded_commands: [Scientific construction or coordinate evaluation, File or registry writes]
+  - task: Independent density source-binding review (think-0s6h)
+    operator: Codex angle_reader_recovery, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: []
+    checks: []
+    uncertainty: Source reconstruction, side and containment binding, process caps and positive acceptance need independent review.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Review the08:58:29 root freeze without evaluating scientific inputs.
+    phase: 6
+    budget_minutes: 10
+    started_at: '2026-09-07T09:02:18Z'
+    deadline_at: '2026-09-07T09:12:18Z'
+    expected_output: Independent source-binding and whole-process cap verdict.
+    validation_command: Synthetic source mocks, toy CLI roundtrip and static inspection.
+    kill_condition: Original ten-minute deadline or a correctness finding.
+    fallback: Preserve the exact readiness gap without science.
+    write_scope: [Read-only review]
+    excluded_commands: [Scientific source or target evaluation, File or shared-record writes]
+  - task: Source-free closed polygon cover producer (think-g29r)
+    operator: Codex density_control_recovery, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: []
+    checks: []
+    uncertainty: A complete event sweep and endpoint-chain discovery remain to be implemented.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Freeze under the original author cap, retaining any exact missing obligation.
+    phase: 6
+    budget_minutes: 20
+    started_at: '2026-09-07T09:02:18Z'
+    deadline_at: '2026-09-07T09:22:18Z'
+    expected_output: Generic exact cover producer and unrelated source-free controls.
+    validation_command: Focused project Python3.14 tests, Ruff and BasedPyright.
+    kill_condition: Original twenty-minute deadline or a missing completeness premise.
+    fallback: Retain partial source without a target or cap extension.
+    write_scope: [packing/devtools/closed_polygon_cover.py, packing/tests/test_closed_polygon_cover.py]
+    excluded_commands: [Scientific source construction or target evaluation, Registry or Git writes, Dependency changes]
+  - task: Independent closed polygon endpoint-chain reader (think-qt0k)
+    operator: Codex scalar_followup_assessment, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: []
+    checks: []
+    uncertainty: Complete source and partition binding and endpoint-chain checks remain to be implemented.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Freeze under the original cap without producer inspection.
+    phase: 6
+    budget_minutes: 20
+    started_at: '2026-09-07T09:02:18Z'
+    deadline_at: '2026-09-07T09:22:18Z'
+    expected_output: Independent generic closed-cover reader and synthetic refusal controls.
+    validation_command: Focused project Python3.14 tests, Ruff and BasedPyright.
+    kill_condition: Original twenty-minute deadline or an independence failure.
+    fallback: Retain partial source and the precise missing premise, without science.
+    write_scope: [packing/devtools/check_closed_polygon_cover.py, packing/tests/test_check_closed_polygon_cover.py]
+    excluded_commands: [Producer inspection, Scientific construction or target evaluation, Registry or Git writes, Dependency changes]
   outputs:
   - packing/campaign/agent-sessions/session-093-full-square-compatibility.md
   - packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md
@@ -482,8 +634,8 @@ prospectively. Parallel worker time is measured separately from the portfolio cl
 | Next thirty minutes | Reprice from the result; at most one changed higher-value obligation | Fund a useful next contract or retain the negative without escalation |
 | Final thirty minutes | Up to ten minutes finishing bounded work; twenty protected for integration | Validation, cost, records and PR checkpoint |
 
-The frontmatter records each actual evidence-based switch; this table does not authorize a
-target or a chain of retries.
+The frontmatter records each actual evidence-based switch; this table does not authorize
+a target or a chain of retries.
 
 ## Why Keep the Full Square?
 
@@ -521,9 +673,9 @@ An unchanged replay of a timed-out density method is not allocated.
 PR110 owns Session092 and the active BC261/BC273 program.
 No assignment here duplicates or reassigns those lanes.
 Only landed origin/main is merged into this branch.
-Published local IDs are Session091 and Session093, H122–H124, and exp121–124.
-Next checked pointers are Session094, H125, exp125, BC276, Agenda029
-and X019; check live ownership before assigning any one of them.
+Published local IDs are Session091 and Session093, H122–H124, and exp121–124. Next
+checked pointers are Session094, H125, exp125, BC276, Agenda029 and X019; check live
+ownership before assigning any one of them.
 
 On resumption, read this record, its bead `think-bmx9`, the latest PR109 checkpoint and
 the actual agent outcomes.

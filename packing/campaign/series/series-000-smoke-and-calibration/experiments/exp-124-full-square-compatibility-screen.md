@@ -69,16 +69,18 @@ experiment:
 ---
 # exp-124 — Full-square Compatibility, One Fixed Slice
 
-H124 remains unresolved. The prospective protocol was committed as `4acafdfc` after
-all31 record checks passed in17.88 seconds. The producer launched once at the observed
-08:20:59UTC boundary from clean engine `a75d751a` and returned actual exit zero with
-`status=no_witness`, `complete=true`,837 event cells,47 canonical cells and one uncovered
-canonical cell. It used0.84 seconds process wall and0.83 seconds CPU.
+H124 remains unresolved.
+The prospective protocol was committed as `4acafdfc` after all31 record checks passed
+in17.88 seconds. The producer launched once at the observed 08:20:59UTC boundary from
+clean engine `a75d751a` and returned actual exit zero with `status=no_witness`,
+`complete=true`,837 event cells,47 canonical cells and one uncovered canonical cell.
+It used0.84 seconds process wall and0.83 seconds CPU.
 
-There was no witness, so the conditional reader was not invoked. No replay receipt is
-claimed. This is a finite screening outcome, not an independently certified exhaustive
-proof and not a determination of continuous H124. Neither the source square nor Q frame
-was changed, and no invocation was repeated.
+There was no witness, so the conditional reader was not invoked.
+No replay receipt is claimed.
+This is a finite screening outcome, not an independently certified exhaustive proof and
+not a determination of continuous H124. Neither the source square nor Q frame was
+changed, and no invocation was repeated.
 
 ## Retained Prospective Protocol
 

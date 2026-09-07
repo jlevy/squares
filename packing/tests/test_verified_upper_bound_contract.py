@@ -66,6 +66,22 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/devtools/check_geometric_graph_certificate.py": (
+        "consumes a graph-proof status only after reconstructing the conservative "
+        "interior-overlap graph; the resulting depth ceiling is not a packing side"
+    ),
+    "packing/tests/test_check_geometric_graph_certificate.py": (
+        "uses synthetic graph-proof statuses to test exact family-depth replay, "
+        "not the frontier upper-bound field or an exact value of s(n)"
+    ),
+    "packing/devtools/check_weighted_clique_certificate.py": (
+        "uses the same spelling as a graph-proof status, not the frontier field: it "
+        "certifies an upper bound on every weighted graph clique, never a packing side"
+    ),
+    "packing/tests/test_check_weighted_clique_certificate.py": (
+        "tests the graph-only upper-bound status on unrelated synthetic graphs; it "
+        "neither reads the frontier ceiling nor claims an exact packing side"
+    ),
     "packing/devtools/check_basic_bounds.py": (
         "checks the ceiling really is the certifiable grid bound"
     ),

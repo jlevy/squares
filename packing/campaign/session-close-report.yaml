@@ -1445,7 +1445,7 @@ sessions:
   title: "Full-square compatibility and distinct density assessment"
   status: in_progress
   primary_bead: think-bmx9
-  phases: 5
+  phases: 6
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-093.yaml

@@ -42,10 +42,12 @@ hypothesis:
 
 This is the changed BC255 obligation selected under `think-7e72` after H110 and H123
 were accepted and H122 was refuted.
-The sole [exp124](../series/series-000-smoke-and-calibration/experiments/exp-124-full-square-compatibility-screen.md)
-fixed-S, exact45-Q screen returned no witness in0.84 seconds. Its witness-only reader
-was not invoked. H124 remains unresolved; neither continuous compatibility nor the
-finite search's coverage has an independent certificate from that run.
+The sole
+[exp124](../series/series-000-smoke-and-calibration/experiments/exp-124-full-square-compatibility-screen.md)
+fixed-S, exact45-Q screen returned no witness in0.84 seconds.
+Its witness-only reader was not invoked.
+H124 remains unresolved; neither continuous compatibility nor the finite search’s
+coverage has an independent certificate from that run.
 The producer and independent reader passed27 source-free controls and independent
 reviews by08:09:33UTC, before the prospective protocol and sole scientific invocation.
 No retry or second frame is allocated.
@@ -107,19 +109,18 @@ The exact invocation and budgets belong in a separate prospective experiment.
 
 ## A Stronger Continuous Common Obstacle
 
-The next analytical assessment uses the full ten-mark avoidance condition to enlarge
-the old diamond. Independent mathematical review accepted this derivation in
-Session093 at08:50:29UTC; it does not establish the remaining nine-mark cover or resolve H124.
-No additional scientific evaluation produced it.
+The next analytical assessment uses the full ten-mark avoidance condition to enlarge the
+old diamond. Independent mathematical review accepted this derivation in Session093
+at08:50:29UTC; it does not establish the remaining nine-mark cover or resolve H124. No
+additional scientific evaluation produced it.
 
-Put $m=q/2$, $W=m-1=939/1000$, $r=\sqrt2/2$, and $k=1+W/2$.
-Write $C=\cos\theta$, $S=\sin\theta$ and $h=(C+S)/2$.
-Containment of Q implies its center $(x,y)$ has $y\ge h$.
-In the canonical region, $a=x-1$ and $z=1-y$ therefore satisfy
-$0\le a\le W<1$ and $0\le z\le1-h<1/2$.
+Put $m=q/2$, $W=m-1=939/1000$, $r=\sqrt2/2$, and $k=1+W/2$. Write $C=\cos\theta$,
+$S=\sin\theta$ and $h=(C+S)/2$. Containment of Q implies its center $(x,y)$ has
+$y\ge h$. In the canonical region, $a=x-1$ and $z=1-y$ therefore satisfy $0\le a\le W<1$
+and $0\le z\le1-h<1/2$.
 
-Two original P10 marks are $L=(1,1)$ and $M=(m,1)$.
-Their coordinates relative to Q's center in its orthonormal frame are
+Two original P10 marks are $L=(1,1)$ and $M=(m,1)$. Their coordinates relative to Q’s
+center in its orthonormal frame are
 
 $$
 L:\ (-Ca+Sz,\ Sa+Cz),\qquad
@@ -132,12 +133,11 @@ $$
 Sa+Cz>1/2,\qquad C(W-a)+Sz>1/2.
 $$
 
-Indeed, the alternative escape $Ca-Sz>1/2$ for L implies $a>1/2$.
-M's first coordinate is then less than $CW-1/2<1/2$, while its second lies strictly
-between $-1/2$ and $1/2$, forcing M inside Q.
-The symmetric alternative escape for M forces L inside Q.
-The other escape directions are impossible since $Cz,Sz<1/2$.
-Strict inequalities matter: a mark on Q's boundary is contained, so avoidance is strict.
+Indeed, the alternative escape $Ca-Sz>1/2$ for L implies $a>1/2$. M’s first coordinate
+is then less than $CW-1/2<1/2$, while its second lies strictly between $-1/2$ and $1/2$,
+forcing M inside Q. The symmetric alternative escape for M forces L inside Q. The other
+escape directions are impossible since $Cz,Sz<1/2$. Strict inequalities matter: a mark
+on Q’s boundary is contained, so avoidance is strict.
 
 Use frame coordinates $U=Cx+Sy$ and $V=-Sx+Cy$ for the center.
 The preceding inequalities and bottom containment place it inside the closed triangle
@@ -147,12 +147,11 @@ K_\theta=\{U\le u_*,\ V\le v_*,\ SU+CV\ge h\},\qquad
 u_*=Cm+S-1/2,\quad v_*=C-S-1/2.
 $$
 
-This is an outer approximation to the possible centers; enlarging the center set is
-safe when taking a common intersection.
-For a nonempty triangle let $\Delta=1-2h+CSW\ge0$.
-Its coordinate ranges have widths $\Delta/S$ and $\Delta/C$.
-The intersection of all unit squares with centers in this triangle is consequently a
-frame-aligned rectangle with half-sides
+This is an outer approximation to the possible centers; enlarging the center set is safe
+when taking a common intersection.
+For a nonempty triangle let $\Delta=1-2h+CSW\ge0$. Its coordinate ranges have widths
+$\Delta/S$ and $\Delta/C$. The intersection of all unit squares with centers in this
+triangle is consequently a frame-aligned rectangle with half-sides
 
 $$
 \frac{1-\Delta/S}{2},\qquad\frac{1-\Delta/C}{2},
@@ -164,20 +163,17 @@ $$
 p_\theta=\left(k+\frac{(C-S)(2h-1)^2}{4CS},\ h\right).
 $$
 
-Put $d=|\theta-\pi/4|$. The full angle band satisfies $d<1/180$ because $\pi<4$.
-Using $707/1000<r<708/1000$, $\sin d\le d$ and
-$\cos d\ge1-d^2/2$ gives
+Put $d=|\theta-\pi/4|$. The full angle band satisfies $d<1/180$ because $\pi<4$. Using
+$707/1000<r<708/1000$, $\sin d\le d$ and $\cos d\ge1-d^2/2$ gives
 
 $$
 703/1000<C,S<89/125,\qquad h>353/500.
 $$
 
-Since $CS\le1/2$, we have $\Delta\le23/400$.
-Each rectangle half-side is at least $1291/2812>459/1000$.
-Also $|C-S|<1/125$, $(2h-1)^2<9/49$ and $4CS>49/25$ bound the horizontal
-displacement of $p_\theta$ from $(k,r)$ by $1/1000$.
-The vertical displacement is less than $1/90000$, so
-$\|p_\theta-(k,r)\|_1<1/800$.
+Since $CS\le1/2$, we have $\Delta\le23/400$. Each rectangle half-side is at least
+$1291/2812>459/1000$. Also $|C-S|<1/125$, $(2h-1)^2<9/49$ and $4CS>49/25$ bound the
+horizontal displacement of $p_\theta$ from $(k,r)$ by $1/1000$. The vertical
+displacement is less than $1/90000$, so $\|p_\theta-(k,r)\|_1<1/800$.
 
 It follows that the fixed diamond
 
@@ -193,46 +189,45 @@ $$
 =\frac{45657}{100000}<\frac{459}{1000}.
 $$
 
-The old [anchor diamond D](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md#a-larger-fixed-obstacle-from-two-anchors)
-is also contained in Q. Thus $E=\operatorname{conv}(D\cup K_1)$, the convex hull of
-the two diamonds, is a larger common obstacle.
+The old
+[anchor diamond D](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md#a-larger-fixed-obstacle-from-two-anchors)
+is also contained in Q. Thus $E=\operatorname{conv}(D\cup K_1)$, the convex hull of the
+two diamonds, is a larger common obstacle.
 This is a sufficient obstacle, not a maximal-intersection claim.
 Its internal margin is not a uniform clearance between hypothetical packed cores.
 
 ### A Continuous Cover Contract, Not Two Angle Samples
 
-Let T be the accepted outer tangent-half-angle endpoint
-$110880/50803079$ and set
+Let T be the accepted outer tangent-half-angle endpoint $110880/50803079$ and set
 
 $$
 \alpha=\frac{1+T^2}{2(1+2T-T^2)},\qquad
 B_\phi=R_\phi[-\alpha,\alpha]^2,\quad\phi\in\{0,\pi/4\}.
 $$
 
-Here $R_\phi$ rotates a point by $\phi$.
-For S's orientation $\psi$, put $\delta=|\psi-\phi|$.
-Each shrunken square $B_\phi$ lies in the centered unit-square kernel for every
-actual orientation in that band: $t=\tan(\delta/2)\le T$, and
+Here $R_\phi$ rotates a point by $\phi$. For S’s orientation $\psi$, put
+$\delta=|\psi-\phi|$. Each shrunken square $B_\phi$ lies in the centered unit-square
+kernel for every actual orientation in that band: $t=\tan(\delta/2)\le T$, and
 $(1+2t-t^2)/(1+t^2)=\cos\delta+\sin\delta$ is increasing over this short interval.
 The largest required projection is therefore bounded by
-$\alpha(\cos\delta+\sin\delta)\le1/2$.
-A complete cover of all possible S centers by
+$\alpha(\cos\delta+\sin\delta)\le1/2$. A complete cover of all possible S centers by
 
 $$
 (E+B_\phi)\ \cup\ \bigcup_{p\in\{B,\ldots,J\}}(p+B_\phi)
 $$
 
 would prove H124 for that whole band.
-The plus sign between sets denotes their Minkowski sum: all sums of one point from
-each set. Because $B_\phi$ is centrally symmetric, a center in $E+B_\phi$ gives an
+The plus sign between sets denotes their Minkowski sum: all sums of one point from each
+set. Because $B_\phi$ is centrally symmetric, a center in $E+B_\phi$ gives an
 intersection with E; a center in $p+B_\phi$ gives containment of p.
 
-However, one enlarged center box can forget the correlation between wall containment
-and angle. Uniform shrinking may then fail at wall-tight seams even when the actual
-cover holds. Marked corners admit an analytical patch: for
-$b_\theta=|\cos\theta|+|\sin\theta|$ and $h_\theta=b_\theta/2$, a mark one unit
-from both adjacent walls belongs to any contained square whose center distances from
-those walls are both in $[h_\theta,1]$, because
+However, one enlarged center box can forget the correlation between wall containment and
+angle. Uniform shrinking may then fail at wall-tight seams even when the actual cover
+holds.
+Marked corners admit an analytical patch: for $b_\theta=|\cos\theta|+|\sin\theta|$
+and $h_\theta=b_\theta/2$, a mark one unit from both adjacent walls belongs to any
+contained square whose center distances from those walls are both in $[h_\theta,1]$,
+because
 
 $$
 b_\theta(1-h_\theta)=1/2-(b_\theta-1)^2/2\le1/2.
@@ -248,8 +243,8 @@ Z_{\pi/4}=[h_{\min},q-h_{\min}]^2,\qquad
 h_{\min}=r\frac{1-T^2}{1+T^2}.
 $$
 
-For each of the three marked corners B, D and F, let $R_j$ be the portion of
-$Z_\phi$ within distance one of both adjacent walls.
+For each of the three marked corners B, D and F, let $R_j$ be the portion of $Z_\phi$
+within distance one of both adjacent walls.
 Actual containment supplies the lower distances $h_\psi$ needed by the corner lemma.
 The unmarked bottom-left corner has no such patch.
 The exact sufficient obligation, for both central frames, is the closed union cover
@@ -262,6 +257,39 @@ $$
 Writing a closed union preserves seams rather than discarding them informally.
 Failure of this sufficient representation would leave H124 unresolved.
 No residual-cover run, automatic retry or continuous arrangement build is allocated.
+
+### Endpoint-chain Certificates
+
+The independently assessed cover instrument partitions the rectangle’s full x-range into
+contiguous closed slabs.
+For each slab $[a,b]$, it supplies one ordered chain of convex polygons.
+The reader checks that the first polygon contains both bottom slab corners, the last
+contains both top corners, and each consecutive pair has overlapping closed vertical
+sections at both $x=a$ and $x=b$.
+
+Each consecutive pair’s intersection is convex.
+Its two endpoint intersection points therefore yield an intersection at every
+intermediate x. The resulting interval chain connects the rectangle’s bottom and top
+throughout the slab, proving its full closed coverage.
+Different chains at the two endpoints would not suffice.
+The reader also binds the complete source and verifies convexity and the entire
+contiguous slab partition; it need not trust or reconstruct discovery events.
+
+A complete discovery method includes rectangle walls, polygon supporting lines, vertical
+lines and every nonparallel supporting-line intersection whose x-coordinate lies in the
+rectangle’s x-range.
+Intersections outside its y-range are retained to keep the completeness argument simple.
+Between consecutive x-events, section endpoint orders are fixed.
+A covering interval chain found in one interior fiber persists through the open slab,
+and closedness extends it to both endpoints.
+Thus the representation is complete for finite closed convex-polygon covers absent
+resource limits. Adjacent slabs with the same chain can be merged.
+
+The bounded source-free producer and reader are being authored independently under
+`think-g29r` and `think-qt0k`. This is instrument preparation, not a residual-cover
+evaluation.
+Timeout, omitted evidence or failure to construct a chain is unresolved; even
+a verified gap in this sufficient cover would not refute H124.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

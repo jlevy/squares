@@ -83,10 +83,10 @@ Session093 prospectively adds the
 [conservative graph alternative](../series/series-000-smoke-and-calibration/results/agenda-026/bc-243-graph-depth-assessment.md).
 The graph retains every possible interior-overlap pair; unknown pairs remain edges.
 Every nonempty common interior induces a clique, so an independently verified upper
-bound of one on every clique proves the required depth bound away from the finite
-union of square boundaries.
+bound of one on every clique proves the required depth bound away from the finite union
+of square boundaries.
 An overweight clique does not prove a geometric violation.
-This sufficient method changes the instrument, not H-099's claim or accept rule.
+This sufficient method changes the instrument, not H-099’s claim or accept rule.
 Independent generic graph controls have passed; geometric source controls and a
 prospective candidate protocol remain required before any acceptance.
 
