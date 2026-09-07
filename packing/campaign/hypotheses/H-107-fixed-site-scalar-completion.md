@@ -50,6 +50,16 @@ unspent. A future launch requires a fresh sufficient allocation, passing record 
 and a renewed operational lease.
 H-107 remains unresolved.
 
+The September 7 priority review under `think-m9a9` holds this test out of the next
+two-hour block; `think-7fec` retains the later-session reconsideration.
+Success would establish fixed-site sufficiency at 3.8125 and provide a scalar control,
+but none of the currently selected density or geometry-based compatibility steps depends
+on this success. Readiness alone does not allocate another run.
+The
+[current agenda](../agendas/agenda-024-post-381-24h-portfolio.md#selected-continuation-after-session-090)
+owns the reopening conditions; this scheduling decision changes no mathematical claim or
+scientific cap.
+
 Freeze the terminal state from exp-116: 24,653 exact sites in 3,180 D4 orbits, 11,885
 initial exact placement rows, and the net `t_k=(207107/500000)k/180`, for `k=0,...,180`.
 Here `L=61/16` is the containing square’s side and `B=9977/10000` is the core square’s

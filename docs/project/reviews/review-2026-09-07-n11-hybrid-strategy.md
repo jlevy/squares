@@ -33,18 +33,18 @@ line-by-line software audit.
 | Source | Reviewed identity | Scope |
 | --- | --- | --- |
 | [PR #105](https://github.com/jlevy/squares/pull/105) | Scientific checkpoint `f5684f51fea68fd02ce60fe875e50c4383034e83`; closeout `54d1ca98bf53a02d337e9d90b8dea7cca5af0169`; priority amendment `6d8b2b38cf696a82ed7cc5b9ad6744ba7e439312` | 109 changed files from `4d305597` through the amendment: scalar production and completion, density algorithms and controls, continuous restricted-angle results, Session 090, and source handoffs |
-| [PR #107](https://github.com/jlevy/squares/pull/107) | Publication base `81e8a6159138ad7c2dfa7b33cb8ae0d5cdcd486f` | Its 78-file change from shared checkpoint `54d1ca98`: contributed research archive and replay, X-017, Agenda 027, H-111–117, and campaign identity safeguards |
+| [PR #107](https://github.com/jlevy/squares/pull/107) | Reviewed base `54ad6bc1f6dfe30b7294a7e804358e5f92265a4c` | Its 70-file change from shared checkpoint `6d8b2b38`: contributed research archive and replay, X-017, Agenda 027, H-111–117, and campaign identity safeguards |
 | Earlier hybrid spikes | Local stash `8f6592818f17f1cea83a617bb11ed6ffd6e112a6`, based on `4d305597` | Unpublished instruments and receipts; the mathematical arguments needed for this strategy are included below. The raw interval counts and tests cannot be replayed from this PR alone. |
 
-The publication branch stacks on PR107’s `81e8a615`, which incorporates PR105’s
-`54d1ca98` closeout and restores X-017 as the final exploration identity.
-The additional `6d8b2b38` priority amendment is reviewed here but is not yet part of
-that base. Its
+The publication branch stacks on PR107’s `54ad6bc1`, which incorporates PR105’s
+`54d1ca98` closeout and `6d8b2b38` priority amendment and uses X-017 as the final
+exploration identity.
+The
 [revised Session 090 handoff](https://github.com/jlevy/squares/blob/6d8b2b38cf696a82ed7cc5b9ad6744ba7e439312/packing/campaign/agent-sessions/session-090-four-hour-research.md)
 keeps H-110 selected, defers H-107 from the next two-hour block, and selects a short
 conditional-compatibility assessment alongside H-110. Neither source update changes a
 scientific verdict. The publication diff adds this single review and its two navigation
-entries; it leaves the source branch’s allocation amendment to its coordinator.
+entries; the source allocations retain their coordinator.
 
 The inherited strategy was reviewed through
 [X-014](../../../packing/campaign/explorations/X-014-closing-from-both-ends.md),
@@ -59,6 +59,10 @@ PR107’s
 accounts for both contributed mathematical reports, their combined agenda, supplied
 checkers and controls, the frozen source packet, and directions not selected for the
 opening allocation.
+Its latest archive cleanup retains the research text, delivered PDFs,
+mathematical code and replay evidence in Git; the complete upload and publishing assets
+remain in the source coordinator’s attic.
+The research text and mathematical evidence are unchanged.
 
 ## The Mathematical Position After Both Branches
 
@@ -850,10 +854,8 @@ It gives no basis for discarding the general-angle remainder.
 ## Integration and Identifier Finalization
 
 The working branch is `codex/n11-hybrid-research-plan`, created directly from PR105’s
-`f5684f51` head and now stacked on PR107’s `81e8a615` publication base, including
-PR105’s `54d1ca98` closeout.
-PR105’s additional `6d8b2b38` scheduling amendment is reviewed and summarized here;
-incorporating its source records remains upstream work.
+`f5684f51` head and now stacked on PR107’s `54ad6bc1` base, including PR105’s `54d1ca98`
+closeout and `6d8b2b38` scheduling amendment.
 The earlier spike drafts remain local, unpublished provenance in the stash identified
 above; their untracked files are in its third parent.
 The strategic arguments needed for incorporation are collected in this review.

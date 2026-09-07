@@ -416,19 +416,46 @@ Only a committed, reviewed prospective experiment may invoke the fixed candidate
 A verified one-square escape would invalidate that auxiliary construction, not refute
 H-036.
 
-The next independent lane is H-107 fixed-site scalar completion, if a block has room for
-its full producer and verification allowances plus coordination.
-Its reviewed instrument is ready; allocate a fresh prospective experiment without
-rewriting exp-118’s unlaunched history.
-The scalar compute can run alongside the small P12 author/review tasks, with the
-coordinator supervising it.
-Do not occupy another agent slot merely to wait for the process.
+The user’s September 7 priority amendment, assessed under `think-m9a9`, defers H-107 out
+of the next two-hour block.
+The later-session bead `think-7fec` is paused.
+A fully verified success would raise the bound to 3.8125, establish that the retained
+sites suffice, and supply a scalar comparison for adaptive cores.
+None of the currently selected density, localization or geometry-based compatibility
+steps depends on H-107 success.
+Its present adapter also has no exact negative branch: an unsuccessful attempt generally
+leaves the question unresolved.
+Preserve its reviewed instrument, frozen protocol and exp-118’s unlaunched history.
+Reconsider only at a later-session allocation checkpoint for a named downstream use or
+an explicitly justified low-attention attempt, with the full 35-minute producer and
+20-minute shared verification allowances plus coordination.
+
+Use the freed mathematical attention under BC-255 / H-102 to assess a conditional
+compatibility argument from the accepted A-point forcing lemmas.
+The question is whether a forced square occupies positive-radius neighborhoods of the
+three A-points, so other squares must avoid those neighborhoods and satisfy a weaker
+covering obligation.
+This could bypass an unconditional P12 clause.
+It is an unverified proof direction, not an accepted counting argument: localization,
+the conditional cover and strict-interior incidence must all be justified.
+The existing
+[strict-sublevel enlargement argument](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md#candidate-conditional-cover)
+supplies interior incidence by scaling a hypothetical packing with side below the target
+and using concentric unit cores.
+Its slack need not be uniform as the side approaches the target; a fixed positive
+clearance remains a separate new obligation.
+Mere closed-point containment would allow shared boundary points and is insufficient.
+Allow one 30-minute derivation and independent-review slice, coordinated through
+`think-qv73`, rotating the available workers as the H-110 instruments become ready.
+Its exit is a precise reusable lemma and a priced complete-proof obligation, or a reason
+to stop. Register any distinct claim before a computational test; no new target or
+automatic instrument build is commissioned by this amendment.
 
 If the P12 candidate is rejected, rank near-45 localization ahead of the complete
 near-45 P12 cover. Localization asks for P10 coverage of the complement of the four
 reflected canonical regions; the session handoff records its exact strips.
-If the candidate is accepted, first assess the smallest justified change to the P12
-argument or point construction under a new hypothesis.
+If the candidate is accepted, first compare the conditional compatibility route with the
+smallest justified change to the P12 argument or point construction.
 Neither outcome silently funds a repair.
 Density and the eleven-square BC-256 falsifier remain separate candidates, not extra
 default launches. Preserve the larger portfolio’s unspent allocations and all completed

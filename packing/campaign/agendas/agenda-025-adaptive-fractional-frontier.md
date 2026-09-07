@@ -443,10 +443,11 @@ agenda:
     workflows: [insight-iteration]
     depends_on: [BC-250]
     next_evidence: >-
-      Session090's retained assessment selects fixed-site row completion before
-      support adaptation: exp116 stopped on a truncated dual while allrow solves
-      remained incomplete. Durable every-exit rows/timings/vector receipts and
-      exact decision pricing remain prerequisites; no row-only target is launched.
+      Session090 selected fixed-site row completion before further support
+      adaptation; its adapter is reviewed but no target has launched. The September7
+      priority amendment holds H107 out of the next two-hour block under paused
+      think-7fec. Reconsider at a later-session checkpoint for a named downstream
+      use or justified low-attention attempt; preserve both frozen scientific caps.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md
     parallel_group: agenda025-support
