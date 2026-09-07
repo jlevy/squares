@@ -29,6 +29,7 @@ from sqpack.witness import load_witness
 GOLDEN_INDEXED: dict[str, tuple[int, int]] = {
     "n=1..100": (211, 32017),
     "n=1..200": (311, 47067),
+    "n=1..324": (334, 58001),
 }
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -184,7 +185,7 @@ def test_n68_near_wall_rotations_are_not_full_side_contacts() -> None:
 
 def test_full_side_contacts_join_numerically_split_angle_classes() -> None:
     witness = load_witness(
-        ROOT / "witnesses/prospective/n-105.yaml",
+        ROOT / "witnesses/known-best/n-105.yaml",
         fallback_schema=ROOT / "witness.schema.yaml",
     )
     colors = assign_square_colors(frame_from_witness(witness), RenderSpec())

@@ -62,16 +62,19 @@ FRONTIER_COUNTS: dict[str, tuple[int, int, int]] = {
     # certificate at 24/5 took n = 20 and n = 21 off the closed form.
     "n=1..100": (65, 65, 58),
     "n=1..200": (153, 153, 146),
+    "n=1..324": (265, 265, 258),
 }
 SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
     "n=1..100": ("n=68", "n=69"),
     "n=1..200": ("n=68", "n=69", "n=103", "n=105", "n=110", "n=131"),
+    "n=1..324": ("n=68", "n=69", "n=103", "n=105", "n=110", "n=131"),
 }
 #: (records with a separating square, those squares, records with any translating
 #: square, those squares).
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (25, 76, 84, 496),
     "n=1..200": (60, 678, 176, 1933),
+    "n=1..324": (114, 2714, 296, 5323),
 }
 UNDETERMINED_BY_MISS = (28,)
 

@@ -43,6 +43,7 @@ from sqpack.verify import float_sign, verify_packing
 GOLDEN_BY_CORPUS: dict[str, tuple[int, int, list[int]]] = {
     "n=1..100": (84, 12, [28, 40, 68, 69]),
     "n=1..200": (176, 16, [28, 40, 68, 69, 103, 105, 110, 131]),
+    "n=1..324": (296, 20, [28, 40, 68, 69, 103, 105, 110, 131]),
 }
 
 ROOT = Path(__file__).resolve().parent.parent

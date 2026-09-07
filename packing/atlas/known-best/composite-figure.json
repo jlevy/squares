@@ -23,6 +23,29 @@
           "rigidity_catalogue_annotated": 2,
           "rigidity_established": 12
         }
+      },
+      {
+        "columns": 18,
+        "layout": "18 by 18, row-major n=1..324",
+        "range": {
+          "count": 324,
+          "first_n": 1,
+          "last_n": 324
+        },
+        "rows": 18,
+        "square_count": 52650,
+        "stem": "known-best-1-324",
+        "totals": {
+          "degree_derived_here": 251,
+          "degree_known": 287,
+          "degree_recorded_upstream": 36,
+          "exact_value_known": 287,
+          "lower_bound_first_proved_here": 7,
+          "only_known_numerically": 37,
+          "proved_optimal": 59,
+          "rigidity_catalogue_annotated": 2,
+          "rigidity_established": 20
+        }
       }
     ],
     "entries": [
@@ -9161,6 +9184,5542 @@
           "relation": "upper-bound",
           "value": "14.65685424949238"
         }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "14 + (1/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 56*s + 391 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(201) ≥ 14.190905",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.1909059583"
+        },
+        "n": 201,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(201) ≤ 14.707107",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "14.70710678118654"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "2 + 9 sqrt(2)",
+          "minimal_polynomial": "s**2 - 4*s - 158 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(202) ≥ 14.228756",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.2287565553"
+        },
+        "n": 202,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(202) ≤ 14.727922",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "14.72792206135785"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "7 + (11/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 28*s - 23 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(203) ≥ 14.266499",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.2664991614"
+        },
+        "n": 203,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(203) ≤ 14.778175",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "14.77817459305202"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "(27/2) + (1/2)sqrt(7)",
+          "minimal_polynomial": "2*s**2 - 54*s + 361 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(204) ≥ 14.304134",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.3041346957"
+        },
+        "n": 204,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(204) ≤ 14.822876",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "14.82287565553229"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 40,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "6765201s^{40}-3656922768s^{39}+958435862652s^{38}-162258762163956s^{37}+19944495118895680s^{36}-1896817614997924732s^{35}+145244607337067116310s^{34}-9200231755130148537584s^{33}+491532552940826676421598s^{32}-22471266124455622725351620s^{31}+888775367178021320983990528s^{30}-30670374642432504931208393536s^{29}+929494097506723220926745638527s^{28}-24862568075564651560878275579812s^{27}+589158528037990588430776578667278s^{26}-12400310845434669601706739856078348s^{25}+232178750736807601084495428509773447s^{24}-3869279274647141302600286447060842028s^{23}+57359828211423634121225283370282978472s^{22}-755020486735335189866154838905984601284s^{21}+8794114159490040759213225924279409129174s^{20}-90126731671943479290165241436087360926864s^{19}+805381183069421598181526905692816890290502s^{18}-6181562346162193722542638238059633411805108s^{17}+39656170956144484959733239448754004343189341s^{16}-200557184022962853819962178120475887680432104s^{15}+668299828757988666056469128930860611880478162s^{14}+47787548247188382784775375655144589392168024s^{13}-20274687460176342070123115001595419340631113986s^{12}+171806640590364466782586102889249290168160938968s^{11}-887645374096288133345472520371583078066772417438s^{10}+2995081869452847889056141420143309758645762048480s^9-4490901292932914262604076259256067123710050815195s^8-18138284909745955939878418372807115317752603411176s^7+165869320264318841451647718375161237581492991097810s^6-695527958949195756061996697585676748194320009594040s^5+1948735509481744597514888658808885791132097191929625s^4-3838064311683628303762259793886602147590339042385000s^3+5169742707762800848775847149992971475362078199650000s^2-4315559969700226767159393981391684637349630444000000s+1694040395896101772224866098180283214283057728000000=0",
+          "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(205) ≥ 14.341664",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.3416640641"
+        },
+        "n": 205,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(205) ≤ 14.824451",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "14.82445114612408"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(206) ≥ 14.379088",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.3790881603"
+        },
+        "n": 206,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(206) ≤ 14.872532",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "14.87253189075152"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(207) ≥ 14.416407",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.416407865"
+        },
+        "n": 207,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(207) ≤ 14.893979",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "14.89397859563780"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(208) ≥ 14.453624",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.4536240471"
+        },
+        "n": 208,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(208) ≤ 14.93783",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "14.93783044811097"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(209) ≥ 14.490737",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.4907375632"
+        },
+        "n": 209,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(209) ≤ 14.958682",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "14.95868244078260"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(210) ≥ 14.527749",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.5277492585"
+        },
+        "n": 210,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(210) ≤ 14.974214",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "14.97421396826961"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15",
+          "minimal_polynomial": "s - 15 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(211) ≥ 14.564659",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.5646599663"
+        },
+        "n": 211,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(211) ≤ 15",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15",
+          "minimal_polynomial": "s - 15 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(212) ≥ 14.60147",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.6014705087"
+        },
+        "n": 212,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(212) ≤ 15",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15",
+          "minimal_polynomial": "s - 15 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(213) ≥ 14.638181",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.638181697"
+        },
+        "n": 213,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(213) ≤ 15",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15",
+          "minimal_polynomial": "s - 15 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(214) ≥ 14.674794",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.6747943312"
+        },
+        "n": 214,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(214) ≤ 15",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15",
+          "minimal_polynomial": "s - 15 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(215) ≥ 14.711309",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.7113092008"
+        },
+        "n": 215,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(215) ≤ 15",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15",
+          "minimal_polynomial": "s - 15 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(216) ≥ 14.747727",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.7477270849"
+        },
+        "n": 216,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(216) ≤ 15",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15",
+          "minimal_polynomial": "s - 15 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(217) ≥ 14.784048",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.7840487521"
+        },
+        "n": 217,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(217) ≤ 15",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15",
+          "minimal_polynomial": "s - 15 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(218) ≥ 14.820274",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.8202749611"
+        },
+        "n": 218,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(218) ≤ 15",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15",
+          "minimal_polynomial": "s - 15 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(219) ≥ 14.856406",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.8564064606"
+        },
+        "n": 219,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(219) ≤ 15",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15",
+          "minimal_polynomial": "s - 15 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(220) ≥ 14.892443",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.8924439894"
+        },
+        "n": 220,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(220) ≤ 15",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15",
+          "minimal_polynomial": "s - 15 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(221) ≥ 14.928388",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.9283882772"
+        },
+        "n": 221,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(221) ≤ 15",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15",
+          "minimal_polynomial": "s - 15 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(222) ≥ 14.96424",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "14.9642400438"
+        },
+        "n": 222,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(222) ≤ 15",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15",
+          "minimal_polynomial": "s - 15 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(223) ≥ 15",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "15"
+        },
+        "n": 223,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(223) = 15",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "15.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15",
+          "minimal_polynomial": "s - 15 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(224) ≥ 15",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "15"
+        },
+        "n": 224,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(224) = 15",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "15.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established here)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15",
+          "minimal_polynomial": "s - 15 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(225) ≥ 15",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "15"
+        },
+        "n": 225,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "perfect-square-tiling",
+          "evidence": "225 unit squares exactly tile a 15 by 15 container, leaving no slack, so no square can move.",
+          "provenance": "derived",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(225) = 15",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "15.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "12 + (5/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 48*s + 263 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(226) ≥ 15.035668",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.0356688476"
+        },
+        "n": 226,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(226) ≤ 15.535534",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.53553390593273"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "(17/2) + 5 sqrt(2)",
+          "minimal_polynomial": "4*s**2 - 68*s + 89 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(227) ≥ 15.071247",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.0712472795"
+        },
+        "n": 227,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(227) ≤ 15.571068",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.57106781186547"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 12,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "24s^6-(3008+632sqrt(2))s^5+(143990+46836sqrt(2))s^4-(3498934+1393560sqrt(2))s^3+(46342192+20798868sqrt(2))s^2-(320302448+155625644sqrt(2))s+907787225+466763736sqrt(2)=0",
+          "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(228) ≥ 15.106735",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.1067359797"
+        },
+        "n": 228,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(228) ≤ 15.609023",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.60902282132495"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "10 + 4 sqrt(2)",
+          "minimal_polynomial": "s**2 - 20*s + 68 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(229) ≥ 15.142135",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.1421356237"
+        },
+        "n": 229,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(229) ≤ 15.656854",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.65685424949238"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15 + (28/41)",
+          "minimal_polynomial": "41*s - 643 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(230) ≥ 15.177446",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.1774468788"
+        },
+        "n": 230,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(230) ≤ 15.682927",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.68292682926829"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "15 + (1/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 60*s + 449 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(231) ≥ 15.21267",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.2126704036"
+        },
+        "n": 231,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(231) ≤ 15.707107",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.70710678118654"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "8 + (11/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 32*s + 7 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(232) ≥ 15.247806",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.2478068488"
+        },
+        "n": 232,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(232) ≤ 15.778175",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.77817459305202"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "8 + (11/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 32*s + 7 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(233) ≥ 15.282856",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.2828568571"
+        },
+        "n": 233,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(233) ≤ 15.778175",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.77817459305202"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "(29/2) + (1/2)sqrt(7)",
+          "minimal_polynomial": "2*s**2 - 58*s + 417 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(234) ≥ 15.317821",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.3178210633"
+        },
+        "n": 234,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(234) ≤ 15.822876",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.82287565553229"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 83,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "15197358585941502961s^{83}-19054029395700781380870s^{82}+11796924216629042649354579s^{81}-4808108614769876120043468180s^{80}+1451030856404178122570781430789s^{79}-345799767275884788306353984453266s^{78}+67774498813564804634645374167057335s^{77}-11234508000945633407554425804213908384s^{76}+1607532344825153174801872971520978793189s^{75}-201668659118682967539387133057113450996510s^{74}+22454296891522560058771023859593458711158383s^{73}-2240889622579706580689718577985790904704763388s^{72}+202076916434677863681321953179975198173682882349s^{71}-16577690712578589166013893731214562354253387341274s^{70}+1244306501679531491606992301185434118328699167129267s^{69}-85872410283218882421430889383517071885115187773104056s^{68}+5471931933759042230241340087362460711039430660491160647s^{67}-323138905823957289824620179077427648515971541643473332874s^{66}+17742026808852576915081042170482522649963659530339729297241s^{65}-908282679855850349803743965878897364257354889699334907097884s^{64}+43465080817124537825282652035527867092782838207883438915180955s^{63}-1948672651714009470065517948906139063310384408556369781794367782s^{62}+82014228252452305308486172380001566000442685829960411231106701149s^{61}-3246186057482410594749950508613065532781882056581161088848208781448s^{60}+121030129123359970782879324721925653713348068894577966308153780376769s^{59}-4256774383890838346683359771242014391309685520375828879287765027421558s^{58}+141417395891604974478673542444206052527574423688874097457316926184111667s^{57}-4442950325166710767652318494176477005346284036871039689545149858425019188s^{56}+132143761554097136892656409949813501644806291750873673851743056646810847307s^{55}-3724278121653142074595785794031359776637918996855481246500264411247627583870s^{54}+99547162759226989443922275915301342990394148481013546431915854939056693130149s^{53}-2525451166316636919882169794346033300450573261760214407544561168810183261623712s^{52}+60851054822925884393362872088231784921476592249704525359339306693211978978637574s^{51}-1393407983201463082750103812667205031231534119903960161407503385026149533812640388s^{50}+30338905815230015350337507443629547938133322986372599251613731735431147148807587298s^{49}-628396204847897965060061083685759495211044889335692127791727849670706521484518435856s^{48}+12386583193977551660461241876390719826604576164873235895959785437607584760441587730192s^{47}-232433724444205471983096462597776075369365835330568989261391110164425311728212391035632s^{46}+4153323734217430140145070137613411920743170003732119525339537946385437046481746033523872s^{45}-70686380467717783902448903568646078963423628086622300763415121270383317250590261969131336s^{44}+1146011275499749445486974909121594149473099806147735475740109750306258973873693081841338630s^{43}-17701136698331714953844021503637463123650314086731790857767064280112784186506532020777615276s^{42}+260492277459372683985340515012561460001230750454462824800331349575718851511822995239394574714s^{41}-3652320068116991521691903234094675077664783199210342925565230028260558957233172085378428693648s^{40}+48786365568085939831648565613081789083584480449521988080326278540514634832953535303132015187720s^{39}-620776840486987337546656613456515581406101803594950169186131730819070047268868384631491241542280s^{38}+7523288801124157164696453440451668126537802179655932385275366967957982556047497857359919983352588s^{37}-86819738273128010242526385979967991470567862056150689620462183702554367768947413111616038233016416s^{36}+953774954925025648253304474733609592484747994431472390301868754639755982678716269084529930641443023s^{35}-9971081293651892380457737953978637874233272651346699205006125992828217866601482502757629011345866570s^{34}+99159113935527095843791193320314995744620431737333925602216138254954437828859473360567133620147394445s^{33}-937591882456243116942831217151994956616595933093755511723294563972551195048414611565248985607152821236s^{32}+8424667140126948167633953265193969962679276499025327494839034104790577492192909219817624591386758730279s^{31}-71892659494830178227616871456048478350079377496302951700870381917053589308972575388983039596535479420278s^{30}+582251421494115025057046976615977029976720394400712813199098003690123303907349827395875756580289035731733s^{29}-4471937667537034121585882112126200967254037591271575148365797097846048547850509627026833861786334101222136s^{28}+32543614650180016207874244187164028503629361855235911764700956406683943044733068359145297584031071397155994s^{27}-224183523933854882502864682078640188285826762871716486751957673723635189271192115484721934301078509843540820s^{26}+1460312333249097739412739848153412311136035088888884922686424538738960526601793346522957489286185673762602902s^{25}-8984148217876593612167877570397820635649870435669726928588777366245474742877218816201439836639845502892953560s^{24}+52134501077125370653590265849501908514957010403776225078820415168994018070692909692704843148671899014807836538s^{23}-284941297083362220078712187212822093342654560298933781771361807935255252780142074341846765908056419933065354916s^{22}+1464404571156043076914637252120097347255977567642248877431122565189765063022644175773142656036823662408630919410s^{21}-7064080779433205483997411627458329256081928935674885720573960927817446941144054662390438254917264293853571028424s^{20}+31919881457624033726193536951838036401111886302890312451699329606929040067283389942070240214272698940267541956493s^{19}-134801722329859078816742606094646334228067206837309021726684217834848607820988762454709381034223562103046457675998s^{18}+530707012396024913429576740380121941086737225273466472672403349930854389215481675641529836588022052334151834279003s^{17}-1942205476550803484882315247161577147422888428395169781637047795709098197490266699760943181834041758117906367397268s^{16}+6585767384476720675187977121595259536735035857996075281802198937005198489937485851461054520341053364378881846325263s^{15}-20614892940117095331097736607876870976314189060882921080291907574510740821764737500291921914248821586266401315666942s^{14}+59316353011229384909666880954476222015479423693489595098884075044567497728679992849404330173399583652230381335502305s^{13}-156117670782437502269990886042735284992957692699464203987769629925609348266900609376317045942894365095896351357414520s^{12}+373698270769972479755939957244422481116455737532015818487606025512111631824244935754777237146223432771503247544608560s^{11}-808048121315624822538485230387020159879703732818682364581834764813478780649668941927219429385916131623619099840318128s^{10}+1565583417239292630942979288694634658573835168674069318551077876822765011658251873382962913367365429573513955164437064s^9-2691230551310123431856658453025381333299196967548104418289076204697729928184484894708129837595375747556018998818512192s^8+4054542066273187475893579325962915065845321084583224373643180486702374676704731329107411831884877578115801740253541904s^7-5270878662724145249388262906951781140123258747428763886318687210813398134336463475140327838867254422860035408448158432s^6+5792836201656880167367652921094881746142782983189532980946755918671194010952081295188183352763611672876752443571623568s^5-5233614558124453824846563012926178182173958634839557295689659286203290796724301748107667652717293231008062406343836800s^4+3732102862328364130585244845143109502510706215299361787475517662634187688740089578345011212002758654232473965037848832s^3-1969628432244786328367806409266293170003496844663625159204453312874075246094750590119459796978694116823499446641506304s^2+683920819913111461189983402245349089127449075173547013376466597761071475636877690918573610486424418270329963001143296s-117203977757280124647356183279343983773836101226288348510440504667964165618210763520372674407323269025478320565518336=0",
+          "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(235) ≥ 15.3527",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.3527000944"
+        },
+        "n": 235,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(235) ≤ 15.826606",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.82660563342856"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 12,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "6596s^6-(619856+19000sqrt(2))s^5+(24226944+1444540sqrt(2))s^4-(504036792+43818500sqrt(2))s^3+(5886496273+662906450sqrt(2))s^2-(36585732598+5001593450sqrt(2))s+94529982167+15055629320sqrt(2)=0",
+          "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(236) ≥ 15.387494",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.3874945699"
+        },
+        "n": 236,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(236) ≤ 15.876077",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.87607676541001"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "(29/2) + sqrt(2)",
+          "minimal_polynomial": "4*s**2 - 116*s + 833 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(237) ≥ 15.422205",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.4222051019"
+        },
+        "n": 237,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(237) ≤ 15.914214",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.91421356237309"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(238) ≥ 15.456832",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.4568322948"
+        },
+        "n": 238,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(238) ≤ 15.939847",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.93984676308969"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(239) ≥ 15.491376",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.4913767462"
+        },
+        "n": 239,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(239) ≤ 15.956433",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.95643304058435"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(240) ≥ 15.525839",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.5258390463"
+        },
+        "n": 240,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(240) ≤ 15.975594",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.97559404379946"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(241) ≥ 15.560219",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.5602197786"
+        },
+        "n": 241,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(241) ≤ 15.990917",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "15.99091684780193"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16",
+          "minimal_polynomial": "s - 16 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(242) ≥ 15.594519",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.5945195193"
+        },
+        "n": 242,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(242) ≤ 16",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16",
+          "minimal_polynomial": "s - 16 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(243) ≥ 15.628738",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.6287388383"
+        },
+        "n": 243,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(243) ≤ 16",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16",
+          "minimal_polynomial": "s - 16 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(244) ≥ 15.662878",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.6628782986"
+        },
+        "n": 244,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(244) ≤ 16",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16",
+          "minimal_polynomial": "s - 16 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(245) ≥ 15.696938",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.6969384567"
+        },
+        "n": 245,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(245) ≤ 16",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16",
+          "minimal_polynomial": "s - 16 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(246) ≥ 15.730919",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.7309198627"
+        },
+        "n": 246,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(246) ≤ 16",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16",
+          "minimal_polynomial": "s - 16 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(247) ≥ 15.764823",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.7648230602"
+        },
+        "n": 247,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(247) ≤ 16",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16",
+          "minimal_polynomial": "s - 16 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(248) ≥ 15.798648",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.7986485869"
+        },
+        "n": 248,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(248) ≤ 16",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16",
+          "minimal_polynomial": "s - 16 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(249) ≥ 15.832396",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.8323969742"
+        },
+        "n": 249,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(249) ≤ 16",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16",
+          "minimal_polynomial": "s - 16 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(250) ≥ 15.866068",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.8660687473"
+        },
+        "n": 250,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(250) ≤ 16",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16",
+          "minimal_polynomial": "s - 16 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(251) ≥ 15.899664",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.8996644258"
+        },
+        "n": 251,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(251) ≤ 16",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16",
+          "minimal_polynomial": "s - 16 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(252) ≥ 15.933184",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.9331845231"
+        },
+        "n": 252,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(252) ≤ 16",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16",
+          "minimal_polynomial": "s - 16 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(253) ≥ 15.966629",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "15.9666295471"
+        },
+        "n": 253,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(253) ≤ 16",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16",
+          "minimal_polynomial": "s - 16 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(254) ≥ 16",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "16"
+        },
+        "n": 254,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(254) = 16",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "16.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16",
+          "minimal_polynomial": "s - 16 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(255) ≥ 16",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "16"
+        },
+        "n": 255,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(255) = 16",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "16.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established here)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16",
+          "minimal_polynomial": "s - 16 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(256) ≥ 16",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "16"
+        },
+        "n": 256,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "perfect-square-tiling",
+          "evidence": "256 unit squares exactly tile a 16 by 16 container, leaving no slack, so no square can move.",
+          "provenance": "derived",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(256) = 16",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "16.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "13 + (5/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 52*s + 313 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(257) ≥ 16.033296",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.0332963784"
+        },
+        "n": 257,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(257) ≤ 16.535534",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.53553390593273"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "(19/2) + 5 sqrt(2)",
+          "minimal_polynomial": "4*s**2 - 76*s + 161 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(258) ≥ 16.066519",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.0665191733"
+        },
+        "n": 258,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(258) ≤ 16.571068",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.57106781186547"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 8,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "150s^4-(11600+1720sqrt(2))s^3+(324554+80686sqrt(2))s^2-(3938328+1264082sqrt(2))s+6617328sqrt(2)+17614577=0",
+          "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(259) ≥ 16.099668",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.0996688705"
+        },
+        "n": 259,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(259) ≤ 16.602571",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.60257141234448"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "11 + 4 sqrt(2)",
+          "minimal_polynomial": "s**2 - 22*s + 89 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(260) ≥ 16.132745",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.1327459504"
+        },
+        "n": 260,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(260) ≤ 16.656854",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.65685424949238"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16 + (28/41)",
+          "minimal_polynomial": "41*s - 684 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(261) ≥ 16.16575",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.1657508881"
+        },
+        "n": 261,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(261) ≤ 16.682927",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.68292682926829"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16 + (1/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 64*s + 511 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(262) ≥ 16.198684",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.1986841536"
+        },
+        "n": 262,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(262) ≤ 16.707107",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.70710678118654"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "(25/2) + 3 sqrt(2)",
+          "minimal_polynomial": "4*s**2 - 100*s + 553 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(263) ≥ 16.231546",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.2315462117"
+        },
+        "n": 263,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(263) ≤ 16.742641",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.74264068711928"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "9 + (11/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 36*s + 41 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(264) ≥ 16.264337",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.2643375225"
+        },
+        "n": 264,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(264) ≤ 16.778175",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.77817459305202"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "9 + (11/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 36*s + 41 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(265) ≥ 16.297058",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.2970585408"
+        },
+        "n": 265,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(265) ≤ 16.778175",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.77817459305202"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 32,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "2401s^{32}-1162084s^{31}+263199482s^{30}-36971795756s^{29}+3593304360857s^{28}-254523535144036s^{27}+13408548240776810s^{26}-519901936408593644s^{25}+13805430523268790240s^{24}-171760035794017558004s^{23}-4426818799267672804198s^{22}+326745541238344524670064s^{21}-10052823560617182774582207s^{20}+181074087488548519346667052s^{19}-1180165534713863709787052484s^{18}-39814767996810201813233201880s^{17}+1608559573416436468095371051805s^{16}-32123383071505854643466513964696s^{15}+412614513240021198536387912093202s^{14}-3166929683248511957762311522115552s^{13}+4864413227687588362660593637481982s^{12}+178773674416065677195226856423404204s^{11}-1078437021027255344046160578887057944s^{10}-30113420634289372798330615891075770272s^9+791230647693671970529285145442783714082s^8-10342818482011428376427887130138935213892s^7+91890490062472897914498395018088233984940s^6-595883639785360944056309451122760067196636s^5+2858083210066295032341927117330041150532457s^4-9961121615142990990156112009477337084333564s^3+23996879793794528190240708983850819688279982s^2-35874639749283350605126520242841070953510704s+25142156270060598069723106950936800398659193=0",
+          "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(266) ≥ 16.329709",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.3297097168"
+        },
+        "n": 266,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(266) ≤ 16.823062",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.82306208283780"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 4,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "16 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))",
+          "minimal_polynomial": "4*s**4 - 256*s**3 + 6132*s**2 - 65136*s + 258809 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(267) ≥ 16.362291",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.3622914957"
+        },
+        "n": 267,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(267) ≤ 16.846667",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.84666719284348"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 6,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "2s^6-176s^5+6280s^4-115238s^3+1129107s^2-5432722s+9316447=0",
+          "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(268) ≥ 16.394804",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.3948043183"
+        },
+        "n": 268,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(268) ≤ 16.879332",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.87933209237563"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 8,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "1338s^4-(92136+4180sqrt(2))s^3+(2378600+206890sqrt(2))s^2-(27290208+3419060sqrt(2))s+18867680sqrt(2)+117431679=0",
+          "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(269) ≥ 16.427248",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.4272486205"
+        },
+        "n": 269,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(269) ≤ 16.905968",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.90596764828402"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(270) ≥ 16.459624",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.4596248337"
+        },
+        "n": 270,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(270) ≤ 16.940736",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.94073593015457"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(271) ≥ 16.491933",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.4919333848"
+        },
+        "n": 271,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(271) ≤ 16.955094",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.95509447506437"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(272) ≥ 16.524174",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.5241746963"
+        },
+        "n": 272,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(272) ≤ 16.969807",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.96980702828259"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(273) ≥ 16.556349",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.5563491861"
+        },
+        "n": 273,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(273) ≤ 16.988321",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "16.98832058897683"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(274) ≥ 16.588457",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.5884572681"
+        },
+        "n": 274,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(274) ≤ 17",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(275) ≥ 16.620499",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.6204993518"
+        },
+        "n": 275,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(275) ≤ 17",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(276) ≥ 16.652475",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.6524758425"
+        },
+        "n": 276,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(276) ≤ 17",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(277) ≥ 16.684387",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.6843871414"
+        },
+        "n": 277,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(277) ≤ 17",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(278) ≥ 16.716233",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.7162336455"
+        },
+        "n": 278,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(278) ≤ 17",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(279) ≥ 16.748015",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.748015748"
+        },
+        "n": 279,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(279) ≤ 17",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(280) ≥ 16.779733",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.7797338381"
+        },
+        "n": 280,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(280) ≤ 17",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(281) ≥ 16.811388",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.8113883008"
+        },
+        "n": 281,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(281) ≤ 17",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(282) ≥ 16.842979",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.8429795178"
+        },
+        "n": 282,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(282) ≤ 17",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(283) ≥ 16.874507",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.8745078664"
+        },
+        "n": 283,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(283) ≤ 17",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(284) ≥ 16.905973",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.9059737206"
+        },
+        "n": 284,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(284) ≤ 17",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(285) ≥ 16.937377",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.9373774505"
+        },
+        "n": 285,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(285) ≤ 17",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(286) ≥ 16.968719",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "16.9687194227"
+        },
+        "n": 286,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(286) ≤ 17",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(287) ≥ 17",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "17"
+        },
+        "n": 287,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(287) = 17",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(288) ≥ 17",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "17"
+        },
+        "n": 288,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(288) = 17",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established here)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17",
+          "minimal_polynomial": "s - 17 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(289) ≥ 17",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "17"
+        },
+        "n": 289,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "perfect-square-tiling",
+          "evidence": "289 unit squares exactly tile a 17 by 17 container, leaving no slack, so no square can move.",
+          "provenance": "derived",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(289) = 17",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "17.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "14 + (5/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 56*s + 367 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(290) ≥ 17.031219",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.0312195419"
+        },
+        "n": 290,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(290) ≤ 17.535534",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.53553390593273"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "14 + (5/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 56*s + 367 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(291) ≥ 17.062378",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.0623784042"
+        },
+        "n": 291,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(291) ≤ 17.535534",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.53553390593273"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 8,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "150s^4-(12200+1720sqrt(2))s^3+(360254+85846sqrt(2))s^2-(4622836+1430614sqrt(2))s+21889209+7963816sqrt(2)=0",
+          "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(292) ≥ 17.093476",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.0934769394"
+        },
+        "n": 292,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(292) ≤ 17.602571",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.60257141234448"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17 + (26/41)",
+          "minimal_polynomial": "41*s - 723 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(293) ≥ 17.124515",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.1245154966"
+        },
+        "n": 293,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(293) ≤ 17.634146",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.63414634146341"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "12 + 4 sqrt(2)",
+          "minimal_polynomial": "s**2 - 24*s + 112 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(294) ≥ 17.155494",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.1554944214"
+        },
+        "n": 294,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(294) ≤ 17.656854",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.65685424949238"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17 + (1/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 68*s + 577 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(295) ≥ 17.186414",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.1864140562"
+        },
+        "n": 295,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(295) ≤ 17.707107",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.70710678118654"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "17 + (1/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 68*s + 577 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(296) ≥ 17.217274",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.2172747402"
+        },
+        "n": 296,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(296) ≤ 17.707107",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.70710678118654"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(297) ≥ 17.248076",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.2480768093"
+        },
+        "n": 297,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(297) ≤ 17.74117",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.74116992948972"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "10 + (11/2)sqrt(2)",
+          "minimal_polynomial": "2*s**2 - 40*s + 79 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(298) ≥ 17.27882",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.2788205961"
+        },
+        "n": 298,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(298) ≤ 17.778175",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.77817459305202"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 2,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "(33/2) + (1/2)sqrt(7)",
+          "minimal_polynomial": "2*s**2 - 66*s + 541 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(299) ≥ 17.309506",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.3095064303"
+        },
+        "n": 299,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(299) ≤ 17.822876",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.82287565553229"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 40,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "6765201s^{40}-4468746888s^{39}+1431055332684s^{38}-295991953326108s^{37}+44445603736025352s^{36}-5163220519287531048s^{35}+482878985597614632366s^{34}-37353497397438488815260s^{33}+2436831832955268577880066s^{32}-136013384348919954233715980s^{31}+6566863009941672632548971230s^{30}-276576685299846988827282188436s^{29}+10227647719730769459718165452749s^{28}-333724070621087598910090605855348s^{27}+9643524705514237911246918698322714s^{26}-247404094366714093683897197709917204s^{25}+5643119674396861410915876260884036989s^{24}-114477712300768469604781612467804162660s^{23}+2063707000134940629708077092426963028132s^{22}-32985932723685807897922726019150035754248s^{21}+465583759504110006491405487605416144111553s^{20}-5764247971291523576624473899585978835759824s^{19}+61914526137823063569936032519366359362310830s^{18}-566147126795280425805190165571461577530656336s^{17}+4248816809091624736372842695988910574840203032s^{16}-23948399126640716409385371068745856498999580804s^{15}+69800847299887214247772249238723707512987918380s^{14}+394782152673201159198736947784032596106016880136s^{13}-7828936745814934561867828618761111333890039348250s^{12}+67387777391090638044324068706351575262477706086740s^{11}-381562083381768156325668597682082463480074995868360s^{10}+1336650893593888696724108652818662244745263296865588s^9-614601349329475752238933120184261110575651083354603s^8-28305247058854021955410328849850580588215220244356248s^7+224981301926271768349655651977718726650378985178322646s^6-1055948455747248748890178989019952798681204013121554736s^5+3473810396018259264801879879806884179343515176608754025s^4-8177313821139351944992551555783250987371382184946020000s^3+13278518858240943321872383441026571982205038824476375000s^2-13426397690512873291977824583646716429736153596450000000s+6401405918124622124119207874790462553248468260156250000=0",
+          "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(300) ≥ 17.340134",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.3401346384"
+        },
+        "n": 300,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(300) ≤ 17.824123",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.82412338847854"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(301) ≥ 17.370705",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.3707055437"
+        },
+        "n": 301,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(301) ≤ 17.868992",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.86899185179999"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 4,
+          "degree_provenance": "frontier",
+          "degree_recorded_upstream": true,
+          "exact_form": null,
+          "minimal_polynomial": "s^4-66s^3+1631s^2-17882s+73369=0",
+          "state": "minimal-polynomial"
+        },
+        "lower": {
+          "display": "s(302) ≥ 17.401219",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.4012194669"
+        },
+        "n": 302,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(302) ≤ 17.886746",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.88674602860566"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(303) ≥ 17.431676",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.4316767252"
+        },
+        "n": 303,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(303) ≤ 17.931279",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.93127894394689"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(304) ≥ 17.462077",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.4620776332"
+        },
+        "n": 304,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(304) ≤ 17.949172",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.94917201919110"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(305) ≥ 17.492422",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.4924225025"
+        },
+        "n": 305,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(305) ≤ 17.960756",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.96075558628675"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(306) ≥ 17.522711",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.5227116419"
+        },
+        "n": 306,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(306) ≤ 17.96927",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.96926975248972"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "≈",
+            "meaning": "only known numerically",
+            "style": "muted"
+          }
+        ],
+        "exactness": {
+          "degree": null,
+          "degree_provenance": "absent",
+          "degree_recorded_upstream": false,
+          "exact_form": null,
+          "minimal_polynomial": null,
+          "state": "numeric-only"
+        },
+        "lower": {
+          "display": "s(307) ≥ 17.552945",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.5529453572"
+        },
+        "n": 307,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(307) ≤ 17.982816",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "17.98281564631754"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(308) ≥ 17.583123",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.5831239518"
+        },
+        "n": 308,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(308) ≤ 18",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(309) ≥ 17.613247",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.6132477258"
+        },
+        "n": 309,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(309) ≤ 18",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(310) ≥ 17.643316",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.6433169771"
+        },
+        "n": 310,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(310) ≤ 18",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(311) ≥ 17.673332",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.6733320005"
+        },
+        "n": 311,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(311) ≤ 18",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(312) ≥ 17.703293",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.7032930885"
+        },
+        "n": 312,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(312) ≤ 18",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(313) ≥ 17.7332",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.7332005307"
+        },
+        "n": 313,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(313) ≤ 18",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(314) ≥ 17.763054",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.7630546142"
+        },
+        "n": 314,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(314) ≤ 18",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(315) ≥ 17.792855",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.7928556237"
+        },
+        "n": 315,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(315) ≤ 18",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(316) ≥ 17.822603",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.8226038413"
+        },
+        "n": 316,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(316) ≤ 18",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(317) ≥ 17.852299",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.8522995464"
+        },
+        "n": 317,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(317) ≤ 18",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(318) ≥ 17.881943",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.8819430161"
+        },
+        "n": 318,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(318) ≤ 18",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(319) ≥ 17.911534",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.9115345253"
+        },
+        "n": 319,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(319) ≤ 18",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(320) ≥ 17.941074",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.9410743461"
+        },
+        "n": 320,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(320) ≤ 18",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(321) ≥ 17.970562",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": true,
+          "value": "17.9705627485"
+        },
+        "n": 321,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "open"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(321) ≤ 18",
+          "provenance": "frontier",
+          "relation": "upper-bound",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(322) ≥ 18",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "18"
+        },
+        "n": 322,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(322) = 18",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(323) ≥ 18",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "18"
+        },
+        "n": 323,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "none",
+          "evidence": null,
+          "provenance": "absent",
+          "state": "not-established"
+        },
+        "side": {
+          "display": "s(323) = 18",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "18.0"
+        }
+      },
+      {
+        "badges": [
+          {
+            "glyph": "O",
+            "meaning": "proved optimal",
+            "style": "solid"
+          },
+          {
+            "glyph": "=",
+            "meaning": "exact value known",
+            "style": "solid"
+          },
+          {
+            "glyph": "R",
+            "meaning": "rigid (established here)",
+            "style": "solid"
+          }
+        ],
+        "exactness": {
+          "degree": 1,
+          "degree_provenance": "derived",
+          "degree_recorded_upstream": false,
+          "exact_form": "18",
+          "minimal_polynomial": "s - 18 = 0",
+          "state": "closed-form"
+        },
+        "lower": {
+          "display": "s(324) ≥ 18",
+          "evidence": [
+            "E-nagamochi-lower"
+          ],
+          "first_proved_here": false,
+          "provenance": "frontier",
+          "shown": false,
+          "value": "18"
+        },
+        "n": 324,
+        "optimality": {
+          "provenance": "frontier",
+          "status": "proved"
+        },
+        "rigidity": {
+          "basis": "perfect-square-tiling",
+          "evidence": "324 unit squares exactly tile a 18 by 18 container, leaving no slack, so no square can move.",
+          "provenance": "derived",
+          "state": "established"
+        },
+        "side": {
+          "display": "s(324) = 18",
+          "provenance": "frontier",
+          "relation": "equality",
+          "value": "18.0"
+        }
       }
     ],
     "generated_by": "python -m devtools.build_composite_figure_data",
@@ -9171,20 +14730,20 @@
       "frontier": "Read from the case's frontier record, which transcribes a retained source."
     },
     "range": {
-      "count": 200,
+      "count": 324,
       "first_n": 1,
-      "last_n": 200
+      "last_n": 324
     },
     "totals": {
-      "degree_derived_here": 158,
-      "degree_known": 183,
-      "degree_recorded_upstream": 25,
-      "exact_value_known": 183,
+      "degree_derived_here": 251,
+      "degree_known": 287,
+      "degree_recorded_upstream": 36,
+      "exact_value_known": 287,
       "lower_bound_first_proved_here": 7,
-      "only_known_numerically": 17,
-      "proved_optimal": 47,
+      "only_known_numerically": 37,
+      "proved_optimal": 59,
       "rigidity_catalogue_annotated": 2,
-      "rigidity_established": 16
+      "rigidity_established": 20
     }
   },
   "softschema": {

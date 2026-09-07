@@ -49,7 +49,11 @@ from sqpack.yamlio import safe_load
 CASE_MAXIMUM = 100
 #: What the reconciliation reached at each corpus: (cases matched to a pictured block,
 #: printed facts checked). Pinned so a parser that quietly stopped matching still fails.
-GOLDEN_RECONCILED: dict[str, tuple[int, int]] = {"n=1..100": (60, 206), "n=1..200": (114, 409)}
+GOLDEN_RECONCILED: dict[str, tuple[int, int]] = {
+    "n=1..100": (60, 206),
+    "n=1..200": (114, 409),
+    "n=1..324": (183, 648),
+}
 
 #: A block whose printed form uses LaTeX this parser does not read. It must raise rather
 #: than record "no closed form", which is exactly how the `n = 54` miss looked.

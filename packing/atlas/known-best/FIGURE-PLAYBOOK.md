@@ -206,7 +206,7 @@ not touch.
 Color and layout reach past this directory, so rebuild the rest too:
 
 ```bash
-for m in build_prospective_atlas build_contact_scaffold_atlas \
+for m in build_contact_scaffold_atlas \
          render_known_best_contact_overlays render_packing_gallery \
          profile_known_best_chunks census_known_best_chunks; do
   uv run --frozen --all-extras --group dev python -m devtools.$m --update

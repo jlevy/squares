@@ -41,13 +41,45 @@ from sqpack.known_best import KNOWN_BEST_CORPUS
 from sqpack.verify import float_sign, verify_packing
 
 FRONTIER = ROOT / "frontier"
-GOLDEN_SCREENED = {"n=1..100": 98, "n=1..200": 194}
+GOLDEN_SCREENED = {"n=1..100": 98, "n=1..200": 194, "n=1..324": 318}
 #: The UnitSquare renderings expose six-decimal polygon coordinates, so their shape
 #: residual exceeds the screen's limit and they are excluded by measurement (think-ecqk).
-GOLDEN_EXCLUDED = {"n=1..100": [68, 69], "n=1..200": [68, 69, 103, 105, 110, 131]}
+GOLDEN_EXCLUDED = {
+    "n=1..100": [68, 69],
+    "n=1..200": [68, 69, 103, 105, 110, 131],
+    "n=1..324": [68, 69, 103, 105, 110, 131],
+}
 #: Cases whose movable-square count differs between the screen's four tolerances; each
 #: still carries a replayed hit at the primary tolerance.
-GOLDEN_UNSTABLE = {"n=1..100": [], "n=1..200": [132, 154, 155, 156, 179, 180, 181, 182]}
+GOLDEN_UNSTABLE = {
+    "n=1..100": [],
+    "n=1..200": [132, 154, 155, 156, 179, 180, 181, 182],
+    "n=1..324": [
+        132,
+        154,
+        155,
+        156,
+        179,
+        180,
+        181,
+        182,
+        206,
+        207,
+        208,
+        209,
+        210,
+        238,
+        239,
+        240,
+        241,
+        270,
+        273,
+        297,
+        301,
+        305,
+        307,
+    ],
+}
 """Records screened at a corpus whose result has actually been looked at.
 
 The count itself is derived below -- the corpus less the shape-residual exclusions -- so

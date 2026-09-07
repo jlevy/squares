@@ -12,7 +12,7 @@ coverage_scope: >
   web search has exhausted every possible source.
 case_corpus:
   n_min: 1
-  n_max: 200
+  n_max: 324
   reader_view: frontier/STATUS.md
 sources:
   - id: kingbird-current
@@ -26,7 +26,7 @@ sources:
     source_date: null
     disposition: baseline-current
     replay_disposition: case-specific
-    represented_by: [frontier/n-001.md through frontier/n-200.md]
+    represented_by: [frontier/n-001.md through frontier/n-324.md]
     evidence: [E-kingbird-upper-register]
     notes: >
       The retained page was freshly retrieved and reparsed on the review date. It is

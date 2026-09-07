@@ -35,7 +35,7 @@ from sqpack.assurance import bounds_agree_at_declared_precision
 from sqpack.known_best import KNOWN_BEST_CORPUS
 
 #: Cases whose verified ceiling trails the reported side, per corpus (think-93on).
-TRAILING_BY_CORPUS: dict[str, int] = {"n=1..100": 18, "n=1..200": 68}
+TRAILING_BY_CORPUS: dict[str, int] = {"n=1..100": 18, "n=1..200": 68, "n=1..324": 129}
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 # The consumers of this field now span the repository: it is named in SYNOPSIS.md and

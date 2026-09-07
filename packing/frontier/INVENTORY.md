@@ -20,12 +20,12 @@ results, it is a statement about what this repository has itself examined.
 
 | evidence | cases | claim | assurance | method decides | whose work | read here | novelty |
 | --- | ---: | --- | --- | --- | --- | --- | --- |
-| `E-kingbird-upper-register` | 152 | upper-bound | reported | - | - | - | previously-published |
-| `E-kingbird-grid-completeness` | 42 | upper-bound | reported | - | - | - | previously-published |
+| `E-kingbird-upper-register` | 221 | upper-bound | reported | - | - | - | previously-published |
+| `E-kingbird-grid-completeness` | 97 | upper-bound | reported | - | - | - | previously-published |
 | `E-unitsquare-release1-report` | 6 | upper-bound | reported | - | - | - | previously-published |
-| `E-basic-grid-upper` | 181 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
-| `E-basic-area-lower` | 14 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
-| `E-nagamochi-lower` | 188 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published |
+| `E-basic-grid-upper` | 305 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
+| `E-basic-area-lower` | 18 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
+| `E-nagamochi-lower` | 312 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published |
 | `E-migrated-lower-report` | 6 | lower-bound | reported | - | - | - | *not assessed* |
 | `E-side2-center-lower` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
 | `E-n005-gobel-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
@@ -56,8 +56,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-n029-schadt-numerical` | 0 | witness-feasibility | numerically-checked | nothing formally; a measurement at a tolerance | here | - | previously-published |
 | `E-n029-interval-certified-upper` | 1 | upper-bound | verified | strict inequalities only | here | - | apparently-novel |
 | `E-n029-schadt-rational-upper` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
-| `E-translation-escape-not-rigid` | 183 | derived-structure | numerically-checked | nothing formally; a measurement at a tolerance | here | - | apparently-novel |
-| `E-perfect-square-tiling-rigid` | 14 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
+| `E-translation-escape-not-rigid` | 303 | derived-structure | numerically-checked | nothing formally; a measurement at a tolerance | here | - | apparently-novel |
+| `E-perfect-square-tiling-rigid` | 18 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
 | `E-bentz46-theorem8-audit` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-bentz13-figure2-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-green17-sixteen-point-lower` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
@@ -92,7 +92,7 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 
 | result | n | what is new | cases | assurance |
 | --- | --- | --- | ---: | --- |
-| `E-translation-escape-not-rigid` | 183 sizes | A systematic screen over 194 configurations with replayable certificates; the idea of checking a slide is not new | 183 | numerically-checked |
+| `E-translation-escape-not-rigid` | 303 sizes | A systematic screen over 318 configurations with replayable certificates; the idea of checking a slide is not new | 303 | numerically-checked |
 | `E-n017-fractional-certificate` | 17, 18, 19 | The certificate and the side. The method is Burns's and the parametrisation is Massaccesi's own; what is new is a denser certificate at a larger side than his, found by this project's generator once its separation oracle was corrected. | 2 | verified |
 | `E-n020-fractional-certificate-97-20` | 20, 21 | The certificate and the side. The method is Burns's, the parametrisation Massaccesi's, and the previous rung this project's own; what is new is a certificate at 97/20, found by seeding the generator's site set with the 24/5 certificate's own atoms scaled to the new side after the uniform grid walled there. | 2 | verified |
 | `E-n005-fixed-side-local-rigidity` | 5 | The first exact PROOF that Goebel's n = 5 optimum is locally rigid at fixed side -- a property ASSERTED WITHOUT PROOF by Kingbird (archived main page, line 44, "Rigid." with a link and no argument), not stated by Goebel 1979 (zero occurrences of "rigid" or "uniqu" in the extraction) and not annotated by Friedman DS7, whose Theorem 2 is a lower bound only and analyses no equality case | 1 | verified |
@@ -113,13 +113,13 @@ The `n` column is what each covers and `cases` is how many frontier records cite
 
 | evidence | cases | whose work | read here |
 | --- | ---: | --- | --- |
-| `E-nagamochi-lower` | 188 | elsewhere | informally-verified |
-| `E-basic-grid-upper` | 181 | here | - |
-| `E-basic-area-lower` | 14 | here | - |
-| `E-perfect-square-tiling-rigid` | 14 | here | - |
+| `E-nagamochi-lower` | 312 | elsewhere | informally-verified |
+| `E-basic-grid-upper` | 305 | here | - |
+| `E-basic-area-lower` | 18 | here | - |
+| `E-perfect-square-tiling-rigid` | 18 | here | - |
 | `E-fractional-interval-decision` | 7 | here | - |
 
-The most-cited argument this repository did not produce is `E-nagamochi-lower`, carrying 188 of the hundred cases. It is an external proof, and it has been read here: its record carries the review, what was re-derived, and the four things that were not. The arithmetic is what picked it out for reading -- being cited this heavily is the reason to open an argument, not a reason to trust it.
+The most-cited argument this repository did not produce is `E-nagamochi-lower`, carrying 312 of the hundred cases. It is an external proof, and it has been read here: its record carries the review, what was re-derived, and the four things that were not. The arithmetic is what picked it out for reading -- being cited this heavily is the reason to open an argument, not a reason to trust it.
 
 `[Stromquist 2003]` is why that matters rather than being a formality: its `n = 11` argument needed a source-distinct repair, which `E-n011-repaired-lower` supplies.
 

@@ -30,16 +30,18 @@ from sqpack.render.style import FIRST_PARTY_ACCENT_COLOR
 from sqpack.witness import load_witness
 
 #: Catalogue-derived witnesses above the hand-audited hundred, per corpus (think-93on).
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 46}
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 46, "n=1..324": 107}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     "n=1..100": {68, 69},
     "n=1..200": {68, 69, 103, 105, 110, 131},
+    "n=1..324": {68, 69, 103, 105, 110, 131},
 }
 #: How the corpus splits by source kind at each corpus; a case switching kind fails here.
 GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     "n=1..100": {"exact-grid": 64, "kingbird-derived-facts": 34, "unitsquare-rendering": 2},
     "n=1..200": {"exact-grid": 114, "kingbird-derived-facts": 80, "unitsquare-rendering": 6},
+    "n=1..324": {"exact-grid": 177, "kingbird-derived-facts": 141, "unitsquare-rendering": 6},
 }
 
 ROOT = Path(__file__).resolve().parent.parent

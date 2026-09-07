@@ -1,7 +1,7 @@
 # Frontier: What Is Known About `s(n)`, Case by Case
 
 `s(n)` is the side of the smallest square holding `n` non-overlapping unit squares.
-This folder is the structured claim register for each `n ≤ 200`. Each case keeps the
+This folder is the structured claim register for each `n ≤ 324`. Each case keeps the
 best bounds reported by the named public sources separate from the strongest bounds
 supported by formal evidence.
 It also records numerical checks, verification origin, conflicts, blockers, review date,
@@ -124,7 +124,7 @@ The ones that carry the most weight:
 - `verified_upper_bound` and `verified_lower_bound` contain only formally supported
   bounds. They are a ceiling and a floor, not the value of `s(n)`. The certified ceiling
   may be a weaker rational construction or the exact grid when the tighter public pose
-  is only numerical: for 84 of the 200 cases it is *larger* than the best-known side
+  is only numerical: for 145 of the 324 cases it is *larger* than the best-known side
   recorded two fields above it, by up to `0.46`, and each of those cases says so in its
   own body and carries a `mathematics` blocker.
   An `exact_form` on the ceiling is the exact form of the ceiling; `s(n)` is known
@@ -162,9 +162,9 @@ verification.
 [`source-coverage.yaml`](source-coverage.yaml) is a dated claim about a named source
 set, not a claim that a web search exhausted every publication.
 It records each source’s scope, review date, retained first-party material, evidence,
-replay disposition, in-horizon overrides, and relevant claims beyond `n = 200`.
+replay disposition, in-horizon overrides, and relevant claims beyond `n = 324`.
 
-The current baseline reparses the retained Kingbird catalogue through `n = 200`, applies
+The current baseline reparses the retained Kingbird catalogue through `n = 324`, applies
 the newer UnitSquare reports at `n = 68` and `n = 69`, retains its four beyond-horizon
 claims, and records the Schadt `n = 29` repository as a superseded numerical witness.
 The check is local and deterministic; refreshing a public source is a dated W1 research
@@ -218,17 +218,17 @@ lower-bound side has underused methods.
 
 Counts below are computed from the artifacts, not asserted.
 
-Of the 153 open cases, **146** have Nagamochi’s formula as their best proved lower bound.
-The other seven use weighted fractional unavoidable-set certificates held here: `n = 11`
-at `381/100` and `n = 12` at `99/25` (`T-018`, `T-017`); `n = 17` and `n = 18` at
-`459/100` (`T-019`); `n = 19` at `24/5` (`T-020`); and `n = 20` and `n = 21` at `97/20`
-(`T-021`). Before 2026-09-03 the number governed by Nagamochi was sixty-three; the
-remaining fifty-eight still have not moved.
+Of the 265 open cases, **258** have Nagamochi’s formula as their best proved lower
+bound. The other seven use weighted fractional unavoidable-set certificates held here:
+`n = 11` at `381/100` and `n = 12` at `99/25` (`T-018`, `T-017`); `n = 17` and `n = 18`
+at `459/100` (`T-019`); `n = 19` at `24/5` (`T-020`); and `n = 20` and `n = 21` at
+`97/20` (`T-021`). Before 2026-09-03 the number governed by Nagamochi was sixty-three;
+the remaining fifty-eight still have not moved.
 The count is checked against the case records by `devtools.check_nagamochi_bounds`
 (`D-430`), because the earlier figure of sixty-three outlived the first adoption by a
 day.
 
-Of the 153 open cases, 69 are still held by the trivial grid.
+Of the 265 open cases, 120 are still held by the trivial grid.
 The remaining 34 carry non-grid constructions: 14 hand-built, 10 from simulated
 annealing (nine of the ten dated 2024–2026; `n = 53` is Cantrell’s from 2002), 5
 diagonal strips, 3 extensions of smaller records, and 2 whose method the source does not

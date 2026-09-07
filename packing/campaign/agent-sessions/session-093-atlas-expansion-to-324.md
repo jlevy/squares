@@ -71,14 +71,16 @@ session:
       own slice.
     outcome: All four Phase 1 gates landed (reparser with zero divergences, retention record,
       generator, range-parameterized builder with the 1-100 family byte-identical), followed by
-      the Phase 2 tools (fetch-and-derive, calibration pinning) and the first chunk itself,
-      n = 101..200, integrated with the records tier green.
+      the Phase 2 tools (fetch-and-derive, calibration pinning) and both corpus chunks,
+      n = 101..200 and 201..324, each integrated with the records tier green and the
+      prospective seed retired with a pointer. The 1-100 composite family stayed byte-identical
+      throughout.
     evidence:
     - packing/frontier/n-101.md
     - packing/witnesses/known-best/n-147.yaml
     - packing/atlas/known-best/translation-escape-screen.json
     stop_reason: null
-    next_action: Push tier and a sweeps-tier timing, then chunk 2 (201..324).
+    next_action: Phase 4, the 1..324 poster composite, then Phase 5's gate budget and documents.
   primary_bead: think-0juv
   status: in_progress
   budget:
@@ -93,9 +95,9 @@ session:
     metric: frontier cases and known-best rows retained beyond n = 100
     before: 100 frontier cases, 100 known-best rows, 101 prospective seed witnesses without
       claims, 123 located-but-unretained Kingbird cases, no composite beyond 1-100.
-    after: 200 frontier cases and 200 known-best rows (46 catalogue-derived, 50 grid and 4
-      UnitSquare cases added), 194 screened, 176 not rigid; 77 Kingbird cases in 201..324 still
-      to acquire; no composite beyond 1-100 yet.
+    after: 324 frontier cases and 324 known-best rows (141 catalogue-derived, 177 grid and 6
+      UnitSquare cases; 59 proved); the prospective seed retired with a pointer; no composite
+      beyond 1-100 yet. Screen and rigidity totals at 324 are recorded in the evidence register.
   delegations:
   - task: Map the known-best atlas pipeline end to end and every hard-coded n = 1..100 site
     operator: Claude Explore delegate
@@ -330,6 +332,33 @@ session:
     elapsed_seconds: 1531
     elapsed_quality: platform_measured
     next_action: W2 reviewer pass over the unknown methods.
+  - task: Retire the prospective seed with a pointer (think-whx3)
+    operator: Claude Opus delegate
+    status: completed
+    recording: contemporaneous
+    phase: 2
+    outcome: The 101 seed witnesses and 101 renderings were removed; the seed manifest is a
+      retirement record pointing at the known-best manifest, validated by a oneOf schema that
+      keeps the historical shape; the builder's --update refuses and --check verifies the
+      retirement; the source map stays as the provenance record. The seed step fell from about
+      37 s to 0.07 s.
+    evidence:
+    - packing/atlas/prospective/manifest.json
+    - packing/tests/test_prospective_atlas_seed.py
+    files:
+    - packing/devtools/build_prospective_atlas.py
+    - packing/atlas/prospective/prospective-atlas-seed.schema.yaml
+    - packing/atlas/prospective/README.md
+    - packing/tests/test_prospective_atlas_seed.py
+    - packing/tests/test_module_boundaries.py
+    checks:
+    - Coordinator re-ran ruff, basedpyright, the retirement check and 45 tests across the seed,
+      map, module-boundary and negative-control suites, and confirmed 202 staged deletions.
+    uncertainty: The CC BY attribution for the four UnitSquare renderings now rests on the
+      prospective-packings README rather than on a seed record field.
+    elapsed_seconds: 1031
+    elapsed_quality: platform_measured
+    next_action: None.
   outputs:
   - docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
   checks:
