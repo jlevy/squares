@@ -94,6 +94,13 @@ They sharpen the auxiliary restricted-angle work while leaving H-036 and the glo
 bound unresolved. Consume their final reviewed receipts from the source program before
 using them in a new pilot.
 
+PR105’s later `6d8b2b38` priority amendment defers H-107 and selects a bounded
+conditional-compatibility assessment under BC-255 / H-102 alongside the H-110 work.
+Its
+[continuation](../agendas/agenda-024-post-381-24h-portfolio.md#selected-continuation-after-session-090)
+owns that allocation.
+It preserves the locked IDs and does not launch Agenda 027.
+
 The retained global bracket is
 
 $$
@@ -170,8 +177,11 @@ directions; absence of results there is not a refutation.
 ## What the Packet Adds, and the Acceptance Boundary
 
 The source has two technical reports and a shorter combined agenda.
-Its complete text, PDFs, code, and frozen repository exports remain unchanged in the
+Its research text, delivered PDFs, mathematical code, and frozen repository exports
+remain unchanged in the
 [source archive](../../resources/papers/n11-complete-research-bundle-2026-09-07/README.md).
+The full upload remains in the attic; PDF publishing assets and distribution-integrity
+files are omitted from the tracked research subset, whose packaging notes are adapted.
 The following dispositions are this project’s adaptation.
 
 | Contribution | Intake assessment | Native disposition |
@@ -453,8 +463,8 @@ lemma. Every new fast regression then belongs on the normal CI surface.
 
 ## Source-to-Record Map
 
-The whole packet is retained; this map accounts for directions that are not selected for
-the first block as well as those that are.
+This map accounts for all research directions in the packet, including those not
+selected for the first block.
 
 | Source material | Native home and treatment |
 | --- | --- |
@@ -476,7 +486,8 @@ the first block as well as those that are.
 | Both reports: other-n bounds | Controls or pruning only after an explicit subset-container or augmentation lemma |
 | Integrated source agenda | Adapted into Agenda 027; source sequencing is advice, not imported scheduling authority |
 | Frozen source packet 00–18 and supplemental image | Provenance behind the reviews; current repository owners supersede its stale status prose |
-| Checkers, JSON, mutation tests, build assets, PDFs | Immutable archive; same-code intake replay; independent mathematical acceptance and production adaptation remain distinct |
+| Checkers, mathematical JSON, mutation tests, delivered PDFs | Preserved research evidence; same-code intake replay; independent mathematical acceptance and production adaptation remain distinct |
+| PDF build script, TeX/Lua layout, original manifest and preservation receipt | Retained only with the complete upload in the attic; excluded from the tracked research subset |
 
 ## Allocation and the First Decision
 
@@ -486,8 +497,9 @@ The support-ceiling review does not gate those pilots; physical KKT is required 
 a leaf that invokes original stationarity.
 The kernel has a small independent discriminator; a resource-representation extension is
 selected only when evidence earns it.
-Scalar row completion and the near-45 continuation can proceed in the source portfolio
-without becoming dependencies of these new questions.
+The source portfolio owns its near-45 and conditional-compatibility continuation; scalar
+row completion is deferred under its latest amendment.
+These remain separate allocations and do not become dependencies of the new questions.
 
 The first checkpoint should answer whether any selected method closes a nontrivial
 continuous domain with reusable certificates at a useful price.

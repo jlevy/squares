@@ -54,7 +54,8 @@ agenda:
     - scope: Source intake, critical adaptation and a prepared independent research agenda
       classification: achieved
       result: >-
-        Preserved all supplied source files, reproduced the same-code controls,
+        Preserved the complete upload in the attic and its research subset in the
+        tracked archive, reproduced the same-code controls,
         reconciled the older snapshot with PR105, and separated existing support
         acceptance from new compatibility, restricted-family and kernel questions.
         No new packing bound, accepted H-099 verdict or successor experiment is claimed.

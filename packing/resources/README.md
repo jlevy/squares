@@ -169,10 +169,12 @@ Citation keys match those used in the research document.
 
 The owner-supplied
 [complete n=11 research bundle](papers/n11-complete-research-bundle-2026-09-07/INTAKE.md)
-was received on 2026-09-07 UTC and first unpacked into the local `attic/`. Its 57
-supplied files are retained unchanged in the archive, including the review, enumeration
-addendum, integrated agenda, source snapshot, checkers and PDFs.
-The intake note records provenance and the scope of the replayed controls.
+was received on 2026-09-07 UTC; its complete 57-file distribution remains in the local
+`attic/`. The tracked archive retains its research reports, source snapshot, figures,
+checkers, replay outputs and delivered PDFs.
+PDF publishing helpers and original distribution-integrity files stay in the attic.
+The intake note records this selection, the adapted packaging documentation and the
+scope of the replayed controls.
 This is a contributed analysis packet; its proposals and supplied checks are not
 automatically accepted campaign results.
 
