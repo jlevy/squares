@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 90
+count: 94
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 46
+  sessions_measured: 50
   sessions_unmeasured: 44
   attributed:
     rollups: 115
@@ -35,9 +35,9 @@ totals:
     one_off_code: 3267
     wall_hours: 195.94
 codex_receipts:
-  attributed: 19
+  attributed: 23
   unattributed: 0
-  measured: 19
+  measured: 23
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1420,4 +1420,84 @@ sessions:
     agent_hours: 9.8
     active_union_hours: 3.94
     wall_hours: 3.95
+    snapshot_incomplete: true
+- id: session-091
+  title: "Exact P12 escape and conditional compatibility"
+  status: completed
+  primary_bead: think-fqhr
+  phases: 6
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-091.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-091.yaml
+    model_responses: 553
+    agent_hours: 5.05
+    active_union_hours: 1.93
+    wall_hours: 1.93
+    snapshot_incomplete: true
+- id: session-093
+  title: "Full-square compatibility and distinct density assessment"
+  status: completed
+  primary_bead: think-bmx9
+  phases: 9
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-093.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-093.yaml
+    model_responses: 673
+    agent_hours: 6.07
+    active_union_hours: 1.99
+    wall_hours: 1.99
+    snapshot_incomplete: true
+- id: session-094
+  title: "Complete-cover binding and repaired density controls"
+  status: completed
+  primary_bead: think-63oj
+  phases: 8
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-094.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-094.yaml
+    model_responses: 562
+    agent_hours: 4.53
+    active_union_hours: 1.82
+    wall_hours: 1.82
+    snapshot_incomplete: true
+- id: session-095
+  title: "Collision cover and independent support ceiling"
+  status: completed
+  primary_bead: think-ro0s
+  phases: 5
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-095.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-095.yaml
+    model_responses: 476
+    agent_hours: 4.08
+    active_union_hours: 1.69
+    wall_hours: 1.69
     snapshot_incomplete: true

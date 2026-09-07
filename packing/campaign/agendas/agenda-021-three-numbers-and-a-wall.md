@@ -1059,16 +1059,56 @@ agenda:
           H110 tests one fixed near-axis P12 escape before a larger positive proof.
           Source-free controls, independent review and a fresh prospective round
           are required; no target has run.
-      selected:
-        bead: think-qv73
-        workflow: research-loop
+      - bead: think-jbw5
+        workflow: pipeline-improvement
+        priority: 0
         rationale: >-
-          This live handoff follows terminal Session090 and its passed full
-          bc5c24b5 checkpoint. H106, H108 and H109 accept continuous auxiliaries;
-          H110 is the next unrun discriminator. The September7 amendment holds
-          H107 out of the next block and selects a bounded conditional-compatibility
-          assessment through Agenda024. Preserve BC215 as an uncompleted
-          efficiency candidate and keep the work on the integrated research PR.
+          Added during Session091, not backdated to this agenda's W10. Exp121
+          accepts H110's auxiliary P12 escape. H122 is the conditional diamond
+          cover replacement; independent source-free instruments precede its
+          first registered screen, with localization assessed in parallel.
+      - bead: think-7e72
+        workflow: pipeline-improvement
+        priority: 0
+        rationale: >-
+          Added at Session091's close, not backdated to this agenda's W10.
+          H110 and H123 are accepted and H122 is refuted. Preserve the full
+          distinguished square in a changed compatibility discriminator, with
+          source-free independent instruments and a new prospective protocol.
+      - bead: think-nwss
+        workflow: factual-review
+        priority: 0
+        rationale: >-
+          Added after Session095 exp127, not backdated to this agenda's W10.
+          The fixed collision-augmented axis cover is terminal and unresolved.
+          Independently bind the existing BC259 seven-row support ceiling; a
+          complete ceiling is more informative than diagnosing one candidate clique.
+      - bead: think-j8pz
+        workflow: insight-iteration
+        priority: 1
+        rationale: >-
+          Added after Session095 exp128, not backdated to this agenda's W10.
+          The full old support has independently verified optimum11. BC265
+          compares changed resource directions by mathematical impact before
+          commissioning any new scientific instrument or target.
+      - bead: think-mq0d
+        workflow: insight-iteration
+        priority: 1
+        rationale: >-
+          Added after Session095's independent BC265 design, not backdated to W10.
+          Price one small H114 feature family and its missing kernel-specific
+          contract before any target. This has a direct-bound mechanism, unlike
+          merely refuting the particular old-support calibration.
+      selected:
+        bead: think-mq0d
+        workflow: insight-iteration
+        rationale: >-
+          Session095 exp128 closes BC259/H099 at fixed-support optimum11.
+          Its comparative design selects BC264's existing 30-minute feature and
+          kernel-contract pricing, not a target or an automatic hierarchy build.
+          Keep the conditional H101 common-support obstruction as fallback.
+          H107 stays paused and external BC261/273 remains separately owned.
+          This is a live selection update, not a W10 outcome.
       operator_input:
         status: unavailable
         note: >-

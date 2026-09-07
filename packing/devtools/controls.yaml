@@ -171,7 +171,7 @@ controls:
 # the one that announces itself.
 - name: synopsis - narrative round aggregate lagging the ledger
   file: ../SYNOPSIS.md
-  replace: ["There are 76 rounds", "There are 45 rounds"]
+  replace: ["There are 84 rounds", "There are 45 rounds"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "registered-round aggregate is not"
 
@@ -1285,9 +1285,9 @@ controls:
 
 - name: synopsis handoff - W10 selected entry is replaced by a deferred candidate
   file: ../SYNOPSIS.md
-  replace: ["**Selected next entry:** `think-qv73`", "**Selected next entry:** `think-cyko`"]
+  replace: ["**Selected next entry:** `think-mq0d`", "**Selected next entry:** `think-cyko`"]
   run: python3 -m devtools.check_synopsis
-  expect: "exactly one canonical Selected next entry marker for think-qv73"
+  expect: "exactly one canonical Selected next entry marker for think-mq0d"
 
 # --- the gate's own declared cost (agenda-023 BC-216) ---
 #
