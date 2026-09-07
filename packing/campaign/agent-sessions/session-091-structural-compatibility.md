@@ -90,7 +90,7 @@ session:
     objective: Prepare the four-guard continuous near45 localization instrument and independent review.
     commitment: BC-255
     bead: think-g930
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: The source-free assessment replaces a general localization mesh with a reviewed two-mark interval reduction and four polynomial obligations.
     budget_minutes: 30
@@ -100,10 +100,31 @@ session:
     validation_command: Focused source-free tests, independent mathematical review and the records tier.
     kill_condition: A missing geometric premise, a failed control or the fixed author/review deadline; no target before a committed prospective protocol.
     fallback: Preserve the exact unproved obligation and retained instrument, without subdivision or target retries.
+    outcome: H123 analytic reduction passed independent review; producer froze06:54:29 with18 source-free controls. Independent reader and swapped instrument reviews continue.
+    evidence: [packing/campaign/hypotheses/H-123-near45-coordinate-localization.md]
+    stop_reason: Coordinator switches to the ready H122 scientific screen while H123 delegated readiness work continues under its original caps.
+    next_action: Finish retained H123 author/review delegations; do not infer readiness or run its target before their disposition.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Run the prospectively capped H122 screen, then the H123 four-guard certificate only if its independent readiness completes.
+    commitment: BC-255
+    bead: think-jbw5
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: H122 source-free controls and swapped reviews passed; its immutable source is c4a69e3e and exp122 is being committed prospectively.
+    budget_minutes: 25
+    started_at: '2026-09-07T07:00:00Z'
+    deadline_at: '2026-09-07T07:25:00Z'
+    expected_output: Retained H122 screen disposition, and H123 exact certificate or explicit unopened obligation; no automatic retries.
+    validation_command: Frozen scientific commands in the committed prospective experiments, followed by independent readers when authorized.
+    kill_condition: A frozen process cap, missing readiness premise or phase deadline ends that invocation without retry.
+    fallback: Record exact unresolved scope and failed or unopened work, then choose a genuinely changed next allocation at the checkpoint.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Allocate one fifteen-minute source-free producer slice and independently check the generic geometric reduction.
+    next_action: Commit exp122, pass record checks and invoke its producer exactly once from the clean source checkout.
   primary_bead: think-fqhr
   status: in_progress
   budget:
