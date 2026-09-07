@@ -528,8 +528,8 @@ def _print_sans_face(block: str) -> bool:
     """Whether a `@font-face` block is one of kpress's static print instances.
 
     Those exist so a printed page embeds a font rather than drawing outline paths, and
-    they are at kpress's own weight tokens. This page prints at its own -- 410, 550,
-    600 and 680, declared and checked in `devtools.sans_instances` -- so kpress's set
+    they are at kpress's own weight tokens. This page prints at its own -- 410, 550 and
+    680, declared and checked in `devtools.sans_instances` -- so kpress's set
     would answer none of its requests while costing 20 KB of base64 a face in every
     copy of the page ever served. `render_explainer_pdf` injects this page's own set
     into the loaded document instead, at the moment it prints it, which is why nothing

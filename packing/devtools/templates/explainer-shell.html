@@ -91,10 +91,18 @@ body {
    Figure text, captions and footnotes share one supporting-text role.
    Print keeps the same size ratio.
    Scope the bold token to sans components because KPress also uses it for serif
-   emphasis. Diagram labels with explicit SVG weights join the same scale. */
+   emphasis. Diagram labels with explicit SVG weights join the same scale.
+
+   Three weights and no others, which is the rule rather than the tally: one bold
+   everywhere in the sans, one medium everywhere, one light for supporting text.
+   `sans_instances --weights` lists what the page asks for in both media with the
+   declaration behind each request, and it is how a fourth weight is found. Two used
+   to be there: the caption label sat at the medium while the title credits were bold,
+   and the footnote controls at KPress's literal 600, which is neither token. */
 :root {
   --cert-font-scale-sans: calc(19 / 18);
   --cert-font-weight-sans-light: 410;
+  --cert-font-weight-sans-medium: 550;
   --cert-font-weight-sans-bold: 680;
   --paper-title-scale: 1.5;
   --paper-subtitle-scale: 1.25;
@@ -126,12 +134,23 @@ body {
 }
 .cert-page, .kpress-tooltip {
   --kpress-font-weight-sans-light: var(--cert-font-weight-sans-light);
+  /* The medium is mapped at this scope rather than at the sans components' because it
+     is the same 550 KPress already uses, so nothing the page does not own can change
+     under it; naming it here is what lets every medium on the page read as a token. */
+  --kpress-font-weight-sans-medium: var(--cert-font-weight-sans-medium);
 }
 .cert-page :is(.credits, .kpress-figcaption, .kpress-footnotes, .colophon,
   .mass-line, .panel, .tip-panel, .line-fig, .chart, button),
 .kpress-tooltip {
   --kpress-font-weight-sans-bold: var(--cert-font-weight-sans-bold);
   font-weight: var(--cert-font-weight-sans-light);
+}
+/* Diagram labels carry their weight as an SVG presentation attribute, because that is
+   what an `<svg>` written by `render_explainer` can say about one `<text>`. The two
+   numbers it emits are markers, not weights: they select the scale's medium and its
+   bold here, so a token moves them with everything else. */
+.cert-page :is(.line-fig, .chart) [font-weight="550"] {
+  font-weight: var(--kpress-font-weight-sans-medium);
 }
 .cert-page :is(.line-fig, .chart) [font-weight="650"] {
   font-weight: var(--cert-font-weight-sans-bold);
@@ -198,6 +217,21 @@ body {
     min-width: 0;
     width: calc(8.5in - 2 * var(--kpress-print-page-margin) - 2.2rem);
   }
+}
+
+/* The footnote controls -- the reference in the body, the arrow back from each source,
+   the tooltip's next and previous -- at the scale's medium. KPress sets all three from
+   one literal 600, which is neither of this page's tokens and was the page's fourth sans
+   weight: two instanced faces in the PDF for thirty superscript figures. 550 is 50 units
+   below it and still reads as a mark rather than as body text at the 0.75em these run
+   at; if a control ever needs more presence than that, the answer is the bold token and
+   not a number between the two.
+
+   The tooltip's link is named at KPress's own specificity and comes later in the
+   cascade, which is how it wins; the two in the page win on `.cert-page`. */
+.cert-page .kpress-footnote-ref a, .cert-page a.kpress-footnote-backref,
+.kpress-tooltip .kpress-footnote-nav-link {
+  font-weight: var(--kpress-font-weight-sans-medium);
 }
 
 /* One transition for every hover and every replaced readout: fast, and the
@@ -475,8 +509,13 @@ body {
   margin-block-start: 0;
   padding: 0.85rem 1.1rem 1rem;
 }
+/* The caption label -- "Figure 5." and the sentence that names the figure -- is bold,
+   and it is the same bold as the title credits and every other bold in the sans. KPress
+   sets it to its medium, which is right for a caption that whispers and wrong for one
+   that labels: on this page the label is the figure's title, and a reader scanning for
+   Figure 7 was looking for the one weight the page uses to mean "start here". */
 .cert-page .kpress-figcaption strong {
-  font-weight: var(--kpress-font-weight-sans-medium);
+  font-weight: var(--kpress-font-weight-sans-bold);
 }
 
 /* The mass budget. */
@@ -927,9 +966,10 @@ body {
      them in the prose face as small-cap figures at 400 -- a quiet treatment for prose
      that cites rarely. This paper cites in most paragraphs, and each reference is a
      signpost to the sources block, which is sans throughout; the prose-face figure sat
-     a little too close to the digits of the text around it. The weight is the screen's
-     600, read against 11pt PT Serif: enough to be seen at superscript size, not enough
-     to read as bold. No chip in print; kpress's print rule already removes it.
+     a little too close to the digits of the text around it. The weight is the screen's,
+     and the screen's is now the scale's medium, set once for both media in the rule
+     above rather than repeated here as a number. No chip in print; kpress's print rule
+     already removes it.
 
      kpress prints every superscript at 110% of the text, a compensation for the
      small-cap figure it sets the reference in, which is short. A sans figure at that
@@ -942,7 +982,6 @@ body {
     font-family: var(--kpress-font-sans);
     font-feature-settings: var(--kpress-font-features-sans);
     font-variant-caps: normal;
-    font-weight: 600;
   }
 }
 

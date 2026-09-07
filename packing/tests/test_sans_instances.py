@@ -21,6 +21,10 @@ Nothing here launches a browser or reads a real font: the fixture writes stand-i
 of a few bytes, and the whole file runs in milliseconds.
 """
 
+# `_attribution` reads one node's cascade and is private because nothing outside the
+# listing should decide what "set this weight" means. Tested directly rather than through
+# a browser: the shape it reads is CDP's, and a fixture of it is exact where a page is not.
+# pyright: reportPrivateUsage=false
 from __future__ import annotations
 
 import re
@@ -31,22 +35,25 @@ import pytest
 from devtools.render_explainer_pdf import embedded_fonts, font_findings, outline_fonts
 from devtools.sans_instances import (
     PRINT_FACES,
+    Declared,
     Face,
     Requested,
+    _attribution,
     covered,
+    distinct_sources,
     gaps,
     generator,
     print_face_css,
 )
 
 #: What the probe found on the rendered page, on 2026-09-07, weight and style only.
-#: Every one of them has to be answered, and 400 is answered by 410.
+#: Every one of them has to be answered, and 400 is answered by 410: `.rel` names it for
+#: the one fallback relation glyph, and the `@page` margin-box footer inherits it.
 REQUESTED: list[tuple[int, str]] = [
     (400, "normal"),
     (410, "italic"),
     (410, "normal"),
     (550, "normal"),
-    (600, "normal"),
     (680, "normal"),
 ]
 
@@ -57,6 +64,7 @@ COVERAGE_CASES: list[tuple[str, int, str, bool]] = [
     ("400 italic, which lands the same way", 400, "italic", True),
     ("a kpress token this page does not print at", 370, "normal", False),
     ("another one", 650, "normal", False),
+    ("the weight the footnote controls left behind", 600, "normal", False),
     ("a weight below the substitution", 300, "normal", False),
     ("a style no instance carries", 410, "oblique 14deg", False),
 ]
@@ -197,3 +205,85 @@ def test_an_outline_font_whose_face_cannot_be_read_counts_as_ours() -> None:
     """No descriptor, no attribution, no pass: an unreadable Type3 is not waved through."""
     findings = font_findings(_font(1, "Type3") + _font(2, "Type0"))
     assert len(findings) == 1
+
+
+def test_the_weight_listing_reports_one_row_per_source_and_not_per_element() -> None:
+    """Two elements at one weight from two rules is the finding the listing is for.
+
+    The caption label and the chip were both the sans at 550 and only one of them was a
+    caption; a listing that showed the first element of each combination would have said
+    the medium had one source when it had two.
+    """
+    row: Declared = {
+        "family": "Source Sans 3",
+        "weight": 550,
+        "style": "normal",
+        "runs": 12,
+        "seen": [
+            {"marker": 0, "path": "a.chip[0]", "source": ".doc-links .chip { 550 }"},
+            {"marker": 1, "path": "a.chip[1]", "source": ".doc-links .chip { 550 }"},
+            {"marker": 2, "path": "strong[0]", "source": ".kpress-figcaption strong { 550 }"},
+        ],
+    }
+    assert [sample["path"] for sample in distinct_sources(row)] == ["a.chip[0]", "strong[0]"]
+
+
+def test_a_weight_set_through_a_token_is_reported_as_the_token() -> None:
+    """What `getComputedStyle` cannot answer, and the reason the listing goes through CDP.
+
+    The cascade is read weakest origin first, so the last declaration is the one that
+    won; CDP repeats the winner with `disabled` unset, and those duplicates collapse.
+    """
+    styles = {
+        "matchedCSSRules": [
+            {
+                "rule": {
+                    "selectorList": {"text": ".kpress b, .kpress strong"},
+                    "style": {"cssProperties": [{"name": "font-weight", "value": "650"}]},
+                }
+            },
+            {
+                "rule": {
+                    "selectorList": {"text": ".credits strong"},
+                    "style": {
+                        "cssProperties": [
+                            {
+                                "name": "font-weight",
+                                "value": "var(--kpress-font-weight-sans-bold)",
+                                "disabled": False,
+                            }
+                        ]
+                    },
+                }
+            },
+        ]
+    }
+    assert _attribution(styles) == ".credits strong { var(--kpress-font-weight-sans-bold) }"
+
+
+def test_a_weight_no_rule_sets_is_reported_as_inherited_or_unset() -> None:
+    """Most of this page's text is set by a token on a wrapper, not on the run itself."""
+    inherited = {
+        "inherited": [
+            {
+                "matchedCSSRules": [
+                    {
+                        "rule": {
+                            "selectorList": {"text": ".cert-page :is(.credits, .panel)"},
+                            "style": {
+                                "cssProperties": [
+                                    {
+                                        "name": "font-weight",
+                                        "value": "var(--cert-font-weight-sans-light)",
+                                    }
+                                ]
+                            },
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+    assert _attribution(inherited).endswith("(inherited)")
+    assert "--cert-font-weight-sans-light" in _attribution(inherited)
+    assert _attribution({}) == "unset (the initial 400)"
