@@ -319,6 +319,28 @@ returned `no_chain` and did not authorize a reader.
 Timeout, omitted evidence or failure to construct a chain is unresolved; even a verified
 gap in this sufficient cover would not refute H124.
 
+### A Fixed Collision-region Strengthening
+
+The next selected instrument keeps those thirteen regions and appends one fixed
+S-center region, $C^*$, directly. It is not another obstacle to dilate by $B_0$.
+The [author proof](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-collision.md)
+and [independent derivation](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-review.md)
+prove the uniform displacement guard $\varepsilon=1/500$ and the collision implication
+throughout both actual closed angle bands. They define every constant and distinguish
+world coordinates from the rotated Q-frame.
+
+The producer constructs $C^*$ by closed half-plane clipping; the independently authored
+reader reconstructs it by enumerating supporting-line intersections. Both source-free
+reviews passed in Session094, with the fixed eight unnormalized normals and the
+required $2\varepsilon$ penalty on diagonal normals. The reviewed source retains the
+old thirteen regions unchanged and has at most fourteen regions and 68 vertices.
+Empty or degenerate new regions are refused, not silently discarded.
+
+This is instrument readiness only. Neither new scientific constructor has been invoked,
+and actual source agreement, nondegeneracy and complete near-axis coverage remain
+untested. A separate prospective experiment and its admission checks are required.
+No radius sweep, two-angle solver or retry of exp125 is authorized by this construction.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

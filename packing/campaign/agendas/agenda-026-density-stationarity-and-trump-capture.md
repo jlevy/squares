@@ -209,10 +209,10 @@ agenda:
     parallel_group: agenda026-density
     program: n11-density-stationarity-trump-capture
     next_evidence: >-
-      Exp126 separately tests the unchanged56/5 candidate with a complete graph
-      certificate after allfive Session094 scientific controls passed. Only an
-      independent full source-bound depth replay accepts H099; graph overweight
-      remains unresolved. No continuum primal coverage or alternate candidate is funded.
+      Exp126's sole producer reported an overweight graph clique and no independent
+      reader was authorized. H099 and its bracket [11,56/5] remain unchanged. Reprice
+      the exact geometric obligation before funding any higher-order verifier;
+      no candidate retry, continuum primal coverage or alternate candidate is funded.
     note: >-
       BC-250 narrows prospective allocation: retain all soundness controls, but no
       automatic 180-minute build or BC-244 launch. Candidate acceptance uses H-099;

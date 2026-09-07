@@ -28,8 +28,13 @@ MAX_LIMIT = 5000
 MAX_SECONDS = 120
 
 
-def scientific_source(frame: str, *, reader: bool) -> tuple[NumberField, Any, Any]:
+def scientific_source(
+    frame: str | None, *, reader: bool, collision: bool = False
+) -> tuple[NumberField, Any, Any]:
     """Load only the requested independent route, under the worker's process cap."""
+    if collision:
+        module = "check_h124_collision_source" if reader else "h124_collision_source"
+        return import_module(f"devtools.{module}").cover_source()
     module = "check_h124_cover_source" if reader else "h124_cover_source"
     return import_module(f"devtools.{module}").cover_source(frame)
 
@@ -64,17 +69,26 @@ def worker(
     control: str | None,
     raw: Any,
     limit: int,
+    collision: bool = False,
 ) -> dict[str, Any]:
     """Explicit source, exact bound and complete independent replay only."""
-    if (frame is None) == (control is None):
-        raise ValueError("exactly one explicit scientific band or toy control is required")
+    if type(collision) is not bool:
+        raise ValueError("collision mode must be boolean")
+    if (frame is not None) + (control is not None) + collision != 1:
+        raise ValueError("exactly one explicit band, collision mode or toy control is required")
     if frame is not None and frame not in ("axis", "diagonal"):
         raise ValueError("unknown scientific band")
     if control is not None and control not in ("covered", "gap"):
         raise ValueError("unknown toy control")
     if type(limit) is not int or not 1 <= limit <= MAX_LIMIT:
         raise ValueError("event and slab cap outside admitted range")
-    source = f"h124:{frame}" if frame is not None else f"toy:{control}"
+    source = (
+        "h124:axis-collision-v1"
+        if collision
+        else f"h124:{frame}"
+        if frame is not None
+        else f"toy:{control}"
+    )
     if raw is not None and (
         type(raw) is not dict
         or set(raw) != {"kind", "source", "certificate"}
@@ -82,11 +96,14 @@ def worker(
         or raw["source"] != source
     ):
         raise ValueError("cover envelope differs from the explicit source")
-    field, rectangle, polygons = (
-        scientific_source(frame, reader=raw is not None)
-        if frame is not None
-        else toy_source(control or "")
-    )
+    if collision:
+        field, rectangle, polygons = scientific_source(
+            None, reader=raw is not None, collision=True
+        )
+    elif frame is not None:
+        field, rectangle, polygons = scientific_source(frame, reader=raw is not None)
+    else:
+        field, rectangle, polygons = toy_source(control or "")
     if raw is None:
         return {
             "kind": KIND,
@@ -120,6 +137,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     modes = parser.add_mutually_exclusive_group(required=True)
     modes.add_argument("--frame", choices=("axis", "diagonal"))
     modes.add_argument("--toy-control", choices=("covered", "gap"))
+    modes.add_argument("--axis-collision", action="store_true")
     parser.add_argument("--input", type=Path)
     parser.add_argument("--limit", type=int, required=True)
     parser.add_argument("--timeout-seconds", type=int, required=True)
@@ -144,7 +162,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                     )
                 encoded = serialize_packet(
                     worker(
-                        frame=args.frame, control=args.toy_control, raw=raw, limit=args.limit
+                        frame=args.frame,
+                        control=args.toy_control,
+                        collision=args.axis_collision,
+                        raw=raw,
+                        limit=args.limit,
                     )
                 )
             finally:
@@ -171,11 +193,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             "--timeout-seconds",
             str(args.timeout_seconds),
         ]
-        command.extend(
-            ["--frame", args.frame]
-            if args.frame is not None
-            else ["--toy-control", args.toy_control]
-        )
+        if args.axis_collision:
+            command.append("--axis-collision")
+        else:
+            command.extend(
+                ["--frame", args.frame]
+                if args.frame is not None
+                else ["--toy-control", args.toy_control]
+            )
         if args.input is not None:
             command.extend(["--input", str(args.input)])
         completed = subprocess.run(

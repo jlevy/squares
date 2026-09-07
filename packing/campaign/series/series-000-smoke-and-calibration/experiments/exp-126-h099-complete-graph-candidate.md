@@ -53,16 +53,51 @@ experiment:
       graph nodes and all existing geometry/arithmetic/input caps. Launch by11:12
       UTC and finish by11:15 UTC, or retain non-invocation. No cap extension.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-126-h099-complete-graph-candidate
-  lease:
-    expires: '2026-09-07T11:15:00Z'
-    host: Session094 coordinator
-  results: []
+  effort:
+    timebox: One60-second scientific child; no independent reader was authorized or invoked
+    wall_seconds: 4.49
+    stopped_by: criterion
+  results:
+  - shape: determination
+    role: outcome
+    question: Does the complete conservative graph bound certify the unchanged mass56/5 candidate?
+    outcome: criterion_missed
+    checked_by: Sole producer actual exit zero with unresolved/overweight_clique; it reports36 retained positive vertices,630 pairs and a five-vertex clique of weight6/5. The protocol did not authorize an independent reader, so this is not independently checked geometric infeasibility.
   verdict:
-    decision: in-progress
+    decision: unresolved
     primary_criterion: Complete independently source-bound a.e.-depth at most one for the fixed contained family, with exact mass56/5 greater than eleven.
-    reason: Prospectively registered after all scientific controls passed; no candidate invocation yet. Committed protocol, independent review and record checks are required before launch.
+    reason: The conservative graph contains a reported overweight clique, so this sufficient depth certificate failed. No common geometric interior was certified and no independent target reader ran. H099 and its fixed-support bracket remain unresolved and unchanged.
+    commit: a3ce0b9c
 ---
 # One Complete Fixed-Candidate Graph Test
+
+The sole producer returned `unresolved` with `overweight_clique`. H099 remains
+unresolved; an overweight clique in the conservative graph does not establish common
+geometric interior. The fixed-support bracket remains [11,56/5].
+
+## Retained Outcome
+
+Protocol `a3ce0b9c` and its durable-document map correction `5195f903` were committed
+before invocation. The latter passed all 31 immutable record checks in 24.33 seconds.
+The engine remained the clean `7daa7c55` checkout that had already passed full/push
+validation and all five scientific controls. The producer launched at the observed
+11:11:15 UTC boundary, before the original 11:12 cutoff, and returned actual exit zero.
+External timing was 4.49 seconds wall, 4.45 user and 0.03 system.
+
+The retained packet reports sixty source squares, 36 positive-weight graph vertices and
+630 pair tests. Its adapter status is `unresolved`; the graph certificate status and
+stop reason are both `overweight_clique`. It reports local graph vertices [1,2,7,9,10]
+with weight 6/5. These are indices in the retained positive-vertex graph, not original
+packing labels. No independent target replay or geometric common-interior check was
+authorized by this nonpositive result.
+
+The producer and external timing are retained under the declared result directory.
+No reader files were created and no process was repeated. This experiment does not
+refute H099, establish that the fixed weights are geometrically invalid, or alter any
+packing bound. Any higher-order geometric obligation needs separate repricing; it does
+not follow automatically from this failed sufficient certificate.
+
+## Retained Prospective Protocol
 
 This is a new complete sufficient certificate for the unchanged exp113 candidate, not
 another LP solve, pair screen or arrangement retry.

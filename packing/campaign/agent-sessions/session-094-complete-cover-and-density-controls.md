@@ -125,7 +125,7 @@ session:
     objective: Independently bind the proved collision-cover source and run the one newly admitted fixed density candidate if ready.
     commitment: BC-255
     bead: think-63oj
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Both mathematical proofs are frozen, while independent source constructors and a distinct explicit caller are now the remaining readiness work.
     budget_minutes: 25
@@ -135,10 +135,30 @@ session:
     validation_command: Project Python3.14 synthetic tests, independent source review, immutable push and prospective records before any new source; exp126 uses its already frozen engine and exact protocol.
     kill_condition: Original disjoint author caps, failed source readiness or exp126 launch11:12/finish11:15. No strengthened-axis evaluation without a separate future protocol.
     fallback: Preserve complete proof packages and the exact missing instrument obligation for the final checkpoint and Session095; no target retry.
+    outcome: Both collision sources and the explicit caller froze and passed independent review with source-free controls. Exp126 ended unresolved with a reported overweight graph clique and no reader. Final-slice repricing selected the unchanged collision cover and the existing seven-row support-ceiling review as separable obligations.
+    evidence: [packing/devtools/h124_collision_source.py, packing/devtools/check_h124_collision_source.py, packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md]
+    stop_reason: Source readiness and the admitted density target are dispositioned; no new collision target is invoked in this slice.
+    next_action: Freeze and validate the engine, publish the recoverable checkpoint and prepare the selected Session095 handoff.
+  - workflow: documentation-pass
+    focus: correctness
+    recording: contemporaneous
+    clock_role: finalization
+    objective: Publish the third checkpoint with exact outcomes, cost attribution and the selected two-lane continuation.
+    bead: think-63oj
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Independent source reviews and final-slice repricing are complete; the remaining work is validation and a recoverable handoff.
+    budget_minutes: 22
+    started_at: '2026-09-07T11:27:38Z'
+    deadline_at: '2026-09-07T11:49:00Z'
+    expected_output: Immutable push/full evidence or explicit pending state, terminal receipts, updated PR109 and a prospective Session095 plan.
+    validation_command: Immutable packing-validate gates, record checks, prose review and cost-rollup refresh.
+    kill_condition: Session094 deadline11:49; no new scientific target or extension of completed allocations.
+    fallback: Publish completed evidence and exact pending gates, then continue the separately planned final slice.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Pass committed exp126 records before its sole target; keep collision sources uncalled while authors and reviewer work.
+    next_action: Commit the reviewed source engine and start immutable gates while reconciling the checkpoint records.
   primary_bead: think-63oj
   status: in_progress
   budget:
@@ -510,12 +530,283 @@ session:
     fallback: "Retain the completed evidence and exact missing premise without science."
     write_scope: ["Read-only review"]
     excluded_commands: ["Scientific source evaluation","Target invocation","Git or registry writes"]
+  - task: "Fixed-displacement collision proof (think-8x6o)"
+    operator: "Independent mathematical author, max thinking"
+    status: "completed"
+    recording: "retrospective"
+    outcome: "Fixed displacement and collision implication proved source-free; actual work 10:48:06–10:59:44 UTC. No scientific source was constructed."
+    evidence: ["packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-collision.md"]
+    files: ["packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-collision.md"]
+    checks: ["Independent proof review accepted the fixed-displacement obligation."]
+    uncertainty: "Source-free readiness and retained scoped evidence do not authorize further science."
+    elapsed_seconds: 698
+    elapsed_quality: "operator_reported_approximate"
+    next_action: "Bind the proved collision polygon in independently authored source modules."
+    phase: 5
+    budget_minutes: 30
+    started_at: "2026-09-07T10:47:14Z"
+    deadline_at: "2026-09-07T11:17:14Z"
+    expected_output: "Fixed-displacement collision proof with retained evidence and original cap."
+    validation_command: "Independent proof review accepted the fixed-displacement obligation."
+    kill_condition: "Original deadline or an unresolved premise; no cap extension."
+    fallback: "Retain partial evidence and the exact missing obligation without scientific invocation."
+    write_scope: ["packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-collision.md"]
+    excluded_commands: ["Scientific source construction or target invocation","Git or unrelated registry writes"]
+  - task: "Independent fixed-displacement proof review (think-rit7)"
+    operator: "Independent mathematical reviewer, max thinking"
+    status: "completed"
+    recording: "retrospective"
+    outcome: "Independent fixed-displacement and collision proof accepted; frozen at 11:00:59 UTC after 708 seconds."
+    evidence: ["packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-review.md"]
+    files: ["packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-review.md"]
+    checks: ["Independent analytical derivation; no scientific source construction."]
+    uncertainty: "Source-free readiness and retained scoped evidence do not authorize further science."
+    elapsed_seconds: 708
+    elapsed_quality: "operator_reported_approximate"
+    next_action: "Review source binding separately from the accepted analytical proof."
+    phase: 5
+    budget_minutes: 25
+    started_at: "2026-09-07T10:49:11Z"
+    deadline_at: "2026-09-07T11:14:11Z"
+    expected_output: "Independent fixed-displacement proof review with retained evidence and original cap."
+    validation_command: "Independent analytical derivation; no scientific source construction."
+    kill_condition: "Original deadline or an unresolved premise; no cap extension."
+    fallback: "Retain partial evidence and the exact missing obligation without scientific invocation."
+    write_scope: ["packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-review.md"]
+    excluded_commands: ["Scientific source construction or target invocation","Git or unrelated registry writes"]
+  - task: "Fresh density-control protocol review (think-lvb6)"
+    operator: "Codex checkpoint_handoff_audit, high thinking"
+    status: "completed"
+    recording: "retrospective"
+    outcome: "Mechanical GO for the fresh five-row allocation; actual review 10:47:53–10:48:36 UTC. Status mappings, ordered controls and original caps matched the frozen caller."
+    evidence: ["packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-graph-depth-assessment.md"]
+    files: []
+    checks: ["Static review only; mathematical source judgment remained with root and independent mathematical reviewers."]
+    uncertainty: "Source-free readiness and retained scoped evidence do not authorize further science."
+    elapsed_seconds: 43
+    elapsed_quality: "operator_reported_approximate"
+    next_action: "Admit only the separately reviewed, committed allocation after its record gate."
+    phase: 5
+    budget_minutes: 5
+    started_at: "2026-09-07T10:47:14Z"
+    deadline_at: "2026-09-07T10:52:14Z"
+    expected_output: "Fresh density-control protocol review with retained evidence and original cap."
+    validation_command: "Static review only; mathematical source judgment remained with root and independent mathematical reviewers."
+    kill_condition: "Original deadline or an unresolved premise; no cap extension."
+    fallback: "Retain partial evidence and the exact missing obligation without scientific invocation."
+    write_scope: ["Read-only protocol review"]
+    excluded_commands: ["Scientific source construction or target invocation","Git or unrelated registry writes"]
+  - task: "Partial Session094 task-tree receipt (think-67kb)"
+    operator: "Codex checkpoint_handoff_audit, high thinking"
+    status: "completed"
+    recording: "retrospective"
+    outcome: "Generated the privacy-preserving receipt for 09:49:00–10:52:22 UTC. Retained the live-task lower bound and interval-boundary limitation."
+    evidence: ["packing/campaign/resource-usage/codex-task-tree-session-094.yaml"]
+    files: ["packing/campaign/resource-usage/codex-task-tree-session-094.yaml"]
+    checks: ["Collector: 28.69 seconds wall and 24.93 CPU; additive aggregates only."]
+    uncertainty: "Source-free readiness and retained scoped evidence do not authorize further science."
+    elapsed_seconds: 57
+    elapsed_quality: "operator_reported_approximate"
+    next_action: "Root binds the partial receipt and regenerates the branch rollup; do not treat it as the full session cost."
+    phase: 5
+    budget_minutes: 10
+    started_at: "2026-09-07T10:52:01Z"
+    deadline_at: "2026-09-07T11:02:01Z"
+    expected_output: "Partial Session094 task-tree receipt with retained evidence and original cap."
+    validation_command: "Collector: 28.69 seconds wall and 24.93 CPU; additive aggregates only."
+    kill_condition: "Original deadline or an unresolved premise; no cap extension."
+    fallback: "Retain partial evidence and the exact missing obligation without scientific invocation."
+    write_scope: ["packing/campaign/resource-usage/codex-task-tree-session-094.yaml"]
+    excluded_commands: ["Scientific source construction or target invocation","Git or unrelated registry writes"]
+  - task: "Fixed-candidate prospective protocol review (think-tqku)"
+    operator: "Independent protocol reviewer, max thinking"
+    status: "completed"
+    recording: "retrospective"
+    outcome: "Independent protocol GO at 11:03:16 UTC after 142 seconds of static review. The complete scientific-child cap and separately measured wrapper overhead remain distinct."
+    evidence: ["packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md"]
+    files: []
+    checks: ["Static commands, source binding, conditional reader and stop predicates reviewed."]
+    uncertainty: "Source-free readiness and retained scoped evidence do not authorize further science."
+    elapsed_seconds: 142
+    elapsed_quality: "operator_reported_approximate"
+    next_action: "Root commits the protocol and passes records before the sole candidate launch."
+    phase: 5
+    budget_minutes: 5
+    started_at: "2026-09-07T11:00:15Z"
+    deadline_at: "2026-09-07T11:05:15Z"
+    expected_output: "Fixed-candidate prospective protocol review with retained evidence and original cap."
+    validation_command: "Static commands, source binding, conditional reader and stop predicates reviewed."
+    kill_condition: "Original deadline or an unresolved premise; no cap extension."
+    fallback: "Retain partial evidence and the exact missing obligation without scientific invocation."
+    write_scope: ["Read-only protocol review"]
+    excluded_commands: ["Scientific source construction or target invocation","Git or unrelated registry writes"]
+  - task: "Explicit collision-cover caller (think-fhdr)"
+    operator: "Codex checkpoint_handoff_audit, high thinking"
+    status: "completed"
+    recording: "retrospective"
+    outcome: "Explicit mutually exclusive collision mode and independent lazy source routes implemented. Actual work 11:03:18–11:07:34 UTC; all scientific routes were mocked."
+    evidence: ["packing/devtools/run_h124_cover.py","packing/tests/test_run_h124_cover.py"]
+    files: ["packing/devtools/run_h124_cover.py","packing/tests/test_run_h124_cover.py"]
+    checks: ["TDD: 11 expected failures, then 33 tests passed in 0.55 seconds; external wall 0.72 seconds, CPU 0.70 seconds.","Ruff, formatting, BasedPyright and diff checks clean."]
+    uncertainty: "Source-free readiness and retained scoped evidence do not authorize further science."
+    elapsed_seconds: 256
+    elapsed_quality: "operator_reported_approximate"
+    next_action: "Independent review of source binding remains required; the caller does not authorize a scientific target."
+    phase: 6
+    budget_minutes: 15
+    started_at: "2026-09-07T11:02:37Z"
+    deadline_at: "2026-09-07T11:17:37Z"
+    expected_output: "Explicit collision-cover caller with retained evidence and original cap."
+    validation_command: "TDD: 11 expected failures, then 33 tests passed in 0.55 seconds; external wall 0.72 seconds, CPU 0.70 seconds. Ruff, formatting, BasedPyright and diff checks clean."
+    kill_condition: "Original deadline or an unresolved premise; no cap extension."
+    fallback: "Retain partial evidence and the exact missing obligation without scientific invocation."
+    write_scope: ["packing/devtools/run_h124_cover.py","packing/tests/test_run_h124_cover.py"]
+    excluded_commands: ["Scientific source construction or target invocation","Git or unrelated registry writes"]
+  - task: "Independent collision-source reader (think-fxyo)"
+    operator: "Independent source-reader author, max thinking"
+    status: "completed"
+    recording: "retrospective"
+    outcome: "Independent reader froze at 11:12:33 UTC after 596 seconds. Scientific source factories remained uncalled."
+    evidence: ["packing/devtools/check_h124_collision_source.py"]
+    files: ["packing/devtools/check_h124_collision_source.py","packing/tests/test_check_h124_collision_source.py"]
+    checks: ["16 synthetic tests passed in 0.28 seconds."]
+    uncertainty: "Source-free readiness and retained scoped evidence do not authorize further science."
+    elapsed_seconds: 596
+    elapsed_quality: "operator_reported_approximate"
+    next_action: "Root reviews the independent reader; actual scientific source agreement remains untested."
+    phase: 6
+    budget_minutes: 20
+    started_at: "2026-09-07T11:02:37Z"
+    deadline_at: "2026-09-07T11:22:37Z"
+    expected_output: "Independent collision-source reader with retained evidence and original cap."
+    validation_command: "16 synthetic tests passed in 0.28 seconds."
+    kill_condition: "Original deadline or an unresolved premise; no cap extension."
+    fallback: "Retain partial evidence and the exact missing obligation without scientific invocation."
+    write_scope: ["packing/devtools/check_h124_collision_source.py","packing/tests/test_check_h124_collision_source.py"]
+    excluded_commands: ["Scientific source construction or target invocation","Git or unrelated registry writes"]
+  - task: "Collision-source producer (think-9m5q)"
+    operator: "Independent source-producer author, max thinking"
+    status: "completed"
+    recording: "retrospective"
+    outcome: "Producer and source-free controls froze at 11:16:16 UTC after 679 seconds of reported work. No scientific constructor was invoked."
+    evidence: ["packing/devtools/h124_collision_source.py"]
+    files: ["packing/devtools/h124_collision_source.py","packing/tests/test_h124_collision_source.py"]
+    checks: ["41 synthetic controls passed."]
+    uncertainty: "Source-free readiness and retained scoped evidence do not authorize further science."
+    elapsed_seconds: 679
+    elapsed_quality: "operator_reported_approximate"
+    next_action: "Independent producer-source review under think-543z; no source invocation before separate admission."
+    phase: 6
+    budget_minutes: 20
+    started_at: "2026-09-07T11:04:23Z"
+    deadline_at: "2026-09-07T11:24:23Z"
+    expected_output: "Collision-source producer with retained evidence and original cap."
+    validation_command: "41 synthetic controls passed."
+    kill_condition: "Original deadline or an unresolved premise; no cap extension."
+    fallback: "Retain partial evidence and the exact missing obligation without scientific invocation."
+    write_scope: ["packing/devtools/h124_collision_source.py","packing/tests/test_h124_collision_source.py"]
+    excluded_commands: ["Scientific source construction or target invocation","Git or unrelated registry writes"]
+  - task: "Cost-first checkpoint PR draft (think-4x0d)"
+    operator: "Codex checkpoint_handoff_audit, high thinking"
+    status: "completed"
+    recording: "retrospective"
+    outcome: "Draft completed during 11:11:37–11:14:36 UTC. Generated cost block preserved; exp126's terminal graph-only obstruction and current source-author handoff incorporated."
+    evidence: ["packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md"]
+    files: []
+    checks: ["Generated cost prefix unchanged; partial window labeled; no pending markers or trailing whitespace; prose footer retained."]
+    uncertainty: "Source-free readiness and retained scoped evidence do not authorize further science."
+    elapsed_seconds: 179
+    elapsed_quality: "operator_reported_approximate"
+    next_action: "Root updates the draft for subsequent review results and publishes the integrated checkpoint."
+    phase: 6
+    budget_minutes: 10
+    started_at: "2026-09-07T11:11:15Z"
+    deadline_at: "2026-09-07T11:21:15Z"
+    expected_output: "Cost-first checkpoint PR draft with retained evidence and original cap."
+    validation_command: "Generated cost prefix unchanged; partial window labeled; no pending markers or trailing whitespace; prose footer retained."
+    kill_condition: "Original deadline or an unresolved premise; no cap extension."
+    fallback: "Retain partial evidence and the exact missing obligation without scientific invocation."
+    write_scope: ["Assigned temporary PR draft only"]
+    excluded_commands: ["Scientific source construction or target invocation","Git or unrelated registry writes"]
+  - task: "Independent collision-producer source review (think-543z)"
+    operator: "Independent mathematical source reviewer, max thinking"
+    status: "completed"
+    recording: "contemporaneous"
+    outcome: "Independent producer-source GO at 11:22:21 UTC; actual review 11:20:24–11:22:21 UTC. No scientific factory was invoked."
+    evidence: ["packing/devtools/h124_collision_source.py"]
+    files: []
+    checks: ["41 source-free tests passed in 0.32 seconds wall and 0.31 CPU; Ruff, formatting and BasedPyright clean."]
+    uncertainty: "Actual scientific source agreement remains untested; this source-free verdict does not authorize a target."
+    elapsed_seconds: 117
+    elapsed_quality: "operator_reported_approximate"
+    next_action: "Root freezes and validates the source engine; any scientific invocation needs a separate prospective protocol."
+    phase: 6
+    budget_minutes: 7
+    started_at: "2026-09-07T11:20:15Z"
+    deadline_at: "2026-09-07T11:27:15Z"
+    expected_output: "Bounded review or record completion with actual timing and remaining uncertainty."
+    validation_command: "Static review of assigned records or source-free controls only."
+    kill_condition: "Original deadline or an unresolved premise; no cap extension."
+    fallback: "Retain partial evidence and the exact missing obligation without scientific invocation."
+    write_scope: ["Read-only source review"]
+    excluded_commands: ["Scientific source construction or target invocation","Git or unrelated registry writes"]
+  - task: "Delegation backfill and session prose (think-tif5)"
+    operator: "Codex checkpoint_handoff_audit, high thinking"
+    status: "completed"
+    recording: "contemporaneous"
+    outcome: "Delegation rows and body prose completed; observed work 11:20:51–11:24:03 UTC. Original dispatch and caps preserved; phase 6, session status and cost receipt unchanged."
+    evidence: ["packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md"]
+    files: ["packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md"]
+    checks: ["softschema repair --check: valid, no repairs or structural errors; git diff --check clean."]
+    uncertainty: "Root retains scientific admission, final-slice repricing and session close; no scientific invocation occurred."
+    elapsed_seconds: 192
+    elapsed_quality: "operator_reported_approximate"
+    next_action: "Root integrates the frozen session record, reconciles current phase outcomes and runs the checkpoint gates."
+    phase: 6
+    budget_minutes: 7
+    started_at: "2026-09-07T11:20:22Z"
+    deadline_at: "2026-09-07T11:27:22Z"
+    expected_output: "Bounded review or record completion with actual timing and remaining uncertainty."
+    validation_command: "Static review of assigned records or source-free controls only."
+    kill_condition: "Original deadline or an unresolved premise; no cap extension."
+    fallback: "Retain partial evidence and the exact missing obligation without scientific invocation."
+    write_scope: ["packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md"]
+    excluded_commands: ["Scientific source construction or target invocation","Git or unrelated registry writes"]
+  - task: "Read-only final-slice density repricing (think-44s0)"
+    operator: "Independent density reviewer, max thinking"
+    status: "completed"
+    recording: "contemporaneous"
+    outcome: "Selected the fixed H124 axis cover and the independently available BC259 seven-row support-ceiling review. A complete support ceiling is more informative than diagnosing only the current exp126 clique. Actual review11:22:07–11:26:15 UTC."
+    evidence: [packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md]
+    files: []
+    checks: []
+    uncertainty: "Actual collision coverage and independent support-ceiling adoption remain untested; fresh ownership and prospective admission are required."
+    elapsed_seconds: 248
+    elapsed_quality: "operator_reported_approximate"
+    next_action: "Prepare the existing two-hour framework with these separable obligations and their original bounded entry conditions."
+    phase: 6
+    budget_minutes: 6
+    started_at: "2026-09-07T11:21:40Z"
+    deadline_at: "2026-09-07T11:27:37Z"
+    expected_output: "Read-only evidence-based final-slice repricing after exp126's terminal graph obstruction."
+    validation_command: "Static retained-record review only; no source construction or target calls."
+    kill_condition: "Original 11:27:37 UTC cutoff, which is stricter than six minutes from the recorded start."
+    fallback: "Retain the unresolved bracket and exact missing premise without a scientific retry."
+    write_scope: ["Read-only review"]
+    excluded_commands: ["File or registry edits","Scientific source construction or target invocation","Git writes"]
   outputs:
+  - packing/devtools/h124_collision_source.py
+  - packing/devtools/check_h124_collision_source.py
   - packing/devtools/h124_cover_source.py
   - packing/devtools/check_h124_cover_source.py
   - packing/devtools/run_h124_cover.py
   - packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md
   checks:
+  - Collision producer and reader are frozen and independently reviewed. Producer review think-543z passed at11:22:21 after117 seconds; root reader review think-r7q1 passed by11:21:30. The caller passed independent review. Root reran49 source-free reader/caller tests in1.29 seconds; producer reviewer reran41 in0.32 seconds wall and0.31 CPU. Ruff and BasedPyright are clean. No collision-source factory was invoked.
+  - The frozen source delta passes the edit tier,44 of66 named steps in72.55 seconds. This is neither a full gate nor an immutable push result; those remain separate prerequisites.
+  - Exp126 completed its only producer at actual exit zero in4.49 seconds external wall. It reported unresolved/overweight_clique and did not authorize a reader. No geometric invalidity or H099 refutation is certified; the bracket remains [11,56/5].
+  - Hosted1acd6320 failed only the campaign record because a completed delegation still appeared in_progress after its cap. The corrected completion rows are retained here; no deadline was extended. A fresh push and hosted check remain required.
+  - Fresh11:24 UTC fetch leaves origin/main at dd36800e and external PR110 at0e1961e2. Its Session092 owns BC261/273 and successors throughBC278, but has no BC259/H099 assignment. BC279 is now the next BC pointer, not a reservation.
   - Fresh reviewed density allocation think-b9i7 passed allfive source controls after committed7fcc987b/ec38194a and31/31 records in18.85 seconds. Allten actual exits zero; combined18.65 seconds wall. Uniform control binds60 squares and1770 pairs, mass11. No candidate yet; old failed and uninvoked sequences remain unchanged.
   - Partial Session094 cost receipt covers09:49:00–10:52:22 UTC,3802 seconds wall and9897.624 recursive agent-seconds. It is a live lower bound with boundary limitations, not the full two-hour slice. Collector used28.69 seconds wall and24.93 CPU; no raw prompts or reasoning prose retained.
   - Engine7daa7c55 full gate passed all checks in1623.67 seconds; external1623.74 wall,3260.24 user,89.68 system. Published outcome1acd6320 passes45/45 push steps in148.44 seconds; external151.23 wall,202.37 user,23.32 system. Hosted7daa required checks were green at10:44; laterCI remains separate.
@@ -539,7 +830,7 @@ session:
   - Fresh09:47 UTC fetch leaves origin/main at dd36800e and external PR110 at4ac71438. Session094, H125 and exp125 are not occupied there; only Session094 is allocated now.
   - Session093 checkpoint23d74f69 and generated map6ff421e5 retain full23498e87 passed1631.92 seconds, delta bfc27c7a push passed130.89 seconds and terminal records passed31/31 in19.84 seconds.
   stop_reason: null
-  next_action: Inspect exp125 retained receipts; reprice the missing near-axis S obligation after the certified diagonal lemma. The density sequence remains uninvoked; no completed producer or reader may be repeated.
+  next_action: Continue think-7e72 through immutable collision-source validation and a separate prospective near-axis cover protocol; preserve the terminal density outcome and reprice the independently available seven-row support review for the next slice.
 ---
 # Complete Cover and Repaired Density Controls
 
@@ -563,10 +854,23 @@ independently certified the diagonal-band cover; the axis producer returned `no_
 and had no reader invocation.
 The axis-band obligation remains unresolved, preventing acceptance of H124 or restricted
 H036. The axis result supplies no independently verified gap or counterexample.
-Authors must not execute its scientific source while preparing source-free controls.
+The selected strengthening adds one fixed collision polygon. Its fixed-displacement
+and collision proofs have been independently accepted, and both source authors have
+frozen. The producer's independent source review is complete; root has also completed
+the reader review. All new collision-source factories remain uncalled. Source-free
+review does not establish actual source agreement or authorize a scientific target.
+
 The density lane’s degree-eight repair does not restart the stopped original control
-sequence. BC243’s existing soundness obligations remain binding; any new source attempt
-or candidate needs its own prospective declaration and acceptance evidence.
+sequence. All five controls in the fresh BC243 allocation passed. The separately
+admitted [exp126](../series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md)
+producer then returned `unresolved` with an `overweight_clique` stop. No independent
+reader ran and no retry is authorized. This graph-only obstruction is not geometric
+candidate invalidity or a refutation of H099; the bracket `[11, 56/5]` is unchanged.
+
+The next step is to freeze the reviewed collision-source engine and complete its
+immutable validation. Any new scientific target needs its own reviewed prospective
+protocol. Phase 6 and the session remain open for the 11:49 UTC checkpoint; final-slice
+repricing is read-only and does not authorize another source or target invocation.
 
 Root owns shared records, sequential IDs, scientific admission, Git and PR109.
 Mathematical authors and reviewers use max thinking; suitable mechanical work may use

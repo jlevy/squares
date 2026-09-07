@@ -62,6 +62,13 @@ positive-area perturbed-source rejection, and genuine graph nonacceptance on tha
 perturbation. Ten independently checked producer/reader calls used18.65 seconds wall.
 This admits a separate prospective candidate experiment, not acceptance of H099.
 
+The subsequent
+[exp126](../series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md)
+ran its sole producer in 4.49 seconds and reported an overweight graph clique of weight
+6/5. No independent reader was authorized. This is a failure of the sufficient graph
+bound, not a geometric overlap witness or a refutation of H099. The bracket [11,56/5]
+remains unchanged; no automatic higher-order build or candidate retry is funded.
+
 [Exp-113](../series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md)
 tested the prospectively frozen support and returned a separately replayed finite-row
 ceiling of $56/5$. Together with the feasible mass-eleven average, it gives the bracket
