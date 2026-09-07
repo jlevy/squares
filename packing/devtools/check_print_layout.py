@@ -90,6 +90,10 @@ class Probe(TypedDict):
     footnotes: list[Footnote]
     boxed: list[Boxed]
     overflow: list[Overflow]
+    #: How far the document's layout reaches past the page, and the run that reaches
+    #: farthest. Not clipped: Chromium scales the whole document to fit it.
+    pageOverflow: float
+    widest: Overflow | None
     measure: float
     viewport: float
 
@@ -128,6 +132,7 @@ PRINT_VIEWPORT: ViewportSize = {"width": 816 - 2 * 120, "height": 1056 - 2 * 120
 _PROBE = r"""() => {
   const out = {
     centred: [], markers: [], footnotes: [], boxed: [], overflow: [],
+    pageOverflow: 0, widest: null,
     /* Named so a viewport that did not take is visible in the output rather than
        silently making every horizontal answer wrong. */
     measure: document.querySelector('.kpress')?.getBoundingClientRect().width ?? 0,
@@ -251,10 +256,9 @@ _PROBE = r"""() => {
     });
   }
 
-  /* Overflow. The measure is set by the `@page` margin, so anything reaching past the
-     body's content box will be clipped at the paper's edge rather than wrapped. Figures
-     are allowed their own scroll on screen and are excluded by the same class the
-     stylesheet uses to let them. */
+  /* Overflow. The measure is set by the `@page` margin, so a block reaching past the
+     body's content box is wrapped wrongly or cut. Figures are allowed their own scroll
+     on screen and are excluded by the same class the stylesheet uses to let them. */
   const page = document.querySelector('.kpress');
   if (page) {
     const room = page.getBoundingClientRect();
@@ -268,9 +272,78 @@ _PROBE = r"""() => {
     }
   }
 
+  /* The whole page. An unclipped run past the page box is not cut at the paper's edge:
+     Chromium scales the entire document down until it fits, and every size on every
+     page shrinks with it, silently. One display equation 42px too wide printed a 12pt
+     document at 11.2pt and nothing here saw it, because the blocks above are column
+     boxes and the run that overflowed was inline content inside one. The document's own
+     scroll width is what Chromium fits, so that is what is measured, with the widest
+     unclipped run named so the finding says what to shrink. */
+  const root = document.documentElement;
+  out.pageOverflow = round(root.scrollWidth - root.clientWidth);
+  if (out.pageOverflow > 1) out.widest = widestRun(root);
+
   return out;
 
   function round(v) { return Math.round((v || 0) * 100) / 100; }
+
+  /* The run that reaches farthest past the page, among the runs that can put it there.
+     Among: a box whose ink an ancestor clips away has nothing past that ancestor's edge
+     and cannot widen the document, so naming it sends the author to shrink something
+     that was never the cause.
+
+     KaTeX writes a full MathML transcription of every formula into a `.katex-mathml`
+     span that is 1px square with `overflow: hidden` and `clip: rect(1px, 1px, 1px,
+     1px)`, and the boxes inside it keep their natural width. On this page, printed at
+     576px, the tau* equation's `mrow` reports a 236.77px overhang while the document's
+     own scroll width equals the page's: nothing overflows, and the first form of this
+     scan named that mrow anyway, the moment anything else made the page overflow.
+
+     So cut each candidate's right edge back to what its clipping ancestors leave
+     visible. General rather than a class name, because the same thing is true of a
+     figure given its own scroll -- it does not widen the page either, and if it did the
+     scrolling box would be the culprit, not its contents. SVG internals stay excluded
+     outright: their user units are not the page's pixels. */
+  function widestRun(root) {
+    let widest = null;
+    for (const el of document.querySelectorAll('.kpress *')) {
+      if (el.closest('svg')) continue;
+      const box = el.getBoundingClientRect();
+      /* Ink never reaches past the box, so the ancestor walk is only worth its cost
+         where the box itself is past the edge. */
+      if (!box.width || box.right - root.clientWidth <= 1) continue;
+      const over = round(inkRight(el) - root.clientWidth);
+      if (over > 1 && (!widest || over > widest.over)) {
+        widest = {path: sig(el), over, text: el.textContent.trim().slice(0, 60)};
+      }
+    }
+    return widest;
+  }
+
+  /* How far right an element's ink actually reaches: its own right edge, cut back by
+     every ancestor that clips it. The clip is taken as the ancestor's border box, which
+     is exact for the `overflow` cases and an over-estimate for `clip` and `clip-path` --
+     the wrong way for a false name to survive, and the KaTeX wrapper's rect clip is its
+     border box to within a pixel anyway.
+
+     Out-of-flow boxes are not cut by boxes they are not laid out inside: an absolutely
+     positioned one escapes until its containing block, a fixed one escapes the lot.
+     `.katex-mathml` is itself absolute inside a relative `.katex`, so getting this wrong
+     in the other direction would exclude everything under a positioned ancestor. */
+  function inkRight(el) {
+    let right = el.getBoundingClientRect().right;
+    let position = getComputedStyle(el).position;
+    for (let node = el.parentElement; node; node = node.parentElement) {
+      const style = getComputedStyle(node);
+      const containing = style.position !== 'static';
+      if (position === 'fixed' || (position === 'absolute' && !containing)) continue;
+      if (style.overflowX !== 'visible' || style.clip !== 'auto' || style.clipPath !== 'none') {
+        right = Math.min(right, node.getBoundingClientRect().right);
+      }
+      position = style.position;
+    }
+    return right;
+  }
 
   /* A name for an element that is stable across the two passes and readable in a
      failure: the tag, its classes, and its index among its siblings. */
@@ -293,9 +366,11 @@ _PROBE = r"""() => {
      against an inline box that is not the line box is comparing two different things,
      and the difference was 3px.
 
-     The mass-condition bullets have inline tops at -1, 0, 2 and 3px. A one-pixel band
-     kept only the highest math run and falsely reported a 2.2px marker offset. Group
-     runs starting in the topmost rect's upper half; the next line starts below it.
+     The mass-condition bullets have inline tops at -1, 0, 2 and 3px, because each
+     run's box is its own font's ascent above the shared baseline: PT Serif's is 1.04em
+     and KaTeX_Main's 0.90em. A one-pixel band kept only the highest math run and
+     falsely reported a 2.2px marker offset. Group runs starting in the topmost rect's
+     upper half; the next line starts a full line height below it.
 
      A zero-line-height footnote is raised without enlarging that line, but its ink
      still appears in Range rects. Remove its owned rectangles before grouping, not
@@ -342,9 +417,41 @@ _SETTLED = """() => new Promise(
   (done) => requestAnimationFrame(() => requestAnimationFrame(done)),
 )"""
 
+#: What `--self-check` puts in front of the gate, and what it holds the gate to naming.
+#: 42px is the overflow the display equation shipped with, and the number the reviewer
+#: reproduced this defect at: in a 576px print column it is a 618px block, and Chromium
+#: would print the whole document at 93.2%.
+SELF_CHECK_PX = 42.0
+SELF_CHECK_CLASS = "print-layout-self-check"
 
-def measure(page_url: str) -> Measured:
-    """The probe's answer under each medium, from one browser and one load."""
+#: A block the print column cannot contain, appended to the page. Given its margins and
+#: its width outright, because the column centres its blocks and caps their measure: a
+#: block merely handed a width comes back centred at half the overhang, which is how the
+#: first draft of this control quietly measured nothing.
+_OVERSHOOT = r"""(spec) => {
+  const root = document.documentElement;
+  const page = document.querySelector('.kpress');
+  if (!page) throw new Error('no .kpress column to overflow');
+  const el = document.createElement('div');
+  el.className = spec.name;
+  el.textContent = 'print layout self-check';
+  el.style.setProperty('margin', '0', 'important');
+  el.style.setProperty('max-width', 'none', 'important');
+  page.appendChild(el);
+  /* Measured after insertion rather than assumed: the width that overhangs the page by
+     `over` is the one that reaches `over` past it from wherever the column starts. */
+  const start = el.getBoundingClientRect().left;
+  el.style.setProperty('width', `${root.clientWidth + spec.over - start}px`, 'important');
+}"""
+
+
+def measure(page_url: str, *, inject: str | None = None, spec: object = None) -> Measured:
+    """The probe's answer under each medium, from one browser and one load.
+
+    `inject` runs in the print pass, after the media switch and the viewport change and
+    before the probe, which is the only place a deliberate print-layout defect can be put
+    where the print measurement will see it. Nothing but `--self-check` passes one.
+    """
     import os  # noqa: PLC0415
 
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
@@ -361,6 +468,8 @@ def measure(page_url: str) -> Measured:
             page.emulate_media(media="print", reduced_motion="reduce")
             page.set_viewport_size(PRINT_VIEWPORT)
             page.evaluate("document.fonts.ready")
+            if inject is not None:
+                page.evaluate(inject, spec)
             page.evaluate(_SETTLED)
             printed: Probe = page.evaluate(_PROBE)
             return {"screen": screen, "print": printed}
@@ -410,6 +519,18 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
             for row in probe["overflow"]
         )
 
+    # The page as a whole, in print only: on screen a wide run scrolls, on paper it
+    # shrinks the document. Reported with the scale Chromium would apply, which is the
+    # number a reader of the PDF would otherwise have to infer from the type size.
+    if printed["pageOverflow"] > TOLERANCE_PX:
+        scale = printed["viewport"] / (printed["viewport"] + printed["pageOverflow"])
+        widest = printed["widest"]
+        where = f"; the widest run is {widest['path']} ({widest['text']!r})" if widest else ""
+        found.append(
+            f"print: the document is {printed['pageOverflow']:.0f}px wider than the page, "
+            f"so Chromium prints every page scaled to {scale:.1%}{where}"
+        )
+
     if not every:
         return found
 
@@ -434,6 +555,70 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
     return found
 
 
+def self_check(page_url: str) -> int:
+    """Put a known overflow in front of the gate, and hold the gate to naming it.
+
+    A check that has only ever passed cannot tell itself apart from one that cannot fail,
+    and this one has a second way to be useless: it can fail loudly at the right size and
+    still name the wrong element, which sends the author to shrink a formula that is not
+    the cause. That is what it shipped doing. So the control checks all three of what the
+    finding says -- the overflow, the scale, and the culprit -- against an overflow this
+    puts there itself.
+
+    A browser is the only place this can be established: what makes the reported culprit
+    wrong is real layout, a MathML subtree at its natural width inside a 1px clipping
+    wrapper, and no retained measurement can be trusted to still be what the page does.
+    The unit tests beside this run the scan over rectangles retained from here.
+    """
+    measured = measure(
+        page_url,
+        inject=_OVERSHOOT,
+        spec={"over": SELF_CHECK_PX, "name": SELF_CHECK_CLASS},
+    )
+    printed = measured["print"]
+    column = printed["viewport"]
+    print(
+        f"self-check: a {column + SELF_CHECK_PX:.0f}px block in a {column:.0f}px print column, "
+        f"expected to overflow the page by {SELF_CHECK_PX:.0f}px"
+    )
+    found = findings(measured)
+    for line in found:
+        print(f"self-check: {line}")
+
+    widest = printed["widest"]
+    scale = f"{column / (column + SELF_CHECK_PX):.1%}"
+    wrong: list[str] = []
+    if abs(printed["pageOverflow"] - SELF_CHECK_PX) > TOLERANCE_PX:
+        wrong.append(
+            f"the page overflows by {printed['pageOverflow']:.2f}px, not {SELF_CHECK_PX:.0f}px"
+        )
+    if not any(line.startswith("print: the document is") for line in found):
+        wrong.append("the gate did not report the document as wider than the page")
+    if not any(f"scaled to {scale}" in line for line in found):
+        wrong.append(f"the gate did not report the print scale as {scale}")
+    if widest is None:
+        wrong.append("the gate named no culprit at all")
+    elif SELF_CHECK_CLASS not in widest["path"]:
+        wrong.append(
+            f"the gate named {widest['path']} ({widest['over']:.2f}px over) rather than the "
+            f"block it was handed; a clipped subtree cannot widen the page"
+        )
+    elif abs(widest["over"] - SELF_CHECK_PX) > TOLERANCE_PX:
+        wrong.append(
+            f"the named culprit overhangs by {widest['over']:.2f}px, not {SELF_CHECK_PX}"
+        )
+
+    for line in wrong:
+        print(f"self-check failed: {line}")
+    if wrong:
+        return 1
+    print(
+        f"self-check passed: the gate fails on a {SELF_CHECK_PX:.0f}px overflow, reports the "
+        f"{scale} scale, and names the block that caused it"
+    )
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--page", type=Path, default=PAGE, help="the rendered page to measure")
@@ -443,10 +628,18 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="also report every block centred on screen and not in print",
     )
+    parser.add_argument(
+        "--self-check",
+        action="store_true",
+        help="overflow the print column on purpose, and check the gate fails and names it",
+    )
     args = parser.parse_args(argv)
 
     if not args.page.is_file():
         raise SystemExit(f"{args.page}: no rendered page; run `render_explainer` first")
+
+    if args.self_check:
+        return self_check(args.page.resolve().as_uri())
 
     measured = measure(args.page.resolve().as_uri())
     if args.json:

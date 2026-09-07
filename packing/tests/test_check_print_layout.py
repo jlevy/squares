@@ -8,8 +8,11 @@ its job, which is the failure mode a check that has only ever passed cannot dist
 itself from.
 
 So each check is exercised here against a measurement built to trip it, and against one
-built not to. The first-line probe also runs in Node against retained browser rectangle
-measurements, so its grouping is tested without requiring a browser installation.
+built not to. The first-line probe and the overflow culprit scan also run in Node against
+retained browser rectangle measurements, so the grouping in the one and the exclusions in
+the other are tested without requiring a browser installation. Only the browser can
+establish that the retained rectangles are still what the page lays out, and
+`check_print_layout --self-check` is where that is asked.
 """
 
 from __future__ import annotations
@@ -76,6 +79,8 @@ def probe(**over: object) -> Probe:
         "footnotes": [],
         "boxed": [],
         "overflow": [],
+        "pageOverflow": 0,
+        "widest": None,
         "measure": 576.0,
         "viewport": 576.0,
     }
@@ -123,18 +128,30 @@ def test_a_marker_within_tolerance_is_not(off: float) -> None:
     assert not findings(both(markers=[marker(markerCentre=100.0 + off)]))
 
 
-def first_line_box(setup: str) -> dict[str, float]:
-    """Run the shipped probe against retained Range geometry, without browser setup."""
-    function = re.search(r"  function firstLineBox\(el\) \{.*?\n  \}", _PROBE, re.DOTALL)
-    assert function is not None
-    script = (
-        dedent(setup) + function.group() + "\nconsole.log(JSON.stringify(firstLineBox(el)));\n"
-    )
+def probe_function(name: str) -> str:
+    """One helper's shipped source, so what runs here is what runs in the browser."""
+    source = re.search(rf"  function {name}\([^)]*\) \{{.*?\n  \}}", _PROBE, re.DOTALL)
+    assert source is not None, f"{name} is no longer a helper of its own in the probe"
+    return source.group() + "\n"
+
+
+def run_node(script: str) -> str | bytes:
+    """What the script printed, or its stderr as the failure."""
     completed = node(
         ["-"], return_completed_process=True, input=script, capture_output=True, text=True
     )
     assert completed.returncode == 0, completed.stderr
-    return json.loads(completed.stdout)
+    return completed.stdout
+
+
+def first_line_box(setup: str) -> dict[str, float]:
+    """Run the shipped probe against retained Range geometry, without browser setup."""
+    script = (
+        dedent(setup)
+        + probe_function("firstLineBox")
+        + "\nconsole.log(JSON.stringify(firstLineBox(el)));\n"
+    )
+    return json.loads(run_node(script))
 
 
 def test_mixed_inline_boxes_share_one_line_and_real_marker_offsets_still_fail() -> None:
@@ -261,3 +278,142 @@ def test_a_label_off_the_centre_of_its_own_box_is_a_finding(off: float) -> None:
 @pytest.mark.parametrize("off", [0.0, 0.02, -0.5])
 def test_a_label_within_tolerance_is_not(off: float) -> None:
     assert not findings(both(boxed=[boxed(offset=off)]))
+
+
+def test_a_document_wider_than_the_page_is_reported_with_the_scale_chromium_applies() -> None:
+    """An unclipped run past the page box shrinks every page, silently, in the PDF."""
+    measured = both()
+    measured["print"]["pageOverflow"] = 42
+    measured["print"]["viewport"] = 576
+    measured["print"]["widest"] = {
+        "path": "span.base[3]",
+        "over": 42,
+        "text": "1 for every placement Q,",
+    }
+    found = findings(measured)
+    assert len(found) == 1
+    assert "42px wider than the page" in found[0]
+    assert "scaled to 93.2%" in found[0]
+    assert "span.base[3]" in found[0]
+
+
+def test_screen_overflow_alone_is_not_a_page_finding() -> None:
+    """On screen a wide run scrolls; only the print pass decides the paper."""
+    measured = both()
+    measured["screen"]["pageOverflow"] = 200
+    assert findings(measured) == []
+
+
+#: Enough of a DOM for the culprit scan to walk: a rectangle, a parent, and the computed
+#: properties `inkRight` reads. `sig` and `round` are stubbed rather than taken from the
+#: probe, the shipped `sig` wanting a real `classList` and `children`; the scan itself is
+#: the shipped one. Geometry goes in as rectangles retained from the browser.
+_DOM = """
+const plain = {position: 'static', overflowX: 'visible', clip: 'auto', clipPath: 'none'};
+const el = (name, left, right, style) => ({
+  name, textContent: name, closest: () => null, parentElement: null,
+  style: {...plain, ...style},
+  getBoundingClientRect: () => ({left, right, width: right - left}),
+});
+const stack = (...nodes) => {
+  for (let i = 0; i < nodes.length - 1; i++) nodes[i].parentElement = nodes[i + 1];
+  return nodes[0];
+};
+const root = {clientWidth: 576};
+const getComputedStyle = (node) => node.style;
+const sig = (node) => node.name;
+const round = (v) => Math.round((v || 0) * 100) / 100;
+"""
+
+
+def widest_run(setup: str) -> dict[str, object] | None:
+    """Run the shipped culprit scan over retained geometry, without browser setup."""
+    script = (
+        _DOM
+        + dedent(setup)
+        + probe_function("widestRun")
+        + probe_function("inkRight")
+        + "\nconsole.log(JSON.stringify(widestRun(root) ?? null));\n"
+    )
+    return json.loads(run_node(script))
+
+
+#: The tau* equation's MathML chain and `--self-check`'s injected block, as the rendered
+#: explainer lays them out under `emulateMedia('print')` in a 576px column. KaTeX puts a
+#: MathML transcription of every formula in a `.katex-mathml` span that is 1px wide with
+#: `overflow: hidden`, and the boxes inside it keep their natural width: the `mrow` ends
+#: at 812.77px, 236.77px past a page that its ink never reaches.
+_CLIPPED_MATHML = """
+const html = el('html.math-ready', 0, 576);
+const body = el('body.kpress-frame', 0, 576);
+const main = el('main.kpress-viewport', 0, 576, {position: 'relative'});
+const column = el('div.kpress', 0, 576);
+const render = el('div.kpress-math-render', 0, 576);
+const display = el('span.katex-display', 0, 576);
+const katex = el('span.katex', 0, 576, {position: 'relative'});
+const mathml = el('span.katex-mathml', 288, 289,
+  {position: 'absolute', overflowX: 'hidden', clip: 'rect(1px, 1px, 1px, 1px)'});
+const math = el('math', 288, 289);
+const semantics = el('semantics', 288, 289);
+const mrow = el('mrow', 288, 812.765625);
+const injected = el('div.print-layout-self-check', 0, 618);
+stack(mrow, semantics, math, mathml, katex, display, render, column, main, body, html);
+stack(injected, column);
+const document = {querySelectorAll: () => [mrow, semantics, math, mathml, injected]};
+"""
+
+
+def test_the_named_culprit_is_the_block_that_widens_the_page_not_a_clipped_one() -> None:
+    """S114-R2: the scan named clipped MathML, pointing the author at the wrong formula.
+
+    The gate had the overflow and the scale right and the culprit wrong, which is the
+    worse half to get wrong: a reader acts on the name. Measured on the rendered page,
+    the tau* equation's `mrow` overhangs by 236.77px while the document's scroll width
+    equals the page's -- it is 1px of ink inside `.katex-mathml` and cannot widen
+    anything -- and it outbid a genuinely overflowing block by nearly six to one.
+    """
+    widest = widest_run(_CLIPPED_MATHML)
+    assert widest is not None
+    assert widest["path"] == "div.print-layout-self-check"
+    assert widest["over"] == 42
+
+
+def test_the_culprit_scan_excludes_by_what_clips_and_not_by_what_the_element_is() -> None:
+    """The same MathML, with the wrapper's clipping removed, is named again.
+
+    Which pins the criterion rather than the outcome: nothing here knows about KaTeX,
+    and a figure given its own scroll is excluded by the same rule that excludes this.
+    """
+    unclipped = _CLIPPED_MATHML.replace("overflowX: 'hidden',", "").replace(
+        "clip: 'rect(1px, 1px, 1px, 1px)'", "clip: 'auto'"
+    )
+    widest = widest_run(unclipped)
+    assert widest is not None
+    assert widest["path"] == "mrow"
+    assert widest["over"] == 236.77
+
+
+#: Synthesized rather than retained: this page has no such box. An absolutely positioned
+#: element is laid out in its containing block, so a clipping ancestor below that block
+#: does not cut it, and it really does widen the document.
+_ESCAPING = """
+const html = el('html', 0, 576);
+const body = el('body', 0, 576);
+const clipper = el('div.clipper', 0, 576, {overflowX: 'hidden'});
+const escapee = el('div.escapee', 0, 618, {position: 'absolute'});
+stack(escapee, clipper, body, html);
+const document = {querySelectorAll: () => [escapee]};
+"""
+
+
+def test_a_box_that_escapes_the_clipping_ancestor_is_still_named() -> None:
+    """Only ancestors that are laid out around a box get to cut it back."""
+    widest = widest_run(_ESCAPING)
+    assert widest is not None
+    assert widest["path"] == "div.escapee"
+    assert widest["over"] == 42
+    # The same clipper, positioned, is the escapee's containing block and does clip it.
+    containing = _ESCAPING.replace(
+        "{overflowX: 'hidden'}", "{overflowX: 'hidden', position: 'relative'}"
+    )
+    assert widest_run(containing) is None
