@@ -920,6 +920,28 @@ body {
     font-family: var(--kpress-font-sans);
     font-feature-settings: var(--kpress-font-features-sans);
   }
+
+  /* The footnote references in the body, in the sans they wear on screen. kpress prints
+     them in the prose face as small-cap figures at 400 -- a quiet treatment for prose
+     that cites rarely. This paper cites in most paragraphs, and each reference is a
+     signpost to the sources block, which is sans throughout; the prose-face figure sat
+     a little too close to the digits of the text around it. The weight is the screen's
+     600, read against 11pt PT Serif: enough to be seen at superscript size, not enough
+     to read as bold. No chip in print; kpress's print rule already removes it.
+
+     kpress prints every superscript at 110% of the text, a compensation for the
+     small-cap figure it sets the reference in, which is short. A sans figure at that
+     size and weight stood taller than the capitals beside it; a superscript's own
+     size, 0.75em, puts it back where a reference mark belongs. */
+  .cert-page sup.kpress-footnote-ref {
+    font-size: 0.75em;
+  }
+  .cert-page .kpress-footnote-ref a {
+    font-family: var(--kpress-font-sans);
+    font-feature-settings: var(--kpress-font-features-sans);
+    font-variant-caps: normal;
+    font-weight: 600;
+  }
 }
 
 </style>
