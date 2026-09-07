@@ -166,7 +166,7 @@ This is the actionable list.
 | D-474 | Feasible covering masses were subtracted to infer a lower slope and a stopping side | record |
 | D-475 | The README presented a fixed-net numerical ceiling without its net restriction | docs |
 | D-478 | The BC-206 cutting floor has no retained family for independent replay | record |
-| D-479 | The six-square case summary described a nonexistent pure five-dot proof | docs |
+| D-479 | Case summaries replaced cited geometric helper proofs with generic pure dots counting | docs |
 
 ## Still open
 
@@ -723,7 +723,7 @@ This is the actionable list.
 | [D-476](docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md) | 2026-09-06 | verifier | soundness | flattering | `review` | high | fixed | Cutting separation could retain an invalid scaled bound before final verification |
 | [D-477](docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md) | 2026-09-06 | verifier | soundness | flattering | `review` | high | fixed | Cutting separation merged distinct exact vertices with identical float coordinates |
 | [D-478](docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md) | 2026-09-06 | record | validity | flattering | `review` | medium | contained | The BC-206 cutting floor has no retained family for independent replay |
-| [D-479](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | 2026-09-07 | docs | soundness | flattering | `review` | medium | fixed | The six-square case summary described a nonexistent pure five-dot proof |
+| [D-479](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | 2026-09-07 | docs | soundness | flattering | `review` | medium | fixed | Case summaries replaced cited geometric helper proofs with generic pure dots counting |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

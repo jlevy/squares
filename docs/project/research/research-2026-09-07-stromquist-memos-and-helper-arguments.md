@@ -1,7 +1,8 @@
 # Stromquist’s 1984 Memos and Systematic Dots Proofs
 
 **Status:** source review, independently reviewed derivations, and finite controls
-complete; integration validation in progress.\
+complete. All 66 full-checkpoint steps passed at `dd92b2a0`; final source and record
+deltas receive pre-push validation.\
 **Owner:** `think-7u4s`.\
 **Entry:** W1 source survey, W2 factual review, W3 mathematical synthesis, then W7
 commissioning of a finite incidence control.
@@ -55,7 +56,7 @@ aside, Memo II contains the argument itself.
 | Small-case history | Memo III, p. 6, describes `n=14,15,24` as elementary and credits Bajmóczy for `n=7`; pp. 2–5 present then-new `n=18,26` constructions | Preserve these as historical claims and constructions. They do not replace the current frontier or certify an omitted proof. |
 | Source formula slips | Memo I, p. 8, reverses a monotonicity word; Memo II, p. 8, typesets a sum where its preceding equation and figure use a product | Add page-local reading notes. Preserve original PDFs and raw OCR. |
 | The 2003 proof defects | None of the three memos supplies the repaired unrestricted Figure 14 coordinates. Memo II’s numerical table uses a different parameter from the later erroneous row | Keep the project’s one-coordinate repair source-distinct; do not substitute a different table row as its correction. |
-| Our six-square case description | Kearney–Shiu §3 uses two seven-point lattices and geometric cases; our case summary described generic five-dot counting | Correct the case summary and retain the established bound. D-479 records the error. |
+| Our case-proof descriptions | Several case summaries substituted generic pure dots counting for the cited geometric arguments | Correct the descriptions for `n=6,7,8,14,15`, preserve each established bound and its verification status, and reconnect three cases to the already archived El Moumni source. D-479 records the shared error. |
 
 All 47 scanned pages were visually inspected.
 The [archive index](../../../packing/resources/README.md) links the expanded reading
@@ -64,6 +65,21 @@ aids; the
 ranks the possible hints.
 The historical corrections change attribution and exposition, not the numerical bounds
 or verification classifications.
+
+The case-description audit supplies further examples of the helper mechanism.
+Kearney–Shiu §3 uses two seven-point unavoidable lattices and geometric cases for six
+squares. El Moumni’s intended seven-square proof, printed pp.
+282–288, starts with four marks, localizes escaping squares, and uses segment lengths;
+its known printed defects D-344 through D-347 remain, and the case retains independent
+Nagamochi evidence. For eight and fifteen squares, El Moumni’s Proposition 3 and §3, pp.
+288–289, use parallel-segment intersection lengths.
+Friedman gives separate pure point-cover proofs in DS7, Theorems 3 and 4. His
+fourteen-square proof, Theorem 8 and Figures 31–33, uses twelve almost-unavoidable
+points, five geometric cases and conditional covers.
+The twenty-four-square description is supported by his explicit twenty-three-point cover
+in Theorem 5 and Figure 27. The corrected
+[case records](../../../packing/frontier/README.md) identify these routes without
+treating a source-method correction as a new proof.
 
 Two construction comparisons need particular care.
 Memo III, pp. 2–5, labels the eighteen-square construction `(7 + sqrt(7))/2` new; the

@@ -15694,7 +15694,7 @@ defects:
   bead: think-aenh
   recorded_in: docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md
 - id: D-479
-  title: The six-square case summary described a nonexistent pure five-dot proof
+  title: Case summaries replaced cited geometric helper proofs with generic pure dots counting
   date: '2026-09-07'
   layer: docs
   class: soundness
@@ -15704,19 +15704,23 @@ defects:
   severity: medium
   status: fixed
   what: >-
-    The n006 case described its lower-bound proof with the generic n-minus-one-point
-    pigeonhole paragraph. Kearney and Shiu actually use two seven-point unavoidable
-    lattices and geometric case analysis, while Stromquist's earlier proof also needs
-    geometric helpers. The review derives an explicit neighborhood below side three
-    in which no five-point unavoidable set exists.
+    The n006, n007, n008, n014 and n015 case summaries used the same generic
+    n-minus-one-point pigeonhole paragraph in place of the cited proof mechanisms.
+    Kearney and Shiu use two seven-point lattices and geometric cases for n006.
+    El Moumni's cited routes use localization and segment lengths; Friedman uses
+    almost-unavoidable points and conditional covers for n014. Separate pure-cover
+    proofs do exist for n008 and n015. The review also derives a neighborhood below
+    side three in which no five-point unavoidable set exists.
   consequence: >-
-    The summary overstated the power of pure unweighted dots proofs and concealed
-    exactly the geometric dependency Stromquist's email recommends systematizing.
-    The established value s(6)=3 and its published-proof evidence are unaffected.
+    The shared template misstated the cited methods and concealed geometric
+    dependencies that Stromquist's email recommends systematizing. The established
+    values and verified evidence are unaffected, including the independent route
+    retained where El Moumni's printed seven-square proof has D-344 through D-347.
   fix: >-
-    Replace the generic paragraph with the source's two-lattice and geometric-case
-    mechanism, credit the complete 1984 Memo I proof, and link the independently
-    reviewed obstruction and source-premised incidence control.
+    Replace the generic paragraphs and qualify the method metadata with the
+    source-specific arguments. Credit Memo I's complete 1984 six-square proof and
+    link the independently reviewed obstruction and source-premised incidence control.
+    Reconnect n007, n008 and n015 to the already archived El Moumni source.
   regression: none
   bead: think-7u4s
   recorded_in: docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md

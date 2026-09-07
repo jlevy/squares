@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 94
+count: 95
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 50
+  sessions_measured: 51
   sessions_unmeasured: 44
   attributed:
     rollups: 115
@@ -35,9 +35,9 @@ totals:
     one_off_code: 3267
     wall_hours: 195.94
 codex_receipts:
-  attributed: 23
+  attributed: 24
   unattributed: 0
-  measured: 23
+  measured: 24
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1500,4 +1500,24 @@ sessions:
     agent_hours: 4.08
     active_union_hours: 1.69
     wall_hours: 1.69
+    snapshot_incomplete: true
+- id: session-096
+  title: "Stromquist memos and systematic dots proofs"
+  status: completed
+  primary_bead: think-7u4s
+  phases: 4
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-096.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-096.yaml
+    model_responses: 520
+    agent_hours: 3.79
+    active_union_hours: 1.4
+    wall_hours: 1.4
     snapshot_incomplete: true

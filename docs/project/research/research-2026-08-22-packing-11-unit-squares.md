@@ -945,13 +945,13 @@ Use the structured form to query or plot; use these tables to read.
 | 4 | `2` | perfect square | classical | proved |
 | 5 | `2 + (1/2)√2` | unavoidable points | Frits Göbel (1979) | proved |
 | 6 | `3` | unavoidable points | Michael Kearney, Peter Shiu (2002) | proved |
-| 7 | `3` | unavoidable points | Said El Moumni (1999) | proved |
-| 8 | `3` | unavoidable points | Said El Moumni (1999) | proved |
+| 7 | `3` | elementary | Said El Moumni (1999) | proved |
+| 8 | `3` | elementary | Said El Moumni (1999) | proved |
 | 9 | `3` | perfect square | classical | proved |
 | 10 | `3 + (1/2)√2` | unavoidable points | Walter Stromquist (2003) | proved |
 | 13 | `4` | unavoidable points | Wolfram Bentz (2010) | proved |
 | 14 | `4` | unavoidable points | Erich Friedman (2009) | proved |
-| 15 | `4` | unavoidable points | Said El Moumni (1999) | proved |
+| 15 | `4` | elementary | Said El Moumni (1999) | proved |
 | 16 | `4` | perfect square | classical | proved |
 | 22 | `5` | unavoidable points | Wolfram Bentz (2016) | proved |
 | 23 | `5` | Nagamochi | Hiroshi Nagamochi (2005) | proved |

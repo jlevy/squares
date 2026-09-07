@@ -628,6 +628,15 @@ exact-angle auxiliary result, and the next complete-method assessments.
 
 **Selected next entry:** `think-mq0d` takes BC-264’s bounded H114 feature and
 kernel-contract pricing.
+
+[Session096](packing/campaign/agent-sessions/session-096-stromquist-memos-and-helpers.md)
+reviewed Stromquist’s three memos, corrected the paper’s chronology and five case-proof
+descriptions, and independently checked a five-dot obstruction and the local segment
+helper. Its
+[source brief](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md)
+retains the remaining geometric replay under `think-0krc`; the selected target-research
+entry remains BC-264. All 66 full-checkpoint steps passed at `dd92b2a0`.
+
 The
 [Session094 handoff](packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md)
 was updated after the first result in
@@ -3146,12 +3155,13 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-093.yaml` | session-093 | 673 | 6.07 h | 1.99 h | 1.99 h | yes |
 | `codex-task-tree-session-094.yaml` | session-094 | 562 | 4.53 h | 1.82 h | 1.82 h | yes |
 | `codex-task-tree-session-095.yaml` | session-095 | 476 | 4.08 h | 1.69 h | 1.69 h | yes |
+| `codex-task-tree-session-096.yaml` | session-096 | 520 | 3.79 h | 1.4 h | 1.4 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 50 |
+| measured | 51 |
 | unmeasured | 44 |
-| **total** | **94** |
+| **total** | **95** |
 
 <!-- END GENERATED: session-close-report -->
 

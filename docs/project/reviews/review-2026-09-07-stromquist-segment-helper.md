@@ -192,9 +192,9 @@ not assume they are parallel or share a tilt.
 
 Convexity anchors both Q_A traces at A. If Q_A and Q_B were disjoint, the two Q_A
 lengths could not exceed the corresponding A-connected free lengths left by Q_B. The
-> 1/2 demand and <1/2 capacity contradict this.
-> This gives a complete independent local derivation of the source’s adjacent-singleton
-> exclusion.
+demand exceeds 1/2, whereas the available length is less than 1/2. This contradiction
+gives a complete independent local derivation of the source’s adjacent-singleton
+exclusion.
 
 A reusable verifier must establish four things:
 
