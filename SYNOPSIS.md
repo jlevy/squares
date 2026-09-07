@@ -137,10 +137,10 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives ten confirmed hypotheses, eleven refuted
-hypotheses, one open hypothesis, twenty open questions, and thirty-eight blocked
-hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
-unresolved. No hypothesis waits on review and six are unresolved.
+The generated ledger currently derives twelve confirmed hypotheses, eleven refuted
+hypotheses, one open hypothesis, twenty open questions, and forty blocked hypotheses.
+H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains unresolved.
+No hypothesis is running or waiting on review and six are unresolved.
 H-105 is refuted: all 134 eligible candidate pairs are separated, leaving higher-order
 overlap depth and H-099 unresolved.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
@@ -600,15 +600,21 @@ completed in the fresh allocation below.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
 `think-9qrx`, owns the user-approved four-active-hour block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
-dual mass of about10.080180 at depth one, below the obstruction threshold.
+dual mass of about 10.080180 at depth one, below the obstruction threshold.
 No bridge or unchanged retry is selected.
 BC-243 has complete facet/slab controls and an accepted original source, but its uniform
-control timed out even with a local arithmetic cache.
-A separately reviewed sign-incidence algorithm is now undergoing source controls; no
-density target is open.
+control timed out on all three separately reviewed algorithms, including reciprocal
+caching and sign-incidence reuse.
+No density target is open.
 BC-255 accepted H-106’s full continuous near-axis ten-point clause through an
 independent exact rectangle reader.
-This is one restricted-theorem auxiliary, not a packing bound.
+H-108 and H-109 also accepted canonical near-45 A3 and A1/A2 forcing through independent
+exact replay and a reviewed reflection.
+These are restricted-theorem auxiliaries, not a packing bound.
+H-110 registers the selected next-block fixed P12 escape candidate; no target geometry
+has been evaluated.
+H-107’s fixed-site scalar protocol remains unlaunched pending a fresh
+sufficient allocation.
 Full validation of research checkpoint `99a3ad42` passed;
 [Session 089](packing/campaign/agent-sessions/session-089-agenda024-next-phases.md)
 retains that verdict and the completed experiments, which must not be repeated.
@@ -2827,6 +2833,10 @@ round that names the hypothesis, control roles included.
 | [H-104](packing/campaign/hypotheses/H-104-fixed-side-point-cover-auxiliaries.md) | confirmed | The fixed point formulas at side1939/500 satisfy all seven exact0/45-degree auxiliary clauses | 1 | 2s wall |
 | [H-105](packing/campaign/hypotheses/H-105-exp113-overweight-pair-obstruction.md) | refuted | Exp113’s fixed weights have an overweight pair with intersecting interiors | 1 | 2s wall |
 | [H-106](packing/campaign/hypotheses/H-106-continuous-near-axis-ten-point-cover.md) | confirmed | The unchanged ten-point formulas cover every contained square throughout the full near-axis angle neighborhood at1939/500 | 1 | 0.37s wall |
+| [H-107](packing/campaign/hypotheses/H-107-fixed-site-scalar-completion.md) | blocked | The terminal exp-116 sites admit a complete rational cover of mass below eleven at 61/16; its protocol remains unlaunched pending a sufficient allocation | 1 | — |
+| [H-108](packing/campaign/hypotheses/H-108-near45-canonical-a3-forcing.md) | confirmed | A contained near-45 square in the canonical region avoiding P10 contains A3 | 1 | 0.67s wall |
+| [H-109](packing/campaign/hypotheses/H-109-near45-canonical-a1-a2-forcing.md) | confirmed | A stronger near-45 A1 implication passed independent replay and transfers to A2 by local reflection | 1 | 0.26s wall |
+| [H-110](packing/campaign/hypotheses/H-110-fixed-near-axis-p12-escape.md) | blocked | One frozen near-axis square may escape the unchanged P12 set; next-block controls and exact verification remain unrun | 0 | — |
 | [H-111](packing/campaign/hypotheses/H-111-resource-anchor-case-exclusion.md) | open question | Can a complete resource-and-anchor case cover exclude eleven squares at side 96/25? | 0 | — |
 | [H-112](packing/campaign/hypotheses/H-112-six-axis-five-common-angle-optimum.md) | blocked | Every packing of six axis-aligned squares and five sharing a free actual angle has side at least the Trump side | 0 | — |
 | [H-113](packing/campaign/hypotheses/H-113-at-most-two-angle-optimum.md) | blocked | Every packing of eleven squares using at most two actual orientation classes has side at least the Trump side | 0 | — |
@@ -3057,7 +3067,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-078.yaml` | session-078, session-082 | 2,401 | 13.41 h | 9.45 h | 10.0 h | yes |
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
-| `codex-task-tree-session-090.yaml` | session-090 | 974 | 7.39 h | 2.53 h | 2.53 h | yes |
+| `codex-task-tree-session-090.yaml` | session-090 | 1,104 | 8.27 h | 3.24 h | 3.24 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
@@ -3079,7 +3089,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 73 rounds registered in `series-000`.
+There are 76 rounds registered in `series-000`.
 
 They record 2152.1 agent-minutes and 1223.1 wall-minutes.
 Exp-114 completed its one target and independent replay.
@@ -3192,6 +3202,9 @@ archive beside it.
 | [exp-115](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-115-h-105-fixed-candidate-pair-obstruction.md) | 11 | target | H-105 | exact overweight-pair obstruction for exp113’s unchanged weights | all 134 eligible pairs have independently checked separating axes | rejected |
 | [exp-116](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-116-h-093-scalar-61-16.md) | 11 | target | H-093 | one frozen scalar attempt at side61/16 | all19row solves unconverged; exact dual mass20843712108/2067791663 at depth1 independently reproduced, below11 | unresolved |
 | [exp-117](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-117-h-106-continuous-near-axis.md) | 11 | target | H-106 | full near-axis ten-point cover on the fixed grid | independent rectangle reader proves all576closed inequalities; no H036 or packing-bound conclusion | accepted |
+| [exp-118](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-118-h-107-fixed-site-completion.md) | 11 | target | H-107 | fixed-site scalar row completion | no target dispatched before launch cutoff; scientific allowances unspent | blocked |
+| [exp-119](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-119-h-108-near45-a3-forcing.md) | 11 | target | H-108 | canonical near-45 A3 forcing | independent reader proves all 24 closed inequalities; no localization or H-036 conclusion | accepted |
+| [exp-120](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-120-h-109-near45-a1-a2-forcing.md) | 11 | target | H-109 | canonical A1 forcing plus A2 reflection | independent exact A1 replay passed; analytic reflection supplies A2 without another target | accepted |
 
 ### Cost and provenance
 
@@ -3269,11 +3282,14 @@ archive beside it.
 | exp-114 | one 10-second producer and one separate 10-second receipt/witness replay | 2.46 s | — | criterion | `e45c8a63` |
 | exp-115 | one 30-second producer and one separate 30-second file replay | 1.80 s | — | criterion | `cf299e6c` |
 | exp-116 | one 150-minute cooperative scalar invocation; separate exact verification | 3559.45 s | — | saturation | `4d305597` |
-| exp-117 | one ten-second producer and one independent ten-second replay; both accepted | — | 0.37s | — | `cf0f4d4c` |
+| exp-117 | one ten-second producer and one independent ten-second replay; both accepted | 0.37 s | — | criterion | `cf0f4d4c` |
+| exp-118 | one 2100-second total target cap and one 1200-second shared verification cap; unlaunched | 0 s | — | dependency | `46f38ab4` |
+| exp-119 | one ten-second producer and one independent ten-second reader; both accepted | 0.67 s | — | criterion | `bdc68784` |
+| exp-120 | one ten-second producer and one independent ten-second reader; both accepted | 0.26 s | — | criterion | `57ad0dea` |
 
-### What the 73 rounds jointly establish
+### What the 76 rounds jointly establish
 
-The 73 rounds use 2152.1 agent-minutes and 1223.1 wall-minutes under the campaign’s
+The 76 rounds use 2152.1 agent-minutes and 1223.1 wall-minutes under the campaign’s
 retained effort accounting.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
 separately in Session089.

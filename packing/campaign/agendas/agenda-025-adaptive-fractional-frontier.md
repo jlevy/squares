@@ -430,7 +430,7 @@ agenda:
     state: in_progress
     priority: 1
     question: Which weight or support change addresses the retained limiting witnesses?
-    hypotheses: [H-094]
+    hypotheses: [H-094, H-107]
     budget: >-
       One assessment slice of at most 30 minutes. Freeze a narrower hypothesis,
       target, witness geometry and row-generation rule before any LP comparison.

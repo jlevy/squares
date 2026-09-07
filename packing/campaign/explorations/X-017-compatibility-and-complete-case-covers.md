@@ -76,11 +76,11 @@ reserve future records under the owner’s sequential-numbering instruction.
 [Conventions](../../../conventions.md#1-identity) owns the general rule.
 No new commitment depends on the other coordinator finishing a run.
 
-**Later source checkpoint.** When numbering was reconciled, PR105 also recorded the
-accepted continuous near-45 A3 implication under H-108, a committed A1/A2 protocol under
-H-109, and the reviewed but unlaunched H-107 scalar protocol.
-Its active checkout had registered H-110’s fixed near-axis twelve-point escape candidate
-for a fresh allocation.
+**Later source checkpoint.** This branch subsequently integrated PR105’s committed
+`f5684f51` checkpoint to keep the stacked PR reviewable.
+It brings the independently accepted continuous near-45 A3 and A1/A2 implications under
+H-108/H-109, the reviewed but unlaunched H-107 scalar protocol, and H-110’s fixed
+near-axis twelve-point escape candidate for a fresh allocation.
 These are source-program updates, not results of this exploration.
 They sharpen the auxiliary restricted-angle work while leaving H-036 and the global
 bound unresolved. Consume their final reviewed receipts from the source program before

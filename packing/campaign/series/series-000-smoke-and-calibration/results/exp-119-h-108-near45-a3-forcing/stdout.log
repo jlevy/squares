@@ -1,0 +1,1 @@
+{"half_angle_slabs": [["-110880/50803079", "0"], ["0", "110880/50803079"]], "inequalities_checked": 24, "kind": "fixed-side-near45-a3-forcing-triangle", "point": ["3/2", "13/10"], "side": "1939/500", "status": "proved", "unresolved": [], "version": 1, "vertices": ["E", "F", "G"]}
