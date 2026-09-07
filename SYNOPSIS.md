@@ -138,7 +138,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives twelve confirmed hypotheses, eleven refuted
-hypotheses, one open hypothesis, fifteen open questions, and thirty-eight blocked
+hypotheses, two open hypotheses, fifteen open questions, and thirty-seven blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. No hypothesis is running or waiting on review and six are unresolved.
 H-105 is refuted: all 134 eligible candidate pairs are separated, leaving higher-order
@@ -275,6 +275,7 @@ case or experiment separately.
 | [BC-255 Theorem 3 Source Control: First Slice](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-slice-01.md) | research synthesis | record | retained | — |
 | [BC-255 Theorem 3 Source-Control Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-independent-review.md) | dated review record | record | retained | — |
 | [BC-255: Restricted-Angle Instrument Design](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md) | research synthesis | record | retained | — |
+| [BC-255: A Fixed Obstacle for Conditional Coverage](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md) | research synthesis | record | retained | — |
 | [BC-255 Near-Axis Reader Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-near-axis-reader-independent-review.md) | dated review record | record | retained | — |
 | [BC-252 — Complete Rows on the Retained Sites](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md) | research synthesis | record | retained | — |
 | [BC-255: Fixed-Side Discriminator Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md) | research synthesis | record | retained | — |
@@ -585,7 +586,9 @@ Session 089 retains the finite-row density candidate, its complete pair exclusio
 exact-angle auxiliary result, and the next complete-method assessments.
 
 **Selected next entry:** `think-qv73`, the fixed near-axis P12 escape discriminator,
-registered but unrun.
+registered but unrun. Its independent instrument work is active in
+[Session 091](packing/campaign/agent-sessions/session-091-structural-compatibility.md)
+under `think-fqhr`, alongside a bounded conditional-compatibility assessment.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
 `think-9qrx`, completed the user-approved research block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
@@ -611,7 +614,8 @@ retains that verdict and the completed experiments, which must not be repeated.
 [Agenda 024’s Current Allocation](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
 owns the scalar, complete-density and continuous-angle packages, including
 independent-review assignments.
-Keep these on one integrated successor PR from `codex/post-381-four-hour-research`. The
+Keep these on one integrated successor PR from
+`codex/structural-compatibility-continuation`, based on merged PRs 105 and 106. The
 earlier BC-215 efficiency work remains available in Agenda 023; this handoff does not
 mark it complete or erase its evidence.
 `BC-219` was the preflight for Agenda 024’s original launch inputs.
@@ -2826,7 +2830,7 @@ round that names the hypothesis, control roles included.
 | [H-107](packing/campaign/hypotheses/H-107-fixed-site-scalar-completion.md) | blocked | The terminal exp-116 sites admit a complete rational cover of mass below eleven at 61/16; its protocol remains unlaunched pending a sufficient allocation | 1 | — |
 | [H-108](packing/campaign/hypotheses/H-108-near45-canonical-a3-forcing.md) | confirmed | A contained near-45 square in the canonical region avoiding P10 contains A3 | 1 | 0.67s wall |
 | [H-109](packing/campaign/hypotheses/H-109-near45-canonical-a1-a2-forcing.md) | confirmed | A stronger near-45 A1 implication passed independent replay and transfers to A2 by local reflection | 1 | 0.26s wall |
-| [H-110](packing/campaign/hypotheses/H-110-fixed-near-axis-p12-escape.md) | blocked | One frozen near-axis square may escape the unchanged P12 set; next-block controls and exact verification remain unrun | 0 | — |
+| [H-110](packing/campaign/hypotheses/H-110-fixed-near-axis-p12-escape.md) | open | Independent source-free controls and reviews pass; the fixed P12 escape candidate remains unrun | 0 | — |
 
 ### Confirmed
 
@@ -3051,12 +3055,13 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
 | `codex-task-tree-session-090.yaml` | session-090 | 1,341 | 9.8 h | 3.94 h | 3.95 h | yes |
+| `codex-task-tree-session-091.yaml` | session-091 | 140 | 1.05 h | 0.3 h | 0.3 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 46 |
+| measured | 47 |
 | unmeasured | 44 |
-| **total** | **90** |
+| **total** | **91** |
 
 <!-- END GENERATED: session-close-report -->
 

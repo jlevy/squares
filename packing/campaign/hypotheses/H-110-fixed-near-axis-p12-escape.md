@@ -29,7 +29,7 @@ hypothesis:
   instrument: >-
     A fixed rational candidate producer and a source-distinct corner/oriented-edge
     checker with source-free positive, negative and boundary controls. No search.
-  instrument_ready: false
+  instrument_ready: true
   regime: Fixed q, rational half-angle, center formula and source-ordered P12; no alternate candidate or point movement.
   instance: {axis: n, point: 11}
   priority: 1
@@ -119,6 +119,13 @@ A supporting-line zero alone does not establish membership when another determin
 negative; include that case in the controls.
 Require complete point inventory, exact identity and actual successful process exits.
 No failure authorizes a second angle, center, point set or invocation.
+
+Session 091 completed independent source-free readiness review on 2026-09-07 at
+06:07:43 UTC. The producer's thirteen controls and the source-distinct corner reader's
+twelve controls pass; swapped reviews found no soundness issue. The reader rebuilds
+the center from the alternate formula and checks all sixteen wall slacks and all
+forty-eight point-edge determinants. Both processes require separately frozen external
+whole-process caps. No target has run; readiness does not establish this hypothesis.
 
 A verified escape would invalidate the unchanged unconditional near-axis P12 auxiliary
 clause. It would not refute H-036, H-102, H-104, or the accepted H-106/H-108/H-109
