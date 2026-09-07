@@ -5,11 +5,11 @@ title: Validation gate runs 6+ min against a documented 2 min budget
 kind: bug
 status: open
 priority: 1
-version: 2
+version: 3
 labels: []
 dependencies: []
 created_at: 2026-08-27T23:50:11.313Z
-updated_at: 2026-09-07T19:18:38.743Z
+updated_at: 2026-09-07T20:06:10.785Z
 ---
 conventions.md states the tiers as: focused under ~60s, checkpoint ~2 min, deep handoff ~5 min. The actual full gate wall time is 380-440s and the 'fast behavioral tests' step alone was 366-413s, so the fast tier is 6x its budget and the full gate exceeds the deep-handoff tier.
 
@@ -26,4 +26,4 @@ Remaining, not yet addressed:
 
 ## Notes
 
-Related current evidence,2026-09-07: PR110 head03ff2102 passed all correctness checks but GitHub checks-tier runtime failed twice at150.31s and150.24s versus a99.39s recorded baseline and1.5x band. The first run attributed95.14s to exact verification,73.96s to BasedPyright and63.52s to the soundness perimeter; retry94.35s,61.85s and70.55s respectively, with overlap. This is a different current tier from the original issue measurements and does not establish their old root cause. No code or timing threshold changed, no speedup is claimed, and no third rerun is queued. Run34154326299 attempts1/2 retain structured timing artifacts. think-oli1 retains the specific PR110 publication obligation.
+Related current evidence,2026-09-07: PR110 head03ff2102 passed correctness but GitHub checks-tier runtime failed twice at150.31s and150.24s versus99.39s baseline and1.5x band. Run34154326299 attempts1/2 retain structured timings. This is a different current tier from the original issue and does not establish its older root cause. W5 follow-up VE-004 accepts an early-start scheduling hint after six complete local48-check observations: control median93.18s, candidate71.84s,22.9% reduction, nonoverlapping ranges; source revisions1dfdb8fb/ed595fb6. Independent review admits only that local exploratory result. No exact-verifier arithmetic, threshold or worker-count change. VE-003 retains an earlier failed setup observation. Native evidence and accepted disposition committedfa8216e4. Hosted outcome and full checkpoint remain pending under think-oli1; unresolved hosted-runner variation and the original issue's other costs remain open.
