@@ -29,7 +29,7 @@ hypothesis:
   instrument: >-
     A two-mark vertical-interval lemma reduces a stronger closed-domain cover to
     F and G on two exact outer angle slabs. Source-free exact polynomial producer
-    and independent reader are being prepared; no target polynomial has been evaluated.
+    and source-distinct reader independently verified all four guards in exp123.
   instrument_ready: true
   regime: Fixed q and original P10, the whole near45 band, with coordinate-midline reflections only.
   instance: {axis: n, point: 11}
@@ -41,23 +41,31 @@ hypothesis:
 ---
 # H-123 — Near45 Coordinate Localization
 
-The analytic reduction and separate exact producer/reader passed independent review
-by 07:08:11 UTC on September 7. Their 28 source-free controls pass. No scientific
-polynomial has been evaluated; readiness is not acceptance of H-123.
+H-123 is accepted by
+[exp-123](../series/series-000-smoke-and-calibration/experiments/exp-123-near45-localization.md).
+The analytic reduction and separate exact producer and reader passed independent review
+by 07:08:11 UTC on September 7, before the experiment was registered.
+Both scientific processes later returned actual exit zero.
+They proved all four continuous guards and checked sixteen exact Bernstein coefficients
+in 0.21 seconds of combined process wall time.
+Neither process was retried.
+
+The claim concerns closed unit squares contained in `[0,q]^2` that avoid the ten
+original Stromquist P10 marks, meaning that they contain none of those points.
+Here the near45 band is `abs(theta-pi/4)<=pi/720`.
 
 This fills the localization premise in the BC-255
 [conditional reduction](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md).
-Its initial source-free assessment used 11 minutes 48 seconds, from 06:27:25 to
-06:39:13 UTC on September 7, under `think-wtma`. The selected implementation is
-`think-g930`. No target sign computation occurred in that assessment.
+Its initial source-free assessment used 11 minutes 48 seconds, from 06:27:25 to 06:39:13
+UTC on September 7, under `think-wtma`. Producer implementation used `think-g930`. No
+target sign computation occurred in that assessment.
 
 ## Domain and Symmetries
 
-Write `q=1939/500`, `W=q/2-1`, `m=q/2=1+W`, `a=1-W/2` and `h0=2/3`.
-For a near45 angle, let `C=cos(theta)`, `S=sin(theta)` and `h=(C+S)/2`.
-Containment requires the center to lie in `[h,q-h]^2`.
-The previously derived near45 bound `49/50<tan(theta),cot(theta)` gives
-`C,S>2/3`, since `2401/4901>4/9`; hence `h>h0`.
+Write `q=1939/500`, `W=q/2-1`, `m=q/2=1+W`, `a=1-W/2` and `h0=2/3`. For a near45 angle,
+let `C=cos(theta)`, `S=sin(theta)` and `h=(C+S)/2`. Containment requires the center to
+lie in `[h,q-h]^2`. The near45 ratio bound in the conditional reduction,
+`49/50<tan(theta),cot(theta)`, gives `C,S>2/3`, since `2401/4901>4/9`; hence `h>h0`.
 Also `2/3<=W<1` implies `a<=h0`.
 
 It is sufficient to cover the larger closed center sets
@@ -67,10 +75,11 @@ $$
 $$
 
 and the coordinate-reflected right strip by the original P10 marks.
-The remaining center lies in the stated union of top and bottom strips; reflections
-`x -> q-x` and `y -> q-y` then put it in `[1,q/2] x [0,1]`.
-These are reflections of the whole configuration. They preserve P10 and exchange the
-two near45 angle signs. A local anchor reflection or a quarter turn is not substituted.
+Any P10-avoiding center then lies in the stated union of top and bottom strips;
+reflections `x -> q-x` and `y -> q-y` then put it in `[1,q/2] x [0,1]`. These are
+reflections of the whole configuration.
+They preserve P10 and exchange the two near45 angle signs.
+A local anchor reflection or a quarter turn is not substituted.
 
 ## Two Guards, Not a Center Mesh
 
@@ -82,42 +91,42 @@ G=(C+S)/2-WS(C+S/2)\ge0.
 $$
 
 The opposite angle sign supplies the C/S-swapped inequalities.
-For the P10 pair `L=(1,1)` and `N=(a,m)`, use square-frame coordinates
-`U=Cx+Sy`, `V=-Sx+Cy`. Their differences are
-`delta U=W(S-C/2)` and `delta V=W(C+S/2)`.
-The near45 ratio bounds make both positive and `delta U<=delta V`.
-Centers whose squares contain both marks form the closed frame rectangle
+For the P10 pair `L=(1,1)` and `N=(a,m)`, use square-frame coordinates `U=Cx+Sy`,
+`V=-Sx+Cy`. Their differences are `delta U=W(S-C/2)` and `delta V=W(C+S/2)`. The near45
+ratio bounds make both positive and `delta U<=delta V`. Centers whose squares contain
+both marks form the closed frame rectangle
 
 $$
 [U_N-1/2,U_L+1/2]\times[V_N-1/2,V_L+1/2].
 $$
 
-F ensures this rectangle exists, including zero-width cases. Its horizontal projection
-is exactly `[a-G,1+G]`. Thus G ensures a common hit at every x between a and 1.
-G alone is insufficient: it does not establish the nonempty frame rectangle.
+F ensures this rectangle is nonempty, including zero-width cases.
+Its horizontal projection is exactly `[a-G,1+G]`. Thus G ensures that, at every x
+between a and 1, some center has a square containing both marks.
+G alone does not establish that the frame rectangle is nonempty.
 
-At any fixed x, the centers hitting one mark form a closed interval of heights.
-The two intervals overlap and cover the lower and upper edges of
-`[h0,1] x [h0,m]`: L hits its lower edge because both coordinate offsets are at most
-1/3 and `sqrt(2)/3<1/2`; N hits its upper edge because the horizontal offset is at
-most `W/2<1/2`. Their connected union covers the whole vertical segment.
+For each x in `[h0,1]`, the heights of centers whose squares contain a given mark form a
+closed interval. The intervals for L and N overlap.
+They cover the lower and upper edges of `[h0,1] x [h0,m]`: squares centered on its lower
+edge contain L because both coordinate offsets are at most 1/3 and `sqrt(2)/3<1/2`;
+squares centered on its upper edge contain N because the horizontal offset is at most
+`W/2<1/2`. Their connected union covers the whole vertical segment.
 The overlap need not itself lie inside that segment.
 
-For the central quarter `[1,m]^2`, use the additional P10 marks
-`M=(m,1)` and `P=(1+W/2,m)`, splitting at `x=1+W/2`.
-The right half uses M and P, a horizontal translate of the previous pair.
+For the central quarter `[1,m]^2`, use the additional P10 marks `M=(m,1)` and
+`P=(1+W/2,m)`, splitting at `x=1+W/2`. The right half uses M and P, a horizontal
+translate of the previous pair.
 The left half uses L and P. Its common-hit rectangle has horizontal projection
-`[1-Gswap,1+W/2+Gswap]`, where
-`Gswap=h-WC(S+C/2)`; Fswap ensures its nonemptiness.
-The endpoint offsets are horizontal and at most W/2 in both halves.
+`[1-Gswap,1+W/2+Gswap]`, where `Gswap=h-WC(S+C/2)`; `Fswap=1-W(S+C/2)` ensures its
+nonemptiness. The endpoint offsets are horizontal and at most W/2 in both halves.
 Coordinate-midline reflections cover the other strips and quarters.
 All boundary edges and splitting seams are closed.
 
 ## Four Continuous Polynomial Obligations
 
-Put `r=sqrt(2)/2`, `t=tan((theta-pi/4)/2)`,
-`D=1+t^2`, `c=r(1-2t-t^2)`, `s=r(1+2t-t^2)`.
-The positive-denominator polynomials `D F` and `D^2 G` have ascending coefficients
+Put `r=sqrt(2)/2`, `t=tan((theta-pi/4)/2)`, `D=1+t^2`, `c=r(1-2t-t^2)`, `s=r(1+2t-t^2)`.
+Then `C=c/D` and `S=s/D`, with `D>0`. The positive-denominator polynomials `D F` and
+`D^2 G` have ascending coefficients
 
 $$
 DF:\quad (1-3Wr/2,\;Wr,\;1+3Wr/2),
@@ -127,20 +136,25 @@ $$
 D^2G:\quad (r-3W/4,\;-W,\;5W/2,\;W,\;-r-3W/4).
 $$
 
-The existing exact outer half-angle enclosure gives closed slabs `[-T,0]` and `[0,T]`,
-where `T=110880/50803079`. Check each polynomial on each slab: four obligations, with
-no adaptive subdivision. A nonnegative Bernstein coefficient certificate suffices.
+The
+[exact outer half-angle enclosure](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md#one-parameter-and-two-center-coordinates)
+gives closed slabs `[-T,0]` and `[0,T]`, where `T=110880/50803079`. Checking each
+polynomial on each slab gives four obligations, with no adaptive subdivision.
+A nonnegative Bernstein coefficient certificate suffices.
 Swapping C and S is `t -> -t`, already covered by the two slabs.
 
-The geometry above is a conditional analytic reduction, not an evaluated target
-certificate. The independent reader must reconstruct the coefficients, exact field,
-slab endpoints and complete four-obligation inventory. It cannot trust producer
-booleans. A failed sufficient certificate is unresolved, not a localization refutation.
-No automatic subdivision, angle narrowing or larger process budget is authorized.
+The geometric reduction and polynomial certificate are separate premises; both are now
+independently checked.
+The reader reconstructed the coefficients, exact field, slab endpoints and complete
+four-obligation inventory instead of trusting producer booleans.
+A failed sufficient certificate would have been unresolved, not a localization
+refutation. No subdivision, angle narrowing or larger process budget was used.
 
-H-123 alone does not establish H-036. The complete both-band compatibility cover in
-[H-122](H-122-diamond-conditional-nine-point-cover.md) remains a separate premise.
-The tutorial and headline bound exposition stay unchanged.
+H-123 alone does not establish H-036. The small-diamond sufficient cover in
+[H-122](H-122-diamond-conditional-nine-point-cover.md) was refuted by
+[exp-122](../series/series-000-smoke-and-calibration/experiments/exp-122-diamond-conditional-cover-screen.md).
+A complete cover conditioned on the full distinguished square remains a separate,
+unlaunched claim; exp-122 did not test that compatibility.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

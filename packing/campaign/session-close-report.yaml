@@ -1425,7 +1425,7 @@ sessions:
   title: "Exact P12 escape and conditional compatibility"
   status: in_progress
   primary_bead: think-fqhr
-  phases: 5
+  phases: 6
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-091.yaml
@@ -1436,8 +1436,8 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-091.yaml
-    model_responses: 224
-    agent_hours: 2.09
-    active_union_hours: 0.8
-    wall_hours: 0.8
+    model_responses: 485
+    agent_hours: 4.31
+    active_union_hours: 1.52
+    wall_hours: 1.52
     snapshot_incomplete: true

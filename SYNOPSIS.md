@@ -137,11 +137,10 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives thirteen confirmed hypotheses, twelve refuted
+The generated ledger currently derives fourteen confirmed hypotheses, twelve refuted
 hypotheses, one open hypothesis, twenty-three open questions, and forty blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
-unresolved. H-123 is running under its prospective certificate; none is waiting on review
-and six are unresolved.
+unresolved. No hypothesis is running or waiting on review and six are unresolved.
 H-105 is refuted: all 134 eligible candidate pairs are separated, leaving higher-order
 overlap depth and H-099 unresolved.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
@@ -612,11 +611,12 @@ Session 089 retains the finite-row density candidate, its complete pair exclusio
 exact-angle auxiliary result, and the next complete-method assessments.
 
 **Selected next entry:** `think-qv73` is the terminal Session090 handoff, already
-consumed by active Session091. Current work is `think-jbw5`, H-122's fixed-diamond
-conditional cover. Its
-independent source-free instrument work is active in
+consumed by active Session091. Its three scientific invocations are complete, and the
+current work is checkpoint integration in
 [Session 091](packing/campaign/agent-sessions/session-091-structural-compatibility.md)
-under `think-fqhr`, alongside a bounded conditional-compatibility assessment.
+under `think-fqhr`. The selected local follow-up is `think-7e72`, a full
+distinguished-square compatibility discriminator requiring a new hypothesis and
+prospective protocol.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
 `think-9qrx`, completed the user-approved research block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
@@ -632,13 +632,16 @@ H-108 and H-109 also accepted canonical near-45 A3 and A1/A2 forcing through ind
 exact replay and a reviewed reflection.
 These are restricted-theorem auxiliaries, not a packing bound.
 H-110 is accepted through exp-121: the fixed unit square is independently verified to
-fit in the actual domain and strictly avoid all twelve marks. This refutes the unchanged
-unconditional P12 auxiliary, not H-036. The reviewed diamond reduction supplies a
-conditional nine-point cover to test under H-122, while localization remains separate.
-H-107’s reviewed fixed-site scalar protocol is held out of the next
-two-hour block under paused `think-7fec`; later-session reconsideration preserves its
-unlaunched history. The freed attention goes to a bounded conditional-compatibility
-assessment from the accepted A-point lemmas, not an automatic P12 repair.
+fit in the actual domain and strictly avoid all twelve marks.
+This refutes the unchanged unconditional P12 auxiliary, not H-036. Exp-122 refutes
+H-122’s small-diamond conditional cover through an independently checked square.
+Exp-123 accepts complete near45 localization through four exact continuous guards and
+the reviewed geometric reduction.
+No full distinguished-square compatibility target has run; the broader bound is
+unchanged. H-107’s reviewed fixed-site scalar protocol is held out of the next two-hour
+block under paused `think-7fec`; later-session reconsideration preserves its unlaunched
+history. The freed attention goes to a bounded conditional-compatibility assessment from
+the accepted A-point lemmas, not an automatic P12 repair.
 Full validation of research checkpoint `99a3ad42` passed;
 [Session 089](packing/campaign/agent-sessions/session-089-agenda024-next-phases.md)
 retains that verdict and the completed experiments, which must not be repeated.
@@ -2874,7 +2877,7 @@ round that names the hypothesis, control roles included.
 | [H-120](packing/campaign/hypotheses/H-120-rank-nine-release-exclusion.md) | open question | Can a closed rank-nine release domain below 96/25 be excluded beyond retained local scope? | 0 | — |
 | [H-121](packing/campaign/hypotheses/H-121-axis-plus-one-minimizer.md) | blocked | Some global minimizing packing has orientations in the axis-plus-one-angle family | 0 | — |
 | [H-122](packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md) | refuted | One independently checked square avoids all nine marks and the forced diamond; full-square compatibility remains open | 1 | 0.20s wall |
-| [H-123](packing/campaign/hypotheses/H-123-near45-coordinate-localization.md) | running | Complete coordinate localization reduces to four continuous polynomial guards; prospective certificate awaits invocation | 1 | — |
+| [H-123](packing/campaign/hypotheses/H-123-near45-coordinate-localization.md) | confirmed | Complete coordinate localization follows from the reviewed reduction and independent four-guard certificate | 1 | 0.21s wall |
 
 ### Confirmed
 
@@ -3099,7 +3102,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
 | `codex-task-tree-session-090.yaml` | session-090 | 1,341 | 9.8 h | 3.94 h | 3.95 h | yes |
-| `codex-task-tree-session-091.yaml` | session-091 | 224 | 2.09 h | 0.8 h | 0.8 h | yes |
+| `codex-task-tree-session-091.yaml` | session-091 | 485 | 4.31 h | 1.52 h | 1.52 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
@@ -3239,7 +3242,7 @@ archive beside it.
 | [exp-120](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-120-h-109-near45-a1-a2-forcing.md) | 11 | target | H-109 | canonical A1 forcing plus A2 reflection | independent exact A1 replay passed; analytic reflection supplies A2 without another target | accepted |
 | [exp-121](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-121-h-110-fixed-p12-escape.md) | 11 | target | H-110 | one frozen rational P12 escape candidate | independent exact reader verifies actual domain and strict avoidance of all twelve marks | accepted |
 | [exp-122](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-122-diamond-conditional-cover-screen.md) | 11 | target | H-122 | four fixed-frame diamond-conditioned cover samples | first frame gives an independently verified strict nine-mark and diamond escape; unused frames not run | rejected |
-| [exp-123](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-123-near45-localization.md) | 11 | target | H-123 | four continuous localization polynomial guards | prospective exact certificate; target signs untested | in-progress |
+| [exp-123](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-123-near45-localization.md) | 11 | target | H-123 | four continuous localization polynomial guards | independent exact reader checks all four guards and sixteen coefficients; reviewed reduction supplies complete localization | accepted |
 
 ### Cost and provenance
 
@@ -3323,7 +3326,7 @@ archive beside it.
 | exp-120 | one ten-second producer and one independent ten-second reader; both accepted | 0.26 s | — | criterion | `57ad0dea` |
 | exp-121 | one ten-second producer and one independent ten-second reader; both accepted | 0.11 s | — | criterion | `961d9923` |
 | exp-122 | one thirty-second producer and conditional ten-second independent reader | 0.20 s | — | criterion | `c4a69e3e` |
-| exp-123 | one fifteen-second producer and conditional ten-second independent reader | — | — | — | `3ea8e346` |
+| exp-123 | one fifteen-second producer and conditional ten-second independent reader | 0.21 s | — | criterion | `3ea8e346` |
 
 ### What the 79 rounds jointly establish
 

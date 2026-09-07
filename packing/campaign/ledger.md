@@ -105,7 +105,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-088](agent-sessions/session-088-validation-efficiency-checkpoint.md) | completed | retrospective | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 1 | think-rwte | Continue think-xejq with explained exhaustive-family planning under W5 Phase 3 after publishing this implementation and verifying its full hosted checkpoint. Preserve complete coverage until the selection and reuse contracts pass their invalidation fixtures. |
 | [session-089](agent-sessions/session-089-agenda024-next-phases.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 14 | think-jgnv | Select BC-251, think-0za3, for the next fresh allocation with its unchanged 150-minute process cap and separate verification. Agenda024 Current Allocation owns the parallel density and angle packages. Keep the integrated PR101 line while open; do not repeat exp113, exp114 or exp115. |
 | [session-090](agent-sessions/session-090-four-hour-research.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 11 | think-9qrx | After Session090 closes, select think-qv73 under BC255 for H110's source-free fixed P12 escape instrument and independent review, then a fresh prospective experiment. The September7 priority amendment holds H107 out of the next block and selects a bounded conditional-compatibility assessment alongside H110. Agenda024 owns this revised allocation and the deferred bead. Density remains source-blocked; no exp116 retry. |
-| [session-091](agent-sessions/session-091-structural-compatibility.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `research-loop` (insight) | 5 | think-fqhr | Complete source-free H-122 readiness under think-jbw5; only then register its bounded exact fixed-frame screen. |
+| [session-091](agent-sessions/session-091-structural-compatibility.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 6 | think-fqhr | Close this checkpoint, then select think-7e72 for a bounded full-P10 distinguished-square compatibility discriminator after fresh ID/ownership checks; no repeated H110/H122/H123 invocation. |
 
 ### Workflow summary
 
@@ -120,7 +120,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
 | `research-loop` | 9 | 4 | 58 | 7 |
 | `pipeline-improvement` | 23 | 0 | 117 | 0 |
-| `documentation-pass` | 1 | 0 | 6 | 0 |
+| `documentation-pass` | 1 | 0 | 7 | 0 |
 | `review-planning-oversight` | 0 | 0 | 1 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
@@ -550,7 +550,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | BC-248 | research | 11 | blocked | 2 | think-901o | Whether certificate-guided enumeration can cover the complement of the Trump neighborhood at a finite, auditable cost. |
 | BC-249 | measurement_validation | 11 | blocked | 0 | think-7dd9 | The closure program's honest theorem gain, measured costs, negative results, and best continuation. |
 | BC-254 | research | 11 | complete | 0 | think-01q4 | An exact upper certificate can retire this support; only verified D>11 can obstruct equality density. A floating LP objective decides neither. |
-| BC-255 | research | 11 | in_progress | 1 | think-dene | Complete the source-free H122 fixed-frame falsifier and independent witness reader, then prospectively register a bounded screen. A verified escape rejects only this sufficient conditional cover; no witness leaves the continuous claim unresolved. Derive the separate complete localization contract. Only mass-derived near-tight forcing needs a valid covering measure; geometric conflicts, interval no-goods and restricted wall/angle arguments do not inherently need it. |
+| BC-255 | research | 11 | in_progress | 1 | think-dene | Think-7e72 owns the next local candidate: test the changed claim that every contained canonical near45 P10-avoiding Q intersects every both-band contained P9-avoiding S. First price source-free controls and independent review for fixed exp122 S and one exact45 Q frame; no target is launched here and no new H/exp ID is reserved. A verified pair rejects only this sufficient route; finite no-witness is unresolved. A complete claim would combine with H106/H123 and closed-core counting, without needing A anchors. Preserve external BC261/BC273 ownership and do not duplicate their exporters. Only mass-derived near-tight forcing needs a valid covering measure; geometric conflicts, interval no-goods and restricted wall/angle arguments do not inherently need it. |
 | BC-256 | research | 11 | tentative | 2 | think-pjk7 | For H-036, verify every angle restriction and side strictly below 3.878; a counterexample need not improve Trump's record. A different target needs its own H. |
 | BC-257 | research | 11 | tentative | 2 | think-k9zi | A direct mass-below-eleven route at a declared lower side, separately scoped from H-101's equality classification at Trump. |
 
@@ -694,7 +694,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | H-120 | open question | proof | Can a nontrivial closed portion of the Trump rank-nine family obtained |  | 0 |  |  |
 | H-121 | blocked | proof | Some global minimizing packing of eleven unit squares has every actual |  | 0 |  |  |
 | H-122 | refuted | proof | At q=1939/500, every contained closed unit square whose orientation mo |  | 1 |  | 0s wall |
-| H-123 | running | proof | At q=1939/500, every contained closed unit square with orientation wit |  | 1 |  |  |
+| H-123 | confirmed | proof | At q=1939/500, every contained closed unit square with orientation wit |  | 1 |  | 0s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -765,7 +765,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-051 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `executable-runner`: the proof, verifier and generic injected-runner controls pass, but the exact preregistered `--record` command exits 2 before target access because no production CLI adapter exists; no scientific H-053 disposition follows. |
 | exp-118 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-252 | H-107 | The prospective record gate was not complete by the 03:16 UTC launch cutoff; no target or verification process ran and both allowances remain unspent. |
 
-### accepted (26)
+### accepted (27)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -795,6 +795,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-119 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-255 | H-108 | The complete canonical A3 forcing implication passed the independent exact reader on both closed angle signs. |
 | exp-120 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-255 | H-109 | Independent exact A1 replay passed on both closed angle signs; the reviewed reflection establishes A2. |
 | exp-121 | series-000 | 11 | Codex coordinator, max mathematical judgment, Session091 BC-255 | H-110 | The independently reconstructed frozen square is contained in the box and strictly avoids all twelve unchanged points. |
+| exp-123 | series-000 | 11 | Session091 coordinator, BC255, max mathematical judgment | H-123 | The independent exact four-guard certificate and reviewed geometric reduction prove complete H123 localization on the actual near45 domain. |
 
 ### baseline (11)
 
@@ -811,12 +812,6 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-030 | series-000 | 9 | openai-codex | H-021 | The complete event path stays below the 30-second profile trigger and retains its nonconverged outcome without censorship. D-126 bars frequency or deterministic-work claims, and no additional n=9 samples are authorized by this performance cell. |
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
-
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-123 | series-000 | 11 | Session091 coordinator, BC255, max mathematical judgment | H-123 | Prospective protocol only; mathematical target signs remain unevaluated. |
 
 ## Resumable — stopped on the clock, not on an answer
 

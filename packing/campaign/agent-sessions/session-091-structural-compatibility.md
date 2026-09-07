@@ -111,7 +111,7 @@ session:
     objective: Run the prospectively capped H122 screen, then the H123 four-guard certificate only if its independent readiness completes.
     commitment: BC-255
     bead: think-jbw5
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: H122 source-free controls and swapped reviews passed; its immutable source is c4a69e3e and exp122 is being committed prospectively.
     budget_minutes: 25
@@ -121,10 +121,31 @@ session:
     validation_command: Frozen scientific commands in the committed prospective experiments, followed by independent readers when authorized.
     kill_condition: A frozen process cap, missing readiness premise or phase deadline ends that invocation without retry.
     fallback: Record exact unresolved scope and failed or unopened work, then choose a genuinely changed next allocation at the checkpoint.
+    outcome: Exp122 independently refutes the fixed-diamond cover in0.20seconds process wall; exp123 accepts complete localization through four exact guards and the reviewed geometric reduction in0.21seconds. No invocation was repeated.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-122-diamond-conditional-cover-screen.md, packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-123-near45-localization.md]
+    stop_reason: Both registered targets reached exact terminal outcomes; full-square compatibility remains a changed, unlaunched obligation.
+    next_action: Finalize costs, records, CI and one local follow-up under think-7e72 without duplicating external BC261/BC273 ownership.
+  - workflow: documentation-pass
+    focus: correctness
+    recording: contemporaneous
+    clock_role: finalization
+    objective: Publish the three exact outcomes, validation scope, cost and complete parallel handoff before the two-hour checkpoint.
+    commitment: BC-255
+    bead: think-fqhr
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: All three scientific targets are terminal; independent assessments select a changed local compatibility obligation and preserve external program ownership.
+    budget_minutes: 20
+    started_at: '2026-09-07T07:29:00Z'
+    deadline_at: '2026-09-07T07:49:00Z'
+    expected_output: Updated integrated PR109, measured validation and resource receipts, explicit dispositions and an exact next-session entry.
+    validation_command: Full immutable checkpoint gate with matching post-checkpoint delta validation and records reconciliation.
+    kill_condition: The session deadline ends new work; retain any pending gate as pending, never claim an unobserved pass.
+    fallback: Publish a recoverable checkpoint with the exact remaining validation or ownership obligation and continue only a separately declared next session.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Commit exp122, pass record checks and invoke its producer exactly once from the clean source checkout.
+    next_action: Complete the boundary prose pass, resolve the already-diagnosed stale-delegation CI failure, and publish current outcomes and costs.
   primary_bead: think-fqhr
   status: in_progress
   budget:
@@ -143,7 +164,7 @@ session:
   progress:
     metric: Independently checked structural obligations and actionable next proof contracts
     before: H-106, H-108 and H-109 accepted as auxiliary lemmas; H-110 instrument not ready; conditional compatibility and localization open.
-    after: null
+    after: H110 accepted as an exact P12 escape; H122 refuted by a diamond-avoiding square; H123 complete localization accepted. Full distinguished-square compatibility and H036 remain unproved.
   delegations:
   - task: H-110 source-free producer and controls (think-h51i)
     operator: Codex angle_reader_recovery, max thinking
@@ -431,6 +452,138 @@ session:
     fallback: Preserve the exact unresolved obligation; no scientific rerun or implicit budget extension.
     write_scope: ["packing/devtools/check_near45_localization.py","packing/tests/test_check_near45_localization.py"]
     excluded_commands: [Scientific constructors or target evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
+  - task: H123 independent producer review (think-ekxn)
+    operator: Codex angle_reader_recovery, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: GO at 07:00:02; exact coefficients, unsplit Bernstein checks and complete ordered inventory are sound.
+    evidence: ["packing/devtools/near45_localization.py"]
+    files: []
+    checks: ["18 source-free tests pass; 0.40 seconds wall and 0.29 CPU","Ruff, format and BasedPyright clean"]
+    uncertainty: The result is scoped to this assessment or review; target acceptance remains separately recorded.
+    elapsed_seconds: 197
+    elapsed_quality: operator_reported_approximate
+    next_action: Coordinator retains the result and integrates its scoped next action.
+    phase: 4
+    budget_minutes: 10
+    started_at: '2026-09-07T06:56:45Z'
+    deadline_at: '2026-09-07T07:06:45Z'
+    expected_output: Independent findings, elapsed cost, exact scope and a concrete next action.
+    validation_command: Read-only source review and focused source-free checks where applicable.
+    kill_condition: The fixed deadline or an unresolved premise ends the slice without a new target invocation.
+    fallback: Preserve partial evidence and the exact missing obligation; do not extend the budget retrospectively.
+    write_scope: ["Read-only review; no file writes"]
+    excluded_commands: [Scientific constructors or target evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
+  - task: H123 independent reader review (think-bk74)
+    operator: Codex scalar_followup_assessment, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: GO at 07:08:11; independent reconstruction, all four obligations and sixteen coefficients, exact identity and refusal branches are sound.
+    evidence: ["packing/devtools/check_near45_localization.py"]
+    files: []
+    checks: ["10 source-free tests pass; 0.32 seconds wall and 0.30 CPU","Ruff, format and BasedPyright clean"]
+    uncertainty: The result is scoped to this assessment or review; target acceptance remains separately recorded.
+    elapsed_seconds: 317
+    elapsed_quality: operator_reported_approximate
+    next_action: Coordinator retains the result and integrates its scoped next action.
+    phase: 4
+    budget_minutes: 10
+    started_at: '2026-09-07T07:02:54Z'
+    deadline_at: '2026-09-07T07:12:54Z'
+    expected_output: Independent findings, elapsed cost, exact scope and a concrete next action.
+    validation_command: Read-only source review and focused source-free checks where applicable.
+    kill_condition: The fixed deadline or an unresolved premise ends the slice without a new target invocation.
+    fallback: Preserve partial evidence and the exact missing obligation; do not extend the budget retrospectively.
+    write_scope: ["Read-only review; no file writes"]
+    excluded_commands: [Scientific constructors or target evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
+  - task: Checkpoint portfolio assessment (think-d139)
+    operator: Codex angle_reader_recovery, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: The remaining BC270 parent-necessity slice may be useful, but active external BC261 and BC273 ownership must be preserved; no reassignment or target launch.
+    evidence: ["packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md"]
+    files: []
+    checks: ["Read-only comparison of current evidence and live bead ownership"]
+    uncertainty: The result is scoped to this assessment or review; target acceptance remains separately recorded.
+    elapsed_seconds: 568
+    elapsed_quality: operator_reported_approximate
+    next_action: Coordinator retains the result and integrates its scoped next action.
+    phase: 5
+    budget_minutes: 10
+    started_at: '2026-09-07T07:02:34Z'
+    deadline_at: '2026-09-07T07:12:34Z'
+    expected_output: Independent findings, elapsed cost, exact scope and a concrete next action.
+    validation_command: Read-only source review and focused source-free checks where applicable.
+    kill_condition: The fixed deadline or an unresolved premise ends the slice without a new target invocation.
+    fallback: Preserve partial evidence and the exact missing obligation; do not extend the budget retrospectively.
+    write_scope: ["Read-only review; no file writes"]
+    excluded_commands: [Scientific constructors or target evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
+  - task: Changed full-square compatibility assessment (think-7bly)
+    operator: Codex density_control_recovery, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Derived the full-P10 Q/S compatibility contract and priced a fixed-witness, exact45-frame falsifier; no new target evaluated.
+    evidence: ["packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md"]
+    files: []
+    checks: ["Read-only symbolic geometry, existing API and counting-implication assessment"]
+    uncertainty: The result is scoped to this assessment or review; target acceptance remains separately recorded.
+    elapsed_seconds: 379
+    elapsed_quality: operator_reported_approximate
+    next_action: Coordinator retains the result and integrates its scoped next action.
+    phase: 5
+    budget_minutes: 10
+    started_at: '2026-09-07T07:08:12Z'
+    deadline_at: '2026-09-07T07:18:00Z'
+    expected_output: Independent findings, elapsed cost, exact scope and a concrete next action.
+    validation_command: Read-only source review and focused source-free checks where applicable.
+    kill_condition: The fixed deadline or an unresolved premise ends the slice without a new target invocation.
+    fallback: Preserve partial evidence and the exact missing obligation; do not extend the budget retrospectively.
+    write_scope: ["Read-only review; no file writes"]
+    excluded_commands: [Scientific constructors or target evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
+  - task: PR109 CI validation triage (think-w0rz)
+    operator: Codex angle_reader_recovery, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Only the campaign-record step failed on f8b18e15 because two author/review delegations remained marked in progress past the committer timestamp. Commit881a786a already closes them; no checker change needed.
+    evidence: ["packing/campaign/agent-sessions/session-091-structural-compatibility.md"]
+    files: []
+    checks: ["Read-only failed-job log and source comparison; no fresh tests or CI retry"]
+    uncertainty: The result is scoped to this assessment or review; target acceptance remains separately recorded.
+    elapsed_seconds: 238
+    elapsed_quality: operator_reported_approximate
+    next_action: Coordinator retains the result and integrates its scoped next action.
+    phase: 5
+    budget_minutes: 5
+    started_at: '2026-09-07T07:17:16Z'
+    deadline_at: '2026-09-07T07:22:00Z'
+    expected_output: Independent findings, elapsed cost, exact scope and a concrete next action.
+    validation_command: Read-only source review and focused source-free checks where applicable.
+    kill_condition: The fixed deadline or an unresolved premise ends the slice without a new target invocation.
+    fallback: Preserve partial evidence and the exact missing obligation; do not extend the budget retrospectively.
+    write_scope: ["Read-only review; no file writes"]
+    excluded_commands: [Scientific constructors or target evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
+  - task: Boundary prose and proof-status pass (think-yf5x)
+    operator: Codex scalar_followup_assessment, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Frozen at 07:29:30; current proof statuses, definitions and links are clear, with exact mathematics and historical evidence preserved.
+    evidence: [packing/campaign/hypotheses/H-123-near45-coordinate-localization.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md]
+    files: [packing/campaign/hypotheses/H-123-near45-coordinate-localization.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md]
+    checks: [Flowmark 0.4.0 body formatting, links and required footers, Scoped diff checks; no scientific rerun]
+    uncertainty: Full distinguished-square compatibility remains untested.
+    elapsed_seconds: 510
+    elapsed_quality: operator_reported_approximate
+    next_action: Return the bounded prose diff without changing exact mathematics or source evidence.
+    phase: 6
+    budget_minutes: 15
+    started_at: '2026-09-07T07:21:00Z'
+    deadline_at: '2026-09-07T07:36:00Z'
+    expected_output: Clear proof-status prose, definitions and links following the required documentation guidelines.
+    validation_command: Review the bounded diff and linked evidence; no scientific rerun.
+    kill_condition: The fixed deadline or an unresolved premise ends the slice without a new target invocation.
+    fallback: Preserve partial evidence and the exact missing obligation; do not extend the budget retrospectively.
+    write_scope: ["packing/campaign/hypotheses/H-123-near45-coordinate-localization.md","packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md"]
+    excluded_commands: [Scientific constructors or target evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
   outputs:
   - packing/campaign/agent-sessions/session-091-structural-compatibility.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md
@@ -440,6 +593,13 @@ session:
   - packing/tests/test_check_p12_escape_candidate.py
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-121-h-110-fixed-p12-escape.md
   - packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md
+  - packing/campaign/hypotheses/H-123-near45-coordinate-localization.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-122-diamond-conditional-cover-screen.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-123-near45-localization.md
+  - packing/devtools/diamond_cover_screen.py
+  - packing/devtools/check_diamond_cover_witness.py
+  - packing/devtools/near45_localization.py
+  - packing/devtools/check_near45_localization.py
   checks:
   - Baseline 3c4fd4e2 has exactly the origin/main aae108a6 tree after PRs 105 and 106 merged.
   - Inherited merge evidence is composed fast validation plus a corrected shared-bead-tree check, not a fresh full checkpoint gate.
@@ -447,18 +607,22 @@ session:
   - The two unchanged failed tests passed with process visibility in 4.67 seconds pytest, 4.98 seconds wall. This is composed push evidence, not a fresh full gate.
   - All required hosted checks passed on PR109 at instrument commit 961d9923; this is not the full research checkpoint gate.
   - Exp-121 producer and independent reader each completed once with exit0; the actual target passed exact checks in 0.11 seconds combined process wall time.
+  - Exp-122 independently refutes H122 in 0.20 seconds combined process wall; exp-123 accepts H123 in 0.21 seconds. Each producer and reader ran exactly once with actual exit zero.
+  - The immutable d8b6fcf3 upstream-integrated checkpoint passed all 45 push-tier steps in 155.65 seconds validation wall, 158.94 seconds outer wall; its full gate is still pending.
+  - Exp-123 prospective records passed all 31 checks in 26.63 seconds before commit881a786a and scientific execution.
+  - Hosted f8b18e15 failed only its campaign record because two completed delegations remained marked in progress; commit881a786a closes them without changing deadlines or weakening validation.
   stop_reason: null
-  next_action: Complete source-free H-122 readiness under think-jbw5; only then register its bounded exact fixed-frame screen.
+  next_action: Close this checkpoint, then select think-7e72 for a bounded full-P10 distinguished-square compatibility discriminator after fresh ID/ownership checks; no repeated H110/H122/H123 invocation.
 ---
-
 # Exact P12 escape and conditional compatibility
 
 This is the first checkpoint in the approximately eight-active-hour continuation of
 Agenda 024, serving BC-255/H-102, under epic `think-il1m`. The user requests checkpoints
-every one to three active hours; this block retains the two-hour cadence. The larger
+every one to three active hours; this block retains the two-hour cadence.
+The larger
 [allocation](../agendas/agenda-024-post-381-24h-portfolio.md#eight-active-hour-continuation-on-pr-109)
-includes work already underway from this session's start. A checkpoint closes this
-bounded session, not the remaining eight-hour authorization.
+includes work already underway from this session’s start.
+A checkpoint closes this bounded session, not the remaining eight-hour authorization.
 
 ## Allocation
 
@@ -472,62 +636,69 @@ bounded session, not the remaining eight-hour authorization.
 The coordinator owns shared records, IDs, integration and scientific disposition.
 Workers have disjoint files and must return elapsed time, checks, uncertainty and a
 resume instruction. Mathematical construction and review use max thinking; mechanical
-follow-through may use high or extra-high thinking. The independent reader cannot read
-or import the producer before its own implementation is complete.
+follow-through may use high or extra-high thinking.
+The independent reader cannot read or import the producer before its own implementation
+is complete.
 
-Operational interruptions are not active research time. Record their actual boundaries
-and preserve the original deadlines and scientific caps; any continuation is declared
-prospectively, rather than rewriting the elapsed history.
+Operational interruptions are not active research time.
+Record their actual boundaries and preserve the original deadlines and scientific caps;
+any continuation is declared prospectively, rather than rewriting the elapsed history.
 
 ## Scope and scientific guardrails
 
 [H-110](../hypotheses/H-110-fixed-near-axis-p12-escape.md) fixes one near-axis unit
-square and the unchanged twelve points. Its success would refute an unconditional P12
-covering step, not produce eleven disjoint squares and not refute H-036 or H-102.
-The frozen constructor is not a source-free test fixture. All twelve point identities,
-closed boundary membership, box containment and the actual angle domain need checking.
+square and the unchanged twelve points.
+Its success would refute an unconditional P12 covering step, not produce eleven disjoint
+squares and not refute H-036 or H-102. The frozen constructor is not a source-free test
+fixture.
+All twelve point identities, closed boundary membership, box containment and the
+actual angle domain need checking.
 
-The parallel assessment asks whether a near-45-degree square forced to contain
-A1, A2 and A3 restricts the other squares enough for a conditional cover. A uniform
-positive clearance is not established: scaling a strict-sublevel packing gives
+The parallel assessment asks whether a near-45-degree square forced to contain A1, A2
+and A3 restricts the other squares enough for a conditional cover.
+A uniform positive clearance is not established: scaling a strict-sublevel packing gives
 interior slack for that packing, but the slack can vanish as its side approaches the
 threshold. Neither this idea nor a single incompatible escape establishes a complete
 conditional cover. Localization of the forced square remains a separate obligation.
 
-H-107 remains paused. No unchanged exp-116 scalar retry or density-control retry is
-allocated. Small numerical improvements remain recorded without complicating the core
-exposition or displacing work toward stronger structural results.
+H-107 remains paused.
+No unchanged exp-116 scalar retry or density-control retry is allocated.
+Small numerical improvements remain recorded without complicating the core exposition or
+displacing work toward stronger structural results.
 
-The parallel [conditional assessment](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md)
+The parallel
+[conditional assessment](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md)
 now gives a fixed diamond contained in every distinguished square with the two forced
-anchors. Its counting reduction needs no uniform clearance. Localization and a complete
-nine-point cover for squares avoiding that diamond remain unproved.
+anchors. Its counting reduction needs no uniform clearance.
+Localization and a complete nine-point cover for squares avoiding that diamond remain
+unproved.
 
 ## PR and parallel-agent handoff
 
 Continue on `codex/structural-compatibility-continuation`, based on merged PRs 105 and
-106. Publish one integrated successor PR early, then update it at each checkpoint.
+106\. Publish one integrated successor PR early, then update it at each checkpoint.
 Each update leads with measured cost (or an explicitly incomplete running lower bound),
 states which checks actually ran, and links unfinished obligations and exact resume
 commands. Beads are synchronized separately on `tbd-sync`; their IDs and scope are
 mirrored here so a PR reader can recover the plan.
 
-This branch has allocated **Session 091**, **exp-121** and **H-122–H-123**, and continues
-**BC-255 / H-102**. H-110 is complete; the next selected bead is `think-jbw5`.
+This branch has allocated **Session 091**, **exp-121** and **H-122–H-123**, and
+continues **BC-255 / H-102**. H-110 is complete; the next selected bead is `think-jbw5`.
 No new agenda or exploration ID is allocated at this checkpoint.
 PR 107 landed on main at `dd36800e`, including PR 108 and its follow-up planning:
 X-017–X-018, Agenda 027–028, BC-258–275 and H-111–121, with no session or experiment
 IDs. The temporary local H-118 diamond label was renamed H-122 before its first
-instrument commit or target invocation. The next pointers are H-124, exp-122,
-Session 092, BC-276, Agenda 029 and X-019; none is reserved speculatively.
-Choose each next required ID sequentially after checking current remote claims;
-publish it on this PR rather than reserving speculative ranges.
+instrument commit or target invocation.
+The next pointers are H-124, exp-122, Session 092, BC-276, Agenda 029 and X-019; none is
+reserved speculatively.
+Choose each next required ID sequentially after checking current remote claims; publish
+it on this PR rather than reserving speculative ranges.
 
 Merge only landed `origin/main` changes, following the upstream-merge shortcut.
-Open PR heads remain coordination context, not prerequisites or automatic merge
-targets. If interrupted, read this session, its bead `think-fqhr`, the latest PR
-checkpoint and the current H-110 record before dispatching anything. Never repeat a
-completed or still-running scientific invocation.
+Open PR heads remain coordination context, not prerequisites or automatic merge targets.
+If interrupted, read this session, its bead `think-fqhr`, the latest PR checkpoint and
+the current H-110 record before dispatching anything.
+Never repeat a completed or still-running scientific invocation.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
