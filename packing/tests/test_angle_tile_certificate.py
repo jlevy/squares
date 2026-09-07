@@ -13,6 +13,7 @@ from devtools.angle_tile_certificate import (
     evaluate,
     membership_polynomials,
 )
+from sqpack.field import NumberField
 
 
 def test_bernstein_proves_closed_endpoint_zeros_but_not_sampled_positivity() -> None:
@@ -211,3 +212,53 @@ def test_degree_and_arithmetic_guards_do_not_silently_round() -> None:
     result = certify_nonnegative(tiny_negative, Fraction(0), Fraction(0))
     assert not result.proved
     assert result.unresolved == ((Fraction(0), Fraction(0)),)
+
+
+def test_quadratic_coefficients_keep_exact_zero_and_refuse_mixed_embeddings() -> None:
+    field = NumberField((1, 0, -2), ("1", "2"))
+    alpha = field.alpha
+    assert certify_nonnegative((alpha * alpha - 2,), Fraction(0), Fraction(1)).proved
+    assert certify_nonnegative((alpha - 1,), Fraction(0), Fraction(1)).proved
+    assert not certify_nonnegative((1 - alpha,), Fraction(0), Fraction(1)).proved
+    assert bernstein_coefficients((field.zero, alpha, -alpha), Fraction(0), Fraction(1)) == (
+        field.zero,
+        alpha / 2,
+        field.zero,
+    )
+    other_field = NumberField((1, 0, -2), ("1", "2"))
+    for polynomial in (
+        (alpha, other_field.alpha),
+        (NumberField((1, 0, -2), ("-2", "-1")).alpha,),
+        (NumberField((1, 0, -3), ("1", "2")).alpha,),
+    ):
+        try:
+            certify_nonnegative(polynomial, Fraction(0), Fraction(1))
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("mixed or unsupported quadratic field accepted")
+
+
+def test_quadratic_side_toy_uses_the_same_map_without_algebraic_vertices() -> None:
+    field = NumberField((1, 0, -2), ("1", "2"))
+    side = field.alpha
+    result = check_cover(
+        side,
+        ((side / 2, side / 2),),
+        (Fraction(0), Fraction(0)),
+        (TileSlab(Fraction(0), Fraction(0), (("0", 0), ("1", 0))),),
+    )
+    assert result.proved
+    assert result.inequalities_checked == 24
+    other_field = NumberField((1, 0, -2), ("1", "2"))
+    try:
+        check_cover(
+            side,
+            ((other_field.alpha / 2, other_field.alpha / 2),),
+            (Fraction(0), Fraction(0)),
+            (TileSlab(Fraction(0), Fraction(0), (("0", 0), ("1", 0))),),
+        )
+    except ValueError as error:
+        assert "field" in str(error)
+    else:
+        raise AssertionError("mixed geometry fields accepted")

@@ -1,4 +1,4 @@
-"""Sufficient closed-tile certificates for rational near-axis angle charts.
+"""Sufficient closed-tile certificates for near-axis angle charts.
 
 This source/toy kernel has no target data, search, or CLI. It proves only the
 point-hit clause supplied to ``check_cover``; it cannot decide H-036. A failed
@@ -10,8 +10,10 @@ This avoids a new general mesh validator: ``sqpack.cover.validate_triangle_mesh`
 also imposes edge-length constraints irrelevant to these parameter-space tiles.
 Each split joins one edge's exact midpoint to its opposite vertex. Complete
 prefix trees therefore cover every seam and boundary, not merely almost every
-point. The near-45-degree Q(sqrt(2)) chart and file/source binding are not yet
-implemented. See results/agenda-026/bc-255-angle-instrument-design.md.
+point. Coefficients may be rational or in the positive Q(sqrt(2)) embedding;
+tile vertices and angle endpoints remain rational. The near-45-degree chart is
+not implemented. Design: campaign/series/series-000-smoke-and-calibration/
+results/agenda-026/bc-255-angle-instrument-design.md.
 """
 
 from __future__ import annotations
@@ -20,9 +22,13 @@ from dataclasses import dataclass
 from fractions import Fraction
 from math import comb
 
-type Polynomial = tuple[Fraction, ...]
-type Point = tuple[Fraction, Fraction]
-type Triangle = tuple[Point, Point, Point]
+from sqpack.field import FieldElement, NumberField
+
+type Scalar = Fraction | FieldElement
+type Polynomial = tuple[Scalar, ...]
+type Point = tuple[Scalar, Scalar]
+type RationalPoint = tuple[Fraction, Fraction]
+type Triangle = tuple[RationalPoint, RationalPoint, RationalPoint]
 type Interval = tuple[Fraction, Fraction]
 
 MAX_DEGREE = 4
@@ -46,11 +52,30 @@ def _rational(value: Fraction) -> None:
         raise ValueError("rational input exceeds the declared bit limit")
 
 
+def _coefficient_field(values: tuple[Scalar, ...]) -> NumberField | None:
+    field: NumberField | None = None
+    for value in values:
+        if isinstance(value, FieldElement):
+            if field is not None and value.field is not field:
+                raise ValueError("coefficients come from different number fields")
+            field = value.field
+            if len(value.coeffs) != 2:
+                raise ValueError("only degree-two Q(sqrt(2)) coefficients are supported")
+            for coefficient in value.coeffs:
+                _rational(coefficient)
+        else:
+            _rational(value)
+    if field is not None and (
+        field.degree != 2 or field.alpha * field.alpha != 2 or field.alpha.sign() <= 0
+    ):
+        raise ValueError("only the positive Q(sqrt(2)) field embedding is supported")
+    return field
+
+
 def _polynomial(value: Polynomial) -> Polynomial:
     if not value or len(value) > MAX_DEGREE + 1:
         raise ValueError("polynomial must have one to five coefficients")
-    for coefficient in value:
-        _rational(coefficient)
+    _coefficient_field(value)
     return value
 
 
@@ -61,21 +86,21 @@ def _add(left: Polynomial, right: Polynomial) -> Polynomial:
     )
 
 
-def _scale(value: Polynomial, factor: Fraction) -> Polynomial:
+def _scale(value: Polynomial, factor: Scalar) -> Polynomial:
     return tuple(factor * coefficient for coefficient in value)
 
 
 def _multiply(left: Polynomial, right: Polynomial) -> Polynomial:
-    result = [ZERO] * (len(left) + len(right) - 1)
+    result: list[Scalar] = [ZERO] * (len(left) + len(right) - 1)
     for i, first in enumerate(left):
         for j, second in enumerate(right):
             result[i + j] += first * second
     return tuple(result)
 
 
-def evaluate(polynomial: Polynomial, value: Fraction) -> Fraction:
+def evaluate(polynomial: Polynomial, value: Fraction) -> Scalar:
     """Exact Horner evaluation, also valid at a zero-dimensional angle slab."""
-    result = ZERO
+    result: Scalar = ZERO
     for coefficient in reversed(polynomial):
         result = result * value + coefficient
     return result
@@ -89,6 +114,8 @@ def bernstein_coefficients(polynomial: Polynomial, low: Fraction, high: Fraction
     if low > high:
         raise ValueError("angle interval is reversed")
     degree = len(polynomial) - 1
+    if low == high:
+        return (evaluate(polynomial, low),) * (degree + 1)
     power = tuple(
         sum(
             (
@@ -198,7 +225,7 @@ def _chart(low: Fraction, high: Fraction) -> Polynomial:
 
 
 def membership_polynomials(
-    side: Fraction, point: Point, vertex: Point, low: Fraction, high: Fraction
+    side: Scalar, point: Point, vertex: RationalPoint, low: Fraction, high: Fraction
 ) -> tuple[Polynomial, Polynomial, Polynomial, Polynomial]:
     """Derive d^2(1/2 - a dot (p-F_t(z))) for a=u,-u,v,-v.
 
@@ -207,8 +234,8 @@ def membership_polynomials(
     affine in z. One fixed point at all three vertices implies the entire
     closed triangle. This alone does not check the positive-width guard.
     """
-    _rational(side)
-    for value in (*point, *vertex):
+    _coefficient_field((side, *point))
+    for value in vertex:
         _rational(value)
     if len(point) != 2 or len(vertex) != 2 or not all(0 <= value <= 1 for value in vertex):
         raise ValueError("membership needs a point and a unit-domain vertex")
@@ -256,7 +283,7 @@ class UnresolvedInequality:
 
 @dataclass(frozen=True)
 class CoverResult:
-    """Exact closed cover of the supplied rational near-axis domain, if proved."""
+    """Exact closed cover of the supplied near-axis domain, if proved."""
 
     inequalities_checked: int
     unresolved: tuple[UnresolvedInequality, ...]
@@ -267,19 +294,27 @@ class CoverResult:
 
 
 def _validate_slabs(
-    side: Fraction, points: tuple[Point, ...], domain: Interval, slabs: tuple[TileSlab, ...]
+    side: Scalar, points: tuple[Point, ...], domain: Interval, slabs: tuple[TileSlab, ...]
 ) -> None:
-    _rational(side)
+    _coefficient_field((side, *(coordinate for point in points for coordinate in point)))
     if side <= 0 or not points or len(points) > MAX_TILES:
         raise ValueError("positive side and a bounded nonempty marked-point set required")
     for point in points:
         if len(point) != 2:
             raise ValueError("marked point must have two coordinates")
         for coordinate in point:
-            _rational(coordinate)
             if not 0 <= coordinate <= side:
                 raise ValueError("marked point is outside the container")
-    if len(set(points)) != len(points):
+    point_keys = {
+        tuple(
+            tuple(coordinate.coeffs)
+            if isinstance(coordinate, FieldElement)
+            else (coordinate, ZERO)
+            for coordinate in point
+        )
+        for point in points
+    }
+    if len(point_keys) != len(points):
         raise ValueError("marked-point inventory has duplicates")
     if len(domain) != 2:
         raise ValueError("requested domain must have two endpoints")
@@ -301,7 +336,7 @@ def _validate_slabs(
 
 
 def check_cover(
-    side: Fraction,
+    side: Scalar,
     points: tuple[Point, ...],
     domain: Interval,
     slabs: tuple[TileSlab, ...],
