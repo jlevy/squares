@@ -360,14 +360,15 @@ The
 owns the actual clocks, dispositions and validation follow-up.
 
 The user commissioned these three commitments in
-[Session090](../agent-sessions/session-090-four-hour-research.md), starting at
-`2026-09-07T00:31:22Z` after PR101 merged. `think-9qrx` coordinates a four-active-hour
-block with a two-hour checkpoint on `codex/post-381-four-hour-research`.
-Its record owns the current slices and interruption accounting; the completed
-Session089 allocation is not reopened.
+[Session 090](../agent-sessions/session-090-four-hour-research.md), starting at
+`2026-09-07T00:31:22Z` after PR 101 merged.
+`think-9qrx` coordinates a four-active-hour block with a two-hour checkpoint on
+`codex/post-381-four-hour-research`. Its record owns the current slices and interruption
+accounting; the completed Session 089 allocation is not reopened.
 
-- **BC-251 / H-093:** the ready but unopened 150-minute scalar invocation, with
-  verification time reserved.
+- **BC-251 / H-093:** the single 150-minute scalar invocation launched as exp-116 at
+  `00:46:18Z`, with verification time reserved.
+  Do not restart the live invocation.
   It can run on one CPU while the coordinator manages the other workers; do not shorten
   or reset its frozen cap.
 - **BC-243 / H-099:** complete a.e.-depth verification of exp113’s unchanged candidate.
@@ -385,16 +386,15 @@ Session089 allocation is not reopened.
   certificate is unresolved, not a geometric counterexample.
 
 The initial commissions are the one scalar invocation and the two source/control
-packages with independent review. Larger density or angle steps need an explicit
-readiness and cost decision at a Session090 checkpoint.
-Keep BC-231’s remaining 180–320 active-worker-minute estimate and unpriced retained
-replays conditional; its two selected slices are complete.
+packages with independent review.
+Larger density or angle steps need an explicit readiness and cost decision at a Session
+090 checkpoint. Keep BC-231’s remaining 180–320 active-worker-minute estimate and
+unpriced retained replays conditional; its two selected slices are complete.
 Use two authors and rotate the third worker into independent review, with the
 coordinator owning shared records and the scalar process.
-PR101 has merged; publish one integrated successor PR for Session090 and keep supporting
-slices on it.
-Use `max` for mathematical judgment and `high` or `xhigh` for suitable
-mechanical work.
+PR 101 has merged; publish one integrated successor PR for Session 090 and keep
+supporting slices on it.
+Use `max` for mathematical judgment and `high` or `xhigh` for suitable mechanical work.
 
 ### Retained Portfolio Commitments
 

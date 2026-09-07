@@ -104,7 +104,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-087](agent-sessions/session-087-agenda022-continuation.md) | completed | contemporaneous | `research-loop` (correctness) | `efficiency-loop` (efficiency) | 2 | think-wufn | Take BC-215 (think-xejq), the one lever the efficiency block measured and did not wire: 20.2 per cent of deep-run work is repeated and 92 per cent of that is trees that did not move, so the tree-id cache is what takes the pull-request wall from about 221.70 s to the operator's two to two and a half minutes. |
 | [session-088](agent-sessions/session-088-validation-efficiency-checkpoint.md) | completed | retrospective | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 1 | think-rwte | Continue think-xejq with explained exhaustive-family planning under W5 Phase 3 after publishing this implementation and verifying its full hosted checkpoint. Preserve complete coverage until the selection and reuse contracts pass their invalidation fixtures. |
 | [session-089](agent-sessions/session-089-agenda024-next-phases.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 14 | think-jgnv | Select BC-251, think-0za3, for the next fresh allocation with its unchanged 150-minute process cap and separate verification. Agenda024 Current Allocation owns the parallel density and angle packages. Keep the integrated PR101 line while open; do not repeat exp113, exp114 or exp115. |
-| [session-090](agent-sessions/session-090-four-hour-research.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 1 | think-9qrx | Freeze and launch BC251 once after independent review; integrate the two control slices and allocate their independent reviews. |
+| [session-090](agent-sessions/session-090-four-hour-research.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 3 | think-9qrx | Supervise exp-116 handle 16679 without restarting; finish the slab reader and source-binding designs, then publish the first checkpoint. |
 
 ### Workflow summary
 
@@ -117,8 +117,8 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 18 | 1 | 58 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 9 | 4 | 52 | 7 |
-| `pipeline-improvement` | 22 | 0 | 110 | 0 |
+| `research-loop` | 9 | 4 | 53 | 7 |
+| `pipeline-improvement` | 22 | 0 | 111 | 0 |
 | `documentation-pass` | 1 | 0 | 4 | 0 |
 | `review-planning-oversight` | 0 | 0 | 1 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
@@ -758,7 +758,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-116 | series-000 | 11 | Codex coordinator, max mathematical reasoning, think-0za3 in Session090 | H-093 | Prospective allocation; the target has not yet run and no outcome is claimed. |
+| exp-116 | series-000 | 11 | Codex coordinator, max mathematical reasoning, think-0za3 in Session090 | H-093 | The single frozen invocation is running; no mathematical outcome is claimed. |
 
 ## Resumable — stopped on the clock, not on an answer
 
