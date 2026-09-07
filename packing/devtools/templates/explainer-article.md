@@ -91,6 +91,21 @@ interiors.[^survey] The value of $s(n)$ is known for $n \le 10$. Stromquist prov
 $s(10) = 3 + 1/\sqrt{2}$ in his {{PRIOR_MEMO_YEAR}} Memo II; the journal presentation
 appeared in {{PRIOR_YEAR}}.[^stromquist-memos][^stromquist]
 
+For values of $n$ where $s(n)$ is still unknown, results generally take the form of
+upper or lower bounds.
+An **upper bound** is constructive: an arrangement of $n$ unit squares in a square of
+side $L$ shows that $s(n) \le L$. Walter Trump’s packing for $n = 11$ is one
+example.[^trump] Such constructions may be specified with approximate numerical
+coordinates or derived exactly by solving the geometric relationships between touching
+squares; in either case, their fit in the stated container must be verified.
+
+A **lower bound** proves that $s(n) \ge L$ by ruling out every arrangement in a
+container of side less than $L$. This requires an argument covering all possible
+placements and rotations of the squares.
+Such arguments range from simple area comparisons to detailed geometric proofs and
+computer-assisted certificates.
+The proof presented here is of this kind.
+
 <figure>
   <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.svg" alt="{{COMPOSITE_ALT}}" width="2400" height="2896"></a></div>
   <figcaption><strong>Figure 1.</strong> The best known packings of 1 through 100 unit squares. Each cell is the tightest
