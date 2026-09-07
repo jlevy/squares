@@ -8,10 +8,14 @@ The user-requested strategy/planning block is **BC283 / `think-dwq8`, W10**, wit
 upstream/documentation reconciliation under W8. It assesses established results and
 selects the next coordinating entry; it launches no successor experiment and changes no
 other lane’s frozen contract.
-The independent mathematical reviews ran 22:20:04–22:21:17 and22:20:12–22:21:45 UTC. The
-planning slice ends at22:45UTC, followed by a15-minute
+The independent mathematical reviews ran 22:20:04–22:21:17 and 22:20:12–22:21:45 UTC.
+The planning slice ends at 22:45 UTC, followed by a 15-minute
 documentation/validation/publication reserve.
 Running validation is asynchronous evidence, not mathematical progress.
+Two independent synthesis reviews, 22:30:42–22:31:51 and 22:30:51–22:31:32 UTC, accepted
+the mathematical distinctions and planning scope.
+Their final accepted wording limits claims to what this work certified, without
+asserting that all suitable kernels are impossible.
 
 ## The Problem and the Proof Languages
 
@@ -24,7 +28,7 @@ Improving either bound would be progress; proving that one attractive picture is
 does not settle the other possible arrangements.
 
 The exact Trump construction gives the upper bound $3.877083590022814\ldots$. T018
-established the fractional certificate at3.81; T022 refined its containment argument to
+established the fractional certificate at 3.81; T022 refined its containment argument to
 the weak limiting lower bound $3.810025723614703\ldots$. T022 is not a no-fit
 certificate at its limiting endpoint.
 Those are the current verified bounds in the
@@ -66,7 +70,7 @@ with one neighbor may be incompatible with another.
 X017 organizes conditional geometry, complete case covers and pair interactions around
 that missing information.
 A proof on one case becomes global only after every possible arrangement is assigned to
-a proved case. The intended target3.84 is an aspiration for that complete argument, not
+a proved case. The intended target 3.84 is an aspiration for that complete argument, not
 an established bound.
 
 X018 tested two concrete ways to make this structural approach useful:
@@ -92,14 +96,14 @@ A weak outer model admitting seven objects need not imply seven actual squares f
 Wall-dependent common cores retain more information than disks, but their complete
 seven-core question remains unresolved.
 
-BC282 then removed square10 and reduced the necessary ten-square skeleton exactly.
-For fixed structural parameters, all translations lie in a closed rectangle and24 pairs
+BC282 then removed square 10 and reduced the necessary ten-square skeleton exactly.
+For fixed structural parameters, all translations lie in a closed rectangle and 24 pairs
 forbid explicit open intervals on each horizontal fiber.
 Covering every fiber would exclude the skeleton; finding a legal translation would
 exhibit a skeleton. Neither was done.
 The reduction is useful, but the proposed short covering chain lacked the uniform
 templates and endpoint analysis needed to fund the larger attempt.
-Even an exact ten-square skeleton would only show that square10 must enter the proof.
+Even an exact ten-square skeleton would only show that square 10 must enter the proof.
 
 **The current kernel lane encodes pairs directly.** In the accepted normalization, a
 kernel $K$ satisfies $K-1\succeq0$, is nonpositive on distinct compatible poses, and has
@@ -225,19 +229,19 @@ is launched.
 ## Planning Decision: Spend on Missing Information
 
 BC283 makes the following portfolio decision from these results.
-Its planning identity was checked against80 remote refs,48 present worktrees and shared
-tbd state before reservation at22:25UTC. The earlier no-BC283 statements belong to the
-completed overnight and residual-design allocations; this later user-requested planning
-block is distinct.
-No mathematical H-item, experiment or scientific session is created to
-count this review as a result.
+Its planning identity was checked against 80 remote refs, 48 present worktrees and
+shared tbd state before reservation at 22:25 UTC. The earlier no-BC283 statements belong
+to the completed overnight and residual-design allocations; this later user-requested
+planning block is distinct.
+No mathematical H-item, experiment or scientific session is created to count this review
+as a result.
 
 | Avenue | What panned out; what did not | Next decision and reconsideration condition |
 | --- | --- | --- |
-| Scalar/fractional optimization | T018/T022 genuinely improved the bound. Later scalar exp116 remained unconverged | Keep H107/its reviewed adapter deferred. Reconsider for a named downstream use, a changed mechanism and a newly priced complete invocation; no unchanged retry |
+| Scalar/fractional optimization | T018/T022 improved the bound. Later scalar exp116 remained unconverged | Keep H107/its reviewed adapter deferred. Reconsider for a named downstream use, a changed mechanism and a newly priced complete invocation; no unchanged retry |
 | Fixed-support density obstruction | Exp128 exactly settled the chosen support at eleven; earlier graph/depth work did not establish the broader obstruction | Retire that support attempt. Any expansion must name the new geometric information and a cheap necessary-row screen before full continuum verification |
 | Conditional compatibility | Near-axis/near45 auxiliaries and the full diagonal band survived independent review; P12 and the weakened diamond cover were refuted; axis `no_chain` remains inconclusive | Retain the lemmas. Re-enter only with a changed representation preserving the actual distinguished square, and a complete independently checked axis discriminator |
-| X018 capacity and release | Guarded4+7 exclusion, signed-angle exclusions and exact residual-fiber reduction are accepted; resource superiority, whole seven-core capacity and complete fiber coverage are not | Keep H118/H120 targets parked. Require the matched LP survival witness or finite joint-angle rule for H118; justified parameter selection or bounded complete templates and an independent open-fiber reader for H120 |
+| X018 capacity and release | Guarded 4+7 exclusion, signed-angle exclusions and exact residual-fiber reduction are accepted; resource superiority, whole seven-core capacity and complete fiber coverage are not | Keep H118/H120 targets parked. Require the matched LP survival witness or finite joint-angle rule for H118; justified parameter selection or bounded complete templates and an independent open-fiber reader for H120 |
 | BC264/H114/H125 kernel work | Cubic-family obstruction and source-free builds provide a concrete next test; no global kernel or improved bound has been certified by this work | **Selected coordinating entry remains `think-mq0d` under its existing owner.** Follow its current code/protocol admission and exp129 registration. Do not restart completed pricing, add features automatically or transfer ownership |
 | Stromquist helper replay | Source chronology and independently reviewed local helper arguments are retained; the finite incidence table alone does not supply the geometry | Parallel enabling lane under `think-0krc`: make exact clipping/component ownership reusable and independently discharge remaining lemmas. Transfer to n11 only through an explicit reviewed consumer contract |
 
@@ -254,7 +258,7 @@ Those are precisely the unsupported steps the recent negative results teach us t
 Preserve three different outcomes: a false auxiliary claim, a representation ruled out
 on its declared domain, and an unfinished or inconclusive solver attempt.
 
-At the22:24UTC ownership check, PR116 owns H125, exp129 and session097 under existing
+At the 22:24 UTC ownership check, PR116 owns H125, exp129 and session097 under existing
 BC264. This planning block dispatches none of that work.
 Its next checkpoint should report the exact obstruction or inconclusive outcome under
 that owner’s frozen protocol, then reassess priorities on the result.
