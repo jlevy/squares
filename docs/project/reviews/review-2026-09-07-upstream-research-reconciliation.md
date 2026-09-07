@@ -1,10 +1,122 @@
-# Research and Upstream Reconciliation, September 7
+# Research Strategy and Upstream Reconciliation, September 7
 
 This review reconciles PR110 at `ecd4a035` with main at `a5e9dbfd`, including PR112 and
 PR115. The GitHub survey covers PRs closed since September 6 UTC; the agenda survey
 covers Agendas017–028. Live task notes were checked separately because a pushed branch
 can lag its owner’s current work.
-The integration is tracked by `think-dwq8` under W8/W10.
+The user-requested strategy/planning block is **BC283 / `think-dwq8`, W10**, with
+upstream/documentation reconciliation under W8. It assesses established results and
+selects the next coordinating entry; it launches no successor experiment and changes no
+other lane’s frozen contract.
+The independent mathematical reviews ran 22:20:04–22:21:17 and22:20:12–22:21:45 UTC. The
+planning slice ends at22:45UTC, followed by a15-minute
+documentation/validation/publication reserve.
+Running validation is asynchronous evidence, not mathematical progress.
+
+## The Problem and the Proof Languages
+
+Let $s(11)$ be the smallest container side that permits eleven unit squares, with
+arbitrary positions and angles.
+A construction gives an **upper bound**: these squares fit, so the optimum is no larger.
+An impossibility proof gives a **lower bound**: every arrangement below a specified side
+fails, so the optimum is no smaller.
+Improving either bound would be progress; proving that one attractive picture is rigid
+does not settle the other possible arrangements.
+
+The exact Trump construction gives the upper bound $3.877083590022814\ldots$. T018
+established the fractional certificate at3.81; T022 refined its containment argument to
+the weak limiting lower bound $3.810025723614703\ldots$. T022 is not a no-fit
+certificate at its limiting endpoint.
+Those are the current verified bounds in the
+[n11 record](../../../packing/frontier/n-011.md).
+The recent structural explorations did not raise that lower bound again.
+
+**The successful fractional proof counts one square at a time.** Place nonnegative
+weights inside the container so every permitted witness square captures at least one
+unit of weight, while the container’s total is less than eleven.
+Eleven disjoint witness squares would require at least eleven units, a contradiction.
+The actual certificate uses smaller interior witnesses, exact orientation transfer and
+explicit boundary conventions; a finite grid of poses alone would not prove the
+continuous statement.
+T018’s mass is $434547/40000=10.863675$, with a certified minimum capture of
+$4001/4000$. Its
+[proof card](../../../packing/cases/n11_fractional_certificate/t-018-proof-card.md)
+records how those finite checks imply the packing theorem.
+
+X016 asked whether better weights, less shrinking, or full-size area densities could
+improve this counting method.
+Better weights address optimization; adaptive witness cores reduce the geometric
+information lost to shrinking.
+Area densities avoid charging shared boundaries because boundaries have zero area.
+All still need a guarantee for every allowed pose.
+An unconverged optimization is neither a certificate nor evidence that no certificate
+exists.
+
+There is also an opposite calculation: weighted candidate square placements whose
+combined overlap depth is at most one force any covering density to have at least their
+total weight. This can prove a limitation of the counting method.
+It is not itself an ordinary packing of eleven disjoint squares.
+PR109’s exact support optimum eleven is a particularly useful result of this kind: the
+chosen support cannot establish the desired strict obstruction beyond eleven.
+Enlarging or changing that support is a different question.
+
+**The structural approaches ask what can coexist.** Checking each square separately
+forgets correlations: two individually legal poses can overlap, and an angle compatible
+with one neighbor may be incompatible with another.
+X017 organizes conditional geometry, complete case covers and pair interactions around
+that missing information.
+A proof on one case becomes global only after every possible arrangement is assigned to
+a proved case. The intended target3.84 is an aspiration for that complete argument, not
+an established bound.
+
+X018 tested two concrete ways to make this structural approach useful:
+
+- **Residual capacity:** condition on four actual squares and bound how many others can
+  coexist with them. The accepted central case leaves only four possible center regions,
+  each of diameter below one.
+  Every unit square contains a radius-one-half disk, so nonoverlapping squares have
+  centers at least one apart.
+  Each region therefore holds at most one further square; the required seven cannot fit.
+  The outer bands and failed guards remain separate cases.
+- **Contact release:** enlarge a family related to Trump’s configuration by dropping
+  contacts, then try to exclude the enlarged family at smaller sides.
+  This produced continuous exclusions over substantial angle intervals.
+  It still retains particular wall assignments, axis squares and common-angle structure;
+  no theorem puts every better packing into that family.
+
+The strongest boundary-model counterexample explains why correlations matter.
+Seven residual disks fit, defeating the proposed disk-capacity bound of six.
+The corresponding squares cannot simply be substituted: walls constrain their
+orientations, and those orientations overlap.
+A weak outer model admitting seven objects need not imply seven actual squares fit.
+Wall-dependent common cores retain more information than disks, but their complete
+seven-core question remains unresolved.
+
+BC282 then removed square10 and reduced the necessary ten-square skeleton exactly.
+For fixed structural parameters, all translations lie in a closed rectangle and24 pairs
+forbid explicit open intervals on each horizontal fiber.
+Covering every fiber would exclude the skeleton; finding a legal translation would
+exhibit a skeleton. Neither was done.
+The reduction is useful, but the proposed short covering chain lacked the uniform
+templates and endpoint analysis needed to fund the larger attempt.
+Even an exact ten-square skeleton would only show that square10 must enter the proof.
+
+**The current kernel lane encodes pairs directly.** In the accepted normalization, a
+kernel $K$ satisfies $K-1\succeq0$, is nonpositive on distinct compatible poses, and has
+diagonal at most $B$. An actual $m$-square packing would then satisfy
+
+$$
+m^2\le\sum_{i,j}K(x_i,x_j)\le mB.
+$$
+
+Thus $B<11$ would exclude eleven squares if the kernel conditions were proved on the
+entire domain. A finite set of necessary constraints can instead rule out a chosen
+feature family cheaply: if even its relaxed problem requires $B\ge11$, that family
+cannot supply the certificate.
+A feasible finite relaxation does not prove a valid kernel.
+[PR116](https://github.com/jlevy/squares/pull/116) reports an independently reviewed
+obstruction to cubic center features and a fixed richer family under H125. This makes
+the next question much narrower than constructing an unrestricted hierarchy.
 
 ## What Has Landed
 
@@ -106,8 +218,47 @@ The next decisions are separated by what they can establish:
    control and the full verification price.
    Neither is ready for another overnight target merely because a previous block ended.
 
-The integration itself starts no new H, BC or scientific experiment and transfers no
-other agent’s ownership.
+The upstream merge transfers no other agent’s ownership.
+The later planning block below adds only BC283; no scientific hypothesis or experiment
+is launched.
+
+## Planning Decision: Spend on Missing Information
+
+BC283 makes the following portfolio decision from these results.
+Its planning identity was checked against80 remote refs,48 present worktrees and shared
+tbd state before reservation at22:25UTC. The earlier no-BC283 statements belong to the
+completed overnight and residual-design allocations; this later user-requested planning
+block is distinct.
+No mathematical H-item, experiment or scientific session is created to
+count this review as a result.
+
+| Avenue | What panned out; what did not | Next decision and reconsideration condition |
+| --- | --- | --- |
+| Scalar/fractional optimization | T018/T022 genuinely improved the bound. Later scalar exp116 remained unconverged | Keep H107/its reviewed adapter deferred. Reconsider for a named downstream use, a changed mechanism and a newly priced complete invocation; no unchanged retry |
+| Fixed-support density obstruction | Exp128 exactly settled the chosen support at eleven; earlier graph/depth work did not establish the broader obstruction | Retire that support attempt. Any expansion must name the new geometric information and a cheap necessary-row screen before full continuum verification |
+| Conditional compatibility | Near-axis/near45 auxiliaries and the full diagonal band survived independent review; P12 and the weakened diamond cover were refuted; axis `no_chain` remains inconclusive | Retain the lemmas. Re-enter only with a changed representation preserving the actual distinguished square, and a complete independently checked axis discriminator |
+| X018 capacity and release | Guarded4+7 exclusion, signed-angle exclusions and exact residual-fiber reduction are accepted; resource superiority, whole seven-core capacity and complete fiber coverage are not | Keep H118/H120 targets parked. Require the matched LP survival witness or finite joint-angle rule for H118; justified parameter selection or bounded complete templates and an independent open-fiber reader for H120 |
+| BC264/H114/H125 kernel work | Cubic-family obstruction and source-free builds provide a concrete next test; no global kernel or improved bound has been certified by this work | **Selected coordinating entry remains `think-mq0d` under its existing owner.** Follow its current code/protocol admission and exp129 registration. Do not restart completed pricing, add features automatically or transfer ownership |
+| Stromquist helper replay | Source chronology and independently reviewed local helper arguments are retained; the finite incidence table alone does not supply the geometry | Parallel enabling lane under `think-0krc`: make exact clipping/component ownership reusable and independently discharge remaining lemmas. Transfer to n11 only through an explicit reviewed consumer contract |
+
+The priority judgment is that a cheap exact rejection of a defined representation is
+more useful now than a larger search whose failure would be ambiguous.
+Kernel work has a named family and a potentially decisive finite obstruction.
+The helper lane has reusable geometric obligations.
+H118/H120 retain promising mathematics, but currently lack the complete discriminator
+that would make another target run informative.
+
+This ranking does not assert that one-body methods are universally exhausted, that all
+kernels will work, or that local contact families capture a global minimizer.
+Those are precisely the unsupported steps the recent negative results teach us to avoid.
+Preserve three different outcomes: a false auxiliary claim, a representation ruled out
+on its declared domain, and an unfinished or inconclusive solver attempt.
+
+At the22:24UTC ownership check, PR116 owns H125, exp129 and session097 under existing
+BC264. This planning block dispatches none of that work.
+Its next checkpoint should report the exact obstruction or inconclusive outcome under
+that owner’s frozen protocol, then reassess priorities on the result.
+Our local re-entry beads stay deferred until their missing premises change.
 
 ## Open PRs and Integration Boundaries
 

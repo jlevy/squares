@@ -205,7 +205,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
-| [Research and Upstream Reconciliation, September 7](docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md) | dated review record | record | retained | — |
+| [Research Strategy and Upstream Reconciliation, September 7](docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md) | dated review record | record | retained | — |
 | [BC-282: Residual Skeleton and a Proposed Translation Fence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md) | research synthesis | record | retained | — |
 | [BC-282: Independent Skeleton-Design Admission](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md) | dated review record | record | retained | — |
 | [BC-282: Independent Residual-Domain Inventory](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-domain-inventory.md) | dated review record | record | retained | — |
@@ -589,6 +589,10 @@ controller, not permission to blur contracts.
 (PR115), including PR112’s Stromquist source work and paper v0.2.3. The
 [research and PR survey](docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md)
 records all 25 recent PR closures, agenda dispositions and remaining parallel lanes.
+BC283 / `think-dwq8` is the user-requested W10 strategy/planning block: it explains the
+proof mechanisms from first principles, distinguishes accepted results from failed
+representations and inconclusive searches, and ranks existing next steps without
+launching another scientific target.
 PR102/103 closed unmerged; PR108 reached main through PR107. PR101,105 and109 are
 completed integration checkpoints, not live dispatch branches.
 

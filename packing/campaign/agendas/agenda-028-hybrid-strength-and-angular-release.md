@@ -597,6 +597,31 @@ agenda:
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md
       disposition: defer-dependency
       follow_up: think-k54y
+  - id: BC-283
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: complete
+    priority: 1
+    question: What did the completed exploration efforts establish, and which existing parallel lanes now have the most informative next discriminator?
+    budget: User-requested W10 planning slice through22:45UTC, followed by15minutes for documentation delta validation/publication; two independent six-minute mathematical assessments plus bounded allocation/CI audits. Continuing full validation is asynchronous evidence, not a scientific extension.
+    entry: Merged PRs105/107/108/109/112/113/115, retained X016/X017/X018 results and negatives, current frontiers, PR110 checkpoints, live PR116 ownership and shared reservations.
+    exit: First-principles account of proof mechanisms, evidence-qualified outcome mapping, completed versus active agenda status, disjoint IDs and a ranked next-entry/re-entry decision in the existing planning record.
+    bead: think-dwq8
+    workflows: [review-planning-oversight]
+    depends_on: []
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md
+    next_evidence: Planning assessment and independent reviews are complete. Publish under think-dwq8 with source-bound validation; follow BC264/H114/H125/exp129/session097 under its live owner, retain the independent helper lane and keep local H118/H120 targets parked. No successor target is launched by this block.
+    outcomes:
+    - scope: First-principles strategic reconciliation and next-entry decision
+      classification: achieved
+      result: Two independent source assessments and two synthesis reviews distinguish bound improvements, restricted geometry, refuted auxiliary models, the fixed-support ceiling, inconclusive searches and unopened targets. The decision retains BC264 under its existing owner, a separate geometric-helper lane, and explicit H118/H120 re-entry gates. Landed096, kernel097 and our residual098 remain distinct; BC283 is planning only.
+      evidence:
+      - docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md
+      disposition: retire-success
+      follow_up: null
 ---
 # Agenda 028 — Hybrid Strength and Angular Release
 
@@ -610,6 +635,14 @@ BC282 now has an independently accepted exact translation reduction; its full ta
 remains unadmitted. The agenda remains active for its explicitly deferred questions.
 [X-018](../explorations/X-018-hybrid-strength-and-angular-release.md) owns the critical
 review, priority rationale and mapping from #108. Epic `think-pxv5` owns this agenda.
+
+**Later strategy/planning block:** BC283 / `think-dwq8` reconciles the completed
+explorations from first principles and ranks existing parallel lanes at the owner’s
+request. Its
+[decision record](../../../docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md)
+keeps the original scientific clocks closed.
+It allocates no new mathematical hypothesis, experiment or scientific session.
+
 PR107 landed the plans at `dd36800e`; integration bead `think-0yfe` owns the new
 `codex/n11-hybrid-overnight` execution branch.
 The owner authorized approximately eight hours, 06:31–14:31 UTC on September 7, with

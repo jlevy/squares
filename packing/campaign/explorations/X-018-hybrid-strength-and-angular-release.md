@@ -36,8 +36,12 @@ exploration:
 **BC282 is complete: the exact translation reduction is accepted, and the full target is
 not admitted.** [Session098](../agent-sessions/session-098-residual-skeleton.md) parks
 further local H120 and H118 target work after independent admission and comparison.
-The next portfolio priority is the existing, separately owned BC264 kernel-pricing
-entry. Its kernel-specific contract must still be reviewed before a target.
+BC282 selected the existing, separately owned BC264 kernel lane.
+Its owner’s later session097/PR116 has completed pricing and progressed to source-free
+implementation and prospective H125 testing; follow its current admission record before
+dispatch. The user-requested
+[BC283 strategy review](../../../docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md)
+reconciles the two exploration efforts and preserves the parked H118/H120 targets.
 The [checkpoint decision](#bc282-checkpoint-and-current-allocation) records the new
 mathematics, re-entry conditions and allocation.
 
@@ -429,7 +433,10 @@ complete 24-interval chain may repeat source labels.
 Missing uniform templates and bounded endpoint changes prevent admission of the proposed
 75-worker-minute target.
 
-Two further read-only comparisons agree with the coordinator’s allocation:
+At BC282’s historical checkpoint, two further read-only comparisons agreed with the
+coordinator’s allocation.
+The later BC283 review above records the kernel owner’s subsequent progress; the old
+pricing slice must not be restarted:
 
 | Avenue | Current disposition and exact re-entry condition |
 | --- | --- |
@@ -448,9 +455,10 @@ Allocate zero further local target minutes at this checkpoint.
 This is a readiness and opportunity-cost decision, not evidence that either mathematical
 route is impossible.
 Preserve the accepted reductions and the unchanged global n11 bracket.
-BC282 and session098 are the only new executed allocations; no BC283, new hypothesis or
-experiment is reserved.
-The continuation remains on PR110.
+BC282 and session098 were the only new executed allocations at that checkpoint; no
+BC283, new hypothesis or experiment was then reserved.
+The later user-requested BC283 planning block changes no scientific allocation from that
+session. The continuation remains on PR110.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

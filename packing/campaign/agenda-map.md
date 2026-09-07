@@ -2,7 +2,7 @@
 
 # Agenda map
 
-271 agenda commitments across 28 agendas, as declared in each agenda's own frontmatter.
+272 agenda commitments across 28 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **6** in_progress, **15** ready, **12** tentative, **59** blocked, **44** stopped, **135** complete.
+- **6** in_progress, **15** ready, **12** tentative, **59** blocked, **44** stopped, **136** complete.
 
 - **18 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -166,7 +166,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-025 | active | 3 |  | 1 | 6 |  | 3 | 13 |
 | agenda-026 | active | 2 | 2 | 2 | 3 |  | 5 | 14 |
 | agenda-027 | active | 1 | 2 | 2 | 2 |  | 4 | 11 |
-| agenda-028 | active |  |  | 2 | 2 | 3 | 7 | 14 |
+| agenda-028 | active |  |  | 2 | 2 | 3 | 8 | 15 |
 
 ## By program
 
@@ -288,6 +288,7 @@ Open frontier: `BC-243`, `BC-244`, `BC-246`, `BC-247`, `BC-248`, `BC-249`, `BC-2
 | agenda-028 | `BC-280` | complete | What complete physical common-angle release domain with t in[0,1] can be admitted without losing… |
 | agenda-028 | `BC-281` | stopped | Is the entire full physical-angle signed short-slide source-feature family empty throughout… |
 | agenda-028 | `BC-282` | complete | Can the accepted new geometry support a complete, independently admissible residual ten-square… |
+| agenda-028 | `BC-283` | complete | What did the completed exploration efforts establish, and which existing parallel lanes now have… |
 
 Open frontier: `BC-270`, `BC-271`, `BC-272`, `BC-274`.
 
