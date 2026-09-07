@@ -5,11 +5,13 @@ title: Review Stromquist memos and pursue systematic helper arguments
 kind: task
 status: open
 priority: 1
-version: 8
+version: 9
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m1yt2rbhseg2axzvsxzed2f8
 created_at: 2026-09-07T16:13:03.887Z
-updated_at: 2026-09-07T20:33:42.967Z
+updated_at: 2026-09-07T20:48:43.363Z
 closed_at: null
 close_reason: null
 resolution: null
