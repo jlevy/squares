@@ -201,16 +201,21 @@ The [agenda map](../../../SYNOPSIS.md) is the generated inventory.
 
 The next decisions are separated by what they can establish:
 
-1. **BC264/H114 remains with its existing owner, `think-mq0d`.** Live notes on September
-   7 at 21:47 UTC report session097’s independently admitted kernel implication and
-   cubic center-feature obstruction, followed by a fixed eleven-feature,
+1. **BC264/H114 remains with its existing owner, `think-mq0d`.** The September 7, 22:46
+   UTC check of [PR116](https://github.com/jlevy/squares/pull/116) and its live owner
+   records retains session097’s independently admitted kernel implication, cubic
+   center-feature obstruction and reviewed implementation of the fixed eleven-feature,
    sixteen-parameter family.
-   The producer (`think-s8cj`) and independent reader (`think-rbmm`) completed
-   source-free builds. Separate code/protocol admission and whole-child supervision
-   remain prerequisites.
-   No scientific source run or continuum certificate was claimed in those notes.
-   These working-tree results are not part of main or this merge; the owner’s current
-   record governs dispatch.
+   Session097 has stopped.
+   Exp129 missed its fixed 22:20 launch cutoff because its protocol guards had not
+   passed; no scientific source, target, packet or reader ran.
+   H125 therefore remains untested, with its scientific allowances unspent.
+   Finish checkpoint validation/publication under `think-m2lx`, then let `think-mq0d`
+   assess a fresh bounded first-invocation allocation for the unchanged instrument.
+   Passing record checks, a renewed operational lease and publication of the new
+   admission must precede launch.
+   This planning block renews no allocation.
+   These separate branch results are not part of main or this merge.
 2. **Stromquist helper replay, `think-0krc`, is an independent tool/proof lane.** Encode
    exact segment clipping, component ownership and universal inequalities, then replay
    the remaining Memo I implications.
@@ -242,7 +247,7 @@ as a result.
 | Fixed-support density obstruction | Exp128 exactly settled the chosen support at eleven; earlier graph/depth work did not establish the broader obstruction | Retire that support attempt. Any expansion must name the new geometric information and a cheap necessary-row screen before full continuum verification |
 | Conditional compatibility | Near-axis/near45 auxiliaries and the full diagonal band survived independent review; P12 and the weakened diamond cover were refuted; axis `no_chain` remains inconclusive | Retain the lemmas. Re-enter only with a changed representation preserving the actual distinguished square, and a complete independently checked axis discriminator |
 | X018 capacity and release | Guarded 4+7 exclusion, signed-angle exclusions and exact residual-fiber reduction are accepted; resource superiority, whole seven-core capacity and complete fiber coverage are not | Keep H118/H120 targets parked. Require the matched LP survival witness or finite joint-angle rule for H118; justified parameter selection or bounded complete templates and an independent open-fiber reader for H120 |
-| BC264/H114/H125 kernel work | Cubic-family obstruction and source-free builds provide a concrete next test; no global kernel or improved bound has been certified by this work | **Selected coordinating entry remains `think-mq0d` under its existing owner.** Follow its current code/protocol admission and exp129 registration. Do not restart completed pricing, add features automatically or transfer ownership |
+| BC264/H114/H125 kernel work | Cubic-family obstruction and reviewed source-free builds provide a concrete next test. Exp129 never ran before its cutoff, so H125 remains untested | **Selected coordinating entry remains `think-mq0d` under its existing owner.** Finish checkpoint publication under `think-m2lx`, then assess a fresh bounded first invocation after its admission requirements pass. Preserve the expired protocol; no automatic feature increase or ownership transfer |
 | Stromquist helper replay | Source chronology and independently reviewed local helper arguments are retained; the finite incidence table alone does not supply the geometry | Parallel enabling lane under `think-0krc`: make exact clipping/component ownership reusable and independently discharge remaining lemmas. Transfer to n11 only through an explicit reviewed consumer contract |
 
 The priority judgment is that a cheap exact rejection of a defined representation is
@@ -258,10 +263,12 @@ Those are precisely the unsupported steps the recent negative results teach us t
 Preserve three different outcomes: a false auxiliary claim, a representation ruled out
 on its declared domain, and an unfinished or inconclusive solver attempt.
 
-At the 22:24 UTC ownership check, PR116 owns H125, exp129 and session097 under existing
-BC264. This planning block dispatches none of that work.
-Its next checkpoint should report the exact obstruction or inconclusive outcome under
-that owner’s frozen protocol, then reassess priorities on the result.
+PR116 retains H125, exp129 and session097 under existing BC264. The 22:46 UTC terminal
+handoff supersedes the earlier live-run expectation: exp129 supplied no mathematical
+test, and its original launch cutoff stays expired.
+A newly admitted first invocation could produce an exact obstruction or an inconclusive
+outcome; neither is available now.
+Compare the actual result with alternatives only after it exists.
 Our local re-entry beads stay deferred until their missing premises change.
 
 ## Open PRs and Integration Boundaries

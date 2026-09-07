@@ -37,9 +37,11 @@ exploration:
 not admitted.** [Session098](../agent-sessions/session-098-residual-skeleton.md) parks
 further local H120 and H118 target work after independent admission and comparison.
 BC282 selected the existing, separately owned BC264 kernel lane.
-Its owner’s later session097/PR116 has completed pricing and progressed to source-free
-implementation and prospective H125 testing; follow its current admission record before
-dispatch. The user-requested
+Its owner’s later session097/PR116 completed pricing and source-free implementation,
+then stopped after exp129 missed its launch cutoff.
+H125 remains untested.
+Follow its checkpoint publication and fresh-allocation requirements before dispatch.
+The user-requested
 [BC283 strategy review](../../../docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md)
 reconciles the two exploration efforts and preserves the parked H118/H120 targets.
 The [checkpoint decision](#bc282-checkpoint-and-current-allocation) records the new

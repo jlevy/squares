@@ -624,16 +624,18 @@ The global n11 bracket is unchanged.
 
 **Selected next entry:** `think-mq0d`, the existing BC-264 / H-114 kernel lane.
 Check the owner’s current checkpoint before dispatch.
-The task **Squares plan X-016** landed PR109 at `07e82d1e` and is continuing on
-`codex/n11-kernel-pricing` under `think-mq0d`. Live task notes at 21:47 UTC report
-session097’s admitted kernel implication and cubic center-feature obstruction, followed
-by source-free producer and independent-reader builds for a fixed eleven-feature,
-sixteen-parameter family (`think-s8cj`, `think-rbmm`). Their next gate is separate
-code/protocol admission and whole-child supervision.
-No scientific source run or continuum certificate was claimed.
-These live working-tree results are not included in this merge; the owner’s record
-governs its next allocation.
-Do not restart the earlier 30-minute pricing slice or take its ownership.
+The task **Squares plan X-016** landed PR109 at `07e82d1e`; its later
+[PR116](https://github.com/jlevy/squares/pull/116) retains session097’s admitted kernel
+implication, cubic center-feature obstruction and independently reviewed implementation
+of a fixed eleven-feature, sixteen-parameter family.
+At the 22:46 UTC check, session097 was stopped: exp129 missed its fixed 22:20 launch
+cutoff, and no scientific source, target or reader ran.
+H125 remains untested.
+Checkpoint validation/publication belongs to `think-m2lx`; after those prerequisites
+pass, `think-mq0d` assesses a fresh bounded first-invocation allocation for the
+unchanged instrument, with a published admission and renewed operational lease.
+These separate branch results are not included in this merge.
+This handoff renews no allocation and transfers no ownership.
 
 PR109’s
 [Session095](packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md)

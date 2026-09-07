@@ -613,7 +613,7 @@ agenda:
     program: n11-hybrid-strength-and-angular-release
     artifacts:
     - docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md
-    next_evidence: Planning assessment and independent reviews are complete. Publish under think-dwq8 with source-bound validation; follow BC264/H114/H125/exp129/session097 under its live owner, retain the independent helper lane and keep local H118/H120 targets parked. No successor target is launched by this block.
+    next_evidence: Planning assessment and independent reviews are complete. Publish under think-dwq8 with source-bound validation. Session097 stopped after exp129 missed its launch cutoff; H125 remains untested. Follow checkpoint publication under think-m2lx, then the existing BC264 owner think-mq0d assesses a fresh bounded first invocation after admission requirements pass. Retain the independent helper lane and parked H118/H120 targets; this block renews no scientific allocation.
     outcomes:
     - scope: First-principles strategic reconciliation and next-entry decision
       classification: achieved
