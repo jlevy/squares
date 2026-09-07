@@ -3,14 +3,19 @@ type: is
 id: is-01m1wdb4fgc305fn9rkevfqyte
 title: "BC255: closed-tile angle certificate controls and independent review"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 1
+version: 2
 spec_path: packing/campaign/hypotheses/H-036-robust-restricted-orientation.md
+assignee: codex
 labels: []
 dependencies: []
 parent_id: is-01m1vvtx8n6tryrc848wzq2pbc
 created_at: 2026-09-06T22:27:37.583Z
-updated_at: 2026-09-06T22:27:37.583Z
+updated_at: 2026-09-07T00:33:03.349Z
 ---
 Next-allocation recommendation, NOT funded during Session089 finalization. Read agenda024CurrentAllocation and datedH104follow-up in bc-255-angle-instrument-design.md. Source/toy wall-adapted closed triangulation and degree-four sign certificate:20–30author minutes plus10–20independent review. Every tile/slab uses a common point label, both sign charts and fullclosedcover including seams/endpoints; Bernstein interior zeros can remain unresolved. No nearby-angle target until reviewed instrument, full-range auxiliary Hitem and prospective experiment exist. H0363.878/±.25unchanged; single-point assignment failure is not all-P10escape. SameintegratedPR101, no tinyPR.
+
+## Notes
+
+Commissioned in Session090 on 2026-09-07 after PR101 merged. structural_lane_strategy owns20–30-minute source/toy closed-angle controls, then independent review. No H036 target or full-range claim is authorized by toy readiness alone.
