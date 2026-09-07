@@ -42,6 +42,12 @@ hypothesis:
 question so a two-angle success cannot silently discard the three-or-more-angle
 remainder. It refines a structural issue within H-103 without changing that claim.
 
+The later [H-120](H-120-rank-nine-release-exclusion.md) selects a direct release-domain
+pilot, while [H-121](H-121-axis-plus-one-minimizer.md) states the existential
+axis-plus-one normal form precisely.
+Agenda 028 owns those narrower questions; BC-267 retains the physical-stationarity audit
+under this broad question.
+
 Independent actual orientation classes are not folded-angle bins.
 Connected components of a proved edge-equality graph bound the number of angle
 variables; distinct components may still share the same angle.

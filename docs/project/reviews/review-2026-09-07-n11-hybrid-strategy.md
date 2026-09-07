@@ -2,6 +2,16 @@
 
 **Draft for discussion, 2026-09-07. New research IDs remain placeholders.**
 
+**Integration decision, 2026-09-07.**
+[X-018](../../../packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md)
+reviews this proposal and maps its four hypothesis templates to H-118–121.
+[Agenda 028](../../../packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md)
+owns the focused comparison and release questions under BC-269–275, preserving X-017 /
+Agenda 027’s existing broad pilots and shared interface.
+The draft below retains its original recommendations and placeholder labels as the
+source record; X-018 owns the subsequent allocation and priority decision.
+Neither document launches an experiment.
+
 The proposed hybrid work fits Agenda 027’s mathematical program.
 Keep that agenda, add a focused exploration provisionally called **X-TBD-HYBRID**, and
 develop its conditional-resource and angle-structure questions through narrower

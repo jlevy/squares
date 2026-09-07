@@ -52,6 +52,10 @@ all-feasible exclusions need neither support-ceiling adoption nor stationary clo
 The proposed allocation is
 [Agenda 027](../agendas/agenda-027-compatibility-and-restricted-families.md).
 It is prepared and paused; this planning work does not launch its experiments.
+The later [X-018](X-018-hybrid-strength-and-angular-release.md) review adds a focused
+parallel program for matched hybrid strength and contact release under Agenda 028. It
+preserves this exploration’s H-111–117 and Agenda 027’s broad pilots; its mapping
+identifies the shared evidence and sole geometry-interface owner.
 The source [Agenda 024](../agendas/agenda-024-post-381-24h-portfolio.md) and its
 children retain their own unfinished work, budgets, and owners.
 The owner can select this program in parallel or use its first checkpoint to replace

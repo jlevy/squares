@@ -571,6 +571,20 @@ Status: **paused**. Prepare an independent alternative to the ongoing Agenda024-
 | BC-267 | measurement_validation | 3, 4, 11 | ready | 1 | think-zq12 | Only leaves using physical stationarity depend on this acceptance. Existing sign/bin branches keep their old obligations. A feasible high-angle witness can refute an all-feasible restriction, but cannot alone refute existence of a different low-angle minimizing representative. |
 | BC-268 | research | 11 | ready | 1 | think-x61z | Expand the method that closes whole cases or yields an actionable simpler remainder; reprice or stop unproductive representations. Retain every partial, failed or never-opened attempt honestly. Do not close the other coordinator's session or alter its scientific budgets. |
 
+### [agenda-028](agendas/agenda-028-hybrid-strength-and-angular-release.md) — Hybrid Strength and Angular Release
+
+Status: **paused**. Prepare a focused parallel n11 program from PR108: decide whether one local resource representation adds strength over a fair coupled outer LP, and test one new closed contact-release domain. Preserve X017's broad cover and family pilots and X016's source continuation. Consume the existing shared geometry instrument, expand on useful closed domains, and allocate common-anchor or global representative work only on explicit evidence. Planning launches no targets.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-269 | research | 11 | complete | 0 | think-urcm | Select BC270 and BC273 design with independent review; keep source ownership intact. |
+| BC-270 | measurement_validation | 3, 4, 11 | ready | 0 | think-9uv0 | Send precise leaf requirements to the BC261 owner. Adopt one reviewed instrument artifact; do not build another exporter or infer readiness from existing arithmetic helpers. If no useful domain is identified, retain the missing geometric premise and reallocate at BC275. |
+| BC-271 | research | 11 | blocked | 1 | think-6l39 | Expand one recurring useful domain or send a checked cut to BC262. One prescribed refinement with unchanged residual ends expansion of this representation at checkpoint. It does not reject H111 or all resource methods. |
+| BC-272 | research | 11 | tentative | 2 | think-cy6g | Return a useful certificate to the broad anchor pilot or retain the exact missing capture premise. Do not escalate to arbitrary measures or subdivisions within the frozen comparison. |
+| BC-273 | research | 11 | ready | 1 | think-1btr | Expand to a different released edge or wall pattern only if a reusable argument closes new geometry. If work returns only source-cell samples or already-closed local boxes, record that limitation and return to BC275. A finite-motion or stationary-minimizer claim needs separate premises. |
+| BC-274 | research | 11 | tentative | 2 | think-5hmt | A global reduction earns an all-multiplicity family allocation with the Agenda027 owner. H112 alone covers only six-plus-five; H113 would suffice as a stronger full-family bound. Do not create a duplicate family run here. |
+| BC-275 | measurement_validation | 11 | ready | 1 | think-1v6g | Extend a frozen useful certificate queue, redirect mathematical attention to its bottleneck, or retain a named blocker and another independently useful slice. A self-chosen checkpoint is not termination of a later open-ended user mandate; never extend an exhausted scientific attempt silently. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
@@ -674,6 +688,10 @@ Status: **paused**. Prepare an independent alternative to the ongoing Agenda024-
 | H-115 | open question | proof | Can finite nondegenerate curved arcs carrying nonnegative integrable p |  | 0 |  |  |
 | H-116 | open question | proof | Does a finite full-size placement support extending beyond the sixty T |  | 0 |  |  |
 | H-117 | open question | proof | Can a complete structural argument force at most k < 11 exact orientat |  | 0 |  |  |
+| H-118 | open question | proof | Does a natural continuous subsystem domain from an n11 case at side 96 |  | 0 |  |  |
+| H-119 | open question | proof | On one frozen unsplit anchor box for n11 at side 96/25, can one fixed  |  | 0 |  |  |
+| H-120 | open question | proof | Can a nontrivial closed portion of the Trump rank-nine family obtained |  | 0 |  |  |
+| H-121 | blocked | proof | Some global minimizing packing of eleven unit squares has every actual |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 

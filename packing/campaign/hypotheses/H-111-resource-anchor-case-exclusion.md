@@ -43,6 +43,10 @@ gives the mechanism and its relationship to H-103.
 [Agenda 027](../agendas/agenda-027-compatibility-and-restricted-families.md) owns the
 proposed pilot; no experiment is registered or executed by this question.
 
+The later [H-118](H-118-capacity-versus-coupled-lp.md) and
+[H-119](H-119-shared-anchor-correlation.md) isolate matched capacity and common-anchor
+comparisons under Agenda 028. They preserve this broad pilot’s ownership and claim.
+
 The anchor-box residual domain is a union over all anchors in the box, or a proved
 superset. A midpoint anchor does not represent that domain.
 Resource minima must hold uniformly, and all angle cells in a capacity-one tile share

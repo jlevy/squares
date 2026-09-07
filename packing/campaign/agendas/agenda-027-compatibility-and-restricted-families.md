@@ -357,7 +357,7 @@ agenda:
     state: ready
     priority: 1
     question: >-
-      Which next slice earns allocation from the actual Agenda100 review and pilot
+      Which next slice earns allocation from the actual Agenda027 review and pilot
       evidence, whether the source portfolio has finished or is still running?
     budget: >-
       A 20-minute integration reserve within a proposed first four-active-hour
@@ -407,6 +407,13 @@ a reusable input, and imported conclusions still require the review their use ne
 A source checkpoint, budget expiry, interruption or completion does not activate,
 terminate or reprice this agenda.
 Neither this agenda nor its reviewers owns the other coordinator’s clocks or records.
+
+[Agenda 028](agenda-028-hybrid-strength-and-angular-release.md) subsequently adds
+H-118–121 and BC-269–275 for the PR108 comparisons and release investigation.
+This agenda retains all its IDs, pilots and owners.
+BC-261 remains the sole shared geometry-interface commitment; its accepted leaf types
+can serve either agenda.
+The new program owns narrower comparisons, not another BC-262 or BC-263 run.
 
 ## Proposed Opening Allocation
 
