@@ -41,7 +41,7 @@ hypothesis:
     parent S. Other block angles, longer slides and changed wall/contact
     patterns remain open. BC280 independently admits the complete physical block
     chart t in[0,1]; BC281 separately prices its whole-family determination.
-    BC281 later retained accepted partial exclusions; session096 completes
+    BC281 later retained accepted partial exclusions; session097 completes
     BC282 with an independently accepted exact open-fiber reduction and a
     target-readiness refusal. No finite-motion theorem or global bound is claimed.
 ---
@@ -179,7 +179,7 @@ The independent reviewer refuses the conditional target allocation because unifo
 templates, bounded facet transitions and a priced complete witness discriminator are
 missing. An exact ten-square witness would refute skeleton emptiness, not H120’s
 eleven-square exclusion.
-Session096 parks local target work and retains the re-entry prerequisites in
+Session097 parks local target work and retains the re-entry prerequisites in
 `think-k54y`: a justified structural-tuple selection rule or bounded uniform templates,
 independent skeleton binding and a credible price through verification.
 Existing BC264 kernel pricing remains separately owned.

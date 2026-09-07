@@ -564,8 +564,8 @@ agenda:
     question: Can the accepted new geometry support a complete, independently admissible residual ten-square skeleton decision?
     hypotheses:
     - H-120
-    budget: 20-minute design and10-minute independent admission, including writing and checks, completed in session096. Two independent10-minute preparation inventories ran inside the design window. The proposed30/25/20-minute target was refused and remains unspent.
-    entry: The accepted BC281 partial audit and closed remainder selected BC282 under think-s6e7. The owner subsequently authorized continuation; session096 executed this separately from closed session092.
+    budget: 20-minute design and10-minute independent admission, including writing and checks, completed in session097. Two independent10-minute preparation inventories ran inside the design window. The proposed30/25/20-minute target was refused and remains unspent.
+    entry: The accepted BC281 partial audit and closed remainder selected BC282 under think-s6e7. The owner subsequently authorized continuation; session097 executed this separately from closed session092.
     exit: Exact necessary skeleton projection with40 containment rows and45 full SAT clauses, complete closed angle/sign cover, scoped inherited lemmas and an alternative-obligation table naming a specific additional geometric implication. Otherwise retain the exact admission gap. A mere restatement or unchanged retry is refused.
     bead: think-s6e7
     workflows:
@@ -580,8 +580,8 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-domain-inventory.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-inherited-premise-inventory.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md
-    - packing/campaign/agent-sessions/session-096-residual-skeleton.md
-    next_evidence: Independent admission accepts the exact40/45 domain, ten closed envelope chambers and open translation-fiber equivalence. The six-source fence is sufficient but unproved; uniform templates, bounded facet transitions and a priced complete witness discriminator are missing. Session096 parks local target work; think-k54y retains exact re-entry prerequisites, while existing BC264 pricing remains separately owned.
+    - packing/campaign/agent-sessions/session-097-residual-skeleton.md
+    next_evidence: Independent admission accepts the exact40/45 domain, ten closed envelope chambers and open translation-fiber equivalence. The six-source fence is sufficient but unproved; uniform templates, bounded facet transitions and a priced complete witness discriminator are missing. Session097 parks local target work; think-k54y retains exact re-entry prerequisites, while existing BC264 pricing remains separately owned.
     outcomes:
     - scope: Complete residual ten-square domain and exact joint-translation reduction
       classification: achieved
@@ -605,7 +605,7 @@ agenda:
 audits completed before the usage interruption; final publication was recovered after
 the owner asked to continue.
 The owner subsequently authorized continuation in
-[session-096](../agent-sessions/session-096-residual-skeleton.md).
+[session-097](../agent-sessions/session-097-residual-skeleton.md).
 BC282 now has an independently accepted exact translation reduction; its full target
 remains unadmitted. The agenda remains active for its explicitly deferred questions.
 [X-018](../explorations/X-018-hybrid-strength-and-angular-release.md) owns the critical

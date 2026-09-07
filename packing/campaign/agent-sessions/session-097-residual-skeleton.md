@@ -1,12 +1,12 @@
 ---
-title: "session-096 \u2014 residual ten-square skeleton admission"
+title: "session-097 \u2014 residual ten-square skeleton admission"
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
 session:
-  id: session-096
+  id: session-097
   title: Residual ten-square skeleton admission
   date: '2026-09-07'
   started_at: '2026-09-07T17:20:00Z'
@@ -101,8 +101,8 @@ session:
     fallback: Preserve the accepted result and exact unfinished validation or publication obligation without claiming completion.
     outcome: At the18:39:20UTC checkpoint, immutable127fd112 has a passing62-step fast gate, all55 exhaustive exact tests and targeted recovery of all six sandbox-blocked tests. The original full invocation remains failed. The accepted reduction, terminal handoff and refreshed cost receipt are ready for a separately checked final documentation commit; push and hosted CI are not yet claimed.
     evidence:
-    - packing/campaign/agent-sessions/session-096-residual-skeleton.md
-    - packing/campaign/resource-usage/codex-task-tree-session-096.yaml
+    - packing/campaign/agent-sessions/session-097-residual-skeleton.md
+    - packing/campaign/resource-usage/codex-task-tree-session-097.yaml
     - SYNOPSIS.md
     stop_reason: Freeze the terminal record for immutable final-delta checks. Scientific allocation and review are complete; final publication receipts are recorded on PR110 after their actual outcomes.
     next_action: Validate the final documentation commit, publish it on PR110 and verify hosted CI; keep the original19:20 publication endpoint and no additional scientific target.
@@ -291,7 +291,7 @@ session:
     operator: Codex closing_scope_review, inherited max thinking
     status: completed
     recording: contemporaneous
-    outcome: "Read-only publication audit found no scientific or ownership overclaim. Corrected the PR cost prose to label session092 separately from session096\u2019s new interval."
+    outcome: "Read-only publication audit found no scientific or ownership overclaim. Corrected the PR cost prose to label session092 separately from session097\u2019s new interval."
     evidence:
     - packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md
     files: []
@@ -315,7 +315,7 @@ session:
   outputs: *id004
   checks:
   - Baseline013e772a is clean and pushed. Its code parentaeef535f passed all66 full checks in1752.00 seconds; the final documentation delta passed45 push checks in140.20 seconds and hosted CI.
-  - Local and source worktree inventories end at session095. The complete paginated PR111 file inventory contains session093-atlas-expansion-to-324, not session096; this branch allocates the next sequential session096. The external093 naming collision with landed source work is separate from this allocation.
+  - Local and source worktree inventories end at session095. The complete paginated PR111 file inventory contains session093-atlas-expansion-to-324, not session097; this branch allocates the next sequential session097. The external093 naming collision with landed source work is separate from this allocation.
   - Baseline aeef535f records tier passed31 of66 steps in37.05 seconds before registry integration; exit0. This is a baseline check, not validation of the new documents.
   - Publication-recovery cost receipt refreshed through20:28:54UTC preserves the exact17:20 baseline and nondecreasing totals; it remains an incomplete lower bound. Session092 accounting is unchanged. Pre17:20 orientation and post20:28:54 validation/publication are outside this snapshot. The earlier18:24 receipt remains in Git history.
   - 'Initial working-tree records run failed three steps in34.80 seconds: two repository walkers entered existing attic fixtures, and the declared-command checker parsed prose after the phase1 command. The command is corrected; subsequent validation uses the clean immutable checkout. No scope, formatter exclusions or validation thresholds changed.'
@@ -331,7 +331,7 @@ session:
   stop_reason: BC282 design and independent admission are complete, with a useful exact reduction and no admitted target. Stop local scientific work on that evidence, not on budget exhaustion. Freeze the terminal record for separately checked publication; PR110 retains the actual final-delta and hosted outcomes without a self-referential claim about an unrun commit.
   next_action: After final-delta validation and publication, retain existing BC-264 / think-mq0d as the next portfolio pricing entry under its separate owner. Check live ownership and accept its kernel-specific prerequisites before at most30 minutes of feature and full-verification pricing; no automatic target or hierarchy.
   resource_rollups:
-  - packing/campaign/resource-usage/codex-task-tree-session-096.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-097.yaml
 ---
 # Residual Skeleton Continuation
 
@@ -373,7 +373,7 @@ Its kernel-specific BC260 review remains a prerequisite; this session neither st
 nor promotes preparation to a target.
 The H120 re-entry conditions are retained in paused bead `think-k54y`. No BC283,
 hypothesis or experiment ID is allocated.
-The external PR111 session093 collision is tracked by `think-rzek`; session096 remains
+The external PR111 session093 collision is tracked by `think-rzek`; session097 remains
 disjoint.
 
 The finalization reserve is increased prospectively to18:09–19:20, after all original

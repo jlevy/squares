@@ -350,7 +350,7 @@ First accept BC260’s kernel-specific implications; the direct case/Farkas revi
 cover them. Fix one feature family, exact PSD criteria and the full diagonal/pair
 verification price before any scientific target.
 Check live ownership before dispatch; no degree escalation or general hierarchy follows
-by default. Session096 completed BC282’s exact open-fiber reduction and independent
+by default. Session097 completed BC282’s exact open-fiber reduction and independent
 admission, which refused the larger target.
 Its comparisons park local H120/H118 target work and retain their re-entry conditions in
 [X018](../../../../packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md#bc282-checkpoint-and-current-allocation).

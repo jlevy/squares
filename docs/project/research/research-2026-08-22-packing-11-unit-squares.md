@@ -681,7 +681,7 @@ Exact values of `s(n)` known as of this research:
 | 6 | 3 | **[Kearney–Shiu 2002]** — first *published* proof (see the priority ledger below) |
 | 7, 8 | 3 | **[El Moumni 1999]** — earliest located publication of the result, with the printed `n = 7` route blocked by D-344–D-347; independent later proofs include **[Friedman DS7]** and **[Kearney–Shiu 2002]** |
 | 9 | 3 | Trivial (`3²`) |
-| **10** | `3 + ½√2 ≈ 3.707107` | **[Stromquist 2003]**, Thm 1 |
+| **10** | `3 + ½√2 ≈ 3.707107` | **[Stromquist 1984]**, Memo II; published as **[Stromquist 2003]**, Thm 1 |
 | **11** | **OPEN** — in `[3.788854, 3.877084]` | — |
 | 13 | 4 | **[Bentz 2010]** |
 | 22 | 5 | **[Bentz 2016]** |
@@ -738,7 +738,7 @@ The ledger, as best it can be reconstructed:
 | --- | --- | --- |
 | `s(7) = s(8) = 3` | Bajmóczy, per Schrijver, per Göbel (unpublished) | **El Moumni (1999)**, *Studia Sci. Math. Hungar.* 35, 281–290 — earliest located publication; its printed `n = 7` route has D-344–D-347 |
 | `s(6) = 3` | Stromquist 1984 memoranda; also Trevor Green (2000, private) — neither published | **[Kearney–Shiu 2002]** |
-| `s(10) = 3 + ½√2` | Stromquist 1984 memoranda | **[Stromquist 2003]** |
+| `s(10) = 3 + ½√2` | Stromquist 1984 Memo II contains the proof | **[Stromquist 2003]** |
 | `s(14) = s(15) = 4`, `s(24) = 5` | Stromquist “claimed to know how to prove” (1984) | **[Friedman DS7]**; `s(15)` also El Moumni (1999) |
 | `s(11) = 3.877084…` | conjectured since 1979; never claimed as proved | **none — open** |
 | `n = 11` packing | Trump 1979; independently rediscovered many times, incl. Gustafsson–Thulin 1980 | construction only |
@@ -945,13 +945,13 @@ Use the structured form to query or plot; use these tables to read.
 | 4 | `2` | perfect square | classical | proved |
 | 5 | `2 + (1/2)√2` | unavoidable points | Frits Göbel (1979) | proved |
 | 6 | `3` | unavoidable points | Michael Kearney, Peter Shiu (2002) | proved |
-| 7 | `3` | unavoidable points | Said El Moumni (1999) | proved |
-| 8 | `3` | unavoidable points | Said El Moumni (1999) | proved |
+| 7 | `3` | elementary | Said El Moumni (1999) | proved |
+| 8 | `3` | elementary | Said El Moumni (1999) | proved |
 | 9 | `3` | perfect square | classical | proved |
 | 10 | `3 + (1/2)√2` | unavoidable points | Walter Stromquist (2003) | proved |
 | 13 | `4` | unavoidable points | Wolfram Bentz (2010) | proved |
 | 14 | `4` | unavoidable points | Erich Friedman (2009) | proved |
-| 15 | `4` | unavoidable points | Said El Moumni (1999) | proved |
+| 15 | `4` | elementary | Said El Moumni (1999) | proved |
 | 16 | `4` | perfect square | classical | proved |
 | 22 | `5` | unavoidable points | Wolfram Bentz (2016) | proved |
 | 23 | `5` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
@@ -2222,6 +2222,17 @@ Exp-017 changes only `G=(.8,1.85)` to `G'=(.79,1.85)` and certifies the full fin
 cover and capacity argument.
 The published proof remains false as printed, while the numerical inequality now has an
 independent exact computer-assisted certificate in this repository.
+
+**Seventh pass — author-prompted memo review (2026-09-07).** All 47 scanned pages were
+visually reviewed against the current explainer.
+The [dedicated review](research-2026-09-07-stromquist-memos-and-helper-arguments.md)
+corrects the introductory chronology to the 1984 statement and 2003 publication, credits
+Memo II’s complete 1984 ten-square proof, and expands the archive’s reading aids.
+It retains independently reviewed conditional counting and five-dot obstruction
+arguments, plus exact finite controls.
+A correction to the six-square case summary distinguishes Kearney–Shiu’s geometric
+two-lattice proof from pure five-dot counting.
+None of these changes improves a packing bound.
 
 ## References
 

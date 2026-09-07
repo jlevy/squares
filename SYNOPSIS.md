@@ -205,6 +205,12 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | research synthesis | supporting | maintained | — |
+| [Review: Incorporating Stromquist’s Memos and Helper Arguments](docs/project/reviews/review-2026-09-07-stromquist-incorporation.md) | dated review record | record | retained | — |
+| [Stromquist’s Helper Arguments and Conditional Dots Certificates](docs/project/stromquist-helper-arguments-math-review.md) | dated review record | supporting | maintained | — |
+| [Five-Dot Obstruction for the Six-Square Problem](docs/project/reviews/review-2026-09-07-n6-pure-dots-obstruction.md) | dated review record | record | retained | — |
+| [An Explicit Five-Point Piercing Obstruction Near Side Three](docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md) | dated review record | record | retained | — |
+| [Stromquist’s Segment Helper: An Independent Derivation](docs/project/reviews/review-2026-09-07-stromquist-segment-helper.md) | dated review record | record | retained | — |
 | [BC-282: Residual Skeleton and a Proposed Translation Fence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md) | research synthesis | record | retained | — |
 | [BC-282: Independent Skeleton-Design Admission](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md) | dated review record | record | retained | — |
 | [BC-282: Independent Residual-Domain Inventory](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-domain-inventory.md) | dated review record | record | retained | — |
@@ -579,7 +585,7 @@ controller, not permission to blur contracts.
 ### Current Handoff
 
 **BC282’s exact reduction is accepted; further local target work is parked.**
-[Session096](packing/campaign/agent-sessions/session-096-residual-skeleton.md) continues
+[Session097](packing/campaign/agent-sessions/session-097-residual-skeleton.md) continues
 the owner’s request after the closed eight-hour investigation in
 [session092](packing/campaign/agent-sessions/session-092-hybrid-overnight.md).
 [PR110](https://github.com/jlevy/squares/pull/110) retains both checkpoints.
@@ -618,7 +624,7 @@ integrated here.
 Its exp128 fixes the old Trump support optimum at eleven; BC265 selected
 the existing BC264 entry.
 Preserve source H122–124, exp121–128 and sessions091/093–095. This continuation executes
-BC282 in session096 and allocates no BC283, new hypothesis or experiment.
+BC282 in session097 and allocates no BC283, new hypothesis or experiment.
 PR111’s separate session093 naming collision is tracked by `think-rzek`; it does not
 change the landed IDs.
 Refresh live allocations before reserving another ID.
@@ -703,7 +709,17 @@ Session 089 retains the finite-row density candidate, its complete pair exclusio
 exact-angle auxiliary result, and the next complete-method assessments.
 
 **Parallel lane:** `think-mq0d` takes BC-264’s bounded H114 feature and kernel-contract
-pricing. The
+pricing.
+
+[Session096](packing/campaign/agent-sessions/session-096-stromquist-memos-and-helpers.md)
+reviewed Stromquist’s three memos, corrected the paper’s chronology and five case-proof
+descriptions, and independently checked a five-dot obstruction and the local segment
+helper. Its
+[source brief](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md)
+retains the remaining geometric replay under `think-0krc`; the selected target-research
+entry remains BC-264. All 66 full-checkpoint steps passed at `dd92b2a0`.
+
+The
 [Session094 handoff](packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md)
 was updated after the first result in
 [Session095](packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md).
@@ -2210,8 +2226,9 @@ For most `n` the answer is uninteresting: `s(m²) = m` by the grid.
 It becomes interesting just above a perfect square, where the leftovers must be tilted
 in.
 
-At `n = 11` the upper end has not moved since 1979, and the lower end moved on
-2026-09-04 for the first time since 2003:
+At `n = 11` the upper end has not moved since 1979. On 2026-09-04 the lower end improved
+on Stromquist’s bound, stated in 1984 and published in 2003; the recorded search found
+no intervening improvement:
 
 |  | value | source |
 | --- | --- | --- |
@@ -2225,8 +2242,13 @@ At `n = 11` the upper end has not moved since 1979, and the lower end moved on
 separated from the independently certified lower bound.
 The segment and dot contact marks are exact, not tolerance-based visual guesses.*
 
-The value `T-018` displaces is Stromquist’s `2 + 4/√5 = 3.788854382…`, and that value
-keeps its own place in the record.
+The value `T-018` displaces is Stromquist’s `2 + 4/√5 = 3.788854382…`, stated in
+[Memo III, p. 10](packing/resources/papers/stromquist-1984-packing-unit-squares-inside-squares-iii-cases-through-65-and-gardner-conjecture.pdf)
+on November 15, 1984, and published in 2003. The memo states the unrestricted bound
+without supplying its proof.
+The
+[memo review](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md)
+records the source distinctions and the helper-argument followup.
 The current audit found an explicit strict box avoiding all twelve printed Figure 14
 points, so the paper’s unavoidability subclaim is false as printed
 ([D-152](defects.md)). Exp-017 independently certifies the same numerical inequality by
@@ -3219,13 +3241,14 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-093.yaml` | session-093 | 673 | 6.07 h | 1.99 h | 1.99 h | yes |
 | `codex-task-tree-session-094.yaml` | session-094 | 562 | 4.53 h | 1.82 h | 1.82 h | yes |
 | `codex-task-tree-session-095.yaml` | session-095 | 476 | 4.08 h | 1.69 h | 1.69 h | yes |
-| `codex-task-tree-session-096.yaml` | session-096 | 590 | 4.33 h | 3.1 h | 3.15 h | yes |
+| `codex-task-tree-session-096.yaml` | session-096 | 520 | 3.79 h | 1.4 h | 1.4 h | yes |
+| `codex-task-tree-session-097.yaml` | session-097 | 590 | 4.33 h | 3.1 h | 3.15 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 52 |
+| measured | 53 |
 | unmeasured | 44 |
-| **total** | **96** |
+| **total** | **97** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -3662,24 +3685,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 478 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 480 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 97 | asserted something false about the mathematics |
-| validity | 121 | was correct, but the measurement did not bear on the question |
+| soundness | 98 | asserted something false about the mathematics |
+| validity | 122 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 182 | recorded something its own evidence contradicts |
 | robustness | 60 | did not finish, or finished only by luck |
 | performance | 18 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Seventy-seven of the ninety-seven soundness defects pointed in the *flattering*
+**Seventy-eight of the ninety-eight soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy-two defects in 478, and no soundness defect
+**The automated gate has caught seventy-two defects in 480, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3990,7 +4013,7 @@ It is contained rather than fixed — such delegations are recorded on completio
 `read_only` flag is better than permitting an empty list that would be ambiguous between
 “writes nothing” and “nobody filled this in”.
 
-111 fixes left no regression check behind.
+112 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
 and exit survived, but invalid `gdate` precision left the start and end fields empty, so
 [D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.
@@ -4166,9 +4189,10 @@ and it is not the cartography spine.** Its weighted-resource lineage runs throug
 Kearney–Shiu, Nagamochi and Bentz; the recent pure-atomic rational direction-net
 architecture follows Burns, and the LP instance and parameter line follows Massaccesi.
 This project’s instances and generator moved seven registered cases in one day.
-`s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first public movement of
-that bound located by the recorded search after Stromquist stated `2 + 4/sqrt(5)` in
-2003\. [T-022](packing/frontier/RESULTS.md) retains a small exact refinement to
+`s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), improving Stromquist’s
+`2 + 4/sqrt(5)`, stated in 1984 and published in 2003; the recorded search found no
+intervening improvement.
+[T-022](packing/frontier/RESULTS.md) retains a small exact refinement to
 `3.810025723614703…`; its proof and endpoint limitations remain in the technical record.
 The shared S5 rubric category does not make these contributions comparable in size.
 `s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound located that

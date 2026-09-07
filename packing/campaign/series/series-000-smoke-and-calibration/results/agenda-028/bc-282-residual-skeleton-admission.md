@@ -10,7 +10,7 @@ transitions from which to price the target. This verdict follows the reconstruct
 below, independently of the author's recommendation.
 
 This is the separately dispatched admission in
-[session096](../../../../agent-sessions/session-096-residual-skeleton.md), phase 2,
+[session097](../../../../agent-sessions/session-097-residual-skeleton.md), phase 2,
 under BC282 and `think-s6e7`. The earlier
 [domain inventory](bc-282-residual-domain-inventory.md) was written without reading the
 new design or proposing its new implication. The other frozen

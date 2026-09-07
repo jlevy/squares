@@ -692,8 +692,9 @@ results:
   - id: T-018
     claim: >-
       s(11) >= 381/100, by a first-party weighted fractional unavoidable-set
-      certificate at container side 381/100 = 3.81. This is the first movement of this
-      case's lower bound since Stromquist stated 2 + 4/sqrt(5) = 3.788854... in 2003,
+      certificate at container side 381/100 = 3.81. This improves Stromquist's
+      2 + 4/sqrt(5) = 3.788854..., stated in 1984 (Memo III, p. 10) and published
+      in 2003. No intervening improvement was found by the recorded search,
       and n = 11 is the smallest open case. The movement is +0.021146, and the case
       stays open against Trump's 1979 packing at 3.877084: the interval narrows from
       0.088230 to 0.067084. Two rungs are retained below it -- 19/5, the value that
@@ -709,7 +710,7 @@ results:
         Scored against the rubric's own anchor for S5, "movement on a central open
         case". s(11) is the smallest open case and the one the frontier record calls
         the problem this project exists for; the recorded public search found no movement
-        after Stromquist's 2003 value, and this displaces a bound from the refereed
+        beyond Stromquist's value, stated in 1984 and published in 2003, and this displaces a bound from the refereed
         literature rather than an inherited or closed-form one.
         What S5 does not claim: the weighted-resource lineage predates this project and
         the pure-atomic direction-net architecture follows Burns and Massaccesi, so what

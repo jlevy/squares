@@ -218,7 +218,7 @@ def nearly(text: str, *, tex: bool = False) -> str:
 # gives its first p digits exactly.
 CARRIED_PLACES = 32
 PRIOR_LOWER = 2 + Fraction(isqrt(32 * 10 ** (2 * CARRIED_PLACES - 1)), 10**CARRIED_PLACES)
-PRIOR_SOURCE = "Stromquist 2003"
+PRIOR_SOURCE = "Stromquist 1984/2003"
 
 # Trump's packing is an algebraic number, the root in this interval of the
 # minimal polynomial the record cites (resources/web/kingbird-squares-in-squares.md).
@@ -244,7 +244,7 @@ assert _polynomial(BEST_PACKING) < 0 < _polynomial(BEST_PACKING + _ULP), (
 )
 
 PRIOR_YEAR = 2003
-RESULT_YEAR = 2026
+PRIOR_MEMO_YEAR = 1984
 
 # Where the page sends a reader for more: the sources the n = 11 record cites
 # (frontier/n-011.md, keys [Friedman DS7], [Kingbird] and [Stromquist 2003]) and
@@ -256,6 +256,9 @@ RESULT_YEAR = 2026
 PROBLEM_URL = "https://erich-friedman.github.io/papers/squares/squares.html"
 BEST_URL = "https://kingbird.myphotos.cc/packing/squares_in_squares.html"
 PRIOR_URL = "https://www.combinatorics.org/ojs/index.php/eljc/article/view/v10i1r8"
+PRIOR_MEMO_URL = "https://walterstromquist.com/papers/squares3.pdf"
+PRIOR_SIX_MEMO_URL = "https://walterstromquist.com/papers/squares1.pdf"
+PRIOR_TEN_MEMO_URL = "https://walterstromquist.com/papers/squares2.pdf"
 REPO_URL = "https://github.com/jlevy/squares"
 # Where the deploy serves this page: the GitHub Pages site for the repository, at
 # the project subpath, with the trailing slash the directory URL actually resolves
@@ -1332,9 +1335,8 @@ def card_substitutions(headline: Facts, headline_frac: str) -> dict[str, str]:
     title = f"s({headline.n}) ≥ {headline_frac}: {SUBTITLE}"
     description = (
         f"How a weighted point set and a pigeonhole prove s({headline.n}) ≥ "
-        f"{headline_frac}, apparently the first improvement in "
-        f"{RESULT_YEAR - PRIOR_YEAR} years on the smallest open case of the "
-        "square packing problem."
+        f"{headline_frac}, improving Stromquist's bound on the smallest open case, "
+        f"stated in {PRIOR_MEMO_YEAR} and published in {PRIOR_YEAR}."
     )
     return {
         "PAGE_TITLE": title,
@@ -1382,7 +1384,6 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         # Print shows one certificate deterministically, and this names which.
         "DEFAULT_SLUG": slug(default),
         "DEFAULT_CERT_URL": repo_file(default.source),
-        "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
         "N_RESULTS": str(registered_results()),
         "N_NOVEL": str(novel_results()),
         "N_STARRED": str(starred_lower_bounds()),
@@ -1391,6 +1392,10 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "PUBLISHED": PUBLICATION_DATE,
         "EDITION": page_edition(),
         "PRIOR_YEAR": str(PRIOR_YEAR),
+        "PRIOR_MEMO_YEAR": str(PRIOR_MEMO_YEAR),
+        "PRIOR_MEMO_URL": PRIOR_MEMO_URL,
+        "PRIOR_SIX_MEMO_URL": PRIOR_SIX_MEMO_URL,
+        "PRIOR_TEN_MEMO_URL": PRIOR_TEN_MEMO_URL,
         **bound_substitutions(),
         "PRIOR_SOURCE": PRIOR_SOURCE,
         "PRIOR_URL": PRIOR_URL,

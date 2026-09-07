@@ -220,7 +220,7 @@ No favorable interval, missing outer cell or unchanged retry is licensed here.
 
 ## Work Receipt
 
-This is session096 preparation within the coordinator’s documented September 7, 2026,
+This is session097 preparation within the coordinator’s documented September 7, 2026,
 17:20–19:20 UTC block.
 The assigned inventory stop is 17:30:00 UTC, including writing and checks.
 The first actual clock was 17:21:21 UTC; initialization does not extend the stop.

@@ -34,7 +34,7 @@ exploration:
 # X-018 — Hybrid Strength and Angular Release
 
 **BC282 is complete: the exact translation reduction is accepted, and the full target is
-not admitted.** [Session096](../agent-sessions/session-096-residual-skeleton.md) parks
+not admitted.** [Session097](../agent-sessions/session-097-residual-skeleton.md) parks
 further local H120 and H118 target work after independent admission and comparison.
 The next portfolio priority is the existing, separately owned BC264 kernel-pricing
 entry. Its kernel-specific contract must still be reviewed before a target.
@@ -215,7 +215,7 @@ After that new premise is independently admitted, a separately frozen 30-minute 
 25-minute adversary and 20-minute fresh audit would cost 105 worker-minutes in total
 including preparation, with an 80-minute sequential path.
 Those later allocations were proposed caps.
-Session096 independently refused the target; they remain unspent.
+Session097 independently refused the target; they remain unspent.
 
 A complete skeleton contradiction would finish the source-family exclusion.
 An exact feasible ten-square skeleton, checked against all 40/45 conditions, would
@@ -448,7 +448,7 @@ Allocate zero further local target minutes at this checkpoint.
 This is a readiness and opportunity-cost decision, not evidence that either mathematical
 route is impossible.
 Preserve the accepted reductions and the unchanged global n11 bracket.
-BC282 and session096 are the only new executed allocations; no BC283, new hypothesis or
+BC282 and session097 are the only new executed allocations; no BC283, new hypothesis or
 experiment is reserved.
 The continuation remains on PR110.
 
