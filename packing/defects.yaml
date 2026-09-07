@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 478
+count: 479
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -15693,3 +15693,34 @@ defects:
   regression: none
   bead: think-aenh
   recorded_in: docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md
+- id: D-479
+  title: Case summaries replaced cited geometric helper proofs with generic pure dots counting
+  date: '2026-09-07'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: until the author-prompted Stromquist memo and five-dot obstruction review
+  severity: medium
+  status: fixed
+  what: >-
+    The n006, n007, n008, n014 and n015 case summaries used the same generic
+    n-minus-one-point pigeonhole paragraph in place of the cited proof mechanisms.
+    Kearney and Shiu use two seven-point lattices and geometric cases for n006.
+    El Moumni's cited routes use localization and segment lengths; Friedman uses
+    almost-unavoidable points and conditional covers for n014. Separate pure-cover
+    proofs do exist for n008 and n015. The review also derives a neighborhood below
+    side three in which no five-point unavoidable set exists.
+  consequence: >-
+    The shared template misstated the cited methods and concealed geometric
+    dependencies that Stromquist's email recommends systematizing. The established
+    values and verified evidence are unaffected, including the independent route
+    retained where El Moumni's printed seven-square proof has D-344 through D-347.
+  fix: >-
+    Replace the generic paragraphs and qualify the method metadata with the
+    source-specific arguments. Credit Memo I's complete 1984 six-square proof and
+    link the independently reviewed obstruction and source-premised incidence control.
+    Reconnect n007, n008 and n015 to the already archived El Moumni source.
+  regression: none
+  bead: think-7u4s
+  recorded_in: docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md

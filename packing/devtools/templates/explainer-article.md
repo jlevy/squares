@@ -52,10 +52,10 @@ of standard-library Python and short enough to read in one sitting, decides the
 certificate file of {{HEADLINE_N_ATOMS}} weighted points in
 {{HEADLINE_PINNED_RUNTIME}}.<!--END:CLAIM-->
 
-This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
-open case of the square packing problem.[^novelty] The previous bound,
-{{PRIOR_LOWER_DEC}}, was Stromquist’s in
-{{PRIOR_YEAR}}.[^stromquist][^repair]
+This improves the previous lower bound on the smallest open case of the square packing
+problem: Stromquist’s {{PRIOR_LOWER_DEC}}, stated in {{PRIOR_MEMO_YEAR}} and published
+in {{PRIOR_YEAR}}.[^stromquist-history][^stromquist][^repair] No intervening improvement
+was found by the recorded search.[^novelty]
 
 ## The Agentic Research Framework
 
@@ -76,19 +76,24 @@ Work is planned on a regular cadence (such as 8 to 12 hours) and broken into sev
 defined workflows (research survey, correctness verification, research loop,
 optimization loop, and a few others).
 
-Every file in the repository (including this paper) is agent written.
-The research framework’s structure had high-level human direction.
-It relies on a few other agent tools, notably [tbd](https://github.com/jlevy/tbd) for
-task tracking, [Softschema](https://github.com/jlevy/softschema) for structuring
-results, and [Practical Prose](https://github.com/jlevy/practical-prose) to improve
-writing quality.
+<div class="boxed-text">
+
+The repository’s original prose and code, including this paper, were written by agents
+under human direction.
+The framework relies on a few other agent tools, notably
+[tbd](https://github.com/jlevy/tbd) for task tracking,
+[Softschema](https://github.com/jlevy/softschema) for structuring results, and
+[Practical Prose](https://github.com/jlevy/practical-prose) to improve writing quality.
+
+</div>
 
 ## The Square Packing Problem
 
 The **square packing problem** asks, for each $n$, for the side $s(n)$ of the smallest
 square that holds $n$ unit squares, which are free to rotate and must have disjoint
-interiors.[^survey] The value of $s(n)$ is known for $n \le 10$. Stromquist settled
-$s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
+interiors.[^survey] The value of $s(n)$ is known for $n \le 10$. Stromquist proved
+$s(10) = 3 + 1/\sqrt{2}$ in his {{PRIOR_MEMO_YEAR}} Memo II; the journal presentation
+appeared in {{PRIOR_YEAR}}.[^stromquist-memos][^stromquist]
 
 For values of $n$ where $s(n)$ is still unknown, results generally take the form of
 upper or lower bounds.
@@ -572,6 +577,14 @@ accepts one only when the exact event-cell sweep and an interval branch-and-boun
 decide Condition 5 by distinct methods, both accept it and report the same least covered
 mass.
 
+Geometric constraints can strengthen the final count.
+Stromquist’s six-square proof rules out a container of side less than 3 by forcing four
+of eight marked points into one square; each other square must contain at least one, so
+at most five fit. The repaired eleven-square argument similarly forces three of twelve
+points into one square.[^stromquist-memos][^stromquist][^repair] These examples suggest
+extending the weighted method by using constraints between squares to force additional
+mass consumption.
+
 A [first-party package for third-party checking]({{THIRDPARTY_URL}}) gathers what an
 outside check needs: the theorem written out, the {{THIRDPARTY_L_FRAC}} certificate as
 plain data, and a one-file verifier on Python’s standard library that decides it without
@@ -658,11 +671,22 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
   - **[KPress](https://github.com/jlevy/kpress):** web and print formatting from
     Markdown
 
+[^stromquist-history]: Stromquist states this bound in
+    [Memo III (1984), p. 10]({{PRIOR_MEMO_URL}}#page=10), as an adaptation of his
+    preceding proof for $0^\circ$ and $45^\circ$ orientations.
+    This suggests he already had the general argument, whose details he omits.
+
 [^stromquist]: Walter Stromquist,
     [Packing 10 or 11 unit squares in a square]({{PRIOR_URL}}), Electronic Journal of
     Combinatorics 10 (2003), R8.
 
-[^novelty]: No improvement on Stromquist’s {{PRIOR_YEAR}} bound is known to us.
+[^stromquist-memos]: Walter Stromquist, *Packing Unit Squares Inside Squares*,
+    [Memo I]({{PRIOR_SIX_MEMO_URL}}), September 11, 1984, pp.
+    13–19, gives the six-square helper argument.
+    [Memo II]({{PRIOR_TEN_MEMO_URL}}), October 15, 1984, proves the ten-square result.
+
+[^novelty]: No intervening improvement on Stromquist’s bound, stated in
+    {{PRIOR_MEMO_YEAR}} and published in {{PRIOR_YEAR}}, is known to us.
     The search behind that statement, recorded in the repository, covered the project’s
     literature archive and source register, then arXiv, Crossref, OpenAlex and Semantic
     Scholar, author pages and the public packing catalogues, through September 4, 2026.
@@ -681,6 +705,10 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
 [^trump]: Walter Trump’s packing of 1979, as recorded in
     [Kingbird’s register of squares in squares]({{BEST_URL}}). The
     [rendering]({{BEST_RENDER_URL}}) is the project’s own.
+    Stromquist’s [Memo III]({{PRIOR_MEMO_URL}}), pp.
+    2–4, credits Mats Gustafsson and Magnus Thulin with the same construction, reported
+    by Gardner in November 1980; the research archive records their independent
+    rediscovery.
 
 [^burns]: Sam Burns,
     [Proposing a Better Lower Bound for n=17 Square Packing](https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/),
