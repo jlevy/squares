@@ -81,6 +81,15 @@ class FaceProbe:
 
 
 @dataclass(frozen=True)
+class FacetSide:
+    """An interior probe with the canonical line signs of its open face."""
+
+    direction: int
+    point: Point
+    signs: tuple[int, ...]
+
+
+@dataclass(frozen=True)
 class ExcessBox:
     """An open L-infinity box contained in every listed square and the container."""
 
@@ -203,6 +212,38 @@ def build_arrangement(family: PairFamily) -> Arrangement:
     return Arrangement(lines, tuple(facets), tuple(contacts))
 
 
+def _signed_incidences(
+    family: PairFamily, arrangement: Arrangement
+) -> tuple[tuple[tuple[int, int], ...], ...]:
+    """Retain each edge's inward sign even when opposite interiors share a line."""
+    orientations = []
+    for entry in family.placements:
+        square = entry.square
+        ex, ey = square[1][0] - square[0][0], square[1][1] - square[0][1]
+        fx, fy = square[3][0] - square[0][0], square[3][1] - square[0][1]
+        orientations.append((ex * fy - ey * fx).sign())
+    incidences: list[list[tuple[int, int]]] = [[] for _ in family.placements]
+    for line_index, line in enumerate(arrangement.lines):
+        for index, edge in line.labels:
+            if index == -1:
+                continue
+            square = family.placements[index].square
+            x, y = square[edge]
+            nx, ny = square[(edge + 1) % 4]
+            a, b = ny - y, x - nx
+            divisor = a if not a.is_zero() else b
+            # The raw edge form is divisor * canonical_line.at(point).
+            inward = -orientations[index] * divisor.sign()
+            incidences[index].append((line_index, inward))
+    if any(
+        len(edges) != 4
+        for entry, edges in zip(family.placements, incidences, strict=True)
+        if entry.weight
+    ):
+        raise SupportError("positive square does not have all four edge incidences")
+    return tuple(tuple(edges) for edges in incidences)
+
+
 def _positive_lower(value: FieldElement) -> Fraction:
     if value.sign() <= 0:
         raise SupportError("positive rational margin was not established")
@@ -216,11 +257,11 @@ def _absolute(value: FieldElement) -> FieldElement:
     return value if value.sign() >= 0 else -value
 
 
-def facet_probes(
+def _facet_sides(
     arrangement: Arrangement,
     facet: Facet,
     side: FieldElement,
-) -> tuple[tuple[int, Point], ...]:
+) -> tuple[FacetSide, ...]:
     """Visit each contained side without crossing any other supporting line."""
     if not 0 <= facet.line < len(arrangement.lines) or facet.start == facet.end:
         raise SupportError("invalid facet or zero-length segment")
@@ -244,7 +285,10 @@ def facet_probes(
                 line, other, derivative
             )
             delta = min(delta, _positive_lower(clearance))
-    probes: list[tuple[int, Point]] = []
+    probes: list[FacetSide] = []
+    # Keep the first-probe sign-check order: eager signs can refine the shared
+    # root interval before a rational clearance has been selected.
+    midpoint_signs = [0] * len(arrangement.lines)
     for direction in (-1, 1):
         point = (center[0] + direction * delta * line.a, center[1] + direction * delta * line.b)
         if not _in_container(point, side, strict=True):
@@ -252,13 +296,45 @@ def facet_probes(
         if any(other.at(point).is_zero() for other in arrangement.lines):
             raise SupportError("facet probe lies on a supporting line")
         for index, other in enumerate(arrangement.lines):
-            if index != facet.line and other.at(point).sign() != other.at(center).sign():
+            if index == facet.line:
+                continue
+            point_sign = other.at(point).sign()
+            if midpoint_signs[index] == 0:
+                midpoint_signs[index] = other.at(center).sign()
+            if point_sign != midpoint_signs[index]:
                 raise SupportError("facet probe crossed another supporting line")
-        probes.append((direction, point))
+        # Clearance preserves every other line sign. The own-line displacement is
+        # direction * delta * (a*a + b*b), whose sign is exactly direction.
+        signs = tuple(
+            direction if index == facet.line else sign
+            for index, sign in enumerate(midpoint_signs)
+        )
+        probes.append(FacetSide(direction, point, signs))
     expected = 1 if any(index == -1 for index, _ in line.labels) else 2
     if len(probes) != expected:
         raise SupportError("facet did not visit every contained adjacent side")
     return tuple(probes)
+
+
+def facet_probes(
+    arrangement: Arrangement, facet: Facet, side: FieldElement
+) -> tuple[tuple[int, Point], ...]:
+    """Visit each contained side without crossing any other supporting line."""
+    return tuple(
+        (probe.direction, probe.point) for probe in _facet_sides(arrangement, facet, side)
+    )
+
+
+def _probe_members(
+    family: PairFamily,
+    incidences: tuple[tuple[tuple[int, int], ...], ...],
+    probe: FacetSide,
+) -> tuple[int, ...]:
+    return tuple(
+        index
+        for index, (entry, edges) in enumerate(zip(family.placements, incidences, strict=True))
+        if entry.weight and all(probe.signs[line] == inward for line, inward in edges)
+    )
 
 
 def _membership_forms(square: Square, point: Point) -> tuple[FieldElement, ...]:
@@ -330,17 +406,13 @@ def verify_density(
     """
     family = make_family(squares, side, weights)
     arrangement = build_arrangement(family)
+    incidences = _signed_incidences(family, arrangement)
     probes: list[FaceProbe] = []
     for facet_index, facet in enumerate(arrangement.facets):
-        for direction, point in facet_probes(arrangement, facet, side):
-            members = tuple(
-                index
-                for index, entry in enumerate(family.placements)
-                if entry.weight
-                and all(value.sign() > 0 for value in _membership_forms(entry.square, point))
-            )
+        for probe in _facet_sides(arrangement, facet, side):
+            members = _probe_members(family, incidences, probe)
             depth = sum((family.placements[index].weight for index in members), Fraction())
-            probes.append(FaceProbe(facet_index, direction, point, members, depth))
+            probes.append(FaceProbe(facet_index, probe.direction, probe.point, members, depth))
     if not probes:
         raise SupportError("complete arrangement produced no interior face probes")
     largest = max(probes, key=lambda probe: probe.depth)

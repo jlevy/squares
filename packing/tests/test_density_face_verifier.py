@@ -8,11 +8,13 @@ from fractions import Fraction
 
 import pytest
 
+from devtools import density_face_verifier as faces
 from devtools.check_full_size_density_pair_separator import control_family, family_signature
 from devtools.density_face_verifier import (
     Arrangement,
     FaceResult,
     Facet,
+    FacetSide,
     Line,
     build_arrangement,
     check_excess_box,
@@ -23,9 +25,11 @@ from devtools.density_face_verifier import (
     verify_density,
 )
 from sqpack.field import FieldElement, NumberField
+from sqpack.full_size_density.pair_separator import PairFamily
 from sqpack.full_size_density.support_ceiling import (
     BoundaryPointError,
     Point,
+    Square,
     Support,
     SupportError,
     axis_square,
@@ -311,6 +315,20 @@ def _exact_face_payload(result: FaceResult) -> tuple:
     )
 
 
+def _toy_result(name: str, *, reverse: bool, aliases_and_zero: bool) -> FaceResult:
+    family = control_family(name)
+    squares = tuple(
+        tuple(reversed(entry.square)) if reverse else entry.square
+        for entry in family.placements
+    )
+    weights = tuple(entry.weight for entry in family.placements)
+    if aliases_and_zero:
+        q = family.side.field.rational
+        squares += (squares[0][1:] + squares[0][:1], axis_square(q("1/2"), q("1/2")))
+        weights += (weights[0], Fraction())
+    return verify_density(squares, family.side, weights)
+
+
 def test_cached_clearances_match_uncached_fresh_field_geometry_exactly(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -321,31 +339,132 @@ def test_cached_clearances_match_uncached_fresh_field_geometry_exactly(
         absolute = derivative if derivative.sign() >= 0 else -derivative
         return (4 * absolute).inverse()
 
-    def run(name: str, *, reverse: bool, aliases_and_zero: bool) -> FaceResult:
-        family = control_family(name)
-        squares = tuple(
-            tuple(reversed(entry.square)) if reverse else entry.square
-            for entry in family.placements
-        )
-        weights = tuple(entry.weight for entry in family.placements)
-        if aliases_and_zero:
-            q = family.side.field.rational
-            squares += (squares[0][1:] + squares[0][:1], axis_square(q("1/2"), q("1/2")))
-            weights += (weights[0], Fraction())
-        return verify_density(squares, family.side, weights)
-
     for name, reverse, aliases_and_zero in (
         ("toy-triple-v1", False, False),
         ("toy-edge-v1", True, True),
         ("toy-rotated-algebraic-v1", True, True),
     ):
         cached = _exact_face_payload(
-            run(name, reverse=reverse, aliases_and_zero=aliases_and_zero)
+            _toy_result(name, reverse=reverse, aliases_and_zero=aliases_and_zero)
         )
         # Reconstruct, rather than reusing the first run's refined root interval.
         with monkeypatch.context() as patch:
             patch.setattr(Arrangement, "clearance_reciprocal", uncached)
             reference = _exact_face_payload(
-                run(name, reverse=reverse, aliases_and_zero=aliases_and_zero)
+                _toy_result(name, reverse=reverse, aliases_and_zero=aliases_and_zero)
             )
         assert cached == reference
+
+
+def test_probe_membership_forms_are_reserved_for_the_direct_excess_box(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    family = control_family("toy-triple-v1")
+    calls = 0
+    function_name = "_membership_forms"
+    original = getattr(faces, function_name)
+
+    def counted(square: Square, point: Point) -> tuple[FieldElement, ...]:
+        nonlocal calls
+        calls += 1
+        return original(square, point)
+
+    monkeypatch.setattr(faces, function_name, counted)
+    result = verify_density(
+        tuple(entry.square for entry in family.placements),
+        family.side,
+        tuple(entry.weight for entry in family.placements),
+    )
+    assert result.witness is not None
+    assert calls == len(result.witness.members)
+    assert calls < len(result.probes) * len(family.placements)
+
+
+@pytest.mark.parametrize(
+    ("name", "reverse", "aliases_and_zero"),
+    [
+        ("toy-overlap-v1", False, False),
+        ("toy-edge-v1", False, False),
+        ("toy-corner-v1", False, False),
+        ("toy-gap-v1", False, False),
+        ("toy-equal-v1", False, False),
+        ("toy-triple-v1", False, False),
+        ("toy-prefix-v1", False, False),
+        ("toy-narrow-overlap-v1", False, False),
+        ("toy-algebraic-v1", False, False),
+        ("toy-rotated-algebraic-v1", False, False),
+        ("toy-edge-v1", True, True),
+        ("toy-rotated-algebraic-v1", True, True),
+    ],
+)
+def test_signed_membership_matches_direct_membership_on_every_fresh_field_probe(
+    name: str,
+    *,
+    reverse: bool,
+    aliases_and_zero: bool,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def direct_members(
+        family: PairFamily,
+        _incidences: tuple[tuple[tuple[int, int], ...], ...],
+        probe: FacetSide,
+    ) -> tuple[int, ...]:
+        # The pre-incidence dot-product oracle does not read supporting lines.
+        def forms(square: Square, point: Point) -> tuple[FieldElement, ...]:
+            x, y = square[0]
+            ex, ey = square[1][0] - x, square[1][1] - y
+            fx, fy = square[3][0] - x, square[3][1] - y
+            u = ex * (point[0] - x) + ey * (point[1] - y)
+            v = fx * (point[0] - x) + fy * (point[1] - y)
+            return u, 1 - u, v, 1 - v
+
+        return tuple(
+            index
+            for index, entry in enumerate(family.placements)
+            if entry.weight
+            and all(value.sign() > 0 for value in forms(entry.square, probe.point))
+        )
+
+    signed = _exact_face_payload(
+        _toy_result(name, reverse=reverse, aliases_and_zero=aliases_and_zero)
+    )
+    with monkeypatch.context() as patch:
+        # The previous direct-membership path had no incidence-sign setup either.
+        patch.setattr(faces, "_signed_incidences", lambda _family, _arrangement: ())
+        patch.setattr(faces, "_probe_members", direct_members)
+        # New construction is essential: neither run inherits the other's root refinement.
+        direct = _exact_face_payload(
+            _toy_result(name, reverse=reverse, aliases_and_zero=aliases_and_zero)
+        )
+    assert signed == direct
+
+
+def test_coincident_edge_preserves_both_opposite_inward_signs() -> None:
+    result = _toy_result("toy-edge-v1", reverse=True, aliases_and_zero=True)
+    shared = next(
+        index
+        for index, line in enumerate(result.arrangement.lines)
+        if line.b.is_zero() and len({owner for owner, _ in line.labels if owner >= 0}) == 2
+    )
+    adjacent = {
+        probe.direction: probe.members
+        for probe in result.probes
+        if result.arrangement.facets[probe.facet].line == shared
+        and Fraction(1, 2) < probe.point[1] < Fraction(3, 2)
+    }
+    left, right = sorted(
+        (index for index, entry in enumerate(result.family.placements) if entry.weight),
+        key=lambda index: min(point[0] for point in result.family.placements[index].square),
+    )
+    assert adjacent == {-1: (left,), 1: (right,)}
+
+
+def test_complete_depth_still_requires_its_independent_excess_box_check(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def reject(_family, _witness) -> None:
+        raise SupportError("independent excess-box check refused")
+
+    monkeypatch.setattr(faces, "check_excess_box", reject)
+    with pytest.raises(SupportError, match="independent excess-box check refused"):
+        _toy_result("toy-triple-v1", reverse=False, aliases_and_zero=False)
