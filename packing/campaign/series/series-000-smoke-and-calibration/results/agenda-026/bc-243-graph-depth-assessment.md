@@ -2,8 +2,8 @@
 
 Session093 selects a bounded source-free weighted-graph certificate component under
 `think-yzzi`, following read-only assessment `think-m8x7`. The assessment ran from
-07:50:34 to08:03:20UTC on September7, using766seconds. No source control, target,
-benchmark or new scientific input was evaluated.
+07:50:34 to08:03:20 UTC on September7, using766 seconds.
+No source control, target, benchmark or new scientific input was evaluated.
 
 This changes the sufficient completeness argument; it is not a fourth run of the
 unchanged arrangement verifier.
@@ -90,7 +90,7 @@ or all other certificate methods.
 [Exp115](../../experiments/exp-115-h-105-fixed-candidate-pair-obstruction.md) retains134
 exact pair-separation receipts.
 With matching source binding, those isolate the four weight-one placements in the
-retained candidate. Thirty-two positive-weight vertices remain:496pairs and at
+retained candidate. Thirty-two positive-weight vertices remain:496 pairs and at
 most4,960triples. These are combinatorial counts from retained data, not new target
 measurements. Even so, one weight pattern already yields binomial(8,2) times
 binomial(16,5)=122,304minimal overweight subsets; blind enumeration is not a justified
@@ -109,12 +109,49 @@ Controls must include:
   color classes at the combinatorial boundary.
 
 The generic graph components and their geometric adapters passed source-free controls
-and independent reviews in Session093. The separately authored source-binding command is
-under independent review; no scientific source graph has been evaluated.
+and independent reviews in Session093. The separately authored source-binding command
+passed independent review.
+The subsequent original source control prepared its named family but refused at adapter
+admission, before graph-pair enumeration, as recorded below.
 Even complete H099 success would address the fixed-support density question at the Trump
 side, not below-Trump density or a new packing lower bound.
 
 ## Prospective Graph Source Controls
+
+**Outcome:** the original-family producer refused at its field-admission guard with
+actual exit2 in 0.18 seconds process wall and 0.16 seconds CPU, observed at 09:13 UTC.
+The committed protocol was `86b746b5`, following31/31 record checks in 24.81 seconds;
+the clean engine was `23498e87`, whose45-step push tier passed in 131.30 seconds.
+The [producer log](graph-source-controls/original/producer.log) retains the exact
+refusal: “caller must supply a validated field of admitted degree.”
+Stdout is retained as an empty `packet.json`, not treated as a certificate.
+
+Static inspection identifies the mismatch: the accepted Trump source declares a
+degree-eight field polynomial, while both new geometric adapters admit only degrees one
+through four. The named source was prepared before the adapter refused; graph-pair
+enumeration was not reached.
+Generic and quartic fixtures had not tested this source compatibility boundary.
+The independent readiness review missed the declared-degree comparison; it was too broad
+to establish readiness for this scientific source.
+
+The control sequence is stopped.
+No original reader, uniform producer or reader, or candidate invocation occurred.
+H099 remains unresolved and the fixed-support bracket is unchanged.
+`think-tn2q` independently reviews the refusal without reconstructing or rerunning the
+source. Any repair needs separately scoped source-free controls and review; this failed
+sequence does not authorize another invocation.
+
+The separate source-free repair now admits degree eight in both independently reviewed
+adapters, compares the declared source degree before any loader, and enforces the
+unchanged 2 MiB serialized packet cap including its newline.
+Independent repair reviews passed by 09:34:12 UTC. Unrelated nonrational degree-eight
+geometry and refusal controls pass; coefficient, axis, pair, node and process bounds
+remain unchanged. This establishes repaired instrument readiness only.
+Actual source coefficient widths, packet size and runtime still require a separately
+declared source-control attempt.
+The failed original sequence remains stopped and no H099 candidate has run.
+
+### Retained Protocol
 
 This is a changed complete sufficient method, not a retry of the earlier arrangement or
 slab controls. Commit this protocol, freeze the independently reviewed engine and pass
@@ -125,22 +162,23 @@ Use the explicit producer and independent-reader modes of
 `packing/devtools/run_full_size_density_graph.py`, always through the parent CLI. Each
 call requires `--node-limit 10000` and an explicit process cap.
 The parent bounds startup, source reconstruction, checking and output.
-The worker alarm covers work and JSON serialization after imports; it is not a substitute
-for the mandatory parent CLI's whole-process cap.
+The worker alarm covers work and JSON serialization after imports; it is not a
+substitute for the mandatory parent CLI’s whole-process cap.
 
 | Named control | Family | Producer cap | Conditional reader cap |
 | --- | --- | --- | --- |
-| `trump-original-control-v1` | The eleven original exact squares, each of weight one;55 pairs | 30seconds | 30seconds |
-| `trump-uniform-control-v1` | The full deduplicated D4 roster with its accepted mass-eleven uniform weights;1,770 pairs | 60seconds | 60seconds |
+| `trump-original-control-v1` | The eleven original exact squares, each of weight one;55 pairs | 30 seconds | 30 seconds |
+| `trump-uniform-control-v1` | The full deduplicated D4 roster with its accepted mass-eleven uniform weights;1,770 pairs | 60 seconds | 60 seconds |
 
 Run each producer once, in that order, only from the frozen clean engine.
-The uniform producer is conditional on the original control's independent reader passing.
-An actual zero exit and a well-formed packet whose nested adapter status is
+The uniform producer is conditional on the original control’s independent reader
+passing. An actual zero exit and a well-formed packet whose nested adapter status is
 `proved_graph_bound` permit one independent reader invocation with the same control name
 and `--input` pointing to that packet.
 A graph overweight, unresolved packet, malformed result, error or timeout ends this
 control sequence without a reader, retry or candidate run.
-Any reader failure also ends the sequence without advancing to another control or target.
+Any reader failure also ends the sequence without advancing to another control or
+target.
 
 Reader admission requires actual exit zero, `status=verified_density_bound`,
 `bound_proved=true`, mass exactly eleven, complete source identity and containment, and
@@ -156,7 +194,7 @@ If admitted, retain reader stdout as `replay.json` and stderr plus timing as
 Use new original and uniform subdirectories under
 `results/agenda-026/graph-source-controls`; never overwrite an existing receipt or infer
 a missing reader result.
-No source-control launch may begin after09:20UTC in Session093.
+No source-control launch may begin after 09:20 UTC in Session093.
 
 These controls test instrument readiness.
 They do not establish H099 or remeasure the accepted original packing.

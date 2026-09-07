@@ -19,13 +19,18 @@ from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
+from cases.trump11.packing import U_MIN_POLY
 from devtools.check_full_size_density_pair_separator import (
     CANDIDATE_SOURCE,
     candidate_family,
     control_family,
 )
-from devtools.check_full_size_density_support_ceiling import load_packet
+from devtools.check_full_size_density_support_ceiling import PACKET_BYTES, load_packet
+from devtools.check_geometric_graph_certificate import (
+    MAX_FIELD_DEGREE as READER_MAX_FIELD_DEGREE,
+)
 from devtools.check_geometric_graph_certificate import GuardError, check_packet
+from devtools.geometric_graph_certificate import MAX_FIELD_DEGREE as PRODUCER_MAX_FIELD_DEGREE
 from devtools.geometric_graph_certificate import produce
 from devtools.run_full_size_density_pair_separator import frozen_candidate
 from sqpack.full_size_density.pair_separator import PairFamily
@@ -39,6 +44,21 @@ CONTROL_NAMES = (
 )
 MAX_SECONDS = 60
 MAX_NODES = 10000
+
+
+def declared_source_preflight() -> None:
+    """Compare static source metadata before constructing its field or placements."""
+    degree = len(U_MIN_POLY) - 1
+    if not 1 <= degree <= min(PRODUCER_MAX_FIELD_DEGREE, READER_MAX_FIELD_DEGREE):
+        raise SupportError("declared source degree is outside both adapters' admission")
+
+
+def serialize_packet(raw: Any) -> str:
+    """Respect the unchanged reader byte cap, including the printed newline."""
+    serialized = json.dumps(raw, sort_keys=True, allow_nan=False)
+    if len(serialized.encode("utf-8")) + 1 > PACKET_BYTES:
+        raise SupportError("serialized graph packet exceeds the existing input byte cap")
+    return serialized
 
 
 def _canonical_square(square: Square) -> Square:
@@ -129,6 +149,11 @@ def worker(
         raise SupportError("exactly one named control or explicit candidate is required")
     if type(node_limit) is not int or not 1 <= node_limit <= MAX_NODES:
         raise SupportError("node limit is outside the admitted fixed budget")
+    if candidate is not None or control in (
+        "trump-original-control-v1",
+        "trump-uniform-control-v1",
+    ):
+        declared_source_preflight()
     if candidate is not None:
         parent = load_packet(candidate)
         family = candidate_family(parent) if packet is not None else frozen_candidate(parent)
@@ -175,7 +200,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     packet=args.input,
                     node_limit=args.node_limit,
                 )
-                serialized = json.dumps(payload, sort_keys=True)
+                serialized = serialize_packet(payload)
             finally:
                 signal.alarm(0)
                 signal.signal(signal.SIGALRM, previous)

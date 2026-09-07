@@ -168,3 +168,31 @@ def test_explicit_toy_cli_producer_and_reader_roundtrip(tmp_path: Path) -> None:
     assert checked["status"] == "verified_density_bound"
     assert checked["bound_proved"] is True
     assert checked["mass"] == "3/2"
+
+
+@pytest.mark.parametrize("limit_name", ["PRODUCER_MAX_FIELD_DEGREE", "READER_MAX_FIELD_DEGREE"])
+def test_declared_degree_preflight_precedes_scientific_loaders(
+    limit_name: str,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def forbidden(*_args: Any, **_kwargs: Any) -> Any:
+        raise AssertionError("scientific loader was reached")
+
+    monkeypatch.setattr(runner, limit_name, 4)
+    monkeypatch.setattr(runner, "control_family", forbidden)
+    monkeypatch.setattr(runner, "load_packet", forbidden)
+    for control, candidate in [("trump-original-control-v1", None), (None, Path("unused"))]:
+        with pytest.raises(SupportError, match="declared source degree"):
+            runner.worker(control=control, candidate=candidate, packet=None, node_limit=1)
+
+
+def test_serialized_output_limit_includes_the_final_newline(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    raw = {"payload": "small unrelated toy"}
+    expected = json.dumps(raw, sort_keys=True)
+    monkeypatch.setattr(runner, "PACKET_BYTES", len(expected.encode("utf-8")) + 1)
+    assert runner.serialize_packet(raw) == expected
+    monkeypatch.setattr(runner, "PACKET_BYTES", len(expected.encode("utf-8")))
+    with pytest.raises(SupportError, match=r"serialized.*byte cap"):
+        runner.serialize_packet(raw)

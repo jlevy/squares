@@ -25,6 +25,8 @@ from sqpack.field import FieldElement, NumberField
 SCOPE = "Supplied square family only; no packing or source-candidate claim."
 KIND = "algebraic-unit-square-overlap-graph"
 MAX_SQUARES = 64
+MAX_FIELD_DEGREE = 8
+"""Admission ceiling for the caller-validated exact real field."""
 Point = tuple[FieldElement, FieldElement]
 Square = tuple[Point, ...]
 
@@ -112,7 +114,7 @@ def _field_descriptor(raw: Any, field: NumberField) -> None:
 
 def _source(raw: Any, field: NumberField) -> tuple[list[Square], list[Fraction]]:
     _keys(raw, {"field", "squares"}, "source")
-    if type(field) is not NumberField or not 1 <= field.degree <= 4:
+    if type(field) is not NumberField or not 1 <= field.degree <= MAX_FIELD_DEGREE:
         raise GuardError("caller must supply an admitted validated NumberField")
     _field_descriptor(raw["field"], field)
     entries = raw["squares"]

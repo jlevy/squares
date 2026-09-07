@@ -11,7 +11,7 @@ import pytest
 
 from devtools import geometric_graph_certificate as adapter
 from devtools.geometric_graph_certificate import AdapterError, produce
-from sqpack.field import NumberField
+from sqpack.field import FieldElement, NumberField
 
 
 def square(field: NumberField, x: Fraction, y: Fraction) -> tuple:
@@ -325,3 +325,97 @@ def test_noncanonical_coordinate_syntax_is_rejected_before_fraction_conversion(
     monkeypatch.setattr(Fraction, "__new__", guarded_new)
     with pytest.raises(AdapterError, match="ASCII"):
         produce(raw, field=field, threshold=threshold, node_limit=1)
+
+
+def degree_eight_rotation() -> tuple[NumberField, tuple, FieldElement, FieldElement]:
+    """An unrelated x^8-2 rotation, not a rational square in a larger field."""
+    field = NumberField((1, 0, 0, 0, 0, 0, 0, 0, -2), (1, 2))
+    t = field.alpha / 4
+    cosine = (1 - t * t) / (1 + t * t)
+    sine = 2 * t / (1 + t * t)
+    zero = field.zero
+    vertices = ((zero, zero), (cosine, sine), (cosine - sine, sine + cosine), (-sine, cosine))
+    return field, vertices, cosine, sine
+
+
+def test_degree_eight_nonrational_rotation_tangency_and_overlap() -> None:
+    field, first, cosine, sine = degree_eight_rotation()
+    assert any(cosine.coeffs[1:])
+    assert any(sine.coeffs[1:])
+    for shift, expected in (
+        (Fraction(1), "proved_graph_bound"),
+        (Fraction(1, 2), "unresolved"),
+    ):
+        second = tuple((x + shift * cosine, y + shift * sine) for x, y in first)
+        raw = source(
+            field, [("first", first, Fraction(3, 4)), ("second", second, Fraction(3, 4))]
+        )
+        result = produce(raw, field=field, threshold=Fraction(1), node_limit=3)
+        assert result["status"] == expected
+        assert result["source"] == raw
+        assert result["pairs_tested"] == 1
+        assert all(
+            len(coordinate) == 8
+            for entry in raw["squares"]
+            for point in entry["vertices"]
+            for coordinate in point
+        )
+        if shift == 1:
+            assert result["nonedges"] == [
+                {
+                    "pair": [0, 1],
+                    "axis": [
+                        [str(value) for value in cosine.coeffs],
+                        [str(value) for value in sine.coeffs],
+                    ],
+                }
+            ]
+            assert result["graph_certificate"]["graph"]["edges"] == []
+            assert all(
+                max(
+                    Fraction(value).numerator.bit_length(),
+                    Fraction(value).denominator.bit_length(),
+                )
+                <= 257
+                for coordinate in result["nonedges"][0]["axis"]
+                for value in coordinate
+            )
+        else:
+            assert result["nonedges"] == []
+            assert result["graph_certificate"]["graph"]["edges"] == [[0, 1]]
+            assert result["graph_certificate"]["status"] == "overweight_clique"
+
+
+@pytest.mark.parametrize("width", [7, 9])
+def test_degree_eight_coordinate_width_refused_before_unit_geometry(width: int) -> None:
+    field, vertices, _, _ = degree_eight_rotation()
+    raw = source(field, [("rotated", vertices, Fraction(1))])
+    raw["squares"][0]["vertices"][0][0] = ["0"] * width
+    with (
+        patch.object(
+            adapter, "check_unit_squares", side_effect=AssertionError("geometry forbidden")
+        ),
+        pytest.raises(AdapterError, match="field-degree coefficients"),
+    ):
+        produce(raw, field=field, threshold=Fraction(1), node_limit=1)
+
+
+def test_degree_eight_field_identity_and_degree_ceiling_refused_without_geometry() -> None:
+    field, vertices, _, _ = degree_eight_rotation()
+    raw = source(field, [("rotated", vertices, Fraction(1))])
+    raw["field"]["minimal_polynomial"].pop()
+    with (
+        patch.object(
+            adapter, "check_unit_squares", side_effect=AssertionError("geometry forbidden")
+        ),
+        pytest.raises(AdapterError, match="coefficient inventory"),
+    ):
+        produce(raw, field=field, threshold=Fraction(1), node_limit=1)
+    with (
+        patch.object(field, "degree", 9),
+        patch.object(
+            adapter, "_entries", side_effect=AssertionError("source access forbidden")
+        ),
+        pytest.raises(AdapterError, match="admitted degree"),
+    ):
+        produce({}, field=field, threshold=Fraction(1), node_limit=1)

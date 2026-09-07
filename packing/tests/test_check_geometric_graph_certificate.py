@@ -11,7 +11,7 @@ from unittest.mock import patch
 import pytest
 
 from devtools import check_geometric_graph_certificate as reader
-from sqpack.field import NumberField
+from sqpack.field import FieldElement, NumberField
 
 
 @pytest.fixture
@@ -521,3 +521,110 @@ def test_empty_family_is_supported_without_containment_claim(field: NumberField)
     assert result["bound_proved"] is True
     assert result["source_squares_checked"] == 0
     assert "packing" in result["scope"]
+
+
+def degree_eight_packet(
+    offset: Fraction | None = Fraction(1),
+) -> tuple[NumberField, dict[str, Any], dict[str, Any]]:
+    field = NumberField((1, 0, 0, 0, 0, 0, 0, 0, -2), (1, 2))
+    # For a^8=2, (1+a^2)^-1=-1+a^2-a^4+a^6. These are the
+    # stereographic unit direction ((1-a^2)/(1+a^2), 2a/(1+a^2)).
+    cosine = field.element([-3, 0, 2, 0, -2, 0, 2, 0])
+    sine = field.element([0, -2, 0, 2, 0, -2, 0, 2])
+    u, v = (cosine, sine), (-sine, cosine)
+
+    def wire(x: FieldElement, y: FieldElement) -> list[list[str]]:
+        return [[str(coefficient) for coefficient in value.coeffs] for value in (x, y)]
+
+    entries = []
+    shift = field.alpha if offset is None else field.rational(offset)
+    for identity, distance in (("first", field.zero), ("second", shift)):
+        px, py = distance * u[0], distance * u[1]
+        entries.append(
+            {
+                "id": identity,
+                "weight": "1",
+                "vertices": [
+                    wire(px, py),
+                    wire(px + u[0], py + u[1]),
+                    wire(px + u[0] + v[0], py + u[1] + v[1]),
+                    wire(px + v[0], py + v[1]),
+                ],
+            }
+        )
+    raw_source = {
+        "field": {
+            "minimal_polynomial": ["1", "0", "0", "0", "0", "0", "0", "0", "-2"],
+            "isolating_interval": ["1", "2"],
+        },
+        "squares": entries,
+    }
+    raw = packet(
+        raw_source,
+        nonedges=[{"pair": [0, 1], "axis": wire(*u)}],
+        leaf={"kind": "coloring", "classes": [[0, 1]]},
+    )
+    return field, raw_source, raw
+
+
+def test_degree_eight_nonrational_rotated_tangency() -> None:
+    field, raw_source, raw = degree_eight_packet()
+    result = reader.check_packet(
+        raw, expected_source=raw_source, field=field, threshold=Fraction(1)
+    )
+    assert result["bound_proved"] is True
+    assert result["projection_comparisons_checked"] == 16
+
+
+def test_degree_eight_nonrational_overlap_cannot_be_a_nonedge() -> None:
+    field, raw_source, raw = degree_eight_packet(Fraction(15, 16))
+    with pytest.raises(reader.GuardError, match="projection"):
+        reader.check_packet(raw, expected_source=raw_source, field=field, threshold=Fraction(1))
+
+
+def test_degree_eight_exact_real_order_for_nonrational_separation() -> None:
+    field, raw_source, raw = degree_eight_packet(None)
+    assert reader.check_packet(
+        raw, expected_source=raw_source, field=field, threshold=Fraction(1)
+    )["bound_proved"]
+
+
+@pytest.mark.parametrize("width", [7, 9])
+@pytest.mark.parametrize("location", ["coordinate", "axis"])
+def test_degree_eight_wrong_coefficient_width_refuses(width: int, location: str) -> None:
+    field, raw_source, raw = degree_eight_packet()
+    if location == "coordinate":
+        raw_source["squares"][0]["vertices"][0][0] = ["0"] * width
+        raw["source"] = deepcopy(raw_source)
+    else:
+        raw["nonedges"][0]["axis"][0] = ["0"] * width
+    with pytest.raises(reader.GuardError, match="exactly the declared degree"):
+        reader.check_packet(raw, expected_source=raw_source, field=field, threshold=Fraction(1))
+
+
+def test_degree_eight_real_root_identity_is_bound() -> None:
+    field, raw_source, raw = degree_eight_packet()
+    negative = NumberField((1, 0, 0, 0, 0, 0, 0, 0, -2), (-2, -1))
+    with pytest.raises(reader.GuardError, match="real embedding"):
+        reader.check_packet(
+            raw, expected_source=raw_source, field=negative, threshold=Fraction(1)
+        )
+    raw_source["field"]["isolating_interval"] = ["-2", "-1"]
+    raw["source"] = deepcopy(raw_source)
+    with pytest.raises(reader.GuardError, match="real embedding"):
+        reader.check_packet(raw, expected_source=raw_source, field=field, threshold=Fraction(1))
+
+
+def test_degree_above_admission_ceiling_is_refused() -> None:
+    field = NumberField((1, 0, 0, 0, 0, 0, 0, 0, 0, -2), (1, 2))
+    raw_source = {
+        "field": {
+            "minimal_polynomial": ["1", "0", "0", "0", "0", "0", "0", "0", "0", "-2"],
+            "isolating_interval": ["1", "2"],
+        },
+        "squares": [],
+    }
+    with pytest.raises(reader.GuardError, match="admitted validated NumberField"):
+        reader.check_packet(
+            packet(raw_source), expected_source=raw_source, field=field, threshold=Fraction(1)
+        )

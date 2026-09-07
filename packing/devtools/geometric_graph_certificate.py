@@ -39,7 +39,7 @@ type Quad = tuple[Point, Point, Point, Point]
 VERSION = 1
 KIND = "algebraic-unit-square-overlap-graph"
 SCOPE = "Supplied square family only; no packing or source-candidate claim."
-MAX_FIELD_DEGREE = 4
+MAX_FIELD_DEGREE = 8
 """Admission limit, not permission to construct or evaluate a scientific field."""
 
 

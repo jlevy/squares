@@ -44,12 +44,12 @@ This is the changed BC255 obligation selected under `think-7e72` after H110 and 
 were accepted and H122 was refuted.
 The sole
 [exp124](../series/series-000-smoke-and-calibration/experiments/exp-124-full-square-compatibility-screen.md)
-fixed-S, exact45-Q screen returned no witness in0.84 seconds.
+fixed-S, exact45-Q screen returned no witness in 0.84 seconds.
 Its witness-only reader was not invoked.
 H124 remains unresolved; neither continuous compatibility nor the finite search’s
 coverage has an independent certificate from that run.
-The producer and independent reader passed27 source-free controls and independent
-reviews by08:09:33UTC, before the prospective protocol and sole scientific invocation.
+The producer and independent reader passed 27 source-free controls and independent
+reviews by 08:09:33 UTC, before the prospective protocol and sole scientific invocation.
 No retry or second frame is allocated.
 
 Write q=1939/500. The actual angle bands, modulo square quarter turns, are
@@ -110,8 +110,8 @@ The exact invocation and budgets belong in a separate prospective experiment.
 ## A Stronger Continuous Common Obstacle
 
 The next analytical assessment uses the full ten-mark avoidance condition to enlarge the
-old diamond. Independent mathematical review accepted this derivation in Session093
-at08:50:29UTC; it does not establish the remaining nine-mark cover or resolve H124. No
+old diamond. Independent mathematical review accepted this derivation in Session093 at
+08:50:29 UTC; it does not establish the remaining nine-mark cover or resolve H124. No
 additional scientific evaluation produced it.
 
 Put $m=q/2$, $W=m-1=939/1000$, $r=\sqrt2/2$, and $k=1+W/2$. Write $C=\cos\theta$,
@@ -285,11 +285,14 @@ and closedness extends it to both endpoints.
 Thus the representation is complete for finite closed convex-polygon covers absent
 resource limits. Adjacent slabs with the same chain can be merged.
 
-The bounded source-free producer and reader are being authored independently under
-`think-g29r` and `think-qt0k`. This is instrument preparation, not a residual-cover
-evaluation.
-Timeout, omitted evidence or failure to construct a chain is unresolved; even
-a verified gap in this sufficient cover would not refute H124.
+The bounded source-free producer and reader were authored independently under
+`think-g29r` and `think-qt0k`; independent reviews passed by 09:21:09 UTC. Their 21 and
+69 synthetic controls pass, including independently replayed closed-contact and
+unresolved examples.
+Scientific source binding and a capped caller are still required.
+No actual residual-cover input has been constructed or evaluated.
+Timeout, omitted evidence or failure to construct a chain is unresolved; even a verified
+gap in this sufficient cover would not refute H124.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -1445,7 +1445,7 @@ sessions:
   title: "Full-square compatibility and distinct density assessment"
   status: in_progress
   primary_bead: think-bmx9
-  phases: 6
+  phases: 9
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-093.yaml
@@ -1456,8 +1456,8 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-093.yaml
-    model_responses: 266
-    agent_hours: 2.47
-    active_union_hours: 0.67
-    wall_hours: 0.67
+    model_responses: 577
+    agent_hours: 5.42
+    active_union_hours: 1.59
+    wall_hours: 1.59
     snapshot_incomplete: true

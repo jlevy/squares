@@ -106,7 +106,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-089](agent-sessions/session-089-agenda024-next-phases.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 14 | think-jgnv | Select BC-251, think-0za3, for the next fresh allocation with its unchanged 150-minute process cap and separate verification. Agenda024 Current Allocation owns the parallel density and angle packages. Keep the integrated PR101 line while open; do not repeat exp113, exp114 or exp115. |
 | [session-090](agent-sessions/session-090-four-hour-research.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 11 | think-9qrx | After Session090 closes, select think-qv73 under BC255 for H110's source-free fixed P12 escape instrument and independent review, then a fresh prospective experiment. The September7 priority amendment holds H107 out of the next block and selects a bounded conditional-compatibility assessment alongside H110. Agenda024 owns this revised allocation and the deferred bead. Density remains source-blocked; no exp116 retry. |
 | [session-091](agent-sessions/session-091-structural-compatibility.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 6 | think-fqhr | Select think-7e72 for a bounded full-P10 distinguished-square compatibility discriminator after fresh ID/ownership checks; no repeated H110/H122/H123 invocation. |
-| [session-093](agent-sessions/session-093-full-square-compatibility.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 6 | think-bmx9 | Review the continuous obstacle and finish bounded source-free graph adapters; no additional scientific target is allocated. |
+| [session-093](agent-sessions/session-093-full-square-compatibility.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 9 | think-bmx9 | Continue with independently authored H124 residual-cover source binding and a bounded caller, alongside a separately declared degree-eight graph source-control attempt. Neither target is yet allocated; preserve the stopped original sequence and check fresh IDs before the next session. |
 
 ### Workflow summary
 
@@ -119,8 +119,8 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 18 | 1 | 58 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 9 | 4 | 59 | 7 |
-| `pipeline-improvement` | 24 | 0 | 122 | 0 |
+| `research-loop` | 9 | 4 | 60 | 7 |
+| `pipeline-improvement` | 24 | 0 | 124 | 0 |
 | `documentation-pass` | 1 | 0 | 7 | 0 |
 | `review-planning-oversight` | 0 | 0 | 1 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |

@@ -25,7 +25,7 @@ experiment:
     control: >-
       Thirteen producer and fourteen independently authored reader source-free
       controls passed, followed by separate independent reviews completed by
-      08:09:33UTC. Controls forbid scientific constructors and retained-source
+      08:09:33 UTC. Controls forbid scientific constructors and retained-source
       access. Canonical clipping, open strata, closed seams, all-mark identity,
       actual angles and strict disjointness are reviewed. No target has run.
     candidate: >-
@@ -49,7 +49,7 @@ experiment:
       Only actual exit zero and a well-formed witness packet authorize one
       independent ten-second whole-process reader. No retry, second frame,
       changed fixed square, obstacle substitution or budget extension.
-      Launch before08:28UTC or retain non-invocation for a fresh future allocation.
+      Launch before 08:28 UTC or retain non-invocation for a fresh future allocation.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-124-full-square-compatibility-screen/packet.json
   effort:
     timebox: One thirty-second producer; the conditional ten-second reader was not invoked
@@ -60,7 +60,7 @@ experiment:
     role: outcome
     question: Does this one fixed-S exact45-Q slice refute full distinguished-square compatibility?
     outcome: criterion_missed
-    checked_by: The actual producer exited zero with complete no_witness output after837 event cells,47 canonical cells and one uncovered canonical cell. The witness-only reader was not authorized or invoked; continuous coverage is not independently certified.
+    checked_by: The actual producer exited zero with complete no_witness output after 837 event cells,47 canonical cells and one uncovered canonical cell. The witness-only reader was not authorized or invoked; continuous coverage is not independently certified.
   verdict:
     decision: unresolved
     primary_criterion: One independently verified closed-disjoint Q/S pair satisfies the complete H124 premises.
@@ -70,11 +70,11 @@ experiment:
 # exp-124 — Full-square Compatibility, One Fixed Slice
 
 H124 remains unresolved.
-The prospective protocol was committed as `4acafdfc` after all31 record checks passed
-in17.88 seconds. The producer launched once at the observed 08:20:59UTC boundary from
+The prospective protocol was committed as `4acafdfc` after all 31 record checks passed
+in 17.88 seconds. The producer launched once at the observed 08:20:59 UTC boundary from
 clean engine `a75d751a` and returned actual exit zero with `status=no_witness`,
 `complete=true`,837 event cells,47 canonical cells and one uncovered canonical cell.
-It used0.84 seconds process wall and0.83 seconds CPU.
+It used0.84 seconds process wall and 0.83 seconds CPU.
 
 There was no witness, so the conditional reader was not invoked.
 No replay receipt is claimed.
@@ -97,7 +97,7 @@ reserved.
 
 ## Frozen Invocation and Admission
 
-Q is a contained closed unit square at exactly45 degrees.
+Q is a contained closed unit square at exactly 45 degrees.
 Its center lies in [1,q/2] x [0,1], with q=1939/500, and it avoids all ten original P10
 marks. The fixed S retains every source field from exp122 and avoids all nine B–J marks.
 The source’s half-angle offset -1/500 obeys the reader’s strict guard1/480, which
@@ -124,8 +124,8 @@ mandatory. They cover imports, source loading, checking and serialization.
 ## Scientific Disposition
 
 Reject H124 only with actual reader exit zero, `status=verified_pair`, complete
-evidence, passed guards, all76 mark-edge determinants checked,16 coordinate containment
-checks and32 scalar wall inequalities, canonical Q, actual angle membership, unchanged
+evidence, passed guards, all 76 mark-edge determinants checked,16 coordinate containment
+checks and 32 scalar wall inequalities, canonical Q, actual angle membership, unchanged
 source identity, strict disjointness and no unresolved obligations.
 A positive claimed gap is checked exactly, and a separate corner-based SAT calculation
 must find strict separation.
