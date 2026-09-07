@@ -205,6 +205,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Research and Upstream Reconciliation, September 7](docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md) | dated review record | record | retained | — |
 | [BC-282: Residual Skeleton and a Proposed Translation Fence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md) | research synthesis | record | retained | — |
 | [BC-282: Independent Skeleton-Design Admission](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md) | dated review record | record | retained | — |
 | [BC-282: Independent Residual-Domain Inventory](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-domain-inventory.md) | dated review record | record | retained | — |
@@ -248,6 +249,12 @@ case or experiment separately.
 | [BC-270 — Capacity Comparison Design and Exact Domain Obstruction](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md) | research synthesis | record | retained | — |
 | [BC-273: A Closed Domain for Releasing Segment 9–10](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md) | research synthesis | record | retained | — |
 | [BC-260 Direct Hybrid Contracts](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md) | dated review record | record | retained | — |
+| [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | research synthesis | supporting | maintained | — |
+| [Review: Incorporating Stromquist’s Memos and Helper Arguments](docs/project/reviews/review-2026-09-07-stromquist-incorporation.md) | dated review record | record | retained | — |
+| [Stromquist’s Helper Arguments and Conditional Dots Certificates](docs/project/stromquist-helper-arguments-math-review.md) | dated review record | supporting | maintained | — |
+| [Five-Dot Obstruction for the Six-Square Problem](docs/project/reviews/review-2026-09-07-n6-pure-dots-obstruction.md) | dated review record | record | retained | — |
+| [An Explicit Five-Point Piercing Obstruction Near Side Three](docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md) | dated review record | record | retained | — |
+| [Stromquist’s Segment Helper: An Independent Derivation](docs/project/reviews/review-2026-09-07-stromquist-segment-helper.md) | dated review record | record | retained | — |
 | [Strategic Mathematical Review: Hybrid Exclusion and Few-Angle Structure at n = 11](docs/project/reviews/review-2026-09-07-n11-hybrid-strategy.md) | dated review record | supporting | maintained | — |
 | [Validation Efficiency Implementation Review](docs/project/reviews/review-2026-09-06-validation-efficiency-implementation.md) | dated review record | record | retained | — |
 | [Validation Efficiency Ideas](packing/benchmarks/validation-efficiency/ideas.md) | implementation plan | supporting | maintained | — |
@@ -578,240 +585,106 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-**BC282’s exact reduction is accepted; further local target work is parked.**
-[Session096](packing/campaign/agent-sessions/session-096-residual-skeleton.md) continues
+**Upstream reconciliation, September 7.** This branch integrates main through `a5e9dbfd`
+(PR115), including PR112’s Stromquist source work and paper v0.2.3. The
+[research and PR survey](docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md)
+records all 25 recent PR closures, agenda dispositions and remaining parallel lanes.
+PR102/103 closed unmerged; PR108 reached main through PR107. PR101,105 and109 are
+completed integration checkpoints, not live dispatch branches.
+
+**Our exact reduction is accepted; further local target work is parked.**
+[Session098](packing/campaign/agent-sessions/session-098-residual-skeleton.md) continues
 the owner’s request after the closed eight-hour investigation in
 [session092](packing/campaign/agent-sessions/session-092-hybrid-overnight.md).
 [PR110](https://github.com/jlevy/squares/pull/110) retains both checkpoints.
-The new design preserves all 40 containment rows and 45 complete pair clauses through
-ten closed envelope chambers and 24 open collision intervals.
-The independent audit accepts the exact translation/fiber equivalence, including
-degenerate fibers and legal touching.
-It proves neither coverage of a target fiber nor a feasible skeleton.
+BC282 preserves all 40 containment rows and 45 complete pair clauses through ten closed
+translation-envelope chambers and 24 open collision intervals.
+Independent review accepts exact fiber equivalence, including degenerate fibers and
+legal touching. This proves neither coverage of a target fiber nor a feasible skeleton.
 
-The proposed six-source covering chain remains unproved.
+The six-source covering chain remains unproved.
 Uniform templates, bounded endpoint transitions and a priced complete witness
 discriminator are missing, so the conditional 30/25/20-minute target was not admitted.
-Two subsequent comparisons support parking local H120 and H118 target work.
-Paused `think-k54y` retains H120’s exact re-entry conditions; H118 still needs a finite
-rule preserving one angle against walls and all ten actual neighbors, its joint-angle
-control and a full verification price.
+Further H120 and H118 target work stays parked.
+Paused `think-k54y` retains H120’s re-entry conditions.
+H118 needs a finite rule preserving one angle against walls and all ten actual
+neighbors, its joint-angle control and full verification price.
 
-**Selected next entry:** `think-mq0d`, existing BC-264 / H-114, under its separate
-owner. Allocate at most 30 minutes of source-free feature and kernel-contract pricing.
-First accept the kernel-specific BC260 implications, which the direct case/Farkas review
-did not cover. Fix one feature family, exact PSD/necessary-constraint acceptance and the
-full diagonal/pair verification price.
-This is preparation; no target, degree escalation or new hierarchy is admitted.
-Check the owner’s live state before any dispatch.
-
-The prior signed exclusions retain the complete closed half-angle remainder
+The signed exclusions retain the complete closed half-angle remainder
 $[1/24,1/3]\cup[1/2,23/25]$, both signs and all original source features.
 The stronger count retains six fixed axis squares and one common angle while dropping
 the four block contact equations.
+The central parent fence is accepted; the matched coupled-LP comparison, maximal
+wall-core capacity and full-square boundary questions remain unresolved.
 The global n11 bracket is unchanged.
-The central parent fence is accepted; the matching coupled-LP strength comparison,
-maximal wall-core capacity and full-square boundary questions remain unresolved.
 
-The parallel task **Squares plan X-016** landed PR109 on main at `07e82d1e`, already
-integrated here.
-Its exp128 fixes the old Trump support optimum at eleven; BC265 selected
-the existing BC264 entry.
-Preserve source H122–124, exp121–128 and sessions091/093–095. This continuation executes
-BC282 in session096 and allocates no BC283, new hypothesis or experiment.
-PR111’s separate session093 naming collision is tracked by `think-rzek`; it does not
-change the landed IDs.
-Refresh live allocations before reserving another ID.
+**Existing kernel lane: check the owner’s current checkpoint before dispatch.** The task
+**Squares plan X-016** landed PR109 at `07e82d1e` and is continuing on
+`codex/n11-kernel-pricing` under `think-mq0d`. Live task notes at 21:47 UTC report
+session097’s admitted kernel implication and cubic center-feature obstruction, followed
+by source-free producer and independent-reader builds for a fixed eleven-feature,
+sixteen-parameter family (`think-s8cj`, `think-rbmm`). Their next gate is separate
+code/protocol admission and whole-child supervision.
+No scientific source run or continuum certificate was claimed.
+These live working-tree results are not included in this merge; the owner’s record
+governs its next allocation.
+Do not restart the earlier 30-minute pricing slice or take its ownership.
 
-**Independent alternative prepared.**
-[X-017](packing/campaign/explorations/X-017-compatibility-and-complete-case-covers.md)
-reconciles the contributed research packet with PR105’s committed state at `46f38ab4`.
-[Agenda 027](packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md)
-proposes resource-and-anchor and six-plus-five restricted-family pilots, with a separate
-pair-kernel discriminator.
-Its broad pilots remain unlaunched.
-The shared BC260 direct contracts are accepted for session092’s concrete consumers;
-BC261 retains the accepted direct leaf and small control cover; complete
-consumer-specific attachment remains open.
-Kernel and physical-stationarity reviews retain their own prerequisites.
-Its X-017, H-111–117 and BC-258–268 records and epic `think-sz5t` keep its ownership and
-numbering separate from the continuing agenda below.
-None of its dependencies requires that run to finish; the original handoff remains the
-entry for that run.
-
-The next research phases run in [PR101](https://github.com/jlevy/squares/pull/101) on
-`codex/post-381-next-phases`, with the landed PR100 depth fixes and PR98 validation
-improvements integrated.
-[Session 089](packing/campaign/agent-sessions/session-089-agenda024-next-phases.md)
-records live assignments and checkpoints; it was renamed from the branch-local
-session-088 to preserve the separate landed efficiency session below.
-Coordinator `think-jgnv` owns the integrated research line and its first two-hour
-checkpoint.
-Source controls have passed; independent review and bounded end-to-end target
-work remain distinct.
-Supporting fixes stay on this PR.
-
-**Efficiency implementation checkpoint.**
-[Session 088](packing/campaign/agent-sessions/session-088-validation-efficiency-checkpoint.md)
-records the bounded W5 slice: detailed timing artifacts, two independently guarded
-component optimizations, configuration-selection repairs, and integrated fast validation
-on main `edccf294` plus the reviewed changes.
-Its 62 selected steps passed in 232.89 seconds on the recorded ten-CPU local host with
-two outer/two inner workers; this is a dated local measurement.
-[PR98](https://github.com/jlevy/squares/pull/98) retains the later hosted results and
-the checkpoint status as upstream work is integrated.
-The
-[W5 plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
-links the measured results, retained profile, complete project documentation matrix, and
-upstream tbd proposal.
-Automatic exhaustive selection and evidence reuse remain planned.
-
-**Research continuation.** The
-[T+2-to-T+10 continuation addendum](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
-is the cold-review entry point for the partially completed post-T+2 continuation.
-The
-[Agenda 024 allocation](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
-owns prospective priorities.
-Its planning block BC-250 links the
-[tbd assessment](docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md)
-of both prior reviews, and distills their directions into H-093–103 and the existing
-agendas. Coordinator `think-jgnv` next dispatches scalar BC-251, adaptive controls
-BC-231, density support BC-254, and restricted assessment BC-255 as capacity and their
-readiness conditions permit.
-The addendum owns command custody and recovery; no successor experiment started during
-the planning block. The user’s credit-interruption amendment excludes unavailable time
-from the wall allowance.
-The addendum records the accounting boundaries, revised deadlines, and conservative
-active-minute position `124:14`, the inherited reference position for this continuation.
-Session089 is closed; no current active-time total is inferred from elapsed wall time.
-BC-232’s completed recovery produced no row-converged covering; BC-241’s independent
-local-scope review was published in `ad600896`. H-092’s fixed-weight refined-core
-negative passed independent review and awaits integration under `think-xsma`. The
-eventual handoff records the active minute actually reached.
-The addendum preserves the first block’s frozen packets and binds the active-time, role,
-safety, BC-241, BC-232, BC-243, and gate contracts.
-[Agenda 024](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md) remains its
-control plane. It coordinates two disjoint programs: the exact fractional frontier in
-[agenda 025](packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md) and
-density, typed stationarity, and Trump capture in
-[agenda 026](packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md).
-
-Research and tooling have separate continuation work.
-[Session 087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md)
-completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0.015`.
-Session 089 retains the finite-row density candidate, its complete pair exclusion, the
-exact-angle auxiliary result, and the next complete-method assessments.
-
-**Parallel lane:** `think-mq0d` takes BC-264’s bounded H114 feature and kernel-contract
-pricing. The
-[Session094 handoff](packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md)
-was updated after the first result in
-[Session095](packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md).
-Exp125 independently certified the entire diagonal compatibility branch, but its axis
-representation returned `no_chain`. Exp127’s fixed collision-augmented axis cover also
-returned `no_chain`, in 0.25 seconds, without an independent reader.
-H124 and restricted H036 remain unresolved; that representation receives no retry or
-parameter sweep. BC-259 is complete: exp128 independently bound all 88 source images, 60
-placements and eight orbits, verified 41 strict inclusions on seven fixed boxes, and
-established the attained support optimum eleven in 1.12 seconds.
+PR109’s
+[Session095](packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md)
+retains exp128’s independently verified optimum eleven on the old Trump support.
 H099 is refuted only on that support.
-BC-265’s independent designs derive an explicit mass-eleven calibration on the old
-support, but a new undercovered pose would reject only that density.
-The selected next allocation is BC-264’s existing 30-minute feature and
-verification-price assessment: a complete H114 kernel could improve the global bound at
-side $96/25$, while a finite obstruction would reject only its chosen feature family.
-Kernel-specific BC-260 review, exact PSD evidence and complete pair-domain verification
-remain prerequisites.
-H101’s stronger common-support obstruction is a conditional fallback, with no candidate
-asserted. No new target or research block is activated by this handoff.
+Exp125 certified diagonal compatibility; exp127’s fixed axis cover returned `no_chain`
+without an independent reader.
+H124 and restricted H036 remain unresolved, with no unchanged collision-cover retry.
+The accepted near-axis and near45 auxiliaries remain restricted theorems.
+Scalar exp116 had no row convergence; no unchanged retry or covering bridge is selected.
+H107 remains deferred under `think-7fec` pending a fresh allocation and named use.
 
-**Session 090’s selection:** `think-qv73`, the fixed near-axis P12 escape discriminator,
-was registered but unrun at that handoff.
-[Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
-`think-9qrx`, completed the user-approved research block after PR 101 merged.
-BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
-dual mass of about 10.080180 at depth one, below the obstruction threshold.
-No bridge or unchanged retry is selected.
-At that earlier checkpoint, BC-243’s uniform control had timed out on three separately
-reviewed algorithms.
-Session094 later completed all five repaired graph controls and ran exp126 once.
-Its graph-only obstruction left H099 unresolved; no retry is open.
-BC-255 accepted H-106’s full continuous near-axis ten-point clause through an
-independent exact rectangle reader.
-H-108 and H-109 also accepted canonical near-45 A3 and A1/A2 forcing through independent
-exact replay and a reviewed reflection.
-These are restricted-theorem auxiliaries, not a packing bound.
-H-110 is accepted through exp-121: the fixed unit square is independently verified to
-fit in the actual domain and strictly avoid all twelve marks.
-This refutes the unchanged unconditional P12 auxiliary, not H-036. Exp-122 refutes
-H-122’s small-diamond conditional cover through an independently checked square.
-Exp-123 accepts complete near45 localization through four exact continuous guards and
-the reviewed geometric reduction.
-The fixed-S H-124 screen found no witness without certifying continuous coverage; the
-broader bound is unchanged.
-H-107’s reviewed fixed-site scalar protocol is held out of the next two-hour block under
-paused `think-7fec`; later-session reconsideration preserves its unlaunched history.
-The freed attention goes to a bounded conditional-compatibility assessment from the
-accepted A-point lemmas, not an automatic P12 repair.
-Full validation of research checkpoint `99a3ad42` passed;
-[Session 089](packing/campaign/agent-sessions/session-089-agenda024-next-phases.md)
-retains that verdict and the completed experiments, which must not be repeated.
-[Agenda 024’s Current Allocation](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
-owns the scalar, complete-density and continuous-angle packages, including
-independent-review assignments.
-Keep these on one integrated successor PR from
-`codex/structural-compatibility-continuation`, based on merged PRs 105 and 106. The
-earlier BC-215 efficiency work remains available in Agenda 023; this handoff does not
-mark it complete or erase its evidence.
-`BC-219` was the preflight for Agenda 024’s original launch inputs.
-Its completion does not replace the continuation addendum’s current gate contract.
+**Independent geometric-helper lane.** Landed
+[Session096](packing/campaign/agent-sessions/session-096-stromquist-memos-and-helpers.md)
+reviewed Stromquist’s three memos and independently checked the five-point obstruction
+and local segment helper.
+The
+[source brief](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md)
+retains exact geometric replay and remaining Memo I implications under `think-0krc`.
+Finite incidence controls do not establish the missing geometric premises.
+This lane can proceed independently of BC264; neither PR112 nor PR115 changes a packing
+bound.
 
-The completed commissioning slice consumed the first two active portfolio hours of the
-same roughly 24-active-hour agenda.
-It exercised the coordinator, both managers, one floating worker, retained-state resume
-and checkpoint seams, the local Trump theorem packet, central integration, and
-interruption recovery.
-The T+2 integration checkpoint left 22 active portfolio hours; the continuation resumes
-those cells without resetting their clocks or budgets.
+**Broad alternatives and agenda status.**
+[X017](packing/campaign/explorations/X-017-compatibility-and-complete-case-covers.md)
+and
+[Agenda027](packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md)
+retain their broad resource/anchor and six-plus-five pilots, still unlaunched.
+BC260’s direct contracts and BC261’s small direct control cover are accepted only for
+their reviewed consumers; other consumers retain their own attachment prerequisites.
+Agendas017,020 and021 are completed,018/019 paused, and022–028 remain active.
+Terminal sessions and parked targets do not close the entire agenda.
+Agenda021’s interim restricted wall bracket 0.025 was superseded by Session087/BC213’s
+accepted 0.015 result.
+Completed results and original clocks remain in their records.
 
-At the historical `T+0` launch, the only takeable research cells were `BC-230`,
-`BC-232`, `BC-233`, `BC-240`, `BC-242`, and `BC-245`. Agenda 024’s current allocation
-now governs which cells may run.
-The coordinator alone allocates experiment IDs, edits shared or generated records,
-integrates manager packets, and moves a gate.
-Codex uses `max` reasoning for theorem scope, proof boundaries, mathematical
-disposition, and strategic routing; bounded implementation and independent reviews use
-`xhigh`, while replay, manifest, formatting, and value checks may use `high` when they
-require no mathematical choice.
+**Allocations and integration boundaries.** Preserve source H122–124, exp121–128 and
+sessions091/093–095, X017/H111–117/BC258–268 and X018/H118–121/BC269–282. Main’s
+Stromquist session096 and the live kernel session097 keep their identities.
+Our former branch-local residual096 becomes 098; its original cost payload and
+historical runtime archives retain their accounting.
+PR111’s atlas session093 and local proposed 097 both conflict with source ownership;
+`think-rzek` tracks its separate repair.
+Refresh remote refs, live worktrees and shared reservations before any further ID
+choice.
 
-[Agenda 021](packing/campaign/agendas/agenda-021-three-numbers-and-a-wall.md) supplied
-the retained `T-021` result and the 3.82 fractional state used here.
-Agenda 022’s Session 087 closed after PR 83 merged and the full gate passed on `main`.
-Agenda 024 is a separate portfolio; its active-hour clocks and T+2 disposition do not
-resume the completed efficiency block.
-
-PR 93 subsequently landed two operational guards on `main` without changing this
-research entry point.
-The on-demand [`deep-gate.yml`](.github/workflows/deep-gate.yml) runs the four deferred
-checks against a pull request before merge; because it is advisory, the post-merge full
-gate remains the backstop for a pull request that does not request it.
-The push-triggered
-[`branch-mergeability.yml`](.github/workflows/branch-mergeability.yml) now reports a
-branch that cannot be merge-built even when GitHub cannot create its pull-request merge
-ref. Its remaining blind spot is an idle branch after `main` moves and before the next
-push. Session 087 retains the full-gate evidence from run `34010683180` at `c743d7bb`.
-
-The later upstream efficiency corrections preserve that historical accounting.
-Session 087 reduced the then-required CI surface from `1369.60 s` to about `221.70 s`
-without removing checks.
-The R1 tree-id cache remains a separate efficiency task: 20.2 percent of measured
-deep-run work repeated, and 92 percent of that repetition came from unchanged trees.
-Per-test CPU readings are diagnostic because child costs cannot yet be attributed
-reliably; the `12 s` call-wall backstop remains enforced.
-[D-472](defects.md) records why one hosted timing sample cannot establish a speedup.
-[Development’s validation tiers](development.md#validation-tiers) own the current
-configuration and measurements; none of these historical selections supersedes Agenda
-024’s allocation.
+PR111’s atlas expansion and PR114’s font/toolchain changes remain separate open PRs.
+They are not included here.
+PR111 changes validation coverage and corpus size, so it needs its own integration
+review and performance evidence.
+Our
+[VE004 record](packing/benchmarks/validation-efficiency/experiments/VE-004-checks-start-order.md)
+retains the 22.9% local median checks-tier improvement on its frozen workload, with all
+48 checks and thresholds preserved.
+Historical full and hosted passes remain source-bound; PR110 records fresh validation of
+this combined tree. Broader efficiency work remains in Agenda023 and `think-u53m`.
 
 ### Handoff Record
 
@@ -2210,8 +2083,9 @@ For most `n` the answer is uninteresting: `s(m²) = m` by the grid.
 It becomes interesting just above a perfect square, where the leftovers must be tilted
 in.
 
-At `n = 11` the upper end has not moved since 1979, and the lower end moved on
-2026-09-04 for the first time since 2003:
+At `n = 11` the upper end has not moved since 1979. On 2026-09-04 the lower end improved
+on Stromquist’s bound, stated in 1984 and published in 2003; the recorded search found
+no intervening improvement:
 
 |  | value | source |
 | --- | --- | --- |
@@ -2225,8 +2099,13 @@ At `n = 11` the upper end has not moved since 1979, and the lower end moved on
 separated from the independently certified lower bound.
 The segment and dot contact marks are exact, not tolerance-based visual guesses.*
 
-The value `T-018` displaces is Stromquist’s `2 + 4/√5 = 3.788854382…`, and that value
-keeps its own place in the record.
+The value `T-018` displaces is Stromquist’s `2 + 4/√5 = 3.788854382…`, stated in
+[Memo III, p. 10](packing/resources/papers/stromquist-1984-packing-unit-squares-inside-squares-iii-cases-through-65-and-gardner-conjecture.pdf)
+on November 15, 1984, and published in 2003. The memo states the unrestricted bound
+without supplying its proof.
+The
+[memo review](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md)
+records the source distinctions and the helper-argument followup.
 The current audit found an explicit strict box avoiding all twelve printed Figure 14
 points, so the paper’s unavoidability subclaim is false as printed
 ([D-152](defects.md)). Exp-017 independently certifies the same numerical inequality by
@@ -3219,13 +3098,14 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-093.yaml` | session-093 | 673 | 6.07 h | 1.99 h | 1.99 h | yes |
 | `codex-task-tree-session-094.yaml` | session-094 | 562 | 4.53 h | 1.82 h | 1.82 h | yes |
 | `codex-task-tree-session-095.yaml` | session-095 | 476 | 4.08 h | 1.69 h | 1.69 h | yes |
-| `codex-task-tree-session-096.yaml` | session-096 | 590 | 4.33 h | 3.1 h | 3.15 h | yes |
+| `codex-task-tree-session-096.yaml` | session-096 | 520 | 3.79 h | 1.4 h | 1.4 h | yes |
+| `codex-task-tree-session-098.yaml` | session-098 | 590 | 4.33 h | 3.1 h | 3.15 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 52 |
+| measured | 53 |
 | unmeasured | 44 |
-| **total** | **96** |
+| **total** | **97** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -3662,24 +3542,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 478 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 480 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 97 | asserted something false about the mathematics |
-| validity | 121 | was correct, but the measurement did not bear on the question |
+| soundness | 98 | asserted something false about the mathematics |
+| validity | 122 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 182 | recorded something its own evidence contradicts |
 | robustness | 60 | did not finish, or finished only by luck |
 | performance | 18 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Seventy-seven of the ninety-seven soundness defects pointed in the *flattering*
+**Seventy-eight of the ninety-eight soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy-two defects in 478, and no soundness defect
+**The automated gate has caught seventy-two defects in 480, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3990,7 +3870,7 @@ It is contained rather than fixed — such delegations are recorded on completio
 `read_only` flag is better than permitting an empty list that would be ambiguous between
 “writes nothing” and “nobody filled this in”.
 
-111 fixes left no regression check behind.
+112 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
 and exit survived, but invalid `gdate` precision left the start and end fields empty, so
 [D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.
@@ -4166,9 +4046,10 @@ and it is not the cartography spine.** Its weighted-resource lineage runs throug
 Kearney–Shiu, Nagamochi and Bentz; the recent pure-atomic rational direction-net
 architecture follows Burns, and the LP instance and parameter line follows Massaccesi.
 This project’s instances and generator moved seven registered cases in one day.
-`s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first public movement of
-that bound located by the recorded search after Stromquist stated `2 + 4/sqrt(5)` in
-2003\. [T-022](packing/frontier/RESULTS.md) retains a small exact refinement to
+`s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), improving Stromquist’s
+`2 + 4/sqrt(5)`, stated in 1984 and published in 2003; the recorded search found no
+intervening improvement.
+[T-022](packing/frontier/RESULTS.md) retains a small exact refinement to
 `3.810025723614703…`; its proof and endpoint limitations remain in the technical record.
 The shared S5 rubric category does not make these contributions comparable in size.
 `s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound located that

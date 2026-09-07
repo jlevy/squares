@@ -394,19 +394,24 @@ Larger density or angle steps need an explicit readiness and cost decision at a 
 unpriced retained replays conditional; its two selected slices are complete.
 Use two authors and rotate the third worker into independent review, with the
 coordinator owning shared records and the scalar process.
-PR 101 has merged; [PR 105](https://github.com/jlevy/squares/pull/105) is the single
-integrated successor for Session 090. Keep supporting slices on it.
+Historically, [PR105](https://github.com/jlevy/squares/pull/105) was Session090’s
+integrated successor to PR101. Both have merged, followed by PR109. The selected
+continuation below governs research disposition; consult the current SYNOPSIS handoff
+for live owner progress before dispatching another slice.
 Use `max` for mathematical judgment and `high` or `xhigh` for suitable mechanical work.
 
 ### Selected Continuation After Session 090
 
-The current local coordinating entry is BC-264 under `think-mq0d`: price one H114
-feature family and its missing kernel-specific contract within the existing 30-minute
-slice. BC265’s independent design is complete; a calibration falsifier has less direct
+At Session095's handoff, the selected coordinating entry was BC-264 under
+`think-mq0d`: price one H114 feature family and its missing kernel-specific contract
+within a 30-minute slice. This is the historical selection; the owner's live session097
+has since completed pricing and begun source-free implementation. The current
+[SYNOPSIS handoff](../../../SYNOPSIS.md#current-handoff) and owner record govern further
+dispatch; do not restart that original slice. BC265’s independent design is complete; a calibration falsifier has less direct
 value than this bound-capable mechanism and is not selected automatically.
 H101’s stronger common-support obstruction remains a conditional fallback without a
 candidate. Exp128 established fixed-support optimum11 and closed BC259/H099. This is a
-future source-free entry, not a newly funded target.
+source-free entry at that checkpoint, not a newly funded target.
 Session094’s diagonal compatibility lemma is retained, while Session095 exp127’s fixed
 collision-augmented axis cover returned `no_chain` without a reader.
 H124 and restricted H036 remain unresolved; no retry or parameter sweep follows.

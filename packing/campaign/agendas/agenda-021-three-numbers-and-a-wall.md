@@ -1111,7 +1111,7 @@ agenda:
         bead: think-mq0d
         workflow: insight-iteration
         rationale: >-
-          Updated at session096’s checkpoint, not backdated to this agenda’s W10.
+          Updated at session098’s checkpoint, not backdated to this agenda’s W10.
           BC282’s exact translation/fiber reduction is independently accepted,
           but its full target is not admitted. Comparative review parks further
           local H120/H118 targets. The existing BC264 entry remains the next

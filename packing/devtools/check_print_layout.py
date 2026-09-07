@@ -286,19 +286,47 @@ _PROBE = r"""() => {
     return steps.join(' > ');
   }
 
-  /* The block's first line box: every rect a Range over its whole contents puts in the
-     topmost band, unioned. Taken this way rather than as one text node's rect, which is
+  /* The block's first line box: every rect a Range over its whole contents puts on the
+     topmost line, unioned. Taken this way rather than as one text node's rect, which is
      that run's inline box and is shorter than the line whenever anything taller -- a
      KaTeX span, a larger inline -- shares the line with it. Comparing a marker box
      against an inline box that is not the line box is comparing two different things,
-     and the difference was 3px. */
+     and the difference was 3px.
+
+     The mass-condition bullets have inline tops at -1, 0, 2 and 3px. A one-pixel band
+     kept only the highest math run and falsely reported a 2.2px marker offset. Group
+     runs starting in the topmost rect's upper half; the next line starts below it.
+
+     A zero-line-height footnote is raised without enlarging that line, but its ink
+     still appears in Range rects. Remove its owned rectangles before grouping, not
+     other inline boxes that really can enlarge the line. Count duplicate rectangles
+     so an unrelated box with the same geometry is not removed along with the ref. */
   function firstLineBox(el) {
     const range = document.createRange();
     range.selectNodeContents(el);
-    const rects = [...range.getClientRects()].filter((r) => r.width && r.height);
+    const excluded = new Map();
+    const key = (r) => [r.top, r.right, r.bottom, r.left].join(',');
+    for (const ref of el.querySelectorAll('sup.kpress-footnote-ref')) {
+      if (parseFloat(getComputedStyle(ref).lineHeight) !== 0) continue;
+      const reference = document.createRange();
+      reference.selectNode(ref);
+      for (const rect of reference.getClientRects()) {
+        if (!rect.width || !rect.height) continue;
+        const id = key(rect);
+        excluded.set(id, (excluded.get(id) || 0) + 1);
+      }
+    }
+    const rects = [...range.getClientRects()].filter((r) => {
+      if (!r.width || !r.height) return false;
+      const id = key(r);
+      const count = excluded.get(id) || 0;
+      if (!count) return true;
+      excluded.set(id, count - 1);
+      return false;
+    });
     if (!rects.length) return null;
-    const first = Math.min(...rects.map((r) => r.top));
-    const band = rects.filter((r) => Math.abs(r.top - first) < 1);
+    const topmost = rects.reduce((a, r) => (r.top < a.top ? r : a));
+    const band = rects.filter((r) => r.top < topmost.top + topmost.height / 2);
     return {
       top: Math.min(...band.map((r) => r.top)),
       bottom: Math.max(...band.map((r) => r.bottom)),

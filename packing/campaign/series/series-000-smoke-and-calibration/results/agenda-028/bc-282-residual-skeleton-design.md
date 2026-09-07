@@ -10,7 +10,7 @@ obtained. Finiteness alone is not an admission argument for the conditional anal
 target.
 
 This is design-only work under existing BC-282, H-120 and `think-s6e7`, in
-[session-096](../../../../agent-sessions/session-096-residual-skeleton.md).
+[session-098](../../../../agent-sessions/session-098-residual-skeleton.md).
 The prospective design window is September 7, 2026, 17:20–17:40 UTC; the actual first
 clock was 17:21:00 UTC. No target proof, witness search, numerical measurement, adapter
 or implementation is attempted.

@@ -13,16 +13,16 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`3`](n-003.md) | `2` | `2` | `2.0` | `2` | proved | replayed here | — | 2026-08-25 |
 | [`4`](n-004.md) | `2` | `2` | `2.0` | `2` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`5`](n-005.md) | `2 + (1/2)√2` | `2 + (1/2)√2` | `2.707106781187` | `2 + (1/2)√2` | proved | replayed here, external proof | — | 2026-08-25 |
-| [`6`](n-006.md) | `3` | `3` | `3.0` | `3` | proved | replayed here, external proof | — | 2026-08-25 |
-| [`7`](n-007.md) | `3` | `3` | `3.0` | `3` | proved | replayed here, external proof | — | 2026-08-24 |
-| [`8`](n-008.md) | `3` | `3` | `3.0` | `3` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`6`](n-006.md) | `3` | `3` | `3.0` | `3` | proved | replayed here, external proof | — | 2026-09-07 |
+| [`7`](n-007.md) | `3` | `3` | `3.0` | `3` | proved | replayed here, external proof | — | 2026-09-07 |
+| [`8`](n-008.md) | `3` | `3` | `3.0` | `3` | proved | replayed here, external proof | — | 2026-09-07 |
 | [`9`](n-009.md) | `3` | `3` | `3.0` | `3` | proved | replayed here, external proof | — | 2026-08-24 |
-| [`10`](n-010.md) | `3 + (1/2)√2` | `3 + (1/2)√2` | `3.707106781187` | `3 + (1/2)√2` | proved | replayed here, external proof | — | 2026-08-25 |
-| [`11`](n-011.md) | `3.87708359002281` | `root(P_trump11, 3.87708359002281417730789706010096)` | `2 + 4/√5` | `38100*√8100042893309449/899996306539` | open | replayed here, audited here | formal lower differs from report | 2026-09-06 |
+| [`10`](n-010.md) | `3 + (1/2)√2` | `3 + (1/2)√2` | `3.707106781187` | `3 + (1/2)√2` | proved | replayed here, external proof | — | 2026-09-07 |
+| [`11`](n-011.md) | `3.87708359002281` | `root(P_trump11, 3.87708359002281417730789706010096)` | `2 + 4/√5` | `38100*√8100042893309449/899996306539` | open | replayed here, audited here | formal lower differs from report | 2026-09-07 |
 | [`12`](n-012.md) | `4` | `4` | `2 + 4/√5` | `99/25` | open | replayed here, audited here | formal lower differs from report | 2026-08-24 |
 | [`13`](n-013.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-25 |
-| [`14`](n-014.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-24 |
-| [`15`](n-015.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`14`](n-014.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-09-07 |
+| [`15`](n-015.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-09-07 |
 | [`16`](n-016.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`17`](n-017.md) | `4.67553009360455` | `5` | `4.162277660168` | `459/100` | open | replayed here, audited here | formal upper trails report; formal lower differs from report | 2026-08-24 |
 | [`18`](n-018.md) | `(7/2) + (1/2)√7` | `(7/2) + (1/2)√7` | `4.316624790355` | `459/100` | open | replayed here, audited here | formal lower differs from report | 2026-08-24 |

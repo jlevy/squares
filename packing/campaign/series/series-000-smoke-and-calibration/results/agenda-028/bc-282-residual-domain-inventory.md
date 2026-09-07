@@ -6,7 +6,7 @@ eleven-square point in the retained BC281 remainder maps into this domain.
 The converse requires an extension by square 10 and is not established.
 
 This is the independent domain inventory for
-[session096](../../../../agent-sessions/session-096-residual-skeleton.md), BC282 and
+[session098](../../../../agent-sessions/session-098-residual-skeleton.md), BC282 and
 `think-s6e7`. It reconstructs the definition from the frozen
 [BC280 domain](bc-280-full-angle-release-domain.md) and
 [BC281 independent audit](bc-281-full-angle-independent-review.md).

@@ -1,12 +1,12 @@
 ---
-title: "session-096 \u2014 residual ten-square skeleton admission"
+title: "session-098 \u2014 residual ten-square skeleton admission"
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
 session:
-  id: session-096
+  id: session-098
   title: Residual ten-square skeleton admission
   date: '2026-09-07'
   started_at: '2026-09-07T17:20:00Z'
@@ -101,8 +101,8 @@ session:
     fallback: Preserve the accepted result and exact unfinished validation or publication obligation without claiming completion.
     outcome: At the18:39:20UTC checkpoint, immutable127fd112 has a passing62-step fast gate, all55 exhaustive exact tests and targeted recovery of all six sandbox-blocked tests. The original full invocation remains failed. The accepted reduction, terminal handoff and refreshed cost receipt are ready for a separately checked final documentation commit; push and hosted CI are not yet claimed.
     evidence:
-    - packing/campaign/agent-sessions/session-096-residual-skeleton.md
-    - packing/campaign/resource-usage/codex-task-tree-session-096.yaml
+    - packing/campaign/agent-sessions/session-098-residual-skeleton.md
+    - packing/campaign/resource-usage/codex-task-tree-session-098.yaml
     - SYNOPSIS.md
     stop_reason: Freeze the terminal record for immutable final-delta checks. Scientific allocation and review are complete; final publication receipts are recorded on PR110 after their actual outcomes.
     next_action: Validate the final documentation commit, publish it on PR110 and verify hosted CI; keep the original19:20 publication endpoint and no additional scientific target.
@@ -291,7 +291,7 @@ session:
     operator: Codex closing_scope_review, inherited max thinking
     status: completed
     recording: contemporaneous
-    outcome: "Read-only publication audit found no scientific or ownership overclaim. Corrected the PR cost prose to label session092 separately from session096\u2019s new interval."
+    outcome: "Read-only publication audit found no scientific or ownership overclaim. Corrected the PR cost prose to label session092 separately from session098\u2019s new interval."
     evidence:
     - packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md
     files: []
@@ -316,6 +316,8 @@ session:
   checks:
   - Baseline013e772a is clean and pushed. Its code parentaeef535f passed all66 full checks in1752.00 seconds; the final documentation delta passed45 push checks in140.20 seconds and hosted CI.
   - Local and source worktree inventories end at session095. The complete paginated PR111 file inventory contains session093-atlas-expansion-to-324, not session096; this branch allocates the next sequential session096. The external093 naming collision with landed source work is separate from this allocation.
+  - >-
+    Upstream integration on September 7 preserves landed PR112 Stromquist session096 and rekeys this unmerged residual record to session098. The 77-ref remote inventory was insufficient: live BC264 work already owns session097. All 47 present registered worktrees and their session/agenda/exploration reservations were then checked; no session098 or later allocation was found. think-dwq8 reserves098 for this identity repair. Original task IDs, accounting intervals, deadlines and native historical receipts remain unchanged.
   - Baseline aeef535f records tier passed31 of66 steps in37.05 seconds before registry integration; exit0. This is a baseline check, not validation of the new documents.
   - Publication-recovery cost receipt refreshed through20:28:54UTC preserves the exact17:20 baseline and nondecreasing totals; it remains an incomplete lower bound. Session092 accounting is unchanged. Pre17:20 orientation and post20:28:54 validation/publication are outside this snapshot. The earlier18:24 receipt remains in Git history.
   - 'Initial working-tree records run failed three steps in34.80 seconds: two repository walkers entered existing attic fixtures, and the declared-command checker parsed prose after the phase1 command. The command is corrected; subsequent validation uses the clean immutable checkout. No scope, formatter exclusions or validation thresholds changed.'
@@ -331,7 +333,7 @@ session:
   stop_reason: BC282 design and independent admission are complete, with a useful exact reduction and no admitted target. Stop local scientific work on that evidence, not on budget exhaustion. Freeze the terminal record for separately checked publication; PR110 retains the actual final-delta and hosted outcomes without a self-referential claim about an unrun commit.
   next_action: After final-delta validation and publication, retain existing BC-264 / think-mq0d as the next portfolio pricing entry under its separate owner. Check live ownership and accept its kernel-specific prerequisites before at most30 minutes of feature and full-verification pricing; no automatic target or hierarchy.
   resource_rollups:
-  - packing/campaign/resource-usage/codex-task-tree-session-096.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-098.yaml
 ---
 # Residual Skeleton Continuation
 
@@ -373,8 +375,11 @@ Its kernel-specific BC260 review remains a prerequisite; this session neither st
 nor promotes preparation to a target.
 The H120 re-entry conditions are retained in paused bead `think-k54y`. No BC283,
 hypothesis or experiment ID is allocated.
-The external PR111 session093 collision is tracked by `think-rzek`; session096 remains
-disjoint.
+The external PR111 session093 collision is tracked by `think-rzek`. After PR112 landed,
+this unmerged record was rekeyed from session096 to session098; landed Stromquist
+session096 retains its identity and separate cost receipt.
+The original allocation check above and archived runtime receipts retain their
+historical names.
 
 The finalization reserve is increased prospectively to18:09–19:20, after all original
 work-phase deadlines, because no scientific target is admitted.
@@ -414,9 +419,11 @@ measured result is integrated.
 
 The first VE-003 control failed one of 48 checks: its new protocol had not been added to
 the document map. The failed observation is retained under its original label, with no
-performance conclusion. VE-004 is the next sequential engineering record and continues
-the comparison after repairing the shared setup. It preserves the workload, acceptance
-rule and original failure. Both arms freeze the same repaired records before timing.
+performance conclusion.
+VE-004 is the next sequential engineering record and continues the comparison after
+repairing the shared setup.
+It preserves the workload, acceptance rule and original failure.
+Both arms freeze the same repaired records before timing.
 The scheduler review at 19:39:58–19:41:04 found no blocker; the recovery disposition
 review at 19:47:34–19:48:12 confirmed this treatment of the failed setup.
 
@@ -424,27 +431,30 @@ VE-004 accepts a local checks-tier improvement after three passing pairs: median
 time fell from 93.18 to 71.84 seconds (22.9%), with nonoverlapping ranges and all 48
 checks retained. The corrected control is `1dfdb8fb`; the measured candidate is
 `ed595fb6`. The 19:51:51–19:52:40 complexity review and 20:01:24–20:02:42 independent
-evidence admission support that restricted conclusion. Native receipts, raw output,
-JUnit and the original failed setup are retained in the engineering campaign.
-No mathematical verifier, runtime threshold or worker count changed. Full-checkpoint
-and hosted-CI outcomes remain separate obligations, not inferred speedups.
+evidence admission support that restricted conclusion.
+Native receipts, raw output, JUnit and the original failed setup are retained in the
+engineering campaign.
+No mathematical verifier, runtime threshold or worker count changed.
+Full-checkpoint and hosted-CI outcomes remain separate obligations, not inferred
+speedups.
 
 Hosted run 34158723317 passed all required checks at `d915dfa9`; its checks tier
-completed all 48 steps in 116.92 seconds inside the unchanged band. The retained native
-receipts identify tested merge `4b1d71cd`. This establishes a passing hosted checkpoint,
-not a hosted speedup estimate.
+completed all 48 steps in 116.92 seconds inside the unchanged band.
+The retained native receipts identify tested merge `4b1d71cd`. This establishes a
+passing hosted checkpoint, not a hosted speedup estimate.
 
 The full checkpoint at `ed595fb6` passed all 66 steps in 1616.00 seconds, with 3,433
-fast tests passed, 98 slow tests passed and all 55 exhaustive exact tests passed. One
-vendored-document exclusion test was skipped because the isolated checkout lacks the
-kpress submodule. All negative controls passed. The
+fast tests passed, 98 slow tests passed and all 55 exhaustive exact tests passed.
+One vendored-document exclusion test was skipped because the isolated checkout lacks the
+kpress submodule. All negative controls passed.
+The
 [native checkpoint](../../benchmarks/validation-efficiency/checkpoints/VE-004-full-ed595fb6.tar.gz)
-retains source, commands, step results and JUnit. This is full correctness evidence,
-not a full-checkpoint performance comparison.
+retains source, commands, step results and JUnit.
+This is full correctness evidence, not a full-checkpoint performance comparison.
 
 The final publication review at 20:21:56–20:23:07 found no attribution or allocation
-error and required the refreshed cumulative two-session cost table in the PR. These frozen
-receipts support final documentation publication; its own checks are recorded on
+error and required the refreshed cumulative two-session cost table in the PR. These
+frozen receipts support final documentation publication; its own checks are recorded on
 [PR110](https://github.com/jlevy/squares/pull/110).
 
 <!-- This document follows common-doc-guidelines.md.

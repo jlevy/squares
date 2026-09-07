@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 650">
+  <title>A closed square escaping the supplied dots in a side-three container</title>
+  <rect width="600" height="650" fill="white"/>
+  <g font-family="system-ui, sans-serif" fill="#263139">
+    <text x="45" y="30" font-size="20">What 5 dots miss</text>
+    <rect x="45" y="55" width="510" height="510" fill="#f7f8fa" stroke="#52616c"/>
+    <path d="M45 55L555 565M45 565L555 55" stroke="#d4d9de" stroke-dasharray="5 5"/>
+    <polygon points="300.000000,559.050000 421.550000,437.500000 300.000000,315.950000 178.450000,437.500000" fill="#d1eee2" stroke="#1b7252" stroke-width="2"/>
+    <circle cx="215.000000" cy="395.000000" r="3.5" fill="#b72d4b" stroke="white"/>
+<circle cx="215.000000" cy="225.000000" r="3.5" fill="#b72d4b" stroke="white"/>
+<circle cx="385.000000" cy="395.000000" r="3.5" fill="#b72d4b" stroke="white"/>
+<circle cx="385.000000" cy="225.000000" r="3.5" fill="#b72d4b" stroke="white"/>
+<circle cx="300.000000" cy="310.000000" r="3.5" fill="#b72d4b" stroke="white"/>
+    <text x="45" y="600" font-size="16">Closed escaping square: side² = 20449/20000</text>
+    <text x="45" y="627" font-size="14">
+      Container side 3. Every dot lies strictly outside the green square.
+    </text>
+  </g>
+</svg>
