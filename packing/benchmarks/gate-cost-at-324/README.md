@@ -42,9 +42,8 @@ That guard is not decoration: three unrelated agent sessions ran the push tier, 
 negative controls and the exhaustive tier on this machine during the window, and a
 contended reading of a twelve-minute step is not a reading of that step.
 Every baseline reading, and the speedup table, is from an idle host.
-Two of the after-readings -- `--sweeps` and `--checks` -- gave up waiting after five
-minutes and ran beside two other processes; the driver logged `PROCEEDING CONTENDED` for
-each.
+Two of the after-readings—`--sweeps` and `--checks`—gave up waiting after five minutes
+and ran beside two other processes; the driver logged `PROCEEDING CONTENDED` for each.
 Both are therefore upper bounds, and both are answering a fits-or-does-not question
 where an upper bound is the conservative direction.
 
@@ -61,8 +60,8 @@ verdict.
 **Local walls are not CI walls**, and nothing here is written into
 `devtools/gate-budgets.yaml` as a `measured_seconds`: that field is only ever a reading
 at the tier’s declared reference shape, which is a four-CPU hosted runner.
-What these readings support is the ordering and the ratios -- which step is the wall,
-what fraction of it moved, and whether the remainder fits inside a declared ceiling with
+What these readings support is the ordering and the ratios—which step is the wall, what
+fraction of it moved, and whether the remainder fits inside a declared ceiling with
 room. Where a ceiling moved, the register says it was argued from the parts and its
 record cleared, which is the same thing `BC-214` and `BC-218` did before.
 
@@ -108,7 +107,7 @@ Both readings are still walls of the work the tier does.
 
 **The escape screen has stopped fitting rather than merely become dear.** 766.26 s is
 6.9× its 110.66 s at n = 1..100, and the pool that produces it is already sized by this
-job’s own `--inner-jobs 2` -- so that figure is what the lever buys, not what it costs
+job’s own `--inner-jobs 2`—so that figure is what the lever buys, not what it costs
 unpulled.
 It is also within 134 s of the gate’s own 900 s per-step subprocess timeout, on
 a machine faster than the hosted runner the timeout was set for.
@@ -117,7 +116,7 @@ a machine faster than the hosted runner the timeout was set for.
 is 691.19 s of 703.28 s, 98.3 per cent; the other seven subcommands cost 12.09 s between
 them, and five of those are pinned at `CALIBRATION_CORPUS` and cannot grow with the
 corpus at all. A step declared as one unit is only as schedulable as its longest member,
-which is the same argument that split the chunk census out of it on 2026-09-06 -- at a
+which is the same argument that split the chunk census out of it on 2026-09-06—at a
 different seam, found by the same measurement.
 
 ## The speedup, taken before any deferral
@@ -143,8 +142,8 @@ one now asks it too.
 run, and `--check` re-derives every witness, every house rendering, every frontier link,
 the source index, both composite SVGs and the manifest, and compares each against the
 retained bytes; a parallel build that rounded one coordinate differently would fail it.
-All three passed. CPU is flat across the three rows -- 691.19, 677.66, 688.74 -- so the
-pool divided the work rather than adding any.
+All three passed. CPU is flat across the three rows—691.19, 677.66, 688.74—so the pool
+divided the work rather than adding any.
 `test_a_pool_worker_builds_the_same_bytes_as_this_process` holds the property as an
 assertion over three cases chosen to reach all three source layers.
 
@@ -174,8 +173,8 @@ The escape screen is 766.26 s against the sweeps job’s 210 s ceiling, which se
 itself. The atlas rebuild is the one worth stating carefully: 184.34 s is under 210 s,
 but it is one step of four, at four inner workers the job cannot give it while three
 other steps run, on a machine faster than the hosted runner.
-The number that decides it is the shape the job actually runs -- 348.15 s at two inner
-workers -- and that is 1.66× the whole tier’s ceiling before the other three steps are
+The number that decides it is the shape the job actually runs—348.15 s at two inner
+workers—and that is 1.66× the whole tier’s ceiling before the other three steps are
 counted. So both re-derivations moved to the deferred surface, and a stand-in took each
 one’s place on every pull request.
 
@@ -187,8 +186,8 @@ list.
 with the corpus and replaces the eighth with `build_known_best_atlas --check --sample`,
 which:
 
-- rebuilds every field of `manifest.json` but its per-case entries -- contract, declared
-  range, policy, generator, composite records, key order and formatting -- from the
+- rebuilds every field of `manifest.json` but its per-case entries—contract, declared
+  range, policy, generator, composite records, key order and formatting—from the
   retained entries and compares the result to the retained bytes;
 - re-derives `sources.json` whole, which re-hashes every retained upstream SVG against
   its upstream-declared digest;
@@ -198,15 +197,15 @@ which:
   would write into it, and every manifest `reported_side` against its frontier record;
 - holds each composite’s retained SVG to the canvas its own specification computes, and
   every PNG and PDF receipt to that retained SVG’s digest;
-- and rebuilds every ninth case in full -- 36 of 324 -- comparing witness text, house
+- and rebuilds every ninth case in full—36 of 324—comparing witness text, house
   rendering and manifest entry byte for byte.
 
 **`translation escape screen records and sample`** runs
 `screen_translation_escape --check --sample`, which rebuilds the retained screen from
-its own cases and exclusions -- aggregate, method block, tolerances, claim boundaries,
+its own cases and exclusions—aggregate, method block, tolerances, claim boundaries,
 contract and formatting, with the JSON-Schema validator and `screen_errors` running on
-the way through -- compares that to the retained bytes, checks the records cover exactly
-n = 1..324, and re-screens every twenty-seventh record in full.
+the way through—compares that to the retained bytes, checks the records cover exactly n
+= 1..324, and re-screens every twenty-seventh record in full.
 
 | Sampled step | Shape | Wall (s) | CPU (s) |
 | --- | --- | ---: | ---: |
@@ -215,9 +214,9 @@ n = 1..324, and re-screens every twenty-seventh record in full.
 
 Both were taken while other sessions held part of the machine, so they are upper bounds.
 
-**Why the two strides differ.** The rule is the same for both -- a fixed stride from the
+**Why the two strides differ.** The rule is the same for both—a fixed stride from the
 corpus’s first case, so the sample is the same on every run and reaches the 224 cases
-the widening added -- but the cost is not.
+the widening added—but the cost is not.
 A screened record’s work grows with the square of n, so every ninth record cost 220.43 s
 of CPU and 127.22 s of wall in the screen against 86.81 s and 47.01 s in the atlas.
 Nine there would have put a single step above two minutes of a 210 s tier, which is what
@@ -226,7 +225,7 @@ Twenty-seven brings it back beside the census.
 
 **What the floor is, and why it is the right thing to size against.** The sweeps job is
 four units on four CPUs, so its wall is its longest unit’s wall, and the unit that
-cannot be made cheaper is `known-best chunk census` -- 90.38 s on CI, 42.11 s here --
+cannot be made cheaper is `known-best chunk census`—90.38 s on CI, 42.11 s here --
 because `D4` pins it at `CALIBRATION_CORPUS` and it will not grow with the corpus.
 The screen sample lands just above it; the atlas sample lands about forty per cent above
 it and does set the tier’s wall, which the tier reading below prices exactly.
@@ -261,8 +260,8 @@ Inside the sweeps tier, over 145.39 s of step time:
 Every step passes except the two pre-existing failures named above, which fail the same
 way before and after.
 The gate reports rather than enforces each band, because a ten-CPU box is not any of
-these tiers’ four-CPU reference shape -- which is also why nothing here is written into
-the register as a `measured_seconds`.
+these tiers’ four-CPU reference shape—which is also why nothing here is written into the
+register as a `measured_seconds`.
 
 `--fast` is 229.05 s whole, and its two longest steps are the two sampled ones at 103.59
 s and 69.70 s, because that tier runs at `--inner-jobs 1` and their pools get one worker
@@ -283,9 +282,9 @@ to write back.
 | `single-square translation escape screen` | 766.26 s at the job’s own `--inner-jobs 2`, within 134 s of the gate’s 900 s per-step timeout | deferred |
 
 **Both fit where they landed**, which a deferral has to establish and not assume.
-Run as `deep-gate.yml` invokes them -- `--only` each, `--jobs 2 --inner-jobs 2` -- the
-pair is 762.60 s of wall, the screen 762.60 s of it and the rebuild 354.27 s beside it
-on the second slot. Both pass.
+Run as `deep-gate.yml` invokes them—`--only` each, `--jobs 2 --inner-jobs 2`—the pair is
+762.60 s of wall, the screen 762.60 s of it and the rebuild 354.27 s beside it on the
+second slot. Both pass.
 The rebuild is 354.27 s against the gate’s 900 s per-step subprocess timeout, and both
 finish under the `slow behavioral tests` step that already sets that job’s wall, so the
 deep gate costs no more wall than it did.
@@ -309,19 +308,18 @@ touched.
 
 **Two records were cleared and neither was replaced**, which is the register’s own
 precedent rather than a shortcut.
-`measured_seconds` is only ever a reading at the tier’s declared reference shape -- a
-four-CPU hosted runner -- and every reading in this document is from a ten-CPU
-development box, so writing one in would leave the drift and stale rules comparing
-numbers from different machines.
-`BC-214` and `BC-218` cleared this same field twice before for the same reason: the
-figure measured a tier that no longer exists.
+`measured_seconds` is only ever a reading at the tier’s declared reference shape—a
+four-CPU hosted runner—and every reading in this document is from a ten-CPU development
+box, so writing one in would leave the drift and stale rules comparing numbers from
+different machines. `BC-214` and `BC-218` cleared this same field twice before for the
+same reason: the figure measured a tier that no longer exists.
 The gate prints the line to write back on the first run at the reference shape, so
 nothing has to be remembered.
 
 **The `sweeps` ceiling did not move**, and that is a decision.
 The predicted wall is near the census, around 105 s on the hosted runner, so 210 s
-leaves real margin for a slow day -- and it is still below the roughly 390 s of step
-time this tier would cost on that runner if its pools stopped parallelising, so serial
+leaves real margin for a slow day—and it is still below the roughly 390 s of step time
+this tier would cost on that runner if its pools stopped parallelising, so serial
 degeneration fails here rather than passing quietly.
 Tightening it against a prediction rather than a reading is what `OR-14` calls
 advertising an aspiration.
@@ -339,9 +337,8 @@ ceilings within 2× of it, all named in `development.md`.
 
 The sweeps job was not the only one the widening reached, and the second one announced
 itself rather than being found: on 2026-09-07 the `checks` job ran **189.09 s** against
-a recorded 99.39 s -- 1.90x, where the register’s drift rule fails at 1.5x -- and 6 s
-under its 195 s ceiling.
-The gate’s own verdict named the step in the same breath: `exact
+a recorded 99.39 s—1.90×, where the register’s drift rule fails at 1.5×—and 6 s under
+its 195 s ceiling. The gate’s own verdict named the step in the same breath: `exact
 verification` was **133.4 s of it, 70.6 per cent**. That is the first record in this
 register cleared by its own rule firing rather than by a re-scoping somebody noticed.
 
@@ -370,11 +367,10 @@ passing.
 
 **One member of that step grows with the corpus and it is the one that grew.**
 `check_basic_bounds` replays the exact rational grid witness of every case whose
-verified upper bound is the grid ceiling -- 305 of the 324 today -- and it was 3.58 s
-when [D-370](../../../defects.md) moved it into this step at n = 1..100. The other
-sixteen subcommands are fixed cases: one rational control, one limit record, ten
-construction replays and four witness checks, none of which can move when the corpus
-widens.
+verified upper bound is the grid ceiling—305 of the 324 today—and it was 3.58 s when
+[D-370](../../../defects.md) moved it into this step at n = 1..100. The other sixteen
+subcommands are fixed cases: one rational control, one limit record, ten construction
+replays and four witness checks, none of which can move when the corpus widens.
 
 **The ratio this box shows against CI is 1.58, in two places at once.** 189.09 / 120.03
 for the tier and 133.4 / 84.21 for the step.
@@ -394,31 +390,31 @@ exists.
 
 **The curve is quadratic in the corpus’s last n, not cubic**, and that is a property of
 the check rather than luck.
-`verify_grid` buckets its pair enumeration -- two unit squares overlap only if their
+`verify_grid` buckets its pair enumeration—two unit squares overlap only if their
 centres are within sqrt(2), so a bucket of side 2 and its eight neighbours contain every
-pair that could -- so one case is about linear in its own n and the corpus is the sum of
+pair that could—so one case is about linear in its own n and the corpus is the sum of
 them. A widening to n = 400 would put this near 53 s with nothing else changing.
 
 ### The speedup, taken before any deferral
 
 `OR-13` puts this first, and here it is worth doing and does not help.
-The replay is a map over independent cases -- `verify_grid` builds its own grid from n
-and reads nothing else -- so `check_basic_bounds` now sizes a `ProcessPoolExecutor` from
+The replay is a map over independent cases—`verify_grid` builds its own grid from n and
+reads nothing else—so `check_basic_bounds` now sizes a `ProcessPoolExecutor` from
 `sqpack.workers.worker_count`, the same contract `screen_translation_escape` and
 `build_known_best_atlas` use.
 
 | Shape | Wall (s) | CPU (s) | Speedup |
 | --- | ---: | ---: | ---: |
-| serial (`--jobs 1`) | 34.81 | 34.81 | 1.00x |
-| `--jobs 2` | 18.58 | 36.64 | 1.87x |
-| `--jobs 4` | 9.97 | 38.49 | 3.49x |
+| serial (`--jobs 1`) | 34.81 | 34.81 | 1.00× |
+| `--jobs 2` | 18.58 | 36.64 | 1.87× |
+| `--jobs 4` | 9.97 | 38.49 | 3.49× |
 
 **The equivalence evidence is byte-for-byte, not a matching verdict.** The tool’s whole
 stdout at one worker and at four hashes to `1caa1409…`, and the sampled run’s to
 `6d1e0e63…`, at both counts; `cmp` reports no difference for either pair.
 That is stronger than comparing exit codes, because the failure this could introduce is
-a reordered failure list rather than a wrong one -- `pool.map` yields by submission
-index, and the tool keys its failures by n and prints them in frontier-document order.
+a reordered failure list rather than a wrong one—`pool.map` yields by submission index,
+and the tool keys its failures by n and prints them in frontier-document order.
 `test_a_pool_worker_replays_the_same_verdicts_as_this_process` holds the property as an
 assertion over sizes chosen to cross a perfect square, its predecessor and its
 successor, where the grid’s own side changes.
@@ -426,8 +422,8 @@ CPU is flat across the three rows, so the pool divides the work rather than addi
 
 **And it buys the pull request nothing, which is the point of measuring it.** Every
 pull-request tier passes `--inner-jobs 1`, so `PACK_JOBS` is 1 and a pooled step is the
-serial step there by design -- the same cap that keeps nineteen ordinary tests from
-going over the quick lane’s per-test ceiling on contention alone.
+serial step there by design—the same cap that keeps nineteen ordinary tests from going
+over the quick lane’s per-test ceiling on contention alone.
 What the pool decides is where the deferred copy can live: run as `deep-gate.yml`
 invokes it, `--only "exact rational grid replay" --jobs 2 --inner-jobs 2`, the whole
 replay is 18.79 s of wall over 36.65 s of cpu, underneath a slow lane that is 890 s.
@@ -448,7 +444,7 @@ than a slice:
 
 - every one of the 324 cases still has its declared grid upper bound, area lower bound
   and Nagamochi lower bound compared against the closed form its evidence record names
-  -- that half is 0.14 s of the 34.86 s, and it never left;
+  —that half is 0.14 s of the 34.86 s, and it never left;
 - every ninth case that claims a grid witness is still replayed exactly, 34 of 305, from
   the first, so the sample reaches the 224 cases the widening added;
 - and what waits for the deep gate is the other eight ninths of the per-case geometry.
@@ -474,10 +470,10 @@ moved: 27.52 s, 86.57 s, 48.93 s and 38.20 s, every step of all four passing, at
 27 and 19 per cent of their ceilings.
 
 The step is 84.21 s to 53.60 s, the tier 120.03 s to 87.56 s, and every step passes at
-both ends -- the two pre-existing failures the earlier readings carried are gone,
-because the uncommitted session file and the frontier-generator work that caused them
-have landed. `--geometry` and `--suite` are unchanged within noise, which is what a
-change confined to one step of one job should look like.
+both ends—the two pre-existing failures the earlier readings carried are gone, because
+the uncommitted session file and the frontier-generator work that caused them have
+landed. `--geometry` and `--suite` are unchanged within noise, which is what a change
+confined to one step of one job should look like.
 
 Inside the tier, over 186.86 s of step time in 48 steps:
 
@@ -510,8 +506,8 @@ than a coverage trade, and it belongs to whoever owns the gate’s scheduler rat
 to a slice about one step.
 
 **`dilation_corollary --check-limit-record` is now the step’s largest member at 26.35
-s.** It is a fixed case -- one certificate and one limit record, at n = 11 -- so it did
-not grow and will not, and it is half of what is left.
+s.** It is a fixed case—one certificate and one limit record, at n = 11—so it did not
+grow and will not, and it is half of what is left.
 Nothing here measured whether it can be made cheaper.
 
 **The per-case predicate was left exactly as it is.** A grid witness’s non-overlap is a

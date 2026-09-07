@@ -4,8 +4,8 @@
 
 **Author:** Joshua Levy, with Claude Fable 5.1 assistance
 
-**Status:** Draft, owner-directed.
-Epic `think-0juv` is created by this plan; the handoff in
+**Status:** Implemented through Phase 5, owner-directed; the open questions below await
+the owner. Epic `think-0juv` is created by this plan; the handoff in
 [`SYNOPSIS.md`](../../../../SYNOPSIS.md#current-handoff) still selects `think-qv73`, and
 this work does not preempt agendas 024–028. It runs beside them as a W7 line with a W1
 opening phase, recorded in
@@ -104,7 +104,7 @@ rule.
 
 `think-ezcx` recorded on 2026-08-24 that per-`n` files past 100 should be created only
 when a concrete research or reader need justifies them, not because a catalogue reaches
-324\. Three things now supply that need:
+`n = 324`. Three things now supply that need:
 
 1. The owner has directed the expansion and the poster.
 2. `H-044`’s confirmatory path is “a successor on an unseen corpus frozen after the
@@ -310,11 +310,13 @@ Each phase closes on its own validation and a commit.
   194 records screened, 176 not rigid, six excluded by shape residual; eight new records
   (132, 154, 155, 156, 179, 180, 181, 182) have hit counts that move between tolerances
   because their sources carry fewer digits, listed in the evidence rather than hidden.
-- [ ] W2 review of the chunk’s transcription; conflicts typed.
-  The machine reparse reports zero divergences over 114 pictured cases and 409 facts; a
-  reviewer pass over credit lines and construction methods (64 cases stay `unknown`) is
-  still owed.
-- [ ] Gate step for the range measured and recorded in `gate-budgets.yaml`.
+- [x] W2 review of the chunk’s transcription; conflicts typed.
+  The machine reparse reports zero divergences over 114 pictured cases and 409 facts;
+  the reviewer pass over credit lines and construction methods is the
+  [credit-line review](../../reviews/review-2026-09-07-atlas-101-324-credit-lines.md),
+  whose corrections regenerated 59 records across the whole range.
+- [x] Gate step for the range measured and recorded in `gate-budgets.yaml`. Measured at
+  the full range under Phase 5.
 
 ### Phase 3: Corpus `201..324`
 
@@ -366,7 +368,8 @@ Each phase closes on its own validation and a commit.
   exact verification step at 133 s of it) and is priced in a second slice.
 - [x] README, SYNOPSIS, atlas READMEs, `frontier/README.md`, and the site updated; W8
   pass; document map current.
-- [ ] Handoff entry naming the frozen corpus commit and the selected next entry.
+- [x] Handoff entry naming the frozen corpus commit and the selected next entry.
+  In the synopsis’s current handoff, beside the research selection it does not preempt.
 - [x] `think-ezcx` re-parented and its note superseded.
 
 ### Phase 6 (conditional): `325..400`
