@@ -54,12 +54,11 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [3, 4, 11]
-    state: blocked
+    state: in_progress
     priority: 0
     question: What frozen target-side comparison fairly tests H118 against coupled geometry?
     hypotheses: [H-118]
     budget: One 30-minute mathematical protocol slice; one further slice only for a named missing premise.
-    blocked_on: A necessary eleven-square residual-compatibility restriction that removes the exact four- and five-square fixtures while preserving all parent siblings.
     entry: >-
       X018 assessment and source controls. Design can proceed before BC261; use
       only accepted geometry/resource implications in a final target protocol.
@@ -230,7 +229,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: efficiency
     instances: [11]
-    state: ready
+    state: in_progress
     priority: 1
     question: Which mathematical result per unit of attention warrants the next overnight allocation?
     budget: A 20-minute integration reserve within the first four active hours, or earlier on decisive evidence.
@@ -246,10 +245,61 @@ agenda:
     depends_on: []
     program: n11-hybrid-strength-and-angular-release
     next_evidence: >-
-      Extend a frozen useful certificate queue, redirect mathematical attention
-      to its bottleneck, or retain a named blocker and another independently
-      useful slice. A self-chosen checkpoint is not termination of a later open-ended
-      user mandate; never extend an exhausted scientific attempt silently.
+      Prioritize BC270's remaining necessary-parent design and give BC276 only one
+      separately reviewed sibling allocation. Correct the reproduced cost parser
+      defect under think-ooa7 before publishing final totals; retain the earlier
+      snapshots as historical unreconciled receipts.
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md
+    outcomes:
+    - scope: First two-hour publication and portfolio allocation
+      classification: achieved
+      result: >-
+        Published the accepted ten-square release contradiction at26679fa8 with
+        passing local and hosted checks. The independent portfolio challenge
+        prioritizes necessary eleven-square compatibility over hours of narrow
+        feature-box expansion. One negative-slide sibling can complete a signed
+        short-slide parent if independently admitted. A later compaction settings
+        event was proved to erase historical work from the cost parser, so totals
+        remain unreconciled until its bounded correction is accepted.
+      evidence:
+      - packing/campaign/agent-sessions/session-092-hybrid-overnight.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md
+      disposition: continue
+      follow_up: think-ooa7
+  - id: BC-276
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: in_progress
+    priority: 1
+    question: Can the closed negative short-slide sibling complete H120's signed short-slide source-feature parent?
+    hypotheses: [H-120]
+    budget: Independent10-minute domain review, then a separately committed analytical attempt with25-minute author,20-minute concurrent adversary and20-minute independent audit.
+    entry: >-
+      Accepted BC273 all-v T+ exclusion and diagonal sign lemma, the BC275
+      complete N definition, independent domain/redundancy acceptance, and a
+      frozen protocol with actual starts and deadlines. Readiness here means
+      domain review; no target begins before protocol commit and record checks.
+    exit: >-
+      Independently reviewed exclusion of the whole N or an exact feasible
+      eleven-square witness in N, with all original walls, contact sides, variable
+      side,55 SAT clauses and closed seams. A ten-square skeleton witness alone
+      does not decide the eleven-square question. Partial proofs stay unresolved.
+    bead: think-6pka
+    workflows: [insight-iteration, factual-review]
+    depends_on: [BC-273]
+    parallel_group: agenda028-release
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-protocol.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-domain-review.md
+    next_evidence: >-
+      If N closes, combine it with accepted T+ and the sign lemma to close the
+      complete signed short-slide parent. Preserve all other block angles, longer
+      slides and changed wall/contact patterns. No automatic smaller-box retry,
+      numerical target or cavity-adapter expansion.
 ---
 # Agenda 028 — Hybrid Strength and Angular Release
 
@@ -272,10 +322,12 @@ No numerical target experiment has been admitted.
 X-016’s continuing source program retains H-110 and conditional compatibility.
 X-017 / Agenda 027 retains H-111–117, BC-258–268, the complete anchor and six-plus-five
 pilots, support adoption, physical KKT review, and the sole BC-261 geometry interface.
-This agenda adds X-018, H-118–121 and BC-269–275; its execution takes session-092. Fresh
-source inventory at 08:16 UTC places its continuation in sessions091 and093, H122–124
-and experiments121–123. Its owner independently reconciled the former unpublished H118
-collision before publication; no cross-task message was sent.
+This agenda adds X-018, H-118–121 and BC-269–275; its execution takes session-092. The
+first checkpoint adds the next sequential commitment BC276 under existing H120; no new
+hypothesis or experiment ID is needed for this coverage extension.
+Fresh source inventory at 08:35 UTC places its continuation in sessions091 and093,
+H122–124 and experiments121–124. Its owner independently reconciled the former
+unpublished H118 collision before publication; no cross-task message was sent.
 This execution retains session092 and allocates no new hypothesis or experiment ID.
 Recheck live allocations before claiming any later ID; a next-ID pointer is not a
 reservation.

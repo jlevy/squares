@@ -105,7 +105,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-088](agent-sessions/session-088-validation-efficiency-checkpoint.md) | completed | retrospective | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 1 | think-rwte | Continue think-xejq with explained exhaustive-family planning under W5 Phase 3 after publishing this implementation and verifying its full hosted checkpoint. Preserve complete coverage until the selection and reuse contracts pass their invalidation fixtures. |
 | [session-089](agent-sessions/session-089-agenda024-next-phases.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 14 | think-jgnv | Select BC-251, think-0za3, for the next fresh allocation with its unchanged 150-minute process cap and separate verification. Agenda024 Current Allocation owns the parallel density and angle packages. Keep the integrated PR101 line while open; do not repeat exp113, exp114 or exp115. |
 | [session-090](agent-sessions/session-090-four-hour-research.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 11 | think-9qrx | After Session090 closes, select think-qv73 under BC255 for H110's source-free fixed P12 escape instrument and independent review, then a fresh prospective experiment. The September7 priority amendment holds H107 out of the next block and selects a bounded conditional-compatibility assessment alongside H110. Agenda024 owns this revised allocation and the deferred bead. Density remains source-blocked; no exp116 retry. |
-| [session-092](agent-sessions/session-092-hybrid-overnight.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `efficiency-loop` (efficiency) | 6 | think-0yfe | Finish the independent BC273 audit and publish the first two-hour checkpoint; next run BC275's twenty-minute efficiency allocation before choosing one changed mathematical domain. |
+| [session-092](agent-sessions/session-092-hybrid-overnight.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 8 | think-0yfe | Complete the bounded cost correction and mathematical prerequisites, then freeze and validate BC276 before any target; preserve BC270's09:08 design deadline and the eight-hour endpoint. |
 
 ### Workflow summary
 
@@ -115,11 +115,11 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 1 | 0 | 12 | 0 |
 | `factual-review` | 3 | 0 | 41 | 2 |
-| `insight-iteration` | 19 | 1 | 61 | 2 |
+| `insight-iteration` | 19 | 1 | 62 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 30 | 1 |
 | `research-loop` | 9 | 4 | 56 | 7 |
-| `pipeline-improvement` | 22 | 0 | 116 | 0 |
+| `pipeline-improvement` | 22 | 0 | 117 | 0 |
 | `documentation-pass` | 1 | 0 | 6 | 0 |
 | `review-planning-oversight` | 0 | 0 | 1 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
@@ -579,12 +579,13 @@ Status: **active**. Execute a focused parallel n11 program from PR108: decide wh
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-269 | research | 11 | complete | 0 | think-urcm | Select BC270 and BC273 design with independent review; keep source ownership intact. |
-| BC-270 | measurement_validation | 3, 4, 11 | blocked | 0 | think-9uv0 | Use the remaining design slice only for necessary compatibility restrictions from the eleven-square parent. Exact packings defeat all three isolated four-square band domains and the central group with a bottom anchor. No capacity target is admitted; BC261 remains the sole interface owner. |
+| BC-270 | measurement_validation | 3, 4, 11 | in_progress | 0 | think-9uv0 | Use the remaining design slice only for necessary compatibility restrictions from the eleven-square parent. Exact packings defeat all three isolated four-square band domains and the central group with a bottom anchor. No capacity target is admitted; BC261 remains the sole interface owner. |
 | BC-271 | research | 11 | blocked | 1 | think-6l39 | Expand one recurring useful domain or send a checked cut to BC262. One prescribed refinement with unchanged residual ends expansion of this representation at checkpoint. It does not reject H111 or all resource methods. |
 | BC-272 | research | 11 | tentative | 2 | think-cy6g | Return a useful certificate to the broad anchor pilot or retain the exact missing capture premise. Do not escalate to arbitrary measures or subdivisions within the frozen comparison. |
 | BC-273 | research | 11 | complete | 1 | think-1btr | BC275 reprices a changed block-angle, slide or wall/contact scope using the accepted ten-square cap contradiction. The full declared T+ is closed, including all square10 orientations; do not fund its cavity adapter or repeat the unchanged target. Global normal-form claims remain separate. |
 | BC-274 | research | 11 | tentative | 2 | think-5hmt | A global reduction earns an all-multiplicity family allocation with the Agenda027 owner. H112 alone covers only six-plus-five; H113 would suffice as a stronger full-family bound. Do not create a duplicate family run here. |
-| BC-275 | measurement_validation | 11 | ready | 1 | think-1v6g | Extend a frozen useful certificate queue, redirect mathematical attention to its bottleneck, or retain a named blocker and another independently useful slice. A self-chosen checkpoint is not termination of a later open-ended user mandate; never extend an exhausted scientific attempt silently. |
+| BC-275 | measurement_validation | 11 | in_progress | 1 | think-1v6g | Prioritize BC270's remaining necessary-parent design and give BC276 only one separately reviewed sibling allocation. Correct the reproduced cost parser defect under think-ooa7 before publishing final totals; retain the earlier snapshots as historical unreconciled receipts. |
+| BC-276 | research | 11 | in_progress | 1 | think-6pka | If N closes, combine it with accepted T+ and the sign lemma to close the complete signed short-slide parent. Preserve all other block angles, longer slides and changed wall/contact patterns. No automatic smaller-box retry, numerical target or cavity-adapter expansion. |
 
 ## Series
 

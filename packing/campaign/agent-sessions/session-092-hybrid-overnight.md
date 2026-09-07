@@ -168,7 +168,7 @@ session:
     objective: Publish the first mathematical checkpoint and select one changed scope by expected mathematical value and observed attention cost.
     commitment: BC-275
     bead: think-1v6g
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: The complete release pilot is analytically closed; its unused cavity adapter loses priority, while a live cost refresh unexpectedly decreases cumulative work and needs diagnosis.
     budget_minutes: 20
@@ -178,10 +178,56 @@ session:
     validation_command: Record and change-reachable push validation; independent read-only comparison of existing cost receipts and research obligations.
     kill_condition: Unpriced target proof or numerical invocation, duplicate source work, speculative performance claim, or phase deadline.
     fallback: Preserve the accepted proof and prior cost snapshot with its cutoff; retain the exact telemetry defect or missing next premise without extending the old target.
+    outcome: Published26679fa8 passed45 push checks and hosted CI. Prioritize the remaining H118 parent-compatibility design; admit only one independently reviewed negative-slide sibling as a smaller parallel candidate. A reproduced late-compaction ownership bug explains the declining cost totals; think-ooa7 owns its correction.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md
+    stop_reason: All three assessments finished early; mathematical and engineering follow-ups are now concrete and separately bounded.
+    next_action: Repair the measured accounting defect, independently review the negative-slide candidate and use BC270's remaining design slice for actual eleven-square parent compatibility.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Repair retrospective cost attribution while the two selected mathematical lanes complete their prerequisite designs.
+    bead: think-ooa7
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: BC275 identified an exact telemetry defect and two bounded mathematical prerequisites; neither a numerical target nor an unchanged release attempt is ready or funded.
+    budget_minutes: 30
+    started_at: '2026-09-07T08:38:00Z'
+    deadline_at: '2026-09-07T09:08:00Z'
+    expected_output: Minimal tested ownership correction, independently accepted or refused negative-slide domain, and one necessary parent-compatibility premise or precise blocker.
+    validation_command: Focused cost-rollup regressions and independent review; mathematical domain review; record validation before any subsequent target.
+    kill_condition: Lost legacy-history control, private log disclosure, fitted parent restriction, new unregistered target, or phase deadline.
+    fallback: Preserve the accepted proof and uncertain accounting with the exact remaining defect or mathematical premise; do not expand an unfinished target.
+    outcome: The minimal cost parser correction and both synthetic append cases pass49 focused tests and coordinator review. BC276's complete N and signed-parent union are independently accepted. BC270's design continues under its original09:08 deadline, with a concrete alternating-fence proposal awaiting its final report.
+    evidence:
+    - packing/devtools/codex_log_rollup.py
+    - packing/tests/test_codex_log_rollup.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-domain-review.md
+    stop_reason: The cost correction and release prerequisite finished early; the delegated BC270 design retains its original deadline in parallel.
+    next_action: Freeze the accepted correction and prospective protocol, pass records, then dispatch BC276; independently audit BC270 after its author terminalizes.
+  - workflow: insight-iteration
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Attempt the unchanged complete negative-slide determination after freezing its accepted protocol, alongside the remaining parent-compatibility design.
+    commitment: BC-276
+    bead: think-6pka
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Independent review accepts N and the signed-parent decomposition; one bounded sibling can expand the completed release result while the principal H118 prerequisite proceeds.
+    budget_minutes: 30
+    started_at: '2026-09-07T08:56:30Z'
+    deadline_at: '2026-09-07T09:26:30Z'
+    expected_output: Independent exact argument or witness proposals for all of N, with precise partial scopes and a separately reserved final audit.
+    validation_command: Immutable protocol and passing record checks before target dispatch, then independent mathematical audit.
+    kill_condition: Uncommitted or altered domain, numerical target work, omitted seam, or the actual worker and phase deadlines.
+    fallback: Preserve exact partial results or the failed implication; no smaller-box retry or adapter substitution in this attempt.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Compare changed slide, block-angle and feature scopes; diagnose the existing receipt tool without delaying publication of the mathematical evidence.
+    next_action: Commit the protocol and accepted code, pass records, then record actual author/adversary leases before dispatch; both end by09:30 and the final audit by09:50.
   primary_bead: think-0yfe
   status: in_progress
   budget:
@@ -535,19 +581,19 @@ session:
     excluded_commands: [Numerical targets or solver runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
   - task: BC275 changed-domain allocation assessment
     operator: Codex capacity_protocol, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Rank one changed block-angle, signed-slide or wall/contact domain against the accepted skeleton proof and the source continuation; design only.
+    outcome: Selected the complete negative short-slide sibling; together with accepted T+ it would cover the signed short-slide parent. Priced25-minute author,20-minute adversary and20-minute independent audit.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md]
+    checks: [Flowmark and six source links/whitespace/footer checks passed; no candidate proof or test]
+    uncertainty: Larger angle, slide and wall/contact scopes remain deferred; candidate N needs independent scope and redundancy review.
+    elapsed_seconds: 443
+    elapsed_quality: operator_reported_approximate
+    next_action: BC276 domain review, then a separate prospective protocol if useful and complete.
     phase: 6
     budget_minutes: 15
-    started_at: '2026-09-07T08:24:25Z'
+    started_at: '2026-09-07T08:25:49Z'
     deadline_at: '2026-09-07T08:39:25Z'
     expected_output: A compact allocation recommendation with complete candidate domain, changed premise, price, acceptance and deferred alternatives.
     validation_command: Compare accepted mathematical reports, retained open siblings and live source ownership; no target determination.
@@ -557,19 +603,19 @@ session:
     excluded_commands: [New target proofs or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
   - task: BC275 cost receipt consistency diagnosis
     operator: Codex release_model_review, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Diagnose why the later existing task-tree delta reports less cumulative work; keep private logs and diagnostic outputs in the attic.
+    outcome: Three late compaction settings events are misread as initial inherited-history boundaries; the parser drops earlier owned work before cutoff filtering. Historical snapshot membership and totals therefore shrink on replay.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md]
+    files: []
+    checks: [Existing guarded replay reproduced the same-cutoff loss;28 existing tests passed in0.12seconds but lack the append regression]
+    uncertainty: Published and refreshed receipts are historical unreconciled snapshots until the ownership bug is corrected and independently checked.
+    elapsed_seconds: 571
+    elapsed_quality: operator_reported_approximate
+    next_action: think-ooa7 repairs only the proved parsing defect with synthetic frozen-cutoff regression and preserved legacy controls.
     phase: 6
     budget_minutes: 15
-    started_at: '2026-09-07T08:24:25Z'
+    started_at: '2026-09-07T08:25:56Z'
     deadline_at: '2026-09-07T08:39:25Z'
     expected_output: Exact reproducible cause or smallest telemetry ambiguity, with a safe reporting disposition; no implementation change in this assessment.
     validation_command: Read existing rollup code and compare the retained and attic receipts; reproduce only with the existing guarded tool if necessary.
@@ -579,6 +625,72 @@ session:
     excluded_commands: [Scientific target work, Git or shared-record mutations, New IDs, Dependency changes, Writes outside attic]
   - task: BC275 independent portfolio challenge
     operator: Codex release_domain, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Prioritize a30-minute H118 necessary-parent design plus15-minute independent review; allow only one small release sibling rather than funding hours of feature-box expansion. H121 still lacks a finite-motion or global-representative premise.
+    evidence: [packing/campaign/agent-sessions/session-092-hybrid-overnight.md]
+    files: []
+    checks: [Read-only comparison of accepted proofs, X018 and live source session093; no target or file changes]
+    uncertainty: An independently complete branch where four squares leave capacity at most six is not yet designed; strict H118 strength also needs a surviving coupled-LP witness on that same domain.
+    elapsed_seconds: 345
+    elapsed_quality: operator_reported_approximate
+    next_action: Use BC270's remaining design slice for an actual restriction from the seven residual squares; stop if the fixtures survive or the parent implication is missing.
+    phase: 6
+    budget_minutes: 15
+    started_at: '2026-09-07T08:26:16Z'
+    deadline_at: '2026-09-07T08:39:25Z'
+    expected_output: Concise evidence-based recommendation and exact unproved global bridge, with no new target proof.
+    validation_command: Read-only comparison of the accepted reports, X018 and the live source continuation.
+    kill_condition: New target proof or numerical work, assuming a global normal form, or lane deadline.
+    fallback: Name why no new lane is ready and price the smallest useful premise.
+    write_scope: [attic/agenda-028-overnight]
+    excluded_commands: [New target proofs or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside attic]
+  - task: Retrospective cost ownership correction
+    operator: Codex release_model_review, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Settings alone no longer remove an owned prefix without foreign metadata; explicit compaction settings are excluded from legacy ownership markers. Synthetic fixed-cutoff append controls cover both metadata shapes.
+    evidence: [packing/devtools/codex_log_rollup.py, packing/tests/test_codex_log_rollup.py]
+    files: [packing/devtools/codex_log_rollup.py, packing/tests/test_codex_log_rollup.py]
+    checks: [Regressions failed before both corrections,49 focused tests passed in0.25seconds, Ruff and BasedPyright clean, Coordinator independently inspected both cases and replayed49 tests in0.25seconds]
+    uncertainty: Arbitrary non-compaction settings after foreign metadata still use the older initial-boundary heuristic; no blanket guarantee about every legacy format is claimed.
+    elapsed_seconds: 838
+    elapsed_quality: operator_reported_approximate
+    next_action: Commit the correction and rebuild historical and current aggregates with the accepted tool before updating published costs.
+    phase: 7
+    budget_minutes: 20
+    started_at: '2026-09-07T08:40:13Z'
+    deadline_at: '2026-09-07T08:58:00Z'
+    expected_output: Minimal parser correction, failing-before/passing-after regression and focused lint/type/test evidence.
+    validation_command: Focused Codex rollup and delta tests, Ruff and BasedPyright, followed by coordinator independent review.
+    kill_condition: Altered ownership semantics without evidence, lost replay-dedup control, private log fixture, or lane deadline.
+    fallback: Return the exact remaining ambiguity and leave accounting uncertain; no broad telemetry rewrite.
+    write_scope: [packing/devtools/codex_log_rollup.py, packing/tests/test_codex_log_rollup.py, packing/tests/test_codex_task_tree_delta.py]
+    excluded_commands: [Scientific targets, Git or shared-record mutations, New IDs, Dependency changes, Private log retention, Writes outside assigned files or attic]
+  - task: BC276 independent negative-slide domain review
+    operator: Codex direct_contracts, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Accepted the complete closed N, exact signed-parent decomposition and prospective protocol; no established inventory-preserving symmetry transfers the remaining negative branch into accepted scope.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-domain-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-domain-review.md]
+    checks: [Independent scope and redundancy review, Flowmark/link/whitespace/footer/reread checks passed]
+    uncertainty: N remains undecided; both target reports must finish by09:30UTC to preserve the independent audit through09:50UTC.
+    elapsed_seconds: 396
+    elapsed_quality: operator_reported_approximate
+    next_action: Commit the accepted protocol, pass record checks and record actual shortened worker windows before dispatch.
+    phase: 7
+    budget_minutes: 10
+    started_at: '2026-09-07T08:40:25Z'
+    deadline_at: '2026-09-07T08:48:00Z'
+    expected_output: Exact accepted scope or missing premise; no proof search in the new target.
+    validation_command: Independent comparison of the BC275 candidate, accepted feature equations and all parent/sibling boundaries.
+    kill_condition: A missing boundary or parent implication, target proof work, or lane deadline.
+    fallback: Return the smallest scope correction or redundancy implication and admit no new target yet.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-domain-review.md]
+    excluded_commands: [New target proof or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC270 remaining parent-compatibility design
+    operator: Codex capacity_protocol, max thinking
     status: in_progress
     recording: contemporaneous
     outcome: null
@@ -588,18 +700,21 @@ session:
     uncertainty: null
     elapsed_seconds: null
     elapsed_quality: null
-    next_action: Independently compare further source-feature closure with H118 residual compatibility and a concrete H121 structural premise; recommend the best use of the remaining night.
-    phase: 6
-    budget_minutes: 15
-    started_at: '2026-09-07T08:24:25Z'
-    deadline_at: '2026-09-07T08:39:25Z'
-    expected_output: Concise evidence-based recommendation and exact unproved global bridge, with no new target proof.
-    validation_command: Read-only comparison of the accepted reports, X018 and the live source continuation.
-    kill_condition: New target proof or numerical work, assuming a global normal form, or lane deadline.
-    fallback: Name why no new lane is ready and price the smallest useful premise.
-    write_scope: [attic/agenda-028-overnight]
-    excluded_commands: [New target proofs or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside attic]
+    next_action: Derive a necessary restriction supplied by the seven residual squares and a complete selected parent branch that defeats the retained diamond fixtures.
+    phase: 7
+    budget_minutes: 30
+    started_at: '2026-09-07T08:38:00Z'
+    deadline_at: '2026-09-07T09:08:00Z'
+    expected_output: A concrete closed parent branch, explicit siblings and geometric premise, or the precise obstruction to any fair H118 target.
+    validation_command: Exact mathematical implication and retained-fixture comparison; independent review follows in a separate15-minute slice.
+    kill_condition: A fitted convenient box, restatement of residual capacity without a new premise, freely positioned anchor only, omitted siblings, or lane deadline.
+    fallback: Retain the missing parent restriction and keep BC271 blocked; no resource target or larger tree.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md]
+    excluded_commands: [Numerical targets or solver runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
   outputs:
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-domain-review.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-protocol.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-author.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md
@@ -610,6 +725,9 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
   checks:
+  - Mathematical checkpoint26679fa8 passed all31 record checks in18.12seconds and all45 push steps in67.18seconds, including604 tests with3 deselected. It was pushed at the two-hour checkpoint and its hosted required CI is green; mergeability into main is clean.
+  - BC275 identified the exact late-compaction prefix-filtering bug in cost attribution; think-ooa7 owns its minimal correction and synthetic regression. No decreased total is claimed as a cost improvement.
+  - Fresh local and source agenda inventory at08:35UTC had commitments throughBC275. BC276 is the next sequential item, tracked by think-6pka under existing H120. Source H124, exp124 and session093 stay untouched.
   - Whole-domain analytical audit ended08:23:03UTC; focused cap audit ended08:19:55UTC. Both accept their declared scopes and completed before the08:31:12 deadline.
   - The08:20:17 live cost refresh decreased previously reported aggregate work despite its later cutoff. Retain the published07:36:15 receipt while BC275 diagnoses this inconsistency; the new raw receipt is in the attic and is not promoted as a reliable total.
   - Implementation daedeb9f passed all45 pre-push steps in262.47seconds, including926 tests with27 deselected; hosted required CI is green. Fresh fetch at08:15UTC still has main atdd36800e, an ancestor of this branch.
@@ -623,7 +741,7 @@ session:
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-092.yaml
   stop_reason: null
-  next_action: Finish the independent BC273 audit and publish the first two-hour checkpoint; next run BC275's twenty-minute efficiency allocation before choosing one changed mathematical domain.
+  next_action: Complete the bounded cost correction and mathematical prerequisites, then freeze and validate BC276 before any target; preserve BC270's09:08 design deadline and the eight-hour endpoint.
 ---
 # Eight-Hour Hybrid and Release Investigation
 
@@ -711,15 +829,23 @@ fixed.
 Recheck live allocations before any new registration; sequential next pointers are
 candidates, not reservations.
 
-The first design wave is complete.
-Exact band-subsystem packings prevent admission of that capacity comparison; the
-complete eleven-square residual compatibility is missing.
-The release model has independent source-corner acceptance.
-Independent reconstruction and the complete small SAT cover are accepted at their exact
-direct scope. The first mathematical attempt used the unchanged native BC273 analytical
-protocol, after record validation and an immutable protocol commit.
-Its two independent reports are terminal and the independent mathematical audit is
-active. No H120 LP target or H118 capacity target is admitted.
+The first two-hour mathematical checkpoint is pushed at `26679fa8`, with passing local
+push checks and hosted CI. The BC273 analytical contradiction and independent audits
+exclude the entire declared $T_+$, including every square10 orientation, without
+changing the global bracket.
+Exact band-subsystem packings still block H118’s comparison.
+BC270 now uses its remaining design slice for an actual necessary restriction from the
+seven residual squares; no capacity target is admitted.
+
+The current prerequisites are the late-compaction cost-parser correction under
+`think-ooa7`, independent review of BC276’s complete negative-slide sibling, and that
+BC270 parent design.
+BC276 is the next sequential commitment, under `think-6pka` and existing H120; it has no
+new hypothesis or experiment ID. Its native analytical protocol must be committed and
+records validated before target dispatch.
+No H120 LP adapter or numerical target is admitted.
+The published cost snapshot remains historical and unreconciled until the parser
+correction passes review and the actual interval is rebuilt.
 Check the current phase and delegation deadlines above before continuing.
 After the final deadline, reconcile retained evidence and report the next request; start
 no further target under this block’s authorization.

@@ -203,6 +203,9 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [BC-276: Negative-Slide Domain Preflight](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-domain-review.md) | dated review record | record | retained | — |
+| [BC-275: First Checkpoint Allocation](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md) | implementation plan | record | retained | — |
+| [BC-276: Prospective Negative-Slide Determination](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-protocol.md) | implementation plan | record | retained | — |
 | [BC-273: Analytical Attempt on the Frozen Middle-Angle Domain](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-author.md) | research synthesis | record | retained | — |
 | [BC-273 — Independent Analytical Adversary](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md) | research synthesis | record | retained | — |
 | [BC-273: Independent Acceptance of the Analytical Release Exclusion](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md) | dated review record | record | retained | — |
