@@ -154,7 +154,7 @@ session:
     clock_role: work
     objective: Disposition H106, test the changed density source controls and select the next useful scalar or restricted-angle discriminator.
     bead: think-9qrx
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: The complete near-axis lemma passed independent replay; remaining lanes have new reviewed instruments or bounded assessments, not unchanged retries.
     budget_minutes: 30
@@ -164,10 +164,30 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: A scientific guard fails, its frozen process cap expires, or the30-minute selection slice ends.
     fallback: Publish the exact accepted and unresolved scope; preserve unspent target allowances and the finalization reserve.
+    outcome: H106 and density outcomes are pushed at1412664f with all required CI passing. Fixed-site adapter is reviewed, but exp118 remains unlaunched after its cutoff. H108's A3 producer and reader controls are complete and under separate review.
+    evidence: [packing/campaign/hypotheses/H-108-near45-canonical-a3-forcing.md, packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-118-h-107-fixed-site-completion.md]
+    stop_reason: The selected outcomes and next restricted clause are now concrete; continue with independent review and prospective A3 execution.
+    next_action: Preserve the unspent scalar protocol; finish A3 review and commit its experiment before any target.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Complete independent A3 instrument review, prospectively test the canonical near45 implication and publish the next integrated checkpoint.
+    bead: think-vttn
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Both independent near45 implementations have source-free controls; scalar and density are retained at their exact unlaunched or source-blocked boundaries.
+    budget_minutes: 30
+    started_at: '2026-09-07T03:24:46Z'
+    deadline_at: '2026-09-07T03:54:46Z'
+    expected_output: A complete A3 auxiliary disposition or precise unresolved obligation, independent receipts, current PR and a selected final research slice.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: A review premise fails, either fixed10-second process cap expires, or this selection slice ends.
+    fallback: Preserve the actual obligation and unspent allowances; never treat a failed sufficient vertex as a counterexample.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Run only newly selected controls; a new target requires its own registered claim, reviewed instrument and committed protocol.
+    next_action: Finish only the already commissioned reviews at their original caps, then require a committed prospective protocol and passing records before the sole target.
   primary_bead: think-9qrx
   status: in_progress
   budget:

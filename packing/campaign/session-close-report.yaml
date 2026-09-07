@@ -1405,7 +1405,7 @@ sessions:
   title: "Scalar, density, and restricted-angle research"
   status: in_progress
   primary_bead: think-9qrx
-  phases: 7
+  phases: 8
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-090.yaml

@@ -483,7 +483,7 @@ agenda:
     state: in_progress
     priority: 1
     question: What is the first complete proof obligation for a useful restricted structural theorem?
-    hypotheses: [H-036, H-102, H-104, H-106]
+    hypotheses: [H-036, H-102, H-104, H-106, H-108]
     budget: >-
       One assessment slice of at most 30 minutes, beginning with H-036's unchanged
       0.25-degree restricted-angle claim. State complete cases, a feasible control,

@@ -265,6 +265,8 @@ Row 86 belongs to the pending refined-core transport.
 | 98 | Fixed-side point-cover auxiliaries before an angle-neighborhood proof | registered | [H-104](hypotheses/H-104-fixed-side-point-cover-auxiliaries.md) | Seven exact-angle formula clauses; a counterexample rejects only this mechanism, not H-036. |
 | 99 | An overweight pair invalidates exp113’s fixed candidate | registered | [H-105](hypotheses/H-105-exp113-overweight-pair-obstruction.md) | A strict positive-area pair witness retires these weights only; complete pair exhaustion is not a.e. feasibility. |
 | 100 | Continuous near-axis ten-point coverage | registered | [H-106](hypotheses/H-106-continuous-near-axis-ten-point-cover.md) | Both closed angle signs and every contained center; failed tile labels remain unresolved, not a packing counterexample. |
+| 101 | Complete rows on the retained scalar sites | registered | [H-107](hypotheses/H-107-fixed-site-scalar-completion.md) | Fix the terminal exp116 sites and complete missing rows before adapting support; only exact coverage accepts. |
+| 102 | Force A3 for a canonical near-45 avoider | registered | [H-108](hypotheses/H-108-near45-canonical-a3-forcing.md) | A two-point avoidance implication reduces to three moving vertices and 24 exact quartics; failed sufficient assignments remain unresolved. |
 
 Exact basis recovery and Lean replay support the relevant candidate or assurance bead;
 they are not additional mathematical hypotheses without a specific method comparison.

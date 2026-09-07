@@ -104,7 +104,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-087](agent-sessions/session-087-agenda022-continuation.md) | completed | contemporaneous | `research-loop` (correctness) | `efficiency-loop` (efficiency) | 2 | think-wufn | Take BC-215 (think-xejq), the one lever the efficiency block measured and did not wire: 20.2 per cent of deep-run work is repeated and 92 per cent of that is trees that did not move, so the tree-id cache is what takes the pull-request wall from about 221.70 s to the operator's two to two and a half minutes. |
 | [session-088](agent-sessions/session-088-validation-efficiency-checkpoint.md) | completed | retrospective | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 1 | think-rwte | Continue think-xejq with explained exhaustive-family planning under W5 Phase 3 after publishing this implementation and verifying its full hosted checkpoint. Preserve complete coverage until the selection and reuse contracts pass their invalidation fixtures. |
 | [session-089](agent-sessions/session-089-agenda024-next-phases.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 14 | think-jgnv | Select BC-251, think-0za3, for the next fresh allocation with its unchanged 150-minute process cap and separate verification. Agenda024 Current Allocation owns the parallel density and angle packages. Keep the integrated PR101 line while open; do not repeat exp113, exp114 or exp115. |
-| [session-090](agent-sessions/session-090-four-hour-research.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `research-loop` (insight) | 7 | think-9qrx | Continue PR105 with accepted H106, the next restricted-angle clause and fixed-site scalar readiness; density remains source-blocked and exp116 must not be retried unchanged. |
+| [session-090](agent-sessions/session-090-four-hour-research.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `research-loop` (insight) | 8 | think-9qrx | Continue PR105 with accepted H106, the next restricted-angle clause and fixed-site scalar readiness; density remains source-blocked and exp116 must not be retried unchanged. |
 
 ### Workflow summary
 
@@ -117,7 +117,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 18 | 1 | 58 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 9 | 4 | 54 | 7 |
+| `research-loop` | 9 | 4 | 55 | 7 |
 | `pipeline-improvement` | 22 | 0 | 114 | 0 |
 | `documentation-pass` | 1 | 0 | 4 | 0 |
 | `review-planning-oversight` | 0 | 0 | 1 | 0 |
@@ -557,7 +557,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 73 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 75 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -645,6 +645,8 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | H-104 | confirmed | proof | At q = 1939/500, the frozen P10, P12 and A-triple point formulas satis |  | 1 |  | 2s wall |
 | H-105 | refuted | proof | Among the 60 distinct D4 placements of trump11-v1, with exactly exp-11 |  | 1 |  | 2s wall |
 | H-106 | confirmed | proof | At q=1939/500, every contained closed unit square with angle in [-pi/7 |  | 1 |  | 0s wall |
+| H-107 | blocked | proof | The terminal exp-116 site set supports a D4-invariant nonnegative rati |  | 1 |  |  |
+| H-108 | running | proof | At q=1939/500, every contained closed unit square whose angle lies in  |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -702,7 +704,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-113 | series-000 | 11 | Codex coordinator, max reasoning, think-2rxf in Session089 | H-099 | The verified ceiling56/5 exceeds11. It bounds the fixed-support problem but neither refutes H099 nor supplies the missing complete a.e.-depth proof. |
 | exp-116 | series-000 | 11 | Codex coordinator, max mathematical reasoning, think-0za3 in Session090 | H-093 | The driver stopped adding sites at iteration18 without row convergence; the replayed dual family has mass about10.08018, so neither acceptance nor rejection criterion holds. |
 
-### blocked (6)
+### blocked (7)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -712,6 +714,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-026 | series-000 | 6 | openai-codex | H-021 | Seeds 0 through 2 replay as admissible, but seed 3 crashed at the retention boundary after failing independent validity. D-183 blocks the cell and all larger event slices until a separately preregistered replication retains that stop. |
 | exp-047 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `interval-enclosure`: the numerical prototype's selftest and synthetic controls pass, but a float midpoint fit with fixed tolerance and heuristic radii does not prove a nonempty compatible-pose enclosure or outward- rounded wall and pair signs, and the preregistered command lacks a complete post- authorization runner. No parent retrieval, target parse or target fit ran, so H-053 remains unresolved. |
 | exp-051 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `executable-runner`: the proof, verifier and generic injected-runner controls pass, but the exact preregistered `--record` command exits 2 before target access because no production CLI adapter exists; no scientific H-053 disposition follows. |
+| exp-118 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-252 | H-107 | The prospective record gate was not complete by the 03:16 UTC launch cutoff; no target or verification process ran and both allowances remain unspent. |
 
 ### accepted (23)
 
@@ -757,6 +760,12 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-119 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-255 | H-108 | Prospectively frozen; no target has run. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -770,10 +779,11 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-056 | H-052 | 356.0m wall | timebox | Canonical child checkpoint SHA-256 0d39a7e734e8afc62fda914fd |  |
 | exp-060 | H-064 | 96m agent + 66.0m wall | timebox | packing/campaign/series/series-000-smoke-and-calibration/res | a resumed loop from the retained 191/50 state with row gener |
 | exp-070 | H-064 | 109.3m wall | timebox | packing/campaign/series/series-000-smoke-and-calibration/res | After the T+2 landing, spend the remaining 135 one-core proc |
+| exp-118 | H-107 |  | dependency |  |  |
 
 ## Effort
 
-73 rounds, 2152.1 agent-minutes, 1223.1 wall-minutes.
+75 rounds, 2152.1 agent-minutes, 1223.1 wall-minutes.
 
 ## Exploration reports not yet codified
 
