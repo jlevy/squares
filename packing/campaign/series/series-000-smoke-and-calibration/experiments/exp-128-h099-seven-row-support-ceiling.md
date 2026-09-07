@@ -1,0 +1,154 @@
+---
+title: exp-128 — independent positive-incidence support ceiling
+softschema:
+  contract: packing.squares:Experiment/v2
+  schema: ../../../schemas/experiment.schema.yaml
+  envelope: experiment
+  status: enforced
+experiment:
+  id: exp-128
+  series: series-000
+  title: Independently verify the seven-row ceiling on the whole Trump D4 support
+  date: '2026-09-07'
+  hypotheses: [H-099]
+  tier: confirmatory
+  subject:
+    label: Exact Trump-side D4 closure of all eleven current seeds and the seven unchanged contributed boxes
+    engine: History-free source-bound necessary-lower-incidence checker using oriented-edge geometry
+    engine_commit: 3160d0a7
+    assurance: verified
+    method: exact-algebraic
+    host_system: macOS arm64, project Python3.14.7; GNU coreutils timeout9.9
+    selftest_passed: true
+  instance: {axis: n, point: 11, role: target}
+  method:
+    control: >-
+      Two independent source-free assessments derive the source correspondence,
+      symmetrization, feasible average and exact multiplier implication. The
+      separately implemented positive-inclusion instrument requires source-free
+      acceptance and mutation controls, independent code/protocol GO and a frozen
+      passing push gate before the scientific constructor may run.
+    candidate: >-
+      The fixed seven archived rational centers, radius1/100000, 41 positive
+      inclusion quotas and nonnegative multipliers1,3,1,1,5/2,1,3/2. Reconstruct
+      all88 labelled D4 images and their60-placement/eight-orbit quotient, bind
+      archive columns by complete orbit keys, and verify the original-packing
+      average. No new placement, changed box, LP, arrangement or candidate replay.
+    runs_per_condition: 1
+    interleaved: false
+    operator: Session095 coordinator, BC259; max mathematical judgment
+    commit: 3160d0a7
+    dirty: false
+    entry_point: packing/devtools/check_trump_support_adoption.py
+    command: >-
+      /usr/bin/time -p /opt/homebrew/bin/timeout --signal=TERM --kill-after=2s 60s
+      env PYTHONPATH=src /Users/levy/wrk/github/squares/packing/.venv/bin/python3
+      -m devtools.check_trump_support_adoption --target-trump
+    budget: >-
+      Exactly one independent adoption checker child. GNUtimeout sends TERM after
+      60seconds including imports, source construction, all checks and serialization;
+      KILL follows at most2seconds later if needed. This is not a strict60-second
+      total-process completion claim. External time measures supervision overhead.
+      Launch by13:09 UTC and finish by13:12 UTC or retain non-invocation. No retry,
+      changed constants, extra candidate box or automatic enlarged-support search.
+    record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-128-h099-seven-row-support-ceiling
+  lease:
+    expires: '2026-09-07T13:12:00Z'
+    host: Session095 coordinator
+  results: []
+  verdict:
+    decision: in-progress
+    primary_criterion: Complete independently source-bound seven-row necessary-lower-incidence ceiling eleven and independently reconstructed feasible average eleven on exactly H099's existing support.
+    reason: Prospective only; instrument readiness, independent review, frozen engine validation and committed protocol admission are required before the sole call.
+---
+# One Independent Seven-row Adoption
+
+This record proposes one independently implemented check of contributed certificate
+data. It is not a new optimizer, a repeated exp113 screen, or a new producer followed
+by a same-code replay. The archived executable is never imported or rerun.
+
+## Fixed Mathematical Contract
+
+The [source assessment](../results/agenda-027/bc-259-support-adoption-author.md) and
+[independent review](../results/agenda-027/bc-259-support-adoption-review.md) derive the
+source formula correspondence and the exact ceiling implication. H099 was amended
+prospectively to name the necessary-lower-incidence predicate. Each fixed positive-area
+box must lie strictly inside the container. In each orbit, find the prescribed number
+of distinct geometric members that contain the whole box strictly; retain their member
+identities. Selected source labels are not distinct members unless their geometric
+placements differ. No exclusion test or constant-incidence assertion is required.
+
+For any nonnegative feasible orbit weighting, these selected inclusions lower-bound
+the actual depth on the entire box. Hence each row has weighted value at most one,
+even with the allowed null exceptional set. The nonnegative multipliers sum to eleven
+and reproduce the orbit-size vector. D4 averaging preserves mass and almost-everywhere
+feasibility, so this ceiling also applies to nonsymmetric weights on the full support.
+The independently reconstructed original packing supplies a feasible averaged mass of
+eleven. Both implications are required for the claimed fixed-support optimum.
+
+The seven frozen rows are copied as data from the archive, not generated by a new
+search. Their radius is exactly1/100000 and their representative seed order is
+(0,2,4,7,10,8,6,9). Sizes in that order are (4,8,8,8,8,8,8,8). The field parameter is
+the half-angle root of the current degree-eight polynomial in (36/100,37/100), not the
+container side and not H124's1939/500 side.
+
+The accepted seed constructor, NumberField arithmetic, exact signs and packing verifier
+are shared foundations. The new checker uses the existing independently structured
+direct-map source reconstruction and independently checks the archived row geometry
+with oriented edges. Do not describe this as an independent derivation of Trump's
+construction or an independent implementation of the field arithmetic.
+
+## Admission and Single Invocation
+
+The code author froze at12:37:05 UTC. Independent source-free code/control/protocol
+review and its retained note froze at12:44:10 UTC, before the original12:57 readiness
+cutoff. Twelve controls passed independently in0.69seconds wall and0.66CPU, with
+Ruff, formatting and BasedPyright clean. Root read the complete frozen implementation,
+tests and review before committing engine3160d0a7. No scientific source was constructed.
+
+Run from that clean immutable checkout's packing directory. Its required push tier
+and this committed prospective record's checks must pass before scientific construction.
+The engine push is still pending at registration; selftest_passed names the completed
+source-free controls, not that pending gate. Record the actual passing admission before
+launch; no later success may retroactively supply it.
+
+Run the exact frontmatter command once. Its fixed CLI admits no alternate target,
+input dataset, row, radius, optimizer or optional eighth candidate-refutation box.
+Require absent result paths before launch. Retain stdout as verification.json, stderr
+and external wall/user/system time as verification.log, plus the actual tool exit code.
+The independent checker is the sole scientific process; no further target reader or
+same-code rerun is authorized. A later source-free audit of this output is allowed.
+
+Acceptance requires actual exit zero, kind=d4-positive-inclusion-support-ceiling,
+version=1, status=verified_support_ceiling and literal
+ceiling_proved=true, predicate=necessary-lower-incidence, source=trump11-v1,
+upper_bound="11", baseline_mass="11" and literal baseline_verified=true.
+Require labelled_images=88, distinct_placements=60, a bijective archive_to_current
+permutation of all eight orbits, selected_incidences=41 and exactly seven frozen rows.
+Every row must have literal strict_inclusions_verified=true and distinct, source-bound
+selected member identities meeting the prescribed per-orbit quotas. Full embedding, support and preimage metadata, source
+quotient, row quotas and exact multiplier identities must agree with the fixed
+instrument contract. Unexpected or missing fields/predicates prohibit promotion.
+
+## Disposition and Stop
+
+An accepted result rejects H099's mass-above-eleven claim for exactly this support and
+establishes its attained optimum eleven. Retain exp113's historical finite-row56/5
+ceiling and exp126's unverified graph obstruction; their original outcomes are not
+rewritten. The result gives no ceiling for added placements, full-pose primal density,
+below-Trump transport, global Trump optimality or improved packing lower bound.
+
+Every refusal, nonzero exit, timeout, incomplete output, source mismatch or failed
+positive-inclusion quota leaves adoption unresolved. Preserve the exact failure and
+any partial or empty output. It does not show that the contributed mathematics is
+false. No retry, radius change, extra box or general overlap engine follows.
+Remove the lease and retain the terminal outcome or explicit non-invocation at the
+original cutoff. Finalization still begins13:29; the endpoint remains13:49.
+
+Fresh PR110 inspection at86dbff43 found no exp128 or BC259 assignment. It separately
+owns Session092 and BCs through280. This round uses existing H099 and BC259 under
+think-ftdi; no new hypothesis, agenda, BC or exploration is allocated.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

@@ -629,8 +629,9 @@ BC-259 instead asks whether the contributed seven-row ceiling of eleven independ
 binds to H099's entire existing support. It could settle every weight vector on that
 support, whereas exp126's unverified overweight graph clique concerns only the current
 candidate and does not prove geometric invalidity. Both independent source assessments
-are complete. The final bounded readiness slice implements and independently reviews
-the seven-row positive-inclusion checker; no support-adoption target is admitted yet.
+are complete. The fixed seven-row checker passed independent source-free review and
+controls. Exp128 is prospectively registered on engine3160d0a7; immutable push and
+committed-record admission remain required before its sole independent adoption call.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
 `think-9qrx`, completed the user-approved research block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
@@ -2867,7 +2868,7 @@ round that names the hypothesis, control roles included.
 | [H-096](packing/campaign/hypotheses/H-096-n11-angle-cell-kernels.md) | open question | Can whole-angle-cell kernels cover more useful positive mass with a tractable exact verifier? | 0 | — |
 | [H-097](packing/campaign/hypotheses/H-097-n11-existential-witness-menus.md) | open question | Can pose-dependent witness choice beat a universal witness while retaining complete pose-box coverage? | 0 | — |
 | [H-098](packing/campaign/hypotheses/H-098-n11-segment-measures.md) | open question | Can segment-supported measures improve the bound with exact intersection-length coverage? | 0 | — |
-| [H-099](packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md) | unresolved | Scientific controls passed; candidate graph reported an overweight clique without geometric rejection or independent replay | 2 | 33s wall |
+| [H-099](packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md) | unresolved | Graph obstruction retained; independently reviewed seven-row ceiling instrument prospectively registered | 3 | 33s wall |
 | [H-100](packing/campaign/hypotheses/H-100-below-trump-area-density.md) | open question | Can a full-size area density give mass below eleven at a side between the retained bound and Trump? | 0 | — |
 | [H-101](packing/campaign/hypotheses/H-101-trump-equality-density.md) | open question | Can mass-eleven density at Trump’s side and a complete equality analysis establish uniqueness? | 0 | — |
 | [H-102](packing/campaign/hypotheses/H-102-complete-restricted-angle-support-families.md) | open question | Which complete restricted angle or wall-support family yields a useful theorem, starting with H-036? | 0 | — |
@@ -3142,7 +3143,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 83 rounds registered in `series-000`.
+There are 84 rounds registered in `series-000`.
 
 They record 2152.1 agent-minutes and 1223.3 wall-minutes.
 Exp-114 completed its one target and independent replay.
@@ -3265,6 +3266,7 @@ archive beside it.
 | [exp-125](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md) | 11 | target | H-124 | Complete residual cover for both whole bands | Diagonal independently certified; axis no_chain without reader | unresolved |
 | [exp-126](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md) | 11 | target | H-099 | Complete graph bound for unchanged56/5 candidate | Reported overweight graph clique; no reader or geometric counterexample | unresolved |
 | [exp-127](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md) | 11 | target | H-124 | Fixed collision-augmented whole-axis cover | Producer no_chain; no independent reader or geometric counterexample | unresolved |
+| [exp-128](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md) | 11 | target | H-099 | Fixed seven-row necessary-lower-incidence ceiling | Prospectively registered; sole independent checker not invoked | in-progress |
 
 ### Cost and provenance
 
@@ -3353,10 +3355,11 @@ archive beside it.
 | exp-125 | one producer per band; only diagonal reader invoked | 1.90 s | — | criterion | `7daa7c55` |
 | exp-126 | one60-second scientific child; no reader invoked | 4.49 s | — | criterion | `7daa7c55` |
 | exp-127 | one120-second scientific child; no reader invoked | 0.25 s | — | criterion | `3bec06e2` |
+| exp-128 | one60-second independent checker plus2-second termination grace | — | — | not invoked | `3160d0a7` |
 
-### What the 83 rounds jointly establish
+### What the 84 rounds jointly establish
 
-The 83 rounds use 2152.1 agent-minutes and 1223.3 wall-minutes under the campaign’s
+The 84 rounds use 2152.1 agent-minutes and 1223.3 wall-minutes under the campaign’s
 retained effort accounting.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
 separately in Session089.

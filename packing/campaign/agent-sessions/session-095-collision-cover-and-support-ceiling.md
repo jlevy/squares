@@ -273,10 +273,77 @@ session:
     fallback: Retain the previous lower bound and a missing receipt notice.
     write_scope: [packing/campaign/resource-usage/codex-task-tree-session-095.yaml]
     excluded_commands: [Scientific source or target execution, Shared registry or Git writes, Raw prompt or reasoning output]
+  - task: "Next agenda pricing (think-5mx6)"
+    operator: "Codex scalar_followup_assessment, max thinking"
+    status: completed
+    recording: contemporaneous
+    outcome: "Static route assessment completed12:44:41. Accepted fixed-support optimum selects existingBC265/H116 design; unresolved adoption selects BC264/H114, with BC257/H100 only when a concrete density mechanism exists."
+    evidence: [packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md, packing/campaign/hypotheses/H-116-expanded-full-size-dual-support.md, packing/campaign/hypotheses/H-100-below-trump-area-density.md]
+    files: []
+    checks: ["Read existing hypothesis/agenda contracts; no new IDs, files, constructors or tests."]
+    uncertainty: Read-only assessment; no scientific execution or new mathematical result.
+    elapsed_seconds: 342
+    elapsed_quality: operator_reported_approximate
+    next_action: "Root compares the recommendation with actual exp128 disposition before allocating any next design."
+    phase: 2
+    budget_minutes: 8
+    started_at: '2026-09-07T12:39:00Z'
+    deadline_at: '2026-09-07T12:47:00Z'
+    expected_output: Bounded evidence-backed assessment within the assigned scope.
+    validation_command: Read-only source and retained-record inspection.
+    kill_condition: Original deadline or unavailable decisive evidence; no target or gate weakening.
+    fallback: Retain the exact uncertainty and defer unpriced work.
+    write_scope: [Read-only inspection]
+    excluded_commands: [File edits, Scientific calls, Git or external mutations]
+  - task: "New checker CI integration audit (think-dtac)"
+    operator: "Codex checkpoint_handoff_audit, high thinking"
+    status: completed
+    recording: contemporaneous
+    outcome: "Read-only12:39:06–12:41:07 audit confirms all12unmarked tests enter fast and reachable discovery, with no new status inventory or CLI wiring."
+    evidence: [packing/tests/test_trump_support_adoption.py, packing/tests/test_verified_upper_bound_contract.py, packing/devtools/check_declared_commands.py]
+    files: []
+    checks: ["The existing proof-status guard scans only verified_upper_bound; the new distinct status must not be added as a stale consumer. Experiment timeout supervision is outside declared packing-CLI validation."]
+    uncertainty: Read-only assessment; no scientific execution or new mathematical result.
+    elapsed_seconds: 121
+    elapsed_quality: operator_reported_approximate
+    next_action: "Include frozen code/tests and preserve explicit host timeout admission; no framework change."
+    phase: 2
+    budget_minutes: 7
+    started_at: '2026-09-07T12:39:00Z'
+    deadline_at: '2026-09-07T12:46:00Z'
+    expected_output: Bounded evidence-backed assessment within the assigned scope.
+    validation_command: Read-only source and retained-record inspection.
+    kill_condition: Original deadline or unavailable decisive evidence; no target or gate weakening.
+    fallback: Retain the exact uncertainty and defer unpriced work.
+    write_scope: [Read-only inspection]
+    excluded_commands: [File edits, Scientific calls, Git or external mutations]
+  - task: "Hosted runtime-band diagnosis (think-9r8i)"
+    operator: "Codex checkpoint_handoff_audit, high thinking"
+    status: completed
+    recording: contemporaneous
+    outcome: "Read-only audit completed12:48:34. Hosted149.79seconds exceeds149.085 drift boundary by0.705; prior147.73 had the same jobshape but different workload. Neither runner noise nor a narrow regression is established."
+    evidence: [packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md, packing/src/sqpack/cli/validate.py, packing/devtools/gate-budgets.yaml]
+    files: []
+    checks: ["All semantic checks passed. Exactverification+0.72s,perimeter+7.60s,types-3.79s overlap; serial Rust downloads were not separately timed. No gates or commands changed."]
+    uncertainty: Read-only assessment; no scientific execution or new mathematical result.
+    elapsed_seconds: 199
+    elapsed_quality: operator_reported_approximate
+    next_action: "Inspect forthcoming CI. If near150seconds repeats, price perimeter and serial setup/cache diagnosis without weakening thresholds."
+    phase: 3
+    budget_minutes: 7
+    started_at: '2026-09-07T12:45:17Z'
+    deadline_at: '2026-09-07T12:52:00Z'
+    expected_output: Bounded evidence-backed assessment within the assigned scope.
+    validation_command: Read-only source and retained-record inspection.
+    kill_condition: Original deadline or unavailable decisive evidence; no target or gate weakening.
+    fallback: Retain the exact uncertainty and defer unpriced work.
+    write_scope: [Read-only inspection]
+    excluded_commands: [File edits, Scientific calls, Git or external mutations]
   outputs:
   - packing/campaign/resource-usage/codex-task-tree-session-095.yaml
   - packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md
   checks:
+  - Immutable3160d0a7 push failed only a stale generatedledger in68.96seconds; the scientific source, source-free tests and remaining selected checks passed. The corrected source pointer and prospective protocol still require passing immutable admission before any target.
   - Hosted73755cc1 passed every semantic check but failed the measured runtime band at149.79seconds against99.39seconds and a1.5factor. This performance failure is distinct from the repaired stale-record/anchor failures; no threshold is weakened.
   - Corrected checkpoint73755cc1 passed45of66 push steps70.28seconds; external72.62wall184.77user24.35system. It was pushed and the cost-first PR109 body updated by12:40:29. The new checker and its unfinished review were excluded from that checkpoint.
   - Frozen0604812c push delta failed only the control-anchor inventory in73.01seconds;723behavioral tests passed. No passing push or publication is claimed for that snapshot until the anchor correction passes its own validation.

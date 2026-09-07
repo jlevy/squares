@@ -108,7 +108,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-091](agent-sessions/session-091-structural-compatibility.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 6 | think-fqhr | Select think-7e72 for a bounded full-P10 distinguished-square compatibility discriminator after fresh ID/ownership checks; no repeated H110/H122/H123 invocation. |
 | [session-093](agent-sessions/session-093-full-square-compatibility.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 9 | think-bmx9 | Select think-7e72 for independently authored H124 residual-cover source binding and a bounded caller, alongside a separately declared degree-eight graph source-control attempt in the density lane. Neither target is yet allocated; preserve the stopped original sequence and check fresh IDs before the next session. |
 | [session-094](agent-sessions/session-094-complete-cover-and-density-controls.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 8 | think-63oj | Post-checkpoint amendment after Session095 exp127 returned no_chain selects BC-259 under think-nwss for independent seven-row support-ceiling adoption. The originally selected fixed collision-cover allocation is terminal; no retry or radius sweep is funded. |
-| [session-095](agent-sessions/session-095-collision-cover-and-support-ceiling.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (correctness) | 2 | think-ro0s | Complete the bounded BC259 implementation-readiness phase by 12:57 UTC, then independently decide whether a separate scientific verification is ready. Exp127 is terminal; preserve the 13:29 finalization reserve and 13:49 endpoint without a retry. |
+| [session-095](agent-sessions/session-095-collision-cover-and-support-ceiling.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (correctness) | 3 | think-ro0s | Complete the bounded BC259 implementation-readiness phase by 12:57 UTC, then independently decide whether a separate scientific verification is ready. Exp127 is terminal; preserve the 13:29 finalization reserve and 13:49 endpoint without a retry. |
 
 ### Workflow summary
 
@@ -121,7 +121,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 18 | 1 | 58 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 10 | 4 | 65 | 7 |
+| `research-loop` | 10 | 4 | 66 | 7 |
 | `pipeline-improvement` | 25 | 0 | 126 | 0 |
 | `documentation-pass` | 1 | 0 | 9 | 0 |
 | `review-planning-oversight` | 0 | 0 | 2 | 0 |
@@ -593,7 +593,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 83 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 84 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -673,7 +673,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | H-096 | open question | proof | Can finite rational inner kernels, contained throughout their assigned |  | 0 |  |  |
 | H-097 | open question | proof | Can a finite witness menu certify that every admissible unit-square po |  | 0 |  |  |
 | H-098 | open question | proof | Can nonnegative segment-supported measures give stronger or cheaper n  |  | 0 |  |  |
-| H-099 | unresolved | proof | At the exact Trump side U, the deduplicated D4 images of the eleven ex |  | 2 |  | 33s wall |
+| H-099 | unresolved | proof | At the exact Trump side U, the deduplicated D4 images of the eleven ex |  | 3 |  | 33s wall |
 | H-100 | open question | proof | Is there a side L strictly between the retained verified lower bound a |  | 0 |  |  |
 | H-101 | open question | proof | Does the exact Trump-side container admit a nonnegative integrable are |  | 0 |  |  |
 | H-102 | open question | proof | Which explicitly delimited n = 11 angle-composition or wall-support fa |  | 0 |  |  |
@@ -821,6 +821,12 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-128 | series-000 | 11 | Session095 coordinator, BC259; max mathematical judgment | H-099 | Prospective only; instrument readiness, independent review, frozen engine validation and committed protocol admission are required before the sole call. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -838,7 +844,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 ## Effort
 
-83 rounds, 2152.1 agent-minutes, 1223.3 wall-minutes.
+84 rounds, 2152.1 agent-minutes, 1223.3 wall-minutes.
 
 ## Exploration reports not yet codified
 
