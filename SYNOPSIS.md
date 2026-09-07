@@ -203,6 +203,9 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [BC-277: Independent Boundary-Band Admission Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md) | dated review record | record | retained | — |
+| [BC-278: Prospective Boundary-Band Extension Determination](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-protocol.md) | implementation plan | record | retained | — |
+| [BC-277: A Closed Boundary-Band Compatibility Domain](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md) | research synthesis | record | retained | — |
 | [BC-271: Comparator Design and the Next Scope Decision](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md) | implementation plan | record | retained | — |
 | [BC-276: Independent Acceptance of the Negative-Slide Exclusion](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md) | dated review record | record | retained | — |
 | [BC-270: A Parent Compatibility Restriction From the Other Seven Squares](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md) | research synthesis | record | retained | — |

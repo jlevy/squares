@@ -353,7 +353,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 1
     question: What complete boundary-band domain fairly tests complement capacity for seven residual full squares beyond the accepted central fence?
     hypotheses: [H-118]
@@ -374,14 +374,58 @@ agenda:
     parallel_group: agenda028-capacity
     program: n11-hybrid-strength-and-angular-release
     artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md
     next_evidence: >-
-      Independently admit the domain before commissioning a separately committed
-      analytical determination. A capacity bound at most6 would exclude7 residual
-      squares; the fixture alone supplies no evidence for that bound. Keep
-      actual-square, incircle and octagon-surrogate conclusions distinct.
+      Independent admission accepts the unchanged eight-guard domain, complete
+      cover, reflection and controls. BC278 owns a separately committed analytical
+      determination after record checks. No capacity result is supplied by admission.
+    outcomes:
+    - scope: Complete boundary-band four-pose domain and full eleven-square child
+      classification: achieved
+      result: >-
+        Independent admission accepts all eight guards, strict membership,
+        compactness,55 SAT clauses, closed failure children, joint upper reflection
+        and square/disk/octagon relaxation directions. Equality wording is qualified
+        without changing the formal cover. The capacity question remains unattempted.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md
+      disposition: retire-success
+      follow_up: think-dtr6
+  - id: BC-278
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: ready
+    priority: 1
+    question: Is the entire admitted boundary-band eleven-square child D0 empty, with its reflected upper child?
+    hypotheses: [H-118]
+    budget: One30-minute author and20-minute concurrent independent adversary, followed by20-minute fresh audit; all target and audit work ends by11:10UTC. Actual worker leases may be shorter.
+    entry: >-
+      Independent BC277 admission, immutable complete eight-guard domain and
+      prospective protocol, exact membership and relaxation controls, passing
+      record checks and separately recorded actual dispatch deadlines.
+    exit: >-
+      Independently accepted uniform exclusion of the whole D0 or exact verified
+      eleven-square witness, or a precise unresolved implication. A seven-center
+      disk or octagon witness decides only that surrogate, not full-square capacity.
+    bead: think-dtr6
+    workflows: [insight-iteration, factual-review]
+    depends_on: [BC-277]
+    parallel_group: agenda028-capacity
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-protocol.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md
+    next_evidence: >-
+      Decide the unchanged complete boundary-band extension question after
+      admission and protocol freeze. Keep authors independent, reserve the final
+      audit, and preserve every failure child. No numerical target, narrowed
+      retry or strict H118 comparison is admitted by this direct attempt.
 ---
 # Agenda 028 — Hybrid Strength and Angular Release
 
@@ -405,8 +449,8 @@ X-016’s continuing source program retains H-110 and conditional compatibility.
 X-017 / Agenda 027 retains H-111–117, BC-258–268, the complete anchor and six-plus-five
 pilots, support adoption, physical KKT review, and the sole BC-261 geometry interface.
 This agenda adds X-018, H-118–121 and BC-269–275; its execution takes session-092. The
-first checkpoint adds the next sequential commitment BC276 under existing H120; no new
-hypothesis or experiment ID is needed for this coverage extension.
+execution adds the next sequential commitments BC276 under existing H120 and BC277–278
+under existing H118; no new hypothesis or experiment ID is needed for these extensions.
 Fresh source inventory at 08:35 UTC places its continuation in sessions091 and093,
 H122–124 and experiments121–124. Its owner independently reconciled the former
 unpublished H118 collision before publication; no cross-task message was sent.

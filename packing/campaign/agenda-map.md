@@ -2,7 +2,7 @@
 
 # Agenda map
 
-266 agenda commitments across 28 agendas, as declared in each agenda's own frontmatter.
+267 agenda commitments across 28 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **6** in_progress, **16** ready, **13** tentative, **60** blocked, **41** stopped, **130** complete.
+- **5** in_progress, **17** ready, **13** tentative, **60** blocked, **41** stopped, **131** complete.
 
 - **19 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-243`, `BC-248`, `BC-270`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -52,7 +52,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-027 | `BC-264` | tentative | 2 | insight | research | Does one small fixed feature family for H-114 have an exact obstruction, or a b < 11 candidate with a… | `think-mq0d` |
 | agenda-027 | `BC-265` | tentative | 3 | insight | research | Which single candidate-led resource option deserves the next discriminator: equality-support geometry, curved… | `think-j8pz` |
 | agenda-027 | `BC-266` | tentative | 3 | insight | research | Does the shared certificate interface make a complete two-angle family under H-113 worth attempting, with… | `think-bgsz` |
-| agenda-028 | `BC-277` | in_progress | 1 | correctness | measurement_validation | What complete boundary-band domain fairly tests complement capacity for seven residual full squares beyond… | `think-os9k` |
+| agenda-028 | `BC-278` | ready | 1 | insight | research | Is the entire admitted boundary-band eleven-square child D0 empty, with its reflected upper child? | `think-dtr6` |
 | agenda-028 | `BC-272` | tentative | 2 | insight | research | Does retaining the common anchor remove a diagnosed H119 correlation loss? | `think-cy6g` |
 | agenda-028 | `BC-274` | tentative | 2 | insight | research | What concrete implication could establish or obstruct the existential H121 normal form? | `think-5hmt` |
 
@@ -169,7 +169,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-025 | active | 3 |  | 1 | 6 |  | 3 | 13 |
 | agenda-026 | active | 1 | 2 | 2 | 4 |  | 5 | 14 |
 | agenda-027 | active | 1 | 3 | 3 | 2 |  | 2 | 11 |
-| agenda-028 | active | 1 |  | 2 | 2 |  | 4 | 9 |
+| agenda-028 | active |  | 1 | 2 | 2 |  | 5 | 10 |
 
 ## By program
 
@@ -285,9 +285,10 @@ Open frontier: `BC-243`, `BC-244`, `BC-246`, `BC-247`, `BC-248`, `BC-249`, `BC-2
 | agenda-028 | `BC-274` | tentative | What concrete implication could establish or obstruct the existential H121 normal form? |
 | agenda-028 | `BC-275` | complete | Which mathematical result per unit of attention warrants the next overnight allocation? |
 | agenda-028 | `BC-276` | complete | Can the closed negative short-slide sibling complete H120's signed short-slide source-feature… |
-| agenda-028 | `BC-277` | in_progress | What complete boundary-band domain fairly tests complement capacity for seven residual full squares… |
+| agenda-028 | `BC-277` | complete | What complete boundary-band domain fairly tests complement capacity for seven residual full squares… |
+| agenda-028 | `BC-278` | ready | Is the entire admitted boundary-band eleven-square child D0 empty, with its reflected upper child? |
 
-Open frontier: `BC-270`, `BC-271`, `BC-272`, `BC-274`, `BC-277`.
+Open frontier: `BC-270`, `BC-271`, `BC-272`, `BC-274`, `BC-278`.
 
 ### `n11-post-381-portfolio`
 

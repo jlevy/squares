@@ -262,7 +262,7 @@ session:
     objective: Design one complete boundary-band compatibility domain while publishing the accepted mathematical checkpoint and running full validation.
     commitment: BC-277
     bead: think-os9k
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: The signed-slide parent is closed and the central fence is a shared geometric lemma. The lower/upper-band parents are a concrete uncovered scope; their finite guarded target is not ready.
     budget_minutes: 30
@@ -272,10 +272,55 @@ session:
     validation_command: Independent mathematical admission review after the author freezes; record and push checks on the checkpoint, with the full gate on an immutable checkout.
     kill_condition: Fitted pose box, restating the desired capacity as a premise, target proof/search before a frozen protocol, hidden boundary loss, or the phase deadline.
     fallback: Preserve the exact design blocker and accepted central restriction; do not enlarge an unready target or build a generic comparator.
+    outcome: An eight-guard closed boundary family containing the exact lower fixture, with all failure siblings and joint upper reflection, is ready for admission review. No capacity claim was attempted. Mathematical checkpoint57b85302 passed31 records in22.25seconds and45 push steps in79.89seconds, including604 tests; it is pushed to PR110 and the full gate is active on its immutable checkout.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md
+    stop_reason: The domain author completed early at09:53:46; the full gate continues independently of mathematical phase boundaries.
+    next_action: Independently admit or refuse the unchanged boundary-band domain in the reserved15-minute review; no target before a separately frozen protocol.
+  - workflow: insight-iteration
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Independently review the boundary-band domain, complete reflected cover, surrogate semantics and controls before pricing a target.
+    commitment: BC-277
+    bead: think-os9k
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: The finite eight-guard domain is explicit and its author terminal; capacity is unproved and the independent admission check is now meaningful.
+    budget_minutes: 15
+    started_at: '2026-09-07T09:55:44Z'
+    deadline_at: '2026-09-07T10:10:44Z'
+    expected_output: Exact admission or failed domain/control implication; distinguish actual-square capacity from disk and octagon surrogate capacities.
+    validation_command: Independent exact reconstruction of guards, fixture membership, complete lower/upper parents and every boundary/symmetry case.
+    kill_condition: Circular capacity premise, narrowed fixture domain, incorrect relaxation direction, omitted reflection seam, new target proof or the review deadline.
+    fallback: Retain the exact domain gap and admit no target; continue the background full gate and preserve the10:31 checkpoint.
+    outcome: Independent admission accepts the unchanged eight guards, strict four-pose membership, full parent and closed cover, joint reflection and all relaxation directions. The equality sentence is qualified without changing any domain. No capacity attempt occurred.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md
+    stop_reason: The admission reader terminalized early at10:07:48; BC277 is complete.
+    next_action: Freeze BC278's prospective complete-domain protocol and passing records, then dispatch independent target workers with shortened actual leases.
+  - workflow: insight-iteration
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Freeze and attempt the complete admitted boundary-band extension question with independent author and adversary and a reserved subsequent audit.
+    commitment: BC-278
+    bead: think-dtr6
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Independent BC277 admission supplies a nontrivial uncovered child without a desired capacity premise; the central and signed-release targets are complete.
+    budget_minutes: 30
+    started_at: '2026-09-07T10:08:23Z'
+    deadline_at: '2026-09-07T10:38:23Z'
+    expected_output: Committed protocol and passing records before dispatch, then independent whole-domain argument or witness proposals, or precise partial scopes and missing implications.
+    validation_command: Frozen admission/protocol with record validation, then separate exact mathematical audit after both writers terminalize.
+    kill_condition: Work before protocol commit and records, altered domain or relaxation semantics, numerical target, omitted boundary, or actual worker and phase deadlines.
+    fallback: Preserve partial results and surrogate-only obstructions honestly; no narrowed retry or new engine. Reserve20 minutes for the independent audit and reprice the next premise in an efficiency block.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Dispatch the bounded domain author; keep all target work unadmitted until its separate protocol and independent scope acceptance.
+    next_action: Commit the accepted protocol, pass records, then record shortened author/adversary leases before dispatch; all target writers end by10:38:23.
   primary_bead: think-0yfe
   status: in_progress
   budget:
@@ -894,19 +939,19 @@ session:
     excluded_commands: [Target proof attempts or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
   - task: BC277 boundary-band domain and guard design
     operator: Codex capacity_protocol, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Design the complete finite lower-band target and reflected sibling before any new capacity proof attempt.
+    outcome: Eight explicit actual-pose guards define a bottom-attached alternating fence with strict lower-fixture membership, complete closed failure children and joint upper reflection; no capacity or pocket-diameter premise is assumed.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md]
+    checks: [Exact eight fixture margins, Flowmark and four links/whitespace/footer checks passed, No target proof or computation]
+    uncertainty: The complete domain and surrogate capacity directions still need independent admission; no numerical or analytical target has begun.
+    elapsed_seconds: 609
+    elapsed_quality: operator_reported_approximate
+    next_action: Reserved15-minute independent admission review, then a separate committed protocol before any capacity determination.
     phase: 10
     budget_minutes: 30
-    started_at: '2026-09-07T09:43:03Z'
+    started_at: '2026-09-07T09:43:37Z'
     deadline_at: '2026-09-07T10:13:03Z'
     expected_output: Exact nontrivial guarded domain containing the retained lower fixture, complete parent/failure cover, independent-angle/reflection semantics, controls and prospective capacity question.
     validation_command: Independent15-minute admission review after freeze, followed by a separate committed target protocol and record checks if admitted.
@@ -914,7 +959,32 @@ session:
     fallback: Retain the exact missing design premise; no new target begins.
     write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md]
     excluded_commands: [New target proof attempts or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC277 independent boundary-band admission review
+    operator: Codex direct_contracts, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Independent admission accepts all eight guards, exact strict fixture, compactness,55 SAT disjunctions, closed siblings, central remainder, joint reflection and square/disk/octagon directions. Equality overlap is correctly qualified as D0 intersect the guard equality.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md]
+    checks: [Independent exact reconstruction, Flowmark and links/anchor/whitespace/footer checks passed, No capacity target or numerical work]
+    uncertainty: Admission establishes no capacity result; the complete full-square question remains open.
+    elapsed_seconds: 685
+    elapsed_quality: operator_reported_approximate
+    next_action: BC278 protocol commit and record checks before target dispatch; the reader remains independent of both future target arguments.
+    phase: 11
+    budget_minutes: 15
+    started_at: '2026-09-07T09:56:23Z'
+    deadline_at: '2026-09-07T10:10:44Z'
+    expected_output: Independent admission or exact failed premise for the finite domain, parent cover, reflection, controls and relaxation semantics.
+    validation_command: Exact domain/fixture/symmetry reconstruction against the full eleven-square parent.
+    kill_condition: Missing guard/parent boundary, circular capacity premise, unproved relaxation direction, target work or deadline.
+    fallback: Preserve the precise admission blocker; no target is launched.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md]
+    excluded_commands: [New target proof attempts or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
   outputs:
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-protocol.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-author.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-adversary.md
@@ -934,6 +1004,7 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
   checks:
+  - Checkpoint57b85302 is pushed and PR110 updated with accepted N/S and capacity results, corrected costs and allocations throughBC277. All31 records passed in22.25seconds and all45 push steps in79.89seconds with604 tests; hosted required CI is green and mergeability clean at09:56UTC. The full gate is running on its immutable checkout with two jobs and one inner job.
   - Hosted validation on4ac71438 passed the code-test lanes but refused the old in-progress BC270 delegation after its09:08 deadline. The worker had finished09:03:24; its actual completed receipt is recorded here. Refresh leases before pushing delayed protocol commits; no timing guard is weakened.
   - Checkpoint4ac71438 passed all45 push checks in84.72seconds, including658 tests with3 deselected, and is pushed to PR110. The corrected live cost receipt through09:03:04 records24094.867agent-seconds over9111.298elapsed active seconds; the historical07:36:15 replay restores session membership and output tokens, with the explicit small retrospective timing revision retained in BC275.
   - BC276 protocol and accepted accounting correction are committed at4ac71438; all31 record checks passed in20.41seconds before any N target work.
@@ -953,7 +1024,7 @@ session:
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-092.yaml
   stop_reason: null
-  next_action: Publish the independently accepted N/S and parent-fence checkpoint with current completed leases and corrected costs. BC277's domain author ends10:13:03; reserve15 minutes for independent admission. Run the full gate on the immutable new checkpoint, preserve10:31 publication and14:31:12 block endpoint.
+  next_action: BC277 admission is complete. Commit BC278's unchanged whole-domain protocol and pass records before independent target dispatch; both writers end by10:38:23 and a20-minute fresh audit follows. The full gate continues on immutable57b85302. Preserve the10:31 evidence checkpoint and14:31:12 block endpoint.
 ---
 # Eight-Hour Hybrid and Release Investigation
 
@@ -1062,13 +1133,21 @@ No H120 LP adapter or numerical target is admitted.
 The rebuilt cost snapshot uses the independently accepted correction; BC275 retains the
 original live-receipt discrepancy and the qualified historical reconciliation.
 BC271’s completed assessment recommends a boundary-band design.
-The next sequential BC277, bead `think-os9k`, receives one 30-minute design followed by
-15 minutes of independent admission review under existing H118. It adds no hypothesis or
-experiment ID. Its author ends at 10:13:03 UTC; no new capacity target is admitted yet.
-The completed mathematical checkpoint is being published while this design proceeds.
-The full validation gate remains due on an immutable checkout, followed by current
-record checks at the final block boundary.
-Start it well before the 14:11 reserve.
+BC277, bead `think-os9k`, is complete: its eight-guard boundary domain and full
+reflection passed independent admission.
+The next sequential BC278, bead `think-dtr6`, owns the unchanged complete full-square
+target under H118, adding no hypothesis or experiment ID. Its prospective protocol and
+records must freeze before dispatch.
+Both target writers end by10:38:23, followed by a20-minute independent audit; all work
+in this determination ends before the protocol’s11:10 endpoint.
+Do not exchange the writers’ reasoning before both reports are terminal.
+Reprice the next premise in an efficiency block after audit.
+Checkpoint57b85302 is pushed with all required hosted CI green and clean mergeability.
+The full gate is actively running on that immutable checkout with two jobs and one inner
+job.
+Do not change its checkout while it runs; use the separate attic protocol-validation
+checkout for current records.
+Preserve current record checks at the final block boundary.
 Check the current phase and delegation deadlines above before continuing.
 After the final deadline, reconcile retained evidence and report the next request; start
 no further target under this block’s authorization.

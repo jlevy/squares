@@ -253,10 +253,13 @@ Repeated returns to two angles are not evidence for H-121.
 The planning allocation is **X-018, Agenda 028, H-118–121, BC-269–275**, owned by epic
 `think-pxv5`. The idea-board entries continue at 112–115. X-017 retains H-111–117 and
 BC-258–268; every PR105 allocation remains locked.
-Session092’s first checkpoint added the next sequential BC276 for the negative-slide
-sibling under existing H120. It allocated no new hypothesis or experiment ID. The live
-source continuation has already consumed session-091; future allocation must inspect
-live work again, rather than rely on an older next-ID pointer.
+Session092 added the next sequential BC276 for the negative-slide sibling under existing
+H120, then BC277 for boundary-band domain admission and BC278 for its conditional
+analytical determination under H118. These allocate no new hypothesis or experiment ID.
+Fresh local and source agenda inventory preceded each allocation; BC278 requires
+independent BC277 admission and a committed protocol with passing records before target
+work. Future allocation must inspect live work again, rather than rely on an older
+next-ID pointer.
 
 At planning, live inspection found the task **Squares plan X-016** executing its source
 continuation while Agenda 027’s broad pilots remained unlaunched.

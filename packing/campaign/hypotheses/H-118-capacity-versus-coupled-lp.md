@@ -86,7 +86,15 @@ requires the same nonlinear guards and applicable geometric deductions.
 A strong closure can already express the accepted regional capacity, making the central
 instance a shared-lemma or proof-cost comparison.
 No natural finite baseline and exact surviving point are frozen.
-BC277 therefore designs the uncovered boundary-band family next, before any new target.
+BC277’s
+[boundary-band design](../series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md)
+and
+[independent admission](../series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md)
+accept a compact eight-guard family, complete closed failure children and joint upper
+reflection. The strict four-pose fixture supplies no residual-capacity conclusion.
+BC278’s separately committed protocol prices one analytical determination of whether
+seven additional full squares fit anywhere in that unchanged family.
+Record checks precede dispatch; actual-square and surrogate outcomes remain distinct.
 H118 remains open, and the global bracket is unchanged.
 
 <!-- This document follows common-doc-guidelines.md.
