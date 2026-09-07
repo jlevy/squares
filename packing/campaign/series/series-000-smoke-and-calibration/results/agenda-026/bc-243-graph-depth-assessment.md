@@ -219,6 +219,90 @@ They do not establish H099 or remeasure the accepted original packing.
 Only after both succeed may a separate committed experiment fund the unchanged exp113
 candidate at its own original cap.
 
+## Separately Declared Session094 Controls
+
+This is a new sequence under `think-3q4b`, using reviewed engine `7daa7c55`. The stopped
+Session093 sequence and its empty stdout remain unchanged.
+The added half-weight and perturbed-source controls preserve all BC243 soundness
+obligations. No actual scientific source in this new sequence has been constructed.
+
+Commit this protocol, pass independent protocol review and record checks, and confirm
+the immutable engine push tier before launching.
+Work from the clean engine’s `packing/`. Begin by10:32 UTC and finish by10:38:06 UTC.
+Each process may run once only; any mismatch, incomplete result or operational failure
+stops every later row, without a retry, cap extension or candidate invocation.
+
+| Order | Named control and instrument | Required outcome | Producer / conditional reader cap |
+| --- | --- | --- | --- |
+| 1 | `toy-equal-v1`, graph | Complete independently verified bound, mass1 | 5 / 5 seconds |
+| 2 | `trump-original-control-v1`, graph | Complete independently verified bound, mass11 and eleven squares | 30 / 30 seconds |
+| 3 | `trump-perturbed-control-v1`, pair separator | Independently verified positive-area overweight witness | 30 / 30 seconds |
+| 4 | `trump-perturbed-control-v1`, graph | Valid overweight-clique receipt, independently replayed without a depth-one claim | 30 / 30 seconds |
+| 5 | `trump-uniform-control-v1`, graph | Complete independently verified bound, mass11 and sixty squares | 60 / 60 seconds |
+
+For each graph producer, use:
+
+```bash
+/usr/bin/time -p env PYTHONPATH=src \
+  /Users/levy/wrk/github/squares/packing/.venv/bin/python3 \
+  -m devtools.run_full_size_density_graph --control NAME \
+  --node-limit 10000 --timeout-seconds CAP
+```
+
+Substitute only the named row and cap from the table.
+An admitted graph reader uses the same arguments and adds `--input` with that row’s
+retained producer packet.
+Positive rows require actual producer exit zero, complete matching source and nested
+adapter `status=proved_graph_bound`. Only then may the conditional reader run.
+It must return actual exit zero, matching source, `status=verified_density_bound`,
+literal `bound_proved=true`, exact listed mass, independent containment and source
+binding, and complete geometric and clique-certificate replay.
+
+The negative graph row instead requires actual producer exit zero, matching source,
+adapter `status=unresolved`, and its nested graph certificate having both
+`status=overweight_clique` and `stop_reason=overweight_clique`. Node exhaustion does not
+pass this control. Its reader must exit zero, bind the same source and return
+`status=unresolved`, literal `bound_proved=false`, and mass11 after replaying the exact
+graph receipt. That is a nonacceptance check, not the geometric rejection proof.
+
+The pair producer uses:
+
+```bash
+/usr/bin/time -p env PYTHONPATH=src \
+  /Users/levy/wrk/github/squares/packing/.venv/bin/python3 \
+  -m devtools.run_full_size_density_pair_separator \
+  --control trump-perturbed-control-v1 --timeout-seconds 30
+```
+
+Only actual exit zero, the complete matching source signature and a non-null strict
+witness permit its one reader invocation:
+
+```bash
+/usr/bin/time -p env PYTHONPATH=src \
+  /Users/levy/wrk/github/squares/packing/.venv/bin/python3 \
+  -m devtools.check_full_size_density_pair_separator \
+  /absolute/path/to/perturbed-pair/packet.json --timeout-seconds 30
+```
+
+The reader must exit zero with `verdict=candidate-refuted`, which refers only to this
+named perturbed control.
+Its complete source binding and strict positive-area neighborhood checks provide the
+required geometric rejection.
+They say nothing about H099’s unchanged candidate.
+A missing witness, no-pair result or graph-only obstruction does not pass this row.
+
+Retain separate `half-weight/`, `original/`, `perturbed-pair/`, `perturbed-graph/` and
+`uniform/` directories under `results/agenda-026/graph-source-controls-session094/`. For
+each invocation retain `packet.json` and `producer.log`, then conditional `replay.json`
+and `replay.log`, with actual exit and external wall/user/system timing.
+Do not create reader receipts for uninvoked processes or overwrite earlier results.
+The total declared process allowance is310 seconds, not a completion guarantee.
+
+All five rows must pass before the unchanged exp113 candidate is even eligible for a
+separate prospective experiment.
+No candidate is allocated by this protocol.
+The H099 bracket and the packing bound remain unchanged during source controls.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -41,7 +41,7 @@ session:
     clock_role: work
     objective: Complete independent source and negative-control reviews and freeze ready scientific protocols.
     bead: think-63oj
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Both source authors and the bounded caller have frozen; the new negative control preserves rather than substitutes for geometric rejection.
     budget_minutes: 30
@@ -51,10 +51,31 @@ session:
     validation_command: Focused source-free tests and independent review, immutable push and records gates before science.
     kill_condition: Original review caps, source mismatch or a failed readiness gate prohibit invocation.
     fallback: Retain the precise missing premise and no scientific target; do not extend caps or resume old sequences.
+    outcome: Independent source and caller reviews passed; frozen engine7daa7c55 passes push45/45 in153.55 seconds. H124 protocol review passed10:23:18 after restricting unresolved continuation to three scientific stop reasons. Density protocol review remains separately conditional.
+    evidence: [packing/devtools/run_h124_cover.py, packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md]
+    stop_reason: H124 is ready for prospective record admission; the density sequence still needs its own review verdict.
+    next_action: Commit and validate the prospective protocols before any source invocation.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Test the complete H124 sufficient cover and, only if independently admitted, the separate density source controls.
+    commitment: BC-255
+    bead: think-drj8
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Independent mathematical source and H124 protocol reviews passed with explicit complete-process stop rules.
+    budget_minutes: 12
+    started_at: '2026-09-07T10:27:00Z'
+    deadline_at: '2026-09-07T10:38:06Z'
+    expected_output: Once-only retained producer and conditional reader receipts, or explicit non-invocation if launch prerequisites miss10:32 UTC.
+    validation_command: Frozen engine7daa7c55 CLI commands and exact independent acceptance predicates in exp125 and the separately declared graph protocol.
+    kill_condition: Launch cutoff10:32 UTC, completion cutoff10:38:06 UTC, or any protocol-specific stop. No retries or cap extension.
+    fallback: Retain partial evidence and the exact unresolved premise; do not substitute sampled targets.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Finish independent reviews and record each scientific admission explicitly.
+    next_action: Pass committed prospective records, then invoke each admitted lane at most as declared.
   primary_bead: think-63oj
   status: in_progress
   budget:
@@ -278,6 +299,9 @@ session:
   - packing/devtools/run_h124_cover.py
   - packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md
   checks:
+  - H124 protocol review think-y146 passed after the stop-rule clarification, actual10:19:21–10:23:18 UTC (237 seconds), within original10:24 cap; no science or tests ran.
+  - Density protocol review think-ptb9 has no full GO. The bead declared5 minutes from10:21, but dispatch occurred10:25:40 and actual review began10:26:01; root corrected its later dispatch deadline to original10:26. Review stopped on that correction; negative graph predicates and prerequisites remain unchecked. No scientific invocation is admitted in this lane.
+  - Immutable engine7daa7c55 push passed45/45 in153.55 seconds; external156.67 wall,208.28 user,26.03 system. Full gate remains running. Engine pushed to integrated PR109 before scientific admission.
   - Readiness records pass31/31 in21.16 seconds before the source-engine freeze; full checkpoint evidence and later push validation remain separate.
   - Independent perturbed-source review think-p8dk passed10:09:30 UTC, actual10:04:15–10:09:30 (315 seconds), before10:13:43 cap.26 source-free controls pass1.60 seconds wall/1.49 CPU. Exact containment and positive-area overlap are proved symbolically; actual source-control acceptance remains untested.
   - Both H124 source modules, capped caller and new density controls pass94 combined source-free tests in1.60 seconds. No scientific constructor was invoked.
