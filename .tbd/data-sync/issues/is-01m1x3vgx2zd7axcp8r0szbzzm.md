@@ -5,7 +5,7 @@ title: Defer H107 and prioritize structural mathematical progress in the next bl
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels: []
 dependencies: []
@@ -15,5 +15,9 @@ child_order_hints:
   - is-01m1x3w5qsy1msvzjh5jpaa0zv
   - is-01m1x3w62rmcxf8rca6j1mtp43
 created_at: 2026-09-07T05:01:03.265Z
-updated_at: 2026-09-07T05:01:24.950Z
+updated_at: 2026-09-07T05:09:13.785Z
 ---
+
+## Notes
+
+Checklist: independent scalar/angle/density assessments complete; revise Agenda024 allocation and existing handoff consumers; pause H107 later-session bead and update monitor; render and validate changed records; review uncommitted diff; commit/push on PR105 and update description. W10 routine re-screen only, no new experiment or scientific target.
