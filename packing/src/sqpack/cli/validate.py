@@ -2769,7 +2769,7 @@ STEPS: tuple[Step, ...] = (
         _exact_verification,
         fast=True,
         # PR110 run34154326299: a 42s launch delay leaves a 41s exact-only tail.
-        # VE-003 measures starting it sooner without extending any timeout.
+        # VE-004 measures starting it sooner after VE-003's retained setup failure.
         start_early=True,
         touches=(
             *_CORE,

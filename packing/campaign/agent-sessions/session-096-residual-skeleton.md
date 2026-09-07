@@ -419,6 +419,15 @@ rule and original failure. Both arms freeze the same repaired records before tim
 The scheduler review at 19:39:58–19:41:04 found no blocker; the recovery disposition
 review at 19:47:34–19:48:12 confirmed this treatment of the failed setup.
 
+VE-004 accepts a local checks-tier improvement after three passing pairs: median wall
+time fell from 93.18 to 71.84 seconds (22.9%), with nonoverlapping ranges and all 48
+checks retained. The corrected control is `1dfdb8fb`; the measured candidate is
+`ed595fb6`. The 19:51:51–19:52:40 complexity review and 20:01:24–20:02:42 independent
+evidence admission support that restricted conclusion. Native receipts, raw output,
+JUnit and the original failed setup are retained in the engineering campaign.
+No mathematical verifier, runtime threshold or worker count changed. Full-checkpoint
+and hosted-CI outcomes remain separate obligations, not inferred speedups.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
