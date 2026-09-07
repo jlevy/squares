@@ -1,14 +1,14 @@
-"""The three rules that decide which faces the explainer ships, and at what cost.
+"""The four rules that decide which faces the explainer ships, and at what cost.
 
 `tests/test_explainer.py` renders the page and asserts that nothing in it is a
 reference outside it. That is the property, and it is the wrong instrument for these
-three seams: a page that inlines every face in the distribution passes it, and so does
+four seams: a page that inlines every face in the distribution passes it, and so does
 a page that drops the half of a composite slot the other half depends on. The first
 costs 40 KB a face; the second is worse than either alternative, because the reading
 face's metric tables would still be installed and KaTeX would lay out digits it is not
 drawing -- the exact mismatch the math text face exists to prevent.
 
-So the three are exercised directly, on inputs small enough to read:
+So the four are exercised directly, on inputs small enough to read:
 
 - `inline_font_urls` over the four `url()` shapes the distribution actually carries,
   and over the two refusals it owes a build: a face that names a file that is not
@@ -19,15 +19,22 @@ So the three are exercised directly, on inputs small enough to read:
   is the partner this page cannot reach.
 - `katex_js`'s ordering guard, which is what keeps kpress's metric tables from being
   loaded before the bundle they patch.
+- `_print_sans_face`, the prune that keeps kpress's static print instances out of the
+  page. They are at kpress's weight tokens and this page prints at its own, so they
+  would answer nothing while costing 20 KB of base64 a face in every copy served; the
+  PDF pass injects this page's own set into the loaded document instead.
 
-Nothing here reads a real font: `tmp_path` holds two stand-in files of a few bytes, and
-the whole file runs in milliseconds, so it belongs in the quick lane and carries no
-marker.
+One test does read the real static tree, and it is the one that has to: that registering
+`print-fonts.css` upstream leaves the rendered page byte for byte where it was. Nothing
+else here reads a real font -- `tmp_path` holds two stand-in files of a few bytes -- and
+the whole file still runs in well under a second, so it belongs in the quick lane and
+carries no marker.
 """
 
-# `_font_face_reachable` is the prune, and it is private because nothing outside the
-# renderer should decide what a page ships. Testing it directly rather than through
-# `katex_css` is what keeps this file off the real static tree, and off a 1.4 MB page.
+# `_font_face_reachable` and `_print_sans_face` are the prunes, and they are private
+# because nothing outside the renderer should decide what a page ships. Testing them
+# directly rather than through `katex_css` is what keeps all but one test here off the
+# real static tree, and every one of them off a 1.4 MB page.
 # pyright: reportPrivateUsage=false
 from __future__ import annotations
 
@@ -38,10 +45,17 @@ import pytest
 from kpress.format import assets as kpress_assets
 
 from devtools.render_explainer import (
+    _declares_nothing,
     _font_face_reachable,
+    _print_sans_face,
     inline_font_urls,
     katex_js,
+    kpress_css,
+    kpress_static,
 )
+
+#: kpress's generated print-face stylesheet, registered in `DEFAULT_CSS_ASSETS`.
+PRINT_FONTS = "css/print-fonts.css"
 
 #: Stand-ins for the two faces the shapes below reference. Any bytes will do: the
 #: rewrite reads a file and base64s it, and nothing in this file parses a font.
@@ -254,3 +268,83 @@ def test_the_metric_tables_must_follow_the_bundle_they_patch(
     monkeypatch.setattr(kpress_assets, "KATEX_JS_ASSETS", listed)
     with pytest.raises(SystemExit, match=complaint):
         katex_js(tmp_path)
+
+
+def _sans_face(family: str, weight: int) -> str:
+    """One of kpress's generated print instances, in the shape its generator writes."""
+    return (
+        f'  @font-face {{\n    font-family: "{family}";\n    font-style: normal;\n'
+        f"    font-display: block;\n    font-weight: {weight};\n"
+        f'    src: url("../fonts/source-sans-3-latin-{weight}-normal.woff2") format("woff2");\n'
+        "  }\n"
+    )
+
+
+#: The prune, in both directions. Only the static print family goes: it is the one this
+#: page overrides. `Source Sans 3 Variable` is a different family and a different string,
+#: and the page's screen face; the rest are what the document is set in.
+PRINT_SANS_CASES: list[tuple[str, str, bool]] = [
+    ("the static print instance", _sans_face("Source Sans 3", 550), True),
+    ("the variable face the screen uses", _sans_face("Source Sans 3 Variable", 400), False),
+    ("the reading face", _kpress_block("../fonts/pt-serif-latin-400-normal.woff2"), False),
+    ("the composite", _composite_block("../katex/fonts/KaTeX_Main-Regular.woff2"), False),
+    ("a KaTeX face", _katex_block("fonts/KaTeX_Main-Regular.woff2"), False),
+]
+
+
+@pytest.mark.parametrize(
+    ("block", "dropped"),
+    [pytest.param(block, dropped, id=name) for name, block, dropped in PRINT_SANS_CASES],
+)
+def test_only_kpress_own_print_instances_are_pruned(block: str, *, dropped: bool) -> None:
+    """Judged on the family alone, so the rule survives kpress reshaping the stylesheet.
+
+    The near miss is the one that matters: `"Source Sans 3 Variable"` starts with the
+    same eleven characters and is the face the screen reads in. Dropping it would leave
+    the page with no sans at all.
+    """
+    assert _print_sans_face(block) is dropped
+
+
+#: What a stylesheet is once its faces are gone, and what is not empty. The `@media`
+#: wrapper is kpress's: the instances are declared inside one so a screen never fetches
+#: them, and pruning the faces out of it leaves the wrapper behind.
+EMPTINESS_CASES: list[tuple[str, str, bool]] = [
+    ("a comment and an emptied media block", "/* generated */\n\n@media print {\n}\n", True),
+    ("nested empty blocks", "@media print {\n  @supports (x: y) {\n  }\n}\n", True),
+    ("whitespace", "\n\n  \n", True),
+    ("one real rule left in the block", "@media print {\n  body { margin: 0 }\n}\n", False),
+    ("a rule outside any block", "/* c */\n:root { --x: 1 }\n", False),
+]
+
+
+@pytest.mark.parametrize(
+    ("css", "empty"),
+    [pytest.param(css, empty, id=name) for name, css, empty in EMPTINESS_CASES],
+)
+def test_a_stylesheet_with_nothing_left_in_it_does_not_enter_the_page(
+    css: str, *, empty: bool
+) -> None:
+    """Not even as its own comment marker, which is what keeps the page's bytes still."""
+    assert _declares_nothing(css) is empty
+
+
+def test_registering_the_print_faces_upstream_does_not_move_the_page(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """kpress's print stylesheet arrives, and the served page is byte for byte where it was.
+
+    The one test here that reads the real static tree, because the claim is about that
+    tree: twelve faces at kpress's weights, about 250 KB of base64, land in
+    `DEFAULT_CSS_ASSETS` and none of it reaches a reader. The PDF pass supplies this
+    page's own instances at this page's weights, to the loaded document only.
+    """
+    static = kpress_static()
+    if not (static / PRINT_FONTS).is_file():
+        pytest.skip(f"kpress ships no {PRINT_FONTS} at this gitlink")
+    listed = [name for name in kpress_assets.DEFAULT_CSS_ASSETS if name != PRINT_FONTS]
+    monkeypatch.setattr(kpress_assets, "DEFAULT_CSS_ASSETS", listed)
+    without = kpress_css(static)
+    monkeypatch.setattr(kpress_assets, "DEFAULT_CSS_ASSETS", [*listed, PRINT_FONTS])
+    assert kpress_css(static) == without
+    assert 'font-family: "Source Sans 3 Variable"' in without

@@ -509,6 +509,57 @@ def inline_font_urls(css: str, stylesheet_dir: Path) -> str:
     return inlined
 
 
+#: The family kpress declares its static print instances under, in
+#: `css/print-fonts.css`. Quoted, and compared whole: `"Source Sans 3 Variable"` is a
+#: different family and a different string, which is what lets one equality separate
+#: the screen's variable face from the print instances that stand in for it.
+PRINT_SANS_FAMILY = '"Source Sans 3"'
+
+#: A `@font-face` block's family, in either of the two shapes kpress and KaTeX write.
+FONT_FACE_FAMILY = re.compile(r"font-family:\s*(\"[^\"]+\"|[^;]+);")
+
+#: An at-rule whose body is empty, which is what a `@media print` block is once its
+#: faces have been pruned out of it, and a CSS comment.
+_EMPTY_AT_RULE = re.compile(r"@[a-zA-Z-]+[^{}]*\{\s*\}")
+_CSS_COMMENT = re.compile(r"/\*.*?\*/", re.DOTALL)
+
+
+def _print_sans_face(block: str) -> bool:
+    """Whether a `@font-face` block is one of kpress's static print instances.
+
+    Those exist so a printed page embeds a font rather than drawing outline paths, and
+    they are at kpress's own weight tokens. This page prints at its own -- 410, 550,
+    600 and 680, declared and checked in `devtools.sans_instances` -- so kpress's set
+    would answer none of its requests while costing 20 KB of base64 a face in every
+    copy of the page ever served. `render_explainer_pdf` injects this page's own set
+    into the loaded document instead, at the moment it prints it, which is why nothing
+    about the served page or the screen changes.
+
+    Judged on the family alone, so it holds however kpress reshapes the stylesheet:
+    what must not reach the page is the family, wherever it is declared. PT Serif,
+    LocalPunct, `Source Sans 3 Variable`, the KaTeX faces and `KPress Math Text` all
+    name something else and are untouched.
+    """
+    family = FONT_FACE_FAMILY.search(block)
+    return family is not None and family.group(1).strip() == PRINT_SANS_FAMILY
+
+
+def _declares_nothing(css: str) -> bool:
+    """Whether a stylesheet still declares anything, once comments and empty rules go.
+
+    `print-fonts.css` pruned of its faces is a comment and an `@media print` block with
+    nothing in it. Neither draws anything, and emitting them would move the page's
+    bytes for a file that contributes nothing to it. Nested empty rules are stripped
+    until nothing more comes out, so an empty block inside an empty block goes too.
+    """
+    stripped = _CSS_COMMENT.sub("", css)
+    while True:
+        smaller = _EMPTY_AT_RULE.sub("", stripped)
+        if smaller == stripped:
+            return not stripped.strip()
+        stripped = smaller
+
+
 def kpress_css(static: Path) -> str:
     """The kpress design system as one stylesheet, its webfonts inlined.
 
@@ -522,10 +573,19 @@ def kpress_css(static: Path) -> str:
     parts = []
     for name in (PAGE_RESET, *DEFAULT_CSS_ASSETS):
         css = (static / name).read_text(encoding="utf-8")
+        pruned = FONT_FACE_BLOCK.sub(
+            lambda match: "" if _print_sans_face(match.group(0)) else match.group(0), css
+        )
+        # A stylesheet the prune empties carries nothing into the page, so it does not
+        # enter it at all, not even as its own comment marker. That is what makes the
+        # rendered page's bytes the same before and after kpress registers
+        # `print-fonts.css`: the file arrives, and the page does not move.
+        if _declares_nothing(pruned):
+            continue
         parts.append(f"/* kpress: {name} */")
         # Each stylesheet resolves its own references, from its own directory, so
         # a kpress stylesheet added outside `css/` would still find its faces.
-        parts.append(inline_font_urls(css, (static / name).parent))
+        parts.append(inline_font_urls(pruned, (static / name).parent))
     return "\n".join(parts)
 
 
@@ -745,7 +805,7 @@ def _font_face_reachable(block: str) -> bool:
     ref = re.search(r"(KaTeX_[A-Za-z0-9-]+)\.woff2", block)
     if ref is not None:
         return ref.group(1) in KATEX_FACES
-    family = re.search(r"font-family:\s*(\"[^\"]+\"|[^;]+);", block)
+    family = FONT_FACE_FAMILY.search(block)
     if family is None or family.group(1) != '"KPress Math Text"':
         raise SystemExit(
             f"a KaTeX stylesheet declares a face this renderer does not know how to prune: "

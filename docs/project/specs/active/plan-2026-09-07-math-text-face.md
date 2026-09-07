@@ -128,14 +128,55 @@ The measurement scripts from the research become one devtool with three commands
   research compared; `shots` takes Playwright element screenshots of named paragraphs
   and display blocks in each variant and stacks them into montages.
   fontTools in the dev group, pinned past the 14-day cool-off.
-- Validation: `render_explainer --check`, `render_explainer_pdf --check`,
-  `check_print_layout`, `inspect_explainer_typography --check-supporting`; the Pages
-  workflow already checks out the submodule and installs the headless shell, so it needs
-  no change.
+- Validation: `render_explainer --check`, `sans_instances --check`,
+  `render_explainer_pdf --check`, `check_print_layout`,
+  `inspect_explainer_typography --check-supporting`; the Pages workflow already checks
+  out the submodule and installs the headless shell, so it needs no change.
+  None of these are `packing-validate` tiers: the explainer is built and checked in
+  `.github/workflows/pages.yml`, which is where `sans_instances --check` belongs too,
+  after the browser is installed and before the PDF is drawn, since it needs both the
+  rendered page and a browser.
+
+### Print sans embedding
+
+The page’s sans came out of the PDF as Type3 outline paths.
+Chromium embeds a variable font only at its default position, and this page prints
+Source Sans 3 at 410, 550, 600 and 680; Preview smooths embedded text and leaves outline
+paths alone, so the captions, footnotes, hero and footer read a step lighter than the
+serif and the mathematics beside them.
+
+The fix is static instances at those four weights in both styles.
+kpress’s `devtools/instance_sans.py` generates them; `devtools/sans_instances.py` writes
+them to `packing/devtools/templates/fonts/` and hands them to `render_explainer_pdf`,
+which injects them into the loaded document as one `@media print` block of data-URI
+`@font-face` rules immediately before it prints.
+The served page never sees them, so the screen keeps the variable font and
+`site/index.html` does not gain a byte.
+`render_explainer`’s inliner is what holds that: it drops every `@font-face` for the
+`Source Sans 3` family out of kpress’s stylesheets, and skips a stylesheet the prune
+empties, so registering `print-fonts.css` upstream left the rendered page byte for byte
+where it was.
+
+Two checks hold the rest.
+`sans_instances --check` regenerates the instances in memory and compares them byte for
+byte, then probes the rendered page under `media: print` and fails on any weight and
+style the declared set does not answer, naming the element that asks for it.
+`render_explainer_pdf --check` scans the exported bytes for font dictionaries and fails
+if a face the page ships is a Type3 font, or if it can see no font dictionary at all.
+It does not fail on the host’s own fonts: three characters in the sans line are in no
+face the document carries, so the reader’s machine draws them, and on macOS that machine
+font is variable too.
+Those are reported rather than refused, because failing on them would pass on Linux and
+fail on a Mac for a glyph nobody here chose.
 
 ### API Changes
 
 - `python -m devtools.compare_math_fonts {metrics,variants,shots}`.
+- `python -m devtools.sans_instances` writes the instances, `--check` verifies them and
+  probes the page; `print_face_css()` is what `render_explainer_pdf` injects, and
+  `PRINT_FACES` is the declared set.
+- `python -m devtools.render_explainer_pdf --fonts` lists what the export embedded and
+  what it drew as outlines.
 - `inline_font_urls(css, stylesheet_dir)`: the second argument is the directory the
   stylesheet is served from, where it was the fonts directory; every relative woff2
   `url()` resolves against it.
@@ -165,6 +206,44 @@ One phase; the kpress feature landed first.
 
 The page picks the feature up on the gitlink bump and its next Pages deploy.
 
+## Font Consistency
+
+The owner’s rule (2026-09-07): the explainer resolves every text run to a face the page
+ships, on screen and in the PDF. The one exception is the 100-best atlas figure, whose
+Helvetica is baked in by its own pipeline (`build_known_best_atlas.py`) and stays.
+Measuring the PDF for the math text face showed where the rule was not yet met, and what
+the fonts cost:
+
+| Measured 2026-09-07 | Web page (1,418 KB) | PDF (946 KB) |
+| --- | ---: | ---: |
+| PT Serif | 164 KB, four faces | 92 KB, embedded subsets |
+| KaTeX faces | 181 KB, eight faces | 25 KB, four embedded subsets |
+| KPress Math Text composite | 216 KB, six faces, all duplicate bytes | none (draws the faces above) |
+| Source Sans 3 | 75 KB, two variable faces | 345 KB as Type3 outline paths |
+| Inline code | system mono | Menlo, 56 KB, 134 characters |
+| List bullets | system serif | Georgia, 16 KB, 48 bullets |
+| Atlas figure | Helvetica by design | 54 KB, accepted |
+
+The PDF column is the kpress side of the same measurement, recorded in kpress’s plan and
+research note. With the print sans faces the PDF is 794 KB.
+
+Tracked under epic `think-phgo`, with the kpress work under `kpr-b4mq`:
+
+- `think-988s`, this branch: the page’s own Source Sans 3 instances injected at PDF time
+  (the section above).
+- `think-xd7t`: the font provenance guard.
+  `render_explainer_pdf --check` gains an allow-list of the shipped families, with
+  Helvetica as the atlas’s documented exception, and `inspect_explainer_typography` the
+  on-screen equivalent.
+  The three relation glyphs the page still takes from the reader’s machine (`≥`, `≈`,
+  `→` in the hero and `.rel`) move to a shipped face.
+- `think-f8q9`: subset the eight inlined KaTeX faces to the glyphs the page’s
+  mathematics uses, after kpress ships the composite’s own subsets (`kpr-hhdc`, which
+  recovers most of the 216 KB).
+- `think-9r58`: adopt kpress’s mono face (`kpr-v731`, Source Code Pro until `kpr-aq8o`
+  decides the final face), its CSS-drawn list marker (`kpr-2tmj`) and PT Serif quotation
+  marks (`kpr-asj4`); then the shell’s print-only prose override goes.
+
 ## Open Questions
 
 - Whether captions and panels keep the math text face or revert to the KaTeX faces (see
@@ -177,6 +256,7 @@ The page picks the feature up on the gitlink bump and its next Pages deploy.
   kpress.
 - [`render_explainer.py`](../../../../packing/devtools/render_explainer.py),
   [`render_explainer_pdf.py`](../../../../packing/devtools/render_explainer_pdf.py),
+  [`sans_instances.py`](../../../../packing/devtools/sans_instances.py),
   [`check_print_layout.py`](../../../../packing/devtools/check_print_layout.py),
   [`inspect_explainer_typography.py`](../../../../packing/devtools/inspect_explainer_typography.py).
 

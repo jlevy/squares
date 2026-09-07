@@ -131,6 +131,9 @@ jobs:
       # After the page, not beside it: the exporter loads `site/index.html` from disk,
       # and Figure 1 references the composite that the render copies into `site/` on its
       # way out.
+      - name: Check the print faces cover every sans weight the page requests
+        run: uv run --frozen --group dev python -m devtools.sans_instances --check
+
       - name: Draw the PDF of the page
         run: uv run --frozen --group dev python -m devtools.render_explainer_pdf --update
 

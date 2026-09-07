@@ -87,6 +87,19 @@ _ABSOLUTE_LINKS = """(site) => {
 }"""
 
 
+#: The added faces, settled. `document.fonts.ready` had already resolved once, on a
+#: document these faces were not in; a set that has not begun loading them reports
+#: itself ready again straight away. Layout is forced and two frames are let through
+#: first, so the faces the new rules bring into use are loading before the wait, which
+#: is the same device `check_print_layout` uses after it switches media.
+_FACES_APPLIED = """() => new Promise((done) => {
+  void document.documentElement.offsetHeight;
+  requestAnimationFrame(() => requestAnimationFrame(
+    () => { document.fonts.ready.then(() => done(document.fonts.status)); },
+  ));
+})"""
+
+
 def _normalised(pdf: bytes) -> bytes:
     """The document without its clock, for comparing one render against another."""
     return _DATES.sub(rb"/\1 (D:00000000000000+00'00')", pdf)
@@ -107,8 +120,19 @@ def render_pdf_bytes() -> bytes:
     at 5.5% more bytes for bit-identical layout. `outline` is a no-op without it --
     Chromium builds the bookmarks from the accessibility tree -- so the two are set
     together or not at all.
+
+    The last thing added to the page is a block of `@font-face` rules carrying static
+    Source Sans 3 instances at the weights this page prints in. Chromium embeds a
+    variable font only at its default position, so without them every sans glyph is a
+    Type3 outline path, which viewers that smooth embedded text leave alone; the sans
+    then reads a step lighter than the serif and the mathematics beside it.
+    `devtools.sans_instances` is where the set is declared and checked, and injecting
+    the faces here rather than rendering them into the page is what keeps the served
+    `index.html` and the screen on the variable font.
     """
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
+
+    from devtools.sans_instances import print_face_css  # noqa: PLC0415
 
     with sync_playwright() as driver:
         # The default launch is the headless shell, and it stays the default on purpose:
@@ -122,6 +146,8 @@ def render_pdf_bytes() -> bytes:
             page.wait_for_selector(READY, timeout=60_000)
             page.evaluate("document.fonts.ready")
             page.evaluate(_ABSOLUTE_LINKS, SITE_URL)
+            page.add_style_tag(content=print_face_css())
+            page.evaluate(_FACES_APPLIED)
             return page.pdf(
                 print_background=True,
                 prefer_css_page_size=True,
@@ -130,6 +156,116 @@ def render_pdf_bytes() -> bytes:
             )
         finally:
             browser.close()
+
+
+#: Font dictionaries, read out of the file with a byte scan rather than a PDF parser.
+#: That works because Chromium's Skia writer emits them uncompressed: it puts the page
+#: content and the structure tree in streams, and leaves the font, descriptor and
+#: encoding dictionaries as plain objects. So the scan needs no dependency, and the
+#: cost of that shortcut is stated in `font_findings`: if the writer ever compresses
+#: them the scan sees nothing at all, which is a failure rather than a pass.
+_TYPE0 = re.compile(rb"/Subtype\s*/Type0\b")
+_TYPE3 = re.compile(rb"/Subtype\s*/Type3\b")
+_BASE_FONT = re.compile(rb"/BaseFont\s*/([^\s/<>\[\]()]+)")
+_DESCRIPTOR_REF = re.compile(rb"/FontDescriptor\s+(\d+)\s+0\s+R")
+_FONT_NAME = re.compile(rb"/FontName\s*/([^\s/<>\[\]()]+)")
+
+#: The faces this page carries, by the PostScript name Chromium writes them under, with
+#: the subset tag off. These are the ones the project answers for: it chose them, it
+#: ships them inside the document, and if one of them is drawn as outline paths that is
+#: a defect here. Prefixes, because an instanced or subsetted face is named from its
+#: family with the axis or the style appended.
+OWNED_FACES = ("PTSerif", "SourceSans3", "KaTeX_", "LocalPunct", "KPressMathText")
+
+#: What a Type3 font is called when its descriptor cannot be read. Counted as ours: an
+#: outline font this scan cannot attribute is not one to wave through.
+UNNAMED = "unnamed"
+
+
+def embedded_fonts(pdf: bytes) -> list[str]:
+    """Every font the file names, by its `/BaseFont`, deduplicated and sorted.
+
+    The six-character subset tag Chromium prefixes (`ABCDEF+PTSerif-Regular`) is kept:
+    it is what distinguishes two subsets of one face, and dropping it would report one
+    font where the file carries two.
+    """
+    seen = dict.fromkeys(name.decode("latin-1") for name in _BASE_FONT.findall(pdf))
+    return sorted(seen)
+
+
+def _indirect(pdf: bytes, number: int) -> bytes:
+    """The body of one numbered object. Enough for the small dictionaries read here."""
+    match = re.search(rb"(?m)^%d 0 obj\b" % number, pdf)
+    if match is None:
+        return b""
+    end = pdf.find(b"endobj", match.end())
+    return pdf[match.end() : end if end != -1 else len(pdf)]
+
+
+def outline_fonts(pdf: bytes) -> list[str]:
+    """The face behind every Type3 font in the file, in the order the file lists them.
+
+    A Type3 font carries no `/BaseFont`; what it has is a `/FontDescriptor`, and the
+    descriptor's `/FontName` is the face Chromium laid the run out in before it gave up
+    on embedding it. The reference is resolved rather than assumed adjacent, and the
+    Type3 dictionary is read only as far as its own `endobj`, so a second font later in
+    the file cannot be mistaken for this one's descriptor.
+    """
+    found: list[str] = []
+    for match in _TYPE3.finditer(pdf):
+        end = pdf.find(b"endobj", match.end())
+        body = pdf[match.end() : end if end != -1 else len(pdf)]
+        ref = _DESCRIPTOR_REF.search(body)
+        name = _FONT_NAME.search(_indirect(pdf, int(ref.group(1)))) if ref else None
+        found.append(name.group(1).decode("latin-1").split("+")[-1] if name else UNNAMED)
+    return found
+
+
+def font_findings(pdf: bytes) -> list[str]:
+    """Whether the faces this document ships are set in fonts, or drawn as paths.
+
+    A Type3 font is not a font: it is a dictionary of drawing procedures, one per
+    glyph, and Chromium writes one whenever it cannot embed the face a run was laid out
+    in -- which for a variable font is any position but its default. The outlines carry
+    the right weight, so nothing looks broken until the file is read in a viewer that
+    smooths embedded text and leaves paths alone. Preview does, and the sans came out a
+    step lighter than the serif beside it. `devtools.sans_instances` is the fix; this is
+    the guard that says whether it took.
+
+    Scoped to `OWNED_FACES` rather than to every Type3 font, and that limit is the
+    honest one. Three characters on this page -- the relations and the arrow in the sans
+    line -- are in no face the document carries, so the browser draws them from the
+    host's own sans, and on macOS that is a variable font too. Failing on those would
+    make the check pass on Linux and fail on a Mac for a glyph nobody here chose, which
+    is the check-that-can-never-pass this module's own header warns about. They are
+    reported instead, by `check`, so a fallback that grew is visible.
+
+    Seeing no font dictionary of either kind is a failure and not a clean file. The
+    scan reads the bytes directly, so a writer that started compressing them would
+    report a document with no Type3 fonts in it and no fonts at all, and that reading
+    has to be louder than a pass.
+    """
+    outlined = outline_fonts(pdf)
+    if not _TYPE0.search(pdf) and not outlined:
+        return [
+            (
+                "cannot see font dictionaries; the writer changed. The scan reads "
+                "`/Subtype /Type0` and `/Subtype /Type3` out of the uncompressed "
+                "objects Chromium writes, and this file has neither."
+            )
+        ]
+    ours = sorted({n for n in outlined if n == UNNAMED or n.startswith(OWNED_FACES)})
+    if ours:
+        return [
+            (
+                f"{len(ours)} of the faces this page ships are drawn as Type3 outline "
+                f"paths rather than embedded: {', '.join(ours)}. A viewer that smooths "
+                "embedded text leaves them thin. Check that `sans_instances` has "
+                "written the instances the page asks for and that the print stack "
+                "names them."
+            )
+        ]
+    return []
 
 
 def _with_receipt(pdf: bytes, source: bytes) -> bytes:
@@ -159,6 +295,10 @@ def check() -> None:
     not applied, an animation still running, anything that makes the page draw
     differently twice. Those are the defects that produced a 440 KB spread before the
     waiting was right.
+
+    The second question is about one render rather than about two, and no amount of
+    self-agreement would answer it: whether the glyphs are set in fonts. A page that
+    draws its sans as outline paths draws it that way every time.
     """
     first = _normalised(render_pdf_bytes())
     second = _normalised(render_pdf_bytes())
@@ -168,8 +308,30 @@ def check() -> None:
             "bytes, normalised. The page draws differently twice, which means something "
             "it draws is not finished when it is captured."
         )
+    findings = font_findings(first)
+    if findings:
+        raise SystemExit("\n".join(findings))
     pages = first.count(b"/Type /Page\n") or first.count(b"/Type/Page")
-    print(f"explainer PDF check passed: two renders agree, {len(first)} bytes, {pages} pages")
+    embedded = embedded_fonts(first)
+    host = sorted(set(outline_fonts(first)))
+    fallbacks = ", ".join(host)
+    trailer = f"; drawn as outlines from the host's own fonts: {fallbacks}" if host else ""
+    print(
+        f"explainer PDF check passed: two renders agree, {len(first)} bytes, "
+        f"{pages} pages, {len(embedded)} embedded fonts, none of them this page's "
+        f"in outline paths{trailer}"
+    )
+
+
+def fonts() -> None:
+    """One render, and what it set its glyphs in. For reading, not for gating."""
+    pdf = render_pdf_bytes()
+    for name in embedded_fonts(pdf):
+        print(f"embedded  {name}")
+    for name in sorted(set(outline_fonts(pdf))):
+        print(f"outlines  {name}")
+    for line in font_findings(pdf):
+        print(line, file=sys.stderr)
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -177,11 +339,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     mode = command.add_mutually_exclusive_group(required=True)
     mode.add_argument("--update", action="store_true", help="write the PDF")
     mode.add_argument("--check", action="store_true", help="render twice and compare")
+    mode.add_argument("--fonts", action="store_true", help="list the fonts the PDF embeds")
     arguments = command.parse_args(argv)
     if not PAGE.is_file():
         raise SystemExit(f"{PAGE.relative_to(ROOT)} is missing; render the page first")
     if arguments.update:
         update()
+    elif arguments.fonts:
+        fonts()
     else:
         check()
     return 0
