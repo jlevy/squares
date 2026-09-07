@@ -359,6 +359,27 @@ session:
     elapsed_seconds: 1031
     elapsed_quality: platform_measured
     next_action: None.
+  - task: W2 credit-line review of the generated records 101..324
+    operator: Claude delegate (read-only review)
+    status: completed
+    recording: contemporaneous
+    phase: 2
+    outcome: Over the 107 catalogue-sourced records, 39 agree, 39 leave a stated fact null, two
+      state an unsupported method and 27 are ambiguous on the page; all 107 printed sides match
+      and no found_year is an improvement year. The body template joins the first finder to the
+      latest method in twelve records and dated improvements are never recorded.
+    evidence:
+    - docs/project/reviews/review-2026-09-07-atlas-101-324-credit-lines.md
+    files:
+    - docs/project/reviews/review-2026-09-07-atlas-101-324-credit-lines.md
+    checks:
+    - Coordinator registered the review in the document map and routed every disposition to a
+      corrections delegate with the hand decisions recorded in that delegate's brief.
+    uncertainty: The L-augmentation family and the two-lineage pages are conventions decided by
+      the coordinator, not facts the page states.
+    elapsed_seconds: 842
+    elapsed_quality: platform_measured
+    next_action: Corrections delegate regenerates the 224 records under the new rules.
   outputs:
   - docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
   checks:
