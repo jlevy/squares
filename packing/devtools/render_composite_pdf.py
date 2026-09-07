@@ -30,10 +30,12 @@ from pathlib import Path
 
 from strif import atomic_output_file
 
+from sqpack.known_best import KNOWN_BEST_COMPOSITES
+
 ROOT = Path(__file__).resolve().parent.parent
 ATLAS_ROOT = ROOT / "atlas/known-best"
 #: The composite this tool exports when a caller names none. The atlas builder passes
-#: each of its own stems in; this is what a bare command line means.
+#: each of its own stems in; this is what a function called without one means.
 DEFAULT_STEM = "known-best-1-100"
 GENERATOR = "python -m devtools.render_composite_pdf"
 # The SVG specification's reference pixel. A user unit maps to 1/96 inch, and a
@@ -104,7 +106,18 @@ def check(stem: str = DEFAULT_STEM) -> None:
         raise ValueError(
             f"stale {pdf.relative_to(ROOT)}; regenerate it after changing the composite"
         )
-    print("composite PDF check passed: receipt matches the current composite SVG")
+    print(f"composite PDF check passed: {pdf.name} matches the current {stem}.svg")
+
+
+def published_stems() -> tuple[str, ...]:
+    """Every composite the corpus publishes, which is what a bare command means.
+
+    A command that named one stem by default reported on one PDF and passed while
+    another was stale, which is the failure the atlas builder's own `--check` was
+    widened to cover on the other side. There is no reading of "is the PDF export
+    current" that is about one member of a family of two.
+    """
+    return tuple(composite.stem for composite in KNOWN_BEST_COMPOSITES)
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -114,15 +127,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     group.add_argument("--check", action="store_true", help="fail if the PDF is stale")
     parser.add_argument(
         "--stem",
-        default=DEFAULT_STEM,
-        help="filename stem of the composite to export (default: %(default)s)",
+        default=None,
+        help="filename stem of one composite to export (default: every published one)",
     )
     arguments = parser.parse_args(argv)
+    stems = (arguments.stem,) if arguments.stem else published_stems()
     try:
-        if arguments.update:
-            update(arguments.stem)
-        else:
-            check(arguments.stem)
+        for stem in stems:
+            if arguments.update:
+                update(stem)
+            else:
+                check(stem)
     except (OSError, RuntimeError, TypeError, ValueError) as error:
         print(f"FAIL: {error}", file=sys.stderr)
         return 1

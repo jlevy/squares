@@ -31,42 +31,71 @@ properties:
     type: array
     minItems: 1
     items: {$ref: '#/$defs/composite'}
-    # The published figure is still pinned by size, which is what this file used to do
-    # with `const` heights and can no longer do that way once the record is a list. The
-    # guarantee is the same one: a silent resize of the 1-100 canvas fails the gate,
-    # and so does a canvas change that moves one raster and not the other. A composite
-    # under any other stem does not match this clause and is not constrained by it.
-    contains:
-      type: object
-      required: [stem, svg, png_preview, png_high_resolution, png_link_preview_card]
-      properties:
-        stem: {const: known-best-1-100}
-        svg:
+    # Each published figure is pinned by size, which is what this file used to do with
+    # `const` heights and can no longer do that way once the record is a list. The
+    # guarantee is the same one: a silent resize of either canvas fails the gate, and so
+    # does a canvas change that moves one raster and not the other. One clause per
+    # published stem, in an `allOf` because a schema carries one `contains`; a composite
+    # under any other stem matches neither and is not constrained by them.
+    allOf:
+      - contains:
           type: object
-          required: [width, height]
+          required: [stem, svg, png_preview, png_high_resolution, png_link_preview_card]
           properties:
-            width: {const: 2400}
-            height: {const: 2896}
-        png_preview:
+            stem: {const: known-best-1-100}
+            svg:
+              type: object
+              required: [width, height]
+              properties:
+                width: {const: 2400}
+                height: {const: 2896}
+            png_preview:
+              type: object
+              required: [width, height]
+              properties:
+                width: {const: 2400}
+                height: {const: 2896}
+            png_high_resolution:
+              type: object
+              required: [scale, width, height]
+              properties:
+                scale: {const: 2}
+                width: {const: 4800}
+                height: {const: 5792}
+            png_link_preview_card:
+              type: object
+              required: [top_crop, width, height]
+              properties:
+                top_crop: {const: true}
+                width: {const: 2400}
+                height: {const: 1256}
+      # The poster: 18 columns of 18 at the same card scale, so its canvas is eight
+      # column pitches wider and eight row pitches taller than the figure above. One
+      # raster and no link-preview crop, which is why only `png_preview` is pinned
+      # here; a second raster would be a change to the specification and to this
+      # clause, never a file that quietly appeared.
+      - contains:
           type: object
-          required: [width, height]
+          required: [stem, columns, rows, layout, square_count, svg, png_preview]
           properties:
-            width: {const: 2400}
-            height: {const: 2896}
-        png_high_resolution:
-          type: object
-          required: [scale, width, height]
-          properties:
-            scale: {const: 2}
-            width: {const: 4800}
-            height: {const: 5792}
-        png_link_preview_card:
-          type: object
-          required: [top_crop, width, height]
-          properties:
-            top_crop: {const: true}
-            width: {const: 2400}
-            height: {const: 1256}
+            stem: {const: known-best-1-324}
+            columns: {const: 18}
+            rows: {const: 18}
+            layout: {const: '18 by 18, row-major n=1..324'}
+            square_count: {const: 52650}
+            svg:
+              type: object
+              required: [width, height]
+              properties:
+                width: {const: 4224}
+                height: {const: 4912}
+            png_preview:
+              type: object
+              required: [scale, width, height]
+              properties:
+                scale: {const: 1}
+                width: {const: 4224}
+                height: {const: 4912}
   entries:
     type: array
     minItems: 1

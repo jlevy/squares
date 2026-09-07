@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import subprocess
 from collections import Counter
 from pathlib import Path
 from xml.etree import ElementTree as ET
@@ -43,6 +44,12 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     "n=1..200": {"exact-grid": 114, "kingbird-derived-facts": 80, "unitsquare-rendering": 6},
     "n=1..324": {"exact-grid": 177, "kingbird-derived-facts": 141, "unitsquare-rendering": 6},
 }
+
+#: What the poster's vector may cost a clone. Eight mebibytes is the ceiling the
+#: encoding was chosen against; the house encoding would have spent 24 MB on the same
+#: 52,650 squares. A ceiling rather than a golden size, because the exact figure follows
+#: from the corpus's geometry and a witness gaining a digit may move it.
+POSTER_SVG_BUDGET_BYTES = 8 * 1024 * 1024
 
 ROOT = Path(__file__).resolve().parent.parent
 ATLAS = ROOT / "atlas/known-best"
@@ -320,7 +327,32 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
                 "path": "atlas/known-best/known-best-1-100.svg",
                 "width": 2400,
             },
-        }
+        },
+        # The poster: the same card scale over eighteen columns of eighteen, one raster
+        # and no link-preview crop. Its absence of a `png_high_resolution` key is part of
+        # the golden answer, not an omission -- a 2x of a 20.7-megapixel canvas is about
+        # five megabytes on every clone for detail the PDF already carries.
+        {
+            "columns": 18,
+            "layout": "18 by 18, row-major n=1..324",
+            "png_preview": {
+                "derived_from": "atlas/known-best/known-best-1-324.svg",
+                "height": 4912,
+                "path": "atlas/known-best/known-best-1-324.png",
+                "scale": 1,
+                "width": 4224,
+            },
+            "range": {"count": 324, "first_n": 1, "last_n": 324},
+            "renderer": "sqpack deterministic composite renderer",
+            "rows": 18,
+            "square_count": 52650,
+            "stem": "known-best-1-324",
+            "svg": {
+                "height": 4912,
+                "path": "atlas/known-best/known-best-1-324.svg",
+                "width": 4224,
+            },
+        },
     ]
     corpus = known_best_builder.CORPUS
     assert document["atlas"]["range"] == {
@@ -564,46 +596,262 @@ def test_the_1_100_canvas_is_what_its_specification_computes() -> None:
     assert composite.card_png_name == "known-best-1-100-card.png"
 
 
-def test_a_second_composite_is_a_specification_and_not_a_second_set_of_constants() -> None:
-    """The 18-by-18 poster of `n = 1..324`, laid out without any data existing yet.
+def test_the_poster_canvas_is_what_its_specification_computes() -> None:
+    """The poster's numbers, as the golden answer to the same formulas.
 
-    This is the whole point of the parameterization, and it is checkable before the
-    corpus catches up: the geometry follows from four fields, so a second composite can
-    be measured -- rows, canvas, legend, footer -- while its cards are still unbuildable.
-    Every number below is a difference against the published figure rather than a
-    literal, because what is being asserted is that nothing is absolute: eight more
-    columns is eight more column pitches of width, and eight more rows moves the legend
-    and all three footer lines by eight row pitches and not by a constant someone
-    remembered to edit.
+    Written as literals for the same reason the figure's are: 4224 by 4912, a legend at
+    4748 and a footer at 4820/4850/4880 are what `CompositeCanvas` returns for eighteen
+    columns of eighteen, and a formula that quietly stopped agreeing with the drawing
+    should fail here rather than in a byte comparison.
     """
-    poster = CompositeSpec(1, 324, 18, "known-best-1-324")
-    canvas = known_best_builder.CompositeCanvas(poster)
+    canvas = known_best_builder.COMPOSITES[1]
+    composite = canvas.spec
+
+    assert (composite.first_n, composite.last_n, composite.columns) == (1, 324, 18)
+    assert (composite.count, composite.rows, composite.square_count) == (324, 18, 52650)
+    assert composite.square_count == 324 * 325 // 2
+    assert composite.layout == "18 by 18, row-major n=1..324"
+    assert composite.cases.label == "n=1..324"
+    assert (canvas.width, canvas.height) == (4224, 4912)
+    assert canvas.grid_bottom == 4710
+    assert canvas.legend_baseline == 4748
+    assert canvas.explainer_baseline == 4820
+    assert canvas.credit_baseline == 4850
+    assert canvas.stamp_baseline == 4880
+    assert (composite.svg_name, composite.pdf_name) == (
+        "known-best-1-324.svg",
+        "known-best-1-324.pdf",
+    )
+    assert composite.raster_name(1) == "known-best-1-324.png"
+    # One raster and no crop: the export set is part of the specification.
+    assert composite.card_units is None
+    assert [export.manifest_key for export in canvas.rasters] == ["png_preview"]
+    assert composite.stem in known_best_builder.SUMMARY_PROSE
+
+
+def test_a_second_composite_is_a_specification_and_not_a_second_set_of_constants() -> None:
+    """Nothing in the poster's geometry is absolute; all of it is the figure's, shifted.
+
+    This is the whole point of the parameterization, and it is asserted as differences
+    rather than as literals -- the literals are the test above -- because what is being
+    checked here is that no constant was edited by hand: eight more columns is eight more
+    column pitches of width, and eight more rows moves the legend and all three footer
+    lines by eight row pitches.
+    """
+    poster = known_best_builder.COMPOSITES[1]
     figure = known_best_builder.PRIMARY_COMPOSITE
 
-    assert (poster.columns, poster.rows, poster.count) == (18, 18, 324)
-    assert poster.square_count == 324 * 325 // 2
-    assert poster.layout == "18 by 18, row-major n=1..324"
-    assert poster.cases.label == "n=1..324"
-
-    extra_columns = poster.columns - figure.spec.columns
-    extra_rows = poster.rows - figure.spec.rows
+    extra_columns = poster.spec.columns - figure.spec.columns
+    extra_rows = poster.spec.rows - figure.spec.rows
     widening = extra_columns * known_best_builder.SUMMARY_COLUMN_PITCH
     shift = extra_rows * known_best_builder.SUMMARY_ROW_PITCH
-    assert canvas.width == figure.width + widening
-    assert canvas.grid_bottom == figure.grid_bottom + shift
-    assert canvas.legend_baseline == figure.legend_baseline + shift
-    assert canvas.explainer_baseline == figure.explainer_baseline + shift
-    assert canvas.credit_baseline == figure.credit_baseline + shift
-    assert canvas.stamp_baseline == figure.stamp_baseline + shift
-    assert canvas.height == figure.height + shift
+    assert poster.width == figure.width + widening
+    assert poster.grid_bottom == figure.grid_bottom + shift
+    assert poster.legend_baseline == figure.legend_baseline + shift
+    assert poster.explainer_baseline == figure.explainer_baseline + shift
+    assert poster.credit_baseline == figure.credit_baseline + shift
+    assert poster.stamp_baseline == figure.stamp_baseline + shift
+    assert poster.height == figure.height + shift
 
-    # No card is declared, so the poster publishes the two full-canvas rasters and no
-    # crop; and nothing here renders, because 324 cases do not exist yet.
-    assert [export.manifest_key for export in canvas.rasters] == [
-        "png_preview",
-        "png_high_resolution",
+    # And a third would be a third specification: one declared here, never rendered,
+    # measured while its cards do not exist.
+    third = known_best_builder.CompositeCanvas(CompositeSpec(1, 400, 20, "known-best-1-400"))
+    assert (third.spec.rows, third.spec.square_count) == (20, 80200)
+    assert third.width == figure.width + 10 * known_best_builder.SUMMARY_COLUMN_PITCH
+    assert third.height == figure.height + 10 * known_best_builder.SUMMARY_ROW_PITCH
+    assert third.spec.stem not in known_best_builder.SUMMARY_PROSE
+
+
+def _committed_poster_svg() -> str:
+    """The retained poster, read the way its drift checks compare it."""
+    return (ATLAS / "known-best-1-324.svg").read_text(encoding="utf-8")
+
+
+def test_the_poster_stays_inside_its_byte_budget() -> None:
+    """The file a clone pays for, measured against the budget the encoding was chosen for.
+
+    The house encoding spends 490 bytes on one of these squares, measured. At 52,650 of
+    them that is a 24.6 MB file, not something to commit, so the poster drops three costs
+    the figure keeps: the per-square `data-*` facts, the stroke repeated on every
+    polygon, and coordinates carried to 28 significant digits. Each is asserted here from
+    the drawing rather than from the specification, because what a reader downloads is
+    the drawing. `build_known_best_atlas --report` prints the same numbers on demand.
+
+    The budget is a ceiling, not a golden size: the corpus's geometry decides the exact
+    figure and a witness gaining a digit may move it. What must not happen is the file
+    quietly returning to an encoding nobody measured.
+    """
+    text = _committed_poster_svg()
+    size = (ATLAS / "known-best-1-324.svg").stat().st_size
+    composite = known_best_builder.COMPOSITES[1].spec
+
+    assert size == len(text.encode("utf-8"))
+    assert size < POSTER_SVG_BUDGET_BYTES
+    assert size / composite.square_count < 200
+
+    root = ET.fromstring(text)
+    squares = known_best_builder.summary_square_polygons(root)
+    assert len(squares) == composite.square_count == 52650
+    # No per-square data attribute survives, and that is the first lever.
+    assert not [
+        name for square in squares for name in square.attrib if name.startswith("data-")
     ]
-    assert poster.stem not in known_best_builder.SUMMARY_PROSE
+    assert {tuple(sorted(square.attrib)) for square in squares} == {("fill", "points")}
+    # The second lever: the stroke is stated once per card, on the group.
+    groups = [node for node in root.iter() if node.attrib.get("data-feature") == "square-fills"]
+    assert len(groups) == composite.count
+    assert {group.attrib["stroke-width"] for group in groups} == {"0.42"}
+    assert {group.attrib["stroke-linejoin"] for group in groups} == {"round"}
+    # The third: every coordinate is rounded to the declared number of decimals.
+    decimals = composite.coordinate_decimals
+    assert decimals == 3
+    lengths = {
+        len(number.partition(".")[2])
+        for square in squares
+        for pair in square.attrib["points"].split(" ")
+        for number in pair.split(",")
+    }
+    assert max(lengths) <= decimals
+    # And the drawing says all three in its own metadata, so a copy of the file that
+    # travels alone still carries what was left out of it and why.
+    metadata = {
+        node.attrib["name"]: node.text or ""
+        for node in root.iter()
+        if node.tag.endswith("}value") and "name" in node.attrib
+    }
+    assert metadata["square-coordinate-decimals"] == "3"
+    assert "atlas/known-best/rendering/n-NNN.svg" in metadata["square-data-attributes"]
+    assert "52650" in metadata["square-stroke"]
+    # The published figure keeps every one of them, which is what makes the poster's
+    # departure a budget decision rather than a change of house style.
+    figure_root = ET.fromstring(_committed_composite_svg())
+    figure_squares = known_best_builder.summary_square_polygons(figure_root)
+    assert len(figure_squares) == 5050
+    assert all("data-hue-index" in square.attrib for square in figure_squares)
+    # And says nothing about an encoding, because it departs from none: the three keys
+    # below appear only on a drawing that had to leave something out. `square-count` is
+    # not one of them -- every composite states how many squares it draws.
+    figure_metadata = {
+        node.attrib["name"] for node in figure_root.iter() if "name" in node.attrib
+    }
+    assert "square-count" in figure_metadata
+    assert figure_metadata.isdisjoint(
+        {"square-data-attributes", "square-stroke", "square-coordinate-decimals"}
+    )
+
+
+def test_the_poster_exports_carry_the_source_receipt() -> None:
+    """The poster's raster and PDF name the SVG they were drawn from, as the figure's do.
+
+    One raster rather than three, and the same rule: a receipt that is the digest of the
+    one drawing is what makes "the PNG matches the PDF" checkable rather than asserted.
+    """
+    svg_text = _committed_poster_svg()
+    expected = hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
+    exports = known_best_builder.COMPOSITES[1].rasters
+
+    assert [export.path.name for export in exports] == ["known-best-1-324.png"]
+    assert known_best_builder.png_summary_receipt(exports[0].path.read_bytes()) == (
+        4224,
+        4912,
+        expected,
+    )
+    assert (
+        render_composite_pdf.pdf_receipt((ATLAS / "known-best-1-324.pdf").read_bytes())
+        == expected
+    )
+
+
+def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() -> None:
+    """`k = 11..18` join the tiling argument, and the legend counts its own cases.
+
+    The badge is derived, never read from the catalogue's flag: `k**2` unit squares
+    exactly tile a `k` by `k` container, so nothing can move. The eight new perfect
+    squares are the first cases above 100 to earn it, and they earn the solid glyph --
+    the one that means this repository established the property -- while the catalogue's
+    two annotations keep the muted one they have on the figure.
+    """
+    root = ET.fromstring(_committed_poster_svg())
+    cards = {
+        int(card.attrib["data-n"]): card for card in root.findall(".//svg:g[@data-n]", SVG)
+    }
+
+    assert sorted(cards) == list(range(1, 325))
+    solid_rigid = sorted(
+        n
+        for n, card in cards.items()
+        for badge in card.findall(".//svg:rect[@data-feature='evidence-badge']", SVG)
+        if badge.attrib["data-evidence"] == "rigid (established here)"
+        and badge.attrib["fill"] != "none"
+    )
+    assert solid_rigid == sorted([k * k for k in range(1, 19)] + [5, 11])
+    assert set(solid_rigid) >= {121, 144, 169, 196, 225, 256, 289, 324}
+
+    # The legend counts the poster's own 324 cases, not the corpus and not the figure's
+    # hundred. Read off the drawing: a badge's glyph is centred and a label is not, so
+    # the labels are the runs that carry no anchor.
+    legend = root.find(".//svg:g[@data-feature='evidence-legend']", SVG)
+    assert legend is not None
+    labels = [
+        node.text
+        for node in legend.findall("svg:text", SVG)
+        if node.attrib.get("text-anchor") is None
+    ]
+    assert labels == [
+        "proved optimal (59)",
+        "exact value known (287)",
+        "only known numerically (37)",
+        "rigid (established here) (20)",
+        "annotated rigid by the catalogue (2)",
+        "lower bound first proved here (7)",
+        "colors indicate distinct tilt angles",
+        "shade indicates number of full-side contacts",
+    ]
+    # The published figure's legend is unmoved by any of it.
+    figure_legend = ET.fromstring(_committed_composite_svg()).find(
+        ".//svg:g[@data-feature='evidence-legend']", SVG
+    )
+    assert figure_legend is not None
+    assert [
+        node.text
+        for node in figure_legend.findall("svg:text", SVG)
+        if node.attrib.get("text-anchor") is None
+    ][:5] == [
+        "proved optimal (35)",
+        "exact value known (95)",
+        "only known numerically (5)",
+        "rigid (established here) (12)",
+        "annotated rigid by the catalogue (2)",
+    ]
+
+
+def test_the_poster_left_the_published_figure_byte_for_byte_where_it_was() -> None:
+    """The 1-100 family is not touched, and this is what says so inside pytest.
+
+    The plan's acceptance criterion for the whole expansion is that the published
+    figure is byte-identical after it, so the comparison is against the committed
+    bytes rather than against a rebuild: a rebuild would agree with a builder that had
+    changed the figure in the same way twice.
+
+    Digests rather than the bytes, because the failure has to be readable: two 2.3 MB
+    strings compared directly print a diff nobody can use, and what a reader needs to
+    know is that the file moved, not where.
+    """
+    figure = ATLAS / "known-best-1-100.svg"
+    committed = subprocess.run(
+        ["git", "show", f"HEAD:packing/atlas/known-best/{figure.name}"],
+        cwd=ROOT.parent,
+        capture_output=True,
+        check=False,
+    )
+    if committed.returncode != 0:  # pragma: no cover - only outside a git checkout
+        pytest.skip("the published figure is not readable from git here")
+
+    working = figure.read_bytes()
+    assert (len(working), hashlib.sha256(working).hexdigest()) == (
+        len(committed.stdout),
+        hashlib.sha256(committed.stdout).hexdigest(),
+    ), "the published 1-100 figure differs from the committed one"
 
 
 @pytest.mark.parametrize("scale", [1, 2])

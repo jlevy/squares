@@ -759,7 +759,7 @@ def run_portability_controls() -> dict[str, bool]:
 def run_gallery_controls() -> dict[str, bool]:
     from xml.etree import ElementTree as ET
 
-    from devtools.build_known_best_atlas import SUMMARY_SVG
+    from devtools.build_known_best_atlas import COMPOSITES
     from devtools.map_prospective_sources import COVERAGE_OUTPUT
     from devtools.packing_render_adapters import frame_from_kingbird29
     from devtools.render_packing_gallery import build_gallery_manifest
@@ -827,11 +827,14 @@ def run_gallery_controls() -> dict[str, bool]:
     kingbird_manifest = by_id["n29-kingbird-overview"]
     kingbird_expected = assign_square_colors(frame_from_kingbird29(), RenderSpec())
     gallery_artifacts = {path.resolve() for path in artifacts}
-    document_svg_artifacts = gallery_artifacts | {
-        SUMMARY_SVG.resolve(),
-        COVERAGE_OUTPUT.resolve(),
-        T018_PROOF_VISUAL.resolve(),
-    }
+    # Every composite the corpus publishes, not just the first: the atlas README embeds
+    # the poster beside the figure, and a set that named one of them would have called
+    # the other an unowned artifact.
+    document_svg_artifacts = (
+        gallery_artifacts
+        | {canvas.svg_path.resolve() for canvas in COMPOSITES}
+        | {COVERAGE_OUTPUT.resolve(), T018_PROOF_VISUAL.resolve()}
+    )
     comparison_artifact = by_id["n10-source-return-comparison"]["artifact"]
     comparison_embeds = {
         document_path.relative_to(REPO).as_posix()

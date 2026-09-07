@@ -432,6 +432,43 @@ session:
     elapsed_seconds: 571
     elapsed_quality: platform_measured
     next_action: None.
+  - task: Draw the 1..324 poster composite beside the 1-100 figure (think-p3z0)
+    operator: Claude Opus delegate
+    status: completed
+    recording: contemporaneous
+    phase: 3
+    outcome: known-best-1-324 as an 18-by-18 composite on a 4224 by 4912 canvas, 6,198,351 bytes
+      of SVG at 117.7 bytes per square after three measured encoding levers (no per-square data
+      attributes, one shared stroke per card, three-decimal coordinates), a 4224-pixel PNG and a
+      44 by 51 inch PDF with receipts; legend totals 59 proved, 287 exact, 37 numeric, 20 rigid;
+      the 1-100 family byte-identical. The palette measurement found up to 106 angle classes in
+      one frame (n = 273), so hues wrap rather than widen.
+    evidence:
+    - packing/atlas/known-best/known-best-1-324.svg
+    - packing/atlas/known-best/manifest.json
+    files:
+    - packing/devtools/build_known_best_atlas.py
+    - packing/devtools/build_composite_figure_data.py
+    - packing/devtools/render_composite_pdf.py
+    - packing/src/sqpack/known_best.py
+    - packing/devtools/check_svg_rendering.py
+    - packing/devtools/run_negative_controls.py
+    - packing/atlas/known-best/known-best-atlas.schema.yaml
+    - packing/atlas/known-best/composite-figure.schema.yaml
+    - packing/tests/test_known_best_atlas.py
+    - packing/tests/test_render_colors.py
+    - packing/atlas/known-best/FIGURE-PLAYBOOK.md
+    - packing/atlas/known-best/README.md
+    checks:
+    - Coordinator re-ran ruff, basedpyright, both PDF receipts, the figure record check, schema
+      validation, the safe-SVG gate (86 controls), the builder report, and confirmed an empty git
+      status over the 1-100 family before committing.
+    uncertainty: The full --update raster pass had to be finished by the export functions after
+      a cairo loader failure under nohup; the check passed on both families afterwards. The
+      poster SVG is not pruned from the negative-control snapshot, which Phase 5 measures.
+    elapsed_seconds: 3826
+    elapsed_quality: platform_measured
+    next_action: Publish the poster family beside the first on the site under Phase 5.
   outputs:
   - docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
   checks:

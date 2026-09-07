@@ -4,13 +4,17 @@ This atlas retains one complete geometry record for every frontier case from `n 
 through `n = 324` and renders every record with the repository’s deterministic house
 renderer. The machine-readable discovery layer is [`manifest.json`](manifest.json).
 The range widened from 100 on 2026-09-07 under
-[the expansion plan](../../../docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md);
-the composite below still draws the first hundred, and the calibration annotations
-further down are pinned to those hundred by design.
+[the expansion plan](../../../docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md).
+Two composites are drawn from it: the published figure of the first hundred, unchanged,
+and a poster of the whole corpus beside it.
+The calibration annotations further down stay pinned to the first hundred by design.
 
 Everything in this directory is generated.
-[FIGURE-PLAYBOOK.md](FIGURE-PLAYBOOK.md) is the playbook for the composite: how to
-rebuild it, where each fact on it comes from, and how to extend it past `n = 100`.
+[FIGURE-PLAYBOOK.md](FIGURE-PLAYBOOK.md) is the playbook for both: how to rebuild them,
+where each fact on them comes from, what a third would take, and how the poster’s byte
+budget was measured.
+
+## The figure, `n = 1..100`
 
 [![The complete known-best atlas from n equals one through one hundred.](known-best-1-100.svg)](known-best-1-100.svg)
 
@@ -34,6 +38,45 @@ fractional scale lands every edge on a fractional pixel boundary, and the antial
 shades the rasteriser then invents cost more bytes than the extra pixels do.
 Rendered from this SVG, a 4096-pixel-wide export is 1,440,555 bytes for 20.2 megapixels
 where the 2x export is 1,294,216 for 27.8.
+
+## The poster, `n = 1..324`
+
+[![The complete known-best atlas from n equals one through three hundred twenty-four.](known-best-1-324.png)](known-best-1-324.svg)
+
+Every case the register holds, at the figure’s card scale: 18 columns of 18, with 52,650
+square polygons from the same witnesses.
+The image above is the raster; the vector it was drawn from is one click away, and the
+PDF is a 44-by-51-inch page.
+
+| File | Size | Bytes | For |
+| --- | --- | --- | --- |
+| [`known-best-1-324.svg`](known-best-1-324.svg) | 4224 × 4912 units | 6,198,351 | the source; scales to anything |
+| [`known-best-1-324.png`](known-best-1-324.png) | 4224 × 4912 px | 2,369,558 | the raster embedded above |
+| [`known-best-1-324.pdf`](known-best-1-324.pdf) | 44 × 51.17 in | 491,026 | printing; vector, so text stays selectable |
+
+One raster rather than three, measured rather than assumed: a 2x of the same drawing is
+5,055,264 bytes for 83 megapixels, more than twice what the figure’s 3x cost when that
+was rejected as too expensive, and the PDF carries the same detail at any zoom for
+491,026. The link-preview card is one page’s unfurl, which the figure above supplies.
+
+The poster also draws a square more cheaply than the figure does, because ten times as
+many of them will not fit in a file anyone should clone.
+The house encoding costs 490 bytes a square here, or 24.6 MB; the poster drops the
+per-square `data-*` facts, states the stroke once per card instead of once per polygon,
+and rounds coordinates to three decimals, which brings it to 117.7 bytes a square.
+All three departures are recorded in the drawing’s own metadata, the facts they drop are
+still carried per case by [`rendering/`](rendering/) and
+[`composite-figure.json`](composite-figure.json), and each was measured before it was
+chosen:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --report
+```
+
+[The playbook](FIGURE-PLAYBOOK.md#the-two-composites) has the measurements and what each
+one bought.
+
+## What the drawings are drawn from
 
 The pipeline has four separate layers:
 
@@ -181,11 +224,13 @@ uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atl
 
 The first command acquires only missing UnitSquare assets unless `--refresh` is
 requested; Kingbird live audits are ephemeral and write no geometry.
-The second rebuilds witnesses, individual house renderings, the SVG and PNG composite,
-the manifest, and frontier witness links from retained inputs.
-PNG regeneration uses macOS `sips` when available and ImageMagick otherwise; check mode
-reads the embedded source-SVG receipt without invoking either renderer.
-Git remains the integrity boundary for co-committed outputs.
+The second rebuilds witnesses, individual house renderings, both composites and every
+export of each, the manifest, and frontier witness links from retained inputs.
+`--report` measures what those exports cost — bytes, square polygons, bytes per square,
+and how each composite encodes a square — without rebuilding anything.
+Rasters are drawn by cairosvg, the same renderer that draws the PDFs, so every export of
+one drawing agrees; check mode reads the embedded source-SVG receipt without invoking a
+renderer at all. Git remains the integrity boundary for co-committed outputs.
 Upstream asset integrity uses only hashes declared independently by a source; the PNG’s
 local source-SVG receipt tracks derivation and is not source evidence.
 

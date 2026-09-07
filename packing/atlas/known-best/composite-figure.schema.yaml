@@ -45,17 +45,28 @@ properties:
         rows: {type: integer, minimum: 1}
         layout: {type: string, pattern: '^[0-9]+ by [0-9]+, row-major n=[0-9]+\.\.[0-9]+$'}
         square_count: {type: integer, minimum: 1}
-    # The published figure's grid is pinned, the way this file used to pin the range
-    # with constants. A composite under any other stem does not match and is free.
-    contains:
-      type: object
-      required: [stem, columns, rows, layout, square_count]
-      properties:
-        stem: {const: known-best-1-100}
-        columns: {const: 10}
-        rows: {const: 10}
-        layout: {const: '10 by 10, row-major n=1..100'}
-        square_count: {const: 5050}
+    # Each published figure's grid is pinned, the way this file used to pin the range
+    # with constants: one clause per stem, in an `allOf` because a schema carries one
+    # `contains`. A composite under any other stem matches neither and is free.
+    allOf:
+      - contains:
+          type: object
+          required: [stem, columns, rows, layout, square_count]
+          properties:
+            stem: {const: known-best-1-100}
+            columns: {const: 10}
+            rows: {const: 10}
+            layout: {const: '10 by 10, row-major n=1..100'}
+            square_count: {const: 5050}
+      - contains:
+          type: object
+          required: [stem, columns, rows, layout, square_count]
+          properties:
+            stem: {const: known-best-1-324}
+            columns: {const: 18}
+            rows: {const: 18}
+            layout: {const: '18 by 18, row-major n=1..324'}
+            square_count: {const: 52650}
   generated_by: {type: string, minLength: 1}
   provenance_vocabulary:
     type: object

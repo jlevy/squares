@@ -40,6 +40,31 @@
           "path": "atlas/known-best/known-best-1-100.svg",
           "width": 2400
         }
+      },
+      {
+        "columns": 18,
+        "layout": "18 by 18, row-major n=1..324",
+        "png_preview": {
+          "derived_from": "atlas/known-best/known-best-1-324.svg",
+          "height": 4912,
+          "path": "atlas/known-best/known-best-1-324.png",
+          "scale": 1,
+          "width": 4224
+        },
+        "range": {
+          "count": 324,
+          "first_n": 1,
+          "last_n": 324
+        },
+        "renderer": "sqpack deterministic composite renderer",
+        "rows": 18,
+        "square_count": 52650,
+        "stem": "known-best-1-324",
+        "svg": {
+          "height": 4912,
+          "path": "atlas/known-best/known-best-1-324.svg",
+          "width": 4224
+        }
       }
     ],
     "entries": [

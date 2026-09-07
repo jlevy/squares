@@ -11,7 +11,12 @@ import pytest
 
 from devtools.build_known_best_atlas import frame_from_witness
 from sqpack.known_best import KNOWN_BEST_CORPUS
-from sqpack.render.color import assign_square_colors, hex_oklch, square_fill_palette
+from sqpack.render.color import (
+    RESERVED_HUES,
+    assign_square_colors,
+    hex_oklch,
+    square_fill_palette,
+)
 from sqpack.render.model import (
     HueScheme,
     PackingFrame,
@@ -31,6 +36,20 @@ GOLDEN_INDEXED: dict[str, tuple[int, int]] = {
     "n=1..200": (311, 47067),
     "n=1..324": (334, 58001),
 }
+#: The largest number of distinct angle classes any one frame carries, and the case that
+#: carries it, per corpus. Per frame rather than corpus-wide because the colorizer
+#: registers classes per frame: what a palette has to distinguish is what one drawing
+#: puts side by side. Measured from the retained renderings, which record a class per
+#: square; it is the number the poster's palette question was decided against.
+GOLDEN_MAX_ANGLE_CLASSES: dict[str, tuple[int, int]] = {
+    "n=1..100": (14, 69),
+    "n=1..200": (67, 182),
+    "n=1..324": (106, 273),
+}
+#: How many frames carry more classes than there are unpinned hue slots, so that their
+#: registrations wrap and two classes in one drawing share a colour. None at all when
+#: the corpus stopped at 100.
+GOLDEN_WRAPPED_CASES: dict[str, int] = {"n=1..100": 0, "n=1..200": 12, "n=1..324": 32}
 
 ROOT = Path(__file__).resolve().parents[1]
 ATLAS = ROOT / "atlas"
@@ -357,6 +376,119 @@ def test_every_indexed_atlas_fill_matches_its_declared_color_contract() -> None:
         indexed_fills += len(fills)
 
     assert (indexed_files, indexed_fills) == GOLDEN_INDEXED[KNOWN_BEST_CORPUS.label]
+
+
+def _angle_classes_by_case() -> dict[int, dict[int, list[tuple[int, float]]]]:
+    """Every retained house rendering's squares, grouped by angle class.
+
+    The renderings are where the corpus records what the colorizer decided, one
+    `data-angle-class`, `data-hue-index` and `data-orientation-radians` per square, so
+    the question "how many classes does a frame carry" is answered by reading them
+    rather than by rebuilding 324 frames from their witnesses. Whole corpus, under a
+    second.
+    """
+    by_case: dict[int, dict[int, list[tuple[int, float]]]] = {}
+    for path in sorted((ATLAS / "known-best/rendering").glob("n-*.svg")):
+        classes: dict[int, list[tuple[int, float]]] = {}
+        for node in ET.fromstring(path.read_text(encoding="utf-8")).iter():
+            if node.attrib.get("data-feature") != "square-fill":
+                continue
+            angle_class = node.attrib.get("data-angle-class")
+            if angle_class is None:
+                continue
+            classes.setdefault(int(angle_class), []).append(
+                (
+                    int(node.attrib["data-hue-index"]),
+                    float(node.attrib["data-orientation-radians"]),
+                )
+            )
+        by_case[int(path.stem.split("-")[1])] = classes
+    return by_case
+
+
+def test_the_palette_holds_at_the_largest_angle_class_count_the_corpus_carries() -> None:
+    """The corpus asks for 106 angle classes in one frame; the palette answers with 20.
+
+    The playbook's extension step read "widen the palette", and the measurement says the
+    opposite: widening it is what would break it. The renderer colors per frame, so the
+    number that matters is the largest class count in any single frame, not the corpus's
+    distinct angles -- 106, in `n = 273`, against 14 when the corpus stopped at 100.
+    Feeding that count to `square_fill_palette` would space 106 bases around one wheel
+    and leave the closest pair 0.04 degrees apart in OkLCh, which is not a palette. The
+    colorizer instead keeps the 20 checked bases and wraps class registrations onto the
+    18 unpinned slots, so the separation the figures rely on is the same one at 106
+    classes as at 14, and repeated hues in a dense frame are an honest statement that a
+    frame carries more angles than any palette can distinguish.
+
+    Hues 0 and 1 survive the wrap by construction -- `RESERVED_HUES` is subtracted
+    before the modulus -- and that is what the last assertion checks on the record: in
+    every frame, a class takes hue 0 exactly when it holds a right angle and hue 1
+    exactly when it holds a 45 degree tilt, wrapping frames included.
+    """
+    classes_by_case = _angle_classes_by_case()
+    largest, case = max((len(classes), n) for n, classes in classes_by_case.items() if classes)
+
+    assert (largest, case) == GOLDEN_MAX_ANGLE_CLASSES[KNOWN_BEST_CORPUS.label]
+
+    spec = RenderSpec()
+    unpinned_slots = spec.hue_count - RESERVED_HUES
+    # The premise of the rest: the corpus really does ask for more classes than there
+    # are slots, so wrapping is exercised rather than merely available.
+    assert largest > unpinned_slots
+
+    hues = tuple(hex_oklch(fill)[2] for fill in SQUARE_HUE_PALETTE)
+    assert len(hues) == spec.hue_count
+    separation = min(
+        min(abs(left - right), 360 - abs(left - right))
+        for index, left in enumerate(hues)
+        for right in hues[index + 1 :]
+    )
+    assert separation >= MINIMUM_BASE_HUE_SEPARATION_DEGREES
+    oklab = tuple(_oklab(fill) for fill in SQUARE_HUE_PALETTE)
+    assert (
+        min(
+            sqrt(sum((left[channel] - right[channel]) ** 2 for channel in range(3)))
+            for index, left in enumerate(oklab)
+            for right in oklab[index + 1 :]
+        )
+        >= MINIMUM_BASE_OKLAB_DISTANCE
+    )
+
+    # What widening would cost, measured rather than asserted from the wheel: a palette
+    # with one base per class in the densest frame cannot separate them.
+    widened = tuple(
+        hex_oklch(family[len(family) // 2])[2]
+        for family in square_fill_palette(hue_count=largest, shades_per_hue=spec.shades_per_hue)
+    )
+    assert len(widened) == largest
+    assert (
+        min(
+            min(abs(left - right), 360 - abs(left - right))
+            for index, left in enumerate(widened)
+            for right in widened[index + 1 :]
+        )
+        < MINIMUM_BASE_HUE_SEPARATION_DEGREES
+    )
+
+    tolerance = float(spec.angle_tolerance_radians)
+    wrapped_cases = 0
+    for n, classes in classes_by_case.items():
+        if len(classes) > unpinned_slots:
+            wrapped_cases += 1
+        for angle_class, members in classes.items():
+            hue_indices = {hue for hue, _radians in members}
+            assert len(hue_indices) == 1, (n, angle_class, hue_indices)
+            hue = hue_indices.pop()
+            assert hue < spec.hue_count
+            right_angle = any(
+                min(radians, QUARTER_TURN - radians) <= tolerance for _hue, radians in members
+            )
+            diagonal = any(
+                abs(radians - QUARTER_TURN / 2) <= tolerance for _hue, radians in members
+            )
+            assert (hue == 0) == right_angle, (n, angle_class, hue)
+            assert (hue == 1) == diagonal, (n, angle_class, hue)
+    assert wrapped_cases == GOLDEN_WRAPPED_CASES[KNOWN_BEST_CORPUS.label]
 
 
 def test_color_parameters_reject_nonpositive_values() -> None:

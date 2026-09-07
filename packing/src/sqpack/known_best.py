@@ -109,12 +109,14 @@ class CorpusRange:
 class CompositeSpec:
     """One composite figure: the cases it draws, its grid width, and its filename stem.
 
-    Everything about a composite that is not a drawing decision follows from these four
-    fields, so a second figure is a second specification rather than a second set of
-    constants. Rows, the canvas, the legend and footer baselines and the layout string
-    are all computed; the ones that need the card metrics are computed by
-    ``CompositeCanvas`` in ``devtools/build_known_best_atlas.py``, which is where those
-    metrics live.
+    Everything about a composite that is not a drawing decision follows from the four
+    fields below, so a second figure is a second specification rather than a second set
+    of constants; the fields after them are the drawing decisions a figure of another
+    size has to make -- which exports it publishes, and what it may leave out of a square
+    to stay inside a byte budget. Rows, the canvas, the legend and footer baselines and
+    the layout string are all computed; the ones that need the card metrics are computed
+    by ``CompositeCanvas`` in ``devtools/build_known_best_atlas.py``, which is where
+    those metrics live.
     """
 
     first_n: int
@@ -131,6 +133,27 @@ class CompositeSpec:
     #: the drawing on a fractional pixel boundary, so the rasteriser invents an
     #: antialiasing shade for each one and PNG loses the flat runs it compresses.
     raster_scales: tuple[int, ...] = (1, 2)
+    #: Whether each square polygon carries the per-square `data-*` facts -- its hue and
+    #: shade indices, its contact count, its orientation and its angle class. They are
+    #: what makes one drawing inspectable without the record beside it, and they cost
+    #: about 153 bytes a square, which a figure of a few thousand squares can afford and
+    #: one of fifty thousand cannot. Dropped only where the byte budget says so, and the
+    #: drawing then records the omission in its own metadata rather than leaving a
+    #: reader to notice it.
+    square_data_attributes: bool = True
+    #: Whether the stroke every square polygon shares -- its colour, its width and its
+    #: linejoin -- is set once on the card's square group instead of on each polygon.
+    #: Identical on every one of them and 61 bytes each where it is repeated, so this is
+    #: the same fact stated once rather than a different drawing. It goes on a group
+    #: of its own rather than on the card, because a card also holds text, and text that
+    #: inherits a stroke is drawn outlined.
+    square_stroke_shared: bool = False
+    #: Decimal places every emitted square coordinate is rounded to, or None to emit at
+    #: the renderer's full `SVG_EMISSION_PRECISION`. Stated per composite and never read
+    #: from the ambient decimal context, which is the whole of `D-359`: a rounding this
+    #: figure applies is a property of the figure, recorded in its metadata and pinned
+    #: here, not something the process it was built in happened to be left in.
+    coordinate_decimals: int | None = None
 
     def __post_init__(self) -> None:
         # Constructing the range is what validates first_n and last_n.
@@ -142,6 +165,8 @@ class CompositeSpec:
             raise ValueError("a link-preview crop keeps a positive number of units")
         if any(scale < 1 for scale in self.raster_scales):
             raise ValueError("a raster scale is a whole multiple of the canvas")
+        if self.coordinate_decimals is not None and self.coordinate_decimals < 1:
+            raise ValueError("a coordinate rounding keeps at least one decimal place")
 
     @property
     def cases(self) -> CorpusRange:
@@ -293,10 +318,40 @@ KNOWN_BEST_COMPOSITES = (
         # expecting that ratio crops nothing at all.
         card_units=1256,
     ),
+    CompositeSpec(
+        first_n=1,
+        last_n=324,
+        columns=18,
+        stem="known-best-1-324",
+        # The poster of the whole corpus, at the card scale of the figure above it: 324
+        # cases fall into 18 columns of 18 with no short row, which is the only square
+        # grid the range admits and the reason the horizon is 324 rather than 300.
+        #
+        # One raster, not two, and the reason is measured: the 1x export is 2,369,558
+        # bytes at 4224 by 4912, and a 2x of the same drawing is 5,055,264 at 83
+        # megapixels -- more than twice what the figure's 3x cost when that was rejected
+        # as too expensive for detail already in the vector. The PDF carries that detail
+        # at any zoom for 491,026 bytes. The published figure keeps its 2x because it is
+        # the copy people attach; nobody attaches a poster.
+        raster_scales=(1,),
+        # No link-preview card either. The card is the unfurl of one page, the
+        # repository's front door, and that page already has one; a second would be a
+        # second 9-megapixel binary with nothing pointing at it.
+        card_units=None,
+        # The three byte-budget levers, each measured before it was chosen and all of
+        # them reported by `build_known_best_atlas --report`. At 52,650 squares the
+        # house encoding costs about 24 MB, which is not a file to commit. See
+        # the "two composites" section of `atlas/known-best/FIGURE-PLAYBOOK.md` for the
+        # measurement each of these bought and why the per-n renderings keep all three.
+        square_data_attributes=False,
+        square_stroke_shared=True,
+        coordinate_decimals=3,
+    ),
 )
 """Every composite figure published from the known-best corpus.
 
-One today. A second is a second entry here, not a second copy of the builder: the
+Two: the published 10-by-10 figure of the first hundred cases, and the 18-by-18 poster
+of the whole corpus. A third is a third entry here, not a third copy of the builder: the
 geometry, the export set, the manifest record and the drift report all read the
 specification.
 """

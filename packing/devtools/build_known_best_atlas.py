@@ -14,7 +14,7 @@ import urllib.request
 import zlib
 from collections.abc import Sequence
 from dataclasses import dataclass
-from decimal import Decimal
+from decimal import ROUND_HALF_EVEN, Decimal
 from fractions import Fraction
 from functools import cache
 from pathlib import Path
@@ -62,6 +62,7 @@ from sqpack.render.model import (
     SquareGeometry,
 )
 from sqpack.render.numbers import (
+    SVG_EMISSION_PRECISION,
     emission_precision,
     format_svg_number,
     scalar_from_decimal,
@@ -74,6 +75,7 @@ from sqpack.render.svg import (
     element,
     serialize_svg,
     sub,
+    svg_tag,
 )
 from sqpack.witness import (
     check_witness_semantics,
@@ -502,10 +504,11 @@ class CompositeCanvas:
 COMPOSITES: tuple[CompositeCanvas, ...] = tuple(
     CompositeCanvas(spec) for spec in COMPOSITE_SPECS
 )
-#: The composite the explainer, the README and the rendering checks name by path.
-#: Every other one is reached through `COMPOSITES`.
+#: The published figure, which the explainer names by path and which several tests
+#: compare byte for byte. Every composite, this one included, is reached through
+#: `COMPOSITES`; a caller that means "the drawings this corpus publishes" reads that,
+#: because a set built from this one called the poster an artifact nobody owned.
 PRIMARY_COMPOSITE = COMPOSITES[0]
-SUMMARY_SVG = PRIMARY_COMPOSITE.svg_path
 
 #: The accessible title and description, per composite. Prose about a particular range
 #: is written rather than computed -- nothing spells "one through one hundred" from two
@@ -524,7 +527,46 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "exactly by a radical or a minimal polynomial rather than only by a decimal."
         ),
     ),
+    "known-best-1-324": (
+        "Best known packings of one through three hundred twenty-four unit squares",
+        (
+            "An eighteen-by-eighteen poster of the retained best known unit-square "
+            "packings for n equals 1 through 324, the whole audited corpus. Each tile is "
+            "normalized to its own container and labeled with n, the best known upper "
+            "bound on the container side and, where the value is not yet settled, the "
+            "best proved lower bound beneath it. A star in crimson marks a lower bound "
+            "first proved by this project. Badges mark which side lengths are proved "
+            "optimal, and whether a side length is pinned exactly by a radical or a "
+            "minimal polynomial rather than only by a decimal."
+        ),
+    ),
 }
+
+
+def _encoding_metadata(composite: CompositeSpec) -> dict[str, str]:
+    """What this composite does differently from the house encoding, and why.
+
+    Empty for a figure drawn the house way, which is what keeps the published 1-100
+    figure's metadata -- and so its bytes -- exactly what it has always been. A
+    composite that departs says so in its own drawing rather than only in a document
+    beside it, because the drawing is what travels.
+    """
+    squares = composite.square_count
+    records: dict[str, str] = {}
+    if not composite.square_data_attributes:
+        records["square-data-attributes"] = (
+            f"omitted at {squares} squares, about 153 bytes each; every square's hue "
+            "index, shade index, full-side contact count, orientation and angle class "
+            "is carried per case by atlas/known-best/rendering/n-NNN.svg and by "
+            "atlas/known-best/composite-figure.json"
+        )
+    if composite.square_stroke_shared:
+        records["square-stroke"] = (
+            f"set once on each card's square group rather than on all {squares} polygons"
+        )
+    if composite.coordinate_decimals is not None:
+        records["square-coordinate-decimals"] = str(composite.coordinate_decimals)
+    return records
 
 
 def _json_text(value: object) -> str:
@@ -882,6 +924,20 @@ def _render(witness: dict) -> str:
     )
 
 
+def _summary_coordinate(value: Decimal, decimals: int | None) -> str:
+    """One emitted coordinate, at the composite's declared rounding.
+
+    `decimals` is None for the house encoding, which emits whatever the projection and
+    the pinned `SVG_EMISSION_PRECISION` produce -- 28 significant digits for a source
+    that carries them. A composite that declares a rounding gets it here, explicitly and
+    from its own specification: `D-359` is about a precision that came from wherever the
+    process had been left, and a figure that rounds on purpose is the opposite of that.
+    """
+    if decimals is not None:
+        value = value.quantize(Decimal(1).scaleb(-decimals), rounding=ROUND_HALF_EVEN)
+    return format_svg_number(value)
+
+
 def _summary_points(
     square: SquareGeometry,
     *,
@@ -889,11 +945,12 @@ def _summary_points(
     x: Decimal,
     y: Decimal,
     scale: Decimal,
+    decimals: int | None = None,
 ) -> str:
     return " ".join(
         (
-            f"{format_svg_number(x + point.x.projected * scale)},"
-            f"{format_svg_number(y + (container_side - point.y.projected) * scale)}"
+            f"{_summary_coordinate(x + point.x.projected * scale, decimals)},"
+            f"{_summary_coordinate(y + (container_side - point.y.projected) * scale, decimals)}"
         )
         for point in square.corners
     )
@@ -950,32 +1007,52 @@ def _append_summary_card(
             "stroke-width": "1.15",
         },
     )
+    encoding = canvas.spec
+    squares = card
+    if encoding.square_stroke_shared:
+        # The stroke every square shares, stated once. On a group of its own rather than
+        # on the card, because the card also holds text and text that inherits a stroke
+        # is drawn outlined; and the group is what names the squares once the polygons
+        # inside it no longer carry `data-feature` of their own.
+        squares = sub(
+            card,
+            "g",
+            {
+                "data-feature": "square-fills",
+                "stroke": PAPER_THEME.container,
+                "stroke-width": "0.42",
+                "stroke-linejoin": "round",
+            },
+        )
     for square in frame.squares:
         color = colors[square.square_id]
-        polygon = sub(
-            card,
-            "polygon",
-            {
+        attributes: dict[str, str] = {}
+        if encoding.square_data_attributes:
+            attributes |= {
                 "data-feature": "square-fill",
                 "data-square": f"n-{n:03d}-{square.square_id}",
                 "data-hue-index": str(color.hue_index),
                 "data-shade-index": str(color.shade_index),
                 "data-contact-sides": str(color.contact_sides),
                 "data-orientation-radians": str(color.orientation_radians),
-                "points": _summary_points(
-                    square,
-                    container_side=side,
-                    x=packing_x,
-                    y=packing_y,
-                    scale=scale,
-                ),
-                "fill": color.fill,
+            }
+        attributes["points"] = _summary_points(
+            square,
+            container_side=side,
+            x=packing_x,
+            y=packing_y,
+            scale=scale,
+            decimals=encoding.coordinate_decimals,
+        )
+        attributes["fill"] = color.fill
+        if not encoding.square_stroke_shared:
+            attributes |= {
                 "stroke": PAPER_THEME.container,
                 "stroke-width": "0.42",
                 "stroke-linejoin": "round",
-            },
-        )
-        if color.angle_class is not None:
+            }
+        polygon = sub(squares, "polygon", attributes)
+        if encoding.square_data_attributes and color.angle_class is not None:
             polygon.set("data-angle-class", str(color.angle_class))
 
     sub(
@@ -1437,6 +1514,7 @@ def render_known_best_summary_svg(built: list[BuiltCase], canvas: CompositeCanva
             "last-n": str(composite.last_n),
             "rows": str(composite.rows),
             "square-count": str(composite.square_count),
+            **_encoding_metadata(composite),
         },
     )
     sub(
@@ -2013,6 +2091,86 @@ def check() -> None:
     )
 
 
+def summary_square_polygons(root: ET.Element) -> list[ET.Element]:
+    """Every square polygon in a composite, under either encoding.
+
+    A composite that carries per-square `data-*` names each polygon `square-fill`; one
+    that has dropped them names the group instead, and the polygons inside it are the
+    squares. Reading both is what lets one measurement, and one test, cover both
+    families rather than one per encoding. The star a card may carry is a polygon too
+    and is not a square, which is why this asks what a polygon is rather than counting
+    the tag.
+    """
+    squares = [
+        node
+        for node in root.iter(svg_tag("polygon"))
+        if node.attrib.get("data-feature") == "square-fill"
+    ]
+    for group in root.iter(svg_tag("g")):
+        if group.attrib.get("data-feature") == "square-fills":
+            squares.extend(group.iter(svg_tag("polygon")))
+    return squares
+
+
+def _encoding_summary(composite: CompositeSpec) -> str:
+    """How one composite encodes a square, in one line of a report."""
+    return "; ".join(
+        (
+            "per-square data-* "
+            + ("carried" if composite.square_data_attributes else "omitted"),
+            "stroke "
+            + ("shared per card" if composite.square_stroke_shared else "per polygon"),
+            "coordinates "
+            + (
+                f"rounded to {composite.coordinate_decimals} decimals"
+                if composite.coordinate_decimals is not None
+                else f"at the renderer's {SVG_EMISSION_PRECISION} significant digits"
+            ),
+        )
+    )
+
+
+def report() -> None:
+    """Measure what each retained composite costs, rather than estimating it.
+
+    The byte budget is the reason this exists. The house encoding spends about 460 bytes
+    on every square it draws, which a figure of five thousand squares carries without
+    comment and a poster of fifty-two thousand cannot: the same encoding would have made
+    `known-best-1-324.svg` a 24 MB file. Every lever that brought it down was chosen
+    against these numbers and can be re-measured against them, which is `OR-1` -- the
+    measurement is a command, not a paragraph someone wrote once.
+
+    Retained bytes, deliberately, not a rebuild: this reports the artifacts a clone
+    actually pays for. `--check` is what says they are current.
+    """
+    print(f"known-best composites: {len(COMPOSITES)}")
+    for canvas in COMPOSITES:
+        composite = canvas.spec
+        print(f"\n{composite.stem}  {composite.layout}")
+        print(f"  encoding: {_encoding_summary(composite)}")
+        svg_path = canvas.svg_path
+        if not svg_path.is_file():
+            print(f"  {'(missing)':>14}  {_relative(svg_path)}")
+            continue
+        svg_bytes = svg_path.stat().st_size
+        polygons = len(summary_square_polygons(ET.fromstring(svg_path.read_text("utf-8"))))
+        print(
+            f"  {svg_bytes:>14,}  {_relative(svg_path)}  {canvas.width}x{canvas.height} units"
+        )
+        print(
+            f"  {'':>14}  {polygons:,} square polygons, "
+            f"{svg_bytes / composite.square_count:.1f} bytes per square"
+        )
+        if polygons != composite.square_count:
+            print(f"  {'':>14}  polygons disagree with {composite.square_count:,} declared")
+        for export in canvas.rasters:
+            size = f"{export.path.stat().st_size:,}" if export.path.is_file() else "(missing)"
+            print(f"  {size:>14}  {export.name}  {export.width}x{export.height} px")
+        pdf = render_composite_pdf.composite_pdf(composite.stem)
+        size = f"{pdf.stat().st_size:,}" if pdf.is_file() else "(missing)"
+        print(f"  {size:>14}  atlas/known-best/{pdf.name}")
+
+
 def smoke_in_temporary_directory() -> None:
     """Exercise generation without retaining outputs; useful while diagnosing a source."""
     with TemporaryDirectory() as directory:
@@ -2040,6 +2198,11 @@ def parser() -> argparse.ArgumentParser:
     mode.add_argument(
         "--smoke", action="store_true", help="build corpus into a temporary directory"
     )
+    mode.add_argument(
+        "--report",
+        action="store_true",
+        help="measure each retained composite: bytes, squares, bytes per square",
+    )
     command.add_argument(
         "--refresh",
         action="store_true",
@@ -2058,6 +2221,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         update()
     elif args.check:
         check()
+    elif args.report:
+        report()
     else:
         smoke_in_temporary_directory()
     return 0

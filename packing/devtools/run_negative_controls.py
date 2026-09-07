@@ -122,11 +122,19 @@ PRUNE = frozenset(
         # The link-preview card joins its three siblings on 2026-09-05, on exactly their
         # grounds: a generated export of the same drawing, carrying the same source
         # receipt the same `--check` replays, named by no control. 0.2 MB.
+        #
+        # The poster's two binary exports join them on 2026-09-07 on the same grounds and
+        # for the same reason, a size larger. Its SVG deliberately does not: the two
+        # composite vectors are what `build_known_best_atlas --check` compares in full,
+        # and whether 6 MB of one of them belongs in every private worker's snapshot is a
+        # measurement against the cap, not a line to add while adding the poster.
         ROOT / "atlas/known-best/contact-overlays",
         ROOT / "atlas/known-best/known-best-1-100-card.png",
         ROOT / "atlas/known-best/known-best-1-100.pdf",
         ROOT / "atlas/known-best/known-best-1-100.png",
         ROOT / "atlas/known-best/known-best-1-100@2x.png",
+        ROOT / "atlas/known-best/known-best-1-324.pdf",
+        ROOT / "atlas/known-best/known-best-1-324.png",
         ROOT / "atlas/known-best/rendering",
         ROOT / "atlas/prospective/rendering",
         # `site` is a stronger case than any of the above and is here for a different
