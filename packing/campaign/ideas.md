@@ -280,8 +280,8 @@ they are not additional mathematical hypotheses without a specific method compar
 
 [X-017](explorations/X-017-compatibility-and-complete-case-covers.md) assesses the
 contributed packet against PR105’s committed `46f38ab4` state.
-[Agenda 027](agendas/agenda-027-compatibility-and-restricted-families.md) is prepared
-and paused. These idea numbers and H-111–117 records continue the sequences after the
+[Agenda 027](agendas/agenda-027-compatibility-and-restricted-families.md) owns the
+selected follow-up allocations. These idea numbers and H-111–117 records continue the sequences after the
 parallel source program’s current entries.
 Branch and bead ownership distinguish the programs; the numbers carry no execution order
 or dependency. The source-to-record map in X-017 also routes overlapping proposals to
@@ -296,6 +296,7 @@ existing H-094–103 without duplicating them.
 | 109 | Boundary-null curved resources | registered | [H-115](hypotheses/H-115-boundary-null-curved-resources.md) | Find a concrete useful candidate before building a general verifier. |
 | 110 | Expand full-size dual support beyond Trump’s orbit | registered | [H-116](hypotheses/H-116-expanded-full-size-dual-support.md) | The contributed ceiling concerns the old support only; every extension needs its own exact evidence. |
 | 111 | Force a useful bound on minimizing angle complexity | registered | [H-117](hypotheses/H-117-forced-angle-complexity.md) | A restricted-family success needs a separate argument controlling the unrestricted remainder. |
+| 119 | Test one fixed biquadratic two-pose kernel family | registered | [H-125](hypotheses/H-125-biquadratic-two-pose-kernel.md) | An exact finite objective bound at least eleven refutes this family; a feasible outer LP remains inconclusive. |
 
 ## Hybrid Strength and Angular Release
 

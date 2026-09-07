@@ -293,6 +293,8 @@ case or experiment separately.
 | [BC-259: Positive-Inclusion Adoption Instrument Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-adoption-instrument-review.md) | dated review record | record | retained | — |
 | [BC265: What the Seven-Box Calibration Unlocks](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md) | research synthesis | record | retained | — |
 | [BC-265: Calibration Scope and the Next Discriminator](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md) | dated review record | record | retained | — |
+| [BC264: One Finite Kernel Family and Its Verification Cost](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md) | research synthesis | record | retained | — |
+| [BC264: Kernel Bound and Feature-Class Acceptance](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md) | dated review record | record | retained | — |
 | [BC-255 Near-Axis Reader Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-near-axis-reader-independent-review.md) | dated review record | record | retained | — |
 | [BC-252 — Complete Rows on the Retained Sites](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md) | research synthesis | record | retained | — |
 | [BC-255: Fixed-Side Discriminator Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md) | research synthesis | record | retained | — |
@@ -629,6 +631,14 @@ exact-angle auxiliary result, and the next complete-method assessments.
 **Selected next entry:** `think-mq0d` takes BC-264’s bounded H114 feature and
 kernel-contract pricing.
 
+[Session097](packing/campaign/agent-sessions/session-097-kernel-contract-and-feature-pricing.md)
+completed that pricing on `codex/n11-kernel-pricing`, following the user's request
+to continue. Independent reviews accept an exact obstruction to cubic center features
+and the design of a finite test for one richer family. Separate max-thinking agents
+now build its LP proposer and independent exact reader, with source-free controls.
+No scientific target or continuum certificate has been admitted.
+Its new checkpoint is separate from the completed eight-active-hour block.
+
 [Session096](packing/campaign/agent-sessions/session-096-stromquist-memos-and-helpers.md)
 reviewed Stromquist’s three memos, corrected the paper’s chronology and five case-proof
 descriptions, and independently checked a five-dot obstruction and the local segment
@@ -651,13 +661,13 @@ established the attained support optimum eleven in 1.12 seconds.
 H099 is refuted only on that support.
 BC-265’s independent designs derive an explicit mass-eleven calibration on the old
 support, but a new undercovered pose would reject only that density.
-The selected next allocation is BC-264’s existing 30-minute feature and
-verification-price assessment: a complete H114 kernel could improve the global bound at
-side $96/25$, while a finite obstruction would reject only its chosen feature family.
-Kernel-specific BC-260 review, exact PSD evidence and complete pair-domain verification
-remain prerequisites.
+Session097 completed the selected BC-264 pricing and kernel-specific BC-260 review.
+Its next source-free instrument targets the fixed family in H125: an exact finite
+obstruction would reject that family, while feasibility of the outer LP proves nothing
+about a complete kernel. Exact PSD evidence and complete pair-domain verification
+remain prerequisites for a positive continuum certificate at side $96/25$.
 H101’s stronger common-support obstruction is a conditional fallback, with no candidate
-asserted. No new target or research block is activated by this handoff.
+asserted. No scientific target has yet been admitted in the active Session097.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
 `think-9qrx`, completed the user-approved research block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
@@ -680,9 +690,9 @@ Exp-123 accepts complete near45 localization through four exact continuous guard
 the reviewed geometric reduction.
 The fixed-S H-124 screen found no witness without certifying continuous coverage; the
 broader bound is unchanged.
-H-107’s reviewed fixed-site scalar protocol is held out of the next two-hour block under
+At Session090's earlier allocation, H-107’s reviewed fixed-site scalar protocol was held out of that two-hour block under
 paused `think-7fec`; later-session reconsideration preserves its unlaunched history.
-The freed attention goes to a bounded conditional-compatibility assessment from the
+The freed attention went to a bounded conditional-compatibility assessment from the
 accepted A-point lemmas, not an automatic P12 repair.
 Full validation of research checkpoint `99a3ad42` passed;
 [Session 089](packing/campaign/agent-sessions/session-089-agenda024-next-phases.md)
@@ -3156,12 +3166,13 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-094.yaml` | session-094 | 562 | 4.53 h | 1.82 h | 1.82 h | yes |
 | `codex-task-tree-session-095.yaml` | session-095 | 476 | 4.08 h | 1.69 h | 1.69 h | yes |
 | `codex-task-tree-session-096.yaml` | session-096 | 520 | 3.79 h | 1.4 h | 1.4 h | yes |
+| `codex-task-tree-session-097.yaml` | session-097 | 175 | 1.66 h | 0.64 h | 0.64 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 51 |
+| measured | 52 |
 | unmeasured | 44 |
-| **total** | **95** |
+| **total** | **96** |
 
 <!-- END GENERATED: session-close-report -->
 

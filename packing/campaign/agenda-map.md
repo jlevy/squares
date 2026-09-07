@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **5** in_progress, **19** ready, **12** tentative, **59** blocked, **41** stopped, **128** complete.
+- **6** in_progress, **19** ready, **11** tentative, **59** blocked, **41** stopped, **128** complete.
 
 - **17 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -49,7 +49,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-027 | `BC-260` | ready | 0 | correctness | measurement_validation | Which direct resource, anchor, case-composition, angular-transfer, uniform Farkas and pair-kernel… | `think-ql1j` |
 | agenda-027 | `BC-267` | ready | 1 | correctness | measurement_validation | Which physical normal-stationarity and stationary-value deductions survive independent review, and what exact… | `think-zq12` |
 | agenda-027 | `BC-268` | ready | 1 | insight | research | Which next slice earns allocation from the actual Agenda027 review and pilot evidence, whether the source… | `think-x61z` |
-| agenda-027 | `BC-264` | tentative | 2 | insight | research | Does one small fixed feature family for H-114 have an exact obstruction, or a b < 11 candidate with a… | `think-mq0d` |
+| agenda-027 | `BC-264` | in_progress | 2 | insight | research | Does one small fixed feature family for H-114 have an exact obstruction, or a b < 11 candidate with a… | `think-mq0d` |
 | agenda-027 | `BC-266` | tentative | 3 | insight | research | Does the shared certificate interface make a complete two-angle family under H-113 worth attempting, with… | `think-bgsz` |
 | agenda-028 | `BC-270` | ready | 0 | correctness | measurement_validation | What frozen target-side comparison fairly tests H118 against coupled geometry? | `think-9uv0` |
 | agenda-028 | `BC-273` | ready | 1 | insight | research | Can H120 close a new rank-nine release domain at variable side below 96/25? | `think-1btr` |
@@ -168,7 +168,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-024 | active |  |  |  | 5 |  | 3 | 8 |
 | agenda-025 | active | 3 |  | 1 | 6 |  | 3 | 13 |
 | agenda-026 | active | 2 | 2 | 2 | 3 |  | 5 | 14 |
-| agenda-027 | active |  | 3 | 2 | 3 |  | 3 | 11 |
+| agenda-027 | active | 1 | 3 | 1 | 3 |  | 3 | 11 |
 | agenda-028 | paused |  | 3 | 2 | 1 |  | 1 | 7 |
 
 ## By program
@@ -244,7 +244,7 @@ Open frontier: `BC-208`, `BC-207`.
 | agenda-027 | `BC-261` | blocked | Can the existing geometry and fixed-angle LP export one independently checked uniform exclusion… |
 | agenda-027 | `BC-262` | blocked | At 96/25, does a frozen complete anchor domain admit an exact exclusion or useful explicit residual… |
 | agenda-027 | `BC-263` | blocked | Can uniform certificates close a nontrivial complete common-angle interval in H-112 without… |
-| agenda-027 | `BC-264` | tentative | Does one small fixed feature family for H-114 have an exact obstruction, or a b < 11 candidate with… |
+| agenda-027 | `BC-264` | in_progress | Does one small fixed feature family for H-114 have an exact obstruction, or a b < 11 candidate with… |
 | agenda-027 | `BC-265` | complete | Which single candidate-led resource option deserves the next discriminator: equality-support… |
 | agenda-027 | `BC-266` | tentative | Does the shared certificate interface make a complete two-angle family under H-113 worth… |
 | agenda-027 | `BC-267` | ready | Which physical normal-stationarity and stationary-value deductions survive independent review, and… |

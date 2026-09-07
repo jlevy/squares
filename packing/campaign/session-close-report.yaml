@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 95
+count: 96
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 51
+  sessions_measured: 52
   sessions_unmeasured: 44
   attributed:
     rollups: 115
@@ -35,9 +35,9 @@ totals:
     one_off_code: 3267
     wall_hours: 195.94
 codex_receipts:
-  attributed: 24
+  attributed: 25
   unattributed: 0
-  measured: 24
+  measured: 25
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1520,4 +1520,24 @@ sessions:
     agent_hours: 3.79
     active_union_hours: 1.4
     wall_hours: 1.4
+    snapshot_incomplete: true
+- id: session-097
+  title: "Kernel contract and feature pricing"
+  status: in_progress
+  primary_bead: think-c53m
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-097.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-097.yaml
+    model_responses: 175
+    agent_hours: 1.66
+    active_union_hours: 0.64
+    wall_hours: 0.64
     snapshot_incomplete: true

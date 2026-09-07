@@ -110,6 +110,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-094](agent-sessions/session-094-complete-cover-and-density-controls.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 8 | think-63oj | Post-checkpoint amendment after Session095's accepted exp128 and independent BC265 design selects BC-264 under think-mq0d for the existing 30-minute H114 feature and kernel-contract pricing slice. No target or new block is activated. BC259 and the fixed collision-cover allocation are terminal; neither receives an unchanged retry. |
 | [session-095](agent-sessions/session-095-collision-cover-and-support-ceiling.md) | completed | contemporaneous | `research-loop` (insight) | `documentation-pass` (correctness) | 5 | think-ro0s | After final record-delta validation and publication, hand off future BC264/think-mq0d's existing30-minute H114 feature and kernel-contract pricing slice. Retain the conditional H101 Omega-avoiding fallback; no new block, target or unchanged retry is activated here. |
 | [session-096](agent-sessions/session-096-stromquist-memos-and-helpers.md) | completed | retrospective | `research-survey` (correctness) | `documentation-pass` (correctness) | 4 | think-7u4s | After the final pre-push check and review publication, preserve BC-264 under think-mq0d as the existing H114 feature and kernel-contract pricing entry. The source brief separately retains the geometric replay dependency; this review activates no new target or unchanged retry. |
+| [session-097](agent-sessions/session-097-kernel-contract-and-feature-pricing.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 3 | think-c53m | Publish the completed mathematical pricing checkpoint while separate agents build and check the finite refutational instrument; no scientific invocation is admitted yet. |
 
 ### Workflow summary
 
@@ -118,8 +119,8 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 1 | 1 | 12 | 1 |
-| `factual-review` | 3 | 0 | 41 | 2 |
-| `insight-iteration` | 18 | 1 | 58 | 3 |
+| `factual-review` | 3 | 0 | 42 | 2 |
+| `insight-iteration` | 19 | 1 | 60 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
 | `research-loop` | 10 | 4 | 67 | 7 |
@@ -570,7 +571,7 @@ Status: **active**. Prepare an independent alternative to the ongoing Agenda024-
 | BC-261 | tool_validation | 3, 4, 11 | blocked | 0 | think-0w2c | Freeze the instrument and controls for BC-262/263 only after independent acceptance. If the shared abstraction grows before one real leaf closes, cut its scope to that leaf or retain a priced implementation blocker. |
 | BC-262 | research | 11 | blocked | 1 | think-zz3t | Expand only for closed continuous domains or a simpler actionable remainder. If refinement leaves almost all minima zero or the same large residual, reprice a second anchor, a low-order no-good or a stronger representation. No midpoint result, core completion or solver timeout becomes a global verdict. |
 | BC-263 | research | 11 | blocked | 1 | think-gdr6 | Expand if a small reusable certificate family closes meaningful domains. Stop broadening if progress consists of sampled angles, one contact graph, or unrelated microscopic boxes. Keep the full H-112 claim unresolved until all angles and cases are covered; verify any counterexample first. |
-| BC-264 | research | 11 | tentative | 2 | think-mq0d | Continue only if the chosen representation earns useful margin or closes a stated domain. An exact family obstruction redirects features; recurring unpriced pair violations redirect to conditional kernels or reusable cases. |
+| BC-264 | research | 11 | in_progress | 2 | think-mq0d | Continue only if the chosen representation earns useful margin or closes a stated domain. An exact family obstruction redirects features; recurring unpriced pair violations redirect to conditional kernels or reusable cases. |
 | BC-265 | research | 11 | complete | 3 | think-j8pz | The comparison selects BC264's bounded feature and kernel-contract pricing as the future main entry. Reopen H101's stronger common-support obstruction only with an exact candidate and priced complete void-cover plan. A fixed calibration falsifier is retained as an optional small alternative, not a prerequisite or evidence that expanded dual mass exceeds eleven. |
 | BC-266 | research | 11 | tentative | 3 | think-bgsz | A complete restricted theorem can transfer only the neighborhoods its margin supports. Do not normalize one absolute angle by arbitrary rotation or infer unrestricted optimality from two-angle success. |
 | BC-267 | measurement_validation | 3, 4, 11 | ready | 1 | think-zq12 | Only leaves using physical stationarity depend on this acceptance. Existing sign/bin branches keep their old obligations. A feasible high-angle witness can refute an all-feasible restriction, but cannot alone refute existence of a different low-angle minimizing representative. |
@@ -700,6 +701,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | H-122 | refuted | proof | At q=1939/500, every contained closed unit square whose orientation mo |  | 1 |  | 0s wall |
 | H-123 | confirmed | proof | At q=1939/500, every contained closed unit square with orientation wit |  | 1 |  | 0s wall |
 | H-124 | unresolved | proof | At q=1939/500, every contained closed unit square Q in the actual near |  | 3 |  | 3s wall |
+| H-125 | blocked | proof | At side L=96/25, the fixed eleven-feature joint-D4 family in BC264's S |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 
