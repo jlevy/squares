@@ -635,13 +635,9 @@ def touch_findings(page: Page) -> list[str]:
                 target_findings: list[str] = handle.evaluate(_ROTATION_TARGET)
                 found.extend(prefix + failure for failure in target_findings)
                 before = _control_angle(control, prover=number == 5)
-                target = handle.bounding_box()
-                assert target is not None
-                _touch_gesture(
-                    page,
-                    session,
-                    (target["x"] + target["width"] / 2, target["y"] + target["height"] / 2),
-                )
+                # Native taps wait for a stable, hittable target after scrolling.
+                handle.tap()
+                page.evaluate(_SETTLED)
                 if _control_angle(control, prover=number == 5) == before:
                     found.append(
                         prefix + "tapping the rotation button does not turn the square"

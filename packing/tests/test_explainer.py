@@ -312,7 +312,7 @@ def test_the_card_image_is_the_landscape_crop_and_not_the_portrait_canvas() -> N
 def test_the_card_alt_describes_the_crop_and_not_the_whole_atlas() -> None:
     """The alt text is read by the readers least able to check it against the picture.
 
-    Figure 1 shows all hundred packings and the card shows the first forty, so one
+    Figure 2 shows all hundred packings and the card shows the first forty, so one
     sentence cannot be true of both. They were the same string until the card became a
     crop, which is exactly the kind of change that leaves an alt text quietly wrong.
     """
@@ -460,7 +460,7 @@ def test_the_published_document_says_what_it_is_and_where_the_figures_are(
 ) -> None:
     """Six of the seven figures are captions here, and a reader cannot tell that alone.
 
-    Figure 1 carries its image; the rest are drawn by the page, so they arrive as
+    Figure 2 carries its image; the rest are drawn by the page, so they arrive as
     captions with nothing above them -- readable, and describing something the reader
     cannot see. Without a word of explanation that reads as images that failed to load,
     and the chip row that would have pointed at the real page is one of the things this

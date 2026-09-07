@@ -35,16 +35,26 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 </div>
 
-## New Result
+## A New Bound for Packing 11 Squares
 
 This work presents a new lower bound on a long-standing open geometry problem: eleven
 unit squares with disjoint interiors, free to rotate, cannot fit in a square of size
 ${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$.
 
-The computer-assisted proof was found via an automated research framework.
-The certificate used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted points
-in the container and selects a net of {{HEADLINE_N_DIRECTIONS}} rationally parameterized
-directions. Five exact conditions and a pigeonhole-style argument then imply the
+The tightest known packing, due to Trump in 1979 (Figure 1), shows
+<span class="math-reference">$s(11) \le {{BEST_PACKING_TEX}}$.[^trump]</span>
+
+<figure>
+  <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
+  <figcaption><strong>Figure 1.</strong> Trump’s 1979 packing of eleven unit squares shows
+  <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>.</figcaption>
+</figure>
+
+The computer-assisted proof of the new lower bound was found via an automated research
+framework. The certificate used in the proof places {{HEADLINE_N_ATOMS}} rationally
+weighted points in the container and selects a net of {{HEADLINE_N_DIRECTIONS}}
+rationally parameterized directions.
+Five exact conditions and a pigeonhole-style argument then imply the
 claim.<!--BEGIN:CLAIM--> [Verification](#verifiable-claim) is exact rational arithmetic:
 the one-file checker,
 {{PINNED_VERIFIER_LINES}}
@@ -54,17 +64,28 @@ certificate file of {{HEADLINE_N_ATOMS}} weighted points in
 
 This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
 open case of the square packing problem.[^novelty] Stromquist published the previous
-bound, {{PRIOR_LOWER_DEC}}, in {{PRIOR_YEAR}}.[^stromquist-history][^repair]
+bound of {{PRIOR_LOWER_DEC}} in {{PRIOR_YEAR}}.[^stromquist-history][^repair]
 
 ## The Agentic Research Framework
 
-The results here are from a flexible but defined
+<div class="boxed-text">
+
+*The results here are from a flexible but defined
 **[agentic research framework](https://github.com/jlevy/squares)** that is likely to be
 useful for creative mathematical or technical problems of other sorts.
+All documents and code for this project, including this paper, were written by agents
+under occasional human direction.
+The framework organizes agent work to reduce the need for oversight and uses several
+agent tools, notably **[tbd](https://github.com/jlevy/tbd)** for task tracking,
+**[Softschema](https://github.com/jlevy/softschema)** for structuring results, and
+**[Practical Prose](https://github.com/jlevy/practical-prose)** to improve writing
+quality.*
+
+</div>
 
 This lower bound is one of {{N_RESULTS}} results the framework has registered so far,
 {{N_NOVEL}} of them apparently new.
-The atlas of best known packings for every $n$ from 1 to 100 in Figure 1 comes from the
+The atlas of best known packings for every $n$ from 1 to 100 in Figure 2 comes from the
 same research agenda and currently includes {{N_STARRED}} new lower bounds.
 
 The repository includes a comprehensive survey of previous research, the atlas of
@@ -75,30 +96,20 @@ Work is planned on a regular cadence (such as 8 to 12 hours) and broken into sev
 defined workflows (research survey, correctness verification, research loop,
 optimization loop, and a few others).
 
-<div class="boxed-text">
-
-The repository’s original prose and code, including this paper, were written by agents
-under human direction.
-The framework relies on a few other agent tools, notably
-[tbd](https://github.com/jlevy/tbd) for task tracking,
-[Softschema](https://github.com/jlevy/softschema) for structuring results, and
-[Practical Prose](https://github.com/jlevy/practical-prose) to improve writing quality.
-
-</div>
-
 ## The Square Packing Problem
 
 The **square packing problem** asks, for each $n$, for the side $s(n)$ of the smallest
 square that holds $n$ unit squares, which are free to rotate and must have disjoint
 interiors.[^survey] The value of $s(n)$ is known for $n \le 10$. Stromquist proved
-$s(10) = 3 + 1/\sqrt{2}$.[^stromquist-memos]
+$s(10) = 3 + 1/\sqrt{2}$.[^stromquist-memos] The case $n = 11$ is the smallest still
+open.
 
 For values of $n$ where $s(n)$ is still unknown, results generally take the form of
 upper or lower bounds.
 An **upper bound** is constructive: an arrangement of $n$ unit squares in a square of
-side $L$ shows that $s(n) \le L$. Trump’s packing for $n = 11$ is one example.[^trump]
-Such constructions may be specified with approximate numerical coordinates or derived
-exactly by solving the geometric relationships between touching squares.
+side $L$ shows that $s(n) \le L$. Trump’s packing for $n = 11$ in Figure 1 is one
+example. Such constructions may be specified with approximate numerical coordinates or
+derived exactly by solving the geometric relationships between touching squares.
 Approximate coordinates alone do not constitute a formal proof of the upper bound.
 
 A **lower bound** proves that $s(n) \ge L$ by ruling out every arrangement in a
@@ -110,7 +121,7 @@ The proof presented here is of this kind.
 
 <figure>
   <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.svg" alt="{{COMPOSITE_ALT}}" width="2400" height="2896"></a></div>
-  <figcaption><strong>Figure 1.</strong> The best known packings of 1 through 100 unit squares. Each cell is the tightest
+  <figcaption><strong>Figure 2.</strong> The best known packings of 1 through 100 unit squares. Each cell is the tightest
   arrangement on record for that <span class="tex">n</span>, with the best known upper bound beneath it and, where
   <span class="tex">s(n)</span> is not yet settled, the best proved lower bound below that. A crimson star marks a lower
   bound this project proved: {{N_STARRED}} of the hundred, this page’s own among them. The full
@@ -119,12 +130,7 @@ The proof presented here is of this kind.
   composite is <a href="known-best-1-100.pdf">available as a PDF</a>.</figcaption>
 </figure>
 
-## Packing 11 Squares
-
-$s(11)$ is the smallest case still open.
-Trump’s 1979 packing shows
-<span class="math-reference">$s(11) \le {{BEST_PACKING_TEX}}$.[^trump]</span> Here we
-prove $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
+For eleven squares, we prove $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
 
 <!--BEGIN:COMPARISON-->
 
@@ -140,12 +146,6 @@ illustrate.<!--BEGIN:REFINEMENT--> There is a small exact refinement in
 The figures below illustrate this certificate.
 
 <!--END:NO_COMPARISON-->
-
-<figure>
-  <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
-  <figcaption><strong>Figure 2.</strong> Trump’s 1979 packing of eleven unit squares shows
-  <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>.</figcaption>
-</figure>
 
 <figure>
   <div class="line-fig kpress-diagram">

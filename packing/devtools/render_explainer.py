@@ -269,10 +269,10 @@ REPO_URL = "https://github.com/jlevy/squares"
 # is that one place.
 SITE_URL = "https://jlevy.github.io/squares/"
 SITE_NAME = "Squares"
-#: The atlas the Figure 1 caption sends a reader to browse, linked as a directory.
+#: The atlas the Figure 2 caption sends a reader to browse, linked as a directory.
 ATLAS = PACKING / "atlas" / "known-best"
 BEST_RENDERING = ATLAS / "rendering" / "n-011.svg"
-# The atlas composite of every known-best packing, shown as Figure 1 and served
+# The atlas composite of every known-best packing, shown as Figure 2 and served
 # beside the page rather than inlined: the PNG is the image, the PDF the link.
 #: The composite travels with the page: the SVG the figure shows, the PDF it links for
 #: print, and the PNG for a reader whose context cannot render the vector.
@@ -294,7 +294,7 @@ COMPOSITE_PNG = COMPOSITE_STEM.with_suffix(".png")
 #: 1.91:1 to the nearest whole pixel. The crop is chosen here rather than inherited from
 #: whatever each platform does, which is the only part of it this repository controls.
 COMPOSITE_CARD = COMPOSITE_STEM.with_name(f"{COMPOSITE_STEM.name}-card.png")
-#: What Figure 1 is a picture of.
+#: What Figure 2 is a picture of.
 COMPOSITE_ALT = (
     "The best known packings of one through one hundred unit squares, in a ten-by-ten "
     "grid, each labelled with its best known upper bound and, where the value is still "
@@ -1320,7 +1320,7 @@ def card_substitutions(headline: Facts, headline_frac: str) -> dict[str, str]:
     """What a link preview shows: the title, the sentence, the canonical URL, the image.
 
     Every one of these is a string the page already states somewhere -- the title in
-    `<title>`, the sentence in `<meta name="description">`, the picture in Figure 1 --
+    `<title>`, the sentence in `<meta name="description">`, the picture in Figure 2 --
     and each is built here once and substituted into both places, so a shared link and
     the page it opens cannot say different things. The bound in the title and in the
     sentence is the headline certificate's own, like every other number on the page.
@@ -1733,17 +1733,17 @@ _ONLY_ON_SCREEN = re.compile(
 )
 
 
-#: What a reader holding this file alone cannot otherwise work out. Figure 1 carries its
-#: image; Figures 2 through 7 are drawn by the page, so here they are captions with
-#: nothing above them -- readable, and describing something the reader cannot see. A
-#: reader who does not know that is left assuming an image failed to load, and a reader
-#: who wants the drawings has no idea where they are, because the chip row that would
-#: have said so is one of the things this edition drops.
+#: What a reader holding this file alone cannot otherwise work out. Figure 2 carries its
+#: image; Figure 1 and Figures 3 through 7 are drawn by the page, so here they are
+#: captions with nothing above them -- readable, and describing something the reader
+#: cannot see. A reader who does not know that is left assuming an image failed to
+#: load, and a reader who wants the drawings has no idea where they are, because the
+#: chip row that would have said so is one of the things this edition drops.
 _EDITION_NOTE = f"""
 
 > This is the Markdown edition, written by the same render that writes the page. The
 > argument is complete here, and every figure's caption states what its figure shows.
-> Only Figure 1 carries its image; the rest are drawn by [the page
+> Only Figure 2 carries its image; the rest are drawn by [the page
 > itself]({SITE_URL})."""
 
 
