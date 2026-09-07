@@ -169,6 +169,7 @@ agenda:
     bead: think-1btr
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-independent-review.md
     workflows: [insight-iteration, factual-review, research-loop]
     depends_on: []
     parallel_group: agenda028-release

@@ -1425,7 +1425,7 @@ sessions:
   title: "Eight-hour hybrid and release investigation"
   status: in_progress
   primary_bead: think-0yfe
-  phases: 2
+  phases: 4
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-092.yaml
@@ -1436,8 +1436,8 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-092.yaml
-    model_responses: 62
-    agent_hours: 0.61
-    active_union_hours: 0.27
-    wall_hours: 0.27
+    model_responses: 310
+    agent_hours: 2.84
+    active_union_hours: 1.08
+    wall_hours: 1.08
     snapshot_incomplete: true

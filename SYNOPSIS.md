@@ -203,6 +203,9 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [BC-273: Prospective Analytical Release Attempt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-release-protocol.md) | implementation plan | record | retained | — |
+| [BC-261: Independent Review of the Uniform Leaf Producer](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-261-uniform-leaf-review.md) | dated review record | record | retained | — |
+| [BC-273: Independent Review of the Segment 9–10 Release Domain](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-independent-review.md) | dated review record | record | retained | — |
 | [BC-270 — Capacity Comparison Design and Exact Domain Obstruction](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md) | research synthesis | record | retained | — |
 | [BC-273: A Closed Domain for Releasing Segment 9–10](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md) | research synthesis | record | retained | — |
 | [BC-260 Direct Hybrid Contracts](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md) | dated review record | record | retained | — |
@@ -3100,7 +3103,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
 | `codex-task-tree-session-090.yaml` | session-090 | 1,341 | 9.8 h | 3.94 h | 3.95 h | yes |
-| `codex-task-tree-session-092.yaml` | session-092 | 62 | 0.61 h | 0.27 h | 0.27 h | yes |
+| `codex-task-tree-session-092.yaml` | session-092 | 310 | 2.84 h | 1.08 h | 1.08 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

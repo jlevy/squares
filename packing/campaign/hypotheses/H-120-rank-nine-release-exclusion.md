@@ -33,7 +33,8 @@ hypothesis:
   notes: >-
     The direct-exclusion specialization of H-TBD-RELEASE, owned by BC273.
     Session092 selects a compact source-feature pilot and a middle-angle child;
-    independent model acceptance and controls precede any target determination.
+    independent model acceptance is complete; implemented controls and the
+    target-specific inclusion and coverage proof precede any determination.
     No finite-motion theorem is claimed.
 ---
 # H-120 — Rank-Nine Release Exclusion
@@ -70,8 +71,13 @@ forbidden-center cover as the next obligation.
 The retained top-wall center alone puts the target outside the named local ball, as
 independently checked in the
 [direct-contract review](../series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md).
-The complete model and its parent-control binding still need independent acceptance; the
-pilot has not been excluded.
+The
+[independent source-corner review](../series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-independent-review.md)
+accepts the complete model, parent-control binding and strict cavity-cover equivalence.
+The rank-nine statement concerns the retained equality graph; allowed recontact can
+raise the full graph rank.
+The pilot has not been excluded, and its instrument remains unready pending independent
+geometric replay and complete target coverage.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

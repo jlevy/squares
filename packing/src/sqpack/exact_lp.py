@@ -34,7 +34,7 @@ the cell is empty rather than a search that gave up.
 
 from __future__ import annotations
 
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any
 
@@ -332,9 +332,10 @@ def solve(
             [basis[row][column] for row in range(lp.width)] for column in range(lp.width)
         ]
         multipliers = solve_square_system(transpose, [-value for value in lp.objective], lp.one)
-        leaving = next(
+        leaving = min(
             (position for position in range(lp.width) if sign(multipliers[position]) < 0),
-            None,
+            key=active.__getitem__,
+            default=None,
         )
         if leaving is None:
             return ExactSolution(
@@ -386,6 +387,62 @@ class Phase1Result:
     point: tuple[Scalar, ...]
     pivots: int
     started_feasible: bool
+
+
+@dataclass(frozen=True)
+class InfeasibilityCertificate:
+    """A Farkas contradiction on the original rows, with its phase-1 search cost.
+
+    `multipliers` is dense and aligned with `lp.rows`; no artificial row or variable
+    appears. The checker recomputes `gap = -sum(multiplier * rhs)`, which must be
+    strictly positive after the row coefficients cancel exactly.
+    """
+
+    multipliers: tuple[Scalar, ...]
+    gap: Scalar
+    pivots: int
+
+
+def check_infeasibility(
+    lp: ExactLP, multipliers: Sequence[Scalar], sign: Callable[[Scalar], int]
+) -> Scalar:
+    """Check `lambda >= 0`, `lambda A = 0`, `lambda b < 0`; return the positive gap.
+
+    This reader does not call the simplex or inspect an active set. With the program's
+    `<=` convention, these conditions contradict every feasible point, independently
+    of the objective. A zero gap cannot exclude legal touching or any other equality.
+    """
+    if len(multipliers) != len(lp.rows):
+        raise ExactLPError(
+            "bad-request",
+            f"an infeasibility certificate needs {len(lp.rows)} row multipliers, "
+            f"got {len(multipliers)}",
+        )
+    coefficients = [lp.zero] * lp.width
+    bound = lp.zero
+    for row, rhs, multiplier in zip(lp.rows, lp.rhs, multipliers, strict=True):
+        multiplier_sign = sign(multiplier)
+        if multiplier_sign < 0:
+            raise ExactLPError(
+                "invalid-certificate", f"row {row.label} carries a negative multiplier"
+            )
+        if multiplier_sign == 0:
+            continue
+        for column, value in enumerate(row.coefficients):
+            if not is_exactly_zero(value):
+                coefficients[column] = coefficients[column] + multiplier * value
+        bound = bound + multiplier * rhs
+    for column, value in enumerate(coefficients):
+        if sign(value) != 0:
+            raise ExactLPError(
+                "invalid-certificate", f"weighted coefficients do not cancel in column {column}"
+            )
+    gap = -bound
+    if sign(gap) <= 0:
+        raise ExactLPError(
+            "invalid-certificate", "the weighted right-hand side is not strictly negative"
+        )
+    return gap
 
 
 def auxiliary_program(
@@ -470,6 +527,45 @@ def auxiliary_program(
         one=lp.one,
     )
     return program, (*crash, blocking)
+
+
+def prove_infeasible(
+    lp: ExactLP,
+    sign: Callable[[Scalar], int],
+    *,
+    pivot_budget: int = DEFAULT_PIVOT_BUDGET,
+) -> InfeasibilityCertificate:
+    """Export and check phase 1's exact contradiction, or return a typed refusal.
+
+    At a positive auxiliary optimum the floor `t >= 0` is inactive. The nonnegative
+    multipliers of the remaining active rows cancel every original variable, and
+    their weighted original right-hand side is minus that positive optimum. Lifting
+    them to the original row inventory therefore gives a Farkas certificate.
+
+    A feasible original program raises `feasible`; budget and basis refusals propagate
+    without being interpreted as infeasibility. As in `feasible_basis`, the producer
+    requires enough independent rows to construct the auxiliary vertex. The checker
+    itself has no rank or vertex requirement.
+    """
+    program, start = auxiliary_program(lp, sign)
+    solution = solve(program, start, sign, pivot_budget=pivot_budget)
+    relaxation_sign = sign(solution.vertex.point[lp.width])
+    if relaxation_sign == 0:
+        raise ExactLPError("feasible", "phase 1 found a feasible point of the original program")
+    if relaxation_sign < 0:
+        raise ExactLPError("phase1-construction", "the phase-1 optimum violates its floor")
+
+    multipliers = [lp.zero] * len(lp.rows)
+    for index, value in zip(solution.vertex.active, solution.vertex.multipliers, strict=True):
+        if index == len(lp.rows):
+            if sign(value) != 0:
+                raise ExactLPError(
+                    "phase1-construction", "a positive phase-1 optimum has a nonzero floor dual"
+                )
+            continue
+        multipliers[index] = value
+    gap = check_infeasibility(lp, multipliers, sign)
+    return InfeasibilityCertificate(tuple(multipliers), gap, solution.pivots)
 
 
 def feasible_basis(
@@ -624,9 +720,55 @@ def fixed_cell_lp(
     - **separation**, per pair: each corner of the earlier square at or before each
       corner of the later one along the pair's fixed axis.
     """
+    if len(squares) < 2:
+        raise ExactLPError("bad-request", f"need at least two squares, got {len(squares)}")
+    return cell_lp_for_axes(squares, separating_axes(squares, sign), zero=zero, one=one)
+
+
+def cell_lp_for_axes(
+    squares: Sequence[Square],
+    choices: Mapping[tuple[int, int], tuple[int, int]],
+    *,
+    zero: Scalar,
+    one: Scalar,
+) -> ExactLP:
+    """Assemble a selected SAT cell without requiring a feasible reference pose.
+
+    Every canonical pair `(i, j)`, with `i < j`, must occur exactly once. A choice is
+    `(position, orientation)`: position indexes `edge_axes(i) + edge_axes(j)` in
+    `0..3`; orientation `+1` puts i before j along that axis, and `-1` reverses them.
+    Indices and signs are strict integers, not booleans or numerically equal floats.
+
+    Variables and row labels are those of `fixed_cell_lp`. The supplied corners fix
+    angles and translation origins only; they may overlap. Choosing one alternative
+    defines a branch, not a proof that all alternative branches have been covered.
+    """
     count = len(squares)
     if count < 2:
         raise ExactLPError("bad-request", f"need at least two squares, got {count}")
+    if not isinstance(choices, Mapping):
+        raise ExactLPError("bad-request", "pair choices must be a mapping")
+    expected = {(i, j) for i in range(count) for j in range(i + 1, count)}
+    for pair, choice in choices.items():
+        if (
+            not isinstance(pair, tuple)
+            or len(pair) != 2
+            or any(type(index) is not int for index in pair)
+            or pair not in expected
+        ):
+            raise ExactLPError("bad-request", f"invalid canonical pair {pair!r}")
+        if (
+            not isinstance(choice, tuple)
+            or len(choice) != 2
+            or any(type(value) is not int for value in choice)
+            or choice[0] not in range(4)
+            or choice[1] not in (-1, 1)
+        ):
+            raise ExactLPError("bad-request", f"invalid axis choice {choice!r} for pair {pair}")
+    if set(choices) != expected:
+        raise ExactLPError(
+            "bad-request", f"missing pair choices: {sorted(expected - set(choices))}"
+        )
     width = 2 * count + 1
     side_column = 2 * count
     rows: list[LinearRow] = []
@@ -646,7 +788,8 @@ def fixed_cell_lp(
             add(f"wall:{index}:right:{corner}", {index: one, side_column: -one}, -px)
             add(f"wall:{index}:top:{corner}", {count + index: one, side_column: -one}, -py)
 
-    for (i, j), (position, orientation) in separating_axes(squares, sign).items():
+    for i, j in sorted(expected):
+        position, orientation = choices[(i, j)]
         axis = (edge_axes(squares[i]) + edge_axes(squares[j]))[position]
         lo, hi = (i, j) if orientation > 0 else (j, i)
         for first, (px, py) in enumerate(squares[lo]):

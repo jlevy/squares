@@ -56,7 +56,7 @@ session:
     objective: Implement the smallest arbitrary-cell and uniform-row certificate path required by the accepted direct contracts.
     commitment: BC-261
     bead: think-0w2c
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Accepted direct implications expose a concrete missing infeasibility export and geometry descriptor; the band comparison is geometrically feasible.
     budget_minutes: 30
@@ -66,10 +66,72 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --push --since dd36800e
     kill_condition: Unproved row implication, malformed domain accepted, failed feasible or mutation control, or phase deadline; no scientific target while the instrument changes.
     fallback: Preserve the exact missing interface or failed control and admit a narrower correction or analytical slice prospectively.
+    outcome: >-
+      Exact Farkas export and bounded rational uniform rows are implemented. The
+      coordinator replayed all fourteen focused controls successfully. Independent
+      source-corner review accepts the release model with retained-rank wording;
+      complete case coverage and independent geometry reconstruction remain open.
+    evidence:
+    - packing/src/sqpack/exact_lp.py
+    - packing/src/sqpack/uniform_cell.py
+    - packing/tests/test_exact_lp_infeasibility.py
+    - packing/tests/test_uniform_cell.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-independent-review.md
+    stop_reason: Implementation wave completed early; no target was admitted.
+    next_action: Independently reconstruct uniform geometry and replay a complete two-square SAT cover before deciding the accepted instrument scope.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Independently reconstruct one uniform geometric leaf and replay a complete eight-alternative two-square control cover.
+    commitment: BC-261
+    bead: think-0w2c
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: Fourteen producer controls pass, but scientific use still needs an independent geometry reader and complete cover controls.
+    budget_minutes: 30
+    started_at: '2026-09-07T07:17:24Z'
+    deadline_at: '2026-09-07T07:47:24Z'
+    expected_output: A strict independent descriptor reader, complete small cover, mutation refusals and a scoped readiness decision.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --push --since dd36800e
+    kill_condition: Failed inclusion or control, growing generic framework, target invocation, or phase deadline.
+    fallback: Price the smallest missing consumer-specific interface explicitly and retain a readiness blocker; no target uses an unaccepted leaf.
+    outcome: >-
+      Independent rational geometry and arithmetic reconstruction and the complete
+      eight-alternative two-square cover pass all thirty-one combined controls.
+      The coordinator accepts that direct scope. Source-distinct review accepts
+      the producer and corrected Bland rule. H120 feature attachment remains
+      unready for LP execution; a separately frozen analytical attempt is selected.
+    evidence:
+    - packing/src/sqpack/uniform_cell_check.py
+    - packing/src/sqpack/uniform_cover.py
+    - packing/tests/test_uniform_cell_check.py
+    - packing/tests/test_uniform_cover.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-261-uniform-leaf-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-release-protocol.md
+    stop_reason: Required direct control scope is independently accepted; a complete H120 LP attachment would require a separate priced extension.
+    next_action: Commit the accepted instrument and analytical protocol, pass record validation, then dispatch the bounded BC273 proof and adversary.
+  - workflow: insight-iteration
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Attempt the unchanged complete middle-angle release determination under the frozen analytical protocol, with an independent adversary and reserved audit.
+    commitment: BC-273
+    bead: think-1btr
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: The direct instrument is controlled, but its missing feature attachment would expand implementation; an independently accepted analytical protocol tests the mathematics first.
+    budget_minutes: 30
+    started_at: '2026-09-07T07:44:12Z'
+    deadline_at: '2026-09-07T08:11:12Z'
+    expected_output: A complete exact exclusion or feasible target packing, or exact partial lemmas and the smallest unresolved geometric obligation.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: Work before the protocol commit and passing records, changed target or omitted seam, numerical target invocation, or the phase deadline.
+    fallback: Preserve incomplete mathematics and price a specific changed premise or adapter; retain the final independent audit through08:31:12Z.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Dispatch disjoint LP and uniform-geometry implementation, plus independent release-model review; publish the initial mathematical checkpoint.
+    next_action: Freeze and validate this checkpoint, then record actual shortened author and adversary leases before dispatch; no target has begun.
   primary_bead: think-0yfe
   status: in_progress
   budget:
@@ -159,19 +221,19 @@ session:
     excluded_commands: [Scientific target runs, Shared registry or Git mutations, New IDs, Dependency changes, Writes outside the assigned file or attic]
   - task: BC261 exact infeasibility and arbitrary-cell export
     operator: Codex capacity_protocol, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Export a checked phase-I Farkas witness and assemble arbitrary selected SAT choices without a feasible seed.
+    outcome: Exact phase-I contradiction export, arithmetic reader and complete selected-axis assembly implemented.
+    evidence: [packing/src/sqpack/exact_lp.py, packing/tests/test_exact_lp_infeasibility.py]
+    files: [packing/src/sqpack/exact_lp.py, packing/tests/test_exact_lp_infeasibility.py]
+    checks: [Nine focused controls passed, Six retained small controls passed, Ruff and BasedPyright clean]
+    uncertainty: Export alone does not prove geometric coverage or instrument readiness.
+    elapsed_seconds: 614
+    elapsed_quality: operator_reported_approximate
+    next_action: Independently reconstruct the other producer's uniform geometry.
     phase: 2
     budget_minutes: 20
-    started_at: '2026-09-07T06:51:37Z'
+    started_at: '2026-09-07T06:54:55Z'
     deadline_at: '2026-09-07T07:11:37Z'
     expected_output: Minimal exact_lp API and meaningful feasibility, infeasibility and mutation controls.
     validation_command: Focused exact-LP pytest controls and independent review.
@@ -181,19 +243,19 @@ session:
     excluded_commands: [Scientific target runs, Shared registry or Git mutations, New IDs, Dependency changes, Writes outside assigned files or attic]
   - task: BC261 rational uniform geometry leaf
     operator: Codex direct_contracts, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Build exact midpoint rows and proved full coefficient-error relaxations from a bounded geometry descriptor.
+    outcome: Strict rational descriptor and outward midpoint-row relaxation implemented with complete pair inventory and variable bounds.
+    evidence: [packing/src/sqpack/uniform_cell.py, packing/tests/test_uniform_cell.py]
+    files: [packing/src/sqpack/uniform_cell.py, packing/tests/test_uniform_cell.py]
+    checks: [Five focused controls passed, Ruff and BasedPyright clean, Coordinator combined replay passed fourteen tests in 0.45 seconds]
+    uncertainty: Independent reconstruction and complete control cover remain required.
+    elapsed_seconds: 521
+    elapsed_quality: operator_reported_approximate
+    next_action: Build the smallest complete two-square control cover against the independent reader interface.
     phase: 2
     budget_minutes: 20
-    started_at: '2026-09-07T06:51:37Z'
+    started_at: '2026-09-07T06:55:30Z'
     deadline_at: '2026-09-07T07:11:37Z'
     expected_output: Bounded rational descriptor and uniform-row construction with touching, width and malformed-input controls.
     validation_command: Focused uniform-cell pytest controls and independent geometry review.
@@ -203,19 +265,19 @@ session:
     excluded_commands: [Scientific target runs, Shared registry or Git mutations, New IDs, Dependency changes, Writes outside assigned files or attic]
   - task: BC273 independent release-model review
     operator: Codex release_model_review, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Independently reconstruct the release geometry from source corners and verify its prospective controls without deciding the target.
+    outcome: Source-bound reconstruction accepts the compact release model, source membership, local separation and strict cavity equivalence.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-independent-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-independent-review.md]
+    checks: [Exact source verifier passed eleven squares and all fifty-five pairs, Formatting and source-link checks passed]
+    uncertainty: Retained equality rank is nine but recontact can raise the full graph rank; source wording corrected. No H120 determination.
+    elapsed_seconds: 840
+    elapsed_quality: operator_reported_approximate
+    next_action: Independently review implemented row implications and scope controls before consumer admission.
     phase: 2
     budget_minutes: 20
-    started_at: '2026-09-07T06:51:37Z'
+    started_at: '2026-09-07T06:55:42Z'
     deadline_at: '2026-09-07T07:11:37Z'
     expected_output: Source-corner reconstruction and clear accepted or missing premises for the closed release pilot.
     validation_command: Source-bound symbolic derivation and exact known-control replay, no target execution.
@@ -223,7 +285,96 @@ session:
     fallback: Retain the exact failed or unproved premise and its smallest correction.
     write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-independent-review.md]
     excluded_commands: [Scientific target runs, Shared registry or Git mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC261 independent uniform geometry reader
+    operator: Codex capacity_protocol, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Full independent midpoint and outer-row reconstruction, exact bounds and conservative errors, and independent dense rational Farkas replay.
+    evidence: [packing/src/sqpack/uniform_cell_check.py, packing/tests/test_uniform_cell_check.py]
+    files: [packing/src/sqpack/uniform_cell_check.py, packing/tests/test_uniform_cell_check.py]
+    checks: [Seven reader controls passed, Twenty-two combined producer and reader tests passed in 0.42 seconds, Ruff and BasedPyright clean]
+    uncertainty: The reader certifies its declared cell; parent inclusion and complete branch coverage remain separate obligations.
+    elapsed_seconds: 557
+    elapsed_quality: operator_reported_approximate
+    next_action: Coordinator integration and consumer-specific scope decision.
+    phase: 3
+    budget_minutes: 20
+    started_at: '2026-09-07T07:17:50Z'
+    deadline_at: '2026-09-07T07:37:24Z'
+    expected_output: Strict uniform-cell reader and meaningful row, angle, sign, bound and certificate mutation controls.
+    validation_command: Focused independent-reader pytest controls and coordinator mathematical review.
+    kill_condition: Dependence on producer assembly, unproved implication, target invocation, or lane deadline.
+    fallback: Retain the precise unchecked premise and incomplete reader without a readiness claim.
+    write_scope: [packing/src/sqpack/uniform_cell_check.py, packing/tests/test_uniform_cell_check.py]
+    excluded_commands: [Scientific target runs, Shared registry or Git mutations, New IDs, Dependency changes, Writes outside assigned files or attic]
+  - task: BC261 complete small SAT control cover
+    operator: Codex direct_contracts, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: All eight directed alternatives independently bound to the identical closed two-square root and checked with positive exact gaps.
+    evidence: [packing/src/sqpack/uniform_cover.py, packing/tests/test_uniform_cover.py]
+    files: [packing/src/sqpack/uniform_cover.py, packing/tests/test_uniform_cover.py]
+    checks: [Nine complete-cover controls passed in 0.27 seconds, Ruff and BasedPyright clean, Coordinator combined replay passed thirty-one tests in 0.61 seconds]
+    uncertainty: Eleven-square retained-feature inclusion and complete target SAT branching are not supplied by the two-square cover.
+    elapsed_seconds: 496
+    elapsed_quality: operator_reported_approximate
+    next_action: Keep the direct leaf and control cover; independently review the analytical H120 protocol.
+    phase: 3
+    budget_minutes: 20
+    started_at: '2026-09-07T07:18:29Z'
+    deadline_at: '2026-09-07T07:37:24Z'
+    expected_output: Minimal flat complete cover, legal-touching and widened-box controls, and missing-branch or substituted-domain refusals.
+    validation_command: Focused complete-cover pytest controls and independent coordinator review.
+    kill_condition: Generic DAG machinery, omitted alternative or seam, target invocation, or lane deadline.
+    fallback: Keep the exact coverage failure and next bounded correction; no instrument readiness claim.
+    write_scope: [packing/src/sqpack/uniform_cover.py, packing/tests/test_uniform_cover.py]
+    excluded_commands: [Scientific target runs, Shared registry or Git mutations, New IDs, Dependency changes, Writes outside assigned files or attic]
+  - task: BC261 adversarial implementation and scope review
+    operator: Codex release_model_review, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Accepted exact producer and full uniform error implication; identified and accepted the corrected Bland row-order rule; priced analytical and feature-adapter routes.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-261-uniform-leaf-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-261-uniform-leaf-review.md]
+    checks: [Independent fifteen-test producer replay passed in 0.26 seconds, Ruff and BasedPyright clean, Formatting and links passed]
+    uncertainty: An angle-dependent center substitution needs additional row error; the accepted generic absolute-center leaf cannot silently supply it.
+    elapsed_seconds: 885
+    elapsed_quality: operator_reported_approximate
+    next_action: Attempt the reviewed analytical cavity route before adding a family adapter.
+    phase: 3
+    budget_minutes: 20
+    started_at: '2026-09-07T07:18:30Z'
+    deadline_at: '2026-09-07T07:37:24Z'
+    expected_output: Independent code and implication review, required refusal cases, and a priced smallest H120 consumer obligation.
+    validation_command: Source inspection, focused adversarial controls and exact mathematical review; no target execution.
+    kill_condition: Unproved implication, uncontrolled source or restricted-lemma reuse, target invocation, or lane deadline.
+    fallback: Report the exact blocker and the smallest safe accepted subset.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-261-uniform-leaf-review.md]
+    excluded_commands: [Scientific target runs, Shared registry or Git mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: H120 analytical protocol preflight
+    operator: Codex direct_contracts, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Accepted unchanged full T_mid mathematical protocol and preserved twenty-minute final audit; native W3 record replaces an unpublished executable-experiment draft.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-release-protocol.md]
+    files: []
+    checks: [Independent domain and acceptance comparison passed, Source control and all closed seams retained]
+    uncertainty: Acceptance reviewed the identical mathematical draft before transfer to the native file; coordinator verifies the transfer. No experiment124 was allocated and no executable analytical self-test is claimed.
+    elapsed_seconds: 221
+    elapsed_quality: operator_reported_approximate
+    next_action: Commit and validate the identical native protocol, then prospectively shorten author time as needed to start the audit by08:11:12Z.
+    phase: 3
+    budget_minutes: 10
+    started_at: '2026-09-07T07:35:59Z'
+    deadline_at: '2026-09-07T07:45:29Z'
+    expected_output: A concise protocol acceptance or exact preflight correction, without attempting its target theorem.
+    validation_command: Independent comparison of the native BC273 analytical protocol with the accepted release-domain design and source review.
+    kill_condition: Domain drift, missing closed seam or unaccepted premise, target proof work, or lane deadline.
+    fallback: Retain the exact protocol correction; no target work before commitment and record acceptance.
+    write_scope: [attic/agenda-028-overnight/]
+    excluded_commands: [Scientific target proof or solver work, Git or record writes, New IDs, Dependency changes, Writes outside attic]
   outputs:
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-release-protocol.md
   - packing/campaign/agent-sessions/session-092-hybrid-overnight.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
@@ -231,11 +382,13 @@ session:
   checks:
   - PR107 merged to main at dd36800ee30d5f6fa0bf5e881fc6747df0ccc826; the branch starts there.
   - Baseline content is identical to 06ddcc4a, whose 45 local pre-push checks and required hosted fast CI passed; full mathematical source checkpoints are retained in PR107.
-  - Source session091 and exp121 are occupied; an unpublished source H118 collision is awaiting explicit cross-task coordination approval.
+  - Initial source inventory found an unpublished H118 collision; fresh read-only inventory at 07:20Z confirms its owner renamed it H122 and now occupies H122-123 and exp121-123. No cross-task message was sent.
+  - Frozen first checkpoint 1a076e4e passed all 45 pre-push steps in 92.21 seconds, including 604 behavioral tests and 3 deselected, and was pushed to origin/codex/n11-hybrid-overnight.
+  - Hosted CI on 1a076e4e failed only the expired in-progress phase/delegation check; the tasks completed before their deadlines and their actual receipts are updated here. No validation rule was weakened.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-092.yaml
   stop_reason: null
-  next_action: Complete the bounded BC261 implementation and release-model review by 07:21:37Z, retain controls and exact missing premises, and continue to the 08:31Z pushed checkpoint.
+  next_action: Commit and validate the accepted direct instrument and unchanged BC273 analytical protocol, then dispatch prospectively shortened proof and adversary leases ending by08:11:12Z; reserve the audit and checkpoint through08:31:12Z.
 ---
 # Eight-Hour Hybrid and Release Investigation
 
@@ -257,17 +410,24 @@ solver runtimes or pre-authorized retries.
 | 14:31 UTC, hour 8 | Final reviewed results, global-bracket status, exact open obligations, costs, validation and next action | Hand off the next bounded run for a later allocation | Close this block honestly, preserving incomplete and never-opened scopes |
 
 Within each stage, slices are at most 30 minutes.
-Every fourth slice protects its last 20 minutes for integration and publication; shorter
-work ends early. The final reserve begins at 14:11:12 UTC. An early mathematical result,
-refusal or likely token interruption triggers an immediate checkpoint rather than
-waiting for the nominal time.
-A checkpoint does not spend the rest of the eight-hour authorization.
+Each two-hour stage protects its last 20 minutes for integration and publication;
+shorter work ends early.
+This follows the checkpoint clock when phases complete early, rather than counting an
+early phase as a full half-hour slot.
+The final reserve begins at 14:11:12 UTC. An early mathematical result, refusal or
+likely token interruption triggers an immediate checkpoint rather than waiting for the
+nominal time. A checkpoint does not spend the rest of the eight-hour authorization.
 
 The app heartbeat `n11-eight-hour-research-continuation` is active on the current task
 every twenty minutes through this block.
 It resumes this record and the existing clocks; it does not grant another eight hours or
 restart a frozen target.
 Its presence does not substitute for pushed checkpoint artifacts.
+
+[PR110](https://github.com/jlevy/squares/pull/110) is the execution record, based on
+merged PR107. Its first pushed checkpoint is `1a076e4e`; all 45 local pre-push steps
+passed on that exact revision.
+Subsequent work updates the same PR.
 
 The first wave has three workers: capacity design, release geometry and independent
 proof-contract review.
@@ -309,17 +469,22 @@ The branch is `codex/n11-hybrid-overnight`, based on `dd36800e`. The integration
 `think-0yfe`; BC270 is `think-9uv0`, BC273 is `think-1btr`, and the shared
 direct-contract/interface owners remain BC260 `think-ql1j` and BC261 `think-0w2c`. No
 additional hypothesis or experiment ID is allocated by this launch.
-Source exp121/session091 and published H118-121 stay fixed; recheck live allocations
-before any new registration.
-Do not proceed through an unresolved ID collision.
+The source owner has independently reconciled the earlier unpublished H118 collision by
+assigning its question H122. Fresh source inventory also contains H123 and
+experiments121-123, with session091 unchanged.
+Published H118-121 stay fixed.
+Recheck live allocations before any new registration; sequential next pointers are
+candidates, not reservations.
 
 The first design wave is complete.
 Exact band-subsystem packings prevent admission of that capacity comparison; the
 complete eleven-square residual compatibility is missing.
-The active phase builds a shared uniform certificate path and independently reviews the
-release model. Neither target is admitted.
-Check the current phase and delegation deadlines above before continuing implementation
-or beginning the next control slice.
+The release model has independent source-corner acceptance.
+Independent reconstruction and the complete small SAT cover are accepted at their exact
+direct scope. The next mathematical attempt uses the unchanged native BC273 analytical
+protocol; record validation and an immutable protocol commit precede its dispatch.
+No H120 LP target or H118 capacity target is admitted.
+Check the current phase and delegation deadlines above before continuing.
 After the final deadline, reconcile retained evidence and report the next request; start
 no further target under this block’s authorization.
 
