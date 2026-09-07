@@ -205,6 +205,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [MacIver’s Square-Packing Papers: Source and Method Review](docs/project/reviews/review-2026-09-07-maciver-square-packing.md) | dated review record | record | retained | — |
 | [Stromquist’s Twenty-Six-Square Packing](docs/project/research/research-2026-09-07-stromquist-n26-verification.md) | research synthesis | supporting | maintained | — |
 | [Stromquist’s `n = 26` Packing: Directions and a Restricted-Family Obstruction](docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md) | dated review record | record | retained | — |
 | [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | research synthesis | supporting | maintained | — |
@@ -649,6 +650,12 @@ separations.
 Green’s stronger source-reported lower bound is now recorded separately from
 the verified one at `n=26–27`; proof recovery is `think-0x08`, the remaining
 source-table audit is `think-4g6w`, and a changed-contact search design is `think-z0fi`.
+The [MacIver review](docs/project/reviews/review-2026-09-07-maciver-square-packing.md)
+adds three previously unindexed manuscripts.
+His reported lower bound at `4.450208382...` is below the verified `4.59` for both n17
+and n18. The missing computational artifacts remain a source gap; `think-sske` owns
+local replay of the center-area and capacity lemmas before adoption.
+Exact design controls show potential local cuts, not a new global bound.
 This source review leaves the selected BC-264 allocation intact.
 
 The

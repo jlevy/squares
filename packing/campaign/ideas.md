@@ -314,6 +314,31 @@ The agenda is prepared; none of the new instruments is declared ready.
 | 114 | Close a rank-nine released-contact domain | registered | [H-120](hypotheses/H-120-rank-nine-release-exclusion.md) | Prove a new continuous sublevel exclusion with all feature and local-chart seams retained. |
 | 115 | An axis-plus-one global minimizing representative | registered | [H-121](hypotheses/H-121-axis-plus-one-minimizer.md) | Establish an existential global reduction; restricted-family value proofs remain a separate obligation. |
 
+### MacIver Method Intake
+
+The
+[MacIver source review](../../docs/project/reviews/review-2026-09-07-maciver-square-packing.md)
+routes these methods to existing questions.
+The source and formal replay dependency `think-sske` precedes adoption of its geometric
+lemmas; the public Lean build is external evidence, and the full n17 computational proof
+has a separate artifact-recovery gap.
+No instrument readiness or target allocation changes here.
+
+- [H-111](hypotheses/H-111-resource-anchor-case-exclusion.md): conditional point losses
+  and the co-hit matching bound can inform complete resource-and-anchor cases.
+  Every geometric forcing clause and the case cover still need proof.
+- [H-118](hypotheses/H-118-capacity-versus-coupled-lp.md): the center-area lemma and
+  very-narrow strip law supply concrete candidate local cuts.
+  The review retains exact rational controls.
+  Acceptance still needs a natural target domain and an exact surviving witness for the
+  declared coupled LP on that same domain; stronger cuts than an incircle or rectangle
+  bound alone do not settle H-118.
+- [H-119](hypotheses/H-119-shared-anchor-correlation.md): the n17 paper’s
+  [exact translation support functions](https://github.com/DRMacIver/square-packing-research/blob/9e2cd597047e040a63b7dcd103e79962cfc2d781/papers/s17-lower-bound/paper.pdf)
+  suggest how to retain correlated translation domains.
+  This is a candidate technique after a common-anchor loss is diagnosed, not evidence of
+  the required uniform capture gap or the independent-minimum comparator’s limitation.
+
 ## Stromquist’s Twenty-Six-Square Construction
 
 Stromquist’s suggestion (private communication, September 2026) prompted the
@@ -325,8 +350,8 @@ separates the useful next dependencies from the restricted deformation already e
 
 | # | Idea | Status | Record | Crux |
 | --- | --- | --- | --- | --- |
-| 119 | Change contacts or split the central block in an n26 packing search | shaped | `think-z0fi` | Name which corner separations or rigid-block assumptions are released; replay both exact source constructions as controls before a registered comparison. |
-| 120 | Recover Green’s n26–27 lower-bound proof or reconstruct its point cover | shaped | `think-0x08` | The survey reports approximately 5.3918, but acceptance needs a complete proof or an independently checked all-angle cover. |
+| 119 | Change contacts or split the central block in an n26 packing search | shaped | `think-z0fi` | The [specified family](../../docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md#first-released-contact-family) has nine translation/side variables, one common angle, and four released pair branches. Build the affine LP adapter and replay its controls before the proposed sample; driver readiness remains false. |
+| 120 | Recover Green’s n26–27 lower-bound proof or reconstruct its point cover | shaped | `think-0x08` | The survey reports approximately 5.3918. Recover the missing geometry and proof; [MacIver’s defect accounting](../../docs/project/reviews/review-2026-09-07-maciver-square-packing.md#defect-charging-and-a-co-hit-graph) suggests conditional loss clauses but supplies no n26 scaffold or theorem. |
 
 ## Open questions
 

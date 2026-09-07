@@ -146,24 +146,137 @@ smaller enclosing square.
 | --- | --- |
 | Recover Memo III’s geometry | Completed: six independently shifted `1 × 2` dominoes reproduce Figure 4(b), with exact unit-square identities, all 325 pair checks, and every wall check at the cubic side. The [exact record](../../../packing/cases/stromquist/memo3-n26.json) retains the coordinates and comparison. The related `n = 18` current record also passes its separate exact replay. |
 | Rotate or translate the current solid block within the stated separation family | The proof above closes this proposed direction analytically. A numerical sweep would add no evidence to that claim. The restriction on separating faces must remain attached to any reuse of the result. |
-| Release a specified source contact pattern | Use the two verified constructions as controls. Preserve the memo’s six independent domino offsets; declare any additional freedom in their angles or frame positions. For the current construction, declare which internal block contacts or corner-triplet constraints are released. Test changed pair-separation assignments and compare against both the memo side and `U`. First verify that the chosen release can violate the obstruction’s assumptions; sliding unrelated side-column squares cannot do so. This is the next packing-search experiment, conditional on a reusable driver that preserves and replays the controls. |
+| Release a specified source contact pattern | The [first released-contact family](#first-released-contact-family) splits the current central block into nine squares at one common angle, with half-turn symmetry, and releases four specified pair branches. `think-z0fi` owns the affine LP adapter and controls. Driver readiness is false; no target LP or packing search has run. |
 
-For the third test, freeze the allowed motions, separating-axis branches, parameter
-intervals, and stopping rule before searching.
-A fixed-angle translation LP can evaluate one branch, but its feasibility is only
-branch-specific and its numerical optimum needs independent verification.
-An apparent improvement must become explicit coordinates and pass every pair and wall
-check at a side strictly below `U`. An unsuccessful finite sample establishes only the
-outcome of that sample.
-An exhaustive interval or exact argument would be required to close the whole released
-family.
+### First Released-Contact Family
 
-The central block’s rigid rotation is an inexpensive exact negative control for such a
-driver.
-It must reproduce `U` and refuse any claimed strict improvement while the proof’s
-assumptions remain imposed.
-A control failure would identify a geometry or constraint error before a candidate is
-treated as a new packing.
+The mathematical specification for `think-z0fi` is complete enough to implement the
+adapter and controls below.
+Driver readiness is false: no target LP or packing search has run.
+Its finite angle sample covers only the stated choices.
+
+#### Family and Parameters
+
+Start from `cases.gobel_offcentre.packing.build(2, 3)`. Keep its twelve aligned corner
+triplet squares and five side-column squares at their existing positions as affine
+functions of container side `L`. Thus the inner rectangle has width `W = L - 1` and
+height `H = L`; the added column has centers `(L - 1/2, k + 1/2)`, `k = 0,...,4`.
+
+Replace the rigid central `3 × 3` block by nine independently translated unit squares at
+one common angle. Impose half-turn symmetry on these nine squares about
+`C(L) = ((L - 1)/2, L/2)`. Label them `P_ij`, `i,j = 0,1,2`, by their source centers
+
+```
+C(L) + (i - 1) u + (j - 1) v,
+u = (cos(theta), sin(theta)), v = (-sin(theta), cos(theta)).
+```
+
+Use four independent center offsets `d_00`, `d_01`, `d_02`, `d_10`; set
+`d_(2-i,2-j) = -d_ij` and `d_11 = 0`. Bound each offset component to `[-1/2, 1/2]` and
+`L` to `[28/5, 45/8]`. There are eight free translation coordinates and `L`: nine linear
+variables at each fixed angle.
+These bounds define the proposed local family; they do not bound all possible
+improvements.
+
+The sole nonlinear parameter is `t = tan(delta/2)`, where `theta = pi/4 + delta` and `t`
+lies in `[-1/20, 1/20]`. Put `a = (1 - t²)/(1 + t²)`, `b = 2t/(1 + t²)`, and
+`u = ((a - b)/sqrt(2), (a + b)/sqrt(2))`. Rational `t` keeps all coefficients in
+`Q(sqrt(2))` and preserves the unit-edge identity exactly.
+
+The first prospective angle sample is exactly `t = -1/20, -1/40, 0, 1/40, 1/20`. This
+finite sample tests only those angles.
+The interval declaration preserves the intended later family; it is not certified by
+sampling it.
+
+#### Exactly Which Separations Are Released
+
+The proof’s whole-triplet versus solid-block inequalities are not imposed.
+The solid block equalities are also removed.
+Retain all unit-square pair nonoverlap constraints.
+
+Let `A` be the aligned square with lower-left corner `(1,0)` and `B` the square with
+lower-left corner `(0,1)`. Their inner corners `(2,1)` and `(1,2)` meet `P_00` and
+`P_01`, respectively.
+Release the signed separating-axis choices for these two pairs and their half-turn
+partners in the northeast triplet.
+For each southwest pair choose one of `+x`, `-x`, `+y`, `-y`, `+u`, `-u`, `+v`, `-v`;
+use the opposite signed normal on its half-turn partner.
+This gives `8 × 8 = 64` branch patterns per angle.
+
+In the exact builder’s zero-based output order, the expected four released pairs are
+`(4,18)`, `(1,15)`, `(11,14)`, and `(9,17)`. These are builder indices, not retained
+witness IDs. The implementation must derive the semantic labels from exact centers and
+assert this mapping before building an LP. The tilted-square order follows
+`P_ij = output[12 + 3*(2-j) + i]`; the aligned output indices are `A=4`, `B=1`,
+`A_NE=11`, and `B_NE=9`.
+
+For the other `325 - 4 = 321` pairs, freeze a deterministic signed axis from the exact
+Friedman pose at `t=0`, retaining axis identity when `u,v` rotate.
+Use exact signs to resolve choices and record the resulting full map.
+Freezing these other branches is a restriction of the experiment, not a claim that
+alternative branches are impossible.
+
+This family can violate the rigid-block assumptions and permits alternative separating
+axes at the four contacts underlying the obstruction.
+Feasibility or an improvement after those releases remains unproved.
+
+#### LP, Controls, and Acceptance
+
+For a selected signed normal `n` pointing from square `i` to `j`, impose
+
+```
+n · (center_j - center_i) >= h_i(n) + h_j(n),
+h_i(n) = (abs(n · u_i) + abs(n · v_i))/2.
+```
+
+All centers are affine in the nine variables and all support values are exact constants
+at fixed `t`. Add every wall inequality, the offset bounds, and the side bounds.
+This constructs one convex LP with all 325 pair constraints, including the four
+replacements. Solve `min L`, retain the complete coefficients and branch map, then
+reconstruct every corner from the returned exact point.
+
+Use the [exact LP implementation](../../../packing/src/sqpack/exact_lp.py): `ExactLP`,
+`LinearRow`, `solve_from_scratch`, and `certify_vertex`; a numerical solve may supply a
+basis hint. Existing `fixed_cell_lp` and the
+[quench’s `solve_cell`](../../../packing/src/sqpack/research/quench.py) do not directly
+represent this reduced family: their independent square translations and pose-derived
+branch selection require a new adapter with explicit affine substitution.
+Using either unchanged would test a different domain.
+
+Required controls before the target sample:
+
+- Reproduce the exact Friedman geometry at `t=0` and zero offsets.
+  Restore rigid-block equalities and the two whole-triplet separating-face inequalities,
+  then require the exact optimum to be `U = (7 + 3sqrt(2))/2`. Any strict improvement
+  with those restrictions imposed is an instrument failure.
+- Force `P_00` and `P_01` to coincide and require infeasibility or exact rejection.
+- Replay the memo’s six-domino construction through the geometry-verification pipeline.
+  This is an independent pipeline control: the memo is outside this 17-aligned,
+  9-common-angle family and has side greater than `U`.
+
+Accept an upper-bound improvement if the exact candidate side satisfies `L-U < 0` in
+`Q(sqrt(2))`, all 26 squares have exact unit edges, and independent pair/wall replay
+accepts all 325 pairs and every wall.
+Retain the exact feasible coordinates; an LP dual is required only for a claimed
+fixed-cell optimum or infeasibility, not for the upper-bound improvement.
+Keep the typed solver status separate from geometric acceptance: a capped or refused
+solve alone supplies no certificate, but does not disqualify a separately recovered and
+independently verified feasible packing.
+A float improvement alone is insufficient.
+An exact LP optimum or infeasibility certificate applies only to its fixed angle and
+branch; unsuccessful sampling does not exhaust the angle interval or all branch changes.
+
+#### Next Implementation Slice
+
+Implement the semantic-index check, nine-variable affine adapter, explicit branch-map
+serialization, and controls first.
+Measure one exact control LP before registering a target time limit.
+Then register the five angles and 64 branch patterns each, with fixed LP pivot limits, a
+total solve limit, and a rule to retain typed refusals.
+Publish every attempt’s side, certificate status, branch, and cost.
+Any undecided cell remains undecided.
+Broader angle refinement or additional released contacts require a subsequent declared
+slice.
 
 ## Recovering Green’s Reported Lower-Bound Argument
 
@@ -191,6 +304,16 @@ and require the exact or interval cover verifier to accept the complete pose dom
 A refusal should retain the escaping pose and the invalidated geometric assumption.
 Until then, Green’s value remains source-reported, distinct from the independently
 verified lower bound in the case record.
+
+The
+[MacIver source review](review-2026-09-07-maciver-square-packing.md#defect-charging-and-a-co-hit-graph)
+adds a possible conditional route under `think-0x08`: if a reconstructed scaffold admits
+avoiding squares, certify which point losses those squares force and combine the losses
+through the co-hit matching bound.
+That n17 method supplies neither the missing n26 points nor their geometric
+classification. A transferred proof must establish both for its own n26 domain.
+The source and formal replay dependency `think-sske` also remains open; no MacIver
+theorem is adopted here.
 
 ## The Earlier `5.52` Computation Is a Separate Lower-Bound Question
 

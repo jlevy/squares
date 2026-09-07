@@ -1522,10 +1522,10 @@ sessions:
     wall_hours: 1.4
     snapshot_incomplete: true
 - id: session-097
-  title: "Stromquist n26 construction verification"
+  title: "Stromquist n26 verification and MacIver source audit"
   status: in_progress
   primary_bead: think-zi3g
-  phases: 3
+  phases: 5
   measured: false
   unmeasured_reason: >-
     declares no rollups

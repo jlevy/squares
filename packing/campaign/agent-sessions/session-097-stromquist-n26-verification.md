@@ -7,12 +7,13 @@ softschema:
   status: enforced
 session:
   id: session-097
-  title: Stromquist n26 construction verification
+  title: Stromquist n26 verification and MacIver source audit
   date: '2026-09-07'
   started_at: '2026-09-07T22:04:11Z'
   deadline_at: '2026-09-07T23:58:28Z'
   branch: codex/stromquist-n26-verification
   goal: Resolve the author's n26 clarification against the scanned construction and live chart, verify the geometry, correct the source record, and pursue bounded mathematical directions.
+    Also audit MacIver's public papers, compare their bounds with the verified record, and preserve useful methods with explicit proof-coverage limits.
   workflow_phases:
   - workflow: pipeline-improvement
     focus: correctness
@@ -29,8 +30,12 @@ session:
     validation_command: .venv/bin/pytest -q tests/test_stromquist_memo3_n26.py
     kill_condition: A failed field precondition, pair separation, wall check, or independent oracle blocks acceptance.
     fallback: Retain the source-reported construction and exact missing verification obligation.
-    outcome: Exact cubic reconstruction checks all 26 unit squares, 325 pairs, and walls. Six tests pass with an independent rational-polynomial and half-plane oracle. Independent review accepts the strict comparison with Friedman and the scoped central-block support proof.
-    evidence: [packing/cases/stromquist/memo3-n26.json, packing/tests/test_stromquist_memo3_n26.py, docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md]
+    outcome: Exact cubic reconstruction checks all 26 unit squares, 325 pairs, and walls. Six tests pass with an independent rational-polynomial and half-plane oracle. Independent review
+      accepts the strict comparison with Friedman and the scoped central-block support proof.
+    evidence:
+    - packing/cases/stromquist/memo3-n26.json
+    - packing/tests/test_stromquist_memo3_n26.py
+    - docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md
     stop_reason: The known construction and its exact comparison are accepted; no new unrestricted bound is claimed.
     next_action: Integrate source corrections and research dispositions, then validate and publish the review checkpoint.
   - workflow: documentation-pass
@@ -48,8 +53,11 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --push
     kill_condition: A failed check requires diagnosis; an estimated time cannot authorize an incomplete claim or skipped required validation.
     fallback: Fix the failing surface, repeat its affected checks, and retain exact source identity and any remaining limitation.
-    outcome: Source attribution, private-communication credit, generated records, and the rendered acknowledgment are integrated. Pre-push checks found and drove corrections to record bookkeeping and the explainer's permalink wiring. The mathematical replay remains accepted.
-    evidence: [docs/project/research/research-2026-09-07-stromquist-n26-verification.md, packing/devtools/templates/explainer-article.md]
+    outcome: Source attribution, private-communication credit, generated records, and the rendered acknowledgment are integrated. Pre-push checks found and drove corrections to record
+      bookkeeping and the explainer's permalink wiring. The mathematical replay remains accepted.
+    evidence:
+    - docs/project/research/research-2026-09-07-stromquist-n26-verification.md
+    - packing/devtools/templates/explainer-article.md
     stop_reason: Final validation and publication move to a separate phase against a committed scientific state; the full checkpoint is still required.
     next_action: Commit the reviewed changes, run the full checkpoint, and close the measured session after validation.
   - workflow: documentation-pass
@@ -57,9 +65,10 @@ session:
     recording: contemporaneous
     clock_role: work
     objective: Validate the committed scientific state, retain the final resource receipt, and publish the reviewed source correction with passing local and hosted checks.
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
-    switch_reason: The substantive source and geometry changes are complete; the permalink contract requires the new report to exist in the linked commit, and the full checkpoint needs a stable source identity.
+    switch_reason: The substantive source and geometry changes are complete; the permalink contract requires the new report to exist in the linked commit, and the full checkpoint needs
+      a stable source identity.
     budget_minutes: 60
     started_at: '2026-09-07T22:34:51Z'
     deadline_at: '2026-09-07T23:34:51Z'
@@ -67,10 +76,57 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate
     kill_condition: A failed check blocks completion and requires diagnosis; the declared checkpoint time is not a reason to skip required validation.
     fallback: Repair the failing surface and repeat affected checks while preserving the exact source identity covered by each receipt.
+    outcome: 'The clean 48a4544f full checkpoint completed 66 steps in 2565.37 seconds: 64 passed, two failed on time guards. All 3425 quick, 98 slow, and 55 exhaustive tests passed
+      their assertions. Two negative controls timed out at 120 seconds and then passed unchanged in serial replay. Thirteen quick tests exceeded the 12-second wall guard. No logic failure
+      was found; a passing fast checkpoint remains required.'
+    evidence:
+    - packing/campaign/agent-sessions/session-097-validation/full-48a4544f.json
+    - packing/campaign/agent-sessions/session-097-validation/reducible-control-48a4544f.jsonl
+    - packing/campaign/agent-sessions/session-097-validation/pivot-control-48a4544f.jsonl
+    stop_reason: The new user source request was reviewed alongside the full run; final integration and time-guard rechecking proceed in a separate phase.
+    next_action: Run the unchanged fast surface with lower process concurrency after integrating the reviewed source additions.
+  - workflow: factual-review
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Audit MacIver's public square-packing papers against the source database and verified bounds, assess reusable mechanisms, and integrate a reviewed evidence record.
+    status: completed
+    entered_by: user_request
+    bead: think-904u
+    switch_reason: The user added MacIver's source and proof mechanisms while the committed n26 full validation was still running.
+    budget_minutes: 45
+    started_at: '2026-09-07T23:07:15Z'
+    deadline_at: '2026-09-07T23:52:15Z'
+    expected_output: Version-pinned source record, exact bound comparison, independently reviewed mechanism assessment, and explicit proof-replay limits.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: Missing evidence or a proof gap prevents promotion of the source claim to verified status.
+    fallback: Retain attributable source statements and name exact unresolved proof obligations.
+    outcome: Three agents identified the pinned public source, audited numerical and formal-proof coverage, and derived concrete local-capacity controls. The coordinator independently
+      checked the bound comparison, counting argument, interval controls, and all proposed record changes. Three original PDFs and faithful extractions are ready for the integrated checkpoint.
+    evidence:
+    - docs/project/reviews/review-2026-09-07-maciver-square-packing.md
+    - packing/resources/web/maciver-square-packing-2026-09-07/README.md
+    stop_reason: The source and method assessment is accepted; no MacIver theorem is promoted and no new target experiment is claimed.
+    next_action: Validate the integrated records and preserve local theorem replay as think-sske.
+  - workflow: documentation-pass
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Integrate the accepted source records and n26 design, pass the unchanged fast gate under bounded concurrency, and close the measured review for publication.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: The full run found time-guard failures after all test assertions passed; source and mathematical reviews are complete, so the final record can now be integrated.
+    budget_minutes: 30
+    started_at: '2026-09-07T23:24:04Z'
+    deadline_at: '2026-09-07T23:54:04Z'
+    expected_output: Reviewed integrated source commit, passing fast validation, retained honest full-run and replay outcomes, terminal session record and pull request.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --fast --jobs 3 --inner-jobs 1
+    kill_condition: A logical failure or unchanged timing failure requires diagnosis; no guard is weakened to manufacture a pass.
+    fallback: Retain the precise failed run and recheck the affected surface with measured resource limits or hosted validation.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Close the session with measured cost and publish the verified checkpoint.
+    next_action: Close the measured source review after validation, then publish and inspect hosted checks.
   primary_bead: think-zi3g
   status: in_progress
   budget:
@@ -90,9 +146,13 @@ session:
     status: completed
     recording: retrospective
     outcome: Implemented exact cubic coordinates, all-pair and wall replay, historical comparisons, and independent rational-polynomial tests.
-    evidence: [packing/cases/stromquist/memo3-n26.json]
-    files: [packing/cases/stromquist/memo3_n26.py, packing/tests/test_stromquist_memo3_n26.py]
-    checks: [Six focused tests passed; Ruff and BasedPyright reported zero findings; independent source reviewer accepted the geometry.]
+    evidence:
+    - packing/cases/stromquist/memo3-n26.json
+    files:
+    - packing/cases/stromquist/memo3_n26.py
+    - packing/tests/test_stromquist_memo3_n26.py
+    checks:
+    - Six focused tests passed; Ruff and BasedPyright reported zero findings; independent source reviewer accepted the geometry.
     uncertainty: This is a verified historical upper construction; optimality is not established.
     elapsed_seconds: null
     elapsed_quality: unavailable
@@ -103,9 +163,11 @@ session:
     status: completed
     recording: retrospective
     outcome: Confirmed the live chart, historical cubic attribution, n18 independent rediscovery, missing Green proof, exact reconstruction, and scoped block obstruction.
-    evidence: [docs/project/research/research-2026-09-07-stromquist-n26-verification.md]
+    evidence:
+    - docs/project/research/research-2026-09-07-stromquist-n26-verification.md
     files: []
-    checks: [Scanned memo and DS7 pages inspected; Gardner pp299–300 checked visually; six focused tests and existing n26/n18 exact replays passed independently.]
+    checks:
+    - Scanned memo and DS7 pages inspected; Gardner pp299–300 checked visually; six focused tests and existing n26/n18 exact replays passed independently.
     uncertainty: The primary Green proof and n26 point data remain unrecovered.
     elapsed_seconds: null
     elapsed_quality: unavailable
@@ -115,14 +177,65 @@ session:
     operator: Codex n26_directions
     status: completed
     recording: retrospective
-    outcome: Derived an exact restricted-family obstruction to intact central-block rotation, identified meaningful contact-release prerequisites, and separated Green recovery from the unresolved BC202 numerical lower-bound attempt.
-    evidence: [docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md]
-    files: [docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md]
-    checks: [Independent reviewer and coordinator accepted the support proof; six-offset-domino source description corrected; Flowmark and whitespace checks passed.]
+    outcome: Derived an exact restricted-family obstruction to intact central-block rotation, identified meaningful contact-release prerequisites, and separated Green recovery from the
+      unresolved BC202 numerical lower-bound attempt.
+    evidence:
+    - docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md
+    files:
+    - docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md
+    checks:
+    - Independent reviewer and coordinator accepted the support proof; six-offset-domino source description corrected; Flowmark and whitespace checks passed.
     uncertainty: Changed contacts, split blocks, and moving corner frames lie outside the proved family.
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Use think-z0fi for a separately specified contact-changing experiment and think-0x08 for Green evidence recovery.
+  - task: Identify MacIver sources and prepare archive/database integration
+    phase: 4
+    operator: Codex n26_sources
+    status: completed
+    recording: retrospective
+    outcome: Pinned the three canonical manuscripts, visually inspected title pages, retained source and CI metadata, verified missing n17 computation files, and prepared schema-valid
+      historical evidence records.
+    evidence:
+    - docs/project/reviews/review-2026-09-07-maciver-square-packing.md
+    files: []
+    checks:
+    - Coordinator review accepted; no source theorem is promoted and no target experiment is claimed.
+    uncertainty: No local Lean build or replay of the missing n17 computation artifacts was performed.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Use think-sske for local theorem replay before adoption.
+  - task: Assess MacIver mechanisms and specify a released-contact n26 family
+    phase: 4
+    operator: Codex n26_directions
+    status: completed
+    recording: retrospective
+    outcome: Derived local triple-box and strip-capacity controls, checked defect/matching and correlated-support identities, rejected the unsupported broad 4.5 ceiling, and prepared
+      the nine-variable n26 LP design.
+    evidence:
+    - docs/project/reviews/review-2026-09-07-maciver-square-packing.md
+    files: []
+    checks:
+    - Coordinator review accepted; no source theorem is promoted and no target experiment is claimed.
+    uncertainty: No local Lean build or replay of the missing n17 computation artifacts was performed.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Use think-sske for local theorem replay before adoption.
+  - task: Independently review MacIver comparisons and validation failures
+    phase: 4
+    operator: Codex n26_geometry
+    status: completed
+    recording: retrospective
+    outcome: Confirmed exact bound arithmetic and formal theorem coverage, reviewed the coordinator's complete assessment, and replayed both timed-out controls unchanged.
+    evidence:
+    - docs/project/reviews/review-2026-09-07-maciver-square-packing.md
+    files: []
+    checks:
+    - Coordinator review accepted; no source theorem is promoted and no target experiment is claimed.
+    uncertainty: No local Lean build or replay of the missing n17 computation artifacts was performed.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Use think-sske for local theorem replay before adoption.
   outputs:
   - docs/project/research/research-2026-09-07-stromquist-n26-verification.md
   - docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md
@@ -130,15 +243,29 @@ session:
   - packing/frontier/n-026.md
   - packing/frontier/n-027.md
   - packing/devtools/templates/explainer-article.md
+  - docs/project/reviews/review-2026-09-07-maciver-square-packing.md
+  - packing/resources/web/maciver-square-packing-2026-09-07/README.md
+  - packing/frontier/n-017.md
+  - packing/frontier/n-018.md
   checks:
   - Baseline records tier passed all 31 selected steps in 67.47 seconds after the locked Python environment and pinned submodule were initialized.
   - Existing Friedman exact replay passed all 325 pairs and walls for n26 and rejected duplicate and overfull-column controls; its companion n85 replay also passed.
   - Coordinator's six focused tests passed in 4.36 seconds, including an exact check against the retained JSON record; the author and independent reviewer separately passed all six.
-  - Initial pre-push attempt selected 45 steps and failed on missing development tools in PATH, stale report/count/ledger views, a missing session deadline, and the case-prose check parsing an unparenthesized algebraic upper bound as its leading integer. Its behavioral selection had 692 passes and one failure on the stale synopsis count; these integration failures are corrected before rerunning.
-  - Second pre-push attempt passed 43 of 45 steps in 275.69 seconds, with 750 behavioral passes and one failure. It caught an unpinned acknowledgment link and a prose phrase in the declared validation command; the link now uses the explainer's commit-pinned URL mechanism and the command is executable.
+  - Initial pre-push attempt selected 45 steps and failed on missing development tools in PATH, stale report/count/ledger views, a missing session deadline, and the case-prose check
+    parsing an unparenthesized algebraic upper bound as its leading integer. Its behavioral selection had 692 passes and one failure on the stale synopsis count; these integration failures
+    are corrected before rerunning.
+  - Second pre-push attempt passed 43 of 45 steps in 275.69 seconds, with 750 behavioral passes and one failure. It caught an unpinned acknowledgment link and a prose phrase in the declared
+    validation command; the link now uses the explainer's commit-pinned URL mechanism and the command is executable.
   - The local explainer PDF renders, its print-layout checker exits zero, and the acknowledgment and affected following pages pass visual inspection.
+  - Pre-push at 48a4544f passed all 45 selected steps in 426.80 seconds, including 796 behavioral tests; the rendered explainer and print-layout check passed at that commit.
+  - 'full gate: full at 48a4544f: failed (64 of 66 steps passed in 2565.37 seconds; all test assertions passed; two negative-control timeouts and thirteen quick-test wall overruns)'
+  - 'The two timed-out controls passed separately on clean 48a4544f with the unchanged 120-second limit: reducible-polynomial control 86.814 seconds and pivot-budget control 44.715 seconds.
+    Heavy host load was observed; the replay does not establish its sole causal role.'
+  - Three independent MacIver audits and the coordinator agree on the exact bound comparison, missing computational artifacts, limited Lean coverage, and candidate local-capacity controls;
+    public CI success is external evidence only.
+  - The final fast checkpoint declares PYTHON_CPU_COUNT=4 with three outer workers and one inner worker, reducing process concurrency without changing tests or time guards.
   stop_reason: null
-  next_action: Integrate the exact memo verification, independently review the restricted-family proof, and preserve the source-reported Green lower-bound gap.
+  next_action: Validate the integrated source audit, close the measured review, and publish the review checkpoint; retain the named future theorem-replay and research dependencies.
 ---
 # Stromquist n26 Verification
 
@@ -163,6 +290,13 @@ mathematical disposition and documentation, and final validation and publication
 Each slice has a thirty-minute checkpoint; later work is replanned from the returned
 evidence. Known-construction verification is a pipeline control, and the analytic
 restricted-family result remains a scoped review rather than an unrestricted bound.
+
+The user added the MacIver source audit while the clean n26 full checkpoint was running.
+Its initial identification work is unclocked; phase 4 begins at the retained prospective
+source-audit declaration.
+The full run remained on its clean source commit while all MacIver edits were prepared
+and independently reviewed in temporary copies.
+Phase 5 integrates those accepted copies after the full process exits.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

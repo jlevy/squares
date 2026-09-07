@@ -4,6 +4,48 @@ softschema:
   status: enforced
 last_reviewed: '2026-09-07'
 evidence:
+  - id: E-n017-maciver-reported-lower
+    claim: lower-bound
+    scope: {n_values: [17, 18]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    novelty: previously-published
+    relationship_to_generator: unknown-historical
+    origin: external
+    source_key: '[MacIver 2026 n17]'
+    replay_status: public-certificate-missing
+    proof:
+      source: packing/resources/web/maciver-square-packing-2026-09-07/maciver-2026-seventeen-unit-squares-lower-bound.pdf
+      theorem: Theorem 1.1 and Corollary 1.2
+      scope: Source claim s(17), s(18) > (40sqrt(2)+19)/17 + 1/200, approximately 4.450208382054341.
+      pinpoints: Printed page 1; Appendix A describes the fourteen certificates, exact ledger, and partial Lean coverage.
+      assumptions:
+        - Unit squares may rotate independently and have pairwise disjoint interiors.
+        - The claimed nonpacking result concerns a closed square container at the exact stated side.
+        - The eighteen-square corollary uses monotonicity from the seventeen-square claim.
+      audit_record: packing/resources/web/maciver-square-packing-2026-09-07/README.md
+    external_review:
+      state: not-reviewed
+      date: '2026-09-07'
+      reviewed_by: repository
+      note: Source identification, title-page inspection, proof-coverage inspection, and public-file inventory only; no full proof audit or local replay.
+    limitations: >-
+      The manuscript dated 8 August 2026 is retained at public commit
+      9e2cd597047e040a63b7dcd103e79962cfc2d781 (10 August 2026).
+      It reports a completed aggregate replay, but the inspected snapshot contains
+      none of the named C1-C14 certificate files, cited scripts/s17_green_*.py
+      replay and ledger programs, or Makefile targets. The public Lean S17 file
+      proves supporting algebra and an abstract counting identity, not the full
+      nonpacking theorem. Successful upstream Lean CI does not cover those missing
+      computations and was not replayed locally. The author discloses AI assistance
+      and incomplete human review. This historical value is below the independently
+      verified 459/100 for both cases and replaces neither verified lower bound.
+    blocker:
+      kind: source-evidence
+      detail: Obtain C1-C14, the exact ledger and theorem assembler, and their replay dependencies; then inspect their geometric interfaces and replay the complete theorem at the pinned target.
+    source_reviewed: '2026-09-07'
+
   - id: E-green26-reported-lower
     claim: lower-bound
     scope: {n_values: [26, 27]}

@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **57** evidence records. **46** are formal; **40** of those were established here.
-- **7** rest on an argument made elsewhere, of which **5** have been read by nobody here.
+- **58** evidence records. **46** are formal; **40** of those were established here.
+- **8** rest on an argument made elsewhere, of which **6** have been read by nobody here.
 - **16** claim to be first established here. **4** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
@@ -20,6 +20,7 @@ results, it is a statement about what this repository has itself examined.
 
 | evidence | cases | claim | assurance | method decides | whose work | read here | novelty |
 | --- | ---: | --- | --- | --- | --- | --- | --- |
+| `E-n017-maciver-reported-lower` | 0 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published |
 | `E-green26-reported-lower` | 2 | lower-bound | reported | - | - | - | previously-published |
 | `E-kingbird-upper-register` | 98 | upper-bound | reported | - | - | - | previously-published |
 | `E-unitsquare-release1-report` | 2 | upper-bound | reported | - | - | - | previously-published |
@@ -80,9 +81,9 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 7, verified 46
-- **method**: exact-algebraic 36, interval-certified 3, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 7
-- **novelty**: apparently-novel 16, common-knowledge 4, not assessed 4, previously-published 33
+- **assurance**: numerically-checked 4, reported 8, verified 46
+- **method**: exact-algebraic 36, interval-certified 3, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 8
+- **novelty**: apparently-novel 16, common-knowledge 4, not assessed 4, previously-published 34
 
 The `cases` column is how many of the hundred frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited by ninety-eight cases is the catalogue everyone reports from and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

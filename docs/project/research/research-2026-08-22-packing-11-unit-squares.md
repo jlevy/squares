@@ -6,7 +6,10 @@
 
 **Status:** The literature report is preserved as of 2026-08-25, with dated source
 corrections. The project summary records results through the 2026-09-06 refresh; the
-2026-09-07 n26 review corrects the table’s source-reported lower bounds for n26–27.
+2026-09-07 n26 review corrects the table’s source-reported lower bounds for n26–27. The
+same day’s [MacIver review](../reviews/review-2026-09-07-maciver-square-packing.md) adds
+his missing computational artifacts to the source-availability table; his three
+manuscripts are now archived, and no operative bound changes from that addition.
 
 ## How to read the citations
 
@@ -2068,6 +2071,7 @@ in place of the PDF on a re-test, not that access was assumed to be blocked.
 | Source | Year | Where | Obstacle | What rests on it |
 | --- | --- | --- | --- | --- |
 | **[Arslanov–Bui 2025]** Note on “efficient packings of unit squares in a large square” | 2025 | Discrete Comput. Geom. | paywall | Current continuation of the Kearney-Shiu delta_n / n_r line. |
+| **[MacIver 2026 n17 artifacts]** Supporting C1-C14 certificates, exact ledger, and theorem replay for the seventeen-square lower-bound manuscript | 2026 | Supporting computational artifacts cited by an author-hosted manuscript | unpublished | Independent replay of the historical source claim s(17), s(18) > (40sqrt(2)+19)/17 + 1/200 and assessment of the deformed-scaffold conditional counting method. Neither current verified 459/100 lower bound depends on these artifacts. |
 | **[Plakhta 2021]** Configuration spaces of squares in a rectangle | 2021 | Algebraic & Geometric Topology 21, 1445-1478 | bot-blocked | H-032’s literature routing for affine Morse-Bott analysis of square configuration spaces in a rectangle; it is context and method, not a classification of the exact optimal-moduli spaces asked there. |
 | **[Chung–Graham 2009]** Packing equal squares into a large square | 2009 | J. Combin. Theory Ser. A 116, 1167-1175 | paywall | The O(x^{(3+sqrt(2))/7} log x) step in the asymptotic chain. |
 | **[Chung–Graham 2020]** Efficient packings of unit squares in a large square | 2020 | Discrete Comput. Geom. | paywall | The claimed O(x^{3/5}) bound that McClenagan states “has an error in it”. Reading it would let us describe the error rather than relay the claim. |

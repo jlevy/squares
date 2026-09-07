@@ -27,7 +27,7 @@ formula in a `.md` looks suspicious.
 
 **Transcription status, stated exactly.** The archive normally stores an original
 source, a cleaned `.md` transcription, and a faithful `.raw.md` extraction.
-Nineteen entries currently fall short in ways worth naming rather than hiding:
+Twenty-two entries currently fall short in ways worth naming rather than hiding:
 
 - `gensane-ryckelynck-2005-improved-dense-packings`,
   `nagamochi-2005-packing-unit-squares-in-a-rectangle`,
@@ -58,6 +58,11 @@ Nineteen entries currently fall short in ways worth naming rather than hiding:
   **image-only scans with concise reading aids**, not cleaned transcriptions.
   Their `.raw.md` files are unedited page-ordered Tesseract OCR for search, not source
   ground truth; formulas and figures must be checked against the PDFs.
+- The three [MacIver 2026 manuscripts](web/maciver-square-packing-2026-09-07/README.md)
+  have original PDFs, faithful `pdftotext -layout` extractions, and one shared reading
+  aid. They have no cleaned transcriptions.
+  The packet records their source claims, incomplete local verification, and the missing
+  computational artifacts for the seventeen-square proof.
 
 Writing the missing transcriptions is deferred deliberately rather than done hastily—
 model-assisted cleanup is exactly what produced the reconstruction hazards tabulated in
@@ -213,6 +218,7 @@ hypotheses to be matched to the square pose chart and its nonsmooth feature chan
 | **[Brandwijk n17 capsule]** | Exact 16-point certificate capsule for `s(17) > 89/20`, offline checker, metadata, local audit, and later supersession context | zenodo.org | `literature-refresh-2026-09-05/` |
 | **[Burns n17 addendum 2026-09-07]** | The rest of Burns’s series: the introduction post, the near-record arrangement’s coordinates file and five figures, the two post images, a replay receipt for the retained `4.4811` verifier, and a Squarl repository pointer; extends `[Burns–Massaccesi n17]` without editing its frozen README | sam-burns.com; github.com/sam-bee/squarl | `burns-n17-series-addendum-2026-09-07/` |
 | **[GitHub n17 certificates 2026]** | Three August 2026 GitHub certificate repositories for `s(17)` found outside the indexed corpus: Mira’s exact 16-point pose-space certificates (`4.450837`, then `4.468292` with triangle-piercing leaves), Fort’s `4.456575` on the same architecture, and anabologyco-maker’s weighted-measure candidate `9141/2000 = 4.5705` with an exact orientation partition and a Lean layer; retained with their checkers, replay scripts and receipts | github.com | `n17-github-certificates-2026/` |
+| **[MacIver 2026 papers]** | Three author-hosted manuscripts: a reported `s(17), s(18) > 4.450208382…`, the center-area lemma, and center-count bounds; original PDFs, faithful extractions, source revision, upstream CI receipt, and a reading aid with verification limits | github.com/DRMacIver; drmaciver.github.io | `maciver-square-packing-2026-09-07/` |
 | **[De Winter 2026]** | Mutable author report of proposed construction improvements at `n = 68, 126, 206`; coordinates unavailable and values unreplayed | researchgate.net | `de-winter-improved-packings-2026/` |
 | **[Literature refresh 2026-09-05]** | Frozen arXiv, Crossref, OpenAlex, and Zenodo receipts; additions, currentness checks, and nearby-problem exclusions | primary sources and scholarly indexes | `literature-refresh-2026-09-05/` |
 | **[`s(11)` lower-bound audit 2026]** | Exact-value, reciprocal, catalogue, citation-chain, and method-lineage search supporting the scoped novelty claim for `381/100` | primary papers; author pages; scholarly indexes; public catalogues | `s11-lower-bound-literature-audit-2026/` |
@@ -225,6 +231,18 @@ hypotheses to be matched to the square pose chart and its nonsmooth feature chan
 | **[squaring.net Sprague]** | Priority for the first published perfect squared square | squaring.net | `squaring-net-sprague` |
 | **[Wikipedia]** | Square packing overview | en.wikipedia.org | `wikipedia-square-packing` |
 | **[`n = 19–21` lower-bound audit 2026]** | Versioned DS7 history, evidential status, and bounded priority check for the `24/5` certificate | combinatorics.org; retained papers and web captures | `n19-n21-lower-bound-literature-audit-2026/` |
+
+The MacIver packet preserves three separate citation identities at commit
+`9e2cd597047e040a63b7dcd103e79962cfc2d781` (10 August 2026). Its
+[reading aid](web/maciver-square-packing-2026-09-07/README.md) distinguishes the
+manuscripts’ printed dates from that source revision and the September retrieval date.
+No journal venue or DOI for them was identified in the inspected source.
+
+| Key | Manuscript | Printed date | Retained source |
+| --- | --- | --- | --- |
+| **[MacIver 2026 n17]** | *An improved lower bound for packing seventeen unit squares in a square, via a deformation of Green’s scaffold with certified defect charging* | 8 August 2026 | [PDF](web/maciver-square-packing-2026-09-07/maciver-2026-seventeen-unit-squares-lower-bound.pdf) |
+| **[MacIver 2026 center-area]** | *The Center-Area Lemma: Three disjoint unit squares whose centers form a non-obtuse triangle span area at least 1/2* | No date printed; present at the pinned August commit | [PDF](web/maciver-square-packing-2026-09-07/maciver-2026-center-area-lemma.pdf) |
+| **[MacIver 2026 nmax]** | *Counting unit squares by their centers: sharp convex bounds and exact strip laws* | August 2026 | [PDF](web/maciver-square-packing-2026-09-07/maciver-2026-counting-unit-squares-by-centers.pdf) |
 
 ## Special Kingbird SVG Witnesses
 
@@ -270,6 +288,7 @@ The short version below is kept for readers of this archive.
 | Arslanov & Bui, *Note on “efficient packings of unit squares in a large square”*, DCG (2025) | Springer; not open access. |
 | Brooks, Smith, Stone & Tutte, *The dissection of rectangles into squares*, Duke Math. J. 7 (1940) | Project Euclid; not open access |
 | Gustafsson & Thulin (1980), *Ronden* | Swedish company periodical; Ellsworth notes he has not read it directly either |
+| MacIver (2026), supporting C1-C14 certificates and exact ledger/replay scripts | Absent from the inspected public commit of 10 August 2026; checked 7 September. The manuscript itself is archived. |
 
 ## Provenance and Licence
 
