@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Please cite the technical note and repository if you use this result or certificate."
+title: "Exact certificate for packing 17 unit squares in a square"
+type: software
+authors:
+  - name: "Mira"
+version: 1.1.0
+date-released: 2026-08-11
+repository-code: "https://github.com/Mira-acc/17squares"
+url: "https://github.com/Mira-acc/17squares/blob/main/paper/17squares-lower-bound.pdf"
+abstract: >-
+  Exact computer-assisted proof that the minimum containing-square side length
+  for 17 pairwise interior-disjoint unit squares satisfies s(17) > 4.468292.
+preferred-citation:
+  type: article
+  authors:
+    - name: "Mira"
+  title: "An Exact Computer-Assisted Lower Bound for Packing 17 Unit Squares in a Square"
+  year: 2026
+  url: "https://github.com/Mira-acc/17squares/blob/main/paper/17squares-lower-bound.pdf"

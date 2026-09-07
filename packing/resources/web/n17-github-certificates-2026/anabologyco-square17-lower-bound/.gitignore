@@ -1,0 +1,5 @@
+bin/
+verification-logs/
+.lake/
+build/
+logs/reproduction_coverage/

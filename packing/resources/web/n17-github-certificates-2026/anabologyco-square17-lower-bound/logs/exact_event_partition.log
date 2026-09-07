@@ -1,0 +1,4 @@
+polynomials=150531 samples=148937 expected_roots=148936
+located_incidences=149049 seconds=2.99797
+root_gaps=148936 gcd_checks=149049 common=1 seconds=2.31568
+EXACT EVENT PARTITION PASS
