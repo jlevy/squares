@@ -51,16 +51,36 @@ experiment:
       changed fixed square, obstacle substitution or budget extension.
       Launch before08:28UTC or retain non-invocation for a fresh future allocation.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-124-full-square-compatibility-screen/packet.json
-  lease:
-    expires: '2026-09-07T08:28:00Z'
-    host: Session093 coordinator; prospective, no scientific process invoked
-  results: []
+  effort:
+    timebox: One thirty-second producer; the conditional ten-second reader was not invoked
+    wall_seconds: 0.84
+    stopped_by: criterion
+  results:
+  - shape: determination
+    role: outcome
+    question: Does this one fixed-S exact45-Q slice refute full distinguished-square compatibility?
+    outcome: criterion_missed
+    checked_by: The actual producer exited zero with complete no_witness output after837 event cells,47 canonical cells and one uncovered canonical cell. The witness-only reader was not authorized or invoked; continuous coverage is not independently certified.
   verdict:
-    decision: in-progress
+    decision: unresolved
     primary_criterion: One independently verified closed-disjoint Q/S pair satisfies the complete H124 premises.
-    reason: Prospective bounded fixed-S discriminator; independently reviewed instruments are ready but no target has run.
+    reason: The sole fixed-frame screen found no pair. This does not certify the continuous compatibility claim or the screen's coverage independently, so H124 remains unresolved.
+    commit: 4acafdfc
 ---
 # exp-124 — Full-square Compatibility, One Fixed Slice
+
+H124 remains unresolved. The prospective protocol was committed as `4acafdfc` after
+all31 record checks passed in17.88 seconds. The producer launched once at the observed
+08:20:59UTC boundary from clean engine `a75d751a` and returned actual exit zero with
+`status=no_witness`, `complete=true`,837 event cells,47 canonical cells and one uncovered
+canonical cell. It used0.84 seconds process wall and0.83 seconds CPU.
+
+There was no witness, so the conditional reader was not invoked. No replay receipt is
+claimed. This is a finite screening outcome, not an independently certified exhaustive
+proof and not a determination of continuous H124. Neither the source square nor Q frame
+was changed, and no invocation was repeated.
+
+## Retained Prospective Protocol
 
 Commit this protocol and pass the record checks before either scientific invocation.
 The reviewed engine is frozen at `a75d751a`; use that clean detached checkout with its

@@ -26,10 +26,13 @@ hypothesis:
     threshold: 11
   instrument: >-
     Proposed exact geometric support deduplication, necessary-row LP ceiling certificate,
-    and, only for a surviving candidate, BC-243's complete a.e.-depth arrangement
-    verifier with independent replay. The exact ceiling route passed its source and
+    and, only for a surviving candidate, either BC-243's complete a.e.-depth arrangement
+    verifier or a conservative interior-overlap graph with a complete weighted-clique
+    upper certificate, both with independent replay and full source binding.
+    The graph alternative is a prospective Session093 instrument amendment, not a
+    completed candidate verification. The exact ceiling route passed its source and
     independent readiness controls; this does not authorize acceptance
-    of a D > 11 candidate without the complete depth verifier.
+    of a D > 11 candidate without a complete depth certificate.
   instrument_ready: true
   regime: >-
     n = 11; exact algebraic Trump side; only the geometric D4 closure of the retained
@@ -52,7 +55,7 @@ hypothesis:
 Session 089 accepted readiness for the finite-row ceiling route after the
 [independent review](../series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-independent-review.md)
 and its parser correction.
-Complete almost-everywhere depth verification is not implemented here.
+Complete almost-everywhere depth verification has not passed its scientific controls.
 
 [Exp-113](../series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md)
 tested the prospectively frozen support and returned a separately replayed finite-row
@@ -74,7 +77,18 @@ test point; it is not merely zero or one.
 Every necessary test point must be off all square boundaries, with a certified
 positive-area neighborhood of constant incidence.
 These rows relax full a.e. feasibility: an exact LP ceiling at most eleven rejects the
-support; a larger optimum still needs every positive-area arrangement face checked.
+support; a larger optimum still needs a complete almost-everywhere depth certificate.
+
+Session093 prospectively adds the
+[conservative graph alternative](../series/series-000-smoke-and-calibration/results/agenda-026/bc-243-graph-depth-assessment.md).
+The graph retains every possible interior-overlap pair; unknown pairs remain edges.
+Every nonempty common interior induces a clique, so an independently verified upper
+bound of one on every clique proves the required depth bound away from the finite
+union of square boundaries.
+An overweight clique does not prove a geometric violation.
+This sufficient method changes the instrument, not H-099's claim or accept rule.
+Independent generic graph controls have passed; geometric source controls and a
+prospective candidate protocol remain required before any acceptance.
 
 [BC-242](../series/series-000-smoke-and-calibration/results/agenda-026/bc-242-full-size-density-proof-contract.md)
 supplies the weak-duality semantics.

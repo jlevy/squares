@@ -11,8 +11,8 @@ count: 92
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 47
-  sessions_unmeasured: 45
+  sessions_measured: 48
+  sessions_unmeasured: 44
   attributed:
     rollups: 115
     turns: 29742
@@ -35,9 +35,9 @@ totals:
     one_off_code: 3267
     wall_hours: 195.94
 codex_receipts:
-  attributed: 20
+  attributed: 21
   unattributed: 0
-  measured: 20
+  measured: 21
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1445,9 +1445,19 @@ sessions:
   title: "Full-square compatibility and distinct density assessment"
   status: in_progress
   primary_bead: think-bmx9
-  phases: 3
-  measured: false
-  unmeasured_reason: >-
-    declares no rollups
-  rollups: []
-  codex_receipts: []
+  phases: 5
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-093.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-093.yaml
+    model_responses: 266
+    agent_hours: 2.47
+    active_union_hours: 0.67
+    wall_hours: 0.67
+    snapshot_incomplete: true
