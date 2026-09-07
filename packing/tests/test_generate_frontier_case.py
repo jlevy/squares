@@ -775,3 +775,30 @@ def test_the_module_runs_as_a_devtool() -> None:
     )
     assert completed.returncode == 1
     assert "hand-authored" in completed.stdout
+
+
+def test_a_pictured_integer_side_case_is_recorded_as_the_trivial_grid() -> None:
+    """ "119, 120 ... s = 11, Proved by Nagamochi" is a grid the catalogue pictures for its
+    proof credit. The register records such cases as `n = 47, 48, 98, 99` are recorded:
+    trivial grid, nobody credited, not pictured, the register item as evidence."""
+    catalogue = pytest.importorskip("sqpack.kingbird_catalogue")
+    entries = catalogue.parse_catalogue()
+    facts = {n: facts_from_catalogue_entry(entries[n], n=n) for n in (119, 120, 142)}
+    availability = load_availability()
+    for n in (119, 120, 142):
+        text = generate_record(
+            n,
+            availability=availability,
+            catalogue=facts,
+            review_date="2026-09-07",
+            retrieved_date="2026-09-07",
+        )
+        payload = safe_load(text.split("---\n")[1])["packing"]
+        upper = payload["reported_upper_bound"]
+        assert upper["construction_method"] == "trivial-grid"
+        assert upper["found_by"] == []
+        assert upper["found_year"] is None
+        assert upper["catalogue_pictured"] is False
+        assert upper["analytically_optimized"] is None
+        assert upper["evidence"] == ["E-kingbird-upper-register"]
+        assert payload["status"] == "proved"

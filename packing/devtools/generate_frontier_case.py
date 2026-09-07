@@ -134,7 +134,7 @@ import math
 import re
 import tempfile
 from collections.abc import Iterable, Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from decimal import ROUND_CEILING, ROUND_FLOOR, ROUND_HALF_UP, Context, Decimal, localcontext
 from pathlib import Path
 from typing import Any, Protocol
@@ -749,8 +749,16 @@ def build_payload(
     review_date: str,
     retrieved_date: str,
     release: Mapping[int, UnitSquareRecord] | None = None,
+    pictured_grid: bool = False,
 ) -> dict[str, Any]:
-    """The `packing` payload for one case, under `packing.squares:SquarePackingCase/v2`."""
+    """The `packing` payload for one case, under `packing.squares:SquarePackingCase/v2`.
+
+    `pictured_grid` marks a grid case the catalogue lists with an integer side -- "119,
+    120 ... s = 11, Proved by Hiroshi Nagamochi" -- which the register records exactly as
+    it records `n = 47, 48, 62, 63, 79, 80, 98, 99`: a trivial grid, credited to nobody,
+    with `catalogue_pictured` false, but vouched for by the register item rather than the
+    completeness statement, because the catalogue does list the value.
+    """
     if n < 1:
         raise GenerationError(f"n must be positive, got {n}")
     side = grid_ceiling(n)
@@ -760,7 +768,8 @@ def build_payload(
                 f"n={n}: source map says the grid side is {source.trivial_grid_side}, "
                 f"but ceil(sqrt({n})) is {side}"
             )
-        reported_upper = _grid_reported_upper(n, side, retrieved_date)
+        evidence = KINGBIRD_EVIDENCE if pictured_grid else grid_upper_evidence(n)
+        reported_upper = _grid_reported_upper(n, side, retrieved_date, evidence=evidence)
     elif source.is_unitsquare:
         reported_upper = _unitsquare_reported_upper(
             n, _unitsquare_record(n, release), retrieved_date
@@ -867,7 +876,9 @@ def grid_upper_evidence(n: int) -> str:
     return GRID_COMPLETENESS_EVIDENCE if n > HAND_AUTHORED_MAX else KINGBIRD_EVIDENCE
 
 
-def _grid_reported_upper(n: int, side: int, retrieved_date: str) -> dict[str, Any]:
+def _grid_reported_upper(
+    n: int, side: int, retrieved_date: str, *, evidence: str | None = None
+) -> dict[str, Any]:
     return {
         "value": str(float(side)),
         "exact_form": str(side),
@@ -885,8 +896,24 @@ def _grid_reported_upper(n: int, side: int, retrieved_date: str) -> dict[str, An
         "source_date": None,
         "retrieved_date": retrieved_date,
         "witnesses": [_witness_id(n)],
-        "evidence": [grid_upper_evidence(n)],
+        "evidence": [grid_upper_evidence(n) if evidence is None else evidence],
     }
+
+
+def catalogue_integer_side(facts: CatalogueFacts) -> int | None:
+    """The catalogue side as an integer covering `facts.n`, else `None`.
+
+    The builder's source plan treats such a case as an exact grid whatever the catalogue
+    pictures, and the hand-authored register did the same at `n = 47, 48, 62, 63, 79,
+    80, 98, 99`; this is the generator's side of that rule.
+    """
+    with localcontext() as context:
+        context.prec = BOUND_PRECISION
+        value = Decimal(facts.side_decimal)
+        if value != value.to_integral_value():
+            return None
+        side = int(value)
+    return side if side >= 1 and side * side >= facts.n else None
 
 
 def _unitsquare_record(
@@ -1267,6 +1294,17 @@ def generate_record(
         facts = None if catalogue is None else catalogue.get(n)
         if facts is None and not source.is_unitsquare:
             raise GenerationError(f"n={n} is a catalogue case and the catalogue has no entry")
+    pictured_grid = False
+    if facts is not None and not source.is_unitsquare:
+        integer_side = catalogue_integer_side(facts)
+        if integer_side is not None:
+            # A pictured grid: recorded as the trivial grid, as the hand-authored register
+            # records its own pictured integer-side cases (see `build_payload`).
+            source = replace(
+                source, classification=GRID_CLASSIFICATION, trivial_grid_side=integer_side
+            )
+            facts = None
+            pictured_grid = True
     payload = build_payload(
         n,
         source=source,
@@ -1274,6 +1312,7 @@ def generate_record(
         review_date=review_date,
         retrieved_date=retrieved_date,
         release=release,
+        pictured_grid=pictured_grid,
     )
     packing_lines: list[str] | None = None
     if source.is_unitsquare:
