@@ -618,8 +618,9 @@ The central parent fence is accepted; the matched coupled-LP comparison, maximal
 wall-core capacity and full-square boundary questions remain unresolved.
 The global n11 bracket is unchanged.
 
-**Existing kernel lane: check the owner’s current checkpoint before dispatch.** The task
-**Squares plan X-016** landed PR109 at `07e82d1e` and is continuing on
+**Selected next entry:** `think-mq0d`, the existing BC-264 / H-114 kernel lane.
+Check the owner’s current checkpoint before dispatch.
+The task **Squares plan X-016** landed PR109 at `07e82d1e` and is continuing on
 `codex/n11-kernel-pricing` under `think-mq0d`. Live task notes at 21:47 UTC report
 session097’s admitted kernel implication and cubic center-feature obstruction, followed
 by source-free producer and independent-reader builds for a fixed eleven-feature,
@@ -685,6 +686,9 @@ retains the 22.9% local median checks-tier improvement on its frozen workload, w
 48 checks and thresholds preserved.
 Historical full and hosted passes remain source-bound; PR110 records fresh validation of
 this combined tree. Broader efficiency work remains in Agenda023 and `think-u53m`.
+[D-472](defects.md) retains the limit on performance inference: one hosted timing sample
+does not establish a speedup.
+Development’s validation tiers own the current coverage.
 
 ### Handoff Record
 
