@@ -546,7 +546,7 @@ controller, not permission to blur contracts.
 **Atlas expansion to `n = 324`, owner-directed, beside the research line.**
 [The plan](docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md) under
 epic `think-0juv` and
-[session-097](packing/campaign/agent-sessions/session-097-atlas-expansion-to-324.md)
+[session-099](packing/campaign/agent-sessions/session-099-atlas-expansion-to-324.md)
 widened the frontier register and the known-best atlas from `n = 1..100` to `1..324`,
 the end of the catalogue’s audited range, on
 [PR 111](https://github.com/jlevy/squares/pull/111). The unseen-corpus baseline is

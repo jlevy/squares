@@ -148,7 +148,7 @@ rule rather than from any catalogue file, which keeps them outside the retention
 - [Retention policy](../../../packing/resources/web/known-best-packings/README.md)
 - [Prospective source map](../../../packing/atlas/prospective/README.md)
 - Retained catalogue pages under `packing/resources/web/kingbird-squares-in-squares*.md`
-- Survey working notes: session-097 scratch, not retained
+- Survey working notes: session-099 scratch, not retained
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

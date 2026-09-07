@@ -9,7 +9,7 @@ the owner. Epic `think-0juv` is created by this plan; the handoff in
 [`SYNOPSIS.md`](../../../../SYNOPSIS.md#current-handoff) still selects `think-qv73`, and
 this work does not preempt agendas 024–028. It runs beside them as a W7 line with a W1
 opening phase, recorded in
-[session-097](../../../../packing/campaign/agent-sessions/session-097-atlas-expansion-to-324.md).
+[session-099](../../../../packing/campaign/agent-sessions/session-099-atlas-expansion-to-324.md).
 
 **Owns:** The sequence, decisions, and acceptance criteria for widening the frontier
 register and the known-best atlas from `n = 1..100` to `n = 1..324`, and for drawing a
@@ -202,7 +202,7 @@ Ceilings are re-argued from measurement, never bumped.
 Phases 1–5 are W7 pipeline-improvement, with a W2 factual review of each chunk’s
 transcription before its cards ship.
 Phase 5 closes with the W8 documentation pass and a W10-style handoff entry.
-The session record is `session-097`.
+The session record is `session-099`.
 
 ### Components
 
