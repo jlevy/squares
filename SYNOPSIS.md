@@ -581,7 +581,9 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**Current execution:** [Session090](packing/campaign/agent-sessions/session-090-four-hour-research.md),
+**Selected next entry:** `think-0za3`, BC-251's scalar investigation, now commissioned
+in the fresh allocation.
+[Session090](packing/campaign/agent-sessions/session-090-four-hour-research.md),
 under `think-9qrx`, owns the user-approved four-active-hour block after PR101 merged.
 BC251/H093 is prospectively allocated as exp116 with its unchanged150-minute scalar
 invocation and separate verification. BC243 facet controls and BC255 closed-angle
