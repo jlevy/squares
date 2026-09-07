@@ -105,7 +105,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-088](agent-sessions/session-088-validation-efficiency-checkpoint.md) | completed | retrospective | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 1 | think-rwte | Continue think-xejq with explained exhaustive-family planning under W5 Phase 3 after publishing this implementation and verifying its full hosted checkpoint. Preserve complete coverage until the selection and reuse contracts pass their invalidation fixtures. |
 | [session-089](agent-sessions/session-089-agenda024-next-phases.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 14 | think-jgnv | Select BC-251, think-0za3, for the next fresh allocation with its unchanged 150-minute process cap and separate verification. Agenda024 Current Allocation owns the parallel density and angle packages. Keep the integrated PR101 line while open; do not repeat exp113, exp114 or exp115. |
 | [session-090](agent-sessions/session-090-four-hour-research.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 11 | think-9qrx | After Session090 closes, select think-qv73 under BC255 for H110's source-free fixed P12 escape instrument and independent review, then a fresh prospective experiment. The September7 priority amendment holds H107 out of the next block and selects a bounded conditional-compatibility assessment alongside H110. Agenda024 owns this revised allocation and the deferred bead. Density remains source-blocked; no exp116 retry. |
-| [session-092](agent-sessions/session-092-hybrid-overnight.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 12 | think-0yfe | BC277 admission is complete. Commit BC278's unchanged whole-domain protocol and pass records before independent target dispatch; both writers end by10:38:23 and a20-minute fresh audit follows. The full gate continues on immutable57b85302. Preserve the10:31 evidence checkpoint and14:31:12 block endpoint. |
+| [session-092](agent-sessions/session-092-hybrid-overnight.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `efficiency-loop` (efficiency) | 14 | think-0yfe | BC278 is independently audited and terminal; full-square D0/D2 remains unresolved. Phase14 is the midpoint efficiency review through11:20:25, comparing wall-conditioned square compatibility, a broader release-angle domain and global coverage. Integrate the accepted fixture fix, current costs and completed receipts, then publish and run a new full gate. The old full and hosted cost-band failures remain failed receipts. Preserve finalization14:11 and endpoint14:31:12. |
 
 ### Workflow summary
 
@@ -115,9 +115,9 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 1 | 0 | 12 | 0 |
 | `factual-review` | 3 | 0 | 41 | 2 |
-| `insight-iteration` | 19 | 1 | 66 | 2 |
+| `insight-iteration` | 19 | 1 | 67 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
-| `efficiency-loop` | 9 | 1 | 30 | 1 |
+| `efficiency-loop` | 9 | 1 | 31 | 1 |
 | `research-loop` | 9 | 4 | 56 | 7 |
 | `pipeline-improvement` | 22 | 0 | 117 | 0 |
 | `documentation-pass` | 1 | 0 | 6 | 0 |
@@ -587,7 +587,7 @@ Status: **active**. Execute a focused parallel n11 program from PR108: decide wh
 | BC-275 | measurement_validation | 11 | complete | 1 | think-1v6g | Audit BC270's completed parent-fence design and BC276's separately frozen sibling attempt. The accepted cost correction at4ac71438 restores the historical membership; use the rebuilt live receipt and preserve its incomplete-snapshot and retrospective timing qualifications. |
 | BC-276 | research | 11 | complete | 1 | think-6pka | N and the complete signed short-slide parent S are independently closed. Preserve other block angles, longer slides and changed wall/contact patterns; reprice further structural work against direct parent compatibility rather than automatically expanding this source-feature family. |
 | BC-277 | measurement_validation | 11 | complete | 1 | think-os9k | Independent admission accepts the unchanged eight-guard domain, complete cover, reflection and controls. BC278 owns a separately committed analytical determination after record checks. No capacity result is supplied by admission. |
-| BC-278 | research | 11 | ready | 1 | think-dtr6 | Decide the unchanged complete boundary-band extension question after admission and protocol freeze. Keep authors independent, reserve the final audit, and preserve every failure child. No numerical target, narrowed retry or strict H118 comparison is admitted by this direct attempt. |
+| BC-278 | research | 11 | stopped | 1 | think-dtr6 | The bounded attempt and independent audit are terminal. Uniform disk and octagon capacities of six are refuted, while full-square D0/D2 remains unresolved. The midpoint efficiency review prices a changed square model against broader release angles; no unchanged retry or strict LP comparison is admitted. |
 
 ## Series
 

@@ -203,6 +203,9 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [BC-278: Boundary-Band Author Result](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-author.md) | research synthesis | record | retained | — |
+| [BC-278: An Exact Obstruction to the Octagon Capacity Method](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-adversary.md) | research synthesis | record | retained | — |
+| [BC-278: Independent Audit of the Boundary-Band Results](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md) | dated review record | record | retained | — |
 | [BC-277: Independent Boundary-Band Admission Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md) | dated review record | record | retained | — |
 | [BC-278: Prospective Boundary-Band Extension Determination](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-protocol.md) | implementation plan | record | retained | — |
 | [BC-277: A Closed Boundary-Band Compatibility Domain](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md) | research synthesis | record | retained | — |
@@ -3119,7 +3122,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
 | `codex-task-tree-session-090.yaml` | session-090 | 1,341 | 9.8 h | 3.94 h | 3.95 h | yes |
-| `codex-task-tree-session-092.yaml` | session-092 | 640 | 6.69 h | 2.53 h | 2.53 h | yes |
+| `codex-task-tree-session-092.yaml` | session-092 | 913 | 10.19 h | 3.96 h | 3.96 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

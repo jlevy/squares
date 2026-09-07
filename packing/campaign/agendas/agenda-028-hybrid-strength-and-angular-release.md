@@ -399,7 +399,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: stopped
     priority: 1
     question: Is the entire admitted boundary-band eleven-square child D0 empty, with its reflected upper child?
     hypotheses: [H-118]
@@ -418,14 +418,41 @@ agenda:
     parallel_group: agenda028-capacity
     program: n11-hybrid-strength-and-angular-release
     artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-adversary.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-protocol.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md
     next_evidence: >-
-      Decide the unchanged complete boundary-band extension question after
-      admission and protocol freeze. Keep authors independent, reserve the final
-      audit, and preserve every failure child. No numerical target, narrowed
-      retry or strict H118 comparison is admitted by this direct attempt.
+      The bounded attempt and independent audit are terminal. Uniform disk and
+      octagon capacities of six are refuted, while full-square D0/D2 remains
+      unresolved. The midpoint efficiency review prices a changed square model
+      against broader release angles; no unchanged retry or strict LP comparison
+      is admitted.
+    outcomes:
+    - scope: Uniform disk and octagon sufficient bounds of six on the complete admitted boundary-band family
+      classification: bounded-negative
+      result: >-
+        Independent audit accepts an exact seven-disk witness and its continuous
+        selected-pose family, plus a distinct strict octagon witness. Both uniform
+        surrogate bounds of six are false. Exact selected-square geometry with
+        incircle-only residuals cannot close this family.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md
+      disposition: retire-negative
+      follow_up: null
+    - scope: Complete full-square child D0 and its jointly reflected D2
+      classification: inconclusive
+      result: >-
+        All residual centers lie strictly above the accepted bottom barrier.
+        Two wall-forced squares overlap at the author's fixed disk centers, so
+        that witness does not lift. No uniform full-square capacity, exact
+        eleven-square witness or global lower-bound improvement is established.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md
+      disposition: continue
+      follow_up: think-0yfe
 ---
 # Agenda 028 — Hybrid Strength and Angular Release
 
@@ -451,8 +478,8 @@ pilots, support adoption, physical KKT review, and the sole BC-261 geometry inte
 This agenda adds X-018, H-118–121 and BC-269–275; its execution takes session-092. The
 execution adds the next sequential commitments BC276 under existing H120 and BC277–278
 under existing H118; no new hypothesis or experiment ID is needed for these extensions.
-Fresh source inventory at 08:35 UTC places its continuation in sessions091 and093,
-H122–124 and experiments121–124. Its owner independently reconciled the former
+Fresh source inventory at10:58 UTC places its continuation in sessions091,093 and094,
+H122–124 and experiments121–125. Its owner independently reconciled the former
 unpublished H118 collision before publication; no cross-task message was sent.
 This execution retains session092 and allocates no new hypothesis or experiment ID.
 Recheck live allocations before claiming any later ID; a next-ID pointer is not a

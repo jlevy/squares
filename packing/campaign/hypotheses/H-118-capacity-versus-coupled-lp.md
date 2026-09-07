@@ -92,9 +92,21 @@ and
 [independent admission](../series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md)
 accept a compact eight-guard family, complete closed failure children and joint upper
 reflection. The strict four-pose fixture supplies no residual-capacity conclusion.
-BC278’s separately committed protocol prices one analytical determination of whether
-seven additional full squares fit anywhere in that unchanged family.
-Record checks precede dispatch; actual-square and surrogate outcomes remain distinct.
+BC278’s
+[independent audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md)
+accepts an exact seven-disk witness, a continuous family of selected poses around it,
+and a distinct strict seven-center octagon witness.
+Uniform disk and octagon capacities of six are therefore false on the admitted family.
+This also rules out fixing the disk obstruction by using the exact selected squares or
+tightening universal inner cores shared by every unrestricted residual orientation.
+
+The full-square question remains unresolved.
+Uniform bottom localization survives, and the disk witness cannot lift at its fixed
+centers: two centers on container boundaries force axis-aligned squares that overlap.
+This is evidence for considering wall-conditioned or joint residual-square constraints;
+it is not an exclusion of the whole full-square family.
+The bounded attempt is closed, and a new model or domain requires a separately priced
+decision. No strict comparison with a matched coupled LP has been made.
 H118 remains open, and the global bracket is unchanged.
 
 <!-- This document follows common-doc-guidelines.md.

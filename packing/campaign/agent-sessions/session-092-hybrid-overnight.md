@@ -307,7 +307,7 @@ session:
     objective: Freeze and attempt the complete admitted boundary-band extension question with independent author and adversary and a reserved subsequent audit.
     commitment: BC-278
     bead: think-dtr6
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Independent BC277 admission supplies a nontrivial uncovered child without a desired capacity premise; the central and signed-release targets are complete.
     budget_minutes: 30
@@ -317,10 +317,55 @@ session:
     validation_command: Frozen admission/protocol with record validation, then separate exact mathematical audit after both writers terminalize.
     kill_condition: Work before protocol commit and records, altered domain or relaxation semantics, numerical target, omitted boundary, or actual worker and phase deadlines.
     fallback: Preserve partial results and surrogate-only obstructions honestly; no narrowed retry or new engine. Reserve20 minutes for the independent audit and reprice the next premise in an efficiency block.
+    outcome: Both independent reports are frozen. The author gives an exact seven-disk candidate and proves those centers cannot lift to full squares; the adversary independently obstructs the octagon model. D0 remains unresolved. The unrelated full-gate fixture isolation correction passes20 existing tests and independent code review.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-adversary.md
+    - packing/tests/test_session_gate.py
+    stop_reason: Both mathematical writers and the code reviewer terminalized before their original deadlines; no target reasoning was exchanged.
+    next_action: Independently audit both frozen mathematical reports, then use an efficiency block to select a changed premise from the accepted residual.
+  - workflow: insight-iteration
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Independently audit the exact boundary-band relaxation obstructions and their full-square limitations, preserving the midpoint checkpoint.
+    commitment: BC-278
+    bead: think-dtr6
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: The unchanged full-square attempt remains unresolved, but two independent reports give exact obstructions to its sufficient models; acceptance needs a fresh reader.
+    budget_minutes: 20
+    started_at: '2026-09-07T10:33:33Z'
+    deadline_at: '2026-09-07T10:53:33Z'
+    expected_output: Independently accepted exact disk/octagon scope and center non-liftability, or precise failed implication, with current costs and validation limitations retained.
+    validation_command: Exact independent reconstruction of guard membership, selected SAT,28 disk-to-square and21 mutual-distance conditions, full-square lift obstruction and all scope boundaries.
+    kill_condition: Unproved witness membership or distance, surrogate/full-square confusion, new target attempt, or audit deadline.
+    fallback: Preserve the precise gap and unresolved full-square question; no unpriced retry or engine substitution. Select the next premise through a separately recorded efficiency block.
+    outcome: Independent audit accepts the exact seven-disk and distinct octagon obstructions, bottom localization, continuous selected-pose family and fixed-center non-liftability. Uniform disk and octagon capacities of six are refuted; full-square D0 and D2 remain unresolved.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md
+    stop_reason: The reader froze at10:46:20 within its lease. Coordinator reconciliation at10:55 does not extend the completed mathematical attempt.
+    next_action: Enter W5 efficiency review using measured gates and costs; compare wall-conditioned square compatibility, broader angular coverage and the missing global bridge before admitting a successor.
+  - workflow: efficiency-loop
+    focus: efficiency
+    recording: contemporaneous
+    clock_role: work
+    objective: Select the next useful mathematical premise from audited BC278 and the complete signed release exclusion, while publishing the midpoint and repairing the failed validation receipt.
+    bead: think-0yfe
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: BC278 refutes the whole-domain disk and octagon sufficient routes, and the last efficiency block was phase6. Further attention must change the mathematical representation or covered domain.
+    budget_minutes: 25
+    started_at: '2026-09-07T10:55:25Z'
+    deadline_at: '2026-09-07T11:20:25Z'
+    expected_output: Three bounded independent assessments, one explicit allocation decision, current cost and mathematical records, and a new checkpoint ready for full validation.
+    validation_command: Compare measured full1644.33seconds and hosted checks151.38seconds with accepted fixture controls and midpoint costs; record and push checks precede a new immutable full gate.
+    kill_condition: New target proof or solver work inside this design block, a fitted domain, weakened validation threshold, duplicate source work, or phase deadline.
+    fallback: Preserve the exact unresolved premise and accepted negative result; continue only a separately priced ready task within the unchanged14:31 endpoint.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Commit the accepted protocol, pass records, then record shortened author/adversary leases before dispatch; all target writers end by10:38:23.
+    next_action: Price wall-conditioned residual square constraints, complete broader release angles and cross-lane coverage independently, then freeze at most one new principal attempt with a reserved audit.
   primary_bead: think-0yfe
   status: in_progress
   budget:
@@ -981,7 +1026,164 @@ session:
     fallback: Preserve the precise admission blocker; no target is launched.
     write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md]
     excluded_commands: [New target proof attempts or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC278 boundary-band analytical author
+    operator: Codex capacity_protocol, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Exact rational selected poses admit seven mutually separated residual disks, with28 disk-to-square checks; this obstructs uniform disk and octagon bounds of six. Two boundary-forced axis-aligned squares prove those particular centers cannot lift. Full D0 remains unresolved.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-author.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-author.md]
+    checks: [Hand-derived exact eight guards and six selected SAT certificates, All28 disk-to-square and21 disk-pair checks, Flowmark and links/footer/whitespace checks passed, No solver or target script or adversary contact]
+    uncertainty: Independent mathematical audit remains pending; the witness supplies no eleven-square packing or whole-domain exclusion.
+    elapsed_seconds: 1083
+    elapsed_quality: operator_reported_approximate
+    next_action: Frozen by10:32:11; audit only after both independent reports are terminal.
+    phase: 12
+    budget_minutes: 30
+    started_at: '2026-09-07T10:14:08Z'
+    deadline_at: '2026-09-07T10:38:23Z'
+    expected_output: Complete exact uniform exclusion or eleven-square witness proposal, or exact partial lemmas and smallest remaining full-domain implication.
+    validation_command: Independent mathematical audit only after both target writers terminalize.
+    kill_condition: Changed domain or relaxation semantics, omitted boundary, numerical target, reasoning exchange with the other writer, or deadline.
+    fallback: Retain exact partial scope; no narrowing, automatic retry or new engine.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-author.md]
+    excluded_commands: [Numerical target or solver invocation, Reading the other live target report or exchanging reasoning, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC278 independent boundary-band adversary
+    operator: Codex release_model_review, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: An exact admitted four-pose member at common pi/6 has seven pairwise-separated centers strictly outside every closed guard octagon; one corresponding disk overlaps an actual selected square. This is a candidate octagon-model obstruction only.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-adversary.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-adversary.md]
+    checks: [Hand-derived exact guard and21 pair checks, Flowmark and document checks passed, No script or solver or author coordination]
+    uncertainty: The octagon obstruction awaits the independent audit; this report leaves disk capacity and the full D0 question open.
+    elapsed_seconds: 526
+    elapsed_quality: operator_reported_approximate
+    next_action: Frozen at10:23:03; do not exchange its reasoning with the still-active author. Both reports must be terminal before mathematical audit.
+    phase: 12
+    budget_minutes: 20
+    started_at: '2026-09-07T10:14:17Z'
+    deadline_at: '2026-09-07T10:32:58Z'
+    expected_output: Exact independently checkable witness or obstruction proposal, or precise unresolved implication at the full declared scope.
+    validation_command: Independent exact full-scope and control review after both target writers terminalize.
+    kill_condition: Changed full-square target, surrogate witness mislabeled as a packing, numerical target, reasoning exchange with the other writer, or deadline.
+    fallback: Preserve the exact failed sufficient model or partial lemma and leave D0 unresolved.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-adversary.md]
+    excluded_commands: [Numerical target or solver invocation, Reading the other live target report or exchanging reasoning, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: Independent review of no-history Git fixture isolation
+    operator: Codex release_model_review, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Independent review accepts the two per-test discovery ceilings. Production ancestry behavior is unchanged, and all20 real-Git/grammar controls pass from nested attic scratch.
+    evidence: [packing/tests/test_session_gate.py]
+    files: []
+    checks: [Independent20-test replay passed2.07seconds, Production file unchanged, Scoped formatting and source checks passed]
+    uncertainty: The original full run remains failed. Explicit Git directory overrides are outside this upward-discovery fix; the reviewer corrected an initial missing scratch-parent setup error before the unchanged successful replay.
+    elapsed_seconds: 293
+    elapsed_quality: operator_reported_approximate
+    next_action: Root commits the accepted fixture correction and reruns appropriate validation; no production guard changes.
+    phase: 12
+    budget_minutes: 8
+    started_at: '2026-09-07T10:26:15Z'
+    deadline_at: '2026-09-07T10:33:13Z'
+    expected_output: Independent acceptance or exact remaining isolation defect in the two existing no-history tests, with focused real-Git control evidence.
+    validation_command: Existing test_session_gate.py suite under attic scratch, source/diff review and Python lint/format checks.
+    kill_condition: Production gate weakening, shared-record or target report edits, broad fixture redesign, or deadline.
+    fallback: Preserve the failed full receipt and exact unresolved fixture problem; mathematical work keeps its original cap.
+    write_scope: [attic/agenda-028-overnight/no-git-fixture-review.md]
+    excluded_commands: [Production or shared-record changes, Mathematical target work or reading the active author report, Git mutations, New IDs, Dependency changes]
+  - task: BC278 independent mathematical audit
+    operator: Codex direct_contracts, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Accepted both exact controls, uniform localization and reflection, the author's continuous selected-pose family and fixed-center non-liftability. The full-square capacity question remains unresolved.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md]
+    checks: [Independent exact guard and SAT reconstruction, All28 disk-source and21 disk-pair conditions, Distinct octagon control and disk-overlap refusal, Closed seams and joint reflection, Formatting and links passed]
+    uncertainty: No full-square exclusion or feasible eleven-square witness, exact capacity, global bound or matched H118 comparison follows.
+    elapsed_seconds: 667
+    elapsed_quality: operator_reported_approximate
+    next_action: The attempt is terminal; choose a changed premise through the next efficiency block.
+    phase: 13
+    budget_minutes: 20
+    started_at: '2026-09-07T10:35:13Z'
+    deadline_at: '2026-09-07T10:53:33Z'
+    expected_output: Exact accepted scopes or failed implications for both independent controls, all actual geometric conditions and complete boundary/symmetry semantics.
+    validation_command: Independent exact mathematical reconstruction; no target search or numerical script.
+    kill_condition: Failed guard/distance implication, hidden boundary loss, surrogate/full-square confusion, coauthoring a new target argument or deadline.
+    fallback: Preserve the precise remaining gap and full-square question; no repaired or narrowed target inside this audit.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md]
+    excluded_commands: [New target proofs or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: Midpoint wall-conditioned square model assessment
+    operator: Codex capacity_protocol, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Price a sound complete-domain position-dependent square relaxation that retains actual wall information; no new capacity target.
+    phase: 14
+    budget_minutes: 15
+    started_at: '2026-09-07T10:55:25Z'
+    deadline_at: '2026-09-07T11:10:25Z'
+    expected_output: Exact candidate implication, scope and control requirements, likely coverage value and a bounded next admission or refusal.
+    validation_command: Analytical model and existing exact-control review only.
+    kill_condition: New target determination, fitted center restriction, hidden orientation loss, numerical target or deadline.
+    fallback: Name the missing premise and decline further capacity work if it lacks a meaningful complete domain.
+    write_scope: [attic/agenda-028-overnight/midpoint-wall-model-assessment.md]
+    excluded_commands: [Numerical or proof target execution, Git or shared-record mutations, New IDs, Writes outside attic]
+  - task: Midpoint broader-angle release assessment
+    operator: Codex release_model_review, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Price a complete changed angular family and its exact coverage map, retaining the accepted signed-slide proof as evidence only.
+    phase: 14
+    budget_minutes: 15
+    started_at: '2026-09-07T10:55:25Z'
+    deadline_at: '2026-09-07T11:10:25Z'
+    expected_output: Natural enlarged domain, omitted siblings and seams, concrete missing proof premise and bounded cost recommendation.
+    validation_command: Existing proof and domain review; no determination of the enlarged target.
+    kill_condition: Tiny fitted angle box, unsupported representative claim, new target proof or search, or deadline.
+    fallback: Defer angle expansion if its likely coverage value is lower than a complete boundary-band obligation.
+    write_scope: [attic/agenda-028-overnight/midpoint-angle-assessment.md]
+    excluded_commands: [Numerical or proof target execution, Git or shared-record mutations, New IDs, Writes outside attic]
+  - task: Midpoint independent portfolio and global-bridge assessment
+    operator: Codex direct_contracts, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Compare the actual coverage increment and remaining premises of H118, H120 and H121 against the live source-owned H124 work.
+    phase: 14
+    budget_minutes: 15
+    started_at: '2026-09-07T10:55:25Z'
+    deadline_at: '2026-09-07T11:10:25Z'
+    expected_output: Ranked next allocation with explicit stop conditions, source ownership and reason to refuse low-value extensions.
+    validation_command: Read-only comparison of accepted evidence, current costs and source records; no new scientific target.
+    kill_condition: Duplicate source work, speculation presented as mathematical evidence, target execution or deadline.
+    fallback: Preserve the exact missing global premise and choose a concrete complete-domain task or honest deferral.
+    write_scope: [attic/agenda-028-overnight/midpoint-portfolio-assessment.md]
+    excluded_commands: [Numerical or proof target execution, Git or shared-record mutations, Cross-task messages, New IDs, Writes outside attic]
   outputs:
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-author.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-adversary.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-review.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-protocol.md
@@ -1004,6 +1206,13 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
   checks:
+  - Fixture correction0e28267b changes only the two no-history test environments and their explanatory comment. Coordinator20 tests passed2.22seconds, independent nested-attic20 passed2.07seconds, and Ruff/format checks passed; think-84uk is closed. A new full validation receipt remains due.
+  - Midpoint cost receipt through10:29UTC records36685.6agent-seconds over14268elapsed active seconds, with22417.6overlap seconds. It remains a live lower bound. The baseline aggregate is unchanged from the accepted repaired snapshot.
+  - Fresh10:28UTC fetch still has main atdd36800e and source PR109 at7daa7c55. Source session094 and exp125 are now occupied under H124; our session092 and BC278 remain disjoint. No new ID is allocated at this checkpoint.
+  - Hosted1b7ed623 passed all substantive checks and code-test lanes but exceeded the existing checks cost band at151.38seconds against99.39recorded seconds, where1.5x fails. The195-second ceiling and cost band remain unchanged; preserve the failure and evaluate the next checkpoint rather than claim hosted success.
+  - The full gate at57b85302 completed1644.33seconds with65 steps passing and one fast-test failure. Its no-history fixture inherited this enclosing repository because TMPDIR is in the authorized attic. Think-84uk isolates only the two no-history fixtures; the failed full receipt is retained and no production ancestry rule is weakened.
+  - Protocol1b7ed623 is pushed to PR110 after45 push steps passed in74.46seconds, including604 tests with3 deselected. PR110 now records accepted BC277 admission and BC278's independent target/audit allocation.
+  - Protocol1b7ed623 commits BC277's independently accepted domain and BC278's complete prospective question. Its separate clean attic checkout passed all31 record steps in20.85seconds before target dispatch; actual writer leases are shortened to the current phase deadline.
   - Checkpoint57b85302 is pushed and PR110 updated with accepted N/S and capacity results, corrected costs and allocations throughBC277. All31 records passed in22.25seconds and all45 push steps in79.89seconds with604 tests; hosted required CI is green and mergeability clean at09:56UTC. The full gate is running on its immutable checkout with two jobs and one inner job.
   - Hosted validation on4ac71438 passed the code-test lanes but refused the old in-progress BC270 delegation after its09:08 deadline. The worker had finished09:03:24; its actual completed receipt is recorded here. Refresh leases before pushing delayed protocol commits; no timing guard is weakened.
   - Checkpoint4ac71438 passed all45 push checks in84.72seconds, including658 tests with3 deselected, and is pushed to PR110. The corrected live cost receipt through09:03:04 records24094.867agent-seconds over9111.298elapsed active seconds; the historical07:36:15 replay restores session membership and output tokens, with the explicit small retrospective timing revision retained in BC275.
@@ -1024,7 +1233,7 @@ session:
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-092.yaml
   stop_reason: null
-  next_action: BC277 admission is complete. Commit BC278's unchanged whole-domain protocol and pass records before independent target dispatch; both writers end by10:38:23 and a20-minute fresh audit follows. The full gate continues on immutable57b85302. Preserve the10:31 evidence checkpoint and14:31:12 block endpoint.
+  next_action: BC278 is independently audited and terminal; full-square D0/D2 remains unresolved. Phase14 is the midpoint efficiency review through11:20:25, comparing wall-conditioned square compatibility, a broader release-angle domain and global coverage. Integrate the accepted fixture fix, current costs and completed receipts, then publish and run a new full gate. The old full and hosted cost-band failures remain failed receipts. Preserve finalization14:11 and endpoint14:31:12.
 ---
 # Eight-Hour Hybrid and Release Investigation
 
@@ -1135,18 +1344,29 @@ original live-receipt discrepancy and the qualified historical reconciliation.
 BC271’s completed assessment recommends a boundary-band design.
 BC277, bead `think-os9k`, is complete: its eight-guard boundary domain and full
 reflection passed independent admission.
-The next sequential BC278, bead `think-dtr6`, owns the unchanged complete full-square
-target under H118, adding no hypothesis or experiment ID. Its prospective protocol and
-records must freeze before dispatch.
-Both target writers end by10:38:23, followed by a20-minute independent audit; all work
-in this determination ends before the protocol’s11:10 endpoint.
-Do not exchange the writers’ reasoning before both reports are terminal.
-Reprice the next premise in an efficiency block after audit.
-Checkpoint57b85302 is pushed with all required hosted CI green and clean mergeability.
-The full gate is actively running on that immutable checkout with two jobs and one inner
-job.
-Do not change its checkout while it runs; use the separate attic protocol-validation
-checkout for current records.
+BC278, bead `think-dtr6`, is closed after its independently audited bounded attempt.
+Its unchanged whole full-square target under H118 remains unresolved.
+The audit froze10:46:20 and accepts the author’s exact seven-disk obstruction,
+continuous selected-pose family and fixed-center non-liftability, and the adversary’s
+distinct octagon witness with a disk-overlap refusal.
+Uniform disk and octagon capacities of six are refuted.
+Phase14 is the genuine midpoint efficiency block,10:55:25–11:20:25, with three
+assessments capped at11:10:25. Compare wall-conditioned square constraints, broader
+release angles and actual coverage value before allocating any successor.
+
+Checkpoint57b85302’s full run finished1644.33seconds with65 steps passing and one failed
+no-history test fixture.
+The independently reviewed fixture-only correction is committed at0e28267b, with20
+focused tests passing; the production gate is unchanged.
+Published protocol1b7ed623 passed local records/push and all hosted substantive checks,
+but its hosted checks tier failed the existing runtime band at151.38seconds. Keep that
+band unchanged and retain both failed receipts; a new full gate is still due.
+Source session094’s full gate passed1623.67seconds; its1acd6320 checkpoint is published.
+At10:58 another checkout has a translation-escape check in flight, so refresh the heavy
+queue before starting our next full gate.
+The midpoint cost receipt through10:29UTC is refreshed; source session094 and exp125 are
+now occupied.
+Our IDs remain disjoint, and any later allocation needs another live check.
 Preserve current record checks at the final block boundary.
 Check the current phase and delegation deadlines above before continuing.
 After the final deadline, reconcile retained evidence and report the next request; start

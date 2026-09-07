@@ -124,6 +124,19 @@ new scope-value argument.
 BC271 prices the comparison before any target or additional implementation, while the
 source’s H124 and density work continue separately.
 
+The next admitted boundary-band attempt reached a useful negative:
+[BC278’s independent audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md)
+accepts seven nonoverlapping residual disks on a continuous selected-pose family.
+Neither an octagon model nor exact selected-square geometry with residual incircles can
+prove a uniform capacity of six there.
+Those fixed centers cannot lift to full squares, because wall containment forces two
+axis-aligned squares to overlap.
+The actual eleven-square extension question remains open.
+The midpoint allocation therefore compares position-dependent wall constraints against a
+complete broader release-angle domain; further disk-only refinement is retired.
+Source H124’s accepted diagonal-band cover and unresolved near-axis obligation remain
+with its separate coordinator, most recently in session094 and exp125.
+
 ## Ranked Portfolio
 
 | Priority | Avenue and owner | Most useful next result | Why allocate attention |
