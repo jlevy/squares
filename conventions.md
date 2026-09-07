@@ -40,6 +40,9 @@ The prefix says what kind of thing it is.
 | Review finding | `R-N`, `F-NN` | the review document that declares them | `R-2`, `F-07` |
 | Basin (planned) | canonical key, plus a `B-NNN` alias | campaign, spans series | — |
 
+Agenda cell numbers continue across agendas because `depends_on` and `discharged_by`
+reference the bare cell ID. The ledger checks cell uniqueness across the campaign.
+
 **Experiment ids do not restart at `exp-001` in each series, and this is deliberate.** A
 series is a directory and a field, not a namespace.
 `exp-003` names one experiment record forever, wherever it lives, which is what makes
@@ -82,49 +85,31 @@ experiments. Four experiments currently reference `H-016`: one historical three-
 round and its three per-cell replacements.
 A round does not apply its one verdict to several hypotheses.
 
-**Assign IDs sequentially within each prefix.** [convention] Continue after the largest
-existing ID or current explicit assignment in the integrated record and known parallel
-work. Read the linked parallel PR and its current agenda before assigning numbers; a
-local branch alone may be behind.
-Use the next IDs for the artifacts being written, without jumping to a distant range for
-a branch or agent. Existing historical gaps remain.
-An ID identifies a record, not its priority, execution order, or dependency.
-
-Record the assigned IDs with the artifacts in their owning bead and publish them in the
-draft PR. Those existing records provide coordination; do not add a second allocation
-ledger or reserve speculative future ranges.
-Treat declared ID choices in known parallel work as occupied, including records still
-being prepared. A changed schedule does not release those IDs; their owner must
-explicitly release them.
-Recheck known parallel changes before integration: sequential allocation is a
-convention, not an atomic allocator.
-
-The shared `BC-` sequence continues across agendas.
-Each cell belongs to one agenda, but its bare ID is used in `depends_on`,
-`discharged_by` and generated views, so restarting at `BC-001` in each agenda would be
-ambiguous.
-
-**Published IDs are never reused, and never renumbered except on merge collision.**
+**Ids are never reused, and never renumbered except on merge collision.**
 [checked: whole-set uniqueness] When two branches collide, the newer campaign renumbers
 and the change is recorded as an annotation on the affected artifacts, never as a silent
 edit. Sequential defect IDs are branch-provisional: the later branch takes the next free
 IDs at merge and updates its references in the same change.
-Do not reserve future defect IDs.
-Correcting the IDs of an unpublished draft does not require renumbering any existing
-record. Record actual assignments in the owning agenda and bead, and mirror them on the
+Assign new research IDs sequentially within each prefix, after the largest published ID
+or current explicit assignment in the integrated record and known parallel work.
+Check the other PR’s current agenda and outstanding transports before assigning IDs; a
+local branch alone may be behind.
+Preserve historical gaps.
+Record actual assignments in the owning agenda and bead, and mirror them on the
 integrated PR so downstream agents can work around them.
 A next-ID pointer is not a reservation or permission to launch research: budgets, write
 scopes and experiment acceptance rules still require their usual prospective records.
+Do not reserve speculative blocks or add a second allocation ledger.
 Current research assignments are in
 [Agenda 024](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#parallel-id-allocation).
+Defect IDs remain branch-provisional; do not reserve future defect IDs.
 
 **Reserved ids.** The idea board’s machine-checked `reserved-ids` comments name
 particular upstream claims awaiting codification, not a worker’s future namespace.
 No such comments are currently active; Agenda 024 records known pending transports.
 Name an uncreated record without linking to a nonexistent file.
 Publishing a record consumes its ID permanently, even if the research is later retired.
-Superseded launch drafts do not reserve speculative future blocks, but an owner’s
-explicitly retained lock remains occupied until that owner releases it.
+Superseded launch drafts do not reserve speculative future blocks.
 Missing numbers are not automatically free: preserve pending upstream work and check
 known parallel assignments.
 

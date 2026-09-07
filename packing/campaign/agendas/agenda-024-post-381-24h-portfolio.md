@@ -699,21 +699,18 @@ pending work before using an uncreated ID.
 The PR 105 coordinator maintains this assignment map under `think-4cdg`; its PR
 description mirrors the table so downstream agents can work around this branch.
 The user’s latest 2026-09-07 instruction selects sequential assignment for this line of
-work.
-No new speculative range is reserved; existing explicit owner locks remain occupied
-until released.
-A next-ID pointer changes when an agent publishes or explicitly assigns a
-record; recheck parallel work before using it.
+work. No speculative range is reserved.
+A next-ID pointer changes when an agent publishes or explicitly assigns a record;
+recheck parallel work before using it.
 
-The integrated collision check includes `origin/main` at `4d305597`, PR 105 at
-`54d1ca98`, and open PR 107 at `5e1263ff`. PR107 now publishes X-020 and retains the
-owner’s X-017–019 lock.
-PR 106 at `9afae3c0` adds an n=17 archive/control/review and no native campaign IDs.
+The collision check includes `origin/main` at `4d305597`, PR 105 at `f5684f51`, and open
+PR 107 at `5ab00c8a`. PR 106 at `9afae3c0` adds an n=17 archive/control/review and no
+native campaign IDs.
 IDs quoted inside imported source packets are not native allocations.
 
 | Namespace | PR 105 additions already published | PR 107 additions already published | Next sequential ID after the checked records |
 | --- | --- | --- | --- |
-| Explorations | Published reports through X-016; X-017–019 remain owner-locked | X-020 | X-021; not assigned |
+| Explorations | None; native reports currently end at X-016 on this branch | X-017 | X-018 |
 | Agendas | None; this branch uses Agenda 024–026 | agenda-027 | agenda-028 |
 | Bounded commitments | Existing BC-251–BC-255 carry this block’s work; BC-256–BC-257 are also occupied | BC-258–BC-268 | BC-269 |
 | Hypotheses | H-106–H-110 | H-111–H-117 | H-118 |
@@ -730,11 +727,10 @@ Root retains acceptance and integration authority for work commissioned through 
 Historical gaps are preserved: H-066–H-069 and H-071–H-089 have no native records here;
 the quarantined PR 87 allocation also holds exp-065–exp-069. H-070 and exp-070–exp-071
 have been consumed. The unused exp-072–exp-109 launch ranges are not silently recycled.
-H-092 and exp-112 belong to pending transport `30c44bb6`. X-017–X-019 remain
-owner-locked under PR107’s checked coordination update.
-PR107 publishes X-020; X-021 is the next sequential pointer, not an assignment or a
-reserved block. No uncreated ranges from the earlier draft of this update were
-dispatched.
+H-092 and exp-112 belong to pending transport `30c44bb6`. The original speculative
+X-017–X-019 reservation is superseded: PR 107 has published X-017; X-018 is the next
+sequential pointer, not a reserved block.
+No uncreated ranges from the earlier draft of this update were dispatched.
 
 The native record inventory at this checkpoint is X-001–X-016, agenda-001–agenda-026,
 BC-001–BC-155 / BC-159–BC-185 / BC-190–BC-225 / BC-230–BC-257, H-001–H-065 / H-070 /

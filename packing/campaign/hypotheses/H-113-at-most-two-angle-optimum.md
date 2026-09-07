@@ -12,7 +12,7 @@ hypothesis:
     Every packing of eleven unit squares with at most two distinct actual
     orientations modulo pi/2 requires container side at least the exact Trump side U.
   lane: proof
-  derived_from: [X-020]
+  derived_from: [X-017]
   criterion:
     shape: determination
     metric: complete at-most-two-angle lower bound or a verified sub-U packing
@@ -45,7 +45,7 @@ hypothesis:
 The
 [enumeration addendum](../../resources/papers/n11-complete-research-bundle-2026-09-07/updates/enumeration_addendum.md)
 supplies descriptors, not solved geometric cases.
-[X-020](../explorations/X-020-compatibility-and-complete-case-covers.md) and
+[X-017](../explorations/X-017-compatibility-and-complete-case-covers.md) and
 [Agenda 027](../agendas/agenda-027-compatibility-and-restricted-families.md) retain this
 as a conditional successor.
 

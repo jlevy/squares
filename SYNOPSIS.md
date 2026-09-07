@@ -522,13 +522,13 @@ controller, not permission to blur contracts.
 ### Current Handoff
 
 **Independent alternative prepared.**
-[X-020](packing/campaign/explorations/X-020-compatibility-and-complete-case-covers.md)
+[X-017](packing/campaign/explorations/X-017-compatibility-and-complete-case-covers.md)
 reconciles the contributed research packet with PR105’s committed state at `46f38ab4`.
 [Agenda 027](packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md)
 proposes resource-and-anchor and six-plus-five restricted-family pilots, with a separate
 pair-kernel discriminator.
 It is paused, with no target experiments launched.
-Its X-020, H-111–117 and BC-258–268 records and epic `think-sz5t` keep its ownership and
+Its X-017, H-111–117 and BC-258–268 records and epic `think-sz5t` keep its ownership and
 numbering separate from the continuing agenda below.
 None of its dependencies requires that run to finish; the original handoff remains the
 entry for that run.

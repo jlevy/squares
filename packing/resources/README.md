@@ -176,7 +176,7 @@ The intake note records provenance and the scope of the replayed controls.
 This is a contributed analysis packet; its proposals and supplied checks are not
 automatically accepted campaign results.
 
-[X-020](../campaign/explorations/X-020-compatibility-and-complete-case-covers.md) owns
+[X-017](../campaign/explorations/X-017-compatibility-and-complete-case-covers.md) owns
 the critical adaptation and complete source-to-record map.
 [Agenda 027](../campaign/agendas/agenda-027-compatibility-and-restricted-families.md)
 organizes the proposed work as a separate agenda.

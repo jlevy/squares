@@ -555,7 +555,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 
 ### [agenda-027](agendas/agenda-027-compatibility-and-restricted-families.md) — Compatibility and Restricted Families
 
-Status: **paused**. Prepare an independent alternative to the ongoing Agenda024-026 allocation, based on X-020 and the owner's contributed research bundle. Compare a complete resource/anchor exclusion at side 96/25 with a contact-independent six-axis-plus-five shared-angle theorem; retain a small independent pair-kernel discriminator and candidate-led successors. Review contributed evidence at its own scope, build only the interfaces selected pilots need, and expand on closed continuous domains or explicit useful residuals. This prepared agenda launches no experiments. Its commitments, ownership and dependencies are separate from the continuing source run.
+Status: **paused**. Prepare an independent alternative to the ongoing Agenda024-026 allocation, based on X-017 and the owner's contributed research bundle. Compare a complete resource/anchor exclusion at side 96/25 with a contact-independent six-axis-plus-five shared-angle theorem; retain a small independent pair-kernel discriminator and candidate-led successors. Review contributed evidence at its own scope, build only the interfaces selected pilots need, and expand on closed continuous domains or explicit useful residuals. This prepared agenda launches no experiments. Its commitments, ownership and dependencies are separate from the continuing source run.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |

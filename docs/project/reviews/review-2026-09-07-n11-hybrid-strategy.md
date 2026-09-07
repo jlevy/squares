@@ -32,18 +32,19 @@ line-by-line software audit.
 
 | Source | Reviewed identity | Scope |
 | --- | --- | --- |
-| [PR #105](https://github.com/jlevy/squares/pull/105) | Scientific checkpoint `f5684f51fea68fd02ce60fe875e50c4383034e83`; later closeout `54d1ca98bf53a02d337e9d90b8dea7cca5af0169` | 109 changed files from `4d305597` through closeout: scalar production and completion, density algorithms and controls, continuous restricted-angle results, Session 090, and source handoffs |
-| [PR #107](https://github.com/jlevy/squares/pull/107) | Publication base `5e1263ff5daae39dc4321a04b2337f1bcd0ef534` | Its 78-file change from shared checkpoint `f5684f51`: contributed research archive and replay, X-020, Agenda 027, H-111–117, and campaign identity safeguards |
+| [PR #105](https://github.com/jlevy/squares/pull/105) | Scientific checkpoint `f5684f51fea68fd02ce60fe875e50c4383034e83`; closeout `54d1ca98bf53a02d337e9d90b8dea7cca5af0169`; priority amendment `6d8b2b38cf696a82ed7cc5b9ad6744ba7e439312` | 109 changed files from `4d305597` through the amendment: scalar production and completion, density algorithms and controls, continuous restricted-angle results, Session 090, and source handoffs |
+| [PR #107](https://github.com/jlevy/squares/pull/107) | Publication base `81e8a6159138ad7c2dfa7b33cb8ae0d5cdcd486f` | Its 78-file change from shared checkpoint `54d1ca98`: contributed research archive and replay, X-017, Agenda 027, H-111–117, and campaign identity safeguards |
 | Earlier hybrid spikes | Local stash `8f6592818f17f1cea83a617bb11ed6ffd6e112a6`, based on `4d305597` | Unpublished instruments and receipts; the mathematical arguments needed for this strategy are included below. The raw interval counts and tests cannot be replayed from this PR alone. |
 
-The publication branch stacks on PR107 and incorporates PR105’s later `54d1ca98`
-closeout. That closeout changes session status and coordination prose without changing a
-scientific verdict. The
-[closed Session 090 and its handoff](https://github.com/jlevy/squares/blob/54d1ca98bf53a02d337e9d90b8dea7cca5af0169/packing/campaign/agent-sessions/session-090-four-hour-research.md)
-remain the source of the next H-110 entry and the independently available H-107 lane.
-The new strategic content is this single review and its two navigation entries.
-The stack also carries the existing source closeout and reconciles its exploration
-allocation table with PR107’s X-020 identity.
+The publication branch stacks on PR107’s `81e8a615`, which incorporates PR105’s
+`54d1ca98` closeout and restores X-017 as the final exploration identity.
+The additional `6d8b2b38` priority amendment is reviewed here but is not yet part of
+that base. Its
+[revised Session 090 handoff](https://github.com/jlevy/squares/blob/6d8b2b38cf696a82ed7cc5b9ad6744ba7e439312/packing/campaign/agent-sessions/session-090-four-hour-research.md)
+keeps H-110 selected, defers H-107 from the next two-hour block, and selects a short
+conditional-compatibility assessment alongside H-110. Neither source update changes a
+scientific verdict. The publication diff adds this single review and its two navigation
+entries; it leaves the source branch’s allocation amendment to its coordinator.
 
 The inherited strategy was reviewed through
 [X-014](../../../packing/campaign/explorations/X-014-closing-from-both-ends.md),
@@ -54,7 +55,7 @@ the
 and its two children, and
 [Session 090](../../../packing/campaign/agent-sessions/session-090-four-hour-research.md).
 PR107’s
-[X-020 exploration](../../../packing/campaign/explorations/X-020-compatibility-and-complete-case-covers.md)
+[X-017 exploration](../../../packing/campaign/explorations/X-017-compatibility-and-complete-case-covers.md)
 accounts for both contributed mathematical reports, their combined agenda, supplied
 checkers and controls, the frozen source packet, and directions not selected for the
 opening allocation.
@@ -94,16 +95,22 @@ claims. Neither branch closes the gap.
 | Global fractional certificate | T-018 proves $s(11)\ge3.81$; T-022 sharpens containment slightly | A working proof mechanism exists. Improvements can target approximation, optimization, or configuration compatibility separately. |
 | Fractional frontier at $3.82$ | The later exact packing-family floor is $21342289572/2055263195\approx10.384212408$; the separate computational covering objective is about $11.055616943$ | This remains an unresolved bracket. Neither number proves a universal barrier at $3.82$. |
 | Scalar attempt at $61/16$ | Exp-116’s 19 row solves were unconverged. Its independently checked depth-one family has mass $20843712108/2067791663\approx10.080180$, below eleven | H-093 remains unresolved. The unchanged attempt is closed to retries; H-107 is a changed fixed-site completion protocol. |
-| Fixed-site completion | H-107’s adapter, input identity checks, controls, and protocol are reviewed; exp-118 never launched | It can produce a checked certificate but has no exact finite-site dual rejection path. Failed convergence, a high numerical objective or failed certification leaves even the frozen-site claim unresolved. |
+| Fixed-site completion | H-107’s adapter, input identity checks, controls, and protocol are reviewed; exp-118 never launched. The latest source priority amendment defers the test under paused `think-7fec`. | It can produce a checked certificate but has no exact finite-site dual rejection path. Failed convergence, a high numerical objective or failed certification leaves even the frozen-site claim unresolved. Readiness does not allocate a run. |
 | Full-size density | Complete facet and slab mechanisms exist; the original source passes, but three distinct algorithms exhaust the uniform-source cap | The candidate target remains unopened. This is an instrument cost problem, without a mathematical impossibility verdict. |
 | Restricted orientations | H-106 proves continuous near-axis P10 coverage throughout the closed $\pm0.25^\circ$ interval at $1939/500$. H-108 proves canonical near-45 A3 forcing; H-109 proves A1 and transfers A2 by reflection | The auxiliary continuous mathematics has advanced. Near-45 localization, the remaining P12 obligations, and H-036’s full theorem remain open. |
-| Current source handoff | H-110 specifies an unevaluated fixed P12 escape candidate; H-107 is independently available | Preserve this selected source continuation. An H-110 escape would reject the unchanged P12 formulas, not H-036. |
+| Current source handoff | H-110 specifies an unevaluated fixed P12 escape candidate. The latest amendment adds a 30-minute BC-255/H-102 conditional-compatibility derivation and review using accepted A-point forcing; H-107 is deferred. | Preserve the source allocation. An H-110 escape would reject the unchanged P12 formulas, not H-036. The compatibility assessment proposes necessary structure; conditional coverage and strict interior incidence remain unproved. |
 | Trump local theorem | A labelled, anchored 33-coordinate neighborhood has preferred retained radius $808514697/200000000000$; the reviewed implication depends on retained BC-199 data | It is a possible terminal lemma for a global cover. The review did not independently replay every radius face witness, and global capture remains unproved. |
 
 The fractional continuation is recorded in
 [exp-070](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-070-h-064-n11-fractional-resume.md);
-the recent results and next allocation are recorded in Session 090 and
+the recent results are recorded in Session 090 and
 [Agenda 026](../../../packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md).
+The latest source allocation is in
+[Agenda 024 at `6d8b2b38`](https://github.com/jlevy/squares/blob/6d8b2b38cf696a82ed7cc5b9ad6744ba7e439312/packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#selected-continuation-after-session-090).
+Its conditional-compatibility assessment gives a concrete connection to the hybrid
+proposal: accepted forcing can restrict a configuration before a local resource is
+applied. The source assessment must still establish the required localization, coverage,
+and interior-incidence premises; it is separately owned and scheduled.
 The [local theorem packet](../../../packing/cases/trump11/isolation-theorem.md) must be
 read with BC-241’s retained-record qualification, rather than its older status line.
 
@@ -694,7 +701,7 @@ The implementation task is to connect existing parts around one real uniform exc
 | [Class certificates](../../../packing/src/sqpack/fractional/classcert.py) and [adaptive cores](../../../packing/src/sqpack/fractional/adaptive.py) | Exact fixed-composition decisions with unchanged center domain; direction-cell/core geometry and independent control machinery | Existing class decisions are reusable. Adaptive controls are not a completed target acceptance route, and neither component supplies general conditional minima. |
 | [Standalone verifier](../../../packing/cases/n11_fractional_certificate/verify_claim.py) and [retention adapter](../../../packing/devtools/decide_certificate.py) | Independent export/replay precedent for the supported uniform-net one-square certificate | The retention adapter accepts unconditional certificates and refuses conditional/class variants. The hybrid proof needs its own reviewed adapter. |
 | [Point covers](../../../packing/src/sqpack/cover.py) | Exact marked-point predicates and mesh/partition checks | Reuse geometric primitives. Mark resources are different from capacity-one pose tiles and grouped occupancy. |
-| [Scalar completion](../../../packing/devtools/run_fixed_site_completion.py) | Changed fixed-site adapter, identity guards, retained outcomes, and reviewed controls | Preserve its separate question and allocation; it is not the hybrid tree |
+| [Scalar completion](../../../packing/devtools/run_fixed_site_completion.py) | Changed fixed-site adapter, identity guards, retained outcomes, and reviewed controls | Preserve its separate question and deferred status. Reopening requires a named downstream use and a fresh source allocation. |
 | [Density facet verifier](../../../packing/devtools/density_face_verifier.py) and [slab verifier](../../../packing/devtools/density_slab_verifier.py) | Complete depth methods with independently structured reader, sign and incidence reuse | Potential resource/support verification; uniform-source cost still blocks the current target |
 | [Density source binding](../../../packing/src/sqpack/full_size_density/support_screen.py) and [necessary support rows](../../../packing/src/sqpack/full_size_density/support_ceiling.py) | D4 image/preimage reconstruction, positive-area incidence regions and exact support ceilings | Reuse during independent seven-row adoption. Closed-point fractional depth and almost-everywhere density depth have different boundary semantics. |
 | [Near-axis reader](../../../packing/devtools/check_angle_near_axis_control.py) and [near-45 reader](../../../packing/devtools/check_angle_near45_triangle_control.py) | Independent exact rectangle and Bernstein triangle reasoning for stated continuous clauses | Models for whole-domain proof receipts and possible necessary angle cuts, with the original clause premises retained |
@@ -757,9 +764,12 @@ and census guards.
 ### First execution checkpoint
 
 This is Agenda 027’s separate opening allocation.
-Session 090’s H-110 continuation keeps its source allocation; H-107 requires its
-retained 35-minute producer and 20-minute shared verification allowance if selected
-there. The hybrid plan does not consume or replace either allowance.
+Session 090’s H-110 continuation and the newly selected 30-minute BC-255/H-102
+conditional-compatibility assessment keep their source allocation.
+H-107 is deferred from that next two-hour block under paused `think-7fec`; any later
+reopening must meet the source agenda’s named-use conditions and fund its retained
+35-minute producer, 20-minute shared verification allowance, and coordination margin.
+The hybrid plan changes none of those allocations.
 
 Use Agenda 027’s proposed first checkpoint of about four active hours as a planning
 estimate, retaining its short slices and integration reserve.
@@ -840,8 +850,10 @@ It gives no basis for discarding the general-angle remainder.
 ## Integration and Identifier Finalization
 
 The working branch is `codex/n11-hybrid-research-plan`, created directly from PR105’s
-`f5684f51` head, advanced onto PR107’s `5e1263ff` publication base, and updated with
+`f5684f51` head and now stacked on PR107’s `81e8a615` publication base, including
 PR105’s `54d1ca98` closeout.
+PR105’s additional `6d8b2b38` scheduling amendment is reviewed and summarized here;
+incorporating its source records remains upstream work.
 The earlier spike drafts remain local, unpublished provenance in the stash identified
 above; their untracked files are in its third parent.
 The strategic arguments needed for incorporation are collected in this review.
@@ -851,16 +863,18 @@ artifact into the repository and reviewing it, with a fresh identifier check.
 After the mathematical scope is settled, fold this review into PR107’s research program,
 adopt selected spike evidence and adapters, and update one scientific agenda and its
 hypotheses through one coordinator for this program.
-Session 090’s H-110 and H-107 continuations retain their source coordinator and
-allocations unless the owner separately reassigns them.
+Session 090’s H-110 continuation and conditional-compatibility assessment retain their
+source coordinator and allocations; H-107 retains its deferred status unless that
+coordinator reopens it under the stated conditions.
 A separate implementation branch can preserve ownership without creating a separate
 research agenda.
 Another agenda would be justified by an independently managed scientific
 objective, rather than by the Git branch alone.
 
-The reviewed PR107 publishes X-020, Agenda 027, H-111–117, and BC-258–268. The
-integrated allocation table preserves the owner’s X-017–019 lock and names PR107’s X-020
-correctly. All new labels in this review remain placeholders.
+The reviewed PR107 publishes X-017, Agenda 027, H-111–117, and BC-258–268. Its latest
+coordination update restores X-017 and supersedes the temporary X-020 name and earlier
+speculative reservation.
+All new labels in this review remain placeholders.
 They consume no part of either branch’s namespace.
 Finalization should recheck both live branches, reuse existing claims wherever possible,
 allocate only the records actually being created, and update affected references

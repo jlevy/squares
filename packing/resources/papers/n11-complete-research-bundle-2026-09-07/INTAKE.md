@@ -43,14 +43,14 @@ No campaign hypothesis verdict or packing bound changes at intake.
   mixed-size frames, uniform LP certificates, and stationary side values.
 - [Combined review](complete_review.md) and [PDF](complete_review.pdf): complete source.
 - [Source catalogue](source_packet/17-source-catalogue.md): the frozen repository packet.
-- [X-020](../../../campaign/explorations/X-020-compatibility-and-complete-case-covers.md):
+- [X-017](../../../campaign/explorations/X-017-compatibility-and-complete-case-covers.md):
   current-work orientation, critical analysis, corrections, and source-to-record map.
 - [Agenda 027](../../../campaign/agendas/agenda-027-compatibility-and-restricted-families.md):
   the separately prepared execution proposal.
 
 Historical schedules and instructions within these files remain source material.
 The native exploration and agenda govern their adaptation.
-In particular, X-020 makes acyclicity explicit in the addendum's case-composition
+In particular, X-017 makes acyclicity explicit in the addendum's case-composition
 theorem, whose proof used an assumption omitted from its listed hypotheses.
 The source itself is preserved unchanged.
 
