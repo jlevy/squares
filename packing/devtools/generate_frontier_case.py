@@ -69,28 +69,60 @@ the four methods a rule is for. The counts are the number of entries each rule r
 | --- | --- | --- | --- |
 | `[Explore group](squares_in_squares__Göbel_strips.html)` | `diagonal-strip` | 6 | 10 |
 | `[Explore group](squares_in_squares__Göbel_squares.html)` | `hand-construction` | 3 | 8 |
-| `simulated annealing` | `simulated-annealing` | 10 | 36 |
+| `Adds <count> "L"s to`, opening the line | `extension` | 0 | 14 |
+| `combining` or `Combines two copies`, opening the line | `composition` | 0 | 3 |
+| `simulated annealing` | `simulated-annealing` | 10 | 34 |
 | `Extends the` or `Unextends the` | `extension` | 3 | 13 |
-| none of the above | `unknown` | 38 | 60 |
+| none of the above | `unknown` | 38 | 45 |
 
-Four of the 36 that `simulated annealing` reaches in range are `n = 103, 105, 110` and
-`131`, whose records take their bound from the release instead and stay `unknown`, so 64
+Four of the 34 that `simulated annealing` reaches in range are `n = 103, 105, 110` and
+`131`, whose records take their bound from the release instead and stay `unknown`, so 49
 of the 224 generated records carry `unknown` and `--range` prints their numbers.
 
-The rules are tried in that order, and the order is load-bearing twice. Ten entries in
-range carry both the strips group link and an "Extends the" sentence; `n = 67` and
+The rules are tried in that order, and the order is load-bearing four times. Ten entries
+in range carry both the strips group link and an "Extends the" sentence; `n = 67` and
 `n = 84` are the same shape at `n <= 100` and were both transcribed `diagonal-strip`, so
 group membership wins over the provenance sentence. One entry, `n = 297`, is both an
 extension and a later simulated-annealing improvement; `n = 87` is that shape at
 `n <= 100` and was transcribed `simulated-annealing`, so the method that produced the
-printed side wins over the one that produced its parent. The two group links differ only
-in the page they point at -- their link text is identical -- which is why `credit_line`
-keeps Markdown link syntax rather than unwrapping it.
+printed side wins over the one that produced its parent. `n = 198` adds an "L" to a
+composition, and the L rule wins, because the composition it names is its parent's
+construction and the "L" is its own. And both new rules are tried before the substring
+rules, because the sentence that opens a credit line is the one describing the packing
+the entry is about. The two group links differ only in the page they point at -- their
+link text is identical -- which is why `credit_line` keeps Markdown link syntax rather
+than unwrapping it.
+
+**Phrases are read outside parentheses, and the two structural rules only in the opening
+sentence.** The catalogue describes an ancestor parenthetically -- "(using a simulated
+annealing program he wrote, starting from randomness)" -- and a method named there is
+the ancestor's. Blanking those spans is what stops `n = 171`, a composition of two
+copies of an annealed `s(50)`, and `n = 198`, an "L" added to that composition, from
+being filed as annealing runs; it changes nothing else, because the other thirty
+in-range annealing matches stand in the finder's own sentence or in a dated improver's.
+
+**The L-augmentation family is `extension`, which departs from `n = 82`.** The fourteen
+entries in range whose line opens "Adds <count> 'L's to the s(m)" (`101, 122, 145, 173,
+197, 198, 199, 200, 226, 229, 258, 261, 292, 298`) describe one construction, and the
+catalogue itself calls that construction an extension at `170`, `257` and `260`
+("Extends the s(65) ... augmented by five/eight 'L's"), which is why those three records
+already read `extension`. Filing the family any other way would leave `s(65)` plus five
+or eight "L"s an extension and `s(65)` plus two, three, four, six or seven an `unknown`.
+The one hand precedent points the other way: `n = 82` reads `hand-construction`. Its
+page is a different shape -- it opens by naming a human finder, "Found by Frits Göbel in
+early 1979", and adds the augmentation as an afterthought -- and this rule reads only
+the opening sentence, so it does not reach `n = 82` and `n-082.md` is left as written.
 
 `analytically_optimized` is `false` where the line says "Not yet analytically optimized"
-(32 entries, every one of them above `n = 100`) and `true` otherwise, which is what all
-sixty hand-transcribed catalogue-sourced pictured entries say. A grid case has no credit
-line and keeps `null`.
+(32 entries, every one of them above `n = 100`), `null` where it ends "Further
+improvement pending" (9 entries, `102, 130, 172, 199, 228, 259, 269, 292, 302`, and
+again all above `n = 100`), and `true` otherwise, which is what all sixty
+hand-transcribed catalogue-sourced pictured entries say. The null is `D-354`'s rule:
+"further improvement pending" says the entry is still moving and says nothing about
+whether its current side has been analytically optimized, and `true` there would be a
+positive claim read from silence. `n = 88`'s "Improvement by Thomas Schadt pending" is a
+different sentence, is not read as this one, and `n-088.md` keeps its `true`. A grid case
+has no credit line and keeps `null`.
 
 **A printed form that disagrees with its printed decimal is not transcribed.** The
 catalogue's `n = 179` entry prints a January-2025 closed form beside a January-2026
@@ -100,15 +132,55 @@ So every form is evaluated against the decimal beside it, and where the two disa
 carries a `stale-source` conflict naming both printed values. The decimal is what the
 page's own credit line dates; the form is what it forgot to update.
 
+**`improved_by` is the page's dated "Improved by" sentences, and nothing else.** A
+sentence-initial "Improved by <names> in <month> <year>" is recorded, names split on
+"and" and on commas and each improver kept once in page order; it reaches 33 records in
+range. Measured over the 46 catalogue-sourced pictured records at `n <= 100`, the rule
+reproduces 45 of them. The one miss is `n = 29`, where the hand pass read an "Optimized
+by" sentence as an improvement and `n = 39, 41, 50, 51, 71` did not read the same
+sentence that way, so that form is deliberately not read; "Improved independently by
+both ..." at `n = 88` is not this form either, and was not recorded by hand. The
+schema closes `additionalProperties` on `reported_upper_bound`, so the improvement's
+date has nowhere to live in the front matter and reaches the reader through the body
+sentence instead. `found_year` stays the year the packing was *found*.
+
+**Two lineages in one entry.** Five entries in range describe two packings, and the
+printed decimal is the side of only one of them. At `170`, `257` and `260` the pictured
+file is the page's alternative (`square-170b.svg`, `square-257a.svg`, `square-260b.svg`),
+so the alternative's finder is the record's; at `240` and `272` the pictured packing was
+"Converted in December 2024 from the s(210)" and the page names nobody as its author, so
+`found_by` stays empty rather than crediting the 2015 or 1991-98 original with a packing
+made nine years later. Either way the lineage the record sets aside becomes a
+`priority_notes` entry quoting the page's own phrase, so nothing the page says is
+dropped silently.
+
+**A retained paper behind a credit is cited.** The seven entries the catalogue credits
+to all three authors of `resources/papers/arslanov-improved-packings-n-n-1` (`132, 156,
+182, 210, 241, 273, 307`) list `[Arslanov et al.]` second, immediately after the
+catalogue, which is where `n-013.md` and `n-011.md` list the paper behind a credit. The
+rule is keyed on the credit rather than on a list of `n`, because the credit is what the
+citation is about.
+
+**The packing paragraph does not join the finder to the method.** `found_by` is the
+page's first credit and `construction_method` is what produced the *printed* side, so
+"Found by <finder> in <year>, via <method>" -- the sentence the hand-written `n = 53` and
+`n = 87` set the template for -- read two different conventions as one claim, and at the
+seven Arslanov cases it credited a March 2019 analytic construction to a January 2026
+annealing run. The method now hangs off whichever credit the phrase that named it sits
+in: the finder's sentence, a dated improvement's, or, where it sits in neither, no credit
+at all ("The recorded construction method is ..."). `unknown` is the exception, and stays
+on the finder's sentence, because "via an unrecorded method" adds no claim to what
+precedes it. `n-053.md` and `n-087.md` are hand-written and are left as written.
+
 **What this tool cannot know**, and does not guess:
 
-- `improved_by` is editorial. The catalogue writes "Optimized by David Ellsworth" for
-  both `n = 29`, whose record lists him, and `n = 50`, whose record does not, so no rule
-  over the credit line reproduces the corpus and none is applied.
 - `source_reviewed` and `retrieved_date` are dates, supplied by the caller. `--check`
   reads them back out of the record being checked so that a regeneration months later
-  still diffs to nothing.
-- `priority_notes` and any case-specific evidence are editorial and stay empty here.
+  still diffs to nothing, and compares everything but the `rigidity` block for a related
+  reason: the promotion path writes that block after this tool has run, and a check that
+  insisted on `null` there would report every promoted record as drift and so find none.
+- Case-specific evidence is editorial. `priority_notes` is written only for the second
+  lineage above, and is otherwise empty.
 
 The record it writes is a draft. It is complete and it validates, and it is not a
 substitute for the review that follows it.
@@ -278,20 +350,70 @@ CONSTRUCTION_PHRASES = {
     "unknown": "an unrecorded method",
 }
 
+#: `construction_method` enum value -> the noun phrase a sentence that names no author
+#: uses for it. The same reading as `CONSTRUCTION_PHRASES`, re-articled: "via extension
+#: of a smaller record" is a clause hanging off a credit, and "The recorded construction
+#: method is an extension of a smaller record" is a sentence standing on its own.
+CONSTRUCTION_SUBJECTS = {
+    "trivial-grid": "the trivial grid",
+    "hand-construction": "a hand construction",
+    "diagonal-strip": "a diagonal-strip construction",
+    "pattern-family": "a pattern family",
+    "extension": "an extension of a smaller record",
+    "composition": "a composition of smaller packings",
+    "simulated-annealing": "simulated annealing",
+    "inflation-billiard": "an inflation-billiard search",
+    "unknown": "an unrecorded method",
+}
+
+
+@dataclass(frozen=True, slots=True)
+class CreditMethodRule:
+    """One row of the credit-line table in this module's docstring.
+
+    `pattern` is searched, not matched, against the credit line with its parenthesised
+    spans blanked out. `opening_only` restricts it to the line's first sentence, which
+    is where the catalogue describes the packing the entry is about; a rule without it
+    reads the whole line, because a method can also arrive with a dated improvement.
+    """
+
+    pattern: str
+    method: str
+    opening_only: bool = False
+
+    @property
+    def regex(self) -> re.Pattern[str]:
+        return re.compile(self.pattern)
+
+
 #: What the catalogue's credit line has to say for a `construction_method` to be read off
 #: it, in the order the rules are tried. Derived from the hand transcription and measured
 #: against it; the module docstring tabulates the counts and argues the ordering. A line
 #: matching none of these is `unknown`, which is the honest answer and not a placeholder.
-CREDIT_METHOD_RULES: tuple[tuple[str, str], ...] = (
-    ("[Explore group](squares_in_squares__Göbel_strips.html)", "diagonal-strip"),
-    ("[Explore group](squares_in_squares__Göbel_squares.html)", "hand-construction"),
-    ("simulated annealing", "simulated-annealing"),
-    ("Extends the", "extension"),
-    ("Unextends the", "extension"),
+CREDIT_METHOD_RULES: tuple[CreditMethodRule, ...] = (
+    CreditMethodRule(
+        re.escape("[Explore group](squares_in_squares__Göbel_strips.html)"), "diagonal-strip"
+    ),
+    CreditMethodRule(
+        re.escape("[Explore group](squares_in_squares__Göbel_squares.html)"),
+        "hand-construction",
+    ),
+    CreditMethodRule(r'^Adds\s+\S+\s+"L"s?\s+to\b', "extension", opening_only=True),
+    CreditMethodRule(
+        r"\b[Cc]ombin(?:es|ing)\s+two\s+copies\b", "composition", opening_only=True
+    ),
+    CreditMethodRule("simulated annealing", "simulated-annealing"),
+    CreditMethodRule("Extends the", "extension"),
+    CreditMethodRule("Unextends the", "extension"),
 )
 
-#: The catalogue's own disclaimer, and the only thing it ever says about the question.
+#: The catalogue's two sentences about how finished an entry is. The first is a statement
+#: ("this side has not been optimized analytically"); the second is a statement that the
+#: entry is still moving, and says nothing either way about the first. `D-354` is the
+#: standing lesson against reading a source's silence as a value, so a page that carries
+#: the second and not the first leaves `analytically_optimized` null.
 NOT_ANALYTICALLY_OPTIMIZED = "Not yet analytically optimized"
+IMPROVEMENT_PENDING = "Further improvement pending"
 
 #: Credit sentences a parent chain is read from, longest opener first so that "Found
 #: first by" is not read as "Found by". Only a credit that names a date is counted: the
@@ -310,6 +432,70 @@ _CREDIT_ROLES = (
 _CREDIT_CHAIN = re.compile(
     rf"\b(?:{'|'.join(_CREDIT_ROLES)})\s+(?P<names>.+?)\s+in\s+(?:[A-Za-z-]+\s+)*\d{{4}}\b"
 )
+
+#: A credit line's sentences, and the parenthesised spans inside one. Both are three
+#: lines duplicated from `sqpack.kingbird_catalogue` rather than imported, for the reason
+#: `CatalogueEntryLike` gives: this module stays importable, and testable, without the
+#: catalogue parser. A period ends a sentence only where it does not follow a single
+#: capital letter, which keeps "David W. Cantrell" and "M.Z. Arslanov" whole.
+_SENTENCE_BREAK = re.compile(r"(?<![A-Z])\.\s+")
+#: A parenthesis the page opened, which is never a Markdown link's target: `credit_line`
+#: keeps link syntax because "[Explore group](squares_in_squares__Göbel_strips.html)" is
+#: the only thing separating the Göbel strips from the Göbel squares, and blanking what
+#: follows the bracket would blank the two family rules along with it.
+_PARENTHESISED = re.compile(r"(?<!\])\([^()]*\)")
+
+#: The one improvement form the corpus reads, and the only one it reads consistently: a
+#: sentence-initial "Improved by <names> in <month> <year>". Measured over the 46
+#: catalogue-sourced pictured records at `n <= 100`, it reproduces 45 of them; the miss
+#: is `n = 29`, where the hand pass read an "Optimized by" sentence as an improvement and
+#: `n = 39, 41, 50, 51, 71` did not read the same sentence that way. "Improved
+#: independently by both ..." at `n = 88` is not this form and is not recorded, which is
+#: also what the hand pass did.
+_IMPROVED_BY = re.compile(
+    r"^Improved by\s+(?P<names>.+?)\s+in\s+(?P<when>(?:[A-Za-z-]+\s+)*)(?P<year>\d{4})\b"
+)
+
+#: The two lineage shapes the page prints where one entry carries two packings, and the
+#: `found by` clause read out of either. Both are structural, both reach exactly the
+#: entries the review named, and both leave the record crediting whichever packing the
+#: printed decimal is the side of.
+#:
+#: "This alternative, converting the s(65) augmented by five 'L's into a primitive
+#: packing, found by Károly Hajba in November 2024" (`n = 170, 257, 260`): the pictured
+#: file is the alternative -- `square-170b.svg`, `square-257a.svg`, `square-260b.svg` --
+#: so the alternative's finder is the record's, and the sentence before it, which credits
+#: the extension the alternative converts, becomes a priority note.
+#:
+#: "Originally found by Károly Hajba in September 2015 ... Converted in December 2024
+#: from the s(210)" (`n = 240, 272`): the printed decimal is the conversion's, and the
+#: page names nobody as its author, so `found_by` stays empty and the original lineage
+#: becomes a priority note. Reading the "Originally found by" sentence as this record's
+#: credit would date the pictured packing to 2015, nine years before it existed.
+_ALTERNATIVE = re.compile(r"\bThis alternative\b")
+_CONVERTED = re.compile(r"^Converted in\b")
+_ORIGINALLY_FOUND = re.compile(
+    r"^Originally found by\s+(?P<names>.+?)"
+    r"(?:\s+in\s+(?:[A-Za-z-]+\s+)*(?P<year>\d{4})|\s+between\s+\d{4}|$)"
+)
+_LOWER_CREDIT = re.compile(
+    r"\bfound by\s+(?P<names>.+?)\s+in\s+(?:[A-Za-z-]+\s+)*(?P<year>\d{4})\b"
+)
+_MATH_DELIMITER = re.compile(r"\$")
+
+#: The three authors of the retained Arslanov paper, as the catalogue spells them. A
+#: record whose `found_by` is exactly this credit cites the paper behind it, which is
+#: what the hand-written records do wherever this repository retains the paper a credit
+#: rests on (`[Bentz 2010]` at 13 and 46, `[Stromquist 2003]` at 10, 11 and 12,
+#: `[Kearney-Shiu 2002]` at 6, `[Gensane-Ryckelynck 2005]` at 11).
+ARSLANOV_AUTHORS = ("M.Z. Arslanov", "S.A. Mustafin", "Z.K. Shangitbayev")
+ARSLANOV_RESOURCE: dict[str, Any] = {
+    "key": "[Arslanov et al.]",
+    "role": "upper-bound-report",
+    "local": "papers/arslanov-improved-packings-n-n-1",
+    "url": "https://www.combinatorics.org/ojs/index.php/eljc/article/download/v28i4p22/pdf/",
+    "retrieved": True,
+}
 
 #: Month names for the one date the prose spells out, fixed here so that the process
 #: locale cannot change what a generated record says.
@@ -369,14 +555,57 @@ class SourceAvailability:
 
 
 @dataclass(frozen=True, slots=True)
+class CreditImprovement:
+    """One dated, sentence-initial "Improved by ... in ..." the catalogue prints.
+
+    `when` is the page's own date words -- "November 2024", or a bare year where the page
+    gives no month -- and is carried here because the schema has nowhere to put it:
+    `reportedUpper` closes `additionalProperties`, and `found_year` means the year the
+    packing was found, never the year it was last improved. So the date reaches the reader
+    through the body sentence, and the front matter carries only `improved_by`.
+
+    `sentence` indexes `credit_sentences`, which is how `_method_owner` decides whether
+    the credit line's construction method belongs to this improvement or to the finder.
+    """
+
+    names: tuple[str, ...]
+    when: str
+    sentence: int
+
+
+@dataclass(frozen=True, slots=True)
+class PriorityNote:
+    """One `priority_notes` entry: a lineage the entry carries that the record does not.
+
+    Written only where a catalogue entry describes two packings and the printed decimal
+    is the side of one of them; the note records the other, quoting the page's own phrase
+    so a reader can see what was set aside and why.
+    """
+
+    claim: str
+    claimed_by: tuple[str, ...] = ()
+    year: int | None = None
+
+    def as_payload(self) -> dict[str, Any]:
+        return {
+            "claim": self.claim,
+            "claimed_by": list(self.claimed_by),
+            "published": None,
+            "year": self.year,
+        }
+
+
+@dataclass(frozen=True, slots=True)
 class CatalogueFacts:
     """Everything a case record takes from the record catalogue, for one `n`.
 
     The first nine fields come straight off `sqpack.kingbird_catalogue.CatalogueEntry`.
-    `construction_method` and `analytically_optimized` are read from that entry's credit
-    line by `facts_from_catalogue_entry`, under the table in this module's docstring, and
-    default to the values that say "no line has been read". `improved_by` has no rule and
-    stays empty unless a caller sets it.
+    `construction_method`, `analytically_optimized`, `improved_by`, `improvements` and
+    `priority_notes` are read from that entry's credit line by
+    `facts_from_catalogue_entry`, under the table in this module's docstring, and default
+    to the values that say "no line has been read". `found_by` and `found_year` are the
+    parser's, except at the five entries carrying two lineages, where `_lineage` decides
+    which of the two the printed decimal belongs to.
 
     `stale_exact_form` is the one field that records something the catalogue got wrong
     rather than something it says: the form the page prints where that form does not
@@ -398,6 +627,8 @@ class CatalogueFacts:
     improved_by: tuple[str, ...] = ()
     credit_line: str | None = None
     stale_exact_form: str | None = None
+    improvements: tuple[CreditImprovement, ...] = ()
+    priority_notes: tuple[PriorityNote, ...] = ()
 
 
 class CatalogueEntryLike(Protocol):
@@ -440,33 +671,180 @@ def _normalized_credit(credit_line: str | None) -> str:
     return "" if credit_line is None else re.sub(r"\s+", " ", credit_line).strip()
 
 
-def construction_method_from_credit(credit_line: str | None) -> str:
-    """The `construction_method` the catalogue's credit line states, or `unknown`.
+def credit_sentences(credit_line: str | None) -> tuple[str, ...]:
+    """One credit line as the sentences the page wrote, whitespace normalised.
+
+    The first of them is the sentence that describes the packing the entry is about; the
+    rest are its history, its family links and the page's own disclaimers.
+    """
+    text = _normalized_credit(credit_line)
+    return tuple(part.strip() for part in _SENTENCE_BREAK.split(text) if part.strip())
+
+
+def _method_sentences(credit_line: str | None) -> tuple[str, ...]:
+    """The credit line's sentences with their parenthesised spans blanked out.
+
+    The catalogue describes an ancestor inside a parenthesis -- "(using a simulated
+    annealing program he wrote, starting from randomness)" -- and the method named there
+    is the ancestor's, not this entry's. Blanking them is what stops `n = 171`, a
+    composition of two copies of an annealed `s(50)`, and `n = 198`, an "L" added to that
+    composition, from being recorded as annealing runs. It changes nothing else: the
+    other thirty in-range matches stand in the finder's own sentence or in a dated
+    improvement's.
+    """
+    return tuple(
+        _PARENTHESISED.sub(" ", sentence) for sentence in credit_sentences(credit_line)
+    )
+
+
+def credit_method_match(credit_line: str | None) -> tuple[str, int | None]:
+    """The `construction_method` the credit line states, and the sentence that states it.
 
     The rules and the evidence for them are in this module's docstring. Nothing is
     inferred from what the line does *not* say: a named human author and no mention of a
     program is `unknown` here, because the catalogue writes exactly that for packings
-    found by computer search (`n = 68`).
+    found by computer search (`n = 68`). The sentence index is `None` for `unknown`, and
+    is what lets the prose attach the method to the credit that owns it.
     """
-    text = _normalized_credit(credit_line)
-    if not text:
-        return "unknown"
-    for phrase, method in CREDIT_METHOD_RULES:
-        if phrase in text:
-            return method
-    return "unknown"
+    sentences = _method_sentences(credit_line)
+    if not sentences:
+        return "unknown", None
+    for rule in CREDIT_METHOD_RULES:
+        regex = rule.regex
+        scope = sentences[:1] if rule.opening_only else sentences
+        for offset, sentence in enumerate(scope):
+            if regex.search(sentence):
+                return rule.method, offset
+    return "unknown", None
+
+
+def construction_method_from_credit(credit_line: str | None) -> str:
+    """The `construction_method` the catalogue's credit line states, or `unknown`."""
+    return credit_method_match(credit_line)[0]
+
+
+def improvements_from_credit(credit_line: str | None) -> tuple[CreditImprovement, ...]:
+    """Every dated, sentence-initial "Improved by <names> in <date>", in page order.
+
+    The one improvement form the corpus reads consistently; `_IMPROVED_BY` carries the
+    measurement. Names are split on "and" and on commas, exactly as the finder's credit
+    is split, and a sentence naming several improvers yields one entry naming all of
+    them.
+    """
+    found: list[CreditImprovement] = []
+    for index, sentence in enumerate(credit_sentences(credit_line)):
+        match = _IMPROVED_BY.search(sentence)
+        if match is None:
+            continue
+        when = f"{match.group('when').strip()} {match.group('year')}".strip()
+        found.append(
+            CreditImprovement(
+                names=_split_names(match.group("names")), when=when, sentence=index
+            )
+        )
+    return tuple(found)
+
+
+def improved_by_from_credit(credit_line: str | None) -> tuple[str, ...]:
+    """Every improver the credit line names, in page order, each kept once."""
+    names: list[str] = []
+    for improvement in improvements_from_credit(credit_line):
+        for name in improvement.names:
+            if name not in names:
+                names.append(name)
+    return tuple(names)
 
 
 def analytically_optimized_from_credit(credit_line: str | None) -> bool | None:
     """Whether the catalogue says this side has been optimized analytically.
 
-    `None` only where there is no credit line at all -- a rule-generated grid case, which
-    the catalogue does not picture and says nothing about.
+    `None` where there is no credit line at all -- a rule-generated grid case, which the
+    catalogue does not picture and says nothing about -- and `None` again where the page
+    ends "Further improvement pending", which says the entry is still moving and says
+    nothing about whether its current side has been optimized. `true` there would be a
+    positive claim read from silence, which `D-354` is the standing lesson against; the
+    nine pages in range that carry it (`102, 130, 172, 199, 228, 259, 269, 292, 302`)
+    therefore carry null. `n = 88`'s "Improvement by Thomas Schadt pending" is a
+    different sentence and is not read as this one.
     """
     text = _normalized_credit(credit_line)
     if not text:
         return None
+    if IMPROVEMENT_PENDING in text:
+        return None
     return NOT_ANALYTICALLY_OPTIMIZED not in text
+
+
+def _split_names(text: str) -> tuple[str, ...]:
+    """ "David W. Cantrell and David Ellsworth" as two names, the way the parser splits one."""
+    return tuple(
+        name.strip() for part in text.split(" and ") for name in part.split(",") if name.strip()
+    )
+
+
+def _quoted_phrase(sentence: str) -> str:
+    """One of the page's sentences, ready to be quoted inside a note.
+
+    The catalogue writes its parent packings as `$s(65)$`; the delimiters are LaTeX and
+    say nothing, so they come out and the name stays.
+    """
+    return _MATH_DELIMITER.sub("", sentence).strip().rstrip(".")
+
+
+def _lineage(
+    credit_line: str | None, found_by: tuple[str, ...], found_year: int | None
+) -> tuple[tuple[str, ...], int | None, tuple[PriorityNote, ...]]:
+    """Whose the printed decimal is, at the five entries that carry two packings.
+
+    Returns the credit and the priority notes for one entry. Everywhere else it returns
+    the parser's credit unchanged and no notes, which is all but five of the 107
+    catalogue-sourced records in `101..324`; `_ALTERNATIVE` and `_CONVERTED` carry the
+    evidence for the two shapes and for which packing each decimal belongs to.
+    """
+    sentences = credit_sentences(credit_line)
+    for index, sentence in enumerate(sentences):
+        if not _ALTERNATIVE.search(sentence):
+            continue
+        credit = _LOWER_CREDIT.search(sentence)
+        if credit is None:
+            break
+        notes: list[PriorityNote] = []
+        if index:
+            prior = sentences[index - 1]
+            prior_credit = _LOWER_CREDIT.search(prior)
+            notes.append(
+                PriorityNote(
+                    claim=(
+                        "The catalogue pictures this entry’s alternative construction; its "
+                        f"other lineage is the page’s own “{_quoted_phrase(prior)}”."
+                    ),
+                    claimed_by=(
+                        ()
+                        if prior_credit is None
+                        else _split_names(prior_credit.group("names"))
+                    ),
+                    year=None if prior_credit is None else int(prior_credit.group("year")),
+                )
+            )
+        return _split_names(credit.group("names")), int(credit.group("year")), tuple(notes)
+
+    converted = any(_CONVERTED.search(sentence) for sentence in sentences)
+    for sentence in sentences if converted else ():
+        match = _ORIGINALLY_FOUND.search(sentence)
+        if match is None:
+            continue
+        year = match.group("year")
+        note = PriorityNote(
+            claim=(
+                "The catalogue pictures the packing this entry was converted into, not the "
+                "one it started as; the original lineage is the page’s own "
+                f"“{_quoted_phrase(sentence)}”."
+            ),
+            claimed_by=_split_names(match.group("names")),
+            year=None if year is None else int(year),
+        )
+        return (), None, (note,)
+    return found_by, found_year, ()
 
 
 def credited_surnames(credit_line: str | None) -> tuple[str, ...]:
@@ -524,30 +902,38 @@ def facts_from_catalogue_entry(
     cover two sizes -- "119, 120" is one drawing and one printed side -- and the parser
     keys such an entry under both while `entry.n` names only one of them.
 
-    Two readings happen here rather than in the parser, because both are this
-    repository's judgement about the page rather than a transcription of it: the credit
-    line is mapped onto the schema's enums, and a closed form that disagrees with its own
-    printed decimal is dropped in favour of the decimal.
+    The readings that happen here rather than in the parser are this repository's
+    judgement about the page rather than a transcription of it: the credit line is mapped
+    onto the schema's enums, its improvements and its second lineage are read out of it,
+    and a closed form that disagrees with its own printed decimal is dropped in favour of
+    the decimal.
     """
     exact_form = entry.exact_form
     stale_exact_form: str | None = None
     if exact_form is not None and not exact_form_agrees(exact_form, entry.side_decimal):
         stale_exact_form = exact_form
         exact_form = None
+    improvements = improvements_from_credit(entry.credit_line)
+    found_by, found_year, priority_notes = _lineage(
+        entry.credit_line, tuple(entry.found_by), entry.found_year
+    )
     return CatalogueFacts(
         n=entry.n if n is None else n,
         side_decimal=entry.side_decimal,
         exact_form=exact_form,
         algebraic_degree=None if stale_exact_form else entry.algebraic_degree,
         minimal_polynomial=None if stale_exact_form else entry.minimal_polynomial,
-        found_by=tuple(entry.found_by),
-        found_year=entry.found_year,
+        found_by=found_by,
+        found_year=found_year,
         catalogue_rigid=entry.catalogue_rigid or "not-stated",
         catalogue_pictured=entry.catalogue_pictured,
         construction_method=construction_method_from_credit(entry.credit_line),
         analytically_optimized=analytically_optimized_from_credit(entry.credit_line),
+        improved_by=improved_by_from_credit(entry.credit_line),
         credit_line=entry.credit_line,
         stale_exact_form=stale_exact_form,
+        improvements=improvements,
+        priority_notes=priority_notes,
     )
 
 
@@ -741,6 +1127,18 @@ def _join_names(names: Sequence[str]) -> str:
     return f"{', '.join(names[:-1])} and {names[-1]}"
 
 
+def _credits_arslanov(facts: CatalogueFacts | None) -> bool:
+    """Whether this case's finders are the authors of the retained Arslanov paper.
+
+    Keyed on the credit rather than on a list of `n`, because the credit is what the
+    resource is about: the seven entries the catalogue credits to all three authors
+    (`132, 156, 182, 210, 241, 273, 307`) are the ones whose packings the paper
+    publishes. The paper is dated 2021 and `found_year` stays 2019, which is when the
+    page and the paper's own submission date the finding; the two are not in conflict.
+    """
+    return facts is not None and set(ARSLANOV_AUTHORS) <= set(facts.found_by)
+
+
 def build_payload(
     n: int,
     *,
@@ -841,6 +1239,14 @@ def build_payload(
         resources = [KINGBIRD_RESOURCE, NAGAMOCHI_RESOURCE, FRIEDMAN_RESOURCE]
     if source.is_unitsquare:
         resources = [KINGBIRD_RESOURCE, UNITSQUARE_RESOURCE, *resources[1:]]
+    elif _credits_arslanov(facts):
+        # Listed second, immediately after the catalogue, which is where `n-013.md` and
+        # `n-011.md` list the paper behind a credit: the catalogue is still where the case
+        # is looked up, and this is the retained report the credit rests on.
+        resources = [KINGBIRD_RESOURCE, ARSLANOV_RESOURCE, *resources[1:]]
+    priority_notes = (
+        [] if facts is None else [note.as_payload() for note in facts.priority_notes]
+    )
 
     return {
         "n": n,
@@ -856,7 +1262,7 @@ def build_payload(
         # that the packing can move.
         "rigidity": None,
         "conjectured_optimum": conjectured,
-        "priority_notes": [],
+        "priority_notes": priority_notes,
         "evidence": rollup,
         "conflicts": _conflicts(source, facts),
         "blockers": blockers,
@@ -1096,7 +1502,63 @@ def _unitsquare_packing_section(n: int, record: UnitSquareRecord, parent: str) -
     ]
 
 
-def _packing_section(n: int, payload: Mapping[str, Any]) -> list[str]:
+def _method_owner(
+    facts: CatalogueFacts | None, method: str, found_by: Sequence[str]
+) -> str | int | None:
+    """Which of the credit line's sentences the construction method belongs to.
+
+    `"finder"` for the sentence that names `found_by`, an index into
+    `facts.improvements` for a dated improvement, `None` for a method the line states
+    somewhere neither of those, which the prose then writes without an owner.
+
+    The two fallbacks to `"finder"` are the shapes where joining the method to the credit
+    asserts nothing false. `unknown` is one: "via an unrecorded method" adds no claim to
+    whatever precedes it. A caller with no credit line is the other: nothing can be
+    attributed, and this is the reading the corpus already carries.
+    """
+    if facts is None or facts.credit_line is None or method == "unknown":
+        return "finder"
+    _, sentence = credit_method_match(facts.credit_line)
+    if sentence is None:
+        return "finder"
+    for index, improvement in enumerate(facts.improvements):
+        if improvement.sentence == sentence:
+            return index
+    sentences = credit_sentences(facts.credit_line)
+    if not found_by:
+        # No name to miscredit, so the method stays on the opening statement, which is
+        # where the corpus has always carried it.
+        return "finder"
+    credited = next(
+        (
+            index
+            for index, text in enumerate(sentences)
+            if all(name in text for name in found_by)
+        ),
+        None,
+    )
+    return "finder" if credited is None or credited == sentence else None
+
+
+def _packing_section(
+    n: int, payload: Mapping[str, Any], facts: CatalogueFacts | None = None
+) -> list[str]:
+    """The "The packing" paragraph for a catalogue case.
+
+    The finder and the method are separate statements unless the page puts them in the
+    same sentence. They follow different conventions -- `found_by` is the page's first
+    credit, `construction_method` is what produced the *printed* side -- so the one
+    sentence the corpus used to write, "Found by <finder> in <year>, via <method>", read
+    the two as one claim and asserted something no page says: at the seven Arslanov
+    cases it credited a March 2019 analytic construction to a January 2026 annealing run.
+    `_method_owner` decides which credit the method hangs off, from where the phrase that
+    named it sits, and a method the line states outside any credit is written with no
+    owner at all.
+
+    The improvement dates are the page's own words and reach the reader only here: the
+    schema closes `additionalProperties` on `reported_upper_bound`, so `improved_by`
+    carries the names and nothing carries the date.
+    """
     reported = payload["reported_upper_bound"]
     if not reported["catalogue_pictured"]:
         side = grid_ceiling(n)
@@ -1112,15 +1574,26 @@ def _packing_section(n: int, payload: Mapping[str, Any]) -> list[str]:
     method = CONSTRUCTION_PHRASES[reported["construction_method"]]
     names = _join_names(reported["found_by"])
     year = reported["found_year"]
+    owner = _method_owner(facts, str(reported["construction_method"]), reported["found_by"])
     if not names:
-        credit = f"Found by an unrecorded author, via {method}."
+        credit = "Found by an unrecorded author"
     elif year is None:
-        credit = f"Found by {names}, via {method}."
+        credit = f"Found by {names}"
     else:
-        credit = f"Found by {names} in {year}, via {method}."
-    lines = [credit]
-    if reported["improved_by"]:
+        credit = f"Found by {names} in {year}"
+    lines = [f"{credit}, via {method}." if owner == "finder" else f"{credit}."]
+    improvements = () if facts is None else facts.improvements
+    for index, improvement in enumerate(improvements):
+        improved = f"Improved by {_join_names(improvement.names)} in {improvement.when}"
+        lines.append(f"{improved}, via {method}." if owner == index else f"{improved}.")
+    if not improvements and reported["improved_by"]:
+        # A caller that handed in facts without the credit line they came from: the names
+        # are on record and their dates are not, which is the sentence the corpus wrote
+        # before the dates were read.
         lines.append(f"Later improved by {_join_names(reported['improved_by'])}.")
+    if owner is None:
+        subject = CONSTRUCTION_SUBJECTS[reported["construction_method"]]
+        lines.append(f"The recorded construction method is {subject}.")
     if reported["algebraic_degree"] is not None:
         lines.append(
             f"Its side length is algebraic of degree **{reported['algebraic_degree']}** "
@@ -1173,13 +1646,19 @@ def _ceiling_section(n: int, payload: Mapping[str, Any]) -> list[str]:
 
 
 def render_body(
-    n: int, payload: Mapping[str, Any], *, packing_lines: Sequence[str] | None = None
+    n: int,
+    payload: Mapping[str, Any],
+    *,
+    packing_lines: Sequence[str] | None = None,
+    facts: CatalogueFacts | None = None,
 ) -> str:
     """The reader-facing half of the record, wrapped the way every other document here is.
 
     `packing_lines` replaces the templated "The packing" paragraph for a case whose source
     is not the catalogue. The payload alone cannot write that paragraph: it says nothing
-    about how much a release improved on its parent, or whose parent it was.
+    about how much a release improved on its parent, or whose parent it was. `facts`
+    carries the two things the payload also cannot say about a catalogue case -- when each
+    improvement happened, and which credit the construction method belongs to.
     """
     side = grid_ceiling(n)
     reported_value = str(payload["reported_upper_bound"]["value"])
@@ -1224,7 +1703,9 @@ def render_body(
 
     lines.append("## The packing")
     lines.append("")
-    lines.extend(_packing_section(n, payload) if packing_lines is None else packing_lines)
+    lines.extend(
+        _packing_section(n, payload, facts) if packing_lines is None else packing_lines
+    )
     lines.append("")
     lines.append("## The lower bound")
     lines.append("")
@@ -1249,7 +1730,10 @@ def render_body(
 
 
 def render_record(
-    payload: Mapping[str, Any], *, packing_lines: Sequence[str] | None = None
+    payload: Mapping[str, Any],
+    *,
+    packing_lines: Sequence[str] | None = None,
+    facts: CatalogueFacts | None = None,
 ) -> str:
     """One complete `n-NNN.md`: front matter, then the prose that restates it."""
     n = int(payload["n"])
@@ -1264,7 +1748,7 @@ def render_record(
         "packing": dict(payload),
     }
     front = yaml.safe_dump(document, allow_unicode=True, sort_keys=False, width=96)
-    body = render_body(n, payload, packing_lines=packing_lines)
+    body = render_body(n, payload, packing_lines=packing_lines, facts=facts)
     return f"---\n{front}---\n{body}"
 
 
@@ -1322,7 +1806,7 @@ def generate_record(
             _unitsquare_record(n, release),
             "-".join(names) if names else "cited",
         )
-    return render_record(payload, packing_lines=packing_lines)
+    return render_record(payload, packing_lines=packing_lines, facts=facts)
 
 
 # --------------------------------------------------------------------------------------
@@ -1370,6 +1854,31 @@ def _existing_dates(path: Path, review_date: str, retrieved_date: str) -> tuple[
         reported.get("retrieved_date") if isinstance(reported, Mapping) else None
     ) or retrieved_date
     return str(payload.get("source_reviewed") or review_date), str(retrieved)
+
+
+def without_rigidity(text: str) -> str:
+    """One record's text with its `packing.rigidity` block removed.
+
+    The generator writes `rigidity: null` and the promotion path replaces it: the
+    translation-escape screen and `devtools/assess_frontier_rigidity.py` run after this
+    tool and re-serialise the block at their own YAML width, so a promoted record can
+    never be byte-identical to a fresh draft of itself in that one field. `--check`
+    therefore compares everything except it. This is the same allowance the golden test
+    already makes -- `NOT_REPRODUCED` names `packing.rigidity` and nothing else -- and
+    without it every promoted record would report as drift and the check would find none.
+    """
+    kept: list[str] = []
+    dropping = False
+    for line in text.splitlines(keepends=True):
+        if line.startswith("  rigidity:"):
+            dropping = True
+            continue
+        if dropping:
+            if line.startswith("    "):
+                continue
+            dropping = False
+        kept.append(line)
+    return "".join(kept)
 
 
 def write_record(text: str, path: Path) -> None:
@@ -1514,9 +2023,11 @@ def _check(
             )
             write_record(generated, record_path(scratch_dir, n))
             checked += 1
-            if generated != existing:
+            comparable = without_rigidity(existing)
+            drafted = without_rigidity(generated)
+            if drafted != comparable:
                 problems += 1
-                print("\n".join(diff_record(existing, generated, existing_path.name)))
+                print("\n".join(diff_record(comparable, drafted, existing_path.name)))
     print(f"checked {checked} record(s); {problems} disagree with the generator")
     return 1 if problems else 0
 

@@ -35,9 +35,11 @@ kinds of mismatch a reader would want to know about are named separately:
   is `rigidity` and, for three cases, a hand-written body.
 
 `test_reports_what_the_adapter_cannot_derive` is the same comparison run through the real
-catalogue parser instead of injected facts. Two of those three credit-line fields are now
-read off `CatalogueEntry.credit_line` and reproduce; `improved_by` is the one that does
-not, and the test names it.
+catalogue parser instead of injected facts. All three credit-line fields are now read off
+`CatalogueEntry.credit_line`, `improved_by` included, and at `n = 50` all three
+reproduce: the rule reads the page's dated "Improved by" sentences, of which `n = 50` has
+none, and deliberately does not read the "Optimized by" sentence the hand pass read at
+`n = 29` and ignored at `n = 39, 41, 50, 51, 71`.
 """
 
 from __future__ import annotations
@@ -68,6 +70,7 @@ from devtools.generate_frontier_case import (
     GenerationError,
     SourceAvailability,
     analytically_optimized_from_credit,
+    build_payload,
     construction_method_from_credit,
     credited_surnames,
     facts_from_catalogue_entry,
@@ -79,6 +82,7 @@ from devtools.generate_frontier_case import (
     method_summary,
     record_path,
     refuse_reason,
+    without_rigidity,
     write_record,
 )
 from sqpack.assurance import check_case_semantics
@@ -106,8 +110,9 @@ SUPPLIED = {
         "injected from the same place, and read off the same credit line"
     ),
     "packing.reported_upper_bound.improved_by": (
-        "injected, and genuinely underivable: the catalogue writes 'Optimized by David "
-        "Ellsworth' for both n = 29, whose record lists him, and n = 50, whose does not"
+        "injected here from the record itself; the generator reads the page's dated "
+        "'Improved by' sentences, which test_reports_what_the_adapter_cannot_derive and "
+        "test_the_improvement_rule_reproduces_the_hand_transcription exercise"
     ),
 }
 NOT_REPRODUCED = {
@@ -288,25 +293,10 @@ def test_the_whole_record_is_byte_identical_apart_from_the_allowlist(n: int) -> 
     if n in BODY_NOT_REPRODUCED:
         return
     # Drop the rigidity block from the committed record and the `rigidity: null` line
-    # from the generated one; nothing else may differ.
-    stripped = _without_rigidity(committed)
-    assert _without_rigidity(generated) == stripped
-
-
-def _without_rigidity(text: str) -> str:
-    lines = text.splitlines(keepends=True)
-    kept: list[str] = []
-    dropping = False
-    for line in lines:
-        if line.startswith("  rigidity:"):
-            dropping = True
-            continue
-        if dropping:
-            if line.startswith("    "):
-                continue
-            dropping = False
-        kept.append(line)
-    return "".join(kept)
+    # from the generated one; nothing else may differ. The generator's own `--check`
+    # makes exactly this allowance, and uses this function to make it.
+    stripped = without_rigidity(committed)
+    assert without_rigidity(generated) == stripped
 
 
 def test_reports_what_the_adapter_cannot_derive() -> None:
@@ -314,10 +304,10 @@ def test_reports_what_the_adapter_cannot_derive() -> None:
 
     `n = 50`'s credit line reads "Found by Thomas Schadt in December 2025, using a
     simulated annealing program he wrote, starting from randomness. Optimized by David
-    Ellsworth." Two of the three credit-line fields fall out of that: the method, and the
-    absence of the "Not yet analytically optimized" disclaimer. The third does not -- the
-    record leaves `improved_by` empty despite the "Optimized by" sentence, where `n = 29`
-    fills it in from the same sentence -- so no rule is applied to it.
+    Ellsworth." All three credit-line fields fall out of that: the method, the absence of
+    the "Not yet analytically optimized" disclaimer, and an empty `improved_by`, because
+    the page carries no dated "Improved by" sentence and the "Optimized by" form is the
+    one the hand pass read inconsistently and the rule therefore does not read.
     """
     facts = _parsed_facts(50)
     generated = safe_load(_regenerate(50, facts=facts).split("---\n", 2)[1])
@@ -361,6 +351,17 @@ def _catalogue_facts() -> dict[int, CatalogueFacts]:
         n: facts_from_catalogue_entry(entry, n=n)
         for n, entry in catalogue_module.parse_catalogue().items()
     }
+
+
+def _regenerate_in_range(n: int) -> str:
+    """Draft a case past the hand-authored range, on the register's own review date."""
+    return generate_record(
+        n,
+        availability=load_availability(),
+        catalogue=_catalogue_facts(),
+        review_date="2026-09-07",
+        retrieved_date="2026-09-07",
+    )
 
 
 def _evidence() -> dict[str, Any]:
@@ -537,8 +538,154 @@ def test_the_unitsquare_prose_names_the_parent_the_release_improved_on() -> None
 def test_each_credit_phrase_maps_to_the_enum_the_transcription_used(
     phrase: str, expected: str
 ) -> None:
-    """One case per row of the table in the generator's docstring."""
+    """One case per substring row of the table in the generator's docstring."""
     assert construction_method_from_credit(f"Found by A. Name in 1979. {phrase}") == expected
+
+
+@pytest.mark.parametrize(
+    ("credit", "expected"),
+    [
+        ('Adds two "L"s to the $s(65)$ found by A. Name in early 1979.', "extension"),
+        ('Adds an "L" to the $s(148)$ that continues a pattern.', "extension"),
+        ("Combines two copies of the $s(65)$ that continues a pattern.", "composition"),
+        (
+            "Found by A. Name in December 2025, by combining two copies of the $s(50)$.",
+            "composition",
+        ),
+        # The n = 82 shape: the page names a human finder first and adds the augmentation
+        # afterwards, so the opening-sentence rule does not reach it and the hand record's
+        # `hand-construction` stands.
+        ('Found by Frits Göbel in early 1979. Adds two "L"s to $s(65)$.', "unknown"),
+    ],
+)
+def test_the_two_structural_rules_read_only_the_opening_sentence(
+    credit: str, expected: str
+) -> None:
+    """The opening sentence is the one describing the packing the entry is about."""
+    assert construction_method_from_credit(credit) == expected
+
+
+def test_a_method_named_inside_a_parenthesis_belongs_to_the_ancestor() -> None:
+    """`n = 171` and `n = 198`, the two entries whose only annealing is two packings up."""
+    catalogue = _catalogue_facts()
+    assert catalogue[171].construction_method == "composition"
+    assert catalogue[198].construction_method == "extension"
+    assert "simulated annealing program" in (catalogue[171].credit_line or "")
+    assert "simulated annealing program" in (catalogue[198].credit_line or "")
+    # And the scoping takes nothing else with it: the other in-range matches stand in a
+    # finder's or a dated improver's own sentence.
+    annealed = sorted(
+        n
+        for n, facts in catalogue.items()
+        if n > 100 and facts.construction_method == "simulated-annealing"
+    )
+    print(f"simulated-annealing in range: {len(annealed)}")
+    assert len(annealed) == 34
+
+
+def test_the_improvement_rule_reproduces_the_hand_transcription() -> None:
+    """Measured over every catalogue-sourced pictured record below the register.
+
+    The rule reads a sentence-initial, dated "Improved by <names> in <month> <year>" and
+    nothing else. It reproduces 45 of the 46 records; the miss is `n = 29`, where the
+    hand pass read an "Optimized by" sentence as an improvement and five sibling records
+    read the same sentence as nothing.
+    """
+    catalogue = _catalogue_facts()
+    disagreed: dict[int, tuple[list[str], list[str]]] = {}
+    compared = 0
+    for n in range(1, 101):
+        facts = catalogue.get(n)
+        committed, _ = _committed(n)
+        reported = committed["packing"]["reported_upper_bound"]
+        if facts is None or reported["source_key"] != "[Kingbird]":
+            continue
+        if not reported["catalogue_pictured"]:
+            continue
+        compared += 1
+        if list(facts.improved_by) != list(reported["improved_by"]):
+            disagreed[n] = (list(reported["improved_by"]), list(facts.improved_by))
+    print(f"compared {compared} record(s); the rule disagrees at {sorted(disagreed)}")
+    assert compared == 46
+    assert set(disagreed) == {29}
+
+
+def test_an_entry_with_two_lineages_credits_the_packing_the_decimal_is_of() -> None:
+    """The pictured alternative takes its own finder; the conversion names nobody."""
+    catalogue = _catalogue_facts()
+    for n, finder, year in ((170, "Károly Hajba", 2024), (257, "David Ellsworth", 2025)):
+        facts = catalogue[n]
+        assert list(facts.found_by) == [finder], n
+        assert facts.found_year == year, n
+        assert [note.claimed_by for note in facts.priority_notes] == [("Frits Göbel",)], n
+    for n, original, year in ((240, "Károly Hajba", 2015), (272, "Lars Cleemann", None)):
+        facts = catalogue[n]
+        assert facts.found_by == (), n
+        assert facts.found_year is None, n
+        assert [note.claimed_by for note in facts.priority_notes] == [(original,)], n
+        assert [note.year for note in facts.priority_notes] == [year], n
+    # And nowhere else: five entries in range carry a second lineage, and no others.
+    carried = sorted(n for n, facts in catalogue.items() if facts.priority_notes)
+    assert carried == [170, 240, 257, 260, 272]
+
+
+def test_a_pending_improvement_leaves_analytic_optimization_unstated() -> None:
+    """`D-354`: a page that says it is still moving has not said this side is finished."""
+    catalogue = _catalogue_facts()
+    unstated = sorted(
+        n for n, facts in catalogue.items() if facts.analytically_optimized is None
+    )
+    assert unstated == [102, 130, 172, 199, 228, 259, 269, 292, 302]
+    # `n = 88`'s "Improvement by Thomas Schadt pending" is a different sentence.
+    assert catalogue[88].analytically_optimized is True
+
+
+def test_an_arslanov_credit_cites_the_retained_paper() -> None:
+    """The seven entries the page credits to all three authors, and no others."""
+    catalogue = _catalogue_facts()
+    availability = load_availability()
+    cited: list[int] = []
+    for n in sorted(availability):
+        facts = catalogue.get(n)
+        if facts is None or availability[n].is_grid:
+            continue
+        payload = build_payload(
+            n,
+            source=availability[n],
+            facts=facts,
+            review_date="2026-09-07",
+            retrieved_date="2026-09-07",
+        )
+        keys = [str(resource["key"]) for resource in payload["resources"]]
+        if "[Arslanov et al.]" in keys:
+            cited.append(n)
+            assert keys[1] == "[Arslanov et al.]", n
+            assert facts.found_year == 2019, n
+    assert cited == [132, 156, 182, 210, 241, 273, 307]
+
+
+def test_the_packing_paragraph_keeps_the_finder_and_the_method_apart() -> None:
+    """The defect the template used to carry, at the case that showed it worst.
+
+    `n = 132` was found by Arslanov, Mustafin and Shangitbayev in March 2019 and last
+    improved by an annealing run in January 2026; the old single sentence credited the
+    2019 construction with the 2026 method.
+    """
+    body = _regenerate_in_range(132).split("---\n", 2)[2]
+    packing = re.sub(r"\s+", " ", body.split("## The packing\n\n")[1].split("\n\n## ")[0])
+    assert packing == (
+        "Found by M.Z. Arslanov, S.A. Mustafin and Z.K. Shangitbayev in 2019. "
+        "Improved by David W. Cantrell in March 2025. "
+        "Improved by David Ellsworth in January 2026, via simulated annealing."
+    )
+    # And where the method belongs to no credit at all, it is written with no owner.
+    ownerless = re.sub(r"\s+", " ", _regenerate_in_range(301).split("---\n", 2)[2]).split(
+        "## The packing "
+    )[1]
+    assert ownerless.startswith(
+        "Found by David Ellsworth in 2025. The recorded construction method is "
+        "simulated annealing."
+    )
 
 
 def test_an_unrecognised_credit_line_stays_unknown() -> None:
@@ -674,9 +821,13 @@ def test_the_summary_counts_the_methods_and_names_what_is_left_unknown() -> None
     }
     assert sum(counts.values()) == 224
     assert counts["trivial-grid"] == 97
-    assert counts["unknown"] == 64
+    assert counts["unknown"] == 49
+    # The L-augmentation family and the two "Combines two copies" entries, which used to
+    # land in the unknown roll and now have rules of their own.
+    assert counts["extension"] == 27
+    assert counts["composition"] == 3
     unresolved = next(line for line in lines if line.startswith("unresolved "))
-    assert "101" in unresolved
+    assert "101" not in unresolved
     assert "103" in unresolved
 
 

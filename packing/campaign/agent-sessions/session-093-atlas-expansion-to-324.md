@@ -469,6 +469,35 @@ session:
     elapsed_seconds: 3826
     elapsed_quality: platform_measured
     next_action: Publish the poster family beside the first on the site under Phase 5.
+  - task: Apply the credit-line review's corrections to the generator and regenerate 101..324
+    operator: Claude Opus delegate
+    status: completed
+    recording: contemporaneous
+    phase: 3
+    outcome: Six credit openers and sentence-scoped parsing; parenthesis-scoped method phrases;
+      L-augmentation and composition rules; dated improved_by (45 of 46 hand records reproduced);
+      pending pages read as null; two-lineage pages carried in priority_notes; the Arslanov paper
+      cited at its seven cases; the body template attributes each method to the credit that owns
+      it. 59 records changed in credit fields, resources, notes and prose only; every bound,
+      evidence, witness, status and rigidity field unchanged.
+    evidence:
+    - docs/project/reviews/review-2026-09-07-atlas-101-324-credit-lines.md
+    - packing/tests/test_generate_frontier_case.py
+    files:
+    - packing/devtools/generate_frontier_case.py
+    - packing/src/sqpack/kingbird_catalogue.py
+    - packing/tests/test_generate_frontier_case.py
+    - packing/tests/test_kingbird_catalogue.py
+    checks:
+    - Coordinator re-ran ruff, basedpyright, 128 tests, the coverage reparse (zero divergences over
+      648 facts), the prose check over 324 files, the generator's own --check (0 disagree) and
+      schema validation before committing.
+    uncertainty: The hand-written n = 53 and n = 87 carry the same body defect and were left as
+      they are; the two-lineage reading at 240 and 272 credits nobody for the conversion and keeps
+      the original finder in priority_notes.
+    elapsed_seconds: 2086
+    elapsed_quality: platform_measured
+    next_action: None; a later hand pass may regenerate n = 53 and 87 under the new template.
   outputs:
   - docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
   checks:

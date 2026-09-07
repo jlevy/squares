@@ -60,10 +60,28 @@ _PRINTED_DECIMAL = re.compile(r"^\\Nn\{([0-9]+(?:\.[0-9]+)?)\}$")
 _DEGREE_LOCK = re.compile(rf"^\{{}}\^\{{(\d+)}}{LOCK_GLYPH}$")
 _PLAIN_NUMBER = re.compile(r"^[0-9]+(?:\.[0-9]+)?$")
 _MARKDOWN_LINK = re.compile(r"\[([^\]]*)]\([^)]*\)")
+#: The sentence openers the catalogue uses to name who found a packing, longest first so
+#: that "Found and improved by" is never read as "Found by". Six, not the three this
+#: module started with: reading only "Found first by", "Found by" and "Proved by" left
+#: eight entries the page credits with no finder at all (``n = 123, 129, 154, 177, 206,
+#: 230, 266, 301``), each opened with one of the three added here.
+_CREDIT_OPENERS = (
+    "Found first by",
+    "Found and improved by",
+    "Originally found by",
+    "Found by",
+    "Proved by",
+    "Drafted by",
+)
 _CREDIT = re.compile(
-    r"(?:Found first by|Found by|Proved by)\s+(?P<names>.+?)"
+    rf"(?:{'|'.join(_CREDIT_OPENERS)})\s+(?P<names>.+?)"
     r"\s+in\s+(?P<when>(?:[A-Za-z-]+\s+)*)(?P<year>\d{4})\b"
 )
+#: A sentence boundary inside one block's joined annotation lines. A period ends a
+#: sentence only where it does not follow a single capital letter, which is what keeps
+#: "David W. Cantrell" and "M.Z. Arslanov" whole. `devtools/generate_frontier_case.py`
+#: carries the same three lines, for the reason its `CatalogueEntryLike` gives.
+_SENTENCE_BREAK = re.compile(r"(?<![A-Z])\.\s+")
 _COMPLETENESS = re.compile(
     r"For the \$n\s*(?:\u2264|<=|\\le(?:q)?\b)\s*(\d+)\$\s*not pictured", re.IGNORECASE
 )
@@ -130,8 +148,9 @@ class CatalogueEntry:
     found_by: tuple[str, ...]
     """Names from the entry's first credit sentence, in order; empty when unparseable.
 
-    The catalogue writes "Found by", "Found first by" and "Proved by" in the same slot
-    and does not separate who built a packing from who proved a bound about it, so this
+    The catalogue writes six openers in the same slot -- "Found by", "Found first by",
+    "Found and improved by", "Originally found by", "Drafted by" and "Proved by" -- and
+    does not separate who built a packing from who proved a bound about it, so this
     field does not either. The frontier does -- `n = 6` credits Erich Friedman with the
     packing and Kearney and Shiu with the proof, where the catalogue prints only the
     latter -- which is why it is not a field the transcription check gates on.
@@ -315,18 +334,33 @@ def _printed_degree(polynomial: str, line: int) -> int:
     return max(exponents)
 
 
+def split_credit_sentences(text: str) -> tuple[str, ...]:
+    """One block's joined annotation lines, split into the sentences the page wrote."""
+    return tuple(part.strip() for part in _SENTENCE_BREAK.split(text) if part.strip())
+
+
 def _parse_credit(text: str) -> tuple[tuple[str, ...], int | None]:
-    """Return the names and year of the entry's first credit sentence."""
-    match = _CREDIT.search(text)
-    if match is None:
-        return (), None
-    names = [
-        name.strip()
-        for part in match.group("names").split(" and ")
-        for name in part.split(",")
-        if name.strip()
-    ]
-    return tuple(names), int(match.group("year"))
+    """Return the names and year of the entry's first credit sentence.
+
+    Matched one sentence at a time, because the openers now include "Originally found
+    by" and the page writes it without a year: `n = 272` reads "Originally found by Lars
+    Cleemann between 1991 and 1998", and a search over the whole block would run the
+    names group past two sentences to reach the next four-digit year it found. A credit
+    is a sentence, so it is read as one, and an opener whose own sentence names no year
+    yields nothing rather than a year from somewhere else.
+    """
+    for sentence in split_credit_sentences(text):
+        match = _CREDIT.search(sentence)
+        if match is None:
+            continue
+        names = [
+            name.strip()
+            for part in match.group("names").split(" and ")
+            for name in part.split(",")
+            if name.strip()
+        ]
+        return tuple(names), int(match.group("year"))
+    return (), None
 
 
 def _parse_block(

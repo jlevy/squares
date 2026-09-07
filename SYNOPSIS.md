@@ -1281,12 +1281,11 @@ All `n = 1..324` frontier entries now point to normalized witnesses and determin
 house renderings. The first hundred are calibration evidence, not an unseen holdout and
 not a new proof of optimality; `n = 101..324`, promoted on 2026-09-07 under the
 [expansion plan](docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md)
-and frozen at commit `6e21c4ca`, is the unseen corpus a confirmatory run may use once its
-instrument and grammar are frozen, and the calibration-only layers stay pinned to the
-first hundred.
-The atlas source inventory retains attributed Kingbird-derived numerical facts but no
-raw Kingbird SVG because the review located no express redistribution terms; that
-conservative repository policy is not a legal conclusion.
+and frozen at commit `6e21c4ca`, is the unseen corpus a confirmatory run may use once
+its instrument and grammar are frozen, and the calibration-only layers stay pinned to
+the first hundred. The atlas source inventory retains attributed Kingbird-derived
+numerical facts but no raw Kingbird SVG because the review located no express
+redistribution terms; that conservative repository policy is not a legal conclusion.
 A broad same-angle contact census covers 1,780 of 1,860 non-grid squares, but the
 stricter bar/L/rectangle partition establishes 3 of 36 non-grid cases inside its narrow
 budget. Two cases are conclusively outside that budget, 23 have no partition in the

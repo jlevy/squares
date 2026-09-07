@@ -265,6 +265,32 @@ def test_the_credit_line_is_where_the_page_states_analytic_optimization() -> Non
     assert 179 in stated
 
 
+def test_the_six_credit_openers_the_page_writes_are_all_read() -> None:
+    """Three of them were unread, which left eight entries the page credits uncredited."""
+    catalogue = _by_n()
+    for n in (123, 129, 177, 206, 266):  # "Found and improved by"
+        assert catalogue[n].found_by == ("David Ellsworth",), n
+    assert catalogue[230].found_by == ("David Ellsworth",)  # "Found and improved by"
+    assert catalogue[154].found_by == ("David Ellsworth",)  # "Originally found by"
+    assert catalogue[301].found_by == ("David Ellsworth",)  # "Drafted by"
+    assert catalogue[230].found_year == 2025
+    assert catalogue[301].found_year == 2025
+
+
+def test_a_credit_is_read_from_one_sentence_and_not_across_two() -> None:
+    """`n = 272` opens "Originally found by Lars Cleemann between 1991 and 1998".
+
+    The sentence names no year in the form this parser reads, and the next four-digit
+    year on the page belongs to a different packing two sentences later. A credit is a
+    sentence, so an opener whose own sentence dates nothing yields nothing.
+    """
+    entry = _by_n()[272]
+
+    assert "Originally found by Lars Cleemann" in (entry.credit_line or "")
+    assert entry.found_by == ()
+    assert entry.found_year is None
+
+
 def test_a_block_with_no_annotation_has_no_credit_line() -> None:
     """`None` says the page printed nothing, which is not the same as an empty string."""
     (entry,) = parse_entries("9\n[](square-9.svg)\n\n$s = 3$\n")
