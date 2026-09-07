@@ -25,12 +25,10 @@ in x-height and weight.
 The research that diagnosed it and the feature that fixes it live in kpress, on the
 vendored `squares/page-fixes` branch, because both are about kpress typography rather
 than this paper:
-[the research brief](../../../../vendor/kpress/docs/math-text-face.research.md) and
-[the feature plan](../../../../vendor/kpress/docs/math-text-face.plan.md).
-The feature draws every Latin letter and digit inside mathematics from the reading face,
-keeps operators, relations, delimiters, radicals and Greek in the KaTeX faces, sets
-inline math at the prose size, and gives KaTeX the reading face’s metrics.
-It is on by default in kpress once it lands.
+[the research brief](../../../../vendor/kpress/docs/project/research/research-2026-09-07-math-text-face.md)
+and [the feature plan](../../../../vendor/kpress/docs/math-text-face.plan.md).
+What the feature does, why, and how it is built are those two documents’ to state; this
+plan takes what they decided as given and adds only what this page needs.
 
 This plan is the squares side: what the renderer, the PDF export and the validation
 tiers need so the page picks the feature up, and where the measurements that settled the
@@ -61,12 +59,11 @@ What is specific to this page, found while prototyping the feature on it:
   KaTeX faces in `KATEX_FACES` and drops the rest.
   The composite family names `../katex/fonts/…` sources, which the rewrite did not match
   before this change.
-- The composite has two `@font-face` blocks per slot, the reading face over the Latin
-  ranges and the KaTeX face the slot replaces over the Greek range, scaled; every other
-  code point falls through to the KaTeX family named next in each rule’s stack.
-  A composite face is reachable only if its slot’s KaTeX face is, so the bold-italic
-  slot (PT Serif Bold Italic beside `KaTeX_Math-BoldItalic`) is dropped from the page
-  with the face it accompanies.
+- The composite’s shape (two `@font-face` blocks per slot, the rest falling through the
+  family stack) is the kpress plan’s to describe.
+  What follows from it here: a composite face is reachable only if its slot’s KaTeX face
+  is, so the bold-italic slot (PT Serif Bold Italic beside `KaTeX_Math-BoldItalic`) is
+  dropped from the page with the face it accompanies.
 - Inlining composes families from two sources, so the page carries a second copy of each
   face the composite names: three PT Serif copies and three scaled Greek copies of KaTeX
   faces, about 216 KB of base64, plus the 32 KB metrics table.
@@ -175,7 +172,7 @@ The page picks the feature up on the gitlink bump and its next Pages deploy.
 
 ## References
 
-- [Research: Harmonizing the Reading Face with KaTeX Mathematics](../../../../vendor/kpress/docs/math-text-face.research.md)
+- [Research: Harmonizing the Reading Face with KaTeX Mathematics](../../../../vendor/kpress/docs/project/research/research-2026-09-07-math-text-face.md)
   and [Math Text Face](../../../../vendor/kpress/docs/math-text-face.plan.md), in
   kpress.
 - [`render_explainer.py`](../../../../packing/devtools/render_explainer.py),
