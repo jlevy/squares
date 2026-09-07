@@ -16,7 +16,7 @@ locating a construction for an `n` in this range.
 | --- | ---: | --- |
 | Exact grid retained | 97 | The catalogue’s stated no-tilt grid rule is generated locally with exact coordinates. |
 | Licensed SVG retained | 4 | UnitSquare geometry for `n = 103`, `105`, `110`, and `131` is retained under the licence identified in its dataset metadata. |
-| Public SVG located; retention deferred | 123 | Kingbird geometry was fetched and parsed during the access audit, but the inspected catalogue page states no express reuse terms, so its SVG files are not retained. |
+| Public SVG located; derived facts pending acquisition | 123 | Kingbird geometry was fetched and parsed during the access audit. The inspected catalogue page states no express reuse terms, so its SVG files are not retained; on 2026-09-07 the known-best retention policy (derived numerical facts only) was extended to this range, and the acquisition pass is Phase 2 of [the expansion plan](../../../docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md). |
 | No selected geometry located | 0 | No case in this audited range currently falls into this category. |
 
 The zero in the last row is scoped evidence, not a claim that the search covered every

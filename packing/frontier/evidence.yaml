@@ -6,7 +6,7 @@ last_reviewed: '2026-09-07'
 evidence:
   - id: E-kingbird-upper-register
     claim: upper-bound
-    scope: {n_min: 1, n_max: 100}
+    scope: {n_min: 1, n_max: 324}
     assurance: reported
     reported_method: source-unspecified
     performed_by: source-author
@@ -14,9 +14,28 @@ evidence:
     relationship_to_generator: generator
     source_key: '[Kingbird]'
     replay_status: not-attempted
-    limitations: A catalogue report does not establish feasibility or optimality.
-    source_reviewed: '2026-08-24'
+    limitations: A catalogue report does not establish feasibility or optimality. Widened
+      from 100 to 324 on 2026-09-07 under plan-2026-09-07-atlas-expansion-to-324; above 100
+      the register is the catalogue's pictured entries, and E-kingbird-grid-completeness
+      carries the unpictured cases.
+    source_reviewed: '2026-09-07'
 
+  - id: E-kingbird-grid-completeness
+    claim: upper-bound
+    scope: {n_min: 101, n_max: 324}
+    assurance: reported
+    reported_method: source-unspecified
+    performed_by: source-author
+    novelty: previously-published
+    relationship_to_generator: generator
+    source_key: '[Kingbird]'
+    replay_status: not-attempted
+    limitations: The catalogue states that for every n at most 324 it does not picture, the
+      trivial no-tilt grid is the best known packing. This record carries that statement for
+      the unpictured cases in 101..324 only; it is a report about the state of the catalogue,
+      not a feasibility or optimality claim, and it says nothing above 324, where the
+      catalogue makes no completeness claim (research-2026-09-07-square-packing-sources-beyond-100).
+    source_reviewed: '2026-09-07'
   - id: E-unitsquare-release1-report
     claim: upper-bound
     scope: {n_values: [68, 69, 103, 105, 110, 131]}
@@ -35,7 +54,7 @@ evidence:
 
   - id: E-basic-grid-upper
     claim: upper-bound
-    scope: {n_min: 1, n_max: 100}
+    scope: {n_min: 1, n_max: 324}
     assurance: verified
     method: exact-algebraic
     performed_by: repository
@@ -46,7 +65,7 @@ evidence:
     replay: uv run --frozen python -m devtools.check_basic_bounds
     replay_status: passed
     limitations: Establishes the integer grid fallback, not any tighter reported packing.
-    source_reviewed: '2026-08-24'
+    source_reviewed: '2026-09-07'
 
   - id: E-basic-area-lower
     claim: lower-bound
@@ -65,7 +84,7 @@ evidence:
 
   - id: E-nagamochi-lower
     claim: lower-bound
-    scope: {n_min: 4, n_max: 100}
+    scope: {n_min: 4, n_max: 324}
     assurance: verified
     method: published-proof
     performed_by: source-author
