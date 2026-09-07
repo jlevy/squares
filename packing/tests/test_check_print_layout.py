@@ -23,6 +23,8 @@ from nodejs_wheel import node
 
 from devtools.check_print_layout import (
     _PROBE,  # pyright: ignore[reportPrivateUsage]
+    _PROVER_LAYOUT,  # pyright: ignore[reportPrivateUsage]
+    _ROTATION_TARGET,  # pyright: ignore[reportPrivateUsage]
     BOXED_TOLERANCE_PX,
     TOLERANCE_PX,
     Boxed,
@@ -261,3 +263,102 @@ def test_a_label_off_the_centre_of_its_own_box_is_a_finding(off: float) -> None:
 @pytest.mark.parametrize("off", [0.0, 0.02, -0.5])
 def test_a_label_within_tolerance_is_not(off: float) -> None:
     assert not findings(both(boxed=[boxed(offset=off)]))
+
+
+def test_prover_failures_are_reported_without_the_optional_layout_sweep() -> None:
+    measured = both()
+    measured["controls"] = [
+        "Figure 5 (19-5): restoring the field uses a stale direction bitmap"
+    ]
+    assert findings(measured) == measured["controls"]
+    assert findings(measured, every=True) == measured["controls"]
+
+
+@pytest.mark.parametrize("broken", [False, True], ids=["valid", "known-defects"])
+def test_prover_layout_probe_accepts_valid_boxes_and_rejects_known_defects(
+    *, broken: bool
+) -> None:
+    """Run the browser's own predicate on contrasting geometry and font measurements.
+
+    The Pages job supplies real DOM geometry; these controls prove that the predicate
+    refuses the earlier side panel, small fraction, broken math, and ignored hidden
+    attribute without requiring every pytest host to install a browser.
+    """
+    script = (
+        f"const broken = {json.dumps(broken)};\n"
+        r"""
+const panel = {getBoundingClientRect: () => ({top: broken ? 20 : 300, left: 0, right: 400})};
+const stage = {getBoundingClientRect: () => ({bottom: 300})};
+const item = {
+  whiteSpace: broken ? 'normal' : 'nowrap',
+  getBoundingClientRect: () => ({left: broken ? -20 : 20, right: broken ? 450 : 380}),
+  querySelector: selector => selector === '.katex' ? mass : item,
+};
+const digit = {children: [], textContent: '4001', fontSize: broken ? '14px' : '20px'};
+const mass = {fontSize: '20px', querySelectorAll: () => [digit], querySelector: () => ({})};
+const hidden = {getClientRects: () => broken ? [{}] : []};
+const figure = {
+  getClientRects: () => [{}],
+  querySelector: selector => ({
+    '.panel': panel, '.stage': stage, '.math-item': item, '.mass-val .katex': mass,
+  })[selector],
+  querySelectorAll: selector => selector === '.math-item' ? [item] : [hidden],
+};
+const document = {querySelectorAll: () => [figure]};
+const getComputedStyle = el => el;
+"""
+        f"\nprocess.stdout.write(JSON.stringify(({_PROVER_LAYOUT})()));\n"
+    )
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
+    measured: list[str] = json.loads(completed.stdout)
+    if not broken:
+        assert measured == []
+        return
+    assert set(measured) == {
+        "control panel is beside the graphic",
+        "a direction item permits an internal line break",
+        "a direction item overflows the control panel",
+        "the mass fraction has reduced-size numerator or denominator",
+        "the half-tangent fraction has reduced-size numerator or denominator",
+        "a hidden status or verdict still occupies a visible box",
+    }
+
+
+@pytest.mark.parametrize("broken", [False, True], ids=["usable", "known-touch-defects"])
+def test_rotation_target_probe_requires_a_large_named_unobstructed_touch_target(
+    *, broken: bool
+) -> None:
+    script = (
+        f"const broken = {json.dumps(broken)};\n"
+        r"""
+const handle = {
+  getBoundingClientRect: () => ({x: 10, y: 20, width: broken ? 43 : 44, height: 44}),
+  tagName: broken ? 'DIV' : 'BUTTON',
+  getAttribute: () => broken ? '' : 'Rotate the unit square',
+  contains: () => !broken,
+  touchAction: broken ? 'pan-y' : 'none',
+  closest: () => ({querySelector: () => ({touchAction: broken ? 'none' : 'pan-y'})}),
+};
+const document = {elementFromPoint: () => handle};
+const getComputedStyle = el => el;
+"""
+        f"\nprocess.stdout.write(JSON.stringify(({_ROTATION_TARGET})(handle)));\n"
+    )
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
+    measured: list[str] = json.loads(completed.stdout)
+    if not broken:
+        assert measured == []
+        return
+    assert set(measured) == {
+        "rotation target is smaller than 44px",
+        "rotation target is not a named native button",
+        "rotation target is covered by another element",
+        "rotation target allows the browser to cancel its touch drag",
+        "the canvas no longer permits vertical touch scrolling",
+    }

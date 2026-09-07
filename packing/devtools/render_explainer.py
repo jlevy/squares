@@ -244,6 +244,7 @@ assert _polynomial(BEST_PACKING) < 0 < _polynomial(BEST_PACKING + _ULP), (
 )
 
 PRIOR_YEAR = 2003
+RESULT_YEAR = 2026
 PRIOR_MEMO_YEAR = 1984
 
 # Where the page sends a reader for more: the sources the n = 11 record cites
@@ -1392,6 +1393,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "PUBLISHED": PUBLICATION_DATE,
         "EDITION": page_edition(),
         "PRIOR_YEAR": str(PRIOR_YEAR),
+        "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
         "PRIOR_MEMO_YEAR": str(PRIOR_MEMO_YEAR),
         "PRIOR_MEMO_URL": PRIOR_MEMO_URL,
         "PRIOR_SIX_MEMO_URL": PRIOR_SIX_MEMO_URL,

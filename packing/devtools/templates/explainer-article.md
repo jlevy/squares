@@ -39,7 +39,7 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 This work presents a new lower bound on a long-standing open geometry problem: eleven
 unit squares with disjoint interiors, free to rotate, cannot fit in a
-${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.[^novelty]
+${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.
 
 The computer-assisted proof was found via an automated research framework.
 The certificate used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted points
@@ -52,8 +52,9 @@ of standard-library Python and short enough to read in one sitting, decides the
 certificate file of {{HEADLINE_N_ATOMS}} weighted points in
 {{HEADLINE_PINNED_RUNTIME}}.<!--END:CLAIM-->
 
-This improves the previous lower bound on the smallest open case of the square packing
-problem: Stromquist’s {{PRIOR_LOWER_DEC}}.[^stromquist-history][^repair]
+This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
+open case of the square packing problem.[^novelty] Stromquist published the previous
+bound, {{PRIOR_LOWER_DEC}}, in {{PRIOR_YEAR}}.[^stromquist-history][^repair]
 
 ## The Agentic Research Framework
 
@@ -312,9 +313,9 @@ a margin of {{LEAST_MARGIN}} of those units above the threshold.
 
 <!--BEGIN:FIGURE-->
 
-<figure data-figure="5">
+<figure class="prover" data-figure="5">
   <div class="split">
-    <div class="stage"><canvas class="draggable" id="prove-{{SLUG}}" width="1000" height="1000"></canvas></div>
+    <div class="stage"><canvas class="draggable" id="prove-{{SLUG}}" width="1000" height="1000" aria-label="Movable square and covered-mass shading" aria-describedby="hint-{{SLUG}}"></canvas></div>
     <div class="panel">
       <div class="readout">
         <span class="caps">Mass covered</span>
@@ -322,31 +323,38 @@ a margin of {{LEAST_MARGIN}} of those units above the threshold.
           <div class="mass-val" id="mv-{{SLUG}}"></div>
           <div class="mass-dec" id="md-{{SLUG}}"></div>
         </div>
-        <span class="verdict ok" id="vd-{{SLUG}}">Covers <span class="rel">≥</span> 1</span>
+        <span class="verdict" id="vd-{{SLUG}}" hidden></span>
       </div>
       <div class="ctl">
-        <span class="caps">Direction <span class="tex">k</span> of the {{N_DIRECTIONS}}-point net</span>
-        <input type="range" id="kslider-{{SLUG}}" min="0" max="{{N_DIRECTIONS_MAX}}" value="0" step="1" aria-label="Net direction index">
-        <div class="val" id="kval-{{SLUG}}"></div>
+        <label class="caps" for="kslider-{{SLUG}}">Choose a net direction (0–{{N_DIRECTIONS_MAX}})</label>
+        <input type="range" id="kslider-{{SLUG}}" min="0" max="{{N_DIRECTIONS_MAX}}" value="0" step="1">
+        <div class="val direction-values" id="kval-{{SLUG}}"></div>
       </div>
       <div class="btns">
-        <button id="btn-tight-{{SLUG}}">Tightest placement</button>
-        <button id="btn-scan-{{SLUG}}">Scan this direction</button>
-        <button id="btn-heat-{{SLUG}}" aria-pressed="true">Field</button>
+        <button id="btn-tight-{{SLUG}}" aria-describedby="actions-{{SLUG}}">Show net minimum</button>
+        <button id="btn-scan-{{SLUG}}" aria-describedby="actions-{{SLUG}}">Find sampled minimum</button>
+        <label class="shading-toggle"><input type="checkbox" id="btn-heat-{{SLUG}}" checked>Show mass shading</label>
       </div>
+      <p class="hint" id="actions-{{SLUG}}">The net minimum is the least covered mass over all {{N_DIRECTIONS}} net directions; the button returns to its placement at direction 0.
+      The sampled minimum searches a grid of centers at the current angle; it can miss smaller event cells.</p>
+      <p class="hint control-status" id="status-{{SLUG}}" role="status" aria-live="polite" hidden></p>
       <div class="legend">
-        <span><i style="background:var(--cert-near)"></i>within {{TIGHT_PERCENT}}% of the limit</span>
-        <span><i style="background:var(--kpress-doc-accent)"></i>comfortably above</span>
-        <span><i style="background:var(--cert-below)"></i>below 1, which never occurs at a net direction</span>
+        <span><i style="background:var(--cert-near)"></i><span class="tex">1 \le \text{mass} &lt; {{TIGHT_JS}}</span></span>
+        <span><i style="background:var(--kpress-doc-accent)"></i><span class="tex">\text{mass} \ge {{TIGHT_JS}}</span></span>
+        <span><i style="background:var(--cert-below)"></i>mass below 1</span>
       </div>
-      <p class="hint" id="hint-{{SLUG}}">The shaded background is the covered mass at every center position, recomputed
-      for the direction you choose. The dashed outline is where the square’s center is allowed to be. Outside
-      it the square hangs out of the container, and the proof makes no claim.</p>
+      <p class="hint" id="hint-{{SLUG}}">Drag the orange square, or tap to place its center. Tap its round handle to turn by 5°, or drag it to rotate freely;
+      the slider then shows the nearest net direction after square symmetry. Move the slider to return to the net.
+      The shading samples the mass covered at each center position.
+      The dashed outline bounds the allowed centers: outside it, the square extends beyond the container.
+      At a net direction, every allowed placement covers mass at least 1. The preview uses floating-point geometry;
+      the exact verifier decides which atoms lie on an edge.</p>
     </div>
   </div>
-  <div class="fig-choose">{{CERT_TOGGLE}}</div>
-  <figcaption><strong>Figure 5. Condition 5.</strong> The prover<span class="screen-only">: drag the square, watch the mass</span>. Inside the dashed domain the field never drops below 1, at any of the {{N_DIRECTIONS}}
-  directions. Outside it the mass falls away at once, which is why the atoms crowd the boundary.</figcaption>
+  <div class="fig-choose"><span class="screen-only caps">Certificate shown in all figures</span>{{CERT_TOGGLE}}</div>
+  <figcaption><strong>Figure 5. Condition 5.</strong> The prover<span class="screen-only">: drag the square, watch the mass</span>.
+  The exact certificate guarantees covered mass at least 1 throughout the dashed domain at every net direction.
+  The shading previews this mass. Outside the domain, the square extends beyond the container.</figcaption>
 </figure>
 
 <!--END:FIGURE-->
@@ -434,8 +442,8 @@ $$
         <dt><span class="tex">B(\cos d + \sin d)</span></dt><dd class="hi" id="s-prod-{{SLUG}}"></dd>
       </dl>
       <p class="hint screen-only">Opens at <span class="tex">K = 3</span>, the coarsest net the figure offers, where Condition 4 admits only
-      <span class="tex">B \lt {{K3_LIMIT_TEX}}</span> and the shrink is unmistakable. Drag either square by its
-      handle. At
+      <span class="tex">B \lt {{K3_LIMIT_TEX}}</span> and the shrink is unmistakable. Tap the round handle to turn
+      the unit square by 5°, or drag it to rotate freely. At
       <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, the two squares are
       indistinguishable.</p>
     </div>
