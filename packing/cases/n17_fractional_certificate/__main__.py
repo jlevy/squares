@@ -1,14 +1,21 @@
 """Replay the retained top n = 17 certificate and report every condition.
 
 Exits non-zero if any condition fails, so the replay is a gate and not a
-report. Run as ``python -m cases.n17_fractional_certificate``.
+report. Run as ``python -m cases.n17_fractional_certificate``; add
+``--burns-control`` to replay Burns's published certificate instead.
 """
 
 from __future__ import annotations
 
+import sys
+from collections.abc import Sequence
 from pathlib import Path
 
-from cases.n17_fractional_certificate.replay import CERTIFICATE_PATH, snapshot
+from cases.n17_fractional_certificate.replay import (
+    BURNS_CONTROL_PATH,
+    CERTIFICATE_PATH,
+    snapshot,
+)
 from sqpack.fractional.certificate import verify
 
 
@@ -45,8 +52,14 @@ def replay(path: Path) -> int:
     return 0
 
 
-def main() -> int:
-    """The retained certificate must replay."""
+def main(argv: Sequence[str] | None = None) -> int:
+    """The retained certificate must replay; ``--burns-control`` replays the control."""
+    arguments = list(sys.argv[1:] if argv is None else argv)
+    if arguments == ["--burns-control"]:
+        return replay(BURNS_CONTROL_PATH)
+    if arguments:
+        print(f"unknown arguments: {' '.join(arguments)}")
+        return 2
     return replay(CERTIFICATE_PATH)
 
 

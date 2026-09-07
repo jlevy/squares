@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-09-06'
+last_reviewed: '2026-09-07'
 evidence:
   - id: E-kingbird-upper-register
     claim: upper-bound
@@ -1128,6 +1128,96 @@ evidence:
       rational angle net), so together they support C3, not C4. No new first-party
       mathematics is claimed.
     source_reviewed: '2026-09-03'
+  - id: E-n017-burns-source-replay
+    claim: lower-bound
+    scope: {n_values: [17, 18, 19]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    novelty: previously-published
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    source_key: '[Burns–Massaccesi n17]'
+    certificate: resources/web/n17-lower-bounds-2026/burns-verify-n17-lower-bound-4_4811.py
+    replay: uv run --frozen python resources/web/n17-lower-bounds-2026/burns-verify-n17-lower-bound-4_4811.py
+    replay_status: passed
+    external_review:
+      state: informally-verified
+      date: '2026-09-07'
+      reviewed_by: repository (BC-150 packet and BC-151 review of the same argument; this replay)
+      note: >-
+        The note's argument -- the scaling and disjointness lemma, the D4 reduction of
+        orientations to [0, pi/4], the 181-direction rational net with T = 207107/500000,
+        the concentric-containment inequality B(1 + D) = 899635478111/900000000000 < 1
+        at B = 9973/10000, the event-cell reduction with its conservative cell
+        selection, and upper semicontinuity at event lines -- is the argument BC-150
+        re-proved step by step and BC-151 re-audited for Massaccesi's instance, which
+        keeps Burns's B, T and net and changes only the container side, the atoms and
+        the weights. Those three are what this replay decides. The note was read here on
+        2026-09-07 and its Section 2 lemma checked by hand; no independent implementation
+        has been run on these 268 atoms, and the two scratch evaluators of BC-150 and
+        BC-151 were not pointed at them.
+    limitations: >-
+      Replays the source author's own exact-rational verifier, retained byte for byte
+      and hash-pinned (SHA-256 6d83c286...): 268 atoms on a 29 by 29 grid of step
+      (L - 1)/28 from 1/2 in [0, 44811/10000]^2, expanded from 37 D4 orbit seeds with
+      weights in units of 1/10000, total mass 169476/10000 = 16.9476 < 17, and mass at
+      least 10003/10000 for every closed 9973/10000-square at each of 181 exact rational
+      directions, which by the containment and scaling argument gives
+      s(17) >= 44811/10000; n = 18 and n = 19 follow because only Condition 2 mentions n.
+      Superseded as a bound on the day it was retained, first by Massaccesi's 22529/5000
+      (T-015) and then by the first-party 459/100 (T-019); it is kept as provenance of
+      the architecture and as the one retained certificate whose least covered mass is
+      not exactly 1, which is what a control needs. The source is a 2026 blog post by
+      an individual, not peer reviewed, which its author labels a proposed
+      computer-assisted proof; the note and verifier are credited to a language model
+      (GPT-5.6 Pro) with Burns operating. Its checks are assert statements that vanish
+      under python -O, after which it prints VERIFIED unconditionally, so replay under
+      normal Python only. The transcript of the 2026-09-07 replay (CPython 3.14.0rc2,
+      NumPy 2.5.2, 5.9 s) is retained at
+      resources/web/burns-n17-series-addendum-2026-09-07/burns-verifier-replay-2026-09-07.log
+      and matches the note's Section 7 line for line. This is the generator's own
+      checker and not an independent implementation; the accumulation-independent leg
+      is E-n017-burns-control-decision, and both are one method family (an exact
+      event-cell sweep of a shrunken square over a rational angle net), so together
+      they support C3, not C4. No new first-party mathematics is claimed.
+    source_reviewed: '2026-09-07'
+  - id: E-n017-burns-control-decision
+    claim: lower-bound
+    scope: {n_values: [17, 18, 19]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    novelty: previously-published
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    source_key: '[Burns–Massaccesi n17]'
+    certificate: cases/n17_fractional_certificate/control-burns-4-4811.json
+    replay: uv run --frozen python -m cases.n17_fractional_certificate --burns-control
+    replay_status: passed
+    limitations: >-
+      Burns's 268 atoms rebuilt in the repository's certificate schema from the
+      constants of his proof note (cases/n17_fractional_certificate/build_burns_control.py,
+      whose --check confirms the shipped file) and decided by the repository's exact
+      event-cell sweep (sqpack.fractional.certificate.verify): Conditions 1 to 5 hold,
+      least cell mass 10003/10000 at direction 0, 6.9 s on 2026-09-07. It is retained as
+      a control rather than a rung, being the one certificate on record whose least
+      covered mass is not exactly 1, so a verifier that reported 1 unconditionally is
+      caught by it; the bound it decides was superseded by T-015 and T-019 before it was
+      retained. The interval branch-and-bound (sqpack.fractional.interval) does not
+      decide it: 360 of the 361 doubled-net directions certify with mass at least 1 and
+      the least sampled point mass is the sweep's 10003/10000, but direction 0 returns
+      5820 stalled boxes as undecided, because Burns's grid puts its fifth column at
+      exactly 1/2 + (L - 1)/7 = B, so a centre on the domain boundary h = B/2 has that
+      column exactly on its far edge -- closed membership counts it in the sweep, and no
+      outward-rounded enclosure can close a region edge that lies on the domain edge. A
+      refusal on a seam, never an acceptance; the retained first-party certificates have
+      no such coincidence and the interval route decides them whole. Massaccesi's grid,
+      with its margin, has no column at B and the interval route decides his control.
+      Same method family as E-n017-burns-source-replay (both are exact event-cell sweeps
+      over the same rational net), independent at the implementation level only, so
+      together they support C3, not C4. No new first-party mathematics is claimed.
+    source_reviewed: '2026-09-07'
   - id: E-n017-massaccesi-h052-agreement
     claim: lower-bound
     scope: {n_values: [17, 18, 19]}

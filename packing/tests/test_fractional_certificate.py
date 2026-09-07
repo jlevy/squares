@@ -28,7 +28,9 @@ from cases.n11_fractional_certificate.replay import declared as n11_declared
 from cases.n11_fractional_certificate.replay import load as n11_load
 from cases.n12_fractional_certificate.__main__ import replay as replay_n12
 from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH, declared, load
+from cases.n17_fractional_certificate import build_burns_control
 from cases.n17_fractional_certificate.__main__ import replay as replay_n17
+from cases.n17_fractional_certificate.replay import BURNS_CONTROL_PATH
 from cases.n17_fractional_certificate.replay import declared as n17_declared
 from cases.n17_fractional_certificate.replay import load as n17_load
 from cases.n17_weighted_certificate.fixture import load_retained_fixture
@@ -41,6 +43,7 @@ from sqpack.fractional.certificate import (
     Verdict,
     ceiling_side,
     ceiling_side_for_net,
+    closed_form_conditions,
     grid_refutation_order,
     least_size_certified,
     verify,
@@ -825,3 +828,42 @@ def test_a_signed_weight_is_refused_before_anything_is_decided() -> None:
     verdict = verify(certificate)
     assert not verdict.accepted
     assert any("Condition 2" in failure for failure in verdict.failures)
+
+
+# --- Burns's published certificate as a control -----------------------------
+
+
+def test_the_burns_control_rebuilds_from_the_notes_constants() -> None:
+    """The shipped control is exactly what the note's 37 orbit seeds expand to."""
+    rebuilt = build_burns_control.render(build_burns_control.build())
+    assert rebuilt == BURNS_CONTROL_PATH.read_text()
+
+
+def test_the_burns_control_declares_what_the_note_states() -> None:
+    """268 atoms, total 169476/10000, the side 4.4811, on Massaccesi's B, T and net."""
+    certificate = n17_load(BURNS_CONTROL_PATH)
+    record = n17_declared(BURNS_CONTROL_PATH)
+    assert len(certificate.atoms) == 268
+    assert certificate.total_mass == Fraction(169476, 10000)
+    assert str(certificate.total_mass) == record["total_mass"]
+    assert certificate.bounded_side == Fraction(44811, 10000)
+    assert record["claim"] == "s(17) >= 44811/10000"
+    assert record["least_cell_mass"] == "10003/10000"
+    assert certificate.square_side == Fraction(9973, 10000)
+    assert certificate.half_tangents[-1] == MASSACCESI_LIMIT
+    assert all(condition.holds for condition in closed_form_conditions(certificate))
+
+
+@pytest.mark.slow
+def test_the_burns_control_is_accepted_at_a_least_mass_above_one() -> None:
+    """The one retained certificate whose least covered mass is not exactly 1.
+
+    Massaccesi's control and every first-party rung sit at row minima of exactly 1
+    or a hair above it, so a verifier that reported 1 unconditionally would pass
+    them. Burns's atoms leave 3/10000 of slack at direction 0, and the sweep must
+    report that number, not 1.
+    """
+    verdict = verify(n17_load(BURNS_CONTROL_PATH))
+    assert verdict.accepted, verdict.failures
+    assert verdict.minimum_cell_mass == Fraction(10003, 10000)
+    assert verdict.minimum_cell_mass != 1
