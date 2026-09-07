@@ -98,7 +98,9 @@ $s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
   bound this project proved: {{N_STARRED}} of the hundred, this page’s own among them. The full
   results, with every witness and its provenance, are in
   <a href="{{ATLAS_URL}}">the GitHub repository</a>, and the
-  composite is <a href="known-best-1-100.pdf">available as a PDF</a>.</figcaption>
+  composite is <a href="known-best-1-100.pdf">available as a PDF</a>. A poster of all 324 best
+  known packings, through the end of the catalogue’s audited range, is
+  <a href="known-best-1-324.pdf">available as a PDF</a> as well.</figcaption>
 </figure>
 
 ## Packing 11 Squares
