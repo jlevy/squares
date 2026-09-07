@@ -5,7 +5,7 @@ title: "W5 efficiency block: fast feedback and justified validation checkpoints"
 kind: epic
 status: in_progress
 priority: 1
-version: 26
+version: 27
 spec_path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 labels: []
 dependencies: []
@@ -22,8 +22,9 @@ child_order_hints:
   - is-01m1w3p66wndg39qyhm4crvgn1
   - is-01m1w3p6hhmhnjqakekbqwa82f
   - is-01m1w1x2hxn7was5jgcheqeyh9
+  - is-01m1x85bf7x32ewcd07348j8dq
 created_at: 2026-09-06T16:27:59.178Z
-updated_at: 2026-09-06T21:15:42.549Z
+updated_at: 2026-09-07T06:16:19.685Z
 ---
 User-directed W5 efficiency block: audit end-to-end CI and long checkpoints, preserve independent coverage while reducing feedback latency, retain detailed timing evidence, align project documentation and naming, and prepare reusable upstream tbd guidance. The plan is docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md. The first implementation slice is PR98; explained family selection and safe reuse follow under think-xejq.
 
