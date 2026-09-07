@@ -612,9 +612,10 @@ H-108 and H-109 also accepted canonical near-45 A3 and A1/A2 forcing through ind
 exact replay and a reviewed reflection.
 These are restricted-theorem auxiliaries, not a packing bound.
 H-110 registers the selected next-block fixed P12 escape candidate; no target geometry
-has been evaluated.
-H-107’s fixed-site scalar protocol remains unlaunched pending a fresh
-sufficient allocation.
+has been evaluated. H-107’s reviewed fixed-site scalar protocol is held out of the next
+two-hour block under paused `think-7fec`; later-session reconsideration preserves its
+unlaunched history. The freed attention goes to a bounded conditional-compatibility
+assessment from the accepted A-point lemmas, not an automatic P12 repair.
 Full validation of research checkpoint `99a3ad42` passed;
 [Session 089](packing/campaign/agent-sessions/session-089-agenda024-next-phases.md)
 retains that verdict and the completed experiments, which must not be repeated.

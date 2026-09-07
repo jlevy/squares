@@ -350,9 +350,9 @@ Keep the continuation on integrated PR 105 while open; do not repeat a completed
 experiment or create another supporting-fix PR.
 [Agenda 024’s Current Allocation](../../../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
 supplies the current priorities.
-H-107 fixed-site scalar completion may run alongside the P12 authors only when the new
-block covers its full producer and verification caps; the complete-density target
-remains source-blocked.
+The September 7 amendment holds H-107 fixed-site scalar completion out of the next
+two-hour block and selects a bounded conditional-compatibility assessment through Agenda
+024\. The complete-density target remains source-blocked.
 The earlier BC-215 efficiency program remains uncompleted, not silently discarded.
 See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the latest session,
 funding conditions and independent-review assignments.
