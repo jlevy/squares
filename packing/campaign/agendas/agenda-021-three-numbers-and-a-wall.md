@@ -1091,13 +1091,22 @@ agenda:
           The full old support has independently verified optimum11. BC265
           compares changed resource directions by mathematical impact before
           commissioning any new scientific instrument or target.
+      - bead: think-mq0d
+        workflow: insight-iteration
+        priority: 1
+        rationale: >-
+          Added after Session095's independent BC265 design, not backdated to W10.
+          Price one small H114 feature family and its missing kernel-specific
+          contract before any target. This has a direct-bound mechanism, unlike
+          merely refuting the particular old-support calibration.
       selected:
-        bead: think-j8pz
+        bead: think-mq0d
         workflow: insight-iteration
         rationale: >-
           Session095 exp128 closes BC259/H099 at fixed-support optimum11.
-          Keep H124's diagonal lemma and the unresolved axis result. Select
-          source-free BC265 comparative design, not an unchanged support retry.
+          Its comparative design selects BC264's existing 30-minute feature and
+          kernel-contract pricing, not a target or an automatic hierarchy build.
+          Keep the conditional H101 common-support obstruction as fallback.
           H107 stays paused and external BC261/273 remains separately owned.
           This is a live selection update, not a W10 outcome.
       operator_input:

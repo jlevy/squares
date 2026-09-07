@@ -285,6 +285,8 @@ case or experiment separately.
 | [BC-259: Source Binding for the Seven-Row Support Ceiling](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-author.md) | research synthesis | record | retained | — |
 | [BC259: Independent Support-ceiling Adoption Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-review.md) | dated review record | record | retained | — |
 | [BC-259: Positive-Inclusion Adoption Instrument Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-adoption-instrument-review.md) | dated review record | record | retained | — |
+| [BC265: What the Seven-Box Calibration Unlocks](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md) | research synthesis | record | retained | — |
+| [BC-265: Calibration Scope and the Next Discriminator](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md) | dated review record | record | retained | — |
 | [BC-255 Near-Axis Reader Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-near-axis-reader-independent-review.md) | dated review record | record | retained | — |
 | [BC-252 — Complete Rows on the Retained Sites](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md) | research synthesis | record | retained | — |
 | [BC-255: Fixed-Side Discriminator Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md) | research synthesis | record | retained | — |
@@ -618,7 +620,7 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**Selected next entry:** `think-j8pz` takes BC-265's bounded comparative resource design.
+**Selected next entry:** `think-mq0d` takes BC-264's bounded H114 feature and kernel-contract pricing.
 The [Session094 handoff](packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md)
 was updated after the first result in
 [Session095](packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md).
@@ -629,9 +631,14 @@ H036 remain unresolved; that representation receives no retry or parameter sweep
 BC-259 is complete: exp128 independently bound all88source images,60placements and
 eight orbits, verified41strict inclusions on seven fixed boxes, and established the
 attained support optimum eleven in1.12seconds. H099 is refuted only on that support.
-BC-265 now compares genuinely changed directions, including expanded support under
-H116, against their value for significant mathematical progress. This is source-free
-design, not an automatic new target or a retry of H099.
+BC-265's independent designs derive an explicit mass-eleven calibration on the old
+support, but a new undercovered pose would reject only that density. The selected next
+allocation is BC-264's existing 30-minute feature and verification-price assessment:
+a complete H114 kernel could improve the global bound at side 96/25, while a finite
+obstruction would reject only its chosen feature family. Kernel-specific BC-260 review,
+exact PSD evidence and complete pair-domain verification remain prerequisites.
+H101's stronger common-support obstruction is a conditional fallback, with no candidate
+asserted. No new target or research block is activated by this handoff.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
 `think-9qrx`, completed the user-approved research block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed

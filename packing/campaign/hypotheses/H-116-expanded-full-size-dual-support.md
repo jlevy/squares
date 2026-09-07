@@ -35,8 +35,9 @@ hypothesis:
 ---
 # H-116 — Expanded Full-Size Dual Support
 
-The contributed ceiling would settle only H-099’s original support after independent
-acceptance. It does not determine the optimum on expanded supports.
+[Exp128](../series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md)
+independently settled H-099’s original support at optimum eleven. It does not determine
+the optimum on expanded supports.
 [X-017](../explorations/X-017-compatibility-and-complete-case-covers.md) maps that
 distinction to this question and to the source’s equality-support proposal.
 
@@ -45,6 +46,13 @@ area-density equality method at U. It would not exclude a packing or refute belo
 primal density improvements.
 A sampled mass above eleven remains a candidate.
 One failed expanded support says nothing about every other support.
+
+BC265's [calibration analysis](../series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md)
+shows why finding a pose undercovered by one old-optimal density is insufficient:
+another mass-eleven density may cover the enlarged support. Its stronger conditional
+common-support obstruction would supply explicit feasible mass89/8, but has no candidate
+pose or complete geometric certificate yet. Neither implication changes this open question's
+verdict or admits an expanded-support run.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -341,11 +341,14 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, select `think-j8pz` under BC-265 for
-comparative design of changed resource directions. Exp128 independently established
-the attained optimum eleven on H099's entire existing support, closing BC259.
-This design must earn a next discriminator through significant mathematical value;
-the support result is not authority for an automatic extension or new target.
+For the next supervised exact-research goal, select `think-mq0d` under BC-264 for its
+existing 30-minute H114 feature and kernel-contract pricing slice. BC265's independent
+designs distinguish a direct-bound mechanism from rejecting one particular density.
+Require a kernel-specific BC260 review, a fixed feature family, exact PSD acceptance
+and a credible complete diagonal/pair verification cost before any scientific target.
+Exp128 established the attained optimum eleven on H099's old support, closing BC259.
+Keep H101's common-support obstruction as a conditional fallback without claiming a
+candidate; the completed design does not activate a new research block.
 Session094 independently certified the diagonal compatibility branch; Session095's
 fixed collision-augmented axis cover returned `no_chain` without a reader. H124 and
 restricted H036 remain unresolved, and that representation receives no retry.

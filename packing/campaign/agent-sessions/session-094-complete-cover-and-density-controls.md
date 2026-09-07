@@ -944,7 +944,7 @@ session:
   - "Historical ownership checkpoint at 09:47 UTC on 2026-09-07: Fresh09:47 UTC fetch leaves origin/main at dd36800e and external PR110 at4ac71438. Session094, H125 and exp125 are not occupied there; only Session094 is allocated now."
   - Session093 checkpoint23d74f69 and generated map6ff421e5 retain full23498e87 passed1631.92 seconds, delta bfc27c7a push passed130.89 seconds and terminal records passed31/31 in19.84 seconds.
   stop_reason: Third checkpoint is published with a passing fast source gate and explicit pending full/delta checks. Administrative confirmation crossed11:49 by aboutone minute; no source target or original scientific cap was extended, and the final portfolio endpoint remains13:49.
-  next_action: Post-checkpoint amendment after Session095 exp128 independently establishes fixed-support optimum11 selects BC-265 under think-j8pz for comparative changed-resource design. BC259 and the fixed collision-cover allocation are terminal; neither receives an unchanged retry.
+  next_action: Post-checkpoint amendment after Session095's accepted exp128 and independent BC265 design selects BC-264 under think-mq0d for the existing 30-minute H114 feature and kernel-contract pricing slice. No target or new block is activated. BC259 and the fixed collision-cover allocation are terminal; neither receives an unchanged retry.
 ---
 # Complete Cover and Repaired Density Controls
 
@@ -997,6 +997,16 @@ PR110’s Session092 and BC261/BC273 lane is not duplicated or merged before it 
 
 ## Selected Final-slice Resources
 
+This is the historical handoff prepared before Session095 activated at 11:51:12 UTC
+on 2026-09-07. Its instructions and resource inventory below are retained as provenance,
+not current launch authority. In
+[Session095](session-095-collision-cover-and-support-ceiling.md),
+[exp127](../series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md)
+returned `unresolved/no_chain` and authorized no reader. The independently accepted
+[exp128](../series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md)
+then established fixed-support optimum eleven and refuted H099. Both allocations are
+terminal; neither receives an unchanged retry. Session095 owns the subsequent disposition.
+
 Continue H124/BC255 through the separately reviewed exp127 protocol, with at most one
 fixed collision-augmented axis producer and its positive-only reader. Retain exp125's
 diagonal proof. The independent secondary is the existing BC259/H099 support-ceiling
@@ -1025,7 +1035,7 @@ The BC259 resource inventory was static, not an adoption verdict:
   that history or bypass private guards. Shared seeds, arithmetic and reconstruction
   must be declared, not described as independent derivation.
 
-The unresolved binding is the historical geometry, all 88 labelled images, the
+At this handoff, the unresolved binding was the historical geometry, all 88 labelled images, the
 60-placement quotient and the eight-orbit order. Map the archive's representatives
 `(0,2,4,7,10,8,6,9)` explicitly to the current canonical order. Retained baseline
 assertions are sizes `(4,8,8,8,8,8,8,8)` and counts `(3,1,2,1,1,1,1,1)`.

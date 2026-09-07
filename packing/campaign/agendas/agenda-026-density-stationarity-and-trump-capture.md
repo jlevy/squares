@@ -210,9 +210,11 @@ agenda:
     program: n11-density-stationarity-trump-capture
     next_evidence: >-
       Exp126's sole producer reported an overweight graph clique and no independent
-      reader was authorized. H099 and its bracket [11,56/5] remain unchanged. Reprice
-      the exact geometric obligation before funding any higher-order verifier;
-      no candidate retry, continuum primal coverage or alternate candidate is funded.
+      reader was authorized. At that checkpoint, H099 and its bracket [11,56/5]
+      remained unchanged. Exp128 subsequently established fixed-support optimum
+      eleven and refuted H099, retiring the unchanged support question. Any changed
+      resource follows Session095's separate disposition; no candidate retry,
+      higher-order verifier, continuum primal coverage or alternate candidate is funded here.
     note: >-
       BC-250 narrows prospective allocation: retain all soundness controls, but no
       automatic 180-minute build or BC-244 launch. Candidate acceptance uses H-099;
@@ -456,13 +458,15 @@ agenda:
     bead: think-01q4
     note: >-
       Session089's source and instrument reviews passed. Exp113 independently
-      replayed a necessary-row ceiling of56/5, leaving H099 unresolved and its
-      full fixed-support supremum in[11,56/5]. The priced pair separator passed
+      replayed a necessary-row ceiling of 56/5, leaving H099 unresolved at that
+      checkpoint and its full fixed-support supremum in [11,56/5]. The priced pair separator passed
       source/toy controls and independent review under think-4ej5 and think-0u56.
       H105/exp115 independently exhausted all 134 eligible pairs without an overlap
       witness, rejecting only the pair-obstruction claim. H099 and full a.e. depth
-      remain unresolved. This cell exits by handing the candidate to BC243 with
+      remained unresolved at that checkpoint. This cell exited by handing the candidate to BC243 with
       think-pg9k's complete-method assessment; its bounded support screen is complete.
+      Exp128 later established the entire fixed-support optimum at eleven and refuted
+      H099. The earlier screen and pair-test outcomes remain unchanged.
       No complete arrangement build or repeated incomplete screen is funded.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-screen-spec.md
@@ -471,8 +475,9 @@ agenda:
     workflows: [insight-iteration, pipeline-improvement, research-loop]
     depends_on: [BC-242, BC-250]
     next_evidence: >-
-      An exact upper certificate can retire this support; only verified D>11 can
-      obstruct equality density. A floating LP objective decides neither.
+      Exp128's independently accepted upper certificate and feasible average retire
+      this support at optimum eleven. Preserve the historical screen and pair results;
+      any expanded support requires its own claim and prospective allocation.
     parallel_group: agenda026-density-support
     program: n11-density-stationarity-trump-capture
   - id: BC-255
@@ -553,8 +558,9 @@ agenda:
       Exp127 is terminal and think-7e72's fixed representation is closed. Preserve
       the accepted diagonal lemma and unresolved axis obligation. A genuinely
       changed premise requires future mathematical repricing; no radius sweep,
-      diagonal rerun or general two-angle solver is funded. The current independent
-      allocation is BC259's existing support-ceiling adoption, not another H124 test.
+      diagonal rerun or general two-angle solver is funded. Session095 owns the
+      current disposition after completing BC259's support-ceiling adoption; this cell
+      does not authorize another H124 test.
       Sufficient-cover failure does not refute H124 or improve the unrestricted bound.
       Preserve external BC261/BC273 ownership and do not duplicate their exporters.
       Only mass-derived

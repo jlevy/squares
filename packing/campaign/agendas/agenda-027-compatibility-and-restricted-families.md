@@ -288,11 +288,18 @@ agenda:
       Continue only if the chosen representation earns useful margin or closes a
       stated domain. An exact family obstruction redirects features; recurring
       unpriced pair violations redirect to conditional kernels or reusable cases.
+    note: >-
+      Session095's completed BC265 comparison selects this existing 30-minute
+      pricing entry for a future allocation, not a target or a new funded block.
+      First accept BC260's kernel subset, which the external direct-contract review
+      left unresolved. Freeze one feature family, exact PSD/necessary-constraint
+      acceptance and the full diagonal/pair verification price. Stop if these
+      do not fit the slice; no degree escalation or general hierarchy build.
   - id: BC-265
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 3
     question: >-
       Which single candidate-led resource option deserves the next discriminator:
@@ -315,15 +322,30 @@ agenda:
     parallel_group: agenda027-selective-resource
     program: n11-compatibility-and-restricted-families
     next_evidence: >-
-      Commission only the selected object's next instrument. Expanded support is
-      H-116, not H-099; equality at U does not imply a below-U transport; arc
-      boundary-nullity does not establish continuum coverage.
+      The comparison selects BC264's bounded feature and kernel-contract pricing
+      as the future main entry. Reopen H101's stronger common-support obstruction
+      only with an exact candidate and priced complete void-cover plan. A fixed
+      calibration falsifier is retained as an optional small alternative, not
+      a prerequisite or evidence that expanded dual mass exceeds eleven.
     note: >-
       Session095 selected a source-free comparative design after exp128 settled
-      the old support. Two independent max-level assessments freeze by13:26,
-      ahead of the13:29 finalization reserve. They must compare mathematical
-      impact and price at most one next discriminator, not automatically build
-      a larger support instrument or claim a new packing bound.
+      the old support. Independent reports froze13:15:58 and13:19:16 before their
+      original13:26 caps. Root read both fully and selected BC264 for its direct
+      bound mechanism rather than spending60agentminutes to reject one calibration.
+      Independent post-freeze review accepted the conditional common-support lemma
+      at13:21:49. No avoiding pose, kernel feature family or new target was evaluated.
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md
+    outcomes:
+    - scope: Source-free comparative design after the fixed-support ceiling
+      classification: achieved
+      result: Both reports derive an explicit old-support calibration and distinguish its falsification from a stronger dual result. Resource implementations are deferred without a concrete high-value candidate; the future main entry is BC264 pricing, with a conditional H101 common-support fallback.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md
+      disposition: retire-success
+      follow_up: think-mq0d
   - id: BC-266
     purpose: research
     owner_focus: insight
@@ -417,7 +439,9 @@ agenda:
 ---
 # Agenda 027 — Compatibility and Restricted Families
 
-**Prepared; execution has not started.**
+**Selected work has executed; the rest requires its own allocation.** Session095
+completed BC259's independent support-ceiling adoption and BC265's comparative design.
+BC264 is the selected future pricing entry, not an active target.
 [X-017](../explorations/X-017-compatibility-and-complete-case-covers.md) owns the
 critical assessment, mathematical distinctions, and complete source-to-record map.
 This agenda owns the prospective actions.
@@ -451,7 +475,9 @@ The new program owns narrower comparisons, not another BC-262 or BC-263 run.
 
 ## Proposed Opening Allocation
 
-The next coordinating entry is W2 factual review: dispatch BC-259 and BC-260
+The original opening plan below is historical. BC259 is now complete; consult the
+current cell states and owning sessions before dispatching any remaining work.
+The proposed opening was W2 factual review: dispatch BC-259 and BC-260
 independently. A third reviewer may take BC-267 while the coordinator handles source
 binding, protocol design and integration.
 Use at most the available three worker slots plus the coordinator; the slots are a
@@ -479,7 +505,42 @@ flowchart TD
 
 The diagram shows evidence flowing to a checkpoint, not a requirement to wait for all
 lanes. BC-268 is takeable after a useful result or refusal and closes only the assessed
-scope. Candidate-led resource extensions and the two-angle successor remain tentative.
+scope. BC265's comparative design is complete, but its resource implementations and
+the two-angle successor remain unlaunched.
+
+## Session095 Selection and Parallel Handoff
+
+The two independent BC265 reports agree on the mathematics and differ on priority.
+Both construct a D4-averaged box density of mass eleven whose capture is exactly one
+on every old support member. A new pose with capture below one rejects this particular
+density, not all mass-eleven densities or the expanded-support optimum.
+The review prices a narrow axis-aligned falsifier at sixty aggregate agent-minutes;
+the author instead prefers BC264's existing 30-minute kernel pricing slice.
+Both proposals and their stop conditions remain in the linked artifacts above.
+
+The coordinator selects **BC264 / H114 / `think-mq0d`**. A complete certificate at
+side96/25 could improve the global lower bound, whereas a calibration falsifier has
+only a routing payoff. This is a judgment about expected value, not evidence that a
+useful kernel exists. The next allocation should pair a max-thinking feature author
+with an independent max-thinking reviewer of the kernel implication and exact
+acceptance format. The coordinator owns the single narrowed claim, scientific
+admission and integrated PR. Mechanical controls and record work use high or xhigh.
+Their disjoint assignments must fit the existing pricing slice before any target.
+
+The independent fallback is **H101's common-support obstruction**. Let Ω be the
+intersection of the occupied regions of all eight symmetry images of the original
+packing. If an exact contained unit square P meets Ω in area zero, the average
+packing has depth at most7/8 almost everywhere on P. Adding weight1/8 on P would
+therefore give a feasible finite dual of mass89/8. This conditional lemma passed
+independent review; no such P is supplied. A full void-cover certificate, not merely
+avoidance of the calibration boxes, is required. Its design can be independent of
+kernel work once a candidate earns allocation; it is not currently an automatic lane.
+
+H100 remains available for a named below-side density mechanism with a credible
+coverage margin. H115 has no new curved-resource candidate. H116 owns any expanded
+support, not H099. External Session092 retains BC261/273 and its successors; consume
+their landed interfaces without duplicating them. Do not activate every preserved
+direction merely because parallel slots are available.
 
 ## Budgets and Readiness
 

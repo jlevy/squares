@@ -400,9 +400,13 @@ Use `max` for mathematical judgment and `high` or `xhigh` for suitable mechanica
 
 ### Selected Continuation After Session 090
 
-The current local coordinating entry is BC-265 under `think-j8pz`, comparing changed
-resource directions after exp128 independently established fixed-support optimum11
-and closed BC259/H099. This is source-free design, not a new target. Session094's diagonal
+The current local coordinating entry is BC-264 under `think-mq0d`: price one H114
+feature family and its missing kernel-specific contract within the existing
+30-minute slice. BC265's independent design is complete; a calibration falsifier has
+less direct value than this bound-capable mechanism and is not selected automatically.
+H101's stronger common-support obstruction remains a conditional fallback without a
+candidate. Exp128 established fixed-support optimum11 and closed BC259/H099.
+This is a future source-free entry, not a newly funded target. Session094's diagonal
 compatibility lemma is retained, while Session095 exp127's fixed collision-augmented
 axis cover returned `no_chain` without a reader. H124 and restricted H036 remain
 unresolved; no retry or parameter sweep follows. The original full-square entry

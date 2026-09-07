@@ -85,7 +85,7 @@ session:
     objective: Compare changed high-impact directions under existing BC265 and retain at most one concrete next design after the fixed-support disposition.
     commitment: BC-265
     bead: think-j8pz
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: The fixed seven-row checker completed positively; the remaining research time funds source-free comparative design. The independent output audit subsequently accepted the result at 13:03:35 UTC.
     budget_minutes: 27
@@ -95,10 +95,30 @@ session:
     validation_command: packing-validate --records
     kill_condition: Original author and reviewer cutoffs or the 13:29 UTC finalization boundary; no target, new scientific IDs or unchanged H124/H107 work.
     fallback: Retain the exact missing premise and defer the design without a scientific call or an extension.
+    outcome: Both independent source-free reports froze, and root read both in full. The selected future direction is BC264/think-mq0d's existing 30-minute H114 feature and kernel-contract pricing slice. The H101 Omega-avoiding-pose argument is retained as a conditional fallback; no candidate, target, new scientific ID or additional active block is admitted.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md]
+    stop_reason: Comparative design and independent reconciliation are complete before the original 13:29 cutoff. The next direction is priced for future allocation rather than launched in the finalization reserve.
+    next_action: Finalize this session and hand off future BC264/think-mq0d feature and kernel-contract pricing, retaining the conditional H101 fallback and its missing premise.
+  - workflow: documentation-pass
+    focus: correctness
+    recording: contemporaneous
+    clock_role: finalization
+    objective: Publish the completed eight-active-hour research checkpoint and its future-only next entry.
+    bead: think-9vjx
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: All scientific and comparative-design allocations are terminal; the original finalization reserve has begun.
+    budget_minutes: 20
+    started_at: '2026-09-07T13:29:11Z'
+    deadline_at: '2026-09-07T13:49:00Z'
+    expected_output: Final session and bead dispositions, refreshed additive cost lower bound, full-source and final-delta validation, and a recoverable integrated PR109 handoff.
+    validation_command: packing-validate --push
+    kill_condition: Original13:49 endpoint; no new scientific call, retry or automatically funded next block.
+    fallback: Preserve the completed proof and exact outstanding validation or publication obligation on PR109.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Freeze the source-free design, obtain independent review under an explicitly dispatched cap, and retain its disposition before finalization.
+    next_action: Validate and publish the final records, inspect hosted CI and landed upstream, then close the authorized block.
   primary_bead: think-ro0s
   status: in_progress
   budget:
@@ -112,11 +132,11 @@ session:
   - Keep the original13:29 finalization reserve and13:49 program endpoint; the later actual start shortens this slice.
   - No scientific source construction before independent readiness and a committed prospective protocol.
   - No repeated terminal exp121–128 calls, changed collision constants, diagonal rerun or automatic higher-order density build.
-  - Preserve external Session092 and its BC261/273 capacity and release successors throughBC278.
+  - Preserve external Session092 and its BC261/273 capacity and release successors throughBC281; refresh ownership before new IDs.
   progress:
     metric: Complete independently checked structural obligations and useful fixed-support dispositions
     before: Exp125 certifies diagonal compatibility; the reviewed collision source is uninvoked. Exp126 reports a graph-only obstruction, while BC259's contributed seven-row ceiling remains unadopted.
-    after: Exp127 is terminal unresolved/no_chain with no reader. Exp128 and its independent output audit establish fixed-support optimum eleven, refuting H099. Source-free BC265 comparative design is the selected remaining research allocation; no global bound or changed H124/H107 result is claimed.
+    after: Exp127 is terminal unresolved/no_chain with no reader. Exp128 and its independent output audit establish fixed-support optimum eleven, refuting H099. BC265's completed source-free comparison selects future BC264/H114 feature and kernel-contract pricing, with a conditional H101 fallback. No global bound, new target or changed H124/H107 result is claimed.
   delegations:
   - task: "BC259 source-binding author (think-m24i)"
     operator: "Codex density_control_recovery, max thinking"
@@ -406,16 +426,16 @@ session:
     excluded_commands: [File edits, Scientific calls, Git or external mutations]
   - task: "BC265 comparative extension design (think-bmuz)"
     operator: "Codex mathematical design author, max thinking"
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
-    files: []
-    checks: []
-    uncertainty: "Source-free design only; no new target or mathematical result is authorized by this allocation."
-    elapsed_seconds: null
-    elapsed_quality: unavailable
-    next_action: "Freeze one comparative design for independent review before the original author cutoff."
+    outcome: "Source-free comparative design froze at 13:15:58 UTC after actual work during 13:02:34–13:15:58, 804 seconds. It selects future BC264/H114 pricing and retains the conditional H101 Omega-avoiding-pose argument as a fallback."
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md]
+    checks: ["Source-free mathematical and retained-record comparison; root read the complete frozen report after both independent reports froze."]
+    uncertainty: "The conditional fallback has no avoiding pose; no target or global packing bound follows from this design."
+    elapsed_seconds: 804
+    elapsed_quality: operator_reported_approximate
+    next_action: "Retain the selected future feature/kernel pricing slice and the precise conditional fallback; do not launch a target."
     phase: 4
     budget_minutes: 24
     started_at: '2026-09-07T13:02:00Z'
@@ -428,16 +448,16 @@ session:
     excluded_commands: [Scientific calls, New scientific IDs, Unchanged H124 or H107 work, Git or shared registry writes]
   - task: "Independent BC265 comparative extension review (think-ju6v)"
     operator: "Codex independent mathematical design reviewer, max thinking"
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
-    files: []
-    checks: []
-    uncertainty: "Independent source-free comparison only; no scientific execution or new result is authorized."
-    elapsed_seconds: null
-    elapsed_quality: unavailable
-    next_action: "Compare the value of ruling out the H116 method with a direct H100 or narrowly specified kernel design, and retain at most one future discriminator."
+    outcome: "Independent source-free review froze at 13:19:16 UTC after actual work during 13:04:45–13:19:16, 871 seconds. Root read the complete frozen review and author report, then selected future BC264/H114 pricing with the conditional H101 fallback retained."
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md]
+    checks: ["Independent source-free mathematical and retained-record comparison; no parallel-author inspection before both reports froze."]
+    uncertainty: "No scientific execution, candidate or new global result is supplied by this comparison."
+    elapsed_seconds: 871
+    elapsed_quality: operator_reported_approximate
+    next_action: "Preserve the reviewed comparison and root's single future pricing choice without launching a new block."
     phase: 4
     budget_minutes: 22
     started_at: '2026-09-07T13:04:15Z'
@@ -470,13 +490,103 @@ session:
     fallback: "Freeze completed changes and report remaining reconciliation gaps."
     write_scope: [packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md]
     excluded_commands: [Other-file or generated-view edits, Git or external PR actions, Scientific source or target invocation]
+  - task: "Current-facing H099 consistency audit (think-1dtv)"
+    operator: "Codex checkpoint_handoff_audit, high thinking"
+    status: completed
+    recording: retrospective
+    outcome: "Actual work 13:17:26–13:19:47 UTC, 141 seconds. Found four narrow current-facing corrections while preserving dated history. SYNOPSIS and H099's leading verdict were correct; no new BC265 report was inspected. Observed starts are authoritative; later approximate dispatch labels are not clocks."
+    evidence: ["packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md"]
+    files: []
+    checks: ["Read-only current summaries, agendas, hypothesis records and handoff inspection; no scientific calls or writes."]
+    uncertainty: "This bounded task does not establish a new scientific target or global packing bound."
+    elapsed_seconds: 141
+    elapsed_quality: operator_reported_approximate
+    next_action: "Root integrates the narrow corrections without changing historical outcomes."
+    phase: 4
+    budget_minutes: 8
+    started_at: '2026-09-07T13:17:26Z'
+    deadline_at: '2026-09-07T13:25:00Z'
+    expected_output: "A scoped factual or source-free review receipt with original limits and explicit remaining uncertainty."
+    validation_command: "Read-only assigned evidence inspection."
+    kill_condition: "Original 13:25:00 UTC cutoff or an unresolved decisive premise; no cap extension."
+    fallback: "Freeze completed evidence and report the precise remaining gap."
+    write_scope: ["Read-only documentation inspection"]
+    excluded_commands: ["Scientific source or target execution", "Git or external mutations", "Other-file or generated-view edits"]
+  - task: "Narrow H099 status and handoff corrections (think-4nzt)"
+    operator: "Codex checkpoint_handoff_audit, high thinking"
+    status: completed
+    recording: retrospective
+    outcome: "Actual work 13:20:45–13:22:04 UTC, 79 seconds. Applied only H116's accepted exp128 sentence, Agenda026's historical bracket/current disposition corrections, and Session094's dated handoff label. Its linked anchor and YAML next_action were preserved. Observed starts are authoritative; later approximate dispatch labels are not clocks."
+    evidence: ["packing/campaign/hypotheses/H-116-expanded-full-size-dual-support.md","packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md","packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md"]
+    files: ["packing/campaign/hypotheses/H-116-expanded-full-size-dual-support.md","packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md","packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md"]
+    checks: ["All three schema repair-checks valid without repairs or structural errors; no generators, Git or scientific calls."]
+    uncertainty: "This bounded task does not establish a new scientific target or global packing bound."
+    elapsed_seconds: 79
+    elapsed_quality: operator_reported_approximate
+    next_action: "Root integrates the three frozen documents and runs whole-repository formatting."
+    phase: 4
+    budget_minutes: 6
+    started_at: '2026-09-07T13:20:45Z'
+    deadline_at: '2026-09-07T13:26:45Z'
+    expected_output: "A scoped factual or source-free review receipt with original limits and explicit remaining uncertainty."
+    validation_command: "Scoped schema repair --check and prose inspection."
+    kill_condition: "Six minutes from the actual 13:20:45 start gives effective cutoff13:26:45, before the unchanged outer13:29 cutoff; no cap extension."
+    fallback: "Freeze completed evidence and report the precise remaining gap."
+    write_scope: ["packing/campaign/hypotheses/H-116-expanded-full-size-dual-support.md","packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md","packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md"]
+    excluded_commands: ["Scientific source or target execution", "Git or external mutations", "Other-file or generated-view edits"]
+  - task: "Independent BC265 reconciliation (think-5fvt)"
+    operator: "Codex independent mathematical reviewer, max thinking"
+    status: completed
+    recording: retrospective
+    outcome: "Actual work 13:20:25–13:21:49 UTC, 84 seconds. Independent GO for the author's conditional Omega-avoiding premise implying expanded-support mass 89/8; no objection to BC264's priority. The avoiding pose remains absent. Observed starts are authoritative; later approximate dispatch labels are not clocks."
+    evidence: ["packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md","packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md"]
+    files: []
+    checks: ["Read-only reconciliation of the two frozen source-free reports; no candidate construction or scientific invocation."]
+    uncertainty: "This bounded task does not establish a new scientific target or global packing bound."
+    elapsed_seconds: 84
+    elapsed_quality: operator_reported_approximate
+    next_action: "Retain future BC264 pricing and the conditional H101 fallback without admitting a target."
+    phase: 4
+    budget_minutes: 5
+    started_at: '2026-09-07T13:20:25Z'
+    deadline_at: '2026-09-07T13:25:25Z'
+    expected_output: "A scoped factual or source-free review receipt with original limits and explicit remaining uncertainty."
+    validation_command: "Read-only assigned evidence inspection."
+    kill_condition: "Five minutes from actual13:20:25 gives effective cutoff13:25:25, before the unchanged outer13:27 cutoff; no cap extension."
+    fallback: "Freeze completed evidence and report the precise remaining gap."
+    write_scope: ["Read-only frozen-report reconciliation"]
+    excluded_commands: ["Scientific source or target execution", "Git or external mutations", "Other-file or generated-view edits"]
+  - task: "Session095 design closeout and full-gate reconciliation (think-khgq)"
+    operator: "Codex checkpoint_handoff_audit, high thinking"
+    status: completed
+    recording: contemporaneous
+    outcome: "Reconciled phase 4, completed author/reviewer and follow-up receipts, accepted immutable full-gate evidence, and the future BC264 handoff. Actual work 13:23:08–13:27:41 UTC, 273 seconds through the final observed schema check. The overall session remains in progress; no future phase or block was activated."
+    evidence: [packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md]
+    files: [packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md]
+    checks: ["Scoped softschema repair --check valid without repairs or structural errors; no generators, Git or scientific calls."]
+    uncertainty: "The full gate validates 87bb15fb, not later record deltas. Root owns finalization, costs and publication; the conditional H101 fallback has no avoiding pose."
+    elapsed_seconds: 273
+    elapsed_quality: operator_reported_approximate
+    next_action: "Root finalizes the session in its original reserve and hands off future BC264 pricing without launching another block."
+    phase: 4
+    budget_minutes: 6
+    started_at: '2026-09-07T13:23:08Z'
+    deadline_at: '2026-09-07T13:29:00Z'
+    expected_output: "A frozen session record with terminal design receipts, exact full-gate evidence and a future-only next action."
+    validation_command: "softschema repair --check campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md"
+    kill_condition: "Original 13:29 UTC cutoff; no other-file edits or scientific invocation."
+    fallback: "Freeze completed record corrections and report remaining reconciliation gaps."
+    write_scope: [packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md]
+    excluded_commands: [Other-file or generated-view edits, Git or external PR actions, Scientific source or target invocation]
   outputs:
   - packing/campaign/resource-usage/codex-task-tree-session-095.yaml
   - packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md
   checks:
+  - 'Current ownership inspection at 13:24:52 UTC: external PR110 at bdbfc054 owns BC281 in progress under think-ilpc; BC280 is complete and BC279 stopped. The next BC pointer is 282, not a reservation. Origin/main remains dd36800e; PR110 is open and unmerged. The earlier 12:28 pointer is historical.'
   - Exp128's sole independent checker exited zero and completed by 13:00:03 UTC after an observed dispatch at 12:59:12. Exact process start within that interval was not measured. External cost was 1.12 seconds wall, 1.08 user and 0.01 system; all positive predicates passed, including 88 labels, 60 distinct placements, eight orbits, the identity orbit permutation, seven rows, 41 inclusions and upper/baseline eleven. Independent output GO froze at 13:03:35 UTC.
   - Immutable a94e57fe source-engine push passed 45/66 steps in 68.33 seconds. The 87bb protocol checkpoint passed 31/66 records steps in 19.07 seconds and 45/66 delta-push steps in 71.01 seconds; it was published before the sole scientific invocation.
-  - Full immutable 87bb validation began around 12:55 UTC and remains in progress in process session 85874, with log /private/tmp/squares-session095-full-protocol.log. No full pass is claimed.
+  - 'full gate: full at 87bb15fb: passed (ALL CHECKS PASSED in 1616.15 seconds gate wall; external 1616.25 seconds wall, 3211.98 user and 90.19 system; native process session 85874 exited zero, observed by root at 13:23 UTC). Later record deltas require their own validation.'
+  - 'Historical pending-full receipt at the 13:08:39 UTC editorial checkpoint: full 87bb15fb validation had begun around 12:55 UTC in process session 85874, with log /private/tmp/squares-session095-full-protocol.log. It was then running; the later passing receipt is recorded separately above.'
   - Historical admission failure before the corrected engine and protocol passed their gates; immutable 3160d0a7 push failed only a stale generated ledger in 68.96 seconds. The redundant 3160 run was aborted after an EOF commit refusal and is not a passing validation receipt.
   - Hosted 73755cc1 passed every semantic check but failed the measured runtime band at 149.79 seconds against 99.39 seconds and a 1.5 factor. This performance failure is distinct from the repaired stale-record/anchor failures; no threshold is weakened.
   - Corrected checkpoint 73755cc1 passed 45/66 push steps in 70.28 seconds; external time was 72.62 seconds wall, 184.77 user and 24.35 system. It was pushed and the cost-first PR109 body updated by 12:40:29. The new checker and its unfinished review were excluded from that checkpoint.
@@ -490,7 +600,7 @@ session:
   - Session094 published its source checkpoint and PR body by 11:49. Fast confirmation was observed at 11:50:19; this slice starts at the actual recorded activation and retains the original program endpoint.
   - Historical activation snapshot 0e1961e2 contained no Session095, exp127 or BC259/H099 assignment. Its then-next pointers were unreserved; later allocations and the 12:28 external ownership check supersede that inventory.
   stop_reason: null
-  next_action: Integrate the independently accepted H099 disposition, then retain at most one independently reviewed BC265 comparative design by 13:29 UTC. Preserve the finalization reserve and 13:49 endpoint, without a scientific retry or automatic next target.
+  next_action: Complete finalization within the original 13:29–13:49 reserve and hand off future BC264/think-mq0d's existing 30-minute H114 feature and kernel-contract pricing slice. Retain the conditional H101 Omega-avoiding fallback; do not launch another block, target or unchanged retry.
 ---
 # Final Active Slice: Collision Cover and Support Ceiling
 
@@ -532,13 +642,20 @@ global packing bound and makes no claim about a mass-eleven area density. The so
 and API inventory is in
 [the prior handoff](session-094-complete-cover-and-density-controls.md#selected-final-slice-resources).
 
-The selected phase is source-free comparative design under existing BC265/`think-j8pz`,
-13:02–13:29 UTC. Its author and independent reviewer compare the value of ruling out
-the H116 method with a direct H100 or narrowly specified kernel design, prioritizing
-significant mathematical results. They may retain at most one changed high-impact
-direction and its next future discriminator. Both reports must freeze before either
-author inspects the parallel derivation. This allocation admits no scientific target,
-new scientific IDs or unchanged H124/H107 work.
+The source-free comparative-design phase under BC265/`think-j8pz` is complete.
+The [author](../series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md)
+froze at 13:15:58 UTC and the
+[independent reviewer](../series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md)
+at 13:19:16, before their original 13:26 cutoffs. Root read both frozen reports in full
+and selected the existing BC264/`think-mq0d` 30-minute H114 feature and kernel-contract
+pricing slice for future allocation. No new block or scientific target starts here.
+
+The conditional fallback is H101's Omega-avoiding-pose argument. Omega is the
+intersection of the eight symmetry images of the accepted packing's occupied region.
+An exact contained unit square meeting Omega only in area zero would give the author's
+depth-one expanded-support construction of mass $89/8$; no such square has been
+constructed or verified. Independent reconciliation accepted that conditional
+implication without objecting to BC264's priority. H124 and H107 remain unchanged.
 
 Root owns scientific admission, shared records, sequential IDs, Git and PR109.
 Independent mathematical authors and reviewers use max thinking and disjoint files.
@@ -553,14 +670,15 @@ record edits. Pending-full statements in the earlier checks are dated historical
 snapshots, not the current gate status.
 
 The corrected `a94e57fe` engine passed its 45/66 push steps in 68.33 seconds.
-The `87bb` protocol checkpoint passed 31/66 records steps in 19.07 seconds and
+The `87bb15fb` protocol checkpoint passed 31/66 records steps in 19.07 seconds and
 45/66 delta-push steps in 71.01 seconds, and was published before invocation.
-Its full gate, started around 12:55 UTC, remains in progress; no full pass is claimed.
+Its full gate passed all checks in 1616.15 seconds, observed by root at 13:23 UTC.
+External time was 1616.25 seconds wall, 3211.98 user and 90.19 system; process session
+85874 exited zero. This validates that immutable checkpoint, not later record changes.
 
-Freeze both comparative design reports by their original 13:26 cutoffs and retain
-the disposition before 13:29. A future scientific verification would require its own
-independently reviewed readiness and prospective protocol. Do not spend this allocation
-on an unregistered target or a retry.
+Both comparative-design reports and their disposition are retained. A future scientific
+verification requires its own independently reviewed readiness and prospective protocol.
+The selected BC264 pricing slice has not started; no candidate or target is admitted.
 At 13:29, begin the protected finalization reserve and capture outcomes,
 uninvoked suffixes, validation, measured costs and the exact next handoff on this PR.
 
