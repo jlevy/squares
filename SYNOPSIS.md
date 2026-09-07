@@ -562,7 +562,7 @@ the planning block. The user’s credit-interruption amendment excludes unavaila
 from the wall allowance.
 The addendum records the accounting boundaries, revised deadlines, and conservative
 active-minute position `124:14`, the inherited reference position for this continuation.
-Session089 is executing; no current active-time total is inferred from elapsed wall
+Session089 is closed; no current active-time total is inferred from elapsed wall
 time. BC-232’s completed recovery produced no row-converged covering; BC-241’s
 independent local-scope review was published in `ad600896`. H-092’s fixed-weight
 refined-core negative passed independent review and awaits integration under
@@ -581,16 +581,18 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**Selected next entry:** `think-0za3`, BC-251’s ready but unopened scalar investigation.
-Reserve its full unchanged 150-minute process cap and separate verification in a fresh
-allocation before launch.
+**Current execution:** [Session090](packing/campaign/agent-sessions/session-090-four-hour-research.md),
+under `think-9qrx`, owns the user-approved four-active-hour block after PR101 merged.
+BC251/H093 is prospectively allocated as exp116 with its unchanged150-minute scalar
+invocation and separate verification. BC243 facet controls and BC255 closed-angle
+controls run in parallel, with a third worker rotating through independent review.
 Full validation of research checkpoint `99a3ad42` passed;
 [Session 089](packing/campaign/agent-sessions/session-089-agenda024-next-phases.md)
 retains that verdict and the completed experiments, which must not be repeated.
 [Agenda 024’s Current Allocation](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
-owns the next fresh scalar, complete-density and continuous-angle packages, including
+owns the scalar, complete-density and continuous-angle packages, including
 independent-review assignments.
-Keep these on integrated PR 101 while it remains open.
+Keep these on one integrated successor PR from `codex/post-381-four-hour-research`.
 The earlier BC-215 efficiency work remains available in Agenda 023; this handoff does
 not mark it complete or erase its evidence.
 `BC-219` was the preflight for Agenda 024’s original launch inputs.

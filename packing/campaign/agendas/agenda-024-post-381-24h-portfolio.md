@@ -359,7 +359,12 @@ The
 [session record](../agent-sessions/session-089-agenda024-next-phases.md#readiness-and-follow-up)
 owns the actual clocks, dispositions and validation follow-up.
 
-For the next fresh active-time allocation, keep three separable commitments:
+The user commissioned these three commitments in
+[Session090](../agent-sessions/session-090-four-hour-research.md), starting at
+`2026-09-07T00:31:22Z` after PR101 merged. `think-9qrx` coordinates a four-active-hour
+block with a two-hour checkpoint on `codex/post-381-four-hour-research`.
+Its record owns the current slices and interruption accounting; the completed
+Session089 allocation is not reopened.
 
 - **BC-251 / H-093:** the ready but unopened 150-minute scalar invocation, with
   verification time reserved.
@@ -379,14 +384,15 @@ For the next fresh active-time allocation, keep three separable commitments:
   cover the entire near-axis auxiliary domain if successful; a failed Bernstein
   certificate is unresolved, not a geometric counterexample.
 
-These are next-allocation recommendations, not new commissions inside Session 089’s
-finalization reserve.
+The initial commissions are the one scalar invocation and the two source/control
+packages with independent review. Larger density or angle steps need an explicit
+readiness and cost decision at a Session090 checkpoint.
 Keep BC-231’s remaining 180–320 active-worker-minute estimate and unpriced retained
 replays conditional; its two selected slices are complete.
 Use two authors and rotate the third worker into independent review, with the
 coordinator owning shared records and the scalar process.
-Reuse PR 101 while it remains the integration line; do not create separate PRs for these
-supporting slices.
+PR101 has merged; publish one integrated successor PR for Session090 and keep supporting
+slices on it.
 Use `max` for mathematical judgment and `high` or `xhigh` for suitable
 mechanical work.
 
