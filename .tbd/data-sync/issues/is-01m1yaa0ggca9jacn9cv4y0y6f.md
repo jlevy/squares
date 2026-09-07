@@ -3,17 +3,17 @@ type: is
 id: is-01m1yaa0ggca9jacn9cv4y0y6f
 title: Review Stromquist memos and pursue systematic helper arguments
 kind: task
-status: open
+status: closed
 priority: 1
-version: 12
+version: 13
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m1yt2rbhseg2axzvsxzed2f8
 created_at: 2026-09-07T16:13:03.887Z
-updated_at: 2026-09-07T21:09:57.111Z
-closed_at: null
-close_reason: null
+updated_at: 2026-09-07T21:18:45.144Z
+closed_at: 2026-09-07T21:18:45.143Z
+close_reason: "Completed the final numerical-construction clarification in commit 8e78f489 on PR115: removed the fit-verification clause and stated that approximate coordinates alone do not constitute a formal proof of the upper bound. All45 pre-push steps passed in75.50seconds, screen/print layout and PDF visual checks passed, and all required CI plus the paper build passed on the final revision. The preview and PDF are refreshed; prior surname, contribution-credit, footnote, and new-bound wording edits remain included."
 resolution: null
 duplicate_of: null
 ---
