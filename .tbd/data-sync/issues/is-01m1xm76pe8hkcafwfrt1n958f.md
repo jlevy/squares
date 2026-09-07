@@ -5,7 +5,7 @@ title: Session094 complete-cover binding and repaired density controls checkpoin
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 34
 spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels: []
 dependencies: []
@@ -26,7 +26,24 @@ child_order_hints:
   - is-01m1xp17wyg0neqj83v1jd558s
   - is-01m1xp189ndy6sd6ap4c7yfbhx
   - is-01m1xp18m6y3yn66cg2mhvqnsa
+  - is-01m1xp6jr8gdm1hn077g0wcwx4
+  - is-01m1xpkx9x6jybg2f66pxe53h2
+  - is-01m1xppqcdx9q4s3jfnwyxstza
+  - is-01m1xpsdsjcz56jdyq0v32azw5
+  - is-01m1xq0na6113veftnz1d0d8ce
+  - is-01m1xq2se5jtsw4t3k7xq4s2jg
+  - is-01m1xqc1sd685exz0sa8cjdckw
+  - is-01m1xqdysmr22ea42a0x8ta0tr
+  - is-01m1xqezm4kmzb1mfy0046dp5w
+  - is-01m1xqj5b2rm8rvhvwpcg96q4v
+  - is-01m1xqq08mcbakazpk0t9jwfzh
+  - is-01m1xqy5dsswx41b1mswf2naha
+  - is-01m1xrarpmyzgnfymhf6a7rysw
+  - is-01m1xrd7f2pfhyn6grkkx2ka11
+  - is-01m1xrhhrcqngtw3ymregzhma6
+  - is-01m1xrhj49akk9hmccdg3w5ept
+  - is-01m1xrmtqxthbkrjxpfd7km738
 created_at: 2026-09-07T09:47:03.244Z
-updated_at: 2026-09-07T10:18:45.765Z
+updated_at: 2026-09-07T11:04:24.060Z
 ---
 Continue selected think-7e72 after Session093, roughly09:49–11:49UTC, stop new science by11:29. Independently bind the reviewed H124 whole-band residual cover and bounded caller; separately reconcile BC243 graph soundness controls and declare a new degree-eight source-control attempt. No completed experiment reruns and no resumption of the failed old control sequence. Same PR109; max mathematical agents, independent readers, fixed caps, final20min integration. Check fresh external ownership before IDs.
