@@ -3,9 +3,9 @@ type: is
 id: is-01m1xd6ffzyzddb7by875t49z4
 title: "Phase 2: promote n = 101..200 into the frontier register and known-best atlas"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
 labels: []
 dependencies:
@@ -13,7 +13,11 @@ dependencies:
     target: is-01m1xd6ft3my6y03sn8yk404nd
 parent_id: is-01m1xd517vezdmp4hrmvs5c8bp
 created_at: 2026-09-07T07:44:19.454Z
-updated_at: 2026-09-07T09:51:41.758Z
+updated_at: 2026-09-07T12:28:37.049Z
+closed_at: 2026-09-07T12:28:37.048Z
+close_reason: 101..200 promoted in 32b796cc; the owed W2 pass is the credit-line review (195dc3bd) and its corrections, regenerated across 101..324 with zero divergences and the goldens byte-identical.
+resolution: null
+duplicate_of: null
 ---
 Fetch-and-derive the Kingbird cases in range under D2 (one-time --fetch, ephemeral SVG, numerical facts only); witnesses with feasibility receipts, house renderings, generated frontier records, manifest entries for 101..200; translation-escape screen and rigidity blocks; W2 review of the chunk transcription against the reparser; the range's gate step measured and recorded in gate-budgets.yaml.
 
