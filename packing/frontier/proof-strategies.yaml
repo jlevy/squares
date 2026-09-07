@@ -175,7 +175,7 @@ strategies:
     the strongest integral instances on record are the August 2026 GitHub certificates
     for n = 17: sixteen rational points made strictly unavoidable by an exact
     pose-space subdivision with pure-integer checkers (Mira 4.450837 and 4.468292, Fort
-    4.456575), the last adding a strict triangle-piercing leaf: a unit square whose
+    4.456575). Mira's 4.468292 certificate adds a strict triangle-piercing leaf: a unit square whose
     centre lies strictly inside a triangle with all sides shorter than one contains a
     vertex in its interior, an orientation-free discharge that the classical triangle
     lemma of Stromquist's tradition supplies. Brandwijk's 89/20 capsule (July 2026) and

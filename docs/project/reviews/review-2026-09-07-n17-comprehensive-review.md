@@ -171,7 +171,7 @@ The reconciliation is applied alongside this review; the details are in the
   copy. It replays unchanged (`E-n017-burns-source-replay`), and re-encoded in the
   repository’s schema it is accepted by the exact sweep at least mass `10003/10000`
   (`E-n017-burns-control-decision`). It is retained as the control the campaign named
-  three times and never built: the one certificate whose least covered mass is not `1`.
+  three times and never built: a published control whose least covered mass is not `1`.
 - The interval route does not decide that control, and the reason is worth keeping.
   Burns’s grid places a column at exactly `1/2 + (L - 1)/7 = B`, so a centre on the
   domain boundary has an atom column exactly on its far edge; closed membership counts
@@ -226,8 +226,8 @@ interior. The later certificate is a 122,626,747-node exact pose-space subdivisi
 three independent checkers (a fast C++ one, a Boost bigint C++ one, and a pure-Python
 integer one), and a LaTeX paper and PDF. Replayed here with the pure-Python checker:
 valid over all 122,626,747 nodes in 3 min 34 s, and both published hashes matched
-(`E-n017-mira-point-certificate-replay`); the two Boost checkers were not run, Boost
-being absent from the container.
+(`E-n017-mira-point-certificate-replay`); the two C++ checkers were not run, Boost being
+absent from the container.
 The repository is credited to a language model (GPT-5.6 Pro) working under human
 direction and is not peer reviewed; it cites Friedman, Stromquist, Ellsworth and Fort,
 and not Brandwijk, Burns or Massaccesi.
@@ -236,12 +236,12 @@ independently replayed; it is superseded within the same repository by the secon
 
 **Stanislav Fort** (`github.com/stanislavfort/17squares`) posted `s(17) > 4.456575` on
 11 August 2026 on the same architecture as Mira’s, without the triangle-piercing leaves:
-a 21,696,657-node exact subdivision over the same sixteen points.
+a 21,696,657-node exact subdivision over a different set of sixteen rational points.
 The author’s README states the work was done by a language model (GPT-5.6-Sol) and that
 he cannot vouch for it; a GitHub Action runs the checkers on every push.
 Replayed here with the pure-Python checker: valid in 20 s
-(`E-n017-fort-point-certificate-replay`); the C++ checker, which needs Boost, was not
-run.
+(`E-n017-fort-point-certificate-replay`); the two C++ checkers, which need Boost, were
+not run.
 
 **anabologyco-maker** (`github.com/anabologyco-maker/square17-lower-bound`) posted a
 weighted fractional unavoidable-set certificate between 13 and 17 August 2026: 71 D4
@@ -273,14 +273,15 @@ That refusal is an artefact of the reduction, not evidence against the source.
 What is new for this record, against what stood before today: the strongest integral
 sixteen-point certificates are now Mira’s and Fort’s, and the strict triangle-piercing
 leaf is a certificate ingredient this repository’s own sixteen-point work does not use.
-anabologyco’s exact-orientation weighted verifier, with no shrink and a Lean 4 layer, is
-a working instance of the proof-assistant-checked (`V5`) direction the record already
-names as a follow-on for `T-015` and `T-019`, reached first by someone else, on a weaker
-bound. `T-019`’s novelty claim and movement figure need the correction recorded as item
-10 in Bookkeeping below.
-And all four 2026 authors found so far, Burns, Mira, Fort and anabologyco, disclose a
-model-generated proof with a human declining to vouch for it, which is exactly the
-situation this repository’s replay-here discipline exists for.
+anabologyco’s exact-orientation weighted verifier, with no shrink and a Lean 4 layer,
+provides a source-reported formalization of the finite-check layer toward the
+proof-assistant-checked (`V5`) direction named for `T-015` and `T-019`. It is not a
+formalized `s(17)` theorem: event completeness and the measure argument remain outside
+Lean, and the Lean build has not been replayed here.
+`T-019`’s novelty claim and movement figure need the correction recorded as item 10 in
+Bookkeeping below. Burns, Mira, Fort and anabologyco disclose model assistance and state
+that their results have not undergone independent peer review.
+Fort additionally says he cannot personally vouch for correctness.
 
 What this repository’s tools can and cannot do with them: the shrink in
 `sqpack.fractional`’s reduction is why its own verifier refuses anabologyco’s
@@ -373,12 +374,12 @@ artifacts were built first, and the case then paid for itself.
    atlas does not hold, and a decision on whether to reconstruct Ellsworth’s geometry
    from the retained digits rather than from the unretained SVG. This is the one lane
    where nothing structural stands in the way.
-2. **Recover the `4.59` run’s stop reason, or run it again recorded.** Cheap, and it
-   settles whether `459/100` is a wall.
+2. **Recover the `4.59` run’s stop reason, or run it again recorded.** This resolves the
+   run’s stopping state; a converged restricted optimum describes only the tested sites.
    A converged column-generation run with a retained site set, row and round counts and
-   a log, seeded with the retained atoms as at `n = 20`, would either add a rung inside
-   the `0.0810` the cap allows or record the first bounded negative at `n = 17`. Either
-   outcome is worth more than the present “not recorded”.
+   a log, seeded with the retained atoms as at `n = 20`, could find a further rung
+   inside the `0.0810` the cap allows or record a bounded negative for the tested sites.
+   Either outcome is worth more than the present “not recorded”.
 3. **Reconstruct the Burns basin** (`think-t5va`). The coordinates are retained and
    checked, the exact side is a root of a known quintic, and a second competitive
    topology at `n = 17` would be the first evidence on record that the landscape has
@@ -393,16 +394,16 @@ artifacts were built first, and the case then paid for itself.
    arguments, an implementation distinct from all three of Mira’s own checkers, would
    put the two strongest external results at `n = 17` on this repository’s own footing
    rather than the source’s. anabologyco’s exact-orientation approach carries neither
-   this repository’s shrink loss nor its `5B` ceiling, so whichever result moves first,
-   the packing-side cap and not the method ceiling is what binds.
+   this repository’s shrink loss nor its `5B` ceiling; the current shrink/net
+   packing-side cap does not apply unchanged to that method.
 6. **Close the tracker**: the seven finished beads, `BC-115`’s re-scope, and the
    `think-ss2a` decision, each of which is a disposition rather than work.
 
 What this review does not do: it does not change a bound, it does not reconstruct the
 contact graph, and it does not decide the reported-lane rule.
-The lower-bound lane’s own ceiling, `0.0810` to the cap, means a certificate cannot
-close the case from below; whether the cap argument itself is tight is a question for
-`X-014`’s author, and if it is not, item 2 is where that would show.
+For the current fixed-`B`, fixed-net certificate family, the packing-side cap leaves
+`0.0810` of possible movement and rules out closing the case at Bidwell’s side.
+That cap does not apply unchanged to the proposed unshrunk exact-orientation method.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

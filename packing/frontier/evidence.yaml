@@ -1167,7 +1167,7 @@ evidence:
       s(17) >= 44811/10000; n = 18 and n = 19 follow because only Condition 2 mentions n.
       Superseded as a bound on the day it was retained, first by Massaccesi's 22529/5000
       (T-015) and then by the first-party 459/100 (T-019); it is kept as provenance of
-      the architecture and as the one retained certificate whose least covered mass is
+      the architecture and as a published control whose least covered mass is
       not exactly 1, which is what a control needs. The source is a 2026 blog post by
       an individual, not peer reviewed, which its author labels a proposed
       computer-assisted proof; the note and verifier are credited to a language model
@@ -1201,8 +1201,8 @@ evidence:
       whose --check confirms the shipped file) and decided by the repository's exact
       event-cell sweep (sqpack.fractional.certificate.verify): Conditions 1 to 5 hold,
       least cell mass 10003/10000 at direction 0, 6.9 s on 2026-09-07. It is retained as
-      a control rather than a rung, being the one certificate on record whose least
-      covered mass is not exactly 1, so a verifier that reported 1 unconditionally is
+      a control rather than a rung, with a least covered mass different from 1,
+      so a verifier that reported 1 unconditionally is
       caught by it; the bound it decides was superseded by T-015 and T-019 before it was
       retained. The interval branch-and-bound (sqpack.fractional.interval) does not
       decide it: 360 of the 361 doubled-net directions certify with mass at least 1 and
@@ -1302,8 +1302,8 @@ evidence:
       is retained here XZ-compressed. The bound is the strict one the source states,
       4456575/1000000 = 4.456575, whose strictness is a compactness step the replay does
       not decide.
-      What was not replayed: the C++ checker, which needs Boost and was not built here, so
-      one of the two checkers the source ships has been run. No first-party implementation
+      What was not replayed: the two C++ checkers, which need Boost and were not built here, so
+      one of the three checkers the source ships has been run. No first-party implementation
       has been pointed at these 16 points.
       The architecture is not this repository's: an integral 16-point unavoidable-set
       certificate in the family of cases/green17, not a weighted fractional unavoidable

@@ -2,8 +2,8 @@
 
 Copies the retained package to a temporary directory, restores the four files this
 archive keeps XZ-compressed and checks their raw SHA-256 values, checks the source's own
-``SHA256SUMS`` manifest, then runs ``scripts/check_certificate.py`` (exact mass and
-symmetry) and ``scripts/verify_filter.py`` (the exact Bernstein prefilter of the
+``SHA256SUMS`` manifest, then runs ``scripts/check_certificate.py`` (atom count and
+exact mass) and ``scripts/verify_filter.py`` (the exact Bernstein prefilter of the
 1,344,862 event polynomials) and requires their PASS markers. The Sturm partition, the
 endpoint audits and the 148,937-cell coverage audit need a C++ compiler with
 Boost.Multiprecision, and the Lean layer needs Lean 4.33; this script does not run

@@ -839,6 +839,28 @@ def test_the_burns_control_rebuilds_from_the_notes_constants() -> None:
     assert rebuilt == BURNS_CONTROL_PATH.read_text()
 
 
+def test_the_burns_control_cli_requires_a_valid_check_invocation(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    for arguments in (
+        ["--check"],
+        ["--check", str(BURNS_CONTROL_PATH), "extra"],
+        ["--unknown"],
+    ):
+        assert build_burns_control.main(arguments) == 2
+        output = capsys.readouterr()
+        assert "unknown arguments" in output.err
+        assert output.out == ""
+
+    assert build_burns_control.main(["--check", str(BURNS_CONTROL_PATH)]) == 0
+    assert "identical" in capsys.readouterr().out
+
+    changed = tmp_path / "control.json"
+    changed.write_text("{}\n")
+    assert build_burns_control.main(["--check", str(changed)]) == 1
+    assert "MISMATCH" in capsys.readouterr().out
+
+
 def test_the_burns_control_declares_what_the_note_states() -> None:
     """268 atoms, total 169476/10000, the side 4.4811, on Massaccesi's B, T and net."""
     certificate = n17_load(BURNS_CONTROL_PATH)

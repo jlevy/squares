@@ -88,9 +88,9 @@ the two C++ checkers did not run here.
 
 ## stanislavfort/17squares: `s(17) > 4.456575`
 
-Full tree of <https://github.com/stanislavfort/17squares> at commit
+Selected tree of <https://github.com/stanislavfort/17squares> at commit
 `853f7ee61e7d37c8284a3fe130d79831140ad507` (three commits, 11 August 2026, author
-Stanislav Fort), minus `.git` and `.DS_Store`.
+Stanislav Fort), minus `.git`, `.DS_Store`, and the five maintainer-facing files listed below.
 
 The claim is 16 rational points, denominator `10^6`
 (`certificates/lower_bound_4p456575/points.json`), with no triangle leaves: a pure
@@ -105,7 +105,7 @@ The repository’s own README opens with the author’s warning: “everything h
 done by GPT-5.6-Sol with high reasoning settings.
 I, Stanislav Fort, don’t really understand it => can’t vouch for its correctness.
 But it should be checkable by other AIs and/or knowledgeable humans.”
-A GitHub Action (`.github/workflows/verify.yml`, not part of this packet) installs Boost
+A GitHub Action (`.github/workflows/verify.yml`, retained in this packet) installs Boost
 and runs the three checkers on push.
 The README also links a `CHANGELOG_FROM_4p452625.md` that is not present in the source
 tree; the source’s own `MANIFEST.sha256` (retained here) lists it and four other
@@ -143,8 +143,11 @@ nonnegative atomic measure on the container, 71 dihedral orbits expanding to 560
 (`data/atoms.csv`), coordinates on the `1/4000` grid, weights with denominator `10^12`.
 Exact total mass is `16994734834452/10^12 = 16.994734834452`, slack `0.005265165548`
 below 17. The weighted obstruction lemma (`docs/PROOF.md`) is standard for this
-architecture: if every closed unit square in the container captures mass at least 1 and
-the total mass is under 17, no 17 interior-disjoint unit squares fit.
+architecture: if every closed unit square in the container of side `S` captures mass at
+least 1 and the total mass is under 17, no 17 interior-disjoint unit squares fit in any
+strictly smaller container. A common generic translation of such a packing into the
+larger container avoids every atom on a square boundary, so each atom is counted at most
+once. This gives `s(17) >= S`; it does not exclude a packing at side `S` itself.
 
 The verification chain regenerates 1,344,862 geometric event polynomials, exactly
 discards 1,194,331 of them by an integer Bernstein sign test on `t = tan(theta/2)` in
@@ -292,7 +295,7 @@ the retained bytes; the rest are hashes of this packet’s own copies.
 | `raw-hashes-of-compressed-files.sha256` | `651023b6773cd2f8e1d3c58e060a970169c9c70a651b0276ea8ecc4233bd8801` |
 | `replay_mira_python.py` | `ba8af295ea57ea17dd6deb15c62c7a58c8a10beefaac4835a6e0f4fc5b39f7c5` |
 | `replay_fort_python.py` | `f40dce78215f6fecb7f8c96155b0bce27cb355387e9216727a7cc7ebdd9a2377` |
-| `replay_anabologyco_python_stages.py` | `b56c93d93a6dd119a6de0bd7da731dfec8e781789bbfe8d083804af8b1d5c4a9` |
+| `replay_anabologyco_python_stages.py` | `05dd90a31df4229ee9d37814a653acad179657d119c503d28583ad6424b91577` |
 
 Retained for private research use.
 Consult the authors before redistribution.

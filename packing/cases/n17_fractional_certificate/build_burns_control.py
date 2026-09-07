@@ -127,6 +127,9 @@ def render(record: dict[str, object]) -> str:
 
 def main(argv: Sequence[str] | None = None) -> int:
     arguments = list(sys.argv[1:] if argv is None else argv)
+    if arguments and not (len(arguments) == 2 and arguments[0] == "--check"):
+        print(f"unknown arguments: {' '.join(arguments)}", file=sys.stderr)
+        return 2
     text = render(build())
     if len(arguments) == 2 and arguments[0] == "--check":
         shipped = Path(arguments[1]).read_text()
