@@ -5,7 +5,7 @@ title: Publish and validate Session097 integrated research checkpoint
 kind: task
 status: in_progress
 priority: 1
-version: 23
+version: 25
 spec_path: packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md
 labels: []
 dependencies: []
@@ -21,10 +21,10 @@ child_order_hints:
   - is-01m1z1d949sby1tkrav2k92sfh
   - is-01m1z2grw8sr01t7ynft3hrnz9
 created_at: 2026-09-07T21:04:19.475Z
-updated_at: 2026-09-07T23:43:46.364Z
+updated_at: 2026-09-07T23:56:01.046Z
 ---
 At each useful block boundary stop writers; review spec/agenda status and all diffs under tbd shortcuts and Practical Prose; regenerate the document, ledger and session views; retain a privacy-reduced interval receipt with fixed start20:56:47.766UTC and observed end; run change-reachable push validation and the complete immutable checkpoint as required; commit explicit owned paths, push, create/update one cost-first PR with results, limits, ownership and ID allocations; follow actual hosted CI results asynchronously. Keep pending and passed distinct, and sync beads.
 
 ## Notes
 
-Precommit review (uncommitted Python/YAML/Markdown): root and independent max reviewers GO. Design: one optional stopped-only certification debt field, no new session state, no borrowed pass, no dropped gate. Existing persisted records retain old behavior; schema/checker/docs update together, no compatibility shim. Low diagnostic wording issue fixed to quench wall budget; two historical-pending/docstring inconsistencies fixed after high169s prose review. Focused64tests pass9.78s; Ruff/types/schema/ledger/synopsis/rules checks pass. Cost snapshot refreshed through23:38:23 in49.24wall32.61user3.07sys, now5.92recursive-agent hours over2.69h interval; explicitly includes post-freeze operations without extendingresearchclock. Generatedviews refreshed and Flowmark passed. Editgate99712 running on frozen sources; commit/push then currentCI/fullcoverage remain. No scientificinvocation.
+Published91b77ab1 at23:53UTC on existing draftPR116 under user instruction not to wait on long tools; required push14890 was already running and remains explicitly pending. It selected all non-exhaustive pytest via incoming dependency changes (PID45512 observedworking at96.6% CPU), not a short reachable subset; no source edits while active. Main373beb integrated and dependenciesaligned. PRbody refreshed with actualcost, currentIDs, reviewed repairs and pendingstatuses. Hostedfast34171519040 inprogress; deferreddispatch34171566965 actuallycreated23:54:20 targetsPR116merge-ref (verify checkout identity; metadataheadis main). Priorfull71633finishedFAILED and neverborrowed. H125originalprotocolallowsfullasync, but actualenginepush+freshcommittedprotocolchecks/review/publicationstillrequired beforefirstinvocation; none yet. Close contract/diagnostics implementationbeads; primarypublication/failurecoveragebeadsremainactive.
