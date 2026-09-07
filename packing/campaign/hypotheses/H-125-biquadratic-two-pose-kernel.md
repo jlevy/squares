@@ -55,34 +55,38 @@ hypothesis:
 ---
 # H125 — One Biquadratic Kernel Family
 
-This is the concrete first family under
-[H114](H-114-two-pose-kernel-exclusion.md), not a claim about all two-pose kernels.
-The [feature design](../series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md#the-sole-proposed-family)
-fixes the order and coefficient blocks. With centered coordinates $u,v$, its features
-are $z=(1,u^2+v^2,u^2v^2,\cos4\theta)$, the three scalar features
-$\sin4\theta$, $u^2-v^2$, $uv$, and vector copies $(u,v)$ and $(uv^2,u^2v)$.
-The positive-semidefinite blocks are a symmetric $4\times4$ matrix $A$, three
-nonnegative scalars, and $B\otimes I_2$ for a symmetric $2\times2$ matrix $B$.
+This is the concrete first family under [H114](H-114-two-pose-kernel-exclusion.md), not
+a claim about all two-pose kernels.
+The
+[feature design](../series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md#the-sole-proposed-family)
+fixes the order and coefficient blocks.
+With centered coordinates $u,v$, its features are $z=(1,u^2+v^2,u^2v^2,\cos4\theta)$,
+the three scalar features $\sin4\theta$, $u^2-v^2$, $uv$, and vector copies $(u,v)$ and
+$(uv^2,u^2v)$. The positive-semidefinite blocks are a symmetric $4\times4$ matrix $A$,
+three nonnegative scalars, and $B\otimes I_2$ for a symmetric $2\times2$ matrix $B$.
 
-The first proposed test can only refute this family. It uses a finite set of exact
-axis-aligned poses and an outer LP relaxation of the PSD conditions. Its separate
-reader must reconstruct containment, compatibility, weights and projected matrices
-from the fixed source. Exact normalization and PSD imply
-$b\ge1+\sum\beta$; a value at least eleven is a family obstruction.
-The [independent admission](../series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md#post-freeze-admission-the-finite-lp-instrument)
+The first proposed test can only refute this family.
+It uses a finite set of exact axis-aligned poses and an outer LP relaxation of the PSD
+conditions. Its separate reader must reconstruct containment, compatibility, weights and
+projected matrices from the fixed source.
+Exact normalization and PSD imply $b\ge1+\sum\beta$; a value at least eleven is a family
+obstruction. The
+[independent admission](../series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md#post-freeze-admission-the-finite-lp-instrument)
 retains the block-trace factor, sparse-support semantics and required refusal controls.
 
 The source-free instruments and their independent reviews are complete; engine
-`d6f0c403` passed its immutable push gate. The prospective
+`d6f0c403` passed its immutable push gate.
+The prospective
 [exp129](../series/series-000-smoke-and-calibration/experiments/exp-129-h125-finite-kernel-obstruction.md)
-did not launch: its protocol checks failed a stale documentation-control anchor,
-and the22:20 UTC launch cutoff passed. Its zero scientific time and blocked guard
-do not refute this family. Instrument readiness remains true; a fresh operational
-allocation, passing record checks and published admission are required before the
-still-unspent first invocation. The full engine checkpoint remains separate.
+did not launch: its protocol checks failed a stale documentation-control anchor, and
+the22:20 UTC launch cutoff passed.
+Its zero scientific time and blocked guard do not refute this family.
+Instrument readiness remains true; a fresh operational allocation, passing record checks
+and published admission are required before the still-unspent first invocation.
+The full engine checkpoint remains separate.
 
-No target has run. A finite LP feasible point is not a PSD kernel candidate, and
-even a PSD candidate would still need full-domain sign and diagonal verification.
+No target has run. A finite LP feasible point is not a PSD kernel candidate, and even a
+PSD candidate would still need full-domain sign and diagonal verification.
 Neither a refutation here nor an inconclusive run changes the published packing bound.
 
 <!-- This document follows common-doc-guidelines.md.

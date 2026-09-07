@@ -141,8 +141,8 @@ The generated ledger currently derives fourteen confirmed hypotheses, thirteen r
 hypotheses, one open hypothesis, twenty-three open questions, and forty-one blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
-invocation; this does not refute its claim. No hypothesis is running or waiting on
-review and six are unresolved.
+invocation; this does not refute its claim.
+No hypothesis is running or waiting on review and six are unresolved.
 H-124’s fixed-square screen found no pair; its witness-only reader was not invoked.
 H-105 is refuted: all 134 eligible candidate pairs are separated.
 Exp128 subsequently settled H-099’s entire fixed support at optimum eleven through seven
@@ -631,20 +631,25 @@ Session 089 retains the finite-row density candidate, its complete pair exclusio
 exact-angle auxiliary result, and the next complete-method assessments.
 
 **Selected next entry:** `think-mq0d` retains BC-264’s disposition after the completed
-H114 feature and kernel-contract pricing. Exp129 missed its launch cutoff; its
-expired allocation cannot authorize a scientific invocation.
+H114 feature and kernel-contract pricing.
+Its immediate prerequisite is the stopped Session097 checkpoint’s operational
+certification and draft publication.
+Exp129 missed its launch cutoff; its expired allocation cannot authorize a scientific
+invocation.
 
 [Session097](packing/campaign/agent-sessions/session-097-kernel-contract-and-feature-pricing.md)
-completed that pricing on `codex/n11-kernel-pricing`, following the user's request
-to continue. Independent reviews accept an exact obstruction to cubic center features
-and the design of a finite test for one richer family. Independent source-free code
-reviews admit its LP proposer and exact reader; all 75 controls passed.
+completed that pricing on `codex/n11-kernel-pricing`, following the user’s request to
+continue. Independent reviews accept an exact obstruction to cubic center features and
+the design of a finite test for one richer family.
+Independent source-free code reviews admit its LP proposer and exact reader; all 75
+controls passed.
 [Exp129](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-129-h125-finite-kernel-obstruction.md)
-closed as blocked when protocol admission was incomplete at the September 7,
-22:20 UTC launch cutoff. The engine push passed, but the protocol records and push
-checks failed on a stale round-count control anchor. No scientific source or packet
-was constructed, no target solver ran, and no result directory was created;
-scientific execution time is zero.
+closed as blocked when protocol admission was incomplete at the September 7, 22:20 UTC
+launch cutoff.
+The engine push passed, but the protocol records and push checks failed on
+a stale round-count control anchor.
+No scientific source or packet was constructed, no target solver ran, and no result
+directory was created; scientific execution time is zero.
 The dependency guard gives no mathematical verdict on H125 or continuum certificate.
 Its new checkpoint is separate from the completed eight-active-hour block.
 
@@ -673,12 +678,13 @@ support, but a new undercovered pose would reject only that density.
 Session097 completed the selected BC-264 pricing and kernel-specific BC-260 review.
 Its reviewed source-free instrument targets the fixed family in H125: an exact finite
 obstruction would reject that family, while feasibility of the outer LP proves nothing
-about a complete kernel. Exact PSD evidence and complete pair-domain verification
-remain prerequisites for a positive continuum certificate at side $96/25$.
-H101’s stronger common-support obstruction is a conditional fallback, with no candidate
-asserted. Exp129’s blocked, never-invoked outcome is retained in Session097.
-Any future scientific attempt needs a fresh bounded allocation and admission;
-repairing the publication control does not reopen exp129.
+about a complete kernel.
+Exact PSD evidence and complete pair-domain verification remain prerequisites for a
+positive continuum certificate at side $96/25$. H101’s stronger common-support
+obstruction is a conditional fallback, with no candidate asserted.
+Exp129’s blocked, never-invoked outcome is retained in Session097. Any future scientific
+attempt needs a fresh bounded allocation and admission; repairing the publication
+control does not reopen exp129.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
 `think-9qrx`, completed the user-approved research block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
@@ -701,8 +707,9 @@ Exp-123 accepts complete near45 localization through four exact continuous guard
 the reviewed geometric reduction.
 The fixed-S H-124 screen found no witness without certifying continuous coverage; the
 broader bound is unchanged.
-At Session090's earlier allocation, H-107’s reviewed fixed-site scalar protocol was held out of that two-hour block under
-paused `think-7fec`; later-session reconsideration preserves its unlaunched history.
+At Session090’s earlier allocation, H-107’s reviewed fixed-site scalar protocol was held
+out of that two-hour block under paused `think-7fec`; later-session reconsideration
+preserves its unlaunched history.
 The freed attention went to a bounded conditional-compatibility assessment from the
 accepted A-point lemmas, not an automatic P12 repair.
 Full validation of research checkpoint `99a3ad42` passed;
@@ -3204,8 +3211,8 @@ There are 85 rounds registered in `series-000`.
 
 They record 2152.1 agent-minutes and 1223.3 wall-minutes.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
-time; its source-free development and review costs belong to Session097.
-Exp-114 completed its one target and independent replay.
+time; its source-free development and review costs belong to Session097. Exp-114
+completed its one target and independent replay.
 Reader development costs are recorded separately from those process times.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
 result; exp-057 stopped before target access; exp-058 stopped on the review it was

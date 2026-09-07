@@ -40,12 +40,14 @@ states the proof obligations and stop conditions.
 [Agenda 027](../agendas/agenda-027-compatibility-and-restricted-families.md) keeps the
 pilot independent of success on the angle-family theorem.
 
-Session095 selected BC264's bounded pricing. Session097 completed it with an
+Session095 selected BC264’s bounded pricing.
+Session097 completed it with an
 [exact cubic-feature obstruction](../series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md#an-exact-obstruction-before-any-solver)
 and an independently admitted eleven-feature proposal.
-The obstruction excludes center-polynomial restrictions of total degree at most three
-on one fixed-angle fiber, not all finite features or H114 itself.
-The [independent admission](../series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md#post-freeze-admission-the-finite-lp-instrument)
+The obstruction excludes center-polynomial restrictions of total degree at most three on
+one fixed-angle fiber, not all finite features or H114 itself.
+The
+[independent admission](../series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md#post-freeze-admission-the-finite-lp-instrument)
 permits a source-free finite refutational LP instrument and a separate exact reader.
 No target has been admitted.
 
@@ -55,8 +57,8 @@ It does not need a continuum verifier because it rejects that family.
 A positive full-domain certificate still needs exact PSD evidence and complete diagonal
 and compatible-pair coverage; that continuum cost remains unknown.
 
-A sampled PSD matrix is only a proposal, and feasibility of the weaker outer LP does
-not even establish PSD or supply a kernel candidate.
+A sampled PSD matrix is only a proposal, and feasibility of the weaker outer LP does not
+even establish PSD or supply a kernel candidate.
 Acceptance requires exact positive semidefiniteness and inequalities on the full
 diagonal and compatible-pair domains.
 An exact finite necessary-constraint obstruction can reject the chosen feature family;

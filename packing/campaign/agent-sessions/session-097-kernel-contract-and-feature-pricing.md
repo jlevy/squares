@@ -519,26 +519,27 @@ session:
   - The privacy-reduced active-task receipt through22:33:04 UTC completed with exit0 in70.55 external wall seconds (33.13 user,3.35 system). It remains a lower bound excluding later finalization; scientific time is not substituted for the cost of development, review or validation.
   - Actual PR116 engine workflow34166034785 failed validate only because the published Session097 still had phase4 active after its deadline; all163 anchors passed. Sweeps correctness passed but58.38s was below the old107.05s baseline's stale band. Suite, geometry, macOS and mergeability passed; full/deferred jobs were skipped. Think-c03a owns a six-sample baseline refresh, not weaker checks or a speedup claim.
   stop_reason: Bounded research and record writers are stopped at the final checkpoint freeze; the scientific guard is terminal and corrected validation/publication are pending under think-m2lx. No passing full gate or successful session completion is claimed.
-  next_action: Complete the separately tracked operational validation/publication of this frozen checkpoint on PR116, retaining actual failures or pending results. Only a new explicit allocation after the guards pass may admit the unspent first scientific invocation.
+  next_action: Continue BC-264 under think-mq0d by resolving the operational certification and draft-publication prerequisites retained in this record. Preserve every pending or failed result; only a new explicit allocation after those guards pass may admit the unspent first scientific invocation.
 ---
 # Kernel Contract and Feature Pricing
 
 The user asked to continue after the previous research block had closed.
-This session resumes the selected [BC264 handoff](../agendas/agenda-027-compatibility-and-restricted-families.md#session095-selection-and-parallel-handoff)
-for [H114](../hypotheses/H-114-two-pose-kernel-exclusion.md)
-on `codex/n11-kernel-pricing`, based on landed main `4620e483`.
-The workflow entry is W3, `insight-iteration`; the independent correctness review
-supports that design and receives a separate admission step before any target.
-PSD means positive semidefinite: every finite quadratic form associated with the
-kernel is nonnegative. The independent review defines the exact normalization and
-the geometric domain. Record validation runs after all report writers stop.
+This session resumes the selected
+[BC264 handoff](../agendas/agenda-027-compatibility-and-restricted-families.md#session095-selection-and-parallel-handoff)
+for [H114](../hypotheses/H-114-two-pose-kernel-exclusion.md) on
+`codex/n11-kernel-pricing`, based on landed main `4620e483`. The workflow entry is W3,
+`insight-iteration`; the independent correctness review supports that design and
+receives a separate admission step before any target.
+PSD means positive semidefinite: every finite quadratic form associated with the kernel
+is nonnegative. The independent review defines the exact normalization and the geometric
+domain. Record validation runs after all report writers stop.
 
 The owning bead was created at the session start above.
 The first slice and delegation scopes were declared there and in the dispatch prompts
-before the reports were written. The rounded `20:57:00` delegation times identify
-the allocated window, not measured worker starts; each terminal receipt will retain
-its actual observed start and end. Earlier orientation and upstream maintenance are
-outside this session's cost interval.
+before the reports were written.
+The rounded `20:57:00` delegation times identify the allocated window, not measured
+worker starts; each terminal receipt will retain its actual observed start and end.
+Earlier orientation and upstream maintenance are outside this session’s cost interval.
 
 ## Checkpoint Plan
 
@@ -550,85 +551,136 @@ outside this session's cost interval.
 | Integration and independent checkpoint review | Originally end by22:41:47.766; research disposition completed before22:35 | Stop writers, reconcile hypotheses and agenda at their established scope, regenerate views, validate on an immutable commit and update the single PR. The full checkpoint runs asynchronously; its observed baseline cost exceeds the closing reserve. |
 | Finalization | Actual22:35:56–22:50:56; original window22:41:47.766–22:56:47.766 shortened | Preserve the measured cost, actual validation verdicts, remaining dependencies and next entry. The15-minute cap and every prior research cap are unchanged. Long hosted checks remain asynchronous obligations. |
 
-These are future ceilings, not time to consume. At each boundary the coordinator
-compares observed command and delegated time with the remaining critical path and
-revises only future slices. The first useful completed block opens the PR; later
-checkpoints update it. No old experiment or funding cap is reopened.
+These are future ceilings, not time to consume.
+At each boundary the coordinator compares observed command and delegated time with the
+remaining critical path and revises only future slices.
+The first useful completed block opens the PR; later checkpoints update it.
+No old experiment or funding cap is reopened.
 
 The first pricing work finished at 21:23:55 UTC. Its receipt reached the coordinator
 after context compaction at 21:28:25; that recording delay did not extend the slice.
-The next source-free build was dispatched at 21:30, with separate 27-minute author
-and reader caps. Their common wire format carries exact rational source poses,
-nonnegative diagonal and pair weights, and the claimed objective bound. The required
-reader contract reconstructs the projected matrices and checks rational positive
-semidefiniteness; it must not trust the producer's floating-point dual or PSD claims.
-Its scientific entry point must fix the source at side 96/25 and threshold eleven.
-Synthetic controls require an explicitly separate source-bound API. These are build
-requirements, not claims that the unfinished implementations already satisfy them.
+The next source-free build was dispatched at 21:30, with separate 27-minute author and
+reader caps. Their common wire format carries exact rational source poses, nonnegative
+diagonal and pair weights, and the claimed objective bound.
+The required reader contract reconstructs the projected matrices and checks rational
+positive semidefiniteness; it must not trust the producer’s floating-point dual or PSD
+claims. Its scientific entry point must fix the source at side 96/25 and threshold
+eleven. Synthetic controls require an explicitly separate source-bound API. These are
+build requirements, not claims that the unfinished implementations already satisfy them.
 The future phase ceiling was raised from five to six at this checkpoint to allow a
-separate finalization record. The wall deadline and all previous caps are unchanged.
+separate finalization record.
+The wall deadline and all previous caps are unchanged.
 
 ## Ownership and Recovery
 
-The coordinator owns Session097, shared records, mathematical admission, commits and
-the PR. The max-thinking agents have frozen their separate BC264 reports, instruments
-and cross-reviews. Any further assignment has its own scope and deadline. The high-thinking
-mechanical audit, `think-bpym`, completed in 250 seconds, before its 21:10 deadline.
-Mechanical implementation and editorial follow-ups use high or extra-high reasoning;
-mathematical construction and independent soundness judgments use max.
+The coordinator owns Session097, shared records, mathematical admission, commits and the
+PR. The max-thinking agents have frozen their separate BC264 reports, instruments and
+cross-reviews. Any further assignment has its own scope and deadline.
+The high-thinking mechanical audit, `think-bpym`, completed in 250 seconds, before its
+21:10 deadline.
+Mechanical implementation and editorial follow-ups use high or extra-high
+reasoning; mathematical construction and independent soundness judgments use max.
 
-Session097 was absent from main and the complete trees of open PRs 110, 111 and 114
-at the ownership check. The subsequent source-free build checkpoint registers H125
-from a dated X017 follow-up, using the next available hypothesis ID from the complete
-21:18 inventory of main and open PR110/111/114/115. The fresh 22:00:19 check precedes
-the complete exp129 allocation. No new exploration, agenda or BC ID is allocated.
-Next candidates are exp130, Session099, X019, BC283 and Agenda029,
-not reserved ranges. Subsequent IDs need a fresh ownership check and a complete record.
+Session097 was absent from main and the complete trees of open PRs 110, 111 and 114 at
+the ownership check.
+The subsequent source-free build checkpoint registers H125 from a dated X017 follow-up,
+using the next available hypothesis ID from the complete 21:18 inventory of main and
+open PR110/111/114/115. The fresh 22:00:19 check precedes the complete exp129
+allocation. No new exploration, agenda or BC ID is allocated.
+Next candidates are exp130, Session099, X019, BC283 and Agenda029, not reserved ranges.
+Subsequent IDs need a fresh ownership check and a complete record.
 PR110 reserves BC269–282 and leaves BC264 to this owner.
-The22:32 audit found PR110 had resolved its Session096 collision by taking
-Session098. PR111's remote head now instead carries an atlas Session097, which
-collides with this branch's already published Session097. The incoming owner retains
-its work and must rekey that record before integration; this branch does not overwrite
-it, renumber its own published session or merge unlanded code. Main remainsa5e9dbfd.
+The22:32 audit found PR110 had resolved its Session096 collision by taking Session098.
+PR111’s remote head now instead carries an atlas Session097, which collides with this
+branch’s already published Session097. The incoming owner retains its work and must
+rekey that record before integration; this branch does not overwrite it, renumber its
+own published session or merge unlanded code.
+Main remainsa5e9dbfd.
 
-On interruption, first read this session, `think-c53m` and `think-mq0d`, and check
-each author's freeze status. Preserve first-pass independence: an unfinished author
-must not read the parallel report. Once both reports are frozen, the coordinator
-and assigned reviewer may read them together. Preserve their original deadlines.
-The implementation slice has a new independence boundary: neither author may read
-the other implementation until both source/test drafts have separately frozen.
+On interruption, first read this session, `think-c53m` and `think-mq0d`, and check each
+author’s freeze status.
+Preserve first-pass independence: an unfinished author must not read the parallel
+report.
+Once both reports are frozen, the coordinator and assigned reviewer may read them
+together. Preserve their original deadlines.
+The implementation slice has a new independence boundary: neither author may read the
+other implementation until both source/test drafts have separately frozen.
 The earlier report freezes do not satisfy that code-review gate.
-The branch's earlier experiments are terminal and must not be repeated.
-The unrestricted packing bound remains unchanged unless a complete independently
-checked certificate establishes otherwise.
+The branch’s earlier experiments are terminal and must not be repeated.
+The unrestricted packing bound remains unchanged unless a complete independently checked
+certificate establishes otherwise.
 
 ## Launch Disposition and Next Allocation
 
 Exp129 did not run. The immutable engine and independent code/protocol reviews passed,
-but the committed protocol's records and push gates failed a stale documentation
-control. The fixed22:20 launch cutoff passed; correcting the anchor later does not
-extend it. There is no target output directory, numerical result or H125 refutation.
-All gate, build and review costs remain part of this session; only scientific wall
-time is zero. The full immutable engine gate and corrected disposition checks are
-separate checkpoint obligations.
+but the committed protocol’s records and push gates failed a stale documentation
+control.
+The fixed22:20 launch cutoff passed; correcting the anchor later does not extend
+it. There is no target output directory, numerical result or H125 refutation.
+All gate, build and review costs remain part of this session; only scientific wall time
+is zero. The full immutable engine gate and corrected disposition checks are separate
+checkpoint obligations.
 
 The selected next entry remains BC264 under `think-mq0d`: resolve and validate the
-specific administrative blocker, then decide a fresh bounded **first invocation** of
-the unchanged instrument. The old protocol and no-invocation outcome stay in history.
-No new target is authorized by this handoff alone. A future allocation must be
-prospective, sufficiently funded, published and explicit about its new lease and
-launch deadline. It must not repeat or revive any already executed experiment.
+specific administrative blocker, then decide a fresh bounded **first invocation** of the
+unchanged instrument.
+The old protocol and no-invocation outcome stay in history.
+No new target is authorized by this handoff alone.
+A future allocation must be prospective, sufficiently funded, published and explicit
+about its new lease and launch deadline.
+It must not repeat or revive any already executed experiment.
 
 After an actual finite result, compare the kernel route with the retained alternatives.
 An exact obstruction retires only the certified family; an inconclusive LP or failed
 rationalization supplies no PSD candidate and earns no continuum implementation.
-Increasing degree is not the default. The independent H101 route earns its retained
-30-minute admission review only from an exact candidate pose and a priced complete
-cover proving avoidance of the common occupied support of all eight packings.
-Avoiding calibration boxes alone is insufficient. Its conditional mass89/8 payoff
-would concern an expanded-support dual, not an improved packing lower bound.
+Increasing degree is not the default.
+The independent H101 route earns its retained 30-minute admission review only from an
+exact candidate pose and a priced complete cover proving avoidance of the common
+occupied support of all eight packings.
+Avoiding calibration boxes alone is insufficient.
+Its conditional mass89/8 payoff would concern an expanded-support dual, not an improved
+packing lower bound.
 Neither that candidate nor a new continuum-checkable kernel is supplied here.
 External BC261/273 ownership is unchanged.
+
+## Post-Freeze Operational Follow-Up
+
+The13b5f454 push gate finished after the research freeze:550.25 seconds gate wall,
+557.13 external wall,223.45 user and36.86 system.
+It failed three steps.
+The terminal next action lacked an explicit bead, and the session lacked a canonical
+declaration of a certifying fast/full gate.
+The reachable negative control failed on that same missing handoff bead;681 tests
+passed, one failed and three were deselected in219.30 seconds.
+The handoff pointer is corrected above.
+The outstanding certification requirement is retained, not bypassed.
+
+An independent max review under `think-9cvw`,22:57:24–22:59:39 UTC (135 seconds),
+rejected using the old docs-only `c3a4e8ec` pass as certification of the later
+instrument. The canonical declaration’s meaning is stronger than the checker’s ancestor
+test; a qualifying note would not change what the checker counts as certified.
+Keep that pass as ordinary history.
+The full `d6f0c403` checkpoint is still pending, and no new fast/full pass is asserted.
+
+The local pre-commit hook was absent.
+A high-thinking operational follow-up under `think-rice`,22:48:14–22:48:54 UTC (40
+seconds), restored the documented pinned Lefthook2.1.10 hook without overwriting an
+active hook. Its executable and shell syntax were checked.
+After the clean-revision gate ended, the whole-repository Flowmark pass normalized ten
+owned Markdown files and its check passed.
+Archived source and generated views retained their exclusions.
+Earlier commits are not claimed to have been automatically formatted.
+
+These are post-freeze operational receipts, not resumed research or extensions of the
+session’s deadlines.
+Draft publication preserves the incomplete checkpoint; it does not certify a handover or
+establish merge readiness.
+Under OR-15, any repair for representing stopped-but-uncertified work belongs in a
+separately allocated efficiency block with independent contract review and tests.
+Do not reactivate this session, borrow an old pass, omit a failing check or relabel a
+partial suite as fast/full.
+`think-m2lx` owns the unresolved publication and certification work; `think-9cvw`
+retains the contract diagnosis.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

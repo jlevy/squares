@@ -470,13 +470,14 @@ agenda:
 
 **Selected work has executed; the rest requires its own allocation.** Session095
 completed BC259’s independent support-ceiling adoption and BC265’s comparative design.
-Session097 completed BC264's pricing: a cubic-feature obstruction is proved and a
-fixed eleven-feature family has independently reviewed finite instruments with75
-source-free controls. Exp129 did not launch because its protocol checks had not
-passed by the launch cutoff; both ultimately failed a stale documentation-control
-anchor. H125 remains untested and both scientific allowances are unspent. A feasible LP would remain
-inconclusive. The next admission must use a fresh allocation after the checkpoint
-checks pass, preserving the original non-invocation rather than extending its clock.
+Session097 completed BC264’s pricing: a cubic-feature obstruction is proved and a fixed
+eleven-feature family has independently reviewed finite instruments with75 source-free
+controls. Exp129 did not launch because its protocol checks had not passed by the launch
+cutoff; both ultimately failed a stale documentation-control anchor.
+H125 remains untested and both scientific allowances are unspent.
+A feasible LP would remain inconclusive.
+The next admission must use a fresh allocation after the checkpoint checks pass,
+preserving the original non-invocation rather than extending its clock.
 [X-017](../explorations/X-017-compatibility-and-complete-case-covers.md) owns the
 critical assessment, mathematical distinctions, and complete source-to-record map.
 This agenda owns the prospective actions.

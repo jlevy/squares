@@ -80,81 +80,93 @@ experiment:
 ---
 # exp129 — One Finite Kernel-Family Obstruction Test
 
-This is a prospective test of [H125](../../../hypotheses/H-125-biquadratic-two-pose-kernel.md),
-not a positive kernel certificate or a packing-bound search.
-No scientific source, solver target or target packet has been constructed at registration.
-The [feature design and reader review](../results/agenda-027/bc-264-kernel-feature-design.md)
-and [kernel contract and producer review](../results/agenda-027/bc-264-kernel-acceptance-review.md)
+This is a prospective test of
+[H125](../../../hypotheses/H-125-biquadratic-two-pose-kernel.md), not a positive kernel
+certificate or a packing-bound search.
+No scientific source, solver target or target packet has been constructed at
+registration. The
+[feature design and reader review](../results/agenda-027/bc-264-kernel-feature-design.md)
+and
+[kernel contract and producer review](../results/agenda-027/bc-264-kernel-acceptance-review.md)
 accept only this fixed finite refutational route.
-The source-free build's75 controls do not measure H125.
+The source-free build’s75 controls do not measure H125.
 
 ## Disposition: No Scientific Invocation
 
-The launch guard failed. Engine `d6f0c403` passed its immutable push gate in
-261.31 seconds and was published on PR116. The independent code and protocol reviews
-were GO. Prospective protocol `424adf85`, however, failed its records gate in
-170.62 seconds and its push gate in 396.61 seconds (403.25 external wall).
-Both failed only the control anchor that still expected “There are 84 rounds” after
-the synopsis correctly counted85. The push's645 reachable tests passed; three were
-deselected. Neither a passing subset nor a later correction satisfies the original
-22:20 UTC launch cutoff.
+The launch guard failed.
+Engine `d6f0c403` passed its immutable push gate in 261.31 seconds and was published on
+PR116. The independent code and protocol reviews were GO. Prospective protocol
+`424adf85`, however, failed its records gate in 170.62 seconds and its push gate in
+396.61 seconds (403.25 external wall).
+Both failed only the control anchor that still expected “There are 84 rounds” after the
+synopsis correctly counted85. The push’s645 reachable tests passed; three were
+deselected. Neither a passing subset nor a later correction satisfies the original 22:20
+UTC launch cutoff.
 
 No scientific source, solver target, output directory, packet or reader was invoked.
 Scientific wall time is zero; validation and coordination cost belongs to Session097.
 The full engine checkpoint was still pending when this disposition was recorded.
 This is an operational block, not a numerical failure or a refutation of H125.
 
-The original protocol below is retained unchanged as planning history. Its clock and
-lease are expired. A future first invocation requires a new explicit sufficient
-allocation, passing record checks, a renewed operational lease and publication of
-the new admission before launch. It must preserve the unspent fixed source and
-once-only acceptance contract unless a separately justified claim is registered.
+The original protocol below is retained unchanged as planning history.
+Its clock and lease are expired.
+A future first invocation requires a new explicit sufficient allocation, passing record
+checks, a renewed operational lease and publication of the new admission before launch.
+It must preserve the unspent fixed source and once-only acceptance contract unless a
+separately justified claim is registered.
 Do not silently restart this expired allocation or borrow finalization time.
 
 ## Admission Before Invocation
 
 Engine `d6f0c403` contains the frozen producer, separate exact reader and three
-source-free test files. It differs from code commit `5336a518` only in the rendered
-session ledger. The first engine gate may therefore expose that corrected ledger
-drift; an actual passing required gate on the executed immutable revision is still
-required. The previous docs-only PR116 gate is not an instrument gate.
+source-free test files.
+It differs from code commit `5336a518` only in the rendered session ledger.
+The first engine gate may therefore expose that corrected ledger drift; an actual
+passing required gate on the executed immutable revision is still required.
+The previous docs-only PR116 gate is not an instrument gate.
 
-Before launching, record the completed independent protocol review, passing engine
-push, passing checks of this committed prospective record, its publication on PR116,
-and the actual engine/protocol revisions. `selftest_passed` refers to the completed
-source-free controls, not pending whole-checkpoint validation.
+Before launching, record the completed independent protocol review, passing engine push,
+passing checks of this committed prospective record, its publication on PR116, and the
+actual engine/protocol revisions.
+`selftest_passed` refers to the completed source-free controls, not pending
+whole-checkpoint validation.
 The full gate remains a separate checkpoint obligation and may run asynchronously.
 Any unsatisfied prerequisite at the launch cutoff means no invocation, zero scientific
-wall time and an explicit blocked guard outcome. Do not borrow finalization time.
+wall time and an explicit blocked guard outcome.
+Do not borrow finalization time.
 
-Run from the clean immutable engine checkout's `packing/` directory, with its `src`
+Run from the clean immutable engine checkout’s `packing/` directory, with its `src`
 first on `PYTHONPATH` and the locked project interpreter supplying dependencies.
-Do not run from the coordinator's changing worktree or import an archived executable.
+Do not run from the coordinator’s changing worktree or import an archived executable.
 The complete fixed source must be reconstructed by each actually invoked scientific
-process. Those two constructions are the separately admitted producer and reader,
-not permission for an additional source probe or exploratory solve.
+process. Those two constructions are the separately admitted producer and reader, not
+permission for an additional source probe or exploratory solve.
 
 ## Output and Process Contract
 
 Resolve the declared repository-relative result directory against
-`/Users/levy/wrk/github/squares`, not the immutable engine checkout's working directory.
-This is the same root used by the reader's absolute input path below.
-Exclusively create that result directory with `mkdir`, without `-p`; an
-existing directory refuses launch. Use shell no-clobber mode for every output stream.
+`/Users/levy/wrk/github/squares`, not the immutable engine checkout’s working directory.
+This is the same root used by the reader’s absolute input path below.
+Exclusively create that result directory with `mkdir`, without `-p`; an existing
+directory refuses launch.
+Use shell no-clobber mode for every output stream.
 The directory is a live attempt record, not an atomically published claim of completion.
-Retain producer stdout in `producer.json`, stderr and external wall/user/system time
-in `producer.log`, and the actual tool exit in the outcome record.
-Empty or partial output remains evidence. Never truncate or regenerate it.
+Retain producer stdout in `producer.json`, stderr and external wall/user/system time in
+`producer.log`, and the actual tool exit in the outcome record.
+Empty or partial output remains evidence.
+Never truncate or regenerate it.
 There are no repository-integrity hash manifests.
 
-The producer command is fixed in the frontmatter. It calls HiGHS once and attempts
-one bounded rationalization. Its internal30-second limit excludes startup and tail;
-the external60-second TERM and two-second KILL grace cover the entire child.
-Use the fixed one-thread environment for both calls. No loop, second solve, changed
-denominator or source expansion follows a numerical or exact-check failure.
+The producer command is fixed in the frontmatter.
+It calls HiGHS once and attempts one bounded rationalization.
+Its internal30-second limit excludes startup and tail; the external60-second TERM and
+two-second KILL grace cover the entire child.
+Use the fixed one-thread environment for both calls.
+No loop, second solve, changed denominator or source expansion follows a numerical or
+exact-check failure.
 
-Only if the producer actually exits zero and its intact seven-key packet has a
-canonical rational `bound >= 11` may the independent reader run once:
+Only if the producer actually exits zero and its intact seven-key packet has a canonical
+rational `bound >= 11` may the independent reader run once:
 
 ```bash
 /usr/bin/time -p /opt/homebrew/bin/timeout --signal=TERM --kill-after=2s 60s \
@@ -166,7 +178,8 @@ canonical rational `bound >= 11` may the independent reader run once:
 ```
 
 Keep its stdout in `verification.json` and stderr/timing in `verification.log`, also
-with exclusive creation. Do not create reader output paths unless the reader runs.
+with exclusive creation.
+Do not create reader output paths unless the reader runs.
 Checking retained producer bytes to decide this trigger is not a new source or solver
 invocation; it cannot supply mathematical acceptance in place of the independent reader.
 
@@ -179,39 +192,42 @@ These arithmetic limits supplement, not replace, the whole-child supervision.
 
 Acceptance requires actual reader exit zero and all of these positive predicates:
 `status=verified_objective_bound`, `source=five-tight-axis-grids-v1`, `side=96/25`,
-`minimum_bound=11`, exact `bound >= 11`, literal `projected_psd_verified=true`,
-literal `scientific_family_refuted=true` and literal `new_packing_bound=false`.
-Require complete source, pose/pair counts and projected-rank metadata consistent with
-the fixed instrument; the reader reconstructs all geometry and matrices itself.
-`pose_count` must equal the length of the packet's complete `poses` inventory;
+`minimum_bound=11`, exact `bound >= 11`, literal `projected_psd_verified=true`, literal
+`scientific_family_refuted=true` and literal `new_packing_bound=false`. Require complete
+source, pose/pair counts and projected-rank metadata consistent with the fixed
+instrument; the reader reconstructs all geometry and matrices itself.
+`pose_count` must equal the length of the packet’s complete `poses` inventory;
 `pair_count` must equal `len(beta)`, its positive sparse proof support, not the number
-of compatible rows considered by the proposer. `projected_ranks` contains the exact
-ranks of the reconstructed $4\times4$ and $2\times2$ blocks, respectively.
+of compatible rows considered by the proposer.
+`projected_ranks` contains the exact ranks of the reconstructed $4\times4$ and
+$2\times2$ blocks, respectively.
 Unknown or missing acceptance fields prevent promotion.
 
-The reader checks $\alpha\ge0$, $\sum\alpha=1$, positive sparse compatible-pair
-weights $\beta$, and exact PSD of the reconstructed invariant matrices and scalars.
-The full vector-block trace is retained. Hence every kernel in H125 obeys
-$b\ge1+\sum\beta\ge11$. Record H125 as rejected and the obstruction question as
-`criterion_met` only after that independent acceptance; then the outcome assurance
-may become `verified` with `exact-algebraic` method. Preserve the numerical proposer
-provenance in this protocol and the retained receipt.
+The reader checks $\alpha\ge0$, $\sum\alpha=1$, positive sparse compatible-pair weights
+$\beta$, and exact PSD of the reconstructed invariant matrices and scalars.
+The full vector-block trace is retained.
+Hence every kernel in H125 obeys $b\ge1+\sum\beta\ge11$. Record H125 as rejected and the
+obstruction question as `criterion_met` only after that independent acceptance; then the
+outcome assurance may become `verified` with `exact-algebraic` method.
+Preserve the numerical proposer provenance in this protocol and the retained receipt.
 
 A producer packet below eleven, outer-LP feasibility, solver failure or failed
-rationalization leaves H125 unresolved. It supplies no PSD candidate, LP-optimality
-claim or positive continuum certificate. Do not invoke the reader for a bound below
-eleven. Any timeout, malformed packet or reader refusal also remains unresolved;
-retain the actual stage, exit, partial output and wall/user/system times.
-Remove the lease and record every terminal outcome. A timebox outcome names these
-retained artifacts in `resume_from` while explicitly prohibiting an unchanged retry.
+rationalization leaves H125 unresolved.
+It supplies no PSD candidate, LP-optimality claim or positive continuum certificate.
+Do not invoke the reader for a bound below eleven.
+Any timeout, malformed packet or reader refusal also remains unresolved; retain the
+actual stage, exit, partial output and wall/user/system times.
+Remove the lease and record every terminal outcome.
+A timebox outcome names these retained artifacts in `resume_from` while explicitly
+prohibiting an unchanged retry.
 
 No outcome here rejects H114 as a whole, establishes Trump optimality, certifies a
 candidate kernel, improves the published lower bound or permits feature expansion.
-BC264's next decision must compare this family-scoped result with the retained
+BC264’s next decision must compare this family-scoped result with the retained
 alternative agendas rather than automatically raising degree.
 
-The complete22:00:19 UTC ownership audit found exp129 absent from landed main
-`a5e9dbfd` and every open PR inventory/body, with no competing reservation.
+The complete22:00:19 UTC ownership audit found exp129 absent from landed main `a5e9dbfd`
+and every open PR inventory/body, with no competing reservation.
 This round allocates only exp129 under existing H125, BC264 and Session097.
 
 <!-- This document follows common-doc-guidelines.md.

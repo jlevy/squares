@@ -404,21 +404,24 @@ closure needs a below-$U$ family or an additional equality argument.
 
 **Session097 follow-up, September 7.** The independently reviewed
 [feature design](../series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md)
-proves that center-polynomial features of total degree at most three cannot satisfy
-the compatible-pair sign condition, for any diagonal bound. A mixed-sign second
-difference on nine touching axis-aligned squares annihilates those features and
-contradicts positive semidefiniteness. This is an analytic family obstruction, not
-a sampled failure or a refutation of all interaction kernels.
+proves that center-polynomial features of total degree at most three cannot satisfy the
+compatible-pair sign condition, for any diagonal bound.
+A mixed-sign second difference on nine touching axis-aligned squares annihilates those
+features and contradicts positive semidefiniteness.
+This is an analytic family obstruction, not a sampled failure or a refutation of all
+interaction kernels.
 
 The same report fixes one richer eleven-feature, sixteen-parameter $D_4$ family.
-[H125](../hypotheses/H-125-biquadratic-two-pose-kernel.md) records that narrower
-claim prospectively. Its first proposed discriminator uses only necessary constraints
-from a fixed finite axis-aligned source. An independently checked exact lower bound
-$b\ge11$ rejects the family; a feasible outer LP does not supply a PSD candidate.
-The [post-freeze admission](../series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md#post-freeze-admission-the-finite-lp-instrument)
-allows source-free instrument construction only. The complete continuum verification
-cost remains unknown and is required only for a positive full-domain certificate,
-not for a finite necessary-constraint refutation.
+[H125](../hypotheses/H-125-biquadratic-two-pose-kernel.md) records that narrower claim
+prospectively. Its first proposed discriminator uses only necessary constraints from a
+fixed finite axis-aligned source.
+An independently checked exact lower bound $b\ge11$ rejects the family; a feasible outer
+LP does not supply a PSD candidate.
+The
+[post-freeze admission](../series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md#post-freeze-admission-the-finite-lp-instrument)
+allows source-free instrument construction only.
+The complete continuum verification cost remains unknown and is required only for a
+positive full-domain certificate, not for a finite necessary-constraint refutation.
 
 ### D. One selective resource extension, when a candidate earns it
 
