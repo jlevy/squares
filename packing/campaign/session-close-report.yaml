@@ -1425,7 +1425,7 @@ sessions:
   title: "Exact P12 escape and conditional compatibility"
   status: in_progress
   primary_bead: think-fqhr
-  phases: 1
+  phases: 2
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-091.yaml

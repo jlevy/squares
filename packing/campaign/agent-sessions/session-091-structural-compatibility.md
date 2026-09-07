@@ -27,7 +27,7 @@ session:
     objective: Build independent source-free H-110 controls and assess the conditional proof obligation.
     commitment: BC-255
     bead: think-qv73
-    status: in_progress
+    status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: 30
@@ -37,10 +37,31 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --push
     kill_condition: A failed control blocks the target; author work ends before the integration reserve.
     fallback: Preserve the failed premise and separately price any changed instrument; do not run the target.
+    outcome: Independent source-free instruments and swapped reviews pass; diamond reduction is reviewed and checkpoint961d9923 is published on PR109.
+    evidence: [packing/devtools/p12_escape_candidate.py, packing/devtools/check_p12_escape_candidate.py, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md]
+    stop_reason: Reviewed readiness permits prospective registration; no target has run.
+    next_action: Commit exp-121 and conduct its sole exact producer and independent reader.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Resolve the frozen H-110 candidate and choose the next conditional-cover or localization discriminator.
+    commitment: BC-255
+    bead: think-qv73
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Independent source-free controls and swapped reviews passed, and the integrated instrument checkpoint is published.
+    budget_minutes: 30
+    started_at: '2026-09-07T06:13:00Z'
+    deadline_at: '2026-09-07T06:43:00Z'
+    expected_output: Retained exact H-110 outcome, scoped scientific disposition and one evidence-selected prospective next task.
+    validation_command: uv run --frozen --all-extras --group dev packing-ledger check
+    kill_condition: A frozen scientific cap or guard fails, or the phase deadline arrives; never repeat a completed invocation.
+    fallback: Record refusal or non-invocation and choose a changed future obligation without claiming mathematical rejection.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Dispatch the three recorded assignments and independently review their outputs.
+    next_action: Pass prospective record checks, commit exp-121, then invoke its producer exactly once.
   primary_bead: think-fqhr
   status: in_progress
   budget:
@@ -245,8 +266,8 @@ states which checks actually ran, and links unfinished obligations and exact res
 commands. Beads are synchronized separately on `tbd-sync`; their IDs and scope are
 mirrored here so a PR reader can recover the plan.
 
-This branch has allocated **Session 091** and owns **H-110 / BC-255**. No new experiment,
-hypothesis, agenda or exploration ID is allocated by this session declaration.
+This branch has allocated **Session 091** and **exp-121**, and owns **H-110 / BC-255**.
+No new hypothesis, agenda or exploration ID is allocated at this checkpoint.
 The last audited external allocation is PR 107: X-017, Agenda 027, BC-258–268 and
 H-111–117, with no session or experiment IDs. Its current head is `96be087f`;
 PR 108 has merged into that branch and allocated no scientific IDs. Neither has landed

@@ -138,9 +138,9 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives twelve confirmed hypotheses, eleven refuted
-hypotheses, two open hypotheses, fifteen open questions, and thirty-seven blocked
+hypotheses, one open hypothesis, fifteen open questions, and thirty-seven blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
-unresolved. No hypothesis is running or waiting on review and six are unresolved.
+unresolved. One hypothesis is running, none is waiting on review, and six are unresolved.
 H-105 is refuted: all 134 eligible candidate pairs are separated, leaving higher-order
 overlap depth and H-099 unresolved.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
@@ -2830,7 +2830,7 @@ round that names the hypothesis, control roles included.
 | [H-107](packing/campaign/hypotheses/H-107-fixed-site-scalar-completion.md) | blocked | The terminal exp-116 sites admit a complete rational cover of mass below eleven at 61/16; its protocol remains unlaunched pending a sufficient allocation | 1 | — |
 | [H-108](packing/campaign/hypotheses/H-108-near45-canonical-a3-forcing.md) | confirmed | A contained near-45 square in the canonical region avoiding P10 contains A3 | 1 | 0.67s wall |
 | [H-109](packing/campaign/hypotheses/H-109-near45-canonical-a1-a2-forcing.md) | confirmed | A stronger near-45 A1 implication passed independent replay and transfers to A2 by local reflection | 1 | 0.26s wall |
-| [H-110](packing/campaign/hypotheses/H-110-fixed-near-axis-p12-escape.md) | open | Independent source-free controls and reviews pass; the fixed P12 escape candidate remains unrun | 0 | — |
+| [H-110](packing/campaign/hypotheses/H-110-fixed-near-axis-p12-escape.md) | running | Independent controls pass; exp-121 is prospectively registered, with no scientific process invoked yet | 1 | — |
 
 ### Confirmed
 
@@ -3077,7 +3077,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 76 rounds registered in `series-000`.
+There are 77 rounds registered in `series-000`.
 
 They record 2152.1 agent-minutes and 1223.1 wall-minutes.
 Exp-114 completed its one target and independent replay.
@@ -3193,6 +3193,7 @@ archive beside it.
 | [exp-118](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-118-h-107-fixed-site-completion.md) | 11 | target | H-107 | fixed-site scalar row completion | no target dispatched before launch cutoff; scientific allowances unspent | blocked |
 | [exp-119](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-119-h-108-near45-a3-forcing.md) | 11 | target | H-108 | canonical near-45 A3 forcing | independent reader proves all 24 closed inequalities; no localization or H-036 conclusion | accepted |
 | [exp-120](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-120-h-109-near45-a1-a2-forcing.md) | 11 | target | H-109 | canonical A1 forcing plus A2 reflection | independent exact A1 replay passed; analytic reflection supplies A2 without another target | accepted |
+| [exp-121](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-121-h-110-fixed-p12-escape.md) | 11 | target | H-110 | one frozen rational P12 escape candidate | prospective protocol; no producer or reader invoked | in-progress |
 
 ### Cost and provenance
 
@@ -3274,10 +3275,11 @@ archive beside it.
 | exp-118 | one 2100-second total target cap and one 1200-second shared verification cap; unlaunched | 0 s | — | dependency | `46f38ab4` |
 | exp-119 | one ten-second producer and one independent ten-second reader; both accepted | 0.67 s | — | criterion | `bdc68784` |
 | exp-120 | one ten-second producer and one independent ten-second reader; both accepted | 0.26 s | — | criterion | `57ad0dea` |
+| exp-121 | one ten-second producer and one independent ten-second reader; both unspent | — | — | — | `961d9923` |
 
-### What the 76 rounds jointly establish
+### What the 77 rounds jointly establish
 
-The 76 rounds use 2152.1 agent-minutes and 1223.1 wall-minutes under the campaign’s
+The 77 rounds use 2152.1 agent-minutes and 1223.1 wall-minutes under the campaign’s
 retained effort accounting.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
 separately in Session089.
