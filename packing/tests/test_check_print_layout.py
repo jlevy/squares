@@ -125,12 +125,23 @@ def test_a_marker_within_tolerance_is_not(off: float) -> None:
     assert not findings(both(markers=[marker(markerCentre=100.0 + off)]))
 
 
-def test_mixed_inline_boxes_share_one_line_and_real_marker_offsets_still_fail() -> None:
-    """The printed mass-condition bullets have inline tops at -1, 0, 2 and 3px."""
+def first_line_box(setup: str) -> dict[str, float]:
+    """Run the shipped probe against retained Range geometry, without browser setup."""
     function = re.search(r"  function firstLineBox\(el\) \{.*?\n  \}", _PROBE, re.DOTALL)
     assert function is not None
     script = (
-        dedent("""
+        dedent(setup) + function.group() + "\nconsole.log(JSON.stringify(firstLineBox(el)));\n"
+    )
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
+    return json.loads(completed.stdout)
+
+
+def test_mixed_inline_boxes_share_one_line_and_real_marker_offsets_still_fail() -> None:
+    """The printed mass-condition bullets have inline tops at -1, 0, 2 and 3px."""
+    line = first_line_box("""
             const rects = [
               {top: 0, bottom: 22, height: 22, width: 100},
               {top: 0, bottom: 22.390625, height: 22.390625, width: 20},
@@ -142,15 +153,8 @@ def test_mixed_inline_boxes_share_one_line_and_real_marker_offsets_still_fail() 
             const document = {createRange: () => ({
               selectNodeContents() {}, getClientRects: () => rects,
             })};
+            const el = {querySelectorAll: () => []};
         """)
-        + function.group()
-        + "\nconsole.log(JSON.stringify(firstLineBox({})));\n"
-    )
-    completed = node(
-        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
-    )
-    assert completed.returncode == 0, completed.stderr
-    line = json.loads(completed.stdout)
     assert line == {"top": -1, "bottom": 22.390625}
     normal = marker(markerCentre=22.390625 / 2, lineCentre=(line["top"] + line["bottom"]) / 2)
     assert not findings(both(markers=[normal]))
@@ -158,6 +162,45 @@ def test_mixed_inline_boxes_share_one_line_and_real_marker_offsets_still_fail() 
     found = findings(both(markers=[displaced]))
     assert len(found) == 2
     assert all("+4.50px" in finding for finding in found)
+
+
+def test_zero_line_height_footnote_ink_does_not_move_the_marker_line() -> None:
+    """Chrome print rectangles from Further Reading, relative to the list item's top."""
+    setup = """
+        const reference = {lineHeight: '0px', rects: [
+          {top: -8.515625, bottom: 13.484375, height: 22, width: 10.390625,
+           left: 519.625, right: 530.015625},
+          {top: -8.515625, bottom: 13.484375, height: 22, width: 6.40625,
+           left: 520.421875, right: 526.828125},
+        ]};
+        const el = {querySelectorAll: () => [reference], rects: [
+          {top: 0, bottom: 20, height: 20, width: 462.03125,
+           left: 57.59375, right: 519.625},
+          ...reference.rects,
+          {top: 21.25, bottom: 41.25, height: 20, width: 200,
+           left: 57.59375, right: 257.59375},
+        ]};
+        const getComputedStyle = el => ({lineHeight: el.lineHeight});
+        const document = {createRange: () => {
+          let selected;
+          return {
+            selectNodeContents(el) { selected = el; },
+            selectNode(el) { selected = el; },
+            getClientRects: () => selected.rects,
+          };
+        }};
+        """
+    line = first_line_box(setup)
+    assert line == {"top": 0, "bottom": 20}
+    normal = marker(markerCentre=10.63, lineCentre=(line["top"] + line["bottom"]) / 2)
+    assert not findings(both(markers=[normal]))
+    displaced = {**normal, "markerCentre": normal["markerCentre"] + 4}
+    found = findings(both(markers=[displaced]))
+    assert len(found) == 2
+    assert all("+4.63px" in finding for finding in found)
+    # Only zero-height references are overlays; a normal inline must still contribute.
+    contributing = first_line_box(setup.replace("lineHeight: '0px'", "lineHeight: '22px'"))
+    assert contributing == {"top": -8.515625, "bottom": 20}
 
 
 def test_a_footnote_reference_that_opens_its_line_is_a_finding() -> None:
