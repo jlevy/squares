@@ -29,7 +29,7 @@ hypothesis:
     Source-free-controlled exact event-cell discriminator for one fixed S and
     one Q frame, with an independently implemented corner/SAT witness reader.
     A complete continuous-angle proof instrument is not yet available.
-  instrument_ready: false
+  instrument_ready: true
   regime: Fixed q, unchanged P10 and B–J coordinates, canonical Q center and both full closed angle bands; closed tangency counts as intersection.
   instance: {axis: n, point: 11}
   priority: 1
@@ -43,8 +43,9 @@ hypothesis:
 This is the changed BC255 obligation selected under `think-7e72` after H110 and H123
 were accepted and H122 was refuted.
 No H124 target has run.
-Session093 funds only source-free readiness until an independent review and prospective
-protocol permit more.
+The producer and independent reader passed27 source-free controls and independent
+reviews by08:09:33UTC. A committed prospective protocol remains required before
+scientific execution.
 
 Write q=1939/500. The actual angle bands, modulo square quarter turns, are
 [-pi/720,pi/720] and [pi/4-pi/720,pi/4+pi/720]. Both closed unit squares must lie in

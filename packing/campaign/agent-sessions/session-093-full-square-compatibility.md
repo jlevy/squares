@@ -25,7 +25,7 @@ session:
     objective: Prepare independent source-free compatibility instruments and assess a distinct density proof contract.
     commitment: BC-255
     bead: think-7e72
-    status: in_progress
+    status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: 30
@@ -35,10 +35,30 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --push
     kill_condition: An author cap, missing geometric premise or failed control prevents target launch.
     fallback: Retain the exact readiness gap and reprice a changed obligation; no scientific retry or unready target.
+    outcome: Both compatibility authors froze with27 source-free controls. The density assessment identifies a complete graph upper-bound certificate as a genuinely changed sufficient method, while retiring the source-packing decomposition shortcut for the candidate.
+    evidence: [packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md]
+    stop_reason: Authoring and assessment are complete; independent compatibility reviews continue under their original caps while a bounded density component is prepared.
+    next_action: Resolve compatibility reviews and prepare only the generic weighted-graph certificate, with no target launch yet.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Finish H124 independent reviews and prepare a changed generic weighted-graph completeness certificate for H099.
+    bead: think-bmx9
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: The compatibility authors froze and the density assessment justified a graph upper-bound certificate, not another arrangement retry or eager triple enumeration.
+    budget_minutes: 30
+    started_at: '2026-09-07T08:06:08Z'
+    deadline_at: '2026-09-07T08:36:08Z'
+    expected_output: Reviewed H124 readiness plus a source-free graph certificate and independent-reader contract; no implicit source or target funding.
+    validation_command: Focused source-free tests and independent review, followed by the immutable push tier.
+    kill_condition: A fixed author/review cap or failed correctness premise ends that assignment without a scientific invocation.
+    fallback: Preserve partial source and precise missing proof obligations; do not expand to Helly triples or rerun a blocked source control.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Obtain independent instrument reviews before registering any target.
+    next_action: Freeze H124 source if independently ready, then separately register its sole discriminator; preserve the graph author's original cap.
   primary_bead: think-bmx9
   status: in_progress
   budget:
@@ -61,16 +81,16 @@ session:
   delegations:
   - task: Full-square producer and source-free controls (think-epg9)
     operator: Codex angle_reader_recovery, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
-    files: []
-    checks: []
-    uncertainty: Scientific geometry and target outcome remain untested.
-    elapsed_seconds: null
-    elapsed_quality: unavailable
-    next_action: Freeze the source-free instrument for independent review.
+    outcome: Frozen at08:01:34UTC; thirteen source-free controls pass, with no scientific constructor, retained packet or target point inventory evaluated.
+    evidence: [packing/devtools/full_square_compatibility.py, packing/tests/test_full_square_compatibility.py]
+    files: [packing/devtools/full_square_compatibility.py, packing/tests/test_full_square_compatibility.py]
+    checks: [13 tests pass in0.18s pytest and0.40s wall, Ruff and format clean, BasedPyright zero findings in0.88s wall]
+    uncertainty: Independent review and prospective scientific registration remain required.
+    elapsed_seconds: 720
+    elapsed_quality: operator_reported_approximate
+    next_action: Obtain the independent source-free producer review.
     phase: 1
     budget_minutes: 20
     started_at: '2026-09-07T07:49:34Z'
@@ -83,16 +103,16 @@ session:
     excluded_commands: [Scientific target construction or evaluation, Registry or Git writes, Dependency changes or repo-wide gates]
   - task: Independent full-square witness reader (think-a0lc)
     operator: Codex density_control_recovery, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
-    files: []
-    checks: []
-    uncertainty: A complete independent corner/SAT check is required before any scientific acceptance.
-    elapsed_seconds: null
-    elapsed_quality: unavailable
-    next_action: Freeze the independent reader before inspecting the producer implementation.
+    outcome: Frozen at08:03:24UTC after782seconds, without producer inspection or scientific input evaluation.
+    evidence: [packing/devtools/check_full_square_compatibility.py, packing/tests/test_check_full_square_compatibility.py]
+    files: [packing/devtools/check_full_square_compatibility.py, packing/tests/test_check_full_square_compatibility.py]
+    checks: [14 tests pass in0.86s pytest and1.12s wall, Ruff and format clean, BasedPyright zero findings in0.79s wall]
+    uncertainty: Independent review and prospective target registration remain required.
+    elapsed_seconds: 782
+    elapsed_quality: operator_reported_approximate
+    next_action: Obtain independent source-free reader review.
     phase: 1
     budget_minutes: 20
     started_at: '2026-09-07T07:50:22Z'
@@ -105,16 +125,16 @@ session:
     excluded_commands: [Reading or importing the new producer, Scientific target or exp122 replay, Registry or Git writes, Dependency changes or repo-wide gates]
   - task: Distinct density verification assessment (think-m8x7)
     operator: Codex scalar_followup_assessment, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Completed at08:03:20UTC. A complete weighted graph upper bound is a changed sufficient proof route; packings of at most eleven cannot provide a budget-one dominating decomposition of mass56/5. Fund only a generic certificate component, not eager higher-order geometry.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-graph-depth-assessment.md]
     files: []
-    checks: []
+    checks: [Read-only comparison of H099, prior complete-method assessment and exp115; independent coordinator proof assessment]
     uncertainty: Graph or Helly reductions may have prohibitive combinatorics or fail to preserve positive-area semantics.
-    elapsed_seconds: null
-    elapsed_quality: unavailable
-    next_action: Recommend a genuinely changed proof contract or retire the idea without a target.
+    elapsed_seconds: 766
+    elapsed_quality: operator_reported_approximate
+    next_action: Build only the generic weighted-graph certificate under think-yzzi; separately price source binding and geometric processing.
     phase: 1
     budget_minutes: 15
     started_at: '2026-09-07T07:50:34Z'
@@ -125,12 +145,102 @@ session:
     fallback: Retain a negative assessment and allocate no computation.
     write_scope: [Read-only assessment; no file writes]
     excluded_commands: [Target or source-control execution, Benchmarks or file writes, New registry IDs, External BC261 or BC273 work]
+  - task: Generic weighted graph certificate producer (think-yzzi)
+    operator: Codex scalar_followup_assessment, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: []
+    checks: []
+    uncertainty: Source binding, graph geometry and target performance are untested and separately unfunded.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Return a source-free producer and packet contract for a separately authored independent reader.
+    phase: 2
+    budget_minutes: 25
+    started_at: '2026-09-07T08:06:08Z'
+    deadline_at: '2026-09-07T08:31:08Z'
+    expected_output: Deterministic rational weighted clique upper-bound certificate or scoped budget/overweight-graph result.
+    validation_command: uv run --frozen --no-sync pytest tests/test_weighted_clique_certificate.py
+    kill_condition: Twenty-five active minutes, the deadline or a missing completeness premise ends author work.
+    fallback: Retain the precise incomplete component; no source or target execution and no Helly expansion.
+    write_scope: [packing/devtools/weighted_clique_certificate.py, packing/tests/test_weighted_clique_certificate.py]
+    excluded_commands: [Scientific graph or support access, Geometry or source-control execution, Registry or Git writes, Independent reader implementation, Dependency changes or repo-wide gates]
+  - task: Independent H124 corner-reader review (think-ngym)
+    operator: Codex angle_reader_recovery, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: GO at08:06:17UTC; no blocking findings on the08:03:24 reader freeze. The rational angle guard, independent geometry and exact source binding are sound.
+    evidence: [packing/devtools/check_full_square_compatibility.py, packing/tests/test_check_full_square_compatibility.py]
+    files: []
+    checks: [14 source-free tests pass in1.04s wall, Ruff and format clean, BasedPyright clean in0.91s wall]
+    uncertainty: This establishes readiness only; a prospective protocol and actual independent replay remain required.
+    elapsed_seconds: 175
+    elapsed_quality: operator_reported_approximate
+    next_action: Combine with the producer review before freezing a scientific source commit.
+    phase: 1
+    budget_minutes: 10
+    started_at: '2026-09-07T08:03:22Z'
+    deadline_at: '2026-09-07T08:13:00Z'
+    expected_output: Independent source-free reader readiness verdict and proof-scope audit.
+    validation_command: uv run --frozen --no-sync pytest tests/test_check_full_square_compatibility.py
+    kill_condition: The deadline or a missing exact premise ends review without a target.
+    fallback: Retain the precise refusal or partial finding without extending the cap.
+    write_scope: [Read-only review; no file writes]
+    excluded_commands: [Scientific target or retained source replay, File or shared-record writes, Repo-wide gates]
+  - task: Independent H124 producer review (think-5a0c)
+    operator: Codex density_control_recovery, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: GO at08:09:33UTC; canonical clipping, strict mixtures, eight signed axes, source identity and finite-screen semantics have no actionable findings.
+    evidence: [packing/devtools/full_square_compatibility.py, packing/tests/test_full_square_compatibility.py]
+    files: []
+    checks: [13 source-free tests pass in0.47s wall, Ruff and format clean, BasedPyright zero findings in0.90s wall]
+    uncertainty: Prospective protocol and actual independent target replay remain required.
+    elapsed_seconds: 165
+    elapsed_quality: operator_reported_approximate
+    next_action: Freeze the source commit and separately register one capped H124 discriminator.
+    phase: 2
+    budget_minutes: 10
+    started_at: '2026-09-07T08:06:48Z'
+    deadline_at: '2026-09-07T08:15:00Z'
+    expected_output: Independent producer verdict covering clipping, strict strata, source binding and finite-screen semantics.
+    validation_command: uv run --frozen --no-sync pytest tests/test_full_square_compatibility.py
+    kill_condition: The deadline or a correctness finding ends review with no target invocation.
+    fallback: Preserve the exact missing premise without an automatic repair/target cycle.
+    write_scope: [Read-only review; no file writes]
+    excluded_commands: [Scientific target or retained source replay, File or shared-record writes, Repo-wide gates]
+  - task: Independent generic weighted graph reader (think-cgp6)
+    operator: Codex angle_reader_recovery, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: []
+    checks: []
+    uncertainty: Source binding and geometry are separately unfunded; a graph clique is not a geometric witness.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Freeze the independent generic graph reader for review without inspecting producer code.
+    phase: 2
+    budget_minutes: 25
+    started_at: '2026-09-07T08:09:48Z'
+    deadline_at: '2026-09-07T08:34:48Z'
+    expected_output: Independent caller-bound graph certificate checker and omitted-branch, invalid-color and identity refusal controls.
+    validation_command: uv run --frozen --no-sync pytest tests/test_check_weighted_clique_certificate.py
+    kill_condition: Twenty-five active minutes, the deadline or an independence/completeness failure ends authoring.
+    fallback: Retain the exact missing premise without scientific source access or cap extension.
+    write_scope: [packing/devtools/check_weighted_clique_certificate.py, packing/tests/test_check_weighted_clique_certificate.py]
+    excluded_commands: [Producer code or test inspection, Scientific graph or source access, Geometry or source-control execution, Registry or Git writes, Dependency changes or repo-wide gates]
   outputs:
   - packing/campaign/agent-sessions/session-093-full-square-compatibility.md
   - packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-graph-depth-assessment.md
   checks:
   - Session091 checkpoint a78e9af7 is published on PR109 with full d8b6fcf3 and later ae341475 push-tier evidence.
   - All required hosted checks passed on a78e9af7, observed at07:58UTC; the longest required job was validate at2m49s.
+  - Immutable planning checkpoint576bbe0a passed all45 push-tier steps in126.25 seconds and is published on PR109.
   - Fresh07:47UTC upstream and PR110 inventory finds Session092 occupied but no H124, exp124 or Session093 allocation.
   stop_reason: null
   next_action: Independently review the two bounded instruments, then prospectively register at most one fixed-S exact45-Q discriminator if ready.
