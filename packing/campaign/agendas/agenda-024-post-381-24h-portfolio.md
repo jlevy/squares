@@ -400,8 +400,13 @@ Use `max` for mathematical judgment and `high` or `xhigh` for suitable mechanica
 
 ### Selected Continuation After Session 090
 
-The next local coordinating entry is `think-7e72`, BC-255’s changed full
-distinguished-square compatibility discriminator.
+The current local coordinating entry is BC-259 under `think-nwss`, independently
+adopting the contributed seven-row H099 support ceiling. Session094's diagonal
+compatibility lemma is retained, while Session095 exp127's fixed collision-augmented
+axis cover returned `no_chain` without a reader. H124 and restricted H036 remain
+unresolved; no retry or parameter sweep follows. The original full-square entry
+`think-7e72` is now terminal. This updates the earlier continuation below, rather than
+reinterpreting its historical outcomes.
 The small-obstacle
 [H-122 conditional cover](../hypotheses/H-122-diamond-conditional-nine-point-cover.md)
 is refuted, while

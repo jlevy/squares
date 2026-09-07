@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **5** in_progress, **20** ready, **13** tentative, **59** blocked, **41** stopped, **126** complete.
+- **6** in_progress, **19** ready, **13** tentative, **59** blocked, **41** stopped, **126** complete.
 
 - **17 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -46,7 +46,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-026 | `BC-255` | in_progress | 1 | insight | research | What is the first complete proof obligation for a useful restricted structural theorem? | `think-dene` |
 | agenda-026 | `BC-256` | tentative | 2 | correctness | research | Does a verified packing refute the selected restricted structural claim? | `think-pjk7` |
 | agenda-026 | `BC-257` | tentative | 2 | insight | research | Which below-Trump density target and family justify a continuum proof attempt? | `think-k9zi` |
-| agenda-027 | `BC-259` | ready | 0 | correctness | measurement_validation | Does independent source binding and geometric replay accept the contributed seven-row ceiling of eleven for… | `think-nwss` |
+| agenda-027 | `BC-259` | in_progress | 0 | correctness | measurement_validation | Does independent source binding and geometric replay accept the contributed seven-row ceiling of eleven for… | `think-nwss` |
 | agenda-027 | `BC-260` | ready | 0 | correctness | measurement_validation | Which direct resource, anchor, case-composition, angular-transfer, uniform Farkas and pair-kernel… | `think-ql1j` |
 | agenda-027 | `BC-267` | ready | 1 | correctness | measurement_validation | Which physical normal-stationarity and stationary-value deductions survive independent review, and what exact… | `think-zq12` |
 | agenda-027 | `BC-268` | ready | 1 | insight | research | Which next slice earns allocation from the actual Agenda027 review and pilot evidence, whether the source… | `think-x61z` |
@@ -170,7 +170,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-024 | active |  |  |  | 5 |  | 3 | 8 |
 | agenda-025 | active | 3 |  | 1 | 6 |  | 3 | 13 |
 | agenda-026 | active | 2 | 2 | 2 | 3 |  | 5 | 14 |
-| agenda-027 | paused |  | 4 | 3 | 3 |  | 1 | 11 |
+| agenda-027 | paused | 1 | 3 | 3 | 3 |  | 1 | 11 |
 | agenda-028 | paused |  | 3 | 2 | 1 |  | 1 | 7 |
 
 ## By program
@@ -241,7 +241,7 @@ Open frontier: `BC-208`, `BC-207`.
 | agenda | id | state | question |
 | --- | --- | --- | --- |
 | agenda-027 | `BC-258` | complete | How should the supplied research bundle change the set of alternative directions, after orientation… |
-| agenda-027 | `BC-259` | ready | Does independent source binding and geometric replay accept the contributed seven-row ceiling of… |
+| agenda-027 | `BC-259` | in_progress | Does independent source binding and geometric replay accept the contributed seven-row ceiling of… |
 | agenda-027 | `BC-260` | ready | Which direct resource, anchor, case-composition, angular-transfer, uniform Farkas and pair-kernel… |
 | agenda-027 | `BC-261` | blocked | Can the existing geometry and fixed-angle LP export one independently checked uniform exclusion… |
 | agenda-027 | `BC-262` | blocked | At 96/25, does a frozen complete anchor domain admit an exact exclusion or useful explicit residual… |

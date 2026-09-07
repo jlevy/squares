@@ -526,8 +526,10 @@ agenda:
       Session094 exp125 subsequently certified the entire diagonal S-band cover;
       the axis sufficient cover returned no_chain. Two independent mathematical
       derivations now prove a fixed center-correlated collision region that may
-      strengthen the missing axis cover. Its independent source bindings are being
-      authored without scientific construction; no new axis target is allocated yet.
+      strengthen the missing axis cover. Both source bindings passed review, but
+      Session095 exp127's sole augmented-axis producer returned no_chain in0.25
+      seconds and did not authorize a reader. H124 and restricted H036 remain
+      unresolved. The fixed representation's allocation is closed without a retry.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md
@@ -544,16 +546,16 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-collision.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md
     workflows: [insight-iteration, pipeline-improvement, research-loop]
     depends_on: [BC-250]
     next_evidence: >-
-      Think-7e72 retains H124: independently bind the proved fixed collision-center
-      polygon and append it directly to all13 original axis cover regions. Preserve
-      the accepted diagonal lemma. Only source-free controls, review and a separately
-      committed changed-axis protocol may authorize that new cover; no radius sweep,
-      diagonal rerun or general two-angle solver. A complete axis cover combines
-      with exp125, H106/H123 and closed-core counting; sufficient-cover failure is
-      unresolved and does not refute H124 or improve the unrestricted bound.
+      Exp127 is terminal and think-7e72's fixed representation is closed. Preserve
+      the accepted diagonal lemma and unresolved axis obligation. A genuinely
+      changed premise requires future mathematical repricing; no radius sweep,
+      diagonal rerun or general two-angle solver is funded. The current independent
+      allocation is BC259's existing support-ceiling adoption, not another H124 test.
+      Sufficient-cover failure does not refute H124 or improve the unrestricted bound.
       Preserve external BC261/BC273 ownership and do not duplicate their exporters.
       Only mass-derived
       near-tight forcing needs a valid covering measure; geometric conflicts,

@@ -281,6 +281,8 @@ case or experiment separately.
 | [BC-255: A Fixed Obstacle for Conditional Coverage](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md) | research synthesis | record | retained | — |
 | [BC255 — A Center-Correlated Collision Region](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-collision.md) | research synthesis | record | retained | — |
 | [BC-255: Uniform Vertex Displacement Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-review.md) | dated review record | record | retained | — |
+| [BC-259: Source Binding for the Seven-Row Support Ceiling](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-author.md) | research synthesis | record | retained | — |
+| [BC259: Independent Support-ceiling Adoption Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-review.md) | dated review record | record | retained | — |
 | [BC-255 Near-Axis Reader Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-near-axis-reader-independent-review.md) | dated review record | record | retained | — |
 | [BC-252 — Complete Rows on the Retained Sites](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md) | research synthesis | record | retained | — |
 | [BC-255: Fixed-Side Discriminator Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md) | research synthesis | record | retained | — |
@@ -614,25 +616,28 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**Selected next entry:** `think-7e72` continues the terminal Session093 handoff.
-Its three scientific invocations and checkpoint review are complete in
-[Session 091](packing/campaign/agent-sessions/session-091-structural-compatibility.md)
-under `think-fqhr`. The full distinguished-square compatibility discriminator H-124
-subsequently returned an unresolved finite screen in
-[Session093](packing/campaign/agent-sessions/session-093-full-square-compatibility.md)
-under `think-bmx9`. Its stronger continuous common obstacle and generic cover tools
-passed independent review.
-Next, bind the complete two-band residual cover to independently reconstructed sources
-and a bounded caller; no cover target has run.
+**Selected next entry:** `think-nwss` takes the existing BC-259 support-ceiling review.
+The [Session094 handoff](packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md)
+was updated after the first result in
+[Session095](packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md).
+Exp125 independently certified the entire diagonal compatibility branch, but its axis
+representation returned `no_chain`. Exp127's fixed collision-augmented axis cover also
+returned `no_chain`, in 0.25 seconds, without an independent reader. H124 and restricted
+H036 remain unresolved; that representation receives no retry or parameter sweep.
+BC-259 instead asks whether the contributed seven-row ceiling of eleven independently
+binds to H099's entire existing support. It could settle every weight vector on that
+support, whereas exp126's unverified overweight graph clique concerns only the current
+candidate and does not prove geometric invalidity. Both independent source assessments
+are complete. The final bounded readiness slice implements and independently reviews
+the seven-row positive-inclusion checker; no support-adoption target is admitted yet.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
 `think-9qrx`, completed the user-approved research block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
 dual mass of about 10.080180 at depth one, below the obstruction threshold.
 No bridge or unchanged retry is selected.
-BC-243 has complete facet/slab controls and an accepted original source, but its uniform
-control timed out on all three separately reviewed algorithms, including reciprocal
-caching and sign-incidence reuse.
-No density target is open.
+At that earlier checkpoint, BC-243's uniform control had timed out on three separately
+reviewed algorithms. Session094 later completed all five repaired graph controls and
+ran exp126 once. Its graph-only obstruction left H099 unresolved; no retry is open.
 BC-255 accepted H-106’s full continuous near-axis ten-point clause through an
 independent exact rectangle reader.
 H-108 and H-109 also accepted canonical near-45 A3 and A1/A2 forcing through independent
@@ -2886,7 +2891,7 @@ round that names the hypothesis, control roles included.
 | [H-121](packing/campaign/hypotheses/H-121-axis-plus-one-minimizer.md) | blocked | Some global minimizing packing has orientations in the axis-plus-one-angle family | 0 | — |
 | [H-122](packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md) | refuted | One independently checked square avoids all nine marks and the forced diamond; full-square compatibility remains open | 1 | 0.20s wall |
 | [H-123](packing/campaign/hypotheses/H-123-near45-coordinate-localization.md) | confirmed | Complete coordinate localization follows from the reviewed reduction and independent four-guard certificate | 1 | 0.21s wall |
-| [H-124](packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md) | unresolved | Whole diagonal S-band cover certified; fixed collision-augmented axis cover prospectively registered | 3 | 2.74s wall |
+| [H-124](packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md) | unresolved | Diagonal band certified; original and collision-augmented axis representations returned no_chain without readers | 3 | 2.99s wall |
 
 ### Confirmed
 
@@ -3118,8 +3123,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 49 |
-| unmeasured | 44 |
-| **total** | **93** |
+| unmeasured | 45 |
+| **total** | **94** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -3257,7 +3262,7 @@ archive beside it.
 | [exp-124](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-124-full-square-compatibility-screen.md) | 11 | target | H-124 | fixed exp122 square and exact45 canonical Q | no witness after837 event cells; witness-only reader not invoked | unresolved |
 | [exp-125](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md) | 11 | target | H-124 | Complete residual cover for both whole bands | Diagonal independently certified; axis no_chain without reader | unresolved |
 | [exp-126](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md) | 11 | target | H-099 | Complete graph bound for unchanged56/5 candidate | Reported overweight graph clique; no reader or geometric counterexample | unresolved |
-| [exp-127](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md) | 11 | target | H-124 | Fixed collision-augmented whole-axis cover | Prospectively registered; not invoked | in-progress |
+| [exp-127](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md) | 11 | target | H-124 | Fixed collision-augmented whole-axis cover | Producer no_chain; no independent reader or geometric counterexample | unresolved |
 
 ### Cost and provenance
 
@@ -3345,7 +3350,7 @@ archive beside it.
 | exp-124 | one thirty-second producer; conditional reader not invoked | 0.84 s | — | criterion | `a75d751a` |
 | exp-125 | one producer per band; only diagonal reader invoked | 1.90 s | — | criterion | `7daa7c55` |
 | exp-126 | one60-second scientific child; no reader invoked | 4.49 s | — | criterion | `7daa7c55` |
-| exp-127 | one120-second scientific child and conditional60-second independent replay | — | — | not invoked | `3bec06e2` |
+| exp-127 | one120-second scientific child; no reader invoked | 0.25 s | — | criterion | `3bec06e2` |
 
 ### What the 83 rounds jointly establish
 

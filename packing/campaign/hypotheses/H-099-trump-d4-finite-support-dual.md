@@ -33,6 +33,10 @@ hypothesis:
     completed candidate verification. The exact ceiling route passed its source and
     independent readiness controls; this does not authorize acceptance
     of a D > 11 candidate without a complete depth certificate.
+    Session095 prospectively adds a history-free necessary-lower-incidence ceiling:
+    certify distinct full-box positive inclusions for seven fixed rows and their
+    nonnegative multiplier identity, with complete current-source binding.
+    This additional instrument remains in source-free readiness, not adopted.
   instrument_ready: true
   regime: >-
     n = 11; exact algebraic Trump side; only the geometric D4 closure of the retained
@@ -86,10 +90,25 @@ lose no full-support solutions.
 A test-row coefficient counts the distinct members of $O$ whose interiors contain the
 test point; it is not merely zero or one.
 
-Every necessary test point must be off all square boundaries, with a certified
+For the original constant-incidence instrument, every necessary test point must be off all square boundaries, with a certified
 positive-area neighborhood of constant incidence.
 These rows relax full a.e. feasibility: an exact LP ceiling at most eleven rejects the
 support; a larger optimum still needs a complete almost-everywhere depth certificate.
+
+Session095 selects a smaller sufficient ceiling predicate after the independent
+[source assessment](../series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-author.md)
+and [mathematical review](../series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-review.md)
+froze. This is a prospective instrument amendment, not a replay of exp113's row history.
+For each fixed positive-area box, verify that at least the prescribed number of distinct
+members of each orbit contain the whole box strictly. With nonnegative placement
+weights, those selected contributions are a lower bound on depth throughout the box.
+Almost-everywhere feasibility therefore implies the same necessary row inequality,
+without classifying unselected squares. The contributed seven rows require 41 such
+inclusions; their nonnegative multipliers sum to eleven and reproduce the orbit-size
+vector. Complete source binding and these geometric inclusions must still pass a
+separately reviewed, committed protocol before the fixed-support ceiling can be adopted.
+No changed placement, box, radius, optimizer history or candidate-depth assertion is
+included in this allocation.
 
 Session093 prospectively adds the
 [conservative graph alternative](../series/series-000-smoke-and-calibration/results/agenda-026/bc-243-graph-depth-assessment.md).

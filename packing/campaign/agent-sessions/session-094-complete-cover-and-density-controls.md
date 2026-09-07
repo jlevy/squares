@@ -165,7 +165,7 @@ session:
     clock_role: finalization
     objective: Publish the third checkpoint and its selected two-lane continuation.
     bead: think-63oj
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: The reviewed source engine and terminal experiment receipts are committed; preserve the original finalization reserve.
     budget_minutes: 20
@@ -175,12 +175,12 @@ session:
     validation_command: Immutable push/full gates, record checks, prose review and cost-rollup refresh.
     kill_condition: Original11:49 checkpoint; no new scientific invocation.
     fallback: Publish completed evidence and precise pending gates, then continue the separately planned final slice.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Start immutable validation while preparing the next protocol and the checkpoint handoff.
+    outcome: Published the passing source checkpoint3bec06e2 and updated PR109 by the11:49 boundary. Its isolated fast handover gate subsequently passed62/66 steps in169.33 seconds; full validation remains asynchronous. The exact protocol, cost receipt and selected two-lane resources are committed atddf545c9, with their record/delta checks in flight.
+    evidence: [packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md, packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md]
+    stop_reason: Third checkpoint published; fast-gate confirmation was observed at11:50:19, after the original boundary. No scientific cutoff or final program endpoint was extended.
+    next_action: Continue the selected obligation and separately checked support review in Session095; monitor the pending full and record-delta gates.
   primary_bead: think-63oj
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 120
     max_cycles: 8
@@ -196,7 +196,7 @@ session:
   progress:
     metric: Complete independently checked structural obligations and useful density decisions
     before: H124 has an unresolved finite screen, reviewed stronger common obstacle and generic cover tools; repaired graph source admission has only synthetic readiness.
-    after: null
+    after: Exp125 certifies the full diagonal compatibility branch, exp126 leaves H099 unresolved through a graph-only obstruction, and independently reviewed collision-source readiness supports one separately declared axis test. BC259's existing support ceiling is selected for independent adoption next.
   delegations:
   - task: H124 producer source binding and synthetic controls (think-jxs9)
     operator: Codex scalar_followup_assessment, max thinking
@@ -880,6 +880,28 @@ session:
     fallback: Preserve the partial handoff and exact missing premise.
     write_scope: ["Read-only protocol review"]
     excluded_commands: [Scientific source construction or target evaluation, Git or external writes]
+  - task: "Session094 cost receipt and PR refresh (think-vw83)"
+    operator: "Codex checkpoint_handoff_audit, high thinking"
+    status: "completed"
+    recording: "retrospective"
+    outcome: "Refreshed the aggregate receipt and temporary PR draft during 11:38:21–11:41:24 UTC. The receipt covers 09:49:00–11:38:21 UTC: 6,561 wall seconds, 16,314.546 recursive agent-seconds and 562 responses. The generated cost prefix was preserved exactly."
+    evidence: ["packing/campaign/resource-usage/codex-task-tree-session-094.yaml"]
+    files: ["packing/campaign/resource-usage/codex-task-tree-session-094.yaml"]
+    checks: ["Collector: 31.13 seconds wall and 25.27 CPU.","Schema and rollup checks passed; live-task and interval-boundary lower-bound caveats retained; no trailing whitespace in the PR draft."]
+    uncertainty: "The receipt is partial, not the full Session094 cost. Corrected gate results were still pending at this task's freeze; root owned publication and later validation binding."
+    elapsed_seconds: 183
+    elapsed_quality: "operator_reported_approximate"
+    next_action: "Retain the refreshed receipt and cost-first PR body; later checkpoint evidence is recorded separately without extending this task."
+    phase: 8
+    budget_minutes: 8
+    started_at: "2026-09-07T11:37:56Z"
+    deadline_at: "2026-09-07T11:45:56Z"
+    expected_output: "An observed aggregate-only receipt cutoff and refreshed temporary PR body with exact validation and invocation status."
+    validation_command: "Project Python 3.14 existing task-tree collector and PR rollup renderer; softschema repair --check on the receipt."
+    kill_condition: "Original 11:45:56 UTC cutoff; no future snapshot, scientific invocation or external write."
+    fallback: "Retain the latest observed partial receipt and explicitly pending gates."
+    write_scope: ["packing/campaign/resource-usage/codex-task-tree-session-094.yaml","Assigned temporary PR draft only"]
+    excluded_commands: ["Scientific source construction or target invocation","Session or generated-view edits","Git or external PR writes"]
   outputs:
   - packing/campaign/resource-usage/codex-task-tree-session-094.yaml
   - packing/devtools/h124_collision_source.py
@@ -889,43 +911,45 @@ session:
   - packing/devtools/run_h124_cover.py
   - packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md
   checks:
-  - Final immutable3bec06e2 push passes45 of66 named steps in147.88 seconds; external149.82 wall,201.59 user and24.40 system. This passes the exp127 engine-readiness gate. Committed protocol records and the explicit Session095 start remain separate admission requirements. Full and isolated fast handover gates are still running.
+  - 'full gate: full at 3bec06e2: passed (1638.75 seconds; external1638.87 wall3235.32 user91.41 system; observed12:26:14 UTC after this checkpoint, with later documentation deltas separate)'
+  - 'Fast handover at 3bec06e2 also passed62 of66 named steps in169.33 seconds; external169.45 wall730.95 user47.16 system.'
+  - "Historical push-admission checkpoint on 2026-09-07 (before the fast confirmation at 11:50:19 UTC): Final immutable3bec06e2 push passes45 of66 named steps in147.88 seconds; external149.82 wall,201.59 user and24.40 system. This passes the exp127 engine-readiness gate. Committed protocol records and the explicit Session095 start remain separate admission requirements. Full and isolated fast handover gates are still running."
   - Refreshed cost receipt spans09:49:00–11:38:21 UTC,6561 seconds wall and16314.546 recursive agent-seconds,562 responses. It remains a live lower bound; the final minutes are not inferred. Collector31.13 wall/25.27 CPU, task183 seconds. No raw prompts or reasoning retained.
   - Engine b38d0376 push failed three record/inventory steps in163.82 seconds; 9d614fef resolved those but its186.15-second push found the stale82-round mutation anchor and its self-test. Anchor correction3bec06e2 passes163 static anchors and22 focused controls in0.31 seconds. Both superseded full gates were canceled after their known failures; neither is a claimed pass. Final immutable push/full are tracked separately.
   - Collision producer and reader are frozen and independently reviewed. Producer review think-543z passed at11:22:21 after117 seconds; root reader review think-r7q1 passed by11:21:30. The caller passed independent review. Root reran49 source-free reader/caller tests in1.29 seconds; producer reviewer reran41 in0.32 seconds wall and0.31 CPU. Ruff and BasedPyright are clean. No collision-source factory was invoked.
-  - The frozen source delta passes the edit tier,44 of66 named steps in72.55 seconds. This is neither a full gate nor an immutable push result; those remain separate prerequisites.
+  - "Historical source-free edit checkpoint on 2026-09-07, before immutable admission: The frozen source delta passes the edit tier,44 of66 named steps in72.55 seconds. This is neither a full gate nor an immutable push result; those remain separate prerequisites."
   - Exp126 completed its only producer at actual exit zero in4.49 seconds external wall. It reported unresolved/overweight_clique and did not authorize a reader. No geometric invalidity or H099 refutation is certified; the bracket remains [11,56/5].
-  - Hosted1acd6320 failed only the campaign record because a completed delegation still appeared in_progress after its cap. The corrected completion rows are retained here; no deadline was extended. A fresh push and hosted check remain required.
+  - "Historical hosted check on 2026-09-07, before the corrected source checkpoint: Hosted1acd6320 failed only the campaign record because a completed delegation still appeared in_progress after its cap. The corrected completion rows are retained here; no deadline was extended. A fresh push and hosted check remain required."
   - Fresh11:24 UTC fetch leaves origin/main at dd36800e and external PR110 at0e1961e2. Its Session092 owns BC261/273 and successors throughBC278, but has no BC259/H099 assignment. BC279 is now the next BC pointer, not a reservation.
-  - Fresh reviewed density allocation think-b9i7 passed allfive source controls after committed7fcc987b/ec38194a and31/31 records in18.85 seconds. Allten actual exits zero; combined18.65 seconds wall. Uniform control binds60 squares and1770 pairs, mass11. No candidate yet; old failed and uninvoked sequences remain unchanged.
-  - Partial Session094 cost receipt covers09:49:00–10:52:22 UTC,3802 seconds wall and9897.624 recursive agent-seconds. It is a live lower bound with boundary limitations, not the full two-hour slice. Collector used28.69 seconds wall and24.93 CPU; no raw prompts or reasoning prose retained.
+  - "Historical control checkpoint on 2026-09-07, before the exp126 launch at 11:11:15 UTC: Fresh reviewed density allocation think-b9i7 passed allfive source controls after committed7fcc987b/ec38194a and31/31 records in18.85 seconds. Allten actual exits zero; combined18.65 seconds wall. Uniform control binds60 squares and1770 pairs, mass11. No candidate yet; old failed and uninvoked sequences remain unchanged."
+  - "Historical receipt cutoff at 10:52:22 UTC on 2026-09-07, superseded by the later refresh above: Partial Session094 cost receipt covers09:49:00–10:52:22 UTC,3802 seconds wall and9897.624 recursive agent-seconds. It is a live lower bound with boundary limitations, not the full two-hour slice. Collector used28.69 seconds wall and24.93 CPU; no raw prompts or reasoning prose retained."
   - Engine7daa7c55 full gate passed all checks in1623.67 seconds; external1623.74 wall,3260.24 user,89.68 system. Published outcome1acd6320 passes45/45 push steps in148.44 seconds; external151.23 wall,202.37 user,23.32 system. Hosted7daa required checks were green at10:44; laterCI remains separate.
   - Generic vertex/Minkowski reduction think-vnua proved independently10:37:49–10:47:55 (606 seconds), with world-frame rotation, empty-triangle branch, closed seams and outer-domain scope. Its actual earlier start gives the stricter10:52:49 cap, not the guessed dispatch timestamp.
-  - Fresh density allocation think-b9i7 received independent mechanical protocol GO under think-lvb6, actual10:47:53–10:48:36 (43 seconds), before10:52:14. Mathematical source and exact predicate reviews remain separate; no actual control has run yet.
+  - "Historical protocol-review checkpoint at 10:48:36 UTC on 2026-09-07: Fresh density allocation think-b9i7 received independent mechanical protocol GO under think-lvb6, actual10:47:53–10:48:36 (43 seconds), before10:52:14. Mathematical source and exact predicate reviews remain separate; no actual control has run yet."
   - Planning began with the10:31 mathematical dispatch while the admitted diagonal replay was completing. The phase start records that earlier actual entry, with the same25-minute allowance giving the stricter10:56 deadline. The PR audit inherited phase3's stricter10:38:06 cap and finished10:30:09; no worker or scientific cutoff is extended.
   - Fresh10:38 UTC upstream inspection found no landed main commits; origin/main remains dd36800e. PR110 advanced to1b7ed623 and retains its separate lane.
   - H124 protocol review think-y146 passed after the stop-rule clarification, actual10:19:21–10:23:18 UTC (237 seconds), within original10:24 cap; no science or tests ran.
   - Density protocol review think-ptb9 has no full GO. The bead declared5 minutes from10:21, but dispatch occurred10:25:40 and actual review began10:26:01; root corrected its later dispatch deadline to original10:26. Review stopped on that correction; negative graph predicates and prerequisites remain unchecked. No scientific invocation is admitted in this lane.
-  - Immutable engine7daa7c55 push passed45/45 in153.55 seconds; external156.67 wall,208.28 user,26.03 system. Full gate remains running. Engine pushed to integrated PR109 before scientific admission.
+  - "Historical engine-push checkpoint on 2026-09-07, before its full-gate pass recorded above: Immutable engine7daa7c55 push passed45/45 in153.55 seconds; external156.67 wall,208.28 user,26.03 system. Full gate remains running. Engine pushed to integrated PR109 before scientific admission."
   - Readiness records pass31/31 in21.16 seconds before the source-engine freeze; full checkpoint evidence and later push validation remain separate.
-  - Independent perturbed-source review think-p8dk passed10:09:30 UTC, actual10:04:15–10:09:30 (315 seconds), before10:13:43 cap.26 source-free controls pass1.60 seconds wall/1.49 CPU. Exact containment and positive-area overlap are proved symbolically; actual source-control acceptance remains untested.
-  - Both H124 source modules, capped caller and new density controls pass94 combined source-free tests in1.60 seconds. No scientific constructor was invoked.
-  - Fresh10:05 UTC fetch leaves origin/main at dd36800e; external PR110 advanced to57b85302, still no H125 or exp125 allocation. Session094 is local; future scientific IDs remain unallocated until their own records.
-  - Root perturbed-control authoring froze by10:02 UTC with4 expected RED controls followed by39 combined source-free tests passing1.27 seconds; Ruff/format/types clean. The new actual source remains unconstructed.
+  - "Historical source-review checkpoint at 10:09:30 UTC on 2026-09-07: Independent perturbed-source review think-p8dk passed10:09:30 UTC, actual10:04:15–10:09:30 (315 seconds), before10:13:43 cap.26 source-free controls pass1.60 seconds wall/1.49 CPU. Exact containment and positive-area overlap are proved symbolically; actual source-control acceptance remains untested."
+  - "Historical source-free readiness checkpoint on 2026-09-07, before exp125: Both H124 source modules, capped caller and new density controls pass94 combined source-free tests in1.60 seconds. No scientific constructor was invoked."
+  - "Historical ownership checkpoint at 10:05 UTC on 2026-09-07: Fresh10:05 UTC fetch leaves origin/main at dd36800e; external PR110 advanced to57b85302, still no H125 or exp125 allocation. Session094 is local; future scientific IDs remain unallocated until their own records."
+  - "Historical authoring checkpoint at 10:02 UTC on 2026-09-07: Root perturbed-control authoring froze by10:02 UTC with4 expected RED controls followed by39 combined source-free tests passing1.27 seconds; Ruff/format/types clean. The new actual source remains unconstructed."
   - The think-7iwc dispatch text guessed a later start; the author's observed09:55:42 start is retained. Its ten-minute cap implies the stricter10:05:42 deadline, earlier than the stated10:08 outer deadline; it froze09:57:10 before both. No cap was extended.
-  - Root caller authoring think-nqd0 froze by09:57 UTC after initial missing-module RED and13 passing source-free controls in0.64 seconds; lint/format/types clean. Scientific source constructors remain uncalled.
-  - Root source-free perturbed-control authoring think-w5q3 begins09:59 UTC with original cap10:14 UTC; an exact leftward1/100 translation of the published fourth-index top-row square gives a positive-area overlap, subject to independent mathematical review. No actual source is constructed during authoring.
+  - "Historical authoring checkpoint at 09:57 UTC on 2026-09-07: Root caller authoring think-nqd0 froze by09:57 UTC after initial missing-module RED and13 passing source-free controls in0.64 seconds; lint/format/types clean. Scientific source constructors remain uncalled."
+  - "Historical authoring entry at 09:59 UTC on 2026-09-07: Root source-free perturbed-control authoring think-w5q3 begins09:59 UTC with original cap10:14 UTC; an exact leftward1/100 translation of the published fourth-index top-row square gives a positive-area overlap, subject to independent mathematical review. No actual source is constructed during authoring."
   - Required hosted CI checks on published6ff421e5 are green, observed10:02 UTC; optional exhaustive/deferred jobs were skipped by their declared triggers.
-  - Only three descendant task slots are available; the additional mathematical-review spawn was refused. The existing high-thinking auditor performs mechanical control inventory while root owns the mathematical decision; both independent H124 authors remain max thinking.
-  - Fresh09:47 UTC fetch leaves origin/main at dd36800e and external PR110 at4ac71438. Session094, H125 and exp125 are not occupied there; only Session094 is allocated now.
+  - "Historical source-authoring coordination note on 2026-09-07, before the H124 authors froze: Only three descendant task slots are available; the additional mathematical-review spawn was refused. The existing high-thinking auditor performs mechanical control inventory while root owns the mathematical decision; both independent H124 authors remain max thinking."
+  - "Historical ownership checkpoint at 09:47 UTC on 2026-09-07: Fresh09:47 UTC fetch leaves origin/main at dd36800e and external PR110 at4ac71438. Session094, H125 and exp125 are not occupied there; only Session094 is allocated now."
   - Session093 checkpoint23d74f69 and generated map6ff421e5 retain full23498e87 passed1631.92 seconds, delta bfc27c7a push passed130.89 seconds and terminal records passed31/31 in19.84 seconds.
-  stop_reason: null
-  next_action: Continue think-7e72 through immutable collision-source validation and a separate prospective near-axis cover protocol; preserve the terminal density outcome and reprice the independently available seven-row support review for the next slice.
+  stop_reason: Third checkpoint is published with a passing fast source gate and explicit pending full/delta checks. Administrative confirmation crossed11:49 by aboutone minute; no source target or original scientific cap was extended, and the final portfolio endpoint remains13:49.
+  next_action: Post-checkpoint amendment after Session095 exp127 returned no_chain selects BC-259 under think-nwss for independent seven-row support-ceiling adoption. The originally selected fixed collision-cover allocation is terminal; no retry or radius sweep is funded.
 ---
 # Complete Cover and Repaired Density Controls
 
-This is the third two-hour checkpoint slice of the eight-active-hour program that began
-at 05:49 UTC, under `think-il1m`. It continues Session093’s selected `think-7e72`
+This completed the third two-hour checkpoint slice of the eight-active-hour program
+that began at 05:49 UTC, under `think-il1m`. It continued Session093’s selected `think-7e72`
 handoff. Interruptions do not consume the allocation; recursive agent time is separate.
 
 ## Slices and Decisions
@@ -947,7 +971,8 @@ H036. The axis result supplies no independently verified gap or counterexample.
 The selected strengthening adds one fixed collision polygon. Its fixed-displacement
 and collision proofs have been independently accepted, and both source authors have
 frozen. The producer's independent source review is complete; root has also completed
-the reader review. All new collision-source factories remain uncalled. Source-free
+the reader review. At Session094 close, all new collision-source factories remained
+uncalled. Source-free
 review does not establish actual source agreement or authorize a scientific target.
 
 The density lane’s degree-eight repair does not restart the stopped original control
@@ -957,10 +982,12 @@ producer then returned `unresolved` with an `overweight_clique` stop. No indepen
 reader ran and no retry is authorized. This graph-only obstruction is not geometric
 candidate invalidity or a refutation of H099; the bracket `[11, 56/5]` is unchanged.
 
-The next step is to freeze the reviewed collision-source engine and complete its
-immutable validation. Any new scientific target needs its own reviewed prospective
-protocol. Phase 6 and the session remain open for the 11:49 UTC checkpoint; final-slice
-repricing is read-only and does not authorize another source or target invocation.
+The source checkpoint was published by 11:49 UTC. The fast gate on `3bec06e2` passed
+in 169.33 seconds, with confirmation observed at 11:50:19 UTC. Its full gate later passed
+in 1638.75 seconds, observed at 12:26:14 UTC and recorded as a post-checkpoint result.
+Session094 is complete. Session095 activated at 11:51:12 UTC with the original
+13:49 endpoint unchanged. Any new scientific target still requires its own reviewed
+prospective protocol and admission; this handoff does not authorize an invocation.
 
 Root owns shared records, sequential IDs, scientific admission, Git and PR109.
 Mathematical authors and reviewers use max thinking; suitable mechanical work may use

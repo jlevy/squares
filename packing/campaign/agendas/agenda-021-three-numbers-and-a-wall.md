@@ -1075,14 +1075,23 @@ agenda:
           H110 and H123 are accepted and H122 is refuted. Preserve the full
           distinguished square in a changed compatibility discriminator, with
           source-free independent instruments and a new prospective protocol.
-      selected:
-        bead: think-7e72
-        workflow: pipeline-improvement
+      - bead: think-nwss
+        workflow: factual-review
+        priority: 0
         rationale: >-
-          Session091 completed its three targets. Test the changed full-square
-          compatibility obligation without repeating them or duplicating the
-          external BC261/BC273 program. H107 remains paused; BC215 remains an
-          efficiency candidate rather than an automatic research interruption.
+          Added after Session095 exp127, not backdated to this agenda's W10.
+          The fixed collision-augmented axis cover is terminal and unresolved.
+          Independently bind the existing BC259 seven-row support ceiling; a
+          complete ceiling is more informative than diagnosing one candidate clique.
+      selected:
+        bead: think-nwss
+        workflow: factual-review
+        rationale: >-
+          The amended Session094 handoff follows Session095's terminal exp127.
+          Preserve the diagonal lemma and stop this fixed axis representation.
+          BC259 receives source-binding review, with further adoption conditional
+          on concrete readiness. H107 stays paused and external BC261/273 remains
+          separately owned. This is a live selection update, not a W10 outcome.
       operator_input:
         status: unavailable
         note: >-

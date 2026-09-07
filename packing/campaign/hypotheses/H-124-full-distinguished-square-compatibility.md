@@ -62,6 +62,13 @@ Thus the remaining compatibility obligation is the near-axis S band; H124 as a w
 restricted H036 are still unresolved.
 This partial lemma does not change the unrestricted packing bound.
 
+The separately admitted
+[exp127](../series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md)
+then added the fixed collision region described below. Its sole producer returned
+`no_chain` in 0.25 seconds, with no independent reader. This ends that fixed sufficient
+representation's allocation. H124 and restricted H036 remain unresolved; no geometric
+gap or disjoint Q/S witness is certified, and no retry or parameter sweep follows.
+
 Write q=1939/500. The actual angle bands, modulo square quarter turns, are
 [-pi/720,pi/720] and [pi/4-pi/720,pi/4+pi/720]. Both closed unit squares must lie in
 [0,q]^2. Q uses the second band and the canonical center region [1,q/2] x [0,1].
@@ -336,10 +343,10 @@ required $2\varepsilon$ penalty on diagonal normals. The reviewed source retains
 old thirteen regions unchanged and has at most fourteen regions and 68 vertices.
 Empty or degenerate new regions are refused, not silently discarded.
 
-This is instrument readiness only. Neither new scientific constructor has been invoked,
-and actual source agreement, nondegeneracy and complete near-axis coverage remain
-untested. A separate prospective experiment and its admission checks are required.
-No radius sweep, two-angle solver or retry of exp125 is authorized by this construction.
+Exp127 subsequently invoked the producer once after its committed protocol and admission
+checks. The sufficient cover returned `no_chain`; no independent source reader was
+authorized. Actual independent source agreement and complete near-axis coverage remain
+uncertified. No radius sweep, two-angle solver or retry is authorized by this outcome.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

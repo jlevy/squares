@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 93
+count: 94
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 49
-  sessions_unmeasured: 44
+  sessions_unmeasured: 45
   attributed:
     rollups: 115
     turns: 29742
@@ -1463,7 +1463,7 @@ sessions:
     snapshot_incomplete: true
 - id: session-094
   title: "Complete-cover binding and repaired density controls"
-  status: in_progress
+  status: completed
   primary_bead: think-63oj
   phases: 8
   measured: true
@@ -1481,3 +1481,13 @@ sessions:
     active_union_hours: 1.82
     wall_hours: 1.82
     snapshot_incomplete: true
+- id: session-095
+  title: "Collision cover and independent support ceiling"
+  status: in_progress
+  primary_bead: think-ro0s
+  phases: 2
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
+  codex_receipts: []

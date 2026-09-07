@@ -53,16 +53,51 @@ experiment:
       kill. Do not invoke before Session095 begins11:49 UTC. Launch by12:05 and finish
       by12:09 UTC, otherwise preserve non-invocation. No retry or cap extension.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-127-h124-collision-augmented-axis-cover
-  lease:
-    expires: '2026-09-07T12:09:00Z'
-    host: Session095 coordinator
-  results: []
+  effort:
+    timebox: One120-second scientific child; the nonpositive result did not authorize a reader
+    wall_seconds: 0.25
+    stopped_by: criterion
+  results:
+  - shape: determination
+    role: outcome
+    question: Does the fixed collision-augmented representation cover the complete near-axis center domain?
+    outcome: criterion_missed
+    checked_by: The sole producer exited zero and returned unresolved/no_chain. No independent reader was authorized or invoked; neither source agreement nor a geometric gap was independently certified.
   verdict:
-    decision: in-progress
+    decision: unresolved
     primary_criterion: Complete independent source reconstruction and endpoint-chain verification of the fixed augmented axis cover, together with the retained diagonal certificate and reviewed continuous compatibility reduction.
-    reason: Prospectively registered for Session095. Independent protocol review, committed record checks and the immutable engine push gate are required before the sole scientific invocation.
+    reason: The augmented sufficient cover returned no_chain. H124 and restricted H036 remain unresolved, with exp125's diagonal lemma retained. This ends the fixed representation's allocation without a retry, parameter sweep or diagonal rerun.
+    commit: ddf545c9
 ---
 # One Fixed Collision-augmented Axis Cover
+
+The sole producer returned `unresolved` with `no_chain`. H124 and restricted H036 remain
+unresolved. No independent reader ran, and this result supplies neither a geometric gap
+nor a disjoint-square counterexample. The fixed representation's allocation is closed.
+
+## Retained Outcome
+
+The clean `3bec06e2` engine passed its push gate in 147.88 seconds and its isolated
+fast handover gate in 169.33 seconds. Protocol `ddf545c9` passed all 31 immutable record
+checks in 28.45 seconds after independent protocol GO at 11:36:19 UTC. The new session
+had actually begun at 11:51:12 UTC. Full validation remained asynchronous and was not
+claimed as a passed gate or substituted for any required admission.
+
+The sole call completed by the observed 11:55:00 UTC boundary, before the original
+launch and finish cutoffs, with actual exit zero. External timing was 0.25 seconds wall,
+0.21 user and 0.02 system; the child reported about 0.122 seconds wall and 0.120 CPU.
+The envelope had the declared kind and source, and its nested certificate reported
+`status=unresolved`, `stop_reason=no_chain` and no slabs. The packet includes fourteen
+source polygons, including the constructed eight-vertex collision region, but these
+producer-side contents have no independent target replay.
+
+Only `packet.json` and `producer.log` were created under the declared result directory.
+No reader was authorized and no process was repeated. The diagonal lemma from exp125
+is unchanged. Further diagnosis, a new representation or a parameter refinement needs
+separate repricing; this outcome does not fund it. The independent BC259 support review
+continues under its own original allocation.
+
+## Retained Prospective Protocol
 
 This protocol tests the remaining near-axis S branch of
 [H124](../../../hypotheses/H-124-full-distinguished-square-compatibility.md).

@@ -341,19 +341,21 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, select `think-7e72` under BC-255 for a
-changed full distinguished-square compatibility discriminator.
-Allocate source-free controls, independent review and a fresh prospective experiment
-before evaluating the candidate.
-Session 091 accepted H-110 and H-123 and refuted H-122. Its checkpoint `d8b6fcf3` passed
-full validation, with the later source delta covered by the push tier.
+For the next supervised exact-research goal, select `think-nwss` under BC-259 for
+independent adoption of the existing seven-row H099 support ceiling.
+Source-free mapping and independent review precede any separately registered replay.
+Session094 independently certified the diagonal compatibility branch; Session095's
+fixed collision-augmented axis cover returned `no_chain` without a reader. H124 and
+restricted H036 remain unresolved, and that representation receives no retry.
+Source checkpoint `3bec06e2` passed push and fast gates; its full check is asynchronous.
 Keep the continuation on integrated PR 109 while open; do not repeat a completed
 experiment or create another supporting-fix PR.
 [Agenda 024’s Current Allocation](../../../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
 supplies the current priorities.
 The September 7 amendment holds H-107 fixed-site scalar completion out of the next
 two-hour block and selects a bounded conditional-compatibility assessment through Agenda
-024\. The complete-density target remains source-blocked.
+024\. Exp126's later graph-only obstruction leaves H099 unresolved; BC259 may instead
+settle the entire fixed support through a separately bound necessary-row ceiling.
 The earlier BC-215 efficiency program remains uncompleted, not silently discarded.
 See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the latest session,
 funding conditions and independent-review assignments.

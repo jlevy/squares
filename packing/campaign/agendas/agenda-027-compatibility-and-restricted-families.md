@@ -68,7 +68,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: in_progress
     priority: 0
     question: >-
       Does independent source binding and geometric replay accept the contributed
@@ -92,6 +92,8 @@ agenda:
     artifacts:
     - packing/resources/papers/n11-complete-research-bundle-2026-09-07/original_review/certificate/check_support_ceiling.py
     - packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-review.md
     parallel_group: agenda027-support-review
     program: n11-compatibility-and-restricted-families
     next_evidence: >-
@@ -105,6 +107,11 @@ agenda:
       and readiness. It is stronger than diagnosing exp126's reported five-clique:
       an independently bound ceiling of eleven would settle every weight vector on
       this support. No target or adapter implementation is admitted by the inventory.
+      Session095 subsequently completed both source assessments and selected the
+      necessary-lower-incidence variant: 41 distinct positive whole-box inclusions,
+      with complete source binding and the unchanged seven-row multiplier identity.
+      Its second and final readiness allocation runs12:27–12:57 under think-257e
+      and independent review think-9mql. This is not yet scientific adoption.
   - id: BC-260
     purpose: measurement_validation
     owner_focus: correctness
