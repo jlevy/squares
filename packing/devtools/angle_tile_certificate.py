@@ -401,9 +401,14 @@ def fixed_grid_triangles() -> dict[GridIndex, Triangle]:
 
 
 def grid_obligations(
-    side: Scalar, points: tuple[Point, ...], assignments: tuple[tuple[int, ...], ...]
+    side: Scalar,
+    points: tuple[Point, ...],
+    assignments: tuple[tuple[int, ...], ...],
+    *,
+    low: Fraction = ZERO,
+    high: Fraction = ZERO,
 ) -> Iterator[tuple[GridObligation, bool]]:
-    """Yield all 432 fixed-grid theta=0 signed vertex checks in canonical order.
+    """Yield 432 fixed-grid signed checks on one closed slab, defaulting to theta=0.
 
     A caller must consume the complete iterator before claiming a cover. A failed
     entry is only an unresolved assigned-point obligation, not a square escape.
@@ -418,12 +423,12 @@ def grid_obligations(
         for label in row
     ):
         raise ValueError("grid has an unknown marked-point label")
-    _validate_slabs(side, points, (ZERO, ZERO), (TileSlab(ZERO, ZERO, ()),))
+    _validate_slabs(side, points, (low, high), (TileSlab(low, high, ()),))
     for (row, column, triangle_index), triangle in fixed_grid_triangles().items():
         point = points[assignments[row][column]]
         for vertex_index, vertex in enumerate(triangle):
             for axis_index, polynomial in enumerate(
-                membership_polynomials(side, point, vertex, ZERO, ZERO)
+                membership_polynomials(side, point, vertex, low, high)
             ):
-                result = certify_nonnegative(polynomial, ZERO, ZERO, max_depth=0)
+                result = certify_nonnegative(polynomial, low, high, max_depth=0)
                 yield (row, column, triangle_index, vertex_index, axis_index), result.proved

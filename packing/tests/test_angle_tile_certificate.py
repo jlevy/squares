@@ -321,3 +321,33 @@ def test_fixed_grid_refuses_missing_rows_columns_or_changed_labels() -> None:
             pass
         else:
             raise AssertionError("incomplete or mislabeled grid accepted")
+
+
+def test_fixed_grid_closed_interval_charts_and_endpoint_refusals() -> None:
+    labels = ((0,) * 6,) * 3
+    points = ((Fraction(3, 4), Fraction(3, 4)),)
+    zero = Fraction(0)
+    for low, high in ((Fraction(-1, 8), zero), (zero, Fraction(1, 8))):
+        results = tuple(grid_obligations(Fraction(3, 2), points, labels, low=low, high=high))
+        assert len(results) == 432
+        assert all(proved for _index, proved in results)
+    for low, high, expected in (
+        (Fraction(-1, 8), Fraction(1, 8), "split"),
+        (Fraction(1, 8), zero, "domain"),
+        (zero, Fraction(1, 4), "chart"),
+        (0.0, Fraction(1, 8), "Fraction"),
+    ):
+        try:
+            tuple(
+                grid_obligations(
+                    Fraction(3, 2),
+                    points,
+                    labels,
+                    low=low,  # pyright: ignore[reportArgumentType]
+                    high=high,
+                )
+            )
+        except ValueError as error:
+            assert expected in str(error)
+        else:
+            raise AssertionError("invalid grid angle chart accepted")
