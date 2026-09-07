@@ -54,7 +54,7 @@ certificate file of {{HEADLINE_N_ATOMS}} weighted points in
 
 This improves the previous lower bound on the smallest open case of the square packing
 problem: Stromquist’s {{PRIOR_LOWER_DEC}}, stated in {{PRIOR_MEMO_YEAR}} and published
-in {{PRIOR_YEAR}}.[^stromquist-memos][^stromquist][^repair] No intervening improvement
+in {{PRIOR_YEAR}}.[^stromquist-history][^stromquist][^repair] No intervening improvement
 was found by the recorded search.[^novelty]
 
 ## The Agentic Research Framework
@@ -653,6 +653,11 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
     consistent formatting
   - **[KPress](https://github.com/jlevy/kpress):** web and print formatting from
     Markdown
+
+[^stromquist-history]: Stromquist states this bound in
+    [Memo III (1984), p. 10]({{PRIOR_MEMO_URL}}#page=10), as an adaptation of his
+    preceding proof. This suggests he already had the argument, although its unrestricted
+    details are omitted.
 
 [^stromquist]: Walter Stromquist,
     [Packing 10 or 11 unit squares in a square]({{PRIOR_URL}}), Electronic Journal of
