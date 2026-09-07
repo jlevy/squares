@@ -367,22 +367,25 @@ The user commissioned these three commitments in
 accounting; the completed Session 089 allocation is not reopened.
 
 - **BC-251 / H-093:** exp-116 completed its single invocation and independent exact
-  family replay. All rows remained unconverged, and the best dual mass is about 10.080180
-  at depth one. H-093 is unresolved; neither a covering bridge nor an unchanged retry is
-  selected. Any changed mechanism starts with BC-252 assessment.
-- **BC-243 / H-099:** complete a.e.-depth verification of exp113’s unchanged candidate.
-  BC-254 has handed off the finite-row bracket and exp115’s complete pair exclusion.
-  Start with the
-  [complete facet kernel’s 30-minute control slice and separate 15-minute review](../series/series-000-smoke-and-calibration/results/agenda-026/bc-254-post-screen-next-discriminator.md#next-step-complete-face-verification-2026-09-06).
-  The next source/control package is `think-ejwh`, under BC-243’s `think-mt6q`. Price
-  the independent complete slab reader afterward; no target acceptance before both
-  routes and their soundness controls are ready.
-- **BC-255 / H-036 and H-102:** first build the
-  [sufficient closed-tile angle certificate](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md#2026-09-06-next-allocation-after-h-104)
-  in a 20–30-minute source/toy slice, with 10–20 minutes of independent review.
-  The next source/control package is `think-vttn`, under BC-255’s `think-dene`. It must
-  cover the entire near-axis auxiliary domain if successful; a failed Bernstein
-  certificate is unresolved, not a geometric counterexample.
+  family replay. All 19 row-generation solves remained unconverged, and the best dual
+  mass is about 10.080180 at depth one.
+  H-093 is unresolved; neither a covering bridge nor an unchanged retry is selected.
+  Any changed mechanism starts with BC-252 assessment.
+- **BC-243 / H-099:** complete facet and independent slab controls are built and
+  reviewed. The original source passes; the uniform source reaches its unchanged
+  60-second cap on the initial, reciprocal-cache and sign-incidence algorithms.
+  The candidate was never opened by the complete verifier.
+  Keep it source-blocked; a future attempt needs a justified changed algorithm and
+  repriced controls, not a longer cap or unchanged retry.
+- **BC-255 / H-036 and H-102:** H-106 now proves complete continuous near-axis P10
+  coverage. H-108 and H-109 prove canonical near-45 A3 and A1/A2 forcing, using
+  independent exact readers and a reviewed reflection for A2. Localization and both P12
+  clauses remain open; these results do not change H-036 or the global bound.
+- **BC-252 / H-107:** the fixed-site completion adapter passed independent review, and
+  exp-118 retains a prospective 35-minute producer plus 20-minute shared verification
+  allowance. Its launch cutoff passed before the protocol was frozen, so neither
+  allowance was spent.
+  A fresh allocation must precede any target.
 
 The initial commissions are the one scalar invocation and the two source/control
 packages with independent review.
@@ -391,9 +394,45 @@ Larger density or angle steps need an explicit readiness and cost decision at a 
 unpriced retained replays conditional; its two selected slices are complete.
 Use two authors and rotate the third worker into independent review, with the
 coordinator owning shared records and the scalar process.
-PR 101 has merged; publish one integrated successor PR for Session 090 and keep
-supporting slices on it.
+PR 101 has merged; [PR 105](https://github.com/jlevy/squares/pull/105) is the single
+integrated successor for Session 090. Keep supporting slices on it.
 Use `max` for mathematical judgment and `high` or `xhigh` for suitable mechanical work.
+
+### Selected Continuation After Session 090
+
+The next coordinating entry is `think-qv73`, BC-255’s
+[H-110 fixed near-axis P12 escape test](../hypotheses/H-110-fixed-near-axis-p12-escape.md).
+A generic projected-strip gap suggests one frozen rational square.
+No target witness has been evaluated.
+Check this inexpensive risk to the unchanged P12 construction before building a larger
+localization or continuous P12 certificate.
+
+Start a fresh bounded block, with two source-free authors on disjoint producer and
+reader files, a third worker for independent review, and the coordinator owning
+registration and disposition.
+Allow 15–20 minutes per author and 10 minutes per review; these are planning estimates,
+not measured runtimes.
+Only a committed, reviewed prospective experiment may invoke the fixed candidate.
+A verified one-square escape would invalidate that auxiliary construction, not refute
+H-036.
+
+The next independent lane is H-107 fixed-site scalar completion, if a block has room for
+its full producer and verification allowances plus coordination.
+Its reviewed instrument is ready; allocate a fresh prospective experiment without
+rewriting exp-118’s unlaunched history.
+The scalar compute can run alongside the small P12 author/review tasks, with the
+coordinator supervising it.
+Do not occupy another agent slot merely to wait for the process.
+
+If the P12 candidate is rejected, rank near-45 localization ahead of the complete
+near-45 P12 cover. Localization asks for P10 coverage of the complement of the four
+reflected canonical regions; the session handoff records its exact strips.
+If the candidate is accepted, first assess the smallest justified change to the P12
+argument or point construction under a new hypothesis.
+Neither outcome silently funds a repair.
+Density and the eleven-square BC-256 falsifier remain separate candidates, not extra
+default launches. Preserve the larger portfolio’s unspent allocations and all completed
+receipts.
 
 ### Retained Portfolio Commitments
 

@@ -1,0 +1,28 @@
+{"cpu_seconds": 0.013224, "exit_code": 0, "input": "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-120-h-109-near45-a1-a2-forcing/packet.json", "subdivisions": 0, "wall_cap_seconds": 10, "wall_seconds": 0.013377749999563093}
+real 0.09
+user 0.06
+sys 0.01
+
+# Operator provenance appended after completion; the reader stderr and outer timing above are unchanged.
+operator_observed_start_utc: 2026-09-07 03:58:07 UTC
+operator_original_deadline_utc: 2026-09-07 04:03:07 UTC
+reader_dispatch_observed_utc: 2026-09-07 03:58:25 UTC
+reader_return_observed_utc: 2026-09-07 03:58:25 UTC
+result_inspection_observed_utc: 2026-09-07 03:58:35 UTC
+working_directory: /private/tmp/squares-session090-gate.spPKvV/packing
+source_revision: 57ad0deaa0fb9f57ccec7b606171de0507422c82
+source_clean_before_dispatch: true
+actual_external_exit_code: 0
+outer_wall_seconds: 0.09
+outer_user_seconds: 0.06
+outer_system_seconds: 0.01
+outer_cpu_seconds: 0.07
+a1_reader_invocations: 1
+producer_reruns: 0
+a3_reruns: 0
+a2_evaluations: 0
+output_policy: replay.json and replay.log were absent; shell noclobber enabled
+command: /usr/bin/time -p /opt/homebrew/bin/timeout --signal=KILL 10s env PYTHONPATH=src /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.check_angle_near45_triangle_control /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-120-h-109-near45-a1-a2-forcing/packet.json --target-a1
+stdout_path: /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-120-h-109-near45-a1-a2-forcing/replay.json
+stderr_path: /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-120-h-109-near45-a1-a2-forcing/replay.log
+observed_result: proved; six vertex-slab checks; 24 independent inequalities; fixed side, A1 point and both closed slabs; empty unresolved inventory; h036_outcome remains unresolved

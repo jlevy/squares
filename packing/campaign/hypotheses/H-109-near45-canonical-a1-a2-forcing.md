@@ -90,8 +90,8 @@ polynomial covariance without evaluating either scientific target.
 Independent review cleared the instrument at 03:47:14 UTC on 2026-09-07, with 19
 producer controls and 22 reader controls.
 Both exact kernels remain unchanged; the reviewed source is
-`57ad0deaa0fb9f57ccec7b606171de0507422c82`. This establishes instrument readiness, not
-the A1/A2 claim. No A1 target has run.
+`57ad0deaa0fb9f57ccec7b606171de0507422c82`. That review established instrument
+readiness, not the A1/A2 claim; no target had run at that point.
 
 No A1 target had run at registration.
 A failed formal-vertex proof, an exhausted cap or an incomplete receipt leaves the claim
@@ -99,6 +99,16 @@ unresolved; the sufficient triangle may be larger than the actual center domain.
 The initial profile permits no subdivision increase, changed point, narrower angle or
 retry. Even success leaves localization and both twelve-point clauses open, so it does
 not prove H-036 or a global packing bound.
+
+## Outcome
+
+[Exp-120](../series/series-000-smoke-and-calibration/experiments/exp-120-h-109-near45-a1-a2-forcing.md)
+accepted H-109 on 2026-09-07. The sole producer and independent reader proved all 24 A1
+inequalities on the two closed angle signs with actual exit zero.
+The reflection argument above transfers that complete implication to A2 without another
+target run. Combined process cost was 0.26 seconds wall and 0.21 CPU. Localization,
+twelve-point coverage, H-036 and the global packing bound remain unproved by this
+result.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

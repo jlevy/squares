@@ -483,7 +483,7 @@ agenda:
     state: in_progress
     priority: 1
     question: What is the first complete proof obligation for a useful restricted structural theorem?
-    hypotheses: [H-036, H-102, H-104, H-106, H-108, H-109]
+    hypotheses: [H-036, H-102, H-104, H-106, H-108, H-109, H-110]
     budget: >-
       One assessment slice of at most 30 minutes, beginning with H-036's unchanged
       0.25-degree restricted-angle claim. State complete cases, a feasible control,
@@ -506,16 +506,26 @@ agenda:
       independent corner reader pass. No continuous target has run at registration.
       Exp117 subsequently accepts H106 through a source-distinct exact rectangle
       reader: both full closed near-axis signs and all contained centers are covered.
-      Near45 localization, forced multiplicity and twelve-point clauses remain open;
-      the next bounded assessment chooses among those clauses without changing H036.
+      Exp119 and exp120 subsequently accept the canonical near45 A3 and A1/A2
+      implications through independent exact readers and the reviewed local
+      reflection. Localization and both twelve-point clauses remain open.
+      The next-block discriminator is H110 under think-qv73: one frozen near-axis
+      P12 escape candidate suggested by a generic projected-strip gap. No target
+      witness has been evaluated. An escape would invalidate only that unchanged
+      auxiliary construction, not H036 or the accepted restricted lemmas.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-117-h-106-continuous-near-axis.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-119-h-108-near45-a3-forcing.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-120-h-109-near45-a1-a2-forcing.md
+    - packing/campaign/hypotheses/H-110-fixed-near-axis-p12-escape.md
     workflows: [insight-iteration, pipeline-improvement, research-loop]
     depends_on: [BC-250]
     next_evidence: >-
-      Whether one complete restricted theorem is tractable. Only mass-derived
+      Check the fixed H110 candidate before funding larger localization or P12
+      certificates; its controls, independent review and target remain unrun.
+      Only mass-derived
       near-tight forcing needs a valid covering measure; geometric conflicts,
       interval no-goods and restricted wall/angle arguments do not inherently need it.
     parallel_group: agenda026-restricted-theory

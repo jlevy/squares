@@ -53,23 +53,53 @@ experiment:
       file replay with a separate ten-second external and internal cap. No A2
       invocation, retries, subdivision, point changes, side changes or angle narrowing.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-120-h-109-near45-a1-a2-forcing/packet.json
-  lease:
-    expires: '2026-09-07T04:10:00Z'
-    host: Session 090 coordinator
-  results: []
+  effort:
+    timebox: One ten-second producer and one independent ten-second reader, each invoked once; no A2 run
+    wall_seconds: 0.26
+    stopped_by: criterion
+  results:
+  - shape: determination
+    role: outcome
+    question: Does the complete canonical A1 implication hold, and does its reflection establish A2?
+    outcome: criterion_met
+    checked_by: >-
+      The sole producer and source-distinct reader returned actual exit zero.
+      The reader proved six vertex-slab checks and all 24 inequalities, with exact
+      side/A1/slab identity and no unresolved entries. The separately reviewed
+      pair-avoidance reflection transfers the complete implication to A2 without
+      another target. No localization or global packing conclusion follows.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Independently verified A1 forcing on both closed angle signs and a complete reflection implication for A2.
-    reason: Both independent reviews passed; commit this prospective protocol and pass record checks before the sole dispatch.
+    reason: Independent exact A1 replay passed on both closed angle signs; the reviewed reflection establishes A2.
+    commit: bc5c24b5
 ---
 # exp-120 — A1 and A2 from One Certificate
 
-This prospectively tests
-[H-109](../../../hypotheses/H-109-near45-canonical-a1-a2-forcing.md).
-No target has run. The producer review under `think-u3yi` independently passed 19
-source-free tests in 0.35 seconds wall and 0.33 CPU. The reader review under
-`think-rsvp` ran 03:43:26–03:47:14 UTC and passed 22 source-free tests in 0.50 seconds
-wall and 0.46 CPU. Ruff, formatting and BasedPyright were clean.
+This tests [H-109](../../../hypotheses/H-109-near45-canonical-a1-a2-forcing.md).
+H-109 is accepted. The sole producer ran after the observed 03:57:01 UTC preflight and
+before 03:57:32 UTC, with actual exit zero and all 24 inequalities proved.
+The independent reader ran once at 03:58:25 UTC, returned actual exit zero and proved
+all six vertex-slab checks and 24 independent inequalities with the exact identity and
+no unresolved entries.
+Both commands used clean immutable `57ad0dea`. Reflection supplies A2; no A2 target or
+second certificate was evaluated.
+The independent reader’s operator interval was 03:58:07–03:59:23 UTC, 76 seconds.
+
+Producer process cost was 0.17 seconds wall and 0.14 CPU; independent replay cost 0.09
+seconds wall and 0.07 CPU. Combined costs were 0.26 seconds wall and 0.21 CPU, distinct
+from author, review and operator time.
+The prospective protocol was committed at `f2924df0`; its record checks passed after
+`bc5c24b5` repaired a missing synopsis cost-table row.
+The original ten-second process allowances were not repeated or extended.
+
+## Reviewed Readiness and Preserved Protocol
+
+No target had run when this protocol was committed.
+The producer review under `think-u3yi` independently passed 19 source-free tests in 0.35
+seconds wall and 0.33 CPU. The reader review under `think-rsvp` ran 03:43:26–03:47:14
+UTC and passed 22 source-free tests in 0.50 seconds wall and 0.46 CPU. Ruff, formatting
+and BasedPyright were clean.
 Source commit `57ad0dea` freezes both reviewed adaptations; their generic mathematical
 kernels are unchanged from `bdc68784`.
 
@@ -92,7 +122,7 @@ construction or Bernstein calculation.
 The reader also imports the existing bounded JSON loader; the producer parses its worker
 packet separately.
 
-## Launch and Decision
+## Preserved Launch and Decision Protocol
 
 Finish independent review, freeze the source commit and commit this protocol before
 dispatch. All record checks must pass.
@@ -119,8 +149,8 @@ reader. Preserve an explicit non-invocation note, not an invented receipt.
 A failed sufficient triangle margin or timeout is unresolved, not a counterexample.
 No failure permits another invocation, changed point, smaller angle interval or
 subdivision increase.
-The lease expires before the block’s closing reserve; it is not a replacement for either
-ten-second process cap.
+The original lease was set to expire at 04:10 UTC, before the block’s closing reserve;
+it was not a replacement for either ten-second process cap.
 
 Even success leaves near-45 localization and both twelve-point clauses open.
 It does not establish H-036 or improve the global packing bound.
