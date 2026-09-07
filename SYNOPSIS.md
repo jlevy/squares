@@ -253,6 +253,8 @@ case or experiment separately.
 | [Validation Efficiency Ideas](packing/benchmarks/validation-efficiency/ideas.md) | implementation plan | supporting | maintained | — |
 | [Reuse Float Midpoint-to-Cell Lookup](packing/benchmarks/validation-efficiency/experiments/VE-001-float-oracle.md) | research synthesis | record | retained | — |
 | [Reuse Bridge Row Inventory](packing/benchmarks/validation-efficiency/experiments/VE-002-bridge.md) | research synthesis | record | retained | — |
+| [Start Exact Verification Earlier](packing/benchmarks/validation-efficiency/experiments/VE-003-checks-start-order.md) | research synthesis | record | retained | — |
+| [Start Exact Verification Earlier: Corrected Setup](packing/benchmarks/validation-efficiency/experiments/VE-004-checks-start-order.md) | research synthesis | record | retained | — |
 | [Validation Efficiency Campaign](packing/benchmarks/validation-efficiency/README.md) | component scope and use | supporting | maintained | — |
 | [Validation Efficiency Results](packing/benchmarks/validation-efficiency/report.md) | generated status view | generated | generated | — |
 | [Exhaustive Checkpoint Exploration](docs/project/reviews/review-2026-09-06-validation-exhaustive-cost.md) | dated review record | record | retained | — |

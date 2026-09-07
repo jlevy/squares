@@ -411,6 +411,14 @@ Its 31 record checks passed in 27.95 seconds before the engineering registry was
 changed. Recovery receipts and their original failures remain in the attic until the
 measured result is integrated.
 
+The first VE-003 control failed one of 48 checks: its new protocol had not been added to
+the document map. The failed observation is retained under its original label, with no
+performance conclusion. VE-004 is the next sequential engineering record and continues
+the comparison after repairing the shared setup. It preserves the workload, acceptance
+rule and original failure. Both arms freeze the same repaired records before timing.
+The scheduler review at 19:39:58–19:41:04 found no blocker; the recovery disposition
+review at 19:47:34–19:48:12 confirmed this treatment of the failed setup.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

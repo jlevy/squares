@@ -520,12 +520,6 @@ class Step:
     its own budget still fails. An explicit `--timeout-seconds` on the command line still
     wins, so an operator can always tighten what a step asked for."""
 
-    start_early: bool = False
-    """Prefer this step within its budget class to reduce a measured late tail.
-
-    This is only a submission hint; it changes neither timeout nor report order.
-    """
-
     def reachable_from(self, path: str) -> bool:
         """Can a change to `path` affect this step?
 
@@ -2768,9 +2762,6 @@ STEPS: tuple[Step, ...] = (
         "exact verification",
         _exact_verification,
         fast=True,
-        # PR110 run34154326299: a 42s launch delay leaves a 41s exact-only tail.
-        # VE-003 measures starting it sooner without extending any timeout.
-        start_early=True,
         touches=(
             *_CORE,
             *_CASES,
@@ -3591,7 +3582,7 @@ def _selection_needs_marker(selected: Sequence[Step]) -> bool:
 
 
 def _submission_order(selected: Sequence[Step]) -> list[Step]:
-    """Submit budgeted steps first, then early hints, with stable ties.
+    """The order steps are handed to the pool: longest first, declared order after.
 
     The pool has `--jobs` workers and takes steps in submission order, so a long step
     submitted late starts late and the run ends when it finishes. In declared order the
@@ -3603,18 +3594,13 @@ def _submission_order(selected: Sequence[Step]) -> list[Step]:
     `budget_seconds` is the ordering key because it is already the file's declaration
     that a step runs long, argued next to each of the three that carry one; nothing here
     guesses a duration. Descending, so the longest budget goes first, and stable, so
-    ties keep declared order unless a measured late tail earns `start_early`.
-    The hint is separate from a subprocess budget so starting sooner cannot grant a
-    longer timeout.
+    everything unbudgeted keeps declared order.
 
     This changes when steps start, never what is reported: `_run_selected` collects
     results by name and replays them in declared order, which is the property that keeps
     two runs comparable.
     """
-    return sorted(
-        selected,
-        key=lambda step: (-(step.budget_seconds or 0.0), not step.start_early),
-    )
+    return sorted(selected, key=lambda step: -(step.budget_seconds or 0.0))
 
 
 def _run_selected(

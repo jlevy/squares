@@ -10,7 +10,8 @@ Selected test hashes do not establish whole-tree equivalence. Within-arm whole-t
 | --- | --- | --- | --- |
 | [VE-001](experiments/VE-001-float-oracle.md) | 275.50 (261.05-282.51), n=3 | 17.45 (17.20-17.98), n=3 | Screen passes (93.7% median reduction); correctness and complexity review required; whole-tree diff varied within an arm: affected-source audit required, whole-tree equivalence is not established |
 | [VE-002](experiments/VE-002-bridge.md) | 84.30 (81.13-86.28), n=3 | 31.72 (30.99-36.51), n=3 | Screen passes (62.4% median reduction); correctness and complexity review required; whole-tree diff varied within an arm: affected-source audit required, whole-tree equivalence is not established |
-| [VE-003](experiments/VE-003-checks-start-order.md) | No passing samples | No passing samples | Pending samples |
+| [VE-003](experiments/VE-003-checks-start-order.md) | No passing samples | No passing samples | Incomplete or unsuccessful observation; no acceptance |
+| [VE-004](experiments/VE-004-checks-start-order.md) | No passing samples | No passing samples | Pending samples |
 
 ## Observations
 
@@ -28,6 +29,7 @@ Every observation is listed, including incomplete or failed work.
 - `1741e67758234729a146ccc7ba9abbb4`: bridge-control, passed, 86.28s, 3 test cases; [output](runs/1741e67758234729a146ccc7ba9abbb4.stdout.log), [errors](runs/1741e67758234729a146ccc7ba9abbb4.stderr.log).
 - `bf593ac7118341fbb674ec003474285f`: float-candidate, passed, 17.45s, 1 test cases; [output](runs/bf593ac7118341fbb674ec003474285f.stdout.log), [errors](runs/bf593ac7118341fbb674ec003474285f.stderr.log).
 - `6d8c5acc3ed24962943d4467e71d3a07`: bridge-candidate, passed, 36.51s, 3 test cases; [output](runs/6d8c5acc3ed24962943d4467e71d3a07.stdout.log), [errors](runs/6d8c5acc3ed24962943d4467e71d3a07.stderr.log).
+- `a742211d2fb644eb835a6255a8e9268b`: checks-order-control, failed, 99.48s, 1 test cases; [output](runs/a742211d2fb644eb835a6255a8e9268b.stdout.log), [errors](runs/a742211d2fb644eb835a6255a8e9268b.stderr.log).
 
 The append-only [receipts](runs/receipts.jsonl) retain commands and provenance.
 
