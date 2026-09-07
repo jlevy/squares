@@ -3119,11 +3119,12 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-091.yaml` | session-091 | 553 | 5.05 h | 1.93 h | 1.93 h | yes |
 | `codex-task-tree-session-093.yaml` | session-093 | 673 | 6.07 h | 1.99 h | 1.99 h | yes |
 | `codex-task-tree-session-094.yaml` | session-094 | 562 | 4.53 h | 1.82 h | 1.82 h | yes |
+| `codex-task-tree-session-095.yaml` | session-095 | 152 | 1.68 h | 0.7 h | 0.7 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 49 |
-| unmeasured | 45 |
+| measured | 50 |
+| unmeasured | 44 |
 | **total** | **94** |
 
 <!-- END GENERATED: session-close-report -->

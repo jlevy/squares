@@ -12,7 +12,7 @@ session:
   started_at: '2026-09-07T11:51:12Z'
   deadline_at: '2026-09-07T13:49:00Z'
   branch: codex/structural-compatibility-continuation
-  resource_rollups: []
+  resource_rollups: [packing/campaign/resource-usage/codex-task-tree-session-095.yaml]
   goal: Disposition the fixed H124 axis cover and independently assess the existing BC259 support-ceiling route, retaining scoped mathematical progress on integrated PR109.
   workflow_phases:
   - workflow: research-loop
@@ -230,9 +230,33 @@ session:
     fallback: "Freeze completed record changes and report remaining reconciliation gaps."
     write_scope: ["packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md"]
     excluded_commands: ["Other-file or generated-view edits","Git or external PR actions","Scientific source or target invocation"]
+  - task: Session095 partial cost receipt (think-3iw1)
+    operator: Codex checkpoint_handoff_audit, high thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Privacy-reduced receipt frozen through12:33:04; 2512seconds wall and active union,6034.707recursive agent seconds and152model responses. Actual task12:33:04–12:33:56.
+    evidence: [packing/campaign/resource-usage/codex-task-tree-session-095.yaml]
+    files: [packing/campaign/resource-usage/codex-task-tree-session-095.yaml]
+    checks: [Schema valid without repairs; collector25.87seconds wall and24.14CPU.]
+    uncertainty: Live-event and interval-boundary lower bound; work after the cutoff and the771-second gap after the previous receipt are not covered.
+    elapsed_seconds: 52
+    elapsed_quality: operator_reported_approximate
+    next_action: Bind the frozen aggregate receipt and update the generated branch-cost prefix.
+    phase: 2
+    budget_minutes: 10
+    started_at: '2026-09-07T12:33:00Z'
+    deadline_at: '2026-09-07T12:43:00Z'
+    expected_output: Privacy-reduced additive cost receipt through an observed cutoff.
+    validation_command: softschema repair --check
+    kill_condition: Original deadline or unavailable provenance; retain uncertainty rather than infer missing cost.
+    fallback: Retain the previous lower bound and a missing receipt notice.
+    write_scope: [packing/campaign/resource-usage/codex-task-tree-session-095.yaml]
+    excluded_commands: [Scientific source or target execution, Shared registry or Git writes, Raw prompt or reasoning output]
   outputs:
+  - packing/campaign/resource-usage/codex-task-tree-session-095.yaml
   - packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md
   checks:
+  - Frozen0604812c push delta failed only the control-anchor inventory in73.01seconds;723behavioral tests passed. No passing push or publication is claimed for that snapshot until the anchor correction passes its own validation.
   - Fresh12:28 upstream inspection at86dbff43 finds external BC279 and BC280 allocated under Session092. The next BC pointer is281, not a reservation; exp128 remains free. Origin/main remainsdd36800e and PR110 is still open.
   - 'Full immutable 3bec06e2 gate: ALL CHECKS PASSED in 1638.75 seconds wall; external 1638.87 seconds wall, 3235.32 user and 91.41 system. Root observed completion at 12:26:14 UTC. This source-engine result does not validate subsequent checker or record changes.'
   - Exp127's sole producer completed by11:55:00, actualexit0, in0.25 seconds external wall; packetunresolved/no_chain. No reader was authorized. The fixed axis representation's allocation ends; H124 and restrictedH036 remain unresolved with the diagonal lemma retained.
