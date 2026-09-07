@@ -5,7 +5,7 @@ title: Publish and validate Session097 integrated research checkpoint
 kind: task
 status: in_progress
 priority: 1
-version: 18
+version: 21
 spec_path: packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md
 labels: []
 dependencies: []
@@ -19,11 +19,12 @@ child_order_hints:
   - is-01m1z0f7at794ynnhcf2pa7my2
   - is-01m1z0wvtasxnptpt2pg4qnty1
   - is-01m1z1d949sby1tkrav2k92sfh
+  - is-01m1z2grw8sr01t7ynft3hrnz9
 created_at: 2026-09-07T21:04:19.475Z
-updated_at: 2026-09-07T23:11:23.770Z
+updated_at: 2026-09-07T23:16:17.563Z
 ---
 At each useful block boundary stop writers; review spec/agenda status and all diffs under tbd shortcuts and Practical Prose; regenerate the document, ledger and session views; retain a privacy-reduced interval receipt with fixed start20:56:47.766UTC and observed end; run change-reachable push validation and the complete immutable checkpoint as required; commit explicit owned paths, push, create/update one cost-first PR with results, limits, ownership and ID allocations; follow actual hosted CI results asynchronously. Keep pending and passed distinct, and sync beads.
 
 ## Notes
 
-Actualnormalpushcompleted: origin/codex/n11-kernel-pricing advanced d6f0c403→8d79f9a9 at23:10. PR116 remainsOPENdraft andbodyexplicitlyrecords knowncertificationfailure, noninvocation, reviewedrejectionofoldpass, allIDs/cost/limits/nextOR12/15review. Allownedresearchworkisnowremote; thisisNOTmerge-ready. Latestpush41807andfull71633stillrunning; preservefrozencheckouts. Hook/formatthinkriceclosed. Upstreamfetch23:10completed, verifycurrentmainheadbeforefuturemerge. ExistingheartbeatupdatedwithcurrentnativeIDs/paths/provenanceNO andfreshreviewentry; no oldscientificscopeauthorized.
+Fullengine71633ACTUALexit1 collected23:14:11:3616.36gate3616.57external,3760.14user199.62sys.4failedsteps: historicalregressions(D019angleoffsetfolding/linesearch,D168n10adjacentclosure), fastpertestelapsedceilings, slow1800timeout, exhaustive3600timeout. Other62stepspassed; no gatepassed/certifyingdeclaration isavailableforlaterengine. Do notassumeallhostload. Fullfrozencheckoutandsharedvenvare nowreleasedbyitscompletedprocess; read-onlyhighPR114mergeaudit92s23:13:00–23:14:32 accepted15paths/no scientificIDs/claims/archive/kernelchanges. Main373bebfont/layout gitlinkanddepsnotcertifiedbyoldfull. Rootmergingmainwithsubmodulerecursionfalse; followupmustsyncverifiedlockeddeps/vendorandvalidatechangedrendering plusresolveexistingcertificationcontractseparately.

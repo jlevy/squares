@@ -5,11 +5,11 @@ title: Validation gate runs 6+ min against a documented 2 min budget
 kind: bug
 status: open
 priority: 1
-version: 5
+version: 6
 labels: []
 dependencies: []
 created_at: 2026-08-27T23:50:11.313Z
-updated_at: 2026-09-07T22:52:45.133Z
+updated_at: 2026-09-07T23:27:31.095Z
 ---
 conventions.md states the tiers as: focused under ~60s, checkpoint ~2 min, deep handoff ~5 min. The actual full gate wall time is 380-440s and the 'fast behavioral tests' step alone was 366-413s, so the fast tier is 6x its budget and the full gate exceeds the deep-handoff tier.
 
@@ -31,3 +31,6 @@ Related September7 repair on PR110: original03ff2102 passed correctness but fail
 Upstream integration checkpoint September7: published1b953c95 passed every required check in34166050586; checks48 took133.94s within the unchanged band. The local full dbd60231, same implementation as1b apart from two Markdown files, hit900s quick/n40 timeouts,1800s slow timeout and three120s negative-control timeouts. Independent process inspection observed several heavy validation/test runs in other worktrees. This is evidence of overlapping load, not a quantified causal attribution or a performance comparison. Prior ed595fb6 used the same Python3.14.7,10CPU,jobs10/inner3 settings and caps; its quick329.16s/n40250.51s/slow715.60s/controls402.20s/full1616.00s are retained context.
 
 Recoveries preserve the failed original status and all original caps/assertions. The three controls passed serially in38.296s,37.724s and26.409s. Isolated n40 on clean dbd60231 passed623.683s on September7 at22:45:40UTC, jobs2/inner1, inside900s. Hosted suite source equivalence is independently verified and covers3456 quick tests in121.72s; it does not cover the separate slow lane or prove native macOS runtime success. Slow replay and exhaustive completion remain pending under think-dwq8. Evidence is retained in attic/agenda-028-overnight/upstream-reconciliation-dbd60231 and PR110; no budget edit or claim of a new speedup follows from these recoveries.
+
+
+Final recovery: PR114 subsequently changed the lock/submodule; its local merge dcbcf2cf has the same tree as hosted c1b58f66. Required run34168353773 passed that entire incoming tree. Final da4e67cb differs only in two documentation files and passed45 pre-push steps in122.84s,646 tests; final required run34169470614 passed with3483 quick tests. The broad local pre-push fallback was interrupted after44 passing steps as duplicate coverage; it deliberately includes slow tests and has its proper1800s cap, so no cap mismatch is asserted. The old local slow replay was also interrupted; owned children were confirmed stopped. Both remain incomplete. Current-source deferred run34168399417 passed98 slow tests (855.21s step),163 controls (426.45s),n40 (232.30s),and55 exhaustive tests (1490.39s), all with unchanged assertions and caps. Native receipts bind clean c1b58f66. PR110 is CLEAN/MERGEABLE at da4e67cb and its publication obligation is complete under think-dwq8. Earlier local full failure remains failed; no aggregate new performance improvement or attribution to contention is claimed. This broader validation-cost issue remains open.
