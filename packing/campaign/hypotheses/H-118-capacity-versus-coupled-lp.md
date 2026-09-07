@@ -110,8 +110,17 @@ decision. No strict comparison with a matched coupled LP has been made.
 The
 [midpoint allocation](../series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md)
 selects BC279’s exact common core conditioned on each center’s wall clearance.
-Its complete-model admission must precede any capacity determination; it retains the
-unchanged boundary-band parent and gives no new global premise.
+Its exact maximal-core identity and complete model passed independent admission.
+The bounded target attempt and
+[fresh audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-independent-review.md)
+accept two distinct exact six-core configurations, including every shared-normal pair
+certificate. A strict three-strip cover excludes adding a seventh to one fixed
+arrangement; rearranging those centers remains free in the actual target.
+Neither whole-model exclusion nor a seven-core witness was obtained.
+The six-core controls refute a bound below six, while capacity at most six remains
+unresolved even at their fixed four-pose configuration.
+BC279’s allocation is closed with those partial results; a future attempt needs a
+specific new implication or separately priced complete method.
 H118 remains open, and the global bracket is unchanged.
 
 <!-- This document follows common-doc-guidelines.md.

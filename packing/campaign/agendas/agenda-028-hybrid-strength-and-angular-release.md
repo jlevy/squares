@@ -457,7 +457,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: in_progress
+    state: stopped
     priority: 1
     question: Does the exact maximal wall-conditioned common-core model admit seven residual centers anywhere on the unchanged complete Gamma0?
     hypotheses: [H-118]
@@ -476,16 +476,25 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-control-review.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-author.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-adversary.md
-    next_evidence: Both independent target writers froze within their caps with exact six-core controls and unresolved whole M7. A fresh20-minute audit checks all predicates and the author's fixed-arrangement insertion cover; no uniform capacity upper bound is claimed.
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-independent-review.md
+    next_evidence: The fresh audit accepts both exact six-core controls and fixed-insertion obstruction. Whole M7 remains unresolved. Reprice a specific new moving-center implication or complete method before another attempt; no unchanged retry.
+    outcomes:
+    - scope: Entire maximal wall-conditioned seven-core model on unchanged Gamma0
+      classification: inconclusive
+      result: Both independent attempts and the fresh audit finished within their caps. All graph values and39 same-normal certificates per configuration pass, as do the strict insertion cover and conditional wall-edge lemma. Neither a seven-core witness nor a uniform upper capacity bound is established.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-independent-review.md
+      disposition: continue
+      follow_up: think-0yfe
   - id: BC-280
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 2
     question: What complete physical common-angle release domain with t in[0,1] can be admitted without losing signed slides, source features or closed seams?
     hypotheses: [H-120]
-    budget: One20-minute domain/control design in the spare independent slot during BC279 target work, then at most15 minutes of separately dispatched independent admission. No target determination is allocated here.
+    budget: One20-minute domain/control design in the spare independent slot during BC279 target work, then at most15 minutes of separately dispatched independent admission. Phase17 separately records15 minutes of prospective target-protocol design in parallel; no target determination is allocated here.
     entry: Accepted BC273/BC276 signed middle-angle exclusion, exact source-feature equations and the midpoint's complete-chart alternative. Preserve the original side, slide, wall and contact pattern.
     exit: A complete native domain, exact parent/control binding, closed angle/sign cover and independent admission or a precise failed premise; no new exclusion or packing witness.
     bead: think-7ylp
@@ -496,7 +505,37 @@ agenda:
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md
-    next_evidence: Complete t and v in[0,1] design froze11:52:30. The independent15-minute admission checks all eight closed angle-sign children and source binding; a separate prospective protocol draft allocates no target work yet.
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-domain-review.md
+    next_evidence: Independent domain admission is complete without defining correction. BC281 owns the separate complete determination after native protocol review and passing committed records.
+    outcomes:
+    - scope: Complete physical-angle signed short-slide source-feature domain and parent controls
+      classification: achieved
+      result: Independent source and domain reconstruction accepts all physical block and square10 angles,44 containment rows,55 complete SAT clauses, exact corner and lift maps, parent binding and eight closed angle-sign children. Only two middle children inherit exclusion; the remaining six are a new complete target.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-domain-review.md
+      disposition: retire-success
+      follow_up: think-ilpc
+  - id: BC-281
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: in_progress
+    priority: 1
+    question: Is the entire full physical-angle signed short-slide source-feature family empty throughout side381/100 through96/25?
+    hypotheses: [H-120]
+    budget: At most30-minute analytical author and25-minute independent adversary, then20-minute fresh audit. A separately reviewed complete protocol, committed record and passing records precede dispatch; actual leases and latest launch are frozen there. All work ends before the existing14:11 final reserve, without retry or extension.
+    entry: Independently completed BC280 domain admission and exact inherited BC273/BC276 middle-angle scope. Fresh local and source inventory at12:21UTC found no BC281 or later native commitment; think-ilpc allocates this next sequential ID.
+    exit: Independently accepted complete exclusion, rigorously verified actual eleven-square packing in the unchanged domain, or exact partial implications and explicit unresolved remainder. No new global representative or unrestricted bound follows from family exclusion.
+    bead: think-ilpc
+    workflows: [insight-iteration, factual-review]
+    depends_on: [BC-280]
+    parallel_group: agenda028-structure
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-release-protocol.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-protocol-review.md
+    next_evidence: BC280 and the native protocol have independent GO, with final checks12:33:54. Phase18 declares writer deadlines13:06 and13:01; no target begins before committed records pass. Latest target dispatch12:45, fresh20-minute audit and absolute scientific endpoint13:35 remain unchanged.
 ---
 # Agenda 028 — Hybrid Strength and Angular Release
 
@@ -520,10 +559,12 @@ X-016’s continuing source program retains H-110 and conditional compatibility.
 X-017 / Agenda 027 retains H-111–117, BC-258–268, the complete anchor and six-plus-five
 pilots, support adoption, physical KKT review, and the sole BC-261 geometry interface.
 This agenda adds X-018, H-118–121 and BC-269–275; its execution takes session-092. The
-execution adds the next sequential commitments BC276 under existing H120 and BC277–279
-under existing H118; no new hypothesis or experiment ID is needed for these extensions.
-Fresh source inventory at11:12 UTC places its continuation in sessions091,093 and094,
-H122–124 and experiments121–125. Its owner independently reconciled the former
+execution adds the next sequential commitments BC276 under existing H120, BC277–279
+under existing H118, and BC280 full-angle domain admission and BC281’s prospective
+complete-domain determination under H120. No new hypothesis or experiment ID is needed
+for these extensions.
+Fresh source inventory at12:16 UTC places its continuation in sessions091,093–095,
+H122–124 and experiments121–127. Its owner independently reconciled the former
 unpublished H118 collision before publication; no cross-task message was sent.
 This execution retains session092 and allocates no new hypothesis or experiment ID.
 Recheck live allocations before claiming any later ID; a next-ID pointer is not a

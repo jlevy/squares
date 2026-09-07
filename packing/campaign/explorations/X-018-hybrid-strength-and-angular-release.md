@@ -33,9 +33,11 @@ exploration:
 ---
 # X-018 — Hybrid Strength and Angular Release
 
-**Put the largest new allocation into a fair test of local compatibility, and a smaller
-independent allocation into angular structure.** The first asks whether a certified
-capacity can remove a continuous domain left by a strong geometric relaxation.
+**Prioritize a complete physical-angle release attempt for the remaining overnight
+mathematics, conditional on independent domain admission.** The opening allocation put
+most attention into local compatibility and a smaller share into angular structure.
+The first asks whether a certified capacity can remove a continuous domain left by a
+strong geometric relaxation.
 The second asks whether releasing one of Trump’s angle-forcing contacts opens a
 tractable family beyond the retained local theorem.
 These are concrete ways to test the structural direction emerging from the last day’s
@@ -117,8 +119,8 @@ The wall/contact assignments remain substantial restrictions.
 No finite-motion or global representative theorem follows.
 
 The global bracket is unchanged.
-These results favor spending the next principal allocation on a genuinely uncovered
-parent or a fair comparison with a concrete missing premise.
+These results favor spending the next principal allocation on an uncovered parent or a
+fair comparison with a concrete missing premise.
 Extending the completed feature box or building its unused cavity adapter would need a
 new scope-value argument.
 BC271 prices the comparison before any target or additional implementation, while the
@@ -138,17 +140,43 @@ The
 [adopted midpoint decision](../series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md)
 selects BC279’s maximal wall-conditioned common core for independent admission, with the
 complete physical release chart $t\in[0,1]$ as the next alternative.
+BC279’s independent bounded attempts have now frozen with exact six-core controls and
+the whole seven-core question unresolved; the
+[fresh audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-independent-review.md)
+accepts those partial results.
+An insertion obstruction for one fixed arrangement cannot establish capacity at most
+six. Another unchanged attempt has no new premise yet.
+
+BC280’s frozen
+[full-angle domain](../series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md)
+instead removes the entire common-angle restriction while preserving the source wall and
+contact pattern, signed short slides and all eleven actual-square conditions.
+It covers eight closed angle/sign children; only two inherit the accepted theorem.
+The six-child remainder is a complete, geometrically motivated next target whose success
+would materially enlarge the continuous family excluded tonight.
+Independent domain admission is complete.
+BC281’s prospective protocol and controls still require independent review and passing
+committed records before execution.
+The global representative question remains too broad for the remaining block without a
+new reduction or a concrete complete domain.
+
 Source H124’s accepted diagonal-band cover and unresolved near-axis obligation remain
-with its separate coordinator, most recently in session094 and exp125.
+with its separate coordinator.
+At12:16 UTC, its collision-augmented exp127 producer returned `no_chain`, with no
+independent target reader.
+This supplies neither a geometric gap nor a counterexample.
+Its source-bound seven-row support review also remains separately owned; none of these
+tasks is duplicated here.
 
 ## Ranked Portfolio
 
 | Priority | Avenue and owner | Most useful next result | Why allocate attention |
 | --- | --- | --- | --- |
 | First, continue | X-016 / Agenda 024 source coordinator | H-110’s fixed-candidate decision and the next conditional-compatibility or localization obligation | Builds directly on accepted auxiliary lemmas and an already active continuation; avoid competing with its work |
-| First, new discriminator | X-018 / H-118 | A target-side capacity exclusion with an exact surviving coupled outer-LP witness on the same domain, or a precise failure of the selected comparison | Determines whether a particular new cut earns expansion before a large tree is built |
+| First, remaining local allocation | X-018 / H-120 | Complete physical-angle release exclusion, exact target packing, or a precise surviving case | Uses the accepted middle-angle proof while testing the complete new remainder, after scoped capacity attempts reached unresolved moving-center obligations |
+| Reprice before another attempt | X-018 / H-118 | A changed complete-domain implication or a natural matched LP and exact surviving point | The disk and octagon bounds are false; the maximal wall-core question is unresolved, and a fixed insertion obstruction supplies no uniform upper bound |
 | First, direct-proof consumer | X-017 / H-111 and H-112 | A complete anchor case or contact-independent common-angle interval, with a useful explicit remainder | Converts accepted local methods into actual lower-bound domains; retains the shortest route to unrestricted progress |
-| Second, independent mathematics | X-018 / H-120, informed by H-121 | A closed released-contact domain outside retained local scope, or a specific obstruction to the proposed simplification | Tests new geometry and a potential reduction of angular complexity without waiting for a global cover |
+| Longer-term structural question | X-018 / H-121 | A precise global representative reduction or counterexample | Could reduce angular complexity substantially, but the current family exclusions supply no finite-motion or representative premise |
 | Short closure task | X-017 / BC-259, H-099 | Independent acceptance or a missing binding in the proposed seven-row ceiling | May prevent spending the night on an unchanged support that has an exact obstruction |
 | Conditional next | X-018 / H-119 | A shared-anchor gain when independent minimization is the diagnosed bottleneck | A targeted response to evidence, rather than a third speculative engine |
 

@@ -39,7 +39,10 @@ hypothesis:
     BC276 independently excludes the full negative short-slide sibling N;
     together with the diagonal sign lemma this closes the signed short-slide
     parent S. Other block angles, longer slides and changed wall/contact
-    patterns remain open. No finite-motion theorem or global bound is claimed.
+    patterns remain open. BC280 independently admits the complete physical block
+    chart t in[0,1]; BC281 separately prices its whole-family determination.
+    No enlarged target has begun at this checkpoint. No finite-motion theorem
+    or global bound is claimed.
 ---
 # H-120 — Rank-Nine Release Exclusion
 
@@ -124,6 +127,21 @@ The common block-angle interval, variable side, prescribed wall/contact pattern 
 every square10 orientation remain exactly as declared.
 These are analytical proofs with independent audits; no machine target, finite-motion
 theorem or global representative claim is added.
+
+BC280’s
+[full-angle domain](../series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md)
+and
+[independent admission](../series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-domain-review.md)
+retain all physical common angles through $t\in[0,1]$, both slide signs, variable side,
+all source features, 44 actual containment rows and 55 complete SAT clauses.
+The eight closed angle/sign children include the two accepted middle-angle children; six
+remain unresolved. Interior quarter-turn lifts and label-specific recontact children
+retain their explicit conversion obligations.
+BC281’s
+[prospective protocol](../series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-release-protocol.md)
+asks for the complete determination, conditional on its own independent admission and
+passing committed records.
+A new target has not begun at this checkpoint.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

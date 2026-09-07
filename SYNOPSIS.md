@@ -203,6 +203,10 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [BC-281: Independent Native Protocol and Control Admission](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-protocol-review.md) | dated review record | record | retained | — |
+| [BC-279: Independent Audit of the Two Six-Core Results](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-independent-review.md) | dated review record | record | retained | — |
+| [BC-280: Independent Admission of the Full-Angle Release Domain](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-domain-review.md) | dated review record | record | retained | — |
+| [BC-281: Complete Physical-Angle Release Determination](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-release-protocol.md) | implementation plan | record | retained | — |
 | [BC-279: Author Result and Exact Six-Core Control](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-author.md) | research synthesis | record | retained | — |
 | [BC-279 Adversary: Six Exact Wall Cores; the Seven-Core Question Remains Open](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-adversary.md) | research synthesis | record | retained | — |
 | [BC-280: Full-Angle Signed-Release Domain](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md) | implementation plan | record | retained | — |
@@ -3129,7 +3133,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
 | `codex-task-tree-session-090.yaml` | session-090 | 1,341 | 9.8 h | 3.94 h | 3.95 h | yes |
-| `codex-task-tree-session-092.yaml` | session-092 | 1,084 | 12.13 h | 4.78 h | 4.78 h | yes |
+| `codex-task-tree-session-092.yaml` | session-092 | 1,273 | 14.58 h | 5.75 h | 5.75 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
