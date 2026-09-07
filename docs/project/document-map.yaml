@@ -9,6 +9,9 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-07-n11-hybrid-strategy.md, role: review, authority: supporting, lifecycle: maintained}
   - {path: docs/project/reviews/review-2026-09-06-validation-efficiency-implementation.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/validation-efficiency/ideas.md, role: plan, authority: supporting, lifecycle: maintained}

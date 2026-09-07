@@ -32,8 +32,9 @@ hypothesis:
   registered: '2026-09-07'
   notes: >-
     The direct-exclusion specialization of H-TBD-RELEASE, owned by BC273.
-    Exact box endpoints and positive segment-length bounds remain to be selected
-    before a prospective target determination. No finite-motion theorem is claimed.
+    Session092 selects a compact source-feature pilot and a middle-angle child;
+    independent model acceptance and controls precede any target determination.
+    No finite-motion theorem is claimed.
 ---
 # H-120 — Rank-Nine Release Exclusion
 
@@ -61,6 +62,16 @@ This is narrower than all six-axis/four-plus-one configurations and cannot estab
 global few-angle representative.
 A finite-motion or original-minimizer-only stationary argument needs its own prospective
 premises and acceptance rule.
+
+Session092’s
+[release design](../series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md)
+gives explicit ten-parameter equations, positive segment margins and a uniform strict
+forbidden-center cover as the next obligation.
+The retained top-wall center alone puts the target outside the named local ball, as
+independently checked in the
+[direct-contract review](../series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md).
+The complete model and its parent-control binding still need independent acceptance; the
+pilot has not been excluded.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

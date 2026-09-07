@@ -9,14 +9,15 @@ agenda:
   id: agenda-028
   title: Hybrid Strength and Angular Release
   updated: '2026-09-07'
-  status: paused
+  status: active
   objective: >-
-    Prepare a focused parallel n11 program from PR108: decide whether one local
+    Execute a focused parallel n11 program from PR108: decide whether one local
     resource representation adds strength over a fair coupled outer LP, and test
     one new closed contact-release domain. Preserve X017's broad cover and family
     pilots and X016's source continuation. Consume the existing shared geometry
     instrument, expand on useful closed domains, and allocate common-anchor or
-    global representative work only on explicit evidence. Planning launches no targets.
+    global representative work only on explicit evidence. Session092 owns the
+    authorized eight-hour block; target execution still requires accepted controls.
   items:
   - id: BC-269
     purpose: research
@@ -53,11 +54,12 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [3, 4, 11]
-    state: ready
+    state: blocked
     priority: 0
     question: What frozen target-side comparison fairly tests H118 against coupled geometry?
     hypotheses: [H-118]
     budget: One 30-minute mathematical protocol slice; one further slice only for a named missing premise.
+    blocked_on: A necessary eleven-square residual-compatibility restriction that removes the exact four- and five-square fixtures while preserving all parent siblings.
     entry: >-
       X018 assessment and source controls. Design can proceed before BC261; use
       only accepted geometry/resource implications in a final target protocol.
@@ -71,10 +73,23 @@ agenda:
     parallel_group: agenda028-capacity
     program: n11-hybrid-strength-and-angular-release
     next_evidence: >-
-      Send precise leaf requirements to the BC261 owner. Adopt one reviewed
-      instrument artifact; do not build another exporter or infer readiness from
-      existing arithmetic helpers. If no useful domain is identified, retain the
-      missing geometric premise and reallocate at BC275.
+      Use the remaining design slice only for necessary compatibility restrictions
+      from the eleven-square parent. Exact packings defeat all three isolated
+      four-square band domains and the central group with a bottom anchor. No
+      capacity target is admitted; BC261 remains the sole interface owner.
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md
+    outcomes:
+    - scope: Natural three-band four-square subsystems and a five-square anchored extension
+      classification: achieved
+      result: >-
+        Exact feasible diamond packings prove that every sound resource and
+        coupled geometric relaxation must retain these domains. The obstruction
+        holds beyond the selected 99-atom family; it does not resolve H118.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md
+      disposition: continue
+      follow_up: think-9uv0
   - id: BC-271
     purpose: research
     owner_focus: insight
@@ -132,7 +147,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: in_progress
     priority: 1
     question: Can H120 close a new rank-nine release domain at variable side below 96/25?
     hypotheses: [H-120]
@@ -152,6 +167,8 @@ agenda:
       independently decided exclusion or verified counterexample at that scope.
       A domain design alone is readiness progress, not H120 acceptance.
     bead: think-1btr
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
     workflows: [insight-iteration, factual-review, research-loop]
     depends_on: []
     parallel_group: agenda028-release
@@ -214,18 +231,26 @@ agenda:
 ---
 # Agenda 028 — Hybrid Strength and Angular Release
 
-**Prepared; no target experiment or overnight run has started.**
+**Active in [session-092](../agent-sessions/session-092-hybrid-overnight.md).**
 [X-018](../explorations/X-018-hybrid-strength-and-angular-release.md) owns the critical
 review, priority rationale and mapping from #108. Epic `think-pxv5` owns this agenda.
-W10 bead `think-urcm` owns its preparation.
+PR107 landed the plans at `dd36800e`; integration bead `think-0yfe` owns the new
+`codex/n11-hybrid-overnight` execution branch.
+The owner authorized approximately eight hours, 06:31–14:31 UTC on September 7, with
+pushed checkpoints at hours 2, 4, 6 and 8. The opening design and proof-contract review
+are retained. Shared certificate implementation and independent release-model review are
+active; no target experiment has yet been admitted.
 
 ## Independent Work, Shared Evidence
 
 X-016’s continuing source program retains H-110 and conditional compatibility.
 X-017 / Agenda 027 retains H-111–117, BC-258–268, the complete anchor and six-plus-five
 pilots, support adoption, physical KKT review, and the sole BC-261 geometry interface.
-This agenda adds X-018, H-118–121 and BC-269–275; it takes no experiment or session ID.
-Source session-091 is already occupied.
+This agenda adds X-018, H-118–121 and BC-269–275; its execution takes session-092.
+Source session-091 and exp-121 are already occupied.
+An unpublished source H-118 collides with the published allocation; cross-task
+coordination awaits the owner’s explicit approval, and this run allocates no new
+hypothesis or experiment ID at launch.
 Recheck live allocations before claiming any later ID; a next-ID pointer is not a
 reservation.
 
@@ -240,7 +265,7 @@ cannot accidentally run the same comparison twice.
 
 ## First Checkpoint and Overnight Continuation
 
-The first four active hours are a planning horizon, not a predicted solver runtime.
+Session092’s four two-hour stages are planning horizons, not predicted solver runtimes.
 Work in slices of at most 30 minutes and integrate earlier when a decision is ready.
 Use the available three workers for capacity design, structural design and independent
 review, with the coordinator integrating evidence and arranging the shared interface.

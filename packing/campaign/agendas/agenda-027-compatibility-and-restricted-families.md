@@ -9,7 +9,7 @@ agenda:
   id: agenda-027
   title: Compatibility and Restricted Families
   updated: '2026-09-07'
-  status: paused
+  status: active
   objective: >-
     Prepare an independent alternative to the ongoing Agenda024-026 allocation,
     based on X-017 and the owner's contributed research bundle. Compare a complete
@@ -17,7 +17,8 @@ agenda:
     shared-angle theorem; retain a small independent pair-kernel discriminator and
     candidate-led successors. Review contributed evidence at its own scope, build only
     the interfaces selected pilots need, and expand on closed continuous domains or
-    explicit useful residuals. This prepared agenda launches no experiments. Its
+    explicit useful residuals. Session092 accepted its direct-contract subset and
+    starts the shared geometry implementation; broad target pilots remain unlaunched. Its
     commitments, ownership and dependencies are separate from the continuing source run.
   items:
   - id: BC-258
@@ -103,7 +104,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Which direct resource, anchor, case-composition, angular-transfer, uniform
@@ -132,11 +133,32 @@ agenda:
       BC-261 consumes only the accepted case/Farkas and required resource subset;
       BC-264 consumes the kernel subset. Physical stationarity is reviewed separately
       under BC-267 and is not a gate on direct all-feasible exclusions.
+    outcomes:
+    - scope: Direct case, uniform Farkas, resource, capacity and anchor implications used by Agenda028
+      classification: achieved
+      result: >-
+        Independently accepted with explicit complete-domain, touching, common-budget
+        and coefficient-error premises. This is proof-contract acceptance, not
+        implementation acceptance or a target result.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
+      disposition: retire-success
+      follow_up: null
+    - scope: Pair-kernel and stationary or finite-motion implications
+      classification: never-opened
+      result: >-
+        The focused review did not assess these implications. BC264 must obtain
+        independent kernel acceptance before its target; BC267 retains physical
+        stationarity review. Completion of the direct review does not satisfy them.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
+      disposition: defer-dependency
+      follow_up: think-mq0d
   - id: BC-261
     purpose: tool_validation
     owner_focus: correctness
     instances: [3, 4, 11]
-    state: blocked
+    state: in_progress
     priority: 0
     question: >-
       Can the existing geometry and fixed-angle LP export one independently checked
@@ -383,11 +405,15 @@ agenda:
 ---
 # Agenda 027 — Compatibility and Restricted Families
 
-**Prepared; execution has not started.**
+**Direct contracts accepted; shared geometry implementation active.**
 [X-017](../explorations/X-017-compatibility-and-complete-case-covers.md) owns the
 critical assessment, mathematical distinctions, and complete source-to-record map.
 This agenda owns the prospective actions.
 Epic `think-sz5t` owns the program; `think-adfk` owns the completed intake and planning.
+[Session 092](../agent-sessions/session-092-hybrid-overnight.md) accepted BC260’s case,
+Farkas and resource subset for the concrete Agenda028 consumers and starts the single
+BC261 implementation.
+Other contract subsets and the broad pilots retain their separate readiness decisions.
 
 ## Parallel Ownership
 

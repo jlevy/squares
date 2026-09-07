@@ -203,6 +203,9 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [BC-270 — Capacity Comparison Design and Exact Domain Obstruction](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md) | research synthesis | record | retained | — |
+| [BC-273: A Closed Domain for Releasing Segment 9–10](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md) | research synthesis | record | retained | — |
+| [BC-260 Direct Hybrid Contracts](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md) | dated review record | record | retained | — |
 | [Strategic Mathematical Review: Hybrid Exclusion and Few-Angle Structure at n = 11](docs/project/reviews/review-2026-09-07-n11-hybrid-strategy.md) | dated review record | supporting | maintained | — |
 | [Validation Efficiency Implementation Review](docs/project/reviews/review-2026-09-06-validation-efficiency-implementation.md) | dated review record | record | retained | — |
 | [Validation Efficiency Ideas](packing/benchmarks/validation-efficiency/ideas.md) | implementation plan | supporting | maintained | — |
@@ -522,7 +525,7 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-**Focused parallel strategy prepared.**
+**Focused parallel investigation active.**
 [X-018](packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md)
 reviews PR108 and ranks the overnight opportunities: direct compatibility and complete
 restricted-family domains first, a bounded contact-release investigation alongside them,
@@ -530,7 +533,14 @@ and shared-anchor correlation only on a diagnosed residual.
 [Agenda 028](packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md)
 owns H-118–121 and BC-269–275 under epic `think-pxv5`; it preserves the X-017 allocation
 below and consumes its single BC-261 geometry interface.
-Both proposed agendas are paused, with no new target run launched by this planning.
+[Session 092](packing/campaign/agent-sessions/session-092-hybrid-overnight.md) executes
+the owner’s approximately eight-hour block on `codex/n11-hybrid-overnight`, starting
+from PR107’s merged plans at `dd36800e`. Integration bead `think-0yfe` owns checkpoints
+at 08:31, 10:31, 12:31 and 14:31 UTC on September 7. The opening W3 slice produced exact
+feasible obstructions to the isolated band comparison and a closed release model.
+The direct BC260 implications are accepted; W7 BC261 implementation and independent
+release-model review are active through 07:21:37 UTC. Targets remain gated on controls
+and prospective registration, and the global bracket is unchanged.
 The live task **Squares plan X-016** continues the source H-110 and conditional
 compatibility allocation independently; session-091 is already occupied there.
 
@@ -540,7 +550,10 @@ reconciles the contributed research packet with PR105’s committed state at `46
 [Agenda 027](packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md)
 proposes resource-and-anchor and six-plus-five restricted-family pilots, with a separate
 pair-kernel discriminator.
-It is paused, with no target experiments launched.
+Its broad pilots remain unlaunched.
+The shared BC260 direct contracts are accepted for session092’s concrete consumers;
+BC261 implements the sole geometry interface.
+Kernel and physical-stationarity reviews retain their own prerequisites.
 Its X-017, H-111–117 and BC-258–268 records and epic `think-sz5t` keep its ownership and
 numbering separate from the continuing agenda below.
 None of its dependencies requires that run to finish; the original handoff remains the
@@ -3087,12 +3100,13 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
 | `codex-task-tree-session-090.yaml` | session-090 | 1,341 | 9.8 h | 3.94 h | 3.95 h | yes |
+| `codex-task-tree-session-092.yaml` | session-092 | 62 | 0.61 h | 0.27 h | 0.27 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 46 |
+| measured | 47 |
 | unmeasured | 44 |
-| **total** | **90** |
+| **total** | **91** |
 
 <!-- END GENERATED: session-close-report -->
 
