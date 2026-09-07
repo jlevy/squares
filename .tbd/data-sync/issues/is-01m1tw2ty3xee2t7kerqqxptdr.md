@@ -5,7 +5,7 @@ title: Monitor landed upstream changes through the integrated research handoff
 kind: task
 status: in_progress
 priority: 0
-version: 19
+version: 20
 spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels:
   - orchestration
@@ -16,10 +16,10 @@ child_order_hints:
   - is-01m1x5jw55j4kx432a2fc2smf0
   - is-01m1x64qrvdn9wp33nbz525y39
 created_at: 2026-09-06T08:06:45.437Z
-updated_at: 2026-09-07T05:41:02.362Z
+updated_at: 2026-09-07T06:40:30.672Z
 ---
 Monitor PRs 93 and 94 and origin/main. Import only landed main commits, pause active research time for each integration, reconcile shared generated records conservatively, validate proportionately, and record exact merge commits in the handoff.
 
 ## Notes
 
-User merged PR105 at05:32:33UTC as aae108a6; origin/main now includes PR106 too. Successor codex/structural-compatibility-continuation has conflict-free local merge445c7af7, file-identical to fetched main aae108a6. Merge gate in /private/tmp/squares-pr106-successor-merge-gate.log. PR107 retargeted automatically to main; PR108 remains stacked on107. Neither is prerequisite for current BC255/H110 and conditional-compatibility entry. H107 remains paused. No Session091 or new target has started.
+PR107 merged 2026-09-07T06:26:49Z as origin/main dd36800e. Upstream added H118-121, Agenda028, X018 after earlier inventory. Local uncommitted/unrun diamond H118 renumbers to H122 before integration; scientific scope and author deadlines unchanged. Checklist: fetch/review complete; preserve current authors until freeze; commit reviewed local results/instruments; merge landed main; reconcile semantic IDs and generated records; matching push/full checks; push PR109 and inspect final CI.

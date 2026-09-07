@@ -3,9 +3,9 @@ type: is
 id: is-01m1x7d097z73jgvwb22rh8brz
 title: "Agenda 028: hybrid-strength comparisons and angular release at n11"
 kind: epic
-status: open
+status: in_progress
 priority: 1
-version: 9
+version: 11
 spec_path: packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md
 labels:
   - agenda028
@@ -19,7 +19,8 @@ child_order_hints:
   - is-01m1x7ebkbchqgjv79etsnmsfk
   - is-01m1x7ec5zyqpznsx3ea5y1vqa
   - is-01m1x7504wnr8tzh8zpd8kyebh
+  - is-01m1x8xjrapjj5sakky0pnmbwq
 created_at: 2026-09-07T06:03:01.798Z
-updated_at: 2026-09-07T06:12:59.173Z
+updated_at: 2026-09-07T06:43:20.166Z
 ---
-Own X018, H118-121 and BC269-275 only. Preserve X017/Agenda027 H111-117 BC258-268 and the active X016 source continuation. Prepare independent matched capacity and direct release-family discriminators, with shared-anchor correlation conditional on evidence. Consume the single BC261 geometry interface; do not duplicate its implementation. No experiment or session allocation and no launch in this planning turn.
+Own X018, H118-121 and BC269-275. PR107 plans landed at dd36800e. Session092 now executes the authorized eight-hour block on codex/n11-hybrid-overnight, with two-hour pushed checkpoints under think-0yfe. Begin the matched capacity and closed release designs and independent direct-contract review; targets need frozen protocols and accepted controls. Preserve X017 H111-117 BC258-268, the single BC261 interface, and source session091/exp121. No new hypothesis or experiment ID at launch.

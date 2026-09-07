@@ -5,7 +5,7 @@ title: Screen composition and support-signature lemmas before a global proof tre
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 18
 spec_path: packing/campaign/hypotheses/H-102-complete-restricted-angle-support-families.md
 delegate: codex
 labels: []
@@ -25,10 +25,11 @@ child_order_hints:
   - is-01m1x66602fas1rk1zsr4jr8ka
   - is-01m1x8eeajx7qv34rk52553brb
   - is-01m1x8eekc5mfnnmxv7vpgpvqj
+  - is-01m1x9mgv1eavdk52m13pwje4q
 hold: null
 hold_until: null
 created_at: 2026-09-06T17:21:40.116Z
-updated_at: 2026-09-07T06:21:17.804Z
+updated_at: 2026-09-07T06:42:05.271Z
 started_at: 2026-09-06T19:12:02.177Z
 ---
 BC-255 assesses H-036 first at its unchanged 0.25-degree angle regime and3.878 threshold; H-102 retains other unselected complete angle/support families. State complete cases, a feasible control and one LP/Farkas or interval proof obligation. H-103 covers global followups. Only mass-derived heavy-atom/near-tight deductions need a valid covering measure M>=11; geometric conflicts, interval no-goods and independent restricted lemmas do not inherently need density or full typed-producer completion.
