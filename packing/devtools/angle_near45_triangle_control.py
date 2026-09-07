@@ -1,9 +1,9 @@
-"""Sufficient continuous A3 forcing for canonical near-45 P10 avoiders.
+"""Sufficient continuous A1 or A3 forcing for canonical near-45 P10 avoiders.
 
-Only explicit --target-a3 dispatch evaluates target inequalities. Imports, toy
+Only explicit --target-a1/--target-a3 dispatch evaluates target inequalities. Imports, toy
 APIs, and packet parsing do not construct the target. The unchanged source
 formulas are cases/stromquist/restricted_orientation.py:point_sets: L=(1,1),
-M=(q/2,1), A3=(3/2,13/10), with q=1939/500, not a scaled source side.
+M=(q/2,1), A1=(1,q-3), A3=(3/2,13/10), with q=1939/500, not a scaled source side.
 
 The mathematical reduction requires a contained CLOSED unit square, its center
 (x,y) in R=[1,q/2] x [0,1], 2<q<4, C,S>0 and C^2+S^2=1. Write
@@ -30,7 +30,15 @@ The fixed T=(11/5040)/(1-(11/5040)^2/2) exceeds tan(pi/1440), by
 pi<22/7, sin(x)<=x, cos(x)>=1-x^2/2. Both closed slabs [-T,0],[0,T]
 are checked without subdivision: 3 vertices x 4 margins x 2 slabs = 24.
 Any failure is unresolved; a failed outer-sliver test is not a counterexample.
-This supplies only a sufficient A3 clause, never localization or H-036.
+This supplies only the selected sufficient point-forcing clause, never H-036.
+
+For the stronger L/M-avoidance statement, local reflection x -> 1+q/2-x
+interchanges L and M, A1 and A2=(q/2,q-3), and t and -t. Canonical x
+coordinates stay in [1,q/2], which lies in [h,q-h] since h<1 and q>2;
+y and h are unchanged. Thus containment is retained. In square-frame
+coordinates U'=V+S*(1+q/2), V'=U-C*(1+q/2); E maps to E at the
+reflected angle, while F/G swap.
+This reflection implication does not require P10 itself to be invariant.
 """
 
 from __future__ import annotations
@@ -44,9 +52,9 @@ import sys
 import time
 from collections.abc import Iterator, Sequence
 from fractions import Fraction
-from functools import cache
+from functools import cache, partial
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 from devtools.angle_tile_certificate import Polynomial, Scalar, certify_nonnegative
 from sqpack.cover import write_text_atomic
@@ -55,16 +63,19 @@ from sqpack.field import NumberField
 type RationalPoint = tuple[Fraction, Fraction]
 type Failure = tuple[int, int, int]
 type VertexPolynomials = tuple[tuple[Polynomial, ...], ...]
+type Clause = Literal["a3", "a1"]
 
 ZERO = Fraction(0)
 ONE = Fraction(1)
 HALF = Fraction(1, 2)
 SIDE = Fraction(1939, 500)
 POINT = (Fraction(3, 2), Fraction(13, 10))
+A1_POINT = (ONE, SIDE - 3)
 OUTER_ARGUMENT = Fraction(11, 5040)
 T = OUTER_ARGUMENT / (1 - OUTER_ARGUMENT**2 / 2)
 SLABS = ((-T, ZERO), (ZERO, T))
 KIND = "fixed-side-near45-a3-forcing-triangle"
+A1_KIND = "fixed-side-near45-a1-forcing-triangle"
 OBLIGATION_COUNT = 24
 WALL_CAP_SECONDS = 10
 PACKET_BYTE_CAP = 262144
@@ -182,15 +193,27 @@ def target_input() -> tuple[Fraction, RationalPoint]:
     return SIDE, POINT
 
 
+def a1_target_input() -> tuple[Fraction, RationalPoint]:
+    """Return unchanged q/A1 formulas only on explicit A1 experiment dispatch."""
+    return SIDE, A1_POINT
+
+
+def _identity(clause: Clause) -> tuple[str, RationalPoint]:
+    if type(clause) is not str or clause not in ("a3", "a1"):
+        raise ValueError("clause must be exactly a3 or a1")
+    return (KIND, POINT) if clause == "a3" else (A1_KIND, A1_POINT)
+
+
 def packet(
-    checked: int, failures: list[Failure], *, interrupted: bool = False
+    checked: int, failures: list[Failure], *, interrupted: bool = False, clause: Clause = "a3"
 ) -> dict[str, Any]:
     """Fixed wire identity with a completed canonical prefix, never coefficients."""
+    kind, point = _identity(clause)
     return {
         "version": 1,
-        "kind": KIND,
+        "kind": kind,
         "side": str(SIDE),
-        "point": [str(value) for value in POINT],
+        "point": [str(value) for value in point],
         "half_angle_slabs": [[str(low), str(high)] for low, high in SLABS],
         "vertices": ["E", "F", "G"],
         "status": "proved"
@@ -201,12 +224,13 @@ def packet(
     }
 
 
-def run_target() -> dict[str, Any]:
-    """Worker-only target evaluation; tests replace target_input with unrelated toys."""
+def run_target(*, clause: Clause = "a3") -> dict[str, Any]:
+    """Worker-only evaluation; tests replace the selected constructor with unrelated toys."""
+    _identity(clause)
     completed: list[tuple[Failure, bool]] = []
     interrupted = False
     try:
-        side, point = target_input()
+        side, point = target_input() if clause == "a3" else a1_target_input()
         for slab, (low, high) in enumerate(SLABS):
             in_slab = 0
             for index, proved in triangle_obligations(side, point, low=low, high=high):
@@ -233,6 +257,7 @@ def run_target() -> dict[str, Any]:
         len(completed),
         [index for index, proved in completed if not proved],
         interrupted=interrupted,
+        clause=clause,
     )
 
 
@@ -247,7 +272,7 @@ def _reject_constant(_value: str) -> None:
     raise ValueError("packet contains a non-finite JSON number")
 
 
-def parse_worker(stdout: str) -> dict[str, Any]:
+def parse_worker(stdout: str, *, clause: Clause = "a3") -> dict[str, Any]:
     """Validate the bounded frozen envelope, not its mathematical conclusion."""
     if type(stdout) is not str:
         raise ValueError("packet must be UTF-8 JSON text")
@@ -256,7 +281,7 @@ def parse_worker(stdout: str) -> dict[str, Any]:
     result = json.loads(
         stdout, object_pairs_hook=_unique_object, parse_constant=_reject_constant
     )
-    template = packet(0, [])
+    template = packet(0, [], clause=clause)
     if type(result) is not dict or set(result) != set(template):
         raise ValueError("packet must have exactly the frozen nine keys")
     if type(result["version"]) is not int or result["version"] != 1:
@@ -295,20 +320,21 @@ def parse_worker(stdout: str) -> dict[str, Any]:
     return result
 
 
-def _expired(_signum: int, _frame: Any) -> None:
-    raise TimeoutError("fixed ten-second near-45 A3 cap")
+def _expired(_signum: int, _frame: Any, *, clause: Clause = "a3") -> None:
+    raise TimeoutError(f"fixed ten-second near-45 {clause.upper()} cap")
 
 
 def _text(value: str | bytes | None) -> str:
     return value.decode(errors="replace") if isinstance(value, bytes) else value or ""
 
 
-def _run_child() -> tuple[dict[str, Any], dict[str, Any], int]:
+def _run_child(*, clause: Clause = "a3") -> tuple[dict[str, Any], dict[str, Any], int]:
+    _identity(clause)
     command = [
         sys.executable,
         "-m",
         "devtools.angle_near45_triangle_control",
-        "--target-a3",
+        f"--target-{clause}",
         "--worker",
     ]
     before = resource.getrusage(resource.RUSAGE_CHILDREN)
@@ -320,16 +346,16 @@ def _run_child() -> tuple[dict[str, Any], dict[str, Any], int]:
         )
         stdout, stderr, child_exit = process.stdout, process.stderr, process.returncode
         try:
-            result = parse_worker(stdout)
+            result = parse_worker(stdout, clause=clause)
             if child_exit != 0:
                 result["status"] = "unresolved"
             code = 0 if child_exit == 0 and result["status"] == "proved" else 1
         except (ValueError, TypeError, RecursionError) as error:
-            result, code = packet(0, []), 2
+            result, code = packet(0, [], clause=clause), 2
             note = f"worker packet refused: {error}"
     except subprocess.TimeoutExpired as error:
         stdout, stderr, child_exit = _text(error.stdout), _text(error.stderr), None
-        result, code = packet(0, []), 1
+        result, code = packet(0, [], clause=clause), 1
         note = "child process cap; no complete packet retained"
     after = resource.getrusage(resource.RUSAGE_CHILDREN)
     log = {
@@ -352,11 +378,14 @@ def _run_child() -> tuple[dict[str, Any], dict[str, Any], int]:
 def main(argv: Sequence[str] | None = None) -> int:
     """Explicit fixed dispatch; atomic per-file publication is not a two-file transaction."""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--target-a3", action="store_true", required=True)
+    selector = parser.add_mutually_exclusive_group(required=True)
+    selector.add_argument("--target-a3", dest="clause", action="store_const", const="a3")
+    selector.add_argument("--target-a1", dest="clause", action="store_const", const="a1")
     parser.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--output", type=Path, help="atomically replace this proof packet")
     parser.add_argument("--log", type=Path, help="atomically replace this execution log")
     args = parser.parse_args(argv)
+    clause: Clause = args.clause
     if args.worker and (args.output is not None or args.log is not None):
         parser.error("only the parent publishes output files")
     if (
@@ -367,23 +396,23 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.error("packet and log paths must differ")
     try:
         if args.worker:
-            previous = signal.signal(signal.SIGALRM, _expired)
+            previous = signal.signal(signal.SIGALRM, partial(_expired, clause=clause))
             signal.alarm(WALL_CAP_SECONDS)
             try:
-                result = run_target()
+                result = run_target(clause=clause)
             finally:
                 signal.alarm(0)
                 signal.signal(signal.SIGALRM, previous)
             print(json.dumps(result, sort_keys=True))
             return 0 if result["status"] == "proved" else 1
-        result, log, code = _run_child()
+        result, log, code = _run_child(clause=clause)
         if args.log is not None:
             write_text_atomic(args.log, json.dumps(log, indent=2, sort_keys=True) + "\n")
         if args.output is not None:
             write_text_atomic(args.output, json.dumps(result, indent=2, sort_keys=True) + "\n")
         print(json.dumps(result, sort_keys=True))
     except TimeoutError as error:
-        print(json.dumps(packet(0, []), sort_keys=True))
+        print(json.dumps(packet(0, [], clause=clause), sort_keys=True))
         print(f"unresolved: {error}", file=sys.stderr)
         return 1
     except (OSError, ValueError, TypeError) as error:

@@ -11,7 +11,11 @@ from pathlib import Path
 import pytest
 
 from devtools import angle_near45_triangle_control as near
-from devtools.angle_tile_certificate import certify_nonnegative, evaluate
+from devtools.angle_tile_certificate import (
+    bernstein_coefficients,
+    certify_nonnegative,
+    evaluate,
+)
 
 F = Fraction
 TOY_SIDE = F(15, 4)
@@ -24,6 +28,7 @@ def forbid_actual_geometry(monkeypatch: pytest.MonkeyPatch) -> None:
         raise AssertionError("a source-free control attempted actual target construction")
 
     monkeypatch.setattr(near, "target_input", forbidden)
+    monkeypatch.setattr(near, "a1_target_input", forbidden)
     monkeypatch.setattr(subprocess, "run", forbidden)
 
 
@@ -134,6 +139,153 @@ def test_mocked_target_dispatch_has_full_inventory_and_real_toy_proof(
     assert near.parse_worker(json.dumps(result)) == result
 
 
+def test_a1_binding_and_cross_clause_packets_are_not_interchangeable() -> None:
+    original = near.packet(24, [])
+    assert original == {
+        "version": 1,
+        "kind": "fixed-side-near45-a3-forcing-triangle",
+        "side": "1939/500",
+        "point": ["3/2", "13/10"],
+        "half_angle_slabs": [["-110880/50803079", "0"], ["0", "110880/50803079"]],
+        "vertices": ["E", "F", "G"],
+        "status": "proved",
+        "inequalities_checked": 24,
+        "unresolved": [],
+    }
+    a1 = near.packet(24, [], clause="a1")
+    assert a1 == original | {
+        "kind": "fixed-side-near45-a1-forcing-triangle",
+        "point": ["1", "439/500"],
+    }
+    assert near.parse_worker(json.dumps(a1), clause="a1") == a1
+    assert near.parse_worker(json.dumps(original)) == original
+    clauses: tuple[near.Clause, ...] = ("a3", "a1")
+    for clause in clauses:
+        packet = a1 if clause == "a3" else original
+        with pytest.raises(ValueError, match="fixed source"):
+            near.parse_worker(json.dumps(packet), clause=clause)
+    for change in ({"point": original["point"]}, {"kind": original["kind"]}):
+        with pytest.raises(ValueError, match="fixed source"):
+            near.parse_worker(json.dumps(a1 | change), clause="a1")
+    for clause in ("a2", "arbitrary", True):
+        with pytest.raises(ValueError, match="clause"):
+            near.packet(0, [], clause=clause)  # pyright: ignore[reportArgumentType]
+
+
+def test_local_reflection_gives_exact_polynomial_covariance() -> None:
+    axis_sum = 1 + TOY_SIDE / 2
+    reflected = (axis_sum - TOY_POINT[0], TOY_POINT[1])
+    original = near.triangle_polynomials(TOY_SIDE, TOY_POINT)
+    image = near.triangle_polynomials(TOY_SIDE, reflected)
+    for vertex, image_vertex in enumerate((0, 2, 1)):
+        for margin, image_margin in enumerate((2, 3, 0, 1)):
+            reflected_polynomial = tuple(
+                coefficient * (-1) ** degree
+                for degree, coefficient in enumerate(image[image_vertex][image_margin])
+            )
+            assert original[vertex][margin] == reflected_polynomial
+            radius = F(1, 100)
+            coefficients = bernstein_coefficients(original[vertex][margin], -radius, F(0))
+            image_coefficients = bernstein_coefficients(
+                image[image_vertex][image_margin], F(0), radius
+            )
+            assert coefficients == tuple(reversed(image_coefficients))
+
+
+def test_local_reflection_preserves_toy_containment_and_swaps_pair_membership() -> None:
+    d, c, s = near.chart_polynomials()
+    axis_sum = 1 + TOY_SIDE / 2
+    x = F(23, 16)
+    for t in (F(-1, 20), F(0), F(1, 20)):
+        denominator = evaluate(d, t)
+        cosine, sine = evaluate(c, t) / denominator, evaluate(s, t) / denominator
+        image_cosine = evaluate(c, -t) / denominator
+        image_sine = evaluate(s, -t) / denominator
+        assert image_cosine == sine
+        assert image_sine == cosine
+        height = (cosine + sine) / 2
+        y = height + (1 - height) / 3
+        image_x = axis_sum - x
+        for center_x in (x, image_x):
+            assert 1 <= center_x <= TOY_SIDE / 2
+            assert height <= center_x <= TOY_SIDE - height
+        assert height <= y <= TOY_SIDE - height
+        for point_x in (F(1), TOY_SIDE / 2):
+            image_point_x = axis_sum - point_x
+            du = cosine * (point_x - x) + sine * (1 - y)
+            dv = -sine * (point_x - x) + cosine * (1 - y)
+            image_du = image_cosine * (image_point_x - image_x) + image_sine * (1 - y)
+            image_dv = -image_sine * (image_point_x - image_x) + image_cosine * (1 - y)
+            assert image_du == dv
+            assert image_dv == du
+
+
+def test_selected_worker_dispatch_uses_only_its_mocked_constructor(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    calls = []
+
+    clauses: tuple[near.Clause, ...] = ("a1", "a3")
+    for clause in clauses:
+
+        def toy(clause=clause):
+            calls.append(clause)
+            return TOY_SIDE, TOY_POINT
+
+        with monkeypatch.context() as scoped:
+            constructor = "target_input" if clause == "a3" else "a1_target_input"
+            scoped.setattr(near, constructor, toy)
+            assert near.main([f"--target-{clause}", "--worker"]) == 0
+        result = json.loads(capsys.readouterr().out)
+        assert result == near.packet(24, [], clause=clause)
+    assert calls == ["a1", "a3"]
+
+
+def test_parent_a1_command_and_cross_clause_child_refusal(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    calls = []
+    cases: tuple[tuple[near.Clause, int], ...] = (("a1", 0), ("a3", 2))
+    for returned_clause, expected in cases:
+
+        def worker(command, returned_clause: near.Clause = returned_clause, **kwargs):
+            calls.append((command, kwargs["timeout"]))
+            return subprocess.CompletedProcess(
+                command, 0, json.dumps(near.packet(24, [], clause=returned_clause)), ""
+            )
+
+        monkeypatch.setattr(subprocess, "run", worker)
+        assert near.main(["--target-a1"]) == expected
+        result = json.loads(capsys.readouterr().out)
+        assert result["kind"] == "fixed-side-near45-a1-forcing-triangle"
+        assert result["status"] == ("proved" if expected == 0 else "unresolved")
+        assert calls[-1][0][-2:] == ["--target-a1", "--worker"]
+        assert calls[-1][1] == 10
+
+
+def test_a1_timeout_receipts_keep_the_selected_identity(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    def worker_timeout(command, **_kwargs):
+        raise subprocess.TimeoutExpired(command, 10, output=b"{partial")
+
+    monkeypatch.setattr(subprocess, "run", worker_timeout)
+    assert near.main(["--target-a1"]) == 1
+    assert json.loads(capsys.readouterr().out) == near.packet(0, [], clause="a1")
+
+    def constructor_timeout():
+        raise TimeoutError("source-free interrupted A1 input")
+
+    monkeypatch.setattr(near, "a1_target_input", constructor_timeout)
+    assert near.main(["--target-a1", "--worker"]) == 1
+    captured = capsys.readouterr()
+    assert json.loads(captured.out) == near.packet(0, [], clause="a1")
+    assert "source-free interrupted A1 input" in captured.err
+
+
 def test_interrupted_prefix_preserves_second_slab_failure(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -235,6 +387,9 @@ def test_cli_requires_fixed_dispatch_and_refuses_overrides(tmp_path: Path) -> No
         ["--target-a3", "--point", "1", "1"],
         ["--target-a3", "--sign-depth", "1"],
         ["--target-a3", "--timeout-seconds", "11"],
+        ["--target-a1", "--target-a3"],
+        ["--target-a1", "--point", "1", "1"],
+        ["--target-a1", "--side", "3"],
         ["--target-a3", "--worker", "--output", str(tmp_path / "p")],
         ["--target-a3", "--output", str(tmp_path / "p"), "--log", str(tmp_path / "p")],
     ):
@@ -251,7 +406,7 @@ def test_worker_alarm_restores_handler_and_parent_timeout_is_not_proof(
     previous = signal.getsignal(signal.SIGALRM)
     alarms = []
     monkeypatch.setattr(near.signal, "alarm", alarms.append)
-    monkeypatch.setattr(near, "run_target", lambda: near.packet(0, []))
+    monkeypatch.setattr(near, "run_target", lambda **_kwargs: near.packet(0, []))
     assert near.main(["--target-a3", "--worker"]) == 1
     assert alarms == [10, 0]
     assert signal.getsignal(signal.SIGALRM) == previous
