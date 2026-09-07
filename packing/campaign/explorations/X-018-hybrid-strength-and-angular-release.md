@@ -33,9 +33,14 @@ exploration:
 ---
 # X-018 — Hybrid Strength and Angular Release
 
-**Prioritize a complete physical-angle release attempt for the remaining overnight
-mathematics, conditional on independent domain admission.** The opening allocation put
-most attention into local compatibility and a smaller share into angular structure.
+**Next: BC-282’s design of the complete residual ten-square skeleton, followed by
+independent admission.** The overnight investigation is closed.
+Its accepted partial exclusions and counting lemma support this bounded next decision;
+the [final allocation](#final-allocation-and-ranked-portfolio) gives the domains, prices
+and alternatives. The separately owned BC-264 kernel assessment can proceed in parallel.
+
+The opening allocation put most attention into local compatibility and a smaller share
+into angular structure.
 The first asks whether a certified capacity can remove a continuous domain left by a
 strong geometric relaxation.
 The second asks whether releasing one of Trump’s angle-forcing contacts opens a
@@ -64,9 +69,9 @@ auxiliaries, a retained local Trump theorem, and more precise separation of supp
 optimization and compatibility obstacles.
 None yet supplies a global angle normal form or closes the remaining bound gap.
 
-The seven-row support proposal may settle the unchanged sixty-placement H-099 test
-cheaply if BC-259 independently accepts its source binding.
-That would retire a finite support, not all one-square resources.
+BC-259/exp-128 independently established optimum eleven on the unchanged sixty-placement
+H-099 support. PR 109 landed that result on `main` at `07e82d1e`. This retires that
+finite support; broader one-square resources remain possible.
 Likewise, unconverged scalar solves and expensive density controls do not prove a
 universal one-body barrier.
 Their present opportunity cost does favor testing configuration compatibility before

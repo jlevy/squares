@@ -470,9 +470,10 @@ critical assessment, mathematical distinctions, and complete source-to-record ma
 This agenda owns the prospective actions.
 Epic `think-sz5t` owns the program; `think-adfk` owns the completed intake and planning.
 [Session 092](../agent-sessions/session-092-hybrid-overnight.md) accepted BC260’s case,
-Farkas and resource subset for the concrete Agenda028 consumers and starts the single
-BC261 implementation.
-Other contract subsets and the broad pilots retain their separate readiness decisions.
+Farkas and resource subset for the concrete Agenda028 consumers, plus BC261’s direct
+geometry controls. Complete consumer-specific attachment remains open under that single
+interface owner. Other contract subsets and the broad pilots retain their separate
+readiness decisions.
 
 ## Parallel Ownership
 

@@ -1799,6 +1799,8 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
   checks:
+  - Recovery accounting cutoff 16:14:30UTC preserves the exact original baseline and nondecreasing cumulative timing fields. The incomplete snapshot at 16:14:26.712 records 68608.674 agent-seconds, 27961.189 active-union seconds, 34994.712 elapsed-envelope seconds and 40647.485 overlap seconds, with one live coordinator. It includes the three completed merge/publication reviews and keeps later validation and publication work outside this lower-bound receipt.
+  - Immutable merged aeef535f passed all 45 pre-push steps in 370.26 seconds, with zero exit status. The mathematical source integration is pushed to PR110; its full validation and hosted checks remain separate pending receipts.
   - The immutable 44c01484 push check passed its behavioral tests but failed the control-anchor step in 147.06 seconds because the selected-entry mutation still named the previous handoff. Main integration updates both its source anchor and expected failure to think-s6e7, retaining the same negative control. The merged commit receives a fresh full validation.
   - PR109 merged into main at 07e82d1e at 16:00:33UTC during publication recovery. The integration preserves both lanes' mathematical artifacts and fixed IDs, combines their shared agenda status and regenerates the views. Session092 retains BC-282 as its next entry; the landed source lane retains future BC264/H114 pricing. This is merge reconciliation, not a new scientific phase.
   - 'full gate: full at 7b967d34: passed (66 steps in 1604.44 seconds; immutable mathematical checkpoint)'
@@ -1954,6 +1956,22 @@ Only retained-evidence review, record correction, validation and publication occ
 this recovery.
 The session and its last phase are marked stopped; neither an active lease
 nor a new research allowance is invented to fill the interruption.
+
+PR 109 landed on `main` during recovery at 16:00:33 UTC. Merge `aeef535f` preserves both
+lanes, updates the shared handoff and receives fresh full validation.
+Three short read-only reviews checked this publication merge under phase 20’s recovery
+scope. They had ten-minute caps, edited no files and ran no tests or scientific targets;
+their earlier quota-blocked assignments remain separate.
+
+| Reviewer | Actual UTC interval on September 7 | Outcome and retained evidence |
+| --- | --- | --- |
+| `closing_scope_review` | 16:06:44–16:10:52; 248 seconds | Parent comparisons found no lost artifacts or ID collisions. Both next entries survive. Reconciled the historical BC282 pointer in Session095 and the stale implementation wording in Agenda027. |
+| `direct_contracts` | 16:06:58–16:11:05; 247 seconds | All 46 source-side and 11 existing-lane Python files match their originating parent blobs. Shared controls preserve both lanes and the live selected-entry mutation. No code regression found in this scope. |
+| `full_angle_adversary` | 16:07:07–16:09:59; 172 seconds | PR claims agree with the accepted BC270/281 audits, BC278–279 limits and exp128. The counting-lemma summary now explicitly retains prescribed centers, L,z ranges, containment and pairwise disjointness. |
+
+These are publication reviews, not new independent proof results.
+Their terminal next action is to publish the reconciled record; running validation
+remains separate evidence.
 
 The coordinator checked BC282’s full necessary projection, 40 containment rows and 45
 pair clauses, inherited lemma domains and closed siblings.
