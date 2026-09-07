@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 90
+count: 91
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 46
-  sessions_unmeasured: 44
+  sessions_unmeasured: 45
   attributed:
     rollups: 115
     turns: 29742
@@ -1421,3 +1421,13 @@ sessions:
     active_union_hours: 3.94
     wall_hours: 3.95
     snapshot_incomplete: true
+- id: session-093
+  title: "Atlas expansion to n = 324 and the poster composite"
+  status: in_progress
+  primary_bead: think-0juv
+  phases: 2
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
+  codex_receipts: []

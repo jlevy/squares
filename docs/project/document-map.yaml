@@ -104,6 +104,7 @@ documents:
   - {path: docs/project/research/research-2026-08-22-packing-11-unit-squares.md, role: research-report, authority: supporting, lifecycle: maintained}
   - {path: docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md, role: research-report, authority: supporting, lifecycle: maintained}
   - {path: docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/research/research-2026-09-07-square-packing-sources-beyond-100.md, role: research-report, authority: supporting, lifecycle: maintained}
   - path: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
     role: review
     authority: record
@@ -372,6 +373,7 @@ documents:
   - {path: docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md, role: plan, authority: supporting, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md, role: plan, authority: current, lifecycle: transient}
   - path: docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
     role: plan
     authority: record
