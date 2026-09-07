@@ -342,26 +342,27 @@ It is not the next thing, because a reassessment of what to search is queued in 
 of it.
 
 For the next supervised exact-research goal, select `think-mq0d` under BC-264 for its
-existing 30-minute H114 feature and kernel-contract pricing slice. BC265's independent
-designs distinguish a direct-bound mechanism from rejecting one particular density.
-Require a kernel-specific BC260 review, a fixed feature family, exact PSD acceptance
-and a credible complete diagonal/pair verification cost before any scientific target.
-Exp128 established the attained optimum eleven on H099's old support, closing BC259.
-Keep H101's common-support obstruction as a conditional fallback without claiming a
-candidate; the completed design does not activate a new research block.
-Session094 independently certified the diagonal compatibility branch; Session095's
-fixed collision-augmented axis cover returned `no_chain` without a reader. H124 and
-restricted H036 remain unresolved, and that representation receives no retry.
+existing 30-minute H114 feature and kernel-contract pricing slice.
+BC265’s independent designs distinguish a direct-bound mechanism from rejecting one
+particular density.
+Require a kernel-specific BC260 review, a fixed feature family, exact
+PSD acceptance and a credible complete diagonal/pair verification cost before any
+scientific target. Exp128 established the attained optimum eleven on H099’s old support,
+closing BC259. Keep H101’s common-support obstruction as a conditional fallback without
+claiming a candidate; the completed design does not activate a new research block.
+Session094 independently certified the diagonal compatibility branch; Session095’s fixed
+collision-augmented axis cover returned `no_chain` without a reader.
+H124 and restricted H036 remain unresolved, and that representation receives no retry.
 Source checkpoint `3bec06e2` passed full validation; the later adoption-engine and
-protocol gates are recorded separately in Session095.
-Keep the continuation on integrated PR 109 while open; do not repeat a completed
-experiment or create another supporting-fix PR.
+protocol gates are recorded separately in Session095. Keep the continuation on
+integrated PR 109 while open; do not repeat a completed experiment or create another
+supporting-fix PR.
 [Agenda 024’s Current Allocation](../../../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
 supplies the current priorities.
 The September 7 amendment holds H-107 fixed-site scalar completion out of the next
 two-hour block and selects a bounded conditional-compatibility assessment through Agenda
-024\. Exp126's graph-only obstruction was inconclusive; exp128 subsequently settled
-the entire fixed support through an independently bound necessary-row ceiling.
+024\. Exp126’s graph-only obstruction was inconclusive; exp128 subsequently settled the
+entire fixed support through an independently bound necessary-row ceiling.
 The earlier BC-215 efficiency program remains uncompleted, not silently discarded.
 See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the latest session,
 funding conditions and independent-review assignments.

@@ -40,11 +40,13 @@ states the proof obligations and stop conditions.
 [Agenda 027](../agendas/agenda-027-compatibility-and-restricted-families.md) keeps the
 pilot independent of success on the angle-family theorem.
 
-Session095's completed BC265 comparison selects BC264's existing 30-minute feature
-and kernel-contract pricing as the next future entry. This is not a target allocation.
+Session095’s completed BC265 comparison selects BC264’s existing 30-minute feature and
+kernel-contract pricing as the next future entry.
+This is not a target allocation.
 The direct-contract review did not accept the kernel subset: that review, one fixed
-feature family, exact PSD acceptance and a credible continuum verification cost must
-be supplied before any experiment. The comparison and independent alternative are in
+feature family, exact PSD acceptance and a credible continuum verification cost must be
+supplied before any experiment.
+The comparison and independent alternative are in
 [the current agenda handoff](../agendas/agenda-027-compatibility-and-restricted-families.md#session095-selection-and-parallel-handoff).
 
 A sampled matrix is a candidate.

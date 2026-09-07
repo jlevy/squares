@@ -105,7 +105,7 @@ session:
     clock_role: finalization
     objective: Publish the completed eight-active-hour research checkpoint and its future-only next entry.
     bead: think-9vjx
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: All scientific and comparative-design allocations are terminal; the original finalization reserve has begun.
     budget_minutes: 20
@@ -115,12 +115,12 @@ session:
     validation_command: packing-validate --push
     kill_condition: Original13:49 endpoint; no new scientific call, retry or automatically funded next block.
     fallback: Preserve the completed proof and exact outstanding validation or publication obligation on PR109.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Validate and publish the final records, inspect hosted CI and landed upstream, then close the authorized block.
+    outcome: Scientific and strategy checkpoint65cfe6c5 was published with a passing immutable push tier and hosted CI before the credit interruption. The cost receipt and final record edits survived locally. Publication-only recovery began at the observed15:34:37 user continuation; no scientific work was repeated. The final closed-record delta is checked separately from the full-validated87bb15fb engine.
+    evidence: [packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md, packing/campaign/resource-usage/codex-task-tree-session-095.yaml]
+    stop_reason: All funded research and comparative design are terminal. Credits interrupted the remaining editorial audit and final publication; the user resumed that administrative closeout. The original13:49 timestamp is retained as history, not claimed as a met wall-clock finish.
+    next_action: Publish and validate the recovered closed-record delta under think-9vjx; the next scientific allocation remains future BC264 pricing.
   primary_bead: think-ro0s
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 120
     max_cycles: 8
@@ -582,6 +582,12 @@ session:
   - packing/campaign/resource-usage/codex-task-tree-session-095.yaml
   - packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md
   checks:
+  - Fresh administrative auditthink-3j0q completed15:36:40–15:37:48UTC in68seconds. No source/archive changes, scientific frontmatter or verdict changes were found; the selected handoff and cost arithmetic match. The reviewer did not inspect root's concurrent credit-pause/final-status amendment, which receives root review and record validation separately. No scientific call, generator or write ran in this audit.
+  - Credit interruption recovery began at observed15:34:37UTC after the last live root check13:36:57UTC. Exact credit-stop onset was not measured; the intervening inactive wall time is excluded from the active research allocation. Original scientific caps and terminal outcomes are unchanged. Final auditthink-cq40 delivered no verdict because of the usage limit and was canceled, not counted as a pass; fresh administrative auditthink-3j0q is separate.
+  - Fresh15:35UTC upstream inspection found origin/main stilldd36800e and externalPR110 stillopen atbdbfc054. PR109 at65cfe6c5 is cleanly mergeable with all hosted checks passing. No upstream commit was available to merge.
+  - Final additive cost refresh covers11:51:12–13:32:38UTC,6086seconds declared wall,6081.198seconds observed active union and14703.392recursive agent seconds across476responses. Collector exited zero,28.57seconds wall23.55user1.26system. Ten live sessions and the last emitted snapshot13:32:33.198 make this a lower bound; later finalization and the earlier771-second gap are not included.
+  - Strategy checkpoint65cfe6c5 passed45/66 push steps in68.84seconds; external70.68wall185.60user25.46system. Root confirmed from the repository root that its scientific adoption checker and tests are unchanged from full-validated87bb15fb. The checkpoint and updatedPR109 body were published before the final cost refresh.
+  - Accepted-result checkpoint41afa5ec passed45/66 push steps in70.87seconds; external73.41wall188.21user27.29system. Its hosted checks all passed, observed13:24UTC. The prior87bb hosted checks also passed; runtime thresholds were unchanged.
   - 'Current ownership inspection at 13:24:52 UTC: external PR110 at bdbfc054 owns BC281 in progress under think-ilpc; BC280 is complete and BC279 stopped. The next BC pointer is 282, not a reservation. Origin/main remains dd36800e; PR110 is open and unmerged. The earlier 12:28 pointer is historical.'
   - Exp128's sole independent checker exited zero and completed by 13:00:03 UTC after an observed dispatch at 12:59:12. Exact process start within that interval was not measured. External cost was 1.12 seconds wall, 1.08 user and 0.01 system; all positive predicates passed, including 88 labels, 60 distinct placements, eight orbits, the identity orbit permutation, seven rows, 41 inclusions and upper/baseline eleven. Independent output GO froze at 13:03:35 UTC.
   - Immutable a94e57fe source-engine push passed 45/66 steps in 68.33 seconds. The 87bb protocol checkpoint passed 31/66 records steps in 19.07 seconds and 45/66 delta-push steps in 71.01 seconds; it was published before the sole scientific invocation.
@@ -599,16 +605,17 @@ session:
   - Exp127 protocol ddf545c9 passed 31/66 immutable records steps in 28.45 seconds. Independent protocol GO preceded invocation; all scientific source modules were unchanged across the record-only corrections.
   - Session094 published its source checkpoint and PR body by 11:49. Fast confirmation was observed at 11:50:19; this slice starts at the actual recorded activation and retains the original program endpoint.
   - Historical activation snapshot 0e1961e2 contained no Session095, exp127 or BC259/H099 assignment. Its then-next pointers were unreserved; later allocations and the 12:28 external ownership check supersede that inventory.
-  stop_reason: null
-  next_action: Complete finalization within the original 13:29–13:49 reserve and hand off future BC264/think-mq0d's existing 30-minute H114 feature and kernel-contract pricing slice. Retain the conditional H101 Omega-avoiding fallback; do not launch another block, target or unchanged retry.
+  stop_reason: The funded research and comparative design are complete and published. Credit interruption delayed only final editorial/cost publication; the user's continuation recovers those records without charging the inactive gap or reopening a scientific allocation.
+  next_action: After final record-delta validation and publication, hand off future BC264/think-mq0d's existing30-minute H114 feature and kernel-contract pricing slice. Retain the conditional H101 Omega-avoiding fallback; no new block, target or unchanged retry is activated here.
 ---
 # Final Active Slice: Collision Cover and Support Ceiling
 
 This continues [Session094](session-094-complete-cover-and-density-controls.md) on
-PR109, under the existing eight-active-hour epic. Operational interruptions are not
-charged as active work. Recursive agent time is reported separately from elapsed
-portfolio time. The actual start is later than the planned 11:49 boundary; the original
-13:29 finalization and 13:49 endpoint are retained.
+PR109, under the existing eight-active-hour epic.
+Operational interruptions are not charged as active work.
+Recursive agent time is reported separately from elapsed portfolio time.
+The actual start is later than the planned 11:49 boundary; the original 13:29
+finalization and 13:49 endpoint are retained.
 
 ## Two Separable Obligations
 
@@ -616,51 +623,62 @@ The first phase dispositioned H124/BC255, under `think-7e72`. The separately rev
 [exp127](../series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md)
 permitted one 120-second complete-child axis producer and a positive-only 60-second
 independent reader. Its sole producer returned `unresolved/no_chain`; no reader was
-authorized or invoked. This fixed representation's allocation is terminal, without a
-retry, radius sweep or diagonal rerun. H124 and restricted H036 remain unresolved;
-exp125's independently certified diagonal lemma is retained. No global bound follows.
+authorized or invoked.
+This fixed representation’s allocation is terminal, without a retry, radius sweep or
+diagonal rerun. H124 and restricted H036 remain unresolved; exp125’s independently
+certified diagonal lemma is retained.
+No global bound follows.
 
 Both independent H099/BC259 source reports froze before implementation:
 [the author assessment](../series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-author.md)
-and [independent review](../series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-review.md).
+and
+[independent review](../series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-review.md).
 They established the source correspondence and upper-bound contract for the bounded
-positive-only checker. The 12:27–12:57 UTC implementation-readiness phase under
-BC259/`think-nwss` completed with twelve source-free controls and independent review.
+positive-only checker.
+The 12:27–12:57 UTC implementation-readiness phase under BC259/`think-nwss` completed
+with twelve source-free controls and independent review.
 
 After immutable admission and publication of the prospective protocol,
 [exp128](../series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md)
-ran its sole independent checker. The process exited zero and completed by 13:00:03
-UTC, taking 1.12 seconds external wall time. Dispatch was observed at 12:59:12;
-the exact process start within that interval was not measured. The checker bound all
-88 labelled source images, the 60 distinct placements and eight orbits with the identity
-orbit permutation, and verified all 41 positive inclusions across seven rows. It
-reported both upper bound and feasible baseline eleven. The independent output audit
-accepted the full metadata and protocol predicates at 13:03:35 UTC.
+ran its sole independent checker.
+The process exited zero and completed by 13:00:03 UTC, taking 1.12 seconds external wall
+time.
+Dispatch was observed at 12:59:12; the exact process start within that interval was
+not measured.
+The checker bound all 88 labelled source images, the 60 distinct placements
+and eight orbits with the identity orbit permutation, and verified all 41 positive
+inclusions across seven rows.
+It reported both upper bound and feasible baseline eleven.
+The independent output audit accepted the full metadata and protocol predicates at
+13:03:35 UTC.
 
-H099 is refuted: the existing fixed support has optimum eleven. This result gives no
-global packing bound and makes no claim about a mass-eleven area density. The source
-and API inventory is in
+H099 is refuted: the existing fixed support has optimum eleven.
+This result gives no global packing bound and makes no claim about a mass-eleven area
+density. The source and API inventory is in
 [the prior handoff](session-094-complete-cover-and-density-controls.md#selected-final-slice-resources).
 
 The source-free comparative-design phase under BC265/`think-j8pz` is complete.
-The [author](../series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md)
+The
+[author](../series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md)
 froze at 13:15:58 UTC and the
 [independent reviewer](../series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md)
-at 13:19:16, before their original 13:26 cutoffs. Root read both frozen reports in full
-and selected the existing BC264/`think-mq0d` 30-minute H114 feature and kernel-contract
-pricing slice for future allocation. No new block or scientific target starts here.
+at 13:19:16, before their original 13:26 cutoffs.
+Root read both frozen reports in full and selected the existing BC264/`think-mq0d`
+30-minute H114 feature and kernel-contract pricing slice for future allocation.
+No new block or scientific target starts here.
 
-The conditional fallback is H101's Omega-avoiding-pose argument. Omega is the
-intersection of the eight symmetry images of the accepted packing's occupied region.
-An exact contained unit square meeting Omega only in area zero would give the author's
-depth-one expanded-support construction of mass $89/8$; no such square has been
-constructed or verified. Independent reconciliation accepted that conditional
-implication without objecting to BC264's priority. H124 and H107 remain unchanged.
+The conditional fallback is H101’s Omega-avoiding-pose argument.
+Omega is the intersection of the eight symmetry images of the accepted packing’s
+occupied region. An exact contained unit square meeting Omega only in area zero would
+give the author’s depth-one expanded-support construction of mass $89/8$; no such square
+has been constructed or verified.
+Independent reconciliation accepted that conditional implication without objecting to
+BC264’s priority. H124 and H107 remain unchanged.
 
 Root owns scientific admission, shared records, sequential IDs, Git and PR109.
 Independent mathematical authors and reviewers use max thinking and disjoint files.
-Mechanical validation and editorial work use high thinking. Authors do not inspect a
-parallel independent derivation before both sides freeze.
+Mechanical validation and editorial work use high thinking.
+Authors do not inspect a parallel independent derivation before both sides freeze.
 
 ## Checkpoints and Fallbacks
 
@@ -670,17 +688,61 @@ record edits. Pending-full statements in the earlier checks are dated historical
 snapshots, not the current gate status.
 
 The corrected `a94e57fe` engine passed its 45/66 push steps in 68.33 seconds.
-The `87bb15fb` protocol checkpoint passed 31/66 records steps in 19.07 seconds and
-45/66 delta-push steps in 71.01 seconds, and was published before invocation.
+The `87bb15fb` protocol checkpoint passed 31/66 records steps in 19.07 seconds and 45/66
+delta-push steps in 71.01 seconds, and was published before invocation.
 Its full gate passed all checks in 1616.15 seconds, observed by root at 13:23 UTC.
 External time was 1616.25 seconds wall, 3211.98 user and 90.19 system; process session
 85874 exited zero. This validates that immutable checkpoint, not later record changes.
 
-Both comparative-design reports and their disposition are retained. A future scientific
-verification requires its own independently reviewed readiness and prospective protocol.
+Both comparative-design reports and their disposition are retained.
+A future scientific verification requires its own independently reviewed readiness and
+prospective protocol.
 The selected BC264 pricing slice has not started; no candidate or target is admitted.
-At 13:29, begin the protected finalization reserve and capture outcomes,
-uninvoked suffixes, validation, measured costs and the exact next handoff on this PR.
+The protected finalization phase actually began at 13:29:11 UTC, retaining the original
+13:49 endpoint. It captures outcomes, uninvoked suffixes, validation, measured costs and
+the exact next handoff on this PR.
+
+Credits interrupted final publication after the last live root observation at 13:36:57
+UTC. The user resumed work at the observed 15:34:37 boundary; the exact interruption
+onset was not measured.
+That inactive interval is excluded from active research time.
+The scientific result and both strategy reports were already published at `65cfe6c5`.
+Recovery finishes the preserved record and publication work without rerunning any
+experiment or changing a scientific deadline.
+The original finalization timestamp is retained rather than presented as a wall-clock
+finish that was achieved.
+
+## Sequential IDs and Restart
+
+The final cost receipt ends at the observed 13:32:38 UTC cutoff: 6,086 seconds of
+declared wall time, 6,081.198 seconds of observed active union, 14,703.392 recursive
+agent seconds and 476 model responses.
+It is a lower bound, not the complete cost of this session or the eight-hour program.
+Later finalization, the earlier 771-second gap after Session094’s last receipt, and
+completion events beyond the snapshot remain unmeasured here.
+Parallel agent time is not elapsed portfolio time.
+
+PR109 uses one integrated line of progress.
+The following inventory is not a reservation; refresh origin/main and outstanding PR
+ownership before allocating anything new.
+
+| Record | Allocated on this PR | Existing work consumed | Next checked pointer |
+| --- | --- | --- | --- |
+| AgentSession | 091, 093, 094, 095 | External Session092 retains its own clock and work | 096 |
+| Hypothesis | H122–H124 | H099, H110 and the existing resource/compatibility questions | H125 |
+| Experiment | exp121–128 | Earlier source controls and retained experiments | exp129 |
+| Block commitment | No new BC identity in these slices | BC243, BC255, BC259 and BC265; future BC264 | BC282 after external BC281 |
+| Agenda | No new agenda identity in these slices | Agenda024 coordinates; Agenda026/027 provide research entries; external Agenda028 remains separate | Agenda029 |
+| Exploration | No new exploration identity in these slices | X016–X018 supply the source and strategy context | X019 |
+
+On restart, read this session, the experiment verdicts, both BC265 design reports and
+Agenda027’s selected handoff.
+Every exp121–128 invocation is terminal; do not rerun a producer or infer that an
+uninvoked reader ran.
+H099’s fixed support and H124’s current axis representation are retired allocations, not
+unfinished jobs. H107 remains paused.
+The next entry is future BC264/`think-mq0d` pricing; a new session requires renewed
+allocation after this block, not a heartbeat silently reopening the old budget.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -80,22 +80,25 @@ geometric interior. The fixed-support bracket remains [11,56/5].
 Protocol `a3ce0b9c` and its durable-document map correction `5195f903` were committed
 before invocation. The latter passed all 31 immutable record checks in 24.33 seconds.
 The engine remained the clean `7daa7c55` checkout that had already passed full/push
-validation and all five scientific controls. The producer launched at the observed
-11:11:15 UTC boundary, before the original 11:12 cutoff, and returned actual exit zero.
+validation and all five scientific controls.
+The producer launched at the observed 11:11:15 UTC boundary, before the original 11:12
+cutoff, and returned actual exit zero.
 External timing was 4.49 seconds wall, 4.45 user and 0.03 system.
 
 The retained packet reports sixty source squares, 36 positive-weight graph vertices and
-630 pair tests. Its adapter status is `unresolved`; the graph certificate status and
-stop reason are both `overweight_clique`. It reports local graph vertices [1,2,7,9,10]
-with weight 6/5. These are indices in the retained positive-vertex graph, not original
+630 pair tests.
+Its adapter status is `unresolved`; the graph certificate status and stop
+reason are both `overweight_clique`. It reports local graph vertices [1,2,7,9,10] with
+weight 6/5. These are indices in the retained positive-vertex graph, not original
 packing labels. No independent target replay or geometric common-interior check was
 authorized by this nonpositive result.
 
 The producer and external timing are retained under the declared result directory.
-No reader files were created and no process was repeated. This experiment does not
-refute H099, establish that the fixed weights are geometrically invalid, or alter any
-packing bound. Any higher-order geometric obligation needs separate repricing; it does
-not follow automatically from this failed sufficient certificate.
+No reader files were created and no process was repeated.
+This experiment does not refute H099, establish that the fixed weights are geometrically
+invalid, or alter any packing bound.
+Any higher-order geometric obligation needs separate repricing; it does not follow
+automatically from this failed sufficient certificate.
 
 ## Retained Prospective Protocol
 

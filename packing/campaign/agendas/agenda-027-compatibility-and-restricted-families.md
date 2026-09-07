@@ -440,7 +440,7 @@ agenda:
 # Agenda 027 — Compatibility and Restricted Families
 
 **Selected work has executed; the rest requires its own allocation.** Session095
-completed BC259's independent support-ceiling adoption and BC265's comparative design.
+completed BC259’s independent support-ceiling adoption and BC265’s comparative design.
 BC264 is the selected future pricing entry, not an active target.
 [X-017](../explorations/X-017-compatibility-and-complete-case-covers.md) owns the
 critical assessment, mathematical distinctions, and complete source-to-record map.
@@ -475,11 +475,12 @@ The new program owns narrower comparisons, not another BC-262 or BC-263 run.
 
 ## Proposed Opening Allocation
 
-The original opening plan below is historical. BC259 is now complete; consult the
-current cell states and owning sessions before dispatching any remaining work.
-The proposed opening was W2 factual review: dispatch BC-259 and BC-260
-independently. A third reviewer may take BC-267 while the coordinator handles source
-binding, protocol design and integration.
+The original opening plan below is historical.
+BC259 is now complete; consult the current cell states and owning sessions before
+dispatching any remaining work.
+The proposed opening was W2 factual review: dispatch BC-259 and BC-260 independently.
+A third reviewer may take BC-267 while the coordinator handles source binding, protocol
+design and integration.
 Use at most the available three worker slots plus the coordinator; the slots are a
 capacity limit, not a reason to manufacture work.
 
@@ -505,42 +506,45 @@ flowchart TD
 
 The diagram shows evidence flowing to a checkpoint, not a requirement to wait for all
 lanes. BC-268 is takeable after a useful result or refusal and closes only the assessed
-scope. BC265's comparative design is complete, but its resource implementations and
-the two-angle successor remain unlaunched.
+scope. BC265’s comparative design is complete, but its resource implementations and the
+two-angle successor remain unlaunched.
 
 ## Session095 Selection and Parallel Handoff
 
 The two independent BC265 reports agree on the mathematics and differ on priority.
-Both construct a D4-averaged box density of mass eleven whose capture is exactly one
-on every old support member. A new pose with capture below one rejects this particular
-density, not all mass-eleven densities or the expanded-support optimum.
-The review prices a narrow axis-aligned falsifier at sixty aggregate agent-minutes;
-the author instead prefers BC264's existing 30-minute kernel pricing slice.
+Both construct a D4-averaged box density of mass eleven whose capture is exactly one on
+every old support member.
+A new pose with capture below one rejects this particular density, not all mass-eleven
+densities or the expanded-support optimum.
+The review prices a narrow axis-aligned falsifier at sixty aggregate agent-minutes; the
+author instead prefers BC264’s existing 30-minute kernel pricing slice.
 Both proposals and their stop conditions remain in the linked artifacts above.
 
 The coordinator selects **BC264 / H114 / `think-mq0d`**. A complete certificate at
-side96/25 could improve the global lower bound, whereas a calibration falsifier has
-only a routing payoff. This is a judgment about expected value, not evidence that a
-useful kernel exists. The next allocation should pair a max-thinking feature author
-with an independent max-thinking reviewer of the kernel implication and exact
-acceptance format. The coordinator owns the single narrowed claim, scientific
-admission and integrated PR. Mechanical controls and record work use high or xhigh.
+side96/25 could improve the global lower bound, whereas a calibration falsifier has only
+a routing payoff. This is a judgment about expected value, not evidence that a useful
+kernel exists. The next allocation should pair a max-thinking feature author with an
+independent max-thinking reviewer of the kernel implication and exact acceptance format.
+The coordinator owns the single narrowed claim, scientific admission and integrated PR.
+Mechanical controls and record work use high or xhigh.
 Their disjoint assignments must fit the existing pricing slice before any target.
 
-The independent fallback is **H101's common-support obstruction**. Let Ω be the
+The independent fallback is **H101’s common-support obstruction**. Let Ω be the
 intersection of the occupied regions of all eight symmetry images of the original
-packing. If an exact contained unit square P meets Ω in area zero, the average
-packing has depth at most7/8 almost everywhere on P. Adding weight1/8 on P would
-therefore give a feasible finite dual of mass89/8. This conditional lemma passed
-independent review; no such P is supplied. A full void-cover certificate, not merely
-avoidance of the calibration boxes, is required. Its design can be independent of
-kernel work once a candidate earns allocation; it is not currently an automatic lane.
+packing. If an exact contained unit square P meets Ω in area zero, the average packing
+has depth at most $7/8$ almost everywhere on P. Adding weight $1/8$ on P would therefore
+give a feasible finite dual of mass $89/8$. This conditional lemma passed independent
+review; no such P is supplied.
+A full void-cover certificate, not merely avoidance of the calibration boxes, is
+required.
+Its design can be independent of kernel work once a candidate earns allocation;
+it is not currently an automatic lane.
 
-H100 remains available for a named below-side density mechanism with a credible
-coverage margin. H115 has no new curved-resource candidate. H116 owns any expanded
-support, not H099. External Session092 retains BC261/273 and its successors; consume
-their landed interfaces without duplicating them. Do not activate every preserved
-direction merely because parallel slots are available.
+H100 remains available for a named below-side density mechanism with a credible coverage
+margin. H115 has no new curved-resource candidate.
+H116 owns any expanded support, not H099. External Session092 retains BC261/273 and its
+successors; consume their landed interfaces without duplicating them.
+Do not activate every preserved direction merely because parallel slots are available.
 
 ## Budgets and Readiness
 

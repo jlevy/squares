@@ -64,10 +64,11 @@ This partial lemma does not change the unrestricted packing bound.
 
 The separately admitted
 [exp127](../series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md)
-then added the fixed collision region described below. Its sole producer returned
-`no_chain` in 0.25 seconds, with no independent reader. This ends that fixed sufficient
-representation's allocation. H124 and restricted H036 remain unresolved; no geometric
-gap or disjoint Q/S witness is certified, and no retry or parameter sweep follows.
+then added the fixed collision region described below.
+Its sole producer returned `no_chain` in 0.25 seconds, with no independent reader.
+This ends that fixed sufficient representation’s allocation.
+H124 and restricted H036 remain unresolved; no geometric gap or disjoint Q/S witness is
+certified, and no retry or parameter sweep follows.
 
 Write q=1939/500. The actual angle bands, modulo square quarter turns, are
 [-pi/720,pi/720] and [pi/4-pi/720,pi/4+pi/720]. Both closed unit squares must lie in
@@ -328,19 +329,22 @@ gap in this sufficient cover would not refute H124.
 
 ### A Fixed Collision-region Strengthening
 
-The next selected instrument keeps those thirteen regions and appends one fixed
-S-center region, $C^*$, directly. It is not another obstacle to dilate by $B_0$.
-The [author proof](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-collision.md)
-and [independent derivation](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-review.md)
+The next selected instrument keeps those thirteen regions and appends one fixed S-center
+region, $C^*$, directly.
+It is not another obstacle to dilate by $B_0$. The
+[author proof](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-collision.md)
+and
+[independent derivation](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-review.md)
 prove the uniform displacement guard $\varepsilon=1/500$ and the collision implication
-throughout both actual closed angle bands. They define every constant and distinguish
-world coordinates from the rotated Q-frame.
+throughout both actual closed angle bands.
+They define every constant and distinguish world coordinates from the rotated Q-frame.
 
 The producer constructs $C^*$ by closed half-plane clipping; the independently authored
-reader reconstructs it by enumerating supporting-line intersections. Both source-free
-reviews passed in Session094, with the fixed eight unnormalized normals and the
-required $2\varepsilon$ penalty on diagonal normals. The reviewed source retains the
-old thirteen regions unchanged and has at most fourteen regions and 68 vertices.
+reader reconstructs it by enumerating supporting-line intersections.
+Both source-free reviews passed in Session094, with the fixed eight unnormalized normals
+and the required $2\varepsilon$ penalty on diagonal normals.
+The reviewed source retains the old thirteen regions unchanged and has at most fourteen
+regions and 68 vertices.
 Empty or degenerate new regions are refused, not silently discarded.
 
 Exp127 subsequently invoked the producer once after its committed protocol and admission

@@ -948,8 +948,8 @@ session:
 ---
 # Complete Cover and Repaired Density Controls
 
-This completed the third two-hour checkpoint slice of the eight-active-hour program
-that began at 05:49 UTC, under `think-il1m`. It continued Session093’s selected `think-7e72`
+This completed the third two-hour checkpoint slice of the eight-active-hour program that
+began at 05:49 UTC, under `think-il1m`. It continued Session093’s selected `think-7e72`
 handoff. Interruptions do not consume the allocation; recursive agent time is separate.
 
 ## Slices and Decisions
@@ -968,26 +968,30 @@ independently certified the diagonal-band cover; the axis producer returned `no_
 and had no reader invocation.
 The axis-band obligation remains unresolved, preventing acceptance of H124 or restricted
 H036. The axis result supplies no independently verified gap or counterexample.
-The selected strengthening adds one fixed collision polygon. Its fixed-displacement
-and collision proofs have been independently accepted, and both source authors have
-frozen. The producer's independent source review is complete; root has also completed
-the reader review. At Session094 close, all new collision-source factories remained
-uncalled. Source-free
-review does not establish actual source agreement or authorize a scientific target.
+The selected strengthening adds one fixed collision polygon.
+Its fixed-displacement and collision proofs have been independently accepted, and both
+source authors have frozen.
+The producer’s independent source review is complete; root has also completed the reader
+review. At Session094 close, all new collision-source factories remained uncalled.
+Source-free review does not establish actual source agreement or authorize a scientific
+target.
 
 The density lane’s degree-eight repair does not restart the stopped original control
-sequence. All five controls in the fresh BC243 allocation passed. The separately
-admitted [exp126](../series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md)
-producer then returned `unresolved` with an `overweight_clique` stop. No independent
-reader ran and no retry is authorized. This graph-only obstruction is not geometric
-candidate invalidity or a refutation of H099; the bracket `[11, 56/5]` is unchanged.
+sequence. All five controls in the fresh BC243 allocation passed.
+The separately admitted
+[exp126](../series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md)
+producer then returned `unresolved` with an `overweight_clique` stop.
+No independent reader ran and no retry is authorized.
+This graph-only obstruction is not geometric candidate invalidity or a refutation of
+H099; the bracket `[11, 56/5]` is unchanged.
 
-The source checkpoint was published by 11:49 UTC. The fast gate on `3bec06e2` passed
-in 169.33 seconds, with confirmation observed at 11:50:19 UTC. Its full gate later passed
+The source checkpoint was published by 11:49 UTC. The fast gate on `3bec06e2` passed in
+169.33 seconds, with confirmation observed at 11:50:19 UTC. Its full gate later passed
 in 1638.75 seconds, observed at 12:26:14 UTC and recorded as a post-checkpoint result.
-Session094 is complete. Session095 activated at 11:51:12 UTC with the original
-13:49 endpoint unchanged. Any new scientific target still requires its own reviewed
-prospective protocol and admission; this handoff does not authorize an invocation.
+Session094 is complete.
+Session095 activated at 11:51:12 UTC with the original 13:49 endpoint unchanged.
+Any new scientific target still requires its own reviewed prospective protocol and
+admission; this handoff does not authorize an invocation.
 
 Root owns shared records, sequential IDs, scientific admission, Git and PR109.
 Mathematical authors and reviewers use max thinking; suitable mechanical work may use
@@ -997,56 +1001,66 @@ PR110’s Session092 and BC261/BC273 lane is not duplicated or merged before it 
 
 ## Selected Final-slice Resources
 
-This is the historical handoff prepared before Session095 activated at 11:51:12 UTC
-on 2026-09-07. Its instructions and resource inventory below are retained as provenance,
-not current launch authority. In
-[Session095](session-095-collision-cover-and-support-ceiling.md),
+This is the historical handoff prepared before Session095 activated at 11:51:12 UTC on
+2026-09-07. Its instructions and resource inventory below are retained as provenance,
+not current launch authority.
+In [Session095](session-095-collision-cover-and-support-ceiling.md),
 [exp127](../series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md)
-returned `unresolved/no_chain` and authorized no reader. The independently accepted
+returned `unresolved/no_chain` and authorized no reader.
+The independently accepted
 [exp128](../series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md)
 then established fixed-support optimum eleven and refuted H099. Both allocations are
-terminal; neither receives an unchanged retry. Session095 owns the subsequent disposition.
+terminal; neither receives an unchanged retry.
+Session095 owns the subsequent disposition.
 
 Continue H124/BC255 through the separately reviewed exp127 protocol, with at most one
-fixed collision-augmented axis producer and its positive-only reader. Retain exp125's
-diagonal proof. The independent secondary is the existing BC259/H099 support-ceiling
-review, initially thirty minutes with at most thirty more after concrete readiness.
+fixed collision-augmented axis producer and its positive-only reader.
+Retain exp125’s diagonal proof.
+The independent secondary is the existing BC259/H099 support-ceiling review, initially
+thirty minutes with at most thirty more after concrete readiness.
 A verified ceiling of eleven would settle every weight vector on this support; a
-geometric diagnosis of exp126's current clique would settle only that vector.
+geometric diagnosis of exp126’s current clique would settle only that vector.
 Neither allocation authorizes a scientific call without its own admission.
 
 The BC259 resource inventory was static, not an adoption verdict:
 
-- The [archived checker](../../resources/papers/n11-complete-research-bundle-2026-09-07/original_review/certificate/check_support_ceiling.py)
+- The
+  [archived checker](../../resources/papers/n11-complete-research-bundle-2026-09-07/original_review/certificate/check_support_ceiling.py)
   contains `ROWS`, `SIZES`, `WEIGHTS` and `incidence_on_box`; its neighboring
-  `support_exact_result.json` retains the supplied seven-row result. Its `geometry()`
-  is contributed reconstruction, not an independent current-source reader.
-- [Trump's current seed](../../cases/trump11/packing.py) defines `U_MIN_POLY` and
+  `support_exact_result.json` retains the supplied seven-row result.
+  Its `geometry()` is contributed reconstruction, not an independent current-source
+  reader.
+- [Trump’s current seed](../../cases/trump11/packing.py) defines `U_MIN_POLY` and
   `U_INTERVAL` for the degree-eight half-angle parameter, not the side.
   Its `build_in()` is a scientific constructor, not an import-time readiness check.
-- [Support construction](../../src/sqpack/full_size_density/support_ceiling.py)
-  exposes `build_support`, `necessary_row` and solver-free `check_upper` arithmetic.
+- [Support construction](../../src/sqpack/full_size_density/support_ceiling.py) exposes
+  `build_support`, `necessary_row` and solver-free `check_upper` arithmetic.
   [Labelled binding](../../src/sqpack/full_size_density/support_screen.py) preserves
   every preimage, orbit and baseline count through `bind_source` and `support_metadata`.
-- The [existing independent reader](../../devtools/check_full_size_density_support_ceiling.py)
+- The
+  [existing independent reader](../../devtools/check_full_size_density_support_ceiling.py)
   has separately structured `_direct_images` and `reconstruct_source`, bounded parsing
-  and oriented-edge row checks. Its `replay_packet` also requires exp113 screening
-  history and solve metadata; it is not a drop-in adoption interface. Do not fabricate
-  that history or bypass private guards. Shared seeds, arithmetic and reconstruction
-  must be declared, not described as independent derivation.
+  and oriented-edge row checks.
+  Its `replay_packet` also requires exp113 screening history and solve metadata; it is
+  not a drop-in adoption interface.
+  Do not fabricate that history or bypass private guards.
+  Shared seeds, arithmetic and reconstruction must be declared, not described as
+  independent derivation.
 
-At this handoff, the unresolved binding was the historical geometry, all 88 labelled images, the
-60-placement quotient and the eight-orbit order. Map the archive's representatives
-`(0,2,4,7,10,8,6,9)` explicitly to the current canonical order. Retained baseline
-assertions are sizes `(4,8,8,8,8,8,8,8)` and counts `(3,1,2,1,1,1,1,1)`.
-Verify all seven positive-area neighborhoods, mapped rows, nonnegative multipliers
-and their upper-bound identity. The candidate-depth box is a separate claim.
+At this handoff, the unresolved binding was the historical geometry, all 88 labelled
+images, the 60-placement quotient and the eight-orbit order.
+Map the archive’s representatives `(0,2,4,7,10,8,6,9)` explicitly to the current
+canonical order. Retained baseline assertions are sizes `(4,8,8,8,8,8,8,8)` and counts
+`(3,1,2,1,1,1,1,1)`. Verify all seven positive-area neighborhoods, mapped rows,
+nonnegative multipliers and their upper-bound identity.
+The candidate-depth box is a separate claim.
 
 Do not run the legacy source-review test file wholesale during source-free preparation:
 `test_trump_source_control_preserves_all_preimages_without_rows_or_solves` constructs
-the actual source. Some algebraic toy helpers use the Trump field, and the archive's
-own mutation checks share its geometry. Select genuinely unrelated controls and forbid
-scientific factories until the new protocol is admitted.
+the actual source. Some algebraic toy helpers use the Trump field, and the archive’s own
+mutation checks share its geometry.
+Select genuinely unrelated controls and forbid scientific factories until the new
+protocol is admitted.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

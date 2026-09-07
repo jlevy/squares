@@ -142,9 +142,9 @@ hypotheses, one open hypothesis, twenty-three open questions, and forty blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. No hypothesis is running or waiting on review and six are unresolved.
 H-124’s fixed-square screen found no pair; its witness-only reader was not invoked.
-H-105 is refuted: all 134 eligible candidate pairs are separated. Exp128 subsequently
-settled H-099's entire fixed support at optimum eleven through seven necessary rows;
-this does not determine expanded supports or a global packing bound.
+H-105 is refuted: all 134 eligible candidate pairs are separated.
+Exp128 subsequently settled H-099’s entire fixed support at optimum eleven through seven
+necessary rows; this does not determine expanded supports or a global packing bound.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
 pinned the `m = 5` covering wall to a bracket of width 0.015 where it had registered
 0.02. One, H-064, is abandoned in the ledger’s word — its latest round expired resumable
@@ -620,33 +620,38 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**Selected next entry:** `think-mq0d` takes BC-264's bounded H114 feature and kernel-contract pricing.
-The [Session094 handoff](packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md)
+**Selected next entry:** `think-mq0d` takes BC-264’s bounded H114 feature and
+kernel-contract pricing.
+The
+[Session094 handoff](packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md)
 was updated after the first result in
 [Session095](packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md).
 Exp125 independently certified the entire diagonal compatibility branch, but its axis
-representation returned `no_chain`. Exp127's fixed collision-augmented axis cover also
-returned `no_chain`, in 0.25 seconds, without an independent reader. H124 and restricted
-H036 remain unresolved; that representation receives no retry or parameter sweep.
-BC-259 is complete: exp128 independently bound all88source images,60placements and
-eight orbits, verified41strict inclusions on seven fixed boxes, and established the
-attained support optimum eleven in1.12seconds. H099 is refuted only on that support.
-BC-265's independent designs derive an explicit mass-eleven calibration on the old
-support, but a new undercovered pose would reject only that density. The selected next
-allocation is BC-264's existing 30-minute feature and verification-price assessment:
-a complete H114 kernel could improve the global bound at side 96/25, while a finite
-obstruction would reject only its chosen feature family. Kernel-specific BC-260 review,
-exact PSD evidence and complete pair-domain verification remain prerequisites.
-H101's stronger common-support obstruction is a conditional fallback, with no candidate
+representation returned `no_chain`. Exp127’s fixed collision-augmented axis cover also
+returned `no_chain`, in 0.25 seconds, without an independent reader.
+H124 and restricted H036 remain unresolved; that representation receives no retry or
+parameter sweep. BC-259 is complete: exp128 independently bound all 88 source images, 60
+placements and eight orbits, verified 41 strict inclusions on seven fixed boxes, and
+established the attained support optimum eleven in 1.12 seconds.
+H099 is refuted only on that support.
+BC-265’s independent designs derive an explicit mass-eleven calibration on the old
+support, but a new undercovered pose would reject only that density.
+The selected next allocation is BC-264’s existing 30-minute feature and
+verification-price assessment: a complete H114 kernel could improve the global bound at
+side $96/25$, while a finite obstruction would reject only its chosen feature family.
+Kernel-specific BC-260 review, exact PSD evidence and complete pair-domain verification
+remain prerequisites.
+H101’s stronger common-support obstruction is a conditional fallback, with no candidate
 asserted. No new target or research block is activated by this handoff.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
 `think-9qrx`, completed the user-approved research block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
 dual mass of about 10.080180 at depth one, below the obstruction threshold.
 No bridge or unchanged retry is selected.
-At that earlier checkpoint, BC-243's uniform control had timed out on three separately
-reviewed algorithms. Session094 later completed all five repaired graph controls and
-ran exp126 once. Its graph-only obstruction left H099 unresolved; no retry is open.
+At that earlier checkpoint, BC-243’s uniform control had timed out on three separately
+reviewed algorithms.
+Session094 later completed all five repaired graph controls and ran exp126 once.
+Its graph-only obstruction left H099 unresolved; no retry is open.
 BC-255 accepted H-106’s full continuous near-axis ten-point clause through an
 independent exact rectangle reader.
 H-108 and H-109 also accepted canonical near-45 A3 and A1/A2 forcing through independent
@@ -3128,7 +3133,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-091.yaml` | session-091 | 553 | 5.05 h | 1.93 h | 1.93 h | yes |
 | `codex-task-tree-session-093.yaml` | session-093 | 673 | 6.07 h | 1.99 h | 1.99 h | yes |
 | `codex-task-tree-session-094.yaml` | session-094 | 562 | 4.53 h | 1.82 h | 1.82 h | yes |
-| `codex-task-tree-session-095.yaml` | session-095 | 152 | 1.68 h | 0.7 h | 0.7 h | yes |
+| `codex-task-tree-session-095.yaml` | session-095 | 476 | 4.08 h | 1.69 h | 1.69 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

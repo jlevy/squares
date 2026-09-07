@@ -45,12 +45,13 @@ An actual mass-eleven density and the exact Trump packing suffice for those
 conditions; an optimizer-existence conjecture does not.
 Coverage equal to one on Trump’s eleven squares alone is only a necessary finite test.
 
-After exp128, BC265's
+After exp128, BC265’s
 [independent designs](../agendas/agenda-027-compatibility-and-restricted-families.md#session095-selection-and-parallel-handoff)
 construct an explicit box density with capture exactly one on all sixty old support
-members. Universal coverage remains unproved. A pose missed by this density rejects
-only this candidate. The stronger conditional test is a unit square meeting the common
-occupied region of all eight source packings in area zero; no such pose has been supplied.
+members. Universal coverage remains unproved.
+A pose missed by this density rejects only this candidate.
+The stronger conditional test is a unit square meeting the common occupied region of all
+eight source packings in area zero; no such pose has been supplied.
 
 A possible inverse-design method imposes these finite coverage equalities in a
 D4-symmetric density basis, followed by the full continuum check.

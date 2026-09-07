@@ -401,18 +401,18 @@ Use `max` for mathematical judgment and `high` or `xhigh` for suitable mechanica
 ### Selected Continuation After Session 090
 
 The current local coordinating entry is BC-264 under `think-mq0d`: price one H114
-feature family and its missing kernel-specific contract within the existing
-30-minute slice. BC265's independent design is complete; a calibration falsifier has
-less direct value than this bound-capable mechanism and is not selected automatically.
-H101's stronger common-support obstruction remains a conditional fallback without a
-candidate. Exp128 established fixed-support optimum11 and closed BC259/H099.
-This is a future source-free entry, not a newly funded target. Session094's diagonal
-compatibility lemma is retained, while Session095 exp127's fixed collision-augmented
-axis cover returned `no_chain` without a reader. H124 and restricted H036 remain
-unresolved; no retry or parameter sweep follows. The original full-square entry
-`think-7e72` is now terminal. This updates the earlier continuation below, rather than
-reinterpreting its historical outcomes.
-The small-obstacle
+feature family and its missing kernel-specific contract within the existing 30-minute
+slice. BC265’s independent design is complete; a calibration falsifier has less direct
+value than this bound-capable mechanism and is not selected automatically.
+H101’s stronger common-support obstruction remains a conditional fallback without a
+candidate. Exp128 established fixed-support optimum11 and closed BC259/H099. This is a
+future source-free entry, not a newly funded target.
+Session094’s diagonal compatibility lemma is retained, while Session095 exp127’s fixed
+collision-augmented axis cover returned `no_chain` without a reader.
+H124 and restricted H036 remain unresolved; no retry or parameter sweep follows.
+The original full-square entry `think-7e72` is now terminal.
+This updates the earlier continuation below, rather than reinterpreting its historical
+outcomes. The small-obstacle
 [H-122 conditional cover](../hypotheses/H-122-diamond-conditional-nine-point-cover.md)
 is refuted, while
 [H-123 localization](../hypotheses/H-123-near45-coordinate-localization.md) is accepted.
