@@ -446,16 +446,16 @@ session:
     excluded_commands: ["Scientific source evaluation","Target invocation","Git or registry writes"]
   - task: "Next structural obligation assessment (think-byq5)"
     operator: "Codex density_control_recovery, max thinking"
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: "Actual10:31:39–10:45:48 UTC; selected one fixed Cstar addition using existing whole-band kernels and a fixed displacement bound, not a two-angle solver or radius sweep."
+    evidence: [packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md]
     files: []
     checks: []
     uncertainty: "No new scientific invocation is authorized by this assignment; runtime and remaining proof obligations are distinct."
-    elapsed_seconds: null
-    elapsed_quality: unavailable
-    next_action: "Reprice the remaining near-axis S branch after the certified diagonal lemma; no scientific source evaluation."
+    elapsed_seconds: 849
+    elapsed_quality: operator_reported_approximate
+    next_action: "The selected fixed displacement has separately bounded independent proof assignments; no scientific source evaluation yet."
     phase: 4
     budget_minutes: 15
     started_at: "2026-09-07T10:31:00Z"
@@ -468,16 +468,16 @@ session:
     excluded_commands: ["Scientific source evaluation","Target invocation","Git or registry writes"]
   - task: "Independent center-correlated reduction review (think-vnua)"
     operator: "Codex scalar_followup_assessment, max thinking"
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: "Generic vertex/Minkowski lemma proved10:37:49–10:47:55 UTC, with world-coordinate rotation, explicit empty-triangle branch and closed seams. Eight support halfplanes suffice; the original psi=0 split resolves S-axis extremizers."
+    evidence: [packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md]
     files: []
     checks: []
     uncertainty: "No new scientific invocation is authorized by this assignment; runtime and remaining proof obligations are distinct."
-    elapsed_seconds: null
-    elapsed_quality: unavailable
-    next_action: "Audit the vertex-intersection lemma, coordinate frame, outer-domain direction and continuous-angle obligations without source evaluation."
+    elapsed_seconds: 606
+    elapsed_quality: operator_reported_approximate
+    next_action: "Independently prove the separately selected fixed displacement guard; generic reduction alone does not authorize a target."
     phase: 4
     budget_minutes: 15
     started_at: "2026-09-07T10:37:49Z"
