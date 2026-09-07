@@ -33,11 +33,13 @@ exploration:
 ---
 # X-018 — Hybrid Strength and Angular Release
 
-**Next: BC-282’s design of the complete residual ten-square skeleton, followed by
-independent admission.** The overnight investigation is closed.
-Its accepted partial exclusions and counting lemma support this bounded next decision;
-the [final allocation](#final-allocation-and-ranked-portfolio) gives the domains, prices
-and alternatives. The separately owned BC-264 kernel assessment can proceed in parallel.
+**BC282 is complete: the exact translation reduction is accepted, and the full target is
+not admitted.** [Session096](../agent-sessions/session-096-residual-skeleton.md) parks
+further local H120 and H118 target work after independent admission and comparison.
+The next portfolio priority is the existing, separately owned BC264 kernel-pricing
+entry. Its kernel-specific contract must still be reviewed before a target.
+The [checkpoint decision](#bc282-checkpoint-and-current-allocation) records the new
+mathematics, re-entry conditions and allocation.
 
 The opening allocation put most attention into local compatibility and a smaller share
 into angular structure.
@@ -185,10 +187,10 @@ Its H124 collision-augmented exp127 remains unresolved with `no_chain` and no
 independent target reader.
 Neither source task is repeated here.
 
-## Final Allocation and Ranked Portfolio
+## Overnight Closing Allocation and Ranked Portfolio
 
-**Select BC282, a future design of the complete residual skeleton decision.** The final
-W5 assessment compared three disjoint read-only reviews with the accepted mathematics.
+**The overnight close selected BC282’s residual-skeleton design.** The final W5
+assessment compared three disjoint read-only reviews with the accepted mathematics.
 It favors a small analytical admission before paying for a family adapter.
 This is a judgment about readiness and useful discrimination, not a measured success
 probability. The eight-hour run does not execute this successor.
@@ -212,7 +214,8 @@ selecting a favorable interval fails admission.
 After that new premise is independently admitted, a separately frozen 30-minute author,
 25-minute adversary and 20-minute fresh audit would cost 105 worker-minutes in total
 including preparation, with an 80-minute sequential path.
-Those later allocations are proposed caps and remain unspent.
+Those later allocations were proposed caps.
+Session096 independently refused the target; they remain unspent.
 
 A complete skeleton contradiction would finish the source-family exclusion.
 An exact feasible ten-square skeleton, checked against all 40/45 conditions, would
@@ -223,7 +226,7 @@ An incomplete table remains a readiness gap.
 
 | Rank | Avenue and ownership | Next useful evidence and reconsideration condition |
 | --- | --- | --- |
-| Selected next entry | X018 / BC282 / H120, `think-s6e7` | Complete residual-skeleton admission from the new exact premises. Refuse an unchanged retry or incomplete case table. |
+| Selected at the overnight close | X018 / BC282 / H120, `think-s6e7` | Complete residual-skeleton admission from the new exact premises. Refuse an unchanged retry or incomplete case table. |
 | Parallel, separately owned | Source X016 and X017 continuation / PR109 | Consume its accepted support optimum and completed BC265/H116 design; preserve the selected BC264/H114 pricing, H124 remainder and ownership. |
 | Next boundary preparation candidate | X018 / H118 | A 20-minute generic design and 15-minute independent audit of exact elimination of one residual angle while retaining walls and all ten actual neighbors. Require a finite event rule, all coefficient/root degeneracies, explicit case counts and a valid simultaneous-angle strictness control. No such rule or control is admitted yet. |
 | Deferred implementation | X017 / BC261, sole interface owner | Add independently enclosed retained-feature rows and a complete checked family cover only when a named consumer needs them. Estimated allocation through a first target audit is 220–250 worker-minutes; current small controls do not measure that cost. |
@@ -404,6 +407,50 @@ An instrument-only block is enabling work; call it that and reprice the next
 mathematical decision.
 [Agenda 028](../agendas/agenda-028-hybrid-strength-and-angular-release.md) sets the
 opening sequence and the conditions for allocating a longer run.
+
+## BC282 Checkpoint and Current Allocation
+
+The
+[design](../series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md)
+and
+[independent admission](../series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md)
+give an exact reduction of the full remaining ten-square domain.
+Ten closed chambers account for changes in the block’s extremal centers.
+For each fixed structural tuple, containment is one closed translation rectangle; each
+of the 24 axis/block pairs forbids an explicit open interval at a fixed translation
+height. A skeleton exists exactly when an allowed translation lies outside every
+forbidden interval. All 40 containment rows and 45 pair clauses remain accounted for,
+including touching, empty rectangles, singleton fibers and tied endpoints.
+
+This is accepted analytical structure, without a numerical run or machine proof replay.
+It establishes neither coverage of a target fiber nor a feasible skeleton.
+The proposed chain using at most six distinct axis owners is sufficient but unproved; a
+complete 24-interval chain may repeat source labels.
+Missing uniform templates and bounded endpoint changes prevent admission of the proposed
+75-worker-minute target.
+
+Two further read-only comparisons agree with the coordinator’s allocation:
+
+| Avenue | Current disposition and exact re-entry condition |
+| --- | --- |
+| Existing BC264 / H114, separately owned | Next portfolio priority: at most 30 minutes of feature and kernel-contract pricing. First accept the kernel-specific BC260 implications, fix features, exact PSD criteria and the full diagonal/pair verification price. Preparation does not authorize a target. |
+| H120 fixed-parameter skeleton witness | Parked in `think-k54y`. A justified tuple-selection rule, complete open-fiber discriminator, independent binding to the skeleton’s features and a credible verification price are missing. An exact ten-square witness would show that square10 must enter the argument. |
+| H120 uniform fiber cover | Parked. Require explicit uniform templates and bounded facet transitions; finiteness or failure of a six-source chain supplies neither coverage nor feasibility. |
+| H118 residual-angle elimination | Conditional alternative with broader parent-cover relevance. Its former 20+15-minute quote prices preparation only. Re-entry needs a finite rule preserving the same residual angle against walls and all ten neighbors, degeneracy coverage, a valid joint-angle control and a full target/audit price. |
+
+The central fence, six-core certificates and fixed-insertion obstruction do not supply
+H118’s missing event rule or resolve M7. Source exp127’s unverified `no_chain` result
+also supplies no transferable negative or geometric gap.
+The existing closed polygon coverer counts tangencies and cannot certify these open
+forbidden intervals unchanged.
+
+Allocate zero further local target minutes at this checkpoint.
+This is a readiness and opportunity-cost decision, not evidence that either mathematical
+route is impossible.
+Preserve the accepted reductions and the unchanged global n11 bracket.
+BC282 and session096 are the only new executed allocations; no BC283, new hypothesis or
+experiment is reserved.
+The continuation remains on PR110.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -557,23 +557,46 @@ agenda:
   - id: BC-282
     purpose: measurement_validation
     owner_focus: correctness
-    instances: [11]
-    state: ready
+    instances:
+    - 11
+    state: complete
     priority: 1
     question: Can the accepted new geometry support a complete, independently admissible residual ten-square skeleton decision?
-    hypotheses: [H-120]
-    budget: Future design only,20 minutes followed by10-minute independent admission, including writing and checks. Any later analytical target needs a separately committed protocol; the proposed30/25/20-minute target price is conditional and unspent.
-    entry: Independently accepted BC281 partial audit and closed remainder. Fresh local and source inventory at13:24:29UTC found no BC282 or later commitment; think-s6e7 reserves the next sequential ID. Session092 closeout selects this entry without executing it.
+    hypotheses:
+    - H-120
+    budget: 20-minute design and10-minute independent admission, including writing and checks, completed in session096. Two independent10-minute preparation inventories ran inside the design window. The proposed30/25/20-minute target was refused and remains unspent.
+    entry: The accepted BC281 partial audit and closed remainder selected BC282 under think-s6e7. The owner subsequently authorized continuation; session096 executed this separately from closed session092.
     exit: Exact necessary skeleton projection with40 containment rows and45 full SAT clauses, complete closed angle/sign cover, scoped inherited lemmas and an alternative-obligation table naming a specific additional geometric implication. Otherwise retain the exact admission gap. A mere restatement or unchanged retry is refused.
     bead: think-s6e7
-    workflows: [insight-iteration, factual-review]
-    depends_on: [BC-280]
+    workflows:
+    - insight-iteration
+    - factual-review
+    depends_on:
+    - BC-280
     parallel_group: agenda028-structure
     program: n11-hybrid-strength-and-angular-release
     artifacts:
-    - packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md
-    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md
-    next_evidence: Choose the exact missing implication after the finite obligation table. Full skeleton exclusion would finish the source-family theorem; an exact ten-square witness would show that square10 must enter the proof and would not be a packing upper bound. No new target or adapter is authorized by this design entry.
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-domain-inventory.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-inherited-premise-inventory.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md
+    - packing/campaign/agent-sessions/session-096-residual-skeleton.md
+    next_evidence: Independent admission accepts the exact40/45 domain, ten closed envelope chambers and open translation-fiber equivalence. The six-source fence is sufficient but unproved; uniform templates, bounded facet transitions and a priced complete witness discriminator are missing. Session096 parks local target work; think-k54y retains exact re-entry prerequisites, while existing BC264 pricing remains separately owned.
+    outcomes:
+    - scope: Complete residual ten-square domain and exact joint-translation reduction
+      classification: achieved
+      result: Independent reconstruction accepts seven parameters,40 containment rows,45 complete pair clauses, ten closed envelope chambers,24 open collision intervals and exact fiber equivalence. Degenerate fibers and all legal touching are retained. No particular target fiber is proved covered.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md
+      disposition: retire-success
+      follow_up: null
+    - scope: Conditional complete skeleton target
+      classification: guard-refused
+      result: 'The independent reviewer declines the30/25/20 target allocation: neither bounded uniform chain templates and active-facet transitions nor a priced complete witness discriminator is supplied. No target ran; six-source-chain failure is not skeleton feasibility.'
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md
+      disposition: defer-dependency
+      follow_up: think-k54y
 ---
 # Agenda 028 — Hybrid Strength and Angular Release
 
@@ -581,11 +604,13 @@ agenda:
 [session-092](../agent-sessions/session-092-hybrid-overnight.md).** Its scientific
 audits completed before the usage interruption; final publication was recovered after
 the owner asked to continue.
-This agenda remains active for the unexecuted BC282 design and its explicitly deferred
-questions.
-[X-018](../explorations/X-018-hybrid-strength-and-angular-release.md) owns the
-critical review, priority rationale and mapping from #108. Epic `think-pxv5` owns this
-agenda. PR107 landed the plans at `dd36800e`; integration bead `think-0yfe` owns the new
+The owner subsequently authorized continuation in
+[session-096](../agent-sessions/session-096-residual-skeleton.md).
+BC282 now has an independently accepted exact translation reduction; its full target
+remains unadmitted. The agenda remains active for its explicitly deferred questions.
+[X-018](../explorations/X-018-hybrid-strength-and-angular-release.md) owns the critical
+review, priority rationale and mapping from #108. Epic `think-pxv5` owns this agenda.
+PR107 landed the plans at `dd36800e`; integration bead `think-0yfe` owns the new
 `codex/n11-hybrid-overnight` execution branch.
 The owner authorized approximately eight hours, 06:31–14:31 UTC on September 7, with
 pushed checkpoints at hours 2, 4, 6 and 8. The opening design and proof-contract review

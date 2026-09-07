@@ -25,7 +25,7 @@ hypothesis:
     wall incidences from the PR108 graph; preserve the release equality seam and
     coincident or axis angle cases; no minimizing-stationarity assumption
   instance: {axis: n, point: 11}
-  priority: 1
+  priority: 3
   cost_estimate: first a 30-minute closed-domain design; target and replay priced from controls
   prereqs: [frozen closed release domain and sibling scopes, accepted geometric implication and controls]
   replication: false
@@ -41,8 +41,9 @@ hypothesis:
     parent S. Other block angles, longer slides and changed wall/contact
     patterns remain open. BC280 independently admits the complete physical block
     chart t in[0,1]; BC281 separately prices its whole-family determination.
-    No enlarged target has begun at this checkpoint. No finite-motion theorem
-    or global bound is claimed.
+    BC281 later retained accepted partial exclusions; session096 completes
+    BC282 with an independently accepted exact open-fiber reduction and a
+    target-readiness refusal. No finite-motion theorem or global bound is claimed.
 ---
 # H-120 — Rank-Nine Release Exclusion
 
@@ -160,10 +161,29 @@ $t\in[1/24,1/3]\cup[1/2,23/25]$, with both slide signs and all other original
 conditions. Endpoint overlap preserves every seam.
 BC281 stops inconclusively on its whole-domain criterion; no actual eleven-square
 witness or global-bound improvement is supplied.
-BC282 selects a future design of the stronger ten-square skeleton decision, using the
-accepted new premises and a complete alternative table.
-A feasible skeleton would refute that proof strategy, not H120; any later target
-requires separate admission.
+BC282’s
+[design](../series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md)
+and
+[independent admission](../series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md)
+now give an exact joint-translation reduction: ten closed envelope chambers and 24 open
+collision intervals account for all 40 containment rows and 45 pair clauses.
+For fixed structural parameters, a skeleton exists exactly when one allowed translation
+lies outside every forbidden interval on its height fiber.
+Empty and singleton containment fibers, interval ties and legal touching retain their
+exact meanings.
+
+No target fiber has been shown covered or feasible.
+The proposed six-source covering chain is sufficient but unproved; general 24-interval
+covers may repeat source labels.
+The independent reviewer refuses the conditional target allocation because uniform
+templates, bounded facet transitions and a priced complete witness discriminator are
+missing. An exact ten-square witness would refute skeleton emptiness, not H120’s
+eleven-square exclusion.
+Session096 parks local target work and retains the re-entry prerequisites in
+`think-k54y`: a justified structural-tuple selection rule or bounded uniform templates,
+independent skeleton binding and a credible price through verification.
+Existing BC264 kernel pricing remains separately owned.
+No unchanged BC281 attempt or automatic target follows.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

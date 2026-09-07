@@ -205,6 +205,10 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [BC-282: Residual Skeleton and a Proposed Translation Fence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-design.md) | research synthesis | record | retained | — |
+| [BC-282: Independent Skeleton-Design Admission](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-skeleton-admission.md) | dated review record | record | retained | — |
+| [BC-282: Independent Residual-Domain Inventory](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-residual-domain-inventory.md) | dated review record | record | retained | — |
+| [BC-282: Inherited Premise Inventory](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-282-inherited-premise-inventory.md) | dated review record | record | retained | — |
 | [BC-281: Independent Audit of the Partial Full-Angle Results](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md) | dated review record | record | retained | — |
 | [BC-281: Author’s Partial Full-Angle Exclusion](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-author.md) | research synthesis | record | retained | — |
 | [BC-281: Independent Full-Angle Adversarial Analysis](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-adversary.md) | research synthesis | record | retained | — |
@@ -572,6 +576,13 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
+**Active continuation:** [session096](packing/campaign/agent-sessions/session-096-residual-skeleton.md)
+has completed BC282’s exact translation reduction and independent target-readiness
+review. The reduction is accepted; the larger target is not admitted. Its efficiency
+checkpoint parks local H120/H118 target work and preserves existing BC264 kernel pricing
+under its separate owner. Publication and validation are in progress. The completed
+session092 handoff below is retained until this continuation terminalizes.
+
 **Eight-hour investigation closed; BC-282 design selected next.**
 [Session 092](packing/campaign/agent-sessions/session-092-hybrid-overnight.md) was
 allocated from 06:31 to 14:31 UTC on September 7, on `codex/n11-hybrid-overnight` after
@@ -580,7 +591,7 @@ intermediate checkpoints, independently audited proofs, exact model obstructions
 validation. All scientific audits ended before their original limits.
 Usage interrupted the final documentation reviews and publication; the user asked to
 continue and the coordinator recovered the checkpoint after the original 14:31 deadline.
-No successor was executed.
+No successor was executed during that publication recovery.
 
 [X-018](packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md) and
 [Agenda 028](packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md)
@@ -3212,12 +3223,13 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-093.yaml` | session-093 | 673 | 6.07 h | 1.99 h | 1.99 h | yes |
 | `codex-task-tree-session-094.yaml` | session-094 | 562 | 4.53 h | 1.82 h | 1.82 h | yes |
 | `codex-task-tree-session-095.yaml` | session-095 | 476 | 4.08 h | 1.69 h | 1.69 h | yes |
+| `codex-task-tree-session-096.yaml` | session-096 | 146 | 1.4 h | 0.63 h | 0.63 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 51 |
+| measured | 52 |
 | unmeasured | 44 |
-| **total** | **95** |
+| **total** | **96** |
 
 <!-- END GENERATED: session-close-report -->
 
