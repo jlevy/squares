@@ -753,3 +753,62 @@ def test_only_the_bound_numeral_carries_the_new_result_accent() -> None:
 
     assert len(accented) == record["figure"]["totals"]["lower_bound_first_proved_here"]
     assert len(plain) > len(accented)
+
+
+def _unitsquare_digests() -> dict[int, str]:
+    release = json.loads(UNITSQUARE_RESULTS.read_text(encoding="utf-8"))
+    return {int(record["n"]): str(record["svg_sha256"]) for record in release["results"]}
+
+
+def _case(n: int, side: str, source_key: str) -> known_best_builder.FrontierCase:
+    return known_best_builder.FrontierCase(
+        n=n,
+        side=side,
+        path=ROOT / f"frontier/n-{n:03d}.md",
+        text="",
+        reported_source_key=source_key,
+    )
+
+
+def _plan_for(
+    case: known_best_builder.FrontierCase,
+    catalogue: dict[int, tuple[str, int, tuple[int, ...]]] | None = None,
+) -> known_best_builder.SourcePlan:
+    """The builder's own source selection, which is what these three cases are about."""
+    select = (
+        known_best_builder._source_plan  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    )
+    return select(case, catalogue or {}, _unitsquare_digests())
+
+
+def test_a_unitsquare_case_is_chosen_by_its_record_rather_than_by_its_number() -> None:
+    # The selector used to be the literal set {68, 69}. It is now what the record says
+    # its bound came from, so a case joins the UnitSquare layer by being sourced there.
+    # n = 103 is one of the four the prospective collection already retains, and it has
+    # to resolve to those retained bytes rather than to a copy under this collection.
+    plans = {
+        n: _plan_for(_case(n, side, "[UnitSquare 2026]"))
+        for n, side in ((68, "8.8033830747161083"), (103, "10.4783914611164"))
+    }
+
+    assert {n: plan.kind for n, plan in plans.items()} == {
+        68: "unitsquare-rendering",
+        103: "unitsquare-rendering",
+    }
+    assert plans[68].path == ROOT / "resources/web/known-best-packings/unitsquare/n068.svg"
+    assert plans[103].path == ROOT / "resources/web/prospective-packings/unitsquare/n103.svg"
+    assert plans[103].upstream_declared_sha256 == _unitsquare_digests()[103]
+
+
+def test_a_record_naming_the_release_the_release_does_not_carry_is_refused() -> None:
+    with pytest.raises(ValueError, match="omits its SVG digest"):
+        _plan_for(_case(107, "10.84666719284348", "[UnitSquare 2026]"))
+
+
+def test_a_catalogue_case_is_unaffected_by_the_unitsquare_selector() -> None:
+    catalogue = {71: ("square-71.svg", 71, (71,))}
+
+    plan = _plan_for(_case(71, "8.9440715575703155", "[Kingbird 2026]"), catalogue)
+
+    assert plan.kind == "kingbird-derived-facts"
+    assert plan.url == "https://kingbird.myphotos.cc/packing/square-71.svg"

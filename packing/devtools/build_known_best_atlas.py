@@ -89,6 +89,13 @@ FRONTIER = ROOT / "frontier"
 CATALOGUE = ROOT / "resources/web/kingbird-squares-in-squares.html"
 SOURCE_ROOT = ROOT / "resources/web/known-best-packings"
 UNITSQUARE_ROOT = SOURCE_ROOT / "unitsquare"
+#: The other place a retained UnitSquare rendering lives. The prospective collection
+#: retained `n = 103, 105, 110, 131` when it audited `101..324`, and those bytes are not
+#: moved into the known-best collection as the corpus widens: they are the same
+#: upstream files under the same digest declaration, and moving them would break the
+#: prospective builder that also reads them. Which root holds a case is therefore a
+#: fact about where it was retained, not about which range it falls in.
+PROSPECTIVE_UNITSQUARE_ROOT = ROOT / "resources/web/prospective-packings/unitsquare"
 UNITSQUARE_RESULTS = ROOT / "resources/web/unitsquare-release1-2026/results.json"
 SOURCE_MANIFEST = SOURCE_ROOT / "sources.json"
 WITNESS_ROOT = ROOT / "witnesses/known-best"
@@ -99,6 +106,10 @@ RENDER_ROOT = ATLAS_ROOT / "rendering"
 MANIFEST = ATLAS_ROOT / "manifest.json"
 GENERATOR = "python -m devtools.build_known_best_atlas"
 USER_AGENT = "thinking-scratchpad-known-best-atlas/1.0"
+#: How a frontier record names the UnitSquare release in `reported_upper_bound`. The
+#: record is what selects the source layer, so a case moves onto a UnitSquare rendering
+#: by having its bound sourced there, never by being listed in a set of case numbers.
+UNITSQUARE_SOURCE_KEY = "[UnitSquare 2026]"
 
 #: The cases this build covers, end to end: sources, witnesses, house renderings,
 #: frontier back-links and manifest entries.
@@ -309,6 +320,9 @@ class FrontierCase:
     side: str
     path: Path
     text: str
+    #: `reported_upper_bound.source_key`, which is how the record says where its number
+    #: came from and so which source layer this build has to read.
+    reported_source_key: str
 
 
 @dataclass(frozen=True)
@@ -531,7 +545,31 @@ def _frontier_case(n: int) -> FrontierCase:
     packing = metadata["packing"]
     if packing["n"] != n:
         raise ValueError(f"{path.name}: frontier identity mismatch")
-    return FrontierCase(n, str(packing["reported_upper_bound"]["value"]), path, text)
+    reported = packing["reported_upper_bound"]
+    return FrontierCase(
+        n, str(reported["value"]), path, text, str(reported.get("source_key") or "")
+    )
+
+
+def _unitsquare_source_path(n: int) -> Path:
+    """Where one UnitSquare case's rendering is retained, or would be fetched to.
+
+    Resolved by looking rather than by range, so widening the corpus moves no bytes and
+    re-spells no boundary. Two roots holding the same file is a refusal, because which
+    copy is authoritative would otherwise be settled by the order they are listed in.
+    Neither holding it is not: `--fetch` acquires an unretained rendering, and this
+    collection's own root is where it lands.
+    """
+    filename = f"n{n:03d}.svg"
+    found = [
+        root / filename
+        for root in (UNITSQUARE_ROOT, PROSPECTIVE_UNITSQUARE_ROOT)
+        if (root / filename).is_file()
+    ]
+    if len(found) > 1:
+        where = " and ".join(_relative(path) for path in found)
+        raise ValueError(f"n={n}: retained UnitSquare rendering is ambiguous, in {where}")
+    return found[0] if found else UNITSQUARE_ROOT / filename
 
 
 def _source_plan(
@@ -542,15 +580,18 @@ def _source_plan(
     integer_side = rational_integer(case.side)
     if integer_side is not None and integer_side * integer_side >= case.n:
         return SourcePlan("exact-grid", case.path, "", case.n, (case.n,))
-    if case.n in {68, 69}:
-        filename = f"n{case.n:03d}.svg"
+    if case.reported_source_key == UNITSQUARE_SOURCE_KEY:
+        # A record naming the release that the release does not carry is a refusal
+        # rather than a fall-through to the catalogue: falling through would quietly
+        # source a case from Kingbird whose own record says it came from elsewhere.
         upstream_digest = unitsquare_svg_digests.get(case.n)
         if upstream_digest is None:
             raise ValueError(f"n={case.n}: UnitSquare release omits its SVG digest")
+        path = _unitsquare_source_path(case.n)
         return SourcePlan(
             "unitsquare-rendering",
-            UNITSQUARE_ROOT / filename,
-            f"{UNITSQUARE_BASE_URL}/{filename}",
+            path,
+            f"{UNITSQUARE_BASE_URL}/{path.name}",
             case.n,
             (case.n,),
             upstream_digest,
@@ -583,7 +624,7 @@ def clear_build_caches() -> None:
 
 @cache
 def source_plans() -> dict[int, SourcePlan]:
-    catalogue = catalogue_source_map(CATALOGUE)
+    catalogue = catalogue_source_map(CATALOGUE, first_n=CORPUS.first_n, last_n=CORPUS.last_n)
     release = json.loads(UNITSQUARE_RESULTS.read_text(encoding="utf-8"))
     unitsquare_svg_digests = {
         int(record["n"]): str(record["svg_sha256"]) for record in release["results"]

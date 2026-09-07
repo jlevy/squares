@@ -5,7 +5,7 @@ from __future__ import annotations
 import html
 import json
 import re
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping
 from copy import deepcopy
 from dataclasses import dataclass
 from fractions import Fraction
@@ -194,6 +194,88 @@ The honest constraint on widening it is the corpus rather than the drawing: a ca
 a frontier record whose facts are sourced to the same standard as the first hundred
 before a card about it can be honest.
 """
+
+CALIBRATION_CORPUS = CorpusRange(first_n=1, last_n=100)
+"""The cases the calibration-only annotation layers may read, and no more.
+
+The chunk census, the partition atlas, the taxonomy, the evidence profile and the contact
+overlay gallery were designed while their authors were looking at `n = 1..100`. A
+taxonomy invented from a corpus cannot also be independent confirmation on that corpus,
+so those instruments are calibration-only and stay pinned here while `KNOWN_BEST_CORPUS`
+widens around them. That is decision `D4` of the atlas expansion plan: the new range has
+to stay unseen to be usable as a holdout for a later confirmatory run, and an annotation
+layer that quietly followed the manifest would spend it.
+
+Sound screens are the deliberate exception and do not read this: a replayed translation
+certificate and an exact tiling argument are certificates rather than instruments, so
+they extend with `KNOWN_BEST_CORPUS`.
+
+Widening this constant is a registered experiment, not a maintenance edit.
+"""
+
+
+def calibration_entries[EntryT: Mapping[str, Any]](
+    entries: Iterable[EntryT],
+) -> tuple[EntryT, ...]:
+    """The manifest entries inside `CALIBRATION_CORPUS`, in the order they arrived.
+
+    The one gate between a widening manifest and an instrument that must not widen with
+    it. Reading the manifest is still how a calibration tool finds its witnesses; what it
+    may not do is take the manifest's own extent as its scope.
+
+    Selecting is only half of it: a manifest that has stopped carrying part of the
+    calibration range is refused rather than quietly censused short, because a shortfall
+    would otherwise reach the retained record as a smaller aggregate rather than as an
+    error.
+    """
+    wanted = CALIBRATION_CORPUS.numbers
+    selected = tuple(entry for entry in entries if int(entry["n"]) in wanted)
+    missing = sorted(set(CALIBRATION_CORPUS.numbers) - {int(entry["n"]) for entry in selected})
+    if missing:
+        raise ValueError(
+            f"the calibration corpus {CALIBRATION_CORPUS.label} is not fully present: "
+            f"missing n = {missing}"
+        )
+    return selected
+
+
+_CALIBRATION_RANGE = re.compile(r"n=\d+\.\.\d+")
+"""How a range is written wherever a document states one inside a longer sentence."""
+
+
+def declared_calibration_label(text: str, *, source: str) -> str:
+    """The range a retained document says it covered, read out of its own prose.
+
+    Several of the calibration documents declare their scope inside a sentence rather
+    than in a field of its own -- `"...manifest.json; inspected n=1..100 calibration
+    corpus"`. A downstream instrument that reads one of them is reading a scope as much
+    as data, so it pulls the range out and checks it rather than trusting the filename.
+    """
+    found = _CALIBRATION_RANGE.findall(text)
+    if not found:
+        raise ValueError(f"{source} declares no calibration range: {text!r}")
+    if len(set(found)) != 1:
+        raise ValueError(
+            f"{source} declares more than one calibration range: {sorted(set(found))}"
+        )
+    return found[0]
+
+
+def require_calibration_label(observed: object, *, source: str) -> None:
+    """Refuse when a retained schema's range constant and `CALIBRATION_CORPUS` disagree.
+
+    The schema constants are the calibration record and are pinned at `n=1..100` on
+    purpose. If someone widens the constant here without re-arguing the record, the tool
+    that writes into that record stops rather than emitting a document whose declared
+    scope is not the scope it read.
+    """
+    if observed != CALIBRATION_CORPUS.label:
+        raise ValueError(
+            f"{source} pins the calibration range at {observed!r} while CALIBRATION_CORPUS "
+            f"is {CALIBRATION_CORPUS.label!r}; the calibration boundary (D4) is a "
+            "registered decision, so re-argue the record rather than widening the constant"
+        )
+
 
 KNOWN_BEST_COMPOSITES = (
     CompositeSpec(
@@ -909,8 +991,15 @@ def kingbird_derived_witness(
     source_n: int,
     source_path: str,
     source_url: str,
+    retrieved: str = RETRIEVED_DATE,
 ) -> dict[str, Any]:
-    """Recheck retained Kingbird numerical facts without requiring the source SVG."""
+    """Recheck retained Kingbird numerical facts without requiring the source SVG.
+
+    ``retrieved`` is a parameter rather than the module constant because a corpus is
+    acquired in passes, and the date belongs to the pass that read the source rather
+    than to this function. The default keeps the 34 witnesses of the 2026-08-26 pass
+    stating what they have always stated; a later pass supplies its own date.
+    """
     expected_id = f"W-known-best-n{n:03d}"
     if retained_witness.get("id") != expected_id or retained_witness.get("n") != n:
         raise ValueError("retained Kingbird witness identity does not match requested n")
@@ -953,7 +1042,7 @@ def kingbird_derived_witness(
         "key": "Kingbird derived numerical facts",
         "path": source_path,
         "url": source_url,
-        "retrieved": RETRIEVED_DATE,
+        "retrieved": retrieved,
     }
     witness.pop("certificate", None)
     return _checked_witness(witness, tolerance=KINGBIRD_TOLERANCE, witness_path=witness_path)
