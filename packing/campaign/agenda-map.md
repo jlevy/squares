@@ -116,7 +116,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-025 | `BC-235` | 1 | `BC-234` | no | — |
 | agenda-025 | `BC-236` | 1 | `BC-235` | no | — |
 | agenda-025 | `BC-237` | 2 | `BC-236` | no | — |
-| agenda-026 | `BC-243` | 0 | `BC-242`, `BC-220` | yes | Complete a.e.-depth producer and source-distinct reader readiness. BC254 has selected exp113's unchanged candidate;… |
+| agenda-026 | `BC-243` | 0 | `BC-242`, `BC-220` | yes | Scientific source-control acceptance. Session093's changed conservative weighted-graph certificate has reviewed generic… |
 | agenda-026 | `BC-249` | 0 | `BC-224` | no | — |
 | agenda-026 | `BC-244` | 1 | `BC-243` | no | — |
 | agenda-026 | `BC-248` | 2 | `BC-246`, `BC-247` | no | An exact fractional measure of mass at least eleven for the chosen subproblem, no more than 2,311,290 of the present… |
