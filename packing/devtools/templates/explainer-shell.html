@@ -163,6 +163,23 @@ body {
   color: var(--paper-support-color);
   text-decoration: none;
 }
+/* Two arrows are controls, not sources: the ↑ after each footnote and the ↓ in a
+   footnote's hover preview lead the reader back and forth. They wear the accent like
+   every other link, while the sources beside them keep the muted text colour, and
+   one rule serves both at rest and on hover so the pair agrees: the accent, and
+   kpress's hover wash behind it. Outranks the muted rule above on specificity. */
+.cert-page .kpress-footnotes a.kpress-footnote-backref,
+.kpress-tooltip .kpress-footnote-nav-link {
+  border-radius: var(--kpress-radius-md);
+  color: var(--kpress-doc-accent);
+  text-decoration: none;
+}
+.cert-page .kpress-footnotes a.kpress-footnote-backref:hover,
+.kpress-tooltip .kpress-footnote-nav-link:hover {
+  background-color: var(--color-hover-bg);
+  color: var(--kpress-doc-accent);
+  text-decoration: none;
+}
 .cert-page :is(.kpress-figcaption, .kpress-footnotes, .mass-line, .panel) .katex {
   font-size: var(--kpress-katex-size-sans);
   color: inherit;
