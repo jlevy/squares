@@ -10,6 +10,7 @@ Selected test hashes do not establish whole-tree equivalence. Within-arm whole-t
 | --- | --- | --- | --- |
 | [VE-001](experiments/VE-001-float-oracle.md) | 275.50 (261.05-282.51), n=3 | 17.45 (17.20-17.98), n=3 | Screen passes (93.7% median reduction); correctness and complexity review required; whole-tree diff varied within an arm: affected-source audit required, whole-tree equivalence is not established |
 | [VE-002](experiments/VE-002-bridge.md) | 84.30 (81.13-86.28), n=3 | 31.72 (30.99-36.51), n=3 | Screen passes (62.4% median reduction); correctness and complexity review required; whole-tree diff varied within an arm: affected-source audit required, whole-tree equivalence is not established |
+| [VE-003](experiments/VE-003-checks-start-order.md) | No passing samples | No passing samples | Pending samples |
 
 ## Observations
 

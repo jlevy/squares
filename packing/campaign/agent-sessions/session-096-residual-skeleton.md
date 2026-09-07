@@ -382,6 +382,35 @@ review,18:39–19:09 for terminal records, delta validation and publication,
 and19:09–19:20 only for remaining CI or explicit recovery.
 End early when complete; no clock is a reason to wait.
 
+## Publication Runtime Recovery
+
+The user resumed the remaining CI obligation after the original session endpoint and
+explicitly requested runtime debugging with subagents.
+This is W5 efficiency work under `think-oli1`; the original scientific deadlines and
+mathematical dispositions stand.
+The first two hosted attempts passed correctness and failed the unchanged checks-tier
+runtime band at 150.31 and 150.24 seconds.
+Neither is relabeled as a passing CI run.
+
+Three independent readers at high reasoning effort examined native timelines, redundant
+verification and scheduler coverage from 19:24 UTC. Their frozen reviews identified a
+late exact-verification tail and unresolved hosted-runner variation.
+The next engineering ID is
+[VE-003](../../benchmarks/validation-efficiency/experiments/VE-003-checks-start-order.md);
+no scientific hypothesis, experiment, agenda or session ID is allocated.
+
+The prospective recovery slices are: implementation and focused guards through 19:55;
+three interleaved control/candidate pairs through 20:25; final checkpoint and
+independent review through 20:55; publication and CI through 21:25. Close each slice
+early when its evidence is complete.
+Replan remaining work if needed; these estimates do not extend an expired scientific
+allocation or justify stopping with the CI obligation unfinished.
+
+The merged baseline `22873a68` includes main’s publication update.
+Its 31 record checks passed in 27.95 seconds before the engineering registry was
+changed. Recovery receipts and their original failures remain in the attic until the
+measured result is integrated.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
