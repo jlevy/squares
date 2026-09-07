@@ -56,7 +56,7 @@ session:
       (think-s7bb), and the frontier case generator (think-bqu1). The retention record
       (think-w1zu) stays with the coordinator because it touches shared records.
     bead: think-0juv
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: Phase 0 complete; the plan's gates are the next bounded slice.
     budget_minutes: 180
@@ -79,8 +79,36 @@ session:
     - packing/frontier/n-101.md
     - packing/witnesses/known-best/n-147.yaml
     - packing/atlas/known-best/translation-escape-screen.json
-    stop_reason: null
+    stop_reason: Both corpus chunks integrated and committed (32b796cc, 6e21c4ca) with the
+      records tier, the atlas step and 1946 reachable tests green; the W2 credit-line review is
+      written and its corrections are with a delegate.
     next_action: Phase 4, the 1..324 poster composite, then Phase 5's gate budget and documents.
+  - workflow: pipeline-improvement
+    focus: efficiency
+    recording: contemporaneous
+    clock_role: work
+    objective: Land the 1..324 poster composite (think-p3z0) and the credit-line corrections,
+      then price the 324-case gate (think-lmlr) and run the documentation and closeout pass
+      (think-mulz).
+    bead: think-0juv
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: The corpus is complete at 324; the drawing, the budget and the documents
+      are what remain.
+    budget_minutes: 170
+    started_at: '2026-09-07T12:05:20Z'
+    deadline_at: '2026-09-07T14:55:20Z'
+    expected_output: known-best-1-324 family with receipts under budget, corrected records,
+      re-argued sweeps ceiling from measurement, reconciled root documents and a handoff entry.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: The poster cannot be brought under 8 MB without a precision change that
+      D-359 would refuse, or the sweeps tier cannot be measured on an idle host.
+    fallback: Ship the poster as repository-only without a site publish and record the gate
+      cost as a deferred checkpoint under OR-13 with the measurement attached.
+    outcome: null
+    evidence: []
+    stop_reason: null
+    next_action: Closeout with the handoff entry naming the frozen corpus commit.
   primary_bead: think-0juv
   status: in_progress
   budget:

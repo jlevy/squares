@@ -1425,7 +1425,7 @@ sessions:
   title: "Atlas expansion to n = 324 and the poster composite"
   status: in_progress
   primary_bead: think-0juv
-  phases: 2
+  phases: 3
   measured: false
   unmeasured_reason: >-
     declares no rollups
