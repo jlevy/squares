@@ -5,7 +5,7 @@ title: "Agenda 028: hybrid-strength comparisons and angular release at n11"
 kind: epic
 status: in_progress
 priority: 1
-version: 24
+version: 25
 spec_path: packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md
 labels:
   - agenda028
@@ -32,6 +32,10 @@ child_order_hints:
   - is-01m1yg3q806t017napmemmx0f9
   - is-01m1yxm3htbmz27kycpx8d23sw
 created_at: 2026-09-07T06:03:01.798Z
-updated_at: 2026-09-07T21:50:37.625Z
+updated_at: 2026-09-07T22:01:57.340Z
 ---
 Own X018, H118–121 and BC269–282. PR107 plans landed atdd36800e. Session092 completed its eight-hour scientific block and session096 completed BC282 design and independent admission on draft PR110, nowpublishedhead ecd4a035. The exact residual open-fiber reduction is accepted; the larger target is not admitted. Further localH120/H118 target work is parked, with H120 re-entry retained in think-k54y. Existing BC264 / think-mq0d remains the separately owned next portfolio pricing entry. Preserve X017 H111–117 BC258–268, sole BC261 interface ownership, and all landed source IDs. No BC283, new hypothesis or scientific experiment is allocated. EngineeringVE003 retains its failed setup; VE004 accepts a22.9% local checks-tier median improvement from early exact-verifier scheduling, preserving all48checks and runtime thresholds. The full checkpoint passed all66steps oned595fb6; finalpublicationhead ecd4a035 passed45pre-pushsteps and allrequiredhostedchecks inrun34159929517. Cost snapshots and native receipts are retained. This closes the specific session096 publication repair; broader mathematical re-entry and other owners remain separate.
+
+## Notes
+
+Upstream reconciliation think-dwq8: merge cda7410f includes main a5e9dbfd (PR112/115); dbd60231 retains canonical handoff and timing caveat. Our former residual session096 is now098, preserving its original cost payload and scientific clocks. Landed Stromquist096 and live kernel-pricing097 remain separate. Live think-mq0d notes at21:47 report source-free producer/reader builds complete after pricing admission; do not restart the historical30minute slice. Our H118/H120 target re-entry remains parked. Durable25-PR/Agenda017–028 survey: docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md. Combined-tree publication checks are underway; previous ecd4a035 gates remain historical evidence only.
