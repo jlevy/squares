@@ -14,7 +14,7 @@ import pytest
 
 from devtools import run_full_size_density_graph as runner
 from devtools.check_full_size_density_pair_separator import control_family
-from sqpack.full_size_density.pair_separator import make_family
+from sqpack.full_size_density.pair_separator import PairFamily, make_family
 from sqpack.full_size_density.support_ceiling import SupportError
 
 
@@ -28,6 +28,27 @@ def test_toy_binding_and_full_independent_replay(source: str, *, proved: bool) -
     assert checked["bound_proved"] is proved
     assert checked["status"] == ("verified_density_bound" if proved else "unresolved")
     assert checked["mass"] == "3/2"
+
+
+def test_distinct_overlapping_half_weight_squares_have_a_complete_bound() -> None:
+    source = "toy-equal-v1"
+    family = control_family(source)
+    first, second = family.placements
+    assert first.key != second.key
+    assert first.weight == second.weight == Fraction(1, 2)
+    for axis in range(2):
+        first_values = [point[axis] for point in first.square]
+        second_values = [point[axis] for point in second.square]
+        assert max(min(first_values), min(second_values)) < min(
+            max(first_values), max(second_values)
+        )
+    packet = runner.worker(control=source, candidate=None, packet=None, node_limit=10)
+    checked = runner.replay_bound(packet, family, source)
+    assert checked["status"] == "verified_density_bound"
+    assert checked["bound_proved"] is True
+    assert checked["mass"] == "1"
+    assert checked["verification"]["source_squares_checked"] == 2
+    assert checked["verification"]["nonedges_verified"] == 0
 
 
 def test_all_cyclic_representations_bind_identically_and_zero_is_retained() -> None:
@@ -111,6 +132,35 @@ def test_candidate_routes_use_separate_constructors_without_real_input(
     assert calls == ["producer", "reader"]
 
 
+@pytest.mark.parametrize("replay", [False, True])
+def test_named_source_rejects_outside_square_before_graph_work(
+    monkeypatch: pytest.MonkeyPatch, *, replay: bool
+) -> None:
+    toy = control_family("toy-edge-v1")
+    outside = tuple((x + toy.side, y) for x, y in toy.placements[0].square)
+    loaded: list[str] = []
+
+    def outside_family(source: str) -> PairFamily:
+        loaded.append(source)
+        return make_family((outside,), toy.side, (Fraction(1),))
+
+    def forbidden(*_args: Any, **_kwargs: Any) -> Any:
+        raise AssertionError("graph work or packet loading preceded source containment")
+
+    monkeypatch.setattr(runner, "control_family", outside_family)
+    monkeypatch.setattr(runner, "produce_bound", forbidden)
+    monkeypatch.setattr(runner, "replay_bound", forbidden)
+    monkeypatch.setattr(runner, "load_packet", forbidden)
+    with pytest.raises(SupportError, match="contained unit square"):
+        runner.worker(
+            control="trump-original-control-v1",
+            candidate=None,
+            packet=Path("unused") if replay else None,
+            node_limit=10,
+        )
+    assert loaded == ["trump-original-control-v1"]
+
+
 def test_parent_timeout_never_emits_a_partial_success(
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
@@ -140,13 +190,14 @@ def test_cli_limits_are_validated_before_launch(nodes: str, seconds: str) -> Non
     assert exc.value.code == 2
 
 
-def test_explicit_toy_cli_producer_and_reader_roundtrip(tmp_path: Path) -> None:
+@pytest.mark.parametrize("source", ["toy-edge-v1", "toy-equal-v1"])
+def test_explicit_toy_cli_producer_and_reader_roundtrip(tmp_path: Path, source: str) -> None:
     command = [
         sys.executable,
         "-m",
         "devtools.run_full_size_density_graph",
         "--control",
-        "toy-edge-v1",
+        source,
         "--node-limit",
         "10",
         "--timeout-seconds",
@@ -167,7 +218,7 @@ def test_explicit_toy_cli_producer_and_reader_roundtrip(tmp_path: Path) -> None:
     checked = json.loads(replayed.stdout)
     assert checked["status"] == "verified_density_bound"
     assert checked["bound_proved"] is True
-    assert checked["mass"] == "3/2"
+    assert checked["mass"] == ("1" if source == "toy-equal-v1" else "3/2")
 
 
 @pytest.mark.parametrize("limit_name", ["PRODUCER_MAX_FIELD_DEGREE", "READER_MAX_FIELD_DEGREE"])

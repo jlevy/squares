@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 92
+count: 93
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 48
-  sessions_unmeasured: 44
+  sessions_unmeasured: 45
   attributed:
     rollups: 115
     turns: 29742
@@ -1456,8 +1456,18 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-093.yaml
-    model_responses: 577
-    agent_hours: 5.42
-    active_union_hours: 1.59
-    wall_hours: 1.59
+    model_responses: 673
+    agent_hours: 6.07
+    active_union_hours: 1.99
+    wall_hours: 1.99
     snapshot_incomplete: true
+- id: session-094
+  title: "Complete-cover binding and repaired density controls"
+  status: in_progress
+  primary_bead: think-63oj
+  phases: 2
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
+  codex_receipts: []

@@ -38,9 +38,11 @@ from sqpack.full_size_density.support_ceiling import Square, SupportError
 
 CONTROL_NAMES = (
     "toy-edge-v1",
+    "toy-equal-v1",
     "toy-overlap-v1",
     "trump-original-control-v1",
     "trump-uniform-control-v1",
+    "trump-perturbed-control-v1",
 )
 MAX_SECONDS = 60
 MAX_NODES = 10000
@@ -152,6 +154,7 @@ def worker(
     if candidate is not None or control in (
         "trump-original-control-v1",
         "trump-uniform-control-v1",
+        "trump-perturbed-control-v1",
     ):
         declared_source_preflight()
     if candidate is not None:

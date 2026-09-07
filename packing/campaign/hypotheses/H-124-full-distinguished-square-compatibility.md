@@ -97,9 +97,10 @@ Degenerate clipped strata and open boundaries need explicit source-free controls
 The independent reader reconstructs unit-square geometry and all mark-edge tests from
 exact ordered corners, verifies actual angles and containment, binds unchanged S to the
 retained source, and requires a strict separating-axis gap.
-There are76 point-edge determinants for the ten plus nine marks.
-Across eight corners there are16 coordinate containment checks, or32 lower/upper scalar
-wall inequalities. Tangency is not a witness.
+There are 76 point-edge determinants for the ten plus nine marks.
+Across eight corners there are 16 coordinate containment checks, or 32 lower/upper
+scalar wall inequalities.
+Tangency is not a witness.
 
 This finite slice can refute the hypothesis but cannot accept it.
 Even exhaustive no-witness output for this S and frame leaves all other S and continuous
@@ -109,8 +110,8 @@ The exact invocation and budgets belong in a separate prospective experiment.
 
 ## A Stronger Continuous Common Obstacle
 
-The next analytical assessment uses the full ten-mark avoidance condition to enlarge the
-old diamond. Independent mathematical review accepted this derivation in Session093 at
+The analytical assessment used the full ten-mark avoidance condition to enlarge the old
+diamond. Independent mathematical review accepted this derivation in Session093 at
 08:50:29 UTC; it does not establish the remaining nine-mark cover or resolve H124. No
 additional scientific evaluation produced it.
 
@@ -289,7 +290,17 @@ The bounded source-free producer and reader were authored independently under
 `think-g29r` and `think-qt0k`; independent reviews passed by 09:21:09 UTC. Their 21 and
 69 synthetic controls pass, including independently replayed closed-contact and
 unresolved examples.
-Scientific source binding and a capped caller are still required.
+In [Session094](../agent-sessions/session-094-complete-cover-and-density-controls.md),
+the source-constructor author `think-jxs9` froze at 10:02:36 UTC with 33 unrelated toy
+controls passing.
+The independently authored source reader `think-smve` froze at 10:06:51
+UTC with 22 unrelated controls passing, before its original 10:14 UTC deadline.
+The [capped caller](../../devtools/run_h124_cover.py) passed 13 source-free controls and
+independent mechanical review under `think-m820`. Independent mathematical source
+reviews passed at 10:10:26 and 10:14:46 UTC. The reviewed source has at most 60 polygon
+vertices and at most 2,082 conservative x-events; these are static bounds, not runtime
+measurements or an actual cover.
+Any target invocation also requires a committed prospective protocol.
 No actual residual-cover input has been constructed or evaluated.
 Timeout, omitted evidence or failure to construct a chain is unresolved; even a verified
 gap in this sufficient cover would not refute H124.

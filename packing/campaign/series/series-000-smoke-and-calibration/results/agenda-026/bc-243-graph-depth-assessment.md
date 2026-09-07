@@ -1,8 +1,8 @@
 # BC-243: A Complete Graph Bound Before More Geometry
 
-Session093 selects a bounded source-free weighted-graph certificate component under
+Session093 selected a bounded source-free weighted-graph certificate component under
 `think-yzzi`, following read-only assessment `think-m8x7`. The assessment ran from
-07:50:34 to08:03:20 UTC on September7, using766 seconds.
+07:50:34 to 08:03:20 UTC on September 7, using 766 seconds.
 No source control, target, benchmark or new scientific input was evaluated.
 
 This changes the sufficient completeness argument; it is not a fourth run of the
@@ -73,7 +73,7 @@ The uniform D4 average has a direct certificate: each of eight source packings h
 pointwise interior depth at most one, and their average does too.
 This can certify that baseline without building its full arrangement.
 
-It cannot certify the retained mass56/5 candidate.
+It cannot certify the retained mass 56/5 candidate.
 If copies of packings containing at most eleven squares dominate its weights with
 nonnegative coefficients eta_g, then
 
@@ -87,20 +87,20 @@ or all other certificate methods.
 
 ## Cost Gate and Control Cases
 
-[Exp115](../../experiments/exp-115-h-105-fixed-candidate-pair-obstruction.md) retains134
-exact pair-separation receipts.
+[Exp115](../../experiments/exp-115-h-105-fixed-candidate-pair-obstruction.md) retains
+134 exact pair-separation receipts.
 With matching source binding, those isolate the four weight-one placements in the
-retained candidate. Thirty-two positive-weight vertices remain:496 pairs and at
-most4,960triples. These are combinatorial counts from retained data, not new target
+retained candidate. Thirty-two positive-weight vertices remain: 496 pairs and at most
+4,960 triples. These are combinatorial counts from retained data, not new target
 measurements. Even so, one weight pattern already yields binomial(8,2) times
-binomial(16,5)=122,304minimal overweight subsets; blind enumeration is not a justified
+binomial(16,5)=122,304 minimal overweight subsets; blind enumeration is not a justified
 plan.
 
-The selected first component gets twenty-five source-free author minutes and a separate
+The first component was allocated twenty-five source-free author minutes and a separate
 independent reader/review allocation before any source use.
 Controls must include:
 
-- Four common-interior squares of weight3/10, overweight although every triple weighs
+- Four common-interior squares of weight 3/10, overweight although every triple weighs
   below one; a pair/triple weight screen must not certify them.
 - Pairwise-compatible graph data without a common geometric interior: no graph clique is
   promoted to a geometric witness.
@@ -119,26 +119,26 @@ side, not below-Trump density or a new packing lower bound.
 ## Prospective Graph Source Controls
 
 **Outcome:** the original-family producer refused at its field-admission guard with
-actual exit2 in 0.18 seconds process wall and 0.16 seconds CPU, observed at 09:13 UTC.
-The committed protocol was `86b746b5`, following31/31 record checks in 24.81 seconds;
-the clean engine was `23498e87`, whose45-step push tier passed in 131.30 seconds.
+actual exit 2 in 0.18 seconds process wall and 0.16 seconds CPU, observed at 09:13 UTC.
+The committed protocol was `86b746b5`, following 31/31 record checks in 24.81 seconds;
+the clean engine was `23498e87`, whose 45-step push tier passed in 131.30 seconds.
 The [producer log](graph-source-controls/original/producer.log) retains the exact
 refusal: “caller must supply a validated field of admitted degree.”
 Stdout is retained as an empty `packet.json`, not treated as a certificate.
 
-Static inspection identifies the mismatch: the accepted Trump source declares a
-degree-eight field polynomial, while both new geometric adapters admit only degrees one
-through four. The named source was prepared before the adapter refused; graph-pair
-enumeration was not reached.
-Generic and quartic fixtures had not tested this source compatibility boundary.
+Static inspection identified the mismatch: the accepted Trump source declares a
+degree-eight field polynomial, while both adapters in the frozen engine admitted only
+degrees one through four.
+The named source was prepared before the adapter refused; graph-pair enumeration was not
+reached. Generic and quartic fixtures had not tested this source compatibility boundary.
 The independent readiness review missed the declared-degree comparison; it was too broad
 to establish readiness for this scientific source.
 
 The control sequence is stopped.
 No original reader, uniform producer or reader, or candidate invocation occurred.
 H099 remains unresolved and the fixed-support bracket is unchanged.
-`think-tn2q` independently reviews the refusal without reconstructing or rerunning the
-source. Any repair needs separately scoped source-free controls and review; this failed
+`think-tn2q` independently reviewed the refusal without reconstructing or rerunning the
+source. Repairs require separately scoped source-free controls and review; this failed
 sequence does not authorize another invocation.
 
 The separate source-free repair now admits degree eight in both independently reviewed
@@ -150,6 +150,24 @@ remain unchanged. This establishes repaired instrument readiness only.
 Actual source coefficient widths, packet size and runtime still require a separately
 declared source-control attempt.
 The failed original sequence remains stopped and no H099 candidate has run.
+
+In
+[Session094](../../../../agent-sessions/session-094-complete-cover-and-density-controls.md),
+the `think-ck6q` inventory identified two gaps against BC243’s existing obligations:
+acceptance of two distinct overlapping half-weight squares and geometric rejection of a
+perturbed Trump source.
+The half-weight CLI control and mocked containment refusals passed 22 source-free tests
+under `think-7iwc`. The perturbed-source constructor code under `think-w5q3` has four
+mocked rational controls; the combined focused suite passed 39 tests in 1.27 seconds.
+Independent mathematical review under `think-p8dk` passed at 10:09:30 UTC. Moving the
+bound top-row square left by 1/100 preserves containment and gives an open overlap
+rectangle of area 1/100 with its neighbor.
+The reviewed source-free controls do not establish that the actual scientific invocation
+will succeed within its cap.
+The actual scientific source has not been constructed.
+A negative control requires the independent pair reader’s positive-area overweight
+certificate; an unresolved graph result cannot supply that evidence.
+No new scientific source-control attempt is authorized by this preparation.
 
 ### Retained Protocol
 
