@@ -91,7 +91,7 @@ session:
       then price the 324-case gate (think-lmlr) and run the documentation and closeout pass
       (think-mulz).
     bead: think-0juv
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: The corpus is complete at 324; the drawing, the budget and the documents
       are what remain.
@@ -105,12 +105,20 @@ session:
       D-359 would refuse, or the sweeps tier cannot be measured on an idle host.
     fallback: Ship the poster as repository-only without a site publish and record the gate
       cost as a deferred checkpoint under OR-13 with the measurement attached.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: The 1..324 poster shipped and was published beside the figure; the credit-line
+      corrections regenerated 59 records; the sweeps tier re-priced from measurement with two
+      deferred steps (57 s at the CI shape) and the checks tier's grid replay sampled with the
+      full replay deferred; the documents, synopsis handoff and site reconciled to 324.
+    evidence:
+    - packing/atlas/known-best/known-best-1-324.svg
+    - packing/benchmarks/gate-cost-at-324/README.md
+    - docs/project/reviews/review-2026-09-07-atlas-101-324-credit-lines.md
+    stop_reason: Every phase of the plan through Phase 5 is terminal; what remains is the
+      owner's D2 confirmation, the hosted re-run of the re-priced tiers, and the full
+      checkpoint before merge.
     next_action: Closeout with the handoff entry naming the frozen corpus commit.
   primary_bead: think-0juv
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 480
     checkpoint_minutes: 240
@@ -532,15 +540,57 @@ session:
     elapsed_seconds: 7035
     elapsed_quality: platform_measured
     next_action: Second slice for the checks tier's exact-verification step.
+  - task: Price the checks tier's exact verification at 324 (think-lmlr, second slice)
+    operator: Claude Opus delegate
+    status: completed
+    recording: contemporaneous
+    phase: 3
+    outcome: The grid replay pooled 3.49x on four workers with byte-identical output; on the
+      hosted reading (189 s of a 195 s ceiling, the step 133 s of it) the pull-request copy
+      replays every ninth grid case and the full replay of 305 joins the deep gate at 18.8 s;
+      the checks tier's stale record cleared and its ceiling kept at 195 s against a predicted
+      138 s; the local tier fell from 120 s to 88 s at the CI job shape.
+    evidence:
+    - packing/benchmarks/gate-cost-at-324/README.md
+    files:
+    - packing/devtools/check_basic_bounds.py
+    - packing/src/sqpack/cli/validate.py
+    - packing/src/sqpack/known_best.py
+    - packing/devtools/gate-budgets.yaml
+    - .github/workflows/deep-gate.yml
+    - development.md
+    checks:
+    - Coordinator re-ran ruff, basedpyright, the gate budget declaration, the step list and 104
+      partition, deep-gate and assurance tests before committing 543a1f2f, and refreshed the
+      suite tier's record from its own hosted reading in the same commit.
+    uncertainty: The checks tier's hosted cost after the change is a prediction from the local
+      ratio until CI re-runs; the remaining slack is step scheduling, recorded and not taken.
+    elapsed_seconds: 3161
+    elapsed_quality: platform_measured
+    next_action: Read the hosted checks and suite readings on the next CI run.
   outputs:
   - docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
+  - docs/project/research/research-2026-09-07-square-packing-sources-beyond-100.md
+  - docs/project/reviews/review-2026-09-07-atlas-101-324-credit-lines.md
+  - packing/atlas/known-best/known-best-1-324.svg
+  - packing/benchmarks/gate-cost-at-324/README.md
   checks:
   - packing-validate --records at the branch base dd36800e passed every step except the
     document-map check, which failed only on the then-unregistered spec file; the map entry is
     added in this session.
+  - At 200 and at 324 the records tier, the quick subsets, the known-best atlas step and the
+    change-reachable tests (1946 at 324) passed locally; the pull-request surface's sweeps job
+    passed on CI after the re-pricing, and the checks and suite jobs failed only on drift rules
+    against hundred-case records, refreshed in 543a1f2f. The full checkpoint is not yet
+    obtained.
   resource_rollups: []
-  stop_reason: null
-  next_action: Run the Phase 1 gates in parallel delegates, then promote 101..200.
+  stop_reason: Bounded output reached at 2026-09-07T15:24:41Z: the plan's Phases 0 through 5 are terminal
+    on PR 111 and the calibration boundary held throughout. Not stopped by a clock; Phase 6
+    stays closed under D1 unless the owner chooses the caveated form.
+  next_action: Owner confirms D2 and the two open questions; the re-priced tiers are read on
+    the next hosted run and the full checkpoint is obtained before merge (label deep-gate
+    last); the epic think-0juv closes at merge with the cost block rendered from the session's
+    rollups.
 
 ---
 <!-- This document follows common-doc-guidelines.md.
