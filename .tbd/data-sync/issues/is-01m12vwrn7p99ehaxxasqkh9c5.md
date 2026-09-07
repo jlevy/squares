@@ -5,12 +5,13 @@ title: check_source_coverage never reparses Kingbird exact forms, so transcripti
 kind: bug
 status: open
 priority: 1
-version: 2
+version: 3
+spec_path: docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
 labels: []
 dependencies: []
 parent_id: is-01m12zjr144a4kg6rnv1t0pm6n
 created_at: 2026-08-28T00:21:40.120Z
-updated_at: 2026-08-28T01:26:19.010Z
+updated_at: 2026-09-07T07:44:22.601Z
 ---
 exact_form, algebraic_degree and minimal_polynomial in frontier/n-NNN.md are hand-transcribed from resources/web/kingbird-squares-in-squares.html and never machine-reconciled against it. devtools/check_source_coverage.py:41-46 extracts only the decimal and the integer side form, so nothing can detect a missed radical.
 

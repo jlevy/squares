@@ -5,7 +5,7 @@ title: Screen composition and support-signature lemmas before a global proof tre
 kind: task
 status: in_progress
 priority: 1
-version: 20
+version: 21
 spec_path: packing/campaign/hypotheses/H-102-complete-restricted-angle-support-families.md
 delegate: codex
 labels: []
@@ -31,11 +31,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-06T17:21:40.116Z
-updated_at: 2026-09-07T07:20:29.824Z
+updated_at: 2026-09-07T07:50:49.042Z
 started_at: 2026-09-06T19:12:02.177Z
 ---
 BC-255 assesses H-036 first at its unchanged 0.25-degree angle regime and3.878 threshold; H-102 retains other unselected complete angle/support families. State complete cases, a feasible control and one LP/Farkas or interval proof obligation. H-103 covers global followups. Only mass-derived heavy-atom/near-tight deductions need a valid covering measure M>=11; geometric conflicts, interval no-goods and independent restricted lemmas do not inherently need density or full typed-producer completion.
 
 ## Notes
 
-Session090 accepts H106 continuous near-axis P10 and H108/H109 canonical near45 A-triple via independent exact readers plus local reflection. H036 unchanged; localization and both P12 clauses open. Selected next entry think-qv73/H110: one frozen near-axis P12 escape candidate, not yet evaluated. Source-free author/reviewer allocations and strict exact all12 decision are in H110. Other complete proofs wait for this cheap risk discriminator.
+Session091 accepts H110 exact P12 escape and H123 complete near45 localization; H122 fixed-diamond cover is refuted. No H036 or global bound change. Session093 now selects think-7e72 full distinguished-square compatibility with independent source-free authors; no completed target reruns. External BC261/BC273 remain separately owned.

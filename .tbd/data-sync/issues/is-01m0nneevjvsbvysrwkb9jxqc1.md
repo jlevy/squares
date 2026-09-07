@@ -5,13 +5,13 @@ title: Extend the frontier corpus past n=100 and add geometry from the catalogue
 kind: task
 status: open
 priority: 4
-version: 3
-spec_path: docs/project/research/research-2026-08-22-packing-11-unit-squares.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
 labels: []
 dependencies: []
-parent_id: is-01m0nrh9z5aa3gc9fp6j0vgh05
+parent_id: is-01m1xd517vezdmp4hrmvs5c8bp
 created_at: 2026-08-22T21:18:52.274Z
-updated_at: 2026-08-25T02:58:07.136Z
+updated_at: 2026-09-07T07:44:22.015Z
 ---
 
 ## Notes
