@@ -440,8 +440,10 @@ BC-250’s assessment is distilled into the following commitments.
 H-093 through H-103 are prospective registrations; completed commissioning work is their
 antecedent, not a retroactive experiment.
 H-036 is reused at its original restricted-angle scope.
-H-066–069 and H-071–089 remain reserved; H-092 belongs to its existing pending
-transport. Only the coordinator allocates further IDs.
+H-066–069 and H-071–089 are historical gaps; the superseded launch allocations do not
+authorize filling them.
+H-092 belongs to its existing pending transport.
+The coordinator assigns new IDs sequentially after checking known parallel work.
 
 The original launch required BC-250 to close and publish, then PR 97 to land before
 execution on the successor research branch.
@@ -640,11 +642,13 @@ Each manager submits by gate minus 15 minutes:
 - shared-code or cross-program requests.
 
 In a shared checkout, the content manifest lists every modified and untracked owned path
-from `git status --short --untracked-files=all -- <owned-paths>` and gives the SHA-256
-of every listed regular file; deleted paths are marked `DELETED`. A `git diff` hash
-alone is insufficient because it omits untracked result artifacts.
-In an isolated worktree, the packet gives the local transport commit and its complete
-name-status list.
+from `git status --short --untracked-files=all -- <owned-paths>`; deleted paths are
+marked `DELETED`. Include untracked result artifacts in the review and commit.
+Git provides repository integrity; do not add a per-file checksum inventory for a
+same-repository handoff.
+Use a checksum only at a real trust boundary, such as verifying an externally downloaded
+proof certificate. In an isolated worktree, the packet gives the local transport commit
+and its complete name-status list.
 
 The coordinator integrates fractional before closure, regenerates shared views once, and
 records every accepted and refused path in the coordinator decision packet before
@@ -674,7 +678,10 @@ If a mechanical task uncovers a mathematical choice, stop it and redispatch that
 at `max`; do not let the original speed-oriented assignment make the decision
 implicitly. Record the level in the `T+0` dispatch and each delegated packet.
 
-The word *owns* refers to scientific work and manager-local output, not ID authority:
+The word *owns* refers to scientific work and manager-local output, not ID authority.
+The following table records the original launch allocation.
+Consult [Parallel ID Allocation](#parallel-id-allocation) for current ownership and
+pending work before using an uncreated ID.
 
 | Surface | Reserved range | Writer or allocator |
 | --- | --- | --- |
@@ -686,6 +693,65 @@ The word *owns* refers to scientific work and manager-local output, not ID autho
 | Closure hypotheses and experiments | H-080 through H-089; exp-090 through exp-109 | Coordinator creates and freezes identity and criterion; manager appends allocated outcomes |
 | Cross-program explorations | X-017 through X-019 | Coordinator, after a fresh collision check |
 | Ledgers, maps, frontier, schemas, PR, and retention | Shared; no manager range | Coordinator |
+
+### Parallel ID Allocation
+
+The PR 105 coordinator maintains this assignment map under `think-4cdg`; its PR
+description mirrors the table so downstream agents can work around this branch.
+The user’s latest 2026-09-07 instruction selects sequential assignment for this line of
+work.
+No new speculative range is reserved; existing explicit owner locks remain occupied
+until released.
+A next-ID pointer changes when an agent publishes or explicitly assigns a
+record; recheck parallel work before using it.
+
+The integrated collision check includes `origin/main` at `4d305597`, PR 105 at
+`54d1ca98`, and open PR 107 at `5e1263ff`. PR107 now publishes X-020 and retains the
+owner’s X-017–019 lock.
+PR 106 at `9afae3c0` adds an n=17 archive/control/review and no native campaign IDs.
+IDs quoted inside imported source packets are not native allocations.
+
+| Namespace | PR 105 additions already published | PR 107 additions already published | Next sequential ID after the checked records |
+| --- | --- | --- | --- |
+| Explorations | Published reports through X-016; X-017–019 remain owner-locked | X-020 | X-021; not assigned |
+| Agendas | None; this branch uses Agenda 024–026 | agenda-027 | agenda-028 |
+| Bounded commitments | Existing BC-251–BC-255 carry this block’s work; BC-256–BC-257 are also occupied | BC-258–BC-268 | BC-269 |
+| Hypotheses | H-106–H-110 | H-111–H-117 | H-118 |
+| Experiments | exp-116–exp-120 | None | exp-121 |
+| Agent sessions | session-090 | None | session-091 |
+| Series | Existing series-000; no new series | None | series-001 if a new series is justified; none is assigned |
+
+The user will arrange downstream agents around this sequential line.
+The coordinator publishes actual assignments before dispatch and refreshes the PR at
+each checkpoint. Workers receive their precise IDs and write scopes in their existing
+bead handoffs; they do not independently take the same next number.
+Root retains acceptance and integration authority for work commissioned through PR 105.
+
+Historical gaps are preserved: H-066–H-069 and H-071–H-089 have no native records here;
+the quarantined PR 87 allocation also holds exp-065–exp-069. H-070 and exp-070–exp-071
+have been consumed. The unused exp-072–exp-109 launch ranges are not silently recycled.
+H-092 and exp-112 belong to pending transport `30c44bb6`. X-017–X-019 remain
+owner-locked under PR107’s checked coordination update.
+PR107 publishes X-020; X-021 is the next sequential pointer, not an assignment or a
+reserved block. No uncreated ranges from the earlier draft of this update were
+dispatched.
+
+The native record inventory at this checkpoint is X-001–X-016, agenda-001–agenda-026,
+BC-001–BC-155 / BC-159–BC-185 / BC-190–BC-225 / BC-230–BC-257, H-001–H-065 / H-070 /
+H-090–H-091 / H-093–H-110, and exp-001–exp-064 / exp-070–exp-071 / exp-110–exp-111 /
+exp-113–exp-120. Sessions occupy session-001–session-090. Other native sequences are
+run-001–run-002, D-001–D-478, T-001–T-022, CG-001–CG-012 and VE-001–VE-002; this branch
+introduces none of those IDs.
+Add PR 107’s definitions from the table when checking the combined record.
+BC IDs span agendas; experiment IDs span series.
+
+Assign each new artifact to its actual question: a BC can reuse an existing H-item, and
+multiple experiments can test that H-item.
+Do not allocate a new hypothesis or agenda merely to consume the next number.
+`think-*` bead IDs are generated by tbd and need no numeric reservation.
+Frontier claims, defects, generated ledgers, agenda maps, schemas and the PR remain
+coordinator-written surfaces with their existing review rules; ID assignment does not
+grant concurrent write access to them.
 
 | Manager | First worker wave | Later worker wave |
 | --- | --- | --- |

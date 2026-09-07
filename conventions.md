@@ -111,13 +111,22 @@ edit. Sequential defect IDs are branch-provisional: the later branch takes the n
 IDs at merge and updates its references in the same change.
 Do not reserve future defect IDs.
 Correcting the IDs of an unpublished draft does not require renumbering any existing
-record.
+record. Record actual assignments in the owning agenda and bead, and mirror them on the
+integrated PR so downstream agents can work around them.
+A next-ID pointer is not a reservation or permission to launch research: budgets, write
+scopes and experiment acceptance rules still require their usual prospective records.
+Current research assignments are in
+[Agenda 024](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#parallel-id-allocation).
 
-**Reserved ids.** [checked] No hypothesis ids are currently reserved.
-A future reservation is declared in a `reserved-ids` comment on the idea board and names
-a claim that exists upstream but is not yet codified.
-A reserved id may be *named* but not *linked*, and a reservation that has been fulfilled
-is flagged stale.
+**Reserved ids.** The idea board’s machine-checked `reserved-ids` comments name
+particular upstream claims awaiting codification, not a worker’s future namespace.
+No such comments are currently active; Agenda 024 records known pending transports.
+Name an uncreated record without linking to a nonexistent file.
+Publishing a record consumes its ID permanently, even if the research is later retired.
+Superseded launch drafts do not reserve speculative future blocks, but an owner’s
+explicitly retained lock remains occupied until that owner releases it.
+Missing numbers are not automatically free: preserve pending upstream work and check
+known parallel assignments.
 
 ## 2. Naming
 
