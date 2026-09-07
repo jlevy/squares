@@ -271,8 +271,11 @@ Each phase closes on its own validation and a commit.
 - [x] Extend the source map’s audit to `325..400` if a source with a completeness claim
   exists; otherwise record the absence as scoped evidence.
   Recorded as scoped evidence in the research document: no such claim exists.
-- [ ] Archive the catalogue’s Göbel-squares and Göbel-strips pages under
+- [x] Archive the catalogue’s Göbel-squares and Göbel-strips pages under
   `packing/resources/web/` so the family statements have a retained source.
+  Retained 2026-09-07 with the pandoc procedure the newer catalogue pages use; the
+  strips page’s largest rendered entry is 2135, not the 3047 the survey first read from
+  an HTML comment.
 
 ### Phase 1: Gates
 

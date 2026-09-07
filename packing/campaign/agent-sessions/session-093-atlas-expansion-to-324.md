@@ -380,6 +380,30 @@ session:
     elapsed_seconds: 842
     elapsed_quality: platform_measured
     next_action: Corrections delegate regenerates the 224 records under the new rules.
+  - task: Archive the catalogue's Göbel-squares and Göbel-strips pages (think-n89q)
+    operator: Claude Opus delegate
+    status: completed
+    recording: contemporaneous
+    phase: 1
+    outcome: Both pages retained as byte-for-byte HTML with pandoc transcriptions under the
+      header schema the newer catalogue pages use, and added to the resources README; the
+      survey's 3047 figure for the strips page was an HTML comment, the largest rendered entry
+      is 2135.
+    evidence:
+    - packing/resources/web/kingbird-squares-in-squares-gobel-squares.md
+    - packing/resources/web/kingbird-squares-in-squares-gobel-strips.md
+    files:
+    - packing/resources/web/kingbird-squares-in-squares-gobel-squares.html
+    - packing/resources/web/kingbird-squares-in-squares-gobel-strips.html
+    - packing/resources/README.md
+    checks:
+    - Coordinator re-checked byte sizes and the recorded SHA-256 prefixes, the README rows, and
+      corrected the research document's rendered-entry count.
+    uncertainty: Comment-only entries are dropped by the transcription convention, as on the
+      already-retained rigid page.
+    elapsed_seconds: 571
+    elapsed_quality: platform_measured
+    next_action: None.
   outputs:
   - docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
   checks:
