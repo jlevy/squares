@@ -3,9 +3,9 @@ type: is
 id: is-01m1wdb4fgc305fn9rkevfqyte
 title: "BC255: closed-tile angle certificate controls and independent review"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 13
+version: 28
 spec_path: packing/campaign/hypotheses/H-036-robust-restricted-orientation.md
 assignee: codex
 labels: []
@@ -23,8 +23,26 @@ child_order_hints:
   - is-01m1ws51xa45z35qr3nrk7k7y5
   - is-01m1wsfzdxtzpxysyaqwp21nsp
   - is-01m1wt3dq4232ngm48hgj71zkp
+  - is-01m1wv39s3vnmvfm6j8yjre63t
+  - is-01m1wvxaccb5nkj59zjsbrcy99
+  - is-01m1wwns32wgt3st84dr7sbjkh
+  - is-01m1wxfynmkcy7fsp80axpya31
+  - is-01m1wxjk6jmh6n4fqn9wx5j1kt
+  - is-01m1wy92g7wjafnkf844qkj1ry
+  - is-01m1wy92tbv1p3t1vxsb0q2ace
+  - is-01m1wyj76bsvxe7chdt5920hk7
+  - is-01m1wyk37ntff337kr1ktnw1x9
+  - is-01m1wyyss1ypepr5vg3z0pcr1x
+  - is-01m1wyytarfbwy2w123x0ymktv
+  - is-01m1wzhsq6swjgwfecw11efh5x
+  - is-01m1wzp216qkh0qa1p8f46jcza
+  - is-01m1x04m6aqjffg3eh4x5m3gek
 created_at: 2026-09-06T22:27:37.583Z
-updated_at: 2026-09-07T02:10:36.386Z
+updated_at: 2026-09-07T04:09:08.673Z
+closed_at: 2026-09-07T04:09:08.671Z
+close_reason: "Control package completed and independently reviewed: H106 full near-axis P10 and H108/H109 canonical near45 A-triple accepted with exact receipts. No global bound. All commissioned children terminal; next research is separately tracked as think-qv73/H110 under BC255, not a continuation of these completed controls."
+resolution: null
+duplicate_of: null
 ---
 Next-allocation recommendation, NOT funded during Session089 finalization. Read agenda024CurrentAllocation and datedH104follow-up in bc-255-angle-instrument-design.md. Source/toy wall-adapted closed triangulation and degree-four sign certificate:20–30author minutes plus10–20independent review. Every tile/slab uses a common point label, both sign charts and fullclosedcover including seams/endpoints; Bernstein interior zeros can remain unresolved. No nearby-angle target until reviewed instrument, full-range auxiliary Hitem and prospective experiment exist. H0363.878/±.25unchanged; single-point assignment failure is not all-P10escape. SameintegratedPR101, no tinyPR.
 
