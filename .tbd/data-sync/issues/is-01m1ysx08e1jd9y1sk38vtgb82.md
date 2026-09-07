@@ -3,9 +3,9 @@ type: is
 id: is-01m1ysx08e1jd9y1sk38vtgb82
 title: Integrate landed PR112 and preserve the research handoff
 kind: chore
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels: []
 dependencies: []
@@ -13,7 +13,11 @@ parent_id: is-01m1tvqp2v2js8437xek2xk2gz
 child_order_hints:
   - is-01m1ysxt3psb7c0y0w7q7v81d7
 created_at: 2026-09-07T20:45:34.861Z
-updated_at: 2026-09-07T20:54:43.393Z
+updated_at: 2026-09-07T21:11:45.831Z
+closed_at: 2026-09-07T21:11:45.830Z
+close_reason: Landed PR112 main4620e483 integrated cleanly and pushed on the prior research branch. Immutable delta-push passed45 applicable steps in121.37 seconds;880 tests passed, one skipped,17 deselected. Generated record views had no diff. Independent bounded handoff review retained its precise limits under think-oi5r. Main full workflow34160383036 now completed success, including validate, exhaustive and macOS portability; partition-only jobs skipped as configured. No numerical bound changed, and BC264/H114 remains the next entry, now resumed separately by explicit user continue.
+resolution: null
+duplicate_of: null
 ---
 Post-block maintenance for landed main4620e483 from PR112. Check incoming/outgoing histories and clean ownership, inspect changed interfaces and campaign handoff, fast-forward only landed main, verify record uniqueness/views and change-reachable tests, push the synchronized branch, monitor main workflow34160383036 to its real final verdict, then close and sync. A bounded independent read-only assessment may identify consequences for the stored H114 handoff and IDs; no new scientific target, research block, PR, or changes to terminal outcomes. Preserve external PR110 and its assignments. Session096 is newly occupied upstream; never reuse it.
 
