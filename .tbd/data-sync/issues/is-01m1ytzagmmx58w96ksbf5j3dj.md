@@ -5,7 +5,7 @@ title: Publish and validate Session097 integrated research checkpoint
 kind: task
 status: in_progress
 priority: 1
-version: 25
+version: 26
 spec_path: packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md
 labels: []
 dependencies: []
@@ -21,10 +21,10 @@ child_order_hints:
   - is-01m1z1d949sby1tkrav2k92sfh
   - is-01m1z2grw8sr01t7ynft3hrnz9
 created_at: 2026-09-07T21:04:19.475Z
-updated_at: 2026-09-07T23:56:01.046Z
+updated_at: 2026-09-07T23:58:50.284Z
 ---
 At each useful block boundary stop writers; review spec/agenda status and all diffs under tbd shortcuts and Practical Prose; regenerate the document, ledger and session views; retain a privacy-reduced interval receipt with fixed start20:56:47.766UTC and observed end; run change-reachable push validation and the complete immutable checkpoint as required; commit explicit owned paths, push, create/update one cost-first PR with results, limits, ownership and ID allocations; follow actual hosted CI results asynchronously. Keep pending and passed distinct, and sync beads.
 
 ## Notes
 
-Published91b77ab1 at23:53UTC on existing draftPR116 under user instruction not to wait on long tools; required push14890 was already running and remains explicitly pending. It selected all non-exhaustive pytest via incoming dependency changes (PID45512 observedworking at96.6% CPU), not a short reachable subset; no source edits while active. Main373beb integrated and dependenciesaligned. PRbody refreshed with actualcost, currentIDs, reviewed repairs and pendingstatuses. Hostedfast34171519040 inprogress; deferreddispatch34171566965 actuallycreated23:54:20 targetsPR116merge-ref (verify checkout identity; metadataheadis main). Priorfull71633finishedFAILED and neverborrowed. H125originalprotocolallowsfullasync, but actualenginepush+freshcommittedprotocolchecks/review/publicationstillrequired beforefirstinvocation; none yet. Close contract/diagnostics implementationbeads; primarypublication/failurecoveragebeadsremainactive.
+Required hostedfast34171519040 completed SUCCESS at23:56:30 UTC on published91b77ab1: validate,suite,geometry,sweeps,macOS and packing-required allpass. Default exhaustive skipped, notfullcoverage. Localpush14890 remainsrunning onfrozenroot, and deferreddispatch34171566965 runsPR116merge-ref; actualdeepcheckoutidentity andallfinalstatusesmustbeverified. PRbodyupdatedtoactualCIpass. No canonicalpass is inserted into Session097 whilecertificationdebt remains; no scientificinvocation. Freshfirstinvocation readyonlyafter actualenginepush andprospectiveprotocolguards; writtenfullmayrunasynchronously, notanextra launchpredicate. CheckpointscontinueonPR116.
