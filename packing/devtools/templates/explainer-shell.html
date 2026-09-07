@@ -34,6 +34,11 @@
 <meta name="twitter:image" content="{{CARD_IMAGE_URL}}">
 <meta name="twitter:image:alt" content="{{CARD_ALT}}">
 <style>{{KPRESS_CSS}}</style>
+<!-- The relation, the approximation sign and the arrow, subset out of KaTeX_Main and
+     declared on the sans families the page already ships. Source Sans 3 carries none of
+     the three, so without these the reader's own machine draws them: a different face
+     for every reader, and outline paths in the PDF. See `relation_face_css`. -->
+<style>{{RELATION_CSS}}</style>
 <script>{{THEME_BOOTSTRAP}}</script>
 <style>
 /* ============================================================
@@ -298,33 +303,49 @@ body {
 .hero { padding-block-start: calc(var(--kpress-font-size-base) * 3); }
 /* The heading is set in caps by kpress; s(n) is notation and keeps its case. */
 .hero h1 .symbol { text-transform: none; }
-/* Mathematical relations set in a sans line.
+/* Mathematical relations set in a sans line: `≥` in the title, the verdict badges and
+   the certificate buttons, `≈` in two captions and in the chart labels, `→` in Figure
+   7's label. Source Sans 3 carries none of the three, so the browser used to resolve
+   them to whatever family on the reader's machine had them.
 
-   Source Sans 3 carries no U+2265, so the browser resolves the one character to
-   whatever other family in the stack has it. That would pass unnoticed if it landed
-   on a regular weight, but the hero is set at 550 and CSS weight matching searches
-   upward from anything above 500: the fallback family offers 400 and 700, and answers
-   with Bold. One bold character in a semibold line -- measured 18% heavier in stroke
-   and up to twice the ink of the digits beside it, drawn from DejaVu Sans Bold in the
-   printed file while every other glyph on the line came from Source Sans 3.
+   That was drawn as a weight bug first. The hero is set at 550 and CSS weight matching
+   searches upward from anything above 500, so the fallback family, offering 400 and
+   700, answered with Bold: one bold character in a semibold line, 18% heavier in stroke
+   and up to twice the ink of the digits beside it, from DejaVu Sans Bold in the printed
+   file while every other glyph on the line came from Source Sans 3. A `.rel { 400 }`
+   class fixed the weight and left the family to the host, and the three treatments
+   compared then -- the host sans at 400, the page's own KaTeX_Main, and the whole line
+   set as mathematics -- picked the host sans, because it is drawn like the digits beside
+   it and a Computer Modern relation is a hairline against Source Sans.
 
-   Naming the weight is the whole fix, and the family stays inherited. Three
-   treatments were rendered and compared: the sans fallback at 400, the same relation
-   drawn from the page's own KaTeX_Main, and the whole line set as mathematics. The
-   sans one wins on the only thing that shows at this size -- it is drawn like the
-   digits beside it, flat terminals and the same geometry, and at 400 its stroke sits
-   close to the semibold it stands in, where a Computer Modern relation is a hairline
-   against Source Sans and reads as light as the bold read heavy.
+   The rule that the page resolves every run to a face it ships retires that choice: a
+   glyph from the reader's machine is a different glyph for every reader, and on macOS
+   the PDF writes it as outline paths. Of the two shipped routes, mathematics would set
+   the title's `s(11)` and its digits in Computer Modern and break the line's agreement
+   with the subtitle and the credits under it, so the relation comes from KaTeX_Main,
+   subset to those three code points and declared on the sans families themselves
+   (`relation_face_css`) rather than named by a class. That reaches the chart labels and
+   the caption prose, which no class did.
 
-   The cost is stated rather than hidden: this is the one glyph on the page the
-   reader's own machine supplies, so it is drawn in whichever sans that machine has.
-   The weight is fixed everywhere, which is what the defect was about.
+   KaTeX_Main-Bold, not Regular, and the comparison is the reason. Measured with
+   `compare_math_fonts metrics`, in units of a thousandth of an em, the rule thickness of
+   the minus -- which is the bar every relation here is drawn on -- is 40 in
+   KaTeX_Main-Regular and 60 in its Bold, against Source Sans 3's own 62 at the 410 the
+   captions run at and 78 at the 550 of the title. Bold lands within 3% of the sans at
+   410 and at 77% of it at 550; Regular is at 65% and 51%, which is the hairline the
+   earlier comparison saw. One face for all of them, declared across the whole weight
+   range, so the relation cannot change weight between the title and a caption the way
+   the host's fallback did -- the same rule as one bold in the sans.
 
-   Every site this class marks -- the hero, the two verdict badges, the two figure
-   captions -- is set at 550, so one rule serves them all. Naming the weight also
-   guards the KaTeX route if it is ever taken: KaTeX_Main ships Regular and Bold, and
-   at the inherited 550 the same upward search would pick the Bold. */
-.rel { font-weight: 400; }
+   Scaled to 70% by `size-adjust`, because a mathematics face draws its relations for a
+   mathematics line and this one's `≈` is 1.7 times the size of the arithmetic beside it:
+   `RELATION_SIZE_ADJUST` carries the measurements and what the scale costs. Scaling takes
+   the stroke down with the width, so the sign is lighter than the sans's own `=` at every
+   size. That is the price of the rule, and it is stated rather than hidden: the route it
+   replaces gave a different relation to every reader.
+
+   `.rel` is gone with the class-based fix: it marked three of the sites and the face
+   reaches all of them. */
 /* Under the title: the description in sans caps, a step below the title's
    size, then the deck in the prose face, italic. */
 .cert-page .hero .subtitle {

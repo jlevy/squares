@@ -861,8 +861,20 @@ def _variant_order(directory: Path, only: Sequence[str]) -> list[Path]:
     return ordered + [pages[name] for name in sorted(pages)]
 
 
-def take_shots(variants_dir: Path, out: Path, only: Sequence[str] = ()) -> list[Path]:
-    """Screenshot the same elements in every variant page, then stack them per element."""
+def take_shots(
+    variants_dir: Path,
+    out: Path,
+    only: Sequence[str] = (),
+    elements: Sequence[str] = (),
+) -> list[Path]:
+    """Screenshot the same elements in every variant page, then stack them per element.
+
+    `elements` are extra CSS selectors, each stacked in its own montage beside the fixed
+    set. The fixed set is the paragraphs and blocks the math text face research compared,
+    and it is fixed because those comparisons are re-run whenever a face moves; a question
+    about one other element -- a title's relation glyph, a caption's label -- is asked
+    once and is not worth a constant.
+    """
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
     pages = _variant_order(variants_dir, only)
@@ -911,6 +923,16 @@ def take_shots(variants_dir: Path, out: Path, only: Sequence[str] = ()) -> list[
                         candidate.screenshot(path=str(target))
                         record(name, key, target)
                         break
+                for index, selector in enumerate(elements):
+                    key = f"el{index}"
+                    candidate = page.locator(selector).first
+                    if not candidate.count() or not candidate.is_visible():
+                        print(f"{name}: nothing visible matches {selector!r}")
+                        continue
+                    candidate.scroll_into_view_if_needed()
+                    target = out / f"{name}-{key}.png"
+                    candidate.screenshot(path=str(target))
+                    record(name, key, target)
                 displays = page.locator(".cert-page .katex-display")
                 for index in range(min(displays.count(), DISPLAY_BLOCKS)):
                     display = displays.nth(index)
@@ -982,6 +1004,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     shots.add_argument("--out", type=Path, required=True, help="directory to write into")
     shots.add_argument("--only", nargs="+", default=(), help="variant names to shoot")
+    shots.add_argument(
+        "--element",
+        nargs="+",
+        default=(),
+        help="extra CSS selectors to stack, beyond the fixed set",
+    )
 
     arguments = command.parse_args(argv)
     if arguments.command == "metrics":
@@ -995,7 +1023,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             metrics_patch=arguments.metrics_patch,
         )
     else:
-        take_shots(arguments.variants, arguments.out, arguments.only)
+        take_shots(arguments.variants, arguments.out, arguments.only, arguments.element)
     return 0
 
 
