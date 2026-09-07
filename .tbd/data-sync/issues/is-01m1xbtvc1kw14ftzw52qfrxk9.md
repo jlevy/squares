@@ -5,7 +5,7 @@ title: BC255 full distinguished-square compatibility discriminator
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 14
 spec_path: packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md
 labels: []
 dependencies: []
@@ -17,8 +17,11 @@ child_order_hints:
   - is-01m1xe6rtcampwct0bevhr9nf3
   - is-01m1xfcr8e509aps18k4jzck8a
   - is-01m1xggj6dmy3kcrfjdf4rytph
+  - is-01m1xh3xbkbvcmnh5b40d0hw9h
+  - is-01m1xhn8hjvktqhk423t1trwhq
+  - is-01m1xhn8w2y3hvyzhe4409221d
 created_at: 2026-09-07T07:20:29.824Z
-updated_at: 2026-09-07T08:42:15.626Z
+updated_at: 2026-09-07T09:02:18.497Z
 ---
 Selected local follow-up candidate after H123accepted and H122refuted, from think-7bly sourcefreeassessment. Changedclaim: everycanonicalcontainednear45Q avoiding ALLP10 intersects every both-band contained P9-avoiderS. Completeclaim plusH106/H123/closedcores provesH036; oneverifieddisjointpair refutesonlythissufficientroute. Beforeanytarget allocateH124afterfreshclaimscheck, sourcefreeproducer/reader+reviews, prospectiveexp124; freezeexp122S verbatim and oneexact45Qframe, canonicalclipping/strictstrata, all10+9marks and76edgechecks. 25–35min estimatedcriticalpath,50–70worker-minutes; possible30sproducer/10sreader caps notfrozen. No automaticlaunchthisSession091; compareopportunitycostatcheckpoint. CoordinateBC270onlyifowneravailable; appblockedcross-taskmessage soleaveexternalassignmentsuntouched.
 

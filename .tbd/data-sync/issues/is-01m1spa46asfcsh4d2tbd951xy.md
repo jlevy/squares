@@ -5,7 +5,7 @@ title: Run the exact full-size a.e.-depth dual kill pilot
 kind: task
 status: open
 priority: 1
-version: 12
+version: 14
 labels:
   - research
 dependencies:
@@ -21,8 +21,10 @@ child_order_hints:
   - is-01m1xffd8w5qsyw08g2356fd17
   - is-01m1xggjgf5wq887zr11bds67c
   - is-01m1xggjtgyy6jyz821w27m3rt
+  - is-01m1xgxk6dqnanqbjf6k35m4s4
+  - is-01m1xhz4khgy60x8j5gt1vc1hy
 created_at: 2026-09-05T21:06:38.409Z
-updated_at: 2026-09-07T08:42:16.271Z
+updated_at: 2026-09-07T09:07:41.808Z
 ---
 BC-243: after BC-242 passes review and BC-220 opens the block, build the exact almost-everywhere depth arrangement verifier, recover the Trump D=11 control, run containment/overlap/overweight mutations, and report only the one-sided bound [D,infinity). Any sound D>11 kills the mass-eleven equality-density route. This cell does not wait for or build a continuum primal guard.
 
