@@ -5,7 +5,7 @@ title: "Agenda 028: hybrid-strength comparisons and angular release at n11"
 kind: epic
 status: in_progress
 priority: 1
-version: 15
+version: 17
 spec_path: packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md
 labels:
   - agenda028
@@ -24,7 +24,9 @@ child_order_hints:
   - is-01m1xkxekgqfah06ckbt4dhkxe
   - is-01m1xn7d51x3n00z151gp9xt2h
   - is-01m1xpbwytf7473w9eyxag7hte
+  - is-01m1xs3gakt41dvcqep70ka95s
+  - is-01m1xt1wzqhbg69pa93nd1g4gz
 created_at: 2026-09-07T06:03:01.798Z
-updated_at: 2026-09-07T10:24:34.265Z
+updated_at: 2026-09-07T11:29:00.918Z
 ---
 Own X018, H118-121 and BC269-275. PR107 plans landed at dd36800e. Session092 now executes the authorized eight-hour block on codex/n11-hybrid-overnight, with two-hour pushed checkpoints under think-0yfe. Begin the matched capacity and closed release designs and independent direct-contract review; targets need frozen protocols and accepted controls. Preserve X017 H111-117 BC258-268, the single BC261 interface, and source session091/exp121. No new hypothesis or experiment ID at launch.

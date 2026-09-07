@@ -5,7 +5,7 @@ title: Session094 complete-cover binding and repaired density controls checkpoin
 kind: task
 status: in_progress
 priority: 1
-version: 34
+version: 42
 spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels: []
 dependencies: []
@@ -43,7 +43,15 @@ child_order_hints:
   - is-01m1xrhhrcqngtw3ymregzhma6
   - is-01m1xrhj49akk9hmccdg3w5ept
   - is-01m1xrmtqxthbkrjxpfd7km738
+  - is-01m1xs0wv2n5rvxba2c0q59v9j
+  - is-01m1xs7v02qadz0snwywsaf4bk
+  - is-01m1xshfse90dbs7dtzzqw1v85
+  - is-01m1xsk1c8h857vdag7zqyga1n
+  - is-01m1xskw3zfzczf5rcv1wryxdf
+  - is-01m1xt4s39718jpe72n46zcbg0
+  - is-01m1xt4se0gr56v5csw2hyf3n6
+  - is-01m1xtdz03bsrkfz848szpjr8j
 created_at: 2026-09-07T09:47:03.244Z
-updated_at: 2026-09-07T11:04:24.060Z
+updated_at: 2026-09-07T11:35:36.194Z
 ---
 Continue selected think-7e72 after Session093, roughly09:49–11:49UTC, stop new science by11:29. Independently bind the reviewed H124 whole-band residual cover and bounded caller; separately reconcile BC243 graph soundness controls and declare a new degree-eight source-control attempt. No completed experiment reruns and no resumption of the failed old control sequence. Same PR109; max mathematical agents, independent readers, fixed caps, final20min integration. Check fresh external ownership before IDs.
