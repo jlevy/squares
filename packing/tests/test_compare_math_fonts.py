@@ -11,6 +11,13 @@ here rather than only in the prose.
 The two faces checked are the two the brief tabulates most closely, one from each side
 of the pairing. The whole file reads two woff2 files and takes well under a second, so
 it belongs in the quick lane and carries no marker.
+
+The tool's other two behaviors are checked by running them rather than by reading their
+declarations: the metric patch over a synthetic KaTeX table, and the stock-KaTeX
+baseline the variant pages are built against. A route measured against the wrong
+baseline, or drawn from a face KaTeX is not measuring, is the failure mode the whole
+tool exists to prevent, and neither shows up as an error -- only as a montage that
+answers a question nobody asked.
 """
 
 from __future__ import annotations
@@ -19,11 +26,15 @@ import pytest
 
 from devtools.compare_math_fonts import (
     DEFAULT_FACES,
+    PROSE_FONTS,
     FaceMetrics,
+    Variant,
     built_in_variants,
     measure,
     metrics_table,
     page_faces,
+    patch_metrics,
+    stock_katex_baseline,
 )
 
 
@@ -105,3 +116,58 @@ def test_the_all_latin_route_swaps_the_228_entries_the_brief_counts() -> None:
     ]
     swapped = sum(len(code_points) for _, _, code_points in variants["all"].swaps)
     assert swapped == 228
+
+
+#: One face's entries in the shape KaTeX bakes them into `katex.min.js`: a code point,
+#: then `[depth, height, italic correction, skew, width]`. `43` is `+`, which no route
+#: moves; `48` and `49` are `0` and `1`, which every route does. Short enough to read,
+#: and it exercises the same substitution the whole 900 KB table goes through.
+SYNTHETIC_TABLE = (
+    '"Main-Regular":{43:[.08333,.58333,0,0,.77778],48:[0,.64444,0,0,.5],49:[0,.64444,0,0,.5]}'
+)
+
+#: The one route the rewrite is checked on: digits from PT Serif Regular into the
+#: Main-Regular table, which is Route B's swap and the first half of every later route's.
+_DIGIT_VARIANT = Variant(
+    "digits-only",
+    "digits from PT Serif Regular",
+    css="",
+    swaps=(("Main-Regular", "pt-serif-latin-400-normal.woff2", tuple(range(0x30, 0x3A))),),
+)
+
+
+def test_the_metric_patch_rewrites_the_digits_and_nothing_else() -> None:
+    """The rewrite moves the entries the variant swaps, to the shipped face's own bounds.
+
+    The counted-entries test above reads the route's declaration; this one runs the
+    substitution over a table and reads what came out, against the two figures the
+    kpress brief spot-checks its own generator on: a PT Serif digit is 0.712 em tall
+    and 0.533 em wide, against the 0.644 and 0.5 KaTeX believes it is placing. That
+    0.068 em of width is why an unpatched page sets numbers in boxes too narrow for
+    them, and the 0.068 em of height is what clips a numerator at 3x.
+    """
+    patched, rewritten = patch_metrics(SYNTHETIC_TABLE, _DIGIT_VARIANT, PROSE_FONTS)
+
+    assert rewritten == 2
+    # `0` overshoots the baseline, so its depth moves too; `1` sits on it.
+    assert "48:[0.01200,0.71200,0.00000,0.0,0.53300]" in patched
+    assert "49:[0.00000,0.71200,0.00000,0.0,0.53300]" in patched
+    # `+` is not a glyph any route redirects, so its entry is passed through untouched.
+    assert "43:[.08333,.58333,0,0,.77778]" in patched
+
+
+def test_the_baseline_switches_the_pages_own_math_text_face_off() -> None:
+    """A variant page opts out of kpress's feature, whatever the rendered page declared.
+
+    Both shapes matter: the explainer renders `<html ... data-kpress-math-text="prose">`
+    today, and a page rendered with the attribute left off would silently take kpress's
+    default. One attribute reverts both halves of the feature -- the stylesheet's rules
+    and the page's inline metric install -- so `current` is stock KaTeX either way.
+    """
+    rendered = '<!doctype html>\n<html lang="en"\n      data-kpress-math-text="prose">\n<head>'
+    assert 'data-kpress-math-text="katex"' in stock_katex_baseline(rendered)
+    assert 'data-kpress-math-text="prose"' not in stock_katex_baseline(rendered)
+    assert stock_katex_baseline(rendered).count("data-kpress-math-text") == 1
+
+    bare = '<!doctype html>\n<html lang="en">\n<head>'
+    assert '<html lang="en" data-kpress-math-text="katex">' in stock_katex_baseline(bare)

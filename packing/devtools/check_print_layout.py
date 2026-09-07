@@ -286,19 +286,28 @@ _PROBE = r"""() => {
     return steps.join(' > ');
   }
 
-  /* The block's first line box: every rect a Range over its whole contents puts in the
-     topmost band, unioned. Taken this way rather than as one text node's rect, which is
+  /* The block's first line box: every rect a Range over its whole contents puts on the
+     topmost line, unioned. Taken this way rather than as one text node's rect, which is
      that run's inline box and is shorter than the line whenever anything taller -- a
      KaTeX span, a larger inline -- shares the line with it. Comparing a marker box
      against an inline box that is not the line box is comparing two different things,
-     and the difference was 3px. */
+     and the difference was 3px.
+
+     A rect belongs to the first line when it starts inside the upper half of the
+     topmost rect. The runs on one line start at different heights, because each run's
+     box is its own font's ascent above the shared baseline: PT Serif's is 1.04em and
+     KaTeX_Main's 0.90em, so a line that opens with mathematics drawn in the reading
+     face has runs whose tops sit a whole pixel apart. A band of one pixel around the
+     topmost run once split such a line in two and reported the marker 2.5px off; the
+     next line's runs start a full line height lower, so the half-height test cannot
+     take one of them by mistake. */
   function firstLineBox(el) {
     const range = document.createRange();
     range.selectNodeContents(el);
     const rects = [...range.getClientRects()].filter((r) => r.width && r.height);
     if (!rects.length) return null;
-    const first = Math.min(...rects.map((r) => r.top));
-    const band = rects.filter((r) => Math.abs(r.top - first) < 1);
+    const topmost = rects.reduce((a, r) => (r.top < a.top ? r : a));
+    const band = rects.filter((r) => r.top < topmost.top + topmost.height / 2);
     return {
       top: Math.min(...band.map((r) => r.top)),
       bottom: Math.max(...band.map((r) => r.bottom)),

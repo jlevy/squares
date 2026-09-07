@@ -27,6 +27,17 @@ in it, so a composite family can be built out of the page's own bytes with no ne
 and no rebuild -- and `shots` drives Playwright over the results and stacks the same
 paragraph from every variant into one image.
 
+The variants are built against the stock KaTeX baseline; the page's own math text face
+is switched off first. That is not a nicety: the page this now runs on renders with
+kpress's `KPress Math Text` composite as the root family and installs kpress's metric
+tables inline, so a variant injected on top of it would compare two versions of the
+feature rather than the routes the research compared. `stock_katex_baseline` stamps
+`data-kpress-math-text="katex"` on `<html>`, which is the opt-out both halves read: the
+stylesheet's rules are scoped to a `.kpress` with no opted-out ancestor, and the page's
+metrics installer returns early. With that stamped, `current` is Route A again, each
+variant's CSS lands on upstream's `.katex` rules, and `--metrics-patch` reaches the
+table KaTeX actually lays out from.
+
 What the variants are is `unicode-range` composites, and that is not a stylistic choice.
 KaTeX picks the face by class, and digits, operator names and `\text{}` carry no class
 at all: they are drawn by whatever family the root `.katex` rule names. So "digits from
@@ -69,6 +80,7 @@ from typing import Any
 from fontTools.pens.basePen import BasePen
 from fontTools.pens.boundsPen import BoundsPen
 from fontTools.ttLib import TTFont
+from strif import atomic_output_file
 
 from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY
 
@@ -471,7 +483,12 @@ def _composite(family: str, faces: PageFaces, katex_range: str, prose_range: str
 
 
 def built_in_variants(faces: PageFaces) -> tuple[Variant, ...]:
-    """The eight routes the research rendered, in the order it compares them."""
+    """The eight routes the research rendered, in the order it compares them.
+
+    All eight are relative to stock KaTeX, which is what `stock_katex_baseline` restores
+    before any of this CSS is injected: `current` is that baseline with nothing added,
+    and every other route is one family on top of it.
+    """
     digits = _composite("KaTeX_MainPT", faces, "U+0000-002F, U+003A-10FFFF", "U+0030-0039")
     latin = _composite(
         "KaTeX_MainPTL",
@@ -510,7 +527,7 @@ def built_in_variants(faces: PageFaces) -> tuple[Variant, ...]:
     return (
         Variant(
             "current",
-            "Route A: the page as it renders today, every glyph from the KaTeX faces",
+            "Route A: stock KaTeX, every glyph from the KaTeX faces",
             "",
         ),
         Variant(
@@ -570,10 +587,15 @@ def _spec_variants(spec: Path) -> tuple[Variant, ...]:
     changed stylesheet without editing this module.
     """
     declared = json.loads(spec.read_text(encoding="utf-8"))
-    return tuple(
-        Variant(name, str(body.get("label", name)), str(body["css"]))
-        for name, body in declared.items()
-    )
+    variants: list[Variant] = []
+    for name, body in declared.items():
+        # `label` has a default and `css` cannot: a variant with no CSS is the built-in
+        # `current` under another name. Refused by sentence rather than by traceback,
+        # which is what every other input failure in this module does.
+        if "css" not in body:
+            raise SystemExit(f"{spec}: variant {name!r} declares no `css`")
+        variants.append(Variant(name, str(body.get("label", name)), str(body["css"])))
+    return tuple(variants)
 
 
 # The metric table, which lives as plain data inside the KaTeX bundle.
@@ -684,6 +706,42 @@ def patch_metrics(html: str, variant: Variant, font_dir: Path) -> tuple[str, int
 #: Figures the page loads from beside itself; without them a variant renders broken art.
 SIBLING_ASSETS = ("known-best-1-100*.png", "known-best-1-100*.svg")
 
+#: kpress's opt-out for its own math text face, and the tag it is stamped on. One
+#: attribute turns off both halves of the feature, which is why the baseline is a
+#: stamp rather than a deletion: `katex-text-face.css` scopes every rule to a `.kpress`
+#: with no opted-out ancestor, and the page's inline metrics installer reads the same
+#: three selectors before it touches KaTeX's tables.
+MATH_TEXT_OPT_OUT = 'data-kpress-math-text="katex"'
+_HTML_TAG = re.compile(r"<html\b[^>]*>", re.IGNORECASE)
+_MATH_TEXT_ATTRIBUTE = re.compile(r"""\s*data-kpress-math-text\s*=\s*(["'])[^"']*\1""")
+
+
+def stock_katex_baseline(html: str) -> str:
+    """Switch the page's own math text face off, so a variant measures against KaTeX.
+
+    The routes below are defined against stock KaTeX: `current` is every glyph from the
+    KaTeX faces, and every other variant is that page plus one injected family. The page
+    this runs on no longer starts there, so the baseline is restored rather than assumed
+    -- otherwise `current` would be kpress's feature, the injected families would sit on
+    top of it, and `--metrics-patch` would be overwritten by the page's own tables at
+    load.
+
+    An existing `data-kpress-math-text` is replaced rather than joined, since a second
+    copy of the attribute on one tag is ignored by the parser and the page's own value
+    would stand.
+    """
+    match = _HTML_TAG.search(html)
+    if match is None:
+        raise SystemExit(
+            "the page carries no <html> tag; the math text face cannot be switched off"
+        )
+    tag = match.group(0)
+    if _MATH_TEXT_ATTRIBUTE.search(tag) is not None:
+        tag = _MATH_TEXT_ATTRIBUTE.sub(f" {MATH_TEXT_OPT_OUT}", tag, count=1)
+    else:
+        tag = f"{tag[:-1].rstrip()} {MATH_TEXT_OPT_OUT}>"
+    return html[: match.start()] + tag + html[match.end() :]
+
 
 def build_variants(
     page: Path,
@@ -693,10 +751,16 @@ def build_variants(
     *,
     metrics_patch: bool = False,
 ) -> list[Path]:
-    """Write one page per variant beside a copy of the figures they reference."""
+    """Write one page per variant beside a copy of the figures they reference.
+
+    Every variant is built against the stock KaTeX baseline: the page's own math text
+    face is switched off first, by `stock_katex_baseline`, before any variant CSS is
+    injected. The faces each composite is assembled from are still the page's own bytes;
+    only the feature that would draw with them unbidden is off.
+    """
     if not page.is_file():
         raise SystemExit(f"no rendered page at {page}; render the explainer first")
-    html = page.read_text(encoding="utf-8")
+    html = stock_katex_baseline(page.read_text(encoding="utf-8"))
     variants = {variant.name: variant for variant in built_in_variants(page_faces(html))}
     if spec is not None:
         variants |= {variant.name: variant for variant in _spec_variants(spec)}
@@ -714,7 +778,8 @@ def build_variants(
             page_html, rewritten = patch_metrics(page_html, variant, font_dir)
             note = f" ({rewritten} metric entries rewritten)"
         target = out / f"{variant.name}.html"
-        target.write_text(page_html, encoding="utf-8")
+        with atomic_output_file(target) as temporary:
+            temporary.write_text(page_html, encoding="utf-8")
         written.append(target)
         print(f"wrote {target.name}{note}")
 
@@ -725,16 +790,18 @@ def build_variants(
     resolved = page.resolve()
     source = resolved.relative_to(REPO) if resolved.is_relative_to(REPO) else resolved
     readme = out / "README.txt"
-    readme.write_text(
-        "Variants of "
-        + str(source)
-        + ", built by devtools.compare_math_fonts.\n"
-        + ("Metric tables patched to the swapped faces.\n" if metrics_patch else "")
-        + "\n"
-        + "\n".join(f"{variant.name:10} {variant.label}" for variant in variants.values())
-        + "\n",
-        encoding="utf-8",
-    )
+    with atomic_output_file(readme) as temporary:
+        temporary.write_text(
+            "Variants of "
+            + str(source)
+            + ", built by devtools.compare_math_fonts, against the stock KaTeX baseline\n"
+            + "(the page's own math text face switched off).\n"
+            + ("Metric tables patched to the swapped faces.\n" if metrics_patch else "")
+            + "\n"
+            + "\n".join(f"{variant.name:10} {variant.label}" for variant in variants.values())
+            + "\n",
+            encoding="utf-8",
+        )
     print(f"wrote {readme.name}")
     return written
 

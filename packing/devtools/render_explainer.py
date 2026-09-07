@@ -732,10 +732,22 @@ _WEIGHT_TOKENS = {"normal": "400", "bold": "700"}
 
 
 def _font_face_reachable(block: str) -> bool:
-    """Whether a `@font-face` block names a face this page can reach."""
+    """Whether a `@font-face` block names a face this page can reach.
+
+    Three kinds of block are known: a KaTeX face, kept if the page can reach it; a
+    face of kpress's `KPress Math Text` composite, kept if its slot's KaTeX partner
+    is; and nothing else. A composite under another name (the planned sans one, say)
+    fails the render rather than being inlined unread at 30-40 KB a face.
+    """
     ref = re.search(r"(KaTeX_[A-Za-z0-9-]+)\.woff2", block)
     if ref is not None:
         return ref.group(1) in KATEX_FACES
+    family = re.search(r"font-family:\s*(\"[^\"]+\"|[^;]+);", block)
+    if family is None or family.group(1) != '"KPress Math Text"':
+        raise SystemExit(
+            f"a KaTeX stylesheet declares a face this renderer does not know how to prune: "
+            f"{family.group(1) if family else block.strip()[:60]}"
+        )
     style = re.search(r"font-style:\s*([a-z]+)", block)
     weight = re.search(r"font-weight:\s*([a-z0-9]+)", block)
     slot = (
@@ -782,22 +794,33 @@ def katex_css(static: Path) -> str:
 #: KaTeX lays out from its own metric table, so kpress's tables for the reading face
 #: are installed before the page draws anything. The page renders its mathematics
 #: itself (`tex()` in the shell) rather than through kpress's `katex-init.js`, which
-#: is why the call lives here. The guards are that script's three, copied: the tables
-#: are skipped when the document root or the `.kpress` wrapper opts out of the face
-#: with `data-kpress-math-text="katex"`, and when the wrapper runs on system fonts,
-#: where the stylesheet reverts to the KaTeX faces and PT Serif's numbers would
-#: measure glyphs that are not drawn.
+#: is why the call lives here; the policy is that script's, copied. The tables are
+#: skipped when the wrapper or any ancestor opts out with
+#: `data-kpress-math-text="katex"` or runs on system fonts (the wrapper's baked
+#: `data-kpress-fonts` or the reader's persisted `data-kpress-font-set`, which the
+#: bootstrap stamps on <html>), because the stylesheet reverts to the KaTeX faces
+#: there and PT Serif's numbers would measure glyphs that are not drawn. And when
+#: the face is wanted but the tables cannot be applied, the face is turned off too,
+#: by stamping the opt-out the stylesheet reads: faces without metrics is the one
+#: state the design forbids.
 APPLY_TEXT_METRICS = """
 (() => {
+  const optOut = [
+    '[data-kpress-math-text="katex"]',
+    '[data-kpress-fonts="system"]',
+    '[data-kpress-font-set="system"]',
+  ].join(", ");
+  const wrapper = document.querySelector(".kpress");
+  if (!wrapper || wrapper.closest(optOut)) return;
   const tables = globalThis.kpressKatexTextMetrics;
   const install = typeof katex === "undefined" ? undefined : katex.__setFontMetrics;
-  if (!tables || typeof install !== "function") return;
-  if (document.documentElement.dataset.kpressMathText === "katex") return;
-  const wrapper = document.querySelector(".kpress");
-  const optedOut = wrapper && wrapper.dataset.kpressMathText === "katex";
-  if (optedOut || (wrapper && wrapper.dataset.kpressFonts === "system")) return;
+  if (!tables || typeof install !== "function") {
+    document.documentElement.dataset.kpressMathText = "katex";
+    console.warn("kpress: math text face metrics unavailable; KaTeX's own faces restored");
+    return;
+  }
   for (const [face, table] of Object.entries(tables)) {
-    if (face !== "scale") install(face, table);
+    if (face !== "scale") install.call(katex, face, table);
   }
 })();
 """

@@ -48,7 +48,9 @@ design live afterwards.
 ## Non-Goals
 
 - The feature itself, its option, its CSS and its metrics generator: kpress’s plan.
-- Sans math and Greek sizing: deferred, tracked in kpress as `kpr-7f9z` and `kpr-c2tr`.
+- Sans math: deferred, tracked in kpress as `kpr-7f9z`. Greek sizing shipped inside the
+  kpress feature (KaTeX’s Greek scaled to PT Serif’s x-height and cap height inside the
+  composite), so it is not a squares concern.
 
 ## Background
 
@@ -124,8 +126,10 @@ The measurement scripts from the research become one devtool with three commands
 - `devtools/compare_math_fonts.py`: `metrics` prints the x-height, cap height, digit
   height, ascender, operator centre, hairline and stem of the shipped faces from their
   woff2 files; `variants` builds pages from the rendered explainer by injecting CSS from
-  a small spec; `shots` takes Playwright element screenshots of named paragraphs and
-  display blocks in each variant and stacks them into montages.
+  a small spec, after switching the page’s own math text face off (the opt-out attribute
+  on `<html>`), so every variant is measured against the stock KaTeX baseline the
+  research compared; `shots` takes Playwright element screenshots of named paragraphs
+  and display blocks in each variant and stacks them into montages.
   fontTools in the dev group, pinned past the 14-day cool-off.
 - Validation: `render_explainer --check`, `render_explainer_pdf --check`,
   `check_print_layout`, `inspect_explainer_typography --check-supporting`; the Pages
