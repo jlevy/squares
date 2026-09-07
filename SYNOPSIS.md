@@ -138,9 +138,10 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives fourteen confirmed hypotheses, thirteen refuted
-hypotheses, one open hypothesis, twenty-three open questions, and forty-one blocked
+hypotheses, one open hypothesis, twenty-three open questions, and forty blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
-unresolved. No hypothesis is running or waiting on review and six are unresolved.
+unresolved. H-125 is running through its prospective exp129 protocol; no scientific
+source or target has been invoked. No hypothesis is waiting on review and six are unresolved.
 H-124’s fixed-square screen found no pair; its witness-only reader was not invoked.
 H-105 is refuted: all 134 eligible candidate pairs are separated.
 Exp128 subsequently settled H-099’s entire fixed support at optimum eleven through seven
@@ -628,15 +629,19 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**Selected next entry:** `think-mq0d` takes BC-264’s bounded H114 feature and
-kernel-contract pricing.
+**Selected next entry:** `think-mq0d` continues BC-264 through exp129’s pending
+engine and protocol admission, after completing the bounded H114 feature and
+kernel-contract pricing. The scientific attempt remains uninvoked.
 
 [Session097](packing/campaign/agent-sessions/session-097-kernel-contract-and-feature-pricing.md)
 completed that pricing on `codex/n11-kernel-pricing`, following the user's request
 to continue. Independent reviews accept an exact obstruction to cubic center features
-and the design of a finite test for one richer family. Separate max-thinking agents
-now build its LP proposer and independent exact reader, with source-free controls.
-No scientific target or continuum certificate has been admitted.
+and the design of a finite test for one richer family. Independent source-free code
+reviews admit its LP proposer and exact reader; all 75 controls passed.
+[Exp129](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-129-h125-finite-kernel-obstruction.md)
+registers one prospective proposer call and a conditional independent reader.
+Engine and committed-protocol gates remain pending; neither scientific source has run.
+No continuum certificate has been admitted.
 Its new checkpoint is separate from the completed eight-active-hour block.
 
 [Session096](packing/campaign/agent-sessions/session-096-stromquist-memos-and-helpers.md)
@@ -662,12 +667,13 @@ H099 is refuted only on that support.
 BC-265’s independent designs derive an explicit mass-eleven calibration on the old
 support, but a new undercovered pose would reject only that density.
 Session097 completed the selected BC-264 pricing and kernel-specific BC-260 review.
-Its next source-free instrument targets the fixed family in H125: an exact finite
+Its reviewed source-free instrument targets the fixed family in H125: an exact finite
 obstruction would reject that family, while feasibility of the outer LP proves nothing
 about a complete kernel. Exact PSD evidence and complete pair-domain verification
 remain prerequisites for a positive continuum certificate at side $96/25$.
 H101’s stronger common-support obstruction is a conditional fallback, with no candidate
-asserted. No scientific target has yet been admitted in the active Session097.
+asserted. Exp129 is registered, but scientific invocation still requires the passing
+engine and protocol checks, final protocol review and publication recorded in Session097.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
 `think-9qrx`, completed the user-approved research block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
@@ -2937,7 +2943,7 @@ round that names the hypothesis, control roles included.
 | [H-122](packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md) | refuted | One independently checked square avoids all nine marks and the forced diamond; full-square compatibility remains open | 1 | 0.20s wall |
 | [H-123](packing/campaign/hypotheses/H-123-near45-coordinate-localization.md) | confirmed | Complete coordinate localization follows from the reviewed reduction and independent four-guard certificate | 1 | 0.21s wall |
 | [H-124](packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md) | unresolved | Diagonal band certified; original and collision-augmented axis representations returned no_chain without readers | 3 | 2.99s wall |
-| [H-125](packing/campaign/hypotheses/H-125-biquadratic-two-pose-kernel.md) | blocked | Fixed eleven-feature kernel; finite refutational instrument in source-free development, no target admitted | 0 | — |
+| [H-125](packing/campaign/hypotheses/H-125-biquadratic-two-pose-kernel.md) | running | Fixed eleven-feature kernel; source-free instrument admitted, exp129 prospective and scientific invocation pending | 1 | — |
 
 ### Confirmed
 
@@ -3189,9 +3195,11 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 84 rounds registered in `series-000`.
+There are 85 rounds registered in `series-000`.
 
 They record 2152.1 agent-minutes and 1223.3 wall-minutes.
+Exp129 is prospective and contributes no scientific elapsed time; its source-free
+development and review costs belong to Session097.
 Exp-114 completed its one target and independent replay.
 Reader development costs are recorded separately from those process times.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
@@ -3313,6 +3321,7 @@ archive beside it.
 | [exp-126](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md) | 11 | target | H-099 | Complete graph bound for unchanged56/5 candidate | Reported overweight graph clique; no reader or geometric counterexample | unresolved |
 | [exp-127](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md) | 11 | target | H-124 | Fixed collision-augmented whole-axis cover | Producer no_chain; no independent reader or geometric counterexample | unresolved |
 | [exp-128](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md) | 11 | target | H-099 | Fixed seven-row necessary-lower-incidence ceiling | Independently verified ceiling and attained baseline11; whole fixed support settled | rejected |
+| [exp-129](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-129-h125-finite-kernel-obstruction.md) | 11 | target | H-125 | Fixed-family finite LP proposer and independent exact objective-bound reader | Prospective protocol; scientific source unrun and engine/protocol admission checks pending | in-progress |
 
 ### Cost and provenance
 
@@ -3402,11 +3411,13 @@ archive beside it.
 | exp-126 | one60-second scientific child; no reader invoked | 4.49 s | — | criterion | `7daa7c55` |
 | exp-127 | one120-second scientific child; no reader invoked | 0.25 s | — | criterion | `3bec06e2` |
 | exp-128 | one60-second independent checker plus2-second termination grace | 1.12 s | — | criterion | `a94e57fe` |
+| exp-129 | one proposer and conditional reader; each TERM at 60 s, KILL up to 2 s later; no retry | — (not invoked) | — | prospective; not stopped | `d6f0c403` (pending admission) |
 
-### What the 84 rounds jointly establish
+### What the 85 rounds jointly establish
 
-The 84 rounds use 2152.1 agent-minutes and 1223.3 wall-minutes under the campaign’s
+The 85 rounds use 2152.1 agent-minutes and 1223.3 wall-minutes under the campaign’s
 retained effort accounting.
+The prospective exp129 adds no scientific result or measured execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
 separately in Session089.
 

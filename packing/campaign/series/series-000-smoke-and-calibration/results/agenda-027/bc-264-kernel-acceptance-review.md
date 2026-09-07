@@ -528,6 +528,21 @@ BasedPyright reported zero errors, warnings and notes, using 11.06 seconds user 
 Only this timed review section was appended, using the experiment-loop scope rules, tbd
 review guidelines and Practical Prose/Flowmark documentation pass.
 
+The separate prospective exp129 protocol review under `think-ebh1` began at the observed
+2026-09-07 22:04:57 UTC clock and reached GO at 22:06:58 UTC, before its original
+five-minute cap. The complete protocol, current H125 and frozen CLI contracts agree: one
+proposer, an independent reader only after actual exit zero and an exact bound at least
+eleven, fixed positive receipt fields, separate whole-child TERM/KILL envelopes,
+exclusive live outputs, and unresolved disposition for every other outcome.
+Engine `d6f0c403` matches the reviewed code and differs from `5336a518` only in the
+rendered ledger. Passing immutable engine/protocol checks and publication remain
+prerequisites, not findings of this review.
+Two nonblocking execution clarifications were sent to the coordinator: resolve outputs
+against the coordinator repository root, and interpret `pair_count` as the positive
+sparse pair support.
+No scientific source, solver, target output or test was invoked in this prospective
+review; the previous build and review caps remain terminal.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

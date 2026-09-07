@@ -85,7 +85,7 @@ session:
     objective: Independently admit or refuse the fixed instruments and once-only finite-refutation protocol, then preserve an immutable passing source checkpoint.
     commitment: BC-264
     bead: think-ebh1
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Both independent source/test drafts are frozen and passed their own controls; a new review allocation checks the other's implementation and exact interface.
     budget_minutes: 20
@@ -95,10 +95,31 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --push
     kill_condition: Reviewer caps at 22:00 UTC or phase cap 22:07; any unresolved soundness, source binding, positive control, publication or supervisor obligation prevents target admission.
     fallback: Preserve the exact blocker and partial readiness; no scientific invocation or automatic repair after a target.
+    outcome: Both independent max implementation reviews are GO, with all 75 authored source-free controls passing. Code froze as 5336a518 and its corrected rendered ledger as d6f0c403. No scientific source ran. The first engine push passed its code/tests but failed the stale ledger, so a corrected immutable gate and final protocol publication remain pending, not retrospectively accepted.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md, packing/tests/test_kernel_axis_lp_integration.py]
+    stop_reason: Source-free soundness review is complete; the following research-loop slice owns the explicit outstanding launch guards. No target was admitted by this phase.
+    next_action: Finish the prospective exp129 record, corrected immutable engine/protocol checks and publication; invoke only if every guard passes before the separately fixed launch cutoff.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Complete the remaining prospective launch guards and, only if they pass by 22:20, run one H125 finite discriminator with conditional exact replay and retain the terminal disposition.
+    commitment: BC-264
+    bead: think-rzdb
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Source-free instrument soundness is independently accepted; exp129 now prospectively fixes the sole scientific source, two conditional child envelopes and exact family-refutation criterion. Gate and publication evidence remain explicitly pending.
+    budget_minutes: 30
+    started_at: '2026-09-07T22:05:21Z'
+    deadline_at: '2026-09-07T22:35:21Z'
+    expected_output: One terminal exp129 outcome or explicit non-invocation, retained complete or partial streams, independent output audit, and the next family-scoped agenda decision on PR116.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: No launch after 22:20; all scientific work ends by 22:27. Original whole-child and no-retry limits are unchanged. Failed prerequisites produce explicit non-invocation, not borrowed closing time.
+    fallback: Preserve blocked or unresolved evidence and compare existing alternative hypotheses; no automatic feature/source expansion or replay.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Register a complete prospective experiment only after implementation review; run no target until the protocol and engine are committed, validated and published.
+    next_action: Collect final prospective protocol review, actual passing immutable gates and publication before any scientific constructor.
   primary_bead: think-c53m
   status: in_progress
   budget:
@@ -332,7 +353,46 @@ session:
     elapsed_quality: operator_reported_approximate
     next_action: Include the interface controls in the immutable engine gate.
     phase: 4
-  outputs: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md, packing/devtools/kernel_axis_lp.py, packing/devtools/check_kernel_axis_lp.py, packing/tests/test_kernel_axis_lp_integration.py]
+  - task: Fresh exp129 namespace check (think-rzdb)
+    operator: Codex checkpoint_handoff_audit, high thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Complete inventory/body check 21:59:40–22:00:19 UTC found exp129 free on main a5e9dbfd and every open PR head, with no competing reservation. No allocation or science by the auditor.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-129-h125-finite-kernel-obstruction.md]
+    files: []
+    checks: [Refreshed main and all four open PR heads; changed recursive inventories were not truncated.]
+    uncertainty: Later IDs require fresh ownership checks.
+    elapsed_seconds: 39
+    elapsed_quality: operator_reported_approximate
+    next_action: Root registers only the complete exp129 record.
+    phase: 4
+  - task: Final prospective exp129 protocol review (think-ebh1)
+    operator: Codex scalar_followup_assessment, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: GO frozen 22:07:35 UTC; actual interval 22:04:57–22:07:35, decision 22:06:58. Protocol, H125 and frozen CLIs agree on once-only invocation, source, exact acceptance, assurance and timing. Root clarifies repository output root and sparse pair count.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md]
+    checks: [Independent protocol inspection and Flowmark passed; no target, source construction or tests.]
+    uncertainty: Actual passing engine/protocol checks and publication remain prerequisites, not assumed successes.
+    elapsed_seconds: 158
+    elapsed_quality: operator_reported_approximate
+    next_action: Admit invocation only after all remaining guards actually pass before the fixed cutoff.
+    phase: 5
+  - task: Prospective protocol synopsis reconciliation (think-m2lx)
+    operator: Codex checkpoint_handoff_audit, high thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Manual synopsis changes froze 22:06:50 UTC; actual interval 22:05:10–22:06:50. Added H125's active protocol and exp129 without claiming scientific invocation or elapsed time; generated sections untouched.
+    evidence: [SYNOPSIS.md]
+    files: [SYNOPSIS.md]
+    checks: [Static check against schema/ledger consumers and Practical Prose; no gate or science.]
+    uncertainty: Root must regenerate all views after the final source records freeze.
+    elapsed_seconds: 100
+    elapsed_quality: operator_reported_approximate
+    next_action: Regenerate, validate and publish the committed prospective protocol.
+    phase: 5
+  outputs: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md, packing/devtools/kernel_axis_lp.py, packing/devtools/check_kernel_axis_lp.py, packing/tests/test_kernel_axis_lp_integration.py, packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-129-h125-finite-kernel-obstruction.md]
   checks:
   - Baseline 4620e483 is landed main from PR112. Immutable change-reachable push checks passed 45 selected steps in 121.37 seconds before this branch opened. Main full workflow 34160383036 subsequently completed successfully, including integration and exhaustive validation; these are baseline receipts, not checks of this session's new artifacts.
   - The initial session artifact passed softschema repair and validation with no repairs. The privacy-reduced cost snapshot through 21:09:24 UTC completed with exit 0 in 39.10 wall seconds; it is an active-session lower bound, not the final checkpoint cost.
@@ -340,8 +400,9 @@ session:
   - PR115's six-path paper-attribution correction was independently audited for 173 seconds, 21:36:51–21:39:44 UTC, and main a5e9dbfd merged without conflicts as 4649e23a. The source-free worker drafts were excluded. That immutable checkpoint's first push gate failed in 75.13 seconds (77.46 external wall); 679 reachable tests passed, three failed and four were deselected. One failure and the synopsis step expose H125's missing summary row/count; two unchanged process-cleanup tests could not execute ps under the sandbox. Think-fvo8 tracks the synopsis correction and a bounded rerun with process-inspection permission. No test is weakened and no mathematical result changes.
   - Corrected c3a4e8ec passed the synopsis and process-cleanup checks; its second push failed only the private-snapshot negative control (74.34 seconds gate; 681 tests passed, one failed, four deselected). The snapshot's no-sync uv invocation could not find PyYAML because the immutable checkout lacked its dependency-environment link. After adding that untracked link, the isolated unchanged control passed in 8.67 external wall seconds. No source or test was changed for either environment correction; the full required push rerun remains a separate receipt.
   - The final c3a4e8ec push check passed all 45 applicable steps in 200.88 seconds gate wall and 203.99 external wall; 682 tests passed and four were deselected in 169.80 seconds. PR116 published that first docs checkpoint, with hosted run 34164869950 pending and branch mergeability passed. These are not full-gate or newly added instrument receipts.
+  - Engine 5336a518's push failed only stale campaign ledger in 190.87 seconds gate and 195.32 external wall. The ledger-only correction is d6f0c403, with scientific source/tests unchanged. The corrected immutable gate must pass; this failed receipt cannot supply launch authority. The pre-registration records tier likewise exposed only the then-stale session and ledger views in 25.49 seconds.
   stop_reason: null
-  next_action: Publish the completed mathematical pricing checkpoint while separate agents build and check the finite refutational instrument; no scientific invocation is admitted yet.
+  next_action: Complete exp129's explicit remaining launch guards and publication on PR116; then run its once-only finite H125 test only before the fixed cutoff, preserving any failure or non-invocation.
 ---
 # Kernel Contract and Feature Pricing
 
@@ -402,8 +463,9 @@ mathematical construction and independent soundness judgments use max.
 Session097 was absent from main and the complete trees of open PRs 110, 111 and 114
 at the ownership check. The subsequent source-free build checkpoint registers H125
 from a dated X017 follow-up, using the next available hypothesis ID from the complete
-21:18 inventory of main and open PR110/111/114/115. No new exploration, experiment,
-agenda or BC ID is allocated. Next candidates are exp129, X019, BC283 and Agenda029,
+21:18 inventory of main and open PR110/111/114/115. The fresh 22:00:19 check precedes
+the complete exp129 allocation. No new exploration, agenda or BC ID is allocated.
+Next candidates are exp130, X019, BC283 and Agenda029,
 not reserved ranges. Subsequent IDs need a fresh ownership check and a complete record.
 PR110 reserves BC269–282 and leaves BC264 to this owner.
 Its Session096 and resource-receipt path collide with landed PR112's Session096;

@@ -110,7 +110,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-094](agent-sessions/session-094-complete-cover-and-density-controls.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 8 | think-63oj | Post-checkpoint amendment after Session095's accepted exp128 and independent BC265 design selects BC-264 under think-mq0d for the existing 30-minute H114 feature and kernel-contract pricing slice. No target or new block is activated. BC259 and the fixed collision-cover allocation are terminal; neither receives an unchanged retry. |
 | [session-095](agent-sessions/session-095-collision-cover-and-support-ceiling.md) | completed | contemporaneous | `research-loop` (insight) | `documentation-pass` (correctness) | 5 | think-ro0s | After final record-delta validation and publication, hand off future BC264/think-mq0d's existing30-minute H114 feature and kernel-contract pricing slice. Retain the conditional H101 Omega-avoiding fallback; no new block, target or unchanged retry is activated here. |
 | [session-096](agent-sessions/session-096-stromquist-memos-and-helpers.md) | completed | retrospective | `research-survey` (correctness) | `documentation-pass` (correctness) | 4 | think-7u4s | After the final pre-push check and review publication, preserve BC-264 under think-mq0d as the existing H114 feature and kernel-contract pricing entry. The source brief separately retains the geometric replay dependency; this review activates no new target or unchanged retry. |
-| [session-097](agent-sessions/session-097-kernel-contract-and-feature-pricing.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 4 | think-c53m | Publish the completed mathematical pricing checkpoint while separate agents build and check the finite refutational instrument; no scientific invocation is admitted yet. |
+| [session-097](agent-sessions/session-097-kernel-contract-and-feature-pricing.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 5 | think-c53m | Complete exp129's explicit remaining launch guards and publication on PR116; then run its once-only finite H125 test only before the fixed cutoff, preserving any failure or non-invocation. |
 
 ### Workflow summary
 
@@ -123,7 +123,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 19 | 1 | 60 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 10 | 4 | 67 | 7 |
+| `research-loop` | 10 | 4 | 68 | 7 |
 | `pipeline-improvement` | 25 | 0 | 126 | 1 |
 | `documentation-pass` | 1 | 0 | 10 | 1 |
 | `review-planning-oversight` | 0 | 0 | 2 | 0 |
@@ -595,7 +595,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 84 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 85 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -701,7 +701,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | H-122 | refuted | proof | At q=1939/500, every contained closed unit square whose orientation mo |  | 1 |  | 0s wall |
 | H-123 | confirmed | proof | At q=1939/500, every contained closed unit square with orientation wit |  | 1 |  | 0s wall |
 | H-124 | unresolved | proof | At q=1939/500, every contained closed unit square Q in the actual near |  | 3 |  | 3s wall |
-| H-125 | blocked | proof | At side L=96/25, the fixed eleven-feature joint-D4 family in BC264's S |  | 0 |  |  |
+| H-125 | running | proof | At side L=96/25, the fixed eleven-feature joint-D4 family in BC264's S |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -825,6 +825,12 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-129 | series-000 | 11 | Session097 coordinator under BC264 and think-rzdb; independent max mathematical admission | H-125 | Prospective once-only protocol registered before either scientific source is constructed; actual passing engine/protocol checks, final protocol review and publication are still required. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -842,7 +848,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 ## Effort
 
-84 rounds, 2152.1 agent-minutes, 1223.3 wall-minutes.
+85 rounds, 2152.1 agent-minutes, 1223.3 wall-minutes.
 
 ## Exploration reports not yet codified
 
