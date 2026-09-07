@@ -203,6 +203,9 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [BC-281: Independent Audit of the Partial Full-Angle Results](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md) | dated review record | record | retained | — |
+| [BC-281: Author’s Partial Full-Angle Exclusion](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-author.md) | research synthesis | record | retained | — |
+| [BC-281: Independent Full-Angle Adversarial Analysis](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-adversary.md) | research synthesis | record | retained | — |
 | [BC-281: Independent Native Protocol and Control Admission](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-protocol-review.md) | dated review record | record | retained | — |
 | [BC-279: Independent Audit of the Two Six-Core Results](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-independent-review.md) | dated review record | record | retained | — |
 | [BC-280: Independent Admission of the Full-Angle Release Domain](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-domain-review.md) | dated review record | record | retained | — |
@@ -558,24 +561,41 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-**Focused parallel investigation active.**
-[X-018](packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md)
-reviews PR108 and ranks the overnight opportunities: direct compatibility and complete
-restricted-family domains first, a bounded contact-release investigation alongside them,
-and shared-anchor correlation only on a diagnosed residual.
-[Agenda 028](packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md)
-owns H-118–121 and BC-269–275 under epic `think-pxv5`; it preserves the X-017 allocation
-below and consumes its single BC-261 geometry interface.
-[Session 092](packing/campaign/agent-sessions/session-092-hybrid-overnight.md) executes
-the owner’s approximately eight-hour block on `codex/n11-hybrid-overnight`, starting
-from PR107’s merged plans at `dd36800e`. Integration bead `think-0yfe` owns checkpoints
-at 08:31, 10:31, 12:31 and 14:31 UTC on September 7. The opening W3 slice produced exact
-feasible obstructions to the isolated band comparison and a closed release model.
-The direct BC260 implications are accepted; W7 BC261 implementation and independent
-release-model review are active through 07:21:37 UTC. Targets remain gated on controls
-and prospective registration, and the global bracket is unchanged.
-The live task **Squares plan X-016** continues the source H-110 and conditional
-compatibility allocation independently; session-091 is already occupied there.
+**Eight-hour investigation: final validation and closeout.**
+[Session 092](packing/campaign/agent-sessions/session-092-hybrid-overnight.md) runs from
+06:31 to 14:31 UTC on September 7, on `codex/n11-hybrid-overnight` after PR107 landed at
+`dd36800e`. [PR110](https://github.com/jlevy/squares/pull/110) retains intermediate
+checkpoints, independently audited proofs, exact model obstructions and validation.
+The final reserve begins at 14:11; no successor is executed in closeout.
+
+[X018](packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md) and
+[Agenda028](packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md)
+retain H118–121 and sequential BC269–282. The central parent fence and signed release
+exclusions are accepted.
+The BC281 audit leaves the complete closed half-angle remainder
+$[1/24,1/3]\cup[1/2,23/25]$, with both slide signs and all original conditions.
+The stronger counting inequality also drops the four block contact equations while
+retaining six fixed axis squares and one common angle.
+The global bracket is unchanged.
+Disk and octagon capacity bounds on the boundary family are refuted; maximal wall-core
+and full-square capacity questions remain unresolved.
+
+**Selected next entry: BC282 / `think-s6e7`, design only.** Price20 minutes for the
+complete residual ten-square skeleton and alternative-obligation table, then10 minutes
+for independent admission.
+A specific new geometric implication is required before any later target.
+An exact feasible skeleton would show square10 must enter the proof; it would not be an
+eleven-square witness.
+Do not restart the frozen BC281 attempt.
+Phase20 is the final W5 allocation and validation block, following five completed phases
+since W5 phase14. The next cadence count restarts after this block; terminal closure
+records its final count and validation scope.
+
+The parallel task **Squares plan X-016** owns its PR109 continuation.
+Its exp128 fixes the current Trump D4 support optimum at11; its next BC265/H116
+changed-resource design and unresolved H124 remainder remain separate.
+Source H122–124, exp121–128 and sessions091/093/094/095 are occupied.
+Check live allocations before reserving another ID.
 
 **Independent alternative prepared.**
 [X-017](packing/campaign/explorations/X-017-compatibility-and-complete-case-covers.md)
@@ -585,7 +605,8 @@ proposes resource-and-anchor and six-plus-five restricted-family pilots, with a 
 pair-kernel discriminator.
 Its broad pilots remain unlaunched.
 The shared BC260 direct contracts are accepted for session092’s concrete consumers;
-BC261 implements the sole geometry interface.
+BC261 retains the accepted direct leaf and small control cover; complete
+consumer-specific attachment remains open.
 Kernel and physical-stationarity reviews retain their own prerequisites.
 Its X-017, H-111–117 and BC-258–268 records and epic `think-sz5t` keep its ownership and
 numbering separate from the continuing agenda below.
@@ -3133,7 +3154,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
 | `codex-task-tree-session-090.yaml` | session-090 | 1,341 | 9.8 h | 3.94 h | 3.95 h | yes |
-| `codex-task-tree-session-092.yaml` | session-092 | 1,273 | 14.58 h | 5.75 h | 5.75 h | yes |
+| `codex-task-tree-session-092.yaml` | session-092 | 1,513 | 17.24 h | 6.72 h | 6.72 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

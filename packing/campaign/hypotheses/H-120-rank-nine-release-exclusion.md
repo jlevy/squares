@@ -139,9 +139,30 @@ remain unresolved. Interior quarter-turn lifts and label-specific recontact chil
 retain their explicit conversion obligations.
 BC281’s
 [prospective protocol](../series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-release-protocol.md)
-asks for the complete determination, conditional on its own independent admission and
-passing committed records.
-A new target has not begun at this checkpoint.
+passed independent admission and all 31 immutable record checks before target work.
+Both the
+[author](../series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-author.md)
+and
+[adversary](../series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-adversary.md)
+have frozen inconclusive whole-domain reports within their original limits.
+The
+[fresh independent audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md)
+accepts both-sign exclusions on $[0,1/24]$, $[2/5,1/2]$ and $[23/25,1]$, together with
+the necessary inequality $L\ge2+2/(c+s)$ and the stated broader cap and SAT conditions.
+The counting inequality also applies to four independently positioned common-angle
+squares beside the six fixed axis squares, without the four block contact equations,
+contact sides or slide bounds.
+The fixed wall pattern and common angle remain required.
+
+Together with the accepted middle theorem, the complete closed remainder is
+$t\in[1/24,1/3]\cup[1/2,23/25]$, with both slide signs and all other original
+conditions. Endpoint overlap preserves every seam.
+BC281 stops inconclusively on its whole-domain criterion; no actual eleven-square
+witness or global-bound improvement is supplied.
+BC282 selects a future design of the stronger ten-square skeleton decision, using the
+accepted new premises and a complete alternative table.
+A feasible skeleton would refute that proof strategy, not H120; any later target
+requires separate admission.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

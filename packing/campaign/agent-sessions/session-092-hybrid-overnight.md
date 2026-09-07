@@ -447,7 +447,7 @@ session:
     objective: Attempt the complete admitted full-angle signed-release determination with independent writers, preserving a fresh audit and a separate closing-scope assessment.
     commitment: BC-281
     bead: think-ilpc
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Maximal wall-core work has accepted partial controls but no whole-model result; the admitted full-angle remainder materially expands the already excluded middle-angle family without a new engine.
     budget_minutes: 30
@@ -457,10 +457,54 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: Any target work before passing committed records, changed source/domain or missing seam, numerical target, active writer reasoning exchange, actual worker deadline, or failure to launch by12:45.
     fallback: Preserve non-invocation or the exact unresolved result; no fitted subdomain or automatic retry. Reserve20 minutes for the fresh audit after both writers freeze, ending no later than13:35.
+    outcome: Both writers froze within their original caps with exact partial exclusions and no full-domain determination or actual eleven-square witness. Author proposes both-sign coverage through t=1/2 and larger closed axis neighborhoods; all new mathematics awaits the fresh audit.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-adversary.md
+    stop_reason: Author mathematics froze13:02:35 and final checks13:03:28; adversary mathematics froze12:57:01 and checks12:58:26. Coordinator resumed13:08:27 after context restoration and grants no target extension.
+    next_action: Fresh independent audit of both frozen reports, then a full immutable checkpoint and explicit final reprioritization.
+  - workflow: insight-iteration
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Independently audit both frozen full-angle partial reports and state the exact accepted coverage and unresolved remainder.
+    commitment: BC-281
+    bead: think-ilpc
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: Both independent writers have terminal receipts; a fresh reader has not read either target argument and can judge the proposed larger exclusion before it is integrated.
+    budget_minutes: 20
+    started_at: '2026-09-07T13:10:00Z'
+    deadline_at: '2026-09-07T13:30:00Z'
+    expected_output: Accepted or refused exact partial lemmas, complete sign and angle coverage inventory, and a clear whole-target disposition with no global-bound promotion.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: New target work, unsupported transfer or missing boundary, producer reasoning exchange before freeze, or13:30 deadline; absolute scientific endpoint remains13:35.
+    fallback: Retain any exact unaudited implication as unaccepted, close the bounded target inconclusively and select only a future changed premise during final reprioritization.
+    outcome: Independent audit accepts all stated partial BC281 claims and their exact reusable scope. Both priority assessments are terminal; the complete family and global bound remain unresolved.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md, packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md]
+    stop_reason: All three reviews ended by13:25:01 within their original caps. The bounded scientific attempt receives no extension.
+    next_action: Enter final W5 allocation and validation, then W10 session closeout; select a future complete skeleton design without executing it.
+  - workflow: efficiency-loop
+    focus: efficiency
+    recording: contemporaneous
+    clock_role: work
+    objective: Publish the audited angular remainder and one next design entry, reconcile actual costs and run the final immutable validation checkpoint.
+    bead: think-0yfe
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Five completed phases follow W5 phase14. BC281 yields accepted partial exclusions, the boundary route has no ready changed premise and source exp128 closes the fixed-support avenue; allocation and measured validation now take priority.
+    budget_minutes: 30
+    started_at: '2026-09-07T13:27:00Z'
+    deadline_at: '2026-09-07T13:57:00Z'
+    expected_output: Accepted coverage and exact remainder in native records, one sequential future design commitment, reconciled ownership and costs, and an immutable full checkpoint with its actual pass or pending scope.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --jobs 2 --inner-jobs 1
+    kill_condition: New scientific target or implementation, duplicate source work, changed runtime limits, unreviewed scope promotion or phase deadline.
+    fallback: Preserve any still-running immutable validation under its original command budget and report it at the next bounded reconciliation phase; no target or gate cap is extended.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Commit the final admitted native protocol and prospective assignments, pass records on that immutable revision, then dispatch independent writers before12:45. Prepare the full checkpoint before the14:11 final reserve.
+    next_action: Integrate the accepted audit, select BC282 design only, pass records and the push floor, then obtain full validation and hosted evidence before final reserve.
+
   primary_bead: think-0yfe
   status: in_progress
   budget:
@@ -1519,15 +1563,15 @@ session:
     excluded_commands: [Scientific target execution, Git and shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
   - task: BC281 complete-angle analytical author
     operator: Codex full_angle_author, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
+    outcome: Whole target inconclusive. Proposes exact both-sign exclusions on [0,1/24], [2/5,1/2] and [23/25,1], plus necessary L>=2+2/(c+s). Actual start12:38:54, mathematical freeze13:02:35, final checks13:03:28.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-author.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-author.md]
+    checks: [Independent exact hand analysis, Six native links and footer checked, Flowmark and whitespace passed, No target script or reasoning exchange]
+    uncertainty: All new statements await the fresh audit; no proof of the remaining angles or actual eleven-square witness.
+    elapsed_seconds: 1474
+    elapsed_quality: operator_reported_approximate
     next_action: Attempt the complete unchanged S_full question, with exact scope and every source/closed-cover implication; remain independent of the adversary.
     phase: 18
     budget_minutes: 30
@@ -1541,15 +1585,15 @@ session:
     excluded_commands: [Numerical targets or solvers, Reading the other active target report or exchanging reasoning, Git and shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
   - task: BC281 independent complete-angle adversary
     operator: Codex full_angle_adversary, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
+    outcome: Inconclusive whole family, with exact endpoint exclusions, full-chart individual cap-depth bound, unique top-cap and forced A inequality on c and s at least1/4, and two scalar failed-transfer controls. Actual start12:39:21, mathematical freeze12:57:01, final checks12:58:26.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-adversary.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-adversary.md]
+    checks: [Independent exact hand analysis, Six native links and footer checked, Flowmark and whitespace passed, No target script or reasoning exchange]
+    uncertainty: All new statements await the fresh audit. No full exclusion or witness; scalar controls refute positivity from angle/side bounds alone and are not feasible geometric counterexamples.
+    elapsed_seconds: 1145
+    elapsed_quality: operator_reported_approximate
     next_action: Independently seek a decisive actual-square witness or contradiction for the same complete domain and challenge all boundary and discarded-case implications.
     phase: 18
     budget_minutes: 25
@@ -1563,15 +1607,15 @@ session:
     excluded_commands: [Numerical targets or solvers, Reading the other active target report or exchanging reasoning, Git and shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
   - task: Closing-scope and global-bridge assessment
     operator: Codex closing_scope_review, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
+    outcome: Accepted-evidence assessment recommends returning to a complete unrestricted-orientation parent obligation; full-angle success alone lacks a global representative or coverage implication. Actual start12:39:49, scope freeze12:47:59, final checks12:48:54.
+    evidence: [packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md]
+    files: []
+    checks: [Accepted native evidence and source status read only, Native links and footer checked, Flowmark0.4.0 passed, Active BC281 arguments remained unread]
+    uncertainty: A future30-minute boundary-method design and15-minute independent review is only a proposed price; it must identify a new complete implication and cannot repeat the existing domain design or unchanged target.
+    elapsed_seconds: 545
+    elapsed_quality: operator_reported_approximate
     next_action: Review accepted results and parallel ownership only to identify the exact remaining global bridge and next useful agenda decision; do not read active BC281 target arguments or derive its target proof.
     phase: 18
     budget_minutes: 20
@@ -1583,7 +1627,76 @@ session:
     fallback: Freeze the exact partial result or scope assessment with its unresolved implication; no target or cap extension.
     write_scope: [attic/agenda-028-overnight/closing-scope-assessment.md]
     excluded_commands: [Numerical targets or solvers, Reading the other active target report or exchanging reasoning, Git and shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC281 fresh independent full-angle audit
+    operator: Codex closing_scope_review, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Accepts both signed new intervals, strengthened contact-independent core count and broader necessary cap/SAT conditions. Complete BC281 remains inconclusive. Actual start13:10:26, mathematical freeze13:23:21, final checks13:25:01.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md]
+    checks: [Independent exact reconstruction of every decisive implication, Seven native links and footer checked, Flowmark and whitespace passed]
+    uncertainty: The remaining closed intervals [1/24,1/3] and [1/2,23/25] retain all original conditions. No full exclusion, actual eleven-square witness or global bound.
+    elapsed_seconds: 875
+    elapsed_quality: operator_reported_approximate
+    next_action: Coordinator integrates accepted scopes and the exact remainder, then closes the bounded attempt without extending it.
+    phase: 19
+    budget_minutes: 20
+    started_at: '2026-09-07T13:10:00Z'
+    deadline_at: '2026-09-07T13:30:00Z'
+    expected_output: Exact accepted or refused lemma inventory, retained closed seams and whole-target disposition, with independent derivations for the central claims.
+    validation_command: Independent exact mathematical review of frozen sources and native link, footer and formatting checks.
+    kill_condition: New target proof beyond resolving the review, unsupported interval transfer, changed domain or13:30 deadline.
+    fallback: Mark any unfinished implication unaccepted and retain the exact audit gap without extending the target.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md]
+    excluded_commands: [Numerical targets or solvers, Git and shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: Final boundary-route decision assessment
+    operator: Codex capacity_protocol, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: No ready changed boundary-capacity premise. Proposes only20-minute design and15-minute independent audit of an exact single-angle elimination retaining all ten actual neighbors, with complete degeneracy and case counts. Actual start13:12:32, freeze13:23:34, final checks13:24:27.
+    evidence: [packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md]
+    files: []
+    checks: [Read-only comparison with frozen native evidence, Links and footer checked, Flowmark and whitespace passed]
+    uncertainty: The proposed finite elimination equivalence and meaningful simultaneous-angle strictness control remain unproved; no boundary target is ready.
+    elapsed_seconds: 715
+    elapsed_quality: operator_reported_approximate
+    next_action: Coordinator reconciles this assessment with the independent audit and publishes one next design entry without executing it in closeout.
+    phase: 19
+    budget_minutes: 15
+    started_at: '2026-09-07T13:12:00Z'
+    deadline_at: '2026-09-07T13:27:00Z'
+    expected_output: A concise prioritized future proof obligation, exact dependency and refusal condition, distinguishing a new useful premise from repeated domain design or unchanged model search.
+    validation_command: Read-only comparison against accepted BC277 through BC279 domains, model controls and independent audits.
+    kill_condition: New target derivation or run, repeated domain-design work, unpriced broad machinery or13:27 deadline.
+    fallback: State that no ready changed premise has been identified and defer the unchanged target explicitly.
+    write_scope: [attic/agenda-028-overnight/final-boundary-priority.md]
+    excluded_commands: [Scientific targets or solvers, Git and shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: Final release and certificate-route decision assessment
+    operator: Codex release_model_review, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Select a complete residual skeleton design after BC281 audit;30 worker-minutes for design/admission,105 through a later target audit versus220–250 for a full family adapter. Actual start13:12:23, freeze13:21:51, final checks13:22:59.
+    evidence: [packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md]
+    files: []
+    checks: [Read-only comparison with frozen native evidence, Links and footer checked, Flowmark and whitespace passed]
+    uncertainty: Prices are proposed caps, not measured runtimes. An explicit new necessary implication is required before a target; a ten-square witness is not an eleven-square packing.
+    elapsed_seconds: 636
+    elapsed_quality: operator_reported_approximate
+    next_action: Coordinator reconciles this assessment with the independent audit and publishes one next design entry without executing it in closeout.
+    phase: 19
+    budget_minutes: 15
+    started_at: '2026-09-07T13:12:00Z'
+    deadline_at: '2026-09-07T13:27:00Z'
+    expected_output: Concrete next proof or interface obligation, prerequisite controls and separate proposed design, implementation, audit and target prices, with no readiness or global-bound overclaim.
+    validation_command: Read-only comparison against accepted BC261 controls, the admitted BC280 and BC281 scope, and frozen author and adversary reports.
+    kill_condition: New target mathematics, adapter implementation, calling unaccepted lemmas accepted or13:27 deadline.
+    fallback: Preserve the exact missing premise and recommend no numerical target until its full inclusion and controls are accepted.
+    write_scope: [attic/agenda-028-overnight/final-release-priority.md]
+    excluded_commands: [Scientific targets or solvers, Code implementation, Git and shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
   outputs:
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-author.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-adversary.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-protocol-review.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-independent-review.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-domain-review.md
@@ -1620,6 +1733,12 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
   checks:
+  - The accepted accounting tool refreshed the interval through13:14:22UTC. Its before baseline is identical and every cumulative timing field is nondecreasing. The incomplete live delta records62075.133 agent-seconds over24190 elapsed active seconds, including37885.133 overlap seconds; four tasks remain live.
+  - Fresh13:13 read-only source inspection at41afa5ec records independently accepted exp128, fixing the complete current Trump D4 support optimum at11 and refuting H099 only there. Source BC265/H116 now owns changed-resource comparison. Our IDs remain unchanged. Fresh fetch leaves main atdd36800e and PR110 mergeable with all required bdbfc054 checks green.
+  - Both BC281 writers froze within their original caps. Phase19 reserves the fresh reader through13:30 and two read-only priority assessments through13:27. No new scientific target or numerical work is allocated. The shared host has one source-owned exhaustive validation process at13:13; the final full replay is planned after its expected completion, with load checked again before launch.
+  - All required hosted checks atbdbfc054 are green as observed12:48UTC. Its checks tier ran90.87seconds with unchanged code and runtime thresholds, compared with86dbff43's retained150.07-second failure. This is the new checkpoint's pass, not a causal attribution or rewriting of the older failure.
+  - Committedbdbfc054 passed all31 immutable record steps in32.51seconds before dispatch, then45 push steps in117.50seconds with604 tests and3 deselected. It was pushed12:43UTC. Hosted validate is successful as observed12:45; the final required rollup is tracked separately.
+  - Fresh BC281 author first clock12:38:54 and independent adversary12:39:21 precede the12:45 launch limit; their original13:06 and13:01 stops remain unchanged. The independent closing-scope reviewer started12:39:49, stops12:56 and does not read active target arguments. Every fresh worker receives the committed native premises without unrelated inherited history.
   - The fresh shared bead-tree replay passes after the two source-completion status reconciliations. The original hosted86dbff43 failure is retained; this scoped invariant replay is not a hosted runtime pass.
   - BC279 audit accepted both six-core controls and scoped insertion/edge lemmas by12:25:44. BC280 domain admission finished12:24:41; BC281 native protocol GO and final checks finished12:33:54. Both scientific target writers remain unstarted until their committed records pass.
   - Coordinator inspected the source-owned completion record and issue note directly at12:31UTC, then reconciled only the two stale child statuses. Think-9m5q completed implementation with41 controls and independent review; think-iqwv completed its named fixes with the retained147.88-second push pass. Parent, ownership, source code and scientific scope remain unchanged. A fresh bead-tree check is due; no runtime threshold changes.
@@ -1665,7 +1784,7 @@ session:
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-092.yaml
   stop_reason: null
-  next_action: BC281 domain and native protocol are independently admitted. Phase18 binds prospective writer deadlines13:06 and13:01, with a separate accepted-evidence scope assessment through12:56. Commit and pass immutable records before dispatch, latest12:45; reserve20-minute fresh audit and absolute13:35 scientific stop. Full0e1961e2 passed; retain failed hosted receipts, repaired shared statuses and unchanged runtime bands. Final reserve14:11, endpoint14:31:12.
+  next_action: Phase20 W5 integrates the accepted BC281 partial exclusions, exact remainder and contact-independent counting scope. BC282 and think-s6e7 select only a future complete residual-skeleton design after fresh13:24 inventory. Run records, push and immutable full validation; finish W10 reconciliation inside the original14:11 reserve and14:31:12 endpoint.
 ---
 # Eight-Hour Hybrid and Release Investigation
 
@@ -1790,28 +1909,33 @@ Whole M7 and full-square D0 remain unresolved.
 BC280, bead `think-7ylp`, is complete: its full-angle domain passed independent
 admission without a defining correction.
 BC281, bead `think-ilpc`, uses the next sequential ID under existing H120. Its native
-protocol received independent GO and final checks at12:33:54. Phase18 binds the
-independent writers through13:06 and13:01, and a separate accepted-evidence scope
-assessment through12:56. No target begins before the committed protocol passes records;
-latest launch12:45 and absolute scientific/audit endpoint13:35 remain fixed.
-Reserve a fresh20-minute reader after both writers freeze, then the measured full
-checkpoint and 14:11 final reserve.
+protocol received independent GO and final checks at 12:33:54. The committed `bdbfc054`
+record gate passed in 32.51 seconds before actual writer starts at 12:38:54 and
+12:39:21. Both writers froze within their original caps, with exact partial results and
+the whole-domain question inconclusive.
+Phase19 reserves the fresh independent reader through 13:30 and two read-only priority
+assessments through 13:27. The absolute scientific endpoint remains 13:35. Prepare the
+immutable full checkpoint after the audit and retain the 14:11 final reserve.
 Fresh workers receive only the frozen native premises, avoiding unnecessary inherited
 history while preserving complete mathematical scope.
 
 Immutable0e1961e2 passed all66 full checks in1686.47seconds and required hosted CI.
-Current86dbff43 passed45 push steps115.69seconds. Its hosted check failed two stale
-shared child statuses and a0.985-second runtime-band overrun.
-Coordinator reconciled only those two statuses to explicit source completion receipts;
-the fresh bead-tree check passes.
+Historical `86dbff43` passed 45 push steps in 115.69 seconds.
+Its hosted check failed two stale shared child statuses and a0.985-second runtime-band
+overrun. Coordinator reconciled only those two statuses to explicit source completion
+receipts; the fresh bead-tree check passes.
 No source ownership, scientific scope or runtime threshold changed.
-The hosted failure remains a failed receipt; a subsequent current checkpoint needs its
-own hosted result. Retain the earlier fixture, command-record and runtime failures too.
+The hosted failure remains a failed receipt.
+Current `bdbfc054` passed all required hosted checks, including the checks tier in 90.87
+seconds under unchanged limits.
+Retain the earlier fixture, command-record and runtime failures too.
 
-The current cost receipt is through12:16UTC, with an identical accepted baseline and
-nondecreasing cumulative timings.
-Source session095 and exp127 are occupied; its collision-augmented axis attempt is
-unresolved without an independent target reader.
+The current cost receipt is through 13:14:22 UTC, with an identical accepted baseline
+and nondecreasing cumulative timings.
+Source session095 and exp128 are occupied.
+Its collision-augmented exp127 axis attempt is unresolved without an independent target
+reader; independently accepted exp128 fixes the current Trump D4 support optimum at
+eleven. Source BC265/H116 owns the subsequent changed-resource comparison.
 Our BC281 allocation followed fresh local/source inventory at12:21. Check live source
 allocation again before assigning any later number.
 

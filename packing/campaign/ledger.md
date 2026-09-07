@@ -105,7 +105,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-088](agent-sessions/session-088-validation-efficiency-checkpoint.md) | completed | retrospective | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 1 | think-rwte | Continue think-xejq with explained exhaustive-family planning under W5 Phase 3 after publishing this implementation and verifying its full hosted checkpoint. Preserve complete coverage until the selection and reuse contracts pass their invalidation fixtures. |
 | [session-089](agent-sessions/session-089-agenda024-next-phases.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 14 | think-jgnv | Select BC-251, think-0za3, for the next fresh allocation with its unchanged 150-minute process cap and separate verification. Agenda024 Current Allocation owns the parallel density and angle packages. Keep the integrated PR101 line while open; do not repeat exp113, exp114 or exp115. |
 | [session-090](agent-sessions/session-090-four-hour-research.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 11 | think-9qrx | After Session090 closes, select think-qv73 under BC255 for H110's source-free fixed P12 escape instrument and independent review, then a fresh prospective experiment. The September7 priority amendment holds H107 out of the next block and selects a bounded conditional-compatibility assessment alongside H110. Agenda024 owns this revised allocation and the deferred bead. Density remains source-blocked; no exp116 retry. |
-| [session-092](agent-sessions/session-092-hybrid-overnight.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 18 | think-0yfe | BC281 domain and native protocol are independently admitted. Phase18 binds prospective writer deadlines13:06 and13:01, with a separate accepted-evidence scope assessment through12:56. Commit and pass immutable records before dispatch, latest12:45; reserve20-minute fresh audit and absolute13:35 scientific stop. Full0e1961e2 passed; retain failed hosted receipts, repaired shared statuses and unchanged runtime bands. Final reserve14:11, endpoint14:31:12. |
+| [session-092](agent-sessions/session-092-hybrid-overnight.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `efficiency-loop` (efficiency) | 20 | think-0yfe | Phase20 W5 integrates the accepted BC281 partial exclusions, exact remainder and contact-independent counting scope. BC282 and think-s6e7 select only a future complete residual-skeleton design after fresh13:24 inventory. Run records, push and immutable full validation; finish W10 reconciliation inside the original14:11 reserve and14:31:12 endpoint. |
 
 ### Workflow summary
 
@@ -115,9 +115,9 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 1 | 0 | 12 | 0 |
 | `factual-review` | 3 | 0 | 41 | 2 |
-| `insight-iteration` | 19 | 1 | 71 | 2 |
+| `insight-iteration` | 19 | 1 | 72 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
-| `efficiency-loop` | 9 | 1 | 31 | 1 |
+| `efficiency-loop` | 9 | 1 | 32 | 1 |
 | `research-loop` | 9 | 4 | 56 | 7 |
 | `pipeline-improvement` | 22 | 0 | 117 | 0 |
 | `documentation-pass` | 1 | 0 | 6 | 0 |
@@ -590,7 +590,8 @@ Status: **active**. Execute a focused parallel n11 program from PR108: decide wh
 | BC-278 | research | 11 | stopped | 1 | think-dtr6 | The bounded attempt and independent audit are terminal. Uniform disk and octagon capacities of six are refuted, while full-square D0/D2 remains unresolved. The midpoint efficiency review prices a changed square model against broader release angles; no unchanged retry or strict LP comparison is admitted. |
 | BC-279 | research | 11 | stopped | 1 | think-cwve | The fresh audit accepts both exact six-core controls and fixed-insertion obstruction. Whole M7 remains unresolved. Reprice a specific new moving-center implication or complete method before another attempt; no unchanged retry. |
 | BC-280 | measurement_validation | 11 | complete | 2 | think-7ylp | Independent domain admission is complete without defining correction. BC281 owns the separate complete determination after native protocol review and passing committed records. |
-| BC-281 | research | 11 | in_progress | 1 | think-ilpc | BC280 and the native protocol have independent GO, with final checks12:33:54. Phase18 declares writer deadlines13:06 and13:01; no target begins before committed records pass. Latest target dispatch12:45, fresh20-minute audit and absolute scientific endpoint13:35 remain unchanged. |
+| BC-281 | research | 11 | stopped | 1 | think-ilpc | Independent audit accepts the exact partial exclusions and broader necessary conditions. The complete closed remainder is [1/24,1/3] union [1/2,23/25], with both signs and all original conditions. BC282 selects a new design-only skeleton decision; no unchanged attempt is extended. |
+| BC-282 | measurement_validation | 11 | ready | 1 | think-s6e7 | Choose the exact missing implication after the finite obligation table. Full skeleton exclusion would finish the source-family theorem; an exact ten-square witness would show that square10 must enter the proof and would not be a packing upper bound. No new target or adapter is authorized by this design entry. |
 
 ## Series
 

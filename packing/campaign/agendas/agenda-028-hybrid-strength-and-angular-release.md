@@ -519,7 +519,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: in_progress
+    state: stopped
     priority: 1
     question: Is the entire full physical-angle signed short-slide source-feature family empty throughout side381/100 through96/25?
     hypotheses: [H-120]
@@ -535,7 +535,45 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-release-protocol.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-protocol-review.md
-    next_evidence: BC280 and the native protocol have independent GO, with final checks12:33:54. Phase18 declares writer deadlines13:06 and13:01; no target begins before committed records pass. Latest target dispatch12:45, fresh20-minute audit and absolute scientific endpoint13:35 remain unchanged.
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-adversary.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md
+    next_evidence: Independent audit accepts the exact partial exclusions and broader necessary conditions. The complete closed remainder is [1/24,1/3] union [1/2,23/25], with both signs and all original conditions. BC282 selects a new design-only skeleton decision; no unchanged attempt is extended.
+    outcomes:
+    - scope: Both signed closed axis neighborhoods and middle-angle extension, with exact necessary geometry
+      classification: achieved
+      result: Independent audit accepts exclusions on [0,1/24], [2/5,1/2] and [23/25,1], the full-chart count L>=2+2/(c+s), full-chart individual cap bound and the stated cap/SAT lemmas on c,s>=1/4. The stronger count does not require the four block contact equations, but retains six fixed axis squares and one common angle.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md
+      disposition: retire-success
+      follow_up: null
+    - scope: Entire full physical-angle signed short-slide source-feature family
+      classification: inconclusive
+      result: Both target reports and the fresh audit completed within their original caps, without a full exclusion or actual eleven-square witness. The surviving closed intervals retain all source conditions and every square10 pose. No global bound follows.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md
+      disposition: continue
+      follow_up: think-s6e7
+  - id: BC-282
+    purpose: measurement_validation
+    owner_focus: correctness
+    instances: [11]
+    state: ready
+    priority: 1
+    question: Can the accepted new geometry support a complete, independently admissible residual ten-square skeleton decision?
+    hypotheses: [H-120]
+    budget: Future design only,20 minutes followed by10-minute independent admission, including writing and checks. Any later analytical target needs a separately committed protocol; the proposed30/25/20-minute target price is conditional and unspent.
+    entry: Independently accepted BC281 partial audit and closed remainder. Fresh local and source inventory at13:24:29UTC found no BC282 or later commitment; think-s6e7 reserves the next sequential ID. Session092 closeout selects this entry without executing it.
+    exit: Exact necessary skeleton projection with40 containment rows and45 full SAT clauses, complete closed angle/sign cover, scoped inherited lemmas and an alternative-obligation table naming a specific additional geometric implication. Otherwise retain the exact admission gap. A mere restatement or unchanged retry is refused.
+    bead: think-s6e7
+    workflows: [insight-iteration, factual-review]
+    depends_on: [BC-280]
+    parallel_group: agenda028-structure
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md
+    next_evidence: Choose the exact missing implication after the finite obligation table. Full skeleton exclusion would finish the source-family theorem; an exact ten-square witness would show that square10 must enter the proof and would not be a packing upper bound. No new target or adapter is authorized by this design entry.
 ---
 # Agenda 028 — Hybrid Strength and Angular Release
 

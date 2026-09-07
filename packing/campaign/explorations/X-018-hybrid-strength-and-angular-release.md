@@ -96,7 +96,7 @@ control cover. Its accepted scope is that direct interface.
 An eleven-square feature adapter and full case cover still need separate implementation
 and acceptance; the solver’s message alone is not a certificate.
 
-## Evidence From the Opening Execution
+## Evidence From the Overnight Run
 
 Session092 has independently closed two kinds of continuous geometry.
 The
@@ -147,46 +147,104 @@ accepts those partial results.
 An insertion obstruction for one fixed arrangement cannot establish capacity at most
 six. Another unchanged attempt has no new premise yet.
 
-BC280’s frozen
-[full-angle domain](../series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md)
-instead removes the entire common-angle restriction while preserving the source wall and
-contact pattern, signed short slides and all eleven actual-square conditions.
-It covers eight closed angle/sign children; only two inherit the accepted theorem.
-The six-child remainder is a complete, geometrically motivated next target whose success
-would materially enlarge the continuous family excluded tonight.
-Independent domain admission is complete.
-BC281’s prospective protocol and controls still require independent review and passing
-committed records before execution.
-The global representative question remains too broad for the remaining block without a
-new reduction or a concrete complete domain.
+BC280 independently admitted the complete physical chart $t\in[0,1]$ with the original
+wall/contact pattern and all eleven actual squares.
+BC281’s
+[fresh audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md)
+accepts both-sign exclusions on $[0,1/24]$, $[2/5,1/2]$ and $[23/25,1]$. Combined with
+the accepted middle interval, these leave
 
-Source H124’s accepted diagonal-band cover and unresolved near-axis obligation remain
-with its separate coordinator.
-At12:16 UTC, its collision-augmented exp127 producer returned `no_chain`, with no
+$$
+t\in[1/24,1/3]\cup[1/2,23/25]
+$$
+
+with both slide signs, every original parameter and all actual-square conditions.
+Endpoints overlap proved regions.
+The full-family determination remains inconclusive.
+The audit also accepts $L\ge2+2/(c+s)$. This count needs only the six fixed axis squares
+and four independently positioned squares with one common orientation; their mutual
+block contact equations and slide bounds are unnecessary.
+Its wall and common-angle restrictions still prevent a global-bound inference.
+
+The source branch at `41afa5ec`, read at 13:13 UTC, records independent acceptance of
+exp128: the complete current Trump D4 support has optimum mass exactly eleven.
+Seven positive-incidence rows prove the ceiling and an independently reconstructed
+packing average attains it.
+This refutes H099 only on that fixed support.
+[PR109](https://github.com/jlevy/squares/pull/109) owns the result and subsequent
+BC265/H116 changed-resource comparison.
+Its H124 collision-augmented exp127 remains unresolved with `no_chain` and no
 independent target reader.
-This supplies neither a geometric gap nor a counterexample.
-Its source-bound seven-row support review also remains separately owned; none of these
-tasks is duplicated here.
+Neither source task is repeated here.
 
-## Ranked Portfolio
+## Final Allocation and Ranked Portfolio
 
-| Priority | Avenue and owner | Most useful next result | Why allocate attention |
-| --- | --- | --- | --- |
-| First, continue | X-016 / Agenda 024 source coordinator | H-110’s fixed-candidate decision and the next conditional-compatibility or localization obligation | Builds directly on accepted auxiliary lemmas and an already active continuation; avoid competing with its work |
-| First, remaining local allocation | X-018 / H-120 | Complete physical-angle release exclusion, exact target packing, or a precise surviving case | Uses the accepted middle-angle proof while testing the complete new remainder, after scoped capacity attempts reached unresolved moving-center obligations |
-| Reprice before another attempt | X-018 / H-118 | A changed complete-domain implication or a natural matched LP and exact surviving point | The disk and octagon bounds are false; the maximal wall-core question is unresolved, and a fixed insertion obstruction supplies no uniform upper bound |
-| First, direct-proof consumer | X-017 / H-111 and H-112 | A complete anchor case or contact-independent common-angle interval, with a useful explicit remainder | Converts accepted local methods into actual lower-bound domains; retains the shortest route to unrestricted progress |
-| Longer-term structural question | X-018 / H-121 | A precise global representative reduction or counterexample | Could reduce angular complexity substantially, but the current family exclusions supply no finite-motion or representative premise |
-| Short closure task | X-017 / BC-259, H-099 | Independent acceptance or a missing binding in the proposed seven-row ceiling | May prevent spending the night on an unchanged support that has an exact obstruction |
-| Conditional next | X-018 / H-119 | A shared-anchor gain when independent minimization is the diagnosed bottleneck | A targeted response to evidence, rather than a third speculative engine |
+**Select BC282, a future design of the complete residual skeleton decision.** The final
+W5 assessment compared three disjoint read-only reviews with the accepted mathematics.
+It favors a small analytical admission before paying for a family adapter.
+This is a judgment about readiness and useful discrimination, not a measured success
+probability. The eight-hour run does not execute this successor.
 
-Within the direct-proof consumer, first close the smaller priced continuous domain.
-Do not launch two large trees merely to give both pilots equal time.
-The highest potential payoff of the structural lane is a global representative theorem;
-its likelihood of closing overnight is unknown and its obligations are much larger than
-the first release test.
-These rankings are judgments about leverage and readiness, not measured success
-probabilities.
+Delete only square10 and its conditions from the complete audited remainder to define a
+necessary ten-square skeleton with 40 containment rows and 45 full pair clauses.
+Every original target projects into it; the converse need not hold.
+Keep the original centers, variable side, fixed features, both signs and closed
+overlaps. The accepted new count, full-chart cap bound, and cap/SAT conditions on
+$c,s\ge1/4$ supply the new premises.
+Closed siblings outside that latter region remain mandatory.
+The exact controls at $t=1/5$ and $2/3$ show why the old final positive-gap bounds do
+not transfer from angle and side ranges alone.
+
+Price **20 minutes for design and 10 minutes for independent admission**, including
+writing and checks.
+Require a complete table of necessary SAT alternatives, their removal
+implications, domains and boundary changes.
+It must name a specific additional geometric implication; restating the old question or
+selecting a favorable interval fails admission.
+After that new premise is independently admitted, a separately frozen 30-minute author,
+25-minute adversary and 20-minute fresh audit would cost 105 worker-minutes in total
+including preparation, with an 80-minute sequential path.
+Those later allocations are proposed caps and remain unspent.
+
+A complete skeleton contradiction would finish the source-family exclusion.
+An exact feasible ten-square skeleton, checked against all 40/45 conditions, would
+instead show that square10 must enter the argument at that pose.
+It would refute the stronger proof strategy, not H120, and would give no packing upper
+bound. An actual eleven-square witness still needs all 44/55 conditions.
+An incomplete table remains a readiness gap.
+
+| Rank | Avenue and ownership | Next useful evidence and reconsideration condition |
+| --- | --- | --- |
+| Selected next entry | X018 / BC282 / H120, `think-s6e7` | Complete residual-skeleton admission from the new exact premises. Refuse an unchanged retry or incomplete case table. |
+| Parallel, separately owned | Source X016 and X017 continuation / PR109 | Consume its accepted support optimum and later BC265/H116 design; preserve its H124 remainder and ownership. |
+| Next boundary preparation candidate | X018 / H118 | A 20-minute generic design and 15-minute independent audit of exact elimination of one residual angle while retaining walls and all ten actual neighbors. Require a finite event rule, all coefficient/root degeneracies, explicit case counts and a valid simultaneous-angle strictness control. No such rule or control is admitted yet. |
+| Deferred implementation | X017 / BC261, sole interface owner | Add independently enclosed retained-feature rows and a complete checked family cover only when a named consumer needs them. Estimated allocation through a first target audit is 220–250 worker-minutes; current small controls do not measure that cost. |
+| Preserved broad consumer | X017 / H111–112 | Complete anchor or contact-independent common-angle domains after their own controls. Do not duplicate them through the local release lane. |
+| Conditional only | X018 / H119 | A diagnosed common-anchor correlation loss with a sharp static comparator. No such diagnosis was obtained in this run. |
+| Deferred structural question | X018 / H121 | A concrete global representative or finite angle-elimination premise. The present wall-pattern exclusions do not supply one. |
+
+The boundary route has greater potential relevance to a necessary parent cover, but its
+current information does not justify another capacity attempt.
+Exact elimination would have to preserve one square’s same angle against all its
+neighbors; separate pairwise angle choices lose that information.
+Merely writing an existential constraint or invoking a general elimination engine
+supplies no new method.
+Its remaining continuous parameters and case growth must be priced before a target.
+
+The adapter alternative has three missing obligations: source-family inclusion,
+independent feature-error reconstruction and complete SAT/angle coverage.
+Retaining absolute centers can reuse the accepted physical row errors, but feature
+equations need their own errors.
+A complete known-middle-family calibration must precede any new remainder target.
+One successful selected leaf is insufficient.
+No second exporter, generic proof framework or numerical campaign is selected here.
+
+BC282 was assigned after a fresh local/source inventory at 13:24:29 UTC found no such
+commitment. X018 retains H118–121 and BC269–282; source H122–124, exp121–128 and
+sessions091/093/094/095 stay separate.
+This run uses session092 and no new H or experiment identifier.
+The next task starts from the owning agenda and bead; it does not restart BC281 or
+receive another eight hours from this handoff.
 
 ## The Comparison That Earns a Larger Run
 
