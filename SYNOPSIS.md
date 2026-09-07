@@ -203,6 +203,10 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [BC-273: Analytical Attempt on the Frozen Middle-Angle Domain](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-author.md) | research synthesis | record | retained | — |
+| [BC-273 — Independent Analytical Adversary](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md) | research synthesis | record | retained | — |
+| [BC-273: Independent Acceptance of the Analytical Release Exclusion](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md) | dated review record | record | retained | — |
+| [BC-273: Independent Cap and Scope Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-cap-scope-review.md) | dated review record | record | retained | — |
 | [BC-273: Prospective Analytical Release Attempt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-release-protocol.md) | implementation plan | record | retained | — |
 | [BC-261: Independent Review of the Uniform Leaf Producer](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-261-uniform-leaf-review.md) | dated review record | record | retained | — |
 | [BC-273: Independent Review of the Segment 9–10 Release Domain](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-independent-review.md) | dated review record | record | retained | — |

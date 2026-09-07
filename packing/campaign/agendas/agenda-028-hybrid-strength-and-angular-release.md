@@ -147,7 +147,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 1
     question: Can H120 close a new rank-nine release domain at variable side below 96/25?
     hypotheses: [H-120]
@@ -170,15 +170,36 @@ agenda:
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-independent-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-release-protocol.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-cap-scope-review.md
     workflows: [insight-iteration, factual-review, research-loop]
     depends_on: []
     parallel_group: agenda028-release
     program: n11-hybrid-strength-and-angular-release
     next_evidence: >-
-      Expand to a different released edge or wall pattern only if a reusable
-      argument closes new geometry. If work returns only source-cell samples or
-      already-closed local boxes, record that limitation and return to BC275.
-      A finite-motion or stationary-minimizer claim needs separate premises.
+      BC275 reprices a changed block-angle, slide or wall/contact scope using the
+      accepted ten-square cap contradiction. The full declared T+ is closed,
+      including all square10 orientations; do not fund its cavity adapter or
+      repeat the unchanged target. Global normal-form claims remain separate.
+    outcomes:
+    - scope: The full closed source-feature T+ at variable side from381/100 through96/25, block half-angle in[1/3,2/5], slides in[0,1/4] and every square10 orientation
+      classification: achieved
+      result: >-
+        Independent mathematical audit accepts a contradiction from the
+        ten-square skeleton's containment, complete necessary SAT alternatives
+        and top-cap geometry. The exact final gap is at least2/87. Square10
+        parameters are unused, so the original middle-angle target and both
+        angle siblings close together. Legal contacts and recontacts remain
+        included. This is an analytical proof, not a machine replay or global bound.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-cap-scope-review.md
+      disposition: retire-success
+      follow_up: think-1v6g
   - id: BC-274
     purpose: research
     owner_focus: insight
@@ -239,19 +260,23 @@ PR107 landed the plans at `dd36800e`; integration bead `think-0yfe` owns the new
 `codex/n11-hybrid-overnight` execution branch.
 The owner authorized approximately eight hours, 06:31–14:31 UTC on September 7, with
 pushed checkpoints at hours 2, 4, 6 and 8. The opening design and proof-contract review
-are retained. Shared certificate implementation and independent release-model review are
-active; no target experiment has yet been admitted.
+are retained.
+Independent geometry reconstruction and a complete two-square control cover
+are accepted at their direct scope.
+The first analytical release attempt is independently accepted: the ten-square skeleton
+is impossible throughout the declared $T_+$, for every square10 orientation.
+No numerical target experiment has been admitted.
 
 ## Independent Work, Shared Evidence
 
 X-016’s continuing source program retains H-110 and conditional compatibility.
 X-017 / Agenda 027 retains H-111–117, BC-258–268, the complete anchor and six-plus-five
 pilots, support adoption, physical KKT review, and the sole BC-261 geometry interface.
-This agenda adds X-018, H-118–121 and BC-269–275; its execution takes session-092.
-Source session-091 and exp-121 are already occupied.
-An unpublished source H-118 collides with the published allocation; cross-task
-coordination awaits the owner’s explicit approval, and this run allocates no new
-hypothesis or experiment ID at launch.
+This agenda adds X-018, H-118–121 and BC-269–275; its execution takes session-092. Fresh
+source inventory at 08:16 UTC places its continuation in sessions091 and093, H122–124
+and experiments121–123. Its owner independently reconciled the former unpublished H118
+collision before publication; no cross-task message was sent.
+This execution retains session092 and allocates no new hypothesis or experiment ID.
 Recheck live allocations before claiming any later ID; a next-ID pointer is not a
 reservation.
 
@@ -280,11 +305,14 @@ before pricing a compute run on the same host.
 | First target | BC-271 runs one prospectively frozen determination | Independently replay it; run H-120 only after its separate readiness decision | New domain, scoped obstruction or explicit unresolved remainder |
 | Checkpoint | BC-275 compares strength, proof work and cost | Reconcile useful evidence with X-017; preserve the source continuation | Expand one demonstrated representation, or select the next missing mathematical premise |
 
-There is currently **no ready machine-only queue** for these new questions.
-The existing LP helper chooses branches from a feasible source pose and does not export
-the required infeasibility dual.
-Building and reviewing one real uniform leaf is the first enabling task.
-The unpublished spike receipts are not a substitute for it.
+There is currently **no ready eleven-square machine-only queue** for these questions.
+The direct instrument now exports exact infeasibility duals and independently
+reconstructs uniform rational cells, with a complete two-square control cover.
+An H120 adapter must still enclose the angle-dependent feature centers or keep them as
+variables with uniformly enclosed feature equations.
+The accepted fixed-center error estimate does not automatically cover that dependency.
+The accepted analytical contradiction closes this pilot without that adapter, so it
+earns no further implementation allocation for the unchanged domain.
 
 Once a producer and independent reader pass controls, a longer run can process one
 frozen exact-certificate queue while a separate adversary proposes packings in the same

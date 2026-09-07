@@ -19,7 +19,7 @@ hypothesis:
     Explicit variable-side release-domain equations and feature bounds, complete
     geometric alternatives, an exact or uniformly enclosed certificate and an
     independent reader; a separately controlled adversarial proposer.
-  instrument_ready: false
+  instrument_ready: true
   regime: >-
     Eleven squares; retain six specified positive-length segments and nine flush
     wall incidences from the PR108 graph; preserve the release equality seam and
@@ -32,10 +32,12 @@ hypothesis:
   registered: '2026-09-07'
   notes: >-
     The direct-exclusion specialization of H-TBD-RELEASE, owned by BC273.
-    Session092 selects a compact source-feature pilot and a middle-angle child;
-    independent model acceptance is complete; implemented controls and the
-    target-specific inclusion and coverage proof precede any determination.
-    No finite-motion theorem is claimed.
+    Session092's independently audited analytical contradiction excludes the
+    entire frozen middle-angle child and, because it uses only the ten-square
+    skeleton, the already-defined T+ for every square10 orientation. Readiness
+    refers to that analytical proof and audit, not an H120 uniform-LP adapter.
+    Other block angles, negative or longer slides and changed wall/contact
+    patterns remain open. No finite-motion theorem or global bound is claimed.
 ---
 # H-120 — Rank-Nine Release Exclusion
 
@@ -66,8 +68,8 @@ premises and acceptance rule.
 
 Session092’s
 [release design](../series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md)
-gives explicit ten-parameter equations, positive segment margins and a uniform strict
-forbidden-center cover as the next obligation.
+gives explicit ten-parameter equations, positive segment margins and the complete
+geometric definition of the selected pilot.
 The retained top-wall center alone puts the target outside the named local ball, as
 independently checked in the
 [direct-contract review](../series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md).
@@ -76,8 +78,33 @@ The
 accepts the complete model, parent-control binding and strict cavity-cover equivalence.
 The rank-nine statement concerns the retained equality graph; allowed recontact can
 raise the full graph rank.
-The pilot has not been excluded, and its instrument remains unready pending independent
-geometric replay and complete target coverage.
+
+The
+[analytical adversary’s argument](../series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md)
+now excludes the ten-square skeleton itself.
+The
+[independent whole-argument review](../series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md)
+accepts every used separating alternative, exact range and legal-contact boundary; a
+[separate cap review](../series/series-000-smoke-and-calibration/results/agenda-028/bc-273-cap-scope-review.md)
+checks the delicate open-interior and closed-base distinction.
+The decisive inequalities require both $B+b\ge J$ and $B+b\le M$, with $J-M\ge2/87>0$
+over the declared domain.
+
+This answers the selected question affirmatively for the entire closed $T_+$:
+$381/100\le L\le96/25$, $1/3\le t\le2/5$, $0\le a,b\le1/4$, and the declared center,
+wall and contact-side conditions, for every $v\in[0,1]$. It includes the original
+$T_{\rm mid}$, both square10 angle siblings, both axis lifts, equal angles, zero-slide
+seams and allowed recontacts.
+No square10 condition is used in the contradiction, so the all-angle conclusion follows
+by projection rather than by an added target attempt.
+
+This is an independently audited analytical result, without a machine proof replay.
+It closes new continuous source-feature geometry beyond the named local ball, while
+leaving the global $n=11$ bracket unchanged.
+Different block angles, negative or larger slides, short or vanishing segments, and
+changed contact-side or wall assignments remain explicit open scopes.
+The independent author’s partial compartment results are retained in its
+[separate report](../series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-author.md).
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

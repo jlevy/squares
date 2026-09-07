@@ -369,6 +369,105 @@ found no trailing blanks; all five linked files existed; the guideline-footer co
 one; and the formatted report was reread for mathematical meaning.
 No background command remains.
 
+## Phase-4 Acceptance: Independent Reader and Two-Square Cover
+
+The finished [`uniform_cell_check.py`](../../../../../src/sqpack/uniform_cell_check.py)
+and [`uniform_cover.py`](../../../../../src/sqpack/uniform_cover.py) are accepted for
+independent rational selected-cell replay and the complete flat cover of one declared
+two-square root. No soundness correction was found.
+This closes the corresponding phase-3 pending reader and small-control reviews; it does
+not accept an eleven-square cover or the H-120 feature-family attachment.
+
+The reader imports public receipt types but calls neither the producer’s geometry
+builder and selected-axis assembler nor its Farkas checker.
+It independently derives the midpoint corners from $(c+s)/2$ and $(c-s)/2$, constructs
+normals $(f,-e)$, and rebuilds every wall row, sixteen-corner pair conjunction, uniform
+allowance and variable bound.
+Its four-endpoint center-difference maximum agrees with the producer’s bound.
+The complete reconstructed midpoint LP, outer LP and error tuple must equal their stored
+counterparts, including the objective, row order, labels, coefficients and right-hand
+sides. A direction change therefore cannot hide behind an unchanged pair label.
+
+The reader revalidates nested descriptor fields without relying on their constructors.
+Stored interval endpoints, matrix entries, errors, identities and dual entries must be
+actual `Fraction` objects.
+For those rational fields, bool, int, float, NaN and substituted scalar representations
+are refused at this receipt boundary; producer constructors may normalize ordinary input
+integers before producing the receipt.
+Exact `zero` and `one` are checked.
+The reader independently sums the dense dual, requires nonnegative entries, exact
+cancellation in every column and a strictly negative weighted right-hand side, and
+returns the recomputed positive gap.
+It consumes no asserted gap or solver status.
+
+The cover reader takes an authoritative `expected_root` separately from the packet.
+It revalidates both roots and requires equality.
+Each leaf must retain exactly that root’s center boxes, actual half-angle intervals and
+variable-side interval, and must choose pair `(0, 1)` with one of the four axis
+positions and two signs.
+Requiring eight leaves and equality with the eight-element alternative set also rules
+out duplicates. Leaf order is immaterial.
+Every leaf is then checked by the independent rational reader; one invalid or unresolved
+leaf prevents acceptance.
+
+The coverage implication is complete at this scope: every legal two-square packing in
+the declared closed root has at least one of those directed separating axes.
+Its parameters therefore satisfy a corresponding child’s physical conditions and their
+uniform outer rows. A positive Farkas contradiction in every child excludes every such
+packing. Children share the entire root domain, so no angle or center seam disappears
+through interval subdivision.
+Weak geometry preserves touching, coincident angles and axis endpoints; duplicate
+physical axes need no deduplication argument because all eight alternatives remain.
+The format has no recursive references, symmetry metadata or lemma substitutions whose
+extra implications would need checking.
+
+The caller must supply the intended root independently rather than adopting a root from
+an untrusted proof packet.
+A valid proof for a narrower, reflected or otherwise different root certifies only that
+other root. The new root-mismatch controls exercise this distinction with independently
+valid restricted leaves and a valid reflected packet, rather than merely corrupting
+their arithmetic.
+
+The focused replay ran once from `packing/`:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src \
+  /Users/levy/wrk/github/squares/packing/.venv/bin/python3 \
+  -m pytest -q -p no:cacheprovider \
+  tests/test_exact_lp_infeasibility.py tests/test_uniform_cell.py \
+  tests/test_uniform_cell_check.py tests/test_uniform_cover.py
+```
+
+It reported `31 passed in 0.61s`, with no skipped test reported.
+The new controls cover all directed normal owners, sign and physical-row mutations,
+stale angles and bounds, lossy nested receipt fields, nonpositive or corrupted duals,
+missing or duplicated alternatives, invalid individual leaves, restricted or reflected
+root substitution, unsupported reference metadata, and feasible touching in every
+zero-width alternative.
+The positive-width complete-cover control also varies side over $[9/5,19/10]$;
+acceptance is not confined to a fixed-side LP. Widened rows have a displayed feasible
+outer point and refuse stale duals.
+These controls corroborate the uniform implication proved in the preceding review;
+endpoint sampling is not promoted to a uniform proof.
+
+Ruff and BasedPyright passed on the two new modules and their tests, with zero type
+errors, warnings or notes.
+The coordinator’s separate record, mutation and pre-push checks were not rerun or
+independently claimed by this slice.
+H-120 still needs its own domain inclusion or sound feature substitution, complete
+target coverage, source controls and scientific determination.
+No target theorem work was performed here.
+
+The phase-4 audit began at the actual clock read `2026-09-07T07:51:00Z`; the parent
+phase began at `07:44:12Z` and its delegation wave at `07:49:50Z`. Only this addendum
+was written. No code, test, Git, registry, ID or dependency change was made by this
+reviewer. The terminal checkpoint was `2026-09-07T07:56:28Z`, 5 minutes 28 seconds (328
+seconds) after startup.
+Flowmark 0.4.0 passed its full auto-format check with `--no-cache`; the whitespace scan
+found no trailing blanks; all seven linked files existed; and the guideline-footer count
+was one. The formatted addendum was reread for meaning, and no background command
+remains.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

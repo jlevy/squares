@@ -226,11 +226,13 @@ No experiment or session identifier is allocated here.
 The live source continuation has already consumed session-091; future allocation must
 inspect live work again, rather than rely on an older next-ID pointer.
 
-Live inspection found the task **Squares plan X-016** executing its source continuation.
-Agenda 027 was still recorded as prepared and paused.
-Keep its assignments stable so it can be selected independently; do not describe an
-unlaunched program as an active worker.
-Agenda 028 is likewise prepared, not launched.
+At planning, live inspection found the task **Squares plan X-016** executing its source
+continuation while Agenda 027’s broad pilots remained unlaunched.
+Session092 now executes Agenda 028 and the shared BC260/261 direct work, following the
+owner’s authorization and merged PR107. The broader Agenda 027 assignments remain
+available independently.
+Source sessions091 and093 and H122–124 are occupied as of the first checkpoint’s live
+inventory; our session092 and published H118–121 remain disjoint.
 The source review’s preference to fold everything into Agenda 027 is superseded by this
 ownership decision, while its mathematical derivations remain the source record.
 

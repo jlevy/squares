@@ -118,7 +118,7 @@ session:
     objective: Attempt the unchanged complete middle-angle release determination under the frozen analytical protocol, with an independent adversary and reserved audit.
     commitment: BC-273
     bead: think-1btr
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: The direct instrument is controlled, but its missing feature attachment would expand implementation; an independently accepted analytical protocol tests the mathematics first.
     budget_minutes: 30
@@ -128,10 +128,60 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: Work before the protocol commit and passing records, changed target or omitted seam, numerical target invocation, or the phase deadline.
     fallback: Preserve incomplete mathematics and price a specific changed premise or adapter; retain the final independent audit through08:31:12Z.
+    outcome: >-
+      The independent author retained forced separations, a top-gap bound and a
+      closed right-compartment exclusion. The adversary returned a provisional
+      contradiction for the entire ten-square skeleton. Both ended before their
+      deadlines; mathematical acceptance remains with the independent reader.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md
+    stop_reason: Both independent analytical attempts terminalized; proceed only to the reserved audit.
+    next_action: End the author and adversary leases by08:11:12Z, then independently audit both completed reports under phase5.
+  - workflow: insight-iteration
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Independently audit the completed BC273 analytical arguments and preserve the first two-hour mathematical checkpoint.
+    commitment: BC-273
+    bead: think-1btr
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: The independent adversary returned a provisional whole-domain contradiction; acceptance requires a fresh reader of every SAT case and boundary.
+    budget_minutes: 20
+    started_at: '2026-09-07T08:11:12Z'
+    deadline_at: '2026-09-07T08:31:12Z'
+    expected_output: Accepted exact scope or a precise failed implication, both independent analytical reports, updated costs and a durable checkpoint.
+    validation_command: Independent mathematical audit followed by record and pre-push validation.
+    kill_condition: Unproved SAT alternative, boundary omission, expanding the frozen proof attempt, or the checkpoint deadline.
+    fallback: Preserve the candidate as unresolved with its exact missing step and choose a distinct next premise prospectively.
+    outcome: Independent whole-argument and cap audits accept the entire frozen T_mid and all-v T+ projection. Every used SAT alternative and legal-contact boundary is covered; the ten-square skeleton contradiction has margin at least2/87.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-cap-scope-review.md
+    stop_reason: The mathematical audit finished early at08:23:03Z; integration continues in the efficiency checkpoint.
+    next_action: Publish the accepted exact scope and reprice one changed mathematical premise through BC275; no further work on the completed analytical attempt.
+  - workflow: efficiency-loop
+    focus: efficiency
+    recording: contemporaneous
+    clock_role: work
+    objective: Publish the first mathematical checkpoint and select one changed scope by expected mathematical value and observed attention cost.
+    commitment: BC-275
+    bead: think-1v6g
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: The complete release pilot is analytically closed; its unused cavity adapter loses priority, while a live cost refresh unexpectedly decreases cumulative work and needs diagnosis.
+    budget_minutes: 20
+    started_at: '2026-09-07T08:24:25Z'
+    deadline_at: '2026-09-07T08:44:25Z'
+    expected_output: Pushed mathematical checkpoint, honest cost limitation and one prospectively priced successor or exact blocker, preserving parallel ownership.
+    validation_command: Record and change-reachable push validation; independent read-only comparison of existing cost receipts and research obligations.
+    kill_condition: Unpriced target proof or numerical invocation, duplicate source work, speculative performance claim, or phase deadline.
+    fallback: Preserve the accepted proof and prior cost snapshot with its cutoff; retain the exact telemetry defect or missing next premise without extending the old target.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Freeze and validate this checkpoint, then record actual shortened author and adversary leases before dispatch; no target has begun.
+    next_action: Compare changed slide, block-angle and feature scopes; diagnose the existing receipt tool without delaying publication of the mathematical evidence.
   primary_bead: think-0yfe
   status: in_progress
   budget:
@@ -373,13 +423,198 @@ session:
     fallback: Retain the exact protocol correction; no target work before commitment and record acceptance.
     write_scope: [attic/agenda-028-overnight/]
     excluded_commands: [Scientific target proof or solver work, Git or record writes, New IDs, Dependency changes, Writes outside attic]
+  - task: BC273 analytical release author
+    operator: Codex release_domain, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Forced SAT rows, a positive top-row gap, a uniform four-way cavity restriction and a closed right-compartment exclusion; three compartments remain unresolved in this independent argument.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-author.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-author.md]
+    checks: [Flowmark and whitespace checks passed; mathematical acceptance pending]
+    uncertainty: Mathematics stopped08:09:22Z and final checks ended08:10:57Z; the independent report alone leaves the whole target unresolved.
+    elapsed_seconds: 1232
+    elapsed_quality: operator_reported_approximate
+    next_action: Independent audit under the original complete target; no continuation of the author attempt.
+    phase: 4
+    budget_minutes: 30
+    started_at: '2026-09-07T07:50:25Z'
+    deadline_at: '2026-09-07T08:11:12Z'
+    expected_output: A self-contained exact mathematical argument at the whole frozen scope, or precise partial results and the remaining obligation.
+    validation_command: Independent mathematical audit under the committed BC273 analytical protocol.
+    kill_condition: Changed domain or omitted seam, numerical target or solver work, unproved implication reused as fact, or author deadline.
+    fallback: Return partial reasoning with its exact scope; no automatic continuation of this attempt.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-author.md]
+    excluded_commands: [Numerical targets or solver runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC273 independent analytical adversary
+    operator: Codex capacity_protocol, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Provisional full ten-square skeleton contradiction from complete necessary SAT reductions and top-cap geometry, with exact final margin at least2/87.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md]
+    checks: [Flowmark formatting and check passed; no numerical or solver work]
+    uncertainty: Mathematics and document review ended08:08:55Z, final formatting08:09:17Z; complete implication and equality scope require independent acceptance.
+    elapsed_seconds: 1114
+    elapsed_quality: operator_reported_approximate
+    next_action: Independent audit of both cap regimes, all SAT eliminations and exact ranges; no new target claim before acceptance.
+    phase: 4
+    budget_minutes: 20
+    started_at: '2026-09-07T07:50:43Z'
+    deadline_at: '2026-09-07T08:09:50Z'
+    expected_output: An exact feasible candidate with all proof obligations, or a rigorous obstruction to an analytical shortcut and a priced remainder.
+    validation_command: Exact mathematical membership and nonoverlap review; no numerical search.
+    kill_condition: Changed target, source-control confusion, unverified numerical fit, or adversary deadline.
+    fallback: Retain unsuccessful constructions and their exact failed premises without claiming a negative determination.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md]
+    excluded_commands: [Numerical targets or solver runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC261 final independent reader and cover audit
+    operator: Codex release_model_review, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Independently accepted full rational geometry reconstruction and separately bound complete two-square root coverage; no soundness correction required.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-261-uniform-leaf-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-261-uniform-leaf-review.md]
+    checks: [Thirty-one tests passed in 0.61 seconds, Ruff and BasedPyright clean, Formatting and links passed]
+    uncertainty: Acceptance remains selected rational cells and complete declared two-square roots; H120 feature attachment and eleven-square LP coverage remain open.
+    elapsed_seconds: 328
+    elapsed_quality: operator_reported_approximate
+    next_action: Preserve the accepted direct instrument while the independent mathematical attempts finish.
+    phase: 4
+    budget_minutes: 15
+    started_at: '2026-09-07T07:51:00Z'
+    deadline_at: '2026-09-07T08:04:50Z'
+    expected_output: Independent acceptance or concrete correction for exact scalar, row reconstruction, root binding and complete eight-alternative coverage.
+    validation_command: Focused finished-reader and complete-cover tests plus code and mathematical inspection.
+    kill_condition: Target proof participation, expanding the interface, source or registry mutation, or lane deadline.
+    fallback: Name the precise failed interface premise; no H120 LP admission.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-261-uniform-leaf-review.md]
+    excluded_commands: [Numerical targets or solver runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC273 independent analytical acceptance
+    operator: Codex direct_contracts, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Accepted the complete ten-square skeleton contradiction, the all-v T+ corollary and the author's partial lemmas; no missing premise remains at the exact declared scope.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md]
+    checks: [Independent exact SAT and geometry reconstruction, Flowmark0.4.0 and link/whitespace/footer/formula checks passed]
+    uncertainty: Wider block angles, signed or longer slides, changed features and the global packing bracket remain open.
+    elapsed_seconds: 664
+    elapsed_quality: operator_reported_approximate
+    next_action: Publish the accepted analytical scope and select a changed premise prospectively.
+    phase: 5
+    budget_minutes: 20
+    started_at: '2026-09-07T08:11:59Z'
+    deadline_at: '2026-09-07T08:31:12Z'
+    expected_output: A self-contained acceptance or rejection of every decisive implication, including exact domain and equality scope.
+    validation_command: Independent source-bound mathematical audit of all necessary SAT cases, cap geometry, ranges and identities.
+    kill_condition: A missing implication, new target construction or computation, or the checkpoint deadline.
+    fallback: Retain the exact failed premise and partial accepted lemmas; no whole-domain verdict without complete review.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md]
+    excluded_commands: [Numerical targets or solver runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC273 independent cap and scope audit
+    operator: Codex release_model_review, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Accepted connected open-cap localization, all touching boundaries, triangular section inequalities and the exact B+b upper bound; all-v projection is valid conditional on the whole contradiction.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-cap-scope-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-cap-scope-review.md]
+    checks: [Independent geometric and symbolic review, Flowmark0.4.0 format and check passed]
+    uncertainty: This focused audit leaves the full SAT contradiction to the separate whole-argument reader; broader contact and angle families remain uncovered.
+    elapsed_seconds: 408
+    elapsed_quality: operator_reported_approximate
+    next_action: Preserve the accepted cap scope and the separate whole-argument verdict.
+    phase: 5
+    budget_minutes: 10
+    started_at: '2026-09-07T08:13:07Z'
+    deadline_at: '2026-09-07T08:22:35Z'
+    expected_output: Acceptance or a concrete gap in connected open-cap localization, triangular section inequalities and the unused-square10 scope corollary.
+    validation_command: Exact independent geometric review against the original contained unit-square model.
+    kill_condition: New target construction, numerical work, or the shortened audit deadline.
+    fallback: Report the exact missing boundary or geometric implication; leave the main reader's acceptance pending.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-cap-scope-review.md]
+    excluded_commands: [Numerical targets or solver runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC275 changed-domain allocation assessment
+    operator: Codex capacity_protocol, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Rank one changed block-angle, signed-slide or wall/contact domain against the accepted skeleton proof and the source continuation; design only.
+    phase: 6
+    budget_minutes: 15
+    started_at: '2026-09-07T08:24:25Z'
+    deadline_at: '2026-09-07T08:39:25Z'
+    expected_output: A compact allocation recommendation with complete candidate domain, changed premise, price, acceptance and deferred alternatives.
+    validation_command: Compare accepted mathematical reports, retained open siblings and live source ownership; no target determination.
+    kill_condition: New target proof or computation, duplicate source allocation, or lane deadline.
+    fallback: Return the smallest missing premise and do not authorize a target.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md]
+    excluded_commands: [New target proofs or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC275 cost receipt consistency diagnosis
+    operator: Codex release_model_review, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Diagnose why the later existing task-tree delta reports less cumulative work; keep private logs and diagnostic outputs in the attic.
+    phase: 6
+    budget_minutes: 15
+    started_at: '2026-09-07T08:24:25Z'
+    deadline_at: '2026-09-07T08:39:25Z'
+    expected_output: Exact reproducible cause or smallest telemetry ambiguity, with a safe reporting disposition; no implementation change in this assessment.
+    validation_command: Read existing rollup code and compare the retained and attic receipts; reproduce only with the existing guarded tool if necessary.
+    kill_condition: Private log disclosure, one-off retained measurement, implementation expansion, or lane deadline.
+    fallback: Preserve the older published cutoff and mark totals uncertain pending a separately bounded correction.
+    write_scope: [attic/agenda-028-overnight]
+    excluded_commands: [Scientific target work, Git or shared-record mutations, New IDs, Dependency changes, Writes outside attic]
+  - task: BC275 independent portfolio challenge
+    operator: Codex release_domain, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Independently compare further source-feature closure with H118 residual compatibility and a concrete H121 structural premise; recommend the best use of the remaining night.
+    phase: 6
+    budget_minutes: 15
+    started_at: '2026-09-07T08:24:25Z'
+    deadline_at: '2026-09-07T08:39:25Z'
+    expected_output: Concise evidence-based recommendation and exact unproved global bridge, with no new target proof.
+    validation_command: Read-only comparison of the accepted reports, X018 and the live source continuation.
+    kill_condition: New target proof or numerical work, assuming a global normal form, or lane deadline.
+    fallback: Name why no new lane is ready and price the smallest useful premise.
+    write_scope: [attic/agenda-028-overnight]
+    excluded_commands: [New target proofs or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside attic]
   outputs:
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-author.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-adversary.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-independent-review.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-cap-scope-review.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-release-protocol.md
   - packing/campaign/agent-sessions/session-092-hybrid-overnight.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
   checks:
+  - Whole-domain analytical audit ended08:23:03UTC; focused cap audit ended08:19:55UTC. Both accept their declared scopes and completed before the08:31:12 deadline.
+  - The08:20:17 live cost refresh decreased previously reported aggregate work despite its later cutoff. Retain the published07:36:15 receipt while BC275 diagnoses this inconsistency; the new raw receipt is in the attic and is not promoted as a reliable total.
+  - Implementation daedeb9f passed all45 pre-push steps in262.47seconds, including926 tests with27 deselected; hosted required CI is green. Fresh fetch at08:15UTC still has main atdd36800e, an ancestor of this branch.
+  - Fresh source inventory at08:16UTC also occupies H124 and session093; no new identifier is allocated here. Another source push validation is active, so this checkpoint avoids competing full-suite work.
+  - Protocol and instrument at daedeb9f passed all 31 record checks in 19.8 seconds; the repaired phase-I budget mutation fired as expected in 1.083 seconds. The analytical author window is shortened to end08:11:12Z, preserving the full final audit.
   - PR107 merged to main at dd36800ee30d5f6fa0bf5e881fc6747df0ccc826; the branch starts there.
   - Baseline content is identical to 06ddcc4a, whose 45 local pre-push checks and required hosted fast CI passed; full mathematical source checkpoints are retained in PR107.
   - Initial source inventory found an unpublished H118 collision; fresh read-only inventory at 07:20Z confirms its owner renamed it H122 and now occupies H122-123 and exp121-123. No cross-task message was sent.
@@ -388,7 +623,7 @@ session:
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-092.yaml
   stop_reason: null
-  next_action: Commit and validate the accepted direct instrument and unchanged BC273 analytical protocol, then dispatch prospectively shortened proof and adversary leases ending by08:11:12Z; reserve the audit and checkpoint through08:31:12Z.
+  next_action: Finish the independent BC273 audit and publish the first two-hour checkpoint; next run BC275's twenty-minute efficiency allocation before choosing one changed mathematical domain.
 ---
 # Eight-Hour Hybrid and Release Investigation
 
@@ -470,9 +705,9 @@ The branch is `codex/n11-hybrid-overnight`, based on `dd36800e`. The integration
 direct-contract/interface owners remain BC260 `think-ql1j` and BC261 `think-0w2c`. No
 additional hypothesis or experiment ID is allocated by this launch.
 The source owner has independently reconciled the earlier unpublished H118 collision by
-assigning its question H122. Fresh source inventory also contains H123 and
-experiments121-123, with session091 unchanged.
-Published H118-121 stay fixed.
+assigning its question H122. Fresh inventory at 08:16 UTC also contains H123–124,
+experiments121–123 and session093 in addition to session091. Published H118-121 stay
+fixed.
 Recheck live allocations before any new registration; sequential next pointers are
 candidates, not reservations.
 
@@ -481,9 +716,10 @@ Exact band-subsystem packings prevent admission of that capacity comparison; the
 complete eleven-square residual compatibility is missing.
 The release model has independent source-corner acceptance.
 Independent reconstruction and the complete small SAT cover are accepted at their exact
-direct scope. The next mathematical attempt uses the unchanged native BC273 analytical
-protocol; record validation and an immutable protocol commit precede its dispatch.
-No H120 LP target or H118 capacity target is admitted.
+direct scope. The first mathematical attempt used the unchanged native BC273 analytical
+protocol, after record validation and an immutable protocol commit.
+Its two independent reports are terminal and the independent mathematical audit is
+active. No H120 LP target or H118 capacity target is admitted.
 Check the current phase and delegation deadlines above before continuing.
 After the final deadline, reconcile retained evidence and report the next request; start
 no further target under this block’s authorization.
