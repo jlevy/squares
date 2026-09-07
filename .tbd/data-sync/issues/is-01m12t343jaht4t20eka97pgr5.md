@@ -5,11 +5,11 @@ title: Validation gate runs 6+ min against a documented 2 min budget
 kind: bug
 status: open
 priority: 1
-version: 3
+version: 4
 labels: []
 dependencies: []
 created_at: 2026-08-27T23:50:11.313Z
-updated_at: 2026-09-07T20:06:10.785Z
+updated_at: 2026-09-07T20:39:11.483Z
 ---
 conventions.md states the tiers as: focused under ~60s, checkpoint ~2 min, deep handoff ~5 min. The actual full gate wall time is 380-440s and the 'fast behavioral tests' step alone was 366-413s, so the fast tier is 6x its budget and the full gate exceeds the deep-handoff tier.
 
@@ -26,4 +26,4 @@ Remaining, not yet addressed:
 
 ## Notes
 
-Related current evidence,2026-09-07: PR110 head03ff2102 passed correctness but GitHub checks-tier runtime failed twice at150.31s and150.24s versus99.39s baseline and1.5x band. Run34154326299 attempts1/2 retain structured timings. This is a different current tier from the original issue and does not establish its older root cause. W5 follow-up VE-004 accepts an early-start scheduling hint after six complete local48-check observations: control median93.18s, candidate71.84s,22.9% reduction, nonoverlapping ranges; source revisions1dfdb8fb/ed595fb6. Independent review admits only that local exploratory result. No exact-verifier arithmetic, threshold or worker-count change. VE-003 retains an earlier failed setup observation. Native evidence and accepted disposition committedfa8216e4. Hosted outcome and full checkpoint remain pending under think-oli1; unresolved hosted-runner variation and the original issue's other costs remain open.
+Related2026-09-07 repair on PR110: originalhead03ff2102 passed correctness but failed the checks runtime band twice at150.31s/150.24s. VE004 accepts an early-start scheduling hint after six complete48-check local observations: controlmedian93.18s, candidate71.84s,22.9% reduction, nonoverlapping ranges; frozen1dfdb8fb/ed595fb6. Independent review admits only that local exploratory result. OriginalVE003 missing-map setup failure remains retained. Firsthostedrepair d915dfa9 passed allrequiredchecks inrun34158723317, checks116.92s within unchanged band. Finalpublicationecd4a035 passed allrequiredchecks inrun34159929517. Full66checkpoint ed595fb6 passed1616.00s. No exact-verifier arithmetic, thresholds or worker counts changed. Broader hosted-runner variation and this older issue's other costs remain open; the specificPR110 publication obligation closes underthink-oli1.

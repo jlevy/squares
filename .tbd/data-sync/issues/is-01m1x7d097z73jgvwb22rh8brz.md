@@ -5,7 +5,7 @@ title: "Agenda 028: hybrid-strength comparisons and angular release at n11"
 kind: epic
 status: in_progress
 priority: 1
-version: 22
+version: 23
 spec_path: packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md
 labels:
   - agenda028
@@ -31,6 +31,6 @@ child_order_hints:
   - is-01m1ye3mfvf5n5nehfnq6ca8c2
   - is-01m1yg3q806t017napmemmx0f9
 created_at: 2026-09-07T06:03:01.798Z
-updated_at: 2026-09-07T19:18:38.994Z
+updated_at: 2026-09-07T20:39:11.221Z
 ---
-Own X018, H118-121 and BC269-282. PR107 plans landed at dd36800e. Session092 completed its eight-hour scientific block, and session096 completed BC282 design and independent admission on draft PR110, head03ff2102. The exact residual open-fiber reduction is accepted; the larger target is not admitted. Further local H120/H118 target work is parked, with H120 re-entry retained in think-k54y. Existing BC264 / think-mq0d remains the separate owner next portfolio pricing entry. Preserve X017 H111-117 BC258-268, sole BC261 interface ownership, and all landed source IDs. No BC283, new hypothesis or experiment is allocated. think-oli1 remains open for the repeated hosted runtime-band failure; mathematics and local validation receipts are published on PR110.
+Own X018, H118–121 and BC269–282. PR107 plans landed atdd36800e. Session092 completed its eight-hour scientific block and session096 completed BC282 design and independent admission on draft PR110, nowpublishedhead ecd4a035. The exact residual open-fiber reduction is accepted; the larger target is not admitted. Further localH120/H118 target work is parked, with H120 re-entry retained in think-k54y. Existing BC264 / think-mq0d remains the separately owned next portfolio pricing entry. Preserve X017 H111–117 BC258–268, sole BC261 interface ownership, and all landed source IDs. No BC283, new hypothesis or scientific experiment is allocated. EngineeringVE003 retains its failed setup; VE004 accepts a22.9% local checks-tier median improvement from early exact-verifier scheduling, preserving all48checks and runtime thresholds. The full checkpoint passed all66steps oned595fb6; finalpublicationhead ecd4a035 passed45pre-pushsteps and allrequiredhostedchecks inrun34159929517. Cost snapshots and native receipts are retained. This closes the specific session096 publication repair; broader mathematical re-entry and other owners remain separate.

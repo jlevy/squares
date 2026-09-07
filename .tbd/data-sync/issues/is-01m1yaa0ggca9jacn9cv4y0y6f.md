@@ -3,15 +3,15 @@ type: is
 id: is-01m1yaa0ggca9jacn9cv4y0y6f
 title: Review Stromquist memos and pursue systematic helper arguments
 kind: task
-status: closed
+status: open
 priority: 1
-version: 7
+version: 8
 labels: []
 dependencies: []
 created_at: 2026-09-07T16:13:03.887Z
-updated_at: 2026-09-07T20:28:46.223Z
-closed_at: 2026-09-07T20:28:46.221Z
-close_reason: Completed the requested authorship box in commit 4601fdf6 on PR112. Fast-forwarded to the latest paper edits first, preserved the updated wording, and reused the existing boxed-text style. All 45 pre-push checks passed in 102.62 seconds; screen/print layout checks and PDF visual review passed. The preview and PDF were rebuilt, and all required PR checks and the site build passed.
+updated_at: 2026-09-07T20:33:42.967Z
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
@@ -22,3 +22,5 @@ User supplied Walter Stromquist correspondence requesting thorough review of the
 Reopened: User requested a concise introduction footnote explaining the likely 1984 proof, with a direct link to Memo III. Documentation-pass continuation of the same review and PR.
 
 Reopened: User requested boxing the authorship paragraph using the explainer's existing box style. Documentation-pass continuation on the same PR.
+
+Reopened: W8 documentation-pass continuation on PR112: standardize surnames in the explainer, move source details to footnotes, balance attribution by relevance, and state clearly what the new eleven-square result proves and how it uses the established certificate method. Three bounded read-only reviews cover source credit, editorial consistency, and mathematical wording.
