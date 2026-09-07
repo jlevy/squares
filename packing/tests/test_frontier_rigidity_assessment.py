@@ -33,7 +33,17 @@ from devtools.assess_frontier_rigidity import (
 )
 from devtools.screen_translation_escape import PRIMARY_TOLERANCE, load_record, translated
 from sqpack.assurance import check_case_semantics
+from sqpack.known_best import KNOWN_BEST_CORPUS
 from sqpack.verify import float_sign, verify_packing
+
+#: The assessment's outcome at each corpus this test has seen. The 1-100 literals stay as
+#: the golden for the inspected hundred; a wider corpus is pinned here when it lands, so
+#: a record silently changing property still fails (think-93on). Each value counts the
+#: not-rigid records, the locally-rigid records, and lists the undetermined ones.
+GOLDEN_BY_CORPUS: dict[str, tuple[int, int, list[int]]] = {
+    "n=1..100": (84, 12, [28, 40, 68, 69]),
+    "n=1..200": (176, 16, [28, 40, 68, 69, 103, 105, 110, 131]),
+}
 
 ROOT = Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
@@ -53,7 +63,7 @@ def _rigidity(n: int) -> dict:
 
 def _by_property() -> dict[str, list[int]]:
     grouped: dict[str, list[int]] = {}
-    for n in range(1, 101):
+    for n in KNOWN_BEST_CORPUS.numbers:
         grouped.setdefault(_rigidity(n)["property"], []).append(n)
     return grouped
 
@@ -61,17 +71,18 @@ def _by_property() -> dict[str, list[int]]:
 def test_every_record_now_carries_an_assessment() -> None:
     """Null meant "not assessed". Nothing is unassessed any more."""
     grouped = _by_property()
-    assert sum(len(v) for v in grouped.values()) == 100
+    not_rigid, locally_rigid, undetermined = GOLDEN_BY_CORPUS[KNOWN_BEST_CORPUS.label]
+    assert sum(len(v) for v in grouped.values()) == KNOWN_BEST_CORPUS.count
     assert sorted(grouped) == ["locally-rigid", "not-rigid", "undetermined"]
-    assert len(grouped["not-rigid"]) == 84
-    # Ten tilings plus two first-party arguments: n=11's tangent cones and n=5's T-014.
-    assert len(grouped["locally-rigid"]) == 12
-    assert grouped["undetermined"] == [28, 40, 68, 69]
+    assert len(grouped["not-rigid"]) == not_rigid
+    # The tilings plus two first-party arguments: n=11's tangent cones and n=5's T-014.
+    assert len(grouped["locally-rigid"]) == locally_rigid
+    assert grouped["undetermined"] == undetermined
 
 
 def test_rigid_records_are_exactly_the_tilings_plus_n5_and_n11() -> None:
     """Rigidity is claimed only where an argument exists, never from a screen miss."""
-    perfect = [n for n in range(1, 101) if math.isqrt(n) ** 2 == n]
+    perfect = [n for n in KNOWN_BEST_CORPUS.numbers if math.isqrt(n) ** 2 == n]
     assert _by_property()["locally-rigid"] == sorted([*perfect, 5, 11])
     for n in perfect:
         assert _rigidity(n)["evidence"] == [TILING_EVIDENCE]
@@ -85,7 +96,7 @@ def test_rigid_records_are_exactly_the_tilings_plus_n5_and_n11() -> None:
 
 def test_no_record_claims_rigidity_from_a_screen_miss() -> None:
     """The asymmetry that makes the screen sound: hits prove, misses do not."""
-    for n in range(1, 101):
+    for n in KNOWN_BEST_CORPUS.numbers:
         block = _rigidity(n)
         if ESCAPE_EVIDENCE in block["evidence"]:
             assert block["property"] in {"not-rigid", "undetermined"}, (
@@ -123,7 +134,7 @@ def test_the_immobile_records_are_exactly_the_tilings_and_the_annotated_four() -
     """
     cases, _excluded = screen_cases()
     immobile = sorted(n for n, case in cases.items() if case["movable_square_count"] == 0)
-    perfect = [n for n in range(1, 101) if math.isqrt(n) ** 2 == n]
+    perfect = [n for n in KNOWN_BEST_CORPUS.numbers if math.isqrt(n) ** 2 == n]
     assert immobile == sorted([*perfect, *CATALOGUE_RIGID])
 
 

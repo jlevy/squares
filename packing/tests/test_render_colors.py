@@ -10,6 +10,7 @@ from xml.etree import ElementTree as ET
 import pytest
 
 from devtools.build_known_best_atlas import frame_from_witness
+from sqpack.known_best import KNOWN_BEST_CORPUS
 from sqpack.render.color import assign_square_colors, hex_oklch, square_fill_palette
 from sqpack.render.model import (
     HueScheme,
@@ -24,8 +25,15 @@ from sqpack.render.numbers import scalar_from_decimal
 from sqpack.render.style import SQUARE_FILL_PALETTE, SQUARE_HUE_PALETTE
 from sqpack.witness import load_witness
 
+#: SVG files carrying indexed square fills, and those fills, per corpus (think-93on).
+GOLDEN_INDEXED: dict[str, tuple[int, int]] = {
+    "n=1..100": (211, 32017),
+    "n=1..200": (311, 47067),
+}
+
 ROOT = Path(__file__).resolve().parents[1]
 ATLAS = ROOT / "atlas"
+QUARTER_TURN = 3.141592653589793 / 2
 # Separation is measured in OkLCh, not HSL. HSL hue degrees are not
 # perceptually uniform, so they misreport how far apart two bases look: the
 # closest pair here sits 7.0 deg apart in HSL but 16.6 deg apart in OkLCh, with
@@ -347,8 +355,7 @@ def test_every_indexed_atlas_fill_matches_its_declared_color_contract() -> None:
             assert fill.attrib["fill"] == palette[hue_index][shade_index], path
         indexed_fills += len(fills)
 
-    assert indexed_files == 211
-    assert indexed_fills == 32017
+    assert (indexed_files, indexed_fills) == GOLDEN_INDEXED[KNOWN_BEST_CORPUS.label]
 
 
 def test_color_parameters_reject_nonpositive_values() -> None:
@@ -398,15 +405,20 @@ def test_right_angles_and_diagonals_are_pinned_across_the_atlas() -> None:
     exactly that case. The pin therefore compares modulo the seam.
     """
     spec = RenderSpec(overlays=frozenset())
+    # "Right angle" and "diagonal" mean what the renderer's own class tolerance says
+    # they mean, not a looser figure: n=110's six-decimal UnitSquare geometry carries a
+    # class 1.6 microradians off the axis, which the registered 1-microradian tolerance
+    # keeps distinct and therefore colors as its own class rather than as hue 0.
+    tolerance = float(spec.angle_tolerance_radians)
     right_angle_hues: set[int] = set()
     diagonal_hues: set[int] = set()
     for frame in _atlas_frames():
         for color in assign_square_colors(frame, spec).values():
-            degrees = float(color.orientation_radians) * 180 / 3.141592653589793
-            offset = min(degrees, 90 - degrees)
-            if offset < 1e-4:
+            radians = float(color.orientation_radians)
+            offset = min(radians, QUARTER_TURN - radians)
+            if offset <= tolerance:
                 right_angle_hues.add(color.hue_index)
-            elif abs(degrees - 45) < 1e-4:
+            elif abs(radians - QUARTER_TURN / 2) <= tolerance:
                 diagonal_hues.add(color.hue_index)
     assert right_angle_hues == {0}
     assert diagonal_hues == {1}

@@ -69,10 +69,16 @@ session:
       reports divergences at n <= 100 that are not transcription misses.
     fallback: Land the reparser and retention record alone; defer the builder refactor to its
       own slice.
-    outcome: null
-    evidence: []
+    outcome: All four Phase 1 gates landed (reparser with zero divergences, retention record,
+      generator, range-parameterized builder with the 1-100 family byte-identical), followed by
+      the Phase 2 tools (fetch-and-derive, calibration pinning) and the first chunk itself,
+      n = 101..200, integrated with the records tier green.
+    evidence:
+    - packing/frontier/n-101.md
+    - packing/witnesses/known-best/n-147.yaml
+    - packing/atlas/known-best/translation-escape-screen.json
     stop_reason: null
-    next_action: Phase 2, promote 101..200.
+    next_action: Push tier and a sweeps-tier timing, then chunk 2 (201..324).
   primary_bead: think-0juv
   status: in_progress
   budget:
@@ -87,7 +93,9 @@ session:
     metric: frontier cases and known-best rows retained beyond n = 100
     before: 100 frontier cases, 100 known-best rows, 101 prospective seed witnesses without
       claims, 123 located-but-unretained Kingbird cases, no composite beyond 1-100.
-    after: null
+    after: 200 frontier cases and 200 known-best rows (46 catalogue-derived, 50 grid and 4
+      UnitSquare cases added), 194 screened, 176 not rigid; 77 Kingbird cases in 201..324 still
+      to acquire; no composite beyond 1-100 yet.
   delegations:
   - task: Map the known-best atlas pipeline end to end and every hard-coded n = 1..100 site
     operator: Claude Explore delegate
@@ -244,6 +252,84 @@ session:
     elapsed_seconds: 1334
     elapsed_quality: platform_measured
     next_action: Follow-up delegate for UnitSquare overrides, credit-line methods and n = 179.
+  - task: One-time fetch-and-derive pass and range-general source plan (think-93on slice 2a)
+    operator: Claude Opus delegate
+    status: completed
+    recording: contemporaneous
+    phase: 2
+    outcome: derive_kingbird_facts fetches into memory only and writes Witness/v2 numerical
+      facts through the existing derivation; the catalogue's own removal rule reduces shared
+      pictures deterministically; the builder selects UnitSquare renderings by record source
+      key. Two real receipts at n = 101 and 147 replayed byte-identically.
+    evidence:
+    - packing/devtools/derive_kingbird_facts.py
+    - packing/tests/test_derive_kingbird_facts.py
+    files:
+    - packing/devtools/derive_kingbird_facts.py
+    - packing/devtools/build_known_best_atlas.py
+    - packing/src/sqpack/known_best.py
+    - packing/tests/test_derive_kingbird_facts.py
+    checks:
+    - Coordinator re-ran ruff, basedpyright, 54 tests and the atlas check, confirmed no
+      kingbird directory and exactly 100 witnesses, before committing 09b6e246.
+    uncertainty: Pictured integer-side cases are grids, so 107 of the 123 catalogue cases in
+      101..324 derive; the rest generate exactly.
+    elapsed_seconds: 1515
+    elapsed_quality: platform_measured
+    next_action: Run the pass for 201..324 in chunk 2.
+  - task: Pin the calibration-only layers to n = 1..100 and widen the sound screens (slice 2b)
+    operator: Claude Opus delegate
+    status: completed
+    recording: contemporaneous
+    phase: 2
+    outcome: CALIBRATION_CORPUS holds census, partitions, profile, overlays, taxonomy and
+      grammar coverage to the inspected hundred with refusal guards; the escape screen and
+      rigidity assessment follow the corpus; validate.py pins derive from the range or stay
+      pinned as calibration facts.
+    evidence:
+    - packing/tests/test_calibration_boundary.py
+    files:
+    - packing/devtools/census_known_best_chunks.py
+    - packing/devtools/profile_known_best_chunks.py
+    - packing/devtools/render_known_best_contact_overlays.py
+    - packing/devtools/census_chunk_taxonomy.py
+    - packing/devtools/certify_assembly_coverage.py
+    - packing/devtools/screen_translation_escape.py
+    - packing/devtools/assess_frontier_rigidity.py
+    - packing/devtools/validate_schemas.py
+    - packing/src/sqpack/cli/validate.py
+    checks:
+    - Coordinator re-ran ruff, basedpyright, 182 tests and the four bounded validate subsets
+      with an empty git status over atlas/known-best and frontier before committing 12e57d5f.
+    uncertainty: The open-case and screen tripwires were left as commented literals and then
+      made per-corpus goldens by the coordinator at chunk integration.
+    elapsed_seconds: 1577
+    elapsed_quality: platform_measured
+    next_action: None.
+  - task: Generator follow-ups; UnitSquare overrides, credit-line methods, the stale n = 179 form
+    operator: Claude Opus delegate
+    status: completed
+    recording: contemporaneous
+    phase: 2
+    outcome: Four credit-line phrases map to construction methods, agreeing with all 22
+      hand-transcribed cases the rules reach; UnitSquare cases reproduce 42 fields of n = 68
+      and 69; a closed form that disagrees with its own decimal becomes a typed stale-source
+      conflict; unpictured grids above 100 cite E-kingbird-grid-completeness.
+    evidence:
+    - packing/tests/test_generate_frontier_case.py
+    files:
+    - packing/devtools/generate_frontier_case.py
+    - packing/src/sqpack/kingbird_catalogue.py
+    - packing/tests/test_generate_frontier_case.py
+    - packing/tests/test_kingbird_catalogue.py
+    checks:
+    - Coordinator re-ran ruff, basedpyright, 77 tests and check_source_coverage before
+      committing 7252faa2; pictured integer-side grids were then fixed by the coordinator.
+    uncertainty: 64 catalogue cases in 101..324 keep construction_method unknown because no
+      phrase in their credit line is one the hand transcription ever mapped.
+    elapsed_seconds: 1531
+    elapsed_quality: platform_measured
+    next_action: W2 reviewer pass over the unknown methods.
   outputs:
   - docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
   checks:

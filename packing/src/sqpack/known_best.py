@@ -187,7 +187,7 @@ class CompositeSpec:
         return f"{self.stem}.png" if scale == 1 else f"{self.stem}@{scale}x.png"
 
 
-KNOWN_BEST_CORPUS = CorpusRange(first_n=1, last_n=100)
+KNOWN_BEST_CORPUS = CorpusRange(first_n=1, last_n=200)
 """The cases the known-best atlas normalizes, renders, and manifests.
 
 The honest constraint on widening it is the corpus rather than the drawing: a case needs

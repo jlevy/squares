@@ -34,9 +34,12 @@ properties:
     items:
       type: object
       additionalProperties: false
-      required: [stem, range, columns, rows, layout, square_count]
+      required: [stem, range, columns, rows, layout, square_count, totals]
       properties:
         stem: {type: string, pattern: '^known-best-[0-9]+-[0-9]+$'}
+        # The legend counts over the cases this composite draws, so the 1-100 figure's
+        # legend is fixed by its own cases rather than by the corpus.
+        totals: {$ref: '#/$defs/totals'}
         range: {$ref: '#/$defs/range'}
         columns: {type: integer, minimum: 1}
         rows: {type: integer, minimum: 1}
@@ -64,6 +67,12 @@ properties:
       catalogue: {type: string, minLength: 1}
       derived: {type: string, minLength: 1}
       absent: {type: string, minLength: 1}
+  totals: {$ref: '#/$defs/totals'}
+  entries:
+    type: array
+    minItems: 1
+    items: {$ref: '#/$defs/entry'}
+$defs:
   totals:
     type: object
     additionalProperties: false
@@ -91,11 +100,6 @@ properties:
       degree_known: {type: integer, minimum: 0}
       degree_recorded_upstream: {type: integer, minimum: 0}
       degree_derived_here: {type: integer, minimum: 0}
-  entries:
-    type: array
-    minItems: 1
-    items: {$ref: '#/$defs/entry'}
-$defs:
   range:
     type: object
     additionalProperties: false

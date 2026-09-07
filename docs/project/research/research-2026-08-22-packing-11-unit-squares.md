@@ -930,6 +930,94 @@ Use the structured form to query or plot; use these tables to read.
 | 95 | 10 | grid | — | 9.831761 | Nagamochi | 0.1682 |
 | 96 | 10 | grid | — | 9.888194 | Nagamochi | 0.1118 |
 | 97 | 10 | grid | — | 9.944272 | Nagamochi | 0.0557 |
+| 101 | `7 + (5/2)√2` = 10.53553391 | — | — | 10.055385 | Nagamochi | 0.4801 |
+| 102 | 10.61138823 | — | 8 | 10.110434 | Nagamochi | 0.501 |
+| 103 | 10.70379028 | — | — | 10.165151 | Nagamochi | 0.5386 |
+| 104 | `10 + (1/2)√2` = 10.70710678 | strip | — | 10.219544 | Nagamochi | 0.4876 |
+| 105 | 10.80784791 | — | — | 10.273618 | Nagamochi | 0.5342 |
+| 106 | 10.82297973 | — | 32 | 10.327379 | Nagamochi | 0.4956 |
+| 107 | `10 - (1/2)√2 + sqrt(1 + √2)` = 10.84666719 | — | — | 10.380832 | Nagamochi | 0.4658 |
+| 108 | 10.92591939 | extension | 144 | 10.433981 | Nagamochi | 0.4919 |
+| 109 | `6 + (7/2)√2` = 10.94974747 | hand | — | 10.486833 | Nagamochi | 0.4629 |
+| 110 | 10.99679777 | — | — | 10.539392 | Nagamochi | 0.4574 |
+| 111 | 11 | grid | — | 10.591663 | Nagamochi | 0.4083 |
+| 112 | 11 | grid | — | 10.643651 | Nagamochi | 0.3563 |
+| 113 | 11 | grid | — | 10.69536 | Nagamochi | 0.3046 |
+| 114 | 11 | grid | — | 10.746794 | Nagamochi | 0.2532 |
+| 115 | 11 | grid | — | 10.797959 | Nagamochi | 0.202 |
+| 116 | 11 | grid | — | 10.848858 | Nagamochi | 0.1511 |
+| 117 | 11 | grid | — | 10.899495 | Nagamochi | 0.1005 |
+| 118 | 11 | grid | — | 10.949874 | Nagamochi | 0.0501 |
+| 122 | `8 + (5/2)√2` = 11.53553391 | — | — | 11.049876 | Nagamochi | 0.4857 |
+| 123 | 11.60139979 | — | 12 | 11.099505 | Nagamochi | 0.5019 |
+| 124 | `6 + 4 √2` = 11.65685425 | hand | — | 11.148892 | Nagamochi | 0.508 |
+| 125 | `11 + (1/2)√2` = 11.70710678 | strip | — | 11.198039 | Nagamochi | 0.5091 |
+| 126 | 11.77617895 | annealing | 59 | 11.246951 | Nagamochi | 0.5292 |
+| 127 | `(21/2) + (1/2)√7` = 11.82287566 | extension | — | 11.29563 | Nagamochi | 0.5272 |
+| 128 | 11.82509197 | — | 40 | 11.34408 | Nagamochi | 0.481 |
+| 129 | 11.88130622 | annealing | 20 | 11.392305 | Nagamochi | 0.489 |
+| 130 | 11.91119052 | extension | 8 | 11.440307 | Nagamochi | 0.4709 |
+| 131 | 11.95654311 | — | — | 11.488088 | Nagamochi | 0.4685 |
+| 132 | 11.99143644 | annealing | — | 11.535654 | Nagamochi | 0.4558 |
+| 133 | 12 | grid | — | 11.583005 | Nagamochi | 0.417 |
+| 134 | 12 | grid | — | 11.630146 | Nagamochi | 0.3699 |
+| 135 | 12 | grid | — | 11.677078 | Nagamochi | 0.3229 |
+| 136 | 12 | grid | — | 11.723805 | Nagamochi | 0.2762 |
+| 137 | 12 | grid | — | 11.77033 | Nagamochi | 0.2297 |
+| 138 | 12 | grid | — | 11.816654 | Nagamochi | 0.1833 |
+| 139 | 12 | grid | — | 11.86278 | Nagamochi | 0.1372 |
+| 140 | 12 | grid | — | 11.908712 | Nagamochi | 0.0913 |
+| 141 | 12 | grid | — | 11.954451 | Nagamochi | 0.0455 |
+| 145 | `9 + (5/2)√2` = 12.53553391 | — | — | 12.045361 | Nagamochi | 0.4902 |
+| 146 | 12.60090778 | — | 16 | 12.090537 | Nagamochi | 0.5104 |
+| 147 | `7 + 4 √2` = 12.65685425 | hand | — | 12.135529 | Nagamochi | 0.5213 |
+| 148 | `7 + 4 √2` = 12.65685425 | hand | — | 12.18034 | Nagamochi | 0.4765 |
+| 149 | `12 + (1/2)√2` = 12.70710678 | strip | — | 12.224972 | Nagamochi | 0.4821 |
+| 150 | `5 + (11/2)√2` = 12.77817459 | extension | — | 12.269428 | Nagamochi | 0.5087 |
+| 151 | `(23/2) + (1/2)√7` = 12.82287566 | — | — | 12.313708 | Nagamochi | 0.5092 |
+| 152 | 12.83100282 | — | 84 | 12.357817 | Nagamochi | 0.4732 |
+| 153 | 12.88166676 | — | 4 | 12.401754 | Nagamochi | 0.4799 |
+| 154 | 12.93171184 | annealing | — | 12.445523 | Nagamochi | 0.4862 |
+| 155 | 12.95851389 | annealing | — | 12.489125 | Nagamochi | 0.4694 |
+| 156 | 12.98219172 | annealing | — | 12.532563 | Nagamochi | 0.4496 |
+| 157 | 13 | grid | — | 12.575837 | Nagamochi | 0.4242 |
+| 158 | 13 | grid | — | 12.61895 | Nagamochi | 0.381 |
+| 159 | 13 | grid | — | 12.661904 | Nagamochi | 0.3381 |
+| 160 | 13 | grid | — | 12.7047 | Nagamochi | 0.2953 |
+| 161 | 13 | grid | — | 12.74734 | Nagamochi | 0.2527 |
+| 162 | 13 | grid | — | 12.789826 | Nagamochi | 0.2102 |
+| 163 | 13 | grid | — | 12.83216 | Nagamochi | 0.1678 |
+| 164 | 13 | grid | — | 12.874342 | Nagamochi | 0.1257 |
+| 165 | 13 | grid | — | 12.916375 | Nagamochi | 0.0836 |
+| 166 | 13 | grid | — | 12.958261 | Nagamochi | 0.0417 |
+| 170 | `10 + (5/2)√2` = 13.53553391 | extension | — | 13.041595 | Nagamochi | 0.4939 |
+| 171 | `13 + (4/7)` = 13.57142857 | annealing | — | 13.083046 | Nagamochi | 0.4884 |
+| 172 | 13.61898899 | — | 8 | 13.124356 | Nagamochi | 0.4946 |
+| 173 | `8 + 4 √2` = 13.65685425 | — | — | 13.165525 | Nagamochi | 0.4913 |
+| 174 | `13 + (1/2)√2` = 13.70710678 | strip | — | 13.206556 | Nagamochi | 0.5006 |
+| 175 | `6 + (11/2)√2` = 13.77817459 | — | — | 13.247449 | Nagamochi | 0.5307 |
+| 176 | `(25/2) + (1/2)√7` = 13.82287566 | extension | — | 13.288206 | Nagamochi | 0.5347 |
+| 177 | 13.82302875 | — | 32 | 13.328828 | Nagamochi | 0.4942 |
+| 178 | `13 - (1/2)√2 + sqrt(1 + √2)` = 13.84666719 | extension | — | 13.369317 | Nagamochi | 0.4774 |
+| 179 | 13.89540982 | annealing | — | 13.409674 | Nagamochi | 0.4857 |
+| 180 | 13.9351393 | annealing | — | 13.4499 | Nagamochi | 0.4852 |
+| 181 | 13.95698416 | annealing | — | 13.489996 | Nagamochi | 0.467 |
+| 182 | 13.97442961 | annealing | — | 13.529964 | Nagamochi | 0.4445 |
+| 183 | 14 | grid | — | 13.569805 | Nagamochi | 0.4302 |
+| 184 | 14 | grid | — | 13.60952 | Nagamochi | 0.3905 |
+| 185 | 14 | grid | — | 13.649111 | Nagamochi | 0.3509 |
+| 186 | 14 | grid | — | 13.688578 | Nagamochi | 0.3114 |
+| 187 | 14 | grid | — | 13.727922 | Nagamochi | 0.2721 |
+| 188 | 14 | grid | — | 13.767145 | Nagamochi | 0.2329 |
+| 189 | 14 | grid | — | 13.806248 | Nagamochi | 0.1938 |
+| 190 | 14 | grid | — | 13.845233 | Nagamochi | 0.1548 |
+| 191 | 14 | grid | — | 13.884099 | Nagamochi | 0.1159 |
+| 192 | 14 | grid | — | 13.922848 | Nagamochi | 0.0772 |
+| 193 | 14 | grid | — | 13.961481 | Nagamochi | 0.0385 |
+| 197 | `11 + (5/2)√2` = 14.53553391 | — | — | 14.038405 | Nagamochi | 0.4971 |
+| 198 | `14 + (4/7)` = 14.57142857 | annealing | — | 14.076697 | Nagamochi | 0.4947 |
+| 199 | 14.61898899 | — | 8 | 14.114877 | Nagamochi | 0.5041 |
+| 200 | `9 + 4 √2` = 14.65685425 | — | — | 14.152946 | Nagamochi | 0.5039 |
 
 <!-- END GENERATED: frontier-open -->
 
@@ -974,6 +1062,18 @@ Use the structured form to query or plot; use these tables to read.
 | 98 | `10` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 99 | `10` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
 | 100 | `10` | perfect square | classical | proved |
+| 119 | `11` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 120 | `11` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 121 | `11` | perfect square | classical | proved |
+| 142 | `12` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 143 | `12` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 144 | `12` | perfect square | classical | proved |
+| 167 | `13` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 168 | `13` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 169 | `13` | perfect square | classical | proved |
+| 194 | `14` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 195 | `14` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 196 | `14` | perfect square | classical | proved |
 
 <!-- END GENERATED: frontier-solved -->
 

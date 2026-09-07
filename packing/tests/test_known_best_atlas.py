@@ -29,6 +29,19 @@ from sqpack.render.model import RenderSpec
 from sqpack.render.style import FIRST_PARTY_ACCENT_COLOR
 from sqpack.witness import load_witness
 
+#: Catalogue-derived witnesses above the hand-audited hundred, per corpus (think-93on).
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 46}
+#: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
+GOLDEN_UNITSQUARE: dict[str, set[int]] = {
+    "n=1..100": {68, 69},
+    "n=1..200": {68, 69, 103, 105, 110, 131},
+}
+#: How the corpus splits by source kind at each corpus; a case switching kind fails here.
+GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
+    "n=1..100": {"exact-grid": 64, "kingbird-derived-facts": 34, "unitsquare-rendering": 2},
+    "n=1..200": {"exact-grid": 114, "kingbird-derived-facts": 80, "unitsquare-rendering": 6},
+}
+
 ROOT = Path(__file__).resolve().parent.parent
 ATLAS = ROOT / "atlas/known-best"
 SOURCES = ROOT / "resources/web/known-best-packings"
@@ -127,12 +140,20 @@ def test_kingbird_sources_are_metadata_only_derived_facts() -> None:
         88,
         89,
     }
-    assert {record["n"] for record in kingbird} == expected_n
-    assert len(kingbird) == len(expected_n)
+    # The hand-audited hundred stay a literal; above it the count of derived records is
+    # pinned per corpus, so a case silently switching source kind still fails.
+    assert {record["n"] for record in kingbird if record["n"] <= 100} == expected_n
+    above = sorted(record["n"] for record in kingbird if record["n"] > 100)
+    assert len(above) == GOLDEN_DERIVED_ABOVE_100[known_best_builder.CORPUS.label]
+    assert len(kingbird) == len(expected_n) + len(above)
     for record in kingbird:
         assert record["attribution"].startswith("SVG and high-precision updates")
-        assert record["source_n"] == record["n"]
-        assert record["listed_n"] == [record["n"]]
+        # Above the hundred a catalogue picture can serve two sizes (147 is the 148
+        # picture with a square removed), so the record names the picture's own n.
+        assert record["n"] in record["listed_n"]
+        assert record["source_n"] == max(record["listed_n"])
+        if record["n"] <= 100:
+            assert record["listed_n"] == [record["n"]]
         assert record["raw_asset_retained"] is False
         assert record["license_status"] == "no-express-reuse-terms-found"
         assert record["retention_policy"] == "metadata-and-derived-numerical-facts-only"
@@ -143,7 +164,9 @@ def test_kingbird_sources_are_metadata_only_derived_facts() -> None:
     ]
     release = json.loads(UNITSQUARE_RESULTS.read_text(encoding="utf-8"))
     release_by_n = {record["n"]: record for record in release["results"]}
-    assert {record["n"] for record in unitsquare} == {68, 69}
+    assert {record["n"] for record in unitsquare} == GOLDEN_UNITSQUARE[
+        known_best_builder.CORPUS.label
+    ]
     for record in unitsquare:
         assert record["raw_asset_retained"] is True
         assert record["bytes"] > 0
@@ -297,14 +320,17 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
             },
         }
     ]
-    assert document["atlas"]["range"] == {"count": 100, "first_n": 1, "last_n": 100}
-    assert [entry["n"] for entry in entries] == list(known_best_builder.CORPUS.numbers)
-    assert [entry["n"] for entry in entries] == list(range(1, 101))
-    assert Counter(entry["source"]["kind"] for entry in entries) == {
-        "exact-grid": 64,
-        "kingbird-derived-facts": 34,
-        "unitsquare-rendering": 2,
+    corpus = known_best_builder.CORPUS
+    assert document["atlas"]["range"] == {
+        "count": corpus.count,
+        "first_n": corpus.first_n,
+        "last_n": corpus.last_n,
     }
+    assert [entry["n"] for entry in entries] == list(corpus.numbers)
+    assert (
+        Counter(entry["source"]["kind"] for entry in entries)
+        == GOLDEN_SOURCE_KINDS[corpus.label]
+    )
 
     for entry in entries:
         n = entry["n"]
@@ -703,7 +729,12 @@ def test_a_catalogue_annotation_is_shown_but_never_counted() -> None:
 
     assert annotated == [28, 40]
     assert record["figure"]["totals"]["rigidity_catalogue_annotated"] == len(annotated)
-    assert record["figure"]["totals"]["rigidity_established"] == 12
+    # The 1-100 figure's legend counts its own cases, whatever the corpus has grown to.
+    composite = next(
+        c for c in record["figure"]["composites"] if c["stem"] == "known-best-1-100"
+    )
+    assert composite["totals"]["rigidity_catalogue_annotated"] == len(annotated)
+    assert composite["totals"]["rigidity_established"] == 12
     for n in annotated:
         entry = entries[n]
         assert entry["rigidity"]["state"] == "not-established"

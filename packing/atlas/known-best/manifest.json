@@ -3014,6 +3014,3008 @@
           "method": "exact-algebraic",
           "path": "witnesses/known-best/n-100.yaml"
         }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-101.md",
+        "n": 101,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-101.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "10.53553390593273",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            101
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 101,
+          "url": "https://kingbird.myphotos.cc/packing/square-101.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n101",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-101.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-102.md",
+        "n": 102,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-102.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "10.61138823373863",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            102
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 102,
+          "url": "https://kingbird.myphotos.cc/packing/square-102.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n102",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-102.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-103.md",
+        "n": 103,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-103.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "10.703790283762427",
+        "source": {
+          "derivation": "direct normalization of complete source geometry",
+          "kind": "unitsquare-rendering",
+          "listed_n": [
+            103
+          ],
+          "path": "resources/web/prospective-packings/unitsquare/n103.svg",
+          "source_n": 103,
+          "url": "https://hmbelvedere.com/packings/n103.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n103",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-103.yaml",
+          "tolerance": "2e-6"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-104.md",
+        "n": 104,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-104.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "10.70710678118654",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            104
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 104,
+          "url": "https://kingbird.myphotos.cc/packing/square-104.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n104",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-104.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-105.md",
+        "n": 105,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-105.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "10.807847913867976",
+        "source": {
+          "derivation": "direct normalization of complete source geometry",
+          "kind": "unitsquare-rendering",
+          "listed_n": [
+            105
+          ],
+          "path": "resources/web/prospective-packings/unitsquare/n105.svg",
+          "source_n": 105,
+          "url": "https://hmbelvedere.com/packings/n105.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n105",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-105.yaml",
+          "tolerance": "2e-6"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-106.md",
+        "n": 106,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-106.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "10.82297973416944",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            106
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 106,
+          "url": "https://kingbird.myphotos.cc/packing/square-106.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n106",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-106.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-107.md",
+        "n": 107,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-107.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "10.84666719284348",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            107
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 107,
+          "url": "https://kingbird.myphotos.cc/packing/square-107.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n107",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-107.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-108.md",
+        "n": 108,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-108.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "10.92591939016138",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            108
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 108,
+          "url": "https://kingbird.myphotos.cc/packing/square-108.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n108",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-108.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-109.md",
+        "n": 109,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-109.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "10.94974746830583",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            109
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 109,
+          "url": "https://kingbird.myphotos.cc/packing/square-109.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n109",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-109.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-110.md",
+        "n": 110,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-110.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "10.996797773597706",
+        "source": {
+          "derivation": "direct normalization of complete source geometry",
+          "kind": "unitsquare-rendering",
+          "listed_n": [
+            110
+          ],
+          "path": "resources/web/prospective-packings/unitsquare/n110.svg",
+          "source_n": 110,
+          "url": "https://hmbelvedere.com/packings/n110.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n110",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-110.yaml",
+          "tolerance": "2e-6"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-111.md",
+        "n": 111,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-111.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            111
+          ],
+          "path": "frontier/n-111.md",
+          "source_n": 111
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n111",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-111.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-112.md",
+        "n": 112,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-112.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            112
+          ],
+          "path": "frontier/n-112.md",
+          "source_n": 112
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n112",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-112.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-113.md",
+        "n": 113,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-113.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            113
+          ],
+          "path": "frontier/n-113.md",
+          "source_n": 113
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n113",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-113.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-114.md",
+        "n": 114,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-114.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            114
+          ],
+          "path": "frontier/n-114.md",
+          "source_n": 114
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n114",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-114.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-115.md",
+        "n": 115,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-115.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            115
+          ],
+          "path": "frontier/n-115.md",
+          "source_n": 115
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n115",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-115.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-116.md",
+        "n": 116,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-116.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            116
+          ],
+          "path": "frontier/n-116.md",
+          "source_n": 116
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n116",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-116.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-117.md",
+        "n": 117,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-117.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            117
+          ],
+          "path": "frontier/n-117.md",
+          "source_n": 117
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n117",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-117.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-118.md",
+        "n": 118,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-118.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            118
+          ],
+          "path": "frontier/n-118.md",
+          "source_n": 118
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n118",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-118.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-119.md",
+        "n": 119,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-119.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            119
+          ],
+          "path": "frontier/n-119.md",
+          "source_n": 119
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n119",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-119.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-120.md",
+        "n": 120,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-120.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            120
+          ],
+          "path": "frontier/n-120.md",
+          "source_n": 120
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n120",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-120.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-121.md",
+        "n": 121,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-121.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            121
+          ],
+          "path": "frontier/n-121.md",
+          "source_n": 121
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n121",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-121.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-122.md",
+        "n": 122,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-122.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.53553390593273",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            122
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 122,
+          "url": "https://kingbird.myphotos.cc/packing/square-122.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n122",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-122.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-123.md",
+        "n": 123,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-123.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.60139979378801",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            123
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 123,
+          "url": "https://kingbird.myphotos.cc/packing/square-123.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n123",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-123.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-124.md",
+        "n": 124,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-124.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.65685424949238",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            124
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 124,
+          "url": "https://kingbird.myphotos.cc/packing/square-124.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n124",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-124.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-125.md",
+        "n": 125,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-125.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.70710678118654",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            125
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 125,
+          "url": "https://kingbird.myphotos.cc/packing/square-125.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n125",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-125.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-126.md",
+        "n": 126,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-126.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.77617894651987",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            126
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 126,
+          "url": "https://kingbird.myphotos.cc/packing/square-126.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n126",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-126.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-127.md",
+        "n": 127,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-127.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.82287565553229",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            127
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 127,
+          "url": "https://kingbird.myphotos.cc/packing/square-127.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n127",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-127.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-128.md",
+        "n": 128,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-128.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.82509196821368",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            128
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 128,
+          "url": "https://kingbird.myphotos.cc/packing/square-128.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n128",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-128.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-129.md",
+        "n": 129,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-129.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.88130621809000",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            129
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 129,
+          "url": "https://kingbird.myphotos.cc/packing/square-129.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n129",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-129.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-130.md",
+        "n": 130,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-130.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.91119052015898",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            130
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 130,
+          "url": "https://kingbird.myphotos.cc/packing/square-130.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n130",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-130.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-131.md",
+        "n": 131,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-131.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.956543108124773261501115489978287643498579738",
+        "source": {
+          "derivation": "direct normalization of complete source geometry",
+          "kind": "unitsquare-rendering",
+          "listed_n": [
+            131
+          ],
+          "path": "resources/web/prospective-packings/unitsquare/n131.svg",
+          "source_n": 131,
+          "url": "https://hmbelvedere.com/packings/n131.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n131",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-131.yaml",
+          "tolerance": "2e-6"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-132.md",
+        "n": 132,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-132.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "11.99143643966336",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            132
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 132,
+          "url": "https://kingbird.myphotos.cc/packing/square-132.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n132",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-132.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-133.md",
+        "n": 133,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-133.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            133
+          ],
+          "path": "frontier/n-133.md",
+          "source_n": 133
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n133",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-133.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-134.md",
+        "n": 134,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-134.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            134
+          ],
+          "path": "frontier/n-134.md",
+          "source_n": 134
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n134",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-134.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-135.md",
+        "n": 135,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-135.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            135
+          ],
+          "path": "frontier/n-135.md",
+          "source_n": 135
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n135",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-135.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-136.md",
+        "n": 136,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-136.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            136
+          ],
+          "path": "frontier/n-136.md",
+          "source_n": 136
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n136",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-136.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-137.md",
+        "n": 137,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-137.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            137
+          ],
+          "path": "frontier/n-137.md",
+          "source_n": 137
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n137",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-137.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-138.md",
+        "n": 138,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-138.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            138
+          ],
+          "path": "frontier/n-138.md",
+          "source_n": 138
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n138",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-138.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-139.md",
+        "n": 139,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-139.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            139
+          ],
+          "path": "frontier/n-139.md",
+          "source_n": 139
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n139",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-139.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-140.md",
+        "n": 140,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-140.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            140
+          ],
+          "path": "frontier/n-140.md",
+          "source_n": 140
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n140",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-140.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-141.md",
+        "n": 141,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-141.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            141
+          ],
+          "path": "frontier/n-141.md",
+          "source_n": 141
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n141",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-141.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-142.md",
+        "n": 142,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-142.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            142
+          ],
+          "path": "frontier/n-142.md",
+          "source_n": 142
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n142",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-142.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-143.md",
+        "n": 143,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-143.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            143
+          ],
+          "path": "frontier/n-143.md",
+          "source_n": 143
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n143",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-143.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-144.md",
+        "n": 144,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-144.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            144
+          ],
+          "path": "frontier/n-144.md",
+          "source_n": 144
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n144",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-144.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-145.md",
+        "n": 145,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-145.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.53553390593273",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            145
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 145,
+          "url": "https://kingbird.myphotos.cc/packing/square-145.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n145",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-145.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-146.md",
+        "n": 146,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-146.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.60090777851301",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            146
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 146,
+          "url": "https://kingbird.myphotos.cc/packing/square-146.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n146",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-146.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-147.md",
+        "n": 147,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-147.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.65685424949238",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            147,
+            148
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 148,
+          "url": "https://kingbird.myphotos.cc/packing/square-148.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n147",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-147.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-148.md",
+        "n": 148,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-148.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.65685424949238",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            147,
+            148
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 148,
+          "url": "https://kingbird.myphotos.cc/packing/square-148.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n148",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-148.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-149.md",
+        "n": 149,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-149.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.70710678118654",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            149
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 149,
+          "url": "https://kingbird.myphotos.cc/packing/square-149.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n149",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-149.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-150.md",
+        "n": 150,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-150.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.77817459305202",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            150
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 150,
+          "url": "https://kingbird.myphotos.cc/packing/square-150.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n150",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-150.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-151.md",
+        "n": 151,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-151.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.82287565553229",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            151
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 151,
+          "url": "https://kingbird.myphotos.cc/packing/square-151.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n151",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-151.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-152.md",
+        "n": 152,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-152.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.83100282216725",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            152
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 152,
+          "url": "https://kingbird.myphotos.cc/packing/square-152.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n152",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-152.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-153.md",
+        "n": 153,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-153.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.88166675700900",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            153
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 153,
+          "url": "https://kingbird.myphotos.cc/packing/square-153.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n153",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-153.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-154.md",
+        "n": 154,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-154.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.93171183926903",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            154
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 154,
+          "url": "https://kingbird.myphotos.cc/packing/square-154.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n154",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-154.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-155.md",
+        "n": 155,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-155.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.95851388606690",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            155
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 155,
+          "url": "https://kingbird.myphotos.cc/packing/square-155.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n155",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-155.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-156.md",
+        "n": 156,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-156.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "12.98219172354800",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            156
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 156,
+          "url": "https://kingbird.myphotos.cc/packing/square-156.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n156",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-156.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-157.md",
+        "n": 157,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-157.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            157
+          ],
+          "path": "frontier/n-157.md",
+          "source_n": 157
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n157",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-157.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-158.md",
+        "n": 158,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-158.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            158
+          ],
+          "path": "frontier/n-158.md",
+          "source_n": 158
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n158",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-158.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-159.md",
+        "n": 159,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-159.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            159
+          ],
+          "path": "frontier/n-159.md",
+          "source_n": 159
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n159",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-159.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-160.md",
+        "n": 160,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-160.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            160
+          ],
+          "path": "frontier/n-160.md",
+          "source_n": 160
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n160",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-160.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-161.md",
+        "n": 161,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-161.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            161
+          ],
+          "path": "frontier/n-161.md",
+          "source_n": 161
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n161",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-161.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-162.md",
+        "n": 162,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-162.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            162
+          ],
+          "path": "frontier/n-162.md",
+          "source_n": 162
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n162",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-162.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-163.md",
+        "n": 163,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-163.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            163
+          ],
+          "path": "frontier/n-163.md",
+          "source_n": 163
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n163",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-163.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-164.md",
+        "n": 164,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-164.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            164
+          ],
+          "path": "frontier/n-164.md",
+          "source_n": 164
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n164",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-164.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-165.md",
+        "n": 165,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-165.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            165
+          ],
+          "path": "frontier/n-165.md",
+          "source_n": 165
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n165",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-165.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-166.md",
+        "n": 166,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-166.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            166
+          ],
+          "path": "frontier/n-166.md",
+          "source_n": 166
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n166",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-166.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-167.md",
+        "n": 167,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-167.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            167
+          ],
+          "path": "frontier/n-167.md",
+          "source_n": 167
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n167",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-167.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-168.md",
+        "n": 168,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-168.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            168
+          ],
+          "path": "frontier/n-168.md",
+          "source_n": 168
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n168",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-168.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-169.md",
+        "n": 169,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-169.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            169
+          ],
+          "path": "frontier/n-169.md",
+          "source_n": 169
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n169",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-169.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-170.md",
+        "n": 170,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-170.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.53553390593273",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            170
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 170,
+          "url": "https://kingbird.myphotos.cc/packing/square-170b.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n170",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-170.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-171.md",
+        "n": 171,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-171.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.57142857142857",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            171
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 171,
+          "url": "https://kingbird.myphotos.cc/packing/square-171.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n171",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-171.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-172.md",
+        "n": 172,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-172.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.61898898660160",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            172
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 172,
+          "url": "https://kingbird.myphotos.cc/packing/square-172.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n172",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-172.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-173.md",
+        "n": 173,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-173.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.65685424949238",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            173
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 173,
+          "url": "https://kingbird.myphotos.cc/packing/square-173.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n173",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-173.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-174.md",
+        "n": 174,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-174.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.70710678118654",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            174
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 174,
+          "url": "https://kingbird.myphotos.cc/packing/square-174.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n174",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-174.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-175.md",
+        "n": 175,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-175.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.77817459305202",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            175
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 175,
+          "url": "https://kingbird.myphotos.cc/packing/square-175.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n175",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-175.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-176.md",
+        "n": 176,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-176.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.82287565553229",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            176
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 176,
+          "url": "https://kingbird.myphotos.cc/packing/square-176.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n176",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-176.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-177.md",
+        "n": 177,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-177.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.82302875075647",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            177
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 177,
+          "url": "https://kingbird.myphotos.cc/packing/square-177.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n177",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-177.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-178.md",
+        "n": 178,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-178.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.84666719284348",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            178
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 178,
+          "url": "https://kingbird.myphotos.cc/packing/square-178.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n178",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-178.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-179.md",
+        "n": 179,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-179.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.89540982243640",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            179
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 179,
+          "url": "https://kingbird.myphotos.cc/packing/square-179.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n179",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-179.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-180.md",
+        "n": 180,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-180.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.93513929847193",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            180
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 180,
+          "url": "https://kingbird.myphotos.cc/packing/square-180.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n180",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-180.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-181.md",
+        "n": 181,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-181.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.95698416446504",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            181
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 181,
+          "url": "https://kingbird.myphotos.cc/packing/square-181.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n181",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-181.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-182.md",
+        "n": 182,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-182.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "13.97442960739443",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            182
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 182,
+          "url": "https://kingbird.myphotos.cc/packing/square-182.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n182",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-182.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-183.md",
+        "n": 183,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-183.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            183
+          ],
+          "path": "frontier/n-183.md",
+          "source_n": 183
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n183",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-183.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-184.md",
+        "n": 184,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-184.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            184
+          ],
+          "path": "frontier/n-184.md",
+          "source_n": 184
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n184",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-184.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-185.md",
+        "n": 185,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-185.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            185
+          ],
+          "path": "frontier/n-185.md",
+          "source_n": 185
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n185",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-185.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-186.md",
+        "n": 186,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-186.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            186
+          ],
+          "path": "frontier/n-186.md",
+          "source_n": 186
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n186",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-186.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-187.md",
+        "n": 187,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-187.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            187
+          ],
+          "path": "frontier/n-187.md",
+          "source_n": 187
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n187",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-187.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-188.md",
+        "n": 188,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-188.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            188
+          ],
+          "path": "frontier/n-188.md",
+          "source_n": 188
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n188",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-188.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-189.md",
+        "n": 189,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-189.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            189
+          ],
+          "path": "frontier/n-189.md",
+          "source_n": 189
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n189",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-189.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-190.md",
+        "n": 190,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-190.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            190
+          ],
+          "path": "frontier/n-190.md",
+          "source_n": 190
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n190",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-190.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-191.md",
+        "n": 191,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-191.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            191
+          ],
+          "path": "frontier/n-191.md",
+          "source_n": 191
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n191",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-191.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-192.md",
+        "n": 192,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-192.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            192
+          ],
+          "path": "frontier/n-192.md",
+          "source_n": 192
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n192",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-192.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-193.md",
+        "n": 193,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-193.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            193
+          ],
+          "path": "frontier/n-193.md",
+          "source_n": 193
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n193",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-193.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-194.md",
+        "n": 194,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-194.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            194
+          ],
+          "path": "frontier/n-194.md",
+          "source_n": 194
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n194",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-194.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-195.md",
+        "n": 195,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-195.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            195
+          ],
+          "path": "frontier/n-195.md",
+          "source_n": 195
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n195",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-195.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-196.md",
+        "n": 196,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-196.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.0",
+        "source": {
+          "derivation": "canonical row-major subset of an exact integer grid",
+          "kind": "exact-grid",
+          "listed_n": [
+            196
+          ],
+          "path": "frontier/n-196.md",
+          "source_n": 196
+        },
+        "witness": {
+          "coordinate_provenance": "verified",
+          "id": "W-known-best-n196",
+          "method": "exact-algebraic",
+          "path": "witnesses/known-best/n-196.yaml"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-197.md",
+        "n": 197,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-197.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.53553390593273",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            197
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 197,
+          "url": "https://kingbird.myphotos.cc/packing/square-197.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n197",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-197.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-198.md",
+        "n": 198,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-198.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.57142857142857",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            198
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 198,
+          "url": "https://kingbird.myphotos.cc/packing/square-198.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n198",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-198.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-199.md",
+        "n": 199,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-199.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.61898898660160",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            199
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 199,
+          "url": "https://kingbird.myphotos.cc/packing/square-199.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n199",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-199.yaml",
+          "tolerance": "1e-8"
+        }
+      },
+      {
+        "chunk_annotation": {
+          "note": "Derived bounded lattice-partition calibration; no H-044 verdict. Recompute after the complete grammar and prospective split are frozen.",
+          "path": "atlas/known-best/chunk-partitions.json",
+          "status": "calibration"
+        },
+        "frontier_path": "frontier/n-200.md",
+        "n": 200,
+        "rendering": {
+          "path": "atlas/known-best/rendering/n-200.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "reported_side": "14.65685424949238",
+        "source": {
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
+          "kind": "kingbird-derived-facts",
+          "listed_n": [
+            200
+          ],
+          "path": "resources/web/known-best-packings/sources.json",
+          "source_n": 200,
+          "url": "https://kingbird.myphotos.cc/packing/square-200.svg"
+        },
+        "witness": {
+          "coordinate_provenance": "numerically-checked",
+          "id": "W-known-best-n200",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/known-best/n-200.yaml",
+          "tolerance": "1e-8"
+        }
       }
     ],
     "generated_by": "python -m devtools.build_known_best_atlas",
@@ -3024,9 +6026,9 @@
       "witness_layer": "lossless where possible; limitations explicit otherwise"
     },
     "range": {
-      "count": 100,
+      "count": 200,
       "first_n": 1,
-      "last_n": 100
+      "last_n": 200
     }
   },
   "softschema": {

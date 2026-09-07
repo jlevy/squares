@@ -1337,7 +1337,12 @@ def _append_summary_legend(
     root: ET.Element, *, spec: RenderSpec, canvas: CompositeCanvas
 ) -> None:
     """Two rows: what the badges assert, then what color and shade encode."""
-    totals = load_figure_record()["totals"]
+    record = load_figure_record()
+    totals = next(
+        composite["totals"]
+        for composite in record["composites"]
+        if composite["stem"] == canvas.spec.stem
+    )
     tally = {
         "lower bound first proved here": totals["lower_bound_first_proved_here"],
         "proved optimal": totals["proved_optimal"],
@@ -1399,8 +1404,7 @@ def render_known_best_summary_svg(built: list[BuiltCase], canvas: CompositeCanva
     numbers = [item.frontier.n for item in built]
     if numbers != list(composite.numbers):
         raise ValueError(
-            f"the {composite.stem} composite requires exactly "
-            f"{composite.cases.label} in order"
+            f"the {composite.stem} composite requires exactly {composite.cases.label} in order"
         )
     accessible_title, accessible_description = SUMMARY_PROSE[composite.stem]
     width, height = canvas.width, canvas.height

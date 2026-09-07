@@ -7,8 +7,8 @@ Its collections have deliberately different claim semantics:
 | Collection | Contents | Claim boundary |
 | --- | --- | --- |
 | [`atlas.schema.yaml`](atlas.schema.yaml) and [`rendering/`](rendering/README.md) | Typed endpoint observations and explanatory figures indexed by [`manifest.json`](rendering/manifest.json) | A view may expose retained evidence but cannot promote its tier |
-| [`known-best/`](known-best/README.md) | One normalized construction and house SVG for every `n = 1..100`, plus separate calibration annotations | Feasible retained constructions; no new optimality or H-044 verdict |
-| [`prospective/`](prospective/README.md) | Complete source-availability map for `n = 101..324` and the license-safe normalized seed | Source corpus only; contact and hypothesis annotations are prohibited |
+| [`known-best/`](known-best/README.md) | One normalized construction and house SVG for every `n = 1..200`, plus calibration annotations pinned to `n = 1..100` | Feasible retained constructions; no new optimality or H-044 verdict |
+| [`prospective/`](prospective/README.md) | Complete source-availability map for `n = 101..324` and the license-safe normalized seed; `101..200` is now promoted into `known-best/` | Source corpus only; contact and hypothesis annotations are prohibited |
 | [`enumerated/`](enumerated/README.md) | All 11,013 abstract signed-contact orbits at scaffold size five | Incidence labels only; no geometry, realization, feasibility, or packing claim |
 
 Within every collection, data and presentation remain separate.

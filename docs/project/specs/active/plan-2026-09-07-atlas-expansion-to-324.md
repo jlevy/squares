@@ -289,10 +289,23 @@ Each phase closes on its own validation and a commit.
 
 ### Phase 2: Corpus `101..200`
 
-- [ ] Fetch-and-derive the Kingbird cases in range under `D2`.
-- [ ] Witnesses, receipts, renderings, frontier records, manifest for `101..200`.
-- [ ] Escape screen and rigidity blocks over the new cases.
+- [x] Fetch-and-derive the Kingbird cases in range under `D2`.
+      46 witnesses derived from 45 pictures (n = 147 is the 148 picture less one square,
+      by the catalogue's own stated rule); 50 exact grids generated; the four UnitSquare
+      cases taken from the retained release renderings.
+- [x] Witnesses, receipts, renderings, frontier records, manifest for `101..200`.
+      Twelve cases come out proved (`k²`, `k² − 1`, `k² − 2` for `k = 11..14`); the
+      `n = 179` record carries a typed `stale-source` conflict instead of the
+      catalogue's superseded closed form.
+- [x] Escape screen and rigidity blocks over the new cases.
+      194 records screened, 176 not rigid, six excluded by shape residual; eight new
+      records (132, 154, 155, 156, 179, 180, 181, 182) have hit counts that move between
+      tolerances because their sources carry fewer digits, listed in the evidence rather
+      than hidden.
 - [ ] W2 review of the chunk's transcription; conflicts typed.
+      The machine reparse reports zero divergences over 114 pictured cases and 409
+      facts; a reviewer pass over credit lines and construction methods (64 cases stay
+      `unknown`) is still owed.
 - [ ] Gate step for the range measured and recorded in `gate-budgets.yaml`.
 
 ### Phase 3: Corpus `201..324`

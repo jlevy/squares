@@ -1,8 +1,12 @@
-# Known-Best Packing Atlas, `n = 1..100`
+# Known-Best Packing Atlas, `n = 1..200`
 
 This atlas retains one complete geometry record for every frontier case from `n = 1`
-through `n = 100` and renders every record with the repository’s deterministic house
+through `n = 200` and renders every record with the repository’s deterministic house
 renderer. The machine-readable discovery layer is [`manifest.json`](manifest.json).
+The range widened from 100 on 2026-09-07 under
+[the expansion plan](../../../docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md);
+the composite below still draws the first hundred, and the calibration annotations
+further down are pinned to those hundred by design.
 
 Everything in this directory is generated.
 [FIGURE-PLAYBOOK.md](FIGURE-PLAYBOOK.md) is the playbook for the composite: how to

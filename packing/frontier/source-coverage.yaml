@@ -3,7 +3,7 @@ softschema:
   schema: source-coverage.schema.yaml
   status: enforced
 
-last_reviewed: '2026-08-25'
+last_reviewed: '2026-09-07'
 coverage_scope: >
   Current public upper-bound catalogues and first-party result releases known to this
   project, plus the Schadt n=29 repository used as the witness-contract regression case.
@@ -12,7 +12,7 @@ coverage_scope: >
   web search has exhausted every possible source.
 case_corpus:
   n_min: 1
-  n_max: 100
+  n_max: 200
   reader_view: frontier/STATUS.md
 sources:
   - id: kingbird-current
@@ -26,7 +26,7 @@ sources:
     source_date: null
     disposition: baseline-current
     replay_disposition: case-specific
-    represented_by: [frontier/n-001.md through frontier/n-100.md]
+    represented_by: [frontier/n-001.md through frontier/n-200.md]
     evidence: [E-kingbird-upper-register]
     notes: >
       The retained page was freshly retrieved and reparsed on the review date. It is
@@ -44,7 +44,7 @@ sources:
     source_date: '2026-07-29'
     disposition: current-report
     replay_disposition: public-certificate-missing
-    represented_by: [frontier/n-068.md, frontier/n-069.md, beyond_horizon_claims]
+    represented_by: [frontier/n-068.md, frontier/n-069.md, frontier/n-103.md, frontier/n-105.md, frontier/n-110.md, frontier/n-131.md]
     evidence: [E-unitsquare-release1-report]
     notes: >
       The release reports interval validation but does not publish its interval boxes,
@@ -79,8 +79,24 @@ selected_overrides:
     value: '8.827205507815920656880680735618736931225314831'
     evidence: E-unitsquare-release1-report
     reason: Newer first-party reported upper bound than the Kingbird baseline.
-beyond_horizon_claims:
-  - {n: 103, source_id: unitsquare-release1, claim: upper-bound, value: '10.703790283762427', assurance: reported, disposition: tracked-outside-case-corpus}
-  - {n: 105, source_id: unitsquare-release1, claim: upper-bound, value: '10.807847913867976', assurance: reported, disposition: tracked-outside-case-corpus}
-  - {n: 110, source_id: unitsquare-release1, claim: upper-bound, value: '10.996797773597706', assurance: reported, disposition: tracked-outside-case-corpus}
-  - {n: 131, source_id: unitsquare-release1, claim: upper-bound, value: '11.956543108124773261501115489978287643498579738', assurance: reported, disposition: tracked-outside-case-corpus}
+  - n: 103
+    source_id: unitsquare-release1
+    value: '10.703790283762427'
+    evidence: E-unitsquare-release1-report
+    reason: Newer first-party reported upper bound than the Kingbird baseline.
+  - n: 105
+    source_id: unitsquare-release1
+    value: '10.807847913867976'
+    evidence: E-unitsquare-release1-report
+    reason: Newer first-party reported upper bound than the Kingbird baseline.
+  - n: 110
+    source_id: unitsquare-release1
+    value: '10.996797773597706'
+    evidence: E-unitsquare-release1-report
+    reason: Newer first-party reported upper bound than the Kingbird baseline.
+  - n: 131
+    source_id: unitsquare-release1
+    value: '11.956543108124773261501115489978287643498579738'
+    evidence: E-unitsquare-release1-report
+    reason: Newer first-party reported upper bound than the Kingbird baseline.
+beyond_horizon_claims: []

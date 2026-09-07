@@ -39,10 +39,17 @@ from sqpack.kingbird_catalogue import (
     parse_catalogue,
     parse_entries,
 )
+from sqpack.known_best import KNOWN_BEST_CORPUS
 from sqpack.yamlio import safe_load
 
 #: The case corpus this repository keeps a frontier record for.
+#: The hand-authored hundred. Facts about the catalogue relative to that boundary (how
+#: many entries lie beyond it, where the stale n=179 form sits) are facts about the page
+#: and do not move when the case corpus grows; the reconciliation below follows the corpus.
 CASE_MAXIMUM = 100
+#: What the reconciliation reached at each corpus: (cases matched to a pictured block,
+#: printed facts checked). Pinned so a parser that quietly stopped matching still fails.
+GOLDEN_RECONCILED: dict[str, tuple[int, int]] = {"n=1..100": (60, 206), "n=1..200": (114, 409)}
 
 #: A block whose printed form uses LaTeX this parser does not read. It must raise rather
 #: than record "no closed form", which is exactly how the `n = 54` miss looked.
@@ -310,7 +317,7 @@ def _kingbird_source_key() -> str:
 def test_frontier_transcription_diverges_nowhere_below_the_case_maximum() -> None:
     """The gate `think-l0vj` exists to hold: zero divergences at n = 1..100."""
     cases = _frontier_cases()
-    assert sorted(cases) == list(range(1, CASE_MAXIMUM + 1))
+    assert sorted(cases) == list(KNOWN_BEST_CORPUS.numbers)
 
     errors, compared, facts = catalogue_transcription_errors(
         cases,
@@ -322,8 +329,7 @@ def test_frontier_transcription_diverges_nowhere_below_the_case_maximum() -> Non
     assert errors == []
     # A parser that quietly stopped matching would agree with every record, so the
     # reconciliation's own reach is asserted alongside its verdict.
-    assert compared == 60
-    assert facts == 206
+    assert (compared, facts) == GOLDEN_RECONCILED[KNOWN_BEST_CORPUS.label]
 
 
 @pytest.mark.parametrize(

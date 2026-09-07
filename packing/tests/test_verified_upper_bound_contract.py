@@ -32,6 +32,10 @@ import pytest
 import yaml
 
 from sqpack.assurance import bounds_agree_at_declared_precision
+from sqpack.known_best import KNOWN_BEST_CORPUS
+
+#: Cases whose verified ceiling trails the reported side, per corpus (think-93on).
+TRAILING_BY_CORPUS: dict[str, int] = {"n=1..100": 18, "n=1..200": 68}
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 # The consumers of this field now span the repository: it is named in SYNOPSIS.md and
@@ -246,7 +250,9 @@ def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> Non
     # family's 27, 38, 52, 67 and 84, the off-centre family's 26 and 85, and the lifted
     # witnesses 19 and 66 in Q(sqrt 2) and 18 and 86 in Q(sqrt 7) -- leaving n = 50's
     # 3/7 as the widest.
-    assert len(trailing) == 18
+    # 18 at n = 1..100; the new cases above 100 trail on the grid ceiling wherever the
+    # catalogue reports a non-integer side, so the measurement grows with the corpus.
+    assert len(trailing) == TRAILING_BY_CORPUS[KNOWN_BEST_CORPUS.label]
     for n, (reported, verified) in trailing.items():
         assert verified > reported, n
     worst = max(verified - reported for reported, verified in trailing.values())
@@ -266,7 +272,7 @@ def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> Non
         1 for case in cases().values() if case["verified_upper_bound"]["exact_form"]
     )
     proved = sum(1 for case in cases().values() if case["status"] == "proved")
-    assert exact_forms == 100
+    assert exact_forms == KNOWN_BEST_CORPUS.count
     assert proved < exact_forms
 
 

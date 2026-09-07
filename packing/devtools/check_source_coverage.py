@@ -148,6 +148,19 @@ def _summarize_polynomial(coefficients: tuple[int, ...]) -> str:
     return f"degree {len(coefficients) - 1} [{head}{tail}]"
 
 
+def _stated_form_agrees_with_its_decimal(stated: str, entry: CatalogueEntry) -> bool:
+    """Whether the catalogue's own printed form denotes the decimal printed beside it.
+
+    A form that does not evaluate at all is reported by the caller's later evaluation;
+    here it counts as agreeing so that the ordinary comparison, and its error, run.
+    """
+    try:
+        value = evaluate_exact_form(stated, EXACT_FORM_DIGITS + 10)
+    except _FORM_ERRORS:
+        return True
+    return agrees_with_printed_decimal(value, entry.side_decimal)
+
+
 def exact_form_errors(n: int, bound: Mapping, entry: CatalogueEntry) -> list[str]:
     """Compare one record's `exact_form` with the closed form the catalogue prints.
 
@@ -161,6 +174,21 @@ def exact_form_errors(n: int, bound: Mapping, entry: CatalogueEntry) -> list[str
     where = f"catalogue line {entry.source_line}"
     if stated is None:
         return []
+    if not _stated_form_agrees_with_its_decimal(stated, entry):
+        # The catalogue contradicts itself: the printed form does not denote the printed
+        # decimal (n = 179 prints a superseded closed form beside a newer value). The
+        # record must then carry no form at all; a generated record says why in a typed
+        # `stale-source` conflict, and a form copied from such an entry is the error.
+        if recorded is None:
+            return []
+        return [
+            (
+                f"n={n}: exact_form: record has {recorded!r}, but {where} prints "
+                f"{stated!r}, which does not evaluate to the decimal {entry.side_decimal} "
+                "printed beside it; the record may carry no form from a self-contradicting "
+                "entry"
+            )
+        ]
     if recorded is None:
         return [f"n={n}: exact_form: record has null, {where} prints {stated!r}"]
     try:

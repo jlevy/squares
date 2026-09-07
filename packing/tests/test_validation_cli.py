@@ -24,6 +24,12 @@ from sqpack.cli import validate
 from sqpack.cli.validate import main
 from sqpack.yamlio import safe_load
 
+#: (proved, open) at each corpus the frontier-corpus step has summarized.
+FRONTIER_LANE_SPLIT: dict[str, tuple[int, int]] = {
+    "n=1..100": (35, 65),
+    "n=1..200": (47, 153),
+}
+
 WORKFLOW = Path(__file__).resolve().parents[2] / ".github/workflows/packing-validation.yml"
 """The gate's own workflow, read by the test that keeps its two post-merge jobs a
 partition of `STEPS`. Repository-relative from `packing/tests/`, so two levels up."""
@@ -1423,8 +1429,15 @@ def test_frontier_contract_accepts_the_declared_schema_metadata(
 
     assert status == 0
     assert stderr == ""
-    assert "100 artifacts, n = 1..100; formal lane: 35 proved, 65 open" in stdout
-    assert "reported lane: 35 proved, 65 open" in stdout
+    # The corpus summary is a corpus fact and follows KNOWN_BEST_CORPUS; the split is
+    # pinned per corpus so a record silently changing status still fails (think-93on).
+    proved, open_cases = FRONTIER_LANE_SPLIT[validate.KNOWN_BEST_CORPUS.label]
+    corpus = validate.KNOWN_BEST_CORPUS
+    assert (
+        f"{corpus.count} artifacts, n = {corpus.label[2:]}; formal lane: "
+        f"{proved} proved, {open_cases} open"
+    ) in stdout
+    assert f"reported lane: {proved} proved, {open_cases} open" in stdout
 
 
 def _budget_context(*, timeout_seconds: float, explicit: bool) -> validate.Context:

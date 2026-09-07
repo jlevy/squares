@@ -53,6 +53,28 @@ from sqpack.project import (
 )
 from sqpack.yamlio import safe_load
 
+#: Per-corpus tripwires for the frontier and the escape screen. Each is a finding about
+#: one corpus rather than a count derived from it, so it is pinned by the corpus label and
+#: re-argued when the corpus grows (think-93on): the open-case counts, the records the
+#: screen excludes by shape residual, and the screen's four findings.
+FRONTIER_COUNTS: dict[str, tuple[int, int, int]] = {
+    # (formal-open, reported-open, Nagamochi-bounded). 58 since 2026-09-04: T-020's
+    # certificate at 24/5 took n = 20 and n = 21 off the closed form.
+    "n=1..100": (65, 65, 58),
+    "n=1..200": (153, 153, 146),
+}
+SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
+    "n=1..100": ("n=68", "n=69"),
+    "n=1..200": ("n=68", "n=69", "n=103", "n=105", "n=110", "n=131"),
+}
+#: (records with a separating square, those squares, records with any translating
+#: square, those squares).
+SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
+    "n=1..100": (25, 76, 84, 496),
+    "n=1..200": (60, 678, 176, 1933),
+}
+UNDETERMINED_BY_MISS = (28,)
+
 PROJECT_ROOT = configured_project_root()
 REPOSITORY_ROOT = PROJECT_ROOT.parent
 ENGINE = PROJECT_ROOT / "sqsearch/target/release/sqsearch"
@@ -1547,7 +1569,10 @@ def _frontier_rigidity(context: Context) -> str:
     # it is pinned; think-93on re-argues it when the corpus grows.
     stronger = (5, 11, 40)
     tilings = sum(1 for n in KNOWN_BEST_CORPUS.numbers if math.isqrt(n) ** 2 == n)
-    undetermined = 3
+    # Undetermined is the screen's excluded records (whose geometry is too coarse to
+    # read contacts from) plus n=28, the one screened record the screen misses that no
+    # stronger argument has taken; both lists are per-corpus tripwires (think-93on).
+    undetermined = len(SCREEN_EXCLUDED[KNOWN_BEST_CORPUS.label]) + len(UNDETERMINED_BY_MISS)
     not_rigid = KNOWN_BEST_CORPUS.count - len(stronger) - tilings - undetermined
     _require_text(
         review,
@@ -1571,13 +1596,16 @@ def _translation_escape_screen(context: Context) -> str:
     # the records the shape-residual limit throws out. The four findings after it are not
     # counts of anything and stay pinned as tripwires -- think-93on re-argues them, and
     # the exclusion list with them, when the corpus grows.
-    excluded = ("n=68", "n=69")
+    excluded = SCREEN_EXCLUDED[KNOWN_BEST_CORPUS.label]
+    separating, separating_squares, translating, translating_squares = SCREEN_FINDINGS[
+        KNOWN_BEST_CORPUS.label
+    ]
     screened = KNOWN_BEST_CORPUS.count - len(excluded)
     _require_text(
         output,
         f"translation escape screen check passed: {screened} records screened, "
-        "25 with a square that separates (76 squares), "
-        "84 with a square that translates at all (496 squares), "
+        f"{separating} with a square that separates ({separating_squares} squares), "
+        f"{translating} with a square that translates at all ({translating_squares} squares), "
         f"excluded: {', '.join(excluded)}",
     )
     return output
@@ -1867,10 +1895,12 @@ def _frontier_corpus(context: Context) -> str:
     # record; this line exists so the record cannot move without someone saying so.
     # Deliberately NOT derived from KNOWN_BEST_CORPUS: widening the corpus adds open
     # cases, and think-93on re-argues these three numbers rather than letting them float.
-    if (formal_open, reported_open, nagamochi_count) != (65, 65, 58):
+    expected_counts = FRONTIER_COUNTS[KNOWN_BEST_CORPUS.label]
+    if (formal_open, reported_open, nagamochi_count) != expected_counts:
         raise StepFailureError(
-            "frontier corpus counts drifted: expected 65 formal-open, 65 reported-open, "
-            f"and 58 Nagamochi-bounded; observed {formal_open}, {reported_open}, "
+            f"frontier corpus counts drifted: expected {expected_counts[0]} formal-open, "
+            f"{expected_counts[1]} reported-open, and {expected_counts[2]} "
+            f"Nagamochi-bounded; observed {formal_open}, {reported_open}, "
             f"and {nagamochi_count}"
         )
 
