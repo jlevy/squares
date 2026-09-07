@@ -3,9 +3,9 @@ type: is
 id: is-01m1wdb4fgc305fn9rkevfqyte
 title: "BC255: closed-tile angle certificate controls and independent review"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 27
+version: 28
 spec_path: packing/campaign/hypotheses/H-036-robust-restricted-orientation.md
 assignee: codex
 labels: []
@@ -38,7 +38,11 @@ child_order_hints:
   - is-01m1wzp216qkh0qa1p8f46jcza
   - is-01m1x04m6aqjffg3eh4x5m3gek
 created_at: 2026-09-06T22:27:37.583Z
-updated_at: 2026-09-07T03:56:07.241Z
+updated_at: 2026-09-07T04:09:08.673Z
+closed_at: 2026-09-07T04:09:08.671Z
+close_reason: "Control package completed and independently reviewed: H106 full near-axis P10 and H108/H109 canonical near45 A-triple accepted with exact receipts. No global bound. All commissioned children terminal; next research is separately tracked as think-qv73/H110 under BC255, not a continuation of these completed controls."
+resolution: null
+duplicate_of: null
 ---
 Next-allocation recommendation, NOT funded during Session089 finalization. Read agenda024CurrentAllocation and datedH104follow-up in bc-255-angle-instrument-design.md. Source/toy wall-adapted closed triangulation and degree-four sign certificate:20–30author minutes plus10–20independent review. Every tile/slab uses a common point label, both sign charts and fullclosedcover including seams/endpoints; Bernstein interior zeros can remain unresolved. No nearby-angle target until reviewed instrument, full-range auxiliary Hitem and prospective experiment exist. H0363.878/±.25unchanged; single-point assignment failure is not all-P10escape. SameintegratedPR101, no tinyPR.
 
