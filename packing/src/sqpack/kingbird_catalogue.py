@@ -152,6 +152,28 @@ class CatalogueEntry:
     source_line: int
     """1-based line in the transcription carrying this entry's side value."""
 
+    credit_line: str | None = None
+    """The entry's annotation lines, verbatim, below its side value; `None` when it has none.
+
+    Everything the block prints after the side value and before the next heading: the
+    credit sentences, the rigidity annotation, the "Explore group" link, the family notes,
+    and the page's "Not yet analytically optimized." disclaimer. The catalogue's own
+    characters, with two mechanical changes and no others -- each line is right-stripped
+    (the transcription's line ends carry Markdown's two-space hard break), and blank lines
+    are dropped -- so the surviving lines are joined by a single newline in page order,
+    Markdown link syntax included.
+
+    The link syntax is what makes it worth keeping verbatim. `[Explore group](...)` is the
+    only thing separating the Göbel strips from the Göbel squares, and its text is the same
+    for both: the two families differ solely in the page it links to. `found_by` and
+    `found_year` are read from the same lines with that markup unwrapped, which is why they
+    are parsed separately rather than from this field.
+
+    Added last, with a default, so that every existing construction of this record keeps
+    working. It is the field a caller needs to read `construction_method` and
+    `analytically_optimized`, neither of which the catalogue states anywhere else.
+    """
+
 
 def default_catalogue_path() -> Path:
     """Return the retained Markdown transcription inside the packing checkout."""
@@ -339,9 +361,8 @@ def _parse_block(
             rigidity = annotation.group(1).lower()
             break
 
-    credit = " ".join(
-        _MARKDOWN_LINK.sub(r"\1", line).strip() for line in block[value_offset + 1 :]
-    )
+    annotation_lines = [line.rstrip() for line in block[value_offset + 1 :] if line.strip()]
+    credit = " ".join(_MARKDOWN_LINK.sub(r"\1", line).strip() for line in annotation_lines)
     found_by, found_year = _parse_credit(credit)
 
     return CatalogueEntry(
@@ -357,6 +378,7 @@ def _parse_block(
         catalogue_pictured=True,
         svg_path=svg_path,
         source_line=value_line,
+        credit_line="\n".join(annotation_lines) or None,
     )
 
 

@@ -210,6 +210,58 @@ def test_every_printed_closed_form_matches_its_printed_decimal_except_n179() -> 
     assert all(n > CASE_MAXIMUM for n in stale)
 
 
+def test_every_pictured_entry_carries_its_credit_line_verbatim() -> None:
+    """The annotation under the picture, as the page writes it, markup and all.
+
+    `construction_method` and `analytically_optimized` are stated nowhere else on the
+    page, so a caller that wants them has to read these lines. Kept verbatim because the
+    only thing separating the two Göbel families is the page an "Explore group" link
+    points at -- its text is identical for both -- so unwrapping the Markdown link would
+    throw the distinction away.
+    """
+    entries = _entries()
+    assert all(entry.credit_line for entry in entries)
+
+    assert _by_n()[11].credit_line == (
+        "[Rigid.](squares_in_squares__rigid.html)\nFound by Walter Trump\nin 1979."
+    )
+    assert _by_n()[10].credit_line == (
+        "Found by Frits Göbel in early 1979.\n"
+        "Proved by Walter Stromquist in 2003.\n"
+        "[Explore group](squares_in_squares__Göbel_strips.html)"
+    )
+    assert _by_n()[179].credit_line == (
+        "Found by David Ellsworth in January 2025, using a computer program he wrote.\n"
+        "Improved by David Ellsworth in January 2026, using his modified version of "
+        "Thomas Schadt's simulated annealing program.\n"
+        "Not yet analytically optimized."
+    )
+    # Every line of the block below the side value, and nothing above it.
+    assert all("\\Nn{" not in (entry.credit_line or "") for entry in entries)
+    assert not any((entry.credit_line or "").startswith("\n") for entry in entries)
+
+
+def test_the_credit_line_is_where_the_page_states_analytic_optimization() -> None:
+    """The disclaimer exists, it is exact, and it appears only above the case corpus."""
+    stated = [
+        entry.n
+        for entry in _entries()
+        if "Not yet analytically optimized." in (entry.credit_line or "")
+    ]
+
+    assert len(stated) == 32
+    assert all(n > CASE_MAXIMUM for n in stated)
+    assert 179 in stated
+
+
+def test_a_block_with_no_annotation_has_no_credit_line() -> None:
+    """`None` says the page printed nothing, which is not the same as an empty string."""
+    (entry,) = parse_entries("9\n[](square-9.svg)\n\n$s = 3$\n")
+
+    assert entry.credit_line is None
+    assert entry.found_by == ()
+
+
 def test_transcription_agrees_with_the_retained_html() -> None:
     """`html2text` must not have dropped, added, or reordered a box."""
     html = default_catalogue_html_path().read_text(encoding="utf-8")

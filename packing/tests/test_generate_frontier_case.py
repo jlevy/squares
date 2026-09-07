@@ -7,7 +7,7 @@ a record can validate, read fluently, and still carry a bound rule that the firs
 cases do not use. So the generator is pointed back at cases a person wrote and asked to
 reproduce them **field by field**, on the same inputs.
 
-Five cases, chosen so that every branch of the generator is exercised by a record whose
+Seven cases, chosen so that every branch of the generator is exercised by a record whose
 correctness someone already argued:
 
 - `n = 100` and `n = 64` -- perfect squares. The lower bound is the area bound, the
@@ -16,26 +16,34 @@ correctness someone already argued:
   reported as the integer, with the three-resource block.
 - `n = 50` -- open, catalogue-sourced, with a certified ceiling that trails the report
   and the `mathematics` blocker that gap requires.
+- `n = 68` and `n = 69` -- open, and sourced from the UnitSquare release rather than the
+  catalogue: a forty-five figure reported side, a `source-evidence` blocker instead of a
+  `mathematics` one, a fourth resource, and a null `conjectured_optimum`. They are the
+  only two records of that shape at `n <= 100`, and `n = 103, 105, 110` and `131` will be
+  generated from the same branch.
 
 **Nothing is skipped quietly.** Every key of the front matter is compared. The three
 kinds of mismatch a reader would want to know about are named separately:
 
 - `GENERATOR_OWNS` -- must be byte-equal. A difference here is a failure.
-- `SUPPLIED` -- values the generator takes as arguments because they are not derivable
-  from any source: the two dates, and the two facts that live in the catalogue's credit
-  line rather than in its structured row. The test passes them in and reports that it
-  did, so nobody reads their agreement as a derivation.
+- `SUPPLIED` -- values this test hands the generator rather than letting it derive: the
+  two dates, which no source carries, and the three credit-line facts, which the
+  injected-facts path passes in so that the comparison tests assembly rather than
+  parsing. The test reports that it did, so nobody reads their agreement as a
+  derivation.
 - `NOT_REPRODUCED` -- fields the generator deliberately leaves for a later step, which
-  is `rigidity` and, for `n = 100`, a hand-written body about the edge of the corpus.
+  is `rigidity` and, for three cases, a hand-written body.
 
 `test_reports_what_the_adapter_cannot_derive` is the same comparison run through the real
-catalogue parser instead of injected facts, so the report says which fields a fully
-automatic run would leave at their "not reviewed yet" defaults.
+catalogue parser instead of injected facts. Two of those three credit-line fields are now
+read off `CatalogueEntry.credit_line` and reproduce; `improved_by` is the one that does
+not, and the test names it.
 """
 
 from __future__ import annotations
 
 import math
+import re
 import shutil
 import subprocess
 import sys
@@ -51,14 +59,24 @@ from devtools.check_case_prose import check_case_file
 from devtools.generate_frontier_case import (
     CATALOGUE_CLASSIFICATION,
     GRID_CLASSIFICATION,
+    GRID_COMPLETENESS_EVIDENCE,
+    KINGBIRD_EVIDENCE,
+    UNITSQUARE_AVAILABILITY_KEY,
+    UNITSQUARE_EVIDENCE,
+    UNITSQUARE_SOURCE_KEY,
     CatalogueFacts,
     GenerationError,
     SourceAvailability,
+    analytically_optimized_from_credit,
+    construction_method_from_credit,
+    credited_surnames,
     facts_from_catalogue_entry,
     generate_record,
     grid_ceiling,
     load_availability,
+    load_unitsquare_release,
     main,
+    method_summary,
     record_path,
     refuse_reason,
     write_record,
@@ -70,7 +88,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 FRONTIER = PROJECT_ROOT / "frontier"
 SCHEMA = FRONTIER / "square-packing-case.schema.yaml"
 
-GOLDEN_CASES = (100, 99, 98, 64, 50)
+GOLDEN_CASES = (100, 99, 98, 69, 68, 64, 50)
 
 #: Front-matter paths the generator derives from its inputs and must reproduce exactly.
 #: Everything not named in the two sets below falls here, so a field added to the schema
@@ -81,13 +99,15 @@ SUPPLIED = {
         "the fetch date is an argument; the catalogue does not date itself"
     ),
     "packing.reported_upper_bound.construction_method": (
-        "read from the catalogue's credit line, which the structured entry does not carry"
+        "injected here from the record itself; the generator reads it off the catalogue's "
+        "credit line, which test_reports_what_the_adapter_cannot_derive exercises"
     ),
     "packing.reported_upper_bound.analytically_optimized": (
-        "read from the same credit line, for the same reason"
+        "injected from the same place, and read off the same credit line"
     ),
     "packing.reported_upper_bound.improved_by": (
-        "read from the same credit line, for the same reason"
+        "injected, and genuinely underivable: the catalogue writes 'Optimized by David "
+        "Ellsworth' for both n = 29, whose record lists him, and n = 50, whose does not"
     ),
 }
 NOT_REPRODUCED = {
@@ -99,15 +119,45 @@ NOT_REPRODUCED = {
 #: Cases whose prose is bespoke rather than templated, and why.
 BODY_NOT_REPRODUCED = {
     100: "an editorial section about the edge of the corpus, written for this one case",
+    68: (
+        "one figure: the body prints the Nagamochi lower bound to five places where every "
+        "other record in the corpus, and the generator, print six"
+    ),
+    69: (
+        "a sentence about the parent's degree-82 polynomial being dropped, written for "
+        "this one case, and a shorter paraphrase of the release's verification claims"
+    ),
 }
 
+#: How the source map would classify a record the register already carries.
+GRID = "grid"
+CATALOGUE = "catalogue"
+UNITSQUARE = "unitsquare"
 
-def _availability(n: int, *, grid: bool) -> SourceAvailability:
-    if grid:
+
+def _source_kind(payload: Mapping[str, Any]) -> str:
+    reported = payload["reported_upper_bound"]
+    if reported["source_key"] == UNITSQUARE_SOURCE_KEY:
+        return UNITSQUARE
+    return GRID if reported["construction_method"] == "trivial-grid" else CATALOGUE
+
+
+def _availability(n: int, kind: str) -> SourceAvailability:
+    if kind == GRID:
         return SourceAvailability(
             n, GRID_CLASSIFICATION, "catalogue-trivial-grid-rule", grid_ceiling(n)
         )
+    if kind == UNITSQUARE:
+        return SourceAvailability(
+            n, CATALOGUE_CLASSIFICATION, UNITSQUARE_AVAILABILITY_KEY, None
+        )
     return SourceAvailability(n, CATALOGUE_CLASSIFICATION, "kingbird-current-catalogue", None)
+
+
+def _parsed_facts(n: int) -> CatalogueFacts:
+    """The catalogue entry for `n` as the real parser reads it."""
+    catalogue = pytest.importorskip("sqpack.kingbird_catalogue")
+    return facts_from_catalogue_entry(catalogue.parse_catalogue()[n], n=n)
 
 
 def _committed(n: int) -> tuple[dict[str, Any], str]:
@@ -144,12 +194,17 @@ def _regenerate(n: int, *, facts: CatalogueFacts | None = None) -> str:
     """Draft `n` on the same inputs and dates the committed record declares."""
     document, _ = _committed(n)
     payload = document["packing"]
-    grid = payload["reported_upper_bound"]["construction_method"] == "trivial-grid"
-    if not grid and facts is None:
+    kind = _source_kind(payload)
+    if facts is None and kind == CATALOGUE:
         facts = _injected_facts(n)
+    if facts is None and kind == UNITSQUARE:
+        # A release case takes no bound from the catalogue, but its prose names the
+        # parent the release improved on, and the catalogue's credit chain is where
+        # those authors are written down. So this one comes from the real parser.
+        facts = _parsed_facts(n)
     return generate_record(
         n,
-        availability={n: _availability(n, grid=grid)},
+        availability={n: _availability(n, kind)},
         catalogue=None if facts is None else {n: facts},
         review_date=str(payload["source_reviewed"]),
         retrieved_date=str(payload["reported_upper_bound"]["retrieved_date"]),
@@ -255,28 +310,34 @@ def _without_rigidity(text: str) -> str:
 
 
 def test_reports_what_the_adapter_cannot_derive() -> None:
-    """The same comparison through the real parser, so the gap is named rather than assumed."""
-    catalogue = pytest.importorskip("sqpack.kingbird_catalogue")
-    entry = catalogue.parse_catalogue()[50]
-    facts = facts_from_catalogue_entry(entry, n=50)
+    """The same comparison through the real parser, so the gap is named rather than assumed.
+
+    `n = 50`'s credit line reads "Found by Thomas Schadt in December 2025, using a
+    simulated annealing program he wrote, starting from randomness. Optimized by David
+    Ellsworth." Two of the three credit-line fields fall out of that: the method, and the
+    absence of the "Not yet analytically optimized" disclaimer. The third does not -- the
+    record leaves `improved_by` empty despite the "Optimized by" sentence, where `n = 29`
+    fills it in from the same sentence -- so no rule is applied to it.
+    """
+    facts = _parsed_facts(50)
     generated = safe_load(_regenerate(50, facts=facts).split("---\n", 2)[1])
     committed, _ = _committed(50)
 
     generated_upper = generated["packing"]["reported_upper_bound"]
     committed_upper = committed["packing"]["reported_upper_bound"]
-    undecided = {
+    credit_fields = {
         key: (committed_upper[key], generated_upper[key])
         for key in ("construction_method", "analytically_optimized", "improved_by")
     }
-    print(f"n=50 through the real parser, credit-line fields: {undecided}")
-    # The structured entry carries no credit line, so these three stay at the values that
-    # say "not reviewed". Everything the entry does carry must still agree.
-    assert generated_upper["construction_method"] == "unknown"
-    assert generated_upper["analytically_optimized"] is None
+    print(f"n=50 through the real parser, credit-line fields: {credit_fields}")
+    assert generated_upper["construction_method"] == "simulated-annealing"
+    assert generated_upper["analytically_optimized"] is True
     assert generated_upper["improved_by"] == []
     for key in ("value", "exact_form", "algebraic_degree", "minimal_polynomial"):
         assert generated_upper[key] == committed_upper[key], key
     for key in ("found_by", "found_year", "catalogue_rigid", "catalogue_pictured"):
+        assert generated_upper[key] == committed_upper[key], key
+    for key in ("construction_method", "analytically_optimized"):
         assert generated_upper[key] == committed_upper[key], key
 
 
@@ -289,27 +350,43 @@ def test_a_regenerated_record_validates_and_replays(n: int, tmp_path: Path) -> N
     assert validate_schemas.check(path) == []
 
     payload = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])["packing"]
-    evidence = {
+    assert check_case_semantics(payload, _evidence()) == []
+    assert check_case_basic_bounds(payload) == []
+    assert [finding.render() for finding in check_case_file(path)] == []
+
+
+def _catalogue_facts() -> dict[int, CatalogueFacts]:
+    catalogue_module = pytest.importorskip("sqpack.kingbird_catalogue")
+    return {
+        n: facts_from_catalogue_entry(entry, n=n)
+        for n, entry in catalogue_module.parse_catalogue().items()
+    }
+
+
+def _evidence() -> dict[str, Any]:
+    return {
         record["id"]: record
         for record in safe_load((FRONTIER / "evidence.yaml").read_text(encoding="utf-8"))[
             "evidence"
         ]
     }
-    assert check_case_semantics(payload, evidence) == []
-    assert check_case_basic_bounds(payload) == []
-    assert [finding.render() for finding in check_case_file(path)] == []
+
+
+#: The one finding the register's own evidence still produces above `n = 100`, and the
+#: only reason a generated case is allowed to report anything at all.
+#: `E-basic-area-lower` was left scoped `1..100` when the other three widened to 324, so
+#: the eight perfect squares in range cite a record that does not reach them. Tolerated
+#: rather than asserted: this passes both before and after that scope moves.
+AREA_LOWER_SCOPE_GAP = "evidence E-basic-area-lower does not cover"
 
 
 def test_generated_cases_past_the_register_validate(tmp_path: Path) -> None:
-    """A sample of the new range, over both classifications and both statuses."""
-    catalogue_module = pytest.importorskip("sqpack.kingbird_catalogue")
+    """A sample of the new range, over all three source branches and both statuses."""
     availability = load_availability()
-    catalogue = {
-        n: facts_from_catalogue_entry(entry, n=n)
-        for n, entry in catalogue_module.parse_catalogue().items()
-    }
+    catalogue = _catalogue_facts()
+    evidence = _evidence()
     shutil.copy(SCHEMA, tmp_path / SCHEMA.name)
-    for n in (101, 111, 119, 121, 123, 324):
+    for n in (101, 105, 111, 119, 121, 123, 179, 324):
         path = record_path(tmp_path, n)
         write_record(
             generate_record(
@@ -325,20 +402,21 @@ def test_generated_cases_past_the_register_validate(tmp_path: Path) -> None:
         payload = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])["packing"]
         assert check_case_basic_bounds(payload) == [], n
         assert [finding.render() for finding in check_case_file(path)] == [], n
-        # The register's own evidence records are still scoped to n <= 100, so
-        # `check_case_semantics` cannot pass here yet. That widening is a separate
-        # change, and this test does not pretend it has happened.
+        # The three evidence records the generator leans on are scoped to 324 now, so a
+        # generated case has to satisfy the cross-record checks the register enforces --
+        # every one of them but the area-bound scope named above.
+        findings = check_case_semantics(payload, evidence)
+        remaining = [error for error in findings if AREA_LOWER_SCOPE_GAP not in error]
+        assert remaining == [], (n, findings)
+        if findings:
+            print(f"n={n}: still open on the evidence side -- {findings}")
         assert payload["rigidity"] is None
 
 
 def test_the_new_range_proves_exactly_the_twenty_four_cases_the_plan_names() -> None:
     """`k^2`, `k^2 - 1` and `k^2 - 2` for `k = 11..18`, and nothing else in 101..324."""
-    catalogue_module = pytest.importorskip("sqpack.kingbird_catalogue")
     availability = load_availability()
-    catalogue = {
-        n: facts_from_catalogue_entry(entry, n=n)
-        for n, entry in catalogue_module.parse_catalogue().items()
-    }
+    catalogue = _catalogue_facts()
     proved: list[int] = []
     for n in sorted(availability):
         text = generate_record(
@@ -357,6 +435,249 @@ def test_the_new_range_proves_exactly_the_twenty_four_cases_the_plan_names() -> 
     print(f"proved in 101..324: {proved}")
     assert proved == expected
     assert len(proved) == 24
+
+
+def test_an_unpictured_grid_case_cites_whichever_kingbird_item_covers_it() -> None:
+    """The register below 100, the completeness statement above it, and never both.
+
+    The two items divide the catalogue between them: `E-kingbird-upper-register` is its
+    pictured entries, and above 100 its own `limitations` field says so;
+    `E-kingbird-grid-completeness` is its statement about the ones it does not picture,
+    scoped `101..324`. An unpictured grid case cites the one that reaches it.
+    """
+    availability = load_availability()
+    for n in (111, 121, 324):
+        payload = safe_load(
+            generate_record(
+                n,
+                availability=availability,
+                catalogue=None,
+                review_date="2026-09-07",
+                retrieved_date="2026-09-07",
+            ).split("---\n")[1]
+        )["packing"]
+        reported = payload["reported_upper_bound"]
+        assert reported["catalogue_pictured"] is False, n
+        assert reported["evidence"] == [GRID_COMPLETENESS_EVIDENCE], n
+        assert KINGBIRD_EVIDENCE not in payload["evidence"], n
+        assert payload["evidence"][0] == GRID_COMPLETENESS_EVIDENCE, n
+
+    # The hand-written unpictured grid cases keep citing the register, which is what the
+    # byte-identical golden above already holds; asserted here so the rule reads whole.
+    for n in (91, 100):
+        committed, _ = _committed(n)
+        assert committed["packing"]["reported_upper_bound"]["evidence"] == [KINGBIRD_EVIDENCE]
+
+
+def test_a_unitsquare_case_takes_its_bound_and_its_blocker_from_the_release() -> None:
+    """The four cases in `101..324` the release serves, built like `n = 68` and `n = 69`."""
+    availability = load_availability()
+    catalogue = _catalogue_facts()
+    release = load_unitsquare_release()
+    for n in (103, 105, 110, 131):
+        assert availability[n].is_unitsquare, n
+        payload = safe_load(
+            generate_record(
+                n,
+                availability=availability,
+                catalogue=catalogue,
+                review_date="2026-09-07",
+                retrieved_date="2026-09-07",
+            ).split("---\n")[1]
+        )["packing"]
+        reported = payload["reported_upper_bound"]
+        assert reported["value"] == release[n].offered_side, n
+        assert reported["source_key"] == UNITSQUARE_SOURCE_KEY, n
+        assert reported["source_date"] == "2026-07-29", n
+        assert reported["found_by"] == ["UnitSquare Project"], n
+        assert reported["found_year"] == 2026, n
+        assert reported["evidence"] == [UNITSQUARE_EVIDENCE], n
+        assert reported["analytically_optimized"] is False, n
+        assert reported["construction_method"] == "unknown", n
+        assert reported["witnesses"] == [f"W-known-best-n{n:03d}"], n
+        # A release that publishes no certificate blocks on evidence, not on mathematics.
+        assert [blocker["kind"] for blocker in payload["blockers"]] == ["source-evidence"], n
+        assert payload["blockers"][0]["evidence"] is reported["evidence"], n
+        assert payload["conjectured_optimum"] is None, n
+        assert [resource["key"] for resource in payload["resources"]] == [
+            "[Kingbird]",
+            UNITSQUARE_SOURCE_KEY,
+            "[Nagamochi 2005]",
+            "[Friedman DS7]",
+        ], n
+        assert payload["evidence"][0] == UNITSQUARE_EVIDENCE, n
+
+
+def test_the_unitsquare_prose_names_the_parent_the_release_improved_on() -> None:
+    """The one sentence of that paragraph the release itself does not carry."""
+    assert credited_surnames(_parsed_facts(68).credit_line) == (
+        "Brendberg",
+        "Schadt",
+        "Ellsworth",
+    )
+    assert credited_surnames(_parsed_facts(69).credit_line) == ("Morandi", "Cantrell")
+    # Compared with the wrapping collapsed: the formatter breaks lines where it likes.
+    body = re.sub(r"\s+", " ", _regenerate(68).split("---\n", 2)[2])
+    assert (
+        "The UnitSquare Project’s 29 July 2026 release improves the public "  # noqa: RUF001
+        "Brendberg-Schadt-Ellsworth parent by `0.0000768618004216131`." in body
+    )
+
+
+@pytest.mark.parametrize(
+    ("phrase", "expected"),
+    [
+        ("[Explore group](squares_in_squares__Göbel_strips.html)", "diagonal-strip"),
+        ("[Explore group](squares_in_squares__Göbel_squares.html)", "hand-construction"),
+        ("simulated annealing", "simulated-annealing"),
+        ("Extends the", "extension"),
+        ("Unextends the", "extension"),
+    ],
+)
+def test_each_credit_phrase_maps_to_the_enum_the_transcription_used(
+    phrase: str, expected: str
+) -> None:
+    """One case per row of the table in the generator's docstring."""
+    assert construction_method_from_credit(f"Found by A. Name in 1979. {phrase}") == expected
+
+
+def test_an_unrecognised_credit_line_stays_unknown() -> None:
+    """Including the shape that looks most like a hand construction and is not one.
+
+    `n = 68`'s catalogue entry credits a person, names no method this table reads, and
+    describes a computer search. Nothing here infers `hand-construction` from the absence
+    of a keyword.
+    """
+    assert construction_method_from_credit(None) == "unknown"
+    assert construction_method_from_credit("") == "unknown"
+    assert (
+        construction_method_from_credit(
+            "Found by Sigvart Brendberg in June 2023, using a computer program he wrote "
+            "followed by manual optimization."
+        )
+        == "unknown"
+    )
+
+
+def test_a_credit_phrase_broken_across_lines_still_reads() -> None:
+    """The transcription wraps where the page wrapped, and a rule must not care."""
+    assert (
+        construction_method_from_credit(
+            "Found by A. Name\nin 1979.\n[Explore group](squares_in_squares__Göbel_strips.html)"
+        )
+        == "diagonal-strip"
+    )
+    assert credited_surnames("Found by Maurizio Morandi\nin June 2010.") == ("Morandi",)
+
+
+def test_the_credit_rules_reproduce_the_hand_transcription_below_the_register() -> None:
+    """Measured, not asserted: wherever a rule fires below the register, it fires correctly.
+
+    The comparison runs over the pictured entries at `n <= 100` that a person transcribed
+    from the catalogue. Where a rule fires it must agree with what they wrote -- 22 cases,
+    and no disagreement anywhere. Where none fires the case stays `unknown`, and those are
+    reported rather than checked: a rule that fired there would be an invention, and the
+    count is what a reviewer inherits.
+    """
+    catalogue = _catalogue_facts()
+    fired: dict[int, tuple[str, str]] = {}
+    silent: dict[int, str] = {}
+    for n in range(1, 101):
+        facts = catalogue.get(n)
+        committed, _ = _committed(n)
+        reported = committed["packing"]["reported_upper_bound"]
+        if facts is None or reported["source_key"] != "[Kingbird]":
+            continue
+        if facts.construction_method == "unknown":
+            silent[n] = str(reported["construction_method"])
+            continue
+        fired[n] = (str(reported["construction_method"]), facts.construction_method)
+    disagreed = {n: pair for n, pair in fired.items() if pair[0] != pair[1]}
+    print(f"rules fired at {len(fired)} case(s), silent at {len(silent)}: {sorted(silent)}")
+    print(f"what the hand transcription called the silent ones: {sorted(set(silent.values()))}")
+    assert disagreed == {}
+    assert len(fired) == 22
+    assert all(catalogue[n].analytically_optimized is True for n in fired)
+    # Every case no rule reaches is one a person called `hand-construction`, `trivial-grid`
+    # or `unknown` -- never one of the four methods the rules are for, which is what makes
+    # `unknown` a gap in the table rather than a wrong answer from it.
+    assert set(silent.values()) <= {"hand-construction", "trivial-grid", "unknown"}
+
+
+def test_analytically_optimized_is_the_catalogues_own_disclaimer() -> None:
+    """`false` where the page says so, `true` where it does not, `null` with no line."""
+    assert analytically_optimized_from_credit("Not yet analytically optimized.") is False
+    assert analytically_optimized_from_credit("Found by A. Name in 1979.") is True
+    assert analytically_optimized_from_credit(None) is None
+
+    catalogue = _catalogue_facts()
+    stated = sorted(
+        n for n, facts in catalogue.items() if facts.analytically_optimized is False
+    )
+    print(f"catalogue entries carrying the disclaimer: {len(stated)}")
+    assert 179 in stated
+    assert all(n > 100 for n in stated)
+
+
+def test_a_stale_printed_form_is_dropped_and_typed_as_a_conflict() -> None:
+    """`n = 179`: the page prints a form its own decimal contradicts, and says so by date.
+
+    The catalogue's entry pairs a January-2025 closed form with a January-2026 decimal it
+    does not equal. Recording the form would put a number in `exact_form` that no source
+    currently claims, so the three algebraic fields go null and the disagreement is
+    carried as a `stale-source` conflict quoting both printed values.
+    """
+    catalogue_module = pytest.importorskip("sqpack.kingbird_catalogue")
+    entry = catalogue_module.parse_catalogue()[179]
+    assert entry.exact_form == "(25/2) + sqrt(2)"
+    assert not catalogue_module.exact_form_matches_decimal(entry)
+
+    facts = facts_from_catalogue_entry(entry, n=179)
+    assert facts.exact_form is None
+    assert facts.stale_exact_form == "(25/2) + sqrt(2)"
+    payload = safe_load(
+        generate_record(
+            179,
+            availability=load_availability(),
+            catalogue={179: facts},
+            review_date="2026-09-07",
+            retrieved_date="2026-09-07",
+        ).split("---\n")[1]
+    )["packing"]
+    reported = payload["reported_upper_bound"]
+    assert reported["value"] == entry.side_decimal
+    assert reported["exact_form"] is None
+    assert reported["algebraic_degree"] is None
+    assert reported["minimal_polynomial"] is None
+    conflicts = payload["conflicts"]
+    assert [conflict["kind"] for conflict in conflicts] == ["stale-source"]
+    assert "`(25/2) + sqrt(2)`" in conflicts[0]["detail"]
+    assert f"`{entry.side_decimal}`" in conflicts[0]["detail"]
+    assert conflicts[0]["evidence"] == [KINGBIRD_EVIDENCE]
+
+    # Every other entry in range agrees with its own decimal, so 179 is the only conflict.
+    catalogue = _catalogue_facts()
+    stale = sorted(n for n, facts in catalogue.items() if facts.stale_exact_form is not None)
+    assert stale == [179]
+
+
+def test_the_summary_counts_the_methods_and_names_what_is_left_unknown() -> None:
+    """A run says which cases it is handing a reviewer, rather than burying them."""
+    availability = load_availability()
+    catalogue = _catalogue_facts()
+    lines = method_summary(sorted(availability), availability, catalogue)
+    print("\n".join(lines))
+    counts = {
+        line.removeprefix("construction_method ").split(": ")[0]: int(line.rsplit(": ", 1)[1])
+        for line in lines
+        if line.startswith("construction_method ")
+    }
+    assert sum(counts.values()) == 224
+    assert counts["trivial-grid"] == 97
+    assert counts["unknown"] == 64
+    unresolved = next(line for line in lines if line.startswith("unresolved "))
+    assert "101" in unresolved
+    assert "103" in unresolved
 
 
 def test_nagamochi_values_carry_the_two_precisions_the_register_uses() -> None:
