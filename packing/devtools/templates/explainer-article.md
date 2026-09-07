@@ -41,7 +41,10 @@ This work presents a new lower bound on a long-standing open geometry problem: e
 unit squares with disjoint interiors, free to rotate, cannot fit in a square of size
 ${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$.
 
-The tightest known packing, due to Trump in 1979 (Figure 1), shows
+This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
+open case of the square packing problem.[^novelty] Stromquist published the previous
+bound of {{PRIOR_LOWER_DEC}} in {{PRIOR_YEAR}}.[^stromquist-history][^repair] The
+tightest known packing, due to Trump in 1979 (Figure 1), shows
 <span class="math-reference">$s(11) \le {{BEST_PACKING_TEX}}$.[^trump]</span>
 
 <figure>
@@ -61,10 +64,6 @@ the one-file checker,
 of standard-library Python and short enough to read in one sitting, decides the
 certificate file of {{HEADLINE_N_ATOMS}} weighted points in
 {{HEADLINE_PINNED_RUNTIME}}.<!--END:CLAIM-->
-
-This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
-open case of the square packing problem.[^novelty] Stromquist published the previous
-bound of {{PRIOR_LOWER_DEC}} in {{PRIOR_YEAR}}.[^stromquist-history][^repair]
 
 ## The Agentic Research Framework
 
