@@ -51,25 +51,57 @@ experiment:
       grid/label/point/side/slab changes, subdivision increase, retry or target
       repair. Retain external exits and wall/CPU independently of packet claims.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-117-h-106-continuous-near-axis/packet.json
-  lease:
-    expires: '2026-09-07T03:10:00Z'
-    host: Session090 coordinator
-  results: []
+  effort:
+    timebox: One ten-second producer and one independent ten-second reader, each invoked once
+    wall_seconds: 0.37
+    stopped_by: criterion
+  results:
+  - shape: determination
+    role: outcome
+    question: Does the unchanged ten-set cover every contained square in the full closed near-axis neighborhood?
+    outcome: criterion_met
+    checked_by: >-
+      Producer completed all864triangle inequalities with actual exit0. A separate
+      exact rectangle reader returned actual exit0, decisionproved,36rectangles,
+      144corners and576inequalities with no unresolved inventory. Both signs and
+      all boundaries are covered. No conclusion about H036 or a packing bound.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Complete independently verified near-axis P10 coverage on both closed angle signs and all contained centers.
-    reason: Prospectively frozen; the sole target invocation has not started.
+    reason: Complete fixed-side near-axis ten-point coverage passed the source-distinct exact reader within both frozen caps.
+    commit: 676f775a
 ---
 # exp-117 — Continuous Near-Axis Coverage
 
 This tests [H-106](../../../hypotheses/H-106-continuous-near-axis-ten-point-cover.md),
 one auxiliary clause for H-036, using the unchanged point formulas and complete angle
-neighborhood. No target has run.
-Commit this protocol and pass record checks before dispatch from a clean detached
-`cf0f4d4c` checkout.
-Both commands run from that checkout's `packing/` directory, with `PYTHONPATH=src`
-selecting its isolated source. The existing project interpreter supplies dependencies;
-it does not select the integration checkout's source.
+neighborhood. H-106 is accepted at precisely that scope.
+The sole producer and independent reader completed from a clean detached `cf0f4d4c`
+checkout, after the protocol was committed and the record checks passed.
+Both commands run from that checkout’s `packing/` directory, with `PYTHONPATH=src`
+selecting its isolated source.
+The existing project interpreter supplies dependencies; it does not select the
+integration checkout’s source.
+
+The producer ran between the observed clocks `02:48:02Z` and `02:48:22Z`, returned
+actual exit zero, and checked all 864 inequalities without unresolved entries.
+The independent reader ran once between `02:49:59Z` and `02:50:00Z`, returned actual
+exit zero and `decision=proved`, and checked all 36 slab-rectangles, 144 corners and 576
+inequalities. Both closed angle signs, every center-grid seam and the endpoints are
+covered. The reader retained the exact side and slab binding and reported H-036
+unresolved.
+
+Outer process costs were 0.24 seconds wall and 0.22 CPU for the producer, then 0.13
+seconds wall and 0.12 CPU for the reader: 0.37 wall and 0.34 CPU seconds in total.
+The producer worker reported 0.164891 wall and 0.160650 CPU seconds; the reader reported
+0.062017 wall and 0.061722 CPU seconds.
+These are process costs, not operator attention.
+The reader’s assigned operator interval was `02:49:20Z`–`02:50:19Z`, 59 seconds.
+Neither process was repeated or approached its ten-second cap.
+
+The result directory retains the packet, worker log, outer producer log and stdout, and
+the source-distinct `replay.json` and `replay.log`. The prospective protocol below is
+unchanged.
 
 The
 [independent review](../results/agenda-026/bc-255-near-axis-reader-independent-review.md)

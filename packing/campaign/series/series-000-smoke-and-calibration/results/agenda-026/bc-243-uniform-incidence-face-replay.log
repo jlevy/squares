@@ -1,0 +1,10 @@
+NOT INVOKED: the changed-algorithm uniform producer exited 1 at its frozen 60-second cap and emitted zero stdout bytes.
+Source revision: 22ef5f6c42a8fbb57bce3823fb800fcdbc92ed93
+Producer working directory: /private/tmp/squares-session090-recovery.zliTmQ/packing
+Producer observed dispatch: 2026-09-07 02:59:39 UTC
+Producer completion observed when polled: 2026-09-07 03:00:51 UTC
+Producer measured outer wall: 60.09 seconds; total CPU: 55.86 seconds.
+Producer receipt: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-uniform-incidence-face-control.json (0 bytes).
+No reader command was run. There is no reader stdout, exit status, wall time, or CPU measurement; no reader JSON was created.
+The uniform maximum is unmeasured, so maximum <= 1 has not been established by this source-control pair.
+The uniform source-control replay obligation remains unresolved. No repeat or target was run.

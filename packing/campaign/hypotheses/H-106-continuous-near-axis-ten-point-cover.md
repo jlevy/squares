@@ -75,8 +75,18 @@ The continuous producer and source-distinct rectangle reader passed separate
 mathematical review in Session 090. The reader’s 16 source-free controls include exact
 corner polynomials, closed interval signs, source/packet identity, malformed bytes,
 incomplete positive claims and timeout refusal.
-This establishes instrument readiness, not the claim.
-The first target protocol must still be committed before dispatch.
+That review established instrument readiness, not the claim.
+The first target protocol was then committed before dispatch.
+
+## Outcome
+
+[Exp-117](../series/series-000-smoke-and-calibration/experiments/exp-117-h-106-continuous-near-axis.md)
+accepted this claim on 2026-09-07. The producer certified all 864 triangle obligations;
+the independently implemented reader proved all 576 corner inequalities over the 36
+closed slab-rectangles.
+Both actual process exits were zero, and the reader returned no unresolved obligations.
+This proves the full near-axis ten-point clause, not H-036 or a new packing bound.
+The remaining restricted-theorem clauses need their own evidence.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

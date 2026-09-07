@@ -1,0 +1,17 @@
+{
+  "child_cpu_seconds": 0.16065,
+  "child_exit_code": 0,
+  "child_wall_cap_seconds": 10,
+  "command": [
+    "/Users/levy/wrk/github/squares/packing/.venv/bin/python3",
+    "-m",
+    "devtools.angle_near_axis_control",
+    "--target-near-axis",
+    "--worker"
+  ],
+  "note": "complete worker return",
+  "parent_exit_code": 0,
+  "process_wall_seconds": 0.16489054099997702,
+  "stderr": "",
+  "stdout": "{\"assignments\": [[1, 1, 4, 4, 7, 7], [0, 3, 3, 6, 6, 9], [2, 2, 5, 5, 8, 8]], \"grid\": [6, 3], \"half_angle_slabs\": [[\"-110880/50803079\", \"0\"], [\"0\", \"110880/50803079\"]], \"inequalities_checked\": 864, \"kind\": \"fixed-side-near-axis-ten-cover-grid\", \"side\": \"1939/500\", \"status\": \"proved\", \"unresolved\": [], \"version\": 1}\n"
+}

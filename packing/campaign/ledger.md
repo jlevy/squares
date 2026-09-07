@@ -104,7 +104,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-087](agent-sessions/session-087-agenda022-continuation.md) | completed | contemporaneous | `research-loop` (correctness) | `efficiency-loop` (efficiency) | 2 | think-wufn | Take BC-215 (think-xejq), the one lever the efficiency block measured and did not wire: 20.2 per cent of deep-run work is repeated and 92 per cent of that is trees that did not move, so the tree-id cache is what takes the pull-request wall from about 221.70 s to the operator's two to two and a half minutes. |
 | [session-088](agent-sessions/session-088-validation-efficiency-checkpoint.md) | completed | retrospective | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 1 | think-rwte | Continue think-xejq with explained exhaustive-family planning under W5 Phase 3 after publishing this implementation and verifying its full hosted checkpoint. Preserve complete coverage until the selection and reuse contracts pass their invalidation fixtures. |
 | [session-089](agent-sessions/session-089-agenda024-next-phases.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 14 | think-jgnv | Select BC-251, think-0za3, for the next fresh allocation with its unchanged 150-minute process cap and separate verification. Agenda024 Current Allocation owns the parallel density and angle packages. Keep the integrated PR101 line while open; do not repeat exp113, exp114 or exp115. |
-| [session-090](agent-sessions/session-090-four-hour-research.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 6 | think-9qrx | Continue PR105 with the changed density arithmetic and continuous near-axis controls; exp116 is terminal unresolved and must not be retried unchanged. |
+| [session-090](agent-sessions/session-090-four-hour-research.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `research-loop` (insight) | 7 | think-9qrx | Continue PR105 with the changed density arithmetic and continuous near-axis controls; exp116 is terminal unresolved and must not be retried unchanged. |
 
 ### Workflow summary
 
@@ -117,7 +117,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 18 | 1 | 58 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 9 | 4 | 53 | 7 |
+| `research-loop` | 9 | 4 | 54 | 7 |
 | `pipeline-improvement` | 22 | 0 | 114 | 0 |
 | `documentation-pass` | 1 | 0 | 4 | 0 |
 | `review-planning-oversight` | 0 | 0 | 1 | 0 |
@@ -644,7 +644,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | H-103 | open question | proof | Can a complete typed finite cover of every n = 11 side-minimizing conf |  | 0 |  |  |
 | H-104 | confirmed | proof | At q = 1939/500, the frozen P10, P12 and A-triple point formulas satis |  | 1 |  | 2s wall |
 | H-105 | refuted | proof | Among the 60 distinct D4 placements of trump11-v1, with exactly exp-11 |  | 1 |  | 2s wall |
-| H-106 | running | proof | At q=1939/500, every contained closed unit square with angle in [-pi/7 |  | 1 |  |  |
+| H-106 | confirmed | proof | At q=1939/500, every contained closed unit square with angle in [-pi/7 |  | 1 |  | 0s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -713,7 +713,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-047 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `interval-enclosure`: the numerical prototype's selftest and synthetic controls pass, but a float midpoint fit with fixed tolerance and heuristic radii does not prove a nonempty compatible-pose enclosure or outward- rounded wall and pair signs, and the preregistered command lacks a complete post- authorization runner. No parent retrieval, target parse or target fit ran, so H-053 remains unresolved. |
 | exp-051 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `executable-runner`: the proof, verifier and generic injected-runner controls pass, but the exact preregistered `--record` command exits 2 before target access because no production CLI adapter exists; no scientific H-053 disposition follows. |
 
-### accepted (22)
+### accepted (23)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -739,6 +739,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-062 | series-000 | 20 | Claude (agent), Lane A of agenda-022 BC-213, bead think-wufn, session-087 | H-062 | Every clause is met. The bracket is [97/20, 973/200], width 0.015. Its lower end carries T-021, retained on both routes. Its upper end carries a wall on the two independently constructed site sets H-062 declared, and sits 0.1235 below the ceiling, so at m = 5 the covering value binds and the ceiling never does. The hypothesis is accepted on its own threshold, and this is the first covering wall this project has pinned to the width its hypothesis asked for. |
 | exp-063 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-201 re-run, bead think-614o, session-087 | H-065 | The ratio is 23112904/567130649 = 0.040754, a fifth of the threshold and an eighth of the 0.50 kill line, so the hypothesis is accepted on the number it registered. That acceptance and the cell's own reading point in different directions and both are reported: the tight set is a small fraction of the reachable cells, and it is still far too large and far too spread out for the exact cover to be a check. The threshold was calibrated to catch a tight set covering most of the domain, and four per cent is not most; the operative bar for Corollary 1a was a few hundred cells near a few dozen positions, and twenty-three million cells in twenty-two thousand components is not that either. |
 | exp-114 | series-000 | 11 | Codex coordinator, max reasoning, think-d2d1 in Session089 | H-104 | All seven fixed-formula auxiliaries hold at q=1939/500 for exactly zero and45 degrees in the reviewed exact computation. The independent reader verifies inputs and complete receipt scope. No nearby-angle or H036 conclusion follows. |
+| exp-117 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session090 BC255 | H-106 | Complete fixed-side near-axis ten-point coverage passed the source-distinct exact reader within both frozen caps. |
 
 ### baseline (11)
 
@@ -755,12 +756,6 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-030 | series-000 | 9 | openai-codex | H-021 | The complete event path stays below the 30-second profile trigger and retains its nonconverged outcome without censorship. D-126 bars frequency or deterministic-work claims, and no additional n=9 samples are authorized by this performance cell. |
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
-
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-117 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session090 BC255 | H-106 | Prospectively frozen; the sole target invocation has not started. |
 
 ## Resumable — stopped on the clock, not on an answer
 

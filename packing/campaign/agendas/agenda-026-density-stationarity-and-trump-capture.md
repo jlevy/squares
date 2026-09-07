@@ -504,9 +504,14 @@ agenda:
       Session090 registers H106 for the full near-axis ten-point clause and selects
       its source-bound instrument after the changed original-source grid and
       independent corner reader pass. No continuous target has run at registration.
+      Exp117 subsequently accepts H106 through a source-distinct exact rectangle
+      reader: both full closed near-axis signs and all contained centers are covered.
+      Near45 localization, forced multiplicity and twelve-point clauses remain open;
+      the next bounded assessment chooses among those clauses without changing H036.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-117-h-106-continuous-near-axis.md
     workflows: [insight-iteration, pipeline-improvement, research-loop]
     depends_on: [BC-250]
     next_evidence: >-

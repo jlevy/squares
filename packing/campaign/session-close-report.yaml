@@ -1405,7 +1405,7 @@ sessions:
   title: "Scalar, density, and restricted-angle research"
   status: in_progress
   primary_bead: think-9qrx
-  phases: 6
+  phases: 7
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-090.yaml
@@ -1416,8 +1416,8 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-090.yaml
-    model_responses: 819
-    agent_hours: 6.03
-    active_union_hours: 1.97
-    wall_hours: 1.97
+    model_responses: 974
+    agent_hours: 7.39
+    active_union_hours: 2.53
+    wall_hours: 2.53
     snapshot_incomplete: true

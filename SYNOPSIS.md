@@ -137,7 +137,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives nine confirmed hypotheses, eleven refuted
+The generated ledger currently derives ten confirmed hypotheses, eleven refuted
 hypotheses, one open hypothesis, fifteen open questions, and thirty-six blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. No hypothesis waits on review and six are unresolved.
@@ -591,10 +591,13 @@ BC-251/exp-116 finished unresolved: no row convergence, and an independently rep
 dual mass of about10.080180 at depth one, below the obstruction threshold.
 No bridge or unchanged retry is selected.
 BC-243 has complete facet/slab controls and an accepted original source, but its uniform
-control timed out; a local arithmetic cache is under review.
-BC-255’s changed zero-angle source grid passed an independent corner reader; H-106 now
-names the full near-axis ten-point clause, with its continuous instrument still being
-built. Full validation of research checkpoint `99a3ad42` passed;
+control timed out even with a local arithmetic cache.
+A separately reviewed sign-incidence algorithm is now undergoing source controls; no
+density target is open.
+BC-255 accepted H-106’s full continuous near-axis ten-point clause through an
+independent exact rectangle reader.
+This is one restricted-theorem auxiliary, not a packing bound.
+Full validation of research checkpoint `99a3ad42` passed;
 [Session 089](packing/campaign/agent-sessions/session-089-agenda024-next-phases.md)
 retains that verdict and the completed experiments, which must not be repeated.
 [Agenda 024’s Current Allocation](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
@@ -2811,7 +2814,7 @@ round that names the hypothesis, control roles included.
 | [H-103](packing/campaign/hypotheses/H-103-complete-typed-global-capture.md) | open question | Can a complete typed cover exclude every minimizing branch or place its entire surviving box inside the accepted local Trump neighborhood? | 0 | — |
 | [H-104](packing/campaign/hypotheses/H-104-fixed-side-point-cover-auxiliaries.md) | confirmed | The fixed point formulas at side1939/500 satisfy all seven exact0/45-degree auxiliary clauses | 1 | 2s wall |
 | [H-105](packing/campaign/hypotheses/H-105-exp113-overweight-pair-obstruction.md) | refuted | Exp113’s fixed weights have an overweight pair with intersecting interiors | 1 | 2s wall |
-| [H-106](packing/campaign/hypotheses/H-106-continuous-near-axis-ten-point-cover.md) | running | The unchanged ten-point formulas cover every contained square throughout the full near-axis angle neighborhood at1939/500 | 1 | — |
+| [H-106](packing/campaign/hypotheses/H-106-continuous-near-axis-ten-point-cover.md) | confirmed | The unchanged ten-point formulas cover every contained square throughout the full near-axis angle neighborhood at1939/500 | 1 | 0.37s wall |
 
 ### Confirmed
 
@@ -3035,7 +3038,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-078.yaml` | session-078, session-082 | 2,401 | 13.41 h | 9.45 h | 10.0 h | yes |
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
-| `codex-task-tree-session-090.yaml` | session-090 | 819 | 6.03 h | 1.97 h | 1.97 h | yes |
+| `codex-task-tree-session-090.yaml` | session-090 | 974 | 7.39 h | 2.53 h | 2.53 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
@@ -3169,7 +3172,7 @@ archive beside it.
 | [exp-114](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md) | 11 | target | H-104 | seven fixed-formula exact-angle auxiliary clauses at1939/500 | all seven clauses hold in the reviewed exact computation and independent input/receipt replay | accepted |
 | [exp-115](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-115-h-105-fixed-candidate-pair-obstruction.md) | 11 | target | H-105 | exact overweight-pair obstruction for exp113’s unchanged weights | all 134 eligible pairs have independently checked separating axes | rejected |
 | [exp-116](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-116-h-093-scalar-61-16.md) | 11 | target | H-093 | one frozen scalar attempt at side61/16 | all19row solves unconverged; exact dual mass20843712108/2067791663 at depth1 independently reproduced, below11 | unresolved |
-| [exp-117](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-117-h-106-continuous-near-axis.md) | 11 | target | H-106 | full near-axis ten-point cover on the fixed grid | prospectively frozen; target not yet run | in-progress |
+| [exp-117](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-117-h-106-continuous-near-axis.md) | 11 | target | H-106 | full near-axis ten-point cover on the fixed grid | independent rectangle reader proves all576closed inequalities; no H036 or packing-bound conclusion | accepted |
 
 ### Cost and provenance
 
@@ -3247,7 +3250,7 @@ archive beside it.
 | exp-114 | one 10-second producer and one separate 10-second receipt/witness replay | 2.46 s | — | criterion | `e45c8a63` |
 | exp-115 | one 30-second producer and one separate 30-second file replay | 1.80 s | — | criterion | `cf299e6c` |
 | exp-116 | one 150-minute cooperative scalar invocation; separate exact verification | 3559.45 s | — | saturation | `4d305597` |
-| exp-117 | one ten-second producer and conditional ten-second independent replay | — | — | — | `cf0f4d4c` |
+| exp-117 | one ten-second producer and one independent ten-second replay; both accepted | — | 0.37s | — | `cf0f4d4c` |
 
 ### What the 73 rounds jointly establish
 

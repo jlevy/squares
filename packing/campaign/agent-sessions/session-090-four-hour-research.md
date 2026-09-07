@@ -134,7 +134,7 @@ session:
     clock_role: work
     objective: Recover interrupted worker evidence, finish independent angle readiness and publish the integrated checkpoint.
     bead: think-hbni
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: Retained files survived the operational interruption, but worker completion reports and temporary checkouts did not.
     budget_minutes: 30
@@ -144,10 +144,30 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --push
     kill_condition: A readiness premise fails, a frozen process cap expires, or the bounded recovery slice ends.
     fallback: Publish exact unresolved obligations without restarting a completed experiment or extending a scientific cap.
+    outcome: H106 passed its sole producer and independent exact reader; scalar disposition and source outcomes are retained. Checkpoint2707ea39 is pushed and the full gate is running.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-117-h-106-continuous-near-axis.md]
+    stop_reason: The recovery boundary arrived with independent H106 acceptance and a changed density algorithm ready for source controls.
+    next_action: Record the accepted auxiliary lemma, test the changed density source controls and review the fixed-site adapter without resetting its author cap.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Disposition H106, test the changed density source controls and select the next useful scalar or restricted-angle discriminator.
+    bead: think-9qrx
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: The complete near-axis lemma passed independent replay; remaining lanes have new reviewed instruments or bounded assessments, not unchanged retries.
+    budget_minutes: 30
+    started_at: '2026-09-07T02:55:03Z'
+    deadline_at: '2026-09-07T03:25:03Z'
+    expected_output: Recorded H106 acceptance, changed-algorithm source readiness and one prospectively priced continuation from the returned assessments.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: A scientific guard fails, its frozen process cap expires, or the30-minute selection slice ends.
+    fallback: Publish the exact accepted and unresolved scope; preserve unspent target allowances and the finalization reserve.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Accept only reviewed artifacts, freeze any new target prospectively, and retain one integrated PR105.
+    next_action: Run only newly selected controls; a new target requires its own registered claim, reviewed instrument and committed protocol.
   primary_bead: think-9qrx
   status: in_progress
   budget:
@@ -588,16 +608,16 @@ session:
     excluded_commands: [target measurements, repeated completed commands, cap increases, Git mutations, shared registry edits]
   - task: BC243 exact facet-side membership reuse; think-8zdl
     operator: Codex density_control_recovery, max mathematical reasoning
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
-    files: []
-    checks: []
+    outcome: Exact line-incidence reuse preserves direct membership and witness construction; committed22ef5f6c after independent root review.
+    evidence: [packing/devtools/density_face_verifier.py, packing/tests/test_density_face_verifier.py]
+    files: [packing/devtools/density_face_verifier.py, packing/tests/test_density_face_verifier.py]
+    checks: [Root replay passed all50focused controls in9.84s wall9.78s CPU; Ruff and BasedPyright clean.]
     uncertainty: Membership operation reduction is not a source speedup; independent review and changed-code source controls remain separate.
-    elapsed_seconds: null
-    elapsed_quality: unavailable
-    next_action: Compare inferred side-sign membership with direct oriented-edge tests on every retained toy probe.
+    elapsed_seconds: 1012
+    elapsed_quality: operator_reported_approximate
+    next_action: Run the separately selected changed-code source controls, without candidate access.
     phase: 6
     budget_minutes: 20
     started_at: '2026-09-07T02:31:32Z'
@@ -616,7 +636,7 @@ session:
   - Updated narrative-count negative control fired in 1.568s using a private source snapshot.
   - Root independently reviewed the rational angle kernel and replayed 8 controls; 0.05s pytest, 0.57s process wall, 0.42s CPU.
   stop_reason: null
-  next_action: Continue PR105 with the changed density arithmetic and continuous near-axis controls; exp116 is terminal unresolved and must not be retried unchanged.
+  next_action: Continue PR105 with accepted H106, the next restricted-angle clause and fixed-site scalar readiness; density remains source-blocked and exp116 must not be retried unchanged.
 ---
 # Session 090 — Four-Hour Research Block
 
@@ -794,6 +814,46 @@ the still-unstarted uniform control.
 Independent recovery review treats the retained continuous reader as unfinished author
 work until its mathematics and controls pass.
 The scalar follow-up is a read-only assessment, not another solver invocation.
+
+## Continuous Lemma and Next Selection
+
+Exp-117 accepted H-106 after one producer and one independently implemented exact
+reader. All 36 closed slab-rectangles and their 576 corner inequalities passed; summed
+process costs were 0.37 seconds wall and 0.34 CPU. The reader’s operator interval was
+02:49:20–02:50:19 UTC under `think-tv58`. H-036 and the global bound remain unchanged.
+Near-45-degree localization, forced points and twelve-point coverage are still separate
+obligations.
+`think-hkpi` owns a read-only comparison of those next clauses from 02:54:21
+to the original 03:09:21 boundary.
+
+The density sign-incidence author finished at 02:48:24 UTC. Root independently reviewed
+the inward-sign and clearance argument under `think-sxbg`, and all 50 focused controls
+passed before commit `22ef5f6c`. `think-2sd2` then ran the original and uniform source
+controls once each, with the unchanged 60-second process caps.
+The original producer and independent slab replay passed at maximum one; the uniform
+producer timed out with empty stdout, so its reader was not invoked.
+Total process costs were 73.61 seconds wall and 69.33 CPU; the operator interval was
+02:56:55–03:02:12 UTC. These shared-host timings do not establish a speedup.
+No further density optimization or candidate run is selected in this slice.
+
+For BC-252, `think-au9i` completed the fixed-site receipt adapter in the original
+02:42:09–02:54:37 author interval.
+The root review found that a failed later LP can leave dual vectors indexed by a shorter
+row prefix; the receipt now names that prefix explicitly and has a regression.
+`think-36uc` owns the separate final review.
+The read-only protocol assessment ran 02:57:26–03:02:58 UTC under `think-u7c9`. Its
+proposed 45-minute target, 15-minute source controls and 20-minute candidate
+verification do not fit before the closing reserve.
+Reuse of already-running, unchanged proof-chain controls and a shorter external target
+cap need an explicit allocation decision; no scalar target is authorized by the adapter
+alone.
+
+The published `2707ea39` checkpoint passed every required hosted check at 02:52:03 UTC.
+The full local gate remains active on that immutable snapshot.
+The fresh upstream fetch found no new main commit and no other outstanding PR. PR 105’s
+body now records the terminal scalar outcome, accepted auxiliary lemma, source-control
+limits and current validation scope.
+Core README and TUTORIAL exposition remains unchanged.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

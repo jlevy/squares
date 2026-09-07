@@ -1,0 +1,20 @@
+Changed-algorithm original source control only.
+Source revision: 22ef5f6c42a8fbb57bce3823fb800fcdbc92ed93
+Working directory: /private/tmp/squares-session090-recovery.zliTmQ/packing
+Operator first observed clock: 2026-09-07 02:56:55 UTC
+Operator boundary: 2026-09-07 03:04:55 UTC
+Observed immediately before dispatch: 2026-09-07 02:57:23 UTC
+Setup/preflight to dispatch: 28 seconds.
+The immutable checkout was clean; no incidence-control artifacts or live density-control processes existed before this slice. Noclobber prevented output replacement.
+Exact command:
+/usr/bin/time -p env PYTHONPATH=src OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.run_full_size_density_faces --control trump-original-control-v1 --timeout-seconds 60 > /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-original-incidence-face-control.json 2> /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-original-incidence-face-control.log
+Exact worker stderr and outer /usr/bin/time -p output follow:
+{"wall_seconds": 9.474764915999913, "cpu_seconds": 9.44742}
+real 9.62
+user 9.55
+sys 0.03
+Completion observed when the process was polled: 2026-09-07 02:58:04 UTC. The process may have exited earlier; its measured outer wall is recorded above.
+Exit status: 0
+Total outer CPU: 9.58 seconds (user plus sys).
+Complete positive receipt: source trump-original-control-v1; 11 canonical placements; mass 11; maximum 1.
+This source-control measurement permits one independent replay at the unchanged 60-second cap. Shared-host timing is not a speedup claim.
