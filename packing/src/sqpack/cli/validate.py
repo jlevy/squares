@@ -40,6 +40,11 @@ from threading import Lock
 from typing import Literal, Never, TextIO, override
 
 from sqpack import gate_budgets
+from sqpack.known_best import (
+    CALIBRATION_CORPUS,
+    KNOWN_BEST_COMPOSITES,
+    KNOWN_BEST_CORPUS,
+)
 from sqpack.project import (
     ProjectLayoutError,
     add_version_argument,
@@ -1441,8 +1446,13 @@ def _known_best_atlas(context: Context) -> str:
     )
     _require_text(
         output,
-        "known-best atlas check passed: 100 sources/plans, witnesses, renders, "
-        "1 composite, and links",
+        f"known-best atlas check passed: {KNOWN_BEST_CORPUS.count} sources/plans, "
+        f"witnesses, renders, {len(KNOWN_BEST_COMPOSITES)} composite"
+        f"{'' if len(KNOWN_BEST_COMPOSITES) == 1 else 's'}, and links",
+        # Five strata and thirty-six non-grid cases are calibration facts, not corpus
+        # facts: `D4` pins both layers at CALIBRATION_CORPUS, so neither moves when the
+        # atlas widens. They stay literal because the numbers are findings about the
+        # inspected hundred rather than counts of it.
         "known-best contact overlay check passed: 5 house-rendered calibration strata",
         "known-best chunk evidence profile check passed: 36 non-grid calibration cases",
         "contact enumeration pricing check passed",
@@ -1455,18 +1465,31 @@ def _known_best_atlas(context: Context) -> str:
 def _known_best_chunk_census(context: Context) -> str:
     """Re-derive the committed chunk census using its serial default."""
     output = _module(context, "devtools.census_known_best_chunks", "--check")
+    # A calibration count, not a corpus one: `D4` holds the census at CALIBRATION_CORPUS
+    # while the atlas widens, and this reads the same constant the census prints from.
     _require_text(
         output,
         "chunk census check passed: components, contacts, and bounded lattice partitions "
-        "for 100 records",
+        f"for {CALIBRATION_CORPUS.count} records",
     )
     return output
 
 
 def _prospective_source_map(context: Context) -> str:
+    """The audited source map for the prospective range, whose size it declares itself."""
     output = _module(context, "devtools.map_prospective_sources", "--check")
+    # 224 is the prospective range's own size, not the known-best corpus's, so it is read
+    # from the artifact the step checks rather than derived from KNOWN_BEST_CORPUS. Under
+    # `D3` the known-best register supersedes this seed as it widens; the count stays a
+    # property of the map either way.
+    availability = json.loads(
+        (PROJECT_ROOT / "atlas/prospective/source-availability-101-324.json").read_text(
+            encoding="utf-8"
+        )
+    )["availability"]
+    cases = int(availability["range"]["count"])
     _require_text(
-        output, "prospective source map check passed: 224 cases, availability and SVG"
+        output, f"prospective source map check passed: {cases} cases, availability and SVG"
     )
     return output
 
@@ -1474,8 +1497,17 @@ def _prospective_source_map(context: Context) -> str:
 def _prospective_atlas(context: Context) -> str:
     """Re-derive the prospective seed using its serial default."""
     output = _module(context, "devtools.build_prospective_atlas", "--check")
+    # Read from the seed rather than pinned: how many of the 224 prospective cases carry
+    # retained geometry is a property of that collection, and it moves as the acquisition
+    # pass runs, independently of KNOWN_BEST_CORPUS.
+    seed = json.loads(
+        (PROJECT_ROOT / "atlas/prospective/manifest.json").read_text(encoding="utf-8")
+    )["atlas_seed"]
+    retained = len(seed["entries"])
     _require_text(
-        output, "prospective atlas seed check passed: 101 witnesses and 101 house renderings"
+        output,
+        f"prospective atlas seed check passed: {retained} witnesses and "
+        f"{retained} house renderings",
     )
     return output
 
@@ -1483,9 +1515,11 @@ def _prospective_atlas(context: Context) -> str:
 def _frontier_rigidity(context: Context) -> str:
     """Every rigidity block still follows from the screen and the tiling argument.
 
-    The counts are pinned because they are the finding: 84 records are NOT rigid on a
+    The counts are asserted because they are the finding: 84 records are NOT rigid on a
     replayable certificate, ten are rigid by an exact tiling with no slack, and four are
-    assessed and unsettled. `undetermined` is a result and is not the same as the field
+    assessed and unsettled. Three of the four are now derived from the corpus rather than
+    written out, for the reason given at the derivation below; only the unsettled count is
+    still a literal. `undetermined` is a result and is not the same as the field
     being null.
 
     Two records are excluded here because a stronger first-party argument owns them, and
@@ -1506,12 +1540,21 @@ def _frontier_rigidity(context: Context) -> str:
     output = _module(context, "devtools.assess_frontier_rigidity", "--check")
     _require_text(output, "frontier rigidity check passed")
     review = _module(context, "devtools.assess_frontier_rigidity", "--review")
+    # Three of the four numbers follow the corpus and are derived from it. The tilings are
+    # the perfect squares of KNOWN_BEST_CORPUS -- ten at n=1..100, eighteen at n=1..324 --
+    # and what is left after the tilings and the three stronger arguments is the screen's
+    # own split. Only that split's smaller half is a finding rather than a count, so only
+    # it is pinned; think-93on re-argues it when the corpus grows.
+    stronger = (5, 11, 40)
+    tilings = sum(1 for n in KNOWN_BEST_CORPUS.numbers if math.isqrt(n) ** 2 == n)
+    undetermined = 3
+    not_rigid = KNOWN_BEST_CORPUS.count - len(stronger) - tilings - undetermined
     _require_text(
         review,
-        "assessed: 10 locally-rigid, 84 not-rigid, 3 undetermined, "
-        "3 left to a stronger argument",
+        f"assessed: {tilings} locally-rigid, {not_rigid} not-rigid, "
+        f"{undetermined} undetermined, {len(stronger)} left to a stronger argument",
     )
-    _require_text(review, "left to a stronger argument: n = [5, 11, 40]")
+    _require_text(review, f"left to a stronger argument: n = {list(stronger)}")
     return output + review
 
 
@@ -1524,12 +1567,18 @@ def _translation_escape_screen(context: Context) -> str:
     A miss is not rigidity, so nothing here may be restated as one.
     """
     output = _module(context, "devtools.screen_translation_escape", "--check")
+    # The screened count is a corpus fact and scales: the whole of KNOWN_BEST_CORPUS less
+    # the records the shape-residual limit throws out. The four findings after it are not
+    # counts of anything and stay pinned as tripwires -- think-93on re-argues them, and
+    # the exclusion list with them, when the corpus grows.
+    excluded = ("n=68", "n=69")
+    screened = KNOWN_BEST_CORPUS.count - len(excluded)
     _require_text(
         output,
-        "translation escape screen check passed: 98 records screened, "
+        f"translation escape screen check passed: {screened} records screened, "
         "25 with a square that separates (76 squares), "
         "84 with a square that translates at all (496 squares), "
-        "excluded: n=68, n=69",
+        f"excluded: {', '.join(excluded)}",
     )
     return output
 
@@ -1768,8 +1817,10 @@ def _verifier_limits(context: Context) -> str:
 
 def _frontier_corpus(context: Context) -> str:
     files = sorted((PROJECT_ROOT / "frontier").glob("n-*.md"))
-    if len(files) != 100:
-        raise StepFailureError(f"expected 100 frontier artifacts, found {len(files)}")
+    if len(files) != KNOWN_BEST_CORPUS.count:
+        raise StepFailureError(
+            f"expected {KNOWN_BEST_CORPUS.count} frontier artifacts, found {len(files)}"
+        )
     values: set[int] = set()
     formal_open = 0
     reported_open = 0
@@ -1799,7 +1850,7 @@ def _frontier_corpus(context: Context) -> str:
             )
         reported_open += packing["reported_status"] == "open"
         values.add(n)
-    expected_values = set(range(1, 101))
+    expected_values = set(KNOWN_BEST_CORPUS.numbers)
     if values != expected_values:
         missing = sorted(expected_values - values)
         extra = sorted(values - expected_values)
@@ -1814,6 +1865,8 @@ def _frontier_corpus(context: Context) -> str:
     # closed form, the first bounds specific to either size. This constant is a
     # tripwire, not a derivation -- check_nagamochi_bounds reads the count from the
     # record; this line exists so the record cannot move without someone saying so.
+    # Deliberately NOT derived from KNOWN_BEST_CORPUS: widening the corpus adds open
+    # cases, and think-93on re-argues these three numbers rather than letting them float.
     if (formal_open, reported_open, nagamochi_count) != (65, 65, 58):
         raise StepFailureError(
             "frontier corpus counts drifted: expected 65 formal-open, 65 reported-open, "
@@ -1836,10 +1889,11 @@ def _frontier_corpus(context: Context) -> str:
         and all(result["selftests"].values())
     ):
         raise StepFailureError("the Kingbird n=29 replay contract changed")
+    total = KNOWN_BEST_CORPUS.count
     return (
-        f"  100 artifacts, n = 1..100; formal lane: {100 - formal_open} proved, "
-        f"{formal_open} open\n"
-        f"  reported lane: {100 - reported_open} proved, {reported_open} open; "
+        f"  {total} artifacts, n = {KNOWN_BEST_CORPUS.first_n}..{KNOWN_BEST_CORPUS.last_n}; "
+        f"formal lane: {total - formal_open} proved, {formal_open} open\n"
+        f"  reported lane: {total - reported_open} proved, {reported_open} open; "
         f"{nagamochi_count} formal-open cases use Nagamochi\n"
         "  n=29 source numerically checked: 29 squares, 406 pairs, six classes\n"
         "  named-source reconciliation is enforced by soft-schema validation"

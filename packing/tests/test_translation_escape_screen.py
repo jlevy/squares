@@ -37,9 +37,16 @@ from devtools.screen_translation_escape import (
     shape_residual,
     translated,
 )
+from sqpack.known_best import KNOWN_BEST_CORPUS
 from sqpack.verify import float_sign, verify_packing
 
 FRONTIER = ROOT / "frontier"
+GOLDEN_SCREENED = {"n=1..100": 98}
+"""Records screened at a corpus whose result has actually been looked at.
+
+The count itself is derived below -- the corpus less the shape-residual exclusions -- so
+widening the corpus does not falsify this test. What this pins is the one corpus whose
+number someone has checked, so a change *at* `n = 1..100` still fails."""
 # Closed forms the retained certificates must reproduce, from the geometry of each
 # packing rather than from this screen: a corner rattler in a square pocket slides the
 # pocket's diagonal.  Evaluated inside the tests, at the screen's working precision.
@@ -91,7 +98,12 @@ def test_retained_screen_satisfies_its_own_contract() -> None:
     screen = document["screen"]
     assert schema_errors(screen) == []
     assert screen_errors(screen) == []
-    assert screen["aggregate"]["records_screened"] == 98
+    # The screen covers the whole corpus less whatever its own shape-residual limit
+    # excluded, so the count follows `KNOWN_BEST_CORPUS` rather than a literal.
+    screened = KNOWN_BEST_CORPUS.count - len(screen["excluded"])
+    assert screen["aggregate"]["records_screened"] == screened
+    golden = GOLDEN_SCREENED.get(KNOWN_BEST_CORPUS.label)
+    assert golden is None or screened == golden
     assert all(case["stable_across_tolerances"] for case in screen["cases"])
     assert screen["aggregate"]["tolerance_disagreement_ns"] == []
 

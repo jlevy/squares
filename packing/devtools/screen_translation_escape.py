@@ -83,6 +83,7 @@ import mpmath as mp
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
+from sqpack.known_best import KNOWN_BEST_CORPUS
 from sqpack.verify import Square, edge_axes, float_sign, project, verify_packing
 from sqpack.witness import load_witness, materialize_witness
 from sqpack.workers import worker_count
@@ -596,8 +597,35 @@ def screen_record(
 
 
 def manifest_entries() -> list[dict[str, Any]]:
-    """The retained known-best corpus, in the manifest's order."""
-    return json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]["entries"]
+    """The retained known-best corpus, in the manifest's order.
+
+    The whole of `KNOWN_BEST_CORPUS`, checked rather than assumed. This screen extends
+    with the corpus and is meant to: a replayed slide is a certificate about one
+    configuration, not an instrument calibrated on the cases it was designed against, so
+    `D4`'s calibration boundary is not its boundary. What it must not do is describe a
+    subset while reporting on the corpus, which is what a manifest short of the declared
+    range would make the aggregate do.
+    """
+    atlas = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]
+    entries = list(atlas["entries"])
+    declared = atlas["range"]
+    if (declared["first_n"], declared["last_n"]) != (
+        KNOWN_BEST_CORPUS.first_n,
+        KNOWN_BEST_CORPUS.last_n,
+    ):
+        raise ValueError(
+            f"the manifest declares n={declared['first_n']}..{declared['last_n']} while "
+            f"KNOWN_BEST_CORPUS is {KNOWN_BEST_CORPUS.label}; rebuild the atlas before "
+            "screening it"
+        )
+    covered = {int(entry["n"]) for entry in entries}
+    missing = sorted(set(KNOWN_BEST_CORPUS.numbers) - covered)
+    if missing or len(covered) != len(entries):
+        raise ValueError(
+            f"the manifest does not carry {KNOWN_BEST_CORPUS.label} exactly once each: "
+            f"missing n = {missing}"
+        )
+    return entries
 
 
 def materialize_record(
