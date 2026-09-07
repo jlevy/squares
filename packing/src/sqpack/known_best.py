@@ -67,6 +67,158 @@ assessment is right -- that is a review decision, and this criterion assumes it 
 than revisiting it.
 """
 
+
+@dataclass(frozen=True)
+class CorpusRange:
+    """A closed range of case counts, named once so nothing re-spells ``1..100``.
+
+    The atlas builds a witness, a house rendering and a manifest entry for every case in
+    this range, and every count it states about the corpus is derived from it. Widening
+    the corpus is then one edit here rather than a search for literal hundreds.
+    """
+
+    first_n: int
+    last_n: int
+
+    def __post_init__(self) -> None:
+        if self.first_n < 1 or self.last_n < self.first_n:
+            raise ValueError("a corpus range must be nonempty and positive")
+
+    @property
+    def count(self) -> int:
+        """How many cases the range covers."""
+        return self.last_n - self.first_n + 1
+
+    @property
+    def numbers(self) -> range:
+        """Every case in the range, ascending."""
+        return range(self.first_n, self.last_n + 1)
+
+    @property
+    def square_count(self) -> int:
+        """Unit squares across the whole range, which is what a composite draws."""
+        return sum(self.numbers)
+
+    @property
+    def label(self) -> str:
+        """How the range is written wherever a message or a layout string names it."""
+        return f"n={self.first_n}..{self.last_n}"
+
+
+@dataclass(frozen=True)
+class CompositeSpec:
+    """One composite figure: the cases it draws, its grid width, and its filename stem.
+
+    Everything about a composite that is not a drawing decision follows from these four
+    fields, so a second figure is a second specification rather than a second set of
+    constants. Rows, the canvas, the legend and footer baselines and the layout string
+    are all computed; the ones that need the card metrics are computed by
+    ``CompositeCanvas`` in ``devtools/build_known_best_atlas.py``, which is where those
+    metrics live.
+    """
+
+    first_n: int
+    last_n: int
+    columns: int
+    stem: str
+    #: Drawing units kept from the top for the link-preview card, or None where the
+    #: composite publishes no card. Stated rather than derived: the crop is chosen
+    #: against a row boundary and an unfurler's aspect ratio, neither of which follows
+    #: from the range.
+    card_units: int | None = None
+    #: Whole-number scales of the full-canvas PNG exports. Whole on purpose, and the
+    #: reason is measured rather than aesthetic: a fractional scale puts every edge in
+    #: the drawing on a fractional pixel boundary, so the rasteriser invents an
+    #: antialiasing shade for each one and PNG loses the flat runs it compresses.
+    raster_scales: tuple[int, ...] = (1, 2)
+
+    def __post_init__(self) -> None:
+        # Constructing the range is what validates first_n and last_n.
+        if self.cases.count < 1 or self.columns < 1:
+            raise ValueError("a composite needs at least one case and one column")
+        if not self.stem:
+            raise ValueError("a composite needs a filename stem")
+        if self.card_units is not None and self.card_units < 1:
+            raise ValueError("a link-preview crop keeps a positive number of units")
+        if any(scale < 1 for scale in self.raster_scales):
+            raise ValueError("a raster scale is a whole multiple of the canvas")
+
+    @property
+    def cases(self) -> CorpusRange:
+        """The closed range of cases this composite draws."""
+        return CorpusRange(self.first_n, self.last_n)
+
+    @property
+    def count(self) -> int:
+        return self.cases.count
+
+    @property
+    def numbers(self) -> range:
+        return self.cases.numbers
+
+    @property
+    def square_count(self) -> int:
+        return self.cases.square_count
+
+    @property
+    def rows(self) -> int:
+        """Rows the grid needs, the last one short where the count does not fill it."""
+        return -(-self.count // self.columns)
+
+    @property
+    def layout(self) -> str:
+        """The grid, columns first: ``10 by 10, row-major n=1..100``."""
+        return f"{self.columns} by {self.rows}, row-major {self.cases.label}"
+
+    @property
+    def svg_name(self) -> str:
+        return f"{self.stem}.svg"
+
+    @property
+    def pdf_name(self) -> str:
+        return f"{self.stem}.pdf"
+
+    @property
+    def card_png_name(self) -> str:
+        return f"{self.stem}-card.png"
+
+    def raster_name(self, scale: int) -> str:
+        """The PNG for one whole-number scale; 1x carries no suffix."""
+        return f"{self.stem}.png" if scale == 1 else f"{self.stem}@{scale}x.png"
+
+
+KNOWN_BEST_CORPUS = CorpusRange(first_n=1, last_n=100)
+"""The cases the known-best atlas normalizes, renders, and manifests.
+
+The honest constraint on widening it is the corpus rather than the drawing: a case needs
+a frontier record whose facts are sourced to the same standard as the first hundred
+before a card about it can be honest.
+"""
+
+KNOWN_BEST_COMPOSITES = (
+    CompositeSpec(
+        first_n=1,
+        last_n=100,
+        columns=10,
+        stem="known-best-1-100",
+        # The card is a crop rather than a scale. Every unfurler shows a landscape card
+        # and centre-crops what it is given, so the portrait composite would lose its
+        # title and keep a band from the middle of the grid -- the part that says least
+        # about what the picture is. Cropping it here means the crop is chosen rather
+        # than inherited: this is the title block plus four whole rows, and the sliver of
+        # the fifth that completes the ratio reads as a continuation rather than a cut.
+        # 2400x1256 is 1.911:1, which is 1.91:1 to the nearest whole pixel, so a platform
+        # expecting that ratio crops nothing at all.
+        card_units=1256,
+    ),
+)
+"""Every composite figure published from the known-best corpus.
+
+One today. A second is a second entry here, not a second copy of the builder: the
+geometry, the export set, the manifest record and the drift report all read the
+specification.
+"""
+
 _NUMBER = r"[-+]?(?:(?:\d+(?:\.\d*)?)|(?:\.\d+))(?:[eE][-+]?\d+)?"
 _PATH_TOKEN = re.compile(rf"[MmLlHhVvZz]|{_NUMBER}")
 _TRANSFORM = re.compile(r"([A-Za-z]+)\s*\(([^)]*)\)")

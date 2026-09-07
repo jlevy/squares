@@ -18,6 +18,7 @@ import yaml
 from devtools import build_known_best_atlas as known_best_builder
 from devtools import render_composite_pdf
 from sqpack.known_best import (
+    CompositeSpec,
     SourceGeometryError,
     catalogue_source_map,
     parse_kingbird_svg,
@@ -255,38 +256,49 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
     release_by_n = {record["n"]: record for record in release["results"]}
     assert document["softschema"]["contract"] == "packing.squares:KnownBestAtlas/v1"
     entries = document["atlas"]["entries"]
-    assert document["atlas"]["composite"] == {
-        "layout": "10 by 10, row-major n=1..100",
-        "png_high_resolution": {
-            "derived_from": "atlas/known-best/known-best-1-100.svg",
-            "height": 5792,
-            "path": "atlas/known-best/known-best-1-100@2x.png",
-            "scale": 2,
-            "width": 4800,
-        },
-        "png_link_preview_card": {
-            "derived_from": "atlas/known-best/known-best-1-100.svg",
-            "height": 1256,
-            "path": "atlas/known-best/known-best-1-100-card.png",
-            "scale": 1,
-            "top_crop": True,
-            "width": 2400,
-        },
-        "png_preview": {
-            "derived_from": "atlas/known-best/known-best-1-100.svg",
-            "height": 2896,
-            "path": "atlas/known-best/known-best-1-100.png",
-            "scale": 1,
-            "width": 2400,
-        },
-        "renderer": "sqpack deterministic composite renderer",
-        "square_count": 5050,
-        "svg": {
-            "height": 2896,
-            "path": "atlas/known-best/known-best-1-100.svg",
-            "width": 2400,
-        },
-    }
+    # A list, because the corpus can publish more than one composite of itself. The
+    # values are the golden ones for this figure: every number here is computed from
+    # `known_best_builder.PRIMARY_COMPOSITE`, and these are what the formulas return.
+    assert document["atlas"]["composites"] == [
+        {
+            "columns": 10,
+            "layout": "10 by 10, row-major n=1..100",
+            "png_high_resolution": {
+                "derived_from": "atlas/known-best/known-best-1-100.svg",
+                "height": 5792,
+                "path": "atlas/known-best/known-best-1-100@2x.png",
+                "scale": 2,
+                "width": 4800,
+            },
+            "png_link_preview_card": {
+                "derived_from": "atlas/known-best/known-best-1-100.svg",
+                "height": 1256,
+                "path": "atlas/known-best/known-best-1-100-card.png",
+                "scale": 1,
+                "top_crop": True,
+                "width": 2400,
+            },
+            "png_preview": {
+                "derived_from": "atlas/known-best/known-best-1-100.svg",
+                "height": 2896,
+                "path": "atlas/known-best/known-best-1-100.png",
+                "scale": 1,
+                "width": 2400,
+            },
+            "range": {"count": 100, "first_n": 1, "last_n": 100},
+            "renderer": "sqpack deterministic composite renderer",
+            "rows": 10,
+            "square_count": 5050,
+            "stem": "known-best-1-100",
+            "svg": {
+                "height": 2896,
+                "path": "atlas/known-best/known-best-1-100.svg",
+                "width": 2400,
+            },
+        }
+    ]
+    assert document["atlas"]["range"] == {"count": 100, "first_n": 1, "last_n": 100}
+    assert [entry["n"] for entry in entries] == list(known_best_builder.CORPUS.numbers)
     assert [entry["n"] for entry in entries] == list(range(1, 101))
     assert Counter(entry["source"]["kind"] for entry in entries) == {
         "exact-grid": 64,
@@ -320,7 +332,7 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
 
 def test_known_best_v1_schema_accepts_a_manifest_without_the_new_composite() -> None:
     atlas = json.loads((ATLAS / "manifest.json").read_text(encoding="utf-8"))["atlas"]
-    atlas.pop("composite")
+    atlas.pop("composites")
     schema = yaml.safe_load(
         (ATLAS / "known-best-atlas.schema.yaml").read_text(encoding="utf-8")
     )
@@ -448,7 +460,7 @@ def test_known_best_composite_exports_all_carry_one_source_receipt() -> None:
 
     receipts = {
         export.path.name: known_best_builder.png_summary_receipt(export.path.read_bytes())[2]
-        for export in known_best_builder.SUMMARY_RASTERS
+        for export in known_best_builder.PRIMARY_COMPOSITE.rasters
     }
     receipts["known-best-1-100.pdf"] = render_composite_pdf.pdf_receipt(
         (ATLAS / "known-best-1-100.pdf").read_bytes()
@@ -467,26 +479,103 @@ def test_known_best_composite_rasters_scale_the_one_canvas_by_whole_numbers() ->
     """Every raster is a whole multiple of the canvas, in width always and in height
     unless it declares a crop.
 
-    The dimensions are derived from `SUMMARY_WIDTH` and `SUMMARY_HEIGHT` rather than
-    stored, so a resized canvas moves every export together. This pins the facts that
-    derivation relies on: the scales are integers, no two exports collide on one path,
-    and a cropped export is shorter than the canvas rather than a differently scaled
-    drawing -- the link-preview card is the top of the same picture, not a second one.
+    The dimensions are derived from the composite's own canvas rather than stored, so a
+    resized canvas moves every export together. This pins the facts that derivation
+    relies on: the scales are integers, no two exports collide on one path or on one
+    manifest key, and a cropped export is shorter than the canvas rather than a
+    differently scaled drawing -- the link-preview card is the top of the same picture,
+    not a second one.
     """
-    exports = known_best_builder.SUMMARY_RASTERS
+    canvas = known_best_builder.PRIMARY_COMPOSITE
+    exports = canvas.rasters
 
     assert sorted(export.scale for export in exports) == [1, 1, 2]
     assert len({export.path for export in exports}) == len(exports)
+    assert len({export.manifest_key for export in exports}) == len(exports)
     for export in exports:
-        assert export.width == known_best_builder.SUMMARY_WIDTH * export.scale
+        assert (export.canvas_width, export.canvas_height) == (canvas.width, canvas.height)
+        assert export.width == canvas.width * export.scale
         if export.crop_units is None:
-            assert export.height == known_best_builder.SUMMARY_HEIGHT * export.scale
+            assert export.height == canvas.height * export.scale
             continue
         assert export.height == export.crop_units * export.scale
-        assert 0 < export.crop_units < known_best_builder.SUMMARY_HEIGHT
+        assert 0 < export.crop_units < canvas.height
     # Exactly one crop, and it is the card the page's link preview names.
     cropped = [export for export in exports if export.crop_units is not None]
     assert [export.path.name for export in cropped] == ["known-best-1-100-card.png"]
+
+
+def test_the_1_100_canvas_is_what_its_specification_computes() -> None:
+    """The published figure's numbers, as the golden answer to the formulas.
+
+    2400 by 2896, a legend at 2732 and a footer at 2804/2834/2864 were absolute
+    constants until the layout was parameterized, and they are what
+    `CompositeCanvas` returns for ten columns of ten. Pinning them literally here is
+    what makes the derivation checkable: a formula that quietly stopped agreeing with
+    the drawing would fail this before it reached a byte comparison.
+    """
+    canvas = known_best_builder.PRIMARY_COMPOSITE
+    composite = canvas.spec
+
+    assert (composite.first_n, composite.last_n, composite.columns) == (1, 100, 10)
+    assert (composite.count, composite.rows, composite.square_count) == (100, 10, 5050)
+    assert composite.layout == "10 by 10, row-major n=1..100"
+    assert composite.card_units == 1256
+    assert (canvas.width, canvas.height) == (2400, 2896)
+    assert canvas.grid_bottom == 2694
+    assert canvas.legend_baseline == 2732
+    assert canvas.explainer_baseline == 2804
+    assert canvas.credit_baseline == 2834
+    assert canvas.stamp_baseline == 2864
+    assert (composite.svg_name, composite.pdf_name) == (
+        "known-best-1-100.svg",
+        "known-best-1-100.pdf",
+    )
+    assert composite.raster_name(1) == "known-best-1-100.png"
+    assert composite.raster_name(2) == "known-best-1-100@2x.png"
+    assert composite.card_png_name == "known-best-1-100-card.png"
+
+
+def test_a_second_composite_is_a_specification_and_not_a_second_set_of_constants() -> None:
+    """The 18-by-18 poster of `n = 1..324`, laid out without any data existing yet.
+
+    This is the whole point of the parameterization, and it is checkable before the
+    corpus catches up: the geometry follows from four fields, so a second composite can
+    be measured -- rows, canvas, legend, footer -- while its cards are still unbuildable.
+    Every number below is a difference against the published figure rather than a
+    literal, because what is being asserted is that nothing is absolute: eight more
+    columns is eight more column pitches of width, and eight more rows moves the legend
+    and all three footer lines by eight row pitches and not by a constant someone
+    remembered to edit.
+    """
+    poster = CompositeSpec(1, 324, 18, "known-best-1-324")
+    canvas = known_best_builder.CompositeCanvas(poster)
+    figure = known_best_builder.PRIMARY_COMPOSITE
+
+    assert (poster.columns, poster.rows, poster.count) == (18, 18, 324)
+    assert poster.square_count == 324 * 325 // 2
+    assert poster.layout == "18 by 18, row-major n=1..324"
+    assert poster.cases.label == "n=1..324"
+
+    extra_columns = poster.columns - figure.spec.columns
+    extra_rows = poster.rows - figure.spec.rows
+    widening = extra_columns * known_best_builder.SUMMARY_COLUMN_PITCH
+    shift = extra_rows * known_best_builder.SUMMARY_ROW_PITCH
+    assert canvas.width == figure.width + widening
+    assert canvas.grid_bottom == figure.grid_bottom + shift
+    assert canvas.legend_baseline == figure.legend_baseline + shift
+    assert canvas.explainer_baseline == figure.explainer_baseline + shift
+    assert canvas.credit_baseline == figure.credit_baseline + shift
+    assert canvas.stamp_baseline == figure.stamp_baseline + shift
+    assert canvas.height == figure.height + shift
+
+    # No card is declared, so the poster publishes the two full-canvas rasters and no
+    # crop; and nothing here renders, because 324 cases do not exist yet.
+    assert [export.manifest_key for export in canvas.rasters] == [
+        "png_preview",
+        "png_high_resolution",
+    ]
+    assert poster.stem not in known_best_builder.SUMMARY_PROSE
 
 
 @pytest.mark.parametrize("scale", [1, 2])
@@ -501,10 +590,13 @@ def test_known_best_composite_png_refuses_a_raster_of_the_wrong_size(
     a guard that only ever saw the 1x canvas would pass a 2x export that ignored it.
     """
     export = known_best_builder.RasterExport(
-        path=tmp_path / f"summary-{scale}x.png", scale=scale, role="preview"
+        path=tmp_path / f"summary-{scale}x.png",
+        scale=scale,
+        role="preview",
+        manifest_key="png_preview",
+        canvas_width=64,
+        canvas_height=64,
     )
-    monkeypatch.setattr(known_best_builder, "SUMMARY_WIDTH", 64)
-    monkeypatch.setattr(known_best_builder, "SUMMARY_HEIGHT", 64)
     wrong_size = cairosvg.svg2png(
         bytestring=b'<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"/>',
         output_width=8,
@@ -532,9 +624,14 @@ def test_known_best_atlas_check_reports_the_pdf_export_too(
     """
     svg_text = "<svg/>\n"
     digest = hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
-    pdf = tmp_path / "known-best-1-100.pdf"
-    monkeypatch.setattr(render_composite_pdf, "SUMMARY_PDF", pdf)
-    problems = known_best_builder._composite_pdf_problems  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    canvas = known_best_builder.PRIMARY_COMPOSITE
+    monkeypatch.setattr(render_composite_pdf, "ATLAS_ROOT", tmp_path)
+    pdf = render_composite_pdf.composite_pdf(canvas.spec.stem)
+    assert pdf == tmp_path / "known-best-1-100.pdf"
+    report = known_best_builder._composite_pdf_problems  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+
+    def problems(text: str) -> list[str]:
+        return report(canvas, text)
 
     assert problems(svg_text) == ["missing atlas/known-best/known-best-1-100.pdf"]
 

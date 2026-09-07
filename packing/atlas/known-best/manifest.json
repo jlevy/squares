@@ -1,37 +1,47 @@
 {
   "atlas": {
-    "composite": {
-      "layout": "10 by 10, row-major n=1..100",
-      "png_high_resolution": {
-        "derived_from": "atlas/known-best/known-best-1-100.svg",
-        "height": 5792,
-        "path": "atlas/known-best/known-best-1-100@2x.png",
-        "scale": 2,
-        "width": 4800
-      },
-      "png_link_preview_card": {
-        "derived_from": "atlas/known-best/known-best-1-100.svg",
-        "height": 1256,
-        "path": "atlas/known-best/known-best-1-100-card.png",
-        "scale": 1,
-        "top_crop": true,
-        "width": 2400
-      },
-      "png_preview": {
-        "derived_from": "atlas/known-best/known-best-1-100.svg",
-        "height": 2896,
-        "path": "atlas/known-best/known-best-1-100.png",
-        "scale": 1,
-        "width": 2400
-      },
-      "renderer": "sqpack deterministic composite renderer",
-      "square_count": 5050,
-      "svg": {
-        "height": 2896,
-        "path": "atlas/known-best/known-best-1-100.svg",
-        "width": 2400
+    "composites": [
+      {
+        "columns": 10,
+        "layout": "10 by 10, row-major n=1..100",
+        "png_high_resolution": {
+          "derived_from": "atlas/known-best/known-best-1-100.svg",
+          "height": 5792,
+          "path": "atlas/known-best/known-best-1-100@2x.png",
+          "scale": 2,
+          "width": 4800
+        },
+        "png_link_preview_card": {
+          "derived_from": "atlas/known-best/known-best-1-100.svg",
+          "height": 1256,
+          "path": "atlas/known-best/known-best-1-100-card.png",
+          "scale": 1,
+          "top_crop": true,
+          "width": 2400
+        },
+        "png_preview": {
+          "derived_from": "atlas/known-best/known-best-1-100.svg",
+          "height": 2896,
+          "path": "atlas/known-best/known-best-1-100.png",
+          "scale": 1,
+          "width": 2400
+        },
+        "range": {
+          "count": 100,
+          "first_n": 1,
+          "last_n": 100
+        },
+        "renderer": "sqpack deterministic composite renderer",
+        "rows": 10,
+        "square_count": 5050,
+        "stem": "known-best-1-100",
+        "svg": {
+          "height": 2896,
+          "path": "atlas/known-best/known-best-1-100.svg",
+          "width": 2400
+        }
       }
-    },
+    ],
     "entries": [
       {
         "chunk_annotation": {

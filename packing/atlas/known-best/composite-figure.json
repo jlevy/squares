@@ -1,5 +1,19 @@
 {
   "figure": {
+    "composites": [
+      {
+        "columns": 10,
+        "layout": "10 by 10, row-major n=1..100",
+        "range": {
+          "count": 100,
+          "first_n": 1,
+          "last_n": 100
+        },
+        "rows": 10,
+        "square_count": 5050,
+        "stem": "known-best-1-100"
+      }
+    ],
     "entries": [
       {
         "badges": [

@@ -6,13 +6,13 @@ additionalProperties: false
 required: [range, generated_by, policy, entries]
 properties:
   range:
-    type: object
-    additionalProperties: false
-    required: [first_n, last_n, count]
-    properties:
-      first_n: {const: 1}
-      last_n: {const: 100}
-      count: {const: 100}
+    # The corpus this manifest covers, as values rather than as constants in a schema:
+    # widening it is a change to the builder's corpus range and to these numbers, not
+    # to this file. What the schema cannot state -- that count is last_n - first_n + 1,
+    # and that entries carries exactly that many cases -- is checked against the data by
+    # `devtools.build_known_best_atlas --check`, so a case that goes missing between the
+    # frontier and the manifest still fails a gate rather than passing quietly.
+    $ref: '#/$defs/range'
   generated_by: {type: string, minLength: 1}
   policy:
     type: object
@@ -23,82 +23,60 @@ properties:
       witness_layer: {type: string, minLength: 1}
       rendering_layer: {type: string, minLength: 1}
       annotation_layer: {type: string, minLength: 1}
-  composite:
-    type: object
-    additionalProperties: false
-    required:
-      [
-        layout,
-        renderer,
-        square_count,
-        svg,
-        png_preview,
-        png_high_resolution,
-        png_link_preview_card,
-      ]
-    properties:
-      layout: {const: '10 by 10, row-major n=1..100'}
-      renderer: {const: sqpack deterministic composite renderer}
-      square_count: {const: 5050}
-      svg:
-        type: object
-        additionalProperties: false
-        required: [path, width, height]
-        properties:
-          path: {const: atlas/known-best/known-best-1-100.svg}
-          width: {const: 2400}
-          height: {const: 2896}
-      png_preview:
-        type: object
-        additionalProperties: false
-        required: [path, derived_from, scale, width, height]
-        properties:
-          path: {const: atlas/known-best/known-best-1-100.png}
-          derived_from: {const: atlas/known-best/known-best-1-100.svg}
-          scale: {const: 1}
-          width: {const: 2400}
-          height: {const: 2896}
-      png_link_preview_card:
-        # The one export that is a crop rather than a scale. Every unfurler shows a
-        # landscape card and centre-crops what it is handed, so a portrait canvas
-        # arrives as a band from the middle of the grid with the title gone. 2400x1256
-        # is 1.91:1 to the nearest whole pixel, which is the ratio those platforms
-        # want, so the crop here is the crop shown. Same width as the canvas, because
-        # it is the top of the same drawing and not a second one.
-        type: object
-        additionalProperties: false
-        required: [path, derived_from, scale, top_crop, width, height]
-        properties:
-          path: {const: atlas/known-best/known-best-1-100-card.png}
-          derived_from: {const: atlas/known-best/known-best-1-100.svg}
-          scale: {const: 1}
-          top_crop: {const: true}
-          width: {const: 2400}
-          height: {const: 1256}
-      png_high_resolution:
-        # The whole-number scale is the load-bearing constant, not the pixel counts:
-        # a fractional scale lands every edge on a fractional pixel boundary and the
-        # antialiasing shades it invents cost more bytes than the extra pixels do.
-        type: object
-        additionalProperties: false
-        required: [path, derived_from, scale, width, height]
-        properties:
-          path: {const: 'atlas/known-best/known-best-1-100@2x.png'}
-          derived_from: {const: atlas/known-best/known-best-1-100.svg}
-          scale: {const: 2}
-          width: {const: 4800}
-          height: {const: 5792}
+  composites:
+    # A list, because the corpus can publish more than one figure of itself and a
+    # second is a second entry rather than a second shape. Each record's numbers are
+    # computed from the composite's specification in
+    # `devtools/build_known_best_atlas.py`, so the sizes here are the sizes drawn.
+    type: array
+    minItems: 1
+    items: {$ref: '#/$defs/composite'}
+    # The published figure is still pinned by size, which is what this file used to do
+    # with `const` heights and can no longer do that way once the record is a list. The
+    # guarantee is the same one: a silent resize of the 1-100 canvas fails the gate,
+    # and so does a canvas change that moves one raster and not the other. A composite
+    # under any other stem does not match this clause and is not constrained by it.
+    contains:
+      type: object
+      required: [stem, svg, png_preview, png_high_resolution, png_link_preview_card]
+      properties:
+        stem: {const: known-best-1-100}
+        svg:
+          type: object
+          required: [width, height]
+          properties:
+            width: {const: 2400}
+            height: {const: 2896}
+        png_preview:
+          type: object
+          required: [width, height]
+          properties:
+            width: {const: 2400}
+            height: {const: 2896}
+        png_high_resolution:
+          type: object
+          required: [scale, width, height]
+          properties:
+            scale: {const: 2}
+            width: {const: 4800}
+            height: {const: 5792}
+        png_link_preview_card:
+          type: object
+          required: [top_crop, width, height]
+          properties:
+            top_crop: {const: true}
+            width: {const: 2400}
+            height: {const: 1256}
   entries:
     type: array
-    minItems: 100
-    maxItems: 100
+    minItems: 1
     items:
       type: object
       additionalProperties: false
       required:
         [n, frontier_path, reported_side, source, witness, rendering, chunk_annotation]
       properties:
-        n: {type: integer, minimum: 1, maximum: 100}
+        n: {type: integer, minimum: 1}
         frontier_path: {type: string, pattern: '^frontier/n-[0-9]{3}\.md$'}
         reported_side: {type: string, minLength: 1}
         source:
@@ -109,11 +87,11 @@ properties:
             kind: {enum: [exact-grid, kingbird-derived-facts, unitsquare-rendering]}
             path: {type: string, minLength: 1}
             url: {type: string, minLength: 1}
-            source_n: {type: integer, minimum: 1, maximum: 100}
+            source_n: {type: integer, minimum: 1}
             listed_n:
               type: array
               minItems: 1
-              items: {type: integer, minimum: 1, maximum: 100}
+              items: {type: integer, minimum: 1}
             derivation: {type: string, minLength: 1}
         witness:
           type: object
@@ -145,3 +123,64 @@ properties:
             status: {enum: [unreviewed, calibration, holdout, annotated]}
             path: {type: [string, 'null']}
             note: {type: string, minLength: 1}
+$defs:
+  range:
+    type: object
+    additionalProperties: false
+    required: [first_n, last_n, count]
+    properties:
+      first_n: {type: integer, minimum: 1}
+      last_n: {type: integer, minimum: 1}
+      count: {type: integer, minimum: 1}
+  raster:
+    type: object
+    additionalProperties: false
+    required: [path, derived_from, scale, width, height]
+    properties:
+      path: {type: string, pattern: '^atlas/known-best/[A-Za-z0-9@._-]+\.png$'}
+      derived_from: {type: string, pattern: '^atlas/known-best/[A-Za-z0-9._-]+\.svg$'}
+      # The whole-number scale is the load-bearing constant, not the pixel counts: a
+      # fractional scale lands every edge on a fractional pixel boundary and the
+      # antialiasing shades it invents cost more bytes than the extra pixels do.
+      scale: {type: integer, minimum: 1}
+      # True on the one export that is a crop rather than a scale. Every unfurler shows
+      # a landscape card and centre-crops what it is handed, so a portrait canvas
+      # arrives as a band from the middle of the grid with the title gone. The card is
+      # the top of the same drawing at the same width, and not a second one.
+      top_crop: {const: true}
+      width: {type: integer, minimum: 1}
+      height: {type: integer, minimum: 1}
+  composite:
+    type: object
+    additionalProperties: false
+    required:
+      [
+        stem,
+        range,
+        columns,
+        rows,
+        layout,
+        renderer,
+        square_count,
+        svg,
+        png_preview,
+      ]
+    properties:
+      stem: {type: string, pattern: '^known-best-[0-9]+-[0-9]+$'}
+      range: {$ref: '#/$defs/range'}
+      columns: {type: integer, minimum: 1}
+      rows: {type: integer, minimum: 1}
+      layout: {type: string, pattern: '^[0-9]+ by [0-9]+, row-major n=[0-9]+\.\.[0-9]+$'}
+      renderer: {const: sqpack deterministic composite renderer}
+      square_count: {type: integer, minimum: 1}
+      svg:
+        type: object
+        additionalProperties: false
+        required: [path, width, height]
+        properties:
+          path: {type: string, pattern: '^atlas/known-best/[A-Za-z0-9._-]+\.svg$'}
+          width: {type: integer, minimum: 1}
+          height: {type: integer, minimum: 1}
+      png_preview: {$ref: '#/$defs/raster'}
+      png_high_resolution: {$ref: '#/$defs/raster'}
+      png_link_preview_card: {$ref: '#/$defs/raster'}

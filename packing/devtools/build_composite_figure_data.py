@@ -31,6 +31,12 @@ from sympy.parsing.sympy_parser import (
     standard_transformations,
 )
 
+from sqpack.known_best import (
+    KNOWN_BEST_COMPOSITES,
+    KNOWN_BEST_CORPUS,
+    CompositeSpec,
+    CorpusRange,
+)
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -40,6 +46,13 @@ RECORD = ROOT / "atlas/known-best/composite-figure.json"
 GENERATOR = "python -m devtools.build_composite_figure_data"
 CONTRACT = "packing.squares:CompositeFigure/v1"
 SCHEMA = "composite-figure.schema.yaml"
+
+#: The cases this record carries, one entry each. Shared with the atlas builder rather
+#: than re-spelled, so the record and the drawing cover the same corpus by construction.
+CORPUS = KNOWN_BEST_CORPUS
+#: The composites drawn from it. Recorded here so a reader of the record knows which
+#: figures state these facts and at what grid, without opening the builder.
+COMPOSITES: tuple[CompositeSpec, ...] = KNOWN_BEST_COMPOSITES
 
 TILING_EVIDENCE = "E-perfect-square-tiling-rigid"
 """The evidence id the frontier carries on a record rigid by exact tiling.
@@ -260,8 +273,28 @@ def _entry(n: int) -> dict:
     }
 
 
+def _composite_record(composite: CompositeSpec) -> dict:
+    """One composite's shape, as the record states it.
+
+    Which cases a figure draws and at what grid, and nothing about pixels: the canvas
+    is the builder's, and `atlas/known-best/manifest.json` records it there.
+    """
+    return {
+        "stem": composite.stem,
+        "range": _range_record(composite.cases),
+        "columns": composite.columns,
+        "rows": composite.rows,
+        "layout": composite.layout,
+        "square_count": composite.square_count,
+    }
+
+
+def _range_record(cases: CorpusRange) -> dict:
+    return {"first_n": cases.first_n, "last_n": cases.last_n, "count": cases.count}
+
+
 def build_record() -> dict:
-    entries = [_entry(n) for n in range(1, 101)]
+    entries = [_entry(n) for n in CORPUS.numbers]
     return {
         "softschema": {
             "contract": CONTRACT,
@@ -270,7 +303,11 @@ def build_record() -> dict:
             "status": "enforced",
         },
         "figure": {
-            "range": {"first_n": 1, "last_n": 100, "count": 100},
+            "range": _range_record(CORPUS),
+            # A list rather than a single record: a second composite over the same
+            # cases is a second entry, and nothing about this shape moves when one
+            # is added.
+            "composites": [_composite_record(spec) for spec in COMPOSITES],
             "generated_by": GENERATOR,
             "provenance_vocabulary": PROVENANCE_VOCABULARY,
             "totals": {
