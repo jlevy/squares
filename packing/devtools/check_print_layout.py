@@ -286,19 +286,23 @@ _PROBE = r"""() => {
     return steps.join(' > ');
   }
 
-  /* The block's first line box: every rect a Range over its whole contents puts in the
-     topmost band, unioned. Taken this way rather than as one text node's rect, which is
+  /* The block's first line box: every rect a Range over its whole contents puts on the
+     topmost line, unioned. Taken this way rather than as one text node's rect, which is
      that run's inline box and is shorter than the line whenever anything taller -- a
      KaTeX span, a larger inline -- shares the line with it. Comparing a marker box
      against an inline box that is not the line box is comparing two different things,
-     and the difference was 3px. */
+     and the difference was 3px.
+
+     The mass-condition bullets have inline tops at -1, 0, 2 and 3px. A one-pixel band
+     kept only the highest math run and falsely reported a 2.2px marker offset. Group
+     runs starting in the topmost rect's upper half; the next line starts below it. */
   function firstLineBox(el) {
     const range = document.createRange();
     range.selectNodeContents(el);
     const rects = [...range.getClientRects()].filter((r) => r.width && r.height);
     if (!rects.length) return null;
-    const first = Math.min(...rects.map((r) => r.top));
-    const band = rects.filter((r) => Math.abs(r.top - first) < 1);
+    const topmost = rects.reduce((a, r) => (r.top < a.top ? r : a));
+    const band = rects.filter((r) => r.top < topmost.top + topmost.height / 2);
     return {
       top: Math.min(...band.map((r) => r.top)),
       bottom: Math.max(...band.map((r) => r.bottom)),
