@@ -1307,6 +1307,8 @@ def claim_substitutions(headline: Facts, default: Facts) -> dict[str, str]:
         values[f"{role}_RUNTIME"] = runtime_phrase(f)
     values["HEADLINE_PINNED_RUNTIME"] = runtime_phrase(headline, pinned=True)
     values["PINNED_VERIFIER_LINES"] = source_lines_phrase(PINNED_VERIFIER)
+    values["PINNED_VERIFIER_URL"] = repo_file(PINNED_VERIFIER)
+    values["PROOF_CARD_URL"] = repo_file(CASE / f"{RESULT_ID}-proof-card.md")
     return values
 
 
@@ -1917,6 +1919,15 @@ def markdown_source(
     if not shared["REFINEMENT_URL"]:
         source = drop_block(source, "REFINEMENT")
     comparison = shared["HEADLINE_L_FRAC"] != shared["DEFAULT_L_FRAC"]
+    if not comparison and shared["REFINEMENT_URL"]:
+        # The refinement still applies when the page shows only the stronger bound.
+        source = re.sub(
+            r"<!--BEGIN:COMPARISON-->.*?<!--BEGIN:REFINEMENT-->"
+            r"(.*?)<!--END:REFINEMENT-->.*?<!--END:COMPARISON-->",
+            lambda match: f"({match.group(1).strip()})",
+            source,
+            flags=re.DOTALL,
+        )
     source = drop_block(source, "NO_COMPARISON" if comparison else "COMPARISON")
     unmeasured = [v["SLUG"] for v in per_certificate if not v["COARSEN_BARS"]]
     if unmeasured:

@@ -38,8 +38,8 @@ per certificate; the prose is filled once, with the headline certificate's value
 ## New Result
 
 This work presents a new lower bound on a long-standing open geometry problem: eleven
-unit squares with disjoint interiors, free to rotate, cannot fit in a
-${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.
+unit squares with disjoint interiors, free to rotate, cannot fit in a square of size
+${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$.
 
 The computer-assisted proof was found via an automated research framework.
 The certificate used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted points
@@ -126,18 +126,12 @@ Trump’s 1979 packing shows
 <span class="math-reference">$s(11) \le {{BEST_PACKING_TEX}}$.[^trump]</span> Here we
 prove $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
 
-<!--BEGIN:REFINEMENT-->
-
-The technical record retains a small exact refinement in [T-022]({{REFINEMENT_URL}}).
-This exposition uses the simpler 3.81 certificate bound.
-
-<!--END:REFINEMENT-->
-
 <!--BEGIN:COMPARISON-->
 
 (Some figures also show the simpler certificate for the weaker bound
 $s({{N}}) \ge {{DEFAULT_L_FRAC}}$, whose smaller numbers make the argument easier to
-illustrate.)
+illustrate.<!--BEGIN:REFINEMENT--> There is a small exact refinement in
+[T-022]({{REFINEMENT_URL}}).<!--END:REFINEMENT-->)
 
 <!--END:COMPARISON-->
 
@@ -610,14 +604,12 @@ coding agent or check by hand.
 
 For $s(11) \ge {{HEADLINE_L_FRAC}}$:
 [`{{HEADLINE_CLAIM_NAME}}`]({{HEADLINE_CLAIM_URL}}),
-{{HEADLINE_N_ATOMS}} atoms, verified in {{HEADLINE_RUNTIME}}. (For the weaker bound
+{{HEADLINE_N_ATOMS}} atoms.<!--BEGIN:COMPARISON--> (For the weaker bound
 $s(11) \ge {{DEFAULT_L_FRAC}}$: [`{{DEFAULT_CLAIM_NAME}}`]({{DEFAULT_CLAIM_URL}}),
-{{DEFAULT_N_ATOMS}} atoms, verified in
-{{DEFAULT_RUNTIME}}.)
+{{DEFAULT_N_ATOMS}} atoms.)<!--END:COMPARISON-->
 
-The times are the embedded verifier’s, on a laptop.
-The one-file checker beside it that pins the certificate’s digest, `minimal_verify.py`,
-decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
+The one-file checker [`minimal_verify.py`]({{PINNED_VERIFIER_URL}}) verifies the
+{{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.[^verifier-timing]
 
 <!--END:CLAIM-->
 
@@ -718,6 +710,16 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
     and Covering in Combinatorics*, Mathematical Centre Tracts 106 (1979), 179–199;
     Hiroshi Nagamochi, [Packing unit squares in a rectangle]({{NAGAMOCHI_URL}}),
     Electronic Journal of Combinatorics 12 (2005), R37.
+
+<!--BEGIN:CLAIM-->
+
+[^verifier-timing]: The one-minute timing is for `minimal_verify.py`;
+    [recorded runs]({{PROOF_CARD_URL}}#verify-it-in-one-command) took 47.5–67.0 seconds
+    under CPython 3.14 on September 5, 2026. The claim document embeds a separate
+    verifier, `verify_claim.py`, which checks the same certificate in
+    {{HEADLINE_RUNTIME}} on an Apple Silicon laptop.
+
+<!--END:CLAIM-->
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
