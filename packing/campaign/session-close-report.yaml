@@ -1525,7 +1525,7 @@ sessions:
   title: "Kernel contract and feature pricing"
   status: in_progress
   primary_bead: think-c53m
-  phases: 3
+  phases: 4
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-097.yaml

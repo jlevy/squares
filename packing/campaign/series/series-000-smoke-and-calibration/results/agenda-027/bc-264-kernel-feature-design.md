@@ -298,6 +298,103 @@ unresolved continuum price explicit.
 Flowmark is the only requested mechanical check.
 The coordinator owns independent mathematical admission and any later registration.
 
+## Independent Reader Review After the Build
+
+This separate `think-ebh1` review began at the observed clock 2026-09-07 21:48:15 UTC,
+after the producer froze at 21:45:55 and the independently authored reader froze at
+21:46:33. Its hard deadline is 22:00 UTC. The first-pass design and its no-execution
+statement above remain historical evidence for that earlier allocation.
+This review read the complete [reader](../../../../../devtools/check_kernel_axis_lp.py),
+its [tests](../../../../../tests/test_check_kernel_axis_lp.py), the frozen producer for
+wire consistency, [H125](../../../../hypotheses/H-125-biquadratic-two-pose-kernel.md),
+and the post-freeze admission contract.
+
+**GO for this reader’s finite objective-certificate soundness and source-free
+readiness.** No mathematical or implementation blocker was found.
+This does not authorize a scientific invocation or accept H125.
+
+The reader independently forms $M=\sum_i\alpha_i\phi_i\phi_i^T+\sum_{i<j}\beta_{ij}
+(\phi_i\phi_j^T+\phi_j\phi_i^T)/2$. Its invariant block is the full $4\times4$ submatrix
+$M_A$. For the two vector copies, it sums both spatial coordinates and forms
+$T_{rs}=\operatorname{tr}(M^V_{rs})$. Consequently the vector contribution is
+$\langle T,B\rangle$, with no extra factor of one-half.
+The symmetrization factor one-half is already present in each pair term.
+The mixed-vector control, whose exact $T$ is
+$\left(\begin{smallmatrix}34&62\\62&106\end{smallmatrix}\right)$, exercises this
+distinction. The three scalar contributions are checked separately.
+
+Exact Schur elimination rejects negative pivots and rejects a zero pivot with a nonzero
+remaining row. Positive pivots update the symmetric residual matrix using exact rational
+arithmetic. Together with nonnegative scalar projections, these checks imply
+$\langle M,R\rangle\ge0$ for every coefficient matrix in the fixed family.
+The reader also requires $\alpha\ge0$, $\sum\alpha=1$, positive sparse $\beta$ and the
+exact identity $\texttt{bound}=1+\sum\beta$. Thus its accepted certificate proves the
+lower bound derived above.
+
+The frozen seven-key packet carries no direction multipliers or supplied matrices.
+The earlier admission’s proposed reconstruction of all twenty-three test-direction
+decompositions is unnecessary for this admitted direct-PSD format: the reader
+reconstructs the projection from the weights and checks its PSD exactly.
+The twenty-three directions remain the frozen proposer’s necessary LP inequalities, not
+additional premises of the objective certificate.
+This clarification preserves the earlier proposal while recording the implementation
+actually reviewed.
+
+Source binding is complete at the code level.
+The reader independently generates the four translated tight grids and the centered
+grid, deduplicates by exact coordinates, sorts them, and fixes the side at $96/25$. The
+packet must match the entire roster, including zero-weight poses.
+Each selected pair must have $|x_i-x_j|\ge1$ or $|y_i-y_j|\ge1$; equality correctly
+admits touching. Unweighted pairs need not appear in the sparse dual.
+Every listed unit square must satisfy the closed containment inequalities.
+The eleven-feature order, including the repeated one and angular zero on this axis
+fiber, matches the frozen family.
+
+The parser requires the seven exact top-level keys and exact sparse-entry keys,
+canonical rational strings, native integer indices excluding booleans, sorted distinct
+poses and sorted distinct pairs with $i<j$. It rejects duplicate JSON keys,
+floating-point JSON values and constants, excessive nesting and nonregular inputs.
+The file reader admits at most 2 MiB; the algebra admits at most forty-five poses and
+990 sparse pairs, 128-bit source rationals, 4,096-bit certificate rationals and
+32,768-bit accumulated arithmetic.
+These refusal bounds do not substitute for the external whole-child timeout.
+The producer’s stricter 4,096-bit arithmetic limit can cause an inconclusive
+reconstruction but does not create a reader acceptance gap.
+
+The scientific CLI is only `--input PATH`. It has no synthetic source, side or threshold
+override. The separate caller-bound synthetic API cannot return
+`scientific_family_refuted=true`. A certificate below eleven is refused by the
+scientific path, and the error path prints only stderr and exits two.
+
+The independent checks used the project Python 3.14 interpreter:
+
+| Check | Result | Outer wall | User CPU | System CPU |
+| --- | --- | --- | --- | --- |
+| Reader’s focused pytest suite | 55 passed; pytest reported 0.13 seconds | 0.58 seconds | 0.33 seconds | 0.10 seconds |
+| Ruff check | Zero findings | 0.11 seconds | 0.02 seconds | 0.03 seconds |
+| Ruff format check | Both files already formatted | 0.05 seconds | 0.02 seconds | 0.01 seconds |
+| BasedPyright | Zero errors, warnings or notes | 1.26 seconds | 1.74 seconds | 0.22 seconds |
+
+The tests forbid the scientific constructor.
+They cover the exact nine-bound control, threshold refusal, block-trace factors,
+singular PSD, altered duals, negative scalar projection, full source mutations,
+touching, overlap, normalization, lexical limits, input bytes and fixed-CLI refusal.
+No scientific source agreement, positive scientific CLI invocation, target solve or
+target packet was evaluated.
+Those remain prospective conditions, not missing evidence hidden by the control count.
+No code or test file was edited during this review.
+
+For the proposed later protocol, allow one fixed producer under an external sixty-second
+TERM deadline and a separately disclosed two-second KILL grace.
+Only an actual producer exit zero and a complete packet with bound at least eleven may
+trigger the one independent reader, under the same external limits.
+Accept a family refutation only after actual reader exit zero and a complete receipt
+with `status=verified_objective_bound`, the fixed source and side, `minimum_bound=11`,
+bound at least eleven, `projected_psd_verified=true`, `scientific_family_refuted=true`,
+and `new_packing_bound=false`. Any other result remains unresolved.
+No retry or target-informed repair follows.
+The KILL grace means this is not a strict sixty-second total-runtime promise.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

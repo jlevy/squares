@@ -64,7 +64,7 @@ session:
     objective: Implement the fixed finite necessary-constraint discriminator and its independently authored exact certificate reader, using source-free controls only.
     commitment: BC-264
     bead: think-s8cj
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: The completed mathematical admission accepts a small refutational instrument while leaving full continuum feasibility unpriced.
     budget_minutes: 30
@@ -74,10 +74,31 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --push
     kill_condition: Original worker caps or 22:00 UTC, invalid exact identity, failed controls, or no bounded complete-child execution contract. No scientific source construction in this slice.
     fallback: Freeze partial code and refusal evidence; do not start a target or extend the pool, feature family or solver automatically.
+    outcome: Producer and tests froze at 21:45:55 UTC; independent reader and tests at 21:46:33. Their 17 and 55 source-free controls passed, with clean Ruff and BasedPyright. Neither scientific factory ran and neither author inspected the other's implementation before both freezes.
+    evidence: [packing/devtools/kernel_axis_lp.py, packing/tests/test_kernel_axis_lp.py, packing/devtools/check_kernel_axis_lp.py, packing/tests/test_check_kernel_axis_lp.py]
+    stop_reason: Both bounded source-free implementations completed early; independent code and protocol acceptance remain separate.
+    next_action: Swap the frozen implementations for max-thinking review and add a source-free cross-implementation control before any target.
+  - workflow: factual-review
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Independently admit or refuse the fixed instruments and once-only finite-refutation protocol, then preserve an immutable passing source checkpoint.
+    commitment: BC-264
+    bead: think-ebh1
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Both independent source/test drafts are frozen and passed their own controls; a new review allocation checks the other's implementation and exact interface.
+    budget_minutes: 20
+    started_at: '2026-09-07T21:47:04Z'
+    deadline_at: '2026-09-07T22:07:00Z'
+    expected_output: Separate max soundness reviews, a source-free interface control, fixed execution and acceptance predicates, and a committed engine with passing required checks.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: Reviewer caps at 22:00 UTC or phase cap 22:07; any unresolved soundness, source binding, positive control, publication or supervisor obligation prevents target admission.
+    fallback: Preserve the exact blocker and partial readiness; no scientific invocation or automatic repair after a target.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Collect both frozen implementations and independently audit the complete acceptance path before a separate target allocation.
+    next_action: Register a complete prospective experiment only after implementation review; run no target until the protocol and engine are committed, validated and published.
   primary_bead: think-c53m
   status: in_progress
   budget:
@@ -204,16 +225,16 @@ session:
     phase: 1
   - task: Fixed finite LP proposer (think-s8cj)
     operator: Codex density_control_recovery, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Freeze code and source-free control receipts; no scientific target.
+    outcome: Source and tests frozen 21:45:55 UTC. Fixed lazy five-grid source, 23 necessary PSD directions, one LP and bounded one-pass rationalization; only exact projected-PSD objective packets are emitted. No target or independent reader inspection.
+    evidence: [packing/devtools/kernel_axis_lp.py, packing/tests/test_kernel_axis_lp.py]
+    files: [packing/devtools/kernel_axis_lp.py, packing/tests/test_kernel_axis_lp.py]
+    checks: [17 source-free controls passed in 0.59 seconds pytest and 0.95 external wall; Ruff check 0.04 wall and format-check 0.09 wall; BasedPyright zero findings in 4.55 wall seconds.]
+    uncertainty: Whole-child supervision and independent acceptance remain required. The real LP control is one unrelated side-two pose; the nine-grid reconstruction control uses a supplied exact dual, not a claimed real nine-grid solve.
+    elapsed_seconds: 936
+    elapsed_quality: operator_reported_approximate
+    next_action: Independently review the separately frozen reader within a new bounded assignment.
     phase: 3
     budget_minutes: 27
     started_at: '2026-09-07T21:30:19Z'
@@ -239,16 +260,16 @@ session:
     phase: 3
   - task: Independent exact objective reader (think-rbmm)
     operator: Codex scalar_followup_assessment, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Freeze independent reader and source-free acceptance/refusal controls.
+    outcome: Source and tests frozen 21:46:33 UTC. Independently reconstructs the source, eleven features, compatibility, projected matrices and exact rational PSD. No producer access or scientific constructor/result.
+    evidence: [packing/devtools/check_kernel_axis_lp.py, packing/tests/test_check_kernel_axis_lp.py]
+    files: [packing/devtools/check_kernel_axis_lp.py, packing/tests/test_check_kernel_axis_lp.py]
+    checks: [55 source-free controls passed in 0.10 seconds pytest and 0.31 external wall; Ruff, format check and BasedPyright clean. Initial TDD missing-module failure preceded implementation.]
+    uncertainty: No internal timeout is claimed; the future complete-child supervisor and independent code/protocol review remain necessary.
+    elapsed_seconds: 935
+    elapsed_quality: operator_reported_approximate
+    next_action: Independently review the separately frozen producer under a new bounded assignment.
     phase: 3
     budget_minutes: 27
     started_at: '2026-09-07T21:30:58Z'
@@ -259,12 +280,66 @@ session:
     fallback: Refuse affected packets and preserve missing readiness evidence.
     write_scope: [packing/devtools/check_kernel_axis_lp.py, packing/tests/test_check_kernel_axis_lp.py]
     excluded_commands: [Scientific source construction, Producer source or imports before freeze, Shared-record or Git mutation]
-  outputs: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md]
+  - task: Independent frozen-reader review (think-ebh1)
+    operator: Codex density_control_recovery, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: GO frozen 21:54:17 UTC after complete reader, test and wire inspection. Exact projected PSD and full block trace prove the normalized family objective bound; no target or code edits.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md]
+    checks: [55 source-free controls passed in 0.58 external wall seconds; Ruff, formatting and BasedPyright clean; Flowmark passed.]
+    uncertainty: Full-source scientific agreement and target outputs remain untested; gate and prospective protocol required.
+    elapsed_seconds: 362
+    elapsed_quality: operator_reported_approximate
+    next_action: Use only the reviewed finite refutational protocol after its remaining admission checks.
+    phase: 4
+  - task: Independent frozen-producer review (think-ebh1)
+    operator: Codex scalar_followup_assessment, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: GO frozen 21:56:54 UTC; actual interval 21:48:04–21:56:54. Full producer, tests and wire inspected. Direct projected PSD bounds H125, not LP optimality or all weaker-relaxation matrices. No code edit or scientific invocation.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md]
+    checks: [72 declared source-free tests passed in 16.93 external wall seconds; Ruff, format check and BasedPyright clean; Flowmark passed.]
+    uncertainty: Actual engine/protocol gates, publication and external whole-child supervision remain required before science.
+    elapsed_seconds: 530
+    elapsed_quality: operator_reported_approximate
+    next_action: Independently audit the final prospective protocol without invoking a target.
+    phase: 4
+  - task: Prospective record and supervision audit (think-ebh1)
+    operator: Codex checkpoint_handoff_audit, high thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Read-only audit 21:46:04–21:48:53 UTC of Experiment/v2 and existing no-invocation/once-only precedents; no instrument drafts or scientific execution.
+    evidence: [packing/campaign/agent-sessions/session-097-kernel-contract-and-feature-pricing.md]
+    files: []
+    checks: [Schema, lease, numerical-versus-verified status, exclusive output creation and TERM/KILL timing inspected.]
+    uncertainty: This defines record requirements, not target launch authority.
+    elapsed_seconds: 169
+    elapsed_quality: operator_reported_approximate
+    next_action: Bind a complete prospective record to the actually frozen instrument and passing receipts.
+    phase: 4
+  - task: Source-free producer-to-reader integration controls (think-ebh1)
+    operator: Codex checkpoint_handoff_audit, high thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Three independent-interface tests froze 21:54:24 UTC; actual interval 21:51:15–21:54:24. Bound nine is accepted only at its declared threshold; threshold eleven and a changed caller source are refused. Both scientific factories forbidden; no solve.
+    evidence: [packing/tests/test_kernel_axis_lp_integration.py]
+    files: [packing/tests/test_kernel_axis_lp_integration.py]
+    checks: [Three tests passed in 4.60 external wall seconds; Ruff, formatting and BasedPyright clean.]
+    uncertainty: This tests a synthetic interface, not the scientific source or H125.
+    elapsed_seconds: 189
+    elapsed_quality: operator_reported_approximate
+    next_action: Include the interface controls in the immutable engine gate.
+    phase: 4
+  outputs: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md, packing/devtools/kernel_axis_lp.py, packing/devtools/check_kernel_axis_lp.py, packing/tests/test_kernel_axis_lp_integration.py]
   checks:
   - Baseline 4620e483 is landed main from PR112. Immutable change-reachable push checks passed 45 selected steps in 121.37 seconds before this branch opened. Main full workflow 34160383036 subsequently completed successfully, including integration and exhaustive validation; these are baseline receipts, not checks of this session's new artifacts.
   - The initial session artifact passed softschema repair and validation with no repairs. The privacy-reduced cost snapshot through 21:09:24 UTC completed with exit 0 in 39.10 wall seconds; it is an active-session lower bound, not the final checkpoint cost.
   - The checkpoint cost receipt was refreshed through 21:35:00 UTC in 38.12 wall seconds with exit 0. It remains an active-session lower bound. Session097 and H125 passed softschema repair/validation with no repairs. The first records attempt exposed expected generated-view drift and an overbroad BC260 dependency; these require correction before publication. Its missing Ruff came from invoking the venv executable without the venv on PATH, not a source lint finding.
   - PR115's six-path paper-attribution correction was independently audited for 173 seconds, 21:36:51–21:39:44 UTC, and main a5e9dbfd merged without conflicts as 4649e23a. The source-free worker drafts were excluded. That immutable checkpoint's first push gate failed in 75.13 seconds (77.46 external wall); 679 reachable tests passed, three failed and four were deselected. One failure and the synopsis step expose H125's missing summary row/count; two unchanged process-cleanup tests could not execute ps under the sandbox. Think-fvo8 tracks the synopsis correction and a bounded rerun with process-inspection permission. No test is weakened and no mathematical result changes.
+  - Corrected c3a4e8ec passed the synopsis and process-cleanup checks; its second push failed only the private-snapshot negative control (74.34 seconds gate; 681 tests passed, one failed, four deselected). The snapshot's no-sync uv invocation could not find PyYAML because the immutable checkout lacked its dependency-environment link. After adding that untracked link, the isolated unchanged control passed in 8.67 external wall seconds. No source or test was changed for either environment correction; the full required push rerun remains a separate receipt.
+  - The final c3a4e8ec push check passed all 45 applicable steps in 200.88 seconds gate wall and 203.99 external wall; 682 tests passed and four were deselected in 169.80 seconds. PR116 published that first docs checkpoint, with hosted run 34164869950 pending and branch mergeability passed. These are not full-gate or newly added instrument receipts.
   stop_reason: null
   next_action: Publish the completed mathematical pricing checkpoint while separate agents build and check the finite refutational instrument; no scientific invocation is admitted yet.
 ---

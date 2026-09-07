@@ -391,6 +391,143 @@ proposed once-only 60-second proposer and 60-second reader caps are not launch
 authority. Registration, instrument controls and independent review must precede any
 separately allocated scientific invocation.
 
+## Frozen Instrument Review
+
+This separate `think-ebh1` review began at the observed clock 2026-09-07 21:48:04 UTC,
+after the producer froze at 21:45:55 and the independent reader at 21:46:33. The
+original review deadline is 22:00 UTC. Both contract reports, all 415 producer lines and
+329 producer-test lines were read, and the independent reader was checked against the
+shared wire contract.
+The earlier passes above remain historical records of their respective admissions.
+The substantive review and control replay ended at the observed 21:56:36 UTC clock, 512
+seconds after the start; only final documentation formatting and handoff followed.
+
+**GO for the frozen instruments and H125’s finite refutational route.** No soundness or
+required-control blocker was found.
+This is not a scientific verdict, evidence that the whole-child limits have been
+exercised, or permission to launch without the separately declared protocol.
+The direct exact projected-PSD check is a sufficient certificate for the selected
+family; no larger verifier or new dependency is needed for this bounded route.
+
+### Exact Rows and Certificate Meaning
+
+In `packing/devtools/kernel_axis_lp.py`, lines 98–138 bind the complete, sorted,
+deduplicated five-grid source and closed containment.
+The scientific factory remains lazy and fixes $L=96/25$. Lines 141–186 retain the
+eleven-feature order, including the angular zero and repeated constant on the axis
+slice, and pack the sixteen invariant parameters correctly.
+The vector cross term includes both spatial coordinates and both ordered vector-copy
+contributions.
+
+Lines 189–233 construct all 23 fixed PSD necessities, every source diagonal, and every
+unordered compatible pair from that pool.
+The diagonal rows are $-b+\langle M_{ii},R\rangle\le-1$; pair rows have right-hand side
+$-1$; the negated PSD-direction rows have right-hand side zero.
+Edge and corner contacts satisfy compatibility by equality.
+Lines 363–390 make exactly one solver call, with unrestricted parameter bounds, a
+30-second solver limit and 10,000-iteration limit.
+There are no adaptive directions, repeated solves or rationalization retries.
+
+The selected packet format has seven keys: `format`, `source`, `side`, `poses`, `alpha`,
+`beta`, and `bound`. Lines 326–360 rationalize once, normalize the diagonal weights
+once, omit only zero-weight pairs, and pass the resulting exact weights to
+`make_certificate`. Lines 276–323 independently reconstruct their parameter
+coefficients, require exact normalization, and check projected PSD before emitting a
+packet. The Schur checks retain the mandatory zero-pivot residual-row condition.
+
+For this separately selected format, the 23 PSD-direction multipliers are not serialized
+and the reader does not verify LP stationarity or a fixed-direction cone identity.
+Instead it reconstructs $M_A$, the three scalar entries, and
+$T_{ij}=\operatorname{tr}(M^V_{ij})$, then proves their PSD conditions directly.
+This is the projected alternative admitted above and registered in
+[H125](../../../../hypotheses/H-125-biquadratic-two-pose-kernel.md).
+It is not a silent relaxation of the mathematical acceptance rule:
+
+$$
+b\ge1+\sum\beta+\langle M_A,A\rangle+
+\sum_c M_{cc}a_c+\langle T,B\rangle
+\ge1+\sum\beta.
+$$
+
+The reader’s `projected_matrices`, at `packing/devtools/check_kernel_axis_lp.py:173`,
+preserves the full block trace.
+The producer divides packed off-diagonal coefficients by two to recover the same
+trace-dual matrices; the reader instead forms symmetrized feature products directly.
+An accepted certificate bounds the selected PSD kernel family, not necessarily every
+matrix admitted by the weaker 23-direction LP relaxation.
+It does not certify LP optimality.
+Discarding approximate direction multipliers is therefore safe only because this
+complete exact matrix check replaces reliance on those multipliers.
+
+### Binding, Refusals and the Once-Only Protocol
+
+The reader independently reconstructs the fixed source, exact feature values, closed
+containment and every positive-weight pair.
+Sparse proof support does not remove poses from the source inventory.
+It requires canonical rational strings, exactly normalized nonnegative `alpha`, sorted
+unique positive `beta`, and `bound = 1 + sum(beta)`. Unknown fields, altered source
+identity, Boolean indices, duplicate pairs, illegal overlap, malformed numbers and
+invalid PSD blocks cannot produce acceptance.
+
+Both sides admit at most 45 poses, 990 pair entries and a two-MiB packet.
+Source rationals have a 128-bit limit and certificate rationals a 4,096-bit limit.
+The reader’s larger 32,768-bit intermediate ceiling allows exact checking beyond the
+producer’s 4,096-bit intermediate ceiling; it does not widen the packet’s input bounds.
+The reader checks lexical limits before constructing fractions and restricts file input
+to a bounded regular file.
+
+Producer exit zero means that an exact objective-bound packet was emitted, even if its
+bound is below eleven.
+The prospective supervisor must invoke the reader once only after actual producer exit
+zero and an intact packet with exact `bound >= 11`. All other producer outcomes,
+including an exact smaller bound, end unresolved.
+The reader’s fixed CLI has no side, source or threshold override.
+Acceptance requires actual reader exit zero and all of:
+
+- `status = verified_objective_bound`, `source = five-tight-axis-grids-v1`,
+  `side = 96/25`, and `minimum_bound = 11`;
+- an exact bound at least eleven, `projected_psd_verified = true`, and
+  `scientific_family_refuted = true`;
+- `new_packing_bound = false`.
+
+The proposed external TERM at 60 seconds, followed by KILL after a further two seconds,
+must supervise the complete producer child and, if eligible, the complete reader child
+separately. The solver’s internal 30 seconds excludes imports, source construction,
+rationalization and serialization; it is not the whole-child cap.
+A terminated process, partial stdout, malformed packet or reader refusal remains
+unresolved regardless of numerical solver status.
+There is no retry, repair, feature change, source expansion or automatic continuum work
+after the once-only invocation.
+The source and family have not been scientifically constructed or evaluated by this
+review.
+
+### Replayed Controls and Cost
+
+The coordinator explicitly clarified that the already-authored side-two, one-pose solver
+control was allowed within the fixed source-free suite.
+No new exploratory solve was added.
+The scientific factories remained forbidden by the test fixtures.
+From `packing/`, the independent replay was:
+
+```bash
+/usr/bin/time -p .venv/bin/python3 -m pytest -q tests/test_kernel_axis_lp.py tests/test_check_kernel_axis_lp.py
+```
+
+All 72 tests passed: 17 producer and 55 reader controls, with none deselected.
+Pytest reported 13.96 seconds; the complete process used 16.93 seconds wall, 1.20
+seconds user CPU and 3.53 seconds system CPU. The controls cover the exact nine-grid
+lower bound of nine and threshold-eleven refusal, mixed vector trace, source and weight
+mutations, legal touching, strict overlap, singular PSD and invalid zero pivots,
+incomplete solver receipts, one-call limits, rationalization failure and bounded
+parsing. They establish neither scientific pool counts nor a scientific objective value.
+
+Targeted Ruff, format-check and BasedPyright checks also passed on the four frozen
+files. Their process wall times were 0.12, 0.01 and 38.21 seconds respectively;
+BasedPyright reported zero errors, warnings and notes, using 11.06 seconds user CPU and
+0.79 seconds system CPU. No code or tests were changed.
+Only this timed review section was appended, using the experiment-loop scope rules, tbd
+review guidelines and Practical Prose/Flowmark documentation pass.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
