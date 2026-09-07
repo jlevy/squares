@@ -268,7 +268,9 @@ Row 86 belongs to the pending refined-core transport.
 | 101 | Complete rows on the retained scalar sites | registered | [H-107](hypotheses/H-107-fixed-site-scalar-completion.md) | Fix the terminal exp116 sites and complete missing rows before adapting support; only exact coverage accepts. |
 | 102 | Force A3 for a canonical near-45 avoider | registered | [H-108](hypotheses/H-108-near45-canonical-a3-forcing.md) | A two-point avoidance implication reduces to three moving vertices and 24 exact quartics; failed sufficient assignments remain unresolved. |
 | 103 | Force A1 and transfer the proof to A2 by local reflection | registered | [H-109](hypotheses/H-109-near45-canonical-a1-a2-forcing.md) | The two-point implication is preserved by canonical reflection; one A1 certificate supplies A2 without another target run. |
-| 104 | Check one near-axis escape from the unchanged P12 construction | registered | [H-110](hypotheses/H-110-fixed-near-axis-p12-escape.md) | A generic two-strip gap suggests a frozen rational candidate; exact containment and avoidance of all twelve points remain untested. |
+| 104 | Check one near-axis escape from the unchanged P12 construction | registered | [H-110](hypotheses/H-110-fixed-near-axis-p12-escape.md) | Exp-121 independently verifies the frozen escape; the unchanged unconditional auxiliary is false, without refuting H-036. |
+| 105 | Cover both-band squares outside the forced diamond | registered | [H-122](hypotheses/H-122-diamond-conditional-nine-point-cover.md) | A reviewed fixed-obstacle reduction avoids uniform clearance; the nine-point conditional cover and separate localization remain unproved. |
+| 106 | Localize all P10-avoiding near45 squares | registered | [H-123](hypotheses/H-123-near45-coordinate-localization.md) | A two-mark interval argument reduces a stronger closed-domain cover to four continuous polynomial obligations; target signs remain unevaluated. |
 
 Exact basis recovery and Lean replay support the relevant candidate or assurance bead;
 they are not additional mathematical hypotheses without a specific method comparison.

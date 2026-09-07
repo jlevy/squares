@@ -48,22 +48,50 @@ experiment:
       No retry, alternate candidate or second invocation. Launch before06:40UTC;
       otherwise retain non-invocation and select a fresh future allocation.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-121-h-110-fixed-p12-escape/packet.json
-  lease:
-    expires: '2026-09-07T06:40:00Z'
-    host: Session091 coordinator; prospective launch not yet invoked
-  results: []
+  effort:
+    timebox: One ten-second producer and one independent ten-second reader, each invoked once
+    wall_seconds: 0.11
+    stopped_by: criterion
+  results:
+  - shape: determination
+    role: outcome
+    question: Does the frozen square fit in the actual domain and strictly avoid all twelve unchanged points?
+    outcome: criterion_met
+    checked_by: >-
+      Independent reader returned actual exit zero, status escaped, complete true,
+      exact unit CCW geometry, actual angle membership, sixteen wall slacks,
+      twelve point checks and forty-eight edge determinants. Every point has a
+      strictly negative edge determinant; no contained point or unresolved entry.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Independent exact validity and strict twelve-point avoidance of the frozen H-110 square.
-    reason: Prospective protocol only; no producer or reader invocation has occurred.
+    reason: The independently reconstructed frozen square is contained in the box and strictly avoids all twelve unchanged points.
+    commit: 18e5a641
 ---
 # exp-121 — Fixed P12 Escape
 
-Commit this protocol and pass record checks before either scientific process.
+H-110 is accepted. The prospective protocol was committed as `18e5a641` after all
+31 record checks passed in 20.2 seconds. The sole producer launched at the observed
+06:18:18 UTC boundary and returned actual exit zero with a complete `escaped` packet.
+The independent reader launched once at 06:18:49 UTC and returned actual exit zero,
+`escaped`, all twelve strict avoidances and no unresolved entry.
+
+Producer cost was 0.06 seconds wall and 0.04 CPU; replay cost was 0.05 seconds wall
+and 0.05 CPU. Total scientific process cost was 0.11 seconds wall and 0.09 CPU,
+separate from author, review and coordinator time. Neither allowance was repeated or
+extended. The result directory retains `packet.json`, `producer.log`, `replay.json`
+and `replay.log`.
+
+This refutes the unchanged unconditional near-axis P12 clause. It does not refute
+H-036 or establish a new packing bound.
+
+## Retained Prospective Protocol
+
+The following protocol was committed before either scientific process.
 The source is the clean instrument commit `961d9923`; run from a detached checkout of
 that commit, using its `packing/` directory and `PYTHONPATH=src`. The existing project
 Python 3.14 environment supplies only standard-library dependencies for these two
-instruments. This prospective record has no scientific result.
+instruments. No scientific result existed at registration.
 
 ## One Producer and One Independent Reader
 

@@ -48,7 +48,7 @@ session:
     objective: Resolve the frozen H-110 candidate and choose the next conditional-cover or localization discriminator.
     commitment: BC-255
     bead: think-qv73
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Independent source-free controls and swapped reviews passed, and the integrated instrument checkpoint is published.
     budget_minutes: 30
@@ -58,15 +58,57 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-ledger check
     kill_condition: A frozen scientific cap or guard fails, or the phase deadline arrives; never repeat a completed invocation.
     fallback: Record refusal or non-invocation and choose a changed future obligation without claiming mathematical rejection.
+    outcome: Exp-121 independently accepted H-110; one producer and one reader used 0.11 seconds total process wall time. H-122 is the selected conditional-cover continuation.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-121-h-110-fixed-p12-escape.md]
+    stop_reason: A verified P12 escape rules out the unchanged unconditional auxiliary and warrants testing the diamond-conditioned replacement.
+    next_action: Build source-free H-122 screen and reader while deriving the separate localization contract.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Prepare a bounded H-122 exact fixed-frame falsifier and independent witness reader, with a parallel localization design assessment.
+    commitment: BC-255
+    bead: think-jbw5
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: H-110 refutes the unconditional P12 cover; the reviewed fixed-diamond reduction supplies a more useful conditional obligation.
+    budget_minutes: 30
+    started_at: '2026-09-07T06:26:00Z'
+    deadline_at: '2026-09-07T06:56:00Z'
+    expected_output: Independently reviewed source-free H-122 instruments and a scoped localization contract; no target before separate registration.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: An author or review cap expires, or an exact geometry/coverage premise fails; no target without readiness.
+    fallback: Preserve the missing premise and select a changed next obligation; do not run an unready instrument.
+    outcome: H122 producer and independent reader passed 24 source-free controls and swapped reviews by06:49:01; H123 localization reduces to four sufficient polynomial obligations.
+    evidence: [packing/devtools/diamond_cover_screen.py, packing/devtools/check_diamond_cover_witness.py, packing/campaign/hypotheses/H-123-near45-coordinate-localization.md]
+    stop_reason: Source-free readiness is established; no H122 or H123 scientific target has run.
+    next_action: Freeze H122 source and a prospective screen; prepare the separate H123 instrument under phase4.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Prepare the four-guard continuous near45 localization instrument and independent review.
+    commitment: BC-255
+    bead: think-g930
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: The source-free assessment replaces a general localization mesh with a reviewed two-mark interval reduction and four polynomial obligations.
+    budget_minutes: 30
+    started_at: '2026-09-07T06:45:00Z'
+    deadline_at: '2026-09-07T07:15:00Z'
+    expected_output: Source-free localization producer and independent reader readiness, with exact implication and failure semantics.
+    validation_command: Focused source-free tests, independent mathematical review and the records tier.
+    kill_condition: A missing geometric premise, a failed control or the fixed author/review deadline; no target before a committed prospective protocol.
+    fallback: Preserve the exact unproved obligation and retained instrument, without subdivision or target retries.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Pass prospective record checks, commit exp-121, then invoke its producer exactly once.
+    next_action: Allocate one fifteen-minute source-free producer slice and independently check the generic geometric reduction.
   primary_bead: think-fqhr
   status: in_progress
   budget:
     wall_minutes: 120
-    max_cycles: 4
+    max_cycles: 6
     orientation_minutes: 10
     checkpoint_minutes: 20
     slice_minutes: 30
@@ -192,6 +234,182 @@ session:
     fallback: Return the precise unresolved premise for coordinator disposition.
     write_scope: [Read-only review; no file writes]
     excluded_commands: [Scientific target invocation, File or shared-record writes, Repo-wide gates]
+  - task: H-122 fixed-frame producer and source-free controls (think-crsj)
+    operator: Codex angle_reader_recovery, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Frozen06:43:09; source-free exact-frame screen ready for independent review, no target invocation.
+    evidence: [packing/devtools/diamond_cover_screen.py, packing/tests/test_diamond_cover_screen.py]
+    files: [packing/cases/stromquist/restricted_orientation.py, packing/devtools/diamond_cover_screen.py, packing/tests/test_diamond_cover_screen.py]
+    checks: [12 source-free tests pass; 0.41 seconds wall and 0.31 CPU, Ruff and format clean, BasedPyright zero findings; 0.84 seconds wall]
+    uncertainty: Fixed samples cannot establish the continuous cover.
+    elapsed_seconds: 970
+    elapsed_quality: operator_reported_approximate
+    next_action: Factor the existing fixed-frame cell kernel and implement exact diamond separation on generic controls only.
+    phase: 3
+    budget_minutes: 20
+    started_at: '2026-09-07T06:26:00Z'
+    deadline_at: '2026-09-07T06:46:00Z'
+    expected_output: Source-free fixed-frame falsifier, preserved original wrapper and focused tests.
+    validation_command: .venv/bin/python3 -m pytest tests/test_diamond_cover_screen.py tests/test_stromquist_restricted_orientation.py
+    kill_condition: The deadline or a missing event-stratum/separation premise blocks target readiness.
+    fallback: Retain the failed control and precise missing proof without a target invocation.
+    write_scope: [packing/cases/stromquist/restricted_orientation.py, packing/devtools/diamond_cover_screen.py, packing/tests/test_diamond_cover_screen.py]
+    excluded_commands: [H-122 target constructors or target-frame evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
+  - task: H-122 independent corner and SAT reader (think-l60w)
+    operator: Codex density_control_recovery, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Frozen06:41:04 before producer inspection; source-free independent reader ready for review.
+    evidence: [packing/devtools/check_diamond_cover_witness.py, packing/tests/test_check_diamond_cover_witness.py]
+    files: [packing/devtools/check_diamond_cover_witness.py, packing/tests/test_check_diamond_cover_witness.py]
+    checks: [12 source-free tests pass; 1.22 seconds wall and 0.97 CPU, Ruff and format clean, BasedPyright zero findings; 0.87 seconds wall]
+    uncertainty: A valid returned witness can reject the cover; no-witness cannot accept it.
+    elapsed_seconds: 827
+    elapsed_quality: operator_reported_approximate
+    next_action: Independently bind the exact witness, nine marks, diamond and actual angle; use generic controls only.
+    phase: 3
+    budget_minutes: 20
+    started_at: '2026-09-07T06:26:00Z'
+    deadline_at: '2026-09-07T06:46:00Z'
+    expected_output: Source-distinct witness reader with exact containment, strict point avoidance and strict polygon separation controls.
+    validation_command: .venv/bin/python3 -m pytest tests/test_check_diamond_cover_witness.py
+    kill_condition: The deadline or a missing identity/angle/strictness check blocks target readiness.
+    fallback: Report unresolved readiness without invoking the scientific constructor.
+    write_scope: [packing/devtools/check_diamond_cover_witness.py, packing/tests/test_check_diamond_cover_witness.py]
+    excluded_commands: [Reading or importing the producer, Scientific target evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
+  - task: Complete near45 localization design assessment (think-wtma)
+    operator: Codex scalar_followup_assessment, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Completed06:39:13; a two-mark interval argument reduces complete localization to four sufficient polynomial guards.
+    evidence: [packing/campaign/hypotheses/H-123-near45-coordinate-localization.md]
+    files: []
+    checks: [Source-free analytic derivation; coordinator independently checks overlap projections and closed-domain reduction]
+    uncertainty: Target polynomial signs remain unevaluated; separate analytic review and instrument readiness remain required.
+    elapsed_seconds: 708
+    elapsed_quality: operator_reported_approximate
+    next_action: Derive a complete moving-domain or stronger closed-domain certificate contract from the current exact angle instruments.
+    phase: 3
+    budget_minutes: 15
+    started_at: '2026-09-07T06:26:00Z'
+    deadline_at: '2026-09-07T06:41:00Z'
+    expected_output: Exact localization premise, proof decomposition, source-free control needs and priced next action.
+    validation_command: Independent review against P10, the actual angle bands and coordinate-midline symmetry.
+    kill_condition: The deadline or a dependency on unproved localization, sampled coverage or target computation.
+    fallback: Preserve one precise missing premise and its smallest prospective discriminator.
+    write_scope: [Read-only assessment; no file writes]
+    excluded_commands: [Scientific target evaluation, File or shared-record writes, New hypothesis or experiment allocation]
+  - task: H-123 four-guard localization producer (think-g930)
+    operator: Codex scalar_followup_assessment, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Build the source-free generic polynomial instrument; target coefficient evaluation remains forbidden.
+    phase: 4
+    budget_minutes: 15
+    started_at: '2026-09-07T06:45:00Z'
+    deadline_at: '2026-09-07T07:00:00Z'
+    expected_output: Generic exact localization polynomials, fixed four-obligation protocol constructor and source-free controls.
+    validation_command: .venv/bin/python3 -m pytest tests/test_near45_localization.py
+    kill_condition: Deadline or a missing implication; no scientific target computation to debug the tool.
+    fallback: Freeze partial work and its exact readiness gap for independent disposition.
+    write_scope: [packing/devtools/near45_localization.py, packing/tests/test_near45_localization.py]
+    excluded_commands: [Scientific target constructors or target-polynomial evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
+  - task: H122 producer review (think-byfa)
+    operator: Codex density_control_recovery, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: GO at06:49:01; exact event strata and strict SAT mixing are sound.
+    evidence: ["packing/devtools/diamond_cover_screen.py","packing/cases/stromquist/restricted_orientation.py"]
+    files: []
+    checks: ["12 source-free tests pass; 0.38 seconds wall, Ruff/types/format clean"]
+    uncertainty: Readiness does not decide the scientific target.
+    elapsed_seconds: 301
+    elapsed_quality: operator_reported_approximate
+    next_action: Coordinator records readiness before a prospective target.
+    phase: 3
+    budget_minutes: 10
+    started_at: '2026-09-07T06:44:00Z'
+    deadline_at: '2026-09-07T06:54:00Z'
+    expected_output: Independent source-free mathematical and instrument review with costs and findings.
+    validation_command: Focused source-free tests and independent analytic review; no scientific target.
+    kill_condition: A missing premise or the original deadline ends the slice without target authorization.
+    fallback: Preserve the exact unresolved obligation; no scientific rerun or implicit budget extension.
+    write_scope: ["Read-only review; no file writes"]
+    excluded_commands: [Scientific constructors or target evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
+  - task: H122 independent reader review (think-8rjz)
+    operator: Codex angle_reader_recovery, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: GO at06:48:01; fixed identity, actual-angle, unit corners, strict point and SAT checks are sound.
+    evidence: ["packing/devtools/check_diamond_cover_witness.py"]
+    files: []
+    checks: ["12 source-free tests pass; 0.44 seconds wall, Ruff/types/format clean"]
+    uncertainty: Readiness does not decide the scientific target.
+    elapsed_seconds: 219
+    elapsed_quality: operator_reported_approximate
+    next_action: Coordinator records readiness before a prospective target.
+    phase: 3
+    budget_minutes: 10
+    started_at: '2026-09-07T06:44:22Z'
+    deadline_at: '2026-09-07T06:54:22Z'
+    expected_output: Independent source-free mathematical and instrument review with costs and findings.
+    validation_command: Focused source-free tests and independent analytic review; no scientific target.
+    kill_condition: A missing premise or the original deadline ends the slice without target authorization.
+    fallback: Preserve the exact unresolved obligation; no scientific rerun or implicit budget extension.
+    write_scope: ["Read-only review; no file writes"]
+    excluded_commands: [Scientific constructors or target evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
+  - task: H123 analytic localization review (think-l3cm)
+    operator: Codex angle_reader_recovery, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Return source-free readiness or the exact missing premise before the deadline.
+    phase: 4
+    budget_minutes: 10
+    started_at: '2026-09-07T06:49:30Z'
+    deadline_at: '2026-09-07T06:59:30Z'
+    expected_output: Independent source-free mathematical and instrument review with costs and findings.
+    validation_command: Focused source-free tests and independent analytic review; no scientific target.
+    kill_condition: A missing premise or the original deadline ends the slice without target authorization.
+    fallback: Preserve the exact unresolved obligation; no scientific rerun or implicit budget extension.
+    write_scope: ["Read-only review; no file writes"]
+    excluded_commands: [Scientific constructors or target evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
+  - task: H123 independent polynomial reader (think-awk9)
+    operator: Codex density_control_recovery, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Return source-free readiness or the exact missing premise before the deadline.
+    phase: 4
+    budget_minutes: 15
+    started_at: '2026-09-07T06:50:16Z'
+    deadline_at: '2026-09-07T07:05:16Z'
+    expected_output: Independent source-free polynomial reader with complete identity and obligation checks.
+    validation_command: .venv/bin/python3 -m pytest tests/test_check_near45_localization.py
+    kill_condition: A missing premise or the original deadline ends the slice without target authorization.
+    fallback: Preserve the exact unresolved obligation; no scientific rerun or implicit budget extension.
+    write_scope: ["packing/devtools/check_near45_localization.py","packing/tests/test_check_near45_localization.py"]
+    excluded_commands: [Scientific constructors or target evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
   outputs:
   - packing/campaign/agent-sessions/session-091-structural-compatibility.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md
@@ -199,20 +417,27 @@ session:
   - packing/tests/test_p12_escape_candidate.py
   - packing/devtools/check_p12_escape_candidate.py
   - packing/tests/test_check_p12_escape_candidate.py
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-121-h-110-fixed-p12-escape.md
+  - packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md
   checks:
   - Baseline 3c4fd4e2 has exactly the origin/main aae108a6 tree after PRs 105 and 106 merged.
   - Inherited merge evidence is composed fast validation plus a corrected shared-bead-tree check, not a fresh full checkpoint gate.
   - Instrument push gate took 135.71 seconds; all steps passed except two process-cleanup tests denied ps by the sandbox. Reachable tests recorded 627 passed, two failed, three deselected.
   - The two unchanged failed tests passed with process visibility in 4.67 seconds pytest, 4.98 seconds wall. This is composed push evidence, not a fresh full gate.
+  - All required hosted checks passed on PR109 at instrument commit 961d9923; this is not the full research checkpoint gate.
+  - Exp-121 producer and independent reader each completed once with exit0; the actual target passed exact checks in 0.11 seconds combined process wall time.
   stop_reason: null
-  next_action: Complete the independently reviewed H-110 instrument under think-qv73, then prospectively register its sole candidate test.
+  next_action: Complete source-free H-122 readiness under think-jbw5; only then register its bounded exact fixed-frame screen.
 ---
 
 # Exact P12 escape and conditional compatibility
 
-This is the first autonomous two-active-hour continuation of Agenda 024, serving
-BC-255/H-102. The user authorized continued work, with a reviewable checkpoint every
-two hours. A checkpoint closes this bounded session, not that authorization.
+This is the first checkpoint in the approximately eight-active-hour continuation of
+Agenda 024, serving BC-255/H-102, under epic `think-il1m`. The user requests checkpoints
+every one to three active hours; this block retains the two-hour cadence. The larger
+[allocation](../agendas/agenda-024-post-381-24h-portfolio.md#eight-active-hour-continuation-on-pr-109)
+includes work already underway from this session's start. A checkpoint closes this
+bounded session, not the remaining eight-hour authorization.
 
 ## Allocation
 
@@ -266,8 +491,9 @@ states which checks actually ran, and links unfinished obligations and exact res
 commands. Beads are synchronized separately on `tbd-sync`; their IDs and scope are
 mirrored here so a PR reader can recover the plan.
 
-This branch has allocated **Session 091** and **exp-121**, and owns **H-110 / BC-255**.
-No new hypothesis, agenda or exploration ID is allocated at this checkpoint.
+This branch has allocated **Session 091**, **exp-121** and **H-122**, and continues
+**BC-255 / H-102**. H-110 is complete; the next selected bead is `think-jbw5`.
+No new agenda or exploration ID is allocated at this checkpoint.
 The last audited external allocation is PR 107: X-017, Agenda 027, BC-258–268 and
 H-111–117, with no session or experiment IDs. Its current head is `96be087f`;
 PR 108 has merged into that branch and allocated no scientific IDs. Neither has landed

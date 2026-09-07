@@ -483,7 +483,7 @@ agenda:
     state: in_progress
     priority: 1
     question: What is the first complete proof obligation for a useful restricted structural theorem?
-    hypotheses: [H-036, H-102, H-104, H-106, H-108, H-109, H-110]
+    hypotheses: [H-036, H-102, H-104, H-106, H-108, H-109, H-110, H-122]
     budget: >-
       One assessment slice of at most 30 minutes, beginning with H-036's unchanged
       0.25-degree restricted-angle claim. State complete cases, a feasible control,
@@ -509,10 +509,13 @@ agenda:
       Exp119 and exp120 subsequently accept the canonical near45 A3 and A1/A2
       implications through independent exact readers and the reviewed local
       reflection. Localization and both twelve-point clauses remain open.
-      The next-block discriminator is H110 under think-qv73: one frozen near-axis
-      P12 escape candidate suggested by a generic projected-strip gap. No target
-      witness has been evaluated. An escape would invalidate only that unchanged
-      auxiliary construction, not H036 or the accepted restricted lemmas.
+      Session091 accepts H110/exp121 under think-qv73: the sole exact candidate and
+      independent reader establish a contained near-axis square avoiding all twelve
+      unchanged marks. This refutes the unconditional P12 auxiliary, not H036 or
+      the accepted restricted lemmas. The independently reviewed fixed-diamond
+      reduction avoids a uniform-clearance premise. H122 under think-jbw5 now tests
+      its conditional nine-point cover; localization remains separately assessed
+      under think-wtma. No H122 target has run.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md
@@ -520,11 +523,16 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-119-h-108-near45-a3-forcing.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-120-h-109-near45-a1-a2-forcing.md
     - packing/campaign/hypotheses/H-110-fixed-near-axis-p12-escape.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-121-h-110-fixed-p12-escape.md
+    - packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md
     workflows: [insight-iteration, pipeline-improvement, research-loop]
     depends_on: [BC-250]
     next_evidence: >-
-      Check the fixed H110 candidate before funding larger localization or P12
-      certificates; its controls, independent review and target remain unrun.
+      Complete the source-free H122 fixed-frame falsifier and independent witness
+      reader, then prospectively register a bounded screen. A verified escape
+      rejects only this sufficient conditional cover; no witness leaves the
+      continuous claim unresolved. Derive the separate complete localization contract.
       Only mass-derived
       near-tight forcing needs a valid covering measure; geometric conflicts,
       interval no-goods and restricted wall/angle arguments do not inherently need it.

@@ -1059,16 +1059,23 @@ agenda:
           H110 tests one fixed near-axis P12 escape before a larger positive proof.
           Source-free controls, independent review and a fresh prospective round
           are required; no target has run.
+      - bead: think-jbw5
+        workflow: pipeline-improvement
+        priority: 0
+        rationale: >-
+          Added during Session091, not backdated to this agenda's W10. Exp121
+          accepts H110's auxiliary P12 escape. H122 is the conditional diamond
+          cover replacement; independent source-free instruments precede its
+          first registered screen, with localization assessed in parallel.
       selected:
         bead: think-qv73
         workflow: research-loop
         rationale: >-
-          This live handoff follows terminal Session090 and its passed full
-          bc5c24b5 checkpoint. H106, H108 and H109 accept continuous auxiliaries;
-          H110 is the next unrun discriminator. The September7 amendment holds
-          H107 out of the next block and selects a bounded conditional-compatibility
-          assessment through Agenda024. Preserve BC215 as an uncompleted
-          efficiency candidate and keep the work on the integrated research PR.
+          This machine-checked marker retains terminal Session090's handoff
+          until Session091 closes. Session091 has consumed it: H110 is accepted
+          by exp121 and active work is H122 under think-jbw5, with H123
+          localization in parallel. H107 stays paused. Select the next terminal
+          handoff at the checkpoint, preserving BC215 as an efficiency candidate.
       operator_input:
         status: unavailable
         note: >-

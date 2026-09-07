@@ -400,21 +400,19 @@ Use `max` for mathematical judgment and `high` or `xhigh` for suitable mechanica
 
 ### Selected Continuation After Session 090
 
-The next coordinating entry is `think-qv73`, BC-255’s
-[H-110 fixed near-axis P12 escape test](../hypotheses/H-110-fixed-near-axis-p12-escape.md).
-A generic projected-strip gap suggests one frozen rational square.
-No target witness has been evaluated.
-Check this inexpensive risk to the unchanged P12 construction before building a larger
-localization or continuous P12 certificate.
+The next coordinating entry is `think-jbw5`, BC-255's
+[H-122 conditional nine-point cover](../hypotheses/H-122-diamond-conditional-nine-point-cover.md).
+[Session 091](../agent-sessions/session-091-structural-compatibility.md) completed
+H-110/exp-121: one independently checked contained near-axis square strictly avoids all
+twelve unchanged marks. This refutes the unconditional P12 auxiliary, not H-036.
+The accepted H-106, H-108 and H-109 lemmas remain valid.
 
-Start a fresh bounded block, with two source-free authors on disjoint producer and
-reader files, a third worker for independent review, and the coordinator owning
-registration and disposition.
-Allow 15–20 minutes per author and 10 minutes per review; these are planning estimates,
-not measured runtimes.
-Only a committed, reviewed prospective experiment may invoke the fixed candidate.
-A verified one-square escape would invalidate that auxiliary construction, not refute
-H-036.
+The current block builds a bounded fixed-frame conditional-cover falsifier and a
+source-distinct witness reader on disjoint files, with a third worker deriving the
+separate localization contract. Allow twenty minutes per source-free author and ten
+minutes per independent review. Root owns registration and disposition; only a
+committed prospective experiment may invoke the new target. A failed sample search
+does not prove a continuous cover.
 
 The user’s September 7 priority amendment, assessed under `think-m9a9`, defers H-107 out
 of the next two-hour block.
@@ -430,36 +428,52 @@ Reconsider only at a later-session allocation checkpoint for a named downstream 
 an explicitly justified low-attention attempt, with the full 35-minute producer and
 20-minute shared verification allowances plus coordination.
 
-Use the freed mathematical attention under BC-255 / H-102 to assess a conditional
-compatibility argument from the accepted A-point forcing lemmas.
-The question is whether a forced square occupies positive-radius neighborhoods of the
-three A-points, so other squares must avoid those neighborhoods and satisfy a weaker
-covering obligation.
-This could bypass an unconditional P12 clause.
-It is an unverified proof direction, not an accepted counting argument: localization,
-the conditional cover and strict-interior incidence must all be justified.
-The existing
-[strict-sublevel enlargement argument](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md#candidate-conditional-cover)
-supplies interior incidence by scaling a hypothetical packing with side below the target
-and using concentric unit cores.
-Its slack need not be uniform as the side approaches the target; a fixed positive
-clearance remains a separate new obligation.
-Mere closed-point containment would allow shared boundary points and is insufficient.
-Allow one 30-minute derivation and independent-review slice, coordinated through
-`think-qv73`, rotating the available workers as the H-110 instruments become ready.
-Its exit is a precise reusable lemma and a priced complete-proof obligation, or a reason
-to stop. Register any distinct claim before a computational test; no new target or
-automatic instrument build is commissioned by this amendment.
+The independently reviewed
+[conditional assessment](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md)
+shows that A1/A2 forcing and the angle band place a fixed rational diamond inside the
+distinguished square. Strict-sublevel enlargement supplies pairwise-disjoint closed
+unit cores, so the other cores avoid that diamond. No uniform clearance radius is
+needed. H-122 asks whether the nine remaining marks cover every diamond-avoiding unit
+square in both full angle bands. Together with the separate localization lemma, that
+would complete the restricted counting argument. Neither universal obligation is
+proved yet. A counterexample to this sufficient cover would leave full-square
+compatibility available, rather than refute H-036.
 
-If the P12 candidate is rejected, rank near-45 localization ahead of the complete
-near-45 P12 cover. Localization asks for P10 coverage of the complement of the four
-reflected canonical regions; the session handoff records its exact strips.
-If the candidate is accepted, first compare the conditional compatibility route with the
-smallest justified change to the P12 argument or point construction.
-Neither outcome silently funds a repair.
+The accepted P12 escape selects the conditional compatibility route for the next
+discriminator. Localization asks for P10 coverage of the complement of the four
+reflected canonical regions; the assessment records its exact strips.
+Moving the marked points or repairing the unconditional cover is a different
+allocation, not an automatic response to that escape.
 Density and the eleven-square BC-256 falsifier remain separate candidates, not extra
 default launches. Preserve the larger portfolio’s unspent allocations and all completed
 receipts.
+
+### Eight-Active-Hour Continuation on PR 109
+
+The user's current mandate is approximately eight active portfolio hours, including
+Session 091 from 05:49 UTC on September 7, under epic `think-il1m`. Keep one integrated
+PR and checkpoints every one to three active hours; the default is two. The original
+Session 091 deadline remains 07:49 UTC. A later checkpoint gets a fresh bounded
+session contract, not an extension of a completed phase or scientific allowance.
+
+| Checkpoint | Evidence to seek | Allocation decision |
+| --- | --- | --- |
+| About two active hours | H-110 disposition, H-122 fixed-frame screen if ready, and a complete localization instrument contract | Fund a complete conditional proof only if the screen and reviewed design justify it; otherwise retain the precise obstruction. |
+| About four active hours | A complete useful restricted lemma or a checked counterexample to its sufficient proof step | Close the obligation at its actual scope; compare full-square compatibility with changing the construction before further implementation. |
+| About six active hours | Progress from the strongest surviving structural route and one independently selected higher-impact portfolio direction | Reprice against likely mathematical benefit, not code already written. Consider the resource/anchor and richer-witness agendas at their actual readiness; do not create a dependency on an unmerged PR. |
+| About eight active hours | Integrated results, failed and unopened work, validation, costs and exact successor instructions | Finish a coherent final checkpoint and hand off the selected next agenda. |
+
+These are evidence-dependent allocations, not promises that each theorem will be
+proved. At every checkpoint, challenge whether another hour on the current auxiliary
+is more valuable than a different route toward a substantial bound improvement. Keep
+mathematical authorship and independent review separate, with the coordinator owning
+shared records and the PR. Do not create speculative IDs or a separate PR per fix.
+
+Operational interruptions do not consume this research allocation. Record active
+portfolio time separately from summed parallel worker time, retain actual interruption
+boundaries, and never change an experimental cap retrospectively. Intermediate
+checkpoints must be pushed with enough state for a replacement agent to continue
+without reconstructing the conversation.
 
 ### Retained Portfolio Commitments
 
@@ -730,19 +744,19 @@ work. No speculative range is reserved.
 A next-ID pointer changes when an agent publishes or explicitly assigns a record;
 recheck parallel work before using it.
 
-The collision check includes `origin/main` at `4d305597`, PR 105 at `f5684f51`, and open
-PR 107 at `5ab00c8a`. PR 106 at `9afae3c0` adds an n=17 archive/control/review and no
-native campaign IDs.
+The current collision check includes `origin/main` at `aae108a6` after PRs 105 and 106
+merged, this continuation on PR 109, and open PR 107 at `96be087f`. PR 108 has merged
+into PR 107 and adds no native campaign IDs. PR 106's n=17 work also adds none.
 IDs quoted inside imported source packets are not native allocations.
 
-| Namespace | PR 105 additions already published | PR 107 additions already published | Next sequential ID after the checked records |
+| Namespace | Integrated research line: PRs 105 and 109 | PR 107 additions already published | Next sequential ID after the checked records |
 | --- | --- | --- | --- |
 | Explorations | None; native reports currently end at X-016 on this branch | X-017 | X-018 |
 | Agendas | None; this branch uses Agenda 024–026 | agenda-027 | agenda-028 |
 | Bounded commitments | Existing BC-251–BC-255 carry this block’s work; BC-256–BC-257 are also occupied | BC-258–BC-268 | BC-269 |
-| Hypotheses | H-106–H-110 | H-111–H-117 | H-118 |
-| Experiments | exp-116–exp-120 | None | exp-121 |
-| Agent sessions | session-090 | None | session-091 |
+| Hypotheses | H-106–H-110 and H-122 | H-111–H-117 | H-119 |
+| Experiments | exp-116–exp-121 | None | exp-122 |
+| Agent sessions | session-090–session-091 | None | session-092 |
 | Series | Existing series-000; no new series | None | series-001 if a new series is justified; none is assigned |
 
 The user will arrange downstream agents around this sequential line.
@@ -761,8 +775,8 @@ No uncreated ranges from the earlier draft of this update were dispatched.
 
 The native record inventory at this checkpoint is X-001–X-016, agenda-001–agenda-026,
 BC-001–BC-155 / BC-159–BC-185 / BC-190–BC-225 / BC-230–BC-257, H-001–H-065 / H-070 /
-H-090–H-091 / H-093–H-110, and exp-001–exp-064 / exp-070–exp-071 / exp-110–exp-111 /
-exp-113–exp-120. Sessions occupy session-001–session-090. Other native sequences are
+H-090–H-091 / H-093–H-110 / H-122, and exp-001–exp-064 / exp-070–exp-071 / exp-110–exp-111 /
+exp-113–exp-121. Sessions occupy session-001–session-091. Other native sequences are
 run-001–run-002, D-001–D-478, T-001–T-022, CG-001–CG-012 and VE-001–VE-002; this branch
 introduces none of those IDs.
 Add PR 107’s definitions from the table when checking the combined record.
