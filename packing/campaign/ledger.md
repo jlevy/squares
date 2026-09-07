@@ -107,7 +107,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-090](agent-sessions/session-090-four-hour-research.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 11 | think-9qrx | After Session090 closes, select think-qv73 under BC255 for H110's source-free fixed P12 escape instrument and independent review, then a fresh prospective experiment. The September7 priority amendment holds H107 out of the next block and selects a bounded conditional-compatibility assessment alongside H110. Agenda024 owns this revised allocation and the deferred bead. Density remains source-blocked; no exp116 retry. |
 | [session-091](agent-sessions/session-091-structural-compatibility.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 6 | think-fqhr | Select think-7e72 for a bounded full-P10 distinguished-square compatibility discriminator after fresh ID/ownership checks; no repeated H110/H122/H123 invocation. |
 | [session-093](agent-sessions/session-093-full-square-compatibility.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 9 | think-bmx9 | Select think-7e72 for independently authored H124 residual-cover source binding and a bounded caller, alongside a separately declared degree-eight graph source-control attempt in the density lane. Neither target is yet allocated; preserve the stopped original sequence and check fresh IDs before the next session. |
-| [session-094](agent-sessions/session-094-complete-cover-and-density-controls.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `review-planning-oversight` (insight) | 4 | think-63oj | Inspect exp125 retained receipts; reprice the missing near-axis S obligation after the certified diagonal lemma. The density sequence remains uninvoked; no completed producer or reader may be repeated. |
+| [session-094](agent-sessions/session-094-complete-cover-and-density-controls.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `research-loop` (insight) | 5 | think-63oj | Inspect exp125 retained receipts; reprice the missing near-axis S obligation after the certified diagonal lemma. The density sequence remains uninvoked; no completed producer or reader may be repeated. |
 
 ### Workflow summary
 
@@ -120,7 +120,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 18 | 1 | 58 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 9 | 4 | 61 | 7 |
+| `research-loop` | 9 | 4 | 62 | 7 |
 | `pipeline-improvement` | 25 | 0 | 126 | 0 |
 | `documentation-pass` | 1 | 0 | 7 | 0 |
 | `review-planning-oversight` | 0 | 0 | 2 | 0 |

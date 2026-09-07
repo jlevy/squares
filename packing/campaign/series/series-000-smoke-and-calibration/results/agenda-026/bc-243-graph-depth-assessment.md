@@ -303,6 +303,48 @@ separate prospective experiment.
 No candidate is allocated by this protocol.
 The H099 bracket and the packing bound remain unchanged during source controls.
 
+## Fresh Allocation After the Missing Review
+
+The preceding `think-3q4b` allocation expired without invoking any row.
+Its initial review began after its original cap and did not produce a full GO. The
+separate narrow review `think-aukd` then completed the missing exact status and
+source-binding audit at 10:34:07 UTC. These are new readiness facts, not scientific
+results or permission to change the historical deadline.
+
+The coordinator allocates the first actual invocation of these five reviewed controls
+under `think-b9i7`, with the same frozen engine `7daa7c55`, row order, process caps,
+source identities and acceptance/stop predicates.
+This future allocation must itself be committed, independently reviewed and pass record
+checks before any invocation.
+The immutable engine push already passed45/45 in153.55 seconds; the independent full
+checkpoint gate remains separate.
+
+Launch no earlier than10:50 UTC and no later than11:00 UTC. Finish every process by
+11:06 UTC. The allowance remains310 process seconds, with no retry or extension.
+A failed row stops all later rows.
+No candidate is allocated.
+This is not a repetition of an experiment: neither this five-row sequence nor its
+repaired scientific source has ever been invoked.
+The failed Session093 old-code call and the wholly unused earlier Session094 allocation
+remain preserved separately.
+
+Use exactly the five commands and conditional-reader rules in the preceding table,
+substituting only the explicit source name and cap for that row.
+In addition, the negative graph replay must have
+`verification.graph_verification.status=verified_overweight_clique`; outer `unresolved`
+alone does not distinguish a genuine overweight clique from node exhaustion.
+Its source must be `trump-perturbed-control-v1` and its independently recomputed mass
+must be the exact string `"11"`.
+
+Retain new directories `half-weight/`, `original/`, `perturbed-pair/`,
+`perturbed-graph/` and `uniform/` under
+`results/agenda-026/graph-source-controls-reviewed/`. Require each output path to be
+absent before its first invocation.
+Keep producer and conditional reader stdout, stderr, external wall/user/system timing
+and actual exit. Never create evidence for an uncalled process.
+On completion, append the row-by-row disposition here, including any uninvoked suffix,
+and reprice a separate candidate only if all five controls passed.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

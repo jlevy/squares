@@ -82,7 +82,7 @@ session:
     clock_role: work
     objective: Reprice the missing near-axis compatibility branch and complete the remaining static density admission obligations.
     bead: think-63oj
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Exp125 independently certifies the whole diagonal branch but leaves the axis sufficient cover unresolved; the old density allocation was never invoked.
     budget_minutes: 25
@@ -92,10 +92,31 @@ session:
     validation_command: Independent mathematical review of retained proofs, exact static status mapping, record checks and existing asynchronous full gate.
     kill_condition: Original worker caps or any unresolved premise; no target repetition or modification of expired deadlines.
     fallback: Preserve the certified diagonal lemma and precise missing axis premise; defer any unready future scientific allocation.
+    outcome: The independent assessment selects one fixed collision polygon using existing inner kernels and a single displacement guard. The generic vertex/Minkowski reduction is independently proved. Exp125 evidence is published at1acd6320; missing density predicates and fresh protocol review passed independently.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-graph-depth-assessment.md]
+    stop_reason: A changed bounded proof obligation is selected; no two-angle solver or radius sweep is funded.
+    next_action: Independently derive the fixed displacement guard and admit fresh density controls only after their committed record gate.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Prove one fixed collision-polygon strengthening source-free while separately testing the newly admitted density controls.
+    commitment: BC-255
+    bead: think-8x6o
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: The diagonal branch is certified and independent repricing selected a bounded fixed-polygon route for the missing near-axis branch; density readiness now has its missing review.
+    budget_minutes: 30
+    started_at: '2026-09-07T10:47:14Z'
+    deadline_at: '2026-09-07T11:17:14Z'
+    expected_output: Independent fixed-displacement proof packages and once-only density source-control receipts or explicit non-invocation.
+    validation_command: Independent analytical derivations without target construction; frozen density CLI and complete conditional reader predicates after committed records.
+    kill_condition: Original author caps, any unproved fixed guard, or the density launch11:00 and finish11:06 cutoffs. No radius refinement or target repetition.
+    fallback: Preserve exp125's partial theorem and exact missing premise; keep any failed or uninvoked control suffix explicit.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Finish the active mathematical assessment and publish retained evidence before selecting a separately scoped next obligation.
+    next_action: Commit the reviewed future density allocation and run records before any control; proof authors remain independent and source-free.
   primary_bead: think-63oj
   status: in_progress
   budget:
@@ -473,6 +494,9 @@ session:
   - packing/devtools/run_h124_cover.py
   - packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md
   checks:
+  - Engine7daa7c55 full gate passed all checks in1623.67 seconds; external1623.74 wall,3260.24 user,89.68 system. Published outcome1acd6320 passes45/45 push steps in148.44 seconds; external151.23 wall,202.37 user,23.32 system. Hosted7daa required checks were green at10:44; laterCI remains separate.
+  - Generic vertex/Minkowski reduction think-vnua proved independently10:37:49–10:47:55 (606 seconds), with world-frame rotation, empty-triangle branch, closed seams and outer-domain scope. Its actual earlier start gives the stricter10:52:49 cap, not the guessed dispatch timestamp.
+  - Fresh density allocation think-b9i7 received independent mechanical protocol GO under think-lvb6, actual10:47:53–10:48:36 (43 seconds), before10:52:14. Mathematical source and exact predicate reviews remain separate; no actual control has run yet.
   - Planning began with the10:31 mathematical dispatch while the admitted diagonal replay was completing. The phase start records that earlier actual entry, with the same25-minute allowance giving the stricter10:56 deadline. The PR audit inherited phase3's stricter10:38:06 cap and finished10:30:09; no worker or scientific cutoff is extended.
   - Fresh10:38 UTC upstream inspection found no landed main commits; origin/main remains dd36800e. PR110 advanced to1b7ed623 and retains its separate lane.
   - H124 protocol review think-y146 passed after the stop-rule clarification, actual10:19:21–10:23:18 UTC (237 seconds), within original10:24 cap; no science or tests ran.
