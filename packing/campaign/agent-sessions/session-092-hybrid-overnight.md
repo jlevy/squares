@@ -490,7 +490,7 @@ session:
     clock_role: work
     objective: Publish the audited angular remainder and one next design entry, reconcile actual costs and run the final immutable validation checkpoint.
     bead: think-0yfe
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: Five completed phases follow W5 phase14. BC281 yields accepted partial exclusions, the boundary route has no ready changed premise and source exp128 closes the fixed-support avenue; allocation and measured validation now take priority.
     budget_minutes: 30
@@ -500,13 +500,13 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --jobs 2 --inner-jobs 1
     kill_condition: New scientific target or implementation, duplicate source work, changed runtime limits, unreviewed scope promotion or phase deadline.
     fallback: Preserve any still-running immutable validation under its original command budget and report it at the next bounded reconciliation phase; no target or gate cap is extended.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Integrate the accepted audit, select BC282 design only, pass records and the push floor, then obtain full validation and hosted evidence before final reserve.
+    outcome: The accepted mathematical audit, exact remainder, next BC282 design and13:14 cost receipt were committed at7b967d34. Its immutable31 record steps passed24.07seconds,45 push steps passed167.65seconds and full66 steps passed1604.44seconds. Three final documentation delegations returned usage-limit errors without reports; post-deadline coordinator reconciliation follows the retained session procedure.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md, packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md]
+    stop_reason: External account usage interruption prevented the final delegated reviews and publication inside the original block. Their caps and the original14:31:12 session deadline are unchanged. The already-launched full gate completed under its original budget; user continuation resumed only reconciliation at15:34:37.
+    next_action: Finish post-deadline records, coordinator document checks, narrow validation and publication. BC282 remains the sole future design entry and is not executed by this closeout.
 
   primary_bead: think-0yfe
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 480
     max_cycles: 24
@@ -525,7 +525,7 @@ session:
   progress:
     metric: Independently checked continuous domains, exact scoped obstructions and remaining proof obligations, qualified by actual attention and compute cost
     before: PR107 plans landed; H118-120 domains unselected, H121 globally unproved, uniform LP export not ready, no Agenda028 target measured.
-    after: null
+    after: Independently audited signed release exclusions now cover the middle interval and both axis neighborhoods, with an exact closed remainder and stronger reusable core count. Central capacity fence and complete parent remainders are accepted; disk and octagon routes are refuted, wall-core and full-square questions remain unresolved. The direct proof interface passes its controls. Full7b967d34 validation passes; usage interruption leaves only post-deadline publication recovery. The global bracket is unchanged and BC282 design remains unexecuted.
   delegations:
   - task: BC270 natural-domain capacity comparison
     operator: Codex capacity_protocol, max thinking
@@ -1693,6 +1693,72 @@ session:
     fallback: Preserve the exact missing premise and recommend no numerical target until its full inclusion and controls are accepted.
     write_scope: [attic/agenda-028-overnight/final-release-priority.md]
     excluded_commands: [Scientific targets or solvers, Code implementation, Git and shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: Final native scope and handoff review
+    operator: Codex closing_scope_review, max thinking
+    status: blocked
+    recording: contemporaneous
+    outcome: The agent reported an account usage limit and returned no review artifact. First clock13:36:21 was reported. The coordinator performs the remaining documentation checks during post-deadline reconciliation.
+    evidence: [packing/campaign/agent-sessions/session-092-hybrid-overnight.md]
+    files: []
+    checks: []
+    uncertainty: No independent final documentation review was completed by this delegation; elapsed work is unavailable. The previously frozen mathematical audit remains accepted.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Do not retry this expired delegation. Coordinator reconciles the retained record and publishes without extending scientific work.
+    phase: 20
+    budget_minutes: 10
+    started_at: '2026-09-07T13:36:00Z'
+    deadline_at: '2026-09-07T13:46:00Z'
+    expected_output: Concise read-only review with exact actionable corrections or checked-current decisions; no new scientific work.
+    validation_command: Read-only comparison with frozen native evidence and documentation guidelines.
+    kill_condition: New target mathematics, implementation, shared-record mutation or13:46 deadline.
+    fallback: Retain any unfinished review scope explicitly; no automatic extension.
+    write_scope: [attic/agenda-028-overnight/final-native-scope-review.md]
+    excluded_commands: [Scientific targets, Code implementation, Git and shared-record mutations, New IDs, Writes outside assigned file or attic]
+  - task: Final successor-admission review
+    operator: Codex full_angle_adversary, max thinking
+    status: blocked
+    recording: contemporaneous
+    outcome: The agent reported an account usage limit and returned no review artifact. First clock13:36:30 was reported. The coordinator performs the remaining documentation checks during post-deadline reconciliation.
+    evidence: [packing/campaign/agent-sessions/session-092-hybrid-overnight.md]
+    files: []
+    checks: []
+    uncertainty: No independent final documentation review was completed by this delegation; elapsed work is unavailable. The previously frozen mathematical audit remains accepted.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Do not retry this expired delegation. Coordinator reconciles the retained record and publishes without extending scientific work.
+    phase: 20
+    budget_minutes: 10
+    started_at: '2026-09-07T13:36:00Z'
+    deadline_at: '2026-09-07T13:46:00Z'
+    expected_output: Concise read-only review with exact actionable corrections or checked-current decisions; no new scientific work.
+    validation_command: Read-only comparison with frozen native evidence and documentation guidelines.
+    kill_condition: New target mathematics, implementation, shared-record mutation or13:46 deadline.
+    fallback: Retain any unfinished review scope explicitly; no automatic extension.
+    write_scope: [attic/agenda-028-overnight/final-successor-review.md]
+    excluded_commands: [Scientific targets, Code implementation, Git and shared-record mutations, New IDs, Writes outside assigned file or attic]
+  - task: Reader-document update-or-current decisions
+    operator: Codex direct_contracts, max thinking
+    status: blocked
+    recording: contemporaneous
+    outcome: The agent reported an account usage limit and returned no review artifact. No first-clock or completion receipt was returned. The coordinator performs the remaining documentation checks during post-deadline reconciliation.
+    evidence: [packing/campaign/agent-sessions/session-092-hybrid-overnight.md]
+    files: []
+    checks: []
+    uncertainty: No independent final documentation review was completed by this delegation; elapsed work is unavailable. The previously frozen mathematical audit remains accepted.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Do not retry this expired delegation. Coordinator reconciles the retained record and publishes without extending scientific work.
+    phase: 20
+    budget_minutes: 10
+    started_at: '2026-09-07T13:36:00Z'
+    deadline_at: '2026-09-07T13:46:00Z'
+    expected_output: Concise read-only review with exact actionable corrections or checked-current decisions; no new scientific work.
+    validation_command: Read-only comparison with frozen native evidence and documentation guidelines.
+    kill_condition: New target mathematics, implementation, shared-record mutation or13:46 deadline.
+    fallback: Retain any unfinished review scope explicitly; no automatic extension.
+    write_scope: [attic/agenda-028-overnight/final-reader-doc-decisions.md]
+    excluded_commands: [Scientific targets, Code implementation, Git and shared-record mutations, New IDs, Writes outside assigned file or attic]
   outputs:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-independent-review.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-author.md
@@ -1733,6 +1799,9 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
   checks:
+  - Recovery accounting through15:41:25UTC preserves the exact original baseline and nondecreasing cumulative timings. It records65804.238 agent-seconds over25979.477 active-union seconds within33013 elapsed-envelope seconds, including39824.761 overlap seconds. The original-deadline snapshot separately records65381.081 agent-seconds and25560.729 active-union seconds. One live coordinator makes the latest receipt incomplete; recovery and interruption are not eight hours of uninterrupted mathematical attention.
+  - Recovered at15:34:37UTC after the user asked to continue. Immutable7b967d34 passed all66 full checks in1604.44seconds, including2848 fast tests with1 skipped,98 geometry tests and55 sweep tests. Its31 records passed24.07seconds and45 push steps167.65seconds. All actual process exits were zero. The new delta contains records and documentation only and receives its own push floor.
+  - The three final documentation delegates returned account usage-limit errors without artifacts. Their original13:46 deadlines remain fixed and their statuses are blocked. The coordinator checks the final native scopes, successor boundaries and reader-document decisions from retained evidence; this is not another independent mathematical audit.
   - The accepted accounting tool refreshed the interval through13:14:22UTC. Its before baseline is identical and every cumulative timing field is nondecreasing. The incomplete live delta records62075.133 agent-seconds over24190 elapsed active seconds, including37885.133 overlap seconds; four tasks remain live.
   - Fresh13:13 read-only source inspection at41afa5ec records independently accepted exp128, fixing the complete current Trump D4 support optimum at11 and refuting H099 only there. Source BC265/H116 now owns changed-resource comparison. Our IDs remain unchanged. Fresh fetch leaves main atdd36800e and PR110 mergeable with all required bdbfc054 checks green.
   - Both BC281 writers froze within their original caps. Phase19 reserves the fresh reader through13:30 and two read-only priority assessments through13:27. No new scientific target or numerical work is allocated. The shared host has one source-owned exhaustive validation process at13:13; the final full replay is planned after its expected completion, with load checked again before launch.
@@ -1783,8 +1852,9 @@ session:
   - Hosted CI on 1a076e4e failed only the expired in-progress phase/delegation check; the tasks completed before their deadlines and their actual receipts are updated here. No validation rule was weakened.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-092.yaml
-  stop_reason: null
-  next_action: Phase20 W5 integrates the accepted BC281 partial exclusions, exact remainder and contact-independent counting scope. BC282 and think-s6e7 select only a future complete residual-skeleton design after fresh13:24 inventory. Run records, push and immutable full validation; finish W10 reconciliation inside the original14:11 reserve and14:31:12 endpoint.
+  stop_reason: Account usage interrupted final documentation reviews and publication after all scientific audits were complete. The coordinator resumed on the user continuation at15:34:37 only to reconcile, validate and publish existing work; no scientific cap or original session deadline is extended.
+  next_action: After the final record-only push gate and publication, start a separately allocated BC282 design from Agenda028 and think-s6e7. Require the20-minute complete skeleton/alternative table and10-minute independent admission before any later target; no automatic retry or new eight-hour block.
+
 ---
 # Eight-Hour Hybrid and Release Investigation
 
@@ -1814,11 +1884,11 @@ The final reserve begins at 14:11:12 UTC. An early mathematical result, refusal 
 likely token interruption triggers an immediate checkpoint rather than waiting for the
 nominal time. A checkpoint does not spend the rest of the eight-hour authorization.
 
-The app heartbeat `n11-eight-hour-research-continuation` is active on the current task
-every twenty minutes through this block.
-It resumes this record and the existing clocks; it does not grant another eight hours or
-restart a frozen target.
-Its presence does not substitute for pushed checkpoint artifacts.
+The app heartbeat `n11-eight-hour-research-continuation` preserved the original clocks
+through the authorized block.
+It was paused during final recovery.
+Its wakeups never granted another eight hours, restarted a frozen target or replaced a
+pushed checkpoint.
 
 [PR110](https://github.com/jlevy/squares/pull/110) is the execution record, based on
 merged PR107. Its first pushed checkpoint is `1a076e4e`; all 45 local pre-push steps
@@ -1853,96 +1923,72 @@ Retain target commands and output under their normal campaign result directories
 Use `attic/` for working files and validation receipts; do not use `/tmp` or `/temp`.
 The repository’s runtime is Python 3.14; never use `python3` from PATH.
 
-## Fresh-Agent Resume
+## Final State and Recovery
 
-Read this record first, then the owning agenda items and their current artifacts.
-Fetch the recorded branch, inspect uncommitted work, and compare the actual UTC clock
-with the active phase, next two-hour checkpoint and finalization deadline before
-continuing. Preserve unfinished author work and do not rerun a frozen target simply
-because its result has not yet been summarized.
+The scientific work is closed.
+All BC281 mathematical writers and the fresh audit ended by 13:25:01 UTC, inside their
+original limits. The independently accepted exclusions leave
+$t\in[1/24,1/3]\cup[1/2,23/25]$, with both signs and all other conditions.
+The stronger count also applies without the four block contact equations, while
+retaining six fixed axis squares and one common orientation.
+The global $n=11$ bracket remains unchanged.
 
-The branch is `codex/n11-hybrid-overnight`, based on `dd36800e`. The integration bead is
-`think-0yfe`; BC270 is `think-9uv0`, BC273 is `think-1btr`, and the shared
-direct-contract/interface owners remain BC260 `think-ql1j` and BC261 `think-0w2c`. No
-additional hypothesis or experiment ID is allocated by this launch.
-The source owner has independently reconciled the earlier unpublished H118 collision by
-assigning its question H122. Fresh inventory at 08:16 UTC also contains H123–124,
-experiments121–123 and session093 in addition to session091. Published H118-121 stay
-fixed.
-Recheck live allocations before any new registration; sequential next pointers are
-candidates, not reservations.
+The final mathematical checkpoint is `7b967d34`. Its immutable record tier passed all 31
+steps in 24.07 seconds, its push tier passed 45 in 167.65 seconds, and its full gate
+passed all 66 in 1604.44 seconds.
+The full gate includes 2848 fast tests with one skipped, 98 geometry tests and 55 sweep
+tests. The command was launched before the scientific checkpoint cutoff, on a clear
+shared queue, and retained its original budget.
+Earlier failed receipts remain in Git and the attic; no runtime threshold changed.
+Later record-only edits receive their own push check.
 
-The first two-hour mathematical checkpoint is pushed at `26679fa8`, with passing local
-push checks and hosted CI. The BC273 analytical contradiction and independent audits
-exclude the entire declared $T_+$, including every square10 orientation, without
-changing the global bracket.
-Exact band-subsystem packings still block H118’s comparison.
-BC270 now uses its remaining design slice for an actual necessary restriction from the
-seven residual squares; no capacity target is admitted.
+Three final documentation delegates returned account usage-limit errors and no reports.
+The final reserve and original 14:31:12 deadline were not successfully completed as
+planned. The coordinator resumed at 15:34:37 after the user said to continue, following
+the session procedure for post-deadline reconciliation.
+Only retained-evidence review, record correction, validation and publication occur in
+this recovery.
+The session and its last phase are marked stopped; neither an active lease
+nor a new research allowance is invented to fill the interruption.
 
-The cost correction and BC276’s complete-domain review are accepted and published at
-`4ac71438`, with all 31 record and 45 push checks passing.
-Both independent negative-slide attempts and their whole-domain audit are complete.
-The whole signed short-slide parent is excluded.
-BC270’s parent fence and corrected 24-guard remainder are also independently accepted,
-with the matched coupled-LP question still open.
-BC276 is the next sequential commitment, under `think-6pka` and existing H120; it has no
-new hypothesis or experiment ID. Its native analytical protocol was committed and
-records validated before target dispatch.
-No H120 LP adapter or numerical target is admitted.
-The rebuilt cost snapshot uses the independently accepted correction; BC275 retains the
-original live-receipt discrepancy and the qualified historical reconciliation.
-BC271’s completed assessment recommends a boundary-band design.
-BC277, bead `think-os9k`, is complete: its eight-guard boundary domain and full
-reflection passed independent admission.
-BC278, bead `think-dtr6`, is closed after its independently audited bounded attempt.
-Its unchanged whole full-square target under H118 remains unresolved.
-The audit froze10:46:20 and accepts the author’s exact seven-disk obstruction,
-continuous selected-pose family and fixed-center non-liftability, and the adversary’s
-distinct octagon witness with a disk-overlap refusal.
-Uniform disk and octagon capacities of six are refuted.
-Phase14 selected maximal wall-conditioned cores on the unchanged parent, with complete
-release half-angle $t\in[0,1]$ as the next alternative.
-BC279, bead `think-cwve`, is closed after fresh audit accepted both exact six-core
-controls, the fixed-arrangement insertion cover and conditional wall-edge lemma.
-Whole M7 and full-square D0 remain unresolved.
-BC280, bead `think-7ylp`, is complete: its full-angle domain passed independent
-admission without a defining correction.
-BC281, bead `think-ilpc`, uses the next sequential ID under existing H120. Its native
-protocol received independent GO and final checks at 12:33:54. The committed `bdbfc054`
-record gate passed in 32.51 seconds before actual writer starts at 12:38:54 and
-12:39:21. Both writers froze within their original caps, with exact partial results and
-the whole-domain question inconclusive.
-Phase19 reserves the fresh independent reader through 13:30 and two read-only priority
-assessments through 13:27. The absolute scientific endpoint remains 13:35. Prepare the
-immutable full checkpoint after the audit and retain the 14:11 final reserve.
-Fresh workers receive only the frozen native premises, avoiding unnecessary inherited
-history while preserving complete mathematical scope.
+The coordinator checked BC282’s full necessary projection, 40 containment rows and 45
+pair clauses, inherited lemma domains and closed siblings.
+A ten-square witness would refute the stronger skeleton strategy at that pose; it would
+not refute H120 or give an eleven-square upper bound.
+The 20/10-minute design and admission are the sole selected next entry; the later
+30/25/20-minute analytical attempt remains conditional.
+The published prices sum to 105 worker-minutes and an 80-minute sequential path.
+BC282 was reserved as `think-s6e7` after fresh local/source inventory at 13:24:29. It
+has not been executed.
+Start it from the owning agenda and bead in a later allocation.
 
-Immutable0e1961e2 passed all66 full checks in1686.47seconds and required hosted CI.
-Historical `86dbff43` passed 45 push steps in 115.69 seconds.
-Its hosted check failed two stale shared child statuses and a0.985-second runtime-band
-overrun. Coordinator reconciled only those two statuses to explicit source completion
-receipts; the fresh bead-tree check passes.
-No source ownership, scientific scope or runtime threshold changed.
-The hosted failure remains a failed receipt.
-Current `bdbfc054` passed all required hosted checks, including the checks tier in 90.87
-seconds under unchanged limits.
-Retain the earlier fixture, command-record and runtime failures too.
+The original owner preference remains the guide: meaningful $n=11$ progress, disjoint
+parallel work and durable intermediate checkpoints.
+The final ranking is the coordinator’s judgment from three completed strategic
+assessments and the mathematical audit; the later failed documentation delegations
+supplied no additional acceptance.
+Agenda028 remains active for the selected future design and its explicitly deferred
+questions. This session’s closure does not close the whole research program.
 
-The current cost receipt is through 13:14:22 UTC, with an identical accepted baseline
-and nondecreasing cumulative timings.
-Source session095 and exp128 are occupied.
-Its collision-augmented exp127 axis attempt is unresolved without an independent target
-reader; independently accepted exp128 fixes the current Trump D4 support optimum at
-eleven. Source BC265/H116 owns the subsequent changed-resource comparison.
-Our BC281 allocation followed fresh local/source inventory at12:21. Check live source
-allocation again before assigning any later number.
+## Documentation and Efficiency Decisions
 
-Preserve current record checks at the final block boundary.
-Check the current phase and delegation deadlines above before continuing.
-After the final deadline, reconcile retained evidence and report the next request; start
-no further target under this block’s authorization.
+| Document | Coordinator decision and reason |
+| --- | --- |
+| `SYNOPSIS.md` | Updated the current handoff, accepted scope, exact remainder, sequential ownership and future design; regenerated the owned views. |
+| `README.md` | Checked current. The global lower and upper bounds are unchanged; local family results belong in the linked synopsis and research record. |
+| `TUTORIAL.md` | Checked current. Its explanation and bound table remain valid and explicitly delegate current campaign outcomes to the synopsis. |
+| `conventions.md` | Updated the live-assignment pointer to the generated agenda map while retaining the source allocation and parallel-PR checks; the numbering and evidence rules are unchanged. |
+| `operating-rules.md` | Checked current. The existing post-deadline reconciliation and evidence-based reprioritization rules handle this interruption without changing policy. |
+| `development.md` | Checked current. Validation tiers, commands, source-qualified receipts and unchanged runtime limits remain correct; no new gate or dependency is introduced. |
+
+The session records 20 phases, including W5 at phases 6, 14 and 20. Five completed
+phases separate the last two W5 entries; zero further research phases follow phase20.
+This is the cadence count for the next handoff.
+The full gate improved from the prior 1686.47-second receipt to 1604.44 seconds on this
+run, but these timings do not isolate an optimization effect.
+No causal speedup is claimed.
+Current finalization costs and snapshot completeness are reported by the retained
+accounting tool, not estimated from phase caps or by adding overlapping agent times.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -173,6 +173,9 @@ packing average attains it.
 This refutes H099 only on that fixed support.
 [PR109](https://github.com/jlevy/squares/pull/109) owns the result and subsequent
 BC265/H116 changed-resource comparison.
+The later source record at `65cfe6c5`, read at 15:38 UTC, closes that comparison and
+selects future BC264/H114 feature and kernel pricing; its proposed avoiding-pose
+fallback remains conditional.
 Its H124 collision-augmented exp127 remains unresolved with `no_chain` and no
 independent target reader.
 Neither source task is repeated here.
@@ -216,7 +219,7 @@ An incomplete table remains a readiness gap.
 | Rank | Avenue and ownership | Next useful evidence and reconsideration condition |
 | --- | --- | --- |
 | Selected next entry | X018 / BC282 / H120, `think-s6e7` | Complete residual-skeleton admission from the new exact premises. Refuse an unchanged retry or incomplete case table. |
-| Parallel, separately owned | Source X016 and X017 continuation / PR109 | Consume its accepted support optimum and later BC265/H116 design; preserve its H124 remainder and ownership. |
+| Parallel, separately owned | Source X016 and X017 continuation / PR109 | Consume its accepted support optimum and completed BC265/H116 design; preserve the selected BC264/H114 pricing, H124 remainder and ownership. |
 | Next boundary preparation candidate | X018 / H118 | A 20-minute generic design and 15-minute independent audit of exact elimination of one residual angle while retaining walls and all ten actual neighbors. Require a finite event rule, all coefficient/root degeneracies, explicit case counts and a valid simultaneous-angle strictness control. No such rule or control is admitted yet. |
 | Deferred implementation | X017 / BC261, sole interface owner | Add independently enclosed retained-feature rows and a complete checked family cover only when a named consumer needs them. Estimated allocation through a first target audit is 220–250 worker-minutes; current small controls do not measure that cost. |
 | Preserved broad consumer | X017 / H111–112 | Complete anchor or contact-independent common-angle domains after their own controls. Do not duplicate them through the local release lane. |

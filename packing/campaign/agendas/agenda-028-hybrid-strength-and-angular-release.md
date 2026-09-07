@@ -577,10 +577,15 @@ agenda:
 ---
 # Agenda 028 — Hybrid Strength and Angular Release
 
-**Active in [session-092](../agent-sessions/session-092-hybrid-overnight.md).**
-[X-018](../explorations/X-018-hybrid-strength-and-angular-release.md) owns the critical
-review, priority rationale and mapping from #108. Epic `think-pxv5` owns this agenda.
-PR107 landed the plans at `dd36800e`; integration bead `think-0yfe` owns the new
+**The first execution block is closed in
+[session-092](../agent-sessions/session-092-hybrid-overnight.md).** Its scientific
+audits completed before the usage interruption; final publication was recovered after
+the owner asked to continue.
+This agenda remains active for the unexecuted BC282 design and its explicitly deferred
+questions.
+[X-018](../explorations/X-018-hybrid-strength-and-angular-release.md) owns the
+critical review, priority rationale and mapping from #108. Epic `think-pxv5` owns this
+agenda. PR107 landed the plans at `dd36800e`; integration bead `think-0yfe` owns the new
 `codex/n11-hybrid-overnight` execution branch.
 The owner authorized approximately eight hours, 06:31–14:31 UTC on September 7, with
 pushed checkpoints at hours 2, 4, 6 and 8. The opening design and proof-contract review

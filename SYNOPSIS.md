@@ -561,12 +561,15 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-**Eight-hour investigation: final validation and closeout.**
-[Session 092](packing/campaign/agent-sessions/session-092-hybrid-overnight.md) runs from
-06:31 to 14:31 UTC on September 7, on `codex/n11-hybrid-overnight` after PR107 landed at
-`dd36800e`. [PR110](https://github.com/jlevy/squares/pull/110) retains intermediate
-checkpoints, independently audited proofs, exact model obstructions and validation.
-The final reserve begins at 14:11; no successor is executed in closeout.
+**Eight-hour investigation closed; BC282 design selected next.**
+[Session 092](packing/campaign/agent-sessions/session-092-hybrid-overnight.md) was
+allocated from 06:31 to 14:31 UTC on September 7, on `codex/n11-hybrid-overnight` after
+PR107 landed at `dd36800e`. [PR110](https://github.com/jlevy/squares/pull/110) retains
+intermediate checkpoints, independently audited proofs, exact model obstructions and
+validation. All scientific audits ended before their original limits.
+Usage interrupted the final documentation reviews and publication; the user asked to
+continue and the coordinator recovered the checkpoint after the original14:31 deadline.
+No successor was executed.
 
 [X018](packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md) and
 [Agenda028](packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md)
@@ -588,12 +591,16 @@ An exact feasible skeleton would show square10 must enter the proof; it would no
 eleven-square witness.
 Do not restart the frozen BC281 attempt.
 Phase20 is the final W5 allocation and validation block, following five completed phases
-since W5 phase14. The next cadence count restarts after this block; terminal closure
-records its final count and validation scope.
+since W5 phase14. Zero research phases follow it.
+Immutable7b967d34 passed all66 full checks in1604.44seconds; the final documentation and
+status delta has its own push gate.
+The original480-minute window and scientific caps remain recorded in the stopped
+session.
 
 The parallel task **Squares plan X-016** owns its PR109 continuation.
-Its exp128 fixes the current Trump D4 support optimum at11; its next BC265/H116
-changed-resource design and unresolved H124 remainder remain separate.
+Its exp128 fixes the current Trump D4 support optimum at11. Its completed BC265/H116
+comparison selects future BC264/H114 feature and kernel pricing; that work and the
+unresolved H124 remainder remain separate.
 Source H122–124, exp121–128 and sessions091/093/094/095 are occupied.
 Check live allocations before reserving another ID.
 
@@ -3154,7 +3161,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
 | `codex-task-tree-session-090.yaml` | session-090 | 1,341 | 9.8 h | 3.94 h | 3.95 h | yes |
-| `codex-task-tree-session-092.yaml` | session-092 | 1,513 | 17.24 h | 6.72 h | 6.72 h | yes |
+| `codex-task-tree-session-092.yaml` | session-092 | 1,620 | 18.28 h | 7.22 h | 9.17 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

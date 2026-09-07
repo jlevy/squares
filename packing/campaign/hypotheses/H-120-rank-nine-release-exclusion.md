@@ -134,9 +134,10 @@ and
 [independent admission](../series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-domain-review.md)
 retain all physical common angles through $t\in[0,1]$, both slide signs, variable side,
 all source features, 44 actual containment rows and 55 complete SAT clauses.
-The eight closed angle/sign children include the two accepted middle-angle children; six
-remain unresolved. Interior quarter-turn lifts and label-specific recontact children
-retain their explicit conversion obligations.
+At domain admission, two of the eight closed angle/sign children inherited the accepted
+middle-angle theorem and six remained unresolved.
+Interior quarter-turn lifts and label-specific recontact children retain their explicit
+conversion obligations.
 BC281’s
 [prospective protocol](../series/series-000-smoke-and-calibration/results/agenda-028/bc-281-full-angle-release-protocol.md)
 passed independent admission and all 31 immutable record checks before target work.
