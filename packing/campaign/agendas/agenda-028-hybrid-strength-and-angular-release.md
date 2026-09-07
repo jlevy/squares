@@ -474,12 +474,14 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-protocol.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-mathematical-review.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-control-review.md
-    next_evidence: Both independent reviews accept the frozen maximal-core protocol, all same-normal pair predicates and complete closed parent. Commit and pass records, then declare actual target leases. No serial weaker-core or unchanged disk retry.
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-adversary.md
+    next_evidence: Both independent target writers froze within their caps with exact six-core controls and unresolved whole M7. A fresh20-minute audit checks all predicates and the author's fixed-arrangement insertion cover; no uniform capacity upper bound is claimed.
   - id: BC-280
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: in_progress
     priority: 2
     question: What complete physical common-angle release domain with t in[0,1] can be admitted without losing signed slides, source features or closed seams?
     hypotheses: [H-120]
@@ -493,7 +495,8 @@ agenda:
     program: n11-hybrid-strength-and-angular-release
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md
-    next_evidence: Prepare only the complete t in[0,1] design while keeping the BC279 target reader independent of its active arguments. Any later release target requires its own prospective commitment and price.
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md
+    next_evidence: Complete t and v in[0,1] design froze11:52:30. The independent15-minute admission checks all eight closed angle-sign children and source binding; a separate prospective protocol draft allocates no target work yet.
 ---
 # Agenda 028 — Hybrid Strength and Angular Release
 

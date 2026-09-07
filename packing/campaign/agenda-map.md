@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **6** in_progress, **17** ready, **13** tentative, **60** blocked, **42** stopped, **131** complete.
+- **7** in_progress, **16** ready, **13** tentative, **60** blocked, **42** stopped, **131** complete.
 
 - **19 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-243`, `BC-248`, `BC-270`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -55,7 +55,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-028 | `BC-279` | in_progress | 1 | insight | research | Does the exact maximal wall-conditioned common-core model admit seven residual centers anywhere on the… | `think-cwve` |
 | agenda-028 | `BC-272` | tentative | 2 | insight | research | Does retaining the common anchor remove a diagnosed H119 correlation loss? | `think-cy6g` |
 | agenda-028 | `BC-274` | tentative | 2 | insight | research | What concrete implication could establish or obstruct the existential H121 normal form? | `think-5hmt` |
-| agenda-028 | `BC-280` | ready | 2 | correctness | measurement_validation | What complete physical common-angle release domain with t in[0,1] can be admitted without losing signed… | `think-7ylp` |
+| agenda-028 | `BC-280` | in_progress | 2 | correctness | measurement_validation | What complete physical common-angle release domain with t in[0,1] can be admitted without losing signed… | `think-7ylp` |
 
 ## Blocked, and on what
 
@@ -170,7 +170,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-025 | active | 3 |  | 1 | 6 |  | 3 | 13 |
 | agenda-026 | active | 1 | 2 | 2 | 4 |  | 5 | 14 |
 | agenda-027 | active | 1 | 3 | 3 | 2 |  | 2 | 11 |
-| agenda-028 | active | 1 | 1 | 2 | 2 | 1 | 5 | 12 |
+| agenda-028 | active | 2 |  | 2 | 2 | 1 | 5 | 12 |
 
 ## By program
 
@@ -289,7 +289,7 @@ Open frontier: `BC-243`, `BC-244`, `BC-246`, `BC-247`, `BC-248`, `BC-249`, `BC-2
 | agenda-028 | `BC-277` | complete | What complete boundary-band domain fairly tests complement capacity for seven residual full squares… |
 | agenda-028 | `BC-278` | stopped | Is the entire admitted boundary-band eleven-square child D0 empty, with its reflected upper child? |
 | agenda-028 | `BC-279` | in_progress | Does the exact maximal wall-conditioned common-core model admit seven residual centers anywhere on… |
-| agenda-028 | `BC-280` | ready | What complete physical common-angle release domain with t in[0,1] can be admitted without losing… |
+| agenda-028 | `BC-280` | in_progress | What complete physical common-angle release domain with t in[0,1] can be admitted without losing… |
 
 Open frontier: `BC-270`, `BC-271`, `BC-272`, `BC-274`, `BC-279`, `BC-280`.
 

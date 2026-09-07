@@ -203,6 +203,9 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [BC-279: Author Result and Exact Six-Core Control](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-author.md) | research synthesis | record | retained | — |
+| [BC-279 Adversary: Six Exact Wall Cores; the Seven-Core Question Remains Open](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-adversary.md) | research synthesis | record | retained | — |
+| [BC-280: Full-Angle Signed-Release Domain](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md) | implementation plan | record | retained | — |
 | [BC-278: Boundary-Band Author Result](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-author.md) | research synthesis | record | retained | — |
 | [Midpoint Allocation: Wall Information Before Further Angle Expansion](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md) | implementation plan | record | retained | — |
 | [BC-279: Maximal Wall-Core Protocol](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-protocol.md) | implementation plan | record | retained | — |

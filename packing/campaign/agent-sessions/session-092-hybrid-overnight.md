@@ -374,7 +374,7 @@ session:
     objective: Freeze and independently admit the exact maximal wall-conditioned common-core model on the complete unchanged boundary-band family.
     commitment: BC-279
     bead: think-cwve
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: The midpoint selects a generic containment consequence unavailable to unconditional incircles, with an exact maximal-core formula and a meaningful whole-class negative outcome.
     budget_minutes: 25
@@ -384,10 +384,58 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: Unproved maximal-core identity, changed Gamma0, independent normals inside one pair, missing closed seam, target work before admission, or phase deadline.
     fallback: Retain the precise failed implication and do not invoke this target. Consider the complete release-angle chart under a separate prospective allocation.
+    outcome: Both independent admissions accept the frozen native maximal-core model and exact controls. Protocol52b1b43e needed only a runnable-command record correction; correctedd11b866f passes all31 record steps in27.46seconds before target dispatch.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-protocol.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-mathematical-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-control-review.md
+    stop_reason: Final independent admissions and the committed record gate completed before11:37:25; no scientific target ran during model preparation.
+    next_action: Attempt the unchanged maximal-core question under separately recorded30/25-minute writer caps and reserved20-minute audit; prepare only the complete release domain in the spare slot.
+  - workflow: insight-iteration
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Determine the entire admitted seven-core model with independent author and adversary while preparing the complete release-angle domain separately.
+    commitment: BC-279
+    bead: think-cwve
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: Both independent native admissions and the committed record gate pass; the maximal wall-conditioned core gives a changed complete-domain question after the disk obstruction.
+    budget_minutes: 30
+    started_at: '2026-09-07T11:36:33Z'
+    deadline_at: '2026-09-07T12:06:33Z'
+    expected_output: Exact complete model exclusion, exact seven-core witness or explicit unresolved implication from each independent writer, plus a separate unattempted full-angle domain design.
+    validation_command: Independent exact whole-domain mathematical audit after both target reports freeze, followed by record validation.
+    kill_condition: Changed Gamma0 or core, omitted shared-normal predicate or seam, target reasoning exchange before both writers freeze, numerical target, or actual worker deadline.
+    fallback: Preserve the exact partial result or model obstruction and its full-square limitation; no narrower retry or engine switch. The reserved audit follows without extending the writers.
+    outcome: Both independent writers froze within their original caps with exact six-core controls and no complete seven-core determination. The author also reports fixed-arrangement insertion maximality, explicitly not a capacity upper bound. BC280 froze the complete physical-angle domain without target work.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-adversary.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md
+    stop_reason: Author checks ended12:01:33, adversary11:58:37 and domain design11:52:30; all precede unchanged deadlines. Coordinator resumed12:11 after context restoration and grants no target extension.
+    next_action: Fresh independent BC279 audit and separate BC280 domain admission, with prospective release-protocol design only in the third slot.
+  - workflow: insight-iteration
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Audit the frozen maximal-core partial results and admit the complete release-angle domain while drafting its prospective target protocol.
+    commitment: BC-279
+    bead: think-cwve
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Both whole-model attempts are unresolved but retain exact scoped controls; the next useful alternative needs complete-domain admission before any enlarged release target.
+    budget_minutes: 20
+    started_at: '2026-09-07T12:14:00Z'
+    deadline_at: '2026-09-07T12:34:00Z'
+    expected_output: Independently accepted or refused six-core certificates and insertion-only claim, complete full-angle domain admission, and an unattempted prospective protocol draft.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: Capacity upper bound inferred from fixed insertion failure, omitted pair or domain seam, target proof inside design, or worker deadline.
+    fallback: Preserve each exact failed or unresolved implication; select a separately admitted ready alternative within the unchanged14:11 final reserve.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Dispatch disjoint model design and two independent admissions; preserve the12:31 checkpoint, final reserve14:11 and endpoint14:31.
+    next_action: Publish current terminal receipts and phase17 before its live leases expire; complete the12:31 checkpoint and select any new target only after admission and passing committed records.
   primary_bead: think-0yfe
   status: in_progress
   budget:
@@ -1268,7 +1316,142 @@ session:
     fallback: Preserve the exact failed model control and refuse target admission until a separately priced correction.
     write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-control-review.md]
     excluded_commands: [Target proof or numerical execution, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC279 analytical maximal-core author
+    operator: Codex capacity_protocol, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Exact six-core configuration with39 pair normals and fixed-arrangement insertion maximality; whole M7 unresolved. Actual start11:38:50, mathematical freeze12:01:02, final checks12:01:33.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-author.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-author.md]
+    checks: [Hand-derived exact predicates, Formatting and links/footer/whitespace passed, No prohibited target runs or reasoning exchange]
+    uncertainty: No capacity upper bound or seven-core witness; independent audit pending.
+    elapsed_seconds: 1363
+    elapsed_quality: operator_reported_approximate
+    next_action: Fresh independent audit of all predicates and strict covering margins.
+    phase: 16
+    budget_minutes: 30
+    started_at: '2026-09-07T11:36:33Z'
+    deadline_at: '2026-09-07T12:06:33Z'
+    expected_output: Exact uniform model exclusion, exact seven-core witness with all required normals, or complete scoped partial result and precise remaining obligation.
+    validation_command: Fresh independent exact audit of the complete source-domain and model evidence after both writers freeze.
+    kill_condition: Changed source/model, omitted pair or seam, numerical target, reasoning exchange, or deadline.
+    fallback: Preserve the unresolved implication or exact model obstruction; no automatic retry, weaker core or fitted subset substitution.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-author.md]
+    excluded_commands: [Numerical target or solver invocation, Reading the other active target report or exchanging reasoning, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC279 independent maximal-core adversary
+    operator: Codex release_model_review, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Distinct exact six-core configuration with39 pair normals and108 inequalities; whole M7 unresolved. Actual start11:39:06, mathematical freeze11:57:40, final checks11:58:37.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-adversary.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-adversary.md]
+    checks: [Exact shared-normal certificates, Formatting and native links/footer passed, Independent from author throughout]
+    uncertainty: Failed seventh insertion is not a uniform upper bound; audit pending.
+    elapsed_seconds: 1171
+    elapsed_quality: operator_reported_approximate
+    next_action: Fresh independent audit and exact scope disposition.
+    phase: 16
+    budget_minutes: 25
+    started_at: '2026-09-07T11:36:33Z'
+    deadline_at: '2026-09-07T12:01:33Z'
+    expected_output: Independently checkable exact model determination or precise surviving obligation, with full-square and surrogate scope separated.
+    validation_command: Fresh exact mathematical audit of source guards, every pair, graph value and normal after both target writers freeze.
+    kill_condition: Weaker-model witness mislabeled, changed domain, numerical target, reasoning exchange or deadline.
+    fallback: Preserve the exact failed construction or missing implication; no automatic narrowed target.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-adversary.md]
+    excluded_commands: [Numerical target or solver invocation, Reading the other active target report or exchanging reasoning, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC280 complete physical-angle release domain design
+    operator: Codex direct_contracts, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Complete full t and v in[0,1] domain,44 wall rows and55 SAT disjunctions, eight closed angle-sign children. Actual start11:39:13 and freeze11:52:30.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md]
+    checks: [Source and corner binding reread, Six native links and footer checked, Flowmark0.4.0 checks passed, BC279 target reasoning remained unread]
+    uncertainty: Only two middle-angle children inherit exclusion; six remain unresolved. Admission pending.
+    elapsed_seconds: 797
+    elapsed_quality: operator_reported_approximate
+    next_action: Independent15-minute domain admission before any enlarged target.
+    phase: 16
+    budget_minutes: 20
+    started_at: '2026-09-07T11:36:33Z'
+    deadline_at: '2026-09-07T11:56:33Z'
+    expected_output: One native complete-domain design with explicit old-theorem scope, all new angle branches and seams, source controls and a separately priced future admission.
+    validation_command: Exact domain and source-control design only, followed by a later independent admission before any target.
+    kill_condition: New target proof, fitted angle box, assumed reflection, missing SAT or endpoint, reading active BC279 target reports, or deadline.
+    fallback: Retain the precise domain or source-binding gap and leave the alternative unlaunched; return as a fresh BC279 target reader only after both writers freeze.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md]
+    excluded_commands: [Capacity or release target execution, Reading or discussing active BC279 target arguments, Numerical target or solver, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC279 fresh independent maximal-core target audit
+    operator: Codex direct_contracts, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Reconstruct both frozen six-core certificates and the author insertion cover; distinguish exact lower controls from uniform capacity and whole M7 conclusions.
+    phase: 17
+    budget_minutes: 20
+    started_at: '2026-09-07T12:14:00Z'
+    deadline_at: '2026-09-07T12:34:00Z'
+    expected_output: Reconstruct both frozen six-core certificates and the author insertion cover; distinguish exact lower controls from uniform capacity and whole M7 conclusions.
+    validation_command: Independent exact equations, every same-normal pair, graph value and strict cover margin; no numerical target.
+    kill_condition: New target proof or numerical run, unsupported transfer of a scoped result, omitted seam or pair, shared-record mutation, or deadline.
+    fallback: Retain accepted partial lemmas and every failed or missing implication.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-independent-review.md]
+    excluded_commands: [Scientific target execution, Git and shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC280 independent full-angle domain admission
+    operator: Codex release_model_review, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Independently admit the complete domain, source/corner binding, all angle and sign seams, quarter-turn labels and exact old-theorem scope.
+    phase: 17
+    budget_minutes: 15
+    started_at: '2026-09-07T12:14:00Z'
+    deadline_at: '2026-09-07T12:29:00Z'
+    expected_output: Independently admit the complete domain, source/corner binding, all angle and sign seams, quarter-turn labels and exact old-theorem scope.
+    validation_command: Independent complete-domain reconstruction and finite analytical admission controls; no enlarged target.
+    kill_condition: New target proof or numerical run, unsupported transfer of a scoped result, omitted seam or pair, shared-record mutation, or deadline.
+    fallback: Record the smallest domain or source-binding gap without target dispatch.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-domain-review.md]
+    excluded_commands: [Scientific target execution, Git and shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC280 prospective full-angle target protocol design
+    operator: Codex capacity_protocol, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Draft one complete full-angle analytical target protocol with acceptance controls and priced independent writers and audit; no target proof or new ID.
+    phase: 17
+    budget_minutes: 15
+    started_at: '2026-09-07T12:14:00Z'
+    deadline_at: '2026-09-07T12:29:00Z'
+    expected_output: Draft one complete full-angle analytical target protocol with acceptance controls and priced independent writers and audit; no target proof or new ID.
+    validation_command: Compare admitted prior results and complete domain only; no target reasoning or computation.
+    kill_condition: New target proof or numerical run, unsupported transfer of a scoped result, omitted seam or pair, shared-record mutation, or deadline.
+    fallback: Retain an unattempted draft and exact readiness gaps; assign any future ID only after fresh inventory.
+    write_scope: [attic/agenda-028-overnight/full-angle-target-protocol-draft.md]
+    excluded_commands: [Scientific target execution, Git and shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
   outputs:
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-author.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-adversary.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-280-full-angle-release-domain.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-protocol.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-mathematical-review.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-control-review.md
@@ -1298,6 +1481,10 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
   checks:
+  - Immutable0e1961e2 full validation passed all66 checks in1686.47seconds. It includes2848 fast tests with1 skipped,98 geometry tests and55 sweep tests. The old failed fixture receipt remains historical; this new pass validates its correction.
+  - Protocold11b866f passed45 push steps in148.35seconds with604 tests and3 deselected. Hosted checks took141.84seconds within the unchanged runtime band but failed the stale phase15 status at the later synthetic merge-commit clock. Publish current phase and all completed delegations together; local historical-commit validity is insufficient.
+  - Read-only source review at11:41UTC found exp126 under source H099 unresolved with overweight_clique and no independent target reader; it is neither a geometric invalidity nor a refutation. Source H124 collision-source strengthening and seven-row work remain separately owned. Our allocations remain BC279-280 under H118 and H120.
+  - Corrected protocold11b866f passed all31 record steps in27.46seconds on its verified immutable head before BC279 target dispatch. The earlier52b1b43e failure and accidental old-head record receipt remain separately retained; neither counted as admission.
   - The first52b1b43e record run failed only because phase15's validation_command included prose after the CLI arguments. It is corrected to the exact runnable invocation. The failed30.45-second receipt is retained; no target starts before its successful committed replay.
   - BC279's native protocol froze11:23:05. Independent predicate/control review completed11:25:47 and mathematical review11:28:01, both within their unchanged caps. Both reconcile the frozen native model and accept it; target work awaits committed protocol and passing records.
   - The accepted-tool receipt through11:18UTC records43664.617 agent-seconds over17208 active elapsed seconds, with26456.617 parallel-overlap seconds. Its prior baseline is unchanged, and the current four live tasks make this an incomplete lower bound.
@@ -1331,7 +1518,7 @@ session:
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-092.yaml
   stop_reason: null
-  next_action: BC279 model/protocol design and two independent admissions run under phase15 through11:37:25. No capacity target before independent acceptance, committed native protocol and passing records. The selected maximal wall-conditioned core preserves Gamma0; full release t in[0,1] is the next alternative. Full0e1961e2 is running with two workers, required hosted CI is green, and historical failed receipts remain explicit. Preserve checkpoint12:31, finalization14:11 and endpoint14:31:12.
+  next_action: Phase17 audits both terminal BC279 reports through12:34 and admits BC280 plus drafts its prospective target protocol through12:29. No new target has started. Publish the completed full0e1961e2 receipt and correct the stale hosted phase status; retain checkpoint12:31, finalization14:11 and endpoint14:31:12.
 ---
 # Eight-Hour Hybrid and Release Investigation
 
@@ -1450,28 +1637,33 @@ distinct octagon witness with a disk-overlap refusal.
 Uniform disk and octagon capacities of six are refuted.
 Phase14 selected maximal wall-conditioned cores on the unchanged parent, with complete
 release half-angle $t\in[0,1]$ as the next alternative.
-BC279, bead `think-cwve`, owns phase15’s native model design and independent generic and
-predicate/control admissions through11:37:25. A target needs the frozen native protocol,
-both completed admissions and passing records before actual leases are dispatched.
-The proposed target caps are30-minute author,25-minute concurrent adversary and20-minute
-fresh audit, all ending by12:40 UTC; no target is yet launched.
+BC279, bead `think-cwve`, passed independent model admission and committed records
+before its independent attempts.
+Both writers froze within their caps with exact six-core controls and unresolved whole
+M7. The author’s additional insertion-maximality claim concerns a fixed arrangement
+only.
+Phase17 assigns the fresh independent audit through12:34, before the unchanged12:40
+outer limit. BC280, bead `think-7ylp`, froze its full physical-angle design11:52:30.
+Independent domain admission and prospective protocol design run through12:29. No
+enlarged target is admitted yet.
+A new allocation requires fresh ID inventory, accepted domain and controls, a committed
+protocol and passing records.
 
-Checkpoint57b85302’s full run finished1644.33seconds with65 steps passing and one failed
-no-history test fixture.
-The independently reviewed fixture-only correction is committed at0e28267b, with20
-focused tests passing; the production gate is unchanged.
-Published protocol1b7ed623 passed local records/push and all hosted substantive checks,
-but its hosted checks tier failed the existing runtime band at151.38seconds. Keep that
-band unchanged and retain both failed receipts.
-Required hosted CI on0e1961e2 is green, and its new full gate is running from11:16 UTC
-on the immutable protocol-validation checkout; do not move that checkout until its
-command finishes. Source session094’s full gate passed1623.67seconds; its1acd6320
-checkpoint is published.
-At10:58 another checkout has a translation-escape check in flight, so refresh the heavy
-queue before starting our next full gate.
-The midpoint cost receipt through10:29UTC is refreshed; source session094 and exp125 are
-now occupied.
-Our IDs remain disjoint, and any later allocation needs another live check.
+The corrected immutable0e1961e2 checkpoint passed all66 full checks in1686.47seconds,
+including2848 fast tests,98 geometry tests and55 sweep tests.
+Its required hosted CI is green.
+Preserve the earlier57b85302 fixture failure and1b7ed623 hosted runtime failure as
+historical receipts.
+Protocold11b866f passed local records and push validation; its hosted141.84-second
+checks fit the runtime band but rejected an outdated active phase15 at the later
+merge-commit clock. Publish the current phase and terminal worker receipts together.
+No runtime or deadline gate is weakened.
+
+The current cost receipt is through11:18UTC and remains an incomplete lower bound.
+Source session094 and exp126 are occupied.
+Our IDs remain disjoint; check live source allocation again before creating any later
+commitment.
+
 Preserve current record checks at the final block boundary.
 Check the current phase and delegation deadlines above before continuing.
 After the final deadline, reconcile retained evidence and report the next request; start
