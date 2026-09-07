@@ -586,10 +586,11 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-**Upstream reconciliation, September 7.** This branch integrates main through `a5e9dbfd`
-(PR115), including PR112’s Stromquist source work and paper v0.2.3. The
+**Upstream reconciliation, September 7.** This branch integrates main through `373beb36`
+(PR114), including PR112’s Stromquist source work, PR115’s attribution and PR114’s math
+text face. The
 [research and PR survey](docs/project/reviews/review-2026-09-07-upstream-research-reconciliation.md)
-records all 25 recent PR closures, agenda dispositions and remaining parallel lanes.
+records all 26 recent PR closures, agenda dispositions and remaining parallel lanes.
 BC283 / `think-dwq8` is the user-requested W10 strategy/planning block: it explains the
 proof mechanisms from first principles, distinguishes accepted results from failed
 representations and inconclusive searches, and ranks existing next steps without

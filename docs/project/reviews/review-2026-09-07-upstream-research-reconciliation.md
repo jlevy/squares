@@ -1,9 +1,10 @@
 # Research Strategy and Upstream Reconciliation, September 7
 
-This review reconciles PR110 at `ecd4a035` with main at `a5e9dbfd`, including PR112 and
-PR115. The GitHub survey covers PRs closed since September 6 UTC; the agenda survey
-covers Agendas017–028. Live task notes were checked separately because a pushed branch
-can lag its owner’s current work.
+This review reconciles PR110 at `ecd4a035` with main through `373beb36`, including
+PR112, PR115 and PR114. PR114 landed during the final publication checks and was merged
+cleanly; the earlier checkpoint used `a5e9dbfd`. The GitHub survey covers PRs closed
+since September 6 UTC; the agenda survey covers Agendas017–028. Live task notes were
+checked separately because a pushed branch can lag its owner’s current work.
 The user-requested strategy/planning block is **BC283 / `think-dwq8`, W10**, with
 upstream/documentation reconciliation under W8. It assesses established results and
 selects the next coordinating entry; it launches no successor experiment and changes no
@@ -124,7 +125,7 @@ the next question much narrower than constructing an unrestricted hierarchy.
 
 ## What Has Landed
 
-The survey found 25 closed PRs: 23 merged and two closed without merging.
+The final survey found 26 closed PRs: 24 merged and two closed without merging.
 PR108 merged into PR107’s branch, then reached main through PR107. Closing a PR or a
 session does not close every commitment in its agenda.
 
@@ -154,6 +155,7 @@ session does not close every commitment in its agenda.
 | [109](https://github.com/jlevy/squares/pull/109) | Merged: diagonal compatibility and fixed-support ceiling |
 | [112](https://github.com/jlevy/squares/pull/112) | Merged: Stromquist memos, helper arguments and paper v0.2.3 |
 | [113](https://github.com/jlevy/squares/pull/113) | Merged: bound-direction explanation and paper v0.2.2 |
+| [114](https://github.com/jlevy/squares/pull/114) | Merged at 22:50 UTC: explainer math text face, rendering controls and pinned font tooling |
 | [115](https://github.com/jlevy/squares/pull/115) | Merged: attribution, explicit new bound and D-480 layout repair |
 
 The current paper edition is DRAFT v0.2.3-14beee33. PR115 preserves the mathematical
@@ -273,14 +275,17 @@ Our local re-entry beads stay deferred until their missing premises change.
 
 ## Open PRs and Integration Boundaries
 
-At the survey snapshot, PR110, PR111 and PR114 were open and conflicted with main.
-This work resolves PR110’s integration only.
+At the initial survey snapshot, PR110, PR111 and PR114 were open and conflicted with
+main.
+PR114 subsequently landed and is incorporated here; PR110’s conflicts are resolved.
+PR111’s separate integration remains with its owner.
 
 | Open work | Relation to this branch | Integration requirement |
 | --- | --- | --- |
 | [110](https://github.com/jlevy/squares/pull/110), `codex/n11-hybrid-overnight` | Our mathematical checkpoints and measured scheduler repair | Retain both main’s new source work and our scoped results; validate the combined tree |
 | [111](https://github.com/jlevy/squares/pull/111), atlas expansion to 324 | Changes corpus size, validator selection, budgets and PR/deep workflows | Review complete-versus-sampled coverage separately; do not transfer the frozen 100-case timing claim to this workload |
-| [114](https://github.com/jlevy/squares/pull/114), math text face | Changes vendored kpress, fontTools/development lock and rendering tests | Resolve its kpress PR53 dependency and retain its separate browser/print obligations |
+| [116](https://github.com/jlevy/squares/pull/116), kernel instrument | Separately owned BC264/H125 and stopped session097 | Finish its checkpoint publication before assessing a fresh scientific allocation |
+| [117](https://github.com/jlevy/squares/pull/117), Figure5 controls; [118](https://github.com/jlevy/squares/pull/118), PDF font embedding | Separate paper/rendering follow-ups | Their owner reviews and published checks remain separate from this branch |
 
 Green checks attached to an older PR head do not establish present mergeability.
 Open PR status also does not establish whether an agent is currently running.
@@ -312,11 +317,18 @@ clocks or relabel a prior failed check.
 
 The incoming main code adds Stromquist finite controls and tests, rendering/print checks
 and release metadata.
-It does not change the validator scheduler, workflows, budgets or dependency lock.
+The later PR114 merge also changes the dependency lock and vendored kpress, adding
+pinned font tooling and renderer controls.
+It does not change the validator scheduler, workflows or budgets.
 VE004’s 22.9% local median improvement remains evidence about its frozen 48-check
 workload, not a new measurement of the merged tree.
 Run the records and affected pre-push floor, then a full frozen combined-tree checkpoint
 concurrently with hosted CI. PR110 retains the actual source-bound outcomes.
+The first full local checkpoint remains bound to `dbd60231`; its timeout recoveries do
+not validate the later dependency change.
+The dispatched deferred checkpoint tests GitHub merge `c1b58f66`, whose Git tree equals
+local PR114 integration `dcbcf2cf`. Use the updated lock and submodule for local checks
+of that tree.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
