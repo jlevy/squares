@@ -15,7 +15,7 @@ experiment:
   subject:
     label: Exact Trump-side D4 closure of all eleven current seeds and the seven unchanged contributed boxes
     engine: History-free source-bound necessary-lower-incidence checker using oriented-edge geometry
-    engine_commit: 3160d0a7
+    engine_commit: a94e57fe
     assurance: verified
     method: exact-algebraic
     host_system: macOS arm64, project Python3.14.7; GNU coreutils timeout9.9
@@ -37,7 +37,7 @@ experiment:
     runs_per_condition: 1
     interleaved: false
     operator: Session095 coordinator, BC259; max mathematical judgment
-    commit: 3160d0a7
+    commit: a94e57fe
     dirty: false
     entry_point: packing/devtools/check_trump_support_adoption.py
     command: >-
@@ -104,7 +104,10 @@ The code author froze at12:37:05 UTC. Independent source-free code/control/proto
 review and its retained note froze at12:44:10 UTC, before the original12:57 readiness
 cutoff. Twelve controls passed independently in0.69seconds wall and0.66CPU, with
 Ruff, formatting and BasedPyright clean. Root read the complete frozen implementation,
-tests and review before committing engine3160d0a7. No scientific source was constructed.
+tests and review before committing source3160d0a7. Its immutable push found only a
+stale generated ledger. Corrected enginea94e57fe includes the reconciled record and
+prospective experiment, with the scientific checker and tests unchanged. No scientific
+source was constructed during these corrections.
 
 Run from that clean immutable checkout's packing directory. Its required push tier
 and this committed prospective record's checks must pass before scientific construction.

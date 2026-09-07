@@ -630,7 +630,7 @@ binds to H099's entire existing support. It could settle every weight vector on 
 support, whereas exp126's unverified overweight graph clique concerns only the current
 candidate and does not prove geometric invalidity. Both independent source assessments
 are complete. The fixed seven-row checker passed independent source-free review and
-controls. Exp128 is prospectively registered on engine3160d0a7; immutable push and
+controls. Exp128 is prospectively registered on enginea94e57fe; immutable push and
 committed-record admission remain required before its sole independent adoption call.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
 `think-9qrx`, completed the user-approved research block after PR 101 merged.
@@ -3355,7 +3355,7 @@ archive beside it.
 | exp-125 | one producer per band; only diagonal reader invoked | 1.90 s | — | criterion | `7daa7c55` |
 | exp-126 | one60-second scientific child; no reader invoked | 4.49 s | — | criterion | `7daa7c55` |
 | exp-127 | one120-second scientific child; no reader invoked | 0.25 s | — | criterion | `3bec06e2` |
-| exp-128 | one60-second independent checker plus2-second termination grace | — | — | not invoked | `3160d0a7` |
+| exp-128 | one60-second independent checker plus2-second termination grace | — | — | not invoked | `a94e57fe` |
 
 ### What the 84 rounds jointly establish
 
