@@ -3,9 +3,9 @@ type: is
 id: is-01m1x0aka5e5kxs9f1t5kd2cs1
 title: Check the frozen near-axis P12 escape candidate end to end
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 8
+version: 9
 spec_path: packing/campaign/hypotheses/H-102-complete-restricted-angle-support-families.md
 labels: []
 dependencies: []
@@ -17,7 +17,11 @@ child_order_hints:
   - is-01m1x7c6ssb09nc9hdmqk521ne
   - is-01m1x7c74k6h7jayt7mjfqf1gx
 created_at: 2026-09-07T03:59:22.948Z
-updated_at: 2026-09-07T06:02:36.050Z
+updated_at: 2026-09-07T06:21:17.410Z
+closed_at: 2026-09-07T06:21:17.409Z
+close_reason: H110 accepted by exp121 after prospective commit18e5a641 and31 passing record checks. Sole producer0.06s and independent reader0.05s both actual exit0; complete48determinants prove strict avoidance of all12 marks with actual angle and containment. Refutes only unconditional P12 auxiliary, not H036/global bound. Continue BC255 through separately selected conditional diamond cover and localization.
+resolution: null
+duplicate_of: null
 ---
 Selected next-block BC255/H110 slice, not launched in Session090. Freeze q1939/500 and t1/1000; center on x=h with V midpoint between unchanged A1/G marks. Source-free producer and independent corner/edge reader controls, separate review, prospective experiment, then one bounded producer and conditional replay. Exact angle, containment and all12 strict avoidance required. A counterexample blocks unchanged P12 auxiliary construction, not H036.
 
