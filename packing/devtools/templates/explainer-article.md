@@ -76,12 +76,12 @@ Work is planned on a regular cadence (such as 8 to 12 hours) and broken into sev
 defined workflows (research survey, correctness verification, research loop,
 optimization loop, and a few others).
 
-Every file in the repository (including this paper) is agent written.
-The research framework’s structure had high-level human direction.
-It relies on a few other agent tools, notably [tbd](https://github.com/jlevy/tbd) for
-task tracking, [Softschema](https://github.com/jlevy/softschema) for structuring
-results, and [Practical Prose](https://github.com/jlevy/practical-prose) to improve
-writing quality.
+The repository’s original prose and code, including this paper, were written by agents
+under human direction.
+The framework relies on a few other agent tools, notably
+[tbd](https://github.com/jlevy/tbd) for task tracking,
+[Softschema](https://github.com/jlevy/softschema) for structuring results, and
+[Practical Prose](https://github.com/jlevy/practical-prose) to improve writing quality.
 
 ## The Square Packing Problem
 
@@ -563,16 +563,6 @@ solver’s weights, inflated slightly and rounded up to multiples of ${{SCALE}}$
 every constraint holds in exact arithmetic.
 The verifier proves that point feasible, not minimal.
 
-The argument is an unconditional weighted dots proof: each square must consume mass from
-the same fixed measure.
-Stromquist’s earlier proofs also use geometric helper arguments.
-His six-square proof forces one box to consume four of eight unavoidable dots, leaving
-room for at most five boxes.
-His eleven-square argument forces three of twelve dots into one box.
-These examples suggest a further direction: use constraints between squares to force
-additional mass consumption before the final counting
-step.[^stromquist-memos][^stromquist]
-
 The search runs in floating point.
 None of it is part of the proof: the [generator]({{GENERATOR_URL}}) writes the
 certificate to a file, and the [verifier]({{VERIFIER_URL}}) decides Conditions 1 through
@@ -582,6 +572,14 @@ generated. The gate that admits a certificate to the record asks for two verdict
 accepts one only when the exact event-cell sweep and an interval branch-and-bound, which
 decide Condition 5 by distinct methods, both accept it and report the same least covered
 mass.
+
+Geometric constraints can strengthen the final count.
+Stromquist’s six-square proof rules out a container of side less than 3 by forcing four
+of eight marked points into one square; each other square must contain at least one, so
+at most five fit. The repaired eleven-square argument similarly forces three of twelve
+points into one square.[^stromquist-memos][^stromquist][^repair] These examples suggest
+extending the weighted method by using constraints between squares to force additional
+mass consumption.
 
 A [first-party package for third-party checking]({{THIRDPARTY_URL}}) gathers what an
 outside check needs: the theorem written out, the {{THIRDPARTY_L_FRAC}} certificate as
@@ -671,8 +669,8 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
 
 [^stromquist-history]: Stromquist states this bound in
     [Memo III (1984), p. 10]({{PRIOR_MEMO_URL}}#page=10), as an adaptation of his
-    preceding proof. This suggests he already had the argument, although its unrestricted
-    details are omitted.
+    preceding proof for $0^\circ$ and $45^\circ$ orientations.
+    This suggests he already had the general argument, whose details he omits.
 
 [^stromquist]: Walter Stromquist,
     [Packing 10 or 11 unit squares in a square]({{PRIOR_URL}}), Electronic Journal of
@@ -682,9 +680,6 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
     [Memo I]({{PRIOR_SIX_MEMO_URL}}), September 11, 1984, pp.
     13–19, gives the six-square helper argument.
     [Memo II]({{PRIOR_TEN_MEMO_URL}}), October 15, 1984, proves the ten-square result.
-    [Memo III]({{PRIOR_MEMO_URL}}), November 15, 1984, p. 10, states the unrestricted
-    eleven-square bound as a parenthetical extension of a restricted-orientation proof;
-    it does not supply the unrestricted proof there.
 
 [^novelty]: No intervening improvement on Stromquist’s bound, stated in
     {{PRIOR_MEMO_YEAR}} and published in {{PRIOR_YEAR}}, is known to us.

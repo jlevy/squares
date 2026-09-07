@@ -62,10 +62,10 @@ Results first established here, as far as the recorded source searches show:
 - **[T-018](packing/frontier/RESULTS.md): `s(11) ≥ 381/100 = 3.81`, improving the lower
   bound for the smallest open case (`S5`).** [`s(11)`](packing/frontier/n-011.md) is the
   case this project exists for, and the recorded public search found no stronger lower
-  bound after Stromquist stated `2 + 4/√5 = 3.788854` in 1984 and published it in 2003.
+  bound after Stromquist stated `2 + 4/√5 = 3.788854…` in 1984 and published it in 2003.
   The
   [memo review](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md)
-  distinguishes that early statement from the later proof.
+  distinguishes that early statement from the later published presentation.
   A first-party
   [weighted fractional unavoidable-set certificate](packing/cases/n11_fractional_certificate/)
   —1121 weighted atoms, total mass `434547/40000`, every placement of a shrunken square

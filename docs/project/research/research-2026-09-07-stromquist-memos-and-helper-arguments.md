@@ -7,11 +7,10 @@ deltas receive pre-push validation.\
 **Entry:** W1 source survey, W2 factual review, W3 mathematical synthesis, then W7
 commissioning of a finite incidence control.
 
-Walter Stromquist’s three memoranda are already in the research archive, with PDFs,
-unaltered OCR, and checked reading aids, retrieved on August 24, 2026. His
-correspondence supplied by the project owner prompted this review.
-The source review must distinguish what the memoranda establish, what their prose merely
-asserts, and what this project has independently verified.
+Walter Stromquist’s three memoranda were retrieved on August 24, 2026, and archived as
+PDFs, unaltered OCR, and checked reading aids.
+His correspondence, supplied by the project owner, prompted this review of what the
+memoranda establish, what they assert, and what this project has independently verified.
 
 ## The Likely Small Revision
 
@@ -25,10 +24,8 @@ $$
 
 The parenthetical passage states the unrestricted result and says the preceding
 restricted-orientation argument can be adapted; it does not supply that general proof.
-The journal presentation appeared in 2003. The correct chronology is therefore **stated
-in 1984, published in 2003**. An introduction dating the result simply to 2003 loses
-nineteen years of its history.
-The scan, rather than the damaged OCR, was checked for this formula.
+The journal presentation appeared in 2003. The chronology is therefore *stated in 1984,
+published in 2003*. The scan, rather than the damaged OCR, was checked for this formula.
 
 This is an inference about Stromquist’s hint, not a confirmation of his intent.
 The long research report already acknowledged the 1984 assertion, but the README and
@@ -39,7 +36,7 @@ The live page retrieved on September 7 carried `DRAFT v0.2.1-dd36800e` and the s
 chronological shortcuts as the local baseline `07e82d1e`: a first improvement in 23
 years and the statement that Stromquist settled ten squares in 2003.
 
-The latter is a second concrete correction.
+The ten-square date also needs correction.
 [Memo II](../../../packing/resources/papers/stromquist-1984-packing-unit-squares-inside-squares-ii-ten-unit-squares.pdf)
 is dated October 15, 1984, and gives the ten-square proof.
 Its journal presentation appeared in 2003. Unlike Memo III’s unrestricted eleven-square
@@ -81,7 +78,6 @@ in Theorem 5 and Figure 27. The corrected
 [case records](../../../packing/frontier/README.md) identify these routes without
 treating a source-method correction as a new proof.
 
-Two construction comparisons need particular care.
 Memo III, pp. 2–5, labels the eighteen-square construction `(7 + sqrt(7))/2` new; the
 current source register credits Pertti Hämäläinen in 1980 for the same value and
 arrangement. Retain that priority and record the historical discrepancy pending an
@@ -121,7 +117,6 @@ The proof covers independent orientations, axis endpoints and strict boundary
 inequalities, and avoids relying on the source figures’ contact-normalization arguments.
 A second mathematics reviewer and the coordinator checked the complete case split.
 
-The broad symmetry question has a useful exact answer.
 Any feasible unconditional weighted covering measure can be averaged over the eight
 symmetries of the container without changing its total mass or weakening any covering
 inequality. For that unrestricted weighted problem, dropping symmetry alone cannot
@@ -175,8 +170,8 @@ checked literature. No new packing lower bound follows from this piercing obstru
 
 ## Work Allocation
 
-Each slice is at most thirty minutes; these are planning estimates, not scientific
-budgets or a promise that a new bound will result.
+Each planned slice was allotted at most thirty minutes.
+These estimates set no scientific budget or expectation of a new bound.
 
 | Slice | Output | Owner |
 | --- | --- | --- |
@@ -185,25 +180,23 @@ budgets or a promise that a new bound will result.
 | Conditional control | Implement and review the finite incidence part of Memo I’s six-square proof, with its geometric premises explicit | Mathematics worker and independent reviewer |
 | Integration | Retain the control output, explain the next mathematical dependency, format the documents, and run applicable validation | Coordinator |
 
-The existing campaign handoff remains in force for target research.
-In particular, H-124’s fixed collision-augmented near-axis representation is not
-reopened or swept; its completed attempts and the selected H-114 feature assessment
-remain the evidence and priority boundary.
-This source-driven six-square control does not launch a new eleven-square target
-experiment.
+The campaign handoff remains in force: H-124’s fixed collision-augmented near-axis
+representation has no allocated retry or sweep, and the H-114 feature assessment remains
+the selected next step.
+This six-square control launches no eleven-square target experiment.
 
 ## Commissioning Criterion and Outcome
 
-Before implementing or executing the new control, freeze its purpose as follows.
-The instrument must enumerate the finite allocations in Memo I under explicitly named
-geometric premises and recover exactly one orbit under square symmetries.
-It must then check that an unavoidable set of eight distinct sites, four consumed by one
-forced box, allows at most `1 + (8 - 4) = 5` pairwise disjoint boxes.
+The criterion fixed before implementation required the control to enumerate Memo I’s
+finite allocations under explicitly named geometric premises and recover exactly one
+orbit under square symmetries.
+It then had to check that an unavoidable set of eight distinct sites, four consumed by
+one forced box, allows at most `1 + (8 - 4) = 5` pairwise disjoint boxes.
 
-An independently written enumeration must agree, and premise-removal controls must
+An independently written enumeration had to agree, and premise-removal controls had to
 expose the additional allocations excluded by the helper premises.
-Inputs must preserve the distinction between sites that are unused and sites allocated
-to a box. Invalid incidences or overlapping ownership must be refused.
+The control had to distinguish unused sites from sites allocated to a box and reject
+invalid incidences or overlapping ownership.
 
 The control met this criterion: four allocations, one dihedral orbit, agreement with an
 independent enumerator, and additional allocations under each removed premise.
@@ -218,7 +211,7 @@ No campaign hypothesis receives a mathematical verdict from commissioning.
 
 ## Follow-up Dependencies
 
-The local segment helper is now proved analytically.
+The local segment helper is proved analytically.
 Making it executable requires exact segment clipping, the component accessible from the
 distinguished dot, wall and facet inequalities, and universal positivity checks.
 The full Memo I replay also needs Lemmas 6–7, its assertion about exactly two covered
@@ -226,18 +219,17 @@ marks, the center-block implication `EH => EHJK`, and the final eight-point cove
 These remaining dependencies are tracked as `think-0krc`. They lead toward a validated
 helper component for later pairwise or conditional weighted searches.
 
-Several matters still warrant an author’s clarification: which small revision he
-intended; the intern’s name and the original no-pure-dots argument; whether the
-unrestricted eleven-square adaptation was written down before 2003; and whether further
-memos or proofs of the briefly asserted small cases survive.
+Several matters still need Stromquist’s clarification: which small revision he intended;
+the intern’s name and the original no-pure-dots argument; whether the unrestricted
+eleven-square adaptation was written down before 2003; and whether further memos or
+proofs of the briefly asserted small cases survive.
 The eighteen-square construction’s discovery history is another question for him.
-These are open source questions, not premises needed by the results above.
+These historical questions are not premises of the results above.
 
 Memo III, p. 12, proposes a fourth memorandum on asymptotics or computerized searches
-only **if it is written**; no fourth memo was located.
+only *if it is written*; no fourth memo was located.
 His publication page labels the series “1984–85,” although all three linked title pages
-are dated 1984. Whether that range refers to an unlinked note or revision is therefore a
-concrete source question, without assuming such a document exists.
+are dated 1984. Whether that range refers to an unlinked note or revision remains open.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

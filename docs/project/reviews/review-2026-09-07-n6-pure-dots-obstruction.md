@@ -28,8 +28,7 @@ unit-square packing side.
 
 ## A Five-Point Obstruction Without Symmetry
 
-The following derivation supplies a precise version of the unweighted obstruction.
-Its only packing objects are individual square placements; they need not coexist.
+The obstruction concerns individual square placements, which need not coexist.
 
 **Proposition.** For every set P of at most five points in `S = [0,3]^2`, some closed
 square of side strictly greater than 1 lies in S and is disjoint from P.
@@ -50,12 +49,12 @@ D in [0,1] × [2,3]       C in [2,3] × [2,3].
 ```
 
 Call the remaining point R. Along a boundary strip, the possible unit squares are
-parameterized by the intervals `[t,t+1]`, `0 ≤ t ≤ 2`. We use one elementary fact: if
-all eligible projected sites lie in `[0,1]` or `[2,3]`, hitting every such closed
-interval forces the rightmost site of the first group to be 1 and the leftmost site of
-the second group to be 2. Otherwise the gap between the two groups is greater than 1 and
-contains a closed interval of length 1. In particular, if there is exactly one eligible
-site in each group, their projected coordinates are exactly 1 and 2.
+parameterized by the intervals `[t,t+1]`, `0 ≤ t ≤ 2`. If all eligible projected sites
+lie in `[0,1]` or `[2,3]`, hitting every such closed interval forces the rightmost site
+of the first group to be 1 and the leftmost site of the second group to be 2. Otherwise
+the gap between the two groups is greater than 1 and contains a closed interval of
+length 1. In particular, if there is exactly one eligible site in each group, their
+projected coordinates are exactly 1 and 2.
 
 There are three cases up to a symmetry of S. These cases include the cell boundaries:
 the corner cells are closed; an edge-middle cell has its coordinate along the edge
@@ -135,9 +134,9 @@ The fully dihedral case has a direct witness independent of the site coordinates
 The dihedral group D4 of the container has orbit sizes 1, 4, and 8. Its only fixed point
 is the center. A noncentral point is fixed by at most one reflection, since two distinct
 symmetry axes intersect only at the center.
-A set invariant under D4 with at most five points therefore consists of the center and
-at most one orbit of size 4. That orbit lies either on the two container diagonals or on
-the two midlines.
+A set invariant under D4 with at most five points therefore consists of at most one
+center point and at most one orbit of size 4. That orbit lies either on the two
+container diagonals or on the two midlines.
 
 - For the diagonal family, the open square with vertices `(3/2,0)`, `(9/4,3/4)`,
   `(3/2,3/2)`, `(3/4,3/4)` has side squared `9/8`. Its interior satisfies `x-y > 0` and
@@ -147,7 +146,6 @@ the two midlines.
 
 Both interiors are contained in the interior of S. Contact with the container boundary
 and with a dot at a witness vertex is allowed because the witnesses are open.
-The coordinate checks belong in the reusable exact control.
 The independent review also checks the orbit classification and the arbitrary-site case
 split.
 

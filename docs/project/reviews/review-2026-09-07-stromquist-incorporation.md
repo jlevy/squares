@@ -4,17 +4,15 @@ Stromquist’s 1984 Memo III already states the unrestricted eleven-square lower
 `2 + 4/sqrt(5)` that the paper’s introduction dates to 2003. Memo II also contains the
 ten-square proof that the explainer says he settled in 2003. These chronology
 corrections are the strongest candidates for his suggested “tiny revision.”
-The source supports a chronology correction; only Stromquist can identify his intended
-hint. His suggestion to automate preliminary geometric arguments also identifies a real
-difference from the project’s new fractional certificates, although the repository
-already verifies one complete Stromquist-style helper chain.
+Only Stromquist can identify his intended hint.
+His suggestion to automate preliminary geometric arguments also identifies a difference
+from the project’s new fractional certificates, although the repository already verifies
+one complete Stromquist-style helper chain.
 
-This independent W2 factual review used repository baseline `07e82d1e` and the three
-archived 1984 memos, Stromquist’s 2003 paper, the maintained reader documents, and the
-current proof record.
-Line references below refer to that baseline.
-Source conclusions come from the archived page images where specified; OCR is a search
-aid.
+This independent W2 factual review checked the reader documents and proof record at
+repository baseline `07e82d1e` against the three archived 1984 memos and Stromquist’s
+2003 paper. Line references below refer to that baseline.
+Source conclusions use the archived page images where specified; OCR is a search aid.
 This review does not reproduce every geometric lemma in the memos or establish a new
 packing bound. The companion source survey is
 [Stromquist’s memos and helper arguments](../research/research-2026-09-07-stromquist-memos-and-helper-arguments.md).
@@ -51,8 +49,8 @@ Stromquist likely read.
 At the audit baseline its source template, lines 90–91, says that Stromquist settled
 `s(10)=3+1/sqrt(2)` in `{{PRIOR_YEAR}}`, whose value is 2003. Memo II’s visually checked
 opening page dates the note to October 15, 1984 and states the exact optimum.
-This is a direct correction to a second sentence on that same page, even if the
-introduction continues to measure elapsed time from journal publication.
+This corrects a second sentence on the same page, even if the introduction continues to
+measure elapsed time from journal publication.
 
 For the construction attribution, the [tutorial](../../../TUTORIAL.md), lines 53 and 92,
 uses Trump alone, while the
@@ -76,10 +74,9 @@ The project’s new weighted certificates require **every individual admissible 
 to cover a fixed minimum mass from a common measure.
 They then sum those inequalities over disjoint inner squares.
 Their only use of the other squares is that disjointness prevents double counting.
-In that sense, Stromquist’s description fits the new bound family: they are
-unconditional weighted dots proofs.
+These are unconditional weighted dots proofs, consistent with Stromquist’s description.
 
-The weights are a substantive extension of unweighted point counting.
+The weights extend unweighted point counting.
 At `s=3.81`, the certificate has 1,121 rational sites with positive rational weights,
 total mass `434547/40000`, and exact covering inequalities for the prescribed smaller
 squares. The [tutorial](../../../TUTORIAL.md), lines 138–176, and
@@ -166,10 +163,9 @@ and [SYNOPSIS](../../../SYNOPSIS.md), lines 623–671.
 | Collision-augmented near-axis sufficient cover | Exp-127 returns `no_chain`, with no independent reader invoked | No geometric counterexample or completed cover follows; that fixed representation has no allocated retry |
 
 These experiments concern the restricted H-036 theorem, not a new unrestricted bound.
-The selected handoff at this review’s baseline instead assigns BC-264 to pricing an
-H-114 pair-kernel feature family.
-New research should account for that live allocation before commissioning another H-124
-attempt.
+The selected handoff at this review’s baseline assigns BC-264 to assessing an H-114
+pair-kernel feature family and its verification cost.
+Any further H-124 attempt needs to be considered against that allocation.
 
 ## A Bounded Memo I Calibration
 
@@ -185,9 +181,9 @@ It has isolated B, G and I and pairs AD, CF and EH.
 The same page then forces J and K into the EH block.
 Its final set has eight marks `{G,H,I,J,K,E,L,M}`, with four `{E,H,J,K}` in that block.
 A capacity-one count leaves at most four other blocks.
-This is a concrete source control for a reusable incidence engine: enumerate disjoint
-nonempty hit masks under declared implications, retain all allowed allocations, reduce
-them by actual `D4` actions, and replay the final forced-consumption count.
+This supplies a control for a reusable incidence engine: enumerate disjoint nonempty hit
+masks under declared implications, retain all allowed allocations, reduce them by actual
+`D4` actions, and replay the final forced-consumption count.
 
 The frozen calibration criterion is exactly one surviving `D4` orbit under the declared
 source premises, followed by the `4 of 8` consumption bound of five blocks.
@@ -210,8 +206,7 @@ The finite control is accepted at its declared conditional scope.
 Independent review covered [incidence.py](../../../packing/src/sqpack/incidence.py),
 [memo1.py](../../../packing/cases/stromquist/memo1.py), and the
 [generic](../../../packing/tests/test_incidence.py) and
-[source-specific](../../../packing/tests/test_stromquist_memo1.py) tests after the
-author’s ready declaration.
+[source-specific](../../../packing/tests/test_stromquist_memo1.py) tests.
 The eight focused tests passed under the project’s Python 3.14.7 in 1.21 seconds.
 The attempted `uv run --frozen` command could not access its cache in this sandbox, so
 the review used the expressly supported project interpreter.

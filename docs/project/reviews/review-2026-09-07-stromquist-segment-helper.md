@@ -7,7 +7,7 @@ Source:
 printed pp. 13, 15–17, with Figures 12–13 on p. 16 checked from the scan.
 The threshold printed throughout is 1/2, not the OCR’s 2.
 
-## Claim and resource
+## Claim and Resource
 
 Let A=(1,1), B=(3/2,1), C=(2,1), D=(1,3/2), E=(3/2,3/2). Let T_v=[(1,0),A] and
 T_h=[A,B]. An open square Q_A of side >1 in [0,3]^2 containing A and avoiding D consumes
@@ -17,15 +17,14 @@ total length in the A-connected complementary portions of those segments.
 Consequently the two open squares cannot be disjoint.
 These hypotheses follow from A and B both being isolated.
 
-The A-connected qualification matters.
 The full complement of Q_B on the two segments can include another component below its
 vertical trace. Q_A cannot reach that component without intersecting Q_B, because the
 intersection of a convex open square with a segment is an interval and Q_A contains A.
 
-The following derivation proves the geometric inequalities without assuming the source
-figures’ simultaneous wall/point contacts are a complete list of configurations.
+The proof below does not assume that the source figures’ simultaneous wall/point
+contacts exhaust the configurations.
 
-## Notation and identities
+## Notation and Identities
 
 Write s=sin(theta), c=cos(theta), z=s+c, with 0<theta<pi/2. Then
 
@@ -33,7 +32,7 @@ Write s=sin(theta), c=cos(theta), z=s+c, with 0<theta<pi/2. Then
 f=(s+c-1)/(sc)=2/(z+1),       1/2<f<=1.
 ```
 
-The following identities are exact:
+The exact identities used below are:
 
 ```
 (1-f)(1+c/s) = c(s+c)/((1+s)(1+c)) <= 1/2;
@@ -47,7 +46,7 @@ f-1+s/(2c) = s(s+c/2-1/2)/(c(1+c)) >= 0;
 For the second, s+c/2-1/2 = (s+z-1)/2 >= 0. For the first, c/(1+c)<=1/2 and
 (s+c)/(1+s)<=1. All denominators are positive.
 
-## A-block: direct edge-margin proof
+## A-Block: Direct Edge-Margin Proof
 
 Use orthonormal directions n_1=(c,s), n_2=(-s,c). Let the four positive edge margins of
 A in Q_A be a_-,a_+,b_-,b_+, where
@@ -124,7 +123,7 @@ height at most 3/2. Side >1 puts its bottom edge below 1/2, so its vertical cons
 alone is >1/2. Thus the angle endpoints are covered without division by zero.
 This proves the A-block assertion for every orientation.
 
-## B-block: cap localization and direct length bound
+## B-Block: Cap Localization and Direct Length Bound
 
 Its horizontal chord at y=1 contains B and excludes A,C, so both endpoints lie in [1,2]
 and its length is at most 1. A chord joining opposite edges of a square of side ell>1
@@ -147,7 +146,6 @@ The bottom-cap choice a_-<=c/2 and b_-<=s/2 puts E strictly inside: its coordina
 that corner are a_-+s/2 and b_-+c/2, both positive and at most (s+c)/2<1<ell.
 The only remaining choice is a_+<=c/2 and b_+<=s/2, the top cap.
 
-It remains to treat the top cap.
 Choose theta so that the descending left edge has direction (-s,-c), and the descending
 right edge direction (c,-s). Let t>=0 be the bottom vertex’s height.
 The top vertex has height t+ell*z, and the cap depth at y=1 is h=t+ell*z-1. The
@@ -174,7 +172,7 @@ s^2 * ((1-t-ell*s) - (c/s)*(1-w))
 ```
 
 because 1+sc-c-s=(1-s)(1-c)>=0 and ell>1. Thus 1-u is above that vertex and nonnegative.
-Q_B genuinely crosses the vertical segment there.
+Q_B crosses the vertical segment there.
 
 The A-connected free portions therefore have lengths u and v, and
 
@@ -188,7 +186,7 @@ was assumed.
 The two squares have independent orientation parameters; the inequalities do
 not assume they are parallel or share a tilt.
 
-## Consequence and reusable checker
+## Consequence and Reusable Checker
 
 Convexity anchors both Q_A traces at A. If Q_A and Q_B were disjoint, the two Q_A
 lengths could not exceed the corresponding A-connected free lengths left by Q_B. The
@@ -213,10 +211,9 @@ A reusable verifier must establish four things:
 The current allowed-mask control does not assume a stronger adjacent-singleton rule than
 the source: its conflicts are exactly the D4 images of perimeter pair A,B. It correctly
 excludes pairs involving the center from this premise’s ablation control.
-The direct derivation above actually requires fewer exclusions than full isolation: Q_A
-contains A and avoids D; Q_B contains B and avoids A,C,E. Generalizing the result to
-additional masks would require an explicit new consumer contract, not an unrecorded
-change to the current source-premised replay.
+The derivation requires fewer exclusions than full isolation: Q_A contains A and avoids
+D; Q_B contains B and avoids A,C,E. Generalizing the result to additional masks would
+require an explicit change to the replay’s contract.
 
 The source defines one fixed common side 1+epsilon, with epsilon>0 small.
 For the singleton rule, its extension in the existing record to arbitrary side >1 is
@@ -227,8 +224,8 @@ The direct proof above also establishes the unequal-side version without this re
 The separate exact-two-point adjacency condition remains a source assertion on p. 18;
 this bounded slice did not independently prove that condition, Lemma 6, Lemma 7, or the
 later EH-to-EHJK geometric forcing.
-The finite incidence program remains properly labelled conditional until all its
-required continuous premises have independent certificates.
+The finite incidence program remains conditional until all its required continuous
+premises have independent certificates.
 
 The independent audit accepted the inequalities and case exhaustion after making the
 B-square’s bottom-wall premise explicit in the opening statement.
@@ -236,7 +233,7 @@ The coordinator also checked the four-facet alternatives and the actual-edge ine
 This is an analytic proof; no sampled-angle computation supplies its universal
 quantifiers.
 
-## Kearney–Shiu wording check
+## Kearney–Shiu Wording Check
 
 The existing n-006 prose’s generic n-1 unavoidable-point argument is not the proof in
 Kearney–Shiu Section 3. That proof uses two seven-point lattices related by a quarter

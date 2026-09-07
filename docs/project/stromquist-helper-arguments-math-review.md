@@ -21,8 +21,8 @@ claimed impossibility of a pure dots proof for six squares, or improve a packing
 | [Memo III](../../packing/resources/papers/stromquist-1984-packing-unit-squares-inside-squares-iii-cases-through-65-and-gardner-conjecture.pdf), pp. 6–10 | A box avoiding ten marks is localized and forced to contain three new marks, with orientations restricted to 0° or 45° | Twelve unavoidable marks with three in one box allow at most ten boxes |
 | [2003 paper](../../packing/resources/papers/stromquist-2003-packing-10-or-11-unit-squares.pdf), Theorems 1–3 | Develops the ten-square forcing chain and the eleven-square localization/triple argument | The unrestricted eleven-square printed cover requires the separately verified one-coordinate repair |
 
-The existing [reading aids](../../packing/resources/README.md) distinguish the scanned
-memoranda from mathematical transcriptions.
+The [reading aids](../../packing/resources/README.md) distinguish the scanned memoranda
+from mathematical transcriptions.
 In Memo I, the comparison in Lemma 8 is with **one half**, not the value 2 produced by
 OCR. The point grid and the final allocation were checked against the rendered pages 13,
 18, and 19.
@@ -59,9 +59,9 @@ of which require geometric proofs.
 
 For unit-weight dots and one distinguished block containing $k$ of $m$ marks, this is
 `n <= 1 + m - k`. Memo I uses `(m,k)=(8,4)`; the unrestricted eleven-square proof uses
-`(12,3)`. The new [occupancy_bound function](../../packing/src/sqpack/incidence.py)
-checks this arithmetic with exact rational weights and rejects overlapping forced
-groups. Its return value does not certify the geometric premises.
+`(12,3)`. The [occupancy_bound function](../../packing/src/sqpack/incidence.py) checks
+this arithmetic with exact rational weights and rejects overlapping forced groups.
+Its return value does not certify the geometric premises.
 
 The gain comes from a relation between squares.
 A universal weighted cover assigns a minimum mass to every possible placement
@@ -104,8 +104,7 @@ One is
 {A,D}, {B}, {C,F}, {E,H}, {G}, {I}.
 ```
 
-All nine marks are used in every survivor.
-This is derived by the enumeration.
+The enumeration shows that every surviving allocation uses all nine marks.
 The [retained JSON](../../packing/cases/stromquist/memo1-incidence.json) includes the
 complete allowed-mask inventory, all four allocations, the source premises, and the
 controls. The [independent test oracle](../../packing/tests/test_stromquist_memo1.py)
@@ -114,15 +113,16 @@ to numbered blocks with a separate unused bucket.
 The production code instead builds convex hulls and branches on the least undecided
 site.
 
-The usual counting proof explains why this finite calculation is small.
 Six nonempty masks among nine sites require at least three singleton masks.
 The perimeter cycle allows at most four mutually nonadjacent singleton marks.
-If its four corners are singletons, one proposed remaining triple contains the center in
-its convex hull, forcing a forbidden shared incidence.
-If its four midpoints are singletons, the remaining sites cannot supply two allowed
-nonsingleton masks. Thus exactly three singleton masks remain, and the other three masks
-are adjacent pairs. The center’s partner can be placed at `H` by symmetry, after which
-the perimeter matching has the displayed form.
+If its four corners are singletons, every allowed pair among the remaining sites
+contains the center, so two disjoint pairs are impossible.
+Any remaining triple also contains the center in its convex hull, so a pair and a triple
+would share it. If its four midpoints are singletons, the remaining sites cannot supply
+two allowed nonsingleton masks.
+Thus exactly three singleton masks remain, and the other three masks are adjacent pairs.
+The center’s partner can be placed at `H` by symmetry, after which the perimeter
+matching has the displayed form.
 
 Memo I’s next geometric step forces the `EH` block to contain `J=(1,17/10)` and
 `K=(2,17/10)`. Lemma 7 supplies the unavoidable eight-mark set
@@ -132,7 +132,7 @@ Memo I’s next geometric step forces the `EH` block to contain `J=(1,17/10)` an
 ```
 
 Four marks lie in the center block, giving `1 + (8 - 4) = 5` blocks at most.
-The new tool checks that implication, while retaining the forced `J,K` statement and the
+The tool checks this count, while retaining the forced `J,K` statement and the
 eight-mark coverage as explicit unverified geometric premises of this replay.
 
 Each premise has a control that exposes its contribution:
@@ -168,7 +168,7 @@ containing side at least `3.878`. This is an orientation-restricted statement.
 Its threshold is above Trump’s unrestricted packing side and cannot be promoted to an
 unrestricted lower bound.
 
-Three useful preliminary clauses are already accepted:
+Three preliminary clauses are accepted:
 
 - [H-106](../../packing/campaign/hypotheses/H-106-continuous-near-axis-ten-point-cover.md)
   proves the ten-mark cover throughout the near-axis band.
@@ -179,7 +179,7 @@ Three useful preliminary clauses are already accepted:
 
 With eleven disjoint squares and only ten preliminary marks, at least one square avoids
 all ten marks. The accepted clauses constrain that distinguished square.
-The remaining covering obligation must use its full constraints.
+The remaining cover must account for all of those constraints.
 
 [H-122](../../packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md)
 tested whether nine unchanged marks cover every unit square disjoint from a fixed
@@ -230,9 +230,8 @@ $$
 n^2\le\sum_{i,j}K(Q_i,Q_j)\le nb,
 $$
 
-and hence $n\le b$. This is a systematic way to use relations between squares in a
-lower-bound certificate.
-It does not promise that a small feature family can meet the conditions.
+and hence $n\le b$. Such a kernel would use relations between squares to certify a lower
+bound. Whether a small feature family can meet the conditions remains open.
 The existing handoff requires a fixed feature family, a reviewed kernel argument, exact
 positive-semidefinite evidence, and a credible complete pair-domain verification cost
 before a target experiment.
@@ -257,7 +256,7 @@ strict-sublevel reduction.
 
 The implementation separates three obligations: justify the geometric premises,
 enumerate their finite incidence consequences, and apply the resource count.
-The new Memo I replay completes the latter two as a conditional control.
+The Memo I replay completes the latter two as a conditional control.
 The subsequent
 [segment-helper derivation](reviews/review-2026-09-07-stromquist-segment-helper.md)
 independently proves Lemma 8, including localization and all orientations.

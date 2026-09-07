@@ -10,10 +10,10 @@ Stromquist’s email prompted the
 [five-point argument](review-2026-09-07-n6-pure-dots-obstruction.md).
 Its boundary-strip case split shows that five points cannot pierce every open unit
 square in a container of side $L\ge L_0=(12+2\sqrt2)/5$, including equality.
-The fixed rational proposition retained for the code control proves that every set of at
-most five points in `[0,3]^2` misses a closed square of side at least `101/100`. The
-constants below are fixed algebraic choices, not the outcome of a parameter sweep or a
-claim of optimality.
+The rational proposition implemented by the control proves that every set of at most
+five points in `[0,3]^2` misses a closed square of side at least `101/100`. The
+constants are fixed algebraic choices; no parameter sweep was used, and no optimality is
+claimed.
 
 ## What the Published Piercing Result Establishes
 
@@ -43,8 +43,7 @@ The
 and [published article](https://doi.org/10.1016/j.dam.2018.03.048) identify the primary
 source.
 
-The relevant cited constructions also require care.
-[Friedman, §5](https://erich-friedman.github.io/papers/squares/squares.html), gives a
+[Friedman, §5](https://erich-friedman.github.io/papers/squares/squares.html) gives a
 seven-point unavoidable set for closed unit squares in `[0,3]^2`, and uses five *almost*
 unavoidable points inside a helper proof for seven packed squares.
 Neither statement rules out all five-point unavoidable sets.
@@ -170,9 +169,9 @@ $$
 J_-=[L_0-2,1],\qquad J_+=[L_0-1,2].
 $$
 
-To check the substitution explicitly, the two extreme projected sites must satisfy
-$v-u\le1$, with $u\le1$ and $v\ge L_0-1$. Thus $u\in J_-$ and $v\in J_+$. The same three
-cases for $R$ have the following consequences:
+The two extreme projected sites must satisfy $v-u\le1$, with $u\le1$ and $v\ge L_0-1$.
+Thus $u\in J_-$ and $v\in J_+$. The same three cases for $R$ have the following
+consequences:
 
 1. If $R\in(1,L_0-1)^2$, the four selected sites lie respectively in $J_-^2$,
    $J_+\times J_-$, $J_+^2$, and $J_-\times J_+$.
@@ -243,8 +242,8 @@ $$
 $$
 
 The open formulation permits equality at $a=15/(12+2\sqrt2)=3/L_0$. The fixed rational
-control retains the positive clearances already displayed rather than depending on this
-boundary equality.
+control has the positive clearances displayed above and does not depend on this boundary
+equality.
 
 ## Combined Piercing Interval
 
