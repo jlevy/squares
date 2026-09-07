@@ -3338,6 +3338,7 @@ archive beside it.
 | exp-122 | one thirty-second producer and conditional ten-second independent reader | 0.20 s | — | criterion | `c4a69e3e` |
 | exp-123 | one fifteen-second producer and conditional ten-second independent reader | 0.21 s | — | criterion | `3ea8e346` |
 | exp-124 | one thirty-second producer; conditional reader not invoked | 0.84 s | — | criterion | `a75d751a` |
+| exp-125 | two ordered120-second producers; each conditional reader60 seconds | — | — | not invoked | `7daa7c55` |
 
 ### What the 81 rounds jointly establish
 
