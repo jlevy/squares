@@ -583,10 +583,10 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**Selected next entry:** `think-0za3`, the last terminal handoff’s scalar entry, now
-completed in the fresh allocation below.
+**Selected next entry:** `think-qv73`, the fixed near-axis P12 escape discriminator,
+registered but unrun.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
-`think-9qrx`, owns the user-approved four-active-hour block after PR 101 merged.
+`think-9qrx`, completed the user-approved research block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
 dual mass of about 10.080180 at depth one, below the obstruction threshold.
 No bridge or unchanged retry is selected.
@@ -3048,7 +3048,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-078.yaml` | session-078, session-082 | 2,401 | 13.41 h | 9.45 h | 10.0 h | yes |
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
-| `codex-task-tree-session-090.yaml` | session-090 | 1,104 | 8.27 h | 3.24 h | 3.24 h | yes |
+| `codex-task-tree-session-090.yaml` | session-090 | 1,341 | 9.8 h | 3.94 h | 3.95 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

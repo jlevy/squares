@@ -234,7 +234,7 @@ session:
     clock_role: finalization
     objective: Close the integrated block with synchronized records, exact validation scope and one unrun selected successor.
     bead: think-qnyf
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: Scientific work and independent handoff reviews are complete; the declared closing reserve has begun.
     budget_minutes: 20
@@ -244,12 +244,17 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate
     kill_condition: A validation or upstream conflict requires correction; no new scientific target is permitted in finalization.
     fallback: Retain the exact outstanding revision and validation obligation for operational follow-up without inventing a pass.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Publish current outcomes, finish the immutable full gate, refresh final costs and close the session.
+    outcome: >-
+      All scientific cells are disposed. The full bc5c24b5 checkpoint passes in
+      1574.90 seconds; f5684f51 passes the local pre-push gate. Hosted checks on
+      f5684f51 pass substantively but exceed the unchanged timing drift threshold.
+      User-requested parallel ID allocation and final publication continue under
+      think-4cdg and think-qnyf without extending scientific allowances.
+    evidence: [packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md]
+    stop_reason: The research checkpoint and next entry are fixed; remaining work is operational publication and the newly requested namespace plan.
+    next_action: Publish the reviewed allocation map and verify hosted timing on the next documentation checkpoint; then open the selected fresh research block.
   primary_bead: think-9qrx
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 240
     checkpoint_minutes: 30
@@ -266,7 +271,12 @@ session:
       PR 101 merged as 4d305597 with no file-tree difference from its validated head.
       H-093 is ready but unrun. Exp-113 leaves H-099 unresolved, exp-114 accepts only
       H-104's exact-angle auxiliaries, and exp-115 rejects only H-105's pair obstruction.
-    after: null
+    after: >-
+      H106, H108 and H109 accept three continuous restricted-theorem auxiliaries.
+      H093 remains unresolved with a replayed dual below eleven. H099 is
+      source-blocked; H107 remains unlaunched. H110 is the reviewed, registered
+      and unrun next discriminator. The full mathematical-code checkpoint passes;
+      final publication and the user-requested ID plan remain separately tracked.
   delegations:
   - task: BC243 / H099 complete facet-kernel controls; think-ejwh
     operator: Codex bound_lane_strategy, max mathematical reasoning
@@ -715,7 +725,8 @@ session:
   - Isolated record checkpoint 97ba816e passed 31 of 66 steps in 20.72s; this is not the full gate.
   - Updated narrative-count negative control fired in 1.568s using a private source snapshot.
   - Root independently reviewed the rational angle kernel and replayed 8 controls; 0.05s pytest, 0.57s process wall, 0.42s CPU.
-  stop_reason: null
+  - 'full gate: full at bc5c24b5: passed (all checks in 1574.90 seconds; actual terminal summary observed during finalization)'
+  stop_reason: Selected scientific work and the full checkpoint are complete; remaining publication, hosted timing verification and the user-requested ID allocation are operational follow-up under think-qnyf and think-4cdg.
   next_action: After Session090 closes, select think-qv73 under BC255 for H110's source-free fixed P12 escape instrument and independent review, then a fresh prospective experiment. A sufficiently funded next block may run H107 fixed-site scalar completion in parallel. Density remains source-blocked; no exp116 retry.
 ---
 # Session 090 — Four-Hour Research Block
@@ -1003,6 +1014,24 @@ A denied worktree switch had also left a redundant validation command on old `27
 it was interrupted. Neither event repeated or invalidated a scientific run.
 
 ## Handoff: One Selected Entry, Independent Lanes
+
+At 04:28:39 UTC the coordinator closed scientific Session 090 after the full `bc5c24b5`
+gate passed in 1,574.90 seconds.
+The later `f5684f51` pre-push gate passed 45 steps in 141.32 seconds; its changes are
+retained receipts and documentation.
+Hosted run `34082548787` passed every substantive check but failed its timing band:
+150.84 seconds against a 99.39-second reference with a 1.5-times drift limit.
+The threshold is unchanged.
+`think-zwdt` tracks the next hosted checkpoint.
+
+The user’s additional request for parallel ID ranges is operational follow-up under
+`think-4cdg`, with independent used-ID, reservation and ownership audits.
+It changes namespace coordination, not scientific budgets.
+The
+[allocation table](../agendas/agenda-024-post-381-24h-portfolio.md#parallel-id-allocation)
+protects PR 107’s published records and pending transports.
+Final publication and cost capture may extend beyond the nominal block boundary; no
+scientific cap is reset.
 
 The selected next entry is `think-qv73`, BC-255 / H-110, whose complete candidate
 definition and control plan are in
