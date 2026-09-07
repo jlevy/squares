@@ -117,6 +117,21 @@ DECLARED_CONSUMERS = {
         "corrupts the field on purpose, to prove the checkers fire"
     ),
     "packing/devtools/migrate_frontier_v2.py": "builds the field from the v1 records",
+    "packing/devtools/generate_frontier_case.py": (
+        "builds the field for a drafted case as the trivial grid ceiling ceil(sqrt(n)) "
+        "under E-basic-grid-upper, and writes the case's own ceiling disclaimer and its "
+        "mathematics blocker whenever that ceiling trails the reported best known side. "
+        "It never copies reported_upper_bound into it and never treats either as s(n)"
+    ),
+    "packing/tests/test_generate_frontier_case.py": (
+        "compares the generated field against the one a hand-written record carries, and "
+        "asserts it is the grid ceiling; it makes no claim about any bound's worth"
+    ),
+    "docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md": (
+        "the plan that extends the register to n = 324; it states the bound rule for the "
+        "field in the new range -- the grid ceiling under E-basic-grid-upper -- and never "
+        "as a side length"
+    ),
     "packing/devtools/render_research_tables.py": (
         "renders it beside the report, never instead of it"
     ),
