@@ -1067,15 +1067,22 @@ agenda:
           accepts H110's auxiliary P12 escape. H122 is the conditional diamond
           cover replacement; independent source-free instruments precede its
           first registered screen, with localization assessed in parallel.
-      selected:
-        bead: think-qv73
-        workflow: research-loop
+      - bead: think-7e72
+        workflow: pipeline-improvement
+        priority: 0
         rationale: >-
-          This machine-checked marker retains terminal Session090's handoff
-          until Session091 closes. Session091 has consumed it: H110 is accepted
-          by exp121 and active work is H122 under think-jbw5, with H123
-          localization in parallel. H107 stays paused. Select the next terminal
-          handoff at the checkpoint, preserving BC215 as an efficiency candidate.
+          Added at Session091's close, not backdated to this agenda's W10.
+          H110 and H123 are accepted and H122 is refuted. Preserve the full
+          distinguished square in a changed compatibility discriminator, with
+          source-free independent instruments and a new prospective protocol.
+      selected:
+        bead: think-7e72
+        workflow: pipeline-improvement
+        rationale: >-
+          Session091 completed its three targets. Test the changed full-square
+          compatibility obligation without repeating them or duplicating the
+          external BC261/BC273 program. H107 remains paused; BC215 remains an
+          efficiency candidate rather than an automatic research interruption.
       operator_input:
         status: unavailable
         note: >-

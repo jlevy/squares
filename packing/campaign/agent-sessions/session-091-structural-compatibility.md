@@ -132,7 +132,7 @@ session:
     objective: Publish the three exact outcomes, validation scope, cost and complete parallel handoff before the two-hour checkpoint.
     commitment: BC-255
     bead: think-fqhr
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: All three scientific targets are terminal; independent assessments select a changed local compatibility obligation and preserve external program ownership.
     budget_minutes: 20
@@ -142,12 +142,12 @@ session:
     validation_command: Full immutable checkpoint gate with matching post-checkpoint delta validation and records reconciliation.
     kill_condition: The session deadline ends new work; retain any pending gate as pending, never claim an unobserved pass.
     fallback: Publish a recoverable checkpoint with the exact remaining validation or ownership obligation and continue only a separately declared next session.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Complete the boundary prose pass, resolve the already-diagnosed stale-delegation CI failure, and publish current outcomes and costs.
+    outcome: All three outcomes and independent reviews are retained. The immutable full checkpoint passed; the later source delta passed the matching push tier. The final handoff audit reconciled consumed targets and sequential IDs.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-123-near45-localization.md]
+    stop_reason: The bounded scientific work and checkpoint review are complete; publication and final record reconciliation continue without a new target invocation.
+    next_action: Publish the terminal checkpoint and start a separately declared full-square compatibility slice under think-7e72.
   primary_bead: think-fqhr
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 120
     max_cycles: 6
@@ -584,6 +584,28 @@ session:
     fallback: Preserve partial evidence and the exact missing obligation; do not extend the budget retrospectively.
     write_scope: ["packing/campaign/hypotheses/H-123-near45-coordinate-localization.md","packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md"]
     excluded_commands: [Scientific constructors or target evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
+  - task: Final handoff consistency audit (think-60b0)
+    operator: Codex density_control_recovery, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Completed at 07:35:58; the coordinator corrected stale target status and sequential experiment/session pointers without changing scientific evidence.
+    evidence: [packing/campaign/agent-sessions/session-091-structural-compatibility.md, packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md]
+    files: []
+    checks: [Read-only handoff and ID consistency review]
+    uncertainty: Full distinguished-square compatibility remains untested.
+    elapsed_seconds: 188
+    elapsed_quality: operator_reported_approximate
+    next_action: Publish the reconciled checkpoint before allocating the next session.
+    phase: 6
+    budget_minutes: 8
+    started_at: '2026-09-07T07:32:50Z'
+    deadline_at: '2026-09-07T07:40:50Z'
+    expected_output: Bounded findings on handoff status, ownership and sequential IDs.
+    validation_command: Read-only comparison of records and retained evidence.
+    kill_condition: The fixed deadline or an unresolved premise ends the audit.
+    fallback: Preserve the exact remaining discrepancy for the coordinator.
+    write_scope: [Read-only review; no file writes]
+    excluded_commands: [Scientific target evaluation, File or shared-record writes, Repo-wide gates]
   outputs:
   - packing/campaign/agent-sessions/session-091-structural-compatibility.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md
@@ -602,17 +624,19 @@ session:
   - packing/devtools/check_near45_localization.py
   checks:
   - Baseline 3c4fd4e2 has exactly the origin/main aae108a6 tree after PRs 105 and 106 merged.
+  - 'full gate: full at d8b6fcf3: passed (all checks in 1785.88 seconds; the later ae341475 source delta passed the push tier in 137.64 seconds)'
   - Inherited merge evidence is composed fast validation plus a corrected shared-bead-tree check, not a fresh full checkpoint gate.
   - Instrument push gate took 135.71 seconds; all steps passed except two process-cleanup tests denied ps by the sandbox. Reachable tests recorded 627 passed, two failed, three deselected.
   - The two unchanged failed tests passed with process visibility in 4.67 seconds pytest, 4.98 seconds wall. This is composed push evidence, not a fresh full gate.
   - All required hosted checks passed on PR109 at instrument commit 961d9923; this is not the full research checkpoint gate.
   - Exp-121 producer and independent reader each completed once with exit0; the actual target passed exact checks in 0.11 seconds combined process wall time.
   - Exp-122 independently refutes H122 in 0.20 seconds combined process wall; exp-123 accepts H123 in 0.21 seconds. Each producer and reader ran exactly once with actual exit zero.
-  - The immutable d8b6fcf3 upstream-integrated checkpoint passed all 45 push-tier steps in 155.65 seconds validation wall, 158.94 seconds outer wall; its full gate is still pending.
+  - The immutable d8b6fcf3 upstream-integrated checkpoint passed all 45 push-tier steps in 155.65 seconds validation wall, 158.94 seconds outer wall. Its full gate passed all checks in 1785.88 seconds validation wall, 1786.04 seconds outer wall.
+  - The later immutable ae341475 checkpoint passed all 45 push-tier steps in 137.64 seconds validation wall, 140.23 seconds outer wall. This covers the H123 source delta; composed evidence is not a second latest-head full run.
   - Exp-123 prospective records passed all 31 checks in 26.63 seconds before commit881a786a and scientific execution.
   - Hosted f8b18e15 failed only its campaign record because two completed delegations remained marked in progress; commit881a786a closes them without changing deadlines or weakening validation.
-  stop_reason: null
-  next_action: Close this checkpoint, then select think-7e72 for a bounded full-P10 distinguished-square compatibility discriminator after fresh ID/ownership checks; no repeated H110/H122/H123 invocation.
+  stop_reason: The first bounded checkpoint is complete with three exact dispositions, independent review, full baseline and matching delta validation. The approximately eight-active-hour authorization remains active.
+  next_action: Select think-7e72 for a bounded full-P10 distinguished-square compatibility discriminator after fresh ID/ownership checks; no repeated H110/H122/H123 invocation.
 ---
 # Exact P12 escape and conditional compatibility
 
@@ -648,18 +672,18 @@ any continuation is declared prospectively, rather than rewriting the elapsed hi
 
 [H-110](../hypotheses/H-110-fixed-near-axis-p12-escape.md) fixes one near-axis unit
 square and the unchanged twelve points.
-Its success would refute an unconditional P12 covering step, not produce eleven disjoint
-squares and not refute H-036 or H-102. The frozen constructor is not a source-free test
-fixture.
-All twelve point identities, closed boundary membership, box containment and the
-actual angle domain need checking.
+Its verified square refutes an unconditional P12 covering step; it does not produce
+eleven disjoint squares or refute H-036 or H-102. All twelve point identities, closed
+boundary membership, containment and the actual angle domain were independently checked.
+The frozen constructor is not a source-free fixture and must not be rerun.
 
-The parallel assessment asks whether a near-45-degree square forced to contain A1, A2
-and A3 restricts the other squares enough for a conditional cover.
+The initial parallel assessment asked whether a near-45-degree square forced to contain
+A1, A2 and A3 restricts the other squares enough for a conditional cover.
 A uniform positive clearance is not established: scaling a strict-sublevel packing gives
 interior slack for that packing, but the slack can vanish as its side approaches the
 threshold. Neither this idea nor a single incompatible escape establishes a complete
-conditional cover. Localization of the forced square remains a separate obligation.
+conditional cover. H-123 has since completed localization; full-square compatibility
+remains a separate obligation.
 
 H-107 remains paused.
 No unchanged exp-116 scalar retry or density-control retry is allocated.
@@ -670,34 +694,36 @@ The parallel
 [conditional assessment](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md)
 now gives a fixed diamond contained in every distinguished square with the two forced
 anchors. Its counting reduction needs no uniform clearance.
-Localization and a complete nine-point cover for squares avoiding that diamond remain
-unproved.
+H-123 proves localization, while exp-122 refutes the diamond-conditioned nine-point
+cover. Neither completed result resolves full distinguished-square compatibility.
 
 ## PR and parallel-agent handoff
 
-Continue on `codex/structural-compatibility-continuation`, based on merged PRs 105 and
-106\. Publish one integrated successor PR early, then update it at each checkpoint.
+Continue on `codex/structural-compatibility-continuation`, based on merged PRs 105–108.
+Keep the integrated PR109 updated at each checkpoint.
 Each update leads with measured cost (or an explicitly incomplete running lower bound),
 states which checks actually ran, and links unfinished obligations and exact resume
 commands. Beads are synchronized separately on `tbd-sync`; their IDs and scope are
 mirrored here so a PR reader can recover the plan.
 
-This branch has allocated **Session 091**, **exp-121** and **H-122–H-123**, and
-continues **BC-255 / H-102**. H-110 is complete; the next selected bead is `think-jbw5`.
-No new agenda or exploration ID is allocated at this checkpoint.
-PR 107 landed on main at `dd36800e`, including PR 108 and its follow-up planning:
-X-017–X-018, Agenda 027–028, BC-258–275 and H-111–121, with no session or experiment
-IDs. The temporary local H-118 diamond label was renamed H-122 before its first
-instrument commit or target invocation.
-The next pointers are H-124, exp-122, Session 092, BC-276, Agenda 029 and X-019; none is
-reserved speculatively.
+This branch has allocated **Session 091**, **exp-121–exp-123** and **H-122–H-123**, and
+continues **BC-255 / H-102**. H-110 and H-123 are accepted, H-122 is refuted, and all
+three invocations are complete.
+The next local entry is `think-7e72`. No new agenda or exploration ID is allocated at
+this checkpoint. PR 107 landed on main at `dd36800e`, including PR 108 and its follow-up
+planning: X-017–X-018, Agenda 027–028, BC-258–275 and H-111–121, with no session or
+experiment IDs. The temporary local H-118 diamond label was renamed H-122 before its
+first instrument commit or target invocation.
+The independent program has since occupied Session092 and active BC-261/BC-273 work.
+The next checked pointers are H-124, exp-124, Session093, BC-276, Agenda029 and X-019;
+none is reserved, and each requires a fresh live-ownership check before assignment.
 Choose each next required ID sequentially after checking current remote claims; publish
 it on this PR rather than reserving speculative ranges.
 
 Merge only landed `origin/main` changes, following the upstream-merge shortcut.
 Open PR heads remain coordination context, not prerequisites or automatic merge targets.
 If interrupted, read this session, its bead `think-fqhr`, the latest PR checkpoint and
-the current H-110 record before dispatching anything.
+the completed H-110/H-122/H-123 records and `think-7e72` before dispatching anything.
 Never repeat a completed or still-running scientific invocation.
 
 <!-- This document follows common-doc-guidelines.md.

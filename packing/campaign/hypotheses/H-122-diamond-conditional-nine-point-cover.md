@@ -42,25 +42,28 @@ hypothesis:
 ---
 # H-122 — Cover Outside a Forced Diamond
 
-H-122 is refuted by [exp-122](../series/series-000-smoke-and-calibration/experiments/exp-122-diamond-conditional-cover-screen.md).
+H-122 is refuted by
+[exp-122](../series/series-000-smoke-and-calibration/experiments/exp-122-diamond-conditional-cover-screen.md).
 One square at the first prescribed near-axis frame strictly avoids all nine marks and
 the closed diamond, independently checked in 0.20 seconds combined process wall time.
-This rules out the sufficient diamond cover, not full-square compatibility or H-036.
-The unused frames were not run, and no retry is allocated.
+This rules out the sufficient diamond cover, not full-square compatibility or H-036. The
+unused frames were not run, and no retry is allocated.
 
-The fixed-frame falsifier and source-distinct reader passed 24 source-free controls
-and swapped independent reviews by 06:49:01 UTC on September 7, before registration.
+The fixed-frame falsifier and source-distinct reader passed 24 source-free controls and
+swapped independent reviews by 06:49:01 UTC on September 7, before registration.
 That readiness supported counterexample search only, not a complete continuous proof.
 
-This unrun claim was temporarily called H-118 locally. PR 107 landed additional
-H-118–H-121 records after the last upstream inventory, so it was renamed H-122 before
-its first instrument commit or scientific invocation; its mathematics did not change.
+Before any target invocation, this claim was temporarily called H-118 locally.
+PR 107 landed additional H-118–H-121 records after the last upstream inventory, so it
+was renamed H-122 before its first instrument commit or scientific invocation; its
+mathematics did not change.
 
-This is the selected BC-255 continuation under `think-jbw5` after H-110 established
-that the unchanged unconditional near-axis P12 cover is false. The separate
+This was the selected BC-255 continuation under `think-jbw5` after H-110 established
+that the unchanged unconditional near-axis P12 cover is false.
+The separate
 [conditional assessment](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md)
-proves the fixed-obstacle lemma and counting reduction. It does not establish this
-covering hypothesis.
+proves the fixed-obstacle lemma and counting reduction.
+It does not establish this covering hypothesis.
 
 ## Fixed Domain and Data
 
@@ -72,8 +75,8 @@ D=\{(1+X,b+Y):0\le X\le W,\quad
 |Y|\le\kappa\min(X,W-X)\}.
 $$
 
-Its vertices are `(1,b)`, `(1+W/2,b+kappa W/2)`, `(1+W,b)` and
-`(1+W/2,b-kappa W/2)`. Boundary contact is intersection, not disjointness.
+Its vertices are `(1,b)`, `(1+W/2,b+kappa W/2)`, `(1+W,b)` and `(1+W/2,b-kappa W/2)`.
+Boundary contact is intersection, not disjointness.
 The nine marked points retain their source coordinates:
 
 $$
@@ -84,48 +87,52 @@ H&=(17/10,11/5),&I&=(11/5,11/5),&J&=(11/5,17/10).
 \end{aligned}
 $$
 
-The point called D in the source inventory is written D0 here to distinguish it from
-the diamond; the machine inventory retains the original label `D`. No point is scaled
-or symmetrized independently of its source formula.
+The point called D in the source inventory is written D0 here to distinguish it from the
+diamond; the machine inventory retains the original label `D`. No point is scaled or
+symmetrized independently of its source formula.
 
-The angle domain is the union of the closed bands
-`[-pi/720,pi/720]` and `[pi/4-pi/720,pi/4+pi/720]`, modulo square quarter turns.
-The entire closed square must lie in `[0,q]^2`. An independent counterexample check
-must establish these actual conditions, not just membership in a numerical enclosure.
+The angle domain is the union of the closed bands `[-pi/720,pi/720]` and
+`[pi/4-pi/720,pi/4+pi/720]`, modulo square quarter turns.
+The entire closed square must lie in `[0,q]^2`. An independent counterexample check must
+establish these actual conditions, not just membership in a numerical enclosure.
 
 ## Why the Conditional Statement Is Useful
 
 The reviewed reduction proves that a near-45 square containing A1 and A2 contains D.
 Strict-sublevel enlargement gives eleven pairwise-disjoint closed unit cores, so a
 distinguished core containing D excludes that whole obstacle from every other core.
-Nine marks cannot then cover ten remaining cores. Combined with the accepted H-106 and
-H-109 auxiliaries and a still-missing localization lemma, this hypothesis would prove
-H-036. No uniform clearance radius is needed, and H-108 is not a premise of this
-particular reduction.
+Nine marks cannot then cover ten remaining cores.
+At registration, this hypothesis together with H-106, H-109 and a localization lemma
+would have proved H-036. H-123 has since supplied localization, but exp-122 refuted this
+cover. No uniform clearance radius is needed in the reduction, and H-108 is not one of
+its premises.
 
-This is only a sufficient cover. A square may avoid D while overlapping every actual
-distinguished square allowed by the stronger premises. A refutation here would leave
-full-square compatibility, H-036 and the global packing bound unresolved.
+This is only a sufficient cover.
+A square may avoid D while overlapping every actual distinguished square allowed by the
+stronger premises. A refutation here leaves full-square compatibility, H-036 and the
+global packing bound unresolved.
 
 ## First Instrument, Not a Complete Proof
 
 The source-free author slice prepares a fixed-frame event-cell screen and independent
-witness reader. The proposed first screen examines half-angle offsets `+/-1/500`
-about each of 0 and `pi/4`; these are four samples, not a replacement for the full
-claim. Their exact order and process caps belong in a committed prospective experiment
-before any scientific invocation.
+witness reader. The proposed first screen examines half-angle offsets `+/-1/500` about
+each of 0 and `pi/4`; these are four samples, not a replacement for the full claim.
+Their exact order and process caps belong in a committed prospective experiment before
+any scientific invocation.
 
-The screen may reject this hypothesis through one valid counterexample. No-witness
-output cannot accept it, even if all four sampled center domains were completely
-enumerated. The exact 0-degree and 45-degree special cases already follow from H-104's
-accepted P12 cover and A1, A2, A3 lying in D; do not rerun them as new scientific work.
+The screen may reject this hypothesis through one valid counterexample.
+No-witness output cannot accept it, even if all four sampled center domains were
+completely enumerated.
+The exact 0-degree and 45-degree special cases already follow from H-104’s accepted P12
+cover and A1, A2, A3 lying in D; do not rerun them as new scientific work.
 
-Controls must exercise generic unrelated inputs: both sine signs and exact unit
-frames, positive and zero separating gaps, boundary-only and open event strata, a
-true escape, malformed or incomplete witness refusal and exact field identity.
+Controls must exercise generic unrelated inputs: both sine signs and exact unit frames,
+positive and zero separating gaps, boundary-only and open event strata, a true escape,
+malformed or incomplete witness refusal and exact field identity.
 Scientific constructors remain forbidden until the prospective target protocol passes
-its own launch guards. Root owns scientific disposition; the producer and witness
-reader have independent geometric implementations.
+its own launch guards.
+Root owns scientific disposition; the producer and witness reader have independent
+geometric implementations.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -68,44 +68,51 @@ experiment:
 # exp-122 — Diamond-Conditioned Cover Screen
 
 H-122 is refuted. The protocol was committed as `f8b18e15` after all 31 record checks
-passed in 33.31 seconds. The sole producer launched at the observed 07:03:58 UTC
-boundary and completed with actual exit zero in 0.13 seconds wall, 0.11 CPU.
-It found a witness in the first `axis-negative` frame after seven event cells, six
-uncovered; the other three frames were not invoked.
+passed in 33.31 seconds.
+The sole producer launched at the observed 07:03:58 UTC boundary and completed with
+actual exit zero in 0.13 seconds wall, 0.11 CPU. It found a witness in the first
+`axis-negative` frame after seven event cells, six uncovered; the other three frames
+were not invoked.
 
-The independent reader launched once at 07:04:40 UTC and completed with actual exit
-zero in 0.07 seconds wall, 0.06 CPU. Its complete `verified_counterexample` receipt
-has passed guards, nine strict point avoidances, thirty-six edge determinants, sixteen
-closed wall slacks and strict separation. The supplied axis has exact positive gap
-`49667/20833333333`; the reader independently supplies its own separating axis too.
-There are no unresolved entries. Total scientific process cost is 0.20 seconds wall
-and 0.17 CPU, separate from author/review/coordination costs.
+The independent reader launched once at 07:04:40 UTC and completed with actual exit zero
+in 0.07 seconds wall, 0.06 CPU. Its complete `verified_counterexample` receipt has
+passed guards, nine strict point avoidances, thirty-six edge determinants, sixteen
+closed wall slacks and strict separation.
+The supplied axis has exact positive gap `49667/20833333333`; the reader independently
+supplies its own separating axis too.
+There are no unresolved entries.
+Total scientific process cost is 0.20 seconds wall and 0.17 CPU, separate from
+author/review/coordination costs.
 
-The result directory retains both JSON receipts and both stderr/timing logs. Neither
-process was repeated. The conclusion rejects the sufficient fixed-diamond shortcut,
-not compatibility with an actual P10-avoiding distinguished square or H-036.
+The result directory retains both JSON receipts and both stderr/timing logs.
+Neither process was repeated.
+The conclusion rejects the sufficient fixed-diamond shortcut, not compatibility with an
+actual P10-avoiding distinguished square or H-036.
 
 ## Retained Prospective Protocol
 
 Commit this protocol and pass the record checks before either scientific process.
 The exact instruments are frozen at `c4a69e3e`; use its clean detached checkout with
-`packing/` as the working directory. The H-122 label was fixed before that commit.
+`packing/` as the working directory.
+The H-122 label was fixed before that commit.
 This allocation is independent of the already completed H-110/exp-121 invocation.
 
 ## Frozen Scope and Caps
 
-The producer examines the four frames in the order recorded above. Each actual angle
-offset satisfies `abs(2 atan(t))<1/250<pi/720`. It searches all contained centers at
-a frame through exact closed/open event strata until finding one witness, exhausting
-the prescribed frames or reaching its thirty-second whole-process cap.
-The cap is not a prediction that enumeration finishes. No result authorizes more time,
-a rerun, a different frame or a larger obstacle.
+The producer examines the four frames in the order recorded above.
+Each actual angle offset satisfies `abs(2 atan(t))<1/250<pi/720`. It searches all
+contained centers at a frame through exact closed/open event strata until finding one
+witness, exhausting the prescribed frames or reaching its thirty-second whole-process
+cap. The cap is not a prediction that enumeration finishes.
+No result authorizes more time, a rerun, a different frame or a larger obstacle.
 
 Before launch, check that the result directory and every output path are absent.
-Retain stdout as `packet.json`, stderr/external timing as `producer.log`, and the
-actual process exit. A complete finite `no_witness` result remains unresolved for the
-continuous claim and does not authorize a reader. A timeout, exception or incomplete
-packet is likewise unresolved; do not fabricate a reader receipt.
+Retain stdout as `packet.json`, stderr/external timing as `producer.log`, and the actual
+process exit.
+A complete finite `no_witness` result remains unresolved for the continuous
+claim and does not authorize a reader.
+A timeout, exception or incomplete packet is likewise unresolved; do not fabricate a
+reader receipt.
 
 Only a well-formed `witness` packet and actual exit zero authorize this command once:
 
@@ -116,20 +123,24 @@ Only a well-formed `witness` packet and actual exit zero authorize this command 
 Retain its stdout as `replay.json`, stderr/timing as `replay.log` and actual exit.
 The reader independently reconstructs the frame, q, exact diamond and nine source marks.
 It verifies unit CCW corners, the actual angle, sixteen closed wall slacks, thirty-six
-point-edge determinants and strict polygon separation. Tangency is intersection.
+point-edge determinants and strict polygon separation.
+Tangency is intersection.
 
 ## Scientific Disposition
 
 Reject H-122 only with an actual exit-zero reader result `verified_counterexample`,
 passed guards, complete evidence, all nine points strictly outside and a strictly
 positive exact separating gap from D. Exit zero alone is insufficient: it also permits
-the reader's `not_a_counterexample` outcome, which leaves this universal claim unresolved.
-Frame summaries are producer provenance, not independently checked continuous coverage.
-Shared exact arithmetic is `sqpack.field`; geometric implementations are separate.
+the reader’s `not_a_counterexample` outcome, which leaves this universal claim
+unresolved.
+Frame summaries are producer provenance, not independently checked continuous
+coverage. Shared exact arithmetic is `sqpack.field`; geometric implementations are
+separate.
 
 This screen cannot accept H-122. Even complete success at all four frames would not
-cover either full angle band. A verified escape rejects only the sufficient
-fixed-diamond cover: it need not be compatible with any actual distinguished square.
+cover either full angle band.
+A verified escape rejects only the sufficient fixed-diamond cover: it need not be
+compatible with any actual distinguished square.
 H-036, H-102 and the global packing bound remain unresolved or unchanged.
 Choose the next allocation from the exact obstruction and independently reviewed
 localization result; do not silently strengthen the obstacle in this round.

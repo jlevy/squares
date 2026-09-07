@@ -610,13 +610,11 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**Selected next entry:** `think-qv73` is the terminal Session090 handoff, already
-consumed by active Session091. Its three scientific invocations are complete, and the
-current work is checkpoint integration in
+**Selected next entry:** `think-7e72` is the terminal Session091 handoff.
+Its three scientific invocations and checkpoint review are complete in
 [Session 091](packing/campaign/agent-sessions/session-091-structural-compatibility.md)
-under `think-fqhr`. The selected local follow-up is `think-7e72`, a full
-distinguished-square compatibility discriminator requiring a new hypothesis and
-prospective protocol.
+under `think-fqhr`. The selected local follow-up is a full distinguished-square
+compatibility discriminator requiring a new hypothesis and prospective protocol.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
 `think-9qrx`, completed the user-approved research block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
@@ -3102,7 +3100,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
 | `codex-task-tree-session-090.yaml` | session-090 | 1,341 | 9.8 h | 3.94 h | 3.95 h | yes |
-| `codex-task-tree-session-091.yaml` | session-091 | 485 | 4.31 h | 1.52 h | 1.52 h | yes |
+| `codex-task-tree-session-091.yaml` | session-091 | 553 | 5.05 h | 1.93 h | 1.93 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

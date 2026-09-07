@@ -780,8 +780,8 @@ IDs quoted inside imported source packets are not native allocations.
 | Agendas | None new; this branch uses Agenda 024–026 | agenda-027–agenda-028 | agenda-029 |
 | Bounded commitments | Existing BC-251–BC-255 carry this block’s work; BC-256–BC-257 are also occupied | BC-258–BC-275 | BC-276 |
 | Hypotheses | H-106–H-110 and H-122–H-123 | H-111–H-121 | H-124 |
-| Experiments | exp-116–exp-121 | None | exp-122 |
-| Agent sessions | session-090–session-091 | None | session-092 |
+| Experiments | exp-116–exp-123 | None at the last external check | exp-124 after a fresh check |
+| Agent sessions | session-090–session-091 | Independent program now owns session-092 | session-093 after a fresh check |
 | Series | Existing series-000; no new series | None | series-001 if a new series is justified; none is assigned |
 
 The user will arrange downstream agents around this sequential line.
@@ -801,10 +801,10 @@ No uncreated ranges from the earlier draft of this update were dispatched.
 The native record inventory at this checkpoint is X-001–X-018, agenda-001–agenda-028,
 BC-001–BC-155 / BC-159–BC-185 / BC-190–BC-225 / BC-230–BC-275, H-001–H-065 / H-070 /
 H-090–H-091 / H-093–H-123, and exp-001–exp-064 / exp-070–exp-071 / exp-110–exp-111 /
-exp-113–exp-121. Sessions occupy session-001–session-091. Other native sequences are
-run-001–run-002, D-001–D-478, T-001–T-022, CG-001–CG-012 and VE-001–VE-002; this branch
-introduces none of those IDs.
-PR 107’s definitions are included in this combined record.
+exp-113–exp-123. This checkout has session-001–session-091; the independent program has
+additionally occupied session-092. Other native sequences are run-001–run-002,
+D-001–D-478, T-001–T-022, CG-001–CG-012 and VE-001–VE-002; this branch introduces none
+of those IDs. PR 107’s definitions are included in this combined record.
 BC IDs span agendas; experiment IDs span series.
 
 Assign each new artifact to its actual question: a BC can reuse an existing H-item, and

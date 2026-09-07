@@ -341,12 +341,13 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, select `think-qv73` under BC-255 for
-H-110’s fixed near-axis P12 escape test.
+For the next supervised exact-research goal, select `think-7e72` under BC-255 for a
+changed full distinguished-square compatibility discriminator.
 Allocate source-free controls, independent review and a fresh prospective experiment
 before evaluating the candidate.
-Session 090’s mathematical-code checkpoint `bc5c24b5` passed full validation.
-Keep the continuation on integrated PR 105 while open; do not repeat a completed
+Session 091 accepted H-110 and H-123 and refuted H-122. Its checkpoint `d8b6fcf3` passed
+full validation, with the later source delta covered by the push tier.
+Keep the continuation on integrated PR 109 while open; do not repeat a completed
 experiment or create another supporting-fix PR.
 [Agenda 024’s Current Allocation](../../../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
 supplies the current priorities.

@@ -70,20 +70,22 @@ experiment:
 ---
 # exp-121 — Fixed P12 Escape
 
-H-110 is accepted. The prospective protocol was committed as `18e5a641` after all
-31 record checks passed in 20.2 seconds. The sole producer launched at the observed
-06:18:18 UTC boundary and returned actual exit zero with a complete `escaped` packet.
+H-110 is accepted. The prospective protocol was committed as `18e5a641` after all 31
+record checks passed in 20.2 seconds.
+The sole producer launched at the observed 06:18:18 UTC boundary and returned actual
+exit zero with a complete `escaped` packet.
 The independent reader launched once at 06:18:49 UTC and returned actual exit zero,
 `escaped`, all twelve strict avoidances and no unresolved entry.
 
-Producer cost was 0.06 seconds wall and 0.04 CPU; replay cost was 0.05 seconds wall
-and 0.05 CPU. Total scientific process cost was 0.11 seconds wall and 0.09 CPU,
-separate from author, review and coordinator time. Neither allowance was repeated or
-extended. The result directory retains `packet.json`, `producer.log`, `replay.json`
-and `replay.log`.
+Producer cost was 0.06 seconds wall and 0.04 CPU; replay cost was 0.05 seconds wall and
+0.05 CPU. Total scientific process cost was 0.11 seconds wall and 0.09 CPU, separate
+from author, review and coordinator time.
+Neither allowance was repeated or extended.
+The result directory retains `packet.json`, `producer.log`, `replay.json` and
+`replay.log`.
 
-This refutes the unchanged unconditional near-axis P12 clause. It does not refute
-H-036 or establish a new packing bound.
+This refutes the unchanged unconditional near-axis P12 clause.
+It does not refute H-036 or establish a new packing bound.
 
 ## Retained Prospective Protocol
 
@@ -95,11 +97,11 @@ instruments. No scientific result existed at registration.
 
 ## One Producer and One Independent Reader
 
-Verify that the entire result directory and every output path are absent. The producer
-command above writes stdout to `packet.json` and stderr, including external timing, to
-`producer.log`. Retain the actual tool exit and never infer it from packet status.
-Only an actual exit zero and a complete packet with status `escaped` or `not_escaped`
-authorize the reader:
+Verify that the entire result directory and every output path are absent.
+The producer command above writes stdout to `packet.json` and stderr, including external
+timing, to `producer.log`. Retain the actual tool exit and never infer it from packet
+status. Only an actual exit zero and a complete packet with status `escaped` or
+`not_escaped` authorize the reader:
 
 ```bash
 /usr/bin/time -p /opt/homebrew/bin/timeout --signal=KILL 10s env PYTHONPATH=src /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.check_p12_escape_candidate --input ABSOLUTE_PACKET_PATH
@@ -107,36 +109,41 @@ authorize the reader:
 
 Retain its stdout as `replay.json` and stderr/timing as `replay.log`. Its independent
 reconstruction must agree exactly with the frozen candidate and all twelve marked
-points. It verifies unit CCW geometry, the actual angle-domain proof, all sixteen
-wall slacks and all forty-eight point-edge determinants. Neither process has an
-internal timer; the two separately frozen external caps cover the whole process.
+points. It verifies unit CCW geometry, the actual angle-domain proof, all sixteen wall
+slacks and all forty-eight point-edge determinants.
+Neither process has an internal timer; the two separately frozen external caps cover the
+whole process.
 
-The actual angle argument is `0<t<1/480`, implying
-`0<2 arctan(t)<2t<1/240<pi/720` because `pi>3`. Failure of this sufficient guard is
-unresolved, not evidence that an angle lies outside the actual band.
+The actual angle argument is `0<t<1/480`, implying `0<2 arctan(t)<2t<1/240<pi/720`
+because `pi>3`. Failure of this sufficient guard is unresolved, not evidence that an
+angle lies outside the actual band.
 
 ## Frozen Disposition
 
 Accept H-110 only with actual reader exit zero, a complete `escaped` result, correct
 identity, unit geometry, actual angle membership, box containment, all twelve points
-strictly outside and no unresolved entry. Reject only when the correctly reconstructed
-candidate is independently shown to violate containment or contain at least one mark.
+strictly outside and no unresolved entry.
+Reject only when the correctly reconstructed candidate is independently shown to violate
+containment or contain at least one mark.
 A completed negative also has exit zero; its mathematical status differs from process
 failure. Malformed packets, wrong identity, disagreement, failed sufficient guards,
 exceptions, timeouts and incomplete inventories are refused or unresolved, not
 mathematical rejection.
 
-No failure authorizes another invocation. If the producer does not authorize replay,
-record that the reader was not invoked instead of fabricating a receipt. The
-`verified` assurance field describes the required exact decision route; it is not
-an assertion that the unrun candidate already passes.
+No failure authorizes another invocation.
+If the producer does not authorize replay, record that the reader was not invoked
+instead of fabricating a receipt.
+The `verified` assurance field describes the required exact decision route; it is not an
+assertion that the unrun candidate already passes.
 
 A verified one-square escape refutes only the unchanged unconditional near-axis P12
-auxiliary construction. It does not refute H-036 or H-102, does not invalidate the
-accepted H-106/H-108/H-109 lemmas, and is not an eleven-square packing. The separately
-reviewed fixed-diamond counting reduction remains conditional on localization and a
-complete both-band nine-point cover. Select its next discriminator from this outcome;
-do not reinterpret this experiment as a test of diamond compatibility.
+auxiliary construction.
+It does not refute H-036 or H-102, does not invalidate the accepted H-106/H-108/H-109
+lemmas, and is not an eleven-square packing.
+The separately reviewed fixed-diamond counting reduction remains conditional on
+localization and a complete both-band nine-point cover.
+Select its next discriminator from this outcome; do not reinterpret this experiment as a
+test of diamond compatibility.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
