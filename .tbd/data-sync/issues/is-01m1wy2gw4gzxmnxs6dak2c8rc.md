@@ -5,11 +5,16 @@ title: Integrate n11 research bundle into an alternative exploration and agenda
 kind: task
 status: in_progress
 priority: 1
-version: 4
-labels: []
+version: 6
+labels:
+  - agenda027
 dependencies: []
 parent_id: is-01m1wz2csvegxym6bvt099z2wz
 created_at: 2026-09-07T03:20:01.155Z
-updated_at: 2026-09-07T03:38:11.398Z
+updated_at: 2026-09-07T04:28:50.755Z
 ---
-W10 source assessment and planning for an independent sibling program. Branch codex/research-agenda-exploration starts at PR105 source commit 46f38ab4. User explicitly requires disjoint numbering for concurrent work: this branch owns actual artifacts X-100, agenda-100, H-200 through H-206, and BC-300 through BC-310. Avoid these identifiers in the continuing source program; no new reservation ledger is introduced. Prior X-017 through X-019 and live H-107/H-108 remain with the other coordinator. Preserve source agendas024-026 and their clocks; all new execution dependencies stay within agenda100. Intake n11_complete_research_bundle.zip into attic, preserve source, critically adapt into exploration/claims/agenda and validate. No successor experiments are launched by this planning task.
+W10 source assessment and planning. Branch codex/research-agenda-exploration starts at PR105 commit 46f38ab4. User clarified sequential numbering: actual new artifacts are X-017, agenda-027, H-111 through H-117 and BC-258 through BC-268, checked against PR105 at bc5c24b5 plus active H-110 and BC-257. Prior high draft numbers were corrected before publication. X-017 through X-019 were unmaterialized placeholders in a superseded launch draft; no speculative future ranges or second allocation ledger. Preserve source agendas024-026 and their clocks. Intake the zip into attic, preserve source, critically adapt into exploration/claims/agenda, document sequential numbering, add campaign-wide BC collision detection to the existing validator, validate and publish a stacked draft PR. No successor experiments launched.
+
+## Notes
+
+Draft PR107 is open at https://github.com/jlevy/squares/pull/107, stacked on PR105. Its body lists X-017, Agenda027, H-111–117, BC-258–268 and every owning bead/state. Initial checkpoint ce283e09; PR105 source checkpoint f5684f51 subsequently integrated as5ab00c8a with source H-107–110 preserved and generated views reconciled. The seven new records retain their allocation. Focused42-test campaign suite and docs check pass. First broader pre-push gate still running on a byte-identical clean copy of ce283e09; final integrated record checks are running on immutable5ab00c8a. No new experiment launched.
