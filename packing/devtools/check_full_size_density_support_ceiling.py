@@ -339,16 +339,18 @@ def replay_packet(packet: Any) -> Fraction:
     return upper
 
 
-def load_packet(path: Path) -> Any:
+def load_packet(path: Path, *, max_bytes: int = PACKET_BYTES) -> Any:
     """Read one bounded UTF-8 JSON file; refuse links, floats, and duplicate keys."""
+    if type(max_bytes) is not int or not 1 <= max_bytes <= PACKET_BYTES:
+        raise SupportError("certificate byte limit must be a positive integer within the cap")
     if not stat.S_ISREG(path.lstat().st_mode):
         raise SupportError("certificate path must be a regular file, not a symlink")
     descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
     with os.fdopen(descriptor, "rb") as stream:
         if not stat.S_ISREG(os.fstat(stream.fileno()).st_mode):
             raise SupportError("certificate path changed to a non-regular file")
-        payload = stream.read(PACKET_BYTES + 1)
-    if len(payload) > PACKET_BYTES:
+        payload = stream.read(max_bytes + 1)
+    if len(payload) > max_bytes:
         raise SupportError("certificate file exceeds the size cap")
 
     def pairs(items):

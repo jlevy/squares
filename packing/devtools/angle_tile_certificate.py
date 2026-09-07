@@ -5,7 +5,8 @@ point-hit clause supplied to ``check_cover``; it cannot decide H-036. A failed
 Bernstein test means unresolved, including an actual negative assigned-point
 inequality: a different point could still hit that square.
 
-Triangles are closed leaves of a fixed binary subdivision of the unit square.
+Triangles are closed leaves of a fixed binary subdivision of the unit square,
+or the complete fixed sixths-by-thirds grid used by ``grid_obligations``.
 This avoids a new general mesh validator: ``sqpack.cover.validate_triangle_mesh``
 also imposes edge-length constraints irrelevant to these parameter-space tiles.
 Each split joins one edge's exact midpoint to its opposite vertex. Complete
@@ -18,6 +19,7 @@ results/agenda-026/bc-255-angle-instrument-design.md.
 
 from __future__ import annotations
 
+from collections.abc import Iterator
 from dataclasses import dataclass
 from fractions import Fraction
 from math import comb
@@ -30,6 +32,8 @@ type Point = tuple[Scalar, Scalar]
 type RationalPoint = tuple[Fraction, Fraction]
 type Triangle = tuple[RationalPoint, RationalPoint, RationalPoint]
 type Interval = tuple[Fraction, Fraction]
+type GridIndex = tuple[int, int, int]
+type GridObligation = tuple[int, int, int, int, int]
 
 MAX_DEGREE = 4
 MAX_SIGN_DEPTH = 8
@@ -377,3 +381,49 @@ def check_cover(
                             )
                         )
     return CoverResult(checked, tuple(unresolved))
+
+
+def fixed_grid_triangles() -> dict[GridIndex, Triangle]:
+    """The complete closed 6x3 root grid, with no subdivision or supplied vertices.
+
+    Row-major rectangles exactly cover [0,1]^2. Each diagonal joins LL to UR;
+    triangles (LL,LR,UR) and (LL,UR,UL) include their shared diagonal and all
+    boundary points. The inventory is constructed, never inferred from area.
+    """
+    result: dict[GridIndex, Triangle] = {}
+    for row in range(3):
+        for column in range(6):
+            left, right = Fraction(column, 6), Fraction(column + 1, 6)
+            bottom, top = Fraction(row, 3), Fraction(row + 1, 3)
+            result[row, column, 0] = ((left, bottom), (right, bottom), (right, top))
+            result[row, column, 1] = ((left, bottom), (right, top), (left, top))
+    return result
+
+
+def grid_obligations(
+    side: Scalar, points: tuple[Point, ...], assignments: tuple[tuple[int, ...], ...]
+) -> Iterator[tuple[GridObligation, bool]]:
+    """Yield all 432 fixed-grid theta=0 signed vertex checks in canonical order.
+
+    A caller must consume the complete iterator before claiming a cover. A failed
+    entry is only an unresolved assigned-point obligation, not a square escape.
+    This reuses the same field, center-map, membership and Bernstein proof as the
+    binary interface; only the fixed closed root inventory differs.
+    """
+    if len(assignments) != 3 or any(len(row) != 6 for row in assignments):
+        raise ValueError("the complete 3x6 assignment matrix is required")
+    if any(
+        type(label) is not int or not 0 <= label < len(points)
+        for row in assignments
+        for label in row
+    ):
+        raise ValueError("grid has an unknown marked-point label")
+    _validate_slabs(side, points, (ZERO, ZERO), (TileSlab(ZERO, ZERO, ()),))
+    for (row, column, triangle_index), triangle in fixed_grid_triangles().items():
+        point = points[assignments[row][column]]
+        for vertex_index, vertex in enumerate(triangle):
+            for axis_index, polynomial in enumerate(
+                membership_polynomials(side, point, vertex, ZERO, ZERO)
+            ):
+                result = certify_nonnegative(polynomial, ZERO, ZERO, max_depth=0)
+                yield (row, column, triangle_index, vertex_index, axis_index), result.proved

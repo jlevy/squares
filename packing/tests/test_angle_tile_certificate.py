@@ -11,6 +11,8 @@ from devtools.angle_tile_certificate import (
     check_cover,
     closed_tiles,
     evaluate,
+    fixed_grid_triangles,
+    grid_obligations,
     membership_polynomials,
 )
 from sqpack.field import NumberField
@@ -262,3 +264,60 @@ def test_quadratic_side_toy_uses_the_same_map_without_algebraic_vertices() -> No
         assert "field" in str(error)
     else:
         raise AssertionError("mixed geometry fields accepted")
+
+
+def test_fixed_grid_covers_all_closed_cells_in_a_deterministic_inventory() -> None:
+    triangles = fixed_grid_triangles()
+    assert len(triangles) == 36
+    assert next(iter(triangles)) == (0, 0, 0)
+    assert list(triangles)[-1] == (2, 5, 1)
+    assert triangles[0, 0, 0] == (
+        (Fraction(0), Fraction(0)),
+        (Fraction(1, 6), Fraction(0)),
+        (Fraction(1, 6), Fraction(1, 3)),
+    )
+    assert triangles[0, 0, 1] == (
+        (Fraction(0), Fraction(0)),
+        (Fraction(1, 6), Fraction(1, 3)),
+        (Fraction(0), Fraction(1, 3)),
+    )
+    total_area = Fraction(0)
+    for triangle in triangles.values():
+        a, b, c = triangle
+        area = ((b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])) / 2
+        assert area == Fraction(1, 36)
+        total_area += area
+    assert total_area == 1
+    labels = ((0,) * 6,) * 3
+    results = tuple(
+        grid_obligations(
+            Fraction(3, 2),
+            ((Fraction(3, 4), Fraction(3, 4)),),
+            labels,
+        )
+    )
+    assert len(results) == 432
+    assert results[0][0] == (0, 0, 0, 0, 0)
+    assert results[-1][0] == (2, 5, 1, 2, 3)
+    assert all(proved for _, proved in results)
+
+
+def test_fixed_grid_refuses_missing_rows_columns_or_changed_labels() -> None:
+    for labels in (
+        ((0,) * 6,) * 2,
+        ((0,) * 5,) * 3,
+        ((1,) * 6,) * 3,
+        ((True,) * 6,) * 3,
+    ):
+        try:
+            tuple(
+                grid_obligations(
+                    Fraction(2),
+                    ((Fraction(1), Fraction(1)),),
+                    labels,
+                )
+            )
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("incomplete or mislabeled grid accepted")
