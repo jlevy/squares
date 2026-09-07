@@ -232,6 +232,12 @@ def test_the_atlas_figures_helvetica_is_the_documented_exception() -> None:
     """
     assert shipped("Helvetica-BoldOblique")
     assert host_font_bead("Helvetica-BoldOblique") is None
+    # The same figure drawn on a Linux runner, where fontconfig answers Helvetica with
+    # Liberation Sans, and on Windows, where the stack falls to Arial.
+    assert shipped("LiberationSans-Bold")
+    assert shipped("Arial-BoldMT")
+    assert host_font_bead("LiberationSans-BoldItalic") is None
+    assert not shipped("DejaVuSans-Bold")
 
 
 @pytest.mark.parametrize(
