@@ -9,6 +9,11 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/reviews/review-2026-09-07-stromquist-incorporation.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/stromquist-helper-arguments-math-review.md, role: review, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/reviews/review-2026-09-07-n6-pure-dots-obstruction.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-07-n11-hybrid-strategy.md, role: review, authority: supporting, lifecycle: maintained}
   - {path: docs/project/reviews/review-2026-09-06-validation-efficiency-implementation.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/validation-efficiency/ideas.md, role: plan, authority: supporting, lifecycle: maintained}

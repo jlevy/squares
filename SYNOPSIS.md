@@ -205,6 +205,11 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | research synthesis | supporting | maintained | — |
+| [Review: Incorporating Stromquist’s Memos and Helper Arguments](docs/project/reviews/review-2026-09-07-stromquist-incorporation.md) | dated review record | record | retained | — |
+| [Stromquist’s Helper Arguments and Conditional Dots Certificates](docs/project/stromquist-helper-arguments-math-review.md) | dated review record | supporting | maintained | — |
+| [Five-Dot Obstruction for the Six-Square Problem](docs/project/reviews/review-2026-09-07-n6-pure-dots-obstruction.md) | dated review record | record | retained | — |
+| [An Explicit Five-Point Piercing Obstruction Near Side Three](docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md) | dated review record | record | retained | — |
 | [Strategic Mathematical Review: Hybrid Exclusion and Few-Angle Structure at n = 11](docs/project/reviews/review-2026-09-07-n11-hybrid-strategy.md) | dated review record | supporting | maintained | — |
 | [Validation Efficiency Implementation Review](docs/project/reviews/review-2026-09-06-validation-efficiency-implementation.md) | dated review record | record | retained | — |
 | [Validation Efficiency Ideas](packing/benchmarks/validation-efficiency/ideas.md) | implementation plan | supporting | maintained | — |
@@ -2126,8 +2131,9 @@ For most `n` the answer is uninteresting: `s(m²) = m` by the grid.
 It becomes interesting just above a perfect square, where the leftovers must be tilted
 in.
 
-At `n = 11` the upper end has not moved since 1979, and the lower end moved on
-2026-09-04 for the first time since 2003:
+At `n = 11` the upper end has not moved since 1979. On 2026-09-04 the lower end improved
+on Stromquist’s bound, stated in 1984 and published in 2003; the recorded search found
+no intervening improvement:
 
 |  | value | source |
 | --- | --- | --- |
@@ -2141,8 +2147,13 @@ At `n = 11` the upper end has not moved since 1979, and the lower end moved on
 separated from the independently certified lower bound.
 The segment and dot contact marks are exact, not tolerance-based visual guesses.*
 
-The value `T-018` displaces is Stromquist’s `2 + 4/√5 = 3.788854382…`, and that value
-keeps its own place in the record.
+The value `T-018` displaces is Stromquist’s `2 + 4/√5 = 3.788854382…`, stated in
+[Memo III, p. 10](packing/resources/papers/stromquist-1984-packing-unit-squares-inside-squares-iii-cases-through-65-and-gardner-conjecture.pdf)
+on November 15, 1984, and published in 2003. The memo states the unrestricted bound
+without supplying its proof.
+The
+[memo review](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md)
+records the source distinctions and the helper-argument followup.
 The current audit found an explicit strict box avoiding all twelve printed Figure 14
 points, so the paper’s unavoidability subclaim is false as printed
 ([D-152](defects.md)). Exp-017 independently certifies the same numerical inequality by
@@ -4080,9 +4091,10 @@ and it is not the cartography spine.** Its weighted-resource lineage runs throug
 Kearney–Shiu, Nagamochi and Bentz; the recent pure-atomic rational direction-net
 architecture follows Burns, and the LP instance and parameter line follows Massaccesi.
 This project’s instances and generator moved seven registered cases in one day.
-`s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), the first public movement of
-that bound located by the recorded search after Stromquist stated `2 + 4/sqrt(5)` in
-2003\. [T-022](packing/frontier/RESULTS.md) retains a small exact refinement to
+`s(11) >= 381/100` is [T-018](packing/frontier/RESULTS.md), improving Stromquist’s
+`2 + 4/sqrt(5)`, stated in 1984 and published in 2003; the recorded search found no
+intervening improvement.
+[T-022](packing/frontier/RESULTS.md) retains a small exact refinement to
 `3.810025723614703…`; its proof and endpoint limitations remain in the technical record.
 The shared S5 rubric category does not make these contributions comparable in size.
 `s(12) >= 99/25` is [T-017](packing/frontier/RESULTS.md), the first bound located that

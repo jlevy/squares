@@ -52,10 +52,10 @@ of standard-library Python and short enough to read in one sitting, decides the
 certificate file of {{HEADLINE_N_ATOMS}} weighted points in
 {{HEADLINE_PINNED_RUNTIME}}.<!--END:CLAIM-->
 
-This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
-open case of the square packing problem.[^novelty] The previous bound,
-{{PRIOR_LOWER_DEC}}, was Stromquist’s in
-{{PRIOR_YEAR}}.[^stromquist][^repair]
+This improves the previous lower bound on the smallest open case of the square packing
+problem: Stromquist’s {{PRIOR_LOWER_DEC}}, stated in {{PRIOR_MEMO_YEAR}} and published
+in {{PRIOR_YEAR}}.[^stromquist-memos][^stromquist][^repair] No intervening improvement
+was found by the recorded search.[^novelty]
 
 ## The Agentic Research Framework
 
@@ -87,8 +87,9 @@ writing quality.
 
 The **square packing problem** asks, for each $n$, for the side $s(n)$ of the smallest
 square that holds $n$ unit squares, which are free to rotate and must have disjoint
-interiors.[^survey] The value of $s(n)$ is known for $n \le 10$. Stromquist settled
-$s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
+interiors.[^survey] The value of $s(n)$ is known for $n \le 10$. Stromquist proved
+$s(10) = 3 + 1/\sqrt{2}$ in his {{PRIOR_MEMO_YEAR}} Memo II; the journal presentation
+appeared in {{PRIOR_YEAR}}.[^stromquist-memos][^stromquist]
 
 <figure>
   <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.svg" alt="{{COMPOSITE_ALT}}" width="2400" height="2896"></a></div>
@@ -547,6 +548,16 @@ solver’s weights, inflated slightly and rounded up to multiples of ${{SCALE}}$
 every constraint holds in exact arithmetic.
 The verifier proves that point feasible, not minimal.
 
+The argument is an unconditional weighted dots proof: each square must consume mass from
+the same fixed measure.
+Stromquist’s earlier proofs also use geometric helper arguments.
+His six-square proof forces one box to consume four of eight unavoidable dots, leaving
+room for at most five boxes.
+His eleven-square argument forces three of twelve dots into one box.
+These examples suggest a further direction: use constraints between squares to force
+additional mass consumption before the final counting
+step.[^stromquist-memos][^stromquist]
+
 The search runs in floating point.
 None of it is part of the proof: the [generator]({{GENERATOR_URL}}) writes the
 certificate to a file, and the [verifier]({{VERIFIER_URL}}) decides Conditions 1 through
@@ -647,7 +658,16 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
     [Packing 10 or 11 unit squares in a square]({{PRIOR_URL}}), Electronic Journal of
     Combinatorics 10 (2003), R8.
 
-[^novelty]: No improvement on Stromquist’s {{PRIOR_YEAR}} bound is known to us.
+[^stromquist-memos]: Walter Stromquist, *Packing Unit Squares Inside Squares*,
+    [Memo I]({{PRIOR_SIX_MEMO_URL}}), September 11, 1984, pp.
+    13–19, gives the six-square helper argument.
+    [Memo II]({{PRIOR_TEN_MEMO_URL}}), October 15, 1984, proves the ten-square result.
+    [Memo III]({{PRIOR_MEMO_URL}}), November 15, 1984, p. 10, states the unrestricted
+    eleven-square bound as a parenthetical extension of a restricted-orientation proof;
+    it does not supply the unrestricted proof there.
+
+[^novelty]: No intervening improvement on Stromquist’s bound, stated in
+    {{PRIOR_MEMO_YEAR}} and published in {{PRIOR_YEAR}}, is known to us.
     The search behind that statement, recorded in the repository, covered the project’s
     literature archive and source register, then arXiv, Crossref, OpenAlex and Semantic
     Scholar, author pages and the public packing catalogues, through September 4, 2026.
@@ -666,6 +686,10 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
 [^trump]: Walter Trump’s packing of 1979, as recorded in
     [Kingbird’s register of squares in squares]({{BEST_URL}}). The
     [rendering]({{BEST_RENDER_URL}}) is the project’s own.
+    Stromquist’s [Memo III]({{PRIOR_MEMO_URL}}), pp.
+    2–4, credits Mats Gustafsson and Magnus Thulin with the same construction, reported
+    by Gardner in November 1980; the research archive records their independent
+    rediscovery.
 
 [^burns]: Sam Burns,
     [Proposing a Better Lower Bound for n=17 Square Packing](https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/),

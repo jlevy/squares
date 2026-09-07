@@ -3,10 +3,12 @@
 This repository contains:
 
 - **[New results](#new-results).** The lower bound on `s(11)` has moved.
-  It appears to be the first improvement in 23 years on the smallest open case; the
-  previous bound, `3.7888543…`, was Stromquist’s in 2003. With it come the first bounds
-  located in the public record for twelve, twenty and twenty-one squares, and values
-  from `n = 17` through `n = 21` that displace what was in print.
+  It improves Stromquist’s `3.7888543…` bound, stated in
+  [1984, Memo III, p. 10](packing/resources/papers/stromquist-1984-packing-unit-squares-inside-squares-iii-cases-through-65-and-gardner-conjecture.pdf)
+  and published in 2003; no intervening improvement was found by the recorded search.
+  With it come the first bounds located in the public record for twelve, twenty and
+  twenty-one squares, and values from `n = 17` through `n = 21` that displace what was
+  in print.
 - **[A survey of the whole problem](#survey).** Every case `n = 1…100`, the primary
   literature retained and transcribed, and the bound a source *reports* kept apart from
   the bound this repository has *verified*. Seven of the lower bounds it shows were
@@ -60,7 +62,11 @@ Results first established here, as far as the recorded source searches show:
 - **[T-018](packing/frontier/RESULTS.md): `s(11) ≥ 381/100 = 3.81`, improving the lower
   bound for the smallest open case (`S5`).** [`s(11)`](packing/frontier/n-011.md) is the
   case this project exists for, and the recorded public search found no stronger lower
-  bound after Stromquist published `2 + 4/√5 = 3.788854` in 2003. A first-party
+  bound after Stromquist stated `2 + 4/√5 = 3.788854` in 1984 and published it in 2003.
+  The
+  [memo review](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md)
+  distinguishes that early statement from the later proof.
+  A first-party
   [weighted fractional unavoidable-set certificate](packing/cases/n11_fractional_certificate/)
   —1121 weighted atoms, total mass `434547/40000`, every placement of a shrunken square
   covering mass at least `1`—proves that eleven unit squares do not fit in a container
@@ -226,7 +232,7 @@ relevant source audit.
 | [**Frontier**](packing/frontier/STATUS.md) | One record per case for `n = 1…100`, with reported and verified bounds kept separate |
 | [**Atlas**](packing/atlas/README.md) | Known-best and prospective packings, contact-scaffold enumeration, and deterministic renderings |
 | [**Literature**](packing/resources/README.md) | Retained primary sources, cleaned transcriptions, and raw extractions |
-| [**Reports**](#reports) | Six research reports on the mathematics, algorithms, infrastructure, formal proof, and search strategy |
+| [**Reports**](#reports) | Seven research reports on the mathematics, algorithms, infrastructure, formal proof, and search strategy |
 | [**Code and development guide**](development.md) | Exact verification, search, promotion, and the [validation tiers and behavioral lanes](development.md#validation-tiers) that gate every change |
 | [**Campaign record**](packing/campaign/README.md) | Hypotheses, preregistered experiments, session records, agendas, and generated ledger |
 | [**Defect log**](defects.md) | Generated record of defects, detection methods, fixes, and regressions |
@@ -367,7 +373,7 @@ The Motion Lab is an exploratory instrument, not a citable research result.
 
 ## Reports
 
-These six research reports are the durable topical syntheses:
+These seven research reports are the durable topical syntheses:
 
 | Report | Scope |
 | --- | --- |
@@ -377,6 +383,7 @@ These six research reports are the durable topical syntheses:
 | [Infrastructure for Square-Packing Exploration](docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md) | Build order, latency tiers, language boundaries, and symbolic tooling |
 | [Lean for Square-Packing Proofs and Validation](docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md) | Where proof assistants fit and which certificate layers are suitable first targets |
 | [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | Basin cartography, structural diversity, relaxation ladders, and search strategy |
+| [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | Historical corrections, the three memo arguments, and a reusable conditional counting control |
 
 The reports distinguish formal proof, finite numerical checks, and source reports.
 The [document map](SYNOPSIS.md#document-map) identifies every maintained guide, dated
@@ -596,7 +603,7 @@ review. [`epistemics.md`](epistemics.md) owns whole-result classifications.
 ├── development.md          Python setup, engineering boundaries, and validation
 ├── defects.md              Generated view of packing/defects.yaml
 ├── docs/project/           Reports, reviews, specs, postmortems, and dated handoffs
-├── docs/project/research/  The six research reports listed above
+├── docs/project/research/  The seven research reports listed above
 ├── packing/                Code, data, and the research record
 │   ├── campaign/           Hypotheses, experiments, sessions, agendas, and ledger
 │   ├── frontier/           Per-case claims, evidence, generated views, and results
