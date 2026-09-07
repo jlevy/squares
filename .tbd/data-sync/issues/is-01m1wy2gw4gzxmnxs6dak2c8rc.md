@@ -5,15 +5,15 @@ title: Integrate n11 research bundle into an alternative exploration and agenda
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 labels:
   - agenda027
 dependencies: []
 parent_id: is-01m1wz2csvegxym6bvt099z2wz
 created_at: 2026-09-07T03:20:01.155Z
-updated_at: 2026-09-07T04:39:07.512Z
+updated_at: 2026-09-07T04:58:43.297Z
 ---
-W10 source assessment and planning, published in PR107 stacked on PR105. User locked all PR105 ID choices, including its X-017 through X-019 allocation. This program owns X-020, agenda-027, H-111 through H-117 and BC-258 through BC-268. The first draft X-017 was explicitly renamed to X-020; all native references and the PR table are updated. Source checkpoint f5684f51 was integrated without changing its IDs or scientific criteria. Preserve the supplied packet, critically adapt it into exploration/claims/agenda, document sequential allocation honoring parallel choices, add BC collision detection, validate and keep the PR record current. No successor experiments launched.
+W10 source intake and critical planning in PR107, stacked on PR105. Follow PR105 final locked allocation table at54d1ca98: X-017, agenda-027, H-111 through H-117, BC-258 through BC-268. Preserve every source-program ID. The temporary X-020 rename was reverted to the originally published X-017 after the source coordinator explicitly assigned it to PR107 and retired the old speculative block; native note and PR record explain the correction. Source research and closeout checkpoints integrated without changing scientific criteria. Packet preserved, new exploration/hypotheses/agenda prepared, BC collision detection added, source/record/CI validation retained. No successor experiments launched.
 
 ## Notes
 

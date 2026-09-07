@@ -5,7 +5,7 @@ title: "Agenda 027: independent compatibility and restricted-family program"
 kind: epic
 status: open
 priority: 1
-version: 14
+version: 15
 labels:
   - agenda027
 dependencies: []
@@ -22,6 +22,6 @@ child_order_hints:
   - is-01m1wz3rjajgb6mjsxchxntgw4
   - is-01m1wy2gw4gzxmnxs6dak2c8rc
 created_at: 2026-09-07T03:37:25.561Z
-updated_at: 2026-09-07T04:39:07.252Z
+updated_at: 2026-09-07T04:58:43.005Z
 ---
-Parallel research program from X-020 and agenda-027. All ID choices in PR105 are fixed, including its declared X-017 through X-019 exploration allocation. This program uses the next disjoint IDs: X-020, agenda-027, H-111 through H-117 and BC-258 through BC-268. Owns no speculative future range. Prepared planning proposal; successor execution is not launched during intake. Preserve source records and use their artifacts as evidence, not completion dependencies.
+PR107 follows PR105 final allocation table at54d1ca98 exactly: X-017, agenda-027, H-111 through H-117 and BC-258 through BC-268 belong to this program. All source-program choices remain fixed. No experiment or session ID is taken; no speculative future range. Prepared planning proposal; successor execution is not launched during intake. Use source artifacts as evidence, not completion dependencies.
