@@ -70,7 +70,7 @@ What is specific to this page, found while prototyping the feature on it:
 - Inlining composes families from two sources, so the page carries a second copy of each
   face the composite names: three PT Serif copies and three scaled Greek copies of KaTeX
   faces, about 216 KB of base64, plus the 32 KB metrics table.
-  The page grows from 1,177 KB to 1,441 KB. Accepted for now, and recorded here rather
+  The page grows from 1,177 KB to 1,418 KB. Accepted for now, and recorded here rather
   than discovered later; the way down is for kpress to ship the composite’s faces as
   subsets (the 62 Latin glyphs, the Greek range), which the generator already has the
   tooling for.
