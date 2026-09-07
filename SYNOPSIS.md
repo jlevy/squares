@@ -581,15 +581,18 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**Selected next entry:** `think-0za3`, BC-251’s scalar investigation, now commissioned
-in the fresh allocation.
+**Selected next entry:** `think-0za3`, the last terminal handoff’s scalar entry, now
+completed in the fresh allocation below.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
 `think-9qrx`, owns the user-approved four-active-hour block after PR 101 merged.
-BC-251/H-093 is running as exp-116 under its frozen 150-minute scalar invocation, with
-separate verification.
-BC-243 facet controls and BC-255 rational closed-angle controls passed independent
-review; the complete slab reader and source-control extensions remain separate readiness
-steps. Full validation of research checkpoint `99a3ad42` passed;
+BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
+dual mass of about10.080180 at depth one, below the obstruction threshold.
+No bridge or unchanged retry is selected.
+BC-243 has complete facet/slab controls and an accepted original source, but its uniform
+control timed out; a local arithmetic cache is under review.
+BC-255’s changed zero-angle source grid passed an independent corner reader; H-106 now
+names the full near-axis ten-point clause, with its continuous instrument still being
+built. Full validation of research checkpoint `99a3ad42` passed;
 [Session 089](packing/campaign/agent-sessions/session-089-agenda024-next-phases.md)
 retains that verdict and the completed experiments, which must not be repeated.
 [Agenda 024’s Current Allocation](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
@@ -2793,7 +2796,7 @@ round that names the hypothesis, control roles included.
 | [H-070](packing/campaign/hypotheses/H-070-n11-inset-seed-release.md) | **refuted** | At side `191/50`, the best eligible inset-screen seed improves exact rational mass after unrestricted release versus an equal-stop unseeded control | 1 | 8.2m wall |
 | [H-090](packing/campaign/hypotheses/H-090-n11-fixed-atom-core-shrink.md) | refuted | The fixed T-018 atoms retain enough covered mass after shrinking the core to `99769/100000` to certify side `3.8100381`; an exact corner witness rejects this side and every core side below `1849127/1853400`, leaving a narrower shrink interval open | 1 | 30s wall |
 | [H-091](packing/campaign/hypotheses/H-091-n11-narrow-core-shrink.md) | refuted | Core side `997696/1000000` retains minimum mass above `M/11`; its measured minimum `96377/100000` instead supplies an interior witness excluding every fixed-weight core shrink that could beat T-022 using ordinary containment | 1 | 31s wall |
-| [H-093](packing/campaign/hypotheses/H-093-n11-scalar-61-16-certificate.md) | running | The retained scalar core and net admit an exact mass-below-eleven certificate at side `61/16` | 1 | — |
+| [H-093](packing/campaign/hypotheses/H-093-n11-scalar-61-16-certificate.md) | unresolved | The retained scalar core and net admit an exact mass-below-eleven certificate at side `61/16` | 1 | 59.3m wall |
 | [H-094](packing/campaign/hypotheses/H-094-n11-weight-and-site-redesign.md) | open question | Which relative weights and site changes improve the fractional certificate beyond the fixed-weight shrink obstruction? | 0 | — |
 | [H-095](packing/campaign/hypotheses/H-095-n11-adaptive-core-certificate.md) | blocked | Nonconstant direction-specific cores admit an exact mass-below-eleven certificate at side `61/16` | 0 | — |
 | [H-096](packing/campaign/hypotheses/H-096-n11-angle-cell-kernels.md) | open question | Can whole-angle-cell kernels cover more useful positive mass with a tractable exact verifier? | 0 | — |
@@ -2806,6 +2809,7 @@ round that names the hypothesis, control roles included.
 | [H-103](packing/campaign/hypotheses/H-103-complete-typed-global-capture.md) | open question | Can a complete typed cover exclude every minimizing branch or place its entire surviving box inside the accepted local Trump neighborhood? | 0 | — |
 | [H-104](packing/campaign/hypotheses/H-104-fixed-side-point-cover-auxiliaries.md) | confirmed | The fixed point formulas at side1939/500 satisfy all seven exact0/45-degree auxiliary clauses | 1 | 2s wall |
 | [H-105](packing/campaign/hypotheses/H-105-exp113-overweight-pair-obstruction.md) | refuted | Exp113’s fixed weights have an overweight pair with intersecting interiors | 1 | 2s wall |
+| [H-106](packing/campaign/hypotheses/H-106-continuous-near-axis-ten-point-cover.md) | running | The unchanged ten-point formulas cover every contained square throughout the full near-axis angle neighborhood at1939/500 | 1 | — |
 
 ### Confirmed
 
@@ -3029,7 +3033,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-078.yaml` | session-078, session-082 | 2,401 | 13.41 h | 9.45 h | 10.0 h | yes |
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
-| `codex-task-tree-session-090.yaml` | session-090 | 217 | 1.53 h | 0.48 h | 0.48 h | yes |
+| `codex-task-tree-session-090.yaml` | session-090 | 819 | 6.03 h | 1.97 h | 1.97 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
@@ -3051,9 +3055,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 72 rounds registered in `series-000`.
+There are 73 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1163.8 wall-minutes.
+They record 2152.1 agent-minutes and 1223.1 wall-minutes.
 Exp-114 completed its one target and independent replay.
 Reader development costs are recorded separately from those process times.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
@@ -3162,7 +3166,8 @@ archive beside it.
 | [exp-113](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md) | 11 | target | H-099 | exact necessary-row ceiling on the frozen Trump D4 support | independently replayed ceiling56/5; complete a.e.-depth still unverified | unresolved |
 | [exp-114](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md) | 11 | target | H-104 | seven fixed-formula exact-angle auxiliary clauses at1939/500 | all seven clauses hold in the reviewed exact computation and independent input/receipt replay | accepted |
 | [exp-115](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-115-h-105-fixed-candidate-pair-obstruction.md) | 11 | target | H-105 | exact overweight-pair obstruction for exp113’s unchanged weights | all 134 eligible pairs have independently checked separating axes | rejected |
-| [exp-116](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-116-h-093-scalar-61-16.md) | 11 | target | H-093 | one frozen scalar attempt at side61/16 | prospectively allocated; no outcome yet | in-progress |
+| [exp-116](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-116-h-093-scalar-61-16.md) | 11 | target | H-093 | one frozen scalar attempt at side61/16 | all19row solves unconverged; exact dual mass20843712108/2067791663 at depth1 independently reproduced, below11 | unresolved |
+| [exp-117](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-117-h-106-continuous-near-axis.md) | 11 | target | H-106 | full near-axis ten-point cover on the fixed grid | prospectively frozen; target not yet run | in-progress |
 
 ### Cost and provenance
 
@@ -3239,11 +3244,12 @@ archive beside it.
 | exp-113 | one 60-second producer and one separate 60-second replay | 28.79 s | — | criterion | `e70458a9` |
 | exp-114 | one 10-second producer and one separate 10-second receipt/witness replay | 2.46 s | — | criterion | `e45c8a63` |
 | exp-115 | one 30-second producer and one separate 30-second file replay | 1.80 s | — | criterion | `cf299e6c` |
-| exp-116 | one 150-minute cooperative scalar invocation; separate exact verification | — | — | — | `4d305597` |
+| exp-116 | one 150-minute cooperative scalar invocation; separate exact verification | 3559.45 s | — | saturation | `4d305597` |
+| exp-117 | one ten-second producer and conditional ten-second independent replay | — | — | — | `cf0f4d4c` |
 
-### What the 72 rounds jointly establish
+### What the 73 rounds jointly establish
 
-The 72 rounds use 2152.1 agent-minutes and 1163.8 wall-minutes under the campaign’s
+The 73 rounds use 2152.1 agent-minutes and 1223.1 wall-minutes under the campaign’s
 retained effort accounting.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
 separately in Session089.

@@ -366,11 +366,10 @@ The user commissioned these three commitments in
 `codex/post-381-four-hour-research`. Its record owns the current slices and interruption
 accounting; the completed Session 089 allocation is not reopened.
 
-- **BC-251 / H-093:** the single 150-minute scalar invocation launched as exp-116 at
-  `00:46:18Z`, with verification time reserved.
-  Do not restart the live invocation.
-  It can run on one CPU while the coordinator manages the other workers; do not shorten
-  or reset its frozen cap.
+- **BC-251 / H-093:** exp-116 completed its single invocation and independent exact
+  family replay. All rows remained unconverged, and the best dual mass is about 10.080180
+  at depth one. H-093 is unresolved; neither a covering bridge nor an unchanged retry is
+  selected. Any changed mechanism starts with BC-252 assessment.
 - **BC-243 / H-099:** complete a.e.-depth verification of exp113’s unchanged candidate.
   BC-254 has handed off the finite-row bracket and exp115’s complete pair exclusion.
   Start with the

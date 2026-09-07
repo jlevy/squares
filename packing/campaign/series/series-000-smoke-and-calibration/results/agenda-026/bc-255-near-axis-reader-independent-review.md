@@ -127,8 +127,9 @@ These are single verification timings, not performance comparisons.
 CPU is the sum of the `/usr/bin/time -p` user and system values.
 No full repository gate or CI result is claimed by this delegated review; those remain
 with the coordinator.
-The documentation pass used the pinned Flowmark 0.4.0 with `--no-cache` after its default
-cache path was denied; the completed pass and the scoped whitespace check exited zero.
+The documentation pass used the pinned Flowmark 0.4.0 with `--no-cache` after its
+default cache path was denied; the completed pass and the scoped whitespace check exited
+zero.
 
 ## API and Independence Limits
 

@@ -413,6 +413,78 @@ unknown. No new target limit is adopted here.
 Refusal by the cheaper certificate shape is not a mathematical negative, and does not
 fund an automatic retry, changed points, smaller angle radius, or full event-root build.
 
+### Original-Source Control and a Different Root Mesh, 2026-09-07
+
+Session 090 implemented the rational near-axis kernel, then added coefficients in
+$\mathbb Q(\sqrt2)$ using the existing field implementation.
+The original-source axis-ten-cover clause was attempted once with the declared two-root
+binary subdivision: depth at most 10, at most 256 leaves, no sign subdivision, and a
+ten-second child cap.
+The run reached the leaf cap with 68 assigned and 188 unresolved leaves, in 1.54 seconds
+outer process wall time.
+The [packet](bc-255-angle-source-control.json) and
+[execution log](bc-255-angle-source-control.log) preserve that unresolved outcome.
+It does not refute the known source clause or authorize a target run.
+
+The follow-up under `think-8qp3` is a hand-derived change of root mesh, not a larger
+allocation for the same binary search.
+Put $r=\sqrt2$ and $w=s-1=1+4r/3$. At angle zero, a marked coordinate $p$ covers the
+normalized center interval $[(p-1)/w,p/w]$. The bottom, middle, and top point rows cover
+the three closed y-thirds because $w<3$. The middle row’s four x-coordinates $1-r/3$,
+$1+r/3$, $1+r$, and $1+5r/3$ cover, respectively, $[0,1/6]$, $[1/6,1/2]$, $[1/2,5/6]$,
+and $[5/6,1]$. The endpoint inequalities reduce to $r<3/2$, which follows from $2<9/4$.
+
+Thus a fixed six-column, three-row root grid is a sufficient source-only proposal.
+With the existing numeric-lexicographic ten-point ordering, assign the columns as
+follows:
+
+| Closed y-third | Point indices, left to right |
+| --- | --- |
+| Bottom | 1, 1, 4, 4, 7, 7 |
+| Middle | 0, 3, 3, 6, 6, 9 |
+| Top | 2, 2, 5, 5, 8, 8 |
+
+Splitting each of the 18 rectangles along its lower-left–upper-right diagonal gives 36
+closed triangles and 432 signed vertex obligations.
+A checker must reconstruct the entire named grid and reject missing or duplicate roots;
+supplied coordinates or counts cannot establish completeness.
+The existing polynomial and vertex proof can then be reused.
+Preserve the original binary mode and its failed source attempt.
+
+No new geometry execution occurred in this assessment.
+Estimated implementation is 15–20 active author minutes plus ten minutes of independent
+review. A new source-only control must freeze this changed representation before
+execution; the target side, continuous angle range, remaining theorem clauses, and
+standalone packet reader retain their separate readiness requirements.
+
+## Changed Source Mesh: Verified Checkpoint
+
+The changed grid producer at `cf88599d` completed all 432 signed triangle-vertex
+inequalities, with no unresolved obligation.
+Its single original-source invocation took 0.34 seconds outer wall and 0.31 CPU. The
+source-distinct reader then reconstructed the ten points and checked every corner of all
+18 rectangles: 72 corners and 288 signed inequalities, in 0.07 seconds wall and 0.07
+CPU. Both exited zero.
+The [producer packet](bc-255-angle-source-grid-control.json) and
+[reader decision](bc-255-angle-source-grid-replay.json) support only the original
+zero-angle ten-point clause.
+The earlier 256-leaf binary attempt remains unresolved in its unchanged record; the grid
+does not rewrite that result.
+
+The next instrument slice keeps the complete six-by-three center grid and source label
+matrix, evaluates the unchanged point formulas at `q=1939/500`, and checks both closed
+half-angle slabs `[-T,0]` and `[0,T]`, with the outward endpoint defined above.
+It uses no point optimization, narrower angle range, or sign subdivision.
+This tests the near-axis ten-point clause only; near-45-degree localization, three
+forcing clauses, and both twelve-point clauses remain separate obligations.
+A failed fixed-grid assignment is unresolved, not a geometric counterexample.
+
+`think-2gy1` allocates a 20-minute source-bound driver and toy-control slice.
+Acceptance still requires a source-distinct continuous-angle reader, independent review,
+and a prospectively committed auxiliary hypothesis and experiment.
+Neither the passed source control nor the earlier exact-angle H-104 result authorizes a
+target invocation.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

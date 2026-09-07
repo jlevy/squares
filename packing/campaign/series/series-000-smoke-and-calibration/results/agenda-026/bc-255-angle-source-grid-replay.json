@@ -1,0 +1,10 @@
+{
+  "corners_checked": 72,
+  "decision": "proved",
+  "h036_outcome": "unresolved",
+  "h102_outcome": "unresolved",
+  "inequalities_checked": 288,
+  "producer_inequalities_checked": 432,
+  "rectangles_checked": 18,
+  "scope": "original Theorem 3 axis-ten-cover at theta=0 only"
+}

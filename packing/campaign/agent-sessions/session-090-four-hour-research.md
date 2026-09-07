@@ -74,7 +74,7 @@ session:
     clock_role: work
     objective: Complete independent density coverage and the same-kernel algebraic angle source control while supervising exp-116.
     bead: think-9qrx
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: Both first control kernels passed review; source binding audits identified the next concrete prerequisites.
     budget_minutes: 30
@@ -84,10 +84,70 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --push
     kill_condition: An instrument premise fails or the bounded author allocation ends; no unresolved prerequisite authorizes target work.
     fallback: Retain the exact obligation and price only a changed continuation with independent work still active.
+    outcome: Slab coverage passed independent review. The quadratic source attempt hit its frozen leaf cap; independent review accepted its unresolved scope. Both are committed as 2ded0b4e.
+    evidence: [packing/devtools/density_slab_verifier.py, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-source-control.json]
+    stop_reason: The source outcome and hand-derived alternative justify a changed root representation, not a binary-cap retry.
+    next_action: Preserve the density adapter's original writer cap; commission a distinct grid-source control and source-distinct reader.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Implement the changed 6x3 original-source mesh and independent source-only reader while density adapters and exp-116 continue.
+    bead: think-ibdk
+    status: stopped
+    entered_by: evidence_checkpoint
+    switch_reason: The original binary source attempt is frozen unresolved; an exact hand-derived grid changes the certificate representation.
+    budget_minutes: 30
+    started_at: '2026-09-07T01:26:36Z'
+    deadline_at: '2026-09-07T01:56:36Z'
+    expected_output: One changed-representation source control, independent source-only replay, and a scoped readiness decision.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: Source producer or reader exceeds its separately frozen ten-second cap, a premise fails, or the author/review slice ends.
+    fallback: Retain the precise unresolved result; do not retry the original binary cap or authorize the target.
+    outcome: The changed angle source mesh and independent corner reader pass. Original density source passes both routes; uniform facet control times out at60seconds and has no reader invocation.
+    evidence: [packing/devtools/angle_grid_source_control.py, packing/devtools/check_angle_grid_source_control.py]
+    stop_reason: Source dispositions identify a density arithmetic bottleneck and permit the next continuous-angle instrument slice.
+    next_action: Cache repeated exact clearance inverses and independently disposition the completed scalar; no unchanged source retry.
+  - workflow: pipeline-improvement
+    focus: efficiency
+    recording: contemporaneous
+    clock_role: work
+    objective: Reduce repeated exact clearance inversions, build the continuous near-axis adapter, and review the terminal scalar evidence.
+    bead: think-063l
+    status: stopped
+    entered_by: evidence_checkpoint
+    switch_reason: The uniform density source exceeded its fixed cap; static assessment identified repeated field inversions without changing geometry or the proof.
+    budget_minutes: 30
+    started_at: '2026-09-07T01:54:24Z'
+    deadline_at: '2026-09-07T02:24:24Z'
+    expected_output: An independently reviewed local arithmetic cache, source-bound angle controls, and a scoped scalar disposition.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: A theorem-preservation premise fails or the bounded author/review slice ends; targets need separate prospective authority.
+    fallback: Keep the measured source timeout and scalar outcome; price only a changed next discriminator.
+    outcome: Scalar disposition, cache and continuous producer review completed. Cached original source and replay passed; remaining worker reports were interrupted and retained files require recovery review.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-116-h-093-scalar-61-16.md, packing/devtools/angle_near_axis_control.py]
+    stop_reason: At02:22:33UTC the worker tree was empty after operational handoff; temporary source checkouts had disappeared.
+    next_action: Recover retained evidence without repeating completed commands; independently review the unfinished reader and finish only the unstarted uniform control.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Recover interrupted worker evidence, finish independent angle readiness and publish the integrated checkpoint.
+    bead: think-hbni
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Retained files survived the operational interruption, but worker completion reports and temporary checkouts did not.
+    budget_minutes: 30
+    started_at: '2026-09-07T02:23:47Z'
+    deadline_at: '2026-09-07T02:53:47Z'
+    expected_output: Independent reader disposition, remaining changed-code source outcome, current records and a pushed checkpoint with validation in flight.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: A readiness premise fails, a frozen process cap expires, or the bounded recovery slice ends.
+    fallback: Publish exact unresolved obligations without restarting a completed experiment or extending a scientific cap.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Publish the reviewed rational/facet checkpoint while the two disjoint instrument authors continue.
+    next_action: Accept only reviewed artifacts, freeze any new target prospectively, and retain one integrated PR105.
   primary_bead: think-9qrx
   status: in_progress
   budget:
@@ -198,16 +258,16 @@ session:
     excluded_commands: [target geometry, target measurements, file edits, git mutations, tbd mutations]
   - task: BC243 source-distinct slab-kernel controls; think-w0nb
     operator: Codex gpt6_coverage_audit, max mathematical reasoning
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
-    files: []
-    checks: []
+    outcome: Complete vertical-event and open-band controls passed source-distinct review; no target readiness accepted.
+    evidence: [packing/devtools/density_slab_verifier.py, packing/tests/test_density_slab_verifier.py]
+    files: [packing/devtools/density_slab_verifier.py, packing/tests/test_density_slab_verifier.py]
+    checks: [18 author controls passed in 0.72s; 18 independent controls passed in 0.73s; Ruff and BasedPyright clean.]
     uncertainty: Shared field and validated geometry foundations remain explicit; target binding is separate.
-    elapsed_seconds: null
-    elapsed_quality: unavailable
-    next_action: Return complete vertical-event and open-band controls, then obtain independent review.
+    elapsed_seconds: 895
+    elapsed_quality: operator_reported_approximate
+    next_action: Complete source-bound adapters and separately measured original/uniform source controls.
     phase: 2
     budget_minutes: 30
     started_at: '2026-09-07T00:54:43Z'
@@ -220,16 +280,16 @@ session:
     excluded_commands: [target geometry, target measurements, git mutations, tbd mutations, registry edits]
   - task: BC255 algebraic original-source clause control; think-ggs2
     operator: Codex structural_lane_strategy, max mathematical reasoning
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
-    files: []
-    checks: []
+    outcome: The single source attempt hit 256 leaves with 68 assigned and 188 unresolved; independent review accepted this limited disposition.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-source-control.json]
+    files: [packing/devtools/angle_source_control.py, packing/tests/test_angle_source_control.py]
+    checks: [15 toy controls passed; independent toy replay passed in 0.15s; source attempt took 1.54s outer wall.]
     uncertainty: This is one original-source clause, not the seven-clause theorem or the prospective target.
-    elapsed_seconds: null
-    elapsed_quality: unavailable
-    next_action: Preserve rational controls, implement quadratic coefficients, and attempt the frozen source control once after admission checks.
+    elapsed_seconds: 736
+    elapsed_quality: operator_reported_approximate
+    next_action: Preserve the failed binary control and evaluate only the separately commissioned changed grid representation.
     phase: 3
     budget_minutes: 30
     started_at: '2026-09-07T01:03:56Z'
@@ -240,6 +300,314 @@ session:
     fallback: Retain the bounded source outcome without a cap retry; no target is authorized.
     write_scope: [packing/devtools/angle_tile_certificate.py, packing/tests/test_angle_tile_certificate.py, packing/devtools/angle_source_control.py, packing/tests/test_angle_source_control.py]
     excluded_commands: [target geometry, target measurements, git mutations, tbd mutations, registry edits]
+  - task: BC243 source-bound density adapters; think-6ngf
+    operator: Codex bound_lane_strategy, max mathematical reasoning
+    status: completed
+    recording: contemporaneous
+    outcome: Thin fixed-source producer and independent slab reader passed root review and 23 toy/refusal controls.
+    evidence: [packing/tests/test_full_size_density_faces.py]
+    files: [packing/devtools/run_full_size_density_faces.py, packing/devtools/check_full_size_density_faces.py, packing/tests/test_full_size_density_faces.py]
+    checks: [23 author controls passed in 1.50s; independent replay passed in 1.35s; Ruff and BasedPyright clean.]
+    uncertainty: Process ceiling 120 seconds is not a measured target budget; source controls remain separate.
+    elapsed_seconds: 862
+    elapsed_quality: operator_reported_approximate
+    next_action: Run separately commissioned original and uniform source controls from immutable c5f3a97f.
+    phase: 3
+    budget_minutes: 19
+    started_at: '2026-09-07T01:15:05Z'
+    deadline_at: '2026-09-07T01:33:19Z'
+    expected_output: Compact bound receipts, strict parser/control refusals, and independent complete positive replay.
+    validation_command: uv run --frozen --all-extras --group dev pytest tests/test_full_size_density_faces.py
+    kill_condition: A binding or soundness premise fails, or the writer deadline arrives.
+    fallback: Retain the incomplete adapter; do not execute source-scale or target geometry.
+    write_scope: [packing/devtools/run_full_size_density_faces.py, packing/devtools/check_full_size_density_faces.py, packing/tests/test_full_size_density_faces.py]
+    excluded_commands: [source-scale geometry, target measurements, git mutations, tbd mutations, registry edits]
+  - task: BC255 changed 6x3 source-grid control; think-ibdk
+    operator: Codex structural_lane_strategy, max mathematical reasoning
+    status: completed
+    recording: contemporaneous
+    outcome: The original zero-angle clause passes all432triangle inequalities with no unresolved obligations.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-source-grid-control.json]
+    files: [packing/devtools/angle_grid_source_control.py]
+    checks: [25author controls passed; independent replay passed; source outer wall0.34s and CPU0.31s.]
+    uncertainty: A positive producer receipt still needs the separately written source-only checker.
+    elapsed_seconds: 676
+    elapsed_quality: operator_reported_approximate
+    next_action: Preserve the source result; a continuous-angle driver and independent reader remain separate.
+    phase: 4
+    budget_minutes: 20
+    started_at: '2026-09-07T01:29:07Z'
+    deadline_at: '2026-09-07T01:49:07Z'
+    expected_output: Complete fixed-grid source packet or an explicit unresolved obligation.
+    validation_command: uv run --frozen --all-extras --group dev pytest tests/test_angle_grid_source_control.py
+    kill_condition: The ten-second source child cap, a failed control, or the author deadline.
+    fallback: Preserve the new source outcome without retrying either source representation or accessing the target.
+    write_scope: [packing/devtools/angle_tile_certificate.py, packing/tests/test_angle_tile_certificate.py, packing/devtools/angle_grid_source_control.py, packing/tests/test_angle_grid_source_control.py, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-source-grid-control.json, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-source-grid-control.log]
+    excluded_commands: [target geometry, original binary source retry, git mutations, tbd mutations, registry edits]
+  - task: BC255 source-distinct grid reader; think-0rez
+    operator: Codex gpt6_coverage_audit, max mathematical reasoning
+    status: completed
+    recording: contemporaneous
+    outcome: Independent replay proves all18rectangles through72corners and288signed inequalities.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-source-grid-replay.json]
+    files: [packing/devtools/check_angle_grid_source_control.py]
+    checks: [9toy/refusal controls passed; one source replay took0.07s wall and0.07s CPU.]
+    uncertainty: Direct rectangle checks cover only the original theta-zero source clause, not continuous target angles.
+    elapsed_seconds: 799
+    elapsed_quality: operator_reported_approximate
+    next_action: Preserve the source-only guarantee; the next full-range clause needs its own protocol.
+    phase: 4
+    budget_minutes: 20
+    started_at: '2026-09-07T01:29:36Z'
+    deadline_at: '2026-09-07T01:49:36Z'
+    expected_output: Strict bounded source-packet reader using independent source reconstruction and corner inequalities.
+    validation_command: uv run --frozen --all-extras --group dev pytest tests/test_check_angle_grid_source_control.py
+    kill_condition: A source-binding or completeness premise fails, or the author deadline arrives.
+    fallback: Preserve the missing reader obligation; producer acceptance is not independent verification.
+    write_scope: [packing/devtools/check_angle_grid_source_control.py, packing/tests/test_check_angle_grid_source_control.py, packing/devtools/check_full_size_density_support_ceiling.py]
+    excluded_commands: [original-source execution before authorization, target geometry, git mutations, tbd mutations, registry edits]
+  - task: BC243 original and uniform density source controls; think-wc2h
+    operator: Codex bound_lane_strategy, max mathematical reasoning
+    status: completed
+    recording: contemporaneous
+    outcome: Original producer and independent slab replay prove maximum1 and mass11; uniform producer times out at60seconds and its reader is not invoked.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-uniform-face-control.log]
+    files: []
+    checks: [Original producer20.35s wall19.30s CPU; reader4.48s wall4.44s CPU; uniform producer60.10s wall59.74s CPU.]
+    uncertainty: These measure source-scale readiness, not the exp-113 candidate or a packing bound.
+    elapsed_seconds: 248
+    elapsed_quality: operator_reported_approximate
+    next_action: Assess a justified arithmetic change; do not increase the cap or rerun unchanged source code.
+    phase: 4
+    budget_minutes: 10
+    started_at: '2026-09-07T01:35:10Z'
+    deadline_at: '2026-09-07T01:45:10Z'
+    expected_output: Original and uniform source dispositions, separate replay outcomes, and measured wall/CPU costs.
+    validation_command: uv run --frozen --all-extras --group dev packing-ledger check
+    kill_condition: Each process has its own 60-second cap; the operator slice also ends at its declared boundary.
+    fallback: A timeout or partial producer remains unresolved; do not replay it, retry its cap, or authorize a target.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-original-face-control.json, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-original-face-control.log, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-original-face-replay.json, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-original-face-replay.log, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-uniform-face-control.json, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-uniform-face-control.log, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-uniform-face-replay.json, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-uniform-face-replay.log]
+    excluded_commands: [target geometry, source cap retries, git mutations, tbd mutations, registry edits]
+  - task: BC243 local clearance reciprocal cache; think-063l
+    operator: Codex bound_lane_strategy, max mathematical reasoning
+    status: completed
+    recording: contemporaneous
+    outcome: Local lazy cache reduces the degree-eight toy clearance inversions from588to8 with identical exact outputs; root independently accepted theorem preservation.
+    evidence: [packing/devtools/density_face_verifier.py]
+    files: [packing/devtools/density_face_verifier.py, packing/tests/test_density_face_verifier.py]
+    checks: [35author controls7.78s wall7.70s CPU; independent replay7.77s wall7.73s CPU; Ruff and BasedPyright clean.]
+    uncertainty: Any source speedup and source readiness need separately allocated changed-code controls.
+    elapsed_seconds: 543
+    elapsed_quality: operator_reported_approximate
+    next_action: Run only the separately selected changed-code source controls from frozen b379bfc6.
+    phase: 5
+    budget_minutes: 20
+    started_at: '2026-09-07T01:54:24Z'
+    deadline_at: '2026-09-07T02:14:24Z'
+    expected_output: Theorem-preserving exact cache and durable equivalence/operation-count controls.
+    validation_command: uv run --frozen --all-extras --group dev pytest tests/test_density_face_verifier.py
+    kill_condition: A scientific premise fails or the declared slice boundary arrives.
+    fallback: Preserve the exact unresolved obligation without extending its allocation.
+    write_scope: [packing/devtools/density_face_verifier.py, packing/tests/test_density_face_verifier.py]
+    excluded_commands: [new target measurements, unchanged retries, git mutations, tbd mutations, shared registry edits]
+  - task: BC255 continuous near-axis source-bound driver; think-2gy1
+    operator: Codex structural_lane_strategy, max mathematical reasoning
+    status: completed
+    recording: contemporaneous
+    outcome: Source-bound two-slab driver frozen with864obligations; root review accepted its complete-domain and refusal semantics, not a target result.
+    evidence: [packing/devtools/angle_near_axis_control.py]
+    files: [packing/devtools/angle_near_axis_control.py, packing/tests/test_angle_near_axis_control.py]
+    checks: [34author controls2.80s wall1.50s CPU; independent replay1.28s wall1.23s CPU.]
+    uncertainty: An independent continuous reader and prospective target record are still required.
+    elapsed_seconds: 795
+    elapsed_quality: operator_reported_approximate
+    next_action: Complete the independent reader and freeze the target experiment before any target invocation.
+    phase: 5
+    budget_minutes: 20
+    started_at: '2026-09-07T01:55:02Z'
+    deadline_at: '2026-09-07T02:15:02Z'
+    expected_output: Fixed source-bound two-slab driver with toy/refusal controls and no target invocation.
+    validation_command: uv run --frozen --all-extras --group dev pytest tests/test_angle_near_axis_control.py tests/test_angle_tile_certificate.py
+    kill_condition: A scientific premise fails or the declared slice boundary arrives.
+    fallback: Preserve the exact unresolved obligation without extending its allocation.
+    write_scope: [packing/devtools/angle_near_axis_control.py, packing/tests/test_angle_near_axis_control.py, packing/devtools/angle_tile_certificate.py, packing/tests/test_angle_tile_certificate.py]
+    excluded_commands: [new target measurements, unchanged retries, git mutations, tbd mutations, shared registry edits]
+  - task: BC251 terminal scalar evidence and exact family replay; think-m8tj
+    operator: Codex gpt6_coverage_audit, max mathematical reasoning
+    status: completed
+    recording: contemporaneous
+    outcome: H093 remains unresolved; one exact replay reproduces depth1 and mass20843712108/2067791663, failing K3; all19row solves are unconverged.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-116-h-093-scalar-61-16.md]
+    files: []
+    checks: [One replay took134.64s wall and132.92s CPU; all181directions and frozen input/state/family identities match.]
+    uncertainty: The checker exit code means reproduction; rejection additionally needs mass at least eleven.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Preserve the unresolved scalar outcome without bridge or retry; continue the independent angle reader.
+    phase: 5
+    budget_minutes: 10
+    started_at: '2026-09-07T01:55:11Z'
+    deadline_at: '2026-09-07T02:05:11Z'
+    expected_output: Independent disposition of the one terminal scalar run; no unchanged retry or premature bridge.
+    validation_command: uv run --frozen --all-extras --group dev python -m devtools.replay_ceiling_family --check FAMILY.json
+    kill_condition: A scientific premise fails or the declared slice boundary arrives.
+    fallback: Preserve the exact unresolved obligation without extending its allocation.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-234-scalar-61-16-leg-01-replay.log]
+    excluded_commands: [new target measurements, unchanged retries, git mutations, tbd mutations, shared registry edits]
+  - task: BC255 source-distinct continuous near-axis reader; think-3xaz
+    operator: Codex gpt6_coverage_audit, max mathematical reasoning
+    status: blocked
+    recording: contemporaneous
+    outcome: Reader and tests survived, but no author completion report survived the operational handoff; independent recovery review is required.
+    evidence: [packing/devtools/check_angle_near_axis_control.py, packing/tests/test_check_angle_near_axis_control.py]
+    files: []
+    checks: []
+    uncertainty: Fixed-grid failure is unresolved; only full actual-angle coverage or a separately checked avoider decides H106.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Return source-distinct toy/refusal controls before independent review and prospective target dispatch.
+    phase: 5
+    budget_minutes: 20
+    started_at: '2026-09-07T02:02:02Z'
+    deadline_at: '2026-09-07T02:22:02Z'
+    expected_output: Strict source-bound two-slab rectangle reader with independent polynomial construction and exact signs.
+    validation_command: uv run --frozen --all-extras --group dev pytest tests/test_check_angle_near_axis_control.py
+    kill_condition: A completeness premise fails or the author deadline arrives.
+    fallback: Preserve the missing proof obligation; do not run a target or accept a producer alone.
+    write_scope: [packing/devtools/check_angle_near_axis_control.py, packing/tests/test_check_angle_near_axis_control.py]
+    excluded_commands: [target geometry or measurements, source retries, git mutations, tbd mutations, shared registry edits]
+  - task: BC243 changed-cache source controls; think-zkj0
+    operator: Codex coordinator, max mathematical reasoning
+    status: blocked
+    recording: contemporaneous
+    outcome: Cached original producer and independent replay passed; uniform invocation was not found and the temporary source checkout disappeared during interruption.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-original-cached-face-control.json, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-original-cached-face-replay.json]
+    files: []
+    checks: []
+    uncertainty: Toy inversion reduction does not establish source speedup or target readiness.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Measure original and uniform source producers once; replay only complete receipts.
+    phase: 5
+    budget_minutes: 10
+    started_at: '2026-09-07T02:06:57Z'
+    deadline_at: '2026-09-07T02:16:57Z'
+    expected_output: Changed-code original/uniform source dispositions with separate wall/CPU costs.
+    validation_command: python -m devtools.run_full_size_density_faces --control CONTROL --timeout-seconds 60
+    kill_condition: Each process reaches its unchanged60-second cap, a source control fails, or the operator slice ends.
+    fallback: Retain the unresolved obligation and no target; no unchanged retry or cap increase.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026]
+    excluded_commands: [target weights or measurements, unchanged source retries, cap increases]
+  - task: BC252 changed scalar mechanism assessment; think-csgu
+    operator: Codex bound_lane_strategy, max mathematical reasoning
+    status: blocked
+    recording: contemporaneous
+    outcome: No assessment report survived the operational handoff; the scalar evidence is intact and no new measurement was run.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-116-h-093-scalar-61-16.md]
+    files: []
+    checks: []
+    uncertainty: A changed row-completion or support proposal remains unmeasured and needs its own hypothesis and controls.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Price one changed discriminator from retained evidence without solver or geometry execution.
+    phase: 5
+    budget_minutes: 10
+    started_at: '2026-09-07T02:05:45Z'
+    deadline_at: '2026-09-07T02:15:45Z'
+    expected_output: A source-backed explanation of the scalar stop and a prioritized changed next test.
+    validation_command: Read-only inspection of exp116 receipts and the frozen row-generation driver.
+    kill_condition: The ten-minute assessment ends; no new measurement is authorized.
+    fallback: Keep H093 unresolved and prioritize independently active density/angle work.
+    write_scope: [none; read-only messages]
+    excluded_commands: [solver runs, geometry construction, profiling, retries, file edits, git or tbd mutations]
+  - task: Independent retained near-axis reader review; think-3xaz
+    operator: Codex angle_reader_recovery, max mathematical reasoning
+    status: completed
+    recording: contemporaneous
+    outcome: Independent review accepts the full fixed near-axis reader after root completed missing byte/CLI/alarm controls; no target has run.
+    evidence: [packing/devtools/check_angle_near_axis_control.py, packing/tests/test_check_angle_near_axis_control.py]
+    files: []
+    checks: [16source-free tests passed0.58s wall0.55s CPU; Ruff and BasedPyright clean.]
+    uncertainty: Recovery does not establish a new mathematical result or authorize an unchanged retry.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Return retained evidence and measured costs before the declared deadline.
+    phase: 6
+    budget_minutes: 10
+    started_at: '2026-09-07T02:23:47Z'
+    deadline_at: '2026-09-07T02:33:47Z'
+    expected_output: Independent mathematical and source-free control disposition of the retained reader.
+    validation_command: Source-free targeted controls or the separately frozen uniform-source CLI.
+    kill_condition: A proof premise fails, a frozen process cap expires, or the recovery slice ends.
+    fallback: Preserve unresolved evidence and no retry.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-near-axis-reader-independent-review.md]
+    excluded_commands: [target measurements, repeated completed commands, cap increases, Git mutations, shared registry edits]
+  - task: Complete only the unstarted changed uniform source; think-zkj0
+    operator: Codex density_control_recovery, max mathematical reasoning
+    status: completed
+    recording: contemporaneous
+    outcome: Uniform cached producer times out after60.09s wall58.94s CPU, with empty stdout; replay not invoked and source readiness remains unresolved.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-uniform-cached-face-control.log, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-uniform-cached-face-replay.log]
+    files: []
+    checks: []
+    uncertainty: Recovery does not establish a new mathematical result or authorize an unchanged retry.
+    elapsed_seconds: 272
+    elapsed_quality: operator_reported_approximate
+    next_action: Return retained evidence and measured costs before the declared deadline.
+    phase: 6
+    budget_minutes: 8
+    started_at: '2026-09-07T02:25:16Z'
+    deadline_at: '2026-09-07T02:33:16Z'
+    expected_output: One changed-code uniform producer and conditional complete-packet replay, each capped at60seconds.
+    validation_command: Source-free targeted controls or the separately frozen uniform-source CLI.
+    kill_condition: A proof premise fails, a frozen process cap expires, or the recovery slice ends.
+    fallback: Preserve unresolved evidence and no retry.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026]
+    excluded_commands: [target measurements, repeated completed commands, cap increases, Git mutations, shared registry edits]
+  - task: Recover changed scalar mechanism assessment; think-csgu
+    operator: Codex scalar_followup_assessment, max mathematical reasoning
+    status: completed
+    recording: contemporaneous
+    outcome: Fixed-site row completion is the next proposed discriminator; the stopped truncated dual does not establish site or row saturation. No launch allocated.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md]
+    files: []
+    checks: []
+    uncertainty: Recovery does not establish a new mathematical result or authorize an unchanged retry.
+    elapsed_seconds: 462
+    elapsed_quality: operator_reported_approximate
+    next_action: Return retained evidence and measured costs before the declared deadline.
+    phase: 6
+    budget_minutes: 10
+    started_at: '2026-09-07T02:24:24Z'
+    deadline_at: '2026-09-07T02:34:24Z'
+    expected_output: A read-only explanation and priced next discriminator, with no solver or geometry execution.
+    validation_command: Source-free targeted controls or the separately frozen uniform-source CLI.
+    kill_condition: A proof premise fails, a frozen process cap expires, or the recovery slice ends.
+    fallback: Preserve unresolved evidence and no retry.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md]
+    excluded_commands: [target measurements, repeated completed commands, cap increases, Git mutations, shared registry edits]
+  - task: BC243 exact facet-side membership reuse; think-8zdl
+    operator: Codex density_control_recovery, max mathematical reasoning
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: []
+    checks: []
+    uncertainty: Membership operation reduction is not a source speedup; independent review and changed-code source controls remain separate.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Compare inferred side-sign membership with direct oriented-edge tests on every retained toy probe.
+    phase: 6
+    budget_minutes: 20
+    started_at: '2026-09-07T02:31:32Z'
+    deadline_at: '2026-09-07T02:51:32Z'
+    expected_output: Complete canonical inward-edge incidence and exact membership reuse with durable agreement/operation-count controls.
+    validation_command: uv run --frozen --all-extras --group dev pytest tests/test_density_face_verifier.py
+    kill_condition: An orientation/completeness premise fails or the20-minute writer boundary arrives.
+    fallback: Preserve direct membership and source timeout evidence; no source or target invocation.
+    write_scope: [packing/devtools/density_face_verifier.py, packing/tests/test_density_face_verifier.py]
+    excluded_commands: [source or target geometry runs, cap increases, Git mutations, registry edits]
   outputs:
   - packing/campaign/agent-sessions/session-090-four-hour-research.md
   checks:
@@ -248,7 +616,7 @@ session:
   - Updated narrative-count negative control fired in 1.568s using a private source snapshot.
   - Root independently reviewed the rational angle kernel and replayed 8 controls; 0.05s pytest, 0.57s process wall, 0.42s CPU.
   stop_reason: null
-  next_action: Supervise exp-116 handle 16679 without restarting; finish the slab reader and source-binding designs, then publish the first checkpoint.
+  next_action: Continue PR105 with the changed density arithmetic and continuous near-axis controls; exp116 is terminal unresolved and must not be retried unchanged.
 ---
 # Session 090 — Four-Hour Research Block
 
@@ -290,8 +658,13 @@ Exp-116 launched once at `2026-09-07T00:46:18Z`; the retained execution handle i
 the outer process timer are `/private/tmp/squares-session090-exp116.stderr.log`. The
 four scientific output paths are frozen in the experiment.
 Do not consume the state in the bridge while its writer is active.
-The nominal 150-minute loop boundary is `03:16:18Z`, with any cooperative tail recorded
-separately. No convergence or bound is claimed at launch.
+The nominal 150-minute loop boundary was `03:16:18Z`; the producer instead stopped
+adding sites and finished by `01:43:23Z`. Its 3424.81 seconds outer wall and the sole
+134.64-second independent family replay are retained in exp-116. Every row solve was
+unconverged, and the exact dual mass is below eleven.
+The outcome is unresolved, with no covering bridge or unchanged retry.
+The completed state is safe to retain, but its existence does not satisfy the bridge’s
+convergence guard.
 
 The density author’s assigned interval ended at 00:43:08 UTC, 706 seconds after
 dispatch; this is assigned elapsed time, not measured attention.
@@ -352,6 +725,75 @@ Price the algebraic extension and the same-kernel original-source clause before 
 binding.
 The original seven-clause theorem includes further localization and multiplicity
 obligations and is not silently replaced by this one-clause control.
+
+## Integrated Publication and Source Controls
+
+[PR 105](https://github.com/jlevy/squares/pull/105) is the single draft successor.
+Its published `dc5ef612` checkpoint passed all required hosted checks, including Linux
+validation, geometry, sweeps and suite, macOS portability, and mergeability.
+Local pre-push validation was composed from all passing non-behavioral steps, 643
+passing reachable tests, and the remaining snapshot test passing unchanged after
+explicitly binding the synced environment.
+The earlier failures were missing cache, process-inspection access, and a snapshot
+without its dependency environment; no assertion, test selection, or dependency was
+changed. `think-5vpo` retains that repair.
+
+The independently reviewed slab and quadratic-source snapshot is `2ded0b4e`; the
+source-bound density adapters are `c5f3a97f`. These later commits are not covered by the
+earlier hosted verdict until the next push and completed checks.
+The density source controls use the immutable validation checkout at `c5f3a97f`. Each
+original/uniform producer and its independent reader gets one 60-second process cap,
+with no replay of an incomplete producer.
+The original source has expected maximum one; the uniform D4 average has expected
+maximum at most one, without presuming equality.
+Source costs are measured separately from any future candidate allocation.
+
+The new angle control changes the root mesh, not the old binary cap.
+Its fixed six-by-three grid, source labels, 36 triangles, and 432 vertex inequalities
+are specified in the
+[BC-255 design](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md).
+The producer gets one ten-second source invocation after toy/refusal controls.
+The source-distinct reader reconstructs the original K4 ten-set and checks all rectangle
+corners directly; its own ten-second source replay needs separate dispatch after review.
+Neither route accepts a continuous-angle target or the remaining theorem clauses.
+The shared bounded loader may accept a smaller caller-supplied byte cap but cannot
+exceed its existing two-MiB ceiling.
+
+## Efficiency Slice and Continuous-Angle Registration
+
+Phase 5 is the explicitly selected efficiency slice: the uniform source timeout
+motivates a local cache of exact normal-pair clearance inverses.
+Static review priced the cache before implementation; operation-count and exact-output
+controls precede any new source measurement.
+The previous timeout stays in its original record.
+There is no cap increase or target authorization in this change.
+
+In parallel, H-106 registers the unchanged ten-point set at side `1939/500` throughout
+the full near-axis neighborhood.
+The author and source-distinct reader use complete closed rational outer angle slabs and
+a fixed center grid, without target construction in their toy controls.
+This is one auxiliary clause, not all of H-036. Both implementations, their reviews, and
+a prospective experiment must be ready before target dispatch.
+
+## Operational Recovery at the Two-Hour Checkpoint
+
+At `02:22:33Z`, the coordinator observed that the previous worker tree was empty.
+Git still knew the temporary worktrees, but their directories and the temporary PR-body
+file were absent.
+Repository files, completed scientific outputs and bead state remained.
+The unavailable interval was not measured precisely; it is not charged as attentive
+agent time or a scientific timeout.
+No experimental budget resets.
+The nominal block milestones remain reference times until any documented active-time
+adjustment is made.
+
+Exp-116 and both original cached-density invocations were already complete and are not
+repeated.
+A fresh detached checkout at `b379bfc6` restores the same scientific source for
+the still-unstarted uniform control.
+Independent recovery review treats the retained continuous reader as unfinished author
+work until its mathematics and controls pass.
+The scalar follow-up is a read-only assessment, not another solver invocation.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

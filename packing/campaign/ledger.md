@@ -104,7 +104,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-087](agent-sessions/session-087-agenda022-continuation.md) | completed | contemporaneous | `research-loop` (correctness) | `efficiency-loop` (efficiency) | 2 | think-wufn | Take BC-215 (think-xejq), the one lever the efficiency block measured and did not wire: 20.2 per cent of deep-run work is repeated and 92 per cent of that is trees that did not move, so the tree-id cache is what takes the pull-request wall from about 221.70 s to the operator's two to two and a half minutes. |
 | [session-088](agent-sessions/session-088-validation-efficiency-checkpoint.md) | completed | retrospective | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 1 | think-rwte | Continue think-xejq with explained exhaustive-family planning under W5 Phase 3 after publishing this implementation and verifying its full hosted checkpoint. Preserve complete coverage until the selection and reuse contracts pass their invalidation fixtures. |
 | [session-089](agent-sessions/session-089-agenda024-next-phases.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 14 | think-jgnv | Select BC-251, think-0za3, for the next fresh allocation with its unchanged 150-minute process cap and separate verification. Agenda024 Current Allocation owns the parallel density and angle packages. Keep the integrated PR101 line while open; do not repeat exp113, exp114 or exp115. |
-| [session-090](agent-sessions/session-090-four-hour-research.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 3 | think-9qrx | Supervise exp-116 handle 16679 without restarting; finish the slab reader and source-binding designs, then publish the first checkpoint. |
+| [session-090](agent-sessions/session-090-four-hour-research.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 6 | think-9qrx | Continue PR105 with the changed density arithmetic and continuous near-axis controls; exp116 is terminal unresolved and must not be retried unchanged. |
 
 ### Workflow summary
 
@@ -118,7 +118,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
 | `research-loop` | 9 | 4 | 53 | 7 |
-| `pipeline-improvement` | 22 | 0 | 111 | 0 |
+| `pipeline-improvement` | 22 | 0 | 114 | 0 |
 | `documentation-pass` | 1 | 0 | 4 | 0 |
 | `review-planning-oversight` | 0 | 0 | 1 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
@@ -528,8 +528,8 @@ Status: **active**. Pursue stronger n=11 certificates through the scalar languag
 | BC-237 | research | 11 | blocked | 2 | think-fw95 | A build/no-build decision for the next richer measure language. |
 | BC-238 | measurement_validation | 11 | blocked | 0 | think-hjoe | A result object the central retention gate can judge without trusting its generator. |
 | BC-239 | measurement_validation | 11 | blocked | 0 | think-mss2 | The fractional program's honest yield, cost, negative results, and best continuation. |
-| BC-251 | research | 11 | ready | 0 | think-0za3 | Landed depth fixes and isolated seed/bridge controls pass at5267bd34; think-zuq5's readiness boundary is discharged. Freeze the one target invocation only with its full150-minute allocation and separately priced verification. No target has run in Session089; do not shorten or reset that invocation to fit the remaining checkpoint window. |
-| BC-252 | research | 11 | tentative | 1 | think-361m | A finite-model test whose exact outcome would change the allocation. |
+| BC-251 | research | 11 | complete | 0 | think-0za3 | Exp116 completed once in Session090: all19row solves unconverged, site addition stopped at iteration18, best exact dual mass20843712108/2067791663 and depth1 independently reproduced. H093 remains unresolved; no bridge or unchanged retry. BC252 may assess a changed row-completion or support mechanism. |
+| BC-252 | research | 11 | in_progress | 1 | think-361m | Session090's retained assessment selects fixed-site row completion before support adaptation: exp116 stopped on a truncated dual while allrow solves remained incomplete. Durable every-exit rows/timings/vector receipts and exact decision pricing remain prerequisites; no row-only target is launched. |
 | BC-253 | research | 11 | tentative | 2 | think-mw02 | A complete local forall-pose/exists-witness argument, not a sampled menu. |
 
 ### [agenda-026](agendas/agenda-026-density-stationarity-and-trump-capture.md) — Density, Typed Stationarity, and Trump Capture
@@ -557,7 +557,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 72 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 73 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -631,7 +631,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | H-070 | refuted | proof | At n = 11, outer side 191/50, and B = 9977/10000, the eligible minimum | one-sided inset: 1/2 2962983/4505800 15513/20000 | 1 |  | 8.2m wall |
 | H-090 | refuted | proof | With the frozen T-018 atoms, weights, outer side and 181 net direction | core side: 99769/100000 | 1 |  | 30s wall |
 | H-091 | refuted | proof | With the frozen T-018 atoms, weights, outer side and 181 net direction | core side: 997696/1000000 | 1 |  | 31s wall |
-| H-093 | running | proof | At container side 61/16, the retained 181-direction net and scalar cor |  | 1 |  |  |
+| H-093 | unresolved | proof | At container side 61/16, the retained 181-direction net and scalar cor |  | 1 |  | 59.3m wall |
 | H-094 | open question | proof | Which changes to relative atom weights and D4 site orbits overcome the |  | 0 |  |  |
 | H-095 | blocked | proof | At container side 61/16, the BC-230 adaptive-core language admits a fi |  | 0 |  |  |
 | H-096 | open question | proof | Can finite rational inner kernels, contained throughout their assigned |  | 0 |  |  |
@@ -644,6 +644,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | H-103 | open question | proof | Can a complete typed finite cover of every n = 11 side-minimizing conf |  | 0 |  |  |
 | H-104 | confirmed | proof | At q = 1939/500, the frozen P10, P12 and A-triple point formulas satis |  | 1 |  | 2s wall |
 | H-105 | refuted | proof | Among the 60 distinct D4 placements of trump11-v1, with exactly exp-11 |  | 1 |  | 2s wall |
+| H-106 | running | proof | At q=1939/500, every contained closed unit square with angle in [-pi/7 |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -680,7 +681,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 
-### unresolved (15)
+### unresolved (16)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -699,6 +700,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | exp-057 | series-000 | 68 | claude-opus-5 | H-058 | The release supports the literal printed-rational point model but supplies no provenance for applying either six-decimal coordinate rule to its fourteen-digit side token, so the conjunctive binding stops before BC-139 and H-058 remains unmeasured. |
 | exp-061 | series-000 | 20 | Claude (agent), Lane A of agenda-021 BC-197, bead think-g73w, session-086 | H-062 | The four decided rungs bracket the wall to [97/20, 39/8], width 0.025 against the registered 0.02, so the hypothesis is neither accepted on its own threshold nor rejected by either of its two rejection clauses -- no certificate was retained at 4.98 or above, and optima above twenty were found well below the ceiling. |
 | exp-113 | series-000 | 11 | Codex coordinator, max reasoning, think-2rxf in Session089 | H-099 | The verified ceiling56/5 exceeds11. It bounds the fixed-support problem but neither refutes H099 nor supplies the missing complete a.e.-depth proof. |
+| exp-116 | series-000 | 11 | Codex coordinator, max mathematical reasoning, think-0za3 in Session090 | H-093 | The driver stopped adding sites at iteration18 without row convergence; the replayed dual family has mass about10.08018, so neither acceptance nor rejection criterion holds. |
 
 ### blocked (6)
 
@@ -758,7 +760,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-116 | series-000 | 11 | Codex coordinator, max mathematical reasoning, think-0za3 in Session090 | H-093 | The single frozen invocation is running; no mathematical outcome is claimed. |
+| exp-117 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session090 BC255 | H-106 | Prospectively frozen; the sole target invocation has not started. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -776,7 +778,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 
 ## Effort
 
-72 rounds, 2152.1 agent-minutes, 1163.8 wall-minutes.
+73 rounds, 2152.1 agent-minutes, 1223.1 wall-minutes.
 
 ## Exploration reports not yet codified
 

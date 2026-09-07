@@ -1,0 +1,4 @@
+{"path": "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-234-scalar-61-16-leg-01-family.json", "placements": 768, "total_weight": "20843712108/2067791663", "total_weight_float": 10.080179972173532, "vertices": 2713960, "decided_exactly": 5154, "max_depth": "1", "max_depth_float": 1.0, "scaled_total": "20843712108/2067791663", "scaled_total_float": 10.080179972173532, "proved": false, "failures": ["K3 total weight at least n"], "recorded": {"vertices": 2713960, "max_depth": "1", "scaled_total": null}, "seconds": 134.4, "check": "reproduced"}
+real 134.64
+user 131.52
+sys 1.40

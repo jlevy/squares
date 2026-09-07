@@ -483,7 +483,7 @@ agenda:
     state: in_progress
     priority: 1
     question: What is the first complete proof obligation for a useful restricted structural theorem?
-    hypotheses: [H-036, H-102, H-104]
+    hypotheses: [H-036, H-102, H-104, H-106]
     budget: >-
       One assessment slice of at most 30 minutes, beginning with H-036's unchanged
       0.25-degree restricted-angle claim. State complete cases, a feasible control,
@@ -501,6 +501,9 @@ agenda:
       exhaustive computation and separate input/receipt check. H104 is accepted only
       at that narrow scope; H036's full angle-neighborhood claim remains unresolved.
       The continuous-angle instrument is separately priced and not automatically funded.
+      Session090 registers H106 for the full near-axis ten-point clause and selects
+      its source-bound instrument after the changed original-source grid and
+      independent corner reader pass. No continuous target has run at registration.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md

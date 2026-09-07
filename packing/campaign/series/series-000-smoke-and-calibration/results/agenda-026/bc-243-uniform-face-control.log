@@ -1,0 +1,15 @@
+Uniform source control only; no exp-113 candidate weights.
+Code revision: c5f3a97f
+Working directory: /private/tmp/squares-session090-validation.6CXAil/packing
+Interpreter: project Python 3.14.7; imports bound to the immutable checkout.
+Observed dispatch: 2026-09-07 01:37:39 UTC
+Outer command: /usr/bin/time -p env PYTHONPATH=src OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /Users/levy/wrk/github/squares/packing/.venv/bin/python -m devtools.run_full_size_density_faces --control trump-uniform-control-v1 --timeout-seconds 60 > /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-uniform-face-control.json 2>> /Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-uniform-face-control.log
+Exact stderr and outer /usr/bin/time -p output follow:
+unresolved: process wall cap expired
+real 60.10
+user 59.40
+sys 0.34
+Observed completed: 2026-09-07 01:38:40 UTC
+Exit status: 1
+Stdout: 0 bytes; no complete receipt.
+The independent uniform reader was not invoked. No retry or target was run.

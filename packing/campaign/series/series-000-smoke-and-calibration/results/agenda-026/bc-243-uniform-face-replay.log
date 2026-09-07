@@ -1,0 +1,4 @@
+NOT INVOKED: the uniform producer exited 1 at its frozen 60-second cap and emitted zero stdout bytes.
+Code revision: c5f3a97f
+No reader command was run; there is no reader stdout, exit status, wall time or CPU measurement.
+The uniform source-control replay obligation remains unresolved. No retry or target was run.

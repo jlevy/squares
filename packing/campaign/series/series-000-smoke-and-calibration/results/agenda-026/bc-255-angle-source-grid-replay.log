@@ -1,0 +1,7 @@
+{
+  "cpu_seconds": 0.007221999999999992,
+  "exit_code": 0,
+  "input": "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-source-grid-control.json",
+  "wall_cap_seconds": 10,
+  "wall_seconds": 0.007222082931548357
+}
