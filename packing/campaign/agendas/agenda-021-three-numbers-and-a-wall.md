@@ -1065,8 +1065,9 @@ agenda:
         rationale: >-
           This live handoff follows terminal Session090 and its passed full
           bc5c24b5 checkpoint. H106, H108 and H109 accept continuous auxiliaries;
-          H110 is the next unrun discriminator. H107 may run in parallel only
-          under a fresh sufficient allocation. Preserve BC215 as an uncompleted
+          H110 is the next unrun discriminator. The September7 amendment holds
+          H107 out of the next block and selects a bounded conditional-compatibility
+          assessment through Agenda024. Preserve BC215 as an uncompleted
           efficiency candidate and keep the work on the integrated research PR.
       operator_input:
         status: unavailable

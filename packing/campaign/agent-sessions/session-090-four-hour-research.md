@@ -727,7 +727,7 @@ session:
   - Root independently reviewed the rational angle kernel and replayed 8 controls; 0.05s pytest, 0.57s process wall, 0.42s CPU.
   - 'full gate: full at bc5c24b5: passed (all checks in 1574.90 seconds; actual terminal summary observed during finalization)'
   stop_reason: Selected scientific work and the full checkpoint are complete; remaining publication, hosted timing verification and the user-requested ID allocation are operational follow-up under think-qnyf and think-4cdg.
-  next_action: After Session090 closes, select think-qv73 under BC255 for H110's source-free fixed P12 escape instrument and independent review, then a fresh prospective experiment. A sufficiently funded next block may run H107 fixed-site scalar completion in parallel. Density remains source-blocked; no exp116 retry.
+  next_action: After Session090 closes, select think-qv73 under BC255 for H110's source-free fixed P12 escape instrument and independent review, then a fresh prospective experiment. The September7 priority amendment holds H107 out of the next block and selects a bounded conditional-compatibility assessment alongside H110. Agenda024 owns this revised allocation and the deferred bead. Density remains source-blocked; no exp116 retry.
 ---
 # Session 090 — Four-Hour Research Block
 
@@ -1059,14 +1059,15 @@ unchanged auxiliary construction, not H-036. A cap, malformed receipt or failed
 sufficient check is unresolved or refused.
 No outcome authorizes an automatic repair.
 
-The independent scalar lane is H-107 / BC-252. Its adapter and protocol are reviewed;
-exp-118 records a missed launch cutoff with no target or verification time spent.
-Allocate the full 35-minute producer, 20-minute shared sequential verification allowance
-and coordination margin in the next block.
-Reuse completed, unchanged proof-chain controls at their stated provenance, without
-calling them new replays.
-The scalar process can run alongside the P12 authors without consuming a separate agent
-slot. Do not restart exp-116 or hide support changes inside this fixed-site test.
+Post-closeout priority amendment, September 7: H-107 / BC-252 is held out of the next
+two-hour block under paused `think-7fec`. Its reviewed adapter and frozen protocol
+survive; exp-118 remains unlaunched history.
+The
+[Agenda 024 continuation](../agendas/agenda-024-post-381-24h-portfolio.md#selected-continuation-after-session-090)
+records the limited downstream value, later-session reopening conditions, and the
+bounded conditional-compatibility assessment selected instead.
+This amendment does not extend Session 090 or change any completed result.
+Do not restart exp-116 or hide support changes inside a future fixed-site test.
 
 If the P12 candidate is rejected, the next positive-proof priority is near-45 P10
 localization. Fix `q=1939/500` and `theta in [pi/4-pi/720,pi/4+pi/720]`. Let
