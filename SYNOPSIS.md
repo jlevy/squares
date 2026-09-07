@@ -3256,9 +3256,10 @@ archive beside it.
 | exp-114 | one 10-second producer and one separate 10-second receipt/witness replay | 2.46 s | — | criterion | `e45c8a63` |
 | exp-115 | one 30-second producer and one separate 30-second file replay | 1.80 s | — | criterion | `cf299e6c` |
 | exp-116 | one 150-minute cooperative scalar invocation; separate exact verification | 3559.45 s | — | saturation | `4d305597` |
-| exp-117 | one ten-second producer and one independent ten-second replay; both accepted | — | 0.37s | — | `cf0f4d4c` |
-| exp-118 | one2100-second total target cap and one1200-second shared verification cap | — | — | — | `46f38ab4` |
-| exp-119 | one ten-second producer and one independent ten-second reader; both accepted | — | 0.67s | — | `bdc68784` |
+| exp-117 | one ten-second producer and one independent ten-second replay; both accepted | 0.37 s | — | criterion | `cf0f4d4c` |
+| exp-118 | one 2100-second total target cap and one 1200-second shared verification cap; unlaunched | 0 s | — | dependency | `46f38ab4` |
+| exp-119 | one ten-second producer and one independent ten-second reader; both accepted | 0.67 s | — | criterion | `bdc68784` |
+| exp-120 | one ten-second producer and one conditional ten-second reader; prospectively registered | — | — | — | `57ad0dea` |
 
 ### What the 76 rounds jointly establish
 
