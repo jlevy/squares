@@ -3113,7 +3113,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-090.yaml` | session-090 | 1,341 | 9.8 h | 3.94 h | 3.95 h | yes |
 | `codex-task-tree-session-091.yaml` | session-091 | 553 | 5.05 h | 1.93 h | 1.93 h | yes |
 | `codex-task-tree-session-093.yaml` | session-093 | 673 | 6.07 h | 1.99 h | 1.99 h | yes |
-| `codex-task-tree-session-094.yaml` | session-094 | 351 | 2.75 h | 1.06 h | 1.06 h | yes |
+| `codex-task-tree-session-094.yaml` | session-094 | 562 | 4.53 h | 1.82 h | 1.82 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
@@ -3345,7 +3345,7 @@ archive beside it.
 | exp-124 | one thirty-second producer; conditional reader not invoked | 0.84 s | — | criterion | `a75d751a` |
 | exp-125 | one producer per band; only diagonal reader invoked | 1.90 s | — | criterion | `7daa7c55` |
 | exp-126 | one60-second scientific child; no reader invoked | 4.49 s | — | criterion | `7daa7c55` |
-| exp-127 | one120-second scientific child and conditional60-second independent replay | — | — | not invoked | `b38d0376` |
+| exp-127 | one120-second scientific child and conditional60-second independent replay | — | — | not invoked | `3bec06e2` |
 
 ### What the 83 rounds jointly establish
 

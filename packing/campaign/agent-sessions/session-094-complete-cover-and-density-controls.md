@@ -814,7 +814,74 @@ session:
     fallback: "Retain the unresolved bracket and exact missing premise without a scientific retry."
     write_scope: ["Read-only review"]
     excluded_commands: ["File or registry edits","Scientific source construction or target invocation","Git writes"]
+  - task: "Selected Session095 framework draft (think-69ko)"
+    operator: "Codex checkpoint_handoff_audit, high thinking"
+    status: completed
+    recording: contemporaneous
+    outcome: "Temporary draft frozen11:36:16; existing two-lane framework, original process caps and finalization reserve preserved. Planned timestamps require actual activation before registration."
+    evidence: ["packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md"]
+    files: []
+    checks: ["Structural schema passes without repairs; no scientific or registry actions."]
+    uncertainty: Actual scientific source agreement and target outcomes remain untested.
+    elapsed_seconds: 309
+    elapsed_quality: operator_reported_approximate
+    next_action: "Root binds the actual next-session start and selected handoff."
+    phase: 8
+    budget_minutes: 10
+    started_at: '2026-09-07T11:30:35Z'
+    deadline_at: '2026-09-07T11:40:35Z'
+    expected_output: Scoped checkpoint handoff evidence with exact remaining obligations.
+    validation_command: Read-only inspection and source-free record validation.
+    kill_condition: Original task deadline; no scientific invocation or cap extension.
+    fallback: Preserve the partial handoff and exact missing premise.
+    write_scope: ["/private/tmp/squares-session095-draft.md"]
+    excluded_commands: [Scientific source construction or target evaluation, Git or external writes]
+  - task: "BC259 static resource inventory (think-plct)"
+    operator: "Codex density_control_recovery, max thinking"
+    status: completed
+    recording: contemporaneous
+    outcome: "Inventory completed11:37:09. Identified archive rows, current seed and quotient APIs, independent row reader and unresolved source/order binding. Existing replay requires exp113 history and is not a drop-in adapter."
+    evidence: ["packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md"]
+    files: []
+    checks: ["Read-only source inspection; no source construction, geometry, tests or file writes."]
+    uncertainty: Actual scientific source agreement and target outcomes remain untested.
+    elapsed_seconds: 331
+    elapsed_quality: operator_reported_approximate
+    next_action: "Use the retained resource map for BC259 source-binding readiness without replaying exp126."
+    phase: 8
+    budget_minutes: 8
+    started_at: '2026-09-07T11:30:35Z'
+    deadline_at: '2026-09-07T11:38:35Z'
+    expected_output: Scoped checkpoint handoff evidence with exact remaining obligations.
+    validation_command: Read-only inspection and source-free record validation.
+    kill_condition: Original task deadline; no scientific invocation or cap extension.
+    fallback: Preserve the partial handoff and exact missing premise.
+    write_scope: ["Read-only resource inventory"]
+    excluded_commands: [Scientific source construction or target evaluation, Git or external writes]
+  - task: "Independent exp127 protocol review (think-60tt)"
+    operator: "Codex scalar_followup_assessment, max thinking"
+    status: completed
+    recording: contemporaneous
+    outcome: "GO at11:36:19. Exact source binding, positive-only independent reader, static limits, child-process timing and scoped theorem composition match the frozen instrument."
+    evidence: ["packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md"]
+    files: []
+    checks: ["Static review only; no constructors, scientific calls or tests."]
+    uncertainty: Actual scientific source agreement and target outcomes remain untested.
+    elapsed_seconds: 138
+    elapsed_quality: operator_reported_approximate
+    next_action: "Require corrected immutable push and committed record checks before the once-only Session095 call."
+    phase: 8
+    budget_minutes: 5
+    started_at: '2026-09-07T11:34:01Z'
+    deadline_at: '2026-09-07T11:39:01Z'
+    expected_output: Scoped checkpoint handoff evidence with exact remaining obligations.
+    validation_command: Read-only inspection and source-free record validation.
+    kill_condition: Original task deadline; no scientific invocation or cap extension.
+    fallback: Preserve the partial handoff and exact missing premise.
+    write_scope: ["Read-only protocol review"]
+    excluded_commands: [Scientific source construction or target evaluation, Git or external writes]
   outputs:
+  - packing/campaign/resource-usage/codex-task-tree-session-094.yaml
   - packing/devtools/h124_collision_source.py
   - packing/devtools/check_h124_collision_source.py
   - packing/devtools/h124_cover_source.py
@@ -822,6 +889,9 @@ session:
   - packing/devtools/run_h124_cover.py
   - packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md
   checks:
+  - Final immutable3bec06e2 push passes45 of66 named steps in147.88 seconds; external149.82 wall,201.59 user and24.40 system. This passes the exp127 engine-readiness gate. Committed protocol records and the explicit Session095 start remain separate admission requirements. Full and isolated fast handover gates are still running.
+  - Refreshed cost receipt spans09:49:00–11:38:21 UTC,6561 seconds wall and16314.546 recursive agent-seconds,562 responses. It remains a live lower bound; the final minutes are not inferred. Collector31.13 wall/25.27 CPU, task183 seconds. No raw prompts or reasoning retained.
+  - Engine b38d0376 push failed three record/inventory steps in163.82 seconds; 9d614fef resolved those but its186.15-second push found the stale82-round mutation anchor and its self-test. Anchor correction3bec06e2 passes163 static anchors and22 focused controls in0.31 seconds. Both superseded full gates were canceled after their known failures; neither is a claimed pass. Final immutable push/full are tracked separately.
   - Collision producer and reader are frozen and independently reviewed. Producer review think-543z passed at11:22:21 after117 seconds; root reader review think-r7q1 passed by11:21:30. The caller passed independent review. Root reran49 source-free reader/caller tests in1.29 seconds; producer reviewer reran41 in0.32 seconds wall and0.31 CPU. Ruff and BasedPyright are clean. No collision-source factory was invoked.
   - The frozen source delta passes the edit tier,44 of66 named steps in72.55 seconds. This is neither a full gate nor an immutable push result; those remain separate prerequisites.
   - Exp126 completed its only producer at actual exit zero in4.49 seconds external wall. It reported unresolved/overweight_clique and did not authorize a reader. No geometric invalidity or H099 refutation is certified; the bracket remains [11,56/5].
@@ -897,6 +967,49 @@ Mathematical authors and reviewers use max thinking; suitable mechanical work ma
 high or extra-high. Reader authoring is independent and file ownership is disjoint.
 Every worker retains its original cap and reports actual timing, tests and uncertainty.
 PR110’s Session092 and BC261/BC273 lane is not duplicated or merged before it lands.
+
+## Selected Final-slice Resources
+
+Continue H124/BC255 through the separately reviewed exp127 protocol, with at most one
+fixed collision-augmented axis producer and its positive-only reader. Retain exp125's
+diagonal proof. The independent secondary is the existing BC259/H099 support-ceiling
+review, initially thirty minutes with at most thirty more after concrete readiness.
+A verified ceiling of eleven would settle every weight vector on this support; a
+geometric diagnosis of exp126's current clique would settle only that vector.
+Neither allocation authorizes a scientific call without its own admission.
+
+The BC259 resource inventory was static, not an adoption verdict:
+
+- The [archived checker](../../resources/papers/n11-complete-research-bundle-2026-09-07/original_review/certificate/check_support_ceiling.py)
+  contains `ROWS`, `SIZES`, `WEIGHTS` and `incidence_on_box`; its neighboring
+  `support_exact_result.json` retains the supplied seven-row result. Its `geometry()`
+  is contributed reconstruction, not an independent current-source reader.
+- [Trump's current seed](../../cases/trump11/packing.py) defines `U_MIN_POLY` and
+  `U_INTERVAL` for the degree-eight half-angle parameter, not the side.
+  Its `build_in()` is a scientific constructor, not an import-time readiness check.
+- [Support construction](../../src/sqpack/full_size_density/support_ceiling.py)
+  exposes `build_support`, `necessary_row` and solver-free `check_upper` arithmetic.
+  [Labelled binding](../../src/sqpack/full_size_density/support_screen.py) preserves
+  every preimage, orbit and baseline count through `bind_source` and `support_metadata`.
+- The [existing independent reader](../../devtools/check_full_size_density_support_ceiling.py)
+  has separately structured `_direct_images` and `reconstruct_source`, bounded parsing
+  and oriented-edge row checks. Its `replay_packet` also requires exp113 screening
+  history and solve metadata; it is not a drop-in adoption interface. Do not fabricate
+  that history or bypass private guards. Shared seeds, arithmetic and reconstruction
+  must be declared, not described as independent derivation.
+
+The unresolved binding is the historical geometry, all 88 labelled images, the
+60-placement quotient and the eight-orbit order. Map the archive's representatives
+`(0,2,4,7,10,8,6,9)` explicitly to the current canonical order. Retained baseline
+assertions are sizes `(4,8,8,8,8,8,8,8)` and counts `(3,1,2,1,1,1,1,1)`.
+Verify all seven positive-area neighborhoods, mapped rows, nonnegative multipliers
+and their upper-bound identity. The candidate-depth box is a separate claim.
+
+Do not run the legacy source-review test file wholesale during source-free preparation:
+`test_trump_source_control_preserves_all_preimages_without_rows_or_solves` constructs
+the actual source. Some algebraic toy helpers use the Trump field, and the archive's
+own mutation checks share its geometry. Select genuinely unrelated controls and forbid
+scientific factories until the new protocol is admitted.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

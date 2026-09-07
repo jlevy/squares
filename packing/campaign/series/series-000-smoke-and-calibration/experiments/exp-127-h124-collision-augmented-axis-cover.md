@@ -15,7 +15,7 @@ experiment:
   subject:
     label: Fixed q=1939/500, T=110880/50803079, epsilon=1/500 and the original thirteen axis regions plus the proved Cstar S-center region
     engine: Independently source-bound exact closed-polygon endpoint-chain certificates
-    engine_commit: b38d0376
+    engine_commit: 3bec06e2
     assurance: verified
     method: exact-algebraic
     host_system: macOS arm64, project Python3.14.7
@@ -38,7 +38,7 @@ experiment:
     runs_per_condition: 1
     interleaved: false
     operator: Session095 coordinator, BC255; max mathematical judgment
-    commit: b38d0376
+    commit: 3bec06e2
     dirty: false
     entry_point: packing/devtools/run_h124_cover.py
     command: >-
@@ -79,11 +79,20 @@ angle bands. The new region is an S-center region: append it directly, without a
 Minkowski sum with the S kernel. Both independently implemented sources retain the
 old thirteen-region prefix and the same full center rectangle.
 
-Use the clean immutable `b38d0376` checkout, with `packing/` as the working directory.
+Use the clean immutable `3bec06e2` checkout, with `packing/` as the working directory.
 The independent source reviews, immutable push tier, independent protocol review and
 committed prospective record checks must pass before the new source is constructed.
 The full checkpoint gate is tracked separately; pending is not a claimed pass.
 The sole call is held until Session095 starts at or after 11:49 UTC.
+
+Independent protocol review passed at 11:36:19 UTC under `think-60tt` without any
+scientific invocation. The subsequent engine-pointer correction replaces `b38d0376`,
+whose push gate failed on record and status-inventory issues. A direct Git comparison
+confirmed that all seven new and reused source, caller and generic cover modules are
+unchanged at `9d614fef`. Its subsequent gate found only a stale narrative-round mutation
+anchor and that anchor's self-test; `3bec06e2` corrects the anchor from 82 to 83 while
+retaining the same mutation to 45. No scientific constants, algorithms or admission
+predicates changed. The final corrected immutable push must still pass before invocation.
 
 Static limits are fourteen polygons, at most 68 vertices, at most 72 supporting lines
 including rectangle walls, and at most 2,630 conservative x-events. The instrument's

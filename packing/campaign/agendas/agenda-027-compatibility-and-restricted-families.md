@@ -99,6 +99,12 @@ agenda:
       scope and propose its disposition to the source coordinator. Do not rewrite
       exp113/115 or consume the old source target budget. On failure, retain the
       exact missing binding and continue unrelated pilots.
+    note: >-
+      Session094's final-slice repricing selects this existing review as the
+      independent secondary lane for planned Session095, subject to fresh ownership
+      and readiness. It is stronger than diagnosing exp126's reported five-clique:
+      an independently bound ceiling of eleven would settle every weight vector on
+      this support. No target or adapter implementation is admitted by the inventory.
   - id: BC-260
     purpose: measurement_validation
     owner_focus: correctness
