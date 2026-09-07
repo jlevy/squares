@@ -803,6 +803,45 @@ def _cell(cell_id: str, state: str, depends_on: list[str]) -> dict[str, object]:
     }
 
 
+def test_agenda_cell_ids_are_unique_across_the_campaign(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Bare dependency IDs must identify one cell even across distinct agendas."""
+    monkeypatch.setattr(ledger, "dead_links", list)
+    monkeypatch.setattr(ledger, "board_ids", _empty_board_ids)
+    for later_id, expected in (
+        ("BC-902", []),
+        (
+            "BC-901",
+            [
+                (
+                    "duplicate agenda cell id BC-901: "
+                    "agenda-019-contract-test.md, agenda-021-contract-test.md"
+                )
+            ],
+        ),
+    ):
+        agendas = [
+            {
+                "id": agenda_id,
+                "_path": Path(f"{agenda_id}-contract-test.md"),
+                "status": "paused",
+                "items": [_cell(cell_id, "complete", [])],
+            }
+            for agenda_id, cell_id in (("agenda-019", "BC-901"), ("agenda-021", later_id))
+        ]
+        problems = ledger.check(
+            [],
+            [],
+            [],
+            [],
+            [],
+            agendas=agendas,
+            clock=_clock(dt.datetime(2026, 9, 5, tzinfo=dt.UTC)),
+        ).problems
+        assert problems == expected
+
+
 def test_depends_on_resolves_across_agendas_like_discharged_by(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

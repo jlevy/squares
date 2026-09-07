@@ -1,0 +1,6304 @@
+# Complete Standalone Proof of the 3.81 Bound
+
+This source includes the theorem, its proof, all 1,121 weighted atoms and a standard-library Python verifier. The Python and JSON fences are preserved verbatim. To run it offline, save the verifier fence as verify_claim.py and pass THIS packet filename to it. External source links are optional provenance; no repository dependency is needed.
+
+<a id="source-1"></a>
+
+## Source 1: `packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md`
+
+Snapshot `4d305597a505`, source lines 1-end.
+
+<a id="source-1-verifiable-claim-s11-ge-381100"></a>
+
+### Verifiable Claim: $s(11) \ge 381/100$
+
+Everything needed to check, with your own tools and without trusting this repository,
+that eleven unit squares do not fit in a square of side $381/100 = 3.81$: the
+claim, the theorem it instantiates, its proof, a verifier in Python’s standard library
+alone, and the certificate the verifier decides.
+Paste this one file into any coding agent, or read it yourself.
+It is the tighter of the two certificate rungs packaged here.
+
+<a id="source-1-the-claim"></a>
+
+#### The Claim
+
+Let $s(n)$ be the side of the smallest square that contains $n$ unit squares with
+pairwise disjoint interiors, the unit squares free to rotate.
+(Formally $s(n)$ is the infimum of the sides that admit such a packing.)
+
+**Claim.** $s(11) \ge 381/100$.
+
+The witness is the certificate `certificate.json`, 1121 weighted points and a net of
+181 rational directions, carried in full at the end of this file and kept
+in the repository as [`certificate.json`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/certificate.json). The verifier below decides five
+conditions on it in exact rational arithmetic, and the theorem below shows that the five
+conditions imply the claim.
+[`t-018-verifiable-claim-19-5.md`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md) does the same for
+$s(11) \ge 19/5$.
+
+<a id="source-1-the-theorem"></a>
+
+#### The Theorem
+
+The argument is a weighted, fractional form of the classical unavoidable-set argument
+for square packing, in the shape Gustavo Massaccesi used for $n = 17$ in August 2026
+after Sam Burns proposed the weighted form.
+Neither the theorem nor the certificate shape is this project’s; the $n = 11$ instance
+is.
+
+**Data.** An integer $n \ge 1$; rationals $L > 0$ (the container side) and $B > 0$ (the
+shrunken side); a direction net of rationals $0 = t_0 < t_1 < \cdots < t_K$, standing
+for the angles $\theta_k = 2 \arctan t_k$; and finitely many atoms $(x_i, y_i, w_i)$
+with rational coordinates and rational weights $w_i \ge 0$. For a set $Q$ in the plane
+write $\operatorname{mass}(Q) = \sum \{\, w_i : (x_i, y_i) \in Q \,\}$. The container is
+the closed square $[0, L]^2$.
+
+**Hypotheses.**
+
+- **Condition 1.** The weighted atom set is invariant under the eight symmetries of
+  $[0, L]^2$: for every atom, each of the eight images of its site under
+  $(x, y) \mapsto (x, y), (L - x, y), (x, L - y), (L - x, L - y), (y, x), (L - y, x), (y, L - x), (L - y, L - x)$
+  is a site of the same total weight.
+  The proof uses only the reflection $(x, y) \mapsto (y, x)$; the certificate declares
+  the full group, and checking it is a stronger hypothesis, hence safe.
+- **Condition 2.** $\sum_i w_i < n$.
+- **Condition 3.** $\theta_K \ge \pi/4$. Since $\tan(\pi/8) = \sqrt{2} - 1$ is the
+  positive root of $t^2 + 2t - 1$ and that polynomial increases for $t \ge 0$, this is
+  exactly $t_K^2 + 2 t_K - 1 \ge 0$, a rational inequality.
+- **Condition 4.** $B(1 + D) < 1$, where
+  $D = \max_k (t_{k+1} - t_k) / (1 + t_k t_{k+1})$. Since $\theta = 2 \arctan t$, half
+  the gap between adjacent net angles is $\arctan t_{k+1} - \arctan t_k$, whose tangent
+  is exactly that quotient, so $D$ is the tangent of the largest half-gap.
+- **Condition 5.** For every $k$ and every closed square $Q$ of side $B$ whose edges
+  make angle $\theta_k$ with the axes and which lies inside $[0, L]^2$:
+  $\operatorname{mass}(Q) \ge 1$.
+
+**Conclusion.** $n$ unit squares with pairwise disjoint interiors do not fit in
+$[0, L]^2$. Hence $s(n) \ge L$.
+
+<a id="source-1-the-proof"></a>
+
+#### The Proof
+
+Suppose closed unit squares $S_1, \dots, S_n \subset [0, L]^2$ have pairwise disjoint
+interiors. We derive $n \le \sum_i w_i$, contradicting Condition 2.
+
+1. **Orientation reduction.** A square is unchanged by a quarter turn, so its
+   orientation $\varphi$, the angle its edges make with the axes, may be taken in
+   $[0, \pi/2)$. If $\varphi > \pi/4$, apply the reflection $R(x, y) = (y, x)$. It maps
+   $[0, L]^2$ onto itself and sends a direction at angle $\alpha$ to angle
+   $\pi/2 - \alpha$, so $R(S_j)$ is a unit square in $[0, L]^2$ with orientation
+   $\pi/2 - \varphi \in (0, \pi/4)$. Write $S'_j$ for $S_j$ or $R(S_j)$, whichever has
+   orientation $\varphi' \in [0, \pi/4]$.
+2. **A net angle nearby.** By Condition 3 and $t_0 = 0$, the net angles run from $0$ to
+   at least $\pi/4$, so $\varphi'$ lies in some $[\theta_k, \theta_{k+1}]$, and the
+   nearer endpoint $\theta$ satisfies
+   $d := |\varphi' - \theta| \le (\theta_{k+1} - \theta_k)/2$. Since $\tan$ increases on
+   $[0, \pi/2)$, $\tan d \le D$.
+3. **A concentric shrunken square.** Let $Q$ be the closed square of side $B$, centered
+   at the center of $S'_j$, with orientation $\theta$. Its support function in the
+   direction of any edge normal of $S'_j$ is $(B/2)(\cos d + \sin d)$, while $S'_j$
+   extends $1/2$ from its center in that direction, so $Q$ lies in the open interior of
+   $S'_j$ as soon as $B(\cos d + \sin d) < 1$. Now
+   $\cos d + \sin d = \cos d \,(1 + \tan d) \le 1 + \tan d \le 1 + D$, and Condition 4
+   gives $B(1 + D) < 1$. Hence $Q \subset \operatorname{int}(S'_j) \subset [0, L]^2$,
+   strictly inside.
+4. **Condition 5 applies.** $Q$ is a closed $B$-square at the net angle $\theta$ lying
+   inside $[0, L]^2$, so $\operatorname{mass}(Q) \ge 1$.
+5. **Pull back.** Let $P_j = Q$ if $S'_j = S_j$, and $P_j = R(Q)$ otherwise.
+   Then $P_j \subset \operatorname{int}(S_j)$, and
+   $\operatorname{mass}(P_j) = \operatorname{mass}(Q) \ge 1$ because by Condition 1 the
+   weighted atom set is invariant under $R$: the atoms inside $R(Q)$ are the images of
+   the atoms inside $Q$, with the same weights.
+6. **Count.** The interiors of the $S_j$ are pairwise disjoint, so the $P_j$ are
+   pairwise disjoint and each atom lies in at most one of them.
+   With $w_i \ge 0$, $n \le \sum_j \operatorname{mass}(P_j) \le \sum_i w_i < n$.
+   Contradiction.
+
+So no such packing exists in $[0, L]^2$. If $s(n) < L$, the definition of the infimum
+gives a packing in some square of side $L' < L$, which sits inside $[0, L]^2$; therefore
+$s(n) \ge L$.
+
+Two remarks a careful reader will want settled.
+First, $Q$ is closed and Condition 5 counts atoms on its boundary.
+This never double-counts, because step 3 puts $Q$ strictly inside the interior of one
+unit square. Second, Condition 5 quantifies over every $B$-square inside $[0, L]^2$ at a
+net angle, a superset of the squares the proof meets.
+A stronger hypothesis can only make the theorem harder to apply, never unsound.
+
+<a id="source-1-why-the-sweep-is-exact"></a>
+
+#### Why the Sweep Is Exact
+
+Condition 5 quantifies over a continuum of centers, and the verifier decides it by a
+finite enumeration. At the net direction with half-tangent $t_k$, put
+$c_k = (1 - t_k^2)/(1 + t_k^2)$ and $s_k = 2 t_k/(1 + t_k^2)$, so that
+$c_k^2 + s_k^2 = 1$ exactly, and $h_k = (B/2)(|c_k| + |s_k|)$. The closed $B$-square at
+that direction with center $(X, Y)$ lies inside $[0, L]^2$ exactly when
+$h_k \le X, Y \le L - h_k$, and it contains the atom at $(x_i, y_i)$ exactly when
+$|c_k (x_i - X) + s_k (y_i - Y)| \le B/2$ and
+$|-s_k (x_i - X) + c_k (y_i - Y)| \le B/2$. In the rotated coordinates
+$U = c_k X + s_k Y$ and $V = -s_k X + c_k Y$, each atom therefore contributes its weight
+on one closed axis-parallel rectangle of centers, and the edges of these rectangles,
+with the four lines at the extreme $U$- and $V$-coordinates of the admissible square,
+cut the plane into finitely many open cells.
+The admissible square is oblique in these coordinates unless $\theta_k$ is a multiple of
+$\pi/2$, and its own edges are not among the lines: a cell may straddle one of them, and
+the clipping test in `least_mass` decides exactly which cells meet the square, from the
+exact range of $V$ the square occupies over each strip between adjacent $U$-lines.
+The covered mass is constant on each open cell.
+On a cell’s boundary it can only be larger, because the rectangles are closed and the
+weights are nonnegative.
+And every admissible center lies in the closure of some open cell that meets the
+admissible square: that square has interior when $2 h_k < L$, so it has interior points
+within every distance of the center; finitely many lines cannot cover an open set, so
+within every distance of the center some cell meeting the square has a point; and there
+are finitely many cells, so one cell does at every distance, which is to say the center
+lies in its closure.
+So the least mass over all admissible centers is the least over the open cells that meet
+the admissible square, and scoring each of them once decides Condition 5 at that
+direction. Every quantity is rational, so every score is exact.
+
+Two shapes of the admissible square need no cells.
+When $2 h_k > L$, no $B$-square at that direction fits inside the container, so
+Condition 5 quantifies over nothing there and holds vacuously; the verifier counts such
+a direction as admitting no placement rather than as decided, and a certificate whose
+every direction admits none is reported as having decided nothing.
+When $2 h_k = L$, the one admissible center is $(L/2, L/2)$, and the verifier scores
+that single closed square directly.
+Neither arises here: $B < 1$ and $L > 2$, so $2 h_k \le B \sqrt{2} < L$ at every
+direction.
+
+<a id="source-1-how-to-check-it"></a>
+
+#### How to Check It
+
+Save this file as `t-018-verifiable-claim-381-100.md` and the verifier block below as `verify_claim.py`,
+then run the verifier on this file with any CPython 3.12 or later.
+It needs nothing outside the standard library, and it reads the certificate out of the
+fenced `json` block at the end.
+
+```
+python verify_claim.py t-018-verifiable-claim-381-100.md
+```
+
+It also accepts the certificate on its own, saved from that block as `certificate.json`.
+
+It prints one line per condition, then a line comparing the file’s declared `claim`,
+`total_mass` and `least_cell_mass` with what it computed, then a verdict.
+For this certificate the verdict is `VERIFIED: s(11) >= 381/100`, with Condition 5
+reporting the least covered mass $4001/4000$ at direction $0$ and center
+$(27/50, 27/50)$ over the 181 directions.
+It takes about 3 minutes in pure Python on a laptop, most of it on the finite sweep of
+Condition 5 that “Why the Sweep Is Exact” describes.
+The sweep runs only once Conditions 1 to 4 hold; after a failure among them, the
+Condition 5 line says it was not evaluated.
+Before any condition, a file that is not a certificate of the theorem’s shape is refused
+by name: among the refusals are a rational written as a JSON number, a negative weight,
+a `variant` other than `unconditional`, an atom outside the container, and two atoms at
+one site. The theorem would tolerate the last two, an outside atom only adding to the
+total and a repeated site being one site of the summed weight, but a well-formed
+certificate has neither, and the pinned checker `minimal_verify.py`, beside this file in
+the repository, refuses them too.
+A duplicate JSON key or a net parameter outside $0 < T < 1$ is also refused.
+
+The exit status is 0 only when all five conditions hold and the three declarations
+match, and 1 on any refusal.
+A third status, 2, means no verdict was reached: a usage error, or the sweep’s own
+cross-check failing.
+At every direction the verifier re-sums the atoms directly at the center it reports and
+compares that with the swept minimum; a disagreement is a bug in the verifier, not in
+the certificate, and it prints one line beginning `INTERNAL ERROR` in place of the
+verdict. Four perturbations show the verifier deciding rather than agreeing, each with
+its magnitude and the line that refuses it.
+Condition 5 holds by the margin $4001/4000 - 1 = 1/4000$, and the
+placement attaining it, centered at $(27/50, 27/50)$, covers the atom at
+$(43/100, 99/100)$, of weight $7/4000$ and one of 8 in its orbit,
+the atoms at $(43/100, 99/100), (43/100, 141/50), (99/100, 43/100), (99/100, 169/50), (141/50, 43/100), (141/50, 169/50), (169/50, 99/100), (169/50, 141/50)$.
+
+- Lighten all 8 atoms of that orbit by $1/1000$, more than the
+  margin. Conditions 1 to 4 still hold, and Condition 5 fails: that placement now covers
+  at most $3997/4000$, and the least covered mass reported is no more
+  than that.
+- Lighten one of them alone by the same amount, or drop it.
+  Condition 1 fails, and Condition 5 is not evaluated.
+- Set `angle_limit` to $41/100$, short of $\tan(\pi/8) = 0.4142\ldots$. Condition 3
+  fails, and Condition 5 is not evaluated.
+- Lighten the central atom at $(381/200, 381/200)$, a one-point orbit of weight
+  $27899/200000$, by the margin $1/4000$ or by less.
+  All five conditions still hold: Condition 1 is untouched, Condition 2 improves, and
+  every placement loses at most the margin.
+  What refuses the file is the declarations line, since its `total_mass` is now stale;
+  write the values that line computed into the file, and the verdict is `VERIFIED`.
+
+The first two also leave the file’s `total_mass` stale, and the first its
+`least_cell_mass`; the declarations line, after the conditions, says so.
+The condition lines are what to read.
+
+<a id="source-1-how-this-repository-decided-it"></a>
+
+#### How This Repository Decided It
+
+Beyond the verifier in this file, the repository decides these bytes twice more, by two routes that share no code with it. With each other they share the `Certificate` representation, the loader that fills it from the file, and Conditions 2 to 4, decided once in closed form; what differs is how each decides Condition 5. The exact event-cell sweep in [`certificate.py`](https://github.com/jlevy/squares/blob/9307172a/packing/src/sqpack/fractional/certificate.py) does at every net direction what “Why the Sweep Is Exact” describes and reports the least covered mass $4001/4000$ at direction $0$. The interval branch and bound in [`interval.py`](https://github.com/jlevy/squares/blob/9307172a/packing/src/sqpack/fractional/interval.py) works with directed rounding on the doubled net, the net directions and their reflections across the diagonal, so it never invokes Condition 1 and covers every orientation directly. The retention gate, [`decide_certificate.py`](https://github.com/jlevy/squares/blob/9307172a/packing/devtools/decide_certificate.py), builds the one `Certificate` both routes read, and accepts it only when both do and the interval route’s enclosure of the least covered mass has width zero and equals the sweep’s value exactly; both accepted this one. Two algorithms over one loaded object are not two independent implementations, nor two independent readings of the file, and the second and third decisions are worth exactly that much. The gate decides only unconditional certificates: a file declaring a `variant` other than `unconditional` is refused before either route runs, as it is by the verifier in this file, and these bytes declare none.
+
+The certificate embedded below is the file `certificate.json`, whose SHA-256 is `b121edbd044b6f326022d8783551efd947c95eec2738269857d039358ac6ae6a`.
+
+[`minimal_verify.py`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/minimal_verify.py), beside this file in the repository, is another standard-library check, pinned to exactly these bytes by that digest; [`t-018-proof-card.md`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/t-018-proof-card.md) states the claim on one page, and [`t-018-proof-visual.svg`](https://github.com/jlevy/squares/blob/9307172a/packing/cases/n11_fractional_certificate/t-018-proof-visual.svg) draws the atoms, the tight Condition 5 witness and the shrink step.
+
+<a id="source-1-the-verifier"></a>
+
+#### The Verifier
+
+`verify_claim.py`, byte for byte as kept beside this document at
+[`verify_claim.py`](07-standalone-381-proof.md#source-1).
+
+````python
+#!/usr/bin/env python3
+"""Decide a fractional unavoidable-set certificate for s(n) >= L, exactly.
+
+Usage:  python verify_claim.py certificate.json
+        python verify_claim.py t-018-verifiable-claim-19-5.md   (embeds the certificate)
+
+Standard library only, CPython 3.12 or later. Every decision is made in
+fractions.Fraction. One line is printed per condition, then one comparing the file's
+declared claim, total_mass and least_cell_mass with what was computed, then VERIFIED
+or REFUSED; the exit status is 0 only when all five conditions hold and the
+declarations match, and 1 on any refusal. Condition 5, the sweep, is evaluated only
+once Conditions 1 to 4 hold, and its line says so when it was not. A file that is not
+a certificate of the form below is refused by name before any condition. If the
+sweep's own cross-check fails, the verifier and not the certificate is broken: one
+line beginning INTERNAL ERROR replaces the verdict, and the exit status is 2, as it
+is for a usage error.
+
+THE THEOREM. Let s(n) be the least side of a square containing n unit squares
+with pairwise disjoint interiors, rotation allowed. A certificate names an
+integer n >= 1, rationals L > 0 (container side) and B > 0 (shrunken side), a
+net parameter 0 < T < 1 and rationals t_k = T k / K standing for the angles
+2 arctan(t_k), and atoms (x_i, y_i, w_i) with rational coordinates and weights
+w_i >= 0; the mass of a set is the total weight of the atoms in it. If
+  Condition 1  the weighted atoms are invariant under the eight symmetries of
+               the container [0, L]^2;
+  Condition 2  the total weight is strictly less than n;
+  Condition 3  2 arctan(t_K) >= pi/4, decided as t_K^2 + 2 t_K - 1 >= 0;
+  Condition 4  B (1 + D) < 1 for D = max_k (t_{k+1} - t_k) / (1 + t_k t_{k+1}),
+               the tangent of the largest half-gap between adjacent net angles;
+  Condition 5  every closed square of side B at a net angle that lies inside
+               [0, L]^2 has mass at least 1;
+then n unit squares with disjoint interiors do not fit in [0, L]^2, so s(n) >= L.
+(Each unit square, reflected in the diagonal if its angle exceeds pi/4, contains
+strictly inside it a B-square at the nearest net angle, of mass >= 1; the n such
+squares are disjoint, so the total weight is at least n, against Condition 2.)
+
+minimal_verify.py, beside this file, is the other standard-library check: it is
+pinned by SHA-256 to the retained 381/100 certificate, refuses at the first failing
+check instead of reporting Conditions 1 to 4 in full, and shares this file's floor.
+This file decides any certificate of the form above, within the size ceilings below,
+and is the one the claim documents embed.
+"""
+
+# ruff: noqa: N803, N806  -- L, B, D, F, U, V, X, Y are the theorem's own symbols.
+
+import argparse
+import json
+import re
+import sys
+from bisect import bisect_left, bisect_right
+from collections.abc import Sequence
+from fractions import Fraction
+from itertools import accumulate, pairwise
+from math import lcm
+from pathlib import Path
+
+# Ceilings on a certificate's size, so that a run stays within memory and within the hour
+# on an ordinary machine. At one direction the event grid holds up to (2 atoms + 2)^2
+# cells as Python integers: measured on 2026-09-05 at 450 MB and a second per direction
+# for the retained 1,121 atoms, and at 1.2 GB and three seconds at the atom ceiling. A
+# larger certificate is refused before any condition, by name; a reader who raises these
+# knows what the run will cost. The retained certificates have 1,121 atoms and 181
+# directions; the repository's retention gate accepts up to 4,096 atoms.
+MAX_ATOMS = 2000
+MAX_DIRECTIONS = 1000
+
+
+def object_without_duplicate_keys(pairs):
+    """Build one JSON object, refusing a name whose second value would hide its first."""
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON object key {key!r}")
+        result[key] = value
+    return result
+
+
+def load(path):
+    """The certificate as (n, L, B, tangents, atoms, declared), where declared holds the
+    file's own claim, total_mass and least_cell_mass for comparison with what is
+    computed; any other shape is refused. So are an atom outside [0, L]^2 and two atoms
+    at one site: the theorem would tolerate both, an outside atom only adding to the
+    total and a repeated site being one site of the summed weight, but neither is a
+    well-formed certificate, and minimal_verify.py refuses them too.
+
+    The path is the certificate's JSON file, or a Markdown document carrying it in a
+    fenced json block: each verifiable-claim document embeds the certificate it
+    decides, so the whole claim travels as one file."""
+    text = Path(path).read_text(encoding="utf-8")
+    if not text.lstrip().startswith("{"):
+        fence = re.search(
+            r"^`{3,}json[ \t]*\n(.*?)^`{3,}[ \t]*$", text, re.MULTILINE | re.DOTALL
+        )
+        if fence is None:
+            message = "neither a JSON object nor a Markdown document with a fenced json block"
+            raise ValueError(message)
+        text = fence.group(1)
+    record = json.loads(text, object_pairs_hook=object_without_duplicate_keys)
+
+    def rational(value):
+        if not isinstance(value, str):  # a JSON float would be rounded: refuse it
+            message = f"rationals must be strings such as '19/5', got {value!r}"
+            raise TypeError(message)
+        return Fraction(value)
+
+    variant = record.get("variant", "unconditional")
+    if variant != "unconditional":  # a class or conditional certificate claims something else
+        message = f"variant {variant!r} declared; only unconditional certificates are decided"
+        raise ValueError(message)
+    n, K = record["n"], record["direction_steps"]
+    if not (isinstance(n, int) and isinstance(K, int) and n >= 1 and K >= 1):
+        message = "n and direction_steps must be integers, n >= 1 and direction_steps >= 1"
+        raise ValueError(message)
+    L, B, T = (rational(record[key]) for key in ("outer_side", "square_side", "angle_limit"))
+    if not (L > 0 and B > 0):
+        message = "outer_side and square_side must be positive"
+        raise ValueError(message)
+    if not 0 < T < 1:
+        message = f"angle_limit T = {T} is outside the supported range 0 < T < 1"
+        raise ValueError(message)
+    if len(record["atoms"]) > MAX_ATOMS or K + 1 > MAX_DIRECTIONS:
+        message = (
+            f"{len(record['atoms'])} atoms over {K + 1} directions; this verifier decides "
+            f"at most {MAX_ATOMS} atoms and {MAX_DIRECTIONS} directions"
+        )
+        raise ValueError(message)
+    atoms, sites = [], set()
+    for atom in record["atoms"]:
+        x, y, w = (rational(value) for value in atom)
+        if w < 0:
+            message = f"negative weight {w} at ({x}, {y})"
+            raise ValueError(message)
+        if not (0 <= x <= L and 0 <= y <= L):
+            message = f"atom ({x}, {y}) lies outside the container [0, {L}]^2"
+            raise ValueError(message)
+        if (x, y) in sites:
+            message = f"two atoms share the site ({x}, {y})"
+            raise ValueError(message)
+        sites.add((x, y))
+        atoms.append((x, y, w))
+    claim = record["claim"]
+    if not isinstance(claim, str):
+        message = f"claim must be a string such as 's(11) >= 19/5', got {claim!r}"
+        raise TypeError(message)
+    declared = {
+        "claim": claim,
+        "total_mass": rational(record["total_mass"]),
+        "least_cell_mass": rational(record["least_cell_mass"]),
+    }
+    return n, L, B, [T * k / K for k in range(K + 1)], atoms, declared
+
+
+def symmetric(atoms, L):
+    """Condition 1. The eight maps form a group, so checking every site of the support
+    against every image is the whole of invariance."""
+    weight = {(x, y): w for x, y, w in atoms}  # one atom per site: load refused a repeat
+    for (x, y), w in weight.items():
+        flips = [(p, q) for p in (x, L - x) for q in (y, L - y)]
+        for p, q in flips + [(q, p) for p, q in flips]:  # the eight symmetries of [0, L]^2
+            if weight.get((p, q), 0) != w:
+                return (
+                    f"({x}, {y}) has weight {w} but ({p}, {q}) has {weight.get((p, q), 0)}",
+                    False,
+                )
+    return f"{len(atoms)} atoms on distinct sites, invariant under the 8 symmetries", True
+
+
+def extent(polygon, axis, low, high):
+    """Range of the other coordinate over the part of a convex polygon with
+    low <= coordinate[axis] <= high: that part's vertices are the polygon's vertices in
+    the slab and the crossings of its edges with the slab's two boundary lines."""
+    points = [p for p in polygon if low <= p[axis] <= high]
+    for p, q in zip(polygon, polygon[1:] + polygon[:1], strict=True):
+        for bound in (low, high):
+            if (p[axis] - bound) * (q[axis] - bound) < 0:  # a strict crossing
+                f = (bound - p[axis]) / (q[axis] - p[axis])
+                points.append((p[0] + f * (q[0] - p[0]), p[1] + f * (q[1] - p[1])))
+    values = [p[1 - axis] for p in points]
+    return min(values), max(values)
+
+
+# Condition 5 at one direction, decided over the continuum of centers by a finite sweep.
+# In the coordinates u = c x + s y, v = -s x + c y the placed square is axis-parallel:
+# the closed B-square centered at (U, V) contains the atom at (u_i, v_i) iff
+# |u_i - U| <= B/2 and |v_i - V| <= B/2, and it lies inside [0, L]^2 iff its center
+# (X, Y) has h <= X, Y <= L - h with h = B(|c| + |s|)/2. That closed square of centers,
+# F, is empty when 2h > L: no B-square at this direction fits, Condition 5 quantifies
+# over nothing here and holds vacuously, and the direction is reported as deciding
+# nothing. It is the single point (L/2, L/2) when 2h = L, and that one placement is
+# scored directly. Otherwise F has nonempty interior. The lines u = u_i +- B/2,
+# v = v_i +- B/2, with the four lines u = umin, u = umax, v = vmin, v = vmax at F's
+# extreme coordinates (its bounding box: F's own edges are oblique when t > 0, and they
+# are not added), cut the plane into finitely many open cells. The mass is constant on
+# a cell (each atom's box has its edges on the lines); a point on a cell's boundary has
+# at least the cell's mass (a closed box meeting the cell contains its closure); and
+# every point of F is in the closure of a cell meeting F: F has interior points within
+# every distance of it, finitely many lines do not cover an open set, so within every
+# distance of the point some cell meeting F has a point, and since there are finitely
+# many cells one cell does at every distance, which is to say the point is in its
+# closure. So the least mass over F is the least over the cells meeting F. A cell may
+# straddle F's oblique edge, and the clipping test below decides exactly which cells
+# meet F: a cell (a, b) x (a', b') with [a, b] inside F's u-projection meets F iff
+# a' < hi and lo < b', where [lo, hi] is the v-range of F within the closed strip
+# a <= u <= b, since the open strip's part of F projects onto an interval between
+# (lo, hi) and [lo, hi].
+
+
+def mass_at(atoms, c, s, half, center):
+    """The mass of the closed B-square with this center, in original coordinates."""
+    X, Y = center
+    return sum(
+        w
+        for x, y, w in atoms
+        if abs(c * (x - X) + s * (y - Y)) <= half and abs(-s * (x - X) + c * (y - Y)) <= half
+    )
+
+
+def least_mass(L, B, t, atoms, scale):
+    """The least mass over every admissible center at one net direction, with a center
+    (X, Y) that attains it and the number of cells decided; (None, None, 0) at a
+    direction where no B-square fits, and the single placement, counted as one cell,
+    where exactly one does."""
+    c, s = (1 - t * t) / (1 + t * t), 2 * t / (1 + t * t)  # exact: c^2 + s^2 = 1
+    half, h = B / 2, B * (abs(c) + abs(s)) / 2
+    if 2 * h > L:
+        return None, None, 0
+    if 2 * h == L:
+        return mass_at(atoms, c, s, half, (L / 2, L / 2)), (L / 2, L / 2), 1
+    rotated = [(c * x + s * y, -s * x + c * y, w) for x, y, w in atoms]
+    corners = ((h, h), (L - h, h), (L - h, L - h), (h, L - h))
+    F = [(c * x + s * y, -s * x + c * y) for x, y in corners]
+    umin, umax = min(u for u, _ in F), max(u for u, _ in F)
+    vmin, vmax = min(v for _, v in F), max(v for _, v in F)
+    U = sorted({u + d for u, _, _ in rotated for d in (-half, half)} | {umin, umax})
+    V = sorted({v + d for _, v, _ in rotated for d in (-half, half)} | {vmin, vmax})
+    ui, vi = {u: i for i, u in enumerate(U)}, {v: j for j, v in enumerate(V)}
+
+    # grid[i][j] becomes the scaled mass on the cell (U[i], U[i+1]) x (V[j], V[j+1]):
+    # a two-dimensional difference array, then two prefix sums, all in integers.
+    grid = [[0] * len(V) for _ in U]
+    for u, v, w in rotated:
+        i0, i1, j0, j1 = ui[u - half], ui[u + half], vi[v - half], vi[v + half]
+        m = int(w * scale)
+        grid[i0][j0] += m
+        grid[i0][j1] -= m
+        grid[i1][j0] -= m
+        grid[i1][j1] += m
+    grid = [list(accumulate(row)) for row in grid]  # prefix sums along v ...
+    columns = [list(accumulate(column)) for column in zip(*grid, strict=True)]  # ... then u
+    grid = [list(row) for row in zip(*columns, strict=True)]
+
+    strips, cells = [], 0
+    for i in range(ui[umin], ui[umax]):  # the strips within F's u-projection
+        lo, hi = extent(F, 0, U[i], U[i + 1])
+        j0, j1 = bisect_right(V, lo) - 1, bisect_left(V, hi) - 1
+        row = grid[i][j0 : j1 + 1]
+        cells += len(row)
+        strips.append((min(row), i, j0 + row.index(min(row))))
+    best, i, j = min(strips)
+
+    # A center in the least cell and in F: v strictly between the cell's v-bounds and
+    # F's v-range on the strip, then u strictly inside F's u-range at that v.
+    lo, hi = extent(F, 0, U[i], U[i + 1])
+    Vc = (max(V[j], lo) + min(V[j + 1], hi)) / 2
+    left, right = extent(F, 1, Vc, Vc)
+    Uc = (max(U[i], left) + min(U[i + 1], right)) / 2
+    X, Y = c * Uc - s * Vc, s * Uc + c * Vc
+    # The sweep's own cross-check: the witness must be admissible, and summing the atoms
+    # at it directly must give the grid's minimum. A failure here is this file's bug, not
+    # the certificate's, and main reports it as one, apart from either verdict.
+    direct = mass_at(atoms, c, s, half, (X, Y))
+    if not (h <= X <= L - h and h <= Y <= L - h):
+        message = f"at t = {t} the witness center ({X}, {Y}) admits no B-square"
+        raise AssertionError(message)
+    if direct != Fraction(best, scale):
+        message = (
+            f"at t = {t} the center ({X}, {Y}) covers {direct} summed directly, "
+            f"but the grid says {Fraction(best, scale)}"
+        )
+        raise AssertionError(message)
+    return Fraction(best, scale), (X, Y), cells
+
+
+def sweep(L, B, tangents, atoms):
+    """Condition 5 over the whole net: its report, whether it holds, and the least mass
+    found, None when no direction admitted a placement."""
+    scale = lcm(*(w.denominator for _, _, w in atoms))
+    found, cells, vacuous = [], 0, 0
+    for k, t in enumerate(tangents):
+        mass, center, count = least_mass(L, B, t, atoms, scale)
+        if mass is None:
+            vacuous += 1
+        else:
+            found.append((mass, k, t, center))
+        cells += count
+        print(".", end="", file=sys.stderr, flush=True)
+    if not found:  # every direction vacuous: the hypothesis holds, and nothing was decided
+        vacuity = f"no placement at any of the {len(tangents)} directions"
+        return f"{vacuity}, so nothing was decided", True, None
+    least, k, t, (X, Y) = min(found)
+    detail = (
+        f"least covered mass {least} at direction {k} (t = {t}), center ({X}, {Y}); "
+        f"{cells} cells over {len(tangents)} directions"
+    )
+    if vacuous:
+        detail += f", {vacuous} of them admitting no placement"
+    return detail, least >= 1, least
+
+
+def declarations(declared, n, L, total, least):
+    """The file's own claim, total_mass and least_cell_mass against what was computed.
+    The theorem never reads them, but a file that states its figures wrongly is wrong
+    about itself, and success must not read as vouching for them. least is None when
+    the sweep did not run or met no placement, and least_cell_mass is then not compared."""
+    computed = {"claim": f"s({n}) >= {L}", "total_mass": total, "least_cell_mass": least}
+    compared = [name for name, value in computed.items() if value is not None]
+    wrong = [name for name in compared if declared[name] != computed[name]]
+
+    def shown(value):
+        return repr(value) if isinstance(value, str) else str(value)
+
+    if wrong:
+        detail = "; ".join(
+            f"{name} declared {shown(declared[name])}, computed {shown(computed[name])}"
+            for name in wrong
+        )
+    else:
+        detail = ", ".join(f"{name} {shown(declared[name])}" for name in compared)
+        detail += ", as computed"
+    if least is None:
+        detail += "; least_cell_mass not compared"
+    return detail, not wrong
+
+
+def decide(n, L, B, tangents, atoms, declared):  # noqa: PLR0917 -- the certificate, as load returns it
+    """Print every condition with its numbers, then the declarations against what was
+    computed; return 0 if all hold, else 1."""
+    verdicts = []
+
+    def report(number, detail, *, holds):
+        verdicts.append(holds)
+        print(f"Condition {number} {'holds' if holds else 'fails'}: {detail}", flush=True)
+
+    detail, holds = symmetric(atoms, L)
+    report(1, detail, holds=holds)
+    total = sum(w for _, _, w in atoms)
+    report(2, f"total mass {total} against n = {n}", holds=total < n)
+    t, slack = tangents[-1], tangents[-1] ** 2 + 2 * tangents[-1] - 1
+    report(3, f"t_K = {t}, t_K^2 + 2 t_K - 1 = {slack}", holds=slack >= 0)
+    D = max((b - a) / (1 + a * b) for a, b in pairwise(tangents))
+    report(4, f"D = {D}, B(1 + D) = {B * (1 + D)}", holds=B * (1 + D) < 1)
+    least = None
+    if all(verdicts):
+        detail, holds, least = sweep(L, B, tangents, atoms)
+        report(5, detail, holds=holds)
+    else:  # the sweep is the expensive step, and a refused file is not owed it
+        failed = [str(k + 1) for k, holds in enumerate(verdicts) if not holds]
+        which = (
+            f"Condition {failed[0]} fails"
+            if len(failed) == 1
+            else f"Conditions {', '.join(failed)} fail"
+        )
+        print(
+            f"Condition 5 not evaluated: {which}, and the sweep runs only when "
+            "Conditions 1 to 4 hold",
+            flush=True,
+        )
+    detail, holds = declarations(declared, n, L, total, least)
+    verdicts.append(holds)
+    print(f"Declarations {'hold' if holds else 'fail'}: {detail}", flush=True)
+    print(f"VERIFIED: s({n}) >= {L}" if all(verdicts) else "REFUSED")
+    return 0 if all(verdicts) else 1
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    """Verdicts go to stdout with status 0 or 1. Status 2 is no verdict: a usage error,
+    which argparse reports on stderr, or the sweep's own cross-check failing, reported on
+    stdout as one INTERNAL ERROR line in place of the verdict."""
+    parser = argparse.ArgumentParser(
+        description="Decide a fractional unavoidable-set certificate for s(n) >= L, exactly.",
+        epilog=(
+            "One line per condition, one comparing the file's declarations with what was "
+            "computed, then VERIFIED or REFUSED; the exit status is 0 only after VERIFIED "
+            "and 1 on any refusal. Status 2 is no verdict: a usage error, or an INTERNAL "
+            "ERROR line saying the verifier disagreed with itself."
+        ),
+    )
+    parser.add_argument(
+        "certificate", help="a certificate.json, or a claim document that embeds one"
+    )
+    arguments = parser.parse_args(argv)
+    try:
+        certificate = load(arguments.certificate)
+    except (OSError, KeyError, TypeError, ValueError) as error:
+        print(f"REFUSED: not a certificate of the expected shape: {error}")
+        return 1
+    try:
+        return decide(*certificate)
+    except AssertionError as error:  # the sweep's cross-check: this file is what failed
+        print(f"INTERNAL ERROR: no verdict; the verifier disagrees with itself: {error}")
+        return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+````
+
+<a id="source-1-the-certificate"></a>
+
+#### The Certificate
+
+`certificate.json`, as kept in the repository.
+
+````json
+{
+ "id": "C-n011-fractional-381-100",
+ "n": 11,
+ "claim": "s(11) >= 381/100",
+ "outer_side": "381/100",
+ "square_side": "9977/10000",
+ "angle_limit": "207107/500000",
+ "direction_steps": 180,
+ "total_mass": "434547/40000",
+ "least_cell_mass": "4001/4000",
+ "symmetry": "D4",
+ "atoms": [
+  [
+   "43/100",
+   "99/100",
+   "7/4000"
+  ],
+  [
+   "43/100",
+   "141/50",
+   "7/4000"
+  ],
+  [
+   "12/25",
+   "49/50",
+   "277/20000"
+  ],
+  [
+   "12/25",
+   "283/100",
+   "277/20000"
+  ],
+  [
+   "1/2",
+   "581/600",
+   "63/40000"
+  ],
+  [
+   "1/2",
+   "381/200",
+   "583/100000"
+  ],
+  [
+   "1/2",
+   "341/120",
+   "63/40000"
+  ],
+  [
+   "2981/5400",
+   "381/200",
+   "567/50000"
+  ],
+  [
+   "1631/2700",
+   "381/200",
+   "4499/100000"
+  ],
+  [
+   "61/100",
+   "199/200",
+   "33/500"
+  ],
+  [
+   "61/100",
+   "563/200",
+   "33/500"
+  ],
+  [
+   "31/50",
+   "99/100",
+   "47/25000"
+  ],
+  [
+   "31/50",
+   "199/200",
+   "977/100000"
+  ],
+  [
+   "31/50",
+   "563/200",
+   "977/100000"
+  ],
+  [
+   "31/50",
+   "141/50",
+   "47/25000"
+  ],
+  [
+   "5/8",
+   "199/200",
+   "887/200000"
+  ],
+  [
+   "5/8",
+   "563/200",
+   "887/200000"
+  ],
+  [
+   "129/200",
+   "99/100",
+   "279/200000"
+  ],
+  [
+   "129/200",
+   "141/50",
+   "279/200000"
+  ],
+  [
+   "13/20",
+   "199/200",
+   "1277/200000"
+  ],
+  [
+   "13/20",
+   "563/200",
+   "1277/200000"
+  ],
+  [
+   "1181/1800",
+   "5003/2700",
+   "613/40000"
+  ],
+  [
+   "1181/1800",
+   "1321/675",
+   "613/40000"
+  ],
+  [
+   "33/50",
+   "199/200",
+   "31/10000"
+  ],
+  [
+   "33/50",
+   "563/200",
+   "31/10000"
+  ],
+  [
+   "133/200",
+   "199/200",
+   "631/40000"
+  ],
+  [
+   "133/200",
+   "563/200",
+   "631/40000"
+  ],
+  [
+   "27/40",
+   "199/200",
+   "127/200000"
+  ],
+  [
+   "27/40",
+   "563/200",
+   "127/200000"
+  ],
+  [
+   "137/200",
+   "199/200",
+   "3029/200000"
+  ],
+  [
+   "137/200",
+   "563/200",
+   "3029/200000"
+  ],
+  [
+   "139/200",
+   "199/200",
+   "1853/200000"
+  ],
+  [
+   "139/200",
+   "563/200",
+   "1853/200000"
+  ],
+  [
+   "7/10",
+   "197/200",
+   "127/200000"
+  ],
+  [
+   "7/10",
+   "113/40",
+   "127/200000"
+  ],
+  [
+   "141/200",
+   "197/200",
+   "11/50000"
+  ],
+  [
+   "141/200",
+   "113/40",
+   "11/50000"
+  ],
+  [
+   "478/675",
+   "5003/2700",
+   "19/2500"
+  ],
+  [
+   "478/675",
+   "381/200",
+   "2261/200000"
+  ],
+  [
+   "478/675",
+   "1321/675",
+   "19/2500"
+  ],
+  [
+   "2743/3800",
+   "3479/1900",
+   "149/50000"
+  ],
+  [
+   "2743/3800",
+   "381/200",
+   "961/100000"
+  ],
+  [
+   "2743/3800",
+   "188/95",
+   "149/50000"
+  ],
+  [
+   "73/100",
+   "197/200",
+   "237/25000"
+  ],
+  [
+   "73/100",
+   "199/200",
+   "357/40000"
+  ],
+  [
+   "73/100",
+   "563/200",
+   "357/40000"
+  ],
+  [
+   "73/100",
+   "113/40",
+   "237/25000"
+  ],
+  [
+   "147/200",
+   "49/50",
+   "53/40000"
+  ],
+  [
+   "147/200",
+   "283/100",
+   "53/40000"
+  ],
+  [
+   "149/200",
+   "99/100",
+   "633/25000"
+  ],
+  [
+   "149/200",
+   "199/200",
+   "63/10000"
+  ],
+  [
+   "149/200",
+   "563/200",
+   "63/10000"
+  ],
+  [
+   "149/200",
+   "141/50",
+   "633/25000"
+  ],
+  [
+   "151/200",
+   "199/200",
+   "237/25000"
+  ],
+  [
+   "151/200",
+   "563/200",
+   "237/25000"
+  ],
+  [
+   "831/1100",
+   "381/200",
+   "39/40000"
+  ],
+  [
+   "821/1080",
+   "5003/2700",
+   "1187/200000"
+  ],
+  [
+   "821/1080",
+   "381/200",
+   "617/100000"
+  ],
+  [
+   "821/1080",
+   "1321/675",
+   "1187/200000"
+  ],
+  [
+   "781/1000",
+   "581/600",
+   "1371/200000"
+  ],
+  [
+   "781/1000",
+   "341/120",
+   "1371/200000"
+  ],
+  [
+   "731/900",
+   "5003/2700",
+   "567/50000"
+  ],
+  [
+   "731/900",
+   "1321/675",
+   "567/50000"
+  ],
+  [
+   "43/50",
+   "199/200",
+   "2297/200000"
+  ],
+  [
+   "43/50",
+   "563/200",
+   "2297/200000"
+  ],
+  [
+   "173/200",
+   "199/200",
+   "97/8000"
+  ],
+  [
+   "173/200",
+   "563/200",
+   "97/8000"
+  ],
+  [
+   "328/375",
+   "381/200",
+   "213/5000"
+  ],
+  [
+   "22/25",
+   "199/200",
+   "3/40000"
+  ],
+  [
+   "22/25",
+   "563/200",
+   "3/40000"
+  ],
+  [
+   "177/200",
+   "199/200",
+   "631/40000"
+  ],
+  [
+   "177/200",
+   "563/200",
+   "631/40000"
+  ],
+  [
+   "89/100",
+   "199/200",
+   "127/200000"
+  ],
+  [
+   "89/100",
+   "563/200",
+   "127/200000"
+  ],
+  [
+   "179/200",
+   "199/200",
+   "631/40000"
+  ],
+  [
+   "179/200",
+   "563/200",
+   "631/40000"
+  ],
+  [
+   "9/10",
+   "199/200",
+   "237/25000"
+  ],
+  [
+   "9/10",
+   "563/200",
+   "237/25000"
+  ],
+  [
+   "91/100",
+   "199/200",
+   "27/2500"
+  ],
+  [
+   "91/100",
+   "563/200",
+   "27/2500"
+  ],
+  [
+   "1237/1350",
+   "1799/1350",
+   "1623/100000"
+  ],
+  [
+   "1237/1350",
+   "7477/5400",
+   "27/1000"
+  ],
+  [
+   "1237/1350",
+   "5003/2700",
+   "961/100000"
+  ],
+  [
+   "1237/1350",
+   "1321/675",
+   "961/100000"
+  ],
+  [
+   "1237/1350",
+   "13097/5400",
+   "27/1000"
+  ],
+  [
+   "1237/1350",
+   "6689/2700",
+   "1623/100000"
+  ],
+  [
+   "23/25",
+   "199/200",
+   "6323/200000"
+  ],
+  [
+   "23/25",
+   "563/200",
+   "6323/200000"
+  ],
+  [
+   "37/40",
+   "199/200",
+   "237/25000"
+  ],
+  [
+   "37/40",
+   "563/200",
+   "237/25000"
+  ],
+  [
+   "93/100",
+   "199/200",
+   "631/40000"
+  ],
+  [
+   "93/100",
+   "563/200",
+   "631/40000"
+  ],
+  [
+   "47/50",
+   "199/200",
+   "393/40000"
+  ],
+  [
+   "47/50",
+   "563/200",
+   "393/40000"
+  ],
+  [
+   "1793/1900",
+   "659/475",
+   "241/25000"
+  ],
+  [
+   "1793/1900",
+   "4603/1900",
+   "241/25000"
+  ],
+  [
+   "189/200",
+   "199/200",
+   "49/50000"
+  ],
+  [
+   "189/200",
+   "563/200",
+   "49/50000"
+  ],
+  [
+   "19/20",
+   "49/50",
+   "487/200000"
+  ],
+  [
+   "19/20",
+   "199/200",
+   "2369/200000"
+  ],
+  [
+   "19/20",
+   "563/200",
+   "2369/200000"
+  ],
+  [
+   "19/20",
+   "283/100",
+   "487/200000"
+  ],
+  [
+   "24/25",
+   "99/100",
+   "63/40000"
+  ],
+  [
+   "24/25",
+   "141/50",
+   "63/40000"
+  ],
+  [
+   "581/600",
+   "1/2",
+   "63/40000"
+  ],
+  [
+   "581/600",
+   "781/1000",
+   "1371/200000"
+  ],
+  [
+   "581/600",
+   "1343/1000",
+   "3199/200000"
+  ],
+  [
+   "581/600",
+   "4441/2700",
+   "47/25000"
+  ],
+  [
+   "581/600",
+   "381/200",
+   "3747/200000"
+  ],
+  [
+   "581/600",
+   "2923/1350",
+   "47/25000"
+  ],
+  [
+   "581/600",
+   "2467/1000",
+   "3199/200000"
+  ],
+  [
+   "581/600",
+   "3029/1000",
+   "1371/200000"
+  ],
+  [
+   "581/600",
+   "331/100",
+   "63/40000"
+  ],
+  [
+   "97/100",
+   "83/50",
+   "13/3125"
+  ],
+  [
+   "97/100",
+   "43/20",
+   "13/3125"
+  ],
+  [
+   "39/40",
+   "31/25",
+   "329/100000"
+  ],
+  [
+   "39/40",
+   "257/100",
+   "329/100000"
+  ],
+  [
+   "49/50",
+   "12/25",
+   "277/20000"
+  ],
+  [
+   "49/50",
+   "147/200",
+   "53/40000"
+  ],
+  [
+   "49/50",
+   "19/20",
+   "487/200000"
+  ],
+  [
+   "49/50",
+   "99/100",
+   "567/50000"
+  ],
+  [
+   "49/50",
+   "37/20",
+   "19/25000"
+  ],
+  [
+   "49/50",
+   "49/25",
+   "19/25000"
+  ],
+  [
+   "49/50",
+   "141/50",
+   "567/50000"
+  ],
+  [
+   "49/50",
+   "143/50",
+   "487/200000"
+  ],
+  [
+   "49/50",
+   "123/40",
+   "53/40000"
+  ],
+  [
+   "49/50",
+   "333/100",
+   "277/20000"
+  ],
+  [
+   "197/200",
+   "7/10",
+   "127/200000"
+  ],
+  [
+   "197/200",
+   "141/200",
+   "11/50000"
+  ],
+  [
+   "197/200",
+   "73/100",
+   "237/25000"
+  ],
+  [
+   "197/200",
+   "73/40",
+   "11/50000"
+  ],
+  [
+   "197/200",
+   "397/200",
+   "11/50000"
+  ],
+  [
+   "197/200",
+   "77/25",
+   "237/25000"
+  ],
+  [
+   "197/200",
+   "621/200",
+   "11/50000"
+  ],
+  [
+   "197/200",
+   "311/100",
+   "127/200000"
+  ],
+  [
+   "99/100",
+   "43/100",
+   "7/4000"
+  ],
+  [
+   "99/100",
+   "31/50",
+   "47/25000"
+  ],
+  [
+   "99/100",
+   "129/200",
+   "279/200000"
+  ],
+  [
+   "99/100",
+   "149/200",
+   "633/25000"
+  ],
+  [
+   "99/100",
+   "24/25",
+   "63/40000"
+  ],
+  [
+   "99/100",
+   "49/50",
+   "567/50000"
+  ],
+  [
+   "99/100",
+   "99/100",
+   "267/50000"
+  ],
+  [
+   "99/100",
+   "6/5",
+   "33/12500"
+  ],
+  [
+   "99/100",
+   "5/4",
+   "33/12500"
+  ],
+  [
+   "99/100",
+   "251/200",
+   "47/25000"
+  ],
+  [
+   "99/100",
+   "147/100",
+   "31/100000"
+  ],
+  [
+   "99/100",
+   "61/40",
+   "1671/200000"
+  ],
+  [
+   "99/100",
+   "77/50",
+   "7/4000"
+  ],
+  [
+   "99/100",
+   "33/20",
+   "27/8000"
+  ],
+  [
+   "99/100",
+   "183/100",
+   "53/40000"
+  ],
+  [
+   "99/100",
+   "367/200",
+   "451/100000"
+  ],
+  [
+   "99/100",
+   "371/200",
+   "143/25000"
+  ],
+  [
+   "99/100",
+   "391/200",
+   "143/25000"
+  ],
+  [
+   "99/100",
+   "79/40",
+   "451/100000"
+  ],
+  [
+   "99/100",
+   "99/50",
+   "53/40000"
+  ],
+  [
+   "99/100",
+   "54/25",
+   "27/8000"
+  ],
+  [
+   "99/100",
+   "227/100",
+   "7/4000"
+  ],
+  [
+   "99/100",
+   "457/200",
+   "1671/200000"
+  ],
+  [
+   "99/100",
+   "117/50",
+   "31/100000"
+  ],
+  [
+   "99/100",
+   "511/200",
+   "47/25000"
+  ],
+  [
+   "99/100",
+   "64/25",
+   "33/12500"
+  ],
+  [
+   "99/100",
+   "261/100",
+   "33/12500"
+  ],
+  [
+   "99/100",
+   "141/50",
+   "267/50000"
+  ],
+  [
+   "99/100",
+   "283/100",
+   "567/50000"
+  ],
+  [
+   "99/100",
+   "57/20",
+   "63/40000"
+  ],
+  [
+   "99/100",
+   "613/200",
+   "633/25000"
+  ],
+  [
+   "99/100",
+   "633/200",
+   "279/200000"
+  ],
+  [
+   "99/100",
+   "319/100",
+   "47/25000"
+  ],
+  [
+   "99/100",
+   "169/50",
+   "7/4000"
+  ],
+  [
+   "182759609/184037800",
+   "169029363/169484600",
+   "1343/40000"
+  ],
+  [
+   "182759609/184037800",
+   "476706963/169484600",
+   "1343/40000"
+  ],
+  [
+   "199/200",
+   "61/100",
+   "33/500"
+  ],
+  [
+   "199/200",
+   "31/50",
+   "977/100000"
+  ],
+  [
+   "199/200",
+   "5/8",
+   "887/200000"
+  ],
+  [
+   "199/200",
+   "13/20",
+   "1277/200000"
+  ],
+  [
+   "199/200",
+   "33/50",
+   "31/10000"
+  ],
+  [
+   "199/200",
+   "133/200",
+   "631/40000"
+  ],
+  [
+   "199/200",
+   "27/40",
+   "127/200000"
+  ],
+  [
+   "199/200",
+   "137/200",
+   "3029/200000"
+  ],
+  [
+   "199/200",
+   "139/200",
+   "1853/200000"
+  ],
+  [
+   "199/200",
+   "73/100",
+   "357/40000"
+  ],
+  [
+   "199/200",
+   "149/200",
+   "63/10000"
+  ],
+  [
+   "199/200",
+   "151/200",
+   "237/25000"
+  ],
+  [
+   "199/200",
+   "43/50",
+   "2297/200000"
+  ],
+  [
+   "199/200",
+   "173/200",
+   "97/8000"
+  ],
+  [
+   "199/200",
+   "22/25",
+   "3/40000"
+  ],
+  [
+   "199/200",
+   "177/200",
+   "631/40000"
+  ],
+  [
+   "199/200",
+   "89/100",
+   "127/200000"
+  ],
+  [
+   "199/200",
+   "179/200",
+   "631/40000"
+  ],
+  [
+   "199/200",
+   "9/10",
+   "237/25000"
+  ],
+  [
+   "199/200",
+   "91/100",
+   "27/2500"
+  ],
+  [
+   "199/200",
+   "23/25",
+   "6323/200000"
+  ],
+  [
+   "199/200",
+   "37/40",
+   "237/25000"
+  ],
+  [
+   "199/200",
+   "93/100",
+   "631/40000"
+  ],
+  [
+   "199/200",
+   "47/50",
+   "393/40000"
+  ],
+  [
+   "199/200",
+   "189/200",
+   "49/50000"
+  ],
+  [
+   "199/200",
+   "19/20",
+   "2369/200000"
+  ],
+  [
+   "199/200",
+   "241/200",
+   "61/40000"
+  ],
+  [
+   "199/200",
+   "243/200",
+   "47/25000"
+  ],
+  [
+   "199/200",
+   "249/200",
+   "17/200000"
+  ],
+  [
+   "199/200",
+   "251/200",
+   "79/100000"
+  ],
+  [
+   "199/200",
+   "269/200",
+   "83/50000"
+  ],
+  [
+   "199/200",
+   "34/25",
+   "151/25000"
+  ],
+  [
+   "199/200",
+   "291/200",
+   "83/50000"
+  ],
+  [
+   "199/200",
+   "59/40",
+   "1539/200000"
+  ],
+  [
+   "199/200",
+   "149/100",
+   "393/200000"
+  ],
+  [
+   "199/200",
+   "299/200",
+   "333/40000"
+  ],
+  [
+   "199/200",
+   "3/2",
+   "347/40000"
+  ],
+  [
+   "199/200",
+   "301/200",
+   "533/40000"
+  ],
+  [
+   "199/200",
+   "151/100",
+   "49/20000"
+  ],
+  [
+   "199/200",
+   "38/25",
+   "21/2500"
+  ],
+  [
+   "199/200",
+   "61/40",
+   "1671/200000"
+  ],
+  [
+   "199/200",
+   "77/50",
+   "467/50000"
+  ],
+  [
+   "199/200",
+   "31/20",
+   "9/2500"
+  ],
+  [
+   "199/200",
+   "39/25",
+   "789/100000"
+  ],
+  [
+   "199/200",
+   "313/200",
+   "473/50000"
+  ],
+  [
+   "199/200",
+   "63/40",
+   "93/40000"
+  ],
+  [
+   "199/200",
+   "79/50",
+   "1589/200000"
+  ],
+  [
+   "199/200",
+   "317/200",
+   "91/200000"
+  ],
+  [
+   "199/200",
+   "159/100",
+   "91/10000"
+  ],
+  [
+   "199/200",
+   "319/200",
+   "167/25000"
+  ],
+  [
+   "199/200",
+   "323/200",
+   "19/25000"
+  ],
+  [
+   "199/200",
+   "41/25",
+   "279/50000"
+  ],
+  [
+   "199/200",
+   "33/20",
+   "533/200000"
+  ],
+  [
+   "199/200",
+   "331/200",
+   "33/12500"
+  ],
+  [
+   "199/200",
+   "363/200",
+   "3469/200000"
+  ],
+  [
+   "199/200",
+   "91/50",
+   "513/8000"
+  ],
+  [
+   "199/200",
+   "73/40",
+   "631/40000"
+  ],
+  [
+   "199/200",
+   "183/100",
+   "1853/200000"
+  ],
+  [
+   "199/200",
+   "46/25",
+   "977/100000"
+  ],
+  [
+   "199/200",
+   "369/200",
+   "63/40000"
+  ],
+  [
+   "199/200",
+   "37/20",
+   "13/3125"
+  ],
+  [
+   "199/200",
+   "371/200",
+   "193/20000"
+  ],
+  [
+   "199/200",
+   "93/50",
+   "93/40000"
+  ],
+  [
+   "199/200",
+   "373/200",
+   "57/40000"
+  ],
+  [
+   "199/200",
+   "15/8",
+   "353/40000"
+  ],
+  [
+   "199/200",
+   "47/25",
+   "353/40000"
+  ],
+  [
+   "199/200",
+   "377/200",
+   "473/50000"
+  ],
+  [
+   "199/200",
+   "189/100",
+   "2297/200000"
+  ],
+  [
+   "199/200",
+   "379/200",
+   "2091/200000"
+  ],
+  [
+   "199/200",
+   "19/10",
+   "7/4000"
+  ],
+  [
+   "199/200",
+   "381/200",
+   "3281/200000"
+  ],
+  [
+   "199/200",
+   "191/100",
+   "7/4000"
+  ],
+  [
+   "199/200",
+   "383/200",
+   "2091/200000"
+  ],
+  [
+   "199/200",
+   "48/25",
+   "2297/200000"
+  ],
+  [
+   "199/200",
+   "77/40",
+   "473/50000"
+  ],
+  [
+   "199/200",
+   "193/100",
+   "353/40000"
+  ],
+  [
+   "199/200",
+   "387/200",
+   "353/40000"
+  ],
+  [
+   "199/200",
+   "389/200",
+   "57/40000"
+  ],
+  [
+   "199/200",
+   "39/20",
+   "93/40000"
+  ],
+  [
+   "199/200",
+   "391/200",
+   "193/20000"
+  ],
+  [
+   "199/200",
+   "49/25",
+   "13/3125"
+  ],
+  [
+   "199/200",
+   "393/200",
+   "63/40000"
+  ],
+  [
+   "199/200",
+   "197/100",
+   "977/100000"
+  ],
+  [
+   "199/200",
+   "99/50",
+   "1853/200000"
+  ],
+  [
+   "199/200",
+   "397/200",
+   "631/40000"
+  ],
+  [
+   "199/200",
+   "199/100",
+   "513/8000"
+  ],
+  [
+   "199/200",
+   "399/200",
+   "3469/200000"
+  ],
+  [
+   "199/200",
+   "431/200",
+   "33/12500"
+  ],
+  [
+   "199/200",
+   "54/25",
+   "533/200000"
+  ],
+  [
+   "199/200",
+   "217/100",
+   "279/50000"
+  ],
+  [
+   "199/200",
+   "439/200",
+   "19/25000"
+  ],
+  [
+   "199/200",
+   "443/200",
+   "167/25000"
+  ],
+  [
+   "199/200",
+   "111/50",
+   "91/10000"
+  ],
+  [
+   "199/200",
+   "89/40",
+   "91/200000"
+  ],
+  [
+   "199/200",
+   "223/100",
+   "1589/200000"
+  ],
+  [
+   "199/200",
+   "447/200",
+   "93/40000"
+  ],
+  [
+   "199/200",
+   "449/200",
+   "473/50000"
+  ],
+  [
+   "199/200",
+   "9/4",
+   "789/100000"
+  ],
+  [
+   "199/200",
+   "113/50",
+   "9/2500"
+  ],
+  [
+   "199/200",
+   "227/100",
+   "467/50000"
+  ],
+  [
+   "199/200",
+   "457/200",
+   "1671/200000"
+  ],
+  [
+   "199/200",
+   "229/100",
+   "21/2500"
+  ],
+  [
+   "199/200",
+   "23/10",
+   "49/20000"
+  ],
+  [
+   "199/200",
+   "461/200",
+   "533/40000"
+  ],
+  [
+   "199/200",
+   "231/100",
+   "347/40000"
+  ],
+  [
+   "199/200",
+   "463/200",
+   "333/40000"
+  ],
+  [
+   "199/200",
+   "58/25",
+   "393/200000"
+  ],
+  [
+   "199/200",
+   "467/200",
+   "1539/200000"
+  ],
+  [
+   "199/200",
+   "471/200",
+   "83/50000"
+  ],
+  [
+   "199/200",
+   "49/20",
+   "151/25000"
+  ],
+  [
+   "199/200",
+   "493/200",
+   "83/50000"
+  ],
+  [
+   "199/200",
+   "511/200",
+   "79/100000"
+  ],
+  [
+   "199/200",
+   "513/200",
+   "17/200000"
+  ],
+  [
+   "199/200",
+   "519/200",
+   "47/25000"
+  ],
+  [
+   "199/200",
+   "521/200",
+   "61/40000"
+  ],
+  [
+   "199/200",
+   "143/50",
+   "2369/200000"
+  ],
+  [
+   "199/200",
+   "573/200",
+   "49/50000"
+  ],
+  [
+   "199/200",
+   "287/100",
+   "393/40000"
+  ],
+  [
+   "199/200",
+   "72/25",
+   "631/40000"
+  ],
+  [
+   "199/200",
+   "577/200",
+   "237/25000"
+  ],
+  [
+   "199/200",
+   "289/100",
+   "6323/200000"
+  ],
+  [
+   "199/200",
+   "29/10",
+   "27/2500"
+  ],
+  [
+   "199/200",
+   "291/100",
+   "237/25000"
+  ],
+  [
+   "199/200",
+   "583/200",
+   "631/40000"
+  ],
+  [
+   "199/200",
+   "73/25",
+   "127/200000"
+  ],
+  [
+   "199/200",
+   "117/40",
+   "631/40000"
+  ],
+  [
+   "199/200",
+   "293/100",
+   "3/40000"
+  ],
+  [
+   "199/200",
+   "589/200",
+   "97/8000"
+  ],
+  [
+   "199/200",
+   "59/20",
+   "2297/200000"
+  ],
+  [
+   "199/200",
+   "611/200",
+   "237/25000"
+  ],
+  [
+   "199/200",
+   "613/200",
+   "63/10000"
+  ],
+  [
+   "199/200",
+   "77/25",
+   "357/40000"
+  ],
+  [
+   "199/200",
+   "623/200",
+   "1853/200000"
+  ],
+  [
+   "199/200",
+   "25/8",
+   "3029/200000"
+  ],
+  [
+   "199/200",
+   "627/200",
+   "127/200000"
+  ],
+  [
+   "199/200",
+   "629/200",
+   "631/40000"
+  ],
+  [
+   "199/200",
+   "63/20",
+   "31/10000"
+  ],
+  [
+   "199/200",
+   "79/25",
+   "1277/200000"
+  ],
+  [
+   "199/200",
+   "637/200",
+   "887/200000"
+  ],
+  [
+   "199/200",
+   "319/100",
+   "977/100000"
+  ],
+  [
+   "199/200",
+   "16/5",
+   "33/500"
+  ],
+  [
+   "35473313/35642600",
+   "36423/20000",
+   "4443/100000"
+  ],
+  [
+   "35473313/35642600",
+   "39777/20000",
+   "4443/100000"
+  ],
+  [
+   "169029363/169484600",
+   "182759609/184037800",
+   "1343/40000"
+  ],
+  [
+   "169029363/169484600",
+   "518424409/184037800",
+   "1343/40000"
+  ],
+  [
+   "1849127/1853400",
+   "1849127/1853400",
+   "917/6250"
+  ],
+  [
+   "1849127/1853400",
+   "5212327/1853400",
+   "917/6250"
+  ],
+  [
+   "27/25",
+   "371/200",
+   "33/12500"
+  ],
+  [
+   "27/25",
+   "93/50",
+   "151/25000"
+  ],
+  [
+   "27/25",
+   "39/20",
+   "151/25000"
+  ],
+  [
+   "27/25",
+   "391/200",
+   "33/12500"
+  ],
+  [
+   "6/5",
+   "99/100",
+   "33/12500"
+  ],
+  [
+   "6/5",
+   "141/50",
+   "33/12500"
+  ],
+  [
+   "241/200",
+   "199/200",
+   "61/40000"
+  ],
+  [
+   "241/200",
+   "563/200",
+   "61/40000"
+  ],
+  [
+   "243/200",
+   "199/200",
+   "47/25000"
+  ],
+  [
+   "243/200",
+   "563/200",
+   "47/25000"
+  ],
+  [
+   "31/25",
+   "39/40",
+   "329/100000"
+  ],
+  [
+   "31/25",
+   "567/200",
+   "329/100000"
+  ],
+  [
+   "249/200",
+   "199/200",
+   "17/200000"
+  ],
+  [
+   "249/200",
+   "563/200",
+   "17/200000"
+  ],
+  [
+   "5/4",
+   "99/100",
+   "33/12500"
+  ],
+  [
+   "5/4",
+   "141/50",
+   "33/12500"
+  ],
+  [
+   "251/200",
+   "99/100",
+   "47/25000"
+  ],
+  [
+   "251/200",
+   "199/200",
+   "79/100000"
+  ],
+  [
+   "251/200",
+   "563/200",
+   "79/100000"
+  ],
+  [
+   "251/200",
+   "141/50",
+   "47/25000"
+  ],
+  [
+   "1799/1350",
+   "1237/1350",
+   "1623/100000"
+  ],
+  [
+   "1799/1350",
+   "7813/2700",
+   "1623/100000"
+  ],
+  [
+   "67/50",
+   "373/200",
+   "31/100000"
+  ],
+  [
+   "67/50",
+   "389/200",
+   "31/100000"
+  ],
+  [
+   "1343/1000",
+   "581/600",
+   "3199/200000"
+  ],
+  [
+   "1343/1000",
+   "341/120",
+   "3199/200000"
+  ],
+  [
+   "269/200",
+   "199/200",
+   "83/50000"
+  ],
+  [
+   "269/200",
+   "563/200",
+   "83/50000"
+  ],
+  [
+   "27/20",
+   "187/100",
+   "253/200000"
+  ],
+  [
+   "27/20",
+   "97/50",
+   "253/200000"
+  ],
+  [
+   "271/200",
+   "47/25",
+   "1547/100000"
+  ],
+  [
+   "271/200",
+   "193/100",
+   "1547/100000"
+  ],
+  [
+   "34/25",
+   "199/200",
+   "151/25000"
+  ],
+  [
+   "34/25",
+   "563/200",
+   "151/25000"
+  ],
+  [
+   "7477/5400",
+   "1237/1350",
+   "27/1000"
+  ],
+  [
+   "7477/5400",
+   "7813/2700",
+   "27/1000"
+  ],
+  [
+   "659/475",
+   "1793/1900",
+   "241/25000"
+  ],
+  [
+   "659/475",
+   "2723/950",
+   "241/25000"
+  ],
+  [
+   "7/5",
+   "19/10",
+   "777/12500"
+  ],
+  [
+   "7/5",
+   "191/100",
+   "777/12500"
+  ],
+  [
+   "71/50",
+   "19/10",
+   "1387/200000"
+  ],
+  [
+   "71/50",
+   "191/100",
+   "1387/200000"
+  ],
+  [
+   "431/300",
+   "381/200",
+   "2091/200000"
+  ],
+  [
+   "289/200",
+   "189/100",
+   "4173/200000"
+  ],
+  [
+   "289/200",
+   "48/25",
+   "4173/200000"
+  ],
+  [
+   "291/200",
+   "199/200",
+   "83/50000"
+  ],
+  [
+   "291/200",
+   "377/200",
+   "2553/100000"
+  ],
+  [
+   "291/200",
+   "77/40",
+   "2553/100000"
+  ],
+  [
+   "291/200",
+   "563/200",
+   "83/50000"
+  ],
+  [
+   "147/100",
+   "99/100",
+   "31/100000"
+  ],
+  [
+   "147/100",
+   "141/50",
+   "31/100000"
+  ],
+  [
+   "59/40",
+   "199/200",
+   "1539/200000"
+  ],
+  [
+   "59/40",
+   "563/200",
+   "1539/200000"
+  ],
+  [
+   "149/100",
+   "199/200",
+   "393/200000"
+  ],
+  [
+   "149/100",
+   "563/200",
+   "393/200000"
+  ],
+  [
+   "299/200",
+   "199/200",
+   "333/40000"
+  ],
+  [
+   "299/200",
+   "563/200",
+   "333/40000"
+  ],
+  [
+   "3/2",
+   "199/200",
+   "347/40000"
+  ],
+  [
+   "3/2",
+   "93/50",
+   "33/12500"
+  ],
+  [
+   "3/2",
+   "39/20",
+   "33/12500"
+  ],
+  [
+   "3/2",
+   "563/200",
+   "347/40000"
+  ],
+  [
+   "301/200",
+   "199/200",
+   "533/40000"
+  ],
+  [
+   "301/200",
+   "563/200",
+   "533/40000"
+  ],
+  [
+   "151/100",
+   "199/200",
+   "49/20000"
+  ],
+  [
+   "151/100",
+   "563/200",
+   "49/20000"
+  ],
+  [
+   "38/25",
+   "199/200",
+   "21/2500"
+  ],
+  [
+   "38/25",
+   "371/200",
+   "631/40000"
+  ],
+  [
+   "38/25",
+   "391/200",
+   "631/40000"
+  ],
+  [
+   "38/25",
+   "563/200",
+   "21/2500"
+  ],
+  [
+   "61/40",
+   "99/100",
+   "1671/200000"
+  ],
+  [
+   "61/40",
+   "199/200",
+   "1671/200000"
+  ],
+  [
+   "61/40",
+   "563/200",
+   "1671/200000"
+  ],
+  [
+   "61/40",
+   "141/50",
+   "1671/200000"
+  ],
+  [
+   "77/50",
+   "99/100",
+   "7/4000"
+  ],
+  [
+   "77/50",
+   "199/200",
+   "467/50000"
+  ],
+  [
+   "77/50",
+   "563/200",
+   "467/50000"
+  ],
+  [
+   "77/50",
+   "141/50",
+   "7/4000"
+  ],
+  [
+   "31/20",
+   "199/200",
+   "9/2500"
+  ],
+  [
+   "31/20",
+   "563/200",
+   "9/2500"
+  ],
+  [
+   "39/25",
+   "199/200",
+   "789/100000"
+  ],
+  [
+   "39/25",
+   "563/200",
+   "789/100000"
+  ],
+  [
+   "313/200",
+   "199/200",
+   "473/50000"
+  ],
+  [
+   "313/200",
+   "563/200",
+   "473/50000"
+  ],
+  [
+   "63/40",
+   "199/200",
+   "93/40000"
+  ],
+  [
+   "63/40",
+   "563/200",
+   "93/40000"
+  ],
+  [
+   "79/50",
+   "199/200",
+   "1589/200000"
+  ],
+  [
+   "79/50",
+   "563/200",
+   "1589/200000"
+  ],
+  [
+   "317/200",
+   "199/200",
+   "91/200000"
+  ],
+  [
+   "317/200",
+   "46/25",
+   "21/2500"
+  ],
+  [
+   "317/200",
+   "197/100",
+   "21/2500"
+  ],
+  [
+   "317/200",
+   "563/200",
+   "91/200000"
+  ],
+  [
+   "159/100",
+   "199/200",
+   "91/10000"
+  ],
+  [
+   "159/100",
+   "563/200",
+   "91/10000"
+  ],
+  [
+   "2867/1800",
+   "381/200",
+   "353/40000"
+  ],
+  [
+   "319/200",
+   "199/200",
+   "167/25000"
+  ],
+  [
+   "319/200",
+   "563/200",
+   "167/25000"
+  ],
+  [
+   "8/5",
+   "73/40",
+   "73/200000"
+  ],
+  [
+   "8/5",
+   "46/25",
+   "789/100000"
+  ],
+  [
+   "8/5",
+   "197/100",
+   "789/100000"
+  ],
+  [
+   "8/5",
+   "397/200",
+   "73/200000"
+  ],
+  [
+   "321/200",
+   "73/40",
+   "63/40000"
+  ],
+  [
+   "321/200",
+   "46/25",
+   "789/100000"
+  ],
+  [
+   "321/200",
+   "197/100",
+   "789/100000"
+  ],
+  [
+   "321/200",
+   "397/200",
+   "63/40000"
+  ],
+  [
+   "161/100",
+   "371/200",
+   "9/2500"
+  ],
+  [
+   "161/100",
+   "19/10",
+   "1671/200000"
+  ],
+  [
+   "161/100",
+   "191/100",
+   "1671/200000"
+  ],
+  [
+   "161/100",
+   "391/200",
+   "9/2500"
+  ],
+  [
+   "323/200",
+   "199/200",
+   "19/25000"
+  ],
+  [
+   "323/200",
+   "373/200",
+   "227/100000"
+  ],
+  [
+   "323/200",
+   "389/200",
+   "227/100000"
+  ],
+  [
+   "323/200",
+   "563/200",
+   "19/25000"
+  ],
+  [
+   "81/50",
+   "71/40",
+   "393/200000"
+  ],
+  [
+   "81/50",
+   "407/200",
+   "393/200000"
+  ],
+  [
+   "203/125",
+   "381/200",
+   "49/20000"
+  ],
+  [
+   "41/25",
+   "199/200",
+   "279/50000"
+  ],
+  [
+   "41/25",
+   "19/10",
+   "169/50000"
+  ],
+  [
+   "41/25",
+   "191/100",
+   "169/50000"
+  ],
+  [
+   "41/25",
+   "563/200",
+   "279/50000"
+  ],
+  [
+   "4441/2700",
+   "581/600",
+   "47/25000"
+  ],
+  [
+   "4441/2700",
+   "341/120",
+   "47/25000"
+  ],
+  [
+   "33/20",
+   "99/100",
+   "27/8000"
+  ],
+  [
+   "33/20",
+   "199/200",
+   "533/200000"
+  ],
+  [
+   "33/20",
+   "563/200",
+   "533/200000"
+  ],
+  [
+   "33/20",
+   "141/50",
+   "27/8000"
+  ],
+  [
+   "331/200",
+   "199/200",
+   "33/12500"
+  ],
+  [
+   "331/200",
+   "563/200",
+   "33/12500"
+  ],
+  [
+   "83/50",
+   "97/100",
+   "13/3125"
+  ],
+  [
+   "83/50",
+   "71/25",
+   "13/3125"
+  ],
+  [
+   "87/50",
+   "87/50",
+   "1539/200000"
+  ],
+  [
+   "87/50",
+   "207/100",
+   "1539/200000"
+  ],
+  [
+   "71/40",
+   "81/50",
+   "393/200000"
+  ],
+  [
+   "71/40",
+   "219/100",
+   "393/200000"
+  ],
+  [
+   "363/200",
+   "199/200",
+   "3469/200000"
+  ],
+  [
+   "363/200",
+   "563/200",
+   "3469/200000"
+  ],
+  [
+   "91/50",
+   "199/200",
+   "513/8000"
+  ],
+  [
+   "91/50",
+   "563/200",
+   "513/8000"
+  ],
+  [
+   "36423/20000",
+   "35473313/35642600",
+   "4443/100000"
+  ],
+  [
+   "36423/20000",
+   "100324993/35642600",
+   "4443/100000"
+  ],
+  [
+   "73/40",
+   "197/200",
+   "11/50000"
+  ],
+  [
+   "73/40",
+   "199/200",
+   "631/40000"
+  ],
+  [
+   "73/40",
+   "8/5",
+   "73/200000"
+  ],
+  [
+   "73/40",
+   "321/200",
+   "63/40000"
+  ],
+  [
+   "73/40",
+   "441/200",
+   "63/40000"
+  ],
+  [
+   "73/40",
+   "221/100",
+   "73/200000"
+  ],
+  [
+   "73/40",
+   "563/200",
+   "631/40000"
+  ],
+  [
+   "73/40",
+   "113/40",
+   "11/50000"
+  ],
+  [
+   "183/100",
+   "99/100",
+   "53/40000"
+  ],
+  [
+   "183/100",
+   "199/200",
+   "1853/200000"
+  ],
+  [
+   "183/100",
+   "563/200",
+   "1853/200000"
+  ],
+  [
+   "183/100",
+   "141/50",
+   "53/40000"
+  ],
+  [
+   "3479/1900",
+   "2743/3800",
+   "149/50000"
+  ],
+  [
+   "3479/1900",
+   "2347/760",
+   "149/50000"
+  ],
+  [
+   "367/200",
+   "99/100",
+   "451/100000"
+  ],
+  [
+   "367/200",
+   "141/50",
+   "451/100000"
+  ],
+  [
+   "46/25",
+   "199/200",
+   "977/100000"
+  ],
+  [
+   "46/25",
+   "317/200",
+   "21/2500"
+  ],
+  [
+   "46/25",
+   "8/5",
+   "789/100000"
+  ],
+  [
+   "46/25",
+   "321/200",
+   "789/100000"
+  ],
+  [
+   "46/25",
+   "441/200",
+   "789/100000"
+  ],
+  [
+   "46/25",
+   "221/100",
+   "789/100000"
+  ],
+  [
+   "46/25",
+   "89/40",
+   "21/2500"
+  ],
+  [
+   "46/25",
+   "563/200",
+   "977/100000"
+  ],
+  [
+   "369/200",
+   "199/200",
+   "63/40000"
+  ],
+  [
+   "369/200",
+   "563/200",
+   "63/40000"
+  ],
+  [
+   "37/20",
+   "49/50",
+   "19/25000"
+  ],
+  [
+   "37/20",
+   "199/200",
+   "13/3125"
+  ],
+  [
+   "37/20",
+   "563/200",
+   "13/3125"
+  ],
+  [
+   "37/20",
+   "283/100",
+   "19/25000"
+  ],
+  [
+   "5003/2700",
+   "1181/1800",
+   "613/40000"
+  ],
+  [
+   "5003/2700",
+   "478/675",
+   "19/2500"
+  ],
+  [
+   "5003/2700",
+   "821/1080",
+   "1187/200000"
+  ],
+  [
+   "5003/2700",
+   "731/900",
+   "567/50000"
+  ],
+  [
+   "5003/2700",
+   "1237/1350",
+   "961/100000"
+  ],
+  [
+   "5003/2700",
+   "7813/2700",
+   "961/100000"
+  ],
+  [
+   "5003/2700",
+   "1349/450",
+   "567/50000"
+  ],
+  [
+   "5003/2700",
+   "16469/5400",
+   "1187/200000"
+  ],
+  [
+   "5003/2700",
+   "335/108",
+   "19/2500"
+  ],
+  [
+   "5003/2700",
+   "5677/1800",
+   "613/40000"
+  ],
+  [
+   "371/200",
+   "99/100",
+   "143/25000"
+  ],
+  [
+   "371/200",
+   "199/200",
+   "193/20000"
+  ],
+  [
+   "371/200",
+   "27/25",
+   "33/12500"
+  ],
+  [
+   "371/200",
+   "38/25",
+   "631/40000"
+  ],
+  [
+   "371/200",
+   "161/100",
+   "9/2500"
+  ],
+  [
+   "371/200",
+   "11/5",
+   "9/2500"
+  ],
+  [
+   "371/200",
+   "229/100",
+   "631/40000"
+  ],
+  [
+   "371/200",
+   "273/100",
+   "33/12500"
+  ],
+  [
+   "371/200",
+   "563/200",
+   "193/20000"
+  ],
+  [
+   "371/200",
+   "141/50",
+   "143/25000"
+  ],
+  [
+   "93/50",
+   "199/200",
+   "93/40000"
+  ],
+  [
+   "93/50",
+   "27/25",
+   "151/25000"
+  ],
+  [
+   "93/50",
+   "3/2",
+   "33/12500"
+  ],
+  [
+   "93/50",
+   "231/100",
+   "33/12500"
+  ],
+  [
+   "93/50",
+   "273/100",
+   "151/25000"
+  ],
+  [
+   "93/50",
+   "563/200",
+   "93/40000"
+  ],
+  [
+   "373/200",
+   "199/200",
+   "57/40000"
+  ],
+  [
+   "373/200",
+   "67/50",
+   "31/100000"
+  ],
+  [
+   "373/200",
+   "323/200",
+   "227/100000"
+  ],
+  [
+   "373/200",
+   "439/200",
+   "227/100000"
+  ],
+  [
+   "373/200",
+   "247/100",
+   "31/100000"
+  ],
+  [
+   "373/200",
+   "563/200",
+   "57/40000"
+  ],
+  [
+   "187/100",
+   "27/20",
+   "253/200000"
+  ],
+  [
+   "187/100",
+   "123/50",
+   "253/200000"
+  ],
+  [
+   "15/8",
+   "199/200",
+   "353/40000"
+  ],
+  [
+   "15/8",
+   "563/200",
+   "353/40000"
+  ],
+  [
+   "47/25",
+   "199/200",
+   "353/40000"
+  ],
+  [
+   "47/25",
+   "271/200",
+   "1547/100000"
+  ],
+  [
+   "47/25",
+   "491/200",
+   "1547/100000"
+  ],
+  [
+   "47/25",
+   "563/200",
+   "353/40000"
+  ],
+  [
+   "377/200",
+   "199/200",
+   "473/50000"
+  ],
+  [
+   "377/200",
+   "291/200",
+   "2553/100000"
+  ],
+  [
+   "377/200",
+   "471/200",
+   "2553/100000"
+  ],
+  [
+   "377/200",
+   "563/200",
+   "473/50000"
+  ],
+  [
+   "189/100",
+   "199/200",
+   "2297/200000"
+  ],
+  [
+   "189/100",
+   "289/200",
+   "4173/200000"
+  ],
+  [
+   "189/100",
+   "473/200",
+   "4173/200000"
+  ],
+  [
+   "189/100",
+   "563/200",
+   "2297/200000"
+  ],
+  [
+   "379/200",
+   "199/200",
+   "2091/200000"
+  ],
+  [
+   "379/200",
+   "563/200",
+   "2091/200000"
+  ],
+  [
+   "19/10",
+   "199/200",
+   "7/4000"
+  ],
+  [
+   "19/10",
+   "7/5",
+   "777/12500"
+  ],
+  [
+   "19/10",
+   "71/50",
+   "1387/200000"
+  ],
+  [
+   "19/10",
+   "161/100",
+   "1671/200000"
+  ],
+  [
+   "19/10",
+   "41/25",
+   "169/50000"
+  ],
+  [
+   "19/10",
+   "217/100",
+   "169/50000"
+  ],
+  [
+   "19/10",
+   "11/5",
+   "1671/200000"
+  ],
+  [
+   "19/10",
+   "239/100",
+   "1387/200000"
+  ],
+  [
+   "19/10",
+   "241/100",
+   "777/12500"
+  ],
+  [
+   "19/10",
+   "563/200",
+   "7/4000"
+  ],
+  [
+   "381/200",
+   "1/2",
+   "583/100000"
+  ],
+  [
+   "381/200",
+   "2981/5400",
+   "567/50000"
+  ],
+  [
+   "381/200",
+   "1631/2700",
+   "4499/100000"
+  ],
+  [
+   "381/200",
+   "478/675",
+   "2261/200000"
+  ],
+  [
+   "381/200",
+   "2743/3800",
+   "961/100000"
+  ],
+  [
+   "381/200",
+   "831/1100",
+   "39/40000"
+  ],
+  [
+   "381/200",
+   "821/1080",
+   "617/100000"
+  ],
+  [
+   "381/200",
+   "328/375",
+   "213/5000"
+  ],
+  [
+   "381/200",
+   "581/600",
+   "3747/200000"
+  ],
+  [
+   "381/200",
+   "199/200",
+   "3281/200000"
+  ],
+  [
+   "381/200",
+   "431/300",
+   "2091/200000"
+  ],
+  [
+   "381/200",
+   "2867/1800",
+   "353/40000"
+  ],
+  [
+   "381/200",
+   "203/125",
+   "49/20000"
+  ],
+  [
+   "381/200",
+   "381/200",
+   "27899/200000"
+  ],
+  [
+   "381/200",
+   "1093/500",
+   "49/20000"
+  ],
+  [
+   "381/200",
+   "3991/1800",
+   "353/40000"
+  ],
+  [
+   "381/200",
+   "178/75",
+   "2091/200000"
+  ],
+  [
+   "381/200",
+   "563/200",
+   "3281/200000"
+  ],
+  [
+   "381/200",
+   "341/120",
+   "3747/200000"
+  ],
+  [
+   "381/200",
+   "4403/1500",
+   "213/5000"
+  ],
+  [
+   "381/200",
+   "16469/5400",
+   "617/100000"
+  ],
+  [
+   "381/200",
+   "168/55",
+   "39/40000"
+  ],
+  [
+   "381/200",
+   "2347/760",
+   "961/100000"
+  ],
+  [
+   "381/200",
+   "335/108",
+   "2261/200000"
+  ],
+  [
+   "381/200",
+   "2164/675",
+   "4499/100000"
+  ],
+  [
+   "381/200",
+   "17593/5400",
+   "567/50000"
+  ],
+  [
+   "381/200",
+   "331/100",
+   "583/100000"
+  ],
+  [
+   "191/100",
+   "199/200",
+   "7/4000"
+  ],
+  [
+   "191/100",
+   "7/5",
+   "777/12500"
+  ],
+  [
+   "191/100",
+   "71/50",
+   "1387/200000"
+  ],
+  [
+   "191/100",
+   "161/100",
+   "1671/200000"
+  ],
+  [
+   "191/100",
+   "41/25",
+   "169/50000"
+  ],
+  [
+   "191/100",
+   "217/100",
+   "169/50000"
+  ],
+  [
+   "191/100",
+   "11/5",
+   "1671/200000"
+  ],
+  [
+   "191/100",
+   "239/100",
+   "1387/200000"
+  ],
+  [
+   "191/100",
+   "241/100",
+   "777/12500"
+  ],
+  [
+   "191/100",
+   "563/200",
+   "7/4000"
+  ],
+  [
+   "383/200",
+   "199/200",
+   "2091/200000"
+  ],
+  [
+   "383/200",
+   "563/200",
+   "2091/200000"
+  ],
+  [
+   "48/25",
+   "199/200",
+   "2297/200000"
+  ],
+  [
+   "48/25",
+   "289/200",
+   "4173/200000"
+  ],
+  [
+   "48/25",
+   "473/200",
+   "4173/200000"
+  ],
+  [
+   "48/25",
+   "563/200",
+   "2297/200000"
+  ],
+  [
+   "77/40",
+   "199/200",
+   "473/50000"
+  ],
+  [
+   "77/40",
+   "291/200",
+   "2553/100000"
+  ],
+  [
+   "77/40",
+   "471/200",
+   "2553/100000"
+  ],
+  [
+   "77/40",
+   "563/200",
+   "473/50000"
+  ],
+  [
+   "193/100",
+   "199/200",
+   "353/40000"
+  ],
+  [
+   "193/100",
+   "271/200",
+   "1547/100000"
+  ],
+  [
+   "193/100",
+   "491/200",
+   "1547/100000"
+  ],
+  [
+   "193/100",
+   "563/200",
+   "353/40000"
+  ],
+  [
+   "387/200",
+   "199/200",
+   "353/40000"
+  ],
+  [
+   "387/200",
+   "563/200",
+   "353/40000"
+  ],
+  [
+   "97/50",
+   "27/20",
+   "253/200000"
+  ],
+  [
+   "97/50",
+   "123/50",
+   "253/200000"
+  ],
+  [
+   "389/200",
+   "199/200",
+   "57/40000"
+  ],
+  [
+   "389/200",
+   "67/50",
+   "31/100000"
+  ],
+  [
+   "389/200",
+   "323/200",
+   "227/100000"
+  ],
+  [
+   "389/200",
+   "439/200",
+   "227/100000"
+  ],
+  [
+   "389/200",
+   "247/100",
+   "31/100000"
+  ],
+  [
+   "389/200",
+   "563/200",
+   "57/40000"
+  ],
+  [
+   "39/20",
+   "199/200",
+   "93/40000"
+  ],
+  [
+   "39/20",
+   "27/25",
+   "151/25000"
+  ],
+  [
+   "39/20",
+   "3/2",
+   "33/12500"
+  ],
+  [
+   "39/20",
+   "231/100",
+   "33/12500"
+  ],
+  [
+   "39/20",
+   "273/100",
+   "151/25000"
+  ],
+  [
+   "39/20",
+   "563/200",
+   "93/40000"
+  ],
+  [
+   "391/200",
+   "99/100",
+   "143/25000"
+  ],
+  [
+   "391/200",
+   "199/200",
+   "193/20000"
+  ],
+  [
+   "391/200",
+   "27/25",
+   "33/12500"
+  ],
+  [
+   "391/200",
+   "38/25",
+   "631/40000"
+  ],
+  [
+   "391/200",
+   "161/100",
+   "9/2500"
+  ],
+  [
+   "391/200",
+   "11/5",
+   "9/2500"
+  ],
+  [
+   "391/200",
+   "229/100",
+   "631/40000"
+  ],
+  [
+   "391/200",
+   "273/100",
+   "33/12500"
+  ],
+  [
+   "391/200",
+   "563/200",
+   "193/20000"
+  ],
+  [
+   "391/200",
+   "141/50",
+   "143/25000"
+  ],
+  [
+   "1321/675",
+   "1181/1800",
+   "613/40000"
+  ],
+  [
+   "1321/675",
+   "478/675",
+   "19/2500"
+  ],
+  [
+   "1321/675",
+   "821/1080",
+   "1187/200000"
+  ],
+  [
+   "1321/675",
+   "731/900",
+   "567/50000"
+  ],
+  [
+   "1321/675",
+   "1237/1350",
+   "961/100000"
+  ],
+  [
+   "1321/675",
+   "7813/2700",
+   "961/100000"
+  ],
+  [
+   "1321/675",
+   "1349/450",
+   "567/50000"
+  ],
+  [
+   "1321/675",
+   "16469/5400",
+   "1187/200000"
+  ],
+  [
+   "1321/675",
+   "335/108",
+   "19/2500"
+  ],
+  [
+   "1321/675",
+   "5677/1800",
+   "613/40000"
+  ],
+  [
+   "49/25",
+   "49/50",
+   "19/25000"
+  ],
+  [
+   "49/25",
+   "199/200",
+   "13/3125"
+  ],
+  [
+   "49/25",
+   "563/200",
+   "13/3125"
+  ],
+  [
+   "49/25",
+   "283/100",
+   "19/25000"
+  ],
+  [
+   "393/200",
+   "199/200",
+   "63/40000"
+  ],
+  [
+   "393/200",
+   "563/200",
+   "63/40000"
+  ],
+  [
+   "197/100",
+   "199/200",
+   "977/100000"
+  ],
+  [
+   "197/100",
+   "317/200",
+   "21/2500"
+  ],
+  [
+   "197/100",
+   "8/5",
+   "789/100000"
+  ],
+  [
+   "197/100",
+   "321/200",
+   "789/100000"
+  ],
+  [
+   "197/100",
+   "441/200",
+   "789/100000"
+  ],
+  [
+   "197/100",
+   "221/100",
+   "789/100000"
+  ],
+  [
+   "197/100",
+   "89/40",
+   "21/2500"
+  ],
+  [
+   "197/100",
+   "563/200",
+   "977/100000"
+  ],
+  [
+   "79/40",
+   "99/100",
+   "451/100000"
+  ],
+  [
+   "79/40",
+   "141/50",
+   "451/100000"
+  ],
+  [
+   "188/95",
+   "2743/3800",
+   "149/50000"
+  ],
+  [
+   "188/95",
+   "2347/760",
+   "149/50000"
+  ],
+  [
+   "99/50",
+   "99/100",
+   "53/40000"
+  ],
+  [
+   "99/50",
+   "199/200",
+   "1853/200000"
+  ],
+  [
+   "99/50",
+   "563/200",
+   "1853/200000"
+  ],
+  [
+   "99/50",
+   "141/50",
+   "53/40000"
+  ],
+  [
+   "397/200",
+   "197/200",
+   "11/50000"
+  ],
+  [
+   "397/200",
+   "199/200",
+   "631/40000"
+  ],
+  [
+   "397/200",
+   "8/5",
+   "73/200000"
+  ],
+  [
+   "397/200",
+   "321/200",
+   "63/40000"
+  ],
+  [
+   "397/200",
+   "441/200",
+   "63/40000"
+  ],
+  [
+   "397/200",
+   "221/100",
+   "73/200000"
+  ],
+  [
+   "397/200",
+   "563/200",
+   "631/40000"
+  ],
+  [
+   "397/200",
+   "113/40",
+   "11/50000"
+  ],
+  [
+   "39777/20000",
+   "35473313/35642600",
+   "4443/100000"
+  ],
+  [
+   "39777/20000",
+   "100324993/35642600",
+   "4443/100000"
+  ],
+  [
+   "199/100",
+   "199/200",
+   "513/8000"
+  ],
+  [
+   "199/100",
+   "563/200",
+   "513/8000"
+  ],
+  [
+   "399/200",
+   "199/200",
+   "3469/200000"
+  ],
+  [
+   "399/200",
+   "563/200",
+   "3469/200000"
+  ],
+  [
+   "407/200",
+   "81/50",
+   "393/200000"
+  ],
+  [
+   "407/200",
+   "219/100",
+   "393/200000"
+  ],
+  [
+   "207/100",
+   "87/50",
+   "1539/200000"
+  ],
+  [
+   "207/100",
+   "207/100",
+   "1539/200000"
+  ],
+  [
+   "43/20",
+   "97/100",
+   "13/3125"
+  ],
+  [
+   "43/20",
+   "71/25",
+   "13/3125"
+  ],
+  [
+   "431/200",
+   "199/200",
+   "33/12500"
+  ],
+  [
+   "431/200",
+   "563/200",
+   "33/12500"
+  ],
+  [
+   "54/25",
+   "99/100",
+   "27/8000"
+  ],
+  [
+   "54/25",
+   "199/200",
+   "533/200000"
+  ],
+  [
+   "54/25",
+   "563/200",
+   "533/200000"
+  ],
+  [
+   "54/25",
+   "141/50",
+   "27/8000"
+  ],
+  [
+   "2923/1350",
+   "581/600",
+   "47/25000"
+  ],
+  [
+   "2923/1350",
+   "341/120",
+   "47/25000"
+  ],
+  [
+   "217/100",
+   "199/200",
+   "279/50000"
+  ],
+  [
+   "217/100",
+   "19/10",
+   "169/50000"
+  ],
+  [
+   "217/100",
+   "191/100",
+   "169/50000"
+  ],
+  [
+   "217/100",
+   "563/200",
+   "279/50000"
+  ],
+  [
+   "1093/500",
+   "381/200",
+   "49/20000"
+  ],
+  [
+   "219/100",
+   "71/40",
+   "393/200000"
+  ],
+  [
+   "219/100",
+   "407/200",
+   "393/200000"
+  ],
+  [
+   "439/200",
+   "199/200",
+   "19/25000"
+  ],
+  [
+   "439/200",
+   "373/200",
+   "227/100000"
+  ],
+  [
+   "439/200",
+   "389/200",
+   "227/100000"
+  ],
+  [
+   "439/200",
+   "563/200",
+   "19/25000"
+  ],
+  [
+   "11/5",
+   "371/200",
+   "9/2500"
+  ],
+  [
+   "11/5",
+   "19/10",
+   "1671/200000"
+  ],
+  [
+   "11/5",
+   "191/100",
+   "1671/200000"
+  ],
+  [
+   "11/5",
+   "391/200",
+   "9/2500"
+  ],
+  [
+   "441/200",
+   "73/40",
+   "63/40000"
+  ],
+  [
+   "441/200",
+   "46/25",
+   "789/100000"
+  ],
+  [
+   "441/200",
+   "197/100",
+   "789/100000"
+  ],
+  [
+   "441/200",
+   "397/200",
+   "63/40000"
+  ],
+  [
+   "221/100",
+   "73/40",
+   "73/200000"
+  ],
+  [
+   "221/100",
+   "46/25",
+   "789/100000"
+  ],
+  [
+   "221/100",
+   "197/100",
+   "789/100000"
+  ],
+  [
+   "221/100",
+   "397/200",
+   "73/200000"
+  ],
+  [
+   "443/200",
+   "199/200",
+   "167/25000"
+  ],
+  [
+   "443/200",
+   "563/200",
+   "167/25000"
+  ],
+  [
+   "3991/1800",
+   "381/200",
+   "353/40000"
+  ],
+  [
+   "111/50",
+   "199/200",
+   "91/10000"
+  ],
+  [
+   "111/50",
+   "563/200",
+   "91/10000"
+  ],
+  [
+   "89/40",
+   "199/200",
+   "91/200000"
+  ],
+  [
+   "89/40",
+   "46/25",
+   "21/2500"
+  ],
+  [
+   "89/40",
+   "197/100",
+   "21/2500"
+  ],
+  [
+   "89/40",
+   "563/200",
+   "91/200000"
+  ],
+  [
+   "223/100",
+   "199/200",
+   "1589/200000"
+  ],
+  [
+   "223/100",
+   "563/200",
+   "1589/200000"
+  ],
+  [
+   "447/200",
+   "199/200",
+   "93/40000"
+  ],
+  [
+   "447/200",
+   "563/200",
+   "93/40000"
+  ],
+  [
+   "449/200",
+   "199/200",
+   "473/50000"
+  ],
+  [
+   "449/200",
+   "563/200",
+   "473/50000"
+  ],
+  [
+   "9/4",
+   "199/200",
+   "789/100000"
+  ],
+  [
+   "9/4",
+   "563/200",
+   "789/100000"
+  ],
+  [
+   "113/50",
+   "199/200",
+   "9/2500"
+  ],
+  [
+   "113/50",
+   "563/200",
+   "9/2500"
+  ],
+  [
+   "227/100",
+   "99/100",
+   "7/4000"
+  ],
+  [
+   "227/100",
+   "199/200",
+   "467/50000"
+  ],
+  [
+   "227/100",
+   "563/200",
+   "467/50000"
+  ],
+  [
+   "227/100",
+   "141/50",
+   "7/4000"
+  ],
+  [
+   "457/200",
+   "99/100",
+   "1671/200000"
+  ],
+  [
+   "457/200",
+   "199/200",
+   "1671/200000"
+  ],
+  [
+   "457/200",
+   "563/200",
+   "1671/200000"
+  ],
+  [
+   "457/200",
+   "141/50",
+   "1671/200000"
+  ],
+  [
+   "229/100",
+   "199/200",
+   "21/2500"
+  ],
+  [
+   "229/100",
+   "371/200",
+   "631/40000"
+  ],
+  [
+   "229/100",
+   "391/200",
+   "631/40000"
+  ],
+  [
+   "229/100",
+   "563/200",
+   "21/2500"
+  ],
+  [
+   "23/10",
+   "199/200",
+   "49/20000"
+  ],
+  [
+   "23/10",
+   "563/200",
+   "49/20000"
+  ],
+  [
+   "461/200",
+   "199/200",
+   "533/40000"
+  ],
+  [
+   "461/200",
+   "563/200",
+   "533/40000"
+  ],
+  [
+   "231/100",
+   "199/200",
+   "347/40000"
+  ],
+  [
+   "231/100",
+   "93/50",
+   "33/12500"
+  ],
+  [
+   "231/100",
+   "39/20",
+   "33/12500"
+  ],
+  [
+   "231/100",
+   "563/200",
+   "347/40000"
+  ],
+  [
+   "463/200",
+   "199/200",
+   "333/40000"
+  ],
+  [
+   "463/200",
+   "563/200",
+   "333/40000"
+  ],
+  [
+   "58/25",
+   "199/200",
+   "393/200000"
+  ],
+  [
+   "58/25",
+   "563/200",
+   "393/200000"
+  ],
+  [
+   "467/200",
+   "199/200",
+   "1539/200000"
+  ],
+  [
+   "467/200",
+   "563/200",
+   "1539/200000"
+  ],
+  [
+   "117/50",
+   "99/100",
+   "31/100000"
+  ],
+  [
+   "117/50",
+   "141/50",
+   "31/100000"
+  ],
+  [
+   "471/200",
+   "199/200",
+   "83/50000"
+  ],
+  [
+   "471/200",
+   "377/200",
+   "2553/100000"
+  ],
+  [
+   "471/200",
+   "77/40",
+   "2553/100000"
+  ],
+  [
+   "471/200",
+   "563/200",
+   "83/50000"
+  ],
+  [
+   "473/200",
+   "189/100",
+   "4173/200000"
+  ],
+  [
+   "473/200",
+   "48/25",
+   "4173/200000"
+  ],
+  [
+   "178/75",
+   "381/200",
+   "2091/200000"
+  ],
+  [
+   "239/100",
+   "19/10",
+   "1387/200000"
+  ],
+  [
+   "239/100",
+   "191/100",
+   "1387/200000"
+  ],
+  [
+   "241/100",
+   "19/10",
+   "777/12500"
+  ],
+  [
+   "241/100",
+   "191/100",
+   "777/12500"
+  ],
+  [
+   "4603/1900",
+   "1793/1900",
+   "241/25000"
+  ],
+  [
+   "4603/1900",
+   "2723/950",
+   "241/25000"
+  ],
+  [
+   "13097/5400",
+   "1237/1350",
+   "27/1000"
+  ],
+  [
+   "13097/5400",
+   "7813/2700",
+   "27/1000"
+  ],
+  [
+   "49/20",
+   "199/200",
+   "151/25000"
+  ],
+  [
+   "49/20",
+   "563/200",
+   "151/25000"
+  ],
+  [
+   "491/200",
+   "47/25",
+   "1547/100000"
+  ],
+  [
+   "491/200",
+   "193/100",
+   "1547/100000"
+  ],
+  [
+   "123/50",
+   "187/100",
+   "253/200000"
+  ],
+  [
+   "123/50",
+   "97/50",
+   "253/200000"
+  ],
+  [
+   "493/200",
+   "199/200",
+   "83/50000"
+  ],
+  [
+   "493/200",
+   "563/200",
+   "83/50000"
+  ],
+  [
+   "2467/1000",
+   "581/600",
+   "3199/200000"
+  ],
+  [
+   "2467/1000",
+   "341/120",
+   "3199/200000"
+  ],
+  [
+   "247/100",
+   "373/200",
+   "31/100000"
+  ],
+  [
+   "247/100",
+   "389/200",
+   "31/100000"
+  ],
+  [
+   "6689/2700",
+   "1237/1350",
+   "1623/100000"
+  ],
+  [
+   "6689/2700",
+   "7813/2700",
+   "1623/100000"
+  ],
+  [
+   "511/200",
+   "99/100",
+   "47/25000"
+  ],
+  [
+   "511/200",
+   "199/200",
+   "79/100000"
+  ],
+  [
+   "511/200",
+   "563/200",
+   "79/100000"
+  ],
+  [
+   "511/200",
+   "141/50",
+   "47/25000"
+  ],
+  [
+   "64/25",
+   "99/100",
+   "33/12500"
+  ],
+  [
+   "64/25",
+   "141/50",
+   "33/12500"
+  ],
+  [
+   "513/200",
+   "199/200",
+   "17/200000"
+  ],
+  [
+   "513/200",
+   "563/200",
+   "17/200000"
+  ],
+  [
+   "257/100",
+   "39/40",
+   "329/100000"
+  ],
+  [
+   "257/100",
+   "567/200",
+   "329/100000"
+  ],
+  [
+   "519/200",
+   "199/200",
+   "47/25000"
+  ],
+  [
+   "519/200",
+   "563/200",
+   "47/25000"
+  ],
+  [
+   "521/200",
+   "199/200",
+   "61/40000"
+  ],
+  [
+   "521/200",
+   "563/200",
+   "61/40000"
+  ],
+  [
+   "261/100",
+   "99/100",
+   "33/12500"
+  ],
+  [
+   "261/100",
+   "141/50",
+   "33/12500"
+  ],
+  [
+   "273/100",
+   "371/200",
+   "33/12500"
+  ],
+  [
+   "273/100",
+   "93/50",
+   "151/25000"
+  ],
+  [
+   "273/100",
+   "39/20",
+   "151/25000"
+  ],
+  [
+   "273/100",
+   "391/200",
+   "33/12500"
+  ],
+  [
+   "5212327/1853400",
+   "1849127/1853400",
+   "917/6250"
+  ],
+  [
+   "5212327/1853400",
+   "5212327/1853400",
+   "917/6250"
+  ],
+  [
+   "476706963/169484600",
+   "182759609/184037800",
+   "1343/40000"
+  ],
+  [
+   "476706963/169484600",
+   "518424409/184037800",
+   "1343/40000"
+  ],
+  [
+   "100324993/35642600",
+   "36423/20000",
+   "4443/100000"
+  ],
+  [
+   "100324993/35642600",
+   "39777/20000",
+   "4443/100000"
+  ],
+  [
+   "563/200",
+   "61/100",
+   "33/500"
+  ],
+  [
+   "563/200",
+   "31/50",
+   "977/100000"
+  ],
+  [
+   "563/200",
+   "5/8",
+   "887/200000"
+  ],
+  [
+   "563/200",
+   "13/20",
+   "1277/200000"
+  ],
+  [
+   "563/200",
+   "33/50",
+   "31/10000"
+  ],
+  [
+   "563/200",
+   "133/200",
+   "631/40000"
+  ],
+  [
+   "563/200",
+   "27/40",
+   "127/200000"
+  ],
+  [
+   "563/200",
+   "137/200",
+   "3029/200000"
+  ],
+  [
+   "563/200",
+   "139/200",
+   "1853/200000"
+  ],
+  [
+   "563/200",
+   "73/100",
+   "357/40000"
+  ],
+  [
+   "563/200",
+   "149/200",
+   "63/10000"
+  ],
+  [
+   "563/200",
+   "151/200",
+   "237/25000"
+  ],
+  [
+   "563/200",
+   "43/50",
+   "2297/200000"
+  ],
+  [
+   "563/200",
+   "173/200",
+   "97/8000"
+  ],
+  [
+   "563/200",
+   "22/25",
+   "3/40000"
+  ],
+  [
+   "563/200",
+   "177/200",
+   "631/40000"
+  ],
+  [
+   "563/200",
+   "89/100",
+   "127/200000"
+  ],
+  [
+   "563/200",
+   "179/200",
+   "631/40000"
+  ],
+  [
+   "563/200",
+   "9/10",
+   "237/25000"
+  ],
+  [
+   "563/200",
+   "91/100",
+   "27/2500"
+  ],
+  [
+   "563/200",
+   "23/25",
+   "6323/200000"
+  ],
+  [
+   "563/200",
+   "37/40",
+   "237/25000"
+  ],
+  [
+   "563/200",
+   "93/100",
+   "631/40000"
+  ],
+  [
+   "563/200",
+   "47/50",
+   "393/40000"
+  ],
+  [
+   "563/200",
+   "189/200",
+   "49/50000"
+  ],
+  [
+   "563/200",
+   "19/20",
+   "2369/200000"
+  ],
+  [
+   "563/200",
+   "241/200",
+   "61/40000"
+  ],
+  [
+   "563/200",
+   "243/200",
+   "47/25000"
+  ],
+  [
+   "563/200",
+   "249/200",
+   "17/200000"
+  ],
+  [
+   "563/200",
+   "251/200",
+   "79/100000"
+  ],
+  [
+   "563/200",
+   "269/200",
+   "83/50000"
+  ],
+  [
+   "563/200",
+   "34/25",
+   "151/25000"
+  ],
+  [
+   "563/200",
+   "291/200",
+   "83/50000"
+  ],
+  [
+   "563/200",
+   "59/40",
+   "1539/200000"
+  ],
+  [
+   "563/200",
+   "149/100",
+   "393/200000"
+  ],
+  [
+   "563/200",
+   "299/200",
+   "333/40000"
+  ],
+  [
+   "563/200",
+   "3/2",
+   "347/40000"
+  ],
+  [
+   "563/200",
+   "301/200",
+   "533/40000"
+  ],
+  [
+   "563/200",
+   "151/100",
+   "49/20000"
+  ],
+  [
+   "563/200",
+   "38/25",
+   "21/2500"
+  ],
+  [
+   "563/200",
+   "61/40",
+   "1671/200000"
+  ],
+  [
+   "563/200",
+   "77/50",
+   "467/50000"
+  ],
+  [
+   "563/200",
+   "31/20",
+   "9/2500"
+  ],
+  [
+   "563/200",
+   "39/25",
+   "789/100000"
+  ],
+  [
+   "563/200",
+   "313/200",
+   "473/50000"
+  ],
+  [
+   "563/200",
+   "63/40",
+   "93/40000"
+  ],
+  [
+   "563/200",
+   "79/50",
+   "1589/200000"
+  ],
+  [
+   "563/200",
+   "317/200",
+   "91/200000"
+  ],
+  [
+   "563/200",
+   "159/100",
+   "91/10000"
+  ],
+  [
+   "563/200",
+   "319/200",
+   "167/25000"
+  ],
+  [
+   "563/200",
+   "323/200",
+   "19/25000"
+  ],
+  [
+   "563/200",
+   "41/25",
+   "279/50000"
+  ],
+  [
+   "563/200",
+   "33/20",
+   "533/200000"
+  ],
+  [
+   "563/200",
+   "331/200",
+   "33/12500"
+  ],
+  [
+   "563/200",
+   "363/200",
+   "3469/200000"
+  ],
+  [
+   "563/200",
+   "91/50",
+   "513/8000"
+  ],
+  [
+   "563/200",
+   "73/40",
+   "631/40000"
+  ],
+  [
+   "563/200",
+   "183/100",
+   "1853/200000"
+  ],
+  [
+   "563/200",
+   "46/25",
+   "977/100000"
+  ],
+  [
+   "563/200",
+   "369/200",
+   "63/40000"
+  ],
+  [
+   "563/200",
+   "37/20",
+   "13/3125"
+  ],
+  [
+   "563/200",
+   "371/200",
+   "193/20000"
+  ],
+  [
+   "563/200",
+   "93/50",
+   "93/40000"
+  ],
+  [
+   "563/200",
+   "373/200",
+   "57/40000"
+  ],
+  [
+   "563/200",
+   "15/8",
+   "353/40000"
+  ],
+  [
+   "563/200",
+   "47/25",
+   "353/40000"
+  ],
+  [
+   "563/200",
+   "377/200",
+   "473/50000"
+  ],
+  [
+   "563/200",
+   "189/100",
+   "2297/200000"
+  ],
+  [
+   "563/200",
+   "379/200",
+   "2091/200000"
+  ],
+  [
+   "563/200",
+   "19/10",
+   "7/4000"
+  ],
+  [
+   "563/200",
+   "381/200",
+   "3281/200000"
+  ],
+  [
+   "563/200",
+   "191/100",
+   "7/4000"
+  ],
+  [
+   "563/200",
+   "383/200",
+   "2091/200000"
+  ],
+  [
+   "563/200",
+   "48/25",
+   "2297/200000"
+  ],
+  [
+   "563/200",
+   "77/40",
+   "473/50000"
+  ],
+  [
+   "563/200",
+   "193/100",
+   "353/40000"
+  ],
+  [
+   "563/200",
+   "387/200",
+   "353/40000"
+  ],
+  [
+   "563/200",
+   "389/200",
+   "57/40000"
+  ],
+  [
+   "563/200",
+   "39/20",
+   "93/40000"
+  ],
+  [
+   "563/200",
+   "391/200",
+   "193/20000"
+  ],
+  [
+   "563/200",
+   "49/25",
+   "13/3125"
+  ],
+  [
+   "563/200",
+   "393/200",
+   "63/40000"
+  ],
+  [
+   "563/200",
+   "197/100",
+   "977/100000"
+  ],
+  [
+   "563/200",
+   "99/50",
+   "1853/200000"
+  ],
+  [
+   "563/200",
+   "397/200",
+   "631/40000"
+  ],
+  [
+   "563/200",
+   "199/100",
+   "513/8000"
+  ],
+  [
+   "563/200",
+   "399/200",
+   "3469/200000"
+  ],
+  [
+   "563/200",
+   "431/200",
+   "33/12500"
+  ],
+  [
+   "563/200",
+   "54/25",
+   "533/200000"
+  ],
+  [
+   "563/200",
+   "217/100",
+   "279/50000"
+  ],
+  [
+   "563/200",
+   "439/200",
+   "19/25000"
+  ],
+  [
+   "563/200",
+   "443/200",
+   "167/25000"
+  ],
+  [
+   "563/200",
+   "111/50",
+   "91/10000"
+  ],
+  [
+   "563/200",
+   "89/40",
+   "91/200000"
+  ],
+  [
+   "563/200",
+   "223/100",
+   "1589/200000"
+  ],
+  [
+   "563/200",
+   "447/200",
+   "93/40000"
+  ],
+  [
+   "563/200",
+   "449/200",
+   "473/50000"
+  ],
+  [
+   "563/200",
+   "9/4",
+   "789/100000"
+  ],
+  [
+   "563/200",
+   "113/50",
+   "9/2500"
+  ],
+  [
+   "563/200",
+   "227/100",
+   "467/50000"
+  ],
+  [
+   "563/200",
+   "457/200",
+   "1671/200000"
+  ],
+  [
+   "563/200",
+   "229/100",
+   "21/2500"
+  ],
+  [
+   "563/200",
+   "23/10",
+   "49/20000"
+  ],
+  [
+   "563/200",
+   "461/200",
+   "533/40000"
+  ],
+  [
+   "563/200",
+   "231/100",
+   "347/40000"
+  ],
+  [
+   "563/200",
+   "463/200",
+   "333/40000"
+  ],
+  [
+   "563/200",
+   "58/25",
+   "393/200000"
+  ],
+  [
+   "563/200",
+   "467/200",
+   "1539/200000"
+  ],
+  [
+   "563/200",
+   "471/200",
+   "83/50000"
+  ],
+  [
+   "563/200",
+   "49/20",
+   "151/25000"
+  ],
+  [
+   "563/200",
+   "493/200",
+   "83/50000"
+  ],
+  [
+   "563/200",
+   "511/200",
+   "79/100000"
+  ],
+  [
+   "563/200",
+   "513/200",
+   "17/200000"
+  ],
+  [
+   "563/200",
+   "519/200",
+   "47/25000"
+  ],
+  [
+   "563/200",
+   "521/200",
+   "61/40000"
+  ],
+  [
+   "563/200",
+   "143/50",
+   "2369/200000"
+  ],
+  [
+   "563/200",
+   "573/200",
+   "49/50000"
+  ],
+  [
+   "563/200",
+   "287/100",
+   "393/40000"
+  ],
+  [
+   "563/200",
+   "72/25",
+   "631/40000"
+  ],
+  [
+   "563/200",
+   "577/200",
+   "237/25000"
+  ],
+  [
+   "563/200",
+   "289/100",
+   "6323/200000"
+  ],
+  [
+   "563/200",
+   "29/10",
+   "27/2500"
+  ],
+  [
+   "563/200",
+   "291/100",
+   "237/25000"
+  ],
+  [
+   "563/200",
+   "583/200",
+   "631/40000"
+  ],
+  [
+   "563/200",
+   "73/25",
+   "127/200000"
+  ],
+  [
+   "563/200",
+   "117/40",
+   "631/40000"
+  ],
+  [
+   "563/200",
+   "293/100",
+   "3/40000"
+  ],
+  [
+   "563/200",
+   "589/200",
+   "97/8000"
+  ],
+  [
+   "563/200",
+   "59/20",
+   "2297/200000"
+  ],
+  [
+   "563/200",
+   "611/200",
+   "237/25000"
+  ],
+  [
+   "563/200",
+   "613/200",
+   "63/10000"
+  ],
+  [
+   "563/200",
+   "77/25",
+   "357/40000"
+  ],
+  [
+   "563/200",
+   "623/200",
+   "1853/200000"
+  ],
+  [
+   "563/200",
+   "25/8",
+   "3029/200000"
+  ],
+  [
+   "563/200",
+   "627/200",
+   "127/200000"
+  ],
+  [
+   "563/200",
+   "629/200",
+   "631/40000"
+  ],
+  [
+   "563/200",
+   "63/20",
+   "31/10000"
+  ],
+  [
+   "563/200",
+   "79/25",
+   "1277/200000"
+  ],
+  [
+   "563/200",
+   "637/200",
+   "887/200000"
+  ],
+  [
+   "563/200",
+   "319/100",
+   "977/100000"
+  ],
+  [
+   "563/200",
+   "16/5",
+   "33/500"
+  ],
+  [
+   "518424409/184037800",
+   "169029363/169484600",
+   "1343/40000"
+  ],
+  [
+   "518424409/184037800",
+   "476706963/169484600",
+   "1343/40000"
+  ],
+  [
+   "141/50",
+   "43/100",
+   "7/4000"
+  ],
+  [
+   "141/50",
+   "31/50",
+   "47/25000"
+  ],
+  [
+   "141/50",
+   "129/200",
+   "279/200000"
+  ],
+  [
+   "141/50",
+   "149/200",
+   "633/25000"
+  ],
+  [
+   "141/50",
+   "24/25",
+   "63/40000"
+  ],
+  [
+   "141/50",
+   "49/50",
+   "567/50000"
+  ],
+  [
+   "141/50",
+   "99/100",
+   "267/50000"
+  ],
+  [
+   "141/50",
+   "6/5",
+   "33/12500"
+  ],
+  [
+   "141/50",
+   "5/4",
+   "33/12500"
+  ],
+  [
+   "141/50",
+   "251/200",
+   "47/25000"
+  ],
+  [
+   "141/50",
+   "147/100",
+   "31/100000"
+  ],
+  [
+   "141/50",
+   "61/40",
+   "1671/200000"
+  ],
+  [
+   "141/50",
+   "77/50",
+   "7/4000"
+  ],
+  [
+   "141/50",
+   "33/20",
+   "27/8000"
+  ],
+  [
+   "141/50",
+   "183/100",
+   "53/40000"
+  ],
+  [
+   "141/50",
+   "367/200",
+   "451/100000"
+  ],
+  [
+   "141/50",
+   "371/200",
+   "143/25000"
+  ],
+  [
+   "141/50",
+   "391/200",
+   "143/25000"
+  ],
+  [
+   "141/50",
+   "79/40",
+   "451/100000"
+  ],
+  [
+   "141/50",
+   "99/50",
+   "53/40000"
+  ],
+  [
+   "141/50",
+   "54/25",
+   "27/8000"
+  ],
+  [
+   "141/50",
+   "227/100",
+   "7/4000"
+  ],
+  [
+   "141/50",
+   "457/200",
+   "1671/200000"
+  ],
+  [
+   "141/50",
+   "117/50",
+   "31/100000"
+  ],
+  [
+   "141/50",
+   "511/200",
+   "47/25000"
+  ],
+  [
+   "141/50",
+   "64/25",
+   "33/12500"
+  ],
+  [
+   "141/50",
+   "261/100",
+   "33/12500"
+  ],
+  [
+   "141/50",
+   "141/50",
+   "267/50000"
+  ],
+  [
+   "141/50",
+   "283/100",
+   "567/50000"
+  ],
+  [
+   "141/50",
+   "57/20",
+   "63/40000"
+  ],
+  [
+   "141/50",
+   "613/200",
+   "633/25000"
+  ],
+  [
+   "141/50",
+   "633/200",
+   "279/200000"
+  ],
+  [
+   "141/50",
+   "319/100",
+   "47/25000"
+  ],
+  [
+   "141/50",
+   "169/50",
+   "7/4000"
+  ],
+  [
+   "113/40",
+   "7/10",
+   "127/200000"
+  ],
+  [
+   "113/40",
+   "141/200",
+   "11/50000"
+  ],
+  [
+   "113/40",
+   "73/100",
+   "237/25000"
+  ],
+  [
+   "113/40",
+   "73/40",
+   "11/50000"
+  ],
+  [
+   "113/40",
+   "397/200",
+   "11/50000"
+  ],
+  [
+   "113/40",
+   "77/25",
+   "237/25000"
+  ],
+  [
+   "113/40",
+   "621/200",
+   "11/50000"
+  ],
+  [
+   "113/40",
+   "311/100",
+   "127/200000"
+  ],
+  [
+   "283/100",
+   "12/25",
+   "277/20000"
+  ],
+  [
+   "283/100",
+   "147/200",
+   "53/40000"
+  ],
+  [
+   "283/100",
+   "19/20",
+   "487/200000"
+  ],
+  [
+   "283/100",
+   "99/100",
+   "567/50000"
+  ],
+  [
+   "283/100",
+   "37/20",
+   "19/25000"
+  ],
+  [
+   "283/100",
+   "49/25",
+   "19/25000"
+  ],
+  [
+   "283/100",
+   "141/50",
+   "567/50000"
+  ],
+  [
+   "283/100",
+   "143/50",
+   "487/200000"
+  ],
+  [
+   "283/100",
+   "123/40",
+   "53/40000"
+  ],
+  [
+   "283/100",
+   "333/100",
+   "277/20000"
+  ],
+  [
+   "567/200",
+   "31/25",
+   "329/100000"
+  ],
+  [
+   "567/200",
+   "257/100",
+   "329/100000"
+  ],
+  [
+   "71/25",
+   "83/50",
+   "13/3125"
+  ],
+  [
+   "71/25",
+   "43/20",
+   "13/3125"
+  ],
+  [
+   "341/120",
+   "1/2",
+   "63/40000"
+  ],
+  [
+   "341/120",
+   "781/1000",
+   "1371/200000"
+  ],
+  [
+   "341/120",
+   "1343/1000",
+   "3199/200000"
+  ],
+  [
+   "341/120",
+   "4441/2700",
+   "47/25000"
+  ],
+  [
+   "341/120",
+   "381/200",
+   "3747/200000"
+  ],
+  [
+   "341/120",
+   "2923/1350",
+   "47/25000"
+  ],
+  [
+   "341/120",
+   "2467/1000",
+   "3199/200000"
+  ],
+  [
+   "341/120",
+   "3029/1000",
+   "1371/200000"
+  ],
+  [
+   "341/120",
+   "331/100",
+   "63/40000"
+  ],
+  [
+   "57/20",
+   "99/100",
+   "63/40000"
+  ],
+  [
+   "57/20",
+   "141/50",
+   "63/40000"
+  ],
+  [
+   "143/50",
+   "49/50",
+   "487/200000"
+  ],
+  [
+   "143/50",
+   "199/200",
+   "2369/200000"
+  ],
+  [
+   "143/50",
+   "563/200",
+   "2369/200000"
+  ],
+  [
+   "143/50",
+   "283/100",
+   "487/200000"
+  ],
+  [
+   "573/200",
+   "199/200",
+   "49/50000"
+  ],
+  [
+   "573/200",
+   "563/200",
+   "49/50000"
+  ],
+  [
+   "2723/950",
+   "659/475",
+   "241/25000"
+  ],
+  [
+   "2723/950",
+   "4603/1900",
+   "241/25000"
+  ],
+  [
+   "287/100",
+   "199/200",
+   "393/40000"
+  ],
+  [
+   "287/100",
+   "563/200",
+   "393/40000"
+  ],
+  [
+   "72/25",
+   "199/200",
+   "631/40000"
+  ],
+  [
+   "72/25",
+   "563/200",
+   "631/40000"
+  ],
+  [
+   "577/200",
+   "199/200",
+   "237/25000"
+  ],
+  [
+   "577/200",
+   "563/200",
+   "237/25000"
+  ],
+  [
+   "289/100",
+   "199/200",
+   "6323/200000"
+  ],
+  [
+   "289/100",
+   "563/200",
+   "6323/200000"
+  ],
+  [
+   "7813/2700",
+   "1799/1350",
+   "1623/100000"
+  ],
+  [
+   "7813/2700",
+   "7477/5400",
+   "27/1000"
+  ],
+  [
+   "7813/2700",
+   "5003/2700",
+   "961/100000"
+  ],
+  [
+   "7813/2700",
+   "1321/675",
+   "961/100000"
+  ],
+  [
+   "7813/2700",
+   "13097/5400",
+   "27/1000"
+  ],
+  [
+   "7813/2700",
+   "6689/2700",
+   "1623/100000"
+  ],
+  [
+   "29/10",
+   "199/200",
+   "27/2500"
+  ],
+  [
+   "29/10",
+   "563/200",
+   "27/2500"
+  ],
+  [
+   "291/100",
+   "199/200",
+   "237/25000"
+  ],
+  [
+   "291/100",
+   "563/200",
+   "237/25000"
+  ],
+  [
+   "583/200",
+   "199/200",
+   "631/40000"
+  ],
+  [
+   "583/200",
+   "563/200",
+   "631/40000"
+  ],
+  [
+   "73/25",
+   "199/200",
+   "127/200000"
+  ],
+  [
+   "73/25",
+   "563/200",
+   "127/200000"
+  ],
+  [
+   "117/40",
+   "199/200",
+   "631/40000"
+  ],
+  [
+   "117/40",
+   "563/200",
+   "631/40000"
+  ],
+  [
+   "293/100",
+   "199/200",
+   "3/40000"
+  ],
+  [
+   "293/100",
+   "563/200",
+   "3/40000"
+  ],
+  [
+   "4403/1500",
+   "381/200",
+   "213/5000"
+  ],
+  [
+   "589/200",
+   "199/200",
+   "97/8000"
+  ],
+  [
+   "589/200",
+   "563/200",
+   "97/8000"
+  ],
+  [
+   "59/20",
+   "199/200",
+   "2297/200000"
+  ],
+  [
+   "59/20",
+   "563/200",
+   "2297/200000"
+  ],
+  [
+   "1349/450",
+   "5003/2700",
+   "567/50000"
+  ],
+  [
+   "1349/450",
+   "1321/675",
+   "567/50000"
+  ],
+  [
+   "3029/1000",
+   "581/600",
+   "1371/200000"
+  ],
+  [
+   "3029/1000",
+   "341/120",
+   "1371/200000"
+  ],
+  [
+   "16469/5400",
+   "5003/2700",
+   "1187/200000"
+  ],
+  [
+   "16469/5400",
+   "381/200",
+   "617/100000"
+  ],
+  [
+   "16469/5400",
+   "1321/675",
+   "1187/200000"
+  ],
+  [
+   "168/55",
+   "381/200",
+   "39/40000"
+  ],
+  [
+   "611/200",
+   "199/200",
+   "237/25000"
+  ],
+  [
+   "611/200",
+   "563/200",
+   "237/25000"
+  ],
+  [
+   "613/200",
+   "99/100",
+   "633/25000"
+  ],
+  [
+   "613/200",
+   "199/200",
+   "63/10000"
+  ],
+  [
+   "613/200",
+   "563/200",
+   "63/10000"
+  ],
+  [
+   "613/200",
+   "141/50",
+   "633/25000"
+  ],
+  [
+   "123/40",
+   "49/50",
+   "53/40000"
+  ],
+  [
+   "123/40",
+   "283/100",
+   "53/40000"
+  ],
+  [
+   "77/25",
+   "197/200",
+   "237/25000"
+  ],
+  [
+   "77/25",
+   "199/200",
+   "357/40000"
+  ],
+  [
+   "77/25",
+   "563/200",
+   "357/40000"
+  ],
+  [
+   "77/25",
+   "113/40",
+   "237/25000"
+  ],
+  [
+   "2347/760",
+   "3479/1900",
+   "149/50000"
+  ],
+  [
+   "2347/760",
+   "381/200",
+   "961/100000"
+  ],
+  [
+   "2347/760",
+   "188/95",
+   "149/50000"
+  ],
+  [
+   "335/108",
+   "5003/2700",
+   "19/2500"
+  ],
+  [
+   "335/108",
+   "381/200",
+   "2261/200000"
+  ],
+  [
+   "335/108",
+   "1321/675",
+   "19/2500"
+  ],
+  [
+   "621/200",
+   "197/200",
+   "11/50000"
+  ],
+  [
+   "621/200",
+   "113/40",
+   "11/50000"
+  ],
+  [
+   "311/100",
+   "197/200",
+   "127/200000"
+  ],
+  [
+   "311/100",
+   "113/40",
+   "127/200000"
+  ],
+  [
+   "623/200",
+   "199/200",
+   "1853/200000"
+  ],
+  [
+   "623/200",
+   "563/200",
+   "1853/200000"
+  ],
+  [
+   "25/8",
+   "199/200",
+   "3029/200000"
+  ],
+  [
+   "25/8",
+   "563/200",
+   "3029/200000"
+  ],
+  [
+   "627/200",
+   "199/200",
+   "127/200000"
+  ],
+  [
+   "627/200",
+   "563/200",
+   "127/200000"
+  ],
+  [
+   "629/200",
+   "199/200",
+   "631/40000"
+  ],
+  [
+   "629/200",
+   "563/200",
+   "631/40000"
+  ],
+  [
+   "63/20",
+   "199/200",
+   "31/10000"
+  ],
+  [
+   "63/20",
+   "563/200",
+   "31/10000"
+  ],
+  [
+   "5677/1800",
+   "5003/2700",
+   "613/40000"
+  ],
+  [
+   "5677/1800",
+   "1321/675",
+   "613/40000"
+  ],
+  [
+   "79/25",
+   "199/200",
+   "1277/200000"
+  ],
+  [
+   "79/25",
+   "563/200",
+   "1277/200000"
+  ],
+  [
+   "633/200",
+   "99/100",
+   "279/200000"
+  ],
+  [
+   "633/200",
+   "141/50",
+   "279/200000"
+  ],
+  [
+   "637/200",
+   "199/200",
+   "887/200000"
+  ],
+  [
+   "637/200",
+   "563/200",
+   "887/200000"
+  ],
+  [
+   "319/100",
+   "99/100",
+   "47/25000"
+  ],
+  [
+   "319/100",
+   "199/200",
+   "977/100000"
+  ],
+  [
+   "319/100",
+   "563/200",
+   "977/100000"
+  ],
+  [
+   "319/100",
+   "141/50",
+   "47/25000"
+  ],
+  [
+   "16/5",
+   "199/200",
+   "33/500"
+  ],
+  [
+   "16/5",
+   "563/200",
+   "33/500"
+  ],
+  [
+   "2164/675",
+   "381/200",
+   "4499/100000"
+  ],
+  [
+   "17593/5400",
+   "381/200",
+   "567/50000"
+  ],
+  [
+   "331/100",
+   "581/600",
+   "63/40000"
+  ],
+  [
+   "331/100",
+   "381/200",
+   "583/100000"
+  ],
+  [
+   "331/100",
+   "341/120",
+   "63/40000"
+  ],
+  [
+   "333/100",
+   "49/50",
+   "277/20000"
+  ],
+  [
+   "333/100",
+   "283/100",
+   "277/20000"
+  ],
+  [
+   "169/50",
+   "99/100",
+   "7/4000"
+  ],
+  [
+   "169/50",
+   "141/50",
+   "7/4000"
+  ]
+ ]
+}
+````
+
+<a id="source-1-what-is-and-is-not-claimed"></a>
+
+#### What Is and Is Not Claimed
+
+This file decides the $381/100$ bound, and its proof covers exactly what the five
+conditions establish: that eleven unit squares do not fit in a square of side
+$3.81$. Nothing here depends on the correctness of any other code in the
+repository, and nothing here claims that $381/100$ is the true value of $s(11)$: the
+best known packing puts $s(11) \le 3.8770835\ldots$, and the gap is open.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

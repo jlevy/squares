@@ -273,6 +273,44 @@ Row 86 belongs to the pending refined-core transport.
 Exact basis recovery and Lean replay support the relevant candidate or assurance bead;
 they are not additional mathematical hypotheses without a specific method comparison.
 
+## Independent Compatibility and Restricted-Family Proposals
+
+[X-017](explorations/X-017-compatibility-and-complete-case-covers.md) assesses the
+contributed packet against PR105’s committed `46f38ab4` state.
+[Agenda 027](agendas/agenda-027-compatibility-and-restricted-families.md) is prepared
+and paused. These idea numbers and H-111–117 records continue the sequences after the
+parallel source program’s current entries.
+Branch and bead ownership distinguish the programs; the numbers carry no execution order
+or dependency. The source-to-record map in X-017 also routes overlapping proposals to
+existing H-094–103 without duplicating them.
+
+| # | Idea | Status | Record | Crux |
+| --- | --- | --- | --- | --- |
+| 105 | Resources and anchors in a complete case cover | registered | [H-111](hypotheses/H-111-resource-anchor-case-exclusion.md) | Exclude every case at 96/25 with valid mass semantics and a complete anchor cover. |
+| 106 | Six axis-aligned squares plus five at a common free angle | registered | [H-112](hypotheses/H-112-six-axis-five-common-angle-optimum.md) | Cover the continuous family without assuming Trump’s contacts or wall pattern. |
+| 107 | At most two actual orientation classes | registered | [H-113](hypotheses/H-113-at-most-two-angle-optimum.md) | Retain both absolute angles, every multiplicity and all seams. |
+| 108 | A two-pose kernel that excludes eleven | registered | [H-114](hypotheses/H-114-two-pose-kernel-exclusion.md) | Exact positivity, diagonal and compatible-pair bounds must hold over the whole domain, including touching. |
+| 109 | Boundary-null curved resources | registered | [H-115](hypotheses/H-115-boundary-null-curved-resources.md) | Find a concrete useful candidate before building a general verifier. |
+| 110 | Expand full-size dual support beyond Trump’s orbit | registered | [H-116](hypotheses/H-116-expanded-full-size-dual-support.md) | The contributed ceiling concerns the old support only; every extension needs its own exact evidence. |
+| 111 | Force a useful bound on minimizing angle complexity | registered | [H-117](hypotheses/H-117-forced-angle-complexity.md) | A restricted-family success needs a separate argument controlling the unrestricted remainder. |
+
+## Hybrid Strength and Angular Release
+
+[X-018](explorations/X-018-hybrid-strength-and-angular-release.md) critically maps the
+PR108 review into
+[Agenda 028](agendas/agenda-028-hybrid-strength-and-angular-release.md).
+The broad H-111 and H-117 questions retain their owners.
+These narrower comparisons and the precise representative claim can proceed under a
+separate coordinator.
+The agenda is prepared; none of the new instruments is declared ready.
+
+| # | Idea | Status | Record | Crux |
+| --- | --- | --- | --- | --- |
+| 112 | Local capacity beyond a coupled outer LP | registered | [H-118](hypotheses/H-118-capacity-versus-coupled-lp.md) | Require both a resource exclusion and an exact surviving LP witness on the same natural target domain. |
+| 113 | Preserve common-anchor correlation | registered | [H-119](hypotheses/H-119-shared-anchor-correlation.md) | One unsplit box and measure; compare with sharply certified independent minima or a surviving static relaxation. |
+| 114 | Close a rank-nine released-contact domain | registered | [H-120](hypotheses/H-120-rank-nine-release-exclusion.md) | Prove a new continuous sublevel exclusion with all feature and local-chart seams retained. |
+| 115 | An axis-plus-one global minimizing representative | registered | [H-121](hypotheses/H-121-axis-plus-one-minimizer.md) | Establish an existential global reduction; restricted-family value proofs remain a separate obligation. |
+
 ## Open questions
 
 Not claims, so they cannot be hypotheses.

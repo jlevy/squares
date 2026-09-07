@@ -498,6 +498,14 @@ def check(  # noqa: C901 - a flat list of record invariants, each a few lines; s
         ("experiment", experiments),
         ("session", sessions),
         ("agenda", agendas),
+        (
+            "agenda cell",
+            [
+                {"id": item["id"], "_path": agenda["_path"]}
+                for agenda in agendas
+                for item in agenda["items"]
+            ],
+        ),
         ("logbook entry", logbook_entries),
     ):
         seen = defaultdict(list)
@@ -545,10 +553,6 @@ def check(  # noqa: C901 - a flat list of record invariants, each a few lines; s
     for agenda in agendas:
         name = agenda["_path"].name
         items = agenda["items"]
-        item_ids = [item["id"] for item in items]
-        duplicate_items = {item_id for item_id in item_ids if item_ids.count(item_id) > 1}
-        if duplicate_items:
-            problems.append(f"{name}: duplicate item ids: {sorted(duplicate_items)}")
         for item in items:
             item_id = item["id"]
             unknown_hypotheses = set(item.get("hypotheses") or []) - known

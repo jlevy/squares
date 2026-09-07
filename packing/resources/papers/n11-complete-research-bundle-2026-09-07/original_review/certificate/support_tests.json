@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "checks": [
+    "all seven rows reproduced by center/edge projection assembly",
+    "interior and exterior fixtures accepted with correct incidence",
+    "boundary-straddling and out-of-container boxes refused",
+    "altered incidence row refused",
+    "altered multiplier refused",
+    "omitted certificate row refused"
+  ],
+  "independence_boundary": "Projection assembly differs; interval arithmetic, root enclosure, and source geometry are shared. This is not an independent external review."
+}

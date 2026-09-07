@@ -138,7 +138,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives twelve confirmed hypotheses, eleven refuted
-hypotheses, one open hypothesis, fifteen open questions, and thirty-eight blocked
+hypotheses, one open hypothesis, twenty-three open questions, and forty-one blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. No hypothesis is running or waiting on review and six are unresolved.
 H-105 is refuted: all 134 eligible candidate pairs are separated, leaving higher-order
@@ -203,6 +203,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Strategic Mathematical Review: Hybrid Exclusion and Few-Angle Structure at n = 11](docs/project/reviews/review-2026-09-07-n11-hybrid-strategy.md) | dated review record | supporting | maintained | — |
 | [Validation Efficiency Implementation Review](docs/project/reviews/review-2026-09-06-validation-efficiency-implementation.md) | dated review record | record | retained | — |
 | [Validation Efficiency Ideas](packing/benchmarks/validation-efficiency/ideas.md) | implementation plan | supporting | maintained | — |
 | [Reuse Float Midpoint-to-Cell Lookup](packing/benchmarks/validation-efficiency/experiments/VE-001-float-oracle.md) | research synthesis | record | retained | — |
@@ -520,6 +521,30 @@ stop. Long autonomous sessions use the same rule; autonomy changes the duration 
 controller, not permission to blur contracts.
 
 ### Current Handoff
+
+**Focused parallel strategy prepared.**
+[X-018](packing/campaign/explorations/X-018-hybrid-strength-and-angular-release.md)
+reviews PR108 and ranks the overnight opportunities: direct compatibility and complete
+restricted-family domains first, a bounded contact-release investigation alongside them,
+and shared-anchor correlation only on a diagnosed residual.
+[Agenda 028](packing/campaign/agendas/agenda-028-hybrid-strength-and-angular-release.md)
+owns H-118–121 and BC-269–275 under epic `think-pxv5`; it preserves the X-017 allocation
+below and consumes its single BC-261 geometry interface.
+Both proposed agendas are paused, with no new target run launched by this planning.
+The live task **Squares plan X-016** continues the source H-110 and conditional
+compatibility allocation independently; session-091 is already occupied there.
+
+**Independent alternative prepared.**
+[X-017](packing/campaign/explorations/X-017-compatibility-and-complete-case-covers.md)
+reconciles the contributed research packet with PR105’s committed state at `46f38ab4`.
+[Agenda 027](packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md)
+proposes resource-and-anchor and six-plus-five restricted-family pilots, with a separate
+pair-kernel discriminator.
+It is paused, with no target experiments launched.
+Its X-017, H-111–117 and BC-258–268 records and epic `think-sz5t` keep its ownership and
+numbering separate from the continuing agenda below.
+None of its dependencies requires that run to finish; the original handoff remains the
+entry for that run.
 
 The next research phases run in [PR101](https://github.com/jlevy/squares/pull/101) on
 `codex/post-381-next-phases`, with the landed PR100 depth fixes and PR98 validation
@@ -2827,6 +2852,17 @@ round that names the hypothesis, control roles included.
 | [H-108](packing/campaign/hypotheses/H-108-near45-canonical-a3-forcing.md) | confirmed | A contained near-45 square in the canonical region avoiding P10 contains A3 | 1 | 0.67s wall |
 | [H-109](packing/campaign/hypotheses/H-109-near45-canonical-a1-a2-forcing.md) | confirmed | A stronger near-45 A1 implication passed independent replay and transfers to A2 by local reflection | 1 | 0.26s wall |
 | [H-110](packing/campaign/hypotheses/H-110-fixed-near-axis-p12-escape.md) | blocked | One frozen near-axis square may escape the unchanged P12 set; next-block controls and exact verification remain unrun | 0 | — |
+| [H-111](packing/campaign/hypotheses/H-111-resource-anchor-case-exclusion.md) | open question | Can a complete resource-and-anchor case cover exclude eleven squares at side 96/25? | 0 | — |
+| [H-112](packing/campaign/hypotheses/H-112-six-axis-five-common-angle-optimum.md) | blocked | Every packing of six axis-aligned squares and five sharing a free actual angle has side at least the Trump side | 0 | — |
+| [H-113](packing/campaign/hypotheses/H-113-at-most-two-angle-optimum.md) | blocked | Every packing of eleven squares using at most two actual orientation classes has side at least the Trump side | 0 | — |
+| [H-114](packing/campaign/hypotheses/H-114-two-pose-kernel-exclusion.md) | open question | Can a two-pose positive-semidefinite kernel exclude eleven squares at side 96/25? | 0 | — |
+| [H-115](packing/campaign/hypotheses/H-115-boundary-null-curved-resources.md) | open question | Can boundary-null curved resources give a useful candidate-led improvement? | 0 | — |
+| [H-116](packing/campaign/hypotheses/H-116-expanded-full-size-dual-support.md) | open question | Does support beyond the sixty Trump-D4 placements admit depth-one weight above eleven at the exact Trump side? | 0 | — |
+| [H-117](packing/campaign/hypotheses/H-117-forced-angle-complexity.md) | open question | Can minimizing angle complexity be bounded by a complete structural argument, or both near-cluster and dispersed cases be controlled? | 0 | — |
+| [H-118](packing/campaign/hypotheses/H-118-capacity-versus-coupled-lp.md) | open question | Can a local capacity exclude a natural target domain that a strong coupled outer LP permits? | 0 | — |
+| [H-119](packing/campaign/hypotheses/H-119-shared-anchor-correlation.md) | open question | Can joint capture on one unsplit anchor box beat a sharply certified independent-minimum comparator? | 0 | — |
+| [H-120](packing/campaign/hypotheses/H-120-rank-nine-release-exclusion.md) | open question | Can a closed rank-nine release domain below 96/25 be excluded beyond retained local scope? | 0 | — |
+| [H-121](packing/campaign/hypotheses/H-121-axis-plus-one-minimizer.md) | blocked | Some global minimizing packing has orientations in the axis-plus-one-angle family | 0 | — |
 
 ### Confirmed
 

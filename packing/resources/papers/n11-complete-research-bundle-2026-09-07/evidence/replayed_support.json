@@ -1,0 +1,217 @@
+{
+  "verdict": "EXACT NECESSARY-ROW UPPER BOUND 11; CANDIDATE REFUTED",
+  "scope": "Only the D4 support of the supplied Trump construction. Not a global square-packing bound.",
+  "method": "Standard-library rational interval arithmetic; no float decisions, no LP solver, no exhaustive arrangement claim.",
+  "root_bracket": [
+    "4421879599858599128063623/12089258196146291747061760",
+    "44218795998585991280636231/120892581961462917470617600"
+  ],
+  "distinct_placements": 60,
+  "rows": [
+    {
+      "point": [
+        "961/1000",
+        "94/125"
+      ],
+      "radius": "1/100000",
+      "counts": [
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "multiplier": "1",
+      "margin_positive": true
+    },
+    {
+      "point": [
+        "461/500",
+        "461/500"
+      ],
+      "radius": "1/100000",
+      "counts": [
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "multiplier": "3",
+      "margin_positive": true
+    },
+    {
+      "point": [
+        "2621/1000",
+        "3017/1000"
+      ],
+      "radius": "1/100000",
+      "counts": [
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "multiplier": "1",
+      "margin_positive": true
+    },
+    {
+      "point": [
+        "1887/1000",
+        "2893/1000"
+      ],
+      "radius": "1/100000",
+      "counts": [
+        0,
+        0,
+        2,
+        2,
+        1,
+        0,
+        0,
+        1
+      ],
+      "multiplier": "1",
+      "margin_positive": true
+    },
+    {
+      "point": [
+        "1939/1000",
+        "1577/500"
+      ],
+      "radius": "1/100000",
+      "counts": [
+        0,
+        0,
+        2,
+        2,
+        2,
+        0,
+        0,
+        0
+      ],
+      "multiplier": "5/2",
+      "margin_positive": true
+    },
+    {
+      "point": [
+        "81/40",
+        "327/250"
+      ],
+      "radius": "1/100000",
+      "counts": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        3,
+        2
+      ],
+      "multiplier": "1",
+      "margin_positive": true
+    },
+    {
+      "point": [
+        "1939/1000",
+        "1489/1000"
+      ],
+      "radius": "1/100000",
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        4,
+        2,
+        2
+      ],
+      "multiplier": "3/2",
+      "margin_positive": true
+    }
+  ],
+  "combined_coefficients": [
+    "4",
+    "8",
+    "8",
+    "8",
+    "8",
+    "8",
+    "8",
+    "8"
+  ],
+  "upper_bound": "11",
+  "candidate_refutation": {
+    "point": [
+      "97/50",
+      "71/50"
+    ],
+    "radius": "1/100000",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      4,
+      2
+    ],
+    "depth": "7/5",
+    "members": [
+      [
+        8,
+        0,
+        2
+      ],
+      [
+        8,
+        1,
+        2
+      ],
+      [
+        6,
+        0,
+        0
+      ],
+      [
+        6,
+        0,
+        1
+      ],
+      [
+        6,
+        1,
+        0
+      ],
+      [
+        6,
+        1,
+        3
+      ],
+      [
+        9,
+        0,
+        3
+      ],
+      [
+        9,
+        1,
+        1
+      ]
+    ],
+    "margin_positive": true
+  }
+}

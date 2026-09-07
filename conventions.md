@@ -31,7 +31,7 @@ The prefix says what kind of thing it is.
 | Exploration report | `X-NNN` | campaign | `X-001` |
 | Agent session | `session-NNN` | campaign | `session-001` |
 | Agenda | `agenda-NNN` | campaign | `agenda-001` |
-| Agenda cell | `AA-NNN`, prefix declared per agenda | its agenda | `BC-001` |
+| Agenda cell | `BC-NNN` | campaign; owned by one agenda | `BC-001` |
 | Frontier case | `n-NNN` | `frontier/`, one artifact per `n ≤ 100` | `n-011` |
 | Search/proof strategy | `search:N`, `proof:N` | the frontier catalogues | `search:12` |
 | Defect | `D-NNN` | the directory, logged in `defects.yaml` | `D-014` |
@@ -39,6 +39,9 @@ The prefix says what kind of thing it is.
 | Theoretical result | `T-NNN` | the results register, [`packing/frontier/results.yaml`](packing/frontier/results.yaml), under [`epistemics.md`](epistemics.md); `SYNOPSIS.md`’s legacy single-digit `T-N` ids remain that document’s declared shorthand | `T-001` |
 | Review finding | `R-N`, `F-NN` | the review document that declares them | `R-2`, `F-07` |
 | Basin (planned) | canonical key, plus a `B-NNN` alias | campaign, spans series | — |
+
+Agenda cell numbers continue across agendas because `depends_on` and `discharged_by`
+reference the bare cell ID. The ledger checks cell uniqueness across the campaign.
 
 **Experiment ids do not restart at `exp-001` in each series, and this is deliberate.** A
 series is a directory and a field, not a namespace.
