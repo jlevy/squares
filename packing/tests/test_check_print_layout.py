@@ -8,15 +8,21 @@ its job, which is the failure mode a check that has only ever passed cannot dist
 itself from.
 
 So each check is exercised here against a measurement built to trip it, and against one
-built not to. No browser: the probe's arithmetic is the browser's, and what is under test
-is which findings `findings` draws from it.
+built not to. The first-line probe also runs in Node against retained browser rectangle
+measurements, so its grouping is tested without requiring a browser installation.
 """
 
 from __future__ import annotations
 
+import json
+import re
+from textwrap import dedent
+
 import pytest
+from nodejs_wheel import node
 
 from devtools.check_print_layout import (
+    _PROBE,  # pyright: ignore[reportPrivateUsage]
     BOXED_TOLERANCE_PX,
     TOLERANCE_PX,
     Boxed,
@@ -117,6 +123,41 @@ def test_a_marker_within_tolerance_is_not(off: float) -> None:
     """The measured after-values. The tolerance is what separates the two lists."""
     assert abs(off) <= TOLERANCE_PX
     assert not findings(both(markers=[marker(markerCentre=100.0 + off)]))
+
+
+def test_mixed_inline_boxes_share_one_line_and_real_marker_offsets_still_fail() -> None:
+    """The printed mass-condition bullets have inline tops at -1, 0, 2 and 3px."""
+    function = re.search(r"  function firstLineBox\(el\) \{.*?\n  \}", _PROBE, re.DOTALL)
+    assert function is not None
+    script = (
+        dedent("""
+            const rects = [
+              {top: 0, bottom: 22, height: 22, width: 100},
+              {top: 0, bottom: 22.390625, height: 22.390625, width: 20},
+              {top: -1, bottom: 19, height: 20, width: 10},
+              {top: 2, bottom: 22, height: 20, width: 10},
+              {top: 3, bottom: 21, height: 18, width: 10},
+              {top: 22.390625, bottom: 44.390625, height: 22, width: 100},
+            ];
+            const document = {createRange: () => ({
+              selectNodeContents() {}, getClientRects: () => rects,
+            })};
+        """)
+        + function.group()
+        + "\nconsole.log(JSON.stringify(firstLineBox({})));\n"
+    )
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
+    line = json.loads(completed.stdout)
+    assert line == {"top": -1, "bottom": 22.390625}
+    normal = marker(markerCentre=22.390625 / 2, lineCentre=(line["top"] + line["bottom"]) / 2)
+    assert not findings(both(markers=[normal]))
+    displaced = {**normal, "markerCentre": normal["markerCentre"] + 4}
+    found = findings(both(markers=[displaced]))
+    assert len(found) == 2
+    assert all("+4.50px" in finding for finding in found)
 
 
 def test_a_footnote_reference_that_opens_its_line_is_a_finding() -> None:

@@ -319,14 +319,11 @@ _PROBE = r"""() => {
      against an inline box that is not the line box is comparing two different things,
      and the difference was 3px.
 
-     A rect belongs to the first line when it starts inside the upper half of the
-     topmost rect. The runs on one line start at different heights, because each run's
-     box is its own font's ascent above the shared baseline: PT Serif's is 1.04em and
-     KaTeX_Main's 0.90em, so a line that opens with mathematics drawn in the reading
-     face has runs whose tops sit a whole pixel apart. A band of one pixel around the
-     topmost run once split such a line in two and reported the marker 2.5px off; the
-     next line's runs start a full line height lower, so the half-height test cannot
-     take one of them by mistake. */
+     The mass-condition bullets have inline tops at -1, 0, 2 and 3px, because each
+     run's box is its own font's ascent above the shared baseline: PT Serif's is 1.04em
+     and KaTeX_Main's 0.90em. A one-pixel band kept only the highest math run and
+     falsely reported a 2.2px marker offset. Group runs starting in the topmost rect's
+     upper half; the next line starts a full line height below it. */
   function firstLineBox(el) {
     const range = document.createRange();
     range.selectNodeContents(el);

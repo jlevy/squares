@@ -1,0 +1,441 @@
+{
+  "all_grid_sites_used": true,
+  "allocation_count": 4,
+  "allocations": [
+    [
+      "A",
+      "C",
+      "BE",
+      "DG",
+      "H",
+      "FI"
+    ],
+    [
+      "A",
+      "BC",
+      "DE",
+      "F",
+      "G",
+      "HI"
+    ],
+    [
+      "B",
+      "AD",
+      "CF",
+      "G",
+      "EH",
+      "I"
+    ],
+    [
+      "AB",
+      "C",
+      "D",
+      "EF",
+      "GH",
+      "I"
+    ]
+  ],
+  "allowed_masks": [
+    "A",
+    "B",
+    "AB",
+    "C",
+    "BC",
+    "ABC",
+    "D",
+    "AD",
+    "ABD",
+    "BCD",
+    "ABCD",
+    "BE",
+    "ABE",
+    "BCE",
+    "ABCE",
+    "DE",
+    "ADE",
+    "BDE",
+    "ABDE",
+    "CDE",
+    "BCDE",
+    "ABCDE",
+    "F",
+    "ABF",
+    "CF",
+    "BCF",
+    "ABCF",
+    "EF",
+    "AEF",
+    "BEF",
+    "ABEF",
+    "CEF",
+    "BCEF",
+    "ABCEF",
+    "DEF",
+    "ADEF",
+    "BDEF",
+    "ABDEF",
+    "CDEF",
+    "BCDEF",
+    "ABCDEF",
+    "G",
+    "DG",
+    "ADG",
+    "BDG",
+    "ABDG",
+    "BEG",
+    "CEG",
+    "BCEG",
+    "DEG",
+    "ADEG",
+    "BDEG",
+    "ABDEG",
+    "CDEG",
+    "BCDEG",
+    "ABCDEG",
+    "EFG",
+    "BEFG",
+    "CEFG",
+    "BCEFG",
+    "DEFG",
+    "ADEFG",
+    "BDEFG",
+    "ABDEFG",
+    "CDEFG",
+    "BCDEFG",
+    "ABCDEFG",
+    "H",
+    "ADH",
+    "EH",
+    "AEH",
+    "BEH",
+    "ABEH",
+    "CEH",
+    "BCEH",
+    "ABCEH",
+    "DEH",
+    "ADEH",
+    "BDEH",
+    "ABDEH",
+    "CDEH",
+    "BCDEH",
+    "ABCDEH",
+    "CFH",
+    "EFH",
+    "AEFH",
+    "BEFH",
+    "ABEFH",
+    "CEFH",
+    "BCEFH",
+    "ABCEFH",
+    "DEFH",
+    "ADEFH",
+    "BDEFH",
+    "ABDEFH",
+    "CDEFH",
+    "BCDEFH",
+    "ABCDEFH",
+    "GH",
+    "DGH",
+    "ADGH",
+    "EGH",
+    "BEGH",
+    "CEGH",
+    "BCEGH",
+    "DEGH",
+    "ADEGH",
+    "BDEGH",
+    "ABDEGH",
+    "CDEGH",
+    "BCDEGH",
+    "ABCDEGH",
+    "FGH",
+    "EFGH",
+    "BEFGH",
+    "CEFGH",
+    "BCEFGH",
+    "DEFGH",
+    "ADEFGH",
+    "BDEFGH",
+    "ABDEFGH",
+    "CDEFGH",
+    "BCDEFGH",
+    "ABCDEFGH",
+    "I",
+    "AEI",
+    "BEI",
+    "ABEI",
+    "DEI",
+    "ADEI",
+    "BDEI",
+    "ABDEI",
+    "FI",
+    "BFI",
+    "CFI",
+    "BCFI",
+    "EFI",
+    "AEFI",
+    "BEFI",
+    "ABEFI",
+    "CEFI",
+    "BCEFI",
+    "ABCEFI",
+    "DEFI",
+    "ADEFI",
+    "BDEFI",
+    "ABDEFI",
+    "CDEFI",
+    "BCDEFI",
+    "ABCDEFI",
+    "HI",
+    "DHI",
+    "EHI",
+    "AEHI",
+    "BEHI",
+    "ABEHI",
+    "DEHI",
+    "ADEHI",
+    "BDEHI",
+    "ABDEHI",
+    "FHI",
+    "CFHI",
+    "EFHI",
+    "AEFHI",
+    "BEFHI",
+    "ABEFHI",
+    "CEFHI",
+    "BCEFHI",
+    "ABCEFHI",
+    "DEFHI",
+    "ADEFHI",
+    "BDEFHI",
+    "ABDEFHI",
+    "CDEFHI",
+    "BCDEFHI",
+    "ABCDEFHI",
+    "GHI",
+    "DGHI",
+    "EGHI",
+    "BEGHI",
+    "DEGHI",
+    "ADEGHI",
+    "BDEGHI",
+    "ABDEGHI",
+    "FGHI",
+    "EFGHI",
+    "BEFGHI",
+    "CEFGHI",
+    "BCEFGHI",
+    "DEFGHI",
+    "ADEFGHI",
+    "BDEFGHI",
+    "ABDEFGHI",
+    "CDEFGHI",
+    "BCDEFGHI",
+    "ABCDEFGHI"
+  ],
+  "assumed_geometry": {
+    "adjacent_singletons": "Adjacent perimeter marks cannot both be isolated in disjoint blocks (Lemma 8).",
+    "convexity": "A block contains every mark in the closed convex hull of its incidences.",
+    "final_cover": "Every block contains one of E,G,H,I,J,K,L,M (Lemma 7).",
+    "forced_four": "In the normalized allocation, the EH block also contains J and K (p. 18).",
+    "perimeter_hit": "Every open square of side >1 in [0,3]^2 contains a perimeter mark (Lemma 6).",
+    "two_point_adjacency": "A block with exactly two grid marks has marks at distance 1/2 (p. 18)."
+  },
+  "d4_orbit_count": 1,
+  "final_count": {
+    "calculation": "1 + (8 - 4) = 5",
+    "capacity": "5",
+    "forced_together": [
+      "E",
+      "H",
+      "J",
+      "K"
+    ],
+    "sites": {
+      "E": [
+        "3/2",
+        "3/2"
+      ],
+      "G": [
+        "1",
+        "2"
+      ],
+      "H": [
+        "3/2",
+        "2"
+      ],
+      "I": [
+        "2",
+        "2"
+      ],
+      "J": [
+        "1",
+        "17/10"
+      ],
+      "K": [
+        "2",
+        "17/10"
+      ],
+      "L": [
+        "1",
+        "9/10"
+      ],
+      "M": [
+        "2",
+        "9/10"
+      ]
+    },
+    "three_forced_points_capacity": "6"
+  },
+  "full_geometric_proof_verified": false,
+  "grid": {
+    "A": [
+      "1",
+      "1"
+    ],
+    "B": [
+      "3/2",
+      "1"
+    ],
+    "C": [
+      "2",
+      "1"
+    ],
+    "D": [
+      "1",
+      "3/2"
+    ],
+    "E": [
+      "3/2",
+      "3/2"
+    ],
+    "F": [
+      "2",
+      "3/2"
+    ],
+    "G": [
+      "1",
+      "2"
+    ],
+    "H": [
+      "3/2",
+      "2"
+    ],
+    "I": [
+      "2",
+      "2"
+    ]
+  },
+  "incompatible_masks": [
+    [
+      "A",
+      "B"
+    ],
+    [
+      "A",
+      "D"
+    ],
+    [
+      "B",
+      "C"
+    ],
+    [
+      "C",
+      "F"
+    ],
+    [
+      "D",
+      "G"
+    ],
+    [
+      "F",
+      "I"
+    ],
+    [
+      "G",
+      "H"
+    ],
+    [
+      "H",
+      "I"
+    ]
+  ],
+  "new_packing_bound": false,
+  "premise_removal_controls": {
+    "adjacent_singletons": {
+      "allocation_count": 680,
+      "example_extra": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "F",
+        "G"
+      ],
+      "extra_count": 676
+    },
+    "convexity": {
+      "allocation_count": 8,
+      "example_extra": [
+        "A",
+        "C",
+        "BE",
+        "G",
+        "DFH",
+        "I"
+      ],
+      "extra_count": 4
+    },
+    "perimeter_hit": {
+      "allocation_count": 28,
+      "example_extra": [
+        "A",
+        "C",
+        "E",
+        "DG",
+        "H",
+        "FI"
+      ],
+      "extra_count": 24
+    },
+    "two_point_adjacency": {
+      "allocation_count": 118,
+      "example_extra": [
+        "A",
+        "C",
+        "BD",
+        "EF",
+        "G",
+        "I"
+      ],
+      "extra_count": 114
+    }
+  },
+  "schema_version": 1,
+  "scope": "conditional-combinatorial-control",
+  "source": {
+    "figure": 14,
+    "pages": [
+      11,
+      12,
+      13,
+      18,
+      19
+    ],
+    "pdf": "packing/resources/papers/stromquist-1984-packing-unit-squares-inside-squares-i-six-unit-squares.pdf"
+  },
+  "source_representative": [
+    "AD",
+    "B",
+    "CF",
+    "EH",
+    "G",
+    "I"
+  ],
+  "unrestricted_n11_arithmetic_control": {
+    "capacity": "10",
+    "forced_together_count": 3,
+    "geometric_certificate": "packing/cases/stromquist/repaired_cover.py",
+    "site_count": 12
+  }
+}
