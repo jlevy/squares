@@ -138,9 +138,10 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives fourteen confirmed hypotheses, twelve refuted
-hypotheses, two open hypotheses, twenty-three open questions, and forty blocked
+hypotheses, one open hypothesis, twenty-three open questions, and forty blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
-unresolved. No hypothesis is running or waiting on review and six are unresolved.
+unresolved. H-124 is prospectively registered and running; none is waiting on review and
+six are unresolved. No H-124 scientific invocation has run at registration.
 H-105 is refuted: all 134 eligible candidate pairs are separated, leaving higher-order
 overlap depth and H-099 unresolved.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
@@ -258,6 +259,7 @@ case or experiment separately.
 | [BC-233 Inset-Seed Screen and Released-Support Disposition](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-233-disposition.md) | research synthesis | record | retained | — |
 | [Agenda 025 T+2 Commissioning Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/checkpoint-hour-02.md) | research synthesis | record | retained | — |
 | [BC-242 Full-Size Density Proof Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-242-full-size-density-proof-contract.md) | research synthesis | record | retained | — |
+| [BC-243: A Complete Graph Bound Before More Geometry](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-graph-depth-assessment.md) | research synthesis | record | retained | — |
 | [BC-245 Typed Stationary-Backbone Theorem Packet](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-245-typed-backbone-theorem-packet.md) | research synthesis | record | retained | — |
 | [BC-254: Exact Finite-Support Screen Design](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-screen-spec.md) | research synthesis | record | retained | — |
 | [BC-254 Control Build: First-Slice Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-slice-01.md) | research synthesis | record | retained | — |
@@ -2879,7 +2881,7 @@ round that names the hypothesis, control roles included.
 | [H-121](packing/campaign/hypotheses/H-121-axis-plus-one-minimizer.md) | blocked | Some global minimizing packing has orientations in the axis-plus-one-angle family | 0 | — |
 | [H-122](packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md) | refuted | One independently checked square avoids all nine marks and the forced diamond; full-square compatibility remains open | 1 | 0.20s wall |
 | [H-123](packing/campaign/hypotheses/H-123-near45-coordinate-localization.md) | confirmed | Complete coordinate localization follows from the reviewed reduction and independent four-guard certificate | 1 | 0.21s wall |
-| [H-124](packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md) | open | Every canonical P10-avoiding near45 square intersects every both-band P9 avoider; independently reviewed source-free falsifier is ready for prospective registration | 0 | — |
+| [H-124](packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md) | running | Every canonical P10-avoiding near45 square intersects every both-band P9 avoider; exp124 prospectively fixes one S and exact45 Q frame | 1 | — |
 
 ### Confirmed
 
@@ -3126,7 +3128,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 79 rounds registered in `series-000`.
+There are 80 rounds registered in `series-000`.
 
 They record 2152.1 agent-minutes and 1223.1 wall-minutes.
 Exp-114 completed its one target and independent replay.
@@ -3245,6 +3247,7 @@ archive beside it.
 | [exp-121](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-121-h-110-fixed-p12-escape.md) | 11 | target | H-110 | one frozen rational P12 escape candidate | independent exact reader verifies actual domain and strict avoidance of all twelve marks | accepted |
 | [exp-122](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-122-diamond-conditional-cover-screen.md) | 11 | target | H-122 | four fixed-frame diamond-conditioned cover samples | first frame gives an independently verified strict nine-mark and diamond escape; unused frames not run | rejected |
 | [exp-123](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-123-near45-localization.md) | 11 | target | H-123 | four continuous localization polynomial guards | independent exact reader checks all four guards and sixteen coefficients; reviewed reduction supplies complete localization | accepted |
+| [exp-124](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-124-full-square-compatibility-screen.md) | 11 | target | H-124 | fixed exp122 square and exact45 canonical Q | prospective protocol; no target invoked yet | in-progress |
 
 ### Cost and provenance
 
@@ -3329,10 +3332,11 @@ archive beside it.
 | exp-121 | one ten-second producer and one independent ten-second reader; both accepted | 0.11 s | — | criterion | `961d9923` |
 | exp-122 | one thirty-second producer and conditional ten-second independent reader | 0.20 s | — | criterion | `c4a69e3e` |
 | exp-123 | one fifteen-second producer and conditional ten-second independent reader | 0.21 s | — | criterion | `3ea8e346` |
+| exp-124 | one thirty-second producer and conditional ten-second independent reader; prospective | — | — | — | `a75d751a` |
 
-### What the 79 rounds jointly establish
+### What the 80 rounds jointly establish
 
-The 79 rounds use 2152.1 agent-minutes and 1223.1 wall-minutes under the campaign’s
+The 80 rounds use 2152.1 agent-minutes and 1223.1 wall-minutes under the campaign’s
 retained effort accounting.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
 separately in Session089.

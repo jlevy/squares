@@ -45,7 +45,7 @@ session:
     clock_role: work
     objective: Finish H124 independent reviews and prepare a changed generic weighted-graph completeness certificate for H099.
     bead: think-bmx9
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: The compatibility authors froze and the density assessment justified a graph upper-bound certificate, not another arrangement retry or eager triple enumeration.
     budget_minutes: 30
@@ -55,10 +55,31 @@ session:
     validation_command: Focused source-free tests and independent review, followed by the immutable push tier.
     kill_condition: A fixed author/review cap or failed correctness premise ends that assignment without a scientific invocation.
     fallback: Preserve partial source and precise missing proof obligations; do not expand to Helly triples or rerun a blocked source control.
+    outcome: H124 passed both independent reviews and its engine is frozen at a75d751a. Generic graph authors and the separate source-binding assessment continue under their original caps.
+    evidence: [packing/devtools/full_square_compatibility.py, packing/devtools/check_full_square_compatibility.py]
+    stop_reason: The coordinator switches to the ready prospectively registered H124 discriminator; delegated graph work remains source-free.
+    next_action: Preserve the graph workers' original caps and separately disposition their readiness; no graph target is authorized.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Run the sole prospective H124 fixed-S discriminator and select the next structural obligation from its scoped outcome.
+    commitment: BC-255
+    bead: think-7e72
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Both independent instrument reviews passed; engine a75d751a is frozen and exp124 is prospectively registered with unchanged S and one exact45 Q frame.
+    budget_minutes: 20
+    started_at: '2026-09-07T08:16:00Z'
+    deadline_at: '2026-09-07T08:36:00Z'
+    expected_output: Retained producer outcome and conditional independent reader, with no continuous-proof or packing-bound overclaim.
+    validation_command: The frozen exp124 scientific commands after committed protocol and passing records.
+    kill_condition: The external scientific cap, launch cutoff08:28UTC, a guard failure or phase deadline ends the invocation without retry.
+    fallback: Retain unresolved or unlaunched scope and reprice a genuinely changed next obligation.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Freeze H124 source if independently ready, then separately register its sole discriminator; preserve the graph author's original cap.
+    next_action: Finish record reconciliation, commit the prospective protocol and invoke the fixed producer only once.
   primary_bead: think-bmx9
   status: in_progress
   budget:
@@ -233,6 +254,28 @@ session:
     fallback: Retain the exact missing premise without scientific source access or cap extension.
     write_scope: [packing/devtools/check_weighted_clique_certificate.py, packing/tests/test_check_weighted_clique_certificate.py]
     excluded_commands: [Producer code or test inspection, Scientific graph or source access, Geometry or source-control execution, Registry or Git writes, Dependency changes or repo-wide gates]
+  - task: Independent graph-depth and source-binding assessment (think-kqxe)
+    operator: Codex density_control_recovery, max thinking
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: []
+    checks: []
+    uncertainty: No actual source graph or new target geometry has been evaluated.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Return the independent implication audit and smallest separately priced source-binding contract.
+    phase: 2
+    budget_minutes: 15
+    started_at: '2026-09-07T08:13:14Z'
+    deadline_at: '2026-09-07T08:28:14Z'
+    expected_output: Read-only proof and retained-source contract review, with exact scope and proposed controls.
+    validation_command: Static mathematical and API comparison only; no scientific coordinate computation or replay.
+    kill_condition: Fifteen active minutes, the deadline or a decisive missing premise ends the assessment.
+    fallback: Retain the exact gap without authorizing source processing or a target.
+    write_scope: [Read-only assessment; no file writes]
+    excluded_commands: [Scientific source or target execution, Retained-coordinate computation, Unfinished generic engine inspection, File or registry writes, External BC261 duplication]
   outputs:
   - packing/campaign/agent-sessions/session-093-full-square-compatibility.md
   - packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md
@@ -242,6 +285,7 @@ session:
   - All required hosted checks passed on a78e9af7, observed at07:58UTC; the longest required job was validate at2m49s.
   - Immutable planning checkpoint576bbe0a passed all45 push-tier steps in126.25 seconds and is published on PR109.
   - Fresh07:47UTC upstream and PR110 inventory finds Session092 occupied but no H124, exp124 or Session093 allocation.
+  - The a75d751a push tier passed every step except the missing document-map entry for the new graph assessment; no source or test failure. The entry is added before prospective target admission.
   stop_reason: null
   next_action: Independently review the two bounded instruments, then prospectively register at most one fixed-S exact45-Q discriminator if ready.
 ---
