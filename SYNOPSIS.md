@@ -345,6 +345,7 @@ case or experiment separately.
 | [Independent Review of the Fixed-Weight Core-Shrink Obstruction](docs/project/reviews/review-2026-09-06-core-shrink-obstruction.md) | dated review record | record | retained | — |
 | [Research: Adversarial Review of the s(11) ≥ 381/100 Explainer](docs/project/reviews/review-2026-09-06-claude-code-adversarial-review.md) | dated review record | record | retained | — |
 | [Published Core Claims: Adversarial Review and Corrections](docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md) | dated review record | record | retained | — |
+| [Research: Comprehensive Review of the n = 17 Record](docs/project/reviews/review-2026-09-07-n17-comprehensive-review.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
 | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |

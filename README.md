@@ -87,6 +87,15 @@ Results first established here, as far as the recorded source searches show:
   `423327/25000 = 16.9331` against `n = 17` and least covered mass `200009/200000`, so
   the repository now carries a first-party certificate `0.0842` above the number it had
   adopted, with the `229/50` and `451/100` rungs it climbed through retained below.
+  A stronger public candidate at `9141/2000 = 4.5705`, posted to GitHub on 16 August
+  2026 and neither peer reviewed nor replayed here, was outside the search corpus when
+  this was registered; against it the movement is `0.0195`. The bounds that came
+  closest, each archived here with its source and replayed where the tools allowed:
+  anabologyco-maker’s `4.5705` and `4.57` (16 and 13 August), Massaccesi’s `4.5058` (21
+  August), Burns’s `4.4811` (6 August), Mira’s `4.468292` and `4.450837` (11 and 10
+  August), Fort’s `4.456575` (11 August), and Brandwijk’s `89/20 = 4.45` (18 July);
+  Mira’s, Fort’s and Brandwijk’s are exact sixteen-point certificates and the rest
+  weighted ones, and every 2026 author but Brandwijk discloses a model-written proof.
   One certificate covers all three sizes without a monotonicity step: only `Condition 2`
   mentions `n`, so an atom set certifies its side for every integer above its own mass.
   `T-020` has since carried `n = 19` past it; `n = 17` and `n = 18` are this result’s

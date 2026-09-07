@@ -25,3 +25,4 @@ packing/.gate-running
 
 # Rendered by devtools/render_certificate_page.py and deployed by the pages workflow.
 /packing/site/
+attic/

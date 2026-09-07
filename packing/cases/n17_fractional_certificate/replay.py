@@ -10,6 +10,12 @@ mass, which for each of these is 17 and upward.
 
 The JSON carries exact rationals as strings, so a replay reconstructs the same
 object the generator proposed.
+
+A fourth file, `control-burns-4-4811.json`, is not a rung. It is Sam Burns's
+published August 2026 certificate for 4.4811, rebuilt in this schema by
+`build_burns_control.py` from the constants of his proof note, and it is kept
+as a control because its least covered mass is 10003/10000 rather than
+exactly 1: a verifier that only ever reports 1 is caught by it.
 Nothing here decides anything: the verdict comes from
 `sqpack.fractional.certificate.verify`, and this module only feeds it.
 """
@@ -26,6 +32,7 @@ from sqpack.fractional.model import Atom
 CERTIFICATE_PATH = Path(__file__).with_name("certificate.json")
 SECOND_RUNG_PATH = Path(__file__).with_name("certificate-229-50.json")
 FIRST_RUNG_PATH = Path(__file__).with_name("certificate-451-100.json")
+BURNS_CONTROL_PATH = Path(__file__).with_name("control-burns-4-4811.json")
 
 
 def _from_record(record: dict) -> Certificate:

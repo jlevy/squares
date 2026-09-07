@@ -1,0 +1,18 @@
+atoms = 268
+total_weight = 169476/10000 = 16.9476
+angle_net_size = 181
+b*(1+d) = 899635478111/900000000000 = 0.999594975679 < 1
+orientation   0/180: min=10003/10000, global=10003/10000
+orientation  30/180: min=10003/10000, global=10003/10000
+orientation  60/180: min=10003/10000, global=10003/10000
+orientation  90/180: min=10003/10000, global=10003/10000
+orientation 120/180: min=10003/10000, global=10003/10000
+orientation 150/180: min=10003/10000, global=10003/10000
+orientation 180/180: min=10003/10000, global=10003/10000
+minimum_score = 10003/10000 = 1.0003 at k=0
+CERTIFICATE CONDITIONS VERIFIED.
+By the scaling argument: s(17) >= 44811/10000 = 4.4811.
+
+real	0m5.899s
+user	0m6.033s
+sys	0m0.248s

@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **51** evidence records. **42** are formal; **36** of those were established here.
-- **6** rest on an argument made elsewhere, of which **4** have been read by nobody here.
+- **56** evidence records. **46** are formal; **40** of those were established here.
+- **7** rest on an argument made elsewhere, of which **5** have been read by nobody here.
 - **16** claim to be first established here. **4** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
@@ -62,6 +62,11 @@ results, it is a statement about what this repository has itself examined.
 | `E-green17-sixteen-point-lower` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-green17-interval-audit` | 0 | lower-bound | verified | strict inequalities only | here | - | *not assessed* |
 | `E-n017-massaccesi-source-replay` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
+| `E-n017-burns-source-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
+| `E-n017-burns-control-decision` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-n017-mira-point-certificate-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | not-reviewed | previously-published |
+| `E-n017-fort-point-certificate-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | not-reviewed | previously-published |
+| `E-n017-anabologyco-weighted-certificate` | 0 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published |
 | `E-n017-massaccesi-h052-agreement` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n012-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n012-independent-verifier` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
@@ -74,9 +79,9 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 5, verified 42
-- **method**: exact-algebraic 32, interval-certified 3, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 5
-- **novelty**: apparently-novel 16, common-knowledge 4, not assessed 4, previously-published 27
+- **assurance**: numerically-checked 4, reported 6, verified 46
+- **method**: exact-algebraic 36, interval-certified 3, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 6
+- **novelty**: apparently-novel 16, common-knowledge 4, not assessed 4, previously-published 32
 
 The `cases` column is how many of the hundred frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited by ninety-eight cases is the catalogue everyone reports from and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
