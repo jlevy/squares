@@ -342,6 +342,25 @@ under the declared total-work guard.
 
 ## Testing Strategy
 
+### September 7 stopped-checkpoint repair
+
+The bounded `think-9cvw` efficiency review found a contract problem: recording an honest
+stop after failed validation required an earlier passing gate.
+Two independent reviews accepted the narrow W4 repair documented in
+[OR-13](../../../../operating-rules.md#or-13-every-fast-check-runs-in-ci-only-the-unavoidably-slow-ones-leave).
+An explicitly stopped checkpoint can retain certification debt without counting as
+certified. Completed handovers and current full pre-merge coverage remain required.
+The checker, schema and positive/negative controls are implemented; independent review,
+static checks and64 combined certification, diagnostic and session-clock tests passed.
+Current integrated push and full-checkpoint results remain outstanding.
+
+`think-ph9v` retains the local full-checkpoint failures and serialized
+non-reproductions. The `think-6elx` diagnostic repair preserves solver acceptance rules
+and budgets while reporting actual stop reasons and work counts.
+Neither change is a measured speedup, a solver fix, or a scientific result.
+
+### Correctness and performance checks
+
 Run correctness guards before timing comparisons.
 Parallel runs preserve selected tests, nonzero exits, process cleanup, deterministic
 artifacts, and explicit skip counts.

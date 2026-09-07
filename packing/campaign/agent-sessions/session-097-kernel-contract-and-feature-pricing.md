@@ -506,6 +506,7 @@ session:
     phase: 6
   outputs: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md, packing/devtools/kernel_axis_lp.py, packing/devtools/check_kernel_axis_lp.py, packing/tests/test_kernel_axis_lp_integration.py, packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-129-h125-finite-kernel-obstruction.md]
   checks:
+  - 'full gate: full at d6f0c403: failed (historical controls, fast call ceilings, slow and exhaustive timeouts)'
   - Baseline 4620e483 is landed main from PR112. Immutable change-reachable push checks passed 45 selected steps in 121.37 seconds before this branch opened. Main full workflow 34160383036 subsequently completed successfully, including integration and exhaustive validation; these are baseline receipts, not checks of this session's new artifacts.
   - The initial session artifact passed softschema repair and validation with no repairs. The privacy-reduced cost snapshot through 21:09:24 UTC completed with exit 0 in 39.10 wall seconds; it is an active-session lower bound, not the final checkpoint cost.
   - The checkpoint cost receipt was refreshed through 21:35:00 UTC in 38.12 wall seconds with exit 0. It remains an active-session lower bound. Session097 and H125 passed softschema repair/validation with no repairs. The first records attempt exposed expected generated-view drift and an overbroad BC260 dependency; these require correction before publication. Its missing Ruff came from invoking the venv executable without the venv on PATH, not a source lint finding.
@@ -513,11 +514,12 @@ session:
   - Corrected c3a4e8ec passed the synopsis and process-cleanup checks; its second push failed only the private-snapshot negative control (74.34 seconds gate; 681 tests passed, one failed, four deselected). The snapshot's no-sync uv invocation could not find PyYAML because the immutable checkout lacked its dependency-environment link. After adding that untracked link, the isolated unchanged control passed in 8.67 external wall seconds. No source or test was changed for either environment correction; the full required push rerun remains a separate receipt.
   - The final c3a4e8ec push check passed all 45 applicable steps in 200.88 seconds gate wall and 203.99 external wall; 682 tests passed and four were deselected in 169.80 seconds. PR116 published that first docs checkpoint, with hosted run 34164869950 pending and branch mergeability passed. These are not full-gate or newly added instrument receipts.
   - Engine 5336a518's push failed only stale campaign ledger in 190.87 seconds gate and 195.32 external wall. The ledger-only correction is d6f0c403, with scientific source/tests unchanged. The corrected immutable gate must pass; this failed receipt cannot supply launch authority. The pre-registration records tier likewise exposed only the then-stale session and ledger views in 25.49 seconds.
-  - Corrected immutable engine d6f0c403 passed45 applicable push steps in261.31 seconds gate wall and267.36 external wall;644 tests passed and one was deselected in202.53 seconds. The engine was published on PR116. Its full checkpoint launched asynchronously in a separate frozen checkout and is still pending, not passed.
+  - Corrected immutable engine d6f0c403 passed45 applicable push steps in261.31 seconds gate wall and267.36 external wall;644 tests passed and one was deselected in202.53 seconds. The engine was published on PR116. Its full checkpoint launched asynchronously in a separate frozen checkout; it was pending at this launch checkpoint and later failed as recorded below.
   - The first PR116 hosted workflow34164869950 completed successfully on docs checkpointc3a4e8ec; its deferred/full-only jobs were skipped, not passed. This does not substitute for the later engine or final disposition checks.
   - Prospective protocol424adf85 failed its records gate in170.62 seconds and push gate in396.61 seconds (403.25 external wall,227.85 user,35.71 system). Both failed only the stale synopsis round-count mutation anchor;645 reachable tests passed and three were deselected in303.47 seconds. The22:20 launch cutoff passed without protocol publication or scientific invocation. Exp129 records a blocked dependency guard and zero scientific time; its whole-child allowances remain unspent. The correction must earn its own passing checks and cannot retroactively admit the expired target.
   - The privacy-reduced active-task receipt through22:33:04 UTC completed with exit0 in70.55 external wall seconds (33.13 user,3.35 system). It remains a lower bound excluding later finalization; scientific time is not substituted for the cost of development, review or validation.
   - Actual PR116 engine workflow34166034785 failed validate only because the published Session097 still had phase4 active after its deadline; all163 anchors passed. Sweeps correctness passed but58.38s was below the old107.05s baseline's stale band. Suite, geometry, macOS and mergeability passed; full/deferred jobs were skipped. Think-c03a owns a six-sample baseline refresh, not weaker checks or a speedup claim.
+  certification_pending: think-mq0d
   stop_reason: Bounded research and record writers are stopped at the final checkpoint freeze; the scientific guard is terminal and corrected validation/publication are pending under think-m2lx. No passing full gate or successful session completion is claimed.
   next_action: Continue BC-264 under think-mq0d by resolving the operational certification and draft-publication prerequisites retained in this record. Preserve every pending or failed result; only a new explicit allocation after those guards pass may admit the unspent first scientific invocation.
 ---
@@ -660,7 +662,41 @@ rejected using the old docs-only `c3a4e8ec` pass as certification of the later
 instrument. The canonical declaration’s meaning is stronger than the checker’s ancestor
 test; a qualifying note would not change what the checker counts as certified.
 Keep that pass as ordinary history.
-The full `d6f0c403` checkpoint is still pending, and no new fast/full pass is asserted.
+The full `d6f0c403` checkpoint subsequently failed; no new fast/full pass is asserted.
+
+The formatted `8d79f9a9` push finished in177.01 seconds gate wall and180.11 external
+wall, with645 tests passed and three deselected.
+Its sole failed step was the missing certifying declaration.
+Hosted workflow34169054019 likewise failed validate and suite only on that declaration:
+3521 suite tests passed and one failed.
+Geometry, sweeps, macOS and mergeability passed; deferred and exhaustive jobs were
+skipped.
+
+The immutable engine full checkpoint finished with exit1 in3616.36 seconds gate wall
+and3616.57 external wall, using ten outer jobs and three inner jobs.
+Four steps failed: historical regressions D019/D168, three fast-test call-time ceilings,
+the1800-second slow-suite timeout, and the3600-second exhaustive-suite timeout.
+The other62 steps passed.
+Its non-reference worker shape prevents a reference-runtime comparison, but does not
+turn a timeout into a pass.
+`think-ph9v` owns the unresolved complete-checkpoint evidence.
+
+Two bounded diagnostic replays did not reproduce the historical and quick-test failures.
+With one worker and single-thread numerical libraries, the unchanged historical checker
+passed all eight controls in34.50 seconds external wall.
+The three quick-test calls took8.69,4.00 and2.69 seconds, each below the unchanged
+12-second ceiling; their complete command took23.11 seconds.
+These observations support investigating execution conditions, not a claim that host
+contention caused every failure.
+No solver tolerance or time budget was changed, and the slow/exhaustive failures remain
+unresolved.
+
+After the old full process ended, upstream PR114 was merged as `f02acee7` from main
+`373beb36`, following a92-second independent audit.
+The clean kpress submodule was updated to the committed revision and frozen dependencies
+synchronized;48 focused font/layout tests passed in2.28 seconds.
+That source and dependency change requires its own integration evidence; the earlier
+engine checkpoint does not cover it.
 
 The local pre-commit hook was absent.
 A high-thinking operational follow-up under `think-rice`,22:48:14–22:48:54 UTC (40
@@ -681,6 +717,22 @@ Do not reactivate this session, borrow an old pass, omit a failing check or rela
 partial suite as fast/full.
 `think-m2lx` owns the unresolved publication and certification work; `think-9cvw`
 retains the contract diagnosis.
+
+The separately declared23:21:36–23:51:36 UTC efficiency review admitted a narrow W4
+repair after two independent max-thinking reviews,463 and160 seconds.
+The record now declares its certification debt under the existing BC264 owner,
+`think-mq0d`, and retains the actual failed `d6f0c403` full-gate declaration.
+It remains stopped and explicitly uncertified.
+No earlier pass is borrowed, no deadline is extended, and no scientific invocation is
+admitted by the record repair.
+Completed handovers and final pre-merge coverage retain their passing-check
+requirements.
+
+The resource receipt is refreshed through23:38:23 UTC to include the later validation,
+publication and bounded operational repairs attributed to this branch.
+Its measured interval extends beyond the stopped research session; it does not extend
+the scientific clock or imply that those later operations occurred in a research phase.
+The live-task receipt remains a lower bound, excluding work after that cutoff.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

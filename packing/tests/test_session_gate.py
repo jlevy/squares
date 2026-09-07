@@ -18,8 +18,11 @@ orphaned.
 
 from __future__ import annotations
 
+import json
 import pathlib
 import subprocess
+
+import pytest
 
 import devtools.check_session_gate as checker
 from devtools.check_session_gate import (
@@ -335,3 +338,182 @@ def test_a_grandfathered_session_that_does_declare_one_is_still_held_to_it(
     )
 
     assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+# --- stopped work whose certification is explicitly outstanding ----------------------
+
+
+def _pending_record(
+    directory: pathlib.Path,
+    *,
+    status: str = "stopped",
+    pending: object = "think-ab12",
+    reason: object = "The checkpoint failed; preserve the stopped work.",
+    action: str = "Resolve certification under think-ab12 before research admission.",
+    checks: str = "",
+) -> None:
+    fields = (
+        f"  certification_pending: {json.dumps(pending)}\n"
+        f"  stop_reason: {json.dumps(reason)}\n"
+        f"  next_action: {json.dumps(action)}\n"
+    )
+    _record(directory, "session-999", status=status, checks=fields + checks)
+
+
+def test_pending_stop_without_a_run_is_valid_but_not_certified(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    _pending_record(tmp_path / "sessions")
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 0
+    output = capsys.readouterr().out
+    assert "0 terminal sessions name a full-gate run" in output
+    assert "UNCERTIFIED" in output
+    assert "think-ab12" in output
+    assert "which has not closed" not in output
+
+
+@pytest.mark.parametrize("status", ["completed", "in_progress"])
+def test_pending_certification_cannot_hide_another_work_status(
+    monkeypatch, tmp_path, status
+) -> None:
+    _pending_record(tmp_path / "sessions", status=status)
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+@pytest.mark.parametrize("pending", ["", "think-", "think-a-b", True, 12, None])
+def test_pending_certification_requires_a_well_formed_bead(monkeypatch, tmp_path, pending):
+    _pending_record(tmp_path / "sessions", pending=pending)
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+@pytest.mark.parametrize("reason", ["", "  ", True, None])
+def test_pending_certification_requires_a_stop_reason(monkeypatch, tmp_path, reason):
+    _pending_record(tmp_path / "sessions", reason=reason)
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+@pytest.mark.parametrize("action", ["", "Continue think-other.", "Continue think-ab12-extra."])
+def test_pending_certification_requires_the_same_exact_followup_bead(
+    monkeypatch, tmp_path, action
+) -> None:
+    _pending_record(tmp_path / "sessions", action=action)
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+@pytest.mark.parametrize("tier", ["fast", "full"])
+def test_pending_cannot_relabel_a_canonical_pass_as_historical(
+    monkeypatch, tmp_path, tier
+) -> None:
+    repository = _repository(tmp_path / "repo")
+    head = _git(repository, "rev-parse", "HEAD")
+    _pending_record(
+        tmp_path / "sessions",
+        checks=_checks(f"full gate: {tier} at {head}: passed (historical docs only)"),
+    )
+
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 1
+
+
+def test_pending_accepts_failed_history_and_later_real_pass_can_certify(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    repository = _repository(tmp_path / "repo")
+    head = _git(repository, "rev-parse", "HEAD")
+    failed = f"full gate: full at {head}: failed (retained failed checkpoint)"
+    _pending_record(tmp_path / "sessions", checks=_checks(failed))
+
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 0
+    assert "UNCERTIFIED" in capsys.readouterr().out
+    _record(
+        tmp_path / "sessions",
+        "session-999",
+        status="stopped",
+        checks=_checks(failed, f"full gate: full at {head}: passed"),
+    )
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 0
+    assert "1 terminal sessions name a full-gate run" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize(
+    "declaration", ["full gate: passed", "full gate: turbo at 07a41a89: failed"]
+)
+def test_pending_does_not_suppress_malformed_or_unknown_declarations(
+    monkeypatch, tmp_path, declaration
+) -> None:
+    _pending_record(tmp_path / "sessions", checks=_checks(declaration))
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+def test_pending_failed_receipt_must_resolve_in_complete_history(monkeypatch, tmp_path):
+    _pending_record(
+        tmp_path / "sessions", checks=_checks(f"full gate: full at {ABSENT}: failed")
+    )
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+def test_pending_failed_receipt_on_an_orphan_is_refused(monkeypatch, tmp_path):
+    repository = _repository(tmp_path / "repo")
+    _git(repository, "checkout", "--quiet", "-b", "sidebranch", "HEAD~1")
+    _git(repository, "commit", "--quiet", "--allow-empty", "-m", "orphan")
+    orphan = _git(repository, "rev-parse", "HEAD")
+    _git(repository, "checkout", "--quiet", "main")
+    _pending_record(
+        tmp_path / "sessions", checks=_checks(f"full gate: full at {orphan}: failed")
+    )
+
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 1
+
+
+@pytest.mark.parametrize("history", ["shallow", "unavailable"])
+def test_pending_failed_receipt_with_missing_history_stays_uncheckable(
+    monkeypatch, tmp_path, capsys, history
+) -> None:
+    origin = _repository(tmp_path / "origin")
+    commit = _git(origin, "rev-parse", "HEAD~1")
+    repository = tmp_path / "snapshot"
+    if history == "shallow":
+        _git(tmp_path, "clone", "--quiet", "--depth", "1", f"file://{origin}", str(repository))
+    else:
+        repository.mkdir()
+    _pending_record(
+        tmp_path / "sessions", checks=_checks(f"full gate: full at {commit}: failed")
+    )
+
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 0
+    output = capsys.readouterr().out
+    assert "UNCERTIFIED" in output
+    assert "UNCHECKABLE" in output
+    assert "0 terminal sessions name a full-gate run" in output
+
+
+def test_unmarked_stopped_record_still_needs_a_certifying_run(monkeypatch, tmp_path):
+    _record(tmp_path / "sessions", "session-999", status="stopped", checks="")
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+def test_mixed_pending_and_certified_records_have_separate_counts(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    repository = _repository(tmp_path / "repo")
+    head = _git(repository, "rev-parse", "HEAD")
+    _pending_record(tmp_path / "sessions")
+    _record(
+        tmp_path / "sessions",
+        "session-998",
+        status="completed",
+        checks=_checks(f"full gate: full at {head}: passed"),
+    )
+
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 0
+    output = capsys.readouterr().out
+    assert "1 terminal sessions name a full-gate run" in output
+    assert "1 stopped sessions remain UNCERTIFIED" in output
+    assert "session-999 -> think-ab12" in output

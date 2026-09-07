@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Every terminal session names the full gate that certified it, on a commit in its history.
+"""Check declared session certification and explicitly uncertified stopped checkpoints.
 
 `OR-13` says every fast check runs in CI, and the gate is what makes that mean something.
 Nothing said that the gate had *run*. Forty-seven of the eighty-six terminal sessions
@@ -11,7 +11,8 @@ tree nobody can now identify.
 behind the handover certifies nothing about what was handed over, and a check that accepts
 a bare `full gate: passed` is a check that will accept exactly that. So the declaration
 carries three things -- the tier, the commit, and the verdict -- in one canonical line of
-`checks`, and this refuses a terminal session that cannot produce one.
+`checks`. A terminal session must produce one or explicitly declare stopped, pending
+certification as described below.
 
 The grammar lives in `campaign/schemas/agent-session.schema.yaml` under
 `$defs/full_gate_declaration`, and is read from there rather than restated here, so the
@@ -19,7 +20,8 @@ record's contract and the check that enforces it cannot drift apart.
 
 What each rule refuses:
 
-* a terminal session at or after `GATE_DECLARED_FROM` with no declaration at all;
+* a terminal session at or after `GATE_DECLARED_FROM` with neither a declaration nor a
+  valid stopped/pending marker;
 * a `checks` item that opens with `full gate:` and then does not parse, so a near miss is
   a failure rather than an item this quietly skips;
 * a tier `packing-validate` cannot select, and a tier that is real but smaller than the
@@ -40,6 +42,12 @@ does not contain the commit is not evidence the commit was orphaned. Concretely 
 
 Grammar and presence are checked in every one of those cases. Only the ancestry clause
 depends on Git.
+
+A stopped session may instead declare `certification_pending` with its follow-up bead.
+Its record can then be checked without inventing a previous gate run or claiming the
+next run has passed. It remains explicitly UNCERTIFIED; this is not merge approval.
+Completed handovers still require a passing gate, and pending records cannot declare
+one. Every actual gate declaration in a pending record retains its ancestry checks.
 
 Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m devtools.check_session_gate
@@ -236,7 +244,13 @@ def declaration_problems(
         runs.append(run)
     if not runs:
         return problems, runs
-    if not any(run.certifies for run in runs):
+    pending = "certification_pending" in session
+    if pending and any(run.certifies for run in runs):
+        problems.append(
+            f"{name}: certification_pending conflicts with a canonical passed fast/full "
+            "declaration; historical noncertifying evidence belongs in ordinary prose"
+        )
+    elif not pending and not any(run.certifies for run in runs):
         declared = ", ".join(f"{run.tier}:{run.verdict}" for run in runs)
         problems.append(
             f"{name}: declares a gate run ({declared}) but none of them certifies the "
@@ -245,20 +259,50 @@ def declaration_problems(
     return problems, runs
 
 
+def pending_problems(name: str, session: dict) -> list[str]:
+    """Validate an explicit certification debt before any status or legacy skip."""
+    if "certification_pending" not in session:
+        return []
+    problems: list[str] = []
+    if session.get("status") != "stopped":
+        problems.append(f"{name}: certification_pending is allowed only when stopped")
+    owner = session["certification_pending"]
+    if not isinstance(owner, str) or re.fullmatch(r"think-[a-z0-9]+", owner) is None:
+        problems.append(f"{name}: certification_pending must name one well-formed bead")
+    else:
+        action = session.get("next_action")
+        if (
+            not isinstance(action, str)
+            or re.search(rf"(?<![\w-]){re.escape(owner)}(?![\w-])", action) is None
+        ):
+            problems.append(f"{name}: next_action must name certification owner {owner}")
+    reason = session.get("stop_reason")
+    if not isinstance(reason, str) or not reason.strip():
+        problems.append(f"{name}: pending certification requires a nonblank stop_reason")
+    return problems
+
+
 def ancestry_problems(
-    name: str, runs: list[GateRun], history: HistoryState, repository: pathlib.Path
+    name: str,
+    runs: list[GateRun],
+    history: HistoryState,
+    repository: pathlib.Path,
+    *,
+    include_noncertifying: bool = False,
 ) -> tuple[list[str], list[str]]:
     """Refusals and unresolved declarations arising from the Git graph."""
     problems: list[str] = []
     unresolved: list[str] = []
-    certifying = [run for run in runs if run.certifies]
-    if not certifying:
+    checked_runs = runs if include_noncertifying else [run for run in runs if run.certifies]
+    if not checked_runs:
         return problems, unresolved
     if history == "unavailable":
-        unresolved.extend(f"{name} -> {run.commit} (no Git history here)" for run in certifying)
+        unresolved.extend(
+            f"{name} -> {run.commit} (no Git history here)" for run in checked_runs
+        )
         return problems, unresolved
     reachable = 0
-    for run in certifying:
+    for run in checked_runs:
         state = commit_state(repository, run.commit)
         if state == "reachable":
             reachable += 1
@@ -289,18 +333,23 @@ def main(argv: list[str] | None = None) -> int:
     problems: list[str] = []
     unresolved: list[str] = []
     grandfathered: list[str] = []
+    uncertified: list[str] = []
+    pending_unresolved: list[str] = []
     certified = 0
     unverified = 0
 
     for path, session in sessions():
         identifier = str(session.get("id", path.stem))
+        marker_problems = pending_problems(path.name, session)
+        problems.extend(marker_problems)
         if str(session.get("status")) not in TERMINAL:
             continue
+        pending = "certification_pending" in session
         record_problems, runs = declaration_problems(path.name, session, pattern)
-        if identifier < GATE_DECLARED_FROM and not runs and not record_problems:
+        if identifier < GATE_DECLARED_FROM and not pending and not runs and not record_problems:
             grandfathered.append(identifier)
             continue
-        if not runs and not record_problems:
+        if not pending and not runs and not record_problems:
             problems.append(
                 f"{path.name}: terminal session names no full-gate run; add one checks "
                 "item of the form 'full gate: fast at <commit>: passed', naming the "
@@ -308,11 +357,17 @@ def main(argv: list[str] | None = None) -> int:
             )
             continue
         problems.extend(record_problems)
-        graph_problems, graph_unresolved = ancestry_problems(path.name, runs, history, REPO)
+        graph_problems, graph_unresolved = ancestry_problems(
+            path.name, runs, history, REPO, include_noncertifying=pending
+        )
         problems.extend(graph_problems)
-        unresolved.extend(graph_unresolved)
-        if record_problems or graph_problems:
+        if marker_problems or record_problems or graph_problems:
             continue
+        if pending:
+            uncertified.append(f"{identifier} -> {session['certification_pending']}")
+            pending_unresolved.extend(graph_unresolved)
+            continue
+        unresolved.extend(graph_unresolved)
         # Counted apart, because they are different claims. A session is *certified* only
         # where this checkout could resolve its commit and found it behind HEAD; where the
         # checkout could not answer, the record is well formed and nothing more, and
@@ -327,7 +382,7 @@ def main(argv: list[str] | None = None) -> int:
     if problems:
         return 1
     print(f"  {certified} terminal sessions name a full-gate run on a commit in their history")
-    if certified == 0 and unverified == 0:
+    if certified == 0 and unverified == 0 and not uncertified:
         print(
             f"    none yet: the rule binds from {GATE_DECLARED_FROM}, which has not closed. "
             "Every terminal record from there on must carry the declaration"
@@ -340,6 +395,14 @@ def main(argv: list[str] | None = None) -> int:
         for line in unresolved:
             print(f"    {line}")
         print("    `git fetch --unshallow` is what makes these checkable")
+    if uncertified:
+        print(f"  {len(uncertified)} stopped sessions remain UNCERTIFIED; follow-up owners:")
+        for line in uncertified:
+            print(f"    {line}")
+    if pending_unresolved:
+        print("    Their declared run ancestry is UNCHECKABLE here, not verified:")
+        for line in pending_unresolved:
+            print(f"      {line}")
     if grandfathered:
         print(
             f"  {len(grandfathered)} closed before the rule existed and are not checked: "
