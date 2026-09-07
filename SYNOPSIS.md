@@ -650,7 +650,8 @@ A scoped support argument closes rigid central-block rotation with two fixed cor
 separations.
 Green’s stronger source-reported lower bound is now recorded separately from
 the verified one at `n=26–27`; proof recovery is `think-0x08`, the remaining
-source-table audit is `think-4g6w`, and a changed-contact search design is `think-z0fi`.
+source-table audit is `think-4g6w`, and `think-z0fi` implements and controls the
+[specified contact-release family](docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md).
 The [MacIver review](docs/project/reviews/review-2026-09-07-maciver-square-packing.md)
 adds three previously unindexed manuscripts.
 His reported lower bound at `4.450208382...` is below the verified `4.59` for both n17
@@ -3178,11 +3179,12 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-094.yaml` | session-094 | 562 | 4.53 h | 1.82 h | 1.82 h | yes |
 | `codex-task-tree-session-095.yaml` | session-095 | 476 | 4.08 h | 1.69 h | 1.69 h | yes |
 | `codex-task-tree-session-096.yaml` | session-096 | 520 | 3.79 h | 1.4 h | 1.4 h | yes |
+| `codex-task-tree-session-097.yaml` | session-097 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 51 |
-| unmeasured | 45 |
+| measured | 52 |
+| unmeasured | 44 |
 | **total** | **96** |
 
 <!-- END GENERATED: session-close-report -->

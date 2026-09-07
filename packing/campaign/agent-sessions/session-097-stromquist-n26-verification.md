@@ -142,7 +142,7 @@ session:
     clock_role: work
     objective: Integrate main typography changes with the reviewed acknowledgment, verify the combined render and affected checks, and prepare the measured review
       for publication.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Main advanced to 373beb36 during validation; the incoming renderer and generated views need an integration check before publication.
     budget_minutes: 30
@@ -152,12 +152,18 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --push --jobs 2 --inner-jobs 1
     kill_condition: An integration or rendering failure requires repair and affected rechecking before publication.
     fallback: Preserve both source changes, resolve the concrete incompatibility, and retain the tested commit identity.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Close the measured review after the integration checks, then publish and inspect hosted checks.
+    outcome: Merged main 373beb36 into 0e766bfd without conflicts and retained both the upstream typography and the acknowledgment permalink. HTML regeneration and
+      drift checking passed. Print layout, two-render PDF agreement at 16 pages, and light/mobile-dark supporting typography passed; the coordinator visually checked
+      the acknowledgment on page 14 and its commit-pinned link. Pre-push at 0e766bfd passed all 45 selected steps in 163.51 seconds. Independent integration review
+      accepted after identifying one stale CPU-setting sentence, corrected in this closeout.
+    evidence:
+    - packing/campaign/agent-sessions/session-097-validation/push-0e766bfd.json
+    - packing/devtools/templates/explainer-article.md
+    stop_reason: The source review, mathematical verification and upstream integration are complete. Closure metadata verification and publication follow the measured
+      interval.
+    next_action: Check the closure delta against 0e766bfd, publish the reviewed branch, and confirm hosted checks.
   primary_bead: think-zi3g
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 140
     slice_minutes: 30
@@ -167,7 +173,9 @@ session:
   progress:
     metric: Verified source comparison, reconstructed geometry, and explicit research dispositions.
     before: The prior review guessed the author's intent; n26 had an exact Friedman upper certificate but omitted Green's stronger source-reported lower bound.
-    after: null
+    after: The valid historical n26 cubic packing is exactly reconstructed and remains worse than Friedman; private-communication credit is included. Green is retained
+      as source-reported. Three MacIver manuscripts and their proof gaps are indexed, useful mechanisms and n26 search controls are reviewed, and no new unrestricted
+      bound or executed target search is claimed.
   delegations:
   - task: Reconstruct and exactly verify Memo III's n26 construction
     phase: 1
@@ -295,8 +303,8 @@ session:
     control 44.715 seconds. Heavy host load was observed; the replay does not establish its sole causal role.'
   - Three independent MacIver audits and the coordinator agree on the exact bound comparison, missing computational artifacts, limited Lean coverage, and candidate
     local-capacity controls; public CI success is external evidence only.
-  - The final fast checkpoint declares PYTHON_CPU_COUNT=4 with three outer workers and one inner worker, reducing process concurrency without changing tests or time
-    guards.
+  - The initial CPU4 fast attempt declared PYTHON_CPU_COUNT=4 with three outer workers and one inner worker, reducing process concurrency without changing tests or
+    time guards.
   - 'full gate: fast at bdc28e8985663827aae2f7d8219537197cfff189: failed (CPU4 local run passed 62 of 62 steps in 254.69 seconds but failed the stale Linux timing-baseline
     comparison)'
   - 'full gate: fast at bdc28e8985663827aae2f7d8219537197cfff189: failed (native ten-CPU run passed 61 of 62 steps in 249.99 seconds; 3425 tests passed, with one
@@ -307,8 +315,17 @@ session:
     CPU/worker counts as comparable hardware; no speedup or causal load claim is made.
   - Final independent review accepted bdc28e89 without mathematical or source-coverage findings and checked 34 relative links/anchors. The coordinator also confirmed
     all three retained PDFs match the pinned originals and their raw extractions match fresh pdftotext output.
-  stop_reason: null
-  next_action: Integrate current main typography, check the PDF acknowledgment and final affected surface, close the measured review, and publish the review checkpoint.
+  - Pre-push at 0e766bfd8a6a3ff3dac43b095aecbced7d73470d passed all 45 selected steps in 163.51 seconds after main integration.
+  - At 0e766bfd, HTML regeneration/check, print layout, two-render PDF agreement at 16 pages, and light/mobile-dark supporting typography passed. The coordinator
+    visually checked the acknowledgment on page 14 and verified its source link names 0e766bfd.
+  - 'Documentation boundary: README research index and SYNOPSIS updated; TUTORIAL, conventions, operating rules and development remain current for the source review.
+    Dated-source corrections are explicit additions; generated views are refreshed. The selected BC-264 research allocation is retained.'
+  stop_reason: The requested source audits, exact n26 verification, bounded mathematical directions and reviewed integration are complete; future proof recovery,
+    theorem adoption and target optimization have separate named dependencies.
+  next_action: Publish this review and verify hosted checks; retain BC-264 as the selected research slice. think-z0fi implements and controls the specified n26 family,
+    think-0x08 recovers Green evidence, think-4g6w audits the remaining source table, and think-sske replays MacIver theorem dependencies before adoption.
+  resource_rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-097.yaml
 ---
 # Stromquist n26 Verification
 
@@ -346,6 +363,10 @@ The Linux timing baseline remains unchanged: CPU-count overrides on this macOS h
 not establish comparable hardware.
 All three local fast receipts retain their source and invocation metadata, including the
 failed runs.
+
+The measured interval ends before closure-metadata validation, publication, and hosted
+CI. Its receipt is a live task-tree lower bound, not a complete invoice for all later
+publication work. The pull request records those final checks separately.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
