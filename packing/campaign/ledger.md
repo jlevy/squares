@@ -107,7 +107,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-090](agent-sessions/session-090-four-hour-research.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 11 | think-9qrx | After Session090 closes, select think-qv73 under BC255 for H110's source-free fixed P12 escape instrument and independent review, then a fresh prospective experiment. The September7 priority amendment holds H107 out of the next block and selects a bounded conditional-compatibility assessment alongside H110. Agenda024 owns this revised allocation and the deferred bead. Density remains source-blocked; no exp116 retry. |
 | [session-091](agent-sessions/session-091-structural-compatibility.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 6 | think-fqhr | Select think-7e72 for a bounded full-P10 distinguished-square compatibility discriminator after fresh ID/ownership checks; no repeated H110/H122/H123 invocation. |
 | [session-093](agent-sessions/session-093-full-square-compatibility.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 9 | think-bmx9 | Select think-7e72 for independently authored H124 residual-cover source binding and a bounded caller, alongside a separately declared degree-eight graph source-control attempt in the density lane. Neither target is yet allocated; preserve the stopped original sequence and check fresh IDs before the next session. |
-| [session-094](agent-sessions/session-094-complete-cover-and-density-controls.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 7 | think-63oj | Continue think-7e72 through immutable collision-source validation and a separate prospective near-axis cover protocol; preserve the terminal density outcome and reprice the independently available seven-row support review for the next slice. |
+| [session-094](agent-sessions/session-094-complete-cover-and-density-controls.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 8 | think-63oj | Continue think-7e72 through immutable collision-source validation and a separate prospective near-axis cover protocol; preserve the terminal density outcome and reprice the independently available seven-row support review for the next slice. |
 
 ### Workflow summary
 
@@ -122,7 +122,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
 | `research-loop` | 9 | 4 | 63 | 7 |
 | `pipeline-improvement` | 25 | 0 | 126 | 0 |
-| `documentation-pass` | 1 | 0 | 8 | 0 |
+| `documentation-pass` | 1 | 0 | 9 | 0 |
 | `review-planning-oversight` | 0 | 0 | 2 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 

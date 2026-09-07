@@ -142,23 +142,43 @@ session:
   - workflow: documentation-pass
     focus: correctness
     recording: contemporaneous
+    clock_role: work
+    objective: Freeze the reviewed source engine and prepare its immutable validation checkout before finalization.
+    bead: think-63oj
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: Independent source reviews and final-slice repricing are complete; the remaining work is validation and a recoverable handoff.
+    budget_minutes: 2
+    started_at: '2026-09-07T11:27:38Z'
+    deadline_at: '2026-09-07T11:29:00Z'
+    expected_output: Immutable push/full evidence or explicit pending state, terminal receipts, updated PR109 and a prospective Session095 plan.
+    validation_command: Immutable packing-validate gates, record checks, prose review and cost-rollup refresh.
+    kill_condition: Finalization starts11:29; no new scientific target or extension of completed allocations.
+    fallback: Publish completed evidence and exact pending gates, then continue the separately planned final slice.
+    outcome: Source engine b7440262 is committed. The record checker identified that finalization had been labeled before the reserve; this short preceding work phase preserves the actual11:27:38 start without moving the reserve or any deadline.
+    evidence: [packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md]
+    stop_reason: The source freeze is complete and the original11:29 finalization reserve has begun.
+    next_action: Validate the corrected immutable snapshot and publish the checkpoint.
+  - workflow: documentation-pass
+    focus: correctness
+    recording: contemporaneous
     clock_role: finalization
-    objective: Publish the third checkpoint with exact outcomes, cost attribution and the selected two-lane continuation.
+    objective: Publish the third checkpoint and its selected two-lane continuation.
     bead: think-63oj
     status: in_progress
     entered_by: evidence_checkpoint
-    switch_reason: Independent source reviews and final-slice repricing are complete; the remaining work is validation and a recoverable handoff.
-    budget_minutes: 22
-    started_at: '2026-09-07T11:27:38Z'
+    switch_reason: The reviewed source engine and terminal experiment receipts are committed; preserve the original finalization reserve.
+    budget_minutes: 20
+    started_at: '2026-09-07T11:29:48Z'
     deadline_at: '2026-09-07T11:49:00Z'
-    expected_output: Immutable push/full evidence or explicit pending state, terminal receipts, updated PR109 and a prospective Session095 plan.
-    validation_command: Immutable packing-validate gates, record checks, prose review and cost-rollup refresh.
-    kill_condition: Session094 deadline11:49; no new scientific target or extension of completed allocations.
-    fallback: Publish completed evidence and exact pending gates, then continue the separately planned final slice.
+    expected_output: Updated cost and outcome records, immutable validation or explicit pending status, PR109 checkpoint and selected Session095 handoff.
+    validation_command: Immutable push/full gates, record checks, prose review and cost-rollup refresh.
+    kill_condition: Original11:49 checkpoint; no new scientific invocation.
+    fallback: Publish completed evidence and precise pending gates, then continue the separately planned final slice.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Commit the reviewed source engine and start immutable gates while reconciling the checkpoint records.
+    next_action: Start immutable validation while preparing the next protocol and the checkpoint handoff.
   primary_bead: think-63oj
   status: in_progress
   budget:
