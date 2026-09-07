@@ -134,6 +134,10 @@ axis-aligned squares to overlap.
 The actual eleven-square extension question remains open.
 The midpoint allocation therefore compares position-dependent wall constraints against a
 complete broader release-angle domain; further disk-only refinement is retired.
+The
+[adopted midpoint decision](../series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md)
+selects BC279’s maximal wall-conditioned common core for independent admission, with the
+complete physical release chart $t\in[0,1]$ as the next alternative.
 Source H124’s accepted diagonal-band cover and unresolved near-axis obligation remain
 with its separate coordinator, most recently in session094 and exp125.
 

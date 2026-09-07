@@ -107,6 +107,11 @@ This is evidence for considering wall-conditioned or joint residual-square const
 it is not an exclusion of the whole full-square family.
 The bounded attempt is closed, and a new model or domain requires a separately priced
 decision. No strict comparison with a matched coupled LP has been made.
+The
+[midpoint allocation](../series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md)
+selects BC279’s exact common core conditioned on each center’s wall clearance.
+Its complete-model admission must precede any capacity determination; it retains the
+unchanged boundary-band parent and gives no new global premise.
 H118 remains open, and the global bracket is unchanged.
 
 <!-- This document follows common-doc-guidelines.md.

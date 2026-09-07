@@ -352,7 +352,7 @@ session:
     clock_role: work
     objective: Select the next useful mathematical premise from audited BC278 and the complete signed release exclusion, while publishing the midpoint and repairing the failed validation receipt.
     bead: think-0yfe
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: BC278 refutes the whole-domain disk and octagon sufficient routes, and the last efficiency block was phase6. Further attention must change the mathematical representation or covered domain.
     budget_minutes: 25
@@ -362,15 +362,37 @@ session:
     validation_command: Compare measured full1644.33seconds and hosted checks151.38seconds with accepted fixture controls and midpoint costs; record and push checks precede a new immutable full gate.
     kill_condition: New target proof or solver work inside this design block, a fitted domain, weakened validation threshold, duplicate source work, or phase deadline.
     fallback: Preserve the exact unresolved premise and accepted negative result; continue only a separately priced ready task within the unchanged14:31 endpoint.
+    outcome: Select maximal wall-conditioned common cores on unchanged Gamma0 as the principal changed model, with complete release t in[0,1] the next alternative. The generic convex-hull identity makes admission concrete; it is not a capacity result. The audited0e1961e2 checkpoint is pushed with31 records and45 push steps passing.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md
+    stop_reason: All three assessments are terminal. Two final formatting/amendment attempts exceeded their caps by one and six seconds; neither received an extension or performed a target determination.
+    next_action: BC279 receives15 minutes for native model/protocol design,20 minutes for independent generic admission and15 minutes for independent predicate/control review, concurrently. A target still requires the completed protocol and passing records.
+  - workflow: insight-iteration
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Freeze and independently admit the exact maximal wall-conditioned common-core model on the complete unchanged boundary-band family.
+    commitment: BC-279
+    bead: think-cwve
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: The midpoint selects a generic containment consequence unavailable to unconditional incircles, with an exact maximal-core formula and a meaningful whole-class negative outcome.
+    budget_minutes: 25
+    started_at: '2026-09-07T11:12:25Z'
+    deadline_at: '2026-09-07T11:37:25Z'
+    expected_output: A native complete protocol, independent common-core equality and inclusion proof, exact same-normal predicate/control admission, and an immutable passing-records checkpoint before any target.
+    validation_command: Independent exact generic mathematical and predicate review, then packing-validate --records on the committed protocol.
+    kill_condition: Unproved maximal-core identity, changed Gamma0, independent normals inside one pair, missing closed seam, target work before admission, or phase deadline.
+    fallback: Retain the precise failed implication and do not invoke this target. Consider the complete release-angle chart under a separate prospective allocation.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Price wall-conditioned residual square constraints, complete broader release angles and cross-lane coverage independently, then freeze at most one new principal attempt with a reserved audit.
+    next_action: Dispatch disjoint model design and two independent admissions; preserve the12:31 checkpoint, final reserve14:11 and endpoint14:31.
   primary_bead: think-0yfe
   status: in_progress
   budget:
     wall_minutes: 480
-    max_cycles: 16
+    max_cycles: 24
     orientation_minutes: 10
     checkpoint_minutes: 20
     slice_minutes: 30
@@ -1116,19 +1138,19 @@ session:
     excluded_commands: [New target proofs or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
   - task: Midpoint wall-conditioned square model assessment
     operator: Codex capacity_protocol, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Price a sound complete-domain position-dependent square relaxation that retains actual wall information; no new capacity target.
+    outcome: Generic design derives the exact common core as the convex hull of the incircle and wall-dependent axis square. It rejects the existing disk control and gives a complete support model; independent admission remains required.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md]
+    files: []
+    checks: [Exact generic containment and support derivation, Closed graph and control inventory, Formatting and footer passed]
+    uncertainty: No capacity result or matching-LP separation; the coordinator and author discussed the generic identity, so its admission needs a fresh reader.
+    elapsed_seconds: 778
+    elapsed_quality: operator_reported_approximate
+    next_action: BC279 native design and independent admission; no separate weaker union-model target.
     phase: 14
     budget_minutes: 15
-    started_at: '2026-09-07T10:55:25Z'
+    started_at: '2026-09-07T10:56:56Z'
     deadline_at: '2026-09-07T11:10:25Z'
     expected_output: Exact candidate implication, scope and control requirements, likely coverage value and a bounded next admission or refusal.
     validation_command: Analytical model and existing exact-control review only.
@@ -1138,19 +1160,19 @@ session:
     excluded_commands: [Numerical or proof target execution, Git or shared-record mutations, New IDs, Writes outside attic]
   - task: Midpoint broader-angle release assessment
     operator: Codex release_model_review, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Price a complete changed angular family and its exact coverage map, retaining the accepted signed-slide proof as evidence only.
+    outcome: Whole physical t in[0,1] is the final recommendation, with the positive half-chart as an explicit child. Old inequalities fail in the new angle regions, and no reflection or capacity premise supplies them.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md]
+    files: []
+    checks: [Exact block relabeling and failed old-inequality diagnostics, Five source links and formatting passed]
+    uncertainty: Final scope/timing amendment failed; the attic file retains the earlier half-chart recommendation. The terminal message records the full-chart choice. Final work ended six seconds after the cap; no retry was permitted.
+    elapsed_seconds: 799
+    elapsed_quality: operator_reported_approximate
+    next_action: Keep full-chart release as the next alternative, requiring its own domain admission and target allocation.
     phase: 14
     budget_minutes: 15
-    started_at: '2026-09-07T10:55:25Z'
+    started_at: '2026-09-07T10:57:12Z'
     deadline_at: '2026-09-07T11:10:25Z'
     expected_output: Natural enlarged domain, omitted siblings and seams, concrete missing proof premise and bounded cost recommendation.
     validation_command: Existing proof and domain review; no determination of the enlarged target.
@@ -1160,19 +1182,19 @@ session:
     excluded_commands: [Numerical or proof target execution, Git or shared-record mutations, New IDs, Writes outside attic]
   - task: Midpoint independent portfolio and global-bridge assessment
     operator: Codex direct_contracts, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
-    next_action: Compare the actual coverage increment and remaining premises of H118, H120 and H121 against the live source-owned H124 work.
+    outcome: Final ranking selects the exact maximal wall-conditioned core on unchanged D0, because either outcome has a complete-domain interpretation. Full release t in[0,1] is next; H121 remains unready and source H124 stays separate.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md]
+    files: []
+    checks: [Read-only source and local evidence comparison, Explicit measured attention and gate costs, Formatting passed]
+    uncertainty: Priority is a judgment, not a measured success probability. The mathematical decision ended11:10:05; final formatting ended one second beyond the cap, with no further checks.
+    elapsed_seconds: 777
+    elapsed_quality: operator_reported_approximate
+    next_action: Independently admit maximal-core equality before any capacity attempt; no serial polygon refinement or duplicate source work.
     phase: 14
     budget_minutes: 15
-    started_at: '2026-09-07T10:55:25Z'
+    started_at: '2026-09-07T10:57:29Z'
     deadline_at: '2026-09-07T11:10:25Z'
     expected_output: Ranked next allocation with explicit stop conditions, source ownership and reason to refuse low-value extensions.
     validation_command: Read-only comparison of accepted evidence, current costs and source records; no new scientific target.
@@ -1180,7 +1202,77 @@ session:
     fallback: Preserve the exact missing global premise and choose a concrete complete-domain task or honest deferral.
     write_scope: [attic/agenda-028-overnight/midpoint-portfolio-assessment.md]
     excluded_commands: [Numerical or proof target execution, Git or shared-record mutations, Cross-task messages, New IDs, Writes outside attic]
+  - task: BC279 native maximal-core design and prospective protocol
+    operator: Codex capacity_protocol, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: The exact maximal-core model and whole unchanged Gamma0 protocol froze11:23:05, including all49 shared-normal predicates, exact graphs, source siblings, controls and prospective target caps.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-protocol.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-protocol.md]
+    checks: [Native source links and footer checked, Formatting and whitespace passed, Target unattempted]
+    uncertainty: Scientific admission still requires the two independent final reviews and a committed passing-records protocol.
+    elapsed_seconds: 453
+    elapsed_quality: operator_reported_approximate
+    next_action: Independently reconcile the frozen protocol, commit and validate records before any target.
+    phase: 15
+    budget_minutes: 15
+    started_at: '2026-09-07T11:15:32Z'
+    deadline_at: '2026-09-07T11:27:25Z'
+    expected_output: One self-contained native model and protocol consuming the frozen generic design, with full scientific and failure semantics.
+    validation_command: Exact generic reconstruction and control inventory, followed by independent admission of the frozen model and protocol.
+    kill_condition: New target proof, altered parent, weakened maximal-core question, omitted pair or closed boundary, or deadline.
+    fallback: Retain only the generic statement and exact missing admission premise; no automatic target.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-protocol.md]
+    excluded_commands: [Target proof or numerical execution, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC279 independent maximal-core identity and domain admission
+    operator: Codex direct_contracts, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Final native model and protocol accepted after an independent reconstruction of both common-core inclusions, exact graphs, all49 same-normal predicates and140 inequalities, maximality scope, reflection and closed parent seams.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-mathematical-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-mathematical-review.md]
+    checks: [Independent exact generic proof and endpoints, Frozen native protocol reconciled, Exact predicate and source-domain inventory, Formatting and native links passed]
+    uncertainty: No capacity determination, actual eleven-square witness or strict H118 LP comparison is supplied by this admission.
+    elapsed_seconds: 753
+    elapsed_quality: operator_reported_approximate
+    next_action: Commit the accepted protocol, pass records and record actual target leases before dispatch.
+    phase: 15
+    budget_minutes: 20
+    started_at: '2026-09-07T11:15:28Z'
+    deadline_at: '2026-09-07T11:32:25Z'
+    expected_output: Independent generic mathematical acceptance or precise failed implication, reconciled with the final native protocol before target admission.
+    validation_command: Exact support/convexity proof, endpoint and reflection reconstruction, original Gamma0 and all residual quantifiers checked.
+    kill_condition: Target capacity work, accepting a subset or only one containment direction, omitted seam, coauthoring repairs or deadline.
+    fallback: Refuse the affected claim and preserve the smallest gap; no repaired or weaker-model target in this review.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-mathematical-review.md]
+    excluded_commands: [New target proofs or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC279 independent predicates and admission controls
+    operator: Codex release_model_review, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: The final native protocol is accepted after correcting affine center reflection versus the linear action on normals. All49 shared-normal pair predicates, exact graphs, legal touching and stated controls check out.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-control-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-control-review.md]
+    checks: [Exact analytical pair and graph reconstruction, Known disk/octagon refusals and touch controls, Final frozen protocol reconciled, Formatting and five native links passed]
+    uncertainty: This is generic model admission only; no capacity target or matched H118 comparison has run.
+    elapsed_seconds: 603
+    elapsed_quality: operator_reported_approximate
+    next_action: Root may admit a target only after the separate mathematical review, committed protocol and passing records.
+    phase: 15
+    budget_minutes: 15
+    started_at: '2026-09-07T11:15:44Z'
+    deadline_at: '2026-09-07T11:27:25Z'
+    expected_output: Independent predicate and control acceptance or explicit failure, with actual-square and maximal-core conclusions kept distinct.
+    validation_command: Exact analytical controls for legal touch, saturation, wall ties, known disk and octagon refusals, inflated core and separate-normal errors.
+    kill_condition: Capacity target, silently changed predicate or domain, unverified control, shared-record edits or deadline.
+    fallback: Preserve the exact failed model control and refuse target admission until a separately priced correction.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-control-review.md]
+    excluded_commands: [Target proof or numerical execution, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
   outputs:
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-protocol.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-mathematical-review.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-control-review.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-author.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-adversary.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md
@@ -1206,6 +1298,11 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
   checks:
+  - BC279's native protocol froze11:23:05. Independent predicate/control review completed11:25:47 and mathematical review11:28:01, both within their unchanged caps. Both reconcile the frozen native model and accept it; target work awaits committed protocol and passing records.
+  - The accepted-tool receipt through11:18UTC records43664.617 agent-seconds over17208 active elapsed seconds, with26456.617 parallel-overlap seconds. Its prior baseline is unchanged, and the current four live tasks make this an incomplete lower bound.
+  - Required hosted CI at0e1961e2 is green without any runtime-band change. Its new full replay started11:16UTC on an immutable attic checkout with two workers and one inner worker. Source session094 full validation is complete; an unrelated checkout uses one CPU for its pre-push work.
+  - Midpoint0e1961e2 passed31 record steps in24.49seconds and45 push steps in117.50seconds, including624 tests with3 deselected. It is pushed and PR110 updated with audited BC278, allocations through278, current costs and both failed historical validation receipts.
+  - Planning max_cycles increases prospectively from16 to24 because completed slices have been shorter than the original half-hour estimate. This changes neither the480-minute wall allocation nor any existing worker cap, final reserve or endpoint.
   - Fixture correction0e28267b changes only the two no-history test environments and their explanatory comment. Coordinator20 tests passed2.22seconds, independent nested-attic20 passed2.07seconds, and Ruff/format checks passed; think-84uk is closed. A new full validation receipt remains due.
   - Midpoint cost receipt through10:29UTC records36685.6agent-seconds over14268elapsed active seconds, with22417.6overlap seconds. It remains a live lower bound. The baseline aggregate is unchanged from the accepted repaired snapshot.
   - Fresh10:28UTC fetch still has main atdd36800e and source PR109 at7daa7c55. Source session094 and exp125 are now occupied under H124; our session092 and BC278 remain disjoint. No new ID is allocated at this checkpoint.
@@ -1233,7 +1330,7 @@ session:
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-092.yaml
   stop_reason: null
-  next_action: BC278 is independently audited and terminal; full-square D0/D2 remains unresolved. Phase14 is the midpoint efficiency review through11:20:25, comparing wall-conditioned square compatibility, a broader release-angle domain and global coverage. Integrate the accepted fixture fix, current costs and completed receipts, then publish and run a new full gate. The old full and hosted cost-band failures remain failed receipts. Preserve finalization14:11 and endpoint14:31:12.
+  next_action: BC279 model/protocol design and two independent admissions run under phase15 through11:37:25. No capacity target before independent acceptance, committed native protocol and passing records. The selected maximal wall-conditioned core preserves Gamma0; full release t in[0,1] is the next alternative. Full0e1961e2 is running with two workers, required hosted CI is green, and historical failed receipts remain explicit. Preserve checkpoint12:31, finalization14:11 and endpoint14:31:12.
 ---
 # Eight-Hour Hybrid and Release Investigation
 
@@ -1350,9 +1447,13 @@ The audit froze10:46:20 and accepts the author’s exact seven-disk obstruction,
 continuous selected-pose family and fixed-center non-liftability, and the adversary’s
 distinct octagon witness with a disk-overlap refusal.
 Uniform disk and octagon capacities of six are refuted.
-Phase14 is the genuine midpoint efficiency block,10:55:25–11:20:25, with three
-assessments capped at11:10:25. Compare wall-conditioned square constraints, broader
-release angles and actual coverage value before allocating any successor.
+Phase14 selected maximal wall-conditioned cores on the unchanged parent, with complete
+release half-angle $t\in[0,1]$ as the next alternative.
+BC279, bead `think-cwve`, owns phase15’s native model design and independent generic and
+predicate/control admissions through11:37:25. A target needs the frozen native protocol,
+both completed admissions and passing records before actual leases are dispatched.
+The proposed target caps are30-minute author,25-minute concurrent adversary and20-minute
+fresh audit, all ending by12:40 UTC; no target is yet launched.
 
 Checkpoint57b85302’s full run finished1644.33seconds with65 steps passing and one failed
 no-history test fixture.
@@ -1360,8 +1461,11 @@ The independently reviewed fixture-only correction is committed at0e28267b, with
 focused tests passing; the production gate is unchanged.
 Published protocol1b7ed623 passed local records/push and all hosted substantive checks,
 but its hosted checks tier failed the existing runtime band at151.38seconds. Keep that
-band unchanged and retain both failed receipts; a new full gate is still due.
-Source session094’s full gate passed1623.67seconds; its1acd6320 checkpoint is published.
+band unchanged and retain both failed receipts.
+Required hosted CI on0e1961e2 is green, and its new full gate is running from11:16 UTC
+on the immutable protocol-validation checkout; do not move that checkout until its
+command finishes. Source session094’s full gate passed1623.67seconds; its1acd6320
+checkpoint is published.
 At10:58 another checkout has a translation-escape check in flight, so refresh the heavy
 queue before starting our next full gate.
 The midpoint cost receipt through10:29UTC is refreshed; source session094 and exp125 are

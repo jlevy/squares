@@ -453,6 +453,47 @@ agenda:
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-278-boundary-band-independent-review.md
       disposition: continue
       follow_up: think-0yfe
+  - id: BC-279
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: in_progress
+    priority: 1
+    question: Does the exact maximal wall-conditioned common-core model admit seven residual centers anywhere on the unchanged complete Gamma0?
+    hypotheses: [H-118]
+    budget: Concurrent15-minute native design,20-minute independent mathematical admission and15-minute predicate/control review; only after admission and a frozen passing-records protocol may one30-minute author and25-minute concurrent adversary run, followed by20-minute fresh audit. All target/audit work ends by12:40UTC; actual leases may be shorter.
+    entry: Audited BC278 disk/octagon obstruction, exact generic wall-conditioned core proposal, complete unchanged BC277 parent and midpoint allocation; scientific execution additionally requires independent admission, committed protocol and passing records.
+    exit: Independently accepted whole-model exclusion, exact seven-core witness, or precise unresolved implication. A positive excludes the full-square child by inclusion; a model witness does not establish actual eleven-square feasibility or strict H118 comparison.
+    bead: think-cwve
+    workflows: [insight-iteration, factual-review]
+    depends_on: [BC-277]
+    parallel_group: agenda028-capacity
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-protocol.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-mathematical-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-279-wall-core-control-review.md
+    next_evidence: Both independent reviews accept the frozen maximal-core protocol, all same-normal pair predicates and complete closed parent. Commit and pass records, then declare actual target leases. No serial weaker-core or unchanged disk retry.
+  - id: BC-280
+    purpose: measurement_validation
+    owner_focus: correctness
+    instances: [11]
+    state: ready
+    priority: 2
+    question: What complete physical common-angle release domain with t in[0,1] can be admitted without losing signed slides, source features or closed seams?
+    hypotheses: [H-120]
+    budget: One20-minute domain/control design in the spare independent slot during BC279 target work, then at most15 minutes of separately dispatched independent admission. No target determination is allocated here.
+    entry: Accepted BC273/BC276 signed middle-angle exclusion, exact source-feature equations and the midpoint's complete-chart alternative. Preserve the original side, slide, wall and contact pattern.
+    exit: A complete native domain, exact parent/control binding, closed angle/sign cover and independent admission or a precise failed premise; no new exclusion or packing witness.
+    bead: think-7ylp
+    workflows: [insight-iteration, factual-review]
+    depends_on: [BC-273, BC-276]
+    parallel_group: agenda028-structure
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/midpoint-allocation.md
+    next_evidence: Prepare only the complete t in[0,1] design while keeping the BC279 target reader independent of its active arguments. Any later release target requires its own prospective commitment and price.
 ---
 # Agenda 028 — Hybrid Strength and Angular Release
 
@@ -476,9 +517,9 @@ X-016’s continuing source program retains H-110 and conditional compatibility.
 X-017 / Agenda 027 retains H-111–117, BC-258–268, the complete anchor and six-plus-five
 pilots, support adoption, physical KKT review, and the sole BC-261 geometry interface.
 This agenda adds X-018, H-118–121 and BC-269–275; its execution takes session-092. The
-execution adds the next sequential commitments BC276 under existing H120 and BC277–278
+execution adds the next sequential commitments BC276 under existing H120 and BC277–279
 under existing H118; no new hypothesis or experiment ID is needed for these extensions.
-Fresh source inventory at10:58 UTC places its continuation in sessions091,093 and094,
+Fresh source inventory at11:12 UTC places its continuation in sessions091,093 and094,
 H122–124 and experiments121–125. Its owner independently reconciled the former
 unpublished H118 collision before publication; no cross-task message was sent.
 This execution retains session092 and allocates no new hypothesis or experiment ID.
