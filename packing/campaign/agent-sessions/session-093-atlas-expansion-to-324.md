@@ -131,8 +131,8 @@ session:
     switch_reason: The bounded work is complete and committed on PR 111; only records that
       depend on the owner, CI and the harness remain.
     budget_minutes: 1340
-    started_at: '2026-09-07T15:40:00Z'
-    deadline_at: '2026-09-08T14:00:00Z'
+    started_at: '2026-09-07T15:30:00Z'
+    deadline_at: '2026-09-08T13:50:00Z'
     expected_output: A terminal session record with its rollup and certifying gate named, and
       the epic closed at merge.
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
@@ -146,7 +146,7 @@ session:
   primary_bead: think-0juv
   status: in_progress
   budget:
-    # 480 for the work; extended once, at 2026-09-07T15:40Z, to hold the record open for
+    # 480 for the work; extended once, at 2026-09-07T15:30Z, to hold the record open for
     # the finalization phase below, not to continue autonomous work (D-395).
     wall_minutes: 1920
     checkpoint_minutes: 240
