@@ -12,7 +12,7 @@ agenda:
   status: paused
   objective: >-
     Prepare an independent alternative to the ongoing Agenda024-026 allocation,
-    based on X-017 and the owner's contributed research bundle. Compare a complete
+    based on X-020 and the owner's contributed research bundle. Compare a complete
     resource/anchor exclusion at side 96/25 with a contact-independent six-axis-plus-five
     shared-angle theorem; retain a small independent pair-kernel discriminator and
     candidate-led successors. Review contributed evidence at its own scope, build only
@@ -36,7 +36,7 @@ agenda:
       Owner-supplied bundle, PR105 source snapshot 46f38ab4, previous explorations,
       agendas024-026 and retained Session090 evidence.
     exit: >-
-      Source-faithful archive, critical X-017 synthesis, H-111 through H-117, this
+      Source-faithful archive, critical X-020 synthesis, H-111 through H-117, this
       separate agenda with sequential IDs, accountable beads and validated navigation.
     bead: think-adfk
     workflows: [review-planning-oversight]
@@ -44,7 +44,7 @@ agenda:
     artifacts:
     - packing/resources/papers/n11-complete-research-bundle-2026-09-07/INTAKE.md
     - packing/resources/papers/n11-complete-research-bundle-2026-09-07/intake-replay.json
-    - packing/campaign/explorations/X-017-compatibility-and-complete-case-covers.md
+    - packing/campaign/explorations/X-020-compatibility-and-complete-case-covers.md
     - packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md
     program: n11-compatibility-and-restricted-families
     next_evidence: >-
@@ -59,7 +59,7 @@ agenda:
         acceptance from new compatibility, restricted-family and kernel questions.
         No new packing bound, accepted H-099 verdict or successor experiment is claimed.
       evidence:
-      - packing/campaign/explorations/X-017-compatibility-and-complete-case-covers.md
+      - packing/campaign/explorations/X-020-compatibility-and-complete-case-covers.md
       - packing/resources/papers/n11-complete-research-bundle-2026-09-07/intake-replay.json
       disposition: retire-success
       follow_up: null
@@ -112,7 +112,7 @@ agenda:
       each implication; reprice unfinished proofs instead of treating a partial
       review as a universal contract.
     entry: >-
-      Source propositions, X-017's DAG correction and source-to-record map, existing
+      Source propositions, X-020's DAG correction and source-to-record map, existing
       exact geometry conventions, and an independent mathematical reviewer.
     exit: >-
       Named accepted implications and missing premises, including strict-interior
@@ -123,7 +123,7 @@ agenda:
     workflows: [factual-review]
     depends_on: []
     artifacts:
-    - packing/campaign/explorations/X-017-compatibility-and-complete-case-covers.md
+    - packing/campaign/explorations/X-020-compatibility-and-complete-case-covers.md
     - packing/resources/papers/n11-complete-research-bundle-2026-09-07/updates/enumeration_addendum.md
     parallel_group: agenda027-direct-contracts
     program: n11-compatibility-and-restricted-families
@@ -383,7 +383,7 @@ agenda:
 # Agenda 027 — Compatibility and Restricted Families
 
 **Prepared; execution has not started.**
-[X-017](../explorations/X-017-compatibility-and-complete-case-covers.md) owns the
+[X-020](../explorations/X-020-compatibility-and-complete-case-covers.md) owns the
 critical assessment, mathematical distinctions, and complete source-to-record map.
 This agenda owns the prospective actions.
 Epic `think-sz5t` owns the program; `think-adfk` owns the completed intake and planning.
@@ -391,11 +391,11 @@ Epic `think-sz5t` owns the program; `think-adfk` owns the completed intake and p
 ## Parallel Ownership
 
 Agenda 024 runs under a different coordinator.
-This branch continues the existing sequences with X-017, Agenda 027, H-111–117 and
+This branch continues the existing sequences with X-020, Agenda 027, H-111–117 and
 BC-258–268; its owning bead and draft PR record that allocation.
 The
-[exploration’s numbering audit](../explorations/X-017-compatibility-and-complete-case-covers.md#starting-point-what-the-previous-work-established)
-accounts for the current source records and the superseded exploration placeholders.
+[exploration’s numbering audit](../explorations/X-020-compatibility-and-complete-case-covers.md#starting-point-what-the-previous-work-established)
+accounts for the current source records and PR105’s locked exploration allocation.
 [Conventions](../../../conventions.md#1-identity) owns the sequential rule.
 Check known parallel work before assigning another ID and again before integration.
 Any actual collision is resolved with all affected references in the same change.

@@ -275,13 +275,13 @@ they are not additional mathematical hypotheses without a specific method compar
 
 ## Independent Compatibility and Restricted-Family Proposals
 
-[X-017](explorations/X-017-compatibility-and-complete-case-covers.md) assesses the
+[X-020](explorations/X-020-compatibility-and-complete-case-covers.md) assesses the
 contributed packet against PR105’s committed `46f38ab4` state.
 [Agenda 027](agendas/agenda-027-compatibility-and-restricted-families.md) is prepared
 and paused. These idea numbers and H-111–117 records continue the sequences after the
 parallel source program’s current entries.
 Branch and bead ownership distinguish the programs; the numbers carry no execution order
-or dependency. The source-to-record map in X-017 also routes overlapping proposals to
+or dependency. The source-to-record map in X-020 also routes overlapping proposals to
 existing H-094–103 without duplicating them.
 
 | # | Idea | Status | Record | Crux |

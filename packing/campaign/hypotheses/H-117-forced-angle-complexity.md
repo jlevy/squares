@@ -14,7 +14,7 @@ hypothesis:
     can a near-cluster/dispersed-cluster decomposition bound both branches strongly
     enough without reducing the number of independent actual angles?
   lane: proof
-  derived_from: [X-017]
+  derived_from: [X-020]
   instrument: >-
     Proposed typed contact implications with complete alternatives and independent
     feasible controls; a finite descriptor catalogue alone does not supply them.
@@ -38,7 +38,7 @@ hypothesis:
 ---
 # H-117 — The Missing Angle-Complexity Bridge
 
-[X-017](../explorations/X-017-compatibility-and-complete-case-covers.md) retains this
+[X-020](../explorations/X-020-compatibility-and-complete-case-covers.md) retains this
 question so a two-angle success cannot silently discard the three-or-more-angle
 remainder. It refines a structural issue within H-103 without changing that claim.
 

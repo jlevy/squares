@@ -13,7 +13,7 @@ hypothesis:
     placements admit total nonnegative weight above eleven at the exact Trump side,
     with overlap depth at most one almost everywhere?
   lane: proof
-  derived_from: [X-017]
+  derived_from: [X-020]
   instrument: >-
     Proposed exact added placements, support identity, necessary-row obstructions
     and complete a.e.-depth certificates with an independent reader. Freeze any
@@ -37,7 +37,7 @@ hypothesis:
 
 The contributed ceiling would settle only H-099’s original support after independent
 acceptance. It does not determine the optimum on expanded supports.
-[X-017](../explorations/X-017-compatibility-and-complete-case-covers.md) maps that
+[X-020](../explorations/X-020-compatibility-and-complete-case-covers.md) maps that
 distinction to this question and to the source’s equality-support proposal.
 
 A verified depth-one mass above eleven would obstruct the corresponding mass-eleven

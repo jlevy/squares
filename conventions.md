@@ -93,10 +93,11 @@ An ID identifies a record, not its priority, execution order, or dependency.
 Record the assigned IDs with the artifacts in their owning bead and publish them in the
 draft PR. Those existing records provide coordination; do not add a second allocation
 ledger or reserve speculative future ranges.
-Historical launch drafts do not reserve uncreated records after their allocation has
-been superseded.
-Recheck known parallel changes before integration: sequential allocation
-is a convention, not an atomic allocator.
+Treat declared ID choices in known parallel work as occupied, including records still
+being prepared. A changed schedule does not release those IDs; their owner must
+explicitly release them.
+Recheck known parallel changes before integration: sequential allocation is a
+convention, not an atomic allocator.
 
 The shared `BC-` sequence continues across agendas.
 Each cell belongs to one agenda, but its bare ID is used in `depends_on`,

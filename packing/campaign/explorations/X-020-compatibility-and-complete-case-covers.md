@@ -1,12 +1,12 @@
 ---
-title: X-017 — compatibility and complete case covers
+title: X-020 — compatibility and complete case covers
 softschema:
   contract: packing.squares:Exploration/v1
   schema: ../schemas/exploration.schema.yaml
   envelope: exploration
   status: enforced
 exploration:
-  id: X-017
+  id: X-020
   title: Compatibility, Restricted Families, and Complete Case Covers
   date: '2026-09-07'
   author: Codex coordinator, with three independent read-only intake assessments
@@ -38,7 +38,7 @@ exploration:
   - docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
   proposes: [H-111, H-112, H-113, H-114, H-115, H-116, H-117]
 ---
-# X-017 — Compatibility, Restricted Families, and Complete Case Covers
+# X-020 — Compatibility, Restricted Families, and Complete Case Covers
 
 **Recommendation.** Prepare two complementary pilots: a coarse resource-and-anchor
 argument at $L=96/25=3.84$, and a contact-independent theorem for six axis-aligned
@@ -66,15 +66,20 @@ The
 records that boundary and the same-code replay of the supplied controls.
 Later source work is outside that fixed mathematical baseline.
 
-**Parallel ownership.** At the owner’s request, this program uses X-017, Agenda 027,
+**Parallel ownership.** At the owner’s request, this program uses X-020, Agenda 027,
 H-111–117, and BC-258–268, recorded on `think-adfk` and its owning epic `think-sz5t`.
 These continue the existing sequences; branch and bead ownership distinguish the
-parallel program. The numbering check used PR105 at `bc5c24b5` and its active checkout,
-which already contains H-110 and BC-257. Its highest materialized exploration is X-016.
-The X-017–019 placeholders in the superseded launch draft were never created and do not
-reserve future records under the owner’s sequential-numbering instruction.
+parallel program.
+PR105 owns H-110 and BC-257, and its existing plan assigns X-017–019 to
+that coordinator. The owner explicitly locked all of PR105’s ID choices, so those
+exploration IDs remain occupied even while their records are being prepared.
 [Conventions](../../../conventions.md#1-identity) owns the general rule.
 No new commitment depends on the other coordinator finishing a run.
+
+**Identifier correction.** The first draft of PR107 published this report as X-017. It
+was renamed to X-020, with its references updated together, to preserve PR105’s locked
+X-017–019 allocation.
+No existing source-program ID was changed.
 
 **Later source checkpoint.** This branch subsequently integrated PR105’s committed
 `f5684f51` checkpoint to keep the stacked PR reviewable.

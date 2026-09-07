@@ -13,7 +13,7 @@ hypothesis:
     densities improve a one-body bound or a conditional resource inequality beyond
     the current square-core representation, with full continuum coverage verified?
   lane: proof
-  derived_from: [X-017]
+  derived_from: [X-020]
   instrument: >-
     Proposed exact arc containment, boundary-nullity proof, algebraic intersection
     integrals, and uniform pose coverage; first require a specified candidate.
@@ -40,7 +40,7 @@ uses the finite intersection of a nondegenerate quadratic arc with each line.
 It removes square-boundary charges; it does not certify all pose integrals.
 Tangencies, colliding roots, and every parameter interval remain part of that task.
 
-[X-017](../explorations/X-017-compatibility-and-complete-case-covers.md) and
+[X-020](../explorations/X-020-compatibility-and-complete-case-covers.md) and
 [Agenda 027](../agendas/agenda-027-compatibility-and-restricted-families.md) keep this
 as one selectable resource option, not an automatic general-verifier build.
 Freeze any tested arc family, side, criterion, and scientific budget prospectively.
