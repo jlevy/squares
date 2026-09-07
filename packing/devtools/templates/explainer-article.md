@@ -46,8 +46,8 @@ The tightest known packing, due to Trump in 1979 (Figure 1), shows
 
 <figure>
   <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
-  <figcaption><strong>Figure 1.</strong> Trump’s 1979 packing of eleven unit squares shows
-  <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>.</figcaption>
+  <figcaption><strong>Figure 1.</strong> Eleven unit squares inside a square of side
+  <span class="tex">{{BEST_PACKING_TEX}}</span>, a root of an eighth-degree polynomial.</figcaption>
 </figure>
 
 The computer-assisted proof of the new lower bound was found via an automated research
@@ -685,8 +685,9 @@ The one-file checker [`minimal_verify.py`]({{PINNED_VERIFIER_URL}}) verifies the
     Electronic Journal of Combinatorics, Dynamic Survey DS7.
 
 [^trump]: Walter Trump’s packing of 1979, as recorded in
-    [Kingbird’s register of squares in squares]({{BEST_URL}}). The
-    [rendering]({{BEST_RENDER_URL}}) is the project’s own.
+    [Kingbird’s register of squares in squares]({{BEST_URL}}), which also lists the
+    degree-eight polynomial defining its side length.
+    The [rendering]({{BEST_RENDER_URL}}) is the project’s own.
     Stromquist’s [Memo III]({{PRIOR_MEMO_URL}}), pp.
     2–4, credits Mats Gustafsson and Magnus Thulin with the same construction, reported
     by Gardner in November 1980; the research archive records their independent
