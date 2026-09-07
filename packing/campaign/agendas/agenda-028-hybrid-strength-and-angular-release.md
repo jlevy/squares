@@ -54,11 +54,11 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [3, 4, 11]
-    state: in_progress
+    state: blocked
     priority: 0
     question: What frozen target-side comparison fairly tests H118 against coupled geometry?
     hypotheses: [H-118]
-    budget: One 30-minute mathematical protocol slice; one further slice only for a named missing premise.
+    budget: Two design slices of at most30minutes and a15-minute independent audit; the accepted fence review additionally prices one8-minute correction of its redundant closed-sibling representation, followed by coordinator review.
     entry: >-
       X018 assessment and source controls. Design can proceed before BC261; use
       only accepted geometry/resource implications in a final target protocol.
@@ -67,17 +67,20 @@ agenda:
       remainder, finite resource candidates, identical strong comparator and branch
       policy, two exact witness requirements, controls and separately priced replay.
     bead: think-9uv0
+    blocked_on: A natural finite same-domain geometric baseline and exact LP survival witness are missing; the accepted central capacity restriction is retained independently.
     workflows: [insight-iteration, factual-review]
     depends_on: []
     parallel_group: agenda028-capacity
     program: n11-hybrid-strength-and-angular-release
     next_evidence: >-
-      Use the remaining design slice only for necessary compatibility restrictions
-      from the eleven-square parent. Exact packings defeat all three isolated
-      four-square band domains and the central group with a bottom anchor. No
-      capacity target is admitted; BC261 remains the sole interface owner.
+      The central parent fence and corrected24-guard remainder are accepted.
+      BC271 prices the missing same-domain comparator; the lower/upper bands and
+      guard-failure cases remain open. No resource target is admitted; BC261
+      remains the sole interface owner.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md
     outcomes:
     - scope: Natural three-band four-square subsystems and a five-square anchored extension
       classification: achieved
@@ -89,6 +92,19 @@ agenda:
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md
       disposition: continue
       follow_up: think-9uv0
+    - scope: Guarded central four-square family and complete closed parent remainder
+      classification: achieved
+      result: >-
+        Independent audit accepts an orientation-uniform complement capacity of
+        at most4, excluding7 residual full squares. The exact central fixture
+        satisfies the four-pose guards strictly. Coordinator review accepts the
+        equivalent24-guard remainder, correcting tautological whole-parent
+        siblings. The matching coupled-LP survival witness remains missing.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md
+      disposition: continue
+      follow_up: think-6l39
   - id: BC-271
     purpose: research
     owner_focus: insight
@@ -114,9 +130,25 @@ agenda:
     parallel_group: agenda028-capacity
     program: n11-hybrid-strength-and-angular-release
     next_evidence: >-
-      Expand one recurring useful domain or send a checked cut to BC262. One
-      prescribed refinement with unchanged residual ends expansion of this
-      representation at checkpoint. It does not reject H111 or all resource methods.
+      Consume the central fence as a shared geometric lemma and give the next
+      mathematical design to BC277's uncovered boundary-band parent. The reviewed
+      strong comparator can express the same regional capacity; do not manufacture
+      a weak LP for survival. H118 remains open without a natural finite baseline.
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md
+    outcomes:
+    - scope: Admission of a strict central-fence strength comparison
+      classification: guard-refused
+      result: >-
+        No finite matrix or exact relaxation point is frozen. The recommended
+        geometric deduction closure includes the accepted four-region capacity,
+        so this instance becomes shared-lemma consumption or proof cost. A
+        larger nonlinear comparator build is not funded; the lower-band design
+        addresses a genuinely uncovered parent.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md
+      disposition: defer-dependency
+      follow_up: think-os9k
   - id: BC-272
     purpose: research
     owner_focus: insight
@@ -229,7 +261,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: efficiency
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 1
     question: Which mathematical result per unit of attention warrants the next overnight allocation?
     budget: A 20-minute integration reserve within the first four active hours, or earlier on decisive evidence.
@@ -245,10 +277,10 @@ agenda:
     depends_on: []
     program: n11-hybrid-strength-and-angular-release
     next_evidence: >-
-      Prioritize BC270's remaining necessary-parent design and give BC276 only one
-      separately reviewed sibling allocation. Correct the reproduced cost parser
-      defect under think-ooa7 before publishing final totals; retain the earlier
-      snapshots as historical unreconciled receipts.
+      Audit BC270's completed parent-fence design and BC276's separately frozen
+      sibling attempt. The accepted cost correction at4ac71438 restores the
+      historical membership; use the rebuilt live receipt and preserve its
+      incomplete-snapshot and retrospective timing qualifications.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md
     outcomes:
@@ -259,19 +291,20 @@ agenda:
         passing local and hosted checks. The independent portfolio challenge
         prioritizes necessary eleven-square compatibility over hours of narrow
         feature-box expansion. One negative-slide sibling can complete a signed
-        short-slide parent if independently admitted. A later compaction settings
-        event was proved to erase historical work from the cost parser, so totals
-        remain unreconciled until its bounded correction is accepted.
+        short-slide parent if independently accepted. The reproduced late-compaction
+        ownership defect is corrected at4ac71438 with independent review and49
+        focused tests. The rebuilt09:03:04 receipt retains24094.867agent-seconds
+        across9111.298elapsed seconds; no decreased total is a claimed improvement.
       evidence:
       - packing/campaign/agent-sessions/session-092-hybrid-overnight.md
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md
-      disposition: continue
-      follow_up: think-ooa7
+      disposition: retire-success
+      follow_up: null
   - id: BC-276
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 1
     question: Can the closed negative short-slide sibling complete H120's signed short-slide source-feature parent?
     hypotheses: [H-120]
@@ -295,11 +328,60 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-protocol.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-domain-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-adversary.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md
     next_evidence: >-
-      If N closes, combine it with accepted T+ and the sign lemma to close the
-      complete signed short-slide parent. Preserve all other block angles, longer
-      slides and changed wall/contact patterns. No automatic smaller-box retry,
-      numerical target or cavity-adapter expansion.
+      N and the complete signed short-slide parent S are independently closed.
+      Preserve other block angles, longer slides and changed wall/contact patterns;
+      reprice further structural work against direct parent compatibility rather
+      than automatically expanding this source-feature family.
+    outcomes:
+    - scope: Entire frozen negative short-slide N and its signed-parent union S
+      classification: achieved
+      result: >-
+        Both independent analytical arguments pass whole-domain review. Complete
+        SAT reductions and cap geometry force L at least4900/1261, exceeding96/25
+        by1444/31525. The accepted positive child and exact diagonal sign lemma
+        imply S is empty, including all square10 orientations and legal seams.
+        No global bracket change or machine proof replay is claimed.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md
+      disposition: retire-success
+      follow_up: null
+  - id: BC-277
+    purpose: measurement_validation
+    owner_focus: correctness
+    instances: [11]
+    state: in_progress
+    priority: 1
+    question: What complete boundary-band domain fairly tests complement capacity for seven residual full squares beyond the accepted central fence?
+    hypotheses: [H-118]
+    budget: One30-minute domain/guard design and15-minute independent admission review; a later target needs its own frozen protocol, price and independent audit.
+    entry: >-
+      Accepted complete three-band parent and exact lower fixture, central-fence
+      theorem and corrected remainder, and BC271's comparison assessment. The
+      lower and reflected upper parents are still uncovered; their target guards
+      and complement-capacity certificate do not yet exist.
+    exit: >-
+      One explicit finite closed four-pose family containing the retained lower
+      fixture, actual independent angles, complete parent/failure siblings and
+      joint reflection, control semantics and prospective capacity question; or
+      the precise missing premise. No target proof during this design.
+    bead: think-os9k
+    workflows: [insight-iteration, factual-review]
+    depends_on: []
+    parallel_group: agenda028-capacity
+    program: n11-hybrid-strength-and-angular-release
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-capacity-comparison-design.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md
+    next_evidence: >-
+      Independently admit the domain before commissioning a separately committed
+      analytical determination. A capacity bound at most6 would exclude7 residual
+      squares; the fixture alone supplies no evidence for that bound. Keep
+      actual-square, incircle and octagon-surrogate conclusions distinct.
 ---
 # Agenda 028 — Hybrid Strength and Angular Release
 

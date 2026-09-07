@@ -203,6 +203,12 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [BC-271: Comparator Design and the Next Scope Decision](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md) | implementation plan | record | retained | — |
+| [BC-276: Independent Acceptance of the Negative-Slide Exclusion](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md) | dated review record | record | retained | — |
+| [BC-270: A Parent Compatibility Restriction From the Other Seven Squares](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md) | research synthesis | record | retained | — |
+| [BC-270: Independent Review of the Parent Compatibility Fence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md) | dated review record | record | retained | — |
+| [BC-276: Negative-Slide Author’s Analytical Exclusion](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-author.md) | research synthesis | record | retained | — |
+| [BC-276: Independent Negative-Slide Adversary](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-adversary.md) | research synthesis | record | retained | — |
 | [BC-276: Negative-Slide Domain Preflight](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-domain-review.md) | dated review record | record | retained | — |
 | [BC-275: First Checkpoint Allocation](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md) | implementation plan | record | retained | — |
 | [BC-276: Prospective Negative-Slide Determination](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-protocol.md) | implementation plan | record | retained | — |
@@ -3110,7 +3116,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
 | `codex-task-tree-session-090.yaml` | session-090 | 1,341 | 9.8 h | 3.94 h | 3.95 h | yes |
-| `codex-task-tree-session-092.yaml` | session-092 | 310 | 2.84 h | 1.08 h | 1.08 h | yes |
+| `codex-task-tree-session-092.yaml` | session-092 | 640 | 6.69 h | 2.53 h | 2.53 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

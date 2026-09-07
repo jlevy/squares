@@ -31,12 +31,14 @@ hypothesis:
   replication: false
   registered: '2026-09-07'
   notes: >-
-    The direct-exclusion specialization of H-TBD-RELEASE, owned by BC273.
+    The direct-exclusion specialization of H-TBD-RELEASE, owned by BC273 and BC276.
     Session092's independently audited analytical contradiction excludes the
     entire frozen middle-angle child and, because it uses only the ten-square
     skeleton, the already-defined T+ for every square10 orientation. Readiness
     refers to that analytical proof and audit, not an H120 uniform-LP adapter.
-    Other block angles, negative or longer slides and changed wall/contact
+    BC276 independently excludes the full negative short-slide sibling N;
+    together with the diagonal sign lemma this closes the signed short-slide
+    parent S. Other block angles, longer slides and changed wall/contact
     patterns remain open. No finite-motion theorem or global bound is claimed.
 ---
 # H-120 — Rank-Nine Release Exclusion
@@ -101,10 +103,27 @@ by projection rather than by an added target attempt.
 This is an independently audited analytical result, without a machine proof replay.
 It closes new continuous source-feature geometry beyond the named local ball, while
 leaving the global $n=11$ bracket unchanged.
-Different block angles, negative or larger slides, short or vanishing segments, and
-changed contact-side or wall assignments remain explicit open scopes.
+Different block angles, larger slides, degenerating segments, and changed contact-side
+or wall assignments remain explicit open scopes.
 The independent author’s partial compartment results are retained in its
 [separate report](../series/series-000-smoke-and-calibration/results/agenda-028/bc-273-analytic-author.md).
+
+BC276’s
+[independent audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md)
+accepts both separately produced proofs of the entire negative sibling $N$, which
+changes only the slide bounds to $-1/4\le a,b\le0$. The new left-wall constraint and
+complete SAT reductions force $L\ge4900/1261>96/25$, with exact contradiction margin
+$1444/31525$. This is a necessary inequality inside the declared parameter box, not a
+new unrestricted lower bound.
+
+The diagonal nonoverlap conditions give $ab\ge0$ on $[-1/4,1/4]^2$. The complete signed
+short-slide parent is therefore $S=T_+\cup N$, with both children closed and all
+one-zero slide boundaries included.
+Both children are now excluded.
+The common block-angle interval, variable side, prescribed wall/contact pattern and
+every square10 orientation remain exactly as declared.
+These are analytical proofs with independent audits; no machine target, finite-motion
+theorem or global representative claim is added.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

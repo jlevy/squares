@@ -32,8 +32,10 @@ hypothesis:
   registered: '2026-09-07'
   notes: >-
     A narrow discriminator under H111, owned by Agenda028 rather than its broad
-    anchor pilot. No target domain has yet been selected. Freeze a prospective
-    bounded determination before running; failure does not settle all resources.
+    anchor pilot. A guarded eleven-square parent now has an independently
+    accepted direct geometric exclusion; its matching strong coupled-LP
+    representation and exact surviving relaxation witness remain missing.
+    No target comparison is admitted and no superiority verdict is claimed.
 ---
 # H-118 — Capacity Versus a Coupled Outer LP
 
@@ -61,9 +63,31 @@ derives a complete three-band count split and exact feasible packings for all th
 isolated four-square subsystems.
 The central packing also admits a bottom anchor.
 These are analytical obstructions to those domain exclusions, with no target search.
-BC270 must derive necessary compatibility restrictions from the remaining squares before
-it can admit a useful comparison.
-H118 remains open.
+The
+[parent-fence argument](../series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md)
+and its
+[independent review](../series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md)
+now supply such a restriction.
+Pose-dependent guards on four central-band squares leave every residual center in four
+explicit regions of diameter at most $999/1000$. At most four additional full squares
+fit, at any orientations; seven are impossible.
+The original central fixture satisfies the four-pose guards strictly, as does a
+continuous family. This excludes their extension to eleven squares.
+
+The outer bands and central guard-failure cases remain open.
+The first proposed closed remainder contained tautological vertex bounds whose failure
+children reproduced the parent.
+The independently checked equivalent 24-guard list corrects this representation while
+preserving the capacity theorem and every weak seam.
+
+The
+[comparator assessment](../series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md)
+requires the same nonlinear guards and applicable geometric deductions.
+A strong closure can already express the accepted regional capacity, making the central
+instance a shared-lemma or proof-cost comparison.
+No natural finite baseline and exact surviving point are frozen.
+BC277 therefore designs the uncovered boundary-band family next, before any new target.
+H118 remains open, and the global bracket is unchanged.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

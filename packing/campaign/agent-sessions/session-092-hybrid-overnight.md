@@ -214,7 +214,7 @@ session:
     objective: Attempt the unchanged complete negative-slide determination after freezing its accepted protocol, alongside the remaining parent-compatibility design.
     commitment: BC-276
     bead: think-6pka
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Independent review accepts N and the signed-parent decomposition; one bounded sibling can expand the completed release result while the principal H118 prerequisite proceeds.
     budget_minutes: 30
@@ -224,10 +224,58 @@ session:
     validation_command: Immutable protocol and passing record checks before target dispatch, then independent mathematical audit.
     kill_condition: Uncommitted or altered domain, numerical target work, omitted seam, or the actual worker and phase deadlines.
     fallback: Preserve exact partial results or the failed implication; no smaller-box retry or adapter substitution in this attempt.
+    outcome: Both independent N attempts returned complete candidate contradictions and terminalized by09:20:12. The independent BC270 review accepts its all-angle residual capacity bound, with explicit comparator and redundant-sibling limitations.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-author.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-adversary.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md
+    stop_reason: Both target writers are terminal before their hard deadlines; no reasoning was exchanged between them.
+    next_action: Independently audit the frozen N arguments, integrate accepted capacity scope and price only the named remaining comparison premise.
+  - workflow: insight-iteration
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Independently audit the complete N attempts and integrate the accepted parent fence with its exact unresolved comparison and coverage obligations.
+    commitment: BC-276
+    bead: think-6pka
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: Both independent candidate proofs are frozen; acceptance needs a reader who coauthored neither. The separate fence audit accepts the geometry but identifies a redundant remainder representation.
+    budget_minutes: 30
+    started_at: '2026-09-07T09:21:54Z'
+    deadline_at: '2026-09-07T09:50:00Z'
+    expected_output: Independent acceptance or exact failed implication for N, accepted capacity restriction with honest remainder/comparator scope, and a pushed checkpoint with reconciled live costs.
+    validation_command: Independent exact mathematical reconstruction, record and change-reachable push checks; full gate scheduled after the source's current heavy queue.
+    kill_condition: A missing SAT case or boundary, target extension, unpriced new computation, or individual audit and phase deadlines.
+    fallback: Preserve the exact gap and scoped accepted lemmas; no target repair or narrower retry within this attempt.
+    outcome: Both N proofs and the complete signed-parent union are independently accepted. The fence's equivalent24-guard remainder passes coordinator review. BC271 recommends an uncovered boundary-band design; a strong central comparator can already express the same capacity conclusion. Native evidence and corrected costs are ready for checkpoint publication.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md
+    stop_reason: Mathematical review and comparison pricing completed early; no N target work remains. Publication continues alongside the newly priced design.
+    next_action: Publish the accepted geometry and launch only BC277's prospective30-minute lower-band domain design, with15-minute independent admission review reserved.
+  - workflow: insight-iteration
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Design one complete boundary-band compatibility domain while publishing the accepted mathematical checkpoint and running full validation.
+    commitment: BC-277
+    bead: think-os9k
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: The signed-slide parent is closed and the central fence is a shared geometric lemma. The lower/upper-band parents are a concrete uncovered scope; their finite guarded target is not ready.
+    budget_minutes: 30
+    started_at: '2026-09-07T09:43:03Z'
+    deadline_at: '2026-09-07T10:13:03Z'
+    expected_output: Complete finite lower-band domain, actual-angle and reflection semantics, membership controls, explicit failure siblings and priced admission obligation, or the precise missing premise.
+    validation_command: Independent mathematical admission review after the author freezes; record and push checks on the checkpoint, with the full gate on an immutable checkout.
+    kill_condition: Fitted pose box, restating the desired capacity as a premise, target proof/search before a frozen protocol, hidden boundary loss, or the phase deadline.
+    fallback: Preserve the exact design blocker and accepted central restriction; do not enlarge an unready target or build a generic comparator.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Commit the protocol and accepted code, pass records, then record actual author/adversary leases before dispatch; both end by09:30 and the final audit by09:50.
+    next_action: Dispatch the bounded domain author; keep all target work unadmitted until its separate protocol and independent scope acceptance.
   primary_bead: think-0yfe
   status: in_progress
   budget:
@@ -238,6 +286,7 @@ session:
     slice_minutes: 30
     finalization_minutes: 20
   stop_conditions:
+  - Refresh completed delegation receipts immediately before a push; a protocol commit made while a worker was active must not be pushed later with its expired live lease. Passing local records on the older commit does not replace this check.
   - Check the current clock against phase and session deadlines on every resume; terminalize an expired phase before opening its successor.
   - End each target at its prospectively frozen scientific cap; a new session or heartbeat cannot grant that attempt extra time.
   - Stop the affected target on a failed control, incomplete geometric cover, identity collision or invalid independent certificate; retain the reason and continue an unrelated ready lane.
@@ -691,6 +740,160 @@ session:
     excluded_commands: [New target proof or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
   - task: BC270 remaining parent-compatibility design
     operator: Codex capacity_protocol, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Proposed finite continuous alternating-fence guards and four explicit residual-center regions of diameter at most999/1000, yielding capacity at most four; the central fixture satisfies all substantive guards strictly.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md]
+    checks: [Flowmark and two source links/whitespace/footer checks passed; no target computation]
+    uncertainty: Independent geometric and complete-parent audit remains required. Outer-band siblings and the exact surviving coupled-LP comparator remain open.
+    elapsed_seconds: 1366
+    elapsed_quality: operator_reported_approximate
+    next_action: Independently review strict guard inclusion, full section cover, weak boundaries, region diameter and all parent/sibling definitions.
+    phase: 7
+    budget_minutes: 30
+    started_at: '2026-09-07T08:40:38Z'
+    deadline_at: '2026-09-07T09:08:00Z'
+    expected_output: A concrete closed parent branch, explicit siblings and geometric premise, or the precise obstruction to any fair H118 target.
+    validation_command: Exact mathematical implication and retained-fixture comparison; independent review follows in a separate15-minute slice.
+    kill_condition: A fitted convenient box, restatement of residual capacity without a new premise, freely positioned anchor only, omitted siblings, or lane deadline.
+    fallback: Retain the missing parent restriction and keep BC271 blocked; no resource target or larger tree.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md]
+    excluded_commands: [Numerical targets or solver runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC276 negative-slide analytical author
+    operator: Codex negative_slide_author, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Proposed complete exclusion of N using top-cap geometry and complete pair5-6,1-9,1-7 SAT reductions, forcing L at least4900/1261 above96/25; pending independent audit.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-author.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-author.md]
+    checks: [Independent from the adversary throughout, Flowmark and links/footer/whitespace/equation reread passed, No numerical target]
+    uncertainty: The complete argument is provisional until the final independent audit; no global family or bracket claim.
+    elapsed_seconds: 975
+    elapsed_quality: operator_reported_approximate
+    next_action: Preserve the frozen report; begin the independent audit only after the adversary also terminalizes.
+    phase: 8
+    budget_minutes: 25
+    started_at: '2026-09-07T09:01:11Z'
+    deadline_at: '2026-09-07T09:25:45Z'
+    expected_output: A complete exact exclusion or eleven-square witness proposal, or explicitly unresolved exact remainder.
+    validation_command: Independent mathematical audit after both target reports freeze.
+    kill_condition: Changed domain, omitted seam, numerical target or solver work, or the assigned deadline.
+    fallback: Preserve the exact failed implication or remaining case; no continuation or smaller-box retry.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-author.md]
+    excluded_commands: [Reading the concurrent adversary, Numerical targets or solver runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC276 independent negative-slide adversary
+    operator: Codex release_model_review, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Independently proposed a complete ten-square contradiction for all N, with every used SAT alternative and cap boundary explicit; no exact feasible witness found or claimed.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-adversary.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-adversary.md]
+    checks: [No author report or reasoning read, Flowmark and full document checks passed, No numerical target]
+    uncertainty: The cap-coordinate identities and alpha elimination receive particular independent attention; the whole candidate remains provisional until audit.
+    elapsed_seconds: 1107
+    elapsed_quality: operator_reported_approximate
+    next_action: Frozen at09:20:12; both target reports are now terminal and the independent audit can begin.
+    phase: 8
+    budget_minutes: 20
+    started_at: '2026-09-07T09:01:45Z'
+    deadline_at: '2026-09-07T09:20:45Z'
+    expected_output: An exact counterexample proposal or a rigorous obstruction/partial implication at the complete declared scope.
+    validation_command: Independent exact membership and nonoverlap audit under the committed protocol.
+    kill_condition: Reading the concurrent author, changed target, numerical target or solver work, or the assigned deadline.
+    fallback: Retain the precise failed construction or unproved implication; no whole-domain verdict from an incomplete attempt.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-adversary.md]
+    excluded_commands: [Reading the concurrent author, Numerical targets or solver runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC270 independent parent-fence review
+    operator: Codex direct_contracts, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Independently accepted capacity at most4 for the guarded four-pose family, uniformly over residual orientations; exact core inclusion, four-region cover, diameters and fixture margins pass.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md]
+    checks: [Full mathematical reconstruction, Flowmark and links/whitespace/footer/equation reread passed, No concurrent N report read]
+    uncertainty: The fixture belongs to the guarded four-pose conditions, not the impossible full child. Identically tight bounds create redundant whole-parent failure siblings. H118's matching nonlinear-guard comparator and exact LP survival witness remain missing.
+    elapsed_seconds: 463
+    elapsed_quality: operator_reported_approximate
+    next_action: Retain the accepted restriction for BC262 and separately price a nonredundant cover and the missing same-domain comparison.
+    phase: 8
+    budget_minutes: 15
+    started_at: '2026-09-07T09:10:35Z'
+    deadline_at: '2026-09-07T09:20:57Z'
+    expected_output: Exact acceptance or failed implication for actual-angle cores, strict octagon guards, complete four-region cover, diameters and parent/sibling coverage.
+    validation_command: Independent exact reconstruction against full-square containment/nonoverlap and the retained central fixtures.
+    kill_condition: Missing guard or boundary implication, new unregistered target work, or review deadline.
+    fallback: Retain the exact gap and any separately accepted lemma; keep H118/BC271 unresolved without the matching LP witness.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md]
+    excluded_commands: [Numerical targets or solver runs, Git or shared-record mutations, New IDs, Dependency changes, Reading or coauthoring concurrent N attempts, Writes outside assigned file or attic]
+  - task: BC276 independent whole-domain negative-slide audit
+    operator: Codex direct_contracts, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Independently accepted both full N contradictions and the exact signed-parent union S; the final side contradiction has margin1444/31525 and every declared seam is covered.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md]
+    checks: [Every load-bearing SAT alternative and cap boundary reconstructed, Both cap identities and alpha elimination checked, Flowmark and all document checks passed]
+    uncertainty: Unused squares0/10 are dependency observations, not an unrestricted smaller-square theorem; broader angles/slides/features and the global bracket remain outside acceptance.
+    elapsed_seconds: 577
+    elapsed_quality: operator_reported_approximate
+    next_action: Publish the complete N and S disposition; no further work on this target.
+    phase: 9
+    budget_minutes: 20
+    started_at: '2026-09-07T09:23:30Z'
+    deadline_at: '2026-09-07T09:41:54Z'
+    expected_output: Exact acceptance or failed implication for the full N, with all SAT alternatives, cap geometry and closed seams checked.
+    validation_command: Independent mathematical reconstruction from the frozen protocol, feature equations and both completed reports.
+    kill_condition: Missing premise, omitted boundary, changed target, numerical work, or the audit deadline.
+    fallback: Retain the precise failed step and separately accepted implications; end all N target work by09:50.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md]
+    excluded_commands: [New target proof or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC270 nonredundant remainder correction
+    operator: Codex capacity_protocol, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Explicit24-guard list is equivalent to the original conjunction and removes all tautological failure children; its closed remainder excludes the fixture's relative open four-pose family.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md]
+    checks: [Author formatting/link/footer/whitespace checks passed, Coordinator independently accepted all24 expressions and complete weak-boundary remainder after09:30:03]
+    uncertainty: No geometry or capacity scope is enlarged; H118's same-domain comparator and survival witness remain missing.
+    elapsed_seconds: 301
+    elapsed_quality: operator_reported_approximate
+    next_action: Integrate the accepted capacity restriction and corrected remainder; price a distinct uncovered parent instead of repeating this exclusion.
+    phase: 9
+    budget_minutes: 8
+    started_at: '2026-09-07T09:24:41Z'
+    deadline_at: '2026-09-07T09:32:17Z'
+    expected_output: Explicit finite nonvacuous closed failure cover with exact fixture membership wording, or the precise remaining representation gap.
+    validation_command: Coordinator independently checks equivalence of the retained guard conjunction and complete weak-boundary cover.
+    kill_condition: Enlarged geometric theorem, unproved deletion of a guard, target computation, or the correction deadline.
+    fallback: Keep the original sound redundant cover and its honest limitation; no target is admitted.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md]
+    excluded_commands: [New target proof or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC271 matched-comparator design price
+    operator: Codex release_model_review, max thinking
+    status: completed
+    recording: contemporaneous
+    outcome: Specified shared angle/guard/product/SAT semantics and missing controls. A strong central geometric closure can express the accepted regional capacity, making that instance a shared-lemma or proof-cost question. Recommend lower-band design next.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md]
+    checks: [Read-only source ownership and accepted interface inspection, Flowmark and all document checks passed, No target or implementation]
+    uncertainty: No exact matrix, finite baseline policy or survival witness is frozen; H118 stays open. Lower-band guards and complement capacity are not yet defined or proved.
+    elapsed_seconds: 786
+    elapsed_quality: operator_reported_approximate
+    next_action: BC277 receives30 minutes for lower-band domain design and15 minutes for independent admission review; no comparator build is funded.
+    phase: 9
+    budget_minutes: 20
+    started_at: '2026-09-07T09:24:57Z'
+    deadline_at: '2026-09-07T09:44:17Z'
+    expected_output: Concrete prospective comparison definition and controls with a priced next decision, or a precise reason it would be weak, circular or uninformative.
+    validation_command: Read-only mathematical and implementation comparison against H118, the accepted fence, BC261 and current source ownership.
+    kill_condition: Solving or running an unfrozen target, omitting guard/ordering/projection consequences, duplicating source work, or the design deadline.
+    fallback: Retain the exact comparator or implementation blocker and recommend a better named use of the remaining night.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md]
+    excluded_commands: [Target proof attempts or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+  - task: BC277 boundary-band domain and guard design
+    operator: Codex capacity_protocol, max thinking
     status: in_progress
     recording: contemporaneous
     outcome: null
@@ -700,18 +903,24 @@ session:
     uncertainty: null
     elapsed_seconds: null
     elapsed_quality: null
-    next_action: Derive a necessary restriction supplied by the seven residual squares and a complete selected parent branch that defeats the retained diamond fixtures.
-    phase: 7
+    next_action: Design the complete finite lower-band target and reflected sibling before any new capacity proof attempt.
+    phase: 10
     budget_minutes: 30
-    started_at: '2026-09-07T08:38:00Z'
-    deadline_at: '2026-09-07T09:08:00Z'
-    expected_output: A concrete closed parent branch, explicit siblings and geometric premise, or the precise obstruction to any fair H118 target.
-    validation_command: Exact mathematical implication and retained-fixture comparison; independent review follows in a separate15-minute slice.
-    kill_condition: A fitted convenient box, restatement of residual capacity without a new premise, freely positioned anchor only, omitted siblings, or lane deadline.
-    fallback: Retain the missing parent restriction and keep BC271 blocked; no resource target or larger tree.
-    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md]
-    excluded_commands: [Numerical targets or solver runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
+    started_at: '2026-09-07T09:43:03Z'
+    deadline_at: '2026-09-07T10:13:03Z'
+    expected_output: Exact nontrivial guarded domain containing the retained lower fixture, complete parent/failure cover, independent-angle/reflection semantics, controls and prospective capacity question.
+    validation_command: Independent15-minute admission review after freeze, followed by a separate committed target protocol and record checks if admitted.
+    kill_condition: Arbitrary fitted pose box, assumed capacity oracle, target proof or numerical work, omitted sibling or deadline.
+    fallback: Retain the exact missing design premise; no new target begins.
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-277-boundary-band-domain-design.md]
+    excluded_commands: [New target proof attempts or numerical runs, Git or shared-record mutations, New IDs, Dependency changes, Writes outside assigned file or attic]
   outputs:
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-author.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-adversary.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-review.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-271-comparator-design-assessment.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-domain-review.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-275-first-checkpoint-allocation.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-protocol.md
@@ -725,6 +934,9 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-273-release-domain-design.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
   checks:
+  - Hosted validation on4ac71438 passed the code-test lanes but refused the old in-progress BC270 delegation after its09:08 deadline. The worker had finished09:03:24; its actual completed receipt is recorded here. Refresh leases before pushing delayed protocol commits; no timing guard is weakened.
+  - Checkpoint4ac71438 passed all45 push checks in84.72seconds, including658 tests with3 deselected, and is pushed to PR110. The corrected live cost receipt through09:03:04 records24094.867agent-seconds over9111.298elapsed active seconds; the historical07:36:15 replay restores session membership and output tokens, with the explicit small retrospective timing revision retained in BC275.
+  - BC276 protocol and accepted accounting correction are committed at4ac71438; all31 record checks passed in20.41seconds before any N target work.
   - Mathematical checkpoint26679fa8 passed all31 record checks in18.12seconds and all45 push steps in67.18seconds, including604 tests with3 deselected. It was pushed at the two-hour checkpoint and its hosted required CI is green; mergeability into main is clean.
   - BC275 identified the exact late-compaction prefix-filtering bug in cost attribution; think-ooa7 owns its minimal correction and synthetic regression. No decreased total is claimed as a cost improvement.
   - Fresh local and source agenda inventory at08:35UTC had commitments throughBC275. BC276 is the next sequential item, tracked by think-6pka under existing H120. Source H124, exp124 and session093 stay untouched.
@@ -741,7 +953,7 @@ session:
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-092.yaml
   stop_reason: null
-  next_action: Complete the bounded cost correction and mathematical prerequisites, then freeze and validate BC276 before any target; preserve BC270's09:08 design deadline and the eight-hour endpoint.
+  next_action: Publish the independently accepted N/S and parent-fence checkpoint with current completed leases and corrected costs. BC277's domain author ends10:13:03; reserve15 minutes for independent admission. Run the full gate on the immutable new checkpoint, preserve10:31 publication and14:31:12 block endpoint.
 ---
 # Eight-Hour Hybrid and Release Investigation
 
@@ -837,15 +1049,26 @@ Exact band-subsystem packings still block H118’s comparison.
 BC270 now uses its remaining design slice for an actual necessary restriction from the
 seven residual squares; no capacity target is admitted.
 
-The current prerequisites are the late-compaction cost-parser correction under
-`think-ooa7`, independent review of BC276’s complete negative-slide sibling, and that
-BC270 parent design.
+The cost correction and BC276’s complete-domain review are accepted and published at
+`4ac71438`, with all 31 record and 45 push checks passing.
+Both independent negative-slide attempts and their whole-domain audit are complete.
+The whole signed short-slide parent is excluded.
+BC270’s parent fence and corrected 24-guard remainder are also independently accepted,
+with the matched coupled-LP question still open.
 BC276 is the next sequential commitment, under `think-6pka` and existing H120; it has no
-new hypothesis or experiment ID. Its native analytical protocol must be committed and
+new hypothesis or experiment ID. Its native analytical protocol was committed and
 records validated before target dispatch.
 No H120 LP adapter or numerical target is admitted.
-The published cost snapshot remains historical and unreconciled until the parser
-correction passes review and the actual interval is rebuilt.
+The rebuilt cost snapshot uses the independently accepted correction; BC275 retains the
+original live-receipt discrepancy and the qualified historical reconciliation.
+BC271’s completed assessment recommends a boundary-band design.
+The next sequential BC277, bead `think-os9k`, receives one 30-minute design followed by
+15 minutes of independent admission review under existing H118. It adds no hypothesis or
+experiment ID. Its author ends at 10:13:03 UTC; no new capacity target is admitted yet.
+The completed mathematical checkpoint is being published while this design proceeds.
+The full validation gate remains due on an immutable checkout, followed by current
+record checks at the final block boundary.
+Start it well before the 14:11 reserve.
 Check the current phase and delegation deadlines above before continuing.
 After the final deadline, reconcile retained evidence and report the next request; start
 no further target under this block’s authorization.

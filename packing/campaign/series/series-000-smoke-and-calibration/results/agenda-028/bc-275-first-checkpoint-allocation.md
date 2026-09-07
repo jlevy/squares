@@ -47,11 +47,35 @@ reported work delta from10239.015 to4620.821agent-seconds.
 Each receipt passes its internal arithmetic validator; cross-refresh ownership is wrong.
 These figures document the defect, not reliable work totals or a cost improvement.
 
-Bead `think-ooa7` owns a bounded parser correction and synthetic late-append regression,
-preserving genuine inherited-history and explicit-ordinal controls.
+Bead `think-ooa7` owned the bounded correction, independently accepted and published at
+`4ac71438`. The scanner now preserves owned work when a late compaction emits settings,
+both without foreign session metadata and with foreign metadata but no initial settings.
+Genuine inherited-history and explicit-ordinal controls remain intact.
+Two synthetic late-append cases reproduce the failure before correction and preserve the
+complete fixed-cutoff receipt afterward; 49 focused tests, Ruff and BasedPyright pass.
+The checkpoint also passed all 45 push steps in 84.72 seconds, including 658 tests with
+3 deselected.
+
+Replaying the original 07:36:15 cutoff restores its twelve-session membership and
+recorded output tokens.
+Its work delta is now 10240.940 agent-seconds, 1.925 seconds above the original live
+receipt; the corresponding compaction delta increased from 520.908 to 522.830 seconds,
+consistent with the declared retrospective timing-completion semantics.
+This small retrospective timing revision remains visible rather than being rounded into
+a claim of bit-identical live snapshots.
+The reproduced ownership loss is corrected; the legacy parser is not asserted correct
+for every possible incomplete log format.
+
+The rebuilt live receipt through 09:03:04 records 24094.867 agent-seconds across
+9111.298 elapsed active seconds, with 1140.022 seconds of compaction.
+It remains an incomplete snapshot whose explicit timing and completion semantics govern
+later updates.
+The old published receipt remains in Git, and the rejected refresh remains
+diagnostic evidence.
+No decrease is claimed as an efficiency gain.
 Private logs and diagnostic outputs stay in the attic.
-The original published receipt is retained as a historical unreconciled snapshot; final
-totals wait for independent acceptance and replay with the corrected tool.
+The original published receipt is retained as a historical live snapshot; final block
+totals still wait for the block’s actual endpoint.
 No new reporting framework is needed.
 
 ## Evidence and Ranking

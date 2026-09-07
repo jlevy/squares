@@ -86,12 +86,43 @@ remaining problems are their domain and acceptance obligations, not a discovered
 algebraic contradiction.
 This is not adoption of a new theorem in the frontier register.
 
-The current `fixed_cell_lp()` chooses separation alternatives from a supplied feasible
-pose, and positive phase I raises `ExactLPError("infeasible")` without exporting its
-dual.
-BC-261 still needs arbitrary-descriptor assembly and an exact infeasibility receipt
-whose geometry an independent reader reconstructs.
-The solver’s message is not that certificate.
+At planning, `fixed_cell_lp()` chose alternatives from a supplied feasible pose and did
+not export an infeasibility dual.
+BC261 now supplies arbitrary selected-axis assembly, exact Farkas export, rational
+uniform rows and an independent geometry/arithmetic reader, with a complete two-square
+control cover. Its accepted scope is that direct interface.
+An eleven-square feature adapter and full case cover still need separate implementation
+and acceptance; the solver’s message alone is not a certificate.
+
+## Evidence From the Opening Execution
+
+Session092 has independently closed two kinds of continuous geometry.
+The
+[central parent fence](../series/series-000-smoke-and-calibration/results/agenda-028/bc-270-parent-compatibility-design.md)
+uses the actual four poses to leave four residual-center regions of diameter below one.
+Seven further full squares cannot fit, at any angles.
+Its equivalent 24-guard remainder retains the outer bands and central failure cases
+while removing the guarded fixture’s relative open family.
+This is a useful compatibility restriction; H118’s matching coupled-LP survival witness
+is still missing.
+
+The
+[signed-slide audit](../series/series-000-smoke-and-calibration/results/agenda-028/bc-276-negative-slide-independent-review.md)
+closes the whole declared source-feature parent with $a,b\in[-1/4,1/4]$, variable side
+between $381/100$ and $96/25$, block half-angle in $[1/3,2/5]$, and every square10
+orientation.
+Separate positive and negative proofs cover the two sign children; the block
+diagonals exclude mixed signs.
+The wall/contact assignments remain substantial restrictions.
+No finite-motion or global representative theorem follows.
+
+The global bracket is unchanged.
+These results favor spending the next principal allocation on a genuinely uncovered
+parent or a fair comparison with a concrete missing premise.
+Extending the completed feature box or building its unused cavity adapter would need a
+new scope-value argument.
+BC271 prices the comparison before any target or additional implementation, while the
+source’s H124 and density work continue separately.
 
 ## Ranked Portfolio
 
@@ -219,12 +250,13 @@ Repeated returns to two angles are not evidence for H-121.
 | Six-plus-five and two arbitrary angles | Existing H-112/113, BC-263/266 | X-017 retains full-family ownership |
 | Support, physical KKT and alternative resources | Existing BC-259/267, H-114–116 | Consume accepted evidence; do not recreate their reviews or targets |
 
-The new allocation is **X-018, Agenda 028, H-118–121, BC-269–275**, owned by epic
+The planning allocation is **X-018, Agenda 028, H-118–121, BC-269–275**, owned by epic
 `think-pxv5`. The idea-board entries continue at 112–115. X-017 retains H-111–117 and
 BC-258–268; every PR105 allocation remains locked.
-No experiment or session identifier is allocated here.
-The live source continuation has already consumed session-091; future allocation must
-inspect live work again, rather than rely on an older next-ID pointer.
+Session092’s first checkpoint added the next sequential BC276 for the negative-slide
+sibling under existing H120. It allocated no new hypothesis or experiment ID. The live
+source continuation has already consumed session-091; future allocation must inspect
+live work again, rather than rely on an older next-ID pointer.
 
 At planning, live inspection found the task **Squares plan X-016** executing its source
 continuation while Agenda 027’s broad pilots remained unlaunched.
