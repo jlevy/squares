@@ -5,11 +5,11 @@ title: Validation gate runs 6+ min against a documented 2 min budget
 kind: bug
 status: open
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-08-27T23:50:11.313Z
-updated_at: 2026-08-27T23:50:11.313Z
+updated_at: 2026-09-07T19:18:38.743Z
 ---
 conventions.md states the tiers as: focused under ~60s, checkpoint ~2 min, deep handoff ~5 min. The actual full gate wall time is 380-440s and the 'fast behavioral tests' step alone was 366-413s, so the fast tier is 6x its budget and the full gate exceeds the deep-handoff tier.
 
@@ -23,3 +23,7 @@ Remaining, not yet addressed:
 - One genuine first build still costs ~40s (known-best) and ~103s (prospective) per process. Every validate step that shells out to a builder pays it again, since the memo is per-process. Consider a content-addressed on-disk cache keyed by the source digests, or having the steps that need the same build share one process.
 - tests/test_contact_assembly_labels.py::test_every_rich_d4_and_relabeling_image_has_one_label is 28.8s on its own.
 - Decide whether the fast tier should be a genuinely fast subset, or the documented budget in conventions.md should be restated to match reality. Right now the docs and the gate disagree, which is how the drift went unnoticed.
+
+## Notes
+
+Related current evidence,2026-09-07: PR110 head03ff2102 passed all correctness checks but GitHub checks-tier runtime failed twice at150.31s and150.24s versus a99.39s recorded baseline and1.5x band. The first run attributed95.14s to exact verification,73.96s to BasedPyright and63.52s to the soundness perimeter; retry94.35s,61.85s and70.55s respectively, with overlap. This is a different current tier from the original issue measurements and does not establish their old root cause. No code or timing threshold changed, no speedup is claimed, and no third rerun is queued. Run34154326299 attempts1/2 retain structured timing artifacts. think-oli1 retains the specific PR110 publication obligation.
