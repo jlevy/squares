@@ -124,8 +124,9 @@ No candidate follows unless both source controls pass independently.
 Use the explicit producer and independent-reader modes of
 `packing/devtools/run_full_size_density_graph.py`, always through the parent CLI. Each
 call requires `--node-limit 10000` and an explicit process cap.
-The parent bounds startup, source reconstruction, checking and output; the worker alarm
-also refuses direct-worker overruns.
+The parent bounds startup, source reconstruction, checking and output.
+The worker alarm covers work and JSON serialization after imports; it is not a substitute
+for the mandatory parent CLI's whole-process cap.
 
 | Named control | Family | Producer cap | Conditional reader cap |
 | --- | --- | --- | --- |
@@ -133,11 +134,13 @@ also refuses direct-worker overruns.
 | `trump-uniform-control-v1` | The full deduplicated D4 roster with its accepted mass-eleven uniform weights;1,770 pairs | 60seconds | 60seconds |
 
 Run each producer once, in that order, only from the frozen clean engine.
+The uniform producer is conditional on the original control's independent reader passing.
 An actual zero exit and a well-formed packet whose nested adapter status is
 `proved_graph_bound` permit one independent reader invocation with the same control name
 and `--input` pointing to that packet.
 A graph overweight, unresolved packet, malformed result, error or timeout ends this
 control sequence without a reader, retry or candidate run.
+Any reader failure also ends the sequence without advancing to another control or target.
 
 Reader admission requires actual exit zero, `status=verified_density_bound`,
 `bound_proved=true`, mass exactly eleven, complete source identity and containment, and

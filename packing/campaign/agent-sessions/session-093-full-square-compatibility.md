@@ -537,19 +537,19 @@ session:
     excluded_commands: [Scientific construction or coordinate evaluation, File or registry writes]
   - task: Independent density source-binding review (think-0s6h)
     operator: Codex angle_reader_recovery, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: GO at09:09:57UTC for the intended named worker/CLI paths; separate candidate reconstruction, full source/side/containment binding and process caps are sound. Low-level PairFamily validation remains an explicit caller precondition.
+    evidence: [packing/devtools/run_full_size_density_graph.py]
     files: []
-    checks: []
+    checks: [15 tests pass in0.52seconds wall and0.50CPU, Worker alarm serialization/restoration controls pass, Ruff and format clean; BasedPyright zero findings]
     uncertainty: Source reconstruction, side and containment binding, process caps and positive acceptance need independent review.
-    elapsed_seconds: null
-    elapsed_quality: unavailable
-    next_action: Review the08:58:29 root freeze without evaluating scientific inputs.
+    elapsed_seconds: 435
+    elapsed_quality: operator_reported_approximate
+    next_action: Commit the clarified prospective source-control protocol and pass records before any invocation.
     phase: 6
     budget_minutes: 10
-    started_at: '2026-09-07T09:02:18Z'
+    started_at: '2026-09-07T09:02:42Z'
     deadline_at: '2026-09-07T09:12:18Z'
     expected_output: Independent source-binding and whole-process cap verdict.
     validation_command: Synthetic source mocks, toy CLI roundtrip and static inspection.
@@ -606,6 +606,9 @@ session:
   - packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-graph-depth-assessment.md
   checks:
+  - Root source-binding authoring think-308o ran08:50:35–08:58:29UTC,474seconds; fifteen synthetic controls including a real toy-only CLI roundtrip passed in0.59seconds wall and0.55CPU. No scientific source was evaluated.
+  - The immutable3f036314 push tier passed941 reachable tests and all other steps but found two undeclared graph-only status consumers. Exact consumer declarations, including the later geometry readers, now pass all six focused controls; no inventory rule was weakened.
+  - Frozen density engine23498e87 and the prospective source-control protocol are committed. Its immutable push and full checkpoint gates are running; no completed latest full gate is claimed yet.
   - Session091 checkpoint a78e9af7 is published on PR109 with full d8b6fcf3 and later ae341475 push-tier evidence.
   - All required hosted checks passed on a78e9af7, observed at07:58UTC; the longest required job was validate at2m49s.
   - Immutable planning checkpoint576bbe0a passed all45 push-tier steps in126.25 seconds and is published on PR109.
