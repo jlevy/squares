@@ -779,9 +779,9 @@ IDs quoted inside imported source packets are not native allocations.
 | Explorations | None new | X-017–X-018 | X-019 |
 | Agendas | None new; this branch uses Agenda 024–026 | agenda-027–agenda-028 | agenda-029 |
 | Bounded commitments | Existing BC-251–BC-255 carry this block’s work; BC-256–BC-257 are also occupied | BC-258–BC-275 | BC-276 |
-| Hypotheses | H-106–H-110 and H-122–H-123 | H-111–H-121 | H-124 |
+| Hypotheses | H-106–H-110 and H-122–H-124 | H-111–H-121 | H-125 |
 | Experiments | exp-116–exp-123 | None at the last external check | exp-124 after a fresh check |
-| Agent sessions | session-090–session-091 | Independent program now owns session-092 | session-093 after a fresh check |
+| Agent sessions | session-090–session-091 and session-093 | Independent PR110 owns session-092 | session-094 after a fresh check |
 | Series | Existing series-000; no new series | None | series-001 if a new series is justified; none is assigned |
 
 The user will arrange downstream agents around this sequential line.

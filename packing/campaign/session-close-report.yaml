@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 91
+count: 92
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 47
-  sessions_unmeasured: 44
+  sessions_unmeasured: 45
   attributed:
     rollups: 115
     turns: 29742
@@ -1441,3 +1441,13 @@ sessions:
     active_union_hours: 1.93
     wall_hours: 1.93
     snapshot_incomplete: true
+- id: session-093
+  title: "Full-square compatibility and distinct density assessment"
+  status: in_progress
+  primary_bead: think-bmx9
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
+  codex_receipts: []

@@ -138,7 +138,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives fourteen confirmed hypotheses, twelve refuted
-hypotheses, one open hypothesis, twenty-three open questions, and forty blocked
+hypotheses, one open hypothesis, twenty-three open questions, and forty-one blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. No hypothesis is running or waiting on review and six are unresolved.
 H-105 is refuted: all 134 eligible candidate pairs are separated, leaving higher-order
@@ -614,9 +614,12 @@ exact-angle auxiliary result, and the next complete-method assessments.
 Its three scientific invocations and checkpoint review are complete in
 [Session 091](packing/campaign/agent-sessions/session-091-structural-compatibility.md)
 under `think-fqhr`. The selected local follow-up is a full distinguished-square
-compatibility discriminator requiring a new hypothesis and prospective protocol.
-[Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
-`think-9qrx`, completed the user-approved research block after PR 101 merged.
+compatibility discriminator, now registered as H-124 and entering source-free
+preparation in
+[Session093](packing/campaign/agent-sessions/session-093-full-square-compatibility.md)
+under `think-bmx9`. A prospective target protocol remains required; no H-124 target has
+run. [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md),
+under `think-9qrx`, completed the user-approved research block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
 dual mass of about 10.080180 at depth one, below the obstruction threshold.
 No bridge or unchanged retry is selected.
@@ -2876,6 +2879,7 @@ round that names the hypothesis, control roles included.
 | [H-121](packing/campaign/hypotheses/H-121-axis-plus-one-minimizer.md) | blocked | Some global minimizing packing has orientations in the axis-plus-one-angle family | 0 | — |
 | [H-122](packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md) | refuted | One independently checked square avoids all nine marks and the forced diamond; full-square compatibility remains open | 1 | 0.20s wall |
 | [H-123](packing/campaign/hypotheses/H-123-near45-coordinate-localization.md) | confirmed | Complete coordinate localization follows from the reviewed reduction and independent four-guard certificate | 1 | 0.21s wall |
+| [H-124](packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md) | blocked | Every canonical P10-avoiding near45 square intersects every both-band P9 avoider; independent source-free instruments are being prepared | 0 | — |
 
 ### Confirmed
 
@@ -3105,8 +3109,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 47 |
-| unmeasured | 44 |
-| **total** | **91** |
+| unmeasured | 45 |
+| **total** | **92** |
 
 <!-- END GENERATED: session-close-report -->
 
