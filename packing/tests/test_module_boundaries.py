@@ -144,11 +144,15 @@ def test_no_python_implementation_remains_in_ambiguous_legacy_locations() -> Non
 
 
 def test_no_bash_or_shell_entry_points_remain() -> None:
+    # The literature archive retains third-party sources byte for byte, their own
+    # verify scripts included; those are retained bytes, not entry points of this
+    # project, and the project's replays of them are Python.
     scripts = [
         path
         for pattern in ("*.sh", "*.bash")
         for path in PROJECT_ROOT.rglob(pattern)
         if not any(part.startswith(".") for part in path.relative_to(PROJECT_ROOT).parts)
+        and path.relative_to(PROJECT_ROOT).parts[0] != "resources"
     ]
     assert [path.relative_to(PROJECT_ROOT) for path in scripts] == []
 
@@ -677,6 +681,7 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_fractional_certificate.py": {
             "test_containment_at_exactly_one_is_refused",  # 4.4s
             "test_the_retained_atoms_are_refused_in_a_container_they_cannot_cover",  # 2.5s
+            "test_the_burns_control_is_accepted_at_a_least_mass_above_one",  # 7.0s
         },
         # 264s of call time across 1.
         "test_fractional_generate.py": {
@@ -686,6 +691,7 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_fractional_interval.py": {
             "test_both_n12_certificates_certify_every_direction_of_the_sub_net",  # 3.1s
             "test_box_bounds_bracket_the_exact_mass_at_sampled_centres",  # 2.3s
+            "test_the_burns_control_stalls_the_interval_route_only_at_direction_zero",  # 8.1s
         },
         # 36s of call time across 3.
         "test_fractional_sweep_integer.py": {

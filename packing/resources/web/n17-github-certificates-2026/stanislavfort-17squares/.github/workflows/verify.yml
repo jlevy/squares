@@ -1,0 +1,34 @@
+name: Verify exact certificate
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-verification:
+    name: Exact certificate verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential coreutils diffutils libboost-dev python3
+
+      - name: Verify archived certificate with three exact checkers
+        run: bash ./verify_archived.sh
+
+      - name: Check malformed certificates are rejected
+        run: bash ./tests/rejection_tests.sh

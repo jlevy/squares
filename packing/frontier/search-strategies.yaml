@@ -119,8 +119,18 @@ strategies:
   family: stochastic_search
   mechanism: Population methods over configurations
   outcome: used_elsewhere
-  note: Used in the wider packing literature
-  refs: []
+  note: >-
+    Used in the wider packing literature. The nearest first-party application to this
+    problem is a learned policy rather than a population: Sam Burns's Squarl (August
+    2026) trains a graph-transformer policy by REINFORCE over contact-group actions on
+    17 squares with a CUDA wall-pressure polisher, reached a near-record basin at
+    4.677648 (eleven axis-aligned squares and six at one tilt of 39.6319 degrees, a
+    topology the author reports as distinct from Bidwell's) from four separate
+    searches, and did not beat Bidwell's 4.675530 in its final nine-hour run; the
+    arrangement is retained, its contact graph not reconstructed here.
+  refs:
+  - Burns n17 addendum 2026-09-07
+  - Burns–Massaccesi n17
 - id: 17
   name: Exact algebraic refinement
   family: exact_refinement

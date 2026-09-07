@@ -23,6 +23,7 @@ from cases.n11_fractional_certificate.replay import load as load_n11
 from cases.n12_fractional_certificate.replay import FIRST_RUNG_PATH
 from cases.n12_fractional_certificate.replay import declared as declared_n12
 from cases.n12_fractional_certificate.replay import load as load_n12
+from cases.n17_fractional_certificate.replay import BURNS_CONTROL_PATH
 from cases.n17_fractional_certificate.replay import declared as declared_n17
 from cases.n17_fractional_certificate.replay import load as load_n17
 from cases.n20_fractional_certificate.replay import declared as declared_n20
@@ -813,3 +814,36 @@ def test_perturbing_the_coincidence_away_lets_the_same_search_certify() -> None:
     # undecided, since a sample decides nothing about the other 360 directions.
     assert not verdict.accepted
     assert verdict.conditions[-1].status == "undecided"
+
+
+# --- Burns's control: the seam the interval route cannot close --------------
+
+
+@pytest.mark.slow
+def test_the_burns_control_stalls_the_interval_route_only_at_direction_zero() -> None:
+    """A refusal on a seam, never an acceptance, and only where the seam is.
+
+    Burns's grid is 29 columns of step (L - 1)/28 from 1/2, so its fifth column
+    sits at exactly 1/2 + (L - 1)/7 = B. At direction 0 a centre on the domain
+    boundary h = B/2 has that column exactly on its far edge: closed membership
+    counts it in the exact sweep, but no outward-rounded enclosure can close a
+    region edge lying on the domain edge, and the search bisects the seam to
+    the resolution floor and returns the boxes as undecided. Every other
+    direction of the doubled net is certified with mass at least 1, and the
+    least point value the search samples is the sweep's own 10003/10000.
+    """
+    certificate = load_n17(BURNS_CONTROL_PATH)
+    side, shrink = certificate.outer_side, certificate.square_side
+    assert Fraction(1, 2) + 4 * (side - 1) / 28 == shrink
+    verdict = verify_by_intervals(certificate, enclose=False)
+    assert not verdict.accepted
+    assert verdict.failures == ("Condition 5 every admissible centre covers mass 1",)
+    undecided = [d for d in verdict.directions if d.status != "certified"]
+    assert [d.label for d in undecided] == ["0"]
+    assert undecided[0].stalled > 0
+    assert not undecided[0].budget_exhausted
+    assert undecided[0].upper == 10003
+    assert verdict.scale == 10000
+    certified = [d for d in verdict.directions if d.status == "certified"]
+    assert len(certified) == 360
+    assert all(d.lower is not None and d.lower >= verdict.scale for d in certified)

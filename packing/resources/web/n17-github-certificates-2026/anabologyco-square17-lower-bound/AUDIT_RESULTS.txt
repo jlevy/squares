@@ -1,0 +1,33 @@
+Claim: s(17) >= 9141/2000 = 4.5705
+Strict > claim: no
+Bidwell optimality claim: no
+
+Certificate:
+  symmetry orbits: 71
+  expanded atoms: 560
+  coordinate grid: 1/4000
+  exact mass: 4248683708613/250000000000 = 16.994734834452
+  exact slack: 1316291387/250000000000 = 0.005265165548
+
+Event system:
+  raw primitive polynomials: 1344862
+  exactly Bernstein-discarded: 1194331
+  exact Sturm input: 150531
+  polynomial root incidences: 149049
+  distinct interior roots: 148936
+  open orientation cells: 148937
+  exact gcd common-root checks: 149049
+  partition result: PASS
+
+Coverage:
+  exact open cells: 148937
+  maximal subthreshold runs: 278950150
+  every feasible subthreshold intersection excluded: yes
+  coverage result: PASS
+
+Endpoints:
+  theta=0 minimum coverage numerator: 1000300000011
+  theta=pi/4 subthreshold runs: 700, all excluded
+  endpoint result: PASS
+
+Status: exact-arithmetic computer-assisted proof candidate pending independent external reproduction and peer review.
