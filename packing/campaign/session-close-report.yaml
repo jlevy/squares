@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 89
+count: 90
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 45
-  sessions_unmeasured: 44
+  sessions_unmeasured: 45
   attributed:
     rollups: 115
     turns: 29742
@@ -1401,3 +1401,13 @@ sessions:
     active_union_hours: 3.13
     wall_hours: 3.13
     snapshot_incomplete: true
+- id: session-090
+  title: "Scalar, density, and restricted-angle research"
+  status: in_progress
+  primary_bead: think-9qrx
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no rollups
+  rollups: []
+  codex_receipts: []
