@@ -5,7 +5,7 @@ title: Connect a minimal complete-case record to exact geometry certificates
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 9
 assignee: codex
 labels:
   - agenda027
@@ -19,7 +19,9 @@ dependencies:
   - type: blocks
     target: is-01m1x7e9gj6qb1qn7etbx84p42
 parent_id: is-01m1wz2csvegxym6bvt099z2wz
+child_order_hints:
+  - is-01m1xc4yz870dda76wbx9aqkq0
 created_at: 2026-09-07T03:38:07.870Z
-updated_at: 2026-09-07T06:54:28.411Z
+updated_at: 2026-09-07T07:36:15.613Z
 ---
-BC261 phase2 in session092: accepted direct case/Farkas implications in bc-260-direct-hybrid-contracts.md permit a minimal exact infeasibility receipt, arbitrary selected-axis assembly and rational uniform-row descriptor. Two disjoint producers plus independent release-model review, deadline07:21:37Z. No target execution or readiness before independent reconstruction and complete small control cover; no duplicate interface. Additional contact substitution and target controls remain separate obligations.
+Session092 phase3 independently accepted rational selected-cell geometry and exact Farkas reconstruction; complete two-square eight-SAT controls passed in a combined31-test replay. Source-distinct review accepted the full error bound and the Bland correction (think-9ovl). Consumer-specific H120 family attachment and complete eleven-square coverage remain open; do not silently reuse angle errors after center substitution. The next choice is a separately registered analytical H120 attempt before enlarging the adapter.
