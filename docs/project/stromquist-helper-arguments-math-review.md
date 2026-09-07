@@ -258,8 +258,12 @@ strict-sublevel reduction.
 The implementation separates three obligations: justify the geometric premises,
 enumerate their finite incidence consequences, and apply the resource count.
 The new Memo I replay completes the latter two as a conditional control.
-Its next mathematical extension is an independent exact check of Lemma 8’s segment
-inequalities and the `EH -> J,K` forcing step.
+The subsequent
+[segment-helper derivation](reviews/review-2026-09-07-stromquist-segment-helper.md)
+independently proves Lemma 8, including localization and all orientations.
+An executable helper still needs exact clipping and universal inequality certificates;
+the remaining full-proof premises include Lemmas 6–7, the two-mark adjacency assertion,
+and the `EH -> J,K` forcing step.
 The eleven-square handoff selects the separate H-114 assessment while retaining H-124’s
 unresolved near-axis branch.
 

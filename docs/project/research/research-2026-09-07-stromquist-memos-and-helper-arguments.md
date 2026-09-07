@@ -55,6 +55,7 @@ aside, Memo II contains the argument itself.
 | Small-case history | Memo III, p. 6, describes `n=14,15,24` as elementary and credits Bajmóczy for `n=7`; pp. 2–5 present then-new `n=18,26` constructions | Preserve these as historical claims and constructions. They do not replace the current frontier or certify an omitted proof. |
 | Source formula slips | Memo I, p. 8, reverses a monotonicity word; Memo II, p. 8, typesets a sum where its preceding equation and figure use a product | Add page-local reading notes. Preserve original PDFs and raw OCR. |
 | The 2003 proof defects | None of the three memos supplies the repaired unrestricted Figure 14 coordinates. Memo II’s numerical table uses a different parameter from the later erroneous row | Keep the project’s one-coordinate repair source-distinct; do not substitute a different table row as its correction. |
+| Our six-square case description | Kearney–Shiu §3 uses two seven-point lattices and geometric cases; our case summary described generic five-dot counting | Correct the case summary and retain the established bound. D-479 records the error. |
 
 All 47 scanned pages were visually inspected.
 The [archive index](../../../packing/resources/README.md) links the expanded reading
@@ -93,6 +94,16 @@ Assuming its additional two forced marks and the final eight-point cover, the oc
 calculation returns five as the maximum possible block count.
 This is a conditional reproduction of the finite argument, not an independent replay of
 the memo’s geometric lemmas.
+
+A further
+[independent segment-helper derivation](../reviews/review-2026-09-07-stromquist-segment-helper.md)
+now proves the local adjacent-singleton exclusion, Memo I’s Lemma 8. One square must
+occupy more than `1/2` of two critical segments; the neighboring square leaves less than
+`1/2` in the complementary components connected to the first square’s dot.
+Convexity and disjointness give the contradiction.
+The proof covers independent orientations, axis endpoints and strict boundary
+inequalities, and avoids relying on the source figures’ contact-normalization arguments.
+A second mathematics reviewer and the coordinator checked the complete case split.
 
 The broad symmetry question has a useful exact answer.
 Any feasible unconditional weighted covering measure can be averaged over the eight
@@ -191,14 +202,13 @@ No campaign hypothesis receives a mathematical verdict from commissioning.
 
 ## Follow-up Dependencies
 
-The next source-driven proof task is to make Memo I’s segment-intersection helper
-independently checkable.
-It must retain the strict length budget, the allowed angles, and the fact that adjacent
-isolated marks belong to distinct squares.
-After that, the forced center-block marks and final eight-point cover can complete the
-geometric replay. Its output would be a validated helper component for later pairwise or
-conditional weighted searches.
-This dependency is tracked as `think-0krc`.
+The local segment helper is now proved analytically.
+Making it executable requires exact segment clipping, the component accessible from the
+distinguished dot, wall and facet inequalities, and universal positivity checks.
+The full Memo I replay also needs Lemmas 6–7, its assertion about exactly two covered
+marks, the center-block implication `EH => EHJK`, and the final eight-point cover.
+These remaining dependencies are tracked as `think-0krc`. They lead toward a validated
+helper component for later pairwise or conditional weighted searches.
 
 Several matters still warrant an author’s clarification: which small revision he
 intended; the intern’s name and the original no-pure-dots argument; whether the

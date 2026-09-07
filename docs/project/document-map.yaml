@@ -14,6 +14,7 @@ documents:
   - {path: docs/project/stromquist-helper-arguments-math-review.md, role: review, authority: supporting, lifecycle: maintained}
   - {path: docs/project/reviews/review-2026-09-07-n6-pure-dots-obstruction.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-09-07-stromquist-segment-helper.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-07-n11-hybrid-strategy.md, role: review, authority: supporting, lifecycle: maintained}
   - {path: docs/project/reviews/review-2026-09-06-validation-efficiency-implementation.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/validation-efficiency/ideas.md, role: plan, authority: supporting, lifecycle: maintained}

@@ -210,6 +210,7 @@ case or experiment separately.
 | [Stromquist’s Helper Arguments and Conditional Dots Certificates](docs/project/stromquist-helper-arguments-math-review.md) | dated review record | supporting | maintained | — |
 | [Five-Dot Obstruction for the Six-Square Problem](docs/project/reviews/review-2026-09-07-n6-pure-dots-obstruction.md) | dated review record | record | retained | — |
 | [An Explicit Five-Point Piercing Obstruction Near Side Three](docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md) | dated review record | record | retained | — |
+| [Stromquist’s Segment Helper: An Independent Derivation](docs/project/reviews/review-2026-09-07-stromquist-segment-helper.md) | dated review record | record | retained | — |
 | [Strategic Mathematical Review: Hybrid Exclusion and Few-Angle Structure at n = 11](docs/project/reviews/review-2026-09-07-n11-hybrid-strategy.md) | dated review record | supporting | maintained | — |
 | [Validation Efficiency Implementation Review](docs/project/reviews/review-2026-09-06-validation-efficiency-implementation.md) | dated review record | record | retained | — |
 | [Validation Efficiency Ideas](packing/benchmarks/validation-efficiency/ideas.md) | implementation plan | supporting | maintained | — |
@@ -3587,12 +3588,12 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 478 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 479 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 97 | asserted something false about the mathematics |
+| soundness | 98 | asserted something false about the mathematics |
 | validity | 121 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 182 | recorded something its own evidence contradicts |
 | robustness | 60 | did not finish, or finished only by luck |
@@ -3600,11 +3601,11 @@ and checked in the gate.
 
 Two observations the log exists to make.
 
-**Seventy-seven of the ninety-seven soundness defects pointed in the *flattering*
+**Seventy-eight of the ninety-eight soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy-two defects in 478, and no soundness defect
+**The automated gate has caught seventy-two defects in 479, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3915,7 +3916,7 @@ It is contained rather than fixed — such delegations are recorded on completio
 `read_only` flag is better than permitting an empty list that would be ambiguous between
 “writes nothing” and “nobody filled this in”.
 
-111 fixes left no regression check behind.
+112 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
 and exit survived, but invalid `gdate` precision left the start and end fields empty, so
 [D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.

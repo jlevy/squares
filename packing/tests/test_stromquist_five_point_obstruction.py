@@ -17,10 +17,12 @@ from cases.stromquist.five_point_obstruction import (
     AXIS_SIDE,
     BOTTOM_DIAMOND,
     INNER_CORNERS,
+    SVG_ARTIFACT,
     Point,
     Polygon,
     axis_square,
     control_record,
+    control_svg,
     diamond_witnesses,
     escape_square,
     verify_escape,
@@ -134,6 +136,7 @@ def test_cli_retains_controls_and_accepts_exact_rational_sites(tmp_path: Path) -
         Path(__file__).resolve().parents[1] / "cases/stromquist/five-point-obstruction.json"
     )
     assert json.loads(retained.read_text()) == control_record()
+    assert svg.read_text() == SVG_ARTIFACT.read_text() == control_svg()
     drawing = ET.fromstring(svg.read_text())
     assert len(drawing.findall(".//{http://www.w3.org/2000/svg}circle")) == 5
     assert len(drawing.findall(".//{http://www.w3.org/2000/svg}polygon")) == 1

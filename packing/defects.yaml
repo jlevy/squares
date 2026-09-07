@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 478
+count: 479
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -15693,3 +15693,30 @@ defects:
   regression: none
   bead: think-aenh
   recorded_in: docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md
+- id: D-479
+  title: The six-square case summary described a nonexistent pure five-dot proof
+  date: '2026-09-07'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: until the author-prompted Stromquist memo and five-dot obstruction review
+  severity: medium
+  status: fixed
+  what: >-
+    The n006 case described its lower-bound proof with the generic n-minus-one-point
+    pigeonhole paragraph. Kearney and Shiu actually use two seven-point unavoidable
+    lattices and geometric case analysis, while Stromquist's earlier proof also needs
+    geometric helpers. The review derives an explicit neighborhood below side three
+    in which no five-point unavoidable set exists.
+  consequence: >-
+    The summary overstated the power of pure unweighted dots proofs and concealed
+    exactly the geometric dependency Stromquist's email recommends systematizing.
+    The established value s(6)=3 and its published-proof evidence are unaffected.
+  fix: >-
+    Replace the generic paragraph with the source's two-lattice and geometric-case
+    mechanism, credit the complete 1984 Memo I proof, and link the independently
+    reviewed obstruction and source-premised incidence control.
+  regression: none
+  bead: think-7u4s
+  recorded_in: docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md

@@ -19,6 +19,8 @@ from sqpack.cover import write_text_atomic
 type Point = tuple[Fraction, Fraction]
 type Polygon = tuple[Point, ...]
 
+SVG_ARTIFACT = Path(__file__).with_name("five-point-obstruction.svg")
+
 BOTTOM_DIAMOND: Polygon = (
     (Fraction(3, 2), Fraction(0)),
     (Fraction(9, 4), Fraction(3, 4)),
@@ -308,6 +310,12 @@ def escape_svg(points: tuple[Point, ...], escape: Escape) -> str:
 '''
 
 
+def control_svg() -> str:
+    """Rebuild the retained central five-site drawing from the exact constructor."""
+    points = (*INNER_CORNERS, (Fraction(3, 2), Fraction(3, 2)))
+    return escape_svg(points, escape_square(points))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--point", action="append", type=_parse_point, default=None)
@@ -322,10 +330,8 @@ def main() -> None:
     if args.output is not None:
         write_text_atomic(args.output, rendered)
     if args.svg is not None:
-        shown_points = (
-            (*INNER_CORNERS, (Fraction(3, 2), Fraction(3, 2))) if points is None else points
-        )
-        write_text_atomic(args.svg, escape_svg(shown_points, escape_square(shown_points)))
+        drawing = control_svg() if points is None else escape_svg(points, escape_square(points))
+        write_text_atomic(args.svg, drawing)
     print(rendered, end="")
 
 
