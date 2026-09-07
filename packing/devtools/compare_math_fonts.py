@@ -244,7 +244,9 @@ def measure(label: str, path: Path) -> FaceMetrics:
         raise SystemExit(f"no font file at {path}")
     font = TTFont(path)
     scale = 1000 / _units_per_em(font)
-    os2 = font["OS/2"]
+    # A face without an OS/2 table (some bare TrueType conversions) still has ink to
+    # measure; the table is only the declared shortcut for the two heights.
+    os2 = font.get("OS/2")
     glyphs = font.getGlyphSet()
     cmap = _unicode_cmap(font, path)
 
@@ -632,6 +634,11 @@ def _rewrite_face_table(
         nonlocal rewritten
         code_point = int(match.group(1))
         values = [float(value) for value in match.group(2).split(",")]
+        if len(values) != 5:
+            raise SystemExit(
+                f"KaTeX metric entry {code_point} has {len(values)} values, not five; "
+                "the bundle's table shape has changed"
+            )
         if code_point in replacements:
             depth, height, italic, width = replacements[code_point]
             rewritten += 1

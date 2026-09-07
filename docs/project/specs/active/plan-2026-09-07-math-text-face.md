@@ -57,8 +57,21 @@ What is specific to this page, found while prototyping the feature on it:
 - The renderer inlines everything.
   `kpress_css` rewrites `url("../fonts/…")` to data URIs; `katex_css` keeps only the ten
   KaTeX faces in `KATEX_FACES` and drops the rest.
-  The composite family names `../katex/fonts/…` sources, which the rewrite does not
-  match today.
+  The composite family names `../katex/fonts/…` sources, which the rewrite did not match
+  before this change.
+- The composite has two `@font-face` blocks per slot, the reading face over the Latin
+  ranges and the KaTeX face the slot replaces over the Greek range, scaled; every other
+  code point falls through to the KaTeX family named next in each rule’s stack.
+  A composite face is reachable only if its slot’s KaTeX face is, so the bold-italic
+  slot (PT Serif Bold Italic beside `KaTeX_Math-BoldItalic`) is dropped from the page
+  with the face it accompanies.
+- Inlining composes families from two sources, so the page carries a second copy of each
+  face the composite names: three PT Serif copies and three scaled Greek copies of KaTeX
+  faces, about 216 KB of base64, plus the 32 KB metrics table.
+  The page grows from 1,177 KB to 1,441 KB. Accepted for now, and recorded here rather
+  than discovered later; the way down is for kpress to ship the composite’s faces as
+  subsets (the 62 Latin glyphs, the Greek range), which the generator already has the
+  tooling for.
 - The page renders its own math: the explainer template calls `katex.render` directly
   (`tex()` in the shell and the walkthrough script), so the metrics table has to be
   inlined and applied before those calls, not only inside kpress’s `katex-init.js`.
@@ -99,9 +112,15 @@ The measurement scripts from the research become one devtool with three commands
 
 - `vendor/kpress` gitlink bump to the branch commit that carries the feature, and the
   `pyproject.toml` comment that lists what the branch carries.
-- `devtools/render_explainer.py`: `inline_font_urls` also rewrites
-  `url("../katex/fonts/…")`; `katex/katex-text-metrics.js` is inlined after
-  `katex.min.js` and before the page’s own scripts; `KATEX_FACES` unchanged.
+- `devtools/render_explainer.py`: `inline_font_urls` resolves any relative woff2 `url()`
+  against its stylesheet’s directory and fails on any source a kept block still fetches;
+  `katex_css` takes both KaTeX stylesheets from kpress’s `KATEX_CSS_ASSETS`, prunes the
+  composite’s faces by the reachability of their slot’s KaTeX face
+  (`COMPOSITE_SLOT_FACES`, checked against the stylesheet’s face count), and leaves
+  `KATEX_FACES` unchanged; `katex_js` inlines the KaTeX bundle and
+  `katex/katex-text-metrics.js` from `KATEX_JS_ASSETS`, asserts their order, and appends
+  the install call with the same three opt-out guards as kpress’s `katex-init.js`, since
+  the page renders its own mathematics before that script would.
 - `devtools/compare_math_fonts.py`: `metrics` prints the x-height, cap height, digit
   height, ascender, operator centre, hairline and stem of the shipped faces from their
   woff2 files; `variants` builds pages from the rendered explainer by injecting CSS from
@@ -116,7 +135,11 @@ The measurement scripts from the research become one devtool with three commands
 ### API Changes
 
 - `python -m devtools.compare_math_fonts {metrics,variants,shots}`.
-- `inline_font_urls` accepts both `../fonts/` and `../katex/fonts/` sources.
+- `inline_font_urls(css, stylesheet_dir)`: the second argument is the directory the
+  stylesheet is served from, where it was the fonts directory; every relative woff2
+  `url()` resolves against it.
+- `katex_js(static)` beside `katex_css(static)`; `COMPOSITE_SLOT_FACES` names the KaTeX
+  face under each composite slot.
 
 ## Implementation Plan
 

@@ -494,7 +494,16 @@ def inline_font_urls(css: str, stylesheet_dir: Path) -> str:
             raise SystemExit(f"{stylesheet_dir}: stylesheet names {target}, which is not there")
         return f'url("{data_uri(path)}")'
 
-    return FONT_URL.sub(rewrite, css)
+    inlined = FONT_URL.sub(rewrite, css)
+    # "The page fetches nothing" has to hold for every source a kept block names,
+    # not only the woff2 ones the rewrite recognises: a woff or ttf fallback that
+    # kpress or KaTeX added would otherwise ship as a path beside a file that has
+    # no such neighbour.
+    for block in FONT_FACE_BLOCK.findall(inlined):
+        for source in re.findall(r"""url\(\s*["']?([^"')]+)""", block):
+            if not source.startswith("data:"):
+                raise SystemExit(f"{stylesheet_dir}: a face still fetches {source}; inline it")
+    return inlined
 
 
 def kpress_css(static: Path) -> str:
@@ -509,9 +518,12 @@ def kpress_css(static: Path) -> str:
 
     parts = []
     for name in (PAGE_RESET, *DEFAULT_CSS_ASSETS):
+        css = (static / name).read_text(encoding="utf-8")
         parts.append(f"/* kpress: {name} */")
-        parts.append((static / name).read_text(encoding="utf-8"))
-    return inline_font_urls("\n".join(parts), static / "css")
+        # Each stylesheet resolves its own references, from its own directory, so
+        # a kpress stylesheet added outside `css/` would still find its faces.
+        parts.append(inline_font_urls(css, (static / name).parent))
+    return "\n".join(parts)
 
 
 def theme_bootstrap(static: Path) -> str:
@@ -748,6 +760,17 @@ def katex_css(static: Path) -> str:
     parts = []
     for name in KATEX_CSS_ASSETS:
         css = (static / name).read_text(encoding="utf-8")
+        # The prune reads the composite through `COMPOSITE_SLOT_FACES`, a copy of
+        # kpress's slot table. A slot added upstream would be kept unread at
+        # 30-40 KB a face, so the copy is checked against the stylesheet it mirrors.
+        composite = sum(
+            1 for block in FONT_FACE_BLOCK.findall(css) if "KPress Math Text" in block
+        )
+        if composite and composite != 2 * len(COMPOSITE_SLOT_FACES):
+            raise SystemExit(
+                f"{name} declares {composite} faces of KPress Math Text; the renderer "
+                f"knows {len(COMPOSITE_SLOT_FACES)} slots of two. Update COMPOSITE_SLOT_FACES."
+            )
         pruned = FONT_FACE_BLOCK.sub(
             lambda match: match.group(0) if _font_face_reachable(match.group(0)) else "", css
         )
@@ -759,16 +782,22 @@ def katex_css(static: Path) -> str:
 #: KaTeX lays out from its own metric table, so kpress's tables for the reading face
 #: are installed before the page draws anything. The page renders its mathematics
 #: itself (`tex()` in the shell) rather than through kpress's `katex-init.js`, which
-#: is why the call lives here; the rule is the same one that script applies, down to
-#: the root attribute that opts a document out.
+#: is why the call lives here. The guards are that script's three, copied: the tables
+#: are skipped when the document root or the `.kpress` wrapper opts out of the face
+#: with `data-kpress-math-text="katex"`, and when the wrapper runs on system fonts,
+#: where the stylesheet reverts to the KaTeX faces and PT Serif's numbers would
+#: measure glyphs that are not drawn.
 APPLY_TEXT_METRICS = """
 (() => {
   const tables = globalThis.kpressKatexTextMetrics;
   const install = typeof katex === "undefined" ? undefined : katex.__setFontMetrics;
   if (!tables || typeof install !== "function") return;
   if (document.documentElement.dataset.kpressMathText === "katex") return;
+  const wrapper = document.querySelector(".kpress");
+  const optedOut = wrapper && wrapper.dataset.kpressMathText === "katex";
+  if (optedOut || (wrapper && wrapper.dataset.kpressFonts === "system")) return;
   for (const [face, table] of Object.entries(tables)) {
-    if (face !== "scale") katex.__setFontMetrics(face, table);
+    if (face !== "scale") install(face, table);
   }
 })();
 """
@@ -777,18 +806,22 @@ APPLY_TEXT_METRICS = """
 def katex_js(static: Path) -> str:
     """KaTeX, then kpress's metric tables for the math text face, then their install.
 
-    Order matters and is asserted: the tables are a lazy asset kpress lists after the
-    KaTeX bundle and before its own init script, and this page has no init script of
-    its own, so the install call is appended here.
+    Both scripts come from kpress's own list, and their order in it is asserted: the
+    tables have to follow the bundle they patch. The list's `auto-render.min.js` and
+    `katex-init.js` are left out on purpose, since the page finds and renders its
+    own mathematics; the install call takes the init script's one remaining job.
     """
     from kpress.format.assets import KATEX_JS_ASSETS  # noqa: PLC0415
 
-    metrics = "katex/katex-text-metrics.js"
-    if metrics not in KATEX_JS_ASSETS:
-        raise SystemExit(f"kpress no longer lists {metrics}; the math text face has moved")
+    bundle, metrics = "katex/katex.min.js", "katex/katex-text-metrics.js"
+    for name in (bundle, metrics):
+        if name not in KATEX_JS_ASSETS:
+            raise SystemExit(f"kpress no longer lists {name}; the math text face has moved")
+    if KATEX_JS_ASSETS.index(metrics) < KATEX_JS_ASSETS.index(bundle):
+        raise SystemExit(f"kpress lists {metrics} before {bundle}, which cannot be right")
     return "\n".join(
         (
-            (static / "katex" / "katex.min.js").read_text(encoding="utf-8"),
+            (static / bundle).read_text(encoding="utf-8"),
             (static / metrics).read_text(encoding="utf-8"),
             APPLY_TEXT_METRICS,
         )
