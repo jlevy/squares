@@ -1485,7 +1485,7 @@ sessions:
   title: "Collision cover and independent support ceiling"
   status: in_progress
   primary_bead: think-ro0s
-  phases: 3
+  phases: 4
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-095.yaml

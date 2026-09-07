@@ -52,20 +52,68 @@ experiment:
       Launch by13:09 UTC and finish by13:12 UTC or retain non-invocation. No retry,
       changed constants, extra candidate box or automatic enlarged-support search.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-128-h099-seven-row-support-ceiling
-  lease:
-    expires: '2026-09-07T13:12:00Z'
-    host: Session095 coordinator
-  results: []
+  effort:
+    timebox: One independent checker with60second TERM deadline and2second KILL grace; invoked once
+    wall_seconds: 1.12
+    stopped_by: criterion
+  results:
+  - shape: determination
+    role: outcome
+    question: Does the independently source-bound seven-row ceiling match the feasible mass-eleven average?
+    outcome: criterion_met
+    checked_by: Sole independent checker actualexit0 with all positive protocol predicates,88labelledimages,60placements,eightorbits,sevenfixedrows and41distinct positive inclusions. Read-only retained-output audit subsequently accepted the full inventory, quotas and scope.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: Complete independently source-bound seven-row necessary-lower-incidence ceiling eleven and independently reconstructed feasible average eleven on exactly H099's existing support.
-    reason: Prospective only; instrument readiness, independent review, frozen engine validation and committed protocol admission are required before the sole call.
+    reason: The full fixed-support upper bound is exactly11 and the independently reconstructed packing average attains11. Thus H099's mass-above-eleven claim is false for this support. No expanded-support, primal-density or global packing conclusion follows.
+    commit: 87bb15fb
 ---
 # One Independent Seven-row Adoption
 
-This record proposes one independently implemented check of contributed certificate
-data. It is not a new optimizer, a repeated exp113 screen, or a new producer followed
-by a same-code replay. The archived executable is never imported or rerun.
+H099 is refuted on its complete fixed support: the attained optimum is exactly eleven.
+The sole independently implemented checker accepted all source and row obligations in
+1.12 seconds wall. This does not settle expanded supports or any global packing bound.
+
+## Retained Outcome
+
+Source engine `a94e57fe` passed45of66 push steps in68.33seconds. Prospective protocol
+`87bb15fb` passed31of66 record checks in19.07seconds and its record-only push delta in
+71.01seconds. Both were published on PR109 before invocation. Independent instrument
+review froze12:44:10 UTC and final protocol consistency review passed12:54:45.
+The full checkpoint gate remains separate and was still running at invocation.
+
+The sole call was dispatched after the observed12:59:12 boundary and completed by
+the observed13:00:03 boundary, with actual exit zero. These observations bracket the
+invocation; they do not establish a more precise process start. External timing was
+1.12seconds wall,1.08user and0.01system. No timeout, retry, additional producer or
+second scientific reader ran. The archived executable was not imported or executed.
+
+The result has the exact positive kind, version, status and Boolean predicates in the
+retained protocol below. It reconstructs all88labels,60distinct placements and eight
+orbits. The archive-to-current permutation is the identity, established by source
+binding rather than assumed. All seven unchanged boxes have verified strict inclusions
+with41distinct-per-row selected member identities. The multiplier sum and all eight
+combined columns match the declared ceiling and orbit sizes. The exact original
+packing and preimages establish feasible average weights
+`(3/4,1/8,1/4,1/8,1/8,1/8,1/8,1/8)` and mass eleven.
+
+The retained-output audit under `think-cgk6` accepted the predicates, full metadata,
+quotas and scope at13:03:35 after78seconds of read-only inspection. It did not rerun
+the source or geometry. The actual process exit comes from the coordinator's tool
+receipt; `verification.log` records external timing, not an independent exit receipt.
+The result directory contains only `verification.json` and `verification.log`.
+
+The original exp113 finite-row ceiling56/5 and exp126 graph obstruction remain
+historical records. This new ceiling settles the whole support, not just their candidate.
+No placement outside that support, full-pose density, endpoint equality classification
+or below-side transport is certified. A changed support belongs to H116 and a separately
+selected prospective question.
+
+## Retained Prospective Protocol
+
+The following fixed contract was committed before the single invocation. It specifies
+an independent check of contributed data, not a new optimizer, repeated exp113 screen
+or new producer followed by a same-code replay.
 
 ## Fixed Mathematical Contract
 

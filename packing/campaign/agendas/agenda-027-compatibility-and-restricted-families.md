@@ -9,7 +9,7 @@ agenda:
   id: agenda-027
   title: Compatibility and Restricted Families
   updated: '2026-09-07'
-  status: paused
+  status: active
   objective: >-
     Prepare an independent alternative to the ongoing Agenda024-026 allocation,
     based on X-017 and the owner's contributed research bundle. Compare a complete
@@ -17,8 +17,10 @@ agenda:
     shared-angle theorem; retain a small independent pair-kernel discriminator and
     candidate-led successors. Review contributed evidence at its own scope, build only
     the interfaces selected pilots need, and expand on closed continuous domains or
-    explicit useful residuals. This prepared agenda launches no experiments. Its
-    commitments, ownership and dependencies are separate from the continuing source run.
+    explicit useful residuals. Its original preparation launched no experiments.
+    Session095 subsequently selected BC259 adoption and BC265 comparative design;
+    other selected cells remain independently owned by Session092. Read each cell's
+    actual protocol rather than treating this activation as blanket launch authority.
   items:
   - id: BC-258
     purpose: research
@@ -68,7 +70,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 0
     question: >-
       Does independent source binding and geometric replay accept the contributed
@@ -94,13 +96,14 @@ agenda:
     - packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-author.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md
     parallel_group: agenda027-support-review
     program: n11-compatibility-and-restricted-families
     next_evidence: >-
-      If accepted, append a separate reviewed determination at the original support
-      scope and propose its disposition to the source coordinator. Do not rewrite
-      exp113/115 or consume the old source target budget. On failure, retain the
-      exact missing binding and continue unrelated pilots.
+      Exp128 independently accepts the fixed-support optimum11, refuting H099.
+      Retire the unchanged support question and preserve exp113/115/126 history.
+      BC265 prices any changed resource; no new pose, graph extension or target
+      follows automatically from this accepted finite-support ceiling.
     note: >-
       Session094's final-slice repricing selects this existing review as the
       independent secondary lane for planned Session095, subject to fresh ownership
@@ -112,6 +115,18 @@ agenda:
       with complete source binding and the unchanged seven-row multiplier identity.
       Its second and final readiness allocation runs12:27–12:57 under think-257e
       and independent review think-9mql. This is not yet scientific adoption.
+      After its separately committed protocol87bb15fb and immutable admission,
+      exp128 completed with actualexit0 in1.12seconds: full88/60/8source binding,
+      sevenfixedboxes,41positiveinclusions and ceiling/baseline11. Independent
+      output audit accepted the result13:03:35. No global bound changes.
+    outcomes:
+    - scope: Complete fixed Trump-D4 support at the exact Trump side
+      classification: achieved
+      result: Independent seven-row necessary-lower-incidence ceiling and feasible packing average establish attained optimum11 and refute H099 on exactly this support.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md
+      disposition: retire-success
+      follow_up: think-j8pz
   - id: BC-260
     purpose: measurement_validation
     owner_focus: correctness
@@ -277,7 +292,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: tentative
+    state: in_progress
     priority: 3
     question: >-
       Which single candidate-led resource option deserves the next discriminator:
@@ -303,6 +318,12 @@ agenda:
       Commission only the selected object's next instrument. Expanded support is
       H-116, not H-099; equality at U does not imply a below-U transport; arc
       boundary-nullity does not establish continuum coverage.
+    note: >-
+      Session095 selected a source-free comparative design after exp128 settled
+      the old support. Two independent max-level assessments freeze by13:26,
+      ahead of the13:29 finalization reserve. They must compare mathematical
+      impact and price at most one next discriminator, not automatically build
+      a larger support instrument or claim a new packing bound.
   - id: BC-266
     purpose: research
     owner_focus: insight

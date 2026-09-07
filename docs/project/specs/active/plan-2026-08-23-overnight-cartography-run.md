@@ -341,21 +341,24 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, select `think-nwss` under BC-259 for
-independent adoption of the existing seven-row H099 support ceiling.
-Source-free mapping and independent review precede any separately registered replay.
+For the next supervised exact-research goal, select `think-j8pz` under BC-265 for
+comparative design of changed resource directions. Exp128 independently established
+the attained optimum eleven on H099's entire existing support, closing BC259.
+This design must earn a next discriminator through significant mathematical value;
+the support result is not authority for an automatic extension or new target.
 Session094 independently certified the diagonal compatibility branch; Session095's
 fixed collision-augmented axis cover returned `no_chain` without a reader. H124 and
 restricted H036 remain unresolved, and that representation receives no retry.
-Source checkpoint `3bec06e2` passed push and fast gates; its full check is asynchronous.
+Source checkpoint `3bec06e2` passed full validation; the later adoption-engine and
+protocol gates are recorded separately in Session095.
 Keep the continuation on integrated PR 109 while open; do not repeat a completed
 experiment or create another supporting-fix PR.
 [Agenda 024’s Current Allocation](../../../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
 supplies the current priorities.
 The September 7 amendment holds H-107 fixed-site scalar completion out of the next
 two-hour block and selects a bounded conditional-compatibility assessment through Agenda
-024\. Exp126's later graph-only obstruction leaves H099 unresolved; BC259 may instead
-settle the entire fixed support through a separately bound necessary-row ceiling.
+024\. Exp126's graph-only obstruction was inconclusive; exp128 subsequently settled
+the entire fixed support through an independently bound necessary-row ceiling.
 The earlier BC-215 efficiency program remains uncompleted, not silently discarded.
 See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the latest session,
 funding conditions and independent-review assignments.

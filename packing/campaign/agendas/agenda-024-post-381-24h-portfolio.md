@@ -400,8 +400,9 @@ Use `max` for mathematical judgment and `high` or `xhigh` for suitable mechanica
 
 ### Selected Continuation After Session 090
 
-The current local coordinating entry is BC-259 under `think-nwss`, independently
-adopting the contributed seven-row H099 support ceiling. Session094's diagonal
+The current local coordinating entry is BC-265 under `think-j8pz`, comparing changed
+resource directions after exp128 independently established fixed-support optimum11
+and closed BC259/H099. This is source-free design, not a new target. Session094's diagonal
 compatibility lemma is retained, while Session095 exp127's fixed collision-augmented
 axis cover returned `no_chain` without a reader. H124 and restricted H036 remain
 unresolved; no retry or parameter sweep follows. The original full-square entry

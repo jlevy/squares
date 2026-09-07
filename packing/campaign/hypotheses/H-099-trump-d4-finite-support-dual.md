@@ -36,7 +36,7 @@ hypothesis:
     Session095 prospectively adds a history-free necessary-lower-incidence ceiling:
     certify distinct full-box positive inclusions for seven fixed rows and their
     nonnegative multiplier identity, with complete current-source binding.
-    This additional instrument remains in source-free readiness, not adopted.
+    This additional instrument was independently reviewed and adopted by exp128.
   instrument_ready: true
   regime: >-
     n = 11; exact algebraic Trump side; only the geometric D4 closure of the retained
@@ -56,6 +56,15 @@ hypothesis:
 ---
 # H-099 — A Finite-Support Ceiling Before the Arrangement Build
 
+H099 is **refuted on its fixed support**. The separately admitted
+[exp128](../series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md)
+independently verified the contributed seven-row ceiling, with complete88-to-60 source
+binding, eight orbits and41strict whole-box inclusions. The ceiling and the verified
+packing average both equal eleven, so the attained support optimum is exactly eleven.
+This retires the unchanged support question; it does not establish primal density
+existence, determine any expanded support or improve a packing bound. Changed supports
+belong to [H116](H-116-expanded-full-size-dual-support.md), not a retry of H099.
+
 Session 089 accepted readiness for the finite-row ceiling route after the
 [independent review](../series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-independent-review.md)
 and its parser correction.
@@ -69,15 +78,16 @@ This admits a separate prospective candidate experiment, not acceptance of H099.
 The subsequent
 [exp126](../series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md)
 ran its sole producer in 4.49 seconds and reported an overweight graph clique of weight
-6/5. No independent reader was authorized. This is a failure of the sufficient graph
-bound, not a geometric overlap witness or a refutation of H099. The bracket [11,56/5]
-remains unchanged; no automatic higher-order build or candidate retry is funded.
+6/5. No independent reader was authorized. At that checkpoint this was a failure of the
+sufficient graph bound, not a geometric overlap witness or a refutation of H099.
+The then-current bracket [11,56/5] was unchanged; no automatic higher-order build or
+candidate retry was funded. Exp128 subsequently closes the entire support question.
 
 [Exp-113](../series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md)
 tested the prospectively frozen support and returned a separately replayed finite-row
 ceiling of $56/5$. Together with the feasible mass-eleven average, it gives the bracket
 $[11,56/5]$ for the full fixed-support supremum.
-H-099 remains unresolved: the matching finite-row primal weights have not passed
+H-099 was then unresolved: the matching finite-row primal weights had not passed
 complete almost-everywhere depth verification, so the screen does not certify an
 a.e.-feasible mass-above-eleven weighting.
 
@@ -105,8 +115,9 @@ weights, those selected contributions are a lower bound on depth throughout the 
 Almost-everywhere feasibility therefore implies the same necessary row inequality,
 without classifying unselected squares. The contributed seven rows require 41 such
 inclusions; their nonnegative multipliers sum to eleven and reproduce the orbit-size
-vector. Complete source binding and these geometric inclusions must still pass a
-separately reviewed, committed protocol before the fixed-support ceiling can be adopted.
+vector. Exp128 subsequently passed the separately reviewed and committed protocol,
+including complete source binding and all geometric inclusion quotas, adopting this
+fixed-support ceiling.
 No changed placement, box, radius, optimizer history or candidate-depth assertion is
 included in this allocation.
 

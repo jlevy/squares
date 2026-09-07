@@ -1083,15 +1083,23 @@ agenda:
           The fixed collision-augmented axis cover is terminal and unresolved.
           Independently bind the existing BC259 seven-row support ceiling; a
           complete ceiling is more informative than diagnosing one candidate clique.
-      selected:
-        bead: think-nwss
-        workflow: factual-review
+      - bead: think-j8pz
+        workflow: insight-iteration
+        priority: 1
         rationale: >-
-          The amended Session094 handoff follows Session095's terminal exp127.
-          Preserve the diagonal lemma and stop this fixed axis representation.
-          BC259 receives source-binding review, with further adoption conditional
-          on concrete readiness. H107 stays paused and external BC261/273 remains
-          separately owned. This is a live selection update, not a W10 outcome.
+          Added after Session095 exp128, not backdated to this agenda's W10.
+          The full old support has independently verified optimum11. BC265
+          compares changed resource directions by mathematical impact before
+          commissioning any new scientific instrument or target.
+      selected:
+        bead: think-j8pz
+        workflow: insight-iteration
+        rationale: >-
+          Session095 exp128 closes BC259/H099 at fixed-support optimum11.
+          Keep H124's diagonal lemma and the unresolved axis result. Select
+          source-free BC265 comparative design, not an unchanged support retry.
+          H107 stays paused and external BC261/273 remains separately owned.
+          This is a live selection update, not a W10 outcome.
       operator_input:
         status: unavailable
         note: >-

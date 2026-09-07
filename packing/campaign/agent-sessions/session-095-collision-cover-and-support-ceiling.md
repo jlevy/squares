@@ -32,7 +32,7 @@ session:
     validation_command: packing-validate --records
     kill_condition: Exp127's original launch12:05 and finish12:09 cutoffs, author-specific caps, failed readiness, or phase end12:49; no retry or sweep.
     fallback: Preserve exp125's diagonal theorem and the exact remaining premise; continue only the separately admitted support review.
-    outcome: Exp127's sole producer returned unresolved/no_chain and authorized no reader. Both independent BC259 source reports froze and support a bounded history-free checker implementation; no support ceiling has been adopted.
+    outcome: Exp127's sole producer returned unresolved/no_chain and authorized no reader. Both independent BC259 source reports froze and supported a bounded history-free checker implementation; no support ceiling had been adopted at this phase's close.
     evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-author.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-review.md]
     stop_reason: The fixed collision-cover allocation is terminal, and both source-binding reports are complete. The next phase funds instrument readiness, not a scientific target or retry.
     next_action: Implement and independently review the positive-only fixed seven-row checker under BC259.
@@ -53,9 +53,9 @@ session:
     validation_command: packing-validate --records
     kill_condition: Original author/reviewer caps, any unresolved source-binding or inclusion premise, or the 12:57 UTC phase deadline. No target, altered rows or exp127 retry.
     fallback: Freeze partial source-free artifacts and the exact missing readiness premise; retain the unadopted ceiling without extending the allocation.
-    outcome: Author froze12:37:05; independent GO and its full report froze12:44:10. Root read the complete frozen code, tests and review. Twelve source-free controls pass independently; mathematical contract and fixed CLI match the prospective protocol.
+    outcome: The author froze at 12:37:05; independent GO and its full report froze at 12:44:10. Root read the complete frozen code, tests and review. Twelve source-free controls passed independently; the mathematical contract and fixed CLI matched the prospective protocol.
     evidence: [packing/devtools/check_trump_support_adoption.py, packing/tests/test_trump_support_adoption.py, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-adoption-instrument-review.md]
-    stop_reason: Concrete source-free readiness completed before the original12:57 cutoff; actual source binding and scientific inclusions remain untested.
+    stop_reason: Source-free readiness completed before the original 12:57 cutoff; actual source binding and scientific inclusions were still untested at this phase's close.
     next_action: Freeze the engine and separately register the once-only adoption protocol before target admission.
   - workflow: research-loop
     focus: correctness
@@ -64,7 +64,7 @@ session:
     objective: Admit and disposition one independent fixed-source seven-row adoption check, with immutable validation and a committed prospective protocol.
     commitment: BC-259
     bead: think-ftdi
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Independently reviewed source-free checker and fixed scientific contract are ready; the remaining obligation is one source-bound verification, not another search.
     budget_minutes: 27
@@ -72,12 +72,33 @@ session:
     deadline_at: '2026-09-07T13:12:00Z'
     expected_output: One independently checked fixed-support ceiling or a retained unresolved result/non-invocation, plus exact costs and validation.
     validation_command: packing-validate --push
-    kill_condition: Failed admission, launch after13:09, complete-child60second TERM plus2second KILL grace, or original13:12 finish cutoff. No retry or changed box.
+    kill_condition: Failed admission, launch after 13:09, complete-child 60-second TERM plus 2-second KILL grace, or the original 13:12 finish cutoff. No retry or changed box.
     fallback: Preserve the missing premise without adopting the ceiling or repricing an automatic larger instrument.
+    outcome: Exp128's sole independent checker exited zero and completed by 13:00:03 UTC, reporting verified_support_ceiling with all positive protocol predicates satisfied. External process cost was 1.12 seconds wall, 1.08 user and 0.01 system. The independent output audit accepted all metadata and predicates at 13:03:35; H099 is refuted, with fixed-support optimum eleven.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md, packing/campaign/series/series-000-smoke-and-calibration/results/exp-128-h099-seven-row-support-ceiling/verification.json]
+    stop_reason: The once-only scientific checker completed positively within the original allocation. No retry or further reader is required by this independent-checker protocol.
+    next_action: Integrate the independently accepted scoped H099 disposition; use the next allocation only for source-free comparative design.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Compare changed high-impact directions under existing BC265 and retain at most one concrete next design after the fixed-support disposition.
+    commitment: BC-265
+    bead: think-j8pz
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: The fixed seven-row checker completed positively; the remaining research time funds source-free comparative design. The independent output audit subsequently accepted the result at 13:03:35 UTC.
+    budget_minutes: 27
+    started_at: '2026-09-07T13:02:00Z'
+    deadline_at: '2026-09-07T13:29:00Z'
+    expected_output: One bounded comparative design and an independently reviewed recommendation for at most one changed high-impact direction, or a reason to defer it.
+    validation_command: packing-validate --records
+    kill_condition: Original author and reviewer cutoffs or the 13:29 UTC finalization boundary; no target, new scientific IDs or unchanged H124/H107 work.
+    fallback: Retain the exact missing premise and defer the design without a scientific call or an extension.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Commit the independently reviewed source and protocol, pass their immutable admission checks, then invoke the fixed checker at most once.
+    next_action: Freeze the source-free design, obtain independent review under an explicitly dispatched cap, and retain its disposition before finalization.
   primary_bead: think-ro0s
   status: in_progress
   budget:
@@ -90,12 +111,12 @@ session:
   stop_conditions:
   - Keep the original13:29 finalization reserve and13:49 program endpoint; the later actual start shortens this slice.
   - No scientific source construction before independent readiness and a committed prospective protocol.
-  - No repeated terminal exp121–127 calls, changed collision constants, diagonal rerun or automatic higher-order density build.
+  - No repeated terminal exp121–128 calls, changed collision constants, diagonal rerun or automatic higher-order density build.
   - Preserve external Session092 and its BC261/273 capacity and release successors throughBC278.
   progress:
     metric: Complete independently checked structural obligations and useful fixed-support dispositions
     before: Exp125 certifies diagonal compatibility; the reviewed collision source is uninvoked. Exp126 reports a graph-only obstruction, while BC259's contributed seven-row ceiling remains unadopted.
-    after: null
+    after: Exp127 is terminal unresolved/no_chain with no reader. Exp128 and its independent output audit establish fixed-support optimum eleven, refuting H099. Source-free BC265 comparative design is the selected remaining research allocation; no global bound or changed H124/H107 result is claimed.
   delegations:
   - task: "BC259 source-binding author (think-m24i)"
     operator: "Codex density_control_recovery, max thinking"
@@ -211,7 +232,7 @@ session:
     operator: "Codex density_control_recovery, max thinking"
     status: "completed"
     recording: "contemporaneous"
-    outcome: Independent instrument and prospective protocol GO; note frozen12:44:10 after978seconds observed from12:27:52. Source binding, positive-only quotas and multiplier proof are sound; exact target remains uninvoked.
+    outcome: Independent instrument and prospective protocol GO; the note froze at 12:44:10 after 978 seconds observed from 12:27:52. Source binding, positive-only quotas and multiplier proof were accepted; the exact target was uninvoked at that review's close.
     evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-adoption-instrument-review.md]
     files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-adoption-instrument-review.md]
     checks: [Twelve independent source-free controls passed0.69seconds wall and0.66CPU; Ruff, format and BasedPyright clean.]
@@ -339,24 +360,137 @@ session:
     fallback: Retain the exact uncertainty and defer unpriced work.
     write_scope: [Read-only inspection]
     excluded_commands: [File edits, Scientific calls, Git or external mutations]
+  - task: "Final fixed-support protocol review (think-s9ti)"
+    operator: "Codex independent protocol reviewer, max thinking"
+    status: completed
+    recording: contemporaneous
+    outcome: "Independent final protocol review completed during 12:54:29–12:54:45 UTC, 16 seconds, before the original 12:57:15 cutoff."
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md]
+    files: []
+    checks: ["Read-only final prospective protocol review; no scientific invocation."]
+    uncertainty: "Protocol approval preceded the call and does not substitute for actual output acceptance."
+    elapsed_seconds: 16
+    elapsed_quality: operator_reported_approximate
+    next_action: "Root completes immutable admission and records the once-only independent checker outcome."
+    phase: 3
+    budget_minutes: 3
+    started_at: '2026-09-07T12:54:15Z'
+    deadline_at: '2026-09-07T12:57:15Z'
+    expected_output: "Independent GO or a precise blocker for the frozen once-only protocol."
+    validation_command: "Read-only protocol and admission inspection."
+    kill_condition: "Original 12:57:15 UTC cutoff or an unresolved protocol premise."
+    fallback: "Retain non-admission and the precise missing premise."
+    write_scope: [Read-only inspection]
+    excluded_commands: [File edits, Scientific calls, Git or external mutations]
+  - task: "Independent fixed-support output audit (think-cgk6)"
+    operator: "Codex independent output reviewer, max thinking"
+    status: completed
+    recording: contemporaneous
+    outcome: "Independent output GO froze at 13:03:35 UTC after actual review during 13:02:17–13:03:35, 78 seconds. Source/output metadata and every positive predicate meet the frozen protocol; H099 is refuted at fixed-support optimum eleven."
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md, packing/campaign/series/series-000-smoke-and-calibration/results/exp-128-h099-seven-row-support-ceiling/verification.json]
+    files: []
+    checks: ["Read-only comparison of full retained metadata and output predicates against the frozen protocol; no scientific call."]
+    uncertainty: "The accepted optimum concerns exactly the existing fixed support; it implies no global packing bound."
+    elapsed_seconds: 78
+    elapsed_quality: operator_reported_approximate
+    next_action: "Root integrates the accepted fixed-support disposition and preserves the terminal once-only execution."
+    phase: 3
+    budget_minutes: 4
+    started_at: '2026-09-07T13:01:45Z'
+    deadline_at: '2026-09-07T13:05:45Z'
+    expected_output: "Independent output acceptance or a precise mismatch, without scientific execution."
+    validation_command: "Read-only retained output and prospective protocol inspection."
+    kill_condition: "Original 13:05:45 UTC cutoff or an output/protocol mismatch."
+    fallback: "Retain the observed output without adopting an unsupported conclusion."
+    write_scope: [Read-only inspection]
+    excluded_commands: [File edits, Scientific calls, Git or external mutations]
+  - task: "BC265 comparative extension design (think-bmuz)"
+    operator: "Codex mathematical design author, max thinking"
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: []
+    checks: []
+    uncertainty: "Source-free design only; no new target or mathematical result is authorized by this allocation."
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: "Freeze one comparative design for independent review before the original author cutoff."
+    phase: 4
+    budget_minutes: 24
+    started_at: '2026-09-07T13:02:00Z'
+    deadline_at: '2026-09-07T13:26:00Z'
+    expected_output: "A comparative calibration-extension design retaining at most one changed high-impact direction."
+    validation_command: "Source-free mathematical and retained-record review."
+    kill_condition: "Original 13:26 UTC author cutoff or a decisive missing premise; no scientific invocation."
+    fallback: "Freeze the useful comparison and exact remaining obligation without authorizing a target."
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md]
+    excluded_commands: [Scientific calls, New scientific IDs, Unchanged H124 or H107 work, Git or shared registry writes]
+  - task: "Independent BC265 comparative extension review (think-ju6v)"
+    operator: "Codex independent mathematical design reviewer, max thinking"
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: []
+    checks: []
+    uncertainty: "Independent source-free comparison only; no scientific execution or new result is authorized."
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: "Compare the value of ruling out the H116 method with a direct H100 or narrowly specified kernel design, and retain at most one future discriminator."
+    phase: 4
+    budget_minutes: 22
+    started_at: '2026-09-07T13:04:15Z'
+    deadline_at: '2026-09-07T13:26:00Z'
+    expected_output: "Independent comparative design review, prioritizing significant mathematical results and at most one changed future discriminator."
+    validation_command: "Source-free mathematical and retained-record review, without inspecting the parallel author's report before both freeze."
+    kill_condition: "Original 13:26 UTC cutoff, lost independence or a decisive missing premise; no scientific execution."
+    fallback: "Retain the useful comparison and exact missing premise without extending the allocation."
+    write_scope: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md]
+    excluded_commands: [Scientific calls, Parallel author report before both freeze, New scientific IDs, Git or shared registry writes]
+  - task: "Session095 positive-result editorial reconciliation (think-p1h7)"
+    operator: "Codex checkpoint_handoff_audit, high thinking"
+    status: completed
+    recording: contemporaneous
+    outcome: "Reconciliation and final schema check completed during 13:02:36–13:08:39 UTC, 363 seconds. Phase 3, accepted exp128/H099 disposition, phase 4 and five delegation receipts are recorded with original caps; historical admission and pending full-gate evidence remain distinct."
+    evidence: [packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md]
+    files: [packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md]
+    checks: ["softschema repair --check reports valid with no repairs or structural errors. No generators, Git or scientific calls; root retains whole-repository Flowmark formatting."]
+    uncertainty: "Root owns scientific disposition, other records and all publication; the full 87bb gate remains separate."
+    elapsed_seconds: 363
+    elapsed_quality: operator_reported_approximate
+    next_action: "Root integrates the frozen session record and binds later validation or design-review outcomes without changing the original caps."
+    phase: 4
+    budget_minutes: 10
+    started_at: '2026-09-07T13:02:00Z'
+    deadline_at: '2026-09-07T13:12:00Z'
+    expected_output: "A schema-valid session record separating successful execution, output audit and pending full validation."
+    validation_command: "softschema repair --check campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md"
+    kill_condition: "Original 13:12 UTC cutoff; no other-file edits or scientific invocation."
+    fallback: "Freeze completed changes and report remaining reconciliation gaps."
+    write_scope: [packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md]
+    excluded_commands: [Other-file or generated-view edits, Git or external PR actions, Scientific source or target invocation]
   outputs:
   - packing/campaign/resource-usage/codex-task-tree-session-095.yaml
   - packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md
   checks:
-  - Immutable3160d0a7 push failed only a stale generatedledger in68.96seconds; the scientific source, source-free tests and remaining selected checks passed. The corrected source pointer and prospective protocol still require passing immutable admission before any target.
-  - Hosted73755cc1 passed every semantic check but failed the measured runtime band at149.79seconds against99.39seconds and a1.5factor. This performance failure is distinct from the repaired stale-record/anchor failures; no threshold is weakened.
-  - Corrected checkpoint73755cc1 passed45of66 push steps70.28seconds; external72.62wall184.77user24.35system. It was pushed and the cost-first PR109 body updated by12:40:29. The new checker and its unfinished review were excluded from that checkpoint.
-  - Frozen0604812c push delta failed only the control-anchor inventory in73.01seconds;723behavioral tests passed. No passing push or publication is claimed for that snapshot until the anchor correction passes its own validation.
-  - Fresh12:28 upstream inspection at86dbff43 finds external BC279 and BC280 allocated under Session092. The next BC pointer is281, not a reservation; exp128 remains free. Origin/main remainsdd36800e and PR110 is still open.
+  - Exp128's sole independent checker exited zero and completed by 13:00:03 UTC after an observed dispatch at 12:59:12. Exact process start within that interval was not measured. External cost was 1.12 seconds wall, 1.08 user and 0.01 system; all positive predicates passed, including 88 labels, 60 distinct placements, eight orbits, the identity orbit permutation, seven rows, 41 inclusions and upper/baseline eleven. Independent output GO froze at 13:03:35 UTC.
+  - Immutable a94e57fe source-engine push passed 45/66 steps in 68.33 seconds. The 87bb protocol checkpoint passed 31/66 records steps in 19.07 seconds and 45/66 delta-push steps in 71.01 seconds; it was published before the sole scientific invocation.
+  - Full immutable 87bb validation began around 12:55 UTC and remains in progress in process session 85874, with log /private/tmp/squares-session095-full-protocol.log. No full pass is claimed.
+  - Historical admission failure before the corrected engine and protocol passed their gates; immutable 3160d0a7 push failed only a stale generated ledger in 68.96 seconds. The redundant 3160 run was aborted after an EOF commit refusal and is not a passing validation receipt.
+  - Hosted 73755cc1 passed every semantic check but failed the measured runtime band at 149.79 seconds against 99.39 seconds and a 1.5 factor. This performance failure is distinct from the repaired stale-record/anchor failures; no threshold is weakened.
+  - Corrected checkpoint 73755cc1 passed 45/66 push steps in 70.28 seconds; external time was 72.62 seconds wall, 184.77 user and 24.35 system. It was pushed and the cost-first PR109 body updated by 12:40:29. The new checker and its unfinished review were excluded from that checkpoint.
+  - Historical 0604812c push delta failed only the control-anchor inventory in 73.01 seconds; 723 behavioral tests passed. That failed snapshot is not a passing push or publication receipt; the corrected checkpoint is recorded separately.
+  - Historical 12:28 UTC upstream inspection at 86dbff43 found external BC279 and BC280 allocated under Session092. The next BC pointer was 281, not a reservation; exp128 was then free and is now allocated. Origin/main was dd36800e and PR110 was open at that inspection.
   - 'Full immutable 3bec06e2 gate: ALL CHECKS PASSED in 1638.75 seconds wall; external 1638.87 seconds wall, 3235.32 user and 91.41 system. Root observed completion at 12:26:14 UTC. This source-engine result does not validate subsequent checker or record changes.'
-  - Exp127's sole producer completed by11:55:00, actualexit0, in0.25 seconds external wall; packetunresolved/no_chain. No reader was authorized. The fixed axis representation's allocation ends; H124 and restrictedH036 remain unresolved with the diagonal lemma retained.
+  - Exp127's sole producer completed by 11:55:00, exited zero and took 0.25 seconds external wall; its packet reported unresolved/no_chain. No reader was authorized. The fixed axis representation's allocation is terminal; H124 and restricted H036 remain unresolved with the diagonal lemma retained.
   - 'Historical documentation-delta checkpoint on 2026-09-07, before the 12:06:11 CI diagnosis: ddf545c9 passed 45/66 push steps against 3bec06e2 in 119.32 seconds and was published to PR109. Hosted validation was being assessed separately at that checkpoint; its expired-record failure and correction are retained in think-kmw0.'
   - 'Historical source-gate checkpoint on 2026-09-07, before full completion was observed at 12:26:14 UTC: 3bec06e2 passed push 45/66 steps in 147.88 seconds and fast 62/66 steps in 169.33 seconds. Full validation was then asynchronous and was not claimed as a pass.'
-  - Exp127 protocolddf545c9 passes31/66 immutable records in28.45 seconds. Independent protocol GO preceded invocation; all scientific source modules are unchanged across the record-only corrections.
-  - Session094 published its source checkpoint and PR body by11:49. Fast confirmation was observed11:50:19; this slice starts at the actual recorded activation and retains the original program endpoint.
-  - Fresh external snapshot0e1961e2 contains no Session095, exp127 or BC259/H099 assignment. Session095 and exp127 are now allocated; BC279, exp128, H125, Agenda029 and X019 remain next pointers, not reservations.
+  - Exp127 protocol ddf545c9 passed 31/66 immutable records steps in 28.45 seconds. Independent protocol GO preceded invocation; all scientific source modules were unchanged across the record-only corrections.
+  - Session094 published its source checkpoint and PR body by 11:49. Fast confirmation was observed at 11:50:19; this slice starts at the actual recorded activation and retains the original program endpoint.
+  - Historical activation snapshot 0e1961e2 contained no Session095, exp127 or BC259/H099 assignment. Its then-next pointers were unreserved; later allocations and the 12:28 external ownership check supersede that inventory.
   stop_reason: null
-  next_action: Complete the bounded BC259 implementation-readiness phase by 12:57 UTC, then independently decide whether a separate scientific verification is ready. Exp127 is terminal; preserve the 13:29 finalization reserve and 13:49 endpoint without a retry.
+  next_action: Integrate the independently accepted H099 disposition, then retain at most one independently reviewed BC265 comparative design by 13:29 UTC. Preserve the finalization reserve and 13:49 endpoint, without a scientific retry or automatic next target.
 ---
 # Final Active Slice: Collision Cover and Support Ceiling
 
@@ -376,27 +510,35 @@ authorized or invoked. This fixed representation's allocation is terminal, witho
 retry, radius sweep or diagonal rerun. H124 and restricted H036 remain unresolved;
 exp125's independently certified diagonal lemma is retained. No global bound follows.
 
-Both independent H099/BC259 source reports are now frozen:
+Both independent H099/BC259 source reports froze before implementation:
 [the author assessment](../series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-author.md)
 and [independent review](../series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-review.md).
-They support a bounded checker implementation, not adoption of the contributed
-seven-row ceiling. Their source correspondence and upper-bound contract still need
-the complete current-source binding and positive-area inclusion checks.
+They established the source correspondence and upper-bound contract for the bounded
+positive-only checker. The 12:27–12:57 UTC implementation-readiness phase under
+BC259/`think-nwss` completed with twelve source-free controls and independent review.
 
-The selected phase, **12:27–12:57 UTC**, remains under existing BC259/`think-nwss`.
-It funds a positive-only, history-free checker for the fixed seven rows and an
-independent readiness review. The instrument must bind all 88 labelled source images,
-the 60-placement quotient and orbit order, and check the 41 claimed inclusions.
-Do not fabricate solver or experiment history to satisfy an unrelated interface.
-The checker author owns only its implementation and tests; the independent reviewer
-owns the separate instrument-review note. Their controls are source-free, and this
-phase admits no scientific constructor or target invocation.
+After immutable admission and publication of the prospective protocol,
+[exp128](../series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md)
+ran its sole independent checker. The process exited zero and completed by 13:00:03
+UTC, taking 1.12 seconds external wall time. Dispatch was observed at 12:59:12;
+the exact process start within that interval was not measured. The checker bound all
+88 labelled source images, the 60 distinct placements and eight orbits with the identity
+orbit permutation, and verified all 41 positive inclusions across seven rows. It
+reported both upper bound and feasible baseline eleven. The independent output audit
+accepted the full metadata and protocol predicates at 13:03:35 UTC.
 
-A later verification requires its own independently reviewed frozen readiness and
-prospective protocol. Until then the support ceiling is unadopted, and H099's bracket
-`[11, 56/5]` is unchanged. This is a fixed-support obligation, not a claim about a
-mass-eleven area density or a global packing bound. The source and API inventory is in
+H099 is refuted: the existing fixed support has optimum eleven. This result gives no
+global packing bound and makes no claim about a mass-eleven area density. The source
+and API inventory is in
 [the prior handoff](session-094-complete-cover-and-density-controls.md#selected-final-slice-resources).
+
+The selected phase is source-free comparative design under existing BC265/`think-j8pz`,
+13:02–13:29 UTC. Its author and independent reviewer compare the value of ruling out
+the H116 method with a direct H100 or narrowly specified kernel design, prioritizing
+significant mathematical results. They may retain at most one changed high-impact
+direction and its next future discriminator. Both reports must freeze before either
+author inspects the parallel derivation. This allocation admits no scientific target,
+new scientific IDs or unchanged H124/H107 work.
 
 Root owns scientific admission, shared records, sequential IDs, Git and PR109.
 Independent mathematical authors and reviewers use max thinking and disjoint files.
@@ -410,9 +552,15 @@ observed at 12:26:14 UTC. That result does not validate the new BC259 checker or
 record edits. Pending-full statements in the earlier checks are dated historical
 snapshots, not the current gate status.
 
-Freeze the checker and independent review by their original 12:57 cutoff. Only a
-concretely ready obligation may receive a separate scientific allocation. Use the time
-before 13:29 for disposition and integration; do not spend it on unfunded retries.
+The corrected `a94e57fe` engine passed its 45/66 push steps in 68.33 seconds.
+The `87bb` protocol checkpoint passed 31/66 records steps in 19.07 seconds and
+45/66 delta-push steps in 71.01 seconds, and was published before invocation.
+Its full gate, started around 12:55 UTC, remains in progress; no full pass is claimed.
+
+Freeze both comparative design reports by their original 13:26 cutoffs and retain
+the disposition before 13:29. A future scientific verification would require its own
+independently reviewed readiness and prospective protocol. Do not spend this allocation
+on an unregistered target or a retry.
 At 13:29, begin the protected finalization reserve and capture outcomes,
 uninvoked suffixes, validation, measured costs and the exact next handoff on this PR.
 

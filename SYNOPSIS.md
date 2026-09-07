@@ -137,13 +137,14 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives fourteen confirmed hypotheses, twelve refuted
+The generated ledger currently derives fourteen confirmed hypotheses, thirteen refuted
 hypotheses, one open hypothesis, twenty-three open questions, and forty blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
-unresolved. No hypothesis is running or waiting on review and seven are unresolved.
+unresolved. No hypothesis is running or waiting on review and six are unresolved.
 H-124’s fixed-square screen found no pair; its witness-only reader was not invoked.
-H-105 is refuted: all 134 eligible candidate pairs are separated, leaving higher-order
-overlap depth and H-099 unresolved.
+H-105 is refuted: all 134 eligible candidate pairs are separated. Exp128 subsequently
+settled H-099's entire fixed support at optimum eleven through seven necessary rows;
+this does not determine expanded supports or a global packing bound.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
 pinned the `m = 5` covering wall to a bracket of width 0.015 where it had registered
 0.02. One, H-064, is abandoned in the ledger’s word — its latest round expired resumable
@@ -617,7 +618,7 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**Selected next entry:** `think-nwss` takes the existing BC-259 support-ceiling review.
+**Selected next entry:** `think-j8pz` takes BC-265's bounded comparative resource design.
 The [Session094 handoff](packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md)
 was updated after the first result in
 [Session095](packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md).
@@ -625,13 +626,12 @@ Exp125 independently certified the entire diagonal compatibility branch, but its
 representation returned `no_chain`. Exp127's fixed collision-augmented axis cover also
 returned `no_chain`, in 0.25 seconds, without an independent reader. H124 and restricted
 H036 remain unresolved; that representation receives no retry or parameter sweep.
-BC-259 instead asks whether the contributed seven-row ceiling of eleven independently
-binds to H099's entire existing support. It could settle every weight vector on that
-support, whereas exp126's unverified overweight graph clique concerns only the current
-candidate and does not prove geometric invalidity. Both independent source assessments
-are complete. The fixed seven-row checker passed independent source-free review and
-controls. Exp128 is prospectively registered on enginea94e57fe; immutable push and
-committed-record admission remain required before its sole independent adoption call.
+BC-259 is complete: exp128 independently bound all88source images,60placements and
+eight orbits, verified41strict inclusions on seven fixed boxes, and established the
+attained support optimum eleven in1.12seconds. H099 is refuted only on that support.
+BC-265 now compares genuinely changed directions, including expanded support under
+H116, against their value for significant mathematical progress. This is source-free
+design, not an automatic new target or a retry of H099.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
 `think-9qrx`, completed the user-approved research block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
@@ -2868,7 +2868,7 @@ round that names the hypothesis, control roles included.
 | [H-096](packing/campaign/hypotheses/H-096-n11-angle-cell-kernels.md) | open question | Can whole-angle-cell kernels cover more useful positive mass with a tractable exact verifier? | 0 | — |
 | [H-097](packing/campaign/hypotheses/H-097-n11-existential-witness-menus.md) | open question | Can pose-dependent witness choice beat a universal witness while retaining complete pose-box coverage? | 0 | — |
 | [H-098](packing/campaign/hypotheses/H-098-n11-segment-measures.md) | open question | Can segment-supported measures improve the bound with exact intersection-length coverage? | 0 | — |
-| [H-099](packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md) | unresolved | Graph obstruction retained; independently reviewed seven-row ceiling instrument prospectively registered | 3 | 33s wall |
+| [H-099](packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md) | refuted | Independently source-bound seven-row ceiling and feasible average establish fixed-support optimum11 | 3 | 34s wall |
 | [H-100](packing/campaign/hypotheses/H-100-below-trump-area-density.md) | open question | Can a full-size area density give mass below eleven at a side between the retained bound and Trump? | 0 | — |
 | [H-101](packing/campaign/hypotheses/H-101-trump-equality-density.md) | open question | Can mass-eleven density at Trump’s side and a complete equality analysis establish uniqueness? | 0 | — |
 | [H-102](packing/campaign/hypotheses/H-102-complete-restricted-angle-support-families.md) | open question | Which complete restricted angle or wall-support family yields a useful theorem, starting with H-036? | 0 | — |
@@ -3266,7 +3266,7 @@ archive beside it.
 | [exp-125](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md) | 11 | target | H-124 | Complete residual cover for both whole bands | Diagonal independently certified; axis no_chain without reader | unresolved |
 | [exp-126](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md) | 11 | target | H-099 | Complete graph bound for unchanged56/5 candidate | Reported overweight graph clique; no reader or geometric counterexample | unresolved |
 | [exp-127](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md) | 11 | target | H-124 | Fixed collision-augmented whole-axis cover | Producer no_chain; no independent reader or geometric counterexample | unresolved |
-| [exp-128](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md) | 11 | target | H-099 | Fixed seven-row necessary-lower-incidence ceiling | Prospectively registered; sole independent checker not invoked | in-progress |
+| [exp-128](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md) | 11 | target | H-099 | Fixed seven-row necessary-lower-incidence ceiling | Independently verified ceiling and attained baseline11; whole fixed support settled | rejected |
 
 ### Cost and provenance
 
@@ -3355,7 +3355,7 @@ archive beside it.
 | exp-125 | one producer per band; only diagonal reader invoked | 1.90 s | — | criterion | `7daa7c55` |
 | exp-126 | one60-second scientific child; no reader invoked | 4.49 s | — | criterion | `7daa7c55` |
 | exp-127 | one120-second scientific child; no reader invoked | 0.25 s | — | criterion | `3bec06e2` |
-| exp-128 | one60-second independent checker plus2-second termination grace | — | — | not invoked | `a94e57fe` |
+| exp-128 | one60-second independent checker plus2-second termination grace | 1.12 s | — | criterion | `a94e57fe` |
 
 ### What the 84 rounds jointly establish
 
