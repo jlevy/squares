@@ -283,6 +283,7 @@ case or experiment separately.
 | [BC-255: Uniform Vertex Displacement Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-review.md) | dated review record | record | retained | — |
 | [BC-259: Source Binding for the Seven-Row Support Ceiling](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-author.md) | research synthesis | record | retained | — |
 | [BC259: Independent Support-ceiling Adoption Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-review.md) | dated review record | record | retained | — |
+| [BC-259: Positive-Inclusion Adoption Instrument Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-adoption-instrument-review.md) | dated review record | record | retained | — |
 | [BC-255 Near-Axis Reader Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-near-axis-reader-independent-review.md) | dated review record | record | retained | — |
 | [BC-252 — Complete Rows on the Retained Sites](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md) | research synthesis | record | retained | — |
 | [BC-255: Fixed-Side Discriminator Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md) | research synthesis | record | retained | — |

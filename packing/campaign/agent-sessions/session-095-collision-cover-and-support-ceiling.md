@@ -43,7 +43,7 @@ session:
     objective: Implement and independently review a positive-only history-free fixed seven-row checker with complete source binding and 41 claimed inclusions.
     commitment: BC-259
     bead: think-nwss
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Exp127 is terminal and both independent source assessments have frozen; their remaining exact binding and row obligations define one bounded implementation-readiness slice.
     budget_minutes: 30
@@ -53,10 +53,31 @@ session:
     validation_command: packing-validate --records
     kill_condition: Original author/reviewer caps, any unresolved source-binding or inclusion premise, or the 12:57 UTC phase deadline. No target, altered rows or exp127 retry.
     fallback: Freeze partial source-free artifacts and the exact missing readiness premise; retain the unadopted ceiling without extending the allocation.
+    outcome: Author froze12:37:05; independent GO and its full report froze12:44:10. Root read the complete frozen code, tests and review. Twelve source-free controls pass independently; mathematical contract and fixed CLI match the prospective protocol.
+    evidence: [packing/devtools/check_trump_support_adoption.py, packing/tests/test_trump_support_adoption.py, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-adoption-instrument-review.md]
+    stop_reason: Concrete source-free readiness completed before the original12:57 cutoff; actual source binding and scientific inclusions remain untested.
+    next_action: Freeze the engine and separately register the once-only adoption protocol before target admission.
+  - workflow: research-loop
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Admit and disposition one independent fixed-source seven-row adoption check, with immutable validation and a committed prospective protocol.
+    commitment: BC-259
+    bead: think-ftdi
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Independently reviewed source-free checker and fixed scientific contract are ready; the remaining obligation is one source-bound verification, not another search.
+    budget_minutes: 27
+    started_at: '2026-09-07T12:45:17Z'
+    deadline_at: '2026-09-07T13:12:00Z'
+    expected_output: One independently checked fixed-support ceiling or a retained unresolved result/non-invocation, plus exact costs and validation.
+    validation_command: packing-validate --push
+    kill_condition: Failed admission, launch after13:09, complete-child60second TERM plus2second KILL grace, or original13:12 finish cutoff. No retry or changed box.
+    fallback: Preserve the missing premise without adopting the ceiling or repricing an automatic larger instrument.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Authors prepare disjoint checker and review artifacts; root admits any later scientific verification only through its own frozen readiness and prospective protocol.
+    next_action: Commit the independently reviewed source and protocol, pass their immutable admission checks, then invoke the fixed checker at most once.
   primary_bead: think-ro0s
   status: in_progress
   budget:
@@ -166,16 +187,16 @@ session:
     excluded_commands: ["File edits","Git or external PR actions","Scientific source or target invocation","Broad tests"]
   - task: "Positive-only fixed seven-row checker (think-257e)"
     operator: "Codex scalar_followup_assessment, max thinking"
-    status: "in_progress"
+    status: "completed"
     recording: "contemporaneous"
-    outcome: null
-    evidence: []
-    files: []
-    checks: []
-    uncertainty: "Instrument authoring is in progress; no scientific source construction, verified ceiling or target result is claimed."
-    elapsed_seconds: null
-    elapsed_quality: "unavailable"
-    next_action: "Freeze the history-free fixed checker and source-free controls before the original deadline."
+    outcome: Author froze12:37:05 after584seconds observed from12:27:21,605seconds charged from dispatch. The lazy fixed checker binds all source images and positive-inclusion quotas without an optimizer or archive executable.
+    evidence: [packing/devtools/check_trump_support_adoption.py, packing/tests/test_trump_support_adoption.py]
+    files: [packing/devtools/check_trump_support_adoption.py, packing/tests/test_trump_support_adoption.py]
+    checks: [Twelve source-free rational and unrelated quadratic controls passed0.48seconds pytest and0.65seconds process wall/CPU; Ruff, formatting and BasedPyright clean.]
+    uncertainty: No target or scientific field/rows were evaluated. Independent review and prospective admission remain required.
+    elapsed_seconds: 584
+    elapsed_quality: "operator_reported_approximate"
+    next_action: Independent frozen-code review, then root-controlled immutable admission if ready.
     phase: 2
     budget_minutes: 30
     started_at: "2026-09-07T12:27:00Z"
@@ -188,16 +209,16 @@ session:
     excluded_commands: ["Scientific constructor or target execution","Git or shared registry writes","Changed scientific rows or source"]
   - task: "Independent fixed-checker readiness review (think-9mql)"
     operator: "Codex density_control_recovery, max thinking"
-    status: "in_progress"
+    status: "completed"
     recording: "contemporaneous"
-    outcome: null
-    evidence: []
-    files: []
-    checks: []
-    uncertainty: "Readiness review is in progress; the ceiling is unadopted and no scientific evaluation is authorized."
-    elapsed_seconds: null
-    elapsed_quality: "unavailable"
-    next_action: "Return an independent bounded contract review and exact remaining premise before the original cutoff."
+    outcome: Independent instrument and prospective protocol GO; note frozen12:44:10 after978seconds observed from12:27:52. Source binding, positive-only quotas and multiplier proof are sound; exact target remains uninvoked.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-adoption-instrument-review.md]
+    files: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-adoption-instrument-review.md]
+    checks: [Twelve independent source-free controls passed0.69seconds wall and0.66CPU; Ruff, format and BasedPyright clean.]
+    uncertainty: Shared seed, field arithmetic and packing verifier are disclosed; source-engine push and committed protocol admission still precede the sole scientific call.
+    elapsed_seconds: 978
+    elapsed_quality: "operator_reported_approximate"
+    next_action: Root freezes engine and completes the pending admission fields prospectively.
     phase: 2
     budget_minutes: 30
     started_at: "2026-09-07T12:27:00Z"
@@ -256,6 +277,8 @@ session:
   - packing/campaign/resource-usage/codex-task-tree-session-095.yaml
   - packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md
   checks:
+  - Hosted73755cc1 passed every semantic check but failed the measured runtime band at149.79seconds against99.39seconds and a1.5factor. This performance failure is distinct from the repaired stale-record/anchor failures; no threshold is weakened.
+  - Corrected checkpoint73755cc1 passed45of66 push steps70.28seconds; external72.62wall184.77user24.35system. It was pushed and the cost-first PR109 body updated by12:40:29. The new checker and its unfinished review were excluded from that checkpoint.
   - Frozen0604812c push delta failed only the control-anchor inventory in73.01seconds;723behavioral tests passed. No passing push or publication is claimed for that snapshot until the anchor correction passes its own validation.
   - Fresh12:28 upstream inspection at86dbff43 finds external BC279 and BC280 allocated under Session092. The next BC pointer is281, not a reservation; exp128 remains free. Origin/main remainsdd36800e and PR110 is still open.
   - 'Full immutable 3bec06e2 gate: ALL CHECKS PASSED in 1638.75 seconds wall; external 1638.87 seconds wall, 3235.32 user and 91.41 system. Root observed completion at 12:26:14 UTC. This source-engine result does not validate subsequent checker or record changes.'
