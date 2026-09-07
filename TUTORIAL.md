@@ -104,8 +104,11 @@ the signed distance from one packing this project found to the best one anybody 
 published, and it is what [§3](#3-cells-basins-and-two-traps) onward measures.
 The first is a property of the problem; the second is a property of a run.
 
-**The previous lower bound also led to a proof repair.** Stromquist’s 2003 Theorem 2 was
-the published source for `2 + 4/√5 = 3.788854382…`, and this repository found that its
+**The previous lower bound also led to a proof repair.** Stromquist stated
+`2 + 4/√5 = 3.788854382…` in his
+[1984 Memo III, p. 10](packing/resources/papers/stromquist-1984-packing-unit-squares-inside-squares-iii-cases-through-65-and-gardner-conjecture.pdf),
+without supplying the unrestricted proof there.
+His 2003 Theorem 2 was the published presentation, and this repository found that its
 printed proof is **false as printed**: an exact open box of side `10001/10000` fits the
 claimed container and strictly avoids all twelve printed Figure 14 points.
 A separately preregistered, source-distinct repair—moving one point from `(.8, 1.85)` to
@@ -151,9 +154,17 @@ This is a fractional version of an unavoidable point set—the device Stromquist
 argument uses, where every admissible square is required to contain a marked point.
 Here several atoms may instead contribute fractional weights that add to at least one,
 and that flexibility is what lets a covering linear program search for the weights.
-The theorem is Burns’s and Massaccesi’s; the instance and the generator that found it
-are this project’s. The finished proof uses none of the search—only the frozen rational
-atoms, the nonnegativity premise, and five exact conditions.
+Stromquist’s earlier proofs also use geometric helper arguments: his six-square proof
+forces one square to contain four of eight dots, and the repaired eleven-square argument
+forces one square to contain three of twelve.
+Those forced allocations strengthen the final counting contradiction.
+The certificate below uses an unconditional weighted cover; the
+[memo review](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md)
+examines how the helper steps could be made systematic.
+The weighted-certificate theorem is Burns’s and Massaccesi’s; the instance and the
+generator that found it are this project’s. The finished proof uses none of the
+search—only the frozen rational atoms, the nonnegativity premise, and five exact
+conditions.
 
 | Condition | Exact fact in the `n = 11` certificate | Its job in the proof |
 | --- | --- | --- |

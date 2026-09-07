@@ -707,11 +707,13 @@ def run_animation_controls() -> dict[str, bool]:
 
 
 def _rendered_fixtures() -> dict[str, str]:
+    from cases.stromquist.five_point_obstruction import SVG_ARTIFACT, control_svg
     from devtools.render_packing_gallery import render_gallery
     from devtools.render_t018_proof_visual import ARTIFACT, render_visual
 
     rendered = render_gallery()
     rendered[ARTIFACT.name] = render_visual()
+    rendered[SVG_ARTIFACT.name] = control_svg()
     return rendered
 
 
@@ -759,6 +761,7 @@ def run_portability_controls() -> dict[str, bool]:
 def run_gallery_controls() -> dict[str, bool]:
     from xml.etree import ElementTree as ET
 
+    from cases.stromquist.five_point_obstruction import SVG_ARTIFACT, control_svg
     from devtools.build_known_best_atlas import COMPOSITES
     from devtools.map_prospective_sources import COVERAGE_OUTPUT
     from devtools.packing_render_adapters import frame_from_kingbird29
@@ -833,7 +836,11 @@ def run_gallery_controls() -> dict[str, bool]:
     document_svg_artifacts = (
         gallery_artifacts
         | {canvas.svg_path.resolve() for canvas in COMPOSITES}
-        | {COVERAGE_OUTPUT.resolve(), T018_PROOF_VISUAL.resolve()}
+        | {
+            COVERAGE_OUTPUT.resolve(),
+            T018_PROOF_VISUAL.resolve(),
+            SVG_ARTIFACT.resolve(),
+        }
     )
     comparison_artifact = by_id["n10-source-return-comparison"]["artifact"]
     comparison_embeds = {
@@ -888,6 +895,8 @@ def run_gallery_controls() -> dict[str, bool]:
         and all(path.is_file() for path in inline_svg_targets),
         "all_inline_svg_targets_are_owned_artifacts": set(inline_svg_targets)
         <= document_svg_artifacts,
+        "five_point_obstruction_svg_replays": SVG_ARTIFACT.is_file()
+        and SVG_ARTIFACT.read_text(encoding="utf-8") == control_svg(),
         "frontier_cases_reference_gallery_artifacts_or_guide": all(
             embeds(f"packing/{example['frontier_case']}", example["artifact"])
             or references(f"packing/{example['frontier_case']}", "atlas/rendering/README.md")

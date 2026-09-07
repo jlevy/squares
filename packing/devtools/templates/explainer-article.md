@@ -39,7 +39,7 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 This work presents a new lower bound on a long-standing open geometry problem: eleven
 unit squares with disjoint interiors, free to rotate, cannot fit in a
-${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.
+${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.[^novelty]
 
 The computer-assisted proof was found via an automated research framework.
 The certificate used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted points
@@ -52,10 +52,8 @@ of standard-library Python and short enough to read in one sitting, decides the
 certificate file of {{HEADLINE_N_ATOMS}} weighted points in
 {{HEADLINE_PINNED_RUNTIME}}.<!--END:CLAIM-->
 
-This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
-open case of the square packing problem.[^novelty] The previous bound,
-{{PRIOR_LOWER_DEC}}, was Stromquist’s in
-{{PRIOR_YEAR}}.[^stromquist][^repair]
+This improves the previous lower bound on the smallest open case of the square packing
+problem: Stromquist’s {{PRIOR_LOWER_DEC}}.[^stromquist-history][^repair]
 
 ## The Agentic Research Framework
 
@@ -76,19 +74,38 @@ Work is planned on a regular cadence (such as 8 to 12 hours) and broken into sev
 defined workflows (research survey, correctness verification, research loop,
 optimization loop, and a few others).
 
-Every file in the repository (including this paper) is agent written.
-The research framework’s structure had high-level human direction.
-It relies on a few other agent tools, notably [tbd](https://github.com/jlevy/tbd) for
-task tracking, [Softschema](https://github.com/jlevy/softschema) for structuring
-results, and [Practical Prose](https://github.com/jlevy/practical-prose) to improve
-writing quality.
+<div class="boxed-text">
+
+The repository’s original prose and code, including this paper, were written by agents
+under human direction.
+The framework relies on a few other agent tools, notably
+[tbd](https://github.com/jlevy/tbd) for task tracking,
+[Softschema](https://github.com/jlevy/softschema) for structuring results, and
+[Practical Prose](https://github.com/jlevy/practical-prose) to improve writing quality.
+
+</div>
 
 ## The Square Packing Problem
 
 The **square packing problem** asks, for each $n$, for the side $s(n)$ of the smallest
 square that holds $n$ unit squares, which are free to rotate and must have disjoint
-interiors.[^survey] The value of $s(n)$ is known for $n \le 10$. Stromquist settled
-$s(10) = 3 + 1/\sqrt{2}$ in {{PRIOR_YEAR}}.[^stromquist]
+interiors.[^survey] The value of $s(n)$ is known for $n \le 10$. Stromquist proved
+$s(10) = 3 + 1/\sqrt{2}$.[^stromquist-memos]
+
+For values of $n$ where $s(n)$ is still unknown, results generally take the form of
+upper or lower bounds.
+An **upper bound** is constructive: an arrangement of $n$ unit squares in a square of
+side $L$ shows that $s(n) \le L$. Trump’s packing for $n = 11$ is one example.[^trump]
+Such constructions may be specified with approximate numerical coordinates or derived
+exactly by solving the geometric relationships between touching squares.
+Approximate coordinates alone do not constitute a formal proof of the upper bound.
+
+A **lower bound** proves that $s(n) \ge L$ by ruling out every arrangement in a
+container of side less than $L$. This requires an argument covering all possible
+placements and rotations of the squares.
+Such arguments range from simple area comparisons to detailed geometric proofs and
+computer-assisted certificates.
+The proof presented here is of this kind.
 
 <figure>
   <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.svg" alt="{{COMPOSITE_ALT}}" width="2400" height="2896"></a></div>
@@ -168,23 +185,21 @@ The figures below illustrate this certificate.
 
 ## The Five Conditions
 
-The argument is the weighted, fractional form of the classical unavoidable-set argument
-for square packing, in the shape Gustavo Massaccesi used for $n = 17$ in August 2026
-after Sam Burns proposed the weighted form,[^burns][^massaccesi] descended from Göbel’s
-unavoidable points (1979) and Nagamochi’s weighted resources (2005).[^lineage] Neither
-the theorem nor the shape of the certificate is this project’s; what is new here is the
-$n = 11$ instance and the generator that found it.
+We prove $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$ with a new weighted-point
+certificate found by our automated search.
+The five conditions below follow the finite certificate method used by Burns and
+Massaccesi.[^burns][^massaccesi][^lineage]
 
-The proof is a **certificate**: for $n$ unit squares in a container of side $L$, a
-finite set of points in the container, each with a nonnegative rational weight (the
-atoms; every weight in this certificate is positive), a net of directions
+The proof uses a finite **certificate**: for $n$ unit squares in a container of side
+$L$, a finite set of points in the container, each with a nonnegative rational weight
+(the atoms; every weight in this certificate is positive), a net of directions
 $\theta_k = 2\arctan t_k$ with rational half-tangents
 $0 = t_0 \lt t_1 \lt \cdots \lt t_K$, and a shrink $B$, such that:
 
 <div class="conditions boxed-text">
 
-**Condition 1.** The atom set is invariant under the container’s symmetry group
-$\mathbf{D}_4$, its four rotations and four reflections.
+**Condition 1.** The atom positions and weights are invariant under the container’s
+symmetry group $\mathbf{D}_4$, its four rotations and four reflections.
 
 **Condition 2.** The total mass of the atoms, the sum of all their weights, is strictly
 below $n$.
@@ -195,8 +210,8 @@ $\tan(\pi/8)$.
 **Condition 4.** $B(1 + D) \lt 1$, where $D$ is the largest of the net’s half-gap
 tangents, each the tangent of half the angle between two consecutive net directions.
 
-**Condition 5.** At every net direction, every placement of a square of side $B$ inside
-the container covers mass at least $1$.
+**Condition 5.** At every net direction, every placement of a closed square of side $B$
+inside the container covers mass at least $1$.
 
 </div>
 
@@ -443,10 +458,10 @@ $$
 
 ## What a Coarser Net Costs
 
-The net was not derived here.
-It is the one Massaccesi’s $n = 17$ certificate used, {{N_DIRECTIONS}} half-tangents
-equally spaced from $0$ to ${{LIMIT_NUM}}/{{LIMIT_DEN}}$, carried over unchanged.
-To price a coarser net, hold a certificate’s atoms fixed, coarsen the net, set $B$ to a
+We use the net from Massaccesi’s certificate: {{N_DIRECTIONS}} equally spaced
+half-tangents, from $0$ to
+<span class="math-reference">${{LIMIT_NUM}}/{{LIMIT_DEN}}$.[^massaccesi]</span> To price
+a coarser net, hold a certificate’s atoms fixed, coarsen the net, set $B$ to a
 seven-place value one step below the largest Condition 4 admits, and decide Condition 5
 again.
 Figure 7 does this for each certificate, and its caption says what halving the net
@@ -526,9 +541,8 @@ proves, with no appeal to compactness.
 
 ## Generator and Verifier
 
-The atoms are solved for, not placed by hand.
-The sites $A$ are fixed in advance, in orbits of $\mathbf{D}_4$, and the weights, one
-per orbit, come from the covering linear program
+The generator solves for the weights on a chosen set of sites $A$, arranged in orbits of
+$\mathbf{D}_4$. The weights, one per orbit, come from the covering linear program
 
 $$
 \tau^*(A, \Theta; L, B) \;=\; \min_{w \,\ge\, 0}\; \sum_{a \in A} w_a \quad\text{subject to}\quad \sum_{a \in Q} w_a \;\ge\; 1 \;\;\text{ for every placement } Q,
@@ -558,6 +572,14 @@ generated. The gate that admits a certificate to the record asks for two verdict
 accepts one only when the exact event-cell sweep and an interval branch-and-bound, which
 decide Condition 5 by distinct methods, both accept it and report the same least covered
 mass.
+
+Geometric constraints can strengthen the final count.
+Stromquist’s six-square proof rules out a container of side less than 3 by forcing four
+of eight marked points into one square; each other square must contain at least one, so
+at most five fit. The repaired eleven-square argument similarly forces three of twelve
+points into one square.[^stromquist-memos][^repair] These examples suggest extending the
+weighted method by using constraints between squares to force additional mass
+consumption.
 
 A [first-party package for third-party checking]({{THIRDPARTY_URL}}) gathers what an
 outside check needs: the theorem written out, the {{THIRDPARTY_L_FRAC}} certificate as
@@ -596,24 +618,12 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
 ## Further Reading
 
 - **Papers and sources**
-  - Erich Friedman,
-    [Packing unit squares in squares: a survey and new results]({{PROBLEM_URL}}): an
-    introduction to the problem and its literature
-  - Walter Stromquist, [Packing 10 or 11 unit squares in a square]({{PRIOR_URL}})
-    (2003): the preceding lower bound for eleven squares
-  - Hiroshi Nagamochi, [Packing unit squares in a rectangle]({{NAGAMOCHI_URL}}) (2005):
-    lower bounds from restrictions on packing squares into rectangles
-  - Sam Burns,
-    [Proposing a Better Lower Bound for n=17 Square Packing](https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/)
-    (2026): the weighted-point certificate method with a rational direction net and
-    exact coverage checks that this proof follows
-  - Gustavo Massaccesi,
-    [Another Better Lower Bound for n=17 Square Packing](https://gus-massa.blogspot.com/2026/08/another-better-lower-bound-for-n17.html)
-    and
-    [Linear Programing for Square Packing](https://gus-massa.blogspot.com/2026/08/linear-programing-for-square-packing.html)
-    (2026): an improved certificate using Burns’s method and a linear program to find
-    its weights, the immediate precedents for this project’s generator and $n=11$
-    certificates
+  - Friedman’s survey: an introduction to the problem and its literature.[^survey]
+  - Stromquist’s geometric proofs for ten and eleven
+    squares.[^stromquist-history][^stromquist-memos]
+  - Nagamochi’s lower bounds for square packings in rectangles.[^lineage]
+  - Burns’s weighted certificates and Massaccesi’s linear program for finding their
+    weights.[^burns][^massaccesi]
   - [Full paper and source archive]({{ARCHIVE_URL}}): original papers, searchable
     transcriptions, and captured web sources
 - **Elements of the project**
@@ -645,11 +655,22 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
   - **[KPress](https://github.com/jlevy/kpress):** web and print formatting from
     Markdown
 
-[^stromquist]: Walter Stromquist,
+[^stromquist-history]: Walter Stromquist states this bound in
+    [Memo III ({{PRIOR_MEMO_YEAR}}), p. 10]({{PRIOR_MEMO_URL}}#page=10), as an
+    adaptation of his preceding proof for $0^\circ$ and $45^\circ$ orientations.
+    This suggests he already had the general argument, whose details he omits.
+    The journal proof appeared in
     [Packing 10 or 11 unit squares in a square]({{PRIOR_URL}}), Electronic Journal of
-    Combinatorics 10 (2003), R8.
+    Combinatorics 10 ({{PRIOR_YEAR}}), R8.
 
-[^novelty]: No improvement on Stromquist’s {{PRIOR_YEAR}} bound is known to us.
+[^stromquist-memos]: Walter Stromquist, *Packing Unit Squares Inside Squares*,
+    [Memo I]({{PRIOR_SIX_MEMO_URL}}), September 11, 1984, pp.
+    13–19, gives the six-square helper argument.
+    [Memo II]({{PRIOR_TEN_MEMO_URL}}), October 15, 1984, proves the ten-square result,
+    later published in his [{{PRIOR_YEAR}} paper]({{PRIOR_URL}}).
+
+[^novelty]: No intervening improvement on Stromquist’s bound, stated in
+    {{PRIOR_MEMO_YEAR}} and published in {{PRIOR_YEAR}}, is known to us.
     The search behind that statement, recorded in the repository, covered the project’s
     literature archive and source register, then arXiv, Crossref, OpenAlex and Semantic
     Scholar, author pages and the public packing catalogues, through September 4, 2026.
@@ -668,20 +689,29 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
 [^trump]: Walter Trump’s packing of 1979, as recorded in
     [Kingbird’s register of squares in squares]({{BEST_URL}}). The
     [rendering]({{BEST_RENDER_URL}}) is the project’s own.
+    Stromquist’s [Memo III]({{PRIOR_MEMO_URL}}), pp.
+    2–4, credits Mats Gustafsson and Magnus Thulin with the same construction, reported
+    by Gardner in November 1980; the research archive records their independent
+    rediscovery.
 
 [^burns]: Sam Burns,
     [Proposing a Better Lower Bound for n=17 Square Packing](https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/),
-    August 2026.
+    August 2026, presents a weighted-point certificate for seventeen squares with a
+    rational direction net and exact coverage checks.
+    Burns credits ChatGPT with developing the certificate.
 
 [^massaccesi]: Gustavo Massaccesi,
     [Another Better Lower Bound for n=17 Square Packing](https://gus-massa.blogspot.com/2026/08/another-better-lower-bound-for-n17.html),
-    August 2026, with the linear program that found it described in
-    [a companion post](https://gus-massa.blogspot.com/2026/08/linear-programing-for-square-packing.html).
+    August 2026, improves Burns’s certificate.
+    His
+    [Linear Programing for Square Packing](https://gus-massa.blogspot.com/2026/08/linear-programing-for-square-packing.html)
+    describes the linear program and search used to find its weights.
 
-[^lineage]: F. Göbel, Geometrical packing and covering problems, in *Packing and
-    Covering in Combinatorics*, Mathematical Centre Tracts 106 (1979), 179–199; Hiroshi
-    Nagamochi, Packing unit squares in a rectangle, Electronic Journal of Combinatorics
-    12 (2005), R37.
+[^lineage]: Earlier counting methods include Göbel’s unavoidable points and Nagamochi’s
+    weighted resources: F. Göbel, Geometrical packing and covering problems, in *Packing
+    and Covering in Combinatorics*, Mathematical Centre Tracts 106 (1979), 179–199;
+    Hiroshi Nagamochi, [Packing unit squares in a rectangle]({{NAGAMOCHI_URL}}),
+    Electronic Journal of Combinatorics 12 (2005), R37.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

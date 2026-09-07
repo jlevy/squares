@@ -177,7 +177,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: insight
     instances: [11]
-    state: blocked
+    state: in_progress
     priority: 0
     question: >-
       Does the smallest exact a.e.-depth dual pilot certify a value above eleven, which
@@ -206,21 +206,22 @@ agenda:
     hypotheses: [H-099]
     workflows: [research-loop, factual-review]
     depends_on: [BC-242, BC-220]
-    blocked_on: >-
-      Complete a.e.-depth producer and source-distinct reader readiness. BC254 has
-      selected exp113's unchanged candidate; exp115 rules out all overweight-pair
-      obstructions but not higher-order depth. The first proposed control-only
-      facet slice is 30 author minutes plus 15 review minutes; full reader and
-      target costs remain unpriced. A uniform D=11 control is not the target.
     parallel_group: agenda026-density
     program: n11-density-stationarity-trump-capture
     next_evidence: >-
-      Whether exact dual depth already rules out a sharp mass-eleven density before the
-      program spends on continuum primal coverage.
+      Exp126's sole producer reported an overweight graph clique and no independent
+      reader was authorized. At that checkpoint, H099 and its bracket [11,56/5]
+      remained unchanged. Exp128 subsequently established fixed-support optimum
+      eleven and refuted H099, retiring the unchanged support question. Any changed
+      resource follows Session095's separate disposition; no candidate retry,
+      higher-order verifier, continuum primal coverage or alternate candidate is funded here.
     note: >-
       BC-250 narrows prospective allocation: retain all soundness controls, but no
       automatic 180-minute build or BC-244 launch. Candidate acceptance uses H-099;
       a sampled objective above eleven does not certify depth.
+      Session094's fresh reviewed five-row source sequence passed allten
+      producer/reader calls in18.65 seconds. The original failed sequence and
+      expired uninvoked sequence remain preserved; this does not repeat them.
   - id: BC-244
     purpose: research
     owner_focus: insight
@@ -457,13 +458,15 @@ agenda:
     bead: think-01q4
     note: >-
       Session089's source and instrument reviews passed. Exp113 independently
-      replayed a necessary-row ceiling of56/5, leaving H099 unresolved and its
-      full fixed-support supremum in[11,56/5]. The priced pair separator passed
+      replayed a necessary-row ceiling of 56/5, leaving H099 unresolved at that
+      checkpoint and its full fixed-support supremum in [11,56/5]. The priced pair separator passed
       source/toy controls and independent review under think-4ej5 and think-0u56.
       H105/exp115 independently exhausted all 134 eligible pairs without an overlap
       witness, rejecting only the pair-obstruction claim. H099 and full a.e. depth
-      remain unresolved. This cell exits by handing the candidate to BC243 with
+      remained unresolved at that checkpoint. This cell exited by handing the candidate to BC243 with
       think-pg9k's complete-method assessment; its bounded support screen is complete.
+      Exp128 later established the entire fixed-support optimum at eleven and refuted
+      H099. The earlier screen and pair-test outcomes remain unchanged.
       No complete arrangement build or repeated incomplete screen is funded.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-screen-spec.md
@@ -472,8 +475,9 @@ agenda:
     workflows: [insight-iteration, pipeline-improvement, research-loop]
     depends_on: [BC-242, BC-250]
     next_evidence: >-
-      An exact upper certificate can retire this support; only verified D>11 can
-      obstruct equality density. A floating LP objective decides neither.
+      Exp128's independently accepted upper certificate and feasible average retire
+      this support at optimum eleven. Preserve the historical screen and pair results;
+      any expanded support requires its own claim and prospective allocation.
     parallel_group: agenda026-density-support
     program: n11-density-stationarity-trump-capture
   - id: BC-255
@@ -483,7 +487,7 @@ agenda:
     state: in_progress
     priority: 1
     question: What is the first complete proof obligation for a useful restricted structural theorem?
-    hypotheses: [H-036, H-102, H-104, H-106, H-108, H-109, H-110]
+    hypotheses: [H-036, H-102, H-104, H-106, H-108, H-109, H-110, H-122, H-123, H-124]
     budget: >-
       One assessment slice of at most 30 minutes, beginning with H-036's unchanged
       0.25-degree restricted-angle claim. State complete cases, a feasible control,
@@ -509,10 +513,28 @@ agenda:
       Exp119 and exp120 subsequently accept the canonical near45 A3 and A1/A2
       implications through independent exact readers and the reviewed local
       reflection. Localization and both twelve-point clauses remain open.
-      The next-block discriminator is H110 under think-qv73: one frozen near-axis
-      P12 escape candidate suggested by a generic projected-strip gap. No target
-      witness has been evaluated. An escape would invalidate only that unchanged
-      auxiliary construction, not H036 or the accepted restricted lemmas.
+      Session091 accepts H110/exp121 under think-qv73: the sole exact candidate and
+      independent reader establish a contained near-axis square avoiding all twelve
+      unchanged marks. This refutes the unconditional P12 auxiliary, not H036 or
+      the accepted restricted lemmas. The independently reviewed fixed-diamond
+      reduction avoids a uniform-clearance premise. Exp122 subsequently refutes
+      H122's small-diamond cover through one independently checked square,
+      0.20seconds combined processwall. Exp123 accepts complete near45
+      localization through four exact continuous guards and the independently
+      reviewed closed-domain reduction, 0.21seconds combined processwall.
+      Session093's sole H124/exp124 fixed-S discriminator returned unresolved
+      no_witness; finite coverage is not independently certified. A stronger
+      continuous common obstacle and generic closed-cover instruments passed
+      independent review. The next slice binds the complete two-band residual
+      cover to independent sources and a bounded caller. No packing bound changes.
+      All four scientific invocations are terminal, without retries.
+      Session094 exp125 subsequently certified the entire diagonal S-band cover;
+      the axis sufficient cover returned no_chain. Two independent mathematical
+      derivations now prove a fixed center-correlated collision region that may
+      strengthen the missing axis cover. Both source bindings passed review, but
+      Session095 exp127's sole augmented-axis producer returned no_chain in0.25
+      seconds and did not authorize a reader. H124 and restricted H036 remain
+      unresolved. The fixed representation's allocation is closed without a retry.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md
@@ -520,11 +542,27 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-119-h-108-near45-a3-forcing.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-120-h-109-near45-a1-a2-forcing.md
     - packing/campaign/hypotheses/H-110-fixed-near-axis-p12-escape.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-121-h-110-fixed-p12-escape.md
+    - packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md
+    - packing/campaign/hypotheses/H-123-near45-coordinate-localization.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-122-diamond-conditional-cover-screen.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-123-near45-localization.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-collision.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-review.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md
     workflows: [insight-iteration, pipeline-improvement, research-loop]
     depends_on: [BC-250]
     next_evidence: >-
-      Check the fixed H110 candidate before funding larger localization or P12
-      certificates; its controls, independent review and target remain unrun.
+      Exp127 is terminal and think-7e72's fixed representation is closed. Preserve
+      the accepted diagonal lemma and unresolved axis obligation. A genuinely
+      changed premise requires future mathematical repricing; no radius sweep,
+      diagonal rerun or general two-angle solver is funded. Session095 owns the
+      current disposition after completing BC259's support-ceiling adoption; this cell
+      does not authorize another H124 test.
+      Sufficient-cover failure does not refute H124 or improve the unrestricted bound.
+      Preserve external BC261/BC273 ownership and do not duplicate their exporters.
       Only mass-derived
       near-tight forcing needs a valid covering measure; geometric conflicts,
       interval no-goods and restricted wall/angle arguments do not inherently need it.

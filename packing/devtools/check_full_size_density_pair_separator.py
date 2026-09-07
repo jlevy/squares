@@ -59,10 +59,26 @@ CONTROLS = (
     "toy-rotated-algebraic-v1",
     "trump-original-control-v1",
     "trump-uniform-control-v1",
+    "trump-perturbed-control-v1",
 )
 
 
 def _source_control_family(source: str) -> PairFamily:
+    if source == "trump-perturbed-control-v1":
+        seeds, side = load_source("trump11-v1")
+        q = side.field.rational
+        if len(seeds) != 11:
+            raise SupportError("perturbed source requires exactly eleven original squares")
+        # Bind the two published adjacent top-row axis squares before translating.
+        left = axis_square(q("1/2"), side - q("1/2"))
+        right = axis_square(q("3/2"), side - q("1/2"))
+        if set(seeds[3]) != set(left) or set(seeds[4]) != set(right):
+            raise SupportError("perturbed source top-row anchors differ from the declaration")
+        moved = tuple((x - q("1/100"), y) for x, y in seeds[4])
+        squares = (*seeds[:4], moved, *seeds[5:])
+        # The overlap is [99/100,1] x [side-1,side], but only independent
+        # strict-interior witness replay may certify excessive a.e. depth.
+        return make_family(squares, side, (Fraction(1),) * len(squares))
     if source == "trump-original-control-v1":
         seeds, side = load_source("trump11-v1")
         return make_family(seeds, side, (Fraction(1),) * len(seeds))
@@ -83,7 +99,11 @@ def _source_control_family(source: str) -> PairFamily:
 
 def control_family(source: str) -> PairFamily:
     """Construct only a named, predeclared source or toy control."""
-    if source in ("trump-original-control-v1", "trump-uniform-control-v1"):
+    if source in (
+        "trump-original-control-v1",
+        "trump-uniform-control-v1",
+        "trump-perturbed-control-v1",
+    ):
         return _source_control_family(source)
     if source not in CONTROLS:
         raise SupportError("unknown pair control; target is not a control")

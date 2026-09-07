@@ -1,12 +1,12 @@
 ---
-title: session-093 — atlas expansion to n = 324 and the poster composite
+title: session-097 — atlas expansion to n = 324 and the poster composite
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
 session:
-  id: session-093
+  id: session-097
   title: Atlas expansion to n = 324 and the poster composite
   date: '2026-09-07'
   started_at: '2026-09-07T07:20:00Z'

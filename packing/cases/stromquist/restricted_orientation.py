@@ -141,8 +141,19 @@ def _strata(values: Sequence[FieldElement]) -> tuple[Stratum, ...]:
 
 def event_cells(side: FieldElement, angle: int, points: Sequence[Point]) -> Iterator[Cell]:
     """Partition the entire contained closed-unit-square center domain exactly."""
-    frame = direction(side, angle)
-    half_extent = sum(frame, side.field.zero) / 2
+    yield from event_cells_for_frame(side, direction(side, angle), points)
+
+
+def event_cells_for_frame(
+    side: FieldElement, frame: Point, points: Sequence[Point]
+) -> Iterator[Cell]:
+    """The same closed/open event strata for an arbitrary exact unit frame."""
+    if any(value.field is not side.field for value in frame):
+        raise ValueError("frame and container require one exact field")
+    cosine, sine = frame
+    if cosine * cosine + sine * sine != 1:
+        raise ValueError("event-cell frame must have exact unit length")
+    half_extent = sum((value if value >= 0 else -value for value in frame), side.field.zero) / 2
     if side < 2 * half_extent:
         raise ValueError("the contained-center domain is empty")
     if any(value.field is not side.field for point in points for value in point):

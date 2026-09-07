@@ -29,7 +29,7 @@ hypothesis:
   instrument: >-
     A fixed rational candidate producer and a source-distinct corner/oriented-edge
     checker with source-free positive, negative and boundary controls. No search.
-  instrument_ready: false
+  instrument_ready: true
   regime: Fixed q, rational half-angle, center formula and source-ordered P12; no alternate candidate or point movement.
   instance: {axis: n, point: 11}
   priority: 1
@@ -120,12 +120,36 @@ negative; include that case in the controls.
 Require complete point inventory, exact identity and actual successful process exits.
 No failure authorizes a second angle, center, point set or invocation.
 
+Session 091 completed independent source-free readiness review on 2026-09-07 at 06:07:43
+UTC. The producer’s thirteen controls and the source-distinct corner reader’s twelve
+controls pass; swapped reviews found no soundness issue.
+The reader rebuilds the center from the alternate formula and checks all sixteen wall
+slacks and all forty-eight point-edge determinants.
+Both processes require separately frozen external whole-process caps.
+No target had run at that checkpoint; readiness alone did not establish this hypothesis.
+
 A verified escape would invalidate the unchanged unconditional near-axis P12 auxiliary
 clause. It would not refute H-036, H-102, H-104, or the accepted H-106/H-108/H-109
 auxiliary results. In particular, generically `x=h<1`, outside the canonical region of
 the A-forcing lemmas.
 Refuting H-036 still requires the separate BC-256 task: a verified packing of eleven
 squares satisfying its angle and side conditions.
+
+## Outcome
+
+[Exp-121](../series/series-000-smoke-and-calibration/experiments/exp-121-h-110-fixed-p12-escape.md)
+accepted H-110 on 2026-09-07. The sole exact producer and source-distinct reader both
+returned actual exit zero.
+The reader reconstructed the fixed square, verified its actual angle and containment,
+and checked forty-eight exact edge determinants proving strict avoidance of every one of
+the twelve marks. Combined process cost was 0.11 seconds wall.
+This is a counterexample to the unchanged unconditional P12 auxiliary, not a
+counterexample to an eleven-square packing theorem.
+
+The next selected direction is the separately reviewed
+[fixed-diamond conditional reduction](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md).
+The present experiment did not test whether its square avoids that diamond; that is a
+different claim and cannot be inferred from avoiding the marked points.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

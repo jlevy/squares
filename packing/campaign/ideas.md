@@ -268,7 +268,10 @@ Row 86 belongs to the pending refined-core transport.
 | 101 | Complete rows on the retained scalar sites | registered | [H-107](hypotheses/H-107-fixed-site-scalar-completion.md) | Fix the terminal exp116 sites and complete missing rows before adapting support; only exact coverage accepts. |
 | 102 | Force A3 for a canonical near-45 avoider | registered | [H-108](hypotheses/H-108-near45-canonical-a3-forcing.md) | A two-point avoidance implication reduces to three moving vertices and 24 exact quartics; failed sufficient assignments remain unresolved. |
 | 103 | Force A1 and transfer the proof to A2 by local reflection | registered | [H-109](hypotheses/H-109-near45-canonical-a1-a2-forcing.md) | The two-point implication is preserved by canonical reflection; one A1 certificate supplies A2 without another target run. |
-| 104 | Check one near-axis escape from the unchanged P12 construction | registered | [H-110](hypotheses/H-110-fixed-near-axis-p12-escape.md) | A generic two-strip gap suggests a frozen rational candidate; exact containment and avoidance of all twelve points remain untested. |
+| 104 | Check one near-axis escape from the unchanged P12 construction | registered | [H-110](hypotheses/H-110-fixed-near-axis-p12-escape.md) | Exp-121 independently verifies the frozen escape; the unchanged unconditional auxiliary is false, without refuting H-036. |
+| 116 | Cover both-band squares outside the forced diamond | registered | [H-122](hypotheses/H-122-diamond-conditional-nine-point-cover.md) | Exp122 refutes this fixed-obstacle cover; full-square compatibility remains open. |
+| 117 | Localize all P10-avoiding near45 squares | registered | [H-123](hypotheses/H-123-near45-coordinate-localization.md) | Exp123 accepts the reviewed two-mark reduction through an independent four-guard certificate. |
+| 118 | Keep the full distinguished square in the conditional nine-point cover | registered | [H-124](hypotheses/H-124-full-distinguished-square-compatibility.md) | A complete compatibility proof would close H036 using H106 and H123; a bounded fixed-S discriminator first tests whether this stronger sufficient route survives. |
 
 Exact basis recovery and Lean replay support the relevant candidate or assurance bead;
 they are not additional mathematical hypotheses without a specific method comparison.

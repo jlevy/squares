@@ -285,10 +285,22 @@ The three Stromquist memoranda were retrieved on **2026-08-24** from the author�
 links the exact archived PDFs as `squares1.pdf`, `squares2.pdf`, and `squares3.pdf`. All
 three PDFs are image-only scans; their raw aids are unedited Tesseract 5.5.0 English OCR
 from 300 dpi Poppler-rendered page images, concatenated in page order with form-feed and
-newline separators. Archive PDFs are marked binary in the repository’s `.gitattributes`;
-this prevents Git from interpreting compressed scan streams as text without changing any
-source bytes. The arXiv and Electronic Journal of Combinatorics items are open access;
-the Stanford technical report and PMC item are publicly posted.
+newline separators. All 47 pages were visually reviewed on **2026-09-07**, and the
+author’s [publication page](https://walterstromquist.com/publications.html) still links
+the three notes under Geometry and Topology.
+The expanded reading aids describe
+[Memo I’s six-square helper argument](papers/stromquist-1984-packing-unit-squares-inside-squares-i-six-unit-squares.md),
+[Memo II’s forced incidences](papers/stromquist-1984-packing-unit-squares-inside-squares-ii-ten-unit-squares.md),
+and
+[Memo III’s historical claims and restricted proof](papers/stromquist-1984-packing-unit-squares-inside-squares-iii-cases-through-65-and-gardner-conjecture.md).
+[Stromquist’s Memos and Helper Arguments](../../docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md)
+records their implications for the research program.
+The review retains source-level formula slips as explicit reading notes and leaves the
+PDFs and raw OCR unchanged.
+Archive PDFs are marked binary in the repository’s `.gitattributes`; this prevents Git
+from interpreting compressed scan streams as text without changing any source bytes.
+The arXiv and Electronic Journal of Combinatorics items are open access; the Stanford
+technical report and PMC item are publicly posted.
 Retained for private research use.
 Consult the original publisher before redistributing.
 
