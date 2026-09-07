@@ -4,6 +4,27 @@ softschema:
   status: enforced
 last_reviewed: '2026-09-07'
 evidence:
+  - id: E-green26-reported-lower
+    claim: lower-bound
+    scope: {n_values: [26, 27]}
+    assurance: reported
+    reported_method: source-unspecified
+    performed_by: source-author
+    novelty: previously-published
+    relationship_to_generator: unknown-historical
+    source_key: '[Friedman DS7]'
+    replay_status: public-certificate-missing
+    limitations: >-
+      Friedman's survey Theorem 9 at k=5 and Table 2 report
+      s(26), s(27) >= 2sqrt(2)+(27+2sqrt(10))/13, approximately 5.3918,
+      attributed to Trevor Green, reference [8], private communication (2000).
+      The survey supplies neither its proof nor the n26 point coordinates.
+      A source statement and its algebraic specialization are not a verified lower bound.
+    blocker:
+      kind: source-evidence
+      detail: Recover Green's proof and its geometric data, or build and independently verify a complete substitute certificate.
+    source_reviewed: '2026-09-07'
+
   - id: E-kingbird-upper-register
     claim: upper-bound
     scope: {n_min: 1, n_max: 100}

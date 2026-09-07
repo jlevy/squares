@@ -314,6 +314,20 @@ The agenda is prepared; none of the new instruments is declared ready.
 | 114 | Close a rank-nine released-contact domain | registered | [H-120](hypotheses/H-120-rank-nine-release-exclusion.md) | Prove a new continuous sublevel exclusion with all feature and local-chart seams retained. |
 | 115 | An axis-plus-one global minimizing representative | registered | [H-121](hypotheses/H-121-axis-plus-one-minimizer.md) | Establish an existential global reduction; restricted-family value proofs remain a separate obligation. |
 
+## Stromquist’s Twenty-Six-Square Construction
+
+Stromquist’s suggestion (private communication, September 2026) prompted the
+[exact source review](../../docs/project/research/research-2026-09-07-stromquist-n26-verification.md).
+His historical packing is valid and superseded by Friedman’s current construction.
+The
+[directions review](../../docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md)
+separates the useful next dependencies from the restricted deformation already excluded.
+
+| # | Idea | Status | Record | Crux |
+| --- | --- | --- | --- | --- |
+| 119 | Change contacts or split the central block in an n26 packing search | shaped | `think-z0fi` | Name which corner separations or rigid-block assumptions are released; replay both exact source constructions as controls before a registered comparison. |
+| 120 | Recover Green’s n26–27 lower-bound proof or reconstruct its point cover | shaped | `think-0x08` | The survey reports approximately 5.3918, but acceptance needs a complete proof or an independently checked all-angle cover. |
+
 ## Open questions
 
 Not claims, so they cannot be hypotheses.
@@ -347,6 +361,13 @@ Registered as `kind: open_question` when worth carrying formally.
 
 Killed without spending a round, with the reason.
 This section is why the campaign does not rediscover its own mistakes.
+
+- **Rotate or translate Friedman’s intact n26 central block while retaining the two
+  specified opposite corner-triplet separations.** The
+  [exact support inequality](../../docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md#a-closed-direction-rigid-central-block-rotation)
+  gives the current side as the minimum of that family, attained at 45 degrees.
+  This excludes only the declared separations and rigid block; idea 119 releases those
+  assumptions.
 
 - **`14 + 20 = 34` proves Trump is isostatic.** The verifier’s twenty is a count of
   boundary corner coordinates.

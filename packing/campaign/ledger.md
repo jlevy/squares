@@ -110,6 +110,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-094](agent-sessions/session-094-complete-cover-and-density-controls.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 8 | think-63oj | Post-checkpoint amendment after Session095's accepted exp128 and independent BC265 design selects BC-264 under think-mq0d for the existing 30-minute H114 feature and kernel-contract pricing slice. No target or new block is activated. BC259 and the fixed collision-cover allocation are terminal; neither receives an unchanged retry. |
 | [session-095](agent-sessions/session-095-collision-cover-and-support-ceiling.md) | completed | contemporaneous | `research-loop` (insight) | `documentation-pass` (correctness) | 5 | think-ro0s | After final record-delta validation and publication, hand off future BC264/think-mq0d's existing30-minute H114 feature and kernel-contract pricing slice. Retain the conditional H101 Omega-avoiding fallback; no new block, target or unchanged retry is activated here. |
 | [session-096](agent-sessions/session-096-stromquist-memos-and-helpers.md) | completed | retrospective | `research-survey` (correctness) | `documentation-pass` (correctness) | 4 | think-7u4s | After the final pre-push check and review publication, preserve BC-264 under think-mq0d as the existing H114 feature and kernel-contract pricing entry. The source brief separately retains the geometric replay dependency; this review activates no new target or unchanged retry. |
+| [session-097](agent-sessions/session-097-stromquist-n26-verification.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 3 | think-zi3g | Integrate the exact memo verification, independently review the restricted-family proof, and preserve the source-reported Green lower-bound gap. |
 
 ### Workflow summary
 
@@ -123,8 +124,8 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
 | `research-loop` | 10 | 4 | 67 | 7 |
-| `pipeline-improvement` | 25 | 0 | 126 | 1 |
-| `documentation-pass` | 1 | 0 | 10 | 1 |
+| `pipeline-improvement` | 26 | 0 | 127 | 1 |
+| `documentation-pass` | 1 | 0 | 12 | 1 |
 | `review-planning-oversight` | 0 | 0 | 2 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 

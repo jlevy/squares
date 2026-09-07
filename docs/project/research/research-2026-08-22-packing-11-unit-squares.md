@@ -1,11 +1,12 @@
 # Research: Packing 11 Unit Squares in a Square
 
-**Date:** 2026-08-22 (last updated 2026-09-06)
+**Date:** 2026-08-22 (last updated 2026-09-07)
 
 **Author:** Claude (agent), for mailto:samanthadrakova@gmail.com
 
-**Status:** The literature report is preserved as of 2026-08-25; the dated project
-summary and addenda record results through the 2026-09-06 refresh
+**Status:** The literature report is preserved as of 2026-08-25, with dated source
+corrections. The project summary records results through the 2026-09-06 refresh; the
+2026-09-07 n26 review corrects the table’s source-reported lower bounds for n26–27.
 
 ## How to read the citations
 
@@ -159,7 +160,8 @@ project has since answered for itself.
 
 ## Historical Report Body (2026-08-25)
 
-The report body below preserves the literature and project state audited on 2026-08-25.
+The report body below preserves the literature and project state audited on 2026-08-25,
+except for explicitly dated source corrections.
 In particular, its `[3.788854, 3.877084]` intervals and `0.088230` gaps are historical,
 not the current project frontier.
 See the [current summary](#current-summary-through-2026-09-06) for the post-report
@@ -834,8 +836,13 @@ enumeration rather than a mathematical subtlety.
 
 ### The open frontier: what is actually unknown
 
-This section preserves the 2026-08-25 frontier snapshot; the generated table below is
-historical rather than a current inventory.
+This section preserves the 2026-08-25 frontier snapshot, with a source correction on
+2026-09-07: the n26–27 rows now include Green’s stronger lower bound as reported by
+Friedman’s survey, Theorem 9 and Table 2. Its proof remains unrecovered; the
+[verification review](research-2026-09-07-stromquist-n26-verification.md) distinguishes
+that report from the independently verified bounds.
+The table remains a historical inventory with source corrections, rather than the
+current project frontier.
 
 The solved cases above are the exceptions.
 This table is the complement — **every open `n ≤ 100`** — and it is the spine of any
@@ -846,11 +853,13 @@ Upper bounds are the best known packings from **[Kingbird]**; `grid` in the *how
 marks an `n` the catalogue does not picture, where the trivial `⌈√n⌉` packing is still
 the best known. `deg` is the algebraic degree of the conjectured optimum where the
 catalogue records a minimal polynomial.
-Lower bounds are the strongest of four sources: the area bound `√n`, Nagamochi’s general
+The original lower bounds used four sources: the area bound `√n`, Nagamochi’s general
 closed form, monotonicity from the largest proved `m ≤ n`, and the value stated in
 Stromquist’s Theorem 2 for `n ≥ 11`. Exp-017 now supplies an exact source-distinct
 certificate for the last value; D-152 still requires every provenance display to say
 that the published Figure 14 proof is false as printed.
+The n26–27 correction additionally uses Green’s reported bound, cited by Friedman as
+private communication in 2000.
 
 This table and the solved-case table below are **generated** from
 [`packing/frontier/`](../../../packing/frontier/README.md), where the same facts live as
@@ -872,8 +881,8 @@ Use the structured form to query or plot; use these tables to read.
 | 19 | `3 + (4/3)√2` = 4.88561808 | hand | — | 4.464102 | Nagamochi | 0.4215 |
 | 20 | 5 | grid | — | 4.605551 | Nagamochi | 0.3944 |
 | 21 | 5 | grid | — | 4.741657 | Nagamochi | 0.2583 |
-| 26 | `(7/2) + (3/2)√2` = 5.62132034 | extension | — | 5.123106 | Nagamochi | 0.4982 |
-| 27 | `5 + (1/2)√2` = 5.70710678 | strip | — | 5.242641 | Nagamochi | 0.4645 |
+| 26 | `(7/2) + (3/2)√2` = 5.62132034 | extension | — | 5.3918 | unavoidable points | 0.2295 |
+| 27 | `5 + (1/2)√2` = 5.70710678 | strip | — | 5.3918 | unavoidable points | 0.3153 |
 | 28 | 5.82444462 | annealing | 6 | 5.358899 | Nagamochi | 0.4655 |
 | 29 | 5.93383346 | annealing | — | 5.472136 | Nagamochi | 0.4617 |
 | 30 | 6 | grid | — | 5.582576 | Nagamochi | 0.4174 |

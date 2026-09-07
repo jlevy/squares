@@ -1411,6 +1411,9 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
             / "nagamochi-2005-packing-unit-squares-in-a-rectangle.pdf"
         ),
         "TUTORIAL_URL": repo_file(REPO / "TUTORIAL.md"),
+        "STROMQUIST_N26_REVIEW_URL": repo_file(
+            REPO / "docs/project/research/research-2026-09-07-stromquist-n26-verification.md"
+        ),
         "WORKFLOWS_URL": repo_file(REPO / "SYNOPSIS.md") + "#workflow-entry-contracts",
         "PRINCIPLES_URL": repo_file(REPO / "README.md") + "#operating-principles",
         "EPISTEMICS_URL": repo_file(REPO / "epistemics.md"),

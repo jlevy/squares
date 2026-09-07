@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 480
+count: 481
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -15753,3 +15753,29 @@ defects:
     marker. The existing mixed-math and next-line control remains active.
   bead: think-vzld
   recorded_in: packing/devtools/check_print_layout.py
+- id: D-481
+  title: The n26–27 source fields omitted Green's stronger reported lower bound
+  date: '2026-09-07'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: until the Stromquist n26 comparison prompted a fresh DS7 source audit
+  severity: medium
+  status: fixed
+  what: >-
+    The n26 and n27 reported_lower_bound fields repeated the independently verified
+    Nagamochi fallback while the archived Friedman survey already reported Green's
+    stronger 2sqrt(2)+(27+2sqrt(10))/13. Their prose also asserted that nothing
+    specific had ever been proved, without evidence for that absence claim.
+  consequence: >-
+    The frontier hid a source-reported lead and overstated the completeness of its
+    lower-bound history. Its verified numerical bounds were unaffected.
+  fix: >-
+    Preserve the Green report in its own reported-only evidence item and the n26–27
+    source fields, retain the Nagamochi verified fields, and name the missing proof
+    and point coordinates as a recovery blocker. Track the remaining DS7-table audit
+    separately under think-4g6w and proof recovery under think-0x08.
+  regression: none
+  bead: think-zi3g
+  recorded_in: docs/project/research/research-2026-09-07-stromquist-n26-verification.md

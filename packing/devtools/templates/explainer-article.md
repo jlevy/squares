@@ -613,6 +613,12 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
 
 <!--END:CLAIM-->
 
+## Acknowledgments
+
+We thank Walter Stromquist for drawing attention to his twenty-six-square construction
+in Memo III (private communication, September 2026). His suggestion prompted a
+[source review and independent exact verification]({{STROMQUIST_N26_REVIEW_URL}}).
+
 ## Further Reading
 
 - **Papers and sources**
