@@ -211,6 +211,7 @@ case or experiment separately.
 | [Reuse Bridge Row Inventory](packing/benchmarks/validation-efficiency/experiments/VE-002-bridge.md) | research synthesis | record | retained | — |
 | [Validation Efficiency Campaign](packing/benchmarks/validation-efficiency/README.md) | component scope and use | supporting | maintained | — |
 | [Validation Efficiency Results](packing/benchmarks/validation-efficiency/report.md) | generated status view | generated | generated | — |
+| [Gate Cost at the Widened Corpus](packing/benchmarks/gate-cost-at-324/README.md) | research synthesis | record | retained | — |
 | [Exhaustive Checkpoint Exploration](docs/project/reviews/review-2026-09-06-validation-exhaustive-cost.md) | dated review record | record | retained | — |
 | [Slow-lane and mutation-control inspection](docs/project/reviews/review-2026-09-06-validation-slow-and-controls-cost.md) | dated review record | record | retained | — |
 | [Proposal: Testing and CI Performance Guidance](docs/project/reviews/review-2026-09-06-tbd-testing-and-ci-performance-proposal.md) | dated review record | record | retained | — |

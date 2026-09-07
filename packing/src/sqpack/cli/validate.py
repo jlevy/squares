@@ -41,9 +41,12 @@ from typing import Literal, Never, TextIO, override
 
 from sqpack import gate_budgets
 from sqpack.known_best import (
+    ATLAS_SAMPLE_STRIDE,
     CALIBRATION_CORPUS,
     KNOWN_BEST_COMPOSITES,
     KNOWN_BEST_CORPUS,
+    SCREEN_SAMPLE_STRIDE,
+    sampled_numbers,
 )
 from sqpack.project import (
     ProjectLayoutError,
@@ -77,6 +80,14 @@ SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..324": (114, 2714, 296, 5323),
 }
 UNDETERMINED_BY_MISS = (28,)
+#: The cases the two sampled sweeps re-derive on every pull request, computed here from
+#: the same constant the tools compute it from rather than re-typed. `sqpack.cli.validate`
+#: may not import `devtools`, so this is the shared definition both sides reach: a stride
+#: written down in one tool and asserted in the gate would be two numbers that agree by
+#: habit. The two strides and `sampled_numbers` live in `sqpack.known_best` for that
+#: reason, and the counts below reach the output lines the two steps match on.
+SAMPLED_ATLAS_CASES = sampled_numbers(KNOWN_BEST_CORPUS, ATLAS_SAMPLE_STRIDE)
+SAMPLED_SCREEN_RECORDS = sampled_numbers(KNOWN_BEST_CORPUS, SCREEN_SAMPLE_STRIDE)
 
 PROJECT_ROOT = configured_project_root()
 REPOSITORY_ROOT = PROJECT_ROOT.parent
@@ -408,11 +419,22 @@ class Step:
     four-cpu runner (run 34010470187) they cost 313.95s of step time: the
     translation-escape screen at 110.66s, the known-best chunk census at 90.38s, the
     known-best atlas at 75.88s, and the prospective seed at 37.03s. They are also one
-    kind of work -- each rebuilds the retained atlas from the hundred-odd witnesses and
+    kind of work -- each rebuilds the retained atlas from the witnesses under it and
     compares it byte for byte -- which is why the split is stable: a step joins this set
     by being measured into it, and
     `test_the_pull_request_runs_its_sweeps_and_its_suite_apart` is where the number has
     to be typed.
+
+    Two of those four names changed on 2026-09-07 without the rule changing. The corpus
+    widened to `n=1..324` and the two re-derivations that grew with it -- 766.26s for the
+    screen and 691.19s for the atlas rebuild, measured at this job's own shape -- moved to
+    the deferred surface, leaving `known-best atlas records and sample` and `translation
+    escape screen records and sample` here in their place. Each is a whole record check
+    plus a fixed sampled slice of the geometry, and the two strides were set against this
+    job's floor -- `known-best chunk census`, which `D4` pins so it cannot grow. Measured
+    whole afterwards on the same box: 58.48s of tier wall, 28 per cent of the ceiling,
+    over 58.48s for the atlas sample, 44.65s for the screen sample, 42.11s for the census
+    and 0.15s for the retired prospective seed.
 
     Why its own runner rather than a wider one, and this is the whole arithmetic. Four
     units on four cpus saturates the outer pool, so this job's wall is its longest unit's
@@ -420,9 +442,12 @@ class Step:
     rest of the tier. That 110.66s was also the floor under the whole pull-request
     surface, and the lever on it was that step's own cost rather than another job.
 
-    `--inner-jobs 2` sets `PACK_JOBS` for the translation-escape screen. The chunk
-    census and prospective seed expose explicit worker counts but default to serial;
-    the gate does not pass those counts. The known-best atlas also runs serially.
+    `--inner-jobs 2` sets `PACK_JOBS` for the translation-escape screen and, since
+    2026-09-07, for the known-best atlas builder as well: it was given the same pool the
+    screen already had, and on an idle ten-cpu box its whole check went 691.19s serial to
+    184.34s at four workers, over 688.74s of cpu against the 691.19s the serial run spent.
+    The chunk census and prospective seed expose explicit worker counts but default to
+    serial; the gate does not pass those counts.
     Historical pool experiments do not establish the cause of the observed tier
     timings; D-472 tracks the remaining performance attribution work."""
 
@@ -1421,25 +1446,32 @@ def _svg_rendering(context: Context) -> str:
 
 
 def _known_best_atlas(context: Context) -> str:
-    """The known-best atlas without the chunk census, which is its own step.
+    """The atlas's record layer, plus a sampled rebuild standing in for the whole one.
 
     `_commands` runs its list in one process after another, so a step is only as
     schedulable as its longest member and the gate's `--jobs` pool cannot see inside it.
-    Measured one subcommand at a time on a four-cpu box at `PACK_JOBS=1`, this step's
-    nine members were 133.22s, of which `census_known_best_chunks` alone was 94.85s and
-    `build_known_best_atlas` 27.28s; the other seven were 11.09s between them. Against
-    the 254.92s the whole step cost on CI that is about 181s in one member, so a step
-    declared as one unit put a three-minute serial block in the middle of a tier trying
-    to finish in three minutes.
+    That argument split the chunk census out of this step on 2026-09-06, and it split the
+    whole rebuild out on 2026-09-07 at a seam the same measurement found. At `n=1..324`,
+    on an idle ten-cpu box at this job's own `--jobs 4 --inner-jobs 2`, the step was
+    703.28s of which `build_known_best_atlas --check` was 691.19s -- 98.3 per cent -- and
+    the other seven subcommands were 12.09s between them. Five of those seven are pinned
+    at `CALIBRATION_CORPUS` by `D4` and cannot grow with the corpus at all.
 
-    Splitting at that seam is the only division the measurement supports, and it is
-    two steps rather than nine for the same reason: the other seven are noise, and a
-    step per subcommand would be seven more names in the register for no wall.
+    So the seven stay here and the rebuild leaves, and what replaces it is `--sample`
+    rather than nothing: the whole record layer re-derived, and a fixed recorded slice of
+    the cases rebuilt byte for byte. `known-best n=1..324 atlas rebuild` on the deferred
+    surface is the rest, and `benchmarks/gate-cost-at-324/` retains the readings.
     """
     output = _commands(
         context,
         (
-            (sys.executable, "-m", "devtools.build_known_best_atlas", "--check"),
+            (
+                sys.executable,
+                "-m",
+                "devtools.build_known_best_atlas",
+                "--check",
+                "--sample",
+            ),
             (sys.executable, "-m", "devtools.build_composite_figure_data", "--check"),
             (sys.executable, "-m", "devtools.render_composite_pdf", "--check"),
             (
@@ -1471,9 +1503,11 @@ def _known_best_atlas(context: Context) -> str:
     )
     _require_text(
         output,
-        f"known-best atlas check passed: {KNOWN_BEST_CORPUS.count} sources/plans, "
-        f"witnesses, renders, {len(KNOWN_BEST_COMPOSITES)} composite"
-        f"{'' if len(KNOWN_BEST_COMPOSITES) == 1 else 's'}, and links",
+        f"known-best atlas sample check passed: {len(SAMPLED_ATLAS_CASES)} of "
+        f"{KNOWN_BEST_CORPUS.count} cases rebuilt (every {ATLAS_SAMPLE_STRIDE}th from "
+        f"n={KNOWN_BEST_CORPUS.first_n}), {KNOWN_BEST_CORPUS.count} manifest entries, "
+        f"sources, links, and {len(KNOWN_BEST_COMPOSITES)} composite"
+        f"{'' if len(KNOWN_BEST_COMPOSITES) == 1 else 's'}",
         # Five strata and thirty-six non-grid cases are calibration facts, not corpus
         # facts: `D4` pins both layers at CALIBRATION_CORPUS, so neither moves when the
         # atlas widens. They stay literal because the numbers are findings about the
@@ -1483,6 +1517,26 @@ def _known_best_atlas(context: Context) -> str:
         "contact enumeration pricing check passed",
         "contact full-cell control check passed",
         "contact structures check passed",
+    )
+    return output
+
+
+def _known_best_atlas_rebuild(context: Context) -> str:
+    """The whole atlas, re-derived from its sources and compared byte for byte.
+
+    Deferred rather than dropped, and the measurement is on
+    `test_the_pull_request_surface_defers_only_what_was_measured`: 691.19s at `n=1..324`
+    against a 210s ceiling on the job that used to carry it. What a pull request runs
+    instead is `known-best atlas records and sample`, which is the complement of this
+    step and not a sample of it -- every record comparison, and a recorded slice of the
+    per-case geometry this one re-derives whole.
+    """
+    output = _module(context, "devtools.build_known_best_atlas", "--check")
+    _require_text(
+        output,
+        f"known-best atlas check passed: {KNOWN_BEST_CORPUS.count} sources/plans, "
+        f"witnesses, renders, {len(KNOWN_BEST_COMPOSITES)} composite"
+        f"{'' if len(KNOWN_BEST_COMPOSITES) == 1 else 's'}, and links",
     )
     return output
 
@@ -1595,21 +1649,54 @@ def _translation_escape_screen(context: Context) -> str:
     A miss is not rigidity, so nothing here may be restated as one.
     """
     output = _module(context, "devtools.screen_translation_escape", "--check")
-    # The screened count is a corpus fact and scales: the whole of KNOWN_BEST_CORPUS less
-    # the records the shape-residual limit throws out. The four findings after it are not
-    # counts of anything and stay pinned as tripwires -- think-93on re-argues them, and
-    # the exclusion list with them, when the corpus grows.
+    _require_text(output, f"translation escape screen check passed: {_screen_findings()}")
+    return output
+
+
+def _screen_findings() -> str:
+    """The screen's corpus findings, as the tool prints them.
+
+    The screened count is a corpus fact and scales: the whole of KNOWN_BEST_CORPUS less
+    the records the shape-residual limit throws out. The four findings after it are not
+    counts of anything and stay pinned as tripwires -- think-93on re-argues them, and the
+    exclusion list with them, when the corpus grows. Shared by the whole screen and its
+    sampled stand-in, because the findings are read out of the retained document either
+    way and a second copy of this string is a second thing to forget to update.
+    """
     excluded = SCREEN_EXCLUDED[KNOWN_BEST_CORPUS.label]
     separating, separating_squares, translating, translating_squares = SCREEN_FINDINGS[
         KNOWN_BEST_CORPUS.label
     ]
     screened = KNOWN_BEST_CORPUS.count - len(excluded)
-    _require_text(
-        output,
-        f"translation escape screen check passed: {screened} records screened, "
+    return (
+        f"{screened} records screened, "
         f"{separating} with a square that separates ({separating_squares} squares), "
         f"{translating} with a square that translates at all ({translating_squares} squares), "
-        f"excluded: {', '.join(excluded)}",
+        f"excluded: {', '.join(excluded)}"
+    )
+
+
+def _translation_escape_sample(context: Context) -> str:
+    """The retained screen rebuilt from its own records, plus a replayed sample.
+
+    Deferring the whole re-screen is argued on
+    `test_the_pull_request_surface_defers_only_what_was_measured`: 766.26s at `n=1..324`
+    against a 210s ceiling, and within 134s of the gate's own per-step subprocess timeout
+    on a box faster than CI's. What stays here is everything that is not per-record
+    geometry -- the aggregate against its own cases, the method block, the schema, the
+    per-certificate claims -- and a fixed recorded slice of the records replayed in full.
+
+    The corpus findings stay on the pull-request surface with it. They are read out of
+    the retained document, which this step rebuilds from its own records, so a screen
+    edited to a different answer fails here rather than waiting for the deep gate.
+    """
+    output = _module(context, "devtools.screen_translation_escape", "--check", "--sample")
+    _require_text(
+        output,
+        f"translation escape screen sample check passed: {len(SAMPLED_SCREEN_RECORDS)} of "
+        f"{KNOWN_BEST_CORPUS.count} records replayed (every {SCREEN_SAMPLE_STRIDE}th "
+        f"from n={KNOWN_BEST_CORPUS.first_n})",
+        f"retained screen: {_screen_findings()}",
     )
     return output
 
@@ -2576,11 +2663,30 @@ STEPS: tuple[Step, ...] = (
     # second runner, concurrently with everything else. What that is worth, and why it is
     # a second runner and not a wider one, is argued on `Step.sweep`.
     Step(
-        "known-best n=1..100 atlas",
+        "known-best atlas records and sample",
         _known_best_atlas,
         fast=True,
         broad=True,
         sweep=True,
+        touches=(
+            *_CORE,
+            *_CASES,
+            "packing/devtools/*",
+            "packing/atlas/*",
+            "packing/witnesses/*",
+            "packing/frontier/*",
+            "packing/resources/*",
+        ),
+    ),
+    # The whole rebuild, off the pull-request surface since 2026-09-07 and on its own
+    # measurement: 691.19s at `n=1..324` of the 703.28s step above, against that job's
+    # 210s ceiling. It keeps the parent's `touches` for the reason the census split did
+    # -- the two halves read overlapping corners of the same corpus, and the conservative
+    # move on a split is to give both halves the parent's set and narrow later with a
+    # measurement.
+    Step(
+        "known-best n=1..324 atlas rebuild",
+        _known_best_atlas_rebuild,
         touches=(
             *_CORE,
             *_CASES,
@@ -2643,11 +2749,24 @@ STEPS: tuple[Step, ...] = (
         ),
     ),
     Step(
-        "single-square translation escape screen",
-        _translation_escape_screen,
+        "translation escape screen records and sample",
+        _translation_escape_sample,
         fast=True,
         broad=True,
         sweep=True,
+        touches=(
+            *_CORE,
+            "packing/atlas/known-best/*",
+            "packing/witnesses/*",
+            "packing/devtools/screen_translation_escape.py",
+        ),
+    ),
+    # The whole re-screen, off the pull-request surface since 2026-09-07 and on its own
+    # measurement: 766.26s at `n=1..324` against that job's 210s ceiling, and within 134s
+    # of this gate's own per-step subprocess timeout on a box faster than CI's.
+    Step(
+        "single-square translation escape screen",
+        _translation_escape_screen,
         touches=(
             *_CORE,
             "packing/atlas/known-best/*",

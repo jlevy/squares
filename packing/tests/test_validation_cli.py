@@ -1713,6 +1713,45 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
     checks job, the suite job, the sweeps job)` rather than one job's queue -- has moved.
     There is a fourth, and this is that argument.
 
+    **A fifth and a sixth arrived on 2026-09-07, and what moved was the corpus rather
+    than the gate.** The known-best atlas went from `n=1..100` to `n=1..324` -- 324 cases
+    and 52,650 squares against 100 and 5,050 -- and two sweeps grew with it. Measured on
+    an idle ten-cpu box at the sweeps job's own shape (`--jobs 4 --inner-jobs 2`), on
+    commit `2841eec9`, with every reading retained under
+    `benchmarks/gate-cost-at-324/runs/`:
+
+    - `single-square translation escape screen` at **766.26s**, against 110.66s at
+      `n=1..100`. It is already pooled and the pool is already sized by the tier's
+      `--inner-jobs`, so this is what the lever buys, not what it costs unpulled. It is
+      also within 134s of the gate's own 900s per-step subprocess timeout on a box faster
+      than CI's, which is a step that has stopped fitting rather than one that is merely
+      dear.
+    - `known-best n=1..324 atlas rebuild` at **691.19s** of that step's 703.28s, against
+      75.88s for the whole step at `n=1..100`. The seam is measured, not guessed: the
+      seven other subcommands in the step cost 12.09s between them, and five of them are
+      pinned at `CALIBRATION_CORPUS` by `D4` and cannot grow with the corpus at all.
+
+    Both were made faster before either was deferred, which is the order `OR-13` asks
+    for. `build_known_best_atlas` was given the process pool `screen_translation_escape`
+    already had: 691.19s serial, 348.15s at two workers, 184.34s at four, over 677.66s
+    and 688.74s of cpu against the serial run's 691.19s -- the pool divides the work
+    rather than adding any, and `--check` passes at every count, which is what makes the
+    parallel build byte-identical rather than merely quick. 184.34s is still most of the
+    sweeps job's 210s ceiling on a box faster than the runner, so the speedup changes
+    where the deferral lands rather than whether it is needed. It does decide the deep
+    gate's shape: at that job's `--inner-jobs 2` the rebuild is 348.15s here, comfortably
+    inside both the slow lane's 890s and the gate's own 900s per-step timeout.
+
+    Neither is deferred without a stand-in, which is the difference between this and
+    dropping a check. `known-best atlas records and sample` and `translation escape
+    screen records and sample` are new steps on the sweeps job, and each re-derives the
+    whole of its record layer -- the manifest but for its entries, the source index and
+    every upstream digest, every frontier link, every composite receipt; the screen's
+    aggregate, method block, schema and per-certificate claims -- and then rebuilds a
+    fixed, recorded sample of the cases in full. So the drift `D-369` counts still fails
+    a pull request in the minute it is introduced, and only per-case geometry waits for
+    the deep gate.
+
     Nothing was deferred on 2026-09-06, and that is the point of recording it here. The
     tier had reached 501.97s and the obvious 468.11s of it to drop were the two atlas
     sweeps main had just promoted; the measurement refused that too. Those two are the
@@ -1722,7 +1761,10 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
     with the cheapest half of the evidence. The cost was bought from concurrency instead:
     a second runner, and then a third for the behavioural lane, both argued in
     `test_the_pull_request_runs_its_sweeps_and_its_suite_apart`, which changes when a
-    check runs but not whether. This set has held at four across both changes.
+    check runs but not whether. This set held at four across both changes, and what took
+    it to six a day later was not a decision to carry less but a corpus that tripled: the
+    same refusal applies to the record layer of both, which is why the record layer stayed
+    and only the per-case re-derivation left.
 
     `slow behavioral tests` is `BC-214`. It is not a step that was never decided: it is
     the half of the behavioural suite that carries the wall, split out by measurement
@@ -1754,6 +1796,8 @@ def test_the_pull_request_surface_defers_only_what_was_measured() -> None:
         "negative controls",
         "n=40 rigidity bracket still reproduces",
         "slow behavioral tests",
+        "known-best n=1..324 atlas rebuild",
+        "single-square translation escape screen",
     }
     # And the same four are what `--fast` leaves out, so the flag and the workflow cannot
     # drift apart: a step marked `fast` that no pull-request job invokes is deferred in
@@ -1774,21 +1818,33 @@ def test_the_pull_request_runs_its_sweeps_and_its_suite_apart() -> None:
     --inner-jobs 1` at 221.70s of wall over 58 steps, and `--sweeps --jobs 4
     --inner-jobs 1` at 110.66s over four.
 
-    The sweeps, 313.95s of step time between them:
+    The sweeps were 313.95s of step time between them while the corpus was a hundred
+    cases: the escape screen 110.66s, the chunk census 90.38s, `known-best n=1..100
+    atlas` 75.88s, the prospective seed 37.03s.
 
-    - `single-square translation escape screen`, 110.66s. The longest single unit
-      anywhere on the pull-request surface, this job's wall, and therefore the floor
-      under the whole surface.
-    - `known-best chunk census`, 90.38s.
-    - `known-best n=1..100 atlas`, 75.88s -- the eight subcommands left after the census
-      was split out of it.
-    - `prospective n=101..324 safe seed`, 37.03s.
+    Two of those four names are gone, and the corpus is why rather than the gate. At
+    `n=1..324` the screen is 766.26s and the atlas step 703.28s on an idle ten-cpu box at
+    this job's own shape, against a 210s ceiling, and
+    `test_the_pull_request_surface_defers_only_what_was_measured` carries both readings
+    and the argument for moving the per-case re-derivation to the deep gate. What runs
+    here now:
 
-    They are one kind of work: each re-derives a retained atlas from the hundred-odd
-    witnesses under it and compares it byte for byte. That matters more than the ranking,
-    because a rule keyed on kind survives a step getting faster, and a rule keyed on
-    today's top four does not -- as this list has already shown, the prospective seed
-    having gone from the longest of the four to the shortest.
+    - `known-best chunk census`, unchanged. `D4` pins it at `CALIBRATION_CORPUS`, so a
+      widening corpus does not reach it, and three readings on 2026-09-07 agreed to
+      within 0.07s at 40.03s.
+    - `known-best atlas records and sample`, the 12.09s of subcommands that did not grow
+      with the corpus plus a sampled rebuild in place of the 691.19s whole one.
+    - `translation escape screen records and sample`, the retained screen rebuilt from
+      its own records plus a sampled replay.
+    - `prospective n=101..324 safe seed`, now about 0.07s. Where a step runs is not what
+      makes it cheap, so a step that has become free is left where it is rather than
+      moved for tidiness.
+
+    They are one kind of work: each re-derives a retained atlas from the witnesses under
+    it and compares it byte for byte. That matters more than the ranking, because a rule
+    keyed on kind survives a step getting faster, and a rule keyed on today's top four
+    does not -- as this list has already shown, the prospective seed having gone from the
+    longest of the four to the shortest and then to nothing at all.
 
     The suite is one step and its rule is arithmetic rather than kind:
 
@@ -1840,8 +1896,8 @@ def test_the_pull_request_runs_its_sweeps_and_its_suite_apart() -> None:
     assert {step.name for step in validate.STEPS if step.sweep} == {
         "prospective n=101..324 safe seed",
         "known-best chunk census",
-        "single-square translation escape screen",
-        "known-best n=1..100 atlas",
+        "translation escape screen records and sample",
+        "known-best atlas records and sample",
     }
     assert {step.name for step in validate.STEPS if step.suite} == {
         "fast behavioral tests",
@@ -2112,10 +2168,10 @@ def test_broad_is_opt_out_so_a_new_step_joins_the_edit_tier() -> None:
         # locally, at `PACK_JOBS=1` and one subcommand at a time, the census was 94.85s of
         # the undivided known-best step's 133.22s and the seed 88.37s of the prospective
         # step's 88.76s.
-        "known-best n=1..100 atlas",  # 148.50s undivided, about 43s without the census
-        "known-best chunk census",  # about 106s of that 148.50s
+        "known-best atlas records and sample",  # 12.09s of records plus a sampled rebuild
+        "known-best chunk census",  # 40.03s, pinned at CALIBRATION_CORPUS by D4
         "prospective n=101..324 safe seed",  # 102.10s of the 102.56s
-        "single-square translation escape screen",  # 73.07s
+        "translation escape screen records and sample",  # the retained screen, plus a replay
         "historical regressions",  # 29.35s
         "deterministic SVG rendering",  # 26.39s
         "D-034's n=5 identity pair still reproduces",  # 23.54s

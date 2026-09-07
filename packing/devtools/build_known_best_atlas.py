@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Acquire, normalize, validate, and render the known-best atlas and its composites."""
+"""Acquire, normalize, validate, and render the known-best atlas and its composites.
+
+Usage:
+    uv run --frozen python -m devtools.build_known_best_atlas --update
+    uv run --frozen python -m devtools.build_known_best_atlas --check
+    uv run --frozen python -m devtools.build_known_best_atlas --check --jobs 4
+    uv run --frozen python -m devtools.build_known_best_atlas --check --sample
+"""
 
 from __future__ import annotations
 
@@ -13,6 +20,7 @@ import urllib.error
 import urllib.request
 import zlib
 from collections.abc import Sequence
+from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
 from decimal import ROUND_HALF_EVEN, Decimal
 from fractions import Fraction
@@ -27,6 +35,7 @@ from strif import atomic_output_file
 from devtools import build_composite_figure_data, render_composite_pdf
 from devtools.build_composite_figure_data import load_record as load_figure_record
 from sqpack.known_best import (
+    ATLAS_SAMPLE_STRIDE,
     KINGBIRD_ATTRIBUTION,
     KINGBIRD_BASE_URL,
     KINGBIRD_LICENSE_STATUS,
@@ -42,6 +51,7 @@ from sqpack.known_best import (
     kingbird_derived_witness,
     parse_unitsquare_svg,
     rational_integer,
+    sampled_numbers,
     unitsquare_witness,
 )
 from sqpack.release import PUBLICATION_DATE, PUBLICATION_EDITION
@@ -83,6 +93,7 @@ from sqpack.witness import (
     materialize_witness,
     witness_document,
 )
+from sqpack.workers import worker_count
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -1829,6 +1840,47 @@ def _build_case(n: int, plan: SourcePlan) -> BuiltCase:
     return BuiltCase(case, plan, witness, witness_text, _render(witness))
 
 
+def _build_case_unit(unit: tuple[int, SourcePlan]) -> BuiltCase:
+    """One case, addressed by value, so `pool.map` can carry the work to a worker.
+
+    `_build_case` takes two arguments and `pool.map` passes one; a lambda or a `partial`
+    over a memoized function is not picklable, and a named module-level adapter is.
+    """
+    return _build_case(*unit)
+
+
+def built_cases(numbers: Sequence[int], workers: int) -> list[BuiltCase]:
+    """Every named case, built in the order given, serially or through a process pool.
+
+    The per-case work is embarrassingly parallel and it is nearly all of this module's
+    cost: each case reads its own source, normalizes one witness, checks that witness's
+    semantics and renders one house SVG, and no case reads another's output. Measured on
+    2026-09-07 at `n=1..324`, `build_known_best_atlas --check` was 691.19s of the 703.28s
+    validation step that carries it and of which the other seven subcommands were 12.09s,
+    so this loop is the step. The corpus divides well, too: 52,650 squares over 324 units
+    whose largest is one 324-square rendering, so no single unit can hold the wall up.
+
+    `workers` is the pool size, and `1` runs in this process rather than through a pool,
+    because a one-worker pool is a subprocess and a protocol for no concurrency at all.
+    Who chooses the count matters more than the count: the CLI asks
+    `sqpack.workers.worker_count`, which reads the `PACK_JOBS` cap the gate exports to
+    every step -- the same contract `screen_translation_escape`, `check_golden_basins`
+    and `check_soundness_perimeter` use -- while every in-process caller takes the serial
+    default, which is what `expected_outputs` exists to keep.
+
+    Order is the corpus's, whichever way it ran. `pool.map` yields by submission index
+    rather than by completion, so the outputs are built in the order the serial loop
+    built them in, which is what lets `check` compare them byte for byte.
+    """
+    plans = source_plans()
+    units = [(n, plans[n]) for n in numbers]
+    count = max(1, min(workers, len(units)))
+    if count == 1:
+        return [_build_case(n, plan) for n, plan in units]
+    with ProcessPoolExecutor(max_workers=count) as pool:
+        return list(pool.map(_build_case_unit, units))
+
+
 def _frontier_with_witness(case: FrontierCase, witness_id: str) -> str:
     prefix, frontmatter, body = case.text.split("---\n", 2)
     del prefix
@@ -1904,13 +1956,58 @@ def _manifest_entry(built: BuiltCase) -> dict:
     }
 
 
-def expected_outputs() -> tuple[dict[Path, str], dict]:
+def expected_outputs(workers: int = 1) -> tuple[dict[Path, str], dict]:
     """Every derived artifact, and the manifest describing them.
 
     Callers get copies so the memo cannot be mutated underneath them.
+
+    `workers` defaults to 1 rather than to the shared worker policy, and that is the
+    safety property rather than a missing wire-up. A pool worker is a fresh process that
+    re-imports this module, so it does not see a module-level source root a caller has
+    repointed -- which is exactly what
+    `test_known_best_rejects_corrupted_retained_unitsquare_svg` does when it points
+    `UNITSQUARE_ROOT` at a corrupted copy and expects the digest check to refuse it. Every
+    in-process caller therefore gets the serial build, and only `main` resolves a count
+    from `PACK_JOBS`.
     """
-    outputs, manifest = _expected_outputs()
+    outputs, manifest = _expected_outputs(workers)
     return dict(outputs), copy.deepcopy(manifest)
+
+
+def _manifest_document(entries: list[dict], composites: list[dict]) -> dict:
+    """The manifest, given the per-case entries and the composite records.
+
+    Factored out of `_expected_outputs` so a sampled check can re-derive everything a
+    manifest says about itself -- its contract, its declared range, its policy, its
+    generator and its composites -- from the retained entries, without rebuilding the 324
+    cases those entries describe.
+    """
+    return {
+        "softschema": {
+            "contract": "packing.squares:KnownBestAtlas/v1",
+            "schema": "known-best-atlas.schema.yaml",
+            "envelope": "atlas",
+            "status": "enforced",
+        },
+        "atlas": {
+            "range": range_record(CORPUS),
+            "generated_by": GENERATOR,
+            "policy": {
+                "source_layer": (
+                    "exact canonical grids, retained Kingbird derived numerical facts, "
+                    "or immutable UnitSquare renderings"
+                ),
+                "witness_layer": "lossless where possible; limitations explicit otherwise",
+                "rendering_layer": "repository deterministic house renderer",
+                "annotation_layer": "derived and excluded from grammar validation until frozen",
+            },
+            # A list rather than a single record: the corpus publishes one composite
+            # today and the geometry of a second is a second specification, so the shape
+            # that describes them does not change when one is added.
+            "composites": composites,
+            "entries": entries,
+        },
+    }
 
 
 def range_record(cases: CorpusRange) -> dict:
@@ -1963,10 +2060,10 @@ def _composite_record(canvas: CompositeCanvas) -> dict:
 
 
 @cache
-def _expected_outputs() -> tuple[dict[Path, str], dict]:
+def _expected_outputs(workers: int) -> tuple[dict[Path, str], dict]:
     plans = source_plans()
     source_index = _source_index(plans)
-    built = [_build_case(n, plans[n]) for n in CORPUS.numbers]
+    built = built_cases(CORPUS.numbers, workers)
     outputs: dict[Path, str] = {SOURCE_MANIFEST: _json_text(source_index)}
     for item in built:
         n = item.frontier.n
@@ -1978,43 +2075,21 @@ def _expected_outputs() -> tuple[dict[Path, str], dict]:
     for canvas in COMPOSITES:
         cards = [item for item in built if item.frontier.n in canvas.spec.numbers]
         outputs[canvas.svg_path] = render_known_best_summary_svg(cards, canvas)
-    manifest = {
-        "softschema": {
-            "contract": "packing.squares:KnownBestAtlas/v1",
-            "schema": "known-best-atlas.schema.yaml",
-            "envelope": "atlas",
-            "status": "enforced",
-        },
-        "atlas": {
-            "range": range_record(CORPUS),
-            "generated_by": GENERATOR,
-            "policy": {
-                "source_layer": (
-                    "exact canonical grids, retained Kingbird derived numerical facts, "
-                    "or immutable UnitSquare renderings"
-                ),
-                "witness_layer": "lossless where possible; limitations explicit otherwise",
-                "rendering_layer": "repository deterministic house renderer",
-                "annotation_layer": "derived and excluded from grammar validation until frozen",
-            },
-            # A list rather than a single record: the corpus publishes one composite
-            # today and the geometry of a second is a second specification, so the shape
-            # that describes them does not change when one is added.
-            "composites": [_composite_record(canvas) for canvas in COMPOSITES],
-            "entries": [_manifest_entry(item) for item in built],
-        },
-    }
+    manifest = _manifest_document(
+        [_manifest_entry(item) for item in built],
+        [_composite_record(canvas) for canvas in COMPOSITES],
+    )
     outputs[MANIFEST] = _json_text(manifest)
     return outputs, manifest
 
 
-def update() -> None:
+def update(workers: int = 1) -> None:
     # The figure record decides every claim the drawing states, so refresh it
     # first and drop the memo, or the render would use a stale one.
     build_composite_figure_data.update()
     _figure_entries.cache_clear()
     clear_build_caches()
-    outputs, _manifest = expected_outputs()
+    outputs, _manifest = expected_outputs(workers)
     for path, content in sorted(outputs.items(), key=lambda item: item[0].as_posix()):
         path.parent.mkdir(parents=True, exist_ok=True)
         if path.is_file() and path.read_text(encoding="utf-8") == content:
@@ -2036,8 +2111,8 @@ def update() -> None:
     )
 
 
-def check() -> None:
-    outputs, manifest = expected_outputs()
+def check(workers: int = 1) -> None:
+    outputs, manifest = expected_outputs(workers)
     problems = []
     for path, expected in sorted(outputs.items(), key=lambda item: item[0].as_posix()):
         if not path.is_file():
@@ -2088,6 +2163,140 @@ def check() -> None:
     print(
         f"known-best atlas check passed: {CORPUS.count} sources/plans, witnesses, "
         f"renders, {len(COMPOSITES)} composite{_plural(len(COMPOSITES))}, and links"
+    )
+
+
+def _retained_problems() -> tuple[list[str], list[dict] | None]:
+    """Everything the retained records say about themselves, checked without geometry.
+
+    This is the half of `check` that does not rebuild a case, and at `n=1..324` it is
+    almost free next to the half that does. It still re-derives rather than merely
+    re-reads: the source index is rebuilt from the frontier and the catalogue and every
+    retained upstream SVG is re-hashed against its declared digest; every manifest field
+    but the per-case entries is recomputed and compared to the retained bytes; and every
+    frontier record is compared against the link the builder would write into it.
+
+    Returns the problems and, when the manifest is readable and covers the declared
+    range, its entries. `None` means the sampled half has nothing to compare against and
+    must not run: a missing manifest should be reported as a missing manifest rather than
+    as whatever the next reader of it raises.
+    """
+    if not MANIFEST.is_file():
+        return [f"missing {_relative(MANIFEST)}"], None
+    retained = MANIFEST.read_text(encoding="utf-8")
+    try:
+        entries = list(json.loads(retained)["atlas"]["entries"])
+        stated = [int(entry["n"]) for entry in entries]
+    except KeyError, TypeError, ValueError:
+        return [f"{_relative(MANIFEST)} is not a readable known-best manifest"], None
+    if stated != list(CORPUS.numbers):
+        return [f"manifest entries are not exactly {CORPUS.label}"], None
+    problems: list[str] = []
+    rebuilt = _manifest_document(entries, [_composite_record(canvas) for canvas in COMPOSITES])
+    if _json_text(rebuilt) != retained:
+        problems.append(
+            f"stale {_relative(MANIFEST)}: everything but its entries is re-derived here"
+        )
+    plans = source_plans()
+    if not SOURCE_MANIFEST.is_file():
+        problems.append(f"missing {_relative(SOURCE_MANIFEST)}")
+    elif SOURCE_MANIFEST.read_text(encoding="utf-8") != _json_text(_source_index(plans)):
+        problems.append(f"stale {_relative(SOURCE_MANIFEST)}")
+    for root, suffix, label in (
+        (WITNESS_ROOT, "yaml", "witnesses/known-best"),
+        (RENDER_ROOT, "svg", "atlas/known-best/rendering"),
+    ):
+        expected = {f"n-{n:03d}.{suffix}" for n in CORPUS.numbers}
+        present = {path.name for path in root.glob(f"*.{suffix}")} if root.is_dir() else set()
+        problems.extend(f"missing {label}/{name}" for name in sorted(expected - present))
+        problems.extend(f"unexpected {label}/{name}" for name in sorted(present - expected))
+    if KINGBIRD_RAW_ROOT.exists():
+        problems.append("raw Kingbird source directory must not be retained")
+    for entry in entries:
+        case = _frontier_case(int(entry["n"]))
+        if case.side != str(entry["reported_side"]):
+            problems.append(f"manifest reported_side disagrees with {case.path.name}")
+        elif case.text != _frontier_with_witness(case, str(entry["witness"]["id"])):
+            problems.append(f"stale {_relative(case.path)}")
+    problems.extend(_composite_receipt_problems())
+    return problems, entries
+
+
+def _composite_receipt_problems() -> list[str]:
+    """Every composite export, against the retained drawing it declares it came from.
+
+    The whole check compares each export's receipt against a freshly rendered SVG. Here
+    the SVG is the retained one, so what this catches is an export that has fallen behind
+    the drawing beside it -- and the drawing is held to the canvas its own specification
+    computes, so a composite silently resized cannot pass this either.
+    """
+    problems: list[str] = []
+    for canvas in COMPOSITES:
+        if not canvas.svg_path.is_file():
+            problems.append(f"missing {_relative(canvas.svg_path)}")
+            continue
+        svg_text = canvas.svg_path.read_text(encoding="utf-8")
+        root = ET.fromstring(svg_text)
+        if (root.get("width"), root.get("height")) != (str(canvas.width), str(canvas.height)):
+            problems.append(
+                f"{_relative(canvas.svg_path)} is not the canvas its specification computes"
+            )
+        problems.extend(
+            f"missing or stale {export.name} {export.role} receipt"
+            for export in canvas.rasters
+            if not _png_matches_summary(export, svg_text)
+        )
+        problems.extend(_composite_pdf_problems(canvas, svg_text))
+    return problems
+
+
+def _sample_problems(numbers: Sequence[int], retained: list[dict], workers: int) -> list[str]:
+    """Where the retained bytes for the sampled cases differ from a fresh build."""
+    entries = {int(entry["n"]): entry for entry in retained}
+    problems: list[str] = []
+    for built in built_cases(numbers, workers):
+        n = built.frontier.n
+        for path, expected in (
+            (WITNESS_ROOT / f"n-{n:03d}.yaml", built.witness_text),
+            (RENDER_ROOT / f"n-{n:03d}.svg", built.rendering_text),
+        ):
+            if not path.is_file():
+                problems.append(f"missing {_relative(path)}")
+            elif path.read_text(encoding="utf-8") != expected:
+                problems.append(f"stale {_relative(path)}")
+        if entries.get(n) != _manifest_entry(built):
+            problems.append(f"manifest entry for n={n} is not what a rebuild produces")
+    return problems
+
+
+def check_sample(stride: int = ATLAS_SAMPLE_STRIDE, workers: int = 1) -> None:
+    """The pull request's stand-in for the whole rebuild, and what it does not cover.
+
+    `check` re-derives all 324 cases and both composites and compares every byte, and at
+    the widened corpus that is 691.19s of a 703.28s step -- measured on 2026-09-07 and
+    retained in `benchmarks/gate-cost-at-324/`, which is why the whole rebuild moved to
+    the deferred surface. This runs all of the cheap half and a sampled slice of the
+    expensive one, so a pull request still fails on the drift `D-369` counts -- a
+    registry, a generated view or a declared contract going stale -- in the minute it is
+    introduced rather than after the merge.
+
+    What it does not cover, stated so nobody has to infer it: the per-case geometry of
+    the cases the stride skips, and the composite SVGs' own bytes. Both are covered by
+    `known-best n=1..324 atlas rebuild` on the deferred surface, which is the exact
+    complement `test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers`
+    holds.
+    """
+    numbers = sampled_numbers(CORPUS, stride)
+    problems, entries = _retained_problems()
+    if entries is not None:
+        problems.extend(_sample_problems(numbers, entries, workers))
+    if problems:
+        raise ValueError("known-best atlas drift:\n  " + "\n  ".join(problems[:20]))
+    print(
+        f"known-best atlas sample check passed: {len(numbers)} of {CORPUS.count} cases "
+        f"rebuilt (every {stride}th from n={CORPUS.first_n}), {CORPUS.count} manifest "
+        f"entries, sources, links, and {len(COMPOSITES)} "
+        f"composite{_plural(len(COMPOSITES))}"
     )
 
 
@@ -2208,6 +2417,24 @@ def parser() -> argparse.ArgumentParser:
         action="store_true",
         help="with --fetch, replace already retained assets from their recorded URLs",
     )
+    command.add_argument(
+        "--sample",
+        action="store_true",
+        help=(
+            f"with --check, re-derive the whole record layer but rebuild only every "
+            f"{ATLAS_SAMPLE_STRIDE}th case, which is what the pull-request surface runs"
+        ),
+    )
+    command.add_argument(
+        "--jobs",
+        type=int,
+        metavar="N",
+        default=None,
+        help=(
+            "processes to build the corpus with; the default follows the PACK_JOBS cap "
+            "the gate exports, and the whole machine when there is no gate"
+        ),
+    )
     return command
 
 
@@ -2215,12 +2442,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
     if args.refresh and not args.fetch:
         raise SystemExit("--refresh requires --fetch")
+    if args.sample and not args.check:
+        raise SystemExit("--sample narrows --check")
+    if args.jobs is not None and args.jobs < 1:
+        raise SystemExit("--jobs must be positive")
+    # The count is resolved here and nowhere else: `worker_count` reads the machine when
+    # no gate has capped it, and an in-process caller must not inherit that -- see
+    # `expected_outputs`.
+    workers = worker_count(CORPUS.count) if args.jobs is None else args.jobs
     if args.fetch:
         fetch_sources(refresh=args.refresh)
     elif args.update:
-        update()
+        update(workers)
     elif args.check:
-        check()
+        check_sample(workers=workers) if args.sample else check(workers)
     elif args.report:
         report()
     else:

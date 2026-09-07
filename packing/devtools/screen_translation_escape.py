@@ -68,6 +68,7 @@ Usage:
     uv run --frozen python -m devtools.screen_translation_escape --update
     uv run --frozen python -m devtools.screen_translation_escape --check
     uv run --frozen python -m devtools.screen_translation_escape --check --jobs 4
+    uv run --frozen python -m devtools.screen_translation_escape --check --sample
 """
 
 from __future__ import annotations
@@ -83,7 +84,11 @@ import mpmath as mp
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
-from sqpack.known_best import KNOWN_BEST_CORPUS
+from sqpack.known_best import (
+    KNOWN_BEST_CORPUS,
+    SCREEN_SAMPLE_STRIDE,
+    sampled_numbers,
+)
 from sqpack.verify import Square, edge_axes, float_sign, project, verify_packing
 from sqpack.witness import load_witness, materialize_witness
 from sqpack.workers import worker_count
@@ -796,7 +801,19 @@ def screen_errors(screen: dict[str, Any]) -> list[str]:
 
 
 def expected_document(workers: int | None = None) -> dict[str, Any]:
-    cases, excluded = screen_corpus(workers)
+    return _document(*screen_corpus(workers))
+
+
+def _document(cases: list[dict[str, Any]], excluded: list[dict[str, Any]]) -> dict[str, Any]:
+    """The whole screen document, given the per-record results it reports on.
+
+    Split from `expected_document` so a sampled check can rebuild everything but those
+    results from the retained ones: the aggregate is defined as sums over the cases, the
+    method block and the claim boundaries are constants, and the validators below run on
+    the way through. Comparing that against the retained bytes is a real check rather
+    than a restatement, because the inputs to it are the retained records and the
+    outputs are this file's own constants.
+    """
     aggregate = {
         "movable_squares": sum(case["movable_square_count"] for case in cases),
         "records_excluded": len(excluded),
@@ -889,11 +906,90 @@ def check(workers: int | None = None) -> None:
     print(f"translation escape screen check passed: {_summary(document)}")
 
 
+def check_sample(stride: int = SCREEN_SAMPLE_STRIDE, workers: int | None = None) -> None:
+    """The pull request's stand-in for the whole screen, and what it does not cover.
+
+    `check` re-screens all 324 records, and at the widened corpus that measured 766.26s
+    on an idle ten-cpu box at the sweeps job's own `--inner-jobs 2` -- retained in
+    `benchmarks/gate-cost-at-324/`, and within 134s of the gate's own 900s per-step
+    subprocess timeout on a machine faster than the hosted runner. That is why the whole
+    re-screen moved to the deferred surface.
+
+    Three checks, and the first does most of the work. Everything in the screen but the
+    per-record entries -- the aggregate, the method block, the tolerances, the claim
+    boundaries, the contract, and the file's own formatting -- is recomputed from the
+    retained cases and exclusions and compared byte for byte, and `_document` runs the
+    schema validator and `screen_errors` on the way through. So an aggregate that has
+    stopped matching its cases, a tolerance constant changed without re-running the
+    screen, or a certificate claiming no motion all fail here on every pull request.
+
+    What it does not cover: the geometry of the records the stride skips. That is
+    `single-square translation escape screen` on the deferred surface, which is the exact
+    complement `test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers`
+    holds.
+    """
+    if not OUTPUT.is_file():
+        raise ValueError("translation escape screen is missing; run with --update")
+    retained = OUTPUT.read_text(encoding="utf-8")
+    document = json.loads(retained)
+    screen = document["screen"]
+    problems: list[str] = []
+    try:
+        rebuilt = _json_text(_document(list(screen["cases"]), list(screen["excluded"])))
+    except ValueError as error:
+        problems.append(str(error))
+    else:
+        if rebuilt != retained:
+            problems.append(
+                "the retained screen is not what its own cases and exclusions render to"
+            )
+    covered = sorted(
+        [
+            *(int(case["n"]) for case in screen["cases"]),
+            *(int(item["n"]) for item in screen["excluded"]),
+        ]
+    )
+    if covered != list(KNOWN_BEST_CORPUS.numbers):
+        problems.append(f"the retained screen does not cover exactly {KNOWN_BEST_CORPUS.label}")
+    numbers = sampled_numbers(KNOWN_BEST_CORPUS, stride)
+    entries = {int(entry["n"]): entry for entry in manifest_entries()}
+    retained_cases = {int(case["n"]): case for case in screen["cases"]}
+    retained_excluded = {int(item["n"]): item for item in screen["excluded"]}
+    units = [entries[n] for n in numbers]
+    requested = worker_count(len(units)) if workers is None else workers
+    count = max(1, min(requested, len(units)))
+    mp.mp.dps = DIGITS
+    if count == 1:
+        replayed = [_screen_entry(entry) for entry in units]
+    else:
+        with ProcessPoolExecutor(max_workers=count, initializer=_configure_worker) as pool:
+            replayed = list(pool.map(_screen_entry, units))
+    for n, (is_case, record) in zip(numbers, replayed, strict=True):
+        expected = retained_cases.get(n) if is_case else retained_excluded.get(n)
+        if record != expected:
+            problems.append(f"n={n}: the retained record is not what a re-screen produces")
+    if problems:
+        raise ValueError("translation escape screen drift:\n  " + "\n  ".join(problems[:20]))
+    print(
+        f"translation escape screen sample check passed: {len(numbers)} of "
+        f"{KNOWN_BEST_CORPUS.count} records replayed (every {stride}th from "
+        f"n={KNOWN_BEST_CORPUS.first_n}); retained screen: {_summary(document)}"
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--update", action="store_true")
     mode.add_argument("--check", action="store_true")
+    parser.add_argument(
+        "--sample",
+        action="store_true",
+        help=(
+            f"with --check, rebuild the retained screen from its own records but replay "
+            f"only every {SCREEN_SAMPLE_STRIDE}th, which is what the pull-request surface runs"
+        ),
+    )
     parser.add_argument(
         "--jobs",
         type=int,
@@ -905,8 +1001,13 @@ def main() -> int:
         ),
     )
     args = parser.parse_args()
+    if args.sample and not args.check:
+        raise SystemExit("--sample narrows --check")
     workers: int | None = args.jobs
-    update(workers) if args.update else check(workers)
+    if args.update:
+        update(workers)
+    else:
+        check_sample(workers=workers) if args.sample else check(workers)
     return 0
 
 

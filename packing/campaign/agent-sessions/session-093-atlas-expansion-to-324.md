@@ -498,6 +498,40 @@ session:
     elapsed_seconds: 2086
     elapsed_quality: platform_measured
     next_action: None; a later hand pass may regenerate n = 53 and 87 under the new template.
+  - task: Price the 324-case gate and re-argue the sweeps ceiling (think-lmlr)
+    operator: Claude Opus delegate
+    status: completed
+    recording: contemporaneous
+    phase: 3
+    outcome: Baseline at 324 on the idle host (atlas check 691 s serial, escape screen 766 s,
+      census 40 s); the atlas builder pooled at 3.75x on four workers with byte-identical
+      output; the atlas rebuild and the escape screen deferred to the deep gate on their own
+      measurements, each with a sampled records-and-sample stand-in on the sweeps job; the
+      sweeps tier at the CI shape now 57 s of its 210 s ceiling, the fast tier 229 s; the
+      benchmark record retained under packing/benchmarks/gate-cost-at-324.
+    evidence:
+    - packing/benchmarks/gate-cost-at-324/README.md
+    - packing/devtools/gate-budgets.yaml
+    files:
+    - packing/devtools/build_known_best_atlas.py
+    - packing/devtools/screen_translation_escape.py
+    - packing/src/sqpack/cli/validate.py
+    - packing/src/sqpack/known_best.py
+    - packing/devtools/gate-budgets.yaml
+    - development.md
+    - .github/workflows/deep-gate.yml
+    - .github/workflows/packing-validation.yml
+    - packing/tests/test_validation_cli.py
+    - packing/tests/test_known_best_atlas.py
+    checks:
+    - Coordinator re-ran ruff, basedpyright, the gate budget declaration, the step list, and timed
+      the sweeps tier at the CI shape (57.18 s) before committing.
+    uncertainty: The whole-sweeps baseline before the change was not taken on an idle host; the
+      checks tier grew with the corpus (189 s on CI against a stale 99 s record) and is priced in
+      a second slice.
+    elapsed_seconds: 7035
+    elapsed_quality: platform_measured
+    next_action: Second slice for the checks tier's exact-verification step.
   outputs:
   - docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
   checks:

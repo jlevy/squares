@@ -1,0 +1,8 @@
+{
+  "name": "defect log",
+  "output": "  defects.md matches defects.yaml (478 defects)\n  every generated view is exempt from the Markdown formatter",
+  "reason": "",
+  "run_id": "0224631f59cc43a5b3ae7ad92b6d2018",
+  "seconds": 0.5682507919991622,
+  "status": "passed"
+}

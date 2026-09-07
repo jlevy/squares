@@ -220,6 +220,61 @@ a frontier record whose facts are sourced to the same standard as the first hund
 before a card about it can be honest.
 """
 
+ATLAS_SAMPLE_STRIDE = 9
+"""How the sampled atlas check chooses the cases it rebuilds: every ninth, from the first.
+
+A fixed stride rather than a count or a random draw, and both halves of that are about
+repeatability. A random sample makes a green pull request unrepeatable and a red one
+unattributable; a contiguous prefix would never reach the 224 cases the 2026-09-07
+widening added, which are exactly the ones with no history behind them.
+
+Nine is a measurement rather than a round number, and the thing it is measured against
+is the sweeps job's own floor. That job's wall is its longest unit's wall, and the unit
+that cannot be made cheaper is `known-best chunk census`, which `D4` pins at
+`CALIBRATION_CORPUS` so it will not grow with the corpus -- 90.38s on CI, 42.11s on the
+box these readings were taken on. At every ninth case the sampled step measured 58.48s
+beside it in the same run, so it does set the tier's wall, by about a third of the census
+rather than by a multiple of it, and the tier came in at 28 per cent of its ceiling. A
+denser sample would start spending that headroom on cases the deferred rebuild already
+covers; a sparser one would buy back a tier wall that is not the surface's floor
+anyway.
+"""
+
+SCREEN_SAMPLE_STRIDE = 27
+"""The same idea for the translation-escape screen, at a third of the density.
+
+Different because the cost is different, not because the two disagree about sampling. A
+screened record's work grows with the square of `n` -- every square against every square
+it might touch -- so the same 36 records cost 220.43s of cpu there against 86.81s here,
+and at the job's two inner workers that is 127.22s of wall against 47.01s. Twelve records
+measured 63.84s of cpu over 43.83s of wall, which leaves this step under the census that
+sets the tier's wall.
+
+What the thinner sample costs is worth naming: it is the only per-record re-derivation a
+pull request pays here, and the rest of `check_sample` compares the retained document
+against itself. Twelve records spread over the whole range is a tripwire for anything
+global -- a changed tolerance, a changed witness, a changed algorithm -- and it is not a
+substitute for `single-square translation escape screen`, which re-screens all 324 on the
+deferred surface.
+"""
+
+
+def sampled_numbers(
+    cases: CorpusRange = KNOWN_BEST_CORPUS, stride: int = ATLAS_SAMPLE_STRIDE
+) -> tuple[int, ...]:
+    """The cases a sampled check re-derives: every `stride`th, from the range's first.
+
+    Both strides live here rather than in either tool because two things have to agree on
+    each: the tool that samples, and `sqpack.cli.validate`, which matches the resulting
+    count in that tool's output. The gate may not import `devtools`, so a constant defined
+    in a tool would have had to be re-typed in the gate -- which is the shape of drift
+    this module already exists to prevent for `CorpusRange`.
+    """
+    if stride < 1:
+        raise ValueError("a sample stride must be positive")
+    return tuple(cases.numbers[::stride])
+
+
 CALIBRATION_CORPUS = CorpusRange(first_n=1, last_n=100)
 """The cases the calibration-only annotation layers may read, and no more.
 

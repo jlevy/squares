@@ -1,0 +1,8 @@
+{
+  "name": "basin atlas",
+  "output": "  ok    a real quench converges and feeds the store  [side 2.145353719496 (>= proved s(4) = 2), converged=True]\n  ok    re-offering a known endpoint key raises its frequency, never adds a row  [6 rows, 12 proposals]\n  ok    adding never removes an existing basin  [6 unique identities in 6 rows]\n  ok    the written file validates against the declared contract  [validates]\n  ok    save then load is the identity  [12 proposals, 6 basins]\n  ok    merging a store with itself doubles frequencies and adds no rows  [6 rows, 24 total frequency]\n  ok    the store counts non-convergence rather than hiding it  [5/6 converged. The strict/deep golden path carries the real census-scale regression; what is enforced HERE is that a false convergence field is counted (D-030)]\n\n  store: 6 endpoint rows from 6 offered; the one real quench converged at 2.145353719496. Deep golden regeneration carries the real census-scale check.\nATLAS CHECKS PASSED",
+  "reason": "",
+  "run_id": "fa61d608ec0241e885631672ae97ae20",
+  "seconds": 4.778120124996349,
+  "status": "passed"
+}

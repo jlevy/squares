@@ -110,7 +110,8 @@ PRUNE = frozenset(
         # list on 2026-08-27, when merging the atlas SVG work pushed the snapshot to
         # 42,441,211 bytes against a 41,943,040 cap. They are the direct analogue of the
         # prospective renderings already listed here: generated SVG output, checked by the
-        # `deterministic SVG rendering` and `known-best n=1..100 atlas` steps, and named by
+        # `deterministic SVG rendering`, `known-best atlas records and sample` and
+        # `known-best n=1..324 atlas rebuild` steps, and named by
         # no control in `controls.yaml`. The two controls that do target
         # `atlas/known-best/` reach small JSON files at its top level, which stay.
         #
@@ -305,7 +306,15 @@ ROOT_DOCUMENTS = (
 # Compressing the retained summary to xz would leave only about 40 KiB of headroom.
 # Allow 80 MiB as measured storage headroom, not a speed target. Raising this guard
 # does not increase the bytes actually copied; dependency-policy work is separate.
-SNAPSHOT_MAX_BYTES = 80 * 1024 * 1024
+#
+# 2026-09-07, with the corpus at n = 1..324 and the poster composite: 90,858,775 bytes.
+# The growth is witnesses/known-best (7.6 MB for 324 cases, the source of record for the
+# catalogue-derived ones, which the sampled atlas step rebuilds inside a worker), the
+# poster SVG (6.2 MB, generated, but inline-linked from the atlas README and therefore
+# copied back by `linked_pruned_targets` even when pruned -- pruning it was tried and
+# moved nothing), and the escape screen record (3.1 MB). No further safe prune was found;
+# a link checker that tolerated pruned targets would be the next one. Allow 96 MiB.
+SNAPSHOT_MAX_BYTES = 96 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

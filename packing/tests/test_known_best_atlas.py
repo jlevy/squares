@@ -29,6 +29,7 @@ from sqpack.render.color import ANGLE_CLASS_CONTRACT
 from sqpack.render.model import RenderSpec
 from sqpack.render.style import FIRST_PARTY_ACCENT_COLOR
 from sqpack.witness import load_witness
+from sqpack.workers import worker_count
 
 #: Catalogue-derived witnesses above the hand-audited hundred, per corpus (think-93on).
 GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 46, "n=1..324": 107}
@@ -420,15 +421,51 @@ def _committed_composite_svg() -> str:
     return (ATLAS / "known-best-1-100.svg").read_text(encoding="utf-8")
 
 
+def test_a_pool_worker_builds_the_same_bytes_as_this_process() -> None:
+    """The corpus is built across processes, and every derived byte must be unmoved.
+
+    `build_known_best_atlas` gained a pool on 2026-09-07 because the widened corpus made
+    its check 691.19s; four workers took that to 184.34s. What a pool can quietly cost is
+    a differently rounded output, because a `spawn` child inherits none of this process's
+    global arithmetic state -- and the failure would be silent, since a witness rounded
+    at a different precision is still a witness.
+
+    So the comparison is on bytes rather than on a status, and it is over a range that
+    reaches all three source layers: an exact grid (n=4), a Kingbird-derived record
+    (n=11) and a UnitSquare rendering (n=68). `built_cases` is called directly, because
+    what needs checking is the path the tool takes rather than a re-implementation of it.
+
+    Not marked `slow`: three cases is a second or two, and the property is one a pull
+    request should learn about rather than a merge.
+    """
+    numbers = (4, 11, 68)
+    serial = known_best_builder.built_cases(numbers, 1)
+    pooled = known_best_builder.built_cases(numbers, 2)
+
+    assert [item.frontier.n for item in serial] == list(numbers)
+    assert [item.witness_text for item in pooled] == [item.witness_text for item in serial]
+    assert [item.rendering_text for item in pooled] == [item.rendering_text for item in serial]
+    assert [item.witness for item in pooled] == [item.witness for item in serial]
+
+
 @pytest.mark.slow
 def test_known_best_composite_contains_every_case_and_square() -> None:
-    outputs, _manifest = known_best_builder.expected_outputs()
+    # Pooled rather than serial, and the count comes from the same policy every other
+    # pool-backed step reads: `PACK_JOBS` where a gate has capped it, the machine where
+    # nothing has. This is the one test that pays the whole corpus build, and at
+    # `n=1..324` that is 691.19s serial against 348.15s at two workers -- the deep gate
+    # runs the slow lane at `--inner-jobs 2`, so this is what it costs there. The build is
+    # memoized on the worker count, so the serial memo the corrupted-source test above
+    # builds is untouched by this one.
+    outputs, _manifest = known_best_builder.expected_outputs(
+        worker_count(known_best_builder.CORPUS.count)
+    )
     composite_path = ATLAS / "known-best-1-100.svg"
 
     # The pin the quick lane's four composite tests stand on: they read the retained
     # vector, and this is where "retained" and "built" are made one thing inside pytest.
     # Free here -- the build above is already paid -- and checked again from the other
-    # side by the full gate's `known-best n=1..100 atlas` step.
+    # side by the full gate's `known-best n=1..324 atlas rebuild` step.
     assert composite_path.read_text(encoding="utf-8") == outputs[composite_path]
 
     root = ET.fromstring(outputs[composite_path])
