@@ -1,4 +1,4 @@
-"""Independent near45 reader controls on toys; the scientific target is forbidden."""
+"""Independent near45 reader controls on toys; both scientific targets are forbidden."""
 
 from __future__ import annotations
 
@@ -21,6 +21,7 @@ def _forbid_target(monkeypatch: pytest.MonkeyPatch) -> None:
         raise AssertionError("author tests must not invoke target_input")
 
     monkeypatch.setattr(reader, "target_input", forbidden)
+    monkeypatch.setattr(reader, "a1_target_input", forbidden)
 
 
 def _packet() -> dict[str, Any]:
@@ -39,6 +40,13 @@ def _packet() -> dict[str, Any]:
 
 def _toy_input() -> tuple[Fraction, reader.Point]:
     return Fraction(19, 5), (Fraction(29, 20), Fraction(13, 10))
+
+
+def _a1_packet() -> dict[str, Any]:
+    return _packet() | {
+        "kind": "fixed-side-near45-a1-forcing-triangle",
+        "point": ["1", "439/500"],
+    }
 
 
 def test_polarized_bernstein_reconstructs_algebraic_quartics() -> None:
@@ -252,6 +260,8 @@ def test_cli_requires_absolute_dispatch_and_refuses_links(
         [str(source)],
         ["relative.json", "--target-a3"],
         [str(source), "--target-a3", "--depth", "1"],
+        [str(source), "--target-a3", "--target-a1"],
+        [str(source), "--target-a1", "--point", "1,1"],
     ):
         with pytest.raises(SystemExit) as refusal:
             reader.main(args)
@@ -280,8 +290,12 @@ def test_cli_toy_positive_and_negative_replays_retain_outcome_and_costs(
     assert json.loads(capsys.readouterr().out)["decision"] == "unresolved"
 
 
+@pytest.mark.parametrize("clause", ["a3", "a1"])
 def test_alarm_restores_handler_and_never_accepts_partial_work(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+    clause: str,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
 ) -> None:
     alarms: list[int] = []
     previous = reader.signal.getsignal(reader.signal.SIGALRM)
@@ -291,9 +305,11 @@ def test_alarm_restores_handler_and_never_accepts_partial_work(
         raise TimeoutError("toy interrupted admission")
 
     monkeypatch.setattr(reader, "load_packet", interrupted)
-    assert reader.main([str(tmp_path / "packet.json"), "--target-a3"]) == 1
+    assert reader.main([str(tmp_path / "packet.json"), f"--target-{clause}"]) == 1
     captured = capsys.readouterr()
-    assert json.loads(captured.out)["decision"] == "unresolved"
+    receipt = json.loads(captured.out)
+    assert receipt["decision"] == "unresolved"
+    assert receipt["scope"] == (reader.SCOPE if clause == "a3" else reader.A1_SCOPE)
     assert json.loads(captured.err)["exit_code"] == 1
     assert alarms == [10, 0]
     assert reader.signal.getsignal(reader.signal.SIGALRM) == previous
@@ -308,3 +324,128 @@ def test_reader_refuses_an_incomplete_independent_calculation(
     )
     with pytest.raises(ValueError, match="all 24"):
         reader.check_packet(_packet())
+
+
+def test_a1_and_a3_packets_are_not_interchangeable() -> None:
+    reader.validate_packet(_packet())
+    reader.validate_packet(_a1_packet(), clause="a1")
+    for packet, clause in ((_packet(), "a1"), (_a1_packet(), "a3")):
+        with pytest.raises(ValueError, match="kind"):
+            reader.check_packet(packet, clause=clause)
+    with pytest.raises(ValueError, match="point"):
+        reader.check_packet(_a1_packet() | {"point": ["1", "878/1000"]}, clause="a1")
+    for clause in ("a2", "A1", "", True):
+        with pytest.raises(ValueError, match="clause"):
+            reader.check_packet(_a1_packet(), clause=clause)  # type: ignore[arg-type]
+    for count in (0, 23, 24):
+        receipt = reader.check_packet(
+            _a1_packet() | {"status": "unresolved", "inequalities_checked": count},
+            clause="a1",
+        )
+        assert receipt["decision"] == "unresolved"
+        assert receipt["scope"] == reader.A1_SCOPE
+
+
+def test_a1_cli_uses_only_its_mocked_boundary_and_keeps_24_obligations(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    source = tmp_path / "a1.json"
+    source.write_text(json.dumps(_a1_packet()))
+    calls = []
+
+    def toy():
+        calls.append(1)
+        return _toy_input()
+
+    monkeypatch.setattr(reader, "a1_target_input", toy)
+    assert reader.main([str(source), "--target-a1"]) == 0
+    captured = capsys.readouterr()
+    receipt, cost = json.loads(captured.out), json.loads(captured.err)
+    assert receipt["decision"] == "proved"
+    assert receipt["point"] == ["1", "439/500"]
+    assert receipt["scope"] == reader.A1_SCOPE
+    assert receipt["vertices_checked"] == 6
+    assert receipt["inequalities_checked"] == 24
+    assert receipt["h036_outcome"] == "unresolved"
+    assert cost["exit_code"] == 0
+    assert calls == [1]
+    assert reader.main([str(source), "--target-a3"]) == 2
+    assert json.loads(capsys.readouterr().out)["decision"] == "refused"
+    assert calls == [1]
+    monkeypatch.setattr(
+        reader, "a1_target_input", lambda: (Fraction(19, 5), (Fraction(0), Fraction(0)))
+    )
+    assert reader.main([str(source), "--target-a1"]) == 1
+    receipt = json.loads(capsys.readouterr().out)
+    assert receipt["decision"] == "unresolved"
+    assert receipt["point"] == ["1", "439/500"]
+    assert receipt["inequalities_checked"] == 24
+
+
+def test_toy_local_reflection_preserves_containment_and_exchanges_formal_vertices() -> None:
+    cosine, sine = Fraction(3, 5), Fraction(4, 5)
+    height = (cosine + sine) / 2
+    for side in (Fraction(7, 2), Fraction(11, 3), Fraction(19, 5)):
+        offset = 1 + side / 2
+        for x in (Fraction(1), offset / 2, side / 2):
+            for y in (height, (height + 1) / 2, Fraction(1)):
+                rx = offset - x
+                assert 1 <= rx <= side / 2
+                assert height <= rx <= side - height
+                assert height <= y <= side - height
+                vertices = {
+                    (x + (i * cosine - j * sine) / 2, y + (i * sine + j * cosine) / 2)
+                    for i in (-1, 1)
+                    for j in (-1, 1)
+                }
+                reflected = {(offset - vx, vy) for vx, vy in vertices}
+                expected = {
+                    (rx + (i * sine - j * cosine) / 2, y + (i * cosine + j * sine) / 2)
+                    for i in (-1, 1)
+                    for j in (-1, 1)
+                }
+                assert reflected == expected
+                assert all(
+                    0 <= coordinate <= side for vertex in reflected for coordinate in vertex
+                )
+        upper_u = cosine * side / 2 + sine - Fraction(1, 2)
+        upper_v = cosine - sine - Fraction(1, 2)
+        originals = (
+            (upper_u, upper_v),
+            ((height - cosine * upper_v) / sine, upper_v),
+            (upper_u, (height - sine * upper_u) / cosine),
+        )
+        reflected_u = sine * side / 2 + cosine - Fraction(1, 2)
+        reflected_v = sine - cosine - Fraction(1, 2)
+        partners = (
+            (reflected_u, reflected_v),
+            ((height - sine * reflected_v) / cosine, reflected_v),
+            (reflected_u, (height - cosine * reflected_u) / sine),
+        )
+        for vertex, partner in zip(
+            originals, (partners[0], partners[2], partners[1]), strict=True
+        ):
+            u, v = vertex
+            assert (sine * offset + v, u - cosine * offset) == partner
+        assert offset - 1 == side / 2
+        assert offset - side / 2 == 1
+
+
+def test_toy_polynomial_reflection_swaps_slabs_vertices_and_axes_exactly() -> None:
+    side = Fraction(7, 2)
+    point = (Fraction(5, 4), Fraction(6, 5))
+    reflected = (1 + side / 2 - point[0], point[1])
+    original_polynomials = reader.vertex_polynomials(side, point)
+    reflected_polynomials = reader.vertex_polynomials(side, reflected)
+    for vertex, partner in enumerate((0, 2, 1)):
+        for margin, other_margin in enumerate((2, 3, 0, 1)):
+            original = original_polynomials[vertex][margin]
+            other = reflected_polynomials[partner][other_margin]
+            for degree, (left, right) in enumerate(zip(original, other, strict=True)):
+                # Both independent factory calls use the declared positive sqrt(2) basis.
+                assert left.coeffs == [(-1) ** degree * value for value in right.coeffs]
+            first = reader.bernstein_coefficients(original, Fraction(-1, 31), Fraction(0))
+            second = reader.bernstein_coefficients(other, Fraction(0), Fraction(1, 31))
+            assert [value.coeffs for value in first] == [
+                value.coeffs for value in reversed(second)
+            ]

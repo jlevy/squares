@@ -1,4 +1,4 @@
-"""Independent closed-triangle reader for the near-45-degree A3 forcing clause.
+"""Independent closed-triangle reader for fixed near-45 A1 or A3 forcing.
 
 Only NumberField/Q(sqrt(2)) arithmetic and the bounded JSON loader are shared
 project foundations. Geometry, denominator clearing and the unsplit Bernstein
@@ -19,6 +19,10 @@ point-membership margin is affine in U,V, so nonnegative margins at all three
 formal vertices imply containment throughout K, even when K is empty. A failed
 formal-vertex proof is not a counterexample to the forcing clause. This reader
 never decides the full restricted-angle theorem or a square-packing bound.
+
+The closed CLI selector admits only the separately fixed A1 and A3 packets.
+An A1 certificate implies A2 by the separately reviewed local reflection lemma;
+this reader still checks only A1's 24 obligations, not a second A2 certificate.
 """
 
 from __future__ import annotations
@@ -45,6 +49,7 @@ type Failure = tuple[int, int, int]
 
 FIXED_SIDE = Fraction(1939, 500)
 FIXED_POINT = (Fraction(3, 2), Fraction(13, 10))
+A1_POINT = (Fraction(1), Fraction(439, 500))
 HALF_TANGENT = Fraction(110880, 50803079)
 SLABS = ((-HALF_TANGENT, Fraction(0)), (Fraction(0), HALF_TANGENT))
 VERTICES = ("E", "F", "G")
@@ -52,6 +57,7 @@ OBLIGATIONS = 24
 PACKET_BYTE_CAP = 262144
 WALL_CAP_SECONDS = 10
 SCOPE = "fixed-side near45 A3 forcing clause on the two declared closed t-slabs only"
+A1_SCOPE = "fixed-side near45 A1 forcing clause on the two declared closed t-slabs only"
 PACKET_KEYS = {
     "version",
     "kind",
@@ -77,8 +83,24 @@ class TriangleResult:
 
 
 def target_input() -> tuple[Fraction, Point]:
-    """Scientific binding; author controls replace or forbid this boundary."""
+    """Original A3 scientific binding; author controls replace or forbid it."""
     return FIXED_SIDE, FIXED_POINT
+
+
+def a1_target_input() -> tuple[Fraction, Point]:
+    """Separate fixed A1 binding; never invoked by source-free controls."""
+    return FIXED_SIDE, A1_POINT
+
+
+def _identity(clause: str) -> tuple[str, Point, str]:
+    """Only two declared identities; no arbitrary point or side dispatch."""
+    if type(clause) is not str:
+        raise ValueError("clause must be exactly 'a1' or 'a3'")
+    if clause == "a3":
+        return "fixed-side-near45-a3-forcing-triangle", FIXED_POINT, SCOPE
+    if clause == "a1":
+        return "fixed-side-near45-a1-forcing-triangle", A1_POINT, A1_SCOPE
+    raise ValueError("clause must be exactly 'a1' or 'a3'")
 
 
 def _sum(*polynomials: Polynomial) -> Polynomial:
@@ -233,16 +255,17 @@ def check_triangle(side: Fraction, point: Point, slabs: Sequence[Slab]) -> Trian
     return TriangleResult(vertices, checked, tuple(failures))
 
 
-def validate_packet(packet: Any) -> None:
+def validate_packet(packet: Any, *, clause: str = "a3") -> None:
     """Admit only the fixed nine-key wire; incomplete producer packets do no geometry."""
+    kind, point, _scope = _identity(clause)
     if type(packet) is not dict or set(packet) != PACKET_KEYS:
         raise ValueError("packet has missing or unexpected keys")
     if type(packet["version"]) is not int or packet["version"] != 1:
         raise ValueError("packet version must be integer one")
     expected = {
-        "kind": "fixed-side-near45-a3-forcing-triangle",
+        "kind": kind,
         "side": str(FIXED_SIDE),
-        "point": [str(value) for value in FIXED_POINT],
+        "point": [str(value) for value in point],
         "half_angle_slabs": [[str(left), str(right)] for left, right in SLABS],
         "vertices": list(VERTICES),
     }
@@ -280,13 +303,14 @@ def validate_packet(packet: Any) -> None:
         raise ValueError("positive packet requires all 24 obligations and no failures")
 
 
-def check_packet(packet: Any) -> dict[str, Any]:
+def check_packet(packet: Any, *, clause: str = "a3") -> dict[str, Any]:
     """Re-derive every obligation; producer counters are admission metadata only."""
-    validate_packet(packet)
-    base = {"scope": SCOPE, "h036_outcome": "unresolved"}
+    validate_packet(packet, clause=clause)
+    _kind, declared_point, scope = _identity(clause)
+    base = {"scope": scope, "h036_outcome": "unresolved"}
     if packet["status"] != "proved":
         return base | {"decision": "unresolved", "reason": "producer proof was incomplete"}
-    side, point = target_input()
+    side, point = target_input() if clause == "a3" else a1_target_input()
     result = check_triangle(side, point, SLABS)
     if result.vertices_checked != 6 or result.inequalities_checked != OBLIGATIONS:
         raise ValueError("reader did not check all 24 fixed obligations")
@@ -296,7 +320,7 @@ def check_packet(packet: Any) -> dict[str, Any]:
         if result.proved
         else "unsplit Bernstein proof left uncertified margins; not a refutation",
         "side": str(FIXED_SIDE),
-        "point": [str(value) for value in FIXED_POINT],
+        "point": [str(value) for value in declared_point],
         "half_angle_slabs": [[str(left), str(right)] for left, right in SLABS],
         "vertices_checked": result.vertices_checked,
         "inequalities_checked": result.inequalities_checked,
@@ -319,21 +343,26 @@ def main(argv: Sequence[str] | None = None) -> int:
     """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("packet", type=Path)
-    parser.add_argument("--target-a3", action="store_true", required=True)
+    selection = parser.add_mutually_exclusive_group(required=True)
+    selection.add_argument("--target-a3", dest="clause", action="store_const", const="a3")
+    selection.add_argument("--target-a1", dest="clause", action="store_const", const="a1")
     args = parser.parse_args(argv)
     if not args.packet.is_absolute():
         parser.error("packet path must be absolute")
+    _kind, _point, scope = _identity(args.clause)
     started, cpu_started = time.monotonic(), time.process_time()
     previous = signal.signal(signal.SIGALRM, _expired)
     signal.alarm(WALL_CAP_SECONDS)
     try:
-        receipt = check_packet(load_packet(args.packet, max_bytes=PACKET_BYTE_CAP))
+        receipt = check_packet(
+            load_packet(args.packet, max_bytes=PACKET_BYTE_CAP), clause=args.clause
+        )
         code = 0 if receipt["decision"] == "proved" else 1
     except TimeoutError as error:
-        receipt = {"decision": "unresolved", "scope": SCOPE, "reason": str(error)}
+        receipt = {"decision": "unresolved", "scope": scope, "reason": str(error)}
         code = 1
     except (OSError, ValueError, TypeError, KeyError, ArithmeticError, RecursionError) as error:
-        receipt = {"decision": "refused", "scope": SCOPE, "reason": str(error)}
+        receipt = {"decision": "refused", "scope": scope, "reason": str(error)}
         code = 2
     finally:
         signal.alarm(0)
