@@ -3,9 +3,9 @@ type: is
 id: is-01m1x1hz4rye7qkrcgn28msh1m
 title: Publish collision-safe ID ranges for parallel research agents
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 6
+version: 7
 spec_path: packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md
 labels: []
 dependencies: []
@@ -15,7 +15,11 @@ child_order_hints:
   - is-01m1x1wdn0card3swn2w85ge8c
   - is-01m1x1wdyq8pe8bcgyejm9v8e9
 created_at: 2026-09-07T04:20:53.009Z
-updated_at: 2026-09-07T04:32:06.807Z
+updated_at: 2026-09-07T04:39:56.897Z
+closed_at: 2026-09-07T04:39:56.896Z
+close_reason: Sequential-ID map committed and pushed as54d1ca98 and published on PR105; current-used IDs, PR107 additions, next candidates, pending gaps, and coordinator write rules independently reviewed. No speculative range was assigned.
+resolution: null
+duplicate_of: null
 ---
 User requested PR-visible current/used/reserved ID ranges for explorations, agendas, BCs, hypotheses, experiments, sessions and related IDs. Independently inventory landed and active-branch definitions/reservations; document one authoritative allocation table and mirror it on PR105. No range silently authorizes research or shared-registry writes.
 

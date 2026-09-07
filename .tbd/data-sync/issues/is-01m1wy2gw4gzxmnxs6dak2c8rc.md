@@ -5,15 +5,15 @@ title: Integrate n11 research bundle into an alternative exploration and agenda
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 labels:
   - agenda027
 dependencies: []
 parent_id: is-01m1wz2csvegxym6bvt099z2wz
 created_at: 2026-09-07T03:20:01.155Z
-updated_at: 2026-09-07T04:28:50.755Z
+updated_at: 2026-09-07T04:39:07.512Z
 ---
-W10 source assessment and planning. Branch codex/research-agenda-exploration starts at PR105 commit 46f38ab4. User clarified sequential numbering: actual new artifacts are X-017, agenda-027, H-111 through H-117 and BC-258 through BC-268, checked against PR105 at bc5c24b5 plus active H-110 and BC-257. Prior high draft numbers were corrected before publication. X-017 through X-019 were unmaterialized placeholders in a superseded launch draft; no speculative future ranges or second allocation ledger. Preserve source agendas024-026 and their clocks. Intake the zip into attic, preserve source, critically adapt into exploration/claims/agenda, document sequential numbering, add campaign-wide BC collision detection to the existing validator, validate and publish a stacked draft PR. No successor experiments launched.
+W10 source assessment and planning, published in PR107 stacked on PR105. User locked all PR105 ID choices, including its X-017 through X-019 allocation. This program owns X-020, agenda-027, H-111 through H-117 and BC-258 through BC-268. The first draft X-017 was explicitly renamed to X-020; all native references and the PR table are updated. Source checkpoint f5684f51 was integrated without changing its IDs or scientific criteria. Preserve the supplied packet, critically adapt it into exploration/claims/agenda, document sequential allocation honoring parallel choices, add BC collision detection, validate and keep the PR record current. No successor experiments launched.
 
 ## Notes
 

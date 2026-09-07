@@ -5,10 +5,10 @@ title: Plan integration of hybrid n11 research with Agenda 027
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 labels: []
 dependencies: []
 created_at: 2026-09-07T04:27:36.365Z
-updated_at: 2026-09-07T04:29:59.728Z
+updated_at: 2026-09-07T04:40:06.274Z
 ---
-W3 planning only. Branch codex/n11-hybrid-research-plan starts at PR105 f5684f51; earlier uncommitted spike drafts preserved in stash 8f6592818f17f1cea83a617bb11ed6ffd6e112a6. Compare with PR107 ce283e09 before drafting records. PR107 materializes Agenda027, X017, H111-117 and BC258-268; user also communicated X020, which remains untouched. Recommend consolidation versus separate execution scope, preserve all candidate ideas and introduce no duplicate hypotheses. No scientific IDs reserved, new records authored or experiments launched in this turn.
+W3 strategic mathematical review and draft, authorized by the user. Branch codex/n11-hybrid-research-plan starts at PR105 f5684f51; previous spikes preserved in stash 8f6592818f17f1cea83a617bb11ed6ffd6e112a6. Review PR105 f5684f51 and latest PR107 5ab00c8a, including all scientific streams and machinery. Write one review with a proposed focused exploration, Agenda027 additions, and narrower hypothesis templates using placeholders. Preserve existing hypotheses and source handoffs. No scientific IDs assigned, no target experiments or packet production.
