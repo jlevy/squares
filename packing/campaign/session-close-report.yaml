@@ -1443,7 +1443,7 @@ sessions:
     snapshot_incomplete: true
 - id: session-093
   title: "Full-square compatibility and distinct density assessment"
-  status: in_progress
+  status: completed
   primary_bead: think-bmx9
   phases: 9
   measured: true

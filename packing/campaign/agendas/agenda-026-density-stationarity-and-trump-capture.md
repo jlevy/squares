@@ -207,11 +207,14 @@ agenda:
     workflows: [research-loop, factual-review]
     depends_on: [BC-242, BC-220]
     blocked_on: >-
-      Complete a.e.-depth producer and source-distinct reader readiness. BC254 has
-      selected exp113's unchanged candidate; exp115 rules out all overweight-pair
-      obstructions but not higher-order depth. The first proposed control-only
-      facet slice is 30 author minutes plus 15 review minutes; full reader and
-      target costs remain unpriced. A uniform D=11 control is not the target.
+      Scientific source-control acceptance. Session093's changed conservative
+      weighted-graph certificate has reviewed generic instruments and source
+      binding, but its original-source control refused before geometry at a
+      degree-four admission guard. The degree-eight repair is independently
+      reviewed; the failed sequence stays stopped. A separately declared attempt
+      must reconcile all existing soundness controls before target admission.
+      BC254 retains exp113's unchanged candidate; exp115 excludes overweight
+      pairs, not higher-order depth. A uniform D=11 control is not the target.
     parallel_group: agenda026-density
     program: n11-density-stationarity-trump-capture
     next_evidence: >-
@@ -483,7 +486,7 @@ agenda:
     state: in_progress
     priority: 1
     question: What is the first complete proof obligation for a useful restricted structural theorem?
-    hypotheses: [H-036, H-102, H-104, H-106, H-108, H-109, H-110, H-122, H-123]
+    hypotheses: [H-036, H-102, H-104, H-106, H-108, H-109, H-110, H-122, H-123, H-124]
     budget: >-
       One assessment slice of at most 30 minutes, beginning with H-036's unchanged
       0.25-degree restricted-angle claim. State complete cases, a feasible control,
@@ -518,8 +521,12 @@ agenda:
       0.20seconds combined processwall. Exp123 accepts complete near45
       localization through four exact continuous guards and the independently
       reviewed closed-domain reduction, 0.21seconds combined processwall.
-      Full distinguished-square compatibility remains untested; no packingbound
-      changes. All three Session091 scientific invocations are terminal, without retries.
+      Session093's sole H124/exp124 fixed-S discriminator returned unresolved
+      no_witness; finite coverage is not independently certified. A stronger
+      continuous common obstacle and generic closed-cover instruments passed
+      independent review. The next slice binds the complete two-band residual
+      cover to independent sources and a bounded caller. No packing bound changes.
+      All four scientific invocations are terminal, without retries.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md

@@ -188,7 +188,7 @@ session:
     clock_role: finalization
     objective: Complete independent repair review and publish the checked Session093 checkpoint and next research slice.
     bead: think-bmx9
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: The original twenty-minute finalization reserve has begun; all scientific work is stopped and source-free authors have frozen.
     budget_minutes: 20
@@ -198,12 +198,12 @@ session:
     validation_command: Immutable full gate and matching push/records deltas, independent source-free reviews, generated record checks and documentation pass.
     kill_condition: Checkpoint deadline; retain any unfinished gate or readiness gap explicitly rather than inventing completion.
     fallback: Publish the exact remaining validation and handoff without restarting science or extending original caps.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Collect independent degree-eight patch reviews and reconcile the complete checkpoint.
+    outcome: Independent repair reviews passed. Immutable full23498e87 passed in1631.92 seconds; later bfc27c7a passed45/45 push steps in130.89 seconds. All source-control non-invocations are retained.
+    evidence: [packing/devtools/geometric_graph_certificate.py, packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md]
+    stop_reason: Scientific and instrument results are frozen for the second checkpoint; terminal records and publication follow.
+    next_action: Publish the checkpoint and continue think-7e72 with complete-cover source binding.
   primary_bead: think-bmx9
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 120
     max_cycles: 9
@@ -220,7 +220,7 @@ session:
   progress:
     metric: Independently settled high-value structural obligations and viable next proof contracts
     before: H110 and H123 accepted; H122 refuted. Full distinguished-square compatibility remains untested and complete density verification source-blocked.
-    after: null
+    after: H124's finite screen is unresolved. The stronger continuous common obstacle and complete closed-cover instruments passed independent review. The graph source control refused before geometry; degree-eight admission is repaired and reviewed, without resuming the stopped sequence. No new packing bound.
   delegations:
   - task: Full-square producer and source-free controls (think-epg9)
     operator: Codex angle_reader_recovery, max thinking
@@ -846,7 +846,8 @@ session:
   - 'Phase-accounting correction at finalization: the original six-phase allowance was exceeded by the separately dispatched source-free and refusal-review switches. Nine rows now retain the actual work plus finalization; this correction does not extend any author, scientific or session deadline, or authorize more science.'
   - Root source-binding authoring think-308o ran08:50:35–08:58:29 UTC,474 seconds; fifteen synthetic controls including a real toy-only CLI roundtrip passed in 0.59 seconds wall and 0.55 CPU. No scientific source was evaluated.
   - The immutable3f036314 push tier passed 941 reachable tests and all other steps but found two undeclared graph-only status consumers. Exact consumer declarations, including the later geometry readers, now pass all six focused controls; no inventory rule was weakened.
-  - Frozen density engine23498e87 and the prospective source-control protocol are committed. Its immutable push and full checkpoint gates are running; no completed latest full gate is claimed yet.
+  - 'full gate: full at 23498e87: passed (1631.92 seconds; matching code delta bfc27c7a passed 45/45 push steps in 130.89 seconds; this does not claim a full run at bfc27c7a)'
+  - Final combined source-free controls pass225 tests in2.11 seconds. Independent high-thinking handoff audit think-dmvq completed; stale status, next action, cost and prose spacing were corrected without scientific evaluation.
   - Session091 checkpoint a78e9af7 is published on PR109 with full d8b6fcf3 and later ae341475 push-tier evidence.
   - All required hosted checks passed on a78e9af7, observed at 07:58 UTC; the longest required job was validate at 2m49s.
   - Immutable planning checkpoint576bbe0a passed all 45 push-tier steps in 126.25 seconds and is published on PR109.
@@ -854,8 +855,8 @@ session:
   - The a75d751a push tier passed every step except the missing document-map entry for the new graph assessment; no source or test failure. The entry is added before prospective target admission.
   - Exp124 protocol4acafdfc followed31/31 records in 17.88 seconds. Its sole producer at 08:20:59 returned actual exit zero and no_witness in 0.84 seconds; the conditional reader was not invoked.
   - Root repaired the generic graph rational parsers under think-nafq, with six non-evaluating red tests before the fix and 85 combined green controls afterward. Patch freeze08:30:46; independent reviews retain their original deadlines.
-  stop_reason: null
-  next_action: Continue with independently authored H124 residual-cover source binding and a bounded caller, alongside a separately declared degree-eight graph source-control attempt. Neither target is yet allocated; preserve the stopped original sequence and check fresh IDs before the next session.
+  stop_reason: Second checkpoint complete; eight-active-hour authorization continues and is not exhausted.
+  next_action: Select think-7e72 for independently authored H124 residual-cover source binding and a bounded caller, alongside a separately declared degree-eight graph source-control attempt in the density lane. Neither target is yet allocated; preserve the stopped original sequence and check fresh IDs before the next session.
 ---
 # Full-square Compatibility and the Next Density Decision
 

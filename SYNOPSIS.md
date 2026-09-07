@@ -612,16 +612,18 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**Selected next entry:** `think-7e72` is the terminal Session091 handoff.
+**Selected next entry:** `think-7e72` continues the terminal Session093 handoff.
 Its three scientific invocations and checkpoint review are complete in
 [Session 091](packing/campaign/agent-sessions/session-091-structural-compatibility.md)
-under `think-fqhr`. The selected local follow-up is a full distinguished-square
-compatibility discriminator, now registered as H-124 and entering source-free
-preparation in
+under `think-fqhr`. The full distinguished-square compatibility discriminator H-124
+subsequently returned an unresolved finite screen in
 [Session093](packing/campaign/agent-sessions/session-093-full-square-compatibility.md)
-under `think-bmx9`. A prospective target protocol remains required; no H-124 target has
-run. [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md),
-under `think-9qrx`, completed the user-approved research block after PR 101 merged.
+under `think-bmx9`. Its stronger continuous common obstacle and generic cover tools
+passed independent review.
+Next, bind the complete two-band residual cover to independently reconstructed sources
+and a bounded caller; no cover target has run.
+[Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
+`think-9qrx`, completed the user-approved research block after PR 101 merged.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
 dual mass of about 10.080180 at depth one, below the obstruction threshold.
 No bridge or unchanged retry is selected.
@@ -640,11 +642,12 @@ This refutes the unchanged unconditional P12 auxiliary, not H-036. Exp-122 refut
 H-122’s small-diamond conditional cover through an independently checked square.
 Exp-123 accepts complete near45 localization through four exact continuous guards and
 the reviewed geometric reduction.
-No full distinguished-square compatibility target has run; the broader bound is
-unchanged. H-107’s reviewed fixed-site scalar protocol is held out of the next two-hour
-block under paused `think-7fec`; later-session reconsideration preserves its unlaunched
-history. The freed attention goes to a bounded conditional-compatibility assessment from
-the accepted A-point lemmas, not an automatic P12 repair.
+The fixed-S H-124 screen found no witness without certifying continuous coverage; the
+broader bound is unchanged.
+H-107’s reviewed fixed-site scalar protocol is held out of the next two-hour block under
+paused `think-7fec`; later-session reconsideration preserves its unlaunched history.
+The freed attention goes to a bounded conditional-compatibility assessment from the
+accepted A-point lemmas, not an automatic P12 repair.
 Full validation of research checkpoint `99a3ad42` passed;
 [Session 089](packing/campaign/agent-sessions/session-089-agenda024-next-phases.md)
 retains that verdict and the completed experiments, which must not be repeated.
