@@ -73,6 +73,26 @@ Native command, step and run receipts are retained for every pair:
 | 2 | [Control 2](../checkpoints/VE-004-control-2.tar.gz) | [Candidate 2](../checkpoints/VE-004-candidate-2.tar.gz) |
 | 3 | [Control 3](../checkpoints/VE-004-control-3.tar.gz) | [Candidate 3](../checkpoints/VE-004-candidate-3.tar.gz) |
 
+## Hosted Failure Evidence
+
+The hosted observations motivated the candidate; they are not a matched performance
+experiment. Their native command, step and run receipts are preserved below. The prior
+successful run tested merge `8e2c0c31`; the two failures tested merge `1b2f3c56`.
+Exact-verifier commands were unchanged across those sources.
+
+| Hosted observation | Checks wall | Exact-verification step | Native receipts |
+| --- | ---: | ---: | --- |
+| [Prior success, run 34142796559](https://github.com/jlevy/squares/actions/runs/34142796559) | 91.06 s | 49.22 s | [Prior checkpoint](../checkpoints/VE-004-ci-prior.tar.gz) |
+| [Run 34154326299, attempt 1](https://github.com/jlevy/squares/actions/runs/34154326299/attempts/1) | 150.31 s | 95.14 s | [First failure](../checkpoints/VE-004-ci-failure-1.tar.gz) |
+| [Run 34154326299, attempt 2](https://github.com/jlevy/squares/actions/runs/34154326299/attempts/2) | 150.24 s | 94.35 s | [Second failure](../checkpoints/VE-004-ci-failure-2.tar.gz) |
+
+Both failing attempts passed every correctness check and exceeded the unchanged
+149.085-second drift boundary. The exact verifier started late and was the last step
+running. Other unchanged commands also slowed, including commands that ran during that
+final tail. Runner metadata does not identify a hardware or load cause. Starting the
+verifier earlier addresses the measured queue delay; it does not explain or eliminate
+hosted-runner variation.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
