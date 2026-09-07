@@ -55,7 +55,12 @@ hypothesis:
 Session 089 accepted readiness for the finite-row ceiling route after the
 [independent review](../series/series-000-smoke-and-calibration/results/agenda-026/bc-254-target-readiness-independent-review.md)
 and its parser correction.
-Complete almost-everywhere depth verification has not passed its scientific controls.
+The conservative graph instrument subsequently passed all five scientific controls in
+[Session094](../agent-sessions/session-094-complete-cover-and-density-controls.md):
+overlapping half-weight acceptance, original and uniform mass-eleven acceptance,
+positive-area perturbed-source rejection, and genuine graph nonacceptance on that
+perturbation. Ten independently checked producer/reader calls used18.65 seconds wall.
+This admits a separate prospective candidate experiment, not acceptance of H099.
 
 [Exp-113](../series/series-000-smoke-and-calibration/experiments/exp-113-h-099-trump-support-screen.md)
 tested the prospectively frozen support and returned a separately replayed finite-row
@@ -87,8 +92,9 @@ bound of one on every clique proves the required depth bound away from the finit
 of square boundaries.
 An overweight clique does not prove a geometric violation.
 This sufficient method changes the instrument, not H-099’s claim or accept rule.
-Independent generic graph controls have passed; geometric source controls and a
-prospective candidate protocol remain required before any acceptance.
+Independent generic and geometric source controls have passed.
+A prospective candidate protocol and complete independent candidate replay remain
+required before acceptance.
 
 [BC-242](../series/series-000-smoke-and-calibration/results/agenda-026/bc-242-full-size-density-proof-contract.md)
 supplies the weak-duality semantics.

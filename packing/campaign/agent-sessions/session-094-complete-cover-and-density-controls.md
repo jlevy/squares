@@ -12,6 +12,7 @@ session:
   started_at: '2026-09-07T09:49:00Z'
   deadline_at: '2026-09-07T11:49:00Z'
   branch: codex/structural-compatibility-continuation
+  resource_rollups: [packing/campaign/resource-usage/codex-task-tree-session-094.yaml]
   goal: Continue the selected H124 complete-cover obligation and separately assess repaired density controls, retaining independent evidence and the third checkpoint on PR109.
   workflow_phases:
   - workflow: pipeline-improvement
@@ -103,7 +104,7 @@ session:
     objective: Prove one fixed collision-polygon strengthening source-free while separately testing the newly admitted density controls.
     commitment: BC-255
     bead: think-8x6o
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: The diagonal branch is certified and independent repricing selected a bounded fixed-polygon route for the missing near-axis branch; density readiness now has its missing review.
     budget_minutes: 30
@@ -113,10 +114,31 @@ session:
     validation_command: Independent analytical derivations without target construction; frozen density CLI and complete conditional reader predicates after committed records.
     kill_condition: Original author caps, any unproved fixed guard, or the density launch11:00 and finish11:06 cutoffs. No radius refinement or target repetition.
     fallback: Preserve exp125's partial theorem and exact missing premise; keep any failed or uninvoked control suffix explicit.
+    outcome: Both independent derivations prove the fixed displacement and collision implication; allfive density controls passed. The unchanged mass56/5 candidate has a separate prospective record and independent protocol GO, not an invocation.
+    evidence: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-collision.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-review.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-graph-depth-assessment.md]
+    stop_reason: The source-free proof and control obligations are complete; independent source binding and the separately admitted density candidate remain.
+    next_action: Prepare disjoint independent collision sources and the explicit bounded caller; commit and check exp126 before any target call.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: Independently bind the proved collision-cover source and run the one newly admitted fixed density candidate if ready.
+    commitment: BC-255
+    bead: think-63oj
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Both mathematical proofs are frozen, while independent source constructors and a distinct explicit caller are now the remaining readiness work.
+    budget_minutes: 25
+    started_at: '2026-09-07T11:02:37Z'
+    deadline_at: '2026-09-07T11:27:37Z'
+    expected_output: Source-free producer/reader/caller packages with reviewable controls, and exp126's scoped result or non-invocation.
+    validation_command: Project Python3.14 synthetic tests, independent source review, immutable push and prospective records before any new source; exp126 uses its already frozen engine and exact protocol.
+    kill_condition: Original disjoint author caps, failed source readiness or exp126 launch11:12/finish11:15. No strengthened-axis evaluation without a separate future protocol.
+    fallback: Preserve complete proof packages and the exact missing instrument obligation for the final checkpoint and Session095; no target retry.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Commit the reviewed future density allocation and run records before any control; proof authors remain independent and source-free.
+    next_action: Pass committed exp126 records before its sole target; keep collision sources uncalled while authors and reviewer work.
   primary_bead: think-63oj
   status: in_progress
   budget:
@@ -494,6 +516,8 @@ session:
   - packing/devtools/run_h124_cover.py
   - packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md
   checks:
+  - Fresh reviewed density allocation think-b9i7 passed allfive source controls after committed7fcc987b/ec38194a and31/31 records in18.85 seconds. Allten actual exits zero; combined18.65 seconds wall. Uniform control binds60 squares and1770 pairs, mass11. No candidate yet; old failed and uninvoked sequences remain unchanged.
+  - Partial Session094 cost receipt covers09:49:00–10:52:22 UTC,3802 seconds wall and9897.624 recursive agent-seconds. It is a live lower bound with boundary limitations, not the full two-hour slice. Collector used28.69 seconds wall and24.93 CPU; no raw prompts or reasoning prose retained.
   - Engine7daa7c55 full gate passed all checks in1623.67 seconds; external1623.74 wall,3260.24 user,89.68 system. Published outcome1acd6320 passes45/45 push steps in148.44 seconds; external151.23 wall,202.37 user,23.32 system. Hosted7daa required checks were green at10:44; laterCI remains separate.
   - Generic vertex/Minkowski reduction think-vnua proved independently10:37:49–10:47:55 (606 seconds), with world-frame rotation, empty-triangle branch, closed seams and outer-domain scope. Its actual earlier start gives the stricter10:52:49 cap, not the guessed dispatch timestamp.
   - Fresh density allocation think-b9i7 received independent mechanical protocol GO under think-lvb6, actual10:47:53–10:48:36 (43 seconds), before10:52:14. Mathematical source and exact predicate reviews remain separate; no actual control has run yet.

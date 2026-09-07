@@ -345,6 +345,38 @@ and actual exit. Never create evidence for an uncalled process.
 On completion, append the row-by-row disposition here, including any uninvoked suffix,
 and reprice a separate candidate only if all five controls passed.
 
+### Reviewed Allocation Outcome
+
+All five controls passed.
+Protocol `7fcc987b` and session correction `ec38194a` were committed before invocation;
+all31 record checks passed in18.85 seconds.
+The immutable engine `7daa7c55` had passed both its push and full gates.
+Every process ran once, in the declared row order, between the observed10:52 and10:57
+UTC boundaries. Each conditional reader followed an admitted producer; all ten actual
+exits were zero.
+
+| Control | Producer / reader wall | User / system, producer then reader | Independent outcome |
+| --- | --- | --- | --- |
+| Half-weight | 0.14 / 0.14 seconds | 0.10 / 0.02;0.10 / 0.02 | Depth bound verified, mass1, two overlapping squares |
+| Original | 0.41 / 0.31 seconds | 0.38 / 0.02;0.28 / 0.02 | Depth bound verified, mass11, eleven squares and55 pairs |
+| Perturbed pair | 0.21 / 0.18 seconds | 0.18 / 0.02;0.15 / 0.02 | Strict positive-area overweight witness independently verified |
+| Perturbed graph | 0.41 / 0.32 seconds | 0.38 / 0.02;0.29 / 0.02 | Genuine overweight clique replayed; no depth-one claim |
+| Uniform | 11.73 / 4.80 seconds | 11.68 / 0.03;4.76 / 0.03 | Depth bound verified, mass11, sixty squares and1,770 pairs |
+
+Combined external process wall time is18.65 seconds.
+The perturbed pair witness has exact radius1/800 and excess1 for roster pair[2,5]. Its
+reader’s `candidate-refuted` label refers only to the named perturbed control, never the
+H099 candidate. The separate graph receipt names the same weight-two clique, returns the
+required inner `overweight_clique` stop, and independently replays as
+`verified_overweight_clique` with outer `unresolved` and `bound_proved=false`.
+
+Raw packets and external timing are retained under `graph-source-controls-reviewed/`. No
+output was overwritten and no row was retried.
+These results satisfy the declared instrument soundness controls.
+They leave H099 and its bracket[11,56/5] unchanged.
+The unchanged exp113 candidate is now eligible for a separately committed prospective
+experiment; no candidate was invoked by this allocation.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

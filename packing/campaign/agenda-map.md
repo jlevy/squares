@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **4** in_progress, **20** ready, **13** tentative, **60** blocked, **41** stopped, **126** complete.
+- **5** in_progress, **20** ready, **13** tentative, **59** blocked, **41** stopped, **126** complete.
 
-- **18 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-243`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **17 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -40,6 +40,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-025 | `BC-232` | in_progress | 0 | efficiency | research | Can the retained 3.82 primal/dual state be advanced to total covering mass below 11 or exact packing value at… | `think-gmdy` |
 | agenda-025 | `BC-252` | in_progress | 1 | insight | research | Which weight or support change addresses the retained limiting witnesses? | `think-361m` |
 | agenda-025 | `BC-253` | tentative | 2 | insight | research | Can an existential witness menu cover a limiting closed pose box? | `think-mw02` |
+| agenda-026 | `BC-243` | in_progress | 0 | insight | measurement_validation | Does the smallest exact a.e.-depth dual pilot certify a value above eleven, which kills the equality-density… | `think-mt6q` |
 | agenda-026 | `BC-246` | ready | 0 | correctness | tool_validation | Does the typed language recover Trump's stationary backbone, every retained branch, and its local theorem… | `think-3l93` |
 | agenda-026 | `BC-247` | ready | 1 | efficiency | tool_validation | On the complete n=3 and n=4 controls, and the local n=5 Göbel control, is typed backbone generation faithful… | `think-qi66` |
 | agenda-026 | `BC-255` | in_progress | 1 | insight | research | What is the first complete proof obligation for a useful restricted structural theorem? | `think-dene` |
@@ -116,7 +117,6 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-025 | `BC-235` | 1 | `BC-234` | no | — |
 | agenda-025 | `BC-236` | 1 | `BC-235` | no | — |
 | agenda-025 | `BC-237` | 2 | `BC-236` | no | — |
-| agenda-026 | `BC-243` | 0 | `BC-242`, `BC-220` | yes | Scientific source-control acceptance. Session093's changed conservative weighted-graph certificate has reviewed generic… |
 | agenda-026 | `BC-249` | 0 | `BC-224` | no | — |
 | agenda-026 | `BC-244` | 1 | `BC-243` | no | — |
 | agenda-026 | `BC-248` | 2 | `BC-246`, `BC-247` | no | An exact fractional measure of mass at least eleven for the chosen subproblem, no more than 2,311,290 of the present… |
@@ -169,7 +169,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-023 | active |  | 3 |  | 2 |  |  | 5 |
 | agenda-024 | active |  |  |  | 5 |  | 3 | 8 |
 | agenda-025 | active | 3 |  | 1 | 6 |  | 3 | 13 |
-| agenda-026 | active | 1 | 2 | 2 | 4 |  | 5 | 14 |
+| agenda-026 | active | 2 | 2 | 2 | 3 |  | 5 | 14 |
 | agenda-027 | paused |  | 4 | 3 | 3 |  | 1 | 11 |
 | agenda-028 | paused |  | 3 | 2 | 1 |  | 1 | 7 |
 
@@ -261,7 +261,7 @@ Open frontier: `BC-259`, `BC-260`, `BC-261`, `BC-262`, `BC-263`, `BC-264`, `BC-2
 | agenda-026 | `BC-240` | complete | Can the existing 128-branch Trump calculation be stated as one quantitative local theorem with… |
 | agenda-026 | `BC-241` | complete | Does a source-distinct reviewer reproduce every conclusion that the retained Trump records actually… |
 | agenda-026 | `BC-242` | complete | What is the correct primal and weak-dual formulation for a density over full-size placements,… |
-| agenda-026 | `BC-243` | blocked | Does the smallest exact a.e.-depth dual pilot certify a value above eleven, which kills the… |
+| agenda-026 | `BC-243` | in_progress | Does the smallest exact a.e.-depth dual pilot certify a value above eleven, which kills the… |
 | agenda-026 | `BC-244` | blocked | If the dual-only pilot leaves equality alive, can a continuum primal guard and inverse dual design… |
 | agenda-026 | `BC-245` | complete | What finite typed stationary-backbone language is complete for a minimal counterexample, without… |
 | agenda-026 | `BC-246` | ready | Does the typed language recover Trump's stationary backbone, every retained branch, and its local… |

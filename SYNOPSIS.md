@@ -2859,7 +2859,7 @@ round that names the hypothesis, control roles included.
 | [H-096](packing/campaign/hypotheses/H-096-n11-angle-cell-kernels.md) | open question | Can whole-angle-cell kernels cover more useful positive mass with a tractable exact verifier? | 0 | — |
 | [H-097](packing/campaign/hypotheses/H-097-n11-existential-witness-menus.md) | open question | Can pose-dependent witness choice beat a universal witness while retaining complete pose-box coverage? | 0 | — |
 | [H-098](packing/campaign/hypotheses/H-098-n11-segment-measures.md) | open question | Can segment-supported measures improve the bound with exact intersection-length coverage? | 0 | — |
-| [H-099](packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md) | unresolved | The exact deduplicated D4 closure of Trump’s eleven squares admits dual mass above eleven at a.e. depth at most one | 1 | 29s wall |
+| [H-099](packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md) | unresolved | Scientific graph controls passed; complete fixed-candidate verification is prospectively registered, not invoked | 2 | 29s wall |
 | [H-100](packing/campaign/hypotheses/H-100-below-trump-area-density.md) | open question | Can a full-size area density give mass below eleven at a side between the retained bound and Trump? | 0 | — |
 | [H-101](packing/campaign/hypotheses/H-101-trump-equality-density.md) | open question | Can mass-eleven density at Trump’s side and a complete equality analysis establish uniqueness? | 0 | — |
 | [H-102](packing/campaign/hypotheses/H-102-complete-restricted-angle-support-families.md) | open question | Which complete restricted angle or wall-support family yields a useful theorem, starting with H-036? | 0 | — |
@@ -3111,11 +3111,12 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-090.yaml` | session-090 | 1,341 | 9.8 h | 3.94 h | 3.95 h | yes |
 | `codex-task-tree-session-091.yaml` | session-091 | 553 | 5.05 h | 1.93 h | 1.93 h | yes |
 | `codex-task-tree-session-093.yaml` | session-093 | 673 | 6.07 h | 1.99 h | 1.99 h | yes |
+| `codex-task-tree-session-094.yaml` | session-094 | 351 | 2.75 h | 1.06 h | 1.06 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 48 |
-| unmeasured | 45 |
+| measured | 49 |
+| unmeasured | 44 |
 | **total** | **93** |
 
 <!-- END GENERATED: session-close-report -->
@@ -3132,7 +3133,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 81 rounds registered in `series-000`.
+There are 82 rounds registered in `series-000`.
 
 They record 2152.1 agent-minutes and 1223.2 wall-minutes.
 Exp-114 completed its one target and independent replay.
@@ -3253,6 +3254,7 @@ archive beside it.
 | [exp-123](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-123-near45-localization.md) | 11 | target | H-123 | four continuous localization polynomial guards | independent exact reader checks all four guards and sixteen coefficients; reviewed reduction supplies complete localization | accepted |
 | [exp-124](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-124-full-square-compatibility-screen.md) | 11 | target | H-124 | fixed exp122 square and exact45 canonical Q | no witness after837 event cells; witness-only reader not invoked | unresolved |
 | [exp-125](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md) | 11 | target | H-124 | Complete residual cover for both whole bands | Diagonal independently certified; axis no_chain without reader | unresolved |
+| [exp-126](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md) | 11 | target | H-099 | Complete graph bound for unchanged56/5 candidate | Prospectively registered, not invoked | in-progress |
 
 ### Cost and provenance
 
@@ -3339,10 +3341,11 @@ archive beside it.
 | exp-123 | one fifteen-second producer and conditional ten-second independent reader | 0.21 s | — | criterion | `3ea8e346` |
 | exp-124 | one thirty-second producer; conditional reader not invoked | 0.84 s | — | criterion | `a75d751a` |
 | exp-125 | one producer per band; only diagonal reader invoked | 1.90 s | — | criterion | `7daa7c55` |
+| exp-126 | one60-second scientific child and conditional60-second independent replay | — | — | not invoked | `7daa7c55` |
 
-### What the 81 rounds jointly establish
+### What the 82 rounds jointly establish
 
-The 81 rounds use 2152.1 agent-minutes and 1223.2 wall-minutes under the campaign’s
+The 82 rounds use 2152.1 agent-minutes and 1223.2 wall-minutes under the campaign’s
 retained effort accounting.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
 separately in Session089.

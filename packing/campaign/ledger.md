@@ -107,7 +107,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-090](agent-sessions/session-090-four-hour-research.md) | stopped | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 11 | think-9qrx | After Session090 closes, select think-qv73 under BC255 for H110's source-free fixed P12 escape instrument and independent review, then a fresh prospective experiment. The September7 priority amendment holds H107 out of the next block and selects a bounded conditional-compatibility assessment alongside H110. Agenda024 owns this revised allocation and the deferred bead. Density remains source-blocked; no exp116 retry. |
 | [session-091](agent-sessions/session-091-structural-compatibility.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `documentation-pass` (correctness) | 6 | think-fqhr | Select think-7e72 for a bounded full-P10 distinguished-square compatibility discriminator after fresh ID/ownership checks; no repeated H110/H122/H123 invocation. |
 | [session-093](agent-sessions/session-093-full-square-compatibility.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 9 | think-bmx9 | Select think-7e72 for independently authored H124 residual-cover source binding and a bounded caller, alongside a separately declared degree-eight graph source-control attempt in the density lane. Neither target is yet allocated; preserve the stopped original sequence and check fresh IDs before the next session. |
-| [session-094](agent-sessions/session-094-complete-cover-and-density-controls.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `research-loop` (insight) | 5 | think-63oj | Inspect exp125 retained receipts; reprice the missing near-axis S obligation after the certified diagonal lemma. The density sequence remains uninvoked; no completed producer or reader may be repeated. |
+| [session-094](agent-sessions/session-094-complete-cover-and-density-controls.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `research-loop` (insight) | 6 | think-63oj | Inspect exp125 retained receipts; reprice the missing near-axis S obligation after the certified diagonal lemma. The density sequence remains uninvoked; no completed producer or reader may be repeated. |
 
 ### Workflow summary
 
@@ -120,7 +120,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 18 | 1 | 58 | 2 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 9 | 4 | 62 | 7 |
+| `research-loop` | 9 | 4 | 63 | 7 |
 | `pipeline-improvement` | 25 | 0 | 126 | 0 |
 | `documentation-pass` | 1 | 0 | 7 | 0 |
 | `review-planning-oversight` | 0 | 0 | 2 | 0 |
@@ -544,7 +544,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | BC-240 | research | 11 | complete | 0 | think-4ln1 | BC-241's source-distinct retained-record review must decide whether this local endpoint is safe to invoke; no global capture argument may use it first. |
 | BC-241 | measurement_validation | 11 | complete | 0 | think-woi0 | Whether the local endpoint is ready to serve as the last step of a global proof. |
 | BC-242 | research | 11 | complete | 0 | think-9xxh | BC-243 may build the exact a.e.-depth dual verifier only after BC-220. A sound D>11 kills equality before any continuum primal guard is funded. |
-| BC-243 | measurement_validation | 11 | blocked | 0 | think-mt6q | Whether exact dual depth already rules out a sharp mass-eleven density before the program spends on continuum primal coverage. |
+| BC-243 | measurement_validation | 11 | in_progress | 0 | think-mt6q | Exp126 separately tests the unchanged56/5 candidate with a complete graph certificate after allfive Session094 scientific controls passed. Only an independent full source-bound depth replay accepts H099; graph overweight remains unresolved. No continuum primal coverage or alternate candidate is funded. |
 | BC-244 | research | 11 | blocked | 1 | think-h7kl | A possible one-body proof endpoint, or evidence that global classification must carry the closure burden. |
 | BC-245 | research | 3, 4, 5, 11 | complete | 0 | think-do04 | After BC-220, price a lazy producer and independent replay only on n=3, n=4 and Trump controls. No global n=11 atlas opens without measured pruning and cost. |
 | BC-246 | tool_validation | 11 | ready | 0 | think-3l93 | Whether the atlas language can join the global tree to the already-verified local neighborhood. |
@@ -552,7 +552,7 @@ Status: **active**. Pursue full-size density and structural arguments in paralle
 | BC-248 | research | 11 | blocked | 2 | think-901o | Whether certificate-guided enumeration can cover the complement of the Trump neighborhood at a finite, auditable cost. |
 | BC-249 | measurement_validation | 11 | blocked | 0 | think-7dd9 | The closure program's honest theorem gain, measured costs, negative results, and best continuation. |
 | BC-254 | research | 11 | complete | 0 | think-01q4 | An exact upper certificate can retire this support; only verified D>11 can obstruct equality density. A floating LP objective decides neither. |
-| BC-255 | research | 11 | in_progress | 1 | think-dene | Think-7e72 owns the next local candidate: test the changed claim that every contained canonical near45 P10-avoiding Q intersects every both-band contained P9-avoiding S. First price source-free controls and independent review for fixed exp122 S and one exact45 Q frame; no target is launched here and no new H/exp ID is reserved. A verified pair rejects only this sufficient route; finite no-witness is unresolved. A complete claim would combine with H106/H123 and closed-core counting, without needing A anchors. Preserve external BC261/BC273 ownership and do not duplicate their exporters. Only mass-derived near-tight forcing needs a valid covering measure; geometric conflicts, interval no-goods and restricted wall/angle arguments do not inherently need it. |
+| BC-255 | research | 11 | in_progress | 1 | think-dene | Think-7e72 retains H124: independently bind the proved fixed collision-center polygon and append it directly to all13 original axis cover regions. Preserve the accepted diagonal lemma. Only source-free controls, review and a separately committed changed-axis protocol may authorize that new cover; no radius sweep, diagonal rerun or general two-angle solver. A complete axis cover combines with exp125, H106/H123 and closed-core counting; sufficient-cover failure is unresolved and does not refute H124 or improve the unrestricted bound. Preserve external BC261/BC273 ownership and do not duplicate their exporters. Only mass-derived near-tight forcing needs a valid covering measure; geometric conflicts, interval no-goods and restricted wall/angle arguments do not inherently need it. |
 | BC-256 | research | 11 | tentative | 2 | think-pjk7 | For H-036, verify every angle restriction and side strictly below 3.878; a counterexample need not improve Trump's record. A different target needs its own H. |
 | BC-257 | research | 11 | tentative | 2 | think-k9zi | A direct mass-below-eleven route at a declared lower side, separately scoped from H-101's equality classification at Trump. |
 
@@ -592,7 +592,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 81 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 82 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -672,7 +672,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | H-096 | open question | proof | Can finite rational inner kernels, contained throughout their assigned |  | 0 |  |  |
 | H-097 | open question | proof | Can a finite witness menu certify that every admissible unit-square po |  | 0 |  |  |
 | H-098 | open question | proof | Can nonnegative segment-supported measures give stronger or cheaper n  |  | 0 |  |  |
-| H-099 | unresolved | proof | At the exact Trump side U, the deduplicated D4 images of the eleven ex |  | 1 |  | 29s wall |
+| H-099 | unresolved | proof | At the exact Trump side U, the deduplicated D4 images of the eleven ex |  | 2 |  | 29s wall |
 | H-100 | open question | proof | Is there a side L strictly between the retained verified lower bound a |  | 0 |  |  |
 | H-101 | open question | proof | Does the exact Trump-side container admit a nonnegative integrable are |  | 0 |  |  |
 | H-102 | open question | proof | Which explicitly delimited n = 11 angle-composition or wall-support fa |  | 0 |  |  |
@@ -818,6 +818,12 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-126 | series-000 | 11 | Session094 coordinator, BC243; max mathematical judgment | H-099 | Prospectively registered after all scientific controls passed; no candidate invocation yet. Committed protocol, independent review and record checks are required before launch. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -835,7 +841,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 ## Effort
 
-81 rounds, 2152.1 agent-minutes, 1223.2 wall-minutes.
+82 rounds, 2152.1 agent-minutes, 1223.2 wall-minutes.
 
 ## Exploration reports not yet codified
 

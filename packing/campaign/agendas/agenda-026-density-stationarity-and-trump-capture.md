@@ -177,7 +177,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: insight
     instances: [11]
-    state: blocked
+    state: in_progress
     priority: 0
     question: >-
       Does the smallest exact a.e.-depth dual pilot certify a value above eleven, which
@@ -206,24 +206,20 @@ agenda:
     hypotheses: [H-099]
     workflows: [research-loop, factual-review]
     depends_on: [BC-242, BC-220]
-    blocked_on: >-
-      Scientific source-control acceptance. Session093's changed conservative
-      weighted-graph certificate has reviewed generic instruments and source
-      binding, but its original-source control refused before geometry at a
-      degree-four admission guard. The degree-eight repair is independently
-      reviewed; the failed sequence stays stopped. A separately declared attempt
-      must reconcile all existing soundness controls before target admission.
-      BC254 retains exp113's unchanged candidate; exp115 excludes overweight
-      pairs, not higher-order depth. A uniform D=11 control is not the target.
     parallel_group: agenda026-density
     program: n11-density-stationarity-trump-capture
     next_evidence: >-
-      Whether exact dual depth already rules out a sharp mass-eleven density before the
-      program spends on continuum primal coverage.
+      Exp126 separately tests the unchanged56/5 candidate with a complete graph
+      certificate after allfive Session094 scientific controls passed. Only an
+      independent full source-bound depth replay accepts H099; graph overweight
+      remains unresolved. No continuum primal coverage or alternate candidate is funded.
     note: >-
       BC-250 narrows prospective allocation: retain all soundness controls, but no
       automatic 180-minute build or BC-244 launch. Candidate acceptance uses H-099;
       a sampled objective above eleven does not certify depth.
+      Session094's fresh reviewed five-row source sequence passed allten
+      producer/reader calls in18.65 seconds. The original failed sequence and
+      expired uninvoked sequence remain preserved; this does not repeat them.
   - id: BC-244
     purpose: research
     owner_focus: insight
@@ -527,6 +523,11 @@ agenda:
       independent review. The next slice binds the complete two-band residual
       cover to independent sources and a bounded caller. No packing bound changes.
       All four scientific invocations are terminal, without retries.
+      Session094 exp125 subsequently certified the entire diagonal S-band cover;
+      the axis sufficient cover returned no_chain. Two independent mathematical
+      derivations now prove a fixed center-correlated collision region that may
+      strengthen the missing axis cover. Its independent source bindings are being
+      authored without scientific construction; no new axis target is allocated yet.
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-restricted-angle-assessment.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-114-h-104-fixed-side-auxiliaries.md
@@ -540,16 +541,19 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-122-diamond-conditional-cover-screen.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-123-near45-localization.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-collision.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-review.md
     workflows: [insight-iteration, pipeline-improvement, research-loop]
     depends_on: [BC-250]
     next_evidence: >-
-      Think-7e72 owns the next local candidate: test the changed claim that every
-      contained canonical near45 P10-avoiding Q intersects every both-band
-      contained P9-avoiding S. First price source-free controls and independent
-      review for fixed exp122 S and one exact45 Q frame; no target is launched
-      here and no new H/exp ID is reserved. A verified pair rejects only this
-      sufficient route; finite no-witness is unresolved. A complete claim would
-      combine with H106/H123 and closed-core counting, without needing A anchors.
+      Think-7e72 retains H124: independently bind the proved fixed collision-center
+      polygon and append it directly to all13 original axis cover regions. Preserve
+      the accepted diagonal lemma. Only source-free controls, review and a separately
+      committed changed-axis protocol may authorize that new cover; no radius sweep,
+      diagonal rerun or general two-angle solver. A complete axis cover combines
+      with exp125, H106/H123 and closed-core counting; sufficient-cover failure is
+      unresolved and does not refute H124 or improve the unrestricted bound.
       Preserve external BC261/BC273 ownership and do not duplicate their exporters.
       Only mass-derived
       near-tight forcing needs a valid covering measure; geometric conflicts,
