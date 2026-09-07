@@ -592,7 +592,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 82 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 83 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -697,7 +697,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | H-121 | blocked | proof | Some global minimizing packing of eleven unit squares has every actual |  | 0 |  |  |
 | H-122 | refuted | proof | At q=1939/500, every contained closed unit square whose orientation mo |  | 1 |  | 0s wall |
 | H-123 | confirmed | proof | At q=1939/500, every contained closed unit square with orientation wit |  | 1 |  | 0s wall |
-| H-124 | unresolved | proof | At q=1939/500, every contained closed unit square Q in the actual near |  | 2 |  | 3s wall |
+| H-124 | unresolved | proof | At q=1939/500, every contained closed unit square Q in the actual near |  | 3 |  | 3s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -819,6 +819,12 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-127 | series-000 | 11 | Session095 coordinator, BC255; max mathematical judgment | H-124 | Prospectively registered for Session095. Independent protocol review, committed record checks and the immutable engine push gate are required before the sole scientific invocation. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -836,7 +842,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 ## Effort
 
-82 rounds, 2152.1 agent-minutes, 1223.3 wall-minutes.
+83 rounds, 2152.1 agent-minutes, 1223.3 wall-minutes.
 
 ## Exploration reports not yet codified
 

@@ -66,6 +66,10 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md": (
+        "requires an independent graph-proof status for a conditional depth ceiling, "
+        "not the frontier packing-side field or an exact value of s(n)"
+    ),
     "packing/devtools/check_geometric_graph_certificate.py": (
         "consumes a graph-proof status only after reconstructing the conservative "
         "interior-overlap graph; the resulting depth ceiling is not a packing side"

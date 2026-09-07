@@ -1465,7 +1465,7 @@ sessions:
   title: "Complete-cover binding and repaired density controls"
   status: in_progress
   primary_bead: think-63oj
-  phases: 7
+  phases: 8
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-094.yaml

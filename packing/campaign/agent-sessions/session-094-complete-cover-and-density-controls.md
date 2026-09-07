@@ -152,7 +152,7 @@ session:
     started_at: '2026-09-07T11:27:38Z'
     deadline_at: '2026-09-07T11:29:00Z'
     expected_output: Immutable push/full evidence or explicit pending state, terminal receipts, updated PR109 and a prospective Session095 plan.
-    validation_command: Immutable packing-validate gates, record checks, prose review and cost-rollup refresh.
+    validation_command: packing-validate --push
     kill_condition: Finalization starts11:29; no new scientific target or extension of completed allocations.
     fallback: Publish completed evidence and exact pending gates, then continue the separately planned final slice.
     outcome: Source engine b7440262 is committed. The record checker identified that finalization had been labeled before the reserve; this short preceding work phase preserves the actual11:27:38 start without moving the reserve or any deadline.

@@ -2886,7 +2886,7 @@ round that names the hypothesis, control roles included.
 | [H-121](packing/campaign/hypotheses/H-121-axis-plus-one-minimizer.md) | blocked | Some global minimizing packing has orientations in the axis-plus-one-angle family | 0 | — |
 | [H-122](packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md) | refuted | One independently checked square avoids all nine marks and the forced diamond; full-square compatibility remains open | 1 | 0.20s wall |
 | [H-123](packing/campaign/hypotheses/H-123-near45-coordinate-localization.md) | confirmed | Complete coordinate localization follows from the reviewed reduction and independent four-guard certificate | 1 | 0.21s wall |
-| [H-124](packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md) | unresolved | Whole diagonal S-band cover independently certified; near-axis S remains unresolved | 2 | 2.74s wall |
+| [H-124](packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md) | unresolved | Whole diagonal S-band cover certified; fixed collision-augmented axis cover prospectively registered | 3 | 2.74s wall |
 
 ### Confirmed
 
@@ -3135,7 +3135,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 82 rounds registered in `series-000`.
+There are 83 rounds registered in `series-000`.
 
 They record 2152.1 agent-minutes and 1223.3 wall-minutes.
 Exp-114 completed its one target and independent replay.
@@ -3257,6 +3257,7 @@ archive beside it.
 | [exp-124](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-124-full-square-compatibility-screen.md) | 11 | target | H-124 | fixed exp122 square and exact45 canonical Q | no witness after837 event cells; witness-only reader not invoked | unresolved |
 | [exp-125](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md) | 11 | target | H-124 | Complete residual cover for both whole bands | Diagonal independently certified; axis no_chain without reader | unresolved |
 | [exp-126](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md) | 11 | target | H-099 | Complete graph bound for unchanged56/5 candidate | Reported overweight graph clique; no reader or geometric counterexample | unresolved |
+| [exp-127](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md) | 11 | target | H-124 | Fixed collision-augmented whole-axis cover | Prospectively registered; not invoked | in-progress |
 
 ### Cost and provenance
 
@@ -3344,10 +3345,11 @@ archive beside it.
 | exp-124 | one thirty-second producer; conditional reader not invoked | 0.84 s | — | criterion | `a75d751a` |
 | exp-125 | one producer per band; only diagonal reader invoked | 1.90 s | — | criterion | `7daa7c55` |
 | exp-126 | one60-second scientific child; no reader invoked | 4.49 s | — | criterion | `7daa7c55` |
+| exp-127 | one120-second scientific child and conditional60-second independent replay | — | — | not invoked | `b38d0376` |
 
-### What the 82 rounds jointly establish
+### What the 83 rounds jointly establish
 
-The 82 rounds use 2152.1 agent-minutes and 1223.3 wall-minutes under the campaign’s
+The 83 rounds use 2152.1 agent-minutes and 1223.3 wall-minutes under the campaign’s
 retained effort accounting.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
 separately in Session089.
