@@ -49,16 +49,43 @@ experiment:
       independent ten-second whole-process reader. No retry or additional frame.
       Launch before07:15UTC or retain non-invocation and a fresh future allocation.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-122-diamond-conditional-cover-screen/packet.json
-  lease:
-    expires: '2026-09-07T07:15:00Z'
-    host: Session091 coordinator; prospective, no scientific process invoked
-  results: []
+  effort:
+    timebox: One thirty-second producer and one ten-second independent reader, each invoked once
+    wall_seconds: 0.20
+    stopped_by: criterion
+  results:
+  - shape: determination
+    role: outcome
+    question: Does the frozen screen supply one independently verified counterexample to H122?
+    outcome: criterion_met
+    checked_by: Independent exact reader returned complete verified_counterexample, passed guards, actual angle and unit identity, sixteen closed wall checks, nine strict point avoidances and strict SAT separation; no unresolved entries.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: One actual contained both-band square strictly avoids all nine marks and the closed diamond.
-    reason: Prospective bounded falsifier only; source-free readiness is reviewed but no target has run.
+    reason: The first frozen frame supplied one independently verified contained square disjoint from the diamond and avoiding all nine marks, refuting H122 only.
+    commit: f8b18e15
 ---
 # exp-122 — Diamond-Conditioned Cover Screen
+
+H-122 is refuted. The protocol was committed as `f8b18e15` after all 31 record checks
+passed in 33.31 seconds. The sole producer launched at the observed 07:03:58 UTC
+boundary and completed with actual exit zero in 0.13 seconds wall, 0.11 CPU.
+It found a witness in the first `axis-negative` frame after seven event cells, six
+uncovered; the other three frames were not invoked.
+
+The independent reader launched once at 07:04:40 UTC and completed with actual exit
+zero in 0.07 seconds wall, 0.06 CPU. Its complete `verified_counterexample` receipt
+has passed guards, nine strict point avoidances, thirty-six edge determinants, sixteen
+closed wall slacks and strict separation. The supplied axis has exact positive gap
+`49667/20833333333`; the reader independently supplies its own separating axis too.
+There are no unresolved entries. Total scientific process cost is 0.20 seconds wall
+and 0.17 CPU, separate from author/review/coordination costs.
+
+The result directory retains both JSON receipts and both stderr/timing logs. Neither
+process was repeated. The conclusion rejects the sufficient fixed-diamond shortcut,
+not compatibility with an actual P10-avoiding distinguished square or H-036.
+
+## Retained Prospective Protocol
 
 Commit this protocol and pass the record checks before either scientific process.
 The exact instruments are frozen at `c4a69e3e`; use its clean detached checkout with

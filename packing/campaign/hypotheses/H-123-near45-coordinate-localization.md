@@ -30,7 +30,7 @@ hypothesis:
     A two-mark vertical-interval lemma reduces a stronger closed-domain cover to
     F and G on two exact outer angle slabs. Source-free exact polynomial producer
     and independent reader are being prepared; no target polynomial has been evaluated.
-  instrument_ready: false
+  instrument_ready: true
   regime: Fixed q and original P10, the whole near45 band, with coordinate-midline reflections only.
   instance: {axis: n, point: 11}
   priority: 1
@@ -40,6 +40,10 @@ hypothesis:
   registered: '2026-09-07'
 ---
 # H-123 — Near45 Coordinate Localization
+
+The analytic reduction and separate exact producer/reader passed independent review
+by 07:08:11 UTC on September 7. Their 28 source-free controls pass. No scientific
+polynomial has been evaluated; readiness is not acceptance of H-123.
 
 This fills the localization premise in the BC-255
 [conditional reduction](../series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md).

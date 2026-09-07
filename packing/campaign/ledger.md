@@ -590,7 +590,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 78 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 79 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -693,8 +693,8 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | H-119 | open question | proof | On one frozen unsplit anchor box for n11 at side 96/25, can one fixed  |  | 0 |  |  |
 | H-120 | open question | proof | Can a nontrivial closed portion of the Trump rank-nine family obtained |  | 0 |  |  |
 | H-121 | blocked | proof | Some global minimizing packing of eleven unit squares has every actual |  | 0 |  |  |
-| H-122 | running | proof | At q=1939/500, every contained closed unit square whose orientation mo |  | 1 |  |  |
-| H-123 | blocked | proof | At q=1939/500, every contained closed unit square with orientation wit |  | 0 |  |  |
+| H-122 | refuted | proof | At q=1939/500, every contained closed unit square whose orientation mo |  | 1 |  | 0s wall |
+| H-123 | running | proof | At q=1939/500, every contained closed unit square with orientation wit |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -704,7 +704,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 ## Rounds
 
-### rejected (15)
+### rejected (16)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -723,6 +723,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-110 | series-000 | 11 | Codex endpoint_epsilon_spike, max reasoning, coordinator satellite think-zq2u | H-090 | The candidate minimum is below the required threshold by 294969/2200000, so rescaling these weights cannot certify the proposed side 3.8100381. |
 | exp-111 | series-000 | 11 | Codex endpoint_epsilon_spike, max reasoning, coordinator satellite think-jthr | H-091 | The candidate minimum is below the threshold by 52441/2200000. Its interior witness also excludes every core side that could beat T-022 through ordinary containment while retaining these sites and relative weights. |
 | exp-115 | series-000 | 11 | Codex coordinator, max reasoning, think-whmn in Session089 | H-105 | Every eligible pair has an independently checked separating axis. This rejects H105 only; higher-order depth, candidate feasibility and H099 remain unresolved, and the fixed-support bracket stays [11,56/5]. |
+| exp-122 | series-000 | 11 | Session091 coordinator, BC255, max mathematical judgment | H-122 | The first frozen frame supplied one independently verified contained square disjoint from the diamond and avoiding all nine marks, refuting H122 only. |
 
 ### abandoned (2)
 
@@ -815,7 +816,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-122 | series-000 | 11 | Session091 coordinator, BC255, max mathematical judgment | H-122 | Prospective bounded falsifier only; source-free readiness is reviewed but no target has run. |
+| exp-123 | series-000 | 11 | Session091 coordinator, BC255, max mathematical judgment | H-123 | Prospective protocol only; mathematical target signs remain unevaluated. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -834,7 +835,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 ## Effort
 
-78 rounds, 2152.1 agent-minutes, 1223.1 wall-minutes.
+79 rounds, 2152.1 agent-minutes, 1223.1 wall-minutes.
 
 ## Exploration reports not yet codified
 

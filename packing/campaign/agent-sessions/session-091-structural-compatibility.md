@@ -323,15 +323,15 @@ session:
     excluded_commands: [Scientific target evaluation, File or shared-record writes, New hypothesis or experiment allocation]
   - task: H-123 four-guard localization producer (think-g930)
     operator: Codex scalar_followup_assessment, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
+    outcome: Frozen06:54:29; exact generic producer and18source-free controls pass, no target evaluated.
+    evidence: [packing/devtools/near45_localization.py, packing/tests/test_near45_localization.py]
+    files: [packing/devtools/near45_localization.py, packing/tests/test_near45_localization.py]
+    checks: [18 tests pass; final0.30seconds wall and0.28CPU, Ruff and format clean, BasedPyright zero findings]
+    uncertainty: Independent review and reader required before target authorization.
+    elapsed_seconds: 611
+    elapsed_quality: operator_reported_approximate
     next_action: Build the source-free generic polynomial instrument; target coefficient evaluation remains forbidden.
     phase: 4
     budget_minutes: 15
@@ -389,15 +389,15 @@ session:
     excluded_commands: [Scientific constructors or target evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
   - task: H123 analytic localization review (think-l3cm)
     operator: Codex angle_reader_recovery, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
+    outcome: GO06:54:03; independently derived all overlap projections, closed-domain coverage, K4 symmetry, angle enclosure and symbolic coefficients.
+    evidence: [packing/campaign/hypotheses/H-123-near45-coordinate-localization.md]
+    files: []
+    checks: [Independent source-free analytic review; no target signs evaluated]
+    uncertainty: The sufficient polynomial guards remain unevaluated.
+    elapsed_seconds: 273
+    elapsed_quality: operator_reported_approximate
     next_action: Return source-free readiness or the exact missing premise before the deadline.
     phase: 4
     budget_minutes: 10
@@ -411,15 +411,15 @@ session:
     excluded_commands: [Scientific constructors or target evaluation, Git or shared-record writes, Dependency changes or repo-wide gates]
   - task: H123 independent polynomial reader (think-awk9)
     operator: Codex density_control_recovery, max thinking
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: null
-    elapsed_seconds: null
-    elapsed_quality: null
+    outcome: Frozen07:01:55; independent polynomial and Bernstein reconstruction ready for swapped review, no producer inspection or target evaluation.
+    evidence: [packing/devtools/check_near45_localization.py, packing/tests/test_check_near45_localization.py]
+    files: [packing/devtools/check_near45_localization.py, packing/tests/test_check_near45_localization.py]
+    checks: [10 source-free tests pass;1.90seconds wall and1.31CPU, Ruff and format clean, BasedPyright zero findings]
+    uncertainty: Positive sufficient certificates only; failed guards do not refute localization.
+    elapsed_seconds: 699
+    elapsed_quality: operator_reported_approximate
     next_action: Return source-free readiness or the exact missing premise before the deadline.
     phase: 4
     budget_minutes: 15

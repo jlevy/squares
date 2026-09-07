@@ -42,9 +42,15 @@ hypothesis:
 ---
 # H-122 — Cover Outside a Forced Diamond
 
+H-122 is refuted by [exp-122](../series/series-000-smoke-and-calibration/experiments/exp-122-diamond-conditional-cover-screen.md).
+One square at the first prescribed near-axis frame strictly avoids all nine marks and
+the closed diamond, independently checked in 0.20 seconds combined process wall time.
+This rules out the sufficient diamond cover, not full-square compatibility or H-036.
+The unused frames were not run, and no retry is allocated.
+
 The fixed-frame falsifier and source-distinct reader passed 24 source-free controls
-and swapped independent reviews by 06:49:01 UTC on September 7. No target has run.
-Readiness supports counterexample search only, not a complete continuous proof.
+and swapped independent reviews by 06:49:01 UTC on September 7, before registration.
+That readiness supported counterexample search only, not a complete continuous proof.
 
 This unrun claim was temporarily called H-118 locally. PR 107 landed additional
 H-118–H-121 records after the last upstream inventory, so it was renamed H-122 before
