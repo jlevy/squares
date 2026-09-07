@@ -5,7 +5,7 @@ title: Publish and validate Session097 integrated research checkpoint
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 18
 spec_path: packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md
 labels: []
 dependencies: []
@@ -20,10 +20,10 @@ child_order_hints:
   - is-01m1z0wvtasxnptpt2pg4qnty1
   - is-01m1z1d949sby1tkrav2k92sfh
 created_at: 2026-09-07T21:04:19.475Z
-updated_at: 2026-09-07T22:56:59.107Z
+updated_at: 2026-09-07T23:11:23.770Z
 ---
 At each useful block boundary stop writers; review spec/agenda status and all diffs under tbd shortcuts and Practical Prose; regenerate the document, ledger and session views; retain a privacy-reduced interval receipt with fixed start20:56:47.766UTC and observed end; run change-reachable push validation and the complete immutable checkpoint as required; commit explicit owned paths, push, create/update one cost-first PR with results, limits, ownership and ID allocations; follow actual hosted CI results asynchronously. Keep pending and passed distinct, and sync beads.
 
 ## Notes
 
-Actualfinalpush91336 on13b5f454 FAILED550.25gate557.13external,223.45user36.86sys.3failedsteps: terminalnext_action withoutagenda cell names0beads; terminalsession lacks canonical full/fastgate declaration; reachablebaseline negativecontrol fails samepointer.681testspassed1failed3deselected219.30s. Allothersteps passed, zerojudgedactiveclocks. Sourcewriters nowfree; makeformatrunswhole-rootwithrestoredhook. Rootmustfixpointerandcorrectgateprovenance honestly; initialc3hostedfastpartsallpassed butdidnotincludelaterinstruments, full71633pending. Newmaxrecordreviewbead beingallocated; no scientificlaunch/newcap. PRnotyetpushed13.
+Actualnormalpushcompleted: origin/codex/n11-kernel-pricing advanced d6f0c403→8d79f9a9 at23:10. PR116 remainsOPENdraft andbodyexplicitlyrecords knowncertificationfailure, noninvocation, reviewedrejectionofoldpass, allIDs/cost/limits/nextOR12/15review. Allownedresearchworkisnowremote; thisisNOTmerge-ready. Latestpush41807andfull71633stillrunning; preservefrozencheckouts. Hook/formatthinkriceclosed. Upstreamfetch23:10completed, verifycurrentmainheadbeforefuturemerge. ExistingheartbeatupdatedwithcurrentnativeIDs/paths/provenanceNO andfreshreviewentry; no oldscientificscopeauthorized.
