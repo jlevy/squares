@@ -1059,6 +1059,46 @@ agenda:
           H110 tests one fixed near-axis P12 escape before a larger positive proof.
           Source-free controls, independent review and a fresh prospective round
           are required; no target has run.
+      - bead: think-jbw5
+        workflow: pipeline-improvement
+        priority: 0
+        rationale: >-
+          Added during Session091, not backdated to this agenda's W10. Exp121
+          accepts H110's auxiliary P12 escape. H122 is the conditional diamond
+          cover replacement; independent source-free instruments precede its
+          first registered screen, with localization assessed in parallel.
+      - bead: think-7e72
+        workflow: pipeline-improvement
+        priority: 0
+        rationale: >-
+          Added at Session091's close, not backdated to this agenda's W10.
+          H110 and H123 are accepted and H122 is refuted. Preserve the full
+          distinguished square in a changed compatibility discriminator, with
+          source-free independent instruments and a new prospective protocol.
+      - bead: think-nwss
+        workflow: factual-review
+        priority: 0
+        rationale: >-
+          Added after Session095 exp127, not backdated to this agenda's W10.
+          The fixed collision-augmented axis cover is terminal and unresolved.
+          Independently bind the existing BC259 seven-row support ceiling; a
+          complete ceiling is more informative than diagnosing one candidate clique.
+      - bead: think-j8pz
+        workflow: insight-iteration
+        priority: 1
+        rationale: >-
+          Added after Session095 exp128, not backdated to this agenda's W10.
+          The full old support has independently verified optimum11. BC265
+          compares changed resource directions by mathematical impact before
+          commissioning any new scientific instrument or target.
+      - bead: think-mq0d
+        workflow: insight-iteration
+        priority: 1
+        rationale: >-
+          Added after Session095's independent BC265 design, not backdated to W10.
+          Price one small H114 feature family and its missing kernel-specific
+          contract before any target. This has a direct-bound mechanism, unlike
+          merely refuting the particular old-support calibration.
       - bead: think-s6e7
         workflow: research-loop
         priority: 1

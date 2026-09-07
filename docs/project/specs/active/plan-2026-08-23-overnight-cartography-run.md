@@ -351,6 +351,8 @@ Its scientific block is closed; PR 110 retains the results and publication recov
 The successor design has not run and requires a separate allocation.
 [Agenda 024’s Current Allocation](../../../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
 retains the parallel continuation’s assignments and priorities.
+Its separate next step is BC-264’s 30-minute H-114 feature and kernel-contract pricing;
+that lane remains independently allocated.
 See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the latest session,
 funding conditions and independent-review assignments.
 

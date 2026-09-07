@@ -137,12 +137,14 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives twelve confirmed hypotheses, eleven refuted
-hypotheses, one open hypothesis, twenty-three open questions, and forty-one blocked
+The generated ledger currently derives fourteen confirmed hypotheses, thirteen refuted
+hypotheses, one open hypothesis, twenty-three open questions, and forty blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. No hypothesis is running or waiting on review and six are unresolved.
-H-105 is refuted: all 134 eligible candidate pairs are separated, leaving higher-order
-overlap depth and H-099 unresolved.
+H-124’s fixed-square screen found no pair; its witness-only reader was not invoked.
+H-105 is refuted: all 134 eligible candidate pairs are separated.
+Exp128 subsequently settled H-099’s entire fixed support at optimum eleven through seven
+necessary rows; this does not determine expanded supports or a global packing bound.
 H-062 left that set on 2026-09-05: its fifth rung walled on both constructions and
 pinned the `m = 5` covering wall to a bracket of width 0.015 where it had registered
 0.02. One, H-064, is abandoned in the ledger’s word — its latest round expired resumable
@@ -297,6 +299,7 @@ case or experiment separately.
 | [BC-233 Inset-Seed Screen and Released-Support Disposition](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-233-disposition.md) | research synthesis | record | retained | — |
 | [Agenda 025 T+2 Commissioning Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/checkpoint-hour-02.md) | research synthesis | record | retained | — |
 | [BC-242 Full-Size Density Proof Contract](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-242-full-size-density-proof-contract.md) | research synthesis | record | retained | — |
+| [BC-243: A Complete Graph Bound Before More Geometry](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-243-graph-depth-assessment.md) | research synthesis | record | retained | — |
 | [BC-245 Typed Stationary-Backbone Theorem Packet](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-245-typed-backbone-theorem-packet.md) | research synthesis | record | retained | — |
 | [BC-254: Exact Finite-Support Screen Design](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-screen-spec.md) | research synthesis | record | retained | — |
 | [BC-254 Control Build: First-Slice Checkpoint](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-254-support-controls-slice-01.md) | research synthesis | record | retained | — |
@@ -315,6 +318,14 @@ case or experiment separately.
 | [BC-255 Theorem 3 Source Control: First Slice](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-slice-01.md) | research synthesis | record | retained | — |
 | [BC-255 Theorem 3 Source-Control Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-theorem3-source-control-independent-review.md) | dated review record | record | retained | — |
 | [BC-255: Restricted-Angle Instrument Design](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-angle-instrument-design.md) | research synthesis | record | retained | — |
+| [BC-255: A Fixed Obstacle for Conditional Coverage](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-conditional-compatibility-assessment.md) | research synthesis | record | retained | — |
+| [BC255 — A Center-Correlated Collision Region](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-collision.md) | research synthesis | record | retained | — |
+| [BC-255: Uniform Vertex Displacement Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-center-correlated-review.md) | dated review record | record | retained | — |
+| [BC-259: Source Binding for the Seven-Row Support Ceiling](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-author.md) | research synthesis | record | retained | — |
+| [BC259: Independent Support-ceiling Adoption Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-support-adoption-review.md) | dated review record | record | retained | — |
+| [BC-259: Positive-Inclusion Adoption Instrument Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-259-adoption-instrument-review.md) | dated review record | record | retained | — |
+| [BC265: What the Seven-Box Calibration Unlocks](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-design.md) | research synthesis | record | retained | — |
+| [BC-265: Calibration Scope and the Next Discriminator](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md) | dated review record | record | retained | — |
 | [BC-255 Near-Axis Reader Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-near-axis-reader-independent-review.md) | dated review record | record | retained | — |
 | [BC-252 — Complete Rows on the Retained Sites](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md) | research synthesis | record | retained | — |
 | [BC-255: Fixed-Side Discriminator Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md) | research synthesis | record | retained | — |
@@ -597,7 +608,8 @@ documentation and status delta has its own push gate.
 The original 480-minute window and scientific caps remain recorded in the stopped
 session.
 
-The parallel task **Squares plan X-016** owns its PR 109 continuation.
+The parallel task **Squares plan X-016** landed PR 109 on `main` at `07e82d1e`. This
+branch integrates that checkpoint while preserving both lanes’ records.
 Its exp-128 fixes the current Trump D4 support optimum at 11. Its completed BC-265/H-116
 comparison selects future BC-264/H-114 feature and kernel pricing; that work and the
 unresolved H-124 remainder remain separate.
@@ -683,6 +695,29 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
+**Parallel lane:** `think-mq0d` takes BC-264’s bounded H114 feature and kernel-contract
+pricing. The
+[Session094 handoff](packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md)
+was updated after the first result in
+[Session095](packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md).
+Exp125 independently certified the entire diagonal compatibility branch, but its axis
+representation returned `no_chain`. Exp127’s fixed collision-augmented axis cover also
+returned `no_chain`, in 0.25 seconds, without an independent reader.
+H124 and restricted H036 remain unresolved; that representation receives no retry or
+parameter sweep. BC-259 is complete: exp128 independently bound all 88 source images, 60
+placements and eight orbits, verified 41 strict inclusions on seven fixed boxes, and
+established the attained support optimum eleven in 1.12 seconds.
+H099 is refuted only on that support.
+BC-265’s independent designs derive an explicit mass-eleven calibration on the old
+support, but a new undercovered pose would reject only that density.
+The selected next allocation is BC-264’s existing 30-minute feature and
+verification-price assessment: a complete H114 kernel could improve the global bound at
+side $96/25$, while a finite obstruction would reject only its chosen feature family.
+Kernel-specific BC-260 review, exact PSD evidence and complete pair-domain verification
+remain prerequisites.
+H101’s stronger common-support obstruction is a conditional fallback, with no candidate
+asserted. No new target or research block is activated by this handoff.
+
 **Session 090’s selection:** `think-qv73`, the fixed near-axis P12 escape discriminator,
 was registered but unrun at that handoff.
 [Session 090](packing/campaign/agent-sessions/session-090-four-hour-research.md), under
@@ -690,27 +725,35 @@ was registered but unrun at that handoff.
 BC-251/exp-116 finished unresolved: no row convergence, and an independently replayed
 dual mass of about 10.080180 at depth one, below the obstruction threshold.
 No bridge or unchanged retry is selected.
-BC-243 has complete facet/slab controls and an accepted original source, but its uniform
-control timed out on all three separately reviewed algorithms, including reciprocal
-caching and sign-incidence reuse.
-No density target is open.
+At that earlier checkpoint, BC-243’s uniform control had timed out on three separately
+reviewed algorithms.
+Session094 later completed all five repaired graph controls and ran exp126 once.
+Its graph-only obstruction left H099 unresolved; no retry is open.
 BC-255 accepted H-106’s full continuous near-axis ten-point clause through an
 independent exact rectangle reader.
 H-108 and H-109 also accepted canonical near-45 A3 and A1/A2 forcing through independent
 exact replay and a reviewed reflection.
 These are restricted-theorem auxiliaries, not a packing bound.
-H-110 registers the selected next-block fixed P12 escape candidate; no target geometry
-has been evaluated. H-107’s reviewed fixed-site scalar protocol is held out of the next
-two-hour block under paused `think-7fec`; later-session reconsideration preserves its
-unlaunched history. The freed attention goes to a bounded conditional-compatibility
-assessment from the accepted A-point lemmas, not an automatic P12 repair.
+H-110 is accepted through exp-121: the fixed unit square is independently verified to
+fit in the actual domain and strictly avoid all twelve marks.
+This refutes the unchanged unconditional P12 auxiliary, not H-036. Exp-122 refutes
+H-122’s small-diamond conditional cover through an independently checked square.
+Exp-123 accepts complete near45 localization through four exact continuous guards and
+the reviewed geometric reduction.
+The fixed-S H-124 screen found no witness without certifying continuous coverage; the
+broader bound is unchanged.
+H-107’s reviewed fixed-site scalar protocol is held out of the next two-hour block under
+paused `think-7fec`; later-session reconsideration preserves its unlaunched history.
+The freed attention goes to a bounded conditional-compatibility assessment from the
+accepted A-point lemmas, not an automatic P12 repair.
 Full validation of research checkpoint `99a3ad42` passed;
 [Session 089](packing/campaign/agent-sessions/session-089-agenda024-next-phases.md)
 retains that verdict and the completed experiments, which must not be repeated.
 [Agenda 024’s Current Allocation](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
 owns the scalar, complete-density and continuous-angle packages, including
 independent-review assignments.
-Keep these on one integrated successor PR from `codex/post-381-four-hour-research`. The
+Keep these on one integrated successor PR from
+`codex/structural-compatibility-continuation`, based on merged PRs 105 and 106. The
 earlier BC-215 efficiency work remains available in Agenda 023; this handoff does not
 mark it complete or erase its evidence.
 `BC-219` was the preflight for Agenda 024’s original launch inputs.
@@ -2914,7 +2957,7 @@ round that names the hypothesis, control roles included.
 | [H-096](packing/campaign/hypotheses/H-096-n11-angle-cell-kernels.md) | open question | Can whole-angle-cell kernels cover more useful positive mass with a tractable exact verifier? | 0 | — |
 | [H-097](packing/campaign/hypotheses/H-097-n11-existential-witness-menus.md) | open question | Can pose-dependent witness choice beat a universal witness while retaining complete pose-box coverage? | 0 | — |
 | [H-098](packing/campaign/hypotheses/H-098-n11-segment-measures.md) | open question | Can segment-supported measures improve the bound with exact intersection-length coverage? | 0 | — |
-| [H-099](packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md) | unresolved | The exact deduplicated D4 closure of Trump’s eleven squares admits dual mass above eleven at a.e. depth at most one | 1 | 29s wall |
+| [H-099](packing/campaign/hypotheses/H-099-trump-d4-finite-support-dual.md) | refuted | Independently source-bound seven-row ceiling and feasible average establish fixed-support optimum11 | 3 | 34s wall |
 | [H-100](packing/campaign/hypotheses/H-100-below-trump-area-density.md) | open question | Can a full-size area density give mass below eleven at a side between the retained bound and Trump? | 0 | — |
 | [H-101](packing/campaign/hypotheses/H-101-trump-equality-density.md) | open question | Can mass-eleven density at Trump’s side and a complete equality analysis establish uniqueness? | 0 | — |
 | [H-102](packing/campaign/hypotheses/H-102-complete-restricted-angle-support-families.md) | open question | Which complete restricted angle or wall-support family yields a useful theorem, starting with H-036? | 0 | — |
@@ -2925,7 +2968,7 @@ round that names the hypothesis, control roles included.
 | [H-107](packing/campaign/hypotheses/H-107-fixed-site-scalar-completion.md) | blocked | The terminal exp-116 sites admit a complete rational cover of mass below eleven at 61/16; its protocol remains unlaunched pending a sufficient allocation | 1 | — |
 | [H-108](packing/campaign/hypotheses/H-108-near45-canonical-a3-forcing.md) | confirmed | A contained near-45 square in the canonical region avoiding P10 contains A3 | 1 | 0.67s wall |
 | [H-109](packing/campaign/hypotheses/H-109-near45-canonical-a1-a2-forcing.md) | confirmed | A stronger near-45 A1 implication passed independent replay and transfers to A2 by local reflection | 1 | 0.26s wall |
-| [H-110](packing/campaign/hypotheses/H-110-fixed-near-axis-p12-escape.md) | blocked | One frozen near-axis square may escape the unchanged P12 set; next-block controls and exact verification remain unrun | 0 | — |
+| [H-110](packing/campaign/hypotheses/H-110-fixed-near-axis-p12-escape.md) | confirmed | One independently verified square escapes the unchanged P12 set; this refutes only the unconditional auxiliary cover | 1 | 0.11s wall |
 | [H-111](packing/campaign/hypotheses/H-111-resource-anchor-case-exclusion.md) | open question | Can a complete resource-and-anchor case cover exclude eleven squares at side 96/25? | 0 | — |
 | [H-112](packing/campaign/hypotheses/H-112-six-axis-five-common-angle-optimum.md) | blocked | Every packing of six axis-aligned squares and five sharing a free actual angle has side at least the Trump side | 0 | — |
 | [H-113](packing/campaign/hypotheses/H-113-at-most-two-angle-optimum.md) | blocked | Every packing of eleven squares using at most two actual orientation classes has side at least the Trump side | 0 | — |
@@ -2937,6 +2980,9 @@ round that names the hypothesis, control roles included.
 | [H-119](packing/campaign/hypotheses/H-119-shared-anchor-correlation.md) | open question | Can joint capture on one unsplit anchor box beat a sharply certified independent-minimum comparator? | 0 | — |
 | [H-120](packing/campaign/hypotheses/H-120-rank-nine-release-exclusion.md) | open question | Can a closed rank-nine release domain below 96/25 be excluded beyond retained local scope? | 0 | — |
 | [H-121](packing/campaign/hypotheses/H-121-axis-plus-one-minimizer.md) | blocked | Some global minimizing packing has orientations in the axis-plus-one-angle family | 0 | — |
+| [H-122](packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md) | refuted | One independently checked square avoids all nine marks and the forced diamond; full-square compatibility remains open | 1 | 0.20s wall |
+| [H-123](packing/campaign/hypotheses/H-123-near45-coordinate-localization.md) | confirmed | Complete coordinate localization follows from the reviewed reduction and independent four-guard certificate | 1 | 0.21s wall |
+| [H-124](packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md) | unresolved | Diagonal band certified; original and collision-augmented axis representations returned no_chain without readers | 3 | 2.99s wall |
 
 ### Confirmed
 
@@ -3161,13 +3207,17 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-088.yaml` | session-088 | 661 | 3.21 h | 1.43 h | 1.43 h | yes |
 | `codex-task-tree-session-089.yaml` | session-089 | 1,185 | 10.21 h | 3.13 h | 3.13 h | yes |
 | `codex-task-tree-session-090.yaml` | session-090 | 1,341 | 9.8 h | 3.94 h | 3.95 h | yes |
+| `codex-task-tree-session-091.yaml` | session-091 | 553 | 5.05 h | 1.93 h | 1.93 h | yes |
 | `codex-task-tree-session-092.yaml` | session-092 | 1,620 | 18.28 h | 7.22 h | 9.17 h | yes |
+| `codex-task-tree-session-093.yaml` | session-093 | 673 | 6.07 h | 1.99 h | 1.99 h | yes |
+| `codex-task-tree-session-094.yaml` | session-094 | 562 | 4.53 h | 1.82 h | 1.82 h | yes |
+| `codex-task-tree-session-095.yaml` | session-095 | 476 | 4.08 h | 1.69 h | 1.69 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 47 |
+| measured | 51 |
 | unmeasured | 44 |
-| **total** | **91** |
+| **total** | **95** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -3183,9 +3233,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 76 rounds registered in `series-000`.
+There are 84 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1223.1 wall-minutes.
+They record 2152.1 agent-minutes and 1223.3 wall-minutes.
 Exp-114 completed its one target and independent replay.
 Reader development costs are recorded separately from those process times.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
@@ -3299,6 +3349,14 @@ archive beside it.
 | [exp-118](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-118-h-107-fixed-site-completion.md) | 11 | target | H-107 | fixed-site scalar row completion | no target dispatched before launch cutoff; scientific allowances unspent | blocked |
 | [exp-119](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-119-h-108-near45-a3-forcing.md) | 11 | target | H-108 | canonical near-45 A3 forcing | independent reader proves all 24 closed inequalities; no localization or H-036 conclusion | accepted |
 | [exp-120](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-120-h-109-near45-a1-a2-forcing.md) | 11 | target | H-109 | canonical A1 forcing plus A2 reflection | independent exact A1 replay passed; analytic reflection supplies A2 without another target | accepted |
+| [exp-121](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-121-h-110-fixed-p12-escape.md) | 11 | target | H-110 | one frozen rational P12 escape candidate | independent exact reader verifies actual domain and strict avoidance of all twelve marks | accepted |
+| [exp-122](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-122-diamond-conditional-cover-screen.md) | 11 | target | H-122 | four fixed-frame diamond-conditioned cover samples | first frame gives an independently verified strict nine-mark and diamond escape; unused frames not run | rejected |
+| [exp-123](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-123-near45-localization.md) | 11 | target | H-123 | four continuous localization polynomial guards | independent exact reader checks all four guards and sixteen coefficients; reviewed reduction supplies complete localization | accepted |
+| [exp-124](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-124-full-square-compatibility-screen.md) | 11 | target | H-124 | fixed exp122 square and exact45 canonical Q | no witness after837 event cells; witness-only reader not invoked | unresolved |
+| [exp-125](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md) | 11 | target | H-124 | Complete residual cover for both whole bands | Diagonal independently certified; axis no_chain without reader | unresolved |
+| [exp-126](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md) | 11 | target | H-099 | Complete graph bound for unchanged56/5 candidate | Reported overweight graph clique; no reader or geometric counterexample | unresolved |
+| [exp-127](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md) | 11 | target | H-124 | Fixed collision-augmented whole-axis cover | Producer no_chain; no independent reader or geometric counterexample | unresolved |
+| [exp-128](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md) | 11 | target | H-099 | Fixed seven-row necessary-lower-incidence ceiling | Independently verified ceiling and attained baseline11; whole fixed support settled | rejected |
 
 ### Cost and provenance
 
@@ -3380,10 +3438,18 @@ archive beside it.
 | exp-118 | one 2100-second total target cap and one 1200-second shared verification cap; unlaunched | 0 s | — | dependency | `46f38ab4` |
 | exp-119 | one ten-second producer and one independent ten-second reader; both accepted | 0.67 s | — | criterion | `bdc68784` |
 | exp-120 | one ten-second producer and one independent ten-second reader; both accepted | 0.26 s | — | criterion | `57ad0dea` |
+| exp-121 | one ten-second producer and one independent ten-second reader; both accepted | 0.11 s | — | criterion | `961d9923` |
+| exp-122 | one thirty-second producer and conditional ten-second independent reader | 0.20 s | — | criterion | `c4a69e3e` |
+| exp-123 | one fifteen-second producer and conditional ten-second independent reader | 0.21 s | — | criterion | `3ea8e346` |
+| exp-124 | one thirty-second producer; conditional reader not invoked | 0.84 s | — | criterion | `a75d751a` |
+| exp-125 | one producer per band; only diagonal reader invoked | 1.90 s | — | criterion | `7daa7c55` |
+| exp-126 | one60-second scientific child; no reader invoked | 4.49 s | — | criterion | `7daa7c55` |
+| exp-127 | one120-second scientific child; no reader invoked | 0.25 s | — | criterion | `3bec06e2` |
+| exp-128 | one60-second independent checker plus2-second termination grace | 1.12 s | — | criterion | `a94e57fe` |
 
-### What the 76 rounds jointly establish
+### What the 84 rounds jointly establish
 
-The 76 rounds use 2152.1 agent-minutes and 1223.1 wall-minutes under the campaign’s
+The 84 rounds use 2152.1 agent-minutes and 1223.3 wall-minutes under the campaign’s
 retained effort accounting.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
 separately in Session089.
