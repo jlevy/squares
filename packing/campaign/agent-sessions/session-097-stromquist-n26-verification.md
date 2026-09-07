@@ -1,5 +1,5 @@
 ---
-title: session-097 — Stromquist n26 construction verification
+title: session-097 — Stromquist n26 verification and MacIver source audit
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
@@ -10,10 +10,11 @@ session:
   title: Stromquist n26 verification and MacIver source audit
   date: '2026-09-07'
   started_at: '2026-09-07T22:04:11Z'
-  deadline_at: '2026-09-07T23:58:28Z'
+  deadline_at: '2026-09-08T00:14:28Z'
   branch: codex/stromquist-n26-verification
-  goal: Resolve the author's n26 clarification against the scanned construction and live chart, verify the geometry, correct the source record, and pursue bounded mathematical directions.
-    Also audit MacIver's public papers, compare their bounds with the verified record, and preserve useful methods with explicit proof-coverage limits.
+  goal: Resolve the author's n26 clarification against the scanned construction and live chart, verify the geometry, correct the source record, and pursue bounded
+    mathematical directions. Also audit MacIver's public papers, compare their bounds with the verified record, and preserve useful methods with explicit proof-coverage
+    limits.
   workflow_phases:
   - workflow: pipeline-improvement
     focus: correctness
@@ -30,8 +31,8 @@ session:
     validation_command: .venv/bin/pytest -q tests/test_stromquist_memo3_n26.py
     kill_condition: A failed field precondition, pair separation, wall check, or independent oracle blocks acceptance.
     fallback: Retain the source-reported construction and exact missing verification obligation.
-    outcome: Exact cubic reconstruction checks all 26 unit squares, 325 pairs, and walls. Six tests pass with an independent rational-polynomial and half-plane oracle. Independent review
-      accepts the strict comparison with Friedman and the scoped central-block support proof.
+    outcome: Exact cubic reconstruction checks all 26 unit squares, 325 pairs, and walls. Six tests pass with an independent rational-polynomial and half-plane oracle.
+      Independent review accepts the strict comparison with Friedman and the scoped central-block support proof.
     evidence:
     - packing/cases/stromquist/memo3-n26.json
     - packing/tests/test_stromquist_memo3_n26.py
@@ -53,8 +54,8 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --push
     kill_condition: A failed check requires diagnosis; an estimated time cannot authorize an incomplete claim or skipped required validation.
     fallback: Fix the failing surface, repeat its affected checks, and retain exact source identity and any remaining limitation.
-    outcome: Source attribution, private-communication credit, generated records, and the rendered acknowledgment are integrated. Pre-push checks found and drove corrections to record
-      bookkeeping and the explainer's permalink wiring. The mathematical replay remains accepted.
+    outcome: Source attribution, private-communication credit, generated records, and the rendered acknowledgment are integrated. Pre-push checks found and drove
+      corrections to record bookkeeping and the explainer's permalink wiring. The mathematical replay remains accepted.
     evidence:
     - docs/project/research/research-2026-09-07-stromquist-n26-verification.md
     - packing/devtools/templates/explainer-article.md
@@ -64,11 +65,12 @@ session:
     focus: correctness
     recording: contemporaneous
     clock_role: work
-    objective: Validate the committed scientific state, retain the final resource receipt, and publish the reviewed source correction with passing local and hosted checks.
+    objective: Validate the committed scientific state, retain the final resource receipt, and publish the reviewed source correction with passing local and hosted
+      checks.
     status: stopped
     entered_by: evidence_checkpoint
-    switch_reason: The substantive source and geometry changes are complete; the permalink contract requires the new report to exist in the linked commit, and the full checkpoint needs
-      a stable source identity.
+    switch_reason: The substantive source and geometry changes are complete; the permalink contract requires the new report to exist in the linked commit, and the
+      full checkpoint needs a stable source identity.
     budget_minutes: 60
     started_at: '2026-09-07T22:34:51Z'
     deadline_at: '2026-09-07T23:34:51Z'
@@ -76,9 +78,9 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate
     kill_condition: A failed check blocks completion and requires diagnosis; the declared checkpoint time is not a reason to skip required validation.
     fallback: Repair the failing surface and repeat affected checks while preserving the exact source identity covered by each receipt.
-    outcome: 'The clean 48a4544f full checkpoint completed 66 steps in 2565.37 seconds: 64 passed, two failed on time guards. All 3425 quick, 98 slow, and 55 exhaustive tests passed
-      their assertions. Two negative controls timed out at 120 seconds and then passed unchanged in serial replay. Thirteen quick tests exceeded the 12-second wall guard. No logic failure
-      was found; a passing fast checkpoint remains required.'
+    outcome: 'The clean 48a4544f full checkpoint completed 66 steps in 2565.37 seconds: 64 passed, two failed on time guards. All 3425 quick, 98 slow, and 55 exhaustive
+      tests passed their assertions. Two negative controls timed out at 120 seconds and then passed unchanged in serial replay. Thirteen quick tests exceeded the
+      12-second wall guard. No logic failure was found; a passing fast checkpoint remains required.'
     evidence:
     - packing/campaign/agent-sessions/session-097-validation/full-48a4544f.json
     - packing/campaign/agent-sessions/session-097-validation/reducible-control-48a4544f.jsonl
@@ -89,7 +91,8 @@ session:
     focus: correctness
     recording: contemporaneous
     clock_role: work
-    objective: Audit MacIver's public square-packing papers against the source database and verified bounds, assess reusable mechanisms, and integrate a reviewed evidence record.
+    objective: Audit MacIver's public square-packing papers against the source database and verified bounds, assess reusable mechanisms, and integrate a reviewed
+      evidence record.
     status: completed
     entered_by: user_request
     bead: think-904u
@@ -101,8 +104,9 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: Missing evidence or a proof gap prevents promotion of the source claim to verified status.
     fallback: Retain attributable source statements and name exact unresolved proof obligations.
-    outcome: Three agents identified the pinned public source, audited numerical and formal-proof coverage, and derived concrete local-capacity controls. The coordinator independently
-      checked the bound comparison, counting argument, interval controls, and all proposed record changes. Three original PDFs and faithful extractions are ready for the integrated checkpoint.
+    outcome: Three agents identified the pinned public source, audited numerical and formal-proof coverage, and derived concrete local-capacity controls. The coordinator
+      independently checked the bound comparison, counting argument, interval controls, and all proposed record changes. Three original PDFs and faithful extractions
+      are ready for the integrated checkpoint.
     evidence:
     - docs/project/reviews/review-2026-09-07-maciver-square-packing.md
     - packing/resources/web/maciver-square-packing-2026-09-07/README.md
@@ -113,24 +117,49 @@ session:
     recording: contemporaneous
     clock_role: work
     objective: Integrate the accepted source records and n26 design, pass the unchanged fast gate under bounded concurrency, and close the measured review for publication.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
-    switch_reason: The full run found time-guard failures after all test assertions passed; source and mathematical reviews are complete, so the final record can now be integrated.
+    switch_reason: The full run found time-guard failures after all test assertions passed; source and mathematical reviews are complete, so the final record can
+      now be integrated.
     budget_minutes: 30
     started_at: '2026-09-07T23:24:04Z'
     deadline_at: '2026-09-07T23:54:04Z'
-    expected_output: Reviewed integrated source commit, passing fast validation, retained honest full-run and replay outcomes, terminal session record and pull request.
-    validation_command: uv run --frozen --all-extras --group dev packing-validate --fast --jobs 3 --inner-jobs 1
+    expected_output: Reviewed source commit, passing local fast validation, and retained full-run and replay outcomes ready for final integration and publication.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --fast --jobs 2 --inner-jobs 1
     kill_condition: A logical failure or unchanged timing failure requires diagnosis; no guard is weakened to manufacture a pass.
     fallback: Retain the precise failed run and recheck the affected surface with measured resource limits or hosted validation.
+    outcome: The clean bdc28e89 source passed all 62 fast steps in 401.14 seconds with PYTHON_CPU_COUNT=3, two outer jobs and one inner job. The Linux timing-band
+      comparison is reported, not enforced, for this local shape. Earlier CPU4 and native runs are retained as failures of the stale-budget check and one 12.81-second
+      test guard respectively. No tests, guards, timeouts or baseline changed.
+    evidence:
+    - packing/campaign/agent-sessions/session-097-validation/fast-final-bdc28e89.json
+    stop_reason: The scientific source integration and local fast checkpoint are accepted; main has since received typography changes touching the acknowledgment
+      renderer.
+    next_action: Integrate the new main branch, verify the acknowledgment in its typography, and finish publication.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Integrate main typography changes with the reviewed acknowledgment, verify the combined render and affected checks, and prepare the measured review
+      for publication.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Main advanced to 373beb36 during validation; the incoming renderer and generated views need an integration check before publication.
+    budget_minutes: 30
+    started_at: '2026-09-07T23:44:28Z'
+    deadline_at: '2026-09-08T00:14:28Z'
+    expected_output: A clean integrated source commit, reviewed PDF acknowledgment, affected validation evidence, final session cost and review description.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --push --jobs 2 --inner-jobs 1
+    kill_condition: An integration or rendering failure requires repair and affected rechecking before publication.
+    fallback: Preserve both source changes, resolve the concrete incompatibility, and retain the tested commit identity.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Close the measured source review after validation, then publish and inspect hosted checks.
+    next_action: Close the measured review after the integration checks, then publish and inspect hosted checks.
   primary_bead: think-zi3g
   status: in_progress
   budget:
-    wall_minutes: 120
+    wall_minutes: 140
     slice_minutes: 30
   stop_conditions:
   - Complete the source comparison, independently checked construction, bounded directions, and validated integration.
@@ -177,8 +206,8 @@ session:
     operator: Codex n26_directions
     status: completed
     recording: retrospective
-    outcome: Derived an exact restricted-family obstruction to intact central-block rotation, identified meaningful contact-release prerequisites, and separated Green recovery from the
-      unresolved BC202 numerical lower-bound attempt.
+    outcome: Derived an exact restricted-family obstruction to intact central-block rotation, identified meaningful contact-release prerequisites, and separated Green
+      recovery from the unresolved BC202 numerical lower-bound attempt.
     evidence:
     - docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md
     files:
@@ -194,8 +223,8 @@ session:
     operator: Codex n26_sources
     status: completed
     recording: retrospective
-    outcome: Pinned the three canonical manuscripts, visually inspected title pages, retained source and CI metadata, verified missing n17 computation files, and prepared schema-valid
-      historical evidence records.
+    outcome: Pinned the three canonical manuscripts, visually inspected title pages, retained source and CI metadata, verified missing n17 computation files, and
+      prepared schema-valid historical evidence records.
     evidence:
     - docs/project/reviews/review-2026-09-07-maciver-square-packing.md
     files: []
@@ -210,8 +239,8 @@ session:
     operator: Codex n26_directions
     status: completed
     recording: retrospective
-    outcome: Derived local triple-box and strip-capacity controls, checked defect/matching and correlated-support identities, rejected the unsupported broad 4.5 ceiling, and prepared
-      the nine-variable n26 LP design.
+    outcome: Derived local triple-box and strip-capacity controls, checked defect/matching and correlated-support identities, rejected the unsupported broad 4.5 ceiling,
+      and prepared the nine-variable n26 LP design.
     evidence:
     - docs/project/reviews/review-2026-09-07-maciver-square-packing.md
     files: []
@@ -250,22 +279,36 @@ session:
   checks:
   - Baseline records tier passed all 31 selected steps in 67.47 seconds after the locked Python environment and pinned submodule were initialized.
   - Existing Friedman exact replay passed all 325 pairs and walls for n26 and rejected duplicate and overfull-column controls; its companion n85 replay also passed.
-  - Coordinator's six focused tests passed in 4.36 seconds, including an exact check against the retained JSON record; the author and independent reviewer separately passed all six.
-  - Initial pre-push attempt selected 45 steps and failed on missing development tools in PATH, stale report/count/ledger views, a missing session deadline, and the case-prose check
-    parsing an unparenthesized algebraic upper bound as its leading integer. Its behavioral selection had 692 passes and one failure on the stale synopsis count; these integration failures
-    are corrected before rerunning.
-  - Second pre-push attempt passed 43 of 45 steps in 275.69 seconds, with 750 behavioral passes and one failure. It caught an unpinned acknowledgment link and a prose phrase in the declared
-    validation command; the link now uses the explainer's commit-pinned URL mechanism and the command is executable.
+  - Coordinator's six focused tests passed in 4.36 seconds, including an exact check against the retained JSON record; the author and independent reviewer separately
+    passed all six.
+  - Initial pre-push attempt selected 45 steps and failed on missing development tools in PATH, stale report/count/ledger views, a missing session deadline, and the
+    case-prose check parsing an unparenthesized algebraic upper bound as its leading integer. Its behavioral selection had 692 passes and one failure on the stale
+    synopsis count; these integration failures are corrected before rerunning.
+  - Second pre-push attempt passed 43 of 45 steps in 275.69 seconds, with 750 behavioral passes and one failure. It caught an unpinned acknowledgment link and a prose
+    phrase in the declared validation command; the link now uses the explainer's commit-pinned URL mechanism and the command is executable.
   - The local explainer PDF renders, its print-layout checker exits zero, and the acknowledgment and affected following pages pass visual inspection.
-  - Pre-push at 48a4544f passed all 45 selected steps in 426.80 seconds, including 796 behavioral tests; the rendered explainer and print-layout check passed at that commit.
-  - 'full gate: full at 48a4544f: failed (64 of 66 steps passed in 2565.37 seconds; all test assertions passed; two negative-control timeouts and thirteen quick-test wall overruns)'
-  - 'The two timed-out controls passed separately on clean 48a4544f with the unchanged 120-second limit: reducible-polynomial control 86.814 seconds and pivot-budget control 44.715 seconds.
-    Heavy host load was observed; the replay does not establish its sole causal role.'
-  - Three independent MacIver audits and the coordinator agree on the exact bound comparison, missing computational artifacts, limited Lean coverage, and candidate local-capacity controls;
-    public CI success is external evidence only.
-  - The final fast checkpoint declares PYTHON_CPU_COUNT=4 with three outer workers and one inner worker, reducing process concurrency without changing tests or time guards.
+  - Pre-push at 48a4544f passed all 45 selected steps in 426.80 seconds, including 796 behavioral tests; the rendered explainer and print-layout check passed at that
+    commit.
+  - 'full gate: full at 48a4544f: failed (64 of 66 steps passed in 2565.37 seconds; all test assertions passed; two negative-control timeouts and thirteen quick-test
+    wall overruns)'
+  - 'The two timed-out controls passed separately on clean 48a4544f with the unchanged 120-second limit: reducible-polynomial control 86.814 seconds and pivot-budget
+    control 44.715 seconds. Heavy host load was observed; the replay does not establish its sole causal role.'
+  - Three independent MacIver audits and the coordinator agree on the exact bound comparison, missing computational artifacts, limited Lean coverage, and candidate
+    local-capacity controls; public CI success is external evidence only.
+  - The final fast checkpoint declares PYTHON_CPU_COUNT=4 with three outer workers and one inner worker, reducing process concurrency without changing tests or time
+    guards.
+  - 'full gate: fast at bdc28e8985663827aae2f7d8219537197cfff189: failed (CPU4 local run passed 62 of 62 steps in 254.69 seconds but failed the stale Linux timing-baseline
+    comparison)'
+  - 'full gate: fast at bdc28e8985663827aae2f7d8219537197cfff189: failed (native ten-CPU run passed 61 of 62 steps in 249.99 seconds; 3425 tests passed, with one
+    12.81-second call exceeding the 12-second wall guard)'
+  - 'full gate: fast at bdc28e8985663827aae2f7d8219537197cfff189: passed (all 62 steps in 401.14 seconds; local CPU3, jobs2, inner1 shape; Linux timing band reported
+    and not enforced)'
+  - Independent review accepted the lower-concurrency invocation and preservation of all earlier failures. think-mg9q tracks the reference matcher treating equal
+    CPU/worker counts as comparable hardware; no speedup or causal load claim is made.
+  - Final independent review accepted bdc28e89 without mathematical or source-coverage findings and checked 34 relative links/anchors. The coordinator also confirmed
+    all three retained PDFs match the pinned originals and their raw extractions match fresh pdftotext output.
   stop_reason: null
-  next_action: Validate the integrated source audit, close the measured review, and publish the review checkpoint; retain the named future theorem-replay and research dependencies.
+  next_action: Integrate current main typography, check the PDF acknowledgment and final affected surface, close the measured review, and publish the review checkpoint.
 ---
 # Stromquist n26 Verification
 
@@ -297,6 +340,12 @@ source-audit declaration.
 The full run remained on its clean source commit while all MacIver edits were prepared
 and independently reviewed in temporary copies.
 Phase 5 integrates those accepted copies after the full process exits.
+The initial 120-minute plan is extended prospectively to 140 minutes for phase 6 after
+main receives typography changes that touch the acknowledgment renderer.
+The Linux timing baseline remains unchanged: CPU-count overrides on this macOS host do
+not establish comparable hardware.
+All three local fast receipts retain their source and invocation metadata, including the
+failed runs.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

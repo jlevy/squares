@@ -470,14 +470,43 @@ def data_uri(path: Path) -> str:
     return f"data:font/woff2;base64,{base64.b64encode(path.read_bytes()).decode()}"
 
 
-def inline_font_urls(css: str, fonts: Path) -> str:
-    """Rewrite `url("../fonts/x.woff2")` to a data URI, so the page fetches nothing."""
+#: A `@font-face` block, and a woff2 `url()` inside one, quoted or bare. kpress writes
+#: `url("../fonts/x.woff2") format("woff2")`; the minified KaTeX bundle writes
+#: `url(fonts/x.woff2)`; kpress's composite stylesheet reaches sideways into
+#: `../katex/fonts/`. One resolver serves all three, against the directory the
+#: stylesheet lives in, which is how a browser would resolve them.
+FONT_FACE_BLOCK = re.compile(r"@font-face\s*\{[^}]*\}")
+FONT_URL = re.compile(r"""url\(\s*(["']?)([^"')]+\.woff2)\1\s*\)""")
+
+
+def inline_font_urls(css: str, stylesheet_dir: Path) -> str:
+    """Rewrite every relative woff2 `url()` to a data URI, so the page fetches nothing.
+
+    Resolved against `stylesheet_dir`, the directory the stylesheet is served from,
+    so a stylesheet's own relative references land where the browser would land.
+    A reference that does not resolve to a file fails the render: an absent face
+    would otherwise fall through to whatever the reader's machine supplies.
+    """
 
     def rewrite(match: re.Match[str]) -> str:
-        name = match.group(1)
-        return f'url("{data_uri(fonts / name)}")'
+        target = match.group(2)
+        if target.startswith(("data:", "http:", "https:", "/")):
+            return match.group(0)
+        path = (stylesheet_dir / target).resolve()
+        if not path.is_file():
+            raise SystemExit(f"{stylesheet_dir}: stylesheet names {target}, which is not there")
+        return f'url("{data_uri(path)}")'
 
-    return re.sub(r'url\("\.\./fonts/([A-Za-z0-9_.-]+)"\)', rewrite, css)
+    inlined = FONT_URL.sub(rewrite, css)
+    # "The page fetches nothing" has to hold for every source a kept block names,
+    # not only the woff2 ones the rewrite recognises: a woff or ttf fallback that
+    # kpress or KaTeX added would otherwise ship as a path beside a file that has
+    # no such neighbour.
+    for block in FONT_FACE_BLOCK.findall(inlined):
+        for source in re.findall(r"""url\(\s*["']?([^"')]+)""", block):
+            if not source.startswith("data:"):
+                raise SystemExit(f"{stylesheet_dir}: a face still fetches {source}; inline it")
+    return inlined
 
 
 def kpress_css(static: Path) -> str:
@@ -492,9 +521,12 @@ def kpress_css(static: Path) -> str:
 
     parts = []
     for name in (PAGE_RESET, *DEFAULT_CSS_ASSETS):
+        css = (static / name).read_text(encoding="utf-8")
         parts.append(f"/* kpress: {name} */")
-        parts.append((static / name).read_text(encoding="utf-8"))
-    return inline_font_urls("\n".join(parts), static / "fonts")
+        # Each stylesheet resolves its own references, from its own directory, so
+        # a kpress stylesheet added outside `css/` would still find its faces.
+        parts.append(inline_font_urls(css, (static / name).parent))
+    return "\n".join(parts)
 
 
 def theme_bootstrap(static: Path) -> str:
@@ -688,21 +720,138 @@ def icon_sprite(static: Path) -> str:
     return sprite
 
 
+#: The KaTeX face under each slot of kpress's `KPress Math Text` composite, the family
+#: that draws the letters and digits of mathematics from the reading face (kpress:
+#: `katex/katex-text-face.css`). A slot's reading-face block names no KaTeX face, so
+#: its reachability is its KaTeX partner's: the page sets nothing in bold italic, and
+#: the PT Serif Bold Italic copy goes with `KaTeX_Math-BoldItalic`.
+COMPOSITE_SLOT_FACES = {
+    ("normal", "400"): "KaTeX_Main-Regular",
+    ("italic", "400"): "KaTeX_Math-Italic",
+    ("normal", "700"): "KaTeX_Main-Bold",
+    ("italic", "700"): "KaTeX_Math-BoldItalic",
+}
+_WEIGHT_TOKENS = {"normal": "400", "bold": "700"}
+
+
+def _font_face_reachable(block: str) -> bool:
+    """Whether a `@font-face` block names a face this page can reach.
+
+    Three kinds of block are known: a KaTeX face, kept if the page can reach it; a
+    face of kpress's `KPress Math Text` composite, kept if its slot's KaTeX partner
+    is; and nothing else. A composite under another name (the planned sans one, say)
+    fails the render rather than being inlined unread at 30-40 KB a face.
+    """
+    ref = re.search(r"(KaTeX_[A-Za-z0-9-]+)\.woff2", block)
+    if ref is not None:
+        return ref.group(1) in KATEX_FACES
+    family = re.search(r"font-family:\s*(\"[^\"]+\"|[^;]+);", block)
+    if family is None or family.group(1) != '"KPress Math Text"':
+        raise SystemExit(
+            f"a KaTeX stylesheet declares a face this renderer does not know how to prune: "
+            f"{family.group(1) if family else block.strip()[:60]}"
+        )
+    style = re.search(r"font-style:\s*([a-z]+)", block)
+    weight = re.search(r"font-weight:\s*([a-z0-9]+)", block)
+    slot = (
+        style.group(1) if style else "normal",
+        _WEIGHT_TOKENS.get(weight.group(1), weight.group(1)) if weight else "400",
+    )
+    partner = COMPOSITE_SLOT_FACES.get(slot)
+    return partner is None or partner in KATEX_FACES
+
+
 def katex_css(static: Path) -> str:
-    """KaTeX's stylesheet with the reachable faces inlined and the rest dropped."""
-    css = (static / "katex" / "katex.min.css").read_text(encoding="utf-8")
+    """KaTeX's stylesheets with the reachable faces inlined and the rest dropped.
 
-    def rewrite(match: re.Match[str]) -> str:
-        block = match.group(0)
-        ref = re.search(r"fonts/([A-Za-z0-9_-]+)\.woff2", block)
-        if ref is None:
-            return block
-        if ref.group(1) not in KATEX_FACES:
-            return ""
-        uri = data_uri(static / "katex" / "fonts" / f"{ref.group(1)}.woff2")
-        return block.replace(f"url(fonts/{ref.group(1)}.woff2)", f'url("{uri}")')
+    Two of them, in kpress's order: the vendored `katex.min.css`, and kpress's own
+    `katex-text-face.css`, which declares the composite that draws the letters and
+    digits of mathematics from PT Serif, scales KaTeX's Greek to it, and leaves the
+    rest to the KaTeX faces. Both are pruned by the same rule: a block whose face the
+    page cannot reach is dropped rather than inlined, since every face costs 30-40 KB.
+    """
+    from kpress.format.assets import KATEX_CSS_ASSETS  # noqa: PLC0415
 
-    return re.sub(r"@font-face\{[^}]*\}", rewrite, css)
+    parts = []
+    for name in KATEX_CSS_ASSETS:
+        css = (static / name).read_text(encoding="utf-8")
+        # The prune reads the composite through `COMPOSITE_SLOT_FACES`, a copy of
+        # kpress's slot table. A slot added upstream would be kept unread at
+        # 30-40 KB a face, so the copy is checked against the stylesheet it mirrors.
+        composite = sum(
+            1 for block in FONT_FACE_BLOCK.findall(css) if "KPress Math Text" in block
+        )
+        if composite and composite != 2 * len(COMPOSITE_SLOT_FACES):
+            raise SystemExit(
+                f"{name} declares {composite} faces of KPress Math Text; the renderer "
+                f"knows {len(COMPOSITE_SLOT_FACES)} slots of two. Update COMPOSITE_SLOT_FACES."
+            )
+        pruned = FONT_FACE_BLOCK.sub(
+            lambda match: match.group(0) if _font_face_reachable(match.group(0)) else "", css
+        )
+        parts.append(f"/* kpress: {name} */")
+        parts.append(inline_font_urls(pruned, (static / name).parent))
+    return "\n".join(parts)
+
+
+#: KaTeX lays out from its own metric table, so kpress's tables for the reading face
+#: are installed before the page draws anything. The page renders its mathematics
+#: itself (`tex()` in the shell) rather than through kpress's `katex-init.js`, which
+#: is why the call lives here; the policy is that script's, copied. The tables are
+#: skipped when the wrapper or any ancestor opts out with
+#: `data-kpress-math-text="katex"` or runs on system fonts (the wrapper's baked
+#: `data-kpress-fonts` or the reader's persisted `data-kpress-font-set`, which the
+#: bootstrap stamps on <html>), because the stylesheet reverts to the KaTeX faces
+#: there and PT Serif's numbers would measure glyphs that are not drawn. And when
+#: the face is wanted but the tables cannot be applied, the face is turned off too,
+#: by stamping the opt-out the stylesheet reads: faces without metrics is the one
+#: state the design forbids.
+APPLY_TEXT_METRICS = """
+(() => {
+  const optOut = [
+    '[data-kpress-math-text="katex"]',
+    '[data-kpress-fonts="system"]',
+    '[data-kpress-font-set="system"]',
+  ].join(", ");
+  const wrapper = document.querySelector(".kpress");
+  if (!wrapper || wrapper.closest(optOut)) return;
+  const tables = globalThis.kpressKatexTextMetrics;
+  const install = typeof katex === "undefined" ? undefined : katex.__setFontMetrics;
+  if (!tables || typeof install !== "function") {
+    document.documentElement.dataset.kpressMathText = "katex";
+    console.warn("kpress: math text face metrics unavailable; KaTeX's own faces restored");
+    return;
+  }
+  for (const [face, table] of Object.entries(tables)) {
+    if (face !== "scale") install.call(katex, face, table);
+  }
+})();
+"""
+
+
+def katex_js(static: Path) -> str:
+    """KaTeX, then kpress's metric tables for the math text face, then their install.
+
+    Both scripts come from kpress's own list, and their order in it is asserted: the
+    tables have to follow the bundle they patch. The list's `auto-render.min.js` and
+    `katex-init.js` are left out on purpose, since the page finds and renders its
+    own mathematics; the install call takes the init script's one remaining job.
+    """
+    from kpress.format.assets import KATEX_JS_ASSETS  # noqa: PLC0415
+
+    bundle, metrics = "katex/katex.min.js", "katex/katex-text-metrics.js"
+    for name in (bundle, metrics):
+        if name not in KATEX_JS_ASSETS:
+            raise SystemExit(f"kpress no longer lists {name}; the math text face has moved")
+    if KATEX_JS_ASSETS.index(metrics) < KATEX_JS_ASSETS.index(bundle):
+        raise SystemExit(f"kpress lists {metrics} before {bundle}, which cannot be right")
+    return "\n".join(
+        (
+            (static / bundle).read_text(encoding="utf-8"),
+            (static / metrics).read_text(encoding="utf-8"),
+            APPLY_TEXT_METRICS,
+        )
+    )
 
 
 class CoarseningRow(TypedDict):
@@ -1435,7 +1584,7 @@ def shell_substitutions(static: Path, shared: dict[str, str], body: str) -> dict
     return {
         "KPRESS_CSS": kpress_css(static) + katex_css(static),
         "THEME_BOOTSTRAP": theme_bootstrap(static),
-        "KATEX_JS": (static / "katex" / "katex.min.js").read_text(encoding="utf-8"),
+        "KATEX_JS": katex_js(static),
         "KPRESS_CLIENT_JS": kpress_client_js(static),
         **shared,
         "BODY_HTML": body,
