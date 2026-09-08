@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 100
+count: 101
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 55
+  sessions_measured: 56
   sessions_unmeasured: 45
   attributed:
-    rollups: 118
-    turns: 30454
-    tool_calls: 17052
-    tool_errors: 352
-    one_off_code: 2889
-    wall_hours: 173.92
+    rollups: 119
+    turns: 30727
+    tool_calls: 17189
+    tool_errors: 359
+    one_off_code: 2921
+    wall_hours: 175.56
   unattributed:
     rollups: 42
     turns: 8737
@@ -28,12 +28,12 @@ totals:
     one_off_code: 760
     wall_hours: 43.37
   measured:
-    rollups: 160
-    turns: 39191
-    tool_calls: 22186
-    tool_errors: 488
-    one_off_code: 3649
-    wall_hours: 217.29
+    rollups: 161
+    turns: 39464
+    tool_calls: 22323
+    tool_errors: 495
+    one_off_code: 3681
+    wall_hours: 218.93
 codex_receipts:
   attributed: 25
   unattributed: 0
@@ -1550,6 +1550,20 @@ sessions:
   unmeasured_reason: >-
     declares no rollups
   rollups: []
+  codex_receipts: []
+- id: session-101
+  title: "Corner-skeleton ownership at 96/25"
+  status: stopped
+  primary_bead: think-1136
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-a64c5adbf66c1e348.yaml
+  turns: 273
+  tool_calls: 137
+  tool_errors: 7
+  one_off_code: 32
+  wall_hours: 1.64
   codex_receipts: []
 - id: session-102
   title: "Angle-band theorems at 96/25"

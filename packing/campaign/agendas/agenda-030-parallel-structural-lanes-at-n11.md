@@ -68,7 +68,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 0
     question: Does a valid D4-symmetric measure at 96/25 exist with T-018's four corner atoms at weight at least 3/20 and total mass below 11 + 3/20?
     hypotheses: [H-128]
@@ -88,6 +88,27 @@ agenda:
     program: n11-structure-and-conditional-dots
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md
+    - packing/campaign/agent-sessions/session-101-corner-skeleton-ownership.md
+    outcomes:
+    - scope: The bounded corner-skeleton measure at 96/25 on the retained shrink and net, one site set, in session-101 (2026-09-08, one worker at load 3 to 8)
+      classification: bounded-negative
+      result: >-
+        H-128's falsifier is met: with the corner orbit bounded below by 3/20 the exactly
+        swept measure has mass 23596423/2000000 = 11.798 (five-bound 11.819) against the free
+        11.262 on the same site set, price M(forced) - M(free) = 33507/62500 = 0.536, and
+        pricing the corner orbit leaves it at weight zero, so the corner atom's position, not
+        the bound, is the obstacle; the bounded dual's proved floor for every valid D4 measure
+        on this net is 10.785, below 11.15, so the obstruction is a site-set reading rather
+        than a theorem for the net. The lane proved instead, from the exactly verified free
+        measure and the ownership lemma applied to T-018's corner pair, that every packing of
+        eleven unit squares at 96/25 has four distinct squares each containing one of its
+        corner's two marks in its interior; the anchor for BC-299 is therefore a corner pair,
+        not a corner point. The Lemma C dry run on T-018 keeps no diagonal displacement valid.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md
+      - packing/campaign/agent-sessions/session-101-corner-skeleton-ownership.md
+      disposition: continue
+      follow_up: think-1136
     next_evidence: Pinned anchors for the frame-conditioned certificate (BC-287, H-111) and the two-pattern case split of the ownership-conditioned certificate.
   - id: BC-294
     purpose: measurement_validation

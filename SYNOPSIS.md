@@ -603,6 +603,12 @@ certified by an interval reader over pose space with every one of its 184,756 le
 re-decided in exact arithmetic, while every point-mark set built from the atom skeleton
 has an exact escape; every contained unit square is therefore localised near one of ten
 known segments, which is the premise route (a) needed, though not exactly-one ownership.
+[Session-101](packing/campaign/agent-sessions/session-101-corner-skeleton-ownership.md)
+rejected H-128 at `96/25` on the retained shrink and net: the corner-bounded measure
+sweeps exactly at mass `11.798` against `11.262` free, and the corner atom’s position,
+not the bound, is the obstacle; it proved the corner-pair form instead, that every
+packing at `96/25` has four distinct squares each containing one of its corner’s two
+marks, so the anchor for BC-299 is a corner pair.
 
 **Selected next entry:** `think-znzj` is BC-303, the first-wave selection with
 independent review, which reads every lane’s exact results once sessions 100, 101, 102
@@ -3224,9 +3230,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 118 | 30,454 | 17,052 | 352 | 2,889 | 173.92 h |
+| claimed by a session | 119 | 30,727 | 17,189 | 359 | 2,921 | 175.56 h |
 | claimed by none | 42 | 8,737 | 5,134 | 136 | 760 | 43.37 h |
-| **measured** | **160** | **39,191** | **22,186** | **488** | **3,649** | **217.29 h** |
+| **measured** | **161** | **39,464** | **22,323** | **495** | **3,681** | **218.93 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -3257,10 +3263,11 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-085](packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md) | 4 | 23 | 3,244 | 1,801 | 45 | 22.09 h |
 | [session-086](packing/campaign/agent-sessions/session-086-agenda021-overnight-pass.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
 | [session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
+| [session-101](packing/campaign/agent-sessions/session-101-corner-skeleton-ownership.md) | 2 | 1 | 273 | 137 | 7 | 1.64 h |
 | [session-102](packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md) | 2 | 1 | 310 | 106 | 2 | 1.52 h |
 | [session-103](packing/campaign/agent-sessions/session-103-plateau-artefact-at-3-82.md) | 1 | 1 | 164 | 63 | 0 | 0.94 h |
 | [session-104](packing/campaign/agent-sessions/session-104-ownership-set-at-q.md) | 3 | 1 | 238 | 83 | 1 | 1.38 h |
-| *shared by 30 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
+| *shared by 31 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -3292,9 +3299,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 55 |
+| measured | 56 |
 | unmeasured | 45 |
-| **total** | **100** |
+| **total** | **101** |
 
 <!-- END GENERATED: session-close-report -->
 

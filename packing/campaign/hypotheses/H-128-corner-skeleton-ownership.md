@@ -43,7 +43,13 @@ hypothesis:
     holds two, and with mass below 11 + w_c each atom of weight w_c is owned by exactly
     one core. The falsifier is a converged mass at or above 11.15 with the forced
     skeleton. At 3.81 the statement is vacuous because the mass is below eleven; the
-    3.85 run stood at 11.23 unconverged.
+    3.85 run stood at 11.23 unconverged. Rejected at 96/25 on the retained shrink and net
+    in session-101 (lane C, 2026-09-08): the four-bound measure sweeps exactly at mass
+    11.798 against 11.262 free, price 0.536, and pricing the corner orbit leaves it at
+    weight zero; the bounded dual's floor for the net is 10.785, so the reading is
+    site-set-scoped. The corner-pair form holds instead: every packing at 96/25 has four
+    distinct squares each containing one of its corner's two marks. The experiment record
+    is allocated at integration.
 ---
 # H-128 — Four Corners Owned, From the LP Alone
 
