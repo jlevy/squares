@@ -254,33 +254,52 @@ SLOW_TEST_FLOOR_SECONDS = 1.0
 #: its own job rather than a larger share of this one (think-tr2z).
 EXHAUSTIVE_SUITE_BUDGET_SECONDS = 3600.0
 #: The whole single-square translation escape screen, which has had its own post-merge
-#: runner since `D-481`. Sized as a hang detector rather than as a cost guard, because on
-#: its own job `--only` reports no tier and there is no `gate-budgets.yaml` ceiling behind
-#: it: this number is the only bound on that job.
+#: runner since `D-481`. Sized as a hang detector rather than as a cost guard, and a
+#: budget is a property of the step rather than of a job: `_execute_step_result` raises
+#: the subprocess cap to this number wherever the step runs, in any run whose timeout was
+#: not typed by a person. On the solo `screen` jobs, where `--only` reports no tier and no
+#: `gate-budgets.yaml` ceiling applies, that makes it the only bound. In the full gate --
+#: `packing-validate` with no tier flag, the 69-step run `AGENTS.md` asks for at merge
+#: checkpoints -- the same number loosens this one step's hang detector from 900s to
+#: 1800s beside the 68 other steps, under only the `full` tier's 3600s wall ceiling,
+#: which is a check on the finished run rather than a kill and, off that tier's reference
+#: shape, is reported rather than failed. A hung screen takes 1800s to die there, not
+#: 900s; the loosening is not confined to the solo job.
 #:
-#: Why not leave it at the shared 900s, given the job doubles the screen's workers.
-#: Because the doubling did not buy what it looked like it would, and two hosted readings
-#: of the split job say so: 944s on run 34188003140 and 861s on run 34189176373, a spread
-#: of 1.10x, geometric mean **901.5s**.
+#: Why not leave it at the shared 900s, given the split job doubles the screen's workers.
+#: Because at four workers on hosted runners the step does not sit under 900s, and three
+#: readings of the split job say so: 944s on run 34188003140, 861s on run 34189176373 and
+#: 949s on run 34190285360 -- a spread of 1.10x, geometric mean **917.09s**.
 #:
-#: That mean is 1.0017x the old 900s cap. The step does not merely exceed the cap it was
-#: running under -- its central estimate sits within a second of it, which is the sharpest
-#: available statement of why the cap had to move: at 900 this step fails about half the
-#: time, and which half is decided by the runner. Splitting the job and leaving the cap
-#: alone would have bought a differently-shaped coin flip, not a fix.
+#: That mean is 1.019x the old 900s cap, and two of the three readings are above it. The
+#: step does not merely exceed the cap it was running under on a bad draw; its central
+#: estimate is above it, which is the sharpest available statement of why the cap had to
+#: move: at 900 the verdict is settled by which runner the job draws rather than by the
+#: code. Splitting the job and leaving the cap alone would have bought a differently
+#: shaped coin flip, not a fix.
 #:
-#: 1800 is 1.9966x that mean, which is just inside the `max_headroom: 2.0` rule
-#: `devtools/gate-budgets.yaml` applies to every tier -- a ceiling above twice the
-#: recorded cost is not a ceiling. It landed there before the second reading existed, so
-#: read that as the rule endorsing the number rather than the number being derived from
-#: it; the margin is 0.0034 and a third reading could move it either way.
+#: 1800 is 1.963x that mean, and nothing checks the ratio. `max_headroom` in
+#: `devtools/gate-budgets.yaml` is a rule over tier ceilings, `budget_seconds` is read by
+#: nothing in `sqpack.gate_budgets` or under `devtools`, and no check compares a step
+#: budget to any multiple of its cost. The figure is an unenforced analogy to that rule,
+#: recorded so the next reader knows the budget is about twice the reading rather than
+#: ten times it, and not a margin anything measures.
 #:
-#: The estimate all this replaces was 613-846s, from applying the slow lane's measured
-#: 1.42x to the screen's 858.62s at two workers on run 34176106076. It was wrong and
-#: optimistic. It does not license the opposite claim either -- 858.62s came from a
-#: different, faster runner, so neither reading here shows four workers to be slower than
-#: two. What is established is only that this step does not scale with its worker count,
-#: which it now has in common with the slow lane, and `think-ph9v` owns why.
+#: The estimate all this replaces was 613-846s, and it was built from two factors rather
+#: than one. The screen's 858.62s at two workers on run 34176106076, divided by the slow
+#: lane's then-measured 1.42x, was the low end for four workers on that same fast runner:
+#: the division gives 604.66s, and the comment at the time wrote 613s, which was a
+#: further error. The 1.38x by which the slower runner of that night ran the same gate
+#: then gave the high end, 613 x 1.38 = 845.9. Both ends are optimistic against every
+#: hosted reading since, and the 1.42x has since been qualified as well
+#: (`_xdist_distribution`).
+#:
+#: What the three readings do not say is anything about scaling. They are all at four
+#: workers, and the one reading at two -- 858.62s -- came from a different, faster
+#: runner, so this step has no same-runner comparison across worker counts in either
+#: direction. The slow lane has one, 1020.77s serial against 718.52s at four workers on
+#: one box, and its shortfall against 4x is the question `think-ph9v` owns; whether the
+#: screen shares it is not measured.
 SCREEN_BUDGET_SECONDS = 1800.0
 
 
@@ -1193,6 +1212,22 @@ def _xdist_distribution(jobs: int) -> tuple[str, ...]:
     is faster with it. Where the missing parallelism went is `think-ph9v` and is not
     answered by this helper -- 21m of cpu against 12m of wall says the lane is not
     spreading evenly, which is a question about its longest members.
+
+    Two qualifications on that 1.42x, both about shape rather than about the sign. It is
+    *four* workers, which is `--jobs 1`, and no job runs the lane that way: both CI jobs
+    that reach it pass `--jobs 2`, where the formula above gives three. At `-n 3` on a
+    contended box the same tests were 795.11s, about 1.28x against the serial reading.
+    The shipped shape has a hosted reading too -- 1212.70s in the deep gate's
+    `deferred-steps` job on run 34190285360, beside another outer slot -- and it is the
+    first uncensored one: the CI readings it replaces were killed at the 1800s cap on runs
+    34172652457 and 34177317419, so `>= 1801s` was a cap and not a duration. 1212.70s is
+    587s inside that budget on one run, which is where `D-472` applies rather than a claim
+    that the lane is comfortably inside it.
+
+    And the default local gate does not get this at all. `packing-validate` with no
+    `--jobs` defaults it to the cpu count, so `cpus - jobs + 1` is 1, this helper returns
+    `()`, and the lane runs in one process exactly as it did before. Xdist reaches it only
+    where `--jobs` is below the cpu count: CI, and an explicit `--jobs` locally.
     """
     workers = _pytest_workers(jobs)
     return () if workers == 1 else ("-n", str(workers))
@@ -1272,6 +1307,14 @@ def _slow_tests(context: Context) -> str:
             raise
         return "  no test is deferred by the per-test ceiling; the quick lane runs them all"
     _require_durations(output, "slow", f"the {SLOW_TEST_FLOOR_SECONDS:g}s marker floor")
+    # A watch item since this lane gained xdist, and not a live break. The floor is the
+    # two-sided half of the rule -- a `slow` marker has to earn itself -- and under
+    # `--dist load` the durations it reads are less stable than they were: a memoized
+    # module-level build is billed to whichever test reaches it first *per worker*, which
+    # varies run to run, and contention inflates call time. Both push measured cost up, so
+    # the floor got more permissive rather than noisier, and a stale marker can now
+    # survive it. The last full reading had nothing under the floor and its cheapest
+    # member at 2.07s, about twice the margin, so nothing is masked today.
     # Per function, not per node, because the marker is per function. `_fast_tests` keeps
     # the opposite rule for the opposite reason: one node at or above the ceiling is one
     # node the pull-request surface actually pays for, whatever its siblings cost.
@@ -2873,21 +2916,30 @@ STEPS: tuple[Step, ...] = (
     ),
     # The whole re-screen, off the pull-request surface since 2026-09-07 and, since
     # `D-481`, on its own post-merge runner. The 134s of margin the previous note here
-    # claimed against the shared 900s cap was not margin: the step was killed at that cap
-    # on run 34172652457 and finished at 858.62s on run 34176106076 -- the same code, two
-    # runners, and one of them 41s from red. A step that decides main's colour by which
-    # runner it draws is not budgeted, and `D-472` is the entry that says why one reading
-    # was never enough to conclude otherwise.
+    # claimed against the shared 900s cap was not margin, and the control for that is one
+    # commit run twice: on `831697c0` the step finished at 858.62s on post-merge run
+    # 34176106076 and was killed at the cap an hour later on deep-gate run 34177317419 --
+    # the same code, two runners, opposite verdicts, and the surviving one 41s from red.
+    # (Run 34172652457 was killed at the cap as well, at 901.00s, but on commit
+    # `28696526`: a second sighting rather than the control.) A step that decides main's
+    # colour by which runner it draws is not budgeted, and `D-472` is the entry that says
+    # why one reading was never enough to conclude otherwise.
     #
     # What the job buys is workers rather than time: the screen is a process pool sized by
     # `PACK_JOBS`, so beside the rest of the gate at `--inner-jobs 2` it gets two, and
-    # alone at `--inner-jobs 4` it gets four. 794.5s at four workers over the same 318
-    # records on a four-cpu development box.
+    # alone at `--inner-jobs 4` it gets four. What four workers cost is three hosted
+    # readings -- 944s, 861s, 949s, geometric mean 917.09s, run numbers on
+    # `SCREEN_BUDGET_SECONDS` -- against one local reading of 794.5s over the same 318
+    # records on a four-cpu development box, which the hosted runs sit 1.08x to 1.19x
+    # above. The local number is a development reading, not the one to size a job from.
     #
-    # The budget is a hang detector and is sized as one. `--only` reports no tier, so
-    # unlike every step in the `validate` job this one has no `gate-budgets.yaml` ceiling
-    # behind it and this number is the whole guard -- which is the argument for setting it
-    # generously against the measurement and not for setting it tight.
+    # The budget is a hang detector and is sized as one, and it travels with the step:
+    # `_execute_step_result` raises the cap for this step in every run that did not type
+    # its own timeout, the full gate included, where it loosens one step's detector from
+    # 900s to 1800s under the `full` tier's 3600s wall check. On the solo job `--only`
+    # reports no tier, so there is no `gate-budgets.yaml` ceiling behind it and this
+    # number is the whole guard -- which is the argument for setting it generously
+    # against the measurement and not for setting it tight.
     Step(
         "single-square translation escape screen",
         _translation_escape_screen,

@@ -91,28 +91,30 @@ concurrency:
 
 jobs:
   deferred-steps:
-    # Six of the seven deferrals: `negative controls` (543.67s), `slow behavioral tests`
-    # (890s of a 1,038s suite, in 92 of 2,251 tests), `n=40 rigidity bracket still
-    # reproduces` (221.36s), and the three the widened known-best corpus put here on
-    # 2026-09-07 -- `known-best n=1..324 atlas rebuild`, `single-square translation
-    # escape screen` and `exact rational grid replay`. The seventh is `exhaustive-tier`
-    # below.
+    # Five of the seven deferrals: `negative controls` (543.67s), `slow behavioral tests`
+    # (890s of a 1,038s suite, in 92 of 2,251 tests, as the deferral was priced; 1212.70s
+    # hosted at this job's own shape), `n=40 rigidity bracket still
+    # reproduces` (221.36s), and two of the three the widened known-best corpus put here
+    # on 2026-09-07 -- `known-best n=1..324 atlas rebuild` and `exact rational grid
+    # replay`. The other two deferrals have a job each below: `exhaustive-tier` and
+    # `screen`.
     #
-    # The three new ones are here on their own measurements, taken at n=1..324 on an idle
+    # The two that stayed are here on their own measurements, taken at n=1..324 on an idle
     # ten-cpu box and retained in `packing/benchmarks/gate-cost-at-324/`: 691.19s for the
-    # rebuild and 766.26s for the screen, against the 210s ceiling on the pull-request
-    # job that used to carry both; and 34.81s for the grid replay, inside a step that was
-    # 133.4s of a `checks` job running 189.09s against a 195s ceiling. None is deferred
-    # without a stand-in -- `known-best atlas records and sample`, `translation escape
-    # screen records and sample` and the sampled replay inside `exact verification` run
-    # on every pull request -- and this selection is the exact complement of those, not a
-    # rerun of them.
+    # rebuild, against the 210s ceiling on the pull-request job that used to carry it; and
+    # 34.81s for the grid replay, inside a step that was 133.4s of a `checks` job running
+    # 189.09s against a 195s ceiling. The third arrival, the escape screen at 766.26s on
+    # that box, was deferred here the same day and has since moved to the `screen` job
+    # below (`D-481`). None is deferred without a stand-in -- `known-best atlas records
+    # and sample`, `translation escape screen records and sample` and the sampled replay
+    # inside `exact verification` run on every pull request -- and this selection is the
+    # exact complement of those, not a rerun of them.
     #
-    # The grid replay costs this job nothing on the clock. It is 34.81s serial beside a
-    # 890s slow lane, and its own pool takes it to 18.79s -- measured here, at this job's
-    # own `--jobs 2 --inner-jobs 2`, replaying all 305 witnesses over 36.65s of cpu. A
-    # step that finishes inside the wall a longer step already sets is free in the sense
-    # that decides where work goes.
+    # The grid replay costs this job nothing on the clock. It is 34.81s serial and 18.79s
+    # with its own pool on an idle ten-cpu box, 39.59s here on run 34190285360, replaying
+    # all 305 witnesses -- against a slow lane that measured 1212.70s in the same job on
+    # the same run. A step that finishes inside the wall a longer step already sets is
+    # free in the sense that decides where work goes.
     #
     # `--only` rather than a tier flag, and unlike in `packing-validation.yml` that is
     # the correct instrument here. There, `--only` on a pull-request job would have left
@@ -125,21 +127,54 @@ jobs:
     # arrangement the `exhaustive` job in `packing-validation.yml` already runs under.
     #
     # The names are typed here and cannot drift silently:
-    # `test_the_deep_gate_runs_exactly_what_the_pull_request_defers` parses these commands
-    # with the CLI's own parser, resolves them through its own selector, and requires the
-    # union to equal the set no pull-request job runs. A seventh deferral added tomorrow
-    # fails that test until it is added here, which is the property the daily backstop
-    # never had.
+    # `test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers` parses every
+    # `packing-validate` command in this file with the CLI's own parser, resolves them
+    # through its own selector, and requires the union to equal the set no pull-request
+    # job runs. An eighth deferral added tomorrow fails that test until one of these three
+    # jobs runs it, which is the property the daily backstop never had.
     #
-    # `--jobs 2 --inner-jobs 2`: this job's wall is one step's wall. `slow behavioral
-    # tests` runs pytest in a single process -- the xdist lane is the quick one -- so it
-    # is 890s that no amount of outer parallelism shortens, and the rest finish underneath
-    # it on the second slot. `--inner-jobs 2` now also reaches the two steps that arrived
-    # on 2026-09-07: both size their pools from `PACK_JOBS`, and the atlas rebuild is
-    # 348.15s at two workers against 691.19s serial on an idle ten-cpu box, so on this
-    # runner it lands well inside both the slow lane's 890s and the gate's own 900s
-    # per-step timeout. A third slot buys nothing and costs contention, which is
-    # `BC-218`'s finding one level down.
+    # `--jobs 2 --inner-jobs 2`, and since `D-481` gave the slow lane xdist these flags
+    # ask a four-cpu runner for more cpu-bound processes than it has. Nothing in the flags
+    # says that, so the arithmetic is written down here. `slow behavioral tests` sizes
+    # itself through `_pytest_workers`, which is `cpus - jobs + 1` and hands it three;
+    # whichever step holds the other outer slot is two more -- `negative controls` at
+    # `min(NEGATIVE_CONTROL_WORKERS, inner_jobs)`, `known-best n=1..324 atlas rebuild` at
+    # `worker_count` off `PACK_JOBS`. Five on four before counting what the lane's own
+    # members do, and two of them fan out again through the same `PACK_JOBS`:
+    # `test_known_best_composite_contains_every_case_and_square` in
+    # `tests/test_known_best_atlas.py` builds the corpus at `worker_count(324)`, two pool
+    # processes, and `test_the_parallel_direction_loop_matches_the_serial_one` in
+    # `tests/test_fractional_sweep_integer.py` sets `PACK_JOBS=2` itself and spawns two.
+    # `ps` on a live `-n 3` run showed about seven processes from this one step --
+    # controller, three workers, a forkserver and pool children -- so up to about nine on
+    # four cpus beside the other slot's two. The quick lane's job in
+    # `packing-validation.yml` states the invariant this breaks, and runs at
+    # `--inner-jobs 1` to keep it: "a step already running four xdist workers must not
+    # have each of them fan out again." The lane was one process before it had xdist,
+    # which is where the three came from.
+    #
+    # It stays at 2 and 2, because the one reading of this exact shape passed and nothing
+    # in it came near a cap. Run 34190285360: job wall 1451.27s, of which the slow lane
+    # was 1212.70s against its 1800s budget, `negative controls` 685.71s, the atlas
+    # rebuild 653.91s against the shared 900s cap, the n=40 bracket 198.98s and the grid
+    # replay 39.59s. One run, so `D-472` applies. It is visibly a contended one -- the
+    # lane's 1212.70s here is above the 1020.77s it costs serially on an idle four-cpu
+    # box, which is contention showing rather than xdist failing -- and it still cleared
+    # every cap. Oversubscription that is real as arithmetic and unobserved as a failure
+    # is a note, not a change.
+    #
+    # The obvious change is the expensive one to guess at. `--inner-jobs 1` would take the
+    # atlas rebuild from two workers to one, and that step declares no `budget_seconds`,
+    # so it runs under the shared 900s cap: 653.91s on the run above and 765.43s on run
+    # 34177317419, both at two workers, both inside the cap by less than a serial run
+    # would need. Trading a contention nobody has seen bite for a timeout one worker away
+    # is the wrong trade to make from arithmetic alone. Measure this job at `--jobs 2
+    # --inner-jobs 1`, and at `--jobs 1`, before either flag moves; the fan-out above is
+    # evidence for `think-ph9v`, which owns where the lane's parallelism goes.
+    #
+    # The shape of the wall is unchanged by any of that: the slow lane is the long step,
+    # the rest finish underneath it on the second slot, and a third outer slot buys
+    # nothing and costs contention -- `BC-218`'s finding one level down.
     if: >-
       github.event_name == 'workflow_dispatch'
       || contains(github.event.pull_request.labels.*.name, 'deep-gate')
@@ -206,10 +241,11 @@ jobs:
     # beside `deferred-steps` in one job it would do that here too, and the deep gate's
     # whole value is naming *which* deferral broke before the merge rather than after it.
     #
-    # It costs a second runner and no wall: 1943.05s here against about 890s there, so
-    # the gate finishes when this job does either way. `BC-218` priced a second job at
-    # "+3 billed minutes and zero wall" and took it; this one is dearer in minutes and
-    # buys a separable verdict, on a workflow requested by label or dispatch.
+    # It costs a second runner and no wall: 1943.05s here against the 1451.27s
+    # `deferred-steps` measured on run 34190285360, so the gate finishes when this job
+    # does either way. `BC-218` priced a second job at "+3 billed minutes and zero wall"
+    # and took it; this one is dearer in minutes and buys a separable verdict, on a
+    # workflow requested by label or dispatch.
     #
     # Hosted provenance reports four available CPUs. This isolated job gives its
     # certificate pool up to four workers; actual CPU and grid-memory caps still apply.
@@ -273,6 +309,13 @@ jobs:
     # a faster runner. A pre-merge gate that fails on a coin flip teaches people to
     # re-run it, which is the one habit it cannot afford: the deep gate exists to be
     # believed the first time.
+    #
+    # What the split costs is measured on the post-merge `screen` job, which is this
+    # job's shape exactly: 944s on run 34188003140, 861s on run 34189176373 and 949s on
+    # run 34190285360 -- spread 1.10x, geometric mean 917.09s, and two of the three above
+    # the 900s cap this step no longer runs under (`SCREEN_BUDGET_SECONDS` is 1800s). The
+    # one local reading, 794.5s at four workers on a four-cpu development box, is the
+    # number to argue from least: the hosted runs sit 1.08x to 1.19x above it.
     #
     # Keeping it beside the others would also make the deep gate slower than the
     # post-merge gate it is meant to pre-empt, which is backwards for a check a pull

@@ -520,8 +520,16 @@ jobs:
     # the other slot (`BC-218`).
     #
     # Alone at `--jobs 1 --inner-jobs 4` it gets four, which is what `PACK_JOBS` hands
-    # `sqpack.workers.worker_count` and what the pool then asks for. Measured 794.5s at
-    # four workers on a four-cpu development box against the same 318 records.
+    # `sqpack.workers.worker_count` and what the pool then asks for.
+    #
+    # What four workers cost is three hosted readings of this job: 944s on run
+    # 34188003140, 861s on run 34189176373 and 949s on run 34190285360 -- spread 1.10x,
+    # geometric mean 917.09s. Two of the three are above the 900s cap the step used to run
+    # under, which is why `SCREEN_BUDGET_SECONDS` raises it to 1800s rather than leaving
+    # the split to do the work alone. There is also one local reading, 794.5s at four
+    # workers on a four-cpu development box over the same 318 records; the hosted runs sit
+    # 1.08x to 1.19x above it, so it is a development number and not the measurement to
+    # size this job from.
     if: "github.event_name != 'pull_request'"
     runs-on: ubuntu-latest
     defaults:
