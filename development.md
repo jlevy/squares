@@ -683,7 +683,7 @@ the edition stamp is the one `sqpack.release` names, that every repository link 
 that commit and resolves on GitHub, and that the PDF is a PDF.
 
 **The stamp in the credits has two parts, and they move on different clocks.** The
-version (`v0.2.4`) is editorial and pinned in `src/sqpack/release.py`; the hash after it
+version (`v0.3.0`) is editorial and pinned in `src/sqpack/release.py`; the hash after it
 is the commit the page is built from, read at render time (`page_edition()`), so it
 changes on every push, and a reader of the deployed page sees exactly which commit they
 are looking at. The atlas footer and the generated claim documents are checked in and
