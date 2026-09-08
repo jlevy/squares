@@ -1,0 +1,31 @@
+type: object
+additionalProperties: false
+required: [id, title, derived_from, registered, metric, criterion, widths]
+properties:
+  id: {type: string, pattern: '^H-[0-9]{3}$'}
+  title: {type: string, minLength: 1}
+  derived_from:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: {type: string, pattern: '^X-[0-9]{3}$'}
+  registered: {type: string, minLength: 1}
+  metric: {type: string, minLength: 1}
+  widths:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: {type: integer, minimum: 1}
+  criterion: {enum: [geometry, paired_latency]}
+  maximum_math_box_displacement_px: {type: number, minimum: 0}
+  minimum_pairs: {type: integer, minimum: 12}
+  maximum_ci95_change_pct: {type: number, exclusiveMaximum: 0}
+allOf:
+  - if:
+      properties: {criterion: {const: geometry}}
+    then:
+      required: [maximum_math_box_displacement_px]
+  - if:
+      properties: {criterion: {const: paired_latency}}
+    then:
+      required: [minimum_pairs, maximum_ci95_change_pct]
