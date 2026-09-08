@@ -238,10 +238,16 @@ def test_isolated_exhaustive_jobs_use_the_host_without_multiplying_concurrent_po
                 )
                 if namespace.only == ["exhaustive exact behavioral tests"]:
                     assert (namespace.jobs, namespace.inner_jobs) == ("1", "4")
-                elif namespace.skip == ["exhaustive exact behavioral tests"] or (
-                    "negative controls" in namespace.only
-                ):
+                elif namespace.skip == ["exhaustive exact behavioral tests"]:
                     assert (namespace.jobs, namespace.inner_jobs) == ("2", "2")
+                elif "negative controls" in namespace.only:
+                    # The deep gate's five remaining deferrals, serial since run
+                    # 34181619739 killed the escape screen at its 1800s budget while it
+                    # shared four cpus with the atlas rebuild and the negative controls at
+                    # two workers each: more than twice its 858.62s reading. Every one of
+                    # the five was measured at two workers with the runner otherwise
+                    # quiet, so one outer slot is the shape the readings were taken at.
+                    assert (namespace.jobs, namespace.inner_jobs) == ("1", "2")
                 elif namespace.only == ["slow behavioral tests"]:
                     # The deep gate's third job since 2026-09-08, and isolated for the
                     # same reason as the exhaustive tier: it was being killed at its
