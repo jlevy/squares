@@ -34,6 +34,7 @@ import io
 import json
 import shlex
 from contextlib import redirect_stdout
+from itertools import combinations
 from pathlib import Path
 from typing import Any
 
@@ -134,20 +135,27 @@ def test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers() -> No
     also argued into the deep gate, which is how the set reached seven on 2026-09-07
     without anyone maintaining a count.
 
-    The two jobs are disjoint for the reason the post-merge jobs are: nothing is paid for
-    twice. And the exhaustive tier is alone in its job because of `D-456` -- when it
-    outgrew its budget the gate killed it with its output in an unflushed pipe, and three
-    merges went red saying nothing about the sixty other steps. A deep gate that cannot
-    say *which* deferral broke is most of the way back to the daily backstop.
+    The three jobs are pairwise disjoint for the reason the post-merge jobs are: nothing
+    is paid for twice. And two of them run one step each. The exhaustive tier is alone
+    because of `D-456` -- when it outgrew its budget the gate killed it with its output
+    in an unflushed pipe, and three merges went red saying nothing about the sixty other
+    steps. The slow lane is alone since 2026-09-08 for the same failure one level down:
+    run 34177317419 killed it at 1800s and the escape screen at 900s in the same job,
+    while run 34176106076 ran both to completion the same day at 1271.96s and 858.62s
+    beside sixty-odd cheap steps. Contention was the whole difference, so the lane got a
+    runner rather than a larger budget. A deep gate that cannot say *which* deferral
+    broke is most of the way back to the daily backstop.
     """
     selections = {
         job_name: _selected_steps(command)
         for job_name, command in _gate_commands(DEEP_GATE).items()
     }
 
-    assert set(selections) == {"deferred-steps", "exhaustive-tier"}
+    assert set(selections) == {"deferred-steps", "deferred-slow-lane", "exhaustive-tier"}
     assert selections["exhaustive-tier"] == {"exhaustive exact behavioral tests"}
-    assert not selections["deferred-steps"] & selections["exhaustive-tier"]
+    assert selections["deferred-slow-lane"] == {"slow behavioral tests"}
+    for left, right in combinations(sorted(selections), 2):
+        assert not selections[left] & selections[right], (left, right)
 
     covered: set[str] = set().union(*selections.values())
     assert covered == {step.name for step in validate.STEPS if not step.fast}
@@ -209,7 +217,12 @@ def test_the_deep_gate_reports_one_context_and_never_leaves_it_pending() -> None
     filter -- while a job skipped by its own `if` reports a conclusion. So the label is
     tested in the job conditions (above) rather than in the trigger's filters, and the
     aggregate is gated the same way as the jobs it waits on: on an unlabelled pull
-    request all three skip together and none of them hangs.
+    request all four skip together and none of them hangs.
+
+    `needs` is read against the job list rather than a typed set of names, so the
+    2026-09-08 split that gave the slow behavioural lane its own runner had to join this
+    aggregate to pass. A job added to a required workflow and left unrequired is a
+    deferral nobody is waiting on, reported green.
     """
     jobs = _workflow(DEEP_GATE)["jobs"]
     aggregate = jobs[AGGREGATE_JOB]

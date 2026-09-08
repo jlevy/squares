@@ -242,6 +242,16 @@ def test_isolated_exhaustive_jobs_use_the_host_without_multiplying_concurrent_po
                     "negative controls" in namespace.only
                 ):
                     assert (namespace.jobs, namespace.inner_jobs) == ("2", "2")
+                elif namespace.only == ["slow behavioral tests"]:
+                    # The deep gate's third job since 2026-09-08, and isolated for the
+                    # same reason as the exhaustive tier: it was being killed at its
+                    # budget while sharing four cpus with five other deferrals. One outer
+                    # job because pytest runs the lane in a single process, but two inner
+                    # workers rather than one, because the lane's two corpus-scaled tests
+                    # pool their own work through `PACK_JOBS` -- the atlas one is 691.19s
+                    # serial against 348.15s at two -- so `--inner-jobs 1` would hand back
+                    # about as much wall as the split buys.
+                    assert (namespace.jobs, namespace.inner_jobs) == ("1", "2")
                 else:
                     continue
                 checked.add((workflow.name, name))
@@ -250,6 +260,7 @@ def test_isolated_exhaustive_jobs_use_the_host_without_multiplying_concurrent_po
         ("packing-validation.yml", "validate"),
         ("deep-gate.yml", "exhaustive-tier"),
         ("deep-gate.yml", "deferred-steps"),
+        ("deep-gate.yml", "deferred-slow-lane"),
     }
 
 
@@ -1515,7 +1526,7 @@ def test_a_step_that_exceeds_its_own_budget_still_fails(
     assert "timed out after 0.2 seconds" in summary.results[0].reason
 
 
-def test_only_the_whole_suite_steps_carry_budgets() -> None:
+def test_only_the_steps_that_outgrew_the_shared_cap_carry_budgets() -> None:
     """A budget is an exception, so the set of them is worth watching.
 
     If a second step acquires one, that is a signal the shared cap is wrong rather than
@@ -1547,12 +1558,31 @@ def test_only_the_whole_suite_steps_carry_budgets() -> None:
 
     Recorded honestly: the second budget was added by the coordinator during an
     unattended run and has not been independently reviewed.
+
+    The fourth arrived on 2026-09-08 and is the first that is not a suite at all, so the
+    rule the paragraph above states -- a fourth budget means the shared cap is wrong --
+    was re-argued and refused on its own measurements. `single-square translation escape
+    screen` is one corpus-scaled sweep. It measured 858.62s in the post-merge checkpoint
+    (run 34176106076), 41s inside the shared 900s cap, and was killed at that cap in the
+    deferred checkpoint on the same tree (run 34177317419) where six deferrals shared
+    four cpus. Raising the shared cap to 1800s would have fixed this step by switching
+    off the hung-subprocess guard for every other step in the file, most of which finish
+    in seconds, which is the trade `budget_seconds` exists to refuse. What is true of the
+    shared cap is that it stopped bounding this step in particular once the known-best
+    corpus tripled, and the reading is what says so rather than the fact of a fourth
+    exception.
+
+    So the set is no longer "whole suites" and the name changed with it. What it still
+    is: every step whose own measurement outgrew the shared cap, each one argued beside
+    its number. A fifth that is neither a suite nor corpus-scaled would be the signal the
+    old paragraph describes.
     """
     budgeted = {
         step.name: step.budget_seconds for step in validate.STEPS if step.budget_seconds
     }
     assert budgeted == {
         "negative controls": 1800,
+        "single-square translation escape screen": 1800,
         "slow behavioral tests": 1800,
         "exhaustive exact behavioral tests": 3600,
     }
@@ -2147,12 +2177,14 @@ def test_the_longest_steps_are_submitted_first() -> None:
     """
     order = [step.name for step in validate._submission_order(validate.STEPS)]
 
-    assert order[:3] == [
+    assert order[:4] == [
         "exhaustive exact behavioral tests",  # 3600s
+        # The three 1800s budgets, in declared order, because the sort is stable.
+        "single-square translation escape screen",  # 1800s since 2026-09-08
         "negative controls",  # 1800s, and declared before the suite
         "slow behavioral tests",  # 1800s, the non-exhaustive suite's own bound
     ]
-    assert order[3:] == [step.name for step in validate.STEPS if step.budget_seconds is None]
+    assert order[4:] == [step.name for step in validate.STEPS if step.budget_seconds is None]
 
 
 def test_submission_order_does_not_change_the_reported_order(

@@ -171,19 +171,28 @@ def test_readme_inventory_ignores_cache_only_legacy_directories(tmp_path: Path) 
 
 
 def test_deferred_slow_review_has_its_required_git_history() -> None:
+    # Found by the step it needs rather than by a job name, the way
+    # `test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock` ties the
+    # same requirement to the provenance surface. The slow lane moved to a job of its own
+    # on 2026-09-08 and the requirement moved with it; a lookup by job name would have
+    # gone on passing against whichever job kept the name.
     workflow = VALIDATION_WORKFLOW.with_name("deep-gate.yml")
     jobs = _mapping(_mapping(yaml.safe_load(workflow.read_text()))["jobs"])
-    deferred = _mapping(jobs["deferred-steps"])
-    raw_steps = deferred["steps"]
-    assert isinstance(raw_steps, list)
-    steps = [_mapping(step) for step in raw_steps]
-    assert any('"slow behavioral tests"' in str(step.get("run", "")) for step in steps)
-    checkout = next(
-        step for step in steps if str(step.get("uses", "")).startswith("actions/checkout@")
-    )
-    assert _mapping(checkout.get("with") or {}).get("fetch-depth") == 0, (
-        "the slow retained-theorem review reads exact historical Git objects"
-    )
+    carrying: list[str] = []
+    for job_name, raw_job in jobs.items():
+        raw_steps = _mapping(raw_job).get("steps")
+        assert isinstance(raw_steps, list)
+        steps = [_mapping(step) for step in raw_steps]
+        if not any('"slow behavioral tests"' in str(step.get("run", "")) for step in steps):
+            continue
+        carrying.append(job_name)
+        checkout = next(
+            step for step in steps if str(step.get("uses", "")).startswith("actions/checkout@")
+        )
+        assert _mapping(checkout.get("with") or {}).get("fetch-depth") == 0, (
+            f"{job_name}: the slow retained-theorem review reads exact historical Git objects"
+        )
+    assert len(carrying) == 1, carrying
 
 
 def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -> None:
