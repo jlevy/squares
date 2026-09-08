@@ -1828,7 +1828,7 @@ def test_push_tests_forward_the_shared_worker_allocation(
             "--run",
             "--since",
             "origin/main",
-            "--workers",
+            "-n",
             "4",
         )
     ]

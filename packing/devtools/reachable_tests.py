@@ -244,18 +244,39 @@ def select_tests(changed: list[str]) -> TestSelection:
     return TestSelection(everything=False, reason=reason, tests=tests)
 
 
+def pytest_command(targets: Sequence[str], workers: int) -> tuple[str, ...]:
+    """The pytest invocation for a selection, under `workers` xdist processes.
+
+    Split out from `main` so the distribution can be asserted without running a suite.
+    `-n 1` is not asked for, matching `sqpack.cli.validate._xdist_distribution`: one xdist
+    worker is a subprocess and a protocol for no concurrency, which is slower than not
+    asking.
+
+    `D-488` is what this argument closes. The selector's runner had no distribution at
+    all, so the pre-push tier's behavioural step ran in one process at every `--jobs`
+    value, including the `--jobs 1` that `_xdist_distribution` documents as the way to
+    get four workers on a four-cpu box. The whole-suite fallback is the expensive case:
+    any change to a workflow file or to suite configuration selects everything, which is
+    the quick lane and the slow lane together in a single process.
+    """
+    distribution = ("-n", str(workers)) if workers > 1 else ()
+    return (
+        sys.executable,
+        "-m",
+        "pytest",
+        "-q",
+        *targets,
+        "-m",
+        "not exhaustive_exact",
+        *distribution,
+    )
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Select the test files a change can reach, erring toward running too many."
     )
     parser.add_argument("--since", metavar="REF", default="origin/main")
-    parser.add_argument(
-        "--workers",
-        metavar="N",
-        type=int,
-        default=1,
-        help="pytest processes; the validation gate passes its shared worker allocation",
-    )
     parser.add_argument(
         "--summary",
         action="store_true",
@@ -266,9 +287,21 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="run pytest on the selection (the whole non-exhaustive suite when everything)",
     )
+    parser.add_argument(
+        "-n",
+        "--numprocesses",
+        metavar="N",
+        type=int,
+        default=1,
+        help=(
+            "run the selection under N xdist workers; 1, the default, runs in one process."
+            " The caller decides, because the right number depends on how many outer slots"
+            " are already busy: `packing-validate` passes `cpus - jobs + 1`."
+        ),
+    )
     namespace = parser.parse_args(argv)
-    if namespace.workers < 1:
-        parser.error("--workers must be a positive integer")
+    if namespace.numprocesses < 1:
+        parser.error("--numprocesses must be at least 1")
 
     selection = select_tests(changed_paths(namespace.since))
     if namespace.summary:
@@ -293,16 +326,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     # every test above the per-test ceiling because it pays for them on every pull
     # request, while `--push` pays only for the tests your own change reaches, and a slow
     # test your change reaches is exactly the one worth waiting for.
-    command = (
-        sys.executable,
-        "-m",
-        "pytest",
-        "-q",
-        *targets,
-        "-m",
-        "not exhaustive_exact",
-        *(("-n", str(namespace.workers)) if namespace.workers > 1 else ()),
-    )
+    command = pytest_command(targets, namespace.numprocesses)
     return subprocess.run(command, cwd=ROOT, check=False).returncode
 
 
