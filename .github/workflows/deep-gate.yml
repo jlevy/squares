@@ -126,11 +126,12 @@ jobs:
     # fails that test until it is added here, which is the property the daily backstop
     # never had. It also requires the four job selections to be pairwise disjoint.
     #
-    # PR #116's run 34181619739 killed the escape screen at its 1800s budget while
-    # the atlas rebuild and negative controls shared the other outer slot. Two pools
-    # of two workers did not finish within their caps on that hosted runner. The serial
-    # replay in run 34183723509 completed these five checks in 2174.84s of step time,
-    # including 1069.84s for the screen. Keep `--jobs 1 --inner-jobs 2`.
+    # Run 34181619739, on PR #121's branch after it took this job split from PR #116,
+    # killed the escape screen at its 1800s budget while the atlas rebuild and negative
+    # controls shared the other outer slot. Two pools of two workers did not finish within
+    # their caps on that hosted runner. The serial replay in run 34183723509 completed
+    # these five checks in 2174.84s of step time, including 1069.84s for the screen. Keep
+    # `--jobs 1 --inner-jobs 2`.
     if: >-
       github.event_name == 'workflow_dispatch'
       || contains(github.event.pull_request.labels.*.name, 'deep-gate')

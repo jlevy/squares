@@ -161,7 +161,7 @@ alone is not full pre-merge evidence.
 | --- | --- | ---: | ---: | --- |
 | `--records` | contributor, before touching a registry; also every pull request | 31 of 69 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
-| `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a code change |
+| `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; a broad diff selects the whole suite and needs `--jobs 1`, see below |
 | `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 69 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
 | `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 69 | 195 s | record cleared 2026-09-07 when the grid replay was deferred; 87.6 s locally, only the ceiling applies |
 | `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 69 | 180 s | 91.6 s on CI, the mean of four readings |
@@ -229,14 +229,17 @@ test satisfies exactly one, so no test can be in two lanes and none can be in ze
 
 | Lane | Marker | Tests | Runs in | Bound |
 | --- | --- | ---: | --- | --- |
-| quick | neither | 3,944 | PR fast surface | fails a test whose `call` phase reaches 12 s |
+| quick | neither | 4,151 | PR fast surface | fails a test whose `call` phase reaches 12 s |
 | slow | `slow` | 97 | full checkpoint, under xdist in CI | fails a test whose `call` phase is under 1 s |
 | exhaustive | `exhaustive_exact` | 55 | its own CI job | its own 3600 s budget |
 
 Counts are a `--collect-only` of the three marker expressions on 2026-09-08, against the
 n = 1..324 corpus.
-They sum to the 4,096 tests the suite collects, which is the partition
+They sum to the 4,303 tests the suite collects, which is the partition
 property above; they are not a fixed membership, and they move with the corpus.
+The quick lane read 3,944 here until 2026-09-08, when a re-count against the same
+expressions returned 4,151; a stale count in this table is how [D-488](defects.md)’s
+cause stayed invisible, since the tests grew and the budget bounding them did not.
 [Main run 34025346801](https://github.com/jlevy/squares/actions/runs/34025346801)
 reported 2,197 quick and 95 slow on 2026-09-06, before the corpus expansion of
 2026-09-07. The marker expressions determine current membership.
@@ -464,6 +467,22 @@ defensible. Each of 2026-08-30’s three red pushes broke a test reachable this 
 the changed paths ([D-381, D-393](defects.md)), and the floor would have caught all
 three.
 
+**On a broad diff, run it as `packing-validate --push --jobs 1`.** A changed workflow
+file or suite configuration expands the selector to everything, and everything here is
+the quick lane and the slow lane in one step, against `FAST_SUITE_BUDGET_SECONDS`. Plain
+`packing-validate --push` gives that step one worker — `--jobs` defaults to the cpu
+count and the distribution is `cpus - jobs + 1` — and on a four-cpu box one worker does
+not finish it: the step is killed at 1800 s and the tier returns red on a change that is
+fine, without naming a failing test.
+At `--jobs 1` the same selection took 1403 s, inside the cap.
+
+[D-488](defects.md) is that timeout, and what it fixed is narrower than the failure:
+until it, `_xdist_distribution`’s flag never reached the selector’s pytest at all, so
+`--jobs 1` was serial too and there was no shape that worked.
+There is one now, but it is not the default, and it is not the `{jobs: 2, cpus: 2}`
+reference shape `gate-budgets.yaml` declares for this tier, which also yields one
+worker. Choosing what the tier should default to is open on `think-uswr`.
+
 The `.gate-running` marker is a load lock protecting calibrated step budgets, not a
 correctness lock — no step mutates the working tree.
 The floor tiers say so: `--records`, `--edit`, and a `--push` whose test selection is
@@ -500,10 +519,11 @@ raised its budget rather than splitting it.
 `screen` is a worker split ([D-484](defects.md)): the step is a process pool sized by
 `PACK_JOBS`, and beside the rest of the gate at `--inner-jobs 2` it gets two of the
 runner’s four. What the other two workers buy is not established.
-The three hosted readings of the split job are 944 s, 861 s and 949 s, none of them
-below the 858.62 s the step cost at two workers on a different runner, so the argument
-for the split is the pool it was not filling and the cap it kept failing against, not a
-measured speedup. macOS runs four portability checks.
+The four hosted readings of the split job are 944 s, 861 s, 949 s and 947 s, none of
+them below the 858.62 s the step cost at two workers on a different runner, so the
+argument for the split is the pool it was not filling and the cap it kept failing
+against, not a measured speedup.
+macOS runs four portability checks.
 Neither workflow invocation enables the golden rebuild or strict checkpoint.
 The daily run checks the default branch at 08:17 UTC; unmerged branches need their own
 labelled or dispatched deferred checkpoint.
