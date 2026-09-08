@@ -26,7 +26,10 @@ What each rule refuses:
   a failure rather than an item this quietly skips;
 * a tier `packing-validate` cannot select, and a tier that is real but smaller than the
   gate (`records`, `edit`, `push`), so a record cannot claim more than it ran;
-* a declared commit that exists here and is **not an ancestor of HEAD**.
+* a declared commit that exists here and is **not an ancestor of HEAD**, where the run
+  claims to certify. A retained noncertifying run whose commit has left the mainline is
+  reported instead: a squash or rebase merge takes every commit of a branch off `main`,
+  and a run that certified nothing is not falsified by the history moving under it.
 
 **Ancestry that cannot be resolved is uncheckable, not false.** `conventions.md` §6 draws
 this line for recorded engine commits and it is drawn the same way here: a checkout that
@@ -47,7 +50,20 @@ A stopped session may instead declare `certification_pending` with its follow-up
 Its record can then be checked without inventing a previous gate run or claiming the
 next run has passed. It remains explicitly UNCERTIFIED; this is not merge approval.
 Completed handovers still require a passing gate, and pending records cannot declare
-one. Every actual gate declaration in a pending record retains its ancestry checks.
+one. Every actual gate declaration in a pending record retains its ancestry checks,
+under the noncertifying reading of `orphaned` above.
+
+The named bead has to be work that is still open, or the debt is discharged by the act
+of writing it down. Two questions ask that, and they answer from different places on
+purpose:
+
+* a bead the same record marks `completed` in `workflow_phases` is refused from the
+  record alone, which needs nothing installed;
+* a bead `tbd` reports `closed` is refused only where `tbd` can answer. `tbd` is not a
+  dependency of this check -- CI, a source tarball and the negative-control sandbox do
+  not have it -- and a machine that cannot ask has not learned that the bead is closed.
+  An unavailable, failing or unparseable `tbd` therefore refuses nothing, the same way
+  an unresolvable ancestry does.
 
 Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m devtools.check_session_gate
@@ -55,8 +71,10 @@ Usage, from `packing/`:
 
 from __future__ import annotations
 
+import json
 import pathlib
 import re
+import shutil
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -109,8 +127,28 @@ write one.
 GROUPS = ("tier", "commit", "verdict", "note")
 """What the schema's positional capture groups mean, in order."""
 
+BEAD = re.compile(r"think-[a-z0-9]+")
+"""The bead form the session schema publishes for `certification_pending`."""
+
+FINISHED_PHASE_STATUS = frozenset({"completed"})
+"""Phase statuses that say this record has finished with the bead the phase names.
+
+`stopped` is deliberately not one of them, and neither is `in_progress`. A stopped phase
+is the exact shape that leaves a debt behind -- the pending marker's own record ends in
+one -- so reading it as discharged would refuse the only correct declaration.
+"""
+
+BEAD_TIMEOUT_SECONDS = 30.0
+"""How long `tbd` gets to answer before its answer is treated as unavailable.
+
+The store lives on the `tbd-sync` branch, so a cold call can fetch. A call that does not
+return in this long has not told this check anything, which is the `unresolved` case and
+refuses nothing; the ceiling exists so a records-tier step cannot hang on it.
+"""
+
 type CommitState = Literal["reachable", "orphaned", "absent"]
 type HistoryState = Literal["complete", "shallow", "unavailable"]
+type BeadState = Literal["open", "closed", "unresolved"]
 
 
 @dataclass(frozen=True)
@@ -203,6 +241,46 @@ def commit_state(repository: pathlib.Path, commit: str) -> CommitState:
     return "reachable" if ancestry == 0 else "orphaned"
 
 
+def bead_state(bead: str, repository: pathlib.Path) -> BeadState:
+    """Is this follow-up bead open, closed, or unanswerable on this machine?
+
+    Three states, for the reason `commit_state` has three: not being able to ask is a
+    fact about the machine, and being closed is a fact about the bead. `tbd` owns the
+    store and it is not installed everywhere this check runs, so anything short of a
+    parsed status is `unresolved`, which refuses nothing.
+
+    `--json` rather than the rendered view, following `close_session`, so the status is
+    read from a field instead of recovered from prose.
+    """
+    if shutil.which("tbd") is None:
+        return "unresolved"
+    try:
+        shown = subprocess.run(
+            ("tbd", "show", bead, "--json"),
+            capture_output=True,
+            text=True,
+            check=False,
+            cwd=str(repository),
+            timeout=BEAD_TIMEOUT_SECONDS,
+        )
+    except OSError, subprocess.SubprocessError:
+        return "unresolved"
+    if shown.returncode != 0:
+        return "unresolved"
+    try:
+        payload = json.loads(shown.stdout)
+    except ValueError:
+        return "unresolved"
+    issues = payload if isinstance(payload, list) else [payload]
+    status = next(
+        (issue.get("status") for issue in issues if isinstance(issue, dict)),
+        None,
+    )
+    if not isinstance(status, str):
+        return "unresolved"
+    return "closed" if status == "closed" else "open"
+
+
 def sessions(directory: pathlib.Path | None = None) -> list[tuple[pathlib.Path, dict]]:
     """Every session record's frontmatter, in file order."""
     found: list[tuple[pathlib.Path, dict]] = []
@@ -259,7 +337,38 @@ def declaration_problems(
     return problems, runs
 
 
-def pending_problems(name: str, session: dict) -> list[str]:
+def owner_problems(name: str, session: dict, owner: str, repository: pathlib.Path) -> list[str]:
+    """Refusals about the follow-up bead itself: a debt has to be owed to open work.
+
+    A marker naming finished work is the marker discharging itself. The record answers
+    the first question on its own -- `workflow_phases` is the one structured place a
+    session states a bead and a status together -- and `tbd` answers the second only
+    where it can, because a check that fails on a machine without `tbd` would make the
+    tracker a build dependency of every records run.
+    """
+    problems: list[str] = []
+    phases = session.get("workflow_phases")
+    for phase in phases if isinstance(phases, list) else []:
+        if not isinstance(phase, dict) or phase.get("bead") != owner:
+            continue
+        status = phase.get("status")
+        if status in FINISHED_PHASE_STATUS:
+            problems.append(
+                f"{name}: certification_pending names {owner}, which this record's own "
+                f"workflow_phases marks {status}; the debt has to name work that is "
+                "still open, not the phase that finished"
+            )
+            break
+    if bead_state(owner, repository) == "closed":
+        problems.append(
+            f"{name}: certification_pending names {owner}, which tbd reports closed; a "
+            "closed bead owes nothing, so name the open follow-up that does. Where tbd "
+            "is not installed or cannot answer, this clause refuses nothing"
+        )
+    return problems
+
+
+def pending_problems(name: str, session: dict, repository: pathlib.Path) -> list[str]:
     """Validate an explicit certification debt before any status or legacy skip."""
     if "certification_pending" not in session:
         return []
@@ -267,7 +376,7 @@ def pending_problems(name: str, session: dict) -> list[str]:
     if session.get("status") != "stopped":
         problems.append(f"{name}: certification_pending is allowed only when stopped")
     owner = session["certification_pending"]
-    if not isinstance(owner, str) or re.fullmatch(r"think-[a-z0-9]+", owner) is None:
+    if not isinstance(owner, str) or BEAD.fullmatch(owner) is None:
         problems.append(f"{name}: certification_pending must name one well-formed bead")
     else:
         action = session.get("next_action")
@@ -276,6 +385,7 @@ def pending_problems(name: str, session: dict) -> list[str]:
             or re.search(rf"(?<![\w-]){re.escape(owner)}(?![\w-])", action) is None
         ):
             problems.append(f"{name}: next_action must name certification owner {owner}")
+        problems.extend(owner_problems(name, session, owner, repository))
     reason = session.get("stop_reason")
     if not isinstance(reason, str) or not reason.strip():
         problems.append(f"{name}: pending certification requires a nonblank stop_reason")
@@ -290,7 +400,17 @@ def ancestry_problems(
     *,
     include_noncertifying: bool = False,
 ) -> tuple[list[str], list[str]]:
-    """Refusals and unresolved declarations arising from the Git graph."""
+    """Refusals and unresolved declarations arising from the Git graph.
+
+    `orphaned` is read against what the run claims. For a certifying run it is a refusal:
+    a gate run off the handover's own history certifies nothing about what was handed
+    over. For a retained noncertifying run it is not, because such a run certifies
+    nothing either way, and the ordinary squash or rebase merge of the branch that
+    recorded it takes its commit off the mainline. Refusing there would make the records
+    gate fail on `main`, for evidence that never claimed anything, because of a merge
+    button. `absent` stays a refusal for both: a commit missing from a complete checkout
+    is a claim about a run nobody can find, whatever its verdict was.
+    """
     problems: list[str] = []
     unresolved: list[str] = []
     checked_runs = runs if include_noncertifying else [run for run in runs if run.certifies]
@@ -306,6 +426,11 @@ def ancestry_problems(
         state = commit_state(repository, run.commit)
         if state == "reachable":
             reachable += 1
+        elif state == "orphaned" and not run.certifies:
+            unresolved.append(
+                f"{name} -> {run.commit} (a retained {run.tier} run that {run.verdict}, "
+                "no longer in this history; it certifies nothing and refuses nothing)"
+            )
         elif state == "orphaned":
             problems.append(
                 f"{name}: declares a {run.tier} gate at {run.commit}, which is in this "
@@ -340,7 +465,7 @@ def main(argv: list[str] | None = None) -> int:
 
     for path, session in sessions():
         identifier = str(session.get("id", path.stem))
-        marker_problems = pending_problems(path.name, session)
+        marker_problems = pending_problems(path.name, session, REPO)
         problems.extend(marker_problems)
         if str(session.get("status")) not in TERMINAL:
             continue
@@ -400,7 +525,10 @@ def main(argv: list[str] | None = None) -> int:
         for line in uncertified:
             print(f"    {line}")
     if pending_unresolved:
-        print("    Their declared run ancestry is UNCHECKABLE here, not verified:")
+        print(
+            "    Their declared run ancestry is UNCHECKABLE here or off this history; "
+            "either reading certifies nothing:"
+        )
         for line in pending_unresolved:
             print(f"      {line}")
     if grandfathered:
