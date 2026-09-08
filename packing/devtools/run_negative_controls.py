@@ -314,7 +314,27 @@ ROOT_DOCUMENTS = (
 # copied back by `linked_pruned_targets` even when pruned -- pruning it was tried and
 # moved nothing), and the escape screen record (3.1 MB). No further safe prune was found;
 # a link checker that tolerated pruned targets would be the next one. Allow 96 MiB.
-SNAPSHOT_MAX_BYTES = 96 * 1024 * 1024
+#
+# 2026-09-08, merging the agenda-028 release-exclusion branch (PR 110): 100,679,672
+# bytes, 16,376 over the 96 MiB cap -- 0.016%, which is the guard firing on ordinary
+# record growth rather than on anything checked in wrongly. The breach is 91 files of
+# agenda-028 results under `campaign/series`, and they are source the controls read, so
+# pruning them is the move that breaks a control rather than the one that saves bytes.
+# The count is a property of the commit and was confirmed to be one: `.venv` and
+# `sqsearch/target` are pruned, `BUILD_CACHES` is excluded by the walk, and the number
+# reproduces on a tree with no bytecode written into it -- so this is not `D-422` again.
+# The largest single contributor is still `atlas/known-best` at 26.28 MiB, which the
+# 2026-09-07 note above already tried and could not prune: the poster is inline-linked
+# from the atlas README, so `linked_pruned_targets` copies it back. No new safe prune was
+# found. `benchmarks/validation-efficiency` (2.73 MiB, arriving with the same branch) is
+# the one untested candidate and is left alone deliberately -- pruning it on the argument
+# that it looks generated is a precaution, and this file's rule is that a prune is made
+# against a measurement of what reads it.
+#
+# Allow 112 MiB, restoring about 14% headroom. Raising this does not increase the bytes
+# actually copied; it is storage headroom, and a guard one commit from refusing to run
+# the suite is the failure mode `D-371` recorded.
+SNAPSHOT_MAX_BYTES = 112 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something
