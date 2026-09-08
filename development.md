@@ -141,8 +141,7 @@ owns the current W5 work on cost, naming, and checkpoint placement.
 
 Use **PR fast surface** for `--fast`, **full checkpoint** for the default command, and
 **deferred checkpoint** for the seven steps outside PR fast coverage.
-The advisory `Deferred checkpoint` workflow runs those steps in
-[three jobs](#the-deep-gate-the-deferred-surface-before-the-merge).
+The advisory `Deferred checkpoint` workflow runs those steps.
 **Golden rebuild** means `--deep`, which also regenerates expensive golden producers;
 **strict checkpoint** means `--strict`, which includes that rebuild and refuses skipped
 checks. The deferred workflow does not pass `--deep`; its filename and label remain
@@ -163,22 +162,23 @@ alone is not full pre-merge evidence.
 | `--records` | contributor, before touching a registry; also every pull request | 31 of 69 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a code change |
-| `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 69 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally before grid replay was deferred, not re-clocked whole since; only the ceiling applies |
+| `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 69 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
 | `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 69 | 195 s | record cleared 2026-09-07 when the grid replay was deferred; 87.6 s locally, only the ceiling applies |
 | `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 69 | 180 s | 91.6 s on CI, the mean of four readings |
-| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 69 | 260 s | 162.62 s on CI, one reading over the 324-case corpus in run `34133437296` |
+| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 69 | 205 s | 102.8 s on CI, the mean of four readings |
 | `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 69 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 69 of 69 | 3600 s | split across three jobs; not clocked whole |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 69 of 69 | 3600 s | split across four jobs; not clocked whole |
 
-The `--geometry` baseline is the geometric mean of four readings at the reference shape.
-The `--suite` baseline is one hosted reading over the 324-case corpus; its earlier
-four-sample baseline measured the 100-case corpus.
-Hosted variation remains material: before the expansion, unchanged atlas code ranged
-from 60.97 s to 84.48 s, and the suite’s spread reached 1.52x. Refresh the baselines as
-measurements accumulate; a recorded band would represent that variation better than a
-point. The other two partitions, `--sweeps` and `--checks`, have no recorded cost after
-the corpus widening and validation changes of 2026-09-07. Two of the sweeps tier’s four
-steps were split that day, so the tier those readings measured no longer exists.
+Two of the four PR partition costs are geometric means of four readings at the reference
+shape, not maxima. Hosted variation remains material: unchanged atlas code ranged from
+60.97 s to 84.48 s, and the suite’s spread reached 1.52x. The geometric-mean baselines
+leave at least 1.25x margin to the declared drift and stale limits in those four
+samples. Refresh them as measurements accumulate; a recorded band would represent that
+variation better than a point.
+The other two, `--sweeps` and `--checks`, have no recorded cost, and the corpus widening
+of 2026-09-07 is why both times.
+Two of the sweeps tier’s four steps were split that day, so the tier those readings
+measured no longer exists.
 The `checks` record was cleared the same day and by its own rule firing rather than by
 hand: at n = 1..324 the tier ran 189.09 s against a recorded 99.39 s — 1.90x, where 1.5x
 fails — and the gate’s verdict named `exact verification` as 133.4 s of it.
@@ -215,17 +215,11 @@ comparisons:
 
 All three runs are from 2026-09-06. The durations are observations, not necessary lower
 bounds or enforced tier baselines.
-The deferred row predates both the corpus widening and the
-[three-job split of 2026-09-08](#the-deep-gate-the-deferred-surface-before-the-merge),
-so its 12m32s deferred-checks figure no longer describes any job that exists.
-The active PR partition baselines in
-[gate-budgets.yaml](packing/devtools/gate-budgets.yaml) are four reference-shape
-readings for geometry and one for suite over the 324-case corpus.
-Their drift and stale checks are armed; checks and sweeps enforce only their ceilings
-until the new workloads are measured on CI. The six sweeps readings over the former
-100-case workload remain historical evidence and do not calibrate the sampled 324-case
-tier. These tier measurements are distinct from the dated workflow observations above.
-See [budget enforcement](#what-each-tier-costs-and-where-its-ceiling-lives).
+The four PR partitions now have recorded baselines from four reference-shape readings in
+[gate-budgets.yaml](packing/devtools/gate-budgets.yaml); their drift and stale checks
+are armed. These later calibrated values are distinct from the dated workflow
+observations above. See
+[budget enforcement](#what-each-tier-costs-and-where-its-ceiling-lives).
 
 ### The behavioural lanes
 
@@ -235,14 +229,27 @@ test satisfies exactly one, so no test can be in two lanes and none can be in ze
 
 | Lane | Marker | Tests | Runs in | Bound |
 | --- | --- | ---: | --- | --- |
-| quick | neither | 2,197 | PR fast surface | fails a test whose `call` phase reaches 12 s |
-| slow | `slow` | 95 | full checkpoint | fails a test whose `call` phase is under 1 s |
+| quick | neither | 3,944 | PR fast surface | fails a test whose `call` phase reaches 12 s |
+| slow | `slow` | 97 | full checkpoint, under xdist in CI | fails a test whose `call` phase is under 1 s |
 | exhaustive | `exhaustive_exact` | 55 | its own CI job | its own 3600 s budget |
 
-Counts are from
-[main run 34025346801](https://github.com/jlevy/squares/actions/runs/34025346801), not
-fixed test membership.
-The marker expressions determine current membership.
+Counts are a `--collect-only` of the three marker expressions on 2026-09-08, against the
+n = 1..324 corpus.
+They sum to the 4,096 tests the suite collects, which is the partition
+property above; they are not a fixed membership, and they move with the corpus.
+[Main run 34025346801](https://github.com/jlevy/squares/actions/runs/34025346801)
+reported 2,197 quick and 95 slow on 2026-09-06, before the corpus expansion of
+2026-09-07. The marker expressions determine current membership.
+
+**The slow lane’s xdist is conditional on the shape it is run in.** Both lanes size
+their workers as `cpus - jobs + 1`, so the two CI jobs that carry the slow lane run it
+at three workers on four cpus, while `packing-validate` with no `--jobs` defaults jobs
+to the cpu count, leaves one worker, and runs the lane in a single process exactly as it
+did before [D-484](defects.md).
+The change bites only where `--jobs` is below the cpu count, so the default local full
+gate is unimproved. The 718.52 s against 1020.77 s that argued for it was measured at
+four workers, a shape no gate runs; at three workers on a contended box the same tests
+were 795.11 s, about 1.28x.
 
 **Both bounds are enforced, in opposite directions.** A quick test that grows past the
 ceiling fails the pull request in the week it grows; a deferred test that drops below
@@ -258,6 +265,12 @@ single-square translation escape screen, and the whole exact rational grid repla
 These are the seven steps outside the [PR fast surface](#validation-tiers).
 [D-470](defects.md) records why checking them only after a merge is insufficient: a
 stale certificate test left main red across three merges despite green PR checks.
+
+It runs them in four jobs, mirroring the post-merge gate: `deferred-slow-lane`,
+`exhaustive-tier`, and [D-484](defects.md)’s `screen`, with `deferred-steps` carrying
+the other four checks.
+`deep-gate-required` waits on all four — a split job that nothing waits on is an
+advisory check, which is [D-380](defects.md)’s shape.
 
 The last three joined on 2026-09-07 because the corpus tripled, not because the gate
 changed its mind about them.
@@ -283,67 +296,10 @@ So the pull-request surface and the deep gate together are the whole gate, and a
 deferral argued into `test_the_pull_request_surface_defers_only_what_was_measured` fails
 until it is added here too.
 
-**It runs in three jobs, and the third is new.** `deferred-steps` takes the five
-selections that are neither the slow lane nor the exhaustive tier, `deferred-slow-lane`
-takes `slow behavioral tests` alone, and `exhaustive-tier` takes the exhaustive exact
-tests alone. All three feed the single required `deep-gate-required` context, and
-`test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers` requires the
-three selections to be pairwise disjoint as well as complete.
-
-The slow lane was split off on 2026-09-08 because sharing a runner had started to kill
-it. Two runs that day, on the same tree, are the evidence:
-
-| Run | Job and shape | Slow lane | Escape screen |
-| --- | --- | ---: | ---: |
-| [34177317419](https://github.com/jlevy/squares/actions/runs/34177317419) | `deferred-steps`, six deferrals on 4 CPUs at `--jobs 2 --inner-jobs 2` | killed at 1800 s | killed at 900 s |
-| [34176106076](https://github.com/jlevy/squares/actions/runs/34176106076) | `validate`, 68 steps on 4 CPUs at the same shape | 1272.0 s | 858.6 s |
-
-The second run overlaps the two long steps with sixty-odd steps costing seconds each;
-the first had five other deferrals worth 1859.96 s of measured step time and nothing
-cheap left to interleave.
-The tripling of the known-best corpus in
-[PR 111](https://github.com/jlevy/squares/pull/111) is what took them past that point.
-The other four steps in run 34176106076 measured 407.1 s for the atlas rebuild, 347.2 s
-for the negative controls, 221.1 s for the n=40 bracket and 25.9 s for the grid replay.
-These are single hosted readings from that run’s own `validation-timings-validate-1`
-receipts, not baselines.
-
-A third runner costs billed minutes — its own checkout and sync, and two lanes that no
-longer overlap — and buys an uncontended wall rather than a shorter one: the gate now
-reports when the serial five-step job finishes, 2174.8 s of step time in its first
-serial run, [34183723509](https://github.com/jlevy/squares/actions/runs/34183723509),
-against the exhaustive tier’s 1370.1 s and the slow lane’s 1288.5 s in the same run.
-That is `OR-14` applied where the wall actually is, and the alternative — a larger
-budget for a step that was not slow, only crowded — would have measured the runner
-instead of the step.
-The escape screen did take a declared budget the same day, for the separate reason that
-its own ceiling was the shared 900-second default it had measured 41 s inside; that
-[ceiling is described with the other budgets](#what-each-tier-costs-and-where-its-ceiling-lives).
-
-The [dated measurement above](#the-tiers) is about 27 minutes and predates the split.
-All three jobs need profiling: improving only the exhaustive job can leave the
-integration work on the critical path.
+The [dated measurement above](#the-tiers) is about 27 minutes.
+Both jobs need profiling: improving only the exhaustive job can leave the integration
+work on the critical path.
 A duration does not establish that the work is irreducible.
-
-**The daily backstop took the same split, on its own failure.** The non-pull-request
-path of [`packing-validation.yml`](.github/workflows/packing-validation.yml) — the daily
-schedule, `workflow_dispatch`, and pushes to `main` — still ran every deferral in one
-four-CPU `validate` job, and
-[34185998810](https://github.com/jlevy/squares/actions/runs/34185998810) failed there
-the way 34177317419 had failed in `deferred-steps` hours earlier: the slow lane killed
-at 1801.0 s against its 1800 s budget while the escape screen ran beside it to 1794.1 s,
-six seconds inside its own, with the atlas rebuild at 778.9 s and the negative controls
-at 606.1 s — each well above its serial reading — and 3234.8 s of the 3600 s ceiling
-spent. So the lane moved to a `slow-lane` job on that path too, and what is left in
-`validate` runs serially at `--jobs 1 --inner-jobs 2`. The arithmetic is that run’s own
-`validation-timings-validate-1` receipts read against run 34183723509’s: 6226.0 s of
-step time over 68 steps, less the lane’s 1801.0 s, with the five long deferrals at the
-2174.8 s they measure serially rather than the 3445.4 s they cost crowded, leaves 979.6
-s for the other 62 steps and predicts 3154.4 s — under both the ceiling and the 3234.8 s
-that run already walled with the lane inside it.
-Keeping two outer slots was refused on the reading 34181619739 supplied: without the
-lane they put the escape screen back beside the atlas rebuild and the negative controls,
-which is the arrangement that killed it there.
 
 **To run it on a pull request, add the `deep-gate` label.**
 
@@ -532,10 +488,22 @@ implemented. These limits are why a subprocess timeout is not, by itself, eviden
 D-239 is resolved.
 
 Pushes to `main`, manual dispatches, and the daily schedule run the ordinary full
-checkpoint on Linux in three jobs since 2026-09-08: `validate` runs everything except
-the exhaustive exact tests and the slow behavioural lane and runs it serially,
-`exhaustive` runs those tests, and `slow-lane` runs that lane.
-macOS runs four portability checks.
+checkpoint on Linux in four jobs: `validate` excludes the slow lane, exhaustive exact
+tests, and whole translation escape screen.
+`slow-lane`, `exhaustive`, and `screen` run those three selections separately.
+The two solo jobs are solo for different reasons.
+`exhaustive` is a verdict split, carried as `think-tr2z`: the tier was 1943 s of the
+complete surface’s 2755 s wall, just over seventy per cent of it, and killed at its
+budget it reported nothing about the sixty steps beside it.
+That kill is [D-456](defects.md), which re-measured the tier at 2036 s on four cores and
+raised its budget rather than splitting it.
+`screen` is a worker split ([D-484](defects.md)): the step is a process pool sized by
+`PACK_JOBS`, and beside the rest of the gate at `--inner-jobs 2` it gets two of the
+runner’s four. What the other two workers buy is not established.
+The three hosted readings of the split job are 944 s, 861 s and 949 s, none of them
+below the 858.62 s the step cost at two workers on a different runner, so the argument
+for the split is the pool it was not filling and the cap it kept failing against, not a
+measured speedup. macOS runs four portability checks.
 Neither workflow invocation enables the golden rebuild or strict checkpoint.
 The daily run checks the default branch at 08:17 UTC; unmerged branches need their own
 labelled or dispatched deferred checkpoint.
@@ -546,33 +514,29 @@ whichever test starts first.
 Optimize a test that exceeds its ceiling, or retain its measurement when moving it to
 `slow`; remove that marker when its measured cost falls below the floor.
 The marker registry tests enforce both declarations.
-Quick tests use xdist workers sized by `cpus - jobs + 1`; `--inner-jobs` controls other
-internal pools, including the negative-control pool.
+Both behavioural lanes use xdist workers sized by `cpus - jobs + 1`; `--inner-jobs`
+controls other internal pools, including the negative-control pool.
+The slow lane ran in a single process until [D-484](defects.md): `BC-214` split the
+lanes and gave xdist to the quick half only, leaving the half selected for costing the
+most as the one place in the gate that ran a test suite serially.
 Avoid assuming that either flag alone caps total host concurrency.
 
-The isolated exhaustive jobs use `--jobs 1 --inner-jobs 4`: their recorded hosted
-runners expose four CPUs, and no second outer step competes for that budget.
-The concurrent integration job retains `--jobs 2 --inner-jobs 2`. The deferred slow
-lane, isolated since 2026-09-08, uses `--jobs 1 --inner-jobs 2`: pytest runs that lane
-in one process, so the outer pool has nothing to schedule, but its two corpus-scaled
-tests size their own pools from `PACK_JOBS`, and one worker would return the wall the
-split was made to remove.
-The deferred five-step job uses the same `--jobs 1 --inner-jobs 2`, serially: its first
-run at two outer slots,
-[34181619739](https://github.com/jlevy/squares/actions/runs/34181619739), killed the
-escape screen at its 1800 s budget while the atlas rebuild (848.74 s) and the negative
-controls (608.55 s) ran beside it at two workers each, more than twice the screen’s
-858.62 s reading, so two pools side by side on four hosted vCPUs is contention.
-Serial at two workers is the shape every one of the five readings was taken at; their
-sum predicted 1859.96 s, and the first serial run,
-[34183723509](https://github.com/jlevy/squares/actions/runs/34183723509), measured
-2174.84 s, the escape screen at 1069.84 s against its 858.62 s reading in the crowded
-checkpoint and the other four within seventy seconds of theirs.
-Every step finished inside its budget, and the job decides the gate’s wall by about
-thirteen minutes over the exhaustive tier’s 1370.06 s in the same run.
-Certificate pools also enforce actual CPU availability, the four-worker maximum, and the
-grid-memory budget. This allocation preserves the parallelism previously available when
-certificate pools ignored `PACK_JOBS`; it is not a measured speedup claim.
+The screen and exhaustive jobs use `--jobs 1 --inner-jobs 4` on the hosted four-CPU
+runners. The slow lane also has its own job, using `--jobs 1 --inner-jobs 2`: xdist
+supplies four test workers, while tests that create their own pools retain two inner
+workers. The remaining integration and deferred numeric checks run one step at a time
+with `--jobs 1 --inner-jobs 2`, preserving PR #120’s response to the concurrent
+corpus-pool timeout in
+[run 34181619739](https://github.com/jlevy/squares/actions/runs/34181619739). The
+workflow tests derive selections through the CLI and require complete, disjoint coverage
+in both workflows. They also require full Git history wherever the slow retained-theorem
+review runs.
+
+These allocations preserve both integration fixes; their combined wall time needs fresh
+hosted validation.
+They do not establish a total process bound when tests spawn pools, or
+a speedup. Certificate pools still enforce actual CPU availability, the four-worker
+maximum, and the grid-memory budget.
 
 CPU observations are diagnostic only.
 Process counters can charge a child’s setup to the call that reaps it and omit
@@ -598,11 +562,8 @@ explicitly enforced.
 Matching CPU counts alone does not establish comparable load or hardware.
 `--only` invocations have no tier ceiling; per-command subprocess timeouts still apply.
 The default subprocess timeout is 900 seconds, increased for steps with declared larger
-budgets, including 1800 seconds for slow tests, negative controls and the whole
-single-square translation escape screen, and 3600 seconds for exhaustive tests.
-The escape screen’s budget was declared on 2026-09-08, after it measured 858.62 s on a
-four-CPU runner — 41 s inside the shared default — and was killed at that default in the
-deferred checkpoint the same day.
+budgets, including 1800 seconds for slow tests, negative controls and the full
+translation escape screen, and 3600 seconds for exhaustive tests.
 An explicit shorter timeout still wins.
 The full checkpoint’s 3600-second tier declaration is not a universal wall limit on
 split CI jobs. Preserve source, selection, runner, and cache information with timings

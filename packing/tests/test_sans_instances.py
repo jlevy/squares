@@ -9,8 +9,8 @@ a file it never looked at.
 So the three are exercised directly:
 
 - the coverage rule, over the set the page requests and the one substitution it relies
-  on. 400 is the case: `.rel` names it and the `@page` footer inherits it, and CSS font
-  matching sends a request in [400, 500] up before it goes down, so both land on 410.
+  on. 400 is the case: the `@page` footer inherits it, and CSS font matching sends a
+  request in [400, 500] up before it goes down, so it lands on 410.
 - `print_face_css`, over stand-in files, for the shape `render_explainer_pdf` injects:
   one `@media print` block, the family the print stack names, every face's bytes inline.
 - the PDF font scan, over synthetic dictionaries in the shapes Chromium writes. Both
@@ -27,6 +27,10 @@ Nothing here launches a browser or reads a real font: the fixture writes stand-i
 of a few bytes, and the whole file runs in milliseconds.
 """
 
+# `_attribution` reads one node's cascade and is private because nothing outside the
+# listing should decide what "set this weight" means. Tested directly rather than through
+# a browser: the shape it reads is CDP's, and a fixture of it is exact where a page is not.
+# pyright: reportPrivateUsage=false
 from __future__ import annotations
 
 import json
@@ -36,14 +40,24 @@ from pathlib import Path
 import pytest
 from nodejs_wheel import node
 
-from devtools.render_explainer_pdf import embedded_fonts, font_findings, outline_fonts
+from devtools.render_explainer_pdf import (
+    embedded_fonts,
+    font_findings,
+    host_font_bead,
+    outline_fonts,
+    provenance,
+    shipped,
+)
 from devtools.sans_instances import (
     _PROBE,  # pyright: ignore[reportPrivateUsage]
     PRINT_FACES,
     PSEUDO_ELEMENTS,
+    Declared,
     Face,
     Requested,
+    _attribution,
     covered,
+    distinct_sources,
     gaps,
     generator,
     postscript_prefix,
@@ -52,13 +66,12 @@ from devtools.sans_instances import (
 )
 
 #: What the probe found on the rendered page, on 2026-09-07, weight and style only.
-#: Every one of them has to be answered, and 400 is answered by 410.
+#: Every one of them has to be answered. 400 is not among them and is answered anyway:
+#: the `@page` margin-box footer inherits it and no probe can reach a margin box.
 REQUESTED: list[tuple[int, str]] = [
-    (400, "normal"),
     (410, "italic"),
     (410, "normal"),
     (550, "normal"),
-    (600, "normal"),
     (680, "normal"),
 ]
 
@@ -69,6 +82,7 @@ COVERAGE_CASES: list[tuple[str, int, str, bool]] = [
     ("400 italic, which lands the same way", 400, "italic", True),
     ("a kpress token this page does not print at", 370, "normal", False),
     ("another one", 650, "normal", False),
+    ("the weight the footnote controls left behind", 600, "normal", False),
     ("a weight below the substitution", 300, "normal", False),
     ("a style no instance carries", 410, "oblique 14deg", False),
 ]
@@ -153,10 +167,19 @@ def test_a_missing_instance_stops_the_export(instances: Path) -> None:
         print_face_css(fonts=instances)
 
 
-def _font(number: int, subtype: str, descriptor: int | None = None) -> bytes:
-    """A font dictionary in the shape Skia writes it: uncompressed, one object."""
+def _font(
+    number: int,
+    subtype: str,
+    descriptor: int | None = None,
+    face: str = "AAAAAA+PTSerif-Regular",
+) -> bytes:
+    """A font dictionary in the shape Skia writes it: uncompressed, one object.
+
+    `face` is the `/BaseFont` a Type0 dictionary names, which is where `embedded_fonts`
+    reads a family from; a Type3 font has none, and is named through its descriptor.
+    """
     reference = f"/FontDescriptor {descriptor} 0 R\n" if descriptor is not None else ""
-    base = "/BaseFont /AAAAAA+PTSerif-Regular\n" if subtype == "Type0" else ""
+    base = f"/BaseFont /{face}\n" if subtype == "Type0" else ""
     return (
         f"\n{number} 0 obj\n<</Type /Font\n/Subtype /{subtype}\n{base}{reference}>>\nendobj\n"
     ).encode()
@@ -217,15 +240,19 @@ def test_a_print_instance_drawn_as_outlines_fails_too() -> None:
     assert f"{postscript_prefix()}-410" in findings[0]
 
 
-def test_the_hosts_own_font_drawn_as_outlines_passes_and_is_still_reported() -> None:
-    """Three characters on the page are in no face it ships, so the host draws them.
+def test_the_hosts_own_font_drawn_as_outlines_is_read_as_a_host_face() -> None:
+    """The scan reads both dictionaries, and a Type3 says which face it was laid out in.
 
-    Failing on those would pass on Linux and fail on a Mac, for a glyph nobody here
-    chose. The scan still names them, which is how a fallback that grew becomes visible.
+    `.SFNS-Regular` used to be waved through here: three characters were in no face the
+    document carried, so the host drew them, and failing on that would have passed on
+    Linux and failed on a Mac for a glyph nobody chose. The relation face closed that,
+    and the provenance rule replaced the exemption -- what is tolerated now is a named
+    list of families with a bead each, and `.SFNS-Regular` is not on it.
     """
-    assert font_findings(HOST_OUTLINES) == []
     assert outline_fonts(HOST_OUTLINES) == [".SFNS-Regular"]
     assert embedded_fonts(HOST_OUTLINES) == ["AAAAAA+PTSerif-Regular"]
+    unexpected, _ = provenance(HOST_OUTLINES)
+    assert unexpected == [".SFNS-Regular"]
 
 
 def test_a_face_the_file_only_names_is_not_reported_as_embedded() -> None:
@@ -276,6 +303,241 @@ def test_an_outline_font_whose_face_cannot_be_read_counts_as_ours() -> None:
     """No descriptor, no attribution, no pass: an unreadable Type3 is not waved through."""
     findings = font_findings(_font(1, "Type3") + _font(2, "Type0"))
     assert len(findings) == 1
+
+
+def test_a_face_the_page_ships_is_not_reported() -> None:
+    """The families the document carries, by the names Chromium writes them under.
+
+    The print instances are among them under the name kpress gives them, which is where
+    the whole export's sans is: an allow-list that still watched for `SourceSans3` would
+    have called every one of them a face off the reader's machine. `SourceSans3` stays
+    listed beside it, because a run that missed the instances falls back to the variable
+    face and the guard has to know that name too.
+    """
+    for name in (
+        "PTSerif-Bold",
+        "SourceSans3-Regular_wght",
+        f"{postscript_prefix()}-410Italic",
+        "KaTeX_Main-Bold",
+        "LocalPunct",
+        "KPressQuotes-Regular",
+    ):
+        assert shipped(name), name
+    assert host_font_bead("PTSerif-Bold") is None
+    # The screen probe's shape for the same faces: Blink answers with the instance a
+    # variable face is at, which is neither the family nor a PostScript name.
+    assert shipped("Source Sans 3 ExtraLight")
+    assert shipped("PT Serif")
+
+
+def test_the_atlas_figures_helvetica_is_the_documented_exception() -> None:
+    """Page 3's labels are baked into its own SVG by `build_known_best_atlas`.
+
+    Allowed rather than pending: no bead removes it, because the figure is generated by
+    another pipeline, is published on its own, and stays as it is by the owner's decision.
+    """
+    assert shipped("Helvetica-BoldOblique")
+    assert host_font_bead("Helvetica-BoldOblique") is None
+    # The same figure drawn on a Linux runner, where fontconfig answers Helvetica with
+    # Liberation Sans, and on Windows, where the stack falls to Arial.
+    assert shipped("LiberationSans-Bold")
+    assert shipped("Arial-BoldMT")
+    assert host_font_bead("LiberationSans-BoldItalic") is None
+    assert not shipped("DejaVuSans-Bold")
+
+
+def test_the_exception_covers_three_families_and_not_their_namesakes() -> None:
+    """A listed name is that family's faces, not every family whose name starts with it.
+
+    Bare `startswith` gave each entry a family tree, and all three of these are fonts a
+    machine really has: Helvetica Neue ships with macOS, Arial Unicode MS with Office,
+    Liberation Sans Narrow with the Liberation set the runner draws the atlas in. None of
+    them is the figure's face, so a page that drew from one would be a finding.
+
+    The rule is the host's names only. A name the page owns stays a prefix, because the
+    page owns everything under it and the probes answer in two shapes -- `KaTeX_Size2`
+    puts the style in the family, and Blink names a variable instance rather than a face.
+    """
+    assert not shipped("HelveticaNeue-Bold")
+    assert not shipped("ArialUnicodeMS")
+    assert not shipped("LiberationSansNarrow")
+    assert shipped("Helvetica-BoldOblique")
+    assert shipped("KaTeX_Size2-Regular")
+
+
+def test_the_generic_host_sans_is_a_finding_on_both_platforms() -> None:
+    """The face a relation face that stopped loading comes back as, either side of CI.
+
+    macOS draws it as outline paths, because the system sans is variable; a Linux runner
+    embeds DejaVu Sans, and `pages.yml` runs both halves of the guard there. Listing the
+    Linux name as pending is what made the guard weakest on the machine that gates it,
+    so the assertion is that neither name is shipped and neither is waiting on a bead.
+    """
+    for family in (".SFNS-Regular", ".SF NS", "DejaVuSans-Bold", "DejaVu Sans"):
+        assert not shipped(family), family
+        assert host_font_bead(family) is None, family
+
+
+@pytest.mark.parametrize(
+    ("family", "bead"),
+    [
+        ("Menlo-Regular", "kpr-v731"),
+        ("DejaVuSansMono", "kpr-v731"),
+        ("DejaVu Sans Mono", "kpr-v731"),
+    ],
+)
+def test_a_host_face_a_bead_is_removing_is_pending_rather_than_a_failure(
+    family: str, bead: str
+) -> None:
+    """The one role kpress has not covered yet, and the same role on the Linux runner.
+
+    Spaces come out before the match, so one mapping answers a PDF's `DejaVuSansMono`
+    and a browser's `DejaVu Sans Mono`, and a style suffix answers under its family.
+
+    `Georgia` and `LiberationSerif` were here too until `kpr-2tmj` and `kpr-asj4` landed:
+    the list marker is drawn in CSS now rather than set as U+25AA, and the quotation marks
+    come from the shipped `KPress Quotes`. Neither is pending any more, and
+    `test_a_face_kpress_now_ships_is_no_longer_pending` is what says so.
+    """
+    assert not shipped(family)
+    assert host_font_bead(family) == bead
+
+
+@pytest.mark.parametrize("family", ["Georgia", "LiberationSerif-Italic"])
+def test_a_face_kpress_now_ships_is_no_longer_pending(family: str) -> None:
+    """A name off the pending list is a face the guard starts looking at again.
+
+    Leaving it listed would be the more comfortable mistake and the worse one: an entry
+    here is a family `--check` stops reporting, so a quotation mark that went back to the
+    reader's own serif would pass in silence.
+    """
+    assert not shipped(family)
+    assert host_font_bead(family) is None
+
+
+def test_a_family_no_bead_expects_fails_the_check_and_is_named() -> None:
+    """The guard's whole point: a glyph from the reader's machine that nobody chose."""
+    stranger = _descriptor(9, "Wingdings") + _font(1, "Type3", 9) + _font(2, "Type0")
+    unexpected, pending = provenance(stranger)
+    assert unexpected == ["Wingdings"]
+    assert pending == {}
+    findings = font_findings(stranger)
+    assert len(findings) == 1
+    assert "Wingdings" in findings[0]
+
+
+def test_the_pending_faces_pass_and_are_reported_with_their_beads() -> None:
+    """`--check` has to pass with these present, or the guard cannot land before them.
+
+    Both are written the way the export carries them: a descriptor with the program in
+    it, and a font dictionary naming the subset. `embedded_fonts` takes a `/BaseFont`
+    only once its descriptor is found to carry a `/FontFile*`, so a bare name in the
+    file would be read as no face at all rather than as the host face it is.
+    """
+    waiting = (
+        _descriptor(7, "Menlo-Regular", program=True)
+        + _font(1, "Type0", 7, face="TAAAAA+Menlo-Regular")
+        + EMBEDDED_SERIF
+    )
+    unexpected, pending = provenance(waiting)
+    assert unexpected == []
+    assert pending == {"Menlo-Regular": "kpr-v731"}
+    assert font_findings(waiting) == []
+
+
+def test_an_outline_font_from_the_host_is_the_same_finding_as_an_embedded_one() -> None:
+    """Which of the two a host face becomes depends only on whether it is variable.
+
+    `.SFNS-Regular` is how the three relation glyphs left this page before they were
+    given a shipped face: drawn as paths, because the macOS system sans is a variable
+    font and Chromium embeds one only at its default position.
+    """
+    outlined = _descriptor(9, ".SFNS-Regular") + _font(1, "Type3", 9) + _font(2, "Type0")
+    unexpected, _ = provenance(outlined)
+    assert unexpected == [".SFNS-Regular"]
+    assert any(".SFNS-Regular" in finding for finding in font_findings(outlined))
+
+
+def test_the_weight_listing_reports_one_row_per_source_and_not_per_element() -> None:
+    """Two elements at one weight from two rules is the finding the listing is for.
+
+    The caption label and the chip were both the sans at 550 and only one of them was a
+    caption; a listing that showed the first element of each combination would have said
+    the medium had one source when it had two.
+    """
+    row: Declared = {
+        "family": print_family(),
+        "weight": 550,
+        "style": "normal",
+        "runs": 12,
+        "seen": [
+            {"marker": 0, "path": "a.chip[0]", "source": ".doc-links .chip { 550 }"},
+            {"marker": 1, "path": "a.chip[1]", "source": ".doc-links .chip { 550 }"},
+            {"marker": 2, "path": "strong[0]", "source": ".kpress-figcaption strong { 550 }"},
+        ],
+    }
+    assert [sample["path"] for sample in distinct_sources(row)] == ["a.chip[0]", "strong[0]"]
+
+
+def test_a_weight_set_through_a_token_is_reported_as_the_token() -> None:
+    """What `getComputedStyle` cannot answer, and the reason the listing goes through CDP.
+
+    The cascade is read weakest origin first, so the last declaration is the one that
+    won; CDP repeats the winner with `disabled` unset, and those duplicates collapse.
+    """
+    styles = {
+        "matchedCSSRules": [
+            {
+                "rule": {
+                    "selectorList": {"text": ".kpress b, .kpress strong"},
+                    "style": {"cssProperties": [{"name": "font-weight", "value": "650"}]},
+                }
+            },
+            {
+                "rule": {
+                    "selectorList": {"text": ".credits strong"},
+                    "style": {
+                        "cssProperties": [
+                            {
+                                "name": "font-weight",
+                                "value": "var(--kpress-font-weight-sans-bold)",
+                                "disabled": False,
+                            }
+                        ]
+                    },
+                }
+            },
+        ]
+    }
+    assert _attribution(styles) == ".credits strong { var(--kpress-font-weight-sans-bold) }"
+
+
+def test_a_weight_no_rule_sets_is_reported_as_inherited_or_unset() -> None:
+    """Most of this page's text is set by a token on a wrapper, not on the run itself."""
+    inherited = {
+        "inherited": [
+            {
+                "matchedCSSRules": [
+                    {
+                        "rule": {
+                            "selectorList": {"text": ".cert-page :is(.credits, .panel)"},
+                            "style": {
+                                "cssProperties": [
+                                    {
+                                        "name": "font-weight",
+                                        "value": "var(--cert-font-weight-sans-light)",
+                                    }
+                                ]
+                            },
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+    assert _attribution(inherited).endswith("(inherited)")
+    assert "--cert-font-weight-sans-light" in _attribution(inherited)
+    assert _attribution({}) == "unset (the initial 400)"
 
 
 def probe_function(name: str) -> str:

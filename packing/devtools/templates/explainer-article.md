@@ -22,7 +22,7 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 <div class="hero">
 
-# <span class="symbol">s({{N}}) <span class="rel">≥</span> {{HEADLINE_L_FRAC}}</span>
+# <span class="symbol">s({{N}}) ≥ {{HEADLINE_L_FRAC}}</span>
 
 <p class="subtitle centred">{{SUBTITLE}}</p>
 
@@ -72,7 +72,7 @@ certificate file of {{HEADLINE_N_ATOMS}} weighted points in
 *The results here are from a flexible but defined
 **[agentic research framework](https://github.com/jlevy/squares)** that is likely to be
 useful for creative mathematical or technical problems of other sorts.
-All documents and code for this project, including this paper, were written by agents
+The project’s original prose and code, including this paper, were written by agents
 under occasional human direction.
 The framework organizes agent work to reduce the need for oversight and uses several
 agent tools, notably **[tbd](https://github.com/jlevy/tbd)** for task tracking,
@@ -122,7 +122,7 @@ The proof presented here is of this kind.
 <figure>
   <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.svg" alt="{{COMPOSITE_ALT}}" width="2400" height="2896"></a></div>
   <figcaption><strong>Figure 2.</strong> The best known packings of 1 through 100 unit squares, with upper bounds
-  and, for unsettled cases, the best proved lower bounds. A crimson star marks a lower bound this project
+  and, for unsettled cases, lower bounds verified here. A crimson star marks a lower bound this project
   proved: {{N_STARRED}} of the hundred. The <a href="{{ATLAS_URL}}">repository</a> records every witness and its
   provenance. PDFs are available for <a href="known-best-1-100.pdf">this figure</a> and the
   <a href="known-best-1-324.pdf">full 324-case poster</a>.</figcaption>
@@ -492,7 +492,7 @@ costs.
     <p class="figure-note">{{COARSEN_VERDICT}} Measured on the retained atoms, optimized against the full net.</p>
   </div>
   <div class="fig-choose">{{CERT_TOGGLE}}</div>
-  <figcaption><strong>Figure 7. Condition 4 <span class="rel">→</span> Condition 5.</strong> Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. Halving the net shrinks
+  <figcaption><strong>Figure 7. Condition 4 → Condition 5.</strong> Least covered mass as the net of the {{L_FRAC}} certificate is coarsened. Halving the net shrinks
   <span class="tex">B</span> by {{HALVING_B_DROP}} and costs {{HALVING_MASS_DROP}} of the least covered mass. This shows these atoms are tight
   against their own net, not that no coarser net could be made to work. It measures the slope of the trade.</figcaption>
 </figure>
@@ -610,6 +610,12 @@ The one-file checker [`minimal_verify.py`]({{PINNED_VERIFIER_URL}}) verifies the
 {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.[^verifier-timing]
 
 <!--END:CLAIM-->
+
+## Acknowledgments
+
+We thank Walter Stromquist for drawing attention to his twenty-six-square construction
+in Memo III (private communication, September 2026). His suggestion prompted a
+[source review and independent exact verification]({{STROMQUIST_N26_REVIEW_URL}}).
 
 ## Further Reading
 

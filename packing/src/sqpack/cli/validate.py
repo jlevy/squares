@@ -253,30 +253,54 @@ SLOW_TEST_FLOOR_SECONDS = 1.0
 #: weeks. The tier already runs only after merge, so the move that scales is to give it
 #: its own job rather than a larger share of this one (think-tr2z).
 EXHAUSTIVE_SUITE_BUDGET_SECONDS = 3600.0
-#: The whole single-square translation screen's cap, and a constant of its own rather
-#: than a third reader of `FAST_SUITE_BUDGET_SECONDS`. The two agree today and nothing
-#: connects them: that one bounds a behavioural suite whose membership is a marker
-#: expression, this one bounds a single sweep whose cost is a function of
-#: `KNOWN_BEST_CORPUS`. The next argument to move either is an argument about one of
-#: them alone, and a shared constant would make a corpus widening read as a decision
-#: about the lanes.
+#: The whole single-square translation escape screen, which has had its own post-merge
+#: runner since `D-484`. Sized as a hang detector rather than as a cost guard, and a
+#: budget is a property of the step rather than of a job: `_execute_step_result` raises
+#: the subprocess cap to this number wherever the step runs, in any run whose timeout was
+#: not typed by a person. On the solo `screen` jobs, where `--only` reports no tier and no
+#: `gate-budgets.yaml` ceiling applies, that makes it the only bound. In the full gate --
+#: `packing-validate` with no tier flag, the 69-step run `AGENTS.md` asks for at merge
+#: checkpoints -- the same number loosens this one step's hang detector from 900s to
+#: 1800s beside the 68 other steps, under only the `full` tier's 3600s wall ceiling,
+#: which is a check on the finished run rather than a kill and, off that tier's reference
+#: shape, is reported rather than failed. A hung screen takes 1800s to die there, not
+#: 900s; the loosening is not confined to the solo job.
 #:
-#: 858.62s on CI on 2026-09-08 -- the post-merge checkpoint's `validate` job, four cpus
-#: at `--jobs 2 --inner-jobs 2`, run 34176106076, read from that run's own
-#: `validation-timings-validate-1` receipts -- against 766.26s idle locally at
-#: `n=1..324` (`benchmarks/gate-cost-at-324/`). 1800s is 2.10x the CI reading, inside
-#: the 1.77x-to-2x margin the budgets above carry over their own measurements. The
-#: first serial deferred run, 34183723509, read 1069.84s with the runner to itself,
-#: which leaves 1800s at 1.68x the highest reading; the margin is thinner than the
-#: fast tier's, and the next widening of the corpus is the argument to revisit it.
+#: Why not leave it at the shared 900s, given the split job doubles the screen's workers.
+#: Because at four workers on hosted runners the step does not sit under 900s, and three
+#: readings of the split job say so: 944s on run 34188003140, 861s on run 34189176373 and
+#: 949s on run 34190285360 -- a spread of 1.10x, geometric mean **917.09s**.
 #:
-#: It is declared because the shared 900s cap had stopped bounding the step and started
-#: bounding the runner it happened to get. The same tree passed the post-merge job with
-#: 41s to spare and timed out in the deferred checkpoint (run 34177317419, job
-#: `deferred-steps`), where six deferrals shared one four-cpu runner with nothing cheap
-#: left to overlap. `.github/workflows/deep-gate.yml` fixed the contention; this fixes
-#: the ceiling that was 41s from failing either way.
-ESCAPE_SCREEN_BUDGET_SECONDS = 1800.0
+#: That mean is 1.019x the old 900s cap, and two of the three readings are above it. The
+#: step does not merely exceed the cap it was running under on a bad draw; its central
+#: estimate is above it, which is the sharpest available statement of why the cap had to
+#: move: at 900 the verdict is settled by which runner the job draws rather than by the
+#: code. Splitting the job and leaving the cap alone would have bought a differently
+#: shaped coin flip, not a fix.
+#:
+#: 1800 is 1.963x that mean, and nothing checks the ratio. `max_headroom` in
+#: `devtools/gate-budgets.yaml` is a rule over tier ceilings, `budget_seconds` is read by
+#: nothing in `sqpack.gate_budgets` or under `devtools`, and no check compares a step
+#: budget to any multiple of its cost. The figure is an unenforced analogy to that rule,
+#: recorded so the next reader knows the budget is about twice the reading rather than
+#: ten times it, and not a margin anything measures.
+#:
+#: The estimate all this replaces was 613-846s, and it was built from two factors rather
+#: than one. The screen's 858.62s at two workers on run 34176106076, divided by the slow
+#: lane's then-measured 1.42x, was the low end for four workers on that same fast runner:
+#: the division gives 604.66s, and the comment at the time wrote 613s, which was a
+#: further error. The 1.38x by which the slower runner of that night ran the same gate
+#: then gave the high end, 613 x 1.38 = 845.9. Both ends are optimistic against every
+#: hosted reading since, and the 1.42x has since been qualified as well
+#: (`_xdist_distribution`).
+#:
+#: What the three readings do not say is anything about scaling. They are all at four
+#: workers, and the one reading at two -- 858.62s -- came from a different, faster
+#: runner, so this step has no same-runner comparison across worker counts in either
+#: direction. The slow lane has one, 1020.77s serial against 718.52s at four workers on
+#: one box, and its shortfall against 4x is the question `think-ph9v` owns; whether the
+#: screen shares it is not measured.
+SCREEN_BUDGET_SECONDS = 1800.0
 
 
 class _ProcessRegistry:
@@ -1167,9 +1191,54 @@ def _pytest_workers(jobs: int) -> int:
     return max(1, cpus - jobs + 1)
 
 
-def _quick_lane_command(jobs: int) -> tuple[str, ...]:
+def _xdist_distribution(jobs: int) -> tuple[str, ...]:
+    """The `-n` flag both behavioural lanes run under, or nothing at one worker.
+
+    `-n 1` is not asked for: a single xdist worker is a subprocess and a protocol for no
+    concurrency at all, which is slower than not asking.
+
+    Shared by the two lanes because they are the same tests under the same runner, split
+    by a marker. `BC-214` split them and gave xdist to the quick half only, which left the
+    slow half -- the half selected for costing the most -- as the one place in the gate
+    that ran a test suite in a single process. It cost the whole of `D-484`: 1020.77s
+    serially on a four-cpu box, against 1801s and a killed step on CI, where the lane ran
+    beside another `--jobs 2` slot and paid for the contention without any of the
+    parallelism.
+
+    The same 97 tests measured 718.52s at four workers on that box, so the lane is 1.42x
+    rather than the 4x the worker count suggests, and both readings were taken with light
+    work in flight. One reading per configuration is a sample and not a measurement
+    (`D-472`), so what is claimed here is only the sign: the lane passes under xdist and
+    is faster with it. Where the missing parallelism went is `think-ph9v` and is not
+    answered by this helper -- 21m of cpu against 12m of wall says the lane is not
+    spreading evenly, which is a question about its longest members.
+
+    Two qualifications on that 1.42x, both about shape rather than about the sign. It is
+    *four* workers, which is `--jobs 1`. At the time of those readings both CI jobs
+    reaching the lane passed `--jobs 2`, where the formula above gives three. At `-n 3` on a
+    contended box the same tests were 795.11s, about 1.28x against the serial reading.
+    That earlier shape has a hosted reading too -- 1212.70s in the deep gate's
+    `deferred-steps` job on run 34190285360, beside another outer slot -- and it is the
+    first uncensored one: the CI readings it replaces were killed at the 1800s cap on runs
+    34172652457 and 34177317419, so `>= 1801s` was a cap and not a duration. 1212.70s is
+    587s inside that budget on one run, which is where `D-472` applies rather than a claim
+    that the lane is comfortably inside it.
+
+    The integrated workflows now isolate the slow lane at `--jobs 1 --inner-jobs 2`,
+    giving it four xdist workers on the four-CPU hosted runner. The readings above
+    describe the earlier job selections; they do not measure this combined allocation.
+
+    And the default local gate does not get this at all. `packing-validate` with no
+    `--jobs` defaults it to the cpu count, so `cpus - jobs + 1` is 1, this helper returns
+    `()`, and the lane runs in one process exactly as it did before. Xdist reaches it only
+    where `--jobs` is below the cpu count: CI, and an explicit `--jobs` locally.
+    """
     workers = _pytest_workers(jobs)
-    distribution = () if workers == 1 else ("-n", str(workers))
+    return () if workers == 1 else ("-n", str(workers))
+
+
+def _quick_lane_command(jobs: int) -> tuple[str, ...]:
+    distribution = _xdist_distribution(jobs)
     return (
         sys.executable,
         "-m",
@@ -1211,8 +1280,8 @@ def _fast_tests(context: Context) -> str:
     return output
 
 
-#: pytest's exit code for "every test was deselected", which for the slow lane means the
-#: ceiling currently defers nothing rather than that anything is wrong.
+#: Under xdist, exit 5 can also mean every worker failed before collection. Only a
+#: separate serial collection can establish that the slow lane is actually empty.
 _PYTEST_NOTHING_SELECTED = "command exited 5:"
 
 
@@ -1228,19 +1297,45 @@ def _slow_tests(context: Context) -> str:
                 "tests",
                 "-m",
                 SLOW_TESTS,
+                *_xdist_distribution(context.jobs),
                 "--durations=0",
                 "--durations-min=0",
             ),
         )
     except StepFailureError as error:
-        # An empty lane is a lane with no members, not a broken gate. The membership is
-        # decided by a ceiling, so it can legitimately fall to zero -- and a deep surface
-        # that failed when nothing was slow would teach people to keep a token member in
-        # the lane, which is worse than the failure it was meant to report.
-        if _PYTEST_NOTHING_SELECTED not in str(error):
+        if not str(error).startswith(_PYTEST_NOTHING_SELECTED):
             raise
-        return "  no test is deferred by the per-test ceiling; the quick lane runs them all"
+        # Probe only this ambiguous failure: healthy lanes should not pay for a second
+        # collection. Serial pytest distinguishes no selected tests (5) from collection
+        # errors, and a successful collection proves the workers failed to run real tests.
+        try:
+            _run(
+                context,
+                (
+                    sys.executable,
+                    "-m",
+                    "pytest",
+                    "-q",
+                    "tests",
+                    "-m",
+                    SLOW_TESTS,
+                    "--collect-only",
+                ),
+            )
+        except StepFailureError as collection_error:
+            if not str(collection_error).startswith(_PYTEST_NOTHING_SELECTED):
+                raise
+            return "  no test is deferred by the per-test ceiling; the quick lane runs them all"
+        raise
     _require_durations(output, "slow", f"the {SLOW_TEST_FLOOR_SECONDS:g}s marker floor")
+    # A watch item since this lane gained xdist, and not a live break. The floor is the
+    # two-sided half of the rule -- a `slow` marker has to earn itself -- and under
+    # `--dist load` the durations it reads are less stable than they were: a memoized
+    # module-level build is billed to whichever test reaches it first *per worker*, which
+    # varies run to run, and contention inflates call time. Both push measured cost up, so
+    # the floor got more permissive rather than noisier, and a stale marker can now
+    # survive it. The last full reading had nothing under the floor and its cheapest
+    # member at 2.07s, about twice the margin, so nothing is masked today.
     # Per function, not per node, because the marker is per function. `_fast_tests` keeps
     # the opposite rule for the opposite reason: one node at or above the ceiling is one
     # node the pull-request surface actually pays for, whatever its siblings cost.
@@ -1706,12 +1801,11 @@ def _translation_escape_sample(context: Context) -> str:
 
     Deferring the whole re-screen is argued on
     `test_the_pull_request_surface_defers_only_what_was_measured`: 766.26s at `n=1..324`
-    against a 210s ceiling, and within 134s of the 900s per-step subprocess timeout the
-    gate shared then -- which the whole screen went on to exceed on CI, and which is why
-    it now declares `ESCAPE_SCREEN_BUDGET_SECONDS`. What stays here is everything that is
-    not per-record geometry -- the aggregate against its own cases, the method block, the
-    schema, the per-certificate claims -- and a fixed recorded slice of the records
-    replayed in full.
+    against a 210s ceiling, and within 134s of the then-shared 900s subprocess timeout.
+    The whole screen now declares `SCREEN_BUDGET_SECONDS` after exceeding that
+    cap on CI. What stays here is everything that is not per-record
+    geometry -- the aggregate against its own cases, the method block, the schema, the
+    per-certificate claims -- and a fixed recorded slice of the records replayed in full.
 
     The corpus findings stay on the pull-request surface with it. They are read out of
     the retained document, which this step rebuilds from its own records, so a screen
@@ -2357,9 +2451,9 @@ def _session_rollups(context: Context) -> str:
 def _session_gate(context: Context) -> str:
     """A terminal session names the gate run that certified its handover (`OR-13`).
 
-    A few seconds at most: frontmatter, one regex, two `git` calls per declaration, and
-    one `tbd show` per pending record where `tbd` is installed (about 2.6s for the one
-    pending record today; sub-second without it). Records tier
+    About three seconds where `tbd` is installed (one `tbd show --json` per pending
+    record) and sub-second where it is not: frontmatter, one regex, two `git` calls per
+    declaration, and that one tracker call. Records tier
     and therefore on every pull request, which is the point -- `OR-13` says every fast
     check runs in CI, and a rule about the gate that only the gate's slow surface enforces
     is a rule a branch can be green against for its whole life.
@@ -2844,22 +2938,36 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/screen_translation_escape.py",
         ),
     ),
-    # The whole re-screen, off the pull-request surface since 2026-09-07 and on its own
-    # measurement: 766.26s at `n=1..324` against that job's 210s ceiling, and within 134s
-    # of this gate's own per-step subprocess timeout on a box faster than CI's.
+    # The whole re-screen, off the pull-request surface since 2026-09-07 and, since
+    # `D-484`, on its own post-merge runner. The 134s of margin the previous note here
+    # claimed against the shared 900s cap was not margin, and the control for that is one
+    # commit run twice: on `831697c0` the step finished at 858.62s on post-merge run
+    # 34176106076 and was killed at the cap an hour later on deep-gate run 34177317419 --
+    # the same code, different runners and job selections, opposite verdicts, and the
+    # surviving one 41s from red. The runner and composition effects are confounded.
+    # (Run 34172652457 was killed at the cap as well, at 901.00s, but on commit
+    # `28696526`: another timeout.) `D-472` is why one passing reading with that margin
+    # cannot establish a reliable budget.
     #
-    # That last clause was the warning and on 2026-09-08 it came true. The step measured
-    # 858.62s in the post-merge checkpoint (run 34176106076) -- 41s inside the shared
-    # 900s cap -- and was killed at 900s in the deferred checkpoint on the same tree
-    # (run 34177317419), where it shared four cpus with five other deferrals. So it is
-    # the fourth step to declare a budget and the first that is not a whole suite; why
-    # that extends the set rather than raising the shared cap for the other sixty-five
-    # steps is argued on `test_only_the_steps_that_outgrew_the_shared_cap_carry_budgets`,
-    # and the number itself on `ESCAPE_SCREEN_BUDGET_SECONDS`.
+    # What the job buys is workers rather than time: the screen is a process pool sized by
+    # `PACK_JOBS`, so beside the rest of the gate at `--inner-jobs 2` it gets two, and
+    # alone at `--inner-jobs 4` it gets four. What four workers cost is three hosted
+    # readings -- 944s, 861s, 949s, geometric mean 917.09s, run numbers on
+    # `SCREEN_BUDGET_SECONDS` -- against one local reading of 794.5s over the same 318
+    # records on a four-cpu development box, which the hosted runs sit 1.08x to 1.19x
+    # above. The local number is a development reading, not the one to size a job from.
+    #
+    # The budget is a hang detector and is sized as one, and it travels with the step:
+    # `_execute_step_result` raises the cap for this step in every run that did not type
+    # its own timeout, the full gate included, where it loosens one step's detector from
+    # 900s to 1800s under the `full` tier's 3600s wall check. On the solo job `--only`
+    # reports no tier, so there is no `gate-budgets.yaml` ceiling behind it and this
+    # number is the whole guard -- which is the argument for setting it generously
+    # against the measurement and not for setting it tight.
     Step(
         "single-square translation escape screen",
         _translation_escape_screen,
-        budget_seconds=ESCAPE_SCREEN_BUDGET_SECONDS,
+        budget_seconds=SCREEN_BUDGET_SECONDS,
         touches=(
             *_CORE,
             "packing/atlas/known-best/*",

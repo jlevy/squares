@@ -1,0 +1,580 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: a43bae08bfc5ff474.output
+    sha256: bf42a8207d4fc3c17e48d9e730907b6f8c6245ef390a51a0cd3d919431d684a4
+    bytes: 1266733
+    records: 494
+    session_id: 35e8ab73-ad4e-41b5-9a56-e0ec1adfcb15
+    harness_versions:
+    - 2.1.260
+  span:
+    started_at: '2026-09-07T22:31:03.039Z'
+    ended_at: '2026-09-07T23:20:45.092Z'
+    wall_seconds: 2982.053
+  turns:
+    assistant: 214
+    sidechain: 214
+    by_model:
+      claude-opus-5: 214
+    by_thinking_level:
+      xhigh: 214
+    by_model_and_thinking_level:
+      claude-opus-5 @ xhigh: 214
+    by_branch:
+      claude/print-sans-faces: 214
+    latency:
+      count: 214
+      total_seconds: 1706.902
+      median_seconds: 3.319
+      max_seconds: 114.293
+  tokens:
+    cache_creation_input_tokens: 1043873
+    cache_read_input_tokens: 45391313
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 1043873
+    input_tokens: 428
+    output_tokens: 34524
+    thinking_tokens: 20261
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 1043873
+      cache_read_input_tokens: 45391313
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 1043873
+      input_tokens: 428
+      output_tokens: 34524
+      thinking_tokens: 20261
+  tool_calls:
+    total: 141
+    total_seconds: 1317.047
+    share_of_wall: 0.4417
+    errors: 1
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 18
+      total_seconds: 88.687
+      median_seconds: 2.903
+      max_seconds: 15.189
+    by_tool:
+      Bash:
+        count: 104
+        total_seconds: 1251.815
+        median_seconds: 2.009
+        max_seconds: 602.227
+      Edit:
+        count: 29
+        total_seconds: 57.502
+        median_seconds: 1.904
+        max_seconds: 2.592
+      Write:
+        count: 5
+        total_seconds: 7.363
+        median_seconds: 2.091
+        max_seconds: 2.953
+      mcp__ccd_session__mark_chapter:
+        count: 3
+        total_seconds: 0.367
+        median_seconds: 0.151
+        max_seconds: 0.162
+    by_command:
+      make test:
+        count: 3
+        total_seconds: 682.947
+        median_seconds: 78.783
+        max_seconds: 602.227
+      make lint-check:
+        count: 3
+        total_seconds: 121.58
+        median_seconds: 48.686
+        max_seconds: 58.221
+      ruff && make:
+        count: 1
+        total_seconds: 85.956
+        median_seconds: 85.956
+        max_seconds: 85.956
+      npx && make:
+        count: 1
+        total_seconds: 67.713
+        median_seconds: 67.713
+        max_seconds: 67.713
+      make && devtools.katex_text_metrics && devtools.instance_sans && make:
+        count: 1
+        total_seconds: 35.592
+        median_seconds: 35.592
+        max_seconds: 35.592
+      make install:
+        count: 1
+        total_seconds: 30.127
+        median_seconds: 30.127
+        max_seconds: 30.127
+      find:
+        count: 1
+        total_seconds: 29.531
+        median_seconds: 29.531
+        max_seconds: 29.531
+      python && s && recorded && print(ok) && make:
+        count: 1
+        total_seconds: 15.189
+        median_seconds: 15.189
+        max_seconds: 15.189
+      mkdir && measure.py:
+        count: 1
+        total_seconds: 13.674
+        median_seconds: 13.674
+        max_seconds: 13.674
+      ? runInitScript() && expect(globalThis.renderMathInElement).toHaveBeenCalledTimes(2)
+        && expect(setInstalledForRender(0)).toBe(prose) && expect(setInstalledForRender(1)).toBe(sans)
+        && }) && it(leaves the serif set installed once the page is rendered, && runInitScript()
+        && const && const && expect(last[1]).toBe(METRICS[Main-Regular]) && }) && it(uses
+        the sans tables throughout under the reader's sans reading face, && runInitScript()
+        && expect(setInstalledForRender(0)).toBe(sans) && expect(setInstalledForRender(1)).toBe(sans)
+        && }) && it(installs no face called `sans` or `scale`, && runInitScript() && const
+        && expect(faces).not.toContain(sans) && expect(faces).not.toContain(scale) && expect(new
+        && }) && it(turns the face off when only the serif tables are shipped, && mountProseAndCaption()
+        && runInitScript() && expect(globalThis.katex.__setFontMetrics).not.toHaveBeenCalled()
+        && expect(document.documentElement.dataset.kpressMathText).toBe(katex) && expect(globalThis.renderMathInElement).toHaveBeenCalledTimes(2)
+        && }) && }) && JSEOF
+      : count: 1
+        total_seconds: 12.807
+        median_seconds: 12.807
+        max_seconds: 12.807
+      head:
+        count: 12
+        total_seconds: 10.924
+        median_seconds: 0.452
+        max_seconds: 3.47
+      git && git:
+        count: 4
+        total_seconds: 10.718
+        median_seconds: 1.965
+        max_seconds: 4.935
+      make build:
+        count: 1
+        total_seconds: 10.455
+        median_seconds: 10.455
+        max_seconds: 10.455
+      sed:
+        count: 10
+        total_seconds: 8.765
+        median_seconds: 0.449
+        max_seconds: 2.279
+      uv run pytest:
+        count: 2
+        total_seconds: 8.075
+        median_seconds: 4.038
+        max_seconds: 5.034
+      tail:
+        count: 3
+        total_seconds: 7.536
+        median_seconds: 3.341
+        max_seconds: 4.041
+      python && cmap && h && out && st.save(buf) && buf.seek(0):
+        count: 1
+        total_seconds: 7.072
+        median_seconds: 7.072
+        max_seconds: 7.072
+      cat:
+        count: 11
+        total_seconds: 6.736
+        median_seconds: 0.397
+        max_seconds: 2.89
+      npx:
+        count: 1
+        total_seconds: 5.415
+        median_seconds: 5.415
+        max_seconds: 5.415
+      python && t.start() && server.server_close():
+        count: 1
+        total_seconds: 5.143
+        median_seconds: 5.143
+        max_seconds: 5.143
+      flowmark && git && git && git:
+        count: 2
+        total_seconds: 5.138
+        median_seconds: 2.569
+        max_seconds: 2.765
+      perl && devtools.katex_text_metrics && devtools.katex_text_metrics:
+        count: 1
+        total_seconds: 4.929
+        median_seconds: 4.929
+        max_seconds: 4.929
+      grep:
+        count: 7
+        total_seconds: 4.021
+        median_seconds: 0.23
+        max_seconds: 2.308
+      tbd && tbd:
+        count: 1
+        total_seconds: 3.668
+        median_seconds: 3.668
+        max_seconds: 3.668
+      ls:
+        count: 2
+        total_seconds: 3.654
+        median_seconds: 1.827
+        max_seconds: 3.258
+      upem && declared && d && measure2.py:
+        count: 1
+        total_seconds: 3.652
+        median_seconds: 3.652
+        max_seconds: 3.652
+      pwd && git && git:
+        count: 1
+        total_seconds: 3.204
+        median_seconds: 3.204
+        max_seconds: 3.204
+      Safari && Safari && deferred && recorded:
+        count: 1
+        total_seconds: 3.176
+        median_seconds: 3.176
+        max_seconds: 3.176
+      tbd && tbd && tbd:
+        count: 1
+        total_seconds: 3.154
+        median_seconds: 3.154
+        max_seconds: 3.154
+      uv run python -m devtools.katex_text_metrics:
+        count: 1
+        total_seconds: 2.98
+        median_seconds: 2.98
+        max_seconds: 2.98
+      ? "),\n    (.katex && n && ),\n    (.katex && n && ),\n    (.katex && n && ),\n    (\n\
+        \        .katex && n && n && ,\n    ),\n    (.katex && n && ),\n    (.katex && n &&\
+        \ * && the"
+      : count: 1
+        total_seconds: 2.631
+        median_seconds: 2.631
+        max_seconds: 2.631
+      ? 'the && the && the && listed && part && listed && add && declare && scope && tests
+        && Safari && every && the && the,
+
+        '
+      : count: 1
+        total_seconds: 2.469
+        median_seconds: 2.469
+        max_seconds: 2.469
+      footnote:
+        count: 1
+        total_seconds: 2.467
+        median_seconds: 2.467
+        max_seconds: 2.467
+      make && failed:
+        count: 1
+        total_seconds: 2.453
+        median_seconds: 2.453
+        max_seconds: 2.453
+      ? 'Source && a && font-style: && font-weight: && font-display: && src: && unicode-range:
+        && @font-face && font-style: && font-weight: && font-display: && `katex_text_metrics
+        && src: && unicode-range: && * && font-style: && font-weight: && font-display: &&
+        src: && unicode-range: && @font-face && font-style: && font-weight: && font-display:
+        && `katex_text_metrics && src: && unicode-range: && * && font-style: && font-weight:
+        && font-display: && src: && unicode-range: && @font-face && font-style: && font-weight:
+        && font-display: && `katex_text_metrics && src: && unicode-range: && * && font-style:
+        && font-weight: && font-display: && src: && unicode-range: && @font-face && font-style:
+        && font-weight: && font-display: && `--print-scale` && src: && unicode-range: && *
+        && font-style: && font-weight: && font-display: && src: && unicode-range: && @font-face
+        && font-style: && font-weight: && font-display: && src: && unicode-range: && @font-face
+        && font-style: && font-weight: && font-display: && src: && unicode-range: && @font-face
+        && font-style: && font-weight: && font-display: && src: && unicode-range: && CSSEOF'
+      : count: 1
+        total_seconds: 2.397
+        median_seconds: 2.397
+        max_seconds: 2.397
+      python && s && before && s && recorded:
+        count: 1
+        total_seconds: 2.296
+        median_seconds: 2.296
+        max_seconds: 2.296
+      git && git && git:
+        count: 1
+        total_seconds: 2.259
+        median_seconds: 2.259
+        max_seconds: 2.259
+      ruff && ruff:
+        count: 1
+        total_seconds: 2.252
+        median_seconds: 2.252
+        max_seconds: 2.252
+      one && one && add && declare && scope && tests && Safari && the && the && every && the:
+        count: 1
+        total_seconds: 2.231
+        median_seconds: 2.231
+        max_seconds: 2.231
+      python && a:
+        count: 1
+        total_seconds: 2.215
+        median_seconds: 2.215
+        max_seconds: 2.215
+    by_command_family:
+      toolchain:
+        count: 27
+        total_seconds: 1029.471
+        median_seconds: 3.668
+        max_seconds: 602.227
+      other:
+        count: 18
+        total_seconds: 118.038
+        median_seconds: 2.468
+        max_seconds: 67.713
+      inspection:
+        count: 49
+        total_seconds: 72.681
+        median_seconds: 0.426
+        max_seconds: 29.531
+      filesystem:
+        count: 1
+        total_seconds: 13.674
+        median_seconds: 13.674
+        max_seconds: 13.674
+      vcs:
+        count: 5
+        total_seconds: 12.977
+        median_seconds: 2.073
+        max_seconds: 4.935
+      project:
+        count: 1
+        total_seconds: 2.98
+        median_seconds: 2.98
+        max_seconds: 2.98
+      shell:
+        count: 3
+        total_seconds: 1.994
+        median_seconds: 0.442
+        max_seconds: 1.176
+    invoked:
+      cd: 102
+      echo: 36
+      head: 31
+      tail: 27
+      cat: 19
+      sed: 18
+      grep: 13
+      'font-style:': 12
+      'font-weight:': 12
+      'font-display:': 12
+      'src:': 12
+      'unicode-range:': 12
+      the: 9
+      git log: 7
+      '@font-face': 7
+      n: 7
+      make lint-check: 7
+      ls: 6
+      uv run python: 6
+      '})': 6
+      git add: 5
+      git commit: 5
+      '*': 5
+      runInitScript(): 5
+      git status: 4
+      tbd shortcut: 4
+      uv run python -m devtools.katex_text_metrics: 4
+      ? "),\n    (.katex"
+      : 4
+      make test: 4
+      Safari: 4
+      '`katex_text_metrics': 3
+      const: 3
+      recorded: 3
+      failed: 3
+      s: 3
+      tbd show: 2
+      wc: 2
+      uvx flowmark: 2
+      Source: 2
+      a: 2
+      npx: 2
+      uv run ruff format: 2
+      uv run pytest: 2
+      expect(globalThis.renderMathInElement).toHaveBeenCalledTimes(2): 2
+      expect(setInstalledForRender(1)).toBe(sans): 2
+      normal: 2
+      Variable,: 2
+      italic: 2
+      Variable: 2
+      listed: 2
+      add: 2
+      declare: 2
+      scope: 2
+      tests: 2
+      every: 2
+      one: 2
+      make build: 2
+      pwd: 1
+      tbd update: 1
+      make install: 1
+      find: 1
+      mkdir: 1
+      uv run python measure.py: 1
+      upem: 1
+      declared: 1
+      d: 1
+      uv run python measure2.py: 1
+      footnote: 1
+      tbd template: 1
+      cmap: 1
+      h: 1
+      out: 1
+      st.save(buf): 1
+      buf.seek(0): 1
+      '`--print-scale`': 1
+      CSSEOF: 1
+      ? "),\n    (\n        .katex"
+      : 1
+      ? ",\n    ),\n    (.katex"
+      : 1
+      perl: 1
+      awk: 1
+      expect(setInstalledForRender(0)).toBe(prose): 1
+      it(leaves the serif set installed once the page is rendered,: 1
+      expect(last[1]).toBe(METRICS[Main-Regular]): 1
+      it(uses the sans tables throughout under the reader's sans reading face,: 1
+      expect(setInstalledForRender(0)).toBe(sans): 1
+      it(installs no face called `sans` or `scale`,: 1
+      expect(faces).not.toContain(sans): 1
+      expect(faces).not.toContain(scale): 1
+      expect(new: 1
+      it(turns the face off when only the serif tables are shipped,: 1
+      mountProseAndCaption(): 1
+      expect(globalThis.katex.__setFontMetrics).not.toHaveBeenCalled(): 1
+      expect(document.documentElement.dataset.kpressMathText).toBe(katex): 1
+      JSEOF: 1
+      t.start(): 1
+      server.server_close(): 1
+      50,58p: 1
+      240,255p: 1
+      deferred: 1
+      Sans: 1
+      KaTeX: 1
+      Factor: 1
+      KaTeX_Main-Regular: 1
+      96.6%: 1
+      KaTeX_Math-Italic: 1
+      110.2%: 1
+      KaTeX_Main-Bold: 1
+      96.2%: 1
+      KaTeX_Math-BoldItalic: 1
+      109.3%: 1
+      The: 1
+      ERROR): 1
+      passed: 1
+      part: 1
+      ? 'the,
+
+        '
+      : 1
+      before: 1
+      print(ok): 1
+      uv run ruff check: 1
+      uv run python -m devtools.instance_sans: 1
+      git push: 1
+      git diff: 1
+    invoked_families:
+      other: 208
+      shell: 138
+      inspection: 118
+      toolchain: 35
+      vcs: 23
+      project: 5
+      filesystem: 1
+    by_shell_shape:
+      compound:
+        count: 82
+        total_seconds: 1154.108
+        median_seconds: 0.717
+        max_seconds: 602.227
+      python_heredoc:
+        count: 17
+        total_seconds: 86.66
+        median_seconds: 3.176
+        max_seconds: 15.189
+      heredoc:
+        count: 4
+        total_seconds: 9.02
+        median_seconds: 2.316
+        max_seconds: 2.397
+      python_inline:
+        count: 1
+        total_seconds: 2.027
+        median_seconds: 2.027
+        max_seconds: 2.027
+    by_thinking_level:
+      xhigh:
+        count: 141
+        total_seconds: 1317.047
+        median_seconds: 1.937
+        max_seconds: 602.227
+    shell_traits:
+      pipes: 51
+      redirects_output: 17
+      substitutes: 2
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'

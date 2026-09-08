@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 97
+count: 99
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 52
+  sessions_measured: 54
   sessions_unmeasured: 45
   attributed:
     rollups: 115
@@ -21,23 +21,23 @@ totals:
     one_off_code: 2808
     wall_hours: 170.08
   unattributed:
-    rollups: 35
-    turns: 7547
-    tool_calls: 4423
-    tool_errors: 115
-    one_off_code: 699
-    wall_hours: 38.34
+    rollups: 53
+    turns: 9920
+    tool_calls: 5828
+    tool_errors: 135
+    one_off_code: 885
+    wall_hours: 46.72
   measured:
-    rollups: 150
-    turns: 37289
-    tool_calls: 21223
-    tool_errors: 464
-    one_off_code: 3507
-    wall_hours: 208.42
+    rollups: 168
+    turns: 39662
+    tool_calls: 22628
+    tool_errors: 484
+    one_off_code: 3693
+    wall_hours: 216.8
 codex_receipts:
-  attributed: 25
+  attributed: 27
   unattributed: 0
-  measured: 25
+  measured: 27
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1551,3 +1551,43 @@ sessions:
     declares no rollups
   rollups: []
   codex_receipts: []
+- id: session-105
+  title: "Stromquist n26 verification and MacIver source audit"
+  status: completed
+  primary_bead: think-zi3g
+  phases: 6
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-105.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-105.yaml
+    model_responses: 667
+    agent_hours: 3.77
+    active_union_hours: 1.92
+    wall_hours: 1.92
+    snapshot_incomplete: true
+- id: session-106
+  title: "n26 source consistency and upstream integration"
+  status: completed
+  primary_bead: think-4v5w
+  phases: 5
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-106.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-106.yaml
+    model_responses: 1467
+    agent_hours: 14.71
+    active_union_hours: 8.0
+    wall_hours: 8.0
+    snapshot_incomplete: true
