@@ -24,6 +24,7 @@ name: Certificate page
       - packing/devtools/measure_net_coarsening.py
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
+      - packing/devtools/sans_instances.py
       - packing/devtools/check_print_layout.py
       - packing/devtools/inspect_explainer_typography.py
       - packing/src/sqpack/**
@@ -32,6 +33,7 @@ name: Certificate page
       - packing/atlas/known-best/rendering/n-011.svg
       - packing/devtools/templates/explainer-shell.html
       - packing/devtools/templates/explainer-article.md
+      - packing/devtools/templates/fonts/**
       - packing/atlas/known-best/known-best-1-100.svg
       - packing/atlas/known-best/known-best-1-100.png
       - packing/atlas/known-best/known-best-1-100.pdf
@@ -52,6 +54,7 @@ name: Certificate page
       - packing/devtools/measure_net_coarsening.py
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
+      - packing/devtools/sans_instances.py
       - packing/devtools/check_print_layout.py
       - packing/devtools/inspect_explainer_typography.py
       - packing/src/sqpack/**
@@ -60,6 +63,7 @@ name: Certificate page
       - packing/atlas/known-best/rendering/n-011.svg
       - packing/devtools/templates/explainer-shell.html
       - packing/devtools/templates/explainer-article.md
+      - packing/devtools/templates/fonts/**
       - packing/atlas/known-best/known-best-1-100.svg
       - packing/atlas/known-best/known-best-1-100.png
       - packing/atlas/known-best/known-best-1-100.pdf
@@ -137,6 +141,9 @@ jobs:
       # After the page, not beside it: the exporter loads `site/index.html` from disk,
       # and Figure 2 references the composite that the render copies into `site/` on its
       # way out.
+      - name: Check the print faces cover every sans weight the page requests
+        run: uv run --frozen --group dev python -m devtools.sans_instances --check
+
       - name: Draw the PDF of the page
         run: uv run --frozen --group dev python -m devtools.render_explainer_pdf --update
 
@@ -155,6 +162,12 @@ jobs:
       # reference opens a line -- at the column the PDF actually has.
       - name: Check the print layout
         run: uv run --frozen --group dev python -m devtools.check_print_layout
+
+      - name: Check the print-layout probe still catches a page-width overflow
+        run: uv run --frozen --group dev python -m devtools.check_print_layout --self-check
+
+      - name: Check every comparison variant measures the font it draws
+        run: uv run --frozen --group dev python -m devtools.compare_math_fonts check
 
       - name: Check paper typography on screen and in print
         run: |

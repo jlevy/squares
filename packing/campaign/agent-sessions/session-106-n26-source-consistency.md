@@ -10,7 +10,7 @@ session:
   title: n26 source consistency and upstream integration
   date: '2026-09-07'
   started_at: '2026-09-08T00:34:07Z'
-  deadline_at: '2026-09-08T07:04:07Z'
+  deadline_at: '2026-09-08T08:04:07Z'
   branch: codex/stromquist-n26-verification
   goal: Merge the latest upstream atlas expansion, broaden the current n26 best-known search, and reconcile source-reported lower bounds without promoting missing proofs.
   workflow_phases:
@@ -118,9 +118,11 @@ session:
     stop_reason: null
     next_action: Retain exact hosted source identities and coverage, then complete cumulative accounting and tracker synchronization.
   primary_bead: think-4v5w
+  resource_rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-106.yaml
   status: in_progress
   budget:
-    wall_minutes: 390
+    wall_minutes: 450
     orientation_minutes: 10
     checkpoint_minutes: 30
     slice_minutes: 30
@@ -208,8 +210,10 @@ session:
   - The a70716c6 replay passed forty-four steps and failed the undeclared-consumer contract before interruption, with 1 failed and 1032 passed tests. The two new audit consumers are now declared; the focused contract and DS7 replay passed all 29 tests in 379.57 seconds. Its census test took 363.82 seconds because it repeatedly reloaded the full corpus.
   - The reviewed census repair preserves all 324-case assertions and loads the corpus once per test. The two affected tests pass in 3.10 seconds, with the census call taking 1.17 seconds; these observations use different invocation scopes and are not a controlled speedup ratio. Ruff, BasedPyright and whitespace checks pass.
   - Sessions 105/106 and ideas 129/130 avoid the published and explicitly assigned identifiers on PR116, PR121 and their connected constraints work. All fifteen moved validation and cost receipts retain identical bytes. Defects 481–483 remain unchanged pending actual upstream integration.
+  - Current main 89bedd68 merged cleanly, including the kpress aee6df7c print-font update. Independent review preserved the acknowledgment, qualified caption and source claims. The new font directory and instance generator are now in both Pages filters and the render-input contract; all 62 focused contract and font tests pass in 6.12 seconds, with clean Ruff and BasedPyright.
+  - The user authorized final review and merge of PR120. The GitHub sweep found no formal reviews, inline comments, PR comments or open review issues. Independent final source and identifier reviews found no unresolved discrepancy. The session calendar estimate is extended by sixty minutes for the complete hosted checkpoint, whose inspected upstream prediction is approximately 53 minutes plus setup; this is an estimate, not a validation result.
   stop_reason: null
-  next_action: Complete the user-selected n26 review and upstream merge, then retain think-mq0d (BC-264) as the separate selected research continuation.
+  next_action: Complete and merge PR120 as the user authorized, then consult the landed BC-264 handoff under think-mq0d. PR116 completes pricing; further H125 work requires a fresh allocation and admission rather than restarting the historical allocation.
 ---
 # N26 Source Consistency and Upstream Integration
 

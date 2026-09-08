@@ -11,8 +11,8 @@ count: 98
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 52
-  sessions_unmeasured: 46
+  sessions_measured: 53
+  sessions_unmeasured: 45
   attributed:
     rollups: 115
     turns: 29742
@@ -21,23 +21,23 @@ totals:
     one_off_code: 2808
     wall_hours: 170.08
   unattributed:
-    rollups: 12
-    turns: 4499
-    tool_calls: 2568
-    tool_errors: 89
-    one_off_code: 491
-    wall_hours: 28.65
+    rollups: 35
+    turns: 7547
+    tool_calls: 4423
+    tool_errors: 115
+    one_off_code: 699
+    wall_hours: 38.34
   measured:
-    rollups: 127
-    turns: 34241
-    tool_calls: 19368
-    tool_errors: 438
-    one_off_code: 3299
-    wall_hours: 198.73
+    rollups: 150
+    turns: 37289
+    tool_calls: 21223
+    tool_errors: 464
+    one_off_code: 3507
+    wall_hours: 208.42
 codex_receipts:
-  attributed: 25
+  attributed: 26
   unattributed: 0
-  measured: 25
+  measured: 26
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1556,8 +1556,18 @@ sessions:
   status: in_progress
   primary_bead: think-4v5w
   phases: 5
-  measured: false
-  unmeasured_reason: >-
-    declares no rollups
-  rollups: []
-  codex_receipts: []
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-106.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-106.yaml
+    model_responses: 792
+    agent_hours: 9.68
+    active_union_hours: 5.71
+    wall_hours: 5.71
+    snapshot_incomplete: true

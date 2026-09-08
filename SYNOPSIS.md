@@ -681,7 +681,16 @@ His reported lower bound at `4.450208382...` is below the verified `4.59` for bo
 and n18. The missing computational artifacts remain a source gap; `think-sske` owns
 local replay of the center-area and capacity lemmas before adoption.
 Exact design controls show potential local cuts, not a new global bound.
-This source review leaves the selected BC-264 allocation intact.
+This source review does not authorize further kernel research.
+
+[Session106](packing/campaign/agent-sessions/session-106-n26-source-consistency.md)
+extends the source-table audit through n324 and corrects 56 additional reported lower
+bounds, preserving every verified bound and every upper bound.
+The
+[dated n26 search](docs/project/research/research-2026-09-07-n26-best-known-audit.md)
+finds no smaller packing among the checked public sources; exact normalization shows
+that two recent numerical submissions are slightly worse than Friedman.
+This is a best-known conclusion with recorded search limits, not a proof of optimality.
 
 The
 [Session094 handoff](packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md)
@@ -3145,8 +3154,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | claimed by a session | 115 | 29,742 | 16,800 | 349 | 2,808 | 170.08 h |
-| claimed by none | 12 | 4,499 | 2,568 | 89 | 491 | 28.65 h |
-| **measured** | **127** | **34,241** | **19,368** | **438** | **3,299** | **198.73 h** |
+| claimed by none | 35 | 7,547 | 4,423 | 115 | 699 | 38.34 h |
+| **measured** | **150** | **37,289** | **21,223** | **464** | **3,507** | **208.42 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -3206,11 +3215,12 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-095.yaml` | session-095 | 476 | 4.08 h | 1.69 h | 1.69 h | yes |
 | `codex-task-tree-session-096.yaml` | session-096 | 520 | 3.79 h | 1.4 h | 1.4 h | yes |
 | `codex-task-tree-session-105.yaml` | session-105 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
+| `codex-task-tree-session-106.yaml` | session-106 | 792 | 9.68 h | 5.71 h | 5.71 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 52 |
-| unmeasured | 46 |
+| measured | 53 |
+| unmeasured | 45 |
 | **total** | **98** |
 
 <!-- END GENERATED: session-close-report -->
