@@ -36,11 +36,11 @@ jobs:
 
       - run: uv run --frozen --group dev python -m devtools.render_explainer
 
-      - name: Diagnostic, held loads
-        run: uv run --frozen --group dev python -m devtools.diag_fonts --browser ${{ matrix.browser }} --width 390 --repeat 4
+      - name: Fixture, swap against block
+        run: uv run --frozen --group dev python -m devtools.diag_fonts --browser ${{ matrix.browser }} --fixture
 
-      - name: Diagnostic, no hold
-        run: uv run --frozen --group dev python -m devtools.diag_fonts --browser ${{ matrix.browser }} --width 390 --repeat 2 --no-hold
+      - name: Diagnostic, held loads
+        run: uv run --frozen --group dev python -m devtools.diag_fonts --browser ${{ matrix.browser }} --width 390 --repeat 6
 
       - name: Real check, three times
         continue-on-error: true
