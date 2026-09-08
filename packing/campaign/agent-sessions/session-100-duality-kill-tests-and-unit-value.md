@@ -122,12 +122,12 @@ The mathematics and every input are in the Session-100 section of
 this record is the handoff.
 
 What the block established, all at `q = 96/25`: a verified `B = 1` family of value
-`89090463224/9989418081 = 8.918484` (the loop's iteration-0 support; one polisher round did
-not improve it), of which `5.927446` lies outside Trump's neighbourhood;
-a verified family off the four corner boxes of value `6.260870` at the retained
-`(B, net)`; the proved floor `ν*₁(q) ≥ 10` from `s(10)`; and the reading that no region is
-a kill and none is alive at the cell's standard, so routes (b) and (c) and every capture
-design survive untested and BC-204 has no threshold to aim at yet.
+`89090463224/9989418081 = 8.918484` (the loop’s iteration-0 support; one polisher round
+did not improve it), of which `5.927446` lies outside Trump’s neighbourhood; a verified
+family off the four corner boxes of value `6.260870` at the retained `(B, net)`; the
+proved floor `ν*₁(q) ≥ 10` from `s(10)`; and the reading that no region is a kill and
+none is alive at the cell’s standard, so routes (b) and (c) and every capture design
+survive untested and BC-204 has no threshold to aim at yet.
 H-129 is recommended `open`. No claim is frozen and no experiment id is needed.
 
 No full gate was run in this lane; the records tier is the only check claimed, and the

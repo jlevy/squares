@@ -1298,21 +1298,21 @@ if __name__ == "__main__":
 
 Lane BC-294 of Agenda 030, hypothesis H-129, bead `think-7lp3`, session-100: one
 research lane of 2.5 hours (04:27:52Z to 06:57:52Z) on one worker of a four-core machine
-shared with five other agents (load average 4 to 6 throughout), `PACK_JOBS=1`.
-Wall times below are therefore not comparable with the planning lane’s or with BC-200’s.
+shared with five other agents (load average 4 to 6 throughout), `PACK_JOBS=1`. Wall
+times below are therefore not comparable with the planning lane’s or with BC-200’s.
 Nothing here allocates an identifier or edits a shared record; the frozen families and
 states are under the lane scratchpad (`scratchpad/lane-294/`) and their bytes are what
 the numbers below were verified from.
-Notation is Section 1.6’s: `q = 96/25`, `B = 9977/10000`, `U = 3.877083590`,
-a *family* is a finite set of weighted closed squares in `[0, q]²` with exact depth at
-most 1 at every vertex of its own arrangement, and its *value* is its total weight.
+Notation is Section 1.6’s: `q = 96/25`, `B = 9977/10000`, `U = 3.877083590`, a *family*
+is a finite set of weighted closed squares in `[0, q]²` with exact depth at most 1 at
+every vertex of its own arrangement, and its *value* is its total weight.
 
 ### The question and the reading rule
 
-By Lemma D (Section 1.6) the covering mass of *every* measure a certificate could use
-is at least the value of any family the measure must cover, and the same inequality
-holds with the placements restricted to those disjoint from a region `R` (the
-conditional program of X-014 Lemma 2) and with the thresholds of a capture certificate.
+By Lemma D (Section 1.6) the covering mass of *every* measure a certificate could use is
+at least the value of any family the measure must cover, and the same inequality holds
+with the placements restricted to those disjoint from a region `R` (the conditional
+program of X-014 Lemma 2) and with the thresholds of a capture certificate.
 Two instances are measured here.
 
 - **`B = 1` at `q`.** The placements are closed *unit* squares at the net directions.
@@ -1332,9 +1332,9 @@ Two instances are measured here.
   weight, Section 1.6 D4, so `10 + capacity(Π_b) ≥ 11`), alive below `9.5`, undecided
   between, or when only a lower bound exists.
 
-The reading rule for what each number *is*: a verified family gives an exact lower
-bound on the fractional packing value and hence on every covering mass; a covering LP on
-a finite site set whose row generation converged gives, by the same weak duality applied
+The reading rule for what each number *is*: a verified family gives an exact lower bound
+on the fractional packing value and hence on every covering mass; a covering LP on a
+finite site set whose row generation converged gives, by the same weak duality applied
 to the discrete site measure, an upper bound on the fractional packing value over the
 placements at the net directions — in floating point with the row oracle’s tolerance
 `10⁻⁹`, not exact — and a site LP whose rows did not converge is context only.
@@ -1364,14 +1364,14 @@ file:
   clamped into the unit centre domain.
 - `polish_family.py` is new in kind: the loop restores feasibility by dividing every
   weight by the exact maximum depth (BC-200: `11.06` at the sites became `9.91`), which
-  discards everything the family had below depth 1 elsewhere. With the support fixed
-  the arrangement and its vertex set do not move, so the polisher solves
-  `max Σ w_e` over one weight per D4 orbit subject to exact depth `≤ 1` at a working set
-  of vertices, rounds *down* to a common denominator, re-decides every vertex exactly
-  with `depths_above`, adds the violated ones and repeats; the result is verified by
-  `verify_ceiling` like any other family. It is the measurement instrument this lane
-  would ask to have built (OR-1), and it is reported as scratch because the cell names
-  no instrument file.
+  discards everything the family had below depth 1 elsewhere.
+  With the support fixed the arrangement and its vertex set do not move, so the polisher
+  solves `max Σ w_e` over one weight per D4 orbit subject to exact depth `≤ 1` at a
+  working set of vertices, rounds *down* to a common denominator, re-decides every
+  vertex exactly with `depths_above`, adds the violated ones and repeats; the result is
+  verified by `verify_ceiling` like any other family.
+  It is the measurement instrument this lane would ask to have built (OR-1), and it is
+  reported as scratch because the cell names no instrument file.
 - `restricted_loop.py` re-drives the loop with a disjointness filter on the dual side:
   the row oracle (`generate.placement_cells`) runs on the real sites plus phantom points
   of weight 1000 filling `R` at spacing `1/16`, so placements deep in `R` are never the
@@ -1382,70 +1382,72 @@ file:
   The instrument’s sites and duals are D4-symmetric, so it computes the restriction off
   a D4-symmetric region only: the four corner boxes together, or the central box.
   A single corner box or the corner triangle are not symmetric programs, and the
-  instrument cannot express them; they inherit a kill from the four-box result (a
-  family disjoint from four boxes is disjoint from one) and never an “alive”, and
+  instrument cannot express them; they inherit a kill from the four-box result (a family
+  disjoint from four boxes is disjoint from one) and never an “alive”, and
   `subrestrict.py` reads their lower bounds off any verified family exactly.
 - `trump_split.py` scales Trump’s exact pose (`cases.trump11.packing`, 40-digit
-  enclosures) by `q/U`, closes it under D4, and splits a family’s weight by folded
-  angle (within `1°` of `0°` or of `40.181937°`) and by position (within `0.05` of a
-  scaled Trump centre of that class).
+  enclosures) by `q/U`, closes it under D4, and splits a family’s weight by folded angle
+  (within `1°` of `0°` or of `40.181937°`) and by position (within `0.05` of a scaled
+  Trump centre of that class).
 
 ### Remarks proved without a run
 
-- **The `B = 1` value at `q` is at least 10** (proved). `s(10) = 3 + √2/2 < 96/25`
-  (`frontier/n-010.md`, proved), so ten closed unit squares pack in `[0, q]²`; that
-  packing is a family of value 10 with depth at most 1, whatever its angles are.
-  Hence every `B = 1` covering measure at `q` has mass at least 10, and a `B = 1`
-  certificate at `q`, if one exists, has mass in `[10, 11)`. The same holds at every
-  larger side. Nothing in this lane can lower the `B = 1` covering value below 10; the
-  question is only whether it reaches 11.
-- **Monotonicity in the shrink** (proved, one line). A family of unit squares at side
-  `L` scaled by `B` is a family of `B`-squares at side `BL`, and conversely, so
-  `ν*₁(L) = ν*_B(BL)`. The `B = 1` value at `q` is the retained-shrink value at
-  `Bq = 3.831168`, inside the band `[3.810, 3.868983]` between the retained certificate
-  frontier (T-022) and the retained shrink’s plain cap; the site LP at `191/50 = 3.82`
-  with converged rows was `11.0556` (BC-200), which is an upper bound on the finite-net
-  value there and does not decide `Bq`.
-- **What the D4-symmetric instrument can and cannot compute** (proved). A D4-symmetric
-  family disjoint from one corner box is disjoint from all four, so the symmetric loop
-  computes the four-box program; conversely a family disjoint from the four boxes is
-  disjoint from any one, so `ν*(off one box) ≥ ν*(off four boxes)`, and a kill of the
-  four-box program is a kill of the single-box program while an “alive” four-box
-  reading says nothing about one box. The corner triangle `x + y ≤ 1/2` lies in the
-  half-unit box, so `ν*(off the triangle) ≥ ν*(off the half box) ≥ ν*(off the unit
+- **The `B = 1` value at `q` is at least 10** (proved).
+  `s(10) = 3 + √2/2 < 96/25` (`frontier/n-010.md`, proved), so ten closed unit squares
+  pack in `[0, q]²`; that packing is a family of value 10 with depth at most 1, whatever
+  its angles are. Hence every `B = 1` covering measure at `q` has mass at least 10, and a
+  `B = 1` certificate at `q`, if one exists, has mass in `[10, 11)`. The same holds at
+  every larger side. Nothing in this lane can lower the `B = 1` covering value below 10;
+  the question is only whether it reaches 11.
+- **Monotonicity in the shrink** (proved, one line).
+  A family of unit squares at side `L` scaled by `B` is a family of `B`-squares at side
+  `BL`, and conversely, so `ν*₁(L) = ν*_B(BL)`. The `B = 1` value at `q` is the
+  retained-shrink value at `Bq = 3.831168`, inside the band `[3.810, 3.868983]` between
+  the retained certificate frontier (T-022) and the retained shrink’s plain cap; the
+  site LP at `191/50 = 3.82` with converged rows was `11.0556` (BC-200), which is an
+  upper bound on the finite-net value there and does not decide `Bq`.
+- **What the D4-symmetric instrument can and cannot compute** (proved).
+  A D4-symmetric family disjoint from one corner box is disjoint from all four, so the
+  symmetric loop computes the four-box program; conversely a family disjoint from the
+  four boxes is disjoint from any one, so `ν*(off one box) ≥ ν*(off four boxes)`, and a
+  kill of the four-box program is a kill of the single-box program while an “alive”
+  four-box reading says nothing about one box.
+  The corner triangle `x + y ≤ 1/2` lies in the half-unit box, so
+  `ν*(off the triangle) ≥ ν*(off the half box) ≥ ν*(off the unit
   box)`. The single-box and triangle programs have only the diagonal reflection as
   symmetry and need an instrument with sites that are not D4 orbits (BC-204’s domain
   generalisation, or the same loop with individual sites), which does not exist yet.
 
 ### The `B = 1` value at `q = 96/25`
 
-**Inputs.** `n = 11`, `outer_side = 96/25`, placements of side exactly 1;
-net = the retained `net_half_tangents(207107/500000, 180)` (half-tangent step
+**Inputs.** `n = 11`, `outer_side = 96/25`, placements of side exactly 1; net = the
+retained `net_half_tangents(207107/500000, 180)` (half-tangent step
 `h = 207107/90000000`, last direction `45.000043°`) plus `h·k/8` for `k = 1..7`
 (`0.033°` steps above `0°`) and `u_T = 228871/625725` (Trump’s `tan(a/2)` to
-`limit_denominator(10⁶)`, `40.181937°`) with `u_T ± h·k/8` for `k = 1..7`
-(`0.029°` steps): 203 directions.
+`limit_denominator(10⁶)`, `40.181937°`) with `u_T ± h·k/8` for `k = 1..7` (`0.029°`
+steps): 203 directions.
 Warm start: BC-200’s state at `191/50` (12761 sites, 9868 rows), sites and rows shifted
 by `(q − 191/50)/2 = 1/100`, the grid seed for `(96/25, 1)` added, rows remapped onto
 the merged net and clamped into the unit centre domain: 16125 initial sites in 2113 D4
 orbits, 13305 rows after the first row generation.
 `support_cap = 96`, `cap = 150` orbits per iteration, `rows_rounds = 12`,
 `rows_per_direction = 3`, row denominator `10⁶`, weight denominator `10⁹`,
-`select_above = 1.000001`, budget 30 minutes, one worker, `PACK_JOBS = 1`, load
-average 4 to 7 on four cores.
+`select_above = 1.000001`, budget 30 minutes, one worker, `PACK_JOBS = 1`, load average
+4 to 7 on four cores.
 
 **Iteration 0** (the only one that completed; the process was killed at about 05:01Z
 after saving its state, and the budget did not allow a restart): site LP objective
 `11.169805` with the row generation *not* converged (12-round cap, 1074 s), raw dual
-total `11.136308` at the sites, exact maximum depth
-`9989418081/8000000000 = 1.248677` at `(1.000547, 1.839449)` over 2877776 vertices
-(317548 above 1), depth-scaled value `8.918484`. The site LP is context: its rows did
-not converge, so it bounds nothing.
+total `11.136308` at the sites, exact maximum depth `9989418081/8000000000 = 1.248677`
+at `(1.000547, 1.839449)` over 2877776 vertices (317548 above 1), depth-scaled value
+`8.918484`. The site LP is context: its rows did not converge, so it bounds nothing.
 
 **Result (verified twice).** The value of the `B = 1` reading is the loop’s iteration-0
 depth-scaled family:
 
-    89090463224/9989418081 = 8.918484...
+```
+89090463224/9989418081 = 8.918484...
+```
 
 verified from the state bytes by `devtools.replay_ceiling_family --check`: 768
 placements, exact maximum depth exactly `1` over 2877776 vertices (3775 decided
@@ -1453,31 +1455,35 @@ exactly), total `89090463224/9989418081`, `check: reproduced` (553 s), declared 
 `square_side = 1` on the 203-direction net (`net` regime, `B = 1`, K3 fails as it must
 below 11). The polisher’s final pass verified the same bytes re-declared at
 `square_side = 9977/10000` (Condition 4: `B(1 + D) = 0.9999959 < 1`), which is the
-every-`(B, net)` statement: POLISH_VERDICT.
+every-`(B, net)` statement: `regime = unit`, `symmetric_only = True` (the 203-direction
+net’s last direction is `45.000043°`, so placements there are admissible through their
+mirror), exact maximum depth exactly `1` over 2877776 vertices (3775 decided exactly),
+total `89090463224/9989418081 = 8.918483790`, `statement: nothing: K3 total weight at
+least n` (1839 s, the polisher’s whole run).
 
 The polisher did not improve it in the one round the block allowed: on the working set
-of 12028 vertices (the 3072 corners plus every vertex above depth `0.95`) the bounded
-LP reached exactly `11.000000`, and the exact re-check found depth `4/3` at 20256
-vertices, so that round’s scaled contribution was `8.25`; the near-band of the
-candidate (`0.999`) was added and the deadline stopped the run. The number says what
-the cell needs to know about the loop: with a support of 96 orbits the site LP at
-`11.17`, the near-tight LP at `11.00` and the exactly feasible value at `8.92` are three
-different quantities, and only the last is a bound.
+of 12028 vertices (the 3072 corners plus every vertex above depth `0.95`) the bounded LP
+reached exactly `11.000000`, and the exact re-check found depth `4/3` at 20256 vertices,
+so that round’s scaled contribution was `8.25`; the near-band of the candidate (`0.999`)
+was added and the deadline stopped the run.
+The number says what the cell needs to know about the loop: with a support of 96 orbits
+the site LP at `11.17`, the near-tight LP at `11.00` and the exactly feasible value at
+`8.92` are three different quantities, and only the last is a bound.
 
 The value is a lower bound on the `B = 1` fractional packing value at `q` and on the
 mass of every covering measure any `(B, net)` could use there and at every larger side.
 The proved floor is `10` (remark above), above it; so this family measures how far the
 loop is from the truth at `q` after one iteration, not the truth.
 
-**Weight split against Trump’s placements** (`trump_split.py` on the same bytes;
-Trump’s pose scaled by `q/U = 0.990435`, D4-closed; angle band `1°`, centre radius
-`0.05`): of the total `8.918484`, `3.224868` lies within `1°` of the axis directions,
-`0.026704` within `1°` of `40.181937°`, and `5.666911` at other angles (the mass sits
-at `1°`, `13°`, `25°` to `36°` and `41°` to `44°`: the family is diffuse, not
-Trump-shaped); `2.991038` lies inside Trump’s neighbourhood (angle band and centre
-within `0.05` of a D4 image of a scaled Trump centre) and `5.927446` outside it.
-Lemma D2 would need `≥ 11` in total with `≥ 1` outside; the outside weight is there
-five times over, the total is not.
+**Weight split against Trump’s placements** (`trump_split.py` on the same bytes; Trump’s
+pose scaled by `q/U = 0.990435`, D4-closed; angle band `1°`, centre radius `0.05`): of
+the total `8.918484`, `3.224868` lies within `1°` of the axis directions, `0.026704`
+within `1°` of `40.181937°`, and `5.666911` at other angles (the mass sits at `1°`,
+`13°`, `25°` to `36°` and `41°` to `44°`: the family is diffuse, not Trump-shaped);
+`2.991038` lies inside Trump’s neighbourhood (angle band and centre within `0.05` of a
+D4 image of a scaled Trump centre) and `5.927446` outside it.
+Lemma D2 would need `≥ 11` in total with `≥ 1` outside; the outside weight is there five
+times over, the total is not.
 
 **Sub-restrictions of the same family** (`subrestrict.py`, exact): disjoint from one
 unit corner box `76291493608/9989418081 = 7.637231`; from the four corner boxes
@@ -1491,54 +1497,54 @@ order of one square, as D4 read off BC-200 (`9.91 → 8.87`).
 
 **Inputs common to the restricted runs.** `n = 11`, `outer_side = 96/25`,
 `square_side = B = 9977/10000`, the retained 181-direction net
-(`net_half_tangents(207107/500000, 180)`); warm start BC-200’s state at `191/50`
-shifted by `1/100` with the grid seed for `(96/25, B)` added; carried rows meeting the
-region dropped exactly before the first solve; `support_cap = 96`, `cap = 150`,
-`rows_rounds = 6` (12 did not fit the budget under load), `rows_per_direction = 3`
-after the filter with `survey = 12` cells surveyed per direction, phantom points of
-weight 1000 at spacing `1/16` filling the region, row denominator `10⁶`, weight
-denominator `10⁹`, `select_above = 1.000001`, one worker, `PACK_JOBS = 1`.
-The driver asserts exact disjointness of every placement of every family it judges,
-so a family it reports is disjoint from the region by construction and by check.
+(`net_half_tangents(207107/500000, 180)`); warm start BC-200’s state at `191/50` shifted
+by `1/100` with the grid seed for `(96/25, B)` added; carried rows meeting the region
+dropped exactly before the first solve; `support_cap = 96`, `cap = 150`,
+`rows_rounds = 6` (12 did not fit the budget under load), `rows_per_direction = 3` after
+the filter with `survey = 12` cells surveyed per direction, phantom points of weight
+1000 at spacing `1/16` filling the region, row denominator `10⁶`, weight denominator
+`10⁹`, `select_above = 1.000001`, one worker, `PACK_JOBS = 1`. The driver asserts exact
+disjointness of every placement of every family it judges, so a family it reports is
+disjoint from the region by construction and by check.
 
-- **Four corner boxes** `[0,1]² ∪ [q−1,q]×[0,1] ∪ [0,1]×[q−1,q] ∪ [q−1,q]²`:
-  1156 phantom points; 5322 of the 9868 carried rows are disjoint from the union;
-  16285 initial sites in D4 orbits; 26-minute budget from 05:02Z.
+- **Four corner boxes** `[0,1]² ∪ [q−1,q]×[0,1] ∪ [0,1]×[q−1,q] ∪ [q−1,q]²`: 1156
+  phantom points; 5322 of the 9868 carried rows are disjoint from the union; 16285
+  initial sites in D4 orbits; 26-minute budget from 05:02Z.
 
   The loop ran three iterations in 1735 s (iteration 2 cut by the deadline in its row
-  generation): sites 16285 → 17485 → 18633, rows 7320 → 8076 → 8241 (no snapped row
-  was dropped by the exact re-test), site LP `7.324503`, `7.142857`, `7.142857`, none
-  with converged rows (6-round cap, then the deadline), raw duals `7.3245`, `7.1340`,
+  generation): sites 16285 → 17485 → 18633, rows 7320 → 8076 → 8241 (no snapped row was
+  dropped by the exact re-test), site LP `7.324503`, `7.142857`, `7.142857`, none with
+  converged rows (6-round cap, then the deadline), raw duals `7.3245`, `7.1340`,
   `7.1429`, exact maximum depths `1.429636`, `1.155661`, `1.162935`, scaled values
   `5.123335`, `6.173135`, `6.142096`. The best in-loop floor is iteration 1’s
   `28536196648/4622642825 = 6.173135` over 3135372 vertices; its polished value is
-  `57599999944/9199999991 = 6.260870`, verified below. The site LP at `7.14` with unconverged rows is context only: the filtered
-  oracle had not finished pricing the restricted placements, so nothing bounds the
-  restricted value from above in this block.
-  **Verified:** the loop’s own `verify_ceiling` on the iteration-1 family from its bytes:
-  exact maximum depth exactly `1` over 3135364 vertices, total
-  `28536196648/4622642825 = 6.173135`, `net` regime at `B = 9977/10000` on the
-  retained net (K3 fails, as it must below 11; the family is a floor, not a ceiling).
-  `subrestrict.py` on the same bytes: the weight disjoint from any one corner box,
-  from the half box and from the corner triangle is the whole `6.173135` (it is
-  disjoint from all four boxes by construction), and `3.412321` of it is also disjoint
-  from the central box.
-  **Polished (verified):** one polisher round on the same support (working set 4052
-  vertices above `0.95` plus the corners; the LP reached `7.2` and the exact re-check
-  found depth `1.15`, so the round's scaled candidate is kept) gives value
+  `57599999944/9199999991 = 6.260870`, verified below.
+  The site LP at `7.14` with unconverged rows is context only: the filtered oracle had
+  not finished pricing the restricted placements, so nothing bounds the restricted value
+  from above in this block.
+  **Verified:** the loop’s own `verify_ceiling` on the iteration-1 family from its
+  bytes: exact maximum depth exactly `1` over 3135364 vertices, total
+  `28536196648/4622642825 = 6.173135`, `net` regime at `B = 9977/10000` on the retained
+  net (K3 fails, as it must below 11; the family is a floor, not a ceiling).
+  `subrestrict.py` on the same bytes: the weight disjoint from any one corner box, from
+  the half box and from the corner triangle is the whole `6.173135` (it is disjoint from
+  all four boxes by construction), and `3.412321` of it is also disjoint from the
+  central box. **Polished (verified):** one polisher round on the same support (working
+  set 4052 vertices above `0.95` plus the corners; the LP reached `7.2` and the exact
+  re-check found depth `1.15`, so the round’s scaled candidate is kept) gives value
   `57599999944/9199999991 = 6.260870`, verified by `verify_ceiling` from its bytes:
   exact maximum depth exactly `1` over 3135364 vertices (26265 decided exactly), `net`
-  regime at `B = 9977/10000`, `symmetric_only`; the support is the loop's, so every
+  regime at `B = 9977/10000`, `symmetric_only`; the support is the loop’s, so every
   placement is exactly disjoint from the four boxes.
 
 ### Classification
 
-Thresholds are the cell’s: `B = 1` kills at `≥ 11` with a unit of weight outside
-Trump’s neighbourhood; a restricted region kills at `≥ 10`, is alive below `9.5`, and is
+Thresholds are the cell’s: `B = 1` kills at `≥ 11` with a unit of weight outside Trump’s
+neighbourhood; a restricted region kills at `≥ 10`, is alive below `9.5`, and is
 undecided otherwise or when no converged covering LP bounds it from above.
 Every lower bound below is the value of a family verified from its bytes by
-`verify_ceiling`; every upper-bound column is empty because no row generation
-converged in the block.
+`verify_ceiling`; every upper-bound column is empty because no row generation converged
+in the block.
 
 | Region at `q = 96/25` | Placements | Verified lower bound (family, regime) | Upper bound | Classification |
 | --- | --- | --- | --- | --- |
@@ -1557,67 +1563,70 @@ an admissible restricted family of the same weight and no greater depth.
 ### What the readings say about the routes, BC-204 and H-129
 
 - **No kill at `q` at this depth of search, on either side.** The best verified `B = 1`
-  family at `96/25` has value `8.918484`, against the kill threshold 11, and the
-  best verified family off the four corner boxes has value `6.260870`, against
-  10. Both are lower bounds, both are far from their thresholds, and neither says the
-  threshold is unreachable: the site LPs above them (`11.17` unconverged at `B = 1`,
-  `7.14` unconverged off the corners) bound nothing, and the proved floor `ν*₁(q) ≥ 10`
-  leaves the `B = 1` question open in both directions.
+  family at `96/25` has value `8.918484`, against the kill threshold 11, and the best
+  verified family off the four corner boxes has value `6.260870`, against 10. Both are
+  lower bounds, both are far from their thresholds, and neither says the threshold is
+  unreachable: the site LPs above them (`11.17` unconverged at `B = 1`, `7.14`
+  unconverged off the corners) bound nothing, and the proved floor `ν*₁(q) ≥ 10` leaves
+  the `B = 1` question open in both directions.
 - **Routes (b) and (c) survive this block, untested rather than confirmed.** Lemma D2
   would kill every capture design and route (c) with a `B = 1` family of value `≥ 11`
   carrying a unit of weight away from Trump’s placements; the family found carries
-  `5.927446` outside Trump’s neighbourhood and `2.991038` inside it (angle
-  bands: `3.224868` within `1°` of `0°`, `0.026704` within `1°` of `40.18°`), so
-  the *shape* of a would-be kill is diffuse and not Trump-like, but its value is not
-  there. Route (b)’s premise — that integer-hull cuts must push the fractional value
-  below 11 — is neither confirmed nor refuted at `q`; boxing one corner removes `1.28` of
+  `5.927446` outside Trump’s neighbourhood and `2.991038` inside it (angle bands:
+  `3.224868` within `1°` of `0°`, `0.026704` within `1°` of `40.18°`), so the *shape* of
+  a would-be kill is diffuse and not Trump-like, but its value is not there.
+  Route (b)’s premise — that integer-hull cuts must push the fractional value below 11 —
+  is neither confirmed nor refuted at `q`; boxing one corner removes `1.28` of
   fractional weight from the best `B = 1` family and all four remove `5.13`
-  (sub-restriction), while the loop run *on* the four-box program keeps `6.17`
-  (polished `6.260870`); one box costs the order of one square, as Section 1.6 D4
-  read off BC-200, and four cost more than four because the family’s mass is in the
-  corners.
+  (sub-restriction), while the loop run *on* the four-box program keeps `6.17` (polished
+  `6.260870`); one box costs the order of one square, as Section 1.6 D4 read off BC-200,
+  and four cost more than four because the family’s mass is in the corners.
 - **BC-204 is not yet worth building for corner conditioning.** The single-box and
   triangle programs would need it; the four-box program, which the symmetric loop
-  computes, sits at a floor of `6.260870` with an unconverged LP at `7.14`, and
-  until a converged restricted LP or a polished family above `9.5` exists the
-  instrument has no threshold to aim at. What is worth building first is the polisher
-  as an instrument step of the loop (the scaled-versus-polished gap below is the
-  measurement), and an unloaded run of the `B = 1` loop to convergence at `q`.
+  computes, sits at a floor of `6.260870` with an unconverged LP at `7.14`, and until a
+  converged restricted LP or a polished family above `9.5` exists the instrument has no
+  threshold to aim at.
+  What is worth building first is the polisher as an instrument step of the loop (the
+  scaled-versus-polished gap below is the measurement), and an unloaded run of the
+  `B = 1` loop to convergence at `q`.
 - **H-129.** The claim (no `B = 1` family of value `≥ 11` up to `3.87`) is neither
-  refuted (no family reached 11 at `3.84`, the easiest of its three sides) nor
-  supported at the exit’s standard (no converged covering LP below 11 at `3.87`, nor at
-  `3.84` where the unconverged site LP was `11.17`). Recommended status: `open`, with
-  this block’s reading recorded as “`B = 1` at `3.84`: verified `≥ 8.918484`, proved
-  `≥ 10`, site LP `11.17` unconverged; `3.86` and `3.87` not started”.
+  refuted (no family reached 11 at `3.84`, the easiest of its three sides) nor supported
+  at the exit’s standard (no converged covering LP below 11 at `3.87`, nor at `3.84`
+  where the unconverged site LP was `11.17`). Recommended status: `open`, with this
+  block’s reading recorded as “`B = 1` at `3.84`: verified `≥ 8.918484`, proved `≥ 10`,
+  site LP `11.17` unconverged; `3.86` and `3.87` not started”.
 
 ### Obstructions met in the block
 
-- **The loop’s scaling step is the bottleneck, not the LP.** At 16125 sites the site
-  LP was `11.17` and the raw dual `11.14`, but one vertex at depth `1.2487` cut the
-  family to `8.92`. Re-optimising the weights on the fixed support against exact
-  vertices (the polisher) is the missing step between the loop’s two numbers; its
-  first attempt found the LP unbounded because an orbit none of whose images passes
-  through a near-tight vertex has no constraint at all, and the fix is structural:
-  every placement’s corners are vertices of the arrangement, so seeding the working
-  set with all of them gives every orbit its own row `w_e/8 ≤ 1`.
+- **The loop’s scaling step is the bottleneck, not the LP.** At 16125 sites the site LP
+  was `11.17` and the raw dual `11.14`, but one vertex at depth `1.2487` cut the family
+  to `8.92`. Re-optimising the weights on the fixed support against exact vertices (the
+  polisher) is the missing step between the loop’s two numbers; its first attempt found
+  the LP unbounded because an orbit none of whose images passes through a near-tight
+  vertex has no constraint at all, and the fix is structural: every placement’s corners
+  are vertices of the arrangement, so seeding the working set with all of them gives
+  every orbit its own row `w_e/8 ≤ 1`.
 - **One iteration is what thirty minutes buys on a shared core.** Iteration 0 of the
   `B = 1` loop cost 23 minutes (18 of them row generation at 203 directions and 12
-  rounds); the process was then killed at about 05:01Z by something outside the
-  driver (exit 144, memory free), so the `B = 1` reading rests on one iteration’s
-  support. BC-200 needed nine iterations at `191/50` to reach `9.91`; a lane that
-  wants the loop’s own value to converge needs an unloaded core and hours, which is
-  the planning lane’s estimate and not this block’s.
+  rounds); the process was then killed at about 05:01Z by something outside the driver
+  (exit 144, memory free), so the `B = 1` reading rests on one iteration’s support.
+  BC-200 needed nine iterations at `191/50` to reach `9.91`; a lane that wants the
+  loop’s own value to converge needs an unloaded core and hours, which is the planning
+  lane’s estimate and not this block’s.
 - **The polisher’s working set must be near-tight, not wide.** A band of `0.5` on the
   scaled family selected 2204492 of the 2877776 vertices; the exact screen alone took
   1731 s under load and the constraint build was killed by the memory cgroup at 10 GB
-  (`dmesg`: `Memory cgroup out of memory: Killed process ... anon-rss:9998976kB`).
-  A band of `0.95` selects about nine thousand, which with the 3072 corners is the
-  right first working set; the violated vertices of each round then add what the LP
-  needs. Two of the block’s 2.5 hours went to learning this.
+  (`dmesg`: `Memory cgroup out of memory: Killed process ... anon-rss:9998976kB`). A
+  band of `0.95` selects about nine thousand, which with the 3072 corners is the right
+  first working set; the violated vertices of each round then add what the LP needs.
+  Two of the block’s 2.5 hours went to learning this.
 
 ### Appendix — scripts as run (lane scratchpad `scratchpad/lane-294/`)
 
-All scripts were run from `packing/` with the project venv (Python 3.14), `PYTHONPATH=.` for the one that imports `cases`, `PACK_JOBS=1`; the frozen families and states they wrote are beside them. Fences are `text` because the lint floor formats Python fences in Markdown.
+All scripts were run from `packing/` with the project venv (Python 3.14), `PYTHONPATH=.`
+for the one that imports `cases`, `PACK_JOBS=1`; the frozen families and states they
+wrote are beside them.
+Fences are `text` because the lint floor formats Python fences in Markdown.
 
 #### `unit_loop.py`
 
