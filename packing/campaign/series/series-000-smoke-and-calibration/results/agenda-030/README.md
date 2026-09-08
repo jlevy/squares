@@ -26,8 +26,13 @@ are reconciled.
 
 Each research lane of Agenda 030 writes one document here, named for the lane, and
 nothing else in this directory.
-The coordinator registers each new document in `docs/project/document-map.yaml` and
-re-renders the map at integration.
+
+- Lane E, BC-302 (H-134):
+  [A robust unavoidable set of at most eleven marks at 96/25](lane-e-ownership-set-at-q.md)
+  — ten horizontal segments of length 1/10 at Stromquist’s points are certified
+  unavoidable within 3/500 by an exact interval reader; every point set tested has an
+  exact escape. The coordinator registers each new document in
+  `docs/project/document-map.yaml` and re-renders the map at integration.
 
 - [Lane F, the exactly-eleven plateau at `191/50`](lane-f-plateau-at-3-82.md) (BC-297,
   H-133): Trump’s clamped cores are not site-free on any reconstructible site set; the
