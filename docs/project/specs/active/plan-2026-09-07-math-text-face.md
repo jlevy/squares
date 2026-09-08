@@ -11,23 +11,24 @@ status: active
 
 **Status:** The serif integration merged as
 [squares #114](https://github.com/jlevy/squares/pull/114). The sans adoption and loading
-fixes are being integrated through
-[squares #128](https://github.com/jlevy/squares/pull/128). Local Chromium, Firefox, and
-WebKit checks cover delayed fonts, caption faces, early input, and the no-JavaScript
-fallback; upstream CI and deployment remain merge gates.
-The shared runtime merged in [kpress #59](https://github.com/jlevy/kpress/pull/59),
-pinned here at `a265d553`.
+fixes are implemented in [squares #128](https://github.com/jlevy/squares/pull/128).
+Local Chromium, Firefox, and WebKit checks cover delayed fonts, caption faces, early
+input, and the no-JavaScript fallback.
+The shared runtime and missing-stylesheet fallback merged in
+[kpress #59](https://github.com/jlevy/kpress/pull/59) and
+[kpress #60](https://github.com/jlevy/kpress/pull/60), with all upstream checks passing.
+This repository pins their merged source at `7b20ae70`.
 
 **Workflow entry:** feature implementation from spec.
 **Tracking:** epic `think-rk9v`; squares tasks `think-58av` (integration, closed),
-`think-do8b` (devtool, closed) and `think-0vju` (verification, with local WebKit and
-Firefox checks complete and final integrated CI pending).
+`think-do8b` (devtool, closed) and `think-0vju` (browser and PDF verification).
 The font epic `think-phgo` carries the rest: `think-n4y7` (sans math), `think-q5df`
 (paint once) and `think-9r58` (marker, quotes, mono).
 The 2026-09-08 review follows W7, pipeline improvement, under `think-z7ab`, with
 `think-r54y` for the visible native fallback, `think-ysjq` for shared rendering
 readiness, `think-3xrc` for browser gates, and `think-h31m` for CI integration.
 `think-7r2x` covers stock-font opt-outs inside sans ancestors and footnote previews.
+`think-ws53` covers matching stock metrics when custom font declarations are absent.
 The feature itself is tracked in kpress’s own tbd as epic `kpr-sc4f`, with sans math
 shipped through `kpr-7f9z`. Greek sizing, deferred as `kpr-c2tr` when this plan was
 written, shipped inside the kpress feature and that bead is closed.
@@ -454,6 +455,8 @@ After release it checks final readouts and font status, then repeats with JavaSc
 disabled to verify readable fallback content.
 The Pages workflow runs the loading check in Chromium, Firefox, and WebKit, and requires
 those jobs before deployment.
+Both font checkers accept the deployed page URL as well as local HTML, so the same
+loading and actual-face probes can verify the published artifact.
 These are controlled readiness tests, not measurements of network download speed or a
 claim that every source of page layout shift has been eliminated.
 
@@ -485,6 +488,22 @@ Native MathML was also visible before enhancement, producing a native-to-KaTeX c
 even when the first KaTeX insertion had loaded fonts.
 The old insertion check could pass while those paths were still visible.
 The shared runtime and delayed-font browser checks cover those paths together.
+
+The final review also reproduced a missing-stylesheet failure in KPress: its custom
+metric tables could remain selected while the browser drew stock KaTeX glyphs.
+KPress #60 selects stock families and their original metrics together when a composite
+family has no registered declarations, independently for serif and sans contexts.
+A declared face that fails to load preserves the semantic fallback when the formula
+requires it; an unused failed weight does not discard otherwise usable custom math.
+Browser regressions cover both cases with actual missing font files.
+
+The integration preserves the work merged in Squares #120 and includes the CI repairs
+from #122 and #123. The full checkpoint runs the slow lane, exhaustive tests, and
+translation screen in separate jobs, with the remaining checks in a fourth job.
+The workflow guards resolve the commands through the validator and require complete,
+non-overlapping coverage.
+The CI defect is recorded as D-484; the numerical source and earlier defect records from
+#120 remain intact.
 
 Tracked under epic `think-phgo`, with the kpress work under `kpr-b4mq`:
 
