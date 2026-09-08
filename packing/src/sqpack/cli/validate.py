@@ -2357,7 +2357,9 @@ def _session_rollups(context: Context) -> str:
 def _session_gate(context: Context) -> str:
     """A terminal session names the gate run that certified its handover (`OR-13`).
 
-    Sub-second: frontmatter, one regex, and two `git` calls per declaration. Records tier
+    A few seconds at most: frontmatter, one regex, two `git` calls per declaration, and
+    one `tbd show` per pending record where `tbd` is installed (about 2.6s for the one
+    pending record today; sub-second without it). Records tier
     and therefore on every pull request, which is the point -- `OR-13` says every fast
     check runs in CI, and a rule about the gate that only the gate's slow surface enforces
     is a rule a branch can be green against for its whole life.
