@@ -15787,15 +15787,20 @@ defects:
     ceiling behind it.
     Measured after, slow lane: the same 97 tests pass under xdist and cost 718.52s at four
     workers against 1020.77s serially on the same box, a 1.42x rather than the 4x the
-    worker count suggests. Measured after, screen: 944s at four workers on run 34188003140,
-    the first hosted run of the split job. That is past the old 900s cap, so the budget
-    raise was load-bearing rather than precautionary -- splitting the job alone would have
-    produced a red gate on the split's first run. It also refutes the 613-846s this entry
-    first predicted from the slow lane's 1.42x, which was optimistic. It does not support
-    the reverse claim that four workers are slower than two: the 858.62s it would be
-    compared against came from a different, faster runner. One reading per configuration is
-    a sample (D-472), and neither step scales with its worker count for reasons left open
-    on think-ph9v.
+    worker count suggests. Measured after, screen: two hosted readings of the split job,
+    944s on run 34188003140 and 861s on run 34189176373, a 1.10x spread with a geometric
+    mean of 901.5s. That mean is 1.0017x the old 900s cap, so the step's central estimate
+    sits within a second of the cap it had been running under: at 900 it fails about half
+    the time and the runner picks which half. The budget raise was therefore load-bearing
+    rather than precautionary, and splitting the job without it would have bought a
+    differently-shaped coin flip instead of a fix. 1800 is 1.9966x the mean, just inside
+    the max_headroom 2.0 rule gate-budgets.yaml applies to every tier; it was chosen before
+    the second reading existed, so the rule endorses the number rather than having produced
+    it. All of this refutes the 613-846s this entry first predicted from the slow lane's
+    1.42x, which was optimistic; it does not support the reverse claim that four workers
+    are slower than two, since the 858.62s comparison came from a different, faster runner.
+    What is established is that neither step scales with its worker count, left open on
+    think-ph9v.
   regression: >-
     packing/tests/test_validation_cli.py::test_the_post_merge_jobs_partition_the_gate
     resolves all three post-merge commands through the CLI's own selector and requires
