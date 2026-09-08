@@ -77,17 +77,20 @@ dev = [
     # that floor runs, which is this group.
     #
     # Unpinned here because there is no version to pin: kpress is not resolved
-    # from an index. It is vendored as a git submodule at `vendor/kpress`, on the
-    # branch `squares/page-fixes` cut from v0.3.5, and installed from that path by
-    # the `[tool.uv.sources]` entry below. What is installed is exactly the tree
+    # from an index. It is vendored as a git submodule at `vendor/kpress`, on
+    # kpress's own `main`, and installed from that path by the
+    # `[tool.uv.sources]` entry below. What is installed is exactly the tree
     # the gitlink names, so the submodule commit is the pin, and `.gitmodules`
-    # plus the gitlink record it. The branch carries the two typographic fixes
-    # this page needs -- KaTeX math sized to kpress's PT Serif rather than to
-    # KaTeX's Times-tuned 1.21em default, and footnotes on the small size token
-    # instead of a compounding 0.9em.
-    # It also carries the math text face: the letters and digits of mathematics
-    # drawn from PT Serif with matching KaTeX metrics and KaTeX's Greek scaled to
-    # them (`vendor/kpress/docs/math-text-face.plan.md`), on by default.
+    # plus the gitlink record it. The fixes this page needs were cut on
+    # `squares/page-fixes` from v0.3.5 and have all landed upstream since:
+    # KaTeX math sized to kpress's PT Serif rather than to KaTeX's Times-tuned
+    # 1.21em default, footnotes on the small size token instead of a compounding
+    # 0.9em, the math text face (mathematics's letters and digits drawn from PT
+    # Serif with matching KaTeX metrics and KaTeX's Greek scaled to them,
+    # `vendor/kpress/docs/math-text-face.plan.md`), the CSS-drawn list marker,
+    # the shipped `KPress Quotes` marks, and the mono face this page sets its
+    # code in (`Planetaire Mono Text`; the settings behind it are `mono_font` and
+    # `mono_weights`, and `devtools/render_explainer.py` records which it takes).
     #
     # The 14-day cool-off in `tbd guidelines supply-chain-hardening` guards
     # against a compromised upload of a package this project does not control.
