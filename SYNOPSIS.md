@@ -3635,6 +3635,15 @@ and checked in the gate.
 | robustness | 61 | did not finish, or finished only by luck |
 | performance | 18 | worked, but cost far more than it should |
 
+One entry is filed under a class it only half fits, and the table reads accordingly.
+[D-481](defects.md) carries two defects with a single cause: an escape screen that
+finished only when the runner was kind, which is `robustness`, and a behavioural lane
+that completed but cost 1020.77 s where 718.52 s was available, which is `performance`
+in [D-456](defects.md)’s sense.
+It is filed as `robustness`, for the half that took `main` red, so the `performance` row
+here reads one low. The entry names that call rather than leaving it implicit; the
+alternative was two ids sharing every other field.
+
 Two observations the log exists to make.
 
 **Seventy-eight of the ninety-eight soundness defects pointed in the *flattering*
