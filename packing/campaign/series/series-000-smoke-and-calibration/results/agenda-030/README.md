@@ -40,6 +40,12 @@ nothing else in this directory.
   tight-cell census of the one exactly decided measure is recorded as the obstruction to
   the exact cover.
 
+- [BC-303, the first-wave selection](bc-303-first-wave-selection.md) (session-107):
+  independent replays of Theorem E.4 (a second interval reader: agrees at both
+  constants, decides the 8/100 segments too), the corner-pair theorem (agrees) and
+  Theorem C (agrees to the fraction); the selection funds the segment cover toward
+  ownership and the `B = 1` depth polisher, and states the claim to freeze.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
