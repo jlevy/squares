@@ -84,8 +84,9 @@ quality.*
 
 This lower bound is one of {{N_RESULTS}} results the framework has registered so far,
 {{N_NOVEL}} of them apparently new.
-The atlas of best known packings for every $n$ from 1 to 100 in Figure 2 comes from the
-same research agenda and currently includes {{N_STARRED}} new lower bounds.
+These include improved lower bounds for $n = 12$, $17$, and $19$.[^other-results] The
+atlas of best known packings for every $n$ from 1 to 100 in Figure 2 comes from the same
+research agenda and currently includes {{N_STARRED}} new lower bounds.
 
 The repository includes a comprehensive survey of previous research, the atlas of
 packings, a hypothesis registry, an experiment ledger, exact verifiers, and a retention
@@ -691,6 +692,11 @@ The one-file checker [`minimal_verify.py`]({{PINNED_VERIFIER_URL}}) verifies the
     2–4, credits Mats Gustafsson and Magnus Thulin with the same construction, reported
     by Gardner in November 1980; the research archive records their independent
     rediscovery.
+
+[^other-results]: The [result register]({{RESULTS_URL}}) records $s(12) \ge 3.96$
+    (`T-017`), $s(17) \ge 4.59$ (`T-019`), and $s(19) \ge 4.80$ (`T-020`), each
+    supported by a retained weighted-point certificate and classified as apparently
+    novel.
 
 [^burns]: Sam Burns,
     [Proposing a Better Lower Bound for n=17 Square Packing](https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/),

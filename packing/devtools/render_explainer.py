@@ -1538,6 +1538,7 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "DEFAULT_CERT_URL": repo_file(default.source),
         "N_RESULTS": str(registered_results()),
         "N_NOVEL": str(novel_results()),
+        "RESULTS_URL": repo_file(PACKING / "frontier/RESULTS.md"),
         "N_STARRED": str(starred_lower_bounds()),
         "SOURCE_URL": MARKDOWN_OUTPUT.name,
         "REPO_URL": REPO_URL,
