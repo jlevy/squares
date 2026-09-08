@@ -2936,11 +2936,11 @@ STEPS: tuple[Step, ...] = (
     # claimed against the shared 900s cap was not margin, and the control for that is one
     # commit run twice: on `831697c0` the step finished at 858.62s on post-merge run
     # 34176106076 and was killed at the cap an hour later on deep-gate run 34177317419 --
-    # the same code, two runners, opposite verdicts, and the surviving one 41s from red.
+    # the same code, different runners and job selections, opposite verdicts, and the
+    # surviving one 41s from red. The runner and composition effects are confounded.
     # (Run 34172652457 was killed at the cap as well, at 901.00s, but on commit
-    # `28696526`: a second sighting rather than the control.) A step that decides main's
-    # colour by which runner it draws is not budgeted, and `D-472` is the entry that says
-    # why one reading was never enough to conclude otherwise.
+    # `28696526`: another timeout.) `D-472` is why one passing reading with that margin
+    # cannot establish a reliable budget.
     #
     # What the job buys is workers rather than time: the screen is a process pool sized by
     # `PACK_JOBS`, so beside the rest of the gate at `--inner-jobs 2` it gets two, and

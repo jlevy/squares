@@ -153,15 +153,15 @@ jobs:
     # have each of them fan out again." The lane was one process before it had xdist,
     # which is where the three came from.
     #
-    # It stays at 2 and 2, because the one reading of this exact shape passed and nothing
-    # in it came near a cap. Run 34190285360: job wall 1451.27s, of which the slow lane
+    # It stays at 2 and 2 because the one reading of this exact shape passed.
+    # Run 34190285360: job wall 1451.27s, of which the slow lane
     # was 1212.70s against its 1800s budget, `negative controls` 685.71s, the atlas
     # rebuild 653.91s against the shared 900s cap, the n=40 bracket 198.98s and the grid
-    # replay 39.59s. One run, so `D-472` applies. It is visibly a contended one -- the
-    # lane's 1212.70s here is above the 1020.77s it costs serially on an idle four-cpu
-    # box, which is contention showing rather than xdist failing -- and it still cleared
-    # every cap. Oversubscription that is real as arithmetic and unobserved as a failure
-    # is a note, not a change.
+    # replay 39.59s. The atlas has the smallest margin, 246s. One run, so `D-472`
+    # applies. The lane's 1212.70s here and 1020.77s serially on a development box
+    # differ in runner and job composition as well as worker count; they do not isolate
+    # the cost of contention. The observed pass leaves the flags in place pending a
+    # comparison at the same runner shape.
     #
     # The obvious change is the expensive one to guess at. `--inner-jobs 1` would take the
     # atlas rebuild from two workers to one, and that step declares no `budget_seconds`,
@@ -303,23 +303,18 @@ jobs:
     # so beside the five other deferrals at `--inner-jobs 2` it gets two workers and
     # alone at `--inner-jobs 4` it gets four.
     #
-    # Run 34177317419 is why this job exists rather than only the budget raise. It killed
-    # the screen at the shared 900s cap on commit 831697c0 -- the same commit whose
-    # post-merge run 34176106076 had finished the same step at 858.62s an hour earlier on
-    # a faster runner. A pre-merge gate that fails on a coin flip teaches people to
-    # re-run it, which is the one habit it cannot afford: the deep gate exists to be
-    # believed the first time.
+    # Run 34177317419 killed the screen at the shared 900s cap on commit 831697c0.
+    # Post-merge run 34176106076 finished the same code at 858.62s an hour earlier.
+    # The runners and job selections differed, so those readings do not isolate the
+    # cause of the variance. This job gives the pre-merge gate the same screen command
+    # and pool allocation as the post-merge gate.
     #
-    # What the split costs is measured on the post-merge `screen` job, which is this
-    # job's shape exactly: 944s on run 34188003140, 861s on run 34189176373 and 949s on
-    # run 34190285360 -- spread 1.10x, geometric mean 917.09s, and two of the three above
+    # This deep-gate job has three hosted readings, also used as the proxy for the
+    # post-merge job's identical shape: 944s on run 34188003140, 861s on run 34189176373
+    # and 949s on run 34190285360 -- spread 1.10x, geometric mean 917.09s, two of three above
     # the 900s cap this step no longer runs under (`SCREEN_BUDGET_SECONDS` is 1800s). The
     # one local reading, 794.5s at four workers on a four-cpu development box, is the
     # number to argue from least: the hosted runs sit 1.08x to 1.19x above it.
-    #
-    # Keeping it beside the others would also make the deep gate slower than the
-    # post-merge gate it is meant to pre-empt, which is backwards for a check a pull
-    # request waits on.
     if: >-
       github.event_name == 'workflow_dispatch'
       || contains(github.event.pull_request.labels.*.name, 'deep-gate')

@@ -229,14 +229,27 @@ test satisfies exactly one, so no test can be in two lanes and none can be in ze
 
 | Lane | Marker | Tests | Runs in | Bound |
 | --- | --- | ---: | --- | --- |
-| quick | neither | 2,197 | PR fast surface | fails a test whose `call` phase reaches 12 s |
-| slow | `slow` | 95 | full checkpoint, under xdist | fails a test whose `call` phase is under 1 s |
+| quick | neither | 3,944 | PR fast surface | fails a test whose `call` phase reaches 12 s |
+| slow | `slow` | 97 | full checkpoint, under xdist in CI | fails a test whose `call` phase is under 1 s |
 | exhaustive | `exhaustive_exact` | 55 | its own CI job | its own 3600 s budget |
 
-Counts are from
-[main run 34025346801](https://github.com/jlevy/squares/actions/runs/34025346801), not
-fixed test membership.
-The marker expressions determine current membership.
+Counts are a `--collect-only` of the three marker expressions on 2026-09-08, against the
+n = 1..324 corpus.
+They sum to the 4,096 tests the suite collects, which is the partition
+property above; they are not a fixed membership, and they move with the corpus.
+[Main run 34025346801](https://github.com/jlevy/squares/actions/runs/34025346801)
+reported 2,197 quick and 95 slow on 2026-09-06, before the corpus expansion of
+2026-09-07. The marker expressions determine current membership.
+
+**The slow lane’s xdist is conditional on the shape it is run in.** Both lanes size
+their workers as `cpus - jobs + 1`, so the two CI jobs that carry the slow lane run it
+at three workers on four cpus, while `packing-validate` with no `--jobs` defaults jobs
+to the cpu count, leaves one worker, and runs the lane in a single process exactly as it
+did before [D-481](defects.md).
+The change bites only where `--jobs` is below the cpu count, so the default local full
+gate is unimproved. The 718.52 s against 1020.77 s that argued for it was measured at
+four workers, a shape no gate runs; at three workers on a contended box the same tests
+were 795.11 s, about 1.28x.
 
 **Both bounds are enforced, in opposite directions.** A quick test that grows past the
 ceiling fails the pull request in the week it grows; a deferred test that drops below
@@ -478,12 +491,18 @@ checkpoint on Linux in three jobs: `validate` runs everything except the two ste
 below, `exhaustive` runs the exhaustive exact tests, and `screen` runs the whole
 single-square translation escape screen.
 The two solo jobs are solo for different reasons.
-`exhaustive` is a verdict split ([D-456](defects.md)): at 1943 s it had been half the
-surface’s wall, and killed at its budget it reported nothing about the sixty steps
-beside it. `screen` is a worker split ([D-481](defects.md)): the step is embarrassingly
-parallel, so the only thing that moves its wall is the worker count, and beside the rest
-of the gate at `--inner-jobs 2` it gets two.
-macOS runs four portability checks.
+`exhaustive` is a verdict split, carried as `think-tr2z`: the tier was 1943 s of the
+complete surface’s 2755 s wall, just over seventy per cent of it, and killed at its
+budget it reported nothing about the sixty steps beside it.
+That kill is [D-456](defects.md), which re-measured the tier at 2036 s on four cores and
+raised its budget rather than splitting it.
+`screen` is a worker split ([D-481](defects.md)): the step is a process pool sized by
+`PACK_JOBS`, and beside the rest of the gate at `--inner-jobs 2` it gets two of the
+runner’s four. What the other two workers buy is not established.
+The three hosted readings of the split job are 944 s, 861 s and 949 s, none of them
+below the 858.62 s the step cost at two workers on a different runner, so the argument
+for the split is the pool it was not filling and the cap it kept failing against, not a
+measured speedup. macOS runs four portability checks.
 Neither workflow invocation enables the golden rebuild or strict checkpoint.
 The daily run checks the default branch at 08:17 UTC; unmerged branches need their own
 labelled or dispatched deferred checkpoint.

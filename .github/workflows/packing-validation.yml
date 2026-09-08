@@ -507,14 +507,14 @@ jobs:
 
   screen:
     # The whole single-square translation escape screen, on its own runner, for the reason
-    # the exhaustive tier is on its own runner: it is an embarrassingly parallel step whose
-    # worker count is the only thing that moves its wall, and beside the rest of the gate
-    # it cannot have one.
+    # the exhaustive tier is on its own runner: its process pool is sized by PACK_JOBS,
+    # and beside the rest of the gate it receives two workers instead of four.
+    # A same-runner comparison is still needed to measure how the screen scales.
     #
     # `D-481` is what this fixes. The n=1..324 expansion (#111) took the corpus from about
     # 100 records to 318 screened, and the step went from comfortably inside the shared
     # 900s subprocess cap to killed at it -- 901.00s on run 34172652457, which is the cap
-    # and not a measurement of anything. The cap was not the mistake; sharing a runner was.
+    # and not an uncensored duration. The split and the higher cap are evaluated together.
     # At `--jobs 2 --inner-jobs 2` the screen gets two pool workers and pays contention for
     # them, and no `--jobs` setting on that job can give it more without oversubscribing
     # the other slot (`BC-218`).
@@ -522,7 +522,7 @@ jobs:
     # Alone at `--jobs 1 --inner-jobs 4` it gets four, which is what `PACK_JOBS` hands
     # `sqpack.workers.worker_count` and what the pool then asks for.
     #
-    # What four workers cost is three hosted readings of this job: 944s on run
+    # The identical deep-gate job provides three hosted proxy readings: 944s on run
     # 34188003140, 861s on run 34189176373 and 949s on run 34190285360 -- spread 1.10x,
     # geometric mean 917.09s. Two of the three are above the 900s cap the step used to run
     # under, which is why `SCREEN_BUDGET_SECONDS` raises it to 1800s rather than leaving
