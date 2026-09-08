@@ -594,6 +594,20 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | BC-274 | research | 11 | tentative | 2 | think-5hmt | A global reduction earns an all-multiplicity family allocation with the Agenda027 owner. H112 alone covers only six-plus-five; H113 would suffice as a stronger full-family bound. Do not create a duplicate family run here. |
 | BC-275 | measurement_validation | 11 | ready | 1 | think-1v6g | Extend a frozen useful certificate queue, redirect mathematical attention to its bottleneck, or retain a named blocker and another independently useful slice. A self-chosen checkpoint is not termination of a later open-ended user mandate; never extend an exhausted scientific attempt silently. |
 
+### [agenda-029](agendas/agenda-029-structural-restrictions-and-conditional-dots.md) — Structural Restrictions and Conditional Dots
+
+Status: **paused**. Prepare a coordinated n11 campaign connecting proved corner, contact and angle restrictions to stronger conditional dot certificates. Use three preliminary spikes, select the strongest one or two leads, and finish a consequential theorem or obstruction over three blocks of 3h, 3h and 2h. The numerical goal is a global exclusion at 96/25; partial results retain their complete scope and complement. This planning checkpoint launches no research.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-284 | research | 11 | complete | 0 | think-6zei | Await the user's research-start instruction; then the coordinator dispatches the block-one lanes below. |
+| BC-285 | research | 11 | ready | 0 | think-pbv4 | Give BC287 a precise capture-relevant consequence, and bring its global relevance to block-one selection. |
+| BC-286 | research | 11 | ready | 1 | think-yv7r | Return actual closed profiles and the complementary counts, or identify which missing geometric restriction would change the outcome. |
+| BC-287 | research | 11 | ready | 0 | think-1rim | Bring one consequential certificate or concrete geometric bottleneck to BC289; preserve BC261's single interface owner. |
+| BC-288 | research | 11 | tentative | 2 | think-m6gb | Compare its actual implication for H117/H121 with the certificate leads before allocating sustained work. |
+| BC-289 | research | 11 | blocked | 0 | think-4elv | Freeze the strongest claim and remaining proof obligations for block three; readiness alone cannot justify expansion. |
+| BC-290 | research | 11 | blocked | 0 | think-nlji | User reviews the mathematical result and next selection; no automatic new family or extension to rescue a missed target. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
@@ -705,6 +719,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | H-123 | confirmed | proof | At q=1939/500, every contained closed unit square with orientation wit |  | 1 |  | 0s wall |
 | H-124 | unresolved | proof | At q=1939/500, every contained closed unit square Q in the actual near |  | 3 |  | 3s wall |
 | H-125 | blocked | proof | At side L=96/25, the fixed eleven-feature joint-D4 family in BC264's S |  | 1 |  |  |
+| H-126 | open question | proof | Which quantitative restrictions on the four distinct selected corner b |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 
