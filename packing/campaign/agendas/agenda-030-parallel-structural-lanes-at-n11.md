@@ -319,7 +319,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: complete
     priority: 1
     question: Is there a robust unavoidable set of at most eleven marks at 96/25?
     hypotheses: [H-134]
@@ -336,6 +336,32 @@ agenda:
     depends_on: []
     parallel_group: lanes-ownership
     program: n11-structure-and-conditional-dots
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md
+    - packing/campaign/agent-sessions/session-104-ownership-set-at-q.md
+    outcomes:
+    - scope: The falsifier engine, the point-mark catalogue and the segment-mark cover at 96/25 in session-104 (2026-09-08, one worker at load 4 to 14)
+      classification: achieved
+      result: >-
+        H-134's claim is met in segment form (Theorem E.4): replace each of Stromquist's ten
+        Figure-13 points at 96/25 by the horizontal segment of length 1/10 centred on it, and
+        every contained closed unit square lies within sqrt(2) * 2121/500000 < 3/500 of one of
+        them, proved by an interval reader over pose space (404,613 boxes, 184,756 certified
+        leaves, 17,551 discards, 0 failures) with every leaf and discard re-decided in exact
+        rational arithmetic and 6,000 random poses checked by the falsifier's exact distance;
+        lengths 9/100 and the set plus the centre point are also certified, 8/100 is unresolved,
+        7/100 and 6/100 have exact escapes. Every point-mark set built from the atom skeleton is
+        refuted by an exact escape (thirteen sets, 22 escapes agreed by an independent reader;
+        the best point set is 0.008 short of the tolerance). Proved beside it: no LP or counting
+        refutation of H-134 exists (T-018 scaled by 384/381 covers rounded unit squares with mass
+        10.86), ten marks are forced by the scaled n = 10 optimal packing, and no D4-symmetric
+        eleven-point set exists. Localisation for route (a) follows; exactly-one ownership does
+        not, since two touching squares can share a segment.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md
+      - packing/campaign/agent-sessions/session-104-ownership-set-at-q.md
+      disposition: continue
+      follow_up: think-qfog
     next_evidence: If it succeeds, route (a) collapses to about two to the twenty exact LPs; the prior is about thirty per cent.
   - id: BC-303
     purpose: research

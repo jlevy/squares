@@ -306,6 +306,7 @@ case or experiment separately.
 | [Agenda 030, lane C: The transfer of the s(10) proof](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md) | research synthesis | record | retained | — |
 | [Agenda 030, lane D: Contact lemmas and the closing route](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md) | research synthesis | record | retained | — |
 | [Agenda 030, lane F: The exactly-eleven plateau at 191/50](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-f-plateau-at-3-82.md) | research synthesis | record | retained | — |
+| [Agenda 030, lane E: A robust unavoidable set of at most eleven marks at 96/25](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md) | research synthesis | record | retained | — |
 | [BC-255 Near-Axis Reader Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-near-axis-reader-independent-review.md) | dated review record | record | retained | — |
 | [BC-252 — Complete Rows on the Retained Sites](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md) | research synthesis | record | retained | — |
 | [BC-255: Fixed-Side Discriminator Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md) | research synthesis | record | retained | — |
@@ -595,6 +596,13 @@ replayed every count in H-131 exactly and widened the robust end band far past H
 first rung on grid 79; the dual of the band toward `40.19°` puts its weight near the
 axis, not at Trump’s angle, and `ceiling.py` decides that none of those duals is a
 continuum obstruction, so the band’s true value stays open from below.
+[Session-104](packing/campaign/agent-sessions/session-104-ownership-set-at-q.md) met
+H-134 in segment form: ten horizontal segments of length `1/10` centred on Stromquist’s
+ten Figure-13 points at `96/25` are a robust unavoidable set at tolerance `3/500`,
+certified by an interval reader over pose space with every one of its 184,756 leaves
+re-decided in exact arithmetic, while every point-mark set built from the atom skeleton
+has an exact escape; every contained unit square is therefore localised near one of ten
+known segments, which is the premise route (a) needed, though not exactly-one ownership.
 
 **Selected next entry:** `think-znzj` is BC-303, the first-wave selection with
 independent review, which reads every lane’s exact results once sessions 100, 101, 102
@@ -3216,9 +3224,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 117 | 30,216 | 16,969 | 351 | 2,856 | 172.54 h |
+| claimed by a session | 118 | 30,454 | 17,052 | 352 | 2,889 | 173.92 h |
 | claimed by none | 42 | 8,737 | 5,134 | 136 | 760 | 43.37 h |
-| **measured** | **159** | **38,953** | **22,103** | **487** | **3,616** | **215.91 h** |
+| **measured** | **160** | **39,191** | **22,186** | **488** | **3,649** | **217.29 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -3251,7 +3259,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
 | [session-102](packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md) | 2 | 1 | 310 | 106 | 2 | 1.52 h |
 | [session-103](packing/campaign/agent-sessions/session-103-plateau-artefact-at-3-82.md) | 1 | 1 | 164 | 63 | 0 | 0.94 h |
-| *shared by 29 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
+| [session-104](packing/campaign/agent-sessions/session-104-ownership-set-at-q.md) | 3 | 1 | 238 | 83 | 1 | 1.38 h |
+| *shared by 30 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -3283,9 +3292,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 54 |
+| measured | 55 |
 | unmeasured | 45 |
-| **total** | **99** |
+| **total** | **100** |
 
 <!-- END GENERATED: session-close-report -->
 

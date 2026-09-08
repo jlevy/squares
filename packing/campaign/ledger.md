@@ -114,6 +114,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-099](agent-sessions/session-099-atlas-expansion-to-324.md) | in_progress | contemporaneous | `research-survey` (correctness) | `review-planning-oversight` (process) | 4 | think-0juv | The plan's Phases 0 through 5 are terminal on PR 111 and the calibration boundary held throughout; the session stays open, with its clock extended to 2026-09-08, until the owner confirms D2 and the two open questions, the re-priced tiers are read on the next hosted run, the full checkpoint is obtained before merge (label deep-gate last), and the harness has written this session's rollup so the record can name what it cost and the gate that certified it. Phase 6 stays closed under D1 unless the owner chooses the caveated form. |
 | [session-102](agent-sessions/session-102-angle-band-theorems-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `documentation-pass` (correctness) | 2 | think-ndqj | Under think-kbci the coordinator allocates experiment ids for Theorems A, B and C and the H-131 replay and certifies the branch on the pull-request surface; BC-303 (think-znzj) reads this lane and decides whether the end band continues at grid 119 and 159 from k = 9 and whether the band toward 40.19° runs at grid 119. |
 | [session-103](agent-sessions/session-103-plateau-artefact-at-3-82.md) | stopped | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-4uon | Under think-4uon the coordinator integrates the lane document, attaches the resource receipt, runs the certifying gate and dispositions H-133 in BC-303 (think-znzj). |
+| [session-104](agent-sessions/session-104-ownership-set-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `documentation-pass` (correctness) | 3 | think-qfog | Under think-kbci the coordinator integrates the lane branch, registers the document, attaches the harness rollup, allocates the experiment id for Theorem E.4 and certifies the branch on the pull-request surface; BC-303 (think-znzj) reads the lane, and the independent replay with the Hausdorff-bound reader is the next session's first step. |
 
 ### Workflow summary
 
@@ -126,9 +127,9 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 19 | 1 | 60 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 12 | 4 | 70 | 7 |
+| `research-loop` | 13 | 4 | 72 | 7 |
 | `pipeline-improvement` | 25 | 0 | 128 | 1 |
-| `documentation-pass` | 1 | 0 | 11 | 1 |
+| `documentation-pass` | 1 | 0 | 12 | 1 |
 | `review-planning-oversight` | 0 | 0 | 3 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
@@ -625,7 +626,7 @@ Status: **active**. Run X-021's research sessions as parallel lanes with disjoin
 | BC-299 | research | 11 | ready | 1 | think-4ifm | The premise every conditional certificate needs, a square forced into a known box, combined with the nine-point band into a concrete two-branch split. |
 | BC-300 | research | 11 | tentative | 2 | think-dfof | Which corner branches cannot close near U, and whether the structural lane should spend time on elimination motions at all. |
 | BC-301 | research | 11 | blocked | 1 | think-lbqe | The only honest statement about the endpoint; if BC-294 kills capture, this reduces to the exact-side tree and needs BC-302 to be finite. |
-| BC-302 | research | 11 | ready | 1 | think-qfog | If it succeeds, route (a) collapses to about two to the twenty exact LPs; the prior is about thirty per cent. |
+| BC-302 | research | 11 | complete | 1 | think-qfog | If it succeeds, route (a) collapses to about two to the twenty exact LPs; the prior is about thirty per cent. |
 | BC-303 | research | 11 | blocked | 0 | think-znzj | The frozen claim for the next block and the remaining proof obligations. |
 | BC-304 | research | 11 | blocked | 0 | think-yrw1 | The owner reviews the mathematical result and the next selection. |
 

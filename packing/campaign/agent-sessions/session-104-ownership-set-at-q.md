@@ -89,7 +89,7 @@ session:
     objective: The lane document, the one-line README entry, this record, the records-tier validation and the commit.
     commitment: BC-302
     bead: think-qfog
-    status: in_progress
+    status: stopped
     entered_by: planned_checkpoint
     switch_reason: The computations are at their block scope; the remaining time is the record.
     budget_minutes: 45
@@ -107,10 +107,10 @@ session:
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md
-    stop_reason: null
-    next_action: The coordinator integrates the branch, allocates an experiment id if the frozen claim is registered, and closes this record with the harness rollup under think-qfog.
+    stop_reason: The lane document, the README line and this record were written, validated on the lane's own steps and committed; the block ended at the lane's clock.
+    next_action: The coordinator integrates the branch, registers the document, attaches the harness rollup and allocates the experiment id for Theorem E.4; BC-303 (think-znzj) reads the lane.
   primary_bead: think-qfog
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 150
     checkpoint_minutes: 30
@@ -139,12 +139,11 @@ session:
   - packing-validate --records from the lane worktree before the final commit (4 cpus, about 44 s wall) passes every step except three that need the coordinator's integration re-renders and that this lane may not perform, namely the document map row for the lane document (check_documentation), the session-close report and SYNOPSIS render (close_session --render), and the ledger render (packing-ledger render); the session record's own checks (schema, clocks, gate, rollups) pass. A first run had also failed on a YAML colon in this record's phase-2 stop_reason, fixed before this run.
   - A second interval reader with the Hausdorff bound (cover_reader2.py) was written; its float cover did not finish in two bounded runs of 9 and 7 minutes at load 10 to 14, and its full exact pass was stopped after 10 minutes, so it is recorded as not completed and is the next session's first replay.
   - Engine self-tests (selftest.py) passed; the independent reader agreed on all 22 catalogued escapes; the interval reader's exact mode re-decided 184756 leaves and 17551 discards with no failure; 6000 sampled poses inside certified leaves were within 3/500 of a mark by the falsifier's exact distance.
-  resource_rollups: []
-  stop_reason: null
+  resource_rollups: [packing/campaign/resource-usage/agent-ac15f8bb6100170a0.yaml]
+  certification_pending: think-kbci
+  stop_reason: Stopped at the lane's fixed clock with the segment-form theorem certified and the point-form catalogue complete; no full gate was run in the lane, so certification is pending under the agenda's coordinating bead think-kbci, the lane's own bead think-qfog being complete.
   next_action: >-
-    Coordinator: integrate the lane branch, register the document in the document map, and
-    close this record under think-qfog once the harness rollup exists; the lane document's
-    section 7 names what the next session does first.
+    Under think-kbci the coordinator integrates the lane branch, registers the document, attaches the harness rollup, allocates the experiment id for Theorem E.4 and certifies the branch on the pull-request surface; BC-303 (think-znzj) reads the lane, and the independent replay with the Hausdorff-bound reader is the next session's first step.
 ---
 # session-104 — A Robust Unavoidable Set of at Most Eleven Marks at 96/25
 

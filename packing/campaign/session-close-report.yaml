@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 99
+count: 100
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 54
+  sessions_measured: 55
   sessions_unmeasured: 45
   attributed:
-    rollups: 117
-    turns: 30216
-    tool_calls: 16969
-    tool_errors: 351
-    one_off_code: 2856
-    wall_hours: 172.54
+    rollups: 118
+    turns: 30454
+    tool_calls: 17052
+    tool_errors: 352
+    one_off_code: 2889
+    wall_hours: 173.92
   unattributed:
     rollups: 42
     turns: 8737
@@ -28,12 +28,12 @@ totals:
     one_off_code: 760
     wall_hours: 43.37
   measured:
-    rollups: 159
-    turns: 38953
-    tool_calls: 22103
-    tool_errors: 487
-    one_off_code: 3616
-    wall_hours: 215.91
+    rollups: 160
+    turns: 39191
+    tool_calls: 22186
+    tool_errors: 488
+    one_off_code: 3649
+    wall_hours: 217.29
 codex_receipts:
   attributed: 25
   unattributed: 0
@@ -1578,4 +1578,18 @@ sessions:
   tool_errors: 0
   one_off_code: 16
   wall_hours: 0.94
+  codex_receipts: []
+- id: session-104
+  title: "A robust unavoidable set of at most eleven marks at 96/25 (BC-302, H-134)"
+  status: stopped
+  primary_bead: think-qfog
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-ac15f8bb6100170a0.yaml
+  turns: 238
+  tool_calls: 83
+  tool_errors: 1
+  one_off_code: 33
+  wall_hours: 1.38
   codex_receipts: []

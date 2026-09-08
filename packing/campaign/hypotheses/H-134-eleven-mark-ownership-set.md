@@ -41,6 +41,12 @@ hypothesis:
     about 2^20 exact fixed-angle LPs. The evidence against getting it cheaply is that the
     weighted certificate at 3.81 needs 1121 atoms of mass 10.86 where an integral set
     would need at most eleven marks of mass one, and that exp-121 found escapes at 3.878.
+    Met in segment form in session-104 (lane E, 2026-09-08): ten horizontal segments of
+    length 1/10 centred on Stromquist's ten Figure-13 points at 96/25 are a robust
+    unavoidable set at tolerance 3/500, certified by an interval reader with every leaf
+    re-decided exactly; the point form stays open, every skeleton point set having an
+    exact escape. The experiment record and the independent replay are allocated at
+    integration.
 ---
 # H-134 — Ownership at the Target Side
 
