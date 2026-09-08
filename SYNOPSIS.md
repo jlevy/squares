@@ -559,13 +559,14 @@ controller, not permission to blur contracts.
 pursued X-019’s exploration with four Fable lanes in parallel and reports what can be
 proved about eleven-square packings today: seven corner and wall lemmas, exact-verified
 angle counts at `96/25` (at most nine squares within `6.45°` of the axes, ten within
-`10.39°`), Stromquist’s Theorem 3 transported to `0.68°` bands at `96/25`, the spanning
-and chain lemmas, a weighted ownership lemma that would make four-corner containment a
-theorem from one LP, and a duality lemma that prices every conditional and capture
-certificate — including the proof that the retained shrink caps record-conditioned
-certificates at `3.876681 < U`. It also records what cannot be forced (corner
-penetration, blocker angles, positive-length contacts, a bound on orientation classes)
-and prices the three closing architectures.
+`10.39°`, ten with tilt of `30°` or more, and no packing with every angle within `1.45°`
+of the axes or `1.24°` of the diagonal), Stromquist’s Theorem 3 transported to `0.68°`
+bands at `96/25`, the spanning and chain lemmas, a weighted ownership lemma that would
+make four-corner containment a theorem from one LP, and a duality lemma that prices
+every conditional and capture certificate — including the proof that the retained shrink
+caps record-conditioned certificates at `3.876681 < U`. It also records what cannot be
+forced (corner penetration, blocker angles, positive-length contacts, a bound on
+orientation classes) and prices the three closing architectures.
 [Agenda 030](packing/campaign/agendas/agenda-030-parallel-structural-lanes-at-n11.md),
 epic `think-kbci`, maps eleven research lanes with disjoint deliverables under
 BC-292–BC-302, nine ready to run at once, then BC-303 selects and BC-304 closes; it

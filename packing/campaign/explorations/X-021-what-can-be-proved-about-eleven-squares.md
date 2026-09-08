@@ -154,13 +154,22 @@ Lane B sharpened the nine-point argument and then ran the repository’s class p
 - **Band certificates at `q`** (exact-verified on a grid-79 site set with inset `1/10`,
   decided by the exact sweep).
   At most nine squares within `6.4537°` of the axes; at most ten within `10.3875°`; at
-  most nine within `0.564°` of `45°`. At `U`: at most nine within `6.45°`, ten within
+  most nine within `2.155°` of `45°`; at most ten within `2.44°` of Trump’s `40.19°`;
+  and at most ten with folded tilt in `[30.01°, 45°]`, so every packing at side `≤ 3.84`
+  has a square tilted below `30°`. At `U`: at most nine within `6.45°`, ten within
   `7.77°` of the axes, and ten within `1.24°` of `45°`. Bands of width `13°` and beyond
   give no bound at `q`.
+- **A robust `{0°, 45°}` band excluded at `q`** (exact-verified, mass `10.702`). No
+  packing of eleven at side `≤ 3.84` has every folded angle in
+  `[0°, 1.45°] ∪ [43.76°, 45°]`. The next widenings, `3.3°` on each end and
+  `[0°, 7.8°] ∪ [38.2°, 45°]`, are not refuted on grid 79, which a finer site set may
+  change.
 - **Stromquist’s Theorem 3 transported to `q`** (proved, modulo the source theorem).
   Every packing of eleven at side `≤ 3.84` has a square whose folded angle is farther
-  than `0.6848°` from both `0°` and `45°`. This is far stronger than H-036’s `0.25°` in
-  the band and weaker in the side; H-036 stays open.
+  than `0.6848°` from both `0°` and `45°`; the exact-verified band above is twice as
+  wide and uses no Stromquist input.
+  Both are far stronger than H-036’s `0.25°` in the band and weaker in the side; H-036
+  stays open.
 - **Fixed-angle packing floors** (checked, rigorous lower bounds).
   Nine squares at any common tilt up to `30°` fit in `[0, q]²`, and eight at `35°` to
   `45°`. So no near-axis band can force more than two squares out, by any covering
@@ -171,6 +180,11 @@ Lane B sharpened the nine-point argument and then ran the repository’s class p
   locked orientation needs a segment, a corner coincidence, or three stressed point
   contacts. Neither statement bounds the number of orientation classes of an unknown
   packing.
+
+The composition split itself refutes nothing at `q` for `n₀ ≤ 9` on grid 79: for three
+to eight near-axis squares the optimal thresholds coincide to two per cent, so the
+two-threshold program degenerates to the unconditional one, and the all-tilted
+composition sits at `11.21`.
 
 The diagnostic that matters most came from reading the retained `3.82` fractional dual:
 of its `10.38` units of weight, `6.54` sit within `2.5°` of the axes, `1.33` near `29°`,

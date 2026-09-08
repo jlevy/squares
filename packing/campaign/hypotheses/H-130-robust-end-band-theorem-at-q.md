@@ -38,10 +38,12 @@ hypothesis:
   replication: true
   registered: '2026-09-08'
   notes: >-
-    Transporting Stromquist's Theorem 3 to 96/25 already proves 0.6848° (X-021, lane B
-    Proposition 1.6); anything at or beyond 3° is a real theorem of a new kind below U
-    and the first rung of the band ladder. H-036 asks 0.25° at 3.878 and stays open; the
-    method here transfers to it.
+    Transporting Stromquist's Theorem 3 to 96/25 proves 0.6848° (X-021, lane B
+    Proposition 1.6), and the planning lane exact-verified [0°, 1.45°] ∪ [43.76°, 45°]
+    at grid 79 (mass 10.702) with no Stromquist input; the next widenings were not
+    refuted on that grid. Anything at or beyond 3° is a theorem of a new kind below U
+    and the first rung of the band ladder. H-036 asks 0.25° at 3.878 and stays open;
+    the method here transfers to it.
 ---
 # H-130 — The First Rung of the Band Ladder
 
@@ -51,9 +53,11 @@ set `S` has side above `L`. Stromquist’s Theorem 3 is `S = {0°, 45°}` at `3.
 to `0.6848°` bands at `96/25` and shows that the class program proves such theorems
 exactly whenever the restricted covering value is below eleven.
 
-This claim is the widest end band the instrument can decide at `96/25`. It is not
-integrally obstructed there, it needs no new code, and it is the base case every later
-case analysis may assume.
+This claim is the widest end band the instrument can decide at `96/25`. The planning
+lane already decided `1.45°` at the axis end and `1.24°` at the diagonal end on one site
+set; the claim asks for twice that.
+It is not integrally obstructed there, it needs no new code, and it is the base case
+every later case analysis may assume.
 [Agenda 030](../agendas/agenda-030-parallel-structural-lanes-at-n11.md) owns it in
 BC-295.
 

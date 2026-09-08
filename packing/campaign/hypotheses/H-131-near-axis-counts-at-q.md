@@ -11,9 +11,11 @@ hypothesis:
   claim: >-
     In every packing of unit squares in the container of side 96/25, at most nine
     squares have folded tilt at most 6.4537°, at most ten have folded tilt at most
-    10.3875°, and at most nine have folded tilt within 0.564° of 45°. At side U the
-    corresponding counts are nine within 6.4537°, ten within 7.7671° of the axes, and
-    ten within 1.24° of 45°.
+    10.3875°, at most nine have folded tilt within 2.155° of 45°, at most ten have
+    folded tilt within 2.44° of 40.19°, and at most ten have folded tilt in
+    [30.01°, 45°], so some square is tilted below 30°. At side U the corresponding
+    counts are nine within 6.4537°, ten within 7.7671° of the axes, and ten within
+    1.24° of 45°.
   lane: proof
   derived_from: [X-021]
   strategy_refs: ['proof:9', 'proof:15']
@@ -49,7 +51,9 @@ hypothesis:
 The nine-point argument gives at most nine squares tilted below `2.44°` at `96/25`.
 [X-021](../explorations/X-021-what-can-be-proved-about-eleven-squares.md) widens that to
 `4.61°` with nine pushed points and, with the class program, to `6.45°` — and adds a
-count of ten out to `10.39°` and a count of nine within `0.564°` of `45°`.
+count of ten out to `10.39°`, nine within `2.155°` of `45°`, ten within `2.44°` of
+Trump’s angle, and ten in `[30.01°, 45°]`, which is the first count that forces a square
+below `30°`.
 
 These are theorems of the exact verifier on a stated site set, not hand proofs, and they
 were decided in a planning lane rather than a registered round.

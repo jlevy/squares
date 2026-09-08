@@ -227,6 +227,26 @@ This doubles the transfer band of Proposition 1.6 on both ends and needs neither
 79 the next symmetric widening (cells 0–12 ∪ 168–180, i.e. 3.30° and 3.30°) is *not*
 refuted (11.16), so the grid-79 rung lies between the two; Session S2 refines it.
 
+**Theorem 1.12 (a square below 30°; EXACT-VERIFIED).** At most ten squares of any
+packing in [0, 96/25]² have folded angle in [30.0149°, 45°]; hence every packing of
+eleven at side ≤ 3.84 contains a square with folded tilt < 30.0149°.
+
+*Proof.* The class of cells 117–180 (lower bound the exact tangent
+120639827500000/208829222337727 of 30.0149°) has a converged class program at q on grid
+79 whose rationalised measure has mass 42589/4096 = 10.39771 and least covered core mass
+4147/4096 ≥ 1 on every class direction, all conditions holding (`$S/prio2_q.jsonl`,
+record `tiltge30`). Eleven disjoint cores in the class would carry mass ≥ 11 > 10.398. ∎
+
+**Corollary 1.13 (angle-count facts at side ≤ 3.84, all EXACT-VERIFIED or PROVED).**
+Every packing of eleven unit squares in [0, 96/25]² has: (a) at most nine squares with
+folded tilt ≤ 6.4537°, so at least two with tilt > 6.4537° (nine points suffice for
+4.6122°, and the bare grid for 2.44°); (b) at most ten with tilt ≤ 10.3875°; (c) at most
+nine within 2.1547° of 45°; (d) at most ten within ±2.44° of 40.194°; (e) a square with
+folded angle in (1.4503°, 43.7565°); (f) a square with folded tilt below 30.0149°; (g)
+(Proposition 1.6) a square farther than 0.6848° from both 0° and 45°. Trump’s packing
+(six at 0°, five at 40.18°) satisfies all of them with room: the counts are consistent,
+not sharp, and (a)–(d) cannot be sharpened below 9 or 8 by any covering argument (§3.1).
+
 ### 1.4 Segment contacts and orientation classes (PROVED)
 
 **Lemma 1.7 (propagation).** In a packing, if two squares share a boundary segment of
@@ -303,7 +323,8 @@ the vertical direction and width w_d in the diagonal direction (45°) then √2 
 1.4142) this interval is non-empty and contained in the open interval (0°, 45°): a unit
 square can sit in such a region at 22.5° but at neither 0° nor 45°. For the hexagon
 H(w_v, w_d) = {|Y| ≤ w_v/2, |X ± Y| ≤ w_d/√2} the width conditions are also sufficient
-(LP check, §2.5): e.g. H(1.36, 1.36) admits exactly the folded angles [15.9°, 29.1°].
+to the resolution of a 0.1° LP scan (§2.5; NUMERICAL): e.g. H(1.36, 1.36) admits the
+folded angles [15.9°, 29.1°] and nothing outside [15.92°, 29.08°].
 
 *Proof of the width bound.* Containment is monotone under projection onto u. ∎
 
@@ -318,9 +339,9 @@ The lower-right diamond has an edge on the line X − Y = √2 ρ and its centre
 vertex is at X = ρ/√2 + 1/2 − √2/2 = ρ/√2 − 0.2071, at the height Y_c = −ρ/√2 − 1/2 of
 its centre.
 The bottom axis square is [x₀, x₀ + 1] × [−r − 1, −r]; since r ≤ ρ/√2 + 1/2 ≤
-r + 1 for r, ρ < 0.71, the height Y_c lies inside its vertical extent, so at that height
-it must fit between the two bottom diamonds’ inner vertices: 1 ≤ 2(ρ/√2 − 0.2071), i.e.
-ρ ≥ 1.0 > √2/2. ∎
+r + 1 for r, ρ ∈ (0.65, 0.71) (the range Lemma 1.9 needs), the height Y_c lies inside
+its vertical extent, so at that height it must fit between the two bottom diamonds’
+inner vertices: 1 ≤ 2(ρ/√2 − 0.2071), i.e. ρ ≥ 1.0 > √2/2. ∎
 
 So the mixed pocket of Lemma 1.9 cannot be built from a square hole chamfered by four
 diamonds; whether it can be built at all from unit squares at 0° and 45° (walls, two
@@ -381,7 +402,8 @@ the closed range of Θ** (Theorem 1.5’s counting step; EXACT-VERIFIED where an
 given). “float” means the row loop did not converge and the point was not, or could not
 be, exact-decided; those rows are NUMERICAL only.
 Logs: `$S/bands_q_g79.jsonl`, `$S/bands_U_g79.jsonl`, `$S/prio_q.jsonl`,
-`$S/big_q.jsonl`.
+`$S/prio2_q.jsonl`, `$S/split25.jsonl` (the U-side sweep and the large “tilt ≥ 10°/20°”
+bands were cut for time on the single core; what ran is what is tabulated).
 
 **Near-axis bands, q = 96/25:**
 
@@ -431,7 +453,31 @@ ones (many event cells per direction at grid 79).
 | 0–5 ∪ 175–180 | [0°, 1.4503°] ∪ [43.7565°, 45°] | 10.6866 | **10.70215**, least core mass 1025/1024, all conditions hold | **refuted: no packing of eleven at side ≤ 96/25 has all folded angles in this set** (EXACT-VERIFIED; Theorem 1.11) |
 | 0–12 ∪ 168–180 | [0°, 3.2953°] ∪ [41.7°, 45°] | 11.139 | 11.157 (Condition 2′ fails) | not refuted on grid 79 |
 
-PLACEHOLDER-2.3c
+**Further exact rows at q from the re-run script** (round cap 100, exact decision of the
+final point; the folded ranges below are the exact cell bounds, `cell_bounds`, not the
+net directions): trailing 10 cells [42.8453°, 45°]: float 9.694 (not converged), exact M
+= 9.75488, least core mass 2053/2048, all conditions hold → **≤ 9 squares within 2.155°
+of 45°**; cells 149–169 [37.7333°, 42.6166°]: float 9.946 (not converged), exact M =
+10.13892, least 1037/1024 → **≤ 10 squares within ±2.44° of 40.19°** (the ±2-cell band
+157–161 is [39.6115°, 40.7743°], ±5 is [38.9097°, 41.4678°]); cells 0–18 ∪ 162–180:
+11.165, not refuted; cells 0–29 ∪ 151–180 ([0°, 7.77°] ∪ [38.2°, 45°]): 11.269, not
+refuted.
+
+**Cells 117–180 = [30.0149°, 45°] at q:** converged in 60 rounds (700 s); float 10.2309,
+exact M = 10.39771 = 42589/4096, least core mass 4147/4096 at direction 117, Conditions
+1, 3, 4 hold → **at most ten squares of any packing at side ≤ 96/25 have folded angle ≥
+30.0149°; every packing of eleven has a square with folded tilt < 30.0149°**
+(EXACT-VERIFIED, Theorem 1.12). Trump’s packing has six such squares.
+
+**Cells 139–179 = [35.3556°, 44.8874°] at q:** converged in 94 rounds (927 s); float
+10.065, exact M = 10.23975, least core mass 259/256 → **≤ 10 squares in
+[35.36°, 44.89°]** (EXACT-VERIFIED; implied by Theorem 1.12 up to the last cell, and
+consistent with it).
+
+Costs on one core at grid 79: near-axis and end-cell classes 1–15 s; the 45°-side and
+Trump bands 60–930 s because their event grids are dense; the composition split 25–180 s
+per composition. Nothing here was run at grid 119 or with adaptive sites; every “none”
+above may change with a stronger site set, every “≤ N” cannot.
 
 ### 2.4 Fixed-angle packing numbers, lower bounds by MILP on a 0.1-grid (`$S/fixed_angle_packing.py`)
 
@@ -558,8 +604,10 @@ program — can say about a band Θ at side L:
    = 0 (⌊L⌋² = 9 disjoint squares, nine grid points) and near 45° (rows 4 + 2 + 2 = 8
    diamonds) push the count below eleven, and the fractional relaxation smooths even
    those: P(θ, q) = 9 for all θ ≤ 30° (MILP) while the fractional band values rise from
-   9.0 (≤ 6.45°) through 10.5 (≤ 10.4°) to ≥ 11 (≤ 13°). Bands containing a stretch of
-   mid angles admit no bound at all.
+   9.0 (≤ 6.45°) through 10.5 (≤ 10.4°) to ≥ 11 (≤ 13°). Bands that contain the
+   near-axis range together with the 8°–30° stretch admit no bound at all (that is where
+   the 3.82 dual puts its mass); the band [30°, 45°] on its own still does (≤ 10,
+   Theorem 1.12), because the dual puts only about 0.8 of its 10.38 units there.
 
 **Summary of what the bands give at q on grid 79** (§2.3, §2.6; each “≤ N” is
 EXACT-VERIFIED, each “none” is a non-refutation on this site set and therefore
@@ -571,16 +619,25 @@ NUMERICAL):
 | [0°, 10.39°] | ≤ 10 | exact |
 | [0°, 13°] and wider near-axis | none (≥ 11.0) | fractional saturation; §3.1 item 2 |
 | [44.44°, 45°] | ≤ 9 | exact |
+| [42.85°, 45°] | ≤ 9 | exact (mass 9.755) |
 | [40.77°, 45°], [38.2°, 45°] | ≈ 9.8, 9.9 float | undecided (not converged); ≤ 10 likely exact with more rounds |
-| ±0.47° about 40.19° | ≤ 10 | exact |
-| ±1.2° about 40.19° | ≈ 9.9 float | undecided |
+| [39.61°, 40.77°] (±0.6° about 40.19°) | ≤ 10 | exact |
+| [38.91°, 41.47°] (±1.3°) | ≈ 9.9 float | undecided |
+| [37.73°, 42.62°] (±2.4°) | ≤ 10 | exact (mass 10.139; float 9.95) |
+| [30.01°, 45°] | ≤ 10 | exact (mass 10.398): **Theorem 1.12** |
 | [0°, 1.45°] ∪ [43.76°, 45°] | ≤ 10 (value 10.70) | exact: **Theorem 1.11** |
-| [0°, 3.30°] ∪ [41.7°, 45°] and wider unions | none (≥ 11.14) |  |
+| [0°, 3.30°] ∪ [41.7°, 45°], [0°, 7.77°] ∪ [38.2°, 45°] and wider unions | none (≥ 11.14) |  |
 | (6.45°, 45°] (all tilted, composition (0, 11)) | none (11.21) |  |
 | any composition (n₀, 11 − n₀), n₀ ≤ 9, near class [0°, 6.45°] | none | w₀ ≈ w₁: no leverage |
+| [35.36°, 44.89°] | ≤ 10 | exact (mass 10.240) |
 | everything, all 181 cells | none | (≥ 11.06 already at 3.82) |
 
-PLACEHOLDER-3.1c
+The pattern is the one items 1–3 predict: every band that excludes the near-axis range,
+and every near-axis band narrower than 8°, has a count; every band that contains both
+the axis and a stretch of 8°–30° has none.
+The composition split adds nothing because its optimal thresholds are equal (w₀ ≈ w₁)
+whenever both classes are populated — the instrument prices a near-axis core and a
+tilted core identically at q, which is the numerical face of the same integrality gap.
 
 ### 3.2 Site-set dependence, and what a non-refutation means (the exp-064 lesson)
 
