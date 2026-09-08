@@ -847,7 +847,7 @@ SANS_COMPOSITE_SLOT_FACES = {
     ("italic", "650"): "KaTeX_Math-BoldItalic",
 }
 
-#: The sans slots this page draws from, and the reason the other two go.
+#: The sans slots this page draws from, including the reader's sans prose preference.
 #:
 #: Every face of the sans composite is a SECOND data-URI copy of bytes the page already
 #: carries: its Latin halves are the same two `source-sans-3-latin-wght-*.woff2` files
@@ -856,20 +856,18 @@ SANS_COMPOSITE_SLOT_FACES = {
 #: of base64 on every copy of the page ever served, and the prune is worth taking to the
 #: weight rather than only to the style.
 #:
-#: KaTeX reaches a bold table from `\mathbf`, `\boldsymbol` and `\textbf` alone, and this
-#: page sets none of them in a sans context: its three `\mathbf{D}_4` are in prose, which
-#: is the serif composite's. `check_math_faces` in `inspect_explainer_typography` is what
-#: holds that -- it fails on a `.mathbf`, `.boldsymbol` or `.textbf` under any node the
-#: init marked sans -- because the condition is about what the built page renders and
-#: cannot be read off the template. Dropping the pair also drops kpress's two 650 print
-#: instances with it, since those are the same slots under `@media print`.
+#: The three `\mathbf{D}_4` expressions are in prose. That prose uses the sans composite
+#: when the reader has saved `kpress.proseFont = "sans"`, so the upright 650 slot and its
+#: print instance must remain. Without it, CSS synthesizes bold from the 400 face while
+#: KaTeX positions it with the 650 metrics. `check_math_faces` exercises both saved prose
+#: preferences and checks the rendered requests against the declarations actually shipped.
 #:
 #: The italic slots pair with `KaTeX_Math-Italic` and `KaTeX_Math-BoldItalic`, and the
 #: second is outside `KATEX_FACES`, so the italic 650 slot would go on the partner rule
-#: whatever this set said. It is named here as well so the set reads as the two slots the
+#: whatever this set said. It is named here as well so the set reads as the three slots the
 #: page draws, rather than as one prune with a second one hidden behind it.
 SANS_COMPOSITE_SLOTS_DRAWN: frozenset[tuple[str, str]] = frozenset(
-    {("normal", "400"), ("italic", "400")}
+    {("normal", "400"), ("italic", "400"), ("normal", "650")}
 )
 
 _WEIGHT_TOKENS = {"normal": "400", "bold": "700"}

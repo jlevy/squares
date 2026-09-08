@@ -22,8 +22,11 @@ each width on one fresh Linux GitHub Actions runner.
 The control is the retained deployed `33cd4760` HTML. The candidate is the single
 prepared artifact produced by that dispatch’s prepare job, also used by its browser
 checks. Its source commit and complete HTML must accompany the reports.
-Product rendering is unchanged from the dc2eb681 candidate; later changes concern tests,
-documentation, and measurement.
+Before the first parameter-mode candidate run, integration with main at `38ca2892` adds
+PR #131’s revised publication text and retained bold sans math face to the `dc2eb681`
+rendering changes. The comparison therefore measures the complete proposed publication
+against the retained deployment, not the startup code in isolation.
+The prepared candidate’s recorded commit and HTML identify that combined change.
 
 Use `--mode parameters`. Require all fourteen correct visible labels/readouts and the
 retained measurement controls.

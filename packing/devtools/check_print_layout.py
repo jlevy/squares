@@ -66,6 +66,15 @@ class Marker(TypedDict):
     painted: bool
 
 
+class Bullet(TypedDict):
+    """A drawn unordered-list marker, including one whose CSS no longer paints it."""
+
+    path: str
+    width: float
+    height: float
+    painted: bool
+
+
 class Footnote(TypedDict):
     """How much of a footnote reference's own line lies in front of it."""
 
@@ -96,6 +105,7 @@ class Probe(TypedDict):
 
     centred: list[Centred]
     markers: list[Marker]
+    bullets: list[Bullet]
     footnotes: list[Footnote]
     boxed: list[Boxed]
     overflow: list[Overflow]
@@ -122,10 +132,6 @@ class Measured(TypedDict):
 #: pixel is finer than that construction is self-consistent to.
 TOLERANCE_PX = 1.0
 
-#: The two dimensions use the same CSS length, so only subpixel rounding can
-#: distinguish them. A line-height override once turned a 3.7px square into a 27px bar.
-MARKER_SQUARE_TOLERANCE_PX = 0.05
-
 #: The requested optical adjustment below the geometric line centre. Keep the
 #: existing one-pixel tolerance around that target, rather than relaxing it to
 #: accommodate the adjustment. Numbered markers retain the geometric target.
@@ -137,6 +143,10 @@ MARKER_OPTICAL_OFFSET_EM = 0.04
 #: be worth having -- the chips shipped 0.65px off and a reader saw it, which a
 #: one-pixel tolerance would have called clean.
 BOXED_TOLERANCE_PX = 0.5
+
+#: The two dimensions use the same CSS length, so only subpixel rounding can
+#: distinguish them. A line-height override once turned a 3.7px square into a 27px bar.
+BULLET_TOLERANCE_PX = 0.05
 
 #: The measure the PDF actually has, in CSS pixels. `emulate_media` switches which media
 #: queries match; it does not paginate and it does not apply the `@page` box. So the
@@ -150,7 +160,7 @@ PRINT_VIEWPORT: ViewportSize = {"width": 816 - 2 * 120, "height": 1056 - 2 * 120
 #: apart: the whole point is comparing like with like across `emulateMedia`.
 _PROBE = r"""() => {
   const out = {
-    centred: [], markers: [], footnotes: [], boxed: [], overflow: [],
+    centred: [], markers: [], bullets: [], footnotes: [], boxed: [], overflow: [],
     pageOverflow: 0, widest: null,
     /* Named so a viewport that did not take is visible in the output rather than
        silently making every horizontal answer wrong. */
@@ -186,12 +196,15 @@ _PROBE = r"""() => {
   /* Markers. The list bullet is not a `::marker`: kpress sets `list-style-type: none`
      and draws an absolutely positioned `::before`, so there is no marker box to
      measure. Its top edge is the `li`'s content-box top plus the pseudo-element's own
-     `top`; a painted square must retain its own height, not the line box's height. The
+     `top`; its computed height measures the painted square or the numbered marker's
+     box. A painted square must retain its own height, not the line box's height. The
      line it should sit on is the `li`'s first line box, taken as a Range over the first
      text node rather than as the `li`'s own box, which spans every line. */
   for (const li of document.querySelectorAll('.kpress li')) {
     const before = getComputedStyle(li, '::before');
     const own = getComputedStyle(li);
+    const bullet = bulletBox(li, before);
+    if (bullet) out.bullets.push(bullet);
     /* `top` is measured from the containing block's padding edge, and the containing
        block is the `li` only while it is positioned. If kpress ever drops that, the
        offset is against something else and this arithmetic would quietly measure the
@@ -309,6 +322,20 @@ _PROBE = r"""() => {
   return out;
 
   function round(v) { return Math.round((v || 0) * 100) / 100; }
+
+  /* A centered rectangle can still be a vertical bar. Record shape and paint before
+     the centering probe skips missing pseudo-elements; ordered markers are text. */
+  function bulletBox(li, before) {
+    if (li.parentElement?.tagName !== 'UL' || !li.getClientRects().length) return null;
+    return {
+      path: sig(li),
+      width: round(parseFloat(before.width)),
+      height: round(parseFloat(before.height)),
+      painted: before.content === '""' && before.display !== 'none'
+        && before.visibility === 'visible' && Number(before.opacity) > 0
+        && !['transparent', 'rgba(0, 0, 0, 0)'].includes(before.backgroundColor),
+    };
+  }
 
   /* The run that reaches farthest past the page, among the runs that can put it there.
      Among: a box whose ink an ancestor clips away has nothing past that ancestor's edge
@@ -439,6 +466,7 @@ _PROBE = r"""() => {
 #: would print the whole document at 93.2%.
 SELF_CHECK_PX = 42.0
 SELF_CHECK_CLASS = "print-layout-self-check"
+SELF_CHECK_BULLET_CLASS = f"{SELF_CHECK_CLASS}-bullet"
 
 #: Geometry and computed type sizes, rather than a match on the stylesheet that
 #: intended them. The active certificate is checked at each screen width.
@@ -779,8 +807,9 @@ def touch_findings(page: Page) -> list[str]:
 #: A block the print column cannot contain, appended to the page. Given its margins and
 #: its width outright, because the column centres its blocks and caps their measure: a
 #: block merely handed a width comes back centred at half the overhang, which is how the
-#: first draft of this control quietly measured nothing.
-_OVERSHOOT = r"""(spec) => {
+#: first draft of this control quietly measured nothing. The same pass stretches one
+#: real list bullet to reproduce the glyph-to-box regression without another browser.
+_SELF_CHECK_DEFECTS = r"""(spec) => {
   const root = document.documentElement;
   const page = document.querySelector('.kpress');
   if (!page) throw new Error('no .kpress column to overflow');
@@ -794,15 +823,14 @@ _OVERSHOOT = r"""(spec) => {
      `over` is the one that reaches `over` past it from wherever the column starts. */
   const start = el.getBoundingClientRect().left;
   el.style.setProperty('width', `${root.clientWidth + spec.over - start}px`, 'important');
-}"""
-
-
-_STRETCHED_MARKER = """() => {
-  document.querySelector('.cert-page.kpress-prose ul > li')
-    .classList.add('marker-height-self-check');
+  const bullet = page.querySelector('ul > li');
+  if (!bullet) throw new Error('no unordered-list bullet to stretch');
+  bullet.classList.add(spec.bullet);
   const style = document.createElement('style');
-  style.textContent = '.marker-height-self-check::before '
-    + '{height:1lh!important;top:0!important}';
+  style.textContent = `.${spec.bullet}::before {
+    content: "" !important; background: currentColor !important;
+    width: 3px !important; height: 1lh !important; top: 0 !important;
+  }`;
   document.head.appendChild(style);
 }"""
 
@@ -929,16 +957,6 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
             for row in probe["centred"]
             if row["declared"] and row["shown"] and row["align"] != "center"
         )
-        found.extend(
-            f"{medium}: drawn list marker is not square "
-            f"({row['width']:.2f} x {row['height']:.2f}px; {row['path']})"
-            for row in probe["markers"]
-            if row["painted"]
-            and (
-                min(row["width"], row["height"]) <= 0
-                or abs(row["width"] - row["height"]) > MARKER_SQUARE_TOLERANCE_PX
-            )
-        )
         for row in probe["markers"]:
             optical = row["baseFontSize"] * MARKER_OPTICAL_OFFSET_EM if row["painted"] else 0
             offset = row["markerCentre"] - row["lineCentre"] - optical
@@ -947,6 +965,14 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
                 found.append(
                     f"{medium}: list marker off the {target} by {offset:+.2f}px "
                     f"({row['path']}, {row['fontSize']}px on a {row['lineHeight']}px line)"
+                )
+        for bullet in probe["bullets"]:
+            if not bullet["painted"] or min(bullet["width"], bullet["height"]) <= 0:
+                found.append(f"{medium}: list bullet is missing ({bullet['path']})")
+            elif abs(bullet["width"] - bullet["height"]) > BULLET_TOLERANCE_PX:
+                found.append(
+                    f"{medium}: list bullet is {bullet['width']:.2f} by "
+                    f"{bullet['height']:.2f}px instead of square ({bullet['path']})"
                 )
         # Under one em there is no word in front of the reference, only stray punctuation
         # that wrapped down with it, and it reads as opening the line.
@@ -1005,7 +1031,7 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
 
 
 def self_check(page_url: str) -> int:
-    """Put a known overflow in front of the gate, and hold the gate to naming it.
+    """Put an overflow and a stretched bullet in front of the gate and require both.
 
     A check that has only ever passed cannot tell itself apart from one that cannot fail,
     and this one has a second way to be useless: it can fail loudly at the right size and
@@ -1021,8 +1047,12 @@ def self_check(page_url: str) -> int:
     """
     measured = measure(
         page_url,
-        inject=f"spec => {{ ({_OVERSHOOT})(spec); ({_STRETCHED_MARKER})(); }}",
-        spec={"over": SELF_CHECK_PX, "name": SELF_CHECK_CLASS},
+        inject=_SELF_CHECK_DEFECTS,
+        spec={
+            "over": SELF_CHECK_PX,
+            "name": SELF_CHECK_CLASS,
+            "bullet": SELF_CHECK_BULLET_CLASS,
+        },
     )
     printed = measured["print"]
     column = printed["viewport"]
@@ -1056,12 +1086,13 @@ def self_check(page_url: str) -> int:
         wrong.append(
             f"the named culprit overhangs by {widest['over']:.2f}px, not {SELF_CHECK_PX}"
         )
-
     if not any(
-        "drawn list marker is not square" in line and "marker-height-self-check" in line
+        line.startswith("print: list bullet")
+        and "instead of square" in line
+        and SELF_CHECK_BULLET_CLASS in line
         for line in found
     ):
-        wrong.append("the gate accepted a marker stretched to its full line height")
+        wrong.append("the gate did not report the stretched unordered-list bullet")
 
     for line in wrong:
         print(f"self-check failed: {line}")
@@ -1069,7 +1100,7 @@ def self_check(page_url: str) -> int:
         return 1
     print(
         f"self-check passed: the gate fails on a {SELF_CHECK_PX:.0f}px overflow, reports the "
-        f"{scale} scale, names its cause, and rejects a stretched list marker"
+        f"{scale} scale, names the block that caused it, and rejects the stretched bullet"
     )
     return 0
 
@@ -1091,7 +1122,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--self-check",
         action="store_true",
-        help="overflow the print column on purpose, and check the gate fails and names it",
+        help="inject an overflow and a stretched bullet, and check the gate names both",
     )
     args = parser.parse_args(argv)
 
