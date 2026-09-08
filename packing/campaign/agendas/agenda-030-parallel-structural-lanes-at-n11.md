@@ -706,17 +706,17 @@ agenda:
       - packing/campaign/agent-sessions/session-110-pr127-handoff-review.md
     validation:
     - scope: corrected-integration-checkpoint
-      status: pending
+      status: passed
       evidence: >-
-        The corrected integration tree has not yet completed its own full packing-validate
-        checkpoint. Earlier c89c7646 records and focused tests and the 8176e389 deferred
-        checkpoint are historical baselines only and do not certify this tree.
+        The corrected checkpoint composes the 62-step fast pass and the passing
+        structured negative-control, slow and exhaustive component receipts at cbe9fd76
+        with four unchanged full-only geometry passes from the retained raw stdout of the
+        failed ef8a2e72 invocation. The reviewed ef8a2e72..cbe9fd76 diff leaves those four
+        components unaffected. That log and the receipts cover all 69 declared steps;
+        ef8a2e72 remains failed and no component rerun is called a full invocation.
+        Earlier c89c7646 and 8176e389 evidence remains historical.
     replanning:
       candidates:
-      - bead: think-yx4g
-        workflow: remediation
-        priority: 1
-        rationale: Repair the failed checkpoint components and certify the integrated handoff before the authorized merge and new-branch research.
       - bead: think-qfog
         workflow: insight-iteration
         priority: 1
@@ -736,12 +736,13 @@ agenda:
           Retain the corner-class support question, missing run artifacts and unrun site-set
           complement behind the two higher-priority lanes.
       selected:
-        bead: think-yx4g
-        workflow: remediation
+        bead: think-qfog
+        workflow: insight-iteration
         rationale: >-
-          The mathematical closeout is complete, but the corrected integration checkpoint
-          failed local environment and record checks. Certify those repairs before releasing
-          the funded ownership continuation.
+          The corrected checkpoint is certified by the retained raw full log and
+          structured component receipts. The ten-segment theorem now supplies the source
+          control for the distinct pairwise compatibility and ownership continuation
+          after merge publication.
       operator_input:
         status: confirmed
         note: The owner authorized closeout, merge once the corrected tree is ready, and continuation on a new branch.

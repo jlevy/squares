@@ -630,13 +630,14 @@ not certify an upper bound.
 The depth polisher will start from that retained control; its missing scratch state is
 not a runnable handoff.
 
-**Selected next entry:** `think-yx4g` repairs and certifies the merge checkpoint, then
-releases `think-qfog` to continue BC-302 at the missing pairwise compatibility step.
+**Selected next entry:** `think-qfog` continues BC-302 at the missing pairwise
+compatibility step after merge publication.
 BC-304 has dispositioned every first- and second-wave cell and carries the unfinished
 complements of BC-292 and BC-299 forward.
-Its integrated full validation remains pending.
-The owner authorized correcting and validating the stack, merging PRs 116, 121 and 127
-in order, then continuing on a new branch.
+The corrected checkpoint is certified by the retained raw full log and structured
+component receipts composing all 69 steps; the earlier `ef8a2e72` full invocation
+remains failed. The owner authorized correcting and validating the stack, merging PRs
+116, 121 and 127 in order, then continuing on a new branch.
 The [handoff review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md)
 records the corrections and the funded continuation.
 [Session 110](packing/campaign/agent-sessions/session-110-pr127-handoff-review.md)
@@ -3385,7 +3386,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-097.yaml` | session-097 | 973 | 7.51 h | 3.69 h | 4.3 h | yes |
 | `codex-task-tree-session-105.yaml` | session-105 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
 | `codex-task-tree-session-106.yaml` | session-106 | 1,467 | 14.71 h | 8.0 h | 8.0 h | yes |
-| `codex-task-tree-session-110.yaml` | session-110 | 246 | 1.67 h | 0.63 h | 0.63 h | yes |
+| `codex-task-tree-session-110.yaml` | session-110 | 940 | 6.73 h | 2.58 h | 2.58 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

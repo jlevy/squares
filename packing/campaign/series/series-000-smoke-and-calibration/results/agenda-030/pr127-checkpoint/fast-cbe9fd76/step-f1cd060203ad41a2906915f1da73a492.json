@@ -1,0 +1,8 @@
+{
+  "name": "exact certificates are named by their records",
+  "output": "10 case packages certify 18 sizes, every one cited by its record\n  cases/gobel10 -> [10]\n  cases/gobel40 -> [40]\n  cases/gobel5 -> [5]\n  cases/gobel82 -> [82]\n  cases/gobel_family -> [65, 89]\n  cases/gobel_offcentre -> [26, 85]\n  cases/gobel_strip -> [27, 38, 52, 67, 84]\n  cases/lifted_q2 -> [19, 66]\n  cases/lifted_q7 -> [18, 86]\n  cases/trump11 -> [11]",
+  "reason": "",
+  "run_id": "cff3023c333949f090f088fb57734a96",
+  "seconds": 0.29582191599183716,
+  "status": "passed"
+}

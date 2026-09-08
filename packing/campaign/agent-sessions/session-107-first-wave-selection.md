@@ -134,6 +134,7 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md
   - packing/campaign/agent-sessions/session-107-first-wave-selection.md
   checks:
+  - 'full gate: fast at cbe9fd76: passed'
   - The E.4 reader's self-tests pass (analytic segment minimiser against a 2001-point
     sampling at 400 random poses, worst discrepancy 1.1e-16; exact polygon distance
     against the float signed distance at 60 random rational poses, no mismatch); every
@@ -150,7 +151,6 @@ session:
   - packing-validate --records run from the worktree before the final commit; the
     failures it reports are the coordinator's re-renders (document-map row, close report,
     ledger, synopsis handoff) and the absent resource receipt, named in the report.
-  certification_pending: think-kbci
   stop_reason: The block's deadline; the replays and the selection are terminal, the
     record gate was run, no claim was registered (the coordinator allocates the ids), and
     the resource receipt is the coordinator's to attach.
@@ -174,6 +174,24 @@ the corner pair through the library’s verifier, Theorem C through the library�
 program), then the selection on that evidence.
 Checkpoints were written at thirty-minute intervals in the scratchpad and committed as
 work in progress on the lane branch.
+
+## Integration Certification Addendum — 2026-09-08
+
+The corrected integration checkpoint combines the 62-step fast pass at `cbe9fd76`, the
+passing structured negative-control, slow and exhaustive component receipts at that same
+revision, and four unchanged full-only geometry passes recorded in the retained raw
+stdout from the failed `ef8a2e72` invocation.
+The reviewed `ef8a2e72..cbe9fd76` source diff leaves those four components unaffected.
+Together that log and the structured receipts cover all 69 declared validation steps.
+The `ef8a2e72` full invocation remains failed; the later component runs are not called a
+full invocation.
+
+This later integration result discharges only the record’s certification debt.
+It does not extend this stopped session’s clock, rerun its science, change a scientific
+verdict, supply a missing artifact, or complete any target recorded as partial, stopped,
+unrun or absent.
+The original stop reason, resource accounting and unfinished complements
+remain historical facts.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -2,8 +2,10 @@
 
 The stack contains useful, reproducible progress toward `n = 11`, but its original
 handoff was not ready to merge.
-Eight findings require corrections to proof claims, acceptance rules and continuation
-inputs. The segment-localization theorem survives independent exact replay.
+Eight findings required corrections to proof claims, acceptance rules and continuation
+inputs. Those corrections are complete, and the corrected checkpoint is certified by the
+component evidence below.
+The segment-localization theorem survives independent exact replay.
 No certified lower or upper bound changes.
 
 The owner authorized correcting the findings, merging the ready stack, and continuing
@@ -23,7 +25,7 @@ Review covered the cumulative stack, including scientific claims in Markdown fen
 recorded controls, missing artifacts and current CI. Main advanced to `fbc790b3` during
 the handoff; its changes integrated cleanly in local merge `883d5ef8`. The intended
 merge order is 116, 121, 127, preserving their ancestry.
-The corrected integration tree needs its own checkpoint evidence before merge.
+The corrected integration tree has its own checkpoint evidence below.
 
 ## Findings
 
@@ -118,8 +120,8 @@ PR 121’s
 at `8176e389`. These are baseline receipts, not certification of the corrected
 integration tree.
 
-The correction checkpoint will record its commit and actual validation outcome here.
-Until that succeeds, the stack remains unmerged.
+The correction checkpoint’s commits and actual outcomes are recorded below.
+Merge publication remains pending at this checkpoint.
 After merge, the funded continuation starts from updated main on a new `codex/` branch.
 
 The full checkpoint at `ef8a2e72` ran all 69 steps in 1,313.94 seconds.
@@ -128,8 +130,32 @@ translation-escape screen.
 Six steps failed: the local Cairo loader path prevented test collection, the mutation
 snapshot exceeded its storage guard, and the document-map and handoff views needed
 reconciliation. Those failures are retained; this run does not certify the handoff.
-The corrected checkpoint will rerun the failed components and the fast integration
-surface while preserving the unchanged geometry receipts.
+The corrected checkpoint reran the failed components and the fast integration surface
+while preserving the unchanged geometry receipts.
+
+## Corrected Integration Checkpoint — 2026-09-08
+
+The fast tier at `cbe9fd76` passed all 62 selected steps in 298.34 seconds, including
+4,304 fast tests. Separate structured, revision-bound receipts at `cbe9fd76` pass the
+three previously failing full-only components: negative controls, slow behavioral tests
+and exhaustive exact behavioral tests.
+The retained raw stdout from the failed `ef8a2e72` full invocation records passes for
+four expensive full-only components: the 324-case atlas rebuild, the full
+translation-escape screen, exact rational grid replay and the `n=40` rigidity replay.
+The exact reviewed `ef8a2e72..cbe9fd76` path diff changes only handoff records,
+generated views, the selected-entry control and the negative- control snapshot guard,
+leaving those four component sources and inputs unaffected.
+
+The
+[retained checkpoint evidence](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md)
+contains the raw `ef8a2e72` log and revision-bound `cbe9fd76` receipts, composing
+coverage of all 69 declared validation steps.
+They do not turn the `ef8a2e72` full invocation into a pass, and the fast and component
+runs are not described as a new full invocation.
+The four successful full-only replays remain historical evidence from `ef8a2e72`; the
+repaired checks are evidence from `cbe9fd76`. The packing bracket and every partial,
+stopped or never-run scientific task remain unchanged.
+Merge publication is still pending.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

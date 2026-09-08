@@ -98,7 +98,6 @@ session:
   primary_bead: think-1136
   status: stopped
   resource_rollups: [packing/campaign/resource-usage/agent-a64c5adbf66c1e348.yaml]
-  certification_pending: think-kbci
   budget:
     wall_minutes: 150
     checkpoint_minutes: 30
@@ -123,6 +122,7 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md
   - packing/campaign/agent-sessions/session-101-corner-skeleton-ownership.md
   checks:
+  - 'full gate: fast at cbe9fd76: passed'
   - Every final measure of runs 1, 2, 4, 5 and 6 decided by certificate.verify(workers=1); Conditions 1, 3, 4, 5 hold for each, Condition 2 fails as the mass says.
   - The corner-orbit premise d^2 = 4633032392704/1385114794281 > 2B^2 = 99540529/50000000 and the pair premises decided in Fraction arithmetic before any run.
   - Run 4 replayed run 2's LP objectives to the last printed digit.
@@ -153,6 +153,24 @@ measure at `96/25` proves a weaker four-corner theorem outright: four distinct s
 each containing one of two marks near its corner.
 The price `M(forced) − M(free)` is `33507/62500 = 0.536112` on one site set.
 The floor for the net is the unfinished part.
+
+## Integration Certification Addendum — 2026-09-08
+
+The corrected integration checkpoint combines the 62-step fast pass at `cbe9fd76`, the
+passing structured negative-control, slow and exhaustive component receipts at that same
+revision, and four unchanged full-only geometry passes recorded in the retained raw
+stdout from the failed `ef8a2e72` invocation.
+The reviewed `ef8a2e72..cbe9fd76` source diff leaves those four components unaffected.
+Together that log and the structured receipts cover all 69 declared validation steps.
+The `ef8a2e72` full invocation remains failed; the later component runs are not called a
+full invocation.
+
+This later integration result discharges only the record’s certification debt.
+It does not extend this stopped session’s clock, rerun its science, change a scientific
+verdict, supply a missing artifact, or complete any target recorded as partial, stopped,
+unrun or absent.
+The original stop reason, resource accounting and unfinished complements
+remain historical facts.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

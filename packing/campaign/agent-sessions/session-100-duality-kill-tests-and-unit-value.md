@@ -76,7 +76,6 @@ session:
       and destination nets on every resume. No target search is part of this correction.
   primary_bead: think-7lp3
   status: stopped
-  certification_pending: think-7lp3
   resource_rollups: [packing/campaign/resource-usage/agent-a2247da4712316276.yaml]
   budget:
     wall_minutes: 150
@@ -102,6 +101,7 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md
   - packing/campaign/agent-sessions/session-100-duality-kill-tests-and-unit-value.md
   checks:
+  - 'full gate: fast at cbe9fd76: passed'
   - 'uv run --frozen --all-extras --group dev packing-validate --records at 06:05Z: green on every step this lane owns (schema, session clocks, gate grammar, resource rollups with 53 terminal sessions all present, ledger re-rendered); two steps fail, synopsis agrees with the artifacts and every session cost is attributed, because a new terminal session must be named by SYNOPSIS.md Current Handoff and by the session-close report, both coordinator-owned files this lane may not edit; devtools.close_session --render at integration clears both.'
   - verify_ceiling on every frozen family from its bytes (the polisher's own pass and the loop's), and the restricted driver's exact disjointness assertion on every family it judged.
   stop_reason: >-
@@ -154,6 +154,24 @@ The
 owns the proof, command and remaining dependencies.
 This stronger baseline supersedes the proposed restart from the unavailable state; it
 does not settle H-129.
+
+## Integration Certification Addendum — 2026-09-08
+
+The corrected integration checkpoint combines the 62-step fast pass at `cbe9fd76`, the
+passing structured negative-control, slow and exhaustive component receipts at that same
+revision, and four unchanged full-only geometry passes recorded in the retained raw
+stdout from the failed `ef8a2e72` invocation.
+The reviewed `ef8a2e72..cbe9fd76` source diff leaves those four components unaffected.
+Together that log and the structured receipts cover all 69 declared validation steps.
+The `ef8a2e72` full invocation remains failed; the later component runs are not called a
+full invocation.
+
+This later integration result discharges only the record’s certification debt.
+It does not extend this stopped session’s clock, rerun its science, change a scientific
+verdict, supply a missing artifact, or complete any target recorded as partial, stopped,
+unrun or absent.
+The original stop reason, resource accounting and unfinished complements
+remain historical facts.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

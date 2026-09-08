@@ -30,13 +30,12 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate
     kill_condition: A failed mathematical control or integrated validation prevents merge.
     fallback: Correct the failure while preserving its evidence; keep the stack unmerged until ready.
-    outcome: Eight findings isolated and corrections written; E4 and the stronger exp070 unit control replay exactly. The integrated full checkpoint remains outstanding.
+    outcome: At the initial correction checkpoint, eight findings were isolated and corrections written; E4 and the stronger exp070 unit control replayed exactly. The integrated full checkpoint remained outstanding.
     evidence: [docs/project/reviews/review-2026-09-08-pr127-research-readiness.md]
-    stop_reason: Correction checkpoint retained before the qualifying integrated gate; this is certification debt, not a passed handoff.
-    next_action: think-yx4g runs the corrected-tree checkpoint, discharges certification debt, merges the stack, and starts the selected continuation on a new branch.
+    stop_reason: At the initial correction checkpoint, the record was retained before the qualifying integrated gate; this was certification debt, not a passed handoff.
+    next_action: At the initial correction checkpoint, think-yx4g was to run the corrected-tree checkpoint, discharge certification debt, merge the stack, and start the selected continuation on a new branch.
   primary_bead: think-yx4g
   status: stopped
-  certification_pending: think-yx4g
   budget: {wall_minutes: 240, checkpoint_minutes: 30, slice_minutes: 30}
   stop_conditions:
   - Merge checkpoint reached with proof and validation evidence, or an external blocker requiring a truthful handoff.
@@ -44,7 +43,7 @@ session:
   progress:
     metric: Corrected and certified research handoff, with the strongest surviving theorem and a reproducible continuation baseline.
     before: PR127 c89c7646 carries eight mathematical or handoff findings and nine explicitly uncertified stopped sessions.
-    after: Corrections and guarded tools are written; the ten-segment theorem survives and exp070 transports to an exactly verified unit-family floor of 21342289572/2055263195 at 96/25. Integrated certification and merging remain pending.
+    after: Corrections and guarded tools are written; the ten-segment theorem survives, exp070 transports to an exactly verified unit-family floor of 21342289572/2055263195 at 96/25, and the corrected checkpoint is certified by its raw-log and structured-receipt composition of all 69 steps. Merge publication remains pending.
   delegations:
   - task: Rounded-cover and ownership proof review, portable E4 and measure audit.
     operator: GPT-6 Astra, max; ownership_route
@@ -89,11 +88,12 @@ session:
   - packing/devtools/transport_ceiling_family.py
   - operating-rules.md
   checks:
+  - 'full gate: fast at cbe9fd76: passed'
   - Record tier at c89c7646 passed; nine stopped sessions remained explicitly uncertified.
   - 143 focused kernel/session tests passed at c89c7646.
-  - Corrected tools passed their source and failure controls; no integrated full gate claimed yet.
-  stop_reason: The correction checkpoint is recorded with certification pending; active coordination continues under think-yx4g.
-  next_action: think-yx4g repairs and validates the merge checkpoint, then merges the stack and releases the funded ownership continuation onto a new codex branch.
+  - At the initial correction checkpoint, the corrected tools passed their source and failure controls; integrated certification was then outstanding. The dated addendum records its later completion.
+  stop_reason: The stopped correction checkpoint is certified by the retained raw full log and structured component receipts; merge publication remains pending and no research phase is reopened.
+  next_action: think-qfog starts the selected pairwise-compatibility continuation on a new codex branch after merge publication.
 ---
 # PR 127 Handoff Review and Merge Corrections
 
@@ -107,6 +107,24 @@ bound while coordination continues.
 
 The user authorized merging once ready and continuing on a new branch, and specified the
 Sol/Astra and Opus/Fable routing policy now recorded in OR-2 and OR-10.
+
+## Integration Certification Addendum — 2026-09-08
+
+The corrected integration checkpoint combines the 62-step fast pass at `cbe9fd76`, the
+passing structured negative-control, slow and exhaustive component receipts at that same
+revision, and four unchanged full-only geometry passes recorded in the retained raw
+stdout from the failed `ef8a2e72` invocation.
+The reviewed `ef8a2e72..cbe9fd76` source diff leaves those four components unaffected.
+Together that log and the structured receipts cover all 69 declared validation steps.
+The `ef8a2e72` full invocation remains failed; the later component runs are not called a
+full invocation.
+
+This later integration result discharges only the record’s certification debt.
+It does not extend this stopped session’s clock, rerun its science, change a scientific
+verdict, supply a missing artifact, or complete any target recorded as partial, stopped,
+unrun or absent.
+The original stop reason, resource accounting and unfinished complements
+remain historical facts.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

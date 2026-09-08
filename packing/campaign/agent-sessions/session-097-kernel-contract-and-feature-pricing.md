@@ -508,6 +508,7 @@ session:
     phase: 6
   outputs: [packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md, packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md, packing/devtools/kernel_axis_lp.py, packing/devtools/check_kernel_axis_lp.py, packing/tests/test_kernel_axis_lp_integration.py, packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-129-h125-finite-kernel-obstruction.md]
   checks:
+  - 'full gate: fast at cbe9fd76: passed'
   - 'full gate: full at d6f0c403: failed (historical controls, fast call ceilings, slow and exhaustive timeouts)'
   - Baseline 4620e483 is landed main from PR112. Immutable change-reachable push checks passed 45 selected steps in 121.37 seconds before this branch opened. Main full workflow 34160383036 subsequently completed successfully, including integration and exhaustive validation; these are baseline receipts, not checks of this session's new artifacts.
   - The initial session artifact passed softschema repair and validation with no repairs. The privacy-reduced cost snapshot through 21:09:24 UTC completed with exit 0 in 39.10 wall seconds; it is an active-session lower bound, not the final checkpoint cost.
@@ -521,7 +522,6 @@ session:
   - Prospective protocol424adf85 failed its records gate in170.62 seconds and push gate in396.61 seconds (403.25 external wall,227.85 user,35.71 system). Both failed only the stale synopsis round-count mutation anchor;645 reachable tests passed and three were deselected in303.47 seconds. The22:20 launch cutoff passed without protocol publication or scientific invocation. Exp129 records a blocked dependency guard and zero scientific time; its whole-child allowances remain unspent. The correction must earn its own passing checks and cannot retroactively admit the expired target.
   - The privacy-reduced active-task receipt through22:33:04 UTC completed with exit0 in70.55 external wall seconds (33.13 user,3.35 system). It remains a lower bound excluding later finalization; scientific time is not substituted for the cost of development, review or validation.
   - Actual PR116 engine workflow34166034785 failed validate only because the published Session097 still had phase4 active after its deadline; all163 anchors passed. Sweeps correctness passed but58.38s was below the old107.05s baseline's stale band. Suite, geometry, macOS and mergeability passed; full/deferred jobs were skipped. Think-c03a owns a six-sample baseline refresh, not weaker checks or a speedup claim.
-  certification_pending: think-m2lx
   stop_reason: Bounded research and record writers are stopped at the final checkpoint freeze; the scientific guard is terminal and corrected validation/publication are pending under think-m2lx. No passing full gate or successful session completion is claimed.
   next_action: Continue BC-264 under think-mq0d, whose operational certification and draft-publication prerequisites are retained in this record and owned by think-m2lx. Preserve every pending or failed result; only a new explicit allocation after those guards pass may admit the unspent first scientific invocation.
 ---
@@ -764,6 +764,24 @@ this branch. It supersedes the earlier23:38:23 UTC snapshot.
 Its measured interval extends beyond the stopped research session; it does not extend
 the scientific clock or imply that those later operations occurred in a research phase.
 The live-task receipt remains a lower bound, excluding work after that cutoff.
+
+## Integration Certification Addendum — 2026-09-08
+
+The corrected integration checkpoint combines the 62-step fast pass at `cbe9fd76`, the
+passing structured negative-control, slow and exhaustive component receipts at that same
+revision, and four unchanged full-only geometry passes recorded in the retained raw
+stdout from the failed `ef8a2e72` invocation.
+The reviewed `ef8a2e72..cbe9fd76` source diff leaves those four components unaffected.
+Together that log and the structured receipts cover all 69 declared validation steps.
+The `ef8a2e72` full invocation remains failed; the later component runs are not called a
+full invocation.
+
+This later integration result discharges only the record’s certification debt.
+It does not extend this stopped session’s clock, rerun its science, change a scientific
+verdict, supply a missing artifact, or complete any target recorded as partial, stopped,
+unrun or absent.
+The original stop reason, resource accounting and unfinished complements
+remain historical facts.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

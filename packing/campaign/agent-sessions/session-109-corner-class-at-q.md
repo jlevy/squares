@@ -91,6 +91,7 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md
   - packing/campaign/agent-sessions/session-109-corner-class-at-q.md
   checks:
+  - 'full gate: fast at cbe9fd76: passed'
   - For completed runs 1, 2, 3 and 3b, the lane reports each rationalised measure swept
     exactly in one worker on sqpack.fractional.sweep's
     integer mass grid over all 181 directions, with the eight marks carried as zero-weight
@@ -116,7 +117,6 @@ session:
     is stated in the lane's report to the coordinator, including the one check this record
     cannot satisfy on its own (no resource receipt of its own exists for a lane sub-agent;
     the coordinator attaches one at integration).
-  certification_pending: think-kbci
   stop_reason: An external usage limit halted the lane during run 4. Runs 4 and 5,
     the remaining mark branches and the banking-domain extension are unfinished;
     the retained appendix lacks the original driver and raw outputs.
@@ -164,6 +164,24 @@ or a branch’s LP acquires a free ray.
 Theorem B’s three-plus-one clip, the pinwheel and asymmetric mark branches, and H-127’s
 registered corner-box region were not reached; the section records each with the
 instrument gap that would have to be closed first.
+
+## Integration Certification Addendum — 2026-09-08
+
+The corrected integration checkpoint combines the 62-step fast pass at `cbe9fd76`, the
+passing structured negative-control, slow and exhaustive component receipts at that same
+revision, and four unchanged full-only geometry passes recorded in the retained raw
+stdout from the failed `ef8a2e72` invocation.
+The reviewed `ef8a2e72..cbe9fd76` source diff leaves those four components unaffected.
+Together that log and the structured receipts cover all 69 declared validation steps.
+The `ef8a2e72` full invocation remains failed; the later component runs are not called a
+full invocation.
+
+This later integration result discharges only the record’s certification debt.
+It does not extend this stopped session’s clock, rerun its science, change a scientific
+verdict, supply a missing artifact, or complete any target recorded as partial, stopped,
+unrun or absent.
+The original stop reason, resource accounting and unfinished complements
+remain historical facts.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
