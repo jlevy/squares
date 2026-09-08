@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 480
+count: 481
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -15753,3 +15753,139 @@ defects:
     marker. The existing mixed-math and next-line control remains active.
   bead: think-vzld
   recorded_in: packing/devtools/check_print_layout.py
+- id: D-481
+  title: The slow behavioural lane ran serially and the escape screen shared its runner
+  date: '2026-09-08'
+  layer: tooling
+  class: robustness
+  direction: conservative
+  detected_by: gate
+  latent_for: >-
+    Three days for the lane -- BC-214 landed the split on 2026-09-05 and every merge after
+    it ran the slow half in one process -- and one day for the screen, which fitted inside
+    the shared cap until the n=1..324 corpus expansion landed on 2026-09-07.
+  severity: high
+  status: fixed
+  what: >-
+    Two steps of the post-merge gate were given less parallelism than the runner had.
+    BC-214 split the behavioural suite into a quick lane and a slow lane, but only the
+    quick lane's command carried xdist, so the half selected for costing the most was
+    the one place in the gate that ran a test suite in a single process: 1020.77s
+    serially over 97 tests on a four-cpu box. The whole single-square translation escape
+    screen is a process pool sized by PACK_JOBS, and beside the rest of the gate at
+    `--inner-jobs 2` it got two workers where the runner has four.
+  consequence: >-
+    Both steps were killed at their subprocess caps on run 34172652457, taking main red
+    after the n=1..324 corpus expansion: 1801.00s and 901.00s, which are the caps and not
+    measurements. The post-merge run 34176106076 then finished the same code, the screen at
+    858.62s with 41s of margin, and an hour later the deep-gate run 34177317419 killed it at
+    901.00s again. The obvious reading is that the gate's colour was decided by which runner
+    a merge drew, and runner draw is the likeliest single cause, but it is not the only
+    difference between those two runs and this entry should not assert it as though it were:
+    34176106076 ran the post-merge selection, `--skip "exhaustive exact behavioral tests"
+    --jobs 2 --inner-jobs 2` over about sixty steps, while 34177317419 ran the deep gate's
+    six-step `--only` selection. Job composition is confounded with runner draw, and one
+    reading per configuration cannot separate them, which is D-472's finding one level up.
+    What survives the confound is the narrower fact that the truncated readings are caps, so
+    neither could say by how much either step had really grown.
+  fix: >-
+    Give both lanes the same `_xdist_distribution` helper, so the slow lane is sized by
+    `cpus - jobs + 1` like the quick one. Split the escape screen onto its own job at
+    `--jobs 1 --inner-jobs 4` in both the post-merge gate and the deep gate, which is four
+    pool workers instead of two, and drop it from the selections it shared so it is not
+    paid for twice; the deep gate's required job waits on the new one, or the split would
+    quietly make it advisory (D-380). Give it an explicit 1800s budget, since `--only`
+    reports no tier and leaves no gate-budgets.yaml ceiling behind it.
+    Measured after, slow lane: the same 97 tests pass under xdist and cost 718.52s at four
+    workers against 1020.77s serially on one four-cpu development box, a 1.42x rather than
+    the 4x the worker count suggests. Two caveats belong with that number wherever it is
+    quoted. Four workers is not the shape CI runs: both jobs that carry the lane pass
+    `--jobs 2`, which is three workers, and a reading in that shape on a contended box was
+    795.11s, about 1.28x. And each arm is a single reading taken with other work in flight,
+    so by D-472 the ratio is a sample rather than a measurement; what the pair establishes
+    is the sign and the rough size. It is at least a controlled comparison -- same box,
+    same 97 tests, worker count the only deliberate change -- which is what the screen's
+    readings are not.
+    Two things the lane's fix does not reach, and the record should carry both. Its xdist is
+    conditional on shape: workers are `cpus - jobs + 1`, so packing-validate with no
+    `--jobs` defaults jobs to the cpu count, leaves one worker, and runs the slow lane in a
+    single process exactly as before. The change bites only where `--jobs` is below the cpu
+    count -- CI, and an explicit local `--jobs` -- so the default local full gate is
+    unimproved. And the lane's own 1800s budget was never re-argued after the lane gained
+    xdist, because every CI reading it had to clear was censored: killed at the cap, so
+    1801s is arithmetic rather than a duration.
+    One watch item the fix creates. The lane's floor check fails a slow-marked test whose
+    call phase is under 1.0s, and it reads a durations list that xdist makes less stable:
+    under `--dist load` a memoized module-level build is billed to whichever test reaches it
+    first per worker, and contention inflates call time. Both push measured cost up, so the
+    floor became more permissive rather than noisier, and a stale marker can now survive it.
+    Nothing is masked today -- the last full reading had no member under the floor and its
+    cheapest at 2.07s -- but the two-sided rule that keeps the lanes honest is now measured
+    under a shape that flatters it.
+    Measured after, screen: three hosted readings of the split job, all of them at four
+    workers -- 944s on run 34188003140, 861s on run 34189176373 and 949s on run 34190285360
+    -- a 1.102x spread with a geometric mean of 917.09s. That is 1.0190x the 900s cap the
+    step had been running under, so what the sample supports is that the step usually
+    exceeds that cap: two of the three readings are above it. It does not support a rate.
+    "At 900 it fails about half the time" was written here from n=2 and is withdrawn; n=3
+    cannot measure a failure percentage either, and the honest statement is a direction
+    with the sample size attached.
+    That conclusion was fragile when it was written, and the record says so rather than
+    presenting 917.09s as though it had always been solid. On the first two readings the
+    geometric mean was 901.55s -- 1.5s above the cap, not the "within a second" this entry
+    first claimed -- and any third reading below 896.9s would have pulled the mean under
+    900s and inverted every claim resting on it. The third reading was 949s, so it did not.
+    That is luck rather than design. The budget raise is load-bearing on the evidence as it
+    now stands; what would earn the claim is more readings, not this paragraph.
+    1800s is 1.9627x the mean, which is inside the max_headroom 2.0 in
+    devtools/gate-budgets.yaml. Read that as an analogy and nothing more: check_gate_budgets
+    applies max_headroom to the tier entries in that file, a step's budget_seconds is not
+    one of them, and budget_seconds appears nowhere in sqpack/gate_budgets.py or devtools/,
+    so nothing compares this number against a measurement. The ratio is chosen for
+    consistency with the tier policy and it is unenforced.
+    Measured after, job level: deep-gate run 34190285360, on the head that also splits the
+    screen out of the deep gate, finished every job green -- deferred-steps 1454s, screen
+    949s, the exhaustive tier passing, deep-gate-required PASS -- against run 34177317419,
+    where deferred-steps failed at 2245s. So the job went from failing at 2245s to passing
+    at 1454s, and the 791s cannot be attributed to either change: the 2245s baseline
+    contains two killed steps whose 901.00s and 1801.00s are caps rather than durations,
+    and two things landed between the runs, the screen leaving the job and the slow lane
+    gaining xdist. Nothing measured here separates them. Inside that job, at
+    `--jobs 2 --inner-jobs 2` over a 1451.27s wall: slow behavioural tests 1212.70s of an
+    1800s cap -- the first uncensored hosted reading of the lane, 587s inside its budget --
+    negative controls 685.71s of 1800s, the n=1..324 atlas rebuild 653.91s of 900s, the
+    n=40 rigidity bracket 198.98s and the exact rational grid replay 39.59s. So running the
+    lane's xdist workers beside another outer slot pushed no step past its cap on this run,
+    and the thinnest margin left was the atlas rebuild's 246s. That is one run, which is
+    where D-472 applies rather than a claim of comfort.
+    Two limitations, stated plainly because the first draft of this entry guarded against
+    the unflattering inference while keeping the flattering framing. First, the screen is
+    not shown to be faster at four workers than at two. The 858.62s it cost at two workers
+    on run 34176106076 is below all three four-worker readings; that comparison is
+    confounded, by runner draw and by job composition both, but the confound cuts both ways
+    and cannot be spent only against the direction one prefers. What the hosted evidence
+    supports is that at four workers the step is not measurably faster than it was at two,
+    and may be slower. It does refute the 613-846s this entry first predicted by applying
+    the lane's 1.42x to 858.62s. Second, and for the same reason, the claim that neither
+    step scales with its worker count is withdrawn for the screen: its three readings are
+    all at one worker count and cannot bear on scaling, and the only cross-worker
+    comparison available is the confounded one just described. An entry cannot disqualify a
+    comparison and then conclude from it. The scaling claim stands for the slow lane alone,
+    where 1020.77s serial against 718.52s at four workers is a controlled A/B on one box.
+    The screen needs a same-runner two-versus-four reading; that is open on think-ph9v.
+    Taxonomy: this entry carries two defects of different classes under one id. The screen
+    half is robustness -- a step that finished only when the runner was kind -- and the slow
+    lane half is performance in D-456's sense, work that completed but cost 1020.77s where
+    718.52s was available because one command was missing a flag. It is filed as robustness
+    for the half that took main red, so the class table undercounts performance by one.
+    Kept as one entry rather than split because the two halves have a single cause,
+    parallelism the runner offered and the gate did not take, one fix and one regression
+    test; the alternative was two ids sharing every other field.
+  regression: >-
+    packing/tests/test_validation_cli.py::test_the_post_merge_jobs_partition_the_gate
+    resolves all three post-merge commands through the CLI's own selector and requires
+    them to partition STEPS, so a step cannot land in two jobs or none.
+    packing/tests/test_module_boundaries.py pins both solo commands and the two-skip
+    integration command.
+  bead: think-ph9v
+  recorded_in: packing/src/sqpack/cli/validate.py

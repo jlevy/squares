@@ -2,7 +2,7 @@
 
 # Defect log
 
-480 defects recorded across the packing toolchain.
+481 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -23,9 +23,9 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | `inspection` | 62 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 72 | the automated test suite |
+| `gate` | 73 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 72 of 480, and none of the 98 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 73 of 481, and none of the 98 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 72 of 480, and none of
 | quench | 23 |
 | verifier | 12 |
 | record | 149 |
-| tooling | 174 |
+| tooling | 175 |
 | docs | 111 |
 
 ## By kind
@@ -45,7 +45,7 @@ The line worth reading twice: **the automated gate caught 72 of 480, and none of
 | soundness | 98 |
 | validity | 122 |
 | bookkeeping | 182 |
-| robustness | 60 |
+| robustness | 61 |
 | performance | 18 |
 
 ## Fixed, but nothing stops it coming back
@@ -725,6 +725,7 @@ This is the actionable list.
 | [D-478](docs/project/reviews/review-2026-09-06-published-core-claims-adversarial.md) | 2026-09-06 | record | validity | flattering | `review` | medium | contained | The BC-206 cutting floor has no retained family for independent replay |
 | [D-479](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | 2026-09-07 | docs | soundness | flattering | `review` | medium | fixed | Case summaries replaced cited geometric helper proofs with generic pure dots counting |
 | [D-480](packing/devtools/check_print_layout.py) | 2026-09-07 | tooling | validity | conservative | `inspection` | low | fixed | Raised footnote ink shifted the list-marker alignment measurement |
+| [D-481](packing/src/sqpack/cli/validate.py) | 2026-09-08 | tooling | robustness | conservative | `gate` | high | fixed | The slow behavioural lane ran serially and the escape screen shared its runner |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
