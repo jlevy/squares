@@ -258,17 +258,23 @@ EXHAUSTIVE_SUITE_BUDGET_SECONDS = 3600.0
 #: its own job `--only` reports no tier and there is no `gate-budgets.yaml` ceiling behind
 #: it: this number is the only bound on that job.
 #:
-#: Why not leave it at the shared 900s, given the job doubles the screen's workers. The
-#: worker count is not the speedup. The slow lane's own doubling, measured the same day,
-#: returned 1.42x rather than 2x, and applying that here to the 858.62s the screen cost at
-#: two workers on run 34176106076 gives about 613s -- on the *fast* of the two runners
-#: seen that night. The slow one ran the same gate 1.38x heavier, which puts the same
-#: screen near 846s, and 900 is not a hang detector at 846. So the doubling is real and
-#: the cap still had to move; 794.5s at four workers over 318 records on a four-cpu
-#: development box is the local reading either estimate has to sit beside.
+#: Why not leave it at the shared 900s, given the job doubles the screen's workers.
+#: Because the doubling did not buy what it looked like it would, and the hosted number
+#: says so: **944s at four workers** on run 34188003140, the deep gate's first `screen`
+#: job. That is past the old cap. Splitting the job and leaving the cap at 900 would have
+#: produced a red gate on the very first run of the split.
 #:
-#: 1800 is about 2.1x the slow-runner estimate. A screen that has genuinely hung is still
-#: killed inside half an hour, which is what the number is for.
+#: The estimate this replaces was 613-846s, reached by applying the slow lane's measured
+#: 1.42x to the 858.62s the screen cost at two workers on run 34176106076. It was wrong,
+#: and optimistic. What it cannot support is the opposite claim either: 858.62s was a
+#: different (faster) runner, so 944s against it is not evidence that four workers are
+#: slower than two. One reading per configuration is a sample (`D-472`), and there is one
+#: reading at four workers. 794.5s at four workers over the same 318 records on a
+#: four-cpu development box is the local figure beside it.
+#:
+#: 1800 is 1.9x the one hosted reading. A screen that has genuinely hung is still killed
+#: inside half an hour, which is what the number is for. `think-ph9v` owns the open
+#: question of why neither this step nor the slow lane scales with its worker count.
 SCREEN_BUDGET_SECONDS = 1800.0
 
 
