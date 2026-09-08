@@ -265,7 +265,10 @@ EXHAUSTIVE_SUITE_BUDGET_SECONDS = 3600.0
 #: at `--jobs 2 --inner-jobs 2`, run 34176106076, read from that run's own
 #: `validation-timings-validate-1` receipts -- against 766.26s idle locally at
 #: `n=1..324` (`benchmarks/gate-cost-at-324/`). 1800s is 2.10x the CI reading, inside
-#: the 1.77x-to-2x margin the budgets above carry over their own measurements.
+#: the 1.77x-to-2x margin the budgets above carry over their own measurements. The
+#: first serial deferred run, 34183723509, read 1069.84s with the runner to itself,
+#: which leaves 1800s at 1.68x the highest reading; the margin is thinner than the
+#: fast tier's, and the next widening of the corpus is the argument to revisit it.
 #:
 #: It is declared because the shared 900s cap had stopped bounding the step and started
 #: bounding the runner it happened to get. The same tree passed the post-merge job with
