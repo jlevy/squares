@@ -5,7 +5,7 @@ title: Publish and validate Session097 integrated research checkpoint
 kind: task
 status: in_progress
 priority: 1
-version: 29
+version: 30
 spec_path: packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md
 labels: []
 dependencies: []
@@ -21,10 +21,10 @@ child_order_hints:
   - is-01m1z1d949sby1tkrav2k92sfh
   - is-01m1z2grw8sr01t7ynft3hrnz9
 created_at: 2026-09-07T21:04:19.475Z
-updated_at: 2026-09-08T01:37:04.298Z
+updated_at: 2026-09-08T01:43:21.825Z
 ---
 At each useful block boundary stop writers; review spec/agenda status and all diffs under tbd shortcuts and Practical Prose; regenerate the document, ledger and session views; retain a privacy-reduced interval receipt with fixed start20:56:47.766UTC and observed end; run change-reachable push validation and the complete immutable checkpoint as required; commit explicit owned paths, push, create/update one cost-first PR with results, limits, ownership and ID allocations; follow actual hosted CI results asynchronously. Keep pending and passed distinct, and sync beads.
 
 ## Notes
 
-User authorized landing and explicitly asked not to wait on long tooling. Both upstream merges reviewed; main831697c0 includes111/117. Localpush38738 selected whole non-exhaustive suite, stillactive after11min, with all otherchildren finished. To avoid serializing hosteddeep behind the long localrun, publishing the integrated source with local suite explicitly pending. One Markdown reflow detected byformatcheck; normalcommit hook applies it. Localrun is supporting integration evidence, not an immutable finalhead/full declaration; actual fresh hosted fast+deferred must gate landing. PRbody organized in /private/tmp/squares-pr116-KN0zs3/body.md and published. Next ready+dispatchdeferred once finalsource pushed, verify actualsource/basepair, syncdonevsopenbeads, mergeonlyvalidatedhead. No newscience; proposalsycuo/6l2l remainopen.
+Published clean HEAD e2655fe8f3a3b6caedd0f9703beb8a8bb8fcd6af integrates main831697c0, two merge commits a61b/e265. PR116 READY, MERGEABLE; no review comments or requests. Required fast34177255341 final SUCCESS; mergeabilitypass; watch75133completedexit0. Deferred dispatch34177317419 IN_PROGRESS, jobs101909204438(deferredsteps) and101909204441(exhaustive); dispatch metadataheadmain notcheckedoutidentity. Verify actualmatchingcheckoutlogs andtreebeforecombining. Localbroadpush38738 remainsrunning, startedbeforefinalcommit/reflow so supportingnotimmutable. Userexplicitlandauthorization saved. Next fullpass→truthful stopped-session certification receipt/removepending, rerunaffectedrecords/push/fast+negativecontrols, carry otherunchangeddeferredcoverage withevidence, updatePR/beads andmergeexactvalidatedhead. No researchopened; H125/exp129 untestedblocked; processproposalsycuo/6l2l open. PRbody latest /private/tmp/squares-pr116-KN0zs3/body.md, costthrough01:14:55. tbd sync succeeded sent7new4updated beforethisnote.
