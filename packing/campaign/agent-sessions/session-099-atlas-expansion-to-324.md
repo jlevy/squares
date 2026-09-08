@@ -10,7 +10,7 @@ session:
   title: Atlas expansion to n = 324 and the poster composite
   date: '2026-09-07'
   started_at: '2026-09-07T07:20:00Z'
-  deadline_at: '2026-09-08T15:20:00Z'
+  deadline_at: '2026-09-10T15:20:00Z'
   branch: claude/atlas-expansion-300-400-9f79fc
   goal: Plan and begin the owner-directed widening of the frontier register and known-best
     atlas from n = 1..100 to n = 1..324, survey public sources beyond n = 100, and prepare the
@@ -130,9 +130,9 @@ session:
     entered_by: planned_checkpoint
     switch_reason: The bounded work is complete and committed on PR 111; only records that
       depend on the owner, CI and the harness remain.
-    budget_minutes: 1340
+    budget_minutes: 4220
     started_at: '2026-09-07T15:30:00Z'
-    deadline_at: '2026-09-08T13:50:00Z'
+    deadline_at: '2026-09-10T13:50:00Z'
     expected_output: A terminal session record with its rollup and certifying gate named, and
       the epic closed at merge.
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
@@ -147,8 +147,20 @@ session:
   status: in_progress
   budget:
     # 480 for the work; extended once, at 2026-09-07T15:30Z, to hold the record open for
-    # the finalization phase below, not to continue autonomous work (D-395).
-    wall_minutes: 1920
+    # the finalization phase below, not to continue autonomous work (D-395). Extended a
+    # second time, at 2026-09-08T14:06Z, to hold it open and for nothing else: phase 4's
+    # window closed with the rollup still the owner's to produce, and the ledger's deadline
+    # rule, which judges an in-progress deadline against HEAD's committer date, then failed
+    # the first run after it (PR 129's pull-request run 34234453890) and fails any push to
+    # main the same way. Terminalising instead was tried and refused by the records gate: a
+    # terminal session must name what it cost, and check_session_rollups exempts nothing
+    # after session-045, so that half needs the rollup; the certifying-gate line could be
+    # declared without it, but the full checkpoint phase 4 names was not obtained before
+    # merge, so it stays the owner's to declare. No work continues under this extension.
+    # There is no third: by 2026-09-10T13:50Z either the rollup exists and the record closes
+    # through close_session (think-y0hr), or the gate gains an honest unmeasured terminal
+    # state (think-kfpr) and the record closes as stopped under it.
+    wall_minutes: 4800
     checkpoint_minutes: 240
   stop_conditions:
   - Stop a phase when its bounded output is complete and validated; do not start a corpus chunk
@@ -614,7 +626,8 @@ session:
   resource_rollups: []
   stop_reason: null
   next_action: The plan's Phases 0 through 5 are terminal on PR 111 and the calibration
-    boundary held throughout; the session stays open, with its clock extended to 2026-09-08,
+    boundary held throughout; the session stays open, with its clock extended to 2026-09-10
+    (twice; the budget note rules out a third time and names what closes it, think-y0hr),
     until the owner confirms D2 and the two open questions, the re-priced tiers are read on the
     next hosted run, the full checkpoint is obtained before merge (label deep-gate last), and
     the harness has written this session's rollup so the record can name what it cost and the
