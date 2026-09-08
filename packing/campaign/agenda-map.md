@@ -2,7 +2,7 @@
 
 # Agenda map
 
-264 agenda commitments across 28 agendas, as declared in each agenda's own frontmatter.
+271 agenda commitments across 29 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **6** in_progress, **19** ready, **11** tentative, **59** blocked, **41** stopped, **128** complete.
+- **6** in_progress, **22** ready, **12** tentative, **61** blocked, **41** stopped, **129** complete.
 
-- **17 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **18 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-289`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -56,6 +56,10 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-028 | `BC-275` | ready | 1 | efficiency | measurement_validation | Which mathematical result per unit of attention warrants the next overnight allocation? | `think-1v6g` |
 | agenda-028 | `BC-272` | tentative | 2 | insight | research | Does retaining the common anchor remove a diagnosed H119 correlation loss? | `think-cy6g` |
 | agenda-028 | `BC-274` | tentative | 2 | insight | research | What concrete implication could establish or obstruct the existential H121 normal form? | `think-5hmt` |
+| agenda-029 | `BC-285` | ready | 0 | insight | research | What quantitative corner-frame restrictions follow from insertion saturation at 96/25? | `think-pbv4` |
+| agenda-029 | `BC-287` | ready | 0 | insight | research | Can the global four-blocker description support a useful continuous frame-conditioned dot contradiction? | `think-1rim` |
+| agenda-029 | `BC-286` | ready | 1 | insight | research | Can complete angle-count cases at 96/25 gain a useful exclusion from class-dependent dot thresholds? | `think-yv7r` |
+| agenda-029 | `BC-288` | tentative | 2 | insight | research | Can forced edge-contact components or a finite feasible reduction constrain minimizing angle complexity? | `think-m6gb` |
 
 ## Blocked, and on what
 
@@ -122,6 +126,8 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-027 | `BC-262` | 1 | `BC-261` | no | — |
 | agenda-027 | `BC-263` | 1 | `BC-261` | no | — |
 | agenda-028 | `BC-271` | 1 | `BC-270`, `BC-261` | no | — |
+| agenda-029 | `BC-289` | 0 | — | no | First-block evidence and disposition; no route is selected or funded by this planning checkpoint. |
+| agenda-029 | `BC-290` | 0 | `BC-289` | no | — |
 
 ## Discharged elsewhere
 
@@ -170,6 +176,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-026 | active | 2 | 2 | 2 | 3 |  | 5 | 14 |
 | agenda-027 | active | 1 | 3 | 1 | 3 |  | 3 | 11 |
 | agenda-028 | paused |  | 3 | 2 | 1 |  | 1 | 7 |
+| agenda-029 | paused |  | 3 | 1 | 2 |  | 1 | 7 |
 
 ## By program
 
@@ -301,6 +308,20 @@ Open frontier: `BC-270`, `BC-271`, `BC-272`, `BC-273`, `BC-274`, `BC-275`.
 | agenda-024 | `BC-250` | complete | Which reviewed mathematical directions justify the next parallel work, and are their hypotheses,… |
 
 Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
+
+### `n11-structure-and-conditional-dots`
+
+| agenda | id | state | question |
+| --- | --- | --- | --- |
+| agenda-029 | `BC-284` | complete | Which structural restrictions and conditional proofs deserve the next major n11 allocation? |
+| agenda-029 | `BC-285` | ready | What quantitative corner-frame restrictions follow from insertion saturation at 96/25? |
+| agenda-029 | `BC-286` | ready | Can complete angle-count cases at 96/25 gain a useful exclusion from class-dependent dot thresholds? |
+| agenda-029 | `BC-287` | ready | Can the global four-blocker description support a useful continuous frame-conditioned dot… |
+| agenda-029 | `BC-288` | tentative | Can forced edge-contact components or a finite feasible reduction constrain minimizing angle… |
+| agenda-029 | `BC-289` | blocked | What is the strongest consequential theorem or obstruction the best first-block lead can establish? |
+| agenda-029 | `BC-290` | blocked | What survives independent checking, and what does it change about the global n11 problem? |
+
+Open frontier: `BC-285`, `BC-286`, `BC-287`, `BC-288`, `BC-289`, `BC-290`.
 
 ### `reach-table-ladder`
 
