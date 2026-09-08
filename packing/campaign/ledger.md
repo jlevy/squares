@@ -636,7 +636,7 @@ Status: **active**. Run X-021's research sessions as parallel lanes with disjoin
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 85 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 87 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -747,8 +747,8 @@ Status: **active**. Run X-021's research sessions as parallel lanes with disjoin
 | H-127 | blocked | proof | At side 96/25 the corner-class covering program — every admissible cor |  | 0 |  |  |
 | H-128 | open | proof | There is a valid D4-symmetric measure at side 96/25 on the retained sh |  | 0 |  |  |
 | H-129 | open | proof | With closed unit placements (shrink B = 1) and a direction net dense n |  | 0 |  |  |
-| H-130 | open | proof | Every packing of eleven unit squares at side at most 96/25 has a squar |  | 0 |  |  |
-| H-131 | open | proof | In every packing of unit squares in the container of side 96/25, at mo |  | 0 |  |  |
+| H-130 | confirmed | proof | Every packing of eleven unit squares at side at most 96/25 has a squar |  | 1 |  | 37.2m wall |
+| H-131 | confirmed | proof | In every packing of unit squares in the container of side 96/25, at mo |  | 1 |  | 31.2m wall |
 | H-132 | blocked | proof | Eleven unit squares with pairwise disjoint interiors do not fit in the |  | 0 |  |  |
 | H-133 | open question | proof | Is the restricted covering value of exactly 11.000000 that two site se |  | 0 |  |  |
 | H-134 | open | proof | There is a set of at most eleven marks (points or short segments, thic |  | 0 |  |  |
@@ -828,7 +828,7 @@ Status: **active**. Run X-021's research sessions as parallel lanes with disjoin
 | exp-118 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-252 | H-107 | The prospective record gate was not complete by the 03:16 UTC launch cutoff; no target or verification process ran and both allowances remain unspent. |
 | exp-129 | series-000 | 11 | Session097 coordinator under BC264 and think-rzdb; independent max mathematical admission | H-125 | Required protocol checks and publication did not complete before the immutable22:20 launch cutoff. No scientific process ran; H125 remains untested and both child allowances are unspent. |
 
-### accepted (27)
+### accepted (29)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -859,6 +859,8 @@ Status: **active**. Run X-021's research sessions as parallel lanes with disjoin
 | exp-120 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-255 | H-109 | Independent exact A1 replay passed on both closed angle signs; the reviewed reflection establishes A2. |
 | exp-121 | series-000 | 11 | Codex coordinator, max mathematical judgment, Session091 BC-255 | H-110 | The independently reconstructed frozen square is contained in the box and strictly avoids all twelve unchanged points. |
 | exp-123 | series-000 | 11 | Session091 coordinator, BC255, max mathematical judgment | H-123 | The independent exact four-guard certificate and reviewed geometric reduction prove complete H123 localization on the actual near45 domain. |
+| exp-130 | series-000 | 11 | the BC-295 lane agent of agenda-030, bead think-ndqj, session-102; the record was written by a separate record lane from the frozen result section | H-130 | H-130's criterion is met and passed three times over: Theorem A clears the 3° bar by 0.1846° on grid 79 in the shape the hypothesis asked for, Theorem B by 8.8582° on the same grid, and Theorem C by 9.3138° on grid 119 — each an exact decision of decide_class_program, none of them using Stromquist's Theorem 3 or its lemmas. |
+| exp-131 | series-000 | 11 | the BC-295 lane agent of agenda-030, bead think-ndqj, session-102; the record was written by a separate record lane from the frozen result section | H-131 | All eight counts are now decided under a registered round rather than cited from a planning lane, every exact mass reproduces the planning lane's to the fraction, and no declared falsifier occurred — so H-131 is confirmed as stated and its counts may be cited as results of this record, on the site set this record names. |
 
 ### baseline (11)
 
@@ -894,7 +896,7 @@ Status: **active**. Run X-021's research sessions as parallel lanes with disjoin
 
 ## Effort
 
-85 rounds, 2152.1 agent-minutes, 1223.3 wall-minutes.
+87 rounds, 2152.1 agent-minutes, 1291.6 wall-minutes.
 
 ## Exploration reports not yet codified
 
