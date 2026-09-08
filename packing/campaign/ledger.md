@@ -112,6 +112,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-096](agent-sessions/session-096-stromquist-memos-and-helpers.md) | completed | retrospective | `research-survey` (correctness) | `documentation-pass` (correctness) | 4 | think-7u4s | After the final pre-push check and review publication, preserve BC-264 under think-mq0d as the existing H114 feature and kernel-contract pricing entry. The source brief separately retains the geometric replay dependency; this review activates no new target or unchanged retry. |
 | [session-097](agent-sessions/session-097-kernel-contract-and-feature-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 6 | think-c53m | Continue BC-264 under think-mq0d by resolving the operational certification and draft-publication prerequisites retained in this record. Preserve every pending or failed result; only a new explicit allocation after those guards pass may admit the unspent first scientific invocation. |
 | [session-099](agent-sessions/session-099-atlas-expansion-to-324.md) | in_progress | contemporaneous | `research-survey` (correctness) | `review-planning-oversight` (process) | 4 | think-0juv | The plan's Phases 0 through 5 are terminal on PR 111 and the calibration boundary held throughout; the session stays open, with its clock extended to 2026-09-08, until the owner confirms D2 and the two open questions, the re-priced tiers are read on the next hosted run, the full checkpoint is obtained before merge (label deep-gate last), and the harness has written this session's rollup so the record can name what it cost and the gate that certified it. Phase 6 stays closed under D1 unless the owner chooses the caveated form. |
+| [session-100](agent-sessions/session-100-duality-kill-tests-and-unit-value.md) | stopped | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-7lp3 | Coordinator: regenerate the rollup at closeout, apply the recommended H-129 status (open), and hand the saved B = 1 state to a convergence run on an unloaded core before 3.86 and 3.87; the certification debt under think-7lp3 clears with the next qualifying gate on the integrated branch. |
 
 ### Workflow summary
 
@@ -124,7 +125,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 19 | 1 | 60 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 10 | 4 | 68 | 7 |
+| `research-loop` | 11 | 4 | 69 | 7 |
 | `pipeline-improvement` | 25 | 0 | 128 | 1 |
 | `documentation-pass` | 1 | 0 | 10 | 1 |
 | `review-planning-oversight` | 0 | 0 | 3 | 0 |

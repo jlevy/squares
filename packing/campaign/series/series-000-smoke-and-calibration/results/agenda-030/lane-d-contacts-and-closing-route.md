@@ -1294,6 +1294,1155 @@ if __name__ == "__main__":
     main()
 ```
 
+## Session-100 — duality kill tests and the B = 1 value (2026-09-08)
+
+Lane BC-294 of Agenda 030, hypothesis H-129, bead `think-7lp3`, session-100: one
+research lane of 2.5 hours (04:27:52Z to 06:57:52Z) on one worker of a four-core machine
+shared with five other agents (load average 4 to 6 throughout), `PACK_JOBS=1`.
+Wall times below are therefore not comparable with the planning lane’s or with BC-200’s.
+Nothing here allocates an identifier or edits a shared record; the frozen families and
+states are under the lane scratchpad (`scratchpad/lane-294/`) and their bytes are what
+the numbers below were verified from.
+Notation is Section 1.6’s: `q = 96/25`, `B = 9977/10000`, `U = 3.877083590`,
+a *family* is a finite set of weighted closed squares in `[0, q]²` with exact depth at
+most 1 at every vertex of its own arrangement, and its *value* is its total weight.
+
+### The question and the reading rule
+
+By Lemma D (Section 1.6) the covering mass of *every* measure a certificate could use
+is at least the value of any family the measure must cover, and the same inequality
+holds with the placements restricted to those disjoint from a region `R` (the
+conditional program of X-014 Lemma 2) and with the thresholds of a capture certificate.
+Two instances are measured here.
+
+- **`B = 1` at `q`.** The placements are closed *unit* squares at the net directions.
+  A unit square at angle `θ ∈ [0, π/4]` contains a `B`-square at a net angle whenever
+  Condition 4 holds (`B(1 + D) < 1`), so a family of unit squares bounds from below the
+  covering mass of every `(B, net)` the method can use, and of the shrink-free `B = 1`
+  instrument with the continuum of directions in particular; `verify_ceiling` reports
+  this as the `unit` regime when the *declared* `(B, net)` satisfies Condition 4.
+  Declared with `square_side = 1` the same bytes are verified in the `net` regime with
+  `B = 1`, a weaker statement about the same family, so both declarations are reported.
+  A value `≥ 11` with at least one unit of weight outside Trump’s neighbourhood kills
+  every one-body certificate at `q` and above, capture included (D2); a value below 11
+  decides nothing by itself.
+- **Restricted values at `q` with the retained `(B, net)`.** The placements are the
+  retained `B`-squares at the retained 181-direction net, disjoint from `R`. The cell’s
+  thresholds: kill at `≥ 10` (one boxed blocker is worth about one unit of fractional
+  weight, Section 1.6 D4, so `10 + capacity(Π_b) ≥ 11`), alive below `9.5`, undecided
+  between, or when only a lower bound exists.
+
+The reading rule for what each number *is*: a verified family gives an exact lower
+bound on the fractional packing value and hence on every covering mass; a covering LP on
+a finite site set whose row generation converged gives, by the same weak duality applied
+to the discrete site measure, an upper bound on the fractional packing value over the
+placements at the net directions — in floating point with the row oracle’s tolerance
+`10⁻⁹`, not exact — and a site LP whose rows did not converge is context only.
+
+### Falsifiers, stated before the runs
+
+- For every family below: an exact-depth failure (`verify_ceiling` condition K2) on the
+  frozen bytes refutes the value claimed for it; there is no other refutation.
+  Every family was verified from its bytes after the run that produced it, and the
+  polished families a second time under the re-declared `(B, net)`.
+- For a claimed kill: the same K2 check, plus the exact disjointness of every placement
+  from the region (asserted in the restricted driver on every family it judged) and the
+  exact weight split.
+- For a claimed “alive”: the row generation must report `converged` on the final site
+  set; a deadline stop leaves the region undecided whatever the objective says.
+
+### Instruments used
+
+The cutting-plane loop of `sqpack.fractional.cutting` is the entry the cell names, and
+it was driven by three scratch scripts (appendix), none of which touches an instrument
+file:
+
+- `unit_loop.py` runs `cutting_plane_loop` with `square_side = 1` on a merged net (the
+  retained 180-step net plus seven steps of `h/8` above `0°` and Trump’s `u` with seven
+  steps of `h/8` on either side, 203 directions), warm from BC-200’s state at `191/50`
+  with the carried rows’ direction indices remapped onto the merged net and every row
+  clamped into the unit centre domain.
+- `polish_family.py` is new in kind: the loop restores feasibility by dividing every
+  weight by the exact maximum depth (BC-200: `11.06` at the sites became `9.91`), which
+  discards everything the family had below depth 1 elsewhere. With the support fixed
+  the arrangement and its vertex set do not move, so the polisher solves
+  `max Σ w_e` over one weight per D4 orbit subject to exact depth `≤ 1` at a working set
+  of vertices, rounds *down* to a common denominator, re-decides every vertex exactly
+  with `depths_above`, adds the violated ones and repeats; the result is verified by
+  `verify_ceiling` like any other family. It is the measurement instrument this lane
+  would ask to have built (OR-1), and it is reported as scratch because the cell names
+  no instrument file.
+- `restricted_loop.py` re-drives the loop with a disjointness filter on the dual side:
+  the row oracle (`generate.placement_cells`) runs on the real sites plus phantom points
+  of weight 1000 filling `R` at spacing `1/16`, so placements deep in `R` are never the
+  least-covered cells it proposes; each surviving cell is tested for disjointness in
+  floats with a margin, snapped, and re-tested exactly (separating-axis test in
+  `Fraction`) before it is held; the D4-symmetrised family is disjoint from `R` because
+  `R` is D4-symmetric, and the driver asserts that on every family it judges.
+  The instrument’s sites and duals are D4-symmetric, so it computes the restriction off
+  a D4-symmetric region only: the four corner boxes together, or the central box.
+  A single corner box or the corner triangle are not symmetric programs, and the
+  instrument cannot express them; they inherit a kill from the four-box result (a
+  family disjoint from four boxes is disjoint from one) and never an “alive”, and
+  `subrestrict.py` reads their lower bounds off any verified family exactly.
+- `trump_split.py` scales Trump’s exact pose (`cases.trump11.packing`, 40-digit
+  enclosures) by `q/U`, closes it under D4, and splits a family’s weight by folded
+  angle (within `1°` of `0°` or of `40.181937°`) and by position (within `0.05` of a
+  scaled Trump centre of that class).
+
+### Remarks proved without a run
+
+- **The `B = 1` value at `q` is at least 10** (proved). `s(10) = 3 + √2/2 < 96/25`
+  (`frontier/n-010.md`, proved), so ten closed unit squares pack in `[0, q]²`; that
+  packing is a family of value 10 with depth at most 1, whatever its angles are.
+  Hence every `B = 1` covering measure at `q` has mass at least 10, and a `B = 1`
+  certificate at `q`, if one exists, has mass in `[10, 11)`. The same holds at every
+  larger side. Nothing in this lane can lower the `B = 1` covering value below 10; the
+  question is only whether it reaches 11.
+- **Monotonicity in the shrink** (proved, one line). A family of unit squares at side
+  `L` scaled by `B` is a family of `B`-squares at side `BL`, and conversely, so
+  `ν*₁(L) = ν*_B(BL)`. The `B = 1` value at `q` is the retained-shrink value at
+  `Bq = 3.831168`, inside the band `[3.810, 3.868983]` between the retained certificate
+  frontier (T-022) and the retained shrink’s plain cap; the site LP at `191/50 = 3.82`
+  with converged rows was `11.0556` (BC-200), which is an upper bound on the finite-net
+  value there and does not decide `Bq`.
+- **What the D4-symmetric instrument can and cannot compute** (proved). A D4-symmetric
+  family disjoint from one corner box is disjoint from all four, so the symmetric loop
+  computes the four-box program; conversely a family disjoint from the four boxes is
+  disjoint from any one, so `ν*(off one box) ≥ ν*(off four boxes)`, and a kill of the
+  four-box program is a kill of the single-box program while an “alive” four-box
+  reading says nothing about one box. The corner triangle `x + y ≤ 1/2` lies in the
+  half-unit box, so `ν*(off the triangle) ≥ ν*(off the half box) ≥ ν*(off the unit
+  box)`. The single-box and triangle programs have only the diagonal reflection as
+  symmetry and need an instrument with sites that are not D4 orbits (BC-204’s domain
+  generalisation, or the same loop with individual sites), which does not exist yet.
+
+### The `B = 1` value at `q = 96/25`
+
+**Inputs.** `n = 11`, `outer_side = 96/25`, placements of side exactly 1;
+net = the retained `net_half_tangents(207107/500000, 180)` (half-tangent step
+`h = 207107/90000000`, last direction `45.000043°`) plus `h·k/8` for `k = 1..7`
+(`0.033°` steps above `0°`) and `u_T = 228871/625725` (Trump’s `tan(a/2)` to
+`limit_denominator(10⁶)`, `40.181937°`) with `u_T ± h·k/8` for `k = 1..7`
+(`0.029°` steps): 203 directions.
+Warm start: BC-200’s state at `191/50` (12761 sites, 9868 rows), sites and rows shifted
+by `(q − 191/50)/2 = 1/100`, the grid seed for `(96/25, 1)` added, rows remapped onto
+the merged net and clamped into the unit centre domain: 16125 initial sites in 2113 D4
+orbits, 13305 rows after the first row generation.
+`support_cap = 96`, `cap = 150` orbits per iteration, `rows_rounds = 12`,
+`rows_per_direction = 3`, row denominator `10⁶`, weight denominator `10⁹`,
+`select_above = 1.000001`, budget 30 minutes, one worker, `PACK_JOBS = 1`, load
+average 4 to 7 on four cores.
+
+**Iteration 0** (the only one that completed; the process was killed at about 05:01Z
+after saving its state, and the budget did not allow a restart): site LP objective
+`11.169805` with the row generation *not* converged (12-round cap, 1074 s), raw dual
+total `11.136308` at the sites, exact maximum depth
+`9989418081/8000000000 = 1.248677` at `(1.000547, 1.839449)` over 2877776 vertices
+(317548 above 1), depth-scaled value `8.918484`. The site LP is context: its rows did
+not converge, so it bounds nothing.
+
+**Result (verified twice).** The value of the `B = 1` reading is the loop’s iteration-0
+depth-scaled family:
+
+    89090463224/9989418081 = 8.918484...
+
+verified from the state bytes by `devtools.replay_ceiling_family --check`: 768
+placements, exact maximum depth exactly `1` over 2877776 vertices (3775 decided
+exactly), total `89090463224/9989418081`, `check: reproduced` (553 s), declared as
+`square_side = 1` on the 203-direction net (`net` regime, `B = 1`, K3 fails as it must
+below 11). The polisher’s final pass verified the same bytes re-declared at
+`square_side = 9977/10000` (Condition 4: `B(1 + D) = 0.9999959 < 1`), which is the
+every-`(B, net)` statement: POLISH_VERDICT.
+
+The polisher did not improve it in the one round the block allowed: on the working set
+of 12028 vertices (the 3072 corners plus every vertex above depth `0.95`) the bounded
+LP reached exactly `11.000000`, and the exact re-check found depth `4/3` at 20256
+vertices, so that round’s scaled contribution was `8.25`; the near-band of the
+candidate (`0.999`) was added and the deadline stopped the run. The number says what
+the cell needs to know about the loop: with a support of 96 orbits the site LP at
+`11.17`, the near-tight LP at `11.00` and the exactly feasible value at `8.92` are three
+different quantities, and only the last is a bound.
+
+The value is a lower bound on the `B = 1` fractional packing value at `q` and on the
+mass of every covering measure any `(B, net)` could use there and at every larger side.
+The proved floor is `10` (remark above), above it; so this family measures how far the
+loop is from the truth at `q` after one iteration, not the truth.
+
+**Weight split against Trump’s placements** (`trump_split.py` on the same bytes;
+Trump’s pose scaled by `q/U = 0.990435`, D4-closed; angle band `1°`, centre radius
+`0.05`): of the total `8.918484`, `3.224868` lies within `1°` of the axis directions,
+`0.026704` within `1°` of `40.181937°`, and `5.666911` at other angles (the mass sits
+at `1°`, `13°`, `25°` to `36°` and `41°` to `44°`: the family is diffuse, not
+Trump-shaped); `2.991038` lies inside Trump’s neighbourhood (angle band and centre
+within `0.05` of a D4 image of a scaled Trump centre) and `5.927446` outside it.
+Lemma D2 would need `≥ 11` in total with `≥ 1` outside; the outside weight is there
+five times over, the total is not.
+
+**Sub-restrictions of the same family** (`subrestrict.py`, exact): disjoint from one
+unit corner box `76291493608/9989418081 = 7.637231`; from the four corner boxes
+`37894584760/9989418081 = 3.793473`; from the half-unit corner box and from the corner
+triangle `x + y ≤ 1/2` (exact triangle test) `81373249834/9989418081 = 8.145945`; from
+the central unit box `20936487880/3329806027 = 6.287600`; from the strip `x ≤ 1/10`
+`6.614027`. Boxing one corner removes `1.28` of fractional weight from this family, the
+order of one square, as D4 read off BC-200 (`9.91 → 8.87`).
+
+### Restricted values at `q` with the retained `(B, net)`
+
+**Inputs common to the restricted runs.** `n = 11`, `outer_side = 96/25`,
+`square_side = B = 9977/10000`, the retained 181-direction net
+(`net_half_tangents(207107/500000, 180)`); warm start BC-200’s state at `191/50`
+shifted by `1/100` with the grid seed for `(96/25, B)` added; carried rows meeting the
+region dropped exactly before the first solve; `support_cap = 96`, `cap = 150`,
+`rows_rounds = 6` (12 did not fit the budget under load), `rows_per_direction = 3`
+after the filter with `survey = 12` cells surveyed per direction, phantom points of
+weight 1000 at spacing `1/16` filling the region, row denominator `10⁶`, weight
+denominator `10⁹`, `select_above = 1.000001`, one worker, `PACK_JOBS = 1`.
+The driver asserts exact disjointness of every placement of every family it judges,
+so a family it reports is disjoint from the region by construction and by check.
+
+- **Four corner boxes** `[0,1]² ∪ [q−1,q]×[0,1] ∪ [0,1]×[q−1,q] ∪ [q−1,q]²`:
+  1156 phantom points; 5322 of the 9868 carried rows are disjoint from the union;
+  16285 initial sites in D4 orbits; 26-minute budget from 05:02Z.
+
+  The loop ran three iterations in 1735 s (iteration 2 cut by the deadline in its row
+  generation): sites 16285 → 17485 → 18633, rows 7320 → 8076 → 8241 (no snapped row
+  was dropped by the exact re-test), site LP `7.324503`, `7.142857`, `7.142857`, none
+  with converged rows (6-round cap, then the deadline), raw duals `7.3245`, `7.1340`,
+  `7.1429`, exact maximum depths `1.429636`, `1.155661`, `1.162935`, scaled values
+  `5.123335`, `6.173135`, `6.142096`. The best in-loop floor is iteration 1’s
+  `28536196648/4622642825 = 6.173135` over 3135372 vertices; its polished value is
+  `57599999944/9199999991 = 6.260870`, verified below. The site LP at `7.14` with unconverged rows is context only: the filtered
+  oracle had not finished pricing the restricted placements, so nothing bounds the
+  restricted value from above in this block.
+  **Verified:** the loop’s own `verify_ceiling` on the iteration-1 family from its bytes:
+  exact maximum depth exactly `1` over 3135364 vertices, total
+  `28536196648/4622642825 = 6.173135`, `net` regime at `B = 9977/10000` on the
+  retained net (K3 fails, as it must below 11; the family is a floor, not a ceiling).
+  `subrestrict.py` on the same bytes: the weight disjoint from any one corner box,
+  from the half box and from the corner triangle is the whole `6.173135` (it is
+  disjoint from all four boxes by construction), and `3.412321` of it is also disjoint
+  from the central box.
+  **Polished (verified):** one polisher round on the same support (working set 4052
+  vertices above `0.95` plus the corners; the LP reached `7.2` and the exact re-check
+  found depth `1.15`, so the round's scaled candidate is kept) gives value
+  `57599999944/9199999991 = 6.260870`, verified by `verify_ceiling` from its bytes:
+  exact maximum depth exactly `1` over 3135364 vertices (26265 decided exactly), `net`
+  regime at `B = 9977/10000`, `symmetric_only`; the support is the loop's, so every
+  placement is exactly disjoint from the four boxes.
+
+### Classification
+
+Thresholds are the cell’s: `B = 1` kills at `≥ 11` with a unit of weight outside
+Trump’s neighbourhood; a restricted region kills at `≥ 10`, is alive below `9.5`, and is
+undecided otherwise or when no converged covering LP bounds it from above.
+Every lower bound below is the value of a family verified from its bytes by
+`verify_ceiling`; every upper-bound column is empty because no row generation
+converged in the block.
+
+| Region at `q = 96/25` | Placements | Verified lower bound (family, regime) | Upper bound | Classification |
+| --- | --- | --- | --- | --- |
+| whole container, `B = 1` | unit squares, 203-direction net | `8.918484` (polished iteration-0 support, `unit` regime re-declared at `9977/10000`; the loop’s own scaled family `8.918484` replayed) and the proved floor `10` | none (site LP `11.17`, rows unconverged) | **undecided**; not a kill (below 11), not alive (no converged LP) |
+| four corner boxes | retained `B`-squares, 181-direction net, disjoint | `6.173135` (loop iteration 1, `net` regime); polished `6.260870`; sub-restriction of the `B = 1` family `3.793473` | none (site LP `7.14`, rows unconverged) | **undecided**; far below 10, and “alive” needs a converged LP the block did not reach |
+| one corner box `[0,1]²` | not a D4-symmetric program | inherits every four-box lower bound; sub-restriction of the `B = 1` family `7.637231` | none (instrument cannot express the program) | **undecided** (a four-box kill would transfer; none exists) |
+| corner triangle `x + y ≤ 1/2` | not a D4-symmetric program | inherits the four-box bounds; sub-restriction of the `B = 1` family `8.145945` | none | **undecided**, same reason |
+| central unit box | D4-symmetric; loop cancelled under load | sub-restriction of the corners family `3.412321`; of the `B = 1` family `6.287600` | none | **undecided**; no loop was run on it |
+| `B = 1` at `3.86`, `3.87` | — | not started | — | **not started** (the `3.84` run did not converge) |
+
+A `B = 1` family’s sub-restrictions transfer to the retained `(B, net)` program: under
+Condition 4 every unit placement contains a `B`-square at a net angle, and a sub-square
+of a placement disjoint from `R` is disjoint from `R`, so the contained `B`-squares form
+an admissible restricted family of the same weight and no greater depth.
+
+### What the readings say about the routes, BC-204 and H-129
+
+- **No kill at `q` at this depth of search, on either side.** The best verified `B = 1`
+  family at `96/25` has value `8.918484`, against the kill threshold 11, and the
+  best verified family off the four corner boxes has value `6.260870`, against
+  10. Both are lower bounds, both are far from their thresholds, and neither says the
+  threshold is unreachable: the site LPs above them (`11.17` unconverged at `B = 1`,
+  `7.14` unconverged off the corners) bound nothing, and the proved floor `ν*₁(q) ≥ 10`
+  leaves the `B = 1` question open in both directions.
+- **Routes (b) and (c) survive this block, untested rather than confirmed.** Lemma D2
+  would kill every capture design and route (c) with a `B = 1` family of value `≥ 11`
+  carrying a unit of weight away from Trump’s placements; the family found carries
+  `5.927446` outside Trump’s neighbourhood and `2.991038` inside it (angle
+  bands: `3.224868` within `1°` of `0°`, `0.026704` within `1°` of `40.18°`), so
+  the *shape* of a would-be kill is diffuse and not Trump-like, but its value is not
+  there. Route (b)’s premise — that integer-hull cuts must push the fractional value
+  below 11 — is neither confirmed nor refuted at `q`; boxing one corner removes `1.28` of
+  fractional weight from the best `B = 1` family and all four remove `5.13`
+  (sub-restriction), while the loop run *on* the four-box program keeps `6.17`
+  (polished `6.260870`); one box costs the order of one square, as Section 1.6 D4
+  read off BC-200, and four cost more than four because the family’s mass is in the
+  corners.
+- **BC-204 is not yet worth building for corner conditioning.** The single-box and
+  triangle programs would need it; the four-box program, which the symmetric loop
+  computes, sits at a floor of `6.260870` with an unconverged LP at `7.14`, and
+  until a converged restricted LP or a polished family above `9.5` exists the
+  instrument has no threshold to aim at. What is worth building first is the polisher
+  as an instrument step of the loop (the scaled-versus-polished gap below is the
+  measurement), and an unloaded run of the `B = 1` loop to convergence at `q`.
+- **H-129.** The claim (no `B = 1` family of value `≥ 11` up to `3.87`) is neither
+  refuted (no family reached 11 at `3.84`, the easiest of its three sides) nor
+  supported at the exit’s standard (no converged covering LP below 11 at `3.87`, nor at
+  `3.84` where the unconverged site LP was `11.17`). Recommended status: `open`, with
+  this block’s reading recorded as “`B = 1` at `3.84`: verified `≥ 8.918484`, proved
+  `≥ 10`, site LP `11.17` unconverged; `3.86` and `3.87` not started”.
+
+### Obstructions met in the block
+
+- **The loop’s scaling step is the bottleneck, not the LP.** At 16125 sites the site
+  LP was `11.17` and the raw dual `11.14`, but one vertex at depth `1.2487` cut the
+  family to `8.92`. Re-optimising the weights on the fixed support against exact
+  vertices (the polisher) is the missing step between the loop’s two numbers; its
+  first attempt found the LP unbounded because an orbit none of whose images passes
+  through a near-tight vertex has no constraint at all, and the fix is structural:
+  every placement’s corners are vertices of the arrangement, so seeding the working
+  set with all of them gives every orbit its own row `w_e/8 ≤ 1`.
+- **One iteration is what thirty minutes buys on a shared core.** Iteration 0 of the
+  `B = 1` loop cost 23 minutes (18 of them row generation at 203 directions and 12
+  rounds); the process was then killed at about 05:01Z by something outside the
+  driver (exit 144, memory free), so the `B = 1` reading rests on one iteration’s
+  support. BC-200 needed nine iterations at `191/50` to reach `9.91`; a lane that
+  wants the loop’s own value to converge needs an unloaded core and hours, which is
+  the planning lane’s estimate and not this block’s.
+- **The polisher’s working set must be near-tight, not wide.** A band of `0.5` on the
+  scaled family selected 2204492 of the 2877776 vertices; the exact screen alone took
+  1731 s under load and the constraint build was killed by the memory cgroup at 10 GB
+  (`dmesg`: `Memory cgroup out of memory: Killed process ... anon-rss:9998976kB`).
+  A band of `0.95` selects about nine thousand, which with the 3072 corners is the
+  right first working set; the violated vertices of each round then add what the LP
+  needs. Two of the block’s 2.5 hours went to learning this.
+
+### Appendix — scripts as run (lane scratchpad `scratchpad/lane-294/`)
+
+All scripts were run from `packing/` with the project venv (Python 3.14), `PYTHONPATH=.` for the one that imports `cases`, `PACK_JOBS=1`; the frozen families and states they wrote are beside them. Fences are `text` because the lint floor formats Python fences in Markdown.
+
+#### `unit_loop.py`
+
+```text
+"""BC-294, priority 1: the B = 1 depth-scaled family at side 96/25.
+
+Runs `sqpack.fractional.cutting.cutting_plane_loop` with unit placements
+(square_side = 1) on a net that is the retained 180-step net plus fine steps
+near 0 deg and near Trump's angle (u = tan(a/2), the root of 5u^8 - 10u^7 - 2u^6
++ 14u^5 + 12u^4 - 6u^3 + 2u^2 + 2u - 1 in (0.36, 0.37)), warm-started from the
+retained BC-200 state at 191/50 with positions recentred and sizes fixed at 1.
+The direction indices of the carried rows are remapped onto the merged net.
+
+Usage (from packing/, project venv):
+    python unit_loop.py --side 96/25 --minutes 30 --out DIR
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+import time
+from fractions import Fraction
+from pathlib import Path
+
+from sqpack.fractional.ceiling import CeilingCertificate, verify_ceiling
+from sqpack.fractional.colgen import Rows
+from sqpack.fractional.cutting import (
+    cutting_plane_loop,
+    family_record,
+    iteration_table,
+    load_state,
+    rows_from_exact,
+    warm_start,
+)
+from sqpack.fractional.generate import net_half_tangents
+
+ANGLE_LIMIT = Fraction(207107, 500000)
+STEPS = 180
+BC200_STATE = Path(
+    "campaign/series/series-000-smoke-and-calibration/results/bc-200-state-191-50.json"
+)
+U_MIN_POLY = (5, -10, -2, 14, 12, -6, 2, 2, -1)
+
+
+def trump_half_tangent(denominator: int = 10**6) -> Fraction:
+    """A bounded rational within 1e-9 of Trump's u = tan(a/2), by bisection."""
+    def poly(x: Fraction) -> Fraction:
+        acc = Fraction(0)
+        for c in U_MIN_POLY:
+            acc = acc * x + c
+        return acc
+    lo, hi = Fraction(36, 100), Fraction(37, 100)
+    assert poly(lo) * poly(hi) < 0
+    for _ in range(60):
+        mid = (lo + hi) / 2
+        if poly(lo) * poly(mid) <= 0:
+            hi = mid
+        else:
+            lo = mid
+    return ((lo + hi) / 2).limit_denominator(denominator)
+
+
+def merged_net(fine: int = 8, reach: int = 7) -> tuple[tuple[Fraction, ...], list[int], Fraction]:
+    """The retained net, plus `reach` steps of h/fine near 0 and around Trump's u.
+
+    Returns (net, old_index -> new_index map for the retained net, Trump's u)."""
+    base = net_half_tangents(ANGLE_LIMIT, STEPS)
+    h = base[1] - base[0]
+    ut = trump_half_tangent()
+    extras = {h * k / fine for k in range(1, reach + 1)}
+    extras.add(ut)
+    for k in range(1, reach + 1):
+        extras.add(ut + h * k / fine)
+        extras.add(ut - h * k / fine)
+    net = tuple(sorted(set(base) | extras))
+    position = {t: i for i, t in enumerate(net)}
+    remap = [position[t] for t in base]
+    return net, remap, ut
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--side", type=Fraction, default=Fraction(96, 25))
+    ap.add_argument("--square", type=Fraction, default=Fraction(1))
+    ap.add_argument("--minutes", type=float, default=30.0)
+    ap.add_argument("--iterations", type=int, default=40)
+    ap.add_argument("--cap", type=int, default=150)
+    ap.add_argument("--support-cap", type=int, default=96)
+    ap.add_argument("--rows-rounds", type=int, default=12)
+    ap.add_argument("--warm", type=Path, default=BC200_STATE)
+    ap.add_argument("--out", type=Path, required=True)
+    args = ap.parse_args()
+    args.out.mkdir(parents=True, exist_ok=True)
+    tag = f"{args.side.numerator}-{args.side.denominator}"
+
+    net, remap, ut = merged_net()
+    old_side, points, carried = load_state(args.warm)
+    if len(remap) == 181:
+        carried = [(remap[d], x, y) for d, x, y in carried]
+    sites, exact_rows = warm_start(
+        points, carried, old_side=old_side, new_side=args.side,
+        square_side=args.square, half_tangents=net,
+    )
+    rows = rows_from_exact(exact_rows, sites, net, args.square)
+    settings = {
+        "n": 11, "outer_side": str(args.side), "square_side": str(args.square),
+        "net": {"base": f"{STEPS} steps to {ANGLE_LIMIT}", "directions": len(net),
+                "trump_u": str(ut), "trump_u_float": float(ut),
+                "extras": "h/8 steps: 7 above 0 and 7 either side of Trump's u"},
+        "warm": str(args.warm), "warm_side": str(old_side),
+        "warm_sites": len(points), "warm_rows": len(carried),
+        "initial_sites": sites.size, "initial_orbits": len(sites.orbits),
+        "minutes": args.minutes, "iterations": args.iterations, "cap": args.cap,
+        "support_cap": args.support_cap, "rows_rounds": args.rows_rounds,
+        "rows_per_direction": 3, "row_denominator": 10**6, "weight_denominator": 10**9,
+    }
+    print(json.dumps(settings, indent=1), flush=True)
+    log_handle = (args.out / f"unit-loop-{tag}.log").open("a")
+    started = time.perf_counter()
+    try:
+        log = cutting_plane_loop(
+            11, args.side, args.square, net,
+            sites=sites, rows=rows, exact_rows=exact_rows,
+            support_cap=args.support_cap, cap=args.cap,
+            max_iterations=args.iterations,
+            deadline=started + 60.0 * args.minutes,
+            rows_max_rounds=args.rows_rounds, rows_per_direction=3,
+            log_sinks=(sys.stdout, log_handle),
+            state_path=args.out / f"unit-state-{tag}.json",
+        )
+    finally:
+        log_handle.close()
+    wall = time.perf_counter() - started
+    print(f"stopped: {log.stopped}; {wall:.0f} s wall")
+    print(f"best scaled total {log.best_scaled_total} = {float(log.best_scaled_total):.6f} at iteration {log.best_iteration}")
+    print(iteration_table(log.iterations))
+    summary = {
+        "settings": settings, "seconds": wall, "stopped": log.stopped,
+        "best_scaled_total": str(log.best_scaled_total),
+        "best_scaled_total_float": float(log.best_scaled_total),
+        "best_iteration": log.best_iteration,
+        "iterations": [it.as_dict() for it in log.iterations],
+    }
+    if log.best_family is not None:
+        fam = log.best_family
+        verdict = verify_ceiling(fam)
+        print(f"verify_ceiling (declared B=1, net regime): proved={verdict.proved} regime={verdict.regime} max_depth={verdict.max_depth} vertices={verdict.vertices} total={float(verdict.total_weight):.6f}")
+        prov = {"tool": "lane-294 unit_loop.py", "settings": settings,
+                "best_iteration": log.best_iteration, "stopped": log.stopped,
+                "verify_ceiling": {"proved": verdict.proved, "failures": list(verdict.failures),
+                                   "max_depth": str(verdict.max_depth), "vertices": verdict.vertices,
+                                   "decided_exactly": verdict.decided_exactly, "regime": verdict.regime,
+                                   "symmetric_only": verdict.symmetric_only, "statement": verdict.statement}}
+        (args.out / f"unit-family-{tag}.json").write_text(json.dumps(family_record(fam, prov), indent=1) + "\n")
+        summary["verdict"] = prov["verify_ceiling"]
+    (args.out / f"unit-summary-{tag}.json").write_text(json.dumps(summary, indent=1) + "\n")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+```
+
+#### `polish_family.py`
+
+```text
+"""Depth polishing: re-optimise a frozen family's weights against exact vertices.
+
+The cutting-plane loop restores feasibility by dividing every weight by the
+exact maximum depth, which throws away everything the family had below depth
+1 elsewhere (BC-200: raw 11.06 at the sites, 9.91 after scaling). This keeps
+the support fixed -- the arrangement, hence its vertex set, does not move when
+only weights change -- and solves
+
+    max sum_e w_e   s.t.  sum_e (m_e(v) / 8) w_e <= 1  for every working vertex v,
+
+with one weight per D4 orbit of eight images (m_e(v) = images of e containing
+v), rounds the solution DOWN to a common denominator, re-decides the depth at
+every vertex exactly with `depths_above`, adds every violated vertex to the
+working set and repeats. The output is verified by `verify_ceiling`.
+
+Usage (from packing/, project venv):
+    python polish_family.py FAMILY.json --out POLISHED.json [--minutes 15]
+      [--declare-square 9977/10000]   # re-declare (B, net) so the verdict is the unit regime
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+import time
+from fractions import Fraction
+from pathlib import Path
+
+import numpy as np
+from scipy.optimize import linprog
+
+from sqpack.fractional.ceiling import (
+    SCREEN_MARGIN,
+    CeilingCertificate,
+    Placement,
+    arrangement_lines,
+    container_vertices,
+    float_family,
+    loose_membership,
+    verify_ceiling,
+)
+from sqpack.fractional.cutting import depths_above, family_record
+
+
+def memberships(fam: CeilingCertificate, pts: list[tuple[Fraction, Fraction]]) -> list[list[int]]:
+    """Exact member lists of every point, float-screened as `depths_above` screens."""
+    normals, offsets, halves, _ = float_family(fam)
+    arr = np.array([[float(x), float(y)] for x, y in pts])
+    tight = halves[None, :] - SCREEN_MARGIN
+    out: list[list[int]] = []
+    chunk = max(1, 2_000_000 // max(1, len(fam.placements)))
+    for start in range(0, arr.shape[0], chunk):
+        block = arr[start : start + chunk]
+        loose = loose_membership(block, normals, offsets, halves)
+        first = np.abs(block @ normals[:, 0, :].T - offsets[None, :, 0]) <= tight
+        second = np.abs(block @ normals[:, 1, :].T - offsets[None, :, 1]) <= tight
+        strict = first & second
+        for local in range(block.shape[0]):
+            x, y = pts[start + local]
+            members = list(np.flatnonzero(strict[local]))
+            for m in np.flatnonzero(loose[local] & ~strict[local]):
+                if fam.placements[int(m)].contains(x, y):
+                    members.append(int(m))
+            out.append([int(m) for m in members])
+    return out
+
+
+def rebuild(fam: CeilingCertificate, orbit_weights: list[Fraction]) -> CeilingCertificate:
+    pl = [
+        Placement(p.half_tangent, p.centre_x, p.centre_y, orbit_weights[i // 8] / 8, p.side)
+        for i, p in enumerate(fam.placements)
+    ]
+    return CeilingCertificate(fam.n, fam.outer_side, fam.square_side, fam.half_tangents, tuple(pl))
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("family", type=Path)
+    ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--minutes", type=float, default=15.0)
+    ap.add_argument("--band", type=Fraction, default=Fraction(95, 100))
+    ap.add_argument("--denominator", type=int, default=10**9)
+    ap.add_argument("--declare-square", type=Fraction, default=None)
+    args = ap.parse_args()
+    t0 = time.perf_counter()
+    deadline = t0 + 60 * args.minutes
+    rec = json.loads(args.family.read_text())
+    fam = CeilingCertificate.from_record(rec.get("best_family", rec))
+    if args.declare_square is not None:
+        fam = CeilingCertificate(fam.n, fam.outer_side, args.declare_square, fam.half_tangents, fam.placements)
+    n_pl = len(fam.placements)
+    assert n_pl % 8 == 0, "expected a symmetrised family (8 images per entry)"
+    orbits = n_pl // 8
+    for e in range(orbits):
+        ws = {fam.placements[8 * e + k].weight for k in range(8)}
+        assert len(ws) == 1, f"orbit {e} has unequal image weights"
+    w = [fam.placements[8 * e].weight * 8 for e in range(orbits)]
+    print(f"family: {n_pl} placements, {orbits} orbits, total {float(sum(w)):.6f}, side {fam.outer_side}, placement side {fam.placements[0].side}", flush=True)
+
+    lines = arrangement_lines(fam)
+    vertices = container_vertices(fam, lines)
+    print(f"vertices: {len(vertices)} ({time.perf_counter() - t0:.0f} s)", flush=True)
+
+    working: dict[tuple[Fraction, Fraction], list[int]] = {}
+    band, _, _ = depths_above(fam, vertices, args.band)
+    pts = [(x, y) for _, x, y in band]
+    # Every placement's corners are arrangement vertices; seeding them gives every
+    # orbit at least its own constraint w_e / 8 <= 1, so the LP is bounded.
+    corner_set = {c for p in fam.placements for c in p.corners()
+                  if 0 <= c[0] <= fam.outer_side and 0 <= c[1] <= fam.outer_side}
+    pts = list(dict.fromkeys(pts + sorted(corner_set)))
+    for pt, mem in zip(pts, memberships(fam, pts)):
+        working[pt] = mem
+    print(f"round 0 working set: {len(working)} vertices above {float(args.band)} ({time.perf_counter() - t0:.0f} s)", flush=True)
+
+    best = (sum(w), w, fam)
+    rnd = 0
+    while True:
+        rnd += 1
+        keys = list(working.keys())
+        rows_i, cols_j, vals = [], [], []
+        for r, k in enumerate(keys):
+            counts: dict[int, int] = {}
+            for m in working[k]:
+                counts[m // 8] = counts.get(m // 8, 0) + 1
+            for e, c in counts.items():
+                rows_i.append(r); cols_j.append(e); vals.append(c / 8.0)
+        from scipy import sparse
+        A = sparse.csr_matrix((vals, (rows_i, cols_j)), shape=(len(keys), orbits))
+        res = linprog(c=-np.ones(orbits), A_ub=A, b_ub=np.ones(len(keys)), bounds=[(0, 8.0)] * orbits, method="highs")
+        if not res.success:
+            print("LP failed:", res.message); break
+        lp_val = -res.fun
+        D = args.denominator
+        new_w = [Fraction(int(np.floor(max(v, 0.0) * D)), D) for v in res.x]
+        cand = rebuild(fam, new_w)
+        viol, worst, decided = depths_above(cand, vertices, Fraction(1))
+        total = sum(new_w)
+        print(f"round {rnd}: LP {lp_val:.6f} on {len(keys)} constraints; rounded total {float(total):.6f}; exact max depth {float(worst):.9f}; violated {len(viol)}; decided {decided} ({time.perf_counter() - t0:.0f} s)", flush=True)
+        if worst <= 1:
+            if total > best[0]:
+                best = (total, new_w, cand)
+            # tighten: a feasible optimum on the working set that is exactly feasible everywhere is the fixed point
+            break
+        scaled = total / worst
+        if scaled > best[0]:
+            best = (scaled, [x / worst for x in new_w], cand.scaled(1 / worst))
+        # add violated vertices (all of them) and a near band of the candidate
+        near, _, _ = depths_above(cand, vertices, Fraction(999, 1000))
+        new_pts = [(x, y) for _, x, y in near if (x, y) not in working]
+        for pt, mem in zip(new_pts, memberships(cand, new_pts)):
+            working[pt] = mem
+        print(f"  added {len(new_pts)} vertices (working {len(working)})", flush=True)
+        if time.perf_counter() > deadline:
+            print("deadline reached"); break
+
+    total, w_best, fam_best = best
+    verdict = verify_ceiling(fam_best)
+    print(f"verify_ceiling: proved={verdict.proved} regime={verdict.regime} symmetric_only={verdict.symmetric_only} max_depth={verdict.max_depth} vertices={verdict.vertices} decided={verdict.decided_exactly} total={verdict.total_weight} = {float(verdict.total_weight):.9f}")
+    print("statement:", verdict.statement)
+    prov = {"tool": "lane-294 polish_family.py", "source": str(args.family), "rounds": rnd,
+            "band": str(args.band), "denominator": args.denominator,
+            "verify_ceiling": {"proved": verdict.proved, "failures": list(verdict.failures),
+                               "max_depth": str(verdict.max_depth), "vertices": verdict.vertices,
+                               "decided_exactly": verdict.decided_exactly, "regime": verdict.regime,
+                               "symmetric_only": verdict.symmetric_only, "statement": verdict.statement}}
+    args.out.write_text(json.dumps(family_record(fam_best, prov), indent=1) + "\n")
+    print(f"wrote {args.out}; {time.perf_counter() - t0:.0f} s")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+```
+
+#### `restricted_loop.py`
+
+```text
+"""BC-294, priority 2: restricted fractional packing values at 96/25 (Lemma D1).
+
+The cutting-plane loop of `sqpack.fractional.cutting`, re-driven with a
+disjointness filter on the dual side: every placement row must be disjoint
+from a D4-symmetric closed region R (the four unit corner boxes, or the
+central unit box). The oracle is `generate.placement_cells` on the real sites
+plus phantom points of large fixed weight filling R, so that placements deep in
+R are never the least-covered cells it proposes; each proposed cell is tested
+for disjointness in floats with a margin, snapped to a bounded rational, and
+re-tested exactly (separating-axis test in Fractions) before it is held. The
+D4-symmetrised dual family is then disjoint from R because R is D4-symmetric,
+and its total over its exact maximum depth is a lower bound on the fractional
+packing value over placements disjoint from R at this (L, B, net).
+
+Usage (from packing/, project venv):
+    python restricted_loop.py --region corners --minutes 30 --out DIR
+    python restricted_loop.py --region centre  --minutes 30 --out DIR
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+import time
+from fractions import Fraction
+from pathlib import Path
+
+import numpy as np
+
+from sqpack.fractional.ceiling import CeilingCertificate, Placement, arrangement_lines, verify_ceiling
+from sqpack.fractional.colgen import LpSolution, Rows, SiteSet, solve_lp
+from sqpack.fractional.cutting import (
+    Iteration,
+    coverage_matrix,
+    family_record,
+    iteration_table,
+    load_state,
+    rows_from_exact,
+    screened_separation,
+    snap_centre,
+    support_entries,
+    symmetric_placements,
+    warm_start,
+)
+from sqpack.fractional.generate import LP_FEASIBILITY, direction_net, net_half_tangents, placement_cells
+
+ANGLE_LIMIT = Fraction(207107, 500000)
+STEPS = 180
+B = Fraction(9977, 10000)
+BC200_STATE = Path("campaign/series/series-000-smoke-and-calibration/results/bc-200-state-191-50.json")
+Box = tuple[Fraction, Fraction, Fraction, Fraction]
+
+
+def region_boxes(name: str, L: Fraction) -> list[Box]:
+    one = Fraction(1)
+    if name == "corners":
+        return [(0, 0, one, one), (L - 1, 0, L, one), (0, L - 1, one, L), (L - 1, L - 1, L, L)]
+    if name == "centre":
+        return [(L / 2 - Fraction(1, 2), L / 2 - Fraction(1, 2), L / 2 + Fraction(1, 2), L / 2 + Fraction(1, 2))]
+    if name == "halfcorners":
+        h = Fraction(1, 2)
+        return [(0, 0, h, h), (L - h, 0, L, h), (0, L - h, h, L), (L - h, L - h, L, L)]
+    raise ValueError(name)
+
+
+def box_disjoint_exact(p: Placement, box: Box) -> bool:
+    x0, y0, x1, y1 = (Fraction(v) for v in box)
+    cs = p.corners()
+    xs = [c[0] for c in cs]; ys = [c[1] for c in cs]
+    if max(xs) < x0 or min(xs) > x1 or max(ys) < y0 or min(ys) > y1:
+        return True
+    ax, ay, u, bx, by, v = p.slabs()
+    half = p.side / 2
+    pts = [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
+    for (nx, ny, c) in ((ax, ay, u), (bx, by, v)):
+        vals = [nx * x + ny * y for (x, y) in pts]
+        if max(vals) < c - half or min(vals) > c + half:
+            return True
+    return False
+
+
+def disjoint_exact(p: Placement, boxes: list[Box]) -> bool:
+    return all(box_disjoint_exact(p, b) for b in boxes)
+
+
+def disjoint_float(x: float, y: float, cos: float, sin: float, half: float, boxes: list[Box], margin: float = 1e-7) -> bool:
+    """Closed square vs closed boxes, separated by more than `margin` on some axis."""
+    cx = [x + half * (su * cos - sv * sin) for su, sv in ((1, 1), (-1, 1), (-1, -1), (1, -1))]
+    cy = [y + half * (su * sin + sv * cos) for su, sv in ((1, 1), (-1, 1), (-1, -1), (1, -1))]
+    for (x0, y0, x1, y1) in boxes:
+        x0, y0, x1, y1 = float(x0), float(y0), float(x1), float(y1)
+        if max(cx) < x0 - margin or min(cx) > x1 + margin or max(cy) < y0 - margin or min(cy) > y1 + margin:
+            continue
+        u = x * cos + y * sin; v = -x * sin + y * cos
+        pu = [px * cos + py * sin for px, py in ((x0, y0), (x1, y0), (x1, y1), (x0, y1))]
+        pv = [-px * sin + py * cos for px, py in ((x0, y0), (x1, y0), (x1, y1), (x0, y1))]
+        if max(pu) < u - half - margin or min(pu) > u + half + margin or max(pv) < v - half - margin or min(pv) > v + half + margin:
+            continue
+        return False
+    return True
+
+
+def phantom_points(boxes: list[Box], spacing: Fraction = Fraction(1, 16)) -> np.ndarray:
+    pts = []
+    for (x0, y0, x1, y1) in boxes:
+        nx = int((x1 - x0) / spacing) + 1; ny = int((y1 - y0) / spacing) + 1
+        for i in range(nx):
+            for j in range(ny):
+                pts.append((float(x0 + i * spacing), float(y0 + j * spacing)))
+    return np.array(pts)
+
+
+def solve_rows_filtered(sites: SiteSet, square_side: Fraction, half_tangents, rows: Rows, exact_rows, boxes: list[Box], phantom: np.ndarray, *, max_rounds: int, rows_per_direction: int, survey: int, deadline: float | None, row_denominator: int) -> LpSolution:
+    """`colgen.solve_rows` with the region masked by phantom points and held rows filtered."""
+    points = sites.points(); sizes = sites.sizes(); membership = sites.membership()
+    columns = len(sites.orbits)
+    directions = direction_net(half_tangents)
+    outer = float(sites.outer_side); side = float(square_side); half = side / 2
+    aug_points = np.vstack([points, phantom])
+    n_real = points.shape[0]
+    if rows.matrix.shape[0] == 0:
+        rows.matrix = np.zeros((0, columns))
+    weights = np.zeros(columns); duals = np.zeros(len(rows))
+    solution = LpSolution(weights, duals, rows=len(rows))
+    if len(rows) > 0:
+        warm = solve_lp(sites, rows)
+        if warm is not None:
+            weights, duals, objective = warm
+            solution.weights, solution.duals, solution.objective = weights, duals, objective
+    for round_index in range(max_rounds):
+        if deadline is not None and time.perf_counter() >= deadline:
+            solution.stopped = f"deadline reached after {round_index} rounds"; return solution
+        solution.rounds = round_index + 1
+        site_weights = np.concatenate([weights[membership], np.full(phantom.shape[0], 1000.0)])
+        violated = 0; added = 0; least = float("inf"); least_covered = float("inf")
+        for index, direction in enumerate(directions):
+            cos, sin = float(direction.ux), float(direction.uy)
+            kept = 0
+            for mass, cu, cv, covers in placement_cells(aug_points, site_weights, direction, outer, side, keep=survey):
+                x = cos * cu - sin * cv; y = sin * cu + cos * cv
+                if not disjoint_float(x, y, cos, sin, half, boxes):
+                    continue
+                least_covered = min(least_covered, mass)
+                if mass >= 1 - 1e-9:
+                    break
+                row = np.zeros(columns)
+                real = covers[:n_real]
+                np.add.at(row, membership[real], 1.0)
+                if row.sum() == 0:
+                    solution.stopped = "a placement covers no site: the sites cannot cover"; return solution
+                violated += 1; least = min(least, mass)
+                if rows.add(index, (cu, cv), row):
+                    added += 1
+                kept += 1
+                if kept >= rows_per_direction:
+                    break
+        solution.rows = len(rows); solution.least_covered = least_covered
+        if violated == 0 or (added == 0 and least >= 1 - LP_FEASIBILITY):
+            solution.objective = float(sizes @ weights)
+            solution.stopped = "converged: every placement covers mass 1"; return solution
+        if added == 0:
+            solution.stopped = f"a held row is violated by {1 - least:.3e}: the solver's point is off"; return solution
+        solved = solve_lp(sites, rows)
+        if solved is None:
+            solution.stopped = "linear program refused the generated rows"; return solution
+        weights, duals, objective = solved
+        solution.weights, solution.duals, solution.objective = weights, duals, objective
+    solution.stopped = f"round limit {max_rounds} reached"
+    return solution
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--region", choices=["corners", "centre", "halfcorners"], required=True)
+    ap.add_argument("--side", type=Fraction, default=Fraction(96, 25))
+    ap.add_argument("--square", type=Fraction, default=B)
+    ap.add_argument("--minutes", type=float, default=30.0)
+    ap.add_argument("--iterations", type=int, default=40)
+    ap.add_argument("--cap", type=int, default=150)
+    ap.add_argument("--support-cap", type=int, default=96)
+    ap.add_argument("--rows-rounds", type=int, default=12)
+    ap.add_argument("--survey", type=int, default=12)
+    ap.add_argument("--warm", type=Path, default=BC200_STATE)
+    ap.add_argument("--out", type=Path, required=True)
+    args = ap.parse_args()
+    args.out.mkdir(parents=True, exist_ok=True)
+    L = args.side; Bs = args.square
+    net = net_half_tangents(ANGLE_LIMIT, STEPS)
+    directions = direction_net(net)
+    boxes = region_boxes(args.region, L)
+    phantom = phantom_points(boxes)
+    old_side, points, carried = load_state(args.warm)
+    sites, carried = warm_start(points, carried, old_side=old_side, new_side=L, square_side=Bs, half_tangents=net)
+    exact_rows = [(d, x, y) for d, x, y in carried if disjoint_exact(Placement(net[d], x, y, Fraction(1), Bs), boxes)]
+    rows = rows_from_exact(exact_rows, sites, net, Bs)
+    settings = {"n": 11, "outer_side": str(L), "square_side": str(Bs), "region": args.region,
+                "boxes": [[str(v) for v in b] for b in boxes], "phantom_points": int(phantom.shape[0]),
+                "net": f"{STEPS} steps to {ANGLE_LIMIT} ({len(net)} directions)",
+                "warm": str(args.warm), "warm_side": str(old_side), "warm_sites": len(points),
+                "warm_rows": len(carried), "warm_rows_disjoint": len(exact_rows),
+                "initial_sites": sites.size, "initial_orbits": len(sites.orbits),
+                "minutes": args.minutes, "cap": args.cap, "support_cap": args.support_cap,
+                "rows_rounds": args.rows_rounds, "rows_per_direction": 3, "survey": args.survey,
+                "row_denominator": 10**6, "weight_denominator": 10**9}
+    print(json.dumps(settings, indent=1), flush=True)
+    started = time.perf_counter(); deadline = started + 60 * args.minutes
+    iterations: list[Iteration] = []
+    best_scaled = Fraction(0); best_family = None; best_iter = -1; stopped = ""
+    select_above = Fraction(1000001, 1000000)
+    tag = f"{args.region}-{L.numerator}-{L.denominator}"
+    for index in range(args.iterations):
+        if time.perf_counter() >= deadline:
+            stopped = f"deadline reached before iteration {index}"; break
+        t = time.perf_counter()
+        solution = solve_rows_filtered(sites, Bs, net, rows, exact_rows, boxes, phantom, max_rounds=args.rows_rounds, rows_per_direction=3, survey=args.survey, deadline=deadline, row_denominator=10**6)
+        new_exact = []
+        dropped = 0
+        for held in range(len(exact_rows), len(rows)):
+            d = rows.directions[held]
+            x, y = snap_centre(directions[d], rows.centres[held], L, Bs, 10**6)
+            if disjoint_exact(Placement(net[d], x, y, Fraction(1), Bs), boxes):
+                new_exact.append((d, x, y))
+            else:
+                dropped += 1
+        exact_rows.extend(new_exact)
+        rows = rows_from_exact(exact_rows, sites, net, Bs)
+        s_rows = time.perf_counter() - t
+        t = time.perf_counter()
+        solved = solve_lp(sites, rows)
+        if solved is None:
+            stopped = f"the linear program refused the snapped rows at iteration {index}"; break
+        weights, duals, objective = solved
+        s_lp = time.perf_counter() - t
+        t = time.perf_counter()
+        entries = support_entries(exact_rows, duals, net, support_cap=args.support_cap, weight_denominator=10**9)
+        if not entries:
+            stopped = f"the dual is empty at iteration {index}"; break
+        family = CeilingCertificate(11, L, Bs, net, symmetric_placements(entries, L, Bs))
+        assert all(disjoint_exact(p, boxes) for p in family.placements), "a family placement meets the region"
+        lines = arrangement_lines(family)
+        sep = screened_separation(family, lines, sites, cap=args.cap, select_above=select_above)
+        worst = sep.max_depth
+        s_sep = time.perf_counter() - t
+        raw = family.total_weight
+        scaled = raw if worst <= 1 else raw / worst
+        rec = Iteration(index=index, sites=sites.size, orbits=len(sites.orbits), rows=len(rows), support=len(entries), rows_converged=solution.converged, rows_stopped=solution.stopped, rows_objective=solution.objective, objective=objective, raw_total=raw, max_depth=worst, scaled_total=scaled, vertices=sep.vertices, decided=sep.decided, violating=sep.violating, added=0, seconds_rows=s_rows, seconds_lp=s_lp, seconds_separation=s_sep)
+        iterations.append(rec)
+        if scaled > best_scaled:
+            best_scaled, best_iter = scaled, index
+            best_family = family if worst <= 1 else family.scaled(1 / worst)
+        print(f"iteration {index}: sites={sites.size} orbits={len(sites.orbits)} rows={len(rows)} dropped={dropped} support={len(entries)} rows_objective={solution.objective:.6f} converged={solution.converged} ({solution.stopped}) objective={objective:.6f} raw_total={float(raw):.6f} max_depth={float(worst):.6f} scaled_total={float(scaled):.6f} vertices={sep.vertices} violating={sep.violating} seconds rows={s_rows:.1f} lp={s_lp:.1f} sep={s_sep:.1f}", flush=True)
+        state = {"outer_side": str(L), "square_side": str(Bs), "region": args.region,
+                 "sites": [[str(x), str(y)] for orbit in sites.orbits for x, y in orbit],
+                 "rows": [[d, str(x), str(y)] for d, x, y in exact_rows],
+                 "best_scaled_total": str(best_scaled), "best_iteration": best_iter,
+                 "iterations": [it.as_dict() for it in iterations]}
+        if best_family is not None:
+            state["best_family"] = family_record(best_family)
+        (args.out / f"restricted-state-{tag}.json").write_text(json.dumps(state) + "\n")
+        if worst <= 1 and solution.converged:
+            stopped = f"feasible family with converged rows at iteration {index}"; break
+        selected = sep.chosen
+        if not selected:
+            stopped = f"no vertex to add at iteration {index}"; break
+        new_orbits = tuple(orbit for _, orbit in selected)
+        sites = SiteSet(L, (*sites.orbits, *new_orbits))
+        addition = coverage_matrix(exact_rows, SiteSet(L, new_orbits), net, Bs)
+        rows.matrix = np.hstack([rows.stacked(), addition])
+        rows.keys = {row.tobytes() for row in rows.matrix}
+        rec.added = len(new_orbits)
+        print(f"  added {len(new_orbits)} orbits, deepest {float(selected[0][0]):.6f}", flush=True)
+    else:
+        stopped = f"iteration cap {args.iterations} reached"
+    wall = time.perf_counter() - started
+    print(f"stopped: {stopped}; {wall:.0f} s wall")
+    print(f"best scaled total {best_scaled} = {float(best_scaled):.6f} at iteration {best_iter}")
+    print(iteration_table(iterations))
+    summary = {"settings": settings, "seconds": wall, "stopped": stopped, "best_scaled_total": str(best_scaled), "best_scaled_total_float": float(best_scaled), "best_iteration": best_iter, "iterations": [it.as_dict() for it in iterations]}
+    if best_family is not None:
+        verdict = verify_ceiling(best_family)
+        print(f"verify_ceiling: proved={verdict.proved} regime={verdict.regime} max_depth={verdict.max_depth} vertices={verdict.vertices} total={float(verdict.total_weight):.6f}")
+        prov = {"tool": "lane-294 restricted_loop.py", "settings": settings, "best_iteration": best_iter, "stopped": stopped,
+                "verify_ceiling": {"proved": verdict.proved, "failures": list(verdict.failures), "max_depth": str(verdict.max_depth), "vertices": verdict.vertices, "decided_exactly": verdict.decided_exactly, "regime": verdict.regime, "symmetric_only": verdict.symmetric_only, "statement": verdict.statement}}
+        (args.out / f"restricted-family-{tag}.json").write_text(json.dumps(family_record(best_family, prov), indent=1) + "\n")
+        summary["verdict"] = prov["verify_ceiling"]
+    (args.out / f"restricted-summary-{tag}.json").write_text(json.dumps(summary, indent=1) + "\n")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+```
+
+#### `trump_split.py`
+
+```text
+"""Weight of a verified family near Trump's placements versus away from them.
+
+Trump's pose (cases.trump11.packing, exact in Q(u)) is scaled by q/U into
+[0, q]^2 (centres scaled, sides stay 1) and closed under D4. A family placement
+is "near Trump" when its folded angle is within `--deg` of a Trump square's
+folded angle (0 or 40.181937 deg) and its centre is within `--radius` of a D4
+image of a scaled Trump centre in that angle class. Also printed: the weight
+per folded-angle band irrespective of position (Lemma D2 reads either).
+
+Usage (from packing/, project venv): python trump_split.py FAMILY.json [--side 96/25]
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import math
+from fractions import Fraction
+from pathlib import Path
+
+from cases.trump11.packing import build
+from sqpack.fractional.ceiling import CeilingCertificate
+
+
+def to_float(field, e) -> float:
+    field.refine_to(40)
+    lo, hi = field.enclose(e)
+    return float((lo + hi) / 2)
+
+
+def folded_deg(half_tangent: Fraction) -> float:
+    a = math.degrees(2 * math.atan(float(half_tangent))) % 90.0
+    return min(a, 90.0 - a)
+
+
+def d4_images(x: float, y: float, L: float):
+    return [(x, y), (L - y, x), (L - x, L - y), (y, L - x), (L - x, y), (x, L - y), (y, x), (L - y, L - x)]
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("family", type=Path)
+    ap.add_argument("--side", type=Fraction, default=Fraction(96, 25))
+    ap.add_argument("--deg", type=float, default=1.0)
+    ap.add_argument("--radius", type=float, default=0.05)
+    args = ap.parse_args()
+    rec = json.loads(args.family.read_text())
+    fam = CeilingCertificate.from_record(rec.get("best_family", rec))
+    L = float(args.side)
+    squares, side, field = build()
+    U = to_float(field, side)
+    scale = L / U
+    trump = []
+    for s in squares:
+        cs = [(to_float(field, x), to_float(field, y)) for (x, y) in s]
+        cx = sum(c[0] for c in cs) / 4; cy = sum(c[1] for c in cs) / 4
+        ang = math.degrees(math.atan2(cs[1][1] - cs[0][1], cs[1][0] - cs[0][0])) % 90.0
+        ang = min(ang, 90.0 - ang)
+        trump.append((cx * scale, cy * scale, ang))
+    classes = sorted({round(a, 4) for _, _, a in trump})
+    print(f"Trump at U={U:.9f}; scaled by {scale:.6f} into side {L}; folded angle classes {classes}")
+    total = fam.total_weight
+    near_pos = Fraction(0); near_ang = {c: Fraction(0) for c in classes}; other = Fraction(0)
+    bands: dict[int, Fraction] = {}
+    for p in fam.placements:
+        a = folded_deg(p.half_tangent)
+        bands[int(a)] = bands.get(int(a), 0) + p.weight
+        x, y = float(p.centre_x), float(p.centre_y)
+        in_ang = None
+        for c in classes:
+            if abs(a - c) <= args.deg:
+                in_ang = c
+        if in_ang is None:
+            other += p.weight; continue
+        near_ang[in_ang] += p.weight
+        hit = False
+        for (tx, ty, ta) in trump:
+            if abs(ta - in_ang) > 1e-6:
+                continue
+            for (ix, iy) in d4_images(tx, ty, L):
+                if math.hypot(x - ix, y - iy) <= args.radius:
+                    hit = True; break
+            if hit: break
+        if hit:
+            near_pos += p.weight
+    print(f"total {float(total):.6f}")
+    for c in classes:
+        print(f"  angle within {args.deg} deg of {c:.4f}: {float(near_ang[c]):.6f}")
+    print(f"  angle outside both bands: {float(other):.6f}")
+    print(f"  in Trump's neighbourhood (angle band AND centre within {args.radius} of a D4 image of a scaled Trump centre): {float(near_pos):.6f}")
+    print(f"  outside that neighbourhood: {float(total - near_pos):.6f}")
+    print("  weight by folded-angle degree band:", {k: round(float(v), 4) for k, v in sorted(bands.items())})
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+```
+
+#### `subrestrict.py`
+
+```text
+"""Exact weight of a verified family disjoint from each single region (Lemma D1).
+
+A sub-family of a depth-1 family is depth-1, so the total weight of the
+placements disjoint from a closed region R is a lower bound on the fractional
+packing value over placements disjoint from R, at this (L, B, net) and every
+larger side. The D4-symmetric loop can only compute the four-box program
+directly; this reads the single-box, half-box, corner-triangle and central-box
+lower bounds off any verified family (the same separating-axis test in
+Fractions as lane D's family_restrict.py, with an exact triangle test added).
+
+Usage (from packing/, project venv): python subrestrict.py FAMILY.json [--side 96/25]
+"""
+from __future__ import annotations
+
+import argparse
+import json
+from fractions import Fraction
+from pathlib import Path
+
+from sqpack.fractional.ceiling import CeilingCertificate, Placement
+
+
+def box_disjoint(p: Placement, x0, y0, x1, y1) -> bool:
+    cs = p.corners()
+    xs = [c[0] for c in cs]; ys = [c[1] for c in cs]
+    if max(xs) < x0 or min(xs) > x1 or max(ys) < y0 or min(ys) > y1:
+        return True
+    ax, ay, u, bx, by, v = p.slabs()
+    half = p.side / 2
+    box = [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
+    for (nx, ny, c) in ((ax, ay, u), (bx, by, v)):
+        vals = [nx * x + ny * y for (x, y) in box]
+        if max(vals) < c - half or min(vals) > c + half:
+            return True
+    return False
+
+
+def triangle_disjoint(p: Placement, s: Fraction) -> bool:
+    """Closed square vs the closed triangle x >= 0, y >= 0, x + y <= s (SAT on 5 axes)."""
+    tri = [(Fraction(0), Fraction(0)), (s, Fraction(0)), (Fraction(0), s)]
+    cs = p.corners()
+    axes = [(Fraction(1), Fraction(0)), (Fraction(0), Fraction(1)), (Fraction(1), Fraction(1))]
+    ax, ay, u, bx, by, v = p.slabs()
+    axes += [(ax, ay), (bx, by)]
+    for (nx, ny) in axes:
+        a = [nx * x + ny * y for (x, y) in cs]
+        b = [nx * x + ny * y for (x, y) in tri]
+        if max(a) < min(b) or min(a) > max(b):
+            return True
+    return False
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("family", type=Path)
+    ap.add_argument("--side", type=Fraction, default=Fraction(96, 25))
+    args = ap.parse_args()
+    rec = json.loads(args.family.read_text())
+    fam = CeilingCertificate.from_record(rec.get("best_family", rec))
+    Q = args.side
+    assert fam.outer_side == Q, f"family side {fam.outer_side} != {Q}"
+    one, h = Fraction(1), Fraction(1, 2)
+    boxes = {
+        "corner box SW [0,1]^2": [(0, 0, one, one)],
+        "four corner boxes": [(0, 0, one, one), (Q - 1, 0, Q, one), (0, Q - 1, one, Q), (Q - 1, Q - 1, Q, Q)],
+        "half-unit corner box SW [0,1/2]^2": [(0, 0, h, h)],
+        "central unit box": [(Q / 2 - h, Q / 2 - h, Q / 2 + h, Q / 2 + h)],
+        "left strip x<=1/10": [(0, 0, Fraction(1, 10), Q)],
+    }
+    total = fam.total_weight
+    print(f"family {args.family.name}: {len(fam.placements)} placements, side {Q}, placement side {fam.placements[0].side}, total {float(total):.6f}")
+    for name, bl in boxes.items():
+        w = sum((p.weight for p in fam.placements if all(box_disjoint(p, *b) for b in bl)), start=Fraction(0))
+        print(f"  disjoint from {name:36s}: {float(w):.6f}  ({w})")
+    w = sum((p.weight for p in fam.placements if triangle_disjoint(p, h)), start=Fraction(0))
+    print(f"  disjoint from {'corner triangle x+y<=1/2 (exact)':36s}: {float(w):.6f}  ({w})")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+```
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
