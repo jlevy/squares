@@ -34,6 +34,7 @@ import io
 import json
 import shlex
 from contextlib import redirect_stdout
+from itertools import combinations
 from pathlib import Path
 from typing import Any
 
@@ -134,20 +135,31 @@ def test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers() -> No
     also argued into the deep gate, which is how the set reached seven on 2026-09-07
     without anyone maintaining a count.
 
-    The two jobs are disjoint for the reason the post-merge jobs are: nothing is paid for
-    twice. And the exhaustive tier is alone in its job because of `D-456` -- when it
-    outgrew its budget the gate killed it with its output in an unflushed pipe, and three
-    merges went red saying nothing about the sixty other steps. A deep gate that cannot
-    say *which* deferral broke is most of the way back to the daily backstop.
+    The jobs are disjoint for the reason the post-merge jobs are: nothing is paid for
+    twice. Two steps are alone in a job, for two different reasons. The exhaustive tier is
+    `D-456` -- when it outgrew its budget the gate killed it with its output in an
+    unflushed pipe, and three merges went red saying nothing about the sixty other steps.
+    A deep gate that cannot say *which* deferral broke is most of the way back to the
+    daily backstop. The escape screen is `D-481`, and its reason is workers rather than
+    verdicts: it is a process pool sized by `PACK_JOBS`, so beside the other five
+    deferrals it gets two of the runner's four. Run 34177317419 killed it here at the
+    shared 900s cap on the same commit whose post-merge run had finished it at 858.62s an
+    hour earlier.
+
+    Disjointness is asserted pairwise over whatever jobs exist rather than over a named
+    pair, so a third step arguing its way onto its own runner is covered by this test the
+    day it arrives.
     """
     selections = {
         job_name: _selected_steps(command)
         for job_name, command in _gate_commands(DEEP_GATE).items()
     }
 
-    assert set(selections) == {"deferred-steps", "exhaustive-tier"}
+    assert set(selections) == {"deferred-steps", "exhaustive-tier", "screen"}
     assert selections["exhaustive-tier"] == {"exhaustive exact behavioral tests"}
-    assert not selections["deferred-steps"] & selections["exhaustive-tier"]
+    assert selections["screen"] == {"single-square translation escape screen"}
+    for left, right in combinations(sorted(selections), 2):
+        assert not selections[left] & selections[right], f"{left} and {right} overlap"
 
     covered: set[str] = set().union(*selections.values())
     assert covered == {step.name for step in validate.STEPS if not step.fast}
