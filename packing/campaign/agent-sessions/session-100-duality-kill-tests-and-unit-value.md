@@ -68,12 +68,14 @@ session:
       B = 1 loop bought one iteration and the restricted loop three, and the central-box
       loop was cancelled to protect the polishers and the write-up.
     next_action: >-
-      Run the B = 1 loop at 96/25 to convergence on an unloaded core from the saved state
-      (scratchpad/lane-294/unit-3-84/unit-state-96-25.json), polish every iteration's
-      support, then 3.86 and 3.87; make the polisher an instrument step of the loop.
+      Corrected 2026-09-08: the named scratch state is absent, and the embedded unit_loop
+      cannot safely resume its own merged-net indices. Start from retained
+      packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-leg-01-family.json;
+      transport all geometry by 10000/9977 with devtools.transport_ceiling_family and
+      verify the unit control before building the guarded polisher. Preserve exact source
+      and destination nets on every resume. No target search is part of this correction.
   primary_bead: think-7lp3
   status: stopped
-  certification_pending: think-7lp3
   resource_rollups: [packing/campaign/resource-usage/agent-a2247da4712316276.yaml]
   budget:
     wall_minutes: 150
@@ -99,6 +101,7 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md
   - packing/campaign/agent-sessions/session-100-duality-kill-tests-and-unit-value.md
   checks:
+  - 'full gate: fast at cbe9fd76: passed'
   - 'uv run --frozen --all-extras --group dev packing-validate --records at 06:05Z: green on every step this lane owns (schema, session clocks, gate grammar, resource rollups with 53 terminal sessions all present, ledger re-rendered); two steps fail, synopsis agrees with the artifacts and every session cost is attributed, because a new terminal session must be named by SYNOPSIS.md Current Handoff and by the session-close report, both coordinator-owned files this lane may not edit; devtools.close_session --render at integration clears both.'
   - verify_ceiling on every frozen family from its bytes (the polisher's own pass and the loop's), and the restricted driver's exact disjointness assertion on every family it judged.
   stop_reason: >-
@@ -107,10 +110,11 @@ session:
     lane, and the resource receipt is the lane's own transcript rolled up before the
     block closed, a contemporaneous lower bound the coordinator regenerates at closeout.
   next_action: >-
-    Coordinator: regenerate the rollup at closeout, keep H-129 open, and hand the saved
-    B = 1 state to a convergence run on an unloaded core before 3.86 and 3.87; the
-    certification debt under think-7lp3 clears with the next qualifying gate on the
-    integrated branch, and BC-303 (think-znzj) reads this lane with the others.
+    Coordinator: keep H-129 open and use the dated correction's retained exp-070 family,
+    exact unit transport, and net-bound resume contract. The original scratch state has
+    not been recovered. The certification debt under think-7lp3 clears only with the next
+    qualifying gate on the integrated branch; source replay and instrument controls come
+    before a separately registered target continuation.
 ---
 # Duality Kill Tests and the B = 1 Value at 96/25
 
@@ -132,6 +136,42 @@ H-129 is recommended `open`. No claim is frozen and no experiment id is needed.
 
 No full gate was run in this lane; the records tier is the only check claimed, and the
 record is stopped with certification pending under `think-7lp3`.
+
+## Correction of 2026-09-08: Recoverable Evidence and Safe Resume
+
+The original clocks, measurements and scripts are preserved.
+The claimed scratch family and state are absent from this checkout, so their
+eight-point-nine replay cannot be repeated from this PR. The embedded `unit_loop.py`
+also remaps every loaded row from 181 to 203 directions even when its input is already
+its own 203-direction state; using it to resume that state changes angles or raises an
+index error.
+
+The operational control is exp-070’s retained `bc-232-leg-01-family.json`, whose exact
+weight is `21342289572/2055263195`. Scaling its complete geometry by `10000/9977` gives
+unit squares in side `38200/9977 < 96/25`, with the same depth and weight.
+The
+[lane-D correction](../series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md#correction-of-2026-09-08-duality-scope-cap-and-retained-continuation)
+owns the proof, command and remaining dependencies.
+This stronger baseline supersedes the proposed restart from the unavailable state; it
+does not settle H-129.
+
+## Integration Certification Addendum — 2026-09-08
+
+The corrected integration checkpoint combines the 62-step fast pass at `cbe9fd76`, the
+passing structured negative-control, slow and exhaustive component receipts at that same
+revision, and four unchanged full-only geometry passes recorded in the retained raw
+stdout from the failed `ef8a2e72` invocation.
+The reviewed `ef8a2e72..cbe9fd76` source diff leaves those four components unaffected.
+Together that log and the structured receipts cover all 69 declared validation steps.
+The `ef8a2e72` full invocation remains failed; the later component runs are not called a
+full invocation.
+
+This later integration result discharges only the record’s certification debt.
+It does not extend this stopped session’s clock, rerun its science, change a scientific
+verdict, supply a missing artifact, or complete any target recorded as partial, stopped,
+unrun or absent.
+The original stop reason, resource accounting and unfinished complements
+remain historical facts.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

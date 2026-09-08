@@ -84,18 +84,19 @@ experiment:
       mass below the next integer above the stated count?
     outcome: criterion_met
     checked_by: >-
+      Degree endpoints here are approximate labels for the exact cell unions.
       decide_class_program at thresholds (1, 0) for the composition (11, 0), on
       build_site_grid(side, 79, 1/10). At 96/25: class 0–24, [0°, 6.4537°], exact mass
       4611/512 = 9.00586, least core 2049/2048, at most nine; class 0–39, [0°, 10.3875°],
       10765/1024 = 10.51270, least core 1025/1024, at most ten; class 171–180,
-      [42.8453°, 45°], 9989/1024 = 9.75488, least core 2053/2048, at most nine within
-      2.1547° of 45°; class 149–169, [37.7333°, 42.6166°], 41529/4096 = 10.13892, least core
-      1037/1024, at most ten within 2.44° of 40.194°; class 117–180, [30.0149°, 45°],
+      [42.8453°, 45°], 9989/1024 = 9.75488, least core 2053/2048, at most nine in that
+      cell union; class 149–169, [37.7333°, 42.6166°], 41529/4096 = 10.13892, least core
+      1037/1024, at most ten in that cell union; class 117–180, [30.0149°, 45°],
       42589/4096 = 10.39771, least core 4147/4096, at most ten. At 3877084/10⁶: class 0–24,
       10065/1024 = 9.82910, least core 4101/4096, at most nine; class 0–29, [0°, 7.7671°],
       10243/1024 = 10.00293, least core 4097/4096, at most ten; class 175–180,
-      [43.7565°, 45°], 5201/512 = 10.15820, least core 2051/2048, at most ten within 1.2435°
-      of 45°. Every one of the eight reproduces the planning lane's exact mass to the
+      [43.7565°, 45°], 5201/512 = 10.15820, least core 2051/2048, at most ten in that
+      cell union. Every one of the eight reproduces the planning lane's exact mass to the
       fraction, and Condition 5' holds on each, which is what makes the floor of the mass
       the count bound by Theorem 1.5's counting step.
   - shape: determination
@@ -134,8 +135,10 @@ experiment:
     reason: >-
       All eight counts are now decided under a registered round rather than cited from a
       planning lane, every exact mass reproduces the planning lane's to the fraction, and no
-      declared falsifier occurred — so H-131 is confirmed as stated and its counts may be
-      cited as results of this record, on the site set this record names.
+      declared falsifier occurred. The eight exact cell claims of H-131 are confirmed;
+      the 2026-09-08 review corrects outward-rounded degree summaries without claiming
+      a rerun. The certificate's site set does not restrict the resulting packing theorem
+      within its exact angle domain.
 ---
 # exp-131 — The Angle Counts at `96/25`, Replayed
 
@@ -150,6 +153,31 @@ evidence only. Lane BC-295 of
 This record registers it.
 Every figure below is read from
 [lane B’s session-102 section](../results/agenda-030/lane-b-angle-classes.md#session-102--angle-band-theorems-at-9625-2026-09-08).
+
+**Statement correction, 2026-09-08.** The exact domains are the closed angle cells named
+in the replay table.
+Decimal degree endpoints throughout this record are approximate labels, not replacements
+for the cells’ rational tangent bounds.
+The following boundaries are computed by `DirectionClasses.cell_bounds` from the stated
+net; no search or replay is added by this correction.
+
+| Boundary | Exact tangent |
+| --- | --- |
+| Upper cell 24 | `1522236450000/13457106690551` |
+| Upper cell 29 | `36657939000000/268756094025979` |
+| Upper cell 39 | `12271089750000/66942386977163` |
+| Lower cell 117 | `120639827500000/208829222337727` |
+| Lower cell 149 | `1383992527500000/1788529185007663` |
+| Upper cell 169 | `631883457000000/686767521953023` |
+| Lower cell 171 | `70623487000000/76145461047973` |
+| Lower cell 175 | `43368205800000/45292658181853` |
+
+Cells 0–39 end at approximately `10.3874656704°`, so the exact result does not extend to
+`10.39°`. Cells 149–169 end at approximately `42.6166465824°`, before the upper end of
+`40.19° ± 2.44°`. The lower boundary of cell 117 is approximately `30.0148587980°` and
+is strictly above `30°`; the exact squared comparison is recorded in
+[H-131](../../../hypotheses/H-131-near-axis-counts-at-q.md).
+These runs therefore do not establish that some square has tilt below `30°`.
 
 ## What was tested, and what would have refuted it
 
@@ -191,7 +219,7 @@ Each row is one `solve_class_program` search followed by `decide_class_program` 
 rationalised point reached; “least core” is the exact least covered mass over every
 direction of the class, and the count bound is `⌊M⌋` whenever Condition 5′ holds.
 
-| class (cells) | folded range, closed | side | rounds | exact `M` | least core | count | planning lane | wall |
+| class (cells) | folded range, degree endpoints approximate | side | rounds | exact `M` | least core | count | planning lane | wall |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 0–24 | `[0°, 6.4537°]` | `96/25` | 9, converged | `4611/512 = 9.00586` | `2049/2048` | **≤ 9** | `9.00586` | 3 s |
 | 0–39 | `[0°, 10.3875°]` | `96/25` | 14, converged | `10765/1024 = 10.51270` | `1025/1024` | **≤ 10** | `10.51270` | 6 s |
@@ -206,12 +234,10 @@ direction of the class, and the count bound is `⌊M⌋` whenever Condition 5′
 | 175–180 | `[43.7565°, 45°]` | `3877084/10⁶` | 63, converged | `5201/512 = 10.15820` | `2051/2048` | **≤ 10** | `10.15820` | 9 s |
 
 Every exact mass reproduces the planning lane’s to the fraction, on the same inputs.
-So H-131’s list is decided under this record: at `96/25`, at most nine squares have
-folded tilt within `6.4537°` of the axes, at most ten within `10.3875°`, at most nine
-within `2.1547°` of `45°`, at most ten within `±2.44°` of `40.194°`, and at most ten
-with folded tilt in `[30.0149°, 45°]` — so some square is tilted below `30.0149°`. At
-`3877084/10⁶ ≥ U`, at most nine within `6.4537°`, at most ten within `7.7671°`, and at
-most ten within `1.2435°` of `45°`.
+H-131’s eight cell counts are decided under this record with the domains in the table.
+In particular, at `96/25` at most ten squares have folded tilt in cells 117–180, so some
+square’s folded angle has tangent below `120639827500000/208829222337727`. The three
+rows at `3877084/10⁶ ≥ U` imply their corresponding cell counts at `U` by containment.
 
 ## The one row that stays undecided, and why it costs nothing
 

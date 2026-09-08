@@ -81,6 +81,7 @@ experiment:
       with α + β of at least 3°?
     outcome: criterion_met
     checked_by: >-
+      Degree endpoints here are approximate labels for the exact cell unions.
       decide_class_program at thresholds (1, 0) for the composition (11, 0). Theorem A,
       cells 0–6 ∪ 174–180 on grid 79, is [0°, 1.7139°] ∪ [43.5293°, 45°] with α + β =
       3.1846°, mass 5529/512 = 10.798828125 over 152 D4-closed atoms and least covered core
@@ -111,10 +112,11 @@ experiment:
       the container?
     outcome: criterion_met
     checked_by: >-
-      Neither. No refuted point produced a core of mass below one at any class direction, so
-      Condition 5' never failed on a band this record claims, and no eleven disjoint B-cores
-      exist in the container at all: 96/25 ÷ (9977/10000) = 3.8489 is below every known side
-      for eleven unit squares. The site-set duals that did reach eleven on grid 79 were sent
+      Neither was produced by the reported checks. No refuted point produced a core of mass
+      below one at any class direction, so Condition 5' never failed on a band this record
+      claims. The historical inference of nonexistence from 96/25 divided by B being below
+      a known packing side was invalid: a best-known upper bound is not a lower bound.
+      The site-set duals that did reach eleven on grid 79 were sent
       to ceiling.py and all three fail as continuum obstructions — exact maximum depth 2, 2
       and 1291/568, scaling their totals to 11/2, 11/2 and 6392/1291 = 4.9512 — so every
       grid-79 non-refutation is a site-set reading and is recorded as one.
@@ -124,10 +126,10 @@ experiment:
       an exact-decided robust end band [0°, α] ∪ [45° − β, 45°] excluded at 96/25 with
       α + β of at least 3°
     reason: >-
-      H-130's criterion is met and passed three times over: Theorem A clears the 3° bar by
-      0.1846° on grid 79 in the shape the hypothesis asked for, Theorem B by 8.8582° on the
-      same grid, and Theorem C by 9.3138° on grid 119 — each an exact decision of
-      decide_class_program, none of them using Stromquist's Theorem 3 or its lemmas.
+      All three theorems meet H-130's total-width criterion: Theorems A, B and C clear
+      the 3° bar by approximately 0.1846°, 8.8582° and 9.3138°. Theorem C also
+      establishes the literal distance of 1.5° from both endpoints. Each is an exact
+      decision of decide_class_program without using Stromquist's Theorem 3 or its lemmas.
 ---
 # exp-130 — The First Rung of the Band Ladder, Decided
 
@@ -143,15 +145,25 @@ Everything below is read from
 [lane B’s session-102 section](../results/agenda-030/lane-b-angle-classes.md#session-102--angle-band-theorems-at-9625-2026-09-08),
 which holds the widening tables, the proofs, and the scripts.
 
+**Statement correction, 2026-09-08.** The theorem domains are their exact cell unions
+and rational tangent intervals below.
+Decimal degree endpoints and widths are approximate labels.
+The correction also removes an invalid inference from a best-known packing side to
+nonexistence of eleven disjoint cores.
+The recorded positive certificates and the three failed continuum-dual checks supply the
+stated verdicts; this correction adds no run.
+
 ## What was tested, and what would have refuted it
 
 The class is `[0°, α(a)] ∪ [45° − β(b), 45°]` for `a` leading and `b` trailing half-gap
-cells of the net, with `α(a)` the exact upper tangent of cell `a − 1` and `45° − β(b)`
-the exact lower tangent of cell `181 − b`. Both ends are closed.
-The question is whether the composition-`(11, 0)` class program refutes that class: if
-the class measure has total mass below eleven while every direction of the class carries
-a covered core of mass at least one, then eleven pairwise disjoint `B`-cores at class
-directions cannot fit, so no packing of eleven has all its folded angles in the band.
+cells of the net.
+The tangent of `α(a)` is the exact upper bound of cell `a − 1`, and the
+tangent of `45° − β(b)` is the exact lower bound of cell `181 − b`. Both ends are
+closed. The question is whether the composition-`(11, 0)` class program refutes that
+class: if the class measure has total mass below eleven while every direction of the
+class carries a covered core of mass at least one, then eleven pairwise disjoint
+`B`-cores at class directions cannot fit, so no packing of eleven has all its folded
+angles in the band.
 
 The falsifiers were fixed before the runs: **a fractional packing on the end cells of
 value at least eleven at `96/25`, or eleven pairwise disjoint `B`-cores at end-cell
@@ -179,37 +191,37 @@ Legal touching is retained throughout: a square’s `B`-core lies in its open in
 
 ## The three theorems, and their exact domains
 
-**Theorem A — the band H-130 asked for.** No packing of eleven unit squares in
-`[0, 96/25]²` has every folded angle in `[0°, 1.7139°] ∪ [43.5293°, 45°]`; exactly, in
-the closed set of angles whose tangent lies in
+**Theorem A — the first asymmetric band.** No packing of eleven unit squares in
+`[0, 96/25]²` has every folded angle in the closed set whose tangent lies in
 `[0, 40385865000000/1349699746833857] ∪ [1077991935000000/1134804266494367, 1]`. Cells
 `0–6 ∪ 174–180`, grid 79, converged in 49 rounds.
 Mass `5529/512 = 10.798828125` over 152 `D4`-closed atoms, least covered core
 `4099/4096` on every one of the fourteen class directions, Conditions 1, 3 and 4 holding
 with `B(1 + D) = 899996306539/900000000000 < 1`. Here `α + β = 3.1846°`, which clears
-H-130’s `3°` criterion **by `0.1846°`**. This is the statement the hypothesis asked for
-and the one that decides it.
+H-130’s width criterion by approximately `0.1846°`. The degree labels for this set are
+approximately `[0°, 1.7139°] ∪ [43.5293°, 45°]`. This asymmetric band alone does not
+establish H-130’s literal distance of `1.5°` from both endpoints; Theorem C does.
 
-**Theorem B — the widest on grid 79.** The same for `[0°, 10.3875°] ∪ [43.5293°, 45°]`,
-tangent in
+**Theorem B — the widest on grid 79.** The same for the closed set with tangent in
 `[0, 12271089750000/66942386977163] ∪ [1077991935000000/1134804266494367, 1]`. Cells
 `0–39 ∪ 174–180`, grid 79, 41 rounds, mass `351/32 = 10.96875` over 216 atoms, least
 core `4101/4096` over the 47 class directions.
-Here `α + β = 11.8582°`, clearing the criterion by `8.8582°`.
+Its degree labels are approximately `[0°, 10.3875°] ∪ [43.5293°, 45°]` and
+`α + β ≈ 11.8582°`, clearing the width criterion by approximately `8.8582°`.
 
-**Theorem C — the widest decided at all.** The same for
-`[0°, 10.3875°] ∪ [43.0737°, 45°]`, tangent in
+**Theorem C — the widest decided at all.** The same for the closed set with tangent in
 `[0, 12271089750000/66942386977163] ∪ [177594252500000/189956166180167, 1]`. Cells
 `0–39 ∪ 172–180`, grid 119, 81 rounds, mass `11083/1024 = 10.8232421875` over 296 atoms,
 least core `4101/4096` over the 49 class directions.
-Here `α + β = 12.3138°`, clearing the criterion by `9.3138°`.
+Its degree labels are approximately `[0°, 10.3875°] ∪ [43.0737°, 45°]` and
+`α + β ≈ 12.3138°`, clearing the width criterion by approximately `9.3138°`.
 
-Theorem C contains Theorem B contains Theorem A. Equivalently, since `96/25 = 3.84`:
-every packing of eleven unit squares at side at most `3.84` has a square whose folded
-angle lies in `(1.7139°, 43.5293°)` — farther than `1.7139°` from `0°` and than
-`1.4707°` from `45°` — and, by Theorem B, one whose folded angle lies in
-`(10.3875°, 43.5293°)`. Trump’s packing satisfies all three with room, as it must: its
-five tilted squares sit at `40.18°`, inside `(10.39°, 43.53°)`.
+Theorem C contains Theorem B contains Theorem A. Equivalently, every packing of eleven
+unit squares at side at most `96/25` has a square whose folded angle’s tangent lies
+strictly between `12271089750000/66942386977163` and `177594252500000/189956166180167`,
+the exact complementary interval for Theorem C. That interval lies more than `1.5°` from
+both endpoints, so H-130’s symmetric distance claim holds.
+Trump’s five tilted squares have angle approximately `40.18°` inside that interval.
 
 ## How the band was widened
 

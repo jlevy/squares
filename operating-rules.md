@@ -55,24 +55,32 @@ commits, and external updates stay with the coordinator.
 Below three is usually serial work that could have been handed out; above five,
 reconciliation costs more than it buys.
 
-Pick the thinking level by difficulty: **extra** for anything carrying a proof
-obligation, **max** for the hardest mathematics and review findings.
+Choose the model and thinking effort together, and name both in every dispatch.
+Use the least costly row that can discharge the task’s obligation:
 
-Pick the model the same way, and say which in the dispatch.
-**Fable at extra or max thinking** takes anything mathematical: a proof obligation, a
-counterexample that has to be trusted, an adversarial review of a claimed result, a
-feasibility map that a later session will plan against.
-**Opus at high or max** takes the mechanical and maintenance work: a CI repair, record
-bookkeeping, identifier allocation, regenerated views, an editorial pass.
-The tiers are not interchangeable in either direction.
-Mechanical work does not need the expensive reasoning, and a mathematical lane run at
-the mechanical tier returns confident prose the coordinator then has to re-derive, which
-is the same cost as not delegating.
-`OR-10` carries the cross-harness table: Codex Max corresponds to Fable, and Codex High
-or Extra High to Opus Extra High or Max.
-Added 2026-09-08 at the owner’s request, in the session that dispatched four Fable lanes
-on the `n = 11` structural questions and two Opus lanes on the CI repair and the record
-bookkeeping.
+| Task | Codex / OpenAI | Claude |
+| --- | --- | --- |
+| Straightforward implementation, record bookkeeping, identifier allocation, regenerated views, editorial work | GPT-5.6 Sol, high | Opus, high |
+| Mechanical work with substantial dependencies, careful CI repair, difficult integration | GPT-5.6 Sol, extra high; max when the dependency analysis warrants it | Opus, extra; max when the dependency analysis warrants it |
+| Deep mathematical work, proof development, mathematical feasibility analysis | GPT-6 Astra, extra high | Fable, extra |
+| Key mathematical insights, difficult counterexamples, adversarial review of consequential proof claims | GPT-6 Astra, max | Fable, max |
+
+For Codex tool arguments, the named models are `gpt-5.6-sol` and `gpt-6-astra`, and
+extra high is `xhigh`. Use the exact model identifiers and supported thinking settings
+exposed by the current harness; a provider’s display labels need not match another
+provider’s arguments.
+This is the owner’s task-routing policy, not a measured claim of equal model capability.
+If a requested combination is unavailable, record that limitation and the actual
+selection rather than silently substituting it.
+
+Split mixed work at the proof boundary: Sol or Opus can implement a specified checker,
+while Astra or Fable establishes its mathematical contract and reviews the result.
+Escalate when a mechanical lane uncovers a proof obligation, and reserve max for the
+work that benefits from it.
+This keeps straightforward tasks quick and token-efficient while funding the judgment on
+which the research depends.
+The owner specified the OpenAI and Claude choices during the PR 127 handoff review on
+2026-09-08, extending that day’s Fable/Opus dispatch policy.
 
 A sub-agent’s report is evidence, not a verdict.
 One in
@@ -314,12 +322,13 @@ guard receipts still match.
 Record the handoff honestly; do not manufacture a new round or discard exact work just
 to keep a provenance label unchanged.
 
-Match judgment effort across harnesses by task, not by similarly named settings:
-
-- for the hardest mathematics or careful review, Codex **Max** corresponds to Claude
-  **Fable**;
-- for mechanical work requiring substantial care, Codex **High** or **Extra High**
-  corresponds to Claude **Opus Extra High** or **Opus Max**.
+Match the incoming agent to the task using
+[OR-2’s model and effort table](#or-2-run-three-to-five-sub-agents-at-a-model-and-thinking-level-matched-to-the-task).
+Carry both the model and the thinking effort in the handoff: Sol/Opus for mechanical
+work, Astra/Fable for mathematics, with max reserved for the most consequential or
+difficult reasoning.
+A thinking-level name alone does not identify the model or preserve the intended
+allocation.
 
 This equivalence does not make host-sensitive measurements portable.
 Timing, floating-point last bits, nondeterministic search trajectories, or any method

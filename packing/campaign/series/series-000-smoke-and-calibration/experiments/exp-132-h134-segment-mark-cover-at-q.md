@@ -183,7 +183,7 @@ experiment:
       squares at any side up to 96/25 is within 3/500 of a known mark; the point form of the
       same claim is untouched by this and stays open with thirteen candidate sets refuted.
     commit: d04205fb
-    needs_review: true
+    needs_review: false
 ---
 # exp-132 — Ten Short Segments, and Every Square Within `3/500` of One
 
@@ -199,6 +199,35 @@ one claim, Theorem E.4. This record registers it.
 Every figure below is read from
 [lane E’s report](../results/agenda-030/lane-e-ownership-set-at-q.md), which holds the
 catalogue, the reader’s soundness argument, and the scripts and outputs as run.
+
+## Correction and Independent Replay, 2026-09-08
+
+The segment-form outcome is retained.
+An independent replay through
+[`devtools.segment_cover_replay`](../../../../devtools/segment_cover_replay.py)
+reproduces BC-303’s 24,381 nodes, 10,960 certified leaves and 1,231 discards at
+`q = 96/25`, length `1/10` and tolerance `3/500`. Every leaf and discard is rechecked
+exactly, no box fails, and the exact covered volume is `243/128`. The promoted reader
+preserves BC-303’s geometry and exact bounds and adds a bounded, portable CLI, Git/path
+provenance and failure exit statuses.
+
+The three structural claims reproduced below are corrected in
+[lane E’s dated annotation](../results/agenda-030/lane-e-ownership-set-at-q.md#correction-of-the-structural-claims-2026-09-08).
+The claimed scaled T-018 measure gives the rounded square `[0, 1]²` mass
+`85353/100000 < 1`, refuting E.1. E.2’s side-`1 + 2δ` enlargement can make separated
+rotated squares overlap; its replacement bound does not contradict T-018. The
+forced-mark and orbit-counting arguments require point marks and do not apply to
+segments. The historical “no LP obstruction” and “no eleven separated squares”
+conclusions are withdrawn; they were not premises of E.4.
+
+[`devtools.rounded_measure_audit`](../../../../devtools/rounded_measure_audit.py)
+reproduces E.1’s counterexample and the unscaled `4001/4000` control with two
+independent exact distance methods.
+The report retains the original run’s frontmatter, scripts, outputs and timing; this
+correction does not recast them as the independent replay.
+BC-303 also resolved the historical length-`8/100` floor failure, as recorded in its
+[selection report](../results/agenda-030/bc-303-first-wave-selection.md#24-results-exact).
+The one-body segment theorem supplies localisation, with ownership still open.
 
 ## What was tested, and what would have refuted it
 
@@ -317,8 +346,9 @@ too weak to drive the finite family towards infeasibility.
 **A surviving branch is not evidence for the point form.** It is neither established nor
 refuted, and the escape catalogue is the obstruction the closing route inherits.
 
-Three structural facts were proved alongside, and they bound what any future attempt can
-do. No LP, pigeonhole or counting argument can refute H-134, because T-018 scaled by
+**Historical structural claims, corrected above on 2026-09-08.** The following claims
+are retained as the original record; the dated correction withdraws or limits them.
+No LP, pigeonhole or counting argument can refute H-134, because T-018 scaled by
 `384/381` is a fractional cover of mass `434547/40000 = 10.863675 < 11` for `δ`-rounded
 unit squares at `q`. Ten marks of any robustly unavoidable set are localised to the
 `δ`-neighbourhoods of the ten squares of the `n = 10` optimal packing scaled to `q`, and
@@ -350,13 +380,16 @@ restore an ownership argument is a question for the closing route.
   Theorem E.4 rests on the Lipschitz bound above and on a cover whose every leaf and
   every discard was re-decided exactly; the record for it is the reader, its allowance,
   and the re-check, all reproduced in the lane’s appendix.
-- **The independent replay is the pending factual review, and this round is filed with
-  `needs_review` set for it.** A second reader with a different bound — the Hausdorff
-  one on the Euclidean distance itself, `cover_reader2.py` — was written and did **not**
-  finish: its float cover ran out of two bounded runs of `9` and `7` minutes at load
-  `10` to `14`, and the exact pass it started was stopped after ten minutes.
-  Until it or another independent reader replays the cover, the ledger holds H-134 at
-  *needs review* rather than confirmed, which is the standard the lane itself asked for.
+- **Historical review status, superseded by the dated independent replay above.** This
+  round was filed with `needs_review` set for it.
+  A second reader with a different bound — the Hausdorff one on the Euclidean distance
+  itself, `cover_reader2.py` — was written and did **not** finish: its float cover ran
+  out of two bounded runs of `9` and `7` minutes at load `10` to `14`, and the exact
+  pass it started was stopped after ten minutes.
+  That was the reason for the original review flag.
+  BC-303’s independent reader, freshly replayed by the promoted tool on 2026-09-08,
+  discharges it; `needs_review` is now false for the segment theorem.
+  Point-form and ownership extensions remain open.
 - **What is certified and what is only a search reading.** Certified: the cover at
   segment length `1/10` (ten marks and eleven), and at `9/100`. A search reading only:
   that every contained square actually *meets* a segment at distance `0`; that no escape

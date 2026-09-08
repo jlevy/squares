@@ -1,5 +1,5 @@
 ---
-title: H-131 — at most nine squares within 6.45° of the axes at 96/25, and at most ten within 10.39°
+title: H-131 — exact angle-cell counts at 96/25 and U
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
@@ -10,12 +10,12 @@ hypothesis:
   kind: hypothesis
   claim: >-
     In every packing of unit squares in the container of side 96/25, at most nine
-    squares have folded tilt at most 6.4537°, at most ten have folded tilt at most
-    10.3875°, at most nine have folded tilt within 2.155° of 45°, at most ten have
-    folded tilt within 2.44° of 40.19°, and at most ten have folded tilt in
-    [30.01°, 45°], so some square is tilted below 30°. At side U the corresponding
-    counts are nine within 6.4537°, ten within 7.7671° of the axes, and ten within
-    1.24° of 45°.
+    squares have folded tilt in cells 0–24, at most ten in cells 0–39, at most nine
+    in cells 171–180, at most ten in cells 149–169, and at most ten in cells
+    117–180. At side U the counts are at most nine in cells 0–24, ten in cells
+    0–29, and ten in cells 175–180. Cells are the closed half-gap cells of the
+    retained net t_k = k·207107/90000000, k = 0..180, with exact tangent boundaries
+    supplied by DirectionClasses.cell_bounds; the degree labels are approximate.
   lane: proof
   derived_from: [X-021]
   strategy_refs: ['proof:9', 'proof:15']
@@ -45,24 +45,31 @@ hypothesis:
     experiment record before the counts are cited as results. The floors are sharp in
     kind: nine squares at any common tilt up to 30° fit in the container, so no covering
     method gets a near-axis count below nine, and the only room is the band's width.
-    Replayed under session-102 (lane B, 2026-09-08): every count reproduces exactly with
-    the planning lane's masses to the fraction, on the stated site set; the experiment
-    record is allocated at integration.
+    Replayed under session-102 (lane B, 2026-09-08) and registered as exp-131: every
+    cell count reproduces the planning lane's mass to the fraction. Review correction
+    on 2026-09-08 replaces outward-rounded degree claims with the exact cells that
+    were tested; this changes no run and claims no new replay. In particular, the
+    result forces an angle below the lower boundary of cell 117, approximately
+    30.0148588 degrees, and does not establish an angle below 30 degrees.
 ---
 # H-131 — Exact Counts by Angle at `96/25`
 
-The nine-point argument gives at most nine squares tilted below `2.44°` at `96/25`.
-[X-021](../explorations/X-021-what-can-be-proved-about-eleven-squares.md) widens that to
-`4.61°` with nine pushed points and, with the class program, to `6.45°` — and adds a
-count of ten out to `10.39°`, nine within `2.155°` of `45°`, ten within `2.44°` of
-Trump’s angle, and ten in `[30.01°, 45°]`, which is the first count that forces a square
-below `30°`.
+The class program gives the eight exact cell counts in the claim above, registered under
+[exp-131](../series/series-000-smoke-and-calibration/experiments/exp-131-h131-near-axis-counts-replay-at-q.md).
+The site set supplies the certificate’s atoms; Condition 4 and the exact sweep make each
+accepted count a statement about every packing of unit squares in its stated angle
+class.
 
-These are theorems of the exact verifier on a stated site set, not hand proofs, and they
-were decided in a planning lane rather than a registered round.
-Replaying them under an experiment record is the first task of BC-295 in
-[Agenda 030](../agendas/agenda-030-parallel-structural-lanes-at-n11.md); until then they
-are cited as planning evidence only.
+**Statement correction, 2026-09-08.** The registered runs used exact half-gap cells.
+Some earlier degree summaries rounded their domains outward: cells 0–39 end at
+approximately `10.3874656704°`, and cells 149–169 cover approximately
+`[37.7332782363°, 42.6166465824°]`, which does not contain the whole interval
+`40.19° ± 2.44°`. The lower tangent of cell 117 is `120639827500000/208829222337727`,
+whose angle is approximately `30.0148587980°`. It is strictly above `30°`: three times
+its numerator squared minus its denominator squared is `52259835509451319152473471 > 0`.
+The proved conclusion is that one square has tilt below this exact cell boundary.
+No result here forces tilt below `30°`. This correction restates the recorded
+certificates and adds no run.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

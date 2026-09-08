@@ -10,16 +10,17 @@ hypothesis:
   kind: hypothesis
   claim: >-
     Every packing of eleven unit squares at side at most 96/25 has a square whose folded
-    angle is farther than 1.5° from both 0° and 45°. Equivalently, the class covering
-    value restricted to the end cells [0°, α] ∪ [45° − β, 45°] with α + β ≥ 3° is
-    below eleven at 96/25, decided exactly.
+    angle is farther than 1.5° from both 0° and 45°. A sufficient certificate is an
+    exact covering value below eleven on an end-cell union containing both closed
+    1.5° end bands. The weaker width criterion α + β ≥ 3° does not alone imply this
+    symmetric statement; both endpoints must be checked separately.
   lane: proof
   derived_from: [X-021]
   strategy_refs: ['proof:9', 'proof:10', 'proof:15']
   criterion:
     shape: determination
     metric: exact-decided class covering value on the widest end-cell class the site set allows
-    direction: below eleven with α + β of at least 3°
+    direction: below eleven on exact end cells containing both 1.5° bands; total width at least 3° alone is insufficient
     threshold: 3
   instrument: >-
     classcert's composition-(11, 0) program on a union of end cells, decided by
@@ -29,8 +30,9 @@ hypothesis:
   instrument_ready: true
   regime: >-
     n = 11, side 96/25, shrink 9977/10000, 181-direction net; the exact {0°, 45°} class is
-    not integrally obstructed at 96/25 because Hämäläinen's packing needs side B·L₀ =
-    3.8767
+    not obstructed by the cited Hämäläinen construction at 96/25, since that particular
+    construction requires side above 3.8766. Its existence at a larger side does not
+    establish nonexistence of another family at 96/25.
   instance: {axis: n, point: 11}
   priority: 1
   cost_estimate: one session of two to three hours on one core
@@ -38,6 +40,9 @@ hypothesis:
   replication: true
   registered: '2026-09-08'
   notes: >-
+    Correction 2026-09-08: exp-130 Theorem A meets only the asymmetric width target;
+    Theorem C also contains both closed 1.5° bands and proves the claim. The degree
+    labels below are historical approximations; exp-130's exact cell unions govern.
     Transporting Stromquist's Theorem 3 to 96/25 proves 0.6848° (X-021, lane B
     Proposition 1.6), and the planning lane exact-verified [0°, 1.45°] ∪ [43.76°, 45°]
     at grid 79 (mass 10.702) with no Stromquist input; the next widenings were not
@@ -60,9 +65,9 @@ exactly whenever the restricted covering value is below eleven.
 This claim is the widest end band the instrument can decide at `96/25`. The planning
 lane already decided `1.45°` at the axis end and `1.24°` at the diagonal end on one site
 set; the claim asks for twice that.
-It is not integrally obstructed there, it needs no new code, and it is the base case
-every later case analysis may assume.
-[Agenda 030](../agendas/agenda-030-parallel-structural-lanes-at-n11.md) owns it in
+The known construction does not provide an integral obstruction there.
+Exp-130’s Theorem C supplies the symmetric base case; Theorem A’s total width alone does
+not. [Agenda 030](../agendas/agenda-030-parallel-structural-lanes-at-n11.md) owns it in
 BC-295.
 
 <!-- This document follows common-doc-guidelines.md.

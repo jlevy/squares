@@ -970,6 +970,12 @@ column-generation run that converges with rationalised mass at or above 11 + 3/2
 5; or a bounded LP that does not converge inside its wall.
 Only the exact sweep decides validity; every LP objective below is context.
 
+**Handoff correction, 2026-09-08.** These were stopping criteria for the reported
+finite-support attempt.
+An above-threshold feasible measure or a time limit is not a falsifier of H-128’s
+existence claim. A refutation needs an exact lower certificate over the entire declared
+measure domain; the retained bound `10.785 < 11.15` does not provide one.
+
 ### The ownership step, exactly
 
 Setting. Side `L = 96/25`, shrink `B = 9977/10000`, the retained net of 181 directions
@@ -1216,13 +1222,13 @@ deliverable.
 
 ### Status of H-128 and what this feeds
 
-H-128 as registered (the retained shrink and net, T-018’s corner atoms scaled, weight at
-least `3/20`, mass below `11.15`) meets its own falsifier: the converged four-bound
-measure has mass `11.798`, and the priced program shows the position, not the bound, is
-what fails. Recommended status: **rejected at `96/25` on the retained shrink and net**,
-with the scoped caveat that every free reading here is an upper reading on a finite site
-set and that a finer net or a larger `B` is a different measure; the floor section says
-how much of the obstruction is a theorem for the net.
+H-128 remains open over the retained shrink and net.
+The converged four-bound measure has mass `11.798`, so this finite-support attempt did
+not obtain the theorem.
+On that support the priced program identifies the corner position as the obstacle.
+The global lower bound in the floor section is only `10.785 < 11.15`, which does not
+refute the hypothesis.
+This corrects the original recommendation to reject H-128 on the entire net.
 The free value at `96/25` on this net (`11.19` to `11.26`) sits `0.19` to `0.26` above
 the certificate line, which is the number BC-297’s ladder and BC-294’s duality readings
 should be checked against.

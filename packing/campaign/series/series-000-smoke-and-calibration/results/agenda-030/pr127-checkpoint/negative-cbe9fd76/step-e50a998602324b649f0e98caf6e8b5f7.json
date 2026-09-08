@@ -1,0 +1,8 @@
+{
+  "name": "negative controls",
+  "output": "  snapshot source 101.2 MiB; 2 private worker trees\n  slowest negative controls (wall seconds):\n      24.131s  exact LP - the pivot budget never stops the simplex\n      20.581s  minimal polynomial - a reducible relation is discharged as if it were minimal\n      19.589s  exact grid replay - the step that now owns it actually reaches it\n      19.559s  exact grid replay - a grid too small to hold its squares is still caught\n      17.879s  exact LP - a negative multiplier is accepted as optimal\n      16.250s  exact LP - a point that violates a row is certified as a vertex\n      15.960s  exact LP - a rank-deficient active set is eliminated past instead of refused\n      15.914s  exact LP - a short candidate set is returned as if it spanned a vertex\n      12.930s  system assembly - a structure with no chirality is defaulted to all +1\n      12.547s  system assembly - a pose of the wrong chirality is substituted unchecked\n  163 negative controls fire as expected",
+  "reason": "",
+  "run_id": "61376c87f86d47328741ebbc9d73149c",
+  "seconds": 329.1229954579903,
+  "status": "passed"
+}

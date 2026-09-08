@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **6** in_progress, **26** ready, **13** tentative, **61** blocked, **43** stopped, **136** complete.
+- **6** in_progress, **19** ready, **11** tentative, **59** blocked, **51** stopped, **139** complete.
 
-- **18 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-289`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **17 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -56,15 +56,6 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-028 | `BC-275` | ready | 1 | efficiency | measurement_validation | Which mathematical result per unit of attention warrants the next overnight allocation? | `think-1v6g` |
 | agenda-028 | `BC-272` | tentative | 2 | insight | research | Does retaining the common anchor remove a diagnosed H119 correlation loss? | `think-cy6g` |
 | agenda-028 | `BC-274` | tentative | 2 | insight | research | What concrete implication could establish or obstruct the existential H121 normal form? | `think-5hmt` |
-| agenda-029 | `BC-285` | ready | 0 | insight | research | What quantitative corner-frame restrictions follow from insertion saturation at 96/25? | `think-pbv4` |
-| agenda-029 | `BC-287` | ready | 0 | insight | research | Can the global four-blocker description support a useful continuous frame-conditioned dot contradiction? | `think-1rim` |
-| agenda-029 | `BC-286` | ready | 1 | insight | research | Can complete angle-count cases at 96/25 gain a useful exclusion from class-dependent dot thresholds? | `think-yv7r` |
-| agenda-029 | `BC-288` | tentative | 2 | insight | research | Can forced edge-contact components or a finite feasible reduction constrain minimizing angle complexity? | `think-m6gb` |
-| agenda-030 | `BC-304` | ready | 0 | correctness | research | What survives independent checking, what did it change about the global problem, and what is the next… | `think-yrw1` |
-| agenda-030 | `BC-296` | ready | 1 | insight | research | Which compositions (n0, 11 − n0) by near-axis count close at 96/25, and does a class-weighted fractional… | `think-n6fr` |
-| agenda-030 | `BC-298` | ready | 1 | insight | research | What is the largest H0 below 3.84 such that eleven unit squares provably do not fit in the rectangle 3.84 ×… | `think-jsi8` |
-| agenda-030 | `BC-301` | ready | 1 | correctness | research | What do the exact-side tree over Q(u) and the B = 1 capture run at U + σ cost, written as one architecture? | `think-lbqe` |
-| agenda-030 | `BC-300` | tentative | 2 | insight | research | Does any packing below side 3.96 have a snug 45° corner square, four deeply avoided corners, or a confined… | `think-dfof` |
 
 ## Blocked, and on what
 
@@ -131,8 +122,6 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-027 | `BC-262` | 1 | `BC-261` | no | — |
 | agenda-027 | `BC-263` | 1 | `BC-261` | no | — |
 | agenda-028 | `BC-271` | 1 | `BC-270`, `BC-261` | no | — |
-| agenda-029 | `BC-289` | 0 | — | no | First-block evidence and disposition; no route is selected or funded by this planning checkpoint. |
-| agenda-029 | `BC-290` | 0 | `BC-289` | no | — |
 
 ## Discharged elsewhere
 
@@ -148,6 +137,9 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | `BC-051` | stopped | `BC-084` | Can verification run only the steps a change can reach, without any chance of running fewer than it… |
 | `BC-074` | complete | `BC-078` | Do the reader-facing documents still describe the project the record describes? |
 | `BC-075` | complete | `BC-079` | Are the gate's tiers the right tiers, and is the coordinator running them at the right times? |
+| `BC-285` | complete | `BC-293` | What quantitative corner-frame restrictions follow from insertion saturation at 96/25? |
+| `BC-289` | complete | `BC-303` | What is the strongest consequential theorem or obstruction the best first-block lead can establish? |
+| `BC-290` | complete | `BC-304` | What survives independent checking, and what does it change about the global n11 problem? |
 
 ## By agenda
 
@@ -181,8 +173,8 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-026 | active | 2 | 2 | 2 | 3 |  | 5 | 14 |
 | agenda-027 | active | 1 | 3 | 1 | 3 |  | 3 | 11 |
 | agenda-028 | paused |  | 3 | 2 | 1 |  | 1 | 7 |
-| agenda-029 | paused |  | 3 | 1 | 2 |  | 1 | 7 |
-| agenda-030 | active |  | 4 | 1 |  | 2 | 7 | 14 |
+| agenda-029 | superseded |  |  |  |  | 3 | 4 | 7 |
+| agenda-030 | completed |  |  |  |  | 7 | 7 | 14 |
 
 ## By program
 
@@ -320,28 +312,28 @@ Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 | agenda | id | state | question |
 | --- | --- | --- | --- |
 | agenda-029 | `BC-284` | complete | Which structural restrictions and conditional proofs deserve the next major n11 allocation? |
-| agenda-029 | `BC-285` | ready | What quantitative corner-frame restrictions follow from insertion saturation at 96/25? |
-| agenda-029 | `BC-286` | ready | Can complete angle-count cases at 96/25 gain a useful exclusion from class-dependent dot thresholds? |
-| agenda-029 | `BC-287` | ready | Can the global four-blocker description support a useful continuous frame-conditioned dot… |
-| agenda-029 | `BC-288` | tentative | Can forced edge-contact components or a finite feasible reduction constrain minimizing angle… |
-| agenda-029 | `BC-289` | blocked | What is the strongest consequential theorem or obstruction the best first-block lead can establish? |
-| agenda-029 | `BC-290` | blocked | What survives independent checking, and what does it change about the global n11 problem? |
+| agenda-029 | `BC-285` | complete | What quantitative corner-frame restrictions follow from insertion saturation at 96/25? |
+| agenda-029 | `BC-286` | stopped | Can complete angle-count cases at 96/25 gain a useful exclusion from class-dependent dot thresholds? |
+| agenda-029 | `BC-287` | stopped | Can the global four-blocker description support a useful continuous frame-conditioned dot… |
+| agenda-029 | `BC-288` | stopped | Can forced edge-contact components or a finite feasible reduction constrain minimizing angle… |
+| agenda-029 | `BC-289` | complete | What is the strongest consequential theorem or obstruction the best first-block lead can establish? |
+| agenda-029 | `BC-290` | complete | What survives independent checking, and what does it change about the global n11 problem? |
 | agenda-030 | `BC-291` | complete | Which structural constraints on eleven-square packings can be proved now, and what does each buy… |
 | agenda-030 | `BC-292` | stopped | Does pricing the four corner blockers' cores above the rest, or banking their corner boxes, give a… |
 | agenda-030 | `BC-293` | complete | Does a valid D4-symmetric measure at 96/25 exist with T-018's four corner atoms at weight at least… |
-| agenda-030 | `BC-294` | complete | What are the restricted fractional packing values at 96/25 off a corner box, a corner triangle, a… |
+| agenda-030 | `BC-294` | stopped | What are the restricted fractional packing values at 96/25 off a corner box, a corner triangle, a… |
 | agenda-030 | `BC-295` | complete | How wide a band around 0° and 45° can be excluded at 96/25, how wide is the optimal nine-point… |
-| agenda-030 | `BC-296` | ready | Which compositions (n0, 11 − n0) by near-axis count close at 96/25, and does a class-weighted… |
+| agenda-030 | `BC-296` | stopped | Which compositions (n0, 11 − n0) by near-axis count close at 96/25, and does a class-weighted… |
 | agenda-030 | `BC-297` | complete | Is the exactly-eleven plateau at 191/50 a site artefact, what is the shrink tax there, and can the… |
-| agenda-030 | `BC-298` | ready | What is the largest H0 below 3.84 such that eleven unit squares provably do not fit in the… |
+| agenda-030 | `BC-298` | stopped | What is the largest H0 below 3.84 such that eleven unit squares provably do not fit in the… |
 | agenda-030 | `BC-299` | stopped | For which angle band do Stromquist's ten points localise every avoiding square at 96/25, and can an… |
-| agenda-030 | `BC-300` | tentative | Does any packing below side 3.96 have a snug 45° corner square, four deeply avoided corners, or a… |
-| agenda-030 | `BC-301` | ready | What do the exact-side tree over Q(u) and the B = 1 capture run at U + σ cost, written as one… |
+| agenda-030 | `BC-300` | stopped | Does any packing below side 3.96 have a snug 45° corner square, four deeply avoided corners, or a… |
+| agenda-030 | `BC-301` | stopped | What do the exact-side tree over Q(u) and the B = 1 capture run at U + σ cost, written as one… |
 | agenda-030 | `BC-302` | complete | Is there a robust unavoidable set of at most eleven marks at 96/25? |
 | agenda-030 | `BC-303` | complete | Which lane results earn the next sustained block, and what is the strongest claim to freeze? |
-| agenda-030 | `BC-304` | ready | What survives independent checking, what did it change about the global problem, and what is the… |
+| agenda-030 | `BC-304` | complete | What survives independent checking, what did it change about the global problem, and what is the… |
 
-Open frontier: `BC-285`, `BC-286`, `BC-287`, `BC-288`, `BC-289`, `BC-290`, `BC-296`, `BC-298`, `BC-300`, `BC-301`, `BC-304`.
+Open frontier: none; every cell is terminal.
 
 ### `reach-table-ladder`
 

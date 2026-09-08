@@ -12,18 +12,20 @@ hypothesis:
     Is the restricted covering value of exactly 11.000000 that two site sets reached at
     side 191/50 an artefact of Trump-shaped B-cores overlapping only in site-free strips
     of width about 0.0124, so that adding sites in those strips or refining the net
-    yields a certificate below eleven at 191/50; and if not, does the plateau close as
-    an exact cover of the atoms by eleven mass-one cells?
+    yields a certificate below eleven at 191/50? Separately, is the continuum covering
+    value below eleven, or can a retained mass-eleven measure support an exact-cover
+    certificate? Refuting the canonical Trump-strip explanation does not decide either
+    of these further questions. The dated correction below preserves the original wording.
   lane: proof
   derived_from: [X-021]
   strategy_refs: ['proof:9', 'proof:15']
   instrument: >-
-    Thirty-minute artefact test: regenerate the grid site set at 191/50 and test whether
-    the eleven B-cores of Trump's packing scaled by 382/387.7 overlap only in site-free
-    regions. Then either add sites in the strips and re-run, or refine the net toward
-    1800 directions with B = 99977/100000, or read the tight-cell census and run the
-    exact cover with atom-based branching.
-  instrument_ready: true
+    The historical canonical artefact test is complete on reconstructible site sets.
+    Continuation requires a retained state with its exact net, full-dual pricing with
+    pointwise separation, and an independently verified covering candidate. Exact-cover
+    work additionally requires a retained measure of mass eleven; the existing census
+    concerns a different measure of mass 11.118805.
+  instrument_ready: false
   regime: >-
     n = 11, side 191/50, the retained shrink and net for the artefact test and the
     plateau certificate; a finer net and shrink for the tax measurement
@@ -34,6 +36,10 @@ hypothesis:
   replication: true
   registered: '2026-09-08'
   notes: >-
+    Correction 2026-09-08: only the canonical Trump-strip explanation is refuted on the
+    reconstructible site sets. The original exactly-eleven states are missing; neither
+    full-dual pricing nor the continuum value has been decided. The original body below
+    preserves the false dichotomy corrected in the dated section.
     Lane C's cheapest question in X-021 and the one that changes the ladder's status at
     3.82 immediately if the answer is yes; the n = 21 grid artefact is the precedent. The
     exact-cover route is the weighted form of Stromquist's ownership argument and the only
@@ -57,6 +63,24 @@ If the test confirms the mechanism, the ladder at `3.82` is an instrument questi
 it refutes it, the plateau is geometric and the exact-cover certificate is the only
 route left. [Agenda 030](../agendas/agenda-030-parallel-structural-lanes-at-n11.md) owns
 both halves in BC-297.
+
+## Correction of 2026-09-08: The Plateau Remains Undecided
+
+Refuting the canonical Trump-strip explanation does not establish a geometric plateau or
+leave exact cover as the only route.
+Lane F found site-invisible overlaps in the fractional dual and a stop on truncated
+pricing; full-dual pricing may still lower the covering objective.
+Its failure to find a different Trump-shaped explanation in a finite search is not a
+nonexistence proof for that family.
+
+The exactly-eleven states and measures were not retained.
+The million-cell census was run on a different measure of mass `11.118805`; it prices
+that measure’s near-tight enumeration, not an exact cover of an unavailable mass-eleven
+measure. Thus the first part has a scoped negative result, while `τ*_B(191/50) < 11` and
+the exact-cover part remain open.
+See the
+[dated lane-F correction](../series/series-000-smoke-and-calibration/results/agenda-030/lane-f-plateau-at-3-82.md#correction-of-2026-09-08-scope-and-reproducible-continuation)
+for the retained input and the next pricing test.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

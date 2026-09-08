@@ -109,6 +109,7 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md
   - packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md
   checks:
+  - 'full gate: fast at cbe9fd76: passed'
   - packing-validate --records on the lane branch at 05:16Z, before this record was filled, failed only on this record's placeholders (six steps, all naming session-102); every other step passed.
   - >-
     packing-validate --records at 05:58Z on the final tree: every step passed except three
@@ -122,7 +123,6 @@ session:
     devtools.log_rollup at the last commit; it is an active-session lower bound, not a final
     cost.
   resource_rollups: [packing/campaign/resource-usage/agent-ae5b122129d330f9e.yaml]
-  certification_pending: think-kbci
   stop_reason: Stopped at the lane's fixed clock with the exit reached; no full gate was run in this lane (the coordinator owns integration and the pull-request surface), so certification is pending under the agenda's coordinating bead think-kbci; the lane's own bead think-ndqj is complete.
   next_action: >-
     Under think-kbci the coordinator allocates experiment ids for Theorems A, B and C and the H-131 replay and certifies the branch on the pull-request surface; BC-303 (think-znzj) reads this lane and decides whether the end band continues at grid 119 and 159 from k = 9 and whether the band toward 40.19° runs at grid 119.
@@ -162,6 +162,24 @@ The machine ran at load average eight on four cores throughout, so the wall time
 result section are not comparable with the planning lane’s. No identifier was allocated,
 nothing was pushed, and no full gate was run in this lane; the record is stopped with
 certification pending under `think-ndqj`.
+
+## Integration Certification Addendum — 2026-09-08
+
+The corrected integration checkpoint combines the 62-step fast pass at `cbe9fd76`, the
+passing structured negative-control, slow and exhaustive component receipts at that same
+revision, and four unchanged full-only geometry passes recorded in the retained raw
+stdout from the failed `ef8a2e72` invocation.
+The reviewed `ef8a2e72..cbe9fd76` source diff leaves those four components unaffected.
+Together that log and the structured receipts cover all 69 declared validation steps.
+The `ef8a2e72` full invocation remains failed; the later component runs are not called a
+full invocation.
+
+This later integration result discharges only the record’s certification debt.
+It does not extend this stopped session’s clock, rerun its science, change a scientific
+verdict, supply a missing artifact, or complete any target recorded as partial, stopped,
+unrun or absent.
+The original stop reason, resource accounting and unfinished complements
+remain historical facts.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
