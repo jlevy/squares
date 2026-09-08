@@ -238,8 +238,22 @@ def test_isolated_exhaustive_jobs_use_the_host_without_multiplying_concurrent_po
                 )
                 if namespace.only == ["exhaustive exact behavioral tests"]:
                     assert (namespace.jobs, namespace.inner_jobs) == ("1", "4")
-                elif namespace.skip == ["exhaustive exact behavioral tests"]:
-                    assert (namespace.jobs, namespace.inner_jobs) == ("2", "2")
+                elif namespace.skip == [
+                    "exhaustive exact behavioral tests",
+                    "slow behavioral tests",
+                ]:
+                    # The daily backstop's own job, serial since run 34185998810 killed
+                    # `slow behavioral tests` at 1801.00s while the escape screen ran
+                    # beside it to 1794.06s, six seconds inside its own budget: the same
+                    # crowding that split the deep gate two runs earlier. The lane left
+                    # for `slow-lane`, and what remains runs one step at a time because
+                    # `--jobs 2` would put the screen back beside the atlas rebuild and
+                    # the negative controls -- the arrangement run 34181619739 already
+                    # refuted. 68 steps cost 6226.03s of step time there; less the lane's
+                    # 1801.00s, with the five long deferrals at their serial 2174.84s
+                    # rather than their crowded 3445.44s, serial predicts 3154.43s against
+                    # the full tier's 3600s ceiling.
+                    assert (namespace.jobs, namespace.inner_jobs) == ("1", "2")
                 elif "negative controls" in namespace.only:
                     # The deep gate's five remaining deferrals, serial since run
                     # 34181619739 killed the escape screen at its 1800s budget while it
@@ -249,20 +263,24 @@ def test_isolated_exhaustive_jobs_use_the_host_without_multiplying_concurrent_po
                     # quiet, so one outer slot is the shape the readings were taken at.
                     assert (namespace.jobs, namespace.inner_jobs) == ("1", "2")
                 elif namespace.only == ["slow behavioral tests"]:
-                    # The deep gate's third job since 2026-09-08, and isolated for the
-                    # same reason as the exhaustive tier: it was being killed at its
-                    # budget while sharing four cpus with five other deferrals. One outer
-                    # job because pytest runs the lane in a single process, but two inner
-                    # workers rather than one, because the lane's two corpus-scaled tests
-                    # pool their own work through `PACK_JOBS` -- the atlas one is 691.19s
-                    # serial against 348.15s at two -- so `--inner-jobs 1` would hand back
-                    # about as much wall as the split buys.
+                    # A job of its own in both workflows since 2026-09-08, and isolated
+                    # for the same reason as the exhaustive tier: it was being killed at
+                    # its budget while sharing four cpus with the other deferrals. One
+                    # outer job because pytest runs the lane in a single process, but two
+                    # inner workers rather than one, because the lane's two corpus-scaled
+                    # tests pool their own work through `PACK_JOBS` -- the atlas one is
+                    # 691.19s serial against 348.15s at two -- so `--inner-jobs 1` would
+                    # hand back about as much wall as the split buys. The same shape in
+                    # both files, because it is the same lane and the same reading:
+                    # 1271.96s uncontended in run 34176106076's `validate` job against
+                    # 1801.00s killed in run 34185998810's.
                     assert (namespace.jobs, namespace.inner_jobs) == ("1", "2")
                 else:
                     continue
                 checked.add((workflow.name, name))
     assert checked == {
         ("packing-validation.yml", "exhaustive"),
+        ("packing-validation.yml", "slow-lane"),
         ("packing-validation.yml", "validate"),
         ("deep-gate.yml", "exhaustive-tier"),
         ("deep-gate.yml", "deferred-steps"),
@@ -2139,28 +2157,44 @@ def test_every_tier_band_is_declared_for_the_shape_ci_runs() -> None:
 
 
 def test_the_post_merge_jobs_partition_the_gate() -> None:
-    """The two jobs a merge runs must together select every step, and none twice.
+    """The three jobs a merge runs must together select every step, and none twice.
 
     think-tr2z split the exhaustive tier onto its own runner so that it reports its own
     verdict against its own budget; `--skip` on the other job is what stops it being paid
     for twice. Both halves of that are a name typed into a YAML file, so this reads the
     workflow, parses each command with the CLI's own parser, and resolves it through the
-    CLI's own selector: a step added to `STEPS` lands in one job or the other, and a
+    CLI's own selector: a step added to `STEPS` lands in one job or another, and a
     rename that breaks the split fails here rather than after a merge.
 
-    A merge still runs the gate as one job plus the exhaustive tier, not as the pull
+    Three since 2026-09-08, and the third arrived the way the second did. Run 34185998810
+    killed `slow behavioral tests` at 1801.00s in the `validate` job while
+    `single-square translation escape screen` ran beside it to 1794.06s, so the lane got a
+    runner of its own -- `slow-lane` -- exactly as `deep-gate.yml` had given it one hours
+    before on the same evidence. That makes the backstop's `--skip` list two names long,
+    which is precisely why this is a partition test rather than a string pin: a third
+    `--skip` that nobody gave a job to would leave its steps run by nothing, reported by
+    nothing, and green.
+
+    A merge still runs the gate as one broad job plus two isolated ones, not as the pull
     request's four parts. The `geometry`, `suite` and `sweeps` jobs are pull-request only,
     and the complete integration surface here already contains every step they would have
     run.
+
+    Pairwise disjointness is asserted rather than inferred from the union, for the reason
+    `test_the_pull_request_jobs_partition_the_surface` gives: with more than two jobs the
+    two statements differ, and they differ on a bill paid twice hiding a check nobody
+    runs.
     """
     selections = _workflow_selections(pull_request=False)
 
-    assert set(selections) == {"validate", "exhaustive"}
+    assert set(selections) == {"validate", "exhaustive", "slow-lane"}
     assert selections["exhaustive"] == {"exhaustive exact behavioral tests"}
-    assert not selections["validate"] & selections["exhaustive"]
-    assert selections["validate"] | selections["exhaustive"] == {
-        step.name for step in validate.STEPS
-    }
+    assert selections["slow-lane"] == {"slow behavioral tests"}
+    names = list(selections)
+    for index, job in enumerate(names):
+        for other in names[index + 1 :]:
+            assert not selections[job] & selections[other], f"{job} and {other} overlap"
+    assert set().union(*selections.values()) == {step.name for step in validate.STEPS}
 
 
 def test_the_longest_steps_are_submitted_first() -> None:
