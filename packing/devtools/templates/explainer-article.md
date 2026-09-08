@@ -127,7 +127,9 @@ The proof presented here is of this kind.
   bound this project proved: {{N_STARRED}} of the hundred, this page’s own among them. The full
   results, with every witness and its provenance, are in
   <a href="{{ATLAS_URL}}">the GitHub repository</a>, and the
-  composite is <a href="known-best-1-100.pdf">available as a PDF</a>.</figcaption>
+  composite is <a href="known-best-1-100.pdf">available as a PDF</a>. A poster of all 324 best
+  known packings, through the end of the catalogue’s audited range, is
+  <a href="known-best-1-324.pdf">available as a PDF</a> as well.</figcaption>
 </figure>
 
 For eleven squares, we prove $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
@@ -631,7 +633,7 @@ The one-file checker [`minimal_verify.py`]({{PINNED_VERIFIER_URL}}) verifies the
     first-principles introduction to square packing, bounds, search, and proof
     obligations
   - **[Atlas of packings]({{ATLAS_URL}}):** created as part of this project, a
-    collection of the best known packings for $n=1$ through $100$, with figures,
+    collection of the best known packings for $n=1$ through $324$, with figures,
     geometry records, and provenance
 - **Agentic research framework**
   - **[Workflows]({{WORKFLOWS_URL}})** define entry conditions and expected outputs for

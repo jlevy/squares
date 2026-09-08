@@ -1,0 +1,8 @@
+{
+  "name": "golden basin maps (proved cases, checked against mathematics)",
+  "output": "  7 ladder rungs and 11 stored endpoint rows agree with the proved values, their closed forms and their recorded validity\n  (fast path; `packing-validate --deep` rebuilds and compares the map)",
+  "reason": "",
+  "run_id": "ba937434e1454047a1ff994d02db5e3d",
+  "seconds": 0.39057745799800614,
+  "status": "passed"
+}

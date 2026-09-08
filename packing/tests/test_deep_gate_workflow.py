@@ -125,13 +125,14 @@ def _concurrency_prefix(group: str) -> str:
 def test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers() -> None:
     """The deep gate is the complement of the pull-request surface, not a sample of it.
 
-    This is the property the whole file exists for. A deep gate that covers three of the
-    four deferrals looks identical to one that covers all four -- green -- and the one it
-    does not cover is the one that takes `main` red. So the four names typed into
+    This is the property the whole file exists for. A deep gate that covers all but one
+    of the deferrals looks identical to one that covers every one -- green -- and the one
+    it does not cover is the one that takes `main` red. So the names typed into
     `deep-gate.yml` are resolved through the CLI and compared against every step no pull
-    request runs. A fifth deferral argued into
+    request runs. The next deferral argued into
     `test_the_pull_request_surface_defers_only_what_was_measured` fails here until it is
-    also argued into the deep gate.
+    also argued into the deep gate, which is how the set reached seven on 2026-09-07
+    without anyone maintaining a count.
 
     The two jobs are disjoint for the reason the post-merge jobs are: nothing is paid for
     twice. And the exhaustive tier is alone in its job because of `D-456` -- when it

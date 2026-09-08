@@ -365,34 +365,44 @@ jobs:
     # One of the four parts of the pull-request surface, on its own runner and at the
     # same time as the other three.
     #
-    # Four steps, 313.95s of CI step time between them (run 34010470187), all of one
-    # kind: each re-derives a retained atlas from the hundred-odd witnesses under it and
-    # compares the result byte for byte. They are the class `D-369` measured -- a registry
-    # or generated view going stale is what actually breaks CI here -- so they belong on
-    # every pull request, and `D-455` is what happened the last time work of this kind ran
-    # only after a merge. What they cannot do is share three workers with the quick
-    # behavioural lane: 468.11s of them beside it put five ordinary tests over the lane's
-    # 5s per-test ceiling on contention alone.
+    # Four steps, all of one kind: each re-derives a retained atlas from the witnesses
+    # under it and compares the result byte for byte. They are the class `D-369` measured
+    # -- a registry or generated view going stale is what actually breaks CI here -- so
+    # they belong on every pull request, and `D-455` is what happened the last time work
+    # of this kind ran only after a merge. What they cannot do is share three workers with
+    # the quick behavioural lane: 468.11s of them beside it put five ordinary tests over
+    # the lane's 5s per-test ceiling on contention alone.
+    #
+    # Two of the four names changed on 2026-09-07 and the corpus is why. The known-best
+    # atlas widened from n=1..100 to n=1..324, and at that size the whole rebuild measured
+    # 691.19s and the whole escape screen 766.26s on an idle ten-cpu box at this job's own
+    # shape -- against a 210s ceiling, and, for the screen, within 134s of the gate's own
+    # 900s per-step subprocess timeout on a machine faster than this runner. Both
+    # re-derivations moved to `deep-gate.yml`; what runs here is the record layer of each
+    # plus a fixed recorded sample of the cases, which is `known-best atlas records and
+    # sample` and `translation escape screen records and sample`. The readings and the
+    # argument are in `packing/benchmarks/gate-cost-at-324/`.
     #
     # `--jobs 4` because this job has four units and four cpus, so outer parallelism is
-    # already saturated and the wall is the longest unit's wall. That unit was
-    # `single-square translation escape screen` at 110.66s, against 78.5s if the four
-    # could be divided evenly -- so this job was the floor under the whole pull-request
-    # surface, and the lever on it was that step's own cost rather than another job.
+    # already saturated and the wall is the longest unit's wall. That unit is now
+    # `known-best chunk census` at 90.38s, which `D4` pins at CALIBRATION_CORPUS so it
+    # cannot grow with the corpus; both sampled steps are sized to sit under it, so the
+    # tier's wall is the census's wall and the samples cost the job nothing.
     #
-    # `--inner-jobs 2` is that lever, pulled. `screen_translation_escape` was given a
-    # process pool on 2026-09-06, but the pool sizes itself from `PACK_JOBS`, which
-    # `--inner-jobs` sets, so at 1 the parallelism was dormant and the step ran serially
-    # on every pull request. Best of five rounds on a four-cpu box: 103.94s at one worker,
-    # 52.11s at two, 35.40s at three, 27.50s at four.
+    # `--inner-jobs 2` is the lever inside a step, and three of the four now read it.
+    # `screen_translation_escape` was given a process pool on 2026-09-06 and
+    # `build_known_best_atlas` on 2026-09-07; both size themselves from `PACK_JOBS`, which
+    # `--inner-jobs` sets. The atlas rebuild measured 691.19s serial against 184.34s at
+    # four workers on the same idle box -- 3.75x, over 688.74s of cpu against the 691.19s
+    # the serial run spent, so the pool divided the work rather than adding any.
     #
     # Two rather than four, and the reason is the table in the `validate` job above: four
     # outer slots already fill four cpus, so a step fanning out to four inner workers is
     # the oversubscription that cost `checks` thirty to eighty per cent per step.
     #
-    # The screen reads PACK_JOBS. The census and prospective seed default to serial
-    # unless explicitly passed --jobs; these gate invocations do not pass it. Historical
-    # pool experiments did not isolate their effect on tier wall time (D-472).
+    # The census and prospective seed default to serial unless explicitly passed --jobs;
+    # these gate invocations do not pass it. Historical pool experiments did not isolate
+    # their effect on tier wall time (D-472).
     #
     # Shallow checkout: the step that needs full history is `provenance`, and it is in the
     # `validate` job's part. `needs_engine` is false for all four, so no cargo build here.

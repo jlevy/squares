@@ -1,0 +1,8 @@
+{
+  "name": "control anchors still resolve",
+  "output": "163 negative control anchors each match their file exactly once",
+  "reason": "",
+  "run_id": "c4cec457a4a54015a84b67fda9eec81c",
+  "seconds": 0.1441420420014765,
+  "status": "passed"
+}

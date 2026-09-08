@@ -203,6 +203,26 @@ def test_the_published_document_states_each_figure_once(document: str) -> None:
         assert document.count(f"**Figure {number}.") == 1, number
 
 
+def test_figure_two_counts_stars_in_its_own_composite(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Stars beyond the first hundred must not enter Figure 2's caption."""
+    whole_corpus = {"lower_bound_first_proved_here": 23}
+    record = {
+        "totals": whole_corpus,
+        "composites": [
+            {"stem": render_explainer.POSTER_STEM.name, "totals": whole_corpus},
+            {
+                "stem": render_explainer.COMPOSITE_STEM.name,
+                "totals": {"lower_bound_first_proved_here": 7},
+            },
+        ],
+    }
+    monkeypatch.setattr(render_explainer, "load_figure_record", lambda: record)
+
+    document = " ".join(render(WALKTHROUGH).markdown.split())
+    assert "7 of the hundred" in document
+    assert "23 of the hundred" not in document
+
+
 def test_the_published_document_sets_mathematics_without_typesetting_kerns(
     document: str,
 ) -> None:

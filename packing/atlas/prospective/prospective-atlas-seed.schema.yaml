@@ -1,102 +1,173 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: packing.squares:ProspectiveAtlasSeed/v1
-title: Annotation-free prospective square-packing atlas seed
-type: object
-additionalProperties: false
-required:
-- status
-- generated_by
-- source_map
-- selection
-- excluded
-- retained_sources
-- rendering_policy
-- annotation_policy
-- entries
-properties:
-  status: {const: partial-prospective-corpus-seed-not-hypothesis-evidence}
-  generated_by: {const: python -m devtools.build_prospective_atlas}
-  source_map:
+title: Annotation-free prospective square-packing atlas seed, live or retired
+description: >-
+  Two shapes, one contract. `seed` is the license-safe 101-case seed this collection
+  carried from 2026-08-26; `retired` is the record left in its place on 2026-09-07,
+  when the known-best atlas widened to cover the whole audited range and the seed's
+  witnesses and house renderings were removed. The seed shape is kept because the
+  record of what the collection once asserted is part of the provenance, and a schema
+  that dropped it could no longer read the manifest a reader recovers from history.
+oneOf:
+- $ref: '#/$defs/seed'
+- $ref: '#/$defs/retired'
+$defs:
+  retired:
     type: object
     additionalProperties: false
-    required: [path]
+    required:
+    - status
+    - retired_on
+    - superseded_by
+    - range
+    - reason
+    - retired_seed
+    - generated_by
+    - source_map
+    - annotation_policy
+    - annotation_status
+    - entries
     properties:
-      path: {const: packing/atlas/prospective/source-availability-101-324.json}
-  selection:
-    type: object
-    additionalProperties: false
-    required: [count, exact_generated_grid_cases, unitsquare_rendering_cases]
-    properties:
-      count: {const: 101}
-      exact_generated_grid_cases: {const: 97}
-      unitsquare_rendering_cases: {const: 4}
-  excluded:
-    type: object
-    additionalProperties: false
-    required: [count, source_key, reason]
-    properties:
-      count: {const: 123}
-      source_key: {const: kingbird-current-catalogue}
+      status: {const: retired-2026-09-07}
+      retired_on: {const: '2026-09-07'}
+      superseded_by:
+        type: object
+        additionalProperties: false
+        required: [path]
+        properties:
+          path: {const: atlas/known-best/manifest.json}
+      range:
+        type: object
+        additionalProperties: false
+        required: [first_n, last_n, count]
+        properties:
+          first_n: {const: 101}
+          last_n: {const: 324}
+          count: {const: 224}
       reason: {type: string, minLength: 1}
-  retained_sources:
-    type: array
-    minItems: 4
-    maxItems: 4
-    items:
-      type: object
-      additionalProperties: false
-      required: [n, path, url, retrieved, bytes, creator, license]
-      properties:
-        n: {enum: [103, 105, 110, 131]}
-        path:
-          type: string
-          pattern: '^packing/resources/web/prospective-packings/unitsquare/n[0-9]{3}\.svg$'
-        url: {type: string, format: uri}
-        retrieved: {type: string, format: date}
-        bytes: {type: integer, minimum: 1}
-        creator: {const: UnitSquare Project}
-        license: {const: CC-BY-4.0-in-dataset-page-metadata}
-  rendering_policy: {const: repository deterministic house renderer}
-  annotation_policy: {type: string, minLength: 1}
-  entries:
-    type: array
-    minItems: 101
-    maxItems: 101
-    items:
-      type: object
-      additionalProperties: false
-      required: [n, source, witness, rendering, annotation_status]
-      properties:
-        n: {type: integer, minimum: 101, maximum: 324}
-        annotation_status: {const: prohibited-uncomputed}
-        source:
-          oneOf:
-          - $ref: '#/$defs/grid_source'
-          - $ref: '#/$defs/unitsquare_source'
-        witness:
+      retired_seed:
+        type: object
+        additionalProperties: false
+        required: [witnesses, house_renderings]
+        properties:
+          witnesses: {const: 101}
+          house_renderings: {const: 101}
+      generated_by: {const: python -m devtools.build_prospective_atlas}
+      source_map:
+        type: object
+        additionalProperties: false
+        required: [path]
+        properties:
+          path: {const: packing/atlas/prospective/source-availability-101-324.json}
+      annotation_policy: {type: string, minLength: 1}
+      annotation_status:
+        const: prohibited-uncomputed
+        description: >-
+          Carried onto the retirement record itself, so a reader who finds this file
+          cannot take a retired seed for an annotation source.
+      entries:
+        type: array
+        maxItems: 0
+        description: >-
+          Empty, and required rather than absent: the seed indexes no witness and no
+          rendering now, and a consumer that counts what this collection retains reads
+          the same field it always read and gets zero.
+  seed:
+    type: object
+    additionalProperties: false
+    required:
+    - status
+    - generated_by
+    - source_map
+    - selection
+    - excluded
+    - retained_sources
+    - rendering_policy
+    - annotation_policy
+    - entries
+    properties:
+      status: {const: partial-prospective-corpus-seed-not-hypothesis-evidence}
+      generated_by: {const: python -m devtools.build_prospective_atlas}
+      source_map:
+        type: object
+        additionalProperties: false
+        required: [path]
+        properties:
+          path: {const: packing/atlas/prospective/source-availability-101-324.json}
+      selection:
+        type: object
+        additionalProperties: false
+        required: [count, exact_generated_grid_cases, unitsquare_rendering_cases]
+        properties:
+          count: {const: 101}
+          exact_generated_grid_cases: {const: 97}
+          unitsquare_rendering_cases: {const: 4}
+      excluded:
+        type: object
+        additionalProperties: false
+        required: [count, source_key, reason]
+        properties:
+          count: {const: 123}
+          source_key: {const: kingbird-current-catalogue}
+          reason: {type: string, minLength: 1}
+      retained_sources:
+        type: array
+        minItems: 4
+        maxItems: 4
+        items:
           type: object
           additionalProperties: false
-          required: [id, path, coordinate_provenance, method]
+          required: [n, path, url, retrieved, bytes, creator, license]
           properties:
-            id: {type: string, pattern: '^W-prospective-source-n[0-9]{3}$'}
-            path: {type: string, pattern: '^witnesses/prospective/n-[0-9]{3}\.yaml$'}
-            coordinate_provenance:
-              enum: [numerically-checked, verified]
-              description: >-
-                Mirrors the witness claim field of the same name: how this record's
-                coordinates were established, never the standing of s(n).
-            method: {enum: [numerical-multiprecision, exact-algebraic]}
-            tolerance: {type: string, minLength: 1}
-        rendering:
-          type: object
-          additionalProperties: false
-          required: [path, renderer]
-          properties:
+            n: {enum: [103, 105, 110, 131]}
             path:
               type: string
-              pattern: '^atlas/prospective/rendering/n-[0-9]{3}\.svg$'
-            renderer: {const: sqpack deterministic house renderer}
-$defs:
+              pattern: '^packing/resources/web/prospective-packings/unitsquare/n[0-9]{3}\.svg$'
+            url: {type: string, format: uri}
+            retrieved: {type: string, format: date}
+            bytes: {type: integer, minimum: 1}
+            creator: {const: UnitSquare Project}
+            license: {const: CC-BY-4.0-in-dataset-page-metadata}
+      rendering_policy: {const: repository deterministic house renderer}
+      annotation_policy: {type: string, minLength: 1}
+      entries:
+        type: array
+        minItems: 101
+        maxItems: 101
+        items:
+          type: object
+          additionalProperties: false
+          required: [n, source, witness, rendering, annotation_status]
+          properties:
+            n: {type: integer, minimum: 101, maximum: 324}
+            annotation_status: {const: prohibited-uncomputed}
+            source:
+              oneOf:
+              - $ref: '#/$defs/grid_source'
+              - $ref: '#/$defs/unitsquare_source'
+            witness:
+              type: object
+              additionalProperties: false
+              required: [id, path, coordinate_provenance, method]
+              properties:
+                id: {type: string, pattern: '^W-prospective-source-n[0-9]{3}$'}
+                path: {type: string, pattern: '^witnesses/prospective/n-[0-9]{3}\.yaml$'}
+                coordinate_provenance:
+                  enum: [numerically-checked, verified]
+                  description: >-
+                    Mirrors the witness claim field of the same name: how this record's
+                    coordinates were established, never the standing of s(n).
+                method: {enum: [numerical-multiprecision, exact-algebraic]}
+                tolerance: {type: string, minLength: 1}
+            rendering:
+              type: object
+              additionalProperties: false
+              required: [path, renderer]
+              properties:
+                path:
+                  type: string
+                  pattern: '^atlas/prospective/rendering/n-[0-9]{3}\.svg$'
+                renderer: {const: sqpack deterministic house renderer}
   grid_source:
     type: object
     additionalProperties: false

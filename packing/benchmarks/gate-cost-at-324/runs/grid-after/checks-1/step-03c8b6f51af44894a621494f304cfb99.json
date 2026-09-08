@@ -1,0 +1,8 @@
+{
+  "name": "lint floor (ruff)",
+  "output": "All checks passed!\n1312 files already formatted",
+  "reason": "",
+  "run_id": "81bc483753ec48a2bd65f5a28ae992df",
+  "seconds": 0.13917329200194217,
+  "status": "passed"
+}

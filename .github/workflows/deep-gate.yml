@@ -1,6 +1,6 @@
 name: Deferred checkpoint
 
-# The four steps the pull-request surface defers, run against a pull request *before* it
+# The seven steps the pull-request surface defers, run against a pull request *before* it
 # merges rather than after it. Not on every build, and that is the point: the selection
 # here is 1943.05s in one step.
 #
@@ -91,9 +91,28 @@ concurrency:
 
 jobs:
   deferred-steps:
-    # Three of the four deferrals: `negative controls` (543.67s), `slow behavioral tests`
-    # (890s of a 1,038s suite, in 92 of 2,251 tests) and `n=40 rigidity bracket still
-    # reproduces` (221.36s). The fourth is `exhaustive-tier` below.
+    # Six of the seven deferrals: `negative controls` (543.67s), `slow behavioral tests`
+    # (890s of a 1,038s suite, in 92 of 2,251 tests), `n=40 rigidity bracket still
+    # reproduces` (221.36s), and the three the widened known-best corpus put here on
+    # 2026-09-07 -- `known-best n=1..324 atlas rebuild`, `single-square translation
+    # escape screen` and `exact rational grid replay`. The seventh is `exhaustive-tier`
+    # below.
+    #
+    # The three new ones are here on their own measurements, taken at n=1..324 on an idle
+    # ten-cpu box and retained in `packing/benchmarks/gate-cost-at-324/`: 691.19s for the
+    # rebuild and 766.26s for the screen, against the 210s ceiling on the pull-request
+    # job that used to carry both; and 34.81s for the grid replay, inside a step that was
+    # 133.4s of a `checks` job running 189.09s against a 195s ceiling. None is deferred
+    # without a stand-in -- `known-best atlas records and sample`, `translation escape
+    # screen records and sample` and the sampled replay inside `exact verification` run
+    # on every pull request -- and this selection is the exact complement of those, not a
+    # rerun of them.
+    #
+    # The grid replay costs this job nothing on the clock. It is 34.81s serial beside a
+    # 890s slow lane, and its own pool takes it to 18.79s -- measured here, at this job's
+    # own `--jobs 2 --inner-jobs 2`, replaying all 305 witnesses over 36.65s of cpu. A
+    # step that finishes inside the wall a longer step already sets is free in the sense
+    # that decides where work goes.
     #
     # `--only` rather than a tier flag, and unlike in `packing-validation.yml` that is
     # the correct instrument here. There, `--only` on a pull-request job would have left
@@ -108,15 +127,19 @@ jobs:
     # The names are typed here and cannot drift silently:
     # `test_the_deep_gate_runs_exactly_what_the_pull_request_defers` parses these commands
     # with the CLI's own parser, resolves them through its own selector, and requires the
-    # union to equal the set no pull-request job runs. A fifth deferral added tomorrow
+    # union to equal the set no pull-request job runs. A seventh deferral added tomorrow
     # fails that test until it is added here, which is the property the daily backstop
     # never had.
     #
     # `--jobs 2 --inner-jobs 2`: this job's wall is one step's wall. `slow behavioral
     # tests` runs pytest in a single process -- the xdist lane is the quick one -- so it
-    # is 890s that no amount of outer parallelism shortens, and the other two (543.67s
-    # then 221.36s) finish underneath it on the second slot. A third slot buys nothing
-    # and costs contention, which is `BC-218`'s finding one level down.
+    # is 890s that no amount of outer parallelism shortens, and the rest finish underneath
+    # it on the second slot. `--inner-jobs 2` now also reaches the two steps that arrived
+    # on 2026-09-07: both size their pools from `PACK_JOBS`, and the atlas rebuild is
+    # 348.15s at two workers against 691.19s serial on an idle ten-cpu box, so on this
+    # runner it lands well inside both the slow lane's 890s and the gate's own 900s
+    # per-step timeout. A third slot buys nothing and costs contention, which is
+    # `BC-218`'s finding one level down.
     if: >-
       github.event_name == 'workflow_dispatch'
       || contains(github.event.pull_request.labels.*.name, 'deep-gate')
@@ -161,6 +184,9 @@ jobs:
           --only "negative controls"
           --only "slow behavioral tests"
           --only "n=40 rigidity bracket still reproduces"
+          --only "known-best n=1..324 atlas rebuild"
+          --only "single-square translation escape screen"
+          --only "exact rational grid replay"
           --jobs 2 --inner-jobs 2
 
       - name: Preserve validation timings and partial logs

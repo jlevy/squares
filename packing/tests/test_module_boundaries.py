@@ -720,6 +720,10 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         # because the build is already paid, and is what lets those four read the file.
         "test_known_best_atlas.py": {
             "test_known_best_composite_contains_every_case_and_square",  # 27.3s
+            # The whole-corpus witness load behind the atlas coverage test: 7.11s of call
+            # locally at n = 1..324, and its parent read 18.00s on the hosted runner (run
+            # 34139067270) before the surface copy was cut to the atlas sample's stride.
+            "test_every_known_best_witness_agrees_with_its_manifest_entry",
         },
         # 2s of call time across 1, and it is the boundary case the band exists for.
         # 2.22s locally, 6.43s on CI -- slower cores and two lanes beside it -- so it sat
@@ -803,14 +807,11 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_promote_system_degree.py": {
             "test_promote_system_degree",  # 14.6s
         },
-        # 98s of call time across 2. The first of these is also the pin
-        # `test_seed_cross_fields_...` stands on -- it asserts the retained manifest
-        # equals the built one -- which is what lets that test read the file rather than
-        # trigger this build.
-        "test_prospective_atlas_seed.py": {
-            "test_seed_replays_every_safe_source_and_excludes_kingbird",  # 92.5s
-            "test_seed_witnesses_and_house_renderings_match_the_manifest",  # 5.7s
-        },
+        # `test_prospective_atlas_seed.py` was here for 98s across two tests, both of
+        # which rebuilt the 101-case seed. The seed was retired on 2026-09-07 and its
+        # file now checks a retirement record against the schema and the tree: 0.07s for
+        # nine tests, nothing to defer, and the marker left with the build it was paying
+        # for.
         # 7s of call time across 1.
         "test_render_colors.py": {
             "test_right_angles_and_diagonals_are_pinned_across_the_atlas",  # 6.5s

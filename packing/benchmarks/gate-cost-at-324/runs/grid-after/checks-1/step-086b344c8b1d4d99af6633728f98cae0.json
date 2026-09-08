@@ -1,0 +1,8 @@
+{
+  "name": "campaign record",
+  "output": "OK 1 series, 18 reports, 97 hypotheses, 76 rounds, 91 agent sessions, 28 agendas, 2 logbook entries\n  time-based refusals: 2 judged, 0 uncheckable (HEAD committed 2026-09-07T07:31:24-07:00)\n  201 declared packing-CLI invocations parse against their own CLIs",
+  "reason": "",
+  "run_id": "81bc483753ec48a2bd65f5a28ae992df",
+  "seconds": 1.0554318750000675,
+  "status": "passed"
+}
