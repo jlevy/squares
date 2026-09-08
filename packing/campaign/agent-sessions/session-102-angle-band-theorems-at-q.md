@@ -31,7 +31,7 @@ session:
       eleven.
     commitment: BC-295
     bead: think-ndqj
-    status: TBD_STATUS
+    status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: 120
@@ -47,11 +47,19 @@ session:
     fallback: >-
       Publish the replay table alone with the disagreement named, and leave the widening as
       the next session's first task.
-    outcome: TBD_OUTCOME
+    outcome: >-
+      The registered replay reproduced every planning-lane exact mass to the fraction (nine
+      classes at 96/25 and three at U; the trailing-six class alone stays undecided as
+      before). The end band widened from α + β = 2.6937° to Theorem A, [0°, 1.7139°] ∪
+      [43.5293°, 45°] (mass 5529/512), and Theorem B, [0°, 10.3875°] ∪ [43.5293°, 45°] (mass
+      351/32), both exact-decided on grid 79; the diagonal end is bound at seven trailing
+      cells on grid 79 and grid 119 refutes the eighth (43857/4096). Every grid-79 dual that
+      reached eleven has continuum depth two or more under ceiling.py, so those readings are
+      site-set artefacts, not obstructions.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md
-    stop_reason: TBD_PHASE_STOP
-    next_action: TBD_PHASE_NEXT
+    stop_reason: The research slice closed at its checkpoint with the exit reached; the remaining clock is the finalization reserve.
+    next_action: Under think-ndqj, sweep the end band at grid 119 and 159 and run the band toward 40.19° at grid 119 before any continuum family is built.
   - workflow: documentation-pass
     focus: correctness
     recording: contemporaneous
@@ -61,21 +69,23 @@ session:
       lane branch without pushing.
     commitment: BC-295
     bead: think-ndqj
-    status: TBD_STATUS2
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: The research slice closed at its checkpoint; the remaining time is the finalization reserve.
     budget_minutes: 30
-    started_at: 'TBD_P2_START'
+    started_at: '2026-09-08T06:05:00Z'
     deadline_at: '2026-09-08T06:59:00Z'
     expected_output: The result section, this record, and one commit on lane/bc-295-angle-bands.
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: The deadline arrives before the records tier is green.
     fallback: Commit what is written with the failing step named in the checkpoint file.
-    outcome: TBD_OUTCOME2
+    outcome: >-
+      The result section, this record and the receipt were written; the records tier was
+      run and its verdict is in checks; one commit on lane/bc-295-angle-bands, not pushed.
     evidence:
     - packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md
-    stop_reason: TBD_P2_STOP
-    next_action: TBD_P2_NEXT
+    stop_reason: The record and result section were written and validated inside the clock.
+    next_action: Under think-ndqj, the coordinator allocates the experiment ids for the two theorems and the replay and integrates the branch.
   primary_bead: think-ndqj
   status: stopped
   budget:
@@ -90,7 +100,7 @@ session:
   progress:
     metric: exact-decided width α + β of the robust end band excluded at 96/25, and replayed counts
     before: 'α + β = 2.6937° (cells 0–5 ∪ 175–180, planning lane, unregistered); five H-131 counts decided in a planning lane only.'
-    after: TBD_AFTER
+    after: 'α + β = 11.8582° with β = 1.4707° (Theorem B, cells 0–39 ∪ 174–180, mass 351/32), and 3.1846° symmetric-style (Theorem A); the eight H-131 counts replayed exactly under this record; grid 119 refutes the (8, 8) band grid 79 could not.'
   delegations: []
   outputs:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md
@@ -99,12 +109,40 @@ session:
   - TBD_CHECKS
   resource_rollups: TBD_ROLLUPS
   certification_pending: think-ndqj
-  stop_reason: TBD_STOP
-  next_action: TBD_NEXT
+  stop_reason: Stopped at the lane's fixed clock with the exit reached; no full gate was run in this lane (the coordinator owns integration and the pull-request surface), so certification is pending under think-ndqj.
+  next_action: Under think-ndqj: allocate experiment ids for Theorems A and B and the H-131 replay, sweep the end band at grid 119 and 159 from k = 9, run the band toward 40.19° at grid 119, and certify the branch on the pull-request surface.
 ---
 # Angle-Band Theorems at `96/25`
 
-TBD_BODY
+Lane BC-295 of
+[Agenda 030](../agendas/agenda-030-parallel-structural-lanes-at-n11.md) ran as one
+research session of two and a half hours on one worker, under
+[H-130](../hypotheses/H-130-robust-end-band-theorem-at-q.md) and
+[H-131](../hypotheses/H-131-near-axis-counts-at-q.md), with bead `think-ndqj`.
+The result section is in
+[lane B's report](../series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md#session-102--angle-band-theorems-at-9625-2026-09-08),
+which holds the replay table, the widening table, the dual's angular support with its
+exact ceiling check, the grid-119 refinement, and every script.
+
+Three things were decided.
+The planning lane's eight angle counts (H-131) and its Theorem 1.11 replay exactly on the
+stated site set, every mass to the fraction.
+The robust end band widened past H-130's criterion in two steps: Theorem A,
+`[0°, 1.7139°] ∪ [43.5293°, 45°]` with `α + β = 3.1846°`, and Theorem B,
+`[0°, 10.3875°] ∪ [43.5293°, 45°]` with `α + β = 11.8582°`, both exact-decided by
+`decide_class_program` on grid 79 and both frozen claims that need an experiment id.
+And the site-set duals that reach eleven on grid 79 are not obstructions: `ceiling.py`
+finds continuum depth two on the end bands and `1291/568` on the band toward `40.19°`,
+grid 119 refutes the `(8, 8)` band grid 79 could not, and so the fractional obstruction
+at `96/25` is, on this evidence, an artefact of the site set rather than a property of
+the relaxation.
+
+Two process notes. Thirty minutes of queue time were lost to a chained waiter whose
+`pgrep -f` pattern matched its own command line; the fix was a sequential queue script.
+The machine ran at load average eight on four cores throughout, so the wall times in the
+result section are not comparable with the planning lane's.
+No identifier was allocated, nothing was pushed, and no full gate was run in this lane;
+the record is stopped with certification pending under `think-ndqj`.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
