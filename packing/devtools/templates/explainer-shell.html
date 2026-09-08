@@ -503,15 +503,16 @@ body {
   display: flex;
   justify-content: center;
   padding: 0.6rem;
+  position: relative;
 }
 /* A canvas is 40% of a phone's viewport height and there are three of them, so what
    it does with a touch decides whether the page can be read on a phone at all. The
    blanket `touch-action: none` here took every gesture: a 250px upward swipe starting
    on a canvas scrolled the page 0px, against 338px for the same swipe two centimetres
    to the left, leaving 26px of gutter either side as the only way past three dead
-   zones. Only two of the three canvases drag at all -- `prove` and `shrink` capture
-   the pointer -- and neither needs the vertical axis, so `pan-y` gives the page its
-   scroll back and keeps the drag. The atom field, which only taps, restricts nothing. */
+   zones. Keep vertical scrolling on the canvases; only the small native rotation
+   handles capture a two-axis touch gesture. The atom field, which only taps,
+   restricts nothing. */
 .stage canvas {
   display: block;
   height: auto;
@@ -560,6 +561,31 @@ body {
   color: var(--kpress-doc-text);
   font-size: var(--kpress-font-size-large);
 }
+/* Figure 5 needs room for a mass fraction and three separate direction values.
+   Keep its controls below the drawing even on a wide screen. */
+.prover .split { display: block; }
+.prover .stage canvas { max-width: 36rem; }
+.prover .panel {
+  border-inline-start: 0;
+  border-block-start: 1px solid var(--kpress-doc-border);
+  text-align: left;
+}
+.prover .readout, .prover .ctl { text-align: center; }
+.prover .mass-row { justify-content: center; align-items: center; gap: 0.6rem 1rem; }
+.cert-page .prover .mass-val { font-size: var(--kpress-font-size-large); min-height: 0; }
+.prover .mass-val .katex { white-space: nowrap; }
+.prover .ctl { align-items: center; gap: 0.8rem; }
+.prover input[type="range"] { max-width: 34rem; }
+.prover .direction-values { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.8rem 1.6rem; }
+.prover :is(.math-item, .mass-dec) { display: inline-block; white-space: nowrap; }
+.prover .btns { justify-content: center; }
+.prover .shading-toggle { display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; }
+.prover .shading-toggle input { accent-color: var(--kpress-doc-accent); }
+.prover .legend { flex-direction: row; flex-wrap: wrap; gap: 0.5rem 1.4rem; }
+.prover .control-status { border-inline-start: 2px solid var(--kpress-doc-accent); padding-inline-start: 0.8rem; }
+.prover .fig-choose { flex-direction: column; gap: 0.5rem; }
+.prover .fig-choose > .screen-only { display: block; }
+.prover [hidden] { display: none; }
 .verdict {
   border-radius: var(--kpress-radius-sm);
   display: inline-block;
@@ -598,12 +624,43 @@ body {
   font-size: var(--kpress-font-size-tiny);
   padding: 0.3rem 0.55rem;
 }
-.cert-page button:hover { background: var(--kpress-doc-surface-hover); }
+/* The theme's dark surface-hover is mostly muted text, which washes out a
+   button's pale label. Tint the document ground instead. */
+.cert-page button:hover { background: color-mix(in srgb, var(--kpress-doc-text) 10%, var(--kpress-doc-bg)); }
 .cert-page button[aria-pressed="true"] {
   background: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
   border-color: var(--kpress-doc-accent);
   color: var(--kpress-doc-accent);
 }
+/* A visible native target works before hover and keeps touch rotation local.
+   Its position follows the canvas, while its hit area stays finger-sized. */
+.cert-page figure .rotation-handle {
+  align-items: center;
+  background: var(--kpress-doc-bg);
+  border: 2px solid var(--cert-probe);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--kpress-doc-bg);
+  box-sizing: border-box;
+  color: var(--cert-probe);
+  cursor: grab;
+  display: flex;
+  font-size: 25px;
+  height: 44px;
+  justify-content: center;
+  line-height: 1;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0;
+  position: absolute;
+  touch-action: none;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  width: 44px;
+}
+.cert-page .rotation-handle:hover { background: color-mix(in srgb, var(--cert-probe) 12%, var(--kpress-doc-bg)); }
+.cert-page .rotation-handle:focus-visible { outline: 2px solid var(--kpress-doc-accent); outline-offset: 3px; }
+.cert-page .rotation-handle[data-dragging] { cursor: grabbing; }
+.cert-page .rotation-handle[hidden] { display: none; }
 .hint {
   color: var(--kpress-doc-muted);
   font-size: var(--kpress-font-size-tiny);
@@ -617,7 +674,7 @@ body {
   font-size: var(--kpress-font-size-tiny);
   gap: 0.3rem;
 }
-.legend span { align-items: center; display: flex; gap: 0.5rem; }
+.legend > span { align-items: center; display: flex; gap: 0.5rem; }
 .legend i { display: block; flex: none; height: 0.7rem; width: 0.9rem; }
 
 .kv {
@@ -688,11 +745,13 @@ body {
   /* Nothing on paper can be dragged, hovered or chosen. The buttons kpress
      already hides; these are the rest of the apparatus, including the empty
      rule the chooser would otherwise leave under every figure. */
-  .panel, .fig-choose, .cert-page input[type="range"], .screen-only { display: none; }
+  .panel, .fig-choose, .cert-page input[type="range"], .screen-only,
+  .cert-page figure .rotation-handle { display: none; }
 
   /* Stack the printable figure body and cap canvases so their captions fit. */
   .split { display: block; }
   .stage canvas { max-height: 3.2in; width: auto; max-width: 100%; margin-inline: auto; }
+  .trump a { width: min(100%, 3in); }
   .cert-page figure img { max-height: 6.5in; width: auto; max-width: 100%; }
 
   /* The hundred-packing atlas gets a page of its own. With 0.75in vertical
@@ -1009,20 +1068,25 @@ function resort() {
   sorted = ATOMS.map(a => [cs * a[0] + sn * a[1], -sn * a[0] + cs * a[1], a[2]])
                 .sort((p, q) => p[0] - q[0]);
 }
-function setDir(k) { curK = k; onNet = true; [cs, sn] = rot(netT(k)); angle = Math.atan2(sn, cs); resort(); }
+function setDir(k) { heat = null; curK = k; onNet = true; [cs, sn] = rot(netT(k)); angle = Math.atan2(sn, cs); resort(); }
 function setAngle(a) {
   const TAU = 2 * Math.PI;
+  heat = null;
   angle = ((a % TAU) + TAU) % TAU; onNet = false; cs = Math.cos(angle); sn = Math.sin(angle); resort();
 }
 function lowerBound(u) { let lo = 0, hi = sorted.length;
   while (lo < hi) { const m = (lo + hi) >> 1; if (sorted[m][0] < u) lo = m + 1; else hi = m; } return lo; }
 
+/* Counting and highlighting use identical edge comparisons. Floating-point
+   subtraction can disagree with an equivalent absolute-difference test. */
+function covered(u, v, cu, cv) {
+  return u >= cu - HALF && u <= cu + HALF && v >= cv - HALF && v <= cv + HALF;
+}
 function massAt(x, y) {
   const u = cs * x + sn * y, v = -sn * x + cs * y;
   let i = lowerBound(u - HALF), tot = 0;
   for (; i < sorted.length && sorted[i][0] <= u + HALF; i++) {
-    const dv = sorted[i][1] - v;
-    if (dv >= -HALF && dv <= HALF) tot += sorted[i][2];
+    if (covered(sorted[i][0], sorted[i][1], u, v)) tot += sorted[i][2];
   }
   return tot;
 }
@@ -1030,7 +1094,73 @@ function inset() { return B * (Math.abs(cs) + Math.abs(sn)) / 2; }
 function admissible(x, y) { const h = inset();
   return x >= h - 1e-12 && x <= L - h + 1e-12 && y >= h - 1e-12 && y <= L - h + 1e-12; }
 
-/* ---------- Figure 3: the atoms ---------- */
+/* The canvas keeps pan-y. A native overlay owns rotation, touch capture and
+   keyboard input, and supplies the same endpoint the canvas uses for its stem. */
+function rotationHandle(canvas, { id, label, point, angleAt, getAngle, rotate, finish, redraw }) {
+  const stage = canvas.parentElement, button = document.createElement('button');
+  button.type = 'button'; button.id = id; button.className = 'rotation-handle';
+  button.setAttribute('aria-label', label);
+  button.setAttribute('aria-keyshortcuts', 'ArrowLeft ArrowRight ArrowUp ArrowDown');
+  button.title = 'Drag to rotate. Tap or press Enter for 5°. Arrow keys adjust by 1°; Shift by 10°.';
+  button.innerHTML = '<span aria-hidden="true">↺</span>';
+  stage.append(button);
+
+  function update() {
+    const box = canvas.getBoundingClientRect(), frame = stage.getBoundingClientRect();
+    const [x, y] = point();
+    button.hidden = !box.width || !box.height;
+    if (button.hidden) return [x, y];
+    /* A square may be moved to the container edge. Keep the whole target in
+       view, and return its clamped position so the connector still meets it. */
+    const px = Math.max(22, Math.min(box.width - 22, x * box.width / canvas.width));
+    const py = Math.max(22, Math.min(box.height - 22, y * box.height / canvas.height));
+    button.style.left = `${box.left - frame.left + px}px`;
+    button.style.top = `${box.top - frame.top + py}px`;
+    return [px * canvas.width / box.width, py * canvas.height / box.height];
+  }
+
+  let pointer = null, startX = 0, startY = 0, offset = 0, dragged = false, suppressClick = false;
+  button.addEventListener('pointerdown', e => {
+    if (pointer !== null || !e.isPrimary || e.button !== 0) return;
+    pointer = e.pointerId; startX = e.clientX; startY = e.clientY;
+    /* Grabbing the edge of the enlarged or clamped target must not jump the
+       square to the pointer's initial angle. */
+    offset = getAngle() - angleAt(e); dragged = false; suppressClick = false;
+    button.dataset.dragging = ''; button.setPointerCapture(pointer);
+  });
+  button.addEventListener('pointermove', e => {
+    if (e.pointerId !== pointer) return;
+    if (!dragged && Math.hypot(e.clientX - startX, e.clientY - startY) < 3) return;
+    dragged = true; suppressClick = true; rotate(angleAt(e) + offset);
+  });
+  function end(e) {
+    if (e.pointerId !== pointer) return;
+    pointer = null; delete button.dataset.dragging;
+    if (button.hasPointerCapture(e.pointerId)) button.releasePointerCapture(e.pointerId);
+    if (dragged && finish) finish();
+    if (e.type === 'pointercancel') suppressClick = false;
+  }
+  button.addEventListener('pointerup', end);
+  button.addEventListener('pointercancel', end);
+  button.addEventListener('lostpointercapture', end);
+  button.addEventListener('click', e => {
+    if (suppressClick && e.detail > 0) { suppressClick = false; return; }
+    rotate(getAngle() + 5 * Math.PI / 180);
+    if (finish) finish();
+  });
+  button.addEventListener('keydown', e => {
+    const direction = { ArrowRight: 1, ArrowUp: 1, ArrowLeft: -1, ArrowDown: -1 }[e.key];
+    if (!direction) return;
+    e.preventDefault();
+    rotate(getAngle() + direction * (e.shiftKey ? 10 : 1) * Math.PI / 180);
+    if (finish) finish();
+  });
+  const observer = new ResizeObserver(redraw);
+  observer.observe(canvas); observer.observe(stage);
+  return { update };
+}
+
+/* ---------- Figure 4: the atoms ---------- */
 const fc = document.getElementById('field-{{SLUG}}'), fg = fc.getContext('2d');
 const FS = fc.width, FM = FS * 0.055, FPX = FS - 2 * FM, FSC = FPX / L;
 const MAXW = Math.max(...ATOMS.map(a => a[2]));
@@ -1102,14 +1232,14 @@ fc.addEventListener('pointerleave', e => {
   setText(fieldTip, ATOM_PROMPT);
 });
 
-/* ---------- Figure 4 ---------- */
+/* ---------- Figure 5: covered mass ---------- */
 const pv = document.getElementById('prove-{{SLUG}}'), pg = pv.getContext('2d');
 const PS = pv.width, PM = PS * 0.06, PPX = PS - 2 * PM, PSC = PPX / L;
 const RES = 230, TIGHT = {{TIGHT_JS}};
-let probe = [{{WITNESS_X_JS}}, {{WITNESS_Y_JS}}], curK = 0, showHeat = true, heat = null;
+let probe = [L * 0.22, L * 0.64], curK = Math.round(STEPS / 3), showHeat = true, heat = null;
 /* Handle geometry in container units, so it scales with the drawing. */
-const HGAP = 0.3, HR = 0.075;
-let mode = 'none', handleShown = false, handleHot = false;
+const HGAP = 0.3;
+let mode = 'none';
 
 function buildHeat() {
   const img = pg.createImageData(RES, RES), d = img.data;
@@ -1155,7 +1285,7 @@ function drawProver() {
   const pu = cs * probe[0] + sn * probe[1], pvv = -sn * probe[0] + cs * probe[1];
   for (const [x, y, w] of ATOMS) {
     const u = cs * x + sn * y, v = -sn * x + cs * y;
-    const hit = Math.abs(u - pu) <= HALF && Math.abs(v - pvv) <= HALF;
+    const hit = covered(u, v, pu, pvv);
     pg.fillStyle = hit ? css('--cert-probe') : css('--kpress-doc-accent');
     pg.globalAlpha = hit ? 1 : 0.42;
     const r = Math.sqrt(w / maxw) * PSC * 0.1 + PSC * 0.007;
@@ -1170,13 +1300,11 @@ function drawProver() {
   pg.strokeRect(-HALF * PSC, -HALF * PSC, B * PSC, B * PSC);
   pg.restore();
 
-  if (handleShown) {
-    const [hx, hy] = handlePoint();
+  const [hx, hy] = proverHandle.update();
+  if (!window.matchMedia('print').matches) {
     const ex = probe[0] - sn * HALF, ey = probe[1] + cs * HALF;
     pg.strokeStyle = css('--cert-probe'); pg.lineWidth = 2.5;
-    pg.beginPath(); pg.moveTo(X(ex), Y(ey)); pg.lineTo(X(hx), Y(hy)); pg.stroke();
-    pg.fillStyle = css('--kpress-doc-bg'); pg.lineWidth = handleHot || mode === 'rotate' ? 4.5 : 2.5;
-    pg.beginPath(); pg.arc(X(hx), Y(hy), HR * PSC, 0, 6.2832); pg.fill(); pg.stroke();
+    pg.beginPath(); pg.moveTo(X(ex), Y(ey)); pg.lineTo(hx, hy); pg.stroke();
   }
 }
 
@@ -1207,7 +1335,7 @@ function updateReadout() {
      as they drag, which is the opposite of what the readout is for. The six
      places are exact rather than rounded, because SCALE divides a million; the
      renderer refuses a certificate for which it does not. */
-  tex(document.getElementById('mv-{{SLUG}}'), `\\frac{${m}}{${SCALE}}`);
+  tex(document.getElementById('mv-{{SLUG}}'), `\\dfrac{${m}}{${SCALE}}`);
   /* The comparison sits on the equality line; the pill speaks only when there
      is more to say than the comparison. */
   const covers = m >= SCALE, md = document.getElementById('md-{{SLUG}}');
@@ -1218,7 +1346,7 @@ function updateReadout() {
   if (!admissible(probe[0], probe[1])) text = 'Outside the domain';
   else if (covers && onNet) text = '';
   else if (covers) text = 'Off the net';
-  else if (onNet) { cls = 'verdict no'; text = 'Breaks Condition 5'; }
+  else if (onNet) { cls = 'verdict no'; text = 'Below 1 in this preview'; }
   else text = 'Off the net: no condition tested';
   const shown = vd.hidden ? '' : vd.textContent;
   vd.hidden = !text;
@@ -1228,21 +1356,22 @@ function updateK() {
   const el = document.getElementById('kval-{{SLUG}}');
   /* The half-tangent t is the exact rational the net is built from; the degree
      measure beside it is not, so only the second one carries a mark. */
-  if (onNet) {
-    tex(el, `k = ${curK}, \\quad t = ${curK === 0 ? '0' : fracTex(...reduce(LIMIT_N * curK, LIMIT_D * STEPS))},` +
-            `\\quad \\theta ${degRel(2 * Math.atan(netT(curK)), 4)}^{\\circ}`);
-  } else {
-    /* The square at theta is the square at theta mod 90 degrees; past 45 the
-       diagonal reflection carries it to one below 45 at the mirrored center.
-       The congruence is exact between the rounded degrees printed, since they
-       differ by a whole number of right angles; what is approximate is each
-       of them separately, and each says so. */
-    const psi = angle % (Math.PI / 2), mirrored = psi > Math.PI / 4;
-    const k = nearestNet(angle);
-    tex(el, `\\theta ${degRel(angle, 4)}^{\\circ} \\equiv ${degTex(psi, 4)}^{\\circ} \\pmod{90^{\\circ}}` +
-            (mirrored ? `, \\text{ diagonal image } ${degTex(Math.PI / 2 - psi, 4)}^{\\circ}` : '') +
-            `; \\text{ nearest net } k = ${k} \\text{ at } ${degTex(2 * Math.atan(netT(k)), 4)}^{\\circ}`);
-  }
+  const [n, d] = reduce(LIMIT_N * curK, LIMIT_D * STEPS);
+  const parts = onNet
+    ? [`k = ${curK}`, `t = ${curK === 0 ? '0' : `\\dfrac{${n}}{${d}}`}`,
+       `\\theta ${degRel(angle, 4)}^{\\circ}`]
+    : [`\\theta ${degRel(angle, 4)}^{\\circ}`, `\\text{nearest net } k = ${curK}`,
+       `\\theta_k ${degRel(2 * Math.atan(netT(curK)), 4)}^{\\circ}`];
+  el.replaceChildren(...parts.map(part => {
+    const span = document.createElement('span'); span.className = 'math-item'; tex(span, part); return span;
+  }));
+  document.getElementById('kslider-{{SLUG}}').setAttribute('aria-valuetext', onNet
+    ? `Direction ${curK} of ${STEPS}; angle ${deg(angle, 4)} degrees`
+    : `Nearest net direction ${curK}; square is off the net at ${deg(angle, 4)} degrees`);
+}
+function setProverStatus(text = '') {
+  const el = document.getElementById('status-{{SLUG}}');
+  el.hidden = !text; setText(el, text);
 }
 function refresh(rebuild) {
   if (onNet) setDir(curK); else setAngle(angle);
@@ -1259,18 +1388,16 @@ function toWorld(e) {
           L - ((e.clientY - box.top) / box.height * PS - PM) / PSC];
 }
 function place(x, y) {
+  setProverStatus();
   probe = [Math.min(L, Math.max(0, x)), Math.min(L, Math.max(0, y))];
   drawProver(); updateReadout();
 }
-function rotateTo(x, y) {
-  setAngle(Math.atan2(-(x - probe[0]), y - probe[1]));
+function rotateProbe(a) {
+  setProverStatus();
+  setAngle(a);
   curK = nearestNet(angle);
   document.getElementById('kslider-{{SLUG}}').value = String(curK);
   drawProver(); updateReadout(); updateK();
-}
-function overHandle(x, y) {
-  const [hx, hy] = handlePoint();
-  return Math.hypot(x - hx, y - hy) <= HR * 1.9;
 }
 
 /* Inside the square a drag holds it where it was grabbed; elsewhere a press
@@ -1282,40 +1409,36 @@ function insideProbe(x, y) {
   return Math.abs(u - pu) <= HALF && Math.abs(v - pvv) <= HALF;
 }
 pv.addEventListener('pointerdown', e => {
+  if (!e.isPrimary || e.button !== 0) return;
   const [x, y] = toWorld(e);
-  mode = overHandle(x, y) ? 'rotate' : 'move';
-  grabOffset = mode === 'move' && insideProbe(x, y) ? [probe[0] - x, probe[1] - y] : [0, 0];
+  mode = 'move';
+  grabOffset = insideProbe(x, y) ? [probe[0] - x, probe[1] - y] : [0, 0];
   pv.setPointerCapture(e.pointerId);
-  if (mode === 'move') place(x + grabOffset[0], y + grabOffset[1]); else drawProver();
+  place(x + grabOffset[0], y + grabOffset[1]);
 });
 pv.addEventListener('pointermove', e => {
   const [x, y] = toWorld(e);
   if (mode === 'move') { place(x + grabOffset[0], y + grabOffset[1]); return; }
-  if (mode === 'rotate') { rotateTo(x, y); return; }
-  const hot = overHandle(x, y);
-  if (hot !== handleHot || !handleShown) { handleHot = hot; handleShown = true; drawProver(); }
-  pv.style.cursor = hot || insideProbe(x, y) ? 'grab' : 'crosshair';
+  pv.style.cursor = insideProbe(x, y) ? 'grab' : 'crosshair';
 });
-function endDrag() {
-  /* The field is a function of the direction, so a rotation invalidates it. It
-     is rebuilt on release rather than per frame: the rebuild is 53,000 cells. */
-  const wasRotating = mode === 'rotate';
-  mode = 'none';
-  if (wasRotating && showHeat) { buildHeat(); drawProver(); }
-}
-pv.addEventListener('pointerup', endDrag);
-pv.addEventListener('pointercancel', endDrag);
-pv.addEventListener('pointerleave', () => {
-  if (mode !== 'none') return;
-  if (handleShown) { handleShown = false; handleHot = false; drawProver(); }
+pv.addEventListener('pointerup', () => { mode = 'none'; });
+pv.addEventListener('pointercancel', () => { mode = 'none'; });
+const proverHandle = rotationHandle(pv, {
+  id: 'prove-rotate-{{SLUG}}', label: 'Rotate the covered square',
+  point: () => { const [x, y] = handlePoint(); return [PM + x * PSC, PM + (L - y) * PSC]; },
+  angleAt: e => { const [x, y] = toWorld(e); return Math.atan2(-(x - probe[0]), y - probe[1]); },
+  getAngle: () => angle, rotate: rotateProbe, redraw: drawProver,
+  /* The 53,000-cell field is rebuilt on release, after a tap or a key step. */
+  finish: () => { if (showHeat) buildHeat(); drawProver(); },
 });
 
-document.getElementById('kslider-{{SLUG}}').addEventListener('input', e => { setDir(+e.target.value); refresh(true); });
+document.getElementById('kslider-{{SLUG}}').addEventListener('input', e => {
+  setProverStatus(); setDir(+e.target.value); refresh(true);
+});
 document.getElementById('btn-tight-{{SLUG}}').addEventListener('click', () => {
   setDir(0); document.getElementById('kslider-{{SLUG}}').value = 0;
   probe = [{{WITNESS_X_JS}}, {{WITNESS_Y_JS}}]; refresh(true);
-  setText(document.getElementById('hint-{{SLUG}}'),
-    'The tightest placement in the whole certificate: direction k = 0, covering {{LEAST_TEX_PLAIN}}.');
+  setProverStatus('Showing the minimum over all {{N_DIRECTIONS}} net directions: k = 0, covered mass {{LEAST_DEC}}.');
 });
 document.getElementById('btn-scan-{{SLUG}}').addEventListener('click', () => {
   const h = inset(); let best = Infinity, bx = 0, by = 0, N = 300;
@@ -1325,24 +1448,22 @@ document.getElementById('btn-scan-{{SLUG}}').addEventListener('click', () => {
   probe = [bx, by]; drawProver(); updateReadout();
   /* Exact, like the readout above it: an integer count of 1/SCALE units. */
   const lowest = (best / SCALE).toFixed(6);
-  setText(document.getElementById('hint-{{SLUG}}'), onNet
-    ? 'Raster scan of direction k = ' + curK + ': lowest sampled mass ' + lowest +
-      '. A raster only samples; the exact sweep decides every cell of the arrangement.'
-    : 'Raster scan at ' + (angle === 0 ? '' : '≈') + deg(angle, 4) + '°, off the net: lowest sampled mass ' + lowest +
-      '. The certificate sweeps no angle off the net; Condition 5 is decided at the {{N_DIRECTIONS}} net directions only.');
+  setProverStatus('Sampled ' + ((N + 1) ** 2).toLocaleString('en-US') + ' allowed centers ' + (onNet
+    ? 'at direction k = ' + curK
+    : 'at ≈' + deg(angle, 4) + '°, off the net') + ': lowest sampled mass ' + lowest +
+    '. The square now marks one of those sampled minima.');
 });
-document.getElementById('btn-heat-{{SLUG}}').addEventListener('click', e => {
-  showHeat = !showHeat; e.currentTarget.setAttribute('aria-pressed', String(showHeat));
+document.getElementById('btn-heat-{{SLUG}}').addEventListener('change', e => {
+  showHeat = e.currentTarget.checked;
   if (showHeat && !heat) buildHeat();
   drawProver();
 });
 
-/* ---------- Figure 5 ---------- */
+/* ---------- Figure 6: the shrink ---------- */
 let KNET = 3;
 const sk = document.getElementById('shrink-{{SLUG}}'), skg = sk.getContext('2d');
 const SKS = sk.width, SKC = SKS / 2, SKSIDE = SKS * 0.62, SKGAP = SKS * 0.055;
-const SKHR = SKS * 0.028;
-let phiMode = 'none', phiShown = false, phiHot = false;
+sk.style.cursor = 'default';
 
 const phiInput = () => document.getElementById('phi-{{SLUG}}');
 /* The unit square's angle. The slider covers the net's arc; the handle turns
@@ -1364,34 +1485,18 @@ function skToCanvas(e) {
   const box = sk.getBoundingClientRect();
   return [(e.clientX - box.left) / box.width * SKS, (e.clientY - box.top) / box.height * SKS];
 }
-function overPhiHandle(cx, cy) {
-  const [hx, hy] = phiHandlePoint(phiNow());
-  return Math.hypot(cx - hx, cy - hy) <= SKHR * 2;
-}
-function setPhi(cx, cy) {
+function setPhiAngle(a) {
   const TAU = 2 * Math.PI;
-  phiVal = ((Math.atan2(SKC - cx, SKC - cy) % TAU) + TAU) % TAU;
+  phiVal = ((a % TAU) + TAU) % TAU;
   phiExact = false;
   phiInput().value = String(Math.round(arcOf(phiVal) * 180 / Math.PI * 10));
   shrinkDraw();
 }
-sk.addEventListener('pointerdown', e => {
-  const [cx, cy] = skToCanvas(e);
-  if (!overPhiHandle(cx, cy)) return;
-  phiMode = 'rotate'; sk.setPointerCapture(e.pointerId); setPhi(cx, cy);
-});
-sk.addEventListener('pointermove', e => {
-  const [cx, cy] = skToCanvas(e);
-  if (phiMode === 'rotate') { setPhi(cx, cy); return; }
-  const hot = overPhiHandle(cx, cy);
-  if (hot !== phiHot || !phiShown) { phiHot = hot; phiShown = true; shrinkDraw(); }
-  sk.style.cursor = hot ? 'grab' : 'default';
-});
-sk.addEventListener('pointerup', () => { phiMode = 'none'; });
-sk.addEventListener('pointercancel', () => { phiMode = 'none'; });
-sk.addEventListener('pointerleave', () => {
-  if (phiMode !== 'none') return;
-  if (phiShown) { phiShown = false; phiHot = false; shrinkDraw(); }
+const shrinkHandle = rotationHandle(sk, {
+  id: 'shrink-rotate-{{SLUG}}', label: 'Rotate the unit square',
+  point: () => phiHandlePoint(phiNow()),
+  angleAt: e => { const [x, y] = skToCanvas(e); return Math.atan2(SKC - x, SKC - y); },
+  getAngle: phiNow, rotate: setPhiAngle, finish: null, redraw: shrinkDraw,
 });
 function shrinkDraw() {
   const c = sk, g = skg, S = SKS;
@@ -1425,13 +1530,11 @@ function shrinkDraw() {
   g.strokeRect(-Bk * sc / 2, -Bk * sc / 2, Bk * sc, Bk * sc);
   g.restore(); g.restore();
 
-  if (phiShown) {
-    const [hx, hy] = phiHandlePoint(phi);
+  const [hx, hy] = shrinkHandle.update();
+  if (!window.matchMedia('print').matches) {
     const ex = SKC - (SKSIDE / 2) * Math.sin(phi), ey = SKC - (SKSIDE / 2) * Math.cos(phi);
     g.strokeStyle = css('--kpress-doc-border-hairline'); g.lineWidth = 2;
     g.beginPath(); g.moveTo(ex, ey); g.lineTo(hx, hy); g.stroke();
-    g.fillStyle = css('--kpress-doc-bg'); g.lineWidth = phiHot || phiMode === 'rotate' ? 3.5 : 2;
-    g.beginPath(); g.arc(hx, hy, SKHR, 0, 6.2832); g.fill(); g.stroke();
   }
 
   /* What each of these six can and cannot claim: phi is exact while the slider
@@ -1461,7 +1564,10 @@ knets.forEach(b => b.addEventListener('click', () => {
 }));
 
 /* ---------- boot ---------- */
-function boot() { drawField(); refresh(true); shrinkDraw(); }
+function boot() {
+  drawField(); document.getElementById('kslider-{{SLUG}}').value = String(curK);
+  refresh(true); shrinkDraw();
+}
 boot();
 const repaint = () => { heat = null; boot(); };
 if (window.matchMedia) {
@@ -1540,6 +1646,7 @@ window.addEventListener('afterprint', repaint);
   const figureKey = el => { const f = el.closest('figure'); return f ? f.dataset.figure || null : null; };
   function show(slug, record, from) {
     if (!slugs.includes(slug)) slug = slugs[0];
+    const restoreFocus = from && document.activeElement === from;
     const key = from ? figureKey(from) : null, top = from ? from.getBoundingClientRect().top : 0;
     for (const a of articles) {
       const on = a.dataset.cert === slug;
@@ -1549,8 +1656,11 @@ window.addEventListener('afterprint', repaint);
     for (const b of switches) b.setAttribute('aria-pressed', String(b.dataset.cert === slug));
     if (key) {
       const twin = [...document.querySelectorAll('.cert-figure:not([hidden]) figure')].find(f => figureKey(f) === key);
-      const button = twin && twin.querySelector('.cert-toggle button');
-      if (button) scroller.scrollBy(0, button.getBoundingClientRect().top - top);
+      const button = twin && twin.querySelector('.cert-toggle button[aria-pressed="true"]');
+      if (button) {
+        if (restoreFocus) button.focus({ preventScroll: true });
+        scroller.scrollBy(0, button.getBoundingClientRect().top - top);
+      }
     }
     if (record && location.hash !== '#' + slug) history.replaceState(null, '', '#' + slug);
   }

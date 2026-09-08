@@ -6,7 +6,7 @@ name: Certificate page
   # whenever that certificate, the renderer, or the template moves.
   # The list is every input the renderer reads or imports: the case directory
   # (certificates, coarsening rows, claim documents), the templates, the atlas
-  # rendering it inlines as Figure 2, the four composite assets it serves beside
+  # rendering it inlines as Figure 1, the composite assets it serves beside
   # the page, the figure record and the module it is read through, the frontier
   # register whose length the opening states, the sqpack modules it imports (it
   # asserts two palette colours at import), the vendored kpress, and the locked
@@ -135,7 +135,7 @@ jobs:
         run: uv run --frozen --group dev python -m playwright install --only-shell chromium
 
       # After the page, not beside it: the exporter loads `site/index.html` from disk,
-      # and Figure 1 references the composite that the render copies into `site/` on its
+      # and Figure 2 references the composite that the render copies into `site/` on its
       # way out.
       - name: Draw the PDF of the page
         run: uv run --frozen --group dev python -m devtools.render_explainer_pdf --update

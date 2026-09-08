@@ -20,19 +20,24 @@ This looks.
 
 The waiting is the PDF exporter's, deliberately: a check that measures a differently
 settled page than the one that gets drawn is measuring a document nobody reads.
+The same browser also exercises Figure 5 after those measurements, including its
+certificate controls, feedback, field cache, and layout at desktop and phone widths.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from collections.abc import Sequence
+from fractions import Fraction
 from pathlib import Path
-from typing import TypedDict
+from typing import NotRequired, TypedDict
 
-from playwright.sync_api import ViewportSize
+from playwright.sync_api import CDPSession, Locator, Page, ViewportSize
 
+from devtools.render_explainer import WALKTHROUGH
 from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY
 
 
@@ -103,6 +108,7 @@ class Measured(TypedDict):
 
     screen: Probe
     print: Probe
+    controls: NotRequired[list[str]]
 
 
 #: One CSS pixel, which at the print body size is six percent of an em: well under what
@@ -424,6 +430,337 @@ _SETTLED = """() => new Promise(
 SELF_CHECK_PX = 42.0
 SELF_CHECK_CLASS = "print-layout-self-check"
 
+#: Geometry and computed type sizes, rather than a match on the stylesheet that
+#: intended them. The active certificate is checked at each screen width.
+_PROVER_LAYOUT = r"""() => {
+  const found = [];
+  for (const figure of document.querySelectorAll('figure[data-figure="5"]')) {
+    if (!figure.getClientRects().length) continue;
+    const panel = figure.querySelector('.panel');
+    const stage = figure.querySelector('.stage');
+    if (panel.getBoundingClientRect().top < stage.getBoundingClientRect().bottom - 1)
+      found.push('control panel is beside the graphic');
+    const {left, right} = panel.getBoundingClientRect();
+    for (const item of figure.querySelectorAll('.math-item')) {
+      if (getComputedStyle(item).whiteSpace !== 'nowrap')
+        found.push('a direction item permits an internal line break');
+      const ink = item.querySelector('.katex-html') || item;
+      const box = ink.getBoundingClientRect();
+      if (box.left < left - 1 || box.right > right + 1)
+        found.push('a direction item overflows the control panel');
+      const math = item.querySelector('.katex');
+      if (math && math.querySelector('.mfrac')) fraction(math, 'half-tangent');
+    }
+    if (!figure.querySelector('.math-item')) found.push('direction items are missing');
+    fraction(figure.querySelector('.mass-val .katex'), 'mass');
+    for (const hidden of figure.querySelectorAll('[hidden]')) {
+      if (hidden.getClientRects().length)
+        found.push('a hidden status or verdict still occupies a visible box');
+    }
+  }
+  return found;
+
+  function fraction(mass, label) {
+    const digits = [...mass.querySelectorAll('.katex-html .mfrac .mord')]
+      .filter(el => !el.children.length && /[0-9]/.test(el.textContent));
+    const size = parseFloat(getComputedStyle(mass).fontSize);
+    if (!digits.length || digits.some(
+        el => parseFloat(getComputedStyle(el).fontSize) < size * .95))
+      found.push(`the ${label} fraction has reduced-size numerator or denominator`);
+  }
+}"""
+
+
+def prover_findings(page: Page) -> list[str]:
+    """Exercise Figure 5 through its public controls in the already open browser.
+
+    A bitmap comparison follows two paths to the same state: restore a field after
+    changing direction while it was hidden, then rebuild it at that direction. A
+    stale cache differs. Neither path reads the page's private geometric variables.
+    These checks run after the print measurements, so their interaction cannot change
+    the state whose print layout is being inspected.
+    """
+    page.emulate_media(media="screen", reduced_motion="reduce")
+    page.set_viewport_size({"width": 1280, "height": 900})
+    page.evaluate(_SETTLED)
+    slugs: list[str] = page.locator(".cert-figure").evaluate_all(
+        "els => [...new Set(els.map(el => el.dataset.cert))]"
+    )
+    if not slugs:
+        return ["Figure 5: no certificate figures were found"]
+    records = (json.loads(path.read_text("utf-8")) for path in WALKTHROUGH)
+    known_minima = {
+        record["outer_side"].replace("/", "-"): Fraction(record["least_cell_mass"])
+        for record in records
+    }
+    found: list[str] = []
+    for slug in slugs:
+        prefix = f"Figure 5 ({slug}): "
+        page.locator(
+            f'figure[data-figure="5"] .cert-toggle button[data-cert="{slug}"]:visible'
+        ).click()
+        selection: bool = page.evaluate(
+            """slug => [...document.querySelectorAll('.cert-figure')].every(
+              el => el.hidden === (el.dataset.cert !== slug)) &&
+              [...document.querySelectorAll('.cert-toggle button')].every(
+              el => el.getAttribute('aria-pressed') === String(el.dataset.cert === slug))
+              && location.hash === '#' + slug""",
+            slug,
+        )
+        if not selection:
+            found.append(prefix + "certificate visibility, selection, and URL disagree")
+        focused: bool = page.evaluate(
+            """slug => document.activeElement.matches('.cert-toggle button') &&
+              document.activeElement.dataset.cert === slug &&
+              document.activeElement.getClientRects().length > 0""",
+            slug,
+        )
+        if not focused:
+            found.append(prefix + "certificate switching leaves focus on a hidden control")
+        figure = page.locator(f'.cert-figure[data-cert="{slug}"] figure[data-figure="5"]')
+        if figure.count() != 1 or not figure.is_visible():
+            found.append(prefix + "the selected certificate has no visible prover")
+            continue
+        reset = figure.locator(f"#btn-tight-{slug}")
+        scan = figure.locator(f"#btn-scan-{slug}")
+        field = figure.locator(f"#btn-heat-{slug}")
+        slider = figure.locator(f"#kslider-{slug}")
+        status = figure.locator(f"#status-{slug}")
+        hint = figure.locator(f"#hint-{slug}")
+        canvas = figure.locator("canvas")
+        verdict = figure.locator(f"#vd-{slug}")
+        instruction = hint.inner_text()
+        initial_bitmap: str = canvas.evaluate("el => el.toDataURL()")
+        if slider.input_value() == "0" or _control_angle(slider, prover=True) == 0:
+            found.append(prefix + "the opening pose is axis-aligned")
+        if verdict.is_visible() or "off the net" in (
+            slider.get_attribute("aria-valuetext") or ""
+        ):
+            found.append(prefix + "the opening pose is not an admissible net placement")
+        reset.click()
+        if not status.is_visible() or not status.inner_text().strip():
+            found.append(prefix + "reset gives no status feedback")
+        if slider.input_value() != "0":
+            found.append(prefix + "reset does not restore direction zero")
+        if verdict.is_visible():
+            found.append(prefix + "the ordinary on-net minimum shows a stale verdict")
+        if canvas.evaluate("el => el.toDataURL()") == initial_bitmap:
+            found.append(prefix + "the minimum button does not change the opening pose")
+        terms = figure.locator(f"#mv-{slug} .katex-mathml mfrac mn").all_text_contents()
+        minimum_mass = Fraction(int(terms[0]), int(terms[1])) if len(terms) == 2 else None
+        if slug in known_minima and minimum_mass != known_minima[slug]:
+            found.append(prefix + "the minimum button disagrees with the retained certificate")
+        minimum = figure.locator(f"#mv-{slug}").inner_text()
+        canvas.click(position={"x": 20, "y": 20})
+        if status.is_visible() and status.inner_text().strip():
+            found.append(prefix + "moving the square leaves reset feedback visible")
+        if not verdict.is_visible():
+            found.append(prefix + "an outside-domain placement has no verdict")
+        reset.click()
+        if figure.locator(f"#mv-{slug}").inner_text() != minimum:
+            found.append(prefix + "reset does not restore the certificate's minimum mass")
+        scan.click()
+        if not status.is_visible() or not status.inner_text().strip():
+            found.append(prefix + "the raster scan gives no status feedback")
+        slider.evaluate("(el, value) => { el.value = value; }", slider.get_attribute("max"))
+        slider.dispatch_event("input")
+        if status.is_visible() and status.inner_text().strip():
+            found.append(prefix + "changing direction leaves scan feedback visible")
+        field.check()
+        visible_bitmap: str = canvas.evaluate("el => el.toDataURL()")
+        field.uncheck()
+        if canvas.evaluate("el => el.toDataURL()") == visible_bitmap:
+            found.append(prefix + "unchecking mass shading leaves the field unchanged")
+        slider.evaluate("el => { el.value = '0'; }")
+        slider.dispatch_event("input")
+        field.check()
+        replays: bool = figure.evaluate(
+            """figure => {
+              const canvas = figure.querySelector('canvas');
+              const restored = canvas.toDataURL();
+              figure.querySelector('input[type=range]').dispatchEvent(
+                new Event('input', {bubbles: true}));
+              return canvas.toDataURL() === restored;
+            }"""
+        )
+        if not replays:
+            found.append(prefix + "restoring the field uses a stale direction bitmap")
+        if hint.inner_text() != instruction:
+            found.append(prefix + "an action overwrites the permanent instructions")
+        # This is the reported long half-tangent, 12219313/45000000, rather than
+        # only the much shorter zero readout which cannot expose the wrap defect.
+        slider.evaluate("el => { el.value = String(Math.min(118, Number(el.max))); }")
+        slider.dispatch_event("input")
+        if slider.get_attribute("max") == "180":
+            direction = figure.locator(f"#kval-{slug}").inner_text()
+            if not all(value in direction for value in ("12219313", "45000000", "30.3836")):
+                found.append(prefix + "direction 118 has the wrong half-tangent or angle")
+        for width in (1280, 375):
+            page.set_viewport_size({"width": width, "height": 900})
+            page.evaluate(_SETTLED)
+            layout: list[str] = page.evaluate(_PROVER_LAYOUT)
+            found.extend(prefix + f"{width}px: {failure}" for failure in layout)
+        page.set_viewport_size({"width": 1280, "height": 900})
+        slider.evaluate("el => { el.value = '0'; }")
+        slider.dispatch_event("input")
+        box = canvas.bounding_box()
+        if box is not None:
+            # Center the square, then drag the visible top handle into the reflected
+            # angle range. These are pointer locations in the displayed instrument;
+            # they do not call or expose its private geometry functions.
+            canvas.click(position={"x": box["width"] / 2, "y": box["height"] / 2})
+            box = canvas.bounding_box()
+            assert box is not None
+            handle = figure.locator(f"#prove-rotate-{slug}")
+            target = handle.bounding_box() if handle.count() else None
+            if target is None:
+                found.append(prefix + "the rotation handle is missing")
+                continue
+            page.mouse.move(
+                target["x"] + target["width"] / 2, target["y"] + target["height"] / 2
+            )
+            page.mouse.down()
+            page.mouse.move(box["x"] + box["width"] * 0.3, box["y"] + box["height"] * 0.4)
+            page.mouse.up()
+            if "off the net" not in (slider.get_attribute("aria-valuetext") or ""):
+                found.append(prefix + "free rotation does not report an off-net direction")
+            for width in (1280, 375):
+                page.set_viewport_size({"width": width, "height": 900})
+                page.evaluate(_SETTLED)
+                layout = page.evaluate(_PROVER_LAYOUT)
+                found.extend(prefix + f"off-net {width}px: {failure}" for failure in layout)
+        page.set_viewport_size({"width": 1280, "height": 900})
+    return found
+
+
+_ROTATION_TARGET = """handle => {
+  const found = [], box = handle.getBoundingClientRect();
+  if (box.width < 44 || box.height < 44) found.push('rotation target is smaller than 44px');
+  if (handle.tagName !== 'BUTTON' || !handle.getAttribute('aria-label'))
+    found.push('rotation target is not a named native button');
+  const hit = document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2);
+  if (!handle.contains(hit)) found.push('rotation target is covered by another element');
+  if (getComputedStyle(handle).touchAction !== 'none')
+    found.push('rotation target allows the browser to cancel its touch drag');
+  const canvas = handle.closest('.stage').querySelector('canvas');
+  if (getComputedStyle(canvas).touchAction !== 'pan-y')
+    found.push('the canvas no longer permits vertical touch scrolling');
+  return found;
+}"""
+
+
+def _touch_gesture(
+    page: Page,
+    session: CDPSession,
+    start: tuple[float, float],
+    end: tuple[float, float] | None = None,
+) -> None:
+    """Send real browser touch input, paced by animation frames rather than sleeps."""
+    session.send(
+        "Input.dispatchTouchEvent",
+        {"type": "touchStart", "touchPoints": [{"x": start[0], "y": start[1], "id": 1}]},
+    )
+    if end is not None:
+        for step in range(1, 7):
+            x = start[0] + (end[0] - start[0]) * step / 6
+            y = start[1] + (end[1] - start[1]) * step / 6
+            session.send(
+                "Input.dispatchTouchEvent",
+                {"type": "touchMove", "touchPoints": [{"x": x, "y": y, "id": 1}]},
+            )
+            page.evaluate(_SETTLED)
+    session.send("Input.dispatchTouchEvent", {"type": "touchEnd", "touchPoints": []})
+    page.evaluate(_SETTLED)
+
+
+def _control_angle(control: Locator, *, prover: bool) -> float:
+    if not prover:
+        return float(control.input_value()) / 10
+    text = control.get_attribute("aria-valuetext") or ""
+    match = re.search(r"([0-9]+(?:\.[0-9]+)?) degrees", text)
+    if match is None:
+        raise ValueError(f"net direction control has no readable angle: {text!r}")
+    return float(match.group(1))
+
+
+def touch_findings(page: Page) -> list[str]:
+    """Tap, drag, keyboard, and ordinary swipes on both figures and certificates."""
+    session = page.context.new_cdp_session(page)
+    slugs: list[str] = page.locator(".cert-figure").evaluate_all(
+        "els => [...new Set(els.map(el => el.dataset.cert))]"
+    )
+    found: list[str] = []
+    try:
+        for slug in slugs:
+            page.locator(f'.cert-toggle button[data-cert="{slug}"]:visible').first.tap()
+            for number, name, control_name in ((5, "prove", "kslider"), (6, "shrink", "phi")):
+                prefix = f"Figure {number} touch ({slug}): "
+                canvas = page.locator(f"#{name}-{slug}")
+                handle = page.locator(f"#{name}-rotate-{slug}")
+                if not handle.count() or not handle.is_visible():
+                    found.append(prefix + "no visible rotation button before the first touch")
+                    continue
+                canvas.evaluate("el => el.scrollIntoView({block: 'center'})")
+                page.evaluate(_SETTLED)
+                control = page.locator(f"#{control_name}-{slug}")
+                if number == 5:
+                    control.evaluate("el => { el.value = '0'; }")
+                    control.dispatch_event("input")
+                    box = canvas.bounding_box()
+                    assert box is not None
+                    _touch_gesture(
+                        page,
+                        session,
+                        (box["x"] + box["width"] / 2, box["y"] + box["height"] / 2),
+                    )
+                target_findings: list[str] = handle.evaluate(_ROTATION_TARGET)
+                found.extend(prefix + failure for failure in target_findings)
+                before = _control_angle(control, prover=number == 5)
+                # Native taps wait for a stable, hittable target after scrolling.
+                handle.tap()
+                page.evaluate(_SETTLED)
+                if _control_angle(control, prover=number == 5) == before:
+                    found.append(
+                        prefix + "tapping the rotation button does not turn the square"
+                    )
+                before = _control_angle(control, prover=number == 5)
+                target, box = handle.bounding_box(), canvas.bounding_box()
+                assert target is not None
+                assert box is not None
+                _touch_gesture(
+                    page,
+                    session,
+                    (target["x"] + target["width"] / 2, target["y"] + target["height"] / 2),
+                    (box["x"] + box["width"] * 0.3, box["y"] + box["height"] * 0.4),
+                )
+                if abs(_control_angle(control, prover=number == 5) - before) < 0.5:
+                    found.append(
+                        prefix + "touch dragging the handle does not rotate the square"
+                    )
+                before = _control_angle(control, prover=number == 5)
+                handle.press("ArrowRight")
+                if _control_angle(control, prover=number == 5) == before:
+                    found.append(prefix + "the rotation button does not support arrow keys")
+                canvas.evaluate("el => el.scrollIntoView({block: 'center'})")
+                page.evaluate(_SETTLED)
+                box = canvas.bounding_box()
+                assert box is not None
+                scroll = """() => (document.querySelector('[data-kpress-viewport]')
+                  || document.scrollingElement).scrollTop"""
+                prior_scroll: float = page.evaluate(scroll)
+                _touch_gesture(
+                    page,
+                    session,
+                    (box["x"] + box["width"] * 0.8, box["y"] + box["height"] * 0.8),
+                    (box["x"] + box["width"] * 0.8, box["y"] + box["height"] * 0.2),
+                )
+                if page.evaluate(scroll) - prior_scroll < 20:
+                    found.append(prefix + "an ordinary canvas swipe does not scroll the page")
+    finally:
+        session.detach()
+    return found
+
+
 #: A block the print column cannot contain, appended to the page. Given its margins and
 #: its width outright, because the column centres its blocks and caps their measure: a
 #: block merely handed a width comes back centred at half the overhang, which is how the
@@ -472,7 +809,18 @@ def measure(page_url: str, *, inject: str | None = None, spec: object = None) ->
                 page.evaluate(inject, spec)
             page.evaluate(_SETTLED)
             printed: Probe = page.evaluate(_PROBE)
-            return {"screen": screen, "print": printed}
+            controls = prover_findings(page)
+            mobile = browser.new_page(
+                viewport={"width": 375, "height": 812},
+                is_mobile=True,
+                has_touch=True,
+                reduced_motion="reduce",
+            )
+            mobile.goto(page_url, wait_until="load")
+            mobile.wait_for_selector(READY, timeout=60_000)
+            mobile.evaluate("document.fonts.ready")
+            controls.extend(touch_findings(mobile))
+            return {"screen": screen, "print": printed, "controls": controls}
         finally:
             browser.close()
 
@@ -481,7 +829,7 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
     """Everything the two passes say is wrong, as lines a reader can act on."""
     screen = measured["screen"]
     printed = measured["print"]
-    found: list[str] = []
+    found: list[str] = list(measured.get("controls", []))
 
     # `.centred` is the page's declaration that a block is centred in every medium, so
     # it is the thing to hold it to. Everything here runs in both media: a defect that is
