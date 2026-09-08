@@ -141,7 +141,8 @@ owns the current W5 work on cost, naming, and checkpoint placement.
 
 Use **PR fast surface** for `--fast`, **full checkpoint** for the default command, and
 **deferred checkpoint** for the seven steps outside PR fast coverage.
-The advisory `Deferred checkpoint` workflow runs those steps.
+The advisory `Deferred checkpoint` workflow runs those steps in
+[three jobs](#the-deep-gate-the-deferred-surface-before-the-merge).
 **Golden rebuild** means `--deep`, which also regenerates expensive golden producers;
 **strict checkpoint** means `--strict`, which includes that rebuild and refuses skipped
 checks. The deferred workflow does not pass `--deep`; its filename and label remain
@@ -214,6 +215,9 @@ comparisons:
 
 All three runs are from 2026-09-06. The durations are observations, not necessary lower
 bounds or enforced tier baselines.
+The deferred row predates both the corpus widening and the
+[three-job split of 2026-09-08](#the-deep-gate-the-deferred-surface-before-the-merge),
+so its 12m32s deferred-checks figure no longer describes any job that exists.
 The active PR partition baselines in
 [gate-budgets.yaml](packing/devtools/gate-budgets.yaml) are four reference-shape
 readings for geometry and one for suite over the 324-case corpus.
@@ -279,9 +283,43 @@ So the pull-request surface and the deep gate together are the whole gate, and a
 deferral argued into `test_the_pull_request_surface_defers_only_what_was_measured` fails
 until it is added here too.
 
-The [dated measurement above](#the-tiers) is about 27 minutes.
-Both jobs need profiling: improving only the exhaustive job can leave the integration
-work on the critical path.
+**It runs in three jobs, and the third is new.** `deferred-steps` takes the five
+selections that are neither the slow lane nor the exhaustive tier, `deferred-slow-lane`
+takes `slow behavioral tests` alone, and `exhaustive-tier` takes the exhaustive exact
+tests alone. All three feed the single required `deep-gate-required` context, and
+`test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers` requires the
+three selections to be pairwise disjoint as well as complete.
+
+The slow lane was split off on 2026-09-08 because sharing a runner had started to kill
+it. Two runs that day, on the same tree, are the evidence:
+
+| Run | Job and shape | Slow lane | Escape screen |
+| --- | --- | ---: | ---: |
+| [34177317419](https://github.com/jlevy/squares/actions/runs/34177317419) | `deferred-steps`, six deferrals on 4 CPUs at `--jobs 2 --inner-jobs 2` | killed at 1800 s | killed at 900 s |
+| [34176106076](https://github.com/jlevy/squares/actions/runs/34176106076) | `validate`, 68 steps on 4 CPUs at the same shape | 1272.0 s | 858.6 s |
+
+The second run overlaps the two long steps with sixty-odd steps costing seconds each;
+the first had five other deferrals worth 1859.96 s of measured step time and nothing
+cheap left to interleave.
+The tripling of the known-best corpus in
+[PR 111](https://github.com/jlevy/squares/pull/111) is what took them past that point.
+The other four steps in run 34176106076 measured 407.1 s for the atlas rebuild, 347.2 s
+for the negative controls, 221.1 s for the n=40 bracket and 25.9 s for the grid replay.
+These are single hosted readings from that run’s own `validation-timings-validate-1`
+receipts, not baselines.
+
+A third runner costs billed minutes — its own checkout and sync, and two lanes that no
+longer overlap — and buys an uncontended wall rather than a shorter one: the gate still
+reports when `exhaustive-tier` finishes at about 1943 s. That is `OR-14` applied where
+the wall actually is, and the alternative — a larger budget for a step that was not
+slow, only crowded — would have measured the runner instead of the step.
+The escape screen did take a declared budget the same day, for the separate reason that
+its own ceiling was the shared 900-second default it had measured 41 s inside; that
+[ceiling is described with the other budgets](#what-each-tier-costs-and-where-its-ceiling-lives).
+
+The [dated measurement above](#the-tiers) is about 27 minutes and predates the split.
+All three jobs need profiling: improving only the exhaustive job can leave the
+integration work on the critical path.
 A duration does not establish that the work is irreducible.
 
 **To run it on a pull request, add the `deep-gate` label.**
@@ -490,7 +528,11 @@ Avoid assuming that either flag alone caps total host concurrency.
 
 The isolated exhaustive jobs use `--jobs 1 --inner-jobs 4`: their recorded hosted
 runners expose four CPUs, and no second outer step competes for that budget.
-The concurrent integration and deferred jobs retain `--jobs 2 --inner-jobs 2`.
+The concurrent integration and deferred jobs retain `--jobs 2 --inner-jobs 2`. The
+deferred slow lane, isolated since 2026-09-08, uses `--jobs 1 --inner-jobs 2`: pytest
+runs that lane in one process, so the outer pool has nothing to schedule, but its two
+corpus-scaled tests size their own pools from `PACK_JOBS`, and one worker would return
+the wall the split was made to remove.
 Certificate pools also enforce actual CPU availability, the four-worker maximum, and the
 grid-memory budget. This allocation preserves the parallelism previously available when
 certificate pools ignored `PACK_JOBS`; it is not a measured speedup claim.
@@ -519,8 +561,11 @@ explicitly enforced.
 Matching CPU counts alone does not establish comparable load or hardware.
 `--only` invocations have no tier ceiling; per-command subprocess timeouts still apply.
 The default subprocess timeout is 900 seconds, increased for steps with declared larger
-budgets, including 1800 seconds for slow tests and negative controls and 3600 seconds
-for exhaustive tests.
+budgets, including 1800 seconds for slow tests, negative controls and the whole
+single-square translation escape screen, and 3600 seconds for exhaustive tests.
+The escape screen’s budget was declared on 2026-09-08, after it measured 858.62 s on a
+four-CPU runner — 41 s inside the shared default — and was killed at that default in the
+deferred checkpoint the same day.
 An explicit shorter timeout still wins.
 The full checkpoint’s 3600-second tier declaration is not a universal wall limit on
 split CI jobs. Preserve source, selection, runner, and cache information with timings
