@@ -106,9 +106,9 @@ session:
     status: in_progress
     entered_by: user_request
     switch_reason: The owner explicitly requested that PR120 be fully committed, current with main, and adapted for the intended PR116 and PR121 landings.
-    budget_minutes: 35
+    budget_minutes: 95
     started_at: '2026-09-08T06:13:27Z'
-    deadline_at: '2026-09-08T06:48:27Z'
+    deadline_at: '2026-09-08T07:48:27Z'
     expected_output: A pushed mergeable PR120, final hosted check results, and reviewed compatibility and cost records.
     validation_command: DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib PYTEST_ADDOPTS='-n 2 --dist worksteal --maxfail=1' uv run --frozen --all-extras --group dev packing-validate --push --jobs 2 --inner-jobs 1
     kill_condition: A failed assertion, missing coverage, or unresolved record conflict blocks certification.
@@ -194,6 +194,7 @@ session:
   - packing/campaign/agent-sessions/session-106-validation/push-9e785948-merge-failed.json
   - packing/campaign/agent-sessions/session-106-validation/push-b7b0576b-interrupted.json
   - packing/campaign/agent-sessions/session-106-validation/push-a70716c6-interrupted.json
+  - packing/campaign/agent-sessions/session-106-validation/push-6c678ff8.json
   checks:
   - Before this prospective session, the records baseline passed at clean dae6bb8d; origin/main at 28696526 was fetched and reviewed. Generated merge conflicts were resolved by their renderers, preserving both branches' records.
   - The coordinator reproduced 55 exact source omissions against dae6bb8d through n100 and upstream 28696526 above n100; the opaque n21 display is the fifty-sixth corrected reported field. The final named-candidate audit passes through n324 with no omitted stronger report.
@@ -212,6 +213,9 @@ session:
   - Sessions 105/106 and ideas 129/130 avoid the published and explicitly assigned identifiers on PR116, PR121 and their connected constraints work. All fifteen moved validation and cost receipts retain identical bytes. Defects 481–483 remain unchanged pending actual upstream integration.
   - Current main 89bedd68 merged cleanly, including the kpress aee6df7c print-font update. Independent review preserved the acknowledgment, qualified caption and source claims. The new font directory and instance generator are now in both Pages filters and the render-input contract; all 62 focused contract and font tests pass in 6.12 seconds, with clean Ruff and BasedPyright.
   - The user authorized final review and merge of PR120. The GitHub sweep found no formal reviews, inline comments, PR comments or open review issues. Independent final source and identifier reviews found no unresolved discrepancy. The session calendar estimate is extended by sixty minutes for the complete hosted checkpoint, whose inspected upstream prediction is approximately 53 minutes plus setup; this is an estimate, not a validation result.
+  - Pre-push validation at clean 6c678ff8 passes all 45 steps in 1229.07 seconds, including 4159 non-exhaustive tests in 1227.96 seconds. The broader test selection follows the Pages workflow change. Two fontTools warnings enable the GIL; no assertion failed. The 3-CPU operator shape differs from the 2-CPU reference, so the 1800-second tier band is reported rather than enforced; command deadlines and assertions remain active.
+  - Fresh HTML and PDF checks pass at 6c678ff8. The 17-page PDF reproduces after timestamp normalization, embeds 24 fonts and has no shipped face drawn as Type3. The layout check covers 5895 blocks, 23 list markers and 20 footnote references. Agent visual review covers pages 1, 2, 4, 15, 16, 17; the coordinator also inspected the caption and acknowledgment pages. Host fallback faces remain outside the shipped-face assertion.
+  - Before the fifth phase's original 06:48 deadline, its estimate is extended by sixty minutes to cover the full hosted checkpoint and the authorized merge. The local pre-push result is complete; only the new record edits need a further affected check before publishing the stable checkpoint source.
   stop_reason: null
   next_action: Complete and merge PR120 as the user authorized, then consult the landed BC-264 handoff under think-mq0d. PR116 completes pricing; further H125 work requires a fresh allocation and admission rather than restarting the historical allocation.
 ---
