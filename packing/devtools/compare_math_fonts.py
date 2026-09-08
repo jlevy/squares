@@ -406,8 +406,11 @@ def _prose_face(html: str, family: str, style: str, weight: str) -> str:
 
 def _katex_face(html: str, name: str, style: str, weight: str) -> str:
     """One of KaTeX's, which arrive minified and in a fixed property order."""
+    # `font-display` is the one property the renderer rewrites in this stylesheet:
+    # KaTeX ships `swap` and `render_explainer._blocking_faces` makes it `block`, so
+    # this reads whichever the page in front of it carries.
     pattern = (
-        rf"@font-face\{{font-display:swap;font-family:{re.escape(name)};"
+        rf"@font-face\{{font-display:(?:swap|block);font-family:{re.escape(name)};"
         rf'font-style:{style};font-weight:{weight};src:url\("(data:[^"]+)"\)'
     )
     match = re.search(pattern, html)
