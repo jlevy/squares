@@ -52,8 +52,9 @@ session:
       classes at 96/25 and three at U; the trailing-six class alone stays undecided as
       before). The end band widened from α + β = 2.6937° to Theorem A, [0°, 1.7139°] ∪
       [43.5293°, 45°] (mass 5529/512), and Theorem B, [0°, 10.3875°] ∪ [43.5293°, 45°] (mass
-      351/32), both exact-decided on grid 79; the diagonal end is bound at seven trailing
-      cells on grid 79 and grid 119 refutes the eighth (43857/4096). Every grid-79 dual that
+      351/32), both exact-decided on grid 79; on grid 119 the band widens further to Theorem C,
+      [0°, 10.3875°] ∪ [43.0737°, 45°] (mass 11083/1024, α + β = 12.3138°), with the
+      symmetric (12, 12) band [0°, 3.0318°] ∪ [42.3876°, 45°] refuted there too. Every grid-79 dual that
       reached eleven has continuum depth two or more under ceiling.py, so those readings are
       site-set artefacts, not obstructions.
     evidence:
@@ -102,14 +103,24 @@ session:
   progress:
     metric: exact-decided width α + β of the robust end band excluded at 96/25, and replayed counts
     before: 'α + β = 2.6937° (cells 0–5 ∪ 175–180, planning lane, unregistered); five H-131 counts decided in a planning lane only.'
-    after: 'α + β = 11.8582° with β = 1.4707° (Theorem B, cells 0–39 ∪ 174–180, mass 351/32), and 3.1846° symmetric-style (Theorem A); the eight H-131 counts replayed exactly under this record; grid 119 refutes the (8, 8) band grid 79 could not.'
+    after: 'α + β = 12.3138° (Theorem C, grid 119, cells 0–39 ∪ 172–180, mass 11083/1024), 11.8582° on grid 79 (Theorem B, mass 351/32), 3.1846° for the exit band (Theorem A); the symmetric band reaches 5.6442° on grid 119; the eight H-131 counts replayed exactly under this record.'
   delegations: []
   outputs:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md
   - packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md
   checks:
   - packing-validate --records on the lane branch at 05:16Z, before this record was filled, failed only on this record's placeholders (six steps, all naming session-102); every other step passed.
-  - TBD_CHECKS
+  - >-
+    packing-validate --records at 05:58Z on the final tree: every step passed except three
+    generated-view drifts that a new terminal record always causes and that this lane was
+    told not to touch — check_synopsis (SYNOPSIS.md's Current Handoff marker and agenda-021's
+    selected bead must name think-ndqj), close_session --check (session-close-report.yaml and
+    SYNOPSIS.md; run devtools.close_session --render), and the ledger (run packing-ledger
+    render). No full gate was run in this lane.
+  - >-
+    The receipt is a harness-generated efficiency rollup of this session's own log, written by
+    devtools.log_rollup at the last commit; it is an active-session lower bound, not a final
+    cost.
   resource_rollups: [packing/campaign/resource-usage/agent-a2247da4712316276.yaml]
   certification_pending: think-ndqj
   stop_reason: Stopped at the lane's fixed clock with the exit reached; no full gate was run in this lane (the coordinator owns integration and the pull-request surface), so certification is pending under think-ndqj.
@@ -118,35 +129,39 @@ session:
 ---
 # Angle-Band Theorems at `96/25`
 
-Lane BC-295 of
-[Agenda 030](../agendas/agenda-030-parallel-structural-lanes-at-n11.md) ran as one
-research session of two and a half hours on one worker, under
+Lane BC-295 of [Agenda 030](../agendas/agenda-030-parallel-structural-lanes-at-n11.md)
+ran as one research session of two and a half hours on one worker, under
 [H-130](../hypotheses/H-130-robust-end-band-theorem-at-q.md) and
-[H-131](../hypotheses/H-131-near-axis-counts-at-q.md), with bead `think-ndqj`.
-The result section is in
-[lane B's report](../series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md#session-102--angle-band-theorems-at-9625-2026-09-08),
-which holds the replay table, the widening table, the dual's angular support with its
+[H-131](../hypotheses/H-131-near-axis-counts-at-q.md), with bead `think-ndqj`. The
+result section is in
+[lane B’s report](../series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md#session-102--angle-band-theorems-at-9625-2026-09-08),
+which holds the replay table, the widening table, the dual’s angular support with its
 exact ceiling check, the grid-119 refinement, and every script.
 
 Three things were decided.
-The planning lane's eight angle counts (H-131) and its Theorem 1.11 replay exactly on the
-stated site set, every mass to the fraction.
-The robust end band widened past H-130's criterion in two steps: Theorem A,
+The planning lane’s eight angle counts (H-131) and its Theorem 1.11 replay exactly on
+the stated site set, every mass to the fraction.
+The robust end band widened past H-130’s criterion in three steps: Theorem A,
 `[0°, 1.7139°] ∪ [43.5293°, 45°]` with `α + β = 3.1846°`, and Theorem B,
 `[0°, 10.3875°] ∪ [43.5293°, 45°]` with `α + β = 11.8582°`, both exact-decided by
-`decide_class_program` on grid 79 and both frozen claims that need an experiment id.
-And the site-set duals that reach eleven on grid 79 are not obstructions: `ceiling.py`
-finds continuum depth two on the end bands and `1291/568` on the band toward `40.19°`,
-grid 119 refutes the `(8, 8)` band grid 79 could not, and so the fractional obstruction
-at `96/25` is, on this evidence, an artefact of the site set rather than a property of
-the relaxation.
+`decide_class_program` on grid 79, and Theorem C, `[0°, 10.3875°] ∪ [43.0737°, 45°]`
+with `α + β = 12.3138°` on grid 119; all three are frozen claims that need an experiment
+id. And the site-set duals that reach eleven on grid 79 are not obstructions:
+`ceiling.py` finds continuum depth two on the end bands and `1291/568` on the band
+toward `40.19°`, grid 119 refutes the `(8, 8)` band grid 79 could not, and so the
+fractional obstruction at `96/25` is, on this evidence, an artefact of the site set
+rather than a property of the relaxation.
 
-Two process notes. Thirty minutes of queue time were lost to a chained waiter whose
-`pgrep -f` pattern matched its own command line; the fix was a sequential queue script.
+Three process notes.
+Thirty minutes of queue time were lost to a chained waiter whose `pgrep -f` pattern
+matched its own command line; the fix was a sequential queue script.
+The grid-119 queue piped its output through `grep`, whose block-buffered file output hid
+the finished rows for half an hour; the per-point `jsonl` logs were the record and are
+what the result section is assembled from.
 The machine ran at load average eight on four cores throughout, so the wall times in the
-result section are not comparable with the planning lane's.
-No identifier was allocated, nothing was pushed, and no full gate was run in this lane;
-the record is stopped with certification pending under `think-ndqj`.
+result section are not comparable with the planning lane’s. No identifier was allocated,
+nothing was pushed, and no full gate was run in this lane; the record is stopped with
+certification pending under `think-ndqj`.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

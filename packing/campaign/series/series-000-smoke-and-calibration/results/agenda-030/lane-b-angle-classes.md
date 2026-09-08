@@ -1580,6 +1580,836 @@ if __name__ == "__main__":
     main()
 ```
 
+## Session-102 — angle-band theorems at 96/25 (2026-09-08)
+
+Lane BC-295 of
+[Agenda 030](../../../../agendas/agenda-030-parallel-structural-lanes-at-n11.md) under
+[H-130](../../../../hypotheses/H-130-robust-end-band-theorem-at-q.md) and
+[H-131](../../../../hypotheses/H-131-near-axis-counts-at-q.md), bead `think-ndqj`,
+session record
+[session-102](../../../../agent-sessions/session-102-angle-band-theorems-at-q.md).
+The planning report above is left as delivered; this section is the registered replay of
+its Section 2.3 decisions and the widening of its Theorem 1.11. Everything called a
+verdict below is `decide_class_program` on rationalised atoms with exact thresholds
+`(1, 0)` for the composition `(11, 0)`; the float optimum of `solve_class_program` is
+context only.
+Wall times were measured on one worker (`PACK_JOBS=1`, `OMP_NUM_THREADS=1`)
+of a four-core machine shared with five other agents, so they are not comparable with
+the planning lane’s.
+
+**Question.** How wide a band around `0°` and `45°` can be excluded at `96/25`, decided
+exactly; do the planning lane’s counts (H-131) replay under a registered round; and
+where does the fractional obstruction live in angle once the band toward `40.19°` stays
+at or above eleven.
+
+**Inputs, fixed for every run.** Side `q = 96/25` (and `3877084/10⁶ ≥ U` for the three
+`U` rows of H-131); shrink `B = 9977/10000`; the retained 181-direction net
+(`cases/n11_fractional_certificate/certificate.json`: half-tangent limit
+`207107/500000`, 180 equal steps, cell width about `0.264°` at the axis end and `0.225°`
+at the diagonal end); site set `build_site_grid(side, 79, 1/10)` — the `79 × 79` product
+grid inset `1/10` from the walls, folded into `D4` orbits (`6241` sites, `820` orbits);
+composition `(11, 0)`; `rows_per_direction = 3`; the row loop capped at a hundred rounds
+and the point reached decided regardless of convergence (the exact sweep is complete;
+the loop’s rows are a subset of placements); rationalisation at scale `4096` with the
+standard bump `1 + 10⁻⁶`; exact thresholds `(1, 0)`. A class is a union of half-gap
+cells and its folded range is the closed union of the cells’ exact-tangent bounds
+(`DirectionClasses.cell_bounds`), so every band below is stated with closed ends.
+Legal touching is retained throughout: a square’s `B`-core lies in its open interior
+(Condition 4), so the cores of a packing are pairwise disjoint even where squares touch.
+
+**Falsifiers, stated before the runs.** For a count class `Θ` with claimed bound “at
+most `N`”: the exact sweep reports a core of mass below one at some direction of `Θ`, or
+the exact mass reaches `N + 1`, or `N + 1` pairwise disjoint `B`-cores at directions in
+`Θ` fit in `[0, 96/25]²`. For the end band `[0°, α] ∪ [45° − β, 45°]`: a fractional
+packing on the end cells of value at least eleven at `96/25`, or eleven pairwise
+disjoint `B`-cores at end-cell directions in the container.
+A non-refutation on grid 79 is neither; it is a site-set reading and is labelled as
+such. For the nine-point control: an admissible `B`-core at a direction of the leading
+eighteen cells that misses all nine atoms.
+
+### The registered replay (H-131 and the Section 2.3 end bands)
+
+Every row is one `solve_class_program` search on the site set above followed by
+`decide_class_program` on the rationalised point reached; “least core” is the exact
+least covered mass over every direction of the class (Condition 5′), “conditions” lists
+the failures among Conditions 1, 3, 4 and 5′ (Condition 2′ is the `(11, 0)` refutation
+itself and is reported in the last column).
+The count bound is `⌊M⌋` whenever Condition 5′ holds, by Theorem 1.5’s counting step.
+
+| class (cells) | folded range, closed | side | rounds | float `M` | exact `M` | least core | count | planning lane | wall |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0–24 | `[0°, 6.4537°]` | `96/25` | 9, converged | 9.0000 | `4611/512 = 9.00586` | `2049/2048` | **≤ 9** | `9.00586` | 3 s |
+| 0–39 | `[0°, 10.3875°]` | `96/25` | 14, converged | 10.5000 | `10765/1024 = 10.51270` | `1025/1024` | **≤ 10** | `10.51270` | 6 s |
+| 171–180 | `[42.8453°, 45°]` | `96/25` | 100, cap | 9.6938 | `9989/1024 = 9.75488` | `2053/2048` | **≤ 9** | `9.75488` | 67 s |
+| 149–169 | `[37.7333°, 42.6166°]` | `96/25` | 100, cap | 9.9457 | `41529/4096 = 10.13892` | `1037/1024` | **≤ 10** | `10.13892` | 596 s |
+| 117–180 | `[30.0149°, 45°]` | `96/25` | 60, converged | 10.2309 | `42589/4096 = 10.39771` | `4147/4096` | **≤ 10** | `10.39771` | 1149 s |
+| 0–5 | `[0°, 1.4503°]` | `96/25` | 12, converged | 9.0000 | `2305/256 = 9.00391` | `4097/4096` | **≤ 9** | `9.00391` | 1 s |
+| 175–180 | `[43.7565°, 45°]` | `96/25` | 100, cap | 9.6277 | `9925/1024 = 9.69238` | `1021/1024` at 175 | undecided (5′ fails) | float only | 24 s |
+| 0–5 ∪ 175–180 | `[0°, 1.4503°] ∪ [43.7565°, 45°]` | `96/25` | 29, converged | 10.6866 | `10959/1024 = 10.70215` | `1025/1024` | **refutes `(11, 0)`** | `10.70215` | 5 s |
+| 0–24 | `[0°, 6.4537°]` | `3877084/10⁶` | 17, converged | 9.8125 | `10065/1024 = 9.82910` | `4101/4096` | **≤ 9** | `9.82910` | 6 s |
+| 0–29 | `[0°, 7.7671°]` | `3877084/10⁶` | 7, converged | 10.0000 | `10243/1024 = 10.00293` | `4097/4096` | **≤ 10** | `10.00293` | 4 s |
+| 175–180 | `[43.7565°, 45°]` | `3877084/10⁶` | 63, converged | 10.1379 | `5201/512 = 10.15820` | `2051/2048` | **≤ 10** | `10.15820` | 9 s |
+
+Every exact mass reproduces the planning lane’s to the fraction, on the same inputs; no
+falsifier occurred. The one row that stays undecided, the six trailing cells alone at
+`96/25`, was float-only in the planning lane too, and the count it would give is implied
+by the trailing-ten row (`[43.7565°, 45°] ⊂ [42.8453°, 45°]`, so at most nine there as
+well). So H-131’s list is now decided under this record: at `96/25` at most nine squares
+within `6.4537°` of the axes, at most ten within `10.3875°`, at most nine within
+`2.1547°` of `45°`, at most ten within `±2.44°` of `40.194°` (the class
+`[37.7333°, 42.6166°]`), and at most ten with folded tilt in `[30.0149°, 45°]`; at `U`
+at most nine within `6.4537°`, ten within `7.7671°`, and ten within `1.2435°` of `45°`.
+The site set in every case is the `79 × 79` inset-`1/10` grid, and the rationalised
+atoms are reproducible from the scripts in the appendix (`replay.jsonl` in the session
+scratchpad holds each verdict with its conditions and minima).
+
+### The band theorems this decides
+
+Both statements are theorems of the exact verifier on the stated site set
+(EXACT-VERIFIED in the planning report’s vocabulary); the atoms are reproducible from
+the appendix and each verdict is in the scratchpad log with its conditions.
+Both are frozen claims that need an experiment id (none is allocated here).
+
+**Theorem A (the exit band; cells `0–6 ∪ 174–180`).** No packing of eleven unit squares
+in `[0, 96/25]²` has every folded angle in `[0°, 1.7139°] ∪ [43.5293°, 45°]` — exactly,
+the closed set of angles whose tangent lies in `[0, 40385865000000/1349699746833857] ∪
+[1077991935000000/1134804266494367, 1]`. Equivalently every packing of eleven at side at
+most `3.84` has a square whose folded angle lies in `(1.7139°, 43.5293°)`, farther than
+`1.7139°` from `0°` and than `1.4707°` from `45°`; `α + β = 3.1846° ≥ 3°`, which is
+H-130’s criterion.
+
+*Proof.* The composition-`(11, 0)` class program on the `79 × 79` inset-`1/10` grid
+converged in 49 rounds; its rationalised measure (152 atoms, `D4`-closed) has total mass
+`5529/512 = 10.798828125`, the exact event-cell sweep reports least covered mass
+`4099/4096 ≥ 1` on every one of the fourteen class directions, and Conditions 3 and 4
+hold for the net (`B(1 + D) = 899996306539/900000000000 < 1`). Each square of a packing
+contains its closed `B`-core at the net direction whose cell holds its angle; if all
+eleven angles lay in the class, eleven pairwise disjoint cores would each carry mass at
+least one, total at least eleven, against `10.7988`. ∎
+
+**Theorem B (the widest band decided here; cells `0–39 ∪ 174–180`).** No packing of
+eleven unit squares in `[0, 96/25]²` has every folded angle in
+`[0°, 10.3875°] ∪ [43.5293°, 45°]` — tangent in `[0, 12271089750000/66942386977163] ∪
+[1077991935000000/1134804266494367, 1]`. Equivalently every packing of eleven at side at
+most `3.84` has a square whose folded angle lies in `(10.3875°, 43.5293°)`, and so, with
+Theorem 1.12, a square with folded tilt in `(10.3875°, 43.5293°)` and a square with
+folded tilt below `30.0149°` (possibly the same square).
+Here `α + β = 11.8582°`.
+
+*Proof.* The same program converged in 41 rounds; the rationalised measure (216 atoms)
+has mass `351/32 = 10.96875`, least covered core `4101/4096` over the forty-seven class
+directions, Conditions 1, 3, 4 hold; eleven disjoint cores in the class are impossible.
+∎
+
+Theorem B contains Theorem A and every `(a, 7)` row of the table; Theorem A is kept as
+the statement H-130 asked for, with its own smaller certificate.
+Neither theorem uses Stromquist’s Theorem 3 or its lemmas 7–8. Trump’s packing (six
+squares at `0°`, five at `40.18°`) satisfies both with room, as it must: its five tilted
+squares lie in `(10.39°, 43.53°)`.
+
+**Theorem C (the widest band decided here, grid 119; cells `0–39 ∪ 172–180`).** No
+packing of eleven unit squares in `[0, 96/25]²` has every folded angle in
+`[0°, 10.3875°] ∪ [43.0737°, 45°]` — tangent in `[0, 12271089750000/66942386977163] ∪
+[177594252500000/189956166180167, 1]`. Equivalently every packing of eleven at side at
+most `3.84` has a square whose folded angle lies in `(10.3875°, 43.0737°)`;
+`α + β = 12.3138°`.
+
+*Proof.* The same program on `build_site_grid(96/25, 119, 1/10)` converged in 81 rounds;
+the rationalised measure (296 atoms) has mass `11083/1024 = 10.8232421875`, least
+covered core `4101/4096` over the forty-nine class directions, Conditions 1, 3, 4 hold
+(`widen_ext_g119.jsonl`); eleven disjoint cores in the class are impossible.
+∎
+
+Theorem C contains Theorem B; the grid-119 table in the refinement section carries the
+symmetric companion `(12, 12)` and the intermediate `(40, 8)`.
+
+**Corollary (a two-sided count).** At `96/25` the near-axis count and the end band
+combine: in any packing of eleven at most ten squares are within `10.3875°` of the axes
+(replay row `0–39`), and the remaining square or squares cannot all be within `1.4707°`
+of `45°` either — the band `[0°, 10.3875°] ∪ [43.5293°, 45°]` holds at most ten squares,
+`⌊10.96875⌋`.
+
+### Widening the robust end band at 96/25
+
+The class is `[0°, α(a)] ∪ [45° − β(b), 45°]` for `a` leading and `b` trailing cells,
+with `α(a)` the exact upper tangent of cell `a − 1` and `45° − β(b)` the exact lower
+tangent of cell `181 − b` (both closed).
+Symmetric widening first, `a = b`, from the planning lane’s `a = b = 6`; then, from the
+widest symmetric success, one end held and the other pushed.
+Every point is the same search and the same exact decision as the replay rows.
+
+| `(a, b)` | band, closed | `α + β` | rounds | float `M` | exact `M` | least core | verdict (grid 79) | wall |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `(6, 6)` | `[0°, 1.4503°] ∪ [43.7565°, 45°]` | `2.6937°` | 29 | 10.6866 | `10959/1024 = 10.70215` | `1025/1024` | **refuted** (Theorem 1.11, replayed) | 5 s |
+| `(7, 7)` | `[0°, 1.7139°] ∪ [43.5293°, 45°]` | `3.1846°` | 49 | 10.7761 | `5529/512 = 10.79883` | `4099/4096` | **refuted** | 18 s |
+| `(8, 8)` | `[0°, 1.9775°] ∪ [43.3017°, 45°]` | `3.6759°` | 37 | 11.0000 | `5637/512 = 11.00977` | `4099/4096` | not refuted: Condition 2′ fails | 13 s |
+| `(7, 8)` | `[0°, 1.7139°] ∪ [43.3017°, 45°]` | `3.4122°` | 24 | 11.0000 | `45109/4096 = 11.01294` | `2049/2048` | not refuted: Condition 2′ fails | 5 s |
+| `(8, 7)` | `[0°, 1.9775°] ∪ [43.5293°, 45°]` | `3.4482°` | 36 | 10.7761 | `5529/512 = 10.79883` | `4099/4096` | **refuted** | 10 s |
+| `(9, 7)` | `[0°, 2.2411°] ∪ [43.5293°, 45°]` | `3.7118°` | 50 | 10.7761 | `11061/1024 = 10.80176` | `4101/4096` | **refuted** | 21 s |
+| `(10, 7)` | `[0°, 2.5047°] ∪ [43.5293°, 45°]` | `3.9754°` | 44 | 10.7761 | `5533/512 = 10.80664` | `4099/4096` | **refuted** | 18 s |
+| `(11, 7)` | `[0°, 2.7683°] ∪ [43.5293°, 45°]` | `4.2390°` | 42 | 10.7761 | `5531/512 = 10.80273` | `4099/4096` | **refuted** | 13 s |
+| `(12, 7)` | `[0°, 3.0318°] ∪ [43.5293°, 45°]` | `4.5025°` | 37 | 10.7761 | `11059/1024 = 10.79980` | `4099/4096` | **refuted** | 12 s |
+| `(13, 7)` | `[0°, 3.2953°] ∪ [43.5293°, 45°]` | `4.7660°` | 38 | 10.7761 | `11059/1024 = 10.79980` | `4099/4096` | **refuted** | 15 s |
+| `(14, 7)` | `[0°, 3.5588°] ∪ [43.5293°, 45°]` | `5.0295°` | 37 | 10.7761 | `11059/1024 = 10.79980` | `4099/4096` | **refuted** | 19 s |
+| `(15, 7)` | `[0°, 3.8222°] ∪ [43.5293°, 45°]` | `5.2929°` | 44 | 10.7761 | `11061/1024 = 10.80176` | `4099/4096` | **refuted** | 24 s |
+| `(16, 7)` | `[0°, 4.0856°] ∪ [43.5293°, 45°]` | `5.5563°` | 38 | 10.7761 | `11059/1024 = 10.79980` | `4099/4096` | **refuted** | 18 s |
+| `(17, 7)` | `[0°, 4.3489°] ∪ [43.5293°, 45°]` | `5.8196°` | 43 | 10.7761 | `11067/1024 = 10.80762` | `4099/4096` | **refuted** | 18 s |
+| `(18, 7)` | `[0°, 4.6122°] ∪ [43.5293°, 45°]` | `6.0829°` | 43 | 10.7761 | `11059/1024 = 10.79980` | `4099/4096` | **refuted** | 19 s |
+| `(19, 7)` | `[0°, 4.8754°] ∪ [43.5293°, 45°]` | `6.3462°` | 46 | 10.7761 | `1383/128 = 10.80469` | `4101/4096` | **refuted** | 31 s |
+| `(22, 7)` | `[0°, 5.6649°] ∪ [43.5293°, 45°]` | `7.1356°` | 45 | 10.7761 | `11057/1024 = 10.79785` | `4099/4096` | **refuted** | 35 s |
+| `(25, 7)` | `[0°, 6.4537°] ∪ [43.5293°, 45°]` | `7.9244°` | 39 | 10.7761 | `691/64 = 10.79688` | `4099/4096` | **refuted** | 28 s |
+| `(30, 7)` | `[0°, 7.7671°] ∪ [43.5293°, 45°]` | `9.2378°` | 34 | 10.7761 | `11065/1024 = 10.80566` | `4101/4096` | **refuted** | 24 s |
+| `(35, 7)` | `[0°, 9.0785°] ∪ [43.5293°, 45°]` | `10.5492°` | 39 | 10.7761 | `11057/1024 = 10.79785` | `4099/4096` | **refuted** | 41 s |
+| `(40, 7)` | `[0°, 10.3875°] ∪ [43.5293°, 45°]` | `11.8582°` | 41 | 10.9311 | `351/32 = 10.96875` | `4101/4096` | **refuted** | 52 s |
+| `(6, 8)` | `[0°, 1.4503°] ∪ [43.3017°, 45°]` | `3.1486°` | 37 | 11.0000 | `11277/1024 = 11.01270` | `2049/2048` | not refuted: Condition 2′ fails | 8 s |
+| `(1, 8)` | `[0°, 0.1318°] ∪ [43.3017°, 45°]` | `1.8302°` | 22 | 11.0000 | `11277/1024 = 11.01270` | `4099/4096` | not refuted: Condition 2′ fails | 3 s |
+| `(1, 10)` | `[0°, 0.1318°] ∪ [42.8453°, 45°]` | `2.2865°` | 39 | 11.1394 | `11423/1024 = 11.15527` | `1025/1024` | not refuted: Condition 2′ fails | 6 s |
+| `(3, 8)` | `[0°, 0.6592°] ∪ [43.3017°, 45°]` | `2.3576°` | 24 | 11.0000 | `1411/128 = 11.02344` | `4101/4096` | not refuted: Condition 2′ fails | 3 s |
+
+The rationalised atoms of every refuted row carry `D4` symmetry, Conditions 3 and 4 hold
+for the net (`B(1 + D) = 0.99770… < 1`), and the least core mass over every class
+direction is at least one; the verdicts are in `widen_g79.jsonl` and `widen_ext.jsonl`
+in the session scratchpad with the atom counts (93 to 216 atoms per point).
+
+### Where the obstruction lives in angle: the dual’s support
+
+For a class whose grid-79 value stays at or above eleven, the LP dual on the rows the
+loop generated is a fractional packing on the site set: weights `y_r ≥ 0` on placements
+(`B`-cores at class directions) with `Σ_r y_r A[r, a] ≤ |a|` for every `D4` orbit `a` of
+sites, and `Σ_r y_r = M` at optimality.
+Equivalently the `D4`-symmetrised family (each row’s eight images at weight `y_r / 8`)
+has depth at most one at every site.
+That is a site-set object: depth at most one *between* sites is not implied, and the
+honest continuum value is `M / d` for the exact maximum depth `d` that `ceiling.py`
+decides. The angular support below is the dual read by the direction of its rows
+(`histogram.py`; `hist.json` in the scratchpad holds each family with its centres).
+
+| class | folded set | `M` (grid 79) | support rows | `[0°, 2.5°)` | `[38.2°, 40.77°)` | `[40.77°, 42.5°)` | `[42.5°, 45°]` |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `0–5 ∪ 151–180` | `[0°, 1.4503°] ∪ [38.2049°, 45°]` (contains `40.194°`) | 11.2535, converged in 25 rounds | 29 | 7.472 | 1.775 | 0.465 | 1.542 |
+| `0–7 ∪ 173–180` | `[0°, 1.9775°] ∪ [43.3017°, 45°]` (first symmetric failure) | 11.0000, converged in 33 rounds | 8 | 6.000 | — | — | 5.000 |
+| `0–6 ∪ 173–180` | `[0°, 1.7139°] ∪ [43.3017°, 45°]` | 11.0000, converged in 20 rounds | 5 | 8.000 | — | — | 3.000 |
+| `0–5 ∪ 149–180` | `[0°, 1.4503°] ∪ [37.7333°, 45°]` (Trump band `±2.44°` and the diagonal end) | 11.2535, converged in 30 rounds | 30 | 7.465 | 1.141 (and 0.535 in `[35°, 38.2°)`) | 0.451 | 1.662 |
+
+By direction, the band toward `40.19°` carries `6.739` at direction `0` (exactly
+axis-parallel), `0.155` at `0.79°`, `0.578` at `1.32°`, then `0.761` at `38.32°`,
+`0.437` at `39.03°`, `0.338` at `40.19°` itself, `0.183` at `40.89°`, `0.211` at
+`41.35°`, `0.366` at `42.73°`, `0.296` at `43.19°`, `0.254` at `43.42°`, `0.549` at
+`44.32°`, and small remainders.
+Seven and a half units of the eleven-and-a-quarter sit within `1.32°` of the axis and
+the other three and three-quarters are spread over the whole of `[38.2°, 45°]` rather
+than concentrated at Trump’s angle: the mass at `40.19° ± 0.5°` is `0.45`.
+
+The two end-band failures are sharper.
+At `(8, 8)` the dual is eight rows of integer weight summing to exactly eleven: five
+units at direction `0`, one at `0.26°`, two at `43.42°`, one each at `43.64°`, `43.87°`
+and `44.32°` — six near the axis and five near `45°`, Trump’s composition.
+At `(7, 8)` it is five rows, again integral, eight near the axis (six at `0°`, two at
+`0.79°`) and three near `45°`. Both are `D4`-symmetrised fractional families (a corner
+core of weight three, for instance, is three quarters of a core at each of the four
+corners), not packings of eleven squares; and since `96/25 ÷ (9977/10000) = 3.8489` is
+below every known side for eleven unit squares, no family of eleven disjoint `B`-cores
+exists in the container at all.
+The site-set dual can still reach eleven because two cores may overlap by up to a site
+spacing (`(96/25 − 1/5)/78 = 0.0467`) without sharing a site.
+
+`ceiling.py` decides that reading exactly (`ceiling_check.py`: the symmetrised family as
+a `CeilingCertificate` in the `net` regime, `scaled_to_unit_depth`, then
+`verify_ceiling`). All three duals fail as continuum obstructions, and by a wide margin:
+
+| dual | rows, placements | raw total | exact maximum depth | scaled total | K2 depth ≤ 1 after scaling | K3 total ≥ 11 |
+| --- | --- | --- | --- | --- | --- | --- |
+| `0–7 ∪ 173–180`, `(8, 8)` | 8, 64 | 11 | `2` | `11/2` | holds (13 488 vertices, 327 decided exactly) | fails |
+| `0–6 ∪ 173–180`, `(7, 8)` | 5, 40 | 11 | `2` | `11/2` | holds (4 488 vertices) | fails |
+| `0–5 ∪ 151–180`, toward `40.19°` | 29, 232 | 11.2535 | `1291/568 = 2.2729` | `6392/1291 = 4.9512` | holds (220 532 vertices, 1 514 decided exactly) | fails |
+
+A depth of exactly two is two cores of the integral family overlapping in a region that
+contains no site; at grid 79 the site spacing is `0.0467` and a `B`-core is `0.9977`
+wide, so that is the expected failure mode.
+The reading for the cell’s question is therefore: on grid 79, every band whose value
+stays at or above eleven is stopped by a near-integral, Trump-composition family that is
+*not* a fractional packing of the continuum; the obstruction the site set shows is an
+artefact of the site set, not of the relaxation, and the true class covering values of
+these bands are open from below.
+The grid-119 refinement below confirms it for the two end bands.
+For the band toward `40.19°` the honest obstruction, if one exists, has to come from a
+continuum family (`BC-294`’s cutting-plane loop with the disjointness filter, or a
+hand-built family) and not from a site-set dual; nothing here shows that band to be
+unclosable.
+
+### One refinement: grid 119
+
+The site set, not the relaxation, stopped the diagonal end on grid 79, so the failing
+points were rerun on `build_site_grid(96/25, 119, 1/10)` (`14 161` sites), everything
+else unchanged.
+
+| `(a, b)` | band, closed | `α + β` | grid | rounds | float `M` | exact `M` | least core | verdict | wall |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `(8, 8)` | `[0°, 1.9775°] ∪ [43.3017°, 45°]` | `3.6759°` | 119 | 52 | 10.7012 | `43857/4096 = 10.70728` | `4097/4096` | **refuted** | 52 s |
+| `(7, 8)` | `[0°, 1.7139°] ∪ [43.3017°, 45°]` | `3.4122°` | 119 | 54 | 10.7012 | `43865/4096 = 10.70923` | `4097/4096` | **refuted** | 50 s |
+| `(7, 7)` | `[0°, 1.7139°] ∪ [43.5293°, 45°]` | `3.1846°` | 119 | 53 | 10.7012 | `43857/4096 = 10.70728` | `4097/4096` | **refuted** | 42 s |
+| `(9, 9)` | `[0°, 2.2411°] ∪ [43.0737°, 45°]` | `4.1675°` | 119 | 40 | 10.7017 | `43951/4096 = 10.73022` | `2051/2048` | **refuted** | 27 s |
+| `(10, 10)` | `[0°, 2.5047°] ∪ [42.8453°, 45°]` | `4.6594°` | 119 | 46 | 10.7017 | `43951/4096 = 10.73022` | `2051/2048` | **refuted** | 45 s |
+| `(40, 8)` | `[0°, 10.3875°] ∪ [43.3017°, 45°]` | `12.0858°` | 119 | 86 | 10.7981 | `11085/1024 = 10.82520` | `2051/2048` | **refuted** | 474 s |
+| `(11, 11)` | `[0°, 2.7683°] ∪ [42.6166°, 45°]` | `5.1516°` | 119 | 50 | 10.7017 | `43951/4096 = 10.73022` | `1025/1024` | **refuted** | 56 s |
+| `(40, 9)` | `[0°, 10.3875°] ∪ [43.0737°, 45°]` | `12.3138°` | 119 | 81 | 10.7981 | `11083/1024 = 10.82324` | `4101/4096` | **refuted** | 584 s |
+| `(12, 12)` | `[0°, 3.0318°] ∪ [42.3876°, 45°]` | `5.6442°` | 119 | 47 | 10.7351 | `11033/1024 = 10.77441` | `4101/4096` | **refuted** | 109 s |
+
+Grid 119 refutes `(8, 8)`, which grid 79 could not, lowers the value of `(7, 7)` from
+`10.799` to `10.707`, and then keeps going: every symmetric point through `(12, 12)` —
+`[0°, 3.0318°] ∪ [42.3876°, 45°]`, `α + β = 5.6442°`, mass `11033/1024 = 10.7744` — is
+refuted, and so are `(40, 8)` and `(40, 9)`, the latter being Theorem C above with
+`α + β = 12.3138°`. The `(13, 13)` and `(40, 10)` points were cut off by the clock, not
+decided, so the grid-119 rung lies at or beyond `(12, 12)` and `(40, 9)`. The widest
+exact-decided band is therefore a property of the site set as much as of the side, every
+non-refutation in the grid-79 table is a grid-79 reading only, and the ladder’s true
+rung at `96/25` lies beyond every point either grid decided.
+A finer site set needs nothing new in code; its cost is the row loop, not the exact
+sweep — the symmetric points took 27 to 109 s at grid 119 on this loaded machine and the
+`(40, b)` points 474 and 584 s, with the exact decision under four seconds in every
+case. The axis end is different — its limit is the near-axis saturation (`[0°, 13°]`
+alone is already at eleven on grid 79, planning report §2.3) — and the last points
+decided at grid 79 are:
+
+| `(a, b)` | band, closed | `α + β` | rounds | float `M` | exact `M` | least core | verdict (grid 79) | wall |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `(43, 7)` | `[0°, 11.1716°] ∪ [43.5293°, 45°]` | `12.6423°` | 59 | 11.0000 | `11275/1024 = 11.01074` | `1025/1024` | not refuted: Condition 2′ fails | 72 s |
+| `(45, 7)` | `[0°, 11.6937°] ∪ [43.5293°, 45°]` | `13.1644°` | 28 | 11.0891 | `11371/1024 = 11.10449` | `4099/4096` | not refuted: Condition 2′ fails | 24 s |
+| `(47, 7)` | `[0°, 12.2154°] ∪ [43.5293°, 45°]` | `13.6861°` | 39 | 11.0898 | `22747/2048 = 11.10693` | `1025/1024` | not refuted: Condition 2′ fails | 34 s |
+| `(49, 7)` | `[0°, 12.7366°] ∪ [43.5293°, 45°]` | `14.2073°` | 36 | 11.0898 | `5689/512 = 11.11133` | `2051/2048` | not refuted: Condition 2′ fails | 28 s |
+| `(41, 7)` | `[0°, 10.6489°] ∪ [43.5293°, 45°]` | `12.1197°` | 82 | 11.0000 | `11293/1024 = 11.02832` | `4099/4096` | not refuted: Condition 2′ fails | 126 s |
+| `(42, 7)` | `[0°, 10.9103°] ∪ [43.5293°, 45°]` | `12.3810°` | 49 | 11.0000 | `11275/1024 = 11.01074` | `1025/1024` | not refuted: Condition 2′ fails | 49 s |
+
+### Obstructions
+
+- **The `45°` end is the binding end.** With seven trailing cells (`β = 1.4707°`) the
+  float value is pinned at `10.7761` for every axis width from `1.71°` to `9.08°`, and
+  the same measure works: the near-axis cores are pierced by the smeared nine-point
+  pattern at mass nine whatever the width, and the diagonal cores cost the rest.
+  The eighth trailing cell (`43.3017°`) tips grid 79 to eleven even with a single axis
+  cell; grid 119 takes it back.
+  A theorem with `β` beyond `1.47°` is a site-set question, not a relaxation question,
+  on the evidence here.
+- **The site-set dual is not an obstruction.** Every dual that reached eleven on grid 79
+  has continuum depth two or more; `ceiling.py` scales them to `5.5` and `4.95`. A
+  non-refutation on a grid remains what the planning report’s §3.2 said it is.
+- **Cost.** Wall times here ran at load average eight on four cores with one worker; the
+  `[30°, 45°]` replay took 1 149 s against 700 s in the planning lane.
+  The band toward `40.19°` converged in 25 rounds and 16 s on grid 79 (the planning
+  lane’s 80-round cap on the trailing-30 class alone was the slow case, not this union),
+  so a grid-119 run of it is affordable next.
+- **Not done.** `(13, 13)` and `(40, 10)` at grid 119 were cut off by the clock, so
+  neither end is known to be exhausted there; the single trailing-six class at `96/25`
+  stays undecided on its own (implied by the trailing-ten count); no continuum family
+  was built for any band.
+  A note on method: the queue that ran grid 119 piped its output through `grep`, whose
+  block-buffered file output hid the finished rows until the end, so the session
+  believed for half an hour that `(9, 9)` had stalled; the `jsonl` logs, written per
+  point, are the record.
+
+### Status recommended for H-130 and H-131
+
+- **H-130**: confirmed as stated, exact-decided — Theorem A gives `α + β = 3.1846°` on
+  grid 79, Theorem B `11.8582°` on grid 79, and Theorem C `12.3138°` on grid 119 (with
+  the symmetric `5.6442°` of `(12, 12)` there).
+  Frozen claims, need exp ids.
+  The hypothesis text should be read with its domain: closed folded ranges, the tangent
+  bounds above, `B = 9977/10000`, the retained net.
+- **H-131**: the registered replay is complete and every count reproduces to the
+  fraction on the stated site set; the counts can now be cited as results of this
+  record. Frozen claim, needs exp id (one record for the five `96/25` counts and the
+  three `U` counts, or the replay table here cited directly).
+
+### What the next session should do first
+
+1. Continue the end band at grid 119 (and 159) from `(13, 13)` and `(40, 10)` until
+   Condition 2′ fails; symmetric points are one to two minutes at grid 119, the
+   `(40, b)` points about ten.
+   Freeze the widest success with its atoms.
+2. Run the band toward `40.19°` (`0–5 ∪ 151–180`, and `0–39 ∪ 151–180`) at grid 119; if
+   it stays above eleven, build the family in the continuum (`BC-294`’s loop with the
+   disjointness filter) and verify it with `ceiling.py` before calling it an
+   obstruction.
+3. Allocate the experiment ids for Theorems A and B and the replay, and move H-130 and
+   H-131 to the status the registry uses for exact-decided claims.
+
+### Appendix: scripts as run (session-102)
+
+All scripts live in the session scratchpad and import the repository’s `sqpack` from the
+lane worktree; they were run from `packing/` as
+`PACK_JOBS=1 OMP_NUM_THREADS=1 uv run --frozen --all-extras --group dev python <script>`.
+
+#### `bandlib.py`
+
+```text
+"""Lane BC-295 (session-102): band classes at 96/25 with the repository's class program.
+
+Every decision is `decide_class_program` on rationalised atoms at thresholds (1, 0) for the
+composition (11, 0); the float search only proposes. `solve_rows` mirrors the row loop of
+`solve_class_program` at w0 = 1 and keeps each row's direction so the LP dual can be read
+as a fractional packing by angle (the histogram the cell asks for). Nothing here is retained.
+"""
+
+from __future__ import annotations
+
+import json
+import math
+import time
+from fractions import Fraction
+from pathlib import Path
+
+import numpy as np
+from scipy.optimize import linprog
+
+from sqpack.fractional.classcert import (
+    ClassThresholds,
+    Composition,
+    DirectionClasses,
+    decide_class_program,
+    solve_class_program,
+)
+from sqpack.fractional.generate import (
+    LP_FEASIBILITY,
+    build_site_grid,
+    direction_net,
+    net_half_tangents,
+    placement_cells,
+    rationalise,
+)
+from sqpack.project import require_project_root
+
+NET_SOURCE = Path("cases/n11_fractional_certificate/certificate.json")
+Q = Fraction(96, 25)
+U = Fraction(3877084, 10**6)
+
+
+def load_net():
+    root = require_project_root()
+    spec = json.loads((root / NET_SOURCE).read_text())
+    limit = Fraction(spec["angle_limit"])
+    steps = int(spec["direction_steps"])
+    return net_half_tangents(limit, steps), Fraction(spec["square_side"])
+
+
+def deg(t: Fraction) -> float:
+    return math.degrees(math.atan(float(t)))
+
+
+def parse_cells(spec: str) -> frozenset[int]:
+    cells: set[int] = set()
+    for r in spec.split(","):
+        lo, hi = r.split("-")
+        cells |= set(range(int(lo), int(hi) + 1))
+    return frozenset(cells)
+
+
+def folded_ranges(classes: DirectionClasses, cells: frozenset[int]) -> list[tuple[int, int, float, float]]:
+    """Maximal runs of cells with their exact-tangent bounds in degrees."""
+    runs = []
+    for c in sorted(cells):
+        if runs and runs[-1][1] == c - 1:
+            runs[-1][1] = c
+        else:
+            runs.append([c, c])
+    return [
+        (lo, hi, deg(classes.cell_bounds(lo)[0]), deg(classes.cell_bounds(hi)[1]))
+        for lo, hi in runs
+    ]
+
+
+def run_class(
+    ht, shrink, side: Fraction, cells: frozenset[int], *, grid_count: int = 79,
+    inset: Fraction = Fraction(1, 10), max_rounds: int = 100, scale: int = 4096, name: str = "",
+) -> dict:
+    """Float search then the exact decision of the reached point at thresholds (1, 0)."""
+    classes = DirectionClasses(ht, cells)
+    grid = build_site_grid(side, grid_count, inset)
+    comp = Composition(11, 0)
+    t0 = time.perf_counter()
+    weights, log = solve_class_program(grid, shrink, classes, comp, max_rounds=max_rounds)
+    t_float = time.perf_counter() - t0
+    rec = {
+        "name": name, "side": str(side), "grid": grid_count, "inset": str(inset),
+        "sites": len(grid.positions()), "orbits": len(grid.orbits), "shrink": str(shrink),
+        "net": {"cells": len(ht), "limit": str(ht[-1]), "steps": len(ht) - 1},
+        "cells": sorted(cells), "ncells": len(cells),
+        "ranges_deg": folded_ranges(classes, cells),
+        "ranges_tan": [
+            [str(classes.cell_bounds(lo)[0]), str(classes.cell_bounds(hi)[1])]
+            for lo, hi, _, _ in folded_ranges(classes, cells)
+        ],
+        "composition": [11, 0], "max_rounds": max_rounds, "rounds": log.rounds,
+        "rows": log.rows, "stopped": log.stopped, "scale": scale,
+        "float_M_at_w0_1": (log.objective / log.thresholds[0]) if log.thresholds[0] > 0 else None,
+        "float_seconds": round(t_float, 1),
+    }
+    if log.thresholds[0] > 0:
+        atoms = rationalise(grid, weights / log.thresholds[0], scale=scale)
+        t1 = time.perf_counter()
+        v = decide_class_program(
+            atoms, side, shrink, classes, comp, thresholds=ClassThresholds(Fraction(1), Fraction(0))
+        )
+        t_exact = time.perf_counter() - t1
+        M = v.total_mass
+        holds_5 = all(c.holds for c in v.conditions if not c.name.startswith("Condition 2'"))
+        rec["exact"] = {
+            "atoms": len(atoms), "M": str(M), "M_float": float(M),
+            "floor_M": math.floor(M),
+            "conditions": [(c.name, c.holds, c.detail) for c in v.conditions],
+            "failures": list(v.failures),
+            "refutes_11_0": v.refutes,
+            "count_bound": math.floor(M) if holds_5 else None,
+            "minima": [(m.label, str(m.mass), float(m.mass), m.direction) for m in v.minima if m.mass is not None],
+            "exact_seconds": round(t_exact, 1),
+        }
+    return rec
+
+
+def solve_rows(ht, shrink, side: Fraction, cells: frozenset[int], *, grid_count: int = 79,
+               inset: Fraction = Fraction(1, 10), max_rounds: int = 100, rows_per_direction: int = 3,
+               tolerance: float = 1e-9):
+    """The composition-(11, 0) row loop at w0 = 1, keeping each row's direction and centre.
+
+    Returns (weights, rows, row_dirs, row_centres, duals, objective, stopped, rounds).
+    The dual y >= 0 on rows satisfies sum_r y_r A[r, a] <= |orbit a| for every orbit a and
+    sum_r y_r = objective at optimality: a fractional packing of B-cores at class directions
+    with depth at most one on the site set, whose value is the class covering value on this
+    site set.
+    """
+    classes = DirectionClasses(ht, cells)
+    grid = build_site_grid(side, grid_count, inset)
+    positions = grid.positions()
+    points = np.array([[float(x), float(y)] for x, y in positions])
+    sizes = np.array([len(o) for o in grid.orbits], dtype=float)
+    membership = np.zeros(len(positions), dtype=int)
+    cursor = 0
+    for index, orbit in enumerate(grid.orbits):
+        membership[cursor: cursor + len(orbit)] = index
+        cursor += len(orbit)
+    directions = direction_net(ht)
+    outer, sq = float(side), float(shrink)
+    rows: list[np.ndarray] = []
+    row_dirs: list[int] = []
+    row_centres: list[tuple[float, float]] = []
+    held: set[bytes] = set()
+    weights = np.zeros(len(grid.orbits))
+    duals = np.zeros(0)
+    objective = float("inf")
+    stopped = ""
+    rounds = 0
+    for round_index in range(max_rounds):
+        rounds = round_index + 1
+        site_weights = weights[membership]
+        violated = added = 0
+        least_slack = float("inf")
+        for index in sorted(cells):
+            direction = directions[index]
+            for mass, u, v, covers in placement_cells(points, site_weights, direction, outer, sq, keep=rows_per_direction):
+                if mass >= 1.0 - tolerance:
+                    break
+                row = np.zeros(len(grid.orbits))
+                np.add.at(row, membership[covers], 1.0)
+                if row.sum() == 0:
+                    stopped = "a placement covers no site"
+                    return weights, rows, row_dirs, row_centres, duals, objective, stopped, rounds
+                violated += 1
+                least_slack = min(least_slack, 1.0 - mass)
+                key = row.tobytes()
+                if key not in held:
+                    held.add(key)
+                    rows.append(row)
+                    row_dirs.append(index)
+                    row_centres.append((float(u), float(v)))
+                    added += 1
+        if violated == 0 or (added == 0 and least_slack <= LP_FEASIBILITY):
+            objective = float(sizes @ weights)
+            stopped = "converged"
+            break
+        if added == 0:
+            stopped = f"held row short by {least_slack:.3e}"
+            break
+        A = np.vstack(rows)
+        res = linprog(c=sizes, A_ub=-A, b_ub=-np.ones(len(rows)), bounds=[(0.0, None)] * len(sizes), method="highs")
+        if not res.success:
+            stopped = "LP refused"
+            break
+        weights = np.asarray(res.x, dtype=float)
+        objective = float(res.fun)
+        duals = -np.asarray(res.ineqlin.marginals, dtype=float)
+    else:
+        stopped = f"round limit {max_rounds}"
+    return weights, rows, row_dirs, row_centres, duals, objective, stopped, rounds
+
+
+def histogram(ht, row_dirs, duals, bins_deg=(0, 2.5, 5, 7.5, 10, 15, 20, 25, 30, 35, 38.2, 40.77, 42.5, 45.0001)):
+    """Dual weight by direction cell and by coarse folded-angle bin."""
+    by_dir: dict[int, float] = {}
+    for d, y in zip(row_dirs, duals):
+        if y > 1e-12:
+            by_dir[d] = by_dir.get(d, 0.0) + float(y)
+    angles = {d: 2 * math.degrees(math.atan(float(ht[d]))) for d in by_dir}
+    by_bin = {}
+    for d, y in by_dir.items():
+        a = angles[d]
+        for lo, hi in zip(bins_deg[:-1], bins_deg[1:]):
+            if lo <= a < hi:
+                key = f"[{lo}, {hi if hi < 45.0001 else 45}{')' if hi < 45.0001 else ']'}"
+                by_bin[key] = by_bin.get(key, 0.0) + y
+                break
+    return {"total": float(sum(by_dir.values())), "by_direction": {str(d): (round(angles[d], 3), round(y, 4)) for d, y in sorted(by_dir.items())}, "by_bin": {k: round(v, 4) for k, v in by_bin.items()}}
+```
+
+#### `replay.py`
+
+```text
+"""Registered replay of the planning lane's decisions (H-131 counts and the end bands)."""
+import json, sys, time
+from fractions import Fraction
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent))
+from bandlib import Q, U, load_net, parse_cells, run_class
+
+ht, B = load_net()
+out = Path(sys.argv[1])
+jobs = [
+    # name, side, cells, rounds, planning-lane claim
+    ("q_lead25_axis_6.45", Q, "0-24", 100, "<= 9 within 6.4537 deg; planning exact 9.00586"),
+    ("q_lead40_axis_10.39", Q, "0-39", 100, "<= 10 within 10.3875 deg; planning exact 10.5127"),
+    ("q_end6_axis_1.45", Q, "0-5", 100, "end band [0, 1.4503]; planning exact 9.00391"),
+    ("q_trail6_45_1.24", Q, "175-180", 100, "end band [43.7565, 45]; planning float 9.623, not exact-decided"),
+    ("q_union_0-5_175-180_T1.11", Q, "0-5,175-180", 100, "Theorem 1.11; planning exact 10.70215"),
+    ("U_lead25_axis_6.45", U, "0-24", 100, "<= 9 at U; planning exact 9.82910"),
+    ("U_lead30_axis_7.77", U, "0-29", 100, "<= 10 at U; planning exact 10.00293"),
+    ("U_trail6_45_1.24", U, "175-180", 100, "<= 10 at U; planning exact 10.15820"),
+    ("q_trail10_45_2.155", Q, "171-180", 100, "<= 9 within 2.155 of 45; planning exact 9.75488"),
+    ("q_trump_149-169_pm2.44", Q, "149-169", 100, "<= 10 within 2.44 of 40.19; planning exact 10.13892"),
+    ("q_tilt_ge_30.01", Q, "117-180", 100, "<= 10 in [30.0149, 45]; planning exact 10.39771"),
+]
+only = set(sys.argv[2:])
+with out.open("a") as h:
+    for name, side, spec, rounds, claim in jobs:
+        if only and name not in only:
+            continue
+        t0 = time.perf_counter()
+        rec = run_class(ht, B, side, parse_cells(spec), max_rounds=rounds, name=name)
+        rec["planning_claim"] = claim
+        rec["wall_seconds"] = round(time.perf_counter() - t0, 1)
+        h.write(json.dumps(rec) + "\n"); h.flush()
+        ex = rec.get("exact", {})
+        print(f"{name:32s} side {float(side):.6f} cells {rec['ncells']} {rec['ranges_deg']} float {rec['float_M_at_w0_1']} rounds {rec['rounds']} {rec['stopped']} | exact M {ex.get('M')} = {ex.get('M_float')} count<= {ex.get('count_bound')} refutes(11,0) {ex.get('refutes_11_0')} fail {ex.get('failures')} min {ex.get('minima')} | {rec['wall_seconds']}s", flush=True)
+```
+
+#### `widen.py`
+
+```text
+"""Widen the robust end band [0, alpha] U [45 - beta, 45] at 96/25 on grid 79, cell by cell.
+
+Symmetric first (k leading cells and k trailing cells), until Condition 2' fails; then
+asymmetric from the widest symmetric success: hold one end and push the other. Each point
+is exact-decided regardless of convergence (the exact sweep is complete; the loop's rows
+are a subset). Usage: widen.py OUT.jsonl [grid] [k_lo] [k_hi]
+"""
+import json, sys, time
+from fractions import Fraction
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent))
+from bandlib import Q, load_net, run_class
+
+ht, B = load_net()
+n = len(ht)
+out = Path(sys.argv[1])
+grid = int(sys.argv[2]) if len(sys.argv) > 2 else 79
+k_lo = int(sys.argv[3]) if len(sys.argv) > 3 else 7
+k_hi = int(sys.argv[4]) if len(sys.argv) > 4 else 13
+rounds = 100
+
+
+def band(a: int, b: int) -> frozenset[int]:
+    return frozenset(range(a)) | frozenset(range(n - b, n))
+
+
+def run(name, a, b):
+    t0 = time.perf_counter()
+    rec = run_class(ht, B, Q, band(a, b), grid_count=grid, max_rounds=rounds, name=name)
+    rec["lead"] = a; rec["trail"] = b
+    rec["wall_seconds"] = round(time.perf_counter() - t0, 1)
+    with out.open("a") as h:
+        h.write(json.dumps(rec) + "\n")
+    ex = rec.get("exact", {})
+    r = rec["ranges_deg"]
+    alpha = r[0][3]; beta = 45.0 - r[-1][2]
+    ok = ex.get("refutes_11_0")
+    print(f"{name:22s} grid {grid} lead {a} trail {b} alpha {alpha:.4f} beta {beta:.4f} sum {alpha+beta:.4f} | float {rec['float_M_at_w0_1']:.5f} rounds {rec['rounds']} {rec['stopped'][:9]} | exact M {ex.get('M')} = {ex.get('M_float')} refutes {ok} fail {ex.get('failures')} min {ex.get('minima')} | {rec['wall_seconds']}s", flush=True)
+    return bool(ok), alpha, beta
+
+
+# Symmetric.
+best = None
+for k in range(k_lo, k_hi + 1):
+    ok, alpha, beta = run(f"sym_{k}", k, k)
+    if ok:
+        best = k
+    else:
+        break
+print(f"widest symmetric success on grid {grid}: k = {best}", flush=True)
+if best is None:
+    sys.exit(0)
+# Asymmetric: hold the trailing end at best, push the leading end; then the reverse.
+for a in range(best + 1, best + 12):
+    ok, alpha, beta = run(f"asym_lead_{a}_{best}", a, best)
+    if not ok:
+        break
+for b in range(best + 1, best + 12):
+    ok, alpha, beta = run(f"asym_trail_{best}_{b}", best, b)
+    if not ok:
+        break
+```
+
+#### `nine_replay.py`
+
+```text
+"""Replay of Theorem 1.5's nine-point control: the pushed set pierces the leading 18 cells at q."""
+import sys
+from fractions import Fraction
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent))
+from bandlib import Q, U, deg, load_net
+from sqpack.fractional.model import Atom
+from sqpack.fractional.classcert import Composition, DirectionClasses, class_minima
+
+ht, B = load_net()
+
+def nine(side, delta):
+    xs = (1 - delta, side / 2, side - 1 + delta)
+    return tuple(Atom(f"{i}{j}", xs[i], xs[j], Fraction(1)) for i in range(3) for j in range(3))
+
+def widest(side, atoms, kmax=30):
+    best, last = 0, None
+    for k in range(1, kmax + 1):
+        classes = DirectionClasses(ht, frozenset(range(k)))
+        m = class_minima(atoms, classes, Composition(11, 0), side, B)[0]
+        if m.mass is not None and m.mass >= 1:
+            best = k
+        else:
+            last = (k, str(m.mass), m.direction)
+            break
+    return best, last
+
+for name, side in (("q", Q), ("U", U)):
+    for delta in (Fraction(0), Fraction(1, 200), Fraction(1, 100)):
+        k, fail = widest(side, nine(side, delta))
+        upper = deg(DirectionClasses(ht, frozenset(range(max(k, 1)))).cell_bounds(k - 1)[1]) if k else 0.0
+        print(f"{name} delta {delta}: pierces leading {k} cells, folded tilt <= {upper:.4f} deg; first miss {fail}", flush=True)
+    grid_atoms = tuple(Atom(f"{i}{j}", side / 4 * i, side / 4 * j, Fraction(1)) for i in (1, 2, 3) for j in (1, 2, 3))
+    k, fail = widest(side, grid_atoms)
+    print(f"{name} L/4 grid control: leading {k} cells (<= {deg(DirectionClasses(ht, frozenset(range(k))).cell_bounds(k-1)[1]):.4f} deg); first miss {fail}", flush=True)
+```
+
+#### `histogram.py`
+
+```text
+"""Angular support of the LP dual (a fractional packing on the site set) for a class at q.
+
+Usage: histogram.py OUT.json name lo-hi[,lo-hi] [grid] [rounds]
+"""
+import json, sys, time
+from fractions import Fraction
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent))
+from bandlib import Q, histogram, load_net, parse_cells, solve_rows, folded_ranges
+from sqpack.fractional.classcert import DirectionClasses
+
+ht, B = load_net()
+out = Path(sys.argv[1]); name = sys.argv[2]; cells = parse_cells(sys.argv[3])
+grid = int(sys.argv[4]) if len(sys.argv) > 4 else 79
+rounds = int(sys.argv[5]) if len(sys.argv) > 5 else 100
+t0 = time.perf_counter()
+weights, rows, row_dirs, row_centres, duals, objective, stopped, nrounds = solve_rows(ht, B, Q, cells, grid_count=grid, max_rounds=rounds)
+el = time.perf_counter() - t0
+h = histogram(ht, row_dirs, duals)
+support = [(d, str(ht[d]), cu, cv, float(y)) for d, (cu, cv), y in zip(row_dirs, row_centres, duals) if y > 1e-12]
+rec = {"name": name, "cells": sorted(cells), "ranges_deg": folded_ranges(DirectionClasses(ht, cells), cells), "grid": grid, "side": str(Q), "shrink": str(B),
+       "rounds": nrounds, "stopped": stopped, "rows": len(rows), "objective_M": objective, "dual_total": h["total"],
+       "support_rows": len(support), "by_bin": h["by_bin"], "by_direction": h["by_direction"], "seconds": round(el, 1),
+       "family": support}
+existing = json.loads(out.read_text()) if out.exists() else {}
+existing[name] = rec
+out.write_text(json.dumps(existing, indent=1))
+print(f"{name}: cells {rec['ranges_deg']} grid {grid} rounds {nrounds} {stopped} M {objective:.5f} dual total {h['total']:.5f} support rows {len(support)} {el:.0f}s", flush=True)
+print("by bin:", json.dumps(h["by_bin"]), flush=True)
+print("by direction:", json.dumps(h["by_direction"]), flush=True)
+```
+
+#### `ceiling_check.py`
+
+```text
+"""Exact ceiling check of a dual family read by histogram.py.
+
+The LP dual y on rows satisfies sum_r y_r A[r, a] <= |orbit a|, so the D4-symmetrised
+family (each row's eight images at weight y_r / 8) has depth at most one at every site of
+the grid. verify_ceiling decides depth on the continuum; scaled_to_unit_depth divides by the
+exact maximum depth d, and the honest value is (sum_r y_r) / d. At or above eleven that is
+an exact obstruction: the class covering value at q is at least eleven on every site set.
+Usage: ceiling_check.py HIST.json name [top_k]
+"""
+import json, sys, time
+from fractions import Fraction
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent))
+from bandlib import Q, load_net
+from sqpack.fractional.ceiling import CeilingCertificate, Placement, scaled_to_unit_depth, verify_ceiling
+from sqpack.fractional.generate import direction_net
+
+ht, B = load_net()
+rec = json.loads(Path(sys.argv[1]).read_text())[sys.argv[2]]
+top_k = int(sys.argv[3]) if len(sys.argv) > 3 else 10**9
+family = sorted(rec["family"], key=lambda f: -f[4])[:top_k]
+net = direction_net(ht)
+L = Q
+placements = []
+for d, t_str, cu, cv, y in family:
+    dirn = net[d]
+    t = Fraction(t_str)
+    # centre in container coordinates from the rotated-frame (u, v), rationalised
+    u, v = Fraction(cu).limit_denominator(10**9), Fraction(cv).limit_denominator(10**9)
+    x = dirn.ux * u + dirn.vx * v
+    yy = dirn.uy * u + dirn.vy * v
+    w = Fraction(y).limit_denominator(10**9) / 8
+    t_ref = (1 - t) / (1 + t) if t != 0 else Fraction(0)
+    images = ((x, yy, t), (L - x, yy, t_ref), (x, L - yy, t_ref), (L - x, L - yy, t),
+              (yy, x, t_ref), (L - yy, x, t), (yy, L - x, t), (L - yy, L - x, t_ref))
+    for px, py, pt in images:
+        placements.append(Placement(pt, px, py, w, B))
+cert = CeilingCertificate(11, L, B, ht, tuple(placements))
+print(f"{sys.argv[2]}: {len(family)} rows kept of {len(rec['family'])}, {len(placements)} placements, raw total {float(cert.total_weight):.5f}", flush=True)
+t0 = time.perf_counter()
+scaled, factor = scaled_to_unit_depth(cert)
+print(f"exact maximum depth {factor} = {float(factor):.6f}; scaled total {scaled.total_weight} = {float(scaled.total_weight):.5f} ({time.perf_counter()-t0:.0f}s)", flush=True)
+verdict = verify_ceiling(scaled)
+for c in verdict.conditions:
+    print(f"  {c.name}: {c.holds} -- {c.detail[:200]}")
+print(f"ceiling verdict: total {float(verdict.total_weight) if hasattr(verdict,'total_weight') else scaled.total_weight} regime {getattr(verdict,'regime',None)} holds {all(c.holds for c in verdict.conditions)} ({time.perf_counter()-t0:.0f}s)", flush=True)
+out = Path(sys.argv[1]).with_suffix(f".{sys.argv[2]}.ceiling.json")
+out.write_text(json.dumps({"family_rows": len(family), "placements": len(placements), "max_depth": str(factor), "scaled_total": str(scaled.total_weight), "scaled_total_float": float(scaled.total_weight), "conditions": [(c.name, c.holds, c.detail) for c in verdict.conditions], "certificate": scaled.to_record()}))
+```
+
+#### `queue2.sh`
+
+```text
+#!/bin/bash
+S=/tmp/claude-0/-home-user-squares/9010767e-5bb7-5e7d-99d2-858400f3969a/scratchpad
+export PACK_JOBS=1 OMP_NUM_THREADS=1 PATH=$S/uv012:$PATH
+cd $S/wt-lane-295/packing
+run() { uv run --frozen --all-extras --group dev python "$@" 2>&1 | grep -v UV_NATIVE; }
+echo "== widen start $(date -u +%H:%M:%S)"
+run $S/lane-295/widen.py $S/lane-295/widen_g79.jsonl 79 7 13
+echo "== nine start $(date -u +%H:%M:%S)"
+run $S/lane-295/nine_replay.py
+echo "== hist end6+151 start $(date -u +%H:%M:%S)"
+run $S/lane-295/histogram.py $S/lane-295/hist.json end6_trail30 0-5,151-180 79 100
+echo "== queue2 done $(date -u +%H:%M:%S)"
+```
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
