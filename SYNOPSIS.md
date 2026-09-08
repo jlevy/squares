@@ -556,7 +556,7 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-**Parallel structural lanes at `n = 11`, first wave running.**
+**Parallel structural lanes at `n = 11`, first wave terminal.**
 [X-021](packing/campaign/explorations/X-021-what-can-be-proved-about-eleven-squares.md)
 pursued X-019’s exploration with four Fable lanes in parallel and reports what can be
 proved about eleven-square packings today: seven corner and wall lemmas, exact-verified
@@ -609,6 +609,12 @@ sweeps exactly at mass `11.798` against `11.262` free, and the corner atom’s p
 not the bound, is the obstacle; it proved the corner-pair form instead, that every
 packing at `96/25` has four distinct squares each containing one of its corner’s two
 marks, so the anchor for BC-299 is a corner pair.
+[Session-100](packing/campaign/agent-sessions/session-100-duality-kill-tests-and-unit-value.md)
+left H-129 undecided: the `B = 1` family at `96/25` verifies exactly at `8.918` on a
+203-direction net, below the `10` that `s(10)` proves, with its weight diffuse in angle
+and mostly outside Trump’s neighbourhood, and no restricted region reached a kill or an
+alive reading; the loop’s depth scaling, not its LP, loses the value, so a depth
+polisher on the fixed support is the next instrument.
 
 **Selected next entry:** `think-znzj` is BC-303, the first-wave selection with
 independent review, which reads every lane’s exact results once sessions 100, 101, 102
@@ -3230,9 +3236,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 119 | 30,727 | 17,189 | 359 | 2,921 | 175.56 h |
+| claimed by a session | 120 | 31,069 | 17,302 | 365 | 2,941 | 177.34 h |
 | claimed by none | 42 | 8,737 | 5,134 | 136 | 760 | 43.37 h |
-| **measured** | **161** | **39,464** | **22,323** | **495** | **3,681** | **218.93 h** |
+| **measured** | **162** | **39,806** | **22,436** | **501** | **3,701** | **220.71 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -3263,11 +3269,12 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-085](packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md) | 4 | 23 | 3,244 | 1,801 | 45 | 22.09 h |
 | [session-086](packing/campaign/agent-sessions/session-086-agenda021-overnight-pass.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
 | [session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
+| [session-100](packing/campaign/agent-sessions/session-100-duality-kill-tests-and-unit-value.md) | 1 | 1 | 342 | 113 | 6 | 1.78 h |
 | [session-101](packing/campaign/agent-sessions/session-101-corner-skeleton-ownership.md) | 2 | 1 | 273 | 137 | 7 | 1.64 h |
 | [session-102](packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md) | 2 | 1 | 310 | 106 | 2 | 1.52 h |
 | [session-103](packing/campaign/agent-sessions/session-103-plateau-artefact-at-3-82.md) | 1 | 1 | 164 | 63 | 0 | 0.94 h |
 | [session-104](packing/campaign/agent-sessions/session-104-ownership-set-at-q.md) | 3 | 1 | 238 | 83 | 1 | 1.38 h |
-| *shared by 31 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
+| *shared by 32 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -3299,9 +3306,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 56 |
+| measured | 57 |
 | unmeasured | 45 |
-| **total** | **101** |
+| **total** | **102** |
 
 <!-- END GENERATED: session-close-report -->
 

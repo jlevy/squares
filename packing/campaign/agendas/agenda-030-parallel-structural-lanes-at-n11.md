@@ -114,7 +114,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 0
     question: What are the restricted fractional packing values at 96/25 off a corner box, a corner triangle, a central box and the four corner boxes, and the B = 1 value at 3.84, 3.86 and 3.87?
     hypotheses: [H-129]
@@ -136,6 +136,31 @@ agenda:
     program: n11-structure-and-conditional-dots
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md
+    - packing/campaign/agent-sessions/session-100-duality-kill-tests-and-unit-value.md
+    outcomes:
+    - scope: The B = 1 value at 96/25 and the four restricted regions at the retained shrink, one block in session-100 (2026-09-08, one worker at load 4 to 8)
+      classification: time-limited
+      result: >-
+        Every reading is undecided. The B = 1 family at 96/25 verifies exactly at
+        89090463224/9989418081 = 8.918 (768 unit placements, maximum depth exactly 1 over
+        2,877,776 vertices, replayed from the bytes and re-declared in the unit regime) on a
+        203-direction net densified at the axis and at Trump's angle, warm from BC-200's
+        state; its weight is diffuse in angle, 3.22 within a degree of the axis and 0.03
+        near 40.18 degrees, with 5.93 of its mass outside Trump's neighbourhood, and s(10)
+        proves the true value is at least 10, so the family is below the truth and the site
+        LP of 11.17 is unconverged. The four-corner region's verified families reach 6.173
+        and, polished, 6.261; a single corner box and the corner triangle are not
+        D4-symmetric programs and inherit sub-restriction floors of 7.64 and 8.15; the
+        central box loop was cancelled under load. Neither kill (at least 10) nor alive
+        (below 9.5) was reached anywhere, so routes (b) and (c) and every capture design
+        survive untested. The measurable instrument finding is that the loop's depth
+        scaling, not its LP, loses the value; a depth polisher on the fixed support is the
+        next instrument. 3.86 and 3.87 were not started.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md
+      - packing/campaign/agent-sessions/session-100-duality-kill-tests-and-unit-value.md
+      disposition: continue
+      follow_up: think-7lp3
     next_evidence: Whether the non-convex-domain instrument (BC-204) is worth building; whether routes (b) and (c) and every capture design survive; the input BC-301 needs.
   - id: BC-295
     purpose: research
@@ -324,7 +349,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [11]
-    state: blocked
+    state: ready
     priority: 1
     question: What do the exact-side tree over Q(u) and the B = 1 capture run at U + σ cost, written as one architecture?
     hypotheses: [H-129]

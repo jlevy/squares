@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 101
+count: 102
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 56
+  sessions_measured: 57
   sessions_unmeasured: 45
   attributed:
-    rollups: 119
-    turns: 30727
-    tool_calls: 17189
-    tool_errors: 359
-    one_off_code: 2921
-    wall_hours: 175.56
+    rollups: 120
+    turns: 31069
+    tool_calls: 17302
+    tool_errors: 365
+    one_off_code: 2941
+    wall_hours: 177.34
   unattributed:
     rollups: 42
     turns: 8737
@@ -28,12 +28,12 @@ totals:
     one_off_code: 760
     wall_hours: 43.37
   measured:
-    rollups: 161
-    turns: 39464
-    tool_calls: 22323
-    tool_errors: 495
-    one_off_code: 3681
-    wall_hours: 218.93
+    rollups: 162
+    turns: 39806
+    tool_calls: 22436
+    tool_errors: 501
+    one_off_code: 3701
+    wall_hours: 220.71
 codex_receipts:
   attributed: 25
   unattributed: 0
@@ -1550,6 +1550,20 @@ sessions:
   unmeasured_reason: >-
     declares no rollups
   rollups: []
+  codex_receipts: []
+- id: session-100
+  title: "Duality kill tests and the B = 1 value at 96/25"
+  status: stopped
+  primary_bead: think-7lp3
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-a2247da4712316276.yaml
+  turns: 342
+  tool_calls: 113
+  tool_errors: 6
+  one_off_code: 20
+  wall_hours: 1.78
   codex_receipts: []
 - id: session-101
   title: "Corner-skeleton ownership at 96/25"

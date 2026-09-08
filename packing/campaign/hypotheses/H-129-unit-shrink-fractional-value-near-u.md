@@ -42,7 +42,12 @@ hypothesis:
     capture design at once. A refutation is the earliest possible hopelessness signal
     for the dot-based endgame; a confirmation opens the first rung above the shrink cap.
     Direction matters: the fractional packing value with unit squares is at most the
-    value with B-cores, so the retained 3.82 bracket says nothing about it.
+    value with B-cores, so the retained 3.82 bracket says nothing about it. Undecided in session-100 (lane D, 2026-09-08): the B = 1 family at 96/25 verifies
+    exactly at 8.918 on a 203-direction net, below the value s(10) proves is at least 10,
+    with diffuse angular weight and 5.93 of its mass outside Trump's neighbourhood; no
+    restricted region reached a kill or an alive reading; the loop's depth scaling loses
+    the value, and a depth polisher is the next instrument.
+
 ---
 # H-129 — The Number That Decides the Endgame
 
