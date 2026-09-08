@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 98
+count: 99
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 53
+  sessions_measured: 54
   sessions_unmeasured: 45
   attributed:
     rollups: 115
@@ -35,9 +35,9 @@ totals:
     one_off_code: 3693
     wall_hours: 216.8
 codex_receipts:
-  attributed: 26
+  attributed: 27
   unattributed: 0
-  measured: 26
+  measured: 27
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -1520,6 +1520,26 @@ sessions:
     agent_hours: 3.79
     active_union_hours: 1.4
     wall_hours: 1.4
+    snapshot_incomplete: true
+- id: session-097
+  title: "Kernel contract and feature pricing"
+  status: stopped
+  primary_bead: think-c53m
+  phases: 6
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-097.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-097.yaml
+    model_responses: 973
+    agent_hours: 7.51
+    active_union_hours: 3.69
+    wall_hours: 4.3
     snapshot_incomplete: true
 - id: session-099
   title: "Atlas expansion to n = 324 and the poster composite"

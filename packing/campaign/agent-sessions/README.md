@@ -185,6 +185,18 @@ Do not use `git add -A` in a shared checkout.
 
 ## Closing a Session
 
+Work may stop before its validation succeeds.
+Keep that session `stopped`, preserve its original clocks and actual failed checks, and
+declare `certification_pending: think-<follow-up-id>` with a nonblank stop reason and
+the same exact bead in `next_action`. The record checker then reports an explicitly
+uncertified checkpoint; it does not assert that a gate ran or that the branch can merge.
+Completed handovers still require an actual passing certifying gate.
+After a qualifying pass covers the handed-over source, record its declaration and remove
+the pending marker without reopening the stopped research.
+See
+[OR-13](../../../operating-rules.md#or-13-every-fast-check-runs-in-ci-only-the-unavoidably-slow-ones-leave)
+for the unchanged full pre-merge obligation.
+
 The checkpoint sequence above is per-phase.
 Bringing a whole session to a terminal state adds two steps, and neither is optional.
 For a delegated Codex lane, the owner first stops writing and returns a terminal-ready

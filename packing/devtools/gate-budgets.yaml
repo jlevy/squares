@@ -477,6 +477,15 @@ tiers:
   # it still has to hold whatever the escape screen costs on a bad day -- which is why it
   # is not tightened to the new prediction.
   #
+  # Historical calibration of the former n=1..100, four-full-sweep workload: 108.91,
+  # 108.62, 106.15 and 104.57s in runs 34023002068, 34032566385, 34037168378 and
+  # 34040196689, plus 109.16s at c3a4e8ec in run 34164869950 and 58.38s at d6f0c403
+  # in run 34166034785. Six-sample geometric mean 97.07455s (recorded as 97.07), spread
+  # 1.87x. The two added runs shared the workload, jobs 4, inner_jobs 2, runner image,
+  # Python version and successful dependency-cache key; hardware and load equivalence
+  # remain unknown. This was a baseline refresh, with no optimization claim. Neither
+  # that baseline nor its 194s ceiling calibrates the sampled n=1..324 tier below.
+  #
   # --- 2026-09-07: the corpus tripled and two of these four steps are new -----------
   #
   # `KNOWN_BEST_CORPUS` widened from n=1..100 to n=1..324 -- 324 cases and 52,650

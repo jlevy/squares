@@ -18,8 +18,12 @@ orphaned.
 
 from __future__ import annotations
 
+import json
 import pathlib
+import shutil
 import subprocess
+
+import pytest
 
 import devtools.check_session_gate as checker
 from devtools.check_session_gate import (
@@ -27,6 +31,9 @@ from devtools.check_session_gate import (
     GATE_DECLARED_FROM,
     GROUPS,
     SCHEMA,
+    GateRun,
+    ancestry_problems,
+    bead_state,
     commit_state,
     declaration_pattern,
     history_state,
@@ -77,6 +84,28 @@ def _run(monkeypatch, sessions: pathlib.Path, repository: pathlib.Path) -> int:
     monkeypatch.setattr(checker, "SESSIONS", sessions)
     monkeypatch.setattr(checker, "REPO", repository)
     return main()
+
+
+def _only_path(monkeypatch, directory: pathlib.Path, *, bead_status: str | None) -> None:
+    """A PATH holding `git` and, when a status is given, a `tbd` that answers with it.
+
+    Set rather than prepended, so `bead_status=None` is the real tbd-unavailable case on
+    a machine that does have tbd installed. `git` is linked in because the ancestry
+    clause still has to run: what varies between these cases is the tracker, not the
+    graph.
+    """
+    directory.mkdir(parents=True, exist_ok=True)
+    git = shutil.which("git")
+    assert git is not None
+    (directory / "git").symlink_to(git)
+    if bead_status is not None:
+        script = directory / "tbd"
+        script.write_text(
+            f'#!/bin/sh\nprintf \'{{"status": "{bead_status}"}}\\n\'\n',
+            encoding="utf-8",
+        )
+        script.chmod(0o755)
+    monkeypatch.setenv("PATH", str(directory))
 
 
 # --- the grammar ----------------------------------------------------------------------
@@ -335,3 +364,324 @@ def test_a_grandfathered_session_that_does_declare_one_is_still_held_to_it(
     )
 
     assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+# --- stopped work whose certification is explicitly outstanding ----------------------
+
+
+def _pending_record(
+    directory: pathlib.Path,
+    *,
+    status: str = "stopped",
+    pending: object = "think-ab12",
+    reason: object = "The checkpoint failed; preserve the stopped work.",
+    action: str = "Resolve certification under think-ab12 before research admission.",
+    checks: str = "",
+    phases: str = "",
+) -> None:
+    fields = (
+        f"  certification_pending: {json.dumps(pending)}\n"
+        f"  stop_reason: {json.dumps(reason)}\n"
+        f"  next_action: {json.dumps(action)}\n"
+    )
+    _record(directory, "session-999", status=status, checks=fields + phases + checks)
+
+
+def _phases(*beads: tuple[str, str]) -> str:
+    """A `workflow_phases` list holding only the two fields this checker reads."""
+    return "  workflow_phases:\n" + "".join(
+        f"  - bead: {bead}\n    status: {status}\n" for bead, status in beads
+    )
+
+
+def test_pending_stop_without_a_run_is_valid_but_not_certified(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    _pending_record(tmp_path / "sessions")
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 0
+    output = capsys.readouterr().out
+    assert "0 terminal sessions name a full-gate run" in output
+    assert "UNCERTIFIED" in output
+    assert "think-ab12" in output
+    assert "which has not closed" not in output
+
+
+@pytest.mark.parametrize("status", ["completed", "in_progress"])
+def test_pending_certification_cannot_hide_another_work_status(
+    monkeypatch, tmp_path, status
+) -> None:
+    _pending_record(tmp_path / "sessions", status=status)
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+@pytest.mark.parametrize("pending", ["", "think-", "think-a-b", True, 12, None])
+def test_pending_certification_requires_a_well_formed_bead(monkeypatch, tmp_path, pending):
+    _pending_record(tmp_path / "sessions", pending=pending)
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+@pytest.mark.parametrize("reason", ["", "  ", True, None])
+def test_pending_certification_requires_a_stop_reason(monkeypatch, tmp_path, reason):
+    _pending_record(tmp_path / "sessions", reason=reason)
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+@pytest.mark.parametrize("action", ["", "Continue think-other.", "Continue think-ab12-extra."])
+def test_pending_certification_requires_the_same_exact_followup_bead(
+    monkeypatch, tmp_path, action
+) -> None:
+    _pending_record(tmp_path / "sessions", action=action)
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+@pytest.mark.parametrize("tier", ["fast", "full"])
+def test_pending_cannot_relabel_a_canonical_pass_as_historical(
+    monkeypatch, tmp_path, tier
+) -> None:
+    repository = _repository(tmp_path / "repo")
+    head = _git(repository, "rev-parse", "HEAD")
+    _pending_record(
+        tmp_path / "sessions",
+        checks=_checks(f"full gate: {tier} at {head}: passed (historical docs only)"),
+    )
+
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 1
+
+
+def test_pending_accepts_failed_history_and_later_real_pass_can_certify(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    repository = _repository(tmp_path / "repo")
+    head = _git(repository, "rev-parse", "HEAD")
+    failed = f"full gate: full at {head}: failed (retained failed checkpoint)"
+    _pending_record(tmp_path / "sessions", checks=_checks(failed))
+
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 0
+    assert "UNCERTIFIED" in capsys.readouterr().out
+    _record(
+        tmp_path / "sessions",
+        "session-999",
+        status="stopped",
+        checks=_checks(failed, f"full gate: full at {head}: passed"),
+    )
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 0
+    assert "1 terminal sessions name a full-gate run" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize(
+    "declaration", ["full gate: passed", "full gate: turbo at 07a41a89: failed"]
+)
+def test_pending_does_not_suppress_malformed_or_unknown_declarations(
+    monkeypatch, tmp_path, declaration
+) -> None:
+    _pending_record(tmp_path / "sessions", checks=_checks(declaration))
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+def test_pending_failed_receipt_must_resolve_in_complete_history(monkeypatch, tmp_path):
+    _pending_record(
+        tmp_path / "sessions", checks=_checks(f"full gate: full at {ABSENT}: failed")
+    )
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+def test_pending_failed_receipt_on_an_orphan_is_unresolved_not_refused(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    """A squash or rebase merge orphans every commit of the branch that recorded it.
+
+    The retained receipt still says `failed`, which is why it was kept, so nothing about
+    it was certified and nothing about it can be falsified by the mainline moving. Making
+    this a refusal would fail the records gate on `main` because of a merge button.
+    """
+    repository = _repository(tmp_path / "repo")
+    _git(repository, "checkout", "--quiet", "-b", "sidebranch", "HEAD~1")
+    _git(repository, "commit", "--quiet", "--allow-empty", "-m", "orphan")
+    orphan = _git(repository, "rev-parse", "HEAD")
+    _git(repository, "checkout", "--quiet", "main")
+    _pending_record(
+        tmp_path / "sessions", checks=_checks(f"full gate: full at {orphan}: failed")
+    )
+
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 0
+    output = capsys.readouterr().out
+    assert "UNCERTIFIED" in output
+    assert f"{orphan} (a retained full run that failed" in output
+    assert "certifies nothing and refuses nothing" in output
+
+
+def test_a_certifying_orphan_is_still_refused_where_noncertifying_ones_are_not(
+    tmp_path,
+) -> None:
+    """The split is on what the run claims, and only on that.
+
+    Read against `ancestry_problems` directly because a pending record cannot carry a
+    certifying declaration -- `declaration_problems` refuses that first -- so the two
+    readings never meet in one record.
+    """
+    repository = _repository(tmp_path / "repo")
+    _git(repository, "checkout", "--quiet", "-b", "sidebranch", "HEAD~1")
+    _git(repository, "commit", "--quiet", "--allow-empty", "-m", "orphan")
+    orphan = _git(repository, "rev-parse", "HEAD")
+    _git(repository, "checkout", "--quiet", "main")
+    runs = [
+        GateRun(tier="full", commit=orphan, verdict="passed", note=None),
+        GateRun(tier="full", commit=orphan, verdict="failed", note=None),
+    ]
+
+    problems, unresolved = ancestry_problems(
+        "session-999", runs, "complete", repository, include_noncertifying=True
+    )
+
+    assert len(problems) == 1
+    assert "is not an ancestor of HEAD" in problems[0]
+    assert len(unresolved) == 1
+    assert "certifies nothing and refuses nothing" in unresolved[0]
+
+
+@pytest.mark.parametrize("history", ["shallow", "unavailable"])
+def test_pending_failed_receipt_with_missing_history_stays_uncheckable(
+    monkeypatch, tmp_path, capsys, history
+) -> None:
+    origin = _repository(tmp_path / "origin")
+    commit = _git(origin, "rev-parse", "HEAD~1")
+    repository = tmp_path / "snapshot"
+    if history == "shallow":
+        _git(tmp_path, "clone", "--quiet", "--depth", "1", f"file://{origin}", str(repository))
+    else:
+        repository.mkdir()
+    _pending_record(
+        tmp_path / "sessions", checks=_checks(f"full gate: full at {commit}: failed")
+    )
+
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 0
+    output = capsys.readouterr().out
+    assert "UNCERTIFIED" in output
+    assert "UNCHECKABLE" in output
+    assert "0 terminal sessions name a full-gate run" in output
+
+
+def test_unmarked_stopped_record_still_needs_a_certifying_run(monkeypatch, tmp_path):
+    _record(tmp_path / "sessions", "session-999", status="stopped", checks="")
+
+    assert _run(monkeypatch, tmp_path / "sessions", _repository(tmp_path / "repo")) == 1
+
+
+def test_mixed_pending_and_certified_records_have_separate_counts(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    repository = _repository(tmp_path / "repo")
+    head = _git(repository, "rev-parse", "HEAD")
+    _pending_record(tmp_path / "sessions")
+    _record(
+        tmp_path / "sessions",
+        "session-998",
+        status="completed",
+        checks=_checks(f"full gate: full at {head}: passed"),
+    )
+
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 0
+    output = capsys.readouterr().out
+    assert "1 terminal sessions name a full-gate run" in output
+    assert "1 stopped sessions remain UNCERTIFIED" in output
+    assert "session-999 -> think-ab12" in output
+
+
+# --- the follow-up bead the debt is owed to -------------------------------------------
+
+
+def test_pending_certification_cannot_name_a_bead_this_record_completed(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    """A marker naming finished work is the marker discharging itself.
+
+    Answered from the record alone, so it binds on a machine with no tracker installed.
+    """
+    repository = _repository(tmp_path / "repo")
+    _pending_record(tmp_path / "sessions", phases=_phases(("think-ab12", "completed")))
+    _only_path(monkeypatch, tmp_path / "bin", bead_status=None)
+
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 1
+    assert "workflow_phases marks completed" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("status", ["in_progress", "stopped"])
+def test_pending_certification_accepts_a_phase_that_did_not_finish(
+    monkeypatch, tmp_path, status
+) -> None:
+    """`stopped` is the shape that leaves the debt; reading it as discharged inverts it."""
+    repository = _repository(tmp_path / "repo")
+    _pending_record(tmp_path / "sessions", phases=_phases(("think-ab12", status)))
+    _only_path(monkeypatch, tmp_path / "bin", bead_status=None)
+
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 0
+
+
+def test_pending_certification_refuses_a_bead_tbd_reports_closed(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    repository = _repository(tmp_path / "repo")
+    _pending_record(tmp_path / "sessions")
+    _only_path(monkeypatch, tmp_path / "bin", bead_status="closed")
+
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 1
+    assert "tbd reports closed" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("status", ["in_progress", "blocked"])
+def test_pending_certification_accepts_a_bead_tbd_reports_live(
+    monkeypatch, tmp_path, status
+) -> None:
+    """Only `closed` refuses. A blocked bead is work nobody has finished."""
+    repository = _repository(tmp_path / "repo")
+    _pending_record(tmp_path / "sessions")
+    _only_path(monkeypatch, tmp_path / "bin", bead_status=status)
+
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 0
+
+
+def test_pending_certification_does_not_fail_where_tbd_is_unavailable(
+    monkeypatch, tmp_path
+) -> None:
+    """CI, a source tarball and the negative-control sandbox have no tracker.
+
+    A machine that cannot ask has not learned that the bead is closed, which is the same
+    line `conventions.md` §6 draws for an unresolvable ancestry.
+    """
+    repository = _repository(tmp_path / "repo")
+    _pending_record(tmp_path / "sessions")
+    _only_path(monkeypatch, tmp_path / "bin", bead_status=None)
+
+    assert shutil.which("tbd") is None
+    assert bead_state("think-ab12", repository) == "unresolved"
+    assert _run(monkeypatch, tmp_path / "sessions", repository) == 0
+
+
+@pytest.mark.parametrize(
+    ("answer", "expected"), [("closed", "closed"), ("in_progress", "open")]
+)
+def test_bead_state_reads_the_status_tbd_publishes(monkeypatch, tmp_path, answer, expected):
+    """No Git repository here on purpose: the tracker and the graph are separate axes."""
+    _only_path(monkeypatch, tmp_path / "bin", bead_status=answer)
+
+    assert bead_state("think-ab12", tmp_path) == expected
+
+
+def test_a_tbd_that_fails_or_answers_nonsense_resolves_nothing(monkeypatch, tmp_path) -> None:
+    """Three states, never two: not being able to ask is a fact about the machine."""
+    stand_in = tmp_path / "bin"
+    _only_path(monkeypatch, stand_in, bead_status="closed")
+    (stand_in / "tbd").write_text("#!/bin/sh\nexit 1\n", encoding="utf-8")
+
+    assert bead_state("think-ab12", tmp_path) == "unresolved"
+
+    (stand_in / "tbd").write_text("#!/bin/sh\nprintf 'not json\\n'\n", encoding="utf-8")
+
+    assert bead_state("think-ab12", tmp_path) == "unresolved"
