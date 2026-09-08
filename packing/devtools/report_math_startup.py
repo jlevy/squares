@@ -102,6 +102,8 @@ def geometry_result(
     for report in reports:
         browser, width = report["browser"], report["width"]
         label = f"{browser} {width}px {report['medium']}"
+        if report.get("alternate_certificate", False):
+            label += " alternate certificate"
         problems.extend(f"{label}: {finding}" for finding in report["findings"])
         before = {box["key"]: box for box in report["before"]}
         after = {box["key"]: box for box in report["after"]}
@@ -200,7 +202,8 @@ def render(root: Path = CAMPAIGN) -> str:
             )
             report = json.loads(raw)
             reports.append(report)
-            problems.extend(report["findings"])
+            if experiment["kind"] != "geometry":
+                problems.extend(report["findings"])
             for run in report.get("runs", []):
                 by_width[run["environment"]["viewport"]["width"]].append(run)
         passes: list[bool] = []

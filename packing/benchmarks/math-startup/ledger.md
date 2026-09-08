@@ -18,10 +18,23 @@ Decision: **baseline**. The control is valid for the fixed local-file regime; it
 
 Decision: **correctness failed**. Reject this intermediate runtime; the geometry guard caught visible math before a required font transfer completed.
 
-- math was exposed while its font requests were held
 - webkit 1280px screen: math was exposed while its font requests were held
 - missing registered browser/width cells: [('chromium', 390), ('chromium', 1280), ('firefox', 390), ('firefox', 1280), ('webkit', 390)]
 - missing rejected movement or stable-wrong-width control
+
+## exp-003: Prepared publication across browsers and print
+
+- chromium 1280px screen: 261 bases; maximum movement 0.000px; maximum final width error 0.031px.
+- chromium 390px screen: 261 bases; maximum movement 0.000px; maximum final width error 0.031px.
+- firefox 1280px screen: 261 bases; maximum movement 0.500px; maximum final width error 0.100px.
+- firefox 390px screen: 261 bases; maximum movement 0.500px; maximum final width error 0.100px.
+- webkit 1280px screen: 261 bases; maximum movement 0.391px; maximum final width error 0.109px.
+- webkit 390px screen: 261 bases; maximum movement 0.391px; maximum final width error 0.109px.
+- chromium 1280px print: 223 bases; maximum movement 0.781px; maximum final width error 0.125px.
+- chromium 390px print: 223 bases; maximum movement 0.781px; maximum final width error 0.125px.
+- chromium 1280px screen alternate certificate: 261 bases; maximum movement 0.000px; maximum final width error 0.031px.
+
+Decision: **accepted**. Accept the reserved initial geometry; all registered browser/width cells retain their layout across real font arrival, with unchanged wrapping and rejected fault controls.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
