@@ -35,7 +35,7 @@ session:
     switch_reason: null
     budget_minutes: 110
     started_at: '2026-09-08T04:28:00Z'
-    deadline_at: '2026-09-08T06:18:00Z'
+    deadline_at: '2026-09-08T06:03:00Z'
     expected_output: >-
       The session-101 section of results/agenda-030/lane-c-n10-transfer.md with every run's
       inputs, exact verdicts, the price, and the scripts in its appendix.
@@ -53,10 +53,10 @@ session:
       5; corner weights 600001/4000000), the five-bound 47276821/4000000 = 11.8192, the free
       22524199/2000000 = 11.2621 on the same site set and rows, price 33507/62500 = 0.536112;
       the priced program M - w_c leaves the corner orbit at zero at any price, so the position
-      and not the bound is what fails. FLOORTOKEN From the free measure, Lemma C' for sets
+      and not the bound is what fails. Run 6 (four-bound, 45 column rounds of six) reached LP 11.730827 without settling (last candidate depth nan); its dual's exact maximum symmetrised depth D = 1.092857 gives the floor 10.785071 for every valid D4 measure on this net with the corner bound, far below 11.15, so the obstruction is a site-set reading, not yet a theorem for the net. From the free measure, Lemma C' for sets
       proves the four-corner pair containment theorem at 96/25: four distinct squares each
       containing one of its corner's two marks (3152/3175, 2336/3175), (2336/3175, 3152/3175),
-      pair mass 106251/400000 above epsilon = 524199/2000000 by 441/125000. RUN5TOKEN
+      pair mass 106251/400000 above epsilon = 524199/2000000 by 441/125000. Run 5 (the pair-priced phase) did not finish inside the clock.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md
     stop_reason: >-
@@ -76,8 +76,8 @@ session:
     status: stopped
     entered_by: planned_checkpoint
     switch_reason: The runs are terminal; what remains is the record and its validation.
-    budget_minutes: 40
-    started_at: '2026-09-08T06:18:00Z'
+    budget_minutes: 55
+    started_at: '2026-09-08T06:03:00Z'
     deadline_at: '2026-09-08T06:58:00Z'
     expected_output: This record, the result section, one commit on the lane branch.
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
@@ -87,7 +87,7 @@ session:
       Result section appended to lane C's report with the derivation, every run's inputs and
       exact verdicts, the price, the pair theorem, the floor, the obstructions and the scripts;
       the three load-bearing measures exported beside it; this record written; the records
-      tier run with the three integration-time failures named. DRYRUNTOKEN
+      tier run with the three integration-time failures named. Lemma C dry run on T-018: 0 of 4 diagonal displacements of the corner orbit keep the measure valid; R(p) = {p} at radii 1/1000 and 1/100.
     evidence:
     - packing/campaign/agent-sessions/session-101-corner-skeleton-ownership.md
     stop_reason: The lane clock; nothing further is planned in this session.
@@ -100,7 +100,7 @@ session:
   budget:
     wall_minutes: 150
     checkpoint_minutes: 30
-    finalization_minutes: 40
+    finalization_minutes: 55
   stop_conditions:
   - The 2.5 hour lane clock from 04:28Z; no extension.
   - A converged bounded run decided by the exact sweep, or the obstruction with the converged mass.
@@ -115,7 +115,7 @@ session:
     after: >-
       11.7982115 exactly (23596423/2000000), valid, above the 11.15 criterion; the free value on
       the same site set 11.2620995 and, after nine more column rounds, 11.18961275; every reading
-      an upper reading on a finite site set. FLOORSHORT
+      an upper reading on a finite site set. Floor for the net from the unsettled dual: 10.7851 (D = 1.0929).
   delegations: []
   outputs:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md
@@ -135,19 +135,20 @@ session:
 ---
 # session-101 — corner-skeleton ownership at 96/25
 
-The lane's result, with every input, every exact verdict and the scripts, is the
+The lane’s result, with every input, every exact verdict and the scripts, is the
 `Session-101` section of
-[lane C's report](../series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md).
+[lane C’s report](../series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md).
 This record is the handoff: what was attempted, what came back, and what should happen
 next.
 
-In one sentence: the bounded measure H-128 asked for does not exist on the retained shrink
-and net at the precision this block could buy (the least valid four-bound measure has mass
-`23596423/2000000 ≈ 11.798`, against the `11.15` criterion, and pricing the corner orbit
-shows the position rather than the bound is the obstacle), but the free measure at `96/25`
-proves a weaker four-corner theorem outright: four distinct squares each containing one of
-two marks near its corner. The price `M(forced) − M(free)` is `33507/62500 = 0.536112` on
-one site set. The floor for the net is the unfinished part.
+In one sentence: the bounded measure H-128 asked for does not exist on the retained
+shrink and net at the precision this block could buy (the least valid four-bound measure
+has mass `23596423/2000000 ≈ 11.798`, against the `11.15` criterion, and pricing the
+corner orbit shows the position rather than the bound is the obstacle), but the free
+measure at `96/25` proves a weaker four-corner theorem outright: four distinct squares
+each containing one of two marks near its corner.
+The price `M(forced) − M(free)` is `33507/62500 = 0.536112` on one site set.
+The floor for the net is the unfinished part.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

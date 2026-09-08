@@ -949,6 +949,1268 @@ for _ in range(200000):
 print("min P12 count among sampled P10-avoiders (G'=.79):", best)
 ```
 
+## Session-101 — corner-skeleton ownership at 96/25 (2026-09-08)
+
+Research lane BC-293 of
+[Agenda 030](../../../../agendas/agenda-030-parallel-structural-lanes-at-n11.md), on
+[H-128](../../../../hypotheses/H-128-corner-skeleton-ownership.md), bead `think-1136`,
+session-101, 2.5 hours from 04:28Z on 2026-09-08. The planning report above is
+untouched; this section is the lane’s result.
+Scripts and raw outputs are in the appendix at the end of this section; nothing here is
+a registered round, a new bound, or an edit to any registry.
+
+### The question and its falsifiers
+
+Question (the agenda cell, verbatim): does a valid D4-symmetric measure at 96/25 exist
+with T-018’s four corner atoms at weight at least 3/20 and total mass below 11 + 3/20?
+
+Falsifiers, stated before each run and recorded in the lane checkpoints: a bounded
+column-generation run that converges with rationalised mass at or above 11 + 3/20 =
+11.15; a final measure that the exact eighth-turn sweep refuses on Condition 1, 3, 4 or
+5; or a bounded LP that does not converge inside its wall.
+Only the exact sweep decides validity; every LP objective below is context.
+
+### The ownership step, exactly
+
+Setting. Side `L = 96/25`, shrink `B = 9977/10000`, the retained net of 181 directions
+(`t_k = k · 207107/500000 / 180`, `k = 0..180`, reaching `π/4`), a measure `μ` that is
+D4-symmetric (Condition 1) and covers every reachable event cell at every net direction
+with mass at least 1 (Condition 5); Conditions 3 and 4 are the net’s and hold as for
+T-018. Write `M = μ(S) = 11 + ε`.
+
+Lemma C′ (lane C, X-014 Corollary 1a restated).
+In any packing of eleven unit squares in `[0, L]²`, each square contains, strictly
+inside its interior, a closed `B`-square at a net direction (Condition 4); these eleven
+cores `P_1, …, P_11` are pairwise disjoint, and by Condition 5 each has `μ(P_i) ≥ 1`.
+Hence `Σ_i μ(P_i) ≤ M = 11 + ε` gives `μ(P_i) ≤ 1 + ε` for every `i` and
+`μ(S ∖ ⋃ P_i) ≤ ε`. An atom `p` of weight `w > ε` therefore lies in at least one core
+(else it contributes `w > ε` to the mass outside the cores) and in at most one (the
+cores are disjoint).
+So it lies in exactly one core.
+
+Corollary C.2 at `96/25`. The four corner atoms are the D4 orbit of `(a, a)` with
+`a = 1849127/1853400 · 384/381 = 29586032/29422725 ≈ 1.005550`, that is
+`(a, a), (L − a, a), (a, L − a), (L − a, L − a)` — four members, the point being on the
+diagonal mirror. Their least squared pairwise distance is `(L − 2a)² =
+4633032392704/1385114794281 ≈ 1.82890²`; the diameter of a closed `B`-square is `B√2`
+with `2B² = 99540529/50000000 ≈ 1.41096²`; and `4633032392704/1385114794281 >
+99540529/50000000` (decided in `Fraction` arithmetic by the driver, which refuses to run
+otherwise). So no core contains two corner atoms.
+
+Theorem (conditional on the measure).
+If a valid `μ` at `(96/25, 9977/10000, the net)` carries weight `w_c ≥ 3/20` on each
+corner atom and has `M < 11 + 3/20`, then `ε <
+3/20 ≤ w_c`, each corner atom lies in exactly one core by C′, the four cores are
+distinct by C.2, and each core is strictly inside its own unit square: every packing of
+eleven unit squares at side `96/25` has four distinct squares each containing one of the
+four corner atoms in its interior.
+No further geometry enters; the centre atom is not needed for this statement (H-128’s
+fifth bound serves Lemma H’s two-pattern split, not the theorem).
+
+What the LP variable is.
+In `sqpack.fractional.colgen` the column for a D4 orbit `O` is one variable `w_O` with
+objective coefficient `|O|` and row coefficient “members of `O` the placement covers”;
+`rationalise_sites` gives every member of `O` the weight `w_O`. So `w_O` *is* the
+per-atom weight, and the corner constraint is the single bound `w_O ≥ 3/20` on the
+corner orbit (four members, orbit 122 of the scaled seed); the centre bound is
+`w_O ≥ 1/8` on the centre orbit (one member).
+The library fixes every bound at `(0, ∞)` (`colgen.solve_lp`), so the lane’s driver
+re-implements `solve_rows` line for line with a bounded `linprog` call and drives
+`generate_adaptive`’s column loop itself; `sqpack` is not edited.
+Rounding up in `rationalise_sites` can only raise a weight, so the bound survives
+rationalisation, and the driver checks it exactly on the rationalised atoms.
+
+A proved floor from the bounded dual.
+The bounded program’s dual gives more than a reading on a site set.
+Let `(P_r, y_r)` be the final row placements and duals, `depth` the D4-symmetrised
+closed-cover depth, `D = max(1, max depth)` decided exactly at the arrangement vertices
+as `colgen.check_ceiling` does.
+For every valid D4 measure `μ` on this `(L, B, net)` with `μ({p}) ≥ lb_p` at the bounded
+atoms, `Σ_r y_r / D ≤ ∫ depth/D dμ ≤ μ(free atoms) + Σ_p (depth(p)/D) μ({p})`, hence
+`M(μ) ≥ Σ_r y_r / D + Σ_p (1 − depth(p)/D) lb_p`. That floor holds for *every* site set
+and every atom count, not only the one the run used; it is the statement that turns a
+converged obstruction into a theorem about the net.
+
+### Inputs common to every run
+
+| Input | Value |
+| --- | --- |
+| Side, shrink | `L = 96/25`, `B = 9977/10000` |
+| Net | `t_k = k · 207107/500000 / 180`, `k = 0..180` (181 directions; `D = 207107/90000000`, `B(1 + D) = 899996306539/900000000000 < 1`) |
+| Seed | T-018’s 1121 atoms (`cases/n11_fractional_certificate/certificate.json`, mass `434547/40000` at `381/100`) with every coordinate scaled by `384/381 = 128/127`; 149 D4 orbits; the weights are not read |
+| Grids | none (run 1); the library’s density rule `site_counts_for_side(96/25, 9977/10000)` = counts `25, 34, 42` at inset `1/2` (runs 2 and 4) |
+| Corner orbit | `(29586032/29422725, 29586032/29422725)` and its three images; orbit 122 of the seed, size 4 |
+| Centre orbit | `(48/25, 48/25)`; size 1 |
+| Bounds | four-bound: corner `w ≥ 3/20`; five-bound: corner `w ≥ 3/20` and centre `w ≥ 1/8`; priced: corner orbit cost `3` (objective `M − w_c`); free: none |
+| Column generation | `rows_per_direction 3`, `max_rounds 60`, `support_cap 32` for pricing, `settle 0`, one candidate orbit per column round, at most 10 column rounds per phase; rows carried across every phase |
+| Rationalisation | `rationalise_sites` at scale `4 000 000` with the `1000001/1000000` bump (round-up only) |
+| Verifier | `certificate.verify(workers=1)`: Conditions 1–5 exact; validity is 1, 3, 4, 5 (Condition 2 reports the mass against 11) |
+| Machine | one process, `PACK_JOBS=1`, one BLAS thread; four cores shared with five other agents, load average 3–5 throughout; wall times are not comparable with the planning lane’s |
+| Deadlines | four-bound 1500 s, free 1200 s, other phases 600 s each; no phase reached one |
+
+Phases in one process, sharing one row set: B four-bound from scratch with column
+rounds; A free, warm from B’s rows, with column rounds; C five-bound, one round; D free
+on the final site set, one round; E four-bound on the final site set, one round (so D
+and E are read on one site set and one row set); F priced, with column rounds.
+Each final solution is rationalised, swept, and written with its atoms.
+
+### Runs and exact verdicts
+
+Every final measure below was rationalised and then decided by the exact eighth-turn
+sweep in one worker; “valid” means Conditions 1, 3, 4 and 5 hold (Condition 2, mass
+below 11, fails for every measure here and is reported as the mass).
+Masses are the rationalised totals, exact; LP objectives are context.
+
+**Run 1, seed only (control).** Site set: the scaled seed alone, 149 orbits, 1121 sites,
+no grids; final 155 orbits, 1161 sites after six column rounds; 148 s wall.
+Every phase converged.
+
+| Phase | LP objective | Rationalised mass | Atoms | Corner weight | Centre weight | Least cell (direction) | Valid |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| four-bound, final site set | 12.504868914 | `50019567/4000000 = 12.50489175` | 181 | `600001/4000000` | `218727/4000000` | `4000007/4000000` (0) | yes |
+| five-bound | 12.531451613 | `50125929/4000000 = 12.53148225` | 133 | `600001/4000000` | `500001/4000000` | `4000007/4000000` (0) | yes |
+| free, final site set | 12.103825137 | `48415397/4000000 = 12.10384925` | 161 | none | `502733/4000000` | `800001/800000` (0) | yes |
+
+The seed alone is a site artefact at `96/25`: its free value sits a unit above the
+record’s `11.23` at `3.85`. It is retained as the control that shows why the grids are
+needed, not as a reading of the geometry.
+
+**Run 2 (decision) and run 4 (its replay with the dual saved and the priced phase).**
+Site set: the density-matched grids `25, 34, 42` unioned with the scaled seed, 619
+orbits and 4645 sites at the start, 637 orbits and 4777 sites after the column rounds
+(18 orbits added, every one from the dual’s arrangement vertices); 8517 rows at the
+final phases; 495 s wall for run 2. Every phase converged (no deadline was reached; the
+four-bound phase spent its ten column rounds, the last candidate still at averaged depth
+above 1, so the four-bound value is an upper reading on this site set and the floor
+below is what bounds it from underneath).
+Run 4 reproduced run 2’s objectives to the last printed digit.
+
+| Phase | LP objective | Rationalised mass | Atoms | Corner weight | Centre weight | Least cell (direction) | Valid |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| four-bound, first converged LP on the 619-orbit set | 11.849054622 | — | — | — | — | — | — |
+| four-bound, final site set (E) | 11.798148881 | `23596423/2000000 = 11.7982115` | 401 | `600001/4000000 ≥ 3/20` | `41/16000` | `400001/400000` (0) | yes |
+| five-bound (C) | 11.819153276 | `47276821/4000000 = 11.81920525` | 369 | `600001/4000000` | `500001/4000000 ≥ 1/8` | `400001/400000` (0) | yes |
+| free, final site set (D) | 11.262035287 | `22524199/2000000 = 11.2620995` | 377 | none (the orbit carries 0) | `9767/2000000` | `800003/800000` (0) | yes |
+| priced `M − w_c` (F), first LP on the 637-orbit set | 11.262035287 | — | — | — | — | — | — |
+| priced `M − w_c` (F), after nine more column rounds (646 orbits, 9934 rows) | 11.189559666 | `44758451/4000000 = 11.18961275` | 373 | none | `38307/4000000` | `250001/250000` (0) | yes |
+
+**Verdict on the cell.** The falsifier stated before the run is met: the least
+four-bound measure column generation reaches on this site set has mass
+`23596423/2000000 ≈ 11.798 ≥ 11.15`, and it is a valid measure (so the reading is of a
+real measure, not of an infeasible program).
+The theorem is therefore *not* obtained at `96/25` on the retained shrink and net.
+
+**The price.** On one site set (637 orbits) and one row set (8517 rows):
+`M(forced) − M(free) = 23596423/2000000 − 22524199/2000000 = 33507/62500 = 0.536112`
+exactly (LP: `0.5361136`). Four atoms at `3/20` add `3/5` of mass; the free optimum
+recovers `0.064` of it elsewhere.
+The free measure itself carries mass `11.262 > 11` at `96/25` on this net, `0.262` above
+the certificate line, consistent with the record’s `11.23` unconverged at `3.85` and
+with the plateau at `11.000` at `3.82`.
+
+**The bound is not the obstacle; the position is.** Phase F prices the corner orbit at
+`3` instead of `4`, so its objective is `M − w_c` and its optimum is `min_t (M(t) − t)`
+over every bound `t ≥ 0`; the theorem needs that minimum below 11. On the 637-orbit site
+set it equals the free value, `11.262035287`: the LP leaves T-018’s scaled corner site
+at weight zero even when a unit of its weight is free, because the site’s orbit-averaged
+depth under the free dual is `0.559`, below `3/4`. Nine further column rounds on the
+priced program (646 orbits, 9934 rows) lowered the objective to `11.189559666` with the
+corner orbit *still at zero*, so the fall is the free mass itself moving with columns,
+not the corner site earning weight; the rationalised measure of that phase,
+`44758451/4000000 = 11.18961275` over 373 atoms, is valid (least cell `250001/250000` at
+direction 0) and is the lightest valid measure this lane holds at `96/25`. So no lower
+bound at that position, of any size, yields the ownership theorem on these site sets;
+H-128’s `3/20` is not a tunable that was set too high.
+Every free reading here is an upper reading: each phase’s last candidate orbit still had
+averaged depth above 1 (`1.09` to `1.29`) when its ten column rounds ran out.
+
+**Where the mass went.** The free measure’s heaviest orbit is not T-018’s corner point
+but T-018’s `(197/200, 73/100)` orbit scaled: the eight atoms `(3152/3175, 2336/3175)`,
+`(2336/3175, 3152/3175)` and their images, `106251/800000 =
+0.1328` each — a *pair* of marks per corner straddling the diagonal, `0.3635` apart, so
+one core can hold both.
+The next orbit carries `26087/250000 = 0.1043` at `(3.0818, 1.9630)`, a wall-midpoint
+pair. At `3.84` the corner skeleton is a pair, not a point.
+
+### A four-corner theorem the free measure does prove
+
+Lemma C′ applies to sets as it does to atoms: with `M = 11 + ε` the mass outside the
+eleven cores is at most `ε`, so any set of atoms of total weight above `ε` has at least
+one atom inside some core.
+The free measure of phase D (mass `22524199/2000000`, `ε =
+524199/2000000 = 0.2620995`, exactly verified valid) carries `106251/800000` on each of
+the eight atoms `(3152/3175, 2336/3175)`, `(2336/3175, 3152/3175)` and their images —
+T-018’s `(197/200, 73/100)` orbit scaled by `128/127`. Per corner that pair has mass
+`106251/400000 = 0.2656275 > ε`, margin `441/125000 = 0.003528`; the two marks of a
+corner are `√(1331712/10080625) ≈ 0.3635` apart (one core can hold both, which is why
+the pair and not either mark is the anchor); and the least squared distance between
+marks of different corners is `34668544/10080625 ≈ 1.8545² > 2B² = 99540529/50000000`,
+so no core meets two corners’ pairs.
+Hence:
+
+> **Theorem (four-corner pair containment at `96/25`).** Every packing of eleven unit
+> squares in `[0, 96/25]²` has four distinct squares, one per corner, each containing in
+> its interior at least one of its corner’s two marks `(3152/3175, 2336/3175)` and
+> `(2336/3175, 3152/3175)` (and their images under the container’s symmetries).
+
+It is proved by the phase-D measure and the exact sweep alone; it needs no bound, no
+column settlement and no floor, because a single valid measure suffices.
+It is the two-point form of what H-128 asked for at one point, and it is *not* implied
+by insertion saturation’s blockers (which need only meet the open corner box).
+The margin is `0.0035` of mass, so the phase-F measure (`ε = 0.1896`), which spreads its
+corner mass differently, does not reproduce it: the theorem is a property of this
+measure, and a measure built to widen the margin — phase G, the pair orbit priced at
+`|O| − 2` — is run 5 below.
+
+**Run 5 (phase G, the pair orbit priced at `|O| − 2`)** did not finish inside the lane’s
+clock; its objective is `min (M − μ(pair))` and it is the next session’s first reading.
+
+### The floor for the net
+
+**Run 6 (four-bound only, `45` column rounds of six candidate orbits each, settle
+threshold `0.005`, wall 35 min).** Final LP objective `11.730827068` on 883 orbits and
+10364 rows; the last candidate orbit’s averaged depth was `nan`, so the dual did **not**
+settle (`deadline reached after 4 rounds`). Its rationalised measure: mass
+`2932721/250000 = 11.730884000`, valid = True, least cell `250001/250000`, corner
+weights `['600001/4000000']`.
+
+The floor from that dual, decided exactly: 70 of 70 dual rows kept (weight `11.130827`
+of `11.130827`), symmetrised to 560 squares, 1487212 arrangement vertices, 3076 decided
+exactly above the threshold `T = 1.058083`; exact maximum symmetrised depth found
+`1.092857`, so `D = 1.092857` (`153`/140); depth at the four corner atoms `0.000000`,
+`0.000000`, `0.000000`, `0.000000`; correction `Σ (1 − depth/D)·3/20 = 0.600000`;
+**floor `Σy/D + correction = 10.785071`**. (that is `Σy/D = 10.185071` for the free part
+plus the correction).
+Every valid D4 measure on this `(L, B, net)` with the corner bound has mass at least
+that floor. The four corner atoms have depth exactly 0 under this dual: no tight
+placement of the final row set covers T-018’s corner site, so the bound’s price in the
+dual is the full `4 · 3/20 = 3/5` with no substitution at all, which is the dual’s way
+of saying what phase F said in the primal.
+It is far below `11.15` because the dual is feasible at the sites and not pointwise —
+the price of an unsettled column generation — so the obstruction is, in this block, a
+reading on the site set and not yet a theorem for the net.
+A settled dual (depth within `0.005` of 1 everywhere) would put the floor within half a
+per cent of the LP value, which is what the next session should buy first.
+
+### Lemma C dry run on T-018
+
+T-018 at `381/100` (mass `434547/40000`, `ε = -5453/40000 < 0`, so every atom is owned):
+the heaviest atom `(1849127/1853400, 1849127/1853400)` of weight `917/6250` and its
+orbit moved together along the diagonal mirror (the only displacements that keep a
+four-point orbit D4-closed); base sweep 48.2 s, least cell `4001/4000`. Surviving
+displacements: 0 of 4.
+
+| Radius | Direction | `d` | Valid | Least cell | Failed | s |
+| --- | --- | --- | --- | --- | --- | --- |
+| `1/1000` | +diag | `(1/1000, 1/1000)` | False | `85353/100000` | Condition 5 every reachable cell carries mass 1 | 60.1 |
+| `1/1000` | -diag | `(-1/1000, -1/1000)` | False | `10951/12500` | Condition 5 every reachable cell carries mass 1 | 51.7 |
+| `1/100` | +diag | `(1/100, 1/100)` | False | `85353/100000` | Condition 5 every reachable cell carries mass 1 | 45.4 |
+| `1/100` | -diag | `(-1/100, -1/100)` | False | `85367/100000` | Condition 5 every reachable cell carries mass 1 | 46.9 |
+
+Reading: with T-018’s least cell at `4001/4000`, a margin of `1/4000`, moving `917/6250`
+of weight along the diagonal by the radii tried empties some tight cell, so `R(p) = {p}`
+for the corner atom at this granularity and the transfer lemma has no slack to give at
+`381/100` — the falsifier S5 named.
+The automation itself (move an orbit, re-sweep, read the verdict) is the dry run’s
+deliverable.
+
+### Status of H-128 and what this feeds
+
+H-128 as registered (the retained shrink and net, T-018’s corner atoms scaled, weight at
+least `3/20`, mass below `11.15`) meets its own falsifier: the converged four-bound
+measure has mass `11.798`, and the priced program shows the position, not the bound, is
+what fails. Recommended status: **rejected at `96/25` on the retained shrink and net**,
+with the scoped caveat that every free reading here is an upper reading on a finite site
+set and that a finer net or a larger `B` is a different measure; the floor section says
+how much of the obstruction is a theorem for the net.
+The free value at `96/25` on this net (`11.19` to `11.26`) sits `0.19` to `0.26` above
+the certificate line, which is the number BC-297’s ladder and BC-294’s duality readings
+should be checked against.
+
+What BC-299 (H-111, the anchored certificate) can pin from this lane: not a single
+corner point, but a corner *pair* — four distinct squares each containing one of two
+marks at `≈ (0.9928, 0.7357)` and `(0.7357, 0.9928)` from its corner.
+That is a two-branch anchor per corner (sixteen patterns before symmetry, two up to D4
+per corner choice), each branch a pinned point inside a named square, which is the input
+the frame-conditioned certificate asked for in a weaker but proved form.
+The ownership- conditioned split of Lemma H is unchanged: the centre atom carries
+`≈ 0.005` in the free measure at `96/25`, so no centre anchor is available from the LP
+at this side.
+
+What the next session should do first: run phase G to settlement and read the largest
+margin `μ(pair) − ε` the net allows (a proved margin is what makes the pair anchor
+robust to the shrink tax); then settle the free program with many columns per round,
+take its exact floor `Σy/D`, and record it against 11 — if it clears 11 it is the method
+ceiling at `96/25` for this net, which BC-294 and BC-297 both need.
+
+### Obstructions and mistakes worth recording
+
+- **The seed alone is a site artefact.** T-018’s 1121 atoms scaled to `96/25` give a
+  free value of `12.10`, a unit above the geometry’s; the density-matched grids bring it
+  to `11.26`. A run “seeded with T-018” must union the grids, as the devtool does.
+- **Column generation at this size does not settle in ten rounds.** Every phase’s last
+  candidate orbit still had averaged depth `1.09` to `1.29`, so every reading is an
+  upper reading and the ten-round duals are feasible at the sites only: their exact
+  maximum symmetrised depth is `1.31` to `1.34` and the floors they give (`8.6` to
+  `9.5`) say nothing. A floor for the net needs settlement, which run 6 buys with six
+  columns per round and a `0.005` settle threshold.
+- **The floor script’s first screen was unsound** (it re-decided only vertices within
+  `1e-6` of the float maximum, and float depth over-counts at edge-touching vertices);
+  it was replaced by the threshold rule stated above before any floor was read into the
+  record.
+- **The Lemma C dry run was started concurrently with run 4** by the lane’s own queue,
+  against the one-worker rule, and its first moves exposed a bug: an off-diagonal
+  displacement of a diagonal orbit is not D4-closed (the `d4_images` duplicates were
+  mapped inconsistently), so the sweep refused Condition 1. It was killed on the
+  coordinator’s steering, restricted to diagonal displacements, and requeued last.
+- **Wall times are not comparable** with the planning lane’s: the load average ran from
+  3 to 8 on four cores during the block.
+- **Run 5 crashed after its free phase hit the wall.** The driver’s wall fallback hands
+  back the last converged solution on its own site set, but the shared row matrix
+  already carries the column added for the unconverged round, so the next phase’s warm
+  solve fails on a dimension mismatch (`A_ub` columns against `c`). Run 6 escaped it
+  because it ran one phase.
+  The free phase of run 5 had reached LP `11.232919611` on 626 orbits before the wall
+  (under load average 7–8 the from-scratch free phase took ten minutes, not four), and
+  the pair-priced phase never ran: the pair theorem’s margin beyond the phase-D
+  measure’s `441/125000` is unmeasured.
+  The fix is one line (truncate the row matrix to the returned site set’s columns) and
+  is left to the next session with the scripts.
+
+### Appendix: scripts and outputs as run
+
+Retained verbatim from the lane’s scratch directory on 2026-09-08. Every script imports
+`sqpack` and was run through the project environment with `PACK_JOBS=1` and one BLAS
+thread. None is promoted to `devtools/`; the first lane that reuses one owns that
+promotion.
+
+### `bounded_colgen.py`
+
+```text
+"""BC-293: column generation at 96/25 with lower bounds on the corner-skeleton orbits.
+
+A lane-owned driver that calls `sqpack.fractional` and changes exactly one thing
+against `colgen.solve_rows`: the LP bounds, which the library fixes at ``(0, None)``
+for every orbit. Nothing here decides a bound; the exact eighth-turn sweep
+(`certificate.verify`) is the only thing that turns the final measure into a claim.
+
+Phases share one row set (rows stay valid across bound changes and site additions):
+  A  free LP on the seed site set, then column rounds;
+  B  the four corner atoms bounded below, warm from A's rows, then column rounds;
+  C  B plus the centre atom bounded below (H-128's five-bound criterion);
+  D  the free LP re-solved on the final site set, so the price M(forced) - M(free)
+     is read on one site set.
+The B measure is rationalised and decided by the sweep with workers=1.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+import time
+from fractions import Fraction
+from pathlib import Path
+
+import numpy as np
+from scipy.optimize import linprog
+
+from sqpack.fractional.certificate import Certificate, verify
+from sqpack.fractional.colgen import (
+    LpSolution,
+    Rows,
+    SiteSet,
+    dual_squares,
+    orbit_column,
+    rank_candidates,
+    rationalise_sites,
+    site_counts_for_side,
+    site_set_from_grids,
+    site_set_from_points,
+)
+from sqpack.fractional.generate import (
+    LP_FEASIBILITY,
+    direction_net,
+    net_half_tangents,
+    placement_cells,
+)
+
+
+def log(handle, text: str) -> None:
+    stamp = time.strftime("%H:%M:%S", time.gmtime())
+    line = f"[{stamp}] {text}"
+    print(line, flush=True)
+    handle.write(line + "\n")
+    handle.flush()
+
+
+def solve_lp_bounded(sites: SiteSet, rows: Rows, lower: np.ndarray, cost: np.ndarray | None = None):
+    """`colgen.solve_lp` with per-orbit lower bounds on the per-atom weight, and an
+    optional objective vector (default: the orbit sizes, i.e. the mass)."""
+
+    result = linprog(
+        c=sites.sizes() if cost is None else cost,
+        A_ub=-rows.stacked(),
+        b_ub=-np.ones(len(rows)),
+        bounds=[(float(lb), None) for lb in lower],
+        method="highs",
+    )
+    if not result.success:
+        return None
+    duals = np.maximum(-np.asarray(result.ineqlin.marginals, dtype=float), 0.0)
+    return np.asarray(result.x, dtype=float), duals, float(result.fun)
+
+
+def solve_rows_bounded(
+    sites: SiteSet,
+    square_side: Fraction,
+    half_tangents,
+    rows: Rows,
+    lower: np.ndarray,
+    *,
+    cost: np.ndarray | None = None,
+    max_rounds: int,
+    rows_per_direction: int = 3,
+    tolerance: float = 1e-9,
+    deadline: float | None,
+    handle,
+    tag: str,
+) -> LpSolution:
+    """`colgen.solve_rows`, line for line, with `solve_lp_bounded` in place of `solve_lp`."""
+
+    points = sites.points()
+    sizes = sites.sizes()
+    membership = sites.membership()
+    columns = len(sites.orbits)
+    directions = direction_net(half_tangents)
+    outer = float(sites.outer_side)
+    side = float(square_side)
+    if rows.matrix.shape[0] == 0:
+        rows.matrix = np.zeros((0, columns))
+    weights = np.zeros(columns)
+    duals = np.zeros(len(rows))
+    solution = LpSolution(weights, duals, rows=len(rows))
+    if len(rows) > 0:
+        warm = solve_lp_bounded(sites, rows, lower, cost)
+        if warm is not None:
+            weights, duals, objective = warm
+            solution.weights, solution.duals, solution.objective = weights, duals, objective
+            log(handle, f"{tag} warm solve on {len(rows)} rows: objective {objective:.9f}")
+    for round_index in range(max_rounds):
+        if deadline is not None and time.perf_counter() >= deadline:
+            solution.stopped = f"deadline reached after {round_index} rounds"
+            return solution
+        solution.rounds = round_index + 1
+        started = time.perf_counter()
+        site_weights = weights[membership]
+        support = int(np.count_nonzero(site_weights))
+        violated = added = 0
+        least = float("inf")
+        least_covered = float("inf")
+        for index, direction in enumerate(directions):
+            for mass, cu, cv, covers in placement_cells(
+                points, site_weights, direction, outer, side, keep=rows_per_direction
+            ):
+                least_covered = min(least_covered, mass)
+                if mass >= 1 - tolerance:
+                    break
+                row = np.zeros(columns)
+                np.add.at(row, membership[covers], 1.0)
+                if row.sum() == 0:
+                    solution.stopped = "a placement covers no site: the sites cannot cover"
+                    return solution
+                violated += 1
+                least = min(least, mass)
+                added += rows.add(index, (cu, cv), row)
+        solution.rows = len(rows)
+        solution.least_covered = least_covered
+        sep = time.perf_counter() - started
+        if violated == 0 or (added == 0 and least >= 1 - LP_FEASIBILITY):
+            solution.objective = float((sizes if cost is None else cost) @ weights)
+            solution.stopped = "converged: every placement covers mass 1"
+            log(
+                handle,
+                f"{tag} lp round {round_index}: rows={len(rows)} support={support} "
+                f"violated={violated} least_covered={least_covered:.9f} sep={sep:.1f}s "
+                f"objective={solution.objective:.9f} | converged",
+            )
+            return solution
+        if added == 0:
+            solution.stopped = f"a held row is violated by {1 - least:.3e}: the solver's point is off"
+            return solution
+        lp_started = time.perf_counter()
+        solved = solve_lp_bounded(sites, rows, lower, cost)
+        lp_s = time.perf_counter() - lp_started
+        if solved is None:
+            solution.stopped = "linear program refused the generated rows"
+            return solution
+        weights, duals, objective = solved
+        solution.weights, solution.duals, solution.objective = weights, duals, objective
+        log(
+            handle,
+            f"{tag} lp round {round_index}: rows={len(rows)} added={added} support={support} "
+            f"violated={violated} least={least:.6f} sep={sep:.1f}s lp={lp_s:.1f}s "
+            f"objective={objective:.9f}",
+        )
+    solution.stopped = f"round limit {max_rounds} reached"
+    return solution
+
+
+def column_phase(
+    tag: str,
+    sites: SiteSet,
+    rows: Rows,
+    lower_for,
+    *,
+    cost_for=None,
+    square_side: Fraction,
+    half_tangents,
+    column_rounds: int,
+    max_rounds: int,
+    settle: float,
+    support_cap: int,
+    columns_per_round: int = 1,
+    deadline: float | None,
+    handle,
+) -> tuple[SiteSet, LpSolution, list[dict]]:
+    """`colgen.generate_adaptive`'s loop with the bounded row solver."""
+
+    record: list[dict] = []
+    solution = LpSolution(np.zeros(len(sites.orbits)), np.zeros(0))
+    last_converged: tuple[SiteSet, LpSolution] | None = None
+    for index in range(column_rounds):
+        started = time.perf_counter()
+        lower = lower_for(sites)
+        solution = solve_rows_bounded(
+            sites,
+            square_side,
+            half_tangents,
+            rows,
+            lower,
+            cost=None if cost_for is None else cost_for(sites),
+            max_rounds=max_rounds,
+            deadline=deadline,
+            handle=handle,
+            tag=f"{tag}.col{index}",
+        )
+        found = []
+        depth = float("nan")
+        note = solution.stopped
+        if solution.converged:
+            weighted = dual_squares(
+                rows, solution.duals, half_tangents, sites.outer_side, square_side,
+                support_cap=support_cap,
+            )
+            found = rank_candidates(sites, weighted, wanted=columns_per_round)
+            if found:
+                depth = float(found[0].averaged_depth)
+                note = f"deepest candidate {found[0].point} depth {depth:.6f}"
+            else:
+                note = "no candidate orbit has averaged depth above 1"
+        entry = {
+            "phase": tag, "column_round": index, "rows": len(rows),
+            "orbits": len(sites.orbits), "sites": sites.size,
+            "objective": solution.objective, "lp_rounds": solution.rounds,
+            "least_covered": solution.least_covered, "stopped": solution.stopped,
+            "depth": depth, "seconds": round(time.perf_counter() - started, 1),
+        }
+        record.append(entry)
+        log(handle, f"{tag} column round {index}: {json.dumps(entry)} | {note}")
+        if solution.converged:
+            last_converged = (sites, solution)
+        if (
+            not solution.converged or not found
+            or found[0].averaged_depth <= 1 + settle or index + 1 == column_rounds
+        ):
+            break
+        sites = SiteSet(sites.outer_side, (*sites.orbits, *(c.orbit for c in found)))
+        for candidate in found:
+            rows.add_column(orbit_column(rows, candidate.orbit, half_tangents, square_side))
+    if not solution.converged and last_converged is not None:
+        log(handle, f"{tag}: last column round unconverged ({solution.stopped}); returning the last converged solution")
+        sites, solution = last_converged
+    return sites, solution, record
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--side", type=Fraction, default=Fraction(96, 25))
+    parser.add_argument("--shrink", type=Fraction, default=Fraction(9977, 10000))
+    parser.add_argument("--angle-limit", type=Fraction, default=Fraction(207107, 500000))
+    parser.add_argument("--direction-steps", type=int, default=180)
+    parser.add_argument("--seed-certificate", type=Path, required=True)
+    parser.add_argument("--grid-counts", default="", help="optional comma list of grids to union")
+    parser.add_argument("--corner-bound", type=Fraction, default=Fraction(3, 20))
+    parser.add_argument("--centre-bound", type=Fraction, default=Fraction(1, 8))
+    parser.add_argument("--column-rounds", type=int, default=4)
+    parser.add_argument("--max-rounds", type=int, default=60)
+    parser.add_argument("--settle", type=float, default=0.0)
+    parser.add_argument("--support-cap", type=int, default=32)
+    parser.add_argument("--columns-per-round", type=int, default=1)
+    parser.add_argument("--scale", type=int, default=4_000_000)
+    parser.add_argument("--deadline-a", type=float, default=1200.0)
+    parser.add_argument("--deadline-b", type=float, default=1800.0)
+    parser.add_argument("--deadline-c", type=float, default=600.0)
+    parser.add_argument("--out", type=Path, required=True, help="output directory")
+    parser.add_argument("--phases", default="BACDEF", help="phase letters to run, in this order: B A C D E F G")
+    parser.add_argument("--pair-site", default="197/200,73/100",
+                        help="T-018 coordinates of the near-corner pair orbit (scaled like the seed) for phase G")
+    args = parser.parse_args(argv)
+
+    args.out.mkdir(parents=True, exist_ok=True)
+    handle = (args.out / "run.log").open("a")
+    L, B = args.side, args.shrink
+    half_tangents = net_half_tangents(args.angle_limit, args.direction_steps)
+
+    record = json.loads(args.seed_certificate.read_text())
+    ratio = L / Fraction(record["outer_side"])
+    seed = {(Fraction(x) * ratio, Fraction(y) * ratio) for x, y, _ in record["atoms"]}
+    points = set(seed)
+    counts: tuple[int, ...] = ()
+    if args.grid_counts == "auto":
+        counts = site_counts_for_side(L, B)
+    elif args.grid_counts:
+        counts = tuple(int(c) for c in args.grid_counts.split(","))
+    if counts:
+        points |= set(site_set_from_grids(L, counts, Fraction(1, 2)).positions())
+    sites = site_set_from_points(L, points)
+
+    corner_source = max(record["atoms"], key=lambda a: Fraction(a[2]))
+    corner = (Fraction(corner_source[0]) * ratio, Fraction(corner_source[1]) * ratio)
+    centre = (L / 2, L / 2)
+
+    def orbit_index(site_set: SiteSet, point) -> int:
+        for index, orbit in enumerate(site_set.orbits):
+            if point in orbit:
+                return index
+        raise KeyError(point)
+
+    corner_orbit = sites.orbits[orbit_index(sites, corner)]
+    d2 = min(
+        (p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2
+        for i, p in enumerate(corner_orbit) for q in corner_orbit[i + 1:]
+    )
+    premise = d2 > 2 * B * B
+    inputs = {
+        "side": str(L), "shrink": str(B), "angle_limit": str(args.angle_limit),
+        "direction_steps": args.direction_steps, "seed": str(args.seed_certificate),
+        "seed_ratio": str(ratio), "seed_sites": len(seed), "grid_counts": list(counts),
+        "orbits": len(sites.orbits), "sites": sites.size,
+        "corner_orbit": [[str(x), str(y)] for x, y in corner_orbit],
+        "corner_orbit_size": len(corner_orbit),
+        "corner_min_d2": str(d2), "two_B2": str(2 * B * B), "premise_d2_gt_2B2": premise,
+        "corner_bound": str(args.corner_bound), "centre_bound": str(args.centre_bound),
+        "column_rounds": args.column_rounds, "max_rounds": args.max_rounds,
+        "scale": args.scale, "deadlines_s": [args.deadline_a, args.deadline_b, args.deadline_c],
+        "argv": sys.argv,
+    }
+    log(handle, "inputs " + json.dumps(inputs))
+    if not premise:
+        log(handle, "the corner atoms are not pairwise farther than B*sqrt2 apart: stop")
+        return 2
+
+    def free_bounds(site_set: SiteSet) -> np.ndarray:
+        return np.zeros(len(site_set.orbits))
+
+    def four_bounds(site_set: SiteSet) -> np.ndarray:
+        lower = np.zeros(len(site_set.orbits))
+        lower[orbit_index(site_set, corner)] = float(args.corner_bound)
+        return lower
+
+    def five_bounds(site_set: SiteSet) -> np.ndarray:
+        lower = four_bounds(site_set)
+        lower[orbit_index(site_set, centre)] = float(args.centre_bound)
+        return lower
+
+    rows = Rows()
+    common = dict(
+        square_side=B, half_tangents=half_tangents, max_rounds=args.max_rounds,
+        settle=args.settle, support_cap=args.support_cap, columns_per_round=args.columns_per_round, handle=handle,
+    )
+    results: dict = {"inputs": inputs, "phases": {}}
+    t0 = time.perf_counter()
+
+    pair = (Fraction(args.pair_site.split(",")[0]) * ratio, Fraction(args.pair_site.split(",")[1]) * ratio)
+    pair_orbit = sites.orbits[orbit_index(sites, pair)]
+
+    def priced_cost(site_set: SiteSet) -> np.ndarray:
+        cost = site_set.sizes().copy()
+        cost[orbit_index(site_set, corner)] -= 1.0  # M - w_c: the ownership criterion itself
+        return cost
+
+    def pair_cost(site_set: SiteSet) -> np.ndarray:
+        cost = site_set.sizes().copy()
+        cost[orbit_index(site_set, pair)] -= 2.0  # M - (mass of one corner's pair)
+        return cost
+
+    sol: dict[str, LpSolution] = {}
+    site_of: dict[str, SiteSet] = {}
+    plan = {
+        "B": ("B-four", four_bounds, None, args.column_rounds, args.deadline_b),
+        "A": ("A-free", free_bounds, None, args.column_rounds, args.deadline_a),
+        "C": ("C-five", five_bounds, None, 1, args.deadline_c),
+        "D": ("D-free-final", free_bounds, None, 1, args.deadline_c),
+        "E": ("E-four-final", four_bounds, None, 1, args.deadline_c),
+        "F": ("F-priced", free_bounds, priced_cost, args.column_rounds, args.deadline_c),
+        "G": ("G-pair-priced", free_bounds, pair_cost, args.column_rounds, args.deadline_c),
+    }
+    for letter in args.phases:
+        tag, lower_for, cost_for, col_rounds, wall = plan[letter]
+        new_sites, solution, rec = column_phase(
+            tag, sites, rows, lower_for, cost_for=cost_for, column_rounds=col_rounds,
+            deadline=time.perf_counter() + wall, **common,
+        )
+        results["phases"][letter] = rec
+        sol[tag] = solution
+        site_of[tag] = new_sites
+        if letter not in "DE":  # D and E are re-reads on the site set they were given
+            sites = new_sites
+
+    def finish(tag: str, site_set: SiteSet, solution: LpSolution, expect_corner: Fraction | None):
+        if not solution.converged:
+            log(handle, f"{tag}: not converged ({solution.stopped}); no measure is rationalised")
+            return {"converged": False, "stopped": solution.stopped, "objective": solution.objective}
+        atoms = rationalise_sites(site_set, solution.weights, scale=args.scale)
+        cert = Certificate(n=11, outer_side=L, square_side=B, atoms=atoms, half_tangents=half_tangents)
+        corner_weights = sorted({a.weight for a in atoms if (a.x, a.y) in corner_orbit})
+        centre_weight = [a.weight for a in atoms if (a.x, a.y) == centre]
+        w_c = corner_weights[0] if corner_weights else Fraction(0)
+        priced_value = cert.total_mass - w_c
+        pair_weights = sorted({a.weight for a in atoms if (a.x, a.y) in pair_orbit})
+        w_pair = pair_weights[0] if pair_weights else Fraction(0)
+        pair_value = cert.total_mass - 2 * w_pair
+        log(handle, f"{tag}: rationalised mass {cert.total_mass} = {float(cert.total_mass):.9f} over {len(atoms)} atoms; corner weights {corner_weights}; centre {centre_weight}")
+        started = time.perf_counter()
+        verdict = verify(cert, workers=1)
+        sweep_s = time.perf_counter() - started
+        conds = [(c.name, c.holds, c.detail) for c in verdict.conditions]
+        valid = all(h for n_, h, _ in conds if not n_.startswith("Condition 2"))
+        log(handle, f"{tag}: sweep {sweep_s:.1f}s; conditions {conds}; valid(1,3,4,5)={valid}; least cell {verdict.minimum_cell_mass}")
+        out = {
+            "converged": True, "objective": solution.objective, "lp_rounds": solution.rounds,
+            "mass": str(cert.total_mass), "mass_float": float(cert.total_mass), "atoms": len(atoms),
+            "mass_minus_corner": str(priced_value), "mass_minus_corner_float": float(priced_value),
+            "pair_weights": [str(w) for w in pair_weights], "pair_orbit_size": len(pair_orbit),
+            "mass_minus_pair": str(pair_value), "mass_minus_pair_float": float(pair_value),
+            "corner_weights": [str(w) for w in corner_weights], "centre_weight": [str(w) for w in centre_weight],
+            "conditions": conds, "valid_1345": valid, "least_cell_mass": str(verdict.minimum_cell_mass),
+            "worst_direction": verdict.worst_direction, "sweep_seconds": round(sweep_s, 1),
+            "corner_bound_met": (expect_corner is None) or all(w >= expect_corner for w in corner_weights),
+        }
+        # The full dual support, exact, for the lane's bounded-ceiling check.
+        duals = solution.duals
+        if len(duals) < len(rows):
+            duals = np.concatenate([duals, np.zeros(len(rows) - len(duals))])
+        full = dual_squares(rows, duals, half_tangents, L, B, support_cap=10**9)
+        (args.out / f"dual-{tag}.json").write_text(json.dumps({
+            "tag": tag, "outer_side": str(L), "square_side": str(B), "objective": solution.objective,
+            "priced": ([[str(x), str(y), "3/4"] for x, y in corner_orbit] if tag.startswith("F-") else [])
+                      + ([[str(x), str(y), "3/4"] for x, y in pair_orbit] if tag.startswith("G-") else []),
+            "bounded": [[str(x), str(y), str(lb)] for (x, y), lb in
+                        ([(m, args.corner_bound) for m in corner_orbit] if expect_corner is not None else [])
+                        + ([(centre, args.centre_bound)] if tag.startswith("C-") else [])],
+            "squares": [[str(sq.ax), str(sq.ay), str(sq.u), str(sq.bx), str(sq.by), str(sq.v), str(sq.half), str(wt)]
+                        for sq, wt in full],
+        }, indent=0))
+        (args.out / f"measure-{tag}.json").write_text(json.dumps({
+            "id": f"bc-293-{tag}", "n": 11, "outer_side": str(L), "square_side": str(B),
+            "angle_limit": str(args.angle_limit), "direction_steps": args.direction_steps,
+            "total_mass": str(cert.total_mass), "least_cell_mass": str(verdict.minimum_cell_mass),
+            "symmetry": "D4", "atoms": [[str(a.x), str(a.y), str(a.weight)] for a in atoms],
+        }, indent=1))
+        return out
+
+    results["final"] = {}
+    for tag, solution in sol.items():
+        expect = args.corner_bound if tag in ("E-four-final", "C-five", "B-four") else None
+        results["final"][tag] = finish(tag, site_of[tag], solution, expect)
+    sites_e = sites
+    added = [o[0] for o in sites_e.orbits if o[0] not in seed]
+    results["final_site_set"] = {"orbits": len(sites_e.orbits), "sites": sites_e.size,
+                                 "added_orbits": [[str(x), str(y)] for x, y in added]}
+    results["wall_seconds"] = round(time.perf_counter() - t0, 1)
+    (args.out / "results.json").write_text(json.dumps(results, indent=1, default=str))
+    log(handle, "done " + json.dumps({k: v for k, v in results["final"].items()}, default=str))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+```
+
+### `bounded_ceiling.py`
+
+```text
+"""BC-293: an exact lower bound on the mass of every valid D4 measure on a fixed
+(L, B, net) whose named atoms carry at least the named weights.
+
+Weak duality for the bounded covering program. Let mu be valid (every closed B-square
+at a net direction with centre in the centre domain has mass >= 1), D4-symmetric, with
+mu({p}) >= lb_p at each bounded atom p. Let (P_r, y_r) be placements with y_r >= 0 and
+let depth(q) = sum of y_r over the r with q in the closed P_r, symmetrised over D4 (the
+symmetrised depth integrates the same against a D4-invariant mu). With
+D = max(1, max_q depth(q)):
+
+    sum_r y_r / D <= sum_r (y_r / D) mu(P_r) = integral of depth/D dmu
+                  <= mu(free atoms) + sum_p (depth(p)/D) mu({p})
+
+so  M(mu) = mu(free) + sum_p mu({p}) >= sum_r y_r / D + sum_p (1 - depth(p)/D) mu({p})
+           >= sum_r y_r / D + sum_p (1 - depth(p)/D) lb_p,
+
+because 1 - depth(p)/D >= 0. Everything below is decided in Fraction arithmetic: the
+depth maximum is attained at a vertex of the arrangement of the squares' edge lines and
+the walls (coverage by closed squares is upper semicontinuous), the float depths only
+screen, and every vertex near the maximum is re-decided exactly, as `colgen.check_ceiling`
+does for the free program.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+from fractions import Fraction
+from pathlib import Path
+
+import numpy as np
+
+from sqpack.fractional.colgen import (
+    Square,
+    _arrangement_lines,
+    _depths,
+    _exact_intersection,
+    _float_squares,
+    _vertices,
+    symmetrise,
+)
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dual", type=Path, required=True)
+    parser.add_argument("--decide", type=int, default=3000, help="vertices decided exactly, from the top")
+    parser.add_argument("--support-cap", type=int, default=120,
+                        help="keep the heaviest rows only; discarding dual weight only weakens the floor")
+    args = parser.parse_args(argv)
+    record = json.loads(args.dual.read_text())
+    L = Fraction(record["outer_side"])
+    weighted = tuple(
+        (Square(*(Fraction(v) for v in row[:7])), Fraction(row[7])) for row in record["squares"]
+    )
+    full_total = sum((w for _, w in weighted), start=Fraction(0))
+    weighted = tuple(sorted(weighted, key=lambda item: -item[1])[: args.support_cap])
+    bounded = [((Fraction(x), Fraction(y)), Fraction(lb)) for x, y, lb in record["bounded"]]
+    priced = [((Fraction(x), Fraction(y)), Fraction(c)) for x, y, c in record.get("priced", [])]
+    family = symmetrise(weighted)
+    total = sum((w for _, w in family), start=Fraction(0))
+    axes, offsets, floats, half = _float_squares(family)
+    lines = _arrangement_lines(family, L)
+    points, sources = _vertices(lines, L)
+    depths = _depths(points, axes, offsets, floats, half, slack=1e-9)
+    # Soundness of the maximum. With the 1e-9 slack the float depth of a vertex is an
+    # upper bound on its exact depth, so every vertex whose float depth is below a
+    # threshold T has exact depth below T. Decide exactly every vertex at or above T and
+    # take D = max(exact maximum found, T): an upper bound on the true maximum depth,
+    # which is what the floor needs. T is the largest value that leaves at most
+    # --decide vertices to decide, and never below 1.
+    order = np.argsort(-depths)
+    cut = min(args.decide, order.size) - 1
+    T = max(1.0, float(depths[order[cut]])) if order.size else 1.0
+    near = np.flatnonzero(depths >= T)
+    worst = Fraction(0)
+    worst_at = None
+    for index in near:
+        exact = _exact_intersection(lines[sources[index][0]], lines[sources[index][1]])
+        if exact is None:
+            continue
+        depth = sum((w for sq, w in family if sq.covers(exact[0], exact[1])), start=Fraction(0))
+        if depth > worst:
+            worst, worst_at = depth, exact
+    threshold = Fraction(T)
+    D_from_vertices = max(worst, threshold)
+    centre = L / 2
+    # Priced atoms (per-atom objective cost c_p < 1): the dual needs depth(p) <= c_p D there,
+    # so D also absorbs depth(p) / c_p; the floor is then total / D on the priced objective.
+    priced_depths = []
+    for (x, y), c in priced:
+        depth = sum((w for sq, w in family if sq.covers(x - centre, y - centre)), start=Fraction(0))
+        priced_depths.append({"atom": [str(x), str(y)], "cost": str(c), "depth": str(depth), "depth_over_cost": str(depth / c)})
+    D = max(Fraction(1), D_from_vertices, *[Fraction(d["depth_over_cost"]) for d in priced_depths])
+    per_atom = []
+    correction = Fraction(0)
+    for (x, y), lb in bounded:
+        depth = sum((w for sq, w in family if sq.covers(x - centre, y - centre)), start=Fraction(0))
+        term = (1 - depth / D) * lb
+        correction += term
+        per_atom.append({"atom": [str(x), str(y)], "lb": str(lb), "depth": str(depth), "term": str(term)})
+    bound = total / D + correction
+    out = {
+        "dual": str(args.dual), "tag": record.get("tag"), "lp_objective": record.get("objective"),
+        "squares": len(weighted), "squares_in_dual": len(record["squares"]), "full_dual_weight": str(full_total),
+        "full_dual_weight_float": float(full_total), "symmetrised": len(family), "vertices": int(points.shape[0]),
+        "decided_exactly": int(near.size), "threshold_T": T, "total_weight": str(total), "total_float": float(total),
+        "max_exact_depth_decided": float(worst), "D_from_vertices": float(D_from_vertices),
+        "max_depth_at": None if worst_at is None else [str(worst_at[0]), str(worst_at[1])],
+        "D": str(D), "D_float": float(D), "bounded_atoms": per_atom, "priced_atoms": priced_depths, "correction": str(correction),
+        "lower_bound": str(bound), "lower_bound_float": float(bound),
+    }
+    print(json.dumps(out, indent=1))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+```
+
+### `transfer_dry_run.py`
+
+```text
+"""BC-293, Lemma C dry run: which D4-equivariant displacements of a heavy orbit keep a
+measure valid at its own (L, B, net)?
+
+For a valid measure mu of mass 11 + eps and an atom p of weight w > eps, Lemma C says
+that if mu' = mu - w delta_p + w delta_{p'} is also valid then the core owning p contains
+p'. The whole D4 orbit is moved together so that Condition 1 survives; the orbit members
+are pairwise farther apart than B sqrt 2 plus twice the displacement, so no core meets
+two moved atoms and the lemma applies to each member separately.
+
+Every verdict here is the exact eighth-turn sweep (`certificate.verify`, workers=1);
+mass is irrelevant to validity and is reported only as context.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import time
+from fractions import Fraction
+from pathlib import Path
+
+from sqpack.fractional.certificate import Certificate, d4_images, verify
+from sqpack.fractional.model import Atom
+
+
+def load(path: Path) -> Certificate:
+    record = json.loads(path.read_text())
+    atoms = tuple(
+        Atom(f"{i:04d}", Fraction(x), Fraction(y), Fraction(w))
+        for i, (x, y, w) in enumerate(record["atoms"])
+    )
+    steps = int(record["direction_steps"])
+    limit = Fraction(record["angle_limit"])
+    return Certificate(
+        n=11,
+        outer_side=Fraction(record["outer_side"]),
+        square_side=Fraction(record["square_side"]),
+        atoms=atoms,
+        half_tangents=tuple(limit * k / steps for k in range(steps + 1)),
+    )
+
+
+def valid(cert: Certificate) -> tuple[bool, list, Fraction | None]:
+    verdict = verify(cert, workers=1)
+    conds = [(c.name, c.holds, c.detail) for c in verdict.conditions]
+    ok = all(h for n_, h, _ in conds if not n_.startswith("Condition 2"))
+    return ok, conds, verdict.minimum_cell_mass
+
+
+def moved(cert: Certificate, source: tuple[Fraction, Fraction], d: tuple[Fraction, Fraction]) -> Certificate:
+    """Move the orbit of `source` by the D4-equivariant image of `d`."""
+
+    L = cert.outer_side
+    # Map each orbit member to its own displacement: the image of (source + d) under the
+    # same symmetry that produced the member.
+    images = d4_images(source[0], source[1], L)
+    targets = d4_images(source[0] + d[0], source[1] + d[1], L)
+    move = {img: tgt for img, tgt in zip(images, targets, strict=True)}
+    atoms = []
+    for a in cert.atoms:
+        key = (a.x, a.y)
+        if key in move:
+            tx, ty = move[key]
+            atoms.append(Atom(a.label, tx, ty, a.weight))
+        else:
+            atoms.append(a)
+    return Certificate(
+        n=cert.n, outer_side=L, square_side=cert.square_side, atoms=tuple(atoms),
+        half_tangents=cert.half_tangents,
+    )
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--measure", type=Path, required=True)
+    parser.add_argument("--radii", default="1/1000,1/200,1/50")
+    parser.add_argument("--out", type=Path, required=True)
+    args = parser.parse_args(argv)
+    cert = load(args.measure)
+    L, B = cert.outer_side, cert.square_side
+    heaviest = max(cert.atoms, key=lambda a: a.weight)
+    source = (heaviest.x, heaviest.y)
+    # The heaviest atom is on the diagonal mirror in every measure here; pick the member
+    # nearest the origin corner as the representative.
+    source = min(d4_images(source[0], source[1], L))
+    mass = cert.total_mass
+    eps = mass - 11
+    w = heaviest.weight
+    started = time.perf_counter()
+    base_ok, base_conds, base_least = valid(cert)
+    base_s = time.perf_counter() - started
+    report = {
+        "measure": str(args.measure), "L": str(L), "B": str(B), "atoms": len(cert.atoms),
+        "mass": str(mass), "eps": str(eps), "heavy_atom": [str(source[0]), str(source[1])],
+        "heavy_weight": str(w), "w_gt_eps": w > eps,
+        "base_valid": base_ok, "base_least_cell": str(base_least), "base_sweep_s": round(base_s, 1),
+        "moves": [],
+    }
+    print(json.dumps({k: v for k, v in report.items() if k != "moves"}), flush=True)
+    if not base_ok:
+        print("base measure is not valid; nothing to transfer", flush=True)
+        args.out.write_text(json.dumps(report, indent=1))
+        return 1
+    radii = [Fraction(r) for r in args.radii.split(",")]
+    # The heavy atom lies on the diagonal mirror, so only displacements along that mirror
+    # keep its orbit a four-point orbit and the moved measure D4-closed; an off-diagonal
+    # displacement would split the orbit into eight, which is the disjunctive form of
+    # Lemma C and not the dry run's object.
+    directions = [("+diag", (1, 1)), ("-diag", (-1, -1))]
+    for r in radii:
+        for name, (dx, dy) in directions:
+            d = (r * dx, r * dy)
+            started = time.perf_counter()
+            cert2 = moved(cert, source, d)
+            ok, conds, least = valid(cert2)
+            entry = {
+                "radius": str(r), "direction": name, "d": [str(d[0]), str(d[1])],
+                "valid": ok, "least_cell": str(least),
+                "failed": [n_ for n_, h, _ in conds if not h and not n_.startswith("Condition 2")],
+                "seconds": round(time.perf_counter() - started, 1),
+            }
+            report["moves"].append(entry)
+            print(json.dumps(entry), flush=True)
+            args.out.write_text(json.dumps(report, indent=1))
+    surviving = [m for m in report["moves"] if m["valid"]]
+    report["surviving"] = len(surviving)
+    args.out.write_text(json.dumps(report, indent=1))
+    print(f"surviving displacements: {len(surviving)} of {len(report['moves'])}", flush=True)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+```
+
+### Command lines
+
+```text
+# every run: from <worktree>/packing, one process, PACK_JOBS=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+# run1 (seed only, control)
+uv run --frozen --all-extras --group dev python bounded_colgen.py --seed-certificate cases/n11_fractional_certificate/certificate.json --out run1 --column-rounds 4 --deadline-b 1800 --deadline-a 1200 --deadline-c 600
+# run2 (decision; phases B A C D E)
+uv run --frozen --all-extras --group dev python bounded_colgen.py --seed-certificate cases/n11_fractional_certificate/certificate.json --grid-counts auto --out run2 --column-rounds 10 --deadline-b 1500 --deadline-a 1200 --deadline-c 600
+# run4 (replay of run2 with the duals saved and phase F)
+uv run --frozen --all-extras --group dev python bounded_colgen.py --seed-certificate cases/n11_fractional_certificate/certificate.json --grid-counts auto --out run4 --column-rounds 10 --deadline-b 1500 --deadline-a 1200 --deadline-c 600
+# floors on run4's duals (the sound threshold rule)
+uv run --frozen --all-extras --group dev python bounded_ceiling.py --dual run4/dual-<tag>.json --support-cap 120 --decide 3000
+# run6 (four-bound only, settling attempt)
+uv run --frozen --all-extras --group dev python bounded_colgen.py --seed-certificate cases/n11_fractional_certificate/certificate.json --grid-counts auto --out run6 --phases B --column-rounds 60 --columns-per-round 6 --settle 0.005 --support-cap 200 --deadline-b 2100
+uv run --frozen --all-extras --group dev python bounded_ceiling.py --dual run6/dual-B-four.json --support-cap 200 --decide 3000
+# run5 (free, then the pair orbit priced)
+uv run --frozen --all-extras --group dev python bounded_colgen.py --seed-certificate cases/n11_fractional_certificate/certificate.json --grid-counts auto --out run5 --phases AG --column-rounds 10 --deadline-a 600 --deadline-c 600
+# Lemma C dry run on T-018
+uv run --frozen --all-extras --group dev python transfer_dry_run.py --measure cases/n11_fractional_certificate/certificate.json --radii 1/1000,1/100 --out transfer-t018.json
+```
+
+### `run1/run.log` (column rounds, rationalisation and sweep lines)
+
+```text
+[04:35:20] inputs {"side": "96/25", "shrink": "9977/10000", "angle_limit": "207107/500000", "direction_steps": 180, "seed": "cases/n11_fractional_certificate/certificate.json", "seed_ratio": "128/127", "seed_sites": 1121, "grid_counts": "", "orbits": 149, "sites": 1121, "corner_orbit": [["29586032/29422725", "29586032/29422725"], ["29586032/29422725", "83397232/29422725"], ["83397232/29422725", "2
+[04:36:58] B-four column round 0: {"phase": "B-four", "column_round": 0, "rows": 2337, "orbits": 149, "sites": 1121, "objective": 12.583458646615542, "lp_rounds": 17, "least_covered": 0.9999999999996468, "stopped": "converged: every placement covers mass 1", "depth": 1.1353383458646618, "seconds": 97.8}
+[04:37:01] B-four column round 1: {"phase": "B-four", "column_round": 1, "rows": 2381, "orbits": 150, "sites": 1125, "objective": 12.583458646612968, "lp_rounds": 4, "least_covered": 0.9999999999985756, "stopped": "converged: every placement covers mass 1", "depth": 1.4454887218045114, "seconds": 2.8}
+[04:37:06] B-four column round 2: {"phase": "B-four", "column_round": 2, "rows": 2615, "orbits": 151, "sites": 1133, "objective": 12.582926829268368, "lp_rounds": 9, "least_covered": 0.99999999999978, "stopped": "converged: every placement covers mass 1", "depth": 1.228658536585366, "seconds": 5.8}
+[04:37:09] B-four column round 3: {"phase": "B-four", "column_round": 3, "rows": 2726, "orbits": 152, "sites": 1141, "objective": 12.547549770291615, "lp_rounds": 3, "least_covered": 0.9999999999996898, "stopped": "converged: every placement covers mass 1", "depth": 1.4687978560490047, "seconds": 2.5}
+[04:37:17] A-free column round 0: {"phase": "A-free", "column_round": 0, "rows": 2984, "orbits": 152, "sites": 1141, "objective": 12.248000000000012, "lp_rounds": 10, "least_covered": 0.9999999999999764, "stopped": "converged: every placement covers mass 1", "depth": 1.54, "seconds": 7.7}
+[04:37:22] A-free column round 1: {"phase": "A-free", "column_round": 1, "rows": 3287, "orbits": 153, "sites": 1149, "objective": 12.208602150537564, "lp_rounds": 7, "least_covered": 0.9999999999998801, "stopped": "converged: every placement covers mass 1", "depth": 1.5989247311827957, "seconds": 5.3}
+[04:37:27] A-free column round 2: {"phase": "A-free", "column_round": 2, "rows": 3521, "orbits": 154, "sites": 1153, "objective": 12.103825136612095, "lp_rounds": 6, "least_covered": 0.9999999999996054, "stopped": "converged: every placement covers mass 1", "depth": 1.5778688524590163, "seconds": 4.8}
+[04:37:28] A-free column round 3: {"phase": "A-free", "column_round": 3, "rows": 3525, "orbits": 155, "sites": 1161, "objective": 12.103825136612485, "lp_rounds": 2, "least_covered": 0.9999999999995376, "stopped": "converged: every placement covers mass 1", "depth": 1.6120218579234973, "seconds": 1.6}
+[04:37:29] C-five column round 0: {"phase": "C-five", "column_round": 0, "rows": 3525, "orbits": 155, "sites": 1161, "objective": 12.531451612902355, "lp_rounds": 1, "least_covered": 0.9999999999990206, "stopped": "converged: every placement covers mass 1", "depth": 1.4516129032258065, "seconds": 0.6}
+[04:37:30] D-free-final column round 0: {"phase": "D-free-final", "column_round": 0, "rows": 3525, "orbits": 155, "sites": 1161, "objective": 12.103825136612485, "lp_rounds": 1, "least_covered": 0.9999999999995376, "stopped": "converged: every placement covers mass 1", "depth": 1.6120218579234973, "seconds": 1.0}
+[04:37:32] E-four-final column round 0: {"phase": "E-four-final", "column_round": 0, "rows": 3570, "orbits": 155, "sites": 1161, "objective": 12.504868913858248, "lp_rounds": 3, "least_covered": 0.9999999999995878, "stopped": "converged: every placement covers mass 1", "depth": 1.4302434456928839, "seconds": 2.1}
+[04:37:32] E-four-final: rationalised mass 50019567/4000000 = 12.504891750 over 181 atoms; corner weights [Fraction(600001, 4000000)]; centre [Fraction(218727, 4000000)]
+[04:37:38] E-four-final: sweep 5.8s; conditions [('Condition 1 atoms carry the declared symmetry', True, '181 atoms closed under D4 about the centre'), ('Condition 2 total mass below n', False, 'total 50019567/4000000 against n = 11'), ('Condition 3 net reaches pi/4', True, 'final half-tangent 207107/500000, t^2 + 2t - 1 = 309449/250000000000'), ('Condition 4 containment B(1 + D) < 1', True, 'B = 
+[04:37:38] C-five: rationalised mass 50125929/4000000 = 12.531482250 over 133 atoms; corner weights [Fraction(600001, 4000000)]; centre [Fraction(500001, 4000000)]
+[04:37:42] C-five: sweep 4.4s; conditions [('Condition 1 atoms carry the declared symmetry', True, '133 atoms closed under D4 about the centre'), ('Condition 2 total mass below n', False, 'total 50125929/4000000 against n = 11'), ('Condition 3 net reaches pi/4', True, 'final half-tangent 207107/500000, t^2 + 2t - 1 = 309449/250000000000'), ('Condition 4 containment B(1 + D) < 1', True, 'B = 9977/1
+[04:37:42] D-free-final: rationalised mass 48415397/4000000 = 12.103849250 over 161 atoms; corner weights []; centre [Fraction(502733, 4000000)]
+[04:37:48] D-free-final: sweep 5.5s; conditions [('Condition 1 atoms carry the declared symmetry', True, '161 atoms closed under D4 about the centre'), ('Condition 2 total mass below n', False, 'total 48415397/4000000 against n = 11'), ('Condition 3 net reaches pi/4', True, 'final half-tangent 207107/500000, t^2 + 2t - 1 = 309449/250000000000'), ('Condition 4 containment B(1 + D) < 1', True, 'B = 
+```
+
+### `run2/run.log` (column rounds, rationalisation and sweep lines)
+
+```text
+[04:38:25] inputs {"side": "96/25", "shrink": "9977/10000", "angle_limit": "207107/500000", "direction_steps": 180, "seed": "cases/n11_fractional_certificate/certificate.json", "seed_ratio": "128/127", "seed_sites": 1121, "grid_counts": [25, 34, 42], "orbits": 619, "sites": 4645, "corner_orbit": [["29586032/29422725", "29586032/29422725"], ["29586032/29422725", "83397232/29422725"], ["83397232/294
+[04:39:28] B-four column round 0: {"phase": "B-four", "column_round": 0, "rows": 5256, "orbits": 619, "sites": 4645, "objective": 11.849054621847776, "lp_rounds": 20, "least_covered": 0.9999999999944693, "stopped": "converged: every placement covers mass 1", "depth": 1.262079831932773, "seconds": 63.4}
+[04:39:37] B-four column round 1: {"phase": "B-four", "column_round": 1, "rows": 5331, "orbits": 620, "sites": 4653, "objective": 11.849054621847934, "lp_rounds": 2, "least_covered": 0.9999999999979068, "stopped": "converged: every placement covers mass 1", "depth": 1.0172284823020117, "seconds": 8.4}
+[04:39:44] B-four column round 2: {"phase": "B-four", "column_round": 2, "rows": 5340, "orbits": 621, "sites": 4661, "objective": 11.849054621848705, "lp_rounds": 2, "least_covered": 0.9999999999998193, "stopped": "converged: every placement covers mass 1", "depth": 1.388422035480859, "seconds": 6.9}
+[04:39:49] B-four column round 3: {"phase": "B-four", "column_round": 3, "rows": 5340, "orbits": 622, "sites": 4665, "objective": 11.849054621849463, "lp_rounds": 1, "least_covered": 0.9999999999964111, "stopped": "converged: every placement covers mass 1", "depth": 1.333732308712959, "seconds": 4.8}
+[04:40:01] B-four column round 4: {"phase": "B-four", "column_round": 4, "rows": 5424, "orbits": 623, "sites": 4673, "objective": 11.84905462185005, "lp_rounds": 2, "least_covered": 0.9999999999990465, "stopped": "converged: every placement covers mass 1", "depth": 1.344500300120048, "seconds": 12.0}
+[04:40:08] B-four column round 5: {"phase": "B-four", "column_round": 5, "rows": 5424, "orbits": 624, "sites": 4681, "objective": 11.849054621868067, "lp_rounds": 1, "least_covered": 0.9999999999478997, "stopped": "converged: every placement covers mass 1", "depth": 1.3684799233386489, "seconds": 7.0}
+[04:40:17] B-four column round 6: {"phase": "B-four", "column_round": 6, "rows": 5424, "orbits": 625, "sites": 4689, "objective": 11.849054621848865, "lp_rounds": 1, "least_covered": 0.9999999999999787, "stopped": "converged: every placement covers mass 1", "depth": 1.323741515837104, "seconds": 8.9}
+[04:40:54] B-four column round 7: {"phase": "B-four", "column_round": 7, "rows": 6162, "orbits": 626, "sites": 4697, "objective": 11.798148880686648, "lp_rounds": 9, "least_covered": 0.9999999999986957, "stopped": "converged: every placement covers mass 1", "depth": 1.331111611542067, "seconds": 37.1}
+[04:41:04] B-four column round 8: {"phase": "B-four", "column_round": 8, "rows": 6334, "orbits": 627, "sites": 4705, "objective": 11.798148880652594, "lp_rounds": 2, "least_covered": 0.999999999990242, "stopped": "converged: every placement covers mass 1", "depth": 1.2937024222728948, "seconds": 9.7}
+[04:41:25] B-four column round 9: {"phase": "B-four", "column_round": 9, "rows": 6338, "orbits": 628, "sites": 4713, "objective": 11.798148880656132, "lp_rounds": 2, "least_covered": 0.9999999999971597, "stopped": "converged: every placement covers mass 1", "depth": 1.289960946491203, "seconds": 21.2}
+[04:42:31] A-free column round 0: {"phase": "A-free", "column_round": 0, "rows": 7468, "orbits": 628, "sites": 4713, "objective": 11.262576058879532, "lp_rounds": 11, "least_covered": 0.9999999999977146, "stopped": "converged: every placement covers mass 1", "depth": 1.38908865132656, "seconds": 65.7}
+[04:42:38] A-free column round 1: {"phase": "A-free", "column_round": 1, "rows": 7468, "orbits": 629, "sites": 4721, "objective": 11.262576058892813, "lp_rounds": 1, "least_covered": 0.9999999999996492, "stopped": "converged: every placement covers mass 1", "depth": 1.3906804636751324, "seconds": 7.2}
+[04:42:52] A-free column round 2: {"phase": "A-free", "column_round": 2, "rows": 7515, "orbits": 630, "sites": 4725, "objective": 11.262576058892462, "lp_rounds": 2, "least_covered": 0.9999999999985315, "stopped": "converged: every placement covers mass 1", "depth": 1.3906804636743664, "seconds": 13.9}
+[04:43:16] A-free column round 3: {"phase": "A-free", "column_round": 3, "rows": 7612, "orbits": 631, "sites": 4729, "objective": 11.262035286698529, "lp_rounds": 4, "least_covered": 0.9999999999947481, "stopped": "converged: every placement covers mass 1", "depth": 1.3190576756470451, "seconds": 24.5}
+[04:43:47] A-free column round 4: {"phase": "A-free", "column_round": 4, "rows": 7657, "orbits": 632, "sites": 4737, "objective": 11.262035286701805, "lp_rounds": 5, "least_covered": 0.9999999999995222, "stopped": "converged: every placement covers mass 1", "depth": 1.3041445140201637, "seconds": 31.0}
+[04:44:01] A-free column round 5: {"phase": "A-free", "column_round": 5, "rows": 7664, "orbits": 633, "sites": 4745, "objective": 11.262035286704627, "lp_rounds": 2, "least_covered": 0.999999999999859, "stopped": "converged: every placement covers mass 1", "depth": 1.3738332939508506, "seconds": 13.2}
+[04:44:07] A-free column round 6: {"phase": "A-free", "column_round": 6, "rows": 7664, "orbits": 634, "sites": 4753, "objective": 11.262035286704469, "lp_rounds": 1, "least_covered": 0.9999999999999958, "stopped": "converged: every placement covers mass 1", "depth": 1.3738332939508506, "seconds": 6.2}
+[04:44:27] A-free column round 7: {"phase": "A-free", "column_round": 7, "rows": 8112, "orbits": 635, "sites": 4761, "objective": 11.26203528670447, "lp_rounds": 3, "least_covered": 0.9999999999999984, "stopped": "converged: every placement covers mass 1", "depth": 1.245532713715606, "seconds": 19.7}
+[04:44:43] A-free column round 8: {"phase": "A-free", "column_round": 8, "rows": 8349, "orbits": 636, "sites": 4769, "objective": 11.262035286704448, "lp_rounds": 2, "least_covered": 0.999999999999968, "stopped": "converged: every placement covers mass 1", "depth": 1.1120968218327665, "seconds": 16.0}
+[04:45:16] A-free column round 9: {"phase": "A-free", "column_round": 9, "rows": 8371, "orbits": 637, "sites": 4777, "objective": 11.26203528670448, "lp_rounds": 2, "least_covered": 0.9999999999999976, "stopped": "converged: every placement covers mass 1", "depth": 1.133869427378702, "seconds": 33.1}
+[04:45:47] C-five column round 0: {"phase": "C-five", "column_round": 0, "rows": 8517, "orbits": 637, "sites": 4777, "objective": 11.81915327612074, "lp_rounds": 4, "least_covered": 0.9999999999999989, "stopped": "converged: every placement covers mass 1", "depth": 1.22776063487776, "seconds": 30.5}
+[04:45:55] D-free-final column round 0: {"phase": "D-free-final", "column_round": 0, "rows": 8517, "orbits": 637, "sites": 4777, "objective": 11.262035286704476, "lp_rounds": 1, "least_covered": 0.9999999999999993, "stopped": "converged: every placement covers mass 1", "depth": 1.2057382738654523, "seconds": 8.0}
+[04:46:01] E-four-final column round 0: {"phase": "E-four-final", "column_round": 0, "rows": 8517, "orbits": 637, "sites": 4777, "objective": 11.798148880653619, "lp_rounds": 1, "least_covered": 0.9999999999999812, "stopped": "converged: every placement covers mass 1", "depth": 1.1036015574918459, "seconds": 6.1}
+[04:46:01] E-four-final: rationalised mass 23596423/2000000 = 11.798211500 over 401 atoms; corner weights [Fraction(600001, 4000000)]; centre [Fraction(41, 16000)]
+[04:46:15] E-four-final: sweep 13.7s; conditions [('Condition 1 atoms carry the declared symmetry', True, '401 atoms closed under D4 about the centre'), ('Condition 2 total mass below n', False, 'total 23596423/2000000 against n = 11'), ('Condition 3 net reaches pi/4', True, 'final half-tangent 207107/500000, t^2 + 2t - 1 = 309449/250000000000'), ('Condition 4 containment B(1 + D) < 1', True, 'B =
+[04:46:15] C-five: rationalised mass 47276821/4000000 = 11.819205250 over 369 atoms; corner weights [Fraction(600001, 4000000)]; centre [Fraction(500001, 4000000)]
+[04:46:27] C-five: sweep 12.5s; conditions [('Condition 1 atoms carry the declared symmetry', True, '369 atoms closed under D4 about the centre'), ('Condition 2 total mass below n', False, 'total 47276821/4000000 against n = 11'), ('Condition 3 net reaches pi/4', True, 'final half-tangent 207107/500000, t^2 + 2t - 1 = 309449/250000000000'), ('Condition 4 containment B(1 + D) < 1', True, 'B = 9977/
+[04:46:27] D-free-final: rationalised mass 22524199/2000000 = 11.262099500 over 377 atoms; corner weights []; centre [Fraction(9767, 2000000)]
+[04:46:40] D-free-final: sweep 12.7s; conditions [('Condition 1 atoms carry the declared symmetry', True, '377 atoms closed under D4 about the centre'), ('Condition 2 total mass below n', False, 'total 22524199/2000000 against n = 11'), ('Condition 3 net reaches pi/4', True, 'final half-tangent 207107/500000, t^2 + 2t - 1 = 309449/250000000000'), ('Condition 4 containment B(1 + D) < 1', True, 'B =
+```
+
+### `run4/run.log` (column rounds, rationalisation and sweep lines)
+
+```text
+[04:48:32] inputs {"side": "96/25", "shrink": "9977/10000", "angle_limit": "207107/500000", "direction_steps": 180, "seed": "cases/n11_fractional_certificate/certificate.json", "seed_ratio": "128/127", "seed_sites": 1121, "grid_counts": [25, 34, 42], "orbits": 619, "sites": 4645, "corner_orbit": [["29586032/29422725", "29586032/29422725"], ["29586032/29422725", "83397232/29422725"], ["83397232/294
+[04:49:42] B-four column round 0: {"phase": "B-four", "column_round": 0, "rows": 5256, "orbits": 619, "sites": 4645, "objective": 11.849054621847776, "lp_rounds": 20, "least_covered": 0.9999999999944693, "stopped": "converged: every placement covers mass 1", "depth": 1.262079831932773, "seconds": 69.4}
+[04:49:51] B-four column round 1: {"phase": "B-four", "column_round": 1, "rows": 5331, "orbits": 620, "sites": 4653, "objective": 11.849054621847934, "lp_rounds": 2, "least_covered": 0.9999999999979068, "stopped": "converged: every placement covers mass 1", "depth": 1.0172284823020117, "seconds": 9.3}
+[04:49:59] B-four column round 2: {"phase": "B-four", "column_round": 2, "rows": 5340, "orbits": 621, "sites": 4661, "objective": 11.849054621848705, "lp_rounds": 2, "least_covered": 0.9999999999998193, "stopped": "converged: every placement covers mass 1", "depth": 1.388422035480859, "seconds": 8.2}
+[04:50:05] B-four column round 3: {"phase": "B-four", "column_round": 3, "rows": 5340, "orbits": 622, "sites": 4665, "objective": 11.849054621849463, "lp_rounds": 1, "least_covered": 0.9999999999964111, "stopped": "converged: every placement covers mass 1", "depth": 1.333732308712959, "seconds": 5.6}
+[04:50:16] B-four column round 4: {"phase": "B-four", "column_round": 4, "rows": 5424, "orbits": 623, "sites": 4673, "objective": 11.84905462185005, "lp_rounds": 2, "least_covered": 0.9999999999990465, "stopped": "converged: every placement covers mass 1", "depth": 1.344500300120048, "seconds": 10.5}
+[04:50:21] B-four column round 5: {"phase": "B-four", "column_round": 5, "rows": 5424, "orbits": 624, "sites": 4681, "objective": 11.849054621868067, "lp_rounds": 1, "least_covered": 0.9999999999478997, "stopped": "converged: every placement covers mass 1", "depth": 1.3684799233386489, "seconds": 5.1}
+[04:50:26] B-four column round 6: {"phase": "B-four", "column_round": 6, "rows": 5424, "orbits": 625, "sites": 4689, "objective": 11.849054621848865, "lp_rounds": 1, "least_covered": 0.9999999999999787, "stopped": "converged: every placement covers mass 1", "depth": 1.323741515837104, "seconds": 5.1}
+[04:51:16] B-four column round 7: {"phase": "B-four", "column_round": 7, "rows": 6162, "orbits": 626, "sites": 4697, "objective": 11.798148880686648, "lp_rounds": 9, "least_covered": 0.9999999999986957, "stopped": "converged: every placement covers mass 1", "depth": 1.331111611542067, "seconds": 50.2}
+[04:51:32] B-four column round 8: {"phase": "B-four", "column_round": 8, "rows": 6334, "orbits": 627, "sites": 4705, "objective": 11.798148880652594, "lp_rounds": 2, "least_covered": 0.999999999990242, "stopped": "converged: every placement covers mass 1", "depth": 1.2937024222728948, "seconds": 15.6}
+[04:51:50] B-four column round 9: {"phase": "B-four", "column_round": 9, "rows": 6338, "orbits": 628, "sites": 4713, "objective": 11.798148880656132, "lp_rounds": 2, "least_covered": 0.9999999999971597, "stopped": "converged: every placement covers mass 1", "depth": 1.289960946491203, "seconds": 18.1}
+[04:53:27] A-free column round 0: {"phase": "A-free", "column_round": 0, "rows": 7468, "orbits": 628, "sites": 4713, "objective": 11.262576058879532, "lp_rounds": 11, "least_covered": 0.9999999999977146, "stopped": "converged: every placement covers mass 1", "depth": 1.38908865132656, "seconds": 97.5}
+[04:53:39] A-free column round 1: {"phase": "A-free", "column_round": 1, "rows": 7468, "orbits": 629, "sites": 4721, "objective": 11.262576058892813, "lp_rounds": 1, "least_covered": 0.9999999999996492, "stopped": "converged: every placement covers mass 1", "depth": 1.3906804636751324, "seconds": 11.3}
+[04:54:01] A-free column round 2: {"phase": "A-free", "column_round": 2, "rows": 7515, "orbits": 630, "sites": 4725, "objective": 11.262576058892462, "lp_rounds": 2, "least_covered": 0.9999999999985315, "stopped": "converged: every placement covers mass 1", "depth": 1.3906804636743664, "seconds": 21.9}
+[04:54:35] A-free column round 3: {"phase": "A-free", "column_round": 3, "rows": 7612, "orbits": 631, "sites": 4729, "objective": 11.262035286698529, "lp_rounds": 4, "least_covered": 0.9999999999947481, "stopped": "converged: every placement covers mass 1", "depth": 1.3190576756470451, "seconds": 34.0}
+[04:55:22] A-free column round 4: {"phase": "A-free", "column_round": 4, "rows": 7657, "orbits": 632, "sites": 4737, "objective": 11.262035286701805, "lp_rounds": 5, "least_covered": 0.9999999999995222, "stopped": "converged: every placement covers mass 1", "depth": 1.3041445140201637, "seconds": 47.2}
+[04:55:43] A-free column round 5: {"phase": "A-free", "column_round": 5, "rows": 7664, "orbits": 633, "sites": 4745, "objective": 11.262035286704627, "lp_rounds": 2, "least_covered": 0.999999999999859, "stopped": "converged: every placement covers mass 1", "depth": 1.3738332939508506, "seconds": 20.3}
+[04:55:54] A-free column round 6: {"phase": "A-free", "column_round": 6, "rows": 7664, "orbits": 634, "sites": 4753, "objective": 11.262035286704469, "lp_rounds": 1, "least_covered": 0.9999999999999958, "stopped": "converged: every placement covers mass 1", "depth": 1.3738332939508506, "seconds": 11.0}
+[04:56:26] A-free column round 7: {"phase": "A-free", "column_round": 7, "rows": 8112, "orbits": 635, "sites": 4761, "objective": 11.26203528670447, "lp_rounds": 3, "least_covered": 0.9999999999999984, "stopped": "converged: every placement covers mass 1", "depth": 1.245532713715606, "seconds": 31.9}
+[04:56:47] A-free column round 8: {"phase": "A-free", "column_round": 8, "rows": 8349, "orbits": 636, "sites": 4769, "objective": 11.262035286704448, "lp_rounds": 2, "least_covered": 0.999999999999968, "stopped": "converged: every placement covers mass 1", "depth": 1.1120968218327665, "seconds": 20.9}
+[04:57:10] A-free column round 9: {"phase": "A-free", "column_round": 9, "rows": 8371, "orbits": 637, "sites": 4777, "objective": 11.26203528670448, "lp_rounds": 2, "least_covered": 0.9999999999999976, "stopped": "converged: every placement covers mass 1", "depth": 1.133869427378702, "seconds": 23.3}
+[04:57:49] C-five column round 0: {"phase": "C-five", "column_round": 0, "rows": 8517, "orbits": 637, "sites": 4777, "objective": 11.81915327612074, "lp_rounds": 4, "least_covered": 0.9999999999999989, "stopped": "converged: every placement covers mass 1", "depth": 1.22776063487776, "seconds": 38.2}
+[04:58:02] D-free-final column round 0: {"phase": "D-free-final", "column_round": 0, "rows": 8517, "orbits": 637, "sites": 4777, "objective": 11.262035286704476, "lp_rounds": 1, "least_covered": 0.9999999999999993, "stopped": "converged: every placement covers mass 1", "depth": 1.2057382738654523, "seconds": 13.2}
+[04:58:13] E-four-final column round 0: {"phase": "E-four-final", "column_round": 0, "rows": 8517, "orbits": 637, "sites": 4777, "objective": 11.798148880653619, "lp_rounds": 1, "least_covered": 0.9999999999999812, "stopped": "converged: every placement covers mass 1", "depth": 1.1036015574918459, "seconds": 11.3}
+[04:58:26] F-priced column round 0: {"phase": "F-priced", "column_round": 0, "rows": 8517, "orbits": 637, "sites": 4777, "objective": 11.262035286704473, "lp_rounds": 1, "least_covered": 0.9999999999999982, "stopped": "converged: every placement covers mass 1", "depth": 1.2352340304032767, "seconds": 13.2}
+[04:59:29] F-priced column round 1: {"phase": "F-priced", "column_round": 1, "rows": 8985, "orbits": 638, "sites": 4785, "objective": 11.252735350531731, "lp_rounds": 6, "least_covered": 0.9999999999999948, "stopped": "converged: every placement covers mass 1", "depth": 1.1898630114595954, "seconds": 63.0}
+[05:00:14] F-priced column round 2: {"phase": "F-priced", "column_round": 2, "rows": 9192, "orbits": 639, "sites": 4789, "objective": 11.2496854513501, "lp_rounds": 4, "least_covered": 0.9999999999999847, "stopped": "converged: every placement covers mass 1", "depth": 1.3095893778880068, "seconds": 44.8}
+[05:01:18] F-priced column round 3: {"phase": "F-priced", "column_round": 3, "rows": 9391, "orbits": 640, "sites": 4797, "objective": 11.208349397971096, "lp_rounds": 6, "least_covered": 0.9999999999999918, "stopped": "converged: every placement covers mass 1", "depth": 1.114541130739816, "seconds": 64.0}
+[05:01:39] F-priced column round 4: {"phase": "F-priced", "column_round": 4, "rows": 9421, "orbits": 641, "sites": 4805, "objective": 11.208349397971116, "lp_rounds": 2, "least_covered": 0.9999999999999976, "stopped": "converged: every placement covers mass 1", "depth": 1.0207352337009765, "seconds": 20.8}
+[05:01:50] F-priced column round 5: {"phase": "F-priced", "column_round": 5, "rows": 9421, "orbits": 642, "sites": 4813, "objective": 11.208349397971125, "lp_rounds": 1, "least_covered": 0.9999999999999958, "stopped": "converged: every placement covers mass 1", "depth": 1.298353506304712, "seconds": 10.2}
+[05:01:59] F-priced column round 6: {"phase": "F-priced", "column_round": 6, "rows": 9421, "orbits": 643, "sites": 4821, "objective": 11.208349397971112, "lp_rounds": 1, "least_covered": 0.9999999999999969, "stopped": "converged: every placement covers mass 1", "depth": 1.1254420408937205, "seconds": 9.6}
+[05:03:55] F-priced column round 7: {"phase": "F-priced", "column_round": 7, "rows": 9934, "orbits": 644, "sites": 4829, "objective": 11.18957355796806, "lp_rounds": 8, "least_covered": 0.9999999999999994, "stopped": "converged: every placement covers mass 1", "depth": 1.1292533636470434, "seconds": 115.6}
+[05:04:11] F-priced column round 8: {"phase": "F-priced", "column_round": 8, "rows": 9934, "orbits": 645, "sites": 4837, "objective": 11.189559665759083, "lp_rounds": 1, "least_covered": 0.9999999999999991, "stopped": "converged: every placement covers mass 1", "depth": 1.1936672612900197, "seconds": 16.1}
+[05:04:29] F-priced column round 9: {"phase": "F-priced", "column_round": 9, "rows": 9934, "orbits": 646, "sites": 4845, "objective": 11.189559665759083, "lp_rounds": 1, "least_covered": 0.9999999999999987, "stopped": "converged: every placement covers mass 1", "depth": 1.0882441919903192, "seconds": 17.3}
+[05:04:29] E-four-final: rationalised mass 23596423/2000000 = 11.798211500 over 401 atoms; corner weights [Fraction(600001, 4000000)]; centre [Fraction(41, 16000)]
+[05:04:56] E-four-final: sweep 27.3s; conditions [('Condition 1 atoms carry the declared symmetry', True, '401 atoms closed under D4 about the centre'), ('Condition 2 total mass below n', False, 'total 23596423/2000000 against n = 11'), ('Condition 3 net reaches pi/4', True, 'final half-tangent 207107/500000, t^2 + 2t - 1 = 309449/250000000000'), ('Condition 4 containment B(1 + D) < 1', True, 'B =
+[05:04:56] F-priced: rationalised mass 44758451/4000000 = 11.189612750 over 373 atoms; corner weights []; centre [Fraction(38307, 4000000)]
+[05:05:19] F-priced: sweep 22.6s; conditions [('Condition 1 atoms carry the declared symmetry', True, '373 atoms closed under D4 about the centre'), ('Condition 2 total mass below n', False, 'total 44758451/4000000 against n = 11'), ('Condition 3 net reaches pi/4', True, 'final half-tangent 207107/500000, t^2 + 2t - 1 = 309449/250000000000'), ('Condition 4 containment B(1 + D) < 1', True, 'B = 997
+[05:05:19] C-five: rationalised mass 47276821/4000000 = 11.819205250 over 369 atoms; corner weights [Fraction(600001, 4000000)]; centre [Fraction(500001, 4000000)]
+[05:05:41] C-five: sweep 21.9s; conditions [('Condition 1 atoms carry the declared symmetry', True, '369 atoms closed under D4 about the centre'), ('Condition 2 total mass below n', False, 'total 47276821/4000000 against n = 11'), ('Condition 3 net reaches pi/4', True, 'final half-tangent 207107/500000, t^2 + 2t - 1 = 309449/250000000000'), ('Condition 4 containment B(1 + D) < 1', True, 'B = 9977/
+[05:05:41] D-free-final: rationalised mass 22524199/2000000 = 11.262099500 over 377 atoms; corner weights []; centre [Fraction(9767, 2000000)]
+[05:05:57] D-free-final: sweep 16.5s; conditions [('Condition 1 atoms carry the declared symmetry', True, '377 atoms closed under D4 about the centre'), ('Condition 2 total mass below n', False, 'total 22524199/2000000 against n = 11'), ('Condition 3 net reaches pi/4', True, 'final half-tangent 207107/500000, t^2 + 2t - 1 = 309449/250000000000'), ('Condition 4 containment B(1 + D) < 1', True, 'B =
+```
+
+### `run5/run.log` (column rounds, rationalisation and sweep lines)
+
+```text
+[05:48:43] inputs {"side": "96/25", "shrink": "9977/10000", "angle_limit": "207107/500000", "direction_steps": 180, "seed": "cases/n11_fractional_certificate/certificate.json", "seed_ratio": "128/127", "seed_sites": 1121, "grid_counts": [25, 34, 42], "orbits": 619, "sites": 4645, "corner_orbit": [["29586032/29422725", "29586032/29422725"], ["29586032/29422725", "83397232/29422725"], ["83397232/294
+[05:50:28] A-free column round 0: {"phase": "A-free", "column_round": 0, "rows": 4775, "orbits": 619, "sites": 4645, "objective": 11.386020301400558, "lp_rounds": 21, "least_covered": 0.9999999999999554, "stopped": "converged: every placement covers mass 1", "depth": 1.4692955083610197, "seconds": 105.3}
+[05:51:11] A-free column round 1: {"phase": "A-free", "column_round": 1, "rows": 5696, "orbits": 620, "sites": 4653, "objective": 11.312613843371556, "lp_rounds": 7, "least_covered": 0.9999999999908187, "stopped": "converged: every placement covers mass 1", "depth": 1.3544512750455373, "seconds": 42.8}
+[05:51:33] A-free column round 2: {"phase": "A-free", "column_round": 2, "rows": 5966, "orbits": 621, "sites": 4657, "objective": 11.312613843349265, "lp_rounds": 4, "least_covered": 0.9999999999997173, "stopped": "converged: every placement covers mass 1", "depth": 1.1522939435336976, "seconds": 22.1}
+[05:51:53] A-free column round 3: {"phase": "A-free", "column_round": 3, "rows": 5986, "orbits": 622, "sites": 4665, "objective": 11.31261384335261, "lp_rounds": 3, "least_covered": 0.9999999999994427, "stopped": "converged: every placement covers mass 1", "depth": 1.3186902322404372, "seconds": 19.6}
+[05:52:05] A-free column round 4: {"phase": "A-free", "column_round": 4, "rows": 6097, "orbits": 623, "sites": 4673, "objective": 11.312613843527284, "lp_rounds": 2, "least_covered": 0.9999999998135564, "stopped": "converged: every placement covers mass 1", "depth": 1.325165072859745, "seconds": 11.8}
+[05:56:09] A-free column round 5: {"phase": "A-free", "column_round": 5, "rows": 7998, "orbits": 624, "sites": 4681, "objective": 11.237568832493164, "lp_rounds": 20, "least_covered": 0.9999999999999996, "stopped": "converged: every placement covers mass 1", "depth": 1.3276819944165668, "seconds": 244.6}
+[05:58:02] A-free column round 6: {"phase": "A-free", "column_round": 6, "rows": 8351, "orbits": 625, "sites": 4685, "objective": 11.236212568665737, "lp_rounds": 10, "least_covered": 0.9999999999998073, "stopped": "converged: every placement covers mass 1", "depth": 1.0873280492096766, "seconds": 112.7}
+[05:58:45] A-free column round 7: {"phase": "A-free", "column_round": 7, "rows": 8406, "orbits": 626, "sites": 4693, "objective": 11.232919611437643, "lp_rounds": 3, "least_covered": 0.9999999999991993, "stopped": "converged: every placement covers mass 1", "depth": 1.1960211304194466, "seconds": 42.7}
+[05:58:52] A-free column round 8: {"phase": "A-free", "column_round": 8, "rows": 8406, "orbits": 627, "sites": 4701, "objective": 11.232919611436921, "lp_rounds": 0, "least_covered": Infinity, "stopped": "deadline reached after 0 rounds", "depth": NaN, "seconds": 6.5} | deadline reached after 0 rounds
+[05:58:52] A-free: last column round unconverged (deadline reached after 0 rounds); returning the last converged solution
+```
+
+### `run6/run.log` (column rounds, rationalisation and sweep lines)
+
+```text
+[05:12:29] inputs {"side": "96/25", "shrink": "9977/10000", "angle_limit": "207107/500000", "direction_steps": 180, "seed": "cases/n11_fractional_certificate/certificate.json", "seed_ratio": "128/127", "seed_sites": 1121, "grid_counts": [25, 34, 42], "orbits": 619, "sites": 4645, "corner_orbit": [["29586032/29422725", "29586032/29422725"], ["29586032/29422725", "83397232/29422725"], ["83397232/294
+[05:14:18] B-four column round 0: {"phase": "B-four", "column_round": 0, "rows": 5256, "orbits": 619, "sites": 4645, "objective": 11.849054621847776, "lp_rounds": 20, "least_covered": 0.9999999999944693, "stopped": "converged: every placement covers mass 1", "depth": 1.5273109243697478, "seconds": 109.2}
+[05:14:29] B-four column round 1: {"phase": "B-four", "column_round": 1, "rows": 5256, "orbits": 625, "sites": 4685, "objective": 11.84905462184874, "lp_rounds": 1, "least_covered": 0.9999999999999996, "stopped": "converged: every placement covers mass 1", "depth": 1.4204397276151841, "seconds": 10.8}
+[05:15:23] B-four column round 2: {"phase": "B-four", "column_round": 2, "rows": 5964, "orbits": 631, "sites": 4733, "objective": 11.84905462184874, "lp_rounds": 7, "least_covered": 0.9999999999999996, "stopped": "converged: every placement covers mass 1", "depth": 1.4453996510885057, "seconds": 53.9}
+[05:15:39] B-four column round 3: {"phase": "B-four", "column_round": 3, "rows": 5964, "orbits": 637, "sites": 4769, "objective": 11.84905462184874, "lp_rounds": 1, "least_covered": 0.9999999999999999, "stopped": "converged: every placement covers mass 1", "depth": 1.3503526410564226, "seconds": 15.3}
+[05:16:50] B-four column round 4: {"phase": "B-four", "column_round": 4, "rows": 6604, "orbits": 643, "sites": 4817, "objective": 11.837323804342452, "lp_rounds": 10, "least_covered": 0.9999999999999993, "stopped": "converged: every placement covers mass 1", "depth": 1.3676492408130967, "seconds": 70.5}
+[05:18:26] B-four column round 5: {"phase": "B-four", "column_round": 5, "rows": 7457, "orbits": 649, "sites": 4861, "objective": 11.786100263011079, "lp_rounds": 10, "least_covered": 0.9999999999999954, "stopped": "converged: every placement covers mass 1", "depth": 1.2249898714168062, "seconds": 95.6}
+[05:19:14] B-four column round 6: {"phase": "B-four", "column_round": 6, "rows": 7555, "orbits": 655, "sites": 4897, "objective": 11.786100263011082, "lp_rounds": 4, "least_covered": 0.9999999999999662, "stopped": "converged: every placement covers mass 1", "depth": 1.2135420817725353, "seconds": 47.7}
+[05:19:59] B-four column round 7: {"phase": "B-four", "column_round": 7, "rows": 7722, "orbits": 661, "sites": 4945, "objective": 11.78610026301108, "lp_rounds": 3, "least_covered": 0.999999999999986, "stopped": "converged: every placement covers mass 1", "depth": 1.2112805850003985, "seconds": 44.7}
+[05:20:29] B-four column round 8: {"phase": "B-four", "column_round": 8, "rows": 7732, "orbits": 667, "sites": 4993, "objective": 11.786100263011091, "lp_rounds": 2, "least_covered": 0.9999999999999967, "stopped": "converged: every placement covers mass 1", "depth": 1.2193900932493824, "seconds": 29.7}
+[05:20:49] B-four column round 9: {"phase": "B-four", "column_round": 9, "rows": 7732, "orbits": 673, "sites": 5041, "objective": 11.786100263011079, "lp_rounds": 1, "least_covered": 0.999999999999993, "stopped": "converged: every placement covers mass 1", "depth": 1.206139913923647, "seconds": 18.8}
+[05:21:50] B-four column round 10: {"phase": "B-four", "column_round": 10, "rows": 7980, "orbits": 679, "sites": 5089, "objective": 11.780396549418214, "lp_rounds": 7, "least_covered": 0.9999999999999983, "stopped": "converged: every placement covers mass 1", "depth": 1.1904824796041193, "seconds": 61.6}
+[05:22:10] B-four column round 11: {"phase": "B-four", "column_round": 11, "rows": 8015, "orbits": 685, "sites": 5137, "objective": 11.778824888595476, "lp_rounds": 2, "least_covered": 0.9999999999999996, "stopped": "converged: every placement covers mass 1", "depth": 1.2022404687242119, "seconds": 19.1}
+[05:23:12] B-four column round 12: {"phase": "B-four", "column_round": 12, "rows": 8293, "orbits": 691, "sites": 5185, "objective": 11.778824888595448, "lp_rounds": 7, "least_covered": 0.9999999999999885, "stopped": "converged: every placement covers mass 1", "depth": 1.2624195411784123, "seconds": 61.3}
+[05:23:29] B-four column round 13: {"phase": "B-four", "column_round": 13, "rows": 8293, "orbits": 697, "sites": 5221, "objective": 11.778824888595476, "lp_rounds": 1, "least_covered": 0.9999999999999977, "stopped": "converged: every placement covers mass 1", "depth": 1.181187077075425, "seconds": 16.9}
+[05:24:43] B-four column round 14: {"phase": "B-four", "column_round": 14, "rows": 8642, "orbits": 703, "sites": 5269, "objective": 11.77566883909169, "lp_rounds": 8, "least_covered": 0.9999999999999294, "stopped": "converged: every placement covers mass 1", "depth": 1.1493802636669346, "seconds": 73.4}
+[05:25:24] B-four column round 15: {"phase": "B-four", "column_round": 15, "rows": 8888, "orbits": 709, "sites": 5317, "objective": 11.771324009191703, "lp_rounds": 4, "least_covered": 0.9999999999999725, "stopped": "converged: every placement covers mass 1", "depth": 1.1195494907656955, "seconds": 41.4}
+[05:26:01] B-four column round 16: {"phase": "B-four", "column_round": 16, "rows": 8933, "orbits": 715, "sites": 5365, "objective": 11.771324009191757, "lp_rounds": 2, "least_covered": 0.999999999999994, "stopped": "converged: every placement covers mass 1", "depth": 1.1156699480468761, "seconds": 36.7}
+[05:27:19] B-four column round 17: {"phase": "B-four", "column_round": 17, "rows": 9096, "orbits": 721, "sites": 5409, "objective": 11.767953949285923, "lp_rounds": 6, "least_covered": 0.9999999999999979, "stopped": "converged: every placement covers mass 1", "depth": 1.1313301515593122, "seconds": 77.0}
+[05:28:14] B-four column round 18: {"phase": "B-four", "column_round": 18, "rows": 9108, "orbits": 727, "sites": 5457, "objective": 11.767953949285923, "lp_rounds": 5, "least_covered": 0.9999999999999989, "stopped": "converged: every placement covers mass 1", "depth": 1.1561498105508599, "seconds": 54.2}
+[05:28:39] B-four column round 19: {"phase": "B-four", "column_round": 19, "rows": 9108, "orbits": 733, "sites": 5493, "objective": 11.767953949285921, "lp_rounds": 1, "least_covered": 0.9999999999999992, "stopped": "converged: every placement covers mass 1", "depth": 1.1576617604197028, "seconds": 24.6}
+[05:29:02] B-four column round 20: {"phase": "B-four", "column_round": 20, "rows": 9108, "orbits": 739, "sites": 5541, "objective": 11.767953949285893, "lp_rounds": 1, "least_covered": 0.9999999999999674, "stopped": "converged: every placement covers mass 1", "depth": 1.1085712073739435, "seconds": 22.8}
+[05:29:30] B-four column round 21: {"phase": "B-four", "column_round": 21, "rows": 9134, "orbits": 745, "sites": 5589, "objective": 11.767953949285928, "lp_rounds": 2, "least_covered": 0.999999999999999, "stopped": "converged: every placement covers mass 1", "depth": 1.1427863596619061, "seconds": 27.0}
+[05:29:44] B-four column round 22: {"phase": "B-four", "column_round": 22, "rows": 9134, "orbits": 751, "sites": 5629, "objective": 11.767953949285927, "lp_rounds": 1, "least_covered": 0.9999999999999998, "stopped": "converged: every placement covers mass 1", "depth": 1.1631630719906734, "seconds": 14.2}
+[05:30:13] B-four column round 23: {"phase": "B-four", "column_round": 23, "rows": 9200, "orbits": 757, "sites": 5677, "objective": 11.767953949285927, "lp_rounds": 2, "least_covered": 0.999999999999998, "stopped": "converged: every placement covers mass 1", "depth": 1.1095370366017618, "seconds": 28.5}
+[05:30:30] B-four column round 24: {"phase": "B-four", "column_round": 24, "rows": 9200, "orbits": 763, "sites": 5725, "objective": 11.767953949285918, "lp_rounds": 1, "least_covered": 0.9999999999999964, "stopped": "converged: every placement covers mass 1", "depth": 1.152552098513553, "seconds": 16.4}
+[05:30:49] B-four column round 25: {"phase": "B-four", "column_round": 25, "rows": 9200, "orbits": 769, "sites": 5773, "objective": 11.767953949285918, "lp_rounds": 1, "least_covered": 0.999999999999993, "stopped": "converged: every placement covers mass 1", "depth": 1.254552409846056, "seconds": 18.4}
+[05:31:39] B-four column round 26: {"phase": "B-four", "column_round": 26, "rows": 9256, "orbits": 775, "sites": 5809, "objective": 11.767953949285923, "lp_rounds": 2, "least_covered": 0.9999999999999984, "stopped": "converged: every placement covers mass 1", "depth": 1.2263917225298746, "seconds": 49.2}
+[05:32:00] B-four column round 27: {"phase": "B-four", "column_round": 27, "rows": 9256, "orbits": 781, "sites": 5857, "objective": 11.767953949285925, "lp_rounds": 1, "least_covered": 0.9999999999999998, "stopped": "converged: every placement covers mass 1", "depth": 1.1220216409210142, "seconds": 21.3}
+[05:33:14] B-four column round 28: {"phase": "B-four", "column_round": 28, "rows": 9362, "orbits": 787, "sites": 5905, "objective": 11.762900948154126, "lp_rounds": 5, "least_covered": 0.9999999999999989, "stopped": "converged: every placement covers mass 1", "depth": 1.1154596193934503, "seconds": 73.5}
+[05:34:32] B-four column round 29: {"phase": "B-four", "column_round": 29, "rows": 9599, "orbits": 793, "sites": 5953, "objective": 11.748950151195261, "lp_rounds": 6, "least_covered": 0.9999999999999967, "stopped": "converged: every placement covers mass 1", "depth": 1.1019630032997276, "seconds": 77.3}
+[05:35:44] B-four column round 30: {"phase": "B-four", "column_round": 30, "rows": 9659, "orbits": 799, "sites": 6001, "objective": 11.73870050317217, "lp_rounds": 6, "least_covered": 0.9999999999999998, "stopped": "converged: every placement covers mass 1", "depth": 1.1091664843579085, "seconds": 70.9}
+[05:36:32] B-four column round 31: {"phase": "B-four", "column_round": 31, "rows": 9825, "orbits": 805, "sites": 6045, "objective": 11.730827067669175, "lp_rounds": 4, "least_covered": 0.9999999999999918, "stopped": "converged: every placement covers mass 1", "depth": 1.1274592731829574, "seconds": 47.5}
+[05:37:15] B-four column round 32: {"phase": "B-four", "column_round": 32, "rows": 9846, "orbits": 811, "sites": 6093, "objective": 11.730827067669194, "lp_rounds": 2, "least_covered": 0.9999999999999986, "stopped": "converged: every placement covers mass 1", "depth": 1.1413533834586467, "seconds": 43.0}
+[05:37:42] B-four column round 33: {"phase": "B-four", "column_round": 33, "rows": 9846, "orbits": 817, "sites": 6141, "objective": 11.730827067669185, "lp_rounds": 1, "least_covered": 0.9999999999999991, "stopped": "converged: every placement covers mass 1", "depth": 1.1027255639097744, "seconds": 26.1}
+[05:38:11] B-four column round 34: {"phase": "B-four", "column_round": 34, "rows": 9846, "orbits": 823, "sites": 6189, "objective": 11.730827067669152, "lp_rounds": 1, "least_covered": 0.9999999999999943, "stopped": "converged: every placement covers mass 1", "depth": 1.0971052631578948, "seconds": 27.7}
+[05:38:43] B-four column round 35: {"phase": "B-four", "column_round": 35, "rows": 9846, "orbits": 829, "sites": 6237, "objective": 11.730827067669157, "lp_rounds": 1, "least_covered": 0.9999999999999774, "stopped": "converged: every placement covers mass 1", "depth": 1.1399436090225563, "seconds": 31.3}
+[05:39:04] B-four column round 36: {"phase": "B-four", "column_round": 36, "rows": 9846, "orbits": 835, "sites": 6285, "objective": 11.730827067669177, "lp_rounds": 1, "least_covered": 0.9999999999999989, "stopped": "converged: every placement covers mass 1", "depth": 1.0796992481203007, "seconds": 20.5}
+[05:41:29] B-four column round 37: {"phase": "B-four", "column_round": 37, "rows": 10021, "orbits": 841, "sites": 6333, "objective": 11.730827067669182, "lp_rounds": 2, "least_covered": 0.9999999999999984, "stopped": "converged: every placement covers mass 1", "depth": 1.118703007518797, "seconds": 144.6}
+[05:41:55] B-four column round 38: {"phase": "B-four", "column_round": 38, "rows": 10035, "orbits": 847, "sites": 6381, "objective": 11.730827067669175, "lp_rounds": 2, "least_covered": 0.999999999999982, "stopped": "converged: every placement covers mass 1", "depth": 1.1219924812030075, "seconds": 25.1}
+[05:42:24] B-four column round 39: {"phase": "B-four", "column_round": 39, "rows": 10035, "orbits": 853, "sites": 6413, "objective": 11.730827067669146, "lp_rounds": 1, "least_covered": 0.9999999999999899, "stopped": "converged: every placement covers mass 1", "depth": 1.1633458646616541, "seconds": 28.7}
+[05:42:59] B-four column round 40: {"phase": "B-four", "column_round": 40, "rows": 10043, "orbits": 859, "sites": 6461, "objective": 11.730827067669157, "lp_rounds": 2, "least_covered": 0.9999999999999953, "stopped": "converged: every placement covers mass 1", "depth": 1.1158834586466166, "seconds": 34.5}
+[05:43:30] B-four column round 41: {"phase": "B-four", "column_round": 41, "rows": 10043, "orbits": 865, "sites": 6509, "objective": 11.730827067669175, "lp_rounds": 1, "least_covered": 0.9999999999999916, "stopped": "converged: every placement covers mass 1", "depth": 1.080827067669173, "seconds": 29.8}
+[05:45:08] B-four column round 42: {"phase": "B-four", "column_round": 42, "rows": 10237, "orbits": 871, "sites": 6557, "objective": 11.730827067669196, "lp_rounds": 4, "least_covered": 0.9999999999999807, "stopped": "converged: every placement covers mass 1", "depth": 1.1113408521303259, "seconds": 97.3}
+[05:46:12] B-four column round 43: {"phase": "B-four", "column_round": 43, "rows": 10237, "orbits": 877, "sites": 6605, "objective": 11.730827067669138, "lp_rounds": 1, "least_covered": 0.9999999999999314, "stopped": "converged: every placement covers mass 1", "depth": 1.0851503759398495, "seconds": 62.5}
+[05:47:37] B-four column round 44: {"phase": "B-four", "column_round": 44, "rows": 10364, "orbits": 883, "sites": 6653, "objective": 11.727692307692307, "lp_rounds": 4, "least_covered": 0.9938461538461519, "stopped": "deadline reached after 4 rounds", "depth": NaN, "seconds": 84.3} | deadline reached after 4 rounds
+[05:47:37] B-four: last column round unconverged (deadline reached after 4 rounds); returning the last converged solution
+[05:47:37] B-four: rationalised mass 2932721/250000 = 11.730884000 over 328 atoms; corner weights [Fraction(600001, 4000000)]; centre []
+[05:47:54] B-four: sweep 17.4s; conditions [('Condition 1 atoms carry the declared symmetry', True, '328 atoms closed under D4 about the centre'), ('Condition 2 total mass below n', False, 'total 2932721/250000 against n = 11'), ('Condition 3 net reaches pi/4', True, 'final half-tangent 207107/500000, t^2 + 2t - 1 = 309449/250000000000'), ('Condition 4 containment B(1 + D) < 1', True, 'B = 9977/10
+```
+
+### Replaying an exported measure
+
+```text
+from fractions import Fraction
+import json
+from sqpack.fractional.certificate import Certificate, verify
+from sqpack.fractional.model import Atom
+m = json.load(open('bc-293-measure-free-96-25.json'))
+steps, limit = m['direction_steps'], Fraction(m['angle_limit'])
+cert = Certificate(n=11, outer_side=Fraction(m['outer_side']), square_side=Fraction(m['square_side']),
+    atoms=tuple(Atom(str(i), Fraction(x), Fraction(y), Fraction(w)) for i, (x, y, w) in enumerate(m['atoms'])),
+    half_tangents=tuple(limit * k / steps for k in range(steps + 1)))
+v = verify(cert, workers=1)
+print([(c.name, c.holds) for c in v.conditions], v.total_mass, v.minimum_cell_mass)
+```
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
