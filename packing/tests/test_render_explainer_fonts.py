@@ -1,14 +1,14 @@
-"""The three rules that decide which faces the explainer ships, and at what cost.
+"""The four rules that decide which faces the explainer ships, and at what cost.
 
 `tests/test_explainer.py` renders the page and asserts that nothing in it is a
 reference outside it. That is the property, and it is the wrong instrument for these
-three seams: a page that inlines every face in the distribution passes it, and so does
+four seams: a page that inlines every face in the distribution passes it, and so does
 a page that drops the half of a composite slot the other half depends on. The first
 costs 40 KB a face; the second is worse than either alternative, because the reading
 face's metric tables would still be installed and KaTeX would lay out digits it is not
 drawing -- the exact mismatch the math text face exists to prevent.
 
-So the three are exercised directly, on inputs small enough to read:
+So the four are exercised directly, on inputs small enough to read:
 
 - `inline_font_urls` over the four `url()` shapes the distribution actually carries,
   and over the two refusals it owes a build: a face that names a file that is not
@@ -19,29 +19,52 @@ So the three are exercised directly, on inputs small enough to read:
   is the partner this page cannot reach.
 - `katex_js`'s ordering guard, which is what keeps kpress's metric tables from being
   loaded before the bundle they patch.
+- `_print_sans_face`, the prune that keeps kpress's static print instances out of the
+  page. They are at kpress's weight tokens and this page prints at its own, so they
+  would answer nothing while costing 20 KB of base64 a face in every copy served; the
+  PDF pass injects this page's own set into the loaded document instead.
 
-Nothing here reads a real font: `tmp_path` holds two stand-in files of a few bytes, and
-the whole file runs in milliseconds, so it belongs in the quick lane and carries no
-marker.
+One test does read the real static tree, and it is the one that has to: that registering
+`print-fonts.css` upstream leaves the rendered page byte for byte where it was. Nothing
+else here reads a real font -- `tmp_path` holds two stand-in files of a few bytes -- and
+the whole file still runs in well under a second, so it belongs in the quick lane and
+carries no marker.
 """
 
-# `_font_face_reachable` is the prune, and it is private because nothing outside the
-# renderer should decide what a page ships. Testing it directly rather than through
-# `katex_css` is what keeps this file off the real static tree, and off a 1.4 MB page.
+# `_font_face_reachable` and `_print_sans_face` are the prunes, and they are private
+# because nothing outside the renderer should decide what a page ships. Testing them
+# directly rather than through `katex_css` is what keeps all but one test here off the
+# real static tree, and every one of them off a 1.4 MB page.
 # pyright: reportPrivateUsage=false
 from __future__ import annotations
 
 import base64
+import io
+import re
 from pathlib import Path
 
 import pytest
 from kpress.format import assets as kpress_assets
 
+from devtools import render_explainer
 from devtools.render_explainer import (
+    RELATION_FACES,
+    RELATION_FAMILIES,
+    RELATION_POINTS,
+    RELATION_SIZE_ADJUST,
+    _declares_nothing,
     _font_face_reachable,
+    _print_sans_face,
     inline_font_urls,
     katex_js,
+    kpress_css,
+    kpress_static,
+    relation_face_css,
 )
+from devtools.sans_instances import SCREEN_SANS, print_family
+
+#: kpress's generated print-face stylesheet, registered in `DEFAULT_CSS_ASSETS`.
+PRINT_FONTS = "css/print-fonts.css"
 
 #: Stand-ins for the two faces the shapes below reference. Any bytes will do: the
 #: rewrite reads a file and base64s it, and nothing in this file parses a font.
@@ -254,3 +277,181 @@ def test_the_metric_tables_must_follow_the_bundle_they_patch(
     monkeypatch.setattr(kpress_assets, "KATEX_JS_ASSETS", listed)
     with pytest.raises(SystemExit, match=complaint):
         katex_js(tmp_path)
+
+
+def _sans_face(family: str, weight: int) -> str:
+    """One of kpress's generated print instances, in the shape its generator writes."""
+    return (
+        f'  @font-face {{\n    font-family: "{family}";\n    font-style: normal;\n'
+        f"    font-display: swap;\n    font-weight: {weight};\n"
+        f'    src: url("../fonts/kpress-print-sans-latin-{weight}-normal.woff2")'
+        ' format("woff2");\n'
+        "  }\n"
+    )
+
+
+#: The prune, in both directions. Only the static print family goes: it is the one this
+#: page overrides, and it is asked of kpress rather than spelled here, so a rename
+#: upstream moves the case with the rule. `Source Sans 3 Variable` is a different family
+#: and a different string, and the page's screen face; the rest are what the document is
+#: set in.
+PRINT_SANS_CASES: list[tuple[str, str, bool]] = [
+    ("the static print instance", _sans_face(print_family(), 550), True),
+    ("the variable face the screen uses", _sans_face(SCREEN_SANS, 400), False),
+    ("the reading face", _kpress_block("../fonts/pt-serif-latin-400-normal.woff2"), False),
+    ("the composite", _composite_block("../katex/fonts/KaTeX_Main-Regular.woff2"), False),
+    ("a KaTeX face", _katex_block("fonts/KaTeX_Main-Regular.woff2"), False),
+]
+
+
+@pytest.mark.parametrize(
+    ("block", "dropped"),
+    [pytest.param(block, dropped, id=name) for name, block, dropped in PRINT_SANS_CASES],
+)
+def test_only_kpress_own_print_instances_are_pruned(block: str, *, dropped: bool) -> None:
+    """Judged on the family alone, so the rule survives kpress reshaping the stylesheet.
+
+    The variable face is the case that matters: it is what the screen reads in, and
+    dropping it would leave the page with no sans at all. It was also the near miss the
+    whole-string comparison was written for -- while the instances were declared under
+    `"Source Sans 3"`, `"Source Sans 3 Variable"` shared its first eleven characters.
+    kpress's rename put the two families further apart than that; the comparison is
+    still whole, because the next family it declares may not be.
+    """
+    assert _print_sans_face(block) is dropped
+
+
+#: What a stylesheet is once its faces are gone, and what is not empty. The `@media`
+#: wrapper is kpress's: the instances are declared inside one so a screen never fetches
+#: them, and pruning the faces out of it leaves the wrapper behind.
+EMPTINESS_CASES: list[tuple[str, str, bool]] = [
+    ("a comment and an emptied media block", "/* generated */\n\n@media print {\n}\n", True),
+    ("nested empty blocks", "@media print {\n  @supports (x: y) {\n  }\n}\n", True),
+    ("whitespace", "\n\n  \n", True),
+    ("one real rule left in the block", "@media print {\n  body { margin: 0 }\n}\n", False),
+    ("a rule outside any block", "/* c */\n:root { --x: 1 }\n", False),
+]
+
+
+@pytest.mark.parametrize(
+    ("css", "empty"),
+    [pytest.param(css, empty, id=name) for name, css, empty in EMPTINESS_CASES],
+)
+def test_a_stylesheet_with_nothing_left_in_it_does_not_enter_the_page(
+    css: str, *, empty: bool
+) -> None:
+    """Not even as its own comment marker, which is what keeps the page's bytes still."""
+    assert _declares_nothing(css) is empty
+
+
+def test_registering_the_print_faces_upstream_does_not_move_the_page(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """kpress's print stylesheet arrives, and the served page is byte for byte where it was.
+
+    The one test here that reads the real static tree, because the claim is about that
+    tree: twelve faces at kpress's weights, about 250 KB of base64, land in
+    `DEFAULT_CSS_ASSETS` and none of it reaches a reader. The PDF pass supplies this
+    page's own instances at this page's weights, to the loaded document only.
+    """
+    static = kpress_static()
+    if not (static / PRINT_FONTS).is_file():
+        pytest.skip(f"kpress ships no {PRINT_FONTS} at this gitlink")
+    listed = [name for name in kpress_assets.DEFAULT_CSS_ASSETS if name != PRINT_FONTS]
+    monkeypatch.setattr(kpress_assets, "DEFAULT_CSS_ASSETS", listed)
+    without = kpress_css(static)
+    monkeypatch.setattr(kpress_assets, "DEFAULT_CSS_ASSETS", [*listed, PRINT_FONTS])
+    assert kpress_css(static) == without
+    assert f'font-family: "{SCREEN_SANS}"' in without
+
+
+def test_the_relation_face_joins_the_screen_sans_at_the_sans_weight_range() -> None:
+    """The three characters the page sets in a sans run and no text face it ships carries.
+
+    Four properties, and every one of them was a defect before it was a rule.
+
+    The weight range has to match the family's own faces exactly. Blink picks one face per
+    family for a weight before it looks at which face has the character; among faces that
+    match the weight equally the coverage decides, but a face that matches it better wins
+    outright and the search moves on to the next family when it turns out to have no glyph.
+    At `100 900` this face beat Source Sans 3's `200 900` at every weight and every upright
+    sans run on the page came from the reader's machine.
+
+    One family, and not the print stack's `KPress Print Sans` beside it, which is the same
+    lesson from the other side. `render_explainer_pdf` injects this page's static instances
+    into that family at 410, 550 and 680; a relation face declared there over `200 900` did
+    not lose an exact 410 cleanly, and the sans came back out of the export as Type3
+    outline paths with 127 KB on the file. The instances carry kpress's Latin
+    `unicode-range`, so they leave these three code points to the next family, which is
+    this one.
+
+    The `unicode-range` is what keeps the face to those three characters and out of the way
+    of everything else. And the source is inline, because the page is opened from a
+    `file://` URL with nothing to fetch from.
+    """
+    static = kpress_static()
+    css = relation_face_css(static)
+    assert css.count("@font-face") == len(RELATION_FACES) * len(RELATION_FAMILIES)
+    for family in RELATION_FAMILIES:
+        assert f'font-family: "{family}";' in css
+    assert css.count("font-weight: 200 900;") == len(RELATION_FAMILIES)
+    assert css.count("unicode-range: U+2192, U+2248, U+2265;") == len(RELATION_FAMILIES)
+    assert css.count(f"size-adjust: {RELATION_SIZE_ADJUST}%;") == len(RELATION_FAMILIES)
+    assert css.count('url("data:font/woff2;base64,') == len(RELATION_FAMILIES)
+    assert '.woff2")' not in css
+
+
+def test_a_family_kpress_no_longer_declares_fails_the_render(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """`RELATION_FAMILIES` is a copy of kpress's name, so it is checked against kpress.
+
+    The failure it prevents is silent in every other instrument: a renamed family leaves
+    `relation_face_css` declaring a face nothing on the page can reach, the render still
+    reproduces byte for byte, the assertions above still hold -- they read the emitted
+    CSS, which is where the stale name is -- and the three relation characters go back to
+    the reader's own machine. kpress has renamed a sans family here once already.
+
+    A synthetic stylesheet rather than kpress's, because the rename is the input: the
+    same two lines with one name changed are the before and the after.
+    """
+    static = kpress_static()
+
+    def kpress_declares(names: tuple[str, ...]) -> None:
+        css = "\n".join(
+            f'@font-face {{ font-family: "{name}"; src: url("sans.woff2"); }}' for name in names
+        )
+
+        def stylesheet(_static: Path, text: str = css) -> str:
+            return text
+
+        monkeypatch.setattr(render_explainer, "kpress_css", stylesheet)
+
+    kpress_declares(RELATION_FAMILIES)
+    faces = relation_face_css(static).count("@font-face")
+    assert faces == len(RELATION_FACES) * len(RELATION_FAMILIES)
+
+    kpress_declares(tuple(f"{name} Next" for name in RELATION_FAMILIES))
+    with pytest.raises(SystemExit, match="RELATION_FAMILIES is stale"):
+        relation_face_css(static)
+
+
+def test_the_relation_subset_carries_the_three_glyphs_and_its_own_name() -> None:
+    """A few hundred bytes of the 26 KB face, and it has to still say what face it is.
+
+    The name table stays for a reason that cost a render to find: Chromium's font
+    sanitiser renames a face with no name table to `OTS-derived-font`, the PDF embeds it
+    under that name, and the provenance guard cannot tell it from a face off the reader's
+    machine. The hinting programs are what goes instead -- 1.8 KB of the 2.5 KB a hinted
+    three-glyph subset weighs, written for a whole face rather than for these three.
+    """
+    from fontTools.ttLib import TTFont  # noqa: PLC0415
+
+    css = relation_face_css(kpress_static())
+    encoded = re.search(r'base64,([A-Za-z0-9+/=]+)"', css)
+    assert encoded is not None
+    face = TTFont(io.BytesIO(base64.b64decode(encoded.group(1))))
+    assert set(RELATION_POINTS) <= set(face.getBestCmap() or {})
+    assert "KaTeX_Main-Bold" in (face["name"].getDebugName(6) or "")
+    assert not {"fpgm", "prep", "cvt "} & set(face.keys())
+    assert len(base64.b64decode(encoded.group(1))) < 2000

@@ -1,0 +1,560 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: af9cf70e49498fdcd.output
+    sha256: dfd3f9a2ee71dc0c6c207f997ce255cc44a1d7eeea005df279d78791e680a8fa
+    bytes: 815225
+    records: 268
+    session_id: 35e8ab73-ad4e-41b5-9a56-e0ec1adfcb15
+    harness_versions:
+    - 2.1.260
+  span:
+    started_at: '2026-09-07T16:26:24.813Z'
+    ended_at: '2026-09-07T16:43:22.866Z'
+    wall_seconds: 1018.053
+  turns:
+    assistant: 132
+    sidechain: 132
+    by_model:
+      claude-fable-5-1: 132
+    by_thinking_level:
+      xhigh: 132
+    by_model_and_thinking_level:
+      claude-fable-5-1 @ xhigh: 132
+    by_branch:
+      claude/kpress-pt-serif-fonts-1ec7e6: 132
+    latency:
+      count: 132
+      total_seconds: 821.754
+      median_seconds: 2.231
+      max_seconds: 158.864
+  tokens:
+    cache_creation_input_tokens: 3579977
+    cache_read_input_tokens: 11383101
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 3579977
+    input_tokens: 4134
+    output_tokens: 700
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 3579977
+      cache_read_input_tokens: 11383101
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 3579977
+      input_tokens: 4134
+      output_tokens: 700
+  tool_calls:
+    total: 114
+    total_seconds: 2534.038
+    share_of_wall: 2.4891
+    errors: 1
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 2
+      total_seconds: 107.563
+      median_seconds: 53.781
+      max_seconds: 65.65
+    by_tool:
+      Bash:
+        count: 54
+        total_seconds: 1628.209
+        median_seconds: 29.799
+        max_seconds: 83.455
+      WebFetch:
+        count: 42
+        total_seconds: 768.688
+        median_seconds: 7.075
+        max_seconds: 69.403
+      WebSearch:
+        count: 17
+        total_seconds: 137.09
+        median_seconds: 6.71
+        max_seconds: 14.616
+      ToolSearch:
+        count: 1
+        total_seconds: 0.051
+        median_seconds: 0.051
+        max_seconds: 0.051
+    by_command:
+      curl && curl:
+        count: 3
+        total_seconds: 92.635
+        median_seconds: 29.266
+        max_seconds: 61.119
+      gh api:
+        count: 2
+        total_seconds: 89.891
+        median_seconds: 44.946
+        max_seconds: 81.658
+      gh && gh:
+        count: 2
+        total_seconds: 88.892
+        median_seconds: 44.446
+        max_seconds: 83.455
+      git && git:
+        count: 1
+        total_seconds: 83.347
+        median_seconds: 83.347
+        max_seconds: 83.347
+      curl && math && _s && curl && python3:
+        count: 1
+        total_seconds: 65.65
+        median_seconds: 65.65
+        max_seconds: 65.65
+      curl && curl && curl:
+        count: 1
+        total_seconds: 65.37
+        median_seconds: 65.37
+        max_seconds: 65.37
+      curl && curl && curl && curl:
+        count: 2
+        total_seconds: 64.042
+        median_seconds: 32.021
+        max_seconds: 60.876
+      curl:
+        count: 5
+        total_seconds: 63.3
+        median_seconds: 4.915
+        max_seconds: 41.615
+      curl && XP_WIN && XP_MACOSX && ANDROID && XP_UNIX && ^#(if && curl && enum && Constant && Variants && ItalicsCorrection:
+        count: 1
+        total_seconds: 63.248
+        median_seconds: 63.248
+        max_seconds: 63.248
+      'gh && curl && @font-face && font-family: && Noto':
+        count: 1
+        total_seconds: 62.505
+        median_seconds: 62.505
+        max_seconds: 62.505
+      curl && ^mib && ^mtext && ^mnb && curl && enum && MathVariants && Stretch && ItalicCorrection && TopAccent:
+        count: 1
+        total_seconds: 56.934
+        median_seconds: 56.934
+        max_seconds: 56.934
+      mtext && text:
+        count: 1
+        total_seconds: 54.689
+        median_seconds: 54.689
+        max_seconds: 54.689
+      curl && curl && curl && @font-face && mtext && math:
+        count: 1
+        total_seconds: 54.556
+        median_seconds: 54.556
+        max_seconds: 54.556
+      curl && text && surrounding && tools && font-tools && fontExtensions && your && newcm:
+        count: 1
+        total_seconds: 51.831
+        median_seconds: 51.831
+        max_seconds: 51.831
+      ? 'curl && merrorInheritFont && mtextFont && merrorFont && unknownFamily && mathmlSpacing
+        && matchFontHeight && ^.. && font: && curl && fontURL'
+      : count: 1
+        total_seconds: 49.725
+        median_seconds: 49.725
+        max_seconds: 49.725
+      git && git && git && git:
+        count: 1
+        total_seconds: 47.791
+        median_seconds: 47.791
+        max_seconds: 47.791
+      log && git && font-size:
+        count: 1
+        total_seconds: 46.685
+        median_seconds: 46.685
+        max_seconds: 46.685
+      curl && mtextFont && unknownFamily && unknownText && utext && measureText && font-family:
+        count: 1
+        total_seconds: 43.914
+        median_seconds: 43.914
+        max_seconds: 43.914
+      sed:
+        count: 1
+        total_seconds: 43.796
+        median_seconds: 43.796
+        max_seconds: 43.796
+      curl && gh:
+        count: 1
+        total_seconds: 41.913
+        median_seconds: 41.913
+        max_seconds: 41.913
+      gh && select(.patch && select(.patch && font-family && mathnormal && i)):
+        count: 1
+        total_seconds: 38.855
+        median_seconds: 38.855
+        max_seconds: 38.855
+      curl && curl && curl && Latin:
+        count: 1
+        total_seconds: 37.313
+        median_seconds: 37.313
+        max_seconds: 37.313
+      gh && curl:
+        count: 1
+        total_seconds: 37.029
+        median_seconds: 37.029
+        max_seconds: 37.029
+      ^#(if && ifdef:
+        count: 1
+        total_seconds: 36.085
+        median_seconds: 36.085
+        max_seconds: 36.085
+      'texttt && textsf && sans && monospace && .tml-text && font-family: && curl && curl':
+        count: 1
+        total_seconds: 34.933
+        median_seconds: 34.933
+        max_seconds: 34.933
+      rm && git && git:
+        count: 1
+        total_seconds: 31.529
+        median_seconds: 31.529
+        max_seconds: 31.529
+      gh && mathml.css && math_font && curl:
+        count: 1
+        total_seconds: 29.989
+        median_seconds: 29.989
+        max_seconds: 29.989
+      curl && curl && curl && ^math && font-family && mtext && ^mn && ^mib && math-auto && math-shift:
+        count: 1
+        total_seconds: 29.608
+        median_seconds: 29.608
+        max_seconds: 29.608
+      gh && math && curl && curl:
+        count: 1
+        total_seconds: 27.948
+        median_seconds: 27.948
+        max_seconds: 27.948
+      ? gh && Options.ts && OutputJax && OutputJax && FontData && curl && mtextInheritFont
+        && unknownFamily && merrorFont && font-family
+      : count: 1
+        total_seconds: 27.808
+        median_seconds: 27.808
+        max_seconds: 27.808
+      gh && curl && mtext && MathJax && mjx- && STIX && Latin && curl:
+        count: 1
+        total_seconds: 27.178
+        median_seconds: 27.178
+        max_seconds: 27.178
+      cat:
+        count: 3
+        total_seconds: 10.383
+        median_seconds: 0.252
+        max_seconds: 9.911
+      ? mathdefault && Math-Italic && Main-Regular && mathnormal && isMathItalic && const
+        && const && getCharacterMetrics && italic && skew
+      : count: 1
+        total_seconds: 6.948
+        median_seconds: 6.948
+        max_seconds: 6.948
+      curl && curl && curl && curl && curl:
+        count: 1
+        total_seconds: 4.085
+        median_seconds: 4.085
+        max_seconds: 4.085
+      ? gh && metrics && extract && katex.(less && scss && css) && fonts.scss && Options.
+        && buildCommon && symbols. && delimiter && stretchy && gh && fonts
+      : count: 1
+        total_seconds: 3.562
+        median_seconds: 3.562
+        max_seconds: 3.562
+      'curl && curl && mtextFont: && unknownFamily: && curl':
+        count: 1
+        total_seconds: 3.258
+        median_seconds: 3.258
+        max_seconds: 3.258
+      git && git && 1.21:
+        count: 1
+        total_seconds: 3.154
+        median_seconds: 3.154
+        max_seconds: 3.154
+      ? i && "0" && mathdefault && letters && ligatures && Main-Regular && withTextFontShape
+        && withTextFontWeight && fontFamily && textrm
+      : count: 1
+        total_seconds: 2.572
+        median_seconds: 2.572
+        max_seconds: 2.572
+      ? getMetrics && metrics. && .height && .depth && Size1 && Size4 && traverseSequence
+        && katexImagesData && widehat && vec && xrightarrow && metrics && sqrtRuleThickness
+        && ruleWidth
+      : count: 1
+        total_seconds: 2.383
+        median_seconds: 2.383
+        max_seconds: 2.383
+      curl && texttt && textrm && fontFamily && font-family:
+        count: 1
+        total_seconds: 2.275
+        median_seconds: 2.275
+        max_seconds: 2.275
+    by_command_family:
+      toolchain:
+        count: 24
+        total_seconds: 789.657
+        median_seconds: 39.464
+        max_seconds: 65.65
+      vcs:
+        count: 15
+        total_seconds: 567.949
+        median_seconds: 29.989
+        max_seconds: 83.455
+      other:
+        count: 10
+        total_seconds: 184.895
+        median_seconds: 4.76
+        max_seconds: 54.689
+      inspection:
+        count: 4
+        total_seconds: 54.179
+        median_seconds: 5.081
+        max_seconds: 43.796
+      filesystem:
+        count: 1
+        total_seconds: 31.529
+        median_seconds: 31.529
+        max_seconds: 31.529
+    invoked:
+      echo: 151
+      head: 101
+      curl: 61
+      cd: 55
+      cat: 16
+      grep: 16
+      gh api: 16
+      sed: 13
+      mtext: 5
+      font-family: 5
+      git show: 5
+      git log: 4
+      tr: 3
+      Latin: 3
+      tail: 3
+      unknownFamily: 3
+      math: 3
+      .height: 3
+      'font:': 2
+      '1.21': 2
+      STIX: 2
+      Noto: 2
+      metrics: 2
+      ^mib: 2
+      wc: 2
+      OutputJax: 2
+      merrorFont: 2
+      mathdefault: 2
+      Main-Regular: 2
+      mathnormal: 2
+      const: 2
+      getCharacterMetrics: 2
+      italic: 2
+      .depth: 2
+      xHeight: 2
+      fontFamily: 2
+      textrm: 2
+      mtextFont: 2
+      text: 2
+      '@font-face': 2
+      enum: 2
+      ^#(if: 2
+      'font-family:': 2
+      select(.patch: 2
+      texttt: 2
+      font-style: 1
+      font-weight: 1
+      .delimsizing: 1
+      .sizing: 1
+      text-indent: 1
+      \\text: 1
+      Cambria: 1
+      Libertinus: 1
+      Asana: 1
+      Fira: 1
+      extract: 1
+      katex.(less: 1
+      scss: 1
+      css): 1
+      fonts.scss: 1
+      Options.: 1
+      buildCommon: 1
+      symbols.: 1
+      delimiter: 1
+      stretchy: 1
+      fonts: 1
+      rm: 1
+      git clone: 1
+      ^math: 1
+      ^mn: 1
+      math-auto: 1
+      math-shift: 1
+      mathml.css: 1
+      math_font: 1
+      Options.ts: 1
+      FontData: 1
+      mtextInheritFont: 1
+      MathJax: 1
+      mjx-: 1
+      Math-Italic: 1
+      isMathItalic: 1
+      skew: 1
+      getMetrics: 1
+      metrics.: 1
+      Size1: 1
+      Size4: 1
+      traverseSequence: 1
+      katexImagesData: 1
+      widehat: 1
+      vec: 1
+      xrightarrow: 1
+      sqrtRuleThickness: 1
+      ruleWidth: 1
+      sup2: 1
+      sup3: 1
+      sub1: 1
+      sub2: 1
+      supDrop: 1
+      subDrop: 1
+      num2: 1
+      num3: 1
+      denom1: 1
+      denom2: 1
+      axisHeight: 1
+      defaultRuleThickness: 1
+      i: 1
+      '"0"': 1
+      letters: 1
+      ligatures: 1
+      withTextFontShape: 1
+      withTextFontWeight: 1
+      merrorInheritFont: 1
+      mathmlSpacing: 1
+      matchFontHeight: 1
+      ^..: 1
+      fontURL: 1
+      surrounding: 1
+      tools: 1
+      font-tools: 1
+      fontExtensions: 1
+      your: 1
+      newcm: 1
+      ^mtext: 1
+      ^mnb: 1
+      MathVariants: 1
+      Stretch: 1
+      ItalicCorrection: 1
+      TopAccent: 1
+      XP_WIN: 1
+      XP_MACOSX: 1
+      ANDROID: 1
+      XP_UNIX: 1
+      Constant: 1
+      Variants: 1
+      ItalicsCorrection: 1
+      _s: 1
+      python3: 1
+      git grep: 1
+      log: 1
+      font-size: 1
+      unknownText: 1
+      utext: 1
+      measureText: 1
+      i)): 1
+      textsf: 1
+      sans: 1
+      monospace: 1
+      .tml-text: 1
+      ifdef: 1
+      'mtextFont:': 1
+      'unknownFamily:': 1
+    invoked_families:
+      shell: 206
+      other: 179
+      inspection: 151
+      toolchain: 62
+      vcs: 27
+      filesystem: 1
+    by_shell_shape:
+      compound:
+        count: 52
+        total_seconds: 1520.646
+        median_seconds: 29.437
+        max_seconds: 83.455
+      python_inline:
+        count: 2
+        total_seconds: 107.563
+        median_seconds: 53.781
+        max_seconds: 65.65
+    by_thinking_level:
+      xhigh:
+        count: 114
+        total_seconds: 2534.038
+        median_seconds: 7.935
+        max_seconds: 83.455
+    shell_traits:
+      pipes: 51
+      redirects_output: 8
+      substitutes: 8
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'

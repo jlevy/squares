@@ -1,0 +1,535 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: a9b9b284ad2dfc7c9.output
+    sha256: ea1274553855e585cd5dfca9b59ac7cb3be5a1363e20768492f69c007a24d1e9
+    bytes: 696909
+    records: 245
+    session_id: 35e8ab73-ad4e-41b5-9a56-e0ec1adfcb15
+    harness_versions:
+    - 2.1.260
+  span:
+    started_at: '2026-09-07T22:25:00.611Z'
+    ended_at: '2026-09-07T22:44:26.524Z'
+    wall_seconds: 1165.913
+  turns:
+    assistant: 122
+    sidechain: 122
+    by_model:
+      claude-opus-5: 122
+    by_thinking_level:
+      xhigh: 122
+    by_model_and_thinking_level:
+      claude-opus-5 @ xhigh: 122
+    by_branch:
+      claude/print-sans-faces: 122
+    latency:
+      count: 122
+      total_seconds: 886.017
+      median_seconds: 2.199
+      max_seconds: 77.797
+  tokens:
+    cache_creation_input_tokens: 449212
+    cache_read_input_tokens: 14686231
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 449212
+    input_tokens: 244
+    output_tokens: 7349
+    thinking_tokens: 4444
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 449212
+      cache_read_input_tokens: 14686231
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 449212
+      input_tokens: 244
+      output_tokens: 7349
+      thinking_tokens: 4444
+  tool_calls:
+    total: 65
+    total_seconds: 310.841
+    share_of_wall: 0.2666
+    errors: 0
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 14
+      total_seconds: 109.122
+      median_seconds: 7.978
+      max_seconds: 16.184
+    by_tool:
+      Bash:
+        count: 58
+        total_seconds: 296.269
+        median_seconds: 2.859
+        max_seconds: 35.375
+      Agent:
+        count: 3
+        total_seconds: 5.382
+        median_seconds: 1.785
+        max_seconds: 1.857
+      Write:
+        count: 2
+        total_seconds: 4.706
+        median_seconds: 2.353
+        max_seconds: 2.374
+      Edit:
+        count: 2
+        total_seconds: 4.484
+        median_seconds: 2.242
+        max_seconds: 2.612
+    by_command:
+      ls && kpress && pdftotext && pdffonts:
+        count: 1
+        total_seconds: 35.375
+        median_seconds: 35.375
+        max_seconds: 35.375
+      mkdir && probe3.py && pdftotext && pdffonts:
+        count: 2
+        total_seconds: 21.891
+        median_seconds: 10.946
+        max_seconds: 11.428
+      pdffonts:
+        count: 3
+        total_seconds: 19.067
+        median_seconds: 5.745
+        max_seconds: 10.843
+      ? 'run() && probe3.py && pdftotext && pdffonts && }}
+
+        run "C. static family only, no variable fallback" staticonly @media && }}
+
+        run "D. plain system stack" sys @media'
+      : count: 1
+        total_seconds: 17.012
+        median_seconds: 17.012
+        max_seconds: 17.012
+      kpress && pdftotext && pdffonts:
+        count: 1
+        total_seconds: 16.762
+        median_seconds: 16.762
+        max_seconds: 16.762
+      '(!el) && const && {weight: && null, && probe.py':
+        count: 1
+        total_seconds: 16.184
+        median_seconds: 16.184
+        max_seconds: 16.184
+      tbd shortcut:
+        count: 2
+        total_seconds: 14.254
+        median_seconds: 7.127
+        max_seconds: 7.916
+      s.send(CSS.enable) && detach.py:
+        count: 1
+        total_seconds: 11.792
+        median_seconds: 11.792
+        max_seconds: 11.792
+      ? 'run() && probe3.py && pdftotext && pdffonts && font-style:normal && font-weight:400
+        && font-display:swap && src:url("$U") && }:root{--kpress-font-sans:"KPProbe",system-ui,sans-serif
+        && }}
+
+        run D. && font-style:normal && font-weight:400 && font-display:block && src:url("$U")
+        && }:root{--kpress-font-sans:"KPProbe2",system-ui,sans-serif && }}
+
+        run E. && }} && font-family:"Source && font-weight:400'
+      : count: 1
+        total_seconds: 10.879
+        median_seconds: 10.879
+        max_seconds: 10.879
+      uv run python:
+        count: 1
+        total_seconds: 10.566
+        median_seconds: 10.566
+        max_seconds: 10.566
+      git && git && git && git && git:
+        count: 1
+        total_seconds: 10.558
+        median_seconds: 10.558
+        max_seconds: 10.558
+      ? const && (!el) && const && out[name] && probe(html, && probe(wrapper, && probe(main,
+        && probe(h3, && probe(h4, && probe(fn, && probe(th, && out.wrapperClasses && out.mainExists
+        && out.htmlAttrs && out && probe2.py
+      : count: 1
+        total_seconds: 9.016
+        median_seconds: 9.016
+        max_seconds: 9.016
+      sed:
+        count: 10
+        total_seconds: 8.86
+        median_seconds: 0.632
+        max_seconds: 2.489
+      mkdir && probe3.py && pdffonts && pdffonts:
+        count: 1
+        total_seconds: 8.811
+        median_seconds: 8.811
+        max_seconds: 8.811
+      ? const && (el.className && typeof && s && const && (cs.display && cs.visibility &&
+        const && const && n.textContent.trim()) && (hasText) && const && Source && 0)+1 &&
+        ok[key] && 0)+1 && (const && // && (cs.content && cs.content && Source && walk(document.body)
+        && {bad, && sweep.py && pdffonts
+      : count: 1
+        total_seconds: 7.146
+        median_seconds: 7.146
+        max_seconds: 7.146
+      'OUT && document.querySelector(.kpress-prose p) && {footnote: && probe3.py && pdffonts':
+        count: 1
+        total_seconds: 7.021
+        median_seconds: 7.021
+        max_seconds: 7.021
+      strings && strings:
+        count: 1
+        total_seconds: 6.848
+        median_seconds: 6.848
+        max_seconds: 6.848
+      gh pr:
+        count: 2
+        total_seconds: 6.053
+        median_seconds: 3.026
+        max_seconds: 4.476
+      gh && gh:
+        count: 1
+        total_seconds: 5.063
+        median_seconds: 5.063
+        max_seconds: 5.063
+      ls:
+        count: 2
+        total_seconds: 4.921
+        median_seconds: 2.46
+        max_seconds: 2.701
+      grep:
+        count: 4
+        total_seconds: 4.692
+        median_seconds: 0.567
+        max_seconds: 3.113
+      git && git:
+        count: 1
+        total_seconds: 4.679
+        median_seconds: 4.679
+        max_seconds: 4.679
+      'mkdir && Col && Col && one && two && [^a]: && python && ls':
+        count: 1
+        total_seconds: 4.553
+        median_seconds: 4.553
+        max_seconds: 4.553
+      git diff:
+        count: 2
+        total_seconds: 4.455
+        median_seconds: 2.228
+        max_seconds: 2.326
+      uv run kpress:
+        count: 1
+        total_seconds: 3.923
+        median_seconds: 3.923
+        max_seconds: 3.923
+      base64:
+        count: 1
+        total_seconds: 3.518
+        median_seconds: 3.518
+        max_seconds: 3.518
+      git worktree:
+        count: 1
+        total_seconds: 3.343
+        median_seconds: 3.343
+        max_seconds: 3.343
+      mkdir && from:
+        count: 1
+        total_seconds: 3.08
+        median_seconds: 3.08
+        max_seconds: 3.08
+      mkdir && cp && cp && from:
+        count: 1
+        total_seconds: 3.018
+        median_seconds: 3.018
+        max_seconds: 3.018
+      git && git && git:
+        count: 1
+        total_seconds: 2.477
+        median_seconds: 2.477
+        max_seconds: 2.477
+      (which && pdftotext:
+        count: 1
+        total_seconds: 2.417
+        median_seconds: 2.417
+        max_seconds: 2.417
+      pdftotext && pdftotext:
+        count: 1
+        total_seconds: 2.022
+        median_seconds: 2.022
+        max_seconds: 2.022
+      make install:
+        count: 1
+        total_seconds: 1.828
+        median_seconds: 1.828
+        max_seconds: 1.828
+      tbd guidelines:
+        count: 1
+        total_seconds: 1.578
+        median_seconds: 1.578
+        max_seconds: 1.578
+      ls && find && find:
+        count: 1
+        total_seconds: 0.668
+        median_seconds: 0.668
+        max_seconds: 0.668
+      head:
+        count: 1
+        total_seconds: 0.617
+        median_seconds: 0.617
+        max_seconds: 0.617
+      ']*':
+        count: 1
+        total_seconds: 0.615
+        median_seconds: 0.615
+        max_seconds: 0.615
+      cat:
+        count: 1
+        total_seconds: 0.477
+        median_seconds: 0.477
+        max_seconds: 0.477
+      ls && find:
+        count: 1
+        total_seconds: 0.23
+        median_seconds: 0.23
+        max_seconds: 0.23
+    by_command_family:
+      other:
+        count: 17
+        total_seconds: 134.222
+        median_seconds: 7.021
+        max_seconds: 17.012
+      inspection:
+        count: 21
+        total_seconds: 55.84
+        median_seconds: 0.624
+        max_seconds: 35.375
+      filesystem:
+        count: 6
+        total_seconds: 41.353
+        median_seconds: 6.682
+        max_seconds: 11.428
+      vcs:
+        count: 9
+        total_seconds: 36.628
+        median_seconds: 3.343
+        max_seconds: 10.558
+      toolchain:
+        count: 5
+        total_seconds: 28.226
+        median_seconds: 6.338
+        max_seconds: 10.566
+    invoked:
+      echo: 54
+      cd: 52
+      head: 28
+      tail: 25
+      grep: 17
+      sed: 15
+      pdffonts: 13
+      cat: 11
+      pdftotext: 9
+      const: 8
+      ls: 6
+      mkdir: 6
+      uv run python probe3.py: 6
+      git worktree: 5
+      gh pr: 4
+      sort: 4
+      printf: 4
+      awk: 4
+      git diff: 3
+      find: 3
+      font-weight:400: 3
+      uv run kpress: 3
+      tbd shortcut: 2
+      uv run python: 2
+      Col: 2
+      (!el): 2
+      strings: 2
+      uniq: 2
+      from: 2
+      cp: 2
+      Source: 2
+      0)+1: 2
+      run(): 2
+      font-style:normal: 2
+      src:url("$U"): 2
+      git fetch: 1
+      git log: 1
+      git merge-base: 1
+      make install: 1
+      tbd guidelines: 1
+      one: 1
+      two: 1
+      '[^a]:': 1
+      '{weight:': 1
+      null,: 1
+      uv run python probe.py: 1
+      out[name]: 1
+      probe(html,: 1
+      probe(wrapper,: 1
+      probe(main,: 1
+      probe(h3,: 1
+      probe(h4,: 1
+      probe(fn,: 1
+      probe(th,: 1
+      out.wrapperClasses: 1
+      out.mainExists: 1
+      out.htmlAttrs: 1
+      out: 1
+      uv run python probe2.py: 1
+      which: 1
+      (which: 1
+      ']*': 1
+      OUT: 1
+      document.querySelector(.kpress-prose p): 1
+      '{footnote:': 1
+      (el.className: 1
+      typeof: 1
+      s: 1
+      (cs.display: 1
+      cs.visibility: 1
+      'true': 1
+      n.textContent.trim()): 1
+      (hasText): 1
+      ok[key]: 1
+      (const: 1
+      //: 1
+      (cs.content: 1
+      cs.content: 1
+      walk(document.body): 1
+      '{bad,': 1
+      uv run python sweep.py: 1
+      ? '}}
+
+        run "C. static family only, no variable fallback" staticonly @media'
+      : 1
+      ? '}}
+
+        run "D. plain system stack" sys @media'
+      : 1
+      font-display:swap: 1
+      '}:root{--kpress-font-sans:"KPProbe",system-ui,sans-serif': 1
+      ? '}}
+
+        run D.'
+      : 1
+      font-display:block: 1
+      '}:root{--kpress-font-sans:"KPProbe2",system-ui,sans-serif': 1
+      ? '}}
+
+        run E.'
+      : 1
+      '}}': 1
+      font-family:"Source: 1
+      base64: 1
+      tr: 1
+      s.send(CSS.enable): 1
+      uv run python detach.py: 1
+      wc: 1
+      git status: 1
+      git rev-parse: 1
+    invoked_families:
+      inspection: 116
+      other: 113
+      shell: 112
+      vcs: 17
+      filesystem: 8
+      toolchain: 6
+    by_shell_shape:
+      compound:
+        count: 43
+        total_seconds: 184.668
+        median_seconds: 2.22
+        max_seconds: 35.375
+      python_heredoc:
+        count: 10
+        total_seconds: 81.084
+        median_seconds: 7.978
+        max_seconds: 16.184
+      python_inline:
+        count: 4
+        total_seconds: 28.038
+        median_seconds: 6.954
+        max_seconds: 11.428
+      simple:
+        count: 1
+        total_seconds: 2.479
+        median_seconds: 2.479
+        max_seconds: 2.479
+    by_thinking_level:
+      xhigh:
+        count: 65
+        total_seconds: 310.841
+        median_seconds: 2.479
+        max_seconds: 35.375
+    shell_traits:
+      pipes: 42
+      redirects_output: 16
+      substitutes: 1
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'
