@@ -32,7 +32,7 @@ FRONTIER_LANE_SPLIT: dict[str, tuple[int, int]] = {
 }
 
 WORKFLOW = Path(__file__).resolve().parents[2] / ".github/workflows/packing-validation.yml"
-"""The gate's own workflow, read by the test that keeps its two post-merge jobs a
+"""The gate's own workflow, read by the test that keeps its three post-merge jobs a
 partition of `STEPS`. Repository-relative from `packing/tests/`, so two levels up."""
 
 
@@ -238,18 +238,26 @@ def test_isolated_exhaustive_jobs_use_the_host_without_multiplying_concurrent_po
                 )
                 if namespace.only == ["exhaustive exact behavioral tests"]:
                     assert (namespace.jobs, namespace.inner_jobs) == ("1", "4")
-                elif namespace.skip == ["exhaustive exact behavioral tests"] or (
-                    "negative controls" in namespace.only
+                elif (
+                    namespace.skip
+                    == ["exhaustive exact behavioral tests", "slow behavioral tests"]
+                    or "negative controls" in namespace.only
+                    or namespace.only == ["slow behavioral tests"]
                 ):
-                    assert (namespace.jobs, namespace.inner_jobs) == ("2", "2")
+                    # The slow lane has its own runner; the remaining deep checks run
+                    # serially so the screen does not overlap other corpus sweeps.
+                    # Two inner workers retain each tool's own parallelism.
+                    assert (namespace.jobs, namespace.inner_jobs) == ("1", "2")
                 else:
                     continue
                 checked.add((workflow.name, name))
     assert checked == {
         ("packing-validation.yml", "exhaustive"),
+        ("packing-validation.yml", "slow-lane"),
         ("packing-validation.yml", "validate"),
         ("deep-gate.yml", "exhaustive-tier"),
         ("deep-gate.yml", "deferred-steps"),
+        ("deep-gate.yml", "deferred-slow-lane"),
     }
 
 
@@ -2112,8 +2120,8 @@ def test_every_tier_band_is_declared_for_the_shape_ci_runs() -> None:
     reports four and the register records four, and a runner that changed size would
     show up as an unenforced band rather than as a wrong one.
 
-    The post-merge commands are out of scope rather than exempt. Both are narrowed --
-    `--skip` on one, `--only` on the other -- so neither is a clean reading of a whole
+    The post-merge commands are out of scope rather than exempt. All are narrowed --
+    `--skip` on the broad job, `--only` on the isolated lanes -- so none reads a whole
     tier, which is the same reason the `full` entry says only its ceiling applies.
     """
     register = gate_budgets.load()
@@ -2143,28 +2151,34 @@ def test_every_tier_band_is_declared_for_the_shape_ci_runs() -> None:
 
 
 def test_the_post_merge_jobs_partition_the_gate() -> None:
-    """The two jobs a merge runs must together select every step, and none twice.
+    """The three jobs a merge runs must together select every step, and none twice.
 
     think-tr2z split the exhaustive tier onto its own runner so that it reports its own
     verdict against its own budget; `--skip` on the other job is what stops it being paid
     for twice. Both halves of that are a name typed into a YAML file, so this reads the
     workflow, parses each command with the CLI's own parser, and resolves it through the
-    CLI's own selector: a step added to `STEPS` lands in one job or the other, and a
+    CLI's own selector: a step added to `STEPS` lands in one job or another, and a
     rename that breaks the split fails here rather than after a merge.
 
-    A merge still runs the gate as one job plus the exhaustive tier, not as the pull
+    The slow lane now also has its own runner, and the broad job excludes both lanes.
+    Each pair must be disjoint as well as the union complete: a union alone would
+    permit a step to run twice.
+
+    A merge still runs the gate as one broad job plus two isolated lanes, not as the pull
     request's four parts. The `geometry`, `suite` and `sweeps` jobs are pull-request only,
     and the complete integration surface here already contains every step they would have
     run.
     """
     selections = _workflow_selections(pull_request=False)
 
-    assert set(selections) == {"validate", "exhaustive"}
+    assert set(selections) == {"validate", "exhaustive", "slow-lane"}
     assert selections["exhaustive"] == {"exhaustive exact behavioral tests"}
-    assert not selections["validate"] & selections["exhaustive"]
-    assert selections["validate"] | selections["exhaustive"] == {
-        step.name for step in validate.STEPS
-    }
+    assert selections["slow-lane"] == {"slow behavioral tests"}
+    names = list(selections)
+    for index, job in enumerate(names):
+        for other in names[index + 1 :]:
+            assert not selections[job] & selections[other], f"{job} and {other} overlap"
+    assert set().union(*selections.values()) == {step.name for step in validate.STEPS}
 
 
 def test_the_longest_steps_are_submitted_first() -> None:

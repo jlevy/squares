@@ -212,9 +212,8 @@ jobs:
           uv run --frozen --all-extras --group dev
           packing-validate --checks --jobs 3 --inner-jobs 1
 
-      # Everything except the exhaustive exact tier, which is the `exhaustive` job below.
-      # `--skip` is what stops it running here as well: without it the two jobs would both
-      # pay 1943s for the same step. The two selections partition the gate, and
+      # Everything except the two isolated behavioural lanes below. The three selections
+      # partition the gate without paying for any step twice, and
       # `test_the_post_merge_jobs_partition_the_gate` is what keeps them a partition when a
       # step is added.
       #
@@ -222,12 +221,62 @@ jobs:
       # is still a partition. A *tier* flag on this command would be a different thing and
       # is not allowed: a tier is a filter nothing checks the complement of, so it is how a
       # step ends up in neither surface, which is the gap `D-455` and `D-456` came through.
+      #
+      # Run numeric steps serially at two inner workers. PR #116's run 34181619739
+      # timed out the escape screen at 1800s with two numeric pools sharing a runner;
+      # the serial deferred replay in run 34183723509 completed it in 1069.84s.
+      # The slow lane also gets its own runner: run 34177317419 timed it out at 1800s
+      # while it shared the deferred job. This changes scheduling, not coverage.
       - name: Run the complete integration surface
         if: "github.event_name != 'pull_request'"
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --skip "exhaustive exact behavioral tests"
-          --jobs 2 --inner-jobs 2
+          --skip "slow behavioral tests"
+          --jobs 1 --inner-jobs 2
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
+  slow-lane:
+    # The full slow lane stays off the ordinary pull-request surface. Its corpus tests
+    # use PACK_JOBS internally, so retain two inner workers on this isolated runner.
+    if: "github.event_name != 'pull_request'"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Retained-theorem reviews read historical Git objects.
+          fetch-depth: 0
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Run the slow behavioural lane
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --only "slow behavioral tests"
+          --jobs 1 --inner-jobs 2
 
       - name: Preserve validation timings and partial logs
         if: always()

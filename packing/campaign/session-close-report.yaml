@@ -1566,8 +1566,8 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-106.yaml
-    model_responses: 792
-    agent_hours: 9.68
-    active_union_hours: 5.71
-    wall_hours: 5.71
+    model_responses: 1228
+    agent_hours: 13.13
+    active_union_hours: 7.26
+    wall_hours: 7.26
     snapshot_incomplete: true

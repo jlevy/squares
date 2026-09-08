@@ -1,6 +1,6 @@
 """The deep gate's properties, which are otherwise only a comment nobody re-reads.
 
-`packing-validation.yml` keeps four steps off the pull-request surface on cost, and its
+`packing-validation.yml` defers expensive steps from the pull-request surface, and its
 own header states the consequence: "a pull request can be green while a deferred test is
 broken." On 2026-09-05 that happened twice.
 `test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net` asserted a
@@ -134,7 +134,7 @@ def test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers() -> No
     also argued into the deep gate, which is how the set reached seven on 2026-09-07
     without anyone maintaining a count.
 
-    The two jobs are disjoint for the reason the post-merge jobs are: nothing is paid for
+    The three jobs are disjoint for the reason the post-merge jobs are: nothing is paid for
     twice. And the exhaustive tier is alone in its job because of `D-456` -- when it
     outgrew its budget the gate killed it with its output in an unflushed pipe, and three
     merges went red saying nothing about the sixty other steps. A deep gate that cannot
@@ -145,11 +145,12 @@ def test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers() -> No
         for job_name, command in _gate_commands(DEEP_GATE).items()
     }
 
-    assert set(selections) == {"deferred-steps", "exhaustive-tier"}
+    assert set(selections) == {"deferred-steps", "deferred-slow-lane", "exhaustive-tier"}
+    assert selections["deferred-slow-lane"] == {"slow behavioral tests"}
     assert selections["exhaustive-tier"] == {"exhaustive exact behavioral tests"}
-    assert not selections["deferred-steps"] & selections["exhaustive-tier"]
 
     covered: set[str] = set().union(*selections.values())
+    assert len(covered) == sum(len(selected) for selected in selections.values())
     assert covered == {step.name for step in validate.STEPS if not step.fast}
 
 
@@ -209,7 +210,7 @@ def test_the_deep_gate_reports_one_context_and_never_leaves_it_pending() -> None
     filter -- while a job skipped by its own `if` reports a conclusion. So the label is
     tested in the job conditions (above) rather than in the trigger's filters, and the
     aggregate is gated the same way as the jobs it waits on: on an unlabelled pull
-    request all three skip together and none of them hangs.
+    request all four skip together and none of them hangs.
     """
     jobs = _workflow(DEEP_GATE)["jobs"]
     aggregate = jobs[AGGREGATE_JOB]
