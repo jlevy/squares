@@ -206,7 +206,6 @@ case or experiment separately.
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
 | [n = 26: Best-Known Upper-Bound Search](docs/project/research/research-2026-09-07-n26-best-known-audit.md) | research synthesis | supporting | maintained | — |
-| [N26 Source Consistency and Upstream Integration](packing/campaign/agent-sessions/session-100-n26-source-consistency.md) | typed session record | record | retained | — |
 | [MacIver’s Square-Packing Papers: Source and Method Review](docs/project/reviews/review-2026-09-07-maciver-square-packing.md) | dated review record | record | retained | — |
 | [Stromquist’s Twenty-Six-Square Packing](docs/project/research/research-2026-09-07-stromquist-n26-verification.md) | research synthesis | supporting | maintained | — |
 | [Stromquist’s `n = 26` Packing: Directions and a Restricted-Family Obstruction](docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md) | dated review record | record | retained | — |

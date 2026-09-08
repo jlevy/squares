@@ -387,7 +387,7 @@ The Motion Lab is an exploratory instrument, not a citable research result.
 
 ## Reports
 
-These research reports are the durable topical syntheses:
+These ten research reports are the durable topical syntheses:
 
 | Report | Scope |
 | --- | --- |
@@ -620,7 +620,7 @@ review. [`epistemics.md`](epistemics.md) owns whole-result classifications.
 ├── development.md          Python setup, engineering boundaries, and validation
 ├── defects.md              Generated view of packing/defects.yaml
 ├── docs/project/           Reports, reviews, specs, postmortems, and dated handoffs
-├── docs/project/research/  The eight research reports listed above
+├── docs/project/research/  The research reports listed above
 ├── packing/                Code, data, and the research record
 │   ├── campaign/           Hypotheses, experiments, sessions, agendas, and ledger
 │   ├── frontier/           Per-case claims, evidence, generated views, and results

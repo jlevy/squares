@@ -10,7 +10,7 @@ session:
   title: n26 source consistency and upstream integration
   date: '2026-09-07'
   started_at: '2026-09-08T00:34:07Z'
-  deadline_at: '2026-09-08T02:34:07Z'
+  deadline_at: '2026-09-08T03:34:07Z'
   branch: codex/stromquist-n26-verification
   goal: Merge the latest upstream atlas expansion, broaden the current n26 best-known search, and reconcile source-reported lower bounds without promoting missing proofs.
   workflow_phases:
@@ -41,7 +41,7 @@ session:
     recording: contemporaneous
     clock_role: work
     objective: Complete generator integration, refresh the merged views, pass pre-push validation, and launch the hosted full checkpoint on a committed tree.
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: Source review is accepted; the expanded frontier and new lower-bound reports now need combined generation and validation.
     budget_minutes: 30
@@ -51,14 +51,35 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-validate --push --jobs 2 --inner-jobs 1
     kill_condition: A failed assertion or inconsistent generated view blocks publication until diagnosed and rechecked.
     fallback: Fix the narrow failing surface, repeat its affected checks, and retain failures with their source identity.
+    outcome: The source changes and sixty focused regressions passed coordinator review. A second upstream merge was resolved. The combined pre-push run failed six integration checks, including missing Cairo configuration, generated record drift, and an expired phase; it is retained as a failed run.
+    evidence:
+    - packing/devtools/check_case_prose.py
+    - packing/tests/test_case_prose.py
+    stop_reason: The planned slice overran while repairing D-483 and integrating twelve newer upstream commits. Publication remains blocked on the six observed failures; a fresh bounded continuation owns their repair.
+    next_action: Review the hosted full-checkpoint outcomes while preparing final source, cost, and tracking records.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Repair the six observed integration failures, commit the merged tree, pass pre-push validation with the documented Cairo environment, and launch the hosted full checkpoint.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: The completed pre-push attempt exposed concrete integration failures; the session estimate is extended from 120 to 180 minutes to resolve them and retain full validation.
+    budget_minutes: 60
+    started_at: '2026-09-08T01:58:15Z'
+    deadline_at: '2026-09-08T02:58:15Z'
+    expected_output: A committed and pushed merged tree, a passing pre-push receipt, and hosted full-checkpoint and pull-request runs against its exact commit.
+    validation_command: DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib uv run --frozen --all-extras --group dev packing-validate --push --jobs 2 --inner-jobs 1
+    kill_condition: Any remaining assertion failure or stale generated view blocks publication and must be diagnosed before retrying the affected check.
+    fallback: Preserve failed receipts, fix the narrow surface, and continue independent source and visual review while validation runs.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Review the hosted full-checkpoint outcomes while preparing final source, cost, and tracking records.
+    next_action: Review hosted validation, retain the exact commit and coverage, then complete the documentation and tracking closeout.
   primary_bead: think-4v5w
   status: in_progress
   budget:
-    wall_minutes: 120
+    wall_minutes: 180
     orientation_minutes: 10
     checkpoint_minutes: 30
     slice_minutes: 30
@@ -127,6 +148,7 @@ session:
   - docs/project/research/research-2026-09-07-n26-best-known-audit.md
   - packing/frontier/ds7-lower-bound-audit.json
   - packing/cases/stromquist/n26-source-scores.json
+  - packing/campaign/agent-sessions/session-100-validation/push-9e785948-merge-failed.json
   checks:
   - Before this prospective session, the records baseline passed at clean dae6bb8d; origin/main at 28696526 was fetched and reviewed. Generated merge conflicts were resolved by their renderers, preserving both branches' records.
   - The coordinator reproduced 55 exact source omissions against dae6bb8d through n100 and upstream 28696526 above n100; the opaque n21 display is the fifty-sixth corrected reported field. The final named-candidate audit passes through n324 with no omitted stronger report.
@@ -134,6 +156,9 @@ session:
   - A local records run was deliberately interrupted without a verdict after review identified D-483, rather than validating a tree known to need repair. The host load average was above 115. No failing assertion was accepted or time guard weakened.
   - Independent review confirmed the corrected n20/n21 descriptions against T-021 certificate data. Result summaries now distinguish prior verified-register displacement from external source history; no verified field or certificate changed.
   - Upstream advanced again to 831697c0 during the review. Its twelve additional commits revise the explainer and print layout; integration must preserve Stromquist's acknowledgment and the qualified verified-bound caption.
+  - The first combined pre-push attempt completed 45 steps in 481.88 seconds and failed six. Behavioral collection lacked the documented macOS Cairo library path; remaining failures were the expired phase, README report count, generated rigidity blocks, missing evidence assumptions, and duplicate session coverage in the document map. This is a failed run, not partial certification.
+  - Focused repair checks pass for the README, document map, campaign ledger, evidence schema, and evidence semantics. The rigidity renderer refreshed only wrapping in 225 blocks; an independent comparison found identical parsed frontmatter and identical bytes outside those blocks.
+  - A fresh seventeen-page explainer PDF was visually reviewed on pages 2, 4, and 15. Original-prose authorship, the verified-here atlas caption, and Stromquist's private-communication acknowledgment and source link are present without clipping or overlap. The local PDF was then regenerated from the current HTML.
   stop_reason: null
   next_action: Complete the user-selected n26 review and upstream merge, then retain think-mq0d (BC-264) as the separate selected research continuation.
 ---

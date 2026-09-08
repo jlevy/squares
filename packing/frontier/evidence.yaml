@@ -20,6 +20,11 @@ evidence:
       theorem: Theorem 9, PDF page 23
       scope: For positive integer k, s(k^2+1) >= 2sqrt(2)-1 + (k(k-1)^2+(k-1)sqrt(2k))/(k^2+1); monotonicity transfers the report to larger n.
       pinpoints: Theorem 9 on PDF page 23; reference [8], Trevor Green, private communication (2000), on page 27.
+      assumptions:
+        - Unit squares may rotate independently and have pairwise disjoint interiors inside a square container; boundary contact is allowed.
+        - k is a positive integer, and the theorem's base square count is k^2+1.
+        - Transfer to a case n requires n >= k^2+1; deleting squares from an n-square packing establishes the required monotonicity.
+        - This audit includes only base counts and receiving cases at most 324, hence k=1 through 17.
       audit_record: packing/devtools/audit_ds7_lower_bounds.py
     external_review:
       state: not-reviewed
@@ -54,6 +59,11 @@ evidence:
       theorem: Theorem 10, PDF page 23
       scope: For positive integer k, s(k^2+floor(k/2)+1) >= 2sqrt(2)+2(k-2)/sqrt(5); monotonicity transfers the report to larger n.
       pinpoints: Theorem 10 on PDF page 23; Table 2 on pages 25-26; reference [8] on page 27.
+      assumptions:
+        - Unit squares may rotate independently and have pairwise disjoint interiors inside a square container; boundary contact is allowed.
+        - k is a positive integer, and the theorem's base square count is k^2+floor(k/2)+1; no further parity or lower-threshold restriction is printed.
+        - Transfer to a case n requires n >= k^2+floor(k/2)+1; deleting squares from an n-square packing establishes the required monotonicity.
+        - This audit includes only base counts and receiving cases at most 324, hence k=1 through 17.
       audit_record: packing/devtools/audit_ds7_lower_bounds.py
     external_review:
       state: not-reviewed
