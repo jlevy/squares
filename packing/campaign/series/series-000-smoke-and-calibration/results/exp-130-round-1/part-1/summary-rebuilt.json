@@ -1,0 +1,1385 @@
+{
+  "arms": {
+    "A-control": {
+      "archive": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-130-round-1/part-1/A-control.jsonl",
+      "cells": {
+        "10": {
+          "basin_runs": 0,
+          "beat_grid_runs": 5,
+          "below_record_runs": 0,
+          "best_gap": 0.0004194188779553798,
+          "best_side": 3.7075262000644953,
+          "grid": 4.0,
+          "hit_runs": 0,
+          "median_gap": 0.0007083838848522817,
+          "median_side": 3.707815165071392,
+          "moves": 2784000000,
+          "n": 10,
+          "pair_tests": 50112315000,
+          "record": 3.70710678118654,
+          "record_source": "frontier/n-010.md (Frits G\u00f6bel 1979)",
+          "seconds": 194.898,
+          "seeds": 5,
+          "worst_side": 3.7094057506905695
+        },
+        "11": {
+          "basin_runs": 0,
+          "beat_grid_runs": 5,
+          "below_record_runs": 0,
+          "best_gap": 0.045676937395731976,
+          "best_side": 3.922760527418542,
+          "grid": 4.0,
+          "hit_runs": 0,
+          "median_gap": 0.058706622302605815,
+          "median_side": 3.935790212325416,
+          "moves": 2512000000,
+          "n": 11,
+          "pair_tests": 50240347600,
+          "record": 3.87708359002281,
+          "record_source": "frontier/n-011.md (Walter Trump 1979)",
+          "seconds": 167.48499999999999,
+          "seeds": 5,
+          "worst_side": 3.9468210438442726
+        },
+        "17": {
+          "basin_runs": 0,
+          "beat_grid_runs": 1,
+          "below_record_runs": 0,
+          "best_gap": 0.32162213825368813,
+          "best_side": 4.997152231858238,
+          "grid": 5.0,
+          "hit_runs": 0,
+          "median_gap": 0.3244699063954499,
+          "median_side": 5.0,
+          "moves": 1568000000,
+          "n": 17,
+          "pair_tests": 50176538560,
+          "record": 4.67553009360455,
+          "record_source": "frontier/n-017.md (John Bidwell 1998)",
+          "seconds": 130.435,
+          "seeds": 5,
+          "worst_side": 5.0
+        },
+        "19": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.11438191683587995,
+          "best_side": 5.0,
+          "grid": 5.0,
+          "hit_runs": 0,
+          "median_gap": 0.11438191683587995,
+          "median_side": 5.0,
+          "moves": 1392000000,
+          "n": 19,
+          "pair_tests": 50112601920,
+          "record": 4.88561808316412,
+          "record_source": "frontier/n-019.md (Robert Wainwright 1979)",
+          "seconds": 125.977,
+          "seeds": 5,
+          "worst_side": 5.0
+        },
+        "26": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.37867965644035984,
+          "best_side": 6.0,
+          "grid": 6.0,
+          "hit_runs": 0,
+          "median_gap": 0.37867965644035984,
+          "median_side": 6.0,
+          "moves": 1008000000,
+          "n": 26,
+          "pair_tests": 50400832000,
+          "record": 5.62132034355964,
+          "record_source": "frontier/n-026.md (Erich Friedman 1997)",
+          "seconds": 121.185,
+          "seeds": 5,
+          "worst_side": 6.0
+        },
+        "27": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.2928932188134601,
+          "best_side": 6.0,
+          "grid": 6.0,
+          "hit_runs": 0,
+          "median_gap": 0.2928932188134601,
+          "median_side": 6.0,
+          "moves": 976000000,
+          "n": 27,
+          "pair_tests": 50752870480,
+          "record": 5.70710678118654,
+          "record_source": "frontier/n-027.md (Frits G\u00f6bel 1979)",
+          "seconds": 119.008,
+          "seeds": 5,
+          "worst_side": 6.0
+        },
+        "29": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.0661665373230802,
+          "best_side": 6.0,
+          "grid": 6.0,
+          "hit_runs": 0,
+          "median_gap": 0.0661665373230802,
+          "median_side": 6.0,
+          "moves": 896000000,
+          "n": 29,
+          "pair_tests": 50176925680,
+          "record": 5.93383346267692,
+          "record_source": "frontier/n-029.md (Thomas Schadt 2025)",
+          "seconds": 129.126,
+          "seeds": 5,
+          "worst_side": 6.0
+        },
+        "37": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.4013803907556399,
+          "best_side": 7.0,
+          "grid": 7.0,
+          "hit_runs": 0,
+          "median_gap": 0.4013803907556399,
+          "median_side": 7.0,
+          "moves": 704000000,
+          "n": 37,
+          "pair_tests": 50689198800,
+          "record": 6.59861960924436,
+          "record_source": "frontier/n-037.md (David W. Cantrell 2002)",
+          "seconds": 114.497,
+          "seeds": 5,
+          "worst_side": 7.0
+        },
+        "5": {
+          "basin_runs": 5,
+          "beat_grid_runs": 5,
+          "below_record_runs": 0,
+          "best_gap": 6.5487641975892075e-09,
+          "best_side": 2.707106787735304,
+          "grid": 3.0,
+          "hit_runs": 5,
+          "median_gap": 1.1838033220357147e-08,
+          "median_side": 2.707106793024573,
+          "moves": 6256000000,
+          "n": 5,
+          "pair_tests": 50048156800,
+          "record": 2.70710678118654,
+          "record_source": "frontier/n-005.md (Frits G\u00f6bel 1979)",
+          "seconds": 312.709,
+          "seeds": 5,
+          "worst_side": 2.7071068052152074
+        },
+        "50": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.4285714285714297,
+          "best_side": 8.0,
+          "grid": 8.0,
+          "hit_runs": 0,
+          "median_gap": 0.4285714285714297,
+          "median_side": 8.0,
+          "moves": 512000000,
+          "n": 50,
+          "pair_tests": 50177617000,
+          "record": 7.57142857142857,
+          "record_source": "frontier/n-050.md (Thomas Schadt 2025)",
+          "seconds": 116.558,
+          "seeds": 5,
+          "worst_side": 8.0
+        },
+        "52": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.2928932188134601,
+          "best_side": 8.0,
+          "grid": 8.0,
+          "hit_runs": 0,
+          "median_gap": 0.2928932188134601,
+          "median_side": 8.0,
+          "moves": 496000000,
+          "n": 52,
+          "pair_tests": 50593697280,
+          "record": 7.70710678118654,
+          "record_source": "frontier/n-052.md (Frits G\u00f6bel 1979)",
+          "seconds": 131.718,
+          "seeds": 5,
+          "worst_side": 8.0
+        }
+      },
+      "flags": [],
+      "runs": [
+        {
+          "moves": 1251200000,
+          "n": 5,
+          "pair_tests": 10009631360,
+          "seconds": 53.143,
+          "seed": 1,
+          "seed_best": 2.707106793024573
+        },
+        {
+          "moves": 1251200000,
+          "n": 5,
+          "pair_tests": 10009631360,
+          "seconds": 57.065,
+          "seed": 2,
+          "seed_best": 2.7071067933218402
+        },
+        {
+          "moves": 1251200000,
+          "n": 5,
+          "pair_tests": 10009631360,
+          "seconds": 56.819,
+          "seed": 3,
+          "seed_best": 2.7071067909752937
+        },
+        {
+          "moves": 1251200000,
+          "n": 5,
+          "pair_tests": 10009631360,
+          "seconds": 55.275,
+          "seed": 4,
+          "seed_best": 2.707106787735304
+        },
+        {
+          "moves": 1251200000,
+          "n": 5,
+          "pair_tests": 10009631360,
+          "seconds": 90.407,
+          "seed": 5,
+          "seed_best": 2.7071068052152074
+        },
+        {
+          "moves": 556800000,
+          "n": 10,
+          "pair_tests": 10022463000,
+          "seconds": 46.806,
+          "seed": 1,
+          "seed_best": 3.7094057506905695
+        },
+        {
+          "moves": 556800000,
+          "n": 10,
+          "pair_tests": 10022463000,
+          "seconds": 40.985,
+          "seed": 2,
+          "seed_best": 3.7076711818277652
+        },
+        {
+          "moves": 556800000,
+          "n": 10,
+          "pair_tests": 10022463000,
+          "seconds": 35.368,
+          "seed": 3,
+          "seed_best": 3.7075262000644953
+        },
+        {
+          "moves": 556800000,
+          "n": 10,
+          "pair_tests": 10022463000,
+          "seconds": 35.779,
+          "seed": 4,
+          "seed_best": 3.7091188276511113
+        },
+        {
+          "moves": 556800000,
+          "n": 10,
+          "pair_tests": 10022463000,
+          "seconds": 35.96,
+          "seed": 5,
+          "seed_best": 3.707815165071392
+        },
+        {
+          "moves": 502400000,
+          "n": 11,
+          "pair_tests": 10048069520,
+          "seconds": 32.437,
+          "seed": 1,
+          "seed_best": 3.927939617731721
+        },
+        {
+          "moves": 502400000,
+          "n": 11,
+          "pair_tests": 10048069520,
+          "seconds": 32.657,
+          "seed": 2,
+          "seed_best": 3.935790212325416
+        },
+        {
+          "moves": 502400000,
+          "n": 11,
+          "pair_tests": 10048069520,
+          "seconds": 30.595,
+          "seed": 3,
+          "seed_best": 3.9468210438442726
+        },
+        {
+          "moves": 502400000,
+          "n": 11,
+          "pair_tests": 10048069520,
+          "seconds": 37.338,
+          "seed": 4,
+          "seed_best": 3.922760527418542
+        },
+        {
+          "moves": 502400000,
+          "n": 11,
+          "pair_tests": 10048069520,
+          "seconds": 34.458,
+          "seed": 5,
+          "seed_best": 3.9361125018580427
+        },
+        {
+          "moves": 313600000,
+          "n": 17,
+          "pair_tests": 10035307712,
+          "seconds": 27.309,
+          "seed": 1,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 313600000,
+          "n": 17,
+          "pair_tests": 10035307712,
+          "seconds": 25.191,
+          "seed": 2,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 313600000,
+          "n": 17,
+          "pair_tests": 10035307712,
+          "seconds": 23.964,
+          "seed": 3,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 313600000,
+          "n": 17,
+          "pair_tests": 10035307712,
+          "seconds": 30.069,
+          "seed": 4,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 313600000,
+          "n": 17,
+          "pair_tests": 10035307712,
+          "seconds": 23.902,
+          "seed": 5,
+          "seed_best": 4.997152231858238
+        },
+        {
+          "moves": 278400000,
+          "n": 19,
+          "pair_tests": 10022520384,
+          "seconds": 26.955,
+          "seed": 1,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 278400000,
+          "n": 19,
+          "pair_tests": 10022520384,
+          "seconds": 25.905,
+          "seed": 2,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 278400000,
+          "n": 19,
+          "pair_tests": 10022520384,
+          "seconds": 24.871,
+          "seed": 3,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 278400000,
+          "n": 19,
+          "pair_tests": 10022520384,
+          "seconds": 24.216,
+          "seed": 4,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 278400000,
+          "n": 19,
+          "pair_tests": 10022520384,
+          "seconds": 24.03,
+          "seed": 5,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 201600000,
+          "n": 26,
+          "pair_tests": 10080166400,
+          "seconds": 20.257,
+          "seed": 1,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 201600000,
+          "n": 26,
+          "pair_tests": 10080166400,
+          "seconds": 21.578,
+          "seed": 2,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 201600000,
+          "n": 26,
+          "pair_tests": 10080166400,
+          "seconds": 21.965,
+          "seed": 3,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 201600000,
+          "n": 26,
+          "pair_tests": 10080166400,
+          "seconds": 33.354,
+          "seed": 4,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 201600000,
+          "n": 26,
+          "pair_tests": 10080166400,
+          "seconds": 24.031,
+          "seed": 5,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 195200000,
+          "n": 27,
+          "pair_tests": 10150574096,
+          "seconds": 22.807,
+          "seed": 1,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 195200000,
+          "n": 27,
+          "pair_tests": 10150574096,
+          "seconds": 26.892,
+          "seed": 2,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 195200000,
+          "n": 27,
+          "pair_tests": 10150574096,
+          "seconds": 22.239,
+          "seed": 3,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 195200000,
+          "n": 27,
+          "pair_tests": 10150574096,
+          "seconds": 25.773,
+          "seed": 4,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 195200000,
+          "n": 27,
+          "pair_tests": 10150574096,
+          "seconds": 21.297,
+          "seed": 5,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 179200000,
+          "n": 29,
+          "pair_tests": 10035385136,
+          "seconds": 20.17,
+          "seed": 1,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 179200000,
+          "n": 29,
+          "pair_tests": 10035385136,
+          "seconds": 21.036,
+          "seed": 2,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 179200000,
+          "n": 29,
+          "pair_tests": 10035385136,
+          "seconds": 23.274,
+          "seed": 3,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 179200000,
+          "n": 29,
+          "pair_tests": 10035385136,
+          "seconds": 37.388,
+          "seed": 4,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 179200000,
+          "n": 29,
+          "pair_tests": 10035385136,
+          "seconds": 27.258,
+          "seed": 5,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 140800000,
+          "n": 37,
+          "pair_tests": 10137839760,
+          "seconds": 19.967,
+          "seed": 1,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 140800000,
+          "n": 37,
+          "pair_tests": 10137839760,
+          "seconds": 22.037,
+          "seed": 2,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 140800000,
+          "n": 37,
+          "pair_tests": 10137839760,
+          "seconds": 24.016,
+          "seed": 3,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 140800000,
+          "n": 37,
+          "pair_tests": 10137839760,
+          "seconds": 25.782,
+          "seed": 4,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 140800000,
+          "n": 37,
+          "pair_tests": 10137839760,
+          "seconds": 22.695,
+          "seed": 5,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 102400000,
+          "n": 50,
+          "pair_tests": 10035523400,
+          "seconds": 22.818,
+          "seed": 1,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 102400000,
+          "n": 50,
+          "pair_tests": 10035523400,
+          "seconds": 22.903,
+          "seed": 2,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 102400000,
+          "n": 50,
+          "pair_tests": 10035523400,
+          "seconds": 20.975,
+          "seed": 3,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 102400000,
+          "n": 50,
+          "pair_tests": 10035523400,
+          "seconds": 28.082,
+          "seed": 4,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 102400000,
+          "n": 50,
+          "pair_tests": 10035523400,
+          "seconds": 21.78,
+          "seed": 5,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 99200000,
+          "n": 52,
+          "pair_tests": 10118739456,
+          "seconds": 22.863,
+          "seed": 1,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 99200000,
+          "n": 52,
+          "pair_tests": 10118739456,
+          "seconds": 26.955,
+          "seed": 2,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 99200000,
+          "n": 52,
+          "pair_tests": 10118739456,
+          "seconds": 28.271,
+          "seed": 3,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 99200000,
+          "n": 52,
+          "pair_tests": 10118739456,
+          "seconds": 26.189,
+          "seed": 4,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 99200000,
+          "n": 52,
+          "pair_tests": 10118739456,
+          "seconds": 27.44,
+          "seed": 5,
+          "seed_best": 8.0
+        }
+      ],
+      "verification": {
+        "archive_sha256": "7e7f79396aa9f212b8b7cb34d8a300bc5df57f6e4ab9659b04820b53b4dda959",
+        "assurance": "numerically-checked",
+        "failures": [],
+        "poses_checked": 495,
+        "tolerance": 1e-09,
+        "verified": true,
+        "verifier": "sqpack.verify.verify_packing"
+      }
+    },
+    "B-perturb": {
+      "archive": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-130-round-1/part-1/B-perturb.jsonl",
+      "cells": {
+        "10": {
+          "basin_runs": 5,
+          "beat_grid_runs": 5,
+          "below_record_runs": 0,
+          "best_gap": 1.383800007914715e-08,
+          "best_side": 3.70710679502454,
+          "grid": 4.0,
+          "hit_runs": 3,
+          "median_gap": 3.144457947357182e-07,
+          "median_side": 3.7071070956323346,
+          "moves": 1120000000,
+          "n": 10,
+          "pair_tests": 50400127800,
+          "record": 3.70710678118654,
+          "record_source": "frontier/n-010.md (Frits G\u00f6bel 1979)",
+          "seconds": 284.628,
+          "seeds": 5,
+          "worst_side": 3.707109521158077
+        },
+        "11": {
+          "basin_runs": 0,
+          "beat_grid_runs": 5,
+          "below_record_runs": 0,
+          "best_gap": 0.009671691773674773,
+          "best_side": 3.8867552817964848,
+          "grid": 4.0,
+          "hit_runs": 0,
+          "median_gap": 0.01670783233147688,
+          "median_side": 3.893791422354287,
+          "moves": 912000000,
+          "n": 11,
+          "pair_tests": 50160127600,
+          "record": 3.87708359002281,
+          "record_source": "frontier/n-011.md (Walter Trump 1979)",
+          "seconds": 204.526,
+          "seeds": 5,
+          "worst_side": 3.8961395193119683
+        },
+        "17": {
+          "basin_runs": 0,
+          "beat_grid_runs": 5,
+          "below_record_runs": 0,
+          "best_gap": 0.00669668707853166,
+          "best_side": 4.682226780683082,
+          "grid": 5.0,
+          "hit_runs": 0,
+          "median_gap": 0.0318456019158706,
+          "median_side": 4.707375695520421,
+          "moves": 368000000,
+          "n": 17,
+          "pair_tests": 50048130560,
+          "record": 4.67553009360455,
+          "record_source": "frontier/n-017.md (John Bidwell 1998)",
+          "seconds": 147.894,
+          "seeds": 5,
+          "worst_side": 4.7081114216960716
+        },
+        "19": {
+          "basin_runs": 0,
+          "beat_grid_runs": 3,
+          "below_record_runs": 0,
+          "best_gap": 0.07332964491097638,
+          "best_side": 4.958947728075096,
+          "grid": 5.0,
+          "hit_runs": 0,
+          "median_gap": 0.0987985041992836,
+          "median_side": 4.984416587363404,
+          "moves": 304000000,
+          "n": 19,
+          "pair_tests": 51984136800,
+          "record": 4.88561808316412,
+          "record_source": "frontier/n-019.md (Robert Wainwright 1979)",
+          "seconds": 134.094,
+          "seeds": 5,
+          "worst_side": 5.0
+        },
+        "26": {
+          "basin_runs": 0,
+          "beat_grid_runs": 5,
+          "below_record_runs": 0,
+          "best_gap": 0.12525325213842908,
+          "best_side": 5.746573595698069,
+          "grid": 6.0,
+          "hit_runs": 0,
+          "median_gap": 0.20212921994581112,
+          "median_side": 5.823449563505451,
+          "moves": 160000000,
+          "n": 26,
+          "pair_tests": 52000143000,
+          "record": 5.62132034355964,
+          "record_source": "frontier/n-026.md (Erich Friedman 1997)",
+          "seconds": 111.018,
+          "seeds": 5,
+          "worst_side": 5.845242458753859
+        },
+        "27": {
+          "basin_runs": 0,
+          "beat_grid_runs": 2,
+          "below_record_runs": 0,
+          "best_gap": 0.17130990007568592,
+          "best_side": 5.878416681262226,
+          "grid": 6.0,
+          "hit_runs": 0,
+          "median_gap": 0.2928932188134601,
+          "median_side": 6.0,
+          "moves": 144000000,
+          "n": 27,
+          "pair_tests": 50544140400,
+          "record": 5.70710678118654,
+          "record_source": "frontier/n-027.md (Frits G\u00f6bel 1979)",
+          "seconds": 98.594,
+          "seeds": 5,
+          "worst_side": 6.0
+        },
+        "29": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.0661665373230802,
+          "best_side": 6.0,
+          "grid": 6.0,
+          "hit_runs": 0,
+          "median_gap": 0.0661665373230802,
+          "median_side": 6.0,
+          "moves": 128000000,
+          "n": 29,
+          "pair_tests": 51968146160,
+          "record": 5.93383346267692,
+          "record_source": "frontier/n-029.md (Thomas Schadt 2025)",
+          "seconds": 95.17699999999999,
+          "seeds": 5,
+          "worst_side": 6.0
+        },
+        "37": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.4013803907556399,
+          "best_side": 7.0,
+          "grid": 7.0,
+          "hit_runs": 0,
+          "median_gap": 0.4013803907556399,
+          "median_side": 7.0,
+          "moves": 80000000,
+          "n": 37,
+          "pair_tests": 53280159840,
+          "record": 6.59861960924436,
+          "record_source": "frontier/n-037.md (David W. Cantrell 2002)",
+          "seconds": 77.279,
+          "seeds": 5,
+          "worst_side": 7.0
+        },
+        "5": {
+          "basin_runs": 5,
+          "beat_grid_runs": 5,
+          "below_record_runs": 0,
+          "best_gap": 3.5910314721832037e-09,
+          "best_side": 2.7071067847775714,
+          "grid": 3.0,
+          "hit_runs": 5,
+          "median_gap": 5.2117075099999965e-09,
+          "median_side": 2.7071067863982474,
+          "moves": 5008000000,
+          "n": 5,
+          "pair_tests": 50080125600,
+          "record": 2.70710678118654,
+          "record_source": "frontier/n-005.md (Frits G\u00f6bel 1979)",
+          "seconds": 676.337,
+          "seeds": 5,
+          "worst_side": 2.7071067870216243
+        },
+        "50": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.4285714285714297,
+          "best_side": 8.0,
+          "grid": 8.0,
+          "hit_runs": 0,
+          "median_gap": 0.4285714285714297,
+          "median_side": 8.0,
+          "moves": 48000000,
+          "n": 50,
+          "pair_tests": 58800196000,
+          "record": 7.57142857142857,
+          "record_source": "frontier/n-050.md (Thomas Schadt 2025)",
+          "seconds": 80.578,
+          "seeds": 5,
+          "worst_side": 8.0
+        },
+        "52": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.2928932188134601,
+          "best_side": 8.0,
+          "grid": 8.0,
+          "hit_runs": 0,
+          "median_gap": 0.2928932188134601,
+          "median_side": 8.0,
+          "moves": 48000000,
+          "n": 52,
+          "pair_tests": 63648212160,
+          "record": 7.70710678118654,
+          "record_source": "frontier/n-052.md (Frits G\u00f6bel 1979)",
+          "seconds": 89.163,
+          "seeds": 5,
+          "worst_side": 8.0
+        }
+      },
+      "flags": [
+        "--p-perturb",
+        "1.0",
+        "--perturb-scale",
+        "2"
+      ],
+      "runs": [
+        {
+          "moves": 1001600000,
+          "n": 5,
+          "pair_tests": 10016025120,
+          "seconds": 108.525,
+          "seed": 1,
+          "seed_best": 2.7071067869106056
+        },
+        {
+          "moves": 1001600000,
+          "n": 5,
+          "pair_tests": 10016025120,
+          "seconds": 121.805,
+          "seed": 2,
+          "seed_best": 2.7071067863982474
+        },
+        {
+          "moves": 1001600000,
+          "n": 5,
+          "pair_tests": 10016025120,
+          "seconds": 123.22,
+          "seed": 3,
+          "seed_best": 2.7071067847775714
+        },
+        {
+          "moves": 1001600000,
+          "n": 5,
+          "pair_tests": 10016025120,
+          "seconds": 128.94,
+          "seed": 4,
+          "seed_best": 2.7071067860703133
+        },
+        {
+          "moves": 1001600000,
+          "n": 5,
+          "pair_tests": 10016025120,
+          "seconds": 193.847,
+          "seed": 5,
+          "seed_best": 2.7071067870216243
+        },
+        {
+          "moves": 224000000,
+          "n": 10,
+          "pair_tests": 10080025560,
+          "seconds": 73.884,
+          "seed": 1,
+          "seed_best": 3.7071070956323346
+        },
+        {
+          "moves": 224000000,
+          "n": 10,
+          "pair_tests": 10080025560,
+          "seconds": 50.773,
+          "seed": 2,
+          "seed_best": 3.70710679502454
+        },
+        {
+          "moves": 224000000,
+          "n": 10,
+          "pair_tests": 10080025560,
+          "seconds": 49.427,
+          "seed": 3,
+          "seed_best": 3.7071079941475245
+        },
+        {
+          "moves": 224000000,
+          "n": 10,
+          "pair_tests": 10080025560,
+          "seconds": 58.222,
+          "seed": 4,
+          "seed_best": 3.707109521158077
+        },
+        {
+          "moves": 224000000,
+          "n": 10,
+          "pair_tests": 10080025560,
+          "seconds": 52.322,
+          "seed": 5,
+          "seed_best": 3.707106825189151
+        },
+        {
+          "moves": 182400000,
+          "n": 11,
+          "pair_tests": 10032025520,
+          "seconds": 46.037,
+          "seed": 1,
+          "seed_best": 3.893791422354287
+        },
+        {
+          "moves": 182400000,
+          "n": 11,
+          "pair_tests": 10032025520,
+          "seconds": 37.171,
+          "seed": 2,
+          "seed_best": 3.8867552817964848
+        },
+        {
+          "moves": 182400000,
+          "n": 11,
+          "pair_tests": 10032025520,
+          "seconds": 42.319,
+          "seed": 3,
+          "seed_best": 3.8949207410206728
+        },
+        {
+          "moves": 182400000,
+          "n": 11,
+          "pair_tests": 10032025520,
+          "seconds": 38.374,
+          "seed": 4,
+          "seed_best": 3.8903704911990795
+        },
+        {
+          "moves": 182400000,
+          "n": 11,
+          "pair_tests": 10032025520,
+          "seconds": 40.625,
+          "seed": 5,
+          "seed_best": 3.8961395193119683
+        },
+        {
+          "moves": 73600000,
+          "n": 17,
+          "pair_tests": 10009626112,
+          "seconds": 30.56,
+          "seed": 1,
+          "seed_best": 4.707232491273748
+        },
+        {
+          "moves": 73600000,
+          "n": 17,
+          "pair_tests": 10009626112,
+          "seconds": 32.048,
+          "seed": 2,
+          "seed_best": 4.707375695520421
+        },
+        {
+          "moves": 73600000,
+          "n": 17,
+          "pair_tests": 10009626112,
+          "seconds": 29.731,
+          "seed": 3,
+          "seed_best": 4.708074547537024
+        },
+        {
+          "moves": 73600000,
+          "n": 17,
+          "pair_tests": 10009626112,
+          "seconds": 29.699,
+          "seed": 4,
+          "seed_best": 4.682226780683082
+        },
+        {
+          "moves": 73600000,
+          "n": 17,
+          "pair_tests": 10009626112,
+          "seconds": 25.856,
+          "seed": 5,
+          "seed_best": 4.7081114216960716
+        },
+        {
+          "moves": 60800000,
+          "n": 19,
+          "pair_tests": 10396827360,
+          "seconds": 21.897,
+          "seed": 1,
+          "seed_best": 4.971854791864539
+        },
+        {
+          "moves": 60800000,
+          "n": 19,
+          "pair_tests": 10396827360,
+          "seconds": 27.289,
+          "seed": 2,
+          "seed_best": 4.958947728075096
+        },
+        {
+          "moves": 60800000,
+          "n": 19,
+          "pair_tests": 10396827360,
+          "seconds": 30.156,
+          "seed": 3,
+          "seed_best": 4.984416587363404
+        },
+        {
+          "moves": 60800000,
+          "n": 19,
+          "pair_tests": 10396827360,
+          "seconds": 26.866,
+          "seed": 4,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 60800000,
+          "n": 19,
+          "pair_tests": 10396827360,
+          "seconds": 27.886,
+          "seed": 5,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 32000000,
+          "n": 26,
+          "pair_tests": 10400028600,
+          "seconds": 20.301,
+          "seed": 1,
+          "seed_best": 5.838925122288704
+        },
+        {
+          "moves": 32000000,
+          "n": 26,
+          "pair_tests": 10400028600,
+          "seconds": 25.934,
+          "seed": 2,
+          "seed_best": 5.845242458753859
+        },
+        {
+          "moves": 32000000,
+          "n": 26,
+          "pair_tests": 10400028600,
+          "seconds": 22.175,
+          "seed": 3,
+          "seed_best": 5.806711467874486
+        },
+        {
+          "moves": 32000000,
+          "n": 26,
+          "pair_tests": 10400028600,
+          "seconds": 21.895,
+          "seed": 4,
+          "seed_best": 5.746573595698069
+        },
+        {
+          "moves": 32000000,
+          "n": 26,
+          "pair_tests": 10400028600,
+          "seconds": 20.713,
+          "seed": 5,
+          "seed_best": 5.823449563505451
+        },
+        {
+          "moves": 28800000,
+          "n": 27,
+          "pair_tests": 10108828080,
+          "seconds": 19.327,
+          "seed": 1,
+          "seed_best": 5.878416681262226
+        },
+        {
+          "moves": 28800000,
+          "n": 27,
+          "pair_tests": 10108828080,
+          "seconds": 20.252,
+          "seed": 2,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 28800000,
+          "n": 27,
+          "pair_tests": 10108828080,
+          "seconds": 20.258,
+          "seed": 3,
+          "seed_best": 5.9298285010925955
+        },
+        {
+          "moves": 28800000,
+          "n": 27,
+          "pair_tests": 10108828080,
+          "seconds": 19.452,
+          "seed": 4,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 28800000,
+          "n": 27,
+          "pair_tests": 10108828080,
+          "seconds": 19.305,
+          "seed": 5,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 25600000,
+          "n": 29,
+          "pair_tests": 10393629232,
+          "seconds": 17.579,
+          "seed": 1,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 25600000,
+          "n": 29,
+          "pair_tests": 10393629232,
+          "seconds": 19.566,
+          "seed": 2,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 25600000,
+          "n": 29,
+          "pair_tests": 10393629232,
+          "seconds": 19.313,
+          "seed": 3,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 25600000,
+          "n": 29,
+          "pair_tests": 10393629232,
+          "seconds": 20.428,
+          "seed": 4,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 25600000,
+          "n": 29,
+          "pair_tests": 10393629232,
+          "seconds": 18.291,
+          "seed": 5,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 16000000,
+          "n": 37,
+          "pair_tests": 10656031968,
+          "seconds": 15.727,
+          "seed": 1,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 16000000,
+          "n": 37,
+          "pair_tests": 10656031968,
+          "seconds": 14.057,
+          "seed": 2,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 16000000,
+          "n": 37,
+          "pair_tests": 10656031968,
+          "seconds": 15.001,
+          "seed": 3,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 16000000,
+          "n": 37,
+          "pair_tests": 10656031968,
+          "seconds": 15.318,
+          "seed": 4,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 16000000,
+          "n": 37,
+          "pair_tests": 10656031968,
+          "seconds": 17.176,
+          "seed": 5,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 9600000,
+          "n": 50,
+          "pair_tests": 11760039200,
+          "seconds": 16.708,
+          "seed": 1,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 9600000,
+          "n": 50,
+          "pair_tests": 11760039200,
+          "seconds": 15.701,
+          "seed": 2,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 9600000,
+          "n": 50,
+          "pair_tests": 11760039200,
+          "seconds": 18.021,
+          "seed": 3,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 9600000,
+          "n": 50,
+          "pair_tests": 11760039200,
+          "seconds": 14.869,
+          "seed": 4,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 9600000,
+          "n": 50,
+          "pair_tests": 11760039200,
+          "seconds": 15.279,
+          "seed": 5,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 9600000,
+          "n": 52,
+          "pair_tests": 12729642432,
+          "seconds": 16.883,
+          "seed": 1,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 9600000,
+          "n": 52,
+          "pair_tests": 12729642432,
+          "seconds": 17.518,
+          "seed": 2,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 9600000,
+          "n": 52,
+          "pair_tests": 12729642432,
+          "seconds": 17.767,
+          "seed": 3,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 9600000,
+          "n": 52,
+          "pair_tests": 12729642432,
+          "seconds": 16.793,
+          "seed": 4,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 9600000,
+          "n": 52,
+          "pair_tests": 12729642432,
+          "seconds": 20.202,
+          "seed": 5,
+          "seed_best": 8.0
+        }
+      ],
+      "verification": {
+        "archive_sha256": "03bc5835117ab30d8d2469e18287d8ced1f78864ef2d302859a69890ce7d5b10",
+        "assurance": "numerically-checked",
+        "failures": [],
+        "poses_checked": 495,
+        "tolerance": 1e-09,
+        "verified": true,
+        "verifier": "sqpack.verify.verify_packing"
+      }
+    }
+  },
+  "budget_pair_tests_per_chain": 1250000000,
+  "cells": [
+    5,
+    10,
+    11,
+    17,
+    19,
+    26,
+    27,
+    29,
+    37,
+    50,
+    52
+  ],
+  "chains": 8,
+  "engine": "sqsearch/target/release/sqsearch",
+  "gate": {
+    "command": "rebuilt: the gate ran when the sweep ran",
+    "passed": true
+  },
+  "host": {
+    "cpu_count": 10,
+    "loadavg_after": [
+      52.03857421875,
+      43.08984375,
+      40.67724609375
+    ],
+    "loadavg_before": [
+      52.03857421875,
+      43.08984375,
+      40.67724609375
+    ],
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O"
+  },
+  "label": "exp-130-round-1-part-1 (rebuilt from archives)",
+  "plan": "campaign/series/series-000-smoke-and-calibration/results/exp-130-round-1/plan-part-1.yaml",
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "threads": 3
+}

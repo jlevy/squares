@@ -137,7 +137,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives fourteen confirmed hypotheses, thirteen refuted
+The generated ledger currently derives fifteen confirmed hypotheses, sixteen refuted
 hypotheses, one open hypothesis, twenty-three open questions, and forty blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. No hypothesis is running or waiting on review and six are unresolved.
@@ -2955,6 +2955,10 @@ round that names the hypothesis, control roles included.
 | [H-122](packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md) | refuted | One independently checked square avoids all nine marks and the forced diamond; full-square compatibility remains open | 1 | 0.20s wall |
 | [H-123](packing/campaign/hypotheses/H-123-near45-coordinate-localization.md) | confirmed | Complete coordinate localization follows from the reviewed reduction and independent four-guard certificate | 1 | 0.21s wall |
 | [H-124](packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md) | unresolved | Diagonal band certified; original and collision-augmented axis representations returned no_chain without readers | 3 | 2.99s wall |
+| [H-125](packing/campaign/hypotheses/H-125-simultaneous-perturbation-move.md) | refuted | A collective all-square proposal transforms four cells of eleven and is inert on the other six; four improved against the six declared | 2 | 105.7m wall |
+| [H-126](packing/campaign/hypotheses/H-126-wall-pressure-dense-objective.md) | refuted | The isotropic compaction surrogate optimizes a disc rather than a square and regresses both proved controls | 1 | 39.1m wall |
+| [H-127](packing/campaign/hypotheses/H-127-basin-hopping-over-the-lp-quench.md) | confirmed | Basin hopping beats multistart on four cells of five at equal refined optima, with disjoint ranges on two | 1 | 81.2m wall |
+| [H-128](packing/campaign/hypotheses/H-128-cooling-schedule-length.md) | refuted | A tenfold anneal length moves three cells of eleven against the six declared, and recovers three quarters of what the new move family recovers | 1 | 71.3m wall |
 
 ### Confirmed
 
@@ -3205,9 +3209,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 84 rounds registered in `series-000`.
+There are 89 rounds registered in `series-000`.
 
-They record 2152.1 agent-minutes and 1223.3 wall-minutes.
+They record 2417.1 agent-minutes and 1520.7 wall-minutes.
 Exp-114 completed its one target and independent replay.
 Reader development costs are recorded separately from those process times.
 Exp-056 stopped at its fixed timebox with a 170-row agreeing prefix and no canonical
@@ -3329,6 +3333,11 @@ archive beside it.
 | [exp-126](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-126-h099-complete-graph-candidate.md) | 11 | target | H-099 | Complete graph bound for unchanged56/5 candidate | Reported overweight graph clique; no reader or geometric counterexample | unresolved |
 | [exp-127](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md) | 11 | target | H-124 | Fixed collision-augmented whole-axis cover | Producer no_chain; no independent reader or geometric counterexample | unresolved |
 | [exp-128](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-128-h099-seven-row-support-ceiling.md) | 11 | target | H-099 | Fixed seven-row necessary-lower-incidence ceiling | Independently verified ceiling and attained baseline11; whole fixed support settled | rejected |
+| [exp-129](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-129-arm-calibration.md) | 18 | calibration | H-125 | Four calibration passes over 36 arm configurations on held-out non-grid cells | Freezes the round-1 arm parameters; the temperature ablation is inert and the anneal-length ablation is not | baseline |
+| [exp-130](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-130-round-1-perturbation.md) | 11 | target | H-125 | Collective proposal against the stock move set on eleven non-grid cells | Three cells meet both clauses and four the threshold, against six; n=10 reaches the proved basin the control never enters | rejected |
+| [exp-131](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-131-round-1-pressure.md) | 11 | target | H-126 | Constant wall-pressure term against the stock energy on eleven non-grid cells | One cell improves and three regress; every n=5 seed returns 2*sqrt(2) and every n=11 seed the grid | rejected |
+| [exp-132](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-132-basin-hopping.md) | 11 | target | H-127 | 500 refined local optima per condition over the LP-in-cell quench | Basin hopping wins four cells of five; every emitted pose repaired and independently re-verified | accepted |
+| [exp-133](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-133-round-1-schedule.md) | 11 | target | H-128 | Anneal length crossed with move set, two levels each | Both factors move the result and combine; the first factorial crossing found for this problem | rejected |
 
 ### Cost and provenance
 
@@ -3418,10 +3427,15 @@ archive beside it.
 | exp-126 | one60-second scientific child; no reader invoked | 4.49 s | — | criterion | `7daa7c55` |
 | exp-127 | one120-second scientific child; no reader invoked | 0.25 s | — | criterion | `3bec06e2` |
 | exp-128 | one60-second independent checker plus2-second termination grace | 1.12 s | — | criterion | `a94e57fe` |
+| exp-129 | 1.13e12 pair tests over four calibration passes | 2681.0 s | 95 m | criterion | `9ae7700` |
+| exp-130 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells, two arms | 3663.0 s | 60 m | criterion | `9ae7700` |
+| exp-131 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells | 2349.0 s | 25 m | criterion | `9ae7700` |
+| exp-132 | 1,000 refined local optima, 500 per condition | 4871.0 s | 40 m | criterion | `9ae7700` |
+| exp-133 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells, two arms | 4281.0 s | 45 m | criterion | `9ae7700` |
 
-### What the 84 rounds jointly establish
+### What the 89 rounds jointly establish
 
-The 84 rounds use 2152.1 agent-minutes and 1223.3 wall-minutes under the campaign’s
+The 89 rounds use 2417.1 agent-minutes and 1520.7 wall-minutes under the campaign’s
 retained effort accounting.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
 separately in Session089.

@@ -1,0 +1,23 @@
+# exp-129, fourth and final calibration pass: the finalists at the ROUND's budget.
+#
+# Passes 1 to 3 ran at 2e8 pair tests per chain, a sixth of what round 1 will spend. A
+# parameter that wins at a small budget is not the same claim as a parameter that wins at
+# the budget being scored -- more budget lets a colder, finer proposal catch up with a
+# coarser one. This pass re-runs the finalists at exactly the round's budget on the same
+# held-out cells, and whichever wins here is what round 1 freezes.
+label: exp-129-arm-calibration-4
+engine: sqsearch/target/release/sqsearch
+budget_pair_tests: 1250000000
+chains: 8
+threads: 4
+cells: [18, 40]
+seeds: [1, 2, 3]
+arms:
+  A-control: []
+  B-p050-s2: ["--p-perturb", "0.50", "--perturb-scale", "2"]
+  B-p070-s2: ["--p-perturb", "0.70", "--perturb-scale", "2"]
+  B-p100-s05: ["--p-perturb", "1.00", "--perturb-scale", "0.5"]
+  B-p100-s1: ["--p-perturb", "1.00", "--perturb-scale", "1"]
+  B-p100-s2: ["--p-perturb", "1.00", "--perturb-scale", "2"]
+  C-flat-mu5: ["--mu0", "5.0", "--mu1", "5.0"]
+  C-flat-mu50: ["--mu0", "50.0", "--mu1", "50.0"]

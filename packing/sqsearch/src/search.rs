@@ -50,6 +50,30 @@ pub struct Params {
     /// Probability a restart reseeds from the chain's best rather than
     /// scattering fresh.
     pub p_reseed: f64,
+    /// Probability a proposal displaces EVERY square at once instead of one.
+    ///
+    /// Gensane and Ryckelynck's layer 3, and the cheapest structural change
+    /// available here: their layer 2 converges to configurations that are
+    /// *solid* -- no single object can be moved to improve the packing -- which
+    /// is weaker than locally optimal, and simultaneous perturbation is what
+    /// walks along the connected path of solid configurations to a genuine local
+    /// optimum. Zero by default, so the control's RNG stream is untouched.
+    pub p_perturb: f64,
+    /// Scale of a simultaneous perturbation, as a multiple of the temperature.
+    pub perturb_scale: f64,
+    /// Wall-pressure weight, ramped geometrically across the anneal like lambda.
+    ///
+    /// Zero disables the term entirely. Ramped *down* (mu0 > mu1) so the energy
+    /// ends at the true objective and the pressure only shapes the exploration.
+    pub mu0: f64,
+    pub mu1: f64,
+    /// Per-chain cap on evaluated unordered pairs, checked at restart granularity.
+    ///
+    /// The campaign's declared budget currency, and the only one under which arms
+    /// with different per-move costs are comparable: a simultaneous perturbation
+    /// costs a full O(n^2) scan where a single-square move costs O(n), so equal
+    /// moves is not equal work. `u64::MAX` leaves the move budget in charge.
+    pub budget_pair_tests: u64,
     /// Hard cap on restarts, as a backstop only. The move budget is what is
     /// meant to bind: an earlier version capped restarts at 24, which made
     /// `--budget-moves` inert and silently gave "equal budget" comparisons
@@ -68,6 +92,11 @@ impl Default for Params {
             move_rotate: 2.0,
             p_rotate: 0.35,
             p_reseed: 0.5,
+            p_perturb: 0.0,
+            perturb_scale: 1.0,
+            mu0: 0.0,
+            mu1: 0.0,
+            budget_pair_tests: u64::MAX,
             max_restarts: u64::MAX,
         }
     }
@@ -95,6 +124,12 @@ fn scatter(c: &mut Config, s0: f64, rng: &mut Rng) {
 
 /// One anneal. Returns the best valid side seen, or `f64::INFINITY` if the run
 /// never reached a valid configuration.
+// One function on purpose: this is the move loop, and the two proposal kinds share the
+// scoring, the Metropolis test and the rollback. Splitting the perturbation branch into
+// a helper would put the shared acceptance rule out of sight of the branch that has to
+// obey it, which is exactly where an arm could quietly stop being comparable to the
+// control.
+#[allow(clippy::too_many_lines)]
 fn anneal(
     c: &mut Config,
     p: &Params,
@@ -111,9 +146,28 @@ fn anneal(
     let mut temperature = p.t_hot;
     let mut lambda = p.lambda0;
 
+    // Arm C. Off unless both ends of the ramp are positive, which is what keeps the
+    // control's arithmetic and RNG stream bit-identical to the pre-change engine.
+    let pressure_on = p.mu0 > 0.0 && p.mu1 > 0.0;
+    let mu_ramp = if pressure_on {
+        (p.mu1 / p.mu0).powf(1.0 / p.steps.max(1) as f64)
+    } else {
+        1.0
+    };
+    let mut mu = if pressure_on { p.mu0 } else { 0.0 };
+
+    // Arm B needs a whole-configuration rollback, since a simultaneous perturbation
+    // touches every pose. One allocation per anneal against 4e5 moves inside it.
+    let mut saved = if p.p_perturb > 0.0 {
+        Some(c.clone())
+    } else {
+        None
+    };
+
     let mut side = required_side(c);
     let mut overlap = total_overlap_metered(c, pair_tests);
-    let mut energy = side + lambda * overlap;
+    let mut spread = if pressure_on { crate::geom::spread(c) } else { 0.0 };
+    let mut energy = side + lambda * overlap + mu * spread;
 
     // The starting configuration is itself a candidate. Without this the best is only
     // ever updated on an *accepted move*, so a chain that starts feasible and never
@@ -131,39 +185,82 @@ fn anneal(
     }
 
     for _ in 0..p.steps {
-        let k = rng.below(c.n);
-        let (ox, oy, ot) = (c.x[k], c.y[k], c.t[k]);
-        let (ocos, osin) = (c.cos[k], c.sin[k]);
+        // Arm B. The `p_perturb > 0.0` guard short-circuits before the draw, so a
+        // control run consumes exactly the RNG stream it consumed before this move
+        // existed and its numbers are unchanged.
+        let whole = p.p_perturb > 0.0 && rng.f64() < p.p_perturb;
 
-        let (nx, ny, nt, ncos, nsin);
-        if rng.f64() < p.p_rotate {
-            nx = ox;
-            ny = oy;
-            nt = ot + p.move_rotate * temperature * rng.signed();
-            ncos = nt.cos();
-            nsin = nt.sin();
+        // What was displaced, so it can be put back. A single move restores one
+        // square from these scalars; a simultaneous perturbation restores every
+        // pose from `saved`.
+        let mut k = 0usize;
+        let (mut ox, mut oy, mut ot, mut ocos, mut osin) = (0.0, 0.0, 0.0, 0.0, 0.0);
+        let (new_side, new_overlap);
+
+        if whole {
+            let store = saved
+                .as_mut()
+                .expect("the perturbation buffer exists whenever p_perturb > 0");
+            store.x.copy_from_slice(&c.x);
+            store.y.copy_from_slice(&c.y);
+            store.t.copy_from_slice(&c.t);
+            store.cos.copy_from_slice(&c.cos);
+            store.sin.copy_from_slice(&c.sin);
+            let eps = p.perturb_scale * temperature;
+            for j in 0..c.n {
+                c.x[j] += eps * rng.signed();
+                c.y[j] += eps * rng.signed();
+                let angle = c.t[j] + p.move_rotate * eps * rng.signed();
+                c.set_angle(j, angle);
+            }
+            // Every pair moved, so there is nothing incremental to reuse: this
+            // proposal costs a full O(n^2) scan against a single move's O(n).
+            new_side = required_side(c);
+            new_overlap = total_overlap_metered(c, pair_tests);
         } else {
-            nx = ox + temperature * rng.signed();
-            ny = oy + temperature * rng.signed();
-            nt = ot;
-            ncos = ocos;
-            nsin = osin;
+            k = rng.below(c.n);
+            ox = c.x[k];
+            oy = c.y[k];
+            ot = c.t[k];
+            ocos = c.cos[k];
+            osin = c.sin[k];
+
+            let (nx, ny, nt, ncos, nsin);
+            if rng.f64() < p.p_rotate {
+                nx = ox;
+                ny = oy;
+                nt = ot + p.move_rotate * temperature * rng.signed();
+                ncos = nt.cos();
+                nsin = nt.sin();
+            } else {
+                nx = ox + temperature * rng.signed();
+                ny = oy + temperature * rng.signed();
+                nt = ot;
+                ncos = ocos;
+                nsin = osin;
+            }
+
+            // The overlap term is incremental (this square's n-1 pairs); the side
+            // term needs the whole configuration, so apply the move, score, and roll
+            // back if rejected. At n=11 the side scan is 11 operations against 10
+            // pair tests, so this is cheaper than tracking extremes incrementally.
+            let old_local = local_overlap_metered(c, k, ox, oy, ocos, osin, pair_tests);
+            let new_local = local_overlap_metered(c, k, nx, ny, ncos, nsin, pair_tests);
+            c.x[k] = nx;
+            c.y[k] = ny;
+            c.t[k] = nt;
+            c.cos[k] = ncos;
+            c.sin[k] = nsin;
+            new_side = required_side(c);
+            new_overlap = overlap - old_local + new_local;
         }
 
-        // The overlap term is incremental (this square's n-1 pairs); the side
-        // term needs the whole configuration, so apply the move, score, and roll
-        // back if rejected. At n=11 the side scan is 11 operations against 10
-        // pair tests, so this is cheaper than tracking extremes incrementally.
-        let old_local = local_overlap_metered(c, k, ox, oy, ocos, osin, pair_tests);
-        let new_local = local_overlap_metered(c, k, nx, ny, ncos, nsin, pair_tests);
-        c.x[k] = nx;
-        c.y[k] = ny;
-        c.t[k] = nt;
-        c.cos[k] = ncos;
-        c.sin[k] = nsin;
-        let new_side = required_side(c);
-        let new_overlap = overlap - old_local + new_local;
-        let new_energy = new_side + lambda * new_overlap;
+        let new_spread = if pressure_on {
+            crate::geom::spread(c)
+        } else {
+            0.0
+        };
+        let new_energy = new_side + lambda * new_overlap + mu * new_spread;
         *moves += 1;
 
         let delta = new_energy - energy;
@@ -171,6 +268,7 @@ fn anneal(
             energy = new_energy;
             side = new_side;
             overlap = new_overlap;
+            spread = new_spread;
             *accepted += 1;
             if overlap <= FEASIBLE_EPS && side < *best_side {
                 *best_side = side;
@@ -181,6 +279,15 @@ fn anneal(
                 best.cos.copy_from_slice(&c.cos);
                 best.sin.copy_from_slice(&c.sin);
             }
+        } else if whole {
+            let store = saved
+                .as_ref()
+                .expect("the perturbation buffer exists whenever p_perturb > 0");
+            c.x.copy_from_slice(&store.x);
+            c.y.copy_from_slice(&store.y);
+            c.t.copy_from_slice(&store.t);
+            c.cos.copy_from_slice(&store.cos);
+            c.sin.copy_from_slice(&store.sin);
         } else {
             c.x[k] = ox;
             c.y[k] = oy;
@@ -191,8 +298,10 @@ fn anneal(
 
         temperature *= cooling;
         lambda *= ramp;
+        mu *= mu_ramp;
     }
     let _ = side;
+    let _ = spread;
 }
 
 /// One chain: repeated anneals from scattered or reseeded starts.
@@ -206,7 +315,7 @@ pub fn run_chain(n: usize, seed: u64, chain: u64, p: &Params, budget_moves: u64)
     let (mut moves, mut accepted, mut restarts, mut pair_tests) = (0u64, 0u64, 0u64, 0u64);
 
     let mut c = Config::new(n);
-    while moves < budget_moves && restarts < p.max_restarts {
+    while moves < budget_moves && pair_tests < p.budget_pair_tests && restarts < p.max_restarts {
         if restarts > 0 && rng.f64() < p.p_reseed {
             c = best.clone();
         } else {
@@ -325,7 +434,7 @@ pub fn run_entry_chain(
     let (mut moves, mut accepted, mut restarts, mut pair_tests) = (0u64, 0u64, 0u64, 0u64);
 
     let mut c = Config::new(n);
-    while moves < budget_moves && restarts < p.max_restarts {
+    while moves < budget_moves && pair_tests < p.budget_pair_tests && restarts < p.max_restarts {
         perturb(&mut c, seed_cfg, eps, &mut rng);
         restarts += 1;
         anneal(

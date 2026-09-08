@@ -1,0 +1,31 @@
+# Round 1, part 1. Written before the round ran, with every parameter frozen by the
+# exp-129 calibration on held-out cells (n = 18, 40) that appear nowhere below.
+#
+# The subset is the 11 non-grid cells declared in H-125, H-126 and H-128. Every one of
+# them beats the trivial grid, so no arm can score by returning the incumbent.
+#
+# The budget is 1.25e9 pair tests per chain, 8 chains, so 1e10 per (arm, cell, seed).
+# Pair tests rather than moves or seconds, because a simultaneous perturbation scans
+# every pair where a single-square move scans one square's, and because the host carries
+# other work whose load moved between 12 and 95 during the calibration.
+#
+# Part 1 carries the control and the two candidate mechanisms at the stock schedule.
+# Part 2 carries the same two conditions at the long schedule, so the two parts together
+# are a 2x2 factorial in (schedule length) x (collective move) -- the crossing the
+# 2026-09-08 survey reports nobody has run on any problem.
+label: exp-130-round-1-part-3
+engine: sqsearch/target/release/sqsearch
+budget_pair_tests: 1250000000
+chains: 8
+threads: 3
+cells: [5, 10, 11, 17, 19, 26, 27, 29, 37, 50, 52]
+seeds: [1, 2, 3, 4, 5]
+arms:
+  C-pressure: ["--mu0", "5.0", "--mu1", "5.0"]
+
+# Part 3 is arm C alone, split out mid-round onto its own process purely for wall clock:
+# the perturbation arm turned out to cost about five times the control's seconds at equal
+# pair tests, which put arm C behind it in part 1's queue for two hours. Nothing about the
+# measurement changes -- same engine, same flags, same cells, seeds and pair-test budget,
+# and sqsearch is deterministic in (n, seed, chain, params), so this arm's numbers are the
+# ones part 1 would have produced.

@@ -1,0 +1,18 @@
+# Round 1, part 2: the long-schedule half of the factorial. Same cells, same seeds,
+# same budget, same engine as part 1; the only difference is `--steps`, which lengthens
+# each anneal tenfold and so buys a tenth as many restarts at the same pair-test budget.
+#
+# Split into its own process only so the two halves run concurrently on a loaded host.
+# sqsearch is deterministic in (n, seed, chain, params), so which process ran an arm
+# changes nothing about its numbers, and `run_arm_sweep.py --report` refuses to merge
+# parts that disagree about the budget, the cells or the seeds.
+label: exp-130-round-1-part-2
+engine: sqsearch/target/release/sqsearch
+budget_pair_tests: 1250000000
+chains: 8
+threads: 3
+cells: [5, 10, 11, 17, 19, 26, 27, 29, 37, 50, 52]
+seeds: [1, 2, 3, 4, 5]
+arms:
+  A-slow: ["--steps", "4000000"]
+  B-perturb-slow: ["--steps", "4000000", "--p-perturb", "1.0", "--perturb-scale", "2"]

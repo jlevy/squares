@@ -595,7 +595,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 84 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 89 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -701,6 +701,10 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | H-122 | refuted | proof | At q=1939/500, every contained closed unit square whose orientation mo |  | 1 |  | 0s wall |
 | H-123 | confirmed | proof | At q=1939/500, every contained closed unit square with orientation wit |  | 1 |  | 0s wall |
 | H-124 | unresolved | proof | At q=1939/500, every contained closed unit square Q in the actual near |  | 3 |  | 3s wall |
+| H-125 | refuted | search | With a simultaneous perturbation proposal added to the ordinary move m | n: 5 10 11* 17 19 26 27 29 37 50 52 | 2 |  | 155m agent + 105.7m wall |
+| H-126 | refuted | search | Adding an aggregate inward wall-pressure term to the annealing energy, | n: 5 10 11* 17 19 26 27 29 37 50 52 | 1 |  | 25m agent + 39.1m wall |
+| H-127 | confirmed | search | At an equal budget of refined local optima, basin hopping -- perturbin | n: 5 10 11* 17 19 | 1 |  | 40m agent + 81.2m wall |
+| H-128 | refuted | search | Raising only the anneal length from 400,000 to 4,000,000 steps per res | n: 5 10 11* 17 19 26 27 29 37 50 52 | 1 |  | 45m agent + 71.3m wall |
 
 ## Needs review — held for a human, not decided
 
@@ -710,7 +714,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 ## Rounds
 
-### rejected (17)
+### rejected (20)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -731,6 +735,9 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-115 | series-000 | 11 | Codex coordinator, max reasoning, think-whmn in Session089 | H-105 | Every eligible pair has an independently checked separating axis. This rejects H105 only; higher-order depth, candidate feasibility and H099 remain unresolved, and the fixed-support bracket stays [11,56/5]. |
 | exp-122 | series-000 | 11 | Session091 coordinator, BC255, max mathematical judgment | H-122 | The first frozen frame supplied one independently verified contained square disjoint from the diamond and avoiding all nine marks, refuting H122 only. |
 | exp-128 | series-000 | 11 | Session095 coordinator, BC259; max mathematical judgment | H-099 | The full fixed-support upper bound is exactly11 and the independently reconstructed packing average attains11. Thus H099's mass-above-eleven claim is false for this support. No expanded-support, primal-density or global packing conclusion follows. |
+| exp-130 | series-000 | 11 | claude-opus-5 | H-125 | The criterion was measured and missed: three cells of eleven meet both clauses and four meet the threshold, against the six declared -- but the four where it works it works by 0.017 to 0.29, and the six where it does nothing it does exactly nothing, so the move is not weak, it is inapplicable above n = 26 at this budget. |
+| exp-131 | series-000 | 11 | claude-opus-5 | H-126 | The criterion was measured and missed in the wrong direction: one cell of eleven improves and three regress, including both proved controls, so the aggregate compaction surrogate is not a weak version of the inflation formulation but a different and worse objective, and it should not be carried. |
+| exp-133 | series-000 | 11 | claude-opus-5 | H-128 | The criterion was measured and missed -- three cells of eleven against the six declared -- but a parameter that costs nothing to carry recovers three quarters of what the new move family recovers, which contradicts the design input hard enough that the schedule axis has to be swept properly before any further move is built. |
 
 ### abandoned (2)
 
@@ -776,7 +783,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-051 | series-000 | 68 | openai-codex | H-053 | Typed premeasurement stop `executable-runner`: the proof, verifier and generic injected-runner controls pass, but the exact preregistered `--record` command exits 2 before target access because no production CLI adapter exists; no scientific H-053 disposition follows. |
 | exp-118 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-252 | H-107 | The prospective record gate was not complete by the 03:16 UTC launch cutoff; no target or verification process ran and both allowances remain unspent. |
 
-### accepted (27)
+### accepted (28)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -807,8 +814,9 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-120 | series-000 | 11 | Codex coordinator, max mathematical reasoning, Session 090 BC-255 | H-109 | Independent exact A1 replay passed on both closed angle signs; the reviewed reflection establishes A2. |
 | exp-121 | series-000 | 11 | Codex coordinator, max mathematical judgment, Session091 BC-255 | H-110 | The independently reconstructed frozen square is contained in the box and strictly avoids all twelve unchanged points. |
 | exp-123 | series-000 | 11 | Session091 coordinator, BC255, max mathematical judgment | H-123 | The independent exact four-guard certificate and reviewed geometric reduction prove complete H123 localization on the actual near45 domain. |
+| exp-132 | series-000 | 11 | claude-opus-5 | H-127 | The proposal structure is worth its complexity at this budget: H-127 declared three of five cells improving by 0.01 and four did, two of them with disjoint seed ranges, but the other two overlap and no run came within 1e-2 of any record, so this accepts a proposer and settles nothing about record-finding. |
 
-### baseline (11)
+### baseline (12)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -823,6 +831,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 | exp-030 | series-000 | 9 | openai-codex | H-021 | The complete event path stays below the 30-second profile trigger and retains its nonconverged outcome without censorship. D-126 bars frequency or deterministic-work claims, and no additional n=9 samples are authorized by this performance cell. |
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
+| exp-129 | series-000 | 18 | claude-opus-5 | H-125 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-130 and exp-131, and it turned up a schedule-length effect that is now registered as H-128 rather than folded into an arm. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -841,7 +850,7 @@ Status: **paused**. Prepare a focused parallel n11 program from PR108: decide wh
 
 ## Effort
 
-84 rounds, 2152.1 agent-minutes, 1223.3 wall-minutes.
+89 rounds, 2417.1 agent-minutes, 1520.7 wall-minutes.
 
 ## Exploration reports not yet codified
 

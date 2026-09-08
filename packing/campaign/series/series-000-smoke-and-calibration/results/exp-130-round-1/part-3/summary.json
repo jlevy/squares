@@ -1,0 +1,723 @@
+{
+  "arms": {
+    "C-pressure": {
+      "archive": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-130-round-1/part-3/C-pressure.jsonl",
+      "cells": {
+        "10": {
+          "basin_runs": 0,
+          "beat_grid_runs": 5,
+          "below_record_runs": 0,
+          "best_gap": 0.17594309095111793,
+          "best_side": 3.883049872137658,
+          "grid": 4.0,
+          "hit_runs": 0,
+          "median_gap": 0.17651149046032222,
+          "median_side": 3.883618271646862,
+          "moves": 2784000000,
+          "n": 10,
+          "pair_tests": 50112315000,
+          "record": 3.70710678118654,
+          "record_source": "frontier/n-010.md (Frits G\u00f6bel 1979)",
+          "seconds": 276.1796329021454,
+          "seeds": 5,
+          "worst_side": 3.884062214727088
+        },
+        "11": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.12291640997719,
+          "best_side": 4.0,
+          "grid": 4.0,
+          "hit_runs": 0,
+          "median_gap": 0.12291640997719,
+          "median_side": 4.0,
+          "moves": 2512000000,
+          "n": 11,
+          "pair_tests": 50240347600,
+          "record": 3.87708359002281,
+          "record_source": "frontier/n-011.md (Walter Trump 1979)",
+          "seconds": 262.606680393219,
+          "seeds": 5,
+          "worst_side": 4.0
+        },
+        "17": {
+          "basin_runs": 0,
+          "beat_grid_runs": 5,
+          "below_record_runs": 0,
+          "best_gap": 0.2578369260885971,
+          "best_side": 4.933367019693147,
+          "grid": 5.0,
+          "hit_runs": 0,
+          "median_gap": 0.26240176143528426,
+          "median_side": 4.937931855039834,
+          "moves": 1568000000,
+          "n": 17,
+          "pair_tests": 50176538560,
+          "record": 4.67553009360455,
+          "record_source": "frontier/n-017.md (John Bidwell 1998)",
+          "seconds": 201.63997626304626,
+          "seeds": 5,
+          "worst_side": 4.938784434699325
+        },
+        "19": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.11438191683587995,
+          "best_side": 5.0,
+          "grid": 5.0,
+          "hit_runs": 0,
+          "median_gap": 0.11438191683587995,
+          "median_side": 5.0,
+          "moves": 1392000000,
+          "n": 19,
+          "pair_tests": 50112601920,
+          "record": 4.88561808316412,
+          "record_source": "frontier/n-019.md (Robert Wainwright 1979)",
+          "seconds": 187.89992690086365,
+          "seeds": 5,
+          "worst_side": 5.0
+        },
+        "26": {
+          "basin_runs": 0,
+          "beat_grid_runs": 1,
+          "below_record_runs": 0,
+          "best_gap": 0.35380513840771677,
+          "best_side": 5.975125481967357,
+          "grid": 6.0,
+          "hit_runs": 0,
+          "median_gap": 0.37867965644035984,
+          "median_side": 6.0,
+          "moves": 1008000000,
+          "n": 26,
+          "pair_tests": 50400832000,
+          "record": 5.62132034355964,
+          "record_source": "frontier/n-026.md (Erich Friedman 1997)",
+          "seconds": 173.6800980567932,
+          "seeds": 5,
+          "worst_side": 6.0
+        },
+        "27": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.2928932188134601,
+          "best_side": 6.0,
+          "grid": 6.0,
+          "hit_runs": 0,
+          "median_gap": 0.2928932188134601,
+          "median_side": 6.0,
+          "moves": 976000000,
+          "n": 27,
+          "pair_tests": 50752870480,
+          "record": 5.70710678118654,
+          "record_source": "frontier/n-027.md (Frits G\u00f6bel 1979)",
+          "seconds": 141.34605622291565,
+          "seeds": 5,
+          "worst_side": 6.0
+        },
+        "29": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.0661665373230802,
+          "best_side": 6.0,
+          "grid": 6.0,
+          "hit_runs": 0,
+          "median_gap": 0.0661665373230802,
+          "median_side": 6.0,
+          "moves": 896000000,
+          "n": 29,
+          "pair_tests": 50176925680,
+          "record": 5.93383346267692,
+          "record_source": "frontier/n-029.md (Thomas Schadt 2025)",
+          "seconds": 133.63503623008728,
+          "seeds": 5,
+          "worst_side": 6.0
+        },
+        "37": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.4013803907556399,
+          "best_side": 7.0,
+          "grid": 7.0,
+          "hit_runs": 0,
+          "median_gap": 0.4013803907556399,
+          "median_side": 7.0,
+          "moves": 704000000,
+          "n": 37,
+          "pair_tests": 50689198800,
+          "record": 6.59861960924436,
+          "record_source": "frontier/n-037.md (David W. Cantrell 2002)",
+          "seconds": 148.80315685272217,
+          "seeds": 5,
+          "worst_side": 7.0
+        },
+        "5": {
+          "basin_runs": 0,
+          "beat_grid_runs": 5,
+          "below_record_runs": 0,
+          "best_gap": 0.12132034453540186,
+          "best_side": 2.8284271257219418,
+          "grid": 3.0,
+          "hit_runs": 0,
+          "median_gap": 0.1213203446850315,
+          "median_side": 2.8284271258715714,
+          "moves": 6256000000,
+          "n": 5,
+          "pair_tests": 50048156800,
+          "record": 2.70710678118654,
+          "record_source": "frontier/n-005.md (Frits G\u00f6bel 1979)",
+          "seconds": 504.44482612609863,
+          "seeds": 5,
+          "worst_side": 2.828427125999921
+        },
+        "50": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.4285714285714297,
+          "best_side": 8.0,
+          "grid": 8.0,
+          "hit_runs": 0,
+          "median_gap": 0.4285714285714297,
+          "median_side": 8.0,
+          "moves": 512000000,
+          "n": 50,
+          "pair_tests": 50177617000,
+          "record": 7.57142857142857,
+          "record_source": "frontier/n-050.md (Thomas Schadt 2025)",
+          "seconds": 137.73334670066833,
+          "seeds": 5,
+          "worst_side": 8.0
+        },
+        "52": {
+          "basin_runs": 0,
+          "beat_grid_runs": 0,
+          "below_record_runs": 0,
+          "best_gap": 0.2928932188134601,
+          "best_side": 8.0,
+          "grid": 8.0,
+          "hit_runs": 0,
+          "median_gap": 0.2928932188134601,
+          "median_side": 8.0,
+          "moves": 496000000,
+          "n": 52,
+          "pair_tests": 50593697280,
+          "record": 7.70710678118654,
+          "record_source": "frontier/n-052.md (Frits G\u00f6bel 1979)",
+          "seconds": 181.46717143058777,
+          "seeds": 5,
+          "worst_side": 8.0
+        }
+      },
+      "flags": [
+        "--mu0",
+        "5.0",
+        "--mu1",
+        "5.0"
+      ],
+      "runs": [
+        {
+          "moves": 1251200000,
+          "n": 5,
+          "pair_tests": 10009631360,
+          "seconds": 130.37992095947266,
+          "seed": 1,
+          "seed_best": 2.8284271258885347
+        },
+        {
+          "moves": 1251200000,
+          "n": 5,
+          "pair_tests": 10009631360,
+          "seconds": 103.84451818466187,
+          "seed": 2,
+          "seed_best": 2.8284271258715714
+        },
+        {
+          "moves": 1251200000,
+          "n": 5,
+          "pair_tests": 10009631360,
+          "seconds": 93.7679181098938,
+          "seed": 3,
+          "seed_best": 2.828427125999921
+        },
+        {
+          "moves": 1251200000,
+          "n": 5,
+          "pair_tests": 10009631360,
+          "seconds": 94.611652135849,
+          "seed": 4,
+          "seed_best": 2.8284271257219418
+        },
+        {
+          "moves": 1251200000,
+          "n": 5,
+          "pair_tests": 10009631360,
+          "seconds": 81.84081673622131,
+          "seed": 5,
+          "seed_best": 2.8284271257505402
+        },
+        {
+          "moves": 556800000,
+          "n": 10,
+          "pair_tests": 10022463000,
+          "seconds": 58.47760200500488,
+          "seed": 1,
+          "seed_best": 3.8838141243775643
+        },
+        {
+          "moves": 556800000,
+          "n": 10,
+          "pair_tests": 10022463000,
+          "seconds": 47.98150992393494,
+          "seed": 2,
+          "seed_best": 3.884062214727088
+        },
+        {
+          "moves": 556800000,
+          "n": 10,
+          "pair_tests": 10022463000,
+          "seconds": 58.271551847457886,
+          "seed": 3,
+          "seed_best": 3.883618271646862
+        },
+        {
+          "moves": 556800000,
+          "n": 10,
+          "pair_tests": 10022463000,
+          "seconds": 58.74358415603638,
+          "seed": 4,
+          "seed_best": 3.883049872137658
+        },
+        {
+          "moves": 556800000,
+          "n": 10,
+          "pair_tests": 10022463000,
+          "seconds": 52.705384969711304,
+          "seed": 5,
+          "seed_best": 3.8835958727764077
+        },
+        {
+          "moves": 502400000,
+          "n": 11,
+          "pair_tests": 10048069520,
+          "seconds": 51.38852119445801,
+          "seed": 1,
+          "seed_best": 4.0
+        },
+        {
+          "moves": 502400000,
+          "n": 11,
+          "pair_tests": 10048069520,
+          "seconds": 55.66663408279419,
+          "seed": 2,
+          "seed_best": 4.0
+        },
+        {
+          "moves": 502400000,
+          "n": 11,
+          "pair_tests": 10048069520,
+          "seconds": 51.962552070617676,
+          "seed": 3,
+          "seed_best": 4.0
+        },
+        {
+          "moves": 502400000,
+          "n": 11,
+          "pair_tests": 10048069520,
+          "seconds": 55.91301512718201,
+          "seed": 4,
+          "seed_best": 4.0
+        },
+        {
+          "moves": 502400000,
+          "n": 11,
+          "pair_tests": 10048069520,
+          "seconds": 47.675957918167114,
+          "seed": 5,
+          "seed_best": 4.0
+        },
+        {
+          "moves": 313600000,
+          "n": 17,
+          "pair_tests": 10035307712,
+          "seconds": 41.29409217834473,
+          "seed": 1,
+          "seed_best": 4.933367019693147
+        },
+        {
+          "moves": 313600000,
+          "n": 17,
+          "pair_tests": 10035307712,
+          "seconds": 39.53140091896057,
+          "seed": 2,
+          "seed_best": 4.938657243030229
+        },
+        {
+          "moves": 313600000,
+          "n": 17,
+          "pair_tests": 10035307712,
+          "seconds": 40.90555000305176,
+          "seed": 3,
+          "seed_best": 4.937931855039834
+        },
+        {
+          "moves": 313600000,
+          "n": 17,
+          "pair_tests": 10035307712,
+          "seconds": 43.19696092605591,
+          "seed": 4,
+          "seed_best": 4.934582542416545
+        },
+        {
+          "moves": 313600000,
+          "n": 17,
+          "pair_tests": 10035307712,
+          "seconds": 36.7119722366333,
+          "seed": 5,
+          "seed_best": 4.938784434699325
+        },
+        {
+          "moves": 278400000,
+          "n": 19,
+          "pair_tests": 10022520384,
+          "seconds": 34.72270488739014,
+          "seed": 1,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 278400000,
+          "n": 19,
+          "pair_tests": 10022520384,
+          "seconds": 39.28093695640564,
+          "seed": 2,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 278400000,
+          "n": 19,
+          "pair_tests": 10022520384,
+          "seconds": 38.574059009552,
+          "seed": 3,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 278400000,
+          "n": 19,
+          "pair_tests": 10022520384,
+          "seconds": 36.79440689086914,
+          "seed": 4,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 278400000,
+          "n": 19,
+          "pair_tests": 10022520384,
+          "seconds": 38.52781915664673,
+          "seed": 5,
+          "seed_best": 5.0
+        },
+        {
+          "moves": 201600000,
+          "n": 26,
+          "pair_tests": 10080166400,
+          "seconds": 38.50125598907471,
+          "seed": 1,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 201600000,
+          "n": 26,
+          "pair_tests": 10080166400,
+          "seconds": 38.77069807052612,
+          "seed": 2,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 201600000,
+          "n": 26,
+          "pair_tests": 10080166400,
+          "seconds": 35.23941087722778,
+          "seed": 3,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 201600000,
+          "n": 26,
+          "pair_tests": 10080166400,
+          "seconds": 31.443425178527832,
+          "seed": 4,
+          "seed_best": 5.975125481967357
+        },
+        {
+          "moves": 201600000,
+          "n": 26,
+          "pair_tests": 10080166400,
+          "seconds": 29.725307941436768,
+          "seed": 5,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 195200000,
+          "n": 27,
+          "pair_tests": 10150574096,
+          "seconds": 29.706586122512817,
+          "seed": 1,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 195200000,
+          "n": 27,
+          "pair_tests": 10150574096,
+          "seconds": 28.70977210998535,
+          "seed": 2,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 195200000,
+          "n": 27,
+          "pair_tests": 10150574096,
+          "seconds": 28.836774826049805,
+          "seed": 3,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 195200000,
+          "n": 27,
+          "pair_tests": 10150574096,
+          "seconds": 27.04792809486389,
+          "seed": 4,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 195200000,
+          "n": 27,
+          "pair_tests": 10150574096,
+          "seconds": 27.044995069503784,
+          "seed": 5,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 179200000,
+          "n": 29,
+          "pair_tests": 10035385136,
+          "seconds": 25.288958072662354,
+          "seed": 1,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 179200000,
+          "n": 29,
+          "pair_tests": 10035385136,
+          "seconds": 25.531763792037964,
+          "seed": 2,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 179200000,
+          "n": 29,
+          "pair_tests": 10035385136,
+          "seconds": 26.247398138046265,
+          "seed": 3,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 179200000,
+          "n": 29,
+          "pair_tests": 10035385136,
+          "seconds": 26.626874923706055,
+          "seed": 4,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 179200000,
+          "n": 29,
+          "pair_tests": 10035385136,
+          "seconds": 29.940041303634644,
+          "seed": 5,
+          "seed_best": 6.0
+        },
+        {
+          "moves": 140800000,
+          "n": 37,
+          "pair_tests": 10137839760,
+          "seconds": 28.44881319999695,
+          "seed": 1,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 140800000,
+          "n": 37,
+          "pair_tests": 10137839760,
+          "seconds": 29.995332956314087,
+          "seed": 2,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 140800000,
+          "n": 37,
+          "pair_tests": 10137839760,
+          "seconds": 27.490747928619385,
+          "seed": 3,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 140800000,
+          "n": 37,
+          "pair_tests": 10137839760,
+          "seconds": 27.762794017791748,
+          "seed": 4,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 140800000,
+          "n": 37,
+          "pair_tests": 10137839760,
+          "seconds": 35.10546875,
+          "seed": 5,
+          "seed_best": 7.0
+        },
+        {
+          "moves": 102400000,
+          "n": 50,
+          "pair_tests": 10035523400,
+          "seconds": 27.567841053009033,
+          "seed": 1,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 102400000,
+          "n": 50,
+          "pair_tests": 10035523400,
+          "seconds": 29.51522922515869,
+          "seed": 2,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 102400000,
+          "n": 50,
+          "pair_tests": 10035523400,
+          "seconds": 26.93570113182068,
+          "seed": 3,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 102400000,
+          "n": 50,
+          "pair_tests": 10035523400,
+          "seconds": 27.07460618019104,
+          "seed": 4,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 102400000,
+          "n": 50,
+          "pair_tests": 10035523400,
+          "seconds": 26.63996911048889,
+          "seed": 5,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 99200000,
+          "n": 52,
+          "pair_tests": 10118739456,
+          "seconds": 53.70149278640747,
+          "seed": 1,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 99200000,
+          "n": 52,
+          "pair_tests": 10118739456,
+          "seconds": 35.449819803237915,
+          "seed": 2,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 99200000,
+          "n": 52,
+          "pair_tests": 10118739456,
+          "seconds": 32.83934998512268,
+          "seed": 3,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 99200000,
+          "n": 52,
+          "pair_tests": 10118739456,
+          "seconds": 29.324286937713623,
+          "seed": 4,
+          "seed_best": 8.0
+        },
+        {
+          "moves": 99200000,
+          "n": 52,
+          "pair_tests": 10118739456,
+          "seconds": 30.15222191810608,
+          "seed": 5,
+          "seed_best": 8.0
+        }
+      ],
+      "verification": {
+        "archive_sha256": "65cd6468edaffb0aeef0056d4209fa0a482203c0ff5e25a5f52649333d537c00",
+        "assurance": "numerically-checked",
+        "failures": [],
+        "poses_checked": 495,
+        "tolerance": 1e-09,
+        "verified": true,
+        "verifier": "sqpack.verify.verify_packing"
+      }
+    }
+  },
+  "budget_pair_tests_per_chain": 1250000000,
+  "cells": [
+    5,
+    10,
+    11,
+    17,
+    19,
+    26,
+    27,
+    29,
+    37,
+    50,
+    52
+  ],
+  "chains": 8,
+  "engine": "packing/sqsearch/target/release/sqsearch",
+  "gate": {
+    "command": "/Users/levy/wrk/github/squares/.claude/worktrees/squares-viz-explanations-4ae624/packing/sqsearch/target/release/sqsearch --selftest",
+    "passed": true,
+    "seconds": 4.391,
+    "tail": [
+      "SELFTEST PASSED"
+    ]
+  },
+  "host": {
+    "cpu_count": 10,
+    "loadavg_after": [
+      21.4189453125,
+      24.22802734375,
+      29.10888671875
+    ],
+    "loadavg_before": [
+      47.43212890625,
+      37.9912109375,
+      29.392578125
+    ],
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O"
+  },
+  "label": "exp-130-round-1-part-3",
+  "plan": "campaign/series/series-000-smoke-and-calibration/results/exp-130-round-1/plan-part-3.yaml",
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "threads": 3
+}

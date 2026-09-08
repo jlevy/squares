@@ -31,7 +31,8 @@ fn arg<T: std::str::FromStr>(args: &[String], name: &str, default: T) -> T {
 fn json_params(p: &Params) -> String {
     format!(
         "{{\"steps\":{},\"t_hot\":{},\"t_cold\":{},\"lambda0\":{},\"lambda1\":{},\
-\"move_rotate\":{},\"p_rotate\":{},\"p_reseed\":{},\"max_restarts\":{}}}",
+\"move_rotate\":{},\"p_rotate\":{},\"p_reseed\":{},\"p_perturb\":{},\"perturb_scale\":{},\
+\"mu0\":{},\"mu1\":{},\"budget_pair_tests\":{},\"max_restarts\":{}}}",
         p.steps,
         p.t_hot,
         p.t_cold,
@@ -40,6 +41,11 @@ fn json_params(p: &Params) -> String {
         p.move_rotate,
         p.p_rotate,
         p.p_reseed,
+        p.p_perturb,
+        p.perturb_scale,
+        p.mu0,
+        p.mu1,
+        p.budget_pair_tests,
         p.max_restarts
     )
 }
@@ -96,6 +102,13 @@ fn main() {
         move_rotate: arg(&args, "--move-rotate", 2.0),
         p_rotate: arg(&args, "--p-rotate", 0.35),
         p_reseed: arg(&args, "--p-reseed", 0.5),
+        // The three arm flags. Every default is off, so an invocation that names
+        // none of them is the control, bit for bit.
+        p_perturb: arg(&args, "--p-perturb", 0.0),
+        perturb_scale: arg(&args, "--perturb-scale", 1.0),
+        mu0: arg(&args, "--mu0", 0.0),
+        mu1: arg(&args, "--mu1", 0.0),
+        budget_pair_tests: arg(&args, "--budget-pair-tests", u64::MAX),
         max_restarts: arg(&args, "--max-restarts", u64::MAX),
     };
 
@@ -253,6 +266,11 @@ fn basin_entry(args: &[String]) {
         move_rotate: arg(args, "--move-rotate", 2.0),
         p_rotate: arg(args, "--p-rotate", 0.35),
         p_reseed: arg(args, "--p-reseed", 0.5),
+        p_perturb: arg(args, "--p-perturb", 0.0),
+        perturb_scale: arg(args, "--perturb-scale", 1.0),
+        mu0: arg(args, "--mu0", 0.0),
+        mu1: arg(args, "--mu1", 0.0),
+        budget_pair_tests: arg(args, "--budget-pair-tests", u64::MAX),
         max_restarts: arg(args, "--max-restarts", 1),
     };
 
@@ -454,6 +472,84 @@ fn selftest() {
             "ordinary {}, entry {}, expected {}",
             meter_chain.pair_tests, meter_entry.pair_tests, pair_expected
         ),
+        &mut failures,
+    );
+
+    // 5b. THE CONTROL IS PINNED. The arm flags all default to off, and the guard on
+    //     each of them short-circuits before its RNG draw, so a run that names none of
+    //     them must consume exactly the stream it consumed before the arms existed.
+    //     This literal is the value the pre-arm engine printed for the same triple, so
+    //     a change that quietly moves the control fails here rather than in a table.
+    report(
+        "control chain unchanged by the arm flags",
+        a.best_side == 2.793_917_043_631_216_f64,
+        &format!("{:.17e}", a.best_side),
+        &mut failures,
+    );
+
+    // 5c. Each arm runs, and what it reports is still a valid packing at the side it
+    //     claims. The arms change the ENERGY the search walks on; they may never
+    //     change what counts as a reportable configuration, and `best_side` is
+    //     tracked from `required_side` under the overlap gate in every arm.
+    let arm_b = Params {
+        steps: 60_000,
+        p_perturb: 0.2,
+        perturb_scale: 1.0,
+        ..Default::default()
+    };
+    let ob = search::run_chain(5, 42, 3, &arm_b, 400_000);
+    report(
+        "arm B: the perturbation move runs and reports a valid packing",
+        ob.best_overlap <= search::FEASIBLE_EPS
+            && geom::required_side(&ob.best) <= ob.best_side + 1e-12
+            && ob.best_side != a.best_side,
+        &format!(
+            "{:.12} (control {:.12}), overlap {:.2e}",
+            ob.best_side, a.best_side, ob.best_overlap
+        ),
+        &mut failures,
+    );
+    let arm_c = Params {
+        steps: 60_000,
+        mu0: 0.05,
+        mu1: 1e-6,
+        ..Default::default()
+    };
+    let oc = search::run_chain(5, 42, 3, &arm_c, 400_000);
+    report(
+        "arm C: the wall-pressure term runs and reports a valid packing",
+        oc.best_overlap <= search::FEASIBLE_EPS
+            && geom::required_side(&oc.best) <= oc.best_side + 1e-12
+            && oc.best_side != a.best_side,
+        &format!(
+            "{:.12} (control {:.12}), overlap {:.2e}",
+            oc.best_side, a.best_side, oc.best_overlap
+        ),
+        &mut failures,
+    );
+    let mut spread_c = geom::Config::new(2);
+    spread_c.x[0] = -1.0;
+    spread_c.x[1] = 1.0;
+    report(
+        "wall-pressure term is the mean squared offset from the box centre",
+        (geom::spread(&spread_c) - 1.0).abs() < 1e-15,
+        &format!("{:.17e}", geom::spread(&spread_c)),
+        &mut failures,
+    );
+
+    // 5d. The pair-test budget binds. It is the campaign's declared currency and the
+    //     only one under which arms with different per-move costs are comparable, so
+    //     a cap that silently did nothing would make every such comparison a lie.
+    let capped = Params {
+        steps: 1_000,
+        budget_pair_tests: 50_000,
+        ..Default::default()
+    };
+    let ocap = search::run_chain(5, 42, 3, &capped, u64::MAX);
+    report(
+        "pair-test budget binds and the move budget does not have to",
+        ocap.pair_tests >= 50_000 && ocap.pair_tests < 100_000 && ocap.moves < u64::MAX,
+        &format!("{} pair tests, {} moves", ocap.pair_tests, ocap.moves),
         &mut failures,
     );
 
