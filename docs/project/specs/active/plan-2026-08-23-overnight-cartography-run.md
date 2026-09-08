@@ -341,13 +341,15 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, select `think-yrw1` under BC-304, the
-closeout of Agenda 030. Agenda 030’s first wave ran as sessions 100 to 104 and its
-second as sessions 107 to 109; BC-303 replayed the strongest claims independently and
-funded the segment-mark cover toward an ownership argument as the next sustained block,
-with the `B = 1` depth polisher as the efficiency block.
-BC-304 dispositions every cell, carries the unfinished complements of BC-292 and BC-299,
-and hands those blocks on.
+For the next supervised exact-research goal, select `think-yx4g` to finish the corrected
+merge checkpoint, then release the ownership continuation selected by Agenda 030’s
+closeout. Agenda 030’s first wave ran as sessions 100 to 104 and its second as sessions
+107 to 109; BC-303 replayed the strongest claims independently and funded the
+segment-mark cover toward an ownership argument as the next sustained block, with the
+`B = 1` depth polisher as the efficiency block.
+BC-304 has dispositioned every cell and carried the unfinished complements of BC-292 and
+BC-299 forward. The pairwise compatibility argument continues from the independently
+replayed ten-segment theorem; the rounded-cover helper is retracted.
 BC-264’s H114 feature and kernel-contract pricing keeps its stopped checkpoint and its
 certification prerequisite, recorded in its own agenda, and is sequenced after that
 closeout rather than displaced; its requirements are unchanged.

@@ -713,6 +713,10 @@ agenda:
         checkpoint are historical baselines only and do not certify this tree.
     replanning:
       candidates:
+      - bead: think-yx4g
+        workflow: remediation
+        priority: 1
+        rationale: Repair the failed checkpoint components and certify the integrated handoff before the authorized merge and new-branch research.
       - bead: think-qfog
         workflow: insight-iteration
         priority: 1
@@ -732,11 +736,12 @@ agenda:
           Retain the corner-class support question, missing run artifacts and unrun site-set
           complement behind the two higher-priority lanes.
       selected:
-        bead: think-qfog
-        workflow: insight-iteration
+        bead: think-yx4g
+        workflow: remediation
         rationale: >-
-          The segment theorem survives independent replay and exposes a precise missing
-          compatibility step whose resolution can change the ownership case split.
+          The mathematical closeout is complete, but the corrected integration checkpoint
+          failed local environment and record checks. Certify those repairs before releasing
+          the funded ownership continuation.
       operator_input:
         status: confirmed
         note: The owner authorized closeout, merge once the corrected tree is ready, and continuation on a new branch.

@@ -9,6 +9,7 @@ session:
   id: session-110
   title: PR 127 handoff review and merge corrections
   date: '2026-09-08'
+  started_at: '2026-09-08T20:26:06.627Z'
   branch: codex/pr-127-n11-review
   resource_rollups: [packing/campaign/resource-usage/codex-task-tree-session-110.yaml]
   goal: Review the full PR116/121/127 stack, correct mathematical and handoff defects, certify the integrated source, merge in order, and hand the funded n11 continuation to a new branch.
@@ -92,7 +93,7 @@ session:
   - 143 focused kernel/session tests passed at c89c7646.
   - Corrected tools passed their source and failure controls; no integrated full gate claimed yet.
   stop_reason: The correction checkpoint is recorded with certification pending; active coordination continues under think-yx4g.
-  next_action: think-yx4g obtains corrected-tree full validation, removes certification debt only after that pass, merges PR116/121/127, then continues from updated main on a new codex branch.
+  next_action: think-yx4g repairs and validates the merge checkpoint, then merges the stack and releases the funded ownership continuation onto a new codex branch.
 ---
 # PR 127 Handoff Review and Merge Corrections
 

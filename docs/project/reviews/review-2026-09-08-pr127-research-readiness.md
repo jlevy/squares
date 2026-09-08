@@ -122,6 +122,15 @@ The correction checkpoint will record its commit and actual validation outcome h
 Until that succeeds, the stack remains unmerged.
 After merge, the funded continuation starts from updated main on a new `codex/` branch.
 
+The full checkpoint at `ef8a2e72` ran all 69 steps in 1,313.94 seconds.
+Its expensive geometry replays passed, including the 324-case atlas and full
+translation-escape screen.
+Six steps failed: the local Cairo loader path prevented test collection, the mutation
+snapshot exceeded its storage guard, and the document-map and handoff views needed
+reconciliation. Those failures are retained; this run does not certify the handoff.
+The corrected checkpoint will rerun the failed components and the fast integration
+surface while preserving the unchanged geometry receipts.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
