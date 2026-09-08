@@ -1136,8 +1136,13 @@ controls:
 
 - name: exact LP phase 1 - the pivot budget never reaches the auxiliary solve
   file: src/sqpack/exact_lp.py
-  replace: ["    solution = solve(program, start, sign, pivot_budget=pivot_budget)",
-            "    solution = solve(program, start, sign, pivot_budget=pivot_budget + 1000)"]
+  replace:
+  - |2-
+        solution = solve(program, start, sign, pivot_budget=pivot_budget)
+        relaxation = solution.vertex.point[lp.width]
+  - |2-
+        solution = solve(program, start, sign, pivot_budget=pivot_budget + 1000)
+        relaxation = solution.vertex.point[lp.width]
   run: uv run --frozen --group dev python -m pytest tests/test_promote_exact_phase1.py -q
   expect: "phase 1 ran past its pivot budget"
   timeout_seconds: 300

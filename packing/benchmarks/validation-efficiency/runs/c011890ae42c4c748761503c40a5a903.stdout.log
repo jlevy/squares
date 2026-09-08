@@ -1,0 +1,378 @@
+{
+  "results": [
+    {
+      "name": "soundness perimeter",
+      "status": "passed",
+      "seconds": 30.666408083001443,
+      "output": "  22 configurations from every emitting component pass sqpack at tol 1e-10",
+      "reason": ""
+    },
+    {
+      "name": "lint floor (ruff)",
+      "status": "passed",
+      "seconds": 0.17555920799350133,
+      "output": "All checks passed!\n1201 files already formatted",
+      "reason": ""
+    },
+    {
+      "name": "type floor (basedpyright)",
+      "status": "passed",
+      "seconds": 26.067427458001475,
+      "output": "0 errors, 0 warnings, 0 notes",
+      "reason": ""
+    },
+    {
+      "name": "prospective n=101..324 source map",
+      "status": "passed",
+      "seconds": 0.4574826660027611,
+      "output": "prospective source map check passed: 224 cases, availability and SVG",
+      "reason": ""
+    },
+    {
+      "name": "abstract size-five contact-scaffold atlas",
+      "status": "passed",
+      "seconds": 2.082680415995128,
+      "output": "contact scaffold atlas check passed: 21 topologies, 11013 abstract orbits",
+      "reason": ""
+    },
+    {
+      "name": "bead tree",
+      "status": "passed",
+      "seconds": 21.87726179099991,
+      "output": "  1886 beads from origin/tbd-sync\n  report 14 in-progress bead(s) named only by terminal agenda cells\n    think-4o6l  BC-031 complete  Missing resources: acquire the 11 cited sources not in the archive\n    think-ouf0  BC-008 complete, BC-015 complete  Engine anchors: sqsearch must recover s(n) at the trivial n, and budget must be monotone\n    think-1s0h  BC-029 complete, BC-037 complete  Measure terminal flatness and connectivity before defining basin identity\n    think-xzew  BC-007 complete  Baseline and profile the end-to-end research loop\n    think-ykt7  BC-034 complete  Advance the asymptotic waste and finite-transfer lane\n    think-wbra  BC-001 complete, BC-003 complete, BC-004 complete, BC-005 complete, BC-006 complete  Rebuild the small-n basin calibration after typed termination\n    think-75ll  BC-032 complete, BC-045 complete  Bridge numerical witnesses to exact or interval-certified certificates\n    think-kr1d  BC-024 complete  W3: chunk taxonomy census over the imported n <= 100 record corpus\n    think-whwc  BC-027 complete  Run the balanced ten-hour square-packing research agenda\n    think-q6vy  BC-101 complete  Lane A2: certified lower bounds past Nagamochi at the Green Table-2 sizes\n    think-0z9b  BC-102 complete  Lane A3: a bespoke certified lower bound at n = 12 (H-039, with H-006's generator)\n    think-l48p  BC-100 complete  Lane B1: the H-044 verdict -- upgrade the chunk census to the registered partition solver\n    think-614o  BC-201 complete  BC-201: census of near-tight event cells on the retained 381/100 certificate\n    think-os9k  BC-277 complete  BC277: design the uncovered boundary-band complement-capacity domain\n  report 62 in-progress bead(s) named by no agenda cell\n    think-r1yl  Efficiency (Infrastructure): trustworthy experimental throughput\n    think-rthe  Profile and reduce negative-control latency\n    think-2w1a  Maintain the review, defect logbook, and bead reconciliation map\n    think-m79h  Define lane-specific agent handoffs and evidence contracts\n    think-ydus  Unattended square-packing research readiness\n    think-1sxv  Define the unattended research agenda and hypothesis portfolio\n    think-9qz0  solve_to_fixed_point decides convergence by exact float equality of the cell tuple\n    think-1q3g  Test angle-active stationarity along the exact n=5 face\n    think-yi6x  Stabilize n4 and n10 fixed-cell acceptance without weakening the screen\n    think-tx0b  Bound packing validation steps and reap timed-out process groups\n    think-3cbq  Run session-010: eight-hour mixed pipeline and mathematical portfolio\n    think-jqkv  Review and land the final upstream packing PR before session-010\n    think-ot1s  Adapt PR 26 to the W7 taxonomy and current validation entry points\n    think-l7hi  Tier packing CI into fast Linux and selected macOS lanes\n    think-23td  Spec: Generalized square-packing Motion Lab\n    think-plcj  Publish the Agenda 016 contract and handoff\n    think-gml2  Reconcile stacked PR 80 with latest PR 78 and complete adversarial s(11) review\n    think-aads  Address the 2026-09-06 Claude Code adversarial review of the explainer\n    think-6ity  A3: state every hypothesis in the Five Conditions box\n    think-9a8f  A5: 'Condition 5 says every event cell carries mass at least 1' lacks the reachability qualifier\n    think-4cn4  A7: 'A wrong linear program will be rejected by the verifier'\n    think-lhds  A8: mu(Q) names a minimum with Q unbound\n    think-e0gc  A9: the sweep-exactness argument skips the finiteness clause\n    think-hzdx  A10: 'the four lines bounding the admissible centers' is not what the verifier adds\n    think-skwu  B2: verify_claim.py surfaces its own self-check failure as a traceback, not a verdict\n    think-tp23  B3: the two standard-library verifiers accept different inputs\n    think-y1w8  B4: certificate.py says the certificate proves s(n) > L; everything else says >=\n    think-zoa8  C1: the method's originators are never named on the page\n    think-sa2c  C3: name the two Condition 5 routes on the page\n    think-32ii  C4: 'one of 21 new results' overcounts what is new\n    think-t6iv  C6: two verifiers, two runtimes, neither named\n    think-c282  C7: state the basis of the novelty claim\n    think-70nc  C8: optional footnote on what the displaced bound rested on\n    think-f3tl  D2: 'Why the Net Has 181 Directions' promises more than the section shows\n    think-2jha  D3: the Markdown edition's credits run together, figure-only captions describe what it cannot show, Figure 3's preposition\n    think-r2m3  D4: Figure 6's caption is opaque about the side it quotes\n    think-o1x1  D5: 'The project proves two bounds' without saying why the weaker one is kept\n    think-ki4x  D6: wording nits\n    think-jgnv  Execute Agenda 024 from T+2 through T+10\n    think-0p1m  Manage the next stronger-certificate research blocks\n    think-v55y  Manage the next structural and high-upside research blocks\n    think-f5t7  Monitor landed upstream changes through the integrated research handoff\n    think-zq2u  Quantify a strict improvement past T-022 by shrinking the certified core\n    think-3ir7  Reconcile credit interruption and checkpoint recovered Agenda 024 work\n    think-xsma  Test a refined-containment core shrink beyond T-022\n    think-rwte  W5 efficiency block: fast feedback and justified validation checkpoints\n    think-jogv  W5: propose reusable testing and CI performance guidance upstream to tbd\n    think-hmtc  Address shortcomings from the published square-packing adversarial review\n    think-0qcu  Complete the finite-support ceiling instrument before its target run\n    think-uutz  Review the Burns n = 17 page against the n = 17 record: coverage audit and integration items\n    think-sz5t  Agenda 027: independent compatibility and restricted-family program\n    think-pxv5  Agenda 028: hybrid-strength comparisons and angular release at n11\n    think-0yfe  Agenda028: eight-hour hybrid research run with two-hour checkpoints\n    think-il1m  Coordinate eight active hours of structural research on PR109\n    think-\"7e72\"  BC255 full distinguished-square compatibility discriminator\n    think-0juv  [epic] Extend the known-best atlas to n = 324 and draw the poster composite\n    think-4yup  Phase 0: survey public sources with square-packing geometry beyond n = 100 and audit 325..400\n    think-93on  Phase 2: promote n = 101..200 into the frontier register and known-best atlas\n    think-63oj  Session094 complete-cover binding and repaired density controls checkpoint\n    think-jxs9  H124 residual-cover producer source binding and synthetic controls\n    think-smve  H124 residual-cover independent source reader and controls\n    think-ck6q  Reconcile repaired graph source controls with BC243 soundness obligations\n  ok  no open bead under a closed parent, no duplicate open siblings",
+      "reason": ""
+    },
+    {
+      "name": "golden basin maps (proved cases, checked against mathematics)",
+      "status": "passed",
+      "seconds": 0.6707265000004554,
+      "output": "  7 ladder rungs and 11 stored endpoint rows agree with the proved values, their closed forms and their recorded validity\n  (fast path; `packing-validate --deep` rebuilds and compares the map)",
+      "reason": ""
+    },
+    {
+      "name": "basin identity",
+      "status": "passed",
+      "seconds": 3.4347448329936014,
+      "output": "  ok    certificate retains node attributes after individualization  [K3: uniform differs from one marked vertex, invariant under relabelling]\n  ok    invariant under all 8 container symmetries  [1 key pair(s); 8 independent images]\n  ok    invariant under square relabelling  [permutation [3, 6, 1, 5, 9, 8, 0, 4, 2, 7, 10]]\n  ok    invariant under a quarter turn of one square\n  ok    an angle one ULP below pi/2 keys as one at zero  [the quantizer must treat the angle as periodic, not as a line]\n  ok    a perturbed-then-quenched copy keys as the same basin  [same, gap to Trump -2.160e-11]\n  ok    a different arrangement keys differently  [n=11 rigid vs n=16 grid: different]\n  ok    at the same n, the annealer's basin differs from Trump's  [gap +3.733e-02, 4 contacts vs Trump's 14]\n\n  Trump n=11: 14 contacts, angle classes (5, 6), geometric 1ac271c4b727\u2026\nCANONICAL CHECKS PASSED",
+      "reason": ""
+    },
+    {
+      "name": "soft-schema validation",
+      "status": "passed",
+      "seconds": 4.108697457995731,
+      "output": "  100 frontmatter-md artifacts + 383 pure-yaml datasets validate against their declared schemas\n  schemas in use: ['../schemas/claude-efficiency-rollup.schema.yaml', '../schemas/codex-task-tree-delta.schema.yaml', '../witness.schema.yaml', 'asymptotic-waste-bounds.schema.yaml', 'chunk-evidence-profile.schema.yaml', 'chunk-partition-atlas.schema.yaml', 'composite-figure.schema.yaml', 'contact-assembly-grammar.schema.yaml', 'contact-enumeration-pricing.schema.yaml', 'contact-full-cell-control.schema.yaml', 'contact-overlay-gallery.schema.yaml', 'contact-scaffold-atlas.schema.yaml', 'contact-structure.schema.yaml', 'covering-values.schema.yaml', 'defects.schema.yaml', 'document-map.schema.yaml', 'frontier-evidence.schema.yaml', 'known-best-atlas.schema.yaml', 'prospective-atlas-seed.schema.yaml', 'prospective-source-availability.schema.yaml', 'results.schema.yaml', 'schemas/session-close-report.schema.yaml', 'source-availability.schema.yaml', 'source-coverage.schema.yaml', 'square-packing-case.schema.yaml', 'strategy-catalogue.schema.yaml', 'translation-escape-screen.schema.yaml', 'witness.schema.yaml']\n  source coverage reconciled: 100 cases, 2 newer in-horizon reports, 4 tracked beyond horizon",
+      "reason": ""
+    },
+    {
+      "name": "derivation (needs sympy)",
+      "status": "passed",
+      "seconds": 0.99567983399902,
+      "output": "published minimal polynomial of s\n  irreducible over Q: True\n  real roots: [-1.8530324789725078629, 3.8770835900228141773]\n\ns as a rational function of u: (6u + 4) / (-u^2 + 2u + 1)\ncleared polynomial in u has degree 16\n\nirreducible factors over Q:\n  degree 8: [5, -10, -2, 14, 12, -6, 2, 2, -1]\n      real root -0.5460939816602248825636953\n      real root 0.3657693076046772933885450\n  degree 8: [1373, -4318, -15386, -29302, -16044, -4914, -1414, -186, 31]\n      real root 0.08667571693896588186829271\n      real root 5.784029672526773245921044\n\nminimal polynomial of u = tan(a/2), highest degree first:\n  [5, -10, -2, 14, 12, -6, 2, 2, -1]\nmatches cases.trump11.packing.U_MIN_POLY: True",
+      "reason": ""
+    },
+    {
+      "name": "search engine (sqsearch)",
+      "status": "passed",
+      "seconds": 1.5290256250009406,
+      "output": "  ok   simplified SAT == naive SAT  (max diff 6.661e-16)\n  ok   grid(4) valid at s=2  (s=2)\n  ok   grid(4) invalid at s=2-1e-9\n  ok   tilted unit square fits sqrt(2)  (0.000e0)\n  ok   and not sqrt(2)-1e-9\n  ok   overlap depth 0.5 -> penalty 0.25  (0.250000)\n  ok   chain reproducible from (seed, chain)  (2.79391704363121596e0)\n  ok   pair-test meter covers ordinary and basin-entry search  (ordinary 54, entry 54, expected 54)\n  ok   distinct chains explore differently  (2.793917044 vs 2.828439597)\n  ok   positive control: recovers s(5)  (2.707123142 vs 2.707106781, gap +1.64e-5)\n  ok   and never beats it\n  ok   reported packing is overlap-free  (overlap 0.00e0)\n  ok   reported overlap is recomputed, not accumulated  (0.00e0 vs stored 0.00e0)\n  ok   reported packing fits its reported side  (2.707123141908 <= 2.707123141908)\nSELFTEST PASSED",
+      "reason": ""
+    },
+    {
+      "name": "lint floor (rust)",
+      "status": "passed",
+      "seconds": 0.6966756659967359,
+      "output": "clippy clean at warnings-as-errors; rustfmt clean",
+      "reason": ""
+    },
+    {
+      "name": "H-041 Stromquist repaired-cover exact certificate",
+      "status": "passed",
+      "seconds": 0.45303899999998976,
+      "output": "{\n  \"determination_outcome\": \"criterion_met\",\n  \"elapsed_seconds\": 0.364191,\n  \"hypothesis\": \"H-041\",\n  \"record_replayed\": true,\n  \"schema_version\": 1,\n  \"selftests\": {\n    \"bad_threshold_rejected\": true,\n    \"d4_misuse_rejected\": true,\n    \"duplicate_record_node_rejected\": true,\n    \"duplicated_edge_rejected\": true,\n    \"duplicated_face_rejected\": true,\n    \"extraneous_root_rejected\": true,\n    \"omitted_edge_rejected\": true,\n    \"omitted_face_rejected\": true,\n    \"outside_tiling_vertex_rejected\": true,\n    \"printed_g_080_full_cover_rejected\": true,\n    \"printed_g_080_threshold_failure_certified\": true,\n    \"source_path_drift_rejected\": true,\n    \"weakened_capacity_rejected\": true\n  }\n}",
+      "reason": ""
+    },
+    {
+      "name": "H-010 Stromquist printed-cover exact rejection",
+      "status": "passed",
+      "seconds": 0.34156683300534496,
+      "output": "{\n  \"determination_outcome\": \"refuted\",\n  \"elapsed_seconds\": 0.187239,\n  \"hypothesis_id\": \"H-010\",\n  \"minimum_avoidance_margin_point\": \"G\",\n  \"record_replayed\": true,\n  \"record_written\": false,\n  \"schema_version\": 1,\n  \"selftests\": {\n    \"box_side_is_strictly_greater_than_one\": true,\n    \"exact_witness_avoids_all_printed_points\": true,\n    \"figure13_K4_not_D4\": true,\n    \"figure13_escape_contains_A_triple\": true,\n    \"figure13_strict_escape_avoids_all_ten\": true,\n    \"left_shift_witness_mutation_is_rejected\": true,\n    \"lemma4_squared_root_negative_control\": true,\n    \"standalone_twelve_point_pigeonhole_does_not_close\": true,\n    \"three_point_capacity_closes_conditionally\": true,\n    \"two_point_capacity_mutation_does_not_close\": true\n  }\n}",
+      "reason": ""
+    },
+    {
+      "name": "exact verification",
+      "status": "passed",
+      "seconds": 59.07757612500427,
+      "output": "known-best n=11 rational control check passed\nlimit record agrees with the source certificate: cases/n11_fractional_certificate/t-022-dilation-limit-corollary.json\nreplayed 81 exact rational grid witnesses and checked basic bound instantiations for 100 cases\nExact verification of Trump's 11-square packing\nVALID: 11 squares, 55 pairs tested\n  container: 20 corner coordinates exactly on the boundary\n  pairs:     14 separated with zero gap, 41 strictly\n  field:     Q(u), degree 8, u = tan(a/2)\n  interval refinements needed: 0\n  wall time: 0.147 s\n  P(s) == 0 for the published degree-8 polynomial: True\n  s = 3.87708359002281417730789706010096270637645566846\n  published (Ellsworth, 33 digits):\n      3.87708359002281417730789706010096\nVALID: 5 squares, 10 pairs tested\n  container: 16 corner coordinates exactly on the boundary\n  pairs:     4 separated with zero gap, 6 strictly\nfield preconditions: x^2-2 irreducible; (1,2) isolates its positive root\nnegative control: duplicated square rejected\nVALID: 10 squares, 45 pairs tested\n  container: 24 corner coordinates exactly on the boundary\n  pairs:     11 separated with zero gap, 34 strictly\nfield preconditions: x^2-2 irreducible; (1,2) isolates its positive root\nnegative control: duplicated square rejected\nVALID: 40 squares, 780 pairs tested\n  container: 48 corner coordinates exactly on the boundary\n  pairs:     98 separated with zero gap, 682 strictly\nfield preconditions: x^2-2 irreducible; (1,2) isolates its positive root\nnegative control: duplicated square rejected\nagrees with the retained witness to 6.0384286065624924610385364664052401853504307578592229922493134471685500000000000000000000E-31 -- the witness's own rounding\nVALID: 65 squares, 2080 pairs tested\n  container: 64 corner coordinates exactly on the boundary\n  pairs:     172 separated with zero gap, 1908 strictly\nn=65: agrees with the retained witness to 4.80357582031155762981705831045851621816269131268201182181493E-33\nn=65: negative control rejected a duplicated square\nVALID: 89 squares, 3916 pairs tested\n  container: 64 corner coordinates exactly on the boundary\n  pairs:     256 separated with zero gap, 3660 strictly\nn=89: agrees with the retained witness to 3.27499385156381931825611839019650695064115341972086220934925E-33\nn=89: negative control rejected a duplicated square\nfield preconditions: x^2-2 irreducible; (1,2) isolates its positive root\nVALID: 82 squares, 3321 pairs tested\n  container: 70 corner coordinates exactly on the boundary\n  pairs:     224 separated with zero gap, 3097 strictly\nn=82: negative control rejected a duplicated square\nn=82: negative control rejected a tenth column square\nn=82: witness side is the exact side, rounded up by 4.80357582031155762981705830E-33\nfield preconditions: x^2-2 irreducible; (1,2) isolates its positive root\nVALID: 27 squares, 351 pairs tested\n  container: 40 corner coordinates exactly on the boundary\n  pairs:     54 separated with zero gap, 297 strictly\nn=27: negative controls rejected a duplicate and diamond 6\nn=27: witness side is the exact side, rounded off by -4.84903928483593768847403658834E-30\nVALID: 38 squares, 703 pairs tested\n  container: 48 corner coordinates exactly on the boundary\n  pairs:     89 separated with zero gap, 614 strictly\nn=38: negative controls rejected a duplicate and diamond 7\nn=38: witness side is the exact side, rounded off by -4.84903928483593768847403658834E-30\nVALID: 52 squares, 1326 pairs tested\n  container: 56 corner coordinates exactly on the boundary\n  pairs:     129 separated with zero gap, 1197 strictly\nn=52: negative controls rejected a duplicate and diamond 9\nn=52: witness side is the exact side, rounded off by -4.84903928483593768847403658834E-30\nVALID: 67 squares, 2211 pairs tested\n  container: 64 corner coordinates exactly on the boundary\n  pairs:     178 separated with zero gap, 2033 strictly\nn=67: negative controls rejected a duplicate and diamond 10\nn=67: witness side is the exact side, rounded off by -4.84903928483593768847403658834E-30\nVALID: 84 squares, 3486 pairs tested\n  container: 72 corner coordinates exactly on the boundary\n  pairs:     235 separated with zero gap, 3251 strictly\nn=84: negative controls rejected a duplicate and diamond 11\nn=84: witness side is the exact side, rounded off by -4.84903928483593768847403658834E-30\nfield preconditions: x^2-2 irreducible; (1,2) isolates its positive root\nVALID: 26 squares, 325 pairs tested\n  container: 36 corner coordinates exactly on the boundary\n  pairs:     52 separated with zero gap, 273 strictly\nn=26: negative controls rejected a duplicate and column square 6\nn=26: witness side is the exact side, rounded off by 5.45288214549218693457789023498E-30\nVALID: 85 squares, 3570 pairs tested\n  container: 68 corner coordinates exactly on the boundary\n  pairs:     236 separated with zero gap, 3334 strictly\nn=85: negative controls rejected a duplicate and column square 10\nn=85: witness side is the exact side, rounded off by 9.0576429098437386915578046996E-31\nfield preconditions: x^2-2 irreducible; (1,2) isolates its positive root\nVALID: 19 squares, 171 pairs tested\n  container: 28 corner coordinates exactly on the boundary\n  pairs:     31 separated with zero gap, 140 strictly\nn=19: negative control rejected a duplicated square\nVALID: 66 squares, 2145 pairs tested\n  container: 60 corner coordinates exactly on the boundary\n  pairs:     166 separated with zero gap, 1979 strictly\nn=66: negative control rejected a duplicated square\nfield preconditions: x^2-2 irreducible; (1,2) isolates its positive root\nVALID: 18 squares, 153 pairs tested\n  container: 28 corner coordinates exactly on the boundary\n  pairs:     26 separated with zero gap, 127 strictly\nn=18: negative control rejected a duplicated square\nVALID: 86 squares, 3655 pairs tested\n  container: 70 corner coordinates exactly on the boundary\n  pairs:     237 separated with zero gap, 3418 strictly\nn=86: negative control rejected a duplicated square\nfield preconditions: x^2-7 irreducible; (2,3) isolates its positive root\nVERIFIED\n  id: W-known-best-n011-rational\n  n: 11\n  side: 242317724376425886081743566256327981772437642588608174356625631/62500000000000000000000000000000000000000000000000000000000000\n  method: exact-algebraic\n  pairs tested: 55\n  limits: Verifies witness feasibility and its upper bound, not global optimality.\nVERIFIED: 11 squares, 55 pairs\n  exact side: 242317724376425886081743566256327981772437642588608174356625631/62500000000000000000000000000000000000000000000000000000000000\n  minimum pair gap: 1519512263966091128213801849300527626481514060792209640222207706804795100331104585791871729247623946841063/15195565104714582909375242395223498805354675864626240937439374127902896200000000000000000000000000000000000000000000000000000000000000000\nVERIFIED\n  id: W-schadt-n029-2025-decimal-rational\n  n: 29\n  side: 2966942899906512939318226046481160904289990651293931822604648091421/500000000000000000000000000000000000000000000000000000000000000000\n  method: exact-algebraic\n  pairs tested: 406\n  limits: Verifies witness feasibility and its upper bound, not global optimality.\nVERIFIED: 29 squares, 406 pairs\n  exact side: 2966942899906512939318226046481160904289990651293931822604648091421/500000000000000000000000000000000000000000000000000000000000000000\n  minimum pair gap: 199989999999999999999999999999999999/2000000000000000000000000000000000000000000000000000000000000000000",
+      "reason": ""
+    },
+    {
+      "name": "verifier perturbation limits",
+      "status": "passed",
+      "seconds": 1.1027648749950458,
+      "output": "exact verifier, unperturbed packing: accept\n  delta = 1e-6    REJECT\n  delta = 1e-12   REJECT\n  delta = 1e-15   REJECT\n  delta = 1e-18   REJECT\n  delta = 1e-30   REJECT\n  delta = 1e-100  REJECT\n\nfloat64 separating-axis test:\n  tol=1e-09    valid packing: accept   1e-6: REJECT  1e-9: REJECT  1e-12: accept  1e-15: accept  1e-18: accept\n  tol=1e-12    valid packing: accept   1e-6: REJECT  1e-9: REJECT  1e-12: REJECT  1e-15: accept  1e-18: accept\n  tol=0        valid packing: REJECT   1e-6: REJECT  1e-9: REJECT  1e-12: REJECT  1e-15: REJECT  1e-18: REJECT\n\nA float verifier that accepts the true packing also accepts overlaps\nbelow its tolerance; one that rejects those overlaps also rejects the\ntrue packing. That is why exactness here is about representation, not precision.",
+      "reason": ""
+    },
+    {
+      "name": "frontier corpus",
+      "status": "passed",
+      "seconds": 0.542698167002527,
+      "output": "  100 artifacts, n = 1..100; formal lane: 35 proved, 65 open\n  reported lane: 35 proved, 65 open; 58 formal-open cases use Nagamochi\n  n=29 source numerically checked: 29 squares, 406 pairs, six classes\n  named-source reconciliation is enforced by soft-schema validation",
+      "reason": ""
+    },
+    {
+      "name": "frontier rigidity assessed here",
+      "status": "passed",
+      "seconds": 0.4212319580037729,
+      "output": "frontier rigidity check passed: every block matches the derivationassessed: 10 locally-rigid, 84 not-rigid, 3 undetermined, 3 left to a stronger argument\n  locally-rigid     10\n    n = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]\n  not-rigid         84\n  undetermined       3\n    n = [28, 68, 69]\n  left to a stronger argument: n = [5, 11, 40]\n  screen excluded: n = [68, 69]",
+      "reason": ""
+    },
+    {
+      "name": "generated tables in sync with frontier/",
+      "status": "passed",
+      "seconds": 0.5327685000011115,
+      "output": "  6 generated report tables and frontier/STATUS.md match frontier/ (167 data rows)",
+      "reason": ""
+    },
+    {
+      "name": "strategy catalogues",
+      "status": "passed",
+      "seconds": 0.0018809589964803308,
+      "output": "  search: 20 strategies, 4 families, all fields populated\n  proof: 30 strategies, 6 families, all fields populated",
+      "reason": ""
+    },
+    {
+      "name": "defect log",
+      "status": "passed",
+      "seconds": 0.3188772909998079,
+      "output": "  defects.md matches defects.yaml (478 defects)\n  every generated view is exempt from the Markdown formatter",
+      "reason": ""
+    },
+    {
+      "name": "skills mirrored between .agents and .claude",
+      "status": "passed",
+      "seconds": 0.04190412499883678,
+      "output": "hand-written skills in sync",
+      "reason": ""
+    },
+    {
+      "name": "synopsis agrees with the artifacts",
+      "status": "passed",
+      "seconds": 1.8774321250020876,
+      "output": "  documentation map covers 658 durable documents; footers and links resolve\n  SYNOPSIS.md agrees with the artifacts, the ledger and the defect log",
+      "reason": ""
+    },
+    {
+      "name": "README agrees with the directory",
+      "status": "passed",
+      "seconds": 0.8875129579973873,
+      "output": "  README.md agrees with the directory, reports, defect source, work model and its own links",
+      "reason": ""
+    },
+    {
+      "name": "AGENTS.md mirrors the operating rules",
+      "status": "passed",
+      "seconds": 0.07335391700326,
+      "output": "  AGENTS.md mirrors all 16 rules in operating-rules.md",
+      "reason": ""
+    },
+    {
+      "name": "agenda map agrees with the agendas",
+      "status": "passed",
+      "seconds": 0.18218254200473893,
+      "output": "  agenda map matches 271 commitments across 28 agendas: 6 in progress, 15 ready, 59 blocked, 135 complete",
+      "reason": ""
+    },
+    {
+      "name": "work accounting agrees on one unit",
+      "status": "passed",
+      "seconds": 0.45434579200082226,
+      "output": "  work accounting reproduces: 1 shared unit, 4 roles the solver collapses",
+      "reason": ""
+    },
+    {
+      "name": "assembly coverage agrees with the contract",
+      "status": "passed",
+      "seconds": 0.5080521249983576,
+      "output": "  assembly coverage reproduces: 17 certificates and 13 typed limitations over n <= 30",
+      "reason": ""
+    },
+    {
+      "name": "chunk taxonomy agrees with the corpus",
+      "status": "passed",
+      "seconds": 1.4159364999941317,
+      "output": "  chunk taxonomy reproduces: 3 source strata, 109 components in the residue",
+      "reason": ""
+    },
+    {
+      "name": "session clocks are readable",
+      "status": "passed",
+      "seconds": 0.243706374996691,
+      "output": "  96 session artifacts, 458 phases, 440 carrying a clock: every declared start is one that could have been read\n  note: session-044-agenda006-continuation.md phase 7 starts before phase 6; a delegated lane run in a worktree does this legitimately\n  elapsed against budget in session-096-residual-skeleton.md:\n      phase  1 insight-iteration          19 min against a budget of   20\n      phase  2 factual-review             10 min against a budget of   10\n      phase  3 efficiency-loop            20 min against a budget of   20\n      phase  4 documentation-pass        109 min against a budget of   71",
+      "reason": ""
+    },
+    {
+      "name": "n=5 rigidity certificates still verify",
+      "status": "passed",
+      "seconds": 0.45505033300287323,
+      "output": "  n=5 cone reproduces: 14 coordinates pinned with exact Farkas certificates, 1 free\n  1 of 1 free directions obstructed at second order by a verified self-stress",
+      "reason": ""
+    },
+    {
+      "name": "every session's cost is attributed",
+      "status": "passed",
+      "seconds": 3.8530448750025243,
+      "output": "  the close report and its synopsis view agree with 96 sessions\n11 rollups no session declares (pre-field sessions do this legitimately):\n    11222fc8-7b65-5cb8-8e3b-982ecf899ca8.yaml    span starts 2026-09-05\n    5cd11e53-fb82-4a28-ab2a-0c26f16fe7e5.yaml    span starts 2026-08-30\n    agent-a29aa05c090097181.yaml                 span starts 2026-08-29\n    agent-a2b26389a68623fec.yaml                 span starts 2026-08-29\n    agent-a498c3f37ac3199b7.yaml                 span starts 2026-08-29\n    agent-a4a75cb3921cba0d8.yaml                 span starts 2026-08-29\n    agent-a7c3f30347ea4640b.yaml                 span starts 2026-08-29\n    agent-a84da2374f947e8a6.yaml                 span starts 2026-08-29\n    agent-a93d11365c62eefe2.yaml                 span starts 2026-08-29\n    agent-aaaf4d68d6a5916dd.yaml                 span starts 2026-08-29\n    agent-ae78a4077b6ecafac.yaml                 span starts 2026-08-29\n\n96 terminal sessions, all declaring rollups that exist",
+      "reason": ""
+    },
+    {
+      "name": "the branch cost rollup renders",
+      "status": "passed",
+      "seconds": 12.82469024999591,
+      "output": "  the branch cost rollup renders for 22 branches, and for none",
+      "reason": ""
+    },
+    {
+      "name": "control anchors still resolve",
+      "status": "passed",
+      "seconds": 0.18613775000267196,
+      "output": "163 negative control anchors each match their file exactly once",
+      "reason": ""
+    },
+    {
+      "name": "tier ceilings are declared and not slack",
+      "status": "passed",
+      "seconds": 0.12981162500364007,
+      "output": "gate budget declaration passed: 9 tiers, 5 with a recorded cost, all ceilings within 2x of it, all named in development.md",
+      "reason": ""
+    },
+    {
+      "name": "the borrowed lower bounds re-derive",
+      "status": "passed",
+      "seconds": 0.12438179200398736,
+      "output": "83 lower bounds re-derived from Theorem 2, all agreeing, none inverted; the README, case-body, citation (95) and operative (83) counts agree with the records",
+      "reason": ""
+    },
+    {
+      "name": "the inventory agrees with the register",
+      "status": "passed",
+      "seconds": 0.12847049999982119,
+      "output": "inventory agrees with 56 evidence records",
+      "reason": ""
+    },
+    {
+      "name": "results rungs are earned and the view agrees",
+      "status": "passed",
+      "seconds": 0.3178766249984619,
+      "output": "22 registered results: every declared rung passes its structural checks, every path and produced_by id resolves, every reader-tier mention exists\npacking/frontier/RESULTS.md agrees with results.yaml",
+      "reason": ""
+    },
+    {
+      "name": "the synopsis headline carries every result",
+      "status": "passed",
+      "seconds": 0.13474720799422357,
+      "output": "  synopsis headline carries all 22 registered results",
+      "reason": ""
+    },
+    {
+      "name": "exact certificates are named by their records",
+      "status": "passed",
+      "seconds": 0.12515641700156266,
+      "output": "10 case packages certify 18 sizes, every one cited by its record\n  cases/gobel10 -> [10]\n  cases/gobel40 -> [40]\n  cases/gobel5 -> [5]\n  cases/gobel82 -> [82]\n  cases/gobel_family -> [65, 89]\n  cases/gobel_offcentre -> [26, 85]\n  cases/gobel_strip -> [27, 38, 52, 67, 84]\n  cases/lifted_q2 -> [19, 66]\n  cases/lifted_q7 -> [18, 86]\n  cases/trump11 -> [11]",
+      "reason": ""
+    },
+    {
+      "name": "rung figures agree with their certificates",
+      "status": "passed",
+      "seconds": 0.4046874999985448,
+      "output": "  22 results and 42 certificate-bearing evidence entries checked, 18 certificate artifacts recomputed from their own atoms, all quoted figures and fraction-decimal claims agree (results.yaml, evidence.yaml, defects.yaml)",
+      "reason": ""
+    },
+    {
+      "name": "case prose agrees with its own front matter",
+      "status": "passed",
+      "seconds": 0.18788766699435655,
+      "output": "  100 case files checked, every quoted bound figure and fraction-decimal claim in their prose agrees with their own front matter",
+      "reason": ""
+    },
+    {
+      "name": "terminal sessions name what they cost",
+      "status": "passed",
+      "seconds": 0.7229470000020228,
+      "output": "  52 terminal sessions declare 168 resource rollups, all present\n  44 closed before the field existed and are not checked: session-001, session-002, session-003, session-004, session-005, session-006, session-007, session-008, session-009, session-010, session-011, session-012, session-013, session-014, session-015, session-016, session-017, session-018, session-019, session-020, session-021, session-022, session-023, session-024, session-025, session-026, session-027, session-028, session-029, session-030, session-031, session-032, session-033, session-034, session-035, session-036, session-037, session-038, session-039, session-040, session-041, session-042, session-043, session-044",
+      "reason": ""
+    },
+    {
+      "name": "terminal sessions name the gate that certified them",
+      "status": "passed",
+      "seconds": 0.5558272919952287,
+      "output": "  10 terminal sessions name a full-gate run on a commit in their history\n  86 closed before the rule existed and are not checked: session-001..session-086 (86 sessions)",
+      "reason": ""
+    },
+    {
+      "name": "Goebel's family reaches the sizes it reaches",
+      "status": "passed",
+      "seconds": 2.8392240419998416,
+      "output": "  Goebel family reproduces: 12 sizes below 100, optimal at [5, 40, 65, 89], exact and unbuilt at []",
+      "reason": ""
+    },
+    {
+      "name": "differential: search energy vs validity oracle",
+      "status": "passed",
+      "seconds": 0.2981598749975092,
+      "output": "  20000 near-contact pairs: 16891 overlapping, 0 touching\n  sqsearch pair energy and sqpack validity agree on every pair",
+      "reason": ""
+    },
+    {
+      "name": "provenance: recorded commits are reachable",
+      "status": "passed",
+      "seconds": 1.8872407080052653,
+      "output": "  UNAVAILABLE exp-001-baseline-sweep.md -> d6a1057 (historical loss is annotated)\n  ok          exp-002-baseline-n10-positive-control.md -> 1e70bc8\n  ok          exp-003-baseline-n11-target.md -> 1e70bc8\n  ok          exp-004-baseline-n12-negative-control.md -> 1e70bc8\n  ok          exp-005-basin-entry-n11.md -> 41b3e18\n  ok          exp-006-lp-quench-n5-n10-n11.md -> 8b450a1\n  ok          exp-007-quench-bracket-n5.md -> 8b450a1\n  ok          exp-008-quench-bracket-n10.md -> 8b450a1\n  ok          exp-009-quench-bracket-n11.md -> 8b450a1\n  ok          exp-010-angle-kink-n11.md -> 8b450a1\n  ok          exp-011-h-020-n17.md -> 60a50cc\n  ok          exp-012-h-024-n29-angle-classes.md -> 5384209\n  ok          exp-013-h-026-trump-tangent.md -> faba023\n  ok          exp-014-h-032-n3-optimal-moduli.md -> 257cb0d\n  ok          exp-015-h-032-n4-optimal-moduli.md -> 257cb0d\n  ok          exp-016-h-010-stromquist-printed-figure14.md -> 178fc6b\n  ok          exp-017-h-041-stromquist-repaired-figure14.md -> c6d036b\n  ok          exp-018-h-021-n3-basin-event-calibration.md -> ee3acc1\n  ok          exp-019-h-021-n4-basin-event-calibration.md -> ee3acc1\n  ok          exp-020-h-021-n5-basin-event-calibration.md -> ee3acc1\n  ok          exp-021-h-021-n3-basin-event-v3.md -> 8f20908\n  ok          exp-022-h-021-n3-basin-event-v3-completion.md -> 8f20908\n  ok          exp-023-h-021-n4-basin-event-v3.md -> 8f20908\n  ok          exp-024-h-021-n4-basin-event-v3-repair.md -> f15d036\n  ok          exp-025-h-021-n5-basin-event-v3.md -> 5ab8dab\n  ok          exp-026-h-021-n6-basin-event-v3.md -> da6bac3\n  ok          exp-027-h-021-n6-basin-event-v3-retention.md -> a3be8e4\n  ok          exp-028-h-021-n7-basin-event-v3.md -> ce84ef6\n  ok          exp-029-h-021-n8-basin-event-v3.md -> 69c6008\n  ok          exp-030-h-021-n9-basin-event-v3.md -> 56bf66c\n  ok          exp-031-h-002-n10-source-return.md -> dab797c\n  ok          exp-032-h-021-terminal-component-controls.md -> d3d4ace\n  ok          exp-033-h-023-n5-equal-side-face.md -> 26360f1\n  ok          exp-034-h-023-n5-angle-sheet.md -> 329b848\n  ok          exp-035-h-023-n5-tangent-cones.md -> aa63cf4\n  ok          exp-036-h-023-n5-second-order-obstruction.md -> f2d2e53\n  ok          exp-037-h-042-n29-numerical-angle-classes.md -> ae034ba\n  ok          exp-038-h-023-n5-tangent-inventory.md -> b8d0104\n  ok          exp-039-h-023-n5-fixed-angle-polytope.md -> 27b999e\n  ok          exp-042-h-023-n5-endpoint-aware-rotating-paths.md -> 2980fdc\n  ok          exp-047-h-053-unitsquare-rigid-pose-serialization.md -> d7c94590\n  ok          exp-048-h-054-n50-exact-rational-reconstruction.md -> d7c94590\n  ok          exp-049-h-052-n17-independent-certificate-agreement.md -> d7c94590\n  ok          exp-050-h-054-n50-source-semantics-e1-localization.md -> e21598f6\n  ok          exp-051-h-053-n68-refusal-localization.md -> e21598f6\n  ok          exp-052-h-052-n17-resumable-certificate-agreement.md -> e21598f6\n  ok          exp-053-h-057-n17-parent-bound-parallel-speedup.md -> 909efafa0773fbea23b24de072ef59a03a01317a\n  ok          exp-054-h-058-n68-one-parent-production-serialization.md -> 909efafa\n  ok          exp-055-h-059-n50-producer-refusal-ordering.md -> 81177148e404aa283c2a6ec7d696f2b39a9e361c\n  ok          exp-056-h-052-n17-sequential-larger-prefix.md -> 11ce70ee\n  ok          exp-057-h-058-n68-one-parent-localization.md -> 11ce70ee\n  ok          exp-059-h-052-n17-fresh-successor-completion.md -> 2f112f4c\n  ok          exp-070-h-064-n11-fractional-resume.md -> 04e6a2ce8ed20640598f2cd687c1e1dfd3141e92\n  ok          exp-071-h-070-n11-inset-seed-release.md -> 04e6a2ce8ed20640598f2cd687c1e1dfd3141e92\n  ok          exp-110-h-090-core-shrink.md -> 48a161ba570d053d054eb1942f6e315929c6250b\n  ok          exp-111-h-091-core-shrink.md -> aeb683d5e02913504af663aa39e42f577e19a346\n  ok          exp-113-h-099-trump-support-screen.md -> e70458a9c40cfab46d2f2233b0dfbb47501a4de8\n  ok          exp-114-h-104-fixed-side-auxiliaries.md -> e45c8a633090476121701d94d50c034e85e3f7c7\n  ok          exp-115-h-105-fixed-candidate-pair-obstruction.md -> cf299e6c7516c2ad41ba05c8e4ac8bb3ca16b5c6\n  ok          exp-116-h-093-scalar-61-16.md -> 4d305597a505ebfbe85f1851fa7148374661e622\n  ok          exp-117-h-106-continuous-near-axis.md -> cf0f4d4c5b4c540225d53f4724496ba33442607c\n  ok          exp-118-h-107-fixed-site-completion.md -> 46f38ab4\n  ok          exp-119-h-108-near45-a3-forcing.md -> bdc687841467599231b59447b38f9037625deb43\n  ok          exp-120-h-109-near45-a1-a2-forcing.md -> 57ad0deaa0fb9f57ccec7b606171de0507422c82\n  ok          exp-121-h-110-fixed-p12-escape.md -> 961d9923\n  ok          exp-122-diamond-conditional-cover-screen.md -> c4a69e3e\n  ok          exp-123-near45-localization.md -> 3ea8e346\n  ok          exp-124-full-square-compatibility-screen.md -> a75d751a\n  ok          exp-125-h124-complete-residual-cover.md -> 7daa7c55\n  ok          exp-126-h099-complete-graph-candidate.md -> 7daa7c55\n  ok          exp-127-h124-collision-augmented-axis-cover.md -> 3bec06e2\n  ok          exp-128-h099-seven-row-support-ceiling.md -> a94e57fe\n  checked all 72 declared engine commits",
+      "reason": ""
+    },
+    {
+      "name": "campaign record",
+      "status": "passed",
+      "seconds": 1.1248167089943308,
+      "output": "OK 1 series, 18 reports, 100 hypotheses, 84 rounds, 96 agent sessions, 28 agendas, 2 logbook entries\n  time-based refusals: 0 judged, 0 uncheckable (HEAD committed 2026-09-07T12:49:04-07:00)\n  219 declared packing-CLI invocations parse against their own CLIs",
+      "reason": ""
+    }
+  ],
+  "wall_seconds": 90.33168208300049,
+  "setup_output": "built sqsearch/target/release/sqsearch",
+  "selected_count": 48,
+  "total_count": 66,
+  "partial_pattern": [],
+  "skipped_pattern": [],
+  "budget": {
+    "tier": "checks",
+    "wall_seconds": 90.33168208300049,
+    "status": "reported",
+    "enforced": false,
+    "ceiling_seconds": 195.0,
+    "measured_seconds": 99.39,
+    "failures": [],
+    "notes": [
+      "within the declared band, but this run's shape (10 cpus, 3 jobs, 1 inner) is not the checks tier's reference (4 cpus, --jobs 3 --inner-jobs 1), so the band was reported and not enforced"
+    ],
+    "top_steps": [
+      [
+        "exact verification",
+        59.07757612500427
+      ],
+      [
+        "soundness perimeter",
+        30.666408083001443
+      ],
+      [
+        "type floor (basedpyright)",
+        26.067427458001475
+      ]
+    ]
+  }
+}
+.                                                                        [100%]
+============================== slowest durations ===============================
+90.54s call     benchmarks/test_checks_timing.py::test_complete_checks_workload
+0.00s teardown benchmarks/test_checks_timing.py::test_complete_checks_workload
+0.00s setup    benchmarks/test_checks_timing.py::test_complete_checks_workload
+1 passed in 90.55s (0:01:30)

@@ -1099,16 +1099,25 @@ agenda:
           Price one small H114 feature family and its missing kernel-specific
           contract before any target. This has a direct-bound mechanism, unlike
           merely refuting the particular old-support calibration.
+      - bead: think-s6e7
+        workflow: research-loop
+        priority: 1
+        rationale: >-
+          Added at Session092's handoff, not backdated to this agenda's own W10.
+          BC-282 designs the complete residual ten-square skeleton after the
+          independently audited partial release exclusions. Allocate 20 minutes
+          for the design and 10 for independent admission before any later target.
       selected:
         bead: think-mq0d
         workflow: insight-iteration
         rationale: >-
-          Session095 exp128 closes BC259/H099 at fixed-support optimum11.
-          Its comparative design selects BC264's existing 30-minute feature and
-          kernel-contract pricing, not a target or an automatic hierarchy build.
-          Keep the conditional H101 common-support obstruction as fallback.
-          H107 stays paused and external BC261/273 remains separately owned.
-          This is a live selection update, not a W10 outcome.
+          Updated at session098’s checkpoint, not backdated to this agenda’s W10.
+          BC282’s exact translation/fiber reduction is independently accepted,
+          but its full target is not admitted. Comparative review parks further
+          local H120/H118 targets. The existing BC264 entry remains the next
+          portfolio pricing priority under its separate owner: first accept the
+          kernel-specific contract, fix features and price full pair verification.
+          No new target, ID, degree escalation or automatic dispatch is authorized.
       operator_input:
         status: unavailable
         note: >-

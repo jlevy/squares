@@ -17,10 +17,10 @@ agenda:
     shared-angle theorem; retain a small independent pair-kernel discriminator and
     candidate-led successors. Review contributed evidence at its own scope, build only
     the interfaces selected pilots need, and expand on closed continuous domains or
-    explicit useful residuals. Its original preparation launched no experiments.
-    Session095 subsequently selected BC259 adoption and BC265 comparative design;
-    other selected cells remain independently owned by Session092. Read each cell's
-    actual protocol rather than treating this activation as blanket launch authority.
+    explicit useful residuals. Session092 accepted the direct contracts and
+    shared geometry controls; complete consumer attachment and broad pilots remain
+    open. Session095 completed BC259 support-ceiling adoption and BC265 comparative
+    design, selecting future BC264 pricing. Each lane retains its own allocation.
   items:
   - id: BC-258
     purpose: research
@@ -131,7 +131,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Which direct resource, anchor, case-composition, angular-transfer, uniform
@@ -160,11 +160,32 @@ agenda:
       BC-261 consumes only the accepted case/Farkas and required resource subset;
       BC-264 consumes the kernel subset. Physical stationarity is reviewed separately
       under BC-267 and is not a gate on direct all-feasible exclusions.
+    outcomes:
+    - scope: Direct case, uniform Farkas, resource, capacity and anchor implications used by Agenda028
+      classification: achieved
+      result: >-
+        Independently accepted with explicit complete-domain, touching, common-budget
+        and coefficient-error premises. This is proof-contract acceptance, not
+        implementation acceptance or a target result.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
+      disposition: retire-success
+      follow_up: null
+    - scope: Pair-kernel and stationary or finite-motion implications
+      classification: never-opened
+      result: >-
+        The focused review did not assess these implications. BC264 must obtain
+        independent kernel acceptance before its target; BC267 retains physical
+        stationarity review. Completion of the direct review does not satisfy them.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md
+      disposition: defer-dependency
+      follow_up: think-mq0d
   - id: BC-261
     purpose: tool_validation
     owner_focus: correctness
     instances: [3, 4, 11]
-    state: blocked
+    state: in_progress
     priority: 0
     question: >-
       Can the existing geometry and fixed-angle LP export one independently checked
@@ -441,11 +462,18 @@ agenda:
 
 **Selected work has executed; the rest requires its own allocation.** Session095
 completed BC259’s independent support-ceiling adoption and BC265’s comparative design.
-BC264 is the selected future pricing entry, not an active target.
+BC264 is its selected future pricing entry.
+Session092 accepted the shared BC260 contracts and BC261 direct geometry controls;
+complete consumer attachment remains open.
 [X-017](../explorations/X-017-compatibility-and-complete-case-covers.md) owns the
 critical assessment, mathematical distinctions, and complete source-to-record map.
 This agenda owns the prospective actions.
 Epic `think-sz5t` owns the program; `think-adfk` owns the completed intake and planning.
+[Session 092](../agent-sessions/session-092-hybrid-overnight.md) accepted BC260’s case,
+Farkas and resource subset for the concrete Agenda028 consumers, plus BC261’s direct
+geometry controls. Complete consumer-specific attachment remains open under that single
+interface owner. Other contract subsets and the broad pilots retain their separate
+readiness decisions.
 
 ## Parallel Ownership
 
