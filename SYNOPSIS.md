@@ -138,7 +138,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives fourteen confirmed hypotheses, thirteen refuted
-hypotheses, one open hypothesis, twenty-three open questions, and forty-one blocked
+hypotheses, one open hypothesis, twenty-four open questions, and forty-one blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
 invocation; this does not refute its claim.
@@ -2984,6 +2984,7 @@ round that names the hypothesis, control roles included.
 | [H-123](packing/campaign/hypotheses/H-123-near45-coordinate-localization.md) | confirmed | Complete coordinate localization follows from the reviewed reduction and independent four-guard certificate | 1 | 0.21s wall |
 | [H-124](packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md) | unresolved | Diagonal band certified; original and collision-augmented axis representations returned no_chain without readers | 3 | 2.99s wall |
 | [H-125](packing/campaign/hypotheses/H-125-biquadratic-two-pose-kernel.md) | blocked | Fixed eleven-feature kernel; source-free instrument admitted, but exp129 missed its launch cutoff without scientific invocation | 1 | 0s scientific wall |
+| [H-126](packing/campaign/hypotheses/H-126-insertion-saturation-corner-structure.md) | open question | Quantitative corner structure from insertion saturation; X-019 and Agenda 029 prepare the unstarted investigation | 0 | Unspent |
 
 ### Confirmed
 
