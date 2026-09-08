@@ -345,6 +345,22 @@ Registered as `kind: open_question` when worth carrying formally.
   stationary connectivity and unequal-side clearance remain open.
   Six endpoints from six draws show non-saturation, not its cause.
 
+## Structural Restrictions and Conditional Dots — X-019
+
+[X-019](explorations/X-019-structural-restrictions-and-conditional-dots.md) connects the
+existing conditional-dot framework to four distinct corner blockers implied by the
+twelve-square bound.
+The paused
+[Agenda 029](agendas/agenda-029-structural-restrictions-and-conditional-dots.md) plans
+three blocks of preliminary spikes, focused pursuit and independent consolidation.
+It preserves H-102’s composition questions, H-111’s complete anchor exclusion and
+H-117/H-121’s angle-reduction obligations at their existing scopes.
+No research has started under this plan.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 120 | Quantitative corner structure from insertion saturation | registered | [H-126](hypotheses/H-126-insertion-saturation-corner-structure.md) | Use four distinct corner blockers to seek useful pose or capture restrictions, including the alternatives to deep corner penetration. |
+
 ## Dead ends
 
 Killed without spending a round, with the reason.
