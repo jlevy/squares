@@ -28,7 +28,7 @@ PUBLICATION_STATUS = "DRAFT"
 #: the exception, and deliberately: it is rendered on every deploy and stamps the commit
 #: it is built from (`render_explainer.page_edition`), so its hash moves with every push
 #: while this one moves when an edition is cut.
-PUBLICATION_REVISION = "8ea1ca0d"
+PUBLICATION_REVISION = "cef19bfe"
 
 #: The version, written the one way it is ever written: `v0.1.0-3bd273e6`. Semver core,
 #: then the revision, in the shape a build identifier takes everywhere else.
