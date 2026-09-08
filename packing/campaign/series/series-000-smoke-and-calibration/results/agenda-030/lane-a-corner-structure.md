@@ -1309,6 +1309,182 @@ print("separation(Q1,Q2) =", separation(Q1, Q2), " centre distance =", np.hypot(
 print("compare 1/sqrt2 =", 1/np.sqrt(2))
 ```
 
+## Session-109 — the corner-class LP under the corner-pair condition at 96/25 (2026-09-08)
+
+Research lane BC-292 of
+[Agenda 030](../../../../agendas/agenda-030-parallel-structural-lanes-at-n11.md), on
+[H-126](../../../../hypotheses/H-126-insertion-saturation-corner-structure.md) and
+[H-127](../../../../hypotheses/H-127-corner-class-surplus-at-q.md), bead `think-kx2l`,
+session-109, 2.5 hours from 15:35Z on 2026-09-08 on one worker of a shared four-core
+host (load average 1.0 to 2.5 throughout; wall times are not comparable with a quiet
+machine). The planning report above is untouched; this section is the lane’s result.
+Scripts and raw outputs are in the appendix at the end of this section; nothing here is
+a registered round, a new bound, or an edit to any registry.
+
+### The question and its falsifiers
+
+Question (the agenda cell, verbatim): does pricing the four corner blockers’ cores above
+the rest, or banking their corner boxes, give a covering surplus at 96/25?
+
+The premise the coordinator asked the lane to use is session-101’s corner-pair theorem,
+and the lane reads it in the sharper form its own proof gives.
+Lemma C′ applied to the pair says that a set of atoms of total weight above `ε` has an
+atom inside some *core* — a closed `B`-square at a net direction, strictly inside its
+unit square — not merely inside a placement.
+So at side `96/25`, with `B = 9977/10000` and the retained 181-direction net, every
+packing of eleven unit squares has four distinct squares, one per corner, whose cores
+each contain one of that corner’s two marks `m₁ = (3152/3175, 2336/3175)`,
+`m₂ = (2336/3175, 3152/3175)` (and their images under the container’s symmetries).
+The class this lane prices is therefore “cores containing a mark”, which per net
+direction is the union of the marks’ coverage rectangles in the rotated frame — exactly
+the event geometry the sweep already has.
+No clip and no new engine were needed for the corner class; the centre-domain clip of
+Theorem B’s deep-corner bins was not built (see the three-plus-one paragraph).
+
+Two facts about the branches were settled before any run.
+First, under a D4-symmetric measure every one of the sixteen mark branches collapses to
+the union region: the diagonal reflection through a corner is a container symmetry and
+swaps that corner’s two marks, so the folded net cannot tell `m₁` from `m₂`. The
+flush-four program under D4 *is* the union-region program.
+A branch needs a measure with only the branch’s stabiliser and a mark set closed under
+it: the sixteen patterns fall into four D4 orbits — the two *opposite-both* patterns
+(stabiliser the Klein group of the two axis reflections, `D2`), the four *U* patterns
+(one axis reflection), the two *pinwheels* (`C4`, no reflection) and the eight
+asymmetric *J* patterns (trivial stabiliser).
+A folded net needs a reflection in the stabiliser, so the `D2` and `U` branches run on
+the retained net at two and four times the site count; the pinwheel and `J` branches
+need a quarter-turn net and a float centre domain that does not assume `cos ≥ sin`,
+which the library does not have.
+Second, banking the marks is a special case of pricing: crediting the mark’s own weight
+is the class program with `w_c` fixed at that weight, so the class program dominates
+mark-banking and only the class program was run.
+
+The program. Sites `S` folded into orbits under a group `G`; a `G`-symmetric measure
+`μ ≥ 0` on `S`; thresholds `w_c ≥ w_f ≥ 0` (the order is without loss, since a region
+core is also some square’s core and must carry `w_f`). Every admissible core carries at
+least `w_f`; every admissible core containing a mark of the chosen set carries at least
+`w_c`. The four corner cores are distinct and in the class, the other seven cores carry
+`w_f`, and the eleven are pairwise disjoint, so `4 w_c + 7 w_f ≤ M` for every packing: a
+measure with `M − 4 w_c − 7 w_f < 0` excludes eleven squares at `96/25`. The LP is
+homogeneous and is solved under `4 w_c + 7 w_f = 1` (the *ratio* form, optimum `M*`; a
+certificate needs `M* < 1`) or, for a branch, under `w_f = 1` (the *slice* form, optimum
+`M − 4 w_c`; a certificate needs it below `7`). For the union program the two forms are
+the same object rescaled, because `w_f > 0` at the optimum.
+
+Falsifiers, stated before each run and recorded in the lane checkpoints.
+For a site set `S`: a `G`-symmetrised fractional packing `y` of exactly re-derived
+admissible placements with depth at most `1` at every site, total weight at least `11 λ`
+and weight at least `4 λ` on placements that contain a chosen mark, with `λ ≥ 1`. Weak
+duality gives, for every feasible `(μ, w_c, w_f)` on `S`,
+`M ≥ Σ_r y_r μ(P_r) ≥ w_c Σ_A y + w_f Σ_{¬A} y ≥ λ (4 w_c + 7 w_f)`, so the residual
+`M − 4 w_c − 7 w_f ≥ (λ − 1)(4 w_c + 7 w_f)` is nonnegative and no certificate exists on
+`S`. In the slice form the same packing gives `M − 4 w_c − 7 ≥ Σ y − 11` whenever
+`Σ_A y ≥ 4`. The second falsifier of the cell, eleven disjoint cores satisfying the
+condition, is the integral case of the first and was not available (eleven disjoint
+`B`-squares at `96/25` would be a packing at side `3.849`). Only the exact objects
+count: the rationalised primal decided by the integer event-cell sweep with the marks’
+rectangle boundaries as events, and the dual packing decided in `Fraction` arithmetic on
+re-derived rows; every LP objective is context.
+
+### Inputs common to every run
+
+| Input | Value |
+| --- | --- |
+| Side, shrink | `L = 96/25`, `B = 9977/10000` |
+| Net | `t_k = k · 207107/500000 / 180`, `k = 0..180` (181 directions, the retained net; `B(1 + D) < 1` as for T-018) |
+| Marks | `m₁ = (3152/3175, 2336/3175)`, `m₂ = (2336/3175, 3152/3175)` and their images: eight points, T-018’s `(197/200, 73/100)` orbit scaled by `128/127` |
+| Site set A (grid 79) | `build_site_grid(96/25, 79, 1/10)`: 79 coordinates from `1/10` to `369/100` at pitch `91/1950`, plus the eight marks; folded under the run’s group (D4: 821 orbits over 6249 sites; D2: 1602 orbits; `Sv`: 3163 orbits) |
+| Class region | cores whose closed `B`-square contains a chosen mark; per direction the union of the marks’ coverage rectangles `[u_m ± B/2] × [v_m ± B/2]`, whose boundaries are events in both the float separator and the exact sweep (the marks ride along as zero-weight atoms) |
+| Row generation | three least-covered cells per direction *per class* below its threshold, rows read at a point of the cell’s overlap with the centre domain as `generate.placement_cells` reads them, deduplicated, until no cell is short by more than `10⁻⁹`; HiGHS on the two-threshold LP with `w_f ≤ w_c` |
+| Rationalisation | bump `1000001/1000000`, round up to multiples of `1/4 000 000`, drop empty orbits; group closure of the atoms re-checked exactly |
+| Exact primal | `w_c :=` least integer-grid mass over the class cells, `w_f :=` least over all cells, both over all 181 directions on `sweep.scaled_mass_grid` |
+| Exact dual | rows with positive dual weight re-derived from their float centre as a `Fraction`: centre inside the closed centre domain, coverage counts per orbit and mark containment decided exactly; `y` rounded down to multiples of `10⁻⁶`, or solved exactly at the tight vertex where the bound sits on a knife-edge; symmetrised depth `Σ_r y_r |P_r ∩ O| / |O| ≤ 1` checked on every orbit |
+| Machine | one process, `PACK_JOBS=1`, one BLAS thread; two other lanes on the four cores, load average 1.0 to 2.5 |
+
+### Runs and exact verdicts
+
+**Run 1, the flush-four program (union region, D4, site set A).** Row generation
+converged in 17 rounds and 63 s on 6646 rows (load 1.1 to 1.7). LP: ratio optimum
+`1.032490975`, `w_c / w_f = 1.103`. Rationalised measure: 289 atoms, mass
+`M = 103253/100000`; exact `w_c = 386619/4000000`, `w_f = 175259/2000000`, both attained
+at direction `0`; exact residual `M − 4 w_c − 7 w_f = 65009/2000000 > 0`, i.e. in the
+slice normalisation `M/w_f = 11.7829`, `w_c/w_f = 1.10299`, residual
+`65009/175259 = 0.37093`. Census: 43 305 349 reachable cells, 11 176 736 in the class.
+Exact dual: 41 rows, none dropped, maximum symmetrised depth `7999993/8000000`, total
+`11.357376`, `4.129958` on mark-containing placements, **`λ = 177459/171875 =
+1.0324887 ≥ 1`**: no measure on site set A has a negative residual.
+
+**Run 2, the free control on the same site set (no class, `11 w_f = 1`).** Converged in
+16 rounds and 55 s on 7575 rows.
+Rationalised: 233 atoms, `M = 2066149/2000000`, exact `w_f = 363641/4000000`,
+`M / w_f = 11.363675`. Exact dual: 48 rows, maximum depth `3999997/4000000`, total
+`11.363421`, of which `4.018083` on mark-containing placements,
+`λ_free = 11363421/11000000 = 1.0330383`.
+
+**The surplus, exactly.** Each optimum lies between its exact dual and its exact
+rationalised primal ratio: `free* ∈ [11363421/11000000, 4132298/4000051]` and
+`class* ∈ [177459/171875, 2065060/2000051]`, so the corner class lowers the ratio
+optimum on site set A by between `11761534471/22000561000000 = 0.000535` and
+`35788031/62500796875 = 0.000573` — a real surplus, and between `1.6` and `1.8` per cent
+of the gap `0.0325` that separates the free program from the certificate line.
+The free dual’s weight on mark-containing placements, `4.018`, is above `4` but below
+`4 λ_free = 4.132`, which is why the class constraint binds at all; the class dual then
+spends exactly `4 λ` on the corner region and `7 λ` elsewhere.
+
+**Run 3, the opposite-both branch, homogeneous (D2, chosen marks `m₁` and its axis
+images, site set A).** The LP converged in five rounds at ratio `1.000000000` with
+`w_f = 0`, `w_c = 1/4` and the measure `1/4` at each chosen mark: the trivial banking
+measure has residual exactly `0`, and the exact vertex of the dual (36 rows, solved in
+`Fraction` arithmetic on the tight system, maximum symmetrised depth exactly `1`, total
+exactly `11`, exactly `4` on chosen-mark placements) gives **`λ = 1` exactly**. The
+mechanism is general: the chosen marks are sites, a dual packing has depth at most `1`
+at each, every chosen-mark placement contains exactly one chosen mark, so `Σ_A y ≤ 4`
+and no branch dual can exceed `λ = 1`, while the primal can always bank the four marks
+at ratio exactly `1`. A branch program in ratio form sits on this knife-edge whatever
+the site set; the informative branch program is the slice `w_f = 1`.
+
+**Run 3b, the opposite-both branch, slice (`w_f = 1`, D2, site set A).** RUN3B
+
+**Run 4, the U branch, slice (`Sv`, chosen marks the bottom-wall marks at the bottom
+corners and the side-wall marks at the top corners, site set A).** RUN4
+
+**Run 5, the flush-four program on the corner-refined site set B.** RUN5
+
+### Reading
+
+READING
+
+### The three-plus-one branch
+
+Under the corner-pair premise all four corners carry a mark-containing core
+unconditionally, so the cover has one case and the sixteen mark branches are its
+refinement; “three-plus-one” in the sense of Theorem B — three corners banked by
+penetration depth and the fourth in a deep bin with `T_{0.7}` free — needs the
+half-plane clip `a + b > d + cos θ` on the centre domain, in both the float separator
+(`generate._CentreDomain` assumes the rotated square and `cos ≥ sin`) and the exact
+`reduce_to_spans` (which calls `sweep.centre_domain` directly), together with the banked
+boxes `X′_j` and their credits, and a measure with the deep corner’s stabiliser (one
+diagonal reflection, four times the site count).
+That is a half-session of instrument work the lane did not start, because the flush-four
+readings above already bound what any corner banking can buy at this shrink and net: the
+corner region is the binding region of the covering dual, not an over-covered one.
+Its design is recorded here so the next lane does not re-derive it: the clipped domain
+stays convex, so `reduce_to_spans`’ per-slab min/max of the clipped polygon is already
+correct for it, and only the float `v_range`/`u_chord` closed forms need a general
+convex-polygon replacement.
+
+### Status of H-126 and H-127
+
+STATUS
+
+### Obstructions and mistakes worth recording
+
+OBSTRUCTIONS
+
+### Appendix: scripts and outputs as run
+
+APPENDIX
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
