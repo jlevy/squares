@@ -319,6 +319,44 @@ def test_zero_line_height_footnote_ink_does_not_move_the_marker_line() -> None:
     assert contributing == {"top": -8.515625, "bottom": 20}
 
 
+def test_clipped_mathml_does_not_move_the_marker_line_but_visible_fallback_does() -> None:
+    """Retained mass-condition geometry: hidden MathML rises above the real line."""
+    setup = """
+        const semantic = {style: {position: 'absolute', clip: 'rect(1px, 1px, 1px, 1px)',
+          clipPath: 'none'}, rects: [
+          {top: 1, bottom: 2, height: 1, width: 1, left: 600, right: 601},
+          {top: -3.6875, bottom: 18.3125, height: 22, width: 9, left: 600, right: 609},
+        ]};
+        const el = {querySelectorAll: selector => selector.startsWith('sup') ? [] : [semantic],
+          rects: [
+          {top: 1, bottom: 25, height: 24, width: 600, left: 0, right: 600},
+          {top: 1, bottom: 26.1875, height: 25.1875, width: 12, left: 600, right: 612},
+          ...semantic.rects,
+          {top: 4.015625, bottom: 25.609375, height: 21.59375, width: 9,
+            left: 600, right: 609},
+        ]};
+        const getComputedStyle = node => node.style;
+        const document = {createRange: () => {
+          let selected;
+          return {selectNodeContents(node) {selected = node;},
+            selectNode(node) {selected = node;}, getClientRects: () => selected.rects};
+        }};
+    """
+    line = first_line_box(setup)
+    assert line == {"top": 1, "bottom": 26.1875}
+    unchanged = marker(
+        markerCentre=14.217525,
+        lineCentre=(line["top"] + line["bottom"]) / 2,
+        baseFontSize=18,
+        painted=True,
+    )
+    assert not findings(both(markers=[unchanged]))
+    shifted = {**unchanged, "markerCentre": unchanged["markerCentre"] + 4}
+    assert len(findings(both(markers=[shifted]))) == 2
+    visible = first_line_box(setup.replace("position: 'absolute'", "position: 'static'"))
+    assert visible == {"top": -3.6875, "bottom": 26.1875}
+
+
 def test_a_footnote_reference_that_opens_its_line_is_a_finding() -> None:
     """Under one em in front of it, there is no word there -- only wrapped punctuation."""
     assert not findings(both(footnotes=[footnote(leadIn=300.0)]))

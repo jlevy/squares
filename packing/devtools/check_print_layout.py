@@ -423,17 +423,24 @@ _PROBE = r"""() => {
      falsely reported a 2.2px marker offset. Group runs starting in the topmost rect's
      upper half; the next line starts a full line height below it.
 
-     A zero-line-height footnote is raised without enlarging that line, but its ink
-     still appears in Range rects. Remove its owned rectangles before grouping, not
-     other inline boxes that really can enlarge the line. Count duplicate rectangles
-     so an unrelated box with the same geometry is not removed along with the ref. */
+     A zero-line-height footnote and clipped accessibility MathML can have Range
+     rectangles outside the line without enlarging it. Remove only those owned
+     rectangles before grouping. Visible MathML fallback and ordinary inline boxes
+     still contribute. Count duplicates so an unrelated box with the same geometry
+     is not removed along with an overlay. */
   function firstLineBox(el) {
     const range = document.createRange();
     range.selectNodeContents(el);
     const excluded = new Map();
     const key = (r) => [r.top, r.right, r.bottom, r.left].join(',');
-    for (const ref of el.querySelectorAll('sup.kpress-footnote-ref')) {
-      if (parseFloat(getComputedStyle(ref).lineHeight) !== 0) continue;
+    const overlays = [...el.querySelectorAll('sup.kpress-footnote-ref')]
+      .filter(ref => parseFloat(getComputedStyle(ref).lineHeight) === 0);
+    for (const ref of el.querySelectorAll('.katex-mathml, .kpress-math-semantic')) {
+      const style = getComputedStyle(ref);
+      if (style.position === 'absolute'
+          && (style.clip !== 'auto' || style.clipPath !== 'none')) overlays.push(ref);
+    }
+    for (const ref of overlays) {
       const reference = document.createRange();
       reference.selectNode(ref);
       for (const rect of reference.getClientRects()) {
@@ -882,14 +889,27 @@ _MARKER_OPTICAL_GEOMETRY = r"""selector => {
   return {content: before.content, width, height, top, centre: top + height / 2,
     baseline: y, fontSize, aboveBaselineEm: (y - top - height / 2) / fontSize,
     initialText, sampledText, item: box.toJSON(), fontFamily: font.fontFamily,
-    fontWeight: font.fontWeight};
+    fontWeight: font.fontWeight,
+    math: [...item.querySelectorAll('.kpress-math, .katex, .katex-mathml, .katex-html, '
+      + '.squares-math-box, .base, math')].map(node => {
+      const style = getComputedStyle(node), range = document.createRange();
+      range.selectNode(node);
+      return {tag: node.tagName, classes: node.className, position: style.position,
+        lineHeight: style.lineHeight, clip: style.clip, clipPath: style.clipPath,
+        rects: [...range.getClientRects()].map(rect => rect.toJSON())};
+    })};
 }"""
 
 
-def save_marker_preview(page: Page, directory: Path, medium: str) -> None:
-    """Keep the first prose bullet's ink and measured optical alignment together."""
+def save_marker_preview(
+    page: Page,
+    directory: Path,
+    medium: str,
+    *,
+    selector: str = ".cert-page.kpress-prose ul > li",
+) -> None:
+    """Keep a prose bullet's ink and measured optical alignment together."""
     directory.mkdir(parents=True, exist_ok=True)
-    selector = ".cert-page.kpress-prose ul > li"
     item = page.locator(selector).first
     item.scroll_into_view_if_needed()
     measured: dict[str, object] = page.evaluate(_MARKER_OPTICAL_GEOMETRY, selector)
