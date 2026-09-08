@@ -606,6 +606,27 @@ Status: **paused**. Prepare a coordinated n11 campaign connecting proved corner,
 | BC-289 | research | 11 | blocked | 0 | think-4elv | Freeze the strongest claim and remaining proof obligations for block three; readiness alone cannot justify expansion. |
 | BC-290 | research | 11 | blocked | 0 | think-nlji | User reviews the mathematical result and next selection; no automatic new family or extension to rescue a missed target. |
 
+### [agenda-030](agendas/agenda-030-parallel-structural-lanes-at-n11.md) — Parallel Structural Lanes at n = 11
+
+Status: **paused**. Run X-021's research sessions as parallel lanes with disjoint deliverables and files: nine measurement-or-theorem lanes that each decide one question about structural constraints on eleven-square packings at 96/25 and what the constraint buys a certificate, two lanes on the closing route, then one selection cell and one closeout. The numerical goal is unchanged from Agenda 029: a global exclusion at 96/25. Every lane records its site set or inputs with its result, because a non-refutation on a finite site set is never evidence. This planning checkpoint launches no research.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-291 | research | 11 | complete | 0 | think-cm07 | The owner's research-start instruction; then the coordinator allocates session ids and dispatches the ready lanes below. |
+| BC-292 | research | 11 | ready | 0 | think-kx2l | Whether any corner information has value for a certificate at q; if the flush-four residual falls below seven, the first conditional exclusion with a named complement. |
+| BC-293 | research | 11 | ready | 0 | think-1136 | Pinned anchors for the frame-conditioned certificate (BC-287, H-111) and the two-pattern case split of the ownership-conditioned certificate. |
+| BC-294 | measurement_validation | 11 | ready | 0 | think-7lp3 | Whether the non-convex-domain instrument (BC-204) is worth building; whether routes (b) and (c) and every capture design survive; the input BC-301 needs. |
+| BC-295 | research | 11 | ready | 0 | think-ndqj | The first band theorem new below U; whether the obstruction at q is Trump-shaped or an integrality artefact that geometric conditioning can target. |
+| BC-296 | research | 11 | ready | 1 | think-n6fr | Either the composition route ends at q with a certificate of its own impossibility, or the survivors become the branch list for geometric conditioning. |
+| BC-297 | measurement_validation | 11 | ready | 1 | think-4uon | Whether the ladder's top is the instrument's or the geometry's; the size of the ownership tree. |
+| BC-298 | research | 11 | ready | 1 | think-jsi8 | Every wall within 3.84 − H0 of a square, both extents at least H0, and with the spanning lemma the strongest symmetry-breaking premise available. |
+| BC-299 | research | 11 | ready | 1 | think-4ifm | The premise every conditional certificate needs, a square forced into a known box, combined with the nine-point band into a concrete two-branch split. |
+| BC-300 | research | 11 | tentative | 2 | think-dfof | Which corner branches cannot close near U, and whether the structural lane should spend time on elimination motions at all. |
+| BC-301 | research | 11 | blocked | 1 | think-lbqe | The only honest statement about the endpoint; if BC-294 kills capture, this reduces to the exact-side tree and needs BC-302 to be finite. |
+| BC-302 | research | 11 | ready | 1 | think-qfog | If it succeeds, route (a) collapses to about two to the twenty exact LPs; the prior is about thirty per cent. |
+| BC-303 | research | 11 | blocked | 0 | think-znzj | The frozen claim for the next block and the remaining proof obligations. |
+| BC-304 | research | 11 | blocked | 0 | think-yrw1 | The owner reviews the mathematical result and the next selection. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
@@ -718,6 +739,14 @@ Status: **paused**. Prepare a coordinated n11 campaign connecting proved corner,
 | H-124 | unresolved | proof | At q=1939/500, every contained closed unit square Q in the actual near |  | 3 |  | 3s wall |
 | H-125 | blocked | proof | At side L=96/25, the fixed eleven-feature joint-D4 family in BC264's S |  | 1 |  |  |
 | H-126 | open question | proof | Which quantitative restrictions on the four distinct selected corner b |  | 0 |  |  |
+| H-127 | blocked | proof | At side 96/25 the corner-class covering program — every admissible cor |  | 0 |  |  |
+| H-128 | open | proof | There is a valid D4-symmetric measure at side 96/25 on the retained sh |  | 0 |  |  |
+| H-129 | open | proof | With closed unit placements (shrink B = 1) and a direction net dense n |  | 0 |  |  |
+| H-130 | open | proof | Every packing of eleven unit squares at side at most 96/25 has a squar |  | 0 |  |  |
+| H-131 | open | proof | In every packing of unit squares in the container of side 96/25, at mo |  | 0 |  |  |
+| H-132 | blocked | proof | Eleven unit squares with pairwise disjoint interiors do not fit in the |  | 0 |  |  |
+| H-133 | open question | proof | Is the restricted covering value of exactly 11.000000 that two site se |  | 0 |  |  |
+| H-134 | open | proof | There is a set of at most eleven marks (points or short segments, thic |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 

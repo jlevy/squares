@@ -138,7 +138,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives fourteen confirmed hypotheses, thirteen refuted
-hypotheses, one open hypothesis, twenty-four open questions, and forty-one blocked
+hypotheses, six open hypotheses, twenty-five open questions, and forty-three blocked
 hypotheses. H-104’s seven fixed-formula exact-angle clauses are confirmed; H-036 remains
 unresolved. H-125 is blocked after exp129 missed its launch cutoff without scientific
 invocation; this does not refute its claim.
@@ -300,6 +300,11 @@ case or experiment separately.
 | [BC-265: Calibration Scope and the Next Discriminator](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-265-calibration-extension-review.md) | dated review record | record | retained | — |
 | [BC264: One Finite Kernel Family and Its Verification Cost](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-feature-design.md) | research synthesis | record | retained | — |
 | [BC264: Kernel Bound and Feature-Class Acceptance](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-027/bc-264-kernel-acceptance-review.md) | dated review record | record | retained | — |
+| [Agenda 030 Results](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md) | research synthesis | record | retained | — |
+| [Agenda 030, lane A: Corner and wall structure](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-a-corner-structure.md) | research synthesis | record | retained | — |
+| [Agenda 030, lane B: Orientation-class constraints](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md) | research synthesis | record | retained | — |
+| [Agenda 030, lane C: The transfer of the s(10) proof](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md) | research synthesis | record | retained | — |
+| [Agenda 030, lane D: Contact lemmas and the closing route](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md) | research synthesis | record | retained | — |
 | [BC-255 Near-Axis Reader Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-near-axis-reader-independent-review.md) | dated review record | record | retained | — |
 | [BC-252 — Complete Rows on the Retained Sites](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md) | research synthesis | record | retained | — |
 | [BC-255: Fixed-Side Discriminator Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md) | research synthesis | record | retained | — |
@@ -548,6 +553,32 @@ stop. Long autonomous sessions use the same rule; autonomy changes the duration 
 controller, not permission to blur contracts.
 
 ### Current Handoff
+
+**Parallel structural lanes at `n = 11`, prepared and paused.**
+[X-021](packing/campaign/explorations/X-021-what-can-be-proved-about-eleven-squares.md)
+pursued X-019’s exploration with four Fable lanes in parallel and reports what can be
+proved about eleven-square packings today: seven corner and wall lemmas, exact-verified
+angle counts at `96/25` (at most nine squares within `6.45°` of the axes, ten within
+`10.39°`), Stromquist’s Theorem 3 transported to `0.68°` bands at `96/25`, the spanning
+and chain lemmas, a weighted ownership lemma that would make four-corner containment a
+theorem from one LP, and a duality lemma that prices every conditional and capture
+certificate — including the proof that the retained shrink caps record-conditioned
+certificates at `3.876681 < U`. It also records what cannot be forced (corner
+penetration, blocker angles, positive-length contacts, a bound on orientation classes)
+and prices the three closing architectures.
+[Agenda 030](packing/campaign/agendas/agenda-030-parallel-structural-lanes-at-n11.md),
+epic `think-kbci`, maps eleven research lanes with disjoint deliverables under
+BC-292–BC-302, nine ready to run at once, then BC-303 selects and BC-304 closes; it
+replaces Agenda 029’s first block and leaves that agenda’s cells to be discharged at
+closeout. H-127–H-134 register the lanes’ claims.
+The lane reports and every script they ran are retained under
+[`results/agenda-030/`](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md).
+No bound changed and no research has started: the next entry is the owner’s
+research-start instruction, after which the coordinator allocates `session-100` onward
+and `exp-130` onward serially and dispatches the ready lanes.
+The same block repaired the deferred checkpoint (a third label-gated job for the slow
+behavioural lane and a declared budget for the escape screen) and amended OR-2, OR-3 and
+OR-6.
 
 **Atlas expansion to `n = 324`, owner-directed, beside the research line.**
 [The plan](docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md) under
@@ -2985,6 +3016,14 @@ round that names the hypothesis, control roles included.
 | [H-124](packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md) | unresolved | Diagonal band certified; original and collision-augmented axis representations returned no_chain without readers | 3 | 2.99s wall |
 | [H-125](packing/campaign/hypotheses/H-125-biquadratic-two-pose-kernel.md) | blocked | Fixed eleven-feature kernel; source-free instrument admitted, but exp129 missed its launch cutoff without scientific invocation | 1 | 0s scientific wall |
 | [H-126](packing/campaign/hypotheses/H-126-insertion-saturation-corner-structure.md) | open question | Quantitative corner structure from insertion saturation; X-019 and Agenda 029 prepare the unstarted investigation | 0 | Unspent |
+| [H-127](packing/campaign/hypotheses/H-127-corner-class-surplus-at-q.md) | blocked | Pricing the four corner blockers’ cores at 96/25 gives a covering surplus; the region-class row generator is not built | 0 | — |
+| [H-128](packing/campaign/hypotheses/H-128-corner-skeleton-ownership.md) | open | A valid measure at 96/25 with T-018’s corner atoms at weight 3/20 and mass below 11.15 exists, which makes four-corner containment a theorem | 0 | — |
+| [H-129](packing/campaign/hypotheses/H-129-unit-shrink-fractional-value-near-u.md) | open | The shrink-free fractional packing value at 3.87 stays below eleven; a refutation kills every one-body certificate at that side | 0 | — |
+| [H-130](packing/campaign/hypotheses/H-130-robust-end-band-theorem-at-q.md) | open | A robust band of 3° around 0° and 45° is excluded at 96/25; the transfer of Stromquist’s Theorem 3 gives 0.68° | 0 | — |
+| [H-131](packing/campaign/hypotheses/H-131-near-axis-counts-at-q.md) | open | At most nine squares within 6.45° of the axes and ten within 10.39° at 96/25; exact-verified in a planning lane, awaiting a registered replay | 0 | — |
+| [H-132](packing/campaign/hypotheses/H-132-rectangle-no-fit-at-q.md) | blocked | Eleven squares do not fit in 3.84 × 3.81; the rectangle centre domain is not built | 0 | — |
+| [H-133](packing/campaign/hypotheses/H-133-plateau-site-artefact.md) | open question | Is the exactly-eleven plateau at 191/50 a site artefact of Trump-shaped cores in site-free strips? | 0 | — |
+| [H-134](packing/campaign/hypotheses/H-134-eleven-mark-ownership-set.md) | open | A robust unavoidable set of at most eleven marks exists at 96/25; the lemma that collapses the exact-side tree | 0 | — |
 
 ### Confirmed
 

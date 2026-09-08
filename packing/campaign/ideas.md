@@ -361,6 +361,26 @@ No research has started under this plan.
 | --- | --- | --- | --- | --- |
 | 120 | Quantitative corner structure from insertion saturation | registered | [H-126](hypotheses/H-126-insertion-saturation-corner-structure.md) | Use four distinct corner blockers to seek useful pose or capture restrictions, including the alternatives to deep corner penetration. |
 
+## Parallel Structural Lanes — X-021
+
+[X-021](explorations/X-021-what-can-be-proved-about-eleven-squares.md) pursues X-019 as
+a programme: four mathematical lanes proved corner, angle, contact and ownership lemmas,
+measured what each buys at 96/25, and priced the closing route.
+The paused [Agenda 030](agendas/agenda-030-parallel-structural-lanes-at-n11.md) maps
+eleven research lanes with disjoint deliverables, nine of them ready to run at once.
+No research has started under this plan.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 121 | Price the four corner blockers, or bank their boxes | registered | [H-127](hypotheses/H-127-corner-class-surplus-at-q.md) | A region-class certificate is one LP away; the census of tight corner cells decides whether corner information has any value. |
+| 122 | Own the four corner atoms from the LP alone | registered | [H-128](hypotheses/H-128-corner-skeleton-ownership.md) | A valid measure at 96/25 with mass below 11.147 makes four-corner containment a theorem; existence is the measurement. |
+| 123 | The shrink-free fractional value near U | registered | [H-129](hypotheses/H-129-unit-shrink-fractional-value-near-u.md) | Duality makes this one number decide every conditional and capture certificate; a refutation is the earliest hopelessness signal. |
+| 124 | A robust {0°, 45°} band excluded at 96/25 | registered | [H-130](hypotheses/H-130-robust-end-band-theorem-at-q.md) | Stromquist’s Theorem 3 transports to 0.68° bands; 3° would be the first new band theorem below U. |
+| 125 | Exact counts by angle at 96/25 | registered | [H-131](hypotheses/H-131-near-axis-counts-at-q.md) | Nine within 6.45° and ten within 10.39° of the axes, exact-verified in a planning lane; replay under a registered round before citing. |
+| 126 | The first rectangle bound for eleven | registered | [H-132](hypotheses/H-132-rectangle-no-fit-at-q.md) | A convex domain change; the largest H0 with no packing in 3.84 × H0 is the strongest symmetry-breaking premise available. |
+| 127 | Is the 3.82 plateau a site artefact? | registered | [H-133](hypotheses/H-133-plateau-site-artefact.md) | Trump-shaped cores overlapping in site-free strips would explain exactly eleven; thirty minutes to test. |
+| 128 | An eleven-mark ownership set at 96/25 | registered | [H-134](hypotheses/H-134-eleven-mark-ownership-set.md) | The one lemma that collapses the exact-side tree to about two to the twenty LPs; prior about thirty per cent. |
+
 ## Dead ends
 
 Killed without spending a round, with the reason.

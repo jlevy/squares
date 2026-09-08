@@ -110,7 +110,9 @@ controls:
 - name: operating rules - the summary an agent reads contradicts the source
   file: ../AGENTS.md
   replace:
-    - "- **OR-3:** Never wait on a gate with nothing else in flight; run CI beside the research."
+    - |-
+      - **OR-3:** Never wait on a gate with nothing else in flight; run CI beside the
+        research.
     - "- **OR-3:** Wait for the gate to finish before starting anything else."
   run: python3 -m devtools.render_operating_rules --check
   expect: "AGENTS.md's summary has drifted"

@@ -1,0 +1,34 @@
+# Agenda 030 Results
+
+Retained records of the planning block BC-291 (2026-09-08) that wrote
+[X-021](../../../../explorations/X-021-what-can-be-proved-about-eleven-squares.md) and
+[Agenda 030](../../../../agendas/agenda-030-parallel-structural-lanes-at-n11.md), and
+the home of every lane’s result document once the lanes run.
+
+## The four planning-lane reports
+
+Four Fable sub-agents at maximum effort worked in parallel on the repository, read-only,
+with a common brief.
+Each report is reproduced as delivered, with the scripts and outputs it ran appended
+verbatim, so that every number X-021 quotes can be recomputed without the untracked
+scratchpad. The reports carry their own status labels (proved, checked, exact-verified,
+conjectured, open); X-021 is the coordinator’s reading of them and the place where they
+are reconciled.
+
+| Lane | Document | What it settled |
+| --- | --- | --- |
+| A | [Corner and wall structure](lane-a-corner-structure.md) | Seven proved corner and wall lemmas, two sound unrun certificate shapes, and the proof that no positive corner penetration or blocker angle can be forced by any argument valid up to `U` |
+| B | [Orientation-class constraints](lane-b-angle-classes.md) | The nine-point theorem with exact constants, exact-verified band counts at `96/25` and `U`, Stromquist’s Theorem 3 transported to `96/25`, and three precise obstructions to H-121 |
+| C | [The transfer of the `s(10)` proof](lane-c-n10-transfer.md) | Theorem 2 read as an anchored certificate, the rigidity of the ten-point scheme at `2 + 4/√5`, and the weighted ownership and transfer lemmas with the four-corner corollary |
+| D | [Contact lemmas and the closing route](lane-d-contacts-and-closing-route.md) | The spanning, chain, LP-vertex and robust-transfer lemmas, the duality lemma that prices every conditional certificate, and the priced closing route |
+
+## Lane result documents
+
+Each research lane of Agenda 030 writes one document here, named for the lane, and
+nothing else in this directory.
+The coordinator registers each new document in `docs/project/document-map.yaml` and
+re-renders the map at integration.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
