@@ -754,6 +754,17 @@ body {
 .math-reference { white-space: nowrap; }
 
 /* Math is held until KaTeX has typeset it, so no raw TeX flashes. */
+/* Saved preferences are stamped in the head. Select their measured math before
+   first paint; inactive variants occupy no space and are never hydrated. */
+.squares-math-variant { display: none; }
+html:not([data-kpress-font-set="system"]):not([data-kpress-prose-font="sans"])
+  .squares-math-variant[data-squares-math-contexts~="custom-serif"],
+html:not([data-kpress-font-set="system"])[data-kpress-prose-font="sans"]
+  .squares-math-variant[data-squares-math-contexts~="custom-sans"],
+html[data-kpress-font-set="system"]:not([data-kpress-prose-font="sans"])
+  .squares-math-variant[data-squares-math-contexts~="system-serif"],
+html[data-kpress-font-set="system"][data-kpress-prose-font="sans"]
+  .squares-math-variant[data-squares-math-contexts~="system-sans"] { display: inline; }
 /* The head bootstrap marks pending enhancement and clears it on failure. Without
    JavaScript, raw TeX remains legible alongside KPress's semantic MathML. */
 html[data-kpress-math-pending]

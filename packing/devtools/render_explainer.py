@@ -1185,7 +1185,7 @@ def relation_face_css(static: Path) -> str:
 #: The host supplies custom context and TeX spacing; KPress owns profile selection,
 #: metric installation, font readiness, and rendering for every caller.
 KATEX_RUNTIME = "katex/katex-math-runtime.js"
-MATH_WRAPPERS = ".katex, .kpress-math, .kpress-math-render, .tex, .tex-d"
+MATH_WRAPPERS = ".katex, .kpress-math, .kpress-math-render, .tex, .tex-d, .squares-math-variant"
 
 HOST_MATH_INIT = r"""
 (() => {
@@ -1204,14 +1204,26 @@ HOST_MATH_INIT = r"""
   // The same one-mu spacing the SVG labels use for an italic function name.
   const kern = source => String(source).replace(/(?<![A-Za-z\\])([a-z])\(/g, '$1\\mkern1mu(');
   const pending = new Set();
+  const versions = new WeakMap();
   function render(el, source, display) {
-    const renderMath = el.dataset.kpressMathPrepared === 'true'
+    const version = (versions.get(el) || 0) + 1;
+    versions.set(el, version);
+    const root = document.documentElement.dataset;
+    const preference = (root.kpressFontSet === 'system' ? 'system' : 'custom') + '-'
+      + (root.kpressProseFont === 'sans' ? 'sans' : 'serif');
+    const variants = [...el.querySelectorAll(':scope > .squares-math-variant')];
+    const target = variants.find(node =>
+      node.dataset.squaresMathContexts.split(' ').includes(preference)) || el;
+    const renderMath = target.dataset.kpressMathPrepared === 'true'
       ? kpressMathText.hydrate : kpressMathText.render;
-    const result = renderMath(kern(source), el,
+    const result = renderMath(kern(source), target,
       { displayMode: !!display, throwOnError: false }, context).then(() => {
+      if (versions.get(el) !== version) return true;
+      target.dataset.squaresMathReady = 'true';
       el.dataset.squaresMathReady = 'true';
       return true;
     }, () => {
+      if (versions.get(el) !== version) return true;
       el.textContent = source;
       el.dataset.squaresMathReady = 'true';
       return false;

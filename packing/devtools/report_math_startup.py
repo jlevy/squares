@@ -114,12 +114,28 @@ def geometry_result(
     """Require the declared browser matrix and retain the falsification controls."""
     lines: list[str] = []
     problems: list[str] = []
-    covered: set[tuple[str, int]] = set()
+    covered: set[tuple[str, int, str]] = set()
+    printed_contexts: set[str] = set()
     controls: set[str] = set()
     tolerance = hypothesis["maximum_math_box_displacement_px"]
     for report in reports:
         browser, width = report["browser"], report["width"]
         label = f"{browser} {width}px {report['medium']}"
+        context = f"{report.get('font_set', 'custom')}-{report.get('prose_font', 'serif')}"
+        if "font_contexts" in hypothesis:
+            label += f" {context}"
+            for stage in ("before", "after"):
+                coverage = report.get(f"coverage_{stage}", {})
+                if (
+                    not all(
+                        coverage.get(key, 0) > 0 for key in ("targets", "formulas", "bases")
+                    )
+                    or coverage.get("missing", ["absent"])
+                    or coverage.get("unreserved", ["absent"])
+                    or coverage.get("variant_errors", ["absent"])
+                    or coverage.get("duplicate_ids", ["absent"])
+                ):
+                    problems.append(f"{label}: incomplete {stage} formula coverage")
         if report.get("alternate_certificate", False):
             label += " alternate certificate"
         problems.extend(f"{label}: {finding}" for finding in report["findings"])
@@ -147,19 +163,29 @@ def geometry_result(
             f"maximum final width error {mismatch:.3f}px."
         )
         if report["medium"] == "screen" and not report.get("alternate_certificate", False):
-            covered.add((browser, width))
+            covered.add((browser, width, context))
+        if report["medium"] == "print" and browser == "chromium":
+            printed_contexts.add(context)
         for name, control in report.get("controls", {}).items():
             if control.get("rejected") and control.get("report", {}).get("findings"):
                 controls.add(name)
     required = {
-        (browser, width)
+        (browser, width, context)
         for browser in ("chromium", "firefox", "webkit")
         for width in hypothesis["widths"]
+        for context in hypothesis.get("font_contexts", ["custom-serif"])
     }
     if not required <= covered:
         problems.append(f"missing registered browser/width cells: {sorted(required - covered)}")
     if not {"removed_width", "stable_wrong_width"} <= controls:
         problems.append("missing rejected movement or stable-wrong-width control")
+    if "font_contexts" in hypothesis and "missing_reservation" not in controls:
+        problems.append("missing rejected pre-discovery reservation control")
+    if (
+        "font_contexts" in hypothesis
+        and not set(hypothesis["font_contexts"]) <= printed_contexts
+    ):
+        problems.append("missing registered print font settings")
     return lines, problems
 
 

@@ -40,7 +40,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Any, Literal
 
-from devtools.check_math_loading import EXPOSED, page_url
+from devtools.check_math_loading import ACTIVE_MATH_VARIANT, EXPOSED, page_url
 from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
 
 type BrowserName = Literal["chromium", "firefox", "webkit"]
@@ -192,15 +192,17 @@ _STARTUP_SCRIPT = r"""
   mutations.observe(document, {subtree: true, childList: true, attributes: true,
     attributeFilter: ['data-kpress-math-pending', 'class', 'hidden']});
   const exposed = __EXPOSED__;
+  const activeVariant = __ACTIVE_MATH_VARIANT__;
   const mathWrapper = '.katex,.kpress-math,.kpress-math-render,'
-    + '.kpress-math-semantic,.tex,.tex-d';
+    + '.kpress-math-semantic,.tex,.tex-d,.squares-math-variant';
   const normalized = text => (text || '').replace(/\s+/g, '').replace(/\\mkern1mu/g, '');
   const annotation = node => [...node.querySelectorAll(
     'annotation[encoding="application/x-tex"]')]
-    .map(part => part.textContent.trim());
+    .filter(activeVariant).map(part => part.textContent.trim());
   const visibleMath = node => {
-    const maths = [...node.querySelectorAll('.katex')];
-    return maths.length > 0 && !node.querySelector('.katex-error') && maths.every(math => {
+    const maths = [...node.querySelectorAll('.katex')].filter(activeVariant);
+    return maths.length > 0 && ![...node.querySelectorAll('.katex-error')]
+      .some(activeVariant) && maths.every(math => {
       // The publication's pending rule necessarily hides these targets. Avoid
       // forcing prepared-page layout merely to measure an invisible formula.
       // Eligible targets still undergo the same actual exposure checks below.
@@ -245,7 +247,7 @@ _STARTUP_SCRIPT = r"""
       if (!slider || normalized(texts[0]) !== normalized(
         (Number(slider.value) / 10).toFixed(3) + '^{\\circ}')) return false;
     }
-    const containers = [node, ...node.querySelectorAll(mathWrapper)];
+    const containers = [node, ...node.querySelectorAll(mathWrapper)].filter(activeVariant);
     return containers.every(container => {
       const request = sources.get(container);
       return !request || annotation(container)
@@ -452,7 +454,7 @@ _STARTUP_SCRIPT = r"""
     return {...state, finish: undefined};
   };
 })();
-""".replace("__EXPOSED__", EXPOSED)
+""".replace("__EXPOSED__", EXPOSED).replace("__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT)
 
 STARTUP_SCRIPT = _STARTUP_SCRIPT.replace("__MODE__", "full")
 
@@ -708,6 +710,8 @@ body {font:16px serif; margin:20px}
 html[data-kpress-math-pending] .tex {visibility:hidden}
 dt, dd {height:24px; margin:0} dt {float:left; width:240px} dd {width:480px}
 .shift .tex {display:inline-block; width:20px}
+.squares-math-variant {display:none}
+.squares-math-variant[data-squares-math-contexts~="custom-serif"] {display:inline}
 </style>
 <script>document.documentElement.dataset.kpressMathPending = 'true';</script>
 </head><body>
@@ -767,6 +771,17 @@ ready.then(async () => {
     if (mode === 'missing-math' && key === 'phi') continue;
     await kpressMathText.render(source, document.getElementById(`s-${key}-test`));
   }
+  if (mode === 'variants' || mode === 'wrong-active-variant') {
+    for (const math of document.querySelectorAll('.katex')) {
+      const active = document.createElement('span'), dormant = document.createElement('span');
+      active.className = dormant.className = 'squares-math-variant';
+      active.dataset.squaresMathContexts = 'custom-serif';
+      dormant.dataset.squaresMathContexts = 'custom-sans system-serif system-sans';
+      const copy = math.cloneNode(true);
+      (mode === 'variants' ? copy : math).querySelector('annotation').textContent = 'wrong';
+      dormant.append(copy); math.replaceWith(dormant, active); active.append(math);
+    }
+  }
   if (mode === 'width-change') document.querySelector('.shift .tex').style.width = '180px';
   kpressMathText.complete(); document.documentElement.classList.add('math-ready');
   if (mode === 'late-target') {
@@ -795,6 +810,8 @@ def self_test(
             "control",
             "no-warmup",
             "delayed",
+            "variants",
+            "wrong-active-variant",
             "missing-math",
             "missing-counters",
             "late-target",
@@ -810,6 +827,7 @@ def self_test(
         "control",
         "no-warmup",
         "delayed",
+        "variants",
         *(("width-change",) if mode == "full" else ()),
     ):
         findings.extend(
@@ -841,6 +859,7 @@ def self_test(
         findings.append("parameter mode unexpectedly sampled all-page text anchors")
     for control, required in {
         "missing-math": "incorrect parameter math",
+        "wrong-active-variant": "incorrect parameter math",
         "missing-counters": "missing instrumentation: font_hooks",
         "late-target": "expected 14 active parameter targets, found 15",
         **({"missing-anchors": "neighboring text anchors: prose"} if mode == "full" else {}),

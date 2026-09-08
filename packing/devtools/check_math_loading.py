@@ -60,6 +60,26 @@ class LoadingReport(TypedDict):
 #: delivery, while remaining well below the runtime's failure-recovery timeout.
 OBSERVATION_MS = 200
 
+
+#: Variant selection follows the publication's root-attribute CSS without flushing
+#: layout. A hidden certificate is still intended content; only another saved-font
+#: profile is dormant. Malformed metadata must fail instead of silently losing math.
+ACTIVE_MATH_VARIANT = r"""node => {
+  const root = document.documentElement.dataset;
+  const context = (root.kpressFontSet === 'system' ? 'system' : 'custom') + '-'
+    + (root.kpressProseFont === 'sans' ? 'sans' : 'serif');
+  let active = true;
+  for (let variant = node.closest('.squares-math-variant'); variant;
+      variant = variant.parentElement?.closest('.squares-math-variant')) {
+    const contexts = (variant.dataset.squaresMathContexts || '').trim().split(/\s+/);
+    if (contexts.some(value => !/^(custom|system)-(serif|sans)$/.test(value))) {
+      throw new Error('malformed saved-font math variant contexts');
+    }
+    if (!contexts.includes(context)) active = false;
+  }
+  return active;
+}"""
+
 #: checkVisibility ignores clipping. Intersect the element's box with ancestor overflow,
 #: legacy clip rectangles, and inset clip paths before calling semantic fallback visible.
 #: Unrecognised clip shapes are not evidence of readable fallback.
@@ -203,13 +223,16 @@ FIRST_PAINT_SCRIPT = (
     fallback: null, stop: false
   };
   const exposed = __EXPOSED__;
+  const activeVariant = __ACTIVE_MATH_VARIANT__;
   const requiredFonts = __REQUIRED_FONTS__;
   const observe = (__FONT_LOAD_OBSERVER__)((...args) =>
     globalThis.__mathLoadControl?.nativeLoad
       ? globalThis.__mathLoadControl.nativeLoad(...args) : document.fonts.load(...args));
   const discover = () => {
     if (state.stop) return;
-    for (const math of document.querySelectorAll('.katex')) requiredFonts(math, observe);
+    for (const math of document.querySelectorAll('.katex')) {
+      if (activeVariant(math)) requiredFonts(math, observe);
+    }
   };
   const mutations = new MutationObserver(discover);
   mutations.observe(document, {subtree: true, childList: true, characterData: true,
@@ -220,7 +243,8 @@ FIRST_PAINT_SCRIPT = (
   const label = (node) => node.textContent.trim().replace(/\s+/g, ' ').slice(0, 100);
   const sample = () => {
     state.frames++;
-    const maths = [...document.querySelectorAll('.katex')].filter(exposed);
+    const maths = [...document.querySelectorAll('.katex')]
+      .filter(activeVariant).filter(exposed);
     for (const math of maths) {
       if (observed.has(math)) continue;
       observed.add(math);
@@ -244,7 +268,8 @@ FIRST_PAINT_SCRIPT = (
     if (maths.length && control && !control.released && !state.earlyMath) {
       state.earlyMath = label(maths[0]);
     }
-    const fallback = [...document.querySelectorAll('.kpress-math-semantic')].find(exposed);
+    const fallback = [...document.querySelectorAll('.kpress-math-semantic')]
+      .filter(activeVariant).find(exposed);
     if (fallback && !state.fallback) state.fallback = label(fallback);
     if (!state.stop) requestAnimationFrame(sample);
     else mutations.disconnect();
@@ -254,6 +279,7 @@ FIRST_PAINT_SCRIPT = (
 """.replace("__EXPOSED__", EXPOSED)
     .replace("__REQUIRED_FONTS__", REQUIRED_FONTS)
     .replace("__FONT_LOAD_OBSERVER__", FONT_LOAD_OBSERVER)
+    .replace("__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT)
 )
 
 #: Gate successful loads only when CSS actually matches a declared face. Empty
@@ -315,36 +341,45 @@ EARLY_EVENTS = r"""() => {
   return targets;
 }"""
 
-READOUTS = r"""targets => targets.map(target => {
+READOUTS = r"""targets => {
+  const activeVariant = __ACTIVE_MATH_VARIANT__;
+  return targets.map(target => {
   const slider = document.getElementById(target.id);
   const angle = target.id.startsWith('phi-');
   const direction = target.id.startsWith('kslider-');
   const output = document.getElementById(angle ? 's-' + target.id
     : target.id.replace(/^kslider-/, 'kval-'));
-  const annotation = output?.querySelector('annotation[encoding="application/x-tex"]');
-  const math = angle ? (output ? [output] : []) : [...(output?.children || [])];
+  const annotation = [...(output?.querySelectorAll(
+    'annotation[encoding="application/x-tex"]') || [])].find(activeVariant);
+  const math = [...(output?.querySelectorAll('.katex') || [])].filter(activeVariant);
   return {
     id: target.id, expected_value: target.value, actual_value: slider?.value ?? null,
     expected_source: angle ? (Number(target.value) / 10).toFixed(3) + '^{\\circ}'
       : `k = ${target.value}`,
     source: annotation?.textContent || '',
-    sans: math.length > 0 && math.every(node => node.dataset.kpressMathFace === 'sans'),
+    sans: math.length > 0 && math.every(node =>
+      !!node.closest('[data-kpress-math-face="sans"]')),
     state_matches: !direction || (slider?.getAttribute('aria-valuetext') || '')
       .startsWith(`Direction ${target.value} of `),
     supported: angle || direction
   };
-})"""
+});
+}""".replace("__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT)
 
 NO_JAVASCRIPT = r"""() => {
   const exposed = __EXPOSED__;
-  const visible = selector => [...document.querySelectorAll(selector)].filter(exposed).length;
+  const activeVariant = __ACTIVE_MATH_VARIANT__;
+  const visible = selector => [...document.querySelectorAll(selector)]
+    .filter(activeVariant).filter(exposed).length;
   const wrappers = '.kpress-math,.tex,.tex-d,[data-kpress-math-prepared="true"]';
   const raw = node => node.matches('.tex,.tex-d') && !node.querySelector('.katex')
     && !!node.textContent.trim() && exposed(node);
-  const prepared = node => [...node.querySelectorAll('.katex-html')]
+  const prepared = node => [...node.querySelectorAll('.katex-html')].filter(activeVariant)
     .some(html => html.textContent.trim() && exposed(html));
-  const native = node => [...node.querySelectorAll('.kpress-math-semantic')].some(exposed);
-  const targets = [...document.querySelectorAll(wrappers)].filter(node => {
+  const native = node => [...node.querySelectorAll('.kpress-math-semantic')]
+    .filter(activeVariant).some(exposed);
+  const targets = [...document.querySelectorAll(wrappers)].filter(activeVariant)
+    .filter(node => {
     // Judge every intended formula in readable surrounding content. Filtering on
     // the formula's own box would silently discard clipped or empty fallbacks.
     return !node.parentElement.closest(wrappers) && exposed(node.parentElement);
@@ -357,7 +392,7 @@ NO_JAVASCRIPT = r"""() => {
     unreadable_math: targets
       .filter(node => !raw(node) && !prepared(node) && !native(node)).length
   };
-}""".replace("__EXPOSED__", EXPOSED)
+}""".replace("__EXPOSED__", EXPOSED).replace("__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT)
 
 
 def loading_findings(report: LoadingReport) -> list[str]:

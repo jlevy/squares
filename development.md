@@ -671,6 +671,11 @@ Publication uses `python -m devtools.render_explainer --prepare-math` after inst
 the locked Playwright Chromium.
 This pass measures the final math bases under the page’s CSS and ships their geometry
 with the initial HTML, so decoding a font does not change the space a formula occupies.
+It prepares the supported custom/system and serif/sans settings, shares identical
+fragments, and uses the head bootstrap’s root attributes to select one before paint.
+The client hydrates that selected fragment.
+Geometry checks require a reservation for every visible base, including when a saved
+preference changes the selected font profile.
 `--prepare-math --check` repeats the same preparation before comparing bytes.
 The pure `render()` function remains available for source and certificate tests that do
 not need a browser. The canonical

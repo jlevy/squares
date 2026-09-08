@@ -92,6 +92,18 @@ def test_prepared_geometry_checks_cover_each_browser_and_their_controls() -> Non
     def option(command: list[str], flag: str, default: str) -> str:
         return command[command.index(flag) + 1] if flag in command else default
 
+    settings = {
+        (font_set, prose_font)
+        for font_set in ("custom", "system")
+        for prose_font in ("serif", "sans")
+    }
+
+    def context(command: list[str]) -> tuple[str, str]:
+        return (
+            option(command, "--font-set", "custom"),
+            option(command, "--prose-font", "serif"),
+        )
+
     for name in ("build", "font-loading"):
         commands = [
             shlex.split(line.replace("${{ matrix.browser }}", "matrix-browser"))
@@ -107,12 +119,56 @@ def test_prepared_geometry_checks_cover_each_browser_and_their_controls() -> Non
         assert all(
             option(command, "--browser", "chromium") == expected_browser for command in commands
         )
+        outputs = [option(command, "--output", "") for command in commands]
+        assert len(set(outputs)) == len(commands), (
+            "geometry reports must not overwrite each other"
+        )
+        for command, output in zip(commands, outputs, strict=True):
+            medium = "print" if "--print" in command else "screen"
+            suffix = "-controls" if "--self-test" in command else ""
+            if "--alternate-certificate" in command:
+                suffix += "-alternate-certificate"
+            assert output == (
+                f"/tmp/math-geometry/{expected_browser}-{option(command, '--width', '1280')}-"
+                f"{'-'.join(context(command))}-{medium}{suffix}.json"
+            )
+            assert command[-2:] == ["||", "geometry_status=1"]
+        geometry_steps = [
+            step
+            for step in workflow["jobs"][name]["steps"]
+            if f"python -m {module} " in step.get("run", "")
+        ]
+        for step in geometry_steps:
+            assert "mkdir -p /tmp/math-geometry" in step["run"]
+            assert "geometry_status=0" in step["run"]
+            assert step["run"].strip().endswith('exit "$geometry_status"')
+        uploads = [
+            step
+            for step in workflow["jobs"][name]["steps"]
+            if step.get("uses", "").startswith("actions/upload-artifact@")
+        ]
+        assert len(uploads) == 1
+        assert uploads[0]["if"] == "always()"
+        assert uploads[0]["with"] == {
+            "name": "math-geometry-chromium"
+            if name == "build"
+            else "math-geometry-${{ matrix.browser }}",
+            "path": "/tmp/math-geometry",
+            "if-no-files-found": "error",
+            "retention-days": 7,
+        }
         screen = [
             command
             for command in commands
             if "--print" not in command and "--alternate-certificate" not in command
         ]
-        assert {option(command, "--width", "1280") for command in screen} >= {"1280", "390"}
+        observed = {
+            (*context(command), option(command, "--width", "1280")) for command in screen
+        }
+        expected = {(*setting, width) for setting in settings for width in ("1280", "390")}
+        assert observed >= expected, (
+            f"{name}: saved-setting geometry omitted {expected - observed}"
+        )
         desktop = [
             command for command in screen if option(command, "--width", "1280") == "1280"
         ]
@@ -121,7 +177,9 @@ def test_prepared_geometry_checks_cover_each_browser_and_their_controls() -> Non
             assert any(
                 "--host-check" in command and "--self-test" in command for command in desktop
             )
-            assert any("--print" in command for command in commands)
+            assert {
+                context(command) for command in commands if "--print" in command
+            } >= settings
             assert any("--alternate-certificate" in command for command in commands)
 
 

@@ -28,6 +28,10 @@ The reports retain the original source identity, Git state, browser version, vie
 media, process arguments, before/after boxes, and complete diagnostic findings.
 The browser comparisons use different font advances during the hold, so a matching
 fallback font cannot conceal an ineffective width reservation.
+These observations use the default custom-serif setting.
+They do not cover saved sans or system settings; the later integration review found
+reservation loss in those contexts and tracked its correction separately as
+`think-fatc`.
 
 The desktop Chromium report retains both geometry negative controls: removing the
 reserved width changes positions, while adding a consistently wrong width preserves

@@ -19,7 +19,7 @@ Decision: **baseline**. The control is valid for the fixed local-file regime; it
 Decision: **correctness failed**. Reject this intermediate runtime; the geometry guard caught visible math before a required font transfer completed.
 
 - webkit 1280px screen: math was exposed while its font requests were held
-- missing registered browser/width cells: [('chromium', 390), ('chromium', 1280), ('firefox', 390), ('firefox', 1280), ('webkit', 390)]
+- missing registered browser/width cells: [('chromium', 390, 'custom-serif'), ('chromium', 1280, 'custom-serif'), ('firefox', 390, 'custom-serif'), ('firefox', 1280, 'custom-serif'), ('webkit', 390, 'custom-serif')]
 - missing rejected movement or stable-wrong-width control
 
 ## exp-003: Prepared publication across browsers and print

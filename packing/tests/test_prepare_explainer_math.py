@@ -12,7 +12,10 @@ from devtools import prepare_explainer_math, render_explainer
 from devtools.prepare_explainer_math import (
     GeometryBox,
     GeometryReport,
+    MathCoverage,
     PreparedFragment,
+    coverage_findings,
+    font_preference_html,
     geometry_findings,
     held_math_fonts,
     math_slots,
@@ -170,6 +173,44 @@ def test_font_hold_rewrites_actual_math_transfers_and_leaves_reading_faces_embed
     assert all(url in output for url in fonts)
 
 
+@pytest.mark.parametrize("font_set", ["custom", "system"])
+@pytest.mark.parametrize("prose_font", ["serif", "sans"])
+def test_font_preferences_apply_before_bootstrap_and_math(
+    font_set: str, prose_font: str
+) -> None:
+    source = "<html><head><script>bootstrap()</script></head><body>math</body></html>"
+    output = font_preference_html(source, prose_font=prose_font, font_set=font_set)
+    assert output.index(f'kpressProseFont = "{prose_font}"') < output.index("bootstrap()")
+    assert output.index(f'kpressFontSet = "{font_set}"') < output.index("bootstrap()")
+    assert output.endswith("<body>math</body></html>")
+    with pytest.raises(ValueError, match="unsupported"):
+        font_preference_html(source, prose_font="unmeasured", font_set=font_set)
+
+
+def test_geometry_coverage_rejects_missing_formulas_and_unreserved_bases() -> None:
+    coverage: MathCoverage = {
+        "targets": 5,
+        "formulas": 5,
+        "bases": 7,
+        "missing": [],
+        "unreserved": [],
+        "variant_errors": [],
+        "duplicate_ids": [],
+    }
+    assert coverage_findings(coverage) == []
+    assert any(
+        "lack reservations" in finding
+        for finding in coverage_findings({**coverage, "unreserved": ["x + y"]})
+    )
+    assert any(
+        "no prepared formula" in finding
+        for finding in coverage_findings({**coverage, "missing": ["x + y"]})
+    )
+    assert coverage_findings({**coverage, "bases": 0})
+    assert coverage_findings({**coverage, "variant_errors": ["x + y"]})
+    assert coverage_findings({**coverage, "duplicate_ids": ["formula-1"]})
+
+
 def test_cli_retains_raw_control_reports_and_automatic_provenance(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
@@ -179,20 +220,37 @@ def test_cli_retains_raw_control_reports_and_automatic_provenance(
     output = tmp_path / "report.json"
 
     def check(_source: str, **options: object) -> GeometryReport:
+        assert options["prose_font"] == "sans"
+        assert options["font_set"] == "system"
         findings = []
         if options.get("break_reservation"):
             findings.append("base 0: width moved 12.000px")
         if options.get("wrong_reservation"):
             findings.append("base 0: reserved width differs from glyphs by 12.000px")
+        if options.get("missing_reservation"):
+            findings.append("visible math bases lack reservations: ['x + y']")
+        coverage: MathCoverage = {
+            "targets": 1,
+            "formulas": 1,
+            "bases": 1,
+            "missing": [],
+            "unreserved": [],
+            "variant_errors": [],
+            "duplicate_ids": [],
+        }
         return {
             "browser": "fixture",
             "width": 1280,
             "medium": "screen",
             "alternate_certificate": False,
+            "prose_font": "sans",
+            "font_set": "system",
             "held_fonts": 1,
             "before": [],
             "after": [],
             "early_visible": [],
+            "coverage_before": coverage,
+            "coverage_after": coverage,
             "environment": {
                 "browser": "fixture",
                 "browser_version": "1.2.3",
@@ -209,7 +267,16 @@ def test_cli_retains_raw_control_reports_and_automatic_provenance(
         }
 
     monkeypatch.setattr(prepare_explainer_math, "check_geometry", check)
-    arguments = [str(source), "--self-test", "--output", str(output)]
+    arguments = [
+        str(source),
+        "--self-test",
+        "--prose-font",
+        "sans",
+        "--font-set",
+        "system",
+        "--output",
+        str(output),
+    ]
     assert prepare_explainer_math.main(arguments) == 0
     report = json.loads(output.read_text())
     assert report["requested_source"] == str(source.resolve())
@@ -219,6 +286,10 @@ def test_cli_retains_raw_control_reports_and_automatic_provenance(
     assert len(report["instrument"]["git_head"]) == 40
     assert isinstance(report["instrument"]["git_dirty"], bool)
     assert report["instrument"]["browser_versions"] == ["fixture 1.2.3"]
+    assert report["font_set"] == "system"
+    assert report["prose_font"] == "sans"
+    assert report["coverage_after"]["unreserved"] == []
+    assert "missing_reservation" in report["controls"]
     for control in report["controls"].values():
         assert control["rejected"] is True
         assert control["report"]["findings"]

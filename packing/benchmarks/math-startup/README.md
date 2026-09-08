@@ -70,6 +70,23 @@ Independent host review also corrected print visibility and native fallback stat
 The next slice finishes the WebKit fix, then freezes the final prepared artifact for
 correctness and paired timing.
 
+At the 18:42 UTC boundary, KPress PR #61 is merged with its complete CI matrix green.
+The paired full-page observations are retained as exp-004 under review: the observer
+cost differed between arms, and unrelated work on the shared Mac invalidated the
+proposed isolated-host regime.
+H-003 freezes a narrower parameter observation on a dedicated hosted runner before its
+first candidate run.
+
+Main advanced to `38ca2892` during integration.
+Its paper revisions, bold sans slot, and print-check repairs are merged at `cadaf4df`.
+Independent review then found that saved sans or system font settings discarded the
+default prepared boxes, and that the geometry guard could silently inspect only the
+surviving caption boxes.
+`think-fatc` owns profile-matched preparation and complete visible-formula coverage.
+The next slice finishes that correction, verifies the combined publication, and runs the
+parallel pre-push and hosted checkpoints.
+No parameter-mode candidate has been measured.
+
 ## Measurement protocol
 
 Run `python -m devtools.check_math_startup` through the frozen project environment from

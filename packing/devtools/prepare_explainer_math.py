@@ -2,8 +2,9 @@
 
 KaTeX's HTML has measured vertical struts, but its glyph runs still have intrinsic
 width. A hidden TeX or MathML fallback therefore cannot reserve the final layout.
-The publication build typesets once in pinned Chromium and measures each unbreakable
-``.base`` separately. Its fixed outer box keeps that width, height, and baseline while
+The publication build typesets each supported font preference in pinned Chromium and
+measures each unbreakable ``.base`` separately. Its fixed outer box keeps that width,
+height, and baseline while
 the selectable HTML inside waits for its fonts. Keeping separate bases preserves
 KaTeX's line-break opportunities and leaves glyph ink free to overhang the box.
 
@@ -67,6 +68,11 @@ _MATH_ATTRIBUTES = frozenset(
     }
 )
 _MARKER = "data-squares-math-key"
+_FONT_CONTEXTS = tuple(
+    (font_set, prose_font)
+    for font_set in ("custom", "system")
+    for prose_font in ("serif", "sans")
+)
 
 
 @dataclass(frozen=True)
@@ -238,6 +244,77 @@ _MEASURE_MATH = dedent(r"""
 """)
 
 
+_COMBINE_MATH_VARIANTS = dedent("""
+    ({contexts, attributeNames}) => {
+      const actualNodes = element => element.matches('.kpress-math')
+        ? [element.querySelector('.kpress-math-render')]
+        : element.id.startsWith('kval-')
+          ? [...element.querySelectorAll('.math-item')]
+          : [element];
+      const attributes = node => Object.fromEntries(attributeNames.filter(name =>
+        node.hasAttribute(name)).map(name => [name, node.getAttribute(name)]));
+      return contexts[0].fragments.map((fragment, slot) => {
+        const original = document.querySelector('[data-squares-math-key="' + slot + '"]');
+        const copies = contexts.map(context => {
+          const measured = context.fragments[slot];
+          if (measured.key !== fragment.key) throw new Error('math variant keys differ');
+          const copy = original.cloneNode(false);
+          for (const name of attributeNames) copy.removeAttribute(name);
+          for (const [name, value] of Object.entries(measured.attributes)) {
+            copy.setAttribute(name, value);
+          }
+          copy.innerHTML = measured.html;
+          return copy;
+        });
+        const nodes = copies.map(actualNodes);
+        for (let index = 0; index < nodes[0].length; index++) {
+          const versions = new Map();
+          contexts.forEach((context, offset) => {
+            const node = nodes[offset][index];
+            if (!node) throw new Error('math variant nodes differ');
+            const signature = JSON.stringify([attributes(node), node.innerHTML]);
+            const version = versions.get(signature) || {node, contexts: []};
+            version.contexts.push(context.name);
+            versions.set(signature, version);
+          });
+          if (versions.size === 1) continue;
+          const parent = nodes[0][index];
+          const variants = [...versions.values()].map(({node, contexts}) => {
+            const variant = document.createElement('span');
+            variant.className = 'squares-math-variant';
+            variant.dataset.squaresMathContexts = contexts.join(' ');
+            for (const [name, value] of Object.entries(attributes(node))) {
+              variant.setAttribute(name, value);
+            }
+            variant.innerHTML = node.innerHTML;
+            return variant;
+          });
+          // The source stays on the original host target. Font/profile state belongs
+          // to the selected child, so an inactive serif ancestor cannot override it.
+          for (const name of ['data-kpress-math-face', 'data-kpress-math-profile',
+              'data-kpress-math-prepared']) parent.removeAttribute(name);
+          parent.replaceChildren(...variants);
+        }
+        return {key: fragment.key, html: copies[0].innerHTML,
+          attributes: attributes(copies[0])};
+      });
+    }
+""")
+
+
+def font_preference_html(source: str, *, prose_font: str, font_set: str) -> str:
+    """Set the same pre-paint attributes as saved preferences in a fresh browser."""
+    if (font_set, prose_font) not in _FONT_CONTEXTS:
+        raise ValueError("unsupported explainer font preferences")
+    # set_content() has no persistent origin. Assign the attributes in the head,
+    # before the normal bootstrap and body; do not change them after math renders.
+    return _head_script(
+        source,
+        f'document.documentElement.dataset.kpressProseFont = "{prose_font}";'
+        f'document.documentElement.dataset.kpressFontSet = "{font_set}";',
+    )
+
+
 def prepare_math_html(source: str) -> str:
     """Return publication HTML with measured math boxes; never write an artifact."""
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
@@ -260,19 +337,41 @@ def prepare_math_html(source: str) -> str:
     with sync_playwright() as driver:
         browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
         try:
-            page = browser.new_page(viewport={"width": 1280, "height": 960})
-            page.emulate_media(media="screen", reduced_motion="reduce", color_scheme="light")
-            page.route("**/*", lambda route: route.abort())
-            page.set_content(instrumented, wait_until="load")
-            page.wait_for_selector(READY, timeout=60_000)
-            # Hidden certificate copies still need their own measured context. Their
-            # initial values come from the same host code as the visible certificate.
-            page.evaluate(
-                "document.querySelectorAll('.cert-figure').forEach(el => el.hidden = false)"
-            )
-            page.evaluate(SETTLED)
+            contexts: list[dict[str, object]] = []
+            page = None
+            for font_set, prose_font in _FONT_CONTEXTS:
+                if page is not None:
+                    page.close()
+                page = browser.new_page(viewport={"width": 1280, "height": 960})
+                page.emulate_media(
+                    media="screen", reduced_motion="reduce", color_scheme="light"
+                )
+                page.route("**/*", lambda route: route.abort())
+                page.set_content(
+                    font_preference_html(
+                        instrumented, prose_font=prose_font, font_set=font_set
+                    ),
+                    wait_until="load",
+                )
+                page.wait_for_selector(READY, timeout=60_000)
+                # Hidden certificate copies need their own measured context too.
+                page.evaluate(
+                    "document.querySelectorAll('.cert-figure').forEach(el => el.hidden = false)"
+                )
+                page.evaluate(SETTLED)
+                contexts.append(
+                    {
+                        "name": f"{font_set}-{prose_font}",
+                        "fragments": page.evaluate(_MEASURE_MATH, sorted(_MATH_ATTRIBUTES)),
+                    }
+                )
+            assert page is not None
             fragments = cast(
-                "list[PreparedFragment]", page.evaluate(_MEASURE_MATH, sorted(_MATH_ATTRIBUTES))
+                "list[PreparedFragment]",
+                page.evaluate(
+                    _COMBINE_MATH_VARIANTS,
+                    {"contexts": contexts, "attributeNames": sorted(_MATH_ATTRIBUTES)},
+                ),
             )
         finally:
             browser.close()
@@ -296,13 +395,27 @@ class GeometryReport(TypedDict):
     width: int
     medium: str
     alternate_certificate: bool
+    prose_font: str
+    font_set: str
     held_fonts: int
     before: list[GeometryBox]
     after: list[GeometryBox]
     early_visible: list[ReadyMathBox]
+    coverage_before: MathCoverage
+    coverage_after: MathCoverage
     environment: BrowserEnvironment
     source_identity: PageIdentity
     findings: list[str]
+
+
+class MathCoverage(TypedDict):
+    targets: int
+    formulas: int
+    bases: int
+    missing: list[str]
+    unreserved: list[str]
+    variant_errors: list[str]
+    duplicate_ids: list[str]
 
 
 class BrowserEnvironment(TypedDict):
@@ -446,6 +559,70 @@ _GEOMETRY_SNAPSHOT = dedent("""
 """)
 
 
+_MATH_COVERAGE = dedent("""
+    () => {
+      const root = document.documentElement.dataset;
+      const preference = (root.kpressFontSet === 'system' ? 'system' : 'custom') + '-'
+        + (root.kpressProseFont === 'sans' ? 'sans' : 'serif');
+      const parents = new Set([...document.querySelectorAll('.squares-math-variant')]
+        .map(node => node.parentElement));
+      const variant_errors = [];
+      for (const parent of parents) {
+        const displayed = [...parent.querySelectorAll(':scope > .squares-math-variant')]
+          .filter(node => getComputedStyle(node).display !== 'none');
+        if (displayed.length !== 1 || !displayed[0].dataset.squaresMathContexts
+            ?.split(/\\s+/).includes(preference)) {
+          variant_errors.push(parent.dataset.kpressMathSource || parent.id);
+        }
+      }
+      const ids = new Set(), duplicate_ids = [];
+      for (const node of document.querySelectorAll('[id]')) {
+        if (ids.has(node.id)) duplicate_ids.push(node.id);
+        ids.add(node.id);
+      }
+      const targets = [...document.querySelectorAll('[data-kpress-math-source]')]
+        .filter(node => node.getClientRects().length);
+      const formulas = [...new Set(targets.flatMap(node =>
+        [...node.querySelectorAll('.katex-html')].filter(formula =>
+          formula.getClientRects().length)))];
+      const missing = targets.filter(node => !formulas.some(formula => node.contains(formula)))
+        .map(node => node.dataset.kpressMathSource);
+      const unreserved = [];
+      let bases = 0;
+      for (const formula of formulas) {
+        const parts = [...formula.querySelectorAll('.base')];
+        if (!parts.length) missing.push(formula.textContent);
+        for (const base of parts) {
+          bases++;
+          const box = base.parentElement;
+          if (!box.classList.contains('squares-math-box') || box.parentElement !== formula) {
+            unreserved.push(formula.closest('[data-kpress-math-source]')
+              ?.dataset.kpressMathSource || formula.textContent);
+          }
+        }
+      }
+      return {targets: targets.length, formulas: formulas.length, bases, missing, unreserved,
+        variant_errors, duplicate_ids};
+    }
+""")
+
+
+def coverage_findings(coverage: MathCoverage) -> list[str]:
+    """A surviving subset of boxes cannot establish coverage of the page's math."""
+    findings: list[str] = []
+    if not coverage["targets"] or not coverage["formulas"] or not coverage["bases"]:
+        findings.append("no complete prepared mathematics was covered")
+    if coverage["missing"]:
+        findings.append(f"visible mathematics has no prepared formula: {coverage['missing']}")
+    if coverage["unreserved"]:
+        findings.append(f"visible math bases lack reservations: {coverage['unreserved']}")
+    if coverage["variant_errors"]:
+        findings.append(f"CSS selected the wrong math variants: {coverage['variant_errors']}")
+    if coverage["duplicate_ids"]:
+        findings.append(f"prepared page has duplicate IDs: {coverage['duplicate_ids']}")
+    return findings
+
+
 _GEOMETRY_EARLY_READY = dedent("""
     async () => {
       const result = [];
@@ -503,7 +680,10 @@ def check_geometry(
     medium: str = "screen",
     break_reservation: bool = False,
     wrong_reservation: bool = False,
+    missing_reservation: bool = False,
     alternate_certificate: bool = False,
+    prose_font: str = "serif",
+    font_set: str = "custom",
 ) -> GeometryReport:
     """Hold real math-font responses, change intrinsic glyph advances, then reveal.
 
@@ -514,7 +694,9 @@ def check_geometry(
     """
     from playwright.sync_api import Route, sync_playwright  # noqa: PLC0415
 
-    instrumented, font_data = held_math_fonts(source)
+    instrumented, font_data = held_math_fonts(
+        font_preference_html(source, prose_font=prose_font, font_set=font_set)
+    )
     held: list[Route] = []
     released = False
 
@@ -555,6 +737,16 @@ def check_geometry(
                 }
             """)
             )
+            if missing_reservation:
+                # Remove a complete reservation before discovery. A checker that
+                # measures only surviving boxes would silently accept this subset.
+                page.evaluate(
+                    "const box = [...document.querySelectorAll('.squares-math-box')]"
+                    ".find(node => node.getBoundingClientRect().width > 0);"
+                    "const base = box.firstElementChild; base.style.position = '';"
+                    "box.replaceWith(base)"
+                )
+            coverage_before = cast("MathCoverage", page.evaluate(_MATH_COVERAGE))
             page.evaluate(_GEOMETRY_SETUP)
             source_identity = cast(
                 "PageIdentity",
@@ -615,6 +807,7 @@ def check_geometry(
             page.wait_for_selector(READY, timeout=60_000)
             page.evaluate(SETTLED)
             after = cast("list[GeometryBox]", page.evaluate(_GEOMETRY_SNAPSHOT))
+            coverage_after = cast("MathCoverage", page.evaluate(_MATH_COVERAGE))
         finally:
             browser.close()
     early_ready = frozenset(
@@ -629,6 +822,8 @@ def check_geometry(
         )
     )
     findings = geometry_findings(before, after, early_ready=early_ready)
+    findings.extend(coverage_findings(coverage_before))
+    findings.extend(coverage_findings(coverage_after))
     if not held_count:
         findings.append("no actual math-font request was held")
     old = {box["key"]: box for box in before}
@@ -644,10 +839,14 @@ def check_geometry(
         "width": width,
         "medium": medium,
         "alternate_certificate": alternate_certificate,
+        "prose_font": prose_font,
+        "font_set": font_set,
         "held_fonts": held_count,
         "before": before,
         "after": after,
         "early_visible": early_visible,
+        "coverage_before": coverage_before,
+        "coverage_after": coverage_after,
         "environment": {
             "browser": browser_name,
             "browser_version": browser_version,
@@ -683,12 +882,13 @@ _REQUIRED_FONT_FAILURE = dedent("""
     (() => {
       const fonts = Object.getPrototypeOf(document.fonts);
       const check = fonts.check, load = fonts.load;
+      const required = spec => /KPress Math Text|KaTeX_/.test(spec);
       globalThis.__squaresRejectedFonts = 0;
       fonts.check = function(spec, text) {
-        return spec.includes('KPress Math Text') ? false : check.call(this, spec, text);
+        return required(spec) ? false : check.call(this, spec, text);
       };
       fonts.load = function(spec, text) {
-        if (!spec.includes('KPress Math Text')) return load.call(this, spec, text);
+        if (!required(spec)) return load.call(this, spec, text);
         __squaresRejectedFonts++;
         return Promise.reject(new Error('required math-font failure control'));
       };
@@ -780,6 +980,8 @@ def main(argv: list[str] | None = None) -> int:
         "--browser", choices=("chromium", "firefox", "webkit"), default="chromium"
     )
     parser.add_argument("--width", type=int, default=1280)
+    parser.add_argument("--prose-font", choices=("serif", "sans"), default="serif")
+    parser.add_argument("--font-set", choices=("custom", "system"), default="custom")
     parser.add_argument("--print", action="store_true", dest="print_media")
     parser.add_argument("--self-test", action="store_true")
     parser.add_argument("--host-check", action="store_true")
@@ -797,6 +999,8 @@ def main(argv: list[str] | None = None) -> int:
         width=args.width,
         medium="print" if args.print_media else "screen",
         alternate_certificate=args.alternate_certificate,
+        prose_font=args.prose_font,
+        font_set=args.font_set,
     )
     controls: dict[str, object] = {}
     if args.self_test:
@@ -807,6 +1011,8 @@ def main(argv: list[str] | None = None) -> int:
             medium="print" if args.print_media else "screen",
             break_reservation=True,
             alternate_certificate=args.alternate_certificate,
+            prose_font=args.prose_font,
+            font_set=args.font_set,
         )
         rejected = any("moved" in finding for finding in control["findings"])
         controls["removed_width"] = {"rejected": rejected, "report": control}
@@ -819,12 +1025,30 @@ def main(argv: list[str] | None = None) -> int:
             medium="print" if args.print_media else "screen",
             wrong_reservation=True,
             alternate_certificate=args.alternate_certificate,
+            prose_font=args.prose_font,
+            font_set=args.font_set,
         )
         rejected = any("reserved width differs" in finding for finding in wrong["findings"])
         controls["stable_wrong_width"] = {"rejected": rejected, "report": wrong}
         if not rejected:
             report["findings"].append(
                 "the stable wrong-width negative control was not rejected"
+            )
+        missing = check_geometry(
+            source,
+            browser_name=args.browser,
+            width=args.width,
+            medium="print" if args.print_media else "screen",
+            missing_reservation=True,
+            alternate_certificate=args.alternate_certificate,
+            prose_font=args.prose_font,
+            font_set=args.font_set,
+        )
+        rejected = any("lack reservations" in finding for finding in missing["findings"])
+        controls["missing_reservation"] = {"rejected": rejected, "report": missing}
+        if not rejected:
+            report["findings"].append(
+                "the missing-reservation negative control was not rejected"
             )
     output: dict[str, object] = {
         "schema_version": 1,
@@ -839,17 +1063,23 @@ def main(argv: list[str] | None = None) -> int:
         "controls": controls,
     }
     if args.host_check:
-        host = check_host_math(source, browser_name=args.browser)
+        host_source = font_preference_html(
+            source, prose_font=args.prose_font, font_set=args.font_set
+        )
+        host = check_host_math(host_source, browser_name=args.browser)
         output["host"] = host
         report["findings"].extend(host["findings"])
         if args.self_test:
             # The former host branches are retained as actual browser controls. A
             # source refactor must update their construction instead of silently
             # turning either regression back into a positive-only assertion.
-            broken = source.replace(
+            broken = host_source.replace(
                 "pv.getClientRects().length", "!pv.closest('.cert-figure').hidden"
             )
-            if broken == source or "else delete el.dataset.kpressMathRendered;" not in broken:
+            if (
+                broken == host_source
+                or "else delete el.dataset.kpressMathRendered;" not in broken
+            ):
                 report["findings"].append("the host negative controls could not be constructed")
             else:
                 broken = broken.replace("else delete el.dataset.kpressMathRendered;", "")

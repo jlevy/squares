@@ -258,12 +258,35 @@ jobs:
           uv run --frozen --group dev python -m devtools.check_math_startup --runs 1 --output /tmp/math-startup-desktop.json
           uv run --frozen --group dev python -m devtools.check_math_startup --runs 1 --width 390 --output /tmp/math-startup-mobile.json
 
-      - name: Check reserved math geometry before and after fonts load
+      # Saved font settings select different prepared variants before the page
+      # hydrates. Every setting must retain its own geometry on this same artifact.
+      - name: Check reserved math geometry under every saved font setting
         run: |
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --host-check --self-test
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --width 390
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --print
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --alternate-certificate
+          mkdir -p /tmp/math-geometry
+          geometry_status=0
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --host-check --self-test --output /tmp/math-geometry/chromium-1280-custom-serif-screen-controls.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --width 390 --output /tmp/math-geometry/chromium-390-custom-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --prose-font sans --output /tmp/math-geometry/chromium-1280-custom-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --prose-font sans --width 390 --output /tmp/math-geometry/chromium-390-custom-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --output /tmp/math-geometry/chromium-1280-system-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --width 390 --output /tmp/math-geometry/chromium-390-system-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --prose-font sans --output /tmp/math-geometry/chromium-1280-system-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --prose-font sans --width 390 --output /tmp/math-geometry/chromium-390-system-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --print --output /tmp/math-geometry/chromium-1280-custom-serif-print.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --prose-font sans --print --output /tmp/math-geometry/chromium-1280-custom-sans-print.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --print --output /tmp/math-geometry/chromium-1280-system-serif-print.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --font-set system --prose-font sans --print --output /tmp/math-geometry/chromium-1280-system-sans-print.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --alternate-certificate --output /tmp/math-geometry/chromium-1280-custom-serif-screen-alternate-certificate.json || geometry_status=1
+          exit "$geometry_status"
+
+      - name: Retain Chromium geometry observations
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: math-geometry-chromium
+          path: /tmp/math-geometry
+          if-no-files-found: error
+          retention-days: 7
 
       - name: Upload the page artifact
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
@@ -315,8 +338,29 @@ jobs:
       - name: Check mobile font loading on the published artifact
         run: |
           uv run --frozen --group dev python -m devtools.check_math_loading --browser ${{ matrix.browser }} --width 390
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --width 1280 --host-check
-          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --width 390
+
+      - name: Check saved font settings retain geometry in both viewports
+        run: |
+          mkdir -p /tmp/math-geometry
+          geometry_status=0
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --width 1280 --host-check --output /tmp/math-geometry/${{ matrix.browser }}-1280-custom-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --width 390 --output /tmp/math-geometry/${{ matrix.browser }}-390-custom-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --prose-font sans --width 1280 --output /tmp/math-geometry/${{ matrix.browser }}-1280-custom-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --prose-font sans --width 390 --output /tmp/math-geometry/${{ matrix.browser }}-390-custom-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --font-set system --width 1280 --output /tmp/math-geometry/${{ matrix.browser }}-1280-system-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --font-set system --width 390 --output /tmp/math-geometry/${{ matrix.browser }}-390-system-serif-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --font-set system --prose-font sans --width 1280 --output /tmp/math-geometry/${{ matrix.browser }}-1280-system-sans-screen.json || geometry_status=1
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --font-set system --prose-font sans --width 390 --output /tmp/math-geometry/${{ matrix.browser }}-390-system-sans-screen.json || geometry_status=1
+          exit "$geometry_status"
+
+      - name: Retain browser geometry observations
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: math-geometry-${{ matrix.browser }}
+          path: /tmp/math-geometry
+          if-no-files-found: error
+          retention-days: 7
 
   # A dedicated runner keeps PDF export and the other browser jobs from competing
   # with this descriptive timing experiment. Only an explicit dispatch runs it.

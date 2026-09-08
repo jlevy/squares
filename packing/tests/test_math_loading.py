@@ -10,8 +10,10 @@ from nodejs_wheel import node
 
 from devtools import check_math_faces
 from devtools.check_math_loading import (
+    ACTIVE_MATH_VARIANT,
     EARLY_EVENTS,
     EXPOSED,
+    FIRST_PAINT_SCRIPT,
     FONT_LOAD_OBSERVER,
     HOLD_FONTS_SCRIPT,
     READOUTS,
@@ -30,6 +32,61 @@ def run_node(script: str) -> None:
         ["-"], return_completed_process=True, input=script, capture_output=True, text=True
     )
     assert completed.returncode == 0, completed.stderr
+
+
+def test_saved_font_variants_do_not_discard_hidden_certificates_or_bad_metadata() -> None:
+    script = dedent("""
+        const assert = require('node:assert/strict');
+        const document = {documentElement: {dataset: {}}};
+        const plain = {hidden: true, closest: () => null};
+        const variant = (contexts, parent = plain) => ({
+          dataset: {squaresMathContexts: contexts}, parentElement: parent,
+          closest() { return this; }
+        });
+    """)
+    script += f"const active = {ACTIVE_MATH_VARIANT};\n"
+    script += dedent("""
+        for (const fontSet of ['custom', 'system']) for (const proseFont of ['serif', 'sans']) {
+          document.documentElement.dataset = {
+            kpressFontSet: fontSet, kpressProseFont: proseFont};
+          const key = `${fontSet}-${proseFont}`;
+          const choices = ['custom-serif', 'custom-sans', 'system-serif', 'system-sans'];
+          for (const context of choices) {
+            assert.equal(active(variant(context)), context === key);
+          }
+          assert.equal(active(variant(choices.join(' '))), true);
+          assert.equal(active(plain), true, 'hidden certificates remain intended math');
+        }
+        for (const contexts of ['', undefined, 'custom-mono', 'system-serif unknown']) {
+          assert.throws(() => active(variant(contexts)), /malformed saved-font math variant/);
+        }
+        document.documentElement.dataset = {
+          kpressFontSet: 'invalid', kpressProseFont: 'invalid'};
+        assert.equal(active(variant('custom-serif')), true, 'invalid settings use defaults');
+    """)
+    run_node(script)
+
+
+def test_first_exposure_discovery_never_requests_dormant_variant_fonts() -> None:
+    script = dedent("""
+        const assert = require('node:assert/strict');
+        const checked = [];
+        const variant = contexts => ({
+          dataset: {squaresMathContexts: contexts}, parentElement: null});
+        const formula = (id, contexts) => ({id,
+          closest: () => contexts ? variant(contexts) : null,
+          checkVisibility() { throw new Error('discovery must preserve hidden staging'); }});
+        const maths = [formula('plain-hidden-certificate'), formula('selected', 'custom-serif'),
+          formula('dormant', 'custom-sans')];
+        const document = {documentElement: {dataset: {}}, querySelectorAll: () => maths};
+        const MutationObserver = class { observe() {} };
+        const requestAnimationFrame = () => {};
+    """)
+    script += FIRST_PAINT_SCRIPT.replace(
+        REQUIRED_FONTS, "math => { checked.push(math.id); return []; }"
+    )
+    script += "assert.deepEqual(checked, ['plain-hidden-certificate', 'selected']);\n"
+    run_node(script)
 
 
 def clean_report() -> LoadingReport:
@@ -320,14 +377,19 @@ def test_early_targets_survive_boot_resets_and_end_at_distinct_values() -> None:
 def test_readout_probe_uses_frozen_values_for_angles_and_directions() -> None:
     script = dedent(r"""
         const assert = require('node:assert/strict');
-        const sans = {dataset: {kpressMathFace: 'sans'}};
+        const sans = {closest: selector => selector.includes('kpress-math-face') ? {} : null};
+        const dormant = {dataset: {squaresMathContexts: 'system-sans'}, parentElement: null};
+        const output = text => ({querySelectorAll: selector => selector === '.katex'
+          ? [{closest: () => dormant}, sans]
+          : [{textContent: 'stale dormant source', closest: () => dormant},
+            {textContent: text, closest: () => null}]});
         const elements = {
           'phi-example': {value: '196'},
           'kslider-example': {value: '123', getAttribute: () => 'Direction 123 of 448'},
-          's-phi-example': {...sans, querySelector: () => ({textContent: '19.600^{\\circ}'})},
-          'kval-example': {children: [sans], querySelector: () => ({textContent: 'k = 123'})}
+          's-phi-example': output('19.600^{\\circ}'),
+          'kval-example': output('k = 123')
         };
-        const document = {getElementById: id => elements[id]};
+        const document = {getElementById: id => elements[id], documentElement: {dataset: {}}};
         const targets = [{id: 'phi-example', value: '412'},
           {id: 'kslider-example', value: '7'}];
     """)
@@ -335,8 +397,10 @@ def test_readout_probe_uses_frozen_values_for_angles_and_directions() -> None:
     script += dedent(r"""
         assert.equal(readouts[0].expected_source, '41.200^{\\circ}');
         assert.equal(readouts[0].actual_value, '196');
+        assert.equal(readouts[0].source, '19.600^{\\circ}');
         assert.equal(readouts[1].expected_source, 'k = 7');
         assert.equal(readouts[1].actual_value, '123');
+        assert.equal(readouts[1].source, 'k = 123');
         assert.equal(readouts[1].state_matches, false);
         assert.ok(readouts.every(readout => readout.sans && readout.supported));
     """)

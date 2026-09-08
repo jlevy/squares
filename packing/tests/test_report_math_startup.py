@@ -142,3 +142,41 @@ def test_geometry_rechecks_measurements_instead_of_trusting_a_verdict(defect: st
     else:
         reports[0]["before"][0]["hidden"] = False
     assert geometry_result(reports, GEOMETRY_RULE)[1]
+
+
+def test_saved_settings_require_complete_context_matrix_and_formula_coverage() -> None:
+    contexts = ["custom-serif", "custom-sans", "system-serif", "system-sans"]
+    rule = {**GEOMETRY_RULE, "font_contexts": contexts}
+    reports = []
+    for context in contexts:
+        for report in geometry_reports():
+            report["font_set"], report["prose_font"] = context.split("-")
+            for stage in ("before", "after"):
+                report[f"coverage_{stage}"] = {
+                    "targets": 1,
+                    "formulas": 1,
+                    "bases": 1,
+                    "missing": [],
+                    "unreserved": [],
+                    "variant_errors": [],
+                    "duplicate_ids": [],
+                }
+            report["controls"]["missing_reservation"] = {
+                "rejected": True,
+                "report": {"findings": ["unreserved base"]},
+            }
+            reports.append(report)
+        printed = deepcopy(reports[-2])
+        printed["medium"] = "print"
+        printed["browser"] = "chromium"
+        reports.append(printed)
+    assert geometry_result(reports, rule)[1] == []
+    assert any("missing registered" in item for item in geometry_result(reports[:-2], rule)[1])
+    reports[0]["coverage_before"]["unreserved"] = ["a surviving formula lost its box"]
+    assert any("incomplete before" in item for item in geometry_result(reports, rule)[1])
+    reports[0]["coverage_before"]["unreserved"] = []
+    del reports[0]["coverage_after"]
+    assert any("incomplete after" in item for item in geometry_result(reports, rule)[1])
+    for report in reports:
+        del report["controls"]["missing_reservation"]
+    assert any("pre-discovery" in item for item in geometry_result(reports, rule)[1])

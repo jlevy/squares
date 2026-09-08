@@ -58,7 +58,7 @@ import os
 from pathlib import Path
 from typing import Literal, NotRequired, TypedDict
 
-from devtools.check_math_loading import FIRST_PAINT_SCRIPT, page_url
+from devtools.check_math_loading import ACTIVE_MATH_VARIANT, FIRST_PAINT_SCRIPT, page_url
 from devtools.check_print_layout import PRINT_VIEWPORT
 from devtools.render_explainer import MATH_WRAPPERS
 from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
@@ -146,7 +146,8 @@ PROBE = r"""({ wrappers, advance_tolerance }) => {
   const findings = [];
   const boldAdvances = [];
   const fontAdvance = __FONT_ADVANCE_FUNCTION__;
-  const nodes = [...document.querySelectorAll('.katex')];
+  const activeVariant = __ACTIVE_MATH_VARIANT__;
+  const nodes = [...document.querySelectorAll('.katex')].filter(activeVariant);
   const sans = (node) => !!node.closest('[data-kpress-math-face="sans"]');
   const marked = nodes.filter(sans);
   const first = (value) => (value || '').split(',')[0].trim().replace(/^["']|["']$/g, '');
@@ -311,7 +312,9 @@ PROBE = r"""({ wrappers, advance_tolerance }) => {
   }
   return { nodes: nodes.length, marked: marked.length, tables,
     bold_advances: boldAdvances, findings };
-}""".replace("__FONT_ADVANCE_FUNCTION__", FONT_ADVANCE)
+}""".replace("__FONT_ADVANCE_FUNCTION__", FONT_ADVANCE).replace(
+    "__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT
+)
 
 
 def _run(page: object, findings: list[str], medium: str) -> Report:
@@ -332,7 +335,9 @@ def _run(page: object, findings: list[str], medium: str) -> Report:
 #: Latin ranges and the digits and nothing else, so a run of operators or Greek would
 #: answer with a KaTeX face whichever composite is in force and prove nothing.
 _MARK = """({ scope, mark }) => {
+  const activeVariant = __ACTIVE_MATH_VARIANT__;
   for (const node of document.querySelectorAll(scope)) {
+    if (!activeVariant(node)) continue;
     if (!node.checkVisibility({ visibilityProperty: true })) continue;
     for (const run of node.querySelectorAll('.mord')) {
       if (run.children.length === 0 && /^[0-9A-Za-z.]+$/.test(run.textContent.trim())) {
@@ -342,7 +347,7 @@ _MARK = """({ scope, mark }) => {
     }
   }
   return null;
-}"""
+}""".replace("__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT)
 
 
 def _drawn_face(page: object, session: object, *, scope: str) -> tuple[str | None, list[str]]:
@@ -549,7 +554,26 @@ def self_test() -> None:
                 "() => { globalThis.kpressMathText = "
                 "{ installTablesFor: () => null, restore: () => undefined }; }"
             )
+            page.evaluate(
+                """() => {
+                  const dormant = document.createElement('span');
+                  dormant.className = 'squares-math-variant';
+                  dormant.dataset.squaresMathContexts = 'custom-sans';
+                  dormant.style.display = 'none';
+                  dormant.innerHTML = '<span class="katex">dormant</span>';
+                  const certificate = document.createElement('div');
+                  certificate.hidden = true;
+                  certificate.innerHTML = '<p class="sans"><span class="katex" '
+                    + 'data-kpress-math-face="sans">hidden certificate</span></p>';
+                  document.body.append(dormant, certificate);
+                }"""
+            )
             unmarked: Report = page.evaluate(PROBE, arguments)
+            if unmarked["nodes"] != 3:
+                raise SystemExit(
+                    "math face self-test lost hidden certificate math "
+                    "or included a dormant variant"
+                )
             if not any("sans words, serif mathematics" in f for f in unmarked["findings"]):
                 raise SystemExit("math face self-test accepted serif math under sans words")
             page.evaluate(

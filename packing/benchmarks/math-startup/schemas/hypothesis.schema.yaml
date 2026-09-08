@@ -18,6 +18,11 @@ properties:
     items: {type: integer, minimum: 1}
   criterion: {enum: [geometry, paired_latency]}
   maximum_math_box_displacement_px: {type: number, minimum: 0}
+  font_contexts:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: {enum: [custom-serif, custom-sans, system-serif, system-sans]}
   minimum_pairs: {type: integer, minimum: 12}
   maximum_ci95_change_pct: {type: number, exclusiveMaximum: 0}
   required_mode: {enum: [full, parameters]}

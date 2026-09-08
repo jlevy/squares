@@ -425,10 +425,10 @@ def test_host_context_and_kerning_reach_the_shared_math_renderer() -> None:
           fontFamily: '"Source Sans 3 Variable", sans-serif'};
         const prose = {...sans, fontFamily: '"PT Serif", serif'};
         const wrapper = parent => ({nodeType: 1, parentElement: parent,
-          matches: () => true, dataset: {}});
+          matches: () => true, dataset: {}, querySelectorAll: () => []});
         const nodes = [wrapper(wrapper(sans)), wrapper(prose), wrapper(null)];
         nodes[0].dataset.kpressMathPrepared = 'true';
-        const document = {querySelectorAll: () => nodes};
+        const document = {querySelectorAll: () => nodes, documentElement: {dataset: {}}};
         const getComputedStyle = el => ({fontFamily: el.fontFamily,
           getPropertyValue: () => '"Source Sans 3 Variable", sans-serif'});
         globalThis.kpressMathText = {
@@ -477,6 +477,64 @@ def test_host_context_and_kerning_reach_the_shared_math_renderer() -> None:
         {"source": r"s\mkern1mu(11) + cos(x)", "display": True, "sans": True},
         {"source": r"n\mkern1mu(2)", "display": False, "sans": False},
     ]
+
+
+def test_host_selects_saved_geometry_and_ignores_a_stale_variants_failure() -> None:
+    """Only the selected child renders; an older child's failure cannot erase it."""
+    setup = dedent(r"""
+        const assert = require('node:assert/strict');
+        const document = {documentElement: {dataset: {}}};
+        const getComputedStyle = () => ({fontFamily: 'serif', getPropertyValue: () => 'sans'});
+        const parent = {nodeType: 1, dataset: {}, textContent: 'prepared mathematics',
+          matches: () => false};
+        const keys = ['custom-serif', 'custom-sans', 'system-serif', 'system-sans'];
+        const variants = keys.map(key => ({nodeType: 1, parentElement: parent,
+          matches: () => true,
+          dataset: {kpressMathPrepared: 'true', squaresMathContexts: key}}));
+        parent.querySelectorAll = () => variants;
+        const calls = [];
+        let rejectFirst;
+        globalThis.kpressMathText = {
+          render() { throw new Error('matching prepared math must hydrate'); },
+          hydrate(source, target) {
+            calls.push(target.dataset.squaresMathContexts);
+            if (calls.length === 1) {
+              return new Promise((_, reject) => { rejectFirst = reject; });
+            }
+            return Promise.resolve();
+          },
+        };
+    """)
+    exercise = dedent(r"""
+        (async () => {
+          const old = squaresMath.render(parent, 'x', false);
+          document.documentElement.dataset = {kpressFontSet: 'system', kpressProseFont: 'sans'};
+          await squaresMath.render(parent, 'y', false);
+          assert.deepEqual(calls, ['custom-serif', 'system-sans']);
+          assert.equal(variants[3].dataset.squaresMathReady, 'true');
+          assert.equal(variants[1].dataset.squaresMathReady, undefined);
+          assert.equal(variants[2].dataset.squaresMathReady, undefined);
+          rejectFirst(new Error('old profile font failure'));
+          await old;
+          await squaresMath.settled();
+          assert.equal(parent.textContent, 'prepared mathematics');
+          for (const key of keys) {
+            const [fontSet, proseFont] = key.split('-');
+            document.documentElement.dataset = {
+              kpressFontSet: fontSet, kpressProseFont: proseFont};
+            await squaresMath.render(parent, 'z', false);
+            assert.equal(calls.at(-1), key);
+          }
+        })();
+    """)
+    completed = node(
+        ["-"],
+        return_completed_process=True,
+        input=setup + render_explainer.host_math_init() + exercise,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
 
 
 def test_heat_map_waits_for_math_and_cancels_a_hidden_certificates_queued_draw() -> None:

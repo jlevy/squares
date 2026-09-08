@@ -27,6 +27,9 @@ PR #131’s revised publication text and retained bold sans math face to the `dc
 rendering changes. The comparison therefore measures the complete proposed publication
 against the retained deployment, not the startup code in isolation.
 The prepared candidate’s recorded commit and HTML identify that combined change.
+The pre-run integration review also found that saved font settings need matching
+prepared variants; the candidate includes that correction and complete geometry coverage
+checks. This amendment precedes all parameter-mode candidate observations.
 
 Use `--mode parameters`. Require all fourteen correct visible labels/readouts and the
 retained measurement controls.
