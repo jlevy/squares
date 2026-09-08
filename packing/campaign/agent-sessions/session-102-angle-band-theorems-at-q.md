@@ -34,9 +34,9 @@ session:
     status: completed
     entered_by: session_start
     switch_reason: null
-    budget_minutes: 120
+    budget_minutes: 78
     started_at: '2026-09-08T04:29:00Z'
-    deadline_at: '2026-09-08T06:29:00Z'
+    deadline_at: '2026-09-08T05:47:00Z'
     expected_output: >-
       A new section of results/agenda-030/lane-b-angle-classes.md with the replay table, the
       widening table, the histogram and the scripts; every verdict from decide_class_program.
@@ -59,7 +59,8 @@ session:
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md
     stop_reason: The research slice closed at its checkpoint with the exit reached; the remaining clock is the finalization reserve.
-    next_action: Under think-ndqj, sweep the end band at grid 119 and 159 and run the band toward 40.19° at grid 119 before any continuum family is built.
+    next_action: >-
+      Under think-ndqj, sweep the end band at grid 119 and 159 and run the band toward 40.19° at grid 119 before any continuum family is built.
   - workflow: documentation-pass
     focus: correctness
     recording: contemporaneous
@@ -69,11 +70,11 @@ session:
       lane branch without pushing.
     commitment: BC-295
     bead: think-ndqj
-    status: completed
+    status: stopped
     entered_by: planned_checkpoint
     switch_reason: The research slice closed at its checkpoint; the remaining time is the finalization reserve.
-    budget_minutes: 30
-    started_at: '2026-09-08T06:05:00Z'
+    budget_minutes: 72
+    started_at: '2026-09-08T05:47:00Z'
     deadline_at: '2026-09-08T06:59:00Z'
     expected_output: The result section, this record, and one commit on lane/bc-295-angle-bands.
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
@@ -84,14 +85,15 @@ session:
       run and its verdict is in checks; one commit on lane/bc-295-angle-bands, not pushed.
     evidence:
     - packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md
-    stop_reason: The record and result section were written and validated inside the clock.
-    next_action: Under think-ndqj, the coordinator allocates the experiment ids for the two theorems and the replay and integrates the branch.
+    stop_reason: The record and result section were written and the records tier run inside the clock; the session stops at its fixed deadline with certification pending.
+    next_action: >-
+      Under think-ndqj, the coordinator allocates the experiment ids for the two theorems and the replay and integrates the branch.
   primary_bead: think-ndqj
   status: stopped
   budget:
     wall_minutes: 150
     checkpoint_minutes: 30
-    finalization_minutes: 30
+    finalization_minutes: 72
   stop_conditions:
   - The 2.5-hour clock ends at 06:59Z; a promising result does not extend it.
   - Only decide_class_program and class_minima verdicts are results; a float optimum is context.
@@ -106,11 +108,13 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md
   - packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md
   checks:
+  - packing-validate --records on the lane branch at 05:16Z, before this record was filled, failed only on this record's placeholders (six steps, all naming session-102); every other step passed.
   - TBD_CHECKS
-  resource_rollups: TBD_ROLLUPS
+  resource_rollups: [packing/campaign/resource-usage/agent-a2247da4712316276.yaml]
   certification_pending: think-ndqj
   stop_reason: Stopped at the lane's fixed clock with the exit reached; no full gate was run in this lane (the coordinator owns integration and the pull-request surface), so certification is pending under think-ndqj.
-  next_action: Under think-ndqj: allocate experiment ids for Theorems A and B and the H-131 replay, sweep the end band at grid 119 and 159 from k = 9, run the band toward 40.19° at grid 119, and certify the branch on the pull-request surface.
+  next_action: >-
+    Under think-ndqj, allocate experiment ids for Theorems A and B and the H-131 replay, sweep the end band at grid 119 and 159 from k = 9, run the band toward 40.19° at grid 119, and certify the branch on the pull-request surface.
 ---
 # Angle-Band Theorems at `96/25`
 
