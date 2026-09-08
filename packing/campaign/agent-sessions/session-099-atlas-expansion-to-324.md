@@ -10,7 +10,7 @@ session:
   title: Atlas expansion to n = 324 and the poster composite
   date: '2026-09-07'
   started_at: '2026-09-07T07:20:00Z'
-  deadline_at: '2026-09-08T15:20:00Z'
+  deadline_at: '2026-09-10T15:20:00Z'
   branch: claude/atlas-expansion-300-400-9f79fc
   goal: Plan and begin the owner-directed widening of the frontier register and known-best
     atlas from n = 1..100 to n = 1..324, survey public sources beyond n = 100, and prepare the
@@ -130,9 +130,9 @@ session:
     entered_by: planned_checkpoint
     switch_reason: The bounded work is complete and committed on PR 111; only records that
       depend on the owner, CI and the harness remain.
-    budget_minutes: 1340
+    budget_minutes: 4220
     started_at: '2026-09-07T15:30:00Z'
-    deadline_at: '2026-09-08T13:50:00Z'
+    deadline_at: '2026-09-10T13:50:00Z'
     expected_output: A terminal session record with its rollup and certifying gate named, and
       the epic closed at merge.
     validation_command: uv run --frozen --all-extras --group dev packing-validate --records
@@ -147,8 +147,14 @@ session:
   status: in_progress
   budget:
     # 480 for the work; extended once, at 2026-09-07T15:30Z, to hold the record open for
-    # the finalization phase below, not to continue autonomous work (D-395).
-    wall_minutes: 1920
+    # the finalization phase below, not to continue autonomous work (D-395). Extended a
+    # second time, at 2026-09-08T14:00Z, for the same reason and no other: phase 4's
+    # window closed with the rollup still the owner's to produce, and the ledger's deadline
+    # rule then took the next commit on main red (PR 129, run 34234453890). Terminalising
+    # instead was tried and refused by the records gate, which requires a terminal session
+    # to name its cost and its certifying gate -- both of which only the rollup supplies.
+    # No work continues under this extension; it holds the record open for close_session.
+    wall_minutes: 4800
     checkpoint_minutes: 240
   stop_conditions:
   - Stop a phase when its bounded output is complete and validated; do not start a corpus chunk
