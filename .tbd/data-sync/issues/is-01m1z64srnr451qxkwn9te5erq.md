@@ -5,13 +5,13 @@ title: Integrate the newly merged 324-case atlas into the v0.2.4 explainer PR
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 labels: []
 dependencies: []
 created_at: 2026-09-08T00:19:33.268Z
-updated_at: 2026-09-08T00:46:41.995Z
+updated_at: 2026-09-08T01:01:09.201Z
 ---
-Continue PR #117 via merge-upstream after main advanced from373beb36 to28696526 during final closeout. Review upstream and local overlaps, merge without losing the revised opening, Figure1/2 numbering, framework box, representative lower bounds, and Figure5/touch fixes; regenerate publication artifacts for the enlarged atlas with v0.2.4 fixed. Use three independent integration reviews, run the required local and hosted checks, rebuild/open the web and PDF, update the PR and close/sync all completed beads. Do not merge PR #117.
+Continue PR #117 via merge-upstream after main advanced from 373beb36 to 28696526 during closeout. Preserve the revised opening, Figure 1/2 numbering, framework box, representative lower bounds, and Figure 5/touch fixes while integrating the 324-case atlas. Regenerate publication artifacts with v0.2.4 fixed, use three independent integration reviews, and run the required publication, atlas, browser and hosted checks. The user has now explicitly asked to merge when ready. Finish the pre-push rerun, push the reviewed commits, confirm CI and mergeability, merge PR #117, verify the deployed web/PDF/assets against the merge commit, and close/sync completed beads. Do not bump the patch version again.
 
 ## Notes
 
