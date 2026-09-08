@@ -511,6 +511,22 @@ _DIAG_118 = r"""slug => {
     rootPending: document.documentElement.dataset.kpressMathPending ?? null,
     mathReady: document.documentElement.classList.contains('math-ready'),
     slider: document.getElementById('kslider-' + slug)?.value,
+    retry: el.innerText,
+    afterReflow: (() => { void document.body.offsetHeight; return el.innerText; })(),
+    bodyTextLength: document.body.innerText.length,
+    mainTextLength: (document.querySelector('main')?.innerText || '').length,
+    firstKatexText: el.querySelector('.katex-html')?.innerText ?? null,
+    mathmlText: el.querySelector('.katex-mathml')?.innerText ?? null,
+    ancestors: (() => {
+      const rows = [];
+      for (let node = el; node; node = node.parentElement) {
+        const style = getComputedStyle(node);
+        rows.push([node.tagName, String(node.className).slice(0, 40), style.display,
+          style.visibility, style.opacity, style.contentVisibility, style.animationName,
+          node.getClientRects().length, node.innerText.length, node.hidden]);
+      }
+      return rows;
+    })(),
     waitBad: (globalThis.kpressMathFaceWait || []).filter(e => e.outcome !== 'loaded')
       .map(e => [String(e.request).slice(0, 70), e.outcome, String(e.detail).slice(0, 120)])
       .slice(0, 8),
