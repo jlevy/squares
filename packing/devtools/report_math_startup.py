@@ -124,23 +124,36 @@ def geometry_result(
         context = f"{report.get('font_set', 'custom')}-{report.get('prose_font', 'serif')}"
         if "font_contexts" in hypothesis:
             label += f" {context}"
+        before = {box["key"]: box for box in report["before"]}
+        after = {box["key"]: box for box in report["after"]}
+        for stage, boxes in (("before", before), ("after", after)):
+            if len(report[stage]) != len(boxes):
+                problems.append(f"{label}: duplicate {stage} box keys")
+        if "font_contexts" in hypothesis:
             for stage in ("before", "after"):
                 coverage = report.get(f"coverage_{stage}", {})
+                groups = {box.get("group") for box in report[stage]}
                 if (
                     not all(
                         coverage.get(key, 0) > 0 for key in ("targets", "formulas", "bases")
                     )
+                    or coverage.get("bases") != len(report[stage])
+                    or coverage.get("formulas") != len(groups)
+                    or None in groups
                     or coverage.get("missing", ["absent"])
                     or coverage.get("unreserved", ["absent"])
                     or coverage.get("variant_errors", ["absent"])
                     or coverage.get("duplicate_ids", ["absent"])
                 ):
                     problems.append(f"{label}: incomplete {stage} formula coverage")
+            if any(
+                before[key].get("group") != after[key].get("group")
+                for key in before.keys() & after.keys()
+            ):
+                problems.append(f"{label}: formula groups changed between observations")
         if report.get("alternate_certificate", False):
             label += " alternate certificate"
         problems.extend(f"{label}: {finding}" for finding in report["findings"])
-        before = {box["key"]: box for box in report["before"]}
-        after = {box["key"]: box for box in report["after"]}
         if not before or before.keys() != after.keys() or not report["held_fonts"]:
             problems.append(f"{label}: missing boxes or real held font requests")
             continue
@@ -260,7 +273,16 @@ def render(root: Path = CAMPAIGN) -> str:
                     lines.append(f"- {width}px: {spread(values)}; {len(values)} runs.")
             verdict = "invalid" if problems else "baseline"
         elif experiment["kind"] == "geometry":
-            detail, errors = geometry_result(reports, hypotheses["H-001"])
+            geometry = [
+                hypotheses[key]
+                for key in experiment.get("hypotheses", [])
+                if hypotheses[key]["criterion"] == "geometry"
+            ]
+            if len(geometry) != 1:
+                raise ValueError(
+                    "geometry experiment must name exactly one geometry hypothesis"
+                )
+            detail, errors = geometry_result(reports, geometry[0])
             lines.extend(detail)
             problems.extend(errors)
             verdict = "invalid" if problems else "accepted"

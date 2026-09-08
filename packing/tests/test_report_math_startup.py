@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import json
 from copy import deepcopy
+from pathlib import Path
 from typing import Any
 
 import pytest
 
+from devtools import report_math_startup
 from devtools.report_math_startup import (
     CAMPAIGN,
     geometry_result,
@@ -99,7 +102,7 @@ def test_retained_records_validate_and_ledger_is_current() -> None:
 
 
 def geometry_reports() -> list[dict[str, Any]]:
-    box = {"key": 1, "x": 0, "y": 0, "width": 20, "height": 16, "baseline": 12}
+    box = {"key": 1, "group": 0, "x": 0, "y": 0, "width": 20, "height": 16, "baseline": 12}
     return [
         {
             "browser": browser,
@@ -144,18 +147,22 @@ def test_geometry_rechecks_measurements_instead_of_trusting_a_verdict(defect: st
     assert geometry_result(reports, GEOMETRY_RULE)[1]
 
 
-def test_saved_settings_require_complete_context_matrix_and_formula_coverage() -> None:
-    contexts = ["custom-serif", "custom-sans", "system-serif", "system-sans"]
-    rule = {**GEOMETRY_RULE, "font_contexts": contexts}
+FONT_CONTEXTS = ["custom-serif", "custom-sans", "system-serif", "system-sans"]
+SAVED_SETTINGS_RULE = {**GEOMETRY_RULE, "font_contexts": FONT_CONTEXTS}
+
+
+def saved_setting_reports() -> list[dict[str, Any]]:
     reports = []
-    for context in contexts:
+    for context in FONT_CONTEXTS:
         for report in geometry_reports():
             report["font_set"], report["prose_font"] = context.split("-")
             for stage in ("before", "after"):
+                # One formula can legitimately contain several unbreakable bases.
+                report[stage].append({**report[stage][0], "key": 2, "x": 20})
                 report[f"coverage_{stage}"] = {
                     "targets": 1,
                     "formulas": 1,
-                    "bases": 1,
+                    "bases": 2,
                     "missing": [],
                     "unreserved": [],
                     "variant_errors": [],
@@ -170,13 +177,88 @@ def test_saved_settings_require_complete_context_matrix_and_formula_coverage() -
         printed["medium"] = "print"
         printed["browser"] = "chromium"
         reports.append(printed)
-    assert geometry_result(reports, rule)[1] == []
-    assert any("missing registered" in item for item in geometry_result(reports[:-2], rule)[1])
+    return reports
+
+
+def test_saved_settings_require_complete_context_matrix_and_formula_coverage() -> None:
+    reports = saved_setting_reports()
+    assert geometry_result(reports, SAVED_SETTINGS_RULE)[1] == []
+    assert any(
+        "missing registered" in item
+        for item in geometry_result(reports[:-2], SAVED_SETTINGS_RULE)[1]
+    )
     reports[0]["coverage_before"]["unreserved"] = ["a surviving formula lost its box"]
-    assert any("incomplete before" in item for item in geometry_result(reports, rule)[1])
+    assert any(
+        "incomplete before" in item for item in geometry_result(reports, SAVED_SETTINGS_RULE)[1]
+    )
     reports[0]["coverage_before"]["unreserved"] = []
     del reports[0]["coverage_after"]
-    assert any("incomplete after" in item for item in geometry_result(reports, rule)[1])
+    assert any(
+        "incomplete after" in item for item in geometry_result(reports, SAVED_SETTINGS_RULE)[1]
+    )
     for report in reports:
         del report["controls"]["missing_reservation"]
-    assert any("pre-discovery" in item for item in geometry_result(reports, rule)[1])
+    assert any(
+        "pre-discovery" in item for item in geometry_result(reports, SAVED_SETTINGS_RULE)[1]
+    )
+
+
+@pytest.mark.parametrize("stage", ["before", "after"])
+@pytest.mark.parametrize("defect", ["truncated", "duplicate", "formula_count", "regrouped"])
+def test_saved_settings_reconcile_raw_boxes_with_coverage(stage: str, defect: str) -> None:
+    reports = saved_setting_reports()
+    report = reports[0]
+    if defect == "truncated":
+        report[f"coverage_{stage}"]["bases"] = 261
+    elif defect == "duplicate":
+        report[stage].append(deepcopy(report[stage][0]))
+    elif defect == "formula_count":
+        report[f"coverage_{stage}"]["formulas"] = 2
+    else:
+        for box in report[stage]:
+            box["group"] = 99
+    assert geometry_result(reports, SAVED_SETTINGS_RULE)[1]
+
+
+@pytest.mark.parametrize("named", [["H-001"], ["H-004"], [], ["H-001", "H-004"]])
+def test_render_dispatches_the_experiments_registered_geometry_rule(
+    named: list[str], monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """The complete renderer must not apply H001's default-only rule to H004."""
+    reports = geometry_reports()
+    paths = []
+    for index, report in enumerate(reports):
+        path = tmp_path / f"report-{index}.json"
+        path.write_text(json.dumps(report))
+        paths.append(path.name)
+    fixture: dict[str, dict[str, Any]] = {
+        "explorations": {"X-001": {"proposes": ["H-001", "H-004"]}},
+        "hypotheses": {
+            identity: {**rule, "criterion": "geometry", "derived_from": ["X-001"]}
+            for identity, rule in (("H-001", GEOMETRY_RULE), ("H-004", SAVED_SETTINGS_RULE))
+        },
+        "experiments": {
+            "exp-001": {
+                "title": "Geometry dispatch regression",
+                "kind": "geometry",
+                "hypotheses": named,
+                "measurements": paths,
+                "correctness": "passed",
+                "judgment": "Fixture observations cover only default settings.",
+            }
+        },
+    }
+    (tmp_path / "ideas.md").write_text("H-001 H-004")
+    monkeypatch.setattr(
+        report_math_startup, "records", lambda _root, directory: fixture[directory]
+    )
+    if len(named) != 1:
+        with pytest.raises(ValueError, match="exactly one geometry hypothesis"):
+            render(tmp_path)
+    elif named == ["H-001"]:
+        assert "Decision: **accepted**" in render(tmp_path)
+    else:
+        result = render(tmp_path)
+        assert "Decision: **invalid**" in result
+        assert "custom-sans" in result
+        assert "incomplete before formula coverage" in result

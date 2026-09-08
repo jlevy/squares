@@ -14,6 +14,7 @@ import subprocess
 from pathlib import Path
 
 import pytest
+import tinycss2
 
 from devtools import render_explainer
 from devtools.render_explainer import (
@@ -526,14 +527,18 @@ def test_the_page_stylesheet_has_no_orphaned_comment_delimiter(page: str) -> Non
             )
 
 
-def test_no_rule_in_the_page_stylesheet_has_prose_for_a_selector(page: str) -> None:
-    """The other half of the same failure: a selector that is really a sentence.
+def _selector_list(prelude: str) -> list[str]:
+    """Split only top-level commas; functions, strings and escapes stay in one selector."""
+    selectors = [""]
+    for token in tinycss2.parse_component_value_list(prelude):
+        if token == ",":
+            selectors.append("")
+        else:
+            selectors[-1] += token.serialize()
+    return [selector.strip() for selector in selectors]
 
-    An unbalanced comment is one way to get there and a stray `}` is another. A selector
-    cannot contain a semicolon or the word `important`, and a real one here is never
-    hundreds of characters long, so a prelude with any of those is prose that the parser
-    is about to discard along with the rule it was standing in front of.
-    """
+
+def _assert_no_prose_selectors(page: str) -> None:
     for index, css in enumerate(_style_blocks(page)):
         stripped = re.sub(r"/\*.*?\*/", "", css, flags=re.DOTALL)
         # Preludes only: what stands between the end of one rule and the `{` of the next.
@@ -543,7 +548,40 @@ def test_no_rule_in_the_page_stylesheet_has_prose_for_a_selector(page: str) -> N
             assert "important" not in text, (
                 f"style block {index}: selector holds `important`: {text[:80]!r}"
             )
-            assert len(text) < 400, f"style block {index}: selector is prose: {text[:80]!r}"
+            for selector in _selector_list(text):
+                assert len(selector) < 400, (
+                    f"style block {index}: selector is prose: {selector[:80]!r}"
+                )
+
+
+def test_no_rule_in_the_page_stylesheet_has_prose_for_a_selector(page: str) -> None:
+    """Catch prose that silent CSS error recovery would discard along with the next rule.
+
+    An unbalanced comment is one way to get there and a stray `}` is another. Our
+    selectors contain neither a semicolon nor `important`, and each is under 400
+    characters. A valid selector list can exceed that bound, as the four saved-font
+    contexts do, so apply it to each top-level entry rather than the entire prelude.
+    """
+    _assert_no_prose_selectors(page)
+
+
+def test_selector_list_keeps_nested_quoted_and_escaped_commas() -> None:
+    selectors = [":is(.a, :not(.b, .c))", '[data-label="a,b"]', r".a\,b"]
+    assert _selector_list(", ".join(selectors)) == selectors
+
+
+@pytest.mark.parametrize(
+    "prelude",
+    [
+        "text-align: left; .prose",
+        "text-align: left !important .prose",
+        "A sentence outside its comment " * 20,
+        ":is(" + ", ".join("a" * 100 for _ in range(5)) + ")",
+    ],
+)
+def test_prose_selector_guard_rejects_bad_preludes(prelude: str) -> None:
+    with pytest.raises(AssertionError, match=r"selector (holds|is prose)"):
+        _assert_no_prose_selectors(f"<style>{prelude} {{ color: red; }}</style>")
 
 
 def test_every_relative_link_in_the_page_names_a_file_the_deploy_serves(page: str) -> None:

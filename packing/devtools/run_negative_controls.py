@@ -150,6 +150,13 @@ PRUNE = frozenset(
         # have hidden that rather than fixed it, which is what the note above this
         # constant says to check for before raising it a second time.
         ROOT / "site",
+        # Retained browser observations and the frozen HTML control add 2.5 MB,
+        # pushing the 2026-09-08 snapshot beyond 96 MiB. The math-startup reporter
+        # and Pages browser jobs consume them; no registered mutation control does.
+        # Keep the records, schemas and probe sources. Inline-linked or registered
+        # dependencies below these roots still return through snapshot_pruned_targets.
+        ROOT / "benchmarks/math-startup/runs",
+        ROOT / "benchmarks/math-startup/fixtures",
         # Agenda 024's commissioning outputs and its two manager roots are retained
         # research evidence, not mutation-control inputs. Long numerical logs and warm
         # states can grow while the gate is running; copying them into every private

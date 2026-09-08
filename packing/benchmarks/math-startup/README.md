@@ -87,6 +87,25 @@ The next slice finishes that correction, verifies the combined publication, and 
 parallel pre-push and hosted checkpoints.
 No parameter-mode candidate has been measured.
 
+At the 19:26 UTC boundary, the combined `9baa6e08` page passed the focused loading,
+startup, geometry, and print checks, and its seventeen-page PDF passed visual review.
+The full pre-push selection finished in 1,246.67 seconds: all forty-four static steps
+passed, and the behavioral suite reported 4,324 passes and two failures.
+The [retained receipt](runs/push-9baa6e08-failed.log.gz) records a CSS selector-list
+length guard rejecting valid saved-setting selectors and browser evidence pushing the
+mutation snapshot past its size cap.
+The affected guards are being corrected without raising either limit.
+Independent review also found that the geometry report selected the default-only rule
+regardless of the experiment’s named hypothesis and did not reconcile coverage counts
+with raw observations; retained regressions now cover both defects.
+The next slice runs the corrected change-reachable floor, then dispatches the complete
+hosted checkpoint and the still-unmeasured H-003/H-004 comparisons.
+
+The corrected floor against `9baa6e08` passed all forty-five selected steps in 145.03
+seconds, including 889 reachable behavioral tests in 50.28 seconds.
+Its [receipt](runs/push-9baa6e08-corrections-passed.log.gz) records the scoped replay;
+the earlier full selection’s failure remains retained above.
+
 ## Measurement protocol
 
 Run `python -m devtools.check_math_startup` through the frozen project environment from
