@@ -51,11 +51,14 @@ from nodejs_wheel import node
 
 from devtools import render_explainer
 from devtools.render_explainer import (
+    FONT_FACE_BLOCK,
     RELATION_FACES,
     RELATION_FAMILIES,
     RELATION_POINTS,
     RELATION_SIZE_ADJUST,
+    _composite_slot,
     _declares_nothing,
+    _face_family,
     _font_face_reachable,
     _print_sans_face,
     inline_font_urls,
@@ -261,11 +264,11 @@ REACHABILITY_CASES: list[tuple[str, str, bool]] = [
         True,
     ),
     (
-        "sans-slot-at-a-weight-the-page-never-asks-for",
+        "sans-bold-slot-the-reader-preference-can-reach",
         _composite_slot_block(
             "normal", "650", "source-sans-3-latin-wght-normal.woff2", SANS_COMPOSITE
         ),
-        False,
+        True,
     ),
     (
         "sans-print-instance-under-a-drawn-slot",
@@ -282,9 +285,9 @@ REACHABILITY_CASES: list[tuple[str, str, bool]] = [
         False,
     ),
     (
-        "sans-greek-half-of-a-pruned-slot-that-names-a-face-the-page-draws",
+        "sans-greek-half-of-the-reader-preferences-bold-slot",
         _sans_composite_greek("normal", "650", "KaTeX_Main-Bold"),
-        False,
+        True,
     ),
     (
         "sans-greek-half-of-a-drawn-slot",
@@ -306,34 +309,29 @@ def test_only_the_faces_the_page_can_draw_are_kept(block: str, *, reachable: boo
     PT Serif partner goes with it. Keeping the reading half alone would be a slot the CSS
     calls one contract, split -- 40 KB shipped for a range whose Greek is gone.
 
-    The sans composite adds a second rule and a third half. Its bold slots are pinned at
-    650, and this page sets no mathematics in bold inside a sans context, so all three of
-    their faces go: the Source Sans half, the Greek half, and kpress's static print
-    instance for the same slot. The Greek half is the one that would slip through a prune
-    that read a block's `src` before its family, because it names `KaTeX_Main-Bold`, a
-    face the page draws from in prose.
+    The sans composite adds a second rule and a third half. Its upright bold slot stays
+    because the reader can choose sans prose, while bold italic is still unused. Both
+    slots keep or drop their Source Sans half, Greek half, and static print instance
+    together.
     """
     assert _font_face_reachable(block) is reachable
 
 
-def test_the_sans_prune_is_the_bold_slots_and_nothing_else() -> None:
-    """The prune is a statement about this page's mathematics, held to the real one.
+def test_reader_sans_preference_keeps_bold_faces_in_both_media() -> None:
+    """The emitted CSS must cover the bold D in prose when the reader chooses sans.
 
-    Every face of the sans composite is a second data-URI copy of bytes the page already
-    carries, so the prune is worth taking to the weight rather than only to the style --
-    but only while the claim behind it holds. Two halves of that claim are here: the sans
-    slots the page draws are the 400 pair, and the pair it drops is the 650 one, which is
-    what `\\mathbf`, `\\boldsymbol` and `\\textbf` reach. The half that cannot be checked
-    without a browser -- that no sans-context expression uses one of those -- is
-    `check_math_faces` in `inspect_explainer_typography`.
+    Keeping only the normal 400 face makes CSS synthesize bold while KaTeX uses the
+    real 650 metrics. All three pieces must survive: the screen Latin face, Greek, and
+    the print instance. The unused italic 650 slot remains pruned.
     """
-    composite = render_explainer.COMPOSITES[SANS_COMPOSITE]
-    assert composite.drawn == {("normal", "400"), ("italic", "400")}
-    assert set(composite.slots) - composite.drawn == {("normal", "650"), ("italic", "650")}
-    # Three faces a slot, not two: kpress layers a static print instance over the same
-    # Latin range under `@media print`, so a printed page embeds a font rather than the
-    # Type3 outline paths Chromium writes for a variable face away from its default.
-    assert composite.blocks == 3 * len(composite.slots)
+    css = katex_css(kpress_static())
+    faces = [
+        block for block in FONT_FACE_BLOCK.findall(css) if _face_family(block) == SANS_COMPOSITE
+    ]
+    slots = [_composite_slot(block) for block in faces]
+    assert slots.count(("normal", "650")) == 3
+    assert ("italic", "650") not in slots
+    assert "@media print" in css
 
 
 def test_a_composite_the_renderer_does_not_know_fails_the_render() -> None:

@@ -393,15 +393,15 @@ The sans composite is 6 of those faces and 174,568 B of base64: the Source Sans 
 pair, their two KaTeX Greek partners, and kpress’s two static print instances at 400,
 which are what put `KPressPrintSans-400` and `KPressPrintSans-400Italic` in the export
 instead of Type3 outline paths.
-Every one of them is a second copy of bytes the page already carries, which is what
-makes the prune worth taking to the weight rather than only to the style: the 650 slots
-go, and with them 93,684 B of stylesheet.
-KaTeX reaches a bold table from `\mathbf`, `\boldsymbol` and `\textbf` only, and the
-page sets none of the three in a sans context — its three `\mathbf{D}_4` are prose.
-That is a claim about what the built page renders, so `check_math_faces` holds it rather
-than a comment. The italic 650 slot would have gone anyway on the partner rule, since
-`KaTeX_Math-BoldItalic` is outside `KATEX_FACES`. The remaining duplication is
-`kpr-hhdc` and `think-f8q9`, unchanged.
+Every one is a second copy of bytes the page already carries.
+The initial build pruned both 650 slots, removing 93,684 B of stylesheet.
+That assumed the default serif reading preference: the three `\mathbf{D}_4` expressions
+are in prose, but a saved sans preference makes them request the sans bold face.
+[D-486](../../../../defects.md) records the resulting missing-font defect.
+The current build retains the normal 650 slot and its static print instance, and
+`check_math_faces` exercises both saved prose preferences in screen and print media.
+The unused italic 650 slot remains pruned; its `KaTeX_Math-BoldItalic` partner is
+outside `KATEX_FACES`. The remaining duplication is `kpr-hhdc` and `think-f8q9`.
 
 The PDF moved 2,284 B for a strictly better file: two embedded print-sans instances
 more, `KPressQuotes-Regular` for the marks, and `Georgia`’s 16 KB gone.
