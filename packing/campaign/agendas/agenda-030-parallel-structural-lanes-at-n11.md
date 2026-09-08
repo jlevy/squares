@@ -650,7 +650,8 @@ agenda:
         corner and anchor complements remain named. The next principal question is
         whether two squares localized near one segment satisfy a checked pairwise
         compatibility restriction strong enough to reduce the ownership case split.
-        Merge and the corrected-tree checkpoint remain pending.
+        The corrected checkpoint is certified by the retained 69-component evidence;
+        merge publication remains pending at this checkpoint.
       evidence:
       - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
       - packing/campaign/agent-sessions/session-110-pr127-handoff-review.md
@@ -664,7 +665,7 @@ agenda:
       reason: The certified packing bracket is unchanged, so the reader-facing summary needs no bound edit.
     - path: SYNOPSIS.md
       decision: updated
-      reason: The generated agenda and session views will record this closeout and its selected continuation.
+      reason: The generated agenda and session views record this closeout and its selected continuation.
     - path: TUTORIAL.md
       decision: checked-current
       reason: No tutorial algorithm or user workflow changed in this research handoff.
@@ -754,8 +755,9 @@ agenda:
 never opened. [X-021](../explorations/X-021-what-can-be-proved-about-eleven-squares.md)
 carries the structural mathematics, while the frontmatter above is the terminal
 disposition and replanning record.
-The corrected integration checkpoint and merge remain pending and therefore supply no
-certification or bound change here.
+The corrected integration checkpoint is certified by the retained component evidence.
+Merge publication remains pending at this checkpoint.
+No packing bound changes.
 
 ## How It Relates to Agenda 029
 

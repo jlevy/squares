@@ -207,6 +207,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [PR 127 Integration Checkpoint Evidence](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md) | research synthesis | record | retained | — |
 | [PR 127: Research Handoff Review](docs/project/reviews/review-2026-09-08-pr127-research-readiness.md) | dated review record | record | retained | — |
 | [Research Throughput and Time-Box Review](docs/project/reviews/review-2026-09-07-research-throughput-and-timeboxes.md) | dated review record | record | retained | — |
 | [n = 26: Best-Known Upper-Bound Search](docs/project/research/research-2026-09-07-n26-best-known-audit.md) | research synthesis | supporting | maintained | — |
