@@ -4,6 +4,172 @@ softschema:
   status: enforced
 last_reviewed: '2026-09-07'
 evidence:
+  - id: E-green-ds7-theorem9-reported-lower
+    claim: lower-bound
+    scope: {n_min: 2, n_max: 324}
+    assurance: reported
+    reported_method: source-unspecified
+    performed_by: source-author
+    novelty: previously-published
+    relationship_to_generator: unknown-historical
+    origin: external
+    source_key: '[Friedman DS7]'
+    replay_status: public-certificate-missing
+    proof:
+      source: packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.pdf
+      theorem: Theorem 9, PDF page 23
+      scope: For positive integer k, s(k^2+1) >= 2sqrt(2)-1 + (k(k-1)^2+(k-1)sqrt(2k))/(k^2+1); monotonicity transfers the report to larger n.
+      pinpoints: Theorem 9 on PDF page 23; reference [8], Trevor Green, private communication (2000), on page 27.
+      assumptions:
+        - Unit squares may rotate independently and have pairwise disjoint interiors inside a square container; boundary contact is allowed.
+        - k is a positive integer, and the theorem's base square count is k^2+1.
+        - Transfer to a case n requires n >= k^2+1; deleting squares from an n-square packing establishes the required monotonicity.
+        - This audit includes only base counts and receiving cases at most 324, hence k=1 through 17.
+      audit_record: packing/devtools/audit_ds7_lower_bounds.py
+    external_review:
+      state: not-reviewed
+      date: '2026-09-07'
+      note: The source statement, positive-integer specializations through k=17, and exact comparisons were checked; the missing proof was not reviewed.
+    limitations: >-
+      Reported only. Friedman's survey supplies no proof of this general result.
+      Exact rational radical enclosures verify its algebraic specializations and
+      their ordering, not the geometric theorem. The audited horizon is n<=324.
+      The printed Table 2 expression for n82-85, 2sqrt(2)+(288+12sqrt(3))/41,
+      contradicts its own 9.2667 decimal and the trivial upper bound 10.
+      The selected k=9 value (247+94sqrt(2))/41 comes from Theorem 9, not that
+      malformed table cell. Archived source bytes remain unchanged.
+    blocker:
+      kind: source-evidence
+      detail: Recover Green's complete proof or independently verify substitute geometric certificates before any promotion to verified status.
+    source_reviewed: '2026-09-07'
+
+  - id: E-green-ds7-theorem10-reported-lower
+    claim: lower-bound
+    scope: {n_min: 2, n_max: 324}
+    assurance: reported
+    reported_method: source-unspecified
+    performed_by: source-author
+    novelty: previously-published
+    relationship_to_generator: unknown-historical
+    origin: external
+    source_key: '[Friedman DS7]'
+    replay_status: public-certificate-missing
+    proof:
+      source: packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.pdf
+      theorem: Theorem 10, PDF page 23
+      scope: For positive integer k, s(k^2+floor(k/2)+1) >= 2sqrt(2)+2(k-2)/sqrt(5); monotonicity transfers the report to larger n.
+      pinpoints: Theorem 10 on PDF page 23; Table 2 on pages 25-26; reference [8] on page 27.
+      assumptions:
+        - Unit squares may rotate independently and have pairwise disjoint interiors inside a square container; boundary contact is allowed.
+        - k is a positive integer, and the theorem's base square count is k^2+floor(k/2)+1; no further parity or lower-threshold restriction is printed.
+        - Transfer to a case n requires n >= k^2+floor(k/2)+1; deleting squares from an n-square packing establishes the required monotonicity.
+        - This audit includes only base counts and receiving cases at most 324, hence k=1 through 17.
+      audit_record: packing/devtools/audit_ds7_lower_bounds.py
+    external_review:
+      state: not-reviewed
+      date: '2026-09-07'
+      note: Source formula, floor threshold, and exact specializations were checked; no complete geometric proof was available for review.
+    limitations: >-
+      Source-reported only. The audit compares all positive-integer k whose base
+      case is at most 324 and preserves stronger existing reports. In particular,
+      k=4 applies from n19, k=5 from n28, and k=6 from n40. The fact that the
+      source table omits or later supersedes some specializations does not narrow
+      the printed general theorem. At n19-20 this literal specialization exceeds
+      Table 2's 6sqrt(2)-4; the source supplies no restriction explaining the
+      weaker table row. Selection does not imply historical table acceptance.
+      No independently verified field depends on it.
+    blocker:
+      kind: source-evidence
+      detail: Recover Green's complete proof or independently verify substitute geometric certificates before any promotion to verified status.
+    source_reviewed: '2026-09-07'
+
+  - id: E-friedman-ds7-table2-opaque-lower
+    claim: lower-bound
+    scope: {n_values: [13, 21, 31]}
+    assurance: reported
+    reported_method: source-unspecified
+    performed_by: source-author
+    novelty: previously-published
+    relationship_to_generator: unknown-historical
+    origin: external
+    source_key: '[Friedman DS7]'
+    replay_status: public-certificate-missing
+    limitations: >-
+      Table 2 prints only decimals for n13 (3.8437, Friedman), n21 (4.7438,
+      Friedman), and n31 (5.6415, Green), with no exact identity or rounding
+      guarantee. These are opaque reported metadata, not theorems asserting those
+      decimal rational numbers exactly. Only n21 improves the current reported
+      display; its independently verified 4.85 remains unchanged. The other two
+      displays are below their existing reported and verified bounds. Exact
+      radical comparisons do not include these opaque rows.
+    blocker:
+      kind: source-evidence
+      detail: Recover the exact values, rounding meaning, and source proofs before making exact comparisons or verified-bound claims.
+    source_reviewed: '2026-09-07'
+
+  - id: E-n017-maciver-reported-lower
+    claim: lower-bound
+    scope: {n_values: [17, 18]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    novelty: previously-published
+    relationship_to_generator: unknown-historical
+    origin: external
+    source_key: '[MacIver 2026 n17]'
+    replay_status: public-certificate-missing
+    proof:
+      source: packing/resources/web/maciver-square-packing-2026-09-07/maciver-2026-seventeen-unit-squares-lower-bound.pdf
+      theorem: Theorem 1.1 and Corollary 1.2
+      scope: Source claim s(17), s(18) > (40sqrt(2)+19)/17 + 1/200, approximately 4.450208382054341.
+      pinpoints: Printed page 1; Appendix A describes the fourteen certificates, exact ledger, and partial Lean coverage.
+      assumptions:
+        - Unit squares may rotate independently and have pairwise disjoint interiors.
+        - The claimed nonpacking result concerns a closed square container at the exact stated side.
+        - The eighteen-square corollary uses monotonicity from the seventeen-square claim.
+      audit_record: packing/resources/web/maciver-square-packing-2026-09-07/README.md
+    external_review:
+      state: not-reviewed
+      date: '2026-09-07'
+      reviewed_by: repository
+      note: Source identification, title-page inspection, proof-coverage inspection, and public-file inventory only; no full proof audit or local replay.
+    limitations: >-
+      The manuscript dated 8 August 2026 is retained at public commit
+      9e2cd597047e040a63b7dcd103e79962cfc2d781 (10 August 2026).
+      It reports a completed aggregate replay, but the inspected snapshot contains
+      none of the named C1-C14 certificate files, cited scripts/s17_green_*.py
+      replay and ledger programs, or Makefile targets. The public Lean S17 file
+      proves supporting algebra and an abstract counting identity, not the full
+      nonpacking theorem. Successful upstream Lean CI does not cover those missing
+      computations and was not replayed locally. The author discloses AI assistance
+      and incomplete human review. This historical value is below the independently
+      verified 459/100 for both cases and replaces neither verified lower bound.
+    blocker:
+      kind: source-evidence
+      detail: Obtain C1-C14, the exact ledger and theorem assembler, and their replay dependencies; then inspect their geometric interfaces and replay the complete theorem at the pinned target.
+    source_reviewed: '2026-09-07'
+
+  - id: E-green26-reported-lower
+    claim: lower-bound
+    scope: {n_values: [26, 27]}
+    assurance: reported
+    reported_method: source-unspecified
+    performed_by: source-author
+    novelty: previously-published
+    relationship_to_generator: unknown-historical
+    source_key: '[Friedman DS7]'
+    replay_status: public-certificate-missing
+    limitations: >-
+      Friedman's survey Theorem 9 at k=5 and Table 2 report
+      s(26), s(27) >= 2sqrt(2)+(27+2sqrt(10))/13, approximately 5.3918,
+      attributed to Trevor Green, reference [8], private communication (2000).
+      The survey supplies neither its proof nor the n26 point coordinates.
+      A source statement and its algebraic specialization are not a verified lower bound.
+    blocker:
+      kind: source-evidence
+      detail: Recover Green's proof and its geometric data, or build and independently verify a complete substitute certificate.
+    source_reviewed: '2026-09-07'
+
   - id: E-kingbird-upper-register
     claim: upper-bound
     scope: {n_min: 1, n_max: 324}
@@ -1890,13 +2056,17 @@ evidence:
         register, which for n = 19, 20 and 21 hold Nagamochi's 2005 closed form, Bentz's
         2016 proof at n = 22, Friedman's record tables, and this project's own T-019 at
         459/100. The frozen arXiv, Crossref, OpenAlex, and Zenodo search receipts are
-        retained at resources/web/literature-refresh-2026-09-05/README.md. No external
-        source in that corpus states a bound specific to any of these three sizes above
-        the register's prior value.
+        retained at resources/web/literature-refresh-2026-09-05/README.md. The September 7
+        DS7 audit corrected omissions in this source record: the printed Theorem 10
+        specialization reports approximately 4.6172815 at n19 and n20, and Table 2
+        reports the opaque decimal 4.7438 at n21. These reports are below 4.80; their
+        proof gaps and source caveats remain explicit.
       searched: >-
         Searched for any lower bound on s(19), s(20) or s(21) above the closed form
         min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1), including the frozen
-        2026-09-05 refresh. The corpus holds none at any of the three. De Winter's mutable
+        2026-09-05 refresh. The subsequent DS7 audit found the omitted reports named
+        above, so the earlier absence claim is withdrawn. No bound at or above 4.80 was
+        identified in the checked external sources. De Winter's mutable
         report concerns proposed upper-bound constructions at n = 68, 126 and 206; its
         coordinates were unavailable and its values were not replayed, so it is
         irrelevant to lower bounds at n = 17 through 21.

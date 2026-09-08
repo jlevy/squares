@@ -1,0 +1,305 @@
+{
+  "status": "interrupted",
+  "description": "Pre-push at clean 4efa2e5f passed 44 steps. The coordinator stopped the behavioral step after independent static review identified two assertions still pinned to the old CI layout; no passing combined pre-push result is claimed.",
+  "source": {
+    "available_cpus": 3,
+    "commit": "4efa2e5f506e70db34c78c264921f9e515d05de0",
+    "dirty_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "environment": {
+      "PACK_JOBS": "1"
+    },
+    "git_status": "",
+    "inner_jobs": 1,
+    "interpreter": "/Users/levy/.codex/worktrees/b1d9/squares/packing/.venv/bin/python3",
+    "jobs": 2,
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.7 free-threading build (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+    "run_id": "f830df1209cd46e5afa54af5546250b9",
+    "selected_steps": [
+      "lint floor (ruff)",
+      "type floor (basedpyright)",
+      "prospective n=101..324 source map",
+      "abstract size-five contact-scaffold atlas",
+      "bead tree",
+      "golden basin maps (proved cases, checked against mathematics)",
+      "basin identity",
+      "soft-schema validation",
+      "derivation (needs sympy)",
+      "H-041 Stromquist repaired-cover exact certificate",
+      "H-010 Stromquist printed-cover exact rejection",
+      "exact verification",
+      "verifier perturbation limits",
+      "frontier corpus",
+      "frontier rigidity assessed here",
+      "generated tables in sync with frontier/",
+      "strategy catalogues",
+      "defect log",
+      "skills mirrored between .agents and .claude",
+      "synopsis agrees with the artifacts",
+      "README agrees with the directory",
+      "AGENTS.md mirrors the operating rules",
+      "agenda map agrees with the agendas",
+      "work accounting agrees on one unit",
+      "assembly coverage agrees with the contract",
+      "chunk taxonomy agrees with the corpus",
+      "session clocks are readable",
+      "n=5 rigidity certificates still verify",
+      "every session's cost is attributed",
+      "the branch cost rollup renders",
+      "control anchors still resolve",
+      "tier ceilings are declared and not slack",
+      "the borrowed lower bounds re-derive",
+      "the inventory agrees with the register",
+      "results rungs are earned and the view agrees",
+      "the synopsis headline carries every result",
+      "exact certificates are named by their records",
+      "rung figures agree with their certificates",
+      "case prose agrees with its own front matter",
+      "terminal sessions name what they cost",
+      "terminal sessions name the gate that certified them",
+      "Goebel's family reaches the sizes it reaches",
+      "provenance: recorded commits are reachable",
+      "campaign record",
+      "reachable behavioral tests"
+    ],
+    "started_at": "2026-09-08T07:54:57.401066+00:00",
+    "untracked_hashes": {}
+  },
+  "operator_environment": {
+    "PYTEST_ADDOPTS": "-n 2 --dist worksteal --maxfail=1",
+    "DYLD_FALLBACK_LIBRARY_PATH": "/opt/homebrew/lib"
+  },
+  "selected_count": 45,
+  "total_count": 69,
+  "results": [
+    {
+      "name": "lint floor (ruff)",
+      "status": "passed",
+      "seconds": 0.17783099999360275
+    },
+    {
+      "name": "type floor (basedpyright)",
+      "status": "passed",
+      "seconds": 29.169436458003474
+    },
+    {
+      "name": "prospective n=101..324 source map",
+      "status": "passed",
+      "seconds": 0.49904379100189544
+    },
+    {
+      "name": "abstract size-five contact-scaffold atlas",
+      "status": "passed",
+      "seconds": 1.9128861670033075
+    },
+    {
+      "name": "bead tree",
+      "status": "passed",
+      "seconds": 24.785338499990758
+    },
+    {
+      "name": "golden basin maps (proved cases, checked against mathematics)",
+      "status": "passed",
+      "seconds": 0.5581744170049205
+    },
+    {
+      "name": "basin identity",
+      "status": "passed",
+      "seconds": 4.338556707996759
+    },
+    {
+      "name": "soft-schema validation",
+      "status": "passed",
+      "seconds": 8.136051250010496
+    },
+    {
+      "name": "derivation (needs sympy)",
+      "status": "passed",
+      "seconds": 0.9481306670058984
+    },
+    {
+      "name": "H-041 Stromquist repaired-cover exact certificate",
+      "status": "passed",
+      "seconds": 0.39864304100046866
+    },
+    {
+      "name": "H-010 Stromquist printed-cover exact rejection",
+      "status": "passed",
+      "seconds": 0.34716579101223033
+    },
+    {
+      "name": "exact verification",
+      "status": "passed",
+      "seconds": 61.99977937499352
+    },
+    {
+      "name": "verifier perturbation limits",
+      "status": "passed",
+      "seconds": 1.0405814580008155
+    },
+    {
+      "name": "frontier corpus",
+      "status": "passed",
+      "seconds": 0.6295412089966703
+    },
+    {
+      "name": "frontier rigidity assessed here",
+      "status": "passed",
+      "seconds": 1.2923658340005204
+    },
+    {
+      "name": "generated tables in sync with frontier/",
+      "status": "passed",
+      "seconds": 0.9148413329967298
+    },
+    {
+      "name": "strategy catalogues",
+      "status": "passed",
+      "seconds": 0.002059958002064377
+    },
+    {
+      "name": "defect log",
+      "status": "passed",
+      "seconds": 0.5344422080088407
+    },
+    {
+      "name": "skills mirrored between .agents and .claude",
+      "status": "passed",
+      "seconds": 0.043433832994196564
+    },
+    {
+      "name": "synopsis agrees with the artifacts",
+      "status": "passed",
+      "seconds": 2.138674166999408
+    },
+    {
+      "name": "README agrees with the directory",
+      "status": "passed",
+      "seconds": 1.2588315839966526
+    },
+    {
+      "name": "AGENTS.md mirrors the operating rules",
+      "status": "passed",
+      "seconds": 0.07989937500678934
+    },
+    {
+      "name": "agenda map agrees with the agendas",
+      "status": "passed",
+      "seconds": 0.13203320901084226
+    },
+    {
+      "name": "work accounting agrees on one unit",
+      "status": "passed",
+      "seconds": 0.4504966669919668
+    },
+    {
+      "name": "assembly coverage agrees with the contract",
+      "status": "passed",
+      "seconds": 0.5064907500054687
+    },
+    {
+      "name": "chunk taxonomy agrees with the corpus",
+      "status": "passed",
+      "seconds": 1.3790825830074027
+    },
+    {
+      "name": "session clocks are readable",
+      "status": "passed",
+      "seconds": 0.233431250002468
+    },
+    {
+      "name": "n=5 rigidity certificates still verify",
+      "status": "passed",
+      "seconds": 0.45595741699798964
+    },
+    {
+      "name": "every session's cost is attributed",
+      "status": "passed",
+      "seconds": 4.699601790998713
+    },
+    {
+      "name": "the branch cost rollup renders",
+      "status": "passed",
+      "seconds": 20.698149124989868
+    },
+    {
+      "name": "control anchors still resolve",
+      "status": "passed",
+      "seconds": 0.134455125007662
+    },
+    {
+      "name": "tier ceilings are declared and not slack",
+      "status": "passed",
+      "seconds": 0.3996508749987697
+    },
+    {
+      "name": "the borrowed lower bounds re-derive",
+      "status": "passed",
+      "seconds": 0.2910744999971939
+    },
+    {
+      "name": "the inventory agrees with the register",
+      "status": "passed",
+      "seconds": 0.23872291699808557
+    },
+    {
+      "name": "results rungs are earned and the view agrees",
+      "status": "passed",
+      "seconds": 0.26194174999545794
+    },
+    {
+      "name": "the synopsis headline carries every result",
+      "status": "passed",
+      "seconds": 0.13509962499665562
+    },
+    {
+      "name": "exact certificates are named by their records",
+      "status": "passed",
+      "seconds": 0.24152099998900667
+    },
+    {
+      "name": "rung figures agree with their certificates",
+      "status": "passed",
+      "seconds": 0.40376212500268593
+    },
+    {
+      "name": "case prose agrees with its own front matter",
+      "status": "passed",
+      "seconds": 0.2398188749939436
+    },
+    {
+      "name": "terminal sessions name what they cost",
+      "status": "passed",
+      "seconds": 0.7226287499943282
+    },
+    {
+      "name": "terminal sessions name the gate that certified them",
+      "status": "passed",
+      "seconds": 0.8367847500048811
+    },
+    {
+      "name": "Goebel's family reaches the sizes it reaches",
+      "status": "passed",
+      "seconds": 2.9188935830025002
+    },
+    {
+      "name": "provenance: recorded commits are reachable",
+      "status": "passed",
+      "seconds": 2.6702672079991316
+    },
+    {
+      "name": "campaign record",
+      "status": "passed",
+      "seconds": 1.447455292000086
+    },
+    {
+      "name": "reachable behavioral tests",
+      "status": "failed",
+      "seconds": 320.1354970000102
+    }
+  ],
+  "repair_targets": [
+    "packing/tests/test_module_boundaries.py::test_deferred_slow_review_has_its_required_git_history",
+    "packing/tests/test_module_boundaries.py: full integration command assertion"
+  ]
+}

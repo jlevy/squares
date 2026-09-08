@@ -36,9 +36,11 @@ hand-written records to show that the rules are the ones the corpus already foll
   the release's own `offered_side` under `E-unitsquare-release1-report`.
 - `verified_upper_bound` is `ceil(sqrt(n))` under `E-basic-grid-upper`: a ceiling this
   repository can certify, never a reading of `s(n)`.
-- both lower bounds are Nagamochi's closed form under `E-nagamochi-lower`, except that a
-  perfect square reports the area bound under `E-basic-area-lower`, which is what the
-  hand-written perfect squares do.
+- the independently verified lower bound is Nagamochi's closed form under
+  `E-nagamochi-lower`. The reported lower field takes the stronger of that identity and
+  the source candidates in `audit_ds7_lower_bounds`; Green's missing proofs remain
+  source-reported only. A perfect square reports the area bound under
+  `E-basic-area-lower`, which is what the hand-written perfect squares do.
 - `status` is `proved` only where the verified lower bound meets the reported upper
   bound exactly. In `101..324` that is the 24 cases `k^2`, `k^2 - 1` and `k^2 - 2` for
   `k = 11..18`, and nothing else.
@@ -214,6 +216,15 @@ from typing import Any, Protocol
 import yaml
 from strif import atomic_output_file
 
+from devtools.audit_ds7_lower_bounds import (
+    GREEN9,
+    GREEN10,
+    best_candidate,
+    compare,
+    nagamochi,
+    opaque_payload,
+    reported_payload,
+)
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -326,13 +337,11 @@ NAGAMOCHI_DISPLAY = "s(N) ≥ min{ ⌈√N⌉,  √(N − 2⌊√N⌋ + 1) + 1 }
 #: same thing without the arithmetic, and the counted form is emitted only where the
 #: corpus that owns it already carries it.
 NAGAMOCHI_DEFAULT_COUNTED = (
-    "This is the default across almost the whole open frontier — 58 of the 65 open cases "
-    "at `n ≤ 100` are governed by it, and outside this repository’s own displacements it "
-    "has not been improved since 2005."
+    "At `n ≤ 100`, this theorem supplies the independently verified lower bound in "
+    "58 of the 65 open cases. Source-reported bounds are recorded separately."
 )
 NAGAMOCHI_DEFAULT_UNCOUNTED = (
-    "This is the default across almost the whole open frontier, and outside this "
-    "repository’s own displacements it has not been improved since 2005."
+    "Source-reported bounds are recorded separately from this independently verified theorem."
 )
 
 #: `construction_method` enum value -> the phrase the corpus's prose uses for it. Read off
@@ -1222,6 +1231,9 @@ def build_payload(
         else [*upper_evidence, NAGAMOCHI_EVIDENCE, GRID_UPPER_EVIDENCE]
     )
     blockers: list[dict[str, Any]] = []
+    for lower_evidence in reported_lower["evidence"]:
+        if lower_evidence not in rollup:
+            rollup.append(lower_evidence)
     if trails:
         # The blocker's evidence is the *same list object* the reported upper bound
         # carries, which is how the hand-written records read and how they serialise
@@ -1232,6 +1244,15 @@ def build_payload(
                 "kind": "source-evidence" if source.is_unitsquare else "mathematics",
                 "detail": UNITSQUARE_BLOCKER if source.is_unitsquare else UPPER_GAP_BLOCKER,
                 "evidence": reported_upper["evidence"],
+            }
+        )
+    if any(ref in (GREEN9, GREEN10) for ref in reported_lower["evidence"]):
+        blockers.append(
+            {
+                "kind": "source-evidence",
+                "detail": "Green's reported lower-bound proof, cited as private communication "
+                "by Friedman, has not been recovered or independently replayed.",
+                "evidence": list(reported_lower["evidence"]),
             }
         )
     resources = [KINGBIRD_RESOURCE, FRIEDMAN_RESOURCE]
@@ -1444,6 +1465,15 @@ def _reported_lower(n: int, side: int) -> dict[str, Any]:
             "scope": None,
             "evidence": [AREA_LOWER_EVIDENCE],
         }
+    candidate = best_candidate(n)
+    if n == 21:
+        return opaque_payload(n)
+    if (
+        candidate is not None
+        and candidate.evidence is not None
+        and compare(candidate.expression, nagamochi(n))["sign"] > 0
+    ):
+        return reported_payload(candidate, n)
     return {
         "value": nagamochi_value(n, REPORTED_SIGNIFICANT),
         "exact_form": None,
@@ -1602,13 +1632,16 @@ def _packing_section(
     return lines
 
 
-def _nagamochi_lower_section(n: int) -> list[str]:
+def nagamochi_lower_section(n: int, payload: Mapping[str, Any]) -> list[str]:
+    """Describe the verified theorem separately from any stronger external report."""
     default = (
         NAGAMOCHI_DEFAULT_COUNTED if n <= HAND_AUTHORED_MAX else NAGAMOCHI_DEFAULT_UNCOUNTED
     )
-    return [
-        "Nothing specific to this `n` has ever been proved.",
-        "The bound is Nagamochi’s general closed form, which applies to every `N ≥ 4`:",
+    lines = [
+        (
+            "The strongest lower bound independently verified in this record is "
+            "Nagamochi’s general closed form, which applies to every `N ≥ 4`:"
+        ),
         "",
         "```",
         NAGAMOCHI_DISPLAY,
@@ -1616,6 +1649,25 @@ def _nagamochi_lower_section(n: int) -> list[str]:
         "",
         default,
     ]
+    reported = payload["reported_lower_bound"]
+    if any(ref in (GREEN9, GREEN10) for ref in reported["evidence"]):
+        lines.extend(
+            [
+                "",
+                (
+                    f"The reported lower-bound expression for `s({n})` is "
+                    f"`{reported['exact_form']}` "
+                    f"(approximately `{reported['value']}`). {reported['note']}"
+                ),
+                (
+                    "This is a source-reported lower bound; it does not replace the "
+                    "verified bound above. The exact specialization and comparison are "
+                    "retained by "
+                    "[`audit_ds7_lower_bounds`](../devtools/audit_ds7_lower_bounds.py)."
+                ),
+            ]
+        )
+    return lines
 
 
 def _ceiling_section(n: int, payload: Mapping[str, Any]) -> list[str]:
@@ -1692,13 +1744,13 @@ def render_body(
         )
         lines.append(
             f"Open. The best known {known} gives `s({n}) ≤ "
-            f"{shown}`, and the best proved lower bound is "
+            f"{shown}`, and the strongest lower bound independently verified here is "
             f"`{display_lower(verified_lower_value)}` from Nagamochi’s general theorem, "
             f"leaving a gap of `{display_gap(reported_value, verified_lower_value)}`. "
             f"General closed form: {NAGAMOCHI_NOTE.split(': ', 1)[1]}"
         )
         lines.append("")
-        if payload["blockers"]:
+        if Decimal(str(payload["verified_upper_bound"]["value"])) > Decimal(reported_value):
             lines.extend(_ceiling_section(n, payload))
 
     lines.append("## The packing")
@@ -1715,18 +1767,20 @@ def render_body(
             "area bound `√n` is already tight."
         )
     else:
-        lines.extend(_nagamochi_lower_section(n))
+        lines.extend(nagamochi_lower_section(n, payload))
     lines.append("")
     lines.append(COMMON_DOC_FOOTER)
 
     # Formatted in process by the Python build of the same formatter the pre-commit hook
     # runs, so a generated record arrives already wrapped the way the register is and the
-    # hook has nothing to restage. `render_explainer.py` loads it the same way and for
+    # hook has nothing to restage. Smart quotes also apply to source notes inserted
+    # into prose; their frontmatter transcription remains unchanged.
+    # `render_explainer.py` loads it the same way and for
     # the same reason: a network fetch inside a generator would make it depend on an
     # index being reachable.
     from flowmark import reformat_text  # noqa: PLC0415
 
-    return reformat_text("\n".join(lines), semantic=True, cleanups=True)
+    return reformat_text("\n".join(lines), semantic=True, cleanups=True, smartquotes=True)
 
 
 def render_record(

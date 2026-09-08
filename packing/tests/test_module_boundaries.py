@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 import ast
+import io
+import json
 import os
 import re
+import shlex
 import subprocess
 import sys
+from contextlib import redirect_stdout
 from pathlib import Path
 from typing import cast
 
@@ -14,12 +18,14 @@ import pytest
 import yaml
 
 from devtools.check_readme import meaningful_top_level_entries
+from sqpack.cli import validate
 from sqpack.project import ProjectLayoutError, require_project_root
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY_ROOT = PROJECT_ROOT.parent
 SOURCE_ROOT = PROJECT_ROOT / "src" / "sqpack"
 VALIDATION_WORKFLOW = REPOSITORY_ROOT / ".github" / "workflows" / "packing-validation.yml"
+DEEP_GATE_WORKFLOW = VALIDATION_WORKFLOW.with_name("deep-gate.yml")
 PYTHON_VERSION = PROJECT_ROOT / ".python-version"
 
 
@@ -170,41 +176,114 @@ def test_readme_inventory_ignores_cache_only_legacy_directories(tmp_path: Path) 
     assert meaningful_top_level_entries(repository) == {"README.md", "current"}
 
 
-def test_deferred_slow_review_has_its_required_git_history() -> None:
-    # Found by the step it needs rather than by a job name, the way
-    # `test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock` ties the
-    # same requirement to the provenance surface. The slow lane moved to a job of its own
-    # on 2026-09-08 and the requirement moved with it; a lookup by job name would have
-    # gone on passing against whichever job kept the name.
-    #
-    # Both workflows, and both on the same day. `deep-gate.yml` gave the lane a runner
-    # after run 34177317419 killed it at 1800s beside the escape screen; the backstop in
-    # `packing-validation.yml` did the same after run 34185998810 killed it at 1801.00s
-    # the same way. Each file runs the lane in exactly one job, and that job clones deep.
-    workflows = (VALIDATION_WORKFLOW.with_name("deep-gate.yml"), VALIDATION_WORKFLOW)
-    for workflow in workflows:
-        jobs = _mapping(_mapping(yaml.safe_load(workflow.read_text()))["jobs"])
-        carrying: list[str] = []
-        for job_name, raw_job in jobs.items():
-            raw_steps = _mapping(raw_job).get("steps")
-            assert isinstance(raw_steps, list)
-            steps = [_mapping(step) for step in raw_steps]
-            if not any(
-                '--only "slow behavioral tests"' in " ".join(str(step.get("run", "")).split())
-                for step in steps
-            ):
-                continue
-            carrying.append(job_name)
-            checkout = next(
-                step
-                for step in steps
-                if str(step.get("uses", "")).startswith("actions/checkout@")
+def _gate_jobs(workflow: Path) -> dict[str, tuple[list[dict[str, object]], str]]:
+    """Each post-merge or deferred gate job: its steps and selected command."""
+    document = yaml.safe_load(workflow.read_text(encoding="utf-8"))
+    found: dict[str, tuple[list[dict[str, object]], str]] = {}
+    for job_name, job in _mapping(_mapping(document)["jobs"]).items():
+        if "github.event_name == 'pull_request'" in str(_mapping(job).get("if", "")):
+            continue
+        raw_steps = _mapping(job)["steps"]
+        assert isinstance(raw_steps, list)
+        steps = [_mapping(step) for step in raw_steps]
+        commands = [
+            str(step["run"])
+            for step in steps
+            if isinstance(step.get("run"), str) and "packing-validate" in str(step["run"])
+            if "github.event_name == 'pull_request'" not in str(step.get("if", ""))
+        ]
+        if commands:
+            assert len(commands) == 1, f"{job_name} runs the gate twice"
+            found[job_name] = (steps, commands[0])
+    return found
+
+
+def _selected_steps(command: str) -> set[str]:
+    """What the CLI itself says a workflow command selects, via `--list --format json`.
+
+    Resolved through the CLI rather than by reading the `--only` names off the command,
+    for the reason `test_deep_gate_workflow.py` gives for the same helper: `--only` is a
+    substring match and `--skip` narrows it, and a private copy of either rule would drift
+    from the selector it stands in for.
+    """
+    tokens = shlex.split(command)
+    arguments = tokens[tokens.index("packing-validate") + 1 :]
+    stdout = io.StringIO()
+    with redirect_stdout(stdout):
+        status = validate.main(["--list", "--format", "json", *arguments])
+    assert status == 0, f"the CLI refused the workflow's own command: {command}"
+    return {str(entry["name"]) for entry in json.loads(stdout.getvalue())}
+
+
+def _checkout_depth(steps: list[dict[str, object]]) -> object:
+    checkout = next(
+        step for step in steps if str(step.get("uses", "")).startswith("actions/checkout@")
+    )
+    return _mapping(checkout.get("with") or {}).get("fetch-depth")
+
+
+@pytest.mark.parametrize("workflow", [DEEP_GATE_WORKFLOW, VALIDATION_WORKFLOW])
+def test_whichever_job_runs_the_slow_lane_fetches_full_history(workflow: Path) -> None:
+    """The slow retained-theorem review reads exact historical Git objects.
+
+    Found by what the job selects rather than by its name. This test used to open
+    `deferred-steps` directly, and the lane it guards is the next candidate for a runner
+    of its own: it gained xdist with `D-484`, and a split would be built the way the
+    `screen` job was, by copying the shallow solo job beside it. Repointing a name-keyed
+    test at the new job is the natural accommodation, and `fetch-depth: 0` is exactly what
+    that copy would have lost. Keyed to the selection, the test follows the lane to
+    whichever job runs it and fails on the shallow clone instead.
+    """
+    carriers = {
+        job_name: steps
+        for job_name, (steps, command) in _gate_jobs(workflow).items()
+        if "slow behavioral tests" in _selected_steps(command)
+    }
+    assert len(carriers) == 1, f"the slow lane runs in {sorted(carriers) or 'no job'}"
+    [(job_name, steps)] = carriers.items()
+    assert _checkout_depth(steps) == 0, (
+        f"{job_name} runs the slow retained-theorem review, which reads exact historical "
+        "Git objects, and must check out with fetch-depth: 0"
+    )
+
+
+def test_the_other_deep_gate_jobs_need_no_history_and_the_screen_is_one_of_them() -> None:
+    """Shallow is enough for a job whose selection reads no Git object.
+
+    The rule is the one `test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_
+    the_lock` applies to the post-merge jobs: a job that runs the whole gate reaches the
+    provenance step and needs full history, and a job restricted with `--only` needs none
+    as long as it selects no provenance surface. This workflow has one more reader of
+    history, the slow lane, which the test above follows to its job; every other deep-gate
+    job is held to the rule here.
+
+    `screen` is named because it is the job `D-484` split out and the one nothing had
+    asserted a checkout depth for. The screen reads `packing/atlas/known-best/*` and
+    `packing/witnesses/*` from the working tree and no Git object, so its shallow checkout
+    is correct today and `fetch-depth: 0` is not required of it. That is what is asserted:
+    the job is an `--only` job and its selection touches no provenance, which is the whole
+    of what makes shallow enough -- written in the form that says the same of the next
+    solo job.
+    """
+    provenance = {step.name for step in validate.STEPS if step.name.startswith("provenance")}
+    assert provenance, "the provenance step has moved; this rule no longer knows its name"
+
+    jobs = _gate_jobs(DEEP_GATE_WORKFLOW)
+    selections = {job_name: _selected_steps(command) for job_name, (_, command) in jobs.items()}
+
+    assert "screen" in jobs
+    assert "--only" in shlex.split(jobs["screen"][1])
+    assert selections["screen"] == {"single-square translation escape screen"}
+
+    for job_name, (steps, command) in jobs.items():
+        if "slow behavioral tests" in selections[job_name]:
+            continue  # held to full history by the test above, for its own reason
+        if "--only" not in shlex.split(command):
+            assert _checkout_depth(steps) == 0, f"{job_name} runs a tier and needs full history"
+        else:
+            assert not selections[job_name] & provenance, (
+                f"{job_name} is shallow but selects the provenance surface"
             )
-            assert _mapping(checkout.get("with") or {}).get("fetch-depth") == 0, (
-                f"{workflow.name}: {job_name}: the slow retained-theorem review reads "
-                "exact historical Git objects"
-            )
-        assert len(carrying) == 1, (workflow.name, carrying)
 
 
 def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -> None:
@@ -213,7 +292,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     assert PYTHON_VERSION.read_text(encoding="utf-8").strip() == "3.14.7"
 
-    for job_name in ("validate", "suite", "exhaustive", "slow-lane", "macos-portability"):
+    for job_name in ("validate", "suite", "exhaustive", "screen", "macos-portability"):
         raw_steps = _mapping(jobs[job_name])["steps"]
         assert isinstance(raw_steps, list)
         steps = [_mapping(step) for step in raw_steps]
@@ -353,26 +432,15 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         if _mapping(step).get("name") == "Run the complete integration surface"
     )
     assert full_step["if"] == "github.event_name != 'pull_request'"
-    # Two `--skip`s, because the exhaustive exact tier is the `exhaustive` job's whole
-    # selection and the slow behavioural lane is `slow-lane`'s, and neither is a bill to
-    # pay twice. That the three selections still partition `STEPS` is checked against the
-    # CLI's own selector in `test_the_post_merge_jobs_partition_the_gate`; what is pinned
-    # here is that this command is the one that leaves both out.
-    #
-    # `--jobs 1` since 2026-09-08 and it is a measurement, not tidiness. Run 34185998810
-    # ran this step at `--jobs 2 --inner-jobs 2` on four vcpus and killed `slow behavioral
-    # tests` at 1801.00s while `single-square translation escape screen` ran beside it to
-    # 1794.06s, six seconds inside its own budget; the atlas rebuild (778.88s) and the
-    # negative controls (606.08s) were well above their serial readings too. Two outer
-    # slots without the lane would simply put the screen beside those two -- the shape run
-    # 34181619739 refuted in `deep-gate.yml`'s `deferred-steps`. Serial fits: the run's 68
-    # steps were 6226.03s of step time, the lane is 1801.00s of that, the five long
-    # deferrals are 2174.84s serial rather than 3445.44s crowded (run 34183723509), and
-    # the remaining 62 steps were 979.59s, so 2174.84 + 979.59 = 3154.43s against the full
-    # tier's 3600s ceiling.
+    # Three `--skip`s, one per step that has its own runner: the exhaustive exact tier,
+    # slow lane and translation escape screen (`D-484`). The four selections partition
+    # `STEPS`, checked
+    # against the CLI's own selector in `test_the_post_merge_jobs_partition_the_gate`;
+    # what is pinned here is that this command leaves all three out.
     assert " ".join(str(full_step["run"]).split()) == (
         'uv run --frozen --all-extras --group dev packing-validate --skip "exhaustive '
-        'exact behavioral tests" --skip "slow behavioral tests" --jobs 1 --inner-jobs 2'
+        'exact behavioral tests" --skip "slow behavioral tests" '
+        '--skip "single-square translation escape screen" --jobs 1 --inner-jobs 2'
     )
 
     # The exhaustive exact tier, split onto its own runner on 2026-09-05 (think-tr2z) so
@@ -395,6 +463,29 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         (
             'uv run --frozen --all-extras --group dev packing-validate --only "exhaustive '
             'exact behavioral tests" --jobs 1 --inner-jobs 4'
+        )
+    ]
+
+    # The translation escape screen, split onto its own runner by `D-484`. The reason is
+    # not the exhaustive tier's: the screen reports a single verdict either way, and what
+    # it gains alone is workers. `--inner-jobs 4` is the whole point of the job -- it is
+    # what `PACK_JOBS` hands the screen's process pool, and beside the rest of the gate at
+    # `--inner-jobs 2` the same step was killed at the shared 900s cap.
+    screen_job = _mapping(jobs["screen"])
+    assert screen_job["if"] == "github.event_name != 'pull_request'"
+    assert "continue-on-error" not in screen_job
+    screen_steps = screen_job["steps"]
+    assert isinstance(screen_steps, list)
+    screen_commands = [
+        " ".join(str(_mapping(step)["run"]).split())
+        for step in screen_steps
+        if isinstance(_mapping(step).get("run"), str)
+        and "packing-validate" in str(_mapping(step)["run"])
+    ]
+    assert screen_commands == [
+        (
+            "uv run --frozen --all-extras --group dev packing-validate --only "
+            '"single-square translation escape screen" --jobs 1 --inner-jobs 4'
         )
     ]
 

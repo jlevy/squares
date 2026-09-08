@@ -31,13 +31,15 @@ from __future__ import annotations
 
 import argparse
 import base64
+import io
 import json
 import re
 import shutil
 import struct
 import subprocess
 import sys
-from collections.abc import Sequence
+from collections import Counter
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from fractions import Fraction
 from functools import cache
@@ -304,7 +306,7 @@ COMPOSITE_CARD = COMPOSITE_STEM.with_name(f"{COMPOSITE_STEM.name}-card.png")
 COMPOSITE_ALT = (
     "The best known packings of one through one hundred unit squares, in a ten-by-ten "
     "grid, each labelled with its best known upper bound and, where the value is still "
-    "open, the best proved lower bound"
+    "open, the strongest lower bound independently verified here"
 )
 #: What the card is a picture of, which stopped being the same sentence when the card
 #: became a crop. It shows the title block and the first four rows, so it says the first
@@ -315,7 +317,7 @@ CARD_ALT = (
     "The title of the atlas of best known square packings, above the first four rows of "
     "its ten-by-ten grid: the best known packings of one through forty unit squares, "
     "each labelled with its best known upper bound and, where the value is still open, "
-    "the best proved lower bound"
+    "the strongest lower bound independently verified here"
 )
 VERIFIER = PACKING / "src" / "sqpack" / "fractional" / "certificate.py"
 GENERATOR = PACKING / "src" / "sqpack" / "fractional" / "generate.py"
@@ -563,8 +565,8 @@ def _print_sans_face(block: str) -> bool:
     """Whether a `@font-face` block is one of kpress's static print instances.
 
     Those exist so a printed page embeds a font rather than drawing outline paths, and
-    they are at kpress's own weight tokens. This page prints at its own -- 410, 550,
-    600 and 680, declared and checked in `devtools.sans_instances` -- so kpress's set
+    they are at kpress's own weight tokens. This page prints at its own -- 410, 550 and
+    680, declared and checked in `devtools.sans_instances` -- so kpress's set
     would answer none of its requests while costing 20 KB of base64 a face in every
     copy of the page ever served. `render_explainer_pdf` injects this page's own set
     into the loaded document instead, at the moment it prints it, which is why nothing
@@ -826,34 +828,129 @@ COMPOSITE_SLOT_FACES = {
     ("normal", "700"): "KaTeX_Main-Bold",
     ("italic", "700"): "KaTeX_Math-BoldItalic",
 }
+
+#: The same table for `KPress Math Text Sans`, the second composite, which draws the
+#: letters and digits of mathematics from Source Sans 3 wherever the words around them
+#: are sans. Its slots are pinned at 400 and at kpress's sans bold token, 650, rather
+#: than at 400 and 700: a KaTeX metric table describes one face *and one weight*, and
+#: the sans tables are generated at those two.
+SANS_COMPOSITE_SLOT_FACES = {
+    ("normal", "400"): "KaTeX_Main-Regular",
+    ("italic", "400"): "KaTeX_Math-Italic",
+    ("normal", "650"): "KaTeX_Main-Bold",
+    ("italic", "650"): "KaTeX_Math-BoldItalic",
+}
+
+#: The sans slots this page draws from, and the reason the other two go.
+#:
+#: Every face of the sans composite is a SECOND data-URI copy of bytes the page already
+#: carries: its Latin halves are the same two `source-sans-3-latin-wght-*.woff2` files
+#: the prose stack inlines, its Greek halves the same KaTeX faces, and its `@media print`
+#: halves static instances of the same variable face. So a slot kept unused is 20-40 KB
+#: of base64 on every copy of the page ever served, and the prune is worth taking to the
+#: weight rather than only to the style.
+#:
+#: KaTeX reaches a bold table from `\mathbf`, `\boldsymbol` and `\textbf` alone, and this
+#: page sets none of them in a sans context: its three `\mathbf{D}_4` are in prose, which
+#: is the serif composite's. `check_math_faces` in `inspect_explainer_typography` is what
+#: holds that -- it fails on a `.mathbf`, `.boldsymbol` or `.textbf` under any node the
+#: init marked sans -- because the condition is about what the built page renders and
+#: cannot be read off the template. Dropping the pair also drops kpress's two 650 print
+#: instances with it, since those are the same slots under `@media print`.
+#:
+#: The italic slots pair with `KaTeX_Math-Italic` and `KaTeX_Math-BoldItalic`, and the
+#: second is outside `KATEX_FACES`, so the italic 650 slot would go on the partner rule
+#: whatever this set said. It is named here as well so the set reads as the two slots the
+#: page draws, rather than as one prune with a second one hidden behind it.
+SANS_COMPOSITE_SLOTS_DRAWN: frozenset[tuple[str, str]] = frozenset(
+    {("normal", "400"), ("italic", "400")}
+)
+
 _WEIGHT_TOKENS = {"normal": "400", "bold": "700"}
+
+
+class Composite(NamedTuple):
+    """One of kpress's math text composites, as the prune and its staleness guard read it.
+
+    `slots` is the KaTeX face under each style-and-weight slot; `drawn` is the subset of
+    those slots this page can reach; `blocks` is how many `@font-face` rules kpress
+    declares for the family, which is what the guard holds the copy to.
+    """
+
+    slots: Mapping[tuple[str, str], str]
+    drawn: frozenset[tuple[str, str]]
+    blocks: int
+
+
+#: kpress's composites by the EXACT family each declares, which is the whole of why this
+#: mapping exists. The count guard used to ask whether `"KPress Math Text" in block`, and
+#: the sans composite's family starts with that string: the check saw 20 faces of one
+#: composite, refused the render, and did so before anything else could report what had
+#: actually changed (kpress #57 senior review, K57-R2). A family is matched, not searched
+#: for.
+#:
+#: `blocks` is two per slot for the serif composite -- the reading face over Latin and
+#: digits, the KaTeX face over Greek -- and two per slot plus one static print instance
+#: per slot for the sans, which kpress layers over the same Latin ranges under
+#: `@media print` so a printed page embeds a font rather than the Type3 outline paths
+#: Chromium writes for a variable face away from its default position.
+COMPOSITES: Mapping[str, Composite] = {
+    "KPress Math Text": Composite(
+        slots=COMPOSITE_SLOT_FACES,
+        drawn=frozenset(COMPOSITE_SLOT_FACES),
+        blocks=2 * len(COMPOSITE_SLOT_FACES),
+    ),
+    "KPress Math Text Sans": Composite(
+        slots=SANS_COMPOSITE_SLOT_FACES,
+        drawn=SANS_COMPOSITE_SLOTS_DRAWN,
+        blocks=3 * len(SANS_COMPOSITE_SLOT_FACES),
+    ),
+}
+
+
+def _face_family(block: str) -> str | None:
+    """The family a `@font-face` block declares, unquoted, or `None` when it names none."""
+    family = FONT_FACE_FAMILY.search(block)
+    return None if family is None else family.group(1).strip().strip('"')
+
+
+def _composite_slot(block: str) -> tuple[str, str]:
+    """The style-and-weight slot a composite's `@font-face` block belongs to."""
+    style = re.search(r"font-style:\s*([a-z]+)", block)
+    weight = re.search(r"font-weight:\s*([a-z0-9]+)", block)
+    return (
+        style.group(1) if style else "normal",
+        _WEIGHT_TOKENS.get(weight.group(1), weight.group(1)) if weight else "400",
+    )
 
 
 def _font_face_reachable(block: str) -> bool:
     """Whether a `@font-face` block names a face this page can reach.
 
-    Three kinds of block are known: a KaTeX face, kept if the page can reach it; a
-    face of kpress's `KPress Math Text` composite, kept if its slot's KaTeX partner
-    is; and nothing else. A composite under another name (the planned sans one, say)
-    fails the render rather than being inlined unread at 30-40 KB a face.
+    Three kinds of block are known: a face of one of kpress's math text composites, kept
+    if the page draws that slot and the slot's KaTeX partner is reachable; a KaTeX face,
+    kept if the page can reach it; and nothing else. A composite under a third name fails
+    the render rather than being inlined unread at 20-40 KB a face.
     """
+    family = _face_family(block)
+    composite = COMPOSITES.get(family) if family is not None else None
+    if composite is not None:
+        # The composite is asked FIRST, and the KaTeX rule below only afterwards. A
+        # composite's Greek half names a KaTeX woff2 in its `src`, so the other order
+        # answers for it on the partner's reachability alone and keeps the Greek half of
+        # a slot whose reading-face half has just been pruned -- glyphs laid out from a
+        # table for a face the page no longer draws, which is the one state the design
+        # forbids.
+        slot = _composite_slot(block)
+        partner = composite.slots.get(slot)
+        return slot in composite.drawn and (partner is None or partner in KATEX_FACES)
     ref = re.search(r"(KaTeX_[A-Za-z0-9-]+)\.woff2", block)
     if ref is not None:
         return ref.group(1) in KATEX_FACES
-    family = FONT_FACE_FAMILY.search(block)
-    if family is None or family.group(1) != '"KPress Math Text"':
-        raise SystemExit(
-            f"a KaTeX stylesheet declares a face this renderer does not know how to prune: "
-            f"{family.group(1) if family else block.strip()[:60]}"
-        )
-    style = re.search(r"font-style:\s*([a-z]+)", block)
-    weight = re.search(r"font-weight:\s*([a-z0-9]+)", block)
-    slot = (
-        style.group(1) if style else "normal",
-        _WEIGHT_TOKENS.get(weight.group(1), weight.group(1)) if weight else "400",
+    raise SystemExit(
+        f"a KaTeX stylesheet declares a face this renderer does not know how to prune: "
+        f"{family or block.strip()[:60]}"
     )
-    partner = COMPOSITE_SLOT_FACES.get(slot)
-    return partner is None or partner in KATEX_FACES
 
 
 def katex_css(static: Path) -> str:
@@ -870,17 +967,24 @@ def katex_css(static: Path) -> str:
     parts = []
     for name in KATEX_CSS_ASSETS:
         css = (static / name).read_text(encoding="utf-8")
-        # The prune reads the composite through `COMPOSITE_SLOT_FACES`, a copy of
-        # kpress's slot table. A slot added upstream would be kept unread at
-        # 30-40 KB a face, so the copy is checked against the stylesheet it mirrors.
-        composite = sum(
-            1 for block in FONT_FACE_BLOCK.findall(css) if "KPress Math Text" in block
+        # The prune reads each composite through `COMPOSITES`, a copy of kpress's slot
+        # tables. A slot added upstream would be kept unread at 20-40 KB a face, so the
+        # copy is checked against the stylesheet it mirrors -- by exact family, because
+        # one composite's name is a prefix of the other's.
+        declared = Counter(
+            family
+            for block in FONT_FACE_BLOCK.findall(css)
+            for family in [_face_family(block)]
+            if family in COMPOSITES
         )
-        if composite and composite != 2 * len(COMPOSITE_SLOT_FACES):
-            raise SystemExit(
-                f"{name} declares {composite} faces of KPress Math Text; the renderer "
-                f"knows {len(COMPOSITE_SLOT_FACES)} slots of two. Update COMPOSITE_SLOT_FACES."
-            )
+        for family, composite in COMPOSITES.items():
+            count = declared[family]
+            if count and count != composite.blocks:
+                raise SystemExit(
+                    f"{name} declares {count} faces of {family}; the renderer knows "
+                    f"{len(composite.slots)} slots and expects {composite.blocks} faces. "
+                    f"Update COMPOSITES."
+                )
         pruned = FONT_FACE_BLOCK.sub(
             lambda match: match.group(0) if _font_face_reachable(match.group(0)) else "", css
         )
@@ -889,63 +993,256 @@ def katex_css(static: Path) -> str:
     return "\n".join(parts)
 
 
-#: KaTeX lays out from its own metric table, so kpress's tables for the reading face
-#: are installed before the page draws anything. The page renders its mathematics
-#: itself (`tex()` in the shell) rather than through kpress's `katex-init.js`, which
-#: is why the call lives here; the policy is that script's, copied. The tables are
-#: skipped when the wrapper or any ancestor opts out with
-#: `data-kpress-math-text="katex"` or runs on system fonts (the wrapper's baked
-#: `data-kpress-fonts` or the reader's persisted `data-kpress-font-set`, which the
-#: bootstrap stamps on <html>), because the stylesheet reverts to the KaTeX faces
-#: there and PT Serif's numbers would measure glyphs that are not drawn. And when
-#: the face is wanted but the tables cannot be applied, the face is turned off too,
-#: by stamping the opt-out the stylesheet reads: faces without metrics is the one
-#: state the design forbids.
-APPLY_TEXT_METRICS = """
+#: The three characters this page sets in a sans run that no text face it ships carries:
+#: the relation in the title and the verdict badges, the approximation sign in the chart
+#: labels and in two captions, and the arrow in Figure 7's label. Source Sans 3 and PT
+#: Serif both stop at 231 and 216 code points and have none of them; KaTeX_Main has all
+#: three, in Regular and in Bold.
+#:
+#: Left to the browser, they are drawn from whatever family on the reader's machine has
+#: them, which is a different face for every reader and, on macOS, one that the PDF
+#: writes as outline paths. `--check` in `render_explainer_pdf` now refuses that, and
+#: this is how the page stops asking for it.
+RELATION_POINTS: tuple[int, ...] = (0x2192, 0x2248, 0x2265)
+
+#: The KaTeX_Main face the relations come from, and the weights it answers.
+#:
+#: Declared as a face of the families the page already carries rather than as a family of
+#: its own, so no font stack has to be edited: a `@font-face` whose `unicode-range`
+#: covers three code points joins the family it names for those three and for nothing
+#: else, and every run already asking for that family gets them. That is the same
+#: composite technique `compare_math_fonts` builds its variants from.
+#:
+#: Bold rather than Regular, and one face rather than a pair split at the sans's bold.
+#: `compare_math_fonts metrics` puts the rule thickness of the minus -- the bar every
+#: relation here is drawn on -- at 40 thousandths of an em in KaTeX_Main-Regular and 60
+#: in its Bold, against Source Sans 3's own 62 at the 410 the captions run at, 78 at the
+#: 550 of the title and 100 at the 680 of a caption label. Bold is within 3% of the sans
+#: at 410 and at 77% of it at 550, where Regular is at 65% and 51%: the hairline the
+#: template comment's earlier three-way comparison saw and rejected. Declared across the
+#: whole range so that the relation cannot change weight between the title and a caption
+#: the way the host's own fallback did, which is what the class it replaces was for.
+#:
+#: The range is `200 900` and not `100 900`, and the two units matter more than they look.
+#: Blink chooses one face per family for a given weight before it looks at which face has
+#: the character: among faces whose weight ranges match equally well the coverage decides,
+#: which is how a Google Fonts subset set works, but a face that matches the weight better
+#: wins outright and the search moves to the next family when it turns out to have no
+#: glyph. Declared at `100 900`, this face beat the sans's own `200 900` at every weight
+#: and every upright sans run on the page came from the reader's machine: measured with
+#: `CSS.getPlatformFontsForNode`, fourteen glyphs of the title in `.SFNS-Regular` and the
+#: sans face reported `unloaded`. Matching the range exactly puts the two faces level and
+#: lets the coverage decide. `inspect_explainer_typography --check-supporting` is what
+#: found it, and it is the reason that check exists.
+RELATION_FACES: tuple[tuple[str, str], ...] = (("KaTeX_Main-Bold", "200 900"),)
+
+#: What the face is scaled to, as a `size-adjust` percentage, and it is not optional.
+#: KaTeX_Main is a mathematics face and its relations are drawn for a mathematics line:
+#: measured in thousandths of an em, its `≈` is 765 of ink on an advance of 894, against
+#: Source Sans 3's own `=`, `+` and minus at 441 on 509. Unscaled, the sign is 1.7 times
+#: size of the arithmetic beside it, and the five coarsening-chart labels it appears in
+#: collide: `inspect_explainer_typography --check-supporting` reported four overlaps of 7
+#: to 8 pixels in print at 100%, and still 3.4 to 4.2 after the literal space beside the
+#: sign came out. 80% leaves one of 1.4. 70% is where the page's own crowding check
+#: passes, and it is also where the sign stops dominating: at 57%, where the advance comes
+#: to 510 against Source Sans 3's own 509, it reads as a mark rather than as a relation,
+#: at the title's size and in a caption both.
+#:
+#: The trade this makes is worth stating. Scaling takes the stroke down with the width, so
+#: the relation is lighter than the sans's own signs at every size, and the earlier
+#: comparison's objection to a Computer Modern relation among Source Sans stands. It is
+#: accepted because the alternative is not a better-looking relation, it is a different
+#: relation for every reader. The fix that would settle it is a sans that carries the
+#: three characters: Source Sans 3 does upstream, and the woff2 kpress ships is a Latin
+#: subset of 231 code points that does not.
+RELATION_SIZE_ADJUST = 70
+
+#: The family the relation face joins, and only this one, which is the second half of the
+#: matching lesson in `RELATION_FACES`.
+#:
+#: `Source Sans 3 Variable` is the screen stack's name and the print stack's second, so a
+#: face declared on it is reachable in both media. The print stack's first name is
+#: kpress's own print family, `KPress Print Sans`, and declaring the relation there as
+#: well is what the obvious reading suggests and what breaks the PDF:
+#: `render_explainer_pdf` injects this page's static instances into that family at 410,
+#: 550 and 680, and against a face declared over
+#: `200 900` an exact 410 does not win cleanly. Measured: the sans came back out of the
+#: export as Type3 outline paths and the file grew by 127 KB, which is `think-988s`
+#: undone. The instances carry the Latin `unicode-range` kpress gives them, so they
+#: exclude the three relation code points and the search falls through to this family.
+#:
+#: All three characters appear in sans runs only. A relation that turned up in prose would
+#: be caught by the provenance probe rather than drawn from the host, which is the point
+#: of having the probe: the fix would be to add the prose family here.
+RELATION_FAMILIES: tuple[str, ...] = ("Source Sans 3 Variable",)
+
+
+def _relation_families_reachable(css: str) -> None:
+    """Fail the render when kpress no longer declares a family the relation face joins.
+
+    The name above is a copy of kpress's, and a copy of a name is a thing that goes
+    stale: kpress renamed the print sans family once already (`think-9r58`), and a
+    screen rename would leave `relation_face_css` emitting an `@font-face` on a family
+    nothing in the page names. The render would still reproduce byte for byte, every
+    browser-free test would still pass, and the three relation characters would go back
+    to the reader's own machine -- caught, if at all, only by the browser guards.
+
+    So the family is checked against the stylesheet it is a copy of, the way
+    `_font_face_reachable` checks a KaTeX face before inlining it. A `@font-face` block
+    declaring the family is what makes it reachable: it is the evidence that kpress
+    still ships faces under this name, and it moves under exactly the rename this
+    guards against.
+    """
+    declared = {
+        family.group(1).strip().strip('"')
+        for block in FONT_FACE_BLOCK.findall(css)
+        for family in [FONT_FACE_FAMILY.search(block)]
+        if family is not None
+    }
+    missing = [family for family in RELATION_FAMILIES if family not in declared]
+    if missing:
+        raise SystemExit(
+            f"kpress declares no @font-face for {', '.join(missing)}, so the relation face "
+            f"would join a family nothing on the page names; RELATION_FAMILIES is stale"
+        )
+
+
+def relation_face_css(static: Path) -> str:
+    """The relation glyphs as `@font-face` rules on the families the page already ships.
+
+    Subset out of KaTeX_Main at render time rather than vendored: the source is the same
+    woff2 the page inlines for its mathematics, so the two can never disagree about what
+    a relation looks like, and three glyphs come to 684 bytes against the 26 KB of the
+    whole face. fontTools is imported here rather than at module scope because it
+    re-enables the GIL in the process that loads it, and only this function needs it.
+
+    The hinting programs go with the outlines they no longer serve: `fpgm`, `prep` and
+    `cvt ` are 1.8 KB of the 2.5 KB a hinted three-glyph subset weighs, and they are
+    written for the whole face rather than for these three. The mathematics still draws
+    from the complete hinted KaTeX_Main, so nothing that could be compared against this
+    subset shares a glyph with it.
+
+    The `name` table stays, and that is not an oversight. Dropping it saves 300 bytes and
+    costs the face its identity: Chromium's font sanitiser renames a nameless face to
+    `OTS-derived-font`, which is what the PDF then embeds it as, and the provenance guard
+    in `render_explainer_pdf` has no way to tell that from a face off the reader's
+    machine. Measured: the subset embedded under that name until the table was kept.
+
+    One `@font-face` per name in `RELATION_FAMILIES`, which is one name: the screen
+    family, which the print stack also carries, so a single declaration is reachable in
+    both media. Declaring the relation on `KPress Print Sans` beside it is the reading
+    the print stack invites and the one that took the sans out of the PDF as outline
+    paths -- the measurement is under `RELATION_FAMILIES`. That name is a copy of
+    kpress's, so `_relation_families_reachable` reads kpress's own stylesheets first and
+    fails the render if the family is gone, rather than emitting a face nothing reaches.
+    """
+    from fontTools import subset  # noqa: PLC0415
+    from fontTools.ttLib import TTFont  # noqa: PLC0415
+
+    _relation_families_reachable(kpress_css(static))
+    ranges = ", ".join(f"U+{point:04X}" for point in RELATION_POINTS)
+    rules: list[str] = []
+    for face, weights in RELATION_FACES:
+        source = static / "katex" / "fonts" / f"{face}.woff2"
+        if not source.is_file():
+            raise SystemExit(f"{source} is missing; kpress ships no {face} to subset")
+        # `flavor` through the constructor rather than by assignment: its declared type is
+        # the `None` of its default, and the assignment is what a type checker reads.
+        options = subset.Options(flavor="woff2")
+        options.layout_features = []
+        options.notdef_outline = False
+        options.hinting = False
+        options.glyph_names = False
+        # `recalcTimestamp=False`, or the render is not reproducible: `TTFont.save` stamps
+        # `head.modified` from the clock by default, and two renders a second apart
+        # differ in four bytes of the compressed subset. `render_explainer --check` is
+        # what caught it, which is what that check is for.
+        font = TTFont(source, recalcTimestamp=False)
+        subsetter = subset.Subsetter(options=options)
+        subsetter.populate(unicodes=RELATION_POINTS)
+        subsetter.subset(font)
+        buffer = io.BytesIO()
+        font.flavor = "woff2"
+        font.save(buffer)
+        encoded = base64.b64encode(buffer.getvalue()).decode()
+        rules.extend(
+            f'@font-face {{ font-family: "{family}";\n'
+            f'  src: url("data:font/woff2;base64,{encoded}") format("woff2");\n'
+            f"  font-weight: {weights}; font-style: normal; font-display: block;\n"
+            f"  size-adjust: {RELATION_SIZE_ADJUST}%;\n"
+            f"  unicode-range: {ranges}; }}"
+            for family in RELATION_FAMILIES
+        )
+    return f"/* {ranges}, from KaTeX_Main, on the families this page ships */\n" + "\n".join(
+        rules
+    )
+
+
+#: The host supplies custom context and TeX spacing; KPress owns profile selection,
+#: metric installation, font readiness, and rendering for every caller.
+KATEX_RUNTIME = "katex/katex-math-runtime.js"
+MATH_WRAPPERS = ".katex, .kpress-math, .kpress-math-render, .tex, .tex-d"
+
+HOST_MATH_INIT = r"""
 (() => {
-  const optOut = [
-    '[data-kpress-math-text="katex"]',
-    '[data-kpress-fonts="system"]',
-    '[data-kpress-font-set="system"]',
-  ].join(", ");
-  const wrapper = document.querySelector(".kpress");
-  if (!wrapper || wrapper.closest(optOut)) return;
-  const tables = globalThis.kpressKatexTextMetrics;
-  const install = typeof katex === "undefined" ? undefined : katex.__setFontMetrics;
-  if (!tables || typeof install !== "function") {
-    document.documentElement.dataset.kpressMathText = "katex";
-    console.warn("kpress: math text face metrics unavailable; KaTeX's own faces restored");
-    return;
+  const wrappers = "%(wrappers)s";
+  const firstFamily = value => (value || "").split(",")[0].trim().replace(/^["']|["']$/g, "");
+  const context = {
+    // This standalone page has already downloaded every font as a data URI.
+    allEmbeddedFonts: true,
+    isSansContext(node) {
+      let el = node;
+      while (el && el.matches && el.matches(wrappers)) el = el.parentElement;
+      if (!el || el.nodeType !== 1) return false;
+      const style = getComputedStyle(el);
+      const sans = firstFamily(style.getPropertyValue("--kpress-font-sans"));
+      return !!sans && firstFamily(style.fontFamily) === sans;
+    },
+  };
+  // The same one-mu spacing the SVG labels use for an italic function name.
+  const kern = source => String(source).replace(/(?<![A-Za-z\\])([a-z])\(/g, '$1\\mkern1mu(');
+  const ready = kpressMathText.ready(
+    document.querySelectorAll('.tex, .tex-d, .kpress-math-render'), context,
+  );
+  const pending = new Set();
+  function render(el, source, display) {
+    const result = kpressMathText.render(kern(source), el,
+      { displayMode: !!display, throwOnError: false }, context).then(() => true, () => {
+      el.textContent = source;
+      return false;
+    });
+    pending.add(result);
+    result.finally(() => pending.delete(result));
+    return result;
   }
-  for (const [face, table] of Object.entries(tables)) {
-    if (face !== "scale") install.call(katex, face, table);
+  async function settled() {
+    while (pending.size) await Promise.all([...pending]);
   }
+  globalThis.squaresMath = { ready, render, settled, context };
 })();
 """
 
 
-def katex_js(static: Path) -> str:
-    """KaTeX, then kpress's metric tables for the math text face, then their install.
+def host_math_init() -> str:
+    """Adapt the paper's custom math wrappers and spacing to KPress's shared runtime."""
+    return HOST_MATH_INIT % {"wrappers": MATH_WRAPPERS}
 
-    Both scripts come from kpress's own list, and their order in it is asserted: the
-    tables have to follow the bundle they patch. The list's `auto-render.min.js` and
-    `katex-init.js` are left out on purpose, since the page finds and renders its
-    own mathematics; the install call takes the init script's one remaining job.
-    """
+
+def katex_js(static: Path) -> str:
+    """Bundle the shared KPress runtime without its native auto-render entry point."""
     from kpress.format.assets import KATEX_JS_ASSETS  # noqa: PLC0415
 
-    bundle, metrics = "katex/katex.min.js", "katex/katex-text-metrics.js"
-    for name in (bundle, metrics):
+    required = ("katex/katex.min.js", "katex/katex-text-metrics.js", KATEX_RUNTIME)
+    for name in required:
         if name not in KATEX_JS_ASSETS:
             raise SystemExit(f"kpress no longer lists {name}; the math text face has moved")
-    if KATEX_JS_ASSETS.index(metrics) < KATEX_JS_ASSETS.index(bundle):
-        raise SystemExit(f"kpress lists {metrics} before {bundle}, which cannot be right")
-    return "\n".join(
-        (
-            (static / bundle).read_text(encoding="utf-8"),
-            (static / metrics).read_text(encoding="utf-8"),
-            APPLY_TEXT_METRICS,
+    positions = [KATEX_JS_ASSETS.index(name) for name in required]
+    if positions != sorted(positions):
+        raise SystemExit(
+            "kpress lists the math runtime before its dependencies, which cannot be right"
         )
+    return "\n".join(
+        [(static / name).read_text(encoding="utf-8") for name in required] + [host_math_init()]
     )
 
 
@@ -1251,10 +1548,15 @@ def coarsening_svg(rows: list[CoarseningRow]) -> tuple[str, str, str]:
         # The B each net admits is a whole multiple of 10^-7, and the
         # measurement records it rounded to six places rather than exactly, so
         # the label says as much. The mass above the bar is the exact one.
+        # No space before the relation, unlike every other use of `nearly` on the page.
+        # These five labels sit at a fixed pitch and were already within a pixel of
+        # touching; the approximation sign now comes from `relation_face_css` rather than
+        # from the reader's machine, and a mathematics face carries its own space in the
+        # glyph's side bearings, so a literal one beside it is that space twice.
         labels.append(
             f'<text x="{x + width / 2:.0f}" y="188"{tone}>K = {row["K"]}</text>'
             f'<text x="{x + width / 2:.0f}" y="220">'
-            f"B {nearly(row['B'])}</text>"
+            f"B{nearly(row['B'])}</text>"
         )
     return "\n        ".join(bars), "\n        ".join(values), "\n        ".join(labels)
 
@@ -1664,6 +1966,9 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
             / "nagamochi-2005-packing-unit-squares-in-a-rectangle.pdf"
         ),
         "TUTORIAL_URL": repo_file(REPO / "TUTORIAL.md"),
+        "STROMQUIST_N26_REVIEW_URL": repo_file(
+            REPO / "docs/project/research/research-2026-09-07-stromquist-n26-verification.md"
+        ),
         "WORKFLOWS_URL": repo_file(REPO / "SYNOPSIS.md") + "#workflow-entry-contracts",
         "PRINCIPLES_URL": repo_file(REPO / "README.md") + "#operating-principles",
         "EPISTEMICS_URL": repo_file(REPO / "epistemics.md"),
@@ -1684,6 +1989,7 @@ def shell_substitutions(static: Path, shared: dict[str, str], body: str) -> dict
     """
     return {
         "KPRESS_CSS": kpress_css(static) + katex_css(static),
+        "RELATION_CSS": relation_face_css(static),
         "THEME_BOOTSTRAP": theme_bootstrap(static),
         "KATEX_JS": katex_js(static),
         "KPRESS_CLIENT_JS": kpress_client_js(static),
@@ -1908,6 +2214,7 @@ RENDER_INPUTS = (
     PACKING / "devtools" / "measure_net_coarsening.py",
     PACKING / "devtools" / "build_composite_figure_data.py",
     PACKING / "devtools" / "render_explainer_pdf.py",
+    PACKING / "devtools" / "sans_instances.py",
     PACKING / "devtools" / "check_print_layout.py",
     PACKING / "src" / "sqpack",
     PACKING / "frontier" / "results.yaml",
@@ -1916,6 +2223,7 @@ RENDER_INPUTS = (
     *COMPOSITE_ASSETS,
     TEMPLATE,
     MARKDOWN,
+    PACKING / "devtools" / "templates" / "fonts",
     REPO / "vendor" / "kpress",
     PACKING / "pyproject.toml",
     PACKING / "uv.lock",

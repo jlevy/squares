@@ -39,6 +39,34 @@ from devtools.check_print_layout import (
     Probe,
     findings,
 )
+from devtools.render_explainer_pdf import SETTLED
+
+
+def test_layout_settlement_waits_for_pending_math() -> None:
+    """Two animation frames cannot finish a readout still waiting for its font."""
+    script = dedent("""
+        const assert = require('node:assert/strict');
+        let finish;
+        const pendingMath = new Promise(resolve => { finish = resolve; });
+        const document = {documentElement: {offsetHeight: 100},
+          fonts: {ready: Promise.resolve()}};
+        const requestAnimationFrame = callback => queueMicrotask(callback);
+        globalThis.squaresMath = {settled: () => pendingMath};
+        let done = false;
+    """)
+    script += f"const settled = ({SETTLED})().then(() => {{ done = true; }});\n"
+    script += dedent("""
+        setImmediate(async () => {
+          assert.equal(done, false, 'math is still pending after the layout frames');
+          finish();
+          await settled;
+          assert.equal(done, true);
+        });
+    """)
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
 
 
 def block(**over: object) -> Centred:
