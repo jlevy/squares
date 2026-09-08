@@ -1555,7 +1555,7 @@ sessions:
   title: "n26 source consistency and upstream integration"
   status: in_progress
   primary_bead: think-4v5w
-  phases: 3
+  phases: 4
   measured: false
   unmeasured_reason: >-
     declares no rollups

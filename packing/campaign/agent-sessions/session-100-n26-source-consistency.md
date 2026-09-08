@@ -10,7 +10,7 @@ session:
   title: n26 source consistency and upstream integration
   date: '2026-09-07'
   started_at: '2026-09-08T00:34:07Z'
-  deadline_at: '2026-09-08T03:34:07Z'
+  deadline_at: '2026-09-08T07:04:07Z'
   branch: codex/stromquist-n26-verification
   goal: Merge the latest upstream atlas expansion, broaden the current n26 best-known search, and reconcile source-reported lower bounds without promoting missing proofs.
   workflow_phases:
@@ -62,7 +62,7 @@ session:
     recording: contemporaneous
     clock_role: work
     objective: Repair the six observed integration failures, commit the merged tree, pass pre-push validation with the documented Cairo environment, and launch the hosted full checkpoint.
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: The completed pre-push attempt exposed concrete integration failures; the session estimate is extended from 120 to 180 minutes to resolve them and retain full validation.
     budget_minutes: 60
@@ -72,14 +72,34 @@ session:
     validation_command: DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib uv run --frozen --all-extras --group dev packing-validate --push --jobs 2 --inner-jobs 1
     kill_condition: Any remaining assertion failure or stale generated view blocks publication and must be diagnosed before retrying the affected check.
     fallback: Preserve failed receipts, fix the narrow surface, and continue independent source and visual review while validation runs.
+    outcome: The six integration failures were repaired and the second upstream merge committed as b7b0576b. Forty-four pre-push checks passed. The remaining behavioral step displayed two failures and was interrupted on resumption to diagnose them; no passing pre-push or hosted certification is claimed.
+    evidence:
+    - packing/campaign/agent-sessions/session-100-validation/push-b7b0576b-interrupted.json
+    stop_reason: The owner interrupted the turn during the gate and resumed at 05:15 UTC. The run crossed that unobserved interval; its elapsed wall window is not treated as continuous agent work. Observed behavioral failures require a fresh repair slice.
+    next_action: Review hosted validation, retain the exact commit and coverage, then complete the documentation and tracking closeout.
+  - workflow: pipeline-improvement
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: Isolate and repair the two observed behavioral failures, validate the affected tests and merged tree, push the branch, and launch hosted full validation.
+    status: in_progress
+    entered_by: user_request
+    switch_reason: The owner requested continuation after the interrupted turn. The calendar window is extended to include that interruption and the remaining validation; earlier failed and incomplete receipts are retained.
+    budget_minutes: 60
+    started_at: '2026-09-08T05:19:57Z'
+    deadline_at: '2026-09-08T06:19:57Z'
+    expected_output: Diagnosed behavioral failures, passing pre-push validation, and hosted full-checkpoint and pull-request runs against the pushed commit.
+    validation_command: DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib PYTEST_ADDOPTS='-n 2 --dist worksteal' uv run --frozen --all-extras --group dev packing-validate --push --jobs 2 --inner-jobs 1
+    kill_condition: Any assertion failure blocks certification; resolve the observed failure before replaying its dependent surface.
+    fallback: Preserve the failed receipt, narrow to the implicated test or contract, and continue independent review while the check runs.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Review hosted validation, retain the exact commit and coverage, then complete the documentation and tracking closeout.
+    next_action: Record hosted coverage and complete publication, cumulative resource accounting, and tracker synchronization.
   primary_bead: think-4v5w
   status: in_progress
   budget:
-    wall_minutes: 180
+    wall_minutes: 390
     orientation_minutes: 10
     checkpoint_minutes: 30
     slice_minutes: 30
@@ -149,6 +169,7 @@ session:
   - packing/frontier/ds7-lower-bound-audit.json
   - packing/cases/stromquist/n26-source-scores.json
   - packing/campaign/agent-sessions/session-100-validation/push-9e785948-merge-failed.json
+  - packing/campaign/agent-sessions/session-100-validation/push-b7b0576b-interrupted.json
   checks:
   - Before this prospective session, the records baseline passed at clean dae6bb8d; origin/main at 28696526 was fetched and reviewed. Generated merge conflicts were resolved by their renderers, preserving both branches' records.
   - The coordinator reproduced 55 exact source omissions against dae6bb8d through n100 and upstream 28696526 above n100; the opaque n21 display is the fifty-sixth corrected reported field. The final named-candidate audit passes through n324 with no omitted stronger report.
@@ -159,6 +180,9 @@ session:
   - The first combined pre-push attempt completed 45 steps in 481.88 seconds and failed six. Behavioral collection lacked the documented macOS Cairo library path; remaining failures were the expired phase, README report count, generated rigidity blocks, missing evidence assumptions, and duplicate session coverage in the document map. This is a failed run, not partial certification.
   - Focused repair checks pass for the README, document map, campaign ledger, evidence schema, and evidence semantics. The rigidity renderer refreshed only wrapping in 225 blocks; an independent comparison found identical parsed frontmatter and identical bytes outside those blocks.
   - A fresh seventeen-page explainer PDF was visually reviewed on pages 2, 4, and 15. Original-prose authorship, the verified-here atlas caption, and Stromquist's private-communication acknowledgment and source link are present without clipping or overlap. The local PDF was then regenerated from the current HTML.
+  - After continuation, collection mapped the two observed failures to the n50 prose and whole-record golden checks. Both reproduced in a 1.73-second focused replay. Inserted source notes had straight apostrophes where the commit formatter used smart quotes. The renderer now requests the same smart-quote formatting, leaving source frontmatter unchanged.
+  - The complete focused generator file passes all 63 tests in 10.97 seconds after that repair; Ruff, formatting, and BasedPyright pass. The source-score, memo, DS7, and exact-fraction checks retain their earlier passing receipts.
+  - The resumed pre-push replay uses two pytest workers through PYTEST_ADDOPTS with work stealing, alongside the gate's two outer jobs and one inner job. Coverage and timeout limits remain unchanged; this operator-declared runtime option is recorded here because the gate's environment receipt does not collect PYTEST_ADDOPTS.
   stop_reason: null
   next_action: Complete the user-selected n26 review and upstream merge, then retain think-mq0d (BC-264) as the separate selected research continuation.
 ---

@@ -1773,12 +1773,14 @@ def render_body(
 
     # Formatted in process by the Python build of the same formatter the pre-commit hook
     # runs, so a generated record arrives already wrapped the way the register is and the
-    # hook has nothing to restage. `render_explainer.py` loads it the same way and for
+    # hook has nothing to restage. Smart quotes also apply to source notes inserted
+    # into prose; their frontmatter transcription remains unchanged.
+    # `render_explainer.py` loads it the same way and for
     # the same reason: a network fetch inside a generator would make it depend on an
     # index being reachable.
     from flowmark import reformat_text  # noqa: PLC0415
 
-    return reformat_text("\n".join(lines), semantic=True, cleanups=True)
+    return reformat_text("\n".join(lines), semantic=True, cleanups=True, smartquotes=True)
 
 
 def render_record(
