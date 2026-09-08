@@ -1553,7 +1553,7 @@ sessions:
     snapshot_incomplete: true
 - id: session-106
   title: "n26 source consistency and upstream integration"
-  status: in_progress
+  status: completed
   primary_bead: think-4v5w
   phases: 5
   measured: true
@@ -1566,8 +1566,8 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-106.yaml
-    model_responses: 1228
-    agent_hours: 13.13
-    active_union_hours: 7.26
-    wall_hours: 7.26
+    model_responses: 1467
+    agent_hours: 14.71
+    active_union_hours: 8.0
+    wall_hours: 8.0
     snapshot_incomplete: true

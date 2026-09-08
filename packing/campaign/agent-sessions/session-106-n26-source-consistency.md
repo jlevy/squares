@@ -103,7 +103,7 @@ session:
     recording: contemporaneous
     clock_role: work
     objective: Commit the reviewed fixes, merge current origin/main, verify compatibility with PR116 and PR121, and push PR120 with passing validation.
-    status: in_progress
+    status: completed
     entered_by: user_request
     switch_reason: The owner explicitly requested that PR120 be fully committed, current with main, and adapted for the intended PR116 and PR121 landings.
     budget_minutes: 155
@@ -113,14 +113,18 @@ session:
     validation_command: DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib PYTEST_ADDOPTS='-n 2 --dist worksteal --maxfail=1' uv run --frozen --all-extras --group dev packing-validate --push --jobs 2 --inner-jobs 1
     kill_condition: A failed assertion, missing coverage, or unresolved record conflict blocks certification.
     fallback: Preserve the failure, repair its narrow cause, and continue independent PR and source review while checks run.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Retain exact hosted source identities and coverage, then complete cumulative accounting and tracker synchronization.
+    outcome: Main 2980c5bc is merged, PR116/121 compatibility is reviewed, and source fixes are committed and pushed at 3deb90fc. The historical full checkpoint passed 68 of 69 Linux steps and all 4214 tests but timed out on the escape screen. The repaired complete screen, complete pre-push, exact-source fast tier, required PR checks and Pages build now pass; original failed receipts remain failed.
+    evidence:
+    - packing/campaign/agent-sessions/session-106-validation/full-46ee41af-failed.json
+    - packing/campaign/agent-sessions/session-106-validation/push-3deb90fc.json
+    - packing/campaign/agent-sessions/session-106-validation/fast-3deb90fc.json
+    - packing/campaign/agent-sessions/session-106-validation/screen-3deb90fc.json
+    stop_reason: The reviewed source is pushed and its final verification gap is closed. Remaining work is the publication and tracking closeout, including an affected check of these final records.
+    next_action: Commit these final records, pass their affected pre-push and hosted PR checks, then merge PR120 as authorized and synchronize its completed beads.
   primary_bead: think-4v5w
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-106.yaml
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 510
     orientation_minutes: 10
@@ -133,7 +137,7 @@ session:
   progress:
     metric: Agreement of retained source bounds, exact comparisons, and reader-facing conclusions.
     before: Session105 verified Stromquist but did not claim an exhaustive literature search. The incoming atlas spans n1 through n324 and exposes additional omitted DS7 reported lower bounds.
-    after: null
+    after: Exact reconstruction confirms Stromquist’s n26 packing is valid but larger than Friedman’s. Dated public-source review found no better n26 value. Fifty-six justified reported lower-bound fields are corrected without changing verified or upper bounds; private-communication credit and qualified claims survive upstream print integration. MacIver methods and unrecovered proofs remain explicit follow-ups.
   delegations:
   - task: Audit current n26 sources and recent public solver or proof projects
     phase: 1
@@ -197,6 +201,15 @@ session:
   - packing/campaign/agent-sessions/session-106-validation/push-6c678ff8.json
   - packing/campaign/agent-sessions/session-106-validation/full-46ee41af-failed.json
   - packing/campaign/agent-sessions/session-106-validation/push-4efa2e5f-interrupted.json
+  - packing/campaign/agent-sessions/session-106-validation/full-46ee41af-validate.tar.gz
+  - packing/campaign/agent-sessions/session-106-validation/full-46ee41af-exhaustive.tar.gz
+  - packing/campaign/agent-sessions/session-106-validation/full-46ee41af-macos-portability.tar.gz
+  - packing/campaign/agent-sessions/session-106-validation/push-3deb90fc.json
+  - packing/campaign/agent-sessions/session-106-validation/fast-3deb90fc.json
+  - packing/campaign/agent-sessions/session-106-validation/fast-3deb90fc.tar.gz
+  - packing/campaign/agent-sessions/session-106-validation/screen-3deb90fc.json
+  - packing/campaign/agent-sessions/session-106-validation/screen-3deb90fc.tar.gz
+  - packing/campaign/agent-sessions/session-106-validation/pr116-timeout-and-serial-evidence.json
   checks:
   - Before this prospective session, the records baseline passed at clean dae6bb8d; origin/main at 28696526 was fetched and reviewed. Generated merge conflicts were resolved by their renderers, preserving both branches' records.
   - The coordinator reproduced 55 exact source omissions against dae6bb8d through n100 and upstream 28696526 above n100; the opaque n21 display is the fifty-sixth corrected reported field. The final named-candidate audit passes through n324 with no omitted stronger report.
@@ -221,8 +234,16 @@ session:
   - The full hosted checkpoint at 46ee41af completed all 69 Linux steps with 68 passing and one failing at the existing 900-second escape-screen timeout. All 4214 tests passed across disjoint quick, slow and exhaustive lanes, with no skipped tests; macOS passed all four checks. The sweep remains incomplete. Before the fifth phase deadline, its estimate is extended by sixty minutes to repair that measured timeout, integrate main 2980c5bc with PR119 fonts, and validate the affected surfaces before the authorized merge.
   - Main 2980c5bc merged without conflicts as 36c20d5e; the source acknowledgment and qualified caption survive PR119 font integration. The escape screen now has its own 1800-second budget. Independent review verified a separate 1800-second screen timeout in hosted run 34181619739, so both workflows adopt PR116's measured serial numeric schedule and isolated slow lane. The 69-step full partition and 62-step PR surface remain unchanged.
   - Pre-push at 4efa2e5f passed forty-four steps before the coordinator interrupted its behavioral step to repair two stale module-boundary assertions found by independent review. They still named the former shared slow job and full command. The attempt is retained as interrupted; no passing combined result is claimed. The separate escape replay initially refused the active gate marker before executing, and remains queued until the pre-push run finishes.
-  stop_reason: null
-  next_action: Complete and merge PR120 as the user authorized, then consult the landed BC-264 handoff under think-mq0d. PR116 completes pricing; further H125 work requires a fresh allocation and admission rather than restarting the historical allocation.
+  - 'full gate: full at 46ee41afde9894d05cd26a3003a54f8f6199af0d: failed (hosted 34196436989; 68 of 69 Linux steps passed; all 4214 tests passed; escape screen timed out after 900 seconds)'
+  - 'full gate: fast at 3deb90fceda0ac4b5500a69c731364be6938cdd1: passed (clean detached checkout; all 62 steps and 4115 tests passed; 243.31 seconds)'
+  - The complete pre-push at clean 3deb90fc passes all 45 steps and 4212 non-exhaustive tests in 1040.80 seconds. Two fontTools GIL warnings are retained. The operator shape uses three declared CPUs, two outer jobs and one inner job, with two pytest workers; its tier budget is reported rather than reference-enforced.
+  - The complete translation escape replay at clean 3deb90fc passes in 789.56 seconds with one outer job, two inner workers and the dedicated 1800-second command cap. All 318 eligible records pass; the six declared exclusions remain n68, n69, n103, n105, n110 and n131. This certifies the declared single-square translation screen, not unrestricted packing rigidity.
+  - All required PR jobs pass in hosted run 34204401159 at branch head 3deb90fc; Pages build 34204401156 and mergeability 34204397425 pass. A fresh post-PR119 PDF and layout review also passes, with the acknowledgment and qualified caption independently inspected by the coordinator.
+  - Closure combines retained passing results from hosted 34196436989 with the fresh pre-push, complete escape replay, exact-source fast tier and PR/Pages results at their stated commits. No fresh all-hosted 69-step pass is claimed. Scientific certificate inputs and exhaustive implementation are unchanged from 46ee41af; later workflow, budget, test and font changes have their own passing checks.
+  - Final GitHub review at 08:44 UTC found no formal reviews, comments or review threads on PR120; main remains 2980c5bc. PR116/121 remain open. Their scientific status and assigned identifiers are preserved; their eventual integration must combine generated views and the equivalent CI repairs. The separate PR122/123 CI stack remains unimported.
+  - The final resource receipt is a live-task lower bound through 2026-09-08T08:34:00Z. It includes the task tree only through that declared cutoff and does not claim later publication work or continuous activity across the owner interruption.
+  stop_reason: The source-consistency review and integration are complete, with passing source-specific validation and retained failures. Final record publication, authorized PR120 merge and tracker synchronization are the remaining closeout actions.
+  next_action: Merge PR120 after the final record commit passes its affected and hosted checks, then close think-4v5w, think-4g6w and think-7tus. Further H125 work remains conditional on the landed PR116/BC-264 handoff, a fresh allocation and admission under think-mq0d; source-recovery and released-contact follow-ups remain open.
 ---
 # N26 Source Consistency and Upstream Integration
 

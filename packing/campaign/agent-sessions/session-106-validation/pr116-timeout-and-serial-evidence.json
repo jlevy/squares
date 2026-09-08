@@ -1,0 +1,55 @@
+{
+  "retrieved_at": "2026-09-08",
+  "scope": "Direct GitHub run metadata and original job logs, plus local Git source comparison; no packing search.",
+  "failed": {
+    "run_id": 34181619739,
+    "head": "180f776160a448439a7b9a79d3a127554cb44f68",
+    "job_url": "https://github.com/jlevy/squares/actions/runs/34181619739/job/101921696073",
+    "event": "pull_request",
+    "conclusion": "failure",
+    "excerpt": [
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T02:53:55.2525718Z ##[group]Run uv run --frozen --all-extras --group dev packing-validate --only \"negative controls\" --only \"n=40 rigidity bracket still reproduces\" --only \"known-best n=1..324 atlas rebuild\" --only \"single-square translation escape screen\" --only \"exact rational grid replay\" --jobs 2 --inner-jobs 2",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T02:53:55.2527804Z ^[[36;1muv run --frozen --all-extras --group dev packing-validate --only \"negative controls\" --only \"n=40 rigidity bracket still reproduces\" --only \"known-best n=1..324 atlas rebuild\" --only \"single-square translation escape screen\" --only \"exact rational grid replay\" --jobs 2 --inner-jobs 2^[[0m",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T03:23:59.2305149Z command timed out after 1800 seconds: /home/runner/work/squares/squares/packing/.venv/bin/python -m devtools.screen_translation_escape --check",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T03:23:59.2325006Z   1801.00s  single-square translation escape screen",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T03:23:59.2325457Z    848.74s  known-best n=1..324 atlas rebuild",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T03:23:59.2325859Z    608.55s  negative controls",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T03:23:59.2327074Z   1801.00s  TOTAL (wall)",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T03:23:59.2327821Z   1801.00s  wall, against no declared ceiling",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T03:23:59.2330499Z 1 STEP FAILED:",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T03:23:59.2330814Z   - single-square translation escape screen"
+    ]
+  },
+  "passed": {
+    "run_id": 34183723509,
+    "head": "60bd9d0869801bca442f476235dfc2b0589c3dfe",
+    "job_url": "https://github.com/jlevy/squares/actions/runs/34183723509/job/101927794576",
+    "event": "pull_request",
+    "conclusion": "success",
+    "excerpt": [
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T03:30:29.5950648Z ##[group]Run uv run --frozen --all-extras --group dev packing-validate --only \"negative controls\" --only \"n=40 rigidity bracket still reproduces\" --only \"known-best n=1..324 atlas rebuild\" --only \"single-square translation escape screen\" --only \"exact rational grid replay\" --jobs 1 --inner-jobs 2",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T03:30:29.5952731Z ^[[36;1muv run --frozen --all-extras --group dev packing-validate --only \"negative controls\" --only \"n=40 rigidity bracket still reproduces\" --only \"known-best n=1..324 atlas rebuild\" --only \"single-square translation escape screen\" --only \"exact rational grid replay\" --jobs 1 --inner-jobs 2^[[0m",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T04:06:46.9006368Z   1069.84s  single-square translation escape screen",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T04:06:46.9006882Z    476.20s  known-best n=1..324 atlas rebuild",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T04:06:46.9007300Z    374.98s  negative controls",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T04:06:46.9007890Z    227.15s  n=40 rigidity bracket still reproduces",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T04:06:46.9008782Z     26.67s  exact rational grid replay",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T04:06:46.9009226Z   2174.84s  TOTAL (wall)",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T04:06:46.9018782Z   2174.84s  wall, against no declared ceiling",
+      "deferred-steps\tUNKNOWN STEP\t2026-09-08T04:06:46.9021932Z 5 of 69 STEPS PASSED (--only ['negative controls', 'n=40 rigidity bracket still reproduces', 'known-best n=1..324 atlas rebuild', 'single-square translation escape screen', 'exact rational grid replay']; this is not the full gate)"
+    ]
+  },
+  "caution": "The earlier different run34177317419 reported slow1800/screen900. This receipt is the later numeric-only run34181619739, which directly reports screen1800.",
+  "source_comparison": {
+    "old": "60bd9d0869801bca442f476235dfc2b0589c3dfe",
+    "new": "36c20d5e76af660a30330d23ffbf4f0b662fcfb2",
+    "screen_driver": "identical",
+    "atlas_tree": "identical",
+    "witnesses_tree": "identical",
+    "all_manifest_referenced_witness_paths": 324,
+    "changed_manifest_witness_paths": [],
+    "sqpack_package": "identical except cli/validate.py",
+    "pyproject_and_uv_lock": "identical",
+    "limit": "Same screen geometry, exact core and declared dependency versions; different host and whole workflow context still prevent a guaranteed wall-time claim."
+  }
+}

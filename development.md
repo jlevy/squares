@@ -494,8 +494,9 @@ This keeps the full translation screen from competing with another numeric pool.
 The screen exceeded even its 1800-second budget when two pools shared a hosted runner in
 [run 34181619739](https://github.com/jlevy/squares/actions/runs/34181619739).
 Certificate pools also enforce actual CPU availability, the four-worker maximum, and the
-grid-memory budget. This allocation preserves the parallelism previously available when
-certificate pools ignored `PACK_JOBS`; it is not a measured speedup claim.
+grid-memory budget. The four-worker exhaustive setting preserves the parallelism
+previously available when certificate pools ignored `PACK_JOBS`; it is not a measured
+speedup claim.
 
 CPU observations are diagnostic only.
 Process counters can charge a child’s setup to the call that reaps it and omit
