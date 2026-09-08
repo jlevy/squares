@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **57** evidence records. **46** are formal; **40** of those were established here.
-- **7** rest on an argument made elsewhere, of which **5** have been read by nobody here.
+- **62** evidence records. **46** are formal; **40** of those were established here.
+- **11** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **16** claim to be first established here. **4** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
@@ -20,12 +20,17 @@ results, it is a statement about what this repository has itself examined.
 
 | evidence | cases | claim | assurance | method decides | whose work | read here | novelty |
 | --- | ---: | --- | --- | --- | --- | --- | --- |
+| `E-green-ds7-theorem9-reported-lower` | 48 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published |
+| `E-green-ds7-theorem10-reported-lower` | 5 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published |
+| `E-friedman-ds7-table2-opaque-lower` | 1 | lower-bound | reported | - | elsewhere | - | previously-published |
+| `E-n017-maciver-reported-lower` | 0 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published |
+| `E-green26-reported-lower` | 2 | lower-bound | reported | - | - | - | previously-published |
 | `E-kingbird-upper-register` | 221 | upper-bound | reported | - | - | - | previously-published |
 | `E-kingbird-grid-completeness` | 97 | upper-bound | reported | - | - | - | previously-published |
 | `E-unitsquare-release1-report` | 6 | upper-bound | reported | - | - | - | previously-published |
 | `E-basic-grid-upper` | 305 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
 | `E-basic-area-lower` | 18 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
-| `E-nagamochi-lower` | 312 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published |
+| `E-nagamochi-lower` | 307 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published |
 | `E-migrated-lower-report` | 6 | lower-bound | reported | - | - | - | *not assessed* |
 | `E-side2-center-lower` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge |
 | `E-n005-gobel-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
@@ -67,7 +72,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-n017-burns-control-decision` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n017-mira-point-certificate-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | not-reviewed | previously-published |
 | `E-n017-fort-point-certificate-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | not-reviewed | previously-published |
-| `E-n017-anabologyco-weighted-certificate` | 0 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published |
+| `E-n017-anabologyco-weighted-certificate` | 2 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published |
 | `E-n017-massaccesi-h052-agreement` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n012-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n012-independent-verifier` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
@@ -80,11 +85,11 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 7, verified 46
-- **method**: exact-algebraic 36, interval-certified 3, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 7
-- **novelty**: apparently-novel 16, common-knowledge 4, not assessed 4, previously-published 33
+- **assurance**: numerically-checked 4, reported 12, verified 46
+- **method**: exact-algebraic 36, interval-certified 3, numerical-multiprecision 4, proof-audited 1, published-proof 6, reported 12
+- **novelty**: apparently-novel 16, common-knowledge 4, not assessed 4, previously-published 38
 
-The `cases` column is how many of the hundred frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited by ninety-eight cases is the catalogue everyone reports from and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
+The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
 ## What this repository established itself
 
@@ -113,13 +118,13 @@ The `n` column is what each covers and `cases` is how many frontier records cite
 
 | evidence | cases | whose work | read here |
 | --- | ---: | --- | --- |
-| `E-nagamochi-lower` | 312 | elsewhere | informally-verified |
+| `E-nagamochi-lower` | 307 | elsewhere | informally-verified |
 | `E-basic-grid-upper` | 305 | here | - |
 | `E-basic-area-lower` | 18 | here | - |
 | `E-perfect-square-tiling-rigid` | 18 | here | - |
 | `E-fractional-interval-decision` | 7 | here | - |
 
-The most-cited argument this repository did not produce is `E-nagamochi-lower`, carrying 312 of the hundred cases. It is an external proof, and it has been read here: its record carries the review, what was re-derived, and the four things that were not. The arithmetic is what picked it out for reading -- being cited this heavily is the reason to open an argument, not a reason to trust it.
+The most-cited argument this repository did not produce is `E-nagamochi-lower`, carrying 307 frontier cases. It is an external proof, and it has been read here: its record carries the review, what was re-derived, and the four things that were not. The arithmetic is what picked it out for reading -- being cited this heavily is the reason to open an argument, not a reason to trust it.
 
 `[Stromquist 2003]` is why that matters rather than being a formality: its `n = 11` argument needed a source-distinct repair, which `E-n011-repaired-lower` supplies.
 

@@ -226,17 +226,15 @@ def test_ci_keeps_each_gate_jobs_timing_artifacts_even_on_failure() -> None:
 
 
 def test_isolated_jobs_use_the_host_without_multiplying_concurrent_pools() -> None:
-    """A job that owns its runner asks for all of it; a job that shares does not.
+    """Each isolated selection retains its declared worker allocation.
 
-    The shape is read off the selection rather than off the job name, because the name is
-    a label and the selection is the thing that decides. A `--only` naming exactly one
-    step is a job with nothing else on the runner, so `--jobs 1 --inner-jobs 4` is the
-    host's four cpus and not an oversubscription. Anything that shares -- the integration
-    surface behind its `--skip`s, or a `--only` naming several steps -- stays at
-    `--jobs 2 --inner-jobs 2`, where two outer slots of two workers is again about the cpu
-    count rather than half again over it (`BC-218`).
+    The screen and exhaustive tier use four inner workers. The slow lane has xdist
+    workers of its own and retains the two-worker inner cap from PR #120. The other
+    numeric checks run serially with two inner workers, preserving that PR's response
+    to the simultaneous corpus-pool timeout. These flags do not establish a speedup
+    or a total process bound when tests create their own pools.
 
-    `D-481` is why this is a rule over selections instead of a list of exhaustive jobs.
+    `D-484` is why this is a rule over selections instead of a list of exhaustive jobs.
     The escape screen became the second step to own a runner, and under the old matching
     -- which tested for the exhaustive tier by name -- it would have been skipped
     silently, along with the integration surface whose `--skip` list it lengthened.
@@ -260,20 +258,24 @@ def test_isolated_jobs_use_the_host_without_multiplying_concurrent_pools() -> No
                     tokens[tokens.index("packing-validate") + 1 :]
                 )
                 only = namespace.only or []
-                if len(only) == 1:
+                if only == ["slow behavioral tests"]:
+                    assert (namespace.jobs, namespace.inner_jobs) == ("1", "2")
+                elif len(only) == 1:
                     assert (namespace.jobs, namespace.inner_jobs) == ("1", "4")
                 elif namespace.skip or len(only) > 1:
-                    assert (namespace.jobs, namespace.inner_jobs) == ("2", "2")
+                    assert (namespace.jobs, namespace.inner_jobs) == ("1", "2")
                 else:
                     continue
                 checked.add((workflow.name, name))
     assert checked == {
         ("packing-validation.yml", "exhaustive"),
         ("packing-validation.yml", "screen"),
+        ("packing-validation.yml", "slow-lane"),
         ("packing-validation.yml", "validate"),
         ("deep-gate.yml", "exhaustive-tier"),
         ("deep-gate.yml", "deferred-steps"),
         ("deep-gate.yml", "screen"),
+        ("deep-gate.yml", "deferred-slow-lane"),
     }
 
 
@@ -740,7 +742,7 @@ def test_slow_behavioral_step_selects_exactly_what_the_quick_lane_defers(
     expected tuple from `*validate._xdist_distribution(1)` -- the helper the code under
     test calls -- and so asserted nothing on any host where that helper answers `()`: one
     cpu, or every cpu already claimed by `--jobs`. A `_slow_tests` with its workers deleted
-    passed it on a one-cpu view of this box, and that is `D-481` exactly: the two lanes
+    passed it on a one-cpu view of this box, and that is `D-484` exactly: the two lanes
     split, and only one of them given workers.
 
     The call is recorded too, because the count has to be sized from this run's `--jobs`
@@ -1644,8 +1646,8 @@ def test_only_whole_suite_and_solo_steps_carry_budgets() -> None:
     The exhaustive exact tier became the third on 2026-09-05, and it is the same class:
     a whole suite, of complete finite certificate decisions, that measured 892 s on CI's
     runner against the 900 s cap it had been inheriting -- eight seconds from failing on
-    every merge to main. A fourth budgeted step would mean the cap is wrong rather than
-    that another suite is heavy, and should raise the cap instead of extending this set.
+    every merge to main. The rule proposed then was that a fourth budgeted step would
+    mean the shared cap needed revisiting instead of extending this set.
     The step `--push` builds outside this tuple is not a fourth: when its selector
     expands to the whole suite it runs the quick and slow lanes together, so it takes the
     constant that bounds both (D-432), which the next test holds.
@@ -1657,7 +1659,7 @@ def test_only_whole_suite_and_solo_steps_carry_budgets() -> None:
     at `QUICK_TEST_WALL_BACKSTOP_SECONDS` is no longer a step the shared cap is wrong for. An
     exception that is no longer needed is not harmless -- it is a guard switched off.
 
-    The fourth arrived on 2026-09-08 with `D-481`, and the paragraph above said a fourth
+    The fourth arrived on 2026-09-08 with `D-484`, and the paragraph above said a fourth
     would mean the shared cap is wrong. That warning was written when every budgeted step
     shared a runner with fifty-seven short ones, and it is right about that case. The
     escape screen earned its budget elsewhere: `--only` puts it alone on its own
@@ -1683,6 +1685,12 @@ def test_only_whole_suite_and_solo_steps_carry_budgets() -> None:
 
     Recorded honestly: the second budget was added by the coordinator during an
     unattended run and has not been independently reviewed.
+
+    The fourth is a corpus sweep, rather than a suite: the whole translation escape
+    screen at `n=1..324` timed out after 900s in hosted run 34196436989. It now carries
+    the independent 1800s budget used by PR #116. The shared cap remains 900s for
+    ordinary checks, including the sampled screen; a larger corpus does not justify
+    extending every subprocess's deadline.
     """
     budgeted = {
         step.name: step.budget_seconds for step in validate.STEPS if step.budget_seconds
@@ -1696,6 +1704,39 @@ def test_only_whole_suite_and_solo_steps_carry_budgets() -> None:
         "exhaustive exact behavioral tests": 3600,
         "single-square translation escape screen": 1800,
     }
+
+
+@pytest.mark.parametrize(
+    ("timeout_seconds", "explicit", "expected_timeout"),
+    [(900.0, False, 1800.0), (7.0, True, 7.0), (2400.0, True, 2400.0)],
+)
+def test_whole_escape_screen_uses_its_budget_unless_the_operator_sets_a_cap(
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    timeout_seconds: float,
+    explicit: bool,
+    expected_timeout: float,
+) -> None:
+    observed: list[float] = []
+
+    def probe(context: validate.Context, module: str, *arguments: str) -> str:
+        assert module == "devtools.screen_translation_escape"
+        assert arguments == ("--check",)
+        observed.append(context.timeout_seconds)
+        return f"translation escape screen check passed: {validate._screen_findings()}"
+
+    monkeypatch.setattr(validate, "_module", probe)
+    step = next(
+        step
+        for step in validate.STEPS
+        if step.name == "single-square translation escape screen"
+    )
+    context = _budget_context(timeout_seconds=timeout_seconds, explicit=explicit)
+    result = validate._execute_step_result(step, context)
+
+    assert result.status == "passed"
+    assert observed == [expected_timeout]
+    assert context.timeout_seconds == timeout_seconds
 
 
 @pytest.mark.parametrize(
@@ -2212,8 +2253,8 @@ def test_every_tier_band_is_declared_for_the_shape_ci_runs() -> None:
     reports four and the register records four, and a runner that changed size would
     show up as an unenforced band rather than as a wrong one.
 
-    The post-merge commands are out of scope rather than exempt. Both are narrowed --
-    `--skip` on one, `--only` on the other -- so neither is a clean reading of a whole
+    The post-merge commands are out of scope rather than exempt. All are narrowed --
+    `--skip` on the broad job, `--only` on the isolated lanes -- so none reads a whole
     tier, which is the same reason the `full` entry says only its ceiling applies.
     """
     register = gate_budgets.load()
@@ -2247,27 +2288,29 @@ def test_the_post_merge_jobs_partition_the_gate() -> None:
 
     think-tr2z split the exhaustive tier onto its own runner so that it reports its own
     verdict against its own budget; `--skip` on the other job is what stops it being paid
-    for twice. `D-481` split the translation escape screen off for a different reason --
+    for twice. `D-484` split the translation escape screen off for a different reason --
     not its verdict but its worker count, which beside the rest of the gate is two and
     alone is four. Every part of both splits is a name typed into a YAML file, so this
     reads the workflow, parses each command with the CLI's own parser, and resolves it
     through the CLI's own selector: a step added to `STEPS` lands in exactly one job, and
     a rename that breaks the split fails here rather than after a merge.
 
-    A merge still runs the gate as the complete integration surface plus the two steps
-    that earned their own runner, not as the pull request's four parts. The `geometry`,
+    The slow lane also has its own runner. The complete integration surface excludes
+    all three isolated selections. The `geometry`,
     `suite` and `sweeps` jobs are pull-request only, and the complete integration surface
     here already contains every step they would have run.
     """
     selections = _workflow_selections(pull_request=False)
 
-    assert set(selections) == {"validate", "exhaustive", "screen"}
+    assert set(selections) == {"validate", "exhaustive", "screen", "slow-lane"}
     assert selections["exhaustive"] == {"exhaustive exact behavioral tests"}
     assert selections["screen"] == {"single-square translation escape screen"}
-    solo = selections["exhaustive"] | selections["screen"]
-    assert not selections["exhaustive"] & selections["screen"]
-    assert not selections["validate"] & solo
-    assert selections["validate"] | solo == {step.name for step in validate.STEPS}
+    assert selections["slow-lane"] == {"slow behavioral tests"}
+    names = list(selections)
+    for index, job in enumerate(names):
+        for other in names[index + 1 :]:
+            assert not selections[job] & selections[other], f"{job} and {other} overlap"
+    assert set().union(*selections.values()) == {step.name for step in validate.STEPS}
 
 
 def test_the_longest_steps_are_submitted_first() -> None:
@@ -2294,8 +2337,8 @@ def test_the_longest_steps_are_submitted_first() -> None:
         "exhaustive exact behavioral tests",  # 3600s
         # The three 1800s steps, in declaration order, because the sort is stable and a
         # tie is not a ranking. Which of them starts first does not matter to the wall:
-        # two of the four have their own post-merge runner and are alone on it.
-        "single-square translation escape screen",  # 1800s, `D-481`
+        # three of the four have their own post-merge runner and are alone on it.
+        "single-square translation escape screen",  # 1800s, `D-484`
         "negative controls",  # 1800s, and declared before the suite
         "slow behavioral tests",  # 1800s, the non-exhaustive suite's own bound
     ]

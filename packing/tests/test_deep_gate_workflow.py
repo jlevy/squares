@@ -1,6 +1,6 @@
 """The deep gate's properties, which are otherwise only a comment nobody re-reads.
 
-`packing-validation.yml` keeps four steps off the pull-request surface on cost, and its
+`packing-validation.yml` defers expensive steps from the pull-request surface, and its
 own header states the consequence: "a pull request can be green while a deferred test is
 broken." On 2026-09-05 that happened twice.
 `test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net` asserted a
@@ -138,18 +138,19 @@ def test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers() -> No
     without anyone maintaining a count.
 
     The jobs are disjoint for the reason the post-merge jobs are: nothing is paid for
-    twice. Two steps are alone in a job, for two different reasons. The exhaustive tier is
+    twice. Three steps have their own jobs. The exhaustive tier is
     `D-456` -- when it outgrew its budget the gate killed it with its output in an
     unflushed pipe, and three merges went red saying nothing about the sixty other steps.
     A deep gate that cannot say *which* deferral broke is most of the way back to the
-    daily backstop. The escape screen is `D-481`, and its reason is workers rather than
+    daily backstop. The escape screen is `D-484`, and its reason is workers rather than
     verdicts: it is a process pool sized by `PACK_JOBS`, so beside the other five
     deferrals it gets two of the runner's four. Run 34177317419 killed it here at the
     shared 900s cap on commit `831697c0`, an hour after post-merge run 34176106076 had
     finished the same step at 858.62s on the same commit.
 
     Disjointness is asserted pairwise over whatever jobs exist rather than over a named
-    pair. A fourth job arguing its way onto its own runner still fails this test loudly
+    pair. The slow lane's separate runner is included in the same partition. A new job
+    still fails this test loudly
     the day it arrives -- the job-set assertion below fires first and has to be taught the
     new name -- and once it has been, the pairwise loop covers it without further edits.
     """
@@ -158,13 +159,20 @@ def test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers() -> No
         for job_name, command in _gate_commands(DEEP_GATE).items()
     }
 
-    assert set(selections) == {"deferred-steps", "exhaustive-tier", "screen"}
+    assert set(selections) == {
+        "deferred-steps",
+        "deferred-slow-lane",
+        "exhaustive-tier",
+        "screen",
+    }
+    assert selections["deferred-slow-lane"] == {"slow behavioral tests"}
     assert selections["exhaustive-tier"] == {"exhaustive exact behavioral tests"}
     assert selections["screen"] == {"single-square translation escape screen"}
     for left, right in combinations(sorted(selections), 2):
         assert not selections[left] & selections[right], f"{left} and {right} overlap"
 
     covered: set[str] = set().union(*selections.values())
+    assert len(covered) == sum(len(selected) for selected in selections.values())
     assert covered == {step.name for step in validate.STEPS if not step.fast}
 
 
@@ -224,7 +232,7 @@ def test_the_deep_gate_reports_one_context_and_never_leaves_it_pending() -> None
     filter -- while a job skipped by its own `if` reports a conclusion. So the label is
     tested in the job conditions (above) rather than in the trigger's filters, and the
     aggregate is gated the same way as the jobs it waits on: on an unlabelled pull
-    request all three skip together and none of them hangs.
+    request all four skip together and none of them hangs.
     """
     jobs = _workflow(DEEP_GATE)["jobs"]
     aggregate = jobs[AGGREGATE_JOB]

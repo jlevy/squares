@@ -177,10 +177,12 @@ def test_readme_inventory_ignores_cache_only_legacy_directories(tmp_path: Path) 
 
 
 def _gate_jobs(workflow: Path) -> dict[str, tuple[list[dict[str, object]], str]]:
-    """Each job that runs `packing-validate`: its steps and that one command."""
+    """Each post-merge or deferred gate job: its steps and selected command."""
     document = yaml.safe_load(workflow.read_text(encoding="utf-8"))
     found: dict[str, tuple[list[dict[str, object]], str]] = {}
     for job_name, job in _mapping(_mapping(document)["jobs"]).items():
+        if "github.event_name == 'pull_request'" in str(_mapping(job).get("if", "")):
+            continue
         raw_steps = _mapping(job)["steps"]
         assert isinstance(raw_steps, list)
         steps = [_mapping(step) for step in raw_steps]
@@ -188,6 +190,7 @@ def _gate_jobs(workflow: Path) -> dict[str, tuple[list[dict[str, object]], str]]
             str(step["run"])
             for step in steps
             if isinstance(step.get("run"), str) and "packing-validate" in str(step["run"])
+            if "github.event_name == 'pull_request'" not in str(step.get("if", ""))
         ]
         if commands:
             assert len(commands) == 1, f"{job_name} runs the gate twice"
@@ -219,12 +222,13 @@ def _checkout_depth(steps: list[dict[str, object]]) -> object:
     return _mapping(checkout.get("with") or {}).get("fetch-depth")
 
 
-def test_whichever_deep_gate_job_runs_the_slow_lane_fetches_full_history() -> None:
+@pytest.mark.parametrize("workflow", [DEEP_GATE_WORKFLOW, VALIDATION_WORKFLOW])
+def test_whichever_job_runs_the_slow_lane_fetches_full_history(workflow: Path) -> None:
     """The slow retained-theorem review reads exact historical Git objects.
 
     Found by what the job selects rather than by its name. This test used to open
     `deferred-steps` directly, and the lane it guards is the next candidate for a runner
-    of its own: it gained xdist with `D-481`, and a split would be built the way the
+    of its own: it gained xdist with `D-484`, and a split would be built the way the
     `screen` job was, by copying the shallow solo job beside it. Repointing a name-keyed
     test at the new job is the natural accommodation, and `fetch-depth: 0` is exactly what
     that copy would have lost. Keyed to the selection, the test follows the lane to
@@ -232,10 +236,10 @@ def test_whichever_deep_gate_job_runs_the_slow_lane_fetches_full_history() -> No
     """
     carriers = {
         job_name: steps
-        for job_name, (steps, command) in _gate_jobs(DEEP_GATE_WORKFLOW).items()
+        for job_name, (steps, command) in _gate_jobs(workflow).items()
         if "slow behavioral tests" in _selected_steps(command)
     }
-    assert len(carriers) == 1, f"the slow lane runs in {sorted(carriers) or 'no deep-gate job'}"
+    assert len(carriers) == 1, f"the slow lane runs in {sorted(carriers) or 'no job'}"
     [(job_name, steps)] = carriers.items()
     assert _checkout_depth(steps) == 0, (
         f"{job_name} runs the slow retained-theorem review, which reads exact historical "
@@ -253,7 +257,7 @@ def test_the_other_deep_gate_jobs_need_no_history_and_the_screen_is_one_of_them(
     history, the slow lane, which the test above follows to its job; every other deep-gate
     job is held to the rule here.
 
-    `screen` is named because it is the job `D-481` split out and the one nothing had
+    `screen` is named because it is the job `D-484` split out and the one nothing had
     asserted a checkout depth for. The screen reads `packing/atlas/known-best/*` and
     `packing/witnesses/*` from the working tree and no Git object, so its shallow checkout
     is correct today and `fetch-depth: 0` is not required of it. That is what is asserted:
@@ -428,15 +432,15 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         if _mapping(step).get("name") == "Run the complete integration surface"
     )
     assert full_step["if"] == "github.event_name != 'pull_request'"
-    # Two `--skip`s, one per step that has its own runner: the exhaustive exact tier
-    # (1943s, think-tr2z) and the translation escape screen (`D-481`), neither of them a
-    # bill to pay twice. That the three selections still partition `STEPS` is checked
+    # Three `--skip`s, one per step that has its own runner: the exhaustive exact tier,
+    # slow lane and translation escape screen (`D-484`). The four selections partition
+    # `STEPS`, checked
     # against the CLI's own selector in `test_the_post_merge_jobs_partition_the_gate`;
-    # what is pinned here is that this command is the one that leaves both out.
+    # what is pinned here is that this command leaves all three out.
     assert " ".join(str(full_step["run"]).split()) == (
         'uv run --frozen --all-extras --group dev packing-validate --skip "exhaustive '
-        'exact behavioral tests" --skip "single-square translation escape screen" '
-        "--jobs 2 --inner-jobs 2"
+        'exact behavioral tests" --skip "slow behavioral tests" '
+        '--skip "single-square translation escape screen" --jobs 1 --inner-jobs 2'
     )
 
     # The exhaustive exact tier, split onto its own runner on 2026-09-05 (think-tr2z) so
@@ -462,7 +466,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         )
     ]
 
-    # The translation escape screen, split onto its own runner by `D-481`. The reason is
+    # The translation escape screen, split onto its own runner by `D-484`. The reason is
     # not the exhaustive tier's: the screen reports a single verdict either way, and what
     # it gains alone is workers. `--inner-jobs 4` is the whole point of the job -- it is
     # what `PACK_JOBS` hands the screen's process pool, and beside the rest of the gate at

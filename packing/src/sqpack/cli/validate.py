@@ -254,7 +254,7 @@ SLOW_TEST_FLOOR_SECONDS = 1.0
 #: its own job rather than a larger share of this one (think-tr2z).
 EXHAUSTIVE_SUITE_BUDGET_SECONDS = 3600.0
 #: The whole single-square translation escape screen, which has had its own post-merge
-#: runner since `D-481`. Sized as a hang detector rather than as a cost guard, and a
+#: runner since `D-484`. Sized as a hang detector rather than as a cost guard, and a
 #: budget is a property of the step rather than of a job: `_execute_step_result` raises
 #: the subprocess cap to this number wherever the step runs, in any run whose timeout was
 #: not typed by a person. On the solo `screen` jobs, where `--only` reports no tier and no
@@ -1200,9 +1200,9 @@ def _xdist_distribution(jobs: int) -> tuple[str, ...]:
     Shared by the two lanes because they are the same tests under the same runner, split
     by a marker. `BC-214` split them and gave xdist to the quick half only, which left the
     slow half -- the half selected for costing the most -- as the one place in the gate
-    that ran a test suite in a single process. It cost the whole of `D-481`: 1020.77s
-    serially on a four-cpu box, against 1801s and a killed step on CI, where the lane runs
-    beside another `--jobs 2` slot and pays for the contention without any of the
+    that ran a test suite in a single process. It cost the whole of `D-484`: 1020.77s
+    serially on a four-cpu box, against 1801s and a killed step on CI, where the lane ran
+    beside another `--jobs 2` slot and paid for the contention without any of the
     parallelism.
 
     The same 97 tests measured 718.52s at four workers on that box, so the lane is 1.42x
@@ -1214,15 +1214,19 @@ def _xdist_distribution(jobs: int) -> tuple[str, ...]:
     spreading evenly, which is a question about its longest members.
 
     Two qualifications on that 1.42x, both about shape rather than about the sign. It is
-    *four* workers, which is `--jobs 1`, and no job runs the lane that way: both CI jobs
-    that reach it pass `--jobs 2`, where the formula above gives three. At `-n 3` on a
+    *four* workers, which is `--jobs 1`. At the time of those readings both CI jobs
+    reaching the lane passed `--jobs 2`, where the formula above gives three. At `-n 3` on a
     contended box the same tests were 795.11s, about 1.28x against the serial reading.
-    The shipped shape has a hosted reading too -- 1212.70s in the deep gate's
+    That earlier shape has a hosted reading too -- 1212.70s in the deep gate's
     `deferred-steps` job on run 34190285360, beside another outer slot -- and it is the
     first uncensored one: the CI readings it replaces were killed at the 1800s cap on runs
     34172652457 and 34177317419, so `>= 1801s` was a cap and not a duration. 1212.70s is
     587s inside that budget on one run, which is where `D-472` applies rather than a claim
     that the lane is comfortably inside it.
+
+    The integrated workflows now isolate the slow lane at `--jobs 1 --inner-jobs 2`,
+    giving it four xdist workers on the four-CPU hosted runner. The readings above
+    describe the earlier job selections; they do not measure this combined allocation.
 
     And the default local gate does not get this at all. `packing-validate` with no
     `--jobs` defaults it to the cpu count, so `cpus - jobs + 1` is 1, this helper returns
@@ -1797,8 +1801,9 @@ def _translation_escape_sample(context: Context) -> str:
 
     Deferring the whole re-screen is argued on
     `test_the_pull_request_surface_defers_only_what_was_measured`: 766.26s at `n=1..324`
-    against a 210s ceiling, and within 134s of the gate's own per-step subprocess timeout
-    on a box faster than CI's. What stays here is everything that is not per-record
+    against a 210s ceiling, and within 134s of the then-shared 900s subprocess timeout.
+    The whole screen now declares `SCREEN_BUDGET_SECONDS` after exceeding that
+    cap on CI. What stays here is everything that is not per-record
     geometry -- the aggregate against its own cases, the method block, the schema, the
     per-certificate claims -- and a fixed recorded slice of the records replayed in full.
 
@@ -2932,7 +2937,7 @@ STEPS: tuple[Step, ...] = (
         ),
     ),
     # The whole re-screen, off the pull-request surface since 2026-09-07 and, since
-    # `D-481`, on its own post-merge runner. The 134s of margin the previous note here
+    # `D-484`, on its own post-merge runner. The 134s of margin the previous note here
     # claimed against the shared 900s cap was not margin, and the control for that is one
     # commit run twice: on `831697c0` the step finished at 858.62s on post-merge run
     # 34176106076 and was killed at the cap an hour later on deep-gate run 34177317419 --
@@ -4013,7 +4018,7 @@ def _submission_order(selected: Sequence[Step]) -> list[Step]:
     whose wall time is one long step would have started paying for the short ones.
 
     `budget_seconds` is the ordering key because it is already the file's declaration
-    that a step runs long, argued next to each of the three that carry one; nothing here
+    that a step runs long, argued next to each of the four that carry one; nothing here
     guesses a duration. Descending, so the longest budget goes first, and stable, so
     everything unbudgeted keeps declared order.
 

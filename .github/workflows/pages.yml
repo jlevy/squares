@@ -24,6 +24,7 @@ name: Certificate page
       - packing/devtools/measure_net_coarsening.py
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
+      - packing/devtools/sans_instances.py
       - packing/devtools/check_print_layout.py
       - packing/devtools/inspect_explainer_typography.py
       - packing/devtools/check_math_faces.py
@@ -36,6 +37,7 @@ name: Certificate page
       - packing/atlas/known-best/rendering/n-011.svg
       - packing/devtools/templates/explainer-shell.html
       - packing/devtools/templates/explainer-article.md
+      - packing/devtools/templates/fonts/**
       - packing/atlas/known-best/known-best-1-100.svg
       - packing/atlas/known-best/known-best-1-100.png
       - packing/atlas/known-best/known-best-1-100.pdf
@@ -56,6 +58,7 @@ name: Certificate page
       - packing/devtools/measure_net_coarsening.py
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
+      - packing/devtools/sans_instances.py
       - packing/devtools/check_print_layout.py
       - packing/devtools/inspect_explainer_typography.py
       - packing/devtools/check_math_faces.py
@@ -68,6 +71,7 @@ name: Certificate page
       - packing/atlas/known-best/rendering/n-011.svg
       - packing/devtools/templates/explainer-shell.html
       - packing/devtools/templates/explainer-article.md
+      - packing/devtools/templates/fonts/**
       - packing/atlas/known-best/known-best-1-100.svg
       - packing/atlas/known-best/known-best-1-100.png
       - packing/atlas/known-best/known-best-1-100.pdf
