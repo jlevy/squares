@@ -259,22 +259,28 @@ EXHAUSTIVE_SUITE_BUDGET_SECONDS = 3600.0
 #: it: this number is the only bound on that job.
 #:
 #: Why not leave it at the shared 900s, given the job doubles the screen's workers.
-#: Because the doubling did not buy what it looked like it would, and the hosted number
-#: says so: **944s at four workers** on run 34188003140, the deep gate's first `screen`
-#: job. That is past the old cap. Splitting the job and leaving the cap at 900 would have
-#: produced a red gate on the very first run of the split.
+#: Because the doubling did not buy what it looked like it would, and two hosted readings
+#: of the split job say so: 944s on run 34188003140 and 861s on run 34189176373, a spread
+#: of 1.10x, geometric mean **901.5s**.
 #:
-#: The estimate this replaces was 613-846s, reached by applying the slow lane's measured
-#: 1.42x to the 858.62s the screen cost at two workers on run 34176106076. It was wrong,
-#: and optimistic. What it cannot support is the opposite claim either: 858.62s was a
-#: different (faster) runner, so 944s against it is not evidence that four workers are
-#: slower than two. One reading per configuration is a sample (`D-472`), and there is one
-#: reading at four workers. 794.5s at four workers over the same 318 records on a
-#: four-cpu development box is the local figure beside it.
+#: That mean is 1.0017x the old 900s cap. The step does not merely exceed the cap it was
+#: running under -- its central estimate sits within a second of it, which is the sharpest
+#: available statement of why the cap had to move: at 900 this step fails about half the
+#: time, and which half is decided by the runner. Splitting the job and leaving the cap
+#: alone would have bought a differently-shaped coin flip, not a fix.
 #:
-#: 1800 is 1.9x the one hosted reading. A screen that has genuinely hung is still killed
-#: inside half an hour, which is what the number is for. `think-ph9v` owns the open
-#: question of why neither this step nor the slow lane scales with its worker count.
+#: 1800 is 1.9966x that mean, which is just inside the `max_headroom: 2.0` rule
+#: `devtools/gate-budgets.yaml` applies to every tier -- a ceiling above twice the
+#: recorded cost is not a ceiling. It landed there before the second reading existed, so
+#: read that as the rule endorsing the number rather than the number being derived from
+#: it; the margin is 0.0034 and a third reading could move it either way.
+#:
+#: The estimate all this replaces was 613-846s, from applying the slow lane's measured
+#: 1.42x to the screen's 858.62s at two workers on run 34176106076. It was wrong and
+#: optimistic. It does not license the opposite claim either -- 858.62s came from a
+#: different, faster runner, so neither reading here shows four workers to be slower than
+#: two. What is established is only that this step does not scale with its worker count,
+#: which it now has in common with the slow lane, and `think-ph9v` owns why.
 SCREEN_BUDGET_SECONDS = 1800.0
 
 
