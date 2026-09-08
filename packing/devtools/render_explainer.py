@@ -45,7 +45,7 @@ from fractions import Fraction
 from functools import cache
 from math import isqrt
 from pathlib import Path
-from typing import NamedTuple, TypedDict
+from typing import Final, NamedTuple, TypedDict
 
 from strif import atomic_output_file
 
@@ -597,6 +597,65 @@ def _declares_nothing(css: str) -> bool:
         stripped = smaller
 
 
+#: The mono face and the styles of it this page declares, the two publishing decisions
+#: `kpress.format.assets` calls `mono_font` and `mono_weights`. Written here rather than
+#: left to a default because this page inlines every face it names: kpress's own builds
+#: link a woff2 and a browser downloads the styles it draws, so a declared-but-unused
+#: style there costs a request nobody makes, while here it costs base64 in every copy of
+#: the page ever served, whether or not a reader's screen ever asks for it.
+#:
+#: `planetaire` and not `system`, because `system` is the reader's machine: it is what
+#: put `Menlo-Regular` in this project's PDF and `DejaVuSansMono` in the Linux one, and
+#: the rule this page is held to (`docs/project/specs/active/plan-2026-09-07-math-text-face.md`)
+#: is that every text run resolves to a face the page ships.
+#:
+#: All four styles, and not the one this page draws. Measured on the article: eleven code
+#: spans, 179 characters, no fenced block and so no highlighted tokens, and none of them
+#: inside a heading, a table, a `<strong>` or an `<em>`. kpress's own CSS sets no weight
+#: or slant on `code` either -- `syntax.css` does, and every one of its rules is scoped to
+#: a `.kpress-code` token that only a fenced block produces. The export agrees: it
+#: embedded exactly one mono face, `Menlo-Regular`. A `regular`-only set would therefore
+#: have carried every glyph this page draws, and kpress refuses it, because `syntax.css`
+#: ships with the design system whether or not a document has a code block, and a browser
+#: answers a style it was not given by shearing or emboldening the one it has. The refusal
+#: is the right one and this page takes the four: the alternative that costs nothing is
+#: `system`, which is the host font again. The price is stated in the plan's Font
+#: Consistency section -- three styles of base64 for a page that draws none of them -- and
+#: what it buys is that the page keeps no private list of which code may be bold, so an
+#: article that adds a fenced block tomorrow gets a drawn face rather than a sheared one.
+#:
+#: One definition, two consumers, and that is deliberate. It is what `mono_css_assets` and
+#: `mono_weights_rejection` are given, and it is what `shell_substitutions` stamps into
+#: `data-kpress-mono-font` on `<html>` -- kpress's own switch, which the shell used to
+#: carry as a literal. A literal is a second copy of a publishing decision: today the
+#: `planetaire` value changes nothing, since it is kpress's default and only `system` has
+#: a rule of its own, so a shell that had drifted to a stale or misspelled value would
+#: have gone on rendering a page that looked right. Stamping it from here is what makes
+#: the two move together, and the render refuses a shell placeholder with no value, so
+#: dropping the key fails the build rather than the page.
+MONO_FONT: Final = "planetaire"
+MONO_WEIGHTS: Final = ("regular", "bold", "italic", "bold-italic")
+
+
+def mono_stylesheets() -> tuple[str, ...]:
+    """kpress's mono stylesheets for this page's settings, refused set and all.
+
+    The names come from `mono_css_assets`, the same call `package_asset_manifest`
+    makes, so this page links what a kpress build would link instead of keeping seven
+    filenames of its own; and the settings go through `mono_weights_rejection` first,
+    the same gate `format.mono_weights` and `RenderOptions` are held to, so a narrowed
+    set fails the render here rather than shipping a page whose code is synthesized.
+    That gate is the reason this function exists at all: nothing else on this side would
+    notice, since a set kpress refuses still returns a perfectly good list of files.
+    """
+    from kpress.format.assets import mono_css_assets, mono_weights_rejection  # noqa: PLC0415
+
+    rejection = mono_weights_rejection(MONO_WEIGHTS, mono_font=MONO_FONT)
+    if rejection is not None:
+        raise SystemExit(f"{Path(__file__).name}: {rejection}")
+    return tuple(mono_css_assets(mono_font=MONO_FONT, mono_weights=MONO_WEIGHTS))
+
+
 def kpress_css(static: Path) -> str:
     """The kpress design system as one stylesheet, its webfonts inlined.
 
@@ -604,11 +663,18 @@ def kpress_css(static: Path) -> str:
     the heading and list treatments, the color roles and both themes are the
     system's to define, and a page that re-declared a subset of them would drift
     from it silently. This page adds only what kpress has no component for.
+
+    The mono stylesheets follow the defaults, which is where kpress's own manifest
+    puts them, and they are the one part of the list this page chooses rather than
+    imports: `DEFAULT_CSS_ASSETS` names no face for the family `style-tokens.css`
+    leads the mono stack with, so a page that took only that constant would name
+    `Planetaire Mono Text`, declare nothing under it, and draw code from the reader's
+    machine while looking as though it had adopted the face.
     """
     from kpress.format.assets import DEFAULT_CSS_ASSETS  # noqa: PLC0415
 
     parts = []
-    for name in (PAGE_RESET, *DEFAULT_CSS_ASSETS):
+    for name in (PAGE_RESET, *DEFAULT_CSS_ASSETS, *mono_stylesheets()):
         css = (static / name).read_text(encoding="utf-8")
         pruned = FONT_FACE_BLOCK.sub(
             lambda match: "" if _print_sans_face(match.group(0)) else match.group(0), css
@@ -1984,8 +2050,17 @@ def shell_substitutions(static: Path, shared: dict[str, str], body: str) -> dict
 
     `BODY_HTML` goes in last, after every other value: it is already substituted
     through, and a later key must not reach inside it.
+
+    `MONO_FONT` is stamped from the constant rather than written into the shell, so the
+    attribute and the stylesheets cannot disagree: `data-kpress-mono-font` is kpress's
+    switch, and a page that named the face in one place and asked `mono_css_assets` for
+    the other would be a page whose markup says `planetaire` while it ships no face --
+    exactly the drift the attribute is supposed to prevent. Under `system` the two move
+    together: the attribute hands code to the platform stack and `mono_css_assets`
+    returns nothing.
     """
     return {
+        "MONO_FONT": MONO_FONT,
         "KPRESS_CSS": kpress_css(static) + katex_css(static),
         "RELATION_CSS": relation_face_css(static),
         "THEME_BOOTSTRAP": theme_bootstrap(static),
