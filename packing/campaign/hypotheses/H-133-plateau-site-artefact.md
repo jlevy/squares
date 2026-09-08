@@ -37,7 +37,13 @@ hypothesis:
     Lane C's cheapest question in X-021 and the one that changes the ladder's status at
     3.82 immediately if the answer is yes; the n = 21 grid artefact is the precedent. The
     exact-cover route is the weighted form of Stromquist's ownership argument and the only
-    one that works on a plateau at exactly eleven.
+    one that works on a plateau at exactly eleven. Answered in session-103 (lane F,
+    2026-09-08): the Trump-strip mechanism is refuted exactly, 45 grid-seed sites and 822
+    of BC-200's retained sites lie in two or more of the scaled cores; the general
+    site-invisible-overlap mechanism holds; adding strip sites left the value at 11.07
+    with the generator stopping on its 32-row pricing cap; the census exceeds one million
+    near-tight cells with no clustering on Trump's cores. Whether the true value at
+    191/50 is below eleven stays open.
 ---
 # H-133 — The Plateau’s Cheapest Test
 

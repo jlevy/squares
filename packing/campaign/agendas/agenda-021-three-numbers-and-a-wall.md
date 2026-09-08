@@ -1099,16 +1099,26 @@ agenda:
           Price one small H114 feature family and its missing kernel-specific
           contract before any target. This has a direct-bound mechanism, unlike
           merely refuting the particular old-support calibration.
-      selected:
-        bead: think-mq0d
-        workflow: insight-iteration
+      - bead: think-znzj
+        workflow: review-planning-oversight
+        priority: 0
         rationale: >-
-          Session095 exp128 closes BC259/H099 at fixed-support optimum11.
-          Its comparative design selects BC264's existing 30-minute feature and
-          kernel-contract pricing, not a target or an automatic hierarchy build.
-          Keep the conditional H101 common-support obstruction as fallback.
-          H107 stays paused and external BC261/273 remains separately owned.
-          This is a live selection update, not a W10 outcome.
+          Added after Agenda 030's first wave started on 2026-09-08, not backdated to
+          this agenda's W10. BC-303 selects the next sustained block from the wave's
+          exact results with independent review; session-103 is the wave's first
+          terminal lane and hands to it.
+      selected:
+        bead: think-znzj
+        workflow: review-planning-oversight
+        rationale: >-
+          Live selection update of 2026-09-08, not a W10 outcome. Agenda 030's first
+          wave is running as sessions 100 to 104 (BC-294, BC-293, BC-295, BC-297 and
+          BC-302); session-103 is its first terminal lane and hands to BC-303, the
+          first-wave selection with independent review, which decides the next
+          sustained block from the lanes' exact results. BC-264's pricing under
+          think-mq0d stays stopped behind think-m2lx's certification and is sequenced
+          after the wave, not displaced; the earlier rationale (Session095 exp128,
+          the H101 fallback, H107 paused, BC261/273 external) still holds.
       operator_input:
         status: unavailable
         note: >-

@@ -168,7 +168,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: complete
     priority: 1
     question: Is the exactly-eleven plateau at 191/50 a site artefact, what is the shrink tax there, and can the plateau be closed as an exact cover?
     hypotheses: [H-133]
@@ -187,6 +187,28 @@ agenda:
     depends_on: []
     parallel_group: lanes-ladder
     program: n11-structure-and-conditional-dots
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-f-plateau-at-3-82.md
+    - packing/campaign/agent-sessions/session-103-plateau-artefact-at-3-82.md
+    outcomes:
+    - scope: The artefact test, one site-addition run and the exact tight-cell census at 191/50, in session-103 (2026-09-08, 56 minutes of a 150-minute block)
+      classification: achieved
+      result: >-
+        Decided exactly: the plateau is not a Trump-strip artefact. Trump's packing scaled by
+        (191/50)/U has fourteen overlap strips 0.0124 to 0.0254 wide and 45 of the 3365
+        grid-seed sites, 822 of BC-200's 12761 retained sites, lie in two or more of its cores,
+        so the hypothesis's mechanism is refuted; the general mechanism holds in that BC-200's
+        dual folds half its weight within 2.5 degrees of the axes and one per cent near Trump's
+        angle. Adding 70 strip sites moved the row-converged value from 1223/110 to 11.072443
+        and the generator stopped by its own criterion, which prices only the heaviest 32 dual
+        rows; the exact census on the block's one valid measure found 0 exactly tight cells and
+        1,934,092 within the gap in 18,440 components spread over the centre domain, recorded
+        as the obstruction to the exact cover. The shrink tax was not measured.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-f-plateau-at-3-82.md
+      - packing/campaign/agent-sessions/session-103-plateau-artefact-at-3-82.md
+      disposition: continue
+      follow_up: think-4uon
     next_evidence: Whether the ladder's top is the instrument's or the geometry's; the size of the ownership tree.
   - id: BC-298
     purpose: research

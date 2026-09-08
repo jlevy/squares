@@ -305,6 +305,7 @@ case or experiment separately.
 | [Agenda 030, lane B: Orientation-class constraints](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md) | research synthesis | record | retained | — |
 | [Agenda 030, lane C: The transfer of the s(10) proof](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md) | research synthesis | record | retained | — |
 | [Agenda 030, lane D: Contact lemmas and the closing route](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md) | research synthesis | record | retained | — |
+| [Agenda 030, lane F: The exactly-eleven plateau at 191/50](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-f-plateau-at-3-82.md) | research synthesis | record | retained | — |
 | [BC-255 Near-Axis Reader Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-near-axis-reader-independent-review.md) | dated review record | record | retained | — |
 | [BC-252 — Complete Rows on the Retained Sites](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md) | research synthesis | record | retained | — |
 | [BC-255: Fixed-Side Discriminator Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md) | research synthesis | record | retained | — |
@@ -554,7 +555,7 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-**Parallel structural lanes at `n = 11`, prepared and paused.**
+**Parallel structural lanes at `n = 11`, first wave running.**
 [X-021](packing/campaign/explorations/X-021-what-can-be-proved-about-eleven-squares.md)
 pursued X-019’s exploration with four Fable lanes in parallel and reports what can be
 proved about eleven-square packings today: seven corner and wall lemmas, exact-verified
@@ -574,9 +575,24 @@ replaces Agenda 029’s first block and leaves that agenda’s cells to be disch
 closeout. H-127–H-134 register the lanes’ claims.
 The lane reports and every script they ran are retained under
 [`results/agenda-030/`](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md).
-No bound changed and no research has started: the next entry is the owner’s
-research-start instruction, after which the coordinator allocates `session-100` onward
-and `exp-130` onward serially and dispatches the ready lanes.
+No bound has changed.
+The owner started the wave on 2026-09-08: sessions 100 to 104 run BC-294 (the `B = 1`
+value and the kill tests), BC-293 (the corner-skeleton measure), BC-295 (the band replay
+and widening), BC-297 (the `3.82` plateau) and BC-302 (the eleven-mark ownership set),
+each in its own worktree on `claude/squares-n11-constraints-wl9atd`, with `exp-130` the
+next experiment id.
+[Session-103](packing/campaign/agent-sessions/session-103-plateau-artefact-at-3-82.md)
+is the first terminal lane: the exactly-eleven plateau at `191/50` is not a Trump-strip
+artefact (45 grid-seed sites and 822 of BC-200’s retained sites lie in two or more of
+the scaled cores), the general site-invisible-overlap mechanism holds, adding strip
+sites left the value at `11.07` with the generator stopping on its 32-row pricing cap,
+and the exact census exceeds one million near-tight cells with no clustering on Trump’s
+cores, recorded as the obstruction to the exact cover.
+
+**Selected next entry:** `think-znzj` is BC-303, the first-wave selection with
+independent review, which reads every lane’s exact results once sessions 100, 101, 102
+and 104 are terminal and decides the next sustained block; until then the coordinator
+integrates each lane as it lands.
 The same block repaired the deferred checkpoint (a third label-gated job for the slow
 behavioural lane and a declared budget for the escape screen) and amended OR-2, OR-3 and
 OR-6.
@@ -687,8 +703,8 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**Selected next entry:** `think-mq0d` retains BC-264’s disposition after the completed
-H114 feature and kernel-contract pricing.
+**BC-264’s entry:** `think-mq0d` retains BC-264’s disposition after the completed H114
+feature and kernel-contract pricing.
 Its immediate prerequisite is the stopped Session097 checkpoint’s operational
 certification and draft publication.
 Exp129 missed its launch cutoff; its expired allocation cannot authorize a scientific
@@ -3193,9 +3209,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 115 | 29,742 | 16,800 | 349 | 2,808 | 170.08 h |
+| claimed by a session | 116 | 29,906 | 16,863 | 349 | 2,824 | 171.02 h |
 | claimed by none | 19 | 5,689 | 3,279 | 110 | 552 | 33.68 h |
-| **measured** | **134** | **35,431** | **20,079** | **459** | **3,360** | **203.76 h** |
+| **measured** | **135** | **35,595** | **20,142** | **459** | **3,376** | **204.7 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -3226,7 +3242,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-085](packing/campaign/agent-sessions/session-085-agenda017-continuation-and-efficiency-block.md) | 4 | 23 | 3,244 | 1,801 | 45 | 22.09 h |
 | [session-086](packing/campaign/agent-sessions/session-086-agenda021-overnight-pass.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
 | [session-087](packing/campaign/agent-sessions/session-087-agenda022-continuation.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
-| *shared by 27 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
+| [session-103](packing/campaign/agent-sessions/session-103-plateau-artefact-at-3-82.md) | 1 | 1 | 164 | 63 | 0 | 0.94 h |
+| *shared by 28 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -3258,9 +3275,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 52 |
+| measured | 53 |
 | unmeasured | 45 |
-| **total** | **97** |
+| **total** | **98** |
 
 <!-- END GENERATED: session-close-report -->
 

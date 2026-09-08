@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **9** in_progress, **28** ready, **13** tentative, **64** blocked, **41** stopped, **130** complete.
+- **9** in_progress, **27** ready, **13** tentative, **64** blocked, **41** stopped, **131** complete.
 
 - **19 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-289`, `BC-303`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -65,7 +65,6 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-030 | `BC-294` | in_progress | 0 | correctness | measurement_validation | What are the restricted fractional packing values at 96/25 off a corner box, a corner triangle, a central box… | `think-7lp3` |
 | agenda-030 | `BC-295` | in_progress | 0 | insight | research | How wide a band around 0° and 45° can be excluded at 96/25, how wide is the optimal nine-point band, and… | `think-ndqj` |
 | agenda-030 | `BC-296` | ready | 1 | insight | research | Which compositions (n0, 11 − n0) by near-axis count close at 96/25, and does a class-weighted fractional… | `think-n6fr` |
-| agenda-030 | `BC-297` | ready | 1 | correctness | measurement_validation | Is the exactly-eleven plateau at 191/50 a site artefact, what is the shrink tax there, and can the plateau be… | `think-4uon` |
 | agenda-030 | `BC-298` | ready | 1 | insight | research | What is the largest H0 below 3.84 such that eleven unit squares provably do not fit in the rectangle 3.84 ×… | `think-jsi8` |
 | agenda-030 | `BC-299` | ready | 1 | insight | research | For which angle band do Stromquist's ten points localise every avoiding square at 96/25, and can an… | `think-4ifm` |
 | agenda-030 | `BC-302` | ready | 1 | insight | research | Is there a robust unavoidable set of at most eleven marks at 96/25? | `think-qfog` |
@@ -190,7 +189,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-027 | active | 1 | 3 | 1 | 3 |  | 3 | 11 |
 | agenda-028 | paused |  | 3 | 2 | 1 |  | 1 | 7 |
 | agenda-029 | paused |  | 3 | 1 | 2 |  | 1 | 7 |
-| agenda-030 | active | 3 | 6 | 1 | 3 |  | 1 | 14 |
+| agenda-030 | active | 3 | 5 | 1 | 3 |  | 2 | 14 |
 
 ## By program
 
@@ -340,7 +339,7 @@ Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 | agenda-030 | `BC-294` | in_progress | What are the restricted fractional packing values at 96/25 off a corner box, a corner triangle, a… |
 | agenda-030 | `BC-295` | in_progress | How wide a band around 0° and 45° can be excluded at 96/25, how wide is the optimal nine-point… |
 | agenda-030 | `BC-296` | ready | Which compositions (n0, 11 − n0) by near-axis count close at 96/25, and does a class-weighted… |
-| agenda-030 | `BC-297` | ready | Is the exactly-eleven plateau at 191/50 a site artefact, what is the shrink tax there, and can the… |
+| agenda-030 | `BC-297` | complete | Is the exactly-eleven plateau at 191/50 a site artefact, what is the shrink tax there, and can the… |
 | agenda-030 | `BC-298` | ready | What is the largest H0 below 3.84 such that eleven unit squares provably do not fit in the… |
 | agenda-030 | `BC-299` | ready | For which angle band do Stromquist's ten points localise every avoiding square at 96/25, and can an… |
 | agenda-030 | `BC-300` | tentative | Does any packing below side 3.96 have a snug 45° corner square, four deeply avoided corners, or a… |
@@ -349,7 +348,7 @@ Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 | agenda-030 | `BC-303` | blocked | Which lane results earn the next sustained block, and what is the strongest claim to freeze? |
 | agenda-030 | `BC-304` | blocked | What survives independent checking, what did it change about the global problem, and what is the… |
 
-Open frontier: `BC-285`, `BC-286`, `BC-287`, `BC-288`, `BC-289`, `BC-290`, `BC-292`, `BC-293`, `BC-294`, `BC-295`, `BC-296`, `BC-297`, `BC-298`, `BC-299`, `BC-300`, `BC-301`, `BC-302`, `BC-303`, `BC-304`.
+Open frontier: `BC-285`, `BC-286`, `BC-287`, `BC-288`, `BC-289`, `BC-290`, `BC-292`, `BC-293`, `BC-294`, `BC-295`, `BC-296`, `BC-298`, `BC-299`, `BC-300`, `BC-301`, `BC-302`, `BC-303`, `BC-304`.
 
 ### `reach-table-ladder`
 

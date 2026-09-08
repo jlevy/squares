@@ -12,6 +12,7 @@ session:
   started_at: '2026-09-08T04:37:49Z'
   deadline_at: '2026-09-08T07:07:49Z'
   branch: claude/squares-n11-constraints-wl9atd
+  resource_rollups: [packing/campaign/resource-usage/agent-ade07b22e00a3de2a.yaml]
   goal: Decide exactly whether the restricted covering value of exactly eleven that two
     site sets reached at side 191/50 is an artefact of Trump-shaped B-cores overlapping only
     in site-free strips (H-133); if so, add sites in the strips and re-run column generation
@@ -64,7 +65,7 @@ session:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-f-plateau-at-3-82.md
     stop_reason: The block's deadline; every priority through the census was reached and
       the shrink tax was not started.
-    next_action: BC-303 reads this lane; if the plateau is pursued again, continue BC-200's
+    next_action: BC-303 (think-znzj) reads this lane; if the plateau is pursued again, continue BC-200's
       cutting-plane loop from its retained state rather than seeding strips at Trump's
       contacts, and retain the state of any run that stops at exactly eleven.
   primary_bead: think-4uon
@@ -113,7 +114,7 @@ session:
     complete; no full gate was run in the lane, no claim was frozen, and the resource
     receipt is the coordinator's to attach at integration.
   next_action: Under think-4uon the coordinator integrates the lane document, attaches the
-    resource receipt, runs the certifying gate and dispositions H-133 in BC-303.
+    resource receipt, runs the certifying gate and dispositions H-133 in BC-303 (think-znzj).
 ---
 # session-103 — the exactly-eleven plateau at 191/50 as a site artefact
 

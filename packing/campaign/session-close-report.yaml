@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 97
+count: 98
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 52
+  sessions_measured: 53
   sessions_unmeasured: 45
   attributed:
-    rollups: 115
-    turns: 29742
-    tool_calls: 16800
+    rollups: 116
+    turns: 29906
+    tool_calls: 16863
     tool_errors: 349
-    one_off_code: 2808
-    wall_hours: 170.08
+    one_off_code: 2824
+    wall_hours: 171.02
   unattributed:
     rollups: 19
     turns: 5689
@@ -28,12 +28,12 @@ totals:
     one_off_code: 552
     wall_hours: 33.68
   measured:
-    rollups: 134
-    turns: 35431
-    tool_calls: 20079
+    rollups: 135
+    turns: 35595
+    tool_calls: 20142
     tool_errors: 459
-    one_off_code: 3360
-    wall_hours: 203.76
+    one_off_code: 3376
+    wall_hours: 204.7
 codex_receipts:
   attributed: 25
   unattributed: 0
@@ -1550,4 +1550,18 @@ sessions:
   unmeasured_reason: >-
     declares no rollups
   rollups: []
+  codex_receipts: []
+- id: session-103
+  title: "The exactly-eleven plateau at 191/50 as a site artefact (BC-297, H-133)"
+  status: stopped
+  primary_bead: think-4uon
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/agent-ade07b22e00a3de2a.yaml
+  turns: 164
+  tool_calls: 63
+  tool_errors: 0
+  one_off_code: 16
+  wall_hours: 0.94
   codex_receipts: []

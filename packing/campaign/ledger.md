@@ -112,6 +112,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-096](agent-sessions/session-096-stromquist-memos-and-helpers.md) | completed | retrospective | `research-survey` (correctness) | `documentation-pass` (correctness) | 4 | think-7u4s | After the final pre-push check and review publication, preserve BC-264 under think-mq0d as the existing H114 feature and kernel-contract pricing entry. The source brief separately retains the geometric replay dependency; this review activates no new target or unchanged retry. |
 | [session-097](agent-sessions/session-097-kernel-contract-and-feature-pricing.md) | stopped | contemporaneous | `insight-iteration` (insight) | `factual-review` (correctness) | 6 | think-c53m | Continue BC-264 under think-mq0d, whose operational certification and draft-publication prerequisites are retained in this record and owned by think-m2lx. Preserve every pending or failed result; only a new explicit allocation after those guards pass may admit the unspent first scientific invocation. |
 | [session-099](agent-sessions/session-099-atlas-expansion-to-324.md) | in_progress | contemporaneous | `research-survey` (correctness) | `review-planning-oversight` (process) | 4 | think-0juv | The plan's Phases 0 through 5 are terminal on PR 111 and the calibration boundary held throughout; the session stays open, with its clock extended to 2026-09-08, until the owner confirms D2 and the two open questions, the re-priced tiers are read on the next hosted run, the full checkpoint is obtained before merge (label deep-gate last), and the harness has written this session's rollup so the record can name what it cost and the gate that certified it. Phase 6 stays closed under D1 unless the owner chooses the caveated form. |
+| [session-103](agent-sessions/session-103-plateau-artefact-at-3-82.md) | stopped | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-4uon | Under think-4uon the coordinator integrates the lane document, attaches the resource receipt, runs the certifying gate and dispositions H-133 in BC-303 (think-znzj). |
 
 ### Workflow summary
 
@@ -124,7 +125,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 19 | 1 | 60 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 10 | 4 | 68 | 7 |
+| `research-loop` | 11 | 4 | 69 | 7 |
 | `pipeline-improvement` | 25 | 0 | 128 | 1 |
 | `documentation-pass` | 1 | 0 | 10 | 1 |
 | `review-planning-oversight` | 0 | 0 | 3 | 0 |
@@ -618,7 +619,7 @@ Status: **active**. Run X-021's research sessions as parallel lanes with disjoin
 | BC-294 | measurement_validation | 11 | in_progress | 0 | think-7lp3 | Whether the non-convex-domain instrument (BC-204) is worth building; whether routes (b) and (c) and every capture design survive; the input BC-301 needs. |
 | BC-295 | research | 11 | in_progress | 0 | think-ndqj | The first band theorem new below U; whether the obstruction at q is Trump-shaped or an integrality artefact that geometric conditioning can target. |
 | BC-296 | research | 11 | ready | 1 | think-n6fr | Either the composition route ends at q with a certificate of its own impossibility, or the survivors become the branch list for geometric conditioning. |
-| BC-297 | measurement_validation | 11 | ready | 1 | think-4uon | Whether the ladder's top is the instrument's or the geometry's; the size of the ownership tree. |
+| BC-297 | measurement_validation | 11 | complete | 1 | think-4uon | Whether the ladder's top is the instrument's or the geometry's; the size of the ownership tree. |
 | BC-298 | research | 11 | ready | 1 | think-jsi8 | Every wall within 3.84 − H0 of a square, both extents at least H0, and with the spanning lemma the strongest symmetry-breaking premise available. |
 | BC-299 | research | 11 | ready | 1 | think-4ifm | The premise every conditional certificate needs, a square forced into a known box, combined with the nine-point band into a concrete two-branch split. |
 | BC-300 | research | 11 | tentative | 2 | think-dfof | Which corner branches cannot close near U, and whether the structural lane should spend time on elimination motions at all. |
