@@ -545,10 +545,11 @@ Earlier orientation and upstream maintenance are outside this session’s cost i
 
 ## Current Integration Handoff
 
-PR116 is integrating `origin/main` at `28696526` into `codex/n11-kernel-pricing`.
-Session097 remains stopped with `certification_pending: think-mq0d`. H125 is untested:
-exp129 never invoked and retains its blocked dependency outcome and zero scientific
-time. This integration does not reopen its expired allocation.
+PR116 is integrating `origin/main` at `831697c0` into `codex/n11-kernel-pricing`,
+including the landed atlas expansion (PR111) and publication fixes (PR117). Session097
+remains stopped with `certification_pending: think-mq0d`. H125 is untested: exp129 never
+invoked and retains its blocked dependency outcome and zero scientific time.
+This integration does not reopen its expired allocation.
 
 The new integration CI is pending.
 The matched historical fast run `34171519040` and deferred run `34171566965` checked
@@ -754,8 +755,9 @@ admitted by the record repair.
 Completed handovers and final pre-merge coverage retain their passing-check
 requirements.
 
-The resource receipt is refreshed through23:38:23 UTC to include the later validation,
-publication and bounded operational repairs attributed to this branch.
+The resource receipt is now refreshed through01:14:55 UTC on September8, including
+validation, publication, the throughput review and operational repairs attributed to
+this branch. It supersedes the earlier23:38:23 UTC snapshot.
 Its measured interval extends beyond the stopped research session; it does not extend
 the scientific clock or imply that those later operations occurred in a research phase.
 The live-task receipt remains a lower bound, excluding work after that cutoff.

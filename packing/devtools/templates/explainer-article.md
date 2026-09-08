@@ -35,16 +35,29 @@ per certificate; the prose is filled once, with the headline certificate's value
 
 </div>
 
-## New Result
+## A New Bound for Packing 11 Squares
 
 This work presents a new lower bound on a long-standing open geometry problem: eleven
-unit squares with disjoint interiors, free to rotate, cannot fit in a
-${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$ square.[^novelty]
+unit squares with disjoint interiors, free to rotate, cannot fit in a square of size
+${{HEADLINE_L_DEC}} \times {{HEADLINE_L_DEC}}$.
 
-The computer-assisted proof was found via an automated research framework.
-The certificate used in the proof places {{HEADLINE_N_ATOMS}} rationally weighted points
-in the container and selects a net of {{HEADLINE_N_DIRECTIONS}} rationally parameterized
-directions. Five exact conditions and a pigeonhole-style argument then imply the
+This appears to be the first improvement in {{YEARS_SINCE_PRIOR}} years on the smallest
+open case of the square packing problem.[^novelty] Stromquist published the previous
+bound of {{PRIOR_LOWER_DEC}} in {{PRIOR_YEAR}}.[^stromquist-history][^repair] The
+tightest known packing, due to Trump in 1979 (Figure 1), shows
+<span class="math-reference">$s(11) \le {{BEST_PACKING_TEX}}$.[^trump]</span>
+
+<figure>
+  <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
+  <figcaption><strong>Figure 1.</strong> Eleven unit squares inside a square of side
+  <span class="tex">{{BEST_PACKING_TEX}}</span>, a root of an eighth-degree polynomial.</figcaption>
+</figure>
+
+The computer-assisted proof of the new lower bound was found via an automated research
+framework. The certificate used in the proof places {{HEADLINE_N_ATOMS}} rationally
+weighted points in the container and selects a net of {{HEADLINE_N_DIRECTIONS}}
+rationally parameterized directions.
+Five exact conditions and a pigeonhole-style argument then imply the
 claim.<!--BEGIN:CLAIM--> [Verification](#verifiable-claim) is exact rational arithmetic:
 the one-file checker,
 {{PINNED_VERIFIER_LINES}}
@@ -52,19 +65,28 @@ of standard-library Python and short enough to read in one sitting, decides the
 certificate file of {{HEADLINE_N_ATOMS}} weighted points in
 {{HEADLINE_PINNED_RUNTIME}}.<!--END:CLAIM-->
 
-This improves the previous lower bound on the smallest open case of the square packing
-problem: Stromquist’s {{PRIOR_LOWER_DEC}}.[^stromquist-history][^repair]
-
 ## The Agentic Research Framework
 
-The results here are from a flexible but defined
+<div class="boxed-text">
+
+*The results here are from a flexible but defined
 **[agentic research framework](https://github.com/jlevy/squares)** that is likely to be
 useful for creative mathematical or technical problems of other sorts.
+All documents and code for this project, including this paper, were written by agents
+under occasional human direction.
+The framework organizes agent work to reduce the need for oversight and uses several
+agent tools, notably **[tbd](https://github.com/jlevy/tbd)** for task tracking,
+**[Softschema](https://github.com/jlevy/softschema)** for structuring results, and
+**[Practical Prose](https://github.com/jlevy/practical-prose)** to improve writing
+quality.*
+
+</div>
 
 This lower bound is one of {{N_RESULTS}} results the framework has registered so far,
 {{N_NOVEL}} of them apparently new.
-The atlas of best known packings for every $n$ from 1 to 100 in Figure 1 comes from the
-same research agenda and currently includes {{N_STARRED}} new lower bounds.
+These include improved lower bounds for $n = 12$, $17$, and $19$.[^other-results] The
+atlas of best known packings for every $n$ from 1 to 100 in Figure 2 comes from the same
+research agenda and currently includes {{N_STARRED}} new lower bounds.
 
 The repository includes a comprehensive survey of previous research, the atlas of
 packings, a hypothesis registry, an experiment ledger, exact verifiers, and a retention
@@ -74,30 +96,20 @@ Work is planned on a regular cadence (such as 8 to 12 hours) and broken into sev
 defined workflows (research survey, correctness verification, research loop,
 optimization loop, and a few others).
 
-<div class="boxed-text">
-
-The repository’s original prose and code, including this paper, were written by agents
-under human direction.
-The framework relies on a few other agent tools, notably
-[tbd](https://github.com/jlevy/tbd) for task tracking,
-[Softschema](https://github.com/jlevy/softschema) for structuring results, and
-[Practical Prose](https://github.com/jlevy/practical-prose) to improve writing quality.
-
-</div>
-
 ## The Square Packing Problem
 
 The **square packing problem** asks, for each $n$, for the side $s(n)$ of the smallest
 square that holds $n$ unit squares, which are free to rotate and must have disjoint
 interiors.[^survey] The value of $s(n)$ is known for $n \le 10$. Stromquist proved
-$s(10) = 3 + 1/\sqrt{2}$.[^stromquist-memos]
+$s(10) = 3 + 1/\sqrt{2}$.[^stromquist-memos] The case $n = 11$ is the smallest still
+open.
 
 For values of $n$ where $s(n)$ is still unknown, results generally take the form of
 upper or lower bounds.
 An **upper bound** is constructive: an arrangement of $n$ unit squares in a square of
-side $L$ shows that $s(n) \le L$. Trump’s packing for $n = 11$ is one example.[^trump]
-Such constructions may be specified with approximate numerical coordinates or derived
-exactly by solving the geometric relationships between touching squares.
+side $L$ shows that $s(n) \le L$. Trump’s packing for $n = 11$ in Figure 1 is one
+example. Such constructions may be specified with approximate numerical coordinates or
+derived exactly by solving the geometric relationships between touching squares.
 Approximate coordinates alone do not constitute a formal proof of the upper bound.
 
 A **lower bound** proves that $s(n) \ge L$ by ruling out every arrangement in a
@@ -109,36 +121,21 @@ The proof presented here is of this kind.
 
 <figure>
   <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.svg" alt="{{COMPOSITE_ALT}}" width="2400" height="2896"></a></div>
-  <figcaption><strong>Figure 1.</strong> The best known packings of 1 through 100 unit squares. Each cell is the tightest
-  arrangement on record for that <span class="tex">n</span>, with the best known upper bound beneath it and, where
-  <span class="tex">s(n)</span> is not yet settled, the best proved lower bound below that. A crimson star marks a lower
-  bound this project proved: {{N_STARRED}} of the hundred, this page’s own among them. The full
-  results, with every witness and its provenance, are in
-  <a href="{{ATLAS_URL}}">the GitHub repository</a>, and the
-  composite is <a href="known-best-1-100.pdf">available as a PDF</a>. A poster of all 324 best
-  known packings, through the end of the catalogue’s audited range, is
-  <a href="known-best-1-324.pdf">available as a PDF</a> as well.</figcaption>
+  <figcaption><strong>Figure 2.</strong> The best known packings of 1 through 100 unit squares, with upper bounds
+  and, for unsettled cases, the best proved lower bounds. A crimson star marks a lower bound this project
+  proved: {{N_STARRED}} of the hundred. The <a href="{{ATLAS_URL}}">repository</a> records every witness and its
+  provenance. PDFs are available for <a href="known-best-1-100.pdf">this figure</a> and the
+  <a href="known-best-1-324.pdf">full 324-case poster</a>.</figcaption>
 </figure>
 
-## Packing 11 Squares
-
-$s(11)$ is the smallest case still open.
-Trump’s 1979 packing shows
-<span class="math-reference">$s(11) \le {{BEST_PACKING_TEX}}$.[^trump]</span> Here we
-prove $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
-
-<!--BEGIN:REFINEMENT-->
-
-The technical record retains a small exact refinement in [T-022]({{REFINEMENT_URL}}).
-This exposition uses the simpler 3.81 certificate bound.
-
-<!--END:REFINEMENT-->
+For eleven squares, we prove $s(11) \ge {{HEADLINE_L_FRAC}} = {{HEADLINE_L_DEC}}$.
 
 <!--BEGIN:COMPARISON-->
 
 (Some figures also show the simpler certificate for the weaker bound
 $s({{N}}) \ge {{DEFAULT_L_FRAC}}$, whose smaller numbers make the argument easier to
-illustrate.)
+illustrate.<!--BEGIN:REFINEMENT--> There is a small exact refinement in
+[T-022]({{REFINEMENT_URL}}).<!--END:REFINEMENT-->)
 
 <!--END:COMPARISON-->
 
@@ -147,12 +144,6 @@ illustrate.)
 The figures below illustrate this certificate.
 
 <!--END:NO_COMPARISON-->
-
-<figure>
-  <div class="stage trump"><a href="{{BEST_RENDER_URL}}" aria-label="The rendering in the repository">{{TRUMP_SVG}}</a></div>
-  <figcaption><strong>Figure 2.</strong> Trump’s 1979 packing of eleven unit squares shows
-  <span class="tex">s(11) \le {{BEST_PACKING_TEX}}</span>.</figcaption>
-</figure>
 
 <figure>
   <div class="line-fig kpress-diagram">
@@ -314,9 +305,9 @@ a margin of {{LEAST_MARGIN}} of those units above the threshold.
 
 <!--BEGIN:FIGURE-->
 
-<figure data-figure="5">
+<figure class="prover" data-figure="5">
   <div class="split">
-    <div class="stage"><canvas class="draggable" id="prove-{{SLUG}}" width="1000" height="1000"></canvas></div>
+    <div class="stage"><canvas class="draggable" id="prove-{{SLUG}}" width="1000" height="1000" aria-label="Movable square and covered-mass shading" aria-describedby="hint-{{SLUG}}"></canvas></div>
     <div class="panel">
       <div class="readout">
         <span class="caps">Mass covered</span>
@@ -324,31 +315,38 @@ a margin of {{LEAST_MARGIN}} of those units above the threshold.
           <div class="mass-val" id="mv-{{SLUG}}"></div>
           <div class="mass-dec" id="md-{{SLUG}}"></div>
         </div>
-        <span class="verdict ok" id="vd-{{SLUG}}">Covers <span class="rel">≥</span> 1</span>
+        <span class="verdict" id="vd-{{SLUG}}" hidden></span>
       </div>
       <div class="ctl">
-        <span class="caps">Direction <span class="tex">k</span> of the {{N_DIRECTIONS}}-point net</span>
-        <input type="range" id="kslider-{{SLUG}}" min="0" max="{{N_DIRECTIONS_MAX}}" value="0" step="1" aria-label="Net direction index">
-        <div class="val" id="kval-{{SLUG}}"></div>
+        <label class="caps" for="kslider-{{SLUG}}">Choose a net direction (0–{{N_DIRECTIONS_MAX}})</label>
+        <input type="range" id="kslider-{{SLUG}}" min="0" max="{{N_DIRECTIONS_MAX}}" value="0" step="1">
+        <div class="val direction-values" id="kval-{{SLUG}}"></div>
       </div>
       <div class="btns">
-        <button id="btn-tight-{{SLUG}}">Tightest placement</button>
-        <button id="btn-scan-{{SLUG}}">Scan this direction</button>
-        <button id="btn-heat-{{SLUG}}" aria-pressed="true">Field</button>
+        <button id="btn-tight-{{SLUG}}" aria-describedby="actions-{{SLUG}}">Show net minimum</button>
+        <button id="btn-scan-{{SLUG}}" aria-describedby="actions-{{SLUG}}">Find sampled minimum</button>
+        <label class="shading-toggle"><input type="checkbox" id="btn-heat-{{SLUG}}" checked>Show mass shading</label>
       </div>
+      <p class="hint" id="actions-{{SLUG}}">The net minimum is the least covered mass over all {{N_DIRECTIONS}} net directions; the button returns to its placement at direction 0.
+      The sampled minimum searches a grid of centers at the current angle; it can miss smaller event cells.</p>
+      <p class="hint control-status" id="status-{{SLUG}}" role="status" aria-live="polite" hidden></p>
       <div class="legend">
-        <span><i style="background:var(--cert-near)"></i>within {{TIGHT_PERCENT}}% of the limit</span>
-        <span><i style="background:var(--kpress-doc-accent)"></i>comfortably above</span>
-        <span><i style="background:var(--cert-below)"></i>below 1, which never occurs at a net direction</span>
+        <span><i style="background:var(--cert-near)"></i><span class="tex">1 \le \text{mass} &lt; {{TIGHT_JS}}</span></span>
+        <span><i style="background:var(--kpress-doc-accent)"></i><span class="tex">\text{mass} \ge {{TIGHT_JS}}</span></span>
+        <span><i style="background:var(--cert-below)"></i>mass below 1</span>
       </div>
-      <p class="hint" id="hint-{{SLUG}}">The shaded background is the covered mass at every center position, recomputed
-      for the direction you choose. The dashed outline is where the square’s center is allowed to be. Outside
-      it the square hangs out of the container, and the proof makes no claim.</p>
+      <p class="hint" id="hint-{{SLUG}}">Drag the orange square, or tap to place its center. Tap its round handle to turn by 5°, or drag it to rotate freely;
+      the slider then shows the nearest net direction after square symmetry. Move the slider to return to the net.
+      The shading samples the mass covered at each center position.
+      The dashed outline bounds the allowed centers: outside it, the square extends beyond the container.
+      At a net direction, every allowed placement covers mass at least 1. The preview uses floating-point geometry;
+      the exact verifier decides which atoms lie on an edge.</p>
     </div>
   </div>
-  <div class="fig-choose">{{CERT_TOGGLE}}</div>
-  <figcaption><strong>Figure 5. Condition 5.</strong> The prover<span class="screen-only">: drag the square, watch the mass</span>. Inside the dashed domain the field never drops below 1, at any of the {{N_DIRECTIONS}}
-  directions. Outside it the mass falls away at once, which is why the atoms crowd the boundary.</figcaption>
+  <div class="fig-choose"><span class="screen-only caps">Certificate shown in all figures</span>{{CERT_TOGGLE}}</div>
+  <figcaption><strong>Figure 5. Condition 5.</strong> The prover<span class="screen-only">: drag the square, watch the mass</span>.
+  The exact certificate guarantees covered mass at least 1 throughout the dashed domain at every net direction.
+  The shading previews this mass. Outside the domain, the square extends beyond the container.</figcaption>
 </figure>
 
 <!--END:FIGURE-->
@@ -436,8 +434,8 @@ $$
         <dt><span class="tex">B(\cos d + \sin d)</span></dt><dd class="hi" id="s-prod-{{SLUG}}"></dd>
       </dl>
       <p class="hint screen-only">Opens at <span class="tex">K = 3</span>, the coarsest net the figure offers, where Condition 4 admits only
-      <span class="tex">B \lt {{K3_LIMIT_TEX}}</span> and the shrink is unmistakable. Drag either square by its
-      handle. At
+      <span class="tex">B \lt {{K3_LIMIT_TEX}}</span> and the shrink is unmistakable. Tap the round handle to turn
+      the unit square by 5°, or drag it to rotate freely. At
       <span class="tex">K = {{N_DIRECTIONS_MAX}}</span>, the net the proof uses, the two squares are
       indistinguishable.</p>
     </div>
@@ -604,14 +602,12 @@ coding agent or check by hand.
 
 For $s(11) \ge {{HEADLINE_L_FRAC}}$:
 [`{{HEADLINE_CLAIM_NAME}}`]({{HEADLINE_CLAIM_URL}}),
-{{HEADLINE_N_ATOMS}} atoms, verified in {{HEADLINE_RUNTIME}}. (For the weaker bound
+{{HEADLINE_N_ATOMS}} atoms.<!--BEGIN:COMPARISON--> (For the weaker bound
 $s(11) \ge {{DEFAULT_L_FRAC}}$: [`{{DEFAULT_CLAIM_NAME}}`]({{DEFAULT_CLAIM_URL}}),
-{{DEFAULT_N_ATOMS}} atoms, verified in
-{{DEFAULT_RUNTIME}}.)
+{{DEFAULT_N_ATOMS}} atoms.)<!--END:COMPARISON-->
 
-The times are the embedded verifier’s, on a laptop.
-The one-file checker beside it that pins the certificate’s digest, `minimal_verify.py`,
-decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
+The one-file checker [`minimal_verify.py`]({{PINNED_VERIFIER_URL}}) verifies the
+{{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.[^verifier-timing]
 
 <!--END:CLAIM-->
 
@@ -633,7 +629,7 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
     first-principles introduction to square packing, bounds, search, and proof
     obligations
   - **[Atlas of packings]({{ATLAS_URL}}):** created as part of this project, a
-    collection of the best known packings for $n=1$ through $100$, with figures,
+    collection of the best known packings for $n=1$ through $324$, with figures,
     geometry records, and provenance
 - **Agentic research framework**
   - **[Workflows]({{WORKFLOWS_URL}})** define entry conditions and expected outputs for
@@ -687,12 +683,18 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
     Electronic Journal of Combinatorics, Dynamic Survey DS7.
 
 [^trump]: Walter Trump’s packing of 1979, as recorded in
-    [Kingbird’s register of squares in squares]({{BEST_URL}}). The
-    [rendering]({{BEST_RENDER_URL}}) is the project’s own.
+    [Kingbird’s register of squares in squares]({{BEST_URL}}), which also lists the
+    degree-eight polynomial defining its side length.
+    The [rendering]({{BEST_RENDER_URL}}) is the project’s own.
     Stromquist’s [Memo III]({{PRIOR_MEMO_URL}}), pp.
     2–4, credits Mats Gustafsson and Magnus Thulin with the same construction, reported
     by Gardner in November 1980; the research archive records their independent
     rediscovery.
+
+[^other-results]: The [result register]({{RESULTS_URL}}) records $s(12) \ge 3.96$
+    (`T-017`), $s(17) \ge 4.59$ (`T-019`), and $s(19) \ge 4.80$ (`T-020`), each
+    supported by a retained weighted-point certificate and classified as apparently
+    novel.
 
 [^burns]: Sam Burns,
     [Proposing a Better Lower Bound for n=17 Square Packing](https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/),
@@ -712,6 +714,16 @@ decides the {{HEADLINE_L_FRAC}} certificate in {{HEADLINE_PINNED_RUNTIME}}.
     and Covering in Combinatorics*, Mathematical Centre Tracts 106 (1979), 179–199;
     Hiroshi Nagamochi, [Packing unit squares in a rectangle]({{NAGAMOCHI_URL}}),
     Electronic Journal of Combinatorics 12 (2005), R37.
+
+<!--BEGIN:CLAIM-->
+
+[^verifier-timing]: The one-minute timing is for `minimal_verify.py`;
+    [recorded runs]({{PROOF_CARD_URL}}#verify-it-in-one-command) took 47.5–67.0 seconds
+    under CPython 3.14 on September 5, 2026. The claim document embeds a separate
+    verifier, `verify_claim.py`, which checks the same certificate in
+    {{HEADLINE_RUNTIME}} on an Apple Silicon laptop.
+
+<!--END:CLAIM-->
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

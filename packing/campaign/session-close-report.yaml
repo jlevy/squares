@@ -1536,10 +1536,10 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session-097.yaml
-    model_responses: 747
-    agent_hours: 5.92
-    active_union_hours: 2.69
-    wall_hours: 2.69
+    model_responses: 973
+    agent_hours: 7.51
+    active_union_hours: 3.69
+    wall_hours: 4.3
     snapshot_incomplete: true
 - id: session-099
   title: "Atlas expansion to n = 324 and the poster composite"

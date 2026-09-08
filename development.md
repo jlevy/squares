@@ -640,7 +640,7 @@ the edition stamp is the one `sqpack.release` names, that every repository link 
 that commit and resolves on GitHub, and that the PDF is a PDF.
 
 **The stamp in the credits has two parts, and they move on different clocks.** The
-version (`v0.2.3`) is editorial and pinned in `src/sqpack/release.py`; the hash after it
+version (`v0.2.4`) is editorial and pinned in `src/sqpack/release.py`; the hash after it
 is the commit the page is built from, read at render time (`page_edition()`), so it
 changes on every push, and a reader of the deployed page sees exactly which commit they
 are looking at. The atlas footer and the generated claim documents are checked in and
@@ -650,6 +650,9 @@ the version and differ only in which commit they name.
 
 **Cutting an edition** is the one manual step, and it is editorial: it changes the
 version, and with it the revision the committed artifacts are stamped with.
+Use at most one publication patch bump per merge.
+Keep the chosen version fixed throughout a pull request; further edits update the
+content revision, not the patch number.
 To cut one:
 
 1. Set `PUBLICATION_VERSION`, `PUBLICATION_REVISION` (the short hash of the commit whose
@@ -662,8 +665,8 @@ To cut one:
 3. Run `packing-validate --only "known-best"` — which since 2026-09-07 also selects the
    deferred whole-atlas rebuild, and is meant to here — and
    `pytest tests/test_explainer.py tests/test_verify_claim.py tests/test_release.py`,
-   and commit the release module, the five atlas files and the three generated documents
-   together.
+   and commit the release module, the eight atlas files and the three generated
+   documents together.
 
 ## Focused Quality Commands
 
