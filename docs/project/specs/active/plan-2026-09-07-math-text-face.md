@@ -20,7 +20,10 @@ their merged source at `4a868bb`, which also includes Planetaire Mono (`kpr-v731
 Prepared startup and saved-setting support are implemented in
 [Squares #135](https://github.com/jlevy/squares/pull/135). Hosted H-006 timing and H-004
 geometry checks passed at `dab2a381`; integration with the subsequently merged
-[Squares #134](https://github.com/jlevy/squares/pull/134) and release remain pending.
+[Squares #134](https://github.com/jlevy/squares/pull/134) passed at `dfa0a422`. The
+caption-baseline correction at `a10569d1` passed the hosted publication checks: all 13
+caption formulas align with surrounding text in both screen and print.
+PR #135 records merge and deployment status.
 The
 [font and math loading architecture](../../../../vendor/kpress/docs/project/architecture/arch-2026-09-08-font-and-math-loading.md)
 owns the shared rendering, readiness, and preparation contracts.
@@ -128,9 +131,10 @@ What is specific to this page, found while prototyping the feature on it:
   shell, the extra page being content rather than typography.
   With the fourth sans weight gone and the relation glyphs from a shipped face: 17 pages
   and 817,119 bytes on the same host.
-  Current, with the mono face adopted: 17 pages and 820,911 bytes as `--update` writes
-  the file, 820,817 as `--check` reports it — the two modes differ by the 94-byte source
-  receipt and by nothing else, which is why a figure here says which one produced it.
+  At `a10569d1`, with the mono face adopted and caption baselines corrected: 17 pages
+  and 820,692 bytes as `--update` writes the file, 820,598 as `--check` reports it — the
+  two modes differ by the 94-byte source receipt and by nothing else, which is why a
+  figure here says which one produced it.
   In the file the math letters and digits still come from the `PTSerif-Regular` and
   `PTSerif-Italic` subsets the prose already embeds, while `≤`, `√`, the fraction bar
   and the Greek come from the embedded KaTeX faces.

@@ -165,16 +165,20 @@ alone is not full pre-merge evidence.
 | `--fast` | contributor, at a block boundary; the union of the four tiers below | 62 of 69 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
 | `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 69 | 195 s | record cleared 2026-09-07 when the grid replay was deferred; 87.6 s locally, only the ceiling applies |
 | `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 69 | 180 s | 91.6 s on CI, the mean of four readings |
-| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 69 | 205 s | 102.8 s on CI, the mean of four readings |
+| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 69 | 237 s | 118.7 s on CI, the geometric mean of two current-suite readings |
 | `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 69 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
 | *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 69 of 69 | 3600 s | split across four jobs; not clocked whole |
 
-Two of the four PR partition costs are geometric means of four readings at the reference
-shape, not maxima. Hosted variation remains material: unchanged atlas code ranged from
-60.97 s to 84.48 s, and the suite’s spread reached 1.52x. The geometric-mean baselines
-leave at least 1.25x margin to the declared drift and stale limits in those four
-samples. Refresh them as measurements accumulate; a recorded band would represent that
-variation better than a point.
+Two of the four PR partition costs use geometric means at the reference shape: four
+readings for `--geometry` and two consecutive current-suite readings for `--suite`. Both
+suite runs on 2026-09-08 passed all 4,283 selected tests:
+[158.64 s](https://github.com/jlevy/squares/actions/runs/34285770932/job/102260892830)
+and
+[88.84 s](https://github.com/jlevy/squares/actions/runs/34288782986/job/102270405743).
+Their 118.72 s mean and 237 s ceiling preserve the existing policy (`think-uwow`). The
+runner images differed; the 1.79x spread does not establish a code speedup.
+Refresh the means as comparable measurements accumulate; a recorded band would represent
+that variation better than a point.
 The other two, `--sweeps` and `--checks`, have no recorded cost, and the corpus widening
 of 2026-09-07 is why both times.
 Two of the sweeps tier’s four steps were split that day, so the tier those readings
@@ -215,11 +219,8 @@ comparisons:
 
 All three runs are from 2026-09-06. The durations are observations, not necessary lower
 bounds or enforced tier baselines.
-The four PR partitions now have recorded baselines from four reference-shape readings in
-[gate-budgets.yaml](packing/devtools/gate-budgets.yaml); their drift and stale checks
-are armed. These later calibrated values are distinct from the dated workflow
-observations above. See
-[budget enforcement](#what-each-tier-costs-and-where-its-ceiling-lives).
+The [tier table](#the-tiers) lists the current declarations: `--geometry` and `--suite`
+have measured baselines; `--checks` and `--sweeps` remain unmeasured.
 
 ### The behavioural lanes
 
