@@ -620,7 +620,7 @@ and mostly outside Trump’s neighbourhood, and no restricted region reached a k
 alive reading; the loop’s depth scaling, not its LP, loses the value, so a depth
 polisher on the fixed support is the next instrument.
 
-**Selected next entry:** `think-znzj` is BC-303, the first-wave selection with
+**Agenda 030’s next entry:** `think-znzj` is BC-303, the first-wave selection with
 independent review, which reads every lane’s exact results once sessions 100, 101, 102
 and 104 are terminal and decides the next sustained block; until then the coordinator
 integrates each lane as it lands.
@@ -734,8 +734,8 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**BC-264’s entry:** `think-mq0d` retains BC-264’s disposition after the completed H114
-feature and kernel-contract pricing.
+**Selected next entry:** `think-mq0d` retains BC-264’s disposition after the completed
+H114 feature and kernel-contract pricing.
 Its immediate prerequisite is the stopped Session097 checkpoint’s operational
 certification and draft publication.
 Exp129 missed its launch cutoff; its expired allocation cannot authorize a scientific
