@@ -1,14 +1,16 @@
-"""The four rules that decide which faces the explainer ships, and at what cost.
+"""The five rules that decide which faces the explainer ships, and at what cost.
 
 `tests/test_explainer.py` renders the page and asserts that nothing in it is a
 reference outside it. That is the property, and it is the wrong instrument for these
-four seams: a page that inlines every face in the distribution passes it, and so does
-a page that drops the half of a composite slot the other half depends on. The first
-costs 40 KB a face; the second is worse than either alternative, because the reading
-face's metric tables would still be installed and KaTeX would lay out digits it is not
-drawing -- the exact mismatch the math text face exists to prevent.
+five seams: a page that inlines every face in the distribution passes it, and so does
+a page that drops the half of a composite slot the other half depends on, and so does one
+that names a family it declares no face for. The first costs 40 KB a face; the second is
+worse than either alternative, because the reading face's metric tables would still be
+installed and KaTeX would lay out digits it is not drawing -- the exact mismatch the math
+text face exists to prevent; the third hands a role back to the reader's machine while
+reading as though it had been adopted.
 
-So the four are exercised directly, on inputs small enough to read:
+So the five are exercised directly, on inputs small enough to read:
 
 - `inline_font_urls` over the four `url()` shapes the distribution actually carries,
   and over the two refusals it owes a build: a face that names a file that is not
@@ -23,12 +25,18 @@ So the four are exercised directly, on inputs small enough to read:
   page. They are at kpress's weight tokens and this page prints at its own, so they
   would answer nothing while costing 20 KB of base64 a face in every copy served; the
   PDF pass injects this page's own set into the loaded document instead.
+- the mono setting, which is the only entry in the stylesheet list this page chooses
+  rather than imports, since `DEFAULT_CSS_ASSETS` names no mono face and the mono stack
+  leads with one. The set is asked of `mono_css_assets` and put through kpress's own
+  refusal, because a narrowed set renders perfectly well and draws its missing styles by
+  shearing.
 
-One test does read the real static tree, and it is the one that has to: that registering
-`print-fonts.css` upstream leaves the rendered page byte for byte where it was. Nothing
-else here reads a real font -- `tmp_path` holds two stand-in files of a few bytes -- and
-the whole file still runs in well under a second, so it belongs in the quick lane and
-carries no marker.
+Three tests do read the real static tree, and they are the ones that have to: that
+registering `print-fonts.css` upstream leaves the rendered page byte for byte where it
+was, and that the four mono faces arrive with their bytes inside them. Nothing else here
+reads a real font -- `tmp_path` holds two stand-in files of a few bytes -- and the whole
+file still runs in well under a second, so it belongs in the quick lane and carries no
+marker.
 """
 
 # `_font_face_reachable` and `_print_sans_face` are the prunes, and they are private
@@ -852,6 +860,118 @@ def test_registering_the_print_faces_upstream_does_not_move_the_page(
     monkeypatch.setattr(kpress_assets, "DEFAULT_CSS_ASSETS", [*listed, PRINT_FONTS])
     assert kpress_css(static) == without
     assert f'font-family: "{SCREEN_SANS}"' in without
+
+
+def test_the_mono_the_page_declares_is_the_set_kpress_would_link() -> None:
+    """The list is asked for rather than written down, and it is asked for correctly.
+
+    `DEFAULT_CSS_ASSETS` names no mono stylesheet, so a page that took only that constant
+    would name `Planetaire Mono Text` -- `style-tokens.css` leads the mono stack with it
+    -- declare no face under it, and go on drawing code from the reader's machine. The
+    four names have to come from somewhere, and `mono_css_assets` is the same call
+    `package_asset_manifest` makes, so the page links what a kpress build would link.
+    """
+    assert render_explainer.MONO_FONT == "planetaire"
+    assert set(render_explainer.MONO_WEIGHTS) >= set(kpress_assets.MONO_REQUIRED_STYLES)
+    assert render_explainer.mono_stylesheets() == tuple(
+        kpress_assets.mono_css_assets(
+            mono_font=render_explainer.MONO_FONT,
+            mono_weights=render_explainer.MONO_WEIGHTS,
+        )
+    )
+    assert not set(render_explainer.mono_stylesheets()) & set(kpress_assets.DEFAULT_CSS_ASSETS)
+
+
+def test_the_shell_stamps_the_mono_switch_from_the_constant(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """kpress's switch and this page's asset list are one decision, so they are one value.
+
+    `data-kpress-mono-font` is what `style-tokens.css` reads, and the shell carried
+    `planetaire` as a literal. That literal could not fail: `planetaire` is kpress's
+    default and only `system` has a rule of its own, so a shell that drifted -- a typo, a
+    renamed value upstream, a page whose constant moved to `system` while the markup still
+    said `planetaire` -- would have gone on rendering a page that looked right and shipped
+    the wrong thing. Under `system` that page would name a face in its markup, link no
+    stylesheet for it, and draw code from the reader's machine.
+
+    Stamped from `MONO_FONT` instead, the two cannot disagree, and the check is that they
+    move together: the attribute follows the constant and `mono_stylesheets` empties with
+    it. The key itself is load-bearing rather than asserted here -- `fill` refuses a
+    placeholder with no value, so a `shell_substitutions` that stopped supplying
+    `MONO_FONT` fails the render.
+    """
+    shell = render_explainer.TEMPLATE.read_text(encoding="utf-8")
+    assert shell.count('data-kpress-mono-font="{{MONO_FONT}}"') == 1
+    assert render_explainer.MONO_FONT not in shell
+    root = next(line for line in shell.splitlines() if "data-kpress-mono-font" in line)
+
+    def stamped() -> str:
+        values = {"MONO_FONT": render_explainer.MONO_FONT}
+        return render_explainer.fill(root, values, where="explainer-shell.html")
+
+    assert 'data-kpress-mono-font="planetaire"' in stamped()
+    assert render_explainer.mono_stylesheets()
+    monkeypatch.setattr(render_explainer, "MONO_FONT", "system")
+    assert 'data-kpress-mono-font="system"' in stamped()
+    assert render_explainer.mono_stylesheets() == ()
+
+
+def test_a_mono_set_that_leaves_a_style_to_the_browser_fails_the_render(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """kpress's own gate, run on this side, because nothing else here would notice.
+
+    A narrowed set still returns a perfectly good list of files: the page renders, the
+    faces inline, and the styles nobody declared are drawn by shearing or emboldening the
+    ones that did -- which prints as outline paths and is the defect the whole provenance
+    guard exists to catch, arriving in a form the guard cannot see, since synthesized bold
+    is still the regular face under its own name.
+    """
+    monkeypatch.setattr(render_explainer, "MONO_WEIGHTS", ("regular", "bold"))
+    with pytest.raises(SystemExit, match="italic"):
+        render_explainer.mono_stylesheets()
+
+
+def test_every_mono_face_reaches_the_page_with_its_bytes_inside_it() -> None:
+    """The four styles, each declared once, each carrying its own woff2 and no URL.
+
+    Read off the real static tree, like the print-faces test below it and for the same
+    reason: the claim is about what kpress ships and what this page does to it. A face
+    that still named a file would be a face the page fetches at view time, which
+    `inline_font_urls` refuses -- this asserts the refusal never had to fire.
+    """
+    static = kpress_static()
+    css = kpress_css(static)
+    blocks = [
+        block
+        for block in FONT_FACE_BLOCK.findall(css)
+        if _face_family(block) == "Planetaire Mono Text"
+    ]
+    assert len(blocks) == len(render_explainer.MONO_WEIGHTS)
+    assert {(_weight_of(block), _style_of(block)) for block in blocks} == {
+        ("400", "normal"),
+        ("700", "normal"),
+        ("400", "italic"),
+        ("700", "italic"),
+    }
+    for block in blocks:
+        assert 'url("data:font/woff2;base64,' in block
+        assert ".woff2" not in block
+
+
+_WEIGHT = re.compile(r"font-weight:\s*([^;]+);")
+_STYLE = re.compile(r"font-style:\s*([^;]+);")
+
+
+def _weight_of(block: str) -> str:
+    match = _WEIGHT.search(block)
+    return match.group(1).strip() if match else ""
+
+
+def _style_of(block: str) -> str:
+    match = _STYLE.search(block)
+    return match.group(1).strip() if match else ""
 
 
 def test_the_relation_face_joins_the_screen_sans_at_the_sans_weight_range() -> None:
