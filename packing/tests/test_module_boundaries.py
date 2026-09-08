@@ -176,23 +176,35 @@ def test_deferred_slow_review_has_its_required_git_history() -> None:
     # same requirement to the provenance surface. The slow lane moved to a job of its own
     # on 2026-09-08 and the requirement moved with it; a lookup by job name would have
     # gone on passing against whichever job kept the name.
-    workflow = VALIDATION_WORKFLOW.with_name("deep-gate.yml")
-    jobs = _mapping(_mapping(yaml.safe_load(workflow.read_text()))["jobs"])
-    carrying: list[str] = []
-    for job_name, raw_job in jobs.items():
-        raw_steps = _mapping(raw_job).get("steps")
-        assert isinstance(raw_steps, list)
-        steps = [_mapping(step) for step in raw_steps]
-        if not any('"slow behavioral tests"' in str(step.get("run", "")) for step in steps):
-            continue
-        carrying.append(job_name)
-        checkout = next(
-            step for step in steps if str(step.get("uses", "")).startswith("actions/checkout@")
-        )
-        assert _mapping(checkout.get("with") or {}).get("fetch-depth") == 0, (
-            f"{job_name}: the slow retained-theorem review reads exact historical Git objects"
-        )
-    assert len(carrying) == 1, carrying
+    #
+    # Both workflows, and both on the same day. `deep-gate.yml` gave the lane a runner
+    # after run 34177317419 killed it at 1800s beside the escape screen; the backstop in
+    # `packing-validation.yml` did the same after run 34185998810 killed it at 1801.00s
+    # the same way. Each file runs the lane in exactly one job, and that job clones deep.
+    workflows = (VALIDATION_WORKFLOW.with_name("deep-gate.yml"), VALIDATION_WORKFLOW)
+    for workflow in workflows:
+        jobs = _mapping(_mapping(yaml.safe_load(workflow.read_text()))["jobs"])
+        carrying: list[str] = []
+        for job_name, raw_job in jobs.items():
+            raw_steps = _mapping(raw_job).get("steps")
+            assert isinstance(raw_steps, list)
+            steps = [_mapping(step) for step in raw_steps]
+            if not any(
+                '--only "slow behavioral tests"' in " ".join(str(step.get("run", "")).split())
+                for step in steps
+            ):
+                continue
+            carrying.append(job_name)
+            checkout = next(
+                step
+                for step in steps
+                if str(step.get("uses", "")).startswith("actions/checkout@")
+            )
+            assert _mapping(checkout.get("with") or {}).get("fetch-depth") == 0, (
+                f"{workflow.name}: {job_name}: the slow retained-theorem review reads "
+                "exact historical Git objects"
+            )
+        assert len(carrying) == 1, (workflow.name, carrying)
 
 
 def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -> None:
@@ -201,7 +213,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     assert PYTHON_VERSION.read_text(encoding="utf-8").strip() == "3.14.7"
 
-    for job_name in ("validate", "suite", "exhaustive", "macos-portability"):
+    for job_name in ("validate", "suite", "exhaustive", "slow-lane", "macos-portability"):
         raw_steps = _mapping(jobs[job_name])["steps"]
         assert isinstance(raw_steps, list)
         steps = [_mapping(step) for step in raw_steps]
@@ -341,14 +353,26 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         if _mapping(step).get("name") == "Run the complete integration surface"
     )
     assert full_step["if"] == "github.event_name != 'pull_request'"
-    # `--skip`, because the exhaustive exact tier is the `exhaustive` job's whole
-    # selection and 1943s is not a bill to pay twice. That the two selections still
-    # partition `STEPS` is checked against the CLI's own selector in
-    # `test_the_post_merge_jobs_partition_the_gate`; what is pinned here is that this
-    # command is the one that leaves the tier out.
+    # Two `--skip`s, because the exhaustive exact tier is the `exhaustive` job's whole
+    # selection and the slow behavioural lane is `slow-lane`'s, and neither is a bill to
+    # pay twice. That the three selections still partition `STEPS` is checked against the
+    # CLI's own selector in `test_the_post_merge_jobs_partition_the_gate`; what is pinned
+    # here is that this command is the one that leaves both out.
+    #
+    # `--jobs 1` since 2026-09-08 and it is a measurement, not tidiness. Run 34185998810
+    # ran this step at `--jobs 2 --inner-jobs 2` on four vcpus and killed `slow behavioral
+    # tests` at 1801.00s while `single-square translation escape screen` ran beside it to
+    # 1794.06s, six seconds inside its own budget; the atlas rebuild (778.88s) and the
+    # negative controls (606.08s) were well above their serial readings too. Two outer
+    # slots without the lane would simply put the screen beside those two -- the shape run
+    # 34181619739 refuted in `deep-gate.yml`'s `deferred-steps`. Serial fits: the run's 68
+    # steps were 6226.03s of step time, the lane is 1801.00s of that, the five long
+    # deferrals are 2174.84s serial rather than 3445.44s crowded (run 34183723509), and
+    # the remaining 62 steps were 979.59s, so 2174.84 + 979.59 = 3154.43s against the full
+    # tier's 3600s ceiling.
     assert " ".join(str(full_step["run"]).split()) == (
         'uv run --frozen --all-extras --group dev packing-validate --skip "exhaustive '
-        'exact behavioral tests" --jobs 2 --inner-jobs 2'
+        'exact behavioral tests" --skip "slow behavioral tests" --jobs 1 --inner-jobs 2'
     )
 
     # The exhaustive exact tier, split onto its own runner on 2026-09-05 (think-tr2z) so
