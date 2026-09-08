@@ -311,6 +311,8 @@ case or experiment separately.
 | [Agenda 030, lane D: Contact lemmas and the closing route](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md) | research synthesis | record | retained | — |
 | [Agenda 030, lane F: The exactly-eleven plateau at 191/50](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-f-plateau-at-3-82.md) | research synthesis | record | retained | — |
 | [Agenda 030, lane E: A robust unavoidable set of at most eleven marks at 96/25](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md) | research synthesis | record | retained | — |
+| [Agenda 030, lane G: What the segment cover and the corner pair localise at 96/25](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-g-anchors-at-q.md) | research synthesis | record | retained | — |
+| [Agenda 030, BC-303: Independent replays of the first wave, and the selection](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/bc-303-first-wave-selection.md) | dated review record | record | retained | — |
 | [BC-255 Near-Axis Reader Independent Review](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-near-axis-reader-independent-review.md) | dated review record | record | retained | — |
 | [BC-252 — Complete Rows on the Retained Sites](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-252-exp116-next-discriminator.md) | research synthesis | record | retained | — |
 | [BC-255: Fixed-Side Discriminator Readiness](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/bc-255-fixed-side-discriminator-readiness.md) | research synthesis | record | retained | — |
@@ -620,10 +622,31 @@ and mostly outside Trump’s neighbourhood, and no restricted region reached a k
 alive reading; the loop’s depth scaling, not its LP, loses the value, so a depth
 polisher on the fixed support is the next instrument.
 
-**Agenda 030’s next entry:** `think-znzj` is BC-303, the first-wave selection with
-independent review, which reads every lane’s exact results once sessions 100, 101, 102
-and 104 are terminal and decides the next sustained block; until then the coordinator
-integrates each lane as it lands.
+**Selected next entry:** `think-yrw1` is BC-304, Agenda 030’s closeout, which
+dispositions every first- and second-wave cell and carries the unfinished complements of
+BC-292 and BC-299 forward; the blocks it hands on are the ones BC-303 funded below.
+
+**Agenda 030’s selection, made.**
+[Session-107](packing/campaign/agent-sessions/session-107-first-wave-selection.md)
+replayed the first wave’s three strongest claims with readers written from their
+statements, and all three agree: the segment cover at `96/25`, the corner-pair
+containment theorem, and the band exclusion at grid 119. Two corrections came with it:
+the segment length threshold is in `(7/100, 8/100]`, and the cover’s certified domain
+now closes a far-wall sliver.
+BC-303 funds the segment cover toward an ownership argument as the next sustained block,
+with the `B = 1` depth polisher as the efficiency block and the plateau’s full-dual
+pricing as its first task; it retains the band ladder as filler and defers the
+corner-pair anchored certificate until the restricted fractional packing value is
+measured, since X-021’s duality lemma bounds any conditional certificate by it.
+Two more lanes ran and were halted by an external usage limit with their mathematics
+written and their validation unreached:
+[session-108](packing/campaign/agent-sessions/session-108-anchors-at-q.md) proves the
+grazing localisation of the escape class and records where exactly-one ownership fails
+(a segment can be shared by two touching squares), and
+[session-109](packing/campaign/agent-sessions/session-109-corner-class-at-q.md) bounds
+the corner class’s surplus exactly at 1.6 to 1.8 per cent of the gap to the certificate
+line and proves that a branch program in ratio form is a knife-edge whatever the site
+set. BC-304 closes the agenda when the funded block reports.
 The same block repaired the deferred checkpoint (a third label-gated job for the slow
 behavioural lane and a declared budget for the escape screen) and amended OR-2, OR-3 and
 OR-6.
@@ -734,8 +757,8 @@ completed Session 086’s `BC-213` rung and accepted `H-062` at bracket width `0
 Session 089 retains the finite-row density candidate, its complete pair exclusion, the
 exact-angle auxiliary result, and the next complete-method assessments.
 
-**Selected next entry:** `think-mq0d` retains BC-264’s disposition after the completed
-H114 feature and kernel-contract pricing.
+**BC-264’s entry:** `think-mq0d` retains BC-264’s disposition after the completed H114
+feature and kernel-contract pricing.
 Its immediate prerequisite is the stopped Session097 checkpoint’s operational
 certification and draft publication.
 Exp129 missed its launch cutoff; its expired allocation cannot authorize a scientific
@@ -3268,9 +3291,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 120 | 31,069 | 17,302 | 365 | 2,941 | 177.34 h |
+| claimed by a session | 123 | 31,555 | 17,503 | 365 | 2,974 | 179.02 h |
 | claimed by none | 60 | 11,110 | 6,539 | 156 | 946 | 51.75 h |
-| **measured** | **180** | **42,179** | **23,841** | **521** | **3,887** | **229.09 h** |
+| **measured** | **183** | **42,665** | **24,042** | **521** | **3,920** | **230.77 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -3306,7 +3329,10 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-102](packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md) | 2 | 1 | 310 | 106 | 2 | 1.52 h |
 | [session-103](packing/campaign/agent-sessions/session-103-plateau-artefact-at-3-82.md) | 1 | 1 | 164 | 63 | 0 | 0.94 h |
 | [session-104](packing/campaign/agent-sessions/session-104-ownership-set-at-q.md) | 3 | 1 | 238 | 83 | 1 | 1.38 h |
-| *shared by 32 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
+| [session-107](packing/campaign/agent-sessions/session-107-first-wave-selection.md) | 2 | 1 | 202 | 82 | 0 | 0.58 h |
+| [session-108](packing/campaign/agent-sessions/session-108-anchors-at-q.md) | 1 | 1 | 128 | 52 | 0 | 0.57 h |
+| [session-109](packing/campaign/agent-sessions/session-109-corner-class-at-q.md) | 1 | 1 | 156 | 67 | 0 | 0.53 h |
+| *shared by 35 sessions* | — | 6 | 16,652 | 9,129 | 226 | 120.31 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -3340,9 +3366,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 59 |
+| measured | 62 |
 | unmeasured | 45 |
-| **total** | **104** |
+| **total** | **107** |
 
 <!-- END GENERATED: session-close-report -->
 

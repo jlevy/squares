@@ -41,7 +41,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: stopped
     priority: 0
     question: Does pricing the four corner blockers' cores above the rest, or banking their corner boxes, give a covering surplus at 96/25?
     hypotheses: [H-126, H-127]
@@ -62,6 +62,24 @@ agenda:
     program: n11-structure-and-conditional-dots
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-a-corner-structure.md
+    outcomes:
+    - scope: The corner-class LP under the corner-pair condition on one site set, in session-109 (2026-09-08), halted by an external usage limit during run 4
+      classification: time-limited
+      result: >-
+        The corner class does buy a surplus at 96/25 and the surplus is exactly bounded and
+        far too small: on site set A the class lowers the ratio optimum by between 0.000535
+        and 0.000573, which is 1.6 to 1.8 per cent of the 0.0325 gap to the certificate
+        line, with the flush-four dual at lambda = 1.0325 and the free control at 1.0330,
+        both exactly decided. A general obstruction is proved beside it: a branch program in
+        ratio form sits on the knife-edge lambda = 1 whatever the site set, because the
+        chosen marks are sites, so branch programs must be written in slice form; the
+        slice form of the opposite-both branch then buys nothing over the free program.
+        Run 4 did not converge and run 5, on the corner-refined site set, did not run.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-a-corner-structure.md
+      - packing/campaign/agent-sessions/session-109-corner-class-at-q.md
+      disposition: continue
+      follow_up: think-kx2l
     next_evidence: Whether any corner information has value for a certificate at q; if the flush-four residual falls below seven, the first conditional exclusion with a named complement.
     note: Owns the region-class row generator and the centre-domain clip; no other lane edits those files.
   - id: BC-293
@@ -304,7 +322,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: stopped
     priority: 1
     question: For which angle band do Stromquist's ten points localise every avoiding square at 96/25, and can an escape-tolerant two-branch certificate close the escapes?
     hypotheses: [H-126, H-111]
@@ -322,6 +340,24 @@ agenda:
     depends_on: []
     parallel_group: lanes-anchors
     program: n11-structure-and-conditional-dots
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-g-anchors-at-q.md
+    - packing/campaign/agent-sessions/session-108-anchors-at-q.md
+    outcomes:
+    - scope: What Theorem E.4 and the corner-pair theorem localise at 96/25, in session-108 (2026-09-08), halted by an external usage limit before its validation
+      classification: time-limited
+      result: >-
+        Theorem G.1 proves the grazing localisation of the escape class over Theorem E.4;
+        Lemma G.4 and Theorem G.6, the latter with an exact rational pose, complete the
+        band question; the anchor is priced by weak duality on the site set. The lane also
+        records where exactly-one ownership fails: a segment can be shared by two touching
+        squares, so localisation transfers but Stromquist's ownership does not. Its
+        validation, final checkpoint and the second LP run were not reached.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-g-anchors-at-q.md
+      - packing/campaign/agent-sessions/session-108-anchors-at-q.md
+      disposition: continue
+      follow_up: think-4ifm
     next_evidence: The premise every conditional certificate needs, a square forced into a known box, combined with the nine-point band into a concrete two-branch split.
   - id: BC-300
     purpose: research
@@ -413,7 +449,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: blocked
+    state: complete
     priority: 0
     question: Which lane results earn the next sustained block, and what is the strongest claim to freeze?
     hypotheses: [H-127, H-128, H-129, H-130, H-132, H-134]
@@ -425,12 +461,38 @@ agenda:
     depends_on: []
     blocked_on: First-wave evidence from the ready lanes; no route is selected or funded by this planning checkpoint.
     program: n11-structure-and-conditional-dots
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/bc-303-first-wave-selection.md
+    - packing/campaign/agent-sessions/session-107-first-wave-selection.md
+    outcomes:
+    - scope: Independent replays of the first wave's three strongest claims and the selection, in session-107 (2026-09-08)
+      classification: achieved
+      result: >-
+        All three replays agree, each with a reader written from the statement rather than
+        from the lane's script. Theorem E.4 (the ten segments of length 1/10 unavoidable at
+        3/500) is confirmed, with two disagreements recorded: the threshold length is in
+        (7/100, 8/100] rather than (7/100, 9/100], since 8/100 decides with no failure and
+        the lane's own reader confirms it at a finer floor, and the lane's certified domain
+        misses a far-wall sliver its stated constant does not strictly absorb, which this
+        replay closes. The corner-pair containment theorem is confirmed from the exported
+        free measure and the ownership step re-derived. Theorem C is confirmed, the
+        composition (11, 0) refuted exactly on the band at grid 119. The selection funds the
+        segment cover toward an ownership argument as the next sustained block and the
+        B = 1 depth polisher as the efficiency block (with the plateau's full-dual pricing
+        as its first task), retains the band ladder as filler rather than a block, and
+        defers the corner-pair anchored certificate until the restricted fractional packing
+        value is measured, since the duality lemma bounds a conditional certificate by it.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/bc-303-first-wave-selection.md
+      - packing/campaign/agent-sessions/session-107-first-wave-selection.md
+      disposition: continue
+      follow_up: think-qfog
     next_evidence: The frozen claim for the next block and the remaining proof obligations.
   - id: BC-304
     purpose: research
     owner_focus: correctness
     instances: [11]
-    state: blocked
+    state: ready
     priority: 0
     question: What survives independent checking, what did it change about the global problem, and what is the next consequential question?
     budget: One closeout block of two hours with the final hour reserved for verification, integration and publication.

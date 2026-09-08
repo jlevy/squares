@@ -12,7 +12,7 @@ session:
   started_at: '2026-09-08T15:34:22Z'
   deadline_at: '2026-09-08T18:04:22Z'
   branch: claude/squares-n11-constraints-wl9atd
-  resource_rollups: []
+  resource_rollups: [packing/campaign/resource-usage/agent-aabf7fb69affb7684.yaml]
   goal: State exactly the localisation that Theorem E.4 (ten segments) and the four-corner
     pair theorem give for eleven unit squares at 96/25, prove what can be proved, read the
     trade-off between an anchor class and its price on the retained shrink and net, and
@@ -44,7 +44,8 @@ session:
     kill_condition: The deadline, or a two-branch certificate below its threshold decided by
       the exact sweep (then freeze and stop, allocating nothing).
     fallback: Publish the same fields at the scope reached.
-    outcome: Theorem G.1 (proved from E.4 and the net's Hausdorff bound 0.00325) says every
+    outcome: >-
+      Theorem G.1 (proved from E.4 and the net's Hausdorff bound 0.00325) says every
       core avoiding Stromquist's ten points at 96/25 lies within 1/100 of a segment centred
       on a point it does not contain, so the escape class is K4 times the union of four thin
       grazing classes and Lemma B's branch 1 is free; Proposition G.2 (exact 45-degree
@@ -125,8 +126,9 @@ session:
     scope; no full gate was run in the lane, no claim was frozen, and the resource receipt
     is the coordinator's to attach at integration.
   next_action: Under think-kbci the coordinator integrates the lane document, attaches the
-    resource receipt, runs the certifying gate and dispositions H-126 and H-111 in BC-303
-    (think-znzj).
+    resource receipt, runs the certifying gate, and carries H-126 and H-111 and this lane's
+    unfinished complement into BC-304 (think-yrw1), the agenda closeout, which
+    already has this lane's reading from the first-wave selection.
 ---
 # session-108 — what the segment cover and the corner pair localise at 96/25
 

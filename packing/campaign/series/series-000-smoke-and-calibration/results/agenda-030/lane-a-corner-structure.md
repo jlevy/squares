@@ -1443,12 +1443,28 @@ and no branch dual can exceed `λ = 1`, while the primal can always bank the fou
 at ratio exactly `1`. A branch program in ratio form sits on this knife-edge whatever
 the site set; the informative branch program is the slice `w_f = 1`.
 
-**Run 3b, the opposite-both branch, slice (`w_f = 1`, D2, site set A).** RUN3B
+**Run 3b, the opposite-both branch, slice (`w_f = 1`, D2, site set A).** Converged and
+decided exactly. Dual support 97 rows over 65 primal orbits; the tight system (67
+equations, 98 unknowns) solved in `Fraction` arithmetic gives maximum symmetrised depth
+exactly `1`, total `897019/78939 = 11.363445192`, exactly `4` on chosen-mark placements,
+so `Σ_A y = 4` and the residual `M − 4 w_c − 7 ≥ Σ y − 11 = 28690/78939 = 0.363445192 >
+0`. The branch buys nothing over the free program on this site set.
+The census read 28 987 449 reachable cells, 5 455 344 in the corner class over 181
+directions.
 
 **Run 4, the U branch, slice (`Sv`, chosen marks the bottom-wall marks at the bottom
-corners and the side-wall marks at the top corners, site set A).** RUN4
+corners and the side-wall marks at the top corners, site set A).** Did not converge.
+The external usage limit halted the session during round 21 of the row loop, at 19 607
+rows and a float objective of `7.334647511` still rising with a least violation of
+`3.256·10⁻⁴`; no exact decision was taken and none of these figures is a result.
+The run is reproducible from the driver in the appendix with the same site set and
+group.
 
-**Run 5, the flush-four program on the corner-refined site set B.** RUN5
+**Run 5, the flush-four program on the corner-refined site set B.** Did not run.
+Site set B was specified (site set A refined inside the four corner boxes) but the block
+ended before the program was built, so nothing is claimed about whether a denser corner
+site set moves the residual.
+This is the first task of any continuation.
 
 ### Reading
 
@@ -1475,11 +1491,38 @@ convex-polygon replacement.
 
 ### Status of H-126 and H-127
 
-STATUS
+Neither is decided by this session, and neither is refuted.
+
+**H-127** asked whether pricing the four corner blockers’ cores above the rest gives a
+covering surplus at `96/25`. On site set A the surplus is real and exactly bounded but
+far too small: the corner class lowers the ratio optimum by between
+`11761534471/22000561000000 = 0.000535` and `35788031/62500796875 = 0.000573`, between
+1.6 and 1.8 per cent of the `0.0325` gap that separates the free program from the
+certificate line. Recommended status: open, with this bound recorded as the first
+measurement of the surplus rather than a refutation, since the denser corner site set
+(run 5) is untested.
+
+**H-126**, quantitative corner structure from insertion saturation, is untouched here
+beyond supplying the corner-pair condition each branch program conditions on.
+Recommended status: unchanged.
 
 ### Obstructions and mistakes worth recording
 
-OBSTRUCTIONS
+**The knife-edge in ratio form.** A branch program written in ratio form cannot decide
+anything: the chosen marks are sites, a dual packing has depth at most `1` at each, and
+every chosen-mark placement contains exactly one chosen mark, so `Σ_A y ≤ 4` bounds
+every branch dual by `λ = 1` while the primal always banks the four marks at ratio
+exactly `1`. Run 3 spent its budget establishing that before the slice form (`w_f = 1`)
+was used instead. Any continuation writes branch programs in slice form from the start.
+
+**The surplus is measured on one site set.** Every number here is site set A (grid 79,
+inset 1/10, D4-folded, with the corner-pair marks as sites).
+A non-refutation on a site set is not a falsification, and the corner-refined set that
+would test the reading did not run.
+
+**The block ended early.** An external usage limit stopped the session during run 4;
+runs 4 and 5, the pinwheel and J branches and Theorem B’s three-plus-one clip were not
+built, and are the complement this session leaves.
 
 ### Appendix: scripts and outputs as run
 

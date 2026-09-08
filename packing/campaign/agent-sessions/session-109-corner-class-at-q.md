@@ -12,7 +12,7 @@ session:
   started_at: '2026-09-08T15:35:02Z'
   deadline_at: '2026-09-08T18:05:02Z'
   branch: claude/squares-n11-constraints-wl9atd
-  resource_rollups: []
+  resource_rollups: [packing/campaign/resource-usage/agent-a0db35ca8af021cbd.yaml]
   goal: Decide exactly, on stated site sets at side 96/25 with the retained shrink and
     net, whether pricing the four corner squares' cores above the rest gives a covering
     surplus, using session-101's corner-pair theorem as the proved premise (each corner's
@@ -106,8 +106,9 @@ session:
   certification_pending: think-kbci
   stop_reason: STOP_REASON2
   next_action: Under think-kbci the coordinator integrates the lane section, attaches the
-    resource receipt, runs the certifying gate and dispositions H-126 and H-127 in BC-303
-    (think-znzj).
+    resource receipt, runs the certifying gate, and carries H-126 and H-127 and this lane's
+    unfinished complement into BC-304 (think-yrw1), the agenda closeout, which
+    already has this lane's reading from the first-wave selection.
 ---
 # session-109 — the corner-class LP under the corner-pair condition at 96/25
 

@@ -119,6 +119,9 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-104](agent-sessions/session-104-ownership-set-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `documentation-pass` (correctness) | 3 | think-qfog | Under think-kbci the coordinator integrates the lane branch, registers the document, attaches the harness rollup, allocates the experiment id for Theorem E.4 and certifies the branch on the pull-request surface; BC-303 (think-znzj) reads the lane, and the independent replay with the Hausdorff-bound reader is the next session's first step. |
 | [session-105](agent-sessions/session-105-stromquist-n26-verification.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 6 | think-zi3g | Publish this review and verify hosted checks; retain think-mq0d (BC-264) as the selected research slice. think-z0fi implements and controls the specified n26 family, think-0x08 recovers Green evidence, think-4g6w audits the remaining source table, and think-sske replays MacIver theorem dependencies before adoption. |
 | [session-106](agent-sessions/session-106-n26-source-consistency.md) | completed | contemporaneous | `factual-review` (correctness) | `pipeline-improvement` (correctness) | 5 | think-4v5w | Merge PR120 after the final record commit passes its affected and hosted checks, then close think-4v5w, think-4g6w and think-7tus. Further H125 work remains conditional on the landed PR116/BC-264 handoff, a fresh allocation and admission under think-mq0d; source-recovery and released-contact follow-ups remain open. |
+| [session-107](agent-sessions/session-107-first-wave-selection.md) | stopped | contemporaneous | `factual-review` (correctness) | `review-planning-oversight` (insight) | 2 | think-znzj | Under think-kbci the coordinator integrates this record, attaches the resource receipt and runs the certifying gate; then funds the selected block under think-qfog and the efficiency block under think-7lp3, and runs BC-304 (think-yrw1) as the closeout. |
+| [session-108](agent-sessions/session-108-anchors-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-4ifm | Under think-kbci the coordinator integrates the lane document, attaches the resource receipt, runs the certifying gate, and carries H-126 and H-111 and this lane's unfinished complement into BC-304 (think-yrw1), the agenda closeout, which already has this lane's reading from the first-wave selection. |
+| [session-109](agent-sessions/session-109-corner-class-at-q.md) | stopped | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-kx2l | Under think-kbci the coordinator integrates the lane section, attaches the resource receipt, runs the certifying gate, and carries H-126 and H-127 and this lane's unfinished complement into BC-304 (think-yrw1), the agenda closeout, which already has this lane's reading from the first-wave selection. |
 
 ### Workflow summary
 
@@ -127,14 +130,14 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 2 | 1 | 13 | 1 |
-| `factual-review` | 4 | 0 | 46 | 2 |
+| `factual-review` | 5 | 0 | 47 | 2 |
 | `insight-iteration` | 19 | 1 | 60 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
-| `research-loop` | 15 | 4 | 74 | 7 |
+| `research-loop` | 17 | 4 | 76 | 7 |
 | `pipeline-improvement` | 26 | 0 | 134 | 1 |
 | `documentation-pass` | 1 | 0 | 16 | 1 |
-| `review-planning-oversight` | 0 | 0 | 3 | 0 |
+| `review-planning-oversight` | 0 | 0 | 4 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
 ## Experiment agendas
@@ -620,19 +623,19 @@ Status: **active**. Run X-021's research sessions as parallel lanes with disjoin
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-291 | research | 11 | complete | 0 | think-cm07 | The owner's research-start instruction; then the coordinator allocates session ids and dispatches the ready lanes below. |
-| BC-292 | research | 11 | ready | 0 | think-kx2l | Whether any corner information has value for a certificate at q; if the flush-four residual falls below seven, the first conditional exclusion with a named complement. |
+| BC-292 | research | 11 | stopped | 0 | think-kx2l | Whether any corner information has value for a certificate at q; if the flush-four residual falls below seven, the first conditional exclusion with a named complement. |
 | BC-293 | research | 11 | complete | 0 | think-1136 | Pinned anchors for the frame-conditioned certificate (BC-287, H-111) and the two-pattern case split of the ownership-conditioned certificate. |
 | BC-294 | measurement_validation | 11 | complete | 0 | think-7lp3 | Whether the non-convex-domain instrument (BC-204) is worth building; whether routes (b) and (c) and every capture design survive; the input BC-301 needs. |
 | BC-295 | research | 11 | complete | 0 | think-ndqj | The first band theorem new below U; whether the obstruction at q is Trump-shaped or an integrality artefact that geometric conditioning can target. |
 | BC-296 | research | 11 | ready | 1 | think-n6fr | Either the composition route ends at q with a certificate of its own impossibility, or the survivors become the branch list for geometric conditioning. |
 | BC-297 | measurement_validation | 11 | complete | 1 | think-4uon | Whether the ladder's top is the instrument's or the geometry's; the size of the ownership tree. |
 | BC-298 | research | 11 | ready | 1 | think-jsi8 | Every wall within 3.84 − H0 of a square, both extents at least H0, and with the spanning lemma the strongest symmetry-breaking premise available. |
-| BC-299 | research | 11 | ready | 1 | think-4ifm | The premise every conditional certificate needs, a square forced into a known box, combined with the nine-point band into a concrete two-branch split. |
+| BC-299 | research | 11 | stopped | 1 | think-4ifm | The premise every conditional certificate needs, a square forced into a known box, combined with the nine-point band into a concrete two-branch split. |
 | BC-300 | research | 11 | tentative | 2 | think-dfof | Which corner branches cannot close near U, and whether the structural lane should spend time on elimination motions at all. |
 | BC-301 | research | 11 | ready | 1 | think-lbqe | The only honest statement about the endpoint; if BC-294 kills capture, this reduces to the exact-side tree and needs BC-302 to be finite. |
 | BC-302 | research | 11 | complete | 1 | think-qfog | If it succeeds, route (a) collapses to about two to the twenty exact LPs; the prior is about thirty per cent. |
-| BC-303 | research | 11 | blocked | 0 | think-znzj | The frozen claim for the next block and the remaining proof obligations. |
-| BC-304 | research | 11 | blocked | 0 | think-yrw1 | The owner reviews the mathematical result and the next selection. |
+| BC-303 | research | 11 | complete | 0 | think-znzj | The frozen claim for the next block and the remaining proof obligations. |
+| BC-304 | research | 11 | ready | 0 | think-yrw1 | The owner reviews the mathematical result and the next selection. |
 
 ## Series
 

@@ -46,7 +46,9 @@ hypothesis:
     unavoidable set at tolerance 3/500, certified by an interval reader with every leaf
     re-decided exactly; the point form stays open, every skeleton point set having an
     exact escape. The experiment record and the independent replay are allocated at
-    integration.
+    integration. Independently replayed in session-107 (BC-303) with a reader written from
+    the statement: the cover is confirmed, and the threshold length is in (7/100, 8/100]
+    rather than (7/100, 9/100].
 ---
 # H-134 — Ownership at the Target Side
 

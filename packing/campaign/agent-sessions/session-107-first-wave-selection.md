@@ -12,7 +12,7 @@ session:
   started_at: '2026-09-08T15:34:00Z'
   deadline_at: '2026-09-08T18:04:00Z'
   branch: claude/squares-n11-constraints-wl9atd
-  resource_rollups: []
+  resource_rollups: [packing/campaign/resource-usage/agent-a045cfe6da5811e19.yaml]
   goal: Independently replay the strongest claim of each first-wave lane of Agenda 030
     with a reader written from the statement rather than the lane's script (Theorem E.4
     of lane E, the four-corner pair containment theorem of lane C, Theorem C of lane B),
