@@ -643,6 +643,10 @@ def test_static_math_prioritizes_active_panels_and_preserves_native_fallback() -
           makeNode('panel second', {panel: true}),
           makeNode('hidden body', {hidden: true}),
         ];
+        const missing = makeNode('missing native box', {native: true});
+        missing.querySelector = () => null;
+        const alreadyDone = makeNode('already done'); alreadyDone.dataset.done = '1';
+        nodes.push(missing, alreadyDone);
         const document = {querySelectorAll(selector) {
           assert.equal(selector, '.tex, .tex-d, .kpress-math'); return nodes;
         }, documentElement: {classList: {add: value => completed.push(value)}}};
@@ -666,6 +670,8 @@ def test_static_math_prioritizes_active_panels_and_preserves_native_fallback() -
         (async () => {
           const done = typeset();
           assert.equal(calls.length, 0, 'collecting math does not synchronously render it');
+          assert.ok(nodes.every(el => el.dataset.squaresMathQueued === 'true'),
+            'unsubmitted wrappers remain hidden if the root watchdog expires');
           await Promise.all(jobs.map(job => job()));
           assert.deepEqual(calls.map(call => call.source), [
             'panel first', 'panel second', 'body', 'display', 'failed native',
@@ -676,10 +682,16 @@ def test_static_math_prioritizes_active_panels_and_preserves_native_fallback() -
           assert.equal(nodes[1].dataset.kpressMathRendered, 'true');
           assert.equal(nodes[4].dataset.kpressMathRendered, undefined,
             'a failed native formula keeps its semantic fallback');
+          assert.ok(nodes.every(el => !el.dataset.squaresMathQueued),
+            'successful and failed renders release their queued wrappers');
           finishBatch(); await flush();
           assert.deepEqual(completed, [], 'the later certificate boots have not settled');
           finishBootstrap(); await done;
           assert.deepEqual(completed, ['fonts', 'math-ready', 'tooltips', 'copy']);
+          squaresMath.batch = () => Promise.reject(new Error('submission failed'));
+          await assert.rejects(typeset(), /submission failed/);
+          assert.ok(nodes.every(el => !el.dataset.squaresMathQueued),
+            'a failed producer cannot leave later wrappers hidden forever');
           process.stdout.write('complete');
         })().catch(error => { console.error(error); process.exitCode = 1; });
     """)

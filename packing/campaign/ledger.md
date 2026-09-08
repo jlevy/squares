@@ -113,6 +113,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-099](agent-sessions/session-099-atlas-expansion-to-324.md) | in_progress | contemporaneous | `research-survey` (correctness) | `review-planning-oversight` (process) | 4 | think-0juv | The plan's Phases 0 through 5 are terminal on PR 111 and the calibration boundary held throughout; the session stays open, with its clock extended to 2026-09-10 (twice; the budget note rules out a third time and names what closes it, think-y0hr), until the owner confirms D2 and the two open questions, the re-priced tiers are read on the next hosted run, the full checkpoint is obtained before merge (label deep-gate last), and the harness has written this session's rollup so the record can name what it cost and the gate that certified it. Phase 6 stays closed under D1 unless the owner chooses the caveated form. |
 | [session-105](agent-sessions/session-105-stromquist-n26-verification.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 6 | think-zi3g | Publish this review and verify hosted checks; retain think-mq0d (BC-264) as the selected research slice. think-z0fi implements and controls the specified n26 family, think-0x08 recovers Green evidence, think-4g6w audits the remaining source table, and think-sske replays MacIver theorem dependencies before adoption. |
 | [session-106](agent-sessions/session-106-n26-source-consistency.md) | completed | contemporaneous | `factual-review` (correctness) | `pipeline-improvement` (correctness) | 5 | think-4v5w | Merge PR120 after the final record commit passes its affected and hosted checks, then close think-4v5w, think-4g6w and think-7tus. Further H125 work remains conditional on the landed PR116/BC-264 handoff, a fresh allocation and admission under think-mq0d; source-recovery and released-contact follow-ups remain open. |
+| [session-107](agent-sessions/session-107-font-startup-stability.md) | stopped | retrospective | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 3 | think-qcmi | Resume think-mq0d for BC-264's existing 30-minute H114 feature and kernel-contract pricing slice, subject to the current allocation and admission requirements. This publication repair does not reprioritize research or authorize a target run. |
 
 ### Workflow summary
 
@@ -126,7 +127,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
 | `research-loop` | 10 | 4 | 67 | 7 |
-| `pipeline-improvement` | 26 | 0 | 134 | 1 |
+| `pipeline-improvement` | 26 | 1 | 134 | 4 |
 | `documentation-pass` | 1 | 0 | 13 | 1 |
 | `review-planning-oversight` | 0 | 0 | 3 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |

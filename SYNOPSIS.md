@@ -555,6 +555,15 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
+**Math startup release checkpoint.**
+[Session107](packing/campaign/agent-sessions/session-107-font-startup-stability.md)
+records prepared geometry, parameter-first hydration and the passing source checkpoints.
+The latest hosted timing comparison passes its numerical rule, but print geometry and
+WebKit first exposure still fail.
+Queue recovery and print carrier repairs, combined validation, the authorized merge and
+deployed verification remain ongoing under `think-qcmi`; H-006 is registered before the
+next dispatch. The research selection below remains unchanged.
+
 **Atlas expansion to `n = 324`, owner-directed, beside the research line.**
 [The plan](docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md) under
 epic `think-0juv` and
@@ -3223,12 +3232,13 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-096.yaml` | session-096 | 520 | 3.79 h | 1.4 h | 1.4 h | yes |
 | `codex-task-tree-session-105.yaml` | session-105 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
 | `codex-task-tree-session-106.yaml` | session-106 | 1,467 | 14.71 h | 8.0 h | 8.0 h | yes |
+| `codex-task-tree-session-107.yaml` | session-107 | 2,214 | 16.28 h | 4.97 h | 4.98 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 53 |
+| measured | 54 |
 | unmeasured | 45 |
-| **total** | **98** |
+| **total** | **99** |
 
 <!-- END GENERATED: session-close-report -->
 

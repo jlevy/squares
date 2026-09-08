@@ -23,6 +23,7 @@ from pathlib import Path
 from typing import Literal, NotRequired, TypedDict
 
 from devtools.check_print_layout import PRINT_VIEWPORT
+from devtools.render_explainer import MATH_WRAPPERS
 from devtools.render_explainer_pdf import (
     BROWSER_OVERRIDE,
     PAGE,
@@ -50,6 +51,7 @@ class Inspection(TypedDict):
 
     screen: list[FontUse]
     print: list[FontUse]
+    math: NotRequired[dict[str, list[MathContext]]]
     findings: NotRequired[list[str]]
 
 
@@ -58,6 +60,70 @@ class Probe(TypedDict):
 
     fonts: list[FontUse]
     findings: list[str]
+
+
+class MathContext(TypedDict):
+    """The outer math em compared with its surrounding text, excluding script sizes."""
+
+    role: str
+    source: str
+    size: float
+    context_size: float
+    family: str
+    context_family: str
+    weight: str
+    context_weight: str
+    text_rendering: str
+    context_text_rendering: str
+
+
+def math_size_findings(rows: list[MathContext], *, require_roles: bool = False) -> list[str]:
+    """Every root formula follows its context; KaTeX still sizes scripts internally."""
+    findings = [
+        f"{row['role']} math {row['source']!r}: size {row['size']}px "
+        f"differs from surrounding text {row['context_size']}px"
+        for row in rows
+        if row["size"] <= 0
+        or row["context_size"] <= 0
+        or abs(row["size"] - row["context_size"]) > 0.01
+    ]
+    if require_roles:
+        present = {row["role"] for row in rows}
+        findings.extend(
+            f"no visible {role} math to verify"
+            for role in ("inline", "display", "caption")
+            if role not in present
+        )
+    return findings
+
+
+_MATH_CONTEXTS = r"""({wrappers, crops}) => {
+  const selected = new Set();
+  const rows = [];
+  for (const math of document.querySelectorAll('.katex')) {
+    if (!math.getClientRects().length || getComputedStyle(math).visibility !== 'visible'
+        || math.closest('[hidden]')) continue;
+    let context = math.parentElement;
+    while (context && context.matches(wrappers + ', .katex-display'))
+      context = context.parentElement;
+    if (!context) continue;
+    const role = math.closest('.kpress-figcaption') ? 'caption'
+      : math.closest('.katex-display, .tex-d, .kpress-math-display') ? 'display' : 'inline';
+    const style = getComputedStyle(math), surrounding = getComputedStyle(context);
+    rows.push({role,
+      source: math.querySelector('annotation')?.textContent || math.textContent,
+      size: parseFloat(style.fontSize), context_size: parseFloat(surrounding.fontSize),
+      family: style.fontFamily, context_family: surrounding.fontFamily,
+      weight: style.fontWeight, context_weight: surrounding.fontWeight,
+      text_rendering: style.textRendering, context_text_rendering: surrounding.textRendering});
+    if (crops && !selected.has(role)) {
+      const block = math.closest('p, figcaption, .tex-d, .kpress-math-display') || context;
+      block.dataset.squaresTypographyCrop = role;
+      selected.add(role);
+    }
+  }
+  return rows;
+}"""
 
 
 SUPPORTING_SELECTOR = (
@@ -307,17 +373,21 @@ def inspect(
     theme: Literal["light", "dark"] | None = None,
     width: int = 1280,
     check_supporting: bool = False,
+    check_math: bool = False,
+    math_crops: Path | None = None,
 ) -> Inspection:
     """Inspect settled text in both media without changing the source document."""
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
-    report: Inspection = {"screen": [], "print": []}
+    report: Inspection = {"screen": [], "print": [], "math": {}}
     findings: list[str] = []
     with sync_playwright() as driver:
         browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
         try:
             page = browser.new_page(
-                reduced_motion="reduce", viewport={"width": width, "height": 720}
+                reduced_motion="reduce",
+                viewport={"width": width, "height": 720},
+                device_scale_factor=2 if math_crops else 1,
             )
             if theme:
                 page.emulate_media(color_scheme=theme)
@@ -352,11 +422,30 @@ def inspect(
                 else:
                     report["print"] = probe["fonts"]
                 findings.extend(f"{medium}: {finding}" for finding in probe["findings"])
+                rows: list[MathContext] = page.evaluate(
+                    _MATH_CONTEXTS, {"wrappers": MATH_WRAPPERS, "crops": bool(math_crops)}
+                )
+                report["math"][medium] = rows
+                if check_math:
+                    findings.extend(
+                        f"{medium}: {finding}"
+                        for finding in math_size_findings(rows, require_roles=True)
+                    )
+                if math_crops:
+                    math_crops.mkdir(parents=True, exist_ok=True)
+                    for role in ("inline", "display", "caption"):
+                        crop = page.locator(f'[data-squares-typography-crop="{role}"]')
+                        if crop.count():
+                            crop.screenshot(path=math_crops / f"{medium}-{role}.png")
+                    page.evaluate(
+                        "document.querySelectorAll('[data-squares-typography-crop]')"
+                        ".forEach(el => delete el.dataset.squaresTypographyCrop)"
+                    )
                 if check_supporting:
                     findings.extend(
                         f"{medium}: {finding}" for finding in provenance_findings(page)
                     )
-            if check_supporting:
+            if check_supporting or check_math:
                 report["findings"] = findings
             return report
         finally:
@@ -426,6 +515,39 @@ def self_test() -> None:
                 finding.startswith("no visible caption") for finding in no_caption["findings"]
             ):
                 raise SystemExit("typography self-test accepted a fixture without a caption")
+            page.set_content("""<style>
+              .cert-page {font-size:18px} .katex {font-size:inherit}
+              figcaption {font-size:17px} .script {font-size:.7em}
+              </style><div class="cert-page">
+              <p>Inline <span class="tex"><span class="katex">x
+              <span class="script">2</span></span></span></p>
+              <div class="tex-d"><span class="katex-display">
+              <span class="katex">x</span></span></div>
+              <figcaption class="kpress-figcaption">Caption
+              <span class="tex"><span class="katex">x</span></span></figcaption>
+              </div>""")
+            math_args = {"wrappers": MATH_WRAPPERS, "crops": False}
+            correct: list[MathContext] = page.evaluate(_MATH_CONTEXTS, math_args)
+            if {row["role"] for row in correct} != {
+                "inline",
+                "display",
+                "caption",
+            } or math_size_findings(correct):
+                raise SystemExit(
+                    "math-size self-test rejected contextual sizes or script scaling"
+                )
+            page.add_style_tag(content=".katex {font-size:1.1em}")
+            enlarged: list[MathContext] = page.evaluate(_MATH_CONTEXTS, math_args)
+            if len(math_size_findings(enlarged)) != 3:
+                raise SystemExit(
+                    "math-size self-test missed enlarged inline, display, or caption math"
+                )
+            page.locator("figcaption").evaluate("node => { node.hidden = true; }")
+            hidden: list[MathContext] = page.evaluate(_MATH_CONTEXTS, math_args)
+            if "no visible caption math to verify" not in math_size_findings(
+                hidden, require_roles=True
+            ):
+                raise SystemExit("math-size self-test accepted a hidden caption role")
         finally:
             browser.close()
     print("typography self-test passed: valid, inconsistent, and missing-caption fixtures")
@@ -437,6 +559,16 @@ def main() -> None:
     parser.add_argument("page", nargs="?", type=Path, default=PAGE)
     parser.add_argument("--selector", help="Inspect only text within matching CSS elements")
     parser.add_argument("--theme", choices=("light", "dark"), help="Force the screen theme")
+    parser.add_argument(
+        "--check-math",
+        action="store_true",
+        help="Require inline and display math to use the surrounding text size",
+    )
+    parser.add_argument(
+        "--math-crops",
+        type=Path,
+        help="Save matched 2x crops of the first inline, display, and caption math",
+    )
     parser.add_argument(
         "--width", type=int, default=1280, help="Screen viewport width in CSS px"
     )
@@ -460,6 +592,8 @@ def main() -> None:
         theme=args.theme,
         width=args.width,
         check_supporting=args.check_supporting,
+        check_math=args.check_math,
+        math_crops=args.math_crops,
     )
     print(json.dumps(report, indent=2))
     if report.get("findings"):

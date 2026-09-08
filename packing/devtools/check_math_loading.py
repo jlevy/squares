@@ -214,6 +214,39 @@ FONT_LOAD_OBSERVER = r"""load => {
   };
 }"""
 
+#: Batched hydration changes a few wrappers at a time. Rewalking the whole prepared
+#: page after every batch can consume the bootstrap watchdog in the observer itself.
+#: Ancestor changes still cover their descendants; stylesheet edits cover the page.
+MUTATED_MATH = r"""records => {
+  if (!records) return document.querySelectorAll('.katex');
+  const result = new Set();
+  const element = node => node?.nodeType === 1 ? node : node?.parentElement;
+  const styles = node => {
+    const el = element(node);
+    return el?.closest('style, link[rel="stylesheet"]')
+      || el?.querySelector?.('style, link[rel="stylesheet"]');
+  };
+  const collect = node => {
+    const el = element(node);
+    if (!el) return;
+    const math = el.closest('.katex');
+    if (math) result.add(math);
+    else for (const child of el.querySelectorAll('.katex')) result.add(child);
+  };
+  for (const record of records) {
+    const changed = [...(record.addedNodes || []), ...(record.removedNodes || [])];
+    if (styles(record.target) || changed.some(styles)) {
+      return document.querySelectorAll('.katex');
+    }
+    if (record.type === 'childList') {
+      const math = element(record.target)?.closest('.katex');
+      if (math) result.add(math);
+      for (const node of record.addedNodes) collect(node);
+    } else collect(record.target);
+  }
+  return result;
+}"""
+
 FIRST_PAINT_SCRIPT = (
     r"""
 (() => {
@@ -228,9 +261,10 @@ FIRST_PAINT_SCRIPT = (
   const observe = (__FONT_LOAD_OBSERVER__)((...args) =>
     globalThis.__mathLoadControl?.nativeLoad
       ? globalThis.__mathLoadControl.nativeLoad(...args) : document.fonts.load(...args));
-  const discover = () => {
+  const affectedMath = __MUTATED_MATH__;
+  const discover = records => {
     if (state.stop) return;
-    for (const math of document.querySelectorAll('.katex')) {
+    for (const math of affectedMath(records)) {
       if (activeVariant(math)) requiredFonts(math, observe);
     }
   };
@@ -279,6 +313,7 @@ FIRST_PAINT_SCRIPT = (
 """.replace("__EXPOSED__", EXPOSED)
     .replace("__REQUIRED_FONTS__", REQUIRED_FONTS)
     .replace("__FONT_LOAD_OBSERVER__", FONT_LOAD_OBSERVER)
+    .replace("__MUTATED_MATH__", MUTATED_MATH)
     .replace("__ACTIVE_MATH_VARIANT__", ACTIVE_MATH_VARIANT)
 )
 

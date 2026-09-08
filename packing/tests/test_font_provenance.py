@@ -30,7 +30,41 @@ from __future__ import annotations
 
 import pytest
 
-from devtools.inspect_explainer_typography import _text_bearing, _unshipped
+from devtools.inspect_explainer_typography import (
+    MathContext,
+    _text_bearing,
+    _unshipped,
+    math_size_findings,
+)
+
+
+def test_math_size_policy_applies_to_inline_display_and_caption_contexts() -> None:
+    rows: list[MathContext] = [
+        {
+            "role": role,
+            "source": "x_2",
+            "size": size,
+            "context_size": size,
+            "family": "KPress Math Text",
+            "context_family": "PT Serif",
+            "weight": "400",
+            "context_weight": "400",
+            "text_rendering": "auto",
+            "context_text_rendering": "auto",
+        }
+        for role, size in (("inline", 18), ("display", 18), ("caption", 17.5))
+    ]
+    assert math_size_findings(rows) == []
+    for index, row in enumerate(rows):
+        invalid: list[MathContext] = [{**entry} for entry in rows]
+        invalid[index]["size"] *= 1.1
+        assert len(math_size_findings(invalid)) == 1
+        assert row["role"] in math_size_findings(invalid)[0]
+    assert math_size_findings([{**rows[0], "size": 0}])
+    assert len(math_size_findings([], require_roles=True)) == 3
+    assert math_size_findings(rows[:2], require_roles=True) == [
+        "no visible caption math to verify"
+    ]
 
 
 def _face(family: str, *, custom: bool, glyphs: int = 10) -> dict[str, object]:

@@ -706,13 +706,23 @@ widths and missing entire reservations.
 First-exposure, early-input, no-JavaScript, font-failure and alternate-certificate
 checks remain part of publication validation.
 
+Follow-up preview feedback is tracked separately: `think-pbpp` covers reload scroll
+restoration, `think-zmdp` covers the lighter math glyphs caused by disabling hinting,
+and `think-3k14` requires inline and display math to inherit the surrounding text size
+under every saved setting.
+`think-nnvo` covers queued formulas outliving the startup watchdog, and `think-jk1r`
+covers font-dependent line carriers in print.
+These corrections require their own affected checks before publication.
+
 The
 [integration plan and experiment record](../../../../packing/benchmarks/math-startup/README.md)
 retain the control, failed intermediate runtime and measured default-profile result.
 The initial full-observer timing comparison remains under review because observer cost
 and the host regime prevent an unqualified latency claim.
-The hosted H-003 parameter-only comparison, complete H-004 saved-setting verdict and
-Squares release verification remain pending.
+The hosted H-003 comparison was rejected; H-005 passes its numerical rule but fails
+correctness because of the queued-math and print-carrier defects.
+The repaired publication is registered as H-006, with the complete H-004 saved-setting
+verdict and Squares release verification still pending.
 Implemented checks do not substitute for those results.
 
 ## Open Questions

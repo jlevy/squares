@@ -146,6 +146,7 @@ def test_prepared_geometry_checks_cover_each_browser_and_their_controls() -> Non
             step
             for step in workflow["jobs"][name]["steps"]
             if step.get("uses", "").startswith("actions/upload-artifact@")
+            and step["with"]["name"].startswith("math-geometry-")
         ]
         assert len(uploads) == 1
         assert uploads[0]["if"] == "always()"
@@ -181,6 +182,31 @@ def test_prepared_geometry_checks_cover_each_browser_and_their_controls() -> Non
                 context(command) for command in commands if "--print" in command
             } >= settings
             assert any("--alternate-certificate" in command for command in commands)
+
+
+def test_reload_guard_covers_both_viewports_on_the_published_artifact() -> None:
+    workflow = safe_load((REPO / ".github/workflows/pages.yml").read_text("utf-8"))
+    for name in ("build", "font-loading"):
+        steps = workflow["jobs"][name]["steps"]
+        commands = [
+            line
+            for step in steps
+            for line in step.get("run", "").splitlines()
+            if "python -m devtools.check_scroll_restoration " in line
+        ]
+        assert len(commands) == 2
+        assert all(" site/index.html " in command for command in commands)
+        assert any("--self-test" in command for command in commands)
+        assert any("--width 390" in command for command in commands)
+        if name == "font-loading":
+            assert all("--browser ${{ matrix.browser }}" in command for command in commands)
+        uploads = [
+            step
+            for step in steps
+            if step.get("with", {}).get("path") == "/tmp/scroll-restoration"
+        ]
+        assert len(uploads) == 1
+        assert uploads[0]["if"] == "always()"
 
 
 def test_dispatch_timing_uses_frozen_pairs_and_retains_failed_measurements() -> None:

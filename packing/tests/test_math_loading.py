@@ -16,6 +16,7 @@ from devtools.check_math_loading import (
     FIRST_PAINT_SCRIPT,
     FONT_LOAD_OBSERVER,
     HOLD_FONTS_SCRIPT,
+    MUTATED_MATH,
     READOUTS,
     REQUIRED_FONTS,
     LoadingReport,
@@ -86,6 +87,39 @@ def test_first_exposure_discovery_never_requests_dormant_variant_fonts() -> None
         REQUIRED_FONTS, "math => { checked.push(math.id); return []; }"
     )
     script += "assert.deepEqual(checked, ['plain-hidden-certificate', 'selected']);\n"
+    run_node(script)
+
+
+def test_mutation_discovery_rescans_only_affected_math_and_global_style_changes() -> None:
+    script = dedent("""
+        const assert = require('node:assert/strict');
+        const first = {id: 'first'}, second = {id: 'second'};
+        let fullScans = 0;
+        const document = {querySelectorAll() { fullScans++; return [first, second]; }};
+        const element = (math = null, descendants = []) => ({nodeType: 1,
+          closest(selector) { return selector === '.katex' ? math : null; },
+          querySelectorAll() { return descendants; }});
+        const wrapper = element(null, [first]);
+        const glyph = element(first);
+        const text = {nodeType: 3, parentElement: glyph};
+    """)
+    script += f"const affected = {MUTATED_MATH};\n"
+    script += dedent("""
+        assert.deepEqual([...affected()], [first, second]);
+        assert.deepEqual([...affected([{type: 'attributes', target: wrapper}])], [first]);
+        assert.deepEqual([...affected([{type: 'characterData', target: text}])], [first]);
+        assert.deepEqual([...affected([{type: 'childList', target: element(),
+          addedNodes: [wrapper, glyph], removedNodes: []}])], [first]);
+        assert.deepEqual([...affected([{type: 'attributes', target: element()}])], []);
+        assert.equal(fullScans, 1, 'unrelated canvas and local formula mutations stay local');
+        const root = element(null, [first, second]);
+        assert.deepEqual([...affected([{type: 'attributes', target: root}])], [first, second]);
+        const stylesheet = element();
+        stylesheet.closest = selector => selector.includes('style') ? stylesheet : null;
+        assert.deepEqual([...affected([{type: 'characterData',
+          target: {nodeType: 3, parentElement: stylesheet}}])], [first, second]);
+        assert.equal(fullScans, 2, 'stylesheet edits invalidate the complete cascade');
+    """)
     run_node(script)
 
 

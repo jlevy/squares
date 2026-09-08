@@ -3,9 +3,9 @@
 KaTeX's HTML has measured vertical struts, but its glyph runs still have intrinsic
 width. A hidden TeX or MathML fallback therefore cannot reserve the final layout.
 The publication build typesets each supported font preference in pinned Chromium and
-measures each unbreakable ``.base`` separately. The host requires
-``text-rendering: geometricPrecision`` during preparation and reading: hinted glyph
-advances are not linear across font sizes or platforms. A second measurement at 16
+measures each unbreakable ``.base`` separately. The host requires linear glyph advances,
+using ``geometricPrecision`` except where macOS provides them with native hinting.
+A second measurement at 16
 times the font size checks that the saved em width scales within one CSS pixel.
 Its fixed outer box keeps that width,
 height, and baseline while
@@ -32,18 +32,21 @@ import os
 import re
 import sys
 import time
+from contextlib import suppress
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from html import escape
 from html.parser import HTMLParser
+from io import BytesIO
 from itertools import pairwise
 from pathlib import Path
 from textwrap import dedent
-from typing import TYPE_CHECKING, NotRequired, TypedDict, cast, override
+from typing import TYPE_CHECKING, Any, NotRequired, TypedDict, cast, override
 
 if TYPE_CHECKING:
     from playwright.async_api import Route
 
+from devtools.check_math_loading import ACTIVE_MATH_VARIANT, EXPOSED, OBSERVATION_MS
 from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
 
 _MATH_CLASSES = frozenset({"tex", "tex-d", "kpress-math"})
@@ -186,8 +189,11 @@ _LINEAR_BASE_GEOMETRY = dedent("""
       const style = getComputedStyle(base);
       const fontSize = parseFloat(style.fontSize);
       const width = base.getBoundingClientRect().width;
-      if (style.textRendering.toLowerCase() !== 'geometricprecision') {
-        throw new Error('math preparation requires geometricPrecision, got '
+      const native = document.documentElement.dataset.squaresNativeMathMetrics === 'true';
+      if (style.textRendering.toLowerCase() !== 'geometricprecision'
+          && !(native && style.textRendering === 'auto')) {
+        throw new Error('math preparation requires geometricPrecision '
+          + 'or native linear metrics, got '
           + style.textRendering + ': ' + base.textContent);
       }
       const scale = 16;
@@ -267,10 +273,6 @@ _MEASURE_MATH = dedent(r"""
             }
             const box = document.createElement('span');
             box.className = 'squares-math-box';
-            box.dataset.squaresMathMeasuredSize = String(fontSize);
-            box.dataset.squaresMathMeasuredWidth = String(measured.width);
-            box.dataset.squaresMathLinearWidth = String(measured.linearWidth);
-            box.dataset.squaresMathTextRendering = measured.textRendering;
             box.style.cssText = 'display:inline-block;position:relative;'
               + 'font-size:' + fixed(fontSize / parentSize) + ';'
               + 'width:' + fixed(rect.width / fontSize) + ';'
@@ -447,10 +449,7 @@ class GeometryBox(TypedDict):
     text: NotRequired[str]
     font_size: NotRequired[float]
     text_rendering: NotRequired[str]
-    prepared_font_size: NotRequired[float | None]
-    prepared_width: NotRequired[float | None]
-    prepared_linear_width: NotRequired[float | None]
-    prepared_text_rendering: NotRequired[str | None]
+    native_linear_metrics: NotRequired[bool]
 
 
 class GeometryReport(TypedDict):
@@ -462,6 +461,7 @@ class GeometryReport(TypedDict):
     font_set: str
     held_fonts: int
     font_timing: FontHoldTiming
+    visibility_after: NotRequired[dict[str, object]]
     before: list[GeometryBox]
     after: list[GeometryBox]
     early_visible: list[ReadyMathBox]
@@ -563,8 +563,11 @@ def geometry_findings(
     if not after or any(box["hidden"] for box in after):
         findings.append("prepared math did not become visible after fonts arrived")
     for box in after:
-        if box.get("text_rendering", "geometricPrecision").lower() != "geometricprecision":
-            findings.append(f"base {box['key']}: math does not use geometricPrecision")
+        rendering = box.get("text_rendering", "geometricPrecision").lower()
+        if rendering != "geometricprecision" and not (
+            rendering == "auto" and box.get("native_linear_metrics", False)
+        ):
+            findings.append(f"base {box['key']}: math does not use linear glyph metrics")
         delta = abs(box["width"] - box["intrinsic_width"])
         if delta > tolerance:
             findings.append(
@@ -634,11 +637,50 @@ _GEOMETRY_SETUP = dedent("""
     }
 """)
 
+
+def carrier_font_css(source: str) -> str:
+    """Reuse shipped glyphs with different strut metrics, including in WebKit.
+
+    WebKit lacks the FontFace ascent/descent override API. Changing only the metrics
+    in an in-memory font copy makes the same control available in every engine.
+    These bytes are temporary test input and never enter the publication artifact.
+    """
+    from fontTools.ttLib import TTFont  # noqa: PLC0415
+
+    for block in _FONT_BLOCK.finditer(source):
+        css = block.group()
+        if not re.search(r"font-family:\s*[\"']?PT Serif[\"']?\s*;", css):
+            continue
+        if not re.search(r"font-style:\s*normal\s*;", css):
+            continue
+        data = _FONT_DATA.search(css)
+        if data is None:
+            continue
+        font = TTFont(BytesIO(base64.b64decode(data.group(1), validate=True)))
+        # FontTools creates these fields while decompiling each table; its table
+        # types do not declare them. Keep untyped access at this font boundary.
+        head: Any = font["head"]
+        vertical: Any = font["hhea"]
+        os2: Any = font["OS/2"]
+        units = int(head.unitsPerEm)
+        ascent, descent = round(1.8 * units), round(0.2 * units)
+        vertical.ascent, vertical.descent, vertical.lineGap = ascent, -descent, 0
+        os2.sTypoAscender, os2.sTypoDescender, os2.sTypoLineGap = ascent, -descent, 0
+        os2.usWinAscent, os2.usWinDescent = ascent, descent
+        output = BytesIO()
+        font.save(output)
+        encoded = base64.b64encode(output.getvalue()).decode("ascii")
+        return (
+            '@font-face{font-family:"Squares Carrier Control";font-style:normal;'
+            'font-weight:400;src:url("data:font/woff2;base64,' + encoded + '")}'
+        )
+    raise ValueError("no shipped prose face for the carrier-metrics control")
+
+
 _GEOMETRY_SNAPSHOT = dedent("""
     () => globalThis.__squaresGeometryBoxes.filter(box => box.isConnected).map(box => {
       const rect = box.getBoundingClientRect(), style = getComputedStyle(box);
       const base = box.firstElementChild, baseStyle = getComputedStyle(base);
-      const measured = name => box.dataset[name] ? Number(box.dataset[name]) : null;
       return {key: Number(box.dataset.squaresGeometryKey),
         group: Number(box.dataset.squaresGeometryGroup), x: rect.x, y: rect.y,
         width: rect.width, height: rect.height,
@@ -646,10 +688,8 @@ _GEOMETRY_SNAPSHOT = dedent("""
         intrinsic_width: base.getBoundingClientRect().width,
         text: base.textContent, font_size: parseFloat(baseStyle.fontSize),
         text_rendering: baseStyle.textRendering,
-        prepared_font_size: measured('squaresMathMeasuredSize'),
-        prepared_width: measured('squaresMathMeasuredWidth'),
-        prepared_linear_width: measured('squaresMathLinearWidth'),
-        prepared_text_rendering: box.dataset.squaresMathTextRendering || null,
+        native_linear_metrics:
+          document.documentElement.dataset.squaresNativeMathMetrics === 'true',
         hidden: style.visibility === 'hidden'};
     })
 """)
@@ -798,6 +838,252 @@ _GEOMETRY_FONT_TRACE = dedent("""
 """)
 
 
+_MATH_VISIBILITY_STATE = dedent("""
+    () => {
+      const active = __ACTIVE__;
+      const maths = [...document.querySelectorAll('.katex,.squares-math-box')].filter(active)
+        .filter(node => node.getClientRects().length);
+      const hidden = maths.filter(node => getComputedStyle(node).visibility === 'hidden');
+      return {at_ms: performance.now(), root: {...document.documentElement.dataset},
+        queued: document.querySelectorAll('[data-squares-math-queued]').length,
+        pending: document.querySelectorAll('[data-kpress-math-pending]').length,
+        hidden: hidden.length,
+        fonts: [...document.fonts].map(face => ({family: face.family,
+          weight: face.weight, style: face.style, status: face.status})),
+        samples: hidden.slice(0, 3).map(math => {
+          const chain = [];
+          for (let node = math; node && node !== document.body; node = node.parentElement) {
+            const style = getComputedStyle(node);
+            chain.push({classes: node.className, style: node.getAttribute('style'),
+              data: {...node.dataset}, visibility: style.visibility, family: style.fontFamily});
+          }
+          return {text: math.textContent.slice(0, 100), chain};
+        })};
+    }
+""").replace("__ACTIVE__", ACTIVE_MATH_VARIANT)
+
+
+_QUEUE_WATCHDOG_HOLD = dedent("""
+    (() => {
+      let runtime;
+      const posted = [];
+      globalThis.__squaresQueueControl = {
+        get count() { return posted.length; },
+        release() { for (const post of posted.splice(0)) post(); }
+      };
+      // Delay the public producer before its first static job. The host must
+      // protect every queued wrapper before handing any work to the scheduler.
+      Object.defineProperty(globalThis, 'squaresMath', {
+        configurable: true,
+        get() { return runtime; },
+        set(api) {
+          runtime = api;
+          const batch = api.batch;
+          api.batch = function(jobs) {
+            return new Promise((resolve, reject) => {
+              posted.push(() => Promise.resolve(batch.call(this, jobs)).then(resolve, reject));
+            });
+          };
+        }
+      });
+    })();
+""")
+
+_QUEUE_WATCHDOG_OBSERVE = (
+    dedent("""
+    async broken => {
+      // The real head watchdog has expired while initial work and font
+      // transfers remain held. Its fallback must not expose queued math.
+      if (broken) for (const node of document.querySelectorAll('[data-squares-math-queued]')) {
+        delete node.dataset.squaresMathQueued;
+      }
+      const active = __ACTIVE__;
+      const exposed = __EXPOSED__;
+      const waiting = [...document.querySelectorAll('.tex, .tex-d, .kpress-math')]
+        .filter(node => {
+          const box = node.classList.contains('kpress-math')
+            ? node.querySelector('.kpress-math-render') : node;
+          return box && !box.dataset.done && node.getClientRects().length
+            && !box.matches('[data-kpress-math-pending]')
+            && !box.querySelector('[data-kpress-math-pending]');
+        });
+      globalThis.__squaresQueuedControlNodes = waiting;
+      const visible = new Set();
+      const end = performance.now() + __OBSERVATION_MS__;
+      let frames = 0;
+      do {
+        await new Promise(done => requestAnimationFrame(done));
+        frames++;
+        for (const node of waiting) {
+          const formulas = [...node.querySelectorAll('.katex,.kpress-math-semantic')]
+            .filter(active);
+          if (formulas.some(exposed)) visible.add(node);
+        }
+      } while (performance.now() < end);
+      return {delayed_batches: __squaresQueueControl.count,
+        root_pending: document.documentElement.hasAttribute('data-kpress-math-pending'),
+        unsubmitted_formulas: waiting.length, observed_ms: performance.now(),
+        frames,
+        target_classes: Object.fromEntries(['tex', 'tex-d', 'kpress-math'].map(name =>
+          [name, waiting.filter(node => node.classList.contains(name)).length])),
+        exposed: [...visible].map(node =>
+          node.dataset.kpressMathSource || node.querySelector('.kpress-math-render')
+            ?.dataset.kpressMathSource || node.textContent.trim().slice(0, 100))};
+    }
+""")
+    .replace("__ACTIVE__", ACTIVE_MATH_VARIANT)
+    .replace("__EXPOSED__", EXPOSED)
+    .replace("__OBSERVATION_MS__", str(OBSERVATION_MS))
+)
+
+
+class QueueObservation(TypedDict):
+    delayed_batches: int
+    root_pending: bool
+    unsubmitted_formulas: int
+    observed_ms: float
+    frames: NotRequired[int]
+    target_classes: dict[str, int]
+    exposed: list[str]
+
+
+class QueueWatchdogReport(TypedDict):
+    before: QueueObservation
+    held_fonts: int
+    queued_remaining: int
+    unreadable_after: list[str]
+    environment: BrowserEnvironment
+    findings: list[str]
+
+
+def check_queue_watchdog(
+    source: str,
+    *,
+    browser_name: str = "chromium",
+    width: int = 1280,
+    prose_font: str = "serif",
+    font_set: str = "custom",
+    break_queue: bool = False,
+) -> QueueWatchdogReport:
+    """Exercise actual watchdog expiry separately from normal font-arrival geometry.
+
+    Issued readouts may legitimately recover to fallback after three seconds. The
+    initial static producer stays delayed, so its queued wrappers must remain safe
+    until they can acquire the runtime's per-node readiness protection.
+    """
+    return asyncio.run(
+        _check_queue_watchdog_async(
+            source,
+            browser_name=browser_name,
+            width=width,
+            prose_font=prose_font,
+            font_set=font_set,
+            break_queue=break_queue,
+        )
+    )
+
+
+async def _check_queue_watchdog_async(
+    source: str,
+    *,
+    browser_name: str,
+    width: int,
+    prose_font: str,
+    font_set: str,
+    break_queue: bool,
+) -> QueueWatchdogReport:
+    from playwright.async_api import async_playwright  # noqa: PLC0415
+
+    instrumented, font_data = held_math_fonts(
+        font_preference_html(
+            _head_script(source, _QUEUE_WATCHDOG_HOLD),
+            prose_font=prose_font,
+            font_set=font_set,
+        )
+    )
+    held: list[Route] = []
+    released = False
+
+    async def route_font(route: Route) -> None:
+        if released:
+            await release_held_fonts([route], font_data)
+        else:
+            held.append(route)
+
+    async with async_playwright() as driver:
+        browser_type = getattr(driver, browser_name)
+        executable = os.environ.get(BROWSER_OVERRIDE) if browser_name == "chromium" else None
+        browser = await browser_type.launch(executable_path=executable)
+        browser_version = browser.version
+        try:
+            page = await browser.new_page(viewport={"width": width, "height": 960})
+            await page.emulate_media(reduced_motion="reduce", color_scheme="light")
+            await page.route(f"{_FONT_URL}*", route_font)
+            await page.set_content(instrumented, wait_until="domcontentloaded")
+            await page.wait_for_function(
+                "!document.documentElement.hasAttribute('data-kpress-math-pending')",
+                timeout=5000,
+            )
+            before = cast(
+                "QueueObservation", await page.evaluate(_QUEUE_WATCHDOG_OBSERVE, break_queue)
+            )
+            held_count = len(held)
+            released = True
+            await release_held_fonts(held, font_data)
+            await page.evaluate("__squaresQueueControl.release()")
+            await page.wait_for_selector(READY)
+            await page.evaluate(SETTLED)
+            queued_remaining = cast(
+                "int",
+                await page.evaluate(
+                    "document.querySelectorAll('[data-squares-math-queued]').length"
+                ),
+            )
+            unreadable_after = cast(
+                "list[str]",
+                await page.evaluate(
+                    "() => { const exposed = "
+                    + EXPOSED
+                    + "; const active = "
+                    + ACTIVE_MATH_VARIANT
+                    + "; return __squaresQueuedControlNodes.filter(node => {"
+                    " const formulas = [...node.querySelectorAll("
+                    " '.katex,.kpress-math-semantic')]"
+                    " .filter(active); return formulas.length ? !formulas.some(exposed)"
+                    " : !node.textContent.trim() || !exposed(node);"
+                    " }).map(node => node.dataset.kpressMathSource"
+                    " || node.textContent.slice(0,80)); }"
+                ),
+            )
+        finally:
+            await browser.close()
+    findings: list[str] = []
+    if not held_count:
+        findings.append("the queue watchdog control held no actual math-font transfers")
+    if not before["delayed_batches"] or not before["unsubmitted_formulas"]:
+        findings.append("the queue watchdog control held no unsubmitted formulas")
+    if before["root_pending"]:
+        findings.append("the queue watchdog control did not observe watchdog expiry")
+    if before["exposed"]:
+        findings.append(f"math exposed while queued after watchdog: {before['exposed']}")
+    if queued_remaining or unreadable_after:
+        findings.append("queued math did not recover after font transfers resumed")
+    return {
+        "before": before,
+        "held_fonts": held_count,
+        "queued_remaining": queued_remaining,
+        "unreadable_after": unreadable_after,
+        "findings": findings,
+        "environment": {
+            "browser": browser_name,
+            "browser_version": browser_version,
+            "viewport": {"width": width, "height": 960},
+            "media": "screen",
+            "recorded_at": datetime.now(UTC).isoformat(),
+        },
+    }
+
+
 async def release_held_fonts(held: list[Route], font_data: dict[str, bytes]) -> None:
     """Start every response together, without serial browser acknowledgements."""
     await asyncio.gather(
@@ -857,11 +1143,14 @@ async def _check_geometry_async(
 ) -> GeometryReport:
     """Hold real math-font responses, change intrinsic glyph advances, then reveal.
 
-    The temporary monospace substitution makes the before-state advances distinct
-    even on a browser whose fallback happens to resemble the supplied math face.
+    Temporary monospace glyphs and a carrier face with different ascent/descent make
+    the before-state advances and line struts distinct on every host platform.
     The negative control removes one reservation during that phase; the checker must
     reject it. Neither test alteration reaches the artifact on disk.
     """
+    from playwright.async_api import (  # noqa: PLC0415
+        TimeoutError as PlaywrightTimeoutError,
+    )
     from playwright.async_api import async_playwright  # noqa: PLC0415
 
     instrumented, font_data = held_math_fonts(
@@ -952,8 +1241,19 @@ async def _check_geometry_async(
                     "const box = globalThis.__squaresGeometryBoxes[0]; "
                     "box.style.width = (box.getBoundingClientRect().width + 12) + 'px'"
                 )
+            carrier_style = await page.add_style_tag(content=carrier_font_css(source))
+            await page.evaluate(
+                """async () => {
+                  const faces = await document.fonts.load('16px "Squares Carrier Control"');
+                  if (faces.length !== 1 || faces[0].status !== 'loaded') {
+                    throw new Error('the carrier-metrics control did not load');
+                  }
+                }"""
+            )
             substitution = await page.add_style_tag(
                 content=(
+                    '.katex, .katex-html { font-family: "Squares Carrier Control" '
+                    "!important; } "
                     ".squares-math-box > .base, .squares-math-box > .base * "
                     "{ font-family: monospace !important; }"
                 )
@@ -972,6 +1272,7 @@ async def _check_geometry_async(
                 )
             before = cast("list[GeometryBox]", await page.evaluate(_GEOMETRY_SNAPSHOT))
             await substitution.evaluate("node => node.remove()")
+            await carrier_style.evaluate("node => node.remove()")
             if break_reservation:
                 await page.evaluate(
                     dedent("""
@@ -989,7 +1290,20 @@ async def _check_geometry_async(
             release_completed = time.time() * 1000
             await page.wait_for_selector(READY, timeout=60_000)
             await page.evaluate(SETTLED)
+            # Font promises settle before every engine applies inherited paint
+            # styles. Observe the actual visible frame rather than a promise turn.
+            # Keep a failing after-state in the raw report; hidden boxes still
+            # fail the unchanged geometry predicate below.
+            with suppress(PlaywrightTimeoutError):
+                await page.wait_for_function(
+                    "__squaresGeometryBoxes.filter(box => box.isConnected).every("
+                    "box => getComputedStyle(box).visibility !== 'hidden')",
+                    timeout=5000,
+                )
             after = cast("list[GeometryBox]", await page.evaluate(_GEOMETRY_SNAPSHOT))
+            visibility_after = cast(
+                "dict[str, object]", await page.evaluate(_MATH_VISIBILITY_STATE)
+            )
             coverage_after = cast("MathCoverage", await page.evaluate(_MATH_COVERAGE))
             font_trace = cast(
                 "FontRequestTrace", await page.evaluate("__squaresGeometryFontTrace")
@@ -1020,7 +1334,7 @@ async def _check_geometry_async(
     ]
     if not changes or max(changes) <= 1:
         findings.append("the font control did not produce distinct intrinsic glyph advances")
-    return {
+    result: GeometryReport = {
         "browser": browser_name,
         "width": width,
         "medium": medium,
@@ -1028,6 +1342,7 @@ async def _check_geometry_async(
         "prose_font": prose_font,
         "font_set": font_set,
         "held_fonts": held_count,
+        "visibility_after": visibility_after,
         "font_timing": {
             "first_math_request_ms": font_trace["first_math_request_ms"],
             "first_font_request_ms": (
@@ -1056,6 +1371,7 @@ async def _check_geometry_async(
         "source_identity": source_identity,
         "findings": findings,
     }
+    return result
 
 
 class HostMathReport(TypedDict):
@@ -1233,6 +1549,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--print", action="store_true", dest="print_media")
     parser.add_argument("--self-test", action="store_true")
     parser.add_argument("--host-check", action="store_true")
+    parser.add_argument(
+        "--queue-watchdog",
+        action="store_true",
+        help="expire the startup marker while later batches and real fonts are held",
+    )
     parser.add_argument("--alternate-certificate", action="store_true")
     parser.add_argument("--output", type=Path, help="write the JSON report to this path")
     args = parser.parse_args(argv)
@@ -1252,6 +1573,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     controls: dict[str, object] = {}
     preparation: dict[str, object] | None = None
+    queue_positive: QueueWatchdogReport | None = None
     if args.self_test:
         preparation = check_preparation_metrics(browser_name=args.browser)
         metric_controls = cast("dict[str, dict[str, object]]", preparation["controls"])
@@ -1317,6 +1639,65 @@ def main(argv: list[str] | None = None) -> int:
             report["findings"].append(
                 "the missing-reservation negative control was not rejected"
             )
+        # Restore the otherwise invisible inline strut while keeping every
+        # measured base intact. Width-only reservations must fail this control.
+        unreserved_carrier = source.replace(
+            "</head>",
+            '<style>html .kpress [data-kpress-math-prepared="true"] .katex,'
+            'html .kpress [data-kpress-math-prepared="true"] .katex-html'
+            "{line-height:1.2!important}</style></head>",
+            1,
+        )
+        carrier = check_geometry(
+            unreserved_carrier,
+            browser_name=args.browser,
+            width=args.width,
+            medium="print" if args.print_media else "screen",
+            alternate_certificate=args.alternate_certificate,
+            prose_font=args.prose_font,
+            font_set=args.font_set,
+        )
+        rejected = any("baseline moved" in finding for finding in carrier["findings"])
+        controls["unreserved_carrier"] = {"rejected": rejected, "report": carrier}
+        if not rejected:
+            report["findings"].append(
+                "the unreserved-carrier negative control was not rejected"
+            )
+        queue_positive = check_queue_watchdog(
+            source,
+            browser_name=args.browser,
+            width=args.width,
+            prose_font=args.prose_font,
+            font_set=args.font_set,
+        )
+        report["findings"].extend(
+            f"queue watchdog: {finding}" for finding in queue_positive["findings"]
+        )
+        queue_broken = check_queue_watchdog(
+            source,
+            browser_name=args.browser,
+            width=args.width,
+            prose_font=args.prose_font,
+            font_set=args.font_set,
+            break_queue=True,
+        )
+        rejected = any(
+            "exposed while queued" in finding for finding in queue_broken["findings"]
+        )
+        controls["unprotected_queue"] = {"rejected": rejected, "report": queue_broken}
+        if not rejected:
+            report["findings"].append("the unprotected-queue negative control was not rejected")
+    if args.queue_watchdog and queue_positive is None:
+        queue_positive = check_queue_watchdog(
+            source,
+            browser_name=args.browser,
+            width=args.width,
+            prose_font=args.prose_font,
+            font_set=args.font_set,
+        )
+        report["findings"].extend(
+            f"queue watchdog: {finding}" for finding in queue_positive["findings"]
+        )
     output: dict[str, object] = {
         "schema_version": 1,
         "measurement": "prepared-math-geometry",
@@ -1331,6 +1712,8 @@ def main(argv: list[str] | None = None) -> int:
     }
     if preparation is not None:
         output["preparation_metrics"] = preparation
+    if queue_positive is not None:
+        output["queue_watchdog"] = queue_positive
     if args.host_check:
         host_source = font_preference_html(
             source, prose_font=args.prose_font, font_set=args.font_set

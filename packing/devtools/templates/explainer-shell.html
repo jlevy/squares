@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-kpress-theme="system" data-kpress-resolved-theme="light"
+<html lang="en" data-kpress-viewport data-kpress-theme="system" data-kpress-resolved-theme="light"
       data-kpress-palette="neutral" data-kpress-prose-font="serif" data-kpress-math-text="prose">
 <head>
 <meta charset="utf-8">
@@ -40,6 +40,13 @@
      for every reader, and outline paths in the PDF. See `relation_face_css`. -->
 <style>{{RELATION_CSS}}</style>
 <script>{{THEME_BOOTSTRAP}}</script>
+<script>
+/* CoreText uses linear advances with native hinting. Select it before body paint;
+   other platforms retain the explicit linear rendering policy below. */
+if (navigator.platform.startsWith('Mac')) {
+  document.documentElement.dataset.squaresNativeMathMetrics = 'true';
+}
+</script>
 <style>
 /* ============================================================
    This page on top of the kpress design system.
@@ -51,6 +58,13 @@
    is a kpress token, so the figures move with the system rather than beside
    it.
    ============================================================ */
+
+/* This standalone article scrolls the document, so the browser preserves its
+   reading position on reload and history traversal. KPress also supports host
+   panes, but its pane reset would leave the document at scroll position zero.
+   Keep main's width-query container without creating a second scroll context. */
+html, body { height: auto; overflow: visible; }
+.kpress-page-main.kpress-viewport { block-size: auto; overflow: visible; }
 
 /* One accent, everywhere. kpress ships a separate link blue and sets it on
    `:root`, on `.kpress`, and again per theme and palette on attribute selectors,
@@ -190,7 +204,6 @@ body {
   text-decoration: none;
 }
 .cert-page :is(.kpress-figcaption, .kpress-footnotes, .mass-line, .panel) .katex {
-  font-size: var(--kpress-katex-size-sans);
   color: inherit;
 }
 .cert-page .kpress-footnotes code { color: inherit; }
@@ -578,7 +591,6 @@ body {
   line-height: 1.5;
 }
 .tip-panel .tip-w { color: var(--kpress-doc-muted); display: block; margin-block-start: 0.1rem; }
-.tip-panel .katex { font-size: 1.1em; }
 .panel {
   border-inline-start: 1px solid var(--kpress-doc-border);
   display: flex;
@@ -601,7 +613,6 @@ body {
   line-height: 1.1;
   min-height: 2.4em;
 }
-.mass-val .katex { font-size: 1em; }
 .mass-row { align-items: baseline; display: flex; flex-wrap: wrap; gap: 0.15rem 0.7rem; }
 .mass-dec {
   color: var(--kpress-doc-text);
@@ -753,11 +764,30 @@ body {
 /* Keep an inline result, its punctuation and its source reference together. */
 .math-reference { white-space: nowrap; }
 
+/* Every outer formula uses its surrounding text size, including displays and
+   saved system-font settings. KaTeX still controls scripts and large operators
+   inside that em. Override the stock face's legacy display-size compensation. */
+.cert-page .katex, .kpress-tooltip .katex { font-size: inherit !important; }
+
 /* Published math reserves widths in em. Linux Chromium's hinted advances can
    round each glyph to a whole pixel, so a width measured there is wrong on
    another platform or at another size. Override KaTeX's explicit `auto` for
    both preparation and reading, including print. */
 .kpress .katex, .kpress-tooltip .katex { text-rendering: geometricPrecision; }
+/* On macOS, geometricPrecision also disables native hinting and visibly lightens
+   the unchanged PT Serif and Source Sans glyphs. CoreText already gives linear
+   advances under auto; the preparation guard verifies them at 16x as well. */
+@media screen {
+  html[data-squares-native-math-metrics] .kpress .katex,
+  html[data-squares-native-math-metrics] .kpress-tooltip .katex { text-rendering: auto; }
+}
+
+/* Measured bases reserve ascent and descent too. Empty inline carriers must not
+   add a font-dependent strut when a fallback face changes, especially in print's
+   tighter lines. Keep KaTeX's original line height inside the absolute glyph base. */
+.kpress [data-kpress-math-prepared="true"] .katex,
+.kpress [data-kpress-math-prepared="true"] .katex-html { line-height: 0 !important; }
+.kpress [data-kpress-math-prepared="true"] .base { line-height: 1.2 !important; }
 
 /* Math is held until KaTeX has typeset it, so no raw TeX flashes. */
 /* Saved preferences are stamped in the head. Select their measured math before
@@ -777,16 +807,16 @@ html[data-kpress-math-pending]
   :is(.tex, .tex-d, [data-kpress-math-prepared="true"]):not([data-squares-math-ready="true"]) {
   visibility: hidden;
 }
+/* Once startup has queued a wrapper, the root watchdog cannot expose it before
+   its render runs. Include native MathML and descendants with explicit visibility. */
+.kpress [data-squares-math-queued], .kpress [data-squares-math-queued] * {
+  visibility: hidden !important;
+}
 /* Wide equations scroll sideways; the block keeps headroom for fractions, since
    overflow-x: auto also clips vertically and the display margin is zeroed. */
 .tex-d { margin-block: 1.1rem; overflow-x: auto; overflow-y: hidden; padding-block: 0.45rem; }
 .tex-d .katex-display { margin: 0; }
 .caps .katex, .fig-title .katex, .legend .katex, .hint .katex { text-transform: none; }
-/* kpress sizes math to the face it sits in; the page's own sans contexts take
-   kpress's sans size, and its display blocks its display size. */
-.kv .katex, .mass-line .katex, .legend .katex, .hint .katex, .fig-title .katex,
-.caps .katex, .tip .katex { font-size: var(--kpress-katex-size-sans); }
-.cert-page .tex-d .katex { font-size: var(--kpress-katex-size-display); }
 .caps .katex { letter-spacing: 0; }
 /* ============================================================
    Print. kpress prints a document well: page margins, 11pt type,
@@ -796,14 +826,6 @@ html[data-kpress-math-pending]
    follows is only what kpress does not cover.
    ============================================================ */
 @media print {
-  /* Without this the whole document prints as ONE page. kpress's page reset
-     holds `html, body { height: 100%; overflow: hidden }` for the scrolling
-     shell and its print stylesheet releases `.kpress-viewport` but not the
-     two elements above it, so the paginator sees a single viewport of
-     content and stops there. Measured before this rule: 1 page, and 92% of
-     the document absent. */
-  html, body { height: auto; overflow: visible; }
-
   /* Print shows one certificate, always the one the page opens on, so a
      printed copy does not depend on what the reader last clicked. */
   .cert-figure[data-cert="{{DEFAULT_SLUG}}"][hidden] { display: block !important; }
@@ -1080,8 +1102,8 @@ html[data-kpress-math-pending]
 
 </style>
 </head>
-<body class="kpress-frame" data-kpress-frame>
-<main class="kpress-page-main kpress-viewport" data-kpress-viewport>
+<body>
+<main class="kpress-page-main kpress-viewport">
 <div class="kpress kpress-doc kpress-prose cert-page">
 {{BODY_HTML}}
 <p class="col colophon centred">Formatted and typeset with <a href="https://github.com/jlevy/flowmark"><strong>Flowmark</strong></a> and <a href="https://github.com/jlevy/kpress"><strong>KPress</strong></a></p>
@@ -1121,29 +1143,40 @@ const finishMathBootstrap = squaresMath.reserve();
     // DOM state chooses the priority without measuring every formula's layout.
     // Keep document order within active panels, the visible paper, and hidden copies.
     const groups = [[], [], []];
-    for (const el of document.querySelectorAll('.tex, .tex-d, .kpress-math')) {
+    const nodes = [...document.querySelectorAll('.tex, .tex-d, .kpress-math')];
+    for (const el of nodes) {
+      el.dataset.squaresMathQueued = 'true';
       const priority = el.closest('.cert-figure[hidden]') ? 2 : el.closest('.panel') ? 0 : 1;
-      groups[priority].push(() => {
-        if (!el.classList.contains('kpress-math')) {
-          if (el.dataset.done) return;
-          const source = el.dataset.kpressMathSource ?? el.textContent;
-          return render(el, source, el.classList.contains('tex-d')).then(() => {
-            el.dataset.done = '1';
+      groups[priority].push(async () => {
+        try {
+          if (!el.classList.contains('kpress-math')) {
+            if (el.dataset.done) return;
+            const source = el.dataset.kpressMathSource ?? el.textContent;
+            await render(el, source, el.classList.contains('tex-d'));
+            el.dataset.done = '1'; return;
+          }
+          // Native math keeps MathML available if the required font fails.
+          const box = el.querySelector('.kpress-math-render');
+          if (!box || box.dataset.done) return;
+          const src = box.dataset.kpressMathSource
+            ?? box.textContent.trim().replace(/^\\[(\[]/, '').replace(/\\[)\]]$/, '');
+          await render(box, src, el.dataset.kpressMath === 'display').then(rendered => {
+            box.dataset.done = '1';
+            if (rendered) el.dataset.kpressMathRendered = 'true';
+            else delete el.dataset.kpressMathRendered;
           });
+        } finally {
+          delete el.dataset.squaresMathQueued;
         }
-        // Native math keeps MathML available if the required font fails.
-        const box = el.querySelector('.kpress-math-render');
-        if (!box || box.dataset.done) return;
-        const src = box.dataset.kpressMathSource
-          ?? box.textContent.trim().replace(/^\\[(\[]/, '').replace(/\\[)\]]$/, '');
-        return render(box, src, el.dataset.kpressMath === 'display').then(rendered => {
-          box.dataset.done = '1';
-          if (rendered) el.dataset.kpressMathRendered = 'true';
-          else delete el.dataset.kpressMathRendered;
-        });
       });
     }
-    await squaresMath.batch(groups.flat());
+    try {
+      await squaresMath.batch(groups.flat());
+    } finally {
+      // A producer failure releases unsubmitted fallbacks too. Issued renders
+      // retain KPress's own visibility gate until their required fonts settle.
+      for (const el of nodes) delete el.dataset.squaresMathQueued;
+    }
     await squaresMath.settled();
     kpressMathText.complete();
     document.documentElement.classList.add('math-ready');

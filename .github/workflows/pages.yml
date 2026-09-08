@@ -31,6 +31,7 @@ name: Certificate page
       - packing/devtools/check_math_faces.py
       - packing/devtools/check_math_loading.py
       - packing/devtools/check_math_startup.py
+      - packing/devtools/check_scroll_restoration.py
       - packing/devtools/compare_math_fonts.py
       - packing/devtools/sans_instances.py
       - packing/src/sqpack/**
@@ -67,6 +68,7 @@ name: Certificate page
       - packing/devtools/check_math_faces.py
       - packing/devtools/check_math_loading.py
       - packing/devtools/check_math_startup.py
+      - packing/devtools/check_scroll_restoration.py
       - packing/devtools/compare_math_fonts.py
       - packing/devtools/sans_instances.py
       - packing/src/sqpack/**
@@ -231,8 +233,8 @@ jobs:
       - name: Check paper typography on screen and in print
         run: |
           uv run --frozen --group dev python -m devtools.inspect_explainer_typography --self-test
-          uv run --frozen --group dev python -m devtools.inspect_explainer_typography --check-supporting --theme light
-          uv run --frozen --group dev python -m devtools.inspect_explainer_typography --check-supporting --theme dark --width 390
+          uv run --frozen --group dev python -m devtools.inspect_explainer_typography --check-supporting --check-math --theme light
+          uv run --frozen --group dev python -m devtools.inspect_explainer_typography --check-supporting --check-math --theme dark --width 390
 
       # Which composite draws each expression, which metric table laid it out, and
       # whether the faces were loaded before the first one was painted. None of the three
@@ -257,6 +259,20 @@ jobs:
           uv run --frozen --group dev python -m devtools.check_math_startup --mode parameters --self-test
           uv run --frozen --group dev python -m devtools.check_math_startup --runs 1 --output /tmp/math-startup-desktop.json
           uv run --frozen --group dev python -m devtools.check_math_startup --runs 1 --width 390 --output /tmp/math-startup-mobile.json
+
+      - name: Check reload preserves the reading position
+        run: |
+          uv run --frozen --group dev python -m devtools.check_scroll_restoration site/index.html --self-test --output /tmp/scroll-restoration/chromium-1280.json
+          uv run --frozen --group dev python -m devtools.check_scroll_restoration site/index.html --width 390 --output /tmp/scroll-restoration/chromium-390.json
+
+      - name: Retain Chromium reload observations
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: scroll-restoration-chromium
+          path: /tmp/scroll-restoration
+          if-no-files-found: error
+          retention-days: 7
 
       # Saved font settings select different prepared variants before the page
       # hydrates. Every setting must retain its own geometry on this same artifact.
@@ -338,6 +354,20 @@ jobs:
       - name: Check mobile font loading on the published artifact
         run: |
           uv run --frozen --group dev python -m devtools.check_math_loading --browser ${{ matrix.browser }} --width 390
+
+      - name: Check reload preserves the reading position in both viewports
+        run: |
+          uv run --frozen --group dev python -m devtools.check_scroll_restoration site/index.html --browser ${{ matrix.browser }} --self-test --output /tmp/scroll-restoration/${{ matrix.browser }}-1280.json
+          uv run --frozen --group dev python -m devtools.check_scroll_restoration site/index.html --browser ${{ matrix.browser }} --width 390 --output /tmp/scroll-restoration/${{ matrix.browser }}-390.json
+
+      - name: Retain browser reload observations
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: scroll-restoration-${{ matrix.browser }}
+          path: /tmp/scroll-restoration
+          if-no-files-found: error
+          retention-days: 7
 
       - name: Check saved font settings retain geometry in both viewports
         run: |

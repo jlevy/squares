@@ -3,10 +3,13 @@
 from __future__ import annotations
 
 import asyncio
+import base64
 import json
+import re
+from io import BytesIO
 from pathlib import Path
 from textwrap import dedent
-from typing import TYPE_CHECKING, cast
+from typing import TYPE_CHECKING, Any, cast
 
 import pytest
 
@@ -19,6 +22,8 @@ from devtools.prepare_explainer_math import (
     GeometryReport,
     MathCoverage,
     PreparedFragment,
+    QueueWatchdogReport,
+    carrier_font_css,
     coverage_findings,
     font_preference_html,
     geometry_findings,
@@ -165,7 +170,13 @@ def test_geometry_oracle_requires_hidden_then_visible_unchanged_boxes_and_line_b
         "reserved width differs" in message for message in geometry_findings(before, after)
     )
     after[0] = {**after[0], "text_rendering": "auto"}
-    assert any("geometricPrecision" in message for message in geometry_findings(before, after))
+    assert any(
+        "linear glyph metrics" in message for message in geometry_findings(before, after)
+    )
+    after[0] = {**after[0], "native_linear_metrics": True}
+    assert not any(
+        "linear glyph metrics" in message for message in geometry_findings(before, after)
+    )
 
 
 def test_font_hold_rewrites_actual_math_transfers_and_leaves_reading_faces_embedded() -> None:
@@ -255,12 +266,48 @@ def test_geometry_coverage_rejects_missing_formulas_and_unreserved_bases() -> No
     assert coverage_findings({**coverage, "duplicate_ids": ["formula-1"]})
 
 
+def test_carrier_font_control_changes_only_line_metrics_of_shipped_glyphs() -> None:
+    """The cross-platform control needs different struts, not different mathematics."""
+    from fontTools.ttLib import TTFont  # noqa: PLC0415
+
+    path = render_explainer.kpress_static() / "fonts" / "pt-serif-latin-400-normal.woff2"
+    original_bytes = path.read_bytes()
+    source = (
+        '@font-face{font-family:"PT Serif";font-style:normal;'
+        "src:url(data:font/woff2;base64,"
+        + base64.b64encode(original_bytes).decode("ascii")
+        + ")}"
+    )
+    css = carrier_font_css(source)
+    data = re.search(r"base64,([A-Za-z0-9+/=]+)", css)
+    assert data is not None
+    original = TTFont(BytesIO(original_bytes))
+    controlled = TTFont(BytesIO(base64.b64decode(data.group(1))))
+    head: Any = original["head"]
+    vertical: Any = controlled["hhea"]
+    os2: Any = controlled["OS/2"]
+    units = int(head.unitsPerEm)
+    assert vertical.ascent == round(1.8 * units)
+    assert vertical.descent == -round(0.2 * units)
+    assert os2.sTypoAscender == vertical.ascent
+    assert os2.sTypoDescender == vertical.descent
+    assert os2.usWinAscent == vertical.ascent
+    assert os2.usWinDescent == -vertical.descent
+    assert vertical.lineGap == os2.sTypoLineGap == 0
+    assert controlled.getBestCmap() == original.getBestCmap()
+    assert controlled.getTableData("glyf") == original.getTableData("glyf")
+    assert controlled["hmtx"].metrics == original["hmtx"].metrics
+    assert path.read_bytes() == original_bytes
+    with pytest.raises(ValueError, match="no shipped prose face"):
+        carrier_font_css("<html>no embedded fonts</html>")
+
+
 def test_cli_retains_raw_control_reports_and_automatic_provenance(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
     """The JSON transport retains observations, not only the guard's verdict."""
     source = tmp_path / "input.html"
-    source.write_text("<html>prepared fixture</html>")
+    source.write_text("<html><head></head><body>prepared fixture</body></html>")
     output = tmp_path / "report.json"
 
     def check(_source: str, **options: object) -> GeometryReport:
@@ -273,6 +320,8 @@ def test_cli_retains_raw_control_reports_and_automatic_provenance(
             findings.append("base 0: reserved width differs from glyphs by 12.000px")
         if options.get("missing_reservation"):
             findings.append("visible math bases lack reservations: ['x + y']")
+        if "{line-height:1.2!important}" in _source:
+            findings.append("base 0: baseline moved 4.000px")
         coverage: MathCoverage = {
             "targets": 1,
             "formulas": 1,
@@ -319,6 +368,26 @@ def test_cli_retains_raw_control_reports_and_automatic_provenance(
             "findings": findings,
         }
 
+    def check_queue(_source: str, **options: object) -> QueueWatchdogReport:
+        return {
+            "before": {
+                "delayed_batches": 1,
+                "root_pending": False,
+                "unsubmitted_formulas": 1,
+                "observed_ms": 3020,
+                "target_classes": {"tex": 1},
+                "exposed": ["x + y"] if options.get("break_queue") else [],
+            },
+            "held_fonts": 1,
+            "queued_remaining": 0,
+            "unreadable_after": [],
+            "findings": ["math exposed while queued after watchdog: ['x + y']"]
+            if options.get("break_queue")
+            else [],
+            "environment": check(_source, **options)["environment"],
+        }
+
+    monkeypatch.setattr(prepare_explainer_math, "check_queue_watchdog", check_queue)
     monkeypatch.setattr(prepare_explainer_math, "check_geometry", check)
     monkeypatch.setattr(
         prepare_explainer_math,
@@ -357,6 +426,9 @@ def test_cli_retains_raw_control_reports_and_automatic_provenance(
     assert report["font_timing"]["release_ms"] == 10
     assert report["font_timing"]["rejections"] == []
     assert "missing_reservation" in report["controls"]
+    assert "unprotected_queue" in report["controls"]
+    assert "unreserved_carrier" in report["controls"]
+    assert report["queue_watchdog"]["findings"] == []
     assert report["preparation_metrics"]["positive"]["linearWidth"] == 72
     assert {"hinted_metrics", "nonlinear_scaling"} <= report["controls"].keys()
     for control in report["controls"].values():

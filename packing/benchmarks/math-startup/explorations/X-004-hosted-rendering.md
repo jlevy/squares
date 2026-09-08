@@ -5,7 +5,7 @@ softschema:
   status: enforced
 id: X-004
 title: Hosted evidence separates font rounding and startup scheduling
-proposes: [H-005]
+proposes: [H-005, H-006]
 ---
 # Hosted Evidence Separates Font Rounding and Startup Scheduling
 
@@ -34,6 +34,13 @@ and painting proceed between bounded batches.
 Settlement must cover queued work as well as issued requests, so deferred heat maps and
 PDF export still wait for the complete intended work.
 H-005 uses a fresh comparison with the unchanged numerical and observer-cost criteria.
+
+The next hosted dispatch meets H-005’s numerical rule but exposes a queued-node recovery
+gap. The global bootstrap timer can expire before a static formula’s hydration starts,
+leaving no per-node visibility guard.
+Protect the collected queue immediately and clear that state on completion or fallback.
+H-006 retains the same comparison protocol for the repaired candidate; it does not
+replace H-005’s failure.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
