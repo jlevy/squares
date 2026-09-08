@@ -247,6 +247,12 @@ _OBJECT_BODY = re.compile(rb"(?ms)^\d+\s+0\s+obj\b(.*?)endobj")
 #: reader's machine had -- the reason `Georgia` was on `EXPECTED_HOST_FONTS` and the
 #: reason the shell overrode the prose stack for print. Both are gone; `LocalPunct` stays
 #: on this list only until a kpress that still declares it can no longer be checked out.
+#:
+#: `PlanetaireMonoText` is kpress's mono face, which the page declares in all four styles
+#: through `render_explainer.MONO_WEIGHTS`. Only the regular reaches the export -- the
+#: page has no highlighted code and no bold or italic code span -- but the family is what
+#: is listed, because which of a family's styles a run of code needs is the document's to
+#: change and not the guard's to police.
 _FIXED_FACES = (
     "PTSerif",
     "SourceSans3",
@@ -254,6 +260,7 @@ _FIXED_FACES = (
     "LocalPunct",
     "KPressMathText",
     "KPressQuotes",
+    "PlanetaireMonoText",
 )
 
 
@@ -310,11 +317,16 @@ def allowed_families() -> tuple[str, ...]:
     return (*owned_faces(), *ATLAS_FACES)
 
 
-#: The host families the page still leans on, each with the bead that removes it. Listed
-#: rather than tolerated: `--check` passes with these present and names them as pending,
-#: so the guard can land before the fixes it is waiting for and the file says what it is
-#: waiting for. Recorded 2026-09-07; `think-9r58` adopts the kpress fixes and empties
-#: this mapping.
+#: The host families the page still leans on, each with the bead that removes it. Empty
+#: since 2026-09-08, which is the state the rule asks for: every text run in the export
+#: resolves to a face the page ships, and the only family in it the project did not
+#: choose is the atlas figure's Helvetica, which is `ATLAS_FACES` and not this.
+#:
+#: The mapping is kept rather than deleted with its last entry, because it is the shape
+#: an exception takes here and the shape is the point: an entry passes `--check` and is
+#: reported as pending, so a guard can land before the fix it waits on and the file says
+#: what it waits for. A family added without a bead is not an exception, it is a defect
+#: nobody wrote down.
 #:
 #: Two entries are the roles and two are the same roles on another machine. The names are
 #: the host's, so they are the host's names: macOS answers `ui-monospace` with Menlo and
@@ -333,11 +345,12 @@ def allowed_families() -> tuple[str, ...]:
 #: drawn in CSS now instead of set as U+25AA, and the quotation marks come from the
 #: shipped `KPress Quotes` rather than from `local("Georgia")`. Neither family appears in
 #: the export any more, so listing them would only widen the guard.
-EXPECTED_HOST_FONTS: dict[str, str] = {
-    # Inline code: kpress ships no mono face, so the stack ends at `ui-monospace`.
-    "Menlo": "kpr-v731",
-    "DejaVuSansMono": "kpr-v731",
-}
+#:
+#: `Menlo` and its Linux substitute `DejaVuSansMono` came off the same day, when
+#: `kpr-v731` landed Planetaire Mono Text and the page took it. They were `ui-monospace`
+#: resolved on two machines, the last two glyph sources in this export the project did
+#: not ship, and the reason this mapping existed.
+EXPECTED_HOST_FONTS: dict[str, str] = {}
 
 
 def family_of(base_font: str) -> str:

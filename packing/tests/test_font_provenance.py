@@ -66,10 +66,22 @@ def test_a_font_face_whose_source_is_the_hosts_own_is_not_the_pages() -> None:
     assert _unshipped([_face("Wingdings", custom=True)]) == ["Wingdings"]
 
 
-def test_a_host_face_a_bead_is_removing_is_not_a_finding() -> None:
-    """Inline code and the list marker, until kpress ships the mono and the CSS marker."""
-    assert _unshipped([_face("Menlo", custom=False)]) == []
-    assert _unshipped([_face("DejaVu Sans Mono", custom=False)]) == []
+def test_the_mono_kpress_now_ships_is_the_pages_and_the_hosts_own_is_not() -> None:
+    """Inline code was the last role the reader's machine answered, and it is answered here.
+
+    `Menlo` and `DejaVu Sans Mono` are the two names `ui-monospace` resolved to, on the
+    developer's machine and on the runner that gates this probe, and both were excused by
+    `kpr-v731` while kpress shipped no mono face. It ships one, the page declares it, and
+    the excuse is gone -- which is the half of the change that matters, because an excused
+    family is one the probe stops looking at: code that fell back to the platform stack
+    would have passed in silence on both machines at once.
+
+    Both directions, as everywhere else in this file: the shipped face is not a finding,
+    and neither host name is spared by having been listed once.
+    """
+    assert _unshipped([_face("Planetaire Mono Text", custom=True)]) == []
+    assert _unshipped([_face("Menlo", custom=False)]) == ["Menlo"]
+    assert _unshipped([_face("DejaVu Sans Mono", custom=False)]) == ["DejaVu Sans Mono"]
 
 
 def test_a_face_from_the_readers_machine_that_nobody_chose_is_a_finding() -> None:

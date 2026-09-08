@@ -17,7 +17,8 @@ input, and the no-JavaScript fallback.
 The shared runtime and missing-stylesheet fallback merged in
 [kpress #59](https://github.com/jlevy/kpress/pull/59) and
 [kpress #60](https://github.com/jlevy/kpress/pull/60), with all upstream checks passing.
-This repository pins their merged source at `7b20ae70`.
+This repository pins their merged source at `4a868bb`, which adds the mono face
+(`kpr-v731`), kpress #65’s font-settings corrections and its gate mirror.
 
 **Workflow entry:** feature implementation from spec.
 **Tracking:** epic `think-rk9v`; squares tasks `think-58av` (integration, closed),
@@ -318,6 +319,7 @@ the fonts cost:
 | KPress Math Text composite | 216 KB, six faces, all duplicate bytes | none (draws the faces above) |
 | Source Sans 3 | 75 KB, two variable faces | 345 KB as Type3 outline paths |
 | Inline code | system mono | Menlo, 56 KB, 134 characters |
+| Inline code, since 2026-09-08 | Planetaire Mono Text, 76 KB of base64 | 6 KB, one embedded subset |
 | List bullets | system serif | Georgia, 16 KB, 48 bullets |
 | Atlas figure | Helvetica by design | 54 KB, accepted |
 
@@ -338,6 +340,8 @@ export on the same host is **817,119 bytes**, 24 embedded fonts and no Type3 fon
 kind: the three `KPressPrintSans` weights and the italic, the four PT Serif faces, five
 KaTeX faces, the atlas figure’s Helvetica, and Menlo and Georgia while `kpr-v731`,
 `kpr-2tmj` and `kpr-asj4` are open.
+All three are closed now, and the subsection below records the export that carries no
+host face at all.
 
 ### Sans mathematics, the shipped quotation marks, and one paint
 
@@ -429,8 +433,9 @@ a printed page took its apostrophes from whatever the reader owned; kpress ships
 now (`KPress Quotes`, six glyphs of Source Serif 4, 968 B of base64), and keeping the
 override would have dropped the shipped face and sent print back to PT Serif’s own
 marks. `Georgia` and `LiberationSerif` came off `EXPECTED_HOST_FONTS` with it, so the
-guard looks at that family again; `Menlo` stays, on `kpr-v731`. `KPressQuotes` joined
-the owned faces.
+guard looks at that family again; `KPressQuotes` joined the owned faces.
+`Menlo` stayed on `kpr-v731` until the mono landed, and the subsection below is where it
+came off.
 
 **What holds it.** `check_math_faces` is the new gate, and it exists because none of the
 three questions is readable in the rendered HTML. It walks every `.katex` node in both
@@ -526,11 +531,13 @@ Tracked under epic `think-phgo`, with the kpress work under `kpr-b4mq`:
   recovers most of the 216 KB).
 - `think-n4y7` and `think-q5df`, this branch: the sans composite, the per-node table
   selection, and the paint-once wait (the section above).
-- `think-9r58`, the marker and the quotes half done on this branch: kpress’s CSS-drawn
-  list marker (`kpr-2tmj`) and its shipped quotation face (`kpr-asj4`) are adopted, the
-  shell’s print-only prose override is gone, and `EXPECTED_HOST_FONTS` is down to
-  `Menlo` and `DejaVuSansMono`. The mono half waits on `kpr-v731` (Planetaire Mono Text
-  at 0.87), and with it the last two entries.
+- `think-9r58`, adopted in full: kpress’s CSS-drawn list marker (`kpr-2tmj`) and its
+  shipped quotation face (`kpr-asj4`) came first, with the shell’s print-only prose
+  override; the mono followed when `kpr-v731` landed Planetaire Mono Text at 0.87.
+  `EXPECTED_HOST_FONTS` is empty.
+  What remains under the epic is duplication rather than provenance: `kpr-hhdc` and
+  `think-f8q9` on the composite’s copies, and `think-y15p` asking kpress to export the
+  print family from the package.
 
 ### One bold, one medium
 
@@ -566,6 +573,77 @@ Dropping 600 took two instanced faces out of the PDF. The serif keeps kpress’s
 for `strong`, because the paper profile scopes its bold token to sans components on
 purpose — one sans bold is the rule, not one weight for two families.
 
+### The mono face
+
+kpress ships one (`kpr-v731`, Planetaire Mono Text: B612 Mono’s letterforms with Hack’s
+punctuation, vendored as latin subsets), and the page takes it.
+That was the last role the reader’s machine answered, and `EXPECTED_HOST_FONTS` is empty
+because of it.
+
+**Four styles for a page that draws one.** The article carries eleven code spans and 179
+characters, no fenced block and so no highlighted tokens, and not one of them sits in a
+heading, a table, a `<strong>` or an `<em>`; kpress’s own CSS sets no weight or slant on
+`code`, and `syntax.css`, which does, scopes every such rule to a `.kpress-code` token
+only a fenced block produces.
+The export agrees: it embedded `Menlo-Regular` and nothing else, and it embeds
+`PlanetaireMonoText-Regular` and nothing else now.
+So `regular` alone would have carried every glyph the page draws, and kpress refuses it
+— `syntax.css` ships with the design system whether or not a document has a code block,
+and a browser answers a style it was not given by shearing or emboldening the one it
+has. The refusal is right, and it leaves two honest settings rather than three: all four
+styles, or `mono_font: system`, which is the host font again.
+The page takes the four.
+`render_explainer.MONO_FONT` and `MONO_WEIGHTS` record the decision, and
+`mono_stylesheets` puts it through `mono_weights_rejection` — the same gate
+`format.mono_weights` and `RenderOptions` are held to — so a narrowed set fails the
+render here instead of shipping a page whose code is drawn by shearing.
+The stylesheet list itself comes from `mono_css_assets`, the call
+`package_asset_manifest` makes, because the mono sheets are not in `DEFAULT_CSS_ASSETS`:
+a page that took only that constant would name `Planetaire Mono Text`, declare no face
+under it, and go on drawing code from the reader’s machine while reading as though it
+had adopted the face.
+
+**What it cost.** One host, one browser, one session, Playwright’s pinned headless
+shell:
+
+| Measured 2026-09-08 | Before | Gitlink only | After |
+| --- | ---: | ---: | ---: |
+| Page | 1,859,156 B | 1,865,141 B | 1,944,562 B |
+| Page, gzipped | 943,862 B | — | 1,004,079 B |
+| PDF | 822,950 B | — | 820,921 B |
+| Embedded fonts | 26 | — | 26 |
+
+The page grew 85,406 B, of which 5,985 B is the gitlink bump on its own and 79,421 B is
+the face: 57,260 B of woff2 as 76,348 B of base64, plus four stylesheets.
+Three of those four styles are bytes the page carries and never draws, which is the
+price of the no-synthesis contract and is stated here rather than argued away.
+The PDF went the other way and lost 2,029 B: the mono subset the export needs is smaller
+than the Menlo subset it replaced, and the font count is unchanged because one face
+swapped for one face.
+
+**The rung, measured beside the prose.** The mono rung is 0.87 of the base, and it is
+kpress’s number to set.
+On screen the base is 18px and code computes to 15.66px; under print, 12pt and 13.92px.
+Planetaire draws an x-height of 0.560 em against PT Serif’s 0.500, so code’s x-height is
+8.77px against the prose’s 9.00px — 97.4%, the “a hair smaller” the rung is chosen for,
+and it is what keeps a span from bulging out of its line.
+Its advance is 9.427px, 0.602 em, so this page’s 848px prose column holds 89.9 columns;
+an 85-column line in a fenced block set against the page’s own cascade fit without a
+horizontal scrollbar.
+Inside a table the `-small` rung gives 14.094px against a cell at 17.1px, an x-height of
+95%, since this page sets its table text at the prose ramp’s `small` (0.95) while the
+mono ramp steps by 0.9.
+
+One number does not land where the rung was tuned, and it is left alone because the
+ratio is the owner’s. Six of the eleven spans are in footnotes, and footnotes are set in
+the sans: against Source Sans 3’s 0.486 em x-height at 18.05px the mono measures 8.77px
+to its 8.769px, so code there sits at parity with the text beside it rather than the 97%
+it sits at in the serif prose.
+kpress derived 0.87 from Planetaire against PT Serif, which is the right pair for the
+reading column; the sans is a second pair it does not claim to have tuned.
+Read on screen and in the export the difference is not visible, and nothing here is
+adjusted for it.
+
 ### The provenance guard
 
 `render_explainer_pdf --check` now reads every font dictionary in the export, embedded
@@ -589,16 +667,17 @@ spelling it, through `sans_instances.postscript_prefix`; `SourceSans3` stays bes
 because a print run that missed the instances falls back to the variable face and the
 guard has to know that name too.
 
-`EXPECTED_HOST_FONTS` is the temporary list beside it, dated 2026-09-07, each entry
-naming the bead it waits on: `Menlo` for the inline code, on `kpr-v731`, and `Georgia`
-for the list marker and kpress’s `local("Georgia")` quotation marks, on `kpr-2tmj` and
-`kpr-asj4`. The check passes with these present and reports them as pending, so the
-guard could land before the fixes it waits for; `think-9r58` empties the mapping.
-Each entry carries the substitute the Linux runner answers with, since the names in it
-are the host’s: `DejaVuSansMono` and `LiberationSerif`, both of them there because
-`pages.yml` reported them.
-Both `Georgia` entries came off on 2026-09-08, when `kpr-2tmj` and `kpr-asj4` landed and
-the gitlink moved to them; `Menlo` and its substitute are what is left.
+`EXPECTED_HOST_FONTS` is the temporary list beside it, and it is empty.
+It was dated 2026-09-07 and held four names, each with the bead it waited on: `Menlo`
+for the inline code, on `kpr-v731`, and `Georgia` for the list marker and kpress’s
+`local("Georgia")` quotation marks, on `kpr-2tmj` and `kpr-asj4`, each beside the
+substitute the Linux runner answers with, since the names in it are the host’s —
+`DejaVuSansMono` and `LiberationSerif`, both there because `pages.yml` reported them.
+The check passes with an entry present and reports it as pending, so the guard could
+land before the fixes it waited for; all four came off within two days, the `Georgia`
+pair when `kpr-2tmj` and `kpr-asj4` landed and the mono pair when `kpr-v731` did.
+The mapping stays in the file with nothing in it, because the shape is the point and the
+next wait will use it.
 Taking a name off is the half that matters and the half nobody is prompted to do: an
 entry here is a family the guard stops looking at, so a quotation mark that went back to
 the reader’s own serif would have passed in silence.

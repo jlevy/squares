@@ -40,7 +40,9 @@ from pathlib import Path
 import pytest
 from nodejs_wheel import node
 
+from devtools import render_explainer_pdf
 from devtools.render_explainer_pdf import (
+    EXPECTED_HOST_FONTS,
     embedded_fonts,
     font_findings,
     host_font_bead,
@@ -378,41 +380,70 @@ def test_the_generic_host_sans_is_a_finding_on_both_platforms() -> None:
         assert host_font_bead(family) is None, family
 
 
+def test_no_role_on_this_page_is_waiting_on_a_bead() -> None:
+    """`EXPECTED_HOST_FONTS` is empty, and that is the state the rule asks for.
+
+    Every text run in the export resolves to a face the page ships. The one family in the
+    file the project did not choose is the atlas figure's Helvetica, which is an accepted
+    exception rather than a pending one and is asserted separately.
+
+    Asserted on the mapping itself and not only through `host_font_bead`, because the two
+    fail differently: a name quietly added here stops being reported by `--check`, and
+    nothing else in this file would notice.
+    """
+    assert EXPECTED_HOST_FONTS == {}
+
+
 @pytest.mark.parametrize(
-    ("family", "bead"),
+    "family",
     [
-        ("Menlo-Regular", "kpr-v731"),
-        ("DejaVuSansMono", "kpr-v731"),
-        ("DejaVu Sans Mono", "kpr-v731"),
+        "Georgia",
+        "LiberationSerif-Italic",
+        "Menlo-Regular",
+        "DejaVuSansMono",
+        "DejaVu Sans Mono",
     ],
 )
-def test_a_host_face_a_bead_is_removing_is_pending_rather_than_a_failure(
-    family: str, bead: str
-) -> None:
-    """The one role kpress has not covered yet, and the same role on the Linux runner.
-
-    Spaces come out before the match, so one mapping answers a PDF's `DejaVuSansMono`
-    and a browser's `DejaVu Sans Mono`, and a style suffix answers under its family.
-
-    `Georgia` and `LiberationSerif` were here too until `kpr-2tmj` and `kpr-asj4` landed:
-    the list marker is drawn in CSS now rather than set as U+25AA, and the quotation marks
-    come from the shipped `KPress Quotes`. Neither is pending any more, and
-    `test_a_face_kpress_now_ships_is_no_longer_pending` is what says so.
-    """
-    assert not shipped(family)
-    assert host_font_bead(family) == bead
-
-
-@pytest.mark.parametrize("family", ["Georgia", "LiberationSerif-Italic"])
 def test_a_face_kpress_now_ships_is_no_longer_pending(family: str) -> None:
     """A name off the pending list is a face the guard starts looking at again.
 
     Leaving it listed would be the more comfortable mistake and the worse one: an entry
     here is a family `--check` stops reporting, so a quotation mark that went back to the
     reader's own serif would pass in silence.
+
+    All five names were listed once. `Georgia` and `LiberationSerif` came off when
+    `kpr-2tmj` and `kpr-asj4` landed -- the list marker is drawn in CSS now rather than
+    set as U+25AA, and the quotation marks come from the shipped `KPress Quotes`. The
+    three mono names came off with `kpr-v731`: they are `ui-monospace` resolved on the
+    developer's machine and on the runner, in the two shapes the probes answer in -- a
+    PDF's `DejaVuSansMono` and a browser's `DejaVu Sans Mono`, since spaces come out
+    before the match -- and the page declares Planetaire Mono Text instead.
     """
     assert not shipped(family)
     assert host_font_bead(family) is None
+
+
+def test_the_mono_the_page_declares_is_one_of_its_own() -> None:
+    """The face that replaced the host mono, in both shapes and through the whole scan.
+
+    A face this page ships and forgot to list would read as a stranger and fail the
+    check; the `_FIXED_FACES` entry is what prevents that, and the export is where it
+    shows: `PlanetaireMonoText-Regular` is the only one of the four declared styles the
+    page actually draws, because it has no highlighted code and no bold or italic code
+    span, and it arrives as an embedded subset rather than as outline paths.
+    """
+    assert shipped("PlanetaireMonoText-Regular")
+    assert shipped("Planetaire Mono Text")
+    assert host_font_bead("PlanetaireMonoText-Regular") is None
+    inline_code = (
+        _descriptor(7, "PlanetaireMonoText-Regular", program=True)
+        + _font(1, "Type0", 7, face="WAAAAA+PlanetaireMonoText-Regular")
+        + EMBEDDED_SERIF
+    )
+    unexpected, pending = provenance(inline_code)
+    assert unexpected == []
+    assert pending == {}
+    assert font_findings(inline_code) == []
 
 
 def test_a_family_no_bead_expects_fails_the_check_and_is_named() -> None:
@@ -426,14 +457,26 @@ def test_a_family_no_bead_expects_fails_the_check_and_is_named() -> None:
     assert "Wingdings" in findings[0]
 
 
-def test_the_pending_faces_pass_and_are_reported_with_their_beads() -> None:
-    """`--check` has to pass with these present, or the guard cannot land before them.
+def test_a_pending_face_passes_and_is_reported_with_its_bead(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """`--check` has to pass with one present, or a guard cannot land before its fix.
 
-    Both are written the way the export carries them: a descriptor with the program in
+    Over a mapping this test supplies, because the page's own is empty now and the
+    mechanism outlives the entries: it is what let this guard ship while `kpr-v731`,
+    `kpr-2tmj` and `kpr-asj4` were still open, and it is what the next such wait will
+    use. Testing it only through whatever happens to be listed would have deleted the
+    coverage on the day the list emptied, which is the day it stops being exercised by
+    the real export.
+
+    The face is written the way the export carries one: a descriptor with the program in
     it, and a font dictionary naming the subset. `embedded_fonts` takes a `/BaseFont`
     only once its descriptor is found to carry a `/FontFile*`, so a bare name in the
     file would be read as no face at all rather than as the host face it is.
     """
+    monkeypatch.setattr(
+        render_explainer_pdf, "EXPECTED_HOST_FONTS", {"Menlo": "kpr-v731"}, raising=True
+    )
     waiting = (
         _descriptor(7, "Menlo-Regular", program=True)
         + _font(1, "Type0", 7, face="TAAAAA+Menlo-Regular")
