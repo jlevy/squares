@@ -1,0 +1,350 @@
+﻿2026-09-08T22:03:10.5963135Z Current runner version: '2.337.0'
+2026-09-08T22:03:10.5990134Z ##[group]Runner Image Provisioner
+2026-09-08T22:03:10.5991041Z Hosted Compute Agent
+2026-09-08T22:03:10.5991712Z Version: 20260828.587
+2026-09-08T22:03:10.5992427Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+2026-09-08T22:03:10.5993183Z Build Date: 2026-08-28T16:44:25Z
+2026-09-08T22:03:10.5993935Z Worker ID: {294647b4-5584-48bd-8cc8-9f987e2b4294}
+2026-09-08T22:03:10.5994647Z Azure Region: westus
+2026-09-08T22:03:10.5995201Z ##[endgroup]
+2026-09-08T22:03:10.5996829Z ##[group]Operating System
+2026-09-08T22:03:10.5997549Z Ubuntu
+2026-09-08T22:03:10.5998181Z 24.04.4
+2026-09-08T22:03:10.5999131Z LTS
+2026-09-08T22:03:10.5999700Z ##[endgroup]
+2026-09-08T22:03:10.6000386Z ##[group]Runner Image
+2026-09-08T22:03:10.6000992Z Image: ubuntu-24.04
+2026-09-08T22:03:10.6001599Z Version: 20260831.293.1
+2026-09-08T22:03:10.6002957Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260831.293/images/ubuntu/Ubuntu2404-Readme.md
+2026-09-08T22:03:10.6004630Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260831.293
+2026-09-08T22:03:10.6005615Z ##[endgroup]
+2026-09-08T22:03:10.6006782Z ##[group]GITHUB_TOKEN Permissions
+2026-09-08T22:03:10.6009138Z Contents: read
+2026-09-08T22:03:10.6009853Z Metadata: read
+2026-09-08T22:03:10.6010486Z ##[endgroup]
+2026-09-08T22:03:10.6012731Z Secret source: Actions
+2026-09-08T22:03:10.6014031Z Prepare workflow directory
+2026-09-08T22:03:10.6444606Z Prepare all required actions
+2026-09-08T22:03:10.6492663Z Getting action download info
+2026-09-08T22:03:11.0279048Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-09-08T22:03:11.1419100Z Download action repository 'astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9' (SHA:c771a70e6277c0a99b617c7a806ffedaca235ff9)
+2026-09-08T22:03:11.5947896Z Download action repository 'actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809' (SHA:0400d5f644dc74513175e3cd8d07132dd4860809)
+2026-09-08T22:03:11.7006251Z Download action repository 'actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9' (SHA:fc324d3547104276b827a68afc52ff2a11cc49c9)
+2026-09-08T22:03:12.0041744Z Getting action download info
+2026-09-08T22:03:12.1466442Z Download action repository 'actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f' (SHA:bbbca2ddaa5d8feaa63e36b76fdaad77386f024f)
+2026-09-08T22:03:12.2472340Z Complete job name: build
+2026-09-08T22:03:12.3271796Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-09-08T22:03:12.3272887Z with:
+2026-09-08T22:03:12.3273308Z   submodules: true
+2026-09-08T22:03:12.3273761Z   repository: jlevy/squares
+2026-09-08T22:03:12.3277798Z   token: ***
+2026-09-08T22:03:12.3278234Z   ssh-strict: true
+2026-09-08T22:03:12.3278912Z   ssh-user: git
+2026-09-08T22:03:12.3279395Z   persist-credentials: true
+2026-09-08T22:03:12.3279891Z   clean: true
+2026-09-08T22:03:12.3280336Z   sparse-checkout-cone-mode: true
+2026-09-08T22:03:12.3280889Z   fetch-depth: 1
+2026-09-08T22:03:12.3281310Z   fetch-tags: false
+2026-09-08T22:03:12.3281751Z   show-progress: true
+2026-09-08T22:03:12.3282196Z   lfs: false
+2026-09-08T22:03:12.3349002Z   set-safe-directory: true
+2026-09-08T22:03:12.3349599Z   allow-unsafe-pr-checkout: false
+2026-09-08T22:03:12.3351953Z ##[endgroup]
+2026-09-08T22:03:12.4336449Z Syncing repository: jlevy/squares
+2026-09-08T22:03:12.4338593Z ##[group]Getting Git version info
+2026-09-08T22:03:12.4339705Z Working directory is '/home/runner/work/squares/squares'
+2026-09-08T22:03:12.4340766Z [command]/usr/bin/git version
+2026-09-08T22:03:12.4437123Z git version 2.55.0
+2026-09-08T22:03:12.4457965Z ##[endgroup]
+2026-09-08T22:03:12.4469908Z Temporarily overriding HOME='/home/runner/work/_temp/2be5d4be-9ac4-45d6-9e60-7b031db953a4' before making global git config changes
+2026-09-08T22:03:12.4472387Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-08T22:03:12.4475834Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/squares/squares
+2026-09-08T22:03:12.4531178Z Deleting the contents of '/home/runner/work/squares/squares'
+2026-09-08T22:03:12.4535113Z ##[group]Determining repository object format
+2026-09-08T22:03:12.4536830Z ##[endgroup]
+2026-09-08T22:03:12.4538109Z ##[group]Initializing the repository
+2026-09-08T22:03:12.4542075Z [command]/usr/bin/git init /home/runner/work/squares/squares
+2026-09-08T22:03:12.4663699Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-09-08T22:03:12.4665474Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-09-08T22:03:12.4667234Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-09-08T22:03:12.4669012Z hint: call:
+2026-09-08T22:03:12.4670061Z hint:
+2026-09-08T22:03:12.4671516Z hint: 	git config --global init.defaultBranch <name>
+2026-09-08T22:03:12.4672712Z hint:
+2026-09-08T22:03:12.4673578Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-09-08T22:03:12.4675030Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-09-08T22:03:12.4677132Z hint:
+2026-09-08T22:03:12.4677786Z hint: 	git branch -m <name>
+2026-09-08T22:03:12.4678504Z hint:
+2026-09-08T22:03:12.4679704Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-09-08T22:03:12.4680769Z Initialized empty Git repository in /home/runner/work/squares/squares/.git/
+2026-09-08T22:03:12.4682393Z [command]/usr/bin/git remote add origin https://github.com/jlevy/squares
+2026-09-08T22:03:12.4732437Z ##[endgroup]
+2026-09-08T22:03:12.4733255Z ##[group]Disabling automatic garbage collection
+2026-09-08T22:03:12.4735608Z [command]/usr/bin/git config --local gc.auto 0
+2026-09-08T22:03:12.4764873Z ##[endgroup]
+2026-09-08T22:03:12.4766414Z ##[group]Setting up auth
+2026-09-08T22:03:12.4767200Z Removing SSH command configuration
+2026-09-08T22:03:12.4770728Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-08T22:03:12.4800560Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-08T22:03:12.5162369Z Removing HTTP extra header
+2026-09-08T22:03:12.5168972Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-08T22:03:12.5202865Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-08T22:03:12.5423032Z Removing includeIf entries pointing to credentials config files
+2026-09-08T22:03:12.5428454Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-08T22:03:12.5463962Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-08T22:03:12.5705668Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-09-08T22:03:12.5747762Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/squares/squares/.git.path /home/runner/work/_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config
+2026-09-08T22:03:12.5777726Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/squares/squares/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config
+2026-09-08T22:03:12.5812090Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config
+2026-09-08T22:03:12.5841896Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config
+2026-09-08T22:03:12.5870336Z ##[endgroup]
+2026-09-08T22:03:12.5871255Z ##[group]Fetching the repository
+2026-09-08T22:03:12.5877328Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +7ef80525b35a8e77e00b460a7e08f1489134d0cc:refs/remotes/origin/main
+2026-09-08T22:03:19.6504119Z From https://github.com/jlevy/squares
+2026-09-08T22:03:19.6506529Z  * [new ref]         7ef80525b35a8e77e00b460a7e08f1489134d0cc -> origin/main
+2026-09-08T22:03:19.6516151Z [command]/usr/bin/git branch --list --remote origin/main
+2026-09-08T22:03:19.6542264Z   origin/main
+2026-09-08T22:03:19.6550933Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+2026-09-08T22:03:19.6574299Z 7ef80525b35a8e77e00b460a7e08f1489134d0cc
+2026-09-08T22:03:19.6578514Z ##[endgroup]
+2026-09-08T22:03:19.6579818Z ##[group]Determining the checkout info
+2026-09-08T22:03:19.6581180Z ##[endgroup]
+2026-09-08T22:03:19.6585054Z [command]/usr/bin/git sparse-checkout disable
+2026-09-08T22:03:19.6636695Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-09-08T22:03:19.6664783Z ##[group]Checking out the ref
+2026-09-08T22:03:19.6667824Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-09-08T22:03:20.4494589Z Switched to a new branch 'main'
+2026-09-08T22:03:20.4500935Z branch 'main' set up to track 'origin/main'.
+2026-09-08T22:03:20.4546762Z ##[endgroup]
+2026-09-08T22:03:20.4547622Z ##[group]Setting up auth for fetching submodules
+2026-09-08T22:03:20.4555212Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-09-08T22:03:20.4602169Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config
+2026-09-08T22:03:20.4636853Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+2026-09-08T22:03:20.4675990Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+2026-09-08T22:03:20.4713341Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-2058167@github.com:
+2026-09-08T22:03:20.4744799Z ##[endgroup]
+2026-09-08T22:03:20.4745726Z ##[group]Fetching submodules
+2026-09-08T22:03:20.4750609Z [command]/usr/bin/git submodule sync
+2026-09-08T22:03:20.5007215Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+2026-09-08T22:03:20.5233730Z Submodule 'vendor/kpress' (https://github.com/jlevy/kpress) registered for path 'vendor/kpress'
+2026-09-08T22:03:20.5260687Z Cloning into '/home/runner/work/squares/squares/vendor/kpress'...
+2026-09-08T22:03:21.6701629Z Submodule path 'vendor/kpress': checked out '4a868bb769eab4612748fe94a4e75b8eaa2b6112'
+2026-09-08T22:03:21.6717734Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+2026-09-08T22:03:21.6954373Z Entering 'vendor/kpress'
+2026-09-08T22:03:21.6992532Z ##[endgroup]
+2026-09-08T22:03:21.6993201Z ##[group]Persisting credentials for submodules
+2026-09-08T22:03:21.7000216Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+2026-09-08T22:03:21.7220678Z Entering 'vendor/kpress'
+2026-09-08T22:03:21.7277629Z [command]/usr/bin/git submodule foreach git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-08T22:03:21.7496324Z Entering 'vendor/kpress'
+2026-09-08T22:03:21.7519430Z file:/home/runner/work/squares/squares/.git/modules/vendor/kpress/config	remote.origin.url
+2026-09-08T22:03:21.7536637Z [command]/usr/bin/git config --file /home/runner/work/squares/squares/.git/modules/vendor/kpress/config includeIf.gitdir:/home/runner/work/squares/squares/.git/modules/vendor/kpress.path /home/runner/work/_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config
+2026-09-08T22:03:21.7581249Z [command]/usr/bin/git config --file /home/runner/work/squares/squares/.git/modules/vendor/kpress/config includeIf.gitdir:/github/workspace/.git/modules/vendor/kpress.path /github/runner_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config
+2026-09-08T22:03:21.7621904Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+2026-09-08T22:03:21.7833627Z Entering 'vendor/kpress'
+2026-09-08T22:03:21.7872130Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-2058167@github.com:'
+2026-09-08T22:03:21.8092586Z Entering 'vendor/kpress'
+2026-09-08T22:03:21.8123881Z ##[endgroup]
+2026-09-08T22:03:21.8167074Z [command]/usr/bin/git log -1 --format=%H
+2026-09-08T22:03:21.8192446Z 7ef80525b35a8e77e00b460a7e08f1489134d0cc
+2026-09-08T22:03:21.8482096Z ##[group]Run astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9
+2026-09-08T22:03:21.8482524Z with:
+2026-09-08T22:03:21.8482717Z   version: 0.12.8
+2026-09-08T22:03:21.8482931Z   python-version: 3.14.7
+2026-09-08T22:03:21.8483181Z   working-directory: packing
+2026-09-08T22:03:21.8483423Z   enable-cache: true
+2026-09-08T22:03:21.8483650Z   cache-dependency-glob: uv.lock
+2026-09-08T22:03:21.8483914Z   activate-environment: false
+2026-09-08T22:03:21.8484159Z   no-project: false
+2026-09-08T22:03:21.8486904Z   github-token: ***
+2026-09-08T22:03:21.8487130Z   restore-cache: true
+2026-09-08T22:03:21.8487346Z   save-cache: true
+2026-09-08T22:03:21.8487551Z   prune-cache: false
+2026-09-08T22:03:21.8487765Z   cache-python: false
+2026-09-08T22:03:21.8487994Z   ignore-nothing-to-cache: false
+2026-09-08T22:03:21.8488261Z   ignore-empty-workdir: false
+2026-09-08T22:03:21.8488536Z   download-from-astral-mirror: true
+2026-09-08T22:03:21.8489019Z   add-problem-matchers: true
+2026-09-08T22:03:21.8489290Z   quiet: false
+2026-09-08T22:03:21.8489508Z   resolution-strategy: highest
+2026-09-08T22:03:21.8489747Z ##[endgroup]
+2026-09-08T22:03:22.0257439Z Fetching manifest data from https://raw.githubusercontent.com/astral-sh/versions/main/v1/uv.ndjson ...
+2026-09-08T22:03:22.0692615Z Downloading uv from "https://releases.astral.sh/github/uv/releases/download/0.12.8/uv-x86_64-unknown-linux-gnu.tar.gz" ...
+2026-09-08T22:03:22.2504302Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/32af23f6-80b9-4ed3-b491-86ceec0650a3 -f /home/runner/work/_temp/a630a482-12b7-4185-9940-9b77d87bde23
+2026-09-08T22:03:22.6311176Z Added /home/runner/.local/bin to the path
+2026-09-08T22:03:22.6312204Z Added /opt/hostedtoolcache/uv/0.12.8/x86_64 to the path
+2026-09-08T22:03:22.6313268Z Set UV_PYTHON_INSTALL_DIR to /home/runner/work/_temp/uv-python-dir
+2026-09-08T22:03:22.6314326Z Added /home/runner/work/_temp/uv-python-dir to the path
+2026-09-08T22:03:22.6315197Z Set UV_PYTHON to 3.14.7
+2026-09-08T22:03:22.6339286Z Set UV_CACHE_DIR to /home/runner/work/_temp/setup-uv-cache
+2026-09-08T22:03:22.6339709Z Successfully installed uv version 0.12.8
+2026-09-08T22:03:22.6340242Z Searching files using cache dependency glob: /home/runner/work/squares/squares/packing/uv.lock
+2026-09-08T22:03:22.6355130Z /home/runner/work/squares/squares/packing/uv.lock
+2026-09-08T22:03:22.6376082Z Found 1 files to hash.
+2026-09-08T22:03:22.6442519Z Trying to restore cache from GitHub Actions cache with key: setup-uv-2-x86_64-unknown-linux-gnu-ubuntu-24.04-3.14.7-47c7c657a4318ef78cf526f9b81f9615c32d557ed7c8c11fd50dfeb0693dfe2b
+2026-09-08T22:03:22.8878924Z Cache hit for: setup-uv-2-x86_64-unknown-linux-gnu-ubuntu-24.04-3.14.7-47c7c657a4318ef78cf526f9b81f9615c32d557ed7c8c11fd50dfeb0693dfe2b
+2026-09-08T22:03:24.1883163Z Received 0 of 192327837 (0.0%), 0.0 MBs/sec
+2026-09-08T22:03:25.1965365Z Received 88080384 of 192327837 (45.8%), 42.0 MBs/sec
+2026-09-08T22:03:26.1894746Z Received 167772160 of 192327837 (87.2%), 53.3 MBs/sec
+2026-09-08T22:03:26.3305586Z Received 192327837 of 192327837 (100.0%), 58.4 MBs/sec
+2026-09-08T22:03:26.3306947Z Cache Size: ~183 MB (192327837 B)
+2026-09-08T22:03:26.3344294Z [command]/usr/bin/tar -xf /home/runner/work/_temp/694b1983-8a4e-4cba-bcab-2bc16b028d3a/cache.tzst -P -C /home/runner/work/squares/squares --use-compress-program unzstd
+2026-09-08T22:03:28.2434213Z Cache restored successfully
+2026-09-08T22:03:28.2524000Z cache restored from GitHub Actions cache with key: setup-uv-2-x86_64-unknown-linux-gnu-ubuntu-24.04-3.14.7-47c7c657a4318ef78cf526f9b81f9615c32d557ed7c8c11fd50dfeb0693dfe2b
+2026-09-08T22:03:28.3703118Z ##[group]Run uv run --frozen --group dev python -m devtools.render_explainer
+2026-09-08T22:03:28.3703812Z [36;1muv run --frozen --group dev python -m devtools.render_explainer[0m
+2026-09-08T22:03:28.3746300Z shell: /usr/bin/bash -e {0}
+2026-09-08T22:03:28.3746598Z env:
+2026-09-08T22:03:28.3746925Z   UV_PYTHON_INSTALL_DIR: /home/runner/work/_temp/uv-python-dir
+2026-09-08T22:03:28.3747337Z   UV_PYTHON: 3.14.7
+2026-09-08T22:03:28.3747644Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+2026-09-08T22:03:28.3748022Z ##[endgroup]
+2026-09-08T22:03:28.5498503Z Downloading cpython-3.14.7-linux-x86_64-gnu (download) (34.3MiB)
+2026-09-08T22:03:29.4164537Z  Downloaded cpython-3.14.7-linux-x86_64-gnu (download)
+2026-09-08T22:03:29.5968823Z Using CPython 3.14.7
+2026-09-08T22:03:29.5969382Z Creating virtual environment at: .venv
+2026-09-08T22:03:29.6018314Z    Building kpress @ file:///home/runner/work/squares/squares/vendor/kpress
+2026-09-08T22:03:29.6019552Z    Building sqpack @ file:///home/runner/work/squares/squares/packing
+2026-09-08T22:03:30.2038244Z       Built sqpack @ file:///home/runner/work/squares/squares/packing
+2026-09-08T22:03:30.4880601Z       Built kpress @ file:///home/runner/work/squares/squares/vendor/kpress
+2026-09-08T22:03:30.6418476Z Installed 53 packages in 152ms
+2026-09-08T22:03:34.4461977Z wrote packing/site/index.html (1898 KB)
+2026-09-08T22:03:34.4462618Z wrote packing/site/t-018-explainer.md (29 KB)
+2026-09-08T22:03:34.6275837Z ##[group]Run uv run --frozen --group dev python -m devtools.render_explainer --check
+2026-09-08T22:03:34.6276508Z [36;1muv run --frozen --group dev python -m devtools.render_explainer --check[0m
+2026-09-08T22:03:34.6276950Z [36;1mtest -s site/index.html[0m
+2026-09-08T22:03:34.6277286Z [36;1mecho "one file, $(du -h site/index.html | cut -f1)"[0m
+2026-09-08T22:03:34.6313719Z shell: /usr/bin/bash -e {0}
+2026-09-08T22:03:34.6368638Z env:
+2026-09-08T22:03:34.6369348Z   UV_PYTHON_INSTALL_DIR: /home/runner/work/_temp/uv-python-dir
+2026-09-08T22:03:34.6369959Z   UV_PYTHON: 3.14.7
+2026-09-08T22:03:34.6370380Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+2026-09-08T22:03:34.6370899Z ##[endgroup]
+2026-09-08T22:03:35.8063832Z packing/site/index.html is current
+2026-09-08T22:03:35.9595056Z one file, 1.9M
+2026-09-08T22:03:36.0222424Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-08T22:03:36.0224075Z ##[group]Run actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809
+2026-09-08T22:03:36.0224473Z with:
+2026-09-08T22:03:36.0224719Z   path: ~/.cache/ms-playwright
+2026-09-08T22:03:36.0225229Z   key: playwright-Linux-47c7c657a4318ef78cf526f9b81f9615c32d557ed7c8c11fd50dfeb0693dfe2b
+2026-09-08T22:03:36.0225764Z   enableCrossOsArchive: false
+2026-09-08T22:03:36.0226029Z   fail-on-cache-miss: false
+2026-09-08T22:03:36.0226280Z   lookup-only: false
+2026-09-08T22:03:36.0226500Z   save-always: false
+2026-09-08T22:03:36.0226704Z env:
+2026-09-08T22:03:36.0226973Z   UV_PYTHON_INSTALL_DIR: /home/runner/work/_temp/uv-python-dir
+2026-09-08T22:03:36.0227351Z   UV_PYTHON: 3.14.7
+2026-09-08T22:03:36.0227630Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+2026-09-08T22:03:36.0227948Z ##[endgroup]
+2026-09-08T22:03:36.1270913Z (node:2598) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-08T22:03:36.1272334Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-08T22:03:36.4021711Z Cache hit for: playwright-Linux-47c7c657a4318ef78cf526f9b81f9615c32d557ed7c8c11fd50dfeb0693dfe2b
+2026-09-08T22:03:36.4136552Z (node:2598) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-08T22:03:37.6721347Z Received 4194304 of 108072966 (3.9%), 4.0 MBs/sec
+2026-09-08T22:03:38.5015310Z Received 108072966 of 108072966 (100.0%), 56.3 MBs/sec
+2026-09-08T22:03:38.5017865Z Cache Size: ~103 MB (108072966 B)
+2026-09-08T22:03:38.5128106Z [command]/usr/bin/tar -xf /home/runner/work/_temp/5081b6b7-326c-427d-b08e-523c467bcbab/cache.tzst -P -C /home/runner/work/squares/squares --use-compress-program unzstd
+2026-09-08T22:03:38.9487894Z Cache restored successfully
+2026-09-08T22:03:38.9621737Z Cache restored from key: playwright-Linux-47c7c657a4318ef78cf526f9b81f9615c32d557ed7c8c11fd50dfeb0693dfe2b
+2026-09-08T22:03:38.9751673Z ##[group]Run uv run --frozen --group dev python -m playwright install --only-shell chromium
+2026-09-08T22:03:38.9752873Z [36;1muv run --frozen --group dev python -m playwright install --only-shell chromium[0m
+2026-09-08T22:03:38.9805272Z shell: /usr/bin/bash -e {0}
+2026-09-08T22:03:38.9805746Z env:
+2026-09-08T22:03:38.9806264Z   UV_PYTHON_INSTALL_DIR: /home/runner/work/_temp/uv-python-dir
+2026-09-08T22:03:38.9806917Z   UV_PYTHON: 3.14.7
+2026-09-08T22:03:38.9807401Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+2026-09-08T22:03:38.9807982Z ##[endgroup]
+2026-09-08T22:03:39.3778023Z ##[group]Run uv run --frozen --group dev python -m devtools.sans_instances --check
+2026-09-08T22:03:39.3778655Z [36;1muv run --frozen --group dev python -m devtools.sans_instances --check[0m
+2026-09-08T22:03:39.3815108Z shell: /usr/bin/bash -e {0}
+2026-09-08T22:03:39.3815389Z env:
+2026-09-08T22:03:39.3815701Z   UV_PYTHON_INSTALL_DIR: /home/runner/work/_temp/uv-python-dir
+2026-09-08T22:03:39.3816068Z   UV_PYTHON: 3.14.7
+2026-09-08T22:03:39.3816344Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+2026-09-08T22:03:39.3816677Z ##[endgroup]
+2026-09-08T22:03:43.7216791Z the page requests 4 sans faces under print:
+2026-09-08T22:03:43.7217426Z   410 italic  li.kpress-footnote-item[6] > p[0] > em[0]
+2026-09-08T22:03:43.7218020Z   410 normal  div.hero[2] > div.credits.centred[2] > span[0]
+2026-09-08T22:03:43.7218566Z   550 normal  div.hero[2] > h1[0] > span.symbol[0]
+2026-09-08T22:03:43.7219306Z   680 normal  span[0] > a[0] > strong[0]
+2026-09-08T22:03:43.7219894Z print sans instances current: 6 faces cover every request
+2026-09-08T22:03:43.8777004Z ##[group]Run uv run --frozen --group dev python -m devtools.render_explainer_pdf --update
+2026-09-08T22:03:43.8777662Z [36;1muv run --frozen --group dev python -m devtools.render_explainer_pdf --update[0m
+2026-09-08T22:03:43.8813377Z shell: /usr/bin/bash -e {0}
+2026-09-08T22:03:43.8813667Z env:
+2026-09-08T22:03:43.8813972Z   UV_PYTHON_INSTALL_DIR: /home/runner/work/_temp/uv-python-dir
+2026-09-08T22:03:43.8814356Z   UV_PYTHON: 3.14.7
+2026-09-08T22:03:43.8814650Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+2026-09-08T22:03:43.8814977Z ##[endgroup]
+2026-09-08T22:03:46.3040741Z explainer PDF updated: t-018-explainer.pdf (799503 bytes)
+2026-09-08T22:03:46.4313717Z ##[group]Run uv run --frozen --group dev python -m devtools.render_explainer_pdf --check
+2026-09-08T22:03:46.4314385Z [36;1muv run --frozen --group dev python -m devtools.render_explainer_pdf --check[0m
+2026-09-08T22:03:46.4351125Z shell: /usr/bin/bash -e {0}
+2026-09-08T22:03:46.4351409Z env:
+2026-09-08T22:03:46.4351711Z   UV_PYTHON_INSTALL_DIR: /home/runner/work/_temp/uv-python-dir
+2026-09-08T22:03:46.4352097Z   UV_PYTHON: 3.14.7
+2026-09-08T22:03:46.4352379Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+2026-09-08T22:03:46.4352698Z ##[endgroup]
+2026-09-08T22:03:51.1308018Z explainer PDF check passed: two renders agree, 799409 bytes, 17 pages, 20 embedded fonts, none of them this page's in outline paths
+2026-09-08T22:03:51.1310075Z accepted: LiberationSans-Bold is the atlas figure's own, drawn by whichever machine exported it, and stays; recorded in think-czt4
+2026-09-08T22:03:51.1311829Z accepted: LiberationSans-BoldItalic is the atlas figure's own, drawn by whichever machine exported it, and stays; recorded in think-czt4
+2026-09-08T22:03:51.2589865Z ##[group]Run uv run --frozen --group dev python -m devtools.check_print_layout
+2026-09-08T22:03:51.2590474Z [36;1muv run --frozen --group dev python -m devtools.check_print_layout[0m
+2026-09-08T22:03:51.2625746Z shell: /usr/bin/bash -e {0}
+2026-09-08T22:03:51.2626019Z env:
+2026-09-08T22:03:51.2626340Z   UV_PYTHON_INSTALL_DIR: /home/runner/work/_temp/uv-python-dir
+2026-09-08T22:03:51.2626729Z   UV_PYTHON: 3.14.7
+2026-09-08T22:03:51.2627017Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+2026-09-08T22:03:51.2627367Z ##[endgroup]
+2026-09-08T22:04:14.3557802Z Figure 5 (19-5): direction 118 has the wrong half-tangent or angle: ''
+2026-09-08T22:04:14.3559129Z measured 5891 blocks (3 declared `.centred`), 29 list markers, 20 footnote references and 3 boxed labels in each medium; print column 576px in a 576px page
+2026-09-08T22:04:14.3559958Z 1 print-layout findings
+2026-09-08T22:04:14.4849918Z ##[error]Process completed with exit code 1.
+2026-09-08T22:04:14.5000617Z Post job cleanup.
+2026-09-08T22:04:14.5818890Z [command]/usr/bin/git version
+2026-09-08T22:04:14.5857741Z git version 2.55.0
+2026-09-08T22:04:14.5901897Z Temporarily overriding HOME='/home/runner/work/_temp/6d7c0399-08bb-43a6-8b9e-6ea6bc155e49' before making global git config changes
+2026-09-08T22:04:14.5903051Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-08T22:04:14.5907567Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/squares/squares
+2026-09-08T22:04:14.5940055Z Removing SSH command configuration
+2026-09-08T22:04:14.5947893Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-08T22:04:14.5981925Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-08T22:04:14.6200425Z Entering 'vendor/kpress'
+2026-09-08T22:04:14.6256516Z Removing HTTP extra header
+2026-09-08T22:04:14.6262168Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-08T22:04:14.6299891Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-08T22:04:14.6515900Z Entering 'vendor/kpress'
+2026-09-08T22:04:14.6569280Z Removing includeIf entries pointing to credentials config files
+2026-09-08T22:04:14.6575860Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-08T22:04:14.6601436Z includeif.gitdir:/home/runner/work/squares/squares/.git.path
+2026-09-08T22:04:14.6602374Z includeif.gitdir:/home/runner/work/squares/squares/.git/worktrees/*.path
+2026-09-08T22:04:14.6602924Z includeif.gitdir:/github/workspace/.git.path
+2026-09-08T22:04:14.6603375Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-09-08T22:04:14.6611523Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/squares/squares/.git.path
+2026-09-08T22:04:14.6632884Z /home/runner/work/_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config
+2026-09-08T22:04:14.6643269Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/squares/squares/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-351c4e53\-7eb6\-4e12\-b666\-dc28ee698908\.config
+2026-09-08T22:04:14.6675825Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/squares/squares/.git/worktrees/*.path
+2026-09-08T22:04:14.6696878Z /home/runner/work/_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config
+2026-09-08T22:04:14.6708927Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/squares/squares/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-351c4e53\-7eb6\-4e12\-b666\-dc28ee698908\.config
+2026-09-08T22:04:14.6746279Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-09-08T22:04:14.6767833Z /github/runner_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config
+2026-09-08T22:04:14.6776563Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-351c4e53\-7eb6\-4e12\-b666\-dc28ee698908\.config
+2026-09-08T22:04:14.6805978Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-09-08T22:04:14.6825893Z /github/runner_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config
+2026-09-08T22:04:14.6834221Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-351c4e53\-7eb6\-4e12\-b666\-dc28ee698908\.config
+2026-09-08T22:04:14.6863627Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-08T22:04:14.7076370Z Entering 'vendor/kpress'
+2026-09-08T22:04:14.7096100Z file:/home/runner/work/squares/squares/.git/modules/vendor/kpress/config	remote.origin.url
+2026-09-08T22:04:14.7127667Z [command]/usr/bin/git config --file /home/runner/work/squares/squares/.git/modules/vendor/kpress/config --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-08T22:04:14.7149964Z includeif.gitdir:/home/runner/work/squares/squares/.git/modules/vendor/kpress.path
+2026-09-08T22:04:14.7151060Z includeif.gitdir:/github/workspace/.git/modules/vendor/kpress.path
+2026-09-08T22:04:14.7157743Z [command]/usr/bin/git config --file /home/runner/work/squares/squares/.git/modules/vendor/kpress/config --get-all includeif.gitdir:/home/runner/work/squares/squares/.git/modules/vendor/kpress.path
+2026-09-08T22:04:14.7177275Z /home/runner/work/_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config
+2026-09-08T22:04:14.7184944Z [command]/usr/bin/git config --file /home/runner/work/squares/squares/.git/modules/vendor/kpress/config --unset includeif.gitdir:/home/runner/work/squares/squares/.git/modules/vendor/kpress.path \/home\/runner\/work\/_temp\/git\-credentials\-351c4e53\-7eb6\-4e12\-b666\-dc28ee698908\.config
+2026-09-08T22:04:14.7216246Z [command]/usr/bin/git config --file /home/runner/work/squares/squares/.git/modules/vendor/kpress/config --get-all includeif.gitdir:/github/workspace/.git/modules/vendor/kpress.path
+2026-09-08T22:04:14.7236237Z /github/runner_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config
+2026-09-08T22:04:14.7245486Z [command]/usr/bin/git config --file /home/runner/work/squares/squares/.git/modules/vendor/kpress/config --unset includeif.gitdir:/github/workspace/.git/modules/vendor/kpress.path \/github\/runner_temp\/git\-credentials\-351c4e53\-7eb6\-4e12\-b666\-dc28ee698908\.config
+2026-09-08T22:04:14.7273509Z Removing credentials config '/home/runner/work/_temp/git-credentials-351c4e53-7eb6-4e12-b666-dc28ee698908.config'
+2026-09-08T22:04:14.7417282Z Cleaning up orphan processes
+2026-09-08T22:04:14.7801628Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

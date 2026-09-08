@@ -1,0 +1,310 @@
+{
+  "held_loads": 650,
+  "sliders": 4,
+  "early_targets": [
+    {
+      "id": "kslider-19-5",
+      "value": "1"
+    },
+    {
+      "id": "kslider-381-100",
+      "value": "2"
+    },
+    {
+      "id": "phi-19-5",
+      "value": "3"
+    },
+    {
+      "id": "phi-381-100",
+      "value": "4"
+    }
+  ],
+  "frames": 22,
+  "first_paint": {
+    "at": 2765,
+    "faces": [
+      {
+        "family": "PT Serif",
+        "style": "normal",
+        "weight": "400",
+        "unicodeRange": "U+0-ff, U+131, U+152-153, U+2bb-2bc, U+2c6, U+2da, U+2dc, U+304, U+308, U+329, U+2000-206f, U+20ac, U+2122, U+2191, U+2193, U+2212, U+2215, U+feff, U+fffd",
+        "status": "loaded"
+      },
+      {
+        "family": "PT Serif",
+        "style": "normal",
+        "weight": "700",
+        "unicodeRange": "U+0-ff, U+131, U+152-153, U+2bb-2bc, U+2c6, U+2da, U+2dc, U+304, U+308, U+329, U+2000-206f, U+20ac, U+2122, U+2191, U+2193, U+2212, U+2215, U+feff, U+fffd",
+        "status": "loaded"
+      },
+      {
+        "family": "PT Serif",
+        "style": "italic",
+        "weight": "400",
+        "unicodeRange": "U+0-ff, U+131, U+152-153, U+2bb-2bc, U+2c6, U+2da, U+2dc, U+304, U+308, U+329, U+2000-206f, U+20ac, U+2122, U+2191, U+2193, U+2212, U+2215, U+feff, U+fffd",
+        "status": "loaded"
+      },
+      {
+        "family": "PT Serif",
+        "style": "italic",
+        "weight": "700",
+        "unicodeRange": "U+0-ff, U+131, U+152-153, U+2bb-2bc, U+2c6, U+2da, U+2dc, U+304, U+308, U+329, U+2000-206f, U+20ac, U+2122, U+2191, U+2193, U+2212, U+2215, U+feff, U+fffd",
+        "status": "loaded"
+      },
+      {
+        "family": "KPress Quotes",
+        "style": "normal",
+        "weight": "normal",
+        "unicodeRange": "U+22, U+27, U+2018, U+2019, U+201c, U+201d",
+        "status": "loaded"
+      },
+      {
+        "family": "\"Source Sans 3 Variable\"",
+        "style": "normal",
+        "weight": "200 900",
+        "unicodeRange": "U+0-ff, U+131, U+152-153, U+2bb-2bc, U+2c6, U+2da, U+2dc, U+304, U+308, U+329, U+2000-206f, U+20ac, U+2122, U+2191, U+2193, U+2212, U+2215, U+feff, U+fffd",
+        "status": "loaded"
+      },
+      {
+        "family": "\"Source Sans 3 Variable\"",
+        "style": "italic",
+        "weight": "200 900",
+        "unicodeRange": "U+0-ff, U+131, U+152-153, U+2bb-2bc, U+2c6, U+2da, U+2dc, U+304, U+308, U+329, U+2000-206f, U+20ac, U+2122, U+2191, U+2193, U+2212, U+2215, U+feff, U+fffd",
+        "status": "loaded"
+      },
+      {
+        "family": "Planetaire Mono Text",
+        "style": "normal",
+        "weight": "400",
+        "unicodeRange": "U+0-ff, U+131, U+152-153, U+2bb-2bc, U+2c6, U+2da, U+2dc, U+304, U+308, U+329, U+2000-206f, U+20ac, U+2122, U+2191, U+2193, U+2212, U+2215, U+feff, U+fffd",
+        "status": "loaded"
+      },
+      {
+        "family": "Planetaire Mono Text",
+        "style": "normal",
+        "weight": "700",
+        "unicodeRange": "U+0-ff, U+131, U+152-153, U+2bb-2bc, U+2c6, U+2da, U+2dc, U+304, U+308, U+329, U+2000-206f, U+20ac, U+2122, U+2191, U+2193, U+2212, U+2215, U+feff, U+fffd",
+        "status": "loaded"
+      },
+      {
+        "family": "Planetaire Mono Text",
+        "style": "italic",
+        "weight": "400",
+        "unicodeRange": "U+0-ff, U+131, U+152-153, U+2bb-2bc, U+2c6, U+2da, U+2dc, U+304, U+308, U+329, U+2000-206f, U+20ac, U+2122, U+2191, U+2193, U+2212, U+2215, U+feff, U+fffd",
+        "status": "loaded"
+      },
+      {
+        "family": "Planetaire Mono Text",
+        "style": "italic",
+        "weight": "700",
+        "unicodeRange": "U+0-ff, U+131, U+152-153, U+2bb-2bc, U+2c6, U+2da, U+2dc, U+304, U+308, U+329, U+2000-206f, U+20ac, U+2122, U+2191, U+2193, U+2212, U+2215, U+feff, U+fffd",
+        "status": "loaded"
+      },
+      {
+        "family": "KaTeX_AMS",
+        "style": "normal",
+        "weight": "400",
+        "unicodeRange": "U+0-10FFFF",
+        "status": "loaded"
+      },
+      {
+        "family": "KaTeX_Caligraphic",
+        "style": "normal",
+        "weight": "400",
+        "unicodeRange": "U+0-10FFFF",
+        "status": "loaded"
+      },
+      {
+        "family": "KaTeX_Main",
+        "style": "normal",
+        "weight": "700",
+        "unicodeRange": "U+0-10FFFF",
+        "status": "loaded"
+      },
+      {
+        "family": "KaTeX_Main",
+        "style": "italic",
+        "weight": "400",
+        "unicodeRange": "U+0-10FFFF",
+        "status": "loaded"
+      },
+      {
+        "family": "KaTeX_Main",
+        "style": "normal",
+        "weight": "400",
+        "unicodeRange": "U+0-10FFFF",
+        "status": "loaded"
+      },
+      {
+        "family": "KaTeX_Math",
+        "style": "italic",
+        "weight": "400",
+        "unicodeRange": "U+0-10FFFF",
+        "status": "loaded"
+      },
+      {
+        "family": "KaTeX_Size1",
+        "style": "normal",
+        "weight": "400",
+        "unicodeRange": "U+0-10FFFF",
+        "status": "loaded"
+      },
+      {
+        "family": "KaTeX_Size2",
+        "style": "normal",
+        "weight": "400",
+        "unicodeRange": "U+0-10FFFF",
+        "status": "loaded"
+      },
+      {
+        "family": "KaTeX_Size3",
+        "style": "normal",
+        "weight": "400",
+        "unicodeRange": "U+0-10FFFF",
+        "status": "loaded"
+      },
+      {
+        "family": "KaTeX_Size4",
+        "style": "normal",
+        "weight": "400",
+        "unicodeRange": "U+0-10FFFF",
+        "status": "loaded"
+      },
+      {
+        "family": "KPress Math Text",
+        "style": "normal",
+        "weight": "400",
+        "unicodeRange": "U+30-39, U+41-5a, U+61-7a",
+        "status": "loaded"
+      },
+      {
+        "family": "KPress Math Text",
+        "style": "normal",
+        "weight": "400",
+        "unicodeRange": "U+391-3a9",
+        "status": "loaded"
+      },
+      {
+        "family": "KPress Math Text",
+        "style": "italic",
+        "weight": "400",
+        "unicodeRange": "U+41-5a, U+61-7a",
+        "status": "loaded"
+      },
+      {
+        "family": "KPress Math Text",
+        "style": "italic",
+        "weight": "400",
+        "unicodeRange": "U+370-3ff",
+        "status": "loaded"
+      },
+      {
+        "family": "KPress Math Text",
+        "style": "normal",
+        "weight": "700",
+        "unicodeRange": "U+30-39, U+41-5a, U+61-7a",
+        "status": "loaded"
+      },
+      {
+        "family": "KPress Math Text",
+        "style": "normal",
+        "weight": "700",
+        "unicodeRange": "U+391-3a9",
+        "status": "loaded"
+      },
+      {
+        "family": "KPress Math Text Sans",
+        "style": "normal",
+        "weight": "400",
+        "unicodeRange": "U+30-39, U+41-5a, U+61-7a",
+        "status": "loaded"
+      },
+      {
+        "family": "KPress Math Text Sans",
+        "style": "normal",
+        "weight": "400",
+        "unicodeRange": "U+391-3a9",
+        "status": "loaded"
+      },
+      {
+        "family": "KPress Math Text Sans",
+        "style": "italic",
+        "weight": "400",
+        "unicodeRange": "U+41-5a, U+61-7a",
+        "status": "loaded"
+      },
+      {
+        "family": "KPress Math Text Sans",
+        "style": "italic",
+        "weight": "400",
+        "unicodeRange": "U+370-3ff",
+        "status": "loaded"
+      },
+      {
+        "family": "KPress Math Text Sans",
+        "style": "normal",
+        "weight": "650",
+        "unicodeRange": "U+30-39, U+41-5a, U+61-7a",
+        "status": "loaded"
+      },
+      {
+        "family": "KPress Math Text Sans",
+        "style": "normal",
+        "weight": "650",
+        "unicodeRange": "U+391-3a9",
+        "status": "loaded"
+      },
+      {
+        "family": "\"Source Sans 3 Variable\"",
+        "style": "normal",
+        "weight": "200 900",
+        "unicodeRange": "U+2192, U+2248, U+2265",
+        "status": "loaded"
+      }
+    ]
+  },
+  "early_math": null,
+  "fallback": null,
+  "readouts": [
+    "kslider-19-5: k = 1",
+    "kslider-381-100: k = 2",
+    "phi-19-5: 0.300^{\\circ}",
+    "phi-381-100: 0.400^{\\circ}"
+  ],
+  "no_javascript": {
+    "raw_tex": 5,
+    "native_math": 124
+  },
+  "findings": []
+}
+Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Post job cleanup.
+Cache hit occurred on the primary key playwright-Linux-webkit-47c7c657a4318ef78cf526f9b81f9615c32d557ed7c8c11fd50dfeb0693dfe2b, not saving cache.
+(node:4973) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Post job cleanup.
+UV_CACHE_DIR is already set to /home/runner/work/_temp/setup-uv-cache
+UV_PYTHON_INSTALL_DIR is already set to /home/runner/work/_temp/uv-python-dir
+Cache hit occurred on key setup-uv-2-x86_64-unknown-linux-gnu-ubuntu-24.04-3.14.7-47c7c657a4318ef78cf526f9b81f9615c32d557ed7c8c11fd50dfeb0693dfe2b, not saving cache.
+Post job cleanup.
+[command]/usr/bin/git version
+git version 2.55.0
+Temporarily overriding HOME='/home/runner/work/_temp/77ba7c78-522b-4419-a8de-fd85d7e88208' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+[command]/usr/bin/git config --global --add safe.directory /home/runner/work/squares/squares
+Removing SSH command configuration
+[command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+[command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Entering 'vendor/kpress'
+Removing HTTP extra header
+[command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+[command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Entering 'vendor/kpress'
+Removing includeIf entries pointing to credentials config files
+[command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+[command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Entering 'vendor/kpress'
+file:/home/runner/work/squares/squares/.git/modules/vendor/kpress/config	remote.origin.url
+[command]/usr/bin/git config --file /home/runner/work/squares/squares/.git/modules/vendor/kpress/config --name-only --get-regexp ^includeIf\.gitdir:
+Cleaning up orphan processes
+##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
