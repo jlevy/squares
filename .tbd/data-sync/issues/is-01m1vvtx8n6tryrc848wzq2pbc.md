@@ -1,0 +1,41 @@
+---
+type: is
+id: is-01m1vvtx8n6tryrc848wzq2pbc
+title: Screen composition and support-signature lemmas before a global proof tree
+kind: task
+status: in_progress
+priority: 1
+version: 21
+spec_path: packing/campaign/hypotheses/H-102-complete-restricted-angle-support-families.md
+delegate: codex
+labels: []
+dependencies: []
+parent_id: is-01m1sp7knp5r8860yf00zhyexx
+child_order_hints:
+  - is-01m1w49ezc3tma47d6e18y1cz1
+  - is-01m1w5dqt980zbgy01570w2sy8
+  - is-01m1w5srkayg0xp773206hgkb6
+  - is-01m1w6sb6azaqv45zc6dk3s4sp
+  - is-01m1w8bcqshqb53x2qdm7p276t
+  - is-01m1w8bd32vy2w1ynnfb4w34qt
+  - is-01m1w96xs3yavs6n8p07qf23z6
+  - is-01m1wcagmzxasdfc9ktea7gez2
+  - is-01m1wdb4fgc305fn9rkevfqyte
+  - is-01m1x0aka5e5kxs9f1t5kd2cs1
+  - is-01m1x66602fas1rk1zsr4jr8ka
+  - is-01m1x8eeajx7qv34rk52553brb
+  - is-01m1x8eekc5mfnnmxv7vpgpvqj
+  - is-01m1x9mgv1eavdk52m13pwje4q
+  - is-01m1xb3d5gzkqgh21xc4qje9n1
+  - is-01m1xbtvc1kw14ftzw52qfrxk9
+hold: null
+hold_until: null
+created_at: 2026-09-06T17:21:40.116Z
+updated_at: 2026-09-07T07:50:49.042Z
+started_at: 2026-09-06T19:12:02.177Z
+---
+BC-255 assesses H-036 first at its unchanged 0.25-degree angle regime and3.878 threshold; H-102 retains other unselected complete angle/support families. State complete cases, a feasible control and one LP/Farkas or interval proof obligation. H-103 covers global followups. Only mass-derived heavy-atom/near-tight deductions need a valid covering measure M>=11; geometric conflicts, interval no-goods and independent restricted lemmas do not inherently need density or full typed-producer completion.
+
+## Notes
+
+Session091 accepts H110 exact P12 escape and H123 complete near45 localization; H122 fixed-diamond cover is refuted. No H036 or global bound change. Session093 now selects think-7e72 full distinguished-square compatibility with independent source-free authors; no completed target reruns. External BC261/BC273 remain separately owned.

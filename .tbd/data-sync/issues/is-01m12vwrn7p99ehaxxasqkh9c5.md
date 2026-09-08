@@ -3,14 +3,19 @@ type: is
 id: is-01m12vwrn7p99ehaxxasqkh9c5
 title: check_source_coverage never reparses Kingbird exact forms, so transcription misses are invisible
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 2
+version: 4
+spec_path: docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
 labels: []
 dependencies: []
 parent_id: is-01m12zjr144a4kg6rnv1t0pm6n
 created_at: 2026-08-28T00:21:40.120Z
-updated_at: 2026-08-28T01:26:19.010Z
+updated_at: 2026-09-07T08:17:00.421Z
+closed_at: 2026-09-07T08:17:00.421Z
+close_reason: Reparser landed in sqpack.kingbird_catalogue; check_source_coverage reconciles exact forms, degrees, polynomials and rigidity annotations for n = 1..100 with zero divergences (206 facts). Commit on claude/atlas-expansion-300-400-9f79fc.
+resolution: null
+duplicate_of: null
 ---
 exact_form, algebraic_degree and minimal_polynomial in frontier/n-NNN.md are hand-transcribed from resources/web/kingbird-squares-in-squares.html and never machine-reconciled against it. devtools/check_source_coverage.py:41-46 extracts only the decimal and the integer side form, so nothing can detect a missed radical.
 

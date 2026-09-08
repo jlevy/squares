@@ -1,18 +1,33 @@
 ---
 type: is
 id: is-01m1spa46asfcsh4d2tbd951xy
-title: Run the full-size weak-dual kill pilot
+title: Run the exact full-size a.e.-depth dual kill pilot
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 2
+version: 15
 labels:
   - research
 dependencies:
   - type: blocks
     target: is-01m1spa4h4x0mdyfza324b3zsa
 parent_id: is-01m1sp7knp5r8860yf00zhyexx
+child_order_hints:
+  - is-01m1wdb45178x19t207kan88xb
+  - is-01m1xed1gp45f85veyg0std6ya
+  - is-01m1xema5kmpbqbskfbx6zp30g
+  - is-01m1xetfkkpxmqyj0063g7rkh9
+  - is-01m1xffczm0aqb3e8yvqf1p50x
+  - is-01m1xffd8w5qsyw08g2356fd17
+  - is-01m1xggjgf5wq887zr11bds67c
+  - is-01m1xggjtgyy6jyz821w27m3rt
+  - is-01m1xgxk6dqnanqbjf6k35m4s4
+  - is-01m1xhz4khgy60x8j5gt1vc1hy
 created_at: 2026-09-05T21:06:38.409Z
-updated_at: 2026-09-05T21:07:02.780Z
+updated_at: 2026-09-07T11:07:09.284Z
 ---
-BC-243: seek a rigorously feasible fractional packing above 11 at Trump's side; success kills the equality-density route and failure proves nothing.
+BC-243: after BC-242 passes review and BC-220 opens the block, build the exact almost-everywhere depth arrangement verifier, recover the Trump D=11 control, run containment/overlap/overweight mutations, and report only the one-sided bound [D,infinity). Any sound D>11 kills the mass-eleven equality-density route. This cell does not wait for or build a continuum primal guard.
+
+## Notes
+
+Session090 completed think-ejwh controls: exact facet/slab instruments and original source pass, but uniform source times out on original, reciprocal-cache and sign-incidence algorithms at unchanged60s caps. H099 target candidate never opened. Pilot remains unresolved/source-blocked; no next density run selected. Require a justified changed algorithm plus repriced source controls, not a cap increase or unchanged retry.
