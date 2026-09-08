@@ -110,12 +110,26 @@ def cites(case: dict) -> bool:
     return False
 
 
-def register_counts(found: dict[int, dict]) -> tuple[int, int]:
+#: The register prose in this docstring, `results.yaml` and `evidence.yaml` was written
+#: about "the hundred" case records and says so in its own words, so those sentences are
+#: checked against `n <= HUNDRED` even once the corpus runs past it.
+HUNDRED = 100
+
+
+def within(found: dict[int, dict], upto: int | None) -> dict[int, dict]:
+    """The case records at or below `upto`, or all of them."""
+    if upto is None:
+        return found
+    return {n: case for n, case in found.items() if n <= upto}
+
+
+def register_counts(found: dict[int, dict], *, upto: int | None = None) -> tuple[int, int]:
     """Case records citing the record, and those where it is the operative bound."""
-    cited = sum(cites(case) for case in found.values())
+    scoped = within(found, upto)
+    cited = sum(cites(case) for case in scoped.values())
     operative = sum(
         RECORD in ((case.get("verified_lower_bound") or {}).get("evidence") or [])
-        for case in found.values()
+        for case in scoped.values()
     )
     return cited, operative
 
@@ -128,7 +142,10 @@ def register_prose_counts(found: dict[int, dict]) -> list[str]:
     different ways. The two primary shapes must also be present: a count that is deleted
     rather than corrected is a count nothing checks.
     """
-    cited, operative = register_counts(found)
+    # Every one of these sentences was written about the hundred-case register and says
+    # so ("of the hundred", "of them", "the other"), so all four are held to n <= 100
+    # however far the corpus now runs; the corpus-wide count is printed by main().
+    cited, operative = register_counts(found, upto=HUNDRED)
     forms = (
         (_CITED_COUNT, cited, "case records citing the record", True),
         (_OPERATIVE_COUNT, operative, "operative verified lower bounds", True),
@@ -158,12 +175,20 @@ def register_prose_counts(found: dict[int, dict]) -> list[str]:
 
 def prose_counts(found: dict[int, dict]) -> list[str]:
     """Every sentence that quotes the count must quote the corpus, not a memory of it."""
-    open_cases = [case for case in found.values() if case.get("status") == "open"]
-    nagamochi_open = sum(
-        RECORD in ((case.get("verified_lower_bound") or {}).get("evidence") or [])
-        for case in open_cases
-    )
-    corpus = (nagamochi_open, len(open_cases))
+
+    def open_counts(upto: int | None) -> tuple[int, int]:
+        open_cases = [
+            case for case in within(found, upto).values() if case.get("status") == "open"
+        ]
+        nagamochi_open = sum(
+            RECORD in ((case.get("verified_lower_bound") or {}).get("evidence") or [])
+            for case in open_cases
+        )
+        return nagamochi_open, len(open_cases)
+
+    corpus = open_counts(None)
+    # The body sentence names its own scope, `n <= 100`, so it is held to that count.
+    hundred = open_counts(HUNDRED)
     problems: list[str] = []
     match = _README_COUNT.search(README.read_text(encoding="utf-8"))
     if match is None:
@@ -177,10 +202,10 @@ def prose_counts(found: dict[int, dict]) -> list[str]:
         )
     for path in sorted(FRONTIER.glob("n-*.md")):
         problems.extend(
-            f"{path.name} says {match.group(1)} of {match.group(2)} open cases; "
-            f"the case records say {corpus[0]} of {corpus[1]}"
+            f"{path.name} says {match.group(1)} of {match.group(2)} open cases at n <= 100; "
+            f"the case records say {hundred[0]} of {hundred[1]}"
             for match in _BODY_COUNT.finditer(path.read_text(encoding="utf-8"))
-            if (int(match.group(1)), int(match.group(2))) != corpus
+            if (int(match.group(1)), int(match.group(2))) != hundred
         )
     problems.extend(register_prose_counts(found))
     return problems

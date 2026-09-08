@@ -28,6 +28,7 @@ from sqpack.chunks import (
     contact_component_census,
     minimal_lattice_partition,
 )
+from sqpack.known_best import CALIBRATION_CORPUS, calibration_entries
 from sqpack.witness import load_witness
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -52,15 +53,20 @@ CONTACT_SWEEPS: tuple[tuple[str, float, float], ...] = (
 
 
 @cache
-def atlas_entries() -> tuple[dict[str, Any], ...]:
-    """The atlas manifest entries, read once per process.
+def atlas_entries(manifest: Path = MANIFEST) -> tuple[dict[str, Any], ...]:
+    """The manifest's calibration entries, read once per process.
 
     Only the entries, no longer the witnesses they name. Each witness is now loaded by
     whichever process censuses it, which is both what keeps mpmath objects out of the
     pool protocol and what parallelizes the schema-validated load along with the work.
+
+    Filtered to `CALIBRATION_CORPUS` rather than taken whole. This census is a
+    calibration instrument designed against the corpus it reads, so it stays at
+    `n = 1..100` while the manifest widens around it -- `D4`. Reading the manifest is
+    still how it finds the witnesses; the manifest's extent is not its scope.
     """
-    atlas = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]
-    return tuple(atlas["entries"])
+    atlas = json.loads(manifest.read_text(encoding="utf-8"))["atlas"]
+    return calibration_entries(atlas["entries"])
 
 
 def _census_entry(entry: dict[str, Any]) -> dict[str, Any]:
@@ -246,7 +252,10 @@ def expected_document(workers: int | None = None) -> dict:
     return {
         "contract": "packing.squares:ChunkComponentCensus/v1",
         "generated_by": GENERATOR,
-        "corpus": "atlas/known-best/manifest.json; descriptive n=1..100 calibration corpus",
+        "corpus": (
+            f"atlas/known-best/manifest.json; descriptive {CALIBRATION_CORPUS.label} "
+            "calibration corpus"
+        ),
         "claim_status": "exploratory-no-verdict",
         "detector": {
             "angle_classes": (
@@ -358,7 +367,10 @@ def expected_partition_document(workers: int | None = None) -> dict:
         },
         "atlas": {
             "generated_by": GENERATOR,
-            "corpus": "atlas/known-best/manifest.json; inspected n=1..100 calibration corpus",
+            "corpus": (
+                f"atlas/known-best/manifest.json; inspected {CALIBRATION_CORPUS.label} "
+                "calibration corpus"
+            ),
             "claim_status": "calibration-no-verdict",
             "partition_contract": {
                 "candidate_universe": (
@@ -403,7 +415,7 @@ def update(workers: int | None = None) -> None:
         temporary.write_text(partition_text, encoding="utf-8")
     print(
         "chunk census updated: components, contacts, and bounded lattice partitions "
-        "for 100 records"
+        f"for {CALIBRATION_CORPUS.count} records"
     )
 
 
@@ -419,7 +431,7 @@ def check(workers: int | None = None) -> None:
         raise ValueError("atlas/known-best/chunk-partitions.json is missing or stale")
     print(
         "chunk census check passed: components, contacts, and bounded lattice partitions "
-        "for 100 records"
+        f"for {CALIBRATION_CORPUS.count} records"
     )
 
 

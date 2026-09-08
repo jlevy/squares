@@ -111,11 +111,13 @@ The proof presented here is of this kind.
   <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.svg" alt="{{COMPOSITE_ALT}}" width="2400" height="2896"></a></div>
   <figcaption><strong>Figure 1.</strong> The best known packings of 1 through 100 unit squares. Each cell is the tightest
   arrangement on record for that <span class="tex">n</span>, with the best known upper bound beneath it and, where
-  <span class="tex">s(n)</span> is not yet settled, the best proved lower bound below that. A crimson star marks a lower
+  <span class="tex">s(n)</span> is not yet settled, the strongest lower bound independently verified here below that. A crimson star marks a lower
   bound this project proved: {{N_STARRED}} of the hundred, this page’s own among them. The full
   results, with every witness and its provenance, are in
   <a href="{{ATLAS_URL}}">the GitHub repository</a>, and the
-  composite is <a href="known-best-1-100.pdf">available as a PDF</a>.</figcaption>
+  composite is <a href="known-best-1-100.pdf">available as a PDF</a>. A poster of all 324 best
+  known packings, through the end of the catalogue’s audited range, is
+  <a href="known-best-1-324.pdf">available as a PDF</a> as well.</figcaption>
 </figure>
 
 ## Packing 11 Squares

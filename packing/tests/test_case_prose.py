@@ -469,6 +469,133 @@ def test_a_verified_bound_named_in_words_is_held_to_the_field(tmp_path: Path) ->
     assert "upper" in findings[0].detail
 
 
+@pytest.mark.parametrize(
+    ("n", "chain"),
+    [
+        (20, "s(20) ≥ "),
+        (21, "s(21) >= "),
+        (20, "s(20) ≥ s(19) ≥ "),
+        (21, "s(21) >= s(20) >= s(19) >= "),
+    ],
+)
+def test_named_verified_inequalities_keep_the_exact_fraction(
+    tmp_path: Path, n: int, chain: str
+) -> None:
+    bounds: _Bounds = {
+        "verified_lower_bound": ("4.85", "97/20"),
+        "reported_lower_bound": ("4.8", "24/5"),
+    }
+    prefix = "The verified lower\nbound is\n`"
+    stale = make_case(
+        tmp_path,
+        "stale.md",
+        n,
+        bounds,
+        f"# case\n\n{prefix}{chain}24/5 = 4.8`, as it was before.\n",
+    )
+    findings = check_case_file(stale)
+    assert len(findings) == 1
+    assert findings[0].check == "bound-figure"
+    assert "24/5 = 4.8" in findings[0].detail
+    assert "exact_form is 97/20" in findings[0].detail
+    assert (
+        findings[0].line
+        == stale.read_text().splitlines().index(f"`{chain}24/5 = 4.8`, as it was before.") + 1
+    )
+    # A matching reported rung or a historical word cannot rescue a sentence
+    # explicitly naming the current verified field, and --fix cannot repair it.
+    before = stale.read_text()
+    assert rewrite_directionally_safe_figures(stale) == 0
+    assert stale.read_text() == before
+    for index, exact in enumerate(("97/20", "485/100")):
+        current = make_case(
+            tmp_path,
+            f"current-{index}.md",
+            n,
+            bounds,
+            f"# case\n\n{prefix}{chain}{exact} = 4.85`, from the current certificate.\n",
+        )
+        assert check_case_file(current) == []
+
+
+def test_generic_bare_and_historical_inequalities_keep_their_existing_scope(
+    tmp_path: Path,
+) -> None:
+    bounds: _Bounds = {
+        "verified_lower_bound": ("4.85", "97/20"),
+        "reported_lower_bound": None,
+    }
+    for index, sentence in enumerate(
+        (
+            "A consequence is `s(20) ≥ 24/5 = 4.8`.",
+            "Previously the bound was `s(20) ≥ 9/2 = 4.5`.",
+            "The verified lower bound is `s(19) ≥ 24/5 = 4.8`.",
+        )
+    ):
+        case = make_case(tmp_path, f"generic-{index}.md", 20, bounds, sentence)
+        assert check_case_file(case) == []
+
+
+@pytest.mark.parametrize("kind", ["lower", "upper"])
+def test_strongest_independently_verified_wording_names_only_the_verified_field(
+    tmp_path: Path, kind: str
+) -> None:
+    bounds: _Bounds = {
+        f"verified_{kind}_bound": ("4.85", "97/20"),
+        f"reported_{kind}_bound": ("4.80", "24/5"),
+    }
+    prefix = f"The strongest {kind} bound independently\nverified here is "
+    stale = make_case(
+        tmp_path,
+        "strongest-stale.md",
+        20,
+        bounds,
+        f"Previously, {prefix}`4.80`, from a superseded report.\n",
+    )
+    findings = check_case_file(stale)
+    assert len(findings) == 1
+    assert findings[0].check == "bound-figure"
+    assert f"verified_{kind}_bound" in findings[0].detail
+    assert "4.80" in findings[0].detail
+    assert rewrite_directionally_safe_figures(stale) == 0
+    current = make_case(
+        tmp_path,
+        "strongest-current.md",
+        20,
+        bounds,
+        f"{prefix}`4.85`, from the current certificate.\n",
+    )
+    assert check_case_file(current) == []
+    safe, unsafe = ("4", "5") if kind == "lower" else ("5", "4")
+    for value, expected in ((safe, 0), (unsafe, 1)):
+        rounded = make_case(
+            tmp_path,
+            f"strongest-rounded-{value}.md",
+            20,
+            bounds,
+            f"{prefix}`{value}`, from the current certificate.\n",
+        )
+        assert len(check_case_file(rounded)) == expected
+
+
+def test_strongest_verified_rounding_fix_preserves_the_named_field(tmp_path: Path) -> None:
+    bounds: _Bounds = {
+        "verified_lower_bound": ("4.85", "97/20"),
+        "reported_lower_bound": ("4.9", "49/10"),
+    }
+    case = make_case(
+        tmp_path,
+        "strongest-rounding.md",
+        20,
+        bounds,
+        "The strongest lower bound independently verified here is `4.9`.\n",
+    )
+    assert len(check_case_file(case)) == 1
+    assert rewrite_directionally_safe_figures(case) == 1
+    assert "is `4.8`" in case.read_text()
+    assert check_case_file(case) == []
+
+
 def test_decimal_bound_rendering_is_directionally_safe(tmp_path: Path) -> None:
     """A quoted bound may be rounded only away from the value it comes from.
 

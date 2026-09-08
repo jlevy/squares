@@ -36,6 +36,9 @@ name: Certificate page
       - packing/atlas/known-best/known-best-1-100.png
       - packing/atlas/known-best/known-best-1-100.pdf
       - packing/atlas/known-best/known-best-1-100-card.png
+      - packing/atlas/known-best/known-best-1-324.svg
+      - packing/atlas/known-best/known-best-1-324.png
+      - packing/atlas/known-best/known-best-1-324.pdf
       - vendor/kpress
       - packing/pyproject.toml
       - packing/uv.lock
@@ -61,6 +64,9 @@ name: Certificate page
       - packing/atlas/known-best/known-best-1-100.png
       - packing/atlas/known-best/known-best-1-100.pdf
       - packing/atlas/known-best/known-best-1-100-card.png
+      - packing/atlas/known-best/known-best-1-324.svg
+      - packing/atlas/known-best/known-best-1-324.png
+      - packing/atlas/known-best/known-best-1-324.pdf
       - vendor/kpress
       - packing/pyproject.toml
       - packing/uv.lock

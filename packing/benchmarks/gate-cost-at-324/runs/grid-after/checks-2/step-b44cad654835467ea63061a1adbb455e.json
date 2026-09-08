@@ -1,0 +1,8 @@
+{
+  "name": "frontier rigidity assessed here",
+  "output": "frontier rigidity check passed: every block matches the derivationassessed: 18 locally-rigid, 296 not-rigid, 7 undetermined, 3 left to a stronger argument\n  locally-rigid     18\n  not-rigid        296\n  undetermined       7\n    n = [28, 68, 69, 103, 105, 110, 131]\n  left to a stronger argument: n = [5, 11, 40]\n  screen excluded: n = [68, 69, 103, 105, 110, 131]",
+  "reason": "",
+  "run_id": "ba937434e1454047a1ff994d02db5e3d",
+  "seconds": 1.041867584004649,
+  "status": "passed"
+}

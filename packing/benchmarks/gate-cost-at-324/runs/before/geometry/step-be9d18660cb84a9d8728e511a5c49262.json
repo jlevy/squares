@@ -1,0 +1,8 @@
+{
+  "name": "historical regressions",
+  "output": "  8 regression checks pass (D-002, D-015, D-016, D-019, D-029, D-036, D-132, D-164, D-168, D-169, D-171, D-199)",
+  "reason": "",
+  "run_id": "b8b45a0531da4b4fb4bb8efb578c627d",
+  "seconds": 18.56779875000211,
+  "status": "passed"
+}

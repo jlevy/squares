@@ -203,7 +203,9 @@ The broad ceiling is not adopted as a theorem.
 Retain the three dated source identities, original paper bytes and faithful extractions,
 the exact n17/n18 comparison, and the limits of the available verification.
 Link the n17 proposal as source-reported historical evidence.
-Keep the operative lower-bound fields at 4.59.
+Keep the independently verified lower-bound fields at 4.59. The broader source audit
+records the already indexed external report `9141/2000 = 4.5705` in the reported fields;
+MacIver’s proposed bound is below both values.
 
 The next useful adoption step, tracked as `think-sske`, is a bounded replay of the
 center-area, rectangle, and very-narrow-strip theorem entrypoints, followed by a

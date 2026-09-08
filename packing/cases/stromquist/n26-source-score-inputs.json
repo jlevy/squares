@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "minmax": {
+    "snapshot": "packing/resources/web/n26-best-known-2026-09-07/tilted-squares-in-square.json",
+    "url": "https://minmaxarena.com/data/tilted-squares-in-square.json",
+    "metric_documentation": "https://minmaxarena.com/en/problems/tilted-squares-in-square",
+    "retrieved_local_date": "2026-09-07",
+    "retrieval_timezone": "America/Los_Angeles"
+  },
+  "forloopcodes_cache": {
+    "n": 26,
+    "snapshot": "packing/resources/web/n26-best-known-2026-09-07/forloopcodes-best-packings-n26.extract.json",
+    "url": "https://raw.githubusercontent.com/forloopcodes/least-space-squares/6a5646dec9d89a5f750adcf488c769b60fe5ccf9/data/best_packings.json",
+    "source_key": "26",
+    "commit": "6a5646dec9d89a5f750adcf488c769b60fe5ccf9",
+    "commit_time_utc": "2026-09-03T04:25:56Z",
+    "retrieved_local_date": "2026-09-07",
+    "retrieval_timezone": "America/Los_Angeles"
+  },
+  "forloopcodes_readme_display": {
+    "n": 26,
+    "display": "5.621320343560",
+    "quantum": "0.000000000001",
+    "url": "https://github.com/forloopcodes/least-space-squares/blob/6a5646dec9d89a5f750adcf488c769b60fe5ccf9/README.md",
+    "commit": "6a5646dec9d89a5f750adcf488c769b60fe5ccf9",
+    "retrieved_local_date": "2026-09-07",
+    "retrieval_timezone": "America/Los_Angeles"
+  },
+  "deletion_source": {
+    "url": "https://kingbird.myphotos.cc/packing/squares_in_squares.html",
+    "checked_local_date": "2026-09-07",
+    "retrieval_timezone": "America/Los_Angeles",
+    "scope": "current catalogue side labels checked against the retained numerical witnesses; catalogue omits 30 and 31, hence declares the trivial side 6 best known under its introductory rule"
+  },
+  "deletion_parents": [
+    {"n": 27, "witness": "packing/witnesses/known-best/n-027.yaml"},
+    {"n": 28, "witness": "packing/witnesses/known-best/n-028.yaml"},
+    {"n": 29, "witness": "packing/witnesses/known-best/n-029.yaml"},
+    {"n": 30, "witness": "packing/witnesses/known-best/n-030.yaml"},
+    {"n": 31, "witness": "packing/witnesses/known-best/n-031.yaml"}
+  ]
+}

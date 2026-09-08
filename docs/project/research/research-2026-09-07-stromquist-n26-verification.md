@@ -9,6 +9,13 @@ Those two evidential statuses are now explicit in the
 [n26](../../../packing/frontier/n-026.md) and [n27](../../../packing/frontier/n-027.md)
 records.
 
+The subsequent [best-known source audit](research-2026-09-07-n26-best-known-audit.md)
+extends this comparison to the journal history, current catalogues, and recent public
+solver and proof projects.
+It finds no smaller n26 candidate in the checked sources.
+Its dated search coverage and exact normalization of recent scores support retaining
+Friedman’s value as best known; they do not establish optimality.
+
 **Owner:** `think-zi3g`. The
 [session record](../../../packing/campaign/agent-sessions/session-097-stromquist-n26-verification.md)
 retains delegation, validation, and the integration checkpoint.

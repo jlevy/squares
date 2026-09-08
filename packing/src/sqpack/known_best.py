@@ -5,7 +5,7 @@ from __future__ import annotations
 import html
 import json
 import re
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping, Sequence
 from copy import deepcopy
 from dataclasses import dataclass
 from fractions import Fraction
@@ -65,6 +65,386 @@ source exists, and unavailable where the only route is the source's own numbers.
 this does not settle, and what no rule here can, is whether the underlying licensing
 assessment is right -- that is a review decision, and this criterion assumes it rather
 than revisiting it.
+"""
+
+
+@dataclass(frozen=True)
+class CorpusRange:
+    """A closed range of case counts, named once so nothing re-spells ``1..100``.
+
+    The atlas builds a witness, a house rendering and a manifest entry for every case in
+    this range, and every count it states about the corpus is derived from it. Widening
+    the corpus is then one edit here rather than a search for literal hundreds.
+    """
+
+    first_n: int
+    last_n: int
+
+    def __post_init__(self) -> None:
+        if self.first_n < 1 or self.last_n < self.first_n:
+            raise ValueError("a corpus range must be nonempty and positive")
+
+    @property
+    def count(self) -> int:
+        """How many cases the range covers."""
+        return self.last_n - self.first_n + 1
+
+    @property
+    def numbers(self) -> range:
+        """Every case in the range, ascending."""
+        return range(self.first_n, self.last_n + 1)
+
+    @property
+    def square_count(self) -> int:
+        """Unit squares across the whole range, which is what a composite draws."""
+        return sum(self.numbers)
+
+    @property
+    def label(self) -> str:
+        """How the range is written wherever a message or a layout string names it."""
+        return f"n={self.first_n}..{self.last_n}"
+
+
+@dataclass(frozen=True)
+class CompositeSpec:
+    """One composite figure: the cases it draws, its grid width, and its filename stem.
+
+    Everything about a composite that is not a drawing decision follows from the four
+    fields below, so a second figure is a second specification rather than a second set
+    of constants; the fields after them are the drawing decisions a figure of another
+    size has to make -- which exports it publishes, and what it may leave out of a square
+    to stay inside a byte budget. Rows, the canvas, the legend and footer baselines and
+    the layout string are all computed; the ones that need the card metrics are computed
+    by ``CompositeCanvas`` in ``devtools/build_known_best_atlas.py``, which is where
+    those metrics live.
+    """
+
+    first_n: int
+    last_n: int
+    columns: int
+    stem: str
+    #: Drawing units kept from the top for the link-preview card, or None where the
+    #: composite publishes no card. Stated rather than derived: the crop is chosen
+    #: against a row boundary and an unfurler's aspect ratio, neither of which follows
+    #: from the range.
+    card_units: int | None = None
+    #: Whole-number scales of the full-canvas PNG exports. Whole on purpose, and the
+    #: reason is measured rather than aesthetic: a fractional scale puts every edge in
+    #: the drawing on a fractional pixel boundary, so the rasteriser invents an
+    #: antialiasing shade for each one and PNG loses the flat runs it compresses.
+    raster_scales: tuple[int, ...] = (1, 2)
+    #: Whether each square polygon carries the per-square `data-*` facts -- its hue and
+    #: shade indices, its contact count, its orientation and its angle class. They are
+    #: what makes one drawing inspectable without the record beside it, and they cost
+    #: about 153 bytes a square, which a figure of a few thousand squares can afford and
+    #: one of fifty thousand cannot. Dropped only where the byte budget says so, and the
+    #: drawing then records the omission in its own metadata rather than leaving a
+    #: reader to notice it.
+    square_data_attributes: bool = True
+    #: Whether the stroke every square polygon shares -- its colour, its width and its
+    #: linejoin -- is set once on the card's square group instead of on each polygon.
+    #: Identical on every one of them and 61 bytes each where it is repeated, so this is
+    #: the same fact stated once rather than a different drawing. It goes on a group
+    #: of its own rather than on the card, because a card also holds text, and text that
+    #: inherits a stroke is drawn outlined.
+    square_stroke_shared: bool = False
+    #: Decimal places every emitted square coordinate is rounded to, or None to emit at
+    #: the renderer's full `SVG_EMISSION_PRECISION`. Stated per composite and never read
+    #: from the ambient decimal context, which is the whole of `D-359`: a rounding this
+    #: figure applies is a property of the figure, recorded in its metadata and pinned
+    #: here, not something the process it was built in happened to be left in.
+    coordinate_decimals: int | None = None
+
+    def __post_init__(self) -> None:
+        # Constructing the range is what validates first_n and last_n.
+        if self.cases.count < 1 or self.columns < 1:
+            raise ValueError("a composite needs at least one case and one column")
+        if not self.stem:
+            raise ValueError("a composite needs a filename stem")
+        if self.card_units is not None and self.card_units < 1:
+            raise ValueError("a link-preview crop keeps a positive number of units")
+        if any(scale < 1 for scale in self.raster_scales):
+            raise ValueError("a raster scale is a whole multiple of the canvas")
+        if self.coordinate_decimals is not None and self.coordinate_decimals < 1:
+            raise ValueError("a coordinate rounding keeps at least one decimal place")
+
+    @property
+    def cases(self) -> CorpusRange:
+        """The closed range of cases this composite draws."""
+        return CorpusRange(self.first_n, self.last_n)
+
+    @property
+    def count(self) -> int:
+        return self.cases.count
+
+    @property
+    def numbers(self) -> range:
+        return self.cases.numbers
+
+    @property
+    def square_count(self) -> int:
+        return self.cases.square_count
+
+    @property
+    def rows(self) -> int:
+        """Rows the grid needs, the last one short where the count does not fill it."""
+        return -(-self.count // self.columns)
+
+    @property
+    def layout(self) -> str:
+        """The grid, columns first: ``10 by 10, row-major n=1..100``."""
+        return f"{self.columns} by {self.rows}, row-major {self.cases.label}"
+
+    @property
+    def svg_name(self) -> str:
+        return f"{self.stem}.svg"
+
+    @property
+    def pdf_name(self) -> str:
+        return f"{self.stem}.pdf"
+
+    @property
+    def card_png_name(self) -> str:
+        return f"{self.stem}-card.png"
+
+    def raster_name(self, scale: int) -> str:
+        """The PNG for one whole-number scale; 1x carries no suffix."""
+        return f"{self.stem}.png" if scale == 1 else f"{self.stem}@{scale}x.png"
+
+
+KNOWN_BEST_CORPUS = CorpusRange(first_n=1, last_n=324)
+"""The cases the known-best atlas normalizes, renders, and manifests.
+
+The honest constraint on widening it is the corpus rather than the drawing: a case needs
+a frontier record whose facts are sourced to the same standard as the first hundred
+before a card about it can be honest.
+"""
+
+ATLAS_SAMPLE_STRIDE = 9
+"""How the sampled atlas check chooses the cases it rebuilds: every ninth, from the first.
+
+A fixed stride rather than a count or a random draw, and both halves of that are about
+repeatability. A random sample makes a green pull request unrepeatable and a red one
+unattributable; a contiguous prefix would never reach the 224 cases the 2026-09-07
+widening added, which are exactly the ones with no history behind them.
+
+Nine is a measurement rather than a round number, and the thing it is measured against
+is the sweeps job's own floor. That job's wall is its longest unit's wall, and the unit
+that cannot be made cheaper is `known-best chunk census`, which `D4` pins at
+`CALIBRATION_CORPUS` so it will not grow with the corpus -- 90.38s on CI, 42.11s on the
+box these readings were taken on. At every ninth case the sampled step measured 58.48s
+beside it in the same run, so it does set the tier's wall, by about a third of the census
+rather than by a multiple of it, and the tier came in at 28 per cent of its ceiling. A
+denser sample would start spending that headroom on cases the deferred rebuild already
+covers; a sparser one would buy back a tier wall that is not the surface's floor
+anyway.
+"""
+
+SCREEN_SAMPLE_STRIDE = 27
+"""The same idea for the translation-escape screen, at a third of the density.
+
+Different because the cost is different, not because the two disagree about sampling. A
+screened record's work grows with the square of `n` -- every square against every square
+it might touch -- so the same 36 records cost 220.43s of cpu there against 86.81s here,
+and at the job's two inner workers that is 127.22s of wall against 47.01s. Twelve records
+measured 63.84s of cpu over 43.83s of wall, which leaves this step under the census that
+sets the tier's wall.
+
+What the thinner sample costs is worth naming: it is the only per-record re-derivation a
+pull request pays here, and the rest of `check_sample` compares the retained document
+against itself. Twelve records spread over the whole range is a tripwire for anything
+global -- a changed tolerance, a changed witness, a changed algorithm -- and it is not a
+substitute for `single-square translation escape screen`, which re-screens all 324 on the
+deferred surface.
+"""
+
+
+GRID_SAMPLE_STRIDE = 9
+"""The same idea again, for the exact rational grid replay in `check_basic_bounds`.
+
+Nine, like the atlas and unlike the screen, and it is set against the `checks` job rather
+than the sweeps one. `verify_grid` buckets its pair enumeration, so one case is about
+linear in its own `n` and the corpus total is quadratic in the last one: 2.75s at
+`n<=100`, 12.65s at `n<=200`, 34.81s at all 305, measured with the tool's own `--max-n`
+on 2026-09-07. Every ninth grid case is 4.15s of that, which took `exact verification`
+from 84.21s to 53.60s and the whole `checks` tier from 120.03s to 87.56s on the box
+`benchmarks/gate-cost-at-324/` names -- about 138s of the CI job that had just run
+189.09s against a 195s ceiling.
+
+A denser sample buys cases the deferred `exact rational grid replay` already covers, and
+it buys them on a tier this step no longer floors: at every ninth case `exact
+verification` is 55.1s against 62.3s of divided step time, so the queue sets the wall now
+and the next second saved here is not a second off the job. A sparser one would stop
+reaching the range's far end often enough to be a tripwire.
+
+The stride is over the grid cases themselves rather than over `KNOWN_BEST_CORPUS`,
+because which cases claim `E-basic-grid-upper` is a frontier fact that falls as
+constructions are found: 305 of 324 today, and a case that stops claiming it stops being
+this check's business. Striding the corpus range would thin the sample by however many
+non-grid cases it happened to land on.
+"""
+
+
+def sampled_numbers(
+    cases: CorpusRange = KNOWN_BEST_CORPUS, stride: int = ATLAS_SAMPLE_STRIDE
+) -> tuple[int, ...]:
+    """The cases a sampled check re-derives: every `stride`th, from the range's first.
+
+    Both strides live here rather than in either tool because two things have to agree on
+    each: the tool that samples, and `sqpack.cli.validate`, which matches the resulting
+    count in that tool's output. The gate may not import `devtools`, so a constant defined
+    in a tool would have had to be re-typed in the gate -- which is the shape of drift
+    this module already exists to prevent for `CorpusRange`.
+    """
+    return sampled_sequence(cases.numbers, stride)
+
+
+def sampled_sequence(numbers: Sequence[int], stride: int) -> tuple[int, ...]:
+    """Every `stride`th of an explicit list of cases, from its first.
+
+    The same rule as `sampled_numbers` for a set the corpus does not name. The grid replay
+    samples the cases that claim a grid witness, which is a frontier fact rather than a
+    range, so the sequence is passed in and only the rule is shared.
+    """
+    if stride < 1:
+        raise ValueError("a sample stride must be positive")
+    return tuple(numbers[::stride])
+
+
+CALIBRATION_CORPUS = CorpusRange(first_n=1, last_n=100)
+"""The cases the calibration-only annotation layers may read, and no more.
+
+The chunk census, the partition atlas, the taxonomy, the evidence profile and the contact
+overlay gallery were designed while their authors were looking at `n = 1..100`. A
+taxonomy invented from a corpus cannot also be independent confirmation on that corpus,
+so those instruments are calibration-only and stay pinned here while `KNOWN_BEST_CORPUS`
+widens around them. That is decision `D4` of the atlas expansion plan: the new range has
+to stay unseen to be usable as a holdout for a later confirmatory run, and an annotation
+layer that quietly followed the manifest would spend it.
+
+Sound screens are the deliberate exception and do not read this: a replayed translation
+certificate and an exact tiling argument are certificates rather than instruments, so
+they extend with `KNOWN_BEST_CORPUS`.
+
+Widening this constant is a registered experiment, not a maintenance edit.
+"""
+
+
+def calibration_entries[EntryT: Mapping[str, Any]](
+    entries: Iterable[EntryT],
+) -> tuple[EntryT, ...]:
+    """The manifest entries inside `CALIBRATION_CORPUS`, in the order they arrived.
+
+    The one gate between a widening manifest and an instrument that must not widen with
+    it. Reading the manifest is still how a calibration tool finds its witnesses; what it
+    may not do is take the manifest's own extent as its scope.
+
+    Selecting is only half of it: a manifest that has stopped carrying part of the
+    calibration range is refused rather than quietly censused short, because a shortfall
+    would otherwise reach the retained record as a smaller aggregate rather than as an
+    error.
+    """
+    wanted = CALIBRATION_CORPUS.numbers
+    selected = tuple(entry for entry in entries if int(entry["n"]) in wanted)
+    missing = sorted(set(CALIBRATION_CORPUS.numbers) - {int(entry["n"]) for entry in selected})
+    if missing:
+        raise ValueError(
+            f"the calibration corpus {CALIBRATION_CORPUS.label} is not fully present: "
+            f"missing n = {missing}"
+        )
+    return selected
+
+
+_CALIBRATION_RANGE = re.compile(r"n=\d+\.\.\d+")
+"""How a range is written wherever a document states one inside a longer sentence."""
+
+
+def declared_calibration_label(text: str, *, source: str) -> str:
+    """The range a retained document says it covered, read out of its own prose.
+
+    Several of the calibration documents declare their scope inside a sentence rather
+    than in a field of its own -- `"...manifest.json; inspected n=1..100 calibration
+    corpus"`. A downstream instrument that reads one of them is reading a scope as much
+    as data, so it pulls the range out and checks it rather than trusting the filename.
+    """
+    found = _CALIBRATION_RANGE.findall(text)
+    if not found:
+        raise ValueError(f"{source} declares no calibration range: {text!r}")
+    if len(set(found)) != 1:
+        raise ValueError(
+            f"{source} declares more than one calibration range: {sorted(set(found))}"
+        )
+    return found[0]
+
+
+def require_calibration_label(observed: object, *, source: str) -> None:
+    """Refuse when a retained schema's range constant and `CALIBRATION_CORPUS` disagree.
+
+    The schema constants are the calibration record and are pinned at `n=1..100` on
+    purpose. If someone widens the constant here without re-arguing the record, the tool
+    that writes into that record stops rather than emitting a document whose declared
+    scope is not the scope it read.
+    """
+    if observed != CALIBRATION_CORPUS.label:
+        raise ValueError(
+            f"{source} pins the calibration range at {observed!r} while CALIBRATION_CORPUS "
+            f"is {CALIBRATION_CORPUS.label!r}; the calibration boundary (D4) is a "
+            "registered decision, so re-argue the record rather than widening the constant"
+        )
+
+
+KNOWN_BEST_COMPOSITES = (
+    CompositeSpec(
+        first_n=1,
+        last_n=100,
+        columns=10,
+        stem="known-best-1-100",
+        # The card is a crop rather than a scale. Every unfurler shows a landscape card
+        # and centre-crops what it is given, so the portrait composite would lose its
+        # title and keep a band from the middle of the grid -- the part that says least
+        # about what the picture is. Cropping it here means the crop is chosen rather
+        # than inherited: this is the title block plus four whole rows, and the sliver of
+        # the fifth that completes the ratio reads as a continuation rather than a cut.
+        # 2400x1256 is 1.911:1, which is 1.91:1 to the nearest whole pixel, so a platform
+        # expecting that ratio crops nothing at all.
+        card_units=1256,
+    ),
+    CompositeSpec(
+        first_n=1,
+        last_n=324,
+        columns=18,
+        stem="known-best-1-324",
+        # The poster of the whole corpus, at the card scale of the figure above it: 324
+        # cases fall into 18 columns of 18 with no short row, which is the only square
+        # grid the range admits and the reason the horizon is 324 rather than 300.
+        #
+        # One raster, not two, and the reason is measured: the 1x export is 2,369,558
+        # bytes at 4224 by 4912, and a 2x of the same drawing is 5,055,264 at 83
+        # megapixels -- more than twice what the figure's 3x cost when that was rejected
+        # as too expensive for detail already in the vector. The PDF carries that detail
+        # at any zoom for 491,026 bytes. The published figure keeps its 2x because it is
+        # the copy people attach; nobody attaches a poster.
+        raster_scales=(1,),
+        # No link-preview card either. The card is the unfurl of one page, the
+        # repository's front door, and that page already has one; a second would be a
+        # second 9-megapixel binary with nothing pointing at it.
+        card_units=None,
+        # The three byte-budget levers, each measured before it was chosen and all of
+        # them reported by `build_known_best_atlas --report`. At 52,650 squares the
+        # house encoding costs about 24 MB, which is not a file to commit. See
+        # the "two composites" section of `atlas/known-best/FIGURE-PLAYBOOK.md` for the
+        # measurement each of these bought and why the per-n renderings keep all three.
+        square_data_attributes=False,
+        square_stroke_shared=True,
+        coordinate_decimals=3,
+    ),
+)
+"""Every composite figure published from the known-best corpus.
+
+Two: the published 10-by-10 figure of the first hundred cases, and the 18-by-18 poster
+of the whole corpus. A third is a third entry here, not a third copy of the builder: the
+geometry, the export set, the manifest record and the drift report all read the
+specification.
 """
 
 _NUMBER = r"[-+]?(?:(?:\d+(?:\.\d*)?)|(?:\.\d+))(?:[eE][-+]?\d+)?"
@@ -757,8 +1137,15 @@ def kingbird_derived_witness(
     source_n: int,
     source_path: str,
     source_url: str,
+    retrieved: str = RETRIEVED_DATE,
 ) -> dict[str, Any]:
-    """Recheck retained Kingbird numerical facts without requiring the source SVG."""
+    """Recheck retained Kingbird numerical facts without requiring the source SVG.
+
+    ``retrieved`` is a parameter rather than the module constant because a corpus is
+    acquired in passes, and the date belongs to the pass that read the source rather
+    than to this function. The default keeps the 34 witnesses of the 2026-08-26 pass
+    stating what they have always stated; a later pass supplies its own date.
+    """
     expected_id = f"W-known-best-n{n:03d}"
     if retained_witness.get("id") != expected_id or retained_witness.get("n") != n:
         raise ValueError("retained Kingbird witness identity does not match requested n")
@@ -801,7 +1188,7 @@ def kingbird_derived_witness(
         "key": "Kingbird derived numerical facts",
         "path": source_path,
         "url": source_url,
-        "retrieved": RETRIEVED_DATE,
+        "retrieved": retrieved,
     }
     witness.pop("certificate", None)
     return _checked_witness(witness, tolerance=KINGBIRD_TOLERANCE, witness_path=witness_path)

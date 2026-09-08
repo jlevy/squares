@@ -229,7 +229,7 @@ def expected_document() -> dict:
             "sources": [
                 {
                     "access": "public-http-svg",
-                    "acquisition_status": "deferred-pending-license-review",
+                    "acquisition_status": "derived-facts-acquisition-approved-2026-09-07",
                     "evidence_path": "resources/web/kingbird-squares-in-squares.html",
                     "format": "html-listing-and-svg-geometry",
                     "key": "kingbird-current-catalogue",
@@ -430,8 +430,10 @@ def render_coverage_svg(availability: dict) -> str:
         (
             "An audited grid for n equals 101 through 324. Ninety-seven exact grids and "
             "four licensed SVG constructions are retained locally. Public SVG geometry "
-            "was located and parsed for the other 123 cases, but retention is deferred "
-            "pending license review. No case in the audited range lacks selected geometry."
+            "was located and parsed for the other 123 cases; their derived numerical facts "
+            "are approved for acquisition under the known-best retention policy as of "
+            "2026-09-07, and raw SVGs stay unretained. No case in the audited range lacks "
+            "selected geometry."
         ),
     )
     append_metadata(
@@ -496,7 +498,7 @@ def render_coverage_svg(availability: dict) -> str:
         root,
         x=734,
         count=status_counts["public-svg-license-deferred"],
-        label="public SVGs, license deferred",
+        label="public SVGs, derived facts pending acquisition",
         status="public-svg-license-deferred",
     )
     _append_coverage_stat(
@@ -563,8 +565,8 @@ def render_coverage_svg(availability: dict) -> str:
             "fill": "#475569",
         },
     ).text = (
-        "The orange cells are a local retention-policy gap, not a gap in located public "
-        "geometry."
+        "The orange cells await the derived-facts acquisition pass; raw SVGs stay "
+        "unretained. None is a gap in located public geometry."
     )
     sub(
         root,

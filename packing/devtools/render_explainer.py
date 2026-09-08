@@ -276,9 +276,15 @@ BEST_RENDERING = ATLAS / "rendering" / "n-011.svg"
 #: The composite travels with the page: the SVG the figure shows, the PDF it links for
 #: print, and the PNG for a reader whose context cannot render the vector.
 COMPOSITE_STEM = PACKING / "atlas" / "known-best" / "known-best-1-100"
+#: The poster of the whole register, n = 1..324, published beside the figure since
+#: 2026-09-07: the caption links its PDF, and the SVG and PNG travel with it so a reader
+#: who follows the link to the vector is not sent back to the repository. It has no card
+#: of its own; the link preview stays the figure's landscape crop.
+POSTER_STEM = PACKING / "atlas" / "known-best" / "known-best-1-324"
 COMPOSITE_ASSETS = (
     *(COMPOSITE_STEM.with_suffix(f".{ext}") for ext in ("svg", "png", "pdf")),
     COMPOSITE_STEM.with_name(f"{COMPOSITE_STEM.name}-card.png"),
+    *(POSTER_STEM.with_suffix(f".{ext}") for ext in ("svg", "png", "pdf")),
 )
 #: The full-canvas raster, which the published Markdown shows to a reader whose context
 #: cannot render the vector. The 1x rather than the committed `@2x`: every consumer

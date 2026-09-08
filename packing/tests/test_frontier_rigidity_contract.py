@@ -18,6 +18,7 @@ instead of passing silently.
 
 from __future__ import annotations
 
+import math
 from copy import deepcopy
 from pathlib import Path
 from typing import cast
@@ -38,6 +39,7 @@ from devtools.audit_kingbird_catalogue import (
 )
 from devtools.migrate_frontier_v2 import migrate_case
 from sqpack.assurance import check_evidence_semantics
+from sqpack.known_best import KNOWN_BEST_CORPUS
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 FRONTIER = PROJECT_ROOT / "frontier"
@@ -138,7 +140,7 @@ def test_a_parser_that_sees_nothing_fails_instead_of_agreeing() -> None:
 
 def test_catalogue_rigid_is_a_transcription_and_carries_no_judgement() -> None:
     by_n = catalogue_rigidity(catalogue_text())
-    for n in range(1, 101):
+    for n in KNOWN_BEST_CORPUS.numbers:
         case = _case(n)
         recorded = case["reported_upper_bound"]["catalogue_rigid"]
         assert recorded in RIGIDITY_STATES
@@ -149,7 +151,9 @@ def test_catalogue_rigid_is_a_transcription_and_carries_no_judgement() -> None:
     # The trivially rigid grid packings were the plainest casualty of the boolean: one
     # unit square exactly filling a 1x1 container cannot move, and the old field said
     # `false`. `not-stated` now says only that the catalogue is silent about them.
-    for n in (1, 4, 9, 16, 25, 36, 49, 64, 81, 100):
+    tilings = [n for n in KNOWN_BEST_CORPUS.numbers if math.isqrt(n) ** 2 == n]
+    assert tilings[:10] == [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+    for n in tilings:
         assert _case(n)["reported_upper_bound"]["catalogue_rigid"] == NOT_STATED
 
     # Silence is not evidence, so a `not-stated` transcription may never appear as a
@@ -157,7 +161,7 @@ def test_catalogue_rigid_is_a_transcription_and_carries_no_judgement() -> None:
     # devtools/assess_frontier_rigidity.py, which is why this asserts what the block may
     # SAY rather than that it is absent: `not-rigid` and `undetermined` are findings of
     # ours, and neither borrows the catalogue's word.
-    for n in range(1, 101):
+    for n in KNOWN_BEST_CORPUS.numbers:
         recorded = _case(n)["reported_upper_bound"]["catalogue_rigid"]
         rigidity = _case(n)["rigidity"]
         assert rigidity is not None, f"n={n}: rigidity is unassessed"

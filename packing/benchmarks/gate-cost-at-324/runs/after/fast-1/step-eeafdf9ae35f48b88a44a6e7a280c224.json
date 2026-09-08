@@ -1,0 +1,8 @@
+{
+  "name": "derivation (needs sympy)",
+  "output": "published minimal polynomial of s\n  irreducible over Q: True\n  real roots: [-1.8530324789725078629, 3.8770835900228141773]\n\ns as a rational function of u: (6u + 4) / (-u^2 + 2u + 1)\ncleared polynomial in u has degree 16\n\nirreducible factors over Q:\n  degree 8: [5, -10, -2, 14, 12, -6, 2, 2, -1]\n      real root -0.5460939816602248825636953\n      real root 0.3657693076046772933885450\n  degree 8: [1373, -4318, -15386, -29302, -16044, -4914, -1414, -186, 31]\n      real root 0.08667571693896588186829271\n      real root 5.784029672526773245921044\n\nminimal polynomial of u = tan(a/2), highest degree first:\n  [5, -10, -2, 14, 12, -6, 2, 2, -1]\nmatches cases.trump11.packing.U_MIN_POLY: True",
+  "reason": "",
+  "run_id": "a82de8840fc84413b6854db00771e37b",
+  "seconds": 0.7807839169981889,
+  "status": "passed"
+}

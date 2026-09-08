@@ -40,6 +40,15 @@ from threading import Lock
 from typing import Literal, Never, TextIO, override
 
 from sqpack import gate_budgets
+from sqpack.known_best import (
+    ATLAS_SAMPLE_STRIDE,
+    CALIBRATION_CORPUS,
+    GRID_SAMPLE_STRIDE,
+    KNOWN_BEST_COMPOSITES,
+    KNOWN_BEST_CORPUS,
+    SCREEN_SAMPLE_STRIDE,
+    sampled_numbers,
+)
 from sqpack.project import (
     ProjectLayoutError,
     add_version_argument,
@@ -47,6 +56,39 @@ from sqpack.project import (
     require_project_root,
 )
 from sqpack.yamlio import safe_load
+
+#: Per-corpus tripwires for the frontier and the escape screen. Each is a finding about
+#: one corpus rather than a count derived from it, so it is pinned by the corpus label and
+#: re-argued when the corpus grows (think-93on): the open-case counts, the records the
+#: screen excludes by shape residual, and the screen's four findings.
+FRONTIER_COUNTS: dict[str, tuple[int, int, int]] = {
+    # (formal-open, reported-open, Nagamochi-bounded). 58 since 2026-09-04: T-020's
+    # certificate at 24/5 took n = 20 and n = 21 off the closed form.
+    "n=1..100": (65, 65, 58),
+    "n=1..200": (153, 153, 146),
+    "n=1..324": (265, 265, 258),
+}
+SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
+    "n=1..100": ("n=68", "n=69"),
+    "n=1..200": ("n=68", "n=69", "n=103", "n=105", "n=110", "n=131"),
+    "n=1..324": ("n=68", "n=69", "n=103", "n=105", "n=110", "n=131"),
+}
+#: (records with a separating square, those squares, records with any translating
+#: square, those squares).
+SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
+    "n=1..100": (25, 76, 84, 496),
+    "n=1..200": (60, 678, 176, 1933),
+    "n=1..324": (114, 2714, 296, 5323),
+}
+UNDETERMINED_BY_MISS = (28,)
+#: The cases the two sampled sweeps re-derive on every pull request, computed here from
+#: the same constant the tools compute it from rather than re-typed. `sqpack.cli.validate`
+#: may not import `devtools`, so this is the shared definition both sides reach: a stride
+#: written down in one tool and asserted in the gate would be two numbers that agree by
+#: habit. The two strides and `sampled_numbers` live in `sqpack.known_best` for that
+#: reason, and the counts below reach the output lines the two steps match on.
+SAMPLED_ATLAS_CASES = sampled_numbers(KNOWN_BEST_CORPUS, ATLAS_SAMPLE_STRIDE)
+SAMPLED_SCREEN_RECORDS = sampled_numbers(KNOWN_BEST_CORPUS, SCREEN_SAMPLE_STRIDE)
 
 PROJECT_ROOT = configured_project_root()
 REPOSITORY_ROOT = PROJECT_ROOT.parent
@@ -378,11 +420,22 @@ class Step:
     four-cpu runner (run 34010470187) they cost 313.95s of step time: the
     translation-escape screen at 110.66s, the known-best chunk census at 90.38s, the
     known-best atlas at 75.88s, and the prospective seed at 37.03s. They are also one
-    kind of work -- each rebuilds the retained atlas from the hundred-odd witnesses and
+    kind of work -- each rebuilds the retained atlas from the witnesses under it and
     compares it byte for byte -- which is why the split is stable: a step joins this set
     by being measured into it, and
     `test_the_pull_request_runs_its_sweeps_and_its_suite_apart` is where the number has
     to be typed.
+
+    Two of those four names changed on 2026-09-07 without the rule changing. The corpus
+    widened to `n=1..324` and the two re-derivations that grew with it -- 766.26s for the
+    screen and 691.19s for the atlas rebuild, measured at this job's own shape -- moved to
+    the deferred surface, leaving `known-best atlas records and sample` and `translation
+    escape screen records and sample` here in their place. Each is a whole record check
+    plus a fixed sampled slice of the geometry, and the two strides were set against this
+    job's floor -- `known-best chunk census`, which `D4` pins so it cannot grow. Measured
+    whole afterwards on the same box: 58.48s of tier wall, 28 per cent of the ceiling,
+    over 58.48s for the atlas sample, 44.65s for the screen sample, 42.11s for the census
+    and 0.15s for the retired prospective seed.
 
     Why its own runner rather than a wider one, and this is the whole arithmetic. Four
     units on four cpus saturates the outer pool, so this job's wall is its longest unit's
@@ -390,9 +443,12 @@ class Step:
     rest of the tier. That 110.66s was also the floor under the whole pull-request
     surface, and the lever on it was that step's own cost rather than another job.
 
-    `--inner-jobs 2` sets `PACK_JOBS` for the translation-escape screen. The chunk
-    census and prospective seed expose explicit worker counts but default to serial;
-    the gate does not pass those counts. The known-best atlas also runs serially.
+    `--inner-jobs 2` sets `PACK_JOBS` for the translation-escape screen and, since
+    2026-09-07, for the known-best atlas builder as well: it was given the same pool the
+    screen already had, and on an idle ten-cpu box its whole check went 691.19s serial to
+    184.34s at four workers, over 688.74s of cpu against the 691.19s the serial run spent.
+    The chunk census and prospective seed expose explicit worker counts but default to
+    serial; the gate does not pass those counts.
     Historical pool experiments do not establish the cause of the observed tier
     timings; D-472 tracks the remaining performance attribution work."""
 
@@ -1391,25 +1447,32 @@ def _svg_rendering(context: Context) -> str:
 
 
 def _known_best_atlas(context: Context) -> str:
-    """The known-best atlas without the chunk census, which is its own step.
+    """The atlas's record layer, plus a sampled rebuild standing in for the whole one.
 
     `_commands` runs its list in one process after another, so a step is only as
     schedulable as its longest member and the gate's `--jobs` pool cannot see inside it.
-    Measured one subcommand at a time on a four-cpu box at `PACK_JOBS=1`, this step's
-    nine members were 133.22s, of which `census_known_best_chunks` alone was 94.85s and
-    `build_known_best_atlas` 27.28s; the other seven were 11.09s between them. Against
-    the 254.92s the whole step cost on CI that is about 181s in one member, so a step
-    declared as one unit put a three-minute serial block in the middle of a tier trying
-    to finish in three minutes.
+    That argument split the chunk census out of this step on 2026-09-06, and it split the
+    whole rebuild out on 2026-09-07 at a seam the same measurement found. At `n=1..324`,
+    on an idle ten-cpu box at this job's own `--jobs 4 --inner-jobs 2`, the step was
+    703.28s of which `build_known_best_atlas --check` was 691.19s -- 98.3 per cent -- and
+    the other seven subcommands were 12.09s between them. Five of those seven are pinned
+    at `CALIBRATION_CORPUS` by `D4` and cannot grow with the corpus at all.
 
-    Splitting at that seam is the only division the measurement supports, and it is
-    two steps rather than nine for the same reason: the other seven are noise, and a
-    step per subcommand would be seven more names in the register for no wall.
+    So the seven stay here and the rebuild leaves, and what replaces it is `--sample`
+    rather than nothing: the whole record layer re-derived, and a fixed recorded slice of
+    the cases rebuilt byte for byte. `known-best n=1..324 atlas rebuild` on the deferred
+    surface is the rest, and `benchmarks/gate-cost-at-324/` retains the readings.
     """
     output = _commands(
         context,
         (
-            (sys.executable, "-m", "devtools.build_known_best_atlas", "--check"),
+            (
+                sys.executable,
+                "-m",
+                "devtools.build_known_best_atlas",
+                "--check",
+                "--sample",
+            ),
             (sys.executable, "-m", "devtools.build_composite_figure_data", "--check"),
             (sys.executable, "-m", "devtools.render_composite_pdf", "--check"),
             (
@@ -1441,8 +1504,15 @@ def _known_best_atlas(context: Context) -> str:
     )
     _require_text(
         output,
-        "known-best atlas check passed: 100 sources/plans, witnesses, renders, "
-        "1 composite, and links",
+        f"known-best atlas sample check passed: {len(SAMPLED_ATLAS_CASES)} of "
+        f"{KNOWN_BEST_CORPUS.count} cases rebuilt (every {ATLAS_SAMPLE_STRIDE}th from "
+        f"n={KNOWN_BEST_CORPUS.first_n}), {KNOWN_BEST_CORPUS.count} manifest entries, "
+        f"sources, links, and {len(KNOWN_BEST_COMPOSITES)} composite"
+        f"{'' if len(KNOWN_BEST_COMPOSITES) == 1 else 's'}",
+        # Five strata and thirty-six non-grid cases are calibration facts, not corpus
+        # facts: `D4` pins both layers at CALIBRATION_CORPUS, so neither moves when the
+        # atlas widens. They stay literal because the numbers are findings about the
+        # inspected hundred rather than counts of it.
         "known-best contact overlay check passed: 5 house-rendered calibration strata",
         "known-best chunk evidence profile check passed: 36 non-grid calibration cases",
         "contact enumeration pricing check passed",
@@ -1452,21 +1522,54 @@ def _known_best_atlas(context: Context) -> str:
     return output
 
 
+def _known_best_atlas_rebuild(context: Context) -> str:
+    """The whole atlas, re-derived from its sources and compared byte for byte.
+
+    Deferred rather than dropped, and the measurement is on
+    `test_the_pull_request_surface_defers_only_what_was_measured`: 691.19s at `n=1..324`
+    against a 210s ceiling on the job that used to carry it. What a pull request runs
+    instead is `known-best atlas records and sample`, which is the complement of this
+    step and not a sample of it -- every record comparison, and a recorded slice of the
+    per-case geometry this one re-derives whole.
+    """
+    output = _module(context, "devtools.build_known_best_atlas", "--check")
+    _require_text(
+        output,
+        f"known-best atlas check passed: {KNOWN_BEST_CORPUS.count} sources/plans, "
+        f"witnesses, renders, {len(KNOWN_BEST_COMPOSITES)} composite"
+        f"{'' if len(KNOWN_BEST_COMPOSITES) == 1 else 's'}, and links",
+    )
+    return output
+
+
 def _known_best_chunk_census(context: Context) -> str:
     """Re-derive the committed chunk census using its serial default."""
     output = _module(context, "devtools.census_known_best_chunks", "--check")
+    # A calibration count, not a corpus one: `D4` holds the census at CALIBRATION_CORPUS
+    # while the atlas widens, and this reads the same constant the census prints from.
     _require_text(
         output,
         "chunk census check passed: components, contacts, and bounded lattice partitions "
-        "for 100 records",
+        f"for {CALIBRATION_CORPUS.count} records",
     )
     return output
 
 
 def _prospective_source_map(context: Context) -> str:
+    """The audited source map for the prospective range, whose size it declares itself."""
     output = _module(context, "devtools.map_prospective_sources", "--check")
+    # 224 is the prospective range's own size, not the known-best corpus's, so it is read
+    # from the artifact the step checks rather than derived from KNOWN_BEST_CORPUS. Under
+    # `D3` the known-best register supersedes this seed as it widens; the count stays a
+    # property of the map either way.
+    availability = json.loads(
+        (PROJECT_ROOT / "atlas/prospective/source-availability-101-324.json").read_text(
+            encoding="utf-8"
+        )
+    )["availability"]
+    cases = int(availability["range"]["count"])
     _require_text(
-        output, "prospective source map check passed: 224 cases, availability and SVG"
+        output, f"prospective source map check passed: {cases} cases, availability and SVG"
     )
     return output
 
@@ -1474,8 +1577,17 @@ def _prospective_source_map(context: Context) -> str:
 def _prospective_atlas(context: Context) -> str:
     """Re-derive the prospective seed using its serial default."""
     output = _module(context, "devtools.build_prospective_atlas", "--check")
+    # Read from the seed rather than pinned: how many of the 224 prospective cases carry
+    # retained geometry is a property of that collection, and it moves as the acquisition
+    # pass runs, independently of KNOWN_BEST_CORPUS.
+    seed = json.loads(
+        (PROJECT_ROOT / "atlas/prospective/manifest.json").read_text(encoding="utf-8")
+    )["atlas_seed"]
+    retained = len(seed["entries"])
     _require_text(
-        output, "prospective atlas seed check passed: 101 witnesses and 101 house renderings"
+        output,
+        f"prospective atlas seed check passed: {retained} witnesses and "
+        f"{retained} house renderings",
     )
     return output
 
@@ -1483,9 +1595,11 @@ def _prospective_atlas(context: Context) -> str:
 def _frontier_rigidity(context: Context) -> str:
     """Every rigidity block still follows from the screen and the tiling argument.
 
-    The counts are pinned because they are the finding: 84 records are NOT rigid on a
+    The counts are asserted because they are the finding: 84 records are NOT rigid on a
     replayable certificate, ten are rigid by an exact tiling with no slack, and four are
-    assessed and unsettled. `undetermined` is a result and is not the same as the field
+    assessed and unsettled. Three of the four are now derived from the corpus rather than
+    written out, for the reason given at the derivation below; only the unsettled count is
+    still a literal. `undetermined` is a result and is not the same as the field
     being null.
 
     Two records are excluded here because a stronger first-party argument owns them, and
@@ -1506,12 +1620,24 @@ def _frontier_rigidity(context: Context) -> str:
     output = _module(context, "devtools.assess_frontier_rigidity", "--check")
     _require_text(output, "frontier rigidity check passed")
     review = _module(context, "devtools.assess_frontier_rigidity", "--review")
+    # Three of the four numbers follow the corpus and are derived from it. The tilings are
+    # the perfect squares of KNOWN_BEST_CORPUS -- ten at n=1..100, eighteen at n=1..324 --
+    # and what is left after the tilings and the three stronger arguments is the screen's
+    # own split. Only that split's smaller half is a finding rather than a count, so only
+    # it is pinned; think-93on re-argues it when the corpus grows.
+    stronger = (5, 11, 40)
+    tilings = sum(1 for n in KNOWN_BEST_CORPUS.numbers if math.isqrt(n) ** 2 == n)
+    # Undetermined is the screen's excluded records (whose geometry is too coarse to
+    # read contacts from) plus n=28, the one screened record the screen misses that no
+    # stronger argument has taken; both lists are per-corpus tripwires (think-93on).
+    undetermined = len(SCREEN_EXCLUDED[KNOWN_BEST_CORPUS.label]) + len(UNDETERMINED_BY_MISS)
+    not_rigid = KNOWN_BEST_CORPUS.count - len(stronger) - tilings - undetermined
     _require_text(
         review,
-        "assessed: 10 locally-rigid, 84 not-rigid, 3 undetermined, "
-        "3 left to a stronger argument",
+        f"assessed: {tilings} locally-rigid, {not_rigid} not-rigid, "
+        f"{undetermined} undetermined, {len(stronger)} left to a stronger argument",
     )
-    _require_text(review, "left to a stronger argument: n = [5, 11, 40]")
+    _require_text(review, f"left to a stronger argument: n = {list(stronger)}")
     return output + review
 
 
@@ -1524,12 +1650,54 @@ def _translation_escape_screen(context: Context) -> str:
     A miss is not rigidity, so nothing here may be restated as one.
     """
     output = _module(context, "devtools.screen_translation_escape", "--check")
+    _require_text(output, f"translation escape screen check passed: {_screen_findings()}")
+    return output
+
+
+def _screen_findings() -> str:
+    """The screen's corpus findings, as the tool prints them.
+
+    The screened count is a corpus fact and scales: the whole of KNOWN_BEST_CORPUS less
+    the records the shape-residual limit throws out. The four findings after it are not
+    counts of anything and stay pinned as tripwires -- think-93on re-argues them, and the
+    exclusion list with them, when the corpus grows. Shared by the whole screen and its
+    sampled stand-in, because the findings are read out of the retained document either
+    way and a second copy of this string is a second thing to forget to update.
+    """
+    excluded = SCREEN_EXCLUDED[KNOWN_BEST_CORPUS.label]
+    separating, separating_squares, translating, translating_squares = SCREEN_FINDINGS[
+        KNOWN_BEST_CORPUS.label
+    ]
+    screened = KNOWN_BEST_CORPUS.count - len(excluded)
+    return (
+        f"{screened} records screened, "
+        f"{separating} with a square that separates ({separating_squares} squares), "
+        f"{translating} with a square that translates at all ({translating_squares} squares), "
+        f"excluded: {', '.join(excluded)}"
+    )
+
+
+def _translation_escape_sample(context: Context) -> str:
+    """The retained screen rebuilt from its own records, plus a replayed sample.
+
+    Deferring the whole re-screen is argued on
+    `test_the_pull_request_surface_defers_only_what_was_measured`: 766.26s at `n=1..324`
+    against a 210s ceiling, and within 134s of the gate's own per-step subprocess timeout
+    on a box faster than CI's. What stays here is everything that is not per-record
+    geometry -- the aggregate against its own cases, the method block, the schema, the
+    per-certificate claims -- and a fixed recorded slice of the records replayed in full.
+
+    The corpus findings stay on the pull-request surface with it. They are read out of
+    the retained document, which this step rebuilds from its own records, so a screen
+    edited to a different answer fails here rather than waiting for the deep gate.
+    """
+    output = _module(context, "devtools.screen_translation_escape", "--check", "--sample")
     _require_text(
         output,
-        "translation escape screen check passed: 98 records screened, "
-        "25 with a square that separates (76 squares), "
-        "84 with a square that translates at all (496 squares), "
-        "excluded: n=68, n=69",
+        f"translation escape screen sample check passed: {len(SAMPLED_SCREEN_RECORDS)} of "
+        f"{KNOWN_BEST_CORPUS.count} records replayed (every {SCREEN_SAMPLE_STRIDE}th "
+        f"from n={KNOWN_BEST_CORPUS.first_n})",
+        f"retained screen: {_screen_findings()}",
     )
     return output
 
@@ -1646,6 +1814,24 @@ def _stromquist_rejection(context: Context) -> str:
 
 
 def _exact_verification(context: Context) -> str:
+    """The exact certificates, and a sampled stand-in for the grid replay among them.
+
+    `_commands` runs its list in one process after another, so this step's wall is the
+    sum of fifteen subcommands and the gate's `--jobs` pool cannot see inside it. At
+    `n=1..324` the step was 84.21s on an idle ten-cpu box (three readings, spread 0.7 per
+    cent) and 133.4s on CI, where it was 70.6 per cent of a `checks` job that ran 189.09s
+    against a 195s ceiling. One member grows with the corpus and it is the one that grew:
+    `check_basic_bounds` at 34.81s of the 84.21s, against 3.58s when it arrived here
+    under `D-370`.
+
+    So the replay is sampled here and run whole on the deferred surface, as `exact
+    rational grid replay`. `benchmarks/gate-cost-at-324/` retains the readings and
+    `test_the_pull_request_surface_defers_only_what_was_measured` carries the argument.
+    The other sixteen subcommands are fixed cases -- one rational control, one limit
+    record, ten construction replays and four witness checks -- so none of them moves
+    when the corpus widens. The largest is now `dilation_corollary` at 26.35s, which is
+    where the next second on this step would have to come from.
+    """
     output = _commands(
         context,
         (
@@ -1674,7 +1860,13 @@ def _exact_verification(context: Context) -> str:
             # until D-370, where it was 3.58s of that step and where nobody would look
             # for exact geometry. Same cases, same predicate, same verdict; only the
             # step reporting it changed.
-            (sys.executable, "-m", "devtools.check_basic_bounds"),
+            #
+            # `--sample` since 2026-09-07, and the corpus is why. Every case still has
+            # its declared bound compared against the closed form -- that half is
+            # 0.14s and stays whole -- and every ninth grid case is still replayed
+            # exactly. What waits for the deep gate is the other eight ninths of the
+            # per-case geometry, at 34.81s here and about 55s on CI.
+            (sys.executable, "-m", "devtools.check_basic_bounds", "--sample"),
             (sys.executable, "-m", "cases.trump11.verify_exact"),
             (sys.executable, "-m", "cases.gobel5.verify_exact"),
             (sys.executable, "-m", "cases.gobel10.verify_exact"),
@@ -1741,6 +1933,12 @@ def _exact_verification(context: Context) -> str:
     _require_text(
         output,
         "known-best n=11 rational control check passed",
+        # The sample's shape, from the shared constant rather than typed twice. The
+        # replayed count itself is not asserted: how many cases claim `E-basic-grid-upper`
+        # is a frontier fact that falls as constructions are found, while the 324 is the
+        # corpus fact `frontier corpus` already pins.
+        f"exact rational grid witnesses (every {GRID_SAMPLE_STRIDE}th grid case, from the "
+        f"first) and checked basic bound instantiations for {KNOWN_BEST_CORPUS.count} cases",
         "VALID: 11 squares, 55 pairs tested",
         "14 separated with zero gap, 41 strictly",
         "20 corner coordinates exactly on the boundary",
@@ -1752,6 +1950,30 @@ def _exact_verification(context: Context) -> str:
         "VERIFIED: 11 squares, 55 pairs",
         "VERIFIED\n  id: W-schadt-n029-2025-decimal-rational",
         "VERIFIED: 29 squares, 406 pairs",
+    )
+    return output
+
+
+def _exact_grid_replay(context: Context) -> str:
+    """Every exact rational grid witness in the frontier, replayed in full.
+
+    Deferred rather than dropped, and the measurement is on
+    `test_the_pull_request_surface_defers_only_what_was_measured`: 34.81s at `n=1..324`
+    inside a step that was 70.6 per cent of a `checks` job running 189.09s against a 195s
+    ceiling. What a pull request runs instead is the sampled replay inside `exact
+    verification`, which is the complement of this step and not a rerun of it -- every
+    case's declared bound against its closed form, and every ninth grid case replayed
+    exactly.
+
+    The cost is quadratic in the corpus's last `n`, which is why this one moved and the
+    fourteen fixed cases beside it did not: 2.75s at `n=1..100`, 12.65s at `n=1..200`,
+    34.81s at `n=1..324`, all on the box `benchmarks/gate-cost-at-324/` names.
+    """
+    output = _module(context, "devtools.check_basic_bounds")
+    _require_text(
+        output,
+        f"exact rational grid witnesses and checked basic bound instantiations for "
+        f"{KNOWN_BEST_CORPUS.count} cases",
     )
     return output
 
@@ -1768,8 +1990,10 @@ def _verifier_limits(context: Context) -> str:
 
 def _frontier_corpus(context: Context) -> str:
     files = sorted((PROJECT_ROOT / "frontier").glob("n-*.md"))
-    if len(files) != 100:
-        raise StepFailureError(f"expected 100 frontier artifacts, found {len(files)}")
+    if len(files) != KNOWN_BEST_CORPUS.count:
+        raise StepFailureError(
+            f"expected {KNOWN_BEST_CORPUS.count} frontier artifacts, found {len(files)}"
+        )
     values: set[int] = set()
     formal_open = 0
     reported_open = 0
@@ -1799,7 +2023,7 @@ def _frontier_corpus(context: Context) -> str:
             )
         reported_open += packing["reported_status"] == "open"
         values.add(n)
-    expected_values = set(range(1, 101))
+    expected_values = set(KNOWN_BEST_CORPUS.numbers)
     if values != expected_values:
         missing = sorted(expected_values - values)
         extra = sorted(values - expected_values)
@@ -1814,10 +2038,14 @@ def _frontier_corpus(context: Context) -> str:
     # closed form, the first bounds specific to either size. This constant is a
     # tripwire, not a derivation -- check_nagamochi_bounds reads the count from the
     # record; this line exists so the record cannot move without someone saying so.
-    if (formal_open, reported_open, nagamochi_count) != (65, 65, 58):
+    # Deliberately NOT derived from KNOWN_BEST_CORPUS: widening the corpus adds open
+    # cases, and think-93on re-argues these three numbers rather than letting them float.
+    expected_counts = FRONTIER_COUNTS[KNOWN_BEST_CORPUS.label]
+    if (formal_open, reported_open, nagamochi_count) != expected_counts:
         raise StepFailureError(
-            "frontier corpus counts drifted: expected 65 formal-open, 65 reported-open, "
-            f"and 58 Nagamochi-bounded; observed {formal_open}, {reported_open}, "
+            f"frontier corpus counts drifted: expected {expected_counts[0]} formal-open, "
+            f"{expected_counts[1]} reported-open, and {expected_counts[2]} "
+            f"Nagamochi-bounded; observed {formal_open}, {reported_open}, "
             f"and {nagamochi_count}"
         )
 
@@ -1836,10 +2064,11 @@ def _frontier_corpus(context: Context) -> str:
         and all(result["selftests"].values())
     ):
         raise StepFailureError("the Kingbird n=29 replay contract changed")
+    total = KNOWN_BEST_CORPUS.count
     return (
-        f"  100 artifacts, n = 1..100; formal lane: {100 - formal_open} proved, "
-        f"{formal_open} open\n"
-        f"  reported lane: {100 - reported_open} proved, {reported_open} open; "
+        f"  {total} artifacts, n = {KNOWN_BEST_CORPUS.first_n}..{KNOWN_BEST_CORPUS.last_n}; "
+        f"formal lane: {total - formal_open} proved, {formal_open} open\n"
+        f"  reported lane: {total - reported_open} proved, {reported_open} open; "
         f"{nagamochi_count} formal-open cases use Nagamochi\n"
         "  n=29 source numerically checked: 29 squares, 406 pairs, six classes\n"
         "  named-source reconciliation is enforced by soft-schema validation"
@@ -2489,11 +2718,30 @@ STEPS: tuple[Step, ...] = (
     # second runner, concurrently with everything else. What that is worth, and why it is
     # a second runner and not a wider one, is argued on `Step.sweep`.
     Step(
-        "known-best n=1..100 atlas",
+        "known-best atlas records and sample",
         _known_best_atlas,
         fast=True,
         broad=True,
         sweep=True,
+        touches=(
+            *_CORE,
+            *_CASES,
+            "packing/devtools/*",
+            "packing/atlas/*",
+            "packing/witnesses/*",
+            "packing/frontier/*",
+            "packing/resources/*",
+        ),
+    ),
+    # The whole rebuild, off the pull-request surface since 2026-09-07 and on its own
+    # measurement: 691.19s at `n=1..324` of the 703.28s step above, against that job's
+    # 210s ceiling. It keeps the parent's `touches` for the reason the census split did
+    # -- the two halves read overlapping corners of the same corpus, and the conservative
+    # move on a split is to give both halves the parent's set and narrow later with a
+    # measurement.
+    Step(
+        "known-best n=1..324 atlas rebuild",
+        _known_best_atlas_rebuild,
         touches=(
             *_CORE,
             *_CASES,
@@ -2556,11 +2804,24 @@ STEPS: tuple[Step, ...] = (
         ),
     ),
     Step(
-        "single-square translation escape screen",
-        _translation_escape_screen,
+        "translation escape screen records and sample",
+        _translation_escape_sample,
         fast=True,
         broad=True,
         sweep=True,
+        touches=(
+            *_CORE,
+            "packing/atlas/known-best/*",
+            "packing/witnesses/*",
+            "packing/devtools/screen_translation_escape.py",
+        ),
+    ),
+    # The whole re-screen, off the pull-request surface since 2026-09-07 and on its own
+    # measurement: 766.26s at `n=1..324` against that job's 210s ceiling, and within 134s
+    # of this gate's own per-step subprocess timeout on a box faster than CI's.
+    Step(
+        "single-square translation escape screen",
+        _translation_escape_screen,
         touches=(
             *_CORE,
             "packing/atlas/known-best/*",
@@ -2762,6 +3023,27 @@ STEPS: tuple[Step, ...] = (
         "exact verification",
         _exact_verification,
         fast=True,
+        touches=(
+            *_CORE,
+            *_CASES,
+            "packing/witnesses/*",
+            "packing/frontier/*",
+            "packing/devtools/check_basic_bounds.py",
+            "packing/devtools/dilation_corollary.py",
+            "packing/devtools/decide_certificate.py",
+            "packing/devtools/generate_known_best_n011_rational_control.py",
+            "packing/devtools/check_rational_witness_independent.py",
+        ),
+    ),
+    # The whole grid replay, off the pull-request surface since 2026-09-07 and on its own
+    # measurement: 34.81s at `n=1..324` inside a step that was 133.4s of a 189.09s
+    # `checks` job with a 195s ceiling. It keeps the parent step's `touches` for the
+    # reason the atlas rebuild did -- the two halves read the same frontier, and the
+    # conservative move on a split is to give both halves the parent's set and narrow
+    # later with a measurement.
+    Step(
+        "exact rational grid replay",
+        _exact_grid_replay,
         touches=(
             *_CORE,
             *_CASES,

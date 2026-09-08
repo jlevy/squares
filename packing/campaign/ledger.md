@@ -111,6 +111,8 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-095](agent-sessions/session-095-collision-cover-and-support-ceiling.md) | completed | contemporaneous | `research-loop` (insight) | `documentation-pass` (correctness) | 5 | think-ro0s | After final record-delta validation and publication, hand off future BC264/think-mq0d's existing30-minute H114 feature and kernel-contract pricing slice. Retain the conditional H101 Omega-avoiding fallback; no new block, target or unchanged retry is activated here. |
 | [session-096](agent-sessions/session-096-stromquist-memos-and-helpers.md) | completed | retrospective | `research-survey` (correctness) | `documentation-pass` (correctness) | 4 | think-7u4s | After the final pre-push check and review publication, preserve BC-264 under think-mq0d as the existing H114 feature and kernel-contract pricing entry. The source brief separately retains the geometric replay dependency; this review activates no new target or unchanged retry. |
 | [session-097](agent-sessions/session-097-stromquist-n26-verification.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 6 | think-zi3g | Publish this review and verify hosted checks; retain think-mq0d (BC-264) as the selected research slice. think-z0fi implements and controls the specified n26 family, think-0x08 recovers Green evidence, think-4g6w audits the remaining source table, and think-sske replays MacIver theorem dependencies before adoption. |
+| [session-099](agent-sessions/session-099-atlas-expansion-to-324.md) | in_progress | contemporaneous | `research-survey` (correctness) | `review-planning-oversight` (process) | 4 | think-0juv | The plan's Phases 0 through 5 are terminal on PR 111 and the calibration boundary held throughout; the session stays open, with its clock extended to 2026-09-08, until the owner confirms D2 and the two open questions, the re-priced tiers are read on the next hosted run, the full checkpoint is obtained before merge (label deep-gate last), and the harness has written this session's rollup so the record can name what it cost and the gate that certified it. Phase 6 stays closed under D1 unless the owner chooses the caveated form. |
+| [session-100](agent-sessions/session-100-n26-source-consistency.md) | in_progress | contemporaneous | `factual-review` (correctness) | `pipeline-improvement` (correctness) | 2 | think-4v5w | Complete the user-selected n26 review and upstream merge, then retain think-mq0d (BC-264) as the separate selected research continuation. |
 
 ### Workflow summary
 
@@ -118,15 +120,15 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
-| `research-survey` | 1 | 1 | 12 | 1 |
-| `factual-review` | 3 | 0 | 42 | 2 |
+| `research-survey` | 2 | 1 | 13 | 1 |
+| `factual-review` | 4 | 0 | 43 | 2 |
 | `insight-iteration` | 18 | 1 | 58 | 3 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 9 | 1 | 29 | 1 |
 | `research-loop` | 10 | 4 | 67 | 7 |
-| `pipeline-improvement` | 26 | 0 | 128 | 1 |
+| `pipeline-improvement` | 26 | 0 | 131 | 1 |
 | `documentation-pass` | 1 | 0 | 13 | 1 |
-| `review-planning-oversight` | 0 | 0 | 2 | 0 |
+| `review-planning-oversight` | 0 | 0 | 3 | 0 |
 | `general-improvement` | 1 | 0 | 7 | 0 |
 
 ## Experiment agendas

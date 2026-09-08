@@ -1,0 +1,8 @@
+{
+  "name": "single-square translation escape screen",
+  "output": "translation escape screen check passed: 318 records screened, 114 with a square that separates (2714 squares), 296 with a square that translates at all (5323 squares), excluded: n=68, n=69, n=103, n=105, n=110, n=131",
+  "reason": "",
+  "run_id": "270147eccf5b4174b0d2da19e00b4bd0",
+  "seconds": 762.6029961250024,
+  "status": "passed"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "every session's cost is attributed",
+  "output": "  the close report and its synopsis view agree with 91 sessions\n11 rollups no session declares (pre-field sessions do this legitimately):\n    11222fc8-7b65-5cb8-8e3b-982ecf899ca8.yaml    span starts 2026-09-05\n    5cd11e53-fb82-4a28-ab2a-0c26f16fe7e5.yaml    span starts 2026-08-30\n    agent-a29aa05c090097181.yaml                 span starts 2026-08-29\n    agent-a2b26389a68623fec.yaml                 span starts 2026-08-29\n    agent-a498c3f37ac3199b7.yaml                 span starts 2026-08-29\n    agent-a4a75cb3921cba0d8.yaml                 span starts 2026-08-29\n    agent-a7c3f30347ea4640b.yaml                 span starts 2026-08-29\n    agent-a84da2374f947e8a6.yaml                 span starts 2026-08-29\n    agent-a93d11365c62eefe2.yaml                 span starts 2026-08-29\n    agent-aaaf4d68d6a5916dd.yaml                 span starts 2026-08-29\n    agent-ae78a4077b6ecafac.yaml                 span starts 2026-08-29\n\n90 terminal sessions, all declaring rollups that exist",
+  "reason": "",
+  "run_id": "a82de8840fc84413b6854db00771e37b",
+  "seconds": 3.2124350000012782,
+  "status": "passed"
+}

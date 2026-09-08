@@ -21,15 +21,24 @@ The [**explainer page**](https://jlevy.github.io/squares/) is the best introduct
 the proof: the `s(11)` bound and its five conditions in one page, with every figure
 drawn from the certificate it explains.
 
-[![One hundred known-best square packings arranged from n equals one through one hundred, each labeled with its best-known upper bound and, where the value is still open, the best proved lower bound.](packing/atlas/known-best/known-best-1-100.png)](https://jlevy.github.io/squares/known-best-1-100.pdf)
+[![One hundred known-best square packings arranged from n equals one through one hundred, each labeled with its best-known upper bound and, where the value is still open, the strongest lower bound independently verified here.](packing/atlas/known-best/known-best-1-100.png)](https://jlevy.github.io/squares/known-best-1-100.pdf)
 
 *The retained `n = 1…100` atlas, with each packing normalized to its own container and
-labeled by its best-known side upper bound and, where `s(n)` is still open, the best
-proved lower bound beneath it.
-A crimson star marks a lower bound proved here.
+labeled by its best-known side upper bound.
+For open cases, the strongest lower bound independently verified here appears beneath
+it. A crimson star marks a lower bound proved here.
 The image is available in [**SVG**](packing/atlas/known-best/known-best-1-100.svg),
 [**PDF**](https://jlevy.github.io/squares/known-best-1-100.pdf), and
 [**high-resolution PNG**](packing/atlas/known-best/known-best-1-100@2x.png).*
+
+The register now runs to `n = 324`, the end of the catalogue’s audited range, and a
+second, poster-sized composite draws all of it:
+[**`known-best-1-324`**](packing/atlas/known-best/known-best-1-324.png), an 18-by-18
+grid with the same cards, badges and legend, available as
+[**SVG**](packing/atlas/known-best/known-best-1-324.svg) and
+[**PDF**](packing/atlas/known-best/known-best-1-324.pdf) (44 by 51 inches).
+The first figure is unchanged; the [atlas README](packing/atlas/known-best/README.md)
+describes both.
 
 `s(n)` is the side of the smallest square that holds `n` non-overlapping unit squares.
 The problem is elementary to state and remains open even at small `n`.
@@ -86,31 +95,36 @@ Results first established here, as far as the recorded source searches show:
   [T-022 proof packet](packing/cases/n11_fractional_certificate/t-022-dilation-limit-proof.md),
   gives `s(11) ≥ 3.810025723614703…` as a weak limit bound; it does not decide fit at
   that endpoint. The certificate at `3.81` supplies the proof explained here.
-- **T-019: `s(17), s(18), s(19) ≥ 459/100`, displacing the published value (`S4`).** The
-  adopted bound for [these](packing/frontier/n-017.md) three cases was Massaccesi’s
-  `4.5058`, taken from a source rather than proved here.
+- **T-019: `s(17), s(18), s(19) ≥ 459/100`, improving the register (`S4`).** The adopted
+  bound for [these](packing/frontier/n-017.md) three cases was Massaccesi’s `4.5058`,
+  taken from a source rather than proved here.
   The same generator returns `4.59`, on 1184 atoms with total mass
   `423327/25000 = 16.9331` against `n = 17` and least covered mass `200009/200000`, so
   the repository now carries a first-party certificate `0.0842` above the number it had
   adopted, with the `229/50` and `451/100` rungs it climbed through retained below.
   A stronger public candidate at `9141/2000 = 4.5705`, posted to GitHub on 16 August
   2026 and neither peer reviewed nor replayed here, was outside the search corpus when
-  this was registered; against it the movement is `0.0195`. The bounds that came
-  closest, each archived here with its source and replayed where the tools allowed:
-  anabologyco-maker’s `4.5705` and `4.57` (16 and 13 August), Massaccesi’s `4.5058` (21
-  August), Burns’s `4.4811` (6 August), Mira’s `4.468292` and `4.450837` (11 and 10
-  August), Fort’s `4.456575` (11 August), and Brandwijk’s `89/20 = 4.45` (18 July);
-  Mira’s, Fort’s and Brandwijk’s are exact sixteen-point certificates and the rest
-  weighted ones, and every 2026 author but Brandwijk discloses a model-written proof.
+  this was registered; against it the movement is `0.0195` at `n = 17,18`. The DS7 audit
+  now records a stronger reported `n = 19` bound, approximately `4.6172815`, with an
+  unresolved source caveat; T-019 does not improve that report.
+  The bounds that came closest, each archived here with its source and replayed where
+  the tools allowed: anabologyco-maker’s `4.5705` and `4.57` (16 and 13 August),
+  Massaccesi’s `4.5058` (21 August), Burns’s `4.4811` (6 August), Mira’s `4.468292` and
+  `4.450837` (11 and 10 August), Fort’s `4.456575` (11 August), and Brandwijk’s
+  `89/20 = 4.45` (18 July); Mira’s, Fort’s and Brandwijk’s are exact sixteen-point
+  certificates and the rest weighted ones, and every 2026 author but Brandwijk discloses
+  a model-written proof.
   One certificate covers all three sizes without a monotonicity step: only `Condition 2`
   mentions `n`, so an atom set certifies its side for every integer above its own mass.
   `T-020` has since carried `n = 19` past it; `n = 17` and `n = 18` are this result’s
   alone, being too small for the heavier atom set that moved the other three.
-- **T-020: `s(19), s(20), s(21) ≥ 24/5`, displacing a closed form that stood for twenty
-  years (`S4`).** Twenty and twenty-one squares had never had a bound of their own: both
-  carried Nagamochi’s 2005 general formula, `1 + √13 = 4.6055…` and `1 + √14 = 4.7416…`,
-  and nothing else. A [certificate at `4.80`](packing/cases/n20_fractional_certificate/)
-  —2260 atoms, total mass `946131/50000`, least covered mass `50007/50000`—moves
+- **T-020: `s(19), s(20), s(21) ≥ 24/5`, improving the verified register (`S4`).** The
+  verified fields for twenty and twenty-one squares previously carried Nagamochi’s 2005
+  general formula, `1 + √13 = 4.6055…` and `1 + √14 = 4.7416…`. The
+  [DS7 source audit](packing/frontier/README.md#source-coverage-and-freshness) now
+  records stronger external reports separately, with missing proofs and source caveats
+  explicit. A [certificate at `4.80`](packing/cases/n20_fractional_certificate/) —2260
+  atoms, total mass `946131/50000`, least covered mass `50007/50000`—moves
   [`n = 20`](packing/frontier/n-020.md) by `0.194449`, `n = 21` by `0.058343`, and
   `n = 19` by `0.21`, the largest single-case movement in the register.
   The three sizes again come out of `Condition 2` alone.
@@ -204,9 +218,9 @@ accordingly.
 
 ## Survey
 
-The survey records the best-known packing and best proved lower bound for every
-`n ≤ 100`, with provenance and separate reported and formally verified lanes.
-Its source is one schema-validated case file under
+The survey records the best-known packing and strongest lower bound independently
+verified here for every `n ≤ 324`, with provenance and separate reported and verified
+fields. Its source is one schema-validated case file under
 [`packing/frontier/`](packing/frontier/README.md); the generated
 [status table](packing/frontier/STATUS.md) is the reader view, and the atlas above
 renders every retained known-best packing.
@@ -229,10 +243,10 @@ relevant source audit.
 | [**Tutorial**](TUTORIAL.md) | First-principles introduction to the objects, bounds, cells, stationary branches, search, and proof obligations |
 | [**Synopsis**](SYNOPSIS.md) | Current technical state, established results, terminology, experiment roll-up, and handoff |
 | [**Results register**](packing/frontier/RESULTS.md) | Whole-result bounds, audits, structural theorems, and errata graded under [`epistemics.md`](epistemics.md) |
-| [**Frontier**](packing/frontier/STATUS.md) | One record per case for `n = 1…100`, with reported and verified bounds kept separate |
+| [**Frontier**](packing/frontier/STATUS.md) | One record per case for `n = 1…324`, with reported and verified bounds kept separate |
 | [**Atlas**](packing/atlas/README.md) | Known-best and prospective packings, contact-scaffold enumeration, and deterministic renderings |
 | [**Literature**](packing/resources/README.md) | Retained primary sources, cleaned transcriptions, and raw extractions |
-| [**Reports**](#reports) | Eight research reports on the mathematics, algorithms, infrastructure, formal proof, and search strategy |
+| [**Reports**](#reports) | Research reports on the mathematics, algorithms, infrastructure, formal proof, and search strategy |
 | [**Code and development guide**](development.md) | Exact verification, search, promotion, and the [validation tiers and behavioral lanes](development.md#validation-tiers) that gate every change |
 | [**Campaign record**](packing/campaign/README.md) | Hypotheses, preregistered experiments, session records, agendas, and generated ledger |
 | [**Defect log**](defects.md) | Generated record of defects, detection methods, fixes, and regressions |
@@ -373,7 +387,7 @@ The Motion Lab is an exploratory instrument, not a citable research result.
 
 ## Reports
 
-These eight research reports are the durable topical syntheses:
+These research reports are the durable topical syntheses:
 
 | Report | Scope |
 | --- | --- |
@@ -383,8 +397,10 @@ These eight research reports are the durable topical syntheses:
 | [Infrastructure for Square-Packing Exploration](docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md) | Build order, latency tiers, language boundaries, and symbolic tooling |
 | [Lean for Square-Packing Proofs and Validation](docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md) | Where proof assistants fit and which certificate layers are suitable first targets |
 | [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | Basin cartography, structural diversity, relaxation ladders, and search strategy |
+| [Public Sources Beyond n = 100](docs/project/research/research-2026-09-07-square-packing-sources-beyond-100.md) | Which catalogues carry geometry above 100, their reuse terms, and why 324 is a source boundary |
 | [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | Historical corrections, the three memo arguments, and a reusable conditional counting control |
 | [Stromquist’s Twenty-Six-Square Packing](docs/project/research/research-2026-09-07-stromquist-n26-verification.md) | Exact verification, comparison with the current record, source attribution, and bounded follow-up |
+| [The Best-Known n = 26 Packing](docs/project/research/research-2026-09-07-n26-best-known-audit.md) | Dated literature and source search, exact score normalization, and the limits of the best-known claim |
 
 The reports distinguish formal proof, finite numerical checks, and source reports.
 The [document map](SYNOPSIS.md#document-map) identifies every maintained guide, dated

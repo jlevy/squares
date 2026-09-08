@@ -2,7 +2,7 @@
 
 # Defect log
 
-481 defects recorded across the packing toolchain.
+483 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
-| `review` | 283 | a human or agent reading the work against a checklist |
+| `review` | 285 | a human or agent reading the work against a checklist |
 | `anomaly` | 15 | a result that made no sense, chased down |
 | `inspection` | 62 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 72 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 72 of 481, and none of the 98 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 72 of 483, and none of the 98 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 72 of 481, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 12 |
-| record | 150 |
+| record | 152 |
 | tooling | 174 |
 | docs | 111 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 72 of 481, and none of
 | --- | ---: |
 | soundness | 98 |
 | validity | 122 |
-| bookkeeping | 183 |
+| bookkeeping | 185 |
 | robustness | 60 |
 | performance | 18 |
 
@@ -727,6 +727,8 @@ This is the actionable list.
 | [D-479](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | 2026-09-07 | docs | soundness | flattering | `review` | medium | fixed | Case summaries replaced cited geometric helper proofs with generic pure dots counting |
 | [D-480](packing/devtools/check_print_layout.py) | 2026-09-07 | tooling | validity | conservative | `inspection` | low | fixed | Raised footnote ink shifted the list-marker alignment measurement |
 | [D-481](docs/project/research/research-2026-09-07-stromquist-n26-verification.md) | 2026-09-07 | record | bookkeeping | conservative | `review` | medium | fixed | The n26–27 source fields omitted Green's stronger reported lower bound |
+| [D-482](packing/devtools/audit_ds7_lower_bounds.py) | 2026-09-07 | record | bookkeeping | conservative | `review` | medium | fixed | Expanded frontier source fields omitted stronger indexed lower-bound reports |
+| [D-483](packing/devtools/check_case_prose.py) | 2026-09-07 | record | bookkeeping | conservative | `review` | medium | fixed | Case prose accepted a stale exact verified bound as a rounded current value |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
