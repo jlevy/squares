@@ -16,6 +16,7 @@ import sys
 import time
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
+from textwrap import dedent
 
 import pytest
 
@@ -803,6 +804,11 @@ def test_an_empty_slow_lane_passes_and_a_real_failure_does_not(
     def broken(*_args: object, **_kwargs: object) -> str:
         raise validate.StepFailureError("command exited 1: pytest\n1 failed, 3 passed")
 
+    def broken_collection(_context: validate.Context, command: tuple[str, ...]) -> str:
+        if "--collect-only" in command:
+            raise validate.StepFailureError("command exited 2: pytest\ncollection failed")
+        return deselected()
+
     context = validate.Context(
         deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
     )
@@ -813,6 +819,65 @@ def test_an_empty_slow_lane_passes_and_a_real_failure_does_not(
     monkeypatch.setattr(validate, "_run", broken)
     with pytest.raises(validate.StepFailureError):
         validate._slow_tests(context)
+
+    monkeypatch.setattr(validate, "_run", broken_collection)
+    with pytest.raises(validate.StepFailureError, match="command exited 2"):
+        validate._slow_tests(context)
+
+
+@pytest.mark.parametrize("worker_failure", [False, True], ids=["empty", "worker-failure"])
+def test_slow_lane_distinguishes_worker_collection_failure_from_empty_selection(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, worker_failure: bool
+) -> None:
+    """xdist can return exit 5 after all workers fail before collecting any tests."""
+    tests = tmp_path / "tests"
+    tests.mkdir()
+    (tmp_path / "pytest.ini").write_text("[pytest]\nmarkers = slow: deferred tests\n")
+    if worker_failure:
+        (tmp_path / "conftest.py").write_text(
+            dedent("""
+                import pytest
+
+                def pytest_configure(config):
+                    if hasattr(config, "workerinput"):
+                        raise pytest.UsageError("worker cannot collect the slow lane")
+                """)
+        )
+    (tests / "test_slow.py").write_text(
+        "import pytest\n"
+        + ("@pytest.mark.slow\n" if worker_failure else "")
+        + "def test_selected():\n    pass\n"
+    )
+    commands: list[tuple[str, ...]] = []
+    run = validate._run
+
+    def run_here(context: validate.Context, command: tuple[str, ...]) -> str:
+        commands.append(command)
+        return run(context, command, cwd=tmp_path)
+
+    monkeypatch.setattr(validate, "_run", run_here)
+    monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 2)
+    environment = os.environ.copy()
+    for name in ("PYTEST_ADDOPTS", "PYTEST_XDIST_WORKER", "PACKING_VALIDATION_ARTIFACT_DIR"):
+        environment.pop(name, None)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=environment,
+        timeout_seconds=30,
+    )
+    if worker_failure:
+        with pytest.raises(validate.StepFailureError, match="command exited 5") as raised:
+            validate._slow_tests(context)
+        assert "worker cannot collect the slow lane" in str(raised.value)
+    else:
+        assert "no test is deferred" in validate._slow_tests(context)
+    assert len(commands) == 2
+    assert "-n" in commands[0]
+    assert "--collect-only" in commands[1]
+    assert "-n" not in commands[1]
 
 
 #: Node ids taken verbatim from this project's own pytest, not invented: a parametrized

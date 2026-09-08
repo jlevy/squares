@@ -1276,8 +1276,8 @@ def _fast_tests(context: Context) -> str:
     return output
 
 
-#: pytest's exit code for "every test was deselected", which for the slow lane means the
-#: ceiling currently defers nothing rather than that anything is wrong.
+#: Under xdist, exit 5 can also mean every worker failed before collection. Only a
+#: separate serial collection can establish that the slow lane is actually empty.
 _PYTEST_NOTHING_SELECTED = "command exited 5:"
 
 
@@ -1299,13 +1299,30 @@ def _slow_tests(context: Context) -> str:
             ),
         )
     except StepFailureError as error:
-        # An empty lane is a lane with no members, not a broken gate. The membership is
-        # decided by a ceiling, so it can legitimately fall to zero -- and a deep surface
-        # that failed when nothing was slow would teach people to keep a token member in
-        # the lane, which is worse than the failure it was meant to report.
-        if _PYTEST_NOTHING_SELECTED not in str(error):
+        if not str(error).startswith(_PYTEST_NOTHING_SELECTED):
             raise
-        return "  no test is deferred by the per-test ceiling; the quick lane runs them all"
+        # Probe only this ambiguous failure: healthy lanes should not pay for a second
+        # collection. Serial pytest distinguishes no selected tests (5) from collection
+        # errors, and a successful collection proves the workers failed to run real tests.
+        try:
+            _run(
+                context,
+                (
+                    sys.executable,
+                    "-m",
+                    "pytest",
+                    "-q",
+                    "tests",
+                    "-m",
+                    SLOW_TESTS,
+                    "--collect-only",
+                ),
+            )
+        except StepFailureError as collection_error:
+            if not str(collection_error).startswith(_PYTEST_NOTHING_SELECTED):
+                raise
+            return "  no test is deferred by the per-test ceiling; the quick lane runs them all"
+        raise
     _require_durations(output, "slow", f"the {SLOW_TEST_FLOOR_SECONDS:g}s marker floor")
     # A watch item since this lane gained xdist, and not a live break. The floor is the
     # two-sided half of the rule -- a `slow` marker has to earn itself -- and under
