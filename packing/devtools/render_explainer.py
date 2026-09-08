@@ -516,6 +516,85 @@ def inline_font_urls(css: str, stylesheet_dir: Path) -> str:
     return inlined
 
 
+@cache
+def print_sans_family() -> str:
+    """The family kpress declares its static print instances under, quoted as CSS has it.
+
+    Read from kpress's own generator rather than written down here, through
+    `devtools.sans_instances`, which already loads that module by path. The family is
+    kpress's to name -- it renamed it once, from `Source Sans 3` to `KPress Print Sans`,
+    when the OFL's reserved name made a family of its own necessary -- and a literal on
+    this side would have gone on pruning a family nothing declares, letting twelve
+    faces of base64 into every copy of the page served, silently.
+
+    Imported inside the function because `sans_instances` imports this module: the
+    cycle is only a problem at import time, and deferring it also keeps this module
+    loadable in a checkout whose kpress submodule is not initialised.
+
+    Quoted, and compared whole: `"Source Sans 3 Variable"` is a different family and a
+    different string, which is what lets one equality separate the screen's variable
+    face from the print instances that stand in for it.
+
+    The dependency this creates is worth stating, because it is on the repository and
+    not on the package: the generator is `vendor/kpress/devtools/instance_sans.py`,
+    which the kpress wheel does not ship, so this function -- and with it `kpress_css`
+    and the whole page render -- needs the submodule checked out and not merely kpress
+    installed. That is a contract the gitlink already holds, since every path here
+    resolves kpress from `vendor/kpress` rather than from an index, and it is why a
+    missing generator is reported as an uninitialised submodule. `think-y15p` asks kpress
+    to export the family from the package, which would leave the generator as a
+    fallback rather than the only source.
+    """
+    from devtools.sans_instances import print_family  # noqa: PLC0415
+
+    return f'"{print_family()}"'
+
+
+#: A `@font-face` block's family, in either of the two shapes kpress and KaTeX write.
+FONT_FACE_FAMILY = re.compile(r"font-family:\s*(\"[^\"]+\"|[^;]+);")
+
+#: An at-rule whose body is empty, which is what a `@media print` block is once its
+#: faces have been pruned out of it, and a CSS comment.
+_EMPTY_AT_RULE = re.compile(r"@[a-zA-Z-]+[^{}]*\{\s*\}")
+_CSS_COMMENT = re.compile(r"/\*.*?\*/", re.DOTALL)
+
+
+def _print_sans_face(block: str) -> bool:
+    """Whether a `@font-face` block is one of kpress's static print instances.
+
+    Those exist so a printed page embeds a font rather than drawing outline paths, and
+    they are at kpress's own weight tokens. This page prints at its own -- 410, 550,
+    600 and 680, declared and checked in `devtools.sans_instances` -- so kpress's set
+    would answer none of its requests while costing 20 KB of base64 a face in every
+    copy of the page ever served. `render_explainer_pdf` injects this page's own set
+    into the loaded document instead, at the moment it prints it, which is why nothing
+    about the served page or the screen changes.
+
+    Judged on the family alone, so it holds however kpress reshapes the stylesheet:
+    what must not reach the page is the family, wherever it is declared. PT Serif,
+    LocalPunct, `Source Sans 3 Variable`, the KaTeX faces and `KPress Math Text` all
+    name something else and are untouched.
+    """
+    family = FONT_FACE_FAMILY.search(block)
+    return family is not None and family.group(1).strip() == print_sans_family()
+
+
+def _declares_nothing(css: str) -> bool:
+    """Whether a stylesheet still declares anything, once comments and empty rules go.
+
+    `print-fonts.css` pruned of its faces is a comment and an `@media print` block with
+    nothing in it. Neither draws anything, and emitting them would move the page's
+    bytes for a file that contributes nothing to it. Nested empty rules are stripped
+    until nothing more comes out, so an empty block inside an empty block goes too.
+    """
+    stripped = _CSS_COMMENT.sub("", css)
+    while True:
+        smaller = _EMPTY_AT_RULE.sub("", stripped)
+        if smaller == stripped:
+            return not stripped.strip()
+        stripped = smaller
+
+
 def kpress_css(static: Path) -> str:
     """The kpress design system as one stylesheet, its webfonts inlined.
 
@@ -529,10 +608,19 @@ def kpress_css(static: Path) -> str:
     parts = []
     for name in (PAGE_RESET, *DEFAULT_CSS_ASSETS):
         css = (static / name).read_text(encoding="utf-8")
+        pruned = FONT_FACE_BLOCK.sub(
+            lambda match: "" if _print_sans_face(match.group(0)) else match.group(0), css
+        )
+        # A stylesheet the prune empties carries nothing into the page, so it does not
+        # enter it at all, not even as its own comment marker. That is what makes the
+        # rendered page's bytes the same before and after kpress registers
+        # `print-fonts.css`: the file arrives, and the page does not move.
+        if _declares_nothing(pruned):
+            continue
         parts.append(f"/* kpress: {name} */")
         # Each stylesheet resolves its own references, from its own directory, so
         # a kpress stylesheet added outside `css/` would still find its faces.
-        parts.append(inline_font_urls(css, (static / name).parent))
+        parts.append(inline_font_urls(pruned, (static / name).parent))
     return "\n".join(parts)
 
 
@@ -752,7 +840,7 @@ def _font_face_reachable(block: str) -> bool:
     ref = re.search(r"(KaTeX_[A-Za-z0-9-]+)\.woff2", block)
     if ref is not None:
         return ref.group(1) in KATEX_FACES
-    family = re.search(r"font-family:\s*(\"[^\"]+\"|[^;]+);", block)
+    family = FONT_FACE_FAMILY.search(block)
     if family is None or family.group(1) != '"KPress Math Text"':
         raise SystemExit(
             f"a KaTeX stylesheet declares a face this renderer does not know how to prune: "
