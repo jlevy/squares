@@ -30,6 +30,7 @@ import pytest
 import devtools.check_nagamochi_bounds as nagamochi
 from devtools.check_nagamochi_bounds import RECORD, cases, main, prose_counts, theorem_two
 from sqpack.fractional.certificate import least_size_certified
+from sqpack.known_best import KNOWN_BEST_CORPUS
 
 CASES_DIR = Path(__file__).parents[1] / "cases"
 
@@ -73,7 +74,7 @@ def test_it_covers_the_cases_it_claims_to() -> None:
     """
     covered = citing()
     assert min(covered) >= 4
-    assert max(covered) <= 100
+    assert max(covered) <= KNOWN_BEST_CORPUS.last_n
     reached = reached_by_retained_certificates()
     # The retained packages today: n = 11, 12, 17 and 20, reaching 11, 12, 17-21.
     assert {11, 12, 17, 18, 19, 20, 21} <= reached
@@ -161,21 +162,24 @@ def test_a_stale_readme_count_is_refused(
 ) -> None:
     """The figure that outlived the 4.5058 adoption by a day would now fail the gate."""
     stale = tmp_path / "README.md"  # type: ignore[operator]
-    stale.write_text(
-        "Of the 65 open cases, **63** have\nNagamochi\u2019s general closed form.\n",
-        encoding="utf-8",
-    )
-    monkeypatch.setattr(nagamochi, "README", stale)
     found = cases()
     open_cases = [case for case in found.values() if case.get("status") == "open"]
     governed = sum(
         RECORD in ((case.get("verified_lower_bound") or {}).get("evidence") or [])
         for case in open_cases
     )
+    # Five more than the record says, whatever the corpus says today.
+    stale_count = governed + 5
+    stale.write_text(
+        f"Of the {len(open_cases)} open cases, **{stale_count}** have\nNagamochi\u2019s "
+        "general closed form.\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(nagamochi, "README", stale)
     problems = prose_counts(found)
     assert len(problems) == 1
-    assert "63 of 65" in problems[0]
+    assert f"{stale_count} of {len(open_cases)}" in problems[0]
     # The corpus figure is read from the record here, as the checker reads it: it
     # was 60 when this test was written and 58 a day later (D-444).
     assert f"{governed} of {len(open_cases)}" in problems[0]
-    assert governed < 63
+    assert governed < stale_count

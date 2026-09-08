@@ -206,6 +206,8 @@ hypotheses to be matched to the square pose chart and its nonsmooth feature chan
 | **[Kingbird]** | Squares-in-Squares catalogue: exact minimal polynomials, rigidity flags | kingbird.myphotos.cc | `kingbird-squares-in-squares` |
 | **[Kingbird-compared]** | Supersession history: which record fell to which method, when | kingbird.myphotos.cc | `kingbird-squares-in-squares-compared` |
 | **[Kingbird-rigid]** | Author-maintained rigid-packing classification | kingbird.myphotos.cc | `kingbird-squares-in-squares-rigid` |
+| **[Kingbird-Göbel-squares]** | The Göbel-square family in closed form, `n = 2(a+1)a + b²` at side `a + 1 + (b/2)√2`, with its rendered members: 32 picture panels over 18 distinct `n`, from 5 to 9465; retrieved 2026-09-07 | kingbird.myphotos.cc | `kingbird-squares-in-squares-gobel-squares` |
+| **[Kingbird-Göbel-strips]** | The Göbel-strip family in closed form, `n = (a+1)a + 2 + b` with `b = 1 + ⌊(a−1)√2⌋`, at side `a + 1 + (1/2)√2`, with its rendered members: 152 picture panels over 58 distinct `n`, from 5 to 2135; retrieved 2026-09-07 | kingbird.myphotos.cc | `kingbird-squares-in-squares-gobel-strips` |
 | **[Kingbird analytic minimization]** | Author notes on stationary equations for underdetermined packing systems | kingbird.myphotos.cc | `kingbird-squares-in-squares-analytic-minimization` |
 | **[Kingbird run statistics]** | First-party simulated-annealing basin frequencies and setup-specific search costs for `n = 51, 55` | kingbird.myphotos.cc | `kingbird-run-statistics-2026/` |
 | **[UnitSquare 2026]** | Results Release 1: six reported construction-only improvements and its public structured record | hmbelvedere.com | `unitsquare-release1-2026/` |

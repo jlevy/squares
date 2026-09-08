@@ -1,0 +1,8 @@
+{
+  "name": "known-best chunk census",
+  "output": "chunk census check passed: components, contacts, and bounded lattice partitions for 100 records",
+  "reason": "",
+  "run_id": "290dda6d9ccd41e181a2107421759c8b",
+  "seconds": 39.99588862500241,
+  "status": "passed"
+}

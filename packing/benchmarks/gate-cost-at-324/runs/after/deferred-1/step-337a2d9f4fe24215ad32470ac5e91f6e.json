@@ -1,0 +1,8 @@
+{
+  "name": "known-best n=1..324 atlas rebuild",
+  "output": "known-best atlas check passed: 324 sources/plans, witnesses, renders, 2 composites, and links",
+  "reason": "",
+  "run_id": "270147eccf5b4174b0d2da19e00b4bd0",
+  "seconds": 354.2700321250013,
+  "status": "passed"
+}

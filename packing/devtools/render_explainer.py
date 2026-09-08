@@ -245,6 +245,7 @@ assert _polynomial(BEST_PACKING) < 0 < _polynomial(BEST_PACKING + _ULP), (
 )
 
 PRIOR_YEAR = 2003
+RESULT_YEAR = 2026
 PRIOR_MEMO_YEAR = 1984
 
 # Where the page sends a reader for more: the sources the n = 11 record cites
@@ -269,17 +270,23 @@ REPO_URL = "https://github.com/jlevy/squares"
 # is that one place.
 SITE_URL = "https://jlevy.github.io/squares/"
 SITE_NAME = "Squares"
-#: The atlas the Figure 1 caption sends a reader to browse, linked as a directory.
+#: The atlas the Figure 2 caption sends a reader to browse, linked as a directory.
 ATLAS = PACKING / "atlas" / "known-best"
 BEST_RENDERING = ATLAS / "rendering" / "n-011.svg"
-# The atlas composite of every known-best packing, shown as Figure 1 and served
+# The atlas composite of every known-best packing, shown as Figure 2 and served
 # beside the page rather than inlined: the PNG is the image, the PDF the link.
 #: The composite travels with the page: the SVG the figure shows, the PDF it links for
 #: print, and the PNG for a reader whose context cannot render the vector.
 COMPOSITE_STEM = PACKING / "atlas" / "known-best" / "known-best-1-100"
+#: The poster of the whole register, n = 1..324, published beside the figure since
+#: 2026-09-07: the caption links its PDF, and the SVG and PNG travel with it so a reader
+#: who follows the link to the vector is not sent back to the repository. It has no card
+#: of its own; the link preview stays the figure's landscape crop.
+POSTER_STEM = PACKING / "atlas" / "known-best" / "known-best-1-324"
 COMPOSITE_ASSETS = (
     *(COMPOSITE_STEM.with_suffix(f".{ext}") for ext in ("svg", "png", "pdf")),
     COMPOSITE_STEM.with_name(f"{COMPOSITE_STEM.name}-card.png"),
+    *(POSTER_STEM.with_suffix(f".{ext}") for ext in ("svg", "png", "pdf")),
 )
 #: The full-canvas raster, which the published Markdown shows to a reader whose context
 #: cannot render the vector. The 1x rather than the committed `@2x`: every consumer
@@ -294,7 +301,7 @@ COMPOSITE_PNG = COMPOSITE_STEM.with_suffix(".png")
 #: 1.91:1 to the nearest whole pixel. The crop is chosen here rather than inherited from
 #: whatever each platform does, which is the only part of it this repository controls.
 COMPOSITE_CARD = COMPOSITE_STEM.with_name(f"{COMPOSITE_STEM.name}-card.png")
-#: What Figure 1 is a picture of.
+#: What Figure 2 is a picture of.
 COMPOSITE_ALT = (
     "The best known packings of one through one hundred unit squares, in a ten-by-ten "
     "grid, each labelled with its best known upper bound and, where the value is still "
@@ -528,6 +535,16 @@ def print_sans_family() -> str:
     Quoted, and compared whole: `"Source Sans 3 Variable"` is a different family and a
     different string, which is what lets one equality separate the screen's variable
     face from the print instances that stand in for it.
+
+    The dependency this creates is worth stating, because it is on the repository and
+    not on the package: the generator is `vendor/kpress/devtools/instance_sans.py`,
+    which the kpress wheel does not ship, so this function -- and with it `kpress_css`
+    and the whole page render -- needs the submodule checked out and not merely kpress
+    installed. That is a contract the gitlink already holds, since every path here
+    resolves kpress from `vendor/kpress` rather than from an index, and it is why a
+    missing generator is reported as an uninitialised submodule. `think-y15p` asks kpress
+    to export the family from the package, which would leave the generator as a
+    fallback rather than the only source.
     """
     from devtools.sans_instances import print_family  # noqa: PLC0415
 
@@ -1515,12 +1532,17 @@ def number_line_marks(facts: list[Facts], headline: Facts) -> str:
 
 
 def starred_lower_bounds() -> int:
-    """How many atlas cells carry a lower bound this project proved.
+    """How many cells in Figure 2 carry a lower bound this project proved.
 
     The composite counts them in its own legend from the figure record; the caption
     beside the image reads the same total, so the two cannot disagree.
     """
-    return int(load_figure_record()["totals"]["lower_bound_first_proved_here"])
+    totals = next(
+        composite["totals"]
+        for composite in load_figure_record()["composites"]
+        if composite["stem"] == COMPOSITE_STEM.name
+    )
+    return int(totals["lower_bound_first_proved_here"])
 
 
 def novel_results() -> int:
@@ -1724,6 +1746,8 @@ def claim_substitutions(headline: Facts, default: Facts) -> dict[str, str]:
         values[f"{role}_RUNTIME"] = runtime_phrase(f)
     values["HEADLINE_PINNED_RUNTIME"] = runtime_phrase(headline, pinned=True)
     values["PINNED_VERIFIER_LINES"] = source_lines_phrase(PINNED_VERIFIER)
+    values["PINNED_VERIFIER_URL"] = repo_file(PINNED_VERIFIER)
+    values["PROOF_CARD_URL"] = repo_file(CASE / f"{RESULT_ID}-proof-card.md")
     return values
 
 
@@ -1735,7 +1759,7 @@ def card_substitutions(headline: Facts, headline_frac: str) -> dict[str, str]:
     """What a link preview shows: the title, the sentence, the canonical URL, the image.
 
     Every one of these is a string the page already states somewhere -- the title in
-    `<title>`, the sentence in `<meta name="description">`, the picture in Figure 1 --
+    `<title>`, the sentence in `<meta name="description">`, the picture in Figure 2 --
     and each is built here once and substituted into both places, so a shared link and
     the page it opens cannot say different things. The bound in the title and in the
     sentence is the headline certificate's own, like every other number on the page.
@@ -1804,12 +1828,14 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
         "DEFAULT_CERT_URL": repo_file(default.source),
         "N_RESULTS": str(registered_results()),
         "N_NOVEL": str(novel_results()),
+        "RESULTS_URL": repo_file(PACKING / "frontier/RESULTS.md"),
         "N_STARRED": str(starred_lower_bounds()),
         "SOURCE_URL": MARKDOWN_OUTPUT.name,
         "REPO_URL": REPO_URL,
         "PUBLISHED": PUBLICATION_DATE,
         "EDITION": page_edition(),
         "PRIOR_YEAR": str(PRIOR_YEAR),
+        "YEARS_SINCE_PRIOR": str(RESULT_YEAR - PRIOR_YEAR),
         "PRIOR_MEMO_YEAR": str(PRIOR_MEMO_YEAR),
         "PRIOR_MEMO_URL": PRIOR_MEMO_URL,
         "PRIOR_SIX_MEMO_URL": PRIOR_SIX_MEMO_URL,
@@ -2148,17 +2174,17 @@ _ONLY_ON_SCREEN = re.compile(
 )
 
 
-#: What a reader holding this file alone cannot otherwise work out. Figure 1 carries its
-#: image; Figures 2 through 7 are drawn by the page, so here they are captions with
-#: nothing above them -- readable, and describing something the reader cannot see. A
-#: reader who does not know that is left assuming an image failed to load, and a reader
-#: who wants the drawings has no idea where they are, because the chip row that would
-#: have said so is one of the things this edition drops.
+#: What a reader holding this file alone cannot otherwise work out. Figure 2 carries its
+#: image; Figure 1 and Figures 3 through 7 are drawn by the page, so here they are
+#: captions with nothing above them -- readable, and describing something the reader
+#: cannot see. A reader who does not know that is left assuming an image failed to
+#: load, and a reader who wants the drawings has no idea where they are, because the
+#: chip row that would have said so is one of the things this edition drops.
 _EDITION_NOTE = f"""
 
 > This is the Markdown edition, written by the same render that writes the page. The
 > argument is complete here, and every figure's caption states what its figure shows.
-> Only Figure 1 carries its image; the rest are drawn by [the page
+> Only Figure 2 carries its image; the rest are drawn by [the page
 > itself]({SITE_URL})."""
 
 
@@ -2334,6 +2360,15 @@ def markdown_source(
     if not shared["REFINEMENT_URL"]:
         source = drop_block(source, "REFINEMENT")
     comparison = shared["HEADLINE_L_FRAC"] != shared["DEFAULT_L_FRAC"]
+    if not comparison and shared["REFINEMENT_URL"]:
+        # The refinement still applies when the page shows only the stronger bound.
+        source = re.sub(
+            r"<!--BEGIN:COMPARISON-->.*?<!--BEGIN:REFINEMENT-->"
+            r"(.*?)<!--END:REFINEMENT-->.*?<!--END:COMPARISON-->",
+            lambda match: f"({match.group(1).strip()})",
+            source,
+            flags=re.DOTALL,
+        )
     source = drop_block(source, "NO_COMPARISON" if comparison else "COMPARISON")
     unmeasured = [v["SLUG"] for v in per_certificate if not v["COARSEN_BARS"]]
     if unmeasured:

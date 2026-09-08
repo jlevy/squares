@@ -1,0 +1,8 @@
+{
+  "name": "tier ceilings are declared and not slack",
+  "output": "gate budget declaration passed: 9 tiers, 3 with a recorded cost, all ceilings within 2x of it, all named in development.md",
+  "reason": "",
+  "run_id": "0224631f59cc43a5b3ae7ad92b6d2018",
+  "seconds": 0.37742987499950686,
+  "status": "passed"
+}

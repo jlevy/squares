@@ -1,0 +1,8 @@
+{
+  "name": "the borrowed lower bounds re-derive",
+  "output": "307 lower bounds re-derived from Theorem 2, all agreeing, none inverted; the README, case-body, citation (319) and operative (307) counts agree with the records",
+  "reason": "",
+  "run_id": "c4cec457a4a54015a84b67fda9eec81c",
+  "seconds": 0.2600548339978559,
+  "status": "passed"
+}

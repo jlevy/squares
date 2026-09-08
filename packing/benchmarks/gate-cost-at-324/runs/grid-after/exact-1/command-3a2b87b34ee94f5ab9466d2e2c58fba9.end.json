@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/Users/levy/wrk/github/squares/.claude/worktrees/pr-89-review-strategy-19e990/packing/.venv/bin/python3",
+    "-m",
+    "devtools.dilation_corollary",
+    "cases/n11_fractional_certificate/certificate.json",
+    "--source-name",
+    "packing/cases/n11_fractional_certificate/certificate.json",
+    "--check-limit-record",
+    "cases/n11_fractional_certificate/t-022-dilation-limit-corollary.json"
+  ],
+  "cwd": "/Users/levy/wrk/github/squares/.claude/worktrees/pr-89-review-strategy-19e990/packing",
+  "finished_at": "2026-09-07T14:49:51.103198+00:00",
+  "inner_jobs": 1,
+  "jobs": 3,
+  "log_path": "/private/tmp/claude-502/-Users-levy-wrk-github-squares--claude-worktrees-pr-89-review-strategy-19e990/b48434ad-6026-497b-a36d-ed85246e6a7e/scratchpad/runs/after-exact-1/command-3a2b87b34ee94f5ab9466d2e2c58fba9.log",
+  "reason": "",
+  "run_id": "1acdba949c354fc4a623668b0e7d955b",
+  "started_at": "2026-09-07T14:49:24.751505+00:00",
+  "status": "passed",
+  "step_name": "exact verification",
+  "timeout_seconds": 900.0,
+  "wall_seconds": 26.35157587499998
+}

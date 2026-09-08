@@ -1,0 +1,8 @@
+{
+  "name": "verifier perturbation limits",
+  "output": "exact verifier, unperturbed packing: accept\n  delta = 1e-6    REJECT\n  delta = 1e-12   REJECT\n  delta = 1e-15   REJECT\n  delta = 1e-18   REJECT\n  delta = 1e-30   REJECT\n  delta = 1e-100  REJECT\n\nfloat64 separating-axis test:\n  tol=1e-09    valid packing: accept   1e-6: REJECT  1e-9: REJECT  1e-12: accept  1e-15: accept  1e-18: accept\n  tol=1e-12    valid packing: accept   1e-6: REJECT  1e-9: REJECT  1e-12: REJECT  1e-15: accept  1e-18: accept\n  tol=0        valid packing: REJECT   1e-6: REJECT  1e-9: REJECT  1e-12: REJECT  1e-15: REJECT  1e-18: REJECT\n\nA float verifier that accepts the true packing also accepts overlaps\nbelow its tolerance; one that rejects those overlaps also rejects the\ntrue packing. That is why exactness here is about representation, not precision.",
+  "reason": "",
+  "run_id": "81bc483753ec48a2bd65f5a28ae992df",
+  "seconds": 1.0075557499949355,
+  "status": "passed"
+}

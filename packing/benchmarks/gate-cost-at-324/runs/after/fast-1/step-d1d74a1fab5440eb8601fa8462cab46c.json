@@ -1,0 +1,8 @@
+{
+  "name": "Goebel's family reaches the sizes it reaches",
+  "output": "  Goebel family reproduces: 12 sizes below 100, optimal at [5, 40, 65, 89], exact and unbuilt at []",
+  "reason": "",
+  "run_id": "a82de8840fc84413b6854db00771e37b",
+  "seconds": 2.6846518340025796,
+  "status": "passed"
+}

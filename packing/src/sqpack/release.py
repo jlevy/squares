@@ -8,8 +8,9 @@ reasons.
 
 from __future__ import annotations
 
-#: The edition the figures and the explainer state. Bump it when they are republished.
-PUBLICATION_VERSION = "v0.2.3"
+#: The edition the figures and the explainer state. Choose at most one patch bump per
+#: merge, and keep the version fixed while revising that pull request.
+PUBLICATION_VERSION = "v0.2.4"
 
 #: Where the edition stands, said ahead of the version. Empty once it is final; the
 #: join below then drops it and the stray space with it, so going final is one edit.
@@ -27,7 +28,7 @@ PUBLICATION_STATUS = "DRAFT"
 #: the exception, and deliberately: it is rendered on every deploy and stamps the commit
 #: it is built from (`render_explainer.page_edition`), so its hash moves with every push
 #: while this one moves when an edition is cut.
-PUBLICATION_REVISION = "14beee33"
+PUBLICATION_REVISION = "cef19bfe"
 
 #: The version, written the one way it is ever written: `v0.1.0-3bd273e6`. Semver core,
 #: then the revision, in the shape a build identifier takes everywhere else.

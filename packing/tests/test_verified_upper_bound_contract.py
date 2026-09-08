@@ -32,6 +32,10 @@ import pytest
 import yaml
 
 from sqpack.assurance import bounds_agree_at_declared_precision
+from sqpack.known_best import KNOWN_BEST_CORPUS
+
+#: Cases whose verified ceiling trails the reported side, per corpus (think-93on).
+TRAILING_BY_CORPUS: dict[str, int] = {"n=1..100": 18, "n=1..200": 68, "n=1..324": 129}
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 # The consumers of this field now span the repository: it is named in SYNOPSIS.md and
@@ -140,6 +144,21 @@ DECLARED_CONSUMERS = {
         "corrupts the field on purpose, to prove the checkers fire"
     ),
     "packing/devtools/migrate_frontier_v2.py": "builds the field from the v1 records",
+    "packing/devtools/generate_frontier_case.py": (
+        "builds the field for a drafted case as the trivial grid ceiling ceil(sqrt(n)) "
+        "under E-basic-grid-upper, and writes the case's own ceiling disclaimer and its "
+        "mathematics blocker whenever that ceiling trails the reported best known side. "
+        "It never copies reported_upper_bound into it and never treats either as s(n)"
+    ),
+    "packing/tests/test_generate_frontier_case.py": (
+        "compares the generated field against the one a hand-written record carries, and "
+        "asserts it is the grid ceiling; it makes no claim about any bound's worth"
+    ),
+    "docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md": (
+        "the plan that extends the register to n = 324; it states the bound rule for the "
+        "field in the new range -- the grid ceiling under E-basic-grid-upper -- and never "
+        "as a side length"
+    ),
     "packing/devtools/render_research_tables.py": (
         "renders it beside the report, never instead of it"
     ),
@@ -254,7 +273,9 @@ def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> Non
     # family's 27, 38, 52, 67 and 84, the off-centre family's 26 and 85, and the lifted
     # witnesses 19 and 66 in Q(sqrt 2) and 18 and 86 in Q(sqrt 7) -- leaving n = 50's
     # 3/7 as the widest.
-    assert len(trailing) == 18
+    # 18 at n = 1..100; the new cases above 100 trail on the grid ceiling wherever the
+    # catalogue reports a non-integer side, so the measurement grows with the corpus.
+    assert len(trailing) == TRAILING_BY_CORPUS[KNOWN_BEST_CORPUS.label]
     for n, (reported, verified) in trailing.items():
         assert verified > reported, n
     worst = max(verified - reported for reported, verified in trailing.values())
@@ -274,7 +295,7 @@ def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> Non
         1 for case in cases().values() if case["verified_upper_bound"]["exact_form"]
     )
     proved = sum(1 for case in cases().values() if case["status"] == "proved")
-    assert exact_forms == 100
+    assert exact_forms == KNOWN_BEST_CORPUS.count
     assert proved < exact_forms
 
 

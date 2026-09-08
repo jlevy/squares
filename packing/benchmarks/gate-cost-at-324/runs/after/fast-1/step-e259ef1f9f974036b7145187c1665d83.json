@@ -1,0 +1,8 @@
+{
+  "name": "session clocks are readable",
+  "output": "  91 session artifacts, 409 phases, 391 carrying a clock: every declared start is one that could have been read\n  note: session-044-agenda006-continuation.md phase 7 starts before phase 6; a delegated lane run in a worktree does this legitimately\n  elapsed against budget in session-093-atlas-expansion-to-324.md:\n      phase  1 research-survey            25 min against a budget of   90\n      phase  2 pipeline-improvement      260 min against a budget of  180\n    * phase  3 pipeline-improvement      120 min against a budget of  170",
+  "reason": "",
+  "run_id": "a82de8840fc84413b6854db00771e37b",
+  "seconds": 0.20471345900296,
+  "status": "passed"
+}

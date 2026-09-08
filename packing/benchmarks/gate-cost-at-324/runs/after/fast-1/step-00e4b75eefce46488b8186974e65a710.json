@@ -1,0 +1,8 @@
+{
+  "name": "deterministic SVG rendering",
+  "output": "SVG RENDERING CHECKS PASSED: 86 controls",
+  "reason": "",
+  "run_id": "a82de8840fc84413b6854db00771e37b",
+  "seconds": 21.744130957995367,
+  "status": "passed"
+}

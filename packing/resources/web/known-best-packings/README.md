@@ -24,6 +24,25 @@ The metadata attributes the SVG and high-precision updates to David Ellsworth an
 original catalogue compilation to Erich Friedman, following the
 [Kingbird catalogue](https://kingbird.myphotos.cc/packing/squares_in_squares.html).
 
+## The Range `n = 101..324`
+
+Decision of 2026-09-07, under
+[the atlas expansion plan](../../../../docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md),
+decision `D2`: the policy above applies unchanged to the 123 catalogue cases in
+`n = 101..324` whose geometry the prospective audit located but did not retain.
+Each is acquired once, ephemerally, by the atlas builder's `--fetch` path; the SVG is
+parsed to numerical centre-and-angle facts, and only those facts, the attribution, and
+the source metadata are retained, with `raw_asset_retained: false`.
+The source-availability map records the state as
+`derived-facts-acquisition-approved-2026-09-07`; its 2026-08-26 audit remains the
+provenance record for which source served which `n`.
+The
+[survey of sources beyond 100](../../../../docs/project/research/research-2026-09-07-square-packing-sources-beyond-100.md)
+found no source with express reuse terms that carries this range, so there is no
+licensed alternative to prefer.
+Express permission from the catalogue's author would allow raw retention and is an
+owner action, not a prerequisite here.
+
 ## Retained UnitSquare Renderings
 
 The `unitsquare/` files are retained public evidence renderings for the newer `n = 68`

@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/Users/levy/wrk/github/squares/.claude/worktrees/pr-89-review-strategy-19e990/packing/.venv/bin/python3",
+    "-m",
+    "devtools.price_contact_enumeration",
+    "--check"
+  ],
+  "cwd": "/Users/levy/wrk/github/squares/.claude/worktrees/pr-89-review-strategy-19e990/packing",
+  "finished_at": "2026-09-07T13:06:11.911754+00:00",
+  "inner_jobs": 2,
+  "jobs": 4,
+  "log_path": "/private/tmp/claude-502/-Users-levy-wrk-github-squares--claude-worktrees-pr-89-review-strategy-19e990/b48434ad-6026-497b-a36d-ed85246e6a7e/scratchpad/base-art/atlas-1/command-62e9ac5ea6f946d68017279d3c3e8d62.log",
+  "reason": "",
+  "run_id": "d304debd52c24129bca87d702ae403da",
+  "started_at": "2026-09-07T13:06:03.352051+00:00",
+  "status": "passed",
+  "step_name": "known-best n=1..100 atlas",
+  "timeout_seconds": 900.0,
+  "wall_seconds": 8.561350791998848
+}
