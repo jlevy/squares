@@ -102,11 +102,13 @@ What is specific to this page, found while prototyping the feature on it:
   overflowing document by shrinking all of it, so a 12pt document printed at 93.2% —
   11.2pt — over 14 pages; `check_print_layout` did not see it, because it measured
   column boxes and the run that overflowed was inline content inside one.
-  Current, measured 2026-09-07 on this branch: the page prints at the designed 12pt on
-  16 pages and two consecutive exports agree after date normalisation, with
+  Measured 2026-09-07 on this branch: the page prints at the designed 12pt on 16 pages
+  and two consecutive exports agree after date normalisation, with
   `render_explainer_pdf --check` reporting 983,958 bytes locally and 948,440 bytes on CI
   (run 34161478114), both on Playwright’s pinned headless shell — the bytes follow the
   browser build and the host’s fonts, the layout does not.
+  Current, after `main`’s content merge: 17 pages and 830,153 bytes on macOS with the
+  same pinned shell, the extra page being content rather than typography.
   In the file the math letters and digits still come from the `PTSerif-Regular` and
   `PTSerif-Italic` subsets the prose already embeds, while `≤`, `√`, the fraction bar
   and the Greek come from the embedded KaTeX faces.
@@ -199,10 +201,27 @@ all read it back off the loaded generator through `sans_instances.print_family`.
 literal would go on naming a family nothing declares the next time kpress renames it —
 which is how the rename that produced this paragraph was found.
 
+The generator is repository content, not package content: `instance_sans.py` lives in
+kpress’s `devtools/` and the kpress wheel does not ship it.
+So `render_explainer` needs `vendor/kpress` checked out and not merely kpress installed,
+which the gitlink already guarantees — every path here resolves kpress from the
+submodule rather than from an index — and a missing generator is reported as an
+uninitialised submodule rather than as an import error.
+`think-y15p` asks kpress to export the family from the package, which would leave the
+generator as a fallback rather than the only source.
+
 Two checks hold the rest.
 `sans_instances --check` regenerates the instances in memory and compares them byte for
 byte, then probes the rendered page under `media: print` and fails on any weight and
 style the declared set does not answer, naming the element that asks for it.
+The probe reads generated content as well as text nodes — `::before`, `::after` and
+`::marker` on every element with a box, wherever the pseudo’s `content` draws something
+— because kpress numbers footnote items with `li.kpress-footnote-item::before`, a real
+sans run in no text node, and a walk over text alone left the weight it asks for outside
+the check. What stays outside is the `@page` margin box, which is not in the document
+tree at all; `render_explainer_pdf` covers that side by resolving `--kpress-font-sans`
+and `--kpress-font-prose` at the root and loading each by name before it prints, so a
+face used only in a margin box cannot have its first request land inside `page.pdf()`.
 `render_explainer_pdf --check` scans the exported bytes for font dictionaries and fails
 if a face the page ships is a Type3 font, or if it can see no font dictionary at all.
 It does not fail on the host’s own fonts: three characters in the sans line are in no
@@ -282,12 +301,25 @@ the fonts cost:
 | Atlas figure | Helvetica by design | 54 KB, accepted |
 
 The PDF column is the kpress side of the same measurement, recorded in kpress’s plan and
-research note. With the print sans faces the PDF is 794 KB.
+research note. It was taken on 2026-09-07 against the page as it stood before this
+branch, on the machine that wrote the table; the 979,521 bytes quoted elsewhere for the
+same export are a different host on a different day, and figures from two hosts do not
+subtract — the bytes follow the Chromium build and the fonts the machine has.
+
+The one pair that does subtract is two renders of one page in one browser at one moment.
+Measured that way at this branch’s head, on macOS with Playwright’s pinned headless
+shell: **1,024,108 bytes with the sans in Type3 outlines and 830,153 with it in fonts**,
+17 pages either way, and the five `SourceSans3-*` outline fonts gone from the file.
+That is the figure `devtools/sans_instances.py` and the pull request both state.
 
 Tracked under epic `think-phgo`, with the kpress work under `kpr-b4mq`:
 
 - `think-988s`, this branch: the page’s own print sans instances injected at PDF time
   (the section above).
+- `think-y15p`: ask kpress to export the print-fonts wait and the print sans family from
+  the package. Both are private or repository-only today, so this side mirrors the
+  margin-box wait and loads the family by path; the duplication is what let the
+  margin-box step go missing in the first place.
 - `think-xd7t`: the font provenance guard.
   `render_explainer_pdf --check` gains an allow-list of the shipped families, with
   Helvetica as the atlas’s documented exception, and `inspect_explainer_typography` the

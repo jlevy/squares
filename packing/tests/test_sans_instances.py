@@ -16,6 +16,12 @@ So the three are exercised directly:
 - the PDF font scan, over synthetic dictionaries in the shapes Chromium writes. Both
   failures are here -- an owned face drawn as outlines, and a file the scan can see no
   font in at all -- because the second is the one that would otherwise look like a pass.
+  The scan's two ways of reading the wrong thing are here beside them: a face the file
+  only names, and an object number that also occurs inside a stream.
+- the probe's generated-content rule, run as the shipped JavaScript under node against
+  the `content` values a browser computes. Type on this page comes from pseudo-elements
+  as well as from text nodes -- `li.kpress-footnote-item::before` numbers the footnotes
+  -- and this is the rule that decides which of those count as a request.
 
 Nothing here launches a browser or reads a real font: the fixture writes stand-in files
 of a few bytes, and the whole file runs in milliseconds.
@@ -23,14 +29,18 @@ of a few bytes, and the whole file runs in milliseconds.
 
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 
 import pytest
+from nodejs_wheel import node
 
 from devtools.render_explainer_pdf import embedded_fonts, font_findings, outline_fonts
 from devtools.sans_instances import (
+    _PROBE,  # pyright: ignore[reportPrivateUsage]
     PRINT_FACES,
+    PSEUDO_ELEMENTS,
     Face,
     Requested,
     covered,
@@ -152,11 +162,17 @@ def _font(number: int, subtype: str, descriptor: int | None = None) -> bytes:
     ).encode()
 
 
-def _descriptor(number: int, name: str) -> bytes:
-    """The descriptor a Type3 font points at, which is where its face is named."""
+def _descriptor(number: int, name: str, *, program: bool = False) -> bytes:
+    """The descriptor a font points at, which is where its face is named.
+
+    `program` is the `/FontFile2` that makes the descriptor an embedding rather than a
+    reference to a face the reader is expected to own. A Type3 font never has one -- its
+    glyphs are drawing procedures -- which is why the default is off.
+    """
+    embedded = "/FontFile2 99 0 R\n" if program else ""
     return (
         f"\n{number} 0 obj\n<</Type /FontDescriptor\n/FontName /AAAAAA+{name}\n"
-        f"/Flags 4>>\nendobj\n"
+        f"{embedded}/Flags 4>>\nendobj\n"
     ).encode()
 
 
@@ -167,8 +183,19 @@ def _descriptor(number: int, name: str) -> bytes:
 #: scan and the case move together when the family is renamed.
 OWNED_OUTLINES = _descriptor(9, "SourceSans3-Regular_wght") + _font(1, "Type3", 9)
 INSTANCE_OUTLINES = _descriptor(9, f"{postscript_prefix()}-410") + _font(1, "Type3", 9)
-HOST_OUTLINES = _descriptor(9, ".SFNS-Regular") + _font(1, "Type3", 9) + _font(2, "Type0")
+EMBEDDED_SERIF = _descriptor(8, "PTSerif-Regular", program=True) + _font(2, "Type0", 8)
+REFERENCED_SERIF = _descriptor(8, "PTSerif-Regular") + _font(2, "Type0", 8)
+HOST_OUTLINES = _descriptor(9, ".SFNS-Regular") + _font(1, "Type3", 9) + EMBEDDED_SERIF
 NO_FONTS = b"%PDF-1.7\n1 0 obj\n<</Type /Page>>\nendobj\n"
+
+#: An object header at a line start inside a compressed stream, with the number the
+#: Type3 font's descriptor reference names. Flate output is arbitrary bytes and can
+#: hold this; what it cannot hold and still be a decoy is `/Type /FontDescriptor`.
+DECOY = (
+    b"\n7 0 obj\n<</Length 48>>\nstream\n"
+    b"\n9 0 obj\n<</FontName /AAAAAA+Decoy>>\nendobj\n"
+    b"endstream\nendobj\n"
+)
 
 
 def test_an_owned_face_drawn_as_outlines_fails() -> None:
@@ -201,6 +228,38 @@ def test_the_hosts_own_font_drawn_as_outlines_passes_and_is_still_reported() -> 
     assert embedded_fonts(HOST_OUTLINES) == ["AAAAAA+PTSerif-Regular"]
 
 
+def test_a_face_the_file_only_names_is_not_reported_as_embedded() -> None:
+    """`/BaseFont` names a face; `/FontFile2` is what says the file carries it.
+
+    The two dictionaries here are identical but for the font program, and the whole
+    claim this scan backs is that the page ships its faces. Counting a referenced font
+    would have `--check` announce as embedded a face the reader has to supply.
+    """
+    assert embedded_fonts(EMBEDDED_SERIF) == ["AAAAAA+PTSerif-Regular"]
+    assert embedded_fonts(REFERENCED_SERIF) == []
+
+
+def test_an_object_header_inside_a_stream_is_not_mistaken_for_the_descriptor() -> None:
+    """The descriptor is resolved by type, not by the first matching header.
+
+    Compressed streams carry arbitrary bytes, and `9 0 obj` at a line start is a
+    sequence they can hold. Reading one would name the outline font after a decoy: a
+    failure the file does not have, on a check whose findings have to be trusted.
+    """
+    file = DECOY + _descriptor(9, "SourceSans3-Regular_wght") + _font(1, "Type3", 9)
+    assert outline_fonts(file) == ["SourceSans3-Regular_wght"]
+
+
+def test_the_current_definition_of_a_descriptor_wins_over_the_superseded_one() -> None:
+    """A file written in increments carries the old object first and the new one after."""
+    file = (
+        _descriptor(9, "Superseded-Regular")
+        + _font(1, "Type3", 9)
+        + _descriptor(9, "SourceSans3-Regular_wght")
+    )
+    assert outline_fonts(file) == ["SourceSans3-Regular_wght"]
+
+
 def test_a_file_the_scan_can_see_no_font_in_is_a_failure() -> None:
     """The shortcut's cost, stated as a finding.
 
@@ -217,3 +276,61 @@ def test_an_outline_font_whose_face_cannot_be_read_counts_as_ours() -> None:
     """No descriptor, no attribution, no pass: an unreadable Type3 is not waved through."""
     findings = font_findings(_font(1, "Type3") + _font(2, "Type0"))
     assert len(findings) == 1
+
+
+def probe_function(name: str) -> str:
+    """One helper's shipped source, so what runs here is what runs in the browser."""
+    source = re.search(rf"  function {name}\([^)]*\) \{{.*?\n  \}}", _PROBE, re.DOTALL)
+    assert source is not None, f"{name} is no longer a helper of its own in the probe"
+    return source.group() + "\n"
+
+
+def draws(content: str) -> bool:
+    """Run the shipped generated-content rule under node, without browser setup."""
+    script = (
+        probe_function("draws")
+        + f"\nconsole.log(JSON.stringify(draws({json.dumps(content)})));\n"
+    )
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
+    return bool(json.loads(completed.stdout))
+
+
+#: What `getComputedStyle(el, pseudo).content` returns, and whether it puts type on the
+#: page. The counter is the case the probe was extended for: kpress numbers footnote
+#: items with `li.kpress-footnote-item::before`, a sans run in no text node, and a walk
+#: over text alone left the weight it asks for outside `--check` entirely.
+CONTENT_CASES: list[tuple[str, str, bool]] = [
+    ("a footnote counter, which is the case this exists for", 'counter(footnote) ". "', True),
+    ("a literal string", '"Figure "', True),
+    ("an attribute", "attr(data-label)", True),
+    ("no pseudo-element at all", "none", False),
+    ("the default, which draws the element's own marker", "normal", False),
+    ("an empty double-quoted string: a rule or a spacer", '""', False),
+    ("an empty single-quoted one", "''", False),
+    ("nothing computed", "", False),
+]
+
+
+@pytest.mark.parametrize(
+    ("content", "typeset"),
+    [pytest.param(c, t, id=name) for name, c, t in CONTENT_CASES],
+)
+def test_only_generated_content_that_sets_type_counts_as_a_request(
+    content: str, *, typeset: bool
+) -> None:
+    """An empty box asks for no face, and counting it would declare an instance for it.
+
+    The other direction is the one that matters more: a pseudo-element that does set
+    type asks for a weight like any run, and if the set does not answer it the PDF draws
+    it from the variable font as outline paths -- invisibly, because nothing walks it.
+    """
+    assert draws(content) is typeset
+
+
+def test_the_probe_reads_every_pseudo_element_that_can_carry_type() -> None:
+    """The three the page can put a face on, handed in rather than spelled in the JS."""
+    assert PSEUDO_ELEMENTS == ("::before", "::after", "::marker")
+    assert "getComputedStyle(el, pseudo)" in _PROBE

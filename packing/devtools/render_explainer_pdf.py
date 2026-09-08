@@ -88,17 +88,55 @@ _ABSOLUTE_LINKS = """(site) => {
 }"""
 
 
-#: The added faces, settled. `document.fonts.ready` had already resolved once, on a
-#: document these faces were not in; a set that has not begun loading them reports
-#: itself ready again straight away. Layout is forced and two frames are let through
-#: first, so the faces the new rules bring into use are loading before the wait, which
-#: is the same device `check_print_layout` uses after it switches media.
-_FACES_APPLIED = """() => new Promise((done) => {
+#: The custom properties kpress's `@page` margin boxes name their families with, and a
+#: sample every face answers with its `unicode-range` so `document.fonts.load` actually
+#: fetches it. Read as the root's resolved values rather than as literal stacks, which
+#: is what covers a host that redirects the tokens.
+_MARGIN_BOX_TOKENS = ("--kpress-font-sans", "--kpress-font-prose")
+_MARGIN_BOX_SAMPLE = "Aa Gg 0123"
+
+#: The added faces, settled -- both the ones the document tree asks for and the ones
+#: only an `@page` margin box does.
+#:
+#: `document.fonts.ready` had already resolved once, on a document these faces were not
+#: in; a set that has not begun loading them reports itself ready again straight away.
+#: So layout is forced and two frames are let through first, and the faces the new rules
+#: bring into use are loading before the wait -- the same device `check_print_layout`
+#: uses after it switches media.
+#:
+#: That covers the document tree and stops there, which is the gap this second half
+#: closes: a margin box is not in the tree, so a face used only there never enters
+#: `document.fonts.ready` and its first request lands inside `page.pdf()`, after the
+#: page it belongs to is drawn. The families are therefore asked for by name and waited
+#: on again. Nothing on this page is currently set in a margin box in a weight nothing
+#: else uses, so the step changes no byte today; it is here so that restoring kpress's
+#: sans footer does not silently print it in the fallback, where `sans_instances --check`
+#: cannot see it either.
+#:
+#: This mirrors kpress's `_await_print_fonts` (`kpress/format/pdf.py`) rather than
+#: calling it, and the reason is the underscore: the helper, the tokens, the sample and
+#: the page protocol it takes are all private to that module, so importing them would
+#: be this repository reaching past kpress's public surface. `think-y15p` asks kpress to
+#: export it, and this block goes when it does. No timeout race, which is the one thing
+#: dropped: kpress races one because a host page can name a face it fetches, while every
+#: face here is already a data URI in a document loaded from `file://`, and Playwright's
+#: own evaluate timeout is the backstop.
+_FACES_APPLIED = """async ([tokens, sample]) => {
   void document.documentElement.offsetHeight;
-  requestAnimationFrame(() => requestAnimationFrame(
-    () => { document.fonts.ready.then(() => done(document.fonts.status)); },
+  await new Promise((frame) => requestAnimationFrame(() => requestAnimationFrame(frame)));
+  await document.fonts.ready;
+  const root = getComputedStyle(document.documentElement);
+  const weight = root.fontWeight || '400';
+  const stacks = tokens
+    .map((token) => root.getPropertyValue(token).trim())
+    .filter((stack) => stack.length > 0);
+  await Promise.all(stacks.map(
+    (stack) => document.fonts.load(`${weight} 1rem ${stack}`, sample).catch(() => undefined),
   ));
-})"""
+  await document.fonts.ready;
+  void document.documentElement.offsetHeight;
+  return document.fonts.status;
+}"""
 
 
 def _normalised(pdf: bytes) -> bytes:
@@ -148,7 +186,7 @@ def render_pdf_bytes() -> bytes:
             page.evaluate("document.fonts.ready")
             page.evaluate(_ABSOLUTE_LINKS, SITE_URL)
             page.add_style_tag(content=print_face_css())
-            page.evaluate(_FACES_APPLIED)
+            page.evaluate(_FACES_APPLIED, [list(_MARGIN_BOX_TOKENS), _MARGIN_BOX_SAMPLE])
             return page.pdf(
                 print_background=True,
                 prefer_css_page_size=True,
@@ -170,6 +208,19 @@ _TYPE3 = re.compile(rb"/Subtype\s*/Type3\b")
 _BASE_FONT = re.compile(rb"/BaseFont\s*/([^\s/<>\[\]()]+)")
 _DESCRIPTOR_REF = re.compile(rb"/FontDescriptor\s+(\d+)\s+0\s+R")
 _FONT_NAME = re.compile(rb"/FontName\s*/([^\s/<>\[\]()]+)")
+
+#: What tells a descriptor that carries the face from one that only names it. `/FontFile`
+#: is Type1, `/FontFile2` TrueType, `/FontFile3` the compact forms; a descriptor with
+#: none of them describes a font the reader is expected to already have.
+_FONT_FILE = re.compile(rb"/FontFile[23]?\b")
+
+#: The `/Type` a descriptor declares, which is how a real object is told from the same
+#: bytes appearing inside a compressed stream.
+_IS_DESCRIPTOR = re.compile(rb"/Type\s*/FontDescriptor\b")
+
+#: One object's body, from its header to its own `endobj`. Anchored at a line start,
+#: which is where the writer puts a header and where stream bytes only land by accident.
+_OBJECT_BODY = re.compile(rb"(?ms)^\d+\s+0\s+obj\b(.*?)endobj")
 
 #: The faces this page carries that are named the same whatever kpress calls its print
 #: instances. `SourceSans3` is the variable face the screen reads in, and it is on the
@@ -206,23 +257,52 @@ UNNAMED = "unnamed"
 
 
 def embedded_fonts(pdf: bytes) -> list[str]:
-    """Every font the file names, by its `/BaseFont`, deduplicated and sorted.
+    """Every font whose program the file carries, by its `/BaseFont`, deduplicated.
+
+    A `/BaseFont` names a face; it does not say the face travels with the document. A
+    font dictionary whose descriptor has no `/FontFile*` is a reference to a font the
+    reader is expected to own, and counting it here would have `--check` announce as
+    embedded something this page does not ship -- the one reading this scan must never
+    give, since shipping the faces is the whole claim. So a name is taken only once its
+    descriptor is found to carry the program.
+
+    For a Type0 font that descriptor hangs off the descendant CIDFont, which repeats the
+    same `/BaseFont`; the Type0 parent has no descriptor of its own and contributes
+    nothing the descendant does not.
 
     The six-character subset tag Chromium prefixes (`ABCDEF+PTSerif-Regular`) is kept:
     it is what distinguishes two subsets of one face, and dropping it would report one
     font where the file carries two.
     """
-    seen = dict.fromkeys(name.decode("latin-1") for name in _BASE_FONT.findall(pdf))
+    seen: dict[str, None] = {}
+    for body in _OBJECT_BODY.findall(pdf):
+        name = _BASE_FONT.search(body)
+        reference = _DESCRIPTOR_REF.search(body)
+        if name is None or reference is None:
+            continue
+        if _FONT_FILE.search(_descriptor(pdf, int(reference.group(1)))):
+            seen[name.group(1).decode("latin-1")] = None
     return sorted(seen)
 
 
-def _indirect(pdf: bytes, number: int) -> bytes:
-    """The body of one numbered object. Enough for the small dictionaries read here."""
-    match = re.search(rb"(?m)^%d 0 obj\b" % number, pdf)
-    if match is None:
-        return b""
-    end = pdf.find(b"endobj", match.end())
-    return pdf[match.end() : end if end != -1 else len(pdf)]
+def _descriptor(pdf: bytes, number: int) -> bytes:
+    """The body of one numbered font descriptor, or nothing where the file has no such object.
+
+    Three guards, one per way this could read the wrong bytes. The header is matched at
+    a line start and the body ends at its own `endobj`, so what comes back is an object
+    rather than a span. The body has to declare `/Type /FontDescriptor`, which is what
+    separates a real object from the same byte sequence occurring inside a Flate stream
+    -- compressed content can hold anything, a plausible object header included. And the
+    last qualifying definition wins, because a file written in increments carries the
+    superseded object first and the current one after it.
+    """
+    body = b""
+    for match in re.finditer(rb"(?m)^%d\s+0\s+obj\b" % number, pdf):
+        end = pdf.find(b"endobj", match.end())
+        candidate = pdf[match.end() : end if end != -1 else len(pdf)]
+        if _IS_DESCRIPTOR.search(candidate):
+            body = candidate
+    return body
 
 
 def outline_fonts(pdf: bytes) -> list[str]:
@@ -239,7 +319,7 @@ def outline_fonts(pdf: bytes) -> list[str]:
         end = pdf.find(b"endobj", match.end())
         body = pdf[match.end() : end if end != -1 else len(pdf)]
         ref = _DESCRIPTOR_REF.search(body)
-        name = _FONT_NAME.search(_indirect(pdf, int(ref.group(1)))) if ref else None
+        name = _FONT_NAME.search(_descriptor(pdf, int(ref.group(1)))) if ref else None
         found.append(name.group(1).decode("latin-1").split("+")[-1] if name else UNNAMED)
     return found
 
@@ -279,9 +359,13 @@ def font_findings(pdf: bytes) -> list[str]:
         ]
     ours = sorted({n for n in outlined if n == UNNAMED or n.startswith(owned_faces())})
     if ours:
+        # One is the common case -- a single weight falling back is what a stylesheet
+        # edit produces -- so the sentence agrees with the count rather than reading
+        # like a template that was never run on the failure it exists for.
         return [
             (
-                f"{len(ours)} of the faces this page ships are drawn as Type3 outline "
+                f"{len(ours)} of the faces this page ships "
+                f"{'is' if len(ours) == 1 else 'are'} drawn as Type3 outline "
                 f"paths rather than embedded: {', '.join(ours)}. A viewer that smooths "
                 "embedded text leaves them thin. Check that `sans_instances` has "
                 "written the instances the page asks for and that the print stack "

@@ -534,6 +534,16 @@ def print_sans_family() -> str:
     Quoted, and compared whole: `"Source Sans 3 Variable"` is a different family and a
     different string, which is what lets one equality separate the screen's variable
     face from the print instances that stand in for it.
+
+    The dependency this creates is worth stating, because it is on the repository and
+    not on the package: the generator is `vendor/kpress/devtools/instance_sans.py`,
+    which the kpress wheel does not ship, so this function -- and with it `kpress_css`
+    and the whole page render -- needs the submodule checked out and not merely kpress
+    installed. That is a contract the gitlink already holds, since every path here
+    resolves kpress from `vendor/kpress` rather than from an index, and it is why a
+    missing generator is reported as an uninitialised submodule. `think-y15p` asks kpress
+    to export the family from the package, which would leave the generator as a
+    fallback rather than the only source.
     """
     from devtools.sans_instances import print_family  # noqa: PLC0415
 

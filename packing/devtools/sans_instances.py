@@ -8,8 +8,16 @@ the KaTeX faces get. The outlines carry the right weight, so the file is not wro
 reads wrong. Preview smooths text it draws through the font machinery -- 5 to 20 percent
 more ink at 2 to 3 pixels per point -- and leaves outline paths alone, so the captions,
 footnotes, hero and footer come out a step lighter than the serif and the mathematics
-beside them. Measured on 2026-09-07: the export was 979,521 bytes with the sans in
-outlines and 793,873 with it in fonts.
+beside them.
+
+One pair of numbers, taken as one measurement: the same page, in one browser, at one
+moment, with the instances injected and with them suppressed. At this branch's head, on
+macOS with Playwright's pinned headless shell, the export is 1,024,108 bytes with the
+sans in outlines and 830,153 with it in fonts, 17 pages either way, and the five
+`SourceSans3-*` outline fonts drop out. Absolute figures from two hosts do not
+subtract -- the bytes follow the Chromium build and the fonts the machine has -- which
+is why the before and the after are always rendered together rather than quoted from
+different days.
 
 A static instance embeds like any other font. This tool writes one per face the print
 pass asks for, into `templates/fonts/`, and hands them to `render_explainer_pdf` as
@@ -28,14 +36,21 @@ naming a family nothing declares, and the two would drift without a word of warn
 
 `PRINT_FACES` is the declared set, and `--check` holds it to what the page actually
 requests rather than to what the stylesheet appears to say. The probe loads the rendered
-page under `media: print` at the printed column width, walks every text run, and records
-the computed weight and style wherever the family stack starts with the sans. Two
-requests are answered without an instance of their own and both are 400: `.rel` names it
-for the one fallback relation glyph, and the `@page` margin-box footer inherits it.
-Neither is reachable any other way -- a margin box is not in the document tree, so no
-probe can see it -- and CSS font matching sends a request in [400, 500] ascending
-before descending, so both land on the 410 instance, ten units away and below what
-shows at 11pt.
+page under `media: print` at the printed column width and records the computed weight
+and style wherever the family stack starts with the sans. It reads two things, not one:
+every text run, and the generated content of `::before`, `::after` and `::marker` on
+every element with a box. The second half is not a precaution -- kpress numbers footnote
+items with `li.kpress-footnote-item::before`, which is a real sans run this page prints
+and which no tree walk reaches, so a walk over text alone would have let a weight
+nothing instances back into the PDF as outlines.
+
+What is left outside is the `@page` margin box, and it is outside by construction: a
+margin box is not in the document tree, so no probe reaches it. `render_explainer_pdf`
+covers that side instead, by loading the families the margin boxes name before it
+prints. Two requests are answered without an instance of their own and both are 400:
+`.rel` names it for the one fallback relation glyph, and the margin-box footer inherits
+it. CSS font matching sends a request in [400, 500] ascending before descending, so
+both land on the 410 instance, ten units away and below what shows at 11pt.
 
 Usage, from `packing/`:
 
@@ -195,13 +210,23 @@ def gaps(
 #: and it has to be counted for `--check` to say so rather than pass in silence.
 SCREEN_SANS = "Source Sans 3 Variable"
 
+#: The pseudo-elements that can put type on the page without a text node behind it.
+#: Passed in rather than written into the probe so the set is visible from Python and
+#: the test that runs the shipped rule can name the same three.
+PSEUDO_ELEMENTS: tuple[str, ...] = ("::before", "::after", "::marker")
+
 #: What the page asks for, taken from the page rather than read out of the stylesheet.
 #: A run is counted when the first family in its computed stack is one of the two sans
 #: names the probe is handed: the print family kpress declares its instances under, and
 #: `SCREEN_SANS`. Runs the print stylesheet hides are skipped -- a `display: none` block
 #: still reports a computed weight, and counting it would declare an instance for text
 #: no reader ever sees.
-_PROBE = r"""(families) => {
+#:
+#: Two passes, because a tree walk sees only half the type. Text nodes are the first;
+#: generated content is the second, and it is not hypothetical here -- kpress numbers
+#: footnote items with `li.kpress-footnote-item::before`, a real sans run in no text
+#: node on the page.
+_PROBE = r"""([families, pseudos]) => {
   const sans = new Set(families);
   const found = new Map();
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -209,17 +234,39 @@ _PROBE = r"""(families) => {
     if (!node.nodeValue || !node.nodeValue.trim()) continue;
     const el = node.parentElement;
     if (!el || !el.getClientRects().length) continue;
-    const style = getComputedStyle(el);
-    const family = style.fontFamily.split(',')[0].trim().replace(/^["']|["']$/g, '');
-    if (!sans.has(family)) continue;
-    const weight = parseInt(style.fontWeight, 10);
-    const key = `${weight}/${style.fontStyle}`;
-    if (!found.has(key)) {
-      found.set(key, {weight, style: style.fontStyle, path: sig(el)});
+    record(getComputedStyle(el), sig(el));
+  }
+  for (const el of document.body.querySelectorAll('*')) {
+    if (!el.getClientRects().length) continue;
+    for (const pseudo of pseudos) {
+      const style = getComputedStyle(el, pseudo);
+      if (!draws(style.content)) continue;
+      record(style, sig(el) + pseudo);
     }
   }
   return [...found.values()].sort((a, b) =>
     a.weight - b.weight || a.style.localeCompare(b.style));
+
+  /* Whether a computed `content` puts glyphs on the page. `none` is no pseudo-element
+     at all and `normal` is the default -- which for `::marker` is a bullet drawn in the
+     list item's own font, already counted through its text. An empty string is a box
+     with no type in it: a rule, a spacer, a clearfix. None of the four asks for a face. */
+  function draws(content) {
+    return Boolean(content) && !['none', 'normal', '""', "''"].includes(content);
+  }
+
+  /* One request, recorded once per weight and style. The first element to ask for a
+     pair is the one a failure names, and the text pass runs first, so a run a reader
+     can point at is preferred over generated content that says the same thing. */
+  function record(style, path) {
+    const family = style.fontFamily.split(',')[0].trim().replace(/^["']|["']$/g, '');
+    if (!sans.has(family)) return;
+    const weight = parseInt(style.fontWeight, 10);
+    const key = `${weight}/${style.fontStyle}`;
+    if (!found.has(key)) {
+      found.set(key, {weight, style: style.fontStyle, path});
+    }
+  }
 
   /* A name for an element that is readable in a failure: the tag, its classes, and its
      index among its siblings, up to the page wrapper. The same shape `check_print_layout`
@@ -262,7 +309,9 @@ def probe(page_path: Path) -> list[Requested]:
             page.wait_for_selector(READY, timeout=60_000)
             page.set_viewport_size(PRINT_VIEWPORT)
             page.evaluate("document.fonts.ready")
-            rows: list[Requested] = page.evaluate(_PROBE, [print_family(), SCREEN_SANS])
+            rows: list[Requested] = page.evaluate(
+                _PROBE, [[print_family(), SCREEN_SANS], list(PSEUDO_ELEMENTS)]
+            )
             return rows
         finally:
             browser.close()
