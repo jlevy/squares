@@ -1,0 +1,8 @@
+{
+  "name": "soft-schema validation",
+  "output": "  324 frontmatter-md artifacts + 500 pure-yaml datasets validate against their declared schemas\n  schemas in use: ['../schemas/claude-efficiency-rollup.schema.yaml', '../schemas/codex-task-tree-delta.schema.yaml', '../witness.schema.yaml', 'asymptotic-waste-bounds.schema.yaml', 'chunk-evidence-profile.schema.yaml', 'chunk-partition-atlas.schema.yaml', 'composite-figure.schema.yaml', 'contact-assembly-grammar.schema.yaml', 'contact-enumeration-pricing.schema.yaml', 'contact-full-cell-control.schema.yaml', 'contact-overlay-gallery.schema.yaml', 'contact-scaffold-atlas.schema.yaml', 'contact-structure.schema.yaml', 'covering-values.schema.yaml', 'defects.schema.yaml', 'document-map.schema.yaml', 'frontier-evidence.schema.yaml', 'known-best-atlas.schema.yaml', 'prospective-atlas-seed.schema.yaml', 'prospective-source-availability.schema.yaml', 'results.schema.yaml', 'schemas/session-close-report.schema.yaml', 'source-availability.schema.yaml', 'source-coverage.schema.yaml', 'square-packing-case.schema.yaml', 'strategy-catalogue.schema.yaml', 'translation-escape-screen.schema.yaml', 'witness.schema.yaml']\n  source coverage reconciled: 324 cases, 6 newer in-horizon reports, 0 tracked beyond horizon\n  catalogue transcription reconciled: 174 entries reparsed, 183 cases matched to a block, 648 printed facts checked, 0 divergences",
+  "reason": "",
+  "run_id": "81bc483753ec48a2bd65f5a28ae992df",
+  "seconds": 7.036653916999057,
+  "status": "passed"
+}

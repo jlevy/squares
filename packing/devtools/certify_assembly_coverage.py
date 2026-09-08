@@ -48,6 +48,8 @@ from typing import Any
 from strif import atomic_output_file
 
 from devtools.census_chunk_taxonomy import band, is_tilted, manifest, wall_seating
+from sqpack.known_best import require_calibration_label
+from sqpack.yamlio import safe_load
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 ATLAS = ROOT / "atlas" / "known-best"
@@ -63,7 +65,13 @@ RECORD = (
 )
 
 HORIZON = 30
-"""`BC-019`'s own scope. The corpus runs to 100 and the question does not."""
+"""`BC-019`'s own scope. The corpus runs to 100 and the question does not.
+
+Two boundaries stack here and only this one is `BC-019`'s. The other is `D4`: the census
+and the manifest this reads through `census_chunk_taxonomy` are pinned to
+`CALIBRATION_CORPUS`, so a widened atlas cannot reach these certificates even if this
+horizon were raised past it.
+"""
 
 RIGID_LATTICE = ("bar", "L", "rectangle")
 """The shapes the `rigid-lattice` primitive covers. A singleton is a free square, not an
@@ -126,7 +134,24 @@ def limitation(entry: dict[str, Any], seated: dict[str, set[str]]) -> dict[str, 
     }
 
 
+def grammar_calibration_label() -> str:
+    """The calibration range the contract names, read from the contract itself.
+
+    Line 160 below cites `contact-assembly-grammar.yaml` as the contract these
+    certificates are written against. Its `evaluation_split` is where that contract draws
+    the calibration/prospective line, and its schema pins the calibration half at
+    `n=1..100`. Reading it here makes the citation load-bearing: the record cannot be
+    written against a contract whose split has moved.
+    """
+    grammar = safe_load(GRAMMAR.read_text(encoding="utf-8"))
+    return str(grammar["grammar"]["evaluation_split"]["calibration"])
+
+
 def coverage() -> dict[str, Any]:
+    require_calibration_label(
+        grammar_calibration_label(),
+        source="contact-assembly-grammar.yaml evaluation_split.calibration",
+    )
     entries = manifest()
     certified: list[dict[str, Any]] = []
     limited: list[dict[str, Any]] = []

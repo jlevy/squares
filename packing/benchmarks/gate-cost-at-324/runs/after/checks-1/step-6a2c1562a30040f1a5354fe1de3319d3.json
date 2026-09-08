@@ -1,0 +1,8 @@
+{
+  "name": "chunk taxonomy agrees with the corpus",
+  "output": "  chunk taxonomy reproduces: 3 source strata, 109 components in the residue",
+  "reason": "",
+  "run_id": "0224631f59cc43a5b3ae7ad92b6d2018",
+  "seconds": 1.3281105829955777,
+  "status": "passed"
+}

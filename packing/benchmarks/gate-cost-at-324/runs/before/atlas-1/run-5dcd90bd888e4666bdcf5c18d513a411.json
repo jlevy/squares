@@ -1,0 +1,20 @@
+{
+  "available_cpus": 10,
+  "commit": "2841eec905df52a9eb43f2bdd2e82bd1ad713d83",
+  "dirty_diff_sha256": "34eb810c69a580f86f6c6a121020863bc0cff78d4de62686041d4bc6cfc43244",
+  "environment": {
+    "PACK_JOBS": "2"
+  },
+  "git_status": " M packing/campaign/agent-sessions/session-093-atlas-expansion-to-324.md\n",
+  "inner_jobs": 2,
+  "interpreter": "/Users/levy/wrk/github/squares/.claude/worktrees/pr-89-review-strategy-19e990/packing/.venv/bin/python3",
+  "jobs": 4,
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "python": "3.14.7 free-threading build (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+  "run_id": "30349bf7778747ab877830a8d3d052c9",
+  "selected_steps": [
+    "known-best n=1..100 atlas"
+  ],
+  "started_at": "2026-09-07T12:33:18.710300+00:00",
+  "untracked_hashes": {}
+}

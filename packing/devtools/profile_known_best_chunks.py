@@ -13,6 +13,11 @@ from typing import Any
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
+from sqpack.known_best import (
+    CALIBRATION_CORPUS,
+    calibration_entries,
+    require_calibration_label,
+)
 from sqpack.render.style import PAPER_THEME, color_for_square
 from sqpack.render.svg import (
     append_metadata,
@@ -37,6 +42,24 @@ GENERATOR = "python -m devtools.profile_known_best_chunks"
 PRIMARY_SWEEP = "registered-angle-contact"
 SENSITIVITY_SWEEP = "regularized-angle-contact"
 PARTITION_BAND = "exact"
+
+
+def manifest_entries(manifest: Path = MANIFEST) -> tuple[dict[str, Any], ...]:
+    """The manifest's calibration entries, and nothing past them.
+
+    This profile is a calibration instrument -- it condenses a census designed against
+    the corpus it reads -- so it stays at `CALIBRATION_CORPUS` while the manifest widens
+    around it (`D4`). The schema's own `scope.range` constant is the retained record of
+    that boundary, and `schema_calibration_label` checks the two still agree.
+    """
+    atlas = json.loads(manifest.read_text(encoding="utf-8"))["atlas"]
+    return calibration_entries(atlas["entries"])
+
+
+def schema_calibration_label() -> str:
+    """The range constant the retained schema pins, read rather than assumed."""
+    schema = safe_load(SCHEMA.read_text(encoding="utf-8"))
+    return str(schema["properties"]["scope"]["properties"]["range"]["const"])
 
 
 def _json_text(value: object) -> str:
@@ -100,9 +123,11 @@ def render_profile(profile: dict[str, Any]) -> str:
     append_title_desc(
         root,
         "Non-grid known-best contact-assembly evidence profile",
-        "Thirty-six calibration cases from n equals 1 through 100. Bars show the share "
-        "of squares in detected same-angle positive-edge contact components. This is a "
-        "descriptive numerical census, not a rigidity, optimality, or hypothesis verdict.",
+        "Thirty-six calibration cases from n equals "
+        f"{CALIBRATION_CORPUS.first_n} through {CALIBRATION_CORPUS.last_n}. Bars show "
+        "the share of squares in detected same-angle positive-edge contact components. "
+        "This is a descriptive numerical census, not a rigidity, optimality, or "
+        "hypothesis verdict.",
     )
     append_metadata(
         root,
@@ -120,7 +145,10 @@ def render_profile(profile: dict[str, Any]) -> str:
         root,
         x=40,
         y=44,
-        value="Non-grid contact-assembly profile · n = 1…100 calibration",
+        value=(
+            "Non-grid contact-assembly profile · n = "
+            f"{CALIBRATION_CORPUS.first_n}…{CALIBRATION_CORPUS.last_n} calibration"
+        ),
         size=27,
         fill=PAPER_THEME.ink,
         weight="700",
@@ -546,10 +574,12 @@ def _index(items: list[dict[str, Any]], key: str) -> dict[int, dict[str, Any]]:
 
 
 def expected_outputs() -> tuple[dict[str, Any], str]:
-    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]
+    require_calibration_label(
+        schema_calibration_label(), source="chunk-evidence-profile.schema.yaml scope.range"
+    )
     components = json.loads(COMPONENTS.read_text(encoding="utf-8"))
     partitions = json.loads(PARTITIONS.read_text(encoding="utf-8"))["atlas"]
-    source_entries = _index(manifest["entries"], "manifest")
+    source_entries = _index(list(manifest_entries()), "manifest")
     sweeps = {sweep["name"]: sweep for sweep in components["contact_sweeps"]}
     bands = {band["name"]: band for band in partitions["bands"]}
     primary = _index(sweeps[PRIMARY_SWEEP]["entries"], PRIMARY_SWEEP)
@@ -695,7 +725,10 @@ def expected_outputs() -> tuple[dict[str, Any], str]:
         "aggregate": aggregate,
         "cases": rows,
         "claim_boundaries": [
-            "The retained n=1..100 corpus is calibration-only and supplies no H-044 verdict.",
+            (
+                f"The retained {CALIBRATION_CORPUS.label} corpus is calibration-only and "
+                "supplies no H-044 verdict."
+            ),
             (
                 "Detected same-angle positive-edge contact establishes descriptive "
                 "assembly, not rigidity."
@@ -728,7 +761,7 @@ def expected_outputs() -> tuple[dict[str, Any], str]:
         "scope": {
             "excluded_exact_grid_cases": 64,
             "non_grid_cases": 36,
-            "range": "n=1..100",
+            "range": CALIBRATION_CORPUS.label,
         },
     }
     rendering = render_profile(profile)

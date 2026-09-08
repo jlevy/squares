@@ -1,0 +1,8 @@
+{
+  "name": "the inventory agrees with the register",
+  "output": "inventory agrees with 57 evidence records",
+  "reason": "",
+  "run_id": "dfc2af6473f442278c81d327debf3aaa",
+  "seconds": 0.2066290829970967,
+  "status": "passed"
+}

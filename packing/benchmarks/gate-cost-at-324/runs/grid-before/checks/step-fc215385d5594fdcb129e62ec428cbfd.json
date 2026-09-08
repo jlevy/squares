@@ -1,0 +1,8 @@
+{
+  "name": "frontier corpus",
+  "output": "  324 artifacts, n = 1..324; formal lane: 59 proved, 265 open\n  reported lane: 59 proved, 265 open; 258 formal-open cases use Nagamochi\n  n=29 source numerically checked: 29 squares, 406 pairs, six classes\n  named-source reconciliation is enforced by soft-schema validation",
+  "reason": "",
+  "run_id": "dfc2af6473f442278c81d327debf3aaa",
+  "seconds": 0.5418199169944273,
+  "status": "passed"
+}

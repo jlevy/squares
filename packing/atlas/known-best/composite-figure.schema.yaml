@@ -2,9 +2,9 @@ $schema: https://json-schema.org/draft/2020-12/schema
 $id: packing.squares:CompositeFigure/v1
 title: Composite figure record
 description: >-
-  Every fact the n=1..100 composite states, one entry per case, with the
-  provenance of each. The figure renders from this record and from nothing else,
-  so what the drawing asserts and what this file asserts cannot drift apart.
+  Every fact the known-best composites state, one entry per case, with the
+  provenance of each. The figures render from this record and from nothing else,
+  so what a drawing asserts and what this file asserts cannot drift apart.
 
   Provenance is carried per fact rather than inferred, because a missing value
   has several distinct meanings that a bare null cannot separate: transcribed
@@ -13,16 +13,60 @@ description: >-
   or "absent" here while a source could supply them.
 type: object
 additionalProperties: false
-required: [range, generated_by, provenance_vocabulary, totals, entries]
+required: [range, composites, generated_by, provenance_vocabulary, totals, entries]
 properties:
   range:
-    type: object
-    additionalProperties: false
-    required: [first_n, last_n, count]
-    properties:
-      first_n: {const: 1}
-      last_n: {const: 100}
-      count: {const: 100}
+    # The corpus this record carries, as values rather than as constants in a schema:
+    # widening it is a change to the builder's corpus range and to these numbers, not
+    # to this file. What the schema cannot state -- that count is last_n - first_n + 1,
+    # and that entries carries exactly that many cases -- is checked against the data by
+    # `devtools.build_known_best_atlas --check`, which rebuilds both records from the
+    # same range, so a case that goes missing still fails a gate rather than passing
+    # quietly.
+    $ref: '#/$defs/range'
+  composites:
+    # Which figures state these facts, and at what grid. A list, because the corpus can
+    # publish more than one composite of itself and a second is a second entry rather
+    # than a second shape. Pixels are deliberately absent: the canvas belongs to the
+    # builder and is recorded in atlas/known-best/manifest.json.
+    type: array
+    minItems: 1
+    items:
+      type: object
+      additionalProperties: false
+      required: [stem, range, columns, rows, layout, square_count, totals]
+      properties:
+        stem: {type: string, pattern: '^known-best-[0-9]+-[0-9]+$'}
+        # The legend counts over the cases this composite draws, so the 1-100 figure's
+        # legend is fixed by its own cases rather than by the corpus.
+        totals: {$ref: '#/$defs/totals'}
+        range: {$ref: '#/$defs/range'}
+        columns: {type: integer, minimum: 1}
+        rows: {type: integer, minimum: 1}
+        layout: {type: string, pattern: '^[0-9]+ by [0-9]+, row-major n=[0-9]+\.\.[0-9]+$'}
+        square_count: {type: integer, minimum: 1}
+    # Each published figure's grid is pinned, the way this file used to pin the range
+    # with constants: one clause per stem, in an `allOf` because a schema carries one
+    # `contains`. A composite under any other stem matches neither and is free.
+    allOf:
+      - contains:
+          type: object
+          required: [stem, columns, rows, layout, square_count]
+          properties:
+            stem: {const: known-best-1-100}
+            columns: {const: 10}
+            rows: {const: 10}
+            layout: {const: '10 by 10, row-major n=1..100'}
+            square_count: {const: 5050}
+      - contains:
+          type: object
+          required: [stem, columns, rows, layout, square_count]
+          properties:
+            stem: {const: known-best-1-324}
+            columns: {const: 18}
+            rows: {const: 18}
+            layout: {const: '18 by 18, row-major n=1..324'}
+            square_count: {const: 52650}
   generated_by: {type: string, minLength: 1}
   provenance_vocabulary:
     type: object
@@ -34,6 +78,12 @@ properties:
       catalogue: {type: string, minLength: 1}
       derived: {type: string, minLength: 1}
       absent: {type: string, minLength: 1}
+  totals: {$ref: '#/$defs/totals'}
+  entries:
+    type: array
+    minItems: 1
+    items: {$ref: '#/$defs/entry'}
+$defs:
   totals:
     type: object
     additionalProperties: false
@@ -48,22 +98,27 @@ properties:
       - degree_known
       - degree_recorded_upstream
       - degree_derived_here
+    # Each is a count over the entries, so none can exceed how many there are. The
+    # ceiling is the corpus size rather than a hundred, and it is checked where the
+    # totals are recomputed on every build.
     properties:
-      proved_optimal: {type: integer, minimum: 0, maximum: 100}
-      exact_value_known: {type: integer, minimum: 0, maximum: 100}
-      only_known_numerically: {type: integer, minimum: 0, maximum: 100}
-      rigidity_established: {type: integer, minimum: 0, maximum: 100}
-      rigidity_catalogue_annotated: {type: integer, minimum: 0, maximum: 100}
-      lower_bound_first_proved_here: {type: integer, minimum: 0, maximum: 100}
-      degree_known: {type: integer, minimum: 0, maximum: 100}
-      degree_recorded_upstream: {type: integer, minimum: 0, maximum: 100}
-      degree_derived_here: {type: integer, minimum: 0, maximum: 100}
-  entries:
-    type: array
-    minItems: 100
-    maxItems: 100
-    items: {$ref: '#/$defs/entry'}
-$defs:
+      proved_optimal: {type: integer, minimum: 0}
+      exact_value_known: {type: integer, minimum: 0}
+      only_known_numerically: {type: integer, minimum: 0}
+      rigidity_established: {type: integer, minimum: 0}
+      rigidity_catalogue_annotated: {type: integer, minimum: 0}
+      lower_bound_first_proved_here: {type: integer, minimum: 0}
+      degree_known: {type: integer, minimum: 0}
+      degree_recorded_upstream: {type: integer, minimum: 0}
+      degree_derived_here: {type: integer, minimum: 0}
+  range:
+    type: object
+    additionalProperties: false
+    required: [first_n, last_n, count]
+    properties:
+      first_n: {type: integer, minimum: 1}
+      last_n: {type: integer, minimum: 1}
+      count: {type: integer, minimum: 1}
   provenance:
     enum: [frontier, catalogue, derived, absent]
   entry:
@@ -71,7 +126,7 @@ $defs:
     additionalProperties: false
     required: [n, side, lower, optimality, exactness, rigidity, badges]
     properties:
-      n: {type: integer, minimum: 1, maximum: 100}
+      n: {type: integer, minimum: 1}
       side:
         type: object
         additionalProperties: false

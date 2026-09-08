@@ -2648,7 +2648,7 @@
     "sources": [
       {
         "access": "public-http-svg",
-        "acquisition_status": "deferred-pending-license-review",
+        "acquisition_status": "derived-facts-acquisition-approved-2026-09-07",
         "evidence_path": "resources/web/kingbird-squares-in-squares.html",
         "format": "html-listing-and-svg-geometry",
         "key": "kingbird-current-catalogue",

@@ -1,0 +1,8 @@
+{
+  "name": "work accounting agrees on one unit",
+  "output": "  work accounting reproduces: 1 shared unit, 4 roles the solver collapses",
+  "reason": "",
+  "run_id": "81bc483753ec48a2bd65f5a28ae992df",
+  "seconds": 0.37954091699793935,
+  "status": "passed"
+}

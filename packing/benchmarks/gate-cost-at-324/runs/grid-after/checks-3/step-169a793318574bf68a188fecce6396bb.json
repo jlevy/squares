@@ -1,0 +1,8 @@
+{
+  "name": "H-041 Stromquist repaired-cover exact certificate",
+  "output": "{\n  \"determination_outcome\": \"criterion_met\",\n  \"elapsed_seconds\": 0.323836,\n  \"hypothesis\": \"H-041\",\n  \"record_replayed\": true,\n  \"schema_version\": 1,\n  \"selftests\": {\n    \"bad_threshold_rejected\": true,\n    \"d4_misuse_rejected\": true,\n    \"duplicate_record_node_rejected\": true,\n    \"duplicated_edge_rejected\": true,\n    \"duplicated_face_rejected\": true,\n    \"extraneous_root_rejected\": true,\n    \"omitted_edge_rejected\": true,\n    \"omitted_face_rejected\": true,\n    \"outside_tiling_vertex_rejected\": true,\n    \"printed_g_080_full_cover_rejected\": true,\n    \"printed_g_080_threshold_failure_certified\": true,\n    \"source_path_drift_rejected\": true,\n    \"weakened_capacity_rejected\": true\n  }\n}",
+  "reason": "",
+  "run_id": "832fdce8527f4260b4e2f7cc6edcd35a",
+  "seconds": 0.42293812499701744,
+  "status": "passed"
+}

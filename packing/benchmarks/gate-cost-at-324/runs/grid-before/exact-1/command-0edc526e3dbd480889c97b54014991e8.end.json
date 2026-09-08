@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/Users/levy/wrk/github/squares/.claude/worktrees/pr-89-review-strategy-19e990/packing/.venv/bin/python3",
+    "-m",
+    "devtools.check_rational_witness_independent",
+    "witnesses/known-best-n011-rational-control.yaml"
+  ],
+  "cwd": "/Users/levy/wrk/github/squares/.claude/worktrees/pr-89-review-strategy-19e990/packing",
+  "finished_at": "2026-09-07T14:33:17.500950+00:00",
+  "inner_jobs": 1,
+  "jobs": 3,
+  "log_path": "/private/tmp/claude-502/-Users-levy-wrk-github-squares--claude-worktrees-pr-89-review-strategy-19e990/b48434ad-6026-497b-a36d-ed85246e6a7e/scratchpad/runs/before-exact-1/command-0edc526e3dbd480889c97b54014991e8.log",
+  "reason": "",
+  "run_id": "9b28fc11e6f441ca89197e605da0bedd",
+  "started_at": "2026-09-07T14:33:17.415512+00:00",
+  "status": "passed",
+  "step_name": "exact verification",
+  "timeout_seconds": 900.0,
+  "wall_seconds": 0.08527558299829252
+}

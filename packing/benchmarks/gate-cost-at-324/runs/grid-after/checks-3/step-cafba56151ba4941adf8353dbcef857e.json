@@ -1,0 +1,8 @@
+{
+  "name": "rung figures agree with their certificates",
+  "output": "  22 results and 42 certificate-bearing evidence entries checked, 18 certificate artifacts recomputed from their own atoms, all quoted figures and fraction-decimal claims agree (results.yaml, evidence.yaml, defects.yaml)",
+  "reason": "",
+  "run_id": "832fdce8527f4260b4e2f7cc6edcd35a",
+  "seconds": 0.3609838749980554,
+  "status": "passed"
+}

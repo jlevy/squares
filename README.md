@@ -31,6 +31,15 @@ The image is available in [**SVG**](packing/atlas/known-best/known-best-1-100.sv
 [**PDF**](https://jlevy.github.io/squares/known-best-1-100.pdf), and
 [**high-resolution PNG**](packing/atlas/known-best/known-best-1-100@2x.png).*
 
+The register now runs to `n = 324`, the end of the catalogue’s audited range, and a
+second, poster-sized composite draws all of it:
+[**`known-best-1-324`**](packing/atlas/known-best/known-best-1-324.png), an 18-by-18
+grid with the same cards, badges and legend, available as
+[**SVG**](packing/atlas/known-best/known-best-1-324.svg) and
+[**PDF**](packing/atlas/known-best/known-best-1-324.pdf) (44 by 51 inches).
+The first figure is unchanged; the [atlas README](packing/atlas/known-best/README.md)
+describes both.
+
 `s(n)` is the side of the smallest square that holds `n` non-overlapping unit squares.
 The problem is elementary to state and remains open even at small `n`.
 
@@ -373,7 +382,7 @@ The Motion Lab is an exploratory instrument, not a citable research result.
 
 ## Reports
 
-These seven research reports are the durable topical syntheses:
+These eight research reports are the durable topical syntheses:
 
 | Report | Scope |
 | --- | --- |
@@ -383,6 +392,7 @@ These seven research reports are the durable topical syntheses:
 | [Infrastructure for Square-Packing Exploration](docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md) | Build order, latency tiers, language boundaries, and symbolic tooling |
 | [Lean for Square-Packing Proofs and Validation](docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md) | Where proof assistants fit and which certificate layers are suitable first targets |
 | [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | Basin cartography, structural diversity, relaxation ladders, and search strategy |
+| [Public Sources Beyond n = 100](docs/project/research/research-2026-09-07-square-packing-sources-beyond-100.md) | Which catalogues carry geometry above 100, their reuse terms, and why 324 is a source boundary |
 | [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | Historical corrections, the three memo arguments, and a reusable conditional counting control |
 
 The reports distinguish formal proof, finite numerical checks, and source reports.

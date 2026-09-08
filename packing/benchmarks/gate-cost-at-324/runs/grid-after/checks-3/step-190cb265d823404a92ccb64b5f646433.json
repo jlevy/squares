@@ -1,0 +1,8 @@
+{
+  "name": "terminal sessions name the gate that certified them",
+  "output": "  4 terminal sessions name a full-gate run on a commit in their history\n  86 closed before the rule existed and are not checked: session-001..session-086 (86 sessions)",
+  "reason": "",
+  "run_id": "832fdce8527f4260b4e2f7cc6edcd35a",
+  "seconds": 0.6571162920008646,
+  "status": "passed"
+}

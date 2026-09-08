@@ -1,0 +1,8 @@
+{
+  "name": "agenda map agrees with the agendas",
+  "output": "  agenda map matches 264 commitments across 28 agendas: 4 in progress, 20 ready, 60 blocked, 126 complete",
+  "reason": "",
+  "run_id": "81bc483753ec48a2bd65f5a28ae992df",
+  "seconds": 0.14795266700093634,
+  "status": "passed"
+}

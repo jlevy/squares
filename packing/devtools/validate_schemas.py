@@ -29,6 +29,7 @@ from jsonschema_rs import Draft202012Validator
 
 from devtools.check_basic_bounds import check_case_basic_bounds
 from sqpack.assurance import check_case_semantics, check_evidence_semantics
+from sqpack.known_best import KNOWN_BEST_CORPUS
 from sqpack.yamlio import load_yaml, safe_load
 
 FRONTIER = pathlib.Path(__file__).resolve().parent.parent / "frontier"
@@ -190,8 +191,10 @@ def cross_checks() -> list[str]:
             f"{case.name}: {error}" for error in check_case_semantics(packing, evidence_by_id)
         )
         errs.extend(f"{case.name}: {error}" for error in check_case_basic_bounds(packing))
-    if case_numbers != list(range(1, 101)):
-        errs.append("frontier cases are not exactly n=1..100 in filename order")
+    if case_numbers != list(KNOWN_BEST_CORPUS.numbers):
+        errs.append(
+            f"frontier cases are not exactly {KNOWN_BEST_CORPUS.label} in filename order"
+        )
 
     sa = safe_load((FRONTIER / "source-availability.yaml").read_text(encoding="utf-8"))
     keys = [s["key"] for s in sa["recovered"]] + [s["key"] for s in sa["unretrieved"]]
