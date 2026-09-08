@@ -5,7 +5,7 @@ title: Prevent math startup from shifting neighboring text and reduce parameter 
 kind: bug
 status: in_progress
 priority: 1
-version: 8
+version: 11
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 labels: []
 dependencies: []
@@ -15,8 +15,11 @@ child_order_hints:
   - is-01m20vpz8e6ty6gpate34sfrms
   - is-01m20vpzkch50ejzwvpnjpx9h6
   - is-01m20wwftmtwqvpwcsxk52te7x
+  - is-01m20y1bbmq2p2e5e867m2gzfn
+  - is-01m20y36t8d4wbtxgxr2d7skhg
+  - is-01m20y7ngqs7h070049rg7rg92
 created_at: 2026-09-08T15:44:04.307Z
-updated_at: 2026-09-08T16:19:39.757Z
+updated_at: 2026-09-08T16:39:47.476Z
 ---
 User confirms the deployed no-swap fix works but math parameters still appear slowly. Deployment remains 33cd4760 with KPress7b20ae7. Source-confirmed avoidable dependencies: HOST_MATH_INIT sets allEmbeddedFonts:true and waits every declared face before boot; both certificate boots synchronously build 230x230 heat maps, including the hidden certificate, before initial readouts; root pending CSS keeps every .tex/.tex-d hidden until all static math and pending interactive renders settle. Diagnose normal first-visible parameter timing separately from the delayed-font regression probe. Prefer a Squares fix that renders/reveals each font-ready parameter independently and defers nonessential/hidden heat-map work; evaluate narrower upstream warmup separately. Preserve the no-swap, latest-input, no-JS/error fallback, and print contracts. Do not describe the three-second failure ceiling as an intentional startup delay.
 
