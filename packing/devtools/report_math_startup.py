@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import gzip
 import json
 import math
 import random
@@ -89,6 +90,61 @@ def spread(values: list[float]) -> str:
     return f"{statistics.median(values):.1f} ({min(values):.1f} to {max(values):.1f})"
 
 
+def geometry_result(
+    reports: list[dict[str, Any]], hypothesis: dict[str, Any]
+) -> tuple[list[str], list[str]]:
+    """Require the declared browser matrix and retain the falsification controls."""
+    lines: list[str] = []
+    problems: list[str] = []
+    covered: set[tuple[str, int]] = set()
+    controls: set[str] = set()
+    tolerance = hypothesis["maximum_math_box_displacement_px"]
+    for report in reports:
+        browser, width = report["browser"], report["width"]
+        label = f"{browser} {width}px {report['medium']}"
+        problems.extend(f"{label}: {finding}" for finding in report["findings"])
+        before = {box["key"]: box for box in report["before"]}
+        after = {box["key"]: box for box in report["after"]}
+        if not before or before.keys() != after.keys() or not report["held_fonts"]:
+            problems.append(f"{label}: missing boxes or real held font requests")
+            continue
+        if not any(box["hidden"] for box in before.values()) or any(
+            box["hidden"] for box in after.values()
+        ):
+            problems.append(f"{label}: no complete hidden-to-visible observation")
+        movement = max(
+            abs(after[key][dimension] - old[dimension])
+            for key, old in before.items()
+            for dimension in ("x", "y", "width", "height", "baseline")
+        )
+        mismatch = max(
+            abs(box["width"] - box["intrinsic_width"]) for box in after.values()
+        )
+        if not all(
+            math.isfinite(value) and value <= tolerance for value in (movement, mismatch)
+        ):
+            problems.append(f"{label}: measured geometry exceeds {tolerance}px")
+        lines.append(
+            f"- {label}: {len(before)} bases; maximum movement {movement:.3f}px; "
+            f"maximum final width error {mismatch:.3f}px."
+        )
+        if report["medium"] == "screen" and not report["alternate_certificate"]:
+            covered.add((browser, width))
+        for name, control in report.get("controls", {}).items():
+            if control.get("rejected") and control.get("report", {}).get("findings"):
+                controls.add(name)
+    required = {
+        (browser, width)
+        for browser in ("chromium", "firefox", "webkit")
+        for width in hypothesis["widths"]
+    }
+    if not required <= covered:
+        problems.append(f"missing registered browser/width cells: {sorted(required - covered)}")
+    if not {"removed_width", "stable_wrong_width"} <= controls:
+        problems.append("missing rejected movement or stable-wrong-width control")
+    return lines, problems
+
+
 def records(root: Path, directory: str) -> dict[str, dict[str, Any]]:
     result: dict[str, dict[str, Any]] = {}
     for path in sorted((root / directory).glob("*.md")):
@@ -133,14 +189,21 @@ def render(root: Path = CAMPAIGN) -> str:
             raise ValueError(f"{identity}: absent hypothesis")
         lines.extend([f"## {identity}: {experiment['title']}", ""])
         by_width: dict[int, list[dict[str, Any]]] = defaultdict(list)
+        reports: list[dict[str, Any]] = []
         problems: list[str] = []
         for relative in experiment["measurements"]:
             path = (root / relative).resolve()
             if not path.is_relative_to(root.resolve()):
                 raise ValueError("measurement path leaves campaign")
-            report = json.loads(path.read_text())
+            raw = (
+                gzip.decompress(path.read_bytes()).decode()
+                if path.suffix == ".gz"
+                else path.read_text()
+            )
+            report = json.loads(raw)
+            reports.append(report)
             problems.extend(report["findings"])
-            for run in report["runs"]:
+            for run in report.get("runs", []):
                 by_width[run["environment"]["viewport"]["width"]].append(run)
         passes: list[bool] = []
         if experiment["kind"] == "baseline":
@@ -151,6 +214,13 @@ def render(root: Path = CAMPAIGN) -> str:
                 else:
                     lines.append(f"- {width}px: {spread(values)}; {len(values)} runs.")
             verdict = "invalid" if problems else "baseline"
+        elif experiment["kind"] == "geometry":
+            detail, errors = geometry_result(reports, hypotheses["H-001"])
+            lines.extend(detail)
+            problems.extend(errors)
+            verdict = "invalid" if problems else "accepted"
+            if experiment["correctness"] != "passed":
+                verdict = f"correctness {experiment['correctness']}"
         else:
             hypothesis = hypotheses["H-002"]
             if set(by_width) != set(hypothesis["widths"]):

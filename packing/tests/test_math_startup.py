@@ -50,6 +50,7 @@ def clean_report() -> JsonRecord:
             "katex_hooks": 1,
             "runtime_hooks": 2,
             "ready_calls": 1,
+            "render_calls": 1,
             "anchor_samples": 3,
         },
         "targets": [
@@ -82,6 +83,18 @@ def test_initially_hidden_figures_remain_measurable_but_final_selection_is_requi
     )
 
 
+def test_unused_warmup_is_optional_but_rendering_or_hydration_must_be_observed() -> None:
+    report = clean_report()
+    report["counters"].update(ready_calls=0, render_calls=0, hydrate_calls=14)
+    report["metrics"].pop("first_ready_call_ms")
+    report["metrics"]["initial_ready_end_ms"] = None
+    assert startup_findings(report, width=1280, height=720) == []
+    report["counters"]["hydrate_calls"] = 0
+    assert "no observed math rendering or hydration activity" in startup_findings(
+        report, width=1280, height=720
+    )
+
+
 @pytest.mark.parametrize(
     ("section", "key", "value", "message"),
     [
@@ -95,9 +108,9 @@ def test_initially_hidden_figures_remain_measurable_but_final_selection_is_requi
         ),
         (
             "metrics",
-            "initial_ready_end_ms",
+            "first_prose_math_ms",
             math.nan,
-            "missing startup milestone: initial_ready_end_ms",
+            "missing startup milestone: first_prose_math_ms",
         ),
     ],
 )

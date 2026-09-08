@@ -427,16 +427,15 @@ def startup_findings(report: JsonRecord, *, width: int, height: int) -> list[str
         "font_hooks": 2,
         "katex_hooks": 1,
         "runtime_hooks": 2,
-        "ready_calls": 1,
         "anchor_samples": 1,
     }.items():
         if counters.get(name, 0) < minimum:
             findings.append(f"missing instrumentation: {name}")
+    if counters.get("render_calls", 0) + counters.get("hydrate_calls", 0) == 0:
+        findings.append("no observed math rendering or hydration activity")
     metrics = report.get("metrics", {})
     for name in (
         "instrumentation_installed_ms",
-        "first_ready_call_ms",
-        "initial_ready_end_ms",
         "first_prose_math_ms",
         "first_caption_math_ms",
         "parameters_ready_ms",
@@ -706,7 +705,7 @@ globalThis.kpressMathText = {
   render(source, node) { katex.render(source, node); return Promise.resolve(); },
   complete() { delete document.documentElement.dataset.kpressMathPending; }
 };
-const ready = kpressMathText.ready();
+const ready = mode === 'no-warmup' ? gate : kpressMathText.ready();
 globalThis.squaresMath = {ready, settled: () => Promise.resolve()};
 document.fonts.load('16px serif');
 ready.then(async () => {
@@ -731,6 +730,7 @@ def self_test(*, browser_name: BrowserName = "chromium") -> JsonRecord:
     with TemporaryDirectory(prefix="math-startup-controls-") as directory:
         for mode in (
             "control",
+            "no-warmup",
             "delayed",
             "width-change",
             "missing-math",
@@ -742,8 +742,10 @@ def self_test(*, browser_name: BrowserName = "chromium") -> JsonRecord:
             observations[mode] = measure_startup(
                 path, browser_name=browser_name, timeout_ms=5_000
             )
-    for mode in ("control", "delayed", "width-change"):
+    for mode in ("control", "no-warmup", "delayed", "width-change"):
         findings.extend(f"{mode}: {message}" for message in observations[mode]["findings"])
+    if observations["no-warmup"]["counters"]["ready_calls"] != 0:
+        findings.append("the no-warmup control unexpectedly called the warmup API")
     baseline = observations["control"]["metrics"]
     delayed = observations["delayed"]["metrics"]
     changed = observations["width-change"]

@@ -7,7 +7,13 @@ from typing import Any
 
 import pytest
 
-from devtools.report_math_startup import CAMPAIGN, interval, paired_result, render
+from devtools.report_math_startup import (
+    CAMPAIGN,
+    geometry_result,
+    interval,
+    paired_result,
+    render,
+)
 
 
 def samples() -> list[dict[str, Any]]:
@@ -74,3 +80,49 @@ def test_invalid_measurements_are_not_dropped(defect: str) -> None:
 
 def test_retained_records_validate_and_ledger_is_current() -> None:
     assert (CAMPAIGN / "ledger.md").read_text() == render()
+
+
+def geometry_reports() -> list[dict[str, Any]]:
+    box = {"key": 1, "x": 0, "y": 0, "width": 20, "height": 16, "baseline": 12}
+    return [
+        {
+            "browser": browser,
+            "width": width,
+            "medium": "screen",
+            "alternate_certificate": False,
+            "held_fonts": 1,
+            "before": [{**box, "hidden": True, "intrinsic_width": 25}],
+            "after": [{**box, "hidden": False, "intrinsic_width": 20}],
+            "findings": [],
+            "controls": {
+                name: {"rejected": True, "report": {"findings": ["known defect"]}}
+                for name in ("removed_width", "stable_wrong_width")
+            },
+        }
+        for browser in ("chromium", "firefox", "webkit")
+        for width in (1280, 390)
+    ]
+
+
+GEOMETRY_RULE = {"widths": [1280, 390], "maximum_math_box_displacement_px": 1}
+
+
+def test_geometry_requires_every_browser_width_and_actual_negative_controls() -> None:
+    reports = geometry_reports()
+    assert geometry_result(reports, GEOMETRY_RULE)[1] == []
+    assert "missing registered" in geometry_result(reports[:-1], GEOMETRY_RULE)[1][0]
+    for report in reports:
+        report["controls"] = {}
+    assert "missing rejected" in geometry_result(reports, GEOMETRY_RULE)[1][0]
+
+
+@pytest.mark.parametrize("defect", ["movement", "wrong_width", "no_transition"])
+def test_geometry_rechecks_measurements_instead_of_trusting_a_verdict(defect: str) -> None:
+    reports = geometry_reports()
+    if defect == "movement":
+        reports[0]["after"][0]["x"] = 2
+    elif defect == "wrong_width":
+        reports[0]["after"][0]["intrinsic_width"] = 25
+    else:
+        reports[0]["before"][0]["hidden"] = False
+    assert geometry_result(reports, GEOMETRY_RULE)[1]
