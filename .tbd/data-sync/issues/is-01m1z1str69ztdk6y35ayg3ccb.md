@@ -5,15 +5,17 @@ title: "No font swap on the explainer's math at load: verify the composite faces
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 labels:
   - explainer
   - typography
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m1zzjddp742vysds0fzm3fe8
 parent_id: is-01m1yxs9c3y78m00gqh7wsz9d6
 created_at: 2026-09-07T23:03:39.523Z
-updated_at: 2026-09-08T06:58:50.496Z
+updated_at: 2026-09-08T08:08:24.883Z
 ---
 Owner (2026-09-07): digits in formulas visibly change font when the page loads, on the built page and the live site. Cause and fix are kpress bead (see the kpress fonts epic kpr-b4mq): katex-init renders before the composite's PT Serif slot is decoded, and the faces have no font-display. Adopt the kpress fix (gitlink bump) and add a check to inspect_explainer_typography (or a Playwright test) that loads the built page with an init script recording the first .katex insertion against each KPress Math Text face's status, asserting every composite face and every KaTeX face the page inlines is loaded before the first math node is inserted, in screen and print media; run it against the live site once deployed. Record the measured timeline before and after in the plan spec's Font Consistency section.
 
