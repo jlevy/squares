@@ -40,6 +40,12 @@ nothing else in this directory.
   tight-cell census of the one exactly decided measure is recorded as the obstruction to
   the exact cover.
 
+- [Lane A, Session-109: the corner-class LP under the corner-pair condition at `96/25`](lane-a-corner-structure.md#session-109--the-corner-class-lp-under-the-corner-pair-condition-at-9625-2026-09-08)
+  (BC-292, H-126, H-127): pricing the four mark-holding corner cores buys about half a
+  thousandth of the covering ratio and no certificate on the site sets tried, decided
+  exactly on both sides by the sweep and a dual packing; conditioning on which mark each
+  corner holds buys exactly nothing on the symmetric branches.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
