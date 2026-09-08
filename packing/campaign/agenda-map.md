@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **6** in_progress, **31** ready, **13** tentative, **64** blocked, **41** stopped, **130** complete.
+- **9** in_progress, **28** ready, **13** tentative, **64** blocked, **41** stopped, **130** complete.
 
 - **19 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-289`, `BC-303`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -61,9 +61,9 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-029 | `BC-286` | ready | 1 | insight | research | Can complete angle-count cases at 96/25 gain a useful exclusion from class-dependent dot thresholds? | `think-yv7r` |
 | agenda-029 | `BC-288` | tentative | 2 | insight | research | Can forced edge-contact components or a finite feasible reduction constrain minimizing angle complexity? | `think-m6gb` |
 | agenda-030 | `BC-292` | ready | 0 | insight | research | Does pricing the four corner blockers' cores above the rest, or banking their corner boxes, give a covering… | `think-kx2l` |
-| agenda-030 | `BC-293` | ready | 0 | insight | research | Does a valid D4-symmetric measure at 96/25 exist with T-018's four corner atoms at weight at least 3/20 and… | `think-1136` |
-| agenda-030 | `BC-294` | ready | 0 | correctness | measurement_validation | What are the restricted fractional packing values at 96/25 off a corner box, a corner triangle, a central box… | `think-7lp3` |
-| agenda-030 | `BC-295` | ready | 0 | insight | research | How wide a band around 0° and 45° can be excluded at 96/25, how wide is the optimal nine-point band, and… | `think-ndqj` |
+| agenda-030 | `BC-293` | in_progress | 0 | insight | research | Does a valid D4-symmetric measure at 96/25 exist with T-018's four corner atoms at weight at least 3/20 and… | `think-1136` |
+| agenda-030 | `BC-294` | in_progress | 0 | correctness | measurement_validation | What are the restricted fractional packing values at 96/25 off a corner box, a corner triangle, a central box… | `think-7lp3` |
+| agenda-030 | `BC-295` | in_progress | 0 | insight | research | How wide a band around 0° and 45° can be excluded at 96/25, how wide is the optimal nine-point band, and… | `think-ndqj` |
 | agenda-030 | `BC-296` | ready | 1 | insight | research | Which compositions (n0, 11 − n0) by near-axis count close at 96/25, and does a class-weighted fractional… | `think-n6fr` |
 | agenda-030 | `BC-297` | ready | 1 | correctness | measurement_validation | Is the exactly-eleven plateau at 191/50 a site artefact, what is the shrink tax there, and can the plateau be… | `think-4uon` |
 | agenda-030 | `BC-298` | ready | 1 | insight | research | What is the largest H0 below 3.84 such that eleven unit squares provably do not fit in the rectangle 3.84 ×… | `think-jsi8` |
@@ -190,7 +190,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-027 | active | 1 | 3 | 1 | 3 |  | 3 | 11 |
 | agenda-028 | paused |  | 3 | 2 | 1 |  | 1 | 7 |
 | agenda-029 | paused |  | 3 | 1 | 2 |  | 1 | 7 |
-| agenda-030 | paused |  | 9 | 1 | 3 |  | 1 | 14 |
+| agenda-030 | active | 3 | 6 | 1 | 3 |  | 1 | 14 |
 
 ## By program
 
@@ -336,9 +336,9 @@ Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 | agenda-029 | `BC-290` | blocked | What survives independent checking, and what does it change about the global n11 problem? |
 | agenda-030 | `BC-291` | complete | Which structural constraints on eleven-square packings can be proved now, and what does each buy… |
 | agenda-030 | `BC-292` | ready | Does pricing the four corner blockers' cores above the rest, or banking their corner boxes, give a… |
-| agenda-030 | `BC-293` | ready | Does a valid D4-symmetric measure at 96/25 exist with T-018's four corner atoms at weight at least… |
-| agenda-030 | `BC-294` | ready | What are the restricted fractional packing values at 96/25 off a corner box, a corner triangle, a… |
-| agenda-030 | `BC-295` | ready | How wide a band around 0° and 45° can be excluded at 96/25, how wide is the optimal nine-point… |
+| agenda-030 | `BC-293` | in_progress | Does a valid D4-symmetric measure at 96/25 exist with T-018's four corner atoms at weight at least… |
+| agenda-030 | `BC-294` | in_progress | What are the restricted fractional packing values at 96/25 off a corner box, a corner triangle, a… |
+| agenda-030 | `BC-295` | in_progress | How wide a band around 0° and 45° can be excluded at 96/25, how wide is the optimal nine-point… |
 | agenda-030 | `BC-296` | ready | Which compositions (n0, 11 − n0) by near-axis count close at 96/25, and does a class-weighted… |
 | agenda-030 | `BC-297` | ready | Is the exactly-eleven plateau at 191/50 a site artefact, what is the shrink tax there, and can the… |
 | agenda-030 | `BC-298` | ready | What is the largest H0 below 3.84 such that eleven unit squares provably do not fit in the… |

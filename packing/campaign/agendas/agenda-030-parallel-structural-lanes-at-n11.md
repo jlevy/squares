@@ -9,7 +9,7 @@ agenda:
   id: agenda-030
   title: Parallel Structural Lanes at n = 11
   updated: '2026-09-08'
-  status: paused
+  status: active
   objective: >-
     Run X-021's research sessions as parallel lanes with disjoint deliverables and files:
     nine measurement-or-theorem lanes that each decide one question about structural
@@ -68,7 +68,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: in_progress
     priority: 0
     question: Does a valid D4-symmetric measure at 96/25 exist with T-018's four corner atoms at weight at least 3/20 and total mass below 11 + 3/20?
     hypotheses: [H-128]
@@ -93,7 +93,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: in_progress
     priority: 0
     question: What are the restricted fractional packing values at 96/25 off a corner box, a corner triangle, a central box and the four corner boxes, and the B = 1 value at 3.84, 3.86 and 3.87?
     hypotheses: [H-129]
@@ -120,7 +120,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: in_progress
     priority: 0
     question: How wide a band around 0° and 45° can be excluded at 96/25, how wide is the optimal nine-point band, and where does the fractional obstruction live in angle?
     hypotheses: [H-130, H-131]

@@ -608,15 +608,15 @@ Status: **paused**. Prepare a coordinated n11 campaign connecting proved corner,
 
 ### [agenda-030](agendas/agenda-030-parallel-structural-lanes-at-n11.md) — Parallel Structural Lanes at n = 11
 
-Status: **paused**. Run X-021's research sessions as parallel lanes with disjoint deliverables and files: nine measurement-or-theorem lanes that each decide one question about structural constraints on eleven-square packings at 96/25 and what the constraint buys a certificate, two lanes on the closing route, then one selection cell and one closeout. The numerical goal is unchanged from Agenda 029: a global exclusion at 96/25. Every lane records its site set or inputs with its result, because a non-refutation on a finite site set is never evidence. This planning checkpoint launches no research.
+Status: **active**. Run X-021's research sessions as parallel lanes with disjoint deliverables and files: nine measurement-or-theorem lanes that each decide one question about structural constraints on eleven-square packings at 96/25 and what the constraint buys a certificate, two lanes on the closing route, then one selection cell and one closeout. The numerical goal is unchanged from Agenda 029: a global exclusion at 96/25. Every lane records its site set or inputs with its result, because a non-refutation on a finite site set is never evidence. This planning checkpoint launches no research.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-291 | research | 11 | complete | 0 | think-cm07 | The owner's research-start instruction; then the coordinator allocates session ids and dispatches the ready lanes below. |
 | BC-292 | research | 11 | ready | 0 | think-kx2l | Whether any corner information has value for a certificate at q; if the flush-four residual falls below seven, the first conditional exclusion with a named complement. |
-| BC-293 | research | 11 | ready | 0 | think-1136 | Pinned anchors for the frame-conditioned certificate (BC-287, H-111) and the two-pattern case split of the ownership-conditioned certificate. |
-| BC-294 | measurement_validation | 11 | ready | 0 | think-7lp3 | Whether the non-convex-domain instrument (BC-204) is worth building; whether routes (b) and (c) and every capture design survive; the input BC-301 needs. |
-| BC-295 | research | 11 | ready | 0 | think-ndqj | The first band theorem new below U; whether the obstruction at q is Trump-shaped or an integrality artefact that geometric conditioning can target. |
+| BC-293 | research | 11 | in_progress | 0 | think-1136 | Pinned anchors for the frame-conditioned certificate (BC-287, H-111) and the two-pattern case split of the ownership-conditioned certificate. |
+| BC-294 | measurement_validation | 11 | in_progress | 0 | think-7lp3 | Whether the non-convex-domain instrument (BC-204) is worth building; whether routes (b) and (c) and every capture design survive; the input BC-301 needs. |
+| BC-295 | research | 11 | in_progress | 0 | think-ndqj | The first band theorem new below U; whether the obstruction at q is Trump-shaped or an integrality artefact that geometric conditioning can target. |
 | BC-296 | research | 11 | ready | 1 | think-n6fr | Either the composition route ends at q with a certificate of its own impossibility, or the survivors become the branch list for geometric conditioning. |
 | BC-297 | measurement_validation | 11 | ready | 1 | think-4uon | Whether the ladder's top is the instrument's or the geometry's; the size of the ownership tree. |
 | BC-298 | research | 11 | ready | 1 | think-jsi8 | Every wall within 3.84 − H0 of a square, both extents at least H0, and with the spanning lemma the strongest symmetry-breaking premise available. |
