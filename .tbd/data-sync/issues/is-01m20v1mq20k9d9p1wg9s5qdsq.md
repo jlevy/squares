@@ -5,7 +5,7 @@ title: Prevent math startup from shifting neighboring text and reduce parameter 
 kind: bug
 status: in_progress
 priority: 1
-version: 24
+version: 26
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 labels: []
 dependencies: []
@@ -28,8 +28,9 @@ child_order_hints:
   - is-01m21dyydt23csbr8h3jtkztse
   - is-01m21dyyygnr8mpt1vt77b26a4
   - is-01m21f1xf01nwz7jf9bgc3zgnr
+  - is-01m21j7e3h8j1r4fqwhcxn4q21
 created_at: 2026-09-08T15:44:04.307Z
-updated_at: 2026-09-08T21:33:44.799Z
+updated_at: 2026-09-08T22:29:11.397Z
 ---
 User confirms the deployed no-swap fix works but math parameters still appear slowly. Deployment remains 33cd4760 with KPress7b20ae7. Source-confirmed avoidable dependencies: HOST_MATH_INIT sets allEmbeddedFonts:true and waits every declared face before boot; both certificate boots synchronously build 230x230 heat maps, including the hidden certificate, before initial readouts; root pending CSS keeps every .tex/.tex-d hidden until all static math and pending interactive renders settle. Diagnose normal first-visible parameter timing separately from the delayed-font regression probe. Prefer a Squares fix that renders/reveals each font-ready parameter independently and defers nonessential/hidden heat-map work; evaluate narrower upstream warmup separately. Preserve the no-swap, latest-input, no-JS/error fallback, and print contracts. Do not describe the three-second failure ceiling as an intentional startup delay.
 
@@ -48,3 +49,5 @@ Additional owner requests tracked as think-06te (bullet optical offset and obsol
 18:55 UTC integration: KPress PR61 merged20a7d2b with complete CI34256487179 green; runtime, WebKit, architecture-creation and upstream CI beads closed/synced. Merged Squares main38ca2892 atcadaf4df, preserving PR131 paper, bold-sans and print repairs. Review found supported saved settings lost prepared reservations; think-fatc now owns four-context declarative preparation and complete formula coverage, locally validated with52focusedtests and held-font/default/representative saved-setting controls. Canonical architecture follow-up is KPressPR64. H003 remains unmeasured and its pre-run protocol now identifies the combined publication; H004 extends correctness to all settings. Root reporter14tests/types and durable documentation869-file coverage pass. Final committed push gate, hosted full checkpoint/Pages matrix and isolated timings remain before publication, followed by browser/PDF opening.
 
 2026-09-08 20:33 UTC integration checkpoint: final product source d122d19c passed45 selected checks and1188 reachable tests in137.83s, retained in runs/push-final-ui-2026-09-08.json.gz. Full hosted checkpoint at25e66d7b passed69/69 Linux steps with no skips plus4 macOS steps. Final Pages34274946315 passes print and Firefox loading but reports one WebKit early_math observation after3170ms; kpress_font_pipeline is isolating observer overhead versus a real pending-node watchdog gap. H005 has exactly12pairs each width and provisional paired improvements13.50% desktop/37.57% mobile; no accepted product claim before complete correctness evidence. PDF atd122d19c has17 pages,26 embedded subsets, clean full visual review and reproducibility. Main advanced tofbc790b3; validation-only PR129/132 integration committedde5013d9 using main shared -n/--numprocesses interface, preserving branch fault/scope controls; all123 focused tests pass (two required ps permission replay). Three delegates active on final Pages diagnosis, PDF, and evidence closeout. Squares PR/merge/deploy remain incomplete. Scope fixed to these repairs.
+
+2026-09-08 final merge integration: Squares main PR134 at 7ef80525b35a8e77e00b460a7e08f1489134d0cc had Pages run https://github.com/jlevy/squares/actions/runs/34283872995 fail only in font-loading (webkit), step Render the page and check mobile font loading. Build and Firefox passed. The sole reported finding is the old all-declared-font first-paint predicate: KaTeX AMS/Caligraphic/Main/Size faces reported error and two composite bold Greek subsets loading at 2998ms. All four Planetaire Mono Text faces reported loaded; early_math=null, fallback=null, and there were no page errors or stale input findings. This is not evidence of a mono asset failure. Source comparison confirms combined dfa0a422 retains the corrected per-visible-formula, per-family glyph-load observer, later-unready-face rejection, narrowed render readiness, prepared publication and queued-watchdog protection. The old log does not identify which errored declarations a later formula might require, so no claim that every listed font error is harmless is made. Disposition: covered by the existing font startup/loading work; final combined PR CI will run the corrected observer against the merged publication, without a separate old-main reproduction or a new work item. Raw failed log retained at /private/tmp/squares-main-34283872995-failed.log and exact job metadata at /private/tmp/squares-main-34283872995-status.json.
