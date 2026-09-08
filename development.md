@@ -310,8 +310,9 @@ receipts, not baselines.
 
 A third runner costs billed minutes — its own checkout and sync, and two lanes that no
 longer overlap — and buys an uncontended wall rather than a shorter one: the gate now
-reports when the serial five-step job finishes, about 1860 s of measured step time
-against the exhaustive tier’s 1563 s in the same run.
+reports when the serial five-step job finishes, 2174.8 s of step time in its first
+serial run, [34183723509](https://github.com/jlevy/squares/actions/runs/34183723509),
+against the exhaustive tier’s 1370.1 s and the slow lane’s 1288.5 s in the same run.
 That is `OR-14` applied where the wall actually is, and the alternative — a larger
 budget for a step that was not slow, only crowded — would have measured the runner
 instead of the step.
@@ -541,8 +542,13 @@ run at two outer slots,
 escape screen at its 1800 s budget while the atlas rebuild (848.74 s) and the negative
 controls (608.55 s) ran beside it at two workers each, more than twice the screen’s
 858.62 s reading, so two pools side by side on four hosted vCPUs is contention.
-Serial at two workers is the shape every one of the five readings was taken at, and its
-measured sum of 1859.96 s is about five minutes more than the exhaustive tier.
+Serial at two workers is the shape every one of the five readings was taken at; their
+sum predicted 1859.96 s, and the first serial run,
+[34183723509](https://github.com/jlevy/squares/actions/runs/34183723509), measured
+2174.84 s, the escape screen at 1069.84 s against its 858.62 s reading in the crowded
+checkpoint and the other four within seventy seconds of theirs.
+Every step finished inside its budget, and the job decides the gate’s wall by about
+thirteen minutes over the exhaustive tier’s 1370.06 s in the same run.
 Certificate pools also enforce actual CPU availability, the four-worker maximum, and the
 grid-memory budget. This allocation preserves the parallelism previously available when
 certificate pools ignored `PACK_JOBS`; it is not a measured speedup claim.
