@@ -47,14 +47,22 @@ session:
       (then freeze and stop, allocating nothing).
     fallback: Publish the same fields at the scope reached; the runs not started are
       recorded as the complement with the instrument gap that stopped them.
-    outcome: OUTCOME
+    outcome: >-
+      Runs 1 and 2 report exact primal and dual bounds for the mark-union program and
+      free control on site set A. Runs 3 and 3b report an exact obstruction for the
+      opposite-both branch there. The union's ratio gain is 0.000535 to 0.000573;
+      the branch slice residual is at least 28690/78939. Run 4 stopped during row
+      generation without an exact decision, and run 5 did not run. The original
+      driver and raw outputs are missing from the retained appendix, so these remain
+      reported lane readings pending artifact recovery and replay.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-a-corner-structure.md
-    stop_reason: STOP_REASON
-    next_action: BC-303 (think-znzj) reads this lane; the corner class carries no
-      certificate at 96/25 on the retained shrink and net at the site densities tried,
-      so corner information should be routed through BC-299's anchored certificate or a
-      finer net rather than through pricing or banking.
+    stop_reason: An external usage limit halted run 4 before convergence; the remaining
+      branch and refinement runs were not completed.
+    next_action: Recover the missing driver and exact supports, replay runs 1 through
+      3b on site set A, and carry run 4, run 5, the original corner-box class and the
+      corrected banking-domain extension into the agenda closeout. The reported
+      obstructions do not decide other site sets or clipped-domain banking cases.
   primary_bead: think-kx2l
   status: stopped
   budget:
@@ -73,20 +81,25 @@ session:
     before: Theorem A sound and unrun; the 3.81 census reading that the corner region's
       minimum equals the global minimum; H-127 open; the corner-pair theorem proved but
       unpriced.
-    after: PROGRESS_AFTER
+    after: Reported exact bounds for the mark-union and opposite-both programs on site
+      set A; run 4 partial, run 5 unrun; the ratio/slice equivalence and safe core
+      clip corrected in the 2026-09-08 review. Original run artifacts remain to be
+      recovered before independent replay.
   delegations: []
   outputs:
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-a-corner-structure.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md
   - packing/campaign/agent-sessions/session-109-corner-class-at-q.md
   checks:
-  - Every rationalised measure swept exactly in one worker on sqpack.fractional.sweep's
+  - For completed runs 1, 2, 3 and 3b, the lane reports each rationalised measure swept
+    exactly in one worker on sqpack.fractional.sweep's
     integer mass grid over all 181 directions, with the eight marks carried as zero-weight
     atoms so that the class cells are unions of whole event cells; the class threshold is
     the least class-cell mass and the free threshold the least cell mass, both reported
     as fractions with the direction that attains them; group closure of the atoms
     re-checked exactly before every sweep.
-  - Every dual packing re-derived in Fraction arithmetic from its rows' float centres
+  - For those completed runs, the lane reports each dual packing re-derived in Fraction
+    arithmetic from its rows' float centres
     (centre inside the closed centre domain, coverage counts per orbit, mark containment),
     the symmetrised depth checked on every orbit, and the bound read only from the exact
     objects; where the bound sits on the knife-edge (the branch slices) the dual's tight
@@ -104,7 +117,9 @@ session:
     cannot satisfy on its own (no resource receipt of its own exists for a lane sub-agent;
     the coordinator attaches one at integration).
   certification_pending: think-kbci
-  stop_reason: STOP_REASON2
+  stop_reason: An external usage limit halted the lane during run 4. Runs 4 and 5,
+    the remaining mark branches and the banking-domain extension are unfinished;
+    the retained appendix lacks the original driver and raw outputs.
   next_action: Under think-kbci the coordinator integrates the lane section, attaches the
     resource receipt, runs the certifying gate, and carries H-126 and H-127 and this lane's
     unfinished complement into BC-304 (think-yrw1), the agenda closeout, which
@@ -121,26 +136,33 @@ The result document is the Session-109 section of
 [lane A](../series/series-000-smoke-and-calibration/results/agenda-030/lane-a-corner-structure.md);
 this record carries the clocks, the stop conditions and what was checked.
 
-The block ran in the order the cell prescribes.
+**Record correction, 2026-09-08.** This account now distinguishes the completed reported
+runs from the interrupted and unrun work; it adds no rerun or certification.
+
+The block began in the order the cell prescribes.
 The region-class row generator was written first (the marks’ coverage rectangles as
 event lines, so the corner class needs no clip), smoke-tested at grid 21, and run on
 grid 79 with inset `1/10` plus the eight marks; the flush-four program under D4, the
 free control on the same sites, and then the two mark branches whose stabilisers contain
 a reflection — the opposite-both branch under `D2` and the U branch under one axis
-reflection — followed by the flush-four program on a corner-refined site set.
-Every run was decided exactly on both sides: the rationalised measure by the integer
-event-cell sweep, and a dual packing re-derived in `Fraction` arithmetic, at the tight
-vertex where the bound sits on a knife-edge.
+reflection. The U branch stopped during round 21 without an exact decision; the
+flush-four program on a corner-refined site set did not run.
+Runs 1, 2, 3 and 3b report decisions on both sides: the rationalised measure by the
+integer event-cell sweep, and a dual packing re-derived in `Fraction` arithmetic, with
+the tight vertex solved exactly for the branch.
+Their driver, supports and raw outputs were not included in the retained appendix and
+must be recovered for independent replay.
 Checkpoints were written at thirty-minute intervals in the scratchpad and committed as
 work in progress on the lane branch.
 
-Two instrument facts surfaced on the way and are recorded in the lane section: a
-branch’s ratio program is trivial once the chosen marks are sites (the measure `1/4` at
-each has residual exactly `0`), so branches must be run as the slice `w_f = 1`; and a
-folded site set must seed every mark whatever the group, or a branch’s LP acquires a
-free ray.
-Theorem B’s three-plus-one clip, the pinwheel and asymmetric mark branches, and
-H-127’s registered corner-box region were not reached; the section records each with the
+The lane found a ratio optimum of one for the opposite-both branch on site set A. The
+review corrected its extension to every site set: ratio and slice forms have the same
+exclusion power, while the slice `w_f = 1` exposes a positive residual that the ratio’s
+banking point can hide.
+The lane also reported that a folded site set must seed every mark whatever the group,
+or a branch’s LP acquires a free ray.
+Theorem B’s three-plus-one clip, the pinwheel and asymmetric mark branches, and H-127’s
+registered corner-box region were not reached; the section records each with the
 instrument gap that would have to be closed first.
 
 <!-- This document follows common-doc-guidelines.md.

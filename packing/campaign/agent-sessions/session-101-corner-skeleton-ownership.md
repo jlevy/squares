@@ -60,8 +60,9 @@ session:
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md
     stop_reason: >-
-      The cell's question is decided and its falsifier met; the remaining computation
-      (a settled dual for the floor) does not fit the block and is handed on.
+      The finite-support attempt ended without the target measure; the remaining
+      computation (a settled dual for the floor) does not fit the block and is handed
+      on. Handoff correction: H-128 is still open over the full declared net.
     next_action: >-
       Write the record, validate the records tier, commit on lane/bc-293-corner-skeleton.
   - workflow: documentation-pass

@@ -124,9 +124,12 @@ Write `κ = L − 2.96`, the margin the twelve-square certificate leaves at side
   and the other seven at `w_f`, a region analogue of X-014’s class certificate that the
   folded solver runs with one extra row predicate.
   A *complete corner cover by penetration depth* bins each corner’s penetration `δ_j`,
-  banks the box `[d, 1]²` for a shallow corner, and clips the centre domain by the
-  half-plane `a + b > d + cos θ` for a deep one; the clip is convex, so the retained
-  sweep needs a clip rather than a new engine.
+  banks the box `[d, 1]²` for a shallow corner, and clips the centre domain by the safe
+  core half-plane `a + b > d + B cos θ` for a deep one; the clip is convex, so the
+  retained sweep needs a clip rather than a new engine.
+  The 2026-09-08 review corrected the former unit-square clip, which could omit cores of
+  parents at angles between net directions; lane A’s Theorem B contains an exact
+  counterexample and the repaired inclusion proof.
 
 What lane A could **not** prove, and showed cannot be proved by any argument valid up to
 `U`: no positive corner penetration, no bound on a blocker’s angle, no square vertex
@@ -149,16 +152,21 @@ Lane B sharpened the nine-point argument and then ran the repository’s class p
 - **A wider nine-point band** (exact-verified).
   The nine points `{1 − 1/200, q/2,
   q − 1 + 1/200}²` pierce every admissible core in the leading eighteen half-gap cells
-  of the retained net, so at `q` at most nine squares have folded tilt `≤ 4.6122°`; at
-  `U` the same set gives `3.2953°`.
+  of the retained net, so at `q` at most nine squares have folded tilt in those cells
+  (upper angle approximately `4.6122°`); at `U` the same set’s reported endpoint is
+  approximately `3.2953°`.
 - **Band certificates at `q`** (exact-verified on a grid-79 site set with inset `1/10`,
   decided by the exact sweep).
-  At most nine squares within `6.4537°` of the axes; at most ten within `10.3875°`; at
-  most nine within `2.155°` of `45°`; at most ten within `2.44°` of Trump’s `40.19°`;
-  and at most ten with folded tilt in `[30.01°, 45°]`, so every packing at side `≤ 3.84`
-  has a square tilted below `30°`. At `U`: at most nine within `6.45°`, ten within
-  `7.77°` of the axes, and ten within `1.24°` of `45°`. Bands of width `13°` and beyond
-  give no bound at `q`.
+  At `q`, at most nine squares have folded tilt in cells 0–24, ten in cells 0–39, nine
+  in cells 171–180, ten in cells 149–169, and ten in cells 117–180. At `U`, the counts
+  are nine in cells 0–24, ten in cells 0–29, and ten in cells 175–180.
+  [H-131](../hypotheses/H-131-near-axis-counts-at-q.md) and
+  [exp-131](../series/series-000-smoke-and-calibration/experiments/exp-131-h131-near-axis-counts-replay-at-q.md)
+  give the exact rational cell boundaries.
+  The 2026-09-08 review corrects the former degree summaries: the axis count ends at
+  approximately `10.3874656704°`, and the forced low-angle square has tilt below the
+  lower boundary of cell 117, approximately `30.0148587980°`; a tilt below `30°` is not
+  established. The attempted wider bands that failed on grid 79 remain site-set readings.
 - **A robust `{0°, 45°}` band excluded at `q`** (exact-verified, mass `10.702`). No
   packing of eleven at side `≤ 3.84` has every folded angle in
   `[0°, 1.45°] ∪ [43.76°, 45°]`. The next widenings, `3.3°` on each end and
@@ -265,15 +273,21 @@ result that quantifies the whole conditional-certificate programme.
   Minimality facts hold at the unknown side, not at `q`; dilation turns every contact
   into a near-contact with tolerance `0.01113` at `q` and walls `0.00556`. Every
   structural lemma handed to a certificate must be stated with that tolerance.
-- **Duality governs conditional and capture certificates** (proved).
-  A conditional or capture certificate exists exactly when the *restricted* fractional
-  packing value is below its threshold.
-  A depth-one family of value at least `11` supported off the conditioned region kills
-  the certificate at every larger side and on every site set.
+- **Duality bounds a specified single-core covering program** (proved in the form
+  corrected in lane D on 2026-09-08). A depth-one family with sufficient weight in that
+  program’s admissible class gives a weak-duality obstruction on every site set.
+  For strict capture, the core family must lie outside the stated captured set `N`. A
+  family outside `N` does not by itself obstruct a geometric conditional program or a
+  certificate involving several squares.
   Two corollaries were checked on retained data:
-  - with `B = 9977/10000` the `{0°, 45°}` packing of side `2 + (4/3)√2` kills every
-    Trump-neighbourhood capture certificate at all sides `≥ 3.876681 < U`, the same
-    number exp-064 met; with `B = 1` this particular kill disappears;
+  - with `B = 9977/10000`, `t = 207107/500000` and `δ = 2 arctan t − π/4 > 0`, the
+    `{0°, 45°}` packing of side `2 + (4/3)√2` supplies the retained-net obstruction for
+    strict capture of the stated Trump-neighbourhood set at sides strictly above
+    `C_B = B(2 + (4/3)√2)(cos δ + sin δ)`. The signed-angle correction is recorded in
+    lane D. Since `√2 < 665857/470832`,
+    `C_B < 22275352724718225/5745980944770482 < 38767/10000 < U`. The strict side
+    inequality places the closed cores in their parents’ interiors; no assertion is made
+    at equality. With `B = 1` this particular obstruction below `U` disappears;
   - BC-200’s depth-one family at `191/50`, moved to `q`, keeps `≥ 8.8732` of its
     `9.9079` off a unit corner box, `9.0293` off a half-unit box and `7.0992` off a
     central unit box. Boxing one blocker removes about one unit of fractional weight, the
@@ -314,9 +328,11 @@ result that quantifies the whole conditional-certificate programme.
   touch the competitor question.
   The tree of a proof is governed by how much of configuration space a general argument
   discards *at side `U`*, not by the band’s width.
-- **Every fixed measure, shrunk or not, has a plateau.** With the retained shrink the
-  plain certificate caps at `3.868983` and capture at `3.876681`; with `B = 1` both caps
-  vanish and the unknown `B = 1` covering value takes their place.
+- **The retained shrink limits the specified covering programs.** The stated strict
+  capture program has an obstruction above `C_B < 3.8767`, as corrected above; this is
+  not a cap on all geometric conditional or multi-square certificates.
+  With `B = 1` this particular obstruction below `U` disappears and the corresponding
+  covering value remains to be established.
 
 ## The Ambitious Route, Priced
 

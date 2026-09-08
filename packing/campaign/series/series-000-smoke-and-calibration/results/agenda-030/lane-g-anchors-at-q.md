@@ -361,8 +361,9 @@ radius `h` is the Euclidean distance from the core to the segment.
 
 Three checks are in the table.
 Every grazing core of the dual is within `1/100` of some segment (`0` exceptions), as
-Theorem G.1(2) requires of *any* admissible core, so the theorem and the instrument
-agree on the dual’s support.
+Theorem G.1(2) requires of cores arising from contained unit squares.
+For the dual’s admissible `B`-cores this is a separate check: the theorem’s proof needs
+a contained unit-square parent, which an arbitrary admissible `B`-core need not have.
 The corner-pair class is dead with charge above one, Corollary G.4.2 realised.
 And the `σ_O` class with no avoidance filter carries `0.999999` on twenty squares: the
 free packing puts exactly a unit of weight on cores containing `(27/50, q/2)`, which is
@@ -443,12 +444,26 @@ No claim is frozen and no experiment id is needed.
    `placement_cells` supplies the least-mass cells, so the class’s own least-mass cells
    need a second pass restricted to the class.
    The row-outer type needs a `K4`-symmetric measure (its `D4`-union is dead, its
-   `K4`-union is empty), which needs a quarter-turn sweep the repository does not have.
+   `K4`-union is empty on this dual).
+   It can use the same folded angle range once the row generator and exact symmetry
+   check support `K4`.
 2. If the threshold program leaves a class alive, do the same on session-101’s
    `637`-orbit site set with column rounds, where the free value is `11.262`.
 3. Only if a band theorem is wanted: the interval certificate that no contained unit
    square of folded tilt at most `11°` avoids `P10` at `96/25` (the H-106 reader with
    `q` and the band as parameters).
+
+**Readiness correction, 2026-09-08.** The earlier claim that the row-outer `K4` program
+requires a quarter-turn sweep was too strong.
+A vertical reflection in `K4` sends a square’s angle `θ`, modulo `π/2`, to `π/2 − θ`.
+Both the measure and the `K4`-orbit union of the row-outer grazing class are invariant
+under that reflection, so checking `[0, π/4]` covers the remaining angles as well.
+The missing instrument is the region-class separator and a verifier that checks the
+declared `K4` symmetry; `classcert._symmetry_report` currently accepts only `D4`. A
+small-grid comparison against an expanded angular sweep and a broken-symmetry mutation
+should guard that extension.
+The threshold program was not run in session-108. A row-type exclusion would still leave
+the corner and wall-middle types of Corollary G.1.1 to discharge.
 
 ## 8. Inputs and resources
 

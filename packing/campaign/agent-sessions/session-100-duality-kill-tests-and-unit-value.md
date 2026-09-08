@@ -68,9 +68,12 @@ session:
       B = 1 loop bought one iteration and the restricted loop three, and the central-box
       loop was cancelled to protect the polishers and the write-up.
     next_action: >-
-      Run the B = 1 loop at 96/25 to convergence on an unloaded core from the saved state
-      (scratchpad/lane-294/unit-3-84/unit-state-96-25.json), polish every iteration's
-      support, then 3.86 and 3.87; make the polisher an instrument step of the loop.
+      Corrected 2026-09-08: the named scratch state is absent, and the embedded unit_loop
+      cannot safely resume its own merged-net indices. Start from retained
+      packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-leg-01-family.json;
+      transport all geometry by 10000/9977 with devtools.transport_ceiling_family and
+      verify the unit control before building the guarded polisher. Preserve exact source
+      and destination nets on every resume. No target search is part of this correction.
   primary_bead: think-7lp3
   status: stopped
   certification_pending: think-7lp3
@@ -107,10 +110,11 @@ session:
     lane, and the resource receipt is the lane's own transcript rolled up before the
     block closed, a contemporaneous lower bound the coordinator regenerates at closeout.
   next_action: >-
-    Coordinator: regenerate the rollup at closeout, keep H-129 open, and hand the saved
-    B = 1 state to a convergence run on an unloaded core before 3.86 and 3.87; the
-    certification debt under think-7lp3 clears with the next qualifying gate on the
-    integrated branch, and BC-303 (think-znzj) reads this lane with the others.
+    Coordinator: keep H-129 open and use the dated correction's retained exp-070 family,
+    exact unit transport, and net-bound resume contract. The original scratch state has
+    not been recovered. The certification debt under think-7lp3 clears only with the next
+    qualifying gate on the integrated branch; source replay and instrument controls come
+    before a separately registered target continuation.
 ---
 # Duality Kill Tests and the B = 1 Value at 96/25
 
@@ -132,6 +136,24 @@ H-129 is recommended `open`. No claim is frozen and no experiment id is needed.
 
 No full gate was run in this lane; the records tier is the only check claimed, and the
 record is stopped with certification pending under `think-7lp3`.
+
+## Correction of 2026-09-08: Recoverable Evidence and Safe Resume
+
+The original clocks, measurements and scripts are preserved.
+The claimed scratch family and state are absent from this checkout, so their
+eight-point-nine replay cannot be repeated from this PR. The embedded `unit_loop.py`
+also remaps every loaded row from 181 to 203 directions even when its input is already
+its own 203-direction state; using it to resume that state changes angles or raises an
+index error.
+
+The operational control is exp-070’s retained `bc-232-leg-01-family.json`, whose exact
+weight is `21342289572/2055263195`. Scaling its complete geometry by `10000/9977` gives
+unit squares in side `38200/9977 < 96/25`, with the same depth and weight.
+The
+[lane-D correction](../series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md#correction-of-2026-09-08-duality-scope-cap-and-retained-continuation)
+owns the proof, command and remaining dependencies.
+This stronger baseline supersedes the proposed restart from the unavailable state; it
+does not settle H-129.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -289,42 +289,53 @@ exclusion at `96/25` against what it costs, with the replays above as the eviden
    replayed facts now give it a branch structure: every square of a packing is within
    `3/500` of one of ten short segments on three rows, so by pigeonhole some segment
    serves two squares; the corner-pair theorem names four of the eleven squares; Theorem
-   C forces a square with folded angle in `(10.3875°, 43.0737°)`. Accept rule for the
-   block: an exact-decided theorem beyond localisation — a mark set of at most eleven
-   marks with the shared configurations confined to a named pattern (two squares within
-   `δ` of one segment must touch along its line, or the like), or the exact threshold
-   length, each certified by an interval reader with its exact re-check and a second
-   reader; a float non-escape is never a result.
-   First tasks: register the second reader of this record beside the lane’s; decide
-   whether the free eleventh mark can be placed so that some sharing pattern is
-   impossible; cost the case split that E.4, the corner pair and Theorem C define.
+   C forces a square outside its exact union of end-band cells (the degree endpoints are
+   only approximations).
+   Accept rule for the block: an exact-decided theorem beyond localisation — a mark set
+   of at most eleven marks with the shared configurations confined to a named
+   compatibility pattern, or the exact threshold length, each certified by an interval
+   reader with its exact re-check and a second reader; a float non-escape is never a
+   result. Sharing does not force contact: the disjoint squares `[0,1] × [1/2,3/2]` and
+   `[51/50,101/50] × [1/2,3/2]` both meet the central segment `[24/25,26/25] × {1}` and
+   have gap `1/50`. First tasks: register the second reader of this record beside the
+   lane’s; decide whether the free eleventh mark can be placed so that some sharing
+   pattern is impossible; cost the case split that E.4, the corner pair and Theorem C
+   define.
 2. **Fund as the efficiency block (OR-12): the `B = 1` depth polisher** (BC-294’s
    follow-up, bead `think-7lp3`). `ν*₁(q)` is X-021’s decisive unmeasured number and the
    first wave located the loss in the instrument (depth scaling, not the LP); a polisher
    on the fixed support is a bounded instrument change with a kill test as its accept
-   rule: a family verified by `verify_ceiling` at `96/25` of value at least eleven with
-   a unit of weight outside Trump’s neighbourhood decides the ambitious tier negatively;
-   a converged covering LP below eleven at `B = 1` moves H-129; anything in between is
-   recorded with its bytes.
-   The plateau’s full-dual pricing (lane F’s one-line `support_cap` diagnostic, about
-   thirty minutes) rides inside this block as its first task, since it tells whether the
-   instrument’s stops are the cap’s.
+   rule: a finite family verified by `verify_ceiling` at `96/25` of value at least
+   eleven obstructs a strict one-body covering certificate there.
+   A unit of weight outside an exactly specified Trump neighbourhood additionally
+   obstructs that capture certificate.
+   Neither result rules out ownership, compatibility or integrality arguments.
+   A covering measure of mass below eleven, verified over every translation at the
+   declared directions, decides only that finite-net problem; a continuum conclusion
+   additionally needs full angular coverage.
+   A smaller feasible family or a converged site LP alone is inconclusive for H-129. The
+   continuation control is the retained exp-070 family transported by `10000/9977`: its
+   depth-one mass is `21342289572/2055263195`, approximately `10.3842`, in a unit-square
+   container of side `38200/9977 < 96/25`. The plateau’s full-dual pricing (lane F’s
+   one-line `support_cap` diagnostic, about thirty minutes) rides inside this block as
+   its first task, since it tells whether the instrument’s stops are the cap’s.
 3. **Retain, do not fund as a block: the band ladder at grids 119 and 159.** Run it as
    filler beside the funded blocks; freeze the widest success when it appears.
 4. **Retain, defer: the corner-pair anchors for BC-299’s conditional certificate.** The
    anchors are proved and replayed and stay the input BC-299 asked for, but a
    conditional certificate’s value is bounded by the restricted fractional packing value
    (X-021, Lemma D), which is undecided; the polisher block measures it first.
-5. **Fold in, do not fund: the plateau’s full-dual pricing.** Diagnostic, cheap, and
-   unable to produce a certificate below eleven at `191/50` on its own (H-133 refuted as
-   stated); it is task one of the efficiency block.
+5. **Fold in, do not fund: the plateau’s full-dual pricing.** The Trump-strip
+   explanation failed its tests, while the original run stopped at a 32-row pricing cap.
+   Whether full-dual pricing lowers the value remains untested; it is task one of the
+   efficiency block.
 
 Dispositions of the first-wave hypotheses, as recommendations to the coordinator: H-134
 accepted for the segment form (now independently replayed), open for the point form;
-H-128 rejected at `96/25` on the retained shrink and net, with the corner-pair theorem
-retained as its proved by-product; H-130 confirmed (exp-130); H-131 confirmed (exp-131);
-H-129 open; H-133 refuted as stated; H-127 and H-132 untested (BC-292 and BC-298 did not
-run).
+H-128 unsuccessful on the tested finite support, still open over the retained net, with
+the corner-pair theorem retained as its proved by-product; H-130 confirmed (exp-130);
+H-131 confirmed (exp-131); H-129 open; H-133 refuted as stated; H-127 and H-132 untested
+(BC-292 and BC-298 did not run).
 
 ## 7. The strongest claim to freeze
 
@@ -340,11 +351,19 @@ Theorem E.4, in this exact form, with two independent readers agreeing (the lane
 > every packing of eleven unit squares at side at most `96/25` is within `3/500` of one
 > of these ten segments, and some segment is within `3/500` of two of them.
 
-The same statement holds with the segments shortened to `9/100` and to `8/100` (both
-readers; the lane’s at floor `5·10⁻⁵` for `8/100`), and fails at `7/100`, where both
-readers find exact escapes.
+The `3/500` tolerance statement holds with the segments shortened to `9/100` and to
+`8/100` (both readers; the lane’s at floor `5·10⁻⁵` for `8/100`); the smaller radical
+tolerance above has not been established for those lengths.
+The `3/500` statement fails at `7/100`, where both readers find exact escapes.
 It needs an experiment id, the lane’s `set-S10-l0.1.json` and both readers as its
 record, and no registry entry beyond that: it changes no bound on `s(11)`.
+
+**Handoff correction, 2026-09-08.** Exp-132 now records the segment result.
+The guarded, portable replay is `packing/devtools/segment_cover_replay.py`; its failure
+status is nonzero, unlike the historical fence below.
+Lane E’s proposed rounded fractional cover and its enlargement shortcut have exact
+counterexamples. They are not premises of this segment theorem and do not establish an
+obstruction to the ownership continuation.
 
 The corner-pair theorem (Section 3) is the second claim worth freezing, with the
 exported measure as its whole record; it is cheaper to register than E.4 and should be.

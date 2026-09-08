@@ -9,7 +9,7 @@ agenda:
   id: agenda-030
   title: Parallel Structural Lanes at n = 11
   updated: '2026-09-08'
-  status: active
+  status: completed
   objective: >-
     Run X-021's research sessions as parallel lanes with disjoint deliverables and files:
     nine measurement-or-theorem lanes that each decide one question about structural
@@ -36,6 +36,18 @@ agenda:
     artifacts:
     - packing/campaign/explorations/X-021-what-can-be-proved-about-eleven-squares.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md
+    outcomes:
+    - scope: The parallel-lane research plan and its proved structural starting facts
+      classification: achieved
+      result: >-
+        X-021, H-127 through H-134 and the disjoint Agenda 030 lane plan were published
+        without opening a scientific target in the planning block. Later sessions ran
+        under this contract and retain their own measurements and stop reasons.
+      evidence:
+      - packing/campaign/explorations/X-021-what-can-be-proved-about-eleven-squares.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/README.md
+      disposition: retire-success
+      follow_up: null
     next_evidence: The owner's research-start instruction; then the coordinator allocates session ids and dispatches the ready lanes below.
   - id: BC-292
     purpose: research
@@ -70,10 +82,11 @@ agenda:
         far too small: on site set A the class lowers the ratio optimum by between 0.000535
         and 0.000573, which is 1.6 to 1.8 per cent of the 0.0325 gap to the certificate
         line, with the flush-four dual at lambda = 1.0325 and the free control at 1.0330,
-        both exactly decided. A general obstruction is proved beside it: a branch program in
-        ratio form sits on the knife-edge lambda = 1 whatever the site set, because the
-        chosen marks are sites, so branch programs must be written in slice form; the
-        slice form of the opposite-both branch then buys nothing over the free program.
+        both exactly decided. On site set A, run 3's exact dual proves the ratio optimum
+        is 1. Mark banking supplies an upper bound of 1 on other site sets, not equality.
+        The ratio and slice normalizations have the same exclusion power; slice form
+        may resolve a positive gap more clearly numerically. The reported opposite-both
+        slice did not improve on the free program on its tested support.
         Run 4 did not converge and run 5, on the corner-refined site set, did not run.
       evidence:
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-a-corner-structure.md
@@ -111,20 +124,40 @@ agenda:
     - scope: The bounded corner-skeleton measure at 96/25 on the retained shrink and net, one site set, in session-101 (2026-09-08, one worker at load 3 to 8)
       classification: bounded-negative
       result: >-
-        H-128's falsifier is met: with the corner orbit bounded below by 3/20 the exactly
+        The tested finite support is unsuccessful: with the corner orbit bounded below by 3/20 the exactly
         swept measure has mass 23596423/2000000 = 11.798 (five-bound 11.819) against the free
         11.262 on the same site set, price M(forced) - M(free) = 33507/62500 = 0.536, and
         pricing the corner orbit leaves it at weight zero, so the corner atom's position, not
         the bound, is the obstacle; the bounded dual's proved floor for every valid D4 measure
         on this net is 10.785, below 11.15, so the obstruction is a site-set reading rather
-        than a theorem for the net. The lane proved instead, from the exactly verified free
-        measure and the ownership lemma applied to T-018's corner pair, that every packing of
-        eleven unit squares at 96/25 has four distinct squares each containing one of its
-        corner's two marks in its interior; the anchor for BC-299 is therefore a corner pair,
-        not a corner point. The Lemma C dry run on T-018 keeps no diagonal displacement valid.
+        than a theorem for the net. The Lemma C dry run on T-018 keeps no diagonal displacement
+        valid. This retires only the tested support, not H-128's continuum-support question.
       evidence:
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md
       - packing/campaign/agent-sessions/session-101-corner-skeleton-ownership.md
+      disposition: retire-negative
+      follow_up: null
+    - scope: The corner-pair containment theorem derived from the verified free measure
+      classification: achieved
+      result: >-
+        From the exactly verified free measure and the ownership lemma applied to T-018's
+        corner pair, every packing of eleven unit squares at 96/25 has four distinct
+        squares, each containing one of its corner's two marks in its interior. The anchor
+        for later work is therefore a corner pair, not a corner point.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-c-n10-transfer.md
+      - packing/campaign/agent-sessions/session-101-corner-skeleton-ownership.md
+      disposition: retire-success
+      follow_up: null
+    - scope: H-128 over unrestricted D4-symmetric measure support at 96/25
+      classification: inconclusive
+      result: >-
+        The unsuccessful finite support and its bounded dual do not decide whether a
+        qualifying measure exists on the full declared continuum support. That scientific
+        question remains separate from the proved corner-pair theorem.
+      evidence:
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
+      - packing/campaign/hypotheses/H-128-corner-skeleton-ownership.md
       disposition: continue
       follow_up: think-1136
     next_evidence: Pinned anchors for the frame-conditioned certificate (BC-287, H-111) and the two-pattern case split of the ownership-conditioned certificate.
@@ -132,7 +165,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11]
-    state: complete
+    state: stopped
     priority: 0
     question: What are the restricted fractional packing values at 96/25 off a corner box, a corner triangle, a central box and the four corner boxes, and the B = 1 value at 3.84, 3.86 and 3.87?
     hypotheses: [H-129]
@@ -143,10 +176,12 @@ agenda:
       direction net dense near 0° and 40.18°. X-021's duality lemma (lane D, Lemma D) is the
       reading rule.
     exit: >-
-      Per region an exact depth-scaled total classified as kill (at least 10), alive (below
-      9.5) or undecided; and for B = 1 either a verified family of value at least 11 at some
-      side below U with its weight outside Trump's neighbourhood, or a converged covering LP
-      below 11 at 3.87.
+      Per region an exact feasible family of value at least 10 can obstruct the specified
+      one-body certificate; a smaller feasible family is inconclusive. An upper bound
+      requires a covering certificate over the declared region. For B = 1, an exact
+      depth-one family of value at least 11 at a side at most 3.87 refutes H-129;
+      confirmation requires an upper certificate below 11 over its full declared domain.
+      Record outside-neighbourhood weight separately for the particular capture test.
     bead: think-7lp3
     workflows: [research-loop, factual-review]
     depends_on: []
@@ -165,21 +200,34 @@ agenda:
         203-direction net densified at the axis and at Trump's angle, warm from BC-200's
         state; its weight is diffuse in angle, 3.22 within a degree of the axis and 0.03
         near 40.18 degrees, with 5.93 of its mass outside Trump's neighbourhood, and s(10)
-        proves the true value is at least 10, so the family is below the truth and the site
+        supplies a floor of 10 after strict separation, so the family is below that floor and the site
         LP of 11.17 is unconverged. The four-corner region's verified families reach 6.173
         and, polished, 6.261; a single corner box and the corner triangle are not
         D4-symmetric programs and inherit sub-restriction floors of 7.64 and 8.15; the
-        central box loop was cancelled under load. Neither kill (at least 10) nor alive
-        (below 9.5) was reached anywhere, so routes (b) and (c) and every capture design
-        survive untested. The measurable instrument finding is that the loop's depth
+        central box loop was cancelled under load. No reported result decides the
+        relevant upper certificate or capture question. The measurable instrument finding is that the loop's depth
         scaling, not its LP, loses the value; a depth polisher on the fixed support is the
-        next instrument. 3.86 and 3.87 were not started.
+        next instrument. 3.86 and 3.87 were not started. The handoff review identified a
+        stronger retained control: exp-070's depth-one family transports to unit squares
+        at side 38200/9977 < 96/25 with unchanged mass 21342289572/2055263195, about 10.3842.
       evidence:
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md
       - packing/campaign/agent-sessions/session-100-duality-kill-tests-and-unit-value.md
       disposition: continue
       follow_up: think-7lp3
-    next_evidence: Whether the non-convex-domain instrument (BC-204) is worth building; whether routes (b) and (c) and every capture design survive; the input BC-301 needs.
+    - scope: The B = 1 values at 3.86 and 3.87
+      classification: never-opened
+      result: >-
+        The 3.86 and 3.87 target runs never started. The cancelled central-box loop is
+        included in the time-limited outcome above. The scratch state named for a resume is absent; a future
+        run must begin from the retained exp-070 family and preserve exact source and
+        destination net identities. No upper certificate or H-129 disposition follows.
+      evidence:
+      - packing/campaign/agent-sessions/session-100-duality-kill-tests-and-unit-value.md
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
+      disposition: defer-dependency
+      follow_up: think-7lp3
+    next_evidence: Improve the retained 10.3842 control or certify an upper bound over the specified domain; test each proposed one-body or capture obstruction at its own scope.
   - id: BC-295
     purpose: research
     owner_focus: insight
@@ -211,18 +259,30 @@ agenda:
       result: >-
         Every count in H-131 and both Section 2.3 end bands replay exactly through
         decide_class_program with masses equal to the planning lane's to the fraction. The
-        robust end band widens far past 3 degrees: Theorem A excludes [0, 1.7139] union
-        [43.5293, 45] on grid 79 (mass 5529/512), Theorem B [0, 10.3875] union [43.5293, 45]
-        (mass 351/32), and Theorem C on grid 119 [0, 10.3875] union [43.0737, 45] (mass
-        11083/1024, least core 4101/4096, 296 atoms), all in folded degrees with closed ends
-        stated exactly. The 45-degree end binds. The dual of the band toward 40.19 degrees
+        robust end band widens far past 3 degrees. Theorems A, B and C exclude the exact
+        rational cell unions recorded in exp-130, with masses 5529/512, 351/32 and
+        11083/1024 respectively. Theorem C uses grid 119, least core 4101/4096 and 296
+        atoms; its folded boundaries are approximately 10.387466 and 43.0737 degrees.
+        Rounded degree labels are not closed theorem endpoints. The 45-degree end binds.
+        The dual of the band toward 40.19 degrees
         carries 7.47 of its 11.25 units within 1.32 degrees of the axis and only 0.45 near
         Trump's angle, and ceiling.py decides all three duals' continuum depth exactly with
-        scaled totals below 5.5, so on these site sets the obstruction is a site-set artefact
-        and the true class values of the bands toward 40.19 degrees stay open from below.
+        scaled totals below 5.5. These duals therefore do not establish a continuum
+        obstruction; the true class values toward 40.19 degrees remain open from below.
       evidence:
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md
       - packing/campaign/agent-sessions/session-102-angle-band-theorems-at-q.md
+      disposition: retire-success
+      follow_up: null
+    - scope: The true restricted-class values toward 40.19 degrees beyond the tested site sets
+      classification: inconclusive
+      result: >-
+        The reported site-program duals fail the continuum depth checks. They do
+        not establish a continuum obstruction for the classes toward Trump's angle or a new
+        theorem below U, so that distinct band-ladder question remains open.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-b-angle-classes.md
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
       disposition: continue
       follow_up: think-ndqj
     next_evidence: The first band theorem new below U; whether the obstruction at q is Trump-shaped or an integrality artefact that geometric conditioning can target.
@@ -230,7 +290,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: stopped
     priority: 1
     question: Which compositions (n0, 11 − n0) by near-axis count close at 96/25, and does a class-weighted fractional packing certify that no site set closes the rest?
     hypotheses: [H-102]
@@ -248,6 +308,19 @@ agenda:
     depends_on: []
     parallel_group: lanes-angles
     program: n11-structure-and-conditional-dots
+    outcomes:
+    - scope: The complete near-axis composition split and class-weighted packing boundary at 96/25
+      classification: never-opened
+      result: >-
+        This lane never opened. No composition was frozen or refuted, no survivor family
+        was produced and no class-weighted packing-polytope boundary was measured. The
+        exact band result for composition (11, 0) belongs to BC-295 and does not supply
+        this lane's complete case accounting.
+      evidence:
+      - packing/campaign/agendas/agenda-030-parallel-structural-lanes-at-n11.md
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
+      disposition: defer-dependency
+      follow_up: think-n6fr
     next_evidence: Either the composition route ends at q with a certificate of its own impossibility, or the survivors become the branch list for geometric conditioning.
   - id: BC-297
     purpose: measurement_validation
@@ -286,20 +359,32 @@ agenda:
         dual folds half its weight within 2.5 degrees of the axes and one per cent near Trump's
         angle. Adding 70 strip sites moved the row-converged value from 1223/110 to 11.072443
         and the generator stopped by its own criterion, which prices only the heaviest 32 dual
-        rows; the exact census on the block's one valid measure found 0 exactly tight cells and
-        1,934,092 within the gap in 18,440 components spread over the centre domain, recorded
-        as the obstruction to the exact cover. The shrink tax was not measured.
+        rows. The exact census at the different mass 11.118805 found 0 exactly tight cells
+        and 1,934,092 within the gap in 18,440 components spread over the centre domain.
+        That census does not establish an obstruction for the original mass-eleven measure.
+        The shrink tax was not measured and full-dual pricing remains untested.
       evidence:
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-f-plateau-at-3-82.md
       - packing/campaign/agent-sessions/session-103-plateau-artefact-at-3-82.md
-      disposition: continue
+      disposition: retire-success
+      follow_up: null
+    - scope: The shrink tax and full-dual pricing beyond the capped 32-row generator
+      classification: never-opened
+      result: >-
+        The shrink tax was not measured and the retained generator priced only its 32
+        heaviest dual rows. Rejecting the Trump-strip explanation does not decide whether
+        full-dual pricing or net refinement moves the plateau.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-f-plateau-at-3-82.md
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
+      disposition: defer-dependency
       follow_up: think-4uon
     next_evidence: Whether the ladder's top is the instrument's or the geometry's; the size of the ownership tree.
   - id: BC-298
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: stopped
     priority: 1
     question: What is the largest H0 below 3.84 such that eleven unit squares provably do not fit in the rectangle 3.84 × H0?
     hypotheses: [H-132]
@@ -317,6 +402,17 @@ agenda:
     depends_on: []
     parallel_group: lanes-walls
     program: n11-structure-and-conditional-dots
+    outcomes:
+    - scope: The rectangle bound at heights 3.80, 3.81, 3.815 and 3.82
+      classification: never-opened
+      result: >-
+        No rectangle center-domain run or certificate was opened. No value of H0 was
+        established and no converged restricted optimum obstructed the proposed route.
+      evidence:
+      - packing/campaign/agendas/agenda-030-parallel-structural-lanes-at-n11.md
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
+      disposition: defer-dependency
+      follow_up: think-jsi8
     next_evidence: Every wall within 3.84 − H0 of a square, both extents at least H0, and with the spanning lemma the strongest symmetry-breaking premise available.
   - id: BC-299
     purpose: research
@@ -363,7 +459,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: tentative
+    state: stopped
     priority: 2
     question: Does any packing below side 3.96 have a snug 45° corner square, four deeply avoided corners, or a confined rattler whose feasible angles avoid every neighbour's class?
     hypotheses: [H-117, H-121]
@@ -380,12 +476,23 @@ agenda:
     depends_on: []
     parallel_group: lanes-witnesses
     program: n11-structure-and-conditional-dots
+    outcomes:
+    - scope: The adversarial corner, deep-avoidance and confined-rattler witness searches
+      classification: never-opened
+      result: >-
+        The tentative lane was not funded and no target search ran. No exact witness,
+        scoped no-witness result, mixed-pocket realization or merging lemma was produced.
+      evidence:
+      - packing/campaign/agendas/agenda-030-parallel-structural-lanes-at-n11.md
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
+      disposition: defer-dependency
+      follow_up: think-dfof
     next_evidence: Which corner branches cannot close near U, and whether the structural lane should spend time on elimination motions at all.
   - id: BC-301
     purpose: research
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: stopped
     priority: 1
     question: What do the exact-side tree over Q(u) and the B = 1 capture run at U + σ cost, written as one architecture?
     hypotheses: [H-129]
@@ -396,6 +503,17 @@ agenda:
     workflows: [insight-iteration, factual-review]
     depends_on: [BC-294]
     program: n11-structure-and-conditional-dots
+    outcomes:
+    - scope: The exact-side tree and capture-architecture cost at the three declared radii
+      classification: never-opened
+      result: >-
+        The architecture lane never opened. BC-294 returned no qualifying upper
+        certificate and no exact-side tree or radius-specific cost design was produced.
+      evidence:
+      - packing/campaign/agendas/agenda-030-parallel-structural-lanes-at-n11.md
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
+      disposition: defer-dependency
+      follow_up: think-lbqe
     next_evidence: The only honest statement about the endpoint; if BC-294 kills capture, this reduces to the exact-side tree and needs BC-302 to be finite.
   - id: BC-302
     purpose: research
@@ -428,20 +546,31 @@ agenda:
         H-134's claim is met in segment form (Theorem E.4): replace each of Stromquist's ten
         Figure-13 points at 96/25 by the horizontal segment of length 1/10 centred on it, and
         every contained closed unit square lies within sqrt(2) * 2121/500000 < 3/500 of one of
-        them, proved by an interval reader over pose space (404,613 boxes, 184,756 certified
-        leaves, 17,551 discards, 0 failures) with every leaf and discard re-decided in exact
-        rational arithmetic and 6,000 random poses checked by the falsifier's exact distance;
-        lengths 9/100 and the set plus the centre point are also certified, 8/100 is unresolved,
-        7/100 and 6/100 have exact escapes. Every point-mark set built from the atom skeleton is
-        refuted by an exact escape (thirteen sets, 22 escapes agreed by an independent reader;
-        the best point set is 0.008 short of the tolerance). Proved beside it: no LP or counting
-        refutation of H-134 exists (T-018 scaled by 384/381 covers rounded unit squares with mass
-        10.86), ten marks are forced by the scaled n = 10 optimal packing, and no D4-symmetric
-        eleven-point set exists. Localisation for route (a) follows; exactly-one ownership does
-        not, since two touching squares can share a segment.
+        them. The later independent replay closes a far-wall sliver in the original
+        reader; the promoted exact reader verifies every leaf and discard at both that
+        sharper tolerance and 3/500. At tolerance 3/500, lengths 9/100 and 8/100 are also
+        certified, while 7/100 and 6/100 have exact escapes. The retained point-mark
+        catalogue has exact escapes; the handoff review retracts the proposed rounded
+        fractional-cover and enlargement arguments. It also distinguishes the
+        distinct-point orbit count from segment ownership. Localization for route (a)
+        survives. Unique ownership does not follow: two separated squares can share a
+        segment.
       evidence:
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md
       - packing/campaign/agent-sessions/session-104-ownership-set-at-q.md
+      disposition: retire-success
+      follow_up: null
+    - scope: Unique ownership and pairwise compatibility for squares localized near the ten segments
+      classification: inconclusive
+      result: >-
+        The segment cover localizes every contained square but does not assign a unique
+        owner: two interior-disjoint squares may share a segment without touching. The
+        rounded-measure and enlargement helpers proposed for that step are invalid and
+        retracted. A guarded pair reader over the resulting thin pose slabs is a distinct
+        scientific scope, not unfinished certification of Theorem E.4.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
       disposition: continue
       follow_up: think-qfog
     next_evidence: If it succeeds, route (a) collapses to about two to the twenty exact LPs; the prior is about thirty per cent.
@@ -485,34 +614,142 @@ agenda:
       evidence:
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/bc-303-first-wave-selection.md
       - packing/campaign/agent-sessions/session-107-first-wave-selection.md
-      disposition: continue
-      follow_up: think-qfog
+      disposition: retire-success
+      follow_up: null
     next_evidence: The frozen claim for the next block and the remaining proof obligations.
   - id: BC-304
     purpose: research
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: complete
     priority: 0
     question: What survives independent checking, what did it change about the global problem, and what is the next consequential question?
     budget: One closeout block of two hours with the final hour reserved for verification, integration and publication.
-    entry: BC-303's selection and the block it funded, terminal.
+    entry: BC-303's selection and the stopped second-wave handoff; the owner's 2026-09-08 instruction to review and merge the handoff before continuing on a new branch.
     exit: Independently checked strongest result, honest bound impact, complete domain accounting, disposition of every lane, the discharge edges into Agenda 029, and one next consequential question.
     bead: think-yrw1
     workflows: [factual-review, documentation-pass, review-planning-oversight]
     depends_on: [BC-303]
     program: n11-structure-and-conditional-dots
+    artifacts:
+    - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
+    - packing/campaign/agent-sessions/session-110-pr127-handoff-review.md
+    outcomes:
+    - scope: Independent review and terminal disposition of the Agenda 030 handoff
+      classification: achieved
+      result: >-
+        Independent exact replay preserves Theorem E.4's ten horizontal segments of
+        length 1/10 at tolerance 3/500, the corner-pair theorem and the rational
+        angle-cell exclusions. The review retracts the rounded-cover and enlargement
+        helpers, corrects the corner clip, ratio scope, angle labels, retained-net cap
+        and one-body acceptance rules, and records session 109 run 4 as partial and run 5
+        as never run. The transported exp-070 family is a stronger retained depth-one
+        control of weight 21342289572/2055263195 at side 38200/9977 below 96/25. No
+        certified lower or upper bound changes. Unrun compositions, rectangle bounds,
+        witnesses and closing-route cells remain stopped; missing scratch state and the
+        corner and anchor complements remain named. The next principal question is
+        whether two squares localized near one segment satisfy a checked pairwise
+        compatibility restriction strong enough to reduce the ownership case split.
+        Merge and the corrected-tree checkpoint remain pending.
+      evidence:
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
+      - packing/campaign/agent-sessions/session-110-pr127-handoff-review.md
+      disposition: retire-success
+      follow_up: null
     next_evidence: The owner reviews the mathematical result and the next selection.
+  closeout:
+    documentation_review:
+    - path: README.md
+      decision: checked-current
+      reason: The certified packing bracket is unchanged, so the reader-facing summary needs no bound edit.
+    - path: SYNOPSIS.md
+      decision: updated
+      reason: The generated agenda and session views will record this closeout and its selected continuation.
+    - path: TUTORIAL.md
+      decision: checked-current
+      reason: No tutorial algorithm or user workflow changed in this research handoff.
+    - path: conventions.md
+      decision: checked-current
+      reason: Existing evidential-status and historical-record rules already require the scoped corrections.
+    - path: development.md
+      decision: checked-current
+      reason: The established full checkpoint and generated-view entry points remain the required closeout commands.
+    - path: operating-rules.md
+      decision: updated
+      reason: The model-routing and continuation rules used by the reviewed handoff are now recorded there.
+    changes:
+    - name: proof-scope-corrections
+      result: >-
+        Unsupported cover, clip, ratio, acceptance, rounded-angle and retained-net claims
+        are retracted or narrowed while historical runs and exact surviving results remain.
+      paths:
+      - docs/project/reviews/review-2026-09-08-pr127-research-readiness.md
+      - packing/campaign/explorations/X-021-what-can-be-proved-about-eleven-squares.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-a-corner-structure.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-d-contacts-and-closing-route.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/lane-e-ownership-set-at-q.md
+    - name: portable-controls
+      result: >-
+        Guarded repository tools preserve the surviving segment theorem, audit the
+        retracted rounded-measure claim and transport the stronger retained unit family.
+      paths:
+      - packing/devtools/rounded_measure_audit.py
+      - packing/devtools/segment_cover_replay.py
+      - packing/devtools/transport_ceiling_family.py
+    - name: terminal-handoff
+      result: >-
+        Every lane is dispositioned at its actual scope, Agenda 029 receives its discharge
+        edges and the funded continuation is separated from completed theorem scope.
+      paths:
+      - packing/campaign/agendas/agenda-029-structural-restrictions-and-conditional-dots.md
+      - packing/campaign/agendas/agenda-030-parallel-structural-lanes-at-n11.md
+      - packing/campaign/agent-sessions/session-110-pr127-handoff-review.md
+    validation:
+    - scope: corrected-integration-checkpoint
+      status: pending
+      evidence: >-
+        The corrected integration tree has not yet completed its own full packing-validate
+        checkpoint. Earlier c89c7646 records and focused tests and the 8176e389 deferred
+        checkpoint are historical baselines only and do not certify this tree.
+    replanning:
+      candidates:
+      - bead: think-qfog
+        workflow: insight-iteration
+        priority: 1
+        rationale: >-
+          Continue from the completed ten-segment theorem at a distinct scope: build a
+          guarded pair reader for compatibility and ownership without assuming unique hits.
+      - bead: think-7lp3
+        workflow: efficiency-loop
+        priority: 1
+        rationale: >-
+          Start from the retained 10.3842 depth-one control and measure full-dual pricing
+          before any separately registered target continuation.
+      - bead: think-kx2l
+        workflow: insight-iteration
+        priority: 2
+        rationale: >-
+          Retain the corner-class support question, missing run artifacts and unrun site-set
+          complement behind the two higher-priority lanes.
+      selected:
+        bead: think-qfog
+        workflow: insight-iteration
+        rationale: >-
+          The segment theorem survives independent replay and exposes a precise missing
+          compatibility step whose resolution can change the ownership case split.
+      operator_input:
+        status: confirmed
+        note: The owner authorized closeout, merge once the corrected tree is ready, and continuation on a new branch.
 ---
 # Agenda 030 — Parallel Structural Lanes at `n = 11`
 
-**This agenda is prepared, paused and unstarted.** BC-291 is the W10 planning block that
-wrote it, on 2026-09-08, at the owner’s request to pursue X-019’s exploration and to map
-the coming sessions so that they run in parallel.
-[X-021](../explorations/X-021-what-can-be-proved-about-eleven-squares.md) carries the
-mathematics; this agenda is the operational handoff.
-No scientific target, experiment, session or overnight automation is opened by
-publishing it.
+**This agenda is complete.** BC-291 wrote the parallel plan; sessions 100 through 104,
+107 through 110 and the retained lane reports record what ran, what stopped and what was
+never opened. [X-021](../explorations/X-021-what-can-be-proved-about-eleven-squares.md)
+carries the structural mathematics, while the frontmatter above is the terminal
+disposition and replanning record.
+The corrected integration checkpoint and merge remain pending and therefore supply no
+certification or bound change here.
 
 ## How It Relates to Agenda 029
 
@@ -533,9 +770,9 @@ now asks for. The correspondence is:
 | BC-288, contacts and angles under H-117 and H-121 | BC-300 (witnesses and the mixed pocket); the contact lemmas themselves are proved in X-021 |
 | BC-289 and BC-290, selection and closeout | BC-303 and BC-304 |
 
-Agenda 029’s cells are not edited here; BC-304 records the `discharged_by` edges at
-closeout, once the lanes are terminal, so that the older queue stops offering work this
-agenda finished.
+BC-304 records the truthful `discharged_by` edges in Agenda 029 and stops its unmet or
+never-opened cells, so the older queue no longer offers work this agenda already
+handled.
 
 ## The Lane Contract
 
@@ -556,12 +793,9 @@ Every lane is one session of two to four hours, owned by one agent, with:
   what changed mathematically, what remains, and what can finish in the block.
 
 The coordinator owns identifiers, shared registries, integration, commits and the pull
-request.
-Before dispatch it allocates one `session-NNN` per lane serially — the next free
-number is `session-100` on this branch, `session-098` is owned by PR 110 and
-`session-099` by main — and hands each lane its exact path.
-Experiment ids are allocated the same way when a lane freezes a claim; the next free is
-`exp-130`.
+request. At the planning checkpoint, the next free lane identity was `session-100` and
+the next free experiment identity was `exp-130`; those historical allocation notes are
+not current reservations and are not reused.
 
 Model and thinking tiers follow
 [OR-2](../../../operating-rules.md#or-2-run-three-to-five-sub-agents-at-a-model-and-thinking-level-matched-to-the-task):
@@ -601,27 +835,33 @@ free at `q`, and whether the obstruction at `q` is Trump-shaped.
 The narrow tier succeeds when one lane produces either a certificate at `q` conditioned
 on a proved constraint with its complement listed, or a proved structural theorem below
 `U` that is new (the four-corner containment theorem, a rectangle bound, a band theorem
-with `α + β ≥ 3°`). The ambitious tier is decided negatively by BC-294 alone if a
-`B = 1` fractional packing of value at least eleven exists below `U` with a unit of
-weight away from Trump’s placements, and positively only through BC-302 or an
-integer-hull cut family that BC-292 and BC-294 would reveal.
+with `α + β ≥ 3°`). An exact `B = 1` fractional family of value at least eleven
+obstructs a strict one-body covering certificate at its side.
+Sufficient weight outside an exactly specified Trump neighbourhood additionally
+obstructs that capture certificate.
+These tests leave ownership, compatibility and integrality arguments open; BC-294 alone
+cannot rule out the ambitious tier.
 
 A promising result does not extend a lane’s clock.
 A lane that ends early because of tokens or an external limit publishes the same fields
 at its current scope.
 
-## Copyable Coordinator Handoff
+## Original Coordinator Handoff
+
+The following was the launch instruction used for the completed run.
+It is retained as historical protocol, not as a live dispatch.
 
 > Start Agenda 030’s lanes only under the owner’s research-start instruction.
 > Read X-021 and this agenda; check the current branch, the stacked pull requests and
 > live beads. Allocate `session-NNN` and, when a lane freezes a claim, `exp-NNN`
 > serially, after rechecking main and every open pull request, including PR 120.
 > Dispatch the ready lanes with the lane brief below, each with its exact result path
-> and its hypothesis. Fable at extra or max for proof obligations; Opus for instrument
-> work. Push at the first commit worth a hosted run and read CI from its receipts at the
-> next block boundary.
-> At the end of the first wave, run BC-303 with independent review before selecting;
-> BC-304 closes.
+> and its hypothesis. Apply OR-2: Astra at extra high or max / Fable at extra or max for
+> mathematical obligations, Sol / Opus at high, extra high or max as appropriate for
+> mechanical work. Name the actual supported setting in the dispatch.
+> Push at the first commit worth a hosted run and read CI from its receipts at the next
+> block boundary. At the end of the first wave, run BC-303 with independent review before
+> selecting; BC-304 closes.
 
 ## Copyable Lane Brief
 

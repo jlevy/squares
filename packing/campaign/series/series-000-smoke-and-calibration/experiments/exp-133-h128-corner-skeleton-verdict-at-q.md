@@ -180,17 +180,17 @@ experiment:
       net. A settled dual would put the floor within half a per cent of the LP value, and
       that is the measurement this round did not buy.
   verdict:
-    decision: rejected
+    decision: unresolved
     primary_criterion: >-
       the exactly verified total mass of the column-generation measure at 96/25 with the four
       corner atoms bounded below by 3/20, against the threshold 11.15
     reason: >-
-      The falsifier H-128 declared is met: the least four-bound measure on the retained
-      shrink, net and site sets is valid and has exact mass 23596423/2000000 = 11.798, well
-      above 11.15, and pricing the corner orbit leaves it at weight zero at any price, so the
-      measure H-128 asked for does not exist at that position — the rejection being scoped to
-      these site sets, since the bounded dual's proved floor for the net is only 10.785 and a
-      finer net or a larger B is a different measure.
+      Handoff correction, 2026-09-08: the original rejected verdict applied a stopping
+      criterion for a finite-support attempt to H-128's broader existence claim. The
+      valid four-bound measure has exact mass 23596423/2000000 = 11.798, above 11.15;
+      that attempt did not obtain the target. The bounded dual's floor over the net is
+      only 10.785, below 11.15, so H-128 remains inconclusive on its declared domain.
+      The independent corner-pair theorem remains proved.
     commit: '22884081'
 ---
 # exp-133 — The Corner Skeleton Is a Pair, Not a Point
@@ -204,7 +204,7 @@ Lane BC-293 of
 `think-1136`, spent
 [session-101](../../../agent-sessions/session-101-corner-skeleton-ownership.md) building
 the bounded program and running it.
-The measure is not there, and a weaker theorem is.
+The attempt did not produce that measure, and it proved a corner-pair theorem.
 This record registers both.
 Every figure below is read from
 [lane C’s session-101 section](../results/agenda-030/lane-c-n10-transfer.md#session-101--corner-skeleton-ownership-at-9625-2026-09-08),
@@ -253,7 +253,7 @@ orbit. The library fixes every variable at `(0, ∞)`, so the lane’s driver re
 `solve_rows` with a bounded `linprog` call and drives the column loop itself; `sqpack`
 is not edited.
 
-## The measure H-128 asked for is not there
+## The tested support did not produce the H-128 measure
 
 | Phase, on the final 637-orbit site set and 8517 rows | LP objective | Rationalised mass, exact | Atoms | Corner weight | Valid |
 | --- | --- | --- | --- | --- | --- |
@@ -340,9 +340,9 @@ it holds for **every** valid `D4` measure on this `(L, B, net)` with the corner 
 on any site set and any atom count.
 
 `10.785 < 11.15`. So the obstruction is, in this block, a reading on the retained site
-sets and not yet a theorem for the net, and the verdict is scoped accordingly: H-128 is
-rejected **at `96/25` on the retained shrink and net**, not shown impossible for every
-net or every shrink.
+sets and not a theorem of nonexistence over the net.
+H-128 remains unresolved on its declared shrink and net; the unsuccessful support cannot
+justify the original broader rejection.
 A settled dual would put the floor within half a per cent of the LP value, and that is
 the first thing a successor should buy.
 

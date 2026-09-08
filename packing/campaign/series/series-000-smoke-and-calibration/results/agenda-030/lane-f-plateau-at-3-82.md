@@ -8,6 +8,11 @@ Every script and output it quotes is reproduced in the appendix.
 Nothing here is a registered round, a new bound or a frozen claim; the exact verdicts
 are decisions about named finite objects and are labelled as such.
 
+**Correction of 2026-09-08:** the
+[dated continuation correction](#correction-of-2026-09-08-scope-and-reproducible-continuation)
+below governs the route interpretation and retained inputs.
+The original reports and scripts are preserved as historical evidence.
+
 Date: 2026-09-08, 04:37 to 07:07 UTC. Branch `claude/squares-n11-constraints-wl9atd`
 (worktree branch `lane/bc-297-plateau`); working files under `scratchpad/lane-297/`.
 Python 3.14 from the project venv, `PACK_JOBS=1`, one worker throughout, on a four-core
@@ -2045,6 +2050,38 @@ seed sites: 70
 frozen: scratchpad/lane-297/run1/candidate.json
 seconds: 2080.3
 ```
+
+## Correction of 2026-09-08: Scope and Reproducible Continuation
+
+W9 review of PR 127 narrows the original disposition.
+The exact test refutes the canonical Trump-strip explanation on the reconstructible site
+sets. The finite perturbation search does not refute every Trump-shaped family, and
+neither result proves that the continuum covering value is eleven.
+The observed site-invisible overlaps and truncated pricing instead leave full-dual
+pricing as an unresolved route to a lower covering objective, possibly below eleven.
+The original “refuted as stated” recommendation therefore closes only the tested
+explanation; H-133’s continuum and exact-cover questions remain open.
+
+The exactly-eleven states were lost, and run 1’s final state is also absent from this
+checkout. The million-cell census concerns the measure of mass `11.118805` that was
+actually examined. It does not decide the size or feasibility of an exact cover of an
+unavailable mass-eleven measure.
+Likewise the round-65 stop shows failure to price the whole dual, not an impossibility
+theorem for the full site set.
+
+The reproducible continuation begins with retained
+[`agenda-025/bc-232-leg-01-state.json`](../agenda-025/bc-232-leg-01-state.json) and
+[`bc-232-leg-01-family.json`](../agenda-025/bc-232-leg-01-family.json), whose exact
+family weight is `21342289572/2055263195`;
+[exp-070](../../experiments/exp-070-h-064-n11-fractional-resume.md) records the
+verification and the narrower scope of its numerical covering endpoint.
+A new full-dual price must retain its complete support and state and decide pointwise
+depth exactly. A violating point outside the truncated price’s view confirms a missed
+column. Failure to find one with the floating survey does not certify global pricing
+convergence. The
+[lane-D correction](lane-d-contacts-and-closing-route.md#correction-of-2026-09-08-duality-scope-cap-and-retained-continuation)
+gives the guarded unit transport and the acceptance rules for the shared instrument
+block.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

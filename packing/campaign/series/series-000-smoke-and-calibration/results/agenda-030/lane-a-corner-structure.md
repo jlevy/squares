@@ -8,6 +8,14 @@ The report is reproduced as delivered, with its own status labels; X-021 carries
 coordinator’s reading of it.
 Nothing here is a registered round or a new bound.
 
+**Review correction, 2026-09-08.** Theorem B below now uses a safe domain for cores
+whose parent squares avoid a corner triangle.
+The original unit-square clip omitted some cores at angles between net directions.
+Session-109’s ratio and slice programs have the same exclusion power; its exact
+obstruction is confined to the site set tested.
+The proofs of these corrections are given beside the affected statements.
+The historical numerical inputs, outputs and script fences are preserved.
+
 ## A — Corner and wall structure of 11-square packings, 3.81 ≤ L ≤ U
 
 Author: research-mathematician sub-agent, 2026-09-08. Repository read-only; all scripts
@@ -277,10 +285,11 @@ vector `σ`:
 core of every occupant of `T_{d_{k_j}}` (the core is the concentric `B`-square at the
 nearest net direction; it contains the occupant shrunk about its centre by
 `β = B/(cos δ + sin δ)`, `δ` the half-gap, so `X'_j = [d + η, 1 − η]²` with
-`η = (1 − β) · 1.42 ≈ 0.005` suffices, since an occupant’s centre has coordinates
-`≤ d + 0.707 < 1.42`). Let `D_σ` be the admissible domain: cores whose enclosing unit
-square avoids every free triangle of `σ` — per direction this is the rotated-container
-centre domain cut by the half-planes `a + b > d + cos θ` (one per free corner, Lemma 2),
+`η = (1 − β) · 1.42 ≈ 0.005` is conservative: an occupant’s centre coordinates lie in
+`[1/2, d + 1/2]`, so an inset of `(1 − β)/2` already lies in the homothetic image of
+`[d, 1]²`). Let `D_σ` be the admissible domain of cores that avoid every free triangle
+of `σ`. Per net direction this is the rotated-container centre domain cut by the
+half-planes `a + b > d + B cos θ` (one per free corner, Lemma 2 scaled to side `B`),
 hence **convex**, so `sweep.centre_domain` needs only a clip, not a new engine.
 If a nonnegative atom measure `μ` satisfies (1) every core in `D_σ` disjoint from all
 `X_j`, `j ∈ I`, has `μ ≥ 1`, and (2) `μ(C) − Σ_{j∈I} μ(X'_j) < 11 − |I|`, then no
@@ -293,6 +302,22 @@ certificate. The extreme cases are named for §4: **flush-four** (`I = {1,2,3,4}
 small: seven cores in `C` minus four near-unit corner boxes), **three-plus-one**
 (Trump’s pattern: three banked corners and one corner in a deep bin `δ ≥ 0.7`),
 **octagon** (all four corners in the top bin: eleven squares avoiding four `T_d`).
+
+**Domain correction, 2026-09-08.** The earlier clip `a + b > d + cos θ` tested the unit
+square at the core’s net angle.
+It is unsafe for a parent unit square at another angle in that cell.
+For an exact counterexample, take `d = 7/10`, `tan(φ/2) = 1/1000`, and centre
+`a = b = (d + 1000000/1000001)/2`. The unit square is contained in `[0, 96/25]²` and has
+`min_Q(x + y) = d + 1/1000001 > d`. Its nearest retained direction is zero:
+`tan φ = 2000/999999 < 207107/90000000`, the tangent of the first cell’s upper angle.
+Its axis-aligned `B`-core lies strictly inside it because
+`B(cos φ + sin φ) = 9996944023/10000010000 < 1`. Yet its centre sum is
+`d + 1 − 1/1000001 < d + cos 0`, so the old clip discards this legitimate core.
+The corrected clip is a safe superset because `P ⊂ Q` and `Q ∩ T_d = ∅` imply
+`P ∩ T_d = ∅`. A tighter clip would need the parent square’s entire angle cell.
+The centre bound used for the banked-box inset is also corrected above:
+`a + b − cos φ ≤ d` and `b ≥ (cos φ + sin φ)/2` give `a ≤ d + 1/2`, and likewise for
+`b`. No banking run or certificate used either of the original formulas.
 
 ### Summary of what is *not* proved (see §3)
 
@@ -527,12 +552,12 @@ two additional distinct squares (opposite walls), not four.
   `[0.05, 1]²_j` (flush-four)?
   (b) with three boxes banked and the fourth corner in the bin `δ ≥ 0.7` (free
   `T_{0.7}`), does the LP fall below `8` (three-plus-one, Trump’s pattern)?
-- **Entry.** `sweep.centre_domain` extended by half-plane clips (`a + b > d + cos θ` per
-  free corner; convexity preserved) and a “banked box” exclusion in the row generator
-  (cores meeting a banked box are not constrained); objective with the `μ(X'_j)` credits
-  (`X'_j = [d+0.005,
-  0.995]²`). The T-018 pipeline otherwise unchanged; the net must span a quarter turn if
-  the case breaks D4 (three-plus-one does; flush-four does not).
+- **Entry.** `sweep.centre_domain` extended by safe core half-plane clips
+  (`a + b > d + B cos θ` per free corner; convexity preserved) and a “banked box”
+  exclusion in the row generator (cores meeting a banked box are not constrained);
+  objective with the `μ(X'_j)` credits (`X'_j = [d+0.005,
+  0.995]²`). The T-018 pipeline otherwise unchanged; a folded net suffices when the case
+  and measure share a reflection, with that stabiliser checked explicitly.
 - **Instrument.** Column generation + exact sweep on the clipped domain; independent
   replay by the interval route.
 - **Falsifier.** LP value `≥ 7` (resp.
@@ -1368,8 +1393,20 @@ least `w_f`; every admissible core containing a mark of the chosen set carries a
 measure with `M − 4 w_c − 7 w_f < 0` excludes eleven squares at `96/25`. The LP is
 homogeneous and is solved under `4 w_c + 7 w_f = 1` (the *ratio* form, optimum `M*`; a
 certificate needs `M* < 1`) or, for a branch, under `w_f = 1` (the *slice* form, optimum
-`M − 4 w_c`; a certificate needs it below `7`). For the union program the two forms are
-the same object rescaled, because `w_f > 0` at the optimum.
+`M − 4 w_c`; a certificate needs it below `7`). The two forms have the same exclusion
+power; a slice also measures a positive gap that the ratio form can hide at `w_f = 0`.
+
+**Normalization lemma, corrected 2026-09-08.** Every slice point normalizes by
+`T = 4 w_c + 7`, with ratio `M/T = 1 + (M − 4 w_c − 7)/T`. Thus a negative slice
+residual gives a ratio below one.
+Conversely, a ratio below one must have `w_f > 0`: if `w_f = 0`, the four axis-aligned
+`B`-cores centred at the chosen marks are contained and disjoint, forcing
+`M ≥ 4 w_c = 1`. Their least coordinate is `2336/3175 > B/2` and the separation across
+different corners in at least one coordinate is at least `5888/3175 > B`. Dividing by
+positive `w_f` gives a negative slice residual.
+Mark banking gives a feasible ratio of one and the mark-depth constraint bounds every
+obstruction dual by one; neither bound forces the optimum to equal one on an arbitrary
+site set.
 
 Falsifiers, stated before each run and recorded in the lane checkpoints.
 For a site set `S`: a `G`-symmetrised fractional packing `y` of exactly re-derived
@@ -1436,12 +1473,12 @@ images, site set A).** The LP converged in five rounds at ratio `1.000000000` wi
 `w_f = 0`, `w_c = 1/4` and the measure `1/4` at each chosen mark: the trivial banking
 measure has residual exactly `0`, and the exact vertex of the dual (36 rows, solved in
 `Fraction` arithmetic on the tight system, maximum symmetrised depth exactly `1`, total
-exactly `11`, exactly `4` on chosen-mark placements) gives **`λ = 1` exactly**. The
-mechanism is general: the chosen marks are sites, a dual packing has depth at most `1`
-at each, every chosen-mark placement contains exactly one chosen mark, so `Σ_A y ≤ 4`
-and no branch dual can exceed `λ = 1`, while the primal can always bank the four marks
-at ratio exactly `1`. A branch program in ratio form sits on this knife-edge whatever
-the site set; the informative branch program is the slice `w_f = 1`.
+exactly `11`, exactly `4` on chosen-mark placements) gives **`λ = 1` exactly** on site
+set A. This exact dual, together with the banking measure, proves equality on that site
+set.
+The earlier inference of equality on every site set was incorrect; the normalization
+lemma above explains why a negative slice could also be detected in ratio form.
+The slice `w_f = 1` measures the positive gap in run 3b.
 
 **Run 3b, the opposite-both branch, slice (`w_f = 1`, D2, site set A).** Converged and
 decided exactly. Dual support 97 rows over 65 primal orbits; the tight system (67
@@ -1457,8 +1494,8 @@ corners and the side-wall marks at the top corners, site set A).** Did not conve
 The external usage limit halted the session during round 21 of the row loop, at 19 607
 rows and a float objective of `7.334647511` still rising with a least violation of
 `3.256·10⁻⁴`; no exact decision was taken and none of these figures is a result.
-The run is reproducible from the driver in the appendix with the same site set and
-group.
+The inputs are stated here, but the driver and partial state were not retained in this
+document; the appendix records that recovery is required before replay.
 
 **Run 5, the flush-four program on the corner-refined site set B.** Did not run.
 Site set B was specified (site set A refined inside the four corner boxes) but the block
@@ -1468,22 +1505,27 @@ This is the first task of any continuation.
 
 ### Reading
 
-READING
+The completed readings establish a small gain for the union of mark-containing cores on
+site set A and an obstruction to the opposite-both branch there.
+They do not decide the U branch, a refined site set, H-127’s original corner-box class,
+or the clipped-domain banking cases.
+The latter change the admissible rows and cannot be bounded by the union program’s dual
+without checking those rows against the case.
 
 ### The three-plus-one branch
 
 Under the corner-pair premise all four corners carry a mark-containing core
 unconditionally, so the cover has one case and the sixteen mark branches are its
 refinement; “three-plus-one” in the sense of Theorem B — three corners banked by
-penetration depth and the fourth in a deep bin with `T_{0.7}` free — needs the
-half-plane clip `a + b > d + cos θ` on the centre domain, in both the float separator
+penetration depth and the fourth in a deep bin with `T_{0.7}` free — needs the safe
+half-plane clip `a + b > d + B cos θ` on the centre domain, in both the float separator
 (`generate._CentreDomain` assumes the rotated square and `cos ≥ sin`) and the exact
 `reduce_to_spans` (which calls `sweep.centre_domain` directly), together with the banked
 boxes `X′_j` and their credits, and a measure with the deep corner’s stabiliser (one
 diagonal reflection, four times the site count).
-That is a half-session of instrument work the lane did not start, because the flush-four
-readings above already bound what any corner banking can buy at this shrink and net: the
-corner region is the binding region of the covering dual, not an over-covered one.
+That is instrument work the lane did not start.
+The flush-four readings bound the mark-pricing program on site set A; they do not bound
+banking programs that remove placements through a case-specific domain clip.
 Its design is recorded here so the next lane does not re-derive it: the clipped domain
 stays convex, so `reduce_to_spans`’ per-slab min/max of the clipped polygon is already
 correct for it, and only the float `v_range`/`u_chord` closed forms need a general
@@ -1508,12 +1550,11 @@ Recommended status: unchanged.
 
 ### Obstructions and mistakes worth recording
 
-**The knife-edge in ratio form.** A branch program written in ratio form cannot decide
-anything: the chosen marks are sites, a dual packing has depth at most `1` at each, and
-every chosen-mark placement contains exactly one chosen mark, so `Σ_A y ≤ 4` bounds
-every branch dual by `λ = 1` while the primal always banks the four marks at ratio
-exactly `1`. Run 3 spent its budget establishing that before the slice form (`w_f = 1`)
-was used instead. Any continuation writes branch programs in slice form from the start.
+**The ratio boundary.** A branch’s ratio program has a feasible banking point at one.
+It can still detect every exclusion the slice form detects, as the corrected
+normalization lemma proves.
+Run 3’s exact dual establishes equality only on site set A. A continuation should use
+the slice to measure positive residuals as well as negative ones.
 
 **The surplus is measured on one site set.** Every number here is site set A (grid 79,
 inset 1/10, D4-folded, with the corner-pair marks as sites).
@@ -1526,7 +1567,14 @@ built, and are the complement this session leaves.
 
 ### Appendix: scripts and outputs as run
 
-APPENDIX
+**Recovery pending, recorded 2026-09-08.** The session ended with an appendix
+placeholder. Its region-class driver, exact dual supports and raw outputs were not
+included in this retained section.
+The numerical paragraphs above are the lane’s reported results; they are not
+independently replayable from this file alone.
+Recover the original artifacts and replay runs 1, 2, 3 and 3b before treating them as
+registered experiment evidence.
+Run 4 has no exact verdict and run 5 has no run.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

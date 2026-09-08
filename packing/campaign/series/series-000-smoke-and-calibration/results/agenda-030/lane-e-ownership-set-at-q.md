@@ -1,5 +1,14 @@
 # Agenda 030, lane E: A robust unavoidable set of at most eleven marks at 96/25
 
+**Correction, 2026-09-08 (PR 127 review, R1 and R5).** Theorem E.4 survives an
+independent exact replay.
+Lemma E.1’s claimed scaled measure is refuted; Lemma E.2’s nonexistence argument is
+unsupported, and its forced-mark conclusion applies to points.
+The point-orbit argument in E.3 also requires point marks.
+[The correction below](#correction-of-the-structural-claims-2026-09-08) supplies the
+counterexamples and runnable checks.
+The historical scripts and outputs are preserved.
+
 Retained lane report for BC-302 of
 [Agenda 030](../../../../agendas/agenda-030-parallel-structural-lanes-at-n11.md),
 testing [H-134](../../../../hypotheses/H-134-eleven-mark-ownership-set.md) in
@@ -61,12 +70,13 @@ easier and escaping harder, and every escape below clears its marks by more than
   `2(√2 − 1) + 2√2·δ = 0.845`. A segment of half-length `1/20` reaches `0.0354` towards
   that square and its clearance from the row points is `0.0319`; that `0.0035` is why
   length `1/10` works and `7/100` does not.
-- **Three facts proved** (Section 3): no LP, pigeonhole or counting argument can refute
-  H-134, because T-018 scaled by `384/381` is a fractional cover of mass `10.863675` for
-  `δ`-rounded unit squares at `q`; ten marks of any robust unavoidable set are localised
-  to the `δ`-neighbourhoods of the ten squares of the `n = 10` optimal packing scaled to
-  `q`, and no eleven such squares exist; no D4-symmetric eleven-set exists and every K4-
-  or C2-symmetric one contains the centre.
+- **Historical structural claims, corrected on 2026-09-08** (Section 3): no LP,
+  pigeonhole or counting argument can refute H-134, because T-018 scaled by `384/381` is
+  a fractional cover of mass `10.863675` for `δ`-rounded unit squares at `q`; ten marks
+  of any robust unavoidable set are localised to the `δ`-neighbourhoods of the ten
+  squares of the `n = 10` optimal packing scaled to `q`, and no eleven such squares
+  exist; no D4-symmetric eleven-set exists and every K4- or C2-symmetric one contains
+  the centre.
 - **What it buys and what it does not.** H-134’s claim is met by ten short segments, so
   every square of every packing of eleven unit squares in `S` lies within `δ` of a known
   mark: the localisation that collapses route (a)'s tree.
@@ -140,22 +150,23 @@ of Section 6.
 
 ## 3. Structural facts proved in the block
 
-**Lemma E.1 (no LP obstruction; proved).** The fractional relaxation of H-134 has value
-at most `434547/40000 = 10.863675 < 11`. *Proof.* Scale T-018’s measure by `λ = 384/381`
-from side `381/100` to `q`. Every closed square of side `λ` at any angle inside `S`
-contains a `λB`-square at a net angle, hence carries mass `≥ 4001/4000`. The
-`δ`-neighbourhood of a unit square `Q` contains the concentric square of side
-`1 + √2·δ = 1.008485…` in `Q`’s frame (a point with `|u|, |v| ≤ ½ + δ/√2` is within
-`√(2·(δ/√2)²) = δ` of `Q`), and `1 + √2·δ > λ = 1.007874…`, so every `δ`-rounded unit
-square carries mass `≥ 4001/4000 ≥ 1`. ∎ Consequently no counting, pigeonhole or LP
+**Historical Lemma E.1 (no LP obstruction; retracted on 2026-09-08).** The fractional
+relaxation of H-134 has value at most `434547/40000 = 10.863675 < 11`. *Proof.* Scale
+T-018’s measure by `λ = 384/381` from side `381/100` to `q`. Every closed square of side
+`λ` at any angle inside `S` contains a `λB`-square at a net angle, hence carries mass
+`≥ 4001/4000`. The `δ`-neighbourhood of a unit square `Q` contains the concentric square
+of side `1 + √2·δ = 1.008485…` in `Q`’s frame (a point with `|u|, |v| ≤ ½ + δ/√2` is
+within `√(2·(δ/√2)²) = δ` of `Q`), and `1 + √2·δ > λ = 1.007874…`, so every `δ`-rounded
+unit square carries mass `≥ 4001/4000 ≥ 1`. ∎ Consequently no counting, pigeonhole or LP
 argument can refute H-134; only the integrality gap can, and that needs a case analysis
 over mark positions, which Section 5.2 mechanises.
 
-**Lemma E.2 (ten forced marks; proved, exact-verified).** Let `G₁, …, G₁₀` be the
-squares of the `n = 10` optimal packing (side `3 + 1/√2`) scaled to `q`, at the rational
-poses of `tests-gobel.json` (the two `45°` squares at `t = 41/99`). They are contained
-and pairwise at exact distance `> 2δ = 3/250` (`tests_gobel.py`, separating-axis
-decision). Hence any robustly unavoidable set has ten distinct marks `m_i` with
+**Historical Lemma E.2 (ten forced marks; corrected on 2026-09-08).** Let `G₁, …, G₁₀`
+be the squares of the `n = 10` optimal packing (side `3 + 1/√2`) scaled to `q`, at the
+rational poses of `tests-gobel.json` (the two `45°` squares at `t = 41/99`). They are
+contained and pairwise at exact distance `> 2δ = 3/250` (`tests_gobel.py`,
+separating-axis decision).
+Hence any robustly unavoidable set has ten distinct marks `m_i` with
 `dist(m_i, G_i) ≤ δ`. Eleven such squares cannot exist: they would be eleven squares of
 side `1 + 2δ` with disjoint interiors in a container of side `q + 2δ = 3.852`, that is
 eleven unit squares at side `3.852/1.012 = 3.806 < 3.81`, against T-018. So a set of
@@ -163,12 +174,72 @@ eleven marks is *ten localised marks plus one free mark*, and a set of ten marks
 as Theorem E.4’s, is entirely localised: each of its marks is within `δ` of its own
 `G_i`.
 
-**Lemma E.3 (symmetry; proved).** No D4-symmetric eleven-set exists: D4 orbits in `S`
-have size 1 (the centre), 4 or 8, and `11 − 1 = 10` is not a sum of 4s and 8s. Every
-K4-symmetric (two centreline reflections) or C2-symmetric (half-turn) eleven-set
-contains the centre, because all other orbits have even size.
-Stromquist’s ten-point scheme is K4-symmetric (`2 + 4 + 4`), so its only symmetric
-eleven-point extension adds the centre.
+**Lemma E.3 (symmetry of point sets; scope corrected on 2026-09-08).** No D4-symmetric
+eleven-set exists: D4 orbits in `S` have size 1 (the centre), 4 or 8, and `11 − 1 = 10`
+is not a sum of 4s and 8s. Every K4-symmetric (two centreline reflections) or
+C2-symmetric (half-turn) eleven-set contains the centre, because all other orbits have
+even size. Stromquist’s ten-point scheme is K4-symmetric (`2 + 4 + 4`), so its only
+symmetric eleven-point extension adds the centre.
+
+### Correction of the structural claims, 2026-09-08
+
+**E.1 is refuted for the stated measure.** Scale T-018’s atoms by `128/127`, leave its
+weights unchanged, and take the contained unit square `Q = [0, 1]²`. Its closed
+Euclidean `3/500`-neighbourhood has mass `85353/100000 = 0.85353`, below one.
+The unscaled, unrounded control has mass `4001/4000`; the missing weight is `917/6250`
+at the scaled corner atom `(29586032/29422725, 29586032/29422725)`. The concentric
+enlarged square used in the historical proof leaves the container at this corner, so the
+coverage premise does not apply.
+Whether another fractional point cover of mass below eleven exists is undecided by this
+argument. The historical “no LP obstruction” conclusion is withdrawn.
+
+[The rounded-measure auditor](../../../../../devtools/rounded_measure_audit.py) checks
+every atom by two independent rational distance formulas and verifies the input mass,
+containment and orthonormal frame.
+From `packing/`:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.rounded_measure_audit \
+  cases/n11_fractional_certificate/certificate.json \
+  --scale 128/127 --delta 3/500 --cx 1/2 --cy 1/2 --expect below-one
+uv run --frozen --all-extras --group dev python -m devtools.rounded_measure_audit \
+  cases/n11_fractional_certificate/certificate.json --cx 1/2 --cy 1/2
+```
+
+**E.2 does not exclude eleven separated squares.** Two unit squares at `45°`, centred at
+`(1, 1)` and `(243/100, 1)`, are contained in `[0, 96/25]²` and have distance
+`143/100 − √2 > 3/250`. Enlarging their sides to `1 + 2δ = 253/250` makes their
+interiors overlap. The safe enlargement inside a Euclidean `δ`-neighbourhood has side
+`1 + √2δ`; it yields normalized container side `1926/(500 + 3√2) > 381/100`, so T-018
+gives no contradiction.
+The ten test squares still force ten distinct **point** marks because their rounded
+neighbourhoods are disjoint.
+A segment can meet two such neighbourhoods: the segment `[19/20, 21/20] × {71/25}` meets
+`G1` and is only `47/12460 < 3/500` from `G2` in the retained test list.
+The claimed extension to segment marks is withdrawn.
+
+**E.3 concerns point sets.** Centred horizontal and vertical segments can form a D4
+orbit of size two, so the point-orbit counting proof cannot be applied to segments.
+
+**E.4 survives independently.** The promoted
+[BC-303 reader](../../../../../devtools/segment_cover_replay.py) replays the retained
+`q = 96/25`, segment length `1/10`, `δ = 3/500` claim.
+It reconstructs the marks and covers the same dyadic pose domain with 24,381 nodes,
+10,960 certified leaves and 1,231 discards; every leaf and discard passes its exact
+recheck, and the exact covered volume is `243/128`. This proof uses none of E.1–E.3. The
+historical source is BC-303’s `e4_reader.py` appendix at Git commit `c89c7646`. The
+promoted tool preserves its geometry and bounds, adds a bounded portable CLI and
+Git/path provenance, and returns failure for unresolved or rejected boxes or a volume
+mismatch. It also replays the retained sharper constant with `--sharper`.
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.segment_cover_replay
+```
+
+The checks return readable JSON; `--output PATH` also saves it.
+The replay and negative controls run in the ordinary test suite.
+A smaller node budget produces an unresolved result and a failing exit status; it cannot
+certify the claim.
 
 ## 4. Candidate sets and the escape catalogue
 

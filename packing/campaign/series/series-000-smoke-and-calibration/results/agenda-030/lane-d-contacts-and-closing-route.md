@@ -8,6 +8,12 @@ The report is reproduced as delivered, with its own status labels; X-021 carries
 coordinator’s reading of it.
 Nothing here is a registered round or a new bound.
 
+**Correction, 2026-09-08.** The
+[dated correction below](#correction-of-2026-09-08-duality-scope-cap-and-retained-continuation)
+governs the acceptance rule, strict capture scope, retained-net cap and continuation.
+The original report, scratch scripts and reported runs remain historical evidence; the
+missing session-100 scratch state cannot be used as a replay input.
+
 ## D — Contact and spanning lemmas for side-minimal packings of 11 squares, and the closing route to s(11) = U
 
 Date: 2026-09-08. Repository read-only (branch `claude/squares-n11-constraints-wl9atd`);
@@ -2451,6 +2457,163 @@ def main() -> int:
 if __name__ == "__main__":
     raise SystemExit(main())
 ```
+
+## Correction of 2026-09-08: Duality Scope, Cap, and Retained Continuation
+
+W9 review at PR 127 identified three errors in the original interpretation and a
+continuation that cannot be reproduced from the retained inputs.
+This section supersedes those statements while preserving the reports and scripts above.
+
+### What a fractional value decides
+
+Lemma D’s finite covering/packing duality applies to the same fixed placement and site
+domains; its continuum obstruction uses weak duality.
+A finite-site LP dual is constrained only at those sites.
+Its value eleven does not establish pointwise depth at most one.
+A verified finite family below eleven supplies a lower bound on the optimum and cannot
+show that the optimum is below eleven.
+In particular, S2’s original “alive below 9.5” rule is withdrawn: an alive reading
+requires an exact covering upper bound below 9.5 on the entire stated restricted domain.
+A loop that finds a family below 9.5 is inconclusive.
+Likewise a restricted family of weight ten defeats a residual threshold-ten covering
+program; defeating the full threshold-eleven conditional program additionally requires a
+jointly depth-feasible anchored contribution or a dual on its full domain.
+
+For H-129, confirmation requires an exact measure of mass below eleven covering every
+contained unit placement at side 3.87 and every orientation.
+A finite-net covering upper bound has only finite-net scope; `B = 1` supplies no angular
+shrink margin.
+Refutation requires a finite closed-unit family of weight at least eleven,
+exactly contained with pointwise depth at most one, at a side at most 3.87. Other
+results remain inconclusive, including every session-100 result.
+
+If such a family has total `T ≥ 11` and verified outside weight `O ≥ 1` for the stated
+neighbourhood `N`, then `T + δO ≥ 11 + δ` defeats the strict capture inequality
+`M < 11 + δ` for every `δ ≥ 0`. This conclusion concerns that capture shape and domain.
+It does not rule out geometric conditioning on a different domain, ownership at
+equality, capacity or compatibility cuts, or a finite case tree.
+References above to deciding the whole ambitious tier negatively, or to every
+record-conditioned certificate, exceed the lemma’s scope.
+
+**Finite-family stability lemma (proved).** A finite depth-one family of closed unit
+squares contained at side `L > √2` remains feasible at some side `L − ε`, with the same
+angles and weights. For each square let `w_i ≤ √2` be its projection width and map each
+centre coordinate continuously by
+
+`c_i(ε) = w_i/2 + (c_i − w_i/2)(L − ε − w_i)/(L − w_i)`.
+
+This ensures containment when `0 < ε < L − max_i w_i`. If arbitrarily small ε created
+depth above one, one overweight subset of the finitely many placements would recur along
+a sequence ε tending to zero.
+Its witnessing points lie in a compact container; a convergent subsequence and
+closedness put the limit point in every original square of that subset, contradicting
+depth at most one. Thus an attained finite value-eleven family also obstructs a pure
+strict one-body ladder approaching its side from below.
+An unattained supremum of eleven or a finite-site dual of eleven does not supply this
+argument. Equality and ownership arguments remain separate.
+
+### Correct retained-net capture cap
+
+The script `net_end_check.py` used `delta = 45 − last_deg < 0` and then
+`cos(delta) + sin(delta)`, incorrectly obtaining a required side below `B`. Containment
+requires the absolute angular difference.
+Let `t = 207107/500000`, `θ = 2 atan(t) > π/4`, `δ = θ − π/4`, `B = 9977/10000`, and
+`s_H = 2 + (4/3)√2`. A sufficient condition is the **strict** inequality
+
+`L > C_B = B s_H (cos δ + sin δ) = B(2√2 + 8/3)·2t/(1 + t²)`.
+
+Scale the Hämäläinen packing by `L/s_H` and take the concentric B-cores at the net
+directions.
+Strictness places each closed core inside its parent’s interior, so the cores
+are pairwise disjoint as closed sets, and their unit weights have depth one.
+At equality the original packing’s touching closed squares do not themselves have depth
+one. This is why `L ≥ B s_H`, as stated in Corollary D3, was not established.
+
+The corrected cap is still below U. The rational upper bound `√2 < 665857/470832`
+follows from `665857² − 2·470832² = 1`, and substitution gives
+
+`C_B < 22275352724718225/5745980944770482 < 38767/10000 < U`.
+
+For the middle comparison the cross-multiplied positive gap is
+`38767·5745980944770482 − 10000·22275352724718225 = 916038735025694`; the last
+comparison follows from the retained Trump root isolation.
+Thus at every `L ≥ 38767/10000` the five nearly diagonal cores defeat strict Trump
+capture for an angular neighbourhood of radius below `4.8°`. The symbolic corrected
+threshold, rather than the old rounded `3.876681`, governs the sharper statement.
+
+The ten-square floor also needs closed-boundary care: start with the known packing at
+`s(10) < q`, dilate it to q, and take concentric closed unit squares strictly inside its
+larger squares. This gives the stated depth-one family of weight ten.
+
+### A stronger retained unit control and its replay
+
+[Exp-070](../../experiments/exp-070-h-064-n11-fractional-resume.md) retains a stronger
+family than BC-200’s original state: 768 placements at `L = 191/50`, side
+`B = 9977/10000`, exact depth one and weight `21342289572/2055263195`. Its file is
+[`agenda-025/bc-232-leg-01-family.json`](../agenda-025/bc-232-leg-01-family.json).
+Scale every centre and side by `10000/9977`, preserving weights and angles.
+The new closed unit family has the same pointwise depth and fits at
+`38200/9977 < 96/25`, since `38200·25 = 955000 < 957792 = 9977·96`. It follows exactly
+from the retained source verification that
+
+`ν*_1(96/25) ≥ 21342289572/2055263195 ≈ 10.384212408`.
+
+This corrects the original statement that the 3.82 record says nothing about the unit
+value at q. It leaves H-129 unresolved.
+The family can be transported and independently replayed without a search, from
+`packing/`:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.transport_ceiling_family \
+  campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-leg-01-family.json \
+  --scale 10000/9977 --side 96/25 --verify --out /tmp/n11-unit-control.json
+```
+
+`transport_ceiling_family` scales all geometry exactly and optionally recentres it in a
+larger container.
+It preserves the exact source and destination half-tangents and records
+the source’s Git/path identity.
+For state input it remaps each row by tangent identity, refusing an inconsistent source
+net or a destination missing an angle.
+A legacy state needs its net in `best_family`; an index alone is never a direction
+identity. The transport is an instrument control, not an experiment that improves a
+packing bound.
+
+The W9 replay on 2026-09-08 independently checked the transported family at q:
+`max_depth = 1`, `2702488` arrangement vertices, `19335` exact tie decisions, and
+unchanged weight `21342289572/2055263195`. The only failed ceiling condition is
+`K3 total weight at least n`, as expected for a family below eleven; `proved = false`
+must not be read as a depth failure or promoted to an eleven-square obstruction.
+The input is Git-bound to `883d5ef8d4b971057977cd0c3c42f900f937f1de` at the retained
+family path above. The local replay receipt is `/tmp/n11-pr127-unit-control.json`; the
+command and tracked input regenerate it, and the receipt is not a repository artifact.
+
+### Missing scratch evidence and the next instrument
+
+Session-100’s named `scratchpad/lane-294/unit-3-84/unit-state-96-25.json`, its family
+and the plateau run-1 state are absent from this checkout.
+Their reported values remain historical readings, not independently replayable artifacts
+on this branch. The original embedded `unit_loop.py` is **unsafe for resuming its own
+state**: its `len(remap) == 181` condition is always true, so the already merged
+203-direction indices are remapped again, changing angles or raising `IndexError`.
+Preserve the script as evidence; use a net-bound driver for any continuation.
+
+The next instrument block starts from the retained exp-070 family above.
+A fixed-support polisher must preserve that feasible control, seed a bounded working
+set, and record both an exactly feasible family and an exact upper bound on that fixed
+support before calling it optimal.
+Duplicate vertex-incidence vectors are identical constraints; componentwise dominated
+vectors can be dropped because weights are nonnegative.
+This avoids storing millions of coordinate-keyed copies of the same inequality.
+The original one-round polisher result located a scaling loss; it did not prove that
+reweighting this support recovers the loss, or that the LP is no longer a bottleneck.
+
+Full-dual pricing must use a retained state and an exact pointwise separation check.
+A newly found violating point diagnoses the old truncated stop.
+Returning no candidate from a truncated or floating survey is inconclusive.
+Only after these controls should a separately registered search target q for lower-bound
+progress or 3.87 for the endpoint obstruction, with the corrected primal/dual acceptance
+rule above.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
