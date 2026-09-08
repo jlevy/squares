@@ -205,6 +205,10 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [n = 26: Best-Known Upper-Bound Search](docs/project/research/research-2026-09-07-n26-best-known-audit.md) | research synthesis | supporting | maintained | — |
+| [MacIver’s Square-Packing Papers: Source and Method Review](docs/project/reviews/review-2026-09-07-maciver-square-packing.md) | dated review record | record | retained | — |
+| [Stromquist’s Twenty-Six-Square Packing](docs/project/research/research-2026-09-07-stromquist-n26-verification.md) | research synthesis | supporting | maintained | — |
+| [Stromquist’s `n = 26` Packing: Directions and a Restricted-Family Obstruction](docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md) | dated review record | record | retained | — |
 | [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | research synthesis | supporting | maintained | — |
 | [Review: Incorporating Stromquist’s Memos and Helper Arguments](docs/project/reviews/review-2026-09-07-stromquist-incorporation.md) | dated review record | record | retained | — |
 | [Stromquist’s Helper Arguments and Conditional Dots Certificates](docs/project/stromquist-helper-arguments-math-review.md) | dated review record | supporting | maintained | — |
@@ -659,6 +663,34 @@ helper. Its
 [source brief](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md)
 retains the remaining geometric replay under `think-0krc`; the selected target-research
 entry remains BC-264. All 66 full-checkpoint steps passed at `dd92b2a0`.
+
+[Session105](packing/campaign/agent-sessions/session-105-stromquist-n26-verification.md)
+follows the author’s clarification about `n=26`. Its
+[verification report](docs/project/research/research-2026-09-07-stromquist-n26-verification.md)
+checks Stromquist’s historical packing exactly and confirms that Friedman’s current
+upper bound is smaller.
+A scoped support argument closes rigid central-block rotation with two fixed corner
+separations.
+Green’s stronger source-reported lower bound is now recorded separately from
+the verified one at `n=26–27`; proof recovery is `think-0x08`, the remaining
+source-table audit is `think-4g6w`, and `think-z0fi` implements and controls the
+[specified contact-release family](docs/project/reviews/review-2026-09-07-stromquist-n26-directions.md).
+The [MacIver review](docs/project/reviews/review-2026-09-07-maciver-square-packing.md)
+adds three previously unindexed manuscripts.
+His reported lower bound at `4.450208382...` is below the verified `4.59` for both n17
+and n18. The missing computational artifacts remain a source gap; `think-sske` owns
+local replay of the center-area and capacity lemmas before adoption.
+Exact design controls show potential local cuts, not a new global bound.
+This source review does not authorize further kernel research.
+
+[Session106](packing/campaign/agent-sessions/session-106-n26-source-consistency.md)
+extends the source-table audit through n324 and corrects 56 additional reported lower
+bounds, preserving every verified bound and every upper bound.
+The
+[dated n26 search](docs/project/research/research-2026-09-07-n26-best-known-audit.md)
+finds no smaller packing among the checked public sources; exact normalization shows
+that two recent numerical submissions are slightly worse than Friedman.
+This is a best-known conclusion with recorded search limits, not a proof of optimality.
 
 The
 [Session094 handoff](packing/campaign/agent-sessions/session-094-complete-cover-and-density-controls.md)
@@ -3182,12 +3214,14 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-094.yaml` | session-094 | 562 | 4.53 h | 1.82 h | 1.82 h | yes |
 | `codex-task-tree-session-095.yaml` | session-095 | 476 | 4.08 h | 1.69 h | 1.69 h | yes |
 | `codex-task-tree-session-096.yaml` | session-096 | 520 | 3.79 h | 1.4 h | 1.4 h | yes |
+| `codex-task-tree-session-105.yaml` | session-105 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
+| `codex-task-tree-session-106.yaml` | session-106 | 1,467 | 14.71 h | 8.0 h | 8.0 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 51 |
+| measured | 53 |
 | unmeasured | 45 |
-| **total** | **96** |
+| **total** | **98** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -3624,14 +3658,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 480 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 483 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 98 | asserted something false about the mathematics |
 | validity | 122 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 182 | recorded something its own evidence contradicts |
+| bookkeeping | 185 | recorded something its own evidence contradicts |
 | robustness | 60 | did not finish, or finished only by luck |
 | performance | 18 | worked, but cost far more than it should |
 
@@ -3641,7 +3675,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventy-two defects in 480, and no soundness defect
+**The automated gate has caught seventy-two defects in 483, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -3952,7 +3986,7 @@ It is contained rather than fixed — such delegations are recorded on completio
 `read_only` flag is better than permitting an empty list that would be ambiguous between
 “writes nothing” and “nobody filled this in”.
 
-112 fixes left no regression check behind.
+113 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
 and exit survived, but invalid `gdate` precision left the start and end fields empty, so
 [D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.

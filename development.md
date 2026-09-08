@@ -167,7 +167,7 @@ alone is not full pre-merge evidence.
 | `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 69 | 180 s | 91.6 s on CI, the mean of four readings |
 | `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 69 | 205 s | 102.8 s on CI, the mean of four readings |
 | `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 69 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 69 of 69 | 3600 s | split across two jobs; not clocked whole |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 69 of 69 | 3600 s | split across three jobs; not clocked whole |
 
 Two of the four PR partition costs are geometric means of four readings at the reference
 shape, not maxima. Hosted variation remains material: unchanged atlas code ranged from
@@ -469,10 +469,10 @@ implemented. These limits are why a subprocess timeout is not, by itself, eviden
 D-239 is resolved.
 
 Pushes to `main`, manual dispatches, and the daily schedule run the ordinary full
-checkpoint on Linux in two jobs: `validate` runs everything except exhaustive exact
-tests, and `exhaustive` runs those tests.
+checkpoint on Linux in three jobs: `validate` runs everything except slow and exhaustive
+exact tests; `slow-lane` and `exhaustive` run those two lanes separately.
 macOS runs four portability checks.
-Neither workflow invocation enables the golden rebuild or strict checkpoint.
+These invocations enable neither the golden rebuild nor the strict checkpoint.
 The daily run checks the default branch at 08:17 UTC; unmerged branches need their own
 labelled or dispatched deferred checkpoint.
 
@@ -488,10 +488,15 @@ Avoid assuming that either flag alone caps total host concurrency.
 
 The isolated exhaustive jobs use `--jobs 1 --inner-jobs 4`: their recorded hosted
 runners expose four CPUs, and no second outer step competes for that budget.
-The concurrent integration and deferred jobs retain `--jobs 2 --inner-jobs 2`.
+The integration and deferred numeric checks run one step at a time with
+`--jobs 1 --inner-jobs 2`; their isolated slow lanes use the same worker settings.
+This keeps the full translation screen from competing with another numeric pool.
+The screen exceeded even its 1800-second budget when two pools shared a hosted runner in
+[run 34181619739](https://github.com/jlevy/squares/actions/runs/34181619739).
 Certificate pools also enforce actual CPU availability, the four-worker maximum, and the
-grid-memory budget. This allocation preserves the parallelism previously available when
-certificate pools ignored `PACK_JOBS`; it is not a measured speedup claim.
+grid-memory budget. The four-worker exhaustive setting preserves the parallelism
+previously available when certificate pools ignored `PACK_JOBS`; it is not a measured
+speedup claim.
 
 CPU observations are diagnostic only.
 Process counters can charge a child’s setup to the call that reaps it and omit
@@ -517,8 +522,8 @@ explicitly enforced.
 Matching CPU counts alone does not establish comparable load or hardware.
 `--only` invocations have no tier ceiling; per-command subprocess timeouts still apply.
 The default subprocess timeout is 900 seconds, increased for steps with declared larger
-budgets, including 1800 seconds for slow tests and negative controls and 3600 seconds
-for exhaustive tests.
+budgets, including 1800 seconds for slow tests, negative controls and the full
+translation escape screen, and 3600 seconds for exhaustive tests.
 An explicit shorter timeout still wins.
 The full checkpoint’s 3600-second tier declaration is not a universal wall limit on
 split CI jobs. Preserve source, selection, runner, and cache information with timings

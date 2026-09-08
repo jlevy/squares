@@ -253,6 +253,11 @@ SLOW_TEST_FLOOR_SECONDS = 1.0
 #: weeks. The tier already runs only after merge, so the move that scales is to give it
 #: its own job rather than a larger share of this one (think-tr2z).
 EXHAUSTIVE_SUITE_BUDGET_SECONDS = 3600.0
+#: The whole translation screen at `n=1..324` exceeded the shared 900s cap in hosted
+#: run 34196436989 on 2026-09-08; its 901.00s receipt includes termination grace. Give
+#: this corpus sweep the same independent 1800s budget as PR #116. It is separate from
+#: the behavioural suite's budget because their costs change for different reasons.
+ESCAPE_SCREEN_BUDGET_SECONDS = 1800.0
 
 
 class _ProcessRegistry:
@@ -1682,8 +1687,9 @@ def _translation_escape_sample(context: Context) -> str:
 
     Deferring the whole re-screen is argued on
     `test_the_pull_request_surface_defers_only_what_was_measured`: 766.26s at `n=1..324`
-    against a 210s ceiling, and within 134s of the gate's own per-step subprocess timeout
-    on a box faster than CI's. What stays here is everything that is not per-record
+    against a 210s ceiling, and within 134s of the then-shared 900s subprocess timeout.
+    The whole screen now declares `ESCAPE_SCREEN_BUDGET_SECONDS` after exceeding that
+    cap on CI. What stays here is everything that is not per-record
     geometry -- the aggregate against its own cases, the method block, the schema, the
     per-certificate claims -- and a fixed recorded slice of the records replayed in full.
 
@@ -2818,10 +2824,12 @@ STEPS: tuple[Step, ...] = (
     ),
     # The whole re-screen, off the pull-request surface since 2026-09-07 and on its own
     # measurement: 766.26s at `n=1..324` against that job's 210s ceiling, and within 134s
-    # of this gate's own per-step subprocess timeout on a box faster than CI's.
+    # of the then-shared 900s cap. Its own budget is argued above on
+    # `ESCAPE_SCREEN_BUDGET_SECONDS`.
     Step(
         "single-square translation escape screen",
         _translation_escape_screen,
+        budget_seconds=ESCAPE_SCREEN_BUDGET_SECONDS,
         touches=(
             *_CORE,
             "packing/atlas/known-best/*",
@@ -3874,7 +3882,7 @@ def _submission_order(selected: Sequence[Step]) -> list[Step]:
     whose wall time is one long step would have started paying for the short ones.
 
     `budget_seconds` is the ordering key because it is already the file's declaration
-    that a step runs long, argued next to each of the three that carry one; nothing here
+    that a step runs long, argued next to each of the four that carry one; nothing here
     guesses a duration. Descending, so the longest budget goes first, and stable, so
     everything unbudgeted keeps declared order.
 

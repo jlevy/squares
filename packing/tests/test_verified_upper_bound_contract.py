@@ -70,6 +70,14 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/devtools/audit_ds7_lower_bounds.py": (
+        "preserves the certified ceiling unchanged while auditing source-reported lower "
+        "bounds; it neither promotes that ceiling to s(n) nor derives a new upper bound"
+    ),
+    "packing/tests/test_audit_ds7_lower_bounds.py": (
+        "checks that reported-lower-bound updates leave the certified ceiling unchanged; "
+        "equality of stored fields makes no claim that the ceiling is optimal"
+    ),
     (
         "packing/campaign/series/series-000-smoke-and-calibration/experiments/"
         "exp-126-h099-complete-graph-candidate.md"
@@ -249,10 +257,10 @@ def cases() -> dict[int, dict]:
     return loaded
 
 
-def trailing_ceilings() -> dict[int, tuple[Decimal, Decimal]]:
+def trailing_ceilings(loaded_cases: dict[int, dict]) -> dict[int, tuple[Decimal, Decimal]]:
     """Cases whose certified ceiling does not agree with the reported best known."""
     trailing: dict[int, tuple[Decimal, Decimal]] = {}
-    for n, case in cases().items():
+    for n, case in loaded_cases.items():
         reported = case["reported_upper_bound"]
         verified = case["verified_upper_bound"]
         if not bounds_agree_at_declared_precision(reported, verified):
@@ -262,7 +270,8 @@ def trailing_ceilings() -> dict[int, tuple[Decimal, Decimal]]:
 
 @pytest.mark.slow
 def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> None:
-    trailing = trailing_ceilings()
+    loaded_cases = cases()
+    trailing = trailing_ceilings(loaded_cases)
     # Not a target to be held at any number; a measurement, and a loud one. Every one of
     # these is a case where reading `verified_upper_bound` as s(n) overstates the side
     # length. It was 33 until D-398 promoted n = 40, 65 and 89 off the integer grid ceiling
@@ -286,21 +295,22 @@ def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> Non
     grids = {
         n
         for n in trailing
-        if cases()[n]["verified_upper_bound"]["exact_form"] == str(math.isqrt(n - 1) + 1)
+        if loaded_cases[n]["verified_upper_bound"]["exact_form"] == str(math.isqrt(n - 1) + 1)
     }
     assert sorted(set(trailing) - grids) == [29]
 
     # Every case carrying an exact_form on the ceiling, split by whether s(n) is known.
     exact_forms = sum(
-        1 for case in cases().values() if case["verified_upper_bound"]["exact_form"]
+        1 for case in loaded_cases.values() if case["verified_upper_bound"]["exact_form"]
     )
-    proved = sum(1 for case in cases().values() if case["status"] == "proved")
+    proved = sum(1 for case in loaded_cases.values() if case["status"] == "proved")
     assert exact_forms == KNOWN_BEST_CORPUS.count
     assert proved < exact_forms
 
 
 def test_every_trailing_case_says_so_in_the_record_a_reader_opens() -> None:
-    trailing = trailing_ceilings()
+    loaded_cases = cases()
+    trailing = trailing_ceilings(loaded_cases)
     for n, (reported, verified) in sorted(trailing.items()):
         body = _body(n)
         assert CEILING_HEADING in body, f"n={n} certifies a weaker ceiling and does not say so"
@@ -324,7 +334,7 @@ def test_every_trailing_case_says_so_in_the_record_a_reader_opens() -> None:
 
     # The section is a statement about this case, so it must not appear where the
     # ceiling does reach the report.
-    for n in set(cases()) - set(trailing):
+    for n in set(loaded_cases) - set(trailing):
         assert CEILING_HEADING not in _body(n), n
 
 

@@ -1,0 +1,78 @@
+{
+  "results": [
+    {
+      "name": "single-square translation escape screen",
+      "status": "passed",
+      "seconds": 789.5594985829957,
+      "output": "translation escape screen check passed: 318 records screened, 114 with a square that separates (2714 squares), 296 with a square that translates at all (5323 squares), excluded: n=68, n=69, n=103, n=105, n=110, n=131",
+      "reason": ""
+    }
+  ],
+  "wall_seconds": 789.5614782089979,
+  "setup_output": "",
+  "selected_count": 1,
+  "total_count": 69,
+  "partial_pattern": [
+    "single-square translation escape screen"
+  ],
+  "skipped_pattern": [],
+  "budget": {
+    "tier": null,
+    "wall_seconds": 789.5614782089979,
+    "status": "unknown",
+    "enforced": false,
+    "ceiling_seconds": null,
+    "measured_seconds": null,
+    "failures": [],
+    "notes": [
+      "this run is a subset of a tier, so no declared ceiling applies; 'single-square translation escape screen' is 789.6s of it (100.0%)"
+    ],
+    "top_steps": [
+      [
+        "single-square translation escape screen",
+        789.5594985829957
+      ]
+    ]
+  },
+  "source": {
+    "available_cpus": 10,
+    "commit": "3deb90fceda0ac4b5500a69c731364be6938cdd1",
+    "dirty_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "environment": {
+      "PACK_JOBS": "2"
+    },
+    "git_status": "",
+    "inner_jobs": 2,
+    "interpreter": "/Users/levy/.codex/worktrees/b1d9/squares/packing/.venv/bin/python3",
+    "jobs": 1,
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.7 free-threading build (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+    "run_id": "bcb91fed2e1e46da8845c9e201060bbb",
+    "selected_steps": [
+      "single-square translation escape screen"
+    ],
+    "started_at": "2026-09-08T08:25:16.241633+00:00",
+    "untracked_hashes": {}
+  },
+  "command_receipt": {
+    "command": [
+      "/Users/levy/.codex/worktrees/b1d9/squares/packing/.venv/bin/python3",
+      "-m",
+      "devtools.screen_translation_escape",
+      "--check"
+    ],
+    "cwd": "/Users/levy/.codex/worktrees/b1d9/squares/packing",
+    "finished_at": "2026-09-08T08:38:25.890908+00:00",
+    "inner_jobs": 2,
+    "jobs": 1,
+    "log_path": "/private/tmp/session106-screen-3deb90fc-artifacts/command-0d69112858d24f3e804abbc4522f8037.log",
+    "reason": "",
+    "run_id": "bcb91fed2e1e46da8845c9e201060bbb",
+    "started_at": "2026-09-08T08:25:16.324774+00:00",
+    "status": "passed",
+    "step_name": "single-square translation escape screen",
+    "timeout_seconds": 1800.0,
+    "wall_seconds": 789.5584726660018
+  },
+  "description": "Complete translation escape screen at clean 3deb90fc: all 318 eligible records passed; the six declared exclusions are n=68, 69, 103, 105, 110 and 131. This is one complete sweep, not a full-tier checkpoint."
+}

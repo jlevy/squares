@@ -305,7 +305,7 @@ COMPOSITE_CARD = COMPOSITE_STEM.with_name(f"{COMPOSITE_STEM.name}-card.png")
 COMPOSITE_ALT = (
     "The best known packings of one through one hundred unit squares, in a ten-by-ten "
     "grid, each labelled with its best known upper bound and, where the value is still "
-    "open, the best proved lower bound"
+    "open, the strongest lower bound independently verified here"
 )
 #: What the card is a picture of, which stopped being the same sentence when the card
 #: became a crop. It shows the title block and the first four rows, so it says the first
@@ -316,7 +316,7 @@ CARD_ALT = (
     "The title of the atlas of best known square packings, above the first four rows of "
     "its ten-by-ten grid: the best known packings of one through forty unit squares, "
     "each labelled with its best known upper bound and, where the value is still open, "
-    "the best proved lower bound"
+    "the strongest lower bound independently verified here"
 )
 VERIFIER = PACKING / "src" / "sqpack" / "fractional" / "certificate.py"
 GENERATOR = PACKING / "src" / "sqpack" / "fractional" / "generate.py"
@@ -1855,6 +1855,9 @@ def shared_substitutions(facts: list[Facts], headline: Facts, default: Facts) ->
             / "nagamochi-2005-packing-unit-squares-in-a-rectangle.pdf"
         ),
         "TUTORIAL_URL": repo_file(REPO / "TUTORIAL.md"),
+        "STROMQUIST_N26_REVIEW_URL": repo_file(
+            REPO / "docs/project/research/research-2026-09-07-stromquist-n26-verification.md"
+        ),
         "WORKFLOWS_URL": repo_file(REPO / "SYNOPSIS.md") + "#workflow-entry-contracts",
         "PRINCIPLES_URL": repo_file(REPO / "README.md") + "#operating-principles",
         "EPISTEMICS_URL": repo_file(REPO / "epistemics.md"),
@@ -2100,6 +2103,7 @@ RENDER_INPUTS = (
     PACKING / "devtools" / "measure_net_coarsening.py",
     PACKING / "devtools" / "build_composite_figure_data.py",
     PACKING / "devtools" / "render_explainer_pdf.py",
+    PACKING / "devtools" / "sans_instances.py",
     PACKING / "devtools" / "check_print_layout.py",
     PACKING / "src" / "sqpack",
     PACKING / "frontier" / "results.yaml",
@@ -2108,6 +2112,7 @@ RENDER_INPUTS = (
     *COMPOSITE_ASSETS,
     TEMPLATE,
     MARKDOWN,
+    PACKING / "devtools" / "templates" / "fonts",
     REPO / "vendor" / "kpress",
     PACKING / "pyproject.toml",
     PACKING / "uv.lock",

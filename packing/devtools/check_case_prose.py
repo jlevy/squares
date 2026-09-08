@@ -28,6 +28,8 @@ This is that detector. For every `frontier/n-*.md`, it does three things:
    - A bare decimal introduced by name: "the best proved lower bound is `4.741657`", or
      "Nagamochi's general `4.316625`" / "Nagamochi's general `1 + √12 ≈ 4.464102`" -- the
      other bare-decimal shape the corpus uses, whenever the reported bound is Nagamochi's.
+     The generator's "the strongest lower bound independently verified here is `4.741657`"
+     names the verified field directly and has no reported-bound or historical fallback.
    - The disclaimer sentence a case with an unverified tighter construction always carries:
      "`verified_upper_bound` for this case is `5`" (`n-017`, `n-028`, ... -- every case where
      `reported_upper_bound` is tighter than what this repository has itself verified says
@@ -45,7 +47,9 @@ This is that detector. For every `frontier/n-*.md`, it does three things:
      disclaimer it names the field, so it is checked against that field with no fallback and
      no historical exemption, and where the prose spells the exact fraction as well, that is
      checked against `exact_form` -- two rungs a hundredth apart can round alike at the two
-     decimals a body writes.
+     decimals a body writes. The same exact-fraction check applies when the named statement
+     contains `s(n) >=`: otherwise `24/5 = 4.8` can survive a move to `97/20 = 4.85` because
+     the new lower bound still rounds down to `4.8` at one decimal place.
 
    A quoted figure must be the front matter's corresponding bound rendered to the number
    of decimal places the prose itself wrote, in the direction that leaves the sentence it
@@ -173,6 +177,17 @@ _GAP_OF = re.compile(r"a gap of\s+`?(\d+\.\d+)`?")
 
 _BEST_PROVED = re.compile(r"best proved (lower|upper) bound\s+is\s+`(-?\d+(?:\.\d+)?)`")
 
+#: This wording names the verified field, even though its bare figure has no `s(n)`.
+_STRONGEST_VERIFIED = re.compile(
+    rf"strongest\s+(lower|upper)\s+bound\s+independently\s+verified\s+here\s+is\s+`{_FIGURE}`",
+    re.IGNORECASE,
+)
+
+#: Preserve the field anchor when its figure follows an `s(n) >=`/`<=` chain.
+_VERIFIED_BOUND_PREFIX = re.compile(
+    r"the\s+verified\s+(lower|upper)\s+bound\s+is\s+`?\s*$", re.IGNORECASE
+)
+
 #: "Nagamochi's general `4.316625`" or "Nagamochi's general `1 + √12 ≈ 4.464102`" -- this
 #: corpus's other recurring bare-decimal shape, always this file's own reported (and, unless
 #: displaced, verified) lower bound, so also always about this file's own `n`.
@@ -193,6 +208,7 @@ _VERIFIED_FIELD = re.compile(
 #: said `99/25` (`D-451`). Like `_VERIFIED_FIELD` it names the field, so the figure it
 #: states is the field's, with no reported-bound fallback and no historical exemption --
 #: and when the prose writes the exact fraction too, that is checked against `exact_form`.
+#: The `s(n)` sibling keeps these field and fraction checks through `BoundClaim` instead.
 _VERIFIED_BOUND_SENTENCE = re.compile(
     rf"[Tt]he verified (lower|upper) bound is\s+`?{_FIGURE}`?"
 )
@@ -335,10 +351,14 @@ class BoundClaim:
     """Character offset within the case body, for line-number lookup."""
     sentence: str
     """The sentence the figure was found in, for the historical-mention exemption."""
+    exact_form: Fraction | None = None
+    """The explicit rational identity, when this claim names a verified field."""
+    verified_only: bool = False
+    """Whether the wording names the verified field rather than a generic bound."""
 
 
 def bound_claims(body: str, n: int) -> list[BoundClaim]:
-    """Every figure anchored to this file's own `n`, from any of the four bound shapes."""
+    """Every recognized bound figure anchored to this file's own `n` or verified field."""
     claims: list[BoundClaim] = []
     for start, end in sentence_spans(body):
         sentence = body[start:end]
@@ -347,7 +367,19 @@ def bound_claims(body: str, n: int) -> list[BoundClaim]:
                 if int(match.group(1)) != n:
                     continue
                 figure = match.group(4)
-                claims.append(BoundClaim(kind, figure, start + match.start(4), sentence))
+                prefix = _VERIFIED_BOUND_PREFIX.search(sentence[: match.start()])
+                verified_only = prefix is not None and prefix.group(1).lower() == kind
+                numerator, denominator = match.group(2), match.group(3)
+                exact = (
+                    Fraction(int(numerator), int(denominator))
+                    if verified_only and numerator
+                    else None
+                )
+                claims.append(
+                    BoundClaim(
+                        kind, figure, start + match.start(4), sentence, exact, verified_only
+                    )
+                )
         for match in _PINNED_INTERVAL.finditer(sentence):
             if int(match.group(1)) != n:
                 continue
@@ -361,6 +393,19 @@ def bound_claims(body: str, n: int) -> list[BoundClaim]:
             BoundClaim(match.group(1), match.group(2), start + match.start(2), sentence)
             for match in _BEST_PROVED.finditer(sentence)
         )
+        for match in _STRONGEST_VERIFIED.finditer(sentence):
+            numerator, denominator = match.group(2), match.group(3)
+            exact = Fraction(int(numerator), int(denominator)) if numerator else None
+            claims.append(
+                BoundClaim(
+                    match.group(1).lower(),
+                    match.group(4),
+                    start + match.start(4),
+                    sentence,
+                    exact,
+                    verified_only=True,
+                )
+            )
         claims.extend(
             BoundClaim("lower", match.group(1), start + match.start(1), sentence)
             for match in _NAGAMOCHI_GENERAL.finditer(sentence)
@@ -453,6 +498,8 @@ def _check_gap_claim(claim: BoundClaim, front_matter: CaseFrontMatter) -> str | 
 def check_bound_claim(claim: BoundClaim, front_matter: CaseFrontMatter) -> str | None:
     """`None` if `claim` agrees with the front matter (directly, via the reported bound, or
     via the historical-mention exemption); otherwise a description of the disagreement.
+
+    Explicit verified-field statements admit neither fallback.
     """
     digits = _digits_of(claim.figure)
     stated = Decimal(claim.figure)
@@ -461,11 +508,21 @@ def check_bound_claim(claim: BoundClaim, front_matter: CaseFrontMatter) -> str |
     lower = claim.kind == "lower"
     verified = front_matter.verified_lower if lower else front_matter.verified_upper
     reported = front_matter.reported_lower if lower else front_matter.reported_upper
+    if claim.verified_only:
+        exact = verified.exact_fraction()
+        if claim.exact_form is not None and exact is not None and claim.exact_form != exact:
+            return (
+                f"prose says verified_{claim.kind}_bound is {claim.exact_form} = "
+                f"{claim.figure}, but exact_form is {exact}"
+            )
+        return check_verified_field_claim(
+            VerifiedFieldClaim(claim.kind, claim.figure, claim.offset), front_matter
+        )
     verified_value = verified.decimal_at(digits)
 
-    if _field_matches_claim(verified, claim.figure, claim.kind):
-        return None
-    if _field_matches_claim(reported, claim.figure, claim.kind):
+    if _field_matches_claim(verified, claim.figure, claim.kind) or _field_matches_claim(
+        reported, claim.figure, claim.kind
+    ):
         return None
     if verified_value is not None:
         weaker = stated < verified_value if claim.kind == "lower" else stated > verified_value
@@ -488,7 +545,7 @@ def check_bound_claim(claim: BoundClaim, front_matter: CaseFrontMatter) -> str |
 def check_verified_field_claim(
     claim: VerifiedFieldClaim, front_matter: CaseFrontMatter
 ) -> str | None:
-    """The ceiling-disclaimer's figure must equal `verified_{kind}_bound` exactly -- the
+    """The figure must safely render the named `verified_{kind}_bound` -- the
     sentence names the field itself, so there is no reported-bound fallback here and no
     historical exemption: this sentence is never about anything but the present value.
     """
@@ -619,10 +676,17 @@ def _field_for_rewrite(claim: BoundClaim, front_matter: CaseFrontMatter) -> Boun
     lower = claim.kind == "lower"
     stated = Decimal(claim.figure)
     digits = _digits_of(claim.figure)
-    for field in (
-        front_matter.verified_lower if lower else front_matter.verified_upper,
-        front_matter.reported_lower if lower else front_matter.reported_upper,
-    ):
+    verified = front_matter.verified_lower if lower else front_matter.verified_upper
+    if claim.verified_only and claim.exact_form is not None:
+        # A stated rational identity requires review; changing its decimal alone
+        # cannot repair a stale fraction and may break its arithmetic equality.
+        return None
+    fields = (
+        (verified,)
+        if claim.verified_only
+        else (verified, front_matter.reported_lower if lower else front_matter.reported_upper)
+    )
+    for field in fields:
         if field.decimal_at(digits) == stated:
             return field
     return None

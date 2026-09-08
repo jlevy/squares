@@ -1,0 +1,59 @@
+{
+  "commit": "3deb90fceda0ac4b5500a69c731364be6938cdd1",
+  "initial_git_status": "",
+  "run_id": "059e9c51065b41b388b11c4bb811b9d1",
+  "started_at": "2026-09-08T08:25:52.575397+00:00",
+  "jobs": 3,
+  "inner_jobs": 1,
+  "available_cpus": 4,
+  "selected": 62,
+  "completed": 62,
+  "unique_completed": 62,
+  "missing": [],
+  "unexpected": [],
+  "statuses": [
+    {
+      "status": "passed",
+      "count": 62
+    }
+  ],
+  "nonpassing": [],
+  "longest_steps": [
+    {
+      "name": "fast behavioral tests",
+      "seconds": 125.40384729100333
+    },
+    {
+      "name": "known-best atlas records and sample",
+      "seconds": 98.77631329199357
+    },
+    {
+      "name": "translation escape screen records and sample",
+      "seconds": 64.37019341699488
+    },
+    {
+      "name": "exact verification",
+      "seconds": 58.4405298329948
+    },
+    {
+      "name": "soundness perimeter",
+      "seconds": 47.809287249998306
+    },
+    {
+      "name": "known-best chunk census",
+      "seconds": 42.391897417008295
+    },
+    {
+      "name": "type floor (basedpyright)",
+      "seconds": 32.1761574580014
+    },
+    {
+      "name": "deterministic SVG rendering",
+      "seconds": 25.378876541988575
+    }
+  ],
+  "status": "passed",
+  "wall_seconds": 243.31,
+  "pytest_cases": 4115,
+  "description": "Complete fast tier on a clean detached checkout at 3deb90fc. All 62 selected steps and 4115 tests passed; original receipts are retained in fast-3deb90fc.tar.gz."
+}
