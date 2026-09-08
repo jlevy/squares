@@ -288,6 +288,12 @@ def readout_findings(readouts: list[Readout]) -> list[str]:
     return findings
 
 
+def page_url(path: Path | str) -> str:
+    """Preserve a live HTTP URL or resolve a local page for browser navigation."""
+    value = str(path)
+    return value if value.startswith(("https://", "http://")) else Path(path).resolve().as_uri()
+
+
 def check_loading(
     path: Path | str = PAGE,
     *,
@@ -308,11 +314,7 @@ def check_loading(
             page.on("pageerror", lambda error: errors.append(str(error)))
             page.add_init_script(HOLD_FONTS_SCRIPT)
             page.add_init_script(FIRST_PAINT_SCRIPT)
-            url = (
-                str(path)
-                if str(path).startswith(("https://", "http://"))
-                else Path(path).resolve().as_uri()
-            )
+            url = page_url(path)
             page.goto(url, wait_until="domcontentloaded")
             targets: list[EarlyTarget] = page.evaluate(EARLY_EVENTS)
             page.set_viewport_size({"width": max(1, width - 1), "height": 720})

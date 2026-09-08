@@ -56,7 +56,7 @@ import os
 from pathlib import Path
 from typing import NotRequired, TypedDict
 
-from devtools.check_math_loading import FIRST_PAINT_SCRIPT
+from devtools.check_math_loading import FIRST_PAINT_SCRIPT, page_url
 from devtools.check_print_layout import PRINT_VIEWPORT
 from devtools.render_explainer import MATH_WRAPPERS
 from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY, SETTLED
@@ -320,7 +320,7 @@ def _check_drawn(page: object, findings: list[str], medium: str) -> list[str]:
     return drawn
 
 
-def check(path: Path = PAGE, *, width: int = 1280) -> Report:
+def check(path: Path | str = PAGE, *, width: int = 1280) -> Report:
     """Load the built page once and ask all three questions of it, in both media."""
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
@@ -335,7 +335,7 @@ def check(path: Path = PAGE, *, width: int = 1280) -> Report:
             errors: list[str] = []
             page.on("pageerror", lambda error: errors.append(str(error)))
             page.add_init_script(FIRST_PAINT_SCRIPT)
-            page.goto(path.resolve().as_uri(), wait_until="load")
+            page.goto(page_url(path), wait_until="load")
             page.wait_for_selector(READY, timeout=60_000)
             screen = _run(page, findings, "screen")
             report["nodes"] = screen["nodes"]
@@ -421,7 +421,9 @@ def self_test() -> None:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("page", nargs="?", type=Path, default=PAGE)
+    parser.add_argument(
+        "page", nargs="?", default=str(PAGE), help="Local HTML or live page URL"
+    )
     parser.add_argument(
         "--width", type=int, default=1280, help="Screen viewport width in CSS px"
     )

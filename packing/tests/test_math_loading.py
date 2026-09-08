@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from textwrap import dedent
 
 import pytest
 from nodejs_wheel import node
 
+from devtools import check_math_faces
 from devtools.check_math_loading import (
     EARLY_EVENTS,
     EXPOSED,
@@ -15,6 +17,7 @@ from devtools.check_math_loading import (
     LoadingReport,
     Readout,
     loading_findings,
+    page_url,
     readout_findings,
 )
 
@@ -43,6 +46,39 @@ def clean_report() -> LoadingReport:
         "no_javascript": {},
         "findings": [],
     }
+
+
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://jlevy.github.io/squares/",
+        "https://jlevy.github.io/squares/?review=fonts#381-100",
+        "http://127.0.0.1:8000/index.html",
+    ],
+)
+def test_live_page_urls_are_preserved(url: str) -> None:
+    assert page_url(url) == url
+
+
+def test_local_pages_resolve_from_paths_and_strings(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    page = tmp_path / "page with spaces.html"
+    monkeypatch.chdir(tmp_path)
+    for value in (page, str(page), Path(page.name), page.name):
+        assert page_url(value) == page.as_uri()
+
+
+def test_math_faces_cli_preserves_the_live_url(monkeypatch: pytest.MonkeyPatch) -> None:
+    url = "https://jlevy.github.io/squares/"
+
+    def check(path: Path | str, *, width: int) -> check_math_faces.Report:
+        assert path == url
+        assert width == 390
+        return {"nodes": 0, "marked": 0, "tables": [], "findings": []}
+
+    monkeypatch.setattr(check_math_faces, "check", check)
+    assert check_math_faces.main([url, "--width", "390"]) == 0
 
 
 def test_construct_faces_are_part_of_first_visible_paint() -> None:
