@@ -166,6 +166,46 @@ animation does not grant validity to intermediate frames.
 The motion lab plan labels any frame that is not a retained solver evaluation an
 `illustrative tween`. Version 2 inherits both.
 
+### What the toolkit offers a relaxed tween
+
+The owner asked whether a physics-like model could carry a step through a relaxed
+intermediate, and whether the repository’s own research says which optimisation models
+work best below 100. The record answers both.
+
+- There is no physics integrator in the repository.
+  The quench in `sqpack.research.quench` is a fixed-angle linear programme inside a
+  separation cell with a golden-section search over merged angle classes, a polisher
+  within the basin a configuration is already in, and the synopsis says that is all it
+  does; the Rust `sqsearch` annealer minimises the required side plus a linear overlap
+  penalty under a cooling schedule, in floating point, and may not claim a record.
+  The interactive free-quench lab drives that quench for at most twenty squares from a
+  seeded random start and has no witness import.
+- No packing in the corpus has container slack: the translation-escape screen’s
+  `min_container_slack` is zero or below in all 318 screened records, and what play
+  exists is tangential sliding of 5,323 squares in 296 records.
+  A relaxed state therefore has to be constructed, by inflation, not found.
+- A float feasibility check is meaningful only with positive gaps:
+  `verify_packing(corners_from_poses(x, y, theta), side, float_sign(1e-9))` in
+  `sqpack.verify` is the call the motion lab’s tests already make, and its own docstring
+  says why it cannot decide a tight packing.
+  `promote/relax.py` makes the same argument from the other side, opening every contact
+  by `eps` to certify an upper bound.
+- Two registered hypotheses describe the idea and are unbuilt: `H-013`, a fixed-side
+  projection family from an inflated container toward the target side, which notes the
+  side-minimising quench is not that operator; and `H-004`, seeding `n ± 1` from a
+  neighbour’s packing.
+  `H-018` measured that perturbing Trump’s `n = 11` by `1e-3` returned to it in zero of
+  forty trials, so a tween that relied on a refiner finding the endpoint would not work;
+  the tween has both endpoints and needs no refiner.
+- Below 100 the records are 52 trivial grids, 25 hand constructions, 10 simulated
+  annealing, 6 diagonal strips, 3 extensions and 4 unrecorded; above 100, 113 grids, 30
+  annealing, 27 extensions, 10 strips, 8 hand, 3 compositions and 33 unrecorded.
+  The algorithms research records that the dominant mode at large `n` is construct, then
+  locally optimise, that annealing credits are all for `n` between 28 and 307, and that
+  general-purpose global optimisation at `n = 27` returns a much worse arrangement.
+  For the video this means the physics-like model is a path between two given packings,
+  never a search, and it must not be presented as one.
+
 ### Spike findings
 
 Both spikes ran on 2026-09-07 under the `coding-spike` shortcut, each in a directory of
@@ -688,6 +728,23 @@ exceeds it are the cases the fifth and sixth spike revisions count and report.
 The reverse of the first two beats, make room and then arrive, is kept as a selectable
 mode so the owner can compare the two on the pairs where the arriving square would
 overlap squares that have not yet moved, which the spike counts.
+*Under investigation, the owner’s idea:* a relaxed intermediate.
+Loosen `n` by inflating the container to `(1 + δ) s_n` and scaling every centre about
+the container’s centre, which opens each contact by about `δ` times the pair’s
+separation; add the new square; move the blocks in that relaxed space with a per-frame
+overlap-resolution step, a push-apart along the separating axis the way the motion lab’s
+`pair_gap` measures it; then tighten by the inverse contraction to `s_{n+1}`. The corpus
+offers no slack of its own: the escape screen’s `min_container_slack` is zero or below
+in every one of its 318 screened records, so the relaxed state has to be constructed.
+In that state a float check is meaningful, which it is not at a tight packing, so every
+relaxed frame is run through
+`verify_packing(corners_from_poses(x, y, theta), side, float_sign(1e-9))` and the tween
+labels the frames that pass as overlap-free and the rest as illustrative.
+This is the animation form of the registered but unbuilt `H-013` δ-continuation family
+and of `H-004`’s neighbour-transfer premise, and it never claims to search: both
+endpoints are given, and the model between them is a path, not a proposal.
+The sixth spike revision builds it for the sixteen collapse pairs and 100→101 and
+compares it with the block tween by eye and by the overlap census.
 Between `n` and `n + 1` each matched square’s centre moves linearly, its angle turns
 along the shorter arc modulo 90 degrees (at most 45 degrees, an exact tie resolved
 counter-clockwise as the spike did), the container side interpolates linearly, and the
@@ -935,7 +992,13 @@ Closes on: `capture_known_best_video --stand-in --check` self-agreeing locally a
 - [ ] The new-square rule of `D10` recorded per pair, with a census of how often it
   differs from the assignment’s leftover.
 - [ ] The add-then-make-room staging of `D11` as the default `motion_phase`, with the
-  reverse order selectable and the arrival-overlap census recorded.
+  reverse order selectable and the arrival-overlap census recorded; the scale-down beat
+  as its own segment with `scale_seconds`, the stage margin it needs, and the census of
+  early pairs whose growth exceeds the margin.
+- [ ] Spike: the relaxed intermediate of `D11` for the sixteen collapse pairs and
+  100→101, with `δ` swept, the per-frame `verify_packing` census, and a side-by-side
+  with the block tween; the outcome decides whether Phase 4 ships it as a `tween_model`
+  option.
 - [ ] The continuous-angle rule behind a record flag with its own label, so the owner
   judges 260→261 under both rules from the same player.
 
