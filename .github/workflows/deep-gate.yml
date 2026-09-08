@@ -160,8 +160,11 @@ jobs:
     #
     # Serial is the measured shape: 858.62s, 407.15s, 347.17s, 221.09s and 25.93s were
     # all read at two workers with the machine otherwise quiet (run 34176106076), and
-    # their sum, 1859.96s, is what this job now costs -- about five minutes more than
-    # `exhaustive-tier`, so it decides the gate's wall by that margin. `--inner-jobs 2`
+    # their sum, 1859.96s, was the prediction. The first serial run, 34183723509,
+    # measured 2174.84s -- 1069.84s, 476.20s, 374.98s, 227.15s and 26.67s, the screen
+    # 211s over its crowded reading and the other four within seventy seconds of theirs
+    # -- against 1370.06s in `exhaustive-tier` and 1288.54s in `deferred-slow-lane`, so
+    # this job decides the gate's wall by about thirteen minutes. `--inner-jobs 2`
     # is what the two corpus-scaled steps read: both size their pools from `PACK_JOBS`,
     # and the atlas rebuild is 348.15s at two workers against 691.19s serial on an idle
     # ten-cpu box. A fourth runner for the screen alone would buy those five minutes
@@ -328,10 +331,10 @@ jobs:
     # beside `deferred-steps` in one job it would do that here too, and the deep gate's
     # whole value is naming *which* deferral broke before the merge rather than after it.
     #
-    # It costs a second runner and, since `deferred-steps` went serial, about five
-    # minutes of wall: 1563s here in run 34181619739 against 1859.96s of measured step
-    # time there and 1356s in `deferred-slow-lane`, so the gate now finishes when
-    # `deferred-steps` does. `BC-218` priced a second job at "+3 billed
+    # It costs a second runner and, since `deferred-steps` went serial, no wall:
+    # 1370.06s here in run 34183723509 against 2174.84s of step time there and 1288.54s
+    # in `deferred-slow-lane`, so the gate finishes when `deferred-steps` does, about
+    # thirteen minutes after this job. `BC-218` priced a second job at "+3 billed
     # minutes and zero wall" and took it; this one is dearer in minutes and buys a
     # separable verdict, on a workflow requested by label or dispatch. The 2026-09-08
     # split above is the same trade made a third time, and for the sharper reason: the
