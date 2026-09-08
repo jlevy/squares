@@ -180,15 +180,24 @@ serif and the mathematics beside them.
 
 The fix is static instances at those three weights in both styles.
 kpress’s `devtools/instance_sans.py` generates them; `devtools/sans_instances.py` writes
-them to `packing/devtools/templates/fonts/` and hands them to `render_explainer_pdf`,
-which injects them into the loaded document as one `@media print` block of data-URI
-`@font-face` rules immediately before it prints.
+them to `packing/devtools/templates/fonts/` as
+`kpress-print-sans-latin-{weight}-{style}.woff2` and hands them to
+`render_explainer_pdf`, which injects them into the loaded document as one
+`@media print` block of data-URI `@font-face` rules immediately before it prints.
 The served page never sees them, so the screen keeps the variable font and
 `site/index.html` does not gain a byte.
 `render_explainer`’s inliner is what holds that: it drops every `@font-face` for the
-`Source Sans 3` family out of kpress’s stylesheets, and skips a stylesheet the prune
-empties, so registering `print-fonts.css` upstream left the rendered page byte for byte
-where it was.
+print sans family out of kpress’s stylesheets, and skips a stylesheet the prune empties,
+so registering `print-fonts.css` upstream left the rendered page byte for byte where it
+was.
+
+That family is `KPress Print Sans`, and no file on this side spells it.
+The instances are a modified Source Sans 3, whose OFL reserves the name “Source”, so
+kpress declares them under a name of its own; the prune, the probe that recognises the
+print stack, and the PostScript prefix (`KPressPrintSans-410`) the PDF scan watches for
+all read it back off the loaded generator through `sans_instances.print_family`. A
+literal would go on naming a family nothing declares the next time kpress renames it —
+which is how the rename that produced this paragraph was found.
 
 Two checks hold the rest.
 `sans_instances --check` regenerates the instances in memory and compares them byte for
@@ -211,10 +220,13 @@ exemption with a named list.
   probes the page, `--weights` lists every family, weight and style the page draws in
   under both media with the declaration behind each; `print_face_css()` is what
   `render_explainer_pdf` injects, and `PRINT_FACES` is the declared set.
+  `print_family()` and `postscript_prefix()` hand kpress’s family and the PostScript
+  name derived from it to the two other modules that need them, so the name has one
+  definition and it is kpress’s.
 - `python -m devtools.render_explainer_pdf --fonts` lists what the export embedded, what
-  it drew as outlines, and which host families are pending on a bead; `ALLOWED_FAMILIES`
-  and `EXPECTED_HOST_FONTS` are the provenance rule, and `shipped()` and
-  `host_font_bead()` are how the on-screen probe asks the same question.
+  it drew as outlines, and which host families are pending on a bead;
+  `allowed_families()` and `EXPECTED_HOST_FONTS` are the provenance rule, and
+  `shipped()` and `host_font_bead()` are how the on-screen probe asks the same question.
 - `relation_face_css(static)` in `render_explainer`, behind the shell’s
   `{{RELATION_CSS}}`: the three relation glyphs subset out of KaTeX_Main.
 - `inline_font_urls(css, stylesheet_dir)`: the second argument is the directory the
@@ -282,7 +294,7 @@ gone and the relation glyphs from a shipped face it is 781 KB, and the page is 1
 
 Tracked under epic `think-phgo`, with the kpress work under `kpr-b4mq`:
 
-- `think-988s`, this branch: the page’s own Source Sans 3 instances injected at PDF time
+- `think-988s`, this branch: the page’s own print sans instances injected at PDF time
   (the section above).
 - `think-zlxl`, done: one sans bold and one sans medium across the design system.
 - `think-xd7t`, done: the font provenance guard, on both sides.
@@ -332,10 +344,14 @@ purpose — one sans bold is the rule, not one weight for two families.
 
 `render_explainer_pdf --check` now reads every font dictionary in the export, embedded
 and outline alike, and fails on any family that is not one the page ships.
-`ALLOWED_FAMILIES` is `PTSerif`, `SourceSans3`, `KaTeX_`, `LocalPunct`,
-`KPressMathText`, and `Helvetica` as the 100-best atlas figure’s documented exception:
-its labels are baked into `known-best-1-100.svg` by `build_known_best_atlas.py` and stay
-by the owner’s decision, so no bead removes it.
+`allowed_families()` is `PTSerif`, `SourceSans3`, `KPressPrintSans`, `KaTeX_`,
+`LocalPunct`, `KPressMathText`, and `Helvetica` as the 100-best atlas figure’s
+documented exception: its labels are baked into `known-best-1-100.svg` by
+`build_known_best_atlas.py` and stay by the owner’s decision, so no bead removes it.
+`KPressPrintSans` is where the export’s sans actually is, and the list gets it from
+kpress rather than spelling it, through `sans_instances.postscript_prefix`;
+`SourceSans3` stays beside it, because a print run that missed the instances falls back
+to the variable face and the guard has to know that name too.
 
 `EXPECTED_HOST_FONTS` is the temporary list beside it, dated 2026-09-07, each entry
 naming the bead it waits on: `Menlo` for the inline code, on `kpr-v731`, and `Georgia`

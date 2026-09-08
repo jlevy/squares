@@ -510,11 +510,29 @@ def inline_font_urls(css: str, stylesheet_dir: Path) -> str:
     return inlined
 
 
-#: The family kpress declares its static print instances under, in
-#: `css/print-fonts.css`. Quoted, and compared whole: `"Source Sans 3 Variable"` is a
-#: different family and a different string, which is what lets one equality separate
-#: the screen's variable face from the print instances that stand in for it.
-PRINT_SANS_FAMILY = '"Source Sans 3"'
+@cache
+def print_sans_family() -> str:
+    """The family kpress declares its static print instances under, quoted as CSS has it.
+
+    Read from kpress's own generator rather than written down here, through
+    `devtools.sans_instances`, which already loads that module by path. The family is
+    kpress's to name -- it renamed it once, from `Source Sans 3` to `KPress Print Sans`,
+    when the OFL's reserved name made a family of its own necessary -- and a literal on
+    this side would have gone on pruning a family nothing declares, letting twelve
+    faces of base64 into every copy of the page served, silently.
+
+    Imported inside the function because `sans_instances` imports this module: the
+    cycle is only a problem at import time, and deferring it also keeps this module
+    loadable in a checkout whose kpress submodule is not initialised.
+
+    Quoted, and compared whole: `"Source Sans 3 Variable"` is a different family and a
+    different string, which is what lets one equality separate the screen's variable
+    face from the print instances that stand in for it.
+    """
+    from devtools.sans_instances import print_family  # noqa: PLC0415
+
+    return f'"{print_family()}"'
+
 
 #: A `@font-face` block's family, in either of the two shapes kpress and KaTeX write.
 FONT_FACE_FAMILY = re.compile(r"font-family:\s*(\"[^\"]+\"|[^;]+);")
@@ -542,7 +560,7 @@ def _print_sans_face(block: str) -> bool:
     name something else and are untouched.
     """
     family = FONT_FACE_FAMILY.search(block)
-    return family is not None and family.group(1).strip() == PRINT_SANS_FAMILY
+    return family is not None and family.group(1).strip() == print_sans_family()
 
 
 def _declares_nothing(css: str) -> bool:
@@ -924,9 +942,10 @@ RELATION_SIZE_ADJUST = 70
 #:
 #: `Source Sans 3 Variable` is the screen stack's name and the print stack's second, so a
 #: face declared on it is reachable in both media. The print stack's first name is
-#: `Source Sans 3`, and declaring the relation there as well is what the obvious reading
-#: suggests and what breaks the PDF: `render_explainer_pdf` injects this page's static
-#: instances into that family at 410, 550 and 680, and against a face declared over
+#: kpress's own print family, `KPress Print Sans`, and declaring the relation there as
+#: well is what the obvious reading suggests and what breaks the PDF:
+#: `render_explainer_pdf` injects this page's static instances into that family at 410,
+#: 550 and 680, and against a face declared over
 #: `200 900` an exact 410 does not win cleanly. Measured: the sans came back out of the
 #: export as Type3 outline paths and the file grew by 127 KB, which is `think-988s`
 #: undone. The instances carry the Latin `unicode-range` kpress gives them, so they
@@ -962,8 +981,8 @@ def relation_face_css(static: Path) -> str:
     Every face is declared once per family, which duplicates its bytes across the screen
     name and the print name. That is 2.7 KB rather than 1.4 KB, and it is the cost of not
     restating kpress's font stack in this page: the screen stack names only
-    `Source Sans 3 Variable` and the print stack puts `Source Sans 3` in front of it, so
-    a face declared on one is unreachable in the other medium.
+    `Source Sans 3 Variable` and the print stack puts `KPress Print Sans` in front of it,
+    so a face declared on one is unreachable in the other medium.
     """
     from fontTools import subset  # noqa: PLC0415
     from fontTools.ttLib import TTFont  # noqa: PLC0415
