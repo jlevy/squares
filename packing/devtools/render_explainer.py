@@ -1059,8 +1059,43 @@ def katex_css(static: Path) -> str:
             lambda match: match.group(0) if _font_face_reachable(match.group(0)) else "", css
         )
         parts.append(f"/* kpress: {name} */")
-        parts.append(inline_font_urls(pruned, (static / name).parent))
+        parts.append(_blocking_faces(inline_font_urls(pruned, (static / name).parent), name))
     return "\n".join(parts)
+
+
+#: KaTeX ships its faces `font-display: swap`, which is the opposite of what this page
+#: promises: swap invites the browser to paint a formula in whatever family the reader's
+#: machine offers and reflow it when the real face lands, and this page draws no glyph
+#: from a host font. kpress's own composite already declares `block` for that reason
+#: (`katex-text-face.css`), so this brings the KaTeX faces to the same rule.
+#:
+#: It also stops WebKit reporting a face that is merely in flight as a failure. WebKit
+#: maps its internal `TimedOut` state onto `FontFace.status === "error"`, and `swap` is
+#: a zero-length block period, so a swap face reads `error` from the moment its load
+#: starts until its bytes arrive; `block` reads `loading`, which is what it is.
+#: Measured on ubuntu-latest with the pinned WebKit: three identical data-URI faces
+#: differing only in `font-display` read `error` (swap), `loading` (block) and `loading`
+#: (auto) at 8 ms, and all three `loaded` at 52 ms, with all three `load()` promises
+#: resolved. Recorded in think-kdkq.
+#:
+#: Only KaTeX's own stylesheet is rewritten. kpress declares `swap` on the static print
+#: instances in `katex-text-face.css` deliberately -- a print run has no reader waiting
+#: at a blank line -- and those blocks are left as they are.
+SWAP_STYLESHEET = "katex/katex.min.css"
+SWAP_DISPLAY = re.compile(r"font-display:\s*swap")
+
+
+def _blocking_faces(css: str, name: str) -> str:
+    """Draw no fallback glyph: every screen face this page ships blocks until it lands."""
+    if name != SWAP_STYLESHEET:
+        return css
+    rewritten, count = SWAP_DISPLAY.subn("font-display:block", css)
+    if not count:
+        raise SystemExit(
+            f"{name} no longer declares `font-display: swap`; drop this rewrite rather "
+            f"than leaving a substitution that does nothing"
+        )
+    return rewritten
 
 
 #: The three characters this page sets in a sans run that no text face it ships carries:

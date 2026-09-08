@@ -404,11 +404,26 @@ The
 [validation efficiency plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
 owns the current review of this placement and cost.
 
-A terminal session names its full-gate run in its `checks`: the tier, the commit it ran
-on, and the verdict.
-A session that cannot name one has not finished, whatever its cells say.
-The commit matters as much as the verdict, because a gate run on a tree three commits
-behind the handover certifies nothing about what was handed over.
+A completed session names its certifying gate in `checks`: the tier, the commit it ran
+on, and the actual passing verdict.
+The commit matters as much as the verdict, because a gate run on an earlier tree does
+not cover later changes merely because it is an ancestor.
+
+Stopping work is different from certifying its handover.
+A stopped session whose certification remains outstanding declares
+`certification_pending` with its follow-up bead, a nonblank stop reason, and that same
+bead in `next_action`. The checker reports it as **UNCERTIFIED**, separately from
+certified sessions. It need not invent a gate attempt to record a stop; actual failed
+declarations remain failed and retain their provenance checks.
+The marker cannot accompany a canonical passed fast/full declaration or a completed
+session. After an actual qualifying pass covers the handover, record that receipt and
+remove the marker without reopening the stopped scientific work.
+This makes an unsuccessful checkpoint recoverable; it does not supply research assurance
+or replace the current full pre-merge evidence required above.
+
+The distinction was independently reviewed under `think-9cvw` in a separate efficiency
+block after Session097 stopped: requiring an earlier pass to validate a failed stopped
+checkpoint prevented collecting a new pass without misrepresenting the record.
 
 The boundary is enforced, never curated.
 A hand-maintained list of slow tests rots exactly the way the 499-second docstring

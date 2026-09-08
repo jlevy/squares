@@ -28,6 +28,7 @@ from devtools.check_print_layout import (
     _ACTIVE_MATH_TEXT,  # pyright: ignore[reportPrivateUsage]
     _PROBE,  # pyright: ignore[reportPrivateUsage]
     _PROVER_LAYOUT,  # pyright: ignore[reportPrivateUsage]
+    _READOUT_TEXT,  # pyright: ignore[reportPrivateUsage]
     _ROTATION_TARGET,  # pyright: ignore[reportPrivateUsage]
     BOXED_TOLERANCE_PX,
     TOLERANCE_PX,
@@ -511,6 +512,51 @@ for (const prose of ['serif', 'sans']) {
 // Wrong active content must remain observable to the certificate comparison.
 nodes[2].textContent = '999';
 assert.deepEqual(terms(nodes), ['999', '10']);
+"""
+    completed = node(
+        ["-"], return_completed_process=True, input=script, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
+
+
+def test_readout_text_excludes_dormant_variants_and_semantics_but_keeps_fallback() -> None:
+    """Hidden expected values cannot mask a wrong active readout or replace its glyphs."""
+    script = r"""
+const assert = require('node:assert/strict');
+const NodeFilter = {SHOW_TEXT: 4};
+const document = {
+  documentElement: {dataset: {}},
+  createTreeWalker: el => {
+    const nodes = el.nodes[Symbol.iterator]();
+    return {nextNode: () => nodes.next().value || null};
+  },
+};
+const make = (contexts, textContent, semantic = false) => ({
+  textContent,
+  parentElement: {closest: selector => selector === '.katex-mathml'
+    ? (semantic ? {} : null)
+    : (contexts ? {dataset: {squaresMathContexts: contexts}, parentElement: null} : null)},
+});
+const active = make('custom-serif custom-sans', 'wrong visible value');
+const readout = {nodes: [
+  make(null, 'direction: '), active,
+  make('custom-serif custom-sans', '12219313/45000000 30.3836', true),
+  make('system-serif system-sans', '12219313/45000000 30.3836'),
+]};
+"""
+    script += f"const text = ({_READOUT_TEXT});\n"
+    script += r"""
+for (const prose of ['serif', 'sans']) {
+  document.documentElement.dataset.kpressProseFont = prose;
+  document.documentElement.dataset.kpressFontSet = 'custom';
+  assert.equal(text(readout), 'direction: wrong visible value');
+  document.documentElement.dataset.kpressFontSet = 'system';
+  assert.equal(text(readout), 'direction: 12219313/45000000 30.3836');
+}
+// A fresh client render has no profile wrapper; a failed render preserves raw TeX.
+assert.equal(text({nodes: [make(null, 'x=2')]}), 'x=2');
+assert.equal(text({nodes: [make(null, String.raw`\frac{7}{8}`)]}), String.raw`\frac{7}{8}`);
+assert.equal(text({nodes: []}), '');
 """
     completed = node(
         ["-"], return_completed_process=True, input=script, capture_output=True, text=True
