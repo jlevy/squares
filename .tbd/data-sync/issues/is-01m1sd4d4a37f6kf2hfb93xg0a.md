@@ -5,12 +5,14 @@ title: "BC-215: stop re-running expensive gate work whose inputs have not change
 kind: task
 status: open
 priority: 0
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m1z89p53q8kbsrmd0t81bqeg
 created_at: 2026-09-05T18:26:13.770Z
-updated_at: 2026-09-06T21:15:42.806Z
+updated_at: 2026-09-08T00:57:10.562Z
 ---
 
 ## Notes
