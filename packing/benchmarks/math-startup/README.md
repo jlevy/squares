@@ -120,6 +120,15 @@ source, commands, outputs and coverage proof from
 publication and checker changes require their affected tests and final Pages checks;
 this checkpoint does not by itself certify those changes.
 
+The final Pages validation at `dab2a381` passed on 2026-09-08 at 22:06 UTC.
+[Exp-009](experiments/exp-009-protected-hosted-parameter-pairs.md) satisfies H-006’s
+unchanged timing and sampler bounds, and
+[exp-010](experiments/exp-010-protected-hosted-font-geometry.md) passes H-004’s complete
+twenty-nine-cell geometry matrix and rendering checks.
+The frozen inputs, raw reports, and successful workflow receipts remain in this
+campaign. These results certify that source; the subsequent integration of main’s
+Planetaire Mono adoption has a separate publication-correctness obligation.
+
 ## Measurement protocol
 
 Run `python -m devtools.check_math_startup` through the frozen project environment from

@@ -2862,6 +2862,83 @@ Decision: **correctness failed**. All sixteen completed screen settings and the 
 - chromium 1280px print system-serif: measured geometry exceeds 1px
 - missing registered browser/width cells: [('webkit', 390, 'custom-sans'), ('webkit', 390, 'custom-serif'), ('webkit', 390, 'system-sans'), ('webkit', 390, 'system-serif'), ('webkit', 1280, 'custom-sans'), ('webkit', 1280, 'custom-serif'), ('webkit', 1280, 'system-sans'), ('webkit', 1280, 'system-serif')]
 
+## exp-009: Protected queued startup passes the registered timing rule
+
+- 390px: control 469.8 (458.5 to 893.7), candidate 320.9 (317.5 to 327.7); paired change -31.4% (95% interval -33.3% to -30.3%; 12 pairs).
+  Recorded sampler work: control 2.4 (2.2 to 3.0), candidate 5.4 (4.9 to 5.9).
+
+Startup diagnostics, median (minimum to maximum) across runs:
+
+| Observation | Control | Candidate |
+| --- | --- | --- |
+| Runtime available (ms) | 65.4 (62.6 to 159.3) | 223.9 (218.8 to 252.3) |
+| KaTeX render calls | 199.0 (199.0 to 199.0) | 0.0 (0.0 to 0.0) |
+| Runtime render calls | 211.0 (211.0 to 211.0) | 0.0 (0.0 to 0.0) |
+| Runtime hydrate calls | 0.0 (0.0 to 0.0) | 211.0 (211.0 to 211.0) |
+| Font load calls | 36.0 (36.0 to 36.0) | 540.0 (540.0 to 540.0) |
+| Per-run median font promise (ms) | 129.0 (125.2 to 457.3) | 1.3 (1.3 to 1.5) |
+| Per-run longest font promise (ms) | 135.1 (131.3 to 463.5) | 4.7 (4.4 to 6.9) |
+| All six dynamic readouts exposed (ms) | 469.8 (458.5 to 893.7) | 320.9 (317.5 to 327.7) |
+| Dynamic readouts to all fourteen (ms) | 0.0 (0.0 to 0.0) | 0.0 (0.0 to 0.0) |
+
+Font promise durations include JavaScript scheduling; they are not isolated font-decoding measurements.
+
+- 1280px: control 465.9 (453.8 to 613.4), candidate 401.6 (394.5 to 416.6); paired change -14.2% (95% interval -16.4% to -13.3%; 12 pairs).
+  Recorded sampler work: control 2.3 (2.2 to 2.6), candidate 5.6 (5.3 to 6.2).
+
+Startup diagnostics, median (minimum to maximum) across runs:
+
+| Observation | Control | Candidate |
+| --- | --- | --- |
+| Runtime available (ms) | 65.5 (63.0 to 69.0) | 328.9 (319.5 to 343.9) |
+| KaTeX render calls | 205.0 (205.0 to 205.0) | 0.0 (0.0 to 0.0) |
+| Runtime render calls | 217.0 (217.0 to 217.0) | 0.0 (0.0 to 0.0) |
+| Runtime hydrate calls | 0.0 (0.0 to 0.0) | 211.0 (211.0 to 211.0) |
+| Font load calls | 36.0 (36.0 to 36.0) | 540.0 (540.0 to 540.0) |
+| Per-run median font promise (ms) | 128.3 (126.1 to 261.4) | 1.4 (1.2 to 1.4) |
+| Per-run longest font promise (ms) | 134.2 (132.2 to 267.6) | 4.5 (4.3 to 4.8) |
+| All six dynamic readouts exposed (ms) | 465.9 (453.8 to 613.4) | 401.6 (394.5 to 416.6) |
+| Dynamic readouts to all fourteen (ms) | 0.0 (0.0 to 0.0) | 0.0 (0.0 to 0.0) |
+
+Font promise durations include JavaScript scheduling; they are not isolated font-decoding measurements.
+
+
+Decision: **accepted**. Both widths satisfy the fixed paired improvement and sampler bounds, and the same publication passes the complete geometry and rendering checks. Retain the combined repair; the observations establish its improvement over the frozen control without attributing the effect to one edit or certifying later integration changes.
+
+## exp-010: Protected queued math passes every registered font setting
+
+- chromium 1280px print custom-sans: 223 bases; maximum movement 0.000px; maximum final width error 0.156px.
+- chromium 1280px screen custom-sans: 261 bases; maximum movement 0.000px; maximum final width error 0.031px.
+- chromium 1280px print custom-serif: 223 bases; maximum movement 0.000px; maximum final width error 0.078px.
+- chromium 1280px screen custom-serif alternate certificate: 261 bases; maximum movement 0.000px; maximum final width error 0.031px.
+- chromium 1280px screen custom-serif: 261 bases; maximum movement 0.000px; maximum final width error 0.031px.
+- chromium 1280px print system-sans: 223 bases; maximum movement 0.000px; maximum final width error 0.094px.
+- chromium 1280px screen system-sans: 261 bases; maximum movement 0.000px; maximum final width error 0.031px.
+- chromium 1280px print system-serif: 223 bases; maximum movement 0.000px; maximum final width error 0.094px.
+- chromium 1280px screen system-serif: 261 bases; maximum movement 0.000px; maximum final width error 0.031px.
+- chromium 390px screen custom-sans: 261 bases; maximum movement 0.000px; maximum final width error 0.031px.
+- chromium 390px screen custom-serif: 261 bases; maximum movement 0.000px; maximum final width error 0.031px.
+- chromium 390px screen system-sans: 261 bases; maximum movement 0.000px; maximum final width error 0.031px.
+- chromium 390px screen system-serif: 261 bases; maximum movement 0.000px; maximum final width error 0.031px.
+- firefox 1280px screen custom-sans: 261 bases; maximum movement 0.000px; maximum final width error 0.083px.
+- firefox 1280px screen custom-serif: 261 bases; maximum movement 0.000px; maximum final width error 0.083px.
+- firefox 1280px screen system-sans: 261 bases; maximum movement 0.000px; maximum final width error 0.117px.
+- firefox 1280px screen system-serif: 261 bases; maximum movement 0.000px; maximum final width error 0.117px.
+- firefox 390px screen custom-sans: 261 bases; maximum movement 0.000px; maximum final width error 0.083px.
+- firefox 390px screen custom-serif: 261 bases; maximum movement 0.000px; maximum final width error 0.083px.
+- firefox 390px screen system-sans: 261 bases; maximum movement 0.000px; maximum final width error 0.117px.
+- firefox 390px screen system-serif: 261 bases; maximum movement 0.000px; maximum final width error 0.117px.
+- webkit 1280px screen custom-sans: 261 bases; maximum movement 0.000px; maximum final width error 0.141px.
+- webkit 1280px screen custom-serif: 261 bases; maximum movement 0.000px; maximum final width error 0.141px.
+- webkit 1280px screen system-sans: 261 bases; maximum movement 0.000px; maximum final width error 0.109px.
+- webkit 1280px screen system-serif: 261 bases; maximum movement 0.000px; maximum final width error 0.109px.
+- webkit 390px screen custom-sans: 261 bases; maximum movement 0.000px; maximum final width error 0.141px.
+- webkit 390px screen custom-serif: 261 bases; maximum movement 0.000px; maximum final width error 0.141px.
+- webkit 390px screen system-sans: 261 bases; maximum movement 0.000px; maximum final width error 0.109px.
+- webkit 390px screen system-serif: 261 bases; maximum movement 0.000px; maximum final width error 0.109px.
+
+Decision: **accepted**. All twenty-nine required observations pass with complete reservations, zero movement, and intrinsic width agreement within one pixel. The retained controls reject broken widths, missing reservations, font metrics, carrier struts, queue protection, print selection, and native fallback; accept the geometry correction for this exact source.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

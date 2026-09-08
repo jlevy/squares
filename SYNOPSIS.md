@@ -557,12 +557,14 @@ controller, not permission to blur contracts.
 
 **Math startup release checkpoint.**
 [Session107](packing/campaign/agent-sessions/session-107-font-startup-stability.md)
-records prepared geometry, parameter-first hydration and the passing source checkpoints.
-The latest hosted timing comparison passes its numerical rule, but print geometry and
-WebKit first exposure still fail.
-Queue recovery and print carrier repairs, combined validation, the authorized merge and
-deployed verification remain ongoing under `think-qcmi`; H-006 is registered before the
-next dispatch. The research selection below remains unchanged.
+records completed source work and local validation at `dab2a381`, including prepared
+geometry, parameter-first hydration and native reload restoration.
+[PR 135](https://github.com/jlevy/squares/pull/135) passed its hosted checks at that
+source. Main then advanced through PR 134 to `7ef80525`; integration and affected
+validation remain ongoing under `think-qcmi`. The earlier failed comparisons remain
+retained. H-006 and H-004 records, the authorized merge and deployed verification are
+still release closeout work.
+The research selection below remains unchanged.
 
 **Atlas expansion to `n = 324`, owner-directed, beside the research line.**
 [The plan](docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md) under
@@ -3232,7 +3234,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-096.yaml` | session-096 | 520 | 3.79 h | 1.4 h | 1.4 h | yes |
 | `codex-task-tree-session-105.yaml` | session-105 | 667 | 3.77 h | 1.92 h | 1.92 h | yes |
 | `codex-task-tree-session-106.yaml` | session-106 | 1,467 | 14.71 h | 8.0 h | 8.0 h | yes |
-| `codex-task-tree-session-107.yaml` | session-107 | 2,214 | 16.28 h | 4.97 h | 4.98 h | yes |
+| `codex-task-tree-session-107.yaml` | session-107 | 2,798 | 20.24 h | 6.22 h | 6.23 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
