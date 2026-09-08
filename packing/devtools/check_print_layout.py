@@ -62,6 +62,15 @@ class Marker(TypedDict):
     lineHeight: float
 
 
+class Bullet(TypedDict):
+    """A drawn unordered-list marker, including one whose CSS no longer paints it."""
+
+    path: str
+    width: float
+    height: float
+    painted: bool
+
+
 class Footnote(TypedDict):
     """How much of a footnote reference's own line lies in front of it."""
 
@@ -92,6 +101,7 @@ class Probe(TypedDict):
 
     centred: list[Centred]
     markers: list[Marker]
+    bullets: list[Bullet]
     footnotes: list[Footnote]
     boxed: list[Boxed]
     overflow: list[Overflow]
@@ -125,6 +135,9 @@ TOLERANCE_PX = 1.0
 #: one-pixel tolerance would have called clean.
 BOXED_TOLERANCE_PX = 0.5
 
+#: Both dimensions come from the same computed box; only rounding needs tolerance.
+BULLET_TOLERANCE_PX = 0.1
+
 #: The measure the PDF actually has, in CSS pixels. `emulate_media` switches which media
 #: queries match; it does not paginate and it does not apply the `@page` box. So the
 #: default 1280px viewport leaves the column at whatever `--kpress-measure` caps it to --
@@ -137,7 +150,7 @@ PRINT_VIEWPORT: ViewportSize = {"width": 816 - 2 * 120, "height": 1056 - 2 * 120
 #: apart: the whole point is comparing like with like across `emulateMedia`.
 _PROBE = r"""() => {
   const out = {
-    centred: [], markers: [], footnotes: [], boxed: [], overflow: [],
+    centred: [], markers: [], bullets: [], footnotes: [], boxed: [], overflow: [],
     pageOverflow: 0, widest: null,
     /* Named so a viewport that did not take is visible in the output rather than
        silently making every horizontal answer wrong. */
@@ -173,12 +186,14 @@ _PROBE = r"""() => {
   /* Markers. The list bullet is not a `::marker`: kpress sets `list-style-type: none`
      and draws an absolutely positioned `::before`, so there is no marker box to
      measure. Its top edge is the `li`'s content-box top plus the pseudo-element's own
-     `top`, and its height is its line box, which is what `lineHeight` computes to. The
-     line it should sit on is the `li`'s first line box, taken as a Range over the first
-     text node rather than as the `li`'s own box, which spans every line. */
+     `top`; its computed height measures the painted square or the numbered marker's
+     box. The line it should sit on is the `li`'s first line box, taken as a Range over
+     the first text node rather than as the `li`'s own box, which spans every line. */
   for (const li of document.querySelectorAll('.kpress li')) {
     const before = getComputedStyle(li, '::before');
     const own = getComputedStyle(li);
+    const bullet = bulletBox(li, before);
+    if (bullet) out.bullets.push(bullet);
     /* `top` is measured from the containing block's padding edge, and the containing
        block is the `li` only while it is positioned. If kpress ever drops that, the
        offset is against something else and this arithmetic would quietly measure the
@@ -292,6 +307,20 @@ _PROBE = r"""() => {
   return out;
 
   function round(v) { return Math.round((v || 0) * 100) / 100; }
+
+  /* A centered rectangle can still be a vertical bar. Record shape and paint before
+     the centering probe skips missing pseudo-elements; ordered markers are text. */
+  function bulletBox(li, before) {
+    if (li.parentElement?.tagName !== 'UL' || !li.getClientRects().length) return null;
+    return {
+      path: sig(li),
+      width: round(parseFloat(before.width)),
+      height: round(parseFloat(before.height)),
+      painted: before.content === '""' && before.display !== 'none'
+        && before.visibility === 'visible' && Number(before.opacity) > 0
+        && !['transparent', 'rgba(0, 0, 0, 0)'].includes(before.backgroundColor),
+    };
+  }
 
   /* The run that reaches farthest past the page, among the runs that can put it there.
      Among: a box whose ink an ancestor clips away has nothing past that ancestor's edge
@@ -422,6 +451,7 @@ _PROBE = r"""() => {
 #: would print the whole document at 93.2%.
 SELF_CHECK_PX = 42.0
 SELF_CHECK_CLASS = "print-layout-self-check"
+SELF_CHECK_BULLET_CLASS = f"{SELF_CHECK_CLASS}-bullet"
 
 #: Geometry and computed type sizes, rather than a match on the stylesheet that
 #: intended them. The active certificate is checked at each screen width.
@@ -762,8 +792,9 @@ def touch_findings(page: Page) -> list[str]:
 #: A block the print column cannot contain, appended to the page. Given its margins and
 #: its width outright, because the column centres its blocks and caps their measure: a
 #: block merely handed a width comes back centred at half the overhang, which is how the
-#: first draft of this control quietly measured nothing.
-_OVERSHOOT = r"""(spec) => {
+#: first draft of this control quietly measured nothing. The same pass stretches one
+#: real list bullet to reproduce the glyph-to-box regression without another browser.
+_SELF_CHECK_DEFECTS = r"""(spec) => {
   const root = document.documentElement;
   const page = document.querySelector('.kpress');
   if (!page) throw new Error('no .kpress column to overflow');
@@ -777,6 +808,15 @@ _OVERSHOOT = r"""(spec) => {
      `over` is the one that reaches `over` past it from wherever the column starts. */
   const start = el.getBoundingClientRect().left;
   el.style.setProperty('width', `${root.clientWidth + spec.over - start}px`, 'important');
+  const bullet = page.querySelector('ul > li');
+  if (!bullet) throw new Error('no unordered-list bullet to stretch');
+  bullet.classList.add(spec.bullet);
+  const style = document.createElement('style');
+  style.textContent = `.${spec.bullet}::before {
+    content: "" !important; background: currentColor !important;
+    width: 3px !important; height: 1lh !important; top: 0 !important;
+  }`;
+  document.head.appendChild(style);
 }"""
 
 
@@ -845,6 +885,14 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
             for row in probe["markers"]
             if abs(row["markerCentre"] - row["lineCentre"]) > TOLERANCE_PX
         )
+        for bullet in probe["bullets"]:
+            if not bullet["painted"] or min(bullet["width"], bullet["height"]) <= 0:
+                found.append(f"{medium}: list bullet is missing ({bullet['path']})")
+            elif abs(bullet["width"] - bullet["height"]) > BULLET_TOLERANCE_PX:
+                found.append(
+                    f"{medium}: list bullet is {bullet['width']:.2f} by "
+                    f"{bullet['height']:.2f}px instead of square ({bullet['path']})"
+                )
         # Under one em there is no word in front of the reference, only stray punctuation
         # that wrapped down with it, and it reads as opening the line.
         found.extend(
@@ -902,7 +950,7 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
 
 
 def self_check(page_url: str) -> int:
-    """Put a known overflow in front of the gate, and hold the gate to naming it.
+    """Put an overflow and a stretched bullet in front of the gate and require both.
 
     A check that has only ever passed cannot tell itself apart from one that cannot fail,
     and this one has a second way to be useless: it can fail loudly at the right size and
@@ -918,8 +966,12 @@ def self_check(page_url: str) -> int:
     """
     measured = measure(
         page_url,
-        inject=_OVERSHOOT,
-        spec={"over": SELF_CHECK_PX, "name": SELF_CHECK_CLASS},
+        inject=_SELF_CHECK_DEFECTS,
+        spec={
+            "over": SELF_CHECK_PX,
+            "name": SELF_CHECK_CLASS,
+            "bullet": SELF_CHECK_BULLET_CLASS,
+        },
     )
     printed = measured["print"]
     column = printed["viewport"]
@@ -953,6 +1005,13 @@ def self_check(page_url: str) -> int:
         wrong.append(
             f"the named culprit overhangs by {widest['over']:.2f}px, not {SELF_CHECK_PX}"
         )
+    if not any(
+        line.startswith("print: list bullet")
+        and "instead of square" in line
+        and SELF_CHECK_BULLET_CLASS in line
+        for line in found
+    ):
+        wrong.append("the gate did not report the stretched unordered-list bullet")
 
     for line in wrong:
         print(f"self-check failed: {line}")
@@ -960,7 +1019,7 @@ def self_check(page_url: str) -> int:
         return 1
     print(
         f"self-check passed: the gate fails on a {SELF_CHECK_PX:.0f}px overflow, reports the "
-        f"{scale} scale, and names the block that caused it"
+        f"{scale} scale, names the block that caused it, and rejects the stretched bullet"
     )
     return 0
 
@@ -977,7 +1036,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--self-check",
         action="store_true",
-        help="overflow the print column on purpose, and check the gate fails and names it",
+        help="inject an overflow and a stretched bullet, and check the gate names both",
     )
     args = parser.parse_args(argv)
 

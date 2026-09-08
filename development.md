@@ -238,7 +238,7 @@ n = 1..324 corpus.
 They sum to the 4,303 tests the suite collects, which is the partition
 property above; they are not a fixed membership, and they move with the corpus.
 The quick lane read 3,944 here until 2026-09-08, when a re-count against the same
-expressions returned 4,151; a stale count in this table is how [D-485](defects.md)’s
+expressions returned 4,151; a stale count in this table is how [D-488](defects.md)’s
 cause stayed invisible, since the tests grew and the budget bounding them did not.
 [Main run 34025346801](https://github.com/jlevy/squares/actions/runs/34025346801)
 reported 2,197 quick and 95 slow on 2026-09-06, before the corpus expansion of
@@ -476,7 +476,7 @@ not finish it: the step is killed at 1800 s and the tier returns red on a change
 fine, without naming a failing test.
 At `--jobs 1` the same selection took 1403 s, inside the cap.
 
-[D-485](defects.md) is that timeout, and what it fixed is narrower than the failure:
+[D-488](defects.md) is that timeout, and what it fixed is narrower than the failure:
 until it, `_xdist_distribution`’s flag never reached the selector’s pytest at all, so
 `--jobs 1` was serial too and there was no shape that worked.
 There is one now, but it is not the default, and it is not the `{jobs: 2, cpus: 2}`
@@ -703,7 +703,7 @@ the edition stamp is the one `sqpack.release` names, that every repository link 
 that commit and resolves on GitHub, and that the PDF is a PDF.
 
 **The stamp in the credits has two parts, and they move on different clocks.** The
-version (`v0.2.4`) is editorial and pinned in `src/sqpack/release.py`; the hash after it
+version (`v0.3.0`) is editorial and pinned in `src/sqpack/release.py`; the hash after it
 is the commit the page is built from, read at render time (`page_edition()`), so it
 changes on every push, and a reader of the deployed page sees exactly which commit they
 are looking at. The atlas footer and the generated claim documents are checked in and

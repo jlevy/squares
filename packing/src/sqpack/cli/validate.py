@@ -3798,7 +3798,7 @@ def _push_test_step(base: str) -> Step:
                 # selector's runner cannot work it out: `cpus - jobs + 1` is about how many
                 # outer slots this run has busy, which only the caller knows. Without it the
                 # step ran in one process at every shape, `--jobs 1` included, which is
-                # `D-485`. The selector expands to everything for any workflow or
+                # `D-488`. The selector expands to everything for any workflow or
                 # suite-configuration change, so the serial case was the whole non-exhaustive
                 # suite -- quick lane and slow lane together.
                 *_xdist_distribution(context.jobs),

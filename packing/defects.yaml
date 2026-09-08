@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 485
+count: 488
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -16008,6 +16008,90 @@ defects:
   bead: think-ph9v
   recorded_in: packing/src/sqpack/cli/validate.py
 - id: D-485
+  title: A glyph-centering override stretched CSS bullet squares into vertical bars
+  date: '2026-09-08'
+  layer: tooling
+  class: robustness
+  detected_by: anomaly
+  latent_for: from PR 128 until the user reported the broken lists
+  severity: high
+  status: fixed
+  what: >-
+    Merge 33cd4760 advanced kpress from aee6df7c to 7b20ae70, incorporating feb089d6,
+    which replaced unordered-list glyph markers with painted 0.226em squares.
+    The explainer's existing height: 1lh override then stretched those squares to the
+    full line height. Its center-only layout check accepted the centered bars.
+  consequence: >-
+    Every unordered list, including nested lists, displayed vertical bars resembling
+    block quotes in both the browser and the exported PDF.
+  fix: >-
+    Preserve the marker dimensions and center each square with its top offset.
+    Extend the existing layout probe to check unordered-list marker visibility and
+    square dimensions, independently of the center check and ordered-list markers.
+  regression: >-
+    packing/tests/test_check_print_layout.py covers centered bars, missing markers,
+    and correctly drawn squares. devtools.check_print_layout --self-check stretches
+    one actual browser bullet and requires the guard to name the shape defect.
+  bead: think-5qaz
+  recorded_in: docs/project/reviews/review-2026-09-08-paper-font-merge.md
+- id: D-486
+  title: Font pruning ignored the saved sans serif reading preference
+  date: '2026-09-08'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: from PR 128 until review exercised the saved sans preference
+  severity: medium
+  status: fixed
+  what: >-
+    PR 128 introduced the sans math composite while pruning all its 650-weight slots
+    on the assumption that bold mathematics appeared only in serif prose. The
+    supported kpress.proseFont=sans preference makes the three bold D symmetry-group
+    expressions request a 650-weight face the page no longer ships.
+  consequence: >-
+    The browser substitutes a different weight for bold mathematics under the saved
+    sans preference. Restoring the missing slot changes the measured glyph width.
+    Default-preference font and PDF checks did not exercise the failing state.
+  fix: >-
+    Retain the normal 650-weight sans slot and its matching static print face.
+    Run the existing browser math-face check under both supported prose preferences,
+    verifying the rendered face and metric table in screen and print media.
+  regression: >-
+    packing/tests/test_render_explainer_fonts.py requires the reachable sans bold slot
+    to survive pruning. devtools.check_math_faces exercises both saved prose
+    preferences and its self-test rejects a missing sans bold face.
+  bead: think-lghs
+  recorded_in: docs/project/reviews/review-2026-09-08-paper-font-merge.md
+- id: D-487
+  title: Detaching a font inspection session silently ended print emulation
+  date: '2026-09-08'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: from PR 128 until the saved sans preference exposed the medium switch
+  severity: medium
+  status: fixed
+  what: >-
+    The math-face checker introduced in PR 128 opened and detached a Chromium CDP
+    session for each glyph sample. Detachment reset print emulation, so after the
+    first print sample the checker inspected screen fonts while reporting print.
+    The default serif preference hid the switch because its prose face is shared
+    across both media.
+  consequence: >-
+    A passing check did not establish that the later sampled print fonts matched
+    their declared faces. Exercising sans prose exposed the mismatch between the
+    variable screen face and the static print face.
+  fix: >-
+    Keep the inspection session attached throughout the medium's samples, restore
+    the medium after detachment, and verify that print emulation survives sampling.
+  regression: >-
+    devtools.check_math_faces --self-test checks two print samples and requires
+    print emulation to remain active. The normal browser check exercises both
+    saved prose preferences in screen and print media.
+  bead: think-4c0o
+  recorded_in: docs/project/reviews/review-2026-09-08-paper-font-merge.md
+- id: D-488
   title: The pre-push tier ran its whole-suite step in one process and could not finish it
   date: '2026-09-08'
   layer: tooling

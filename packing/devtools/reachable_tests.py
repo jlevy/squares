@@ -252,7 +252,7 @@ def pytest_command(targets: Sequence[str], workers: int) -> tuple[str, ...]:
     worker is a subprocess and a protocol for no concurrency, which is slower than not
     asking.
 
-    `D-485` is what this argument closes. The selector's runner had no distribution at
+    `D-488` is what this argument closes. The selector's runner had no distribution at
     all, so the pre-push tier's behavioural step ran in one process at every `--jobs`
     value, including the `--jobs 1` that `_xdist_distribution` documents as the way to
     get four workers on a four-cpu box. The whole-suite fallback is the expensive case:

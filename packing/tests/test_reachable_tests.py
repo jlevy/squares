@@ -114,7 +114,7 @@ def test_push_is_its_own_tier() -> None:
 
 
 def test_the_selection_runs_under_the_workers_the_caller_asks_for() -> None:
-    """`D-485`: the runner carried no distribution, so every push ran its tests serially.
+    """`D-488`: the runner carried no distribution, so every push ran its tests serially.
 
     The number is the caller's to choose -- `cpus - jobs + 1` is about how many outer
     slots are already busy, which this module cannot see -- so what is pinned here is
@@ -135,7 +135,7 @@ def test_the_push_step_forwards_the_distribution_both_lanes_use(
 ) -> None:
     """The step the pre-push tier builds must carry the flag, not merely accept one.
 
-    `D-485` lived in the gap between those two: `devtools.reachable_tests` grew no
+    `D-488` lived in the gap between those two: `devtools.reachable_tests` grew no
     distribution and `sqpack.cli.validate` passed none, so the rule `_xdist_distribution`
     documents -- four workers at `--jobs 1` on a four-cpu box -- was silently not applied
     on the one tier a contributor runs before every push. Pinning the caller's side as
@@ -184,7 +184,7 @@ def test_the_runner_wires_its_argument_to_the_command_it_builds(
 
     Both of them can pass while `main` builds its command with a literal instead of
     `namespace.numprocesses` -- the CLI would accept `-n` and silently drop it, which is
-    D-485's own shape one layer in: an argument that exists and does not arrive. This
+    D-488's own shape one layer in: an argument that exists and does not arrive. This
     reads the argv the runner actually hands to `subprocess.run`.
     """
     selection = SimpleNamespace(everything=True, tests=(), reason="everything here")
