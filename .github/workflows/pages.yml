@@ -171,6 +171,16 @@ jobs:
           uv run --frozen --group dev python -m devtools.inspect_explainer_typography --check-supporting --theme light
           uv run --frozen --group dev python -m devtools.inspect_explainer_typography --check-supporting --theme dark --width 390
 
+      # Which composite draws each expression, which metric table laid it out, and
+      # whether the faces were loaded before the first one was painted. None of the three
+      # is readable in the rendered HTML: the mark that decides the face is stamped by the
+      # page's own init at render time, and an error inside that init leaves every check
+      # above green while every formula quietly falls back to the serif composite.
+      - name: Check the mathematics is set in the face of the words around it
+        run: |
+          uv run --frozen --group dev python -m devtools.check_math_faces --self-test
+          uv run --frozen --group dev python -m devtools.check_math_faces
+
       - name: Upload the page artifact
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
