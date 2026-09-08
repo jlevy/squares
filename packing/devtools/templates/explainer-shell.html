@@ -34,6 +34,11 @@
 <meta name="twitter:image" content="{{CARD_IMAGE_URL}}">
 <meta name="twitter:image:alt" content="{{CARD_ALT}}">
 <style>{{KPRESS_CSS}}</style>
+<!-- The relation, the approximation sign and the arrow, subset out of KaTeX_Main and
+     declared on the sans families the page already ships. Source Sans 3 carries none of
+     the three, so without these the reader's own machine draws them: a different face
+     for every reader, and outline paths in the PDF. See `relation_face_css`. -->
+<style>{{RELATION_CSS}}</style>
 <script>{{THEME_BOOTSTRAP}}</script>
 <style>
 /* ============================================================
@@ -91,10 +96,18 @@ body {
    Figure text, captions and footnotes share one supporting-text role.
    Print keeps the same size ratio.
    Scope the bold token to sans components because KPress also uses it for serif
-   emphasis. Diagram labels with explicit SVG weights join the same scale. */
+   emphasis. Diagram labels with explicit SVG weights join the same scale.
+
+   Three weights and no others, which is the rule rather than the tally: one bold
+   everywhere in the sans, one medium everywhere, one light for supporting text.
+   `sans_instances --weights` lists what the page asks for in both media with the
+   declaration behind each request, and it is how a fourth weight is found. Two used
+   to be there: the caption label sat at the medium while the title credits were bold,
+   and the footnote controls at KPress's literal 600, which is neither token. */
 :root {
   --cert-font-scale-sans: calc(19 / 18);
   --cert-font-weight-sans-light: 410;
+  --cert-font-weight-sans-medium: 550;
   --cert-font-weight-sans-bold: 680;
   --paper-title-scale: 1.5;
   --paper-subtitle-scale: 1.25;
@@ -126,12 +139,23 @@ body {
 }
 .cert-page, .kpress-tooltip {
   --kpress-font-weight-sans-light: var(--cert-font-weight-sans-light);
+  /* The medium is mapped at this scope rather than at the sans components' because it
+     is the same 550 KPress already uses, so nothing the page does not own can change
+     under it; naming it here is what lets every medium on the page read as a token. */
+  --kpress-font-weight-sans-medium: var(--cert-font-weight-sans-medium);
 }
 .cert-page :is(.credits, .kpress-figcaption, .kpress-footnotes, .colophon,
   .mass-line, .panel, .tip-panel, .line-fig, .chart, button),
 .kpress-tooltip {
   --kpress-font-weight-sans-bold: var(--cert-font-weight-sans-bold);
   font-weight: var(--cert-font-weight-sans-light);
+}
+/* Diagram labels carry their weight as an SVG presentation attribute, because that is
+   what an `<svg>` written by `render_explainer` can say about one `<text>`. The two
+   numbers it emits are markers, not weights: they select the scale's medium and its
+   bold here, so a token moves them with everything else. */
+.cert-page :is(.line-fig, .chart) [font-weight="550"] {
+  font-weight: var(--kpress-font-weight-sans-medium);
 }
 .cert-page :is(.line-fig, .chart) [font-weight="650"] {
   font-weight: var(--cert-font-weight-sans-bold);
@@ -200,6 +224,21 @@ body {
   }
 }
 
+/* The footnote controls -- the reference in the body, the arrow back from each source,
+   the tooltip's next and previous -- at the scale's medium. KPress sets all three from
+   one literal 600, which is neither of this page's tokens and was the page's fourth sans
+   weight: two instanced faces in the PDF for thirty superscript figures. 550 is 50 units
+   below it and still reads as a mark rather than as body text at the 0.75em these run
+   at; if a control ever needs more presence than that, the answer is the bold token and
+   not a number between the two.
+
+   The tooltip's link is named at KPress's own specificity and comes later in the
+   cascade, which is how it wins; the two in the page win on `.cert-page`. */
+.cert-page .kpress-footnote-ref a, .cert-page a.kpress-footnote-backref,
+.kpress-tooltip .kpress-footnote-nav-link {
+  font-weight: var(--kpress-font-weight-sans-medium);
+}
+
 /* One transition for every hover and every replaced readout: fast, and the
    same everywhere. The scripts set `.swap` on a readout whose text they
    replace, so it fades in rather than flicking. */
@@ -264,33 +303,49 @@ body {
 .hero { padding-block-start: calc(var(--kpress-font-size-base) * 3); }
 /* The heading is set in caps by kpress; s(n) is notation and keeps its case. */
 .hero h1 .symbol { text-transform: none; }
-/* Mathematical relations set in a sans line.
+/* Mathematical relations set in a sans line: `≥` in the title and the certificate
+   buttons, `≈` in two captions and in the chart labels, `→` in Figure 7's label.
+   Source Sans 3 carries none of the three, so the browser used to resolve them to
+   whatever family on the reader's machine had them.
 
-   Source Sans 3 carries no U+2265, so the browser resolves the one character to
-   whatever other family in the stack has it. That would pass unnoticed if it landed
-   on a regular weight, but the hero is set at 550 and CSS weight matching searches
-   upward from anything above 500: the fallback family offers 400 and 700, and answers
-   with Bold. One bold character in a semibold line -- measured 18% heavier in stroke
-   and up to twice the ink of the digits beside it, drawn from DejaVu Sans Bold in the
-   printed file while every other glyph on the line came from Source Sans 3.
+   That was drawn as a weight bug first. The hero is set at 550 and CSS weight matching
+   searches upward from anything above 500, so the fallback family, offering 400 and
+   700, answered with Bold: one bold character in a semibold line, 18% heavier in stroke
+   and up to twice the ink of the digits beside it, from DejaVu Sans Bold in the printed
+   file while every other glyph on the line came from Source Sans 3. A `.rel { 400 }`
+   class fixed the weight and left the family to the host, and the three treatments
+   compared then -- the host sans at 400, the page's own KaTeX_Main, and the whole line
+   set as mathematics -- picked the host sans, because it is drawn like the digits beside
+   it and a Computer Modern relation is a hairline against Source Sans.
 
-   Naming the weight is the whole fix, and the family stays inherited. Three
-   treatments were rendered and compared: the sans fallback at 400, the same relation
-   drawn from the page's own KaTeX_Main, and the whole line set as mathematics. The
-   sans one wins on the only thing that shows at this size -- it is drawn like the
-   digits beside it, flat terminals and the same geometry, and at 400 its stroke sits
-   close to the semibold it stands in, where a Computer Modern relation is a hairline
-   against Source Sans and reads as light as the bold read heavy.
+   The rule that the page resolves every run to a face it ships retires that choice: a
+   glyph from the reader's machine is a different glyph for every reader, and on macOS
+   the PDF writes it as outline paths. Of the two shipped routes, mathematics would set
+   the title's `s(11)` and its digits in Computer Modern and break the line's agreement
+   with the subtitle and the credits under it, so the relation comes from KaTeX_Main,
+   subset to those three code points and declared on the sans families themselves
+   (`relation_face_css`) rather than named by a class. That reaches the chart labels and
+   the caption prose, which no class did.
 
-   The cost is stated rather than hidden: this is the one glyph on the page the
-   reader's own machine supplies, so it is drawn in whichever sans that machine has.
-   The weight is fixed everywhere, which is what the defect was about.
+   KaTeX_Main-Bold, not Regular, and the comparison is the reason. Measured with
+   `compare_math_fonts metrics`, in units of a thousandth of an em, the rule thickness of
+   the minus -- which is the bar every relation here is drawn on -- is 40 in
+   KaTeX_Main-Regular and 60 in its Bold, against Source Sans 3's own 62 at the 410 the
+   captions run at and 78 at the 550 of the title. Bold lands within 3% of the sans at
+   410 and at 77% of it at 550; Regular is at 65% and 51%, which is the hairline the
+   earlier comparison saw. One face for all of them, declared across the whole weight
+   range, so the relation cannot change weight between the title and a caption the way
+   the host's fallback did -- the same rule as one bold in the sans.
 
-   Every site this class marks -- the hero, the two verdict badges, the two figure
-   captions -- is set at 550, so one rule serves them all. Naming the weight also
-   guards the KaTeX route if it is ever taken: KaTeX_Main ships Regular and Bold, and
-   at the inherited 550 the same upward search would pick the Bold. */
-.rel { font-weight: 400; }
+   Scaled to 70% by `size-adjust`, because a mathematics face draws its relations for a
+   mathematics line and this one's `≈` is 1.7 times the size of the arithmetic beside it:
+   `RELATION_SIZE_ADJUST` carries the measurements and what the scale costs. Scaling takes
+   the stroke down with the width, so the sign is lighter than the sans's own `=` at every
+   size. That is the price of the rule, and it is stated rather than hidden: the route it
+   replaces gave a different relation to every reader.
+
+   `.rel` is gone with the class-based fix: it marked three of the sites and the face
+   reaches all of them. */
 /* Under the title: the description in sans caps, a step below the title's
    size, then the deck in the prose face, italic. */
 .cert-page .hero .subtitle {
@@ -475,8 +530,13 @@ body {
   margin-block-start: 0;
   padding: 0.85rem 1.1rem 1rem;
 }
+/* The caption label -- "Figure 5." and the sentence that names the figure -- is bold,
+   and it is the same bold as the title credits and every other bold in the sans. KPress
+   sets it to its medium, which is right for a caption that whispers and wrong for one
+   that labels: on this page the label is the figure's title, and a reader scanning for
+   Figure 7 was looking for the one weight the page uses to mean "start here". */
 .cert-page .kpress-figcaption strong {
-  font-weight: var(--kpress-font-weight-sans-medium);
+  font-weight: var(--kpress-font-weight-sans-bold);
 }
 
 /* The mass budget. */
@@ -986,9 +1046,10 @@ body {
      them in the prose face as small-cap figures at 400 -- a quiet treatment for prose
      that cites rarely. This paper cites in most paragraphs, and each reference is a
      signpost to the sources block, which is sans throughout; the prose-face figure sat
-     a little too close to the digits of the text around it. The weight is the screen's
-     600, read against 11pt PT Serif: enough to be seen at superscript size, not enough
-     to read as bold. No chip in print; kpress's print rule already removes it.
+     a little too close to the digits of the text around it. The weight is the screen's,
+     and the screen's is now the scale's medium, set once for both media in the rule
+     above rather than repeated here as a number. No chip in print; kpress's print rule
+     already removes it.
 
      kpress prints every superscript at 110% of the text, a compensation for the
      small-cap figure it sets the reference in, which is short. A sans figure at that
@@ -1001,7 +1062,6 @@ body {
     font-family: var(--kpress-font-sans);
     font-feature-settings: var(--kpress-font-features-sans);
     font-variant-caps: normal;
-    font-weight: 600;
   }
 }
 
@@ -1102,7 +1162,16 @@ function rotationHandle(canvas, { id, label, point, angleAt, getAngle, rotate, f
   button.setAttribute('aria-label', label);
   button.setAttribute('aria-keyshortcuts', 'ArrowLeft ArrowRight ArrowUp ArrowDown');
   button.title = 'Drag to rotate. Tap or press Enter for 5°. Arrow keys adjust by 1°; Shift by 10°.';
-  button.innerHTML = '<span aria-hidden="true">↺</span>';
+  /* An inline icon rather than the `↺` character. No face this page ships carries
+     U+21BA, so as text it is drawn from whatever family the reader's machine has --
+     a different mark for every reader, and a finding in
+     `inspect_explainer_typography --check-supporting`, which holds every run inside
+     the document to a shipped face. Drawn on `currentColor` in the stroke language
+     kpress's own control icons use, so the handle needs no face at all. */
+  button.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"'
+    + ' fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"'
+    + ' stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>'
+    + '<path d="M3 3v5h5"/></svg>';
   stage.append(button);
 
   function update() {

@@ -11,13 +11,14 @@ footnotes, hero and footer come out a step lighter than the serif and the mathem
 beside them.
 
 One pair of numbers, taken as one measurement: the same page, in one browser, at one
-moment, with the instances injected and with them suppressed. At this branch's head, on
-macOS with Playwright's pinned headless shell, the export is 1,024,108 bytes with the
+moment, with the instances injected and with them suppressed. When the instances landed,
+on macOS with Playwright's pinned headless shell, the export was 1,024,108 bytes with the
 sans in outlines and 830,153 with it in fonts, 17 pages either way, and the five
 `SourceSans3-*` outline fonts drop out. Absolute figures from two hosts do not
 subtract -- the bytes follow the Chromium build and the fonts the machine has -- which
 is why the before and the after are always rendered together rather than quoted from
-different days.
+different days. The same export on the same host is 817,119 bytes now, with the fourth
+sans weight gone and the relation glyphs drawn from a shipped face.
 
 A static instance embeds like any other font. This tool writes one per face the print
 pass asks for, into `templates/fonts/`, and hands them to `render_explainer_pdf` as
@@ -47,15 +48,24 @@ nothing instances back into the PDF as outlines.
 What is left outside is the `@page` margin box, and it is outside by construction: a
 margin box is not in the document tree, so no probe reaches it. `render_explainer_pdf`
 covers that side instead, by loading the families the margin boxes name before it
-prints. Two requests are answered without an instance of their own and both are 400:
-`.rel` names it for the one fallback relation glyph, and the margin-box footer inherits
-it. CSS font matching sends a request in [400, 500] ascending before descending, so
-both land on the 410 instance, ten units away and below what shows at 11pt.
+prints. One request is answered without an instance of its own, and it is 400: the
+margin-box footer inherits it. CSS font matching sends a request in [400, 500] ascending
+before descending, so it lands on the 410 instance, ten units away and below what shows
+at 11pt.
+
+`--weights` is the audit beside the gate. It lists every family, weight and style the
+page draws in, under both media, with the run count, a few of the elements that ask, and
+the declaration behind each -- read out of the cascade through CDP rather than out of
+`getComputedStyle`, which resolves a token to a number before any script can see which
+token it was. It is how a fourth sans weight is found: two were, on 2026-09-07, the
+caption label at the medium where the title credits were bold, and kpress's literal 600
+on the footnote controls.
 
 Usage, from `packing/`:
 
     uv run --frozen --all-extras --group dev python -m devtools.sans_instances
     uv run --frozen --all-extras --group dev python -m devtools.sans_instances --check
+    uv run --frozen --all-extras --group dev python -m devtools.sans_instances --weights
 """
 
 from __future__ import annotations
@@ -64,10 +74,10 @@ import argparse
 import importlib.util
 import os
 import sys
-from collections.abc import Callable, Iterable, Sequence
+from collections.abc import Callable, Iterable, Mapping, Sequence
 from functools import cache
 from pathlib import Path
-from typing import Protocol, TypedDict, cast
+from typing import NotRequired, Protocol, TypedDict, cast
 
 from devtools.render_explainer import data_uri, kpress_static
 from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY
@@ -89,11 +99,14 @@ GENERATOR = REPO / "vendor" / "kpress" / "devtools" / "instance_sans.py"
 type Face = tuple[int, str]
 
 #: The faces this page prints in, and `--check` refuses any request the set does not
-#: answer. Three of the weights are the paper profile's own tokens
-#: (`explainer-shell.html`: light 410, medium 550, bold 680); 600 is kpress's, on the
-#: footnote reference control, which the profile does not override. kpress's own
+#: answer. One weight per role and no others: the paper profile's own three tokens,
+#: light 410, medium 550 and bold 680, declared in `explainer-shell.html`. kpress's own
 #: instances are at kpress's tokens -- 370, 400, 550, 600, 650, 700 -- a different set
 #: for a different document, which is why this page instances its own.
+#:
+#: 600 was here until 2026-09-07, for kpress's literal on the footnote controls, which
+#: the profile now maps to its medium: a fourth weight on this page's sans, two instanced
+#: faces in the PDF, for thirty superscript figures and the arrows back from the sources.
 #:
 #: Both styles of each, though the probe finds a request only for 410 italic: `font-style`
 #: inherits, so any of these weights becomes italic the moment a word inside it is
@@ -105,15 +118,13 @@ PRINT_FACES: tuple[Face, ...] = (
     (410, "italic"),
     (550, "normal"),
     (550, "italic"),
-    (600, "normal"),
-    (600, "italic"),
     (680, "normal"),
     (680, "italic"),
 )
 
 #: The one request answered by a face that is not an exact match, and where it lands.
 #: CSS Fonts 4 searches a desired weight in [400, 500] upward to 500 before it looks
-#: down, so 400 takes the 410 instance rather than falling to 680. Ten units is under a
+#: down, so 400 takes the 410 instance rather than falling to 550. Ten units is under a
 #: fifth of the gap to the next token and does not show at the size these run at.
 SUBSTITUTED: dict[int, int] = {400: 410}
 
@@ -267,10 +278,15 @@ _PROBE = r"""([families, pseudos]) => {
       found.set(key, {weight, style: style.fontStyle, path});
     }
   }
+  {{SIG}}
+}"""
 
-  /* A name for an element that is readable in a failure: the tag, its classes, and its
-     index among its siblings, up to the page wrapper. The same shape `check_print_layout`
-     reports its findings with, so two print findings about one element read alike. */
+#: A name for an element that is readable in a failure: the tag, its classes, and its
+#: index among its siblings, up to the page wrapper. The same shape `check_print_layout`
+#: reports its findings with, so two print findings about one element read alike.
+#: Spliced into both probes here rather than written twice, so a path in the listing and
+#: a path in a `--check` failure name the same element the same way.
+_SIG = r"""
   function sig(el) {
     const steps = [];
     for (let node = el, depth = 0; node && depth < 3; node = node.parentElement, depth++) {
@@ -281,8 +297,59 @@ _PROBE = r"""([families, pseudos]) => {
       if (node.classList.contains('kpress')) break;
     }
     return steps.join(' > ');
+  }"""
+
+#: Every distinct family, weight and style the page draws text in, with a run count and
+#: the first few elements that ask for it, each stamped with a marker the matched-rule
+#: walk finds it by. Not scoped to the sans: the question the listing answers is whether
+#: one bold and one medium serve the whole design system, and the serif's own bold is
+#: part of that answer. Hidden runs are skipped for the reason `_PROBE` skips them -- a
+#: weight nobody sees is not a weight the design has to reconcile.
+#:
+#: Several elements per combination, not one, because one is the wrong number for the
+#: question. `.doc-links .chip` and the caption's label are both the sans at 550, and a
+#: listing that reported the first would say the medium had one source when it had two.
+#: The markers are cleared first: the same page is probed under both media, and a marker
+#: the screen pass left behind would be found instead of the element the print pass just
+#: stamped, since `DOM.querySelector` answers with the first match in document order.
+_WEIGHTS_PROBE = r"""({attribute, samples}) => {
+  for (const stale of document.querySelectorAll(`[${attribute}]`))
+    stale.removeAttribute(attribute);
+  const found = new Map();
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  let next = 0;
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    if (!node.nodeValue || !node.nodeValue.trim()) continue;
+    const el = node.parentElement;
+    if (!el || !el.getClientRects().length) continue;
+    const style = getComputedStyle(el);
+    const family = style.fontFamily.split(',')[0].trim().replace(/^["']|["']$/g, '');
+    const weight = parseInt(style.fontWeight, 10);
+    const key = `${family}/${weight}/${style.fontStyle}`;
+    if (!found.has(key))
+      found.set(key, {family, weight, style: style.fontStyle, runs: 0, seen: []});
+    const row = found.get(key);
+    row.runs++;
+    if (row.seen.length < samples && !el.hasAttribute(attribute)) {
+      el.setAttribute(attribute, String(next));
+      row.seen.push({marker: next, path: sig(el)});
+      next++;
+    }
   }
+  return [...found.values()].sort((a, b) =>
+    a.family.localeCompare(b.family) || a.weight - b.weight
+    || a.style.localeCompare(b.style));
+  {{SIG}}
 }"""
+
+
+def _spliced(probe_source: str) -> str:
+    """One probe with the shared element-path helper in it."""
+    return probe_source.replace("{{SIG}}", _SIG)
+
+
+_PROBE = _spliced(_PROBE)
+_WEIGHTS_PROBE = _spliced(_WEIGHTS_PROBE)
 
 
 def probe(page_path: Path) -> list[Requested]:
@@ -315,6 +382,204 @@ def probe(page_path: Path) -> list[Requested]:
             return rows
         finally:
             browser.close()
+
+
+class Sampled(TypedDict):
+    """One element that asks for a combination, and the declaration that gave it one."""
+
+    #: The attribute value the probe stamped on the element, so the matched-rule walk
+    #: can find the node again through CDP's own `DOM.querySelector`.
+    marker: int
+    path: str
+    #: The declaration that won, as `selector { value }`, with `inherited` appended when
+    #: it came from an ancestor. `unset` when no rule names a weight at all. Written by
+    #: `_attributed`; the probe cannot see it, which is the whole reason CDP is here.
+    source: NotRequired[str]
+
+
+class Declared(TypedDict):
+    """One family, weight and style the page draws in, and what asked for it."""
+
+    family: str
+    weight: int
+    style: str
+    runs: int
+    seen: list[Sampled]
+
+
+#: The attribute `_WEIGHTS_PROBE` stamps and the matched-rule walk selects on. A `data-`
+#: name, so it is inert; the page it is written into is a fresh load that is thrown away.
+MARKER = "data-weight-probe"
+
+#: How many elements per combination are stamped and attributed. Enough to show that one
+#: weight has two sources, short enough that a table stays a table; the run count beside
+#: it says how much of the page a combination covers, so the samples do not have to.
+SAMPLES = 6
+
+#: How much of a selector the listing shows. kpress's own selectors run past 200
+#: characters (the `:not()` chain guarding the math text face is one), and a table whose
+#: rows wrap three times is not a table.
+SELECTOR_WIDTH = 58
+
+
+def _weight_declarations(node_styles: Mapping[str, object]) -> list[tuple[str, str]]:
+    """Every `font-weight` a node's own cascade sets, weakest origin first.
+
+    The order is the cascade's: the presentation attribute an SVG label carries, then
+    the matched rules, which CDP already returns by ascending specificity, then the
+    inline style. So the last entry is the one that won. Disabled declarations are the
+    ones a rule lost on `!important` or on shorthand expansion, and they are dropped
+    rather than counted; CDP repeats the winner with `disabled` unset, which is why
+    consecutive duplicates collapse.
+    """
+    found: list[tuple[str, str]] = []
+
+    def collect(selector: str, style: object) -> None:
+        if not isinstance(style, dict):
+            return
+        properties = style.get("cssProperties")
+        if not isinstance(properties, list):
+            return
+        for entry in properties:
+            if not isinstance(entry, dict) or entry.get("name") != "font-weight":
+                continue
+            if entry.get("disabled") is True:
+                continue
+            pair = (selector, str(entry.get("value", "")))
+            if not found or found[-1] != pair:
+                found.append(pair)
+
+    collect("<presentation attribute>", node_styles.get("attributesStyle"))
+    matched = node_styles.get("matchedCSSRules")
+    if isinstance(matched, list):
+        for match in matched:
+            rule = match.get("rule") if isinstance(match, dict) else None
+            if not isinstance(rule, dict):
+                continue
+            selectors = rule.get("selectorList")
+            text = selectors.get("text") if isinstance(selectors, dict) else None
+            collect(str(text) if text else "<rule>", rule.get("style"))
+    collect("<inline style>", node_styles.get("inlineStyle"))
+    return found
+
+
+def _attribution(node_styles: Mapping[str, object]) -> str:
+    """Where one element's weight came from, as a line a reader can act on.
+
+    The element's own cascade first; failing that the nearest ancestor that names a
+    weight, because `font-weight` inherits and most of this page's text is set by a
+    token on a wrapper rather than on the run itself.
+    """
+    own = _weight_declarations(node_styles)
+    if own:
+        selector, value = own[-1]
+        return f"{selector[:SELECTOR_WIDTH]} {{ {value} }}"
+    inherited = node_styles.get("inherited")
+    if isinstance(inherited, list):
+        for level in inherited:
+            if not isinstance(level, dict):
+                continue
+            from_ancestor = _weight_declarations(level)
+            if from_ancestor:
+                selector, value = from_ancestor[-1]
+                return f"{selector[:SELECTOR_WIDTH]} {{ {value} }}  (inherited)"
+    return "unset (the initial 400)"
+
+
+def _attributed(page: object, rows: list[Declared]) -> list[Declared]:
+    """Fill in each row's `source` by asking the browser which rules matched.
+
+    `CSS.getMatchedStylesForNode` is the only way to see the declaration behind a
+    computed weight: `getComputedStyle` resolves `var()` before anything can read it, so
+    a page that sets every weight through a token and a page that writes 550 nine times
+    look identical from script. The listing exists to tell those two apart.
+    """
+    from playwright.sync_api import Page  # noqa: PLC0415
+
+    assert isinstance(page, Page)
+    session = page.context.new_cdp_session(page)
+    try:
+        session.send("DOM.enable")
+        session.send("CSS.enable")
+        document = session.send("DOM.getDocument", {"depth": -1})
+        root = int(document["root"]["nodeId"])
+        for row in rows:
+            for sample in row["seen"]:
+                found = session.send(
+                    "DOM.querySelector",
+                    {"nodeId": root, "selector": f'[{MARKER}="{sample["marker"]}"]'},
+                )
+                node = int(found.get("nodeId") or 0)
+                if not node:  # pragma: no cover - the probe stamped it a moment ago
+                    sample["source"] = "the element could not be found again"
+                    continue
+                sample["source"] = _attribution(
+                    session.send("CSS.getMatchedStylesForNode", {"nodeId": node})
+                )
+    finally:
+        session.detach()
+    return rows
+
+
+def distinct_sources(row: Declared) -> list[Sampled]:
+    """The sampled elements of one combination, one per declaration that produced it.
+
+    Two elements set from the same rule say the same thing twice; two elements at one
+    weight from two different rules are the finding the listing exists to surface.
+    """
+    kept: list[Sampled] = []
+    for sample in row["seen"]:
+        if sample.get("source") not in {other.get("source") for other in kept}:
+            kept.append(sample)
+    return kept
+
+
+def weights(page_path: Path) -> dict[str, list[Declared]]:
+    """Every family, weight and style the page draws in, per medium, with its source.
+
+    Both media from one load, screen first, because switching to print is one call and
+    reloading is fifteen seconds. What that costs is one line inside `_WEIGHTS_PROBE`,
+    which clears its own markers before each pass for the reason recorded there: the
+    numbering restarts at 0 every medium, so a marker the screen pass left behind is
+    what `DOM.querySelector` answers with, being earlier in document order.
+    """
+    from playwright.sync_api import sync_playwright  # noqa: PLC0415
+
+    from devtools.check_print_layout import PRINT_VIEWPORT  # noqa: PLC0415
+
+    listed: dict[str, list[Declared]] = {}
+    with sync_playwright() as driver:
+        browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
+        try:
+            page = browser.new_page()
+            page.emulate_media(reduced_motion="reduce")
+            page.goto(page_path.resolve().as_uri(), wait_until="load")
+            page.wait_for_selector(READY, timeout=60_000)
+            for medium in ("screen", "print"):
+                if medium == "print":
+                    page.emulate_media(media="print")
+                    page.set_viewport_size(PRINT_VIEWPORT)
+                page.evaluate("document.fonts.ready")
+                rows: list[Declared] = page.evaluate(
+                    _WEIGHTS_PROBE, {"attribute": MARKER, "samples": SAMPLES}
+                )
+                listed[medium] = _attributed(page, rows)
+            return listed
+        finally:
+            browser.close()
+
+
+def list_weights(page_path: Path) -> int:
+    """Print the weight table, one block per medium. For reading, not for gating."""
+    for medium, rows in weights(page_path).items():
+        print(f"\n{medium}: {len(rows)} distinct family, weight and style combinations")
+        print(f"  {'weight':>6} {'style':<7} {'runs':>5}  family / set by / one element")
+        for row in rows:
+            print(f"  {row['weight']:>6} {row['style']:<7} {row['runs']:>5}  {row['family']}")
+            for sample in distinct_sources(row):
+                print(f"  {'':>21}   {sample.get('source', '(not attributed)')}")
+                print(f"  {'':>21}     {sample['path']}")
+    return 0
 
 
 def print_face_css(faces: Sequence[Face] = PRINT_FACES, fonts: Path = FONTS) -> str:
@@ -401,17 +666,25 @@ def check(page_path: Path) -> int:
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0])
-    parser.add_argument(
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument(
         "--check",
         action="store_true",
         help="verify the instances and the weights the page asks for, instead of writing",
     )
+    mode.add_argument(
+        "--weights",
+        action="store_true",
+        help="list every family, weight and style the page draws in, and what set it",
+    )
     parser.add_argument("--page", type=Path, default=PAGE, help="the rendered page to probe")
     arguments = parser.parse_args(argv)
-    if not arguments.check:
+    if not arguments.check and not arguments.weights:
         return write()
     if not arguments.page.is_file():
         raise SystemExit(f"{arguments.page}: no rendered page; run `render_explainer` first")
+    if arguments.weights:
+        return list_weights(arguments.page)
     return check(arguments.page)
 
 

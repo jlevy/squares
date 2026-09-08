@@ -4,6 +4,14 @@ Run against the explainer or one of its SVG assets. Both screen and print styles
 are inspected. SVG effective sizes include the viewport transform; external SVG
 images must be inspected separately. Supporting-text checks compare ordinary text
 with the first visible caption and detect intersecting inline SVG label boxes.
+
+`--check-supporting` also asks the provenance question, in both media: whether every
+run of text on the page is drawn from a face the page ships. That is the on-screen half
+of the guard `render_explainer_pdf --check` holds the exported file to, and the two
+share one list of what is shipped and one list of the host faces a kpress bead is on
+its way to replacing. It is one flag rather than two because the second question is not
+optional either: a run set in the reader's own font is a different page for every
+reader, whatever else about it is consistent.
 """
 
 from __future__ import annotations
@@ -15,7 +23,13 @@ from pathlib import Path
 from typing import Literal, NotRequired, TypedDict
 
 from devtools.check_print_layout import PRINT_VIEWPORT
-from devtools.render_explainer_pdf import BROWSER_OVERRIDE, PAGE, READY
+from devtools.render_explainer_pdf import (
+    BROWSER_OVERRIDE,
+    PAGE,
+    READY,
+    host_font_bead,
+    shipped,
+)
 
 
 class FontUse(TypedDict):
@@ -48,6 +62,157 @@ class Probe(TypedDict):
 SUPPORTING_SELECTOR = (
     ".kpress-figcaption, .kpress-footnotes, .mass-line, .line-fig, .chart, .tip-panel, .panel"
 )
+
+#: What the provenance check covers: the document, not the reader's interface around it.
+PROVENANCE_SCOPE = ".cert-page"
+
+#: Elements whose text nodes are not the page's text: the four the tree walk would
+#: otherwise read as content, and `math`, which is the machine-readable copy KaTeX writes
+#: beside every expression it renders. That copy is clipped to a pixel and never seen; a
+#: screen reader is what consumes it, in whatever face it prefers, and Blink still reports
+#: platform fonts for it -- Times and STIX Two Math, from the reader's machine, 121 times
+#: over. The same subtree is what `_PROBE` skips, for the same reason.
+PROVENANCE_SKIP = ("SCRIPT", "STYLE", "TITLE", "DESC", "MATH")
+
+
+def _attributes(node: dict[str, object]) -> dict[str, str]:
+    """One node's attributes, which `DOM.getDocument` returns as a flat name/value list."""
+    flat = node.get("attributes")
+    if not isinstance(flat, list):
+        return {}
+    return {str(k): str(v) for k, v in zip(flat[::2], flat[1::2], strict=False)}
+
+
+def _children(node: dict[str, object]) -> list[dict[str, object]]:
+    """One node's child nodes, which `DOM.getDocument` returns as an untyped list."""
+    kids = node.get("children")
+    if not isinstance(kids, list):
+        return []
+    return [child for child in kids if isinstance(child, dict)]
+
+
+def _element_label(node: dict[str, object], index: int) -> str:
+    """One step of a path: the tag, its classes, and its place among its siblings."""
+    classes = "".join(f".{name}" for name in _attributes(node).get("class", "").split())
+    return f"{str(node.get('nodeName', '?')).lower()}{classes}[{index}]"
+
+
+def _platform_fonts(session: object, node_id: int) -> list[dict[str, object]]:
+    """The platform faces Blink drew one element's own text nodes with.
+
+    Asked per element rather than once over the document, and the reason is a measurement:
+    `CSS.getPlatformFontsForNode` is documented as answering for the child text nodes of a
+    node, and on this page `body` answers with nothing at all while `.cert-page` inside it
+    answers with four faces. The viewport kpress wraps the document in is a containment
+    boundary, and the aggregate does not cross it. A walk that trusted an empty answer at
+    the root would report a clean page without having looked at it.
+    """
+    from playwright.sync_api import CDPSession  # noqa: PLC0415
+
+    assert isinstance(session, CDPSession)
+    fonts = session.send("CSS.getPlatformFontsForNode", {"nodeId": node_id}).get("fonts")
+    if not isinstance(fonts, list):
+        return []
+    return [entry for entry in fonts if isinstance(entry, dict)]
+
+
+def _unshipped(fonts: list[dict[str, object]]) -> list[str]:
+    """The families in one answer that the page did not ship and no bead expects.
+
+    A face is the page's when the document carries its bytes and it is one of the families
+    the page declares. Both halves are needed: kpress's `LocalPunct` is a real
+    `@font-face`, so Blink calls it a custom font, and its source is `local("Georgia")` --
+    the reader's own serif, under a name the page chose.
+    """
+    seen: list[str] = []
+    for entry in fonts:
+        family = str(entry.get("familyName", ""))
+        if not family or family in seen:
+            continue
+        if entry.get("isCustomFont") and shipped(family):
+            continue
+        if host_font_bead(family) is not None:
+            continue
+        seen.append(family)
+    return seen
+
+
+def _text_bearing(node: dict[str, object], trail: list[str]) -> list[tuple[int, str]]:
+    """Every element under this one that holds visible text directly, with its path.
+
+    Text is attributed to the element it sits in rather than to an ancestor, so a finding
+    names the run and not the section it is in. An element with no layout -- hidden, or
+    inside a `hidden` block -- reports no platform font at all, which is how the hidden
+    copies of the mathematics stay out of this without a visibility test of their own.
+    """
+    found: list[tuple[int, str]] = []
+    # Upper-cased before the comparison: an HTML element reports its tag in capitals and
+    # a MathML or SVG one reports its local name as written, so `math` and `MATH` are the
+    # same element seen through two namespaces.
+    if str(node.get("nodeName", "")).upper() in PROVENANCE_SKIP:
+        return found
+    children = _children(node)
+    if any(
+        child.get("nodeType") == 3 and str(child.get("nodeValue", "")).strip()
+        for child in children
+    ):
+        found.append((int(str(node.get("nodeId") or 0)), " > ".join(trail[-4:])))
+    for index, child in enumerate(child for child in children if child.get("nodeType") == 1):
+        found.extend(_text_bearing(child, [*trail, _element_label(child, index)]))
+    return found
+
+
+def provenance_findings(page: object) -> list[str]:
+    """Every run on the page drawn from a face the page does not ship.
+
+    The 100-best atlas figure needs no exception here and gets none: its labels are inside
+    `known-best-1-100.svg`, referenced as an `<img>`, so they are not text nodes of this
+    document and Blink never reports them. The exception for its Helvetica lives in the PDF
+    guard, which sees the figure's own fonts because the export embeds them.
+
+    Scoped to the document rather than to the whole page. kpress's chrome around it -- the
+    tooltip, the theme control, the footnote navigation -- is set in `system-ui` on
+    purpose, because it is the reader's interface and not the paper; none of it prints, and
+    what the PDF guard sees is exactly what this scope covers.
+    """
+    from playwright.sync_api import Page  # noqa: PLC0415
+
+    assert isinstance(page, Page)
+    session = page.context.new_cdp_session(page)
+    try:
+        session.send("DOM.enable")
+        session.send("CSS.enable")
+        document = session.send("DOM.getDocument", {"depth": -1})
+        found = session.send(
+            "DOM.querySelector",
+            {"nodeId": int(str(document["root"]["nodeId"])), "selector": PROVENANCE_SCOPE},
+        )
+        scope = _node(document["root"], int(str(found.get("nodeId") or 0)))
+        if scope is None:
+            return [f"the page has no {PROVENANCE_SCOPE} to check"]
+        findings: list[str] = []
+        for node_id, path in _text_bearing(scope, [PROVENANCE_SCOPE]):
+            offenders = _unshipped(_platform_fonts(session, node_id))
+            if offenders:
+                named = ", ".join(offenders)
+                is_are = "is not a face" if len(offenders) == 1 else "are not faces"
+                findings.append(f"{path}: {named} {is_are} the page ships")
+        return findings
+    finally:
+        session.detach()
+
+
+def _node(tree: dict[str, object], node_id: int) -> dict[str, object] | None:
+    """One node of a `DOM.getDocument` tree, by its id."""
+    if not node_id:
+        return None
+    if int(str(tree.get("nodeId") or 0)) == node_id:
+        return tree
+    for child in _children(tree):
+        if (found := _node(child, node_id)) is not None:
+            return found
+    return None
+
 
 _PROBE = r"""({selector, supporting, check}) => {
   const groups = new Map();
@@ -190,6 +355,10 @@ def inspect(
                 else:
                     report["print"] = probe["fonts"]
                 findings.extend(f"{medium}: {finding}" for finding in probe["findings"])
+                if check_supporting:
+                    findings.extend(
+                        f"{medium}: {finding}" for finding in provenance_findings(page)
+                    )
             if check_supporting:
                 report["findings"] = findings
             return report
