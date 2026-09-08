@@ -272,6 +272,7 @@ def test_isolated_jobs_use_the_host_without_multiplying_concurrent_pools() -> No
         ("packing-validation.yml", "validate"),
         ("deep-gate.yml", "exhaustive-tier"),
         ("deep-gate.yml", "deferred-steps"),
+        ("deep-gate.yml", "screen"),
     }
 
 

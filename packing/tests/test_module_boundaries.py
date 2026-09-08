@@ -192,7 +192,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     assert PYTHON_VERSION.read_text(encoding="utf-8").strip() == "3.14.7"
 
-    for job_name in ("validate", "suite", "exhaustive", "macos-portability"):
+    for job_name in ("validate", "suite", "exhaustive", "screen", "macos-portability"):
         raw_steps = _mapping(jobs[job_name])["steps"]
         assert isinstance(raw_steps, list)
         steps = [_mapping(step) for step in raw_steps]

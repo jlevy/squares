@@ -185,7 +185,6 @@ jobs:
           --only "slow behavioral tests"
           --only "n=40 rigidity bracket still reproduces"
           --only "known-best n=1..324 atlas rebuild"
-          --only "single-square translation escape screen"
           --only "exact rational grid replay"
           --jobs 2 --inner-jobs 2
 
@@ -262,6 +261,69 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
+  screen:
+    # The escape screen alone, mirroring the post-merge `screen` job, and split here for
+    # the same reason `D-481` split it there: it is a process pool sized by `PACK_JOBS`,
+    # so beside the five other deferrals at `--inner-jobs 2` it gets two workers and
+    # alone at `--inner-jobs 4` it gets four.
+    #
+    # Run 34177317419 is why this job exists rather than only the budget raise. It killed
+    # the screen at the shared 900s cap on commit 831697c0 -- the same commit whose
+    # post-merge run 34176106076 had finished the same step at 858.62s an hour earlier on
+    # a faster runner. A pre-merge gate that fails on a coin flip teaches people to
+    # re-run it, which is the one habit it cannot afford: the deep gate exists to be
+    # believed the first time.
+    #
+    # Keeping it beside the others would also make the deep gate slower than the
+    # post-merge gate it is meant to pre-empt, which is backwards for a check a pull
+    # request waits on.
+    if: >-
+      github.event_name == 'workflow_dispatch'
+      || contains(github.event.pull_request.labels.*.name, 'deep-gate')
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # `github.event.inputs` rather than the `inputs` context: the latter is
+          # documented as available only to a dispatched or reusable workflow, and
+          # this step also runs on `pull_request`, where the event
+          # payload simply carries no inputs and this renders empty.
+          ref: ${{ github.event.inputs.pull_request && format('refs/pull/{0}/merge', github.event.inputs.pull_request) || '' }}
+          # This selection has no historical-content review. Keep its shallow checkout;
+          # the vendored submodule is still required to resolve the environment.
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Run the single-square translation escape screen
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --only "single-square translation escape screen"
+          --jobs 1 --inner-jobs 4
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
   deep-gate-required:
     # One context for the whole deep surface, exactly as `packing-required` is one
     # context for the whole pull-request surface -- and for the same recorded reason.
@@ -293,13 +355,15 @@ jobs:
     if: >-
       !cancelled() && (github.event_name == 'workflow_dispatch'
       || contains(github.event.pull_request.labels.*.name, 'deep-gate'))
-    needs: [deferred-steps, exhaustive-tier]
+    needs: [deferred-steps, exhaustive-tier, screen]
     runs-on: ubuntu-latest
     steps:
       - name: Require every deep-gate prerequisite
         env:
           DEFERRED_RESULT: ${{ needs.deferred-steps.result }}
           EXHAUSTIVE_RESULT: ${{ needs.exhaustive-tier.result }}
+          SCREEN_RESULT: ${{ needs.screen.result }}
         run: |
           test "$DEFERRED_RESULT" = "success"
           test "$EXHAUSTIVE_RESULT" = "success"
+          test "$SCREEN_RESULT" = "success"

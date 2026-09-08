@@ -253,6 +253,11 @@ These are the seven steps outside the [PR fast surface](#validation-tiers).
 [D-470](defects.md) records why checking them only after a merge is insufficient: a
 stale certificate test left main red across three merges despite green PR checks.
 
+It runs them in three jobs, mirroring the post-merge gate: `exhaustive-tier` and, since
+[D-481](defects.md), `screen`, with `deferred-steps` carrying the other five.
+`deep-gate-required` waits on all three — a split job that nothing waits on is an
+advisory check, which is [D-380](defects.md)’s shape.
+
 The last three joined on 2026-09-07 because the corpus tripled, not because the gate
 changed its mind about them.
 At n = 1..324 the escape screen measured 766.26 s and `build_known_best_atlas --check`
