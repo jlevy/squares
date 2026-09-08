@@ -53,6 +53,7 @@ from devtools.render_explainer import (
     kpress_css,
     kpress_static,
 )
+from devtools.sans_instances import SCREEN_SANS, print_family
 
 #: kpress's generated print-face stylesheet, registered in `DEFAULT_CSS_ASSETS`.
 PRINT_FONTS = "css/print-fonts.css"
@@ -274,18 +275,21 @@ def _sans_face(family: str, weight: int) -> str:
     """One of kpress's generated print instances, in the shape its generator writes."""
     return (
         f'  @font-face {{\n    font-family: "{family}";\n    font-style: normal;\n'
-        f"    font-display: block;\n    font-weight: {weight};\n"
-        f'    src: url("../fonts/source-sans-3-latin-{weight}-normal.woff2") format("woff2");\n'
+        f"    font-display: swap;\n    font-weight: {weight};\n"
+        f'    src: url("../fonts/kpress-print-sans-latin-{weight}-normal.woff2")'
+        ' format("woff2");\n'
         "  }\n"
     )
 
 
 #: The prune, in both directions. Only the static print family goes: it is the one this
-#: page overrides. `Source Sans 3 Variable` is a different family and a different string,
-#: and the page's screen face; the rest are what the document is set in.
+#: page overrides, and it is asked of kpress rather than spelled here, so a rename
+#: upstream moves the case with the rule. `Source Sans 3 Variable` is a different family
+#: and a different string, and the page's screen face; the rest are what the document is
+#: set in.
 PRINT_SANS_CASES: list[tuple[str, str, bool]] = [
-    ("the static print instance", _sans_face("Source Sans 3", 550), True),
-    ("the variable face the screen uses", _sans_face("Source Sans 3 Variable", 400), False),
+    ("the static print instance", _sans_face(print_family(), 550), True),
+    ("the variable face the screen uses", _sans_face(SCREEN_SANS, 400), False),
     ("the reading face", _kpress_block("../fonts/pt-serif-latin-400-normal.woff2"), False),
     ("the composite", _composite_block("../katex/fonts/KaTeX_Main-Regular.woff2"), False),
     ("a KaTeX face", _katex_block("fonts/KaTeX_Main-Regular.woff2"), False),
@@ -299,9 +303,12 @@ PRINT_SANS_CASES: list[tuple[str, str, bool]] = [
 def test_only_kpress_own_print_instances_are_pruned(block: str, *, dropped: bool) -> None:
     """Judged on the family alone, so the rule survives kpress reshaping the stylesheet.
 
-    The near miss is the one that matters: `"Source Sans 3 Variable"` starts with the
-    same eleven characters and is the face the screen reads in. Dropping it would leave
-    the page with no sans at all.
+    The variable face is the case that matters: it is what the screen reads in, and
+    dropping it would leave the page with no sans at all. It was also the near miss the
+    whole-string comparison was written for -- while the instances were declared under
+    `"Source Sans 3"`, `"Source Sans 3 Variable"` shared its first eleven characters.
+    kpress's rename put the two families further apart than that; the comparison is
+    still whole, because the next family it declares may not be.
     """
     assert _print_sans_face(block) is dropped
 
@@ -347,4 +354,4 @@ def test_registering_the_print_faces_upstream_does_not_move_the_page(
     without = kpress_css(static)
     monkeypatch.setattr(kpress_assets, "DEFAULT_CSS_ASSETS", [*listed, PRINT_FONTS])
     assert kpress_css(static) == without
-    assert 'font-family: "Source Sans 3 Variable"' in without
+    assert f'font-family: "{SCREEN_SANS}"' in without

@@ -509,11 +509,29 @@ def inline_font_urls(css: str, stylesheet_dir: Path) -> str:
     return inlined
 
 
-#: The family kpress declares its static print instances under, in
-#: `css/print-fonts.css`. Quoted, and compared whole: `"Source Sans 3 Variable"` is a
-#: different family and a different string, which is what lets one equality separate
-#: the screen's variable face from the print instances that stand in for it.
-PRINT_SANS_FAMILY = '"Source Sans 3"'
+@cache
+def print_sans_family() -> str:
+    """The family kpress declares its static print instances under, quoted as CSS has it.
+
+    Read from kpress's own generator rather than written down here, through
+    `devtools.sans_instances`, which already loads that module by path. The family is
+    kpress's to name -- it renamed it once, from `Source Sans 3` to `KPress Print Sans`,
+    when the OFL's reserved name made a family of its own necessary -- and a literal on
+    this side would have gone on pruning a family nothing declares, letting twelve
+    faces of base64 into every copy of the page served, silently.
+
+    Imported inside the function because `sans_instances` imports this module: the
+    cycle is only a problem at import time, and deferring it also keeps this module
+    loadable in a checkout whose kpress submodule is not initialised.
+
+    Quoted, and compared whole: `"Source Sans 3 Variable"` is a different family and a
+    different string, which is what lets one equality separate the screen's variable
+    face from the print instances that stand in for it.
+    """
+    from devtools.sans_instances import print_family  # noqa: PLC0415
+
+    return f'"{print_family()}"'
+
 
 #: A `@font-face` block's family, in either of the two shapes kpress and KaTeX write.
 FONT_FACE_FAMILY = re.compile(r"font-family:\s*(\"[^\"]+\"|[^;]+);")
@@ -541,7 +559,7 @@ def _print_sans_face(block: str) -> bool:
     name something else and are untouched.
     """
     family = FONT_FACE_FAMILY.search(block)
-    return family is not None and family.group(1).strip() == PRINT_SANS_FAMILY
+    return family is not None and family.group(1).strip() == print_sans_family()
 
 
 def _declares_nothing(css: str) -> bool:

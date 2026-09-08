@@ -36,7 +36,9 @@ from devtools.sans_instances import (
     covered,
     gaps,
     generator,
+    postscript_prefix,
     print_face_css,
+    print_family,
 )
 
 #: What the probe found on the rendered page, on 2026-09-07, weight and style only.
@@ -110,15 +112,16 @@ def test_the_injected_css_is_one_print_block_of_self_contained_faces(instances: 
 
     Three properties, and each is load-bearing. `@media print` is what keeps the screen
     on the variable font when the same rules are added to a page that is not printing.
-    The family is the one kpress's print stack names first, so a face declared under any
-    other name would be inert. And every source is inline, because the page is drawn
-    from a `file://` URL with nothing to fetch from.
+    The family is the one kpress's print stack names first, asked of kpress rather than
+    written out here, so a face declared under any other name would be inert. And every
+    source is inline, because the page is drawn from a `file://` URL with nothing to
+    fetch from.
     """
     css = print_face_css(fonts=instances)
     assert css.startswith("@media print {\n")
     assert css.endswith("}\n")
     assert css.count("@font-face") == len(PRINT_FACES)
-    assert css.count('font-family: "Source Sans 3";') == len(PRINT_FACES)
+    assert css.count(f'font-family: "{print_family()}";') == len(PRINT_FACES)
     assert css.count('url("data:font/woff2;base64,') == len(PRINT_FACES)
     assert '.woff2")' not in css
 
@@ -157,8 +160,13 @@ def _descriptor(number: int, name: str) -> bytes:
     ).encode()
 
 
-#: The three readings the scan has to tell apart, as whole files.
+#: The readings the scan has to tell apart, as whole files. The first two are both the
+#: sans in outlines, one step apart: the variable face is the print run that never
+#: reached the instances at all, and the instance is one Chromium declined to embed
+#: even so. The instance's name comes from kpress, through `postscript_prefix`, so the
+#: scan and the case move together when the family is renamed.
 OWNED_OUTLINES = _descriptor(9, "SourceSans3-Regular_wght") + _font(1, "Type3", 9)
+INSTANCE_OUTLINES = _descriptor(9, f"{postscript_prefix()}-410") + _font(1, "Type3", 9)
 HOST_OUTLINES = _descriptor(9, ".SFNS-Regular") + _font(1, "Type3", 9) + _font(2, "Type0")
 NO_FONTS = b"%PDF-1.7\n1 0 obj\n<</Type /Page>>\nendobj\n"
 
@@ -168,6 +176,18 @@ def test_an_owned_face_drawn_as_outlines_fails() -> None:
     findings = font_findings(OWNED_OUTLINES)
     assert len(findings) == 1
     assert "SourceSans3-Regular_wght" in findings[0]
+
+
+def test_a_print_instance_drawn_as_outlines_fails_too() -> None:
+    """The scan follows the instances' own name, not only the face they come from.
+
+    They are declared under a family of kpress's own, so the PostScript name in the PDF
+    is nothing like `SourceSans3`; a scan that watched only for the original would have
+    waved the renamed instances through and reported a clean file.
+    """
+    findings = font_findings(INSTANCE_OUTLINES)
+    assert len(findings) == 1
+    assert f"{postscript_prefix()}-410" in findings[0]
 
 
 def test_the_hosts_own_font_drawn_as_outlines_passes_and_is_still_reported() -> None:

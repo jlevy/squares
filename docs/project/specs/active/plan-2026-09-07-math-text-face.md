@@ -180,15 +180,24 @@ serif and the mathematics beside them.
 
 The fix is static instances at those four weights in both styles.
 kpress’s `devtools/instance_sans.py` generates them; `devtools/sans_instances.py` writes
-them to `packing/devtools/templates/fonts/` and hands them to `render_explainer_pdf`,
-which injects them into the loaded document as one `@media print` block of data-URI
-`@font-face` rules immediately before it prints.
+them to `packing/devtools/templates/fonts/` as
+`kpress-print-sans-latin-{weight}-{style}.woff2` and hands them to
+`render_explainer_pdf`, which injects them into the loaded document as one
+`@media print` block of data-URI `@font-face` rules immediately before it prints.
 The served page never sees them, so the screen keeps the variable font and
 `site/index.html` does not gain a byte.
 `render_explainer`’s inliner is what holds that: it drops every `@font-face` for the
-`Source Sans 3` family out of kpress’s stylesheets, and skips a stylesheet the prune
-empties, so registering `print-fonts.css` upstream left the rendered page byte for byte
-where it was.
+print sans family out of kpress’s stylesheets, and skips a stylesheet the prune empties,
+so registering `print-fonts.css` upstream left the rendered page byte for byte where it
+was.
+
+That family is `KPress Print Sans`, and no file on this side spells it.
+The instances are a modified Source Sans 3, whose OFL reserves the name “Source”, so
+kpress declares them under a name of its own; the prune, the probe that recognises the
+print stack, and the PostScript prefix (`KPressPrintSans-410`) the PDF scan watches for
+all read it back off the loaded generator through `sans_instances.print_family`. A
+literal would go on naming a family nothing declares the next time kpress renames it —
+which is how the rename that produced this paragraph was found.
 
 Two checks hold the rest.
 `sans_instances --check` regenerates the instances in memory and compares them byte for
@@ -208,6 +217,9 @@ fail on a Mac for a glyph nobody here chose.
 - `python -m devtools.sans_instances` writes the instances, `--check` verifies them and
   probes the page; `print_face_css()` is what `render_explainer_pdf` injects, and
   `PRINT_FACES` is the declared set.
+  `print_family()` and `postscript_prefix()` hand kpress’s family and the PostScript
+  name derived from it to the two other modules that need them, so the name has one
+  definition and it is kpress’s.
 - `python -m devtools.render_explainer_pdf --fonts` lists what the export embedded and
   what it drew as outlines.
 - `inline_font_urls(css, stylesheet_dir)`: the second argument is the directory the
@@ -274,7 +286,7 @@ research note. With the print sans faces the PDF is 794 KB.
 
 Tracked under epic `think-phgo`, with the kpress work under `kpr-b4mq`:
 
-- `think-988s`, this branch: the page’s own Source Sans 3 instances injected at PDF time
+- `think-988s`, this branch: the page’s own print sans instances injected at PDF time
   (the section above).
 - `think-xd7t`: the font provenance guard.
   `render_explainer_pdf --check` gains an allow-list of the shipped families, with

@@ -36,6 +36,7 @@ import os
 import re
 import sys
 from collections.abc import Sequence
+from functools import cache
 from pathlib import Path
 
 from strif import atomic_output_file
@@ -170,12 +171,34 @@ _BASE_FONT = re.compile(rb"/BaseFont\s*/([^\s/<>\[\]()]+)")
 _DESCRIPTOR_REF = re.compile(rb"/FontDescriptor\s+(\d+)\s+0\s+R")
 _FONT_NAME = re.compile(rb"/FontName\s*/([^\s/<>\[\]()]+)")
 
-#: The faces this page carries, by the PostScript name Chromium writes them under, with
-#: the subset tag off. These are the ones the project answers for: it chose them, it
-#: ships them inside the document, and if one of them is drawn as outline paths that is
-#: a defect here. Prefixes, because an instanced or subsetted face is named from its
+#: The faces this page carries that are named the same whatever kpress calls its print
+#: instances. `SourceSans3` is the variable face the screen reads in, and it is on the
+#: list precisely because a Type3 font under that name is the defect the instances were
+#: written to remove, coming back: a print run that missed them fell back to the
+#: variable font. Prefixes, because an instanced or subsetted face is named from its
 #: family with the axis or the style appended.
-OWNED_FACES = ("PTSerif", "SourceSans3", "KaTeX_", "LocalPunct", "KPressMathText")
+_FIXED_FACES = ("PTSerif", "SourceSans3", "KaTeX_", "LocalPunct", "KPressMathText")
+
+
+@cache
+def owned_faces() -> tuple[str, ...]:
+    """The faces this page answers for, by the PostScript name Chromium writes them under.
+
+    These are the ones the project chose, ships inside the document, and owes a proper
+    embedding to: if one of them is drawn as outline paths that is a defect here.
+
+    The static print instances are among them, and their name is not written down here.
+    kpress derives it from the family it declares them under -- `KPress Print Sans`
+    becomes `KPressPrintSans-410` -- and `devtools.sans_instances` derives the prefix
+    the same way from the same source, so a rename upstream moves this scan with it
+    instead of quietly narrowing it to faces the file no longer contains.
+
+    Imported inside the function because `sans_instances` imports this module.
+    """
+    from devtools.sans_instances import postscript_prefix  # noqa: PLC0415
+
+    return (*_FIXED_FACES, postscript_prefix())
+
 
 #: What a Type3 font is called when its descriptor cannot be read. Counted as ours: an
 #: outline font this scan cannot attribute is not one to wave through.
@@ -232,7 +255,7 @@ def font_findings(pdf: bytes) -> list[str]:
     step lighter than the serif beside it. `devtools.sans_instances` is the fix; this is
     the guard that says whether it took.
 
-    Scoped to `OWNED_FACES` rather than to every Type3 font, and that limit is the
+    Scoped to `owned_faces` rather than to every Type3 font, and that limit is the
     honest one. Three characters on this page -- the relations and the arrow in the sans
     line -- are in no face the document carries, so the browser draws them from the
     host's own sans, and on macOS that is a variable font too. Failing on those would
@@ -254,7 +277,7 @@ def font_findings(pdf: bytes) -> list[str]:
                 "objects Chromium writes, and this file has neither."
             )
         ]
-    ours = sorted({n for n in outlined if n == UNNAMED or n.startswith(OWNED_FACES)})
+    ours = sorted({n for n in outlined if n == UNNAMED or n.startswith(owned_faces())})
     if ours:
         return [
             (

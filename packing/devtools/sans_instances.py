@@ -20,6 +20,12 @@ the served `site/index.html` does not gain a byte. The instancer itself is kpres
 ships instances at its own weight tokens, and this page overrides them, which is the
 case that file is written to serve.
 
+The family those instances declare is kpress's too, and it is read off the loaded
+module (`print_family`) rather than written down here. The instances are a modified
+Source Sans 3, whose OFL reserves the name "Source", so kpress gives them a family of
+their own; a second copy of that string in this repository is a rename away from
+naming a family nothing declares, and the two would drift without a word of warning.
+
 `PRINT_FACES` is the declared set, and `--check` holds it to what the page actually
 requests rather than to what the stylesheet appears to say. The probe loads the rendered
 page under `media: print` at the printed column width, walks every text run, and records
@@ -105,6 +111,7 @@ class Generator(Protocol):
     the file touches it untyped.
     """
 
+    FAMILY: str
     instance_face: Callable[[Path, int], bytes]
     instance_name: Callable[[int, str], str]
     variable_face: Callable[[str, Path], Path]
@@ -130,6 +137,28 @@ def generator() -> Generator:
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return cast(Generator, module)
+
+
+def print_family() -> str:
+    """The family the instances declare, taken from the generator that writes them.
+
+    Every consumer here asks for it through this function -- the probe that recognises
+    the print stack, the prune in `render_explainer` that keeps kpress's own copies out
+    of the served page, the PostScript prefix `render_explainer_pdf` scans the PDF for.
+    One string, in kpress, where the faces are named; a literal on this side would be a
+    second definition of the same thing and would survive the rename that moved it.
+    """
+    return generator().FAMILY
+
+
+def postscript_prefix() -> str:
+    """The PostScript name every instance's name table starts with.
+
+    kpress builds it from the family by dropping the spaces -- `KPressPrintSans-410` --
+    and Chromium writes the same name into the PDF, behind a subset tag. So the prefix
+    is derived the same way rather than spelled out, and follows the family by itself.
+    """
+    return print_family().replace(" ", "")
 
 
 class Requested(TypedDict):
@@ -160,15 +189,20 @@ def gaps(
     return [row for row in requested if not covered(row["weight"], row["style"], faces)]
 
 
+#: The screen's sans, which is the variable face kpress's print stack now puts the
+#: static family ahead of. Still in the probe's set beside it: a run whose computed
+#: stack leads with this one under print is a run the injected instances do not reach,
+#: and it has to be counted for `--check` to say so rather than pass in silence.
+SCREEN_SANS = "Source Sans 3 Variable"
+
 #: What the page asks for, taken from the page rather than read out of the stylesheet.
 #: A run is counted when the first family in its computed stack is one of the two sans
-#: names: `Source Sans 3` is the print stack kpress puts these instances at the head of,
-#: and `Source Sans 3 Variable` is the screen stack, which is still what print resolves
-#: to until that change lands. Runs the print stylesheet hides are skipped -- a
-#: `display: none` block still reports a computed weight, and counting it would declare
-#: an instance for text no reader ever sees.
-_PROBE = r"""() => {
-  const sans = new Set(['Source Sans 3', 'Source Sans 3 Variable']);
+#: names the probe is handed: the print family kpress declares its instances under, and
+#: `SCREEN_SANS`. Runs the print stylesheet hides are skipped -- a `display: none` block
+#: still reports a computed weight, and counting it would declare an instance for text
+#: no reader ever sees.
+_PROBE = r"""(families) => {
+  const sans = new Set(families);
   const found = new Map();
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   for (let node = walker.nextNode(); node; node = walker.nextNode()) {
@@ -228,7 +262,7 @@ def probe(page_path: Path) -> list[Requested]:
             page.wait_for_selector(READY, timeout=60_000)
             page.set_viewport_size(PRINT_VIEWPORT)
             page.evaluate("document.fonts.ready")
-            rows: list[Requested] = page.evaluate(_PROBE)
+            rows: list[Requested] = page.evaluate(_PROBE, [print_family(), SCREEN_SANS])
             return rows
         finally:
             browser.close()
