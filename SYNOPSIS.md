@@ -206,6 +206,10 @@ case or experiment separately.
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
 | [Research: Annealing for Square Packing, and How Far It Actually Reaches](docs/project/research/research-2026-09-08-annealing-for-square-packing.md) | research synthesis | supporting | maintained | — |
+| [Video Spikes: The Sources, Not the Pages](packing/atlas/known-best/video/spikes/README.md) | component scope and use | supporting | maintained | — |
+| [Slideshow candidate v1 — notes](packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md) | research synthesis | record | retained | — |
+| [Spike v2: animated transitions between consecutive known-best packings](packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md) | research synthesis | record | retained | — |
+| [stats-summary.md](packing/atlas/known-best/video/spikes/v2-transitions/stats-summary.md) | generated status view | generated | generated | — |
 | [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | research synthesis | supporting | maintained | — |
 | [Review: Incorporating Stromquist’s Memos and Helper Arguments](docs/project/reviews/review-2026-09-07-stromquist-incorporation.md) | dated review record | record | retained | — |
 | [Stromquist’s Helper Arguments and Conditional Dots Certificates](docs/project/stromquist-helper-arguments-math-review.md) | dated review record | supporting | maintained | — |
