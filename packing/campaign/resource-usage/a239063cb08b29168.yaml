@@ -1,0 +1,485 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: a239063cb08b29168.output
+    sha256: 6485e9e5688177d9bbb81d965b6a47d4fc911519296cb4b7300c8a222fd2032c
+    bytes: 936654
+    records: 240
+    session_id: 35e8ab73-ad4e-41b5-9a56-e0ec1adfcb15
+    harness_versions:
+    - 2.1.260
+  span:
+    started_at: '2026-09-07T16:25:54.854Z'
+    ended_at: '2026-09-07T16:40:13.579Z'
+    wall_seconds: 858.725
+  turns:
+    assistant: 116
+    sidechain: 116
+    by_model:
+      claude-fable-5-1: 116
+    by_thinking_level:
+      xhigh: 116
+    by_model_and_thinking_level:
+      claude-fable-5-1 @ xhigh: 116
+    by_branch:
+      claude/kpress-pt-serif-fonts-1ec7e6: 116
+    latency:
+      count: 116
+      total_seconds: 690.516
+      median_seconds: 1.879
+      max_seconds: 132.782
+  tokens:
+    cache_creation_input_tokens: 2350366
+    cache_read_input_tokens: 13460621
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 2350366
+    input_tokens: 3622
+    output_tokens: 44108
+    thinking_tokens: 16098
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 2350366
+      cache_read_input_tokens: 13460621
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 2350366
+      input_tokens: 3622
+      output_tokens: 44108
+      thinking_tokens: 16098
+  tool_calls:
+    total: 92
+    total_seconds: 628.927
+    share_of_wall: 0.7324
+    errors: 1
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 5
+      total_seconds: 32.86
+      median_seconds: 3.845
+      max_seconds: 18.737
+    by_tool:
+      WebSearch:
+        count: 26
+        total_seconds: 334.867
+        median_seconds: 8.49
+        max_seconds: 38.561
+      WebFetch:
+        count: 26
+        total_seconds: 207.883
+        median_seconds: 6.376
+        max_seconds: 40.726
+      Bash:
+        count: 39
+        total_seconds: 86.145
+        median_seconds: 0.234
+        max_seconds: 18.737
+      ToolSearch:
+        count: 1
+        total_seconds: 0.032
+        median_seconds: 0.032
+        max_seconds: 0.032
+    by_command:
+      mkdir && cp && cp && curl && ls:
+        count: 1
+        total_seconds: 18.737
+        median_seconds: 18.737
+        max_seconds: 18.737
+      curl && pdftotext && x-height && text && companion:
+        count: 1
+        total_seconds: 10.813
+        median_seconds: 10.813
+        max_seconds: 10.813
+      ? curl && pdftotext && x-height && x && minus && fraction && sup1 && sub1 && curl &&
+        file && pdftotext && x-height && x && minus && text && weight && match && harmon
+      : count: 1
+        total_seconds: 6.614
+        median_seconds: 6.614
+        max_seconds: 6.614
+      curl && PT && x-height:
+        count: 1
+        total_seconds: 4.65
+        median_seconds: 4.65
+        max_seconds: 4.65
+      h && print(Q, && print(it[link]) && print(strip(it[body])[:2500]) && 194928:
+        count: 1
+        total_seconds: 4.066
+        median_seconds: 4.066
+        max_seconds: 4.066
+      curl && pdftotext:
+        count: 1
+        total_seconds: 3.947
+        median_seconds: 3.947
+        max_seconds: 3.947
+      ? curl && pdftotext && x-height && x && minus && plus && text && weight && match &&
+        harmon && superscript && subscript && rule && cap && digit
+      : count: 1
+        total_seconds: 3.881
+        median_seconds: 3.881
+        max_seconds: 3.881
+      curl && [print(f"{i[score]:4d}:
+        count: 1
+        total_seconds: 3.845
+        median_seconds: 3.845
+        max_seconds: 3.845
+      sed:
+        count: 14
+        total_seconds: 3.71
+        median_seconds: 0.148
+        max_seconds: 1.506
+      python3 se.py:
+        count: 1
+        total_seconds: 3.693
+        median_seconds: 3.693
+        max_seconds: 3.693
+      pdftotext:
+        count: 1
+        total_seconds: 3.54
+        median_seconds: 3.54
+        max_seconds: 3.54
+      answer:
+        count: 1
+        total_seconds: 3.456
+        median_seconds: 3.456
+        max_seconds: 3.456
+      curl && cm- && amsfonts && AMS && MathJax && source && derived && curl && curl && based:
+        count: 1
+        total_seconds: 3.166
+        median_seconds: 3.166
+        max_seconds: 3.166
+      curl && based:
+        count: 1
+        total_seconds: 3.132
+        median_seconds: 3.132
+        max_seconds: 3.132
+      python3 && h:
+        count: 1
+        total_seconds: 2.756
+        median_seconds: 2.756
+        max_seconds: 2.756
+      Scale && MatchLowercase && math-style && optical && script && ScriptPercent && no && range:
+        count: 1
+        total_seconds: 2.506
+        median_seconds: 2.506
+        max_seconds: 2.506
+      ? Complete && ^ && noplusnominus && nolessnomore && noequal && nosmalldelims && noparenthesis
+        && basic && defaultimath && alphabets && nohbar && nomathsizes && fouriergreek &&
+        selfGreek && symbolgreek && eulergreek && mathaccents && unicodeminus && endash &&
+        nolessnomore && noexclam && nopunctuation && nodigits && noletters && nolists && nospecials
+        && noasterisk && unimathaccents && mathaccents && 12pt && fontspec && subdued && italic)
+        && ^3.2 *Complete list of options
+      : count: 1
+        total_seconds: 2.256
+        median_seconds: 2.256
+        max_seconds: 2.256
+      match && text && companion && weight && axis && harmon && PT && match && text && companion && weight && axis:
+        count: 1
+        total_seconds: 0.251
+        median_seconds: 0.251
+        max_seconds: 0.251
+      MatchUppercase && MatchAveragecase && Scale && Digits && kern && italic && caveat && problem:
+        count: 1
+        total_seconds: 0.17
+        median_seconds: 0.17
+        max_seconds: 0.17
+      b12ptb && scriptscriptstyle && script:
+        count: 1
+        total_seconds: 0.165
+        median_seconds: 0.165
+        max_seconds: 0.165
+      ? ligature && kern && math && axis && endash && en-dash && hyphen && minus && equal
+        && optical && scriptscript && defaultmathsizes && mathaccents && nolessnomore && noplusnominus
+        && nosmalldelims && noparenthesis && noequal && \\mathrm && \\mathit && frenchmath
+        && subdued && sizes && too && too && too && vertical && raised && lowered
+      : count: 1
+        total_seconds: 0.148
+        median_seconds: 0.148
+        max_seconds: 0.148
+      match && harmon && weight && too && too && mismatch && mathptmx && Times.*Computer:
+        count: 1
+        total_seconds: 0.137
+        median_seconds: 0.137
+        max_seconds: 0.137
+      ? x-height && xheight && cap && weight && color && libertine && garamondx && cochineal
+        && baskervaldx && charter && utopia && minion && ebgaramond && scholax && stix &&
+        axis && subscriptcorrection && smallerop && subsup && paratype && PT
+      : count: 1
+        total_seconds: 0.128
+        median_seconds: 0.128
+        max_seconds: 0.128
+      cat:
+        count: 1
+        total_seconds: 0.128
+        median_seconds: 0.128
+        max_seconds: 0.128
+      the && raised && too && too && vertical:
+        count: 1
+        total_seconds: 0.126
+        median_seconds: 0.126
+        max_seconds: 0.126
+      ? x-height && xheight && fontdimen && Superscript && Subscript && ScriptPercent && SizeVariant
+        && optical && text && match && weight && minus
+      : count: 1
+        total_seconds: 0.124
+        median_seconds: 0.124
+        max_seconds: 0.124
+    by_command_family:
+      toolchain:
+        count: 9
+        total_seconds: 42.804
+        median_seconds: 3.881
+        max_seconds: 10.813
+      other:
+        count: 14
+        total_seconds: 20.766
+        median_seconds: 0.211
+        max_seconds: 4.066
+      filesystem:
+        count: 1
+        total_seconds: 18.737
+        median_seconds: 18.737
+        max_seconds: 18.737
+      inspection:
+        count: 15
+        total_seconds: 3.838
+        median_seconds: 0.146
+        max_seconds: 1.506
+    invoked:
+      echo: 84
+      sed: 56
+      cd: 39
+      head: 35
+      curl: 12
+      grep: 11
+      too: 7
+      x-height: 7
+      weight: 7
+      pdftotext: 6
+      text: 6
+      match: 6
+      minus: 5
+      axis: 4
+      harmon: 4
+      set: 3
+      cat: 3
+      optical: 3
+      mathaccents: 3
+      nolessnomore: 3
+      PT: 3
+      companion: 3
+      x: 3
+      cp: 2
+      kern: 2
+      endash: 2
+      noplusnominus: 2
+      nosmalldelims: 2
+      noparenthesis: 2
+      noequal: 2
+      subdued: 2
+      vertical: 2
+      raised: 2
+      Scale: 2
+      script: 2
+      ScriptPercent: 2
+      cut: 2
+      xheight: 2
+      cap: 2
+      h: 2
+      based: 2
+      mkdir: 1
+      which: 1
+      tail: 1
+      ls: 1
+      ligature: 1
+      math: 1
+      en-dash: 1
+      hyphen: 1
+      equal: 1
+      scriptscript: 1
+      defaultmathsizes: 1
+      \\mathrm: 1
+      \\mathit: 1
+      frenchmath: 1
+      sizes: 1
+      lowered: 1
+      MatchLowercase: 1
+      math-style: 1
+      'no': 1
+      range: 1
+      color: 1
+      libertine: 1
+      garamondx: 1
+      cochineal: 1
+      baskervaldx: 1
+      charter: 1
+      utopia: 1
+      minion: 1
+      ebgaramond: 1
+      scholax: 1
+      stix: 1
+      subscriptcorrection: 1
+      smallerop: 1
+      subsup: 1
+      paratype: 1
+      fontdimen: 1
+      Superscript: 1
+      Subscript: 1
+      SizeVariant: 1
+      mismatch: 1
+      mathptmx: 1
+      Times.*Computer: 1
+      MatchUppercase: 1
+      MatchAveragecase: 1
+      Digits: 1
+      italic: 1
+      caveat: 1
+      problem: 1
+      Complete: 1
+      ^: 1
+      basic: 1
+      defaultimath: 1
+      alphabets: 1
+      nohbar: 1
+      nomathsizes: 1
+      fouriergreek: 1
+      selfGreek: 1
+      symbolgreek: 1
+      eulergreek: 1
+      unicodeminus: 1
+      noexclam: 1
+      nopunctuation: 1
+      nodigits: 1
+      noletters: 1
+      nolists: 1
+      nospecials: 1
+      noasterisk: 1
+      unimathaccents: 1
+      12pt: 1
+      fontspec: 1
+      italic): 1
+      ^3.2 *Complete list of options: 1
+      b12ptb: 1
+      scriptscriptstyle: 1
+      '[print(f"{i[score]:4d}': 1
+      print(Q,: 1
+      print(it[link]): 1
+      print(strip(it[body])[:2500]): 1
+      '194928': 1
+      answer: 1
+      fraction: 1
+      sup1: 1
+      sub1: 1
+      file: 1
+      plus: 1
+      superscript: 1
+      subscript: 1
+      rule: 1
+      digit: 1
+      python3: 1
+      cm-: 1
+      amsfonts: 1
+      AMS: 1
+      MathJax: 1
+      source: 1
+      derived: 1
+      the: 1
+      python3 se.py: 1
+    invoked_families:
+      other: 196
+      shell: 127
+      inspection: 108
+      toolchain: 13
+      filesystem: 3
+    by_shell_shape:
+      compound:
+        count: 34
+        total_seconds: 53.285
+        median_seconds: 0.205
+        max_seconds: 10.813
+      python_inline:
+        count: 2
+        total_seconds: 22.582
+        median_seconds: 11.291
+        max_seconds: 18.737
+      python_heredoc:
+        count: 3
+        total_seconds: 10.278
+        median_seconds: 3.456
+        max_seconds: 4.066
+    by_thinking_level:
+      xhigh:
+        count: 92
+        total_seconds: 628.927
+        median_seconds: 4.773
+        max_seconds: 40.726
+    shell_traits:
+      pipes: 24
+      substitutes: 8
+      redirects_output: 7
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'

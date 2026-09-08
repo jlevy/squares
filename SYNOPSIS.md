@@ -3210,8 +3210,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | claimed by a session | 116 | 29,906 | 16,863 | 349 | 2,824 | 171.02 h |
-| claimed by none | 19 | 5,689 | 3,279 | 110 | 552 | 33.68 h |
-| **measured** | **135** | **35,595** | **20,142** | **459** | **3,376** | **204.7 h** |
+| claimed by none | 42 | 8,737 | 5,134 | 136 | 760 | 43.37 h |
+| **measured** | **158** | **38,643** | **21,997** | **485** | **3,584** | **214.39 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
