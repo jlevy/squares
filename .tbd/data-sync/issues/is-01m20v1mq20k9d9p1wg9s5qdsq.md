@@ -5,7 +5,7 @@ title: Prevent math startup from shifting neighboring text and reduce parameter 
 kind: bug
 status: in_progress
 priority: 1
-version: 16
+version: 23
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 labels: []
 dependencies: []
@@ -22,8 +22,13 @@ child_order_hints:
   - is-01m212vmx03ddfr35psjtzk1k5
   - is-01m212vnnwz9d60e7yhsahx8qe
   - is-01m2152r3nckcg3we82828v7yh
+  - is-01m21brwj6et9vbnf7fvnpva2x
+  - is-01m21c9b3envq2cwh5q5s7wvgs
+  - is-01m21dyxvmcggme4gkh8j849hx
+  - is-01m21dyydt23csbr8h3jtkztse
+  - is-01m21dyyygnr8mpt1vt77b26a4
 created_at: 2026-09-08T15:44:04.307Z
-updated_at: 2026-09-08T18:39:26.324Z
+updated_at: 2026-09-08T21:14:39.439Z
 ---
 User confirms the deployed no-swap fix works but math parameters still appear slowly. Deployment remains 33cd4760 with KPress7b20ae7. Source-confirmed avoidable dependencies: HOST_MATH_INIT sets allEmbeddedFonts:true and waits every declared face before boot; both certificate boots synchronously build 230x230 heat maps, including the hidden certificate, before initial readouts; root pending CSS keeps every .tex/.tex-d hidden until all static math and pending interactive renders settle. Diagnose normal first-visible parameter timing separately from the delayed-font regression probe. Prefer a Squares fix that renders/reveals each font-ready parameter independently and defers nonessential/hidden heat-map work; evaluate narrower upstream warmup separately. Preserve the no-swap, latest-input, no-JS/error fallback, and print contracts. Do not describe the three-second failure ceiling as an intentional startup delay.
 
@@ -38,3 +43,7 @@ First boundary16:19UTC: initial records tier31/69 passed in32.93s;11 focused rep
 Second boundary 17:01 UTC: frozen control and corrected no-warmup eligibility committed f95150e4; baseline six valid runs retained, no candidate timing yet. Independent real-transfer geometry control caught WebKit exposing a lone relation before its fallback font arrived (think-zh5u), retained as exp-002. KPress PR61 first CI green at206d585; follow-up runtime now awaits per-family native load promises because check() lies in WebKit. Focused final upstream 29 browser/241 JS tests and lint/types green. Root has integrated current main PR130 session-record repair before final validation.
 
 Additional owner requests tracked as think-06te (bullet optical offset and obsolete stretched-marker override) and think-jizt (canonical standalone KPress architecture). Bullet shape and 0.72px screen/0.64px print downward offset pass retained negative controls; architecture drafted via tbd architecture shortcut and independently reviewed. Host review corrected CSS-visible print certificate heat maps and native semantic fallback markers. Publication CI shares one prepared artifact across all browser checks. Next: commit/pin upstream, build final artifact, run full correctness matrix then an idle-host paired timing window, full checkpoint, PR and HTML/PDF previews.
+
+18:55 UTC integration: KPress PR61 merged20a7d2b with complete CI34256487179 green; runtime, WebKit, architecture-creation and upstream CI beads closed/synced. Merged Squares main38ca2892 atcadaf4df, preserving PR131 paper, bold-sans and print repairs. Review found supported saved settings lost prepared reservations; think-fatc now owns four-context declarative preparation and complete formula coverage, locally validated with52focusedtests and held-font/default/representative saved-setting controls. Canonical architecture follow-up is KPressPR64. H003 remains unmeasured and its pre-run protocol now identifies the combined publication; H004 extends correctness to all settings. Root reporter14tests/types and durable documentation869-file coverage pass. Final committed push gate, hosted full checkpoint/Pages matrix and isolated timings remain before publication, followed by browser/PDF opening.
+
+2026-09-08 20:33 UTC integration checkpoint: final product source d122d19c passed45 selected checks and1188 reachable tests in137.83s, retained in runs/push-final-ui-2026-09-08.json.gz. Full hosted checkpoint at25e66d7b passed69/69 Linux steps with no skips plus4 macOS steps. Final Pages34274946315 passes print and Firefox loading but reports one WebKit early_math observation after3170ms; kpress_font_pipeline is isolating observer overhead versus a real pending-node watchdog gap. H005 has exactly12pairs each width and provisional paired improvements13.50% desktop/37.57% mobile; no accepted product claim before complete correctness evidence. PDF atd122d19c has17 pages,26 embedded subsets, clean full visual review and reproducibility. Main advanced tofbc790b3; validation-only PR129/132 integration committedde5013d9 using main shared -n/--numprocesses interface, preserving branch fault/scope controls; all123 focused tests pass (two required ps permission replay). Three delegates active on final Pages diagnosis, PDF, and evidence closeout. Squares PR/merge/deploy remain incomplete. Scope fixed to these repairs.
