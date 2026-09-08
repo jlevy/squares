@@ -243,6 +243,13 @@ These are prospective controls, not runs performed by this review.
 | Completeness and resource refusal | Refuse missing angle or separating-axis branches, incomplete diagonal coverage, altered coefficients or field embedding, unresolved signs and exhausted limits. |
 | Trump packing control | Bind the accepted exact eleven-square packing at its own side $U$ and retain all eleven diagonal constraints and 55 unordered compatible-pair constraints. Any valid kernel must have $b\ge11$ there. Do not transplant this packing to $96/25$. |
 
+The post-freeze admission below supersedes this table for the instrument that was
+actually built: the frozen controls exercise exact PSD and degeneracy, finite packing
+equality through the nine-grid $b\ge9$ dual, touching and containment, identity and
+symmetry, and completeness and resource refusal, but exercise neither the Trump packing
+control nor constant normalization, neither of which appears in that admission’s minimal
+implementation list.
+
 A finite necessary-constraint obstruction is acceptable only with an exact certificate
 of infeasibility for the prospectively fixed family.
 The grid argument above supplies such a certificate analytically for cubic center
@@ -515,11 +522,16 @@ From `packing/`, the independent replay was:
 
 All 72 tests passed: 17 producer and 55 reader controls, with none deselected.
 Pytest reported 13.96 seconds; the complete process used 16.93 seconds wall, 1.20
-seconds user CPU and 3.53 seconds system CPU. The controls cover the exact nine-grid
-lower bound of nine and threshold-eleven refusal, mixed vector trace, source and weight
-mutations, legal touching, strict overlap, singular PSD and invalid zero pivots,
-incomplete solver receipts, one-call limits, rationalization failure and bounded
-parsing. They establish neither scientific pool counts nor a scientific objective value.
+seconds user CPU and 3.53 seconds system CPU. These figures and the per-file figures
+recorded elsewhere for the same two suites come from separate invocations and cannot be
+compared with each other; re-measuring the same command on 2026-09-08 gave 72 passed in
+0.50 seconds pytest and 0.81 seconds external wall warm, against 2.27 and 3.27 seconds
+on the first cold run, but on a different host, so it corrects neither earlier reading.
+The controls cover the exact nine-grid lower bound of nine and threshold-eleven refusal,
+mixed vector trace, source and weight mutations, legal touching, strict overlap,
+singular PSD and invalid zero pivots, incomplete solver receipts, one-call limits,
+rationalization failure and bounded parsing.
+They establish neither scientific pool counts nor a scientific objective value.
 
 Targeted Ruff, format-check and BasedPyright checks also passed on the four frozen
 files. Their process wall times were 0.12, 0.01 and 38.21 seconds respectively;
