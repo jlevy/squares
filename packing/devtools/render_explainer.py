@@ -623,6 +623,16 @@ def _declares_nothing(css: str) -> bool:
 #: Consistency section -- three styles of base64 for a page that draws none of them -- and
 #: what it buys is that the page keeps no private list of which code may be bold, so an
 #: article that adds a fenced block tomorrow gets a drawn face rather than a sheared one.
+#:
+#: One definition, two consumers, and that is deliberate. It is what `mono_css_assets` and
+#: `mono_weights_rejection` are given, and it is what `shell_substitutions` stamps into
+#: `data-kpress-mono-font` on `<html>` -- kpress's own switch, which the shell used to
+#: carry as a literal. A literal is a second copy of a publishing decision: today the
+#: `planetaire` value changes nothing, since it is kpress's default and only `system` has
+#: a rule of its own, so a shell that had drifted to a stale or misspelled value would
+#: have gone on rendering a page that looked right. Stamping it from here is what makes
+#: the two move together, and the render refuses a shell placeholder with no value, so
+#: dropping the key fails the build rather than the page.
 MONO_FONT: Final = "planetaire"
 MONO_WEIGHTS: Final = ("regular", "bold", "italic", "bold-italic")
 
@@ -2040,8 +2050,17 @@ def shell_substitutions(static: Path, shared: dict[str, str], body: str) -> dict
 
     `BODY_HTML` goes in last, after every other value: it is already substituted
     through, and a later key must not reach inside it.
+
+    `MONO_FONT` is stamped from the constant rather than written into the shell, so the
+    attribute and the stylesheets cannot disagree: `data-kpress-mono-font` is kpress's
+    switch, and a page that named the face in one place and asked `mono_css_assets` for
+    the other would be a page whose markup says `planetaire` while it ships no face --
+    exactly the drift the attribute is supposed to prevent. Under `system` the two move
+    together: the attribute hands code to the platform stack and `mono_css_assets`
+    returns nothing.
     """
     return {
+        "MONO_FONT": MONO_FONT,
         "KPRESS_CSS": kpress_css(static) + katex_css(static),
         "RELATION_CSS": relation_face_css(static),
         "THEME_BOOTSTRAP": theme_bootstrap(static),

@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import pytest
 
+from devtools import render_explainer_pdf
 from devtools.inspect_explainer_typography import _text_bearing, _unshipped
 
 
@@ -82,6 +83,34 @@ def test_the_mono_kpress_now_ships_is_the_pages_and_the_hosts_own_is_not() -> No
     assert _unshipped([_face("Planetaire Mono Text", custom=True)]) == []
     assert _unshipped([_face("Menlo", custom=False)]) == ["Menlo"]
     assert _unshipped([_face("DejaVu Sans Mono", custom=False)]) == ["DejaVu Sans Mono"]
+
+
+def test_a_host_face_a_bead_is_removing_is_not_a_finding(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A guard can land before the fix it waits on, and this is that half on the screen side.
+
+    Over a mapping this test supplies, because the page's own emptied on 2026-09-08 with
+    `kpr-v731`. The mechanism outlives its entries: it is what let this probe ship while
+    the mono, the list marker and the quotation marks were still the reader's, and it is
+    what the next such wait will use. Testing it only through whatever happens to be
+    listed deletes the coverage on the day the list empties -- the day the real page stops
+    exercising it -- which is what happened here and is why this test is back.
+
+    The twin of `test_a_pending_face_passes_and_is_reported_with_its_bead` on the PDF side,
+    in this side's shapes: a platform font Blink names with its spaces in, reported by
+    family rather than by PostScript name, and no `@font-face` behind it, since a pending
+    face is one the page never declared.
+    """
+    monkeypatch.setattr(
+        render_explainer_pdf, "EXPECTED_HOST_FONTS", {"Menlo": "kpr-v731"}, raising=True
+    )
+    assert _unshipped([_face("Menlo", custom=False)]) == []
+    # The excuse is one family, not an amnesty: everything else still answers as itself.
+    assert _unshipped([_face("DejaVu Sans Mono", custom=False)]) == ["DejaVu Sans Mono"]
+    assert _unshipped([_face("Menlo", custom=False), _face("Wingdings", custom=True)]) == [
+        "Wingdings"
+    ]
 
 
 def test_a_face_from_the_readers_machine_that_nobody_chose_is_a_finding() -> None:

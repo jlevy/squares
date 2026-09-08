@@ -121,8 +121,11 @@ What is specific to this page, found while prototyping the feature on it:
   browser build and the host’s fonts, the layout does not.
   After `main`’s content merge: 17 pages and 830,153 bytes on macOS with the same pinned
   shell, the extra page being content rather than typography.
-  Current, with the fourth sans weight gone and the relation glyphs from a shipped face:
-  17 pages and 817,119 bytes on the same host.
+  With the fourth sans weight gone and the relation glyphs from a shipped face: 17 pages
+  and 817,119 bytes on the same host.
+  Current, with the mono face adopted: 17 pages and 820,911 bytes as `--update` writes
+  the file, 820,817 as `--check` reports it — the two modes differ by the 94-byte source
+  receipt and by nothing else, which is why a figure here says which one produced it.
   In the file the math letters and digits still come from the `PTSerif-Regular` and
   `PTSerif-Italic` subsets the prose already embeds, while `≤`, `√`, the fraction bar
   and the Greek come from the embedded KaTeX faces.
@@ -309,17 +312,26 @@ The page picks the feature up on the gitlink bump and its next Pages deploy.
 The owner’s rule (2026-09-07): the explainer resolves every text run to a face the page
 ships, on screen and in the PDF. The one exception is the 100-best atlas figure, whose
 Helvetica is baked in by its own pipeline (`build_known_best_atlas.py`) and stays.
+The exception is a real one and not a formality: the figure sets 468 labels in
+`font-family="Helvetica, Arial, sans-serif"`, so the export carries nine subsets of
+whatever the drawing machine answered that with — nine `Helvetica-Bold` and
+`Helvetica-BoldOblique` subsets, 31,331 bytes of font programs, on the Mac that wrote
+this.
+The page’s own text has no host font in it and the figure inside the page does, and
+the two halves of that sentence are said together wherever either is said.
+`think-czt4` records it, so the guard’s one accepted exception has a bead like every
+pending one ever had.
 Measuring the PDF for the math text face showed where the rule was not yet met, and what
 the fonts cost:
 
-| Measured 2026-09-07 | Web page (1,418 KB) | PDF (946 KB) |
+| Measured 2026-09-07, mono row 2026-09-08 | Web page (1,418 KB) | PDF (946 KB) |
 | --- | ---: | ---: |
 | PT Serif | 164 KB, four faces | 92 KB, embedded subsets |
 | KaTeX faces | 181 KB, eight faces | 25 KB, four embedded subsets |
 | KPress Math Text composite | 216 KB, six faces, all duplicate bytes | none (draws the faces above) |
 | Source Sans 3 | 75 KB, two variable faces | 345 KB as Type3 outline paths |
-| Inline code | system mono | Menlo, 56 KB, 134 characters |
-| Inline code, since 2026-09-08 | Planetaire Mono Text, 76 KB of base64 | 6 KB, one embedded subset |
+| Inline code | system mono | Menlo, 5.6 KB, 134 characters |
+| Inline code, since 2026-09-08 | Planetaire Mono Text, 76,352 B of base64 | 3,600 B, one embedded subset |
 | List bullets | system serif | Georgia, 16 KB, 48 bullets |
 | Atlas figure | Helvetica by design | 54 KB, accepted |
 
@@ -336,12 +348,19 @@ shell: **1,024,108 bytes with the sans in Type3 outlines and 830,153 with it in 
 That is the figure `devtools/sans_instances.py` and the pull request both state.
 
 With the fourth sans weight gone and the relation glyphs from a shipped face, the same
-export on the same host is **817,119 bytes**, 24 embedded fonts and no Type3 font of any
-kind: the three `KPressPrintSans` weights and the italic, the four PT Serif faces, five
-KaTeX faces, the atlas figure’s Helvetica, and Menlo and Georgia while `kpr-v731`,
+export on the same host was **817,119 bytes**, 24 embedded fonts and no Type3 font of
+any kind: the three `KPressPrintSans` weights and the italic, the four PT Serif faces,
+five KaTeX faces, the atlas figure’s Helvetica, and Menlo and Georgia while `kpr-v731`,
 `kpr-2tmj` and `kpr-asj4` are open.
-All three are closed now, and the subsection below records the export that carries no
-host face at all.
+All three are closed now, and with the mono face adopted the same export is **820,911
+bytes as `--update` writes it**, 820,817 as `--check` reports it, and **26 embedded
+fonts**: six `KPressPrintSans` instances, the four PT Serif faces, five KaTeX faces,
+`KPressQuotes-Regular`, `PlanetaireMonoText-Regular`, and the atlas figure’s nine
+`Helvetica-Bold` and `Helvetica-BoldOblique` subsets.
+What the subsection below records is an export whose *document* carries no host face.
+The nine Helvetica subsets are the figure’s own labels and they stay; they are what
+`ATLAS_FACES` and `think-czt4` are for, and `--check` prints them as accepted rather
+than passing them in silence.
 
 ### Sans mathematics, the shipped quotation marks, and one paint
 
@@ -534,7 +553,8 @@ Tracked under epic `think-phgo`, with the kpress work under `kpr-b4mq`:
 - `think-9r58`, adopted in full: kpress’s CSS-drawn list marker (`kpr-2tmj`) and its
   shipped quotation face (`kpr-asj4`) came first, with the shell’s print-only prose
   override; the mono followed when `kpr-v731` landed Planetaire Mono Text at 0.87.
-  `EXPECTED_HOST_FONTS` is empty.
+  `EXPECTED_HOST_FONTS` is empty; the atlas figure’s labels stay on `think-czt4`, which
+  records the exception rather than waiting to remove it.
   What remains under the epic is duplication rather than provenance: `kpr-hhdc` and
   `think-f8q9` on the composite’s copies, and `think-y15p` asking kpress to export the
   print family from the package.
@@ -577,8 +597,11 @@ purpose — one sans bold is the rule, not one weight for two families.
 
 kpress ships one (`kpr-v731`, Planetaire Mono Text: B612 Mono’s letterforms with Hack’s
 punctuation, vendored as latin subsets), and the page takes it.
-That was the last role the reader’s machine answered, and `EXPECTED_HOST_FONTS` is empty
-because of it.
+Inline code was the last role in the document the reader’s machine answered, and
+`EXPECTED_HOST_FONTS` is empty because of it.
+Not the last in the export: the atlas figure’s labels are still drawn by the machine
+that runs it, nine Helvetica subsets on this Mac, and that exception is `ATLAS_FACES`
+and `think-czt4` rather than this mapping.
 
 **Four styles for a page that draws one.** The article carries eleven code spans and 179
 characters, no fenced block and so no highlighted tokens, and not one of them sits in a
@@ -603,23 +626,62 @@ a page that took only that constant would name `Planetaire Mono Text`, declare n
 under it, and go on drawing code from the reader’s machine while reading as though it
 had adopted the face.
 
+**One decision, one value.** `data-kpress-mono-font` on `<html>` is kpress’s switch for
+the same setting, and the shell carried `planetaire` as a literal beside the constant
+that drives the assets.
+The literal could not fail — `planetaire` is kpress’s default and only `system` has a
+rule of its own — so a shell that drifted to a stale or misspelled value would have gone
+on rendering a page that looked right, and a page whose constant moved to `system` would
+have declared a face in its markup while shipping none.
+The shell stamps `{{MONO_FONT}}` now and `shell_substitutions` fills it from
+`MONO_FONT`, so the attribute and the stylesheet list move together and `fill` refuses a
+shell placeholder with no value.
+The rendered page is byte for byte where it was.
+
 **What it cost.** One host, one browser, one session, Playwright’s pinned headless
 shell:
 
 | Measured 2026-09-08 | Before | Gitlink only | After |
 | --- | ---: | ---: | ---: |
 | Page | 1,859,156 B | 1,865,141 B | 1,944,562 B |
-| Page, gzipped | 943,862 B | — | 1,004,079 B |
-| PDF | 822,950 B | — | 820,921 B |
+| Page, gzipped (`gzip -9`) | 943,862 B | — | 1,004,083 B |
+| PDF, `--update` | 822,950 B | — | 820,921 B |
+| PDF, `--check` | — | — | 820,827 B |
 | Embedded fonts | 26 | — | 26 |
 
 The page grew 85,406 B, of which 5,985 B is the gitlink bump on its own and 79,421 B is
-the face: 57,260 B of woff2 as 76,348 B of base64, plus four stylesheets.
+the face: 57,260 B of woff2 as 76,352 B of base64, plus four stylesheets.
+The base64 figure is `4*ceil(n/3)` per file — 17,900, 18,616, 19,788 and 20,048 — and
+not on the sum, which pads once and is four bytes short.
 Three of those four styles are bytes the page carries and never draws, which is the
 price of the no-synthesis contract and is stated here rather than argued away.
+
+**On the wire the number is the compressed one, and it is 60,221 B.** Base64 of a woff2
+is incompressible payload in a compressible alphabet, so gzip gives back about three
+quarters of it: the three undrawn styles are 58,452 B of base64 and **44,017 B of the
+60,221**, measured by gzipping the rendered page with and without their three
+`@font-face` blocks.
+That is 73% of this branch’s wire cost buying glyphs the page cannot draw, on a page
+that compresses to 1,004,083 B — 6.4% larger than before, paid to stop shipping a
+different page to every reader.
+
 The PDF went the other way and lost 2,029 B: the mono subset the export needs is smaller
 than the Menlo subset it replaced, and the font count is unchanged because one face
 swapped for one face.
+The subsets are exactly that delta — `PlanetaireMonoText-Regular` embeds as 3,600 B, so
+Menlo’s subset was 5,629 B — which is why the mono row of the Font Consistency table
+above reads 3,600 B against 5.6 KB rather than the 56 KB a slipped decimal once put
+there.
+
+**Two modes, 94 bytes apart, and each figure says which one produced it.** `--update`
+writes the file with the `%sqpack-source-html-sha256:` receipt `_with_receipt` appends
+after `%%EOF` — 29 bytes of label, 64 of digest and a newline — and `--check` never
+writes it, so `--check` reports 94 bytes fewer for the same document; date normalisation
+is length-preserving and changes nothing else.
+The pair above is one host in one session.
+A second worktree of the same commit wrote 820,911 and reported 820,817 — 10 B below
+this pair and the same 94 apart — and the review’s independent host measured that same
+pair and reproduced the 2,029 B delta against `main`.
 
 **The rung, measured beside the prose.** The mono rung is 0.87 of the base, and it is
 kpress’s number to set.
@@ -649,16 +711,29 @@ adjusted for it.
 `render_explainer_pdf --check` now reads every font dictionary in the export, embedded
 and outline alike, and fails on any family that is not one the page ships.
 `allowed_families()` is `PTSerif`, `SourceSans3`, `KPressPrintSans`, `KaTeX_`,
-`LocalPunct`, `KPressMathText`, and then `Helvetica`, `Arial` and `LiberationSans` as
-the 100-best atlas figure’s documented exception: its labels are baked into
-`known-best-1-100.svg` by `build_known_best_atlas.py` under the stack
-`Helvetica, Arial, sans-serif`, so the face in the file is whichever of the three the
-drawing machine has — Helvetica on a Mac, Arial on Windows, and Liberation Sans on a
-Linux runner, where fontconfig aliases both names to the metric-compatible substitute.
-All three are the one figure, and it stays by the owner’s decision, so no bead removes
-it. The three are matched as host families rather than by bare prefix, so the exception
-admits `Helvetica-BoldOblique` and not `HelveticaNeue`, `ArialUnicodeMS` or
-`LiberationSansNarrow`, each of which is a font a real machine has.
+`LocalPunct`, `KPressMathText`, and then `ATLAS_FACES` — the 100-best atlas figure’s
+accepted exception, `Helvetica` and `LiberationSans`, each carrying `think-czt4`. The
+figure’s labels are baked into `known-best-1-100.svg` by `build_known_best_atlas.py`
+under the stack `Helvetica, Arial, sans-serif`, so the face in the export is whatever
+the drawing machine answered that with, and the export really carries nine such subsets.
+The figure stays by the owner’s decision, so the bead records the exception rather than
+asking for a change; it is there because an exception without a bead is a defect nobody
+wrote down, which is the rule `EXPECTED_HOST_FONTS` states for itself.
+
+Two names and not the figure’s whole fallback chain, and that is what makes the
+exception able to fail.
+Naming the chain named every face the chain can produce, so the allow-list could not
+trip: the labels could change family and the guard would pass in silence.
+Listed instead is what the figure has been measured drawing with — Helvetica on this
+Mac, Liberation Sans on the Linux runner, where fontconfig aliases both Helvetica and
+Arial to the metric-compatible substitute — and `Arial`, which was listed once and which
+no machine that draws this figure has been seen to answer with, is now a finding like
+any other third face.
+Both mappings are matched as host families rather than by bare prefix, so the exception
+admits `Helvetica-BoldOblique` and not `HelveticaNeue` or `LiberationSansNarrow`, each
+of which is a font a real machine has.
+`--check` and `--fonts` print the accepted families and their bead, so the export’s one
+host-drawn family is in the output rather than only in a code comment.
 The names the page owns stay prefixes, because the page owns everything under them and
 the two probes answer in two shapes: a PostScript face in the PDF, and in the browser
 the instance a variable face is at, `Source Sans 3 ExtraLight`. `KPressPrintSans` is
@@ -685,6 +760,8 @@ A plausible substitute nobody has measured is left off, since a listed name is a
 the guard stops looking at; the generic Linux sans was listed once, and it is the exact
 face a relation face that stopped loading comes back as on the machine that gates the
 check.
+`ATLAS_FACES` is held to the same rule, and was not until 2026-09-08: it named the
+atlas figure’s whole fallback chain, which is an exception that cannot fail.
 
 `inspect_explainer_typography --check-supporting` asks the same question of the screen.
 It walks every element in `.cert-page` that holds text and asserts through

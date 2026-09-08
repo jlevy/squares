@@ -589,6 +589,41 @@ def test_the_mono_the_page_declares_is_the_set_kpress_would_link() -> None:
     assert not set(render_explainer.mono_stylesheets()) & set(kpress_assets.DEFAULT_CSS_ASSETS)
 
 
+def test_the_shell_stamps_the_mono_switch_from_the_constant(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """kpress's switch and this page's asset list are one decision, so they are one value.
+
+    `data-kpress-mono-font` is what `style-tokens.css` reads, and the shell carried
+    `planetaire` as a literal. That literal could not fail: `planetaire` is kpress's
+    default and only `system` has a rule of its own, so a shell that drifted -- a typo, a
+    renamed value upstream, a page whose constant moved to `system` while the markup still
+    said `planetaire` -- would have gone on rendering a page that looked right and shipped
+    the wrong thing. Under `system` that page would name a face in its markup, link no
+    stylesheet for it, and draw code from the reader's machine.
+
+    Stamped from `MONO_FONT` instead, the two cannot disagree, and the check is that they
+    move together: the attribute follows the constant and `mono_stylesheets` empties with
+    it. The key itself is load-bearing rather than asserted here -- `fill` refuses a
+    placeholder with no value, so a `shell_substitutions` that stopped supplying
+    `MONO_FONT` fails the render.
+    """
+    shell = render_explainer.TEMPLATE.read_text(encoding="utf-8")
+    assert shell.count('data-kpress-mono-font="{{MONO_FONT}}"') == 1
+    assert render_explainer.MONO_FONT not in shell
+    root = next(line for line in shell.splitlines() if "data-kpress-mono-font" in line)
+
+    def stamped() -> str:
+        values = {"MONO_FONT": render_explainer.MONO_FONT}
+        return render_explainer.fill(root, values, where="explainer-shell.html")
+
+    assert 'data-kpress-mono-font="planetaire"' in stamped()
+    assert render_explainer.mono_stylesheets()
+    monkeypatch.setattr(render_explainer, "MONO_FONT", "system")
+    assert 'data-kpress-mono-font="system"' in stamped()
+    assert render_explainer.mono_stylesheets() == ()
+
+
 def test_a_mono_set_that_leaves_a_style_to_the_browser_fails_the_render(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
