@@ -5,7 +5,7 @@ title: Publish and validate Session097 integrated research checkpoint
 kind: task
 status: in_progress
 priority: 1
-version: 28
+version: 29
 spec_path: packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md
 labels: []
 dependencies: []
@@ -21,10 +21,10 @@ child_order_hints:
   - is-01m1z1d949sby1tkrav2k92sfh
   - is-01m1z2grw8sr01t7ynft3hrnz9
 created_at: 2026-09-07T21:04:19.475Z
-updated_at: 2026-09-08T01:25:39.103Z
+updated_at: 2026-09-08T01:37:04.298Z
 ---
 At each useful block boundary stop writers; review spec/agenda status and all diffs under tbd shortcuts and Practical Prose; regenerate the document, ledger and session views; retain a privacy-reduced interval receipt with fixed start20:56:47.766UTC and observed end; run change-reachable push validation and the complete immutable checkpoint as required; commit explicit owned paths, push, create/update one cost-first PR with results, limits, ownership and ID allocations; follow actual hosted CI results asynchronously. Keep pending and passed distinct, and sync beads.
 
 ## Notes
 
-User now explicitly requests sync and LAND PR116 as soon as safe. First upstream merge28696526 committed a61b3a8f, all five conflicts resolved and generated views rebuilt; second clean merge of new main831697c0/PR117 staged awaiting validation/commit. Independent reviews found no scientific claim or source collision; fixed stale ID ownership and324 workload budgets, preserved v0.2.4 publication set. Refreshed privacy-safe cost receipt through Sep8 01:14:55 (7.51 aggregate agent h;3.69 active union;4.3 wall window;499086 output), not eventual PRtotal. Checklist remaining: complete localpush38738 on integrated tree; commit/push samePR; concise cost-first description; matching actual fast+deferred checks, record receipt and synchronize bead dispositions; ghmerge only currentvalidatedhead. Full historic failures remain; H125 untested, exp129blocked neverinvoked; pipelineproposal beads stayopen, no science authorized.
+User authorized landing and explicitly asked not to wait on long tooling. Both upstream merges reviewed; main831697c0 includes111/117. Localpush38738 selected whole non-exhaustive suite, stillactive after11min, with all otherchildren finished. To avoid serializing hosteddeep behind the long localrun, publishing the integrated source with local suite explicitly pending. One Markdown reflow detected byformatcheck; normalcommit hook applies it. Localrun is supporting integration evidence, not an immutable finalhead/full declaration; actual fresh hosted fast+deferred must gate landing. PRbody organized in /private/tmp/squares-pr116-KN0zs3/body.md and published. Next ready+dispatchdeferred once finalsource pushed, verify actualsource/basepair, syncdonevsopenbeads, mergeonlyvalidatedhead. No newscience; proposalsycuo/6l2l remainopen.
