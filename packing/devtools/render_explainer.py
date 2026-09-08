@@ -23,8 +23,14 @@ from an artifact host with a strict content-security policy.
 
 Usage, from `packing/`:
 
-    uv run --frozen --all-extras --group dev python -m devtools.render_explainer
-    uv run --frozen --all-extras --group dev python -m devtools.render_explainer --check
+    uv run --frozen --all-extras --group dev python -m devtools.render_explainer --prepare-math
+
+Add `--check` to compare the prepared result with the existing publication artifact.
+
+Font composition, loading, hydration, fallback, and print are documented in
+`vendor/kpress/docs/project/architecture/arch-2026-09-08-font-and-math-loading.md`
+(repository-relative). `prepare_explainer_math` owns this host's measured geometry;
+the shared KPress runtime owns matching font metrics and per-formula readiness.
 """
 
 from __future__ import annotations
@@ -1188,8 +1194,6 @@ HOST_MATH_INIT = r"""
   const wrappers = "%(wrappers)s";
   const firstFamily = value => (value || "").split(",")[0].trim().replace(/^["']|["']$/g, "");
   const context = {
-    // This standalone page has already downloaded every font as a data URI.
-    allEmbeddedFonts: true,
     isSansContext(node) {
       let el = node;
       while (el && el.matches && el.matches(wrappers)) el = el.parentElement;
@@ -1201,14 +1205,17 @@ HOST_MATH_INIT = r"""
   };
   // The same one-mu spacing the SVG labels use for an italic function name.
   const kern = source => String(source).replace(/(?<![A-Za-z\\])([a-z])\(/g, '$1\\mkern1mu(');
-  const ready = kpressMathText.ready(
-    document.querySelectorAll('.tex, .tex-d, .kpress-math-render'), context,
-  );
   const pending = new Set();
   function render(el, source, display) {
-    const result = kpressMathText.render(kern(source), el,
-      { displayMode: !!display, throwOnError: false }, context).then(() => true, () => {
+    const renderMath = el.dataset.kpressMathPrepared === 'true'
+      ? kpressMathText.hydrate : kpressMathText.render;
+    const result = renderMath(kern(source), el,
+      { displayMode: !!display, throwOnError: false }, context).then(() => {
+      el.dataset.squaresMathReady = 'true';
+      return true;
+    }, () => {
       el.textContent = source;
+      el.dataset.squaresMathReady = 'true';
       return false;
     });
     pending.add(result);
@@ -1218,7 +1225,7 @@ HOST_MATH_INIT = r"""
   async function settled() {
     while (pending.size) await Promise.all([...pending]);
   }
-  globalThis.squaresMath = { ready, render, settled, context };
+  globalThis.squaresMath = { render, settled, context };
 })();
 """
 
@@ -2119,7 +2126,7 @@ def drop_block(text: str, name: str) -> str:
     return re.sub(rf"<!--BEGIN:{name}-->.*?<!--END:{name}-->", "", text, flags=re.DOTALL)
 
 
-def wrap_figure(body: str, cert: str) -> str:
+def wrap_figure(body: str, cert: str, *, visible: bool) -> str:
     """One certificate's copy of a figure, in a wrapper the switch can hide.
 
     The blank line on each side of the two wrapper tags is load-bearing: a
@@ -2127,9 +2134,9 @@ def wrap_figure(body: str, cert: str) -> str:
     against a paragraph would swallow it into the raw block and leave its
     Markdown unrendered.
     """
-    return (
-        f'\n<div class="cert-figure" data-cert="{cert}" hidden>\n\n{body.strip()}\n\n</div>\n\n'
-    )
+    hidden = "" if visible else " hidden"
+    opening = f'\n<div class="cert-figure" data-cert="{cert}"{hidden}>'
+    return f"{opening}\n\n{body.strip()}\n\n</div>\n\n"
 
 
 def expand(
@@ -2149,13 +2156,15 @@ def expand(
     def stamp(match: re.Match[str]) -> str:
         block = match.group(1)
         copies = []
-        for values in per_certificate:
+        for index, values in enumerate(per_certificate):
             # The coarsening figure belongs to a measured certificate; a
             # certificate without a measurement has no copy of it.
             if "{{COARSEN_BARS}}" in block and not values["COARSEN_BARS"]:
                 continue
             copy = fill(block, values, where=f"{name} {values['SLUG']}")
-            copies.append(wrap_figure(copy, values["SLUG"]) if article else copy)
+            copies.append(
+                wrap_figure(copy, values["SLUG"], visible=index == 0) if article else copy
+            )
         return "".join(copies)
 
     return pattern.sub(stamp, source)
@@ -2211,6 +2220,7 @@ MARKDOWN_OUTPUT = PACKING / "site" / f"{RESULT_ID}-explainer.md"
 RENDER_INPUTS = (
     CASE,
     Path(__file__),
+    PACKING / "devtools" / "prepare_explainer_math.py",
     PACKING / "devtools" / "measure_net_coarsening.py",
     PACKING / "devtools" / "build_composite_figure_data.py",
     PACKING / "devtools" / "render_explainer_pdf.py",
@@ -2626,6 +2636,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     parser.add_argument("--output", type=Path, default=OUTPUT)
     parser.add_argument(
+        "--prepare-math",
+        action="store_true",
+        help="prepare publication math with measured dimensions using pinned Chromium",
+    )
+    parser.add_argument(
         "--check",
         action="store_true",
         help="exit non-zero if the committed page differs from a fresh render",
@@ -2646,8 +2661,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         tuple(path.resolve() for path in args.certificate) if args.certificate else WALKTHROUGH
     )
     rendered = render(certificates, full_sweep=args.verify_condition_5)
+    page = rendered.page
+    if args.prepare_math:
+        from devtools.prepare_explainer_math import prepare_math_html  # noqa: PLC0415
+
+        page = prepare_math_html(page)
+        assert_self_contained(page)
     document = output.parent / MARKDOWN_OUTPUT.name
-    written = ((output, rendered.page), (document, rendered.markdown))
+    written = ((output, page), (document, rendered.markdown))
     if args.check:
         for path, content in written:
             name = path.relative_to(REPO).as_posix() if path.is_relative_to(REPO) else str(path)
@@ -2666,8 +2687,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             temporary.write_text(content, encoding="utf-8")
     for asset in COMPOSITE_ASSETS:
         shutil.copyfile(asset, output.parent / asset.name)
-    print(f"wrote {label} ({len(rendered.page) / 1024:.0f} KB)")
-    name = document.relative_to(REPO).as_posix()
+    print(f"wrote {label} ({len(page) / 1024:.0f} KB)")
+    name = (
+        document.relative_to(REPO).as_posix()
+        if document.is_relative_to(REPO)
+        else str(document)
+    )
     print(f"wrote {name} ({len(rendered.markdown) / 1024:.0f} KB)")
     return 0
 

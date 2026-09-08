@@ -1,9 +1,10 @@
 """Observe visible math during startup, including deliberately delayed font loads.
 
 The probe samples animation frames, so hidden staging nodes do not count as a paint.
-Its controlled run holds explicit font loads, triggers the page's input and resize
-handlers, then releases them. This catches callbacks that bypass startup readiness
-and semantic MathML that flashes before KaTeX replaces it.
+Its controlled run holds successful font-load completions, triggers the page's input
+and resize handlers, then releases them. This catches callbacks that bypass startup
+readiness and semantic MathML that flashes before KaTeX replaces it. The prepared
+geometry checker separately holds real font requests to test delayed decoding.
 """
 
 from __future__ import annotations
@@ -45,7 +46,9 @@ class LoadingReport(TypedDict):
     sliders: int
     early_targets: list[EarlyTarget]
     frames: int
+    math_font_checks: int
     first_paint: dict[str, object] | None
+    unready_math: list[str]
     early_math: str | None
     fallback: str | None
     readouts: list[str]
@@ -116,38 +119,145 @@ EXPOSED = r"""node => {
   return right - left > 1 && bottom - top > 1;
 }"""
 
+#: Describe actual glyph runs, including hidden staging. Query each CSS family
+#: separately: WebKit can report a family list ready while a later face is pending.
+#: Native load matching, rather than a second CSS matching engine, handles weights,
+#: unicode ranges, and families excluded from the glyph run.
+REQUIRED_FONTS = r"""(math, observe) => {
+  const html = math.querySelector('.katex-html');
+  if (!html) return [];
+  const walker = document.createTreeWalker(html, NodeFilter.SHOW_TEXT);
+  const groups = new Map();
+  while (walker.nextNode()) {
+    const node = walker.currentNode, text = node.textContent;
+    if (!text.trim()) continue;
+    const style = getComputedStyle(node.parentElement);
+    for (const family of families(style.fontFamily)) {
+      const spec = `${style.fontStyle} ${style.fontWeight} ${style.fontSize} ${family}`;
+      if (!groups.has(spec)) groups.set(spec, new Set());
+      for (const character of text) groups.get(spec).add(character);
+    }
+  }
+  return [...groups].map(([spec, characters]) => {
+    const text = [...characters].join('');
+    try { return {spec, text, ...observe(spec, text)}; }
+    catch (error) {
+      return {spec, text, ready: false, outcome: 'rejected', faces: [], error: String(error)};
+    }
+  });
+
+  function families(list) {
+    const parts = [];
+    let start = 0, quote = '', escaped = false;
+    for (let index = 0; index < list.length; index++) {
+      const character = list[index];
+      if (escaped) escaped = false;
+      else if (character === '\\') escaped = true;
+      else if (quote) { if (character === quote) quote = ''; }
+      else if (character === '"' || character === "'") quote = character;
+      else if (character === ',') {
+        parts.push(list.slice(start, index).trim()); start = index + 1;
+      }
+    }
+    parts.push(list.slice(start).trim());
+    return parts.filter(Boolean);
+  }
+}"""
+
+#: A readiness oracle separate from the renderer's cache. In WebKit, even a
+#: single-family check() can return true while load() remains pending. Discovering
+#: staged glyphs before rAF lets already-ready promises settle before first exposure;
+#: a previously unseen visible closure must fail instead of passing vacuously.
+FONT_LOAD_OBSERVER = r"""load => {
+  const requests = new Map();
+  return (spec, text) => {
+    const key = JSON.stringify([spec, text]);
+    if (!requests.has(key)) {
+      const record = {outcome: 'pending', faces: []};
+      requests.set(key, record);
+      try {
+        Promise.resolve(load(spec, text)).then(faces => {
+          record.outcome = 'resolved';
+          record.faces = [...faces];
+        }, error => {
+          record.outcome = 'rejected'; record.error = String(error);
+        });
+      } catch (error) {
+        record.outcome = 'rejected'; record.error = String(error);
+      }
+    }
+    const record = requests.get(key);
+    const faces = record.faces.map(face => ({family: face.family, style: face.style,
+      weight: face.weight, unicodeRange: face.unicodeRange, status: face.status}));
+    return {outcome: record.outcome, faces, ...(record.error ? {error: record.error} : {}),
+      ready: record.outcome === 'resolved' && faces.every(face => face.status === 'loaded')};
+  };
+}"""
+
 FIRST_PAINT_SCRIPT = r"""
 (() => {
   globalThis.__mathFirstPaint = null;
   const state = globalThis.__mathLoadingState = {
-    frames: 0, earlyMath: null, fallback: null, stop: false
+    frames: 0, mathFontChecks: 0, unreadyMath: [], earlyMath: null,
+    fallback: null, stop: false
   };
   const exposed = __EXPOSED__;
+  const requiredFonts = __REQUIRED_FONTS__;
+  const observe = (__FONT_LOAD_OBSERVER__)((...args) =>
+    globalThis.__mathLoadControl?.nativeLoad
+      ? globalThis.__mathLoadControl.nativeLoad(...args) : document.fonts.load(...args));
+  const discover = () => {
+    if (state.stop) return;
+    for (const math of document.querySelectorAll('.katex')) requiredFonts(math, observe);
+  };
+  const mutations = new MutationObserver(discover);
+  mutations.observe(document, {subtree: true, childList: true, characterData: true,
+    attributes: true, attributeFilter: ['class', 'style', 'hidden',
+      'data-kpress-math-face', 'data-kpress-math-prepared', 'data-squares-math-ready']});
+  discover();
+  const observed = new WeakSet();
   const label = (node) => node.textContent.trim().replace(/\s+/g, ' ').slice(0, 100);
   const sample = () => {
     state.frames++;
-    const math = [...document.querySelectorAll('.katex')].find(exposed);
-    if (math && !globalThis.__mathFirstPaint) {
-      const faces = [...document.fonts].map(face => ({
-        family: face.family, style: face.style, weight: face.weight,
-        unicodeRange: face.unicodeRange, status: face.status
-      }));
-      globalThis.__mathFirstPaint = { at: performance.now(), faces };
+    const maths = [...document.querySelectorAll('.katex')].filter(exposed);
+    for (const math of maths) {
+      if (observed.has(math)) continue;
+      observed.add(math);
+      const required = requiredFonts(math, observe);
+      state.mathFontChecks += required.length;
+      const late = required.filter(face => !face.ready);
+      if (!required.length) state.unreadyMath.push(label(math) + ': no observed glyph closure');
+      if (late.length) state.unreadyMath.push(label(math) + ': '
+        + late.map(face => `${face.spec} [${face.text}] (${face.outcome || 'error'}; `
+          + face.faces.map(match => `${match.family}: ${match.status}`).join(', ')
+          + (face.error ? `; ${face.error}` : '') + ')').join(', '));
+      if (!globalThis.__mathFirstPaint) {
+        const faces = [...document.fonts].map(face => ({
+          family: face.family, style: face.style, weight: face.weight,
+          unicodeRange: face.unicodeRange, status: face.status
+        }));
+        globalThis.__mathFirstPaint = { at: performance.now(), faces, required };
+      }
     }
     const control = globalThis.__mathLoadControl;
-    if (math && control && !control.released && !state.earlyMath) {
-      state.earlyMath = label(math);
+    if (maths.length && control && !control.released && !state.earlyMath) {
+      state.earlyMath = label(maths[0]);
     }
     const fallback = [...document.querySelectorAll('.kpress-math-semantic')].find(exposed);
     if (fallback && !state.fallback) state.fallback = label(fallback);
     if (!state.stop) requestAnimationFrame(sample);
+    else mutations.disconnect();
   };
   requestAnimationFrame(sample);
 })();
-""".replace("__EXPOSED__", EXPOSED)
+""".replace("__EXPOSED__", EXPOSED).replace("__REQUIRED_FONTS__", REQUIRED_FONTS).replace(
+    "__FONT_LOAD_OBSERVER__", FONT_LOAD_OBSERVER
+)
 
-#: Delay the real load call as well as its promise. CSS may independently request fonts;
-#: the invariant tested here is that rendering awaits its explicit readiness work.
+#: Gate successful loads only when CSS actually matches a declared face. Empty
+#: unicode-range/system-family results remain immediate. CSS and the independent
+#: oracle can decode fonts normally; this tests the explicit readiness contract.
+#: prepare_explainer_math.check_geometry separately holds real font requests.
 HOLD_FONTS_SCRIPT = r"""
 (() => {
   let release;
@@ -156,14 +266,24 @@ HOLD_FONTS_SCRIPT = r"""
     heldLoads: 0, released: false,
     release() { this.released = true; release(); }
   };
+  const fontSet = Object.getPrototypeOf(document.fonts), loadSet = fontSet.load;
+  control.nativeLoad = loadSet.bind(document.fonts);
   // Some pinned Chromium versions have no global FontFaceSet constructor.
-  for (const owner of [FontFace.prototype, Object.getPrototypeOf(document.fonts)]) {
-    const load = owner.load;
-    owner.load = function(...args) {
+  fontSet.load = function(...args) {
+    const promise = loadSet.apply(this, args);
+    if (control.released) return promise;
+    return promise.then(faces => {
+      if (!faces.length) return faces;
       control.heldLoads++;
-      return gate.then(() => load.apply(this, args));
-    };
-  }
+      return gate.then(() => faces);
+    });
+  };
+  const loadFace = FontFace.prototype.load;
+  FontFace.prototype.load = function(...args) {
+    if (control.released) return loadFace.apply(this, args);
+    control.heldLoads++;
+    return gate.then(() => loadFace.apply(this, args));
+  };
 })();
 """
 
@@ -216,9 +336,24 @@ READOUTS = r"""targets => targets.map(target => {
 NO_JAVASCRIPT = r"""() => {
   const exposed = __EXPOSED__;
   const visible = selector => [...document.querySelectorAll(selector)].filter(exposed).length;
+  const wrappers = '.kpress-math,.tex,.tex-d,[data-kpress-math-prepared="true"]';
+  const raw = node => node.matches('.tex,.tex-d') && !node.querySelector('.katex')
+    && !!node.textContent.trim() && exposed(node);
+  const prepared = node => [...node.querySelectorAll('.katex-html')]
+    .some(html => html.textContent.trim() && exposed(html));
+  const native = node => [...node.querySelectorAll('.kpress-math-semantic')].some(exposed);
+  const targets = [...document.querySelectorAll(wrappers)].filter(node => {
+    // Judge every intended formula in readable surrounding content. Filtering on
+    // the formula's own box would silently discard clipped or empty fallbacks.
+    return !node.parentElement.closest(wrappers) && exposed(node.parentElement);
+  });
   return {
-    raw_tex: visible('.tex, .tex-d'),
-    native_math: visible('.kpress-math-semantic')
+    raw_tex: targets.filter(raw).length,
+    native_math: visible('.kpress-math-semantic'),
+    prepared_math: visible('.katex-html'),
+    math_wrappers: targets.length,
+    unreadable_math: targets
+      .filter(node => !raw(node) && !prepared(node) && !native(node)).length
   };
 }""".replace("__EXPOSED__", EXPOSED)
 
@@ -230,6 +365,8 @@ def loading_findings(report: LoadingReport) -> list[str]:
         findings.append("the delayed-load control intercepted no font loads")
     if report["frames"] == 0:
         findings.append("the loading probe observed no animation frames")
+    if report["math_font_checks"] == 0:
+        findings.append("the font probe checked no rendered glyphs")
     if report["sliders"] == 0:
         findings.append("the early-input control exercised no sliders")
     if report["early_math"] is not None:
@@ -249,15 +386,34 @@ def loading_findings(report: LoadingReport) -> list[str]:
         ]
         if not math_faces:
             findings.append("the font probe observed no math font declarations")
-        late = [
-            f"{face['family']} {face['style']} {face['weight']} ({face['status']})"
-            for face in math_faces
-            if face["status"] != "loaded"
-        ]
+        required = paint.get("required", [])
+        assert isinstance(required, list)
+        if not required:
+            findings.append("the first visible formula has no observed glyph closure")
+        late = [f"{face['spec']} [{face['text']}]" for face in required if not face["ready"]]
         if late:
             findings.append(
                 "math faces were not ready at first visible paint: " + ", ".join(late)
             )
+    if report["unready_math"]:
+        findings.append(
+            "math appeared with unavailable required faces: "
+            + "; ".join(report["unready_math"])
+        )
+    return findings
+
+
+def no_javascript_findings(fallback: dict[str, int]) -> list[str]:
+    """Native MathML, raw TeX, and prepared KaTeX are alternative readable fallbacks."""
+    findings: list[str] = []
+    if fallback.get("math_wrappers", 0) == 0:
+        findings.append("no JavaScript: no mathematical fallback targets")
+    if fallback.get("unreadable_math", 0):
+        findings.append(
+            f"no JavaScript: {fallback['unreadable_math']} formulas have no readable fallback"
+        )
+    if not any(fallback.get(name, 0) for name in ("raw_tex", "native_math", "prepared_math")):
+        findings.append("no JavaScript: no readable math fallback")
     return findings
 
 
@@ -335,7 +491,9 @@ def check_loading(
                     sliders: 0,
                     early_targets: [],
                     frames: state.frames,
+                    math_font_checks: state.mathFontChecks,
                     first_paint: globalThis.__mathFirstPaint,
+                    unready_math: state.unreadyMath,
                     early_math: state.earlyMath,
                     fallback: state.fallback,
                     readouts: [],
@@ -363,9 +521,7 @@ def check_loading(
                 fallback_page.goto(url, wait_until="load")
                 fallback = fallback_page.evaluate(NO_JAVASCRIPT)
                 report["no_javascript"] = fallback
-                for kind, count in fallback.items():
-                    if count == 0:
-                        report["findings"].append(f"no JavaScript: no visible {kind} fallback")
+                report["findings"].extend(no_javascript_findings(fallback))
             finally:
                 fallback_page.close()
             return report
@@ -379,8 +535,12 @@ NEGATIVE_FIXTURES = {
     "early-paint": (
         r"""<script>
 document.addEventListener('DOMContentLoaded', () => {
+  // A failed face stays unavailable even if decoding finishes before the next
+  // sampled frame. This makes the missing-font negative control deterministic.
+  document.fonts.add(new FontFace('Math Unready Control', 'url(data:font/woff2;base64,AA==)'));
   const fault = document.createElement('div');
-  fault.innerHTML = '<span class="katex" style="visibility:visible!important">x = 1</span>' +
+  fault.innerHTML = '<span class="katex" style="visibility:visible!important">' +
+    `<span class="katex-html" style='font-family:"Math Unready Control"'>x = 1</span></span>` +
     '<math class="kpress-math-semantic" style="visibility:visible!important">' +
     '<mi>y</mi><mo>=</mo><mn>2</mn></math>';
   document.body.prepend(fault);
@@ -400,14 +560,32 @@ document.addEventListener('input', event => {
 </script>""",
         ("stale readout after rapid input:", "slider value changed after early input:"),
     ),
+    "unready-later-family": (
+        r"""<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // The first family excludes ≥. A whole-family-list check can overlook the
+  // later required face in WebKit; the oracle must observe its actual load.
+  document.fonts.add(new FontFace('Math Range First', 'url(data:font/woff2;base64,AA==)',
+    {unicodeRange:'U+0041'}));
+  document.fonts.add(new FontFace('Math Range Late', 'url(data:font/woff2;base64,AA==)',
+    {unicodeRange:'U+2265'}));
+  const fault = document.createElement('div');
+  fault.innerHTML = '<span class="katex" style="visibility:visible!important">' +
+    `<span class="katex-html" style='font-family:"Math Range First","Math Range Late",serif'>` +
+    '≥</span></span>';
+  document.body.prepend(fault);
+});
+</script>""",
+        ("math appeared with unavailable required faces:", "Math Range Late"),
+    ),
     "clipped-no-javascript": (
         """<noscript><style>
-.kpress-math-semantic {
+.kpress-math-semantic, .katex-html, .tex, .tex-d {
   position:absolute!important; width:1px!important; height:1px!important;
   overflow:hidden!important; clip-path:inset(50%)!important;
 }
 </style></noscript>""",
-        ("no JavaScript: no visible native_math fallback",),
+        ("formulas have no readable fallback", "no JavaScript: no readable math fallback"),
     ),
 }
 

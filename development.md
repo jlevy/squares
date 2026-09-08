@@ -667,6 +667,24 @@ to agree, checks the print layout, and only then deploys.
 A pull request runs the same build without deploying, so a render that breaks fails
 review rather than the next deploy.
 
+Publication uses `python -m devtools.render_explainer --prepare-math` after installing
+the locked Playwright Chromium.
+This pass measures the final math bases under the page’s CSS and ships their geometry
+with the initial HTML, so decoding a font does not change the space a formula occupies.
+`--prepare-math --check` repeats the same preparation before comparing bytes.
+The pure `render()` function remains available for source and certificate tests that do
+not need a browser. The canonical
+[font and math loading architecture](vendor/kpress/docs/project/architecture/arch-2026-09-08-font-and-math-loading.md)
+lives in KPress, alongside the shared runtime’s public API documentation.
+
+The prepare job shares one page artifact with the Chromium print checks and the
+Firefox/WebKit loading checks.
+Deployment waits for all of them.
+Normal parameter startup and neighboring text movement are measured by
+`devtools.check_math_startup`; its controlled fixtures run in CI, while timing
+comparisons are retained in the
+[math startup campaign](packing/benchmarks/math-startup/README.md).
+
 **Merging is the whole publish.** Every repository link on the page is a permalink to
 the commit the page was built from, read from the checkout at render time
 (`link_revision()`), so no merge leaves the deployed page linking to files older than

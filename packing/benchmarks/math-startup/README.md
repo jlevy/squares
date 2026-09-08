@@ -52,6 +52,24 @@ The source review also found all certificate figures initially hidden, tracked a
 idle-host measurement window; CI preparation and record validation can continue without
 waiting on that guard.
 
+At the 17:01 UTC boundary, the six baseline observations are retained and the startup
+instrument is frozen at `f95150e4`. KPress PR 61 passed its first complete CI run, but
+the independent held-transfer geometry guard found a WebKit readiness defect in the
+integrated candidate: a lone relation could appear while its font request was pending.
+The guard remains red while KPress is corrected; no candidate timing has run.
+The efficiency review removed duplicate publication builds by sharing one prepared
+artifact across browser jobs.
+It also removed unused-font warmup and deferred hidden heat maps.
+Their latency effect remains unmeasured.
+
+The owner added a small downward bullet adjustment and a canonical architecture document
+in KPress. The marker review found and corrected an obsolete line-height override that
+stretched the new CSS square into a bar; retained negative controls now check its shape
+as well as position.
+Independent host review also corrected print visibility and native fallback state.
+The next slice finishes the WebKit fix, then freezes the final prepared artifact for
+correctness and paired timing.
+
 ## Measurement protocol
 
 Run `python -m devtools.check_math_startup` through the frozen project environment from

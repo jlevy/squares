@@ -12,6 +12,17 @@ labels and readouts. Each arm shows median (minimum to maximum).
 
 Decision: **baseline**. The control is valid for the fixed local-file regime; its large absolute movement includes figures inserted after the first readable frame.
 
+## exp-002: Intermediate prepared page exposes a pending WebKit relation
+
+- webkit 1280px screen: 261 bases; maximum movement 0.391px; maximum final width error 0.109px.
+
+Decision: **correctness failed**. Reject this intermediate runtime; the geometry guard caught visible math before a required font transfer completed.
+
+- math was exposed while its font requests were held
+- webkit 1280px screen: math was exposed while its font requests were held
+- missing registered browser/width cells: [('chromium', 390), ('chromium', 1280), ('firefox', 390), ('firefox', 1280), ('webkit', 390)]
+- missing rejected movement or stable-wrong-width control
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

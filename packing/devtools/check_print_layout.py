@@ -59,7 +59,11 @@ class Marker(TypedDict):
     markerCentre: float
     lineCentre: float
     fontSize: float
+    baseFontSize: float
     lineHeight: float
+    width: float
+    height: float
+    painted: bool
 
 
 class Footnote(TypedDict):
@@ -118,6 +122,15 @@ class Measured(TypedDict):
 #: pixel is finer than that construction is self-consistent to.
 TOLERANCE_PX = 1.0
 
+#: The two dimensions use the same CSS length, so only subpixel rounding can
+#: distinguish them. A line-height override once turned a 3.7px square into a 27px bar.
+MARKER_SQUARE_TOLERANCE_PX = 0.05
+
+#: The requested optical adjustment below the geometric line centre. Keep the
+#: existing one-pixel tolerance around that target, rather than relaxing it to
+#: accommodate the adjustment. Numbered markers retain the geometric target.
+MARKER_OPTICAL_OFFSET_EM = 0.04
+
 #: Half of that, for a label against the box drawn around it. Tighter because the
 #: measurement is tighter: both sides are rects from one layout, with none of the
 #: marker check's mismatch between a marker box and a line box. It has to be tighter to
@@ -173,7 +186,7 @@ _PROBE = r"""() => {
   /* Markers. The list bullet is not a `::marker`: kpress sets `list-style-type: none`
      and draws an absolutely positioned `::before`, so there is no marker box to
      measure. Its top edge is the `li`'s content-box top plus the pseudo-element's own
-     `top`, and its height is its line box, which is what `lineHeight` computes to. The
+     `top`; a painted square must retain its own height, not the line box's height. The
      line it should sit on is the `li`'s first line box, taken as a Range over the first
      text node rather than as the `li`'s own box, which spans every line. */
   for (const li of document.querySelectorAll('.kpress li')) {
@@ -198,7 +211,11 @@ _PROBE = r"""() => {
       markerCentre: round(top + height / 2),
       lineCentre: round((line.top + line.bottom) / 2),
       fontSize: round(parseFloat(before.fontSize)),
-      lineHeight: round(height),
+      baseFontSize: round(parseFloat(getComputedStyle(li.closest('.kpress')).fontSize)),
+      lineHeight: round(line.bottom - line.top),
+      width: round(parseFloat(before.width) || 0),
+      height: round(height),
+      painted: before.content === '""' && before.backgroundColor !== 'rgba(0, 0, 0, 0)',
     });
   }
 
@@ -780,7 +797,77 @@ _OVERSHOOT = r"""(spec) => {
 }"""
 
 
-def measure(page_url: str, *, inject: str | None = None, spec: object = None) -> Measured:
+_STRETCHED_MARKER = """() => {
+  document.querySelector('.cert-page.kpress-prose ul > li')
+    .classList.add('marker-height-self-check');
+  const style = document.createElement('style');
+  style.textContent = '.marker-height-self-check::before '
+    + '{height:1lh!important;top:0!important}';
+  document.head.appendChild(style);
+}"""
+
+
+_MARKER_OPTICAL_GEOMETRY = r"""selector => {
+  const item = document.querySelector(selector);
+  const walker = document.createTreeWalker(item, NodeFilter.SHOW_TEXT);
+  let text;
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    if (node.textContent.trim() && !node.parentElement.closest('.katex,math')
+        && node.parentElement.checkVisibility({visibilityProperty:true})) {
+      text = node; break;
+    }
+  }
+  const range = document.createRange(); range.selectNodeContents(text);
+  const initialText = [...range.getClientRects()].map(rect => rect.toJSON());
+  const baseline = document.createElement('span');
+  baseline.style.cssText = 'display:inline-block;width:0;height:0;padding:0;'
+    + 'margin:0;line-height:0;vertical-align:baseline';
+  text.parentElement.insertBefore(baseline, text);
+  const y = baseline.getBoundingClientRect().top;
+  const sampledText = [...range.getClientRects()].map(rect => rect.toJSON());
+  baseline.remove();
+  const before = getComputedStyle(item, '::before'), box = item.getBoundingClientRect();
+  const height = parseFloat(before.height), width = parseFloat(before.width);
+  const top = box.top + parseFloat(before.top);
+  const font = getComputedStyle(text.parentElement), fontSize = parseFloat(font.fontSize);
+  return {content: before.content, width, height, top, centre: top + height / 2,
+    baseline: y, fontSize, aboveBaselineEm: (y - top - height / 2) / fontSize,
+    initialText, sampledText, item: box.toJSON(), fontFamily: font.fontFamily,
+    fontWeight: font.fontWeight};
+}"""
+
+
+def save_marker_preview(page: Page, directory: Path, medium: str) -> None:
+    """Keep the first prose bullet's ink and measured optical alignment together."""
+    directory.mkdir(parents=True, exist_ok=True)
+    selector = ".cert-page.kpress-prose ul > li"
+    item = page.locator(selector).first
+    item.scroll_into_view_if_needed()
+    measured: dict[str, object] = page.evaluate(_MARKER_OPTICAL_GEOMETRY, selector)
+    if measured["initialText"] != measured["sampledText"]:
+        raise AssertionError("the baseline probe changed the text's layout")
+    box = item.bounding_box()
+    assert box is not None
+    page.screenshot(
+        path=directory / f"marker-{medium}.png",
+        clip={
+            "x": max(0, box["x"] - 25),
+            "y": max(0, box["y"] - 8),
+            "width": box["width"] + 35,
+            "height": box["height"] + 16,
+        },
+    )
+    (directory / f"marker-{medium}.json").write_text(json.dumps(measured, indent=2) + "\n")
+
+
+def measure(
+    page_url: str,
+    *,
+    inject: str | None = None,
+    spec: object = None,
+    marker_artifacts: Path | None = None,
+) -> Measured:
     """The probe's answer under each medium, from one browser and one load.
 
     `inject` runs in the print pass, after the media switch and the viewport change and
@@ -794,12 +881,14 @@ def measure(page_url: str, *, inject: str | None = None, spec: object = None) ->
     with sync_playwright() as driver:
         browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
         try:
-            page = browser.new_page()
+            page = browser.new_page(device_scale_factor=3 if marker_artifacts else 1)
             page.emulate_media(media="screen", reduced_motion="reduce")
             page.goto(page_url, wait_until="load")
             page.wait_for_selector(READY, timeout=60_000)
             page.evaluate("document.fonts.ready")
             screen: Probe = page.evaluate(_PROBE)
+            if marker_artifacts is not None:
+                save_marker_preview(page, marker_artifacts, "screen")
             page.emulate_media(media="print", reduced_motion="reduce")
             page.set_viewport_size(PRINT_VIEWPORT)
             page.evaluate("document.fonts.ready")
@@ -807,6 +896,8 @@ def measure(page_url: str, *, inject: str | None = None, spec: object = None) ->
                 page.evaluate(inject, spec)
             page.evaluate(SETTLED)
             printed: Probe = page.evaluate(_PROBE)
+            if marker_artifacts is not None:
+                save_marker_preview(page, marker_artifacts, "print")
             controls = prover_findings(page)
             mobile = browser.new_page(
                 viewport={"width": 375, "height": 812},
@@ -839,12 +930,24 @@ def findings(measured: Measured, *, every: bool = False) -> list[str]:
             if row["declared"] and row["shown"] and row["align"] != "center"
         )
         found.extend(
-            f"{medium}: list marker off the line's centre by "
-            f"{row['markerCentre'] - row['lineCentre']:+.2f}px "
-            f"({row['path']}, {row['fontSize']}px on a {row['lineHeight']}px line)"
+            f"{medium}: drawn list marker is not square "
+            f"({row['width']:.2f} x {row['height']:.2f}px; {row['path']})"
             for row in probe["markers"]
-            if abs(row["markerCentre"] - row["lineCentre"]) > TOLERANCE_PX
+            if row["painted"]
+            and (
+                min(row["width"], row["height"]) <= 0
+                or abs(row["width"] - row["height"]) > MARKER_SQUARE_TOLERANCE_PX
+            )
         )
+        for row in probe["markers"]:
+            optical = row["baseFontSize"] * MARKER_OPTICAL_OFFSET_EM if row["painted"] else 0
+            offset = row["markerCentre"] - row["lineCentre"] - optical
+            if abs(offset) > TOLERANCE_PX:
+                target = "optical centre" if row["painted"] else "line's centre"
+                found.append(
+                    f"{medium}: list marker off the {target} by {offset:+.2f}px "
+                    f"({row['path']}, {row['fontSize']}px on a {row['lineHeight']}px line)"
+                )
         # Under one em there is no word in front of the reference, only stray punctuation
         # that wrapped down with it, and it reads as opening the line.
         found.extend(
@@ -918,7 +1021,7 @@ def self_check(page_url: str) -> int:
     """
     measured = measure(
         page_url,
-        inject=_OVERSHOOT,
+        inject=f"spec => {{ ({_OVERSHOOT})(spec); ({_STRETCHED_MARKER})(); }}",
         spec={"over": SELF_CHECK_PX, "name": SELF_CHECK_CLASS},
     )
     printed = measured["print"]
@@ -954,13 +1057,19 @@ def self_check(page_url: str) -> int:
             f"the named culprit overhangs by {widest['over']:.2f}px, not {SELF_CHECK_PX}"
         )
 
+    if not any(
+        "drawn list marker is not square" in line and "marker-height-self-check" in line
+        for line in found
+    ):
+        wrong.append("the gate accepted a marker stretched to its full line height")
+
     for line in wrong:
         print(f"self-check failed: {line}")
     if wrong:
         return 1
     print(
         f"self-check passed: the gate fails on a {SELF_CHECK_PX:.0f}px overflow, reports the "
-        f"{scale} scale, and names the block that caused it"
+        f"{scale} scale, names its cause, and rejects a stretched list marker"
     )
     return 0
 
@@ -969,6 +1078,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--page", type=Path, default=PAGE, help="the rendered page to measure")
     parser.add_argument("--json", action="store_true", help="print the raw measurements")
+    parser.add_argument(
+        "--marker-artifacts",
+        type=Path,
+        help="Save screen/print bullet images and baseline measurements",
+    )
     parser.add_argument(
         "--all",
         action="store_true",
@@ -987,7 +1101,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.self_check:
         return self_check(args.page.resolve().as_uri())
 
-    measured = measure(args.page.resolve().as_uri())
+    measured = measure(args.page.resolve().as_uri(), marker_artifacts=args.marker_artifacts)
     if args.json:
         print(json.dumps(measured, indent=2, sort_keys=True))
         return 0

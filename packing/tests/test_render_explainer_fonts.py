@@ -429,28 +429,31 @@ def test_host_context_and_kerning_reach_the_shared_math_renderer() -> None:
         const wrapper = parent => ({nodeType: 1, parentElement: parent,
           matches: () => true, dataset: {}});
         const nodes = [wrapper(wrapper(sans)), wrapper(prose), wrapper(null)];
+        nodes[0].dataset.kpressMathPrepared = 'true';
         const document = {querySelectorAll: () => nodes};
         const getComputedStyle = el => ({fontFamily: el.fontFamily,
           getPropertyValue: () => '"Source Sans 3 Variable", sans-serif'});
         globalThis.kpressMathText = {
-          ready(nodes, context) {
-            assert.equal(context.allEmbeddedFonts, true);
-            calls.push({contexts: nodes.map(context.isSansContext)});
-            return Promise.resolve();
-          },
           render(source, target, options, context) {
             calls.push({source, display: options.displayMode,
               sans: context.isSansContext(target)});
             if (target === nodes[1]) return new Promise(resolve => { finish = resolve; });
             return Promise.resolve();
           },
+          hydrate(source, target, options, context) {
+            calls.push({hydrate: true});
+            return globalThis.kpressMathText.render(source, target, options, context);
+          },
         };
     """)
     exercise = dedent(r"""
         (async () => {
-          await squaresMath.ready;
+          assert.deepEqual(nodes.map(squaresMath.context.isSansContext), [true, false, false]);
           await squaresMath.render(nodes[0], 's(11) + cos(x)', true);
           const delayed = squaresMath.render(nodes[1], 'n(2)', false);
+          assert.equal(nodes[0].dataset.squaresMathReady, 'true');
+          assert.equal(nodes[1].dataset.squaresMathReady, undefined,
+            'an unrelated pending formula does not hide the completed one');
           let completed = false;
           const settled = squaresMath.settled().then(() => { completed = true; });
           await Promise.resolve();
@@ -459,6 +462,7 @@ def test_host_context_and_kerning_reach_the_shared_math_renderer() -> None:
           await delayed;
           await settled;
           assert.equal(completed, true);
+          assert.equal(nodes[1].dataset.squaresMathReady, 'true');
           process.stdout.write(JSON.stringify(calls));
         })();
     """)
@@ -471,10 +475,57 @@ def test_host_context_and_kerning_reach_the_shared_math_renderer() -> None:
     )
     assert completed.returncode == 0, completed.stderr
     assert json.loads(completed.stdout) == [
-        {"contexts": [True, False, False]},
+        {"hydrate": True},
         {"source": r"s\mkern1mu(11) + cos(x)", "display": True, "sans": True},
         {"source": r"n\mkern1mu(2)", "display": False, "sans": False},
     ]
+
+
+def test_heat_map_waits_for_math_and_cancels_a_hidden_certificates_queued_draw() -> None:
+    """Expensive canvas work starts after the required math settles and a paint occurs."""
+    source = render_explainer.TEMPLATE.read_text()
+    start = source.index("function scheduleHeat() {")
+    function = source[start : source.index("\nfunction toWorld(", start)]
+    setup = dedent("""
+        const assert = require('node:assert/strict');
+        let finish, heatQueued = false, heat = null, showHeat = true, hidden = false;
+        let draws = 0, builds = 0, settlements = 0;
+        const frames = [], tasks = [];
+        const pending = new Promise(resolve => { finish = resolve; });
+        const squaresMath = {settled: () => { settlements++; return pending; }};
+        const pv = {closest: () => ({hidden})};
+        const requestAnimationFrame = callback => frames.push(callback);
+        const setTimeout = callback => tasks.push(callback);
+        const buildHeat = () => { heat = {}; builds++; };
+        const drawProver = () => { draws++; };
+    """)
+    exercise = dedent("""
+        (async () => {
+          scheduleHeat(); scheduleHeat();
+          assert.equal(settlements, 1, 'only one heat-map task may be pending');
+          assert.equal(frames.length, 0, 'pending math has not yet reached a paint');
+          finish(); await Promise.resolve();
+          assert.equal(frames.length, 1);
+          assert.equal(builds, 0);
+          frames.shift()();
+          assert.equal(builds, 0, 'the animation-frame callback still lets a paint through');
+          hidden = true; tasks.shift()();
+          assert.equal(builds, 0, 'a certificate hidden since scheduling is not drawn');
+          hidden = false; scheduleHeat(); await Promise.resolve();
+          frames.shift()(); tasks.shift()();
+          assert.equal(builds, 1); assert.equal(draws, 1);
+          scheduleHeat();
+          assert.equal(frames.length, 0, 'a completed heat map is reused');
+        })();
+    """)
+    completed = node(
+        ["-"],
+        return_completed_process=True,
+        input=setup + function + exercise,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
 
 
 def _sans_face(family: str, weight: int) -> str:

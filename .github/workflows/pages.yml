@@ -21,6 +21,7 @@ name: Certificate page
     paths:
       - packing/cases/n11_fractional_certificate/**
       - packing/devtools/render_explainer.py
+      - packing/devtools/prepare_explainer_math.py
       - packing/devtools/measure_net_coarsening.py
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
@@ -29,6 +30,7 @@ name: Certificate page
       - packing/devtools/inspect_explainer_typography.py
       - packing/devtools/check_math_faces.py
       - packing/devtools/check_math_loading.py
+      - packing/devtools/check_math_startup.py
       - packing/devtools/compare_math_fonts.py
       - packing/devtools/sans_instances.py
       - packing/src/sqpack/**
@@ -55,6 +57,7 @@ name: Certificate page
     paths:
       - packing/cases/n11_fractional_certificate/**
       - packing/devtools/render_explainer.py
+      - packing/devtools/prepare_explainer_math.py
       - packing/devtools/measure_net_coarsening.py
       - packing/devtools/build_composite_figure_data.py
       - packing/devtools/render_explainer_pdf.py
@@ -63,6 +66,7 @@ name: Certificate page
       - packing/devtools/inspect_explainer_typography.py
       - packing/devtools/check_math_faces.py
       - packing/devtools/check_math_loading.py
+      - packing/devtools/check_math_startup.py
       - packing/devtools/compare_math_fonts.py
       - packing/devtools/sans_instances.py
       - packing/src/sqpack/**
@@ -93,7 +97,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  build:
+  prepare:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -115,12 +119,23 @@ jobs:
           enable-cache: true
           cache-dependency-glob: uv.lock
 
+      # Geometry is measured using the pinned browser during publication. Every
+      # browser check below consumes this one artifact, including its reserved boxes.
+      - name: Cache the Playwright browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install the browser that measures the mathematics
+        run: uv run --frozen --group dev python -m playwright install --only-shell chromium
+
       # The renderer re-decides Conditions 1 through 4 before it writes anything,
       # so a certificate those conditions refuse fails the build instead of being
       # published with an explanation of a bound it does not carry. Condition 5 is
       # a sweep per direction and the case replay gate owns it.
       - name: Render the page from the retained certificate
-        run: uv run --frozen --group dev python -m devtools.render_explainer
+        run: uv run --frozen --group dev python -m devtools.render_explainer --prepare-math
 
       # The page is not checked in, so this is where a render that did not reproduce
       # itself byte for byte would show: a second render has to match the first. The
@@ -129,9 +144,45 @@ jobs:
       # self-containment check is the renderer's, not a grep here.
       - name: Check the render is deterministic and self-contained
         run: |
-          uv run --frozen --group dev python -m devtools.render_explainer --check
+          uv run --frozen --group dev python -m devtools.render_explainer --prepare-math --check
           test -s site/index.html
           echo "one file, $(du -h site/index.html | cut -f1)"
+
+      - name: Share the prepared page with all browser checks
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: prepared-page
+          path: packing/site
+          if-no-files-found: error
+          retention-days: 7
+
+  build:
+    needs: prepare
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Use the prepared page
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: prepared-page
+          path: packing/site
 
       # Playwright's own Chromium, at the revision its pinned wheel names -- so the
       # browser moves when someone bumps that pin and not when a runner image rolls.
@@ -198,6 +249,21 @@ jobs:
           uv run --frozen --group dev python -m devtools.check_math_loading --self-test
           uv run --frozen --group dev python -m devtools.check_math_loading
 
+      # Timings remain descriptive: machine speed is not a correctness gate. The
+      # probe's retained controls make missing targets or unobserved content fail.
+      - name: Check normal math startup and the measurement controls
+        run: |
+          uv run --frozen --group dev python -m devtools.check_math_startup --self-test
+          uv run --frozen --group dev python -m devtools.check_math_startup --runs 1 --output /tmp/math-startup-desktop.json
+          uv run --frozen --group dev python -m devtools.check_math_startup --runs 1 --width 390 --output /tmp/math-startup-mobile.json
+
+      - name: Check reserved math geometry before and after fonts load
+        run: |
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --host-check --self-test
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --width 390
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --print
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --alternate-certificate
+
       - name: Upload the page artifact
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
@@ -205,6 +271,7 @@ jobs:
           path: packing/site
 
   font-loading:
+    needs: prepare
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -238,10 +305,17 @@ jobs:
       - name: Install the pinned browser and its system libraries
         run: uv run --frozen --group dev python -m playwright install --with-deps ${{ matrix.browser }}
 
-      - name: Render the page and check mobile font loading
+      - name: Use the prepared page
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: prepared-page
+          path: packing/site
+
+      - name: Check mobile font loading on the published artifact
         run: |
-          uv run --frozen --group dev python -m devtools.render_explainer
           uv run --frozen --group dev python -m devtools.check_math_loading --browser ${{ matrix.browser }} --width 390
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --width 1280 --host-check
+          uv run --frozen --group dev python -m devtools.prepare_explainer_math site/index.html --browser ${{ matrix.browser }} --width 390
 
   deploy:
     needs: [build, font-loading]

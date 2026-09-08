@@ -213,20 +213,28 @@ PROBE = r"""({ wrappers }) => {
   }
   seam.restore();
 
-  /* The self-contained page must decode its math faces before exposing any formula. */
+  /* Only the glyphs an exposed formula uses must be ready. Unused registered
+     styles may remain unloaded; demanding them would restore the startup barrier. */
   const paint = globalThis.__mathFirstPaint;
   if (!paint) {
     findings.push('nothing recorded the first mathematics node; the init script did not run');
   } else {
-    const late = paint.faces
-      .filter((face) => (face.family.startsWith('KaTeX_')
-        || face.family.startsWith('KPress Math Text')) && face.status !== 'loaded')
-      .map((face) => face.family + ' ' + face.style + ' ' + face.weight
-        + ' (' + face.status + ')');
+    if (!Array.isArray(paint.required) || !paint.required.length) {
+      findings.push('first mathematics paint has no required-glyph observations');
+    }
+    const late = (paint.required || [])
+      .filter(face => !face.ready).map(face => face.spec + ' [' + face.text + ']');
     if (late.length) {
       findings.push('mathematics was painted before ' + late.length + ' of its faces: '
         + late.join(', '));
     }
+  }
+  const loading = globalThis.__mathLoadingState;
+  if (!loading || !(loading.mathFontChecks > 0)) {
+    findings.push('no first-visible-frame glyph font checks ran');
+  }
+  for (const failure of loading?.unreadyMath || []) {
+    findings.push('a formula appeared before its required glyph fonts: ' + failure);
   }
   return { nodes: nodes.length, marked: marked.length, tables, findings };
 }"""
@@ -348,7 +356,9 @@ def check(path: Path | str = PAGE, *, width: int = 1280) -> Report:
             report["drawn"].extend(_check_drawn(page, findings, "print"))
             paint = page.evaluate(
                 "() => globalThis.__mathFirstPaint && { at: globalThis.__mathFirstPaint.at, "
-                "faces: globalThis.__mathFirstPaint.faces.length }"
+                "faces: globalThis.__mathFirstPaint.faces.length, "
+                "required: globalThis.__mathFirstPaint.required, "
+                "math_font_checks: globalThis.__mathLoadingState.mathFontChecks }"
             )
             report["first_paint"] = paint or {}
             # An exception in the page's own scripts is the failure this file was written
@@ -414,9 +424,32 @@ def self_test() -> None:
             bold: Report = page.evaluate(PROBE, arguments)
             if not any("bold mathematics in a sans context" in f for f in bold["findings"]):
                 raise SystemExit("math face self-test accepted bold math in a sans context")
+            page.evaluate(
+                """() => {
+                  globalThis.__mathFirstPaint = {
+                    faces: [{family: 'KaTeX_Main', status: 'unloaded', weight: '700'}],
+                    required: [{spec: '16px serif', text: 'x', ready: true}]
+                  };
+                  globalThis.__mathLoadingState = {mathFontChecks: 1, unreadyMath: []};
+                }"""
+            )
+            unused: Report = page.evaluate(PROBE, arguments)
+            if any("was painted before" in f for f in unused["findings"]):
+                raise SystemExit("math face self-test rejected an unused unloaded font")
+            page.evaluate("__mathFirstPaint.required[0].ready = false")
+            required: Report = page.evaluate(PROBE, arguments)
+            if not any("was painted before" in f for f in required["findings"]):
+                raise SystemExit("math face self-test accepted an unavailable required font")
+            page.evaluate(
+                "__mathFirstPaint.required[0].ready = true; "
+                "__mathLoadingState.unreadyMath.push('late expression')"
+            )
+            later: Report = page.evaluate(PROBE, arguments)
+            if not any("a formula appeared before" in f for f in later["findings"]):
+                raise SystemExit("math face self-test missed a later formula's font failure")
         finally:
             browser.close()
-    print("math face self-test passed: no init, unmarked sans, marked prose, sans bold")
+    print("math face self-test passed: face contexts and first-visible glyph readiness")
 
 
 def main(argv: list[str] | None = None) -> int:

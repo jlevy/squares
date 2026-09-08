@@ -87,7 +87,11 @@ def marker(**over: object) -> Marker:
         "markerCentre": 100.0,
         "lineCentre": 100.0,
         "fontSize": 13.2,
+        "baseFontSize": 16.0,
         "lineHeight": 20.5,
+        "width": 3.25,
+        "height": 3.25,
+        "painted": False,
     }
     return {**row, **over}  # pyright: ignore[reportReturnType]
 
@@ -156,6 +160,30 @@ def test_a_marker_within_tolerance_is_not(off: float) -> None:
     """The measured after-values. The tolerance is what separates the two lists."""
     assert abs(off) <= TOLERANCE_PX
     assert not findings(both(markers=[marker(markerCentre=100.0 + off)]))
+
+
+def test_a_centred_square_stretched_to_the_line_height_still_fails() -> None:
+    """The legacy glyph override kept the centre correct but painted a vertical bar."""
+    found = findings(both(markers=[marker(height=27, width=3.65625, painted=True)]))
+    assert len(found) == 2
+    assert all("drawn list marker is not square" in message for message in found)
+
+
+def test_numbered_markers_do_not_have_to_be_square() -> None:
+    assert not findings(both(markers=[marker(height=22, width=10, painted=False)]))
+
+
+@pytest.mark.parametrize("base_size", [16.0, 18.0])
+def test_painted_markers_use_the_requested_optical_offset(base_size: float) -> None:
+    adjusted = marker(
+        markerCentre=100 + base_size * 0.04, baseFontSize=base_size, painted=True
+    )
+    assert not findings(both(markers=[adjusted]))
+    for displacement in (-1.01, 1.01):
+        wrong = {**adjusted, "markerCentre": adjusted["markerCentre"] + displacement}
+        found = findings(both(markers=[wrong]))
+        assert len(found) == 2
+        assert all("optical centre" in message for message in found)
 
 
 def probe_function(name: str) -> str:

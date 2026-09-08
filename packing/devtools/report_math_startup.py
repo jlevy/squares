@@ -117,9 +117,7 @@ def geometry_result(
             for key, old in before.items()
             for dimension in ("x", "y", "width", "height", "baseline")
         )
-        mismatch = max(
-            abs(box["width"] - box["intrinsic_width"]) for box in after.values()
-        )
+        mismatch = max(abs(box["width"] - box["intrinsic_width"]) for box in after.values())
         if not all(
             math.isfinite(value) and value <= tolerance for value in (movement, mismatch)
         ):
@@ -128,7 +126,7 @@ def geometry_result(
             f"- {label}: {len(before)} bases; maximum movement {movement:.3f}px; "
             f"maximum final width error {mismatch:.3f}px."
         )
-        if report["medium"] == "screen" and not report["alternate_certificate"]:
+        if report["medium"] == "screen" and not report.get("alternate_certificate", False):
             covered.add((browser, width))
         for name, control in report.get("controls", {}).items():
             if control.get("rejected") and control.get("report", {}).get("findings"):

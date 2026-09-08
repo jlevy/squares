@@ -12,11 +12,14 @@ from devtools import check_math_faces
 from devtools.check_math_loading import (
     EARLY_EVENTS,
     EXPOSED,
+    FONT_LOAD_OBSERVER,
     HOLD_FONTS_SCRIPT,
     READOUTS,
+    REQUIRED_FONTS,
     LoadingReport,
     Readout,
     loading_findings,
+    no_javascript_findings,
     page_url,
     readout_findings,
 )
@@ -35,11 +38,14 @@ def clean_report() -> LoadingReport:
         "sliders": 1,
         "early_targets": [{"id": "phi-example", "value": "2"}],
         "frames": 2,
+        "math_font_checks": 1,
         "first_paint": {
             "faces": [
                 {"family": "KaTeX_Main", "style": "normal", "weight": "400", "status": "loaded"}
-            ]
+            ],
+            "required": [{"spec": "16px KaTeX_Main", "text": "x", "ready": True}],
         },
+        "unready_math": [],
         "early_math": None,
         "fallback": None,
         "readouts": [],
@@ -83,12 +89,33 @@ def test_math_faces_cli_preserves_the_live_url(monkeypatch: pytest.MonkeyPatch) 
 
 def test_construct_faces_are_part_of_first_visible_paint() -> None:
     report = clean_report()
-    report["first_paint"] = {
-        "faces": [
-            {"family": "KaTeX_Size2", "style": "normal", "weight": "400", "status": "loading"}
-        ]
-    }
+    assert report["first_paint"] is not None
+    report["first_paint"]["required"] = [
+        {"spec": "16px KaTeX_Size2", "text": "∑", "ready": False}
+    ]
     assert any("KaTeX_Size2" in message for message in loading_findings(report))
+
+
+def test_unused_registered_faces_are_not_part_of_the_visible_formula() -> None:
+    report = clean_report()
+    assert report["first_paint"] is not None
+    report["first_paint"]["faces"] = [
+        {"family": "KaTeX_Size2", "style": "normal", "weight": "400", "status": "unloaded"}
+    ]
+    assert loading_findings(report) == []
+
+
+def test_readiness_is_checked_for_later_first_exposures_too() -> None:
+    report = clean_report()
+    report["unready_math"] = ["late sum: 16px KaTeX_Size2 [∑]"]
+    assert any("unavailable required faces" in message for message in loading_findings(report))
+
+
+def test_an_unobserved_first_visible_formula_cannot_pass() -> None:
+    report = clean_report()
+    assert report["first_paint"] is not None
+    report["first_paint"]["required"] = []
+    assert any("no observed glyph closure" in message for message in loading_findings(report))
 
 
 def test_early_event_render_and_semantic_fallback_are_independent_failures() -> None:
@@ -116,22 +143,148 @@ def test_font_hold_intercepts_both_apis_without_a_fontfaceset_global() -> None:
           load(...args) { calls.push(['face', ...args]); return Promise.resolve(this); }
         };
         const document = {fonts: new class {
-          load(...args) { calls.push(['set', ...args]); return Promise.resolve([]); }
+          load(...args) {
+            calls.push(['set', ...args]);
+            return Promise.resolve(args[0].includes('excluded') ? [] : ['matched face']);
+          }
+          check(spec, text) { return spec === '16px test' && text === 'x'; }
         }};
         assert.equal(typeof FontFaceSet, 'undefined');
     """)
     script += HOLD_FONTS_SCRIPT
     script += dedent("""
+        (async () => {
+        let matchedDone = false, emptyDone = false;
         const requests = [new FontFace().load('face argument'),
-          document.fonts.load('12px test')];
+          document.fonts.load('12px test').then(() => { matchedDone = true; }),
+          document.fonts.load('12px excluded').then(() => { emptyDone = true; })];
+        assert.equal(document.fonts.check('16px test', 'x'), true);
+        assert.deepEqual(await __mathLoadControl.nativeLoad('16px test'), ['matched face'],
+          'the independent observer bypasses the test gate');
+        await Promise.resolve();
         assert.equal(__mathLoadControl.heldLoads, 2);
-        assert.deepEqual(calls, [], 'the real loaders must also be delayed');
+        assert.equal(matchedDone, false);
+        assert.equal(emptyDone, true, 'excluded Unicode/system families must not be held');
+        assert.equal(calls.some(([kind]) => kind === 'face'), false);
         __mathLoadControl.release();
-        Promise.all(requests).then(() => {
-          assert.deepEqual(calls, [['face', 'face argument'], ['set', '12px test']]);
-        });
+        await Promise.all(requests);
+        assert.equal(matchedDone, true);
+        assert.equal(document.fonts.check('16px missing', 'x'), false);
+        assert.deepEqual(calls, [['set', '12px test'], ['set', '12px excluded'],
+          ['set', '16px test'], ['face', 'face argument']]);
+        })().catch(error => { console.error(error); process.exitCode = 1; });
     """)
     run_node(script)
+
+
+def test_required_fonts_split_families_and_include_hidden_staging() -> None:
+    script = dedent("""
+        const assert = require('node:assert/strict');
+        const NodeFilter = {SHOW_TEXT: 4};
+        const parent = family => ({
+          style: {fontStyle: 'normal', fontWeight: '400', fontSize: '16px', fontFamily: family},
+          checkVisibility: () => false,
+        });
+        const composite = '"KPress Math, Text Sans",KaTeX_Main,serif';
+        const nodes = [
+          {textContent: 'x1', parentElement: parent(composite)},
+          {textContent: '1≈', parentElement: parent(composite)},
+          {textContent: '∑', parentElement: parent('KaTeX_Size2')},
+        ];
+        const getComputedStyle = node => node.style;
+        const html = {};
+        const document = {createTreeWalker(node) {
+          assert.equal(node, html);
+          let index = -1;
+          return {nextNode() { return ++index < nodes.length; },
+            get currentNode() { return nodes[index]; }};
+        }};
+        const math = {querySelector: selector => {
+          assert.equal(selector, '.katex-html'); return html;
+        }};
+        const checked = [];
+        const observe = (spec, text) => {
+          checked.push({spec, text}); return {ready: !spec.includes('KaTeX_Main')};
+        };
+    """)
+    script += f"const result = ({REQUIRED_FONTS})(math, observe);\n"
+    script += dedent("""
+        assert.deepEqual(checked, [
+          {spec: 'normal 400 16px "KPress Math, Text Sans"', text: 'x1≈'},
+          {spec: 'normal 400 16px KaTeX_Main', text: 'x1≈'},
+          {spec: 'normal 400 16px serif', text: 'x1≈'},
+          {spec: 'normal 400 16px KaTeX_Size2', text: '∑'},
+        ]);
+        assert.equal(result[0].ready, true);
+        assert.equal(result[1].ready, false,
+          'a loaded first family cannot hide a pending later relation face');
+        assert.equal(result[2].ready, true);
+        assert.equal(result[3].ready, true);
+    """)
+    run_node(script)
+
+
+def test_the_font_oracle_observes_promises_instead_of_a_lying_check_api() -> None:
+    script = dedent("""
+        const assert = require('node:assert/strict');
+        const requests = [];
+        const load = (spec, text) => new Promise((resolve, reject) => {
+          requests.push({spec, text, resolve, reject});
+        });
+        const document = {fonts: {check: () => true}};
+        const face = {family: 'KaTeX_Main', style: 'normal', weight: '400',
+          unicodeRange: 'U+2265', status: 'error'};
+    """)
+    script += f"const observe = ({FONT_LOAD_OBSERVER})(load);\n"
+    script += dedent("""
+        (async () => {
+        const spec = 'normal 400 16px "KaTeX_Main"';
+        assert.equal(observe(spec, '≥').ready, false);
+        assert.equal(observe(spec, '≥').outcome, 'pending');
+        assert.equal(requests.length, 1, 'identical descriptions share an observed promise');
+        assert.equal(document.fonts.check(spec, '≥'), true,
+          'the WebKit false-positive must not make the oracle ready');
+        requests[0].resolve([face]);
+        await Promise.resolve();
+        assert.equal(observe(spec, '≥').ready, false,
+          'a resolved promise with an error face is still unavailable');
+        assert.equal(observe(spec, '≥').faces[0].status, 'error');
+        face.status = 'loaded';
+        assert.equal(observe(spec, '≥').ready, true);
+
+        assert.equal(observe('normal 400 16px serif', '≥').ready, false);
+        requests[1].resolve([]);
+        await Promise.resolve();
+        assert.equal(observe('normal 400 16px serif', '≥').ready, true,
+          'a system family or excluded Unicode range needs no declared face');
+
+        observe(spec, '≈');
+        requests[2].reject(new Error('required face failed'));
+        await Promise.resolve();
+        assert.equal(observe(spec, '≈').ready, false);
+        assert.equal(observe(spec, '≈').outcome, 'rejected');
+        assert.match(observe(spec, '≈').error, /required face failed/);
+        observe('italic 400 16px "KaTeX_Main"', '≥');
+        observe('normal 700 16px "KaTeX_Main"', '≥');
+        observe('normal 400 18px "KaTeX_Main"', '≥');
+        observe('normal 400 16px "KaTeX_AMS"', '≥');
+        assert.equal(requests.length, 7, 'style, weight, size, family, and text key the cache');
+        })().catch(error => { console.error(error); process.exitCode = 1; });
+    """)
+    run_node(script)
+
+
+@pytest.mark.parametrize("kind", ["raw_tex", "native_math", "prepared_math"])
+def test_no_javascript_accepts_each_complete_readable_representation(kind: str) -> None:
+    assert no_javascript_findings({"math_wrappers": 1, "unreadable_math": 0, kind: 1}) == []
+
+
+def test_one_visible_fallback_does_not_cover_another_clipped_formula() -> None:
+    findings = no_javascript_findings(
+        {"math_wrappers": 2, "unreadable_math": 1, "prepared_math": 1}
+    )
+    assert findings == ["no JavaScript: 1 formulas have no readable fallback"]
+    assert no_javascript_findings({})
 
 
 def test_early_targets_survive_boot_resets_and_end_at_distinct_values() -> None:

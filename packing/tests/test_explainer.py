@@ -72,6 +72,16 @@ def test_the_page_renders_every_walkthrough_certificate(page: str) -> None:
         assert f'data-cert="{fragment}"' in page, fragment
 
 
+def test_default_figures_reserve_their_place_before_any_script_runs(page: str) -> None:
+    """All-hidden source markup used to insert thousands of pixels after first paint."""
+    wrappers = re.findall(r'<div class="cert-figure" data-cert="([^"]+)"([^>]*)>', page)
+    assert wrappers
+    default = render_explainer.slug(render_explainer.derive(WALKTHROUGH[0]))
+    assert any(cert == default for cert, _attrs in wrappers)
+    for cert, attrs in wrappers:
+        assert ("hidden" not in attrs) is (cert == default)
+
+
 def test_no_placeholder_survives_substitution(page: str) -> None:
     assert re.findall(r"\{\{[A-Z_]+\}\}", page) == []
 

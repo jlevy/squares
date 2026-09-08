@@ -669,6 +669,23 @@ different relation for every reader.
 The fix that would settle it is a sans that carries the three characters — Source Sans 3
 does upstream, and the woff2 kpress ships is a Latin subset that does not.
 
+## Startup and layout follow-up, 2026-09-08
+
+The owner confirmed that the deployed `33cd4760` page no longer swaps math faces, then
+reported slow parameter appearance and neighboring text moving as math arrives.
+`think-qcmi` tracks this W7 continuation, with `think-yygv` for the measurement tool,
+`think-lkjf` for Squares preparation and scheduling, and `think-gnl0` for the shared
+KPress runtime. The upstream counterpart is `kpr-prsb`.
+
+The
+[bounded integration plan and experiment record](../../../../packing/benchmarks/math-startup/README.md)
+retain the control, competing designs, and acceptance criteria.
+The proposed change ships measured space for each unbreakable math base, hydrates
+matching initial markup, waits only for fonts an expression uses, and computes initial
+readouts before heat maps.
+This section records the work in progress; deployment and performance claims require the
+completed browser checks and paired results.
+
 ## Open Questions
 
 - Whether captions and panels keep the math text face or revert to the KaTeX faces (see
